@@ -10912,32 +10912,62 @@ Rispondi con un JSON object (no markdown, no code fences):
 }
 
 /**
- * Un body rimasto in attesa (#1875), tradotto dalla corsia Codex del job:
- * stesso motore e stesso prompt della bonifica dei body bloccanti
- * (`translateWithCodexEngine`, lib/free-translate.mjs), trasporto pinnato su
- * `CODEX_CLI_PRIMARY` come il fact-check di riserva. La scadenza e' quella del
- * tier di traduzione Codex (`installCodexTranslateProcessDeadline`): una
- * chiamata che non puo' finire prima non parte. Torna '' quando Codex
- * risponde con l'italiano o con un'eco del prompt; lancia sugli errori di
- * trasporto.
+ * Un body rimasto in attesa (#1875), tradotto dalla corsia Codex del job.
+ *
+ * Il motore e' quello della bonifica dei body bloccanti
+ * (`translateWithCodexEngine`, lib/free-translate.mjs), con il trasporto
+ * pinnato su `CODEX_CLI_PRIMARY` come il fact-check di riserva. L'uscita passa
+ * pero' da `translateFieldFreeMt`, lo stesso percorso di ogni altro body
+ * tradotto dal free-MT: link `nav:` mascherati e verificati, surrogati
+ * isolati, completezza minima del body (`semantic-truncation`, un riassunto
+ * di Codex con un finale valido non passa) e passthrough. Qualunque rifiuto,
+ * o un errore di trasporto, torna come '' e il body resta in attesa. I
+ * rifiuti NON finiscono in `recordFreeMtUnusableOutput`: i loop che usano
+ * quel report per il cap sono gia' chiusi.
+ *
+ * La scadenza e' quella che il processo ha dichiarato al tier di traduzione
+ * Codex (`installCodexTranslateProcessDeadline`, solo nel percorso CLI). I
+ * producer che importano `translateArticle()` (publish-journalist-article.mjs)
+ * non ne dichiarano una, e il loro orologio di modulo non e' il loro budget:
+ * li' la chiamata ha soltanto il tetto della lane Codex.
  */
-async function translatePendingBodyWithCodex(itValue, locale) {
+let _pendingBodyCodexDeadlineMs = null;
+
+async function translatePendingBodyWithCodex(itValue, locale, field) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
-  const deadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;
-  return translateWithCodexEngine({
+  const deadlineMs = _pendingBodyCodexDeadlineMs;
+  const call = (messages, opts = {}) => _aiCallLLM(messages, {
+    ...opts,
+    model: codex,
+    chain: [codex],
+    prefer: [codex],
+    bypassForceChain: true,
+    ...(deadlineMs !== null ? { deadlineMs } : {}),
+  });
+  const rejected = [];
+  const text = await translateFieldFreeMt({
     text: itValue,
     sourceLang: 'it',
     targetLang: locale,
     fieldType: 'description',
-    call: (messages, opts = {}) => _aiCallLLM(messages, {
-      ...opts,
-      model: codex,
-      chain: [codex],
-      prefer: [codex],
-      bypassForceChain: true,
-      deadlineMs,
+    fieldName: field,
+    translate: ({ text: masked, sourceLang, targetLang, fieldType }) => translateWithCodexEngine({
+      text: masked, sourceLang, targetLang, fieldType, call,
     }),
+    balanceMarkdown: balanceMarkdownMarkers,
+    onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
+    onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
   });
+  if (!text && rejected.length > 0) {
+    console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
+  }
+  return text;
+}
+
+/** La seconda corsia non avvia una chiamata dopo lo stop cooperativo o a ridosso della scadenza dichiarata. */
+function pendingBodyLaneShouldStop() {
+  if (_sigtermStopRequested) return true;
+  return _pendingBodyCodexDeadlineMs !== null && Date.now() + 15_000 >= _pendingBodyCodexDeadlineMs;
 }
 
 async function translateArticle(data) {
@@ -11619,17 +11649,19 @@ ${terminologyByLang[targetLang] || ''}`;
   // `fr:body2`), entrambe con la cascata free esaurita e il tier Codex del
   // free-MT gia' fermo sul suo budget. Prima della guardia ogni body in attesa
   // riceve UN tentativo sulla corsia Codex del job, pinnata (non la cascata
-  // free appena fallita) e con la scadenza del processo. La guardia resta
+  // free appena fallita) e con la scadenza che il processo ha dichiarato.
+  // L'uscita passa da `translateFieldFreeMt` come ogni body free-MT (nav-link,
+  // completezza, passthrough): vedi `translatePendingBodyWithCodex`. La guardia resta
   // invariata: se anche Codex non traduce, il body resta in attesa e
   // l'articolo resta fuori da main. Vedi `retryPendingBodyTranslations`.
-  // Il giudizio sull'uscita e' quello degli altri punti che accettano un body
-  // tradotto: testo usabile nel locale, non l'italiano ricopiato, non troncato.
+  // Sopra quel percorso, gli stessi predicati del retry di troncamento: testo
+  // usabile nel locale, non l'italiano ricopiato, non troncato a meta' frase.
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
     lane: AI_MODELS.CODEX_CLI_PRIMARY,
     isLaneAvailable: () => isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY),
-    shouldStop: () => wallBudgetExceeded(),
-    translate: ({ locale, itValue }) => translatePendingBodyWithCodex(itValue, locale),
+    shouldStop: () => pendingBodyLaneShouldStop(),
+    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(itValue, locale, field),
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
@@ -14811,6 +14843,8 @@ const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
 
 function installCodexTranslateProcessDeadline() {
   setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
+  // Stessa scadenza per la seconda corsia dei body in attesa.
+  _pendingBodyCodexDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;
 }
 
 /**
@@ -14850,6 +14884,7 @@ function requestCooperativeStop(signal) {
   // Nessuna nuova chiamata di traduzione Codex dopo lo stop: quella in volo
   // resta limitata dalla propria deadline, le successive non partono.
   setCodexTranslateProcessDeadline(Date.now());
+  _pendingBodyCodexDeadlineMs = Date.now();
   const spentS = Math.round((Date.now() - RUN_START_MS) / 1000);
   // `::warning` and not `::error`: the run is not broken, it is being stopped.
   // A declared stop that prints nothing is indistinguishable from a crash, and

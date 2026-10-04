@@ -379,10 +379,14 @@ export function clearBodyTranslationPending(data, { locale, field, report = null
 // La funzione e' pura rispetto al trasporto: la corsia (`translate`), il
 // giudizio sul testo (`rejectReason`), la normalizzazione (`finalize`), la
 // disponibilita' (`isLaneAvailable`) e lo stop (`shouldStop`) li passa il
-// chiamante. Una sola chiamata per body, in fila; due errori consecutivi della
-// corsia la fermano per il resto dell'articolo, perche' ogni chiamata spende
-// tempo dello stesso budget wall-clock che serve alla scrittura dei file.
-export const PENDING_BODY_RETRY_MAX_CONSECUTIVE_ERRORS = 2;
+// chiamante. Una sola chiamata per body, in fila; due tentativi consecutivi
+// senza traduzione accettata — errore, risposta vuota (il motore Codex
+// restituisce '' su eco della sorgente o del prompt) o uscita rifiutata dai
+// predicati — fermano la corsia per il resto dell'articolo, perche' ogni
+// chiamata spende tempo dello stesso budget wall-clock che serve alla
+// scrittura dei file, e una corsia che non traduce non va interrogata su
+// tutta la coda.
+export const PENDING_BODY_RETRY_MAX_CONSECUTIVE_FAILURES = 2;
 
 export async function retryPendingBodyTranslations(data, {
   translate,
@@ -400,7 +404,14 @@ export async function retryPendingBodyTranslations(data, {
   if (typeof translate !== 'function') {
     throw new TypeError('retryPendingBodyTranslations: `translate` e\' richiesto');
   }
-  let consecutiveErrors = 0;
+  let consecutiveFailures = 0;
+  const noteFailure = (key) => {
+    outcome.stillPending.push(key);
+    consecutiveFailures += 1;
+    if (consecutiveFailures >= PENDING_BODY_RETRY_MAX_CONSECUTIVE_FAILURES) {
+      outcome.stoppedBy = `${consecutiveFailures} fallimenti consecutivi`;
+    }
+  };
   for (const record of pending) {
     const key = freeMtFieldKey(record.locale, record.field);
     if (!outcome.stoppedBy && shouldStop()) outcome.stoppedBy = 'deadline';
@@ -418,14 +429,9 @@ export async function retryPendingBodyTranslations(data, {
     let text;
     try {
       text = await translate({ locale: record.locale, field: record.field, itValue });
-      consecutiveErrors = 0;
     } catch (err) {
-      consecutiveErrors += 1;
       log(`  ⚠️  ${record.field} (${record.locale}): seconda corsia ${lane} fallita: ${err?.message || err}`);
-      outcome.stillPending.push(key);
-      if (consecutiveErrors >= PENDING_BODY_RETRY_MAX_CONSECUTIVE_ERRORS) {
-        outcome.stoppedBy = `${consecutiveErrors} errori consecutivi`;
-      }
+      noteFailure(key);
       continue;
     }
     const reason = typeof text !== 'string' || !text.trim()
@@ -433,9 +439,10 @@ export async function retryPendingBodyTranslations(data, {
       : rejectReason({ locale: record.locale, field: record.field, itValue, text });
     if (reason) {
       log(`  ⚠️  ${record.field} (${record.locale}): seconda corsia ${lane} scartata (${reason}) — resta in attesa`);
-      outcome.stillPending.push(key);
+      noteFailure(key);
       continue;
     }
+    consecutiveFailures = 0;
     if (!data.content[record.locale] || typeof data.content[record.locale] !== 'object') {
       data.content[record.locale] = {};
     }

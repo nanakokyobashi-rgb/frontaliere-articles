@@ -36,9 +36,9 @@ import {
   isBodyTranslationPending,
   pendingBodyTranslations,
   retryPendingBodyTranslations,
-  PENDING_BODY_RETRY_MAX_CONSECUTIVE_ERRORS,
+  PENDING_BODY_RETRY_MAX_CONSECUTIVE_FAILURES,
 } from '../scripts/lib/free-mt-recovery.mjs';
-import { translatedStringOrNull, isSourcePassthrough } from '../scripts/lib/article-free-mt.mjs';
+import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
@@ -127,16 +127,16 @@ test('un\'uscita rifiutata (italiano ricopiato) lascia il body in attesa: la gua
   assert.deepEqual(outcome.stillPending, ['de:body1']);
 });
 
-test('la corsia si ferma dopo errori consecutivi e non viene interrogata se non e\' disponibile', async () => {
+test('la corsia si ferma dopo fallimenti consecutivi e non viene interrogata se non e\' disponibile', async () => {
   const data = { id: 'x', content: { it: { ...IT_BODY }, en: {}, de: {}, fr: {} } };
   for (const locale of ['en', 'de', 'fr']) markBodyTranslationPending(data, { locale, field: 'body1', reason: 'retry-error' });
   let calls = 0;
   const outcome = await retryPendingBodyTranslations(data, {
     translate: async () => { calls += 1; throw new Error('broker timed out'); },
   });
-  assert.equal(calls, PENDING_BODY_RETRY_MAX_CONSECUTIVE_ERRORS);
+  assert.equal(calls, PENDING_BODY_RETRY_MAX_CONSECUTIVE_FAILURES);
   assert.equal(pendingBodyTranslations(data).length, 3);
-  assert.match(outcome.stoppedBy, /errori consecutivi/);
+  assert.match(outcome.stoppedBy, /fallimenti consecutivi/);
 
   let offCalls = 0;
   const off = await retryPendingBodyTranslations(data, {
@@ -146,6 +146,60 @@ test('la corsia si ferma dopo errori consecutivi e non viene interrogata se non 
   assert.equal(offCalls, 0);
   assert.equal(off.stoppedBy, 'lane-unavailable');
   assert.equal(off.stillPending.length, 3);
+});
+
+test('anche le risposte vuote o rifiutate fermano la corsia: non drena tutta la coda', async () => {
+  // `translateWithCodexEngine` rende '' su eco della sorgente o del prompt, e
+  // un'uscita troncata torna come stringa: nessuno dei due e' un throw.
+  for (const reply of ['', 'risposta rifiutata']) {
+    const data = { id: 'x', content: { it: { ...IT_BODY }, en: {}, de: {}, fr: {} } };
+    for (const locale of ['en', 'de', 'fr']) markBodyTranslationPending(data, { locale, field: 'body1', reason: 'retry-error' });
+    let calls = 0;
+    const outcome = await retryPendingBodyTranslations(data, {
+      translate: async () => { calls += 1; return reply; },
+      rejectReason: () => 'troncato',
+    });
+    assert.equal(calls, PENDING_BODY_RETRY_MAX_CONSECUTIVE_FAILURES, `risposta ${JSON.stringify(reply)}`);
+    assert.match(outcome.stoppedBy, /fallimenti consecutivi/);
+    assert.equal(outcome.stillPending.length, 3);
+  }
+});
+
+test('un successo azzera la striscia: un fallimento isolato non ferma la corsia', async () => {
+  const data = { id: 'x', content: { it: { ...IT_BODY }, en: {}, de: {}, fr: {} } };
+  for (const field of ['body1', 'body2', 'body3']) markBodyTranslationPending(data, { locale: 'de', field, reason: 'retry-error' });
+  const replies = { body1: '', body2: DE_BODY.body2, body3: DE_BODY.body3 };
+  const outcome = await retryPendingBodyTranslations(data, { translate: async ({ field }) => replies[field] });
+  assert.deepEqual(outcome.recovered, ['de:body2', 'de:body3']);
+  assert.deepEqual(outcome.stillPending, ['de:body1']);
+  assert.equal(outcome.stoppedBy, null);
+});
+
+test('il percorso della corsia (translateFieldFreeMt) rifiuta un riassunto completo ma troppo corto e un errore di trasporto', async () => {
+  const longIt = `${IT_BODY.body1} ${IT_BODY.body2} ${IT_BODY.body3}`;
+  const summary = 'Der Beitrag ändert sich im September.';
+  const reasons = [];
+  const out = await translateFieldFreeMt({
+    text: longIt, sourceLang: 'it', targetLang: 'de', fieldType: 'description', fieldName: 'body1',
+    translate: async () => summary,
+    onUnusableOutput: (event) => reasons.push(event.reason),
+  });
+  assert.equal(out, '');
+  assert.deepEqual(reasons, ['semantic-truncation']);
+  // Lo stesso riassunto passerebbe i predicati del blocco da solo: e' il
+  // motivo per cui la corsia passa da translateFieldFreeMt.
+  assert.notEqual(translatedStringOrNull(summary, 'de'), null);
+  assert.equal(isSourcePassthrough(summary, longIt), false);
+  assert.equal(detectTruncation(summary, { label: 'de/body1' }).length, 0);
+
+  const errReasons = [];
+  const errOut = await translateFieldFreeMt({
+    text: longIt, sourceLang: 'it', targetLang: 'de', fieldType: 'description', fieldName: 'body1',
+    translate: async () => { throw new Error('Codex auth broker socket timed out'); },
+    onUnusableOutput: (event) => errReasons.push(event.reason),
+  });
+  assert.equal(errOut, '');
+  assert.deepEqual(errReasons, ['error']);
 });
 
 // ── Il cablaggio in translateArticle() ─────────────────────────────────────
@@ -172,14 +226,23 @@ test('translateArticle() chiama la seconda corsia DOPO i due loop che marcano i 
   assert.ok(start < assembled, 'la seconda corsia deve girare dentro translateArticle(), prima della fine');
 });
 
-test('la corsia e\' Codex pinnata, con la scadenza del tier di traduzione', () => {
+test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scadenza dichiarata dal processo', () => {
   const at = src.indexOf('async function translatePendingBodyWithCodex(');
   assert.notEqual(at, -1, 'translatePendingBodyWithCodex non trovata');
   const body = src.slice(at, src.indexOf('\n}\n', at));
   assert.match(body, /translateWithCodexEngine\(/);
+  assert.match(body, /translateFieldFreeMt\(\{/);
+  assert.match(body, /fieldName: field,/);
   assert.match(body, /chain: \[codex\]/);
   assert.match(body, /prefer: \[codex\]/);
-  assert.match(body, /RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS/);
+  // Nessun orologio di modulo: i producer che importano translateArticle()
+  // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
+  assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
+  assert.match(body, /const deadlineMs = _pendingBodyCodexDeadlineMs;/);
+  const install = src.slice(src.indexOf('function installCodexTranslateProcessDeadline() {'));
+  assert.match(install.slice(0, install.indexOf('\n}\n')), /_pendingBodyCodexDeadlineMs = RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;/);
+  const stop = src.slice(src.indexOf('function pendingBodyLaneShouldStop() {'));
+  assert.doesNotMatch(stop.slice(0, stop.indexOf('\n}\n')), /RUN_START_MS|wallBudgetExceeded/);
   assert.match(src, /pending_recovered=\$\{JSON\.stringify\(recovery\.pendingBodyRecovered \|\| \{\}\)\}/);
 });
 
@@ -187,7 +250,7 @@ async function runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCo
   const { block } = extractSecondLaneBlock();
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
-    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'isModelAvailable', 'wallBudgetExceeded',
+    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'isModelAvailable', 'pendingBodyLaneShouldStop',
     'translatePendingBodyWithCodex', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
     `return (async () => { ${block} })();`,
   );
@@ -205,12 +268,12 @@ test('run 37220516797 riprodotta: de:body1 in attesa arriva alla guardia tradott
   await runSecondLaneBlock({
     data,
     RUN_REPORT,
-    translatePendingBodyWithCodex: async (itValue, locale) => {
-      asked.push(locale);
+    translatePendingBodyWithCodex: async (itValue, locale, field) => {
+      asked.push(`${locale}:${field}`);
       return DE_BODY.body1;
     },
   });
-  assert.deepEqual(asked, ['de']);
+  assert.deepEqual(asked, ['de:body1']);
   assert.deepEqual(missingKeys(data), []);
   assert.equal(data.content.de.body1, sanitizeBodyText(DE_BODY.body1));
   assert.deepEqual(RUN_REPORT.translation.pendingBodyFields, {});
