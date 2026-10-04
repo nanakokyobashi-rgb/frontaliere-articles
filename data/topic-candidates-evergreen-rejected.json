@@ -792,10 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/svizzera/aumento-dei-premi-fino-a-900-mila-assicurati-cambieranno-cassa-malati-443788": {
-      "section": "frontaliere",
-      "ts": 1790926080801
-    },
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954245/mendrisio-e-chiasso-sostengono-le-donne-che-vogliono-lavorare": {
       "section": "frontaliere",
       "ts": 1790938996414
@@ -1007,6 +1003,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/kastritis-a-scafati-dovremo-essere-noi-stessi-della-valle-saltera-la-doppia-trasferta/2696329": {
       "section": "frontaliere",
       "ts": 1791098025788
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1954274/lascia-il-lavoro-per-salvare-cani-c-e-chi-li-regala-a-natale-e-poi-non-li-vuole-piu": {
+      "section": "svizzera",
+      "ts": 1791102161702
     }
   }
 }
