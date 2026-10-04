@@ -228,13 +228,15 @@ describe('originContentOnMain: tutto o non provato', () => {
   it('file rimosso, sole rimozioni o elenco vuoto → non provato', () => {
     expect(originContentOnMain([{ filename: 'gone.ts', status: 'removed', patch: patch([], ['x']) }], main('')).proven).toBe(false);
     expect(originContentOnMain([{ filename: 'a.ts', status: 'modified', patch: patch([], ['x']) }], main('')).proven).toBe(false);
+    expect(originContentOnMain([{ filename: 'a.ts', status: 'modified', patch: '@@ -1,0 +1,1 @@\n+  ' }], main('  \n')).proven).toBe(false);
     expect(originContentOnMain([], main('')).proven).toBe(false);
     expect(originContentOnMain(null, main('')).proven).toBe(false);
   });
 
-  it('l\'intestazione +++ non è una riga aggiunta; gli spazi ai bordi e ripetuti non contano', () => {
+  it('l\'intestazione +++ non è una riga aggiunta; solo CRLF non conta', () => {
     const withHeader = [{ filename: 'a.ts', status: 'modified', patch: `+++ b/a.ts\n${patch(['  // due  spazi'])}` }];
-    expect(originContentOnMain(withHeader, main('\t// due spazi\r\n')).proven).toBe(true);
+    expect(originContentOnMain(withHeader, main('\t// due spazi\r\n')).proven).toBe(false);
+    expect(originContentOnMain(withHeader, main('  // due  spazi\r\n')).proven).toBe(true);
   });
 
   it('dentro un hunk una riga che inizia con ++ è una riga aggiunta, non un\'intestazione', () => {
