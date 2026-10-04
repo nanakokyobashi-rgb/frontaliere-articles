@@ -129,6 +129,10 @@ export const TITLE = 'gate content su main: offender nel corpus generato dai bot
 export const CONTENT_GATES = [
   'generator/tests/brogeda-editorial-correction.test.mjs',
   'generator/tests/historical-unknown-dates.test.mjs',
+  // P14: i record di credito delle copertine Commons (content/image-credits/)
+  // e i letterali SEO delle copertine accreditate: li scrive il generatore,
+  // direttamente su `main`.
+  'generator/tests/image-credits-content.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',

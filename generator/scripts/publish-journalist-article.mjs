@@ -80,6 +80,7 @@ import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
+import { creditRecordForCover, resolveCommonsPick, webpDimensions, writeCreditRecord } from './lib/commons-credit.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -207,7 +208,18 @@ async function resolveHeroImage(data, doc) {
     data._generatedImagePath = rawImage;
     return { source: 'catalog-pick', path: rawImage };
   }
-  if (/^https?:\/\//i.test(rawImage)) {
+  // P14: a Wikimedia Commons pick (the picker offers them) is used only with
+  // its credit: author and licence read from Commons now, the record written
+  // next to the cover. One that cannot be credited — no machine-readable
+  // licence, GFDL-only, deleted, a reuse restriction, no clean author, or
+  // Commons unreachable — is skipped for the fallback below. Any other URL
+  // (a journalist's own upload) is handled as before.
+  const commonsPick = /^https?:\/\//i.test(rawImage)
+    ? await resolveCommonsPick({ root: PROJECT_ROOT, url: rawImage })
+    : { commons: false };
+  if (commonsPick.commons && !commonsPick.ok) {
+    console.warn(`  ⚠️  Commons pick «${commonsPick.title}» cannot be credited (${commonsPick.reasons.join(', ')}) — using the fallback image`);
+  } else if (/^https?:\/\//i.test(rawImage)) {
     try {
       const res = await fetch(rawImage, { signal: AbortSignal.timeout(20000) });
       if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`);
@@ -231,9 +243,25 @@ async function resolveHeroImage(data, doc) {
         quality -= 10;
         size = await render(quality);
       }
-      data._generatedImagePath = `/images/blog/${data.id}.webp`;
+      const cover = `/images/blog/${data.id}.webp`;
+      if (commonsPick.commons) {
+        const record = creditRecordForCover(commonsPick.template, {
+          cover,
+          original: commonsPick.original,
+          coverSize: webpDimensions(fs.readFileSync(destPath)),
+        });
+        try {
+          writeCreditRecord(PROJECT_ROOT, record);
+        } catch (creditErr) {
+          // No credit, no Commons cover: the file must not reach the commit.
+          fs.rmSync(destPath, { force: true });
+          throw creditErr;
+        }
+        data._imageCredit = record;
+      }
+      data._generatedImagePath = cover;
       appendCatalogEntry(data._generatedImagePath);
-      return { source: 'journalist-upload', bytes: size };
+      return { source: commonsPick.commons ? 'commons-pick' : 'journalist-upload', bytes: size };
     } catch (err) {
       console.warn(`  ⚠️  custom hero image download/processing failed (non-fatal): ${err.message}`);
     }
