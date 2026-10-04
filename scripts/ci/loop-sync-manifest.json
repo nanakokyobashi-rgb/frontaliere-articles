@@ -1673,7 +1673,7 @@
       "path": "generator/scripts/create-article.mjs",
       "sitePath": "scripts/create-article.mjs",
       "mode": "adapted",
-      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi. 2026-08-14: `baseline.corpus` era un GHOST (3025de18994bdabc, un hash che loop-drift-check non ha trovato in nessuna revisione storica del path) ed e' stata ricalcolata dal contenuto reale. `baseline.site` NON e' stata toccata di proposito: di questo giro e' stata portata solo la meta' legata a clauseTail (i due call site passati a `truncateToClauseNonEmpty`), il resto del delta del sito non e' stato letto — la voce resta quindi `site-ahead`, che e' la verita', invece di dichiarare un allineamento che non c'e' stato.",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi. Dal P14 diverge di proposito anche sulle copertine Wikimedia Commons (Strategy 4, `findStockImageCandidates`, `modifySeoService`, `validateStructuredData`): licenza e autore letti con la ricerca, record in `content/image-credits/blog/`, dedup per file Commons invece che per URL, letterale SEO senza i cinque campi di diritti per una copertina accreditata. Non va portato al sito: il gemello di la' e' il generatore legacy disabilitato (`confirm_corpus_write=yes`), e i record vivono nel corpus. 2026-08-14: `baseline.corpus` era un GHOST (3025de18994bdabc, un hash che loop-drift-check non ha trovato in nessuna revisione storica del path) ed e' stata ricalcolata dal contenuto reale. `baseline.site` NON e' stata toccata di proposito: di questo giro e' stata portata solo la meta' legata a clauseTail (i due call site passati a `truncateToClauseNonEmpty`), il resto del delta del sito non e' stato letto — la voce resta quindi `site-ahead`, che e' la verita', invece di dichiarare un allineamento che non c'e' stato.",
       "baseline": {
         "site": "44b4dcb727b012ea",
         "corpus": "e48b58a762604895",
@@ -1748,7 +1748,7 @@
       "path": "generator/scripts/publish-journalist-article.mjs",
       "sitePath": "scripts/publish-journalist-article.mjs",
       "mode": "adapted",
-      "reason": "Percorso di pubblicazione degli articoli firmati. Il gemello con il diff piu' piccolo dei sette: Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Nient'altro. Proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire: un file quasi uguale non ha nessun segnale visibile che lo distingua da uno allineato, e una modifica del sito qui si perde senza lasciare traccia.",
+      "reason": "Percorso di pubblicazione degli articoli firmati. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Fino al P14 era l'unica, e questo era il gemello con il diff piu' piccolo dei sette: proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire — un file quasi uguale non ha nessun segnale visibile che lo distingua da uno allineato, e una modifica del sito qui si perde senza lasciare traccia. Dal P14 (crediti delle copertine Wikimedia Commons) diverge di proposito anche in `resolveHeroImage`: un URL Commons passa da `lib/commons-credit.mjs` (licenza e autore letti da Commons, record in `content/image-credits/blog/`), e una scelta che non si puo' accreditare cede al fallback. Non va portato al sito: il gemello di la' non gira piu' da solo (schedule rimosso il 2026-08-14, la coda `journalist_articles` e' di questo repo) e i record vivono nel corpus.",
       "baseline": {
         "site": "e8d8cb515301783c",
         "corpus": "49aa1cb695aa6844",
@@ -4679,6 +4679,26 @@
         "site": null,
         "corpus": "bc5a72d18b99a03e",
         "alignedAt": "2026-10-02"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/commons-credit.mjs",
+      "mode": "corpus-only",
+      "reason": "P14: autore e licenza della copertina Wikimedia Commons, letti con la richiesta di ricerca che il generatore fa gia' (`extmetadata`, nessuna chiamata in piu'), con la regola di accettazione misurata dal probe del 2026-10-04 (492 accettati, 38 da rivedere, 2 da sostituire su 532 file) e il record `content/image-credits/blog/<id>.json` validato con `engine/shared/imageCredits.mjs` prima di scriverlo. Dedup per file Commons, non per URL. Sul sito non esiste e non deve: il generatore del sito e' quello legacy disabilitato e i record vivono nel corpus. Senza dipendenze di proposito (niente jsdom): i gate del generatore girano senza `npm ci`, e un sanitizzatore non caricabile li' non sarebbe testato dove e' gated.",
+      "baseline": {
+        "site": null,
+        "corpus": "de938a06c16dc297",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
+      "path": "scripts/lib/image-credit-records.mjs",
+      "mode": "corpus-only",
+      "reason": "P14: i controlli lato corpus sui record di credito delle copertine Commons (nome del file = copertina, pubblicato solo `ok`, accordo fra le copertine di uno stesso file Commons, letterali SEO di una copertina accreditata senza i cinque campi di diritti) e il file `data/image-credits-<sezione>.json` che `scripts/build-blog-index.mjs` pubblica per la SPA. Il sito legge quel JSON via HTTP e non ha questo modulo: corpus-only per costruzione, come il resto della pubblicazione.",
+      "baseline": {
+        "site": null,
+        "corpus": "c9f00e19d5eb7d9f",
+        "alignedAt": "2026-10-04"
       }
     }
   ]

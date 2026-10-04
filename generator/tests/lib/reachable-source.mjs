@@ -314,3 +314,29 @@ export const createReachableSource = () => {
   };
   return (file) => walk(file, new Set()).text;
 };
+
+/**
+ * The files a module loads through relative imports, itself first, with the
+ * same resolution and comment stripping as the walk above: what a test must
+ * copy to run that module in a temporary tree. A hand-written list drifts in
+ * silence — `blog-index-manifest-declaration.test.mjs` copied ten files,
+ * `scripts/lib/corpus-floors.mjs` later imported three more, and the test kept
+ * passing on the resulting ERR_MODULE_NOT_FOUND (exit 1, nothing written)
+ * instead of on the validation it names.
+ *
+ * @param {string} entry absolute path of the module
+ * @returns {string[]} absolute paths
+ */
+export const relativeImportClosure = (entry) => {
+  const seen = new Set();
+  const visit = (file) => {
+    if (seen.has(file)) return;
+    seen.add(file);
+    for (const m of codeOnly(fs.readFileSync(file, 'utf-8')).matchAll(relativeImportSpec())) {
+      const resolved = resolveRelativeImport(file, m[1]);
+      if (resolved) visit(resolved);
+    }
+  };
+  visit(entry);
+  return [...seen];
+};

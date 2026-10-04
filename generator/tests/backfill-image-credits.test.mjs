@@ -1,0 +1,347 @@
+/**
+ * backfill-image-credits.test.mjs — the one-off backfill of the cover credits
+ * (P14, `scripts/backfill-image-credits.mjs`), on a small corpus built in a
+ * temporary tree from real probe data. Run with `node --test`.
+ *
+ * The tree has what C2 will meet, in miniature: a creditable file on two
+ * covers and a third article reusing one of them, a personality-restricted
+ * file, a GFDL-only file to replace, a file with no machine-readable licence,
+ * a site-era cover whose webp is not in this repository, a cover still shown
+ * by another article after its own was retired, a cover that is not Commons at
+ * all, a map entry no page shows any more, and literals in both formats.
+ */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import {
+  OVERRIDES_FILE,
+  SNAPSHOT_FILE,
+  checkTree,
+  fetchSnapshot,
+  serializeSnapshot,
+} from '../../scripts/backfill-image-credits.mjs';
+import { scanSeoImageBlocks } from '../../scripts/lib/image-credit-records.mjs';
+
+const SCRIPT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../scripts/backfill-image-credits.mjs');
+const PROBE = JSON.parse(fs.readFileSync(new URL('./fixtures/commons-credit/probe-2026-10-04.snapshot.json', import.meta.url), 'utf-8'));
+const NASA = 'PIA11044-PhoenixLander-WorkspaceNames-20080819.jpg';
+const CURATION = { by: 'redazione', at: '2026-10-05', note: 'checked on the file page' };
+
+function webpHeader(width, height) {
+  const b = Buffer.alloc(30);
+  b.write('RIFF', 0, 'ascii');
+  b.writeUInt32LE(22, 4);
+  b.write('WEBPVP8X', 8, 'ascii');
+  b.writeUInt32LE(10, 16);
+  b.writeUIntLE(width - 1, 24, 3);
+  b.writeUIntLE(height - 1, 27, 3);
+  return b;
+}
+
+function write(root, rel, content) {
+  const file = path.join(root, rel);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, content);
+}
+
+const upload = (title) => `https://upload.wikimedia.org/wikipedia/commons/a/ab/${encodeURIComponent(title.replace(/ /g, '_'))}`;
+const thumb = (title) => `https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/${encodeURIComponent(title.replace(/ /g, '_'))}/1280px-x.jpg?utm_source=commons.wikimedia.org`;
+const SITE_RIGHTS_ML = `"acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        `;
+const SITE_RIGHTS_SL = '"acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", ';
+const literal = (id, cover, rights = SITE_RIGHTS_ML) => `  'blog-${id}': {
+    title: 'Titolo ${id}',
+    structuredData: {
+      "@type": "NewsArticle",
+      "image": {
+        "@type": "ImageObject",
+        ${rights}"url": \`\${BASE_URL}${cover}\`,
+        "width": 1200,
+        "height": 675
+      },
+      "datePublished": "2026-10-04T10:00:00+02:00"
+    }
+  },
+`;
+const row = (id, image) => `  {\n   id: '${id}',\n   category: 'novita',\n   date: '2026-10-01',\n   image: '${image}',\n   hasCalculator: false,\n  },\n`;
+
+/** The miniature corpus (see the header). */
+function corpusTree() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-credits-'));
+  write(root, 'content/blog-articles-data.ts', `const RAW_ARTICLES = [\n${[
+    row('locarno-uno', '/images/blog/locarno-uno.webp'),
+    row('riuso-locarno', '/images/blog/locarno-uno.webp'),
+    row('polizia', '/images/blog/polizia.webp'),
+    row('tessera', '/images/blog/tessera.webp'),
+    row('nasa', '/images/blog/nasa.webp'),
+    row('prokudin', '/images/blog/prokudin.webp'),
+    row('stock', '/images/blog/stock.webp'),
+    row('usa-ritirato', '/images/blog/ritirato.webp'),
+  ].join('')}];\n`);
+  write(root, 'content/swiss-articles-data.ts', `const RAW_SWISS_ARTICLES = [\n${row('ch-locarno', '/images/blog/ch-locarno.webp')}];\n`);
+  write(root, 'data/blog-images-used.json', JSON.stringify({
+    'locarno-uno': thumb('Locarno 1.jpg'),
+    polizia: upload('Patrol Police.jpg'),
+    tessera: upload('EHIC Slovenia.jpg'),
+    nasa: upload(NASA),
+    'ch-locarno': upload('Locarno 1.jpg'),
+    'non-pubblicato': upload('Locarno 1.jpg'),
+    ritirato: upload('Locarno 1.jpg'),
+  }));
+  write(root, 'data/blog-images-used-site-legacy.json', JSON.stringify({ prokudin: upload('Lugano prokudin.jpg') }));
+  const files = Object.fromEntries(['Locarno 1.jpg', 'Patrol Police.jpg', 'EHIC Slovenia.jpg', NASA, 'Lugano prokudin.jpg'].map((t) => [t, PROBE.files[t]]));
+  write(root, SNAPSHOT_FILE, serializeSnapshot({ schema: 1, fetchedAt: '2026-10-04', requests: 1, files, aliases: {} }));
+  write(root, 'public/images/blog/locarno-uno.webp', webpHeader(1200, 675));
+  write(root, 'public/images/blog/ch-locarno.webp', webpHeader(1200, 900));
+  write(root, 'public/images/blog/polizia.webp', webpHeader(1200, 675));
+  write(root, 'public/images/blog/tessera.webp', webpHeader(1200, 675));
+  write(root, 'public/images/blog/nasa.webp', webpHeader(1200, 675));
+  write(root, 'public/images/blog/ritirato.webp', webpHeader(1200, 675));
+  write(root, 'content/seo/seo-blog-5.ts', `const BLOG_SEO_METADATA_5 = {\n${[
+    literal('locarno-uno', '/images/blog/locarno-uno.webp'),
+    literal('riuso-locarno', '/images/blog/locarno-uno.webp'),
+    literal('polizia', '/images/blog/polizia.webp'),
+    literal('tessera', '/images/blog/tessera.webp'),
+    literal('nasa', '/images/blog/nasa.webp'),
+    literal('prokudin', '/images/blog/prokudin.webp'),
+    literal('stock', '/images/blog/stock.webp'),
+    literal('usa-ritirato', '/images/blog/ritirato.webp'),
+  ].join('')}};\nexport default BLOG_SEO_METADATA_5;\n`);
+  write(root, 'content/seo/seo-blog-ch.ts', `const BLOG_CH_SEO_METADATA = {\n${literal('ch-locarno', '/images/blog/ch-locarno.webp', SITE_RIGHTS_SL)}};\nexport default BLOG_CH_SEO_METADATA;\n`);
+  return root;
+}
+
+const OVERRIDES = {
+  schema: 1,
+  files: {
+    'Patrol Police.jpg': { decision: 'accept-restriction', curation: { by: 'owner', at: '2026-10-05', note: 'Q1: kept' } },
+    'EHIC Slovenia.jpg': { decision: 'replace', replacement: '/images/places/lugano-view.webp', curation: { by: 'owner', at: '2026-10-05', note: 'GFDL-only' } },
+    [NASA]: {
+      licence: { name: 'Public domain', url: null, family: 'pd', attributionRequired: false },
+      author: { name: 'NASA/JPL-Caltech/University of Arizona/Texas A&M University', url: null, type: 'Organization' },
+      curation: CURATION,
+    },
+  },
+  covers: { prokudin: { modified: 'cropped' } },
+};
+
+function run(root, mode) {
+  return spawnSync(process.execPath, [SCRIPT, mode, '--root', root], { encoding: 'utf8' });
+}
+
+const records = (root) => {
+  const dir = path.join(root, 'content/image-credits/blog');
+  return fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+};
+const readRecord = (root, key) => JSON.parse(fs.readFileSync(path.join(root, 'content/image-credits/blog', `${key}.json`), 'utf-8'));
+const rightsByCover = (root) => {
+  const out = {};
+  for (const rel of ['content/seo/seo-blog-5.ts', 'content/seo/seo-blog-ch.ts']) {
+    const src = fs.readFileSync(path.join(root, rel), 'utf-8');
+    for (const [i, block] of scanSeoImageBlocks(src).entries()) out[`${rel.slice(12)}#${i}:${block.cover}`] = block.rights.length;
+  }
+  return out;
+};
+
+test('--build without curation: credits what it can, strips those literals, and lists what needs a human', () => {
+  const root = corpusTree();
+  try {
+    const result = run(root, '--build');
+    assert.equal(result.status, 1, 'pending files keep the build red');
+    assert.deepEqual(records(root), ['ch-locarno.json', 'locarno-uno.json', 'ritirato.json'], 'a cover only another article shows is credited too; one no page shows is not');
+    assert.equal(readRecord(root, 'locarno-uno').modified, 'cropped');
+    assert.equal(readRecord(root, 'ch-locarno').modified, 'resized', '2560×1920 → 1200×900 keeps the shape');
+    assert.equal(readRecord(root, 'locarno-uno').fetchedAt, '2026-10-04', 'the snapshot date, not today');
+    const needs = result.stderr.split('\n').filter((l) => l.includes('needs a human'));
+    assert.equal(needs.length, 4, result.stderr);
+    assert.match(result.stderr, /«Patrol Police\.jpg» \(polizia\): restriction:personality/);
+    assert.match(result.stderr, /«EHIC Slovenia\.jpg» \(tessera\): licence:GFDL.*decision "replace"/);
+    assert.match(result.stderr, new RegExp(`«${NASA.replace(/[.]/g, '\\.')}» \\(nasa\\): licence:OTHER:none`));
+    assert.match(result.stderr, /«Lugano prokudin\.jpg» \(prokudin\): size of \/images\/blog\/prokudin\.webp unknown/);
+    assert.deepEqual(rightsByCover(root), {
+      'seo-blog-5.ts#0:locarno-uno': 0,
+      'seo-blog-5.ts#1:locarno-uno': 0, // the article that reuses the credited cover
+      'seo-blog-5.ts#2:polizia': 5,
+      'seo-blog-5.ts#3:tessera': 5,
+      'seo-blog-5.ts#4:nasa': 5,
+      'seo-blog-5.ts#5:prokudin': 5,
+      'seo-blog-5.ts#6:stock': 5,
+      'seo-blog-5.ts#7:ritirato': 0,
+      'seo-blog-ch.ts#0:ch-locarno': 0,
+    });
+    const check = run(root, '--check');
+    assert.equal(check.status, 1);
+    assert.equal(check.stderr.split('\n').filter((l) => l.includes('needs a human')).length, 4);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--build with curation: every file answered, the replaced cover repointed, --check clean, a rerun writes nothing', () => {
+  const root = corpusTree();
+  try {
+    write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
+    const result = run(root, '--build');
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.deepEqual(records(root), ['ch-locarno.json', 'locarno-uno.json', 'nasa.json', 'polizia.json', 'prokudin.json', 'ritirato.json']);
+    const polizia = readRecord(root, 'polizia');
+    assert.deepEqual(polizia.restrictions, ['personality']);
+    assert.deepEqual(polizia.curation, { by: 'owner', at: '2026-10-05', note: 'Q1: kept' });
+    assert.equal(polizia.status, 'ok');
+    const nasa = readRecord(root, 'nasa');
+    assert.equal(nasa.licence.family, 'pd');
+    assert.equal(nasa.author.type, 'Organization');
+    assert.deepEqual(nasa.curation, CURATION);
+    assert.equal(readRecord(root, 'prokudin').modified, 'cropped', 'from overrides.covers: the webp is on the site side');
+    // The GFDL file: no record, and both registry and literal now show the replacement.
+    const registry = fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf-8');
+    assert.match(registry, /id: 'tessera',[\s\S]*?image: '\/images\/places\/lugano-view\.webp'/);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf-8');
+    assert.match(seo, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`/);
+    assert.doesNotMatch(seo, /images\/blog\/tessera\.webp/);
+    assert.deepEqual(rightsByCover(root), {
+      'seo-blog-5.ts#0:locarno-uno': 0,
+      'seo-blog-5.ts#1:locarno-uno': 0,
+      'seo-blog-5.ts#2:polizia': 0,
+      'seo-blog-5.ts#3:null': 5, // now a places image: the site's own claim stays
+      'seo-blog-5.ts#4:nasa': 0,
+      'seo-blog-5.ts#5:prokudin': 0,
+      'seo-blog-5.ts#6:stock': 5,
+      'seo-blog-5.ts#7:ritirato': 0,
+      'seo-blog-ch.ts#0:ch-locarno': 0,
+    });
+    assert.deepEqual(checkTree(root), []);
+    assert.equal(run(root, '--check').status, 0);
+    const before = fs.statSync(path.join(root, 'content/image-credits/blog/locarno-uno.json')).mtimeMs;
+    const again = run(root, '--build');
+    assert.equal(again.status, 0);
+    assert.match(again.stdout, /0 written, 0 removed; 0 covers repointed in 0 files; 0 literals stripped/);
+    assert.equal(fs.statSync(path.join(root, 'content/image-credits/blog/locarno-uno.json')).mtimeMs, before);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--check catches what a hand edit or a later write breaks', () => {
+  const root = corpusTree();
+  try {
+    write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
+    assert.equal(run(root, '--build').status, 0);
+    // A hand-edited record, a re-added claim, a restriction nobody accepted.
+    const edited = readRecord(root, 'locarno-uno');
+    write(root, 'content/image-credits/blog/locarno-uno.json', JSON.stringify({ ...edited, author: { ...edited.author, name: 'Qualcun altro' } }));
+    const seoFile = path.join(root, 'content/seo/seo-blog-ch.ts');
+    fs.writeFileSync(seoFile, fs.readFileSync(seoFile, 'utf-8').replace('"@type": "ImageObject",\n        "url"', `"@type": "ImageObject",\n        ${SITE_RIGHTS_ML}"url"`));
+    // A later write that brings the replaced cover back, in the registry and in the literal.
+    for (const rel of ['content/blog-articles-data.ts', 'content/seo/seo-blog-5.ts']) {
+      const file = path.join(root, rel);
+      fs.writeFileSync(file, fs.readFileSync(file, 'utf-8').replace('/images/places/lugano-view.webp', '/images/blog/tessera.webp'));
+    }
+    const overrides = structuredClone(OVERRIDES);
+    delete overrides.files['Patrol Police.jpg'].decision;
+    overrides.files[NASA].curation = { ...CURATION, note: 'changed later' };
+    write(root, OVERRIDES_FILE, JSON.stringify(overrides));
+    const problems = checkTree(root).join('\n');
+    assert.match(problems, /locarno-uno\.json: disagrees with .*ch-locarno\.json about Commons file «Locarno 1\.jpg»/);
+    assert.match(problems, /locarno-uno\.json: differs from a rebuild — run --build/);
+    assert.match(problems, /seo-blog-ch\.ts: the literal of credited cover ch-locarno still carries acquireLicensePage/);
+    assert.match(problems, /polizia\.json: restrictions personality without the owner's accept-restriction/);
+    assert.match(problems, /nasa\.json: curation is not the one in data\/image-credit-overrides\.json/);
+    assert.match(problems, /needs a human: «Patrol Police\.jpg» \(polizia\): restriction:personality/);
+    assert.match(problems, /registry row tessera still shows replaced cover tessera/);
+    assert.match(problems, /seo-blog-5\.ts: a literal still shows replaced cover tessera/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--check refuses a malformed curation file before using it', () => {
+  const root = corpusTree();
+  try {
+    write(root, OVERRIDES_FILE, JSON.stringify({
+      schema: 1,
+      files: {
+        'Patrol Police.jpg': { decision: 'maybe', curation: CURATION },
+        'EHIC Slovenia.jpg': { decision: 'replace', curation: CURATION },
+        [NASA]: { author: { url: 'https://example.com/me' } },
+      },
+      covers: { prokudin: { modified: 'squashed' } },
+    }));
+    const problems = checkTree(root).join('\n');
+    assert.match(problems, /files\["Patrol Police\.jpg"\]: decision must be replace or accept-restriction/);
+    assert.match(problems, /files\["EHIC Slovenia\.jpg"\]: replace needs a "replacement"/);
+    assert.match(problems, /: every override needs curation \{ by, at, note \}/);
+    assert.match(problems, /author\.url is not an allowed profile URL/);
+    assert.match(problems, /covers\["prokudin"\]\.modified must be cropped or resized/);
+    assert.equal(run(root, '--build').status, 1, '--build does not apply a malformed curation file');
+    assert.deepEqual(records(root), []);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--check before the backfill (no snapshot, no curation file) audits the records the generator wrote', () => {
+  const root = corpusTree();
+  try {
+    fs.rmSync(path.join(root, SNAPSHOT_FILE));
+    assert.deepEqual(checkTree(root), [], 'no record, nothing to say');
+    write(root, 'content/image-credits/blog/locarno-uno.json', JSON.stringify({ schema: 1, cover: '/images/blog/locarno-uno.webp' }));
+    assert.match(checkTree(root).join('\n'), /locarno-uno\.json: invalid record/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--fetch follows the API etiquette: ≤50 titles per GET, maxlag, User-Agent, pause, Retry-After', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'backfill-fetch-'));
+  try {
+    const titles = Array.from({ length: 51 }, (_, i) => `Foto ${String(i).padStart(2, '0')}.jpg`);
+    write(root, 'content/blog-articles-data.ts', `const RAW_ARTICLES = [\n${titles.map((_, i) => row(`a${i}`, `/images/blog/a${i}.webp`)).join('')}];\n`);
+    write(root, 'data/blog-images-used.json', JSON.stringify(Object.fromEntries(titles.map((t, i) => [`a${i}`, upload(t)]))));
+    const requests = [];
+    const sleeps = [];
+    let throttled = false;
+    const fetchImpl = async (url, init) => {
+      requests.push({ url: new URL(url), headers: init.headers });
+      if (!throttled) {
+        throttled = true;
+        return { ok: false, status: 429, headers: { get: (h) => (h === 'retry-after' ? '7' : null) }, text: async () => '' };
+      }
+      const asked = new URL(url).searchParams.get('titles').split('|').map((t) => t.replace(/^File:/, ''));
+      const pages = asked.map((t) => (t === 'Foto 03.jpg'
+        ? { title: 'File:Foto 03.jpg', missing: true }
+        : { pageid: 1, title: `File:${t === 'Foto 01.jpg' ? 'Foto uno.jpg' : t}`, imageinfo: [{ width: 10, height: 10, timestamp: 't', descriptionurl: 'https://commons.wikimedia.org/wiki/File:x', extmetadata: { LicenseShortName: { value: 'CC0' } } }] }));
+      const redirects = asked.includes('Foto 01.jpg') ? [{ from: 'File:Foto 01.jpg', to: 'File:Foto uno.jpg' }] : [];
+      return { ok: true, status: 200, headers: { get: () => null }, text: async () => JSON.stringify({ query: { redirects, pages } }) };
+    };
+    const result = await fetchSnapshot({ root, fetchImpl, sleep: async (ms) => { sleeps.push(ms); }, now: new Date('2026-10-05T08:00:00Z'), log: () => {} });
+    assert.deepEqual(result, { titles: 51, requests: 3 });
+    assert.deepEqual(requests.map((r) => r.url.searchParams.get('titles').split('|').length), [50, 50, 1], 'the throttled batch is retried whole');
+    for (const { url, headers } of requests) {
+      assert.equal(url.searchParams.get('maxlag'), '5');
+      assert.equal(url.searchParams.get('formatversion'), '2');
+      assert.equal(url.searchParams.get('redirects'), '1');
+      assert.match(url.searchParams.get('iiprop'), /extmetadata/);
+      assert.match(headers['User-Agent'], /^FrontaliereTicino-ImageCredits\/.*https:\/\/frontaliereticino\.ch/);
+    }
+    assert.ok(sleeps.includes(7000), 'Retry-After honoured');
+    assert.ok(sleeps.some((ms) => ms > 1000 && ms <= 1500), `a pause between requests (${sleeps})`);
+    const snapshot = JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8'));
+    assert.equal(snapshot.fetchedAt, '2026-10-05');
+    assert.equal(snapshot.requests, 3);
+    assert.deepEqual(snapshot.aliases, { 'Foto 01.jpg': 'Foto uno.jpg' });
+    assert.deepEqual(snapshot.files['Foto 03.jpg'], { exists: false });
+    assert.equal(snapshot.files['Foto uno.jpg'].meta.LicenseShortName, 'CC0');
+    assert.equal(Object.keys(snapshot.files).length, 51);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
