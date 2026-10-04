@@ -177,10 +177,12 @@ test('la CLI scrive il TSV letto dallo step di realign', () => {
 test('produttore e consumatore importano lo stesso modulo', () => {
   const producer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins.yml'), 'utf8');
   const consumer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins-realign.yml'), 'utf8');
-  assert.match(producer, /node --input-type=module -e '\s+import fs from "node:fs";\s+import \{ convergedBulletLine, markdownCodeSpan, transportBulletLine \} from "\.\/scripts\/ci\/transport-realign-body\.mjs";/);
-  assert.match(producer, /r\.transported\.map\(\(t\) => transportBulletLine\(t\)\)/);
-  assert.match(producer, /r\.realign\.map\(\(x\) => convergedBulletLine\(x\)\)/);
+  // Il body intero lo scrive `buildTransportPrBody`, che usa
+  // `transportBulletLine`/`convergedBulletLine` dello stesso modulo.
+  assert.match(producer, /node --input-type=module -e '\s+import fs from "node:fs";\s+import \{ buildTransportPrBody \} from "\.\/scripts\/ci\/transport-realign-body\.mjs";/);
   assert.doesNotMatch(producer, /"- `" \+ t\.path \+ "`/, 'il produttore non deve piu\' scrivere il code span a mano');
+  assert.match(producer, /buildTransportPrBody\(r, \{ workflowsScope: process\.env\.PAT_WORKFLOWS_SCOPE === "true" \}\)/);
+  assert.doesNotMatch(producer, /"## Non implementato \(ancora\)"/, 'nessun secondo template inline del body');
   assert.match(consumer, /node scripts\/ci\/transport-realign-body\.mjs/);
   assert.doesNotMatch(consumer, /const re = \/\^- `\(\[\^`/, 'nessun secondo parser inline nel workflow');
 
