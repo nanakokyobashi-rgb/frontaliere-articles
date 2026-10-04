@@ -232,8 +232,9 @@ export function translatedStringOrNull(value, targetLang) {
  *
  * UNICO predicato per OGNI punto che accetta un body tradotto (#1875): la
  * cascata free-MT, il ramo LLM legacy (`ARTICLE_TRANSLATE_FREE_MT=0`, chiamata
- * singola e a chunk), il retry mirato sul campo mancante e il retry del
- * troncamento in `create-article.mjs`. Una copia italiana ha gli stessi numeri
+ * singola e a chunk), il retry mirato sul campo mancante, il retry del
+ * troncamento e la seconda corsia Codex dei body in attesa
+ * (`retryPendingBodyTranslations`) in `create-article.mjs`. Una copia italiana ha gli stessi numeri
  * della sorgente e passa ogni gate di fedelta': se un punto di accettazione
  * non la rifiuta qui, il testo italiano esce sotto /en/ /de/ /fr/ come
  * traduzione. Rifiutata, il campo segue la recovery per-campo e, se nessun
