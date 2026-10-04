@@ -382,8 +382,10 @@ function sortedObject(object) {
  * Only covers used by the section's registry rows, and only publishable
  * records (the engine reader drops invalid, mismatched and `review` records,
  * exactly as the static page does). File fields are stored once per Commons
- * file. Two records of one file that disagree (two runs that read Commons at
- * different moments) are returned in `conflicts`, and the file carries the
+ * file, with the most recent read: records that agree but were read on
+ * different days carry the latest `fetchedAt`, the day the credit was last
+ * confirmed. Two records of one file that disagree (two runs that read Commons
+ * at different moments) are returned in `conflicts`, and the file carries the
  * most recent read — ties go to the cover first in key order — for every
  * cover cut from it: the credit belongs to the file, and no cover goes out
  * without one while its literal no longer claims the photo for the site.
@@ -408,8 +410,6 @@ export function buildImageCreditsIndex({ section, commit, images, reader }) {
   const covers = {};
   /** @type {Map<string, string>} title -> first cover key, for the conflict message */
   const firstCover = new Map();
-  /** @type {Map<string, string>} title -> the most recent read behind files[title] (which shows the earliest) */
-  const latestRead = new Map();
   const conflicts = [];
   for (const key of [...imageByKey.keys()].sort()) {
     const record = reader.get(imageByKey.get(key));
@@ -420,19 +420,15 @@ export function buildImageCreditsIndex({ section, commit, images, reader }) {
     if (!known) {
       files[title] = fields;
       firstCover.set(title, key);
-      latestRead.set(title, fields.fetchedAt);
     } else {
+      // `files[title].fetchedAt` is the most recent read of the file so far.
       const { fetchedAt: knownAt, ...knownRest } = known;
       const { fetchedAt: newAt, ...newRest } = fields;
       if (canonicalJson(knownRest) !== canonicalJson(newRest)) {
         conflicts.push(`covers ${firstCover.get(title)} and ${key} credit Commons file «${title}» differently`);
-        if (newAt > latestRead.get(title)) {
-          files[title] = fields;
-          latestRead.set(title, newAt);
-        }
-      } else {
-        if (newAt < knownAt) files[title] = { ...known, fetchedAt: newAt };
-        if (newAt > latestRead.get(title)) latestRead.set(title, newAt);
+        if (newAt > knownAt) files[title] = fields;
+      } else if (newAt > knownAt) {
+        files[title] = { ...known, fetchedAt: newAt };
       }
     }
     covers[key] = { file: title, modified: record.modified };
