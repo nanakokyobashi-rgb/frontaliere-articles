@@ -142,6 +142,10 @@ const DATE_CASES = [
     source: 'La scadenza e\' il 2 febbraio 2025 e il valore resta 7.',
     de: 'Die Frist ist am 2. Februar 2025 und der Wert bleibt 7.',
   },
+  {
+    source: 'Il contratto decorre dal 3 marzo 2026 e prevede 9 mesi.',
+    de: 'Der Vertrag beginnt am 3. März 2026 und sieht 9 Monate vor.',
+  },
 ];
 const DATE_CASE_BY_SOURCE = new Map(DATE_CASES.map((item) => [item.source, item]));
 
@@ -256,7 +260,7 @@ test('le date sono localizzate nella lingua di arrivo, con valori invariati, in 
     }))));
     assert.deepEqual(value, DATE_CASES.map(({ de }) => de));
     assert.equal(batchCalls.length, 2);
-    assert.equal(batchItems(batchCalls[1].messages).length, 1);
+    assert.equal(batchItems(batchCalls[1].messages).length, 2);
   });
 });
 
