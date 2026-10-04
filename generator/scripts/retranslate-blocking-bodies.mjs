@@ -1336,11 +1336,11 @@ async function main() {
     const selected = scan.pairs.filter((p) => !CODE || p.codes.includes(CODE));
     if (has('list-out')) {
       const lines = scanListLines(selected);
-      writeFileSync(resolve(flag('list-out')), lines.length ? `${lines.join('\n')}\n` : '', 'utf-8');
+      writeAtomic(flag('list-out'), lines.length ? `${lines.join('\n')}\n` : '');
     }
     if (COUNT_ONLY) {
       const counts = JSON.stringify(countBlockingPairs(selected, { scanned: scan.scanned, locales: LOCALES }), null, 2);
-      if (flag('out')) writeFileSync(resolve(flag('out')), `${counts}\n`, 'utf-8');
+      if (flag('out')) writeAtomic(flag('out'), `${counts}\n`);
       console.log(counts);
       return;
     }
@@ -1509,7 +1509,7 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   const payload = () => JSON.stringify({ mode: APPLY ? 'apply' : 'dry-run', total, results }, null, 2);
   if (OUT) {
     // Su file, non su stdout: i tier loggano li' e romperebbero il parse.
-    writeFileSync(OUT, payload(), 'utf-8');
+    writeAtomic(OUT, payload());
     console.log(`report JSON → ${OUT}`);
   } else if (AS_JSON) {
     console.log(payload());
