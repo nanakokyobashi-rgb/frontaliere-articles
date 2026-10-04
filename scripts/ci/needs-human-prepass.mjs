@@ -71,6 +71,7 @@
  *    SITO.
  */
 import { execFileSync } from 'node:child_process';
+import { appendFileSync } from 'node:fs';
 import { isAggregate } from './check-issue-already-resolved.mjs';
 import { AUTOMATION_DEFERRED_LABEL } from '../lib/classify-issue.mjs';
 // Il marker di verdetto ha UNA definizione, non una quinta copia: vedi il punto
@@ -556,6 +557,17 @@ export function noteMarker(reg, staleBlocks = [], { staleBlocksUnknown = false }
  * («commenti non letti»), e confrontare frasi in prosa e' il modo in cui i bug
  * di questa classe si riaprono.
  *
+ * Regola di COPERTURA (gemello della fix del sito, PR 11292): con un marker
+ * sano la nota e' `already` anche quando l'UNIONE delle chiavi dei marker gia'
+ * presenti contiene ogni chiave del marker corrente, tipo per tipo (`r=` con
+ * `r=`, `b=` con `b=`). L'insieme `b=` non e' stabile fra le run: un lookup
+ * fallito (`catch` → `null` nel resolver) toglie una chiave, e il confronto per
+ * identita' di stringa trattava quel sottoinsieme come una nota nuova — misurato
+ * sul sito, issue 8441: nove note in nove giorni, piu' della meta' con soli
+ * riferimenti gia' annotati. Una chiave davvero nuova riapre la nota una volta
+ * sola. Il `?` di un marker degradato non e' una chiave: non copre niente. Il
+ * ramo degradato resta quello di #1078.
+ *
  * @param {{marker?: string|null, comments?: Array<{body?: string}>, commentsRead?: boolean}} o
  * @returns {{post: boolean, code: 'ok'|'no-marker'|'unread'|'already', why: string}}
  */
@@ -576,7 +588,8 @@ export function noteGate({ marker = null, comments = [], commentsRead = false } 
   };
   const current = markerParts(marker);
   const degradedCurrent = current?.get('b') === '?';
-  const already = (Array.isArray(comments) ? comments : []).some((c) => {
+  const list = Array.isArray(comments) ? comments : [];
+  const already = list.some((c) => {
     const body = String(c?.body || '');
     if (body.includes(marker)) return true;
     if (!degradedCurrent) return false;
@@ -590,6 +603,26 @@ export function noteGate({ marker = null, comments = [], commentsRead = false } 
   });
   if (already) {
     return { post: false, code: 'already', why: 'già annotata' };
+  }
+  if (!degradedCurrent && current && current.size > 0) {
+    const keysOf = (value) => new Set(String(value || '').split(',').filter((k) => k && k !== '?'));
+    const seen = new Map();
+    for (const c of list) {
+      for (const m of String(c?.body || '').matchAll(/<!-- PREPASS_NOTE: [^>]+ -->/g)) {
+        for (const [kind, value] of markerParts(m[0]) || []) {
+          const set = seen.get(kind) || new Set();
+          for (const k of keysOf(value)) set.add(k);
+          seen.set(kind, set);
+        }
+      }
+    }
+    const covered = [...current].every(([kind, value]) => {
+      const keys = keysOf(value);
+      return keys.size > 0 && [...keys].every((k) => seen.get(kind)?.has(k));
+    });
+    if (covered) {
+      return { post: false, code: 'already', why: 'riferimenti già annotati da note precedenti' };
+    }
   }
   return { post: true, code: 'ok', why: '' };
 }
@@ -1293,6 +1326,10 @@ function main() {
   const counts = { requeue: 0, decompose: 0, keep: 0 };
   let acted = 0;
   let noted = 0;
+  // Le note NON postate, divise per causa: `covered` e' il regime normale
+  // (marker identico o riferimenti gia' annotati), `unread` una misura mancata.
+  let notesSkippedCovered = 0;
+  let notesSkippedUnread = 0;
   let noteCapLogged = false;
   let visionLabelReady;
   let lookupFailed = 0;
@@ -1366,6 +1403,8 @@ function main() {
       }
     }
     const gate = noteGate({ marker: d.marker, comments, commentsRead });
+    if (d.note && gate.code === 'already') notesSkippedCovered++;
+    else if (d.note && gate.code === 'unread') notesSkippedUnread++;
 
     if (d.action === 'keep') {
       // La nota non consuma `MAX_PER_RUN`: non instrada niente, non tocca le
@@ -1479,7 +1518,19 @@ function main() {
     if (stepFailed) console.log(`::warning::needs-human-prepass: #${iss.number} instradata parzialmente (${stepFailed}/${steps.length} passi falliti).`);
     else console.log(`PREPASS #${iss.number} → ${add} (${d.reason})`);
   }
-  console.log(`needs-human-prepass: requeue=${counts.requeue} decompose=${counts.decompose} keep=${counts.keep} note=${noted} (azioni eseguite: ${acted}, cap ${MAX_PER_RUN}; note cap ${MAX_NOTES_PER_RUN}).`);
+  console.log(`needs-human-prepass: requeue=${counts.requeue} decompose=${counts.decompose} keep=${counts.keep} note=${noted} notes_skipped_covered=${notesSkippedCovered} notes_skipped_unread=${notesSkippedUnread} (azioni eseguite: ${acted}, cap ${MAX_PER_RUN}; note cap ${MAX_NOTES_PER_RUN}).`);
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    try {
+      appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+        '### needs-human-prepass — note',
+        '',
+        `- notes_posted=${noted}`,
+        `- notes_skipped_covered=${notesSkippedCovered}`,
+        `- notes_skipped_unread=${notesSkippedUnread}`,
+        '',
+      ].join('\n'));
+    } catch { /* il summary e' diagnostica: non deve far fallire il pre-pass */ }
+  }
   if (lookupFailed) {
     // In cima al riassunto sta il numero, non il dettaglio: una run in cui i
     // verdetti non si leggono NON è una run che ha deciso «nessun verdetto».
