@@ -44,12 +44,14 @@
  * dropped here exactly as on the static page), file fields stored once per
  * Commons file (`scripts/lib/image-credit-records.mjs` has the shape).
  * Fail-open for the consumer like the index. Two records that credit one
- * Commons file differently cannot share the file map: the cover read second
- * is left out (the SPA shows it without a credit, its static page keeps its
- * own record) and a warning names both. Refusing would hold back the whole
- * API publication for one cover; the alarm is the content gate on `main`
- * (`generator/tests/image-credits-content.test.mjs`), which fails on any
- * such pair.
+ * Commons file differently (two runs that read Commons at different moments)
+ * share one file entry: the most recent read, for every cover cut from that
+ * file, so no cover goes out without a credit while its literal no longer
+ * claims the photo for the site. A warning names the pair. Refusing would
+ * hold back the whole API publication for one cover; the alarm that asks for
+ * the records to be aligned is the content gate on `main`
+ * (`generator/tests/image-credits-content.test.mjs`), which fails on any such
+ * pair.
  *
  * Usage: node scripts/build-blog-index.mjs [--out <dir>]
  * Emits: <out>/blog-index-<section>-<locale>.json       newest RECENT_LIMIT
@@ -348,9 +350,9 @@ for (const section of SECTIONS) {
     locales.push({ locale, entries });
   }
 
-  // The section's cover credits (see the header), prepared with the index. A
-  // cover that disagrees with another cover of its Commons file is already
-  // out of the payload; publishing goes on, and the warning names the pair.
+  // The section's cover credits (see the header), prepared with the index. Two
+  // covers whose records disagree about one Commons file both carry its most
+  // recent read; publishing goes on, and the warning names the pair.
   const credits = buildImageCreditsIndex({
     section: section.name,
     commit: releaseCommit,
@@ -358,7 +360,7 @@ for (const section of SECTIONS) {
     reader: creditReader,
   });
   for (const conflict of credits.conflicts) {
-    creditWarnings.push(`${section.name}: ${conflict} — the second cover is published without a credit until the records agree`);
+    creditWarnings.push(`${section.name}: ${conflict} — both covers carry the most recent read of the file until the records agree`);
   }
   preparedSections.push({ section, locales, credits: credits.payload });
 }

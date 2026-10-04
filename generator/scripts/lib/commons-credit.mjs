@@ -409,14 +409,20 @@ function nameFromArtist(artistText, artistLinks) {
   return { name: null, via: 'artist-not-a-name', link: null };
 }
 
+/** An attribution that names nobody («Unknown», «Anonymous», «Autore sconosciuto», …): prefixes, so the inflected forms count. */
+const UNKNOWN_ATTRIBUTION_RX = /\b(unknown|anonym|unbekannt|sconosciut|inconnu|not known)/i;
+
 /**
  * The name the credit uses. `Attribution` wins when present (CommonsMetadata:
  * it replaces Artist + Credit), if it is short and is not an instruction or an
- * address; otherwise the Artist rule above.
+ * address; otherwise the Artist rule above. An attribution that names nobody is
+ * not a name either: the Artist rule decides, so where attribution is required
+ * a file with no known author goes to review instead of crediting «Unknown».
  */
 function creditName(attributionText, artistText, artistLinks) {
   if (attributionText) {
     const attribution = attributionText.replace(/^"|"$/g, '').trim();
+    if (UNKNOWN_ATTRIBUTION_RX.test(attribution)) return { ...nameFromArtist(artistText, artistLinks), attribution: null };
     if (!SENTENCE_RX.test(attribution) && !EMAIL_HINT_RX.test(attribution) && attribution.length <= 100) {
       return { name: attribution, via: 'attribution', attribution };
     }

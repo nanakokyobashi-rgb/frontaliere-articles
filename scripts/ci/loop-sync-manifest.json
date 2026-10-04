@@ -4687,7 +4687,7 @@
       "reason": "P14: autore e licenza della copertina Wikimedia Commons, letti con la richiesta di ricerca che il generatore fa gia' (`extmetadata`, nessuna chiamata in piu'), con la regola di accettazione misurata dal probe del 2026-10-04 (492 accettati, 38 da rivedere, 2 da sostituire su 532 file) e il record `content/image-credits/blog/<id>.json` validato con `engine/shared/imageCredits.mjs` prima di scriverlo. Dedup per file Commons, non per URL. Sul sito non esiste e non deve: il generatore del sito e' quello legacy disabilitato e i record vivono nel corpus. Senza dipendenze di proposito (niente jsdom): i gate del generatore girano senza `npm ci`, e un sanitizzatore non caricabile li' non sarebbe testato dove e' gated.",
       "baseline": {
         "site": null,
-        "corpus": "de938a06c16dc297",
+        "corpus": "20db761f970a4ca1",
         "alignedAt": "2026-10-04"
       }
     },
@@ -4697,7 +4697,7 @@
       "reason": "P14: i controlli lato corpus sui record di credito delle copertine Commons (nome del file = copertina, pubblicato solo `ok`, accordo fra le copertine di uno stesso file Commons, letterali SEO di una copertina accreditata senza i cinque campi di diritti) e il file `data/image-credits-<sezione>.json` che `scripts/build-blog-index.mjs` pubblica per la SPA. Il sito legge quel JSON via HTTP e non ha questo modulo: corpus-only per costruzione, come il resto della pubblicazione.",
       "baseline": {
         "site": null,
-        "corpus": "c9f00e19d5eb7d9f",
+        "corpus": "f5144784aed4adf4",
         "alignedAt": "2026-10-04"
       }
     }

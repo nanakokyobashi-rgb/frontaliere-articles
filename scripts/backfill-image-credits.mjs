@@ -96,6 +96,8 @@ export const OVERRIDES_FILE = 'data/image-credit-overrides.json';
 export const REGISTRY_FILES = Object.freeze(['content/blog-articles-data.ts', 'content/swiss-articles-data.ts']);
 const COVERS_DIR = 'public/images/blog';
 const BATCH_SIZE = 50;
+/** Encoded length of one request's `titles` value: well under the URL lengths Wikimedia serves. */
+const MAX_TITLES_PARAM = 6000;
 const PAUSE_MS = 1500;
 const MAX_RETRIES = 3;
 
@@ -187,6 +189,51 @@ export function serializeSnapshot(snapshot) {
 
 const EMAIL_IN_TEXT_RX = /[^\s@<>()"':;]+@[^\s@<>()"']+\.[A-Za-z]{2,}/g;
 const OBFUSCATED_EMAIL_IN_TEXT_RX = /[\w.-]+\s*[([]\s*at\s*[)\]]\s*[\w.-]+(?:\s*[([]\s*dot\s*[)\]]\s*[\w.-]+)+/gi;
+const REDACTED_EMAIL = 'redacted@example.invalid';
+const REDACTED_OBFUSCATED_EMAIL = 'redacted(at)example(dot)invalid';
+
+/** Whether a text still carries one of the placeholders `redactEmailAddresses` writes. */
+export function hasRedactedAddress(value) {
+  const text = String(value ?? '');
+  return text.includes(REDACTED_EMAIL) || text.includes(REDACTED_OBFUSCATED_EMAIL);
+}
+
+/**
+ * Seconds to wait before retrying, from a `Retry-After` header: delta-seconds
+ * or an HTTP-date (RFC 9110 §10.2.3). Unreadable or absent → 5; at least 1,
+ * at most 300, so a far date cannot stall the run and a past one cannot skip
+ * the pause.
+ *
+ * @param {unknown} value
+ * @param {number} [nowMs]
+ */
+export function retryAfterSeconds(value, nowMs = Date.now()) {
+  const raw = String(value ?? '').trim();
+  let seconds = Number.NaN;
+  if (/^\d+$/.test(raw)) seconds = Number(raw);
+  else if (raw) seconds = (Date.parse(raw) - nowMs) / 1000;
+  if (!Number.isFinite(seconds)) seconds = 5;
+  return Math.min(300, Math.max(1, Math.ceil(seconds)));
+}
+
+/** The titles in request-sized groups: at most BATCH_SIZE, and a `titles` value no longer than MAX_TITLES_PARAM. */
+export function titleBatches(titles) {
+  const batches = [];
+  let current = [];
+  let length = 0;
+  for (const title of titles) {
+    const cost = encodeURIComponent(`File:${title}`).length + 3; // the encoded `|` separator
+    if (current.length > 0 && (current.length >= BATCH_SIZE || length + cost > MAX_TITLES_PARAM)) {
+      batches.push(current);
+      current = [];
+      length = 0;
+    }
+    current.push(title);
+    length += cost;
+  }
+  if (current.length > 0) batches.push(current);
+  return batches;
+}
 
 /**
  * A Commons `Artist` or `Attribution` sometimes carries the photographer's
@@ -199,8 +246,8 @@ const OBFUSCATED_EMAIL_IN_TEXT_RX = /[\w.-]+\s*[([]\s*at\s*[)\]]\s*[\w.-]+(?:\s*
  */
 export function redactEmailAddresses(value) {
   return value
-    .replace(EMAIL_IN_TEXT_RX, 'redacted@example.invalid')
-    .replace(OBFUSCATED_EMAIL_IN_TEXT_RX, 'redacted(at)example(dot)invalid');
+    .replace(EMAIL_IN_TEXT_RX, REDACTED_EMAIL)
+    .replace(OBFUSCATED_EMAIL_IN_TEXT_RX, REDACTED_OBFUSCATED_EMAIL);
 }
 
 /**
@@ -222,8 +269,7 @@ export async function fetchSnapshot({
   const aliases = {};
   let requests = 0;
   let last = 0;
-  for (let i = 0; i < all.length; i += BATCH_SIZE) {
-    const batch = all.slice(i, i + BATCH_SIZE);
+  for (const [n, batch] of titleBatches(all).entries()) {
     const url = `${COMMONS_API}?action=query&format=json&formatversion=2&redirects=1&maxlag=5&${COMMONS_IMAGEINFO_PARAMS}`
       + `&titles=${encodeURIComponent(batch.map((t) => `File:${t}`).join('|'))}`;
     let json = null;
@@ -240,13 +286,13 @@ export async function fetchSnapshot({
       try { json = JSON.parse(body); } catch { json = null; }
       const lagged = json?.error?.code === 'maxlag';
       if ((res.status === 429 || res.status >= 500 || lagged) && attempt < MAX_RETRIES) {
-        const retryAfter = Number(res.headers?.get?.('retry-after') || 5);
-        log(`[backfill] batch ${i / BATCH_SIZE}: HTTP ${res.status}${lagged ? ' maxlag' : ''}, retrying in ${retryAfter}s`);
+        const retryAfter = retryAfterSeconds(res.headers?.get?.('retry-after'));
+        log(`[backfill] batch ${n}: HTTP ${res.status}${lagged ? ' maxlag' : ''}, retrying in ${retryAfter}s`);
         await sleep(retryAfter * 1000);
         continue;
       }
       if (!res.ok || !json || json.error) {
-        throw new Error(`Commons API refused batch ${i / BATCH_SIZE}: HTTP ${res.status}${json?.error ? ` ${json.error.code}` : ''}`);
+        throw new Error(`Commons API refused batch ${n}: HTTP ${res.status}${json?.error ? ` ${json.error.code}` : ''}`);
       }
       break;
     }
@@ -264,7 +310,7 @@ export async function fetchSnapshot({
       if (entry.meta) entry.meta = Object.fromEntries(Object.entries(entry.meta).map(([k, v]) => [k, redactEmailAddresses(v)]));
       files[title] = entry;
     }
-    log(`[backfill] batch ${i / BATCH_SIZE}: ${batch.length} titles`);
+    log(`[backfill] batch ${n}: ${batch.length} titles`);
   }
   const snapshot = { schema: 1, fetchedAt: utcDate(now), requests, imageinfoParams: COMMONS_IMAGEINFO_PARAMS, files, aliases };
   fs.mkdirSync(path.dirname(path.join(root, SNAPSHOT_FILE)), { recursive: true });
@@ -330,6 +376,10 @@ function applyFileOverride(template, entry) {
     answered.add('licence');
   }
   if (entry.decision === 'accept-restriction') answered.add('restriction');
+  // The snapshot's Artist text of a file with an address carries the redaction
+  // placeholder, which the validator rejects like any e-mail. The curation
+  // names whom to credit, so that raw text goes, unless the curation gives one.
+  if (entry.author?.text === undefined && hasRedactedAddress(next.author?.text)) next.author = { ...next.author, text: null };
   next.curation = { by: entry.curation.by, at: entry.curation.at, note: entry.curation.note };
   return { template: next, answered };
 }

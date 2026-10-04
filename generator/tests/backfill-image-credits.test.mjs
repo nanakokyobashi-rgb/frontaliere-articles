@@ -22,7 +22,9 @@ import {
   SNAPSHOT_FILE,
   checkTree,
   fetchSnapshot,
+  retryAfterSeconds,
   serializeSnapshot,
+  titleBatches,
 } from '../../scripts/backfill-image-credits.mjs';
 import { scanSeoImageBlocks } from '../../scripts/lib/image-credit-records.mjs';
 import { acceptCommonsCandidate, assessCommonsFile, finalizeCreditRecord, writeCreditRecord } from '../scripts/lib/commons-credit.mjs';
@@ -420,6 +422,45 @@ test('--fetch follows the API etiquette: ≤50 titles per GET, maxlag, User-Agen
     const verdict = assessCommonsFile({ title: 'Foto 02.jpg', ...snapshot.files['Foto 02.jpg'] });
     assert.equal(verdict.decision, 'review');
     assert.match(verdict.reasons.join(','), /attribution-needs-curation/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--fetch: Retry-After as seconds or as an HTTP date, never NaN, never a stall', () => {
+  const now = Date.parse('2026-10-05T08:00:00Z');
+  assert.equal(retryAfterSeconds('7', now), 7);
+  assert.equal(retryAfterSeconds('Mon, 05 Oct 2026 08:00:30 GMT', now), 30, 'an HTTP date is a moment, not a number');
+  assert.equal(retryAfterSeconds('Mon, 05 Oct 2026 07:00:00 GMT', now), 1, 'a date already past still pauses');
+  assert.equal(retryAfterSeconds('soon', now), 5);
+  assert.equal(retryAfterSeconds(null, now), 5);
+  assert.equal(retryAfterSeconds('86400', now), 300, 'capped: a far date cannot stall the run');
+});
+
+test('--fetch: a batch also stops before its titles make the URL too long', () => {
+  const long = Array.from({ length: 50 }, (_, i) => `${'Ä'.repeat(60)} ${i}.jpg`);
+  const batches = titleBatches(long);
+  assert.ok(batches.length > 1, 'fifty long names do not fit one request');
+  assert.deepEqual(batches.flat(), long, 'every title once, in order');
+  for (const batch of batches) assert.ok(encodeURIComponent(batch.map((t) => `File:${t}`).join('|')).length <= 6000);
+  assert.deepEqual(titleBatches(Array.from({ length: 51 }, (_, i) => `Foto ${i}.jpg`)).map((b) => b.length), [50, 1], 'short names: 50 per request');
+});
+
+test('--build: a curated author replaces a redacted address in the Artist text, so the record validates', () => {
+  const root = corpusTree();
+  try {
+    const snapshot = JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8'));
+    snapshot.files['Locarno 1.jpg'].meta.Artist = 'Foto Mario Rossi, contatto redacted@example.invalid';
+    write(root, SNAPSHOT_FILE, serializeSnapshot(snapshot));
+    const overrides = structuredClone(OVERRIDES);
+    overrides.files['Locarno 1.jpg'] = { author: { name: 'Mario Rossi', url: null, type: 'Person' }, curation: CURATION };
+    write(root, OVERRIDES_FILE, JSON.stringify(overrides, null, 2));
+    const result = run(root, '--build');
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    const record = readRecord(root, 'locarno-uno');
+    assert.equal(record.author.name, 'Mario Rossi');
+    assert.equal(record.author.text, null, 'the placeholder is not kept as the author text');
+    assert.equal(run(root, '--check').status, 0);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

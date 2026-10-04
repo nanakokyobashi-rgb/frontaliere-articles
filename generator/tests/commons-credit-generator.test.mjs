@@ -76,8 +76,8 @@ const STRATEGY_4 = slice(CREATE, '  // ── Strategy 4: Wikimedia Commons', ' 
  * Runs the real Strategy 4 block against a fake Commons search (one response
  * per query) and a fake optimizer that writes a 1200×675 WebP header.
  */
-async function runStrategy4({ root, responses, failRecord = false }) {
-  const calls = { search: [], download: [], used: [] };
+async function runStrategy4({ root, responses, failRecord = false, failUsed = false }) {
+  const calls = { search: [], download: [], used: [], catalog: [], saveOptions: [] };
   const data = { id: 'nuovo-articolo' };
   const imgPath = path.join(root, 'public', 'images', 'blog', `${data.id}.webp`);
   const queries = Object.keys(responses);
@@ -92,7 +92,7 @@ async function runStrategy4({ root, responses, failRecord = false }) {
   };
   const block = new Function(
     'data', 'imgPath', 'PROJECT_ROOT', 'fetch', 'console', 'Math', 'imagePhaseExpired', '_buildWikimediaQueries',
-    '_saveAndOptimize', '_saveUsedImageUrl', 'readFileSync', 'existsSync', 'unlinkSync',
+    '_saveAndOptimize', '_saveUsedImageUrl', 'appendCatalogEntry', 'readFileSync', 'existsSync', 'unlinkSync',
     'COMMONS_IMAGEINFO_PARAMS', 'chooseCommonsCredit', 'creditRecordForCover', 'loadCommonsUsage', 'readCommonsPage',
     'utcDate', 'webpDimensions', 'writeCreditRecord',
     `return (async () => {\n${STRATEGY_4}\nreturn null;\n})();`,
@@ -100,8 +100,13 @@ async function runStrategy4({ root, responses, failRecord = false }) {
   const result = await block(
     data, imgPath, root, fetch, quiet, { floor: Math.floor, min: Math.min, random: () => 0 }, () => false,
     () => queries,
-    async () => { fs.writeFileSync(imgPath, webpHeader(1200, 675)); return `/images/blog/${data.id}.webp`; },
-    (id, url) => calls.used.push([id, url]),
+    async (_buffer, _label, _type, options) => {
+      calls.saveOptions.push(options);
+      fs.writeFileSync(imgPath, webpHeader(1200, 675));
+      return `/images/blog/${data.id}.webp`;
+    },
+    failUsed ? () => { throw new Error('EROFS'); } : (id, url) => calls.used.push([id, url]),
+    (cover) => calls.catalog.push(cover),
     fs.readFileSync, fs.existsSync, fs.unlinkSync,
     credit.COMMONS_IMAGEINFO_PARAMS, credit.chooseCommonsCredit, credit.creditRecordForCover, credit.loadCommonsUsage,
     credit.readCommonsPage, () => '2026-10-04', credit.webpDimensions,
@@ -139,6 +144,22 @@ test('Strategy 4 writes the credit record of the chosen cover, then the usage ma
     assert.equal(record.fetchedAt, '2026-10-04');
     assert.deepEqual(data._imageCredit, record);
     assert.equal(calls.used.length, 1, '_saveUsedImageUrl is kept');
+    assert.deepEqual(calls.catalog, ['/images/blog/nuovo-articolo.webp'], 'cataloged once, after the credit is in place');
+    assert.deepEqual(calls.saveOptions, [{ commons: true }], '_saveAndOptimize leaves the catalog to Strategy 4');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('Strategy 4 undoes the whole install when the usage map cannot be written', async () => {
+  const root = tempRoot();
+  try {
+    const { result, data, imgPath, calls } = await runStrategy4({ root, failUsed: true, responses: { lugano: [searchPage('Locarno 1.jpg')] } });
+    assert.equal(result, null, 'the next strategy runs');
+    assert.equal(fs.existsSync(path.join(root, 'content/image-credits/blog/nuovo-articolo.json')), false, 'no record left for a picture another strategy will write');
+    assert.equal(fs.existsSync(imgPath), false, 'no Commons cover on disk');
+    assert.equal(data._imageCredit, undefined, 'no credit in memory for the SEO literal');
+    assert.deepEqual(calls.catalog, [], 'nothing cataloged for the journalist picker');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -209,6 +230,7 @@ test('Strategy 4 drops the cover when its record cannot be written', async () =>
     assert.equal(fs.existsSync(imgPath), false, 'no credit, no Commons cover on disk');
     assert.equal(data._imageCredit, undefined);
     assert.deepEqual(calls.used, []);
+    assert.deepEqual(calls.catalog, []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -217,6 +239,62 @@ test('Strategy 4 drops the cover when its record cannot be written', async () =>
 test('generateArticleImage forgets a credit left by an earlier attempt', () => {
   const head = slice(CREATE, 'async function generateArticleImage(data) {', 'const imageDeadline');
   assert.match(head, /delete data\._imageCredit;/);
+});
+
+const SAVE_AND_OPTIMIZE = slice(CREATE, '  async function _saveAndOptimize(', '  // ── Strategy 1: Gemini');
+
+/** The real `_saveAndOptimize`, with a fake optimizer that copies the source to the cover. */
+function makeSaveAndOptimize({ root, data }) {
+  const imgPath = path.join(root, 'public', 'images', 'blog', `${data.id}.webp`);
+  const catalog = [];
+  const factory = new Function(
+    'data', 'imgPath', 'PROJECT_ROOT', 'resolve', 'writeFileSync', 'existsSync', 'unlinkSync', 'optimizeImageToWebp',
+    'BLOG_IMAGE_HARD_MAX_BYTES', 'console', 'appendCatalogEntry', 'creditRecordPath',
+    `${SAVE_AND_OPTIMIZE}\nreturn _saveAndOptimize;`,
+  );
+  const save = factory(
+    data, imgPath, root, (rel) => path.join(root, rel), fs.writeFileSync, fs.existsSync, fs.unlinkSync,
+    async (src, dst) => { fs.copyFileSync(src, dst); return { ok: true, before: 6000, after: 6000 }; },
+    10_000_000, quiet, (cover) => catalog.push(cover), credit.creditRecordPath,
+  );
+  return { save, catalog };
+}
+
+function writeLocarnoRecord(root, cover) {
+  const verdict = credit.acceptCommonsCandidate(credit.readCommonsPage(searchPage('Locarno 1.jpg')), { fetchedAt: '2026-10-04' });
+  assert.ok(verdict.ok);
+  const record = credit.creditRecordForCover(verdict.template, { cover, original: { width: 2560, height: 1920 }, coverSize: { width: 1200, height: 675 } });
+  return credit.writeCreditRecord(root, record);
+}
+
+test('a picture that is not from Commons removes a credit record left for the same cover, then is cataloged', async () => {
+  const root = tempRoot();
+  try {
+    const data = { id: 'nuovo-articolo' };
+    const recordFile = writeLocarnoRecord(root, '/images/blog/nuovo-articolo.webp');
+    const { save, catalog } = makeSaveAndOptimize({ root, data });
+    const cover = await save(Buffer.alloc(6000), 'Pixabay/lugano', 'image/jpeg');
+    assert.equal(cover, '/images/blog/nuovo-articolo.webp');
+    assert.equal(fs.existsSync(recordFile), false, 'the Commons credit would label a Pixabay picture');
+    assert.deepEqual(catalog, ['/images/blog/nuovo-articolo.webp']);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('a Commons picture leaves the record and the catalog to Strategy 4', async () => {
+  const root = tempRoot();
+  try {
+    const data = { id: 'nuovo-articolo' };
+    const recordFile = writeLocarnoRecord(root, '/images/blog/nuovo-articolo.webp');
+    const { save, catalog } = makeSaveAndOptimize({ root, data });
+    const cover = await save(Buffer.alloc(6000), 'Wikimedia/lugano', 'image/jpeg', { commons: true });
+    assert.equal(cover, '/images/blog/nuovo-articolo.webp');
+    assert.equal(fs.existsSync(recordFile), true, 'Strategy 4 rewrites it, or removes it if the install fails');
+    assert.deepEqual(catalog, [], 'cataloged only once the credit is in place');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('findStockImageCandidates offers a Commons photo only with its credit', () => {

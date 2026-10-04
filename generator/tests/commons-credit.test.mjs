@@ -294,6 +294,27 @@ test('a public-domain file with an unknown author is a valid courtesy credit', (
   assert.equal(unknown.template.author.name, null);
 });
 
+test('an attribution that names nobody is no author: CC BY-SA goes to review, public domain stays a courtesy credit', () => {
+  const ccBySa = file('Locarno 1.jpg');
+  for (const attribution of ['Unknown', 'Anonymous', 'Autore sconosciuto', 'Unbekannter Fotograf', 'Auteur inconnu']) {
+    const noArtist = { ...ccBySa, meta: { ...ccBySa.meta, Attribution: attribution } };
+    delete noArtist.meta.Artist;
+    const verdict = acceptCommonsCandidate(noArtist, { fetchedAt: '2026-10-04' });
+    assert.equal(verdict.ok, false, `«${attribution}» is not a name to credit under CC BY-SA`);
+    assert.ok(verdict.reasons.some((r) => r.startsWith('author:')), verdict.reasons.join(', '));
+    // With a named Artist, the Artist is the author and the empty attribution is not shown.
+    const named = acceptCommonsCandidate({ ...ccBySa, meta: { ...ccBySa.meta, Attribution: attribution } }, { fetchedAt: '2026-10-04' });
+    assert.equal(named.ok, true);
+    assert.equal(named.template.author.name, 'Riessdo');
+    assert.equal(named.template.attribution, null);
+  }
+  const pd = file('Lugano prokudin.jpg');
+  const courtesy = acceptCommonsCandidate({ ...pd, meta: { ...pd.meta, Artist: undefined, Attribution: 'Unknown' } }, { fetchedAt: '2026-10-04' });
+  assert.equal(courtesy.ok, true, 'public domain: an unknown author is allowed');
+  assert.equal(courtesy.template.author.name, null);
+  assert.equal(courtesy.template.attribution, null);
+});
+
 // ── Dedup by file, reuse with the existing credit ──────────────────────────
 
 test('dedup is by Commons file: maps and records mark a file as used; a credited file is inherited', () => {

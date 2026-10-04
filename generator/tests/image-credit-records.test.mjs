@@ -247,9 +247,29 @@ test('credits index: two covers that credit one file differently are a conflict,
       images: ['/images/blog/c-tre.webp', '/images/blog/b-due.webp', '/images/blog/a-uno.webp'],
     });
     assert.deepEqual(conflicts, ['covers a-uno and c-tre credit Commons file «Locarno 1.jpg» differently']);
+    // c-tre was read the same day as a-uno, the group's latest read: a tie keeps the cover first in key order.
     assert.equal(payload.files['Locarno 1.jpg'].licence.name, 'CC BY-SA 3.0');
     assert.equal(payload.files['Locarno 1.jpg'].fetchedAt, '2026-09-30');
-    assert.equal(payload.covers['c-tre'], undefined, 'the conflicting cover is not published with the other one\'s credit');
+    assert.deepEqual(payload.covers['c-tre'], { file: 'Locarno 1.jpg', modified: first.modified }, 'no cover goes out without a credit');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('credits index: of two disagreeing reads of one file, the most recent is the file\'s credit for every cover', () => {
+  const root = tempRoot();
+  try {
+    const old = { ...recordFor('Locarno 1.jpg', '/images/blog/a-uno.webp'), fetchedAt: '2026-09-01' };
+    writeCreditRecord(root, old);
+    writeCreditRecord(root, { ...old, cover: '/images/blog/b-due.webp', fetchedAt: '2026-10-04', author: { ...old.author, name: 'Riessdo (new display name)' } });
+    const { conflicts, payload } = buildImageCreditsIndex({
+      section: 'frontaliere', commit: null, reader: corpusCreditReader(root),
+      images: ['/images/blog/a-uno.webp', '/images/blog/b-due.webp'],
+    });
+    assert.equal(conflicts.length, 1);
+    assert.equal(payload.files['Locarno 1.jpg'].author.name, 'Riessdo (new display name)');
+    assert.equal(payload.files['Locarno 1.jpg'].fetchedAt, '2026-10-04');
+    assert.deepEqual(Object.keys(payload.covers), ['a-uno', 'b-due']);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -301,7 +321,7 @@ test('build-blog-index publishes image-credits-<section>.json beside the index, 
   }
 });
 
-test('build-blog-index still publishes when two covers credit one file differently: the second goes without a credit, with a warning', () => {
+test('build-blog-index still publishes when two covers credit one file differently: both carry the file\'s most recent read, with a warning', () => {
   const root = blogIndexTree();
   try {
     const first = recordFor('Locarno 1.jpg', '/images/blog/uno.webp');
@@ -312,10 +332,10 @@ test('build-blog-index still publishes when two covers credit one file different
     const out = path.join(root, 'out');
     const result = spawnSync(process.execPath, [path.join(root, 'scripts/build-blog-index.mjs'), '--out', out], { cwd: root, encoding: 'utf8' });
     assert.equal(result.status, 0, 'one disagreeing cover does not hold back the publication: ' + result.stdout + result.stderr);
-    assert.match(result.stderr, /::warning::frontaliere: covers tre and uno credit Commons file «Locarno 1\.jpg» differently — the second cover is published without a credit/);
+    assert.match(result.stderr, /::warning::frontaliere: covers tre and uno credit Commons file «Locarno 1\.jpg» differently — both covers carry the most recent read of the file/);
     const credits = JSON.parse(fs.readFileSync(path.join(out, 'image-credits-frontaliere.json'), 'utf-8'));
-    assert.deepEqual(Object.keys(credits.covers), ['tre'], 'only the cover read first keeps the file credit');
-    assert.equal(credits.files['Locarno 1.jpg'].author.name, 'Someone Else', 'and it is that cover\'s own record');
+    assert.deepEqual(Object.keys(credits.covers), ['tre', 'uno'], 'no cover goes out without a credit');
+    assert.equal(credits.files['Locarno 1.jpg'].author.name, 'Someone Else', 'same day: the cover first in key order');
     assert.ok(fs.existsSync(path.join(out, 'blog-index-frontaliere-it.json')), 'the index is published as usual');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

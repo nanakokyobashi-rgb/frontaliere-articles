@@ -271,6 +271,7 @@ import {
   chooseCommonsCredit,
   coverCreditFor,
   creditRecordForCover,
+  creditRecordPath,
   loadCommonsUsage,
   readCommonsPage,
   utcDate,
@@ -13330,7 +13331,8 @@ async function generateArticleImage(data) {
   const imgPath = resolve(`public/images/blog/${data.id}.webp`);
 
   // ── Helper: save raw image buffer, optimize, return path or null ──
-  async function _saveAndOptimize(rawBuffer, providerLabel, contentType = 'image/jpeg') {
+  // `commons`: Strategy 4 catalogs the cover itself, once its credit is in place (P14).
+  async function _saveAndOptimize(rawBuffer, providerLabel, contentType = 'image/jpeg', { commons = false } = {}) {
     if (rawBuffer.length < 5000) {
       console.error(`  ⚠️ Immagine troppo piccola (${rawBuffer.length} bytes) da ${providerLabel}`);
       return null;
@@ -13378,6 +13380,12 @@ async function generateArticleImage(data) {
     }
 
     const generatedPath = `/images/blog/${data.id}.webp`;
+    if (commons) return generatedPath;
+    // P14: this file now holds a picture that is not from Commons. A credit
+    // record left for it (an earlier attempt, a regenerated id) would credit
+    // someone else's photo on it.
+    const staleCredit = creditRecordPath(PROJECT_ROOT, data.id);
+    if (existsSync(staleCredit)) unlinkSync(staleCredit);
     appendCatalogEntry(generatedPath);
     return generatedPath;
   }
@@ -13646,24 +13654,31 @@ async function generateArticleImage(data) {
       });
       if (!imgRes.ok) throw new Error(`Download HTTP ${imgRes.status}`);
       const buf = Buffer.from(await imgRes.arrayBuffer());
-      const saved = await _saveAndOptimize(buf, `Wikimedia/${pick.query}`, imgRes.headers.get('content-type'));
+      const saved = await _saveAndOptimize(buf, `Wikimedia/${pick.query}`, imgRes.headers.get('content-type'), { commons: true });
       if (!saved) return null;
+      // The cover is installed in order: its record, the usage map, the
+      // catalog. A step that fails undoes the ones before it — no credit, no
+      // Commons cover — so the next strategy starts clean and no other picture
+      // is ever published with this credit.
+      let recordFile = null;
       try {
         const record = creditRecordForCover(pick.credit, {
           cover: saved,
           original: { width: pick.info.width, height: pick.info.height },
           coverSize: webpDimensions(readFileSync(imgPath)),
         });
-        writeCreditRecord(PROJECT_ROOT, record);
+        recordFile = writeCreditRecord(PROJECT_ROOT, record);
+        _saveUsedImageUrl(data.id, imgUrl);
+        appendCatalogEntry(saved);
         data._imageCredit = record;
+        return saved;
       } catch (e) {
-        // No credit, no Commons cover: drop the file so the next strategy starts clean.
-        console.error(`  ⚠️  Wikimedia «${pick.title}»: credito non registrabile (${e.message}) — immagine scartata`);
+        console.error(`  ⚠️  Wikimedia «${pick.title}»: copertina non installata (${e.message}) — immagine e credito scartati`);
+        if (recordFile && existsSync(recordFile)) unlinkSync(recordFile);
+        delete data._imageCredit;
         if (existsSync(imgPath)) unlinkSync(imgPath);
         return null;
       }
-      _saveUsedImageUrl(data.id, imgUrl);
-      return saved;
     };
 
     for (const query of searchQueries) {
