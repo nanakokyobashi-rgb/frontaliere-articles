@@ -97,7 +97,11 @@ test('lo script gira senza npm ci: solo import di `node:*`', () => {
   // Il workflow non installa dipendenze, e un `identical` con un import
   // relativo dovrebbe portarsi dietro anche quel file.
   const source = read(SCRIPT_REL);
-  const specifiers = [...source.matchAll(/^\s*import\s[^;]*?from\s+['"]([^'"]+)['"]/gms)].map((m) => m[1]);
+  // Copre `import … from`, `export … from` e l'import a solo effetto
+  // collaterale (`import './x.mjs'`).
+  const specifiers = [
+    ...source.matchAll(/^\s*(?:import|export)\s[^;]*?from\s+['"]([^'"]+)['"]|^\s*import\s+['"]([^'"]+)['"]/gms),
+  ].map((m) => m[1] ?? m[2]);
   assert.ok(specifiers.length > 0);
   for (const spec of specifiers) assert.match(spec, /^node:/, `import non builtin: ${spec}`);
   assert.doesNotMatch(source, /\bimport\(\s*['"](?!node:)/, 'nessun import dinamico non builtin');
