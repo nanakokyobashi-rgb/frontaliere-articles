@@ -29,9 +29,11 @@ import {
   decideMintGate,
   demotedBlock,
   demotedItemsBySourcePr,
+  ghApiRunner,
   itemBornSatisfiedMarker,
   itemHeadline,
   mintCheckCounts,
+  mintTargetContext,
   preserveDemotedOnSourcePrs,
   qualifySourcePrLookups,
   resolveSourcePrTriage,
@@ -600,7 +602,7 @@ test('il marker FU_ITEM_BORN_SATISFIED ha la forma letterale del sito e si conta
  * repository. `failEdit` fa fallire la riscrittura del corpo (il bucket resta
  * collecting e la passata dopo lo rivaluta).
  */
-function runAdmissionGate(bucket, { files = {}, contentsError = null, failEdit = false, passes = 1 } = {}) {
+function runAdmissionGate(bucket, { files = {}, contentsError = null, failEdit = false, passes = 1, env: envOverrides = {} } = {}) {
   const root = mkdtempSync(join(tmpdir(), 'followup-mint-admission-'));
   const calls = join(root, 'calls');
   const state = join(root, 'state.json');
@@ -609,7 +611,7 @@ function runAdmissionGate(bucket, { files = {}, contentsError = null, failEdit =
   writeFileSync(join(root, 'gh'), `#!/usr/bin/env node
 const fs = require('node:fs');
 const args = process.argv.slice(2);
-fs.appendFileSync(${JSON.stringify(calls)}, JSON.stringify({ args }) + '\\n');
+fs.appendFileSync(${JSON.stringify(calls)}, JSON.stringify({ args, token: process.env.GH_TOKEN || '' }) + '\\n');
 const read = () => JSON.parse(fs.readFileSync(${JSON.stringify(state)}, 'utf8'));
 const write = (s) => fs.writeFileSync(${JSON.stringify(state)}, JSON.stringify(s));
 const files = ${JSON.stringify(files)};
@@ -658,6 +660,9 @@ if (args[0] === 'api') {
     GITHUB_STEP_SUMMARY: '',
   };
   for (const key of ['GATE_PR_REPO', 'GATE_PR_TOKEN', 'GATE_ALT_PR_REPO', 'GATE_ALT_PR_TOKEN', 'MINT_ADMISSION_READ_CAP']) delete env[key];
+  // Come il passaggio del corpus nel workflow: il gemello (sito) ha il suo token.
+  Object.assign(env, { GATE_ALT_PR_REPO: 'site/r', GATE_ALT_PR_TOKEN: 'site-token' }, envOverrides);
+  for (const [key, value] of Object.entries(envOverrides)) if (value === undefined) delete env[key];
   try {
     const runs = [];
     for (let i = 0; i < passes; i += 1) runs.push(spawnSync(process.execPath, [GATE], { encoding: 'utf8', env }));
@@ -727,4 +732,104 @@ test('gate vero: un item nato soddisfatto riceve UN solo marker anche su due pas
   const markers = state.comments.filter((c) => c.body.includes(`<!-- FU_ITEM_BORN_SATISFIED: item=FU-${ADMISSION_DAY}-001 -->`));
   assert.equal(markers.length, 1, JSON.stringify(state.comments.map((c) => c.body.slice(0, 80))));
   assert.match(state.issue.body, /- State: collecting/);
+});
+
+/**
+ * Il gemello si legge col SUO token (review #2097): `twinIo` passava da
+ * `ghApiRaw`, che eredita il `GH_TOKEN` del bucket e ignora
+ * `GATE_ALT_PR_TOKEN`/`GATE_PR_TOKEN`. Con un gemello illeggibile da quel token
+ * il 404 diventava `missing` e un bersaglio valido usciva come
+ * `target-file-missing`. Titolo di fallimento: «Conio follow-up: bersaglio del
+ * gemello demotato perché letto con il token sbagliato».
+ */
+const SITE_LAYOUT = { GH_REPO: 'corpus/r', GH_TOKEN: 'corpus-token', FOLLOWUP_CORPUS_REPO: 'corpus/r', FOLLOWUP_SITE_REPO: 'site/r' };
+
+const recordingRunner = (seen, answer = () => 'x') => (token) => {
+  seen.push({ token });
+  return (args) => {
+    seen.push({ token, args });
+    return answer(args);
+  };
+};
+
+test('mintTargetContext: il runner del gemello riceve GATE_ALT_PR_TOKEN, non GH_TOKEN', () => {
+  const seen = [];
+  const ctx = mintTargetContext({
+    readManifest: () => [],
+    env: { ...SITE_LAYOUT, GATE_ALT_PR_REPO: 'site/r', GATE_ALT_PR_TOKEN: 'site-token' },
+    ghFor: recordingRunner(seen),
+  });
+  assert.equal(ctx.side, 'corpus');
+  assert.equal(ctx.twinIo.status('scripts/a.mjs'), 'present');
+  const reads = seen.filter((entry) => entry.args);
+  assert.deepEqual(reads.map((entry) => entry.token), ['site-token']);
+  assert.ok(reads[0].args.some((arg) => arg.startsWith('repos/site/r/contents/scripts/a.mjs')));
+  assert.equal(seen.some((entry) => entry.token === 'corpus-token'), false);
+});
+
+test('mintTargetContext: dal lato sito il gemello è il repository delle PR e usa GATE_PR_TOKEN', () => {
+  const seen = [];
+  const ctx = mintTargetContext({
+    readManifest: () => [],
+    env: { GH_REPO: 'site/r', GH_TOKEN: 'site-token', GATE_PR_REPO: 'corpus/r', GATE_PR_TOKEN: 'corpus-token',
+      FOLLOWUP_CORPUS_REPO: 'corpus/r', FOLLOWUP_SITE_REPO: 'site/r' },
+    ghFor: recordingRunner(seen),
+  });
+  assert.equal(ctx.side, 'site');
+  assert.equal(ctx.twinIo.status('generator/x.mjs'), 'present');
+  assert.deepEqual(seen.filter((entry) => entry.args).map((entry) => entry.token), ['corpus-token']);
+});
+
+test('gemello senza token dichiarato: unknown, nessuna lettura, item con bersaglio assente qui resta ammesso', () => {
+  const seen = [];
+  const ctx = mintTargetContext({
+    readManifest: () => [],
+    env: { ...SITE_LAYOUT, GATE_ALT_PR_REPO: 'site/r', GATE_ALT_PR_TOKEN: '' },
+    ghFor: recordingRunner(seen),
+  });
+  assert.equal(ctx.twinIo.status('scripts/missing.mjs'), 'unknown');
+  assert.deepEqual(seen, [], 'nessun runner costruito con un token di ripiego');
+  const bucket = admissionBucket([admissionItem(1, { title: 'bersaglio nel gemello', target: 'scripts/missing.mjs' })]);
+  const d = decideMintGate(bucket, { triageComplete: true, fileIo: statusIo({}), mintTarget: ctx });
+  assert.equal(d.action, 'seal');
+  assert.match(d.body, /bersaglio nel gemello/);
+  assert.equal(mintCheckCounts(d.admissions).targetMissing, 0);
+  assert.equal(admissionCounts(d.admissions).admissionUnknown, 1);
+});
+
+test('ghApiRunner passa il token al processo gh via env, non negli argomenti', () => {
+  const root = mkdtempSync(join(tmpdir(), 'followup-mint-runner-'));
+  writeFileSync(join(root, 'gh'), '#!/bin/sh\nprintf "%s|%s" "$GH_TOKEN" "$*"\n');
+  chmodSync(join(root, 'gh'), 0o755);
+  const previous = process.env.PATH;
+  process.env.PATH = `${root}:${previous}`;
+  try {
+    const [token, args] = ghApiRunner('twin-token')(['api', 'repos/site/r/contents/a.mjs']).split('|');
+    assert.equal(token, 'twin-token');
+    assert.equal(args.includes('twin-token'), false);
+  } finally {
+    process.env.PATH = previous;
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('gate vero: le letture del gemello portano il token del gemello, quelle del bucket il suo', () => {
+  const bucket = admissionBucket([admissionItem(1, { title: 'bersaglio inesistente', target: 'scripts/missing.mjs' })]);
+  const { runs, calls } = runAdmissionGate(bucket, { files: { 'corpus/r': {} } });
+  assert.equal(runs[0].status, 0, runs[0].stdout + runs[0].stderr);
+  const contents = (repo) => calls.filter((c) => c.args.some((arg) => arg.startsWith(`repos/${repo}/contents/`)));
+  assert.ok(contents('site/r').length > 0, 'il gemello non è stato letto');
+  assert.deepEqual([...new Set(contents('site/r').map((c) => c.token))], ['site-token']);
+  assert.deepEqual([...new Set(contents('corpus/r').map((c) => c.token))], ['corpus-token']);
+  assert.doesNotMatch(runs[0].stdout + runs[0].stderr, /site-token/, 'il token del gemello non finisce nei log');
+});
+
+test('gate vero: gemello senza token → target_missing=0 e admission_unknown, nessuna lettura col token del bucket', () => {
+  const bucket = admissionBucket([admissionItem(1, { title: 'bersaglio nel gemello', target: 'scripts/missing.mjs' })]);
+  const { runs, calls, state } = runAdmissionGate(bucket, { files: { 'corpus/r': {} }, env: { GATE_ALT_PR_TOKEN: undefined } });
+  const tally = tallyOf(runs[0].stdout);
+  assert.match(tally, / demoted=0 kept=1 /, runs[0].stdout);
+  assert.match(tally, / admission_unknown=1 closed_state=0 target_missing=0 /);
+  assert.equal(calls.some((c) => c.args.some((arg) => arg.startsWith('repos/site/r/contents/'))), false);
+  assert.match(state.issue.body, /bersaglio nel gemello/);
 });

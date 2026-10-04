@@ -70,7 +70,10 @@
  *                   Oltre il tetto l'item conta `admission_unknown`.
  *   FOLLOWUP_CORPUS_REPO / FOLLOWUP_SITE_REPO  i due repository (default quelli di
  *                   `followup-candidate-bullets.mjs`): `GH_REPO` decide il lato del
- *                   bucket, l'altro e' il gemello letto per i bersagli.
+ *                   bucket, l'altro e' il gemello letto per i bersagli. Il gemello
+ *                   si legge col SUO token (`twinReadToken`): `GATE_ALT_PR_TOKEN` se
+ *                   e' `GATE_ALT_PR_REPO`, `GATE_PR_TOKEN` se e' `GATE_PR_REPO`;
+ *                   nessun token dichiarato → bersagli del gemello `admission_unknown`.
  *
  * AMMISSIONE AL CONIO (parita' col gemello del sito, FU-13/FU-14). Un bucket del
  * corpus e' sigillato da DUE passaggi: questo e la copia del sito (step «Gate sul
@@ -1458,6 +1461,33 @@ function ghApiRaw(args) {
   });
 }
 
+/**
+ * Come `ghApiRaw`, ma con il token INIETTATO nel `GH_TOKEN` del processo `gh`
+ * (mai negli argomenti, quindi mai nei messaggi d'errore o nei log).
+ */
+export function ghApiRunner(token) {
+  return (args) => execFileSync('gh', args, {
+    encoding: 'utf-8', maxBuffer: 1 << 26, stdio: ['ignore', 'pipe', 'pipe'],
+    env: { ...process.env, GH_TOKEN: token },
+  });
+}
+
+/**
+ * Il token con cui leggere `repo`, dalle credenziali che il workflow dichiara
+ * per repository: `GATE_ALT_PR_TOKEN` per `GATE_ALT_PR_REPO`, `GATE_PR_TOKEN`
+ * (default `GH_TOKEN`, come `ghPr`) per `GATE_PR_REPO`, `GH_TOKEN` per
+ * `GH_REPO`. Un repository senza credenziale dichiarata → `''`: il chiamante
+ * non legge e risponde `unknown`, mai con il token di un altro repository (un
+ * 404 da token senza accesso diventerebbe un `missing` inventato).
+ */
+export function twinReadToken(repo, env = process.env) {
+  if (!repo) return '';
+  if (env.GATE_ALT_PR_REPO && env.GATE_ALT_PR_REPO === repo) return env.GATE_ALT_PR_TOKEN || '';
+  if (env.GATE_PR_REPO && env.GATE_PR_REPO === repo) return env.GATE_PR_TOKEN || env.GH_TOKEN || '';
+  if (env.GH_REPO && env.GH_REPO === repo) return env.GH_TOKEN || '';
+  return '';
+}
+
 /** Contatori dell'ammissione per un verdetto (le chiavi della riga MINT_GATE_TALLY). */
 export function admissionCounts(admissions) {
   const list = Array.isArray(admissions) ? admissions : [];
@@ -1582,13 +1612,18 @@ function markBornSatisfiedItems(issue, admissions, repoArgs) {
 /**
  * Contesto del bersaglio per l'ammissione: lato del bucket da `GH_REPO`,
  * manifest di mirror letto dal DISCO accanto a questo script (vive solo nel
- * corpus) una volta per run e solo se serve, `io` del gemello via API.
- * Manifest illeggibile → `admission_unknown`, mai una demozione.
+ * corpus) una volta per run e solo se serve, `io` del gemello via API con il
+ * token del GEMELLO (`twinReadToken`, iniettato in `ghFor(token)`). Senza quel
+ * token l'`io` del gemello non ha runner e risponde `unknown`. Manifest
+ * illeggibile o gemello non verificabile → `admission_unknown`, mai una demozione.
  */
-function mintTargetContext({ readManifest = readManifestFile, gh: runGh = ghApiRaw } = {}) {
-  const corpusRepo = process.env.FOLLOWUP_CORPUS_REPO || DEFAULT_FOLLOWUP_REPOS.corpus;
-  const siteRepo = process.env.FOLLOWUP_SITE_REPO || DEFAULT_FOLLOWUP_REPOS.site;
-  const side = (process.env.GH_REPO || '') === siteRepo ? 'site' : 'corpus';
+export function mintTargetContext({ readManifest = readManifestFile, env = process.env, ghFor = ghApiRunner } = {}) {
+  const corpusRepo = env.FOLLOWUP_CORPUS_REPO || DEFAULT_FOLLOWUP_REPOS.corpus;
+  const siteRepo = env.FOLLOWUP_SITE_REPO || DEFAULT_FOLLOWUP_REPOS.site;
+  const side = (env.GH_REPO || '') === siteRepo ? 'site' : 'corpus';
+  const twinRepo = side === 'site' ? corpusRepo : siteRepo;
+  const twinToken = twinReadToken(twinRepo, env);
+  if (!twinToken) console.log(`::warning::conio: nessun token dichiarato per il gemello ${twinRepo} (GATE_ALT_PR_TOKEN/GATE_PR_TOKEN), i bersagli del gemello contano admission_unknown`);
   const manifestPath = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
   let manifestFiles;
   return {
@@ -1601,9 +1636,9 @@ function mintTargetContext({ readManifest = readManifestFile, gh: runGh = ghApiR
       return manifestFiles;
     },
     twinIo: contentsApiIo({
-      repo: side === 'site' ? corpusRepo : siteRepo,
+      repo: twinRepo,
       ref: 'main',
-      gh: runGh,
+      gh: twinToken ? ghFor(twinToken) : undefined,
       cap: admissionReadCap(),
     }),
   };
