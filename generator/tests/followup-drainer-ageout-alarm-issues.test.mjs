@@ -141,9 +141,20 @@ test('nessun codice del repo conia le famiglie con scope del sito', () => {
     if (d.isDirectory()) return /(?:^|\/)(?:tests|node_modules|fixtures)$/.test(child) ? [] : walk(child);
     return /\.(?:mjs|js|ts|ya?ml|sh)$/.test(d.name) ? [child] : [];
   });
+  // «Conia» vuol dire CODICE che produce il titolo, non un commento che lo nomina.
+  // `scan-job-timeouts.mjs` (identical, trasporto PR corpus 2108) cita
+  // `CI Failure (deploy):`/`CI Failure (build):` solo nel JSDoc di
+  // SCOPED_TITLE_EVENTS, per dire che NON sono eventi e che `--resolve` non le
+  // tocca. Esentare il file intero nasconderebbe un conio vero aggiunto domani:
+  // si tolgono le sole righe di commento, riga per riga (niente regex
+  // `/* … */` multilinea: un glob `**/*.mjs` in una stringa la aprirebbe).
+  const COMMENT_LINE_RE = /^\s*(?:\/\/|\/\*|\*|#)/;
+  const codeOf = (src) => src.split('\n').filter((line) => !COMMENT_LINE_RE.test(line)).join('\n');
+  assert.equal(SCOPED_FAMILY_RE.test(codeOf(" * `CI Failure (deploy):` non e' un evento")), false);
+  assert.equal(SCOPED_FAMILY_RE.test(codeOf("  const title = 'CI Failure (deploy): x';")), true);
   const offenders = ['scripts', '.github', 'generator/scripts']
     .flatMap(walk)
-    .filter((rel) => !EXEMPT.has(rel) && SCOPED_FAMILY_RE.test(read(rel)));
+    .filter((rel) => !EXEMPT.has(rel) && SCOPED_FAMILY_RE.test(codeOf(read(rel))));
   assert.deepEqual(offenders, []);
 });
 
