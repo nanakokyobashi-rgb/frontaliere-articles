@@ -28,6 +28,23 @@ export interface Article {
  image: string;
  hasCalculator: boolean;
  /**
+  * What the article IS, as declared by the generator that wrote it: `news`
+  * (dated reporting) or `evergreen` (a guide meant to stay current). Written
+  * on every new registry entry by `generator/scripts/lib/registry-article-type.mjs`;
+  * older entries have no value until they are backfilled. Read by the
+  * evergreen freshness audit instead of guessing from `category`.
+  */
+ articleType?: 'news' | 'evergreen';
+ /**
+  * `YYYY-MM-DD` of the last check that found the article's facts still
+  * correct WITHOUT changing them (so `updatedAt` stays untouched). Read ONLY by
+  * the evergreen freshness audit — never by sitemap/lastmod, JSON-LD or
+  * `dateModified`. Each value needs a matching proof (sources and unchanged
+  * facts) in `data/evergreen-verifications.json`; the corpus content gate
+  * rejects a `verifiedAt` without it.
+  */
+ verifiedAt?: string;
+ /**
   * A2 — author registry slug (`marco-ferrari`, `laura-bianchi`, `redazione`).
   * When present, the byline links to `/autori/{authorSlug}/` and the
   * NewsArticle JSON-LD uses a Person `@type` for that author. Optional for
@@ -37509,6 +37526,45 @@ const RAW_ARTICLES = [
  date: '2026-10-04T06:49:38.466Z',
  image: '/images/blog/licenza-sospesa-bar-busto-2026.webp',
  hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'fondazione-morandini-eventi-ottobre-2026',
+ category: 'novita',
+ date: '2026-10-04T07:21:29.431Z',
+ image: '/images/blog/fondazione-morandini-eventi-ottobre-2026.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vescovi-openjobmetis-della-valle',
+ category: 'novita',
+ date: '2026-10-04T07:52:54.137Z',
+ image: '/images/blog/vescovi-openjobmetis-della-valle.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'scontro-notturno-gallarate',
+ category: 'novita',
+ date: '2026-10-04T08:06:33.122Z',
+ image: '/images/blog/scontro-notturno-gallarate.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'saracino-comandante-carabinieri-mornago',
+ category: 'novita',
+ date: '2026-10-04T08:19:45.149Z',
+ image: '/images/blog/saracino-comandante-carabinieri-mornago.webp',
+ hasCalculator: false,
+ articleType: 'news',
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },

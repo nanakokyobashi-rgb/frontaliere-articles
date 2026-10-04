@@ -12509,6 +12509,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.licenza-sospesa-bar-busto-2026.title': 'Busto Arsizio: licenza sospesa 15 giorni per aggressione',
     'blog.article.licenza-sospesa-bar-busto-2026.excerpt': 'Il Questore di Varese ha sospeso per 15 giorni la licenza di un bar di Busto Arsizio dopo l\'aggressione del 20 settembre con lancio di pietre vicino a una coppia con passeggino; il ferito è stato portato all\'ospedale di Gallarate.',
     'blog.article.licenza-sospesa-bar-busto-2026.imageAlt': 'Bar di Busto Arsizio con polizia dopo aggressione',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.title': 'Eventi ottobre 2026: Fondazione Morandini a Varese',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.excerpt': 'La Fondazione Marcello Morandini di Varese propone quattro appuntamenti a ottobre 2026, tra visite, concerto, catalogo e laboratorio, a corredo della mostra \'Antonio Barrese: Morfologie di luce\' aperta fino al 20 dicembre 2026.',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.imageAlt': 'Interno della Fondazione Marcello Morandini a Varese con installazioni luminose della mostra \'Antonio Barrese: Morfologie di luce\'.',
+    'blog.article.vescovi-openjobmetis-della-valle.title': 'Cecco vescovi: della valle uomo chiave openjobmetis',
+    'blog.article.vescovi-openjobmetis-della-valle.excerpt': 'Cecco Vescovi, ospite a «Luci a Masnago», ha analizzato la sconfitta della Openjobmetis Varese contro la Virtus Bologna, sottolineando le assenze e il ruolo chiave di Della Valle.',
+    'blog.article.vescovi-openjobmetis-della-valle.imageAlt': 'Azione di gioco durante una partita di basket in un palazzetto dello sport, con giocatori in movimento e pubblico sugli spalti.',
+    'blog.article.scontro-notturno-gallarate.title': 'Incidente notturno a Gallarate: tre giovani coinvolti',
+    'blog.article.scontro-notturno-gallarate.excerpt': 'Incidente a Gallarate, via Stelvio: tre ragazzi di 18, 20 e 24 anni coinvolti. Due trasportati negli ospedali di Legnano e Gallarate.',
+    'blog.article.scontro-notturno-gallarate.imageAlt': 'Incidente notturno a Gallarate con tre giovani coinvolti',
+    'blog.article.saracino-comandante-carabinieri-mornago.title': 'Saracino nuovo comandante dei Carabinieri di Mornago',
+    'blog.article.saracino-comandante-carabinieri-mornago.excerpt': 'Luogotenente Carica Speciale Anacleto Antonio Saracino guida la Stazione dei Carabinieri di Mornago, dipendente dalla Compagnia di Gallarate, responsabile della sicurezza pubblica nei comuni di Mornago, Sumirago, Casale Litta e Inarzo.',
+    'blog.article.saracino-comandante-carabinieri-mornago.imageAlt': 'Luogotenente Anacleto Antonio Saracino davanti alla stazione dei Carabinieri di Mornago',
 };
 
 export default blogMetaIt;

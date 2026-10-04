@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/salari-salgono-dello-0%2c4%25-quest%27anno%2c-ma-l%27inflazione-sar%c3%a0-pi%c3%b9-alta/91999164": {
-    "articleId": "salari-svizzera-2026-inflazione",
-    "ts": "2026-09-03T11:50:43.394Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/prezzo-benzina-e-diesel-aumenta%2c-sfiora-i-massimi-dell%27anno/91999541": {
     "articleId": "benzina-diesel-massimi-anno-2026",
     "ts": "2026-09-03T12:07:43.045Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/ge%3a-un-migliaio-a-manifestazione-pro-palestina%2c-sanzioni-a-israele/92162044": {
     "articleId": "ginevra-manifestazione-palestina-sanzioni-2025",
     "ts": "2026-10-03T16:24:51.329Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954561/swiss-steel-germania-ristrutturazione-tagli-annuncia": {
+    "articleId": "swiss-steel-ristrutturazione-germania",
+    "ts": "2026-10-04T07:37:13.652Z",
     "keyForm": 2
   }
 }
