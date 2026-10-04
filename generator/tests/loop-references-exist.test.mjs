@@ -264,6 +264,13 @@ const DECLARED_ABSENT = {
       '`entryPaths()` del workspace root: e\' provenienza della regola, non un import. Lo script ' +
       'e\' `identical` nel manifest: riscrivere la frase qui fabbricherebbe un `corpus-ahead`.',
   },
+  'scripts/ci/followup-candidate-bullets.mjs :: scripts/ci/foo.mjs': {
+    kind: 'example',
+    reason:
+      'Il commento di EMPTY_DECLARED_RE cita «Nessuno: aggiornare `scripts/ci/foo.mjs`» come riga ' +
+      'd\'esempio del bug della review PR corpus 2080: un path finto, non un referente. Lo script e\' ' +
+      '`identical` nel manifest: riscrivere la frase qui fabbricherebbe un `corpus-ahead`.',
+  },
   'scripts/ci/followup-candidate-bullets.mjs :: scripts/ci/validate-modified-workflows.mjs': {
     kind: 'site-only',
     reason:
