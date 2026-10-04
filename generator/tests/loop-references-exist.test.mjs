@@ -527,6 +527,22 @@ const DECLARED_ABSENT = {
       'dall\'esistenza del file. Sul sito i nomi degli step sono letti dal YAML in ' +
       '`tests/verdict-step-registry.test.ts`, che fa fallire una rinomina.',
   },
+  'scripts/ci/close-recovered-failure-issues.mjs :: .github/workflows/seo-health-loop.yml': {
+    kind: 'site-only',
+    reason:
+      'Chiave di VERDICT_STEPS aggiunta dal sito e scesa col trasporto della PR corpus 2108. ' +
+      'Qui nessun workflow si chiama `SEO closed-loop health and recovery` (il loop SEO e\' del ' +
+      'sito), quindi `verdictStepEntryForWorkflowName` non trova mai la voce: niente dipende ' +
+      'dall\'esistenza del file. I nomi degli step li verifica `tests/verdict-step-registry.test.ts` del sito.',
+  },
+  'scripts/ci/close-recovered-failure-issues.mjs :: .github/workflows/refresh-plate-auctions.yml': {
+    kind: 'site-only',
+    reason:
+      'Chiave di VERDICT_STEPS aggiunta dal sito e scesa col trasporto della PR corpus 2108. ' +
+      'Qui nessun workflow si chiama `Refresh Plate Auctions` (le aste targhe sono un dato del ' +
+      'sito), quindi `verdictStepEntryForWorkflowName` non trova mai la voce: niente dipende ' +
+      'dall\'esistenza del file. I nomi degli step li verifica `tests/verdict-step-registry.test.ts` del sito.',
+  },
   'scripts/ci/report-validate-dist-failure.mjs :: audit-dist-from-run.yml': {
     kind: 'site-only',
     reason:
