@@ -99991,6 +99991,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vescovi-openjobmetis-della-valle': {
+    title: 'Cecco vescovi: della valle uomo chiave openjobmetis',
+    description: 'Cecco Vescovi, ospite a «Luci a Masnago», analizza il debutto della Openjobmetis Varese contro la Virtus Bologna, evidenziando le assenze e il ruolo cruciale',
+    keywords: 'frontalieri, ticino, svizzera, italia, cecco, vescovi, valle, uomo',
+    ogTitle: 'Cecco Vescovi: Della Valle chiave per Openjobmetis Varese',
+    ogDescription: 'Cecco Vescovi, ex recordman della Pallacanestro Varese, ha esaminato la sconfitta casalinga della Openjobmetis contro la Virtus Bologna a «Luci a Masnago». Ha sottolineato l\'importanza di Amedeo Della Valle e consigliato a Matteo Librizzi',
+    canonicalPath: '/articoli-frontaliere/vescovi-openjobmetis-della-valle/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cecco vescovi: della valle uomo chiave openjobmetis",
+      "description": "Cecco Vescovi, ospite a «Luci a Masnago», analizza il debutto della Openjobmetis Varese contro la Virtus Bologna, evidenziando le assenze e il ruolo cruciale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vescovi-openjobmetis-della-valle.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Azione di gioco durante una partita di basket in un palazzetto dello sport, con giocatori in movimento e pubblico sugli spalti."
+      },
+      "datePublished": "2026-10-04T07:52:54+00:00",
+      "dateModified": "2026-10-04T07:52:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vescovi-openjobmetis-della-valle/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
