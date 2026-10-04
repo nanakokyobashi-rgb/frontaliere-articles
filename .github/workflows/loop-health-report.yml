@@ -1,0 +1,84 @@
+# Osservabilità deterministica del loop autonomo di QUESTO repo (zero-modello).
+#
+# Il tracker «📊 Loop health report (tracker)» (issue 1644) esisteva senza un
+# generatore: un solo report in 52 commenti, postato a mano il 2026-09-20.
+# Questo cron lo alimenta con lo stesso script del sito
+# (`scripts/ci/loop-health-report.mjs`, gemello `identical` nel manifest: il
+# drift check e il trasporto dei gemelli lo tengono allineato). Lo script legge
+# il repo da `GH_REPO`, riconosce il revisore di questo repo e trova il tracker
+# per titolo esatto: qui si cambia solo la cadenza e il checkout.
+#
+# Contratto: generator/tests/loop-health-report-workflow.test.mjs (solo
+# GITHUB_TOKEN, GH_REPO del repo corrente, action pinnate per SHA).
+name: Loop health report (zero-Claude)
+
+on:
+  schedule:
+    # Ogni giorno alle 06:10 UTC: dopo il lessons-harvester di questo repo
+    # (05:53), così l'harvest è già visibile nel report.
+    - cron: '10 6 * * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Finestra di osservazione in giorni'
+        required: false
+        type: string
+        default: '7'
+      no_post:
+        description: 'Solo stdout, niente commento sulla issue tracker'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+  # gh run list legge le Actions API.
+  actions: read
+  pull-requests: read
+
+concurrency:
+  group: loop-health-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Lo script importa solo `node:*`: nessun npm ci, e del repo serve solo
+      # scripts/ci.
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            /scripts/ci/
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+
+      - name: Compute and post loop health report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          # GITHUB_TOKEN non legge le variabili del repo via API: il kill switch
+          # dell'auto-close di followup-reconcile.yml arriva da `vars` (vuoto =
+          # non impostata) e il report lo mostra accanto ai follow-up.
+          LOOP_HEALTH_VARS_FROM_WORKFLOW: '1'
+          RECONCILE_NO_AUTOCLOSE: ${{ vars.RECONCILE_NO_AUTOCLOSE }}
+          # Gli input del dispatch arrivano alla shell come DATI, mai come testo
+          # dello script.
+          INPUT_DAYS: ${{ github.event.inputs.days || '7' }}
+          INPUT_NO_POST: ${{ github.event.inputs.no_post }}
+        run: |
+          set -euo pipefail
+          ARGS=(--days "$INPUT_DAYS")
+          if [ "$INPUT_NO_POST" = "true" ]; then
+            ARGS+=(--no-post)
+          fi
+          node scripts/ci/loop-health-report.mjs "${ARGS[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
