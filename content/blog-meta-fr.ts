@@ -12462,6 +12462,21 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tappi-chiodi-parcheggio-luino.title': 'Luino, des bouchons avec des clous dans le parking derrière le Tigros',
     'blog.article.tappi-chiodi-parcheggio-luino.excerpt': 'Paolo Nicastri signale la présence de bouchons munis de clous pointés vers le haut dans la zone utilisée par les voitures, les motos et les auto-écoles pour les examens et les épreuves de conduite.',
     'blog.article.tappi-chiodi-parcheggio-luino.imageAlt': 'Bouchons en liège avec des clous trouvés sur un parking à Luino',
+    'blog.article.ambri-vince-friborgo-2-1.title': 'Hockey, l\'Ambrì s\'impose à la BCF Arena : Friborgo battu 2-1',
+    'blog.article.ambri-vince-friborgo-2-1.excerpt': 'Après deux défaites, l\'Ambrì retrouve son efficacité et s\'impose 2-1 à Friborgo. Les buts de Müller et Schnarr ont été décisifs lors d\'une soirée marquée par un grand sacrifice défensif.',
+    'blog.article.ambri-vince-friborgo-2-1.imageAlt': 'Ambrì gagne 2-1 contre Fribourg à la BCF Arena',
+    'blog.article.fondo-13esima-avs-giovani.title': 'Fonds AVS au Tessin : la 13e pour les jeunes',
+    'blog.article.fondo-13esima-avs-giovani.excerpt': 'Au Tessin, un Fonds a été présenté : toute personne qui pourra et voudra renoncer à la 13e AVS soutiendra des projets dédiés aux nouvelles générations en faveur de la collectivité.',
+    'blog.article.fondo-13esima-avs-giovani.imageAlt': 'Retraités et jeunes lors d\'une rencontre sur le fonds AVS au Tessin',
+    'blog.article.mastini-varese-pergine-hockey.title': 'Mastiffs varois-pergine : défi à l\'acinque ice arena',
+    'blog.article.mastini-varese-pergine-hockey.excerpt': 'Samedi à 18h30, les Mâtins accueillent la Vierge. Varese, Pergine et Feltre cherchent des points au classement à la cote 3 lors de la quatrième journée d\'IHL.',
+    'blog.article.mastini-varese-pergine-hockey.imageAlt': 'Match de hockey sur glace des Mastini Varese à l\'Acinque Ice Arena.',
+    'blog.article.asilo-carluccio-como-lettera.title': 'Asile Carluccio Como : le personnel écrit à la municipalité',
+    'blog.article.asilo-carluccio-como-lettera.excerpt': 'Le personnel de l\'école maternelle Carluccio de la via Volta écrit au maire pour s\'opposer aux coupes budgétaires : l\'école n\'est pas un coût, mais un investissement pour la communauté.',
+    'blog.article.asilo-carluccio-como-lettera.imageAlt': 'École maternelle Carluccio à Côme, Via Volta. (Como)',
+    'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese : 70 kg de drogue dans le camping-car, arrestations',
+    'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'La Guardia di Finanza immobilise un camping-car espagnol : 19 kg de cocaïne et 49 de marijuana saisis, et un teckel confié à une famille.',
+    'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Zone boisée dans la province de Varèse où la cargaison de drogue a été saisie (Varese)',
 };
 
 export default blogMetaFr;

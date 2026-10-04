@@ -99328,6 +99328,201 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ambri-vince-friborgo-2-1': {
+    title: 'Hockey, l\'Ambrì espugna la BCF Arena: Friborgo battuto 2-1',
+    description: 'L\'Ambrì vince 2-1 a Friborgo grazie alle reti di Müller e Schnarr. Una prestazione solida per i biancoblù che ritrovano fiducia dopo le recenti sconfitte.',
+    keywords: 'frontalieri, ticino, svizzera, italia, hockey, ambrì, espugna, arena',
+    ogTitle: 'L\'Ambrì sbanca la tana dei campioni: 2-1 a Friborgo',
+    ogDescription: 'L\'Ambrì ritrova il successo espugnando la pista del Friborgo per 2-1. Decisive le marcature di Müller e Schnarr in una prova caratterizzata da grande compattezza difensiva.',
+    canonicalPath: '/articoli-frontaliere/ambri-vince-friborgo-2-1/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hockey, l'Ambrì espugna la BCF Arena: Friborgo battuto 2-1",
+      "description": "L'Ambrì vince 2-1 a Friborgo grazie alle reti di Müller e Schnarr. Una prestazione solida per i biancoblù che ritrovano fiducia dopo le recenti sconfitte.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ambri-vince-friborgo-2-1.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'Ambrì vince 2-1 contro il Friborgo alla BCF Arena"
+      },
+      "datePublished": "2026-10-04T00:51:52+00:00",
+      "dateModified": "2026-10-04T00:51:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ambri-vince-friborgo-2-1/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fondo-13esima-avs-giovani': {
+    title: 'Fondo AVS in Ticino: la 13esima ai giovani | Frontaliere Ticino',
+    description: 'Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fondo, 13esima, giovani, presentato',
+    ogTitle: 'Fondo AVS in Ticino: la 13esima ai giovani',
+    ogDescription: 'La proposta presentata in Ticino punta a trasformare una rinuncia volontaria alla 13esima AVS in risorse per progetti dedicati ai giovani. L\'annuncio descrive un Fondo a favore della collettività, ma non indica importi o modalità operative del Fondo.',
+    canonicalPath: '/articoli-frontaliere/fondo-13esima-avs-giovani/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fondo AVS in Ticino: la 13esima ai giovani",
+      "description": "Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fondo-13esima-avs-giovani.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pensionati e giovani durante un incontro sul Fondo AVS in Ticino"
+      },
+      "datePublished": "2026-10-04T01:05:00+00:00",
+      "dateModified": "2026-10-04T01:05:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fondo-13esima-avs-giovani/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mastini-varese-pergine-hockey': {
+    title: 'Mastini varese-pergine: sfida all\'acinque ice arena',
+    description: 'Sabato alle 18.30 i Mastini ospitano il Pergine all\'Acinque Ice Arena per la quarta giornata di IHL. Analisi, assenze e stato della classifica. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, mastini, varese-pergine, sfida, acinque',
+    ogTitle: 'Mastini Varese-Pergine: sfida all\'Acinque Ice Arena',
+    ogDescription: 'I Mastini di Varese affrontano il Pergine in un importante scontro diretto di IHL. Scopri le ultime sull\'organico, le assenze di Vanetti e Terzago e il punto sulla classifica.',
+    canonicalPath: '/articoli-frontaliere/mastini-varese-pergine-hockey/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mastini varese-pergine: sfida all'acinque ice arena",
+      "description": "Sabato alle 18.30 i Mastini ospitano il Pergine all'Acinque Ice Arena per la quarta giornata di IHL. Analisi, assenze e stato della classifica. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mastini-varese-pergine-hockey.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di hockey su ghiaccio dei Mastini di Varese all'Acinque Ice Arena."
+      },
+      "datePublished": "2026-10-04T01:23:33+00:00",
+      "dateModified": "2026-10-04T01:23:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mastini-varese-pergine-hockey/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-carluccio-como-lettera': {
+    title: 'Asilo Carluccio Como: il personale scrive al Comune',
+    description: 'Il personale dell\'asilo Carluccio di Como scrive al Comune: la scuola è un presidio educativo e non un costo da ridurre. Leggi l\'appello della comunità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, carluccio, como, personale',
+    ogTitle: 'Asilo Carluccio Como: il personale contro i tagli',
+    ogDescription: 'Il personale della scuola dell\'infanzia Carluccio di via Volta si rivolge al Sindaco e all\'Assessore: la scuola non è un costo da ridurre, ma un investimento da proteggere per l\'intera comunità di Como.',
+    canonicalPath: '/articoli-frontaliere/asilo-carluccio-como-lettera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo Carluccio Como: il personale scrive al Comune",
+      "description": "Il personale dell'asilo Carluccio di Como scrive al Comune: la scuola è un presidio educativo e non un costo da ridurre. Leggi l'appello della comunità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-carluccio-como-lettera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scuola dell'infanzia Carluccio di Como, via Volta."
+      },
+      "datePublished": "2026-10-04T01:35:02+00:00",
+      "dateModified": "2026-10-04T01:35:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/asilo-carluccio-como-lettera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sequestro-stupefacenti-camper-varese': {
+    title: 'Varese: 70 kg di droga sul camper, arresti | Frontaliere Ticino',
+    description: 'La Guardia di Finanza di Varese sequestra oltre 70 kg di stupefacenti su un camper. Arrestati tre persone, trovato un bassotto affidato a una famiglia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, droga, camper, arresti',
+    ogTitle: 'Varese: 70 kg di droga sul camper, arresti',
+    ogDescription: 'Operazione della Guardia di Finanza di Varese: sequestrati 19 kg di cocaina e 49 di marijuana su un camper spagnolo. Tre persone arrestate e un bassotto affidato a una famiglia per adozione temporanea.',
+    canonicalPath: '/articoli-frontaliere/sequestro-stupefacenti-camper-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: 70 kg di droga sul camper, arresti",
+      "description": "La Guardia di Finanza di Varese sequestra oltre 70 kg di stupefacenti su un camper. Arrestati tre persone, trovato un bassotto affidato a una famiglia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sequestro-stupefacenti-camper-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area boschiva nella provincia di Varese dove è stato sequestrato il carico di stupefacenti"
+      },
+      "datePublished": "2026-10-04T01:50:38+00:00",
+      "dateModified": "2026-10-04T01:50:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestro-stupefacenti-camper-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

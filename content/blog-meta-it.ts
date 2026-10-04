@@ -12461,6 +12461,21 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tappi-chiodi-parcheggio-luino.title': 'Luino, tappi con chiodi nel parcheggio dietro al Tigros',
     'blog.article.tappi-chiodi-parcheggio-luino.excerpt': 'Paolo Nicastri segnala la presenza di tappi con chiodi rivolti verso l\'alto nell\'area usata da auto, moto e autoscuole per esami e prove di guida.',
     'blog.article.tappi-chiodi-parcheggio-luino.imageAlt': 'Tappi di sughero con chiodi trovati in un parcheggio a Luino',
+    'blog.article.ambri-vince-friborgo-2-1.title': 'Hockey, l\'Ambrì espugna la BCF Arena: Friborgo battuto 2-1',
+    'blog.article.ambri-vince-friborgo-2-1.excerpt': 'Dopo due sconfitte, l\'Ambrì ritrova concretezza e vince 2-1 a Friborgo. Decisive le reti di Müller e Schnarr in una serata di grande sacrificio difensivo.',
+    'blog.article.ambri-vince-friborgo-2-1.imageAlt': 'L\'Ambrì vince 2-1 contro il Friborgo alla BCF Arena',
+    'blog.article.fondo-13esima-avs-giovani.title': 'Fondo AVS in Ticino: la 13esima ai giovani',
+    'blog.article.fondo-13esima-avs-giovani.excerpt': 'Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.',
+    'blog.article.fondo-13esima-avs-giovani.imageAlt': 'Pensionati e giovani durante un incontro sul Fondo AVS in Ticino',
+    'blog.article.mastini-varese-pergine-hockey.title': 'Mastini varese-pergine: sfida all\'acinque ice arena',
+    'blog.article.mastini-varese-pergine-hockey.excerpt': 'Sabato alle 18.30 i Mastini ospitano il Pergine. Varese, Pergine e Feltre cercano punti in classifica a quota 3 nella quarta giornata di IHL.',
+    'blog.article.mastini-varese-pergine-hockey.imageAlt': 'Partita di hockey su ghiaccio dei Mastini di Varese all\'Acinque Ice Arena.',
+    'blog.article.asilo-carluccio-como-lettera.title': 'Asilo Carluccio Como: il personale scrive al Comune',
+    'blog.article.asilo-carluccio-como-lettera.excerpt': 'Il personale della scuola dell\'infanzia Carluccio di via Volta scrive al Sindaco contro i tagli: la scuola non è un costo, ma un investimento comunitario.',
+    'blog.article.asilo-carluccio-como-lettera.imageAlt': 'Scuola dell\'infanzia Carluccio di Como, via Volta.',
+    'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese: 70 kg di droga sul camper, arresti',
+    'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'La Finanza blocca un camper spagnolo: sequestrati 19 kg di cocaina, 49 di marijuana e un bassotto affidato a una famiglia.',
+    'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Area boschiva nella provincia di Varese dove è stato sequestrato il carico di stupefacenti',
 };
 
 export default blogMetaIt;

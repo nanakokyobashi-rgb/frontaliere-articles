@@ -65,6 +65,8 @@ import {
   hasItalianResidue,
   currentBlockingCodes,
   bodyFieldsForSource,
+  blockingPairsFromContent,
+  scanContentForBlockingPairs,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -1390,6 +1392,283 @@ test('--locale it e --slug trattano la coppia italiana invece di dropparla', () 
     assert.equal(itReport.results[0].locale, 'it');
     assert.equal(itReport.results[0].written, false,
       'dry-run: l\'italiano passa da shouldWrite, non da registerArticleFiles');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+// ── --scan: il selettore dal contenuto ─────────────────────────────────────
+//
+// Lo stock (site#7682, site#7683) restava fermo perche' lo strumento non
+// sapeva TROVARE le coppie senza il file `--audit`, che solo il sito produce
+// (con ~6 GB di heap). `--scan` le trova con la stessa guardia di
+// `processPair`, un file alla volta. Il test diventa rosso se il selettore
+// dimentica `blog-body-ch`, se scrive senza `--apply`, o se un body gia'
+// pulito entra nella lista.
+
+const SCAN_SCRIPT = fileURLToPath(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url));
+const EN_FALSE_FRIEND = `${EN_LONG}Many border guards commute to Ticino every day. `;
+const IT_WITH_CUSTOMS = `${IT_LONG}Al valico la dogana controlla i documenti. `;
+
+/** Fixture minima: una coppia per ogni ramo del selettore. */
+function writeScanFixture(root) {
+  const files = {
+    // Scaffolding sull'italiano: la riga-marcatore del prompt di generazione.
+    'content/blog-body/it/scaf.ts': fileFor('scaf', { body1: `TITOLO ARTICOLO: x\n${IT_LONG}`, body2: IT_LONG, body3: IT_LONG }),
+    'content/blog-body/en/scaf.ts': fileFor('scaf', { body1: EN_LONG, body2: EN_LONG, body3: EN_LONG }),
+    // Falso amico: «border guards» e un italiano che non nomina guardie o dogane.
+    'content/blog-body/it/ff.ts': fileFor('ff', { body1: IT_LONG, body2: IT_LONG, body3: IT_LONG }),
+    'content/blog-body/en/ff.ts': fileFor('ff', { body1: EN_LONG, body2: EN_FALSE_FRIEND, body3: EN_LONG }),
+    // Ancora del gate: l'italiano nomina la dogana, quindi «border guards» e' legittimo.
+    'content/blog-body/it/anchor.ts': fileFor('anchor', { body1: IT_LONG, body2: IT_WITH_CUSTOMS, body3: IT_LONG }),
+    'content/blog-body/en/anchor.ts': fileFor('anchor', { body1: EN_LONG, body2: EN_FALSE_FRIEND, body3: EN_LONG }),
+    // Coppia pulita: non deve entrare nella lista.
+    'content/blog-body/it/clean.ts': fileFor('clean', { body1: IT_LONG, body2: IT_LONG, body3: IT_LONG }),
+    'content/blog-body/en/clean.ts': fileFor('clean', { body1: EN_LONG, body2: EN_LONG, body3: EN_LONG }),
+    // La sezione Svizzera: un selettore che guardasse solo blog-body la perderebbe.
+    'content/blog-body-ch/it/ch-ff.ts': fileFor('ch-ff', { body1: IT_LONG, body2: IT_LONG, body3: IT_LONG }),
+    'content/blog-body-ch/en/ch-ff.ts': fileFor('ch-ff', { body1: EN_FALSE_FRIEND, body2: EN_LONG, body3: EN_LONG }),
+  };
+  for (const [rel, src] of Object.entries(files)) {
+    const file = path.join(root, rel);
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, src);
+  }
+  // Albero completo per i locali di --count-only: de/fr vuoti ma presenti,
+  // altrimenti la guardia di completezza (giustamente) rifiuta la conta.
+  for (const tree of ['content/blog-body', 'content/blog-body-ch']) {
+    for (const locale of ['de', 'fr']) fs.mkdirSync(path.join(root, tree, locale), { recursive: true });
+  }
+  return Object.keys(files);
+}
+
+const snapshotFiles = (root, rels) => Object.fromEntries(
+  rels.map((rel) => [rel, fs.readFileSync(path.join(root, rel)).toString('base64')]),
+);
+
+test('blockingPairsFromContent trova le coppie bloccanti, ch compreso, e lascia fuori le pulite', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-'));
+  try {
+    writeScanFixture(tmp);
+    const pairs = blockingPairsFromContent(tmp, { locales: ['it', 'en'] });
+    // Ordinate per key (dir/locale/id): '-' precede '/', quindi blog-body-ch viene prima.
+    assert.deepEqual(pairs, [
+      { id: 'ch-ff', locale: 'en', dir: 'services/locales/blog-body-ch', codes: ['translation-false-friend'] },
+      { id: 'ff', locale: 'en', dir: 'services/locales/blog-body', codes: ['translation-false-friend'] },
+      { id: 'scaf', locale: 'it', dir: 'services/locales/blog-body', codes: ['leaked-prompt-scaffolding'] },
+    ],'stesso formato di blockingPairsFromAudit, dir con il path dell\'audit');
+
+    // Il default resta en,de,fr: l'italiano e' opt-in anche per --scan.
+    const defaults = blockingPairsFromContent(tmp);
+    assert.deepEqual(defaults.map((p) => `${p.locale}/${p.id}`).sort(), ['en/ch-ff', 'en/ff']);
+
+    const scan = scanContentForBlockingPairs(tmp, { locales: ['it', 'en'] });
+    assert.equal(scan.scanned, 10, 'ogni file it/en della fixture viene letto');
+    const ff = scan.pairs.find((p) => p.id === 'ff');
+    assert.match(ff.evidence[0].excerpt, /border guards/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('--scan rifiuta un secondo sorgente di coppie e i flag fuori contesto', () => {
+  const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, ...args], { encoding: 'utf8' });
+  // Molti percorsi escono 2: ogni caso fissa anche il messaggio della SUA
+  // guardia, cosi' una regressione che cade su un altro exit 2 resta visibile.
+  for (const [args, expected] of [
+    [['--scan', '--audit', '/dev/null'], /--scan non si combina/],
+    [['--scan', '--slug', 'x'], /--scan non si combina/],
+    [['--scan', '--missing'], /--scan non si combina/],
+    [['--missing', '--count-only'], /valgono solo con --scan/],
+    [['--audit', '/dev/null', '--list-out', '/tmp/x.jsonl'], /valgono solo con --scan/],
+    [['--scan', '--count-only', '--apply'], /--count-only non si combina con --apply/],
+    [['--scan', '--list-out='], /--list-out è vuoto/],
+  ]) {
+    const res = run(...args);
+    assert.equal(res.status, 2, `${args.join(' ')} deve uscire 2 (stderr: ${res.stderr})`);
+    assert.match(res.stderr, expected, `${args.join(' ')}: guardia sbagliata`);
+  }
+});
+
+test('--scan fallisce chiuso su un albero incompleto o sparse invece di contare zero', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-gaps-'));
+  const count = (...extra) => spawnSync(process.execPath, [
+    SCAN_SCRIPT, '--scan', '--count-only', '--content-root', tmp, ...extra,
+  ], { encoding: 'utf8' });
+  try {
+    writeScanFixture(tmp);
+    assert.equal(count().status, 0, 'la fixture completa si conta');
+
+    // Un locale chiesto senza cartella: la conta sarebbe parziale.
+    fs.rmSync(path.join(tmp, 'content/blog-body-ch/fr'), { recursive: true });
+    const noLocale = count();
+    assert.equal(noLocale.status, 2, noLocale.stdout);
+    assert.match(noLocale.stderr, /incompleto.*content\/blog-body-ch\/fr/);
+    assert.equal(noLocale.stdout, '', 'nessuna conta stampata');
+    // Con --locale che lo esclude la conta e' di nuovo completa.
+    assert.equal(count('--locale', 'it,en,de').status, 0);
+
+    // Un albero intero assente (il caso del worktree sparse senza -ch).
+    fs.rmSync(path.join(tmp, 'content/blog-body-ch'), { recursive: true });
+    const noTree = count('--locale', 'it,en');
+    assert.equal(noTree.status, 2, noTree.stdout);
+    assert.match(noTree.stderr, /mancano: content\/blog-body-ch\b/);
+
+    // Cartelle presenti ma file skip-worktree: il caso sparse vero.
+    writeScanFixture(tmp);
+    const git = (...args) => spawnSync('git', ['-C', tmp, ...args], { encoding: 'utf8' });
+    assert.equal(git('init', '-q').status, 0);
+    assert.equal(git('add', 'content').status, 0);
+    assert.equal(count().status, 0, 'checkout git completo: nessun skip-worktree');
+    assert.equal(git('update-index', '--skip-worktree', 'content/blog-body/en/ff.ts').status, 0);
+    fs.rmSync(path.join(tmp, 'content/blog-body/en/ff.ts'));
+    const sparse = count();
+    assert.equal(sparse.status, 2, sparse.stdout);
+    assert.match(sparse.stderr, /1 body tracciati ma non materializzati/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+// Review 2026-10-04T01:20Z su e3b8fd98ca: il bit `S` di `git ls-files -v` non
+// basta. Un body tracciato e CANCELLATO dal worktree (senza skip-worktree)
+// restava fuori da `readdirSync` e la conta usciva 0, piu' bassa. La guardia
+// confronta i body tracciati con quelli presenti, per ogni ramo che legge
+// `content/`: --scan, --missing, --slug e i file di un --audit.
+test('un body tracciato ma assente dal worktree fa uscire 2 ogni ramo che legge content/', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-tracked-'));
+  const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, '--content-root', tmp, ...args], { encoding: 'utf8' });
+  const git = (...args) => spawnSync('git', ['-C', tmp, ...args], { encoding: 'utf8' });
+  try {
+    writeScanFixture(tmp);
+    assert.equal(git('init', '-q').status, 0);
+    assert.equal(git('add', 'content').status, 0);
+
+    // Caso sano: checkout git completo, la conta esce 0 con tutti i file.
+    const sane = run('--scan', '--count-only');
+    assert.equal(sane.status, 0, sane.stderr);
+    assert.equal(JSON.parse(sane.stdout).scanned, 10);
+
+    // Traduzione cancellata, non skip-worktree: prima usciva 0 con scanned 9.
+    fs.rmSync(path.join(tmp, 'content/blog-body/en/ff.ts'));
+    const deleted = run('--scan', '--count-only');
+    assert.equal(deleted.status, 2, deleted.stdout);
+    assert.match(deleted.stderr, /tracciati ma assenti.*content\/blog-body\/en\/ff\.ts/s);
+    assert.equal(deleted.stdout, '', 'nessuna conta stampata');
+    // Il locale escluso non e' richiesto: la stessa assenza non blocca.
+    assert.equal(run('--scan', '--count-only', '--locale', 'it,de,fr').status, 0);
+    // Gli altri rami che leggono content/ falliscono chiusi allo stesso modo.
+    const missing = run('--missing', '--locale', 'en');
+    assert.equal(missing.status, 2, missing.stdout);
+    assert.match(missing.stderr, /tracciati ma assenti/);
+    const slug = run('--slug', 'ff', '--locale', 'en');
+    assert.equal(slug.status, 2, slug.stdout);
+    assert.match(slug.stderr, /tracciati ma assenti.*en\/ff\.ts/s);
+    git('checkout', '--', 'content/blog-body/en/ff.ts');
+
+    // L'italiano di riferimento cancellato pesa anche se si contano solo gli en.
+    fs.rmSync(path.join(tmp, 'content/blog-body-ch/it/ch-ff.ts'));
+    const noRef = run('--scan', '--count-only', '--locale', 'en');
+    assert.equal(noRef.status, 2, noRef.stdout);
+    assert.match(noRef.stderr, /content\/blog-body-ch\/it\/ch-ff\.ts/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('una lista di locali vuota o un insieme senza file escono 2 prima della scansione', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-empty-'));
+  const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, '--content-root', tmp, ...args], { encoding: 'utf8' });
+  try {
+    writeScanFixture(tmp);
+    // `--locale=` dava LOCALES=[]: nessun file letto e conta vuota con exit 0.
+    for (const args of [
+      ['--scan', '--count-only', '--locale='],
+      ['--scan', '--count-only', '--locale', ' , '],
+      ['--scan', '--locale='],
+      ['--missing', '--locale='],
+      ['--slug', 'ff', '--locale='],
+      ['--audit', '/dev/null', '--locale='],
+    ]) {
+      const res = run(...args);
+      assert.equal(res.status, 2, `${args.join(' ')} deve uscire 2 (stdout: ${res.stdout})`);
+      assert.match(res.stderr, /--locale .*vuot/, `${args.join(' ')}: guardia sbagliata`);
+      assert.equal(res.stdout, '', `${args.join(' ')}: nessun output`);
+    }
+
+    // Uno slug chiesto che non corrisponde a nessun body: era un no-op a exit 0.
+    const ghost = run('--slug', 'non-esiste', '--json');
+    assert.equal(ghost.status, 2, ghost.stdout);
+    assert.match(ghost.stderr, /non-esiste/);
+
+    // Caso sano: la fixture completa esce 0.
+    assert.equal(run('--scan', '--count-only').status, 0);
+
+    // Albero completo nelle cartelle ma senza un solo body: lo stock vuoto non
+    // e' "zero bloccanti", e' una conta che non ha letto niente.
+    const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-nofiles-'));
+    try {
+      for (const tree of ['content/blog-body', 'content/blog-body-ch']) {
+        for (const locale of ['it', 'en', 'de', 'fr']) fs.mkdirSync(path.join(empty, tree, locale), { recursive: true });
+      }
+      const none = spawnSync(process.execPath, [SCAN_SCRIPT, '--scan', '--count-only', '--content-root', empty], { encoding: 'utf8' });
+      assert.equal(none.status, 2, none.stdout);
+      assert.match(none.stderr, /nessun body/);
+    } finally {
+      fs.rmSync(empty, { recursive: true, force: true });
+    }
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('--scan senza --apply non tocca la fixture; --count-only e --list-out riportano lo stock', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-cli-'));
+  try {
+    const rels = writeScanFixture(tmp);
+    const before = snapshotFiles(tmp, rels);
+
+    // Percorso completo in dry-run sulla sola coppia italiana: niente MT, ma
+    // la coppia passa davvero da processPair.
+    const dry = spawnSync(process.execPath, [
+      SCAN_SCRIPT, '--scan', '--locale', 'it', '--content-root', tmp, '--json',
+    ], { encoding: 'utf8' });
+    assert.equal(dry.status, 0, dry.stderr);
+    const dryReport = JSON.parse(dry.stdout);
+    assert.equal(dryReport.mode, 'dry-run');
+    assert.deepEqual(dryReport.results.map((r) => `${r.locale}/${r.id}`), ['it/scaf']);
+    assert.equal(dryReport.results[0].written, false);
+
+    const out = path.join(tmp, 'stock.json');
+    const listOut = path.join(tmp, 'stock.jsonl');
+    const counted = spawnSync(process.execPath, [
+      SCAN_SCRIPT, '--scan', '--count-only', '--content-root', tmp, '--out', out, '--list-out', listOut,
+    ], { encoding: 'utf8' });
+    assert.equal(counted.status, 0, counted.stderr);
+
+    assert.deepEqual(snapshotFiles(tmp, rels), before, '--scan senza --apply non deve scrivere nessun body');
+
+    const stdoutCounts = JSON.parse(counted.stdout);
+    assert.deepEqual(JSON.parse(fs.readFileSync(out, 'utf8')), stdoutCounts, '--out e stdout portano la stessa conta');
+    assert.ok(stdoutCounts.byCode && typeof stdoutCounts.byCode === 'object');
+    // --count-only include l'italiano di default.
+    assert.equal(stdoutCounts.byCode['leaked-prompt-scaffolding'].it, 1);
+    assert.equal(stdoutCounts.byCode['translation-false-friend'].en, 2);
+    assert.equal(stdoutCounts.byCode['translation-false-friend'].total, 2);
+    assert.equal(stdoutCounts.scanned, 10);
+
+    const rows = fs.readFileSync(listOut, 'utf8').trim().split('\n').map((line) => JSON.parse(line));
+    const keys = rows.map((r) => r.key);
+    assert.deepEqual(keys, [...keys].sort(), 'JSONL ordinato per key');
+    assert.deepEqual(keys, [
+      'services/locales/blog-body-ch/en/ch-ff',
+      'services/locales/blog-body/en/ff',
+      'services/locales/blog-body/it/scaf',
+    ]);
+    const ff = rows.find((r) => r.key.endsWith('/en/ff'));
+    assert.deepEqual(ff.codes, ['translation-false-friend']);
+    assert.equal(ff.evidence[0].code, 'translation-false-friend');
+    assert.match(ff.evidence[0].excerpt, /border guards/);
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }
