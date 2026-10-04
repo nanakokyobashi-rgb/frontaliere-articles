@@ -101,9 +101,9 @@ test('false: input non-array o commenti nulli (lettura fallita)', () => {
 });
 
 test('il marker che la guardia data è quello da cui il drainer del corpus legge le figlie', () => {
-  // Il corpus tiene il proprio DECOMPOSED_INTO_RE nel drainer adattato: se le
-  // due regole divergono, la guardia daterebbe un marker diverso da quello
-  // delle figlie.
+  // Il drainer adattato importa `decomposedIntoNumbers` dal modulo (come il
+  // sito): pin di non-regressione contro un ritorno a una regex locale che
+  // farebbe datare alla guardia un marker diverso da quello delle figlie.
   for (const body of [
     decomposed('2026-10-03T10:00:00Z').body,
     '<!-- DECOMPOSED_INTO: 12 ,#7, 12 -->',

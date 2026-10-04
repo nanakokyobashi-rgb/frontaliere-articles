@@ -68,7 +68,7 @@ import {
 import { REVIEW_QUOTA_TRUSTED_ACTOR_RE, quotaFallbackDecision, quotaLeaseEvents, runQuotaLease } from './check-quota-backoff.mjs';
 import { FIX_OUTCOME_RE, TITLE_RE as RECONCILER_TITLE_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
-import { reopenedAfterDecomposition } from './lib/parent-close-recurrence.mjs';
+import { decomposedIntoNumbers, reopenedAfterDecomposition } from './lib/parent-close-recurrence.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
@@ -710,7 +710,9 @@ const LBL_FROM_DECOMP = 'from-decompose';
 const LBL_DECOMP_RETRIED = 'decompose-retried';
 const LBL_MAYBE_RESOLVED = 'maybe-resolved';
 const DECOMPOSE_ENABLED = process.env.DECOMPOSE_ENABLED !== 'false';
-const DECOMPOSED_INTO_RE = /<!--\s*DECOMPOSED_INTO:\s*((?:#?\d+[\s,]*)+)-->/i;
+// Il marker `DECOMPOSED_INTO` e il suo parse vivono in
+// `./lib/parent-close-recurrence.mjs` (`decomposedIntoNumbers`): la data della
+// decomposizione letta dalla guardia del PARENT-CLOSE usa la stessa regola.
 const PARENT_CLOSE_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARENT_CLOSE_MAX_PER_RUN', 5);
 const PARENT_DEQUEUE_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARENT_DEQUEUE_MAX_PER_RUN', 5);
 
@@ -807,11 +809,7 @@ export function isDrainPromotable(iss) {
 export function decomposedChildNumbers(comments) {
   let nums = null;
   for (const c of comments || []) {
-    const m = DECOMPOSED_INTO_RE.exec(String(c?.body || ''));
-    if (!m) continue;
-    const parsed = [...new Set(
-      (m[1].match(/\d+/g) || []).map(Number).filter((n) => Number.isInteger(n) && n > 0),
-    )].sort((a, b) => a - b);
+    const parsed = decomposedIntoNumbers(c?.body);
     if (parsed.length) nums = parsed;
   }
   return nums || [];
