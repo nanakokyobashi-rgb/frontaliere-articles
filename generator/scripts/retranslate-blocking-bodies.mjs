@@ -1717,6 +1717,12 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
   if (titleMarkerRepair) {
     row.removedLines = Object.values(titleMarkerRepair.removedByField).flat();
+    // Sull'italiano non c'e' cascata: un campo che resta vuoto e' un campo
+    // fatto della sola riga del prompt. La pagina resta intatta come prima
+    // (fail-closed); cambia solo il motivo, che non deve citare la cascata.
+    if (missingField && titleMarkerRepair.removedByField[missingField]?.length) {
+      row.reason = `forma-non-riparabile: campo-solo-marcatore (${missingField})`;
+    }
   }
   if (!verdict.write || !APPLY) return row;
 

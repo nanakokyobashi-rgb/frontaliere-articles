@@ -60,6 +60,9 @@ test('le forme che non sono la riga intera non si toccano e finiscono in skipped
     { text: `### TITOLO ARTICOLO: Frontalieri\n${PROSE}`, skipped: [/^intestazione:/] },
     // etichetta a meta' paragrafo.
     { text: `${PROSE} TITOLO ARTICOLO: Frontalieri e redditi`, skipped: [/^non-riga-intera:/] },
+    // riga intera ma senza i due punti ASCII (assenti, o NBSP prima dei due punti).
+    { text: `${PROSE}\nTITOLO ARTICOLO Frontalieri e redditi`, skipped: [/^senza-due-punti:/] },
+    { text: `${PROSE}\nTITOLO ARTICOLO : Frontalieri e redditi`, skipped: [/^senza-due-punti:/] },
     // titolo oltre la soglia.
     { text: `${PROSE}\nTITOLO ARTICOLO: ${longTitle}`, skipped: [new RegExp(`^titolo-oltre-${TITLE_MARKER_MAX_REST}-caratteri:`)] },
     // resto su due righe: il titolo e' sulla riga dopo.

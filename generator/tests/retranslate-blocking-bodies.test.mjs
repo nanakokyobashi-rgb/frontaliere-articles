@@ -1808,3 +1808,24 @@ test('planTitleMarkerRemoval: niente da togliere non e\' una riparazione', () =>
     skipped: [],
   }), { issue: 'forma-non-riparabile: nessuna-riga-marcatore', src: null });
 });
+
+test('it scaffolding: un campo fatto della sola riga TITOLO ARTICOLO resta intatto e il motivo non cita la cascata', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-it-title-only-'));
+  try {
+    const rels = writeItFixture(tmp, {
+      'content/blog-body/it/solo.ts': fileFor('solo', {
+        body1: IT_BODY1,
+        body2: IT_LONG,
+        body3: TITLE_LINE,
+      }),
+    });
+    const before = snapshotFiles(tmp, rels);
+    const applied = runItScan(tmp, '--apply');
+    assert.deepEqual(applied.results.map((r) => [r.id, r.reason, r.written]), [
+      ['solo', 'forma-non-riparabile: campo-solo-marcatore (body3)', false],
+    ]);
+    assert.deepEqual(snapshotFiles(tmp, rels), before, 'il file non va riscritto');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});

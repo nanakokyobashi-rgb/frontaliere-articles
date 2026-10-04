@@ -55,6 +55,9 @@ function skipReason(line) {
     if (label[1].length > TITLE_MARKER_MAX_REST) return `titolo-oltre-${TITLE_MARKER_MAX_REST}-caratteri`;
     return 'caratteri-non-ammessi';
   }
+  // A inizio riga ma senza `:` ASCII dopo il token (assente, o preceduto da un
+  // carattere non ammesso come NBSP): e' una riga intera, ma non questa forma.
+  if (new RegExp(`^[ \\t]*${TITLE_MARKER_TOKEN}`, 'u').test(line)) return 'senza-due-punti';
   return 'non-riga-intera';
 }
 
