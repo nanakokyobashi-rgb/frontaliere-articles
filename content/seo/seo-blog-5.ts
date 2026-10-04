@@ -99328,6 +99328,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ambri-vince-friborgo-2-1': {
+    title: 'Hockey, l\'Ambrì espugna la BCF Arena: Friborgo battuto 2-1',
+    description: 'L\'Ambrì vince 2-1 a Friborgo grazie alle reti di Müller e Schnarr. Una prestazione solida per i biancoblù che ritrovano fiducia dopo le recenti sconfitte.',
+    keywords: 'frontalieri, ticino, svizzera, italia, hockey, ambrì, espugna, arena',
+    ogTitle: 'L\'Ambrì sbanca la tana dei campioni: 2-1 a Friborgo',
+    ogDescription: 'L\'Ambrì ritrova il successo espugnando la pista del Friborgo per 2-1. Decisive le marcature di Müller e Schnarr in una prova caratterizzata da grande compattezza difensiva.',
+    canonicalPath: '/articoli-frontaliere/ambri-vince-friborgo-2-1/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hockey, l'Ambrì espugna la BCF Arena: Friborgo battuto 2-1",
+      "description": "L'Ambrì vince 2-1 a Friborgo grazie alle reti di Müller e Schnarr. Una prestazione solida per i biancoblù che ritrovano fiducia dopo le recenti sconfitte.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ambri-vince-friborgo-2-1.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'Ambrì vince 2-1 contro il Friborgo alla BCF Arena"
+      },
+      "datePublished": "2026-10-04T00:51:52+00:00",
+      "dateModified": "2026-10-04T00:51:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ambri-vince-friborgo-2-1/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
