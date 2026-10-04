@@ -99523,6 +99523,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scontro-a2-coldrerio': {
+    title: 'Scontro auto-camion sull\'A2, interviene la Rega',
+    description: 'Incidente sull\'A2 a Coldrerio in direzione sud: un\'auto e un camion coinvolti. Tre feriti, due apparentemente gravi; chiusura dell\'A2 fra Mendrisio e Chiasso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, scontro, auto-camion, sull, interviene',
+    ogTitle: 'Scontro auto-camion sull\'A2 a Coldrerio',
+    ogDescription: 'L\'incidente è avvenuto venerdì pomeriggio sull\'A2 in direzione sud, a Coldrerio. Sul posto SAM, REGA, pompieri del Mendrisiotto e Polizia Cantonale. Dopo la chiusura fra Mendrisio e Chiasso, il traffico è stato incanalato su un\'unica corsia.',
+    canonicalPath: '/articoli-frontaliere/scontro-a2-coldrerio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scontro auto-camion sull'A2, interviene la Rega",
+      "description": "Incidente sull'A2 a Coldrerio in direzione sud: un'auto e un camion coinvolti. Tre feriti, due apparentemente gravi; chiusura dell'A2 fra Mendrisio e Chiasso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scontro-a2-coldrerio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'autostrada A2 nei pressi di Coldrerio, in Ticino."
+      },
+      "datePublished": "2026-10-04T02:05:31+00:00",
+      "dateModified": "2026-10-04T02:05:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-a2-coldrerio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
