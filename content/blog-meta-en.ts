@@ -12496,6 +12496,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.workshop-difesa-bullismo.title': 'Travedona Monate: self-defense and bullying',
     'blog.article.workshop-difesa-bullismo.excerpt': 'Saturday, October 10, from 9:00 to 13:30, free self-defense workshop in Travedona Monate with a focus on bullying.',
     'blog.article.workshop-difesa-bullismo.imageAlt': 'Free self-defense workshop in the middle school gym in Travedona Monate',
+    'blog.article.nuovo-teatro-mutuo-2026.title': 'Varese approves 10,8 million loan for the new theater',
+    'blog.article.nuovo-teatro-mutuo-2026.excerpt': 'The City Council approved the budget adjustment that brings the investment to approximately 22 million, with a loan from Cassa Depositi e Prestiti of 10,8 million.',
+    'blog.article.nuovo-teatro-mutuo-2026.imageAlt': 'Rendering of the new Varese theatre with mountains in the background',
+    'blog.article.festa-cairate-2026-monastero.title': 'Festival of Cairate 2026: art, flavours and music at the Monastery',
+    'blog.article.festa-cairate-2026-monastero.excerpt': 'On Sunday 4 October 2026 from 10, the sixteenth Cairate Festival takes place at the Monastero di Santa Maria Assunta with Camminar Gustando (10 € card) and a concert on Saturday 3 October at 21.',
+    'blog.article.festa-cairate-2026-monastero.imageAlt': 'Monastery of Santa Maria Assunta courtyard during Cairate Festival with food stalls and music',
+    'blog.article.maga-giornata-contemporaneo.title': 'At the MA*GA in Gallarate, the Contemporary Day',
+    'blog.article.maga-giornata-contemporaneo.excerpt': 'Saturday 10 October at the MA*GA Museum in Gallarate, free admission, closing event for three exhibitions, books, video and performance for the XXII Contemporary Day.',
+    'blog.article.maga-giornata-contemporaneo.imageAlt': 'The MA*GA Museum in Gallarate for Contemporary Art Day',
 };
 
 export default blogMetaEn;

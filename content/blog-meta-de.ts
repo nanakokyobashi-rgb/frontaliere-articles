@@ -12495,6 +12495,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.workshop-difesa-bullismo.title': 'Travedona Monate: Selbstverteidigung und Mobbing',
     'blog.article.workshop-difesa-bullismo.excerpt': 'Am Samstag, 10 ottobre, findet in Travedona Monate von 9:00 bis 13:30 Uhr ein kostenloser Selbstverteidigungsworkshop mit Schwerpunkt auf Mobbing statt.',
     'blog.article.workshop-difesa-bullismo.imageAlt': 'Kostenloser Selbstverteidigungs-Workshop in der Turnhalle der Mittelschule in Travedona Monate',
+    'blog.article.nuovo-teatro-mutuo-2026.title': 'Varese genehmigt Darlehen über 10,8 Millionen für das neue Theater',
+    'blog.article.nuovo-teatro-mutuo-2026.excerpt': 'Der Gemeinderat hat die Haushaltsänderung genehmigt, die die Investition auf etwa 22 Millionen erhöht, mit einem Darlehen von Cassa Depositi e Prestiti über 10,8 Millionen.',
+    'blog.article.nuovo-teatro-mutuo-2026.imageAlt': 'Rendering des neuen Theaters in Varese mit den Bergen im Hintergrund',
+    'blog.article.festa-cairate-2026-monastero.title': 'Fest von Cairate 2026: Kunst, Aromen und Musik im Kloster',
+    'blog.article.festa-cairate-2026-monastero.excerpt': 'Am Sonntag, den 4. Oktober 2026 ab 10 Uhr findet das sechzehnte Fest von Cairate im Kloster Santa Maria Assunta mit Camminar Gustando (10 € -Karte) und Konzert am Samstag, den 3. Oktober um 21 Uhr statt.',
+    'blog.article.festa-cairate-2026-monastero.imageAlt': 'Klosterhof von Santa Maria Assunta während des Cairate-Festes mit Essensständen und Musik',
+    'blog.article.maga-giornata-contemporaneo.title': 'Der Tag der zeitgenössischen Kunst im MA*GA in Gallarate',
+    'blog.article.maga-giornata-contemporaneo.excerpt': 'Samstag 10 ottobre im Museum MA*GA in Gallarate: freier Eintritt, Finissage von drei Ausstellungen, Bücher, Videos und Performances zur XXII Giornata del Contemporaneo.',
+    'blog.article.maga-giornata-contemporaneo.imageAlt': 'Das MA*GA-Museum in Gallarate am Tag der zeitgenössischen Kunst',
 };
 
 export default blogMetaDe;
