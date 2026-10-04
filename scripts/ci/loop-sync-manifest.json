@@ -778,6 +778,16 @@
       }
     },
     {
+      "path": "scripts/ci/loop-health-report.mjs",
+      "mode": "identical",
+      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): lo script del sito e' gia' portabile (GH_REPO, revisore per repo) e importa solo node:*, quindi gira identico qui, alimentato da .github/workflows/loop-health-report.yml con il GITHUB_TOKEN del corpus.",
+      "baseline": {
+        "site": "5f12fc298ad39df9",
+        "corpus": "5f12fc298ad39df9",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "generator/tests/ci-check-name.test.mjs",
       "mode": "corpus-only",
       "reason": "Equivalente in node:test del guard vitest del sito (tests/ci-vitest-check-name.test.ts): lega il valore di VITEST_CHECK_NAME al `name:` del job in tests.yml. Non e' `identical` perche' il sito lo scrive in TypeScript per vitest e qui non c'e' ne' l'uno ne' l'altro.",
