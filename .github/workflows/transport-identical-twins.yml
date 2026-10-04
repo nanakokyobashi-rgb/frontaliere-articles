@@ -403,37 +403,16 @@ jobs:
           # Le righe `(site sha256 ...)` sono il contratto letto dal realign
           # post-merge: le scrive lo stesso modulo che le rilegge
           # (scripts/ci/transport-realign-body.mjs), cosi' un path con backtick
-          # non diventa un code span rotto.
+          # non diventa un code span rotto. Anche il resto del body vive li'
+          # (`buildTransportPrBody`): il test lo passa all'evaluator del
+          # contratto, strict compreso, cosi' una deroga `per scelta` senza
+          # Motivo/Prossimo passo non blocca piu' le correzioni manuali.
           # shellcheck disable=SC2016
           node --input-type=module -e '
             import fs from "node:fs";
-            import { convergedBulletLine, markdownCodeSpan, transportBulletLine } from "./scripts/ci/transport-realign-body.mjs";
+            import { buildTransportPrBody } from "./scripts/ci/transport-realign-body.mjs";
             const r = JSON.parse(fs.readFileSync("/tmp/transport.json", "utf8"));
-            const list = r.transported.map((t) => transportBulletLine(t)).join("\n");
-            const converged = (r.realign || []).length
-              ? "- Riattestata la baseline di " + r.realign.length + " gemelli `identical` modificati su entrambi i lati che oggi coincidono byte per byte (`both-moved-converged`): nessun file copiato, solo il manifest, con i due lati riletti al momento della scrittura.\n" + r.realign.map((x) => convergedBulletLine(x)).join("\n")
-              : "";
-            const deltas = (r.couplingDelta || []).map((d) => "- Snapshot accoppiamenti per " + markdownCodeSpan(d.path) + ": +" + d.added.length + "/-" + d.removed.length + (d.initialized ? " (prima osservazione)" : " (delta dalla passata precedente)" ) + ".").join("\n");
-            const excluded = (r.realignExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.").join("\n");
-            const workflowExcluded = (r.workflowExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.").join("\n");
-            const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
-            const deferred = workflowExcluded || (workflowsBlocked
-              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli `site-ahead` sotto `.github/workflows/` richiedono lo scope `workflows` per essere COPIATI (la sola riattestazione della baseline di un convergente non lo richiede): blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
-              : "- Le voci `adapted` restano escluse per scelta; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e vengono valutati solo se dichiarati `identical` e `site-ahead`.");
-            fs.writeFileSync("/tmp/pr-body.md", [
-              "## Implementato",
-              r.transported.length
-                ? "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331)."
-                : "- Nessun gemello `site-ahead` da copiare in questa passata: la PR aggiorna solo `scripts/ci/loop-sync-manifest.json`. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
-              list,
-              converged,
-              deltas,
-              "",
-              "## Non implementato (ancora)",
-              excluded,
-              deferred,
-              "",
-            ].join("\n"));
+            fs.writeFileSync("/tmp/pr-body.md", buildTransportPrBody(r, { workflowsScope: process.env.PAT_WORKFLOWS_SCOPE === "true" }));
           '
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito, ${REALIGNED} convergenti riattestati" \
