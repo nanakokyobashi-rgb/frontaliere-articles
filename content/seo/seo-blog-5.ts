@@ -100030,6 +100030,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scontro-notturno-gallarate': {
+    title: 'Incidente notturno a Gallarate: tre giovani coinvolti',
+    description: 'Incidente a Gallarate, via Stelvio: tre ragazzi di 18, 20 e 24 anni coinvolti. Due trasportati negli ospedali di Legnano e Gallarate; codice rosso poi giallo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, notturno, gallarate, giovani',
+    ogTitle: 'Gallarate, scontro tra auto nella notte: tre giovani',
+    ogDescription: 'Via Stelvio a Gallarate, poco dopo le 4, uno scontro tra auto ha coinvolto tre ragazzi. L\'intervento è partito in codice rosso ed è stato poi ridimensionato in giallo; due giovani sono stati trasportati negli ospedali di Legnano e Gallarate.',
+    canonicalPath: '/articoli-frontaliere/scontro-notturno-gallarate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente notturno a Gallarate: tre giovani coinvolti",
+      "description": "Incidente a Gallarate, via Stelvio: tre ragazzi di 18, 20 e 24 anni coinvolti. Due trasportati negli ospedali di Legnano e Gallarate; codice rosso poi giallo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scontro-notturno-gallarate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incidente notturno a Gallarate con tre giovani coinvolti"
+      },
+      "datePublished": "2026-10-04T08:06:33+00:00",
+      "dateModified": "2026-10-04T08:06:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-notturno-gallarate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
