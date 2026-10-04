@@ -54,6 +54,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
   findPromptPlaceholders,
   stripFaqNumberedLabels,
@@ -136,7 +137,7 @@ function cleanBody1(id, locale) {
   const p = bodyFileFor(id, locale);
   if (!p) return '';
   const src = fs.readFileSync(p, 'utf-8');
-  const m = new RegExp(`'blog\\.article\\.${id.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\.body1'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`).exec(src);
+  const m = new RegExp(`'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\.body1'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`).exec(src);
   if (!m) return '';
   const text = unescapeTs(m[1]);
   return findPromptPlaceholders(text).length ? '' : text;

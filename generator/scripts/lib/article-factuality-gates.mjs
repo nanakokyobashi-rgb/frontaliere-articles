@@ -45,12 +45,14 @@
  */
 
 import { tokenizeIt, containmentSim } from './it-text-similarity.mjs';
+import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
   LOCALE_LEXICON,
   lexiconFor,
   canonicalNumeric,
   NUMBER_TOKEN,
   extractNumericFacts,
+  numericDivergenceWorthReporting,
   FALSE_FRIEND_PATTERNS,
   ITALIAN_BORDER_GUARD_ANCHOR,
 } from './article-locale-lexicon.mjs';
@@ -150,6 +152,68 @@ const SENTENCE_END = /[.!?:;»›"”')\]}…]$/;
 // would lose its "000" and pass on the "60." left behind.
 const TRAILING_FOOTNOTE_REF = /\s+\[?\^?\d{1,3}\]?$/;
 
+// A translation can end on a perfectly valid sentence after silently dropping
+// a paragraph. Punctuation-only checks cannot see that loss, so the
+// translation path also compares each body section with its Italian source.
+// Keep the floor conservative: short sections vary naturally between
+// languages, while a material drop in a real body section is actionable.
+const TRANSLATION_WORD_RE = /[\p{L}\p{N}]+(?:[’'][\p{L}\p{N}]+)*/gu;
+const MIN_TRANSLATION_REFERENCE_WORDS = 40;
+const TRANSLATION_RATIO_THRESHOLD = 0.70;
+const TRANSLATION_PARAGRAPH_DROP_RATIO = 0.85;
+const TRANSLATION_CRITICAL_RATIO = 0.50;
+
+function countTranslationWords(text) {
+  return typeof text === 'string' ? (text.match(TRANSLATION_WORD_RE) || []).length : 0;
+}
+
+function countParagraphs(text) {
+  return typeof text === 'string'
+    ? text.split(/\n{2,}/).filter((paragraph) => paragraph.trim()).length
+    : 0;
+}
+
+function detectSemanticTruncation(text, referenceText, opts = {}) {
+  if (opts.locale === 'it' || typeof text !== 'string' || typeof referenceText !== 'string') return [];
+  if (!text.trim() || !referenceText.trim()) return [];
+
+  const referenceWords = countTranslationWords(referenceText);
+  const translatedWords = countTranslationWords(text);
+  // Il floor protegge le sezioni brevi dalla varianza naturale fra lingue. Un
+  // body senza ALCUNA parola («...», «…», «—») contro un italiano che ne ha non
+  // e' varianza: e' una traduzione assente, e chiusa da un punto passava ogni
+  // controllo di punteggiatura (`como-fai-giornate-autunno`, 2026-10-03). Il
+  // placeholder si giudica quindi PRIMA del floor; tutto il resto dopo.
+  const placeholder = translatedWords === 0 && referenceWords > 0;
+  if (!placeholder && referenceWords < MIN_TRANSLATION_REFERENCE_WORDS) return [];
+
+  const ratio = translatedWords / referenceWords;
+  const lostParagraph = countParagraphs(text) < countParagraphs(referenceText);
+  const threshold = lostParagraph
+    ? TRANSLATION_PARAGRAPH_DROP_RATIO
+    : TRANSLATION_RATIO_THRESHOLD;
+  if (ratio >= threshold) return [];
+
+  const label = opts.label ? `[${opts.label}] ` : '';
+  const percentage = Math.round(ratio * 100);
+  const severity = ratio < TRANSLATION_CRITICAL_RATIO ? 'critical' : 'major';
+  // Quale regola ha parlato. `word-ratio`: mancano parole oltre la varianza
+  // fra lingue, con o senza paragrafi persi. `paragraph-drop`: le parole sono
+  // fra il 70% e l'85% e c'e' un paragrafo in meno — un paragrafo omesso OPPURE
+  // una traduzione compatta che ne ha accorpati due. La diagnosi e' la stessa;
+  // chi agisce sul body (il retry del generatore, che lo lascia in attesa se
+  // il retry fallisce) distingue, per non togliere una traduzione valida.
+  const rule = ratio < TRANSLATION_RATIO_THRESHOLD ? 'word-ratio' : 'paragraph-drop';
+  return [{ ...issue(
+    'translation-semantic-truncation',
+    severity,
+    `${label}La traduzione contiene solo ${translatedWords}/${referenceWords} parole dell'italiano (${percentage}%) — possibile paragrafo omesso anche se la frase finale è chiusa`,
+    `${label}paragrafi: ${countParagraphs(referenceText)} → ${countParagraphs(text)}; parole: ${referenceWords} → ${translatedWords}`,
+    `Confronta la sezione ${label || 'tradotta'} con l'italiano e reintegra ogni paragrafo mancante. `
+      + 'Il testo tradotto deve conservare tutto il contenuto, non solo terminare con punteggiatura valida.',
+  ), rule }];
+}
+
 /**
  * Detects text that was cut off mid-generation.
  * @param {string} text
@@ -172,8 +236,55 @@ const TRAILING_FOOTNOTE_REF = /\s+\[?\^?\d{1,3}\]?$/;
 // literally contain, so a match is the prompt leaking, never prose that happens
 // to resemble it. Anchored to line starts and all-caps forms to keep an article
 // that legitimately discusses "la terminologia" from tripping it.
+//
+// THE TITLE MARKER IS TRANSLATED TOO, AND IT IS NOT ALWAYS ON ITS OWN LINE.
+// en/de/fr bodies are translations of the Italian one, so a leaked "TITOLO
+// ARTICOLO:" reaches them as "ARTICLE TITLE:", "ARTIKELTITEL:", "ARTIKEL-TITEL:",
+// "TITEL DES ARTIKELS:", "TITRE ARTICLE :" or "TITRE DE L'ARTICLE :" (French
+// puts a space before the colon and may use the typographic apostrophe). With
+// only the Italian token listed, the corpus on 2026-10-03 held 64 translated
+// bodies carrying one of those forms and the detector flagged none of them
+// (en 20, de 21, fr 23 across blog-body and blog-body-ch).
+//
+// Roughly four in ten of those are not at a line start: the translator
+// flattened the paragraph break and the marker now trails a sentence
+// ("…gedeihen können.» ARTIKEL-TITEL: CEO von Kägi…"). So the title marker has
+// two accepted shapes, both still exact all-caps tokens and case-sensitive:
+//   - heading shape: alone on its line, optional `#`s, colon optional
+//     ("### ARTICLE TITLE\nCost of living…");
+//   - label shape: anywhere, but the colon is then REQUIRED and the token must
+//     not continue a word.
+// Prose never shouts "ARTICLE TITLE:"; lower- and title-case mentions ("The
+// article title: …", "Der Artikeltitel lautet …", "le titre de l'article est
+// …") match neither shape and are pinned by negative tests.
+//
+// One stored body carries its paragraph breaks as the two literal characters
+// `\n` instead of a newline ("…internationaux.\n\nTITRE ARTICLE : Kägi…"), so
+// the token is glued to an "n". That escape is accepted as a boundary too.
+const NOT_INSIDE_A_WORD = '(?:(?<![\\p{L}\\p{N}])|(?<=\\\\n))';
+const LOCALIZED_TITLE_MARKER = "(?:ARTICLE TITLE|ARTIKEL-?TITEL|TITEL DES ARTIKELS|TITRE (?:DE L['’]ARTICLE|ARTICLE))";
+// Two flags, both load-bearing: `m` anchors the heading shape on each line and
+// `u` turns the `\p{L}`/`\p{N}` of NOT_INSIDE_A_WORD into Unicode property
+// escapes. Without `u` they are the literal characters "p", "{", "L"…, the
+// lookbehind stops seeing letters and "PREARTICLE TITLE:" is reported as a leak.
+const TITLE_MARKER_FLAGS = 'mu';
+
 const SCAFFOLDING_MARKERS = [
-  { re: /^\s*#{0,4}\s*TITOLO ARTICOLO\s*:?/m, what: 'marcatore di sezione del prompt di generazione' },
+  {
+    re: new RegExp(
+      `^\\s*#{0,4}\\s*TITOLO ARTICOLO\\s*:?|${NOT_INSIDE_A_WORD}TITOLO ARTICOLO[^\\S\\n]*:`,
+      TITLE_MARKER_FLAGS,
+    ),
+    what: 'marcatore di sezione del prompt di generazione',
+  },
+  {
+    re: new RegExp(
+      `^[^\\S\\n]*#{0,4}[^\\S\\n]*${LOCALIZED_TITLE_MARKER}[^\\S\\n]*$`
+      + `|${NOT_INSIDE_A_WORD}${LOCALIZED_TITLE_MARKER}[^\\S\\n]*:`,
+      TITLE_MARKER_FLAGS,
+    ),
+    what: 'marcatore di sezione del prompt di generazione, tradotto',
+  },
   { re: /^\s*#{0,4}\s*RIFERIMENTO DEL TITOLO\s*\([^\n]{0,80}\)\s*:/m, what: 'etichetta di input del prompt di espansione' },
   { re: /^\s*#{0,4}\s*TESTO ATTUALE\s*\(\d+\s+parole\)\s*:/m, what: 'etichetta del testo di input del prompt di espansione' },
   { re: /^\s*#{0,4}\s*(?:ESEMPIO|ESEMPI) CONCRET[OI]\s*:?\s*$/m, what: 'marcatore di sezione del prompt' },
@@ -314,6 +425,14 @@ export function detectTruncation(text, opts = {}) {
       `Completa la frase finale di ${label || 'questa sezione'} e chiudila con un punto. Non lasciare il periodo sospeso.`,
     ));
   }
+
+  // Formal truncation can be cleanly punctuated when the model drops a whole
+  // paragraph. The reference is supplied only for translated sections; the
+  // Italian source remains governed by the punctuation/markup checks above.
+  issues.push(...detectSemanticTruncation(text, opts.referenceText, {
+    label: opts.label,
+    locale: opts.locale,
+  }));
 
   return issues;
 }
@@ -967,6 +1086,7 @@ export const KNOWN_INSTITUTION_ACRONYMS = new Set([
   'OFAS',     // Office fédéral des assurances sociales — French acronym of UFAS/BSV
   'OFT',      // Office fédéral des transports — French acronym of UFT/BAV
   'DETEC',    // French/English acronym of DATEC — uvek.admin.ch
+  'FDF',      // Département fédéral des finances — French acronym of DFF/EFD — admin.ch
   'CFSL',     // Commissione federale di coordinamento per la sicurezza sul lavoro — ekas.admin.ch/it
   'CFST',     // French acronym of the same commission
   'MEBEKO',   // Commissione delle professioni mediche — bag.admin.ch/it
@@ -1305,20 +1425,33 @@ export function checkFabricatedInstitutionAcronyms(text, opts = {}) {
 // Leggi Pubblica Sicurezza) sono norme VERE e devono restare fuori match —
 // 8 file al 2026-08-18.
 //
-// LCL e LCO (follow-up nanako gemella di frontaliere-si-o-no#6017, item 2/3
-// di #6005) verificate con la stessa disciplina, misurate QUI su `content/`
-// con la stessa regex a confini di lettera: 3 occorrenze in 2 file (`LCL`),
-// 7 in 4 file (`LCO`). `LCL` fabbrica DUE leggi diverse e incompatibili
-// nello stesso corpus — «legge cantonale sulla naturalizzazione del Cantone
-// di Lucerna... (LCL 2020, art. 15)» in un articolo e «La legge cantonale
-// sul lavoro (LCL) del 15 dicembre 1995» in un altro: stesso acronimo,
-// domini e date che si escludono, la stessa firma di fabbricazione di LFW
-// (quattro date incompatibili). `LCO` («Federal Act on Combating Organized
-// Crime (LCO)», 2013) e' invece consistente ma inesistente, e sopravvive
-// identica a it/en/de/fr in `infiltrazioni-criminali-ticino-grigioni` — lo
-// stesso argomento «sopravvive alla traduzione» gia' usato per LFW/LPS.
-// Zero occorrenze minuscole o miste di `lcl`/`lco`, stessa verifica del
-// paragrafo sopra.
+// Il flag `i` e' piu' permissivo di INSTITUTION_RE (`[A-Z]{2,8}`, sezione 5)
+// e la review su #6005 lo ha segnalato come rischio di falso positivo non
+// escluso: una occorrenza minuscola di `lfw`/`lps` dentro una parola
+// straniera o un acronimo di prodotto passerebbe anch'essa. Verificato
+// 2026-08-18 sull'intero corpus tirato (`packages/articles/content/`,
+// 17.872 file su it/en/de/fr): zero occorrenze minuscole o miste, solo la
+// forma maiuscola esatta della sigla inventata. Il flag oggi non cattura
+// altro che la sigla stessa: restringerlo toglierebbe copertura senza un
+// difetto reale da mostrare. Ri-misurare se il corpus cresce di molto o se
+// emerge un hit minuscolo — a quel punto il fix e' un boundary aggiuntivo o
+// la rimozione del flag, non prima.
+//
+// LCL e LCO (follow-up #6017, item 2/3 di #6005) verificate con la stessa
+// disciplina: misurate sul corpus tirato con la stessa regex a confini di
+// lettera — 3 occorrenze in 2 file (`LCL`), 7 in 4 file (`LCO`). `LCL`
+// fabbrica DUE leggi diverse e incompatibili nello stesso corpus: «legge
+// cantonale sulla naturalizzazione del Cantone di Lucerna... (LCL 2020,
+// art. 15)» in un articolo e «La legge cantonale sul lavoro (LCL) del 15
+// dicembre 1995» in un altro — stesso acronimo, domini e date che si
+// escludono, la stessa firma di fabbricazione di LFW. `LCO` («Federal Act
+// on Combating Organized Crime (LCO)», 2013) e' invece consistente ma
+// sopravvive identica a it/en/de/fr in `infiltrazioni-criminali-ticino-
+// grigioni` — nessuna legge federale svizzera con questa sigla esiste, la
+// lotta alla criminalita' organizzata e' nel Codice penale (art. 260ter
+// CP), lo stesso argomento «sopravvive alla traduzione» gia' usato per
+// LFW/LPS. Zero occorrenze minuscole/miste di `lcl`/`lco` sullo stesso
+// corpus tirato, stessa verifica di cui sopra.
 // Cue di CITAZIONE GIURIDICA, multilingue per costruzione: serve alle entry
 // che portano un `context` (oggi solo `LCL`, vedi sotto). Copre le quattro
 // lingue del corpus — it `legge/legislazione/articolo/art.`, fr `loi/article`,
@@ -1371,34 +1504,39 @@ export function checkFabricatedInstitutionAcronyms(text, opts = {}) {
 // vom 13. März 1943» (stesso corpo che ha portato l'incidente #323 in
 // traduzione tedesca), dove `Bundesarbeitsgesetz` non contiene la sottostringa
 // `Bundesgesetz` (c'e' `arbeits` in mezzo) e un `\b` davanti a `Gesetz` non
-// puo' scattare a meta' parola. Applicare il context-guard a LFW/LPS (item
-// 3/3 di #526, stessa disciplina di LCL/LCO) senza questo aggiustamento
-// avrebbe reso invisibile esattamente la fabbricazione che il test su questa
-// frase gia' misura. Il `(?!t)` resta l'unica esclusione e continua a
-// coprire `gesetzt`/`vorausgesetzt` ovunque compaiano, ancorati o no.
+// puo' scattare a meta' parola. Applicare il context-guard a LFW/LPS senza
+// questo aggiustamento avrebbe reso invisibile esattamente la fabbricazione
+// che il test su questa frase gia' misura. Il `(?!t)` resta l'unica esclusione
+// e continua a coprire `gesetzt`/`vorausgesetzt` ovunque compaiano.
 const NORM_CITATION_CUE =
   /\b(?:legg[ei]\b|legislazion[ei]\b|lois?\b|Bundesgesetz|federal\s+act\b|act\s+on\b|law\s+on\b|articol[oi]\b|articles?|Artikeln?\b|art\.|cpv\.|Abs\.|RS\s*\d)|Gesetz(?:es|e)?(?!t)/i;
+
+// LFW/LPS/LCO non hanno oggi un omonimo reale misurato (a differenza della
+// banca LCL), quindi chiedere SEMPRE un cue giuridico indebolirebbe il gate:
+// «secondo la LFW» e «la LCO disciplina» sono citazioni inequivocabili anche
+// senza la parola `legge`, `art.` o `RS`. Manteniamo il bare match storico e
+// scartiamo soltanto forme esplicitamente da nome di entita'/prodotto, che e'
+// l'intento anti-falso-positivo della meta' corpus senza aprire quel buco.
+// Le forme societarie coprono i quattro locali del corpus, accenti compresi:
+// `soci[eé]t[aàeé]` tiene società/societa e société/societe.
+const benignNormEntity = (acronym) => new RegExp(
+  String.raw`\b(?:gruppo|azienda|soci[eé]t[aàeé]|associazione|banca|app|company|firm|group|bank|association|groupe|banque|entreprise|Gruppe|Bank|Unternehmen|Gesellschaft|Firma)\s+${acronym}$`,
+  'i',
+);
 
 export const FABRICATED_NORM_ACRONYMS = [
   {
     acronym: 'LFW',
     re: /(?<![A-Za-z])LFW(?![A-Za-z])/i,
     real: "la legge sul lavoro è LL (RS 822.11, 13 marzo 1964); per l'apprendistato è la LFPr (RS 412.10)",
-    // Stesso irrobustimento di LCL/LCO (#461, #526 item 3/3): nessuna
-    // collisione nota oggi con un'entita' reale sigla "LFW", ma il bare-match
-    // incondizionato e' la stessa fragilita' strutturale gia' misurata due
-    // volte — un futuro articolo che la nomini fuori da ogni contesto
-    // giuridico verrebbe rigettato senza motivo. L'occorrenza vera del
-    // corpus resta rilevata (vedi nota su `NORM_CITATION_CUE` sopra).
-    context: NORM_CITATION_CUE,
+    benign: benignNormEntity('LFW'),
     contextWindow: 120,
   },
   {
     acronym: 'LPS',
     re: /(?<![A-Za-z])LPS(?![A-Za-z])/i,
     real: 'non esiste: previdenza → LAVS/LAI/LPP, assicurazione malattie → LAMal/LVAMal, permesso di soggiorno → LStrI (RS 142.20)',
-    // Stesso irrobustimento di LFW qui sopra.
-    context: NORM_CITATION_CUE,
+    benign: benignNormEntity('LPS'),
     contextWindow: 120,
   },
   {
@@ -1432,15 +1570,7 @@ export const FABRICATED_NORM_ACRONYMS = [
     acronym: 'LCO',
     re: /(?<![A-Za-z])LCO(?![A-Za-z])/i,
     real: 'non esiste: il contrasto alla criminalità organizzata è nel Codice penale, art. 260ter CP (RS 311.0)',
-    // Stesso irrobustimento di LCL (#461, item 1/3 di #455): nessuna
-    // collisione nota oggi con un'entità reale, ma non verificata in modo
-    // esaustivo, e un bare-match incondizionato è la stessa fragilità
-    // strutturale già misurata su LCL — un futuro articolo che nomini
-    // un'entità reale sigla "LCO" andrebbe rigettato senza motivo. Le due
-    // occorrenze vere nel corpus restano rilevate: entrambe hanno «legge
-    // federale» subito prima della sigla (`infiltrazioni-criminali-ticino-
-    // grigioni`).
-    context: NORM_CITATION_CUE,
+    benign: benignNormEntity('LCO'),
     contextWindow: 120,
   },
 ];
@@ -1462,36 +1592,40 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
   const issues = [];
   if (typeof text !== 'string' || !text) return issues;
   const locale = opts.locale || 'it';
-  for (const { acronym, re, real, context, contextWindow } of FABRICATED_NORM_ACRONYMS) {
+  for (const { acronym, re, real, context, benign, contextWindow } of FABRICATED_NORM_ACRONYMS) {
     // `re` is deliberately non-global: a `g` regex carries `lastIndex` across
-    // calls, and this table is module-level shared state. Lo scan qui usa un
-    // CLONE globale creato dentro la chiamata, che quello stato condiviso non
-    // ce l'ha.
+    // calls, and this table is module-level shared state. Lo scan qui sotto
+    // usa quindi un CLONE locale con flag `g`, mai la regex della tabella:
+    // l'invariante `entry.re.global === false` resta vera e nessuna entry
+    // diventa stateful fra due chiamate.
     //
-    // Serve perche' `context` puo' SCARTARE un'occorrenza: con una `re.exec`
-    // a match singolo la prima occorrenza consuma l'unico match, quindi una
-    // menzione legittima in cima al testo nascondeva una fabbricazione piu'
-    // in basso. Misurato: «Ho un conto presso LCL... la legge cantonale sul
-    // lavoro (LCL) del 15 dicembre 1995...» passava in silenzio. Senza
-    // `context` il difetto non poteva esistere, perche' il primo match era
-    // sempre anche l'issue: e' nato con la guardia, e va chiuso con lei.
+    // Perche' non basta la prima occorrenza: con una guardia `context` il
+    // primo match puo' essere legittimo (la banca francese LCL) e nascondere
+    // una fabbricazione piu' in basso nello stesso testo. Senza `context` il
+    // difetto non poteva esistere, perche' il primo match era sempre anche
+    // l'issue: nasce con la guardia e va chiuso con lei.
     const scan = new RegExp(re.source, re.flags.includes('g') ? re.flags : `${re.flags}g`);
     let m;
     while ((m = scan.exec(text)) !== null) {
       if (m[0] === '') { scan.lastIndex += 1; continue; }
-      if (context) {
+      if (context || benign) {
         const w = contextWindow ?? 80;
         const nearby = text.slice(Math.max(0, m.index - w), m.index + m[0].length + w);
-        if (!context.test(nearby)) continue;
+        // Il cue benigno deve terminare sulla occorrenza CORRENTE: cercarlo
+        // nell'intera finestra farebbe assolvere una seconda citazione legale
+        // solo perche' 80 caratteri prima compariva «il gruppo LFW».
+        const throughMatch = text.slice(Math.max(0, m.index - w), m.index + m[0].length);
+        if (benign?.test(throughMatch)) continue;
+        if (context && !context.test(nearby)) continue;
       }
       issues.push(issue(
-      'fabricated-norm-acronym',
-      'critical',
-      `[${locale}] Sigla normativa inventata: «${acronym}» — ${real}`,
-      text.slice(Math.max(0, m.index - 90), m.index + 60),
-      'Cita la norma reale con la sua sigla ufficiale, oppure togli la citazione. '
-      + "Una sigla di legge inesistente è una fabbricazione anche quando la frase intorno è corretta, "
-      + "e sopravvive alla traduzione: va tolta nell'originale, non nei singoli locali.",
+        'fabricated-norm-acronym',
+        'critical',
+        `[${locale}] Sigla normativa inventata: «${acronym}» — ${real}`,
+        text.slice(Math.max(0, m.index - 90), m.index + 60),
+        'Cita la norma reale con la sua sigla ufficiale, oppure togli la citazione. '
+        + "Una sigla di legge inesistente è una fabbricazione anche quando la frase intorno è corretta, "
+        + "e sopravvive alla traduzione: va tolta nell'originale, non nei singoli locali.",
       ));
       break; // una sola issue per sigla, come prima
     }
@@ -1625,8 +1759,9 @@ export function checkContradictoryNormDates(text) {
 // (https://www.fedlex.admin.ch/eli/cc/1979/461_461_461/it), e il MEF la cita
 // come «Convenzione per evitare le doppie imposizioni del 9 marzo 1976».
 // Il generatore ha dettato ai modelli «9 DICEMBRE 1976 (NON marzo)» e il suo
-// gate bocciava la data giusta: la run 36029664367 ha perso ogni tentativo su
-// un corpo che la riportava corretta, col feedback che chiedeva la data errata.
+// gate bocciava la data giusta: la run 36029664367 di frontaliere-articles ha
+// perso ogni tentativo su un corpo che la riportava corretta, col feedback che
+// chiedeva la data errata.
 export const CONVENTION_DATE_IT = '9 marzo 1976';
 const WRONG_CONVENTION_DATE = String.raw`\b0?9\s*(?:dicembre|[./]\s*12\s*[./])\s*1976\b`;
 const WRONG_CONVENTION_DATE_RES = [
@@ -1847,17 +1982,6 @@ export function renderAnchorForPrompt(anchor) {
 }
 
 /**
- * Escapes `value` so it can be dropped into a RegExp source as a literal —
- * needed for `org` and `pct` anchors, whose value comes from source text
- * (an acronym with a dot, a malformed multi-dot percentage) rather than from
- * a controlled vocabulary. `km` and `date` anchors go through `Number(...)`
- * first, so they can never carry a metacharacter and don't need this.
- */
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-/**
  * The RegExp that decides whether a piece of text carries `anchor`.
  *
  * One definition, two callers: `findAnchorSentence` uses it to pick the
@@ -1871,9 +1995,9 @@ function escapeRegExp(value) {
  */
 function anchorNeedle(anchor) {
   const [kind, value] = String(anchor).split(':');
-  if (kind === 'pct') return new RegExp(String.raw`${escapeRegExp(value).replace(/\\\./g, '[.,]')}\s*%`);
+  if (kind === 'pct') return new RegExp(String.raw`${escapeRegExpLiteral(value).replace(/\\\./g, '[.,]')}\s*%`);
   if (kind === 'km') return new RegExp(String.raw`${Number(value)}\s*km`, 'i');
-  if (kind === 'org') return new RegExp(String.raw`\b${escapeRegExp(value)}\b`);
+  if (kind === 'org') return new RegExp(String.raw`\b${escapeRegExpLiteral(value)}\b`);
   if (kind === 'date') {
     const [y, mo, d] = value.split('-');
     const monthName = Object.keys(MONTHS_IT).find((k) => MONTHS_IT[k] === Number(mo));
@@ -2081,7 +2205,7 @@ export function matchedAnchors(articleText, anchors) {
       const monthName = Object.keys(MONTHS_IT).find((k) => MONTHS_IT[k] === Number(mo));
       if (new RegExp(String.raw`${Number(d)}\s*°?\s+${monthName}\s+${y}`, 'i').test(articleText)) found.add(anchor);
     } else if (kind === 'org') {
-      if (new RegExp(String.raw`\b${escapeRegExp(value)}\b`, 'i').test(articleText)) found.add(anchor);
+      if (new RegExp(String.raw`\b${escapeRegExpLiteral(value)}\b`, 'i').test(articleText)) found.add(anchor);
     }
   }
   return found;
@@ -2303,22 +2427,13 @@ function rescaledFrom(value, candidates) {
   return null;
 }
 
-/**
- * Below this, a set difference is noise rather than signal.
- *
- * Measured, not guessed. A single missing number is dominated by artefacts the
- * comparison cannot see through: ranges name only one endpoint next to the
- * currency ("da 60.000 a 100.000 franchi" yields 100000, "from CHF 60,000 to
- * 100,000" yields 60000), and translations legitimately merge or reorder
- * clauses. Requiring at least two values AND a quarter of that kind's set
- * concentrates the report on translations that actually lost their figures.
- */
-const MIN_NUMERIC_DIVERGENCE = 2;
-const MIN_NUMERIC_DIVERGENCE_SHARE = 0.25;
-
+// The threshold itself now lives next to `extractNumericFacts` in
+// article-locale-lexicon.mjs, because the pre-publication guard in
+// article-free-mt.mjs applies the same rule to decide whether to REFUSE a
+// freshly machine-translated field. Two copies of the constant would let the
+// guard and this report drift into disagreeing about the same translation.
 function worthReporting(diverged, total) {
-  return diverged.length >= MIN_NUMERIC_DIVERGENCE
-    && diverged.length >= total * MIN_NUMERIC_DIVERGENCE_SHARE;
+  return numericDivergenceWorthReporting(diverged.length, total);
 }
 
 /**
@@ -2518,12 +2633,31 @@ export function runFactualityGates(params = {}) {
   const joined = (obj) => Object.values(obj).filter((v) => typeof v === 'string').join('\n\n');
   const fullText = joined(sections);
   const localeOptions = { ...options, locale };
+  // A missing/thin source cannot support the learner's negative evidence: an
+  // empty source is not proof that an acronym is fabricated. So without a
+  // usable source nothing is LEARNED (no observations, below) and the
+  // unconfirmed suspects stay quiet. The DENYLIST is different: an acronym gets
+  // there only as CONFIRMED fabricated, from sourced evidence across articles
+  // (source-less observations never reach the learner), so it is a fact about
+  // the acronym, not about this article's source — exactly like the curated
+  // static guards, which stay active too. Dropping it here switched it off for
+  // every evergreen, whose gate source is '' by construction.
+  const hasUsableSourceForLearning = typeof sourceText === 'string'
+    && sourceText.length >= MIN_SOURCE_CHARS_FOR_SUPPORT;
+  const learnedMemory = hasUsableSourceForLearning
+    ? memory
+    : { denylist: memory?.denylist, degraded: memory?.degraded };
 
   let issues = [];
   for (const [label, text] of Object.entries(sections)) {
     if (typeof text !== 'string' || !text.trim()) continue;
     const sectionLabel = locale === 'it' ? label : `${locale}/${label}`;
-    issues.push(...detectTruncation(text, { label: sectionLabel }));
+    const referenceText = locale === 'it' ? undefined : italianSections?.[label];
+    issues.push(...detectTruncation(text, {
+      label: sectionLabel,
+      locale,
+      referenceText,
+    }));
     issues.push(...detectLeakedScaffolding(text, { label: sectionLabel }));
   }
   issues.push(...checkInlineArithmetic(fullText, localeOptions));
@@ -2538,9 +2672,9 @@ export function runFactualityGates(params = {}) {
 
   if (locale === 'it') {
     issues.push(...checkFabricatedInstitutionAcronyms(fullText, {
-      learnedDenylist: memory.denylist,
-      learnedSuspects: memory.suspects,
-      memoryDegraded: memory.degraded,
+      learnedDenylist: learnedMemory.denylist,
+      learnedSuspects: learnedMemory.suspects,
+      memoryDegraded: learnedMemory.degraded,
     }));
     issues.push(...checkContradictoryNormDates(fullText));
     issues.push(...checkSourceFreshness({ sourceDate, publishedAt, text: fullText, ...options }));
@@ -2549,6 +2683,22 @@ export function runFactualityGates(params = {}) {
     }
   } else if (italianSections) {
     const italianText = joined(italianSections);
+
+    // A whole body section can disappear while the remaining translation still
+    // ends cleanly. Report that structural loss separately because the loop
+    // above only visits sections that are present in the translation.
+    for (const [label, italianSection] of Object.entries(italianSections)) {
+      if (typeof italianSection !== 'string' || !italianSection.trim()) continue;
+      const translatedSection = sections?.[label];
+      if (typeof translatedSection === 'string' && translatedSection.trim()) continue;
+      issues.push(issue(
+        'translation-section-missing',
+        'critical',
+        `[${locale}/${label}] Sezione presente nell'italiano ma assente dalla traduzione`,
+        `${label}: ${countTranslationWords(italianSection)} parole nell'italiano`,
+        `Ripristina la sezione ${label} nella versione ${locale}: una traduzione non può omettere un intero blocco di contenuto.`,
+      ));
+    }
 
     // What the Italian says about its own numbers, used to adjudicate the
     // content claims above — see ITALIAN_ADJUDICATED_CODES.
@@ -2587,7 +2737,13 @@ export function runFactualityGates(params = {}) {
   // that consumes them is keyed on the acronym alone. Harvesting the same
   // acronym four times, once per locale, would quadruple every sighting count
   // and promote unknowns to CONFIRMED on one article's evidence.
-  const observations = locale === 'it' ? collectInstitutionAcronyms(fullText, { sourceText }) : [];
+  // Do not feed source-less or thin retro-audits back into the learner. The
+  // collector can label such evidence `unknown`, but that is still an
+  // observation and would let a corpus scan manufacture memory without an
+  // oracle. With a usable source the existing support verdicts are preserved.
+  const observations = locale === 'it' && hasUsableSourceForLearning
+    ? collectInstitutionAcronyms(fullText, { sourceText })
+    : [];
 
   issues.sort((a, b) => (SEVERITY[b.severity] || 0) - (SEVERITY[a.severity] || 0));
   const blocking = issues.filter((i) => i.severity === 'critical');

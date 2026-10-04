@@ -28,6 +28,7 @@ import { parsePositiveNum } from '../../scripts/lib/parse-positive-num.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
+import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -237,7 +238,7 @@ export function parseFaqLiteral(raw) {
 // (`scripts/fix-faq-locales.mjs`) e importare qui una lib `corpus-only` aggiungerebbe una
 // divergenza in piu' fra i due, per tre righe di regex.
 const idOfBodyPath = (filePath) => basename(filePath, '.ts');
-const faqKeyRx = (id) => `'blog\\.article\\.${String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.faq'`;
+const faqKeyRx = (id) => `'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\.faq'`;
 const faqValueRe = (id) => new RegExp(`${faqKeyRx(id)}\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*[,}]`, 'g');
 
 /** Il literal `.faq` vivo di un file, ancora escapato. `null` se non c'e'. */

@@ -2087,9 +2087,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0ce4cf3812d58065",
-        "corpus": "0ce4cf3812d58065",
-        "alignedAt": "2026-08-09"
+        "site": "7b9dc0d8767d26b9",
+        "corpus": "7b9dc0d8767d26b9",
+        "alignedAt": "2026-10-04"
       }
     },
     {
@@ -2426,6 +2426,17 @@
         "site": "54656b480b2b8275",
         "corpus": "54656b480b2b8275",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/escape-regexp.mjs",
+      "sitePath": "scripts/lib/escape-regexp.mjs",
+      "mode": "identical",
+      "reason": "Importato al primo livello da generator/scripts/lib/article-factuality-gates.mjs (gemello identical): senza questa voce il trasporto dei gemelli non lo porta e la copia del sito fallirebbe qui con ERR_MODULE_NOT_FOUND al primo import di create-article.mjs.",
+      "baseline": {
+        "site": "c3e03308dcf9d6b0",
+        "corpus": "c3e03308dcf9d6b0",
+        "alignedAt": "2026-10-04"
       }
     },
     {

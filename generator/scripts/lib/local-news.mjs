@@ -58,6 +58,7 @@ import { fileURLToPath } from 'node:url';
 
 import { normalizeText } from './profession-taxonomy.mjs';
 import { comuniMentioned, municipalityProvince } from './topic-coverage-guard.mjs';
+import { escapeRegExpLiteral } from './escape-regexp.mjs';
 
 export const LOCAL_NEWS_STEMS = Object.freeze([
   // cronaca nera
@@ -80,7 +81,7 @@ export const LOCAL_NEWS_STEMS = Object.freeze([
  */
 export const LOCAL_NEWS_WORDS = Object.freeze(['sport']);
 
-const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRe = (s) => escapeRegExpLiteral(s);
 const LOCAL_NEWS_RE = new RegExp(
   `\\b(?:${LOCAL_NEWS_STEMS.map(escapeRe).join('|')}|(?:${LOCAL_NEWS_WORDS.map(escapeRe).join('|')})\\b)`,
 );

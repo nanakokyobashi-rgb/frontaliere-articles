@@ -156,6 +156,7 @@ import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
 import { freeTranslateWithRetry, balanceMarkdownMarkers, translateWithCodexEngine } from './lib/free-translate.mjs';
 import { createCodexExecCall } from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
+import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
   MIN_FACTS_PER_SECTION,
   matchesVacuousValue,
@@ -519,7 +520,8 @@ export const DIR_TO_REAL = {
 
 /** Chiave i18n di un campo body dentro il file di un articolo. */
 const bodyKey = (id, field) => `'blog.article.${id}.${field}': `;
-const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+// Stesso escape del resto del generatore (lib/escape-regexp.mjs), non una copia.
+const escapeRegExp = (value) => escapeRegExpLiteral(String(value));
 
 /**
  * Legge un campo body dal sorgente TS.

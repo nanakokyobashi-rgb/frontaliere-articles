@@ -169,6 +169,7 @@ import {
   isBodyTranslationPending,
   retryPendingBodyTranslations,
 } from './lib/free-mt-recovery.mjs';
+import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
@@ -5463,14 +5464,30 @@ function assertTranslationsPassFactualityGates(data) {
 
   const blocking = [];
   for (const locale of ['en', 'de', 'fr']) {
-    const content = data?.content?.[locale];
-    if (!content) continue;
+    // Un locale ASSENTE e' trattato come vuoto: tutti i produttori (flusso AI
+    // e i cinque secondari di `registerArticleFiles()`) scrivono it/en/de/fr,
+    // quindi un locale mancante e' un buco, non una scelta, e deve arrivare al
+    // gate come `translation-section-missing` invece di saltarlo.
+    const content = data?.content?.[locale] && typeof data.content[locale] === 'object'
+      ? data.content[locale]
+      : {};
     const sections = collectBodySections(content);
-    if (!Object.values(sections).some((s) => s.trim())) continue;
+    // Un body lasciato NON tradotto da `translateArticle()` col marker
+    // `markBodyTranslationPending` e' un'assenza AUTORIZZATA: la SPA ripiega
+    // sull'italiano e il recupero lo ritraduce. Il riferimento italiano per
+    // quel locale lo esclude, cosi' `translation-section-missing` scatta solo
+    // sulle assenze che nessuno ha dichiarato. Per lo stesso motivo un locale
+    // senza alcun body si salta SOLO se ogni body italiano e' in attesa:
+    // altrimenti il buco non dichiarato arriva al gate invece di sparire.
+    const referenceSections = Object.fromEntries(
+      Object.entries(italianSections).filter(([field]) => !isBodyTranslationPending(data, locale, field)),
+    );
+    if (!Object.values(sections).some((s) => s.trim())
+      && !Object.values(referenceSections).some((s) => s.trim())) continue;
     const result = runArticleFactualityGates({
       sections,
       locale,
-      italianSections,
+      italianSections: referenceSections,
       deterministicBodySections: data?._deterministicBodySections,
     });
     if (result.issues.length > 0) {
@@ -10991,6 +11008,20 @@ function pendingBodyLaneShouldStop() {
   return _pendingBodyCodexDeadlineMs !== null && Date.now() + 15_000 >= _pendingBodyCodexDeadlineMs;
 }
 
+/**
+ * Il body tradotto e' troncato abbastanza da NON accettarlo: ogni rilievo di
+ * `detectTruncation()` tranne `translation-semantic-truncation` con
+ * `rule: 'paragraph-drop'` (70-85% delle parole con un paragrafo in meno), che
+ * puo' essere un semplice accorpamento. Chi lo usa, se il retry fallisce, lascia
+ * il body in attesa — cioe' lo TOGLIE — quindi agisce solo sulla perdita
+ * misurata (`word-ratio`) e sui troncamenti formali; il gate di ammissione
+ * resta la diagnosi. Un solo predicato per il retry di troncamento e per la
+ * seconda corsia dei body in attesa.
+ */
+function isRealTranslationTruncation(issues) {
+  return issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
+}
+
 async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
@@ -11541,7 +11572,14 @@ ${terminologyByLang[targetLang] || ''}`;
       // is 'major') is by definition a truncation signal, so any non-empty
       // result must trigger the retry — filtering to 'critical' only let the
       // majority of real-corpus mid-sentence cuts through silently.
-      const isTruncated = detectTruncation(text, { label: `${locale}/${field}` }).length > 0;
+      // `referenceText` accende `translation-semantic-truncation`: una sezione
+      // chiusa da un punto ma con meno parole dell'italiano (fino al «...» di
+      // `como-fai-giornate-autunno`, 2026-10-03) e' troncata quanto una frase
+      // tagliata, e prende lo stesso retry e lo stesso esito pending. Senza, il
+      // rilievo `major` arrivava solo al gate di ammissione, che blocca i soli
+      // `critical`, e il body ridotto finiva su disco.
+      const truncationOpts = { label: `${locale}/${field}`, locale, referenceText: itContent[field] };
+      const isTruncated = isRealTranslationTruncation(detectTruncation(text, truncationOpts));
       if (!isTruncated) continue;
       const itValue = itContent[field];
       let pendingReason = 'truncation-retry-unusable';
@@ -11582,7 +11620,7 @@ ${terminologyByLang[targetLang] || ''}`;
         // accettazione di un body tradotto.
         const retriedPassthrough = isSourcePassthrough(retried, itValue);
         if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
-        if (retried && !retriedPassthrough && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
+        if (retried && !retriedPassthrough && !isRealTranslationTruncation(detectTruncation(retried, truncationOpts))) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;
@@ -11686,7 +11724,11 @@ ${terminologyByLang[targetLang] || ''}`;
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
-      if (detectTruncation(text, { label: `${locale}/${field}` }).length > 0) return 'troncato';
+      // Stesso predicato del retry di troncamento: riferimento italiano, quindi
+      // anche `translation-semantic-truncation` `word-ratio` (un body chiuso da
+      // un punto ma ridotto), e `paragraph-drop` lasciato alla diagnosi.
+      const truncation = detectTruncation(text, { label: `${locale}/${field}`, locale, referenceText: itValue });
+      if (isRealTranslationTruncation(truncation)) return 'troncato';
       return null;
     },
     finalize: (text) => sanitizeBodyText(text),
@@ -14021,7 +14063,7 @@ function validateBodyFileSyntax(filePath, content) {
 }
 
 function escapeRegex(s) {
-  return String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return escapeRegExpLiteral(String(s || ''));
 }
 
 /**
