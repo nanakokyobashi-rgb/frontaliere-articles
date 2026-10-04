@@ -99289,6 +99289,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tappi-chiodi-parcheggio-luino': {
+    title: 'Luino, tappi con chiodi nel parcheggio dietro al Tigros',
+    description: 'Allarme a Luino: trovati tappi con chiodi rivolti verso l\'alto nel parcheggio usato dalle autoscuole. La denuncia di Paolo Nicastri sulla sicurezza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, luino, tappi, chiodi, parcheggio',
+    ogTitle: 'Luino, tappi con chiodi nel parcheggio dietro al Tigros',
+    ogDescription: 'Segnalazione di pericolo a Luino: rinvenuti tappi con chiodi nel parcheggio utilizzato per gli esami della patente moto. L\'appello dell\'ex candidato sindaco Nicastri.',
+    canonicalPath: '/articoli-frontaliere/tappi-chiodi-parcheggio-luino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luino, tappi con chiodi nel parcheggio dietro al Tigros",
+      "description": "Allarme a Luino: trovati tappi con chiodi rivolti verso l'alto nel parcheggio usato dalle autoscuole. La denuncia di Paolo Nicastri sulla sicurezza.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tappi-chiodi-parcheggio-luino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tappi di sughero con chiodi trovati in un parcheggio a Luino"
+      },
+      "datePublished": "2026-10-04T00:30:47+00:00",
+      "dateModified": "2026-10-04T00:30:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tappi-chiodi-parcheggio-luino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
