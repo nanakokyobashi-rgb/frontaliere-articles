@@ -718,6 +718,10 @@ function removeWordSequence(norm, words) {
  * pool sta crescendo (create-article.mjs), e una chiave che la rispecchiasse
  * cambierebbe significato sotto i piedi al primo cantone aggiunto. Qui si
  * legge il TESTO dell'articolo, come per i mestieri e per i comuni.
+ * Basilea e Appenzello hanno anche un alias aggregato storico, ma le varianti
+ * qualificate usano i codici reali dei semicantoni (BS/BL e AR/AI). Il match
+ * più specifico vince dentro lo stesso gruppo: «Basilea Città» non può quindi
+ * collassare su «Basilea».
  *
  * Le varianti «canton»/«cantone»/senza prefisso non compaiono perché non
  * servono: si cerca il nome del cantone, e il prefisso resta fuori dal match.
@@ -734,9 +738,13 @@ const CANTON_ALIASES = [
   ['zugo', ['zugo', 'zug']],
   ['friburgo', ['friburgo', 'fribourg', 'freiburg']],
   ['soletta', ['soletta', 'solothurn']],
-  ['basilea', ['basilea', 'basel']],
+  ['basilea', ['basilea', 'basel'], 'basilea'],
+  ['BS', ['basilea citta', 'basel stadt', 'bale ville'], 'basilea'],
+  ['BL', ['basilea campagna', 'basel landschaft', 'bale campagne'], 'basilea'],
   ['sciaffusa', ['sciaffusa', 'schaffhausen']],
-  ['appenzello', ['appenzello', 'appenzell']],
+  ['appenzello', ['appenzello', 'appenzell'], 'appenzello'],
+  ['AR', ['appenzello esterno', 'appenzell ausserrhoden', 'appenzell rhodes exterieures'], 'appenzello'],
+  ['AI', ['appenzello interno', 'appenzell innerrhoden', 'appenzell rhodes interieures'], 'appenzello'],
   ['san-gallo', ['san gallo', 'sangallo', 'st gallen']],
   ['grigioni', ['grigioni', 'graubunden']],
   ['argovia', ['argovia', 'aargau']],
@@ -776,8 +784,8 @@ const CANTON_THEMES = [
   ['assistenza-sociale', /(assistenza sociale)/],
   ['incentivi-energetici', /(incentivi energetici|sussidi energetici)/],
   ['autorizzazione-edilizia', /(autorizzazione edilizia|autorizzazioni edilizie|permesso edilizio|permessi edilizi)/],
-  ['voto-cantonale', /(voto cantonale)/],
-  ['elezioni-cantonali', /(elezioni cantonali)/],
+  ['voto-cantonale', /(?:vot[oi]|votazion(?:e|i)) canton(?:ale|ali)/],
+  ['elezioni-cantonali', /elezion(?:e|i) canton(?:ale|ali)/],
   ['protezione-civile', /(protezione civile)/],
   ['assicurazione-immobili', /(assicurazione (degli )?(immobili|edifici))/],
   ['formazione-continua', /(formazione continua)/],
@@ -812,9 +820,25 @@ export function cantonThemeTopicKey(text) {
   if (!norm) return null;
   if (!CANTON_GUIDE_INTENT_RE.test(norm)) return null;
 
-  const named = CANTON_ALIASES
-    .filter(([, aliases]) => aliases.some((a) => new RegExp(`(^| )${a}( |$)`).test(norm)))
-    .map(([id]) => id);
+  const namedByGroup = new Map();
+  const tokens = norm.split(' ');
+  const containsAlias = (alias) => {
+    const words = alias.split(' ');
+    return tokens.some((_, start) => words.every((word, offset) => tokens[start + offset] === word));
+  };
+  for (const [id, aliases, group = id] of CANTON_ALIASES) {
+    const matchedLength = aliases
+      .filter(containsAlias)
+      .reduce((longest, alias) => Math.max(longest, alias.split(' ').length), 0);
+    if (matchedLength === 0) continue;
+    const current = namedByGroup.get(group);
+    if (!current || matchedLength > current.length) {
+      namedByGroup.set(group, { length: matchedLength, ids: new Set([id]) });
+    } else if (matchedLength === current.length) {
+      current.ids.add(id);
+    }
+  }
+  const named = [...namedByGroup.values()].flatMap(({ ids }) => [...ids]);
   // Più di un cantone = un confronto, non un focus. «Zugo e Svitto, meno
   // costosi di Ginevra e Vaud» non è la guida-Ginevra del pool.
   if (named.length > 1) return null;
@@ -889,6 +913,20 @@ export function topicCoverageKey(article) {
   return key;
 }
 
+/**
+ * La keyword evergreen è una prova più affidabile del titolo generato quando
+ * il modello deve comprimere una query lunga. Il produttore può quindi
+ * trasportare una chiave già calcolata senza rendere enumerabile lo scratch
+ * property che la contiene nell'articolo finale.
+ */
+function candidateTopicCoverageKey(candidate, opts = {}) {
+  const expected = opts.candidateTopicKey || candidate?._candidateTopicKey;
+  if (expected && typeof expected.kind === 'string' && typeof expected.value === 'string' && expected.value) {
+    return expected;
+  }
+  return topicCoverageKey(candidate);
+}
+
 function computeTopicCoverageKey(text) {
   if (hasProfessionGuideIntent(text)) {
     const professionId = professionTopicKey(text);
@@ -946,11 +984,11 @@ export function setMunicipalityIndexForTests(index) {
  *
  * @param {{id?: string, title?: string}} candidate
  * @param {Array<{id?: string, title?: string, date?: string}>} existingArticles
- * @param {{now?: number|Date, windowDays?: number}} [opts]
+ * @param {{now?: number|Date, windowDays?: number, candidateTopicKey?: {kind: string, value: string}}} [opts]
  * @returns {{kind: string, value: string, existingId: string, existingTitle: string, ageDays: number}|null}
  */
 export function findRecentTopicCoverage(candidate, existingArticles, opts = {}) {
-  const key = topicCoverageKey(candidate);
+  const key = candidateTopicCoverageKey(candidate, opts);
   if (!key) return null;
 
   const windowDays = typeof opts.windowDays === 'number'
@@ -1000,13 +1038,17 @@ export function findRecentTopicCoverage(candidate, existingArticles, opts = {}) 
  *
  * @param {object} data — legge data.id e data.content.it.title
  * @param {Array<{id?: string, title?: string, date?: string}>} existingArticles
- * @param {{now?: number|Date, windowDays?: number, log?: (m: string) => void}} [opts]
+ * @param {{now?: number|Date, windowDays?: number, log?: (m: string) => void, candidateTopicKey?: {kind: string, value: string}}} [opts]
  * @returns {object} lo stesso `data`
  * @throws {Error} quando l'argomento è già coperto entro la finestra
  */
 export function assertTopicNotRecentlyCovered(data, existingArticles, opts = {}) {
   const log = opts.log || ((msg) => console.error(msg));
-  const candidate = { id: data?.id, title: data?.content?.it?.title || '' };
+  const candidate = {
+    id: data?.id,
+    title: data?.content?.it?.title || '',
+    _candidateTopicKey: data?._candidateTopicKey,
+  };
   const hit = findRecentTopicCoverage(candidate, existingArticles, opts);
 
   if (hit) {
@@ -1030,7 +1072,7 @@ export function assertTopicNotRecentlyCovered(data, existingArticles, opts = {})
     throw err;
   }
 
-  const key = topicCoverageKey(candidate);
+  const key = candidateTopicCoverageKey(candidate, opts);
   if (key) {
     const label = (TOPIC_KINDS[key.kind] || { label: key.kind }).label;
     log(`  ✅ ${label} "${key.value}" non coperto di recente`);

@@ -321,6 +321,14 @@ test('il ramo `svizzera` di topicPool usa il builder strutturale nazionale', () 
   );
 });
 
+test('il fallback evergreen trasporta la chiave candidata fino al gate', () => {
+  const pick = SRC.indexOf('const candidateTopicKey = topicCoverageKey({ id: topic.keyword, title: topic.keyword });');
+  assert.notEqual(pick, -1, 'il fallback non calcola la chiave della keyword selezionata');
+  const call = SRC.slice(pick, SRC.indexOf('// Tick evergreen counter on success', pick));
+  assert.match(call, /_candidateTopicKey: candidateTopicKey/);
+  assert.match(SRC, /Object\.defineProperty\(data, '_candidateTopicKey'/);
+});
+
 // ── 7. Telemetria della saturazione ──────────────────────────────────────
 //
 // Il pool piu' grande sposta la data della prossima saturazione, non la

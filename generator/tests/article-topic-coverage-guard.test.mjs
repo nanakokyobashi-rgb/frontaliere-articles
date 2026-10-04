@@ -348,6 +348,14 @@ describe('gate argomento-già-coperto — (pilastro tematico × cantone)', () =>
     expect(cantonThemeTopicKey(b)).toBe('terzo-pilastro:basilea');
   });
 
+  it('distingue i semicantoni qualificati di Basilea e Appenzello', () => {
+    expect(cantonThemeTopicKey('Guida al salario minimo nel canton Basilea Città')).toBe('salario-minimo:BS');
+    expect(cantonThemeTopicKey('Guida al salario minimo nel canton Basilea Campagna')).toBe('salario-minimo:BL');
+    expect(cantonThemeTopicKey('Guida al salario minimo nel canton Appenzello Esterno')).toBe('salario-minimo:AR');
+    expect(cantonThemeTopicKey('Guida al salario minimo nel canton Appenzello Interno')).toBe('salario-minimo:AI');
+    expect(cantonThemeTopicKey('Guida al salario minimo nel canton Basilea Città e Basilea Campagna')).toBe(null);
+  });
+
   it('stesso pilastro ma cantoni DIVERSI: legittimi, il pool li genera apposta', () => {
     expect(keyOf(LAMAL_GINEVRA)).toBe('canton-theme:lamal-premi:ginevra');
     expect(keyOf(LAMAL_BERNA)).toBe('canton-theme:lamal-premi:berna');
@@ -424,7 +432,10 @@ describe('gate argomento-già-coperto — (pilastro tematico × cantone)', () =>
       ['Autorizzazione edilizia canton Zurigo: requisiti e procedura', 'autorizzazione-edilizia:zurigo'],
       ['Autorizzazioni edilizie canton Zurigo: requisiti e procedura', 'autorizzazione-edilizia:zurigo'],
       ['Voto cantonale canton Zurigo: guida a iniziative e referendum', 'voto-cantonale:zurigo'],
+      ['Votazione cantonale canton Zurigo: guida a iniziative e referendum', 'voto-cantonale:zurigo'],
+      ['Votazioni cantonali canton Zurigo: guida a iniziative e referendum', 'voto-cantonale:zurigo'],
       ['Elezioni cantonali canton Zurigo: guida a calendario e voto', 'elezioni-cantonali:zurigo'],
+      ['Elezione cantonale canton Zurigo: guida a calendario e voto', 'elezioni-cantonali:zurigo'],
       ['Protezione civile canton Zurigo: requisiti e indennità', 'protezione-civile:zurigo'],
       ['Assicurazione immobili canton Zurigo: guida a obbligo e premi', 'assicurazione-immobili:zurigo'],
       ['Assicurazione degli edifici canton Zurigo: guida a obbligo e premi', 'assicurazione-immobili:zurigo'],
@@ -433,6 +444,31 @@ describe('gate argomento-già-coperto — (pilastro tematico × cantone)', () =>
     for (const [text, expected] of cases) {
       expect(cantonThemeTopicKey(text)).toBe(expected);
     }
+  });
+
+  it('usa la chiave della keyword quando titolo e slug generati la perdono', () => {
+    const data = {
+      id: 'salario-minimo-requisiti-e-applicazione',
+      content: { it: { title: 'Salario minimo: requisiti e applicazione' } },
+    };
+    Object.defineProperty(data, '_candidateTopicKey', {
+      value: { kind: 'canton-theme', value: 'salario-minimo:zurigo' },
+      configurable: true,
+    });
+    const existing = [{
+      id: 'salario-minimo-canton-zurigo-requisiti',
+      title: 'Salario minimo canton Zurigo: requisiti e applicazione',
+      date: '2026-09-30T00:00:00.000Z',
+    }];
+    let thrown = null;
+    try {
+      assertTopicNotRecentlyCovered(data, existing, {
+        now: Date.parse('2026-10-01T00:00:00.000Z'),
+        log: () => {},
+      });
+    } catch (err) { thrown = err; }
+    expect(thrown).not.toBe(null);
+    expect(thrown.message).toContain('salario-minimo:zurigo');
   });
 });
 

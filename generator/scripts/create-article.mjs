@@ -257,7 +257,7 @@ import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
 import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
-import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug } from './lib/topic-coverage-guard.mjs';
+import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug, topicCoverageKey } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
@@ -15788,7 +15788,13 @@ async function main() {
           process.env._EVERGREEN_ANGLE = topic.angle;
           process.env._EVERGREEN_KEYWORD = topic.keyword;
 
-          await generateAndValidateArticle(url, { headline: topic.keyword, source: 'evergreen', relatedHeadlines: [] });
+          const candidateTopicKey = topicCoverageKey({ id: topic.keyword, title: topic.keyword });
+          await generateAndValidateArticle(url, {
+            headline: topic.keyword,
+            source: 'evergreen',
+            relatedHeadlines: [],
+            _candidateTopicKey: candidateTopicKey,
+          });
           // Tick evergreen counter on success (round-robin advance).
           try {
             _persistEvergreenCounter({ count: (evergreenCounterState.count || 0) + 1 });
@@ -16260,6 +16266,16 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // gate at the bottom of this function actually enforces.
     try {
       data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(lengthBudgetSource) });
+      // Evergreen keywords define the intended topic even when the model
+      // shortens a title/slug past the theme or canton. Keep that key in a
+      // non-enumerable scratch property so the coverage gate cannot fail open
+      // and the property cannot change the generated article shape.
+      if (sourceContext?._candidateTopicKey) {
+        Object.defineProperty(data, '_candidateTopicKey', {
+          value: sourceContext._candidateTopicKey,
+          configurable: true,
+        });
+      }
       // Validation passed — any earlier id/slug rejection no longer applies to
       // this draft, so clear it rather than carry it (stale) into a later
       // retry triggered by an unrelated check further down.
@@ -16946,7 +16962,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // Sta qui, dopo checkForDuplicates, perché questo è il punto obbligato di
   // OGNI percorso di generazione — news, evergreen, discovery — mentre il
   // pre-flight evergreen vede solo i candidati evergreen.
-  assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
+  try {
+    assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
+  } finally {
+    delete data._candidateTopicKey;
+  }
   // Step 3a.5: «titolo scollegato dallo slug» (#527) — nella serie
   // vivere-/trasferirsi- lo slug esce da un template che porta il comune per
   // costruzione; se il titolo non nomina lo stesso comune promette una guida
