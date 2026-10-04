@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4056678": {
-    "articleId": "tardoc-medici-famiglia-svizzera",
-    "ts": "2026-09-03T12:29:03.974Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/economia-svizzera-in-forte-crescita%2c-stima-trimestrale-confermata/91998072": {
     "articleId": "economia-svizzera-crescita-q2-2026",
     "ts": "2026-09-03T12:45:38.828Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/bilaterali%3a-ceo-axa%2c-%22sono-importanti%2c-ma-non-decisivi%22/92165322": {
     "articleId": "axa-ue-svizzera-posizione",
     "ts": "2026-10-04T20:19:09.215Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1954645/federale-consiglio-donne-problema-donna": {
+    "articleId": "rita-fuhrer-consiglio-federale",
+    "ts": "2026-10-04T22:14:58.372Z",
     "keyForm": 2
   }
 }
