@@ -793,10 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954389/protesta-scontri-violenze-stato-ministro": {
-      "section": "svizzera",
-      "ts": 1790973583388
-    },
     "frontaliere::https://www.varesenews.it/2026/10/controllo-lavoratori-a-distanza-reato-senza-accordo-o-autorizzazione/2694982": {
       "section": "frontaliere",
       "ts": 1791003371812
@@ -1016,6 +1012,14 @@
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/la-festa-d%e2%80%99autunno-anima-lugano--4133136.html": {
       "section": "frontaliere",
       "ts": 1791143743510
+    },
+    "frontaliere::https://www.rsi.ch/info/economia/swiss-steel-ristruttura-e-taglia-in-germania--4132557.html": {
+      "section": "frontaliere",
+      "ts": 1791148788078
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/dal-castello-sforzesco-coop-racconta-un-territorio-fatto-di-prodotti-imprese-e-comunita/2697754": {
+      "section": "frontaliere",
+      "ts": 1791149227711
     }
   }
 }
