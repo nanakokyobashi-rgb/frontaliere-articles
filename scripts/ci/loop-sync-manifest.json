@@ -4112,8 +4112,8 @@
       "path": "scripts/ci/reconcile-conflict-handoffs.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "35e1fc7c2f37fefd",
-        "corpus": "35e1fc7c2f37fefd",
+        "site": "490a4b6b461b4e33",
+        "corpus": "490a4b6b461b4e33",
         "alignedAt": "2026-10-04"
       }
     },
