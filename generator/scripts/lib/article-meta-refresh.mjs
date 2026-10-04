@@ -76,6 +76,7 @@ import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
+import { escapeRegExpLiteral } from './escape-regexp.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Two levels up from `generator/scripts/lib/` is `generator/`; one more is the
@@ -163,7 +164,7 @@ function writeCorpusFile(file, content) {
 }
 
 function escapeRegex(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return escapeRegExpLiteral(s);
 }
 
 function findUniqueSeoEntry(src, id) {

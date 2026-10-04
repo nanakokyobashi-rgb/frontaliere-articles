@@ -153,6 +153,14 @@ function extractTranslationChunkThreshold() {
 
 const TRANSLATION_CHUNK_THRESHOLD = extractTranslationChunkThreshold();
 
+// Il loop decide «troncato» col predicato condiviso con la seconda corsia dei
+// body in attesa: ritagliato verbatim dal sorgente, come il loop stesso.
+const REAL_TRUNCATION_SRC = (() => {
+  const at = src.indexOf('function isRealTranslationTruncation(issues) {');
+  assert.notEqual(at, -1, 'isRealTranslationTruncation non trovata — aggiornare questo test');
+  return src.slice(at, src.indexOf('\n}\n', at) + 2);
+})();
+
 /**
  * Esegue il loop ritagliato dentro una funzione async iniettando i mock come
  * variabili di chiusura (stessa forma delle dipendenze reali di
@@ -172,7 +180,7 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
     'data', 'itContent', 'detectTruncation', 'callWithRetry', 'translateInChunks',
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
     'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough',
-    `return (async () => { ${LOOP_SRC} })();`,
+    `${REAL_TRUNCATION_SRC}\nreturn (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,

@@ -8,6 +8,8 @@
  * geografico generico che introdurrebbe falsi positivi.
  */
 
+import { escapeRegExpLiteral } from './escape-regexp.mjs';
+
 const CANTON_TOPONYMS_INTERNAL = {
   ticino: [
     'ticino',
@@ -97,7 +99,7 @@ function fold(value) {
 }
 
 function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+  return escapeRegExpLiteral(value);
 }
 
 function containsWholeTerm(text, term, { caseSensitive = false } = {}) {

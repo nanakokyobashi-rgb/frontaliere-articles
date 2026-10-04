@@ -51,7 +51,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { runFactualityGates, formatIssues } from '../scripts/lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
+import { markBodyTranslationPending, isBodyTranslationPending } from '../scripts/lib/free-mt-recovery.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -108,6 +109,7 @@ function makeGate() {
   const factory = new Function(
     'runFactualityGates',
     'formatIssues',
+    'isBodyTranslationPending',
     'console',
     `${SECTIONS_SRC}\n${ADMISSION_CONSTANTS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
@@ -115,6 +117,7 @@ function makeGate() {
   return factory(
     runFactualityGates,
     formatIssues,
+    isBodyTranslationPending,
     { error: () => {} },
   );
 }
@@ -141,7 +144,20 @@ function articolo({ enBody1, itExtra = {}, enExtra = {} }) {
         body2: 'The median salary of cross-border commuters is 5.000 francs per month.',
         body3: 'For cross-border commuters the agreement provides an exemption.',
       },
+      // Il gate tratta un locale assente come un buco (vedi #9d): de e fr
+      // portano la resa pulita, cosi' ogni caso giudica solo cio' che mette in en.
+      de: tradottoPulito(itExtra),
+      fr: tradottoPulito(itExtra),
     },
+  };
+}
+
+function tradottoPulito(itExtra) {
+  return {
+    body1: EN_PULITO,
+    body2: 'The median salary of cross-border commuters is 5.000 francs per month.',
+    body3: 'For cross-border commuters the agreement provides an exemption.',
+    ...(itExtra.body4 ? { body4: 'Cross-border commuters find the border-crossing summary at the end.' } : {}),
   };
 }
 
@@ -286,6 +302,173 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
     'critical-fact',
   ]);
   assert.equal(result.passed, false);
+});
+
+// ── #8 Traduzione ridotta a «...» ─────────────────────────────────────────
+//
+// `como-fai-giornate-autunno` (generato il 2026-10-03) e' uscito con de/body1,
+// en/body1 e fr/body2/body3 uguali a '...' (piu', in coda, il blocco strumenti
+// appeso dopo la traduzione). '...' finisce con un punto, quindi il controllo
+// di punteggiatura lo lascia passare: serve il confronto con l'italiano
+// (`translation-semantic-truncation`), che la copia gemella del sito aveva
+// gia' e quella del corpus no — il gemello `identical` si era mosso sui due
+// lati e il trasporto, che porta solo `site-ahead`, si era fermato.
+const IT_LUNGO = {
+  body1: 'Le Giornate FAI d\'autunno aprono a Como sabato e domenica una serie di luoghi '
+    + 'normalmente chiusi al pubblico. Le visite sono guidate da volontari e apprendisti '
+    + 'ciceroni delle scuole superiori, durano circa quaranta minuti e richiedono un '
+    + 'contributo libero. Per i frontalieri che rientrano il venerdi\' sera e\' '
+    + 'consigliata la prenotazione online, perche\' i posti nei gruppi sono limitati.',
+  body2: 'Tra i luoghi aperti ci sono una villa sul lago, la biblioteca di un seminario '
+    + 'e un rifugio antiaereo della seconda guerra mondiale. Chi arriva dal Ticino puo\' '
+    + 'usare il treno regionale fino alla stazione di San Giovanni e proseguire a piedi '
+    + 'verso il centro storico in meno di quindici minuti, evitando i parcheggi a '
+    + 'pagamento del lungolago che nel fine settimana si riempiono presto.',
+  body3: 'Gli orari variano da un sito all\'altro: in genere le visite iniziano alle dieci '
+    + 'e terminano alle diciassette, con ultimo ingresso mezz\'ora prima della chiusura. '
+    + 'In caso di pioggia alcuni percorsi all\'aperto vengono ridotti, mentre le visite '
+    + 'agli interni restano confermate. Il programma completo e\' pubblicato sul sito '
+    + 'della delegazione locale e aggiornato fino al giorno prima.',
+};
+const EN_LUNGO = {
+  body1: 'The autumn FAI Days open a series of places in Como on Saturday and Sunday that '
+    + 'are normally closed to the public. The tours are led by volunteers and apprentice '
+    + 'guides from secondary schools, last about forty minutes and ask for a free '
+    + 'donation. Cross-border commuters who return home on Friday evening are advised to '
+    + 'book online, because places in each group are limited.',
+  body2: 'The open sites include a lakeside villa, the library of a seminary and an air-raid '
+    + 'shelter from the Second World War. Visitors coming from Ticino can take the '
+    + 'regional train to San Giovanni station and walk to the old town in less than '
+    + 'fifteen minutes, avoiding the paid car parks on the lakefront that fill up '
+    + 'quickly at weekends.',
+  body3: 'Opening times vary from site to site: tours usually start at ten and end at five, '
+    + 'with last entry half an hour before closing. If it rains some outdoor routes are '
+    + 'shortened, while the indoor tours remain confirmed. The full programme is published '
+    + 'on the website of the local delegation and updated until the day before.',
+};
+
+test('#8 rigetta un body tradotto ridotto a «...» anche se finisce con un punto', () => {
+  const gate = makeGate();
+  const data = {
+    content: {
+      it: { ...IT_LUNGO },
+      en: {
+        ...EN_LUNGO,
+        body1: '...',
+        body2: '...\n\n## Recommended Tools\nFor a current estimate use the [net salary calculator](nav:calculator).',
+      },
+      de: { ...EN_LUNGO },
+      fr: { ...EN_LUNGO },
+    },
+  };
+  let thrown = null;
+  try {
+    gate(data);
+  } catch (e) {
+    thrown = e;
+  }
+  assert.ok(thrown, 'una traduzione «...» e\' passata dal gate di ammissione — il gemello senza detectSemanticTruncation e\' tornato');
+  assert.equal(thrown.qualityReject, true, 'il rigetto deve essere di qualita\', non un errore infra');
+  assert.match(thrown.message, /translation-semantic-truncation/);
+  assert.match(thrown.message, /\[en\/body1\]/);
+  assert.match(thrown.message, /\[en\/body2\]/);
+});
+
+test('#8b la stessa traduzione completa passa (il confronto non punisce una resa fedele)', () => {
+  const gate = makeGate();
+  assert.doesNotThrow(() => gate({ content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } }));
+});
+
+// ── #9 Body in attesa: assenza autorizzata contro buco non dichiarato ──────
+//
+// `translation-section-missing` e' `critical`: senza distinguere, un body che
+// `translateArticle()` ha lasciato NON tradotto col marker pending (la SPA
+// ripiega sull'italiano, il recupero lo ritraduce) rigettava l'intero articolo,
+// e un locale senza alcun body saltava il gate anche quando nessuno aveva
+// dichiarato l'assenza.
+function senzaBody(fields) {
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } };
+  for (const f of fields) delete data.content.en[f];
+  return data;
+}
+
+test('#9 un body in attesa (marker pending) non fa rigettare l\'articolo', () => {
+  const gate = makeGate();
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } };
+  markBodyTranslationPending(data, { locale: 'en', field: 'body2', reason: 'truncation-retry-unusable' });
+  assert.equal(data.content.en.body2, undefined, 'il marker toglie il campo, come in translateArticle()');
+  assert.doesNotThrow(() => gate(data));
+});
+
+test('#9b un body assente SENZA marker resta un buco bloccante', () => {
+  const gate = makeGate();
+  assert.throws(
+    () => gate(senzaBody(['body2'])),
+    (error) => error?.qualityReject === true && /translation-section-missing/.test(error.message),
+  );
+});
+
+test('#9d un locale del tutto assente e\' un buco, non un locale da saltare', () => {
+  const gate = makeGate();
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO } } };
+  assert.throws(
+    () => gate(data),
+    (error) => error?.qualityReject === true && /\[fr\/body1\] Sezione presente nell'italiano/.test(error.message),
+    'senza data.content.fr il gate saltava il locale e l\'articolo arrivava alla scrittura',
+  );
+});
+
+test('#9c un locale senza alcun body passa solo se ogni body e\' in attesa', () => {
+  const gate = makeGate();
+  assert.throws(
+    () => gate(senzaBody(['body1', 'body2', 'body3'])),
+    (error) => error?.qualityReject === true && /translation-section-missing/.test(error.message),
+    'tre body spariti senza marker non possono saltare il gate',
+  );
+  const tuttiPending = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } };
+  for (const field of ['body1', 'body2', 'body3']) {
+    markBodyTranslationPending(tuttiPending, { locale: 'en', field, reason: 'retry-error' });
+  }
+  assert.doesNotThrow(() => gate(tuttiPending));
+});
+
+// ── #10 Il troncamento semantico accende il retry della traduzione ─────────
+//
+// Il gate di ammissione blocca i soli `critical`: un body che conserva fra il
+// 50% e la soglia delle parole italiane esce `major` e da li' passava. Il
+// posto giusto per agire e' il retry di `translateArticle()`, che gia' ritraduce
+// un body troncato e, se il retry fallisce, lo lascia in attesa invece di
+// pubblicarlo: deve vedere anche il troncamento semantico.
+test('#10 il retry di troncamento di translateArticle confronta con l\'italiano', () => {
+  const start = src.indexOf('const truncationOpts = {');
+  assert.notEqual(start, -1, 'il loop di retry non costruisce piu\' le opzioni condivise — aggiornare questo test');
+  const loop = src.slice(start, src.indexOf('markBodyTranslationPending(data', start));
+  assert.match(loop.split('\n')[0], /referenceText: itContent\[field\]/, 'il retry deve passare l\'italiano come riferimento');
+  assert.match(loop.split('\n')[0], /\blocale\b/, 'senza locale il confronto si spegne (l\'italiano non si giudica)');
+  assert.match(loop, /isRealTranslationTruncation\(detectTruncation\(text, truncationOpts\)\)/, 'il retry non deve togliere un body solo accorpato (paragraph-drop)');
+  assert.match(cutFunction('isRealTranslationTruncation', ['paragraph-drop']), /i\.rule === 'paragraph-drop'/);
+  const calls = loop.match(/detectTruncation\([^)]*\)/g) || [];
+  assert.equal(calls.length, 2, 'rilevazione e verifica del retry: due chiamate');
+  for (const call of calls) assert.match(call, /truncationOpts/, `${call} non usa il riferimento italiano`);
+
+  // E il riferimento cambia davvero il verdetto: un body chiuso da un punto
+  // ma con meta' delle parole e' pulito senza italiano, troncato con.
+  const meta = EN_LUNGO.body1.split(' ').slice(0, 30).join(' ') + '.';
+  assert.deepEqual(detectTruncation(meta, { label: 'en/body1' }), []);
+  assert.ok(
+    detectTruncation(meta, { label: 'en/body1', locale: 'en', referenceText: IT_LUNGO.body1 })
+      .some((i) => i.code === 'translation-semantic-truncation'),
+  );
+});
+
+// ── #11 La seconda corsia dei body in attesa usa lo stesso predicato ───────
+test('#11 la seconda corsia Codex rifiuta un body ridotto come il retry di troncamento', () => {
+  const at = src.indexOf('rejectReason: ({ locale, field, itValue, text }) => {');
+  assert.notEqual(at, -1, 'rejectReason della seconda corsia non trovato — aggiornare questo test');
+  const body = src.slice(at, src.indexOf('finalize:', at));
+  assert.match(body, /referenceText: itValue/, 'senza riferimento italiano un body chiuso ma ridotto passa la corsia');
+  assert.match(body, /\blocale\b[^\n]*referenceText/, 'senza locale il confronto si spegne');
+  assert.match(body, /isRealTranslationTruncation\(/, 'stesso predicato del retry, non una seconda regola');
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {

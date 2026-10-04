@@ -272,13 +272,20 @@ test('la corsia si arma solo nel percorso CLI: i producer importati (publish-jou
   assert.match(src, /pending_recovered=\$\{JSON\.stringify\(recovery\.pendingBodyRecovered \|\| \{\}\)\}/);
 });
 
+/** Il predicato condiviso col retry di troncamento, ritagliato verbatim dal sorgente. */
+function realTruncationSrc() {
+  const at = src.indexOf('function isRealTranslationTruncation(issues) {');
+  assert.notEqual(at, -1, 'isRealTranslationTruncation non trovata — aggiornare questo test');
+  return src.slice(at, src.indexOf('\n}\n', at) + 2);
+}
+
 async function runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCodex, codexAvailable = true }) {
   const { block } = extractSecondLaneBlock();
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
     'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyLaneShouldStop',
     'translatePendingBodyWithCodex', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
-    `return (async () => { ${block} })();`,
+    `${realTruncationSrc()}\nreturn (async () => { ${block} })();`,
   );
   const quiet = { error: () => {}, warn: () => {}, log: () => {} };
   await fn(
