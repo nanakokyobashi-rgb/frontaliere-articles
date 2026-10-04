@@ -499,8 +499,8 @@
       "mode": "identical",
       "reason": "Classifica e instrada i bullet di `## Non implementato (ancora)` per il triage di post-merge-followup.yml (sezione `## Candidate bullets` del bundle). Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#11209): importa solo scripts/lib/pr-body-sections-check.mjs e scripts/ci/followup-has-candidates.mjs, entrambi identical e gia' presenti qui. Qui gira con --side corpus e il manifest letto dal disco.",
       "baseline": {
-        "site": "3dfa84c8ec742681",
-        "corpus": "3dfa84c8ec742681",
+        "site": "35e55adcccec2f4c",
+        "corpus": "35e55adcccec2f4c",
         "alignedAt": "2026-10-04"
       }
     },
@@ -509,8 +509,8 @@
       "mode": "identical",
       "reason": "Ammissione al conio dei daily follow-up (bullet gia' chiusi, bersagli assenti, item nati col token gia' vero), sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#11313 e #11341) e importato da scripts/ci/gate-minted-followups.mjs (adapted): senza questa copia il passaggio del corpus sigillava i bucket del corpus senza i controlli che il passaggio del sito applica. Importa scripts/ci/followup-resolution-match.mjs (adapted: qui espone gli stessi simboli, detectAlreadyResolved con la stessa firma) e scripts/ci/followup-candidate-bullets.mjs (identical), allo stesso path nei due repository; nessuna I/O diretta, l'io e il manifest li inietta il gate.",
       "baseline": {
-        "site": "f6f265b31a65b577",
-        "corpus": "f6f265b31a65b577",
+        "site": "00aaea476d5fa630",
+        "corpus": "00aaea476d5fa630",
         "alignedAt": "2026-10-04"
       }
     },
@@ -585,8 +585,8 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "4fd0a9542573635c",
-        "corpus": "4fd0a9542573635c",
+        "site": "153e7a012e9f2959",
+        "corpus": "153e7a012e9f2959",
         "alignedAt": "2026-10-04"
       }
     },
@@ -623,9 +623,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "bececdc15d5a0e8c",
-        "corpus": "bececdc15d5a0e8c",
-        "alignedAt": "2026-10-02"
+        "site": "65bc7f8e65b88fbc",
+        "corpus": "65bc7f8e65b88fbc",
+        "alignedAt": "2026-10-04"
       }
     },
     {
@@ -843,8 +843,8 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "fad260f2f029e205",
-        "corpus": "fad260f2f029e205",
+        "site": "613f1c89ff5888a0",
+        "corpus": "613f1c89ff5888a0",
         "alignedAt": "2026-10-04"
       }
     },
@@ -955,8 +955,8 @@
       "mode": "identical",
       "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` dice se un monitor (`🔁 **Reopened**` di `scripts/lib/github-issue-creator.mjs`) ha riaperto il padre decomposto DOPO l'ultimo marker `DECOMPOSED_INTO`; in quel caso il PARENT-CLOSE non lo richiude (valerielinc-ops/frontaliere-si-o-no#11312, origine site 5661; qui #339 «Loop drift», 25 PARENT-CLOSE e 35 riaperture al 2026-10-04). Copiata byte-per-byte dal sito: modulo puro, nessun adattamento. Il drainer adattato importa `reopenedAfterDecomposition` e `decomposedIntoNumbers` (unica definizione di `DECOMPOSED_INTO_RE`, come sul sito); il resto del delta del drainer non e' riconciliato in questo giro. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` confronta lo sha256 del file con questa baseline.",
       "baseline": {
-        "site": "7215ecceeb0599df",
-        "corpus": "7215ecceeb0599df",
+        "site": "2547bd9672848f53",
+        "corpus": "2547bd9672848f53",
         "alignedAt": "2026-10-04"
       }
     },
@@ -2768,9 +2768,9 @@
       "mode": "identical",
       "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. RIALLINEATA il 2026-08-14: era il terzo ritardo pre-esistente alla baseline (blob fermo al trasporto `valerielinc-ops@be6b31d5` del 2026-08-02, mentre il sito aggiungeva il 2026-08-05 con 21e2d13d `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`). Il ritardo non aveva effetto funzionale qui — misurato prima di copiare: l'unico importatore locale prende `PROFESSION_TAXONOMY` e nessuno dei quattro simboli nuovi compare in un solo file di questo repo — quindi la copia e' additiva e non cambia comportamento. E' pero' proprio il caso in cui il ritardo si sarebbe fatto sentire in silenzio il giorno in cui `evergreen-topic-generator.mjs` (a sua volta `identical`) fosse sceso dal sito gia' usandoli: un import di un export inesistente e' `undefined`, non un errore.",
       "baseline": {
-        "site": "f3b22ce1f9c02f1a",
-        "corpus": "f3b22ce1f9c02f1a",
-        "alignedAt": "2026-08-21"
+        "site": "c9024ec94b84e03b",
+        "corpus": "c9024ec94b84e03b",
+        "alignedAt": "2026-10-04"
       }
     },
     {
