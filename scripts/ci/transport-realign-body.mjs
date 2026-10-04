@@ -81,6 +81,71 @@ export function convergedBulletLine({ path: filePath, hash }) {
     + ': baseline riattestata, i due lati si sono mossi e coincidono già byte per byte (hash `' + hash + '`)';
 }
 
+const TRANSPORT_WORKFLOW = '.github/workflows/transport-identical-twins.yml';
+
+/**
+ * Voce `per scelta` sulle voci `adapted`: c'e' in ogni passata, quindi porta
+ * sempre `Motivo:` e `Prossimo passo:`. Senza, il body violava la regola
+ * `decision-deferral-not-specific` del contratto (modalita' strict del gate
+ * locale `pr-body-check-gate`): ogni correzione manuale del body di una PR di
+ * trasporto veniva respinta (PR corpus 2090, run 37173895046).
+ */
+export const ADAPTED_DEFERRAL_BULLET = '- Le voci `adapted` di `' + MANIFEST_PATH + '` restano escluse dal trasporto'
+  + ' *(per scelta)*. **Motivo:** una voce `adapted` diverge dal sito di proposito e la copia byte per byte dal sito'
+  + ' cancellerebbe l\'adattamento del corpus. **Prossimo passo:** nessuno su questo canale: una modifica a un file'
+  + ' `adapted` si fa direttamente nel corpus, come prescrive il suo `mode` nel manifest.';
+
+/**
+ * Il body completo della PR di trasporto, dal report JSON di
+ * `transport-identical-twins.mjs` (dopo push e fallback). Una sola sorgente
+ * per il workflow e per il test che lo passa all'evaluator del contratto.
+ *
+ * @param {object} report  `transported`, `realign`, `couplingDelta`,
+ *   `realignExcluded`, `workflowExcluded` (gli ultimi due aggiunti dal workflow).
+ * @param {{ workflowsScope?: boolean }} [opts]  `true` quando l'identita' ha lo
+ *   scope `workflows` (`PAT_WORKFLOWS_SCOPE`).
+ */
+export function buildTransportPrBody(report, { workflowsScope = false } = {}) {
+  const r = report || {};
+  const transported = r.transported || [];
+  const realign = r.realign || [];
+  const list = transported.map((t) => transportBulletLine(t)).join('\n');
+  const converged = realign.length
+    ? '- Riattestata la baseline di ' + realign.length + ' gemelli `identical` modificati su entrambi i lati che oggi coincidono byte per byte (`both-moved-converged`): nessun file copiato, solo il manifest, con i due lati riletti al momento della scrittura.\n'
+      + realign.map((x) => convergedBulletLine(x)).join('\n')
+    : '';
+  const deltas = (r.couplingDelta || []).map((d) => '- Snapshot accoppiamenti per ' + markdownCodeSpan(d.path) + ': +'
+    + d.added.length + '/-' + d.removed.length
+    + (d.initialized ? ' (prima osservazione)' : ' (delta dalla passata precedente)') + '.').join('\n');
+  const hasWorkflowExcluded = (r.workflowExcluded || []).length > 0;
+  // Con un rifiuto esplicito dello scope la nota contraddirebbe le voci
+  // `workflowExcluded` di `## Non implementato (ancora)`.
+  const scopeNote = workflowsScope && !hasWorkflowExcluded
+    ? '- Lo scope `workflows` e\' disponibile per questa identita\': i gemelli sotto `.github/workflows/` sono stati valutati come gli altri, se dichiarati `identical` e `site-ahead`.'
+    : '';
+  const excluded = (r.realignExcluded || []).map((p) => '- ' + markdownCodeSpan(p)
+    + ' escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.').join('\n');
+  const workflowExcluded = (r.workflowExcluded || []).map((p) => '- ' + markdownCodeSpan(p)
+    + ' escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.').join('\n');
+  // La riga sullo scope mancante era fusa con quella sulle `adapted` («per
+  // costruzione ... blocked: ...»): una deroga decisionale senza Motivo. Ora
+  // il blocco tecnico e la scelta sono due voci distinte.
+  const scopeBlocked = !workflowsScope && !workflowExcluded
+    ? '- I gemelli `site-ahead` sotto `.github/workflows/` richiedono lo scope `workflows` per essere COPIATI (la sola riattestazione della baseline di un convergente non lo richiede); blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità.'
+    : '';
+  const implemented = [
+    transported.length
+      ? '- Copia automatica dei gemelli dichiarati `mode: identical` in `' + MANIFEST_PATH + '` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `' + TRANSPORT_WORKFLOW + '` (issue #331).'
+      : '- Nessun gemello `site-ahead` da copiare in questa passata: la PR aggiorna solo `' + MANIFEST_PATH + '`. Aperta da `' + TRANSPORT_WORKFLOW + '` (issue #331).',
+    list,
+    converged,
+    deltas,
+    scopeNote,
+  ].filter(Boolean);
+  const deferred = [excluded, workflowExcluded, scopeBlocked, ADAPTED_DEFERRAL_BULLET].filter(Boolean);
+  return ['## Implementato', ...implemented, '', '## Non implementato (ancora)', ...deferred, ''].join('\n');
+}
+
 export function normalizeSiteHash(value) {
   const normalized = String(value).toLowerCase();
   return normalized.length === 64 ? normalized.slice(0, 16) : normalized;
