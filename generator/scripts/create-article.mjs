@@ -149,7 +149,7 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline } from './lib/free-translate.mjs';
+import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs } from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -167,6 +167,7 @@ import {
   resetBodyTranslationPending,
   markBodyTranslationPending,
   isBodyTranslationPending,
+  retryPendingBodyTranslations,
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
@@ -2333,7 +2334,11 @@ function finalizeRunReport(status, extra = {}) {
       + ` by_locale=${Object.entries(recovery.llmFallbacksByLocale || {}).map(([l, n]) => `${l}:${n}`).join(',') || 'none'}`
       + ` capped=${recovery.llmFallbackCapped ? 1 : 0}`
       // I body lasciati NON tradotti (#1875): prima erano fallback IT muti.
-      + ` pending_bodies=${JSON.stringify(recovery.pendingBodyFields || {})}`,
+      + ` pending_bodies=${JSON.stringify(recovery.pendingBodyFields || {})}`
+      // I body usciti dall'attesa con la seconda corsia (Codex), prima della
+      // guardia di completezza: `pending_bodies` non vuoto qui = run rossa.
+      + ` pending_recovered=${JSON.stringify(recovery.pendingBodyRecovered || {})}`
+      + ` pending_retry=${JSON.stringify(recovery.pendingBodyRetry || null)}`,
     );
   }
 
@@ -10906,6 +10911,86 @@ Rispondi con un JSON object (no markdown, no code fences):
 {"${field}": "..."}`;
 }
 
+/**
+ * Un body rimasto in attesa (#1875), tradotto dalla corsia Codex del job.
+ *
+ * Il motore e' quello della bonifica dei body bloccanti
+ * (`translateWithCodexEngine`, lib/free-translate.mjs), con il trasporto
+ * pinnato su `CODEX_CLI_PRIMARY` come il fact-check di riserva. L'uscita passa
+ * pero' da `translateFieldFreeMt`, lo stesso percorso di ogni altro body
+ * tradotto dal free-MT: link `nav:` mascherati e verificati, surrogati
+ * isolati, completezza minima del body (`semantic-truncation`, un riassunto
+ * di Codex con un finale valido non passa) e passthrough. Qualunque rifiuto,
+ * o un errore di trasporto, torna come '' e il body resta in attesa. I
+ * rifiuti NON finiscono in `recordFreeMtUnusableOutput`: i loop che usano
+ * quel report per il cap sono gia' chiusi.
+ *
+ * Ogni chiamata ha la stessa finestra di una traduzione del tier Codex
+ * (`codexCallDeadlineMs` di lib/free-translate.mjs: tetto per chiamata di
+ * 180 s, coda del broker compresa, limitato dalla scadenza che il processo ha
+ * dichiarato con `installCodexTranslateProcessDeadline`), mai i 600 s della
+ * lane del corpo articolo ne' l'orologio di modulo: un broker bloccato costa
+ * al piu' due finestre (la striscia di stop), non il residuo della run. Sotto
+ * la finestra minima la chiamata non parte e il body resta in attesa.
+ *
+ * La corsia e' ARMATA solo nel percorso CLI, dallo stesso installer: e' li'
+ * che il job ha il broker Codex e che la guardia `missing-key` di
+ * generate-article.yml segue la scrittura. I producer che importano
+ * `translateArticle()` (publish-journalist-article.mjs, il cui workflow non
+ * avvia il broker) restano esattamente come su main: un body non tradotto
+ * resta in attesa (#1875) e la corsia non viene interrogata.
+ */
+let _pendingBodyCodexDeadlineMs = null;
+let _pendingBodySecondLaneArmed = false;
+
+function pendingBodySecondLaneAvailable() {
+  return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+}
+
+async function translatePendingBodyWithCodex(itValue, locale, field) {
+  const codex = AI_MODELS.CODEX_CLI_PRIMARY;
+  const deadlineMs = codexCallDeadlineMs({
+    now: Date.now(),
+    budgetRemainingMs: Number.POSITIVE_INFINITY,
+    processDeadlineMs: _pendingBodyCodexDeadlineMs,
+  });
+  if (deadlineMs === null) {
+    throw new Error('finestra residua troppo corta per una chiamata Codex');
+  }
+  const call = (messages, opts = {}) => _aiCallLLM(messages, {
+    ...opts,
+    model: codex,
+    chain: [codex],
+    prefer: [codex],
+    bypassForceChain: true,
+    deadlineMs,
+  });
+  const rejected = [];
+  const text = await translateFieldFreeMt({
+    text: itValue,
+    sourceLang: 'it',
+    targetLang: locale,
+    fieldType: 'description',
+    fieldName: field,
+    translate: ({ text: masked, sourceLang, targetLang, fieldType }) => translateWithCodexEngine({
+      text: masked, sourceLang, targetLang, fieldType, call,
+    }),
+    balanceMarkdown: balanceMarkdownMarkers,
+    onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
+    onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+  });
+  if (!text && rejected.length > 0) {
+    console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
+  }
+  return text;
+}
+
+/** La seconda corsia non avvia una chiamata dopo lo stop cooperativo o a ridosso della scadenza dichiarata. */
+function pendingBodyLaneShouldStop() {
+  if (_sigtermStopRequested) return true;
+  return _pendingBodyCodexDeadlineMs !== null && Date.now() + 15_000 >= _pendingBodyCodexDeadlineMs;
+}
+
 async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
@@ -11575,6 +11660,38 @@ ${terminologyByLang[targetLang] || ''}`;
       }
     }
   }
+
+  // ── Seconda corsia per i body rimasti in attesa ────────────────────────
+  // Un body che free-MT, retry mirato e retry di troncamento non hanno
+  // tradotto resta ASSENTE dal locale (#1875). La guardia di scrittura di
+  // generate-article.yml («l'articolo generato ha tutti i body localizzati»,
+  // #2042) boccia quell'assenza come `missing-key`, e l'articolo intero non
+  // viene committato: run 37220516797 (`de:body1`), 37153946271 (`fr:body1`,
+  // `fr:body2`), entrambe con la cascata free esaurita e il tier Codex del
+  // free-MT gia' fermo sul suo budget. Prima della guardia ogni body in attesa
+  // riceve UN tentativo sulla corsia Codex del job, pinnata (non la cascata
+  // free appena fallita) e con la scadenza che il processo ha dichiarato.
+  // L'uscita passa da `translateFieldFreeMt` come ogni body free-MT (nav-link,
+  // completezza, passthrough): vedi `translatePendingBodyWithCodex`. La guardia resta
+  // invariata: se anche Codex non traduce, il body resta in attesa e
+  // l'articolo resta fuori da main. Vedi `retryPendingBodyTranslations`.
+  // Sopra quel percorso, gli stessi predicati del retry di troncamento: testo
+  // usabile nel locale, non l'italiano ricopiato, non troncato a meta' frase.
+  await retryPendingBodyTranslations(data, {
+    report: RUN_REPORT.translation,
+    lane: AI_MODELS.CODEX_CLI_PRIMARY,
+    isLaneAvailable: () => pendingBodySecondLaneAvailable(),
+    shouldStop: () => pendingBodyLaneShouldStop(),
+    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(itValue, locale, field),
+    rejectReason: ({ locale, field, itValue, text }) => {
+      if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
+      if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
+      if (detectTruncation(text, { label: `${locale}/${field}` }).length > 0) return 'troncato';
+      return null;
+    },
+    finalize: (text) => sanitizeBodyText(text),
+    log: (message) => console.error(message),
+  });
 
   // ── Title length cap on translated locales (Semrush ≤ 60 chars gate) ──
   // German/French translations expand ~30% vs Italian, so a 58-char IT title
@@ -14747,6 +14864,10 @@ const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
 
 function installCodexTranslateProcessDeadline() {
   setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
+  // Stessa scadenza per la seconda corsia dei body in attesa, che si arma
+  // solo qui: vedi `translatePendingBodyWithCodex`.
+  _pendingBodyCodexDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;
+  _pendingBodySecondLaneArmed = true;
 }
 
 /**
@@ -14786,6 +14907,7 @@ function requestCooperativeStop(signal) {
   // Nessuna nuova chiamata di traduzione Codex dopo lo stop: quella in volo
   // resta limitata dalla propria deadline, le successive non partono.
   setCodexTranslateProcessDeadline(Date.now());
+  _pendingBodyCodexDeadlineMs = Date.now();
   const spentS = Math.round((Date.now() - RUN_START_MS) / 1000);
   // `::warning` and not `::error`: the run is not broken, it is being stopped.
   // A declared stop that prints nothing is indistinguishable from a crash, and

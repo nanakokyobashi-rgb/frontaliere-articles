@@ -130,6 +130,10 @@
       {
         "prefix": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
         "reason": "Copia della disposizione legacy `.github/workflows/observers/` (#1479), byte-identica a `scripts/lib/crawler-generation-token.mjs` e a `.github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs` del sito, ma nessuno la esegue ne' la importa: GitHub Actions non legge le sottocartelle di `.github/workflows/`, e gli importatori del corpus usano `scripts/ci/lib/` (voce `identical` del trasporto lockstep) e `scripts/lib/` (voce `identical`, import di `close-recovered-failure-issues.mjs`). Una voce in `files` non regge: `prepare-crawler-workflow-corpus-sync.mjs` del sito (`isLegacyObserverTransportEntry`) cancella ogni voce sotto `.github/workflows/observers/` mappata su una sorgente observer — l'ha fatto il lockstep #1980 il 2026-09-29, ed e' da li' che il censimento e' rosso (run 36580702291) — e ripuntarla su `scripts/lib/crawler-generation-token.mjs` la fa rifiutare da `readManifestSnapshot()` di handoff-to-site.mjs (sitePath uguale al path corpus di un'altra voce, #1973). Dichiarata qui finche' l'albero legacy resta nel repo; la sua rimozione e' il rimedio definitivo."
+      },
+      {
+        "prefix": "data/evergreen-verifications.json",
+        "reason": "Registro delle verifiche evergreen scritto dal generatore (#2096), che oggi contiene solo `{}`: il censimento lo trova 'byte-identico' a `packages/articles/engine/shared/article-reviewed-by.json` del sito perche' due JSON vuoti hanno lo stesso sha del blob, non perche' siano lo stesso file. Il sito non ha nessun gemello di questo registro e non c'e' una fix che scende o risale. Se il registro diventa codice condiviso col sito, la riga va tolta e il file registrato."
       }
     ]
   },
@@ -3839,8 +3843,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "d0e8bf9117f450ac",
-        "corpus": "d0e8bf9117f450ac",
+        "site": "7034a7d4b84d5959",
+        "corpus": "7034a7d4b84d5959",
         "alignedAt": "2026-10-04"
       }
     },
@@ -3925,9 +3929,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1b175fe8929c8803",
-        "corpus": "1b175fe8929c8803",
-        "alignedAt": "2026-09-29"
+        "site": "ac3fbf4d00700475",
+        "corpus": "ac3fbf4d00700475",
+        "alignedAt": "2026-10-04"
       }
     },
     {
@@ -4283,6 +4287,16 @@
       }
     },
     {
+      "path": "scripts/ci/twin-census-pr-gate.mjs",
+      "mode": "corpus-only",
+      "reason": "Censimento dei gemelli ristretto ai file AGGIUNTI dalla PR, nel check `tests` che governa il merge (issue 1610): le PR 2096 e 2097 hanno aggiunto due file byte-identici al sito senza dichiararli e il rosso e' comparso solo al cron di `loop-drift-check.yml`. Non esiste sul sito e non deve: il manifest e il suo censimento sono del lato che RICEVE il ciclo, come `loop-baseline-pr-gate.mjs` e `loop-drift-check.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "3073e68f366aeec3",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": ".github/workflows/pr-redcheck-fixer.yml",
       "mode": "adapted",
       "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo.",
@@ -4505,6 +4519,16 @@
           "mode": "non registrato"
         }
       ]
+    },
+    {
+      "path": "generator/tests/fixtures/followup-mint/closed-bullets-10258-10289.json",
+      "sitePath": "tests/fixtures/followup-mint/closed-bullets-10258-10289.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "07d2982b682b6f1f",
+        "corpus": "07d2982b682b6f1f",
+        "alignedAt": "2026-10-04"
+      }
     },
     {
       "path": "scripts/lib/plate-auction-editorial.mjs",

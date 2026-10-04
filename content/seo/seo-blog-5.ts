@@ -98551,6 +98551,74 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stra-woman-varese-2026': {
+    title: 'StraWoman Varese 2026: quasi 4mila ai Giardini Estensi',
+    description: 'Quasi 4mila persone hanno partecipato alla StraWoman Varese 2026 nei Giardini Estensi, una corsa‑camminata di 5 km senza cronometro dedicata a sport',
+    keywords: 'frontalieri, ticino, svizzera, italia, strawoman, varese, quasi, 4mila',
+    ogTitle: 'StraWoman Varese 2026: quasi 4mila ai Giardini Estensi',
+    ogDescription: 'La sedicesima edizione della StraWoman Varese ha visto quasi 4mila partecipanti correre o camminare 5 km nei Giardini Estensi. L\'evento ha unito sport, prevenzione senologica tramite il Breast Park Humanitas Medical Care e solidarietà',
+    canonicalPath: '/articoli-frontaliere/stra-woman-varese-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "StraWoman Varese 2026: quasi 4mila ai Giardini Estensi",
+      "description": "Quasi 4mila persone hanno partecipato alla StraWoman Varese 2026 nei Giardini Estensi, una corsa‑camminata di 5 km senza cronometro dedicata a sport",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/stra-woman-varese-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Donne partecipanti alla StraWoman Varese 2026 nei Giardini Estensi, corsa non competitiva di 5 km per prevenzione e solidarietà."
+      },
+      "datePublished": "2026-10-04T19:00:12+00:00",
+      "dateModified": "2026-10-04T19:00:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stra-woman-varese-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lido-san-domenico-lugano-concorsi': {
+    title: 'Lido San Domenico: Lugano pubblica due concorsi',
+    description: 'Il Municipio di Lugano ha pubblicato due concorsi per il futuro del Lido San Domenico: gestione buvette e ristrutturazione tramite partenariato',
+    keywords: 'frontalieri, ticino, svizzera, italia, lido, domenico, lugano, pubblica',
+    ogTitle: 'Lido San Domenico, una mobilitazione per la cultura',
+    ogDescription: 'Il futuro del Lido San Domenico è al centro del dibattito: tra nuovi concorsi per la gestione e la ristrutturazione, i cittadini chiedono di tutelare uno spazio di aggregazione e cultura indipendente.',
+    canonicalPath: '/articoli-frontaliere/lido-san-domenico-lugano-concorsi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lido San Domenico: Lugano pubblica due concorsi",
+      "description": "Il Municipio di Lugano ha pubblicato due concorsi per il futuro del Lido San Domenico: gestione buvette e ristrutturazione tramite partenariato",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lido-san-domenico-lugano-concorsi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del lungolago di Lugano con il Lido San Domenico sullo sfondo"
+      },
+      "datePublished": "2026-10-04T20:03:35+00:00",
+      "dateModified": "2026-10-04T20:03:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lido-san-domenico-lugano-concorsi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
