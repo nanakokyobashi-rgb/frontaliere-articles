@@ -10926,12 +10926,21 @@ Rispondi con un JSON object (no markdown, no code fences):
  * quel report per il cap sono gia' chiusi.
  *
  * La scadenza e' quella che il processo ha dichiarato al tier di traduzione
- * Codex (`installCodexTranslateProcessDeadline`, solo nel percorso CLI). I
- * producer che importano `translateArticle()` (publish-journalist-article.mjs)
- * non ne dichiarano una, e il loro orologio di modulo non e' il loro budget:
- * li' la chiamata ha soltanto il tetto della lane Codex.
+ * Codex (`installCodexTranslateProcessDeadline`), mai l'orologio di modulo.
+ *
+ * La corsia e' ARMATA solo nel percorso CLI, dallo stesso installer: e' li'
+ * che il job ha il broker Codex e che la guardia `missing-key` di
+ * generate-article.yml segue la scrittura. I producer che importano
+ * `translateArticle()` (publish-journalist-article.mjs, il cui workflow non
+ * avvia il broker) restano esattamente come su main: un body non tradotto
+ * resta in attesa (#1875) e la corsia non viene interrogata.
  */
 let _pendingBodyCodexDeadlineMs = null;
+let _pendingBodySecondLaneArmed = false;
+
+function pendingBodySecondLaneAvailable() {
+  return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+}
 
 async function translatePendingBodyWithCodex(itValue, locale, field) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
@@ -11659,7 +11668,7 @@ ${terminologyByLang[targetLang] || ''}`;
   await retryPendingBodyTranslations(data, {
     report: RUN_REPORT.translation,
     lane: AI_MODELS.CODEX_CLI_PRIMARY,
-    isLaneAvailable: () => isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY),
+    isLaneAvailable: () => pendingBodySecondLaneAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
     translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(itValue, locale, field),
     rejectReason: ({ locale, field, itValue, text }) => {
@@ -14843,8 +14852,10 @@ const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
 
 function installCodexTranslateProcessDeadline() {
   setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
-  // Stessa scadenza per la seconda corsia dei body in attesa.
+  // Stessa scadenza per la seconda corsia dei body in attesa, che si arma
+  // solo qui: vedi `translatePendingBodyWithCodex`.
   _pendingBodyCodexDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;
+  _pendingBodySecondLaneArmed = true;
 }
 
 /**

@@ -243,6 +243,18 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   assert.match(install.slice(0, install.indexOf('\n}\n')), /_pendingBodyCodexDeadlineMs = RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;/);
   const stop = src.slice(src.indexOf('function pendingBodyLaneShouldStop() {'));
   assert.doesNotMatch(stop.slice(0, stop.indexOf('\n}\n')), /RUN_START_MS|wallBudgetExceeded/);
+});
+
+test('la corsia si arma solo nel percorso CLI: i producer importati (publish-journalist) non la interrogano', () => {
+  const avail = src.slice(src.indexOf('function pendingBodySecondLaneAvailable() {'));
+  assert.match(avail.slice(0, avail.indexOf('\n}\n')), /_pendingBodySecondLaneArmed && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)/);
+  assert.match(src, /^let _pendingBodySecondLaneArmed = false;$/m);
+  const arms = [...src.matchAll(/_pendingBodySecondLaneArmed = true;/g)].map((m) => m.index);
+  assert.equal(arms.length, 1);
+  const installStart = src.indexOf('function installCodexTranslateProcessDeadline() {');
+  assert.ok(arms[0] > installStart && arms[0] < src.indexOf('\n}\n', installStart), 'la corsia va armata solo da installCodexTranslateProcessDeadline (ramo CLI)');
+  const { block } = extractSecondLaneBlock();
+  assert.match(block, /isLaneAvailable: \(\) => pendingBodySecondLaneAvailable\(\),/);
   assert.match(src, /pending_recovered=\$\{JSON\.stringify\(recovery\.pendingBodyRecovered \|\| \{\}\)\}/);
 });
 
@@ -250,7 +262,7 @@ async function runSecondLaneBlock({ data, RUN_REPORT, translatePendingBodyWithCo
   const { block } = extractSecondLaneBlock();
   const AI_MODELS = { CODEX_CLI_PRIMARY: 'codex-cli/test' };
   const fn = new Function(
-    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'isModelAvailable', 'pendingBodyLaneShouldStop',
+    'data', 'RUN_REPORT', 'retryPendingBodyTranslations', 'AI_MODELS', 'pendingBodySecondLaneAvailable', 'pendingBodyLaneShouldStop',
     'translatePendingBodyWithCodex', 'translatedStringOrNull', 'isSourcePassthrough', 'detectTruncation', 'sanitizeBodyText', 'console',
     `return (async () => { ${block} })();`,
   );
