@@ -31,6 +31,7 @@ test('il reporter strutturato conserva file, riga, nome ed errore', () => {
     failedSuites: 0,
     failures: [failure],
     suiteFailures: [],
+    stdoutWriters: [],
   });
 });
 
