@@ -16,6 +16,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -80,11 +81,18 @@ const STEPS = parseSteps();
 const stepIndex = (pred) => STEPS.findIndex(pred);
 const RETRANSLATE = /retranslate-blocking-bodies\.mjs/;
 
-/** Esegue il corpo di un passo con bash, nell'ambiente dato. */
-function runStep(step, env) {
+/**
+ * Esegue il corpo di un passo con bash, nell'ambiente dato. `files` finisce
+ * nella directory di lavoro (il checkout finto: path relativo → contenuto).
+ */
+function runStep(step, env, files = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-wf-'));
   const output = path.join(dir, 'output');
   fs.writeFileSync(output, '');
+  for (const [rel, content] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    fs.writeFileSync(path.join(dir, rel), content);
+  }
   try {
     const res = spawnSync('bash', ['-c', step.run], {
       cwd: dir,
@@ -172,21 +180,85 @@ test('cancello BONIFICA_FALSE_FRIEND_SAMPLE_URL: exit 1 nel ramo apply + transla
   assert.match(gate.run, /translation-false-friend/);
   assert.match(gate.run, /exit 1/);
 
+  // Senza URL nella forma giusta il cancello non chiama neanche l'API.
   const url = 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/7683#issuecomment-123456';
-  const cases = [
+  const shapes = [
     { CODE: '', SAMPLE_URL: '', status: 1 },
     { CODE: 'translation-false-friend', SAMPLE_URL: '', status: 1 },
     { CODE: 'translation-false-friend', SAMPLE_URL: 'https://example.com/x', status: 1 },
     { CODE: 'translation-false-friend', SAMPLE_URL: url.replace('7683', '7682'), status: 1 },
-    { CODE: 'translation-false-friend', SAMPLE_URL: url, status: 0 },
-    { CODE: '', SAMPLE_URL: url, status: 0 },
     { CODE: 'leaked-prompt-scaffolding', SAMPLE_URL: '', status: 0 },
   ];
-  for (const c of cases) {
-    const res = runStep(gate, { CODE: c.CODE, SAMPLE_URL: c.SAMPLE_URL });
-    assert.equal(res.status, c.status, `CODE=${c.CODE || '(vuoto)'} URL=${c.SAMPLE_URL || '(vuoto)'}: ${res.stdout}${res.stderr}`);
-    if (c.status === 1) assert.match(res.stdout, /::error::campione #7683 non pubblicato/);
+  for (const c of shapes) {
+    const out = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-out-'));
+    fs.writeFileSync(path.join(out, 'sample.md'), 'campione\n');
+    const bin = fakeBin({ gh: 'exit 1' });
+    try {
+      const res = runStep(gate, { CODE: c.CODE, SAMPLE_URL: c.SAMPLE_URL, OUT_DIR: out, PATH: bin.PATH });
+      assert.equal(res.status, c.status, `CODE=${c.CODE || '(vuoto)'} URL=${c.SAMPLE_URL || '(vuoto)'}: ${res.stdout}${res.stderr}`);
+      if (c.status === 1) assert.match(res.stdout, /::error::campione #7683 non pubblicato/);
+      assert.match(res.output, /^sample_verified=false$/m);
+    } finally {
+      bin.cleanup();
+      fs.rmSync(out, { recursive: true, force: true });
+    }
   }
+});
+
+/**
+ * Il cancello del campione con un commento servito da un `gh` finto: il file
+ * `comment` e' l'output di `gh api …/issues/comments/<id> --jq` (prima riga
+ * `issue_url`, poi il body). Se manca, `gh` esce 1 come per un 404.
+ */
+function runSampleGate(gate, { CODE = 'translation-false-friend', SAMPLE_URL, sample = 'campione\n', comment }) {
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-out-'));
+  fs.writeFileSync(path.join(out, 'sample.md'), sample);
+  const commentFile = path.join(out, 'served-comment');
+  if (comment !== undefined) fs.writeFileSync(commentFile, comment);
+  const bin = fakeBin({ gh: `case "$*" in *issues/comments/123456*) cat '${commentFile}' || exit 1 ;; *) exit 1 ;; esac` });
+  try {
+    return { ...runStep(gate, { CODE, SAMPLE_URL, OUT_DIR: out, PATH: bin.PATH }), calls: bin.calls() };
+  } finally {
+    bin.cleanup();
+    fs.rmSync(out, { recursive: true, force: true });
+  }
+}
+
+test('cancello 7683: il commento esiste, sta sulla issue 7683, cita l\'impronta del campione di QUESTA run e il tasso', () => {
+  const gate = STEPS.find((s) => /BONIFICA_FALSE_FRIEND_SAMPLE_URL/.test(Object.values(s.env).join(' ')));
+  assert.ok(gate, 'cancello assente');
+  const url = 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/7683#issuecomment-123456';
+  const sample = '### translation-false-friend — 30 su 139\n| key | locale |\n';
+  const fp = createHash('sha256').update(sample).digest('hex');
+  const other = createHash('sha256').update('un altro stock\n').digest('hex');
+  const on7683 = 'https://api.github.com/repos/valerielinc-ops/frontaliere-si-o-no/issues/7683';
+  const judged = `Campione giudicato: impronta ${fp}\nTasso di falsi positivi: 2/30 (6,7%)\n`;
+  const cases = [
+    { label: 'commento inesistente (404)', comment: undefined, status: 1, why: /non leggibile/ },
+    { label: 'commento su un\'altra issue', comment: `${on7683.replace('7683', '7682')}\n${judged}`, status: 1, why: /non sta sulla issue 7683/ },
+    { label: 'senza impronta', comment: `${on7683}\nTasso di falsi positivi: 2/30\n`, status: 1, why: /impronta/ },
+    { label: 'impronta di un altro campione', comment: `${on7683}\nimpronta ${other}\nTasso di falsi positivi: 2/30\n`, status: 1, why: /impronta/ },
+    { label: 'senza tasso', comment: `${on7683}\nimpronta ${fp}\nverdetti: tutti veri\n`, status: 1, why: /tasso di falsi positivi/ },
+    { label: 'campione giudicato', comment: `${on7683}\n${judged}`, status: 0 },
+    { label: 'tutti i codici, campione giudicato', CODE: '', comment: `${on7683}\n${judged}`, status: 0 },
+  ];
+  for (const c of cases) {
+    const res = runSampleGate(gate, { CODE: c.CODE ?? 'translation-false-friend', SAMPLE_URL: url, sample, comment: c.comment });
+    assert.equal(res.status, c.status, `${c.label}: ${res.stdout}${res.stderr}`);
+    assert.ok(res.calls.includes('gh api repos/valerielinc-ops/frontaliere-si-o-no/issues/comments/123456 --jq .issue_url, .body'), `${c.label}: ${res.calls.join('\n')}`);
+    if (c.status === 1) {
+      assert.match(res.stdout, /::error::campione #7683 non pubblicato/, c.label);
+      assert.match(res.stdout, c.why, c.label);
+      assert.match(res.output, /^sample_verified=false$/m, c.label);
+    } else {
+      assert.match(res.output, /^sample_verified=true$/m, c.label);
+    }
+  }
+  // Lotto di un altro codice: il cancello non lo ferma, ma un commento non
+  // verificato resta `false` per la rete del commit.
+  const other7682 = runSampleGate(gate, { CODE: 'leaked-prompt-scaffolding', SAMPLE_URL: url, sample, comment: `${on7683}\nTasso di falsi positivi: 2/30\n` });
+  assert.equal(other7682.status, 0, other7682.stdout + other7682.stderr);
+  assert.match(other7682.output, /^sample_verified=false$/m);
 });
 
 test('la rete del commit ferma le scritture false-friend senza campione, prima di ogni git', () => {
@@ -195,7 +267,7 @@ test('la rete del commit ferma le scritture false-friend senza campione, prima d
   // rete non esce prima, il test lo vede.
   const blocked = runStep(pr, {
     FALSE_FRIEND_WRITTEN: '2',
-    SAMPLE_URL_VALID: 'false',
+    SAMPLE_VERIFIED: 'false',
     WRITTEN: '3',
     GITHUB_PAT_NANAKO: 'x',
     PATH: `${process.env.PATH}`,
@@ -204,7 +276,7 @@ test('la rete del commit ferma le scritture false-friend senza campione, prima d
   assert.match(blocked.stdout, /::error::campione #7683 non pubblicato: 2 coppie false-friend/);
   const gateOrder = pr.run.indexOf('FALSE_FRIEND_WRITTEN');
   assert.ok(gateOrder >= 0 && gateOrder < pr.run.indexOf('git '), 'la rete sta dopo un comando git');
-  assert.match(pr.env.SAMPLE_URL_VALID || '', /steps\.sample_gate\.outputs\.sample_url_valid/);
+  assert.match(pr.env.SAMPLE_VERIFIED || '', /steps\.sample_gate\.outputs\.sample_verified/);
 });
 
 /**
@@ -212,7 +284,7 @@ test('la rete del commit ferma le scritture false-friend senza campione, prima d
  * file: `git diff --cached --name-only` stampa `staged` righe. Il chiamante
  * mette `bin` in testa al PATH e legge `calls()` dopo il passo.
  */
-function fakeBin({ staged = 0 } = {}) {
+function fakeBin({ staged = 0, gh = '' } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-bin-'));
   const log = path.join(dir, 'calls.log');
   fs.writeFileSync(log, '');
@@ -224,7 +296,7 @@ function fakeBin({ staged = 0 } = {}) {
   };
   script('git', `if [ "$1" = diff ]; then [ -n "${files}" ] && printf '${files}\\n'; fi`);
   script('node');
-  script('gh');
+  script('gh', gh);
   return {
     PATH: `${dir}:${process.env.PATH}`,
     calls: () => fs.readFileSync(log, 'utf8').split('\n').filter(Boolean),
@@ -234,7 +306,7 @@ function fakeBin({ staged = 0 } = {}) {
 
 test('la rete del commit esce 1 se i file in stage non sono le coppie scritte, prima di git commit', () => {
   const pr = STEPS.find((s) => /gh pr create/.test(s.run));
-  const base = { FALSE_FRIEND_WRITTEN: '0', SAMPLE_URL_VALID: 'false', GITHUB_PAT_NANAKO: 'x', GITHUB_RUN_ID: '1', REPO: 'o/r', OUT_DIR: '/tmp/x', LOCALE: 'en', RUN_URL: 'https://github.com/o/r/actions/runs/1' };
+  const base = { FALSE_FRIEND_WRITTEN: '0', SAMPLE_VERIFIED: 'false', GITHUB_PAT_NANAKO: 'x', GITHUB_RUN_ID: '1', REPO: 'o/r', OUT_DIR: '/tmp/x', LOCALE: 'en', RUN_URL: 'https://github.com/o/r/actions/runs/1' };
   const mismatch = fakeBin({ staged: 1 });
   try {
     const res = runStep(pr, { ...base, WRITTEN: '2', PATH: mismatch.PATH });
@@ -282,6 +354,114 @@ test('selettori che tratterebbero 0 coppie: slugs+code o code a lista escono 1 p
       } else {
         assert.equal(tool.length, 1, label);
         assert.match(tool[0], c.args, label);
+      }
+    } finally {
+      bin.cleanup();
+    }
+  }
+});
+
+const TOOL = 'generator/scripts/retranslate-blocking-bodies.mjs';
+const GATES = 'generator/scripts/lib/article-factuality-gates.mjs';
+const WITH_NX_S2 = "import { stripLeakedTitleMarker } from './lib/strip-leaked-title-marker.mjs';\n";
+const WITH_MARKER = 'export const LOCALIZED_TITLE_MARKER = /x/;\n';
+
+/**
+ * Il cancello dello scaffolding con `main` servito da un `gh` finto (raw dei
+ * contents) e il checkout come file nella directory di lavoro. `main: null`
+ * simula l'API giu'.
+ */
+function runScaffoldingGate(step, { CODE = 'leaked-prompt-scaffolding', LOCALE, local, main }) {
+  const served = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-main-'));
+  for (const [rel, content] of Object.entries(main || {})) {
+    fs.writeFileSync(path.join(served, path.basename(rel)), content);
+  }
+  const gh = main === null
+    ? 'exit 1'
+    : `case "$*" in *contents/${TOOL}?ref=main*) cat '${served}/retranslate-blocking-bodies.mjs' || exit 1 ;; *contents/${GATES}?ref=main*) cat '${served}/article-factuality-gates.mjs' || exit 1 ;; *) exit 1 ;; esac`;
+  const bin = fakeBin({ gh });
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-out-'));
+  try {
+    return { ...runStep(step, { CODE, LOCALE, REPO: 'o/r', OUT_DIR: out, PATH: bin.PATH }, local), calls: bin.calls() };
+  } finally {
+    bin.cleanup();
+    fs.rmSync(served, { recursive: true, force: true });
+    fs.rmSync(out, { recursive: true, force: true });
+  }
+}
+
+test('cancello scaffolding 7682: NX-S2 e LOCALIZED_TITLE_MARKER dimostrati nel checkout E su main, o niente scrittura', () => {
+  const g = stepIndex((s) => /LOCALIZED_TITLE_MARKER/.test(s.run));
+  assert.ok(g >= 0, 'cancello dello scaffolding assente: i locali non-it possono scrivere senza il gate dei marcatori tradotti');
+  const step = STEPS[g];
+  assert.equal(step.if, "steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true");
+  assert.ok(g < stepIndex((s) => /--apply\b/.test(s.run)), 'il cancello sta dopo la scrittura');
+
+  const all = { [TOOL]: WITH_NX_S2, [GATES]: WITH_MARKER };
+  const noMarker = { [TOOL]: WITH_NX_S2, [GATES]: 'export const OTHER = 1;\n' };
+  const noNxS2 = { [TOOL]: 'const x = 1;\n', [GATES]: WITH_MARKER };
+  const cases = [
+    { label: 'en,de,fr: gate senza marcatore su main', LOCALE: 'en,de,fr', local: all, main: noMarker, status: 1, why: /LOCALIZED_TITLE_MARKER[\s\S]*main/ },
+    { label: 'en: marcatore su main ma non nel checkout', LOCALE: 'en', local: noMarker, main: all, status: 1, why: /LOCALIZED_TITLE_MARKER[\s\S]*checkout/ },
+    { label: 'en: NX-S2 assente su main', LOCALE: 'en', local: all, main: noNxS2, status: 1, why: /NX-S2[\s\S]*main/ },
+    { label: 'en: NX-S2 assente nel checkout', LOCALE: 'en', local: noNxS2, main: all, status: 1, why: /NX-S2[\s\S]*checkout/ },
+    { label: 'en: API giu\'', LOCALE: 'en', local: all, main: null, status: 1, why: /non leggibile/ },
+    { label: 'it: NX-S2 assente', LOCALE: 'it', local: noNxS2, main: noNxS2, status: 1, why: /NX-S2/ },
+    { label: '"it, en": lo spazio non nasconde un locale non-it', LOCALE: 'it, en', local: noMarker, main: noMarker, status: 1, why: /LOCALIZED_TITLE_MARKER/ },
+    { label: 'locale vuoto: non dimostrato italiano', LOCALE: '', local: noMarker, main: noMarker, status: 1, why: /LOCALIZED_TITLE_MARKER/ },
+    { label: 'tutti i codici, en, marcatore assente', CODE: '', LOCALE: 'en', local: noMarker, main: noMarker, status: 1, why: /LOCALIZED_TITLE_MARKER/ },
+    { label: 'it con NX-S2, marcatore non richiesto', LOCALE: 'it', local: noMarker, main: noMarker, status: 0 },
+    { label: 'en,de,fr con entrambi', LOCALE: 'en,de,fr', local: all, main: all, status: 0 },
+  ];
+  for (const c of cases) {
+    const res = runScaffoldingGate(step, { CODE: c.CODE ?? 'leaked-prompt-scaffolding', LOCALE: c.LOCALE, local: c.local, main: c.main });
+    assert.equal(res.status, c.status, `${c.label}: ${res.stdout}${res.stderr}`);
+    if (c.why) {
+      assert.match(res.stdout, /::error::scaffolding/, c.label);
+      assert.match(res.stdout, c.why, c.label);
+    }
+  }
+  // Un lotto false-friend non e' toccato dal cancello, e non chiama l'API.
+  const ff = runScaffoldingGate(step, { CODE: 'translation-false-friend', LOCALE: 'en', local: {}, main: null });
+  assert.equal(ff.status, 0, ff.stdout + ff.stderr);
+  assert.deepEqual(ff.calls.filter((l) => /^gh /.test(l)), []);
+});
+
+test('la ri-traduzione non scrive se un cancello non e\' passato, e LIMIT ha un tetto di 20 con apply', () => {
+  const step = STEPS.find((s) => s.run.includes('ARGS+=(--apply)'));
+  assert.ok(step, 'passo della ri-traduzione assente');
+  // I cancelli arrivano al passo che scrive come esito, non come promessa.
+  assert.match(step.env.SAMPLE_GATE || '', /steps\.sample_gate\.outcome/);
+  assert.match(step.env.SCAFFOLDING_GATE || '', /steps\.scaffolding_gate\.outcome/);
+  const ok = { SAMPLE_GATE: 'success', SCAFFOLDING_GATE: 'success' };
+  const base = { LOCALE: 'en', SLUGS: '', CODE: 'translation-false-friend', OUT_DIR: '/tmp/x' };
+  const cases = [
+    { label: 'apply, limit 1000', APPLY: 'true', LIMIT: '1000', ...ok, status: 1, error: /limit=1000 oltre il tetto di 20/ },
+    { label: 'apply, limit 21', APPLY: 'true', LIMIT: '21', ...ok, status: 1, error: /limit=21 oltre il tetto di 20/ },
+    { label: 'apply, limit enorme', APPLY: 'true', LIMIT: '99999999999999999999999', ...ok, status: 1, error: /oltre il tetto di 20/ },
+    { label: 'limit non intero', APPLY: 'true', LIMIT: '1e3', ...ok, status: 1, error: /intero positivo/ },
+    { label: 'limit vuoto', APPLY: 'false', LIMIT: '', ...ok, status: 1, error: /intero positivo/ },
+    { label: 'limit zero', APPLY: 'true', LIMIT: '0', ...ok, status: 1, error: /intero positivo/ },
+    { label: 'apply, cancello del campione fallito', APPLY: 'true', LIMIT: '20', SAMPLE_GATE: 'failure', SCAFFOLDING_GATE: 'success', status: 1, error: /cancelli non superati/ },
+    { label: 'apply, cancello scaffolding saltato', APPLY: 'true', LIMIT: '20', SAMPLE_GATE: 'success', SCAFFOLDING_GATE: 'skipped', status: 1, error: /cancelli non superati/ },
+    { label: 'apply, cancelli assenti', APPLY: 'true', LIMIT: '20', SAMPLE_GATE: '', SCAFFOLDING_GATE: '', status: 1, error: /cancelli non superati/ },
+    { label: 'apply, limit 20, cancelli passati', APPLY: 'true', LIMIT: '20', ...ok, status: 0, args: /--limit 20 --stratify .*--apply/ },
+    { label: 'dry-run, limit 1000: nessuna scrittura', APPLY: 'false', LIMIT: '1000', SAMPLE_GATE: '', SCAFFOLDING_GATE: '', status: 0, args: /--limit 1000 --stratify/ },
+  ];
+  for (const c of cases) {
+    const bin = fakeBin();
+    try {
+      const { label, status, error, args, ...env } = c;
+      const res = runStep(step, { ...base, ...env, PATH: bin.PATH });
+      assert.equal(res.status, status, `${label}: ${res.stdout}${res.stderr}`);
+      const tool = bin.calls().filter((l) => RETRANSLATE.test(l));
+      if (error) {
+        assert.match(res.stdout, error, label);
+        assert.deepEqual(tool, [], `${label}: lo strumento e' partito`);
+      } else {
+        assert.equal(tool.length, 1, label);
+        assert.match(tool[0], args, label);
+        if (env.APPLY !== 'true') assert.doesNotMatch(tool[0], /--apply/, label);
       }
     } finally {
       bin.cleanup();
