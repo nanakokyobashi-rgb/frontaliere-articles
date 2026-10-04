@@ -4,31 +4,21 @@ name: Bonifica blocking bodies
 # issue del sito 7682 scaffolding e 7683 false-friend): a lotti, una PR alla
 # volta, col campione da giudicare PRIMA di ogni scrittura.
 #
-# ── Ordine operativo (vincolante) ──────────────────────────────────────────
+# Ordine operativo (vincolante):
 # - translation-false-friend: prima `apply=false` → campione pubblicato e
-#   giudicato sulla issue 7683 del sito, in un commento che cita l'impronta
-#   del campione (nel summary) e «Tasso di falsi positivi: N/M» → variabile
-#   di repository `BONIFICA_FALSE_FRIEND_SAMPLE_URL` con l'URL di quel
-#   commento → solo allora `apply=true` a lotti da 20 (tetto rigido). Il
-#   cancello rilegge il commento via API e confronta l'impronta con lo stock
-#   della run: dopo ogni lotto serve un campione nuovo.
-# - leaked-prompt-scaffolding: prima l'italiano (`locale=it`, richiede la
-#   riparazione di riga del ramo italiano, NX-S2), poi i locali non italiani,
-#   perche' ri-tradurre da un italiano ancora sporco riprodurrebbe il
-#   marcatore; e i locali non italiani solo dopo che il gate del corpus
-#   riconosce i marcatori tradotti (`LOCALIZED_TITLE_MARKER`). Il cancello
-#   7682 lo verifica nel checkout e su `main` prima di ogni scrittura.
+#   giudicato sulla 7683 in un commento con impronta e tasso `N/M` → URL del
+#   commento in `BONIFICA_FALSE_FRIEND_SAMPLE_URL` → `apply=true` a lotti da
+#   20. Dopo ogni lotto lo stock cambia e serve un campione nuovo.
+# - leaked-prompt-scaffolding: prima `locale=it` (NX-S2), poi i locali non
+#   italiani, solo quando il gate riconosce `LOCALIZED_TITLE_MARKER`.
 #
-# ── Cosa NON fa ────────────────────────────────────────────────────────────
+# Cosa NON fa:
 # Nessuno `schedule` (solo dopo il pilota, su decisione del proprietario),
 # nessuna scrittura su `main` (solo PR col ciclo normale), nessun `apply` di
 # default, nessuna modifica a soglie, gate o glossario. Produce il campione,
 # non il verdetto. Ogni condizione non dimostrata ferma la scrittura.
 #
-# Il test `generator/tests/bonifica-blocking-bodies-workflow.test.mjs` diventa
-# rosso se qualcuno mette `--apply` fisso, aggiunge un cron, toglie il guard di
-# una PR alla volta, toglie un cancello (campione 7683, scaffolding 7682,
-# tetto di 20) o sposta il campione dopo la scrittura.
+# Osservatore: `generator/tests/bonifica-blocking-bodies-workflow.test.mjs`.
 on:
   workflow_dispatch:
     inputs:
@@ -117,8 +107,7 @@ jobs:
         if: steps.guard.outputs.open_bonifiche == '0'
         run: bash scripts/lib/npm-ci-retry.sh
 
-      # Lo stock di partenza, tutti i codici e tutti i locali: e' la misura che
-      # la run deve far scendere, e il JSONL e' la base del campione.
+      # Stock di partenza (tutti i codici e locali): la base del campione.
       - name: Stock prima
         if: steps.guard.outputs.open_bonifiche == '0'
         run: |
@@ -127,9 +116,7 @@ jobs:
           node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
             --list-out "$OUT_DIR/stock-before.jsonl" --out "$OUT_DIR/stock-before.json" > /dev/null
 
-      # Il campione da GIUDICARE, prima di qualunque scrittura: deterministico
-      # (ordinamento per key, una coppia ogni floor(N/30), stratificato per
-      # locale). Finisce nell'artifact e nello step summary.
+      # Il campione da GIUDICARE, deterministico, prima di ogni scrittura.
       - name: Campione da giudicare
         if: steps.guard.outputs.open_bonifiche == '0'
         run: |
@@ -140,12 +127,12 @@ jobs:
           if command -v sha256sum > /dev/null; then FP=$(sha256sum "$OUT_DIR/sample.md" | cut -d' ' -f1); else FP=$(shasum -a 256 "$OUT_DIR/sample.md" | cut -d' ' -f1); fi
           printf '%s\n' "$FP" > "$OUT_DIR/sample.sha256"
           echo "::notice::Impronta del campione: $FP"
-          printf '> Impronta del campione (sha256 di sample.md): %s. Il commento giudicato su #7683 la cita insieme a «Tasso di falsi positivi: N/M».\n\n' "$FP" >> "$GITHUB_STEP_SUMMARY"
+          printf '> Impronta del campione (sha256 di sample.md): %s. Il commento giudicato su #7683 la cita intera insieme a «Tasso di falsi positivi: N/M», M = righe false-friend del campione.\n\n' "$FP" >> "$GITHUB_STEP_SUMMARY"
 
       # Cancello della issue 7683 (codice vuoto o false-friend), senza default
       # ne' bypass. La forma dell'URL non basta: il commento si legge via API,
-      # deve stare sulla 7683 e citare il tasso e l'impronta del `sample.md` di
-      # QUESTA run, cioe' dello stock corrente.
+      # deve stare sulla 7683, citare intera l'impronta del `sample.md` di
+      # QUESTA run (stock corrente) e un solo tasso `N/M` con M = sue righe.
       - name: Cancello del campione 7683
         id: sample_gate
         if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true
@@ -165,12 +152,35 @@ jobs:
               why="commento $ID non leggibile via API (inesistente o API giu')"
             elif [ "$(sed -n 1p "$C")" != "https://api.github.com/repos/$SITE_REPO/issues/7683" ]; then
               why="il commento $ID non sta sulla issue 7683"
-            elif ! grep -qF "$FP" "$C"; then
-              why="il commento $ID non cita l'impronta $FP del campione di questa run (campione diverso o stock cambiato)"
-            elif ! grep -Eiq 'tasso di falsi positivi[^0-9]*[0-9]' "$C"; then
-              why="il commento $ID non riporta il tasso di falsi positivi"
+            elif ! grep -Eiq "(^|[^0-9a-f])$FP([^0-9a-f]|\$)" "$C"; then
+              why="il commento $ID non cita l'impronta intera $FP del campione di questa run (campione diverso o stock cambiato)"
             else
-              verified=true
+              # M = righe false-friend del campione di questa run.
+              MS=$(LC_ALL=C sed -n 's/^### translation-false-friend — \([0-9][0-9]*\) su [0-9][0-9]*$/\1/p' "$OUT_DIR/sample.md")
+              # Ogni riga che apre con il tasso deve essere `N/M` interi; un
+              # solo valore. Prosa, percentuale o valori diversi = non dimostrato.
+              RATE=$(tr -d '*_' < "$C" | awk '
+                { l = tolower($0); sub(/^[ \t>-]+/, "", l) }
+                index(l, "tasso di falsi positivi") != 1 { next }
+                { n++ }
+                !match(l, /^tasso di falsi positivi:[ \t]*[0-9]+\/[0-9]+([ \t(].*)?$/) { bad++; next }
+                { v = l; sub(/^tasso di falsi positivi:[ \t]*/, "", v); sub(/[ \t(].*$/, "", v); if (!(v in seen)) { seen[v] = 1; k++ } ; last = v }
+                END { if (n == 0 || bad > 0) print "malformato"; else if (k > 1) print "multiplo"; else print last }')
+              N="${RATE%%/*}"
+              M="${RATE#*/}"
+              if [ "$RATE" = multiplo ]; then
+                why="il commento $ID riporta il tasso di falsi positivi con valori diversi"
+              elif [ "$RATE" = malformato ] || [ "${#N}" -gt 6 ] || [ "${#M}" -gt 6 ]; then
+                why="il commento $ID non riporta il tasso di falsi positivi nella forma «Tasso di falsi positivi: N/M»"
+              elif [ -z "$MS" ]; then
+                why="il campione di questa run non ha la sezione translation-false-friend: M non ricavabile"
+              elif [ $((10#$M)) -eq 0 ] || [ $((10#$N)) -gt $((10#$M)) ]; then
+                why="il commento $ID riporta un tasso impossibile ($RATE): serve 0 <= N <= M e M > 0"
+              elif [ $((10#$M)) -ne $((10#$MS)) ]; then
+                why="il commento $ID giudica M=$((10#$M)) coppie ma il campione di questa run ne ha $MS"
+              else
+                verified=true
+              fi
             fi
           fi
           echo "sample_verified=$verified" >> "$GITHUB_OUTPUT"
@@ -278,9 +288,7 @@ jobs:
             echo "::error::apply con cancelli non superati (campione 7683: ${SAMPLE_GATE:-assente}, scaffolding 7682: ${SCAFFOLDING_GATE:-assente}): nessuna scrittura"
             exit 1
           fi
-          # Selettori che lo strumento accetterebbe trattando 0 coppie, cioe' un
-          # verde che sembra «niente da fare»: con `--slug` le coppie hanno il
-          # codice `in-place`, e `--code` confronta un solo codice esatto.
+          # Selettori che tratterebbero 0 coppie: un verde finto.
           if [ -n "$SLUGS" ] && [ -n "$CODE" ]; then
             echo "::error::slugs e code non si combinano: con slugs lo strumento non filtra per codice e il lotto tratterebbe 0 coppie"
             exit 1
@@ -310,12 +318,8 @@ jobs:
           node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
             --list-out "$OUT_DIR/stock-after.jsonl" --out "$OUT_DIR/stock-after.json" > /dev/null
 
-      # La stessa condizione del passo che scrive (`inputs.apply`): un lotto
-      # scritto sul runner e non committato sarebbe un verde senza effetto.
-      # Si stagiano solo i file gia' tracciati sotto `content/`, e il loro
-      # numero deve essere quello delle coppie scritte dal report. Push sul
-      # branch della PR col PAT: un push col GITHUB_TOKEN non fa partire i
-      # check, e la PR resterebbe ferma.
+      # Solo i file tracciati sotto `content/`, tanti quante le coppie scritte;
+      # push col PAT, perche' col GITHUB_TOKEN i check non partono.
       - name: Apri la PR di bonifica
         if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true && steps.retranslate.outputs.written != '0'
         env:

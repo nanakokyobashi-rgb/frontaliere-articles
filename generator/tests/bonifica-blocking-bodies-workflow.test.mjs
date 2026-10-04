@@ -254,6 +254,44 @@ test('cancello 7683: il commento esiste, sta sulla issue 7683, cita l\'impronta 
       assert.match(res.output, /^sample_verified=true$/m, c.label);
     }
   }
+  // Forme deboli della stessa classe: il tasso e' `N/M` interi, 0 <= N <= M,
+  // M = righe false-friend del `sample.md` di questa run; un solo valore;
+  // l'impronta intera, come token a se'.
+  const sample40 = '## Campione da giudicare\n\n### translation-false-friend — 40 su 139\n\n| key | locale |\n';
+  const fp40 = createHash('sha256').update(sample40).digest('hex');
+  const rate = (line) => `${on7683}\nimpronta ${fp40}\n${line}\n`;
+  const weak = [
+    { label: '«vedi issue 7683»', comment: rate('Tasso di falsi positivi: vedi issue 7683'), status: 1, why: /tasso di falsi positivi/ },
+    { label: '3/40', comment: rate('Tasso di falsi positivi: 3/40 (7,5%)'), status: 0 },
+    { label: 'grassetto Markdown, 0/40', comment: rate('**Tasso di falsi positivi:** 0/40'), status: 0 },
+    { label: '41/40', comment: rate('Tasso di falsi positivi: 41/40'), status: 1, why: /41\/40/ },
+    { label: '3/0', comment: rate('Tasso di falsi positivi: 3/0'), status: 1, why: /3\/0/ },
+    { label: '«3 / quaranta»', comment: rate('Tasso di falsi positivi: 3 / quaranta'), status: 1, why: /tasso di falsi positivi/ },
+    { label: 'M diverso dal campione', comment: rate('Tasso di falsi positivi: 3/30'), status: 1, why: /M=30[\s\S]*40/ },
+    { label: 'cifra dopo il tasso ma non N/M', comment: rate('Tasso di falsi positivi: 7,5%'), status: 1, why: /tasso di falsi positivi/ },
+    { label: 'tasso ripetuto con valori diversi', comment: rate('Tasso di falsi positivi: 3/40\nTasso di falsi positivi: 1/40'), status: 1, why: /valori diversi/ },
+    { label: 'tasso ripetuto uguale', comment: rate('Tasso di falsi positivi: 3/40\n> Tasso di falsi positivi: 3/40'), status: 0 },
+    { label: 'tasso valido e una riga malformata', comment: rate('Tasso di falsi positivi: 3/40\nTasso di falsi positivi: circa 3'), status: 1, why: /tasso di falsi positivi/ },
+    { label: 'impronta citata in parte', comment: `${on7683}\nimpronta ${fp40.slice(0, 12)}\nTasso di falsi positivi: 3/40\n`, status: 1, why: /impronta/ },
+    { label: 'impronta dentro un esadecimale piu\' lungo', comment: `${on7683}\nimpronta ab${fp40}cd\nTasso di falsi positivi: 3/40\n`, status: 1, why: /impronta/ },
+  ];
+  for (const c of weak) {
+    const res = runSampleGate(gate, { SAMPLE_URL: url, sample: sample40, comment: c.comment });
+    assert.equal(res.status, c.status, `${c.label}: ${res.stdout}${res.stderr}`);
+    if (c.status === 1) {
+      assert.match(res.stdout, /::error::campione #7683 non pubblicato/, c.label);
+      assert.match(res.stdout, c.why, c.label);
+    } else {
+      assert.match(res.output, /^sample_verified=true$/m, c.label);
+    }
+  }
+  // Senza sezione false-friend nel campione M non e' ricavabile: si ferma.
+  const noSection = '## Campione da giudicare\n\n### leaked-prompt-scaffolding — 30 su 45\n';
+  const fpNo = createHash('sha256').update(noSection).digest('hex');
+  const res = runSampleGate(gate, { CODE: '', SAMPLE_URL: url, sample: noSection, comment: `${on7683}\nimpronta ${fpNo}\nTasso di falsi positivi: 3/30\n` });
+  assert.equal(res.status, 1, res.stdout + res.stderr);
+  assert.match(res.stdout, /sezione translation-false-friend/);
+
   // Lotto di un altro codice: il cancello non lo ferma, ma un commento non
   // verificato resta `false` per la rete del commit.
   const other7682 = runSampleGate(gate, { CODE: 'leaked-prompt-scaffolding', SAMPLE_URL: url, sample, comment: `${on7683}\nTasso di falsi positivi: 2/30\n` });
