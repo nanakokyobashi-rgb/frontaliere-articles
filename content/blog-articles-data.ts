@@ -37448,6 +37448,24 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'notte-rissa-saronno-soccorsi',
+ category: 'novita',
+ date: '2026-10-04T03:06:50.350Z',
+ image: '/images/blog/notte-rissa-saronno-soccorsi.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'derby-varesina-pro-patria-2026',
+ category: 'novita',
+ date: '2026-10-04T03:23:01.131Z',
+ image: '/images/blog/derby-varesina-pro-patria-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
