@@ -111,6 +111,8 @@
  * @see generator/scripts/repair-prompt-placeholders.mjs — la bonifica del gia' pubblicato
  */
 
+import { escapeRegExpLiteral } from './escape-regexp.mjs';
+
 // ─────────────────────────────────────────────────────────────────────────────
 // I letterali dello schema JSON del prompt
 // ─────────────────────────────────────────────────────────────────────────────
@@ -499,7 +501,7 @@ export function leadOf(literal) {
   return s;
 }
 
-const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRx = (s) => escapeRegExpLiteral(s);
 
 // Non mescolare questi matcher con quelli derivati dal template corrente:
 // sono compatibilità di lettura per gli schemi storici già pubblicati.
@@ -1153,7 +1155,7 @@ export function orphanFaqLocales(faqByLocale, { sourceLocale = 'it' } = {}) {
 // tutta, non solo la prima occorrenza.
 
 /** L'id, reso inerte per finire dentro una regex. */
-const escapeIdRx = (id) => String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeIdRx = (id) => escapeRegExpLiteral(String(id));
 
 /** Il valore del sentinella che il passo 2 scrive per marcare una FAQ da togliere. */
 export const DROP_FAQ_SENTINEL = '__DROP_FAQ__';

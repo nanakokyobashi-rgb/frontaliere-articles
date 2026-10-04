@@ -168,6 +168,7 @@ import {
   markBodyTranslationPending,
   isBodyTranslationPending,
 } from './lib/free-mt-recovery.mjs';
+import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
@@ -13922,7 +13923,7 @@ function validateBodyFileSyntax(filePath, content) {
 }
 
 function escapeRegex(s) {
-  return String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return escapeRegExpLiteral(String(s || ''));
 }
 
 /**

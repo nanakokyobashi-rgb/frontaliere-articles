@@ -53,6 +53,7 @@ import {
   wrongLocalePair,
 } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
+import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
 function parseLimitArgs(argv) {
@@ -537,7 +538,7 @@ export function extractArticleId(fileContent, fileName) {
 // (#294): questo file e' un gemello `adapted` di uno del sito
 // (`scripts/batch-add-faq-to-articles.mjs`) e importare qui una lib `corpus-only` aggiungerebbe una
 // divergenza in piu' fra i due, per tre righe di regex.
-const rxEscape = (id) => String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const rxEscape = (id) => escapeRegExpLiteral(String(id));
 const faqKeyRx = (id) => `'blog\\.article\\.${rxEscape(id)}\\.faq'`;
 // Stessa ancora, altra chiave (issue #393). `extractBodyContent` leggeva
 // `\.body\d+'` — qualunque corpo nel file — e il testo cosi' raccolto e' il

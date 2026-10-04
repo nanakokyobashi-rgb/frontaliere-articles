@@ -2083,8 +2083,8 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0a7b1ffb1f607d24",
-        "corpus": "0a7b1ffb1f607d24",
+        "site": "12c271986374ec38",
+        "corpus": "12c271986374ec38",
         "alignedAt": "2026-10-04"
       }
     },
