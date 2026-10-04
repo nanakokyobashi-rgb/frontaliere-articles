@@ -81,6 +81,8 @@ import {
 // under plain `node --test`, without a tsx subprocess.
 import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
+// Allowlist dei campi pubblici di articles.json / swiss-articles.json.
+import { toPublicRegistryEntry } from './lib/registry-api-entry.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
 // same-day canonical-override landing on a still-in-window ticker article.
 import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
@@ -197,7 +199,10 @@ if (!commit) {
 // Ogni documento che il detector legge deve portare la stessa release del
 // manifest. Senza il marker per-riga, counts e insieme di ID possono restare
 // identici mentre il registro appartiene a un commit diverso da slugs.json.
-const markRegistryRelease = (registry) => registry.map((article) => ({ ...article, commit }));
+// La voce e' proiettata sull'allowlist pubblica, mai copiata con uno spread:
+// un campo interno del registry (es. `articleType`) non entra nel contratto
+// HTTP per caso (scripts/lib/registry-api-entry.mjs).
+const markRegistryRelease = (registry) => registry.map((article) => toPublicRegistryEntry(article, commit));
 write('articles.json', markRegistryRelease(ARTICLES));
 write('swiss-articles.json', markRegistryRelease(SWISS_ARTICLES));
 

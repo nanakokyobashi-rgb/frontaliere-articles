@@ -99991,6 +99991,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vescovi-openjobmetis-della-valle': {
+    title: 'Cecco vescovi: della valle uomo chiave openjobmetis',
+    description: 'Cecco Vescovi, ospite a «Luci a Masnago», analizza il debutto della Openjobmetis Varese contro la Virtus Bologna, evidenziando le assenze e il ruolo cruciale',
+    keywords: 'frontalieri, ticino, svizzera, italia, cecco, vescovi, valle, uomo',
+    ogTitle: 'Cecco Vescovi: Della Valle chiave per Openjobmetis Varese',
+    ogDescription: 'Cecco Vescovi, ex recordman della Pallacanestro Varese, ha esaminato la sconfitta casalinga della Openjobmetis contro la Virtus Bologna a «Luci a Masnago». Ha sottolineato l\'importanza di Amedeo Della Valle e consigliato a Matteo Librizzi',
+    canonicalPath: '/articoli-frontaliere/vescovi-openjobmetis-della-valle/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cecco vescovi: della valle uomo chiave openjobmetis",
+      "description": "Cecco Vescovi, ospite a «Luci a Masnago», analizza il debutto della Openjobmetis Varese contro la Virtus Bologna, evidenziando le assenze e il ruolo cruciale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vescovi-openjobmetis-della-valle.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Azione di gioco durante una partita di basket in un palazzetto dello sport, con giocatori in movimento e pubblico sugli spalti."
+      },
+      "datePublished": "2026-10-04T07:52:54+00:00",
+      "dateModified": "2026-10-04T07:52:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vescovi-openjobmetis-della-valle/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-scontro-notturno-gallarate': {
+    title: 'Incidente notturno a Gallarate: tre giovani coinvolti',
+    description: 'Incidente a Gallarate, via Stelvio: tre ragazzi di 18, 20 e 24 anni coinvolti. Due trasportati negli ospedali di Legnano e Gallarate; codice rosso poi giallo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, notturno, gallarate, giovani',
+    ogTitle: 'Gallarate, scontro tra auto nella notte: tre giovani',
+    ogDescription: 'Via Stelvio a Gallarate, poco dopo le 4, uno scontro tra auto ha coinvolto tre ragazzi. L\'intervento è partito in codice rosso ed è stato poi ridimensionato in giallo; due giovani sono stati trasportati negli ospedali di Legnano e Gallarate.',
+    canonicalPath: '/articoli-frontaliere/scontro-notturno-gallarate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente notturno a Gallarate: tre giovani coinvolti",
+      "description": "Incidente a Gallarate, via Stelvio: tre ragazzi di 18, 20 e 24 anni coinvolti. Due trasportati negli ospedali di Legnano e Gallarate; codice rosso poi giallo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scontro-notturno-gallarate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incidente notturno a Gallarate con tre giovani coinvolti"
+      },
+      "datePublished": "2026-10-04T08:06:33+00:00",
+      "dateModified": "2026-10-04T08:06:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-notturno-gallarate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saracino-comandante-carabinieri-mornago': {
+    title: 'Saracino nuovo comandante dei Carabinieri di Mornago',
+    description: 'Luogotenente Carica Speciale Anacleto Antonio Saracino assume il comando della Stazione dei Carabinieri di Mornago, dipendente dalla Compagnia di Gallarate',
+    keywords: 'frontalieri, ticino, svizzera, italia, saracino, nuovo, comandante, carabinieri',
+    ogTitle: 'Saracino nuovo comandante dei Carabinieri di Mornago',
+    ogDescription: 'Il Luogotenente Carica Speciale Anacleto Antonio Saracino è stato nominato nuovo comandante della Stazione dei Carabinieri di Mornago, unità dipendente dalla Compagnia di Gallarate e sotto la direzione provinciale del Colonnello Alessandro De Vico',
+    canonicalPath: '/articoli-frontaliere/saracino-comandante-carabinieri-mornago/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Saracino nuovo comandante dei Carabinieri di Mornago",
+      "description": "Luogotenente Carica Speciale Anacleto Antonio Saracino assume il comando della Stazione dei Carabinieri di Mornago, dipendente dalla Compagnia di Gallarate",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/saracino-comandante-carabinieri-mornago.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Luogotenente Anacleto Antonio Saracino davanti alla stazione dei Carabinieri di Mornago"
+      },
+      "datePublished": "2026-10-04T08:19:45+00:00",
+      "dateModified": "2026-10-04T08:19:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saracino-comandante-carabinieri-mornago/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
