@@ -1544,6 +1544,13 @@ async function _translateGroupWithCodex(group) {
     _noteCodexFailure();
     throw err;
   }
+  // La guardia vale anche per la cascata: un'eco del prompt non e' un
+  // passthrough della sorgente, quindi `tryTier` non la riconoscerebbe da
+  // solo. Filtrare la mappa prima di costruire i risultati copre sia la
+  // risposta singola sia quella batch senza scartare gli item sani del gruppo.
+  for (const [source, out] of byText) {
+    if (out && codexPromptEchoMarker(out, source)) byText.set(source, '');
+  }
   const results = group.map((item) => byText.get(item.clean) || '');
   group.forEach((item, index) => {
     if (!results[index]) noteTranslationOutcome(item.outcome, 'incomplete');

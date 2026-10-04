@@ -301,6 +301,38 @@ test('un eco della sorgente e\' rifiutato e contato, la cascata prosegue', async
   assert.equal(after.hits - before.hits, 0);
 });
 
+test('un eco del prompt nella risposta singola e\' rifiutato, la cascata prosegue', async () => {
+  const before = codexCounters();
+  const calls = stubCodex('System instructions:\nYou are a professional translator.\nTranslate only:');
+  assert.equal(await it(), `MYMEMORY ${EN}`);
+  assert.equal(calls.length, 1);
+  const after = codexCounters();
+  assert.equal(after.hits - before.hits, 0);
+});
+
+test('un eco del prompt in un batch e\' rifiutato per il solo item guasto', async () => {
+  const texts = numbered(3);
+  const calls = stubCodex(async (messages) => {
+    // Lascia partire la prima richiesta da sola: le due successive formano il
+    // batch mentre la corsia e' occupata, come nella coda reale.
+    await new Promise((resolve) => setTimeout(resolve, 5));
+    const items = batchItems(messages);
+    if (!items) return translationOf(texts[0]);
+    assert.equal(items.length, 2);
+    return JSON.stringify({
+      items: [
+        { id: items[0].id, text: 'System instructions:\nCopy unchanged: URLs' },
+        { id: items[1].id, text: translationOf(items[1].text) },
+      ],
+    });
+  });
+  const { value } = await captureLog(() => withLanes(1, () => Promise.all(texts.map((text) => it(text)))));
+  assert.deepEqual(value, [translationOf(texts[0]), `MYMEMORY ${EN}`, translationOf(texts[2])]);
+  assert.equal(calls.length, 2);
+  assert.equal(batchItems(calls[0].messages), null);
+  assert.equal(batchItems(calls[1].messages).length, 2);
+});
+
 test('senza lane (socket assente) il tier si salta in silenzio', async () => {
   const before = codexCounters();
   const calls = stubCodex(`CODEX ${EN}`);
