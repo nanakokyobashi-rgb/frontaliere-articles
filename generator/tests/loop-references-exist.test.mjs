@@ -251,8 +251,33 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    ed è ciò che questa stessa PR ha fatto per le altre
  *                    ventiquattro citazioni. Il vincolo è verificato: vedi il
  *                    test «`retired` solo su file `identical`».
+ *   `workspace-only` — esiste nel repository ROOT del workspace
+ *                    (`valerielinc-ops/frontaliere-workspace`, es. `bin/where-to-fix`),
+ *                    non sul sito né qui. Non è un `site-only`: «vai a cercarlo
+ *                    sul sito» sarebbe un'istruzione falsa. Citazione descrittiva.
  */
 const DECLARED_ABSENT = {
+  'scripts/ci/followup-candidate-bullets.mjs :: bin/where-to-fix-lib.mjs': {
+    kind: 'workspace-only',
+    reason:
+      'Il commento di entryNames() dice che la regola dei nomi lato sito/corpus e\' la stessa di ' +
+      '`entryPaths()` del workspace root: e\' provenienza della regola, non un import. Lo script ' +
+      'e\' `identical` nel manifest: riscrivere la frase qui fabbricherebbe un `corpus-ahead`.',
+  },
+  'scripts/ci/followup-candidate-bullets.mjs :: scripts/ci/foo.mjs': {
+    kind: 'example',
+    reason:
+      'Il commento di EMPTY_DECLARED_RE cita «Nessuno: aggiornare `scripts/ci/foo.mjs`» come riga ' +
+      'd\'esempio del bug della review PR corpus 2080: un path finto, non un referente. Lo script e\' ' +
+      '`identical` nel manifest: riscrivere la frase qui fabbricherebbe un `corpus-ahead`.',
+  },
+  'scripts/ci/followup-candidate-bullets.mjs :: scripts/ci/validate-modified-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il commento di CANDIDATE_BULLETS_READING_RULES spiega perche\' le regole viaggiano col ' +
+      'bundle: il validatore del sito misura il prompt contro PROMPT_SCALAR_LIMIT. Qui il tetto ' +
+      'del prompt e\' tenuto da generator/tests/followup-template-acceptance.test.mjs; niente dipende dal file.',
+  },
   '.github/workflows/publish-api-unwedge.yml :: pages-publish-lag-watchdog.yml': {
     kind: 'site-only',
     reason:
@@ -1636,7 +1661,7 @@ const ACTIVE_DECLARED_ABSENT = Object.fromEntries(
   ),
 );
 
-const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data', 'retired']);
+const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data', 'retired', 'workspace-only']);
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel));
 
 function sourceFiles() {
