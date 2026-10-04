@@ -1530,6 +1530,98 @@ test('--scan fallisce chiuso su un albero incompleto o sparse invece di contare 
   }
 });
 
+// Review 2026-10-04T01:20Z su e3b8fd98ca: il bit `S` di `git ls-files -v` non
+// basta. Un body tracciato e CANCELLATO dal worktree (senza skip-worktree)
+// restava fuori da `readdirSync` e la conta usciva 0, piu' bassa. La guardia
+// confronta i body tracciati con quelli presenti, per ogni ramo che legge
+// `content/`: --scan, --missing, --slug e i file di un --audit.
+test('un body tracciato ma assente dal worktree fa uscire 2 ogni ramo che legge content/', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-tracked-'));
+  const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, '--content-root', tmp, ...args], { encoding: 'utf8' });
+  const git = (...args) => spawnSync('git', ['-C', tmp, ...args], { encoding: 'utf8' });
+  try {
+    writeScanFixture(tmp);
+    assert.equal(git('init', '-q').status, 0);
+    assert.equal(git('add', 'content').status, 0);
+
+    // Caso sano: checkout git completo, la conta esce 0 con tutti i file.
+    const sane = run('--scan', '--count-only');
+    assert.equal(sane.status, 0, sane.stderr);
+    assert.equal(JSON.parse(sane.stdout).scanned, 10);
+
+    // Traduzione cancellata, non skip-worktree: prima usciva 0 con scanned 9.
+    fs.rmSync(path.join(tmp, 'content/blog-body/en/ff.ts'));
+    const deleted = run('--scan', '--count-only');
+    assert.equal(deleted.status, 2, deleted.stdout);
+    assert.match(deleted.stderr, /tracciati ma assenti.*content\/blog-body\/en\/ff\.ts/s);
+    assert.equal(deleted.stdout, '', 'nessuna conta stampata');
+    // Il locale escluso non e' richiesto: la stessa assenza non blocca.
+    assert.equal(run('--scan', '--count-only', '--locale', 'it,de,fr').status, 0);
+    // Gli altri rami che leggono content/ falliscono chiusi allo stesso modo.
+    const missing = run('--missing', '--locale', 'en');
+    assert.equal(missing.status, 2, missing.stdout);
+    assert.match(missing.stderr, /tracciati ma assenti/);
+    const slug = run('--slug', 'ff', '--locale', 'en');
+    assert.equal(slug.status, 2, slug.stdout);
+    assert.match(slug.stderr, /tracciati ma assenti.*en\/ff\.ts/s);
+    git('checkout', '--', 'content/blog-body/en/ff.ts');
+
+    // L'italiano di riferimento cancellato pesa anche se si contano solo gli en.
+    fs.rmSync(path.join(tmp, 'content/blog-body-ch/it/ch-ff.ts'));
+    const noRef = run('--scan', '--count-only', '--locale', 'en');
+    assert.equal(noRef.status, 2, noRef.stdout);
+    assert.match(noRef.stderr, /content\/blog-body-ch\/it\/ch-ff\.ts/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('una lista di locali vuota o un insieme senza file escono 2 prima della scansione', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-empty-'));
+  const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, '--content-root', tmp, ...args], { encoding: 'utf8' });
+  try {
+    writeScanFixture(tmp);
+    // `--locale=` dava LOCALES=[]: nessun file letto e conta vuota con exit 0.
+    for (const args of [
+      ['--scan', '--count-only', '--locale='],
+      ['--scan', '--count-only', '--locale', ' , '],
+      ['--scan', '--locale='],
+      ['--missing', '--locale='],
+      ['--slug', 'ff', '--locale='],
+      ['--audit', '/dev/null', '--locale='],
+    ]) {
+      const res = run(...args);
+      assert.equal(res.status, 2, `${args.join(' ')} deve uscire 2 (stdout: ${res.stdout})`);
+      assert.match(res.stderr, /--locale .*vuot/, `${args.join(' ')}: guardia sbagliata`);
+      assert.equal(res.stdout, '', `${args.join(' ')}: nessun output`);
+    }
+
+    // Uno slug chiesto che non corrisponde a nessun body: era un no-op a exit 0.
+    const ghost = run('--slug', 'non-esiste', '--json');
+    assert.equal(ghost.status, 2, ghost.stdout);
+    assert.match(ghost.stderr, /non-esiste/);
+
+    // Caso sano: la fixture completa esce 0.
+    assert.equal(run('--scan', '--count-only').status, 0);
+
+    // Albero completo nelle cartelle ma senza un solo body: lo stock vuoto non
+    // e' "zero bloccanti", e' una conta che non ha letto niente.
+    const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-nofiles-'));
+    try {
+      for (const tree of ['content/blog-body', 'content/blog-body-ch']) {
+        for (const locale of ['it', 'en', 'de', 'fr']) fs.mkdirSync(path.join(empty, tree, locale), { recursive: true });
+      }
+      const none = spawnSync(process.execPath, [SCAN_SCRIPT, '--scan', '--count-only', '--content-root', empty], { encoding: 'utf8' });
+      assert.equal(none.status, 2, none.stdout);
+      assert.match(none.stderr, /nessun body/);
+    } finally {
+      fs.rmSync(empty, { recursive: true, force: true });
+    }
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
 test('--scan senza --apply non tocca la fixture; --count-only e --list-out riportano lo stock', () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-cli-'));
   try {

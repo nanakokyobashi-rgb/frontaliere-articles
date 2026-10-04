@@ -82,8 +82,11 @@
  *                      --audit, --slug o --missing. Il resto (--code,
  *                      --locale, --limit, --stratify, --apply) e' invariato.
  *                      Esce 2 se manca una cartella `<albero>/<locale>` (o
- *                      l'`it`) o se il checkout ha body skip-worktree: una
- *                      conta parziale non deve sembrare uno stock bonificato.
+ *                      l'`it`), se un body tracciato da git manca dal
+ *                      worktree (cancellato o skip-worktree) o se non legge
+ *                      nessun body: una conta parziale non deve sembrare uno
+ *                      stock bonificato. La stessa guardia sui body tracciati
+ *                      vale per --missing, --slug e i file di un --audit.
  *   --count-only       solo con --scan: non tratta nessuna coppia, stampa
  *                      `{ scanned, byCode: { <codice>: { it, en, de, fr,
  *                      total } } }` su stdout (e su --out). Default locali
@@ -103,6 +106,8 @@
  *   --limit N          massimo di coppie trattate
  *   --locale a,b       filtra le coppie per locale (default en,de,fr).
  *                      `it` e' opt-in: e' il sorgente, non una traduzione.
+ *                      Una lista vuota (`--locale=`) esce 2: non e' "nessun
+ *                      filtro" e non e' "zero coppie".
  *   --code <code>      filtra per codice bloccante (stratificazione del pilota)
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
@@ -113,7 +118,7 @@
  *                      STDOUT ("DeepL key #1 quota exhausted"), quindi un
  *                      `--json` rediretto con `>` non e' parsabile.
  */
-import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync, readdirSync, statSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -934,22 +939,88 @@ export function scanContentGaps(contentRoot, { locales = ['en', 'de', 'fr'] } = 
   return missing;
 }
 
+const isRegularFile = (file) => {
+  try {
+    return statSync(file).isFile();
+  } catch {
+    return false;
+  }
+};
+
 /**
- * Body tracciati ma non materializzati (skip-worktree, lettera `S` di
- * `git ls-files -v`) sotto gli alberi di `DIR_TO_REAL`. In uno sparse le
- * cartelle possono esistere e contenere solo una parte dei file: l'esistenza
- * delle cartelle non basta a provare che la conta sia completa.
- * Fuori da un checkout git (fixture, archivio estratto) restituisce 0.
+ * Confronta i body che git TRACCIA sotto gli alberi di `DIR_TO_REAL` con quelli
+ * presenti sul disco, per l'`it` di riferimento e i `locales` chiesti (e, se
+ * `ids` e' dato, solo per quegli id).
+ *
+ * Chiedere a `git ls-files -v` il solo bit `S` (skip-worktree) non bastava: un
+ * body tracciato e CANCELLATO dal worktree resta fuori da `readdirSync`, e la
+ * conta usciva 0, piu' bassa, come uno stock bonificato. Qui conta l'elenco
+ * atteso contro i file materializzati, qualunque sia la causa dell'assenza
+ * (sparse, `rm`, un `x.ts` diventato cartella).
+ *
+ * Fuori da un checkout git (fixture, archivio estratto da `git archive`) non
+ * c'e' un elenco atteso: `{ git: false }`. Un git che risponde con un errore
+ * diverso da "not a git repository" NON e' un'assenza: torna `error`, e chi
+ * chiama fallisce chiuso.
+ *
+ * @param {string} contentRoot radice che contiene `content/`
+ * @param {{ locales?: string[], ids?: string[] | null }} [opts]
+ * @returns {{ git: boolean, missing: string[], skipWorktree: number, error?: string }}
  */
-export function skipWorktreeBodyCount(contentRoot) {
-  const res = spawnSync('git', ['-C', contentRoot, 'ls-files', '-v', '--', ...Object.values(DIR_TO_REAL)], {
+export function trackedBodyGaps(contentRoot, { locales = ['en', 'de', 'fr'], ids = null } = {}) {
+  const wanted = new Set(['it', ...(Array.isArray(locales) ? locales.filter(Boolean) : [])]);
+  const idSet = ids == null ? null : new Set(ids);
+  const result = { git: false, missing: [], skipWorktree: 0 };
+  const probe = spawnSync('git', ['-C', contentRoot, 'rev-parse', '--is-inside-work-tree'], { encoding: 'utf8' });
+  if (probe.error) return { ...result, error: `git non eseguibile: ${probe.error.message}` };
+  if (probe.status !== 0) {
+    if (/not a git repository/i.test(probe.stderr || '')) return result;
+    return { ...result, error: `git rev-parse: ${(probe.stderr || '').trim() || `exit ${probe.status}`}` };
+  }
+  if (String(probe.stdout).trim() !== 'true') return result;
+  const res = spawnSync('git', ['-C', contentRoot, 'ls-files', '-v', '-z', '--', ...Object.values(DIR_TO_REAL)], {
     encoding: 'utf8',
     maxBuffer: 256 * 1024 * 1024,
   });
-  if (res.status !== 0 || typeof res.stdout !== 'string') return 0;
-  let count = 0;
-  for (const line of res.stdout.split('\n')) if (line.startsWith('S ')) count += 1;
-  return count;
+  if (res.error || res.status !== 0 || typeof res.stdout !== 'string') {
+    return { ...result, git: true, error: `git ls-files: ${res.error?.message || (res.stderr || '').trim() || `exit ${res.status}`}` };
+  }
+  result.git = true;
+  for (const entry of res.stdout.split('\0')) {
+    if (entry.length < 3) continue;
+    const tag = entry[0];
+    const rel = entry.slice(2);
+    const realDir = Object.values(DIR_TO_REAL).find((d) => rel.startsWith(`${d}/`));
+    if (!realDir) continue;
+    const parts = rel.slice(realDir.length + 1).split('/');
+    if (parts.length !== 2 || !parts[1].endsWith('.ts')) continue;
+    const [locale, name] = parts;
+    if (!wanted.has(locale)) continue;
+    if (idSet && !idSet.has(name.slice(0, -'.ts'.length))) continue;
+    if (tag === 'S') result.skipWorktree += 1;
+    if (!isRegularFile(resolve(contentRoot, rel))) result.missing.push(rel);
+  }
+  result.missing.sort();
+  return result;
+}
+
+/**
+ * Messaggi d'errore della guardia sui body tracciati; vuoto se il set e'
+ * completo. Unico punto usato da tutti i rami che leggono `content/`.
+ */
+export function trackedBodyGapErrors(contentRoot, opts = {}) {
+  const gaps = trackedBodyGaps(contentRoot, opts);
+  const errors = [];
+  if (gaps.error) errors.push(`impossibile verificare i body tracciati sotto ${contentRoot} (${gaps.error}).`);
+  if (gaps.skipWorktree > 0) {
+    errors.push(`${gaps.skipWorktree} body tracciati ma non materializzati (skip-worktree) sotto ${contentRoot}.`);
+  }
+  if (gaps.missing.length) {
+    const shown = gaps.missing.slice(0, 10).join(', ');
+    const more = gaps.missing.length > 10 ? ` (e altri ${gaps.missing.length - 10})` : '';
+    errors.push(`${gaps.missing.length} body tracciati ma assenti dal worktree sotto ${contentRoot}: ${shown}${more}.`);
+  }
+  return errors;
 }
 
 /**
@@ -976,8 +1047,10 @@ export function skipWorktreeBodyCount(contentRoot) {
  * vederla, e `processPair` la salta come `sorgente-mancante`.
  *
  * Una cartella assente qui viene saltata: la completezza dell'albero la
- * prova `main` con `scanContentGaps` e `skipWorktreeBodyCount` PRIMA della
- * scansione, e senza quella prova `--scan` esce 2.
+ * prova `main` con `scanContentGaps` e `trackedBodyGaps` PRIMA della
+ * scansione, e senza quella prova (o con `scanned` a zero) `--scan` esce 2.
+ * Una voce `.ts` che non e' un file regolare non viene letta: se git la
+ * traccia come body, `trackedBodyGaps` l'ha gia' segnalata.
  *
  * Funzione pura sul filesystem in sola lettura: zero rete, zero MT, nessuna
  * scrittura.
@@ -994,7 +1067,9 @@ export function scanContentForBlockingPairs(contentRoot, { locales = ['en', 'de'
     for (const locale of uniqueLocales) {
       const localeDir = resolve(contentRoot, realDir, locale);
       if (!existsSync(localeDir)) continue;
-      const files = readdirSync(localeDir).filter((name) => name.endsWith('.ts')).sort();
+      const files = readdirSync(localeDir)
+        .filter((name) => name.endsWith('.ts') && isRegularFile(resolve(localeDir, name)))
+        .sort();
       for (const name of files) {
         const id = name.slice(0, -'.ts'.length);
         const src = readFileSync(resolve(localeDir, name), 'utf8');
@@ -1299,7 +1374,16 @@ async function main() {
   }
   const CONCURRENCY = Math.max(1, Number(flag('concurrency', 2)) || 2);
   const CONTENT_ROOT = resolve(flag('content-root', ROOT));
-  const LOCALES = parseLocaleList(flag('locale', COUNT_ONLY ? SCAN_COUNT_LOCALES.join(',') : 'en,de,fr'));
+  const rawLocale = flag('locale', COUNT_ONLY ? SCAN_COUNT_LOCALES.join(',') : 'en,de,fr');
+  const LOCALES = parseLocaleList(rawLocale);
+  // `--locale=` (o `--locale ' , '`) dava `LOCALES=[]`: nessun locale da
+  // leggere, nessuna coppia, exit 0 — con --count-only uno stock vuoto che si
+  // legge come bonificato. Come per `--slug=`, una lista chiesta e vuota e' un
+  // errore di invocazione, in TUTTI i rami, prima di leggere audit o content/.
+  if (LOCALES.length === 0) {
+    console.error(`❌ --locale "${rawLocale ?? ''}" è vuoto. Indica almeno un locale (it, en, de, fr) oppure ometti il flag.`);
+    process.exit(2);
+  }
   const CODE = flag('code');
   const SLUG_FILTER = has('slug') ? SLUGS : undefined;
 
@@ -1314,25 +1398,39 @@ async function main() {
     process.exit(2);
   }
 
+  // Ogni ramo che legge `content/` passa da qui: la guardia globale sopra
+  // scatta solo se mancano TUTTI gli alberi, e una cartella o un body assente
+  // altrove dava una selezione parziale con exit 0. `ids` restringe il
+  // confronto agli articoli del ramo (--slug, --audit); `dirs` aggiunge il
+  // controllo delle cartelle `<albero>/<locale>` per i rami che scansionano
+  // l'albero intero (--scan, --missing).
+  const failClosedOnIncompleteTree = (branch, { ids = null, dirs = false } = {}) => {
+    const errors = [];
+    if (dirs) {
+      const gaps = scanContentGaps(CONTENT_ROOT, { locales: LOCALES });
+      if (gaps.length) errors.push(`albero dei body incompleto sotto ${CONTENT_ROOT}, mancano: ${gaps.join(', ')}.`);
+    }
+    errors.push(...trackedBodyGapErrors(CONTENT_ROOT, { locales: LOCALES, ids }));
+    if (!errors.length) return;
+    for (const message of errors) console.error(`❌ ${branch}: ${message}`);
+    console.error('   Una selezione parziale si leggerebbe come stock bonificato: passa --content-root su un checkout completo.');
+    process.exit(2);
+  };
+
   let pairs;
   if (SCAN) {
-    // La guardia qui sopra scatta solo se mancano TUTTI gli alberi. Per la
-    // conta non basta: in uno sparse `content/blog-body/it` con un solo file
-    // dava `{ scanned: 1, byCode: {} }` con exit 0, cioe' "stock azzerato".
-    // `--scan` e' la metrica (e la base del ratchet): fallisce chiuso.
-    const gaps = scanContentGaps(CONTENT_ROOT, { locales: LOCALES });
-    if (gaps.length) {
-      console.error(`❌ --scan: albero dei body incompleto sotto ${CONTENT_ROOT}, mancano: ${gaps.join(', ')}.`);
-      console.error('   Una conta parziale si leggerebbe come stock bonificato: passa --content-root su un checkout completo.');
-      process.exit(2);
-    }
-    const skipped = skipWorktreeBodyCount(CONTENT_ROOT);
-    if (skipped > 0) {
-      console.error(`❌ --scan: ${skipped} body tracciati ma non materializzati (skip-worktree) sotto ${CONTENT_ROOT}.`);
-      console.error('   Il checkout e\' sparse: passa --content-root su un checkout completo.');
-      process.exit(2);
-    }
+    // `--scan` e' la metrica (e la base del ratchet): in uno sparse
+    // `content/blog-body/it` con un solo file dava `{ scanned: 1, byCode: {} }`
+    // con exit 0, e un body tracciato ma cancellato abbassava la conta in
+    // silenzio. Fallisce chiuso su cartelle mancanti e body tracciati assenti.
+    failClosedOnIncompleteTree('--scan', { dirs: true });
     const scan = scanContentForBlockingPairs(CONTENT_ROOT, { locales: LOCALES });
+    // Cartelle tutte presenti ma vuote (o un archivio senza body): zero file
+    // letti non e' "zero bloccanti".
+    if (scan.scanned === 0) {
+      console.error(`❌ --scan: nessun body letto sotto ${CONTENT_ROOT} per i locali ${LOCALES.join(',')}.`);
+      process.exit(2);
+    }
     const selected = scan.pairs.filter((p) => !CODE || p.codes.includes(CODE));
     if (has('list-out')) {
       const lines = scanListLines(selected);
@@ -1347,6 +1445,9 @@ async function main() {
     // Stesso formato dell'audit: `evidence` resta nel --list-out, non nel report.
     pairs = selected.map(({ id, locale, dir, codes }) => ({ id, locale, dir, codes }));
   } else if (MISSING) {
+    // Anche --missing scansiona l'albero intero: un body tracciato e assente
+    // sparirebbe dal report di completezza invece di comparire come difetto.
+    failClosedOnIncompleteTree('--missing', { dirs: true });
     pairs = completenessPairsFromReport(inspectBlogLocaleCompleteness({ root: CONTENT_ROOT }));
     pairs = selectBlockingPairs(pairs, { locales: LOCALES, slugs: undefined });
   } else if (auditPath) {
@@ -1355,13 +1456,26 @@ async function main() {
       locales: LOCALES,
       slugs: SLUG_FILTER,
     });
+    // Le coppie dell'audit si leggono da content/: un loro body tracciato e
+    // assente uscirebbe 'sorgente-mancante' con exit 0.
+    if (pairs.length) failClosedOnIncompleteTree('--audit', { ids: [...new Set(pairs.map((p) => p.id))] });
   } else {
     // Senza audit lo slug e' l'unica chiave: riscrittura in-place di un
     // articolo gia' registrato, italiano compreso. Nessun id nuovo.
+    failClosedOnIncompleteTree('--slug', { ids: SLUGS });
     pairs = selectBlockingPairs(pairsForSlugs(SLUGS, LOCALES, CONTENT_ROOT), {
       locales: LOCALES,
       slugs: SLUG_FILTER,
     });
+    // Uno slug chiesto che non corrisponde a nessun body nei locali chiesti
+    // (refuso, locale sbagliato, articolo non ancora nel checkout) era un
+    // no-op a exit 0: "niente da fare" invece di "non l'ho trovato".
+    const found = new Set(pairs.map((p) => p.id));
+    const ghosts = SLUGS.filter((id) => !found.has(id));
+    if (ghosts.length) {
+      console.error(`❌ --slug: nessun body per ${ghosts.join(', ')} nei locali ${LOCALES.join(',')} sotto ${CONTENT_ROOT}.`);
+      process.exit(2);
+    }
   }
   pairs = pairs.filter((p) => !CODE || p.codes.includes(CODE));
 
