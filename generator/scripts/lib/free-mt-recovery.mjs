@@ -132,6 +132,9 @@ export function createFreeMtRecoveryReport({
     // `<locale>:<bodyN>` -> motivo, per i body che nessun tier ha tradotto e
     // che restano quindi NON tradotti (vedi `markBodyTranslationPending`).
     pendingBodyFields: {},
+    // `<locale>:<bodyN>` -> corsia, per i body usciti dall'attesa grazie alla
+    // seconda corsia (vedi `retryPendingBodyTranslations`).
+    pendingBodyRecovered: {},
   };
 }
 
@@ -334,4 +337,120 @@ export function isBodyTranslationPending(data, locale, field) {
 export function pendingBodyTranslations(data) {
   const list = pendingList(data);
   return list ? list.map((r) => ({ ...r })) : [];
+}
+
+/**
+ * Toglie il marker di attesa da `locale`/`field` (il body e' stato tradotto da
+ * un'altra corsia) e lo sposta, nel report, da `pendingBodyFields` a
+ * `pendingBodyRecovered`. Non scrive il contenuto: lo fa il chiamante.
+ */
+export function clearBodyTranslationPending(data, { locale, field, report = null, lane = 'unknown' } = {}) {
+  const list = pendingList(data);
+  if (list) {
+    const at = list.findIndex((r) => r.locale === locale && r.field === field);
+    if (at !== -1) list.splice(at, 1);
+  }
+  if (report && typeof report === 'object') {
+    const key = freeMtFieldKey(locale, field);
+    if (report.pendingBodyFields && typeof report.pendingBodyFields === 'object') {
+      delete report.pendingBodyFields[key];
+    }
+    if (!report.pendingBodyRecovered || typeof report.pendingBodyRecovered !== 'object') report.pendingBodyRecovered = {};
+    report.pendingBodyRecovered[key] = lane;
+  }
+}
+
+// ── Seconda corsia per i body rimasti in attesa ──────────────────────────────
+//
+// Un body lasciato in attesa (#1875) e' ASSENTE dal locale. La guardia di
+// scrittura di generate-article.yml («Guard — l'articolo generato ha tutti i
+// body localizzati», `scripts/ci/check-blog-locale-completeness.mjs`, #2042)
+// boccia quell'assenza come `missing-key`: ogni articolo con anche un solo body
+// non recuperato fa rossa la run e non viene committato. Run 37220516797
+// (2026-10-04): `pending_bodies={"de:body1":"retry-error"}` dopo che la cascata
+// free intera era esaurita, e il tier Codex del free-MT si era gia' fermato sul
+// suo budget di 300 s; run 37153946271 (2026-10-03): `fr:body1` e `fr:body2`.
+//
+// La guardia ha ragione (AGENTS.md #1) e resta com'e': prima che l'articolo
+// arrivi li', ogni body in attesa riceve UN tentativo su una seconda corsia,
+// indipendente dalla cascata appena esaurita. Se anche quella non traduce, il
+// body resta in attesa e la guardia continua a fermare l'articolo.
+//
+// La funzione e' pura rispetto al trasporto: la corsia (`translate`), il
+// giudizio sul testo (`rejectReason`), la normalizzazione (`finalize`), la
+// disponibilita' (`isLaneAvailable`) e lo stop (`shouldStop`) li passa il
+// chiamante. Una sola chiamata per body, in fila; due errori consecutivi della
+// corsia la fermano per il resto dell'articolo, perche' ogni chiamata spende
+// tempo dello stesso budget wall-clock che serve alla scrittura dei file.
+export const PENDING_BODY_RETRY_MAX_CONSECUTIVE_ERRORS = 2;
+
+export async function retryPendingBodyTranslations(data, {
+  translate,
+  rejectReason = () => null,
+  finalize = (text) => text,
+  report = null,
+  lane = 'second-lane',
+  isLaneAvailable = () => true,
+  shouldStop = () => false,
+  log = () => {},
+} = {}) {
+  const outcome = { lane, attempted: 0, recovered: [], stillPending: [], stoppedBy: null };
+  const pending = pendingBodyTranslations(data);
+  if (pending.length === 0) return outcome;
+  if (typeof translate !== 'function') {
+    throw new TypeError('retryPendingBodyTranslations: `translate` e\' richiesto');
+  }
+  let consecutiveErrors = 0;
+  for (const record of pending) {
+    const key = freeMtFieldKey(record.locale, record.field);
+    if (!outcome.stoppedBy && shouldStop()) outcome.stoppedBy = 'deadline';
+    if (!outcome.stoppedBy && !isLaneAvailable()) outcome.stoppedBy = 'lane-unavailable';
+    if (outcome.stoppedBy) {
+      outcome.stillPending.push(key);
+      continue;
+    }
+    const itValue = data?.content?.it?.[record.field];
+    if (typeof itValue !== 'string' || !itValue.trim()) {
+      outcome.stillPending.push(key);
+      continue;
+    }
+    outcome.attempted += 1;
+    let text;
+    try {
+      text = await translate({ locale: record.locale, field: record.field, itValue });
+      consecutiveErrors = 0;
+    } catch (err) {
+      consecutiveErrors += 1;
+      log(`  ⚠️  ${record.field} (${record.locale}): seconda corsia ${lane} fallita: ${err?.message || err}`);
+      outcome.stillPending.push(key);
+      if (consecutiveErrors >= PENDING_BODY_RETRY_MAX_CONSECUTIVE_ERRORS) {
+        outcome.stoppedBy = `${consecutiveErrors} errori consecutivi`;
+      }
+      continue;
+    }
+    const reason = typeof text !== 'string' || !text.trim()
+      ? 'risposta vuota'
+      : rejectReason({ locale: record.locale, field: record.field, itValue, text });
+    if (reason) {
+      log(`  ⚠️  ${record.field} (${record.locale}): seconda corsia ${lane} scartata (${reason}) — resta in attesa`);
+      outcome.stillPending.push(key);
+      continue;
+    }
+    if (!data.content[record.locale] || typeof data.content[record.locale] !== 'object') {
+      data.content[record.locale] = {};
+    }
+    data.content[record.locale][record.field] = finalize(text);
+    clearBodyTranslationPending(data, { locale: record.locale, field: record.field, report, lane });
+    outcome.recovered.push(key);
+    log(`  ✅ ${record.field} (${record.locale}) tradotto dalla seconda corsia ${lane}: non piu' in attesa`);
+  }
+  if (report && typeof report === 'object') {
+    report.pendingBodyRetry = {
+      lane,
+      attempted: outcome.attempted,
+      recovered: outcome.recovered.length,
+      stoppedBy: outcome.stoppedBy,
+    };
+  }
+  return outcome;
 }
