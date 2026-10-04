@@ -68,6 +68,7 @@ import {
 import { REVIEW_QUOTA_TRUSTED_ACTOR_RE, quotaFallbackDecision, quotaLeaseEvents, runQuotaLease } from './check-quota-backoff.mjs';
 import { FIX_OUTCOME_RE, TITLE_RE as RECONCILER_TITLE_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
+import { reopenedAfterDecomposition } from './lib/parent-close-recurrence.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
@@ -4480,8 +4481,21 @@ export function runDrain() {
       }
       if (!budget.take(`#${p.number} (parent-close)`, ITEM_COST_MS)) break;
       examined++;
-      const kids = decomposedChildNumbers(issueComments(p.number) || []);
+      const comments = issueComments(p.number) || [];
+      const kids = decomposedChildNumbers(comments);
       if (!kids.length) continue; // marker assente/illeggibile → nessuna decisione
+      // Un monitor (github-issue-creator, `🔁 **Reopened**`) che ha riaperto
+      // il padre DOPO la decomposizione ha detto che la condizione è tornata:
+      // le figlie chiuse non lo smentiscono, e richiuderlo qui produceva il
+      // ping-pong chiusura/riapertura (sito 5661; qui #339 «Loop drift»,
+      // 25 PARENT-CLOSE e 35 riaperture al 2026-10-04). La chiusura spetta al
+      // closer del monitor; una decomposizione rifatta dopo ridà l'autorità a
+      // questo stadio. Prima delle view di stato delle figlie e prima del guard
+      // dei pin del manifest: non costa letture.
+      if (reopenedAfterDecomposition(comments)) {
+        console.log(`PARENT-CLOSE-SKIP #${p.number} (riaperta da un monitor dopo la decomposizione: la chiude il suo closer)`);
+        continue;
+      }
       let allClosed = true;
       for (const k of kids) {
         try {

@@ -921,6 +921,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/parent-close-recurrence.mjs",
+      "mode": "identical",
+      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` dice se un monitor (`🔁 **Reopened**` di `scripts/lib/github-issue-creator.mjs`) ha riaperto il padre decomposto DOPO l'ultimo marker `DECOMPOSED_INTO`; in quel caso il PARENT-CLOSE non lo richiude (valerielinc-ops/frontaliere-si-o-no#11312, origine site 5661; qui #339 «Loop drift», 25 PARENT-CLOSE e 35 riaperture al 2026-10-04). Copiata byte-per-byte dal sito: modulo puro, nessun adattamento. Il corpus importa solo la guardia e tiene il proprio `DECOMPOSED_INTO_RE` dentro il drainer adattato (il resto del delta del drainer non e' riconciliato in questo giro). `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` confronta lo sha256 del file con questa baseline.",
+      "baseline": {
+        "site": "7215ecceeb0599df",
+        "corpus": "7215ecceeb0599df",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "scripts/ci/lib/run-budget.mjs",
       "mode": "identical",
       "baseline": {
