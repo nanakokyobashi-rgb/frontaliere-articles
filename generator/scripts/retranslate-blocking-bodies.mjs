@@ -81,6 +81,9 @@
  *                      niente audit da 6 GB del sito. Non si combina con
  *                      --audit, --slug o --missing. Il resto (--code,
  *                      --locale, --limit, --stratify, --apply) e' invariato.
+ *                      Esce 2 se manca una cartella `<albero>/<locale>` (o
+ *                      l'`it`) o se il checkout ha body skip-worktree: una
+ *                      conta parziale non deve sembrare uno stock bonificato.
  *   --count-only       solo con --scan: non tratta nessuna coppia, stampa
  *                      `{ scanned, byCode: { <codice>: { it, en, de, fr,
  *                      total } } }` su stdout (e su --out). Default locali
@@ -112,6 +115,7 @@
  */
 import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
@@ -897,13 +901,55 @@ export const SCAN_COUNT_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 /** Chiave stabile di una coppia, la stessa di `--list-out`. */
 export const scanPairKey = (pair) => `${pair.dir}/${pair.locale}/${pair.id}`;
 
-function readSections(src, id) {
+function readSections(src, id, fields = bodyFieldsForSource(src, id)) {
   const sections = {};
-  for (const f of bodyFieldsForSource(src, id)) {
+  for (const f of fields) {
     const v = readBodyField(src, id, f);
     if (v) sections[f] = v;
   }
   return sections;
+}
+
+/**
+ * Le cartelle che `--scan` deve vedere per dare una conta completa: per ogni
+ * albero di `DIR_TO_REAL`, ogni locale chiesto e l'`it` di riferimento.
+ * Restituisce i path relativi a `contentRoot` che mancano sul disco.
+ *
+ * Senza questo controllo una cartella assente (worktree sparse, checkout
+ * parziale, `--content-root` sbagliato) verrebbe saltata e la conta uscirebbe
+ * piu' bassa con exit 0: uno stock dimezzato che si legge come bonificato.
+ */
+export function scanContentGaps(contentRoot, { locales = ['en', 'de', 'fr'] } = {}) {
+  const wanted = [...new Set(['it', ...(Array.isArray(locales) ? locales.filter(Boolean) : [])])];
+  const missing = [];
+  for (const realDir of Object.values(DIR_TO_REAL)) {
+    if (!existsSync(resolve(contentRoot, realDir))) {
+      missing.push(realDir);
+      continue;
+    }
+    for (const locale of wanted) {
+      if (!existsSync(resolve(contentRoot, realDir, locale))) missing.push(`${realDir}/${locale}`);
+    }
+  }
+  return missing;
+}
+
+/**
+ * Body tracciati ma non materializzati (skip-worktree, lettera `S` di
+ * `git ls-files -v`) sotto gli alberi di `DIR_TO_REAL`. In uno sparse le
+ * cartelle possono esistere e contenere solo una parte dei file: l'esistenza
+ * delle cartelle non basta a provare che la conta sia completa.
+ * Fuori da un checkout git (fixture, archivio estratto) restituisce 0.
+ */
+export function skipWorktreeBodyCount(contentRoot) {
+  const res = spawnSync('git', ['-C', contentRoot, 'ls-files', '-v', '--', ...Object.values(DIR_TO_REAL)], {
+    encoding: 'utf8',
+    maxBuffer: 256 * 1024 * 1024,
+  });
+  if (res.status !== 0 || typeof res.stdout !== 'string') return 0;
+  let count = 0;
+  for (const line of res.stdout.split('\n')) if (line.startsWith('S ')) count += 1;
+  return count;
 }
 
 /**
@@ -929,6 +975,10 @@ function readSections(src, id) {
  * troncamenti non dipendono dal riferimento): la conta dello stock deve
  * vederla, e `processPair` la salta come `sorgente-mancante`.
  *
+ * Una cartella assente qui viene saltata: la completezza dell'albero la
+ * prova `main` con `scanContentGaps` e `skipWorktreeBodyCount` PRIMA della
+ * scansione, e senza quella prova `--scan` esce 2.
+ *
  * Funzione pura sul filesystem in sola lettura: zero rete, zero MT, nessuna
  * scrittura.
  *
@@ -949,18 +999,29 @@ export function scanContentForBlockingPairs(contentRoot, { locales = ['en', 'de'
         const id = name.slice(0, -'.ts'.length);
         const src = readFileSync(resolve(localeDir, name), 'utf8');
         scanned += 1;
-        const sections = readSections(src, id);
-        if (!Object.keys(sections).length) continue;
+        let sections;
         let italianSections = null;
         if (locale === 'it') {
+          sections = readSections(src, id);
           italianSections = sections;
         } else {
+          // Come `processPair`: i campi della traduzione sono quelli dell'`it`
+          // (`bodyFieldsForSource(itSrc)`), cosi' un bodyN che esiste solo
+          // nella traduzione non fa entrare una coppia che `processPair`
+          // giudicherebbe 'vecchia-gia-pulita'. Senza `it` si usano i campi
+          // della traduzione stessa.
           const itPath = resolve(contentRoot, realDir, 'it', name);
-          if (existsSync(itPath)) {
-            const itSections = readSections(readFileSync(itPath, 'utf8'), id);
+          const itSrc = existsSync(itPath) ? readFileSync(itPath, 'utf8') : null;
+          const itFields = itSrc === null ? [] : bodyFieldsForSource(itSrc, id);
+          if (itFields.length) {
+            const itSections = readSections(itSrc, id, itFields);
             if (Object.keys(itSections).length) italianSections = itSections;
+            sections = readSections(src, id, itFields);
+          } else {
+            sections = readSections(src, id);
           }
         }
+        if (!Object.keys(sections).length) continue;
         const result = runFactualityGates({ sections, locale, italianSections });
         const codes = criticalCodes(result);
         if (!codes.length) continue;
@@ -1255,6 +1316,22 @@ async function main() {
 
   let pairs;
   if (SCAN) {
+    // La guardia qui sopra scatta solo se mancano TUTTI gli alberi. Per la
+    // conta non basta: in uno sparse `content/blog-body/it` con un solo file
+    // dava `{ scanned: 1, byCode: {} }` con exit 0, cioe' "stock azzerato".
+    // `--scan` e' la metrica (e la base del ratchet): fallisce chiuso.
+    const gaps = scanContentGaps(CONTENT_ROOT, { locales: LOCALES });
+    if (gaps.length) {
+      console.error(`❌ --scan: albero dei body incompleto sotto ${CONTENT_ROOT}, mancano: ${gaps.join(', ')}.`);
+      console.error('   Una conta parziale si leggerebbe come stock bonificato: passa --content-root su un checkout completo.');
+      process.exit(2);
+    }
+    const skipped = skipWorktreeBodyCount(CONTENT_ROOT);
+    if (skipped > 0) {
+      console.error(`❌ --scan: ${skipped} body tracciati ma non materializzati (skip-worktree) sotto ${CONTENT_ROOT}.`);
+      console.error('   Il checkout e\' sparse: passa --content-root su un checkout completo.');
+      process.exit(2);
+    }
     const scan = scanContentForBlockingPairs(CONTENT_ROOT, { locales: LOCALES });
     const selected = scan.pairs.filter((p) => !CODE || p.codes.includes(CODE));
     if (has('list-out')) {

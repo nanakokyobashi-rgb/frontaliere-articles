@@ -1434,6 +1434,11 @@ function writeScanFixture(root) {
     fs.mkdirSync(path.dirname(file), { recursive: true });
     fs.writeFileSync(file, src);
   }
+  // Albero completo per i locali di --count-only: de/fr vuoti ma presenti,
+  // altrimenti la guardia di completezza (giustamente) rifiuta la conta.
+  for (const tree of ['content/blog-body', 'content/blog-body-ch']) {
+    for (const locale of ['de', 'fr']) fs.mkdirSync(path.join(root, tree, locale), { recursive: true });
+  }
   return Object.keys(files);
 }
 
@@ -1468,17 +1473,60 @@ test('blockingPairsFromContent trova le coppie bloccanti, ch compreso, e lascia 
 
 test('--scan rifiuta un secondo sorgente di coppie e i flag fuori contesto', () => {
   const run = (...args) => spawnSync(process.execPath, [SCAN_SCRIPT, ...args], { encoding: 'utf8' });
-  for (const args of [
-    ['--scan', '--audit', '/dev/null'],
-    ['--scan', '--slug', 'x'],
-    ['--scan', '--missing'],
-    ['--count-only'],
-    ['--audit', '/dev/null', '--list-out', '/tmp/x.jsonl'],
-    ['--scan', '--count-only', '--apply'],
-    ['--scan', '--list-out='],
+  // Molti percorsi escono 2: ogni caso fissa anche il messaggio della SUA
+  // guardia, cosi' una regressione che cade su un altro exit 2 resta visibile.
+  for (const [args, expected] of [
+    [['--scan', '--audit', '/dev/null'], /--scan non si combina/],
+    [['--scan', '--slug', 'x'], /--scan non si combina/],
+    [['--scan', '--missing'], /--scan non si combina/],
+    [['--missing', '--count-only'], /valgono solo con --scan/],
+    [['--audit', '/dev/null', '--list-out', '/tmp/x.jsonl'], /valgono solo con --scan/],
+    [['--scan', '--count-only', '--apply'], /--count-only non si combina con --apply/],
+    [['--scan', '--list-out='], /--list-out è vuoto/],
   ]) {
     const res = run(...args);
     assert.equal(res.status, 2, `${args.join(' ')} deve uscire 2 (stderr: ${res.stderr})`);
+    assert.match(res.stderr, expected, `${args.join(' ')}: guardia sbagliata`);
+  }
+});
+
+test('--scan fallisce chiuso su un albero incompleto o sparse invece di contare zero', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-scan-gaps-'));
+  const count = (...extra) => spawnSync(process.execPath, [
+    SCAN_SCRIPT, '--scan', '--count-only', '--content-root', tmp, ...extra,
+  ], { encoding: 'utf8' });
+  try {
+    writeScanFixture(tmp);
+    assert.equal(count().status, 0, 'la fixture completa si conta');
+
+    // Un locale chiesto senza cartella: la conta sarebbe parziale.
+    fs.rmSync(path.join(tmp, 'content/blog-body-ch/fr'), { recursive: true });
+    const noLocale = count();
+    assert.equal(noLocale.status, 2, noLocale.stdout);
+    assert.match(noLocale.stderr, /incompleto.*content\/blog-body-ch\/fr/);
+    assert.equal(noLocale.stdout, '', 'nessuna conta stampata');
+    // Con --locale che lo esclude la conta e' di nuovo completa.
+    assert.equal(count('--locale', 'it,en,de').status, 0);
+
+    // Un albero intero assente (il caso del worktree sparse senza -ch).
+    fs.rmSync(path.join(tmp, 'content/blog-body-ch'), { recursive: true });
+    const noTree = count('--locale', 'it,en');
+    assert.equal(noTree.status, 2, noTree.stdout);
+    assert.match(noTree.stderr, /mancano: content\/blog-body-ch\b/);
+
+    // Cartelle presenti ma file skip-worktree: il caso sparse vero.
+    writeScanFixture(tmp);
+    const git = (...args) => spawnSync('git', ['-C', tmp, ...args], { encoding: 'utf8' });
+    assert.equal(git('init', '-q').status, 0);
+    assert.equal(git('add', 'content').status, 0);
+    assert.equal(count().status, 0, 'checkout git completo: nessun skip-worktree');
+    assert.equal(git('update-index', '--skip-worktree', 'content/blog-body/en/ff.ts').status, 0);
+    fs.rmSync(path.join(tmp, 'content/blog-body/en/ff.ts'));
+    const sparse = count();
+    assert.equal(sparse.status, 2, sparse.stdout);
+    assert.match(sparse.stderr, /1 body tracciati ma non materializzati/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
   }
 });
 
