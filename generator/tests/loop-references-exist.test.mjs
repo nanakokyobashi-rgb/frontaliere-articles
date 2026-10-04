@@ -510,6 +510,23 @@ const DECLARED_ABSENT = {
       'Il file che la cita tiene il titolo come costante locale proprio perche\' qui il modulo non c\'e\': ' +
       'nulla dipende dalla sua esistenza, e un test del sito lega le due stringhe.',
   },
+  'scripts/ci/close-recovered-failure-issues.mjs :: crawler-health-monitor.yml': {
+    kind: 'site-only',
+    reason:
+      'Cronaca LC-03 (issue 9243 del sito) nel commento del registro degli step-verdetto: il monitor ' +
+      'dei crawler, con lo step `Fail if any crawler stale` (id `failgate`), vive solo sul sito. ' +
+      'Descrittiva: il gemello `identical` dichiara da se\' che «nel corpus il path non esiste: ' +
+      'il registro e\' un no-op».',
+  },
+  'scripts/ci/close-recovered-failure-issues.mjs :: .github/workflows/crawler-health-monitor.yml': {
+    kind: 'site-only',
+    reason:
+      'Chiave di VERDICT_STEPS, il registro per path degli step-verdetto. Qui nessun workflow si ' +
+      'chiama `crawler-health-monitor`, quindi `verdictStepEntryForWorkflowName` non trova mai la voce ' +
+      'e nessuna issue `CI Failure:` del corpus passa da `close-not-planned`: niente dipende ' +
+      'dall\'esistenza del file. Sul sito i nomi degli step sono letti dal YAML in ' +
+      '`tests/verdict-step-registry.test.ts`, che fa fallire una rinomina.',
+  },
   'scripts/ci/report-validate-dist-failure.mjs :: audit-dist-from-run.yml': {
     kind: 'site-only',
     reason:

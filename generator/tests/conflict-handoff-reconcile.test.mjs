@@ -23,6 +23,7 @@ import {
   declaresClosing,
   declaresSupersede,
   groupHandoffs,
+  originContentOnMain,
   reapplyInFlight,
   RECONCILE_MARKER,
   stillClosable,
@@ -186,6 +187,153 @@ describe('groupHandoffs e decideHandoff', () => {
       expect(body.startsWith(RECONCILE_MARKER)).toBe(true);
       expect(body).not.toMatch(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s*:?\s+#\d/i);
     }
+  });
+});
+
+
+/** Patch nel formato di `pulls/<n>/files`: contesto `before`, rimozioni, aggiunte. */
+const patch = (lines, removed = [], before = []) => [
+  `@@ -1,${before.length + removed.length} +1,${before.length + lines.length} @@`,
+  ...before.map((l) => ` ${l}`),
+  ...removed.map((l) => `-${l}`),
+  ...lines.map((l) => `+${l}`),
+].join('\n');
+
+describe('originContentOnMain: tutto o non provato', () => {
+  const added = ['export const A = 1;', '', '  return a + b;'];
+  const files = [{ filename: 'src/a.ts', status: 'modified', patch: patch(added, ['old'], ['// x']) }];
+  const main = (text) => () => text;
+
+  it('tutte le righe aggiunte non vuote su main → provato, con il conteggio', () => {
+    expect(originContentOnMain(files, main('// x\nexport const A = 1;\n\n  return a + b;\n')))
+      .toEqual({ proven: true, checked: added.filter((l) => l.trim()).length, files: ['src/a.ts'] });
+  });
+
+  it('una sola riga mancante → non provato', () => {
+    const verdict = originContentOnMain(files, main('export const A = 1;\n'));
+    expect(verdict.proven).toBe(false);
+    expect(verdict.reason).toContain('src/a.ts: hunk 1/1');
+  });
+
+  it('file senza patch (binario o troppo grande) → non provato', () => {
+    expect(originContentOnMain([{ filename: 'img.png', status: 'modified' }], main('x')).proven).toBe(false);
+    expect(originContentOnMain([...files, { filename: 'big.json', status: 'modified', patch: '' }], main('export const A = 1;\n  return a + b;')).proven).toBe(false);
+  });
+
+  it('lettura di main fallita, file assente o eccezione → non provato', () => {
+    expect(originContentOnMain(files, main(null)).proven).toBe(false);
+    expect(originContentOnMain(files, () => { throw new Error('503'); }).proven).toBe(false);
+  });
+
+  it('file rimosso, sole rimozioni o elenco vuoto → non provato', () => {
+    expect(originContentOnMain([{ filename: 'gone.ts', status: 'removed', patch: patch([], ['x']) }], main('')).proven).toBe(false);
+    expect(originContentOnMain([{ filename: 'a.ts', status: 'modified', patch: patch([], ['x']) }], main('')).proven).toBe(false);
+    expect(originContentOnMain([{ filename: 'a.ts', status: 'modified', patch: '@@ -1,0 +1,1 @@\n+  ' }], main('  \n')).proven).toBe(false);
+    expect(originContentOnMain([], main('')).proven).toBe(false);
+    expect(originContentOnMain(null, main('')).proven).toBe(false);
+  });
+
+  it('l\'intestazione +++ non è una riga aggiunta; solo CRLF non conta', () => {
+    const withHeader = [{ filename: 'a.ts', status: 'modified', patch: `+++ b/a.ts\n${patch(['  // due  spazi'])}` }];
+    expect(originContentOnMain(withHeader, main('\t// due spazi\r\n')).proven).toBe(false);
+    expect(originContentOnMain(withHeader, main('  // due  spazi\r\n')).proven).toBe(true);
+  });
+
+  it('dentro un hunk una riga che inizia con ++ è una riga aggiunta, non un\'intestazione', () => {
+    const plusPlus = [{ filename: 'a.ts', status: 'modified', patch: patch(['++i;', 'const x = 1;']) }];
+    expect(originContentOnMain(plusPlus, main('const x = 1;\n')).proven).toBe(false);
+    expect(originContentOnMain(plusPlus, main('++i;\nconst x = 1;\n'))).toEqual({ proven: true, checked: 2, files: ['a.ts'] });
+  });
+});
+
+// Review del corpus sulla PR di trasporto 2090 (unico 🔴): la prova era un
+// `Set` di righe, quindi una riga aggiunta che su main compare SOLO altrove (il
+// contesto di un altro hunk) o una riga aggiunta due volte e presente una sola
+// facevano «su main» una PR mai applicata. La prova e' ora un'applicazione al
+// contrario: il nuovo lato di ogni hunk (contesto + aggiunte, in ordine) deve
+// stare CONTIGUO su main, ogni hunk in una posizione distinta e nell'ordine
+// della patch.
+describe('originContentOnMain: applicazione hunk per hunk, non presenza di righe', () => {
+  const main = (text) => () => text;
+  const file = (p) => [{ filename: 'src/b.ts', status: 'modified', patch: p }];
+  // Due hunk: il primo aggiunge `return null;` in a(), il secondo ha la stessa
+  // riga come CONTESTO in b() e cambia `old()` in `fresh()`.
+  const twoHunks = [
+    '@@ -1,3 +1,4 @@',
+    ' function a() {',
+    '+  return null;',
+    ' }',
+    ' ',
+    '@@ -10,4 +11,4 @@',
+    ' function b() {',
+    '-  old();',
+    '+  fresh();',
+    '   return null;',
+    ' }',
+  ].join('\n');
+  const ORIGINAL = 'function a() {\n}\n\n// ...\nfunction b() {\n  old();\n  return null;\n}\n';
+  const APPLIED = 'import x;\nfunction a() {\n  return null;\n}\n\n// ...\n// altro\nfunction b() {\n  fresh();\n  return null;\n}\n';
+
+  it('una riga aggiunta presente su main solo nel contesto di un altro hunk → non provato', () => {
+    // Su main c'e' `fresh()` (secondo hunk applicato) ma a() e' ancora vuota:
+    // `return null;` compare solo dentro b().
+    const onlySecond = 'function a() {\n}\n\nfunction b() {\n  fresh();\n  return null;\n}\n';
+    const verdict = originContentOnMain(file(twoHunks), main(onlySecond));
+    expect(verdict.proven).toBe(false);
+    expect(verdict.reason).toContain('src/b.ts: hunk 1/2');
+    expect(originContentOnMain(file(twoHunks), main(ORIGINAL)).proven).toBe(false);
+  });
+
+  it('una riga aggiunta due volte ma presente una volta su main → non provato', () => {
+    const twice = '@@ -1,2 +1,4 @@\n const list = [\n+  \'a\',\n+  \'a\',\n ];';
+    expect(originContentOnMain(file(twice), main('const list = [\n  \'a\',\n];\n')).proven).toBe(false);
+    expect(originContentOnMain(file(twice), main('const list = [\n  \'a\',\n  \'a\',\n];\n')))
+      .toEqual({ proven: true, checked: 2, files: ['src/b.ts'] });
+  });
+
+  it('patch davvero applicata, con righe nuove fra un hunk e l\'altro → provato', () => {
+    expect(originContentOnMain(file(twoHunks), main(APPLIED))).toEqual({ proven: true, checked: 2, files: ['src/b.ts'] });
+  });
+
+  it('hunk su main in ordine inverso, o due hunk sulla stessa posizione → non provato', () => {
+    const same = '@@ -1,2 +1,3 @@\n a\n+b\n c\n@@ -8,2 +9,3 @@\n a\n+b\n c';
+    expect(originContentOnMain(file(same), main('a\nb\nc\n')).proven).toBe(false);
+    expect(originContentOnMain(file(same), main('a\nb\nc\nz\na\nb\nc\n')).proven).toBe(true);
+    const reversed = 'function b() {\n  fresh();\n  return null;\n}\nfunction a() {\n  return null;\n}\n';
+    expect(originContentOnMain(file(twoHunks), main(reversed)).proven).toBe(false);
+  });
+
+  it('diff troncato (righe meno di quelle dichiarate dall\'intestazione dell\'hunk) → non provato', () => {
+    const truncated = '@@ -1,3 +1,5 @@\n a\n+b\n+c';
+    const verdict = originContentOnMain(file(truncated), main('a\nb\nc\nd\ne\n'));
+    expect(verdict.proven).toBe(false);
+    expect(verdict.reason).toContain('troncat');
+  });
+
+  it('patch senza intestazione di hunk o con una riga estranea → non provato', () => {
+    expect(originContentOnMain(file('+solo una riga'), main('solo una riga\n')).proven).toBe(false);
+    expect(originContentOnMain(file('@@ -1,1 +1,2 @@\n a\n+b\n?c'), main('a\nb\n')).proven).toBe(false);
+  });
+
+  it('una rimozione fra due righe di contesto e\' provata solo se su main non c\'e\' piu\'', () => {
+    const swap = '@@ -1,3 +1,3 @@\n a\n-old\n+new\n b';
+    expect(originContentOnMain(file(swap), main('a\nnew\nb\n')).proven).toBe(true);
+    expect(originContentOnMain(file(swap), main('a\nold\nnew\nb\n')).proven).toBe(false);
+    expect(originContentOnMain(file(swap), main('a\nnew\nold\nb\n')).proven).toBe(false);
+  });
+
+  it('una rimozione in testa o in coda all\'hunk ancora l\'hunk all\'inizio o alla fine del file', () => {
+    const head = '@@ -1,2 +1,2 @@\n-old\n+new\n a';
+    expect(originContentOnMain(file(head), main('new\na\n')).proven).toBe(true);
+    expect(originContentOnMain(file(head), main('old\nnew\na\n')).proven).toBe(false);
+    const tail = '@@ -1,2 +1,2 @@\n a\n+new\n-old';
+    expect(originContentOnMain(file(tail), main('a\nnew\n')).proven).toBe(true);
+    expect(originContentOnMain(file(tail), main('a\nnew\nold\n')).proven).toBe(false);
+  });
+
+  it('\\ No newline at end of file non e\' una riga del file', () => {
+    const noEol = '@@ -1,1 +1,2 @@\n a\n+b\n\\ No newline at end of file';
+    expect(originContentOnMain(file(noEol), main('a\nb')).proven).toBe(true);
   });
 });
 
