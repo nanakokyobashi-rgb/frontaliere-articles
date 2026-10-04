@@ -29,12 +29,10 @@ name: Content gates (main)
 #
 # ── Perche' non blocca niente ───────────────────────────────────────────────
 #
-# Non gira su `pull_request`, quindi non puo' essere un required check ne'
-# entrare nel gate dell'auto-merge; la branch protection non la tocca; e su
-# offender trovati lo script esce 0 — il segnale e' UNA issue deduplicata sul
-# titolo, che si richiude da sola al primo push verde. Esce !=0 solo quando il
-# preflight trova `content/` assente o quasi vuoto, cioe' quando il gate non ha
-# guardato niente.
+# Non gira su pull_request e non è un required check. Il suo risultato deve
+# comunque riflettere i gate: offender, TAP incompleto o errori escono !=0.
+# L'issue deduplicata resta azionabile; il JSON caricato anche su failure
+# distingue il verdetto dei test dagli errori di esecuzione/preflight.
 
 on:
   push:
@@ -108,7 +106,16 @@ jobs:
           PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
         run: |
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
-          GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/content-gates-main.mjs
+          GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/content-gates-main.mjs --json "$RUNNER_TEMP/content-gates-main-summary.json"
+
+      - name: Upload content gate summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-gates-main-summary-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/content-gates-main-summary.json
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Cleanup Firebase credentials
         if: always()
