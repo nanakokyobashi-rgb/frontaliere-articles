@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url';
 import {
   REGISTRY_ARTICLE_TYPES,
   registryArticleType,
+  registryArticleTypeForRun,
   resolveArticleType,
   renderRegistryEntry,
   readRegistryEntries,
@@ -58,6 +59,24 @@ describe('registryArticleType: il tipo scelto dal generatore primario', () => {
     for (const v of ['news', 'experimental', null, undefined]) {
       assert.equal(registryArticleType(v), 'news', String(v));
     }
+  });
+});
+
+describe('registryArticleTypeForRun: il percorso AI primario', () => {
+  test('un URL evergreen:// e\' una guida anche con etichetta experimental o null', () => {
+    // Tier experimental del ranker → evergreen://<keyword>; modalita' manuale
+    // con evergreen:// lascia selectedArticleType a null.
+    for (const sel of ['experimental', null, undefined, 'news']) {
+      assert.equal(registryArticleTypeForRun(sel, 'evergreen://permesso%20G'), 'evergreen', String(sel));
+    }
+  });
+  test('senza evergreen:// decide l\'etichetta del run', () => {
+    assert.equal(registryArticleTypeForRun('evergreen_static', 'evergreen://x'), 'evergreen');
+    assert.equal(registryArticleTypeForRun('evergreen_dynamic', null), 'evergreen');
+    assert.equal(registryArticleTypeForRun('news', 'https://www.rsi.ch/news/x'), 'news');
+    assert.equal(registryArticleTypeForRun('experimental', 'https://www.rsi.ch/news/x'), 'news');
+    assert.equal(registryArticleTypeForRun(null, 'stats-bfs://salari'), 'news');
+    assert.equal(registryArticleTypeForRun(undefined, undefined), 'news');
   });
 });
 
@@ -143,11 +162,12 @@ describe('create-article.mjs usa il modulo del registry (letto come testo)', () 
       const window = src.slice(Math.max(0, c.index - 1500), c.index);
       assert.match(
         window,
-        /data\.articleType = (?:registryArticleType|resolveArticleType)\(/,
-        `chiamata a offset ${c.index} senza data.articleType = registryArticleType(/resolveArticleType( poco prima`,
+        /data\.articleType = (?:registryArticleTypeForRun|resolveArticleType)\(/,
+        `chiamata a offset ${c.index} senza data.articleType = registryArticleTypeForRun(/resolveArticleType( poco prima`,
       );
     }
-    assert.match(src, /data\.articleType = registryArticleType\(RUN_REPORT\.selectedArticleType\)/);
+    // Il percorso primario decide dall'URL di generazione, non solo dall'etichetta.
+    assert.match(src, /data\.articleType = registryArticleTypeForRun\(RUN_REPORT\.selectedArticleType, url\)/);
   });
 });
 

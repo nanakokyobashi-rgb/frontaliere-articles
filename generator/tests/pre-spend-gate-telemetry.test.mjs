@@ -47,6 +47,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// `resolveRunRecovery()` maps the selected type through the registry module
+// (one definition shared with the registry writer): injected below, since the
+// extracted source is evaluated outside create-article.mjs's module scope.
+import { registryArticleType } from '../scripts/lib/registry-article-type.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -503,7 +507,10 @@ test('empty input pool → not counted as a rejection, and the gate is not marke
 // ── The disposition half: "recovered" is derived, not bookkept ─────────────
 
 function makeRecovery(runReport) {
-  return new Function('RUN_REPORT', `${RECOVERY_SRC}\nreturn resolveRunRecovery;`)(runReport);
+  return new Function('RUN_REPORT', 'registryArticleType', `${RECOVERY_SRC}\nreturn resolveRunRecovery;`)(
+    runReport,
+    registryArticleType,
+  );
 }
 
 test('resolveRunRecovery separates the three outcomes the issue names', () => {

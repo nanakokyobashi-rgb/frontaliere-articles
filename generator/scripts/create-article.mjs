@@ -327,6 +327,7 @@ import {
 // (che gira senza `npm ci`) lo testa senza importare questo file.
 import {
   registryArticleType,
+  registryArticleTypeForRun,
   resolveArticleType,
   renderRegistryEntry,
 } from './lib/registry-article-type.mjs';
@@ -17135,11 +17136,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
-  // Il tipo che il run ha scelto (news/experimental → news, evergreen_* →
-  // evergreen) entra nel registry. Prima del lock: se il registry rifiutasse
-  // la voce, nessun file deve essere gia' stato scritto. Sovrascrive di
-  // proposito un eventuale `articleType` arrivato dal payload del modello.
-  data.articleType = registryArticleType(RUN_REPORT.selectedArticleType);
+  // Il tipo dell'articolo entra nel registry: `evergreen://` (tier
+  // experimental del ranker, modalita' manuale) e evergreen_* → evergreen,
+  // il resto → news. Prima del lock: se il registry rifiutasse la voce,
+  // nessun file deve essere gia' stato scritto. Sovrascrive di proposito un
+  // eventuale `articleType` arrivato dal payload del modello.
+  data.articleType = registryArticleTypeForRun(RUN_REPORT.selectedArticleType, url);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

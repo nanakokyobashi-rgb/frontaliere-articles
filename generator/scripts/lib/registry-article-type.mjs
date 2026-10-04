@@ -58,6 +58,26 @@ export function registryArticleType(selectedArticleType) {
 }
 
 /**
+ * Il tipo di registry per il percorso AI primario di `create-article.mjs`.
+ *
+ * `selectedArticleType` e' un'etichetta di telemetria, non il tipo del
+ * contenuto: il tier `experimental` del ranker converte il candidato in
+ * `evergreen://<keyword>`, e la modalita' manuale con un URL `evergreen://`
+ * lascia `selectedArticleType` a `null`. In entrambi i casi l'articolo nasce
+ * dal prompt e dal facts brief EVERGREEN (il ramo `url.startsWith('evergreen://')`
+ * di create-article.mjs): e' una guida, non cronaca datata. Decide quindi
+ * prima la modalita' di generazione (l'URL), poi l'etichetta.
+ *
+ * @param {string|null|undefined} selectedArticleType
+ * @param {string|null|undefined} url l'URL con cui l'articolo e' stato generato
+ * @returns {'news'|'evergreen'}
+ */
+export function registryArticleTypeForRun(selectedArticleType, url) {
+  if (String(url || '').startsWith('evergreen://')) return 'evergreen';
+  return registryArticleType(selectedArticleType);
+}
+
+/**
  * Il tipo di registry per un produttore che entra da `registerArticleFiles()`.
  *
  * Un `data.articleType` esplicito vince, ma deve essere uno dei due valori

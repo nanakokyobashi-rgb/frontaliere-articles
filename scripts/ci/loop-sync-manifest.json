@@ -4263,7 +4263,7 @@
       "reason": "Tipo dell'articolo nel registry (news|evergreen), voce del registry e scansione del cutover, piu' il controllo di verifiedAt contro il ledger delle verifiche. Nessun omonimo sul sito: il registry e' scritto solo dal generatore del corpus. Modulo senza dipendenze npm perche' il content gate di main lo testa senza npm ci.",
       "baseline": {
         "site": null,
-        "corpus": "307a9d5e99131ede",
+        "corpus": "e11a3aab81cd2f3f",
         "alignedAt": "2026-10-04"
       }
     },
