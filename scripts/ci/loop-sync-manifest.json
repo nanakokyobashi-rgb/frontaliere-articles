@@ -505,6 +505,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/followup-mint-admission.mjs",
+      "mode": "identical",
+      "reason": "Ammissione al conio dei daily follow-up (bullet gia' chiusi, bersagli assenti, item nati col token gia' vero), sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#11313 e #11341) e importato da scripts/ci/gate-minted-followups.mjs (adapted): senza questa copia il passaggio del corpus sigillava i bucket del corpus senza i controlli che il passaggio del sito applica. Importa scripts/ci/followup-resolution-match.mjs (adapted: qui espone gli stessi simboli, detectAlreadyResolved con la stessa firma) e scripts/ci/followup-candidate-bullets.mjs (identical), allo stesso path nei due repository; nessuna I/O diretta, l'io e il manifest li inietta il gate.",
+      "baseline": {
+        "site": "f6f265b31a65b577",
+        "corpus": "f6f265b31a65b577",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
