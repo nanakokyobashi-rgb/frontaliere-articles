@@ -99406,6 +99406,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mastini-varese-pergine-hockey': {
+    title: 'Mastini varese-pergine: sfida all\'acinque ice arena',
+    description: 'Sabato alle 18.30 i Mastini ospitano il Pergine all\'Acinque Ice Arena per la quarta giornata di IHL. Analisi, assenze e stato della classifica. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, mastini, varese-pergine, sfida, acinque',
+    ogTitle: 'Mastini Varese-Pergine: sfida all\'Acinque Ice Arena',
+    ogDescription: 'I Mastini di Varese affrontano il Pergine in un importante scontro diretto di IHL. Scopri le ultime sull\'organico, le assenze di Vanetti e Terzago e il punto sulla classifica.',
+    canonicalPath: '/articoli-frontaliere/mastini-varese-pergine-hockey/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mastini varese-pergine: sfida all'acinque ice arena",
+      "description": "Sabato alle 18.30 i Mastini ospitano il Pergine all'Acinque Ice Arena per la quarta giornata di IHL. Analisi, assenze e stato della classifica. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mastini-varese-pergine-hockey.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di hockey su ghiaccio dei Mastini di Varese all'Acinque Ice Arena."
+      },
+      "datePublished": "2026-10-04T01:23:33+00:00",
+      "dateModified": "2026-10-04T01:23:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mastini-varese-pergine-hockey/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-carluccio-como-lettera': {
+    title: 'Asilo Carluccio Como: il personale scrive al Comune',
+    description: 'Il personale dell\'asilo Carluccio di Como scrive al Comune: la scuola è un presidio educativo e non un costo da ridurre. Leggi l\'appello della comunità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, carluccio, como, personale',
+    ogTitle: 'Asilo Carluccio Como: il personale contro i tagli',
+    ogDescription: 'Il personale della scuola dell\'infanzia Carluccio di via Volta si rivolge al Sindaco e all\'Assessore: la scuola non è un costo da ridurre, ma un investimento da proteggere per l\'intera comunità di Como.',
+    canonicalPath: '/articoli-frontaliere/asilo-carluccio-como-lettera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo Carluccio Como: il personale scrive al Comune",
+      "description": "Il personale dell'asilo Carluccio di Como scrive al Comune: la scuola è un presidio educativo e non un costo da ridurre. Leggi l'appello della comunità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-carluccio-como-lettera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scuola dell'infanzia Carluccio di Como, via Volta."
+      },
+      "datePublished": "2026-10-04T01:35:02+00:00",
+      "dateModified": "2026-10-04T01:35:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/asilo-carluccio-como-lettera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sequestro-stupefacenti-camper-varese': {
+    title: 'Varese: 70 kg di droga sul camper, arresti | Frontaliere Ticino',
+    description: 'La Guardia di Finanza di Varese sequestra oltre 70 kg di stupefacenti su un camper. Arrestati tre persone, trovato un bassotto affidato a una famiglia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, droga, camper, arresti',
+    ogTitle: 'Varese: 70 kg di droga sul camper, arresti',
+    ogDescription: 'Operazione della Guardia di Finanza di Varese: sequestrati 19 kg di cocaina e 49 di marijuana su un camper spagnolo. Tre persone arrestate e un bassotto affidato a una famiglia per adozione temporanea.',
+    canonicalPath: '/articoli-frontaliere/sequestro-stupefacenti-camper-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: 70 kg di droga sul camper, arresti",
+      "description": "La Guardia di Finanza di Varese sequestra oltre 70 kg di stupefacenti su un camper. Arrestati tre persone, trovato un bassotto affidato a una famiglia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sequestro-stupefacenti-camper-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area boschiva nella provincia di Varese dove è stato sequestrato il carico di stupefacenti"
+      },
+      "datePublished": "2026-10-04T01:50:38+00:00",
+      "dateModified": "2026-10-04T01:50:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestro-stupefacenti-camper-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

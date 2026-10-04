@@ -37385,6 +37385,33 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'mastini-varese-pergine-hockey',
+ category: 'novita',
+ date: '2026-10-04T01:23:33.000Z',
+ image: '/images/blog/mastini-varese-pergine-hockey.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'asilo-carluccio-como-lettera',
+ category: 'novita',
+ date: '2026-10-04T01:35:02.083Z',
+ image: '/images/blog/asilo-carluccio-como-lettera.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'sequestro-stupefacenti-camper-varese',
+ category: 'novita',
+ date: '2026-10-04T01:50:38.530Z',
+ image: '/images/blog/sequestro-stupefacenti-camper-varese.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

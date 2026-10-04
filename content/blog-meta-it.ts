@@ -12467,6 +12467,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fondo-13esima-avs-giovani.title': 'Fondo AVS in Ticino: la 13esima ai giovani',
     'blog.article.fondo-13esima-avs-giovani.excerpt': 'Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.',
     'blog.article.fondo-13esima-avs-giovani.imageAlt': 'Pensionati e giovani durante un incontro sul Fondo AVS in Ticino',
+    'blog.article.mastini-varese-pergine-hockey.title': 'Mastini varese-pergine: sfida all\'acinque ice arena',
+    'blog.article.mastini-varese-pergine-hockey.excerpt': 'Sabato alle 18.30 i Mastini ospitano il Pergine. Varese, Pergine e Feltre cercano punti in classifica a quota 3 nella quarta giornata di IHL.',
+    'blog.article.mastini-varese-pergine-hockey.imageAlt': 'Partita di hockey su ghiaccio dei Mastini di Varese all\'Acinque Ice Arena.',
+    'blog.article.asilo-carluccio-como-lettera.title': 'Asilo Carluccio Como: il personale scrive al Comune',
+    'blog.article.asilo-carluccio-como-lettera.excerpt': 'Il personale della scuola dell\'infanzia Carluccio di via Volta scrive al Sindaco contro i tagli: la scuola non è un costo, ma un investimento comunitario.',
+    'blog.article.asilo-carluccio-como-lettera.imageAlt': 'Scuola dell\'infanzia Carluccio di Como, via Volta.',
+    'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese: 70 kg di droga sul camper, arresti',
+    'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'La Finanza blocca un camper spagnolo: sequestrati 19 kg di cocaina, 49 di marijuana e un bassotto affidato a una famiglia.',
+    'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Area boschiva nella provincia di Varese dove è stato sequestrato il carico di stupefacenti',
 };
 
 export default blogMetaIt;
