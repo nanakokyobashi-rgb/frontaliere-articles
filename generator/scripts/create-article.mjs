@@ -16266,6 +16266,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // gate at the bottom of this function actually enforces.
     try {
       data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(lengthBudgetSource) });
+      // Validation passed — any earlier id/slug rejection no longer applies to
+      // this draft, so clear it rather than carry it (stale) into a later
+      // retry triggered by an unrelated check further down.
+      lastIdentityErrors = null;
       // Evergreen keywords define the intended topic even when the model
       // shortens a title/slug past the theme or canton. Keep that key in a
       // non-enumerable scratch property so the coverage gate cannot fail open
@@ -16276,10 +16280,6 @@ async function generateAndValidateArticle(url, sourceContext = null) {
           configurable: true,
         });
       }
-      // Validation passed — any earlier id/slug rejection no longer applies to
-      // this draft, so clear it rather than carry it (stale) into a later
-      // retry triggered by an unrelated check further down.
-      lastIdentityErrors = null;
     } catch (validationErr) {
       console.error(`  ⚠️  Validazione fallita: ${validationErr.message}`);
       // #330 item 2: feed the exact id/slug rejection reason (already includes
