@@ -19,6 +19,8 @@ import { fileURLToPath } from 'node:url';
 import {
   addedFiles,
   coveredByManifest,
+  ensureLocalCommit,
+  manifestAt,
   siteBlobShas,
   twinCensusVerdict,
 } from '../../scripts/ci/twin-census-pr-gate.mjs';
@@ -156,6 +158,25 @@ test('addedFiles: solo i path nuovi (rinomini inclusi), con lo sha del blob di H
   assert.equal(added.find((e) => e.path === 'fixtures/twin.json').sha, blobSha('{"twin":true}\n'));
 });
 
+test('manifestAt: il manifest e\' quello della head misurata, non del checkout', () => {
+  // Il checkout resta su `pr`; la head misurata e' `main`, che non ha manifest.
+  try {
+    write('scripts/ci/loop-sync-manifest.json', '{"files":[{"path":"fixtures/twin.json"}]}\n');
+    git('add', '-A');
+    git('commit', '-q', '-m', 'manifest');
+    git('checkout', '-q', 'main');
+    assert.deepEqual(manifestAt('pr', { cwd: dir }).files, [{ path: 'fixtures/twin.json' }]);
+    assert.throws(() => manifestAt('main', { cwd: dir }), 'su main il manifest non c\'e\': errore, non un manifest vuoto');
+  } finally {
+    git('checkout', '-q', 'pr');
+  }
+});
+
+test('ensureLocalCommit: una head illeggibile e\' un errore, non un verde', () => {
+  ensureLocalCommit('pr', { cwd: dir });
+  assert.throws(() => ensureLocalCommit('f'.repeat(40), { cwd: dir }), /non e' un commit leggibile/);
+});
+
 test('addedFiles: su main stesso non c\'e\' niente di aggiunto', () => {
   assert.deepEqual(addedFiles({ base: 'main', head: 'main', cwd: dir }), []);
 });
@@ -173,6 +194,13 @@ test('siteBlobShas: l\'albero intero da\' gli sha dei soli blob', async () => {
     sleep: noSleep,
   });
   assert.deepEqual([...shas], ['a']);
+});
+
+test('siteBlobShas: un 200 senza `tree` non e\' un sito vuoto', async () => {
+  await assert.rejects(
+    siteBlobShas({ repo: 'o/r', ref: 'main', fetchImpl: async () => response(200, { truncated: false }), sleep: noSleep }),
+    /campo `tree`/,
+  );
 });
 
 test('siteBlobShas: un albero troncato non e\' un «nessun gemello»', async () => {

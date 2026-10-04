@@ -4292,7 +4292,7 @@
       "reason": "Censimento dei gemelli ristretto ai file AGGIUNTI dalla PR, nel check `tests` che governa il merge (issue 1610): le PR 2096 e 2097 hanno aggiunto due file byte-identici al sito senza dichiararli e il rosso e' comparso solo al cron di `loop-drift-check.yml`. Non esiste sul sito e non deve: il manifest e il suo censimento sono del lato che RICEVE il ciclo, come `loop-baseline-pr-gate.mjs` e `loop-drift-check.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "1b859c93b6dd5584",
+        "corpus": "3073e68f366aeec3",
         "alignedAt": "2026-10-04"
       }
     },

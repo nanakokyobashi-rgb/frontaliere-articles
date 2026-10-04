@@ -41,11 +41,11 @@
  *   BASE_SHA   base della PR (default `origin/main`).
  *   HEAD_SHA   head della PR (default `HEAD`).
  *   SITE_REPO  default `valerielinc-ops/frontaliere-si-o-no`.
- *   SITE_REF   default `HEAD` (il ramo di default del sito, come il censimento).
+ *   SITE_REF   default `main`, il ref di produzione del sito (come `SITE_REF` di
+ *              `loop-drift-check.yml`).
  *   GH_TOKEN / GITHUB_TOKEN
  */
 
-import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -131,7 +131,10 @@ export async function siteBlobShas({ repo, ref, token, fetchImpl = fetch, attemp
       const body = await res.json();
       // Un albero troncato darebbe un verdetto costruito su meta' dei dati.
       if (body.truncated !== false) throw new Error(`l'albero di ${repo}@${ref} e' troncato: il censimento non e' affidabile`);
-      return new Set((body.tree || []).filter((e) => e.type === 'blob').map((e) => e.sha));
+      // Un 200 senza `tree` e' una risposta che non si sa leggere, non un sito
+      // senza file: un Set vuoto renderebbe pulito ogni candidato.
+      if (!Array.isArray(body?.tree)) throw new Error(`l'albero di ${repo}@${ref} non ha un campo \`tree\` leggibile`);
+      return new Set(body.tree.filter((e) => e.type === 'blob').map((e) => e.sha));
     }
     lastError = new Error(`GET tree ${repo}@${ref} → HTTP ${res.status}`);
     // Un 4xx non migliora ritentando (permessi, ref inesistente); 429 e 5xx si'.
@@ -140,10 +143,46 @@ export async function siteBlobShas({ repo, ref, token, fetchImpl = fetch, attemp
   throw lastError;
 }
 
+/**
+ * La head da misurare deve essere un commit LOCALE. In un dispatch di recovery
+ * (`inputs.head_sha`) il checkout resta sul ref del dispatch, e la head di una
+ * PR da fork non e' fra i branch scaricati: si chiede quella SHA a `origin`
+ * (GitHub serve i commit raggiungibili, anche da `refs/pull/*`). Se non arriva
+ * il gate resta rosso: niente verdetto su una head che non si e' letta.
+ */
+export function ensureLocalCommit(head, { cwd = ROOT } = {}) {
+  const has = () => {
+    try {
+      execFileSync('git', ['cat-file', '-e', `${head}^{commit}`], { cwd, stdio: 'ignore' });
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  if (has()) return;
+  try {
+    execFileSync('git', ['fetch', '--no-tags', '--filter=blob:none', 'origin', head], { cwd, stdio: ['ignore', 'ignore', 'inherit'] });
+  } catch {
+    // il verdetto sotto lo dice meglio di un errore di fetch.
+  }
+  if (!has()) throw new Error(`la head ${head} non e' un commit leggibile in questo checkout`);
+}
+
+/**
+ * Il manifest della HEAD misurata, non quello del checkout: in un dispatch di
+ * recovery il checkout puo' essere il branch base, e combinare i file aggiunti
+ * dalla PR col manifest di un altro albero darebbe un verdetto su nessuna delle
+ * due revisioni.
+ */
+export function manifestAt(head, { cwd = ROOT } = {}) {
+  return JSON.parse(execFileSync('git', ['show', `${head}:${MANIFEST_REL}`], { cwd, maxBuffer: 1 << 28 }).toString());
+}
+
 async function main() {
-  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, MANIFEST_REL), 'utf8'));
   const base = process.env.BASE_SHA || process.env.BASE_REF || 'origin/main';
   const head = process.env.HEAD_SHA || 'HEAD';
+  ensureLocalCommit(head);
+  const manifest = manifestAt(head);
   const added = addedFiles({ base, head });
   let verdict = twinCensusVerdict({ added, siteShas: null, manifest });
   if (!verdict.needsSite) {
@@ -156,7 +195,7 @@ async function main() {
   try {
     siteShas = await siteBlobShas({
       repo: process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no',
-      ref: process.env.SITE_REF || 'HEAD',
+      ref: process.env.SITE_REF || 'main',
       token: process.env.GH_TOKEN || process.env.GITHUB_TOKEN,
     });
   } catch (error) {

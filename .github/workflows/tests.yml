@@ -351,8 +351,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          SITE_REF: main
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
+        # In un dispatch di recovery il checkout resta sul ref del dispatch: lo
+        # script legge file aggiunti E manifest dalla SHA richiesta (che scarica
+        # se manca), mai dal checkout.
         run: node scripts/ci/twin-census-pr-gate.mjs
 
       # ══════════════════════════════════════════════════════════════════════
