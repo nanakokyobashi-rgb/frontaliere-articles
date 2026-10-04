@@ -920,6 +920,59 @@ test('#923: la nota non si posta se i commenti non sono stati letti', () => {
   assert.equal(noteGate().post, false);
 });
 
+// ── Copertura: un sottoinsieme di riferimenti gia' annotati non e' una nota nuova ──
+//
+// Gemello della fix del sito (PR 11292, issue 8441: nove note in nove giorni,
+// quattro delle quali ripetevano solo riferimenti gia' annotati). L'insieme `b=` oscilla
+// quando un lookup fallisce e toglie una chiave: il confronto per identita' di
+// stringa trattava il sottoinsieme come una novita'.
+test('copertura: marker sano con chiavi gia\' annotate da note precedenti → already', () => {
+  const prev = [
+    { body: 'nota\n<!-- PREPASS_NOTE: r=7 b=a#1,a#2 -->' },
+    { body: 'nota\n<!-- PREPASS_NOTE: b=a#3 -->' },
+  ];
+  const subset = noteGate({ marker: '<!-- PREPASS_NOTE: r=7 b=a#2 -->', comments: prev, commentsRead: true });
+  assert.equal(subset.post, false, 'un sottoinsieme di b= gia\' annotato non riapre la nota');
+  assert.equal(subset.code, 'already');
+  // L'unione dei marker conta, non un singolo commento.
+  assert.equal(
+    noteGate({ marker: '<!-- PREPASS_NOTE: r=7 b=a#1,a#3 -->', comments: prev, commentsRead: true }).code,
+    'already',
+  );
+  assert.equal(noteGate({ marker: '<!-- PREPASS_NOTE: r=7 -->', comments: prev, commentsRead: true }).code, 'already');
+});
+
+test('copertura: una chiave nuova, anche di un solo tipo, riapre la nota', () => {
+  const prev = [{ body: 'nota\n<!-- PREPASS_NOTE: r=7 b=a#1,a#2 -->' }];
+  const newBlock = noteGate({ marker: '<!-- PREPASS_NOTE: r=7 b=a#1,a#9 -->', comments: prev, commentsRead: true });
+  assert.equal(newBlock.post, true);
+  assert.equal(newBlock.code, 'ok');
+  assert.equal(noteGate({ marker: '<!-- PREPASS_NOTE: r=8 b=a#1 -->', comments: prev, commentsRead: true }).code, 'ok');
+  // Tipo per tipo: una chiave annotata come `r=` non copre la stessa come `b=`.
+  assert.equal(
+    noteGate({ marker: '<!-- PREPASS_NOTE: b=7 -->', comments: [{ body: '<!-- PREPASS_NOTE: r=7 -->' }], commentsRead: true }).code,
+    'ok',
+  );
+  // Il `?` di una nota degradata non e' una misura: non copre nessun blocco.
+  assert.equal(
+    noteGate({ marker: '<!-- PREPASS_NOTE: r=7 b=a#1 -->', comments: [{ body: '<!-- PREPASS_NOTE: r=7 b=? -->' }], commentsRead: true }).code,
+    'ok',
+  );
+});
+
+test('copertura: ramo degradato e `unread` restano come prima', () => {
+  const complete = '<!-- PREPASS_NOTE: r=7 b=a#1 -->';
+  const degraded = '<!-- PREPASS_NOTE: r=7 b=? -->';
+  assert.equal(noteGate({ marker: degraded, comments: [{ body: `nota\n${complete}` }], commentsRead: true }).code, 'already');
+  // Degradato contro nota completa con altra chiave di registro: nessuna copertura.
+  assert.equal(
+    noteGate({ marker: degraded, comments: [{ body: '<!-- PREPASS_NOTE: r=7,8 b=a#1 -->' }], commentsRead: true }).code,
+    'ok',
+  );
+  assert.equal(noteGate({ marker: '<!-- PREPASS_NOTE: r=7 b=a#2 -->', comments: [{ body: complete }], commentsRead: false }).code, 'unread');
+  assert.equal(noteGate({ marker: degraded, comments: [{ body: complete }], commentsRead: false }).code, 'unread');
+});
+
 test('#923: la famiglia owner-only ha una nota, quindi ha un marker da verificare', () => {
   // E' il caso reale: `prepassDecision` calcola la nota per tutte le issue
   // tranne `agent:no-age-out`, quindi la famiglia che esce `keep` sul titolo la
