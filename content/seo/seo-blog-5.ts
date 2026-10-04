@@ -99835,6 +99835,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-festa-cairate-2026-monastero': {
+    title: 'Festa di Cairate 2026: arte, sapori e musica al Monastero',
+    description: 'La sedicesima Festa di Cairate torna il 4 ottobre 2026 al Monastero di Santa Maria Assunta con Camminar Gustando, visite guidate, mostre, mercatino',
+    keywords: 'frontalieri, ticino, svizzera, italia, festa, cairate, arte, sapori',
+    ogTitle: 'Festa di Cairate 2026: arte, sapori e musica al Monastero',
+    ogDescription: 'Domenica 4 ottobre 2026 dalle 10, Cairate ospita la sedicesima edizione della sua festa popolare nel suggestivo Monastero di Santa Maria Assunta. Tra le iniziative: Camminar Gustando (tessera 10 € dalle 12 alle 14.30), visite guidate, mostre',
+    canonicalPath: '/articoli-frontaliere/festa-cairate-2026-monastero/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Festa di Cairate 2026: arte, sapori e musica al Monastero",
+      "description": "La sedicesima Festa di Cairate torna il 4 ottobre 2026 al Monastero di Santa Maria Assunta con Camminar Gustando, visite guidate, mostre, mercatino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/festa-cairate-2026-monastero.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cortile del Monastero di Santa Maria Assunta durante la Festa di Cairate con stand gastronomici e musica"
+      },
+      "datePublished": "2026-10-04T06:15:59+00:00",
+      "dateModified": "2026-10-04T06:15:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/festa-cairate-2026-monastero/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
