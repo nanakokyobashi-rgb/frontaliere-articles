@@ -55,8 +55,10 @@ function fakeIo(files) {
 }
 
 describe('ammissione al conio — osservazione del referente', () => {
-  test('l\'interruttore della demozione è quello del modulo copiato: spento, si misura e basta', () => {
-    assert.equal(DEMOTE_BORN_SATISFIED, false);
+  // Nessun pin sul VALORE: il modulo è `identical` e il sito può girare
+  // l'interruttore; il trasporto aggiorna il modulo ma non questo test.
+  test('l\'interruttore della demozione esiste ed è un booleano (valore deciso dal sito)', () => {
+    assert.equal(typeof DEMOTE_BORN_SATISFIED, 'boolean');
   });
 
   test('token già invocato nel file → acceptance-already-true, ma ammesso', () => {

@@ -1408,8 +1408,9 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
 /**
  * Letterale del marker degli item nati soddisfatti, IDENTICO a
  * `itemBornSatisfiedMarker()` del modulo `followup-item-evidence` del
- * sito: quel modulo qui non esiste, e il reconciler del corpus legge la stessa
- * forma `<!-- FU_ITEM_BORN_SATISFIED: item=FU-… -->`.
+ * sito (`<!-- FU_ITEM_BORN_SATISFIED: item=FU-… -->`): quel modulo qui non
+ * esiste. Oggi nel corpus nessun lettore usa il marker: è una misura finché il
+ * reconciler del corpus non lo legge.
  */
 export const ITEM_BORN_SATISFIED_MARKER = 'FU_ITEM_BORN_SATISFIED';
 const BORN_SATISFIED_MARKER_RE = new RegExp(`<!--\\s*${ITEM_BORN_SATISFIED_MARKER}:([^>]*?)-->`, 'gu');
@@ -1537,7 +1538,7 @@ export function bornSatisfiedCommentBody(entries, repository) {
     '',
     ...lines,
     '',
-    'Restano in coda (l\'item è ammesso: è una misura, non una demozione), ma trovare quel token nel file non prova più che il lavoro sia stato fatto. Per chiuderli serve una PR che li affronti o una verifica esplicita.',
+    'Restano in coda (l\'item è ammesso: è una misura, non una demozione). Il token era già vero al conio, quindi trovarlo nel file non prova che il lavoro sia stato fatto; il reconciler del corpus però non legge ancora questo marker e oggi può ancora chiuderli per token.',
   ].join('\n');
 }
 

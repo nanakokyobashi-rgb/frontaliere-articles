@@ -465,7 +465,15 @@ const CLOSED_BULLET = JSON.parse(readFileSync(
 )).closed[0].bullet;
 // Un file `identical` del manifest vero (letto dal disco, come in produzione), fuori
 // da `scripts/ci`: un path della macchina passerebbe anche da `machineAdmission()`.
+// Accoppiamento voluto: se la voce cambia modo o sparisce dal manifest, scegline
+// un'altra `identical` fuori da `scripts/ci` (l'assert sotto lo segnala).
 const IDENTICAL_TARGET = 'scripts/lib/pr-body-sections-check.mjs';
+assert.equal(
+  JSON.parse(readFileSync(new URL('../../scripts/ci/loop-sync-manifest.json', import.meta.url), 'utf8'))
+    .files?.find?.((entry) => entry?.path === IDENTICAL_TARGET)?.mode,
+  'identical',
+  `${IDENTICAL_TARGET} non è più identical nel manifest: aggiorna IDENTICAL_TARGET`,
+);
 
 // Un token per item: due item con lo stesso bersaglio e token sarebbero accorpati
 // dal dedupe del fingerprint prima dell'ammissione.
