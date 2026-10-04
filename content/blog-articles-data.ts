@@ -37578,6 +37578,36 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bollettino-frontaliere-2026-10-04',
+ category: 'novita',
+ date: '2026-10-04T11:02:04.189Z',
+ image: '/images/blog/bollettino-frontaliere-2026-10-04.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'sindacati-miazzina-diritti-9-ottobre',
+ category: 'novita',
+ date: '2026-10-04T11:20:31.538Z',
+ image: '/images/blog/sindacati-miazzina-diritti-9-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'italia-mondiale-baseball-ciechi-varese',
+ category: 'novita',
+ date: '2026-10-04T11:54:50.673Z',
+ image: '/images/blog/italia-mondiale-baseball-ciechi-varese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

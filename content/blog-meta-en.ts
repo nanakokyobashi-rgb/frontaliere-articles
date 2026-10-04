@@ -12523,6 +12523,17 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tre-valli-corti.title': 'Tre Valli Varesine, the history on display at Le Corti',
     'blog.article.tre-valli-corti.excerpt': 'Twenty panels retrace at the Corti di Varese the history of the Tre Valli Varesine from 1919 to the present day. Exhibition until October 20.',
     'blog.article.tre-valli-corti.imageAlt': 'Twenty panels on the history of Tre Valli Varesine at Le Corti in Varese.',
+    'blog.article.bollettino-frontaliere-2026-10-04.title': 'Cross-border daily brief – October 4, 2026: 34-minute queue at Ponte Tresa',
+    'blog.article.bollettino-frontaliere-2026-10-04.excerpt': 'Today\'s numbers, October 4, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-04.imageAlt': 'The day\'s numbers for cross-border commuters – October 4, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-04.seoDescription': 'Cross-border brief, October 4, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-04.ogDescription': 'The numbers for October 4, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.title': 'Miazzina, unions on 9 October: \'We ask for respect\'',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.excerpt': 'Trade-union mobilization on 9 October at 14 at Eremo di Miazzina, organized by Cgil Novara Vco, Cisl Piemonte Orientale and Uil Novara Vco on work, care and support for families.',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.imageAlt': 'Trade union demonstration at the Hermitage of Miazzina with banners asking for respect for workers, people under care, and families.',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.title': 'Italy are world champions in blind baseball',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.excerpt': 'Italy triumphs in Castiglione della Pescaia: Cuba defeated 10-4. Varese players Oliveri (MVP) and Trombini (best young player) were the protagonists.',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.imageAlt': 'Italy wins the Blind Baseball World Cup in Castiglione della Pescaia',
 };
 
 export default blogMetaEn;

@@ -12522,6 +12522,17 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tre-valli-corti.title': 'Tre Valli Varesine, die Geschichte in der Ausstellung bei Le Corti',
     'blog.article.tre-valli-corti.excerpt': 'Zwanzig Tafeln zeichnen bei Le Corti von Varese die Geschichte der Tre Valli Varesine von 1919 bis heute nach. Ausstellung bis 20 ottobre.',
     'blog.article.tre-valli-corti.imageAlt': 'Zwanzig Tafeln zur Geschichte der Tre Valli Varesine im Einkaufszentrum Le Corti in Varese.',
+    'blog.article.bollettino-frontaliere-2026-10-04.title': 'Grenzgänger-Tagesbulletin – 4. Oktober 2026: 34 Minuten Wartezeit in Ponte Tresa',
+    'blog.article.bollettino-frontaliere-2026-10-04.excerpt': 'Die Zahlen von heute, 4. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-04.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 4. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-04.seoDescription': 'Grenzgänger-Bulletin vom 4. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-04.ogDescription': 'Die Zahlen vom 4. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.title': 'Miazzina, Gewerkschaften am 9 ottobre: \'Wir fordern Respekt\'',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.excerpt': 'Gewerkschaftliche Mobilisierung am 9. Oktober um 14 Uhr im Eremo di Miazzina, initiiert von Cgil Novara Vco, Cisl Piemonte Orientale und Uil Novara Vco, zu den Themen Arbeit, Betreuung und Unterstützung der Familien.',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.imageAlt': 'Gewerkschaftsdemonstration in der Einsiedelei von Miazzina mit Bannern, die Respekt für Arbeitnehmer, Pflegebedürftige und Familien fordern.',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.title': 'Italien ist Weltmeister im Blindenbaseball',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.excerpt': 'Triumph der Azzurri in Castiglione della Pescaia: Kuba mit 10-4 geschlagen. Die Vareser Oliveri (MVP) und Trombini (bester Nachwuchsspieler) als Protagonisten.',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.imageAlt': 'Italien gewinnt die Blind-Baseball-Weltmeisterschaft in Castiglione della Pescaia',
 };
 
 export default blogMetaDe;
