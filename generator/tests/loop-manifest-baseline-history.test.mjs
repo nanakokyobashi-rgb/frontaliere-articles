@@ -110,10 +110,15 @@ test('blobsByPath accetta anche array semplici (forma JSON del report)', () => {
 test('la storia usa il ref canonico e conserva i merge completi', () => {
   assert.equal(CANONICAL_HISTORY_REF, 'origin/main');
   assert.equal(CURRENT_HISTORY_REF, 'HEAD');
+  // La storia e' quella di `origin/main` piu' l'albero FINALE di HEAD, non la
+  // storia di HEAD: i commit intermedi del branch spariscono con lo squash
+  // (issue 1610). Il comportamento e' esercitato su un repository vero in
+  // loop-manifest-baseline-squash.test.mjs.
   assert.match(
     HISTORY_SCRIPT,
-    /git\(\[\s*'-c', 'core\.quotePath=false', 'rev-list', '--full-history',\s*CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects'/,
+    /git\(\[\s*'-c', 'core\.quotePath=false', 'rev-list', '--full-history',\s*CANONICAL_HISTORY_REF, '--objects'/,
   );
+  assert.match(HISTORY_SCRIPT, /'ls-tree', '-r', '-z', CURRENT_HISTORY_REF/);
   assert.doesNotMatch(HISTORY_SCRIPT, /git\(\['rev-list', '--all'/);
 });
 
