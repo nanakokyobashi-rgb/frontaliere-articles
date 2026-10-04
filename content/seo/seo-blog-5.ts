@@ -100069,6 +100069,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-saracino-comandante-carabinieri-mornago': {
+    title: 'Saracino nuovo comandante dei Carabinieri di Mornago',
+    description: 'Luogotenente Carica Speciale Anacleto Antonio Saracino assume il comando della Stazione dei Carabinieri di Mornago, dipendente dalla Compagnia di Gallarate',
+    keywords: 'frontalieri, ticino, svizzera, italia, saracino, nuovo, comandante, carabinieri',
+    ogTitle: 'Saracino nuovo comandante dei Carabinieri di Mornago',
+    ogDescription: 'Il Luogotenente Carica Speciale Anacleto Antonio Saracino è stato nominato nuovo comandante della Stazione dei Carabinieri di Mornago, unità dipendente dalla Compagnia di Gallarate e sotto la direzione provinciale del Colonnello Alessandro De Vico',
+    canonicalPath: '/articoli-frontaliere/saracino-comandante-carabinieri-mornago/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Saracino nuovo comandante dei Carabinieri di Mornago",
+      "description": "Luogotenente Carica Speciale Anacleto Antonio Saracino assume il comando della Stazione dei Carabinieri di Mornago, dipendente dalla Compagnia di Gallarate",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/saracino-comandante-carabinieri-mornago.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Luogotenente Anacleto Antonio Saracino davanti alla stazione dei Carabinieri di Mornago"
+      },
+      "datePublished": "2026-10-04T08:19:45+00:00",
+      "dateModified": "2026-10-04T08:19:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saracino-comandante-carabinieri-mornago/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
