@@ -792,18 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/deloitte-prevede-fino-a-900%27000-cambi-di-cassa-malati/92154103": {
-      "section": "frontaliere",
-      "ts": 1790920670205
-    },
-    "frontaliere::https://www.rsi.ch/s/4128663": {
-      "section": "frontaliere",
-      "ts": 1790922932239
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1954206/cassaforma-incidente-operaio-stato-ospedale": {
-      "section": "svizzera",
-      "ts": 1790924358128
-    },
     "frontaliere::https://www.ticinonews.ch/svizzera/aumento-dei-premi-fino-a-900-mila-assicurati-cambieranno-cassa-malati-443788": {
       "section": "frontaliere",
       "ts": 1790926080801
@@ -1011,6 +999,14 @@
     "frontaliere::https://www.rsi.ch/info/economia/dazi-ue-sui-%e2%80%9cpacchettini%e2%80%9d-coinvolta-anche-la-posta-svizzera--4131072.html": {
       "section": "frontaliere",
       "ts": 1791092681481
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/futura-volley-la-prima-di-campionato-e-tosta-le-cocche-ospitano-perugia/2696113": {
+      "section": "frontaliere",
+      "ts": 1791097453407
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/kastritis-a-scafati-dovremo-essere-noi-stessi-della-valle-saltera-la-doppia-trasferta/2696329": {
+      "section": "frontaliere",
+      "ts": 1791098025788
     }
   }
 }
