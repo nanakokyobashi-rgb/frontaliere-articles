@@ -99211,6 +99211,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-patto-generazionale-avs-ticino': {
+    title: 'Una 13esima AVS solidale per i giovani ticinesi',
+    description: 'Il Fondo Patto Generazionale invita i beneficiari AVS a donare parte o tutta la tredicesima per sostenere giovani da 0 a 30 anni residenti nel Canton Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, 13esima, solidale, giovani, ticinesi',
+    ogTitle: '13esima AVS: fondo per giovani in Ticino',
+    ogDescription: 'La campagna del Fondo Patto Generazionale invita i beneficiari AVS a destinare una parte o l\'intera tredicesima a giovani residenti in Ticino: il sostegno può finanziare apprendistato, primo impiego, cultura, associazioni e sport.',
+    canonicalPath: '/articoli-frontaliere/patto-generazionale-avs-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Una 13esima AVS solidale per i giovani ticinesi",
+      "description": "Il Fondo Patto Generazionale invita i beneficiari AVS a donare parte o tutta la tredicesima per sostenere giovani da 0 a 30 anni residenti nel Canton Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/patto-generazionale-avs-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena simbolica di solidarietà tra generazioni in Ticino"
+      },
+      "datePublished": "2026-10-04T00:02:47+00:00",
+      "dateModified": "2026-10-04T00:02:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/patto-generazionale-avs-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
