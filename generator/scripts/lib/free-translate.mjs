@@ -2342,6 +2342,7 @@ const CODEX_PROMPT_ECHO_MARKERS = Object.freeze([
   'System instructions:',
   'You are a professional translator',
   'Translate only:',
+  'Localize dates using',
   'Copy unchanged:',
   'Reply with the translated text only',
   'Keep line breaks, paragraphs and Markdown',

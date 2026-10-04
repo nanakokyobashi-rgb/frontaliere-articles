@@ -303,7 +303,7 @@ test('un eco della sorgente e\' rifiutato e contato, la cascata prosegue', async
 
 test('un eco del prompt nella risposta singola e\' rifiutato, la cascata prosegue', async () => {
   const before = codexCounters();
-  const calls = stubCodex('System instructions:\nYou are a professional translator.\nTranslate only:');
+  const calls = stubCodex('Der Grenzgänger zahlt Steuern.\n- Localize dates using the target language\'s customary format');
   assert.equal(await it(), `MYMEMORY ${EN}`);
   assert.equal(calls.length, 1);
   const after = codexCounters();

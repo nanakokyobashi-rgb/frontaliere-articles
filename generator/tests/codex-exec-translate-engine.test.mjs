@@ -213,6 +213,7 @@ test('translateWithCodexEngine: un eco della sorgente non e\' una traduzione', a
 test('translateWithCodexEngine: un\'eco del prompt e\' scartata, fail-closed', async () => {
   for (const echo of [
     'System instructions:\nYou are a professional translator. Rules:\n- Translate only',
+    'Der Grenzgänger zahlt Steuern.\n- Localize dates using the target language\'s customary format',
     'Der Grenzgänger zahlt Steuern.\n- Copy unchanged: URLs, email addresses',
     'BEGIN_TEXT_ABCD1234\nDer Grenzgänger zahlt Steuern.',
   ]) {
@@ -220,6 +221,7 @@ test('translateWithCodexEngine: un\'eco del prompt e\' scartata, fail-closed', a
   }
   // Un frammento presente anche nella sorgente e' testo dell'articolo.
   assert.equal(codexPromptEchoMarker('Translate only: the rule', 'Translate only: la regola'), null);
+  assert.equal(codexPromptEchoMarker('x Localize dates using y', 'z'), 'Localize dates using');
   assert.equal(codexPromptEchoMarker('Rules: keep it short', 'Regole: breve'), null);
   assert.equal(codexPromptEchoMarker('x System instructions: y', 'z'), 'System instructions:');
 });
