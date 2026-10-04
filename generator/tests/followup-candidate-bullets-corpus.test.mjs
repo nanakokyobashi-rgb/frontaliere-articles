@@ -195,3 +195,34 @@ for (const line of [
     assert.equal(bullet.candidate, true);
   });
 }
+
+// Allineato al sito #11371 (review della PR corpus 2080, due finding 🔴).
+test('una continuazione senza marker con `per scelta` chiude il bullet: non è candidato', () => {
+  const body = [
+    '## Non implementato (ancora)',
+    '- Riallineamento del drift check',
+    '  per scelta. **Motivo:** il trasporto lo porta da solo.',
+    '  **Prossimo passo:** nessuno.',
+    '',
+  ].join('\n');
+  const bullets = classifyCandidateBullets({
+    pr: { body },
+    side: 'corpus',
+    manifestFiles: MANIFEST_FILES,
+    existsHere: () => true,
+    existsTwin: () => true,
+  });
+  assert.equal(bullets.length, 1, 'le righe di continuazione si accorpano al bullet, non sono bullet a sé');
+  assert.equal(bullets[0].candidate, false);
+  assert.deepEqual(bullets[0].routes, []);
+});
+
+test('`FOLLOWUP.md` nella root, in una PR del corpus, viene instradato al corpus', () => {
+  const entry = MANIFEST_FILES.find((e) => e.path === 'FOLLOWUP.md');
+  assert.ok(entry, 'premessa: il manifest ha la voce FOLLOWUP.md');
+  const bullet = classifyOne('Aggiornare `FOLLOWUP.md` con lo stato — blocked: serve il giro di prova');
+  assert.equal(bullet.candidate, true);
+  const route = bullet.routes.find((r) => r.path === 'FOLLOWUP.md');
+  assert.ok(route, `FOLLOWUP.md senza route: ${JSON.stringify(bullet.routes)}`);
+  assert.equal(route.repo, 'corpus', 'FOLLOWUP.md è adapted: lo si corregge nel corpus');
+});

@@ -499,8 +499,8 @@
       "mode": "identical",
       "reason": "Classifica e instrada i bullet di `## Non implementato (ancora)` per il triage di post-merge-followup.yml (sezione `## Candidate bullets` del bundle). Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#11209): importa solo scripts/lib/pr-body-sections-check.mjs e scripts/ci/followup-has-candidates.mjs, entrambi identical e gia' presenti qui. Qui gira con --side corpus e il manifest letto dal disco.",
       "baseline": {
-        "site": "8bf63be3a1e50ae4",
-        "corpus": "8bf63be3a1e50ae4",
+        "site": "3dfa84c8ec742681",
+        "corpus": "3dfa84c8ec742681",
         "alignedAt": "2026-10-04"
       }
     },
@@ -641,9 +641,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e610f3392b1a52fb",
-        "corpus": "e610f3392b1a52fb",
-        "alignedAt": "2026-09-21"
+        "site": "b8c729e37f891333",
+        "corpus": "b8c729e37f891333",
+        "alignedAt": "2026-10-04"
       }
     },
     {
