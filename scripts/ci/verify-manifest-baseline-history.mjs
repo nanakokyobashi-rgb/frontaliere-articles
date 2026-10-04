@@ -117,12 +117,12 @@ function isShallow() {
 }
 
 /** true se git deve poter chiedere blob mancanti al promisor remoto. */
-export function isPartialClone() {
+export function isPartialClone(cwd = ROOT) {
   for (const args of [
     ['config', '--get', 'extensions.partialclone'],
     ['config', '--get-regexp', '^remote\\..*\\.promisor$'],
   ]) {
-    const result = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8' });
+    const result = spawnSync('git', args, { cwd, encoding: 'utf8' });
     if (result.status === 0 && String(result.stdout || '').trim()) return true;
   }
   return false;
@@ -221,32 +221,71 @@ export function parseCatFileBatchOutput(buf, oidToPaths, { allowMissing = false 
 }
 
 /**
- * Gli hash di tutti i blob mai comparsi ai path dati, dalla storia canonica.
+ * I commit raggiungibili da HEAD ma non da `origin/main`: i commit propri del
+ * branch. Su `main` (HEAD == origin/main) l'insieme e' vuoto.
  *
- * @returns {Map<string, Set<string>>}
+ * Esistono solo finche' la PR e' aperta: lo squash li sostituisce con UN
+ * commit il cui albero e' quello di HEAD. Un blob che vive soltanto in uno di
+ * loro non arriva mai su `main`, quindi non puo' attestare una baseline
+ * (issue 1610: la PR 2090 ha attestato `reconcile-conflict-handoffs.mjs` sul
+ * blob di un commit intermedio, verde sulla PR e `ghost-baseline` su main).
  */
-function blobsByPathFromHistory(paths, { partialClone = isPartialClone() } = {}) {
+export function branchOnlyCommits({ cwd = ROOT } = {}) {
+  return new Set(
+    git(['rev-list', `${CANONICAL_HISTORY_REF}..${CURRENT_HISTORY_REF}`], { cwd })
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean),
+  );
+}
+
+/**
+ * Gli hash dei blob che `main` avra' contenuto ai path dati DOPO il merge:
+ * l'intera storia di `origin/main` piu' l'albero FINALE di HEAD.
+ *
+ * Non la storia di HEAD: sulla PR conterrebbe anche i commit intermedi del
+ * branch, che lo squash scarta. Prima della issue 1610 qui c'era
+ * `rev-list HEAD origin/main`, e il verdetto della PR differiva da quello di
+ * `main` proprio sulle baseline attestate a meta' PR. Su `main` (HEAD ==
+ * origin/main) l'insieme e' identico a prima.
+ *
+ * @returns {Map<string, Set<string>>|null} null = lettura inconclusiva.
+ */
+export function blobsByPathFromHistory(paths, { cwd = ROOT, partialClone = isPartialClone(cwd) } = {}) {
   if (paths.length === 0) return new Map();
   const want = new Set(paths);
+  const oidToPaths = new Map();
+  const remember = (oid, rel) => {
+    // `--objects` porta anche gli alberi dei path intermedi: si tengono solo
+    // le righe che sono davvero uno dei file chiesti.
+    if (!want.has(rel)) return;
+    if (!oidToPaths.has(oid)) oidToPaths.set(oid, new Set());
+    oidToPaths.get(oid).add(rel);
+  };
   const listing = git([
     '-c', 'core.quotePath=false', 'rev-list', '--full-history',
-    CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF, '--objects', '--', ...paths,
-  ]);
-  const oidToPaths = new Map();
+    CANONICAL_HISTORY_REF, '--objects', '--', ...paths,
+  ], { cwd });
   for (const line of listing.split('\n')) {
     const sp = line.indexOf(' ');
     if (sp < 0) continue;
-    const oid = line.slice(0, sp);
-    const rel = line.slice(sp + 1);
-    // `--objects` porta anche gli alberi dei path intermedi: si tengono solo
-    // le righe che sono davvero uno dei file chiesti.
-    if (!want.has(rel)) continue;
-    if (!oidToPaths.has(oid)) oidToPaths.set(oid, new Set());
-    oidToPaths.get(oid).add(rel);
+    remember(line.slice(0, sp), line.slice(sp + 1));
+  }
+  // L'albero di HEAD e' cio' che lo squash porta su `main`: basta il tree, il
+  // blob si legge sotto con lo stesso `cat-file --batch`.
+  const tree = git([
+    '-c', 'core.quotePath=false', 'ls-tree', '-r', '-z', CURRENT_HISTORY_REF, '--', ...paths,
+  ], { cwd });
+  for (const record of tree.split('\0')) {
+    const tab = record.indexOf('\t');
+    if (tab < 0) continue;
+    const [, type, oid] = record.slice(0, tab).split(' ');
+    if (type !== 'blob') continue;
+    remember(oid, record.slice(tab + 1));
   }
   if (oidToPaths.size === 0) return new Map();
   const res = spawnSync('git', ['-c', 'core.quotePath=false', 'cat-file', '--batch'], {
-    cwd: ROOT,
+    cwd,
     input: `${[...oidToPaths.keys()].join('\n')}\n`,
     maxBuffer: 1 << 30,
   });
@@ -264,14 +303,19 @@ function blobsByPathFromHistory(paths, { partialClone = isPartialClone() } = {})
  * legittimo di mancato match, ed e' raro — quindi si paga un `git log` per voce
  * sospetta, non per tutte e 330.
  */
-function blobsFollowingRenames(rel, { partialClone = isPartialClone() } = {}) {
+export function blobsFollowingRenames(rel, { cwd = ROOT, partialClone = isPartialClone(cwd) } = {}) {
   const hashes = new Set();
   const seen = new Set();
+  // HEAD si segue ancora, perche' su una PR che rinomina e' l'unica storia
+  // che conosce il nome nuovo; ma i commit propri del branch si scartano per
+  // la stessa ragione di `blobsByPathFromHistory` — l'albero finale di HEAD
+  // e' gia' stato letto dalla prima passata.
+  const branchOnly = branchOnlyCommits({ cwd });
   for (const ref of new Set([CURRENT_HISTORY_REF, CANONICAL_HISTORY_REF])) {
     let commits;
     try {
       commits = parseFollowHistory(
-        git(['-c', 'core.quotePath=false', 'log', '--follow', '--format=%H', '--name-only', ref, '--', rel]),
+        git(['-c', 'core.quotePath=false', 'log', '--follow', '--format=%H', '--name-only', ref, '--', rel], { cwd }),
       );
     } catch (error) {
       const diagnostic = error?.stderr ?? error?.message ?? '';
@@ -279,13 +323,14 @@ function blobsFollowingRenames(rel, { partialClone = isPartialClone() } = {}) {
       continue;
     }
     for (const { sha, path: historicalPath } of commits) {
+      if (branchOnly.has(sha)) continue;
       const key = `${sha}\0${historicalPath}`;
       if (seen.has(key)) continue;
       seen.add(key);
       const r = spawnSync(
         'git',
         ['-c', 'core.quotePath=false', 'cat-file', 'blob', `${sha}:${historicalPath}`],
-        { cwd: ROOT, maxBuffer: 1 << 28 },
+        { cwd, maxBuffer: 1 << 28 },
       );
       if (r.status === 0) hashes.add(sha256(r.stdout));
       else if (isExpectedMissingHistoricalPath(r.stderr)) continue;

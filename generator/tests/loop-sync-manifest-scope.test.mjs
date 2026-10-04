@@ -56,6 +56,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { coveredByManifest } from '../../scripts/ci/twin-census-pr-gate.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -395,10 +396,9 @@ test('censimento: nessun gemello byte-identico fuori da roots, files e outOfScop
   const siteShas = new Set(theirs.map((e) => e.sha));
   const outOfScope = (manifest.scope.outOfScope || []).map((x) => x.prefix);
 
-  const covered = (p) =>
-    byPath.has(p) ||
-    roots.some((r) => p.startsWith(`${r}/`)) ||
-    outOfScope.some((x) => p.startsWith(x));
+  // La stessa regola del gate in PR (`twin-census-pr-gate.mjs`, issue 1610):
+  // il cron e la PR non possono dare verdetti diversi sullo stesso path.
+  const covered = coveredByManifest(manifest);
 
   const undeclared = mine.filter((e) => siteShas.has(e.sha) && !covered(e.path)).map((e) => e.path);
   assert.deepEqual(

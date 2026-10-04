@@ -184,7 +184,10 @@ jobs:
 
       # Il guard di censimento usa la rete solo una volta al giorno: serve a
       # scoprire file byte-identici fuori da `scope.roots`, `files` e
-      # `outOfScope`, non a rallentare ogni PR con la stessa domanda.
+      # `outOfScope`, non a rallentare ogni PR con la stessa domanda. La meta'
+      # che riguarda i file AGGIUNTI da una PR gira invece nel check `tests`
+      # (`scripts/ci/twin-census-pr-gate.mjs`, issue 1610), con la stessa
+      # regola di copertura.
       - name: Censimento opt-in dei gemelli
         if: always() && github.event_name == 'schedule'
         env:

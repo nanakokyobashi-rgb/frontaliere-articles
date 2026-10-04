@@ -339,6 +339,22 @@ jobs:
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
+      # Il censimento dei gemelli, ristretto ai file che la PR AGGIUNGE (issue
+      # 1610). Quello completo gira solo sullo schedule di `loop-drift-check.yml`,
+      # che sulle PR e' anche path-scoped: le PR 2096 e 2097 hanno aggiunto due
+      # file byte-identici al sito fuori dal manifest, sono passate verdi e il
+      # rosso e' arrivato su `main` (run 37205308197). Zero rete se i file
+      # aggiunti sono gia' coperti dal manifest; altrimenti una sola lettura
+      # dell'albero del sito, fail-closed.
+      - name: Gemelli aggiunti dalla PR dichiarati nel manifest (diff-scoped)
+        if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() && steps.unit_gates.conclusion == 'success' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci/twin-census-pr-gate.mjs
+
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 3/3 — Codex review + verdetto (ex workflow di review dedicato)
       #
