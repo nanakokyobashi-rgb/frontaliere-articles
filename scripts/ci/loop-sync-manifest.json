@@ -4268,6 +4268,16 @@
       }
     },
     {
+      "path": "scripts/lib/registry-api-entry.mjs",
+      "mode": "corpus-only",
+      "reason": "Proiezione della voce di registry su un'allowlist esplicita per dist/api/articles.json e swiss-articles.json, cosi' un campo interno del registry (articleType, verifiedAt) non entra nel contratto HTTP per caso. Corpus-only perche' quei file sono la superficie che QUESTO repo pubblica: il sito li consuma, non li produce.",
+      "baseline": {
+        "site": null,
+        "corpus": "87c33613739a51f3",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "scripts/lib/cdn-asset-existence.mjs",
       "mode": "adapted",
       "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",
