@@ -1,0 +1,385 @@
+name: Bonifica blocking bodies
+
+# Esecutore di `generator/scripts/retranslate-blocking-bodies.mjs` (stock delle
+# issue del sito 7682 scaffolding e 7683 false-friend): a lotti, una PR alla
+# volta, col campione da giudicare PRIMA di ogni scrittura.
+#
+# Ordine operativo (vincolante):
+# - translation-false-friend: prima `apply=false` → campione pubblicato e
+#   giudicato sulla 7683 in un commento con impronta e tasso `N/M` → URL del
+#   commento in `BONIFICA_FALSE_FRIEND_SAMPLE_URL` → `apply=true` a lotti da
+#   20. Dopo ogni lotto lo stock cambia e serve un campione nuovo.
+# - leaked-prompt-scaffolding: prima `locale=it` (NX-S2), poi i locali non
+#   italiani, solo quando il gate riconosce `LOCALIZED_TITLE_MARKER`.
+#
+# Cosa NON fa:
+# Nessuno `schedule` (solo dopo il pilota, su decisione del proprietario),
+# nessuna scrittura su `main` (solo PR col ciclo normale), nessun `apply` di
+# default, nessuna modifica a soglie, gate o glossario. Produce il campione,
+# non il verdetto. Ogni condizione non dimostrata ferma la scrittura.
+#
+# Osservatore: `generator/tests/bonifica-blocking-bodies-workflow.test.mjs`.
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: 'Un solo codice bloccante (vuoto = tutti), es. translation-false-friend o leaked-prompt-scaffolding. Non si combina con slugs.'
+        required: false
+        default: ''
+        type: string
+      locale:
+        description: 'Locali da trattare, separati da virgola (it e'' opt-in).'
+        required: false
+        default: 'en,de,fr'
+        type: string
+      limit:
+        description: 'Massimo di coppie trattate in questo lotto.'
+        required: false
+        default: '20'
+        type: string
+      apply:
+        description: 'Scrive davvero e apre la PR di contenuto. Senza: dry-run e campione.'
+        required: false
+        default: false
+        type: boolean
+      slugs:
+        description: 'Facoltativo: slug separati da virgola al posto della scansione del contenuto (lascia code vuoto).'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+
+concurrency:
+  group: bonifica-blocking-bodies
+  cancel-in-progress: false
+
+jobs:
+  bonifica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    # Gli input passano da qui e si leggono come variabili d'ambiente: mai
+    # interpolati dentro un `run:`, dove un valore diventerebbe codice shell.
+    env:
+      CODE: ${{ inputs.code }}
+      LOCALE: ${{ inputs.locale }}
+      LIMIT: ${{ inputs.limit }}
+      APPLY: ${{ inputs.apply }}
+      SLUGS: ${{ inputs.slugs }}
+      OUT_DIR: /tmp/bonifica
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          # Il push usa il PAT caricato da Remote Config: con le credenziali
+          # persistite dal checkout v7 il push si autenticherebbe come
+          # GITHUB_TOKEN (site#10520, corpus#2002).
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # Una PR di bonifica alla volta (modello `transport-identical-twins.yml`):
+      # prefisso del branch con `gh api --paginate`, solo branch di questo repo.
+      - name: Guard — bonifica gia' in volo
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
+            awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
+          OPEN=$(grep -c '^bonifica/blocking-bodies' /tmp/open-prs.txt || true)
+          echo "open_bonifiche=$OPEN" >> "$GITHUB_OUTPUT"
+          if [ "$OPEN" != "0" ]; then
+            echo "::notice::Una PR di bonifica e' gia' aperta: niente di nuovo finche' non si chiude."
+          fi
+
+      - name: Install dependencies
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      # Stock di partenza (tutti i codici e locali): la base del campione.
+      - name: Stock prima
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT_DIR"
+          node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
+            --list-out "$OUT_DIR/stock-before.jsonl" --out "$OUT_DIR/stock-before.json" > /dev/null
+
+      # Il campione da GIUDICARE, deterministico, prima di ogni scrittura.
+      - name: Campione da giudicare
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          ARGS=(--in "$OUT_DIR/stock-before.jsonl" --locale "$LOCALE" --min 30 --out "$OUT_DIR/sample.md")
+          if [ -n "$CODE" ]; then ARGS+=(--code "$CODE"); fi
+          node generator/scripts/bonifica-sample.mjs "${ARGS[@]}"
+          if command -v sha256sum > /dev/null; then FP=$(sha256sum "$OUT_DIR/sample.md" | cut -d' ' -f1); else FP=$(shasum -a 256 "$OUT_DIR/sample.md" | cut -d' ' -f1); fi
+          printf '%s\n' "$FP" > "$OUT_DIR/sample.sha256"
+          echo "::notice::Impronta del campione: $FP"
+          printf '> Impronta del campione (sha256 di sample.md): %s. Il commento giudicato su #7683 la cita intera insieme a «Tasso di falsi positivi: N/M», M = righe false-friend del campione.\n\n' "$FP" >> "$GITHUB_STEP_SUMMARY"
+
+      # Cancello della issue 7683 (codice vuoto o false-friend), senza default
+      # ne' bypass. La forma dell'URL non basta: il commento si legge via API,
+      # deve stare sulla 7683, citare intera l'impronta del `sample.md` di
+      # QUESTA run (stock corrente) e un solo tasso `N/M` con M = sue righe.
+      - name: Cancello del campione 7683
+        id: sample_gate
+        if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SAMPLE_URL: ${{ vars.BONIFICA_FALSE_FRIEND_SAMPLE_URL }}
+        run: |
+          set -euo pipefail
+          SITE_REPO=valerielinc-ops/frontaliere-si-o-no
+          verified=false
+          why="BONIFICA_FALSE_FRIEND_SAMPLE_URL vuota o non e' un commento della issue 7683"
+          if printf '%s' "${SAMPLE_URL:-}" | grep -Eq '^https://github\.com/valerielinc-ops/frontaliere-si-o-no/issues/7683#issuecomment-[0-9]+$'; then
+            ID="${SAMPLE_URL##*#issuecomment-}"
+            if command -v sha256sum > /dev/null; then FP=$(sha256sum "$OUT_DIR/sample.md" | cut -d' ' -f1); else FP=$(shasum -a 256 "$OUT_DIR/sample.md" | cut -d' ' -f1); fi
+            C="$OUT_DIR/sample-comment.txt"
+            if ! gh api "repos/$SITE_REPO/issues/comments/$ID" --jq '.issue_url, .body' > "$C"; then
+              why="commento $ID non leggibile via API (inesistente o API giu')"
+            elif [ "$(sed -n 1p "$C")" != "https://api.github.com/repos/$SITE_REPO/issues/7683" ]; then
+              why="il commento $ID non sta sulla issue 7683"
+            elif ! grep -Eiq "(^|[^0-9a-f])$FP([^0-9a-f]|\$)" "$C"; then
+              why="il commento $ID non cita l'impronta intera $FP del campione di questa run (campione diverso o stock cambiato)"
+            else
+              # M = righe false-friend del campione di questa run.
+              MS=$(LC_ALL=C sed -n 's/^### translation-false-friend — \([0-9][0-9]*\) su [0-9][0-9]*$/\1/p' "$OUT_DIR/sample.md")
+              # Ogni riga che apre con il tasso deve essere `N/M` interi; un
+              # solo valore. Prosa, percentuale o valori diversi = non dimostrato.
+              RATE=$(tr -d '*_' < "$C" | awk '
+                { l = tolower($0); sub(/^[ \t>-]+/, "", l) }
+                index(l, "tasso di falsi positivi") != 1 { next }
+                { n++ }
+                !match(l, /^tasso di falsi positivi:[ \t]*[0-9]+\/[0-9]+([ \t(].*)?$/) { bad++; next }
+                { v = l; sub(/^tasso di falsi positivi:[ \t]*/, "", v); sub(/[ \t(].*$/, "", v); if (!(v in seen)) { seen[v] = 1; k++ } ; last = v }
+                END { if (n == 0 || bad > 0) print "malformato"; else if (k > 1) print "multiplo"; else print last }')
+              N="${RATE%%/*}"
+              M="${RATE#*/}"
+              if [ "$RATE" = multiplo ]; then
+                why="il commento $ID riporta il tasso di falsi positivi con valori diversi"
+              elif [ "$RATE" = malformato ] || [ "${#N}" -gt 6 ] || [ "${#M}" -gt 6 ]; then
+                why="il commento $ID non riporta il tasso di falsi positivi nella forma «Tasso di falsi positivi: N/M»"
+              elif [ -z "$MS" ]; then
+                why="il campione di questa run non ha la sezione translation-false-friend: M non ricavabile"
+              elif [ $((10#$M)) -eq 0 ] || [ $((10#$N)) -gt $((10#$M)) ]; then
+                why="il commento $ID riporta un tasso impossibile ($RATE): serve 0 <= N <= M e M > 0"
+              elif [ $((10#$M)) -ne $((10#$MS)) ]; then
+                why="il commento $ID giudica M=$((10#$M)) coppie ma il campione di questa run ne ha $MS"
+              else
+                verified=true
+              fi
+            fi
+          fi
+          echo "sample_verified=$verified" >> "$GITHUB_OUTPUT"
+          case "$CODE" in
+            ''|*translation-false-friend*)
+              if [ "$verified" != "true" ]; then
+                echo "::error::campione #7683 non pubblicato o non verificato: $why. Lancia prima con apply=false e pubblica il campione giudicato"
+                exit 1
+              fi
+              echo "Campione giudicato e verificato: $SAMPLE_URL (impronta $FP)"
+              ;;
+            *)
+              echo "Codice $CODE: il cancello del campione false-friend non si applica a questo lotto."
+              ;;
+          esac
+
+      # Cancello della issue 7682 (codice vuoto o scaffolding, anche con
+      # `slugs`): serve NX-S2 (esiste solo col via del proprietario su 7682);
+      # per i locali non-`it` anche `LOCALIZED_TITLE_MARKER`, senza il quale un
+      # marcatore tradotto sfugge al gate e arriva in `dist/api/`. Prove nel
+      # checkout E su `main`; un locale non dimostrato `it` conta come non-`it`.
+      - name: Cancello dello scaffolding 7682
+        id: scaffolding_gate
+        if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          case "$CODE" in
+            ''|*leaked-prompt-scaffolding*) ;;
+            *)
+              echo "Codice $CODE: il cancello dello scaffolding non si applica a questo lotto."
+              exit 0
+              ;;
+          esac
+          prove() {
+            if ! grep -q "$2" "$1" 2> /dev/null; then
+              echo "::error::scaffolding: $3 assente nel checkout ($1): nessuna scrittura"
+              exit 1
+            fi
+            if ! gh api -H 'Accept: application/vnd.github.raw' "repos/$REPO/contents/$1?ref=main" > "$OUT_DIR/main-proof"; then
+              echo "::error::scaffolding: $1 non leggibile su main via API: $3 non dimostrato, nessuna scrittura"
+              exit 1
+            fi
+            if ! grep -q "$2" "$OUT_DIR/main-proof"; then
+              echo "::error::scaffolding: $3 non e' su main ($1): nessuna scrittura"
+              exit 1
+            fi
+          }
+          prove generator/scripts/retranslate-blocking-bodies.mjs strip-leaked-title-marker 'NX-S2 (rimozione della sola riga, decisione del proprietario su 7682)'
+          non_it=true
+          set -f
+          for loc in $(printf '%s' "$LOCALE" | tr ',' ' '); do
+            if [ "$loc" = it ]; then non_it=false; else non_it=true; break; fi
+          done
+          if [ "$non_it" = true ]; then
+            prove generator/scripts/lib/article-factuality-gates.mjs LOCALIZED_TITLE_MARKER "il gate dei marcatori tradotti LOCALIZED_TITLE_MARKER (locali $LOCALE)"
+          fi
+          echo "Scaffolding: prerequisiti dimostrati nel checkout e su main (locali: $LOCALE)."
+
+      - name: Prepare Firebase credentials
+        if: steps.guard.outputs.open_bonifiche == '0'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: Remote Config e' l'unica fonte delle chiavi MT e del PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      # Chiavi della cascata MT e `GITHUB_PAT_NANAKO` per il push.
+      - name: Load secrets from Remote Config
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: node generator/scripts/load-rc-env.mjs
+
+      # `--apply` solo nel ramo `APPLY=true`. Una run tutta
+      # `campo-vuoto-dalla-cascata` resta verde ma lo dichiara.
+      - name: Ri-traduzione del lotto
+        id: retranslate
+        if: steps.guard.outputs.open_bonifiche == '0'
+        env:
+          SAMPLE_GATE: ${{ steps.sample_gate.outcome }}
+          SCAFFOLDING_GATE: ${{ steps.scaffolding_gate.outcome }}
+        run: |
+          set -euo pipefail
+          # Tetto rigido del lotto che scrive: 20 coppie, il pilota giudicato.
+          # La lunghezza prima di `-gt`, che su un numero enorme fallisce.
+          case "$LIMIT" in
+            ''|*[!0-9]*|0*)
+              echo "::error::limit deve essere un intero positivo, non '$LIMIT'"
+              exit 1
+              ;;
+          esac
+          if [ "$APPLY" = "true" ] && { [ "${#LIMIT}" -gt 2 ] || [ "$LIMIT" -gt 20 ]; }; then
+            echo "::error::limit=$LIMIT oltre il tetto di 20 coppie per lotto con apply=true: nessuna scrittura"
+            exit 1
+          fi
+          # I cancelli si leggono come esito qui, nel passo che scrive: se un
+          # `if:` li salta o li rende non bloccanti, la scrittura resta ferma.
+          if [ "$APPLY" = "true" ] && { [ "${SAMPLE_GATE:-}" != "success" ] || [ "${SCAFFOLDING_GATE:-}" != "success" ]; }; then
+            echo "::error::apply con cancelli non superati (campione 7683: ${SAMPLE_GATE:-assente}, scaffolding 7682: ${SCAFFOLDING_GATE:-assente}): nessuna scrittura"
+            exit 1
+          fi
+          # Selettori che tratterebbero 0 coppie: un verde finto.
+          if [ -n "$SLUGS" ] && [ -n "$CODE" ]; then
+            echo "::error::slugs e code non si combinano: con slugs lo strumento non filtra per codice e il lotto tratterebbe 0 coppie"
+            exit 1
+          fi
+          case "$CODE" in
+            *,*)
+              echo "::error::code accetta un solo codice, non una lista ($CODE): il lotto tratterebbe 0 coppie"
+              exit 1
+              ;;
+          esac
+          ARGS=()
+          if [ -n "$SLUGS" ]; then ARGS+=(--slug "$SLUGS"); else ARGS+=(--scan); fi
+          if [ -n "$CODE" ]; then ARGS+=(--code "$CODE"); fi
+          ARGS+=(--locale "$LOCALE" --limit "$LIMIT" --stratify --out "$OUT_DIR/report.json")
+          if [ "$APPLY" = "true" ]; then ARGS+=(--apply); fi
+          node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs "${ARGS[@]}"
+          STATS=$(node generator/scripts/bonifica-report.mjs stats --report "$OUT_DIR/report.json")
+          printf '%s\n' "$STATS" | tee -a "$GITHUB_OUTPUT"
+          if printf '%s\n' "$STATS" | grep -qx 'all_empty=true'; then
+            echo "::warning::Run informativa: tutte le coppie trattate sono campo-vuoto-dalla-cascata (tier MT fuori servizio o senza quota)."
+          fi
+
+      - name: Stock dopo
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
+            --list-out "$OUT_DIR/stock-after.jsonl" --out "$OUT_DIR/stock-after.json" > /dev/null
+
+      # Solo i file tracciati sotto `content/`, tanti quante le coppie scritte;
+      # push col PAT, perche' col GITHUB_TOKEN i check non partono.
+      - name: Apri la PR di bonifica
+        if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true && steps.retranslate.outputs.written != '0'
+        env:
+          REPO: ${{ github.repository }}
+          WRITTEN: ${{ steps.retranslate.outputs.written }}
+          FALSE_FRIEND_WRITTEN: ${{ steps.retranslate.outputs.false_friend_written }}
+          SAMPLE_VERIFIED: ${{ steps.sample_gate.outputs.sample_verified }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          # Rete del cancello 7683: un lotto di un altro codice puo' riscrivere
+          # una coppia che porta ANCHE il false-friend. Senza campione
+          # pubblicato quella scrittura non entra in un commit.
+          if [ "${FALSE_FRIEND_WRITTEN:-0}" != "0" ] && [ "${SAMPLE_VERIFIED:-false}" != "true" ]; then
+            echo "::error::campione #7683 non pubblicato: $FALSE_FRIEND_WRITTEN coppie false-friend scritte sul runner, nessun commit"
+            exit 1
+          fi
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: $WRITTEN coppie scritte sul runner andrebbero perse"
+            exit 1
+          fi
+          BRANCH="bonifica/blocking-bodies-${GITHUB_RUN_ID}"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BRANCH"
+          git add -u -- content/
+          STAGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
+          git diff --cached --name-only
+          if [ "$STAGED" != "$WRITTEN" ]; then
+            echo "::error::il report dice $WRITTEN coppie scritte ma sotto content/ sono cambiati $STAGED file"
+            exit 1
+          fi
+          git commit -m "chore(content): bonifica ${WRITTEN} body bloccanti (${CODE:-tutti i codici}, ${LOCALE})"
+          git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
+          git push origin "$BRANCH"
+          node generator/scripts/bonifica-report.mjs pr-body --report "$OUT_DIR/report.json" \
+            --before "$OUT_DIR/stock-before.json" --after "$OUT_DIR/stock-after.json" \
+            --run-url "$RUN_URL" --out "$OUT_DIR/pr-body.md"
+          GH_TOKEN="$runtime_pat" gh pr create --repo "$REPO" --base main --head "$BRANCH" \
+            --title "chore(content): bonifica ${WRITTEN} body bloccanti (${CODE:-tutti i codici}, ${LOCALE})" \
+            --body-file "$OUT_DIR/pr-body.md"
+
+      # Anche quando il cancello ferma la run: il campione e lo stock di
+      # partenza restano leggibili nel summary e nell'artifact.
+      - name: Riepilogo
+        if: always() && steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT_DIR"
+          node generator/scripts/bonifica-report.mjs summary --report "$OUT_DIR/report.json" \
+            --before "$OUT_DIR/stock-before.json" --after "$OUT_DIR/stock-after.json" \
+            --sample "$OUT_DIR/sample.md" --out "$OUT_DIR/summary.md"
+          cat "$OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always() && steps.guard.outputs.open_bonifiche == '0'
+        uses: actions/upload-artifact@v7
+        with:
+          name: bonifica-blocking-bodies-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/bonifica/
+          if-no-files-found: warn
+          retention-days: 30
