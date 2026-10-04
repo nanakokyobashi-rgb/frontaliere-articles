@@ -30,11 +30,36 @@
  * (`/data/jobs-<locale>-index.json`), so it is a data publication, not a new
  * mechanism.
  *
+ * THE COVER CREDITS RIDE THE SAME CHANNEL (P14)
+ * ─────────────────────────────────────────────
+ * A second, separate output, not more fields in the index above: the list
+ * files stay exactly what a list cell renders. The article page of the SPA
+ * needs the credit of a Wikimedia Commons cover (author, licence, Commons
+ * file page) for its visible line and its ImageObject, and for a fresh
+ * article that data exists only here, in `content/image-credits/blog/` —
+ * the bundle lags by hours. So each section also gets
+ * `image-credits-<section>.json`: the publishable records of the covers its
+ * registry rows use, read through the engine's own reader
+ * (`engine/shared/imageCredits.mjs`, so an invalid or `review` record is
+ * dropped here exactly as on the static page), file fields stored once per
+ * Commons file (`scripts/lib/image-credit-records.mjs` has the shape).
+ * Fail-open for the consumer like the index. Two records that credit one
+ * Commons file differently (two runs that read Commons at different moments)
+ * share one file entry: the most recent read, for every cover cut from that
+ * file, so no cover goes out without a credit while its literal no longer
+ * claims the photo for the site. A warning names the pair. Refusing would
+ * hold back the whole API publication for one cover; the alarm that asks for
+ * the records to be aligned is the content gate on `main`
+ * (`generator/tests/image-credits-content.test.mjs`), which fails on any such
+ * pair.
+ *
  * Usage: node scripts/build-blog-index.mjs [--out <dir>]
  * Emits: <out>/blog-index-<section>-<locale>.json       newest RECENT_LIMIT
  *        <out>/blog-index-<section>-<locale>-full.json  every article
  *        (2 sections x 4 locales x 2 files). The capped file is the fast path;
  *        the full one is what stops the cap being a cliff — see the slice below.
+ *        <out>/image-credits-<section>.json             the section's cover credits
+ *        (2 files)
  */
 
 import fs from 'node:fs';
@@ -61,6 +86,7 @@ import {
 // senza questa dichiarazione resterebbero l'unica parte di `dist/api/` che
 // nessun consumer puo' verificare prima di usarla.
 import { declareApiArtifacts, byteSize } from './lib/api-manifest.mjs';
+import { buildImageCreditsIndex, corpusCreditReader } from './lib/image-credit-records.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -85,6 +111,29 @@ const expectedShards = new Set(
     path.relative(API_ROOT, path.join(OUT, `blog-index-${section.name}-${locale}-full.json`)),
   ])),
 );
+/** The cover credits: one file per section, declared apart from the index shards. */
+const expectedCreditFiles = new Set(
+  SECTIONS.map((section) => path.relative(API_ROOT, path.join(OUT, `image-credits-${section.name}.json`))),
+);
+const writtenCredits = {};
+
+/**
+ * The release the credits belong to: `manifest.json`'s `commit`, written by
+ * `build-api.mjs` a step earlier — so a consumer can match the two. Outside
+ * the published surface (a `--out` of convenience) there is no manifest and
+ * the field is null rather than invented.
+ */
+const releaseCommit = (() => {
+  if (!PUBLISHES_TO_API) return null;
+  try {
+    return JSON.parse(fs.readFileSync(path.join(API_ROOT, 'manifest.json'), 'utf-8')).commit ?? null;
+  } catch {
+    return null;
+  }
+})();
+/** Records the engine reader drops, reported once each instead of vanishing. */
+const creditWarnings = [];
+const creditReader = corpusCreditReader(ROOT, (message) => creditWarnings.push(message));
 
 /**
  * Il pavimento sotto cui il parse del registro e' rotto, non vuoto.
@@ -300,14 +349,39 @@ for (const section of SECTIONS) {
     entries.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     locales.push({ locale, entries });
   }
-  preparedSections.push({ section, locales });
+
+  // The section's cover credits (see the header), prepared with the index. Two
+  // covers whose records disagree about one Commons file both carry its most
+  // recent read; publishing goes on, and the warning names the pair.
+  const credits = buildImageCreditsIndex({
+    section: section.name,
+    commit: releaseCommit,
+    images: registry.map((a) => a.image),
+    reader: creditReader,
+  });
+  for (const conflict of credits.conflicts) {
+    creditWarnings.push(`${section.name}: ${conflict} — both covers carry the most recent read of the file until the records agree`);
+  }
+  preparedSections.push({ section, locales, credits: credits.payload });
 }
+for (const message of creditWarnings) console.warn('::warning::' + message);
 
 if (!failed) {
   fs.mkdirSync(OUT, { recursive: true });
 
   // Fase 2: la validazione e' completa; da qui in poi si scrive il set preparato.
-  for (const { section, locales } of preparedSections) {
+  for (const { section, locales, credits } of preparedSections) {
+    const creditsFile = path.join(OUT, `image-credits-${section.name}.json`);
+    const cleanCredits = sanitizeDeep(credits);
+    reportStrippedControlCharsDeep(creditsFile, credits, cleanCredits);
+    const creditsText = JSON.stringify(cleanCredits) + '\n';
+    fs.writeFileSync(creditsFile, creditsText);
+    writtenCredits[path.relative(API_ROOT, creditsFile)] = byteSize(creditsText);
+    console.log(
+      `[blog-index] ${path.basename(creditsFile)} — ${Object.keys(credits.covers).length} credited covers, ` +
+      `${Object.keys(credits.files).length} Commons files, ${Math.round(byteSize(creditsText) / 1024)} KB`,
+    );
+
     for (const { locale, entries } of locales) {
       // Two files, and the split is the point.
       //
@@ -402,6 +476,19 @@ if (!failed && PUBLISHES_TO_API) {
   } else {
     const total = declareApiArtifacts(API_ROOT, writtenShards, { blogIndexShards: actual });
     console.log(`[blog-index] manifest.files: ${actual} shards declared, ${total} artifacts match on disk`);
+  }
+}
+
+// Same net for the cover credits, declared on their own so the closed product
+// above stays the index's: one file per section, or a refusal.
+if (!failed && PUBLISHES_TO_API) {
+  const missing = [...expectedCreditFiles].filter((rel) => !Object.hasOwn(writtenCredits, rel));
+  if (missing.length > 0 || Object.keys(writtenCredits).length !== expectedCreditFiles.size) {
+    console.error(`[blog-index] cover credits: missing ${missing.join(', ') || 'unknown'} — refusing to publish a partial set`);
+    failed = true;
+  } else {
+    const total = declareApiArtifacts(API_ROOT, writtenCredits, { imageCreditFiles: expectedCreditFiles.size });
+    console.log(`[blog-index] manifest.files: ${expectedCreditFiles.size} cover-credit files declared, ${total} artifacts match on disk`);
   }
 }
 

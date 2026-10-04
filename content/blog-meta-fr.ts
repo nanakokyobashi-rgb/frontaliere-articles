@@ -12522,6 +12522,23 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.saracino-comandante-carabinieri-mornago.title': 'Saracino, nouveau commandant des Carabinieri de Mornago',
     'blog.article.saracino-comandante-carabinieri-mornago.excerpt': 'Le lieutenant à charge spéciale Anacleto Antonio Saracino dirige la Station des Carabiniers de Mornago, rattachée à la Compagnie de Gallarate, responsable de la sécurité publique dans les communes de Mornago, Sumirago, Casale Litta et Inarzo.',
     'blog.article.saracino-comandante-carabinieri-mornago.imageAlt': 'Lieutenant Anacleto Antonio Saracino devant la poste des carabiniers di Mornago',
+    'blog.article.tre-valli-corti.title': 'Tre Valli Varesine, l’histoire exposée aux Corti',
+    'blog.article.tre-valli-corti.excerpt': 'Vingt planches retracent aux cours de Varese l\'histoire des trois vallées de Varèse de 1919 à nos jours. Afficher jusqu\'au 20 octobre.',
+    'blog.article.tre-valli-corti.imageAlt': 'Vingt panneaux sur l’histoire des Tre Valli Varesine aux Corti de Varèse. (Varese)',
+    'blog.article.bollettino-frontaliere-2026-10-04.title': 'Bulletin du frontalier – 4 octobre 2026 : 34 minutes d\'attente à Ponte Tresa',
+    'blog.article.bollettino-frontaliere-2026-10-04.excerpt': 'Les chiffres du jour, 4 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-04.imageAlt': 'Les chiffres du jour pour les frontaliers – 4 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-04.seoDescription': 'Bulletin du frontalier du 4 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-04.ogDescription': 'Les chiffres du 4 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.title': 'Miazzina, les syndicats le 9 octobre : \'Nous demandons du respect\'',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.excerpt': 'Mobilisation syndicale le 9 octobre à 14 heures à l\'Eremo di Miazzina, organisée par Cgil Novara Vco, Cisl Piemonte Orientale et Uil Novara Vco sur le travail, l\'assistance et le soutien aux familles.',
+    'blog.article.sindacati-miazzina-diritti-9-ottobre.imageAlt': 'Manifestation syndicale à l\'Ermitage de Miazzina avec des banderoles demandant le respect pour les travailleurs, les personnes soignées et les familles.',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.title': 'L\'Italie championne du monde de baseball pour aveugles',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.excerpt': 'Triomphe italien à Castiglione della Pescaia : Cuba battue 10-4. Les Varésans Oliveri (MVP) et Trombini (meilleur jeune) en sont les protagonistes.',
+    'blog.article.italia-mondiale-baseball-ciechi-varese.imageAlt': 'L\'Italie remporte la Coupe du monde de baseball pour aveugles à Castiglione della Pescaia',
+    'blog.article.urto-spartitraffico-camorino.title': 'Accident à Camorino, une femme blessée en direction de l\'A2',
+    'blog.article.urto-spartitraffico-camorino.excerpt': 'Après avoir perdu le contrôle dans un virage, la voiture a heurté un séparateur central et s\'est renversée. L\'entrée vers le sud de l\'A2 est restée fermée pendant plus d\'une heure.',
+    'blog.article.urto-spartitraffico-camorino.imageAlt': 'Échangeur de Camorino vers l\'A2 avec séparateur, lieu de l\'accident.',
 };
 
 export default blogMetaFr;

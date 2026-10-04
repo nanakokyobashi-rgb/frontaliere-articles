@@ -257,11 +257,27 @@ import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
 import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
-import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug } from './lib/topic-coverage-guard.mjs';
+import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug, topicCoverageKey } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
+// P14: author and licence of a Commons cover, read with the search request and
+// written as content/image-credits/blog/<id>.json. In a module because this
+// file is not importable from a test (jsdom); see its header.
+import {
+  COMMONS_IMAGEINFO_PARAMS,
+  acceptCommonsCandidate,
+  chooseCommonsCredit,
+  coverCreditFor,
+  creditRecordForCover,
+  creditRecordPath,
+  loadCommonsUsage,
+  readCommonsPage,
+  utcDate,
+  webpDimensions,
+  writeCreditRecord,
+} from './lib/commons-credit.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
@@ -3918,6 +3934,14 @@ function buildDynamicEvergreenTopicsSvizzera() {
 //    errore corretto il 2026-07-21 (vedi il commento a PRIORITY_EVERGREEN_TOPICS_SVIZZERA),
 //    ri-derivato per via combinatoria invece che a mano.
 //
+// ROTAZIONE 2026-10-04 (#2085). Il watchdog ha misurato 610/610 keyword
+// rifiutate: 300 dal ledger permanente, 12 da strike, 44 da copertura recente,
+// 228 dal title-Jaccard e 26 da famiglia satura. Allargare la soglia o svuotare
+// le bans avrebbe rimesso nel ciclo duplicati già confermati. Il denominatore
+// resta bounded a 610, ma dieci pilastri cantonali ormai esauriti vengono
+// sostituiti da dieci dimensioni nuove (250 keyword): la superficie utile cresce
+// senza indebolire i gate né dipendere da un'amnistia dello stato storico.
+//
 // NOTA PER CHI MODIFICA I PILASTRI. `evergreenTopicFamily` (piu' sotto) mappa
 // certe combinazioni di token su «famiglie», e sei di queste sono in
 // SATURATED_FAMILIES: un candidato che ci cade viene dichiarato duplicato contro
@@ -3977,12 +4001,12 @@ function buildStructuralEvergreenTopicsSvizzera() {
       a: 'Permesso di dimora B %C: requisiti, documenti da produrre, durata, procedura di rinnovo e ufficio cantonale della migrazione competente.',
     },
     {
-      k: 'permesso di domicilio C %c requisiti e domanda',
-      a: 'Permesso di domicilio C %C: anni richiesti, criteri di integrazione, conoscenze linguistiche, procedura di domanda e casi di rilascio anticipato.',
+      k: 'salario minimo %c requisiti e applicazione',
+      a: 'Salario minimo %C: disciplina cantonale eventualmente applicabile, settori interessati, requisiti, controlli e ufficio competente; dove non esiste un minimo cantonale, differenza rispetto ai contratti collettivi.',
     },
     {
-      k: 'permesso L di breve durata %c validità e proroga',
-      a: 'Permesso L di breve durata %C: durata massima, condizioni di proroga, passaggio al permesso di dimora e vincoli legati al datore di lavoro.',
+      k: 'assistenza sociale %c requisiti e domanda',
+      a: 'Assistenza sociale %C: condizioni di bisogno, ufficio comunale o cantonale competente, documenti per la domanda, prestazioni e obblighi di collaborazione.',
     },
     {
       k: 'indennità di disoccupazione %c iscrizione URC',
@@ -3993,48 +4017,48 @@ function buildStructuralEvergreenTopicsSvizzera() {
       a: 'Assegni familiari e di formazione %C: importi mensili per figlio, condizioni di diritto, cassa di compensazione competente e procedura di domanda.',
     },
     {
-      k: 'sistema scolastico %c iscrizione e cicli',
-      a: 'Scuola dell\'obbligo %C: cicli, età di iscrizione, calendario scolastico, lingue di insegnamento e passaggio alle scuole medie superiori.',
+      k: 'imposta sugli autoveicoli %c calcolo e pagamento',
+      a: 'Imposta cantonale sugli autoveicoli %C: criteri di calcolo, scadenze, ufficio della circolazione, cambio di veicolo e aggiornamento dell\'indirizzo.',
     },
     {
       k: 'apprendistato e formazione professionale %c',
       a: 'Apprendistato e formazione professionale %C: come si trova un posto di tirocinio, contratto di tirocinio, retribuzione dell\'apprendista e maturità professionale.',
     },
     {
-      k: 'borse di studio %c requisiti e importi',
-      a: 'Borse di studio e prestiti allo studio %C: requisiti, importi massimi, termini di presentazione e ufficio cantonale competente.',
+      k: 'incentivi energetici %c requisiti e domanda',
+      a: 'Incentivi energetici %C: programmi per il risanamento degli edifici e degli impianti, requisiti tecnici, domanda da presentare prima dei lavori e ufficio cantonale competente.',
     },
     {
-      k: 'asilo nido e custodia bambini %c costi',
-      a: 'Custodia dei bambini %C: asili nido, famiglie diurne, doposcuola, tariffe calcolate sul reddito e sussidi cantonali disponibili.',
+      k: 'autorizzazione edilizia %c requisiti e procedura',
+      a: 'Autorizzazione edilizia %C: quando serve, documenti, ruolo del comune e del cantone, opposizioni o ricorsi e divieto di iniziare i lavori prima del permesso.',
     },
     {
-      k: 'comprare casa %c prezzi e mutuo ipotecario',
-      a: 'Acquisto di un\'abitazione %C: prezzi medi, fondi propri richiesti, sostenibilità del mutuo ipotecario, imposta sui trapassi e spese notarili.',
+      k: 'voto cantonale %c guida a iniziative e referendum',
+      a: 'Voto cantonale %C: come funzionano iniziative e referendum, calendario delle votazioni, aventi diritto e informazioni ufficiali per esprimere il voto.',
     },
     {
-      k: 'mercato degli affitti %c canoni medi e diritto di locazione',
-      a: 'Affitti %C: canoni medi per zona, deposito di garanzia, contestazione del canone iniziale, disdetta e autorità di conciliazione in materia di locazione.',
+      k: 'elezioni cantonali %c guida a calendario e voto',
+      a: 'Elezioni cantonali %C: sistema elettorale, calendario, modalità di voto, liste e ufficio elettorale responsabile delle informazioni ufficiali.',
     },
     {
-      k: 'naturalizzazione %c requisiti e procedura',
-      a: 'Naturalizzazione ordinaria %C: anni richiesti dal cantone e dal comune, test di integrazione e di lingua, tasse da versare e durata della procedura.',
+      k: 'protezione civile %c requisiti e indennità',
+      a: 'Protezione civile %C: organizzazione cantonale, obblighi, convocazioni, indennità e autorità responsabile del servizio.',
     },
     {
       k: 'avs e prestazioni complementari %c cassa di compensazione',
       a: 'Primo pilastro %C: cassa di compensazione cantonale, calcolo della rendita AVS, lacune contributive e prestazioni complementari a copertura del minimo vitale.',
     },
     {
-      k: 'abbonamenti trasporti pubblici %c zone e tariffe',
-      a: 'Trasporti pubblici %C: comunità tariffaria, zone, abbonamenti annuali e mensili, combinazione con metà-prezzo e AG, sconti per studenti e apprendisti.',
+      k: 'assicurazione immobili %c guida a obbligo e premi',
+      a: 'Assicurazione degli immobili %C: obbligo eventuale, ente cantonale o assicuratore autorizzato, coperture, premi e procedura in caso di sinistro.',
     },
     {
       k: 'aprire un\'attività %c registro di commercio e costi',
       a: 'Avviare un\'attività %C: scelta della forma giuridica, iscrizione al registro di commercio, capitale minimo, tasse di iscrizione e obblighi assicurativi.',
     },
     {
-      k: 'salari e mercato del lavoro %c settori e livelli',
-      a: 'Mercato del lavoro %C: settori che assumono, livelli salariali per grado di formazione, contratti collettivi in vigore e salario minimo dove previsto.',
+      k: 'formazione continua %c requisiti e contributi',
+      a: 'Formazione continua %C: programmi riconosciuti, requisiti per i contributi, termini della domanda e ufficio cantonale o istituzione competente.',
     },
     {
       k: 'patente di guida %c conversione ed esami',
@@ -4568,7 +4592,7 @@ async function findStockImageCandidates(data, count = 4) {
       const wikiUrl =
         `https://commons.wikimedia.org/w/api.php?action=query&generator=search` +
         `&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=8` +
-        `&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=1280&format=json`;
+        `&${COMMONS_IMAGEINFO_PARAMS}&iiurlwidth=1280&format=json`;
       const res = await fetch(wikiUrl, {
         signal: AbortSignal.timeout(15000),
         headers: { 'User-Agent': 'FrontaliereBot/1.0 (https://frontaliereticino.ch; blog image)' },
@@ -4580,7 +4604,13 @@ async function findStockImageCandidates(data, count = 4) {
           const info = p.imageinfo?.[0];
           const mime = (info?.mime || '').toLowerCase();
           if (info?.thumburl && (mime.startsWith('image/jpeg') || mime.startsWith('image/png'))) {
-            candidates.push({ url: info.thumburl, source: 'wikimedia', attribution: p.title || null });
+            // P14: a Commons photo is offered only with the credit it would
+            // carry (same rule as Strategy 4); one that cannot be credited is
+            // not a candidate. The publisher re-reads it from Commons anyway.
+            const verdict = acceptCommonsCandidate(readCommonsPage(p));
+            if (verdict.ok) {
+              candidates.push({ url: info.thumburl, source: 'wikimedia', attribution: p.title || null, credit: verdict.template });
+            }
           }
           if (candidates.length >= count) break;
         }
@@ -5610,6 +5640,8 @@ const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-che
 - Permessi stranieri (SEM): L breve durata (fino a 1 anno), B dimora (rinnovabile), C domicilio (di norma 10 anni residenza, 5 per UE/AELS), G frontaliere. Naturalizzazione ordinaria: permesso C + 10 anni residenza (8–18 anni contano doppio) + requisiti cantonali/comunali.
 - Locazione (CO art. 253 segg., diritto FEDERALE uguale in ogni cantone): deposito cauzionale max 3 mesi pigione, conto vincolato intestato all'inquilino; disdetta del locatore valida solo su modulo ufficiale cantonale; contestazione entro 30 giorni all'autorita' di conciliazione.
 - Lavoro: NESSUN salario minimo federale (alcuni cantoni ne hanno uno proprio). Orario max 45 ore/sett (industria, uffici, vendita) o 50 ore altri settori. Vacanze min 4 sett (5 sotto i 20 anni). Maternita' 14 sett all'80% (IPG); paternita' 2 sett. Disdetta: 1/2/3 mesi (1° anno / 2°–9° / dal 10°).
+- Prestazioni e servizi cantonali: l'assistenza sociale e' generalmente amministrata da cantoni e comuni secondo il bisogno; imposta sugli autoveicoli, incentivi energetici, autorizzazioni edilizie e contributi alla formazione continua seguono regole e uffici cantonali, quindi requisiti, termini e importi vanno verificati sulla fonte ufficiale del cantone.
+- Immobili e protezione: l'assicurazione degli edifici e' obbligatoria o organizzata diversamente secondo il cantone; la protezione civile e' coordinata a livello cantonale nell'ambito della legge federale, con convocazioni e indennita' da verificare presso l'autorita' competente.
 - Democrazia diretta: 4 date di voto federale/anno. Iniziativa popolare 100'000 firme in 18 mesi; referendum facoltativo 50'000 firme in 100 giorni. Modifica costituzionale: DOPPIA maggioranza (popolo E cantoni).
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, UST/BFS, UFSP/BAG, AFC/ESTV, UFAS/BSV, SUVA, BNS/SNB, UDSC, Fedpol, ARE, USTAT (Ticino).
 - Cifre indicizzate ogni anno (massimale 3° pilastro 3a, soglia/deduzione coordinamento LPP, massimale AD/AC, premi medi LAMal, salario mediano): NON dare importi precisi se incerto sull'anno; spiega il meccanismo, rimanda alla fonte ufficiale.`;
@@ -13235,19 +13267,12 @@ function _buildWikimediaQueries(data) {
   return queries;
 }
 
-/** Load previously used Wikimedia image URLs to avoid repeats */
-function _loadUsedImageUrls() {
-  const trackingFile = path.join(process.cwd(), 'data', 'blog-images-used.json');
-  try {
-    const raw = readFileSync(trackingFile, 'utf8');
-    const entries = JSON.parse(raw);
-    return new Set(Object.values(entries));
-  } catch {
-    return new Set();
-  }
-}
-
-/** Save a used Wikimedia image URL for dedup tracking */
+/**
+ * Save a used Wikimedia image URL for dedup tracking. The dedup itself reads
+ * this map as Commons FILE titles (`loadCommonsUsage`), together with the
+ * credit records: comparing URLs let one photo reach five articles, because
+ * the API now hands out `thumb.wikimedia.org/…?utm_*` forms of the same file.
+ */
 function _saveUsedImageUrl(articleId, imageUrl) {
   const trackingFile = path.join(process.cwd(), 'data', 'blog-images-used.json');
   let entries = {};
@@ -13273,6 +13298,9 @@ const IMAGE_PHASE_BUDGET_MS = Math.max(
 );
 
 async function generateArticleImage(data) {
+  // P14: only Strategy 4 sets it again. A credit left by an earlier attempt
+  // would strip the site's rights from an AI or stock cover's literal.
+  delete data._imageCredit;
   const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
   const imagePhaseExpired = (label) => {
     if (Date.now() < imageDeadline) return false;
@@ -13303,7 +13331,8 @@ async function generateArticleImage(data) {
   const imgPath = resolve(`public/images/blog/${data.id}.webp`);
 
   // ── Helper: save raw image buffer, optimize, return path or null ──
-  async function _saveAndOptimize(rawBuffer, providerLabel, contentType = 'image/jpeg') {
+  // `commons`: Strategy 4 catalogs the cover itself, once its credit is in place (P14).
+  async function _saveAndOptimize(rawBuffer, providerLabel, contentType = 'image/jpeg', { commons = false } = {}) {
     if (rawBuffer.length < 5000) {
       console.error(`  ⚠️ Immagine troppo piccola (${rawBuffer.length} bytes) da ${providerLabel}`);
       return null;
@@ -13351,6 +13380,12 @@ async function generateArticleImage(data) {
     }
 
     const generatedPath = `/images/blog/${data.id}.webp`;
+    if (commons) return generatedPath;
+    // P14: this file now holds a picture that is not from Commons. A credit
+    // record left for it (an earlier attempt, a regenerated id) would credit
+    // someone else's photo on it.
+    const staleCredit = creditRecordPath(PROJECT_ROOT, data.id);
+    if (existsSync(staleCredit)) unlinkSync(staleCredit);
     appendCatalogEntry(generatedPath);
     return generatedPath;
   }
@@ -13593,18 +13628,65 @@ async function generateArticleImage(data) {
 
   // ── Strategy 4: Wikimedia Commons (free, no API key, keyword search) ──
   if (imagePhaseExpired('Strategy 4')) return null;
-  // Searches Creative Commons licensed photos from Wikimedia. Very reliable.
-  // Uses article-specific topic keywords + image URL dedup to avoid repeats.
+  // Searches freely licensed photos on Wikimedia Commons. Very reliable.
+  // P14: a Commons cover goes out only with its credit. The search request
+  // also asks for the licence metadata (`extmetadata`: no extra call); a file
+  // that cannot be credited — no machine-readable licence, GFDL-only, a reuse
+  // restriction such as personality rights, no clean author — is not a
+  // candidate, and the chosen one gets content/image-credits/blog/<id>.json
+  // before it is used. Dedup is by Commons FILE, not URL: a file another
+  // article already uses is taken only when no unused one is usable, after
+  // every query has been tried.
   {
     const searchQueries = _buildWikimediaQueries(data);
-    const usedUrls = _loadUsedImageUrls();
+    const commonsUsage = loadCommonsUsage(PROJECT_ROOT);
+    const fetchedAt = utcDate();
+    // Prefer landscape orientation (ratio > 1.3) and larger images
+    const candidateScore = ({ info }) => ((info.width || 1) / (info.height || 1) > 1.3 ? 10 : 0) + Math.min(info.width || 0, 2000) / 200;
+    /** Creditable files another article already uses: the last resort, below. */
+    const reusable = [];
+    const useCommonsCandidate = async (pick) => {
+      const imgUrl = pick.info.thumburl;
+      console.error(`  📥 Download: ${imgUrl.slice(0, 80)}...`);
+      const imgRes = await fetch(imgUrl, {
+        signal: AbortSignal.timeout(20000),
+        headers: { 'User-Agent': 'FrontaliereBot/1.0' },
+      });
+      if (!imgRes.ok) throw new Error(`Download HTTP ${imgRes.status}`);
+      const buf = Buffer.from(await imgRes.arrayBuffer());
+      const saved = await _saveAndOptimize(buf, `Wikimedia/${pick.query}`, imgRes.headers.get('content-type'), { commons: true });
+      if (!saved) return null;
+      // The cover is installed in order: its record, the usage map, the
+      // catalog. A step that fails undoes the ones before it — no credit, no
+      // Commons cover — so the next strategy starts clean and no other picture
+      // is ever published with this credit.
+      let recordFile = null;
+      try {
+        const record = creditRecordForCover(pick.credit, {
+          cover: saved,
+          original: { width: pick.info.width, height: pick.info.height },
+          coverSize: webpDimensions(readFileSync(imgPath)),
+        });
+        recordFile = writeCreditRecord(PROJECT_ROOT, record);
+        _saveUsedImageUrl(data.id, imgUrl);
+        appendCatalogEntry(saved);
+        data._imageCredit = record;
+        return saved;
+      } catch (e) {
+        console.error(`  ⚠️  Wikimedia «${pick.title}»: copertina non installata (${e.message}) — immagine e credito scartati`);
+        if (recordFile && existsSync(recordFile)) unlinkSync(recordFile);
+        delete data._imageCredit;
+        if (existsSync(imgPath)) unlinkSync(imgPath);
+        return null;
+      }
+    };
 
     for (const query of searchQueries) {
       try {
         console.error(`🖼️ Ricerca immagine da Wikimedia Commons ("${query}")...`);
         const wikiUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search` +
           `&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=12` +
-          `&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=1280&format=json`;
+          `&${COMMONS_IMAGEINFO_PARAMS}&iiurlwidth=1280&format=json`;
         const res = await fetch(wikiUrl, {
           signal: AbortSignal.timeout(15000),
           headers: { 'User-Agent': 'FrontaliereBot/1.0 (https://frontaliereticino.ch; blog image)' },
@@ -13612,52 +13694,49 @@ async function generateArticleImage(data) {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         const pages = json.query?.pages || {};
-        // Filter to JPEG/PNG images with a thumbnail URL, exclude already-used URLs
+        // JPEG/PNG images with a thumbnail URL, that can be credited
         const candidates = Object.values(pages)
-          .filter(p => {
+          .map((p) => {
             const info = p.imageinfo?.[0];
-            if (!info?.thumburl) return false;
+            if (!info?.thumburl) return null;
             const mime = (info.mime || '').toLowerCase();
-            if (!mime.startsWith('image/jpeg') && !mime.startsWith('image/png')) return false;
-            // Dedup: skip images already used by other articles
-            if (usedUrls.has(info.thumburl) || usedUrls.has(info.url)) return false;
-            return true;
+            if (!mime.startsWith('image/jpeg') && !mime.startsWith('image/png')) return null;
+            const verdict = chooseCommonsCredit(readCommonsPage(p), commonsUsage, { fetchedAt });
+            if (!verdict.ok) return null;
+            return { info, query, title: verdict.title, credit: verdict.template, reused: verdict.reused };
           })
-          .sort((a, b) => {
-            // Prefer landscape orientation and reasonable sizes
-            const aInfo = a.imageinfo[0];
-            const bInfo = b.imageinfo[0];
-            const aRatio = (aInfo.width || 1) / (aInfo.height || 1);
-            const bRatio = (bInfo.width || 1) / (bInfo.height || 1);
-            // Score: prefer ratio > 1.3 (landscape) and larger images
-            const aScore = (aRatio > 1.3 ? 10 : 0) + Math.min(aInfo.width || 0, 2000) / 200;
-            const bScore = (bRatio > 1.3 ? 10 : 0) + Math.min(bInfo.width || 0, 2000) / 200;
-            return bScore - aScore;
-          });
+          .filter(Boolean)
+          .sort((a, b) => candidateScore(b) - candidateScore(a));
+        const fresh = candidates.filter((c) => !c.reused);
+        reusable.push(...candidates.filter((c) => c.reused));
 
-        if (candidates.length === 0) {
-          console.error(`  ⚠️  Wikimedia "${query}": nessun risultato (o tutti già usati)`);
+        if (fresh.length === 0) {
+          console.error(`  ⚠️  Wikimedia "${query}": nessun file accreditabile e non ancora usato`);
           continue;
         }
 
         // Pick from top 5 candidates for variety (was top 3)
-        const pick = candidates[Math.floor(Math.random() * Math.min(5, candidates.length))];
-        const imgUrl = pick.imageinfo[0].thumburl;
-        console.error(`  📥 Download: ${imgUrl.slice(0, 80)}...`);
-
-        const imgRes = await fetch(imgUrl, {
-          signal: AbortSignal.timeout(20000),
-          headers: { 'User-Agent': 'FrontaliereBot/1.0' },
-        });
-        if (!imgRes.ok) throw new Error(`Download HTTP ${imgRes.status}`);
-        const buf = Buffer.from(await imgRes.arrayBuffer());
-        const saved = await _saveAndOptimize(buf, `Wikimedia/${query}`, imgRes.headers.get('content-type'));
-        if (saved) {
-          _saveUsedImageUrl(data.id, imgUrl);
-          return saved;
-        }
+        const pick = fresh[Math.floor(Math.random() * Math.min(5, fresh.length))];
+        const saved = await useCommonsCandidate(pick);
+        if (saved) return saved;
       } catch (e) {
         console.error(`  ⚠️  Wikimedia "${query}" fallito: ${e.message}`);
+      }
+    }
+
+    // Last resort (P14 design, Q5): a file already on another article, with
+    // the credit its record already carries — at most three tries.
+    const tried = new Set();
+    for (const pick of reusable.sort((a, b) => candidateScore(b) - candidateScore(a))) {
+      if (tried.has(pick.title)) continue;
+      if (tried.size >= 3 || imagePhaseExpired('il riuso Commons di Strategy 4')) break;
+      tried.add(pick.title);
+      try {
+        console.error(`🖼️ Wikimedia Commons: nessun file nuovo, riuso «${pick.title}» con il suo credito`);
+        const saved = await useCommonsCandidate(pick);
+        if (saved) return saved;
+      } catch (e) {
+        console.error(`  ⚠️  Wikimedia «${pick.title}» fallito: ${e.message}`);
       }
     }
   }
@@ -14229,6 +14308,24 @@ function modifySeoService(data) {
     ? data._generatedImagePath.replace(/^\//, '')
     : `images/places/${data.image}`;
 
+  // P14 (§4.5): a Commons cover is credited by its record in
+  // content/image-credits/, from which the engine builds the ImageObject. The
+  // literal must not ALSO claim the photo for the site, so a credited cover —
+  // picked now, or reused by path (catalog pick, keyword fallback) — gets none
+  // of the five rights fields. Every other cover keeps the site's claim, byte
+  // for byte. validateStructuredData() below reads the same `_imageCredit`.
+  data._imageCredit = data._generatedImagePath
+    ? (data._imageCredit?.cover === data._generatedImagePath
+      ? data._imageCredit
+      : coverCreditFor(PROJECT_ROOT, data._generatedImagePath))
+    : null;
+  const imageRightsLines = data._imageCredit ? '' : `
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",`;
+
   // 1. SEO entry → section seo file. frontaliere → seo-blog-5.ts (latest split
   // chunk, keeps seo-blog.ts below the 500 kB Rollup warning); svizzera →
   // seo-blog-ch.ts (BLOG_CH_SEO_METADATA). canonicalPath/mainEntityOfPage use
@@ -14253,12 +14350,7 @@ function modifySeoService(data) {
       "headline": "${String(data.seo.headline || '').replace(/"/g, '\\"')}",
       "description": "${String(data.seo.description || '').replace(/"/g, '\\"')}",
       "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
+        "@type": "ImageObject",${imageRightsLines}
         "url": \`\${BASE_URL}/${imagePath}\`,
         "width": ${data._generatedImagePath ? 1200 : 1200},
         "height": ${data._generatedImagePath ? 675 : 563},
@@ -14386,7 +14478,17 @@ function validateStructuredData(data) {
   if (!ogT) throw new Error(`[validate-ld] Empty ogTitle for ${entryKey}`);
   if (!ogD) throw new Error(`[validate-ld] Empty ogDescription for ${entryKey}`);
   if (!cp) throw new Error(`[validate-ld] Empty canonicalPath for ${entryKey}`);
-  if (imageCreator?.[1] !== 'Organization' || imageCreator?.[2] !== siteOrganizationId) {
+  if (data._imageCredit) {
+    // P14: a credited Commons cover carries no rights field in the literal —
+    // the engine builds all five from the record (see modifySeoService).
+    const imageAt = block.search(/"image"\s*:\s*\{/);
+    const imageEnd = imageAt < 0 ? -1 : block.indexOf('"datePublished"', imageAt);
+    const imageBlock = imageAt < 0 ? '' : block.slice(imageAt, imageEnd < 0 ? undefined : imageEnd);
+    const claimed = imageBlock.match(/"(acquireLicensePage|copyrightNotice|license|creator|creditText)"\s*:/);
+    if (claimed) {
+      throw new Error(`[validate-ld] image.${claimed[1]} must be absent for ${entryKey}: the cover is credited by its Commons record`);
+    }
+  } else if (imageCreator?.[1] !== 'Organization' || imageCreator?.[2] !== siteOrganizationId) {
     throw new Error(`[validate-ld] image.creator must reference ${siteOrganizationId} as Organization for ${entryKey}`);
   }
 
@@ -15778,7 +15880,13 @@ async function main() {
           process.env._EVERGREEN_ANGLE = topic.angle;
           process.env._EVERGREEN_KEYWORD = topic.keyword;
 
-          await generateAndValidateArticle(url, { headline: topic.keyword, source: 'evergreen', relatedHeadlines: [] });
+          const candidateTopicKey = topicCoverageKey({ id: topic.keyword, title: topic.keyword });
+          await generateAndValidateArticle(url, {
+            headline: topic.keyword,
+            source: 'evergreen',
+            relatedHeadlines: [],
+            _candidateTopicKey: candidateTopicKey,
+          });
           // Tick evergreen counter on success (round-robin advance).
           try {
             _persistEvergreenCounter({ count: (evergreenCounterState.count || 0) + 1 });
@@ -16254,6 +16362,16 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // this draft, so clear it rather than carry it (stale) into a later
       // retry triggered by an unrelated check further down.
       lastIdentityErrors = null;
+      // Evergreen keywords define the intended topic even when the model
+      // shortens a title/slug past the theme or canton. Keep that key in a
+      // non-enumerable scratch property so the coverage gate cannot fail open
+      // and the property cannot change the generated article shape.
+      if (sourceContext?._candidateTopicKey) {
+        Object.defineProperty(data, '_candidateTopicKey', {
+          value: sourceContext._candidateTopicKey,
+          configurable: true,
+        });
+      }
     } catch (validationErr) {
       console.error(`  ⚠️  Validazione fallita: ${validationErr.message}`);
       // #330 item 2: feed the exact id/slug rejection reason (already includes
@@ -16936,7 +17054,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // Sta qui, dopo checkForDuplicates, perché questo è il punto obbligato di
   // OGNI percorso di generazione — news, evergreen, discovery — mentre il
   // pre-flight evergreen vede solo i candidati evergreen.
-  assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
+  try {
+    assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
+  } finally {
+    delete data._candidateTopicKey;
+  }
   // Step 3a.5: «titolo scollegato dallo slug» (#527) — nella serie
   // vivere-/trasferirsi- lo slug esce da un template che porta il comune per
   // costruzione; se il titolo non nomina lo stesso comune promette una guida

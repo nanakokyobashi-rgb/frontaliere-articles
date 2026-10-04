@@ -241,6 +241,13 @@ test('i closer mirror-locked sono dichiarati, non dimenticati', () => {
     // la PR #N su main», titolo esatto di pr-autorebase), mai un trackingIssue:
     // valerielinc-ops/frontaliere-si-o-no#10714.
     'scripts/ci/check-issue-already-resolved.mjs',
+    // Chiude `not planned` SOLO una issue `CI Failure: <workflow>` il cui workflow ha una
+    // voce in VERDICT_STEPS (LC-03, issue 9243 del sito) e la cui ultima run e' rossa
+    // soltanto allo step-verdetto: mai un trackingIssue, che non porta quel titolo. Qui
+    // l'unica voce del registro e' `crawler-health-monitor.yml`, che nel corpus non
+    // esiste: il ramo e' un no-op. Gli altri rami chiudono gia' via
+    // `resolveGithubIssue`, fuori dalla forma che questo censimento riconosce.
+    'scripts/ci/close-recovered-failure-issues.mjs',
     'scripts/ci/harvest-agent-lessons.mjs',
     'scripts/ci/reconcile-conflict-handoffs.mjs',
   ];

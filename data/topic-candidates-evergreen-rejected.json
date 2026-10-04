@@ -509,7 +509,8 @@
     "affitti svizzera mercato immobiliare 2026 canton Berna",
     "affitti svizzera mercato immobiliare 2026 canton Basilea",
     "affitti svizzera mercato immobiliare 2026 canton San Gallo",
-    "dichiarazione imposte svizzera guida pratica 2026 canton Basilea"
+    "dichiarazione imposte svizzera guida pratica 2026 canton Basilea",
+    "imposta sugli autoveicoli canton Zurigo calcolo e pagamento"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -792,14 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/svizzera/aumento-dei-premi-fino-a-900-mila-assicurati-cambieranno-cassa-malati-443788": {
-      "section": "frontaliere",
-      "ts": 1790926080801
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954245/mendrisio-e-chiasso-sostengono-le-donne-che-vogliono-lavorare": {
-      "section": "frontaliere",
-      "ts": 1790938996414
-    },
     "svizzera::https://www.swissinfo.ch/ita/beyond-gravity-nel-mirino-di-un-attacco-informatico/92158747": {
       "section": "svizzera",
       "ts": 1790957953931
@@ -1007,6 +1000,22 @@
     "frontaliere::https://www.varesenews.it/2026/10/kastritis-a-scafati-dovremo-essere-noi-stessi-della-valle-saltera-la-doppia-trasferta/2696329": {
       "section": "frontaliere",
       "ts": 1791098025788
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1954274/lascia-il-lavoro-per-salvare-cani-c-e-chi-li-regala-a-natale-e-poi-non-li-vuole-piu": {
+      "section": "svizzera",
+      "ts": 1791102161702
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954245/mendrisio-e-chiasso-sostengono-le-donne-che-vogliono-lavorare": {
+      "section": "frontaliere",
+      "ts": 1791111951172
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954587/migranti-spiaggia-polizia-ceuta-strutture": {
+      "section": "svizzera",
+      "ts": 1791115117783
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/attualita/1954607/nobel-ottobre-medicina-premio-economia": {
+      "section": "svizzera",
+      "ts": 1791125994294
     }
   }
 }
