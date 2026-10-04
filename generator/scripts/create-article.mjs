@@ -322,6 +322,14 @@ import {
   escapeForSingleQuoteTS,
   META_SEO_FIELDS,
 } from './lib/article-meta-block.mjs';
+// Il tipo dell'articolo nel registry (`articleType: news | evergreen`) e la
+// voce che lo scrive: modulo senza dipendenze, cosi' il content gate di `main`
+// (che gira senza `npm ci`) lo testa senza importare questo file.
+import {
+  registryArticleType,
+  resolveArticleType,
+  renderRegistryEntry,
+} from './lib/registry-article-type.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
 // Solo per sapere QUALI sezioni dichiarano l'elenco id come letterale
@@ -2244,7 +2252,7 @@ function duplicateCandidateDetail(errorMessage = '') {
  */
 function resolveRunRecovery() {
   if (!RUN_REPORT?.article?.id) return 'none';
-  return String(RUN_REPORT.selectedArticleType || '').startsWith('evergreen') ? 'evergreen' : 'news';
+  return registryArticleType(RUN_REPORT.selectedArticleType);
 }
 
 function finalizeRunReport(status, extra = {}) {
@@ -14032,23 +14040,10 @@ function modifyBlogArticlesTsx(data) {
   // Object-level indent is one level less (or same if single-space)
   const objIndent = propIndent.length > 1 ? propIndent.slice(0, -1) : propIndent;
 
-  const entryLines = [
-    `${objIndent}{`,
-    `${propIndent}id: '${data.id}',`,
-    `${propIndent}category: '${data.category}',`,
-    `${propIndent}date: '${today}',`,
-    `${propIndent}image: '${imagePath}',`,
-    `${propIndent}hasCalculator: ${data.hasCalculator ? 'true' : 'false'},`,
-  ];
-  // A2: persist byline so BlogArticles.tsx can render an author link.
-  if (data.author?.slug) {
-    entryLines.push(`${propIndent}authorSlug: '${escapeForSingleQuoteTS(data.author.slug)}',`);
-  }
-  if (data.author?.name) {
-    entryLines.push(`${propIndent}authorName: '${escapeForSingleQuoteTS(data.author.name)}',`);
-  }
-  entryLines.push(`${objIndent}},`);
-  const newEntry = entryLines.join('\n');
+  // Le righe della voce (con `articleType` e il byline A2) vengono dal modulo
+  // del registry, che lancia se `data.articleType` manca: i due chiamanti lo
+  // impostano prima di aprire il register lock.
+  const newEntry = renderRegistryEntry(data, { objIndent, propIndent, today, imagePath }).join('\n');
 
   // Insert before the array terminator. Anchors to the closing `},` that
   // immediately precedes `] satisfies Article[];` or `];` — robust to any
@@ -17140,6 +17135,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
+  // Il tipo che il run ha scelto (news/experimental → news, evergreen_* →
+  // evergreen) entra nel registry. Prima del lock: se il registry rifiutasse
+  // la voce, nessun file deve essere gia' stato scritto. Sovrascrive di
+  // proposito un eventuale `articleType` arrivato dal payload del modello.
+  data.articleType = registryArticleType(RUN_REPORT.selectedArticleType);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
@@ -18043,6 +18043,10 @@ export async function registerArticleFiles(data, opts = {}) {
   // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
   // retain an Italian fallback when a translated candidate is unusable.
   checkTranslatedSlugCollisions(data);
+  // Il tipo dell'articolo nel registry: esplicito del produttore, altrimenti
+  // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima
+  // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.
+  data.articleType = resolveArticleType(data, opts);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

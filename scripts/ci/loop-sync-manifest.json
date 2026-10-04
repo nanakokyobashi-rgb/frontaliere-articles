@@ -4258,6 +4258,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/registry-article-type.mjs",
+      "mode": "corpus-only",
+      "reason": "Tipo dell'articolo nel registry (news|evergreen), voce del registry e scansione del cutover, piu' il controllo di verifiedAt contro il ledger delle verifiche. Nessun omonimo sul sito: il registry e' scritto solo dal generatore del corpus. Modulo senza dipendenze npm perche' il content gate di main lo testa senza npm ci.",
+      "baseline": {
+        "site": null,
+        "corpus": "307a9d5e99131ede",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "scripts/lib/cdn-asset-existence.mjs",
       "mode": "adapted",
       "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",

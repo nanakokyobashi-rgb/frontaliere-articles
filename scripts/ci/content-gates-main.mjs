@@ -188,6 +188,9 @@ export const CONTENT_GATES = [
   'generator/tests/key-facts-specificity.test.mjs',
   'generator/tests/meta-localized-seo-description.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
+  // Ogni voce di registry nata dal cutover dichiara `articleType`, e ogni
+  // `verifiedAt` ha la sua prova nel ledger delle verifiche.
+  'generator/tests/registry-article-type.test.mjs',
   // Osservatore del tetto `TESTIMONE_GIRI_MAX` (#404): non giudica il corpus,
   // giudica se il tetto della riparazione caratteri LEGA sul corpus. Sta qui e
   // non fra i gate di PR per la ragione di tutta questa lista — legge
