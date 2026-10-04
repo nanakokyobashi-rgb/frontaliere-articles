@@ -65,7 +65,7 @@ import {
   latestFixOutcomeFromComments,
   maxQuotaResetsAt,
 } from './claude-rate-limit.mjs';
-import { quotaFallbackDecision, runQuotaLease } from './check-quota-backoff.mjs';
+import { quotaFallbackDecision, quotaLeaseEvents, runQuotaLease } from './check-quota-backoff.mjs';
 import { FIX_OUTCOME_RE, TITLE_RE as RECONCILER_TITLE_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
@@ -165,6 +165,174 @@ export function applyParentDequeue(parent, { readComments, postComment, removeLa
     log(`::warning::parent-dequeue: commenti di #${num} non leggibili → nessun commento (${labelsRemoved ? 'label tolte comunque' : 'label non tolte in questo giro'}).`);
   }
   return { decision, labelsRemoved };
+}
+
+// --- Allarme sullo stadio decompose che prenota e non consuma ----------------
+// Il DECOMPOSE-DRAIN prenota un lease `issue-decompose` a ogni promozione; lo
+// consuma `issue-decompose.yml`, che se il consumo e' negato ri-accoda la issue
+// e chiude la run in `success`. Nessuno guardava se le reservation venivano mai
+// consumate: corpus 1084 ne ha accumulate 29 dal 27-09 al 03-10 con 0
+// `consumed` (anche la issue 307), perche' il consumo contava la reservation
+// stessa fra i concorrenti. La causa l'ha tolta la PR 2069; questo osservatore
+// impedisce che una causa diversa produca di nuovo giorni di giri a vuoto.
+//
+// Data di taglio = `mergedAt` della PR 2069 (FU-04, «il consumo del lease di
+// decompose applica la regola di esclusivita' dell'acquire»), letta con
+// `gh pr view 2069 --repo nanakokyobashi-rgb/frontaliere-articles --json mergedAt`.
+// Le reservation precedenti sono la storia del difetto gia' corretto: contarle
+// metterebbe `automation-deferred` proprio quando il difetto e' stato tolto.
+export const DECOMPOSE_STALL_COUNT_SINCE = '2026-10-03T17:41:42Z';
+export const DECOMPOSE_STALL_THRESHOLD = 3;
+export const DECOMPOSE_STALLED_MARKER = '<!-- DECOMPOSE_STALLED -->';
+const DECOMPOSE_STALLED_RE = /<!--\s*DECOMPOSE_STALLED\s*-->/;
+
+function epochSec(value) {
+  const ms = Date.parse(String(value ?? ''));
+  return Number.isFinite(ms) ? Math.floor(ms / 1000) : null;
+}
+
+/**
+ * Istante (epoch s) dell'ultimo commento `DECOMPOSE_STALLED`, o null. Il
+ * marker chiude l'episodio: dopo un allarme la issue esce dalla coda
+ * (`fu-parked` + `automation-deferred`) e, se qualcuno la rimette in coda con
+ * contesto nuovo, il conteggio riparte da zero invece di ri-scattare subito su
+ * reservation gia' denunciate. Un marker scritto a mano concede al piu'
+ * `threshold` reservation in piu': il costo resta limitato. Pure.
+ */
+export function latestDecomposeStalledAt(comments) {
+  let latest = null;
+  for (const comment of comments || []) {
+    if (!DECOMPOSE_STALLED_RE.test(String(comment?.body || ''))) continue;
+    const at = epochSec(comment?.created_at ?? comment?.createdAt);
+    if (at !== null && (latest === null || at > latest)) latest = at;
+  }
+  return latest;
+}
+
+/**
+ * Lo stadio decompose di questa issue e' fermo? Conta le reservation
+ * `issue-decompose` CONSECUTIVE (comment time >= `since` e dopo `resetAt`)
+ * senza un `consumed` successivo: un `consumed` azzera il conteggio. Riceve gli
+ * eventi di `quotaLeaseEvents` (lo stesso parser dei commenti di lease usato da
+ * `check-quota-backoff.mjs`), in ordine di commento. Lo stato finale
+ * dell'ultima reservation dice perche' non e' stata consumata: la ragione
+ * della negazione (`lease_reason`) vive solo nel log della run di
+ * `issue-decompose.yml`, che non la scrive sulla issue. Pure.
+ *
+ * @returns {{stalled: boolean, count: number, threshold: number,
+ *   reason: string, last: null|{token: string, reservedAt: string,
+ *   state: string, expiresAt: string}}}
+ */
+export function decomposeStallDecision(leaseEvents, {
+  since = DECOMPOSE_STALL_COUNT_SINCE,
+  threshold = DECOMPOSE_STALL_THRESHOLD,
+  resetAt = null,
+  nowSec = Math.floor(Date.now() / 1000),
+} = {}) {
+  const sinceSec = epochSec(since);
+  if (sinceSec === null) throw new TypeError(`decomposeStallDecision: since non valida (${since})`);
+  const floor = Number.isFinite(Number(resetAt)) && resetAt !== null
+    ? Math.max(sinceSec, Number(resetAt) + 1)
+    : sinceSec;
+  const at = (event) => (Number.isFinite(Number(event?.commentAt)) ? Number(event.commentAt) : Number(event?.issuedAt));
+  const events = (leaseEvents || [])
+    .map((event, index) => ({ event, index }))
+    .filter(({ event }) => event?.role === 'issue-decompose' && typeof event?.token === 'string' && event.token)
+    .sort((a, b) => (at(a.event) - at(b.event))
+      || (Number(a.event.commentOrder ?? a.index) - Number(b.event.commentOrder ?? b.index)))
+    .map(({ event }) => event);
+  const counted = new Map(); // token -> {reservedAt, state, expiresAt}
+  for (const event of events) {
+    if (event.state === 'consumed') {
+      counted.clear();
+      continue;
+    }
+    const own = counted.get(event.token);
+    if (own) {
+      own.state = event.state;
+      own.expiresAt = Number(event.expiresAt);
+      continue;
+    }
+    if (event.state === 'reserved' && at(event) >= floor) {
+      counted.set(event.token, { reservedAt: at(event), state: 'reserved', expiresAt: Number(event.expiresAt) });
+    }
+  }
+  const count = counted.size;
+  const tail = [...counted.entries()].at(-1);
+  const last = tail ? {
+    token: tail[0],
+    reservedAt: new Date(tail[1].reservedAt * 1000).toISOString(),
+    state: tail[1].state,
+    expiresAt: Number.isFinite(tail[1].expiresAt) ? new Date(tail[1].expiresAt * 1000).toISOString() : '',
+  } : null;
+  let reason = 'none';
+  if (tail) {
+    if (tail[1].state === 'released') reason = 'reservation-released-unconsumed';
+    else if (Number.isFinite(tail[1].expiresAt) && tail[1].expiresAt <= nowSec) reason = 'reservation-expired-unconsumed';
+    else reason = 'reservation-live-unconsumed';
+  }
+  return { stalled: count >= threshold, count, threshold, reason, last };
+}
+
+/**
+ * Gate prima della reservation del DECOMPOSE-DRAIN, con I/O iniettato.
+ * `proceed: false` = non prenotare. Commenti illeggibili → si prenota come
+ * prima (l'osservatore non ferma lo stadio su un glitch API). A soglia: nessuna
+ * reservation, `::error::` con issue e motivo, defer tecnico con UN commento
+ * `DECOMPOSE_STALLED` (label prima, commento dopo: `deferAutomationIssue`). Il
+ * marker chiude l'episodio, quindi un secondo commento per le stesse
+ * reservation non e' possibile per costruzione.
+ *
+ * @param {{number: number}} issue
+ * @param {{
+ *   readComments: (num: number) => Array<object>|null,
+ *   defer: (num: number, note: string) => boolean,
+ *   log?: (line: string) => void,
+ *   since?: string, threshold?: number, nowSec?: number,
+ * }} io
+ */
+export function gateDecomposeReservation(issue, {
+  readComments,
+  defer,
+  log = console.log,
+  since = DECOMPOSE_STALL_COUNT_SINCE,
+  threshold = DECOMPOSE_STALL_THRESHOLD,
+  nowSec = Math.floor(Date.now() / 1000),
+}) {
+  const num = issue.number;
+  let comments = null;
+  try {
+    comments = readComments(num);
+  } catch {
+    comments = null;
+  }
+  if (!Array.isArray(comments)) {
+    log(`::warning::decompose-stall: commenti di #${num} non leggibili → conteggio delle reservation saltato in questo giro.`);
+    return { proceed: true, decision: null, deferred: false };
+  }
+  const decision = decomposeStallDecision(quotaLeaseEvents(comments), {
+    since,
+    threshold,
+    resetAt: latestDecomposeStalledAt(comments),
+    nowSec,
+  });
+  if (!decision.stalled) return { proceed: true, decision, deferred: false };
+  log(`::error::Stadio decompose: tre reservation consecutive senza consumo — #${num} ha ${decision.count} reservation \`issue-decompose\` dal ${since} senza \`consumed\` (soglia ${threshold}); ultima ${decision.last?.reservedAt || '?'} → ${decision.reason}. Nessuna nuova reservation.`);
+  const note = [
+    DECOMPOSE_STALLED_MARKER,
+    `🛑 **Stadio decompose fermo (zero-Claude): ${decision.count} reservation \`issue-decompose\` consecutive senza consumo.**`,
+    '',
+    `Il drainer ha prenotato il lease per questa issue ${decision.count} volte dal ${since} e \`issue-decompose.yml\` non lo ha mai consumato: ogni run ha ri-accodato la issue chiudendo in \`success\`. Ultima reservation ${decision.last?.reservedAt || '?'} (\`${decision.last?.token || '?'}\`), stato finale \`${decision.last?.state || '?'}\` → \`${decision.reason}\`.`,
+    '',
+    `Non prenoto una ${decision.count + 1}ª reservation: la issue esce dalla coda (\`fu-parked\` + \`automation-deferred\`). Il motivo della negazione è nel log della run \`issue-decompose.yml\` (riga \`lease_reason=\`). Il conteggio riparte da zero dopo questo commento quando la issue torna in coda.`,
+  ].join('\n');
+  let deferred = false;
+  try {
+    deferred = defer(num, note) === true;
+  } catch (e) {
+    log(`::warning::decompose-stall: defer di #${num} fallito: ${String(e).slice(0, 120)}`);
+  }
+  return { proceed: false, decision, deferred };
 }
 
 // Il sito usa int-from-env.mjs; nel corpus l'helper equivalente riceve il
@@ -3161,6 +3329,37 @@ function reserveQuotaLease(issueNumber, role) {
   });
 }
 
+/**
+ * Allarme dello stadio decompose prima della reservation (vedi
+ * `gateDecomposeReservation`). true = non prenotare. Scrive
+ * `decompose_stalled=<n>` nel log e nello step summary con il numero della
+ * issue: il DRAIN esamina una sola issue per tick, quindi n vale 0 o 1.
+ */
+function decomposeStallBlocks(issue) {
+  const gate = gateDecomposeReservation(issue, {
+    readComments: issueCommentsRest,
+    defer: (num, note) => deferAutomationIssue(num, {
+      add: [LBL_PARKED],
+      remove: [LBL_DECOMP_QUEUED],
+      reason: 'decompose-stalled',
+      note,
+    }),
+  });
+  const stalled = gate.proceed ? [] : [issue.number];
+  console.log(`decompose_stalled=${stalled.length}${stalled.length ? ` (#${stalled.join(', #')}${gate.deferred ? '' : ', defer non applicato: riprovo al prossimo tick'})` : ''}`);
+  if (stalled.length && process.env.GITHUB_STEP_SUMMARY) {
+    try {
+      appendFileSync(
+        process.env.GITHUB_STEP_SUMMARY,
+        `### Stadio decompose: tre reservation consecutive senza consumo\n\n\`decompose_stalled=${stalled.length}\` — ${stalled.map((n) => `#${n}`).join(', ')}: ${gate.decision?.count ?? '?'} reservation \`issue-decompose\` dal ${DECOMPOSE_STALL_COUNT_SINCE} senza \`consumed\` (${gate.decision?.reason || '?'}).\n\n`,
+      );
+    } catch (e) {
+      console.log(`decompose-stall: step summary non scrivibile (${String(e).slice(0, 120)})`);
+    }
+  }
+  return !gate.proceed;
+}
+
 function releaseQuotaLease(issueNumber, role, token) {
   if (!token || DRY) return;
   runQuotaLease({
@@ -5368,6 +5567,8 @@ export function runDrain() {
           if (dq.length && budget.take(`#${dq[0].number} (decompose-drain)`, ITEM_COST_MS)) {
             if (!liveClaimAllowsMutation(dq[0].number)) {
               console.log(`DECOMPOSE-SKIP #${dq[0].number}: claim live → nessuna promozione e nessuna lease quota.`);
+            } else if (decomposeStallBlocks(dq[0])) {
+              console.log(`DECOMPOSE-SKIP #${dq[0].number}: stadio decompose fermo → nessuna reservation (allarme DECOMPOSE_STALLED).`);
             } else {
               const decomposeLease = reserveQuotaLease(dq[0].number, 'issue-decompose');
               if (!decomposeLease.allowed) {
