@@ -1,0 +1,293 @@
+name: Bonifica blocking bodies
+
+# L'ESECUTORE che a `generator/scripts/retranslate-blocking-bodies.mjs` mancava
+# dal 06-09 (PR #994): nessun workflow lo lanciava, e lo stock dei body che la
+# guardia di factuality rifiuta (issue del sito 7682 scaffolding, 7683
+# false-friend) restava fermo. Qui lo strumento gira a lotti, una PR alla volta,
+# e PRIMA di ogni scrittura produce il campione da giudicare.
+#
+# ── Ordine operativo (vincolante) ──────────────────────────────────────────
+# - translation-false-friend: prima `apply=false` → campione pubblicato e
+#   giudicato sulla issue 7683 del sito con il tasso di falsi positivi →
+#   variabile di repository `BONIFICA_FALSE_FRIEND_SAMPLE_URL` impostata con
+#   l'URL di quel commento → solo allora `apply=true` a lotti da 20.
+# - leaked-prompt-scaffolding: prima l'italiano (`locale=it`, richiede la
+#   riparazione di riga del ramo italiano, NX-S2), poi i locali non italiani,
+#   perche' ri-tradurre da un italiano ancora sporco riprodurrebbe il
+#   marcatore; e i locali non italiani solo dopo che il gate del corpus
+#   riconosce i marcatori tradotti (`git show
+#   origin/main:generator/scripts/lib/article-factuality-gates.mjs | grep -c
+#   LOCALIZED_TITLE_MARKER` >= 1).
+#
+# ── Cosa NON fa ────────────────────────────────────────────────────────────
+# Nessuno `schedule` (un cron si aggiunge solo dopo il pilota e su decisione
+# del proprietario), nessuna scrittura su `main` (le pagine cambiano solo con
+# una PR che passa test, review e auto-merge come le altre), nessun `apply` di
+# default, nessuna modifica a soglie, gate o glossario. Il workflow produce il
+# campione, non il verdetto. Lo strumento scrive solo una ri-traduzione con
+# zero `critical`: il danno peggiore di una run coi tier MT giu' e' un report
+# di zero scritture, mai una pagina peggiore.
+#
+# Il test `generator/tests/bonifica-blocking-bodies-workflow.test.mjs` diventa
+# rosso se qualcuno mette `--apply` fisso, aggiunge un cron, toglie il guard di
+# una PR alla volta, toglie il cancello del campione o sposta il campione dopo
+# la scrittura.
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: 'Codice bloccante (vuoto = tutti), es. translation-false-friend o leaked-prompt-scaffolding.'
+        required: false
+        default: ''
+        type: string
+      locale:
+        description: 'Locali da trattare, separati da virgola (it e'' opt-in).'
+        required: false
+        default: 'en,de,fr'
+        type: string
+      limit:
+        description: 'Massimo di coppie trattate in questo lotto.'
+        required: false
+        default: '20'
+        type: string
+      apply:
+        description: 'Scrive davvero e apre la PR di contenuto. Senza: dry-run e campione.'
+        required: false
+        default: false
+        type: boolean
+      slugs:
+        description: 'Facoltativo: slug separati da virgola al posto della scansione del contenuto.'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+
+concurrency:
+  group: bonifica-blocking-bodies
+  cancel-in-progress: false
+
+jobs:
+  bonifica:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    # Gli input passano da qui e si leggono come variabili d'ambiente: mai
+    # interpolati dentro un `run:`, dove un valore diventerebbe codice shell.
+    env:
+      CODE: ${{ inputs.code }}
+      LOCALE: ${{ inputs.locale }}
+      LIMIT: ${{ inputs.limit }}
+      APPLY: ${{ inputs.apply }}
+      SLUGS: ${{ inputs.slugs }}
+      OUT_DIR: /tmp/bonifica
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          # Il push usa il PAT caricato da Remote Config: con le credenziali
+          # persistite dal checkout v7 il push si autenticherebbe come
+          # GITHUB_TOKEN (site#10520, corpus#2002).
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # Una PR di bonifica alla volta, sul modello di
+      # `transport-identical-twins.yml`: conteggio sul `headRefName` con
+      # `startswith` (non `--search head:`, che puo' non fare prefix match) e
+      # `gh api --paginate` (non `gh pr list --limit`, che tronca proprio la PR
+      # vecchia che questo guard deve vedere). Solo branch di questo repo: un
+      # fork con lo stesso nome non spegne il workflow.
+      - name: Guard — bonifica gia' in volo
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
+            awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
+          OPEN=$(grep -c '^bonifica/blocking-bodies' /tmp/open-prs.txt || true)
+          echo "open_bonifiche=$OPEN" >> "$GITHUB_OUTPUT"
+          if [ "$OPEN" != "0" ]; then
+            echo "::notice::Una PR di bonifica e' gia' aperta: niente di nuovo finche' non si chiude."
+          fi
+
+      - name: Install dependencies
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      # Lo stock di partenza, tutti i codici e tutti i locali: e' la misura che
+      # la run deve far scendere, e il JSONL e' la base del campione.
+      - name: Stock prima
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT_DIR"
+          node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
+            --list-out "$OUT_DIR/stock-before.jsonl" --out "$OUT_DIR/stock-before.json" > /dev/null
+
+      # Il campione da GIUDICARE, prima di qualunque scrittura: deterministico
+      # (ordinamento per key, una coppia ogni floor(N/30), stratificato per
+      # locale). Finisce nell'artifact e nello step summary.
+      - name: Campione da giudicare
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          ARGS=(--in "$OUT_DIR/stock-before.jsonl" --locale "$LOCALE" --min 30 --out "$OUT_DIR/sample.md")
+          if [ -n "$CODE" ]; then ARGS+=(--code "$CODE"); fi
+          node generator/scripts/bonifica-sample.mjs "${ARGS[@]}"
+
+      # Cancello della issue 7683 del sito: nessuna scrittura false-friend prima
+      # che il campione giudicato sia pubblicato sulla issue. Vale quando il
+      # lotto la puo' toccare: codice vuoto (tutti) o false-friend. Nessun
+      # default, nessun bypass: la variabile la imposta il proprietario con
+      # l'URL del commento che contiene verdetti e tasso.
+      - name: Cancello del campione 7683
+        id: sample_gate
+        if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true
+        env:
+          SAMPLE_URL: ${{ vars.BONIFICA_FALSE_FRIEND_SAMPLE_URL }}
+        run: |
+          set -euo pipefail
+          valid=false
+          if printf '%s' "${SAMPLE_URL:-}" | grep -Eq '^https://github\.com/valerielinc-ops/frontaliere-si-o-no/issues/7683#issuecomment-[0-9]+$'; then
+            valid=true
+          fi
+          echo "sample_url_valid=$valid" >> "$GITHUB_OUTPUT"
+          case "$CODE" in
+            ''|*translation-false-friend*)
+              if [ "$valid" != "true" ]; then
+                echo "::error::campione #7683 non pubblicato: lancia prima con apply=false e pubblica il campione giudicato"
+                exit 1
+              fi
+              echo "Campione giudicato: $SAMPLE_URL"
+              ;;
+            *)
+              echo "Codice $CODE: il cancello del campione false-friend non si applica a questo lotto."
+              ;;
+          esac
+
+      - name: Prepare Firebase credentials
+        if: steps.guard.outputs.open_bonifiche == '0'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: Remote Config e' l'unica fonte delle chiavi MT e del PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      # Chiavi della cascata MT e `GITHUB_PAT_NANAKO` per il push.
+      - name: Load secrets from Remote Config
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: node generator/scripts/load-rc-env.mjs
+
+      # `--apply` solo nel ramo `APPLY=true`, cioe' `inputs.apply`. Con
+      # `slugs` lo strumento tratta quegli articoli invece di scansionare il
+      # contenuto (i due sorgenti non si combinano). Se ogni coppia trattata
+      # torna `campo-vuoto-dalla-cascata` la run resta verde ma lo dichiara:
+      # e' un'informazione sui tier, non una bonifica.
+      - name: Ri-traduzione del lotto
+        id: retranslate
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "$SLUGS" ]; then ARGS+=(--slug "$SLUGS"); else ARGS+=(--scan); fi
+          if [ -n "$CODE" ]; then ARGS+=(--code "$CODE"); fi
+          ARGS+=(--locale "$LOCALE" --limit "$LIMIT" --stratify --out "$OUT_DIR/report.json")
+          if [ "$APPLY" = "true" ]; then ARGS+=(--apply); fi
+          node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs "${ARGS[@]}"
+          STATS=$(node generator/scripts/bonifica-report.mjs stats --report "$OUT_DIR/report.json")
+          printf '%s\n' "$STATS" | tee -a "$GITHUB_OUTPUT"
+          if printf '%s\n' "$STATS" | grep -qx 'all_empty=true'; then
+            echo "::warning::Run informativa: tutte le coppie trattate sono campo-vuoto-dalla-cascata (tier MT fuori servizio o senza quota)."
+          fi
+
+      - name: Stock dopo
+        if: steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          node --max-old-space-size=4096 generator/scripts/retranslate-blocking-bodies.mjs --scan --count-only \
+            --list-out "$OUT_DIR/stock-after.jsonl" --out "$OUT_DIR/stock-after.json" > /dev/null
+
+      # La stessa condizione del passo che scrive (`inputs.apply`): un lotto
+      # scritto sul runner e non committato sarebbe un verde senza effetto.
+      # Si stagiano solo i file gia' tracciati sotto `content/`, e il loro
+      # numero deve essere quello delle coppie scritte dal report. Push sul
+      # branch della PR col PAT: un push col GITHUB_TOKEN non fa partire i
+      # check, e la PR resterebbe ferma.
+      - name: Apri la PR di bonifica
+        if: steps.guard.outputs.open_bonifiche == '0' && inputs.apply == true && steps.retranslate.outputs.written != '0'
+        env:
+          REPO: ${{ github.repository }}
+          WRITTEN: ${{ steps.retranslate.outputs.written }}
+          FALSE_FRIEND_WRITTEN: ${{ steps.retranslate.outputs.false_friend_written }}
+          SAMPLE_URL_VALID: ${{ steps.sample_gate.outputs.sample_url_valid }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          # Rete del cancello 7683: un lotto di un altro codice puo' riscrivere
+          # una coppia che porta ANCHE il false-friend. Senza campione
+          # pubblicato quella scrittura non entra in un commit.
+          if [ "${FALSE_FRIEND_WRITTEN:-0}" != "0" ] && [ "${SAMPLE_URL_VALID:-false}" != "true" ]; then
+            echo "::error::campione #7683 non pubblicato: $FALSE_FRIEND_WRITTEN coppie false-friend scritte sul runner, nessun commit"
+            exit 1
+          fi
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: $WRITTEN coppie scritte sul runner andrebbero perse"
+            exit 1
+          fi
+          BRANCH="bonifica/blocking-bodies-${GITHUB_RUN_ID}"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BRANCH"
+          git add -u -- content/
+          STAGED=$(git diff --cached --name-only | wc -l | tr -d ' ')
+          git diff --cached --name-only
+          if [ "$STAGED" != "$WRITTEN" ]; then
+            echo "::error::il report dice $WRITTEN coppie scritte ma sotto content/ sono cambiati $STAGED file"
+            exit 1
+          fi
+          git commit -m "chore(content): bonifica ${WRITTEN} body bloccanti (${CODE:-tutti i codici}, ${LOCALE})"
+          git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
+          git push origin "$BRANCH"
+          node generator/scripts/bonifica-report.mjs pr-body --report "$OUT_DIR/report.json" \
+            --before "$OUT_DIR/stock-before.json" --after "$OUT_DIR/stock-after.json" \
+            --run-url "$RUN_URL" --out "$OUT_DIR/pr-body.md"
+          GH_TOKEN="$runtime_pat" gh pr create --repo "$REPO" --base main --head "$BRANCH" \
+            --title "chore(content): bonifica ${WRITTEN} body bloccanti (${CODE:-tutti i codici}, ${LOCALE})" \
+            --body-file "$OUT_DIR/pr-body.md"
+
+      # Anche quando il cancello ferma la run: il campione e lo stock di
+      # partenza restano leggibili nel summary e nell'artifact.
+      - name: Riepilogo
+        if: always() && steps.guard.outputs.open_bonifiche == '0'
+        run: |
+          set -euo pipefail
+          mkdir -p "$OUT_DIR"
+          node generator/scripts/bonifica-report.mjs summary --report "$OUT_DIR/report.json" \
+            --before "$OUT_DIR/stock-before.json" --after "$OUT_DIR/stock-after.json" \
+            --sample "$OUT_DIR/sample.md" --out "$OUT_DIR/summary.md"
+          cat "$OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report
+        if: always() && steps.guard.outputs.open_bonifiche == '0'
+        uses: actions/upload-artifact@v7
+        with:
+          name: bonifica-blocking-bodies-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/bonifica/
+          if-no-files-found: warn
+          retention-days: 30
