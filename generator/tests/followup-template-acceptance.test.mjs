@@ -121,9 +121,86 @@ test('il prompt rende verificabile il token derivato nel file citato', () => {
   assert.match(
     WORKFLOW,
     /token derivato[\s\S]{0,180}verbatim[\s\S]{0,220}content\.includes\(tok\)/i,
-    'il prompt deve richiedere un token derivato già presente verbatim nel file citato, ' +
-      'così la chiusura ha una prova eseguibile',
+    'il prompt deve richiedere un token derivato riportato verbatim e verificabile con ' +
+      '`content.includes(tok)`, così la chiusura ha una prova eseguibile',
   );
+});
+
+/**
+ * Il token derivato deve essere ASSENTE OGGI nel file target. La clausola
+ * «DERIVALO invece di scartarlo» da sola fa copiare un simbolo dal codice
+ * corrente: l'item nasce già soddisfatto e il matcher lo chiude `done` senza
+ * che nessuna PR abbia fatto niente (corpus 1977: 9 item su 11). Il vincolo
+ * deve accompagnare l'istruzione di derivare, non stare altrove nel prompt.
+ */
+test('il prompt vincola il token derivato ad essere assente oggi, accanto a DERIVALO', () => {
+  const derive = WORKFLOW.indexOf('DERIVALO invece di scartarlo');
+  assert.ok(derive >= 0, 'premessa: il prompt contiene la clausola DERIVALO');
+  const nextStage = WORKFLOW.indexOf('Dedup vs issue `follow-up` esistenti', derive);
+  assert.ok(nextStage > derive, 'premessa: lo stadio di dedup segue la clausola');
+  const clause = WORKFLOW.slice(derive, nextStage);
+  assert.match(
+    clause,
+    /ASSENTE OGGI/,
+    'post-merge-followup.yml: la clausola DERIVALO non porta più il vincolo «ASSENTE OGGI» — ' +
+      'Triage follow-up (corpus): il prompt conia item con token già vero o file inesistente',
+  );
+  assert.match(clause, /already-on-main/, 'manca lo scarto `already-on-main` del residuo già vero');
+  assert.match(clause, /Live-verification/, 'una prova post-merge senza file va nella checklist Live-verification');
+  // Anche la definizione del token derivato nel contratto di output.
+  assert.match(WORKFLOW, /\*\*Token derivato:\*\*[^\n]*ASSENTE OGGI/);
+  assert.doesNotMatch(
+    WORKFLOW,
+    /cerca nel file target il simbolo\/campo da toccare e riportalo verbatim/,
+    'la vecchia istruzione faceva copiare un simbolo già presente: token vero al conio',
+  );
+});
+
+test('il prompt legge i bullet già classificati e instradati del bundle', () => {
+  assert.match(WORKFLOW, /## Candidate bullets/, 'il prompt deve citare la sezione `## Candidate bullets`');
+  assert.match(WORKFLOW, /Regole di lettura/, 'il prompt deve rimandare alle regole di lettura della sezione');
+  assert.match(WORKFLOW, /`routes`/, 'Target repository/Target file vengono dalle `routes` del bundle');
+  assert.match(WORKFLOW, /route-unverified/, 'una route unknown si conia con la nota route-unverified');
+  assert.match(
+    WORKFLOW,
+    /`identical` va nel sito col `sitePath`/,
+    'nel corpus un file identical esiste anche qui: il prompt deve dire che si corregge nel sito',
+  );
+  assert.match(WORKFLOW, /State: blocked/, 'manca la regola `State: blocked` per le cause non di codice');
+});
+
+test('il prefetch invoca lo script con side=corpus e mette la sezione nel bundle', () => {
+  const step = WORKFLOW.slice(
+    WORKFLOW.indexOf('- name: Prefetch follow-up batch context'),
+    WORKFLOW.indexOf('- name: Run Codex Luna Max follow-up triage'),
+  );
+  assert.ok(step.length > 0, 'premessa: lo step di prefetch esiste prima del triage');
+  assert.match(step, /node scripts\/ci\/followup-candidate-bullets\.mjs --side corpus/);
+  assert.match(step, /--manifest scripts\/ci\/loop-sync-manifest\.json/, 'il manifest si legge dal disco, non via API');
+  assert.match(step, /PR_JSON_FILES\+=/, 'lo script riceve il JSON di ogni PR del batch');
+  const bundle = step.slice(step.indexOf('# Post-merge follow-up batch bundle'));
+  assert.match(bundle, /cat "\$CTX_DIR\/candidate-bullets\.md"/, 'la sezione deve finire nel bundle letto dal triage');
+});
+
+/**
+ * Il prompt è uno scalare YAML con espressioni `${{ }}`: GitHub ha un tetto
+ * sulla sua lunghezza, e il sito ha misurato un workflow rifiutato oltre i
+ * 20.000 caratteri (`PROMPT_SCALAR_LIMIT` di validate-modified-workflows.mjs del
+ * sito). Qui non c'è quel validatore: il tetto si tiene col test.
+ */
+test('lo scalare prompt resta sotto 20.000 caratteri', () => {
+  const lines = WORKFLOW.split('\n');
+  const header = lines.findIndex((line) => /^\s*prompt:\s*\|/.test(line));
+  assert.ok(header >= 0, 'premessa: il workflow ha uno scalare prompt a blocco');
+  const indent = lines[header].length - lines[header].trimStart().length;
+  const body = [];
+  for (const line of lines.slice(header + 1)) {
+    if (line.trim() !== '' && line.length - line.trimStart().length <= indent) break;
+    body.push(line);
+  }
+  const width = Math.min(...body.filter((l) => l.trim()).map((l) => l.length - l.trimStart().length));
+  const prompt = body.map((l) => (l.trim() ? l.slice(width) : '')).join('\n');
+  assert.ok(prompt.length < 20_000, `prompt di ${prompt.length} caratteri: oltre il tetto di 20.000`);
 });
 
 test('il parser dei controesempi tollera una lista markdown su righe separate', () => {
