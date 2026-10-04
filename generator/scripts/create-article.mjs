@@ -5459,8 +5459,13 @@ function assertTranslationsPassFactualityGates(data) {
 
   const blocking = [];
   for (const locale of ['en', 'de', 'fr']) {
-    const content = data?.content?.[locale];
-    if (!content) continue;
+    // Un locale ASSENTE e' trattato come vuoto: tutti i produttori (flusso AI
+    // e i cinque secondari di `registerArticleFiles()`) scrivono it/en/de/fr,
+    // quindi un locale mancante e' un buco, non una scelta, e deve arrivare al
+    // gate come `translation-section-missing` invece di saltarlo.
+    const content = data?.content?.[locale] && typeof data.content[locale] === 'object'
+      ? data.content[locale]
+      : {};
     const sections = collectBodySections(content);
     // Un body lasciato NON tradotto da `translateArticle()` col marker
     // `markBodyTranslationPending` e' un'assenza AUTORIZZATA: la SPA ripiega
@@ -11475,7 +11480,12 @@ ${terminologyByLang[targetLang] || ''}`;
       // rilievo `major` arrivava solo al gate di ammissione, che blocca i soli
       // `critical`, e il body ridotto finiva su disco.
       const truncationOpts = { label: `${locale}/${field}`, locale, referenceText: itContent[field] };
-      const isTruncated = detectTruncation(text, truncationOpts).length > 0;
+      // `paragraph-drop` (70-85% delle parole con un paragrafo in meno) puo'
+      // essere solo un accorpamento: il retry, che se fallisce lascia il body in
+      // attesa e quindi lo TOGLIE, agisce sulla perdita misurata (`word-ratio`)
+      // e su ogni troncamento formale; il gate di ammissione resta la diagnosi.
+      const isRealTruncation = (issues) => issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
+      const isTruncated = isRealTruncation(detectTruncation(text, truncationOpts));
       if (!isTruncated) continue;
       const itValue = itContent[field];
       let pendingReason = 'truncation-retry-unusable';
@@ -11516,7 +11526,7 @@ ${terminologyByLang[targetLang] || ''}`;
         // accettazione di un body tradotto.
         const retriedPassthrough = isSourcePassthrough(retried, itValue);
         if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
-        if (retried && !retriedPassthrough && detectTruncation(retried, truncationOpts).length === 0) {
+        if (retried && !retriedPassthrough && !isRealTruncation(detectTruncation(retried, truncationOpts))) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;

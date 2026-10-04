@@ -144,7 +144,20 @@ function articolo({ enBody1, itExtra = {}, enExtra = {} }) {
         body2: 'The median salary of cross-border commuters is 5.000 francs per month.',
         body3: 'For cross-border commuters the agreement provides an exemption.',
       },
+      // Il gate tratta un locale assente come un buco (vedi #9d): de e fr
+      // portano la resa pulita, cosi' ogni caso giudica solo cio' che mette in en.
+      de: tradottoPulito(itExtra),
+      fr: tradottoPulito(itExtra),
     },
+  };
+}
+
+function tradottoPulito(itExtra) {
+  return {
+    body1: EN_PULITO,
+    body2: 'The median salary of cross-border commuters is 5.000 francs per month.',
+    body3: 'For cross-border commuters the agreement provides an exemption.',
+    ...(itExtra.body4 ? { body4: 'Cross-border commuters find the border-crossing summary at the end.' } : {}),
   };
 }
 
@@ -344,6 +357,8 @@ test('#8 rigetta un body tradotto ridotto a «...» anche se finisce con un punt
         body1: '...',
         body2: '...\n\n## Recommended Tools\nFor a current estimate use the [net salary calculator](nav:calculator).',
       },
+      de: { ...EN_LUNGO },
+      fr: { ...EN_LUNGO },
     },
   };
   let thrown = null;
@@ -361,7 +376,7 @@ test('#8 rigetta un body tradotto ridotto a «...» anche se finisce con un punt
 
 test('#8b la stessa traduzione completa passa (il confronto non punisce una resa fedele)', () => {
   const gate = makeGate();
-  assert.doesNotThrow(() => gate({ content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } }));
+  assert.doesNotThrow(() => gate({ content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } }));
 });
 
 // ── #9 Body in attesa: assenza autorizzata contro buco non dichiarato ──────
@@ -372,14 +387,14 @@ test('#8b la stessa traduzione completa passa (il confronto non punisce una resa
 // e un locale senza alcun body saltava il gate anche quando nessuno aveva
 // dichiarato l'assenza.
 function senzaBody(fields) {
-  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } };
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } };
   for (const f of fields) delete data.content.en[f];
   return data;
 }
 
 test('#9 un body in attesa (marker pending) non fa rigettare l\'articolo', () => {
   const gate = makeGate();
-  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } };
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } };
   markBodyTranslationPending(data, { locale: 'en', field: 'body2', reason: 'truncation-retry-unusable' });
   assert.equal(data.content.en.body2, undefined, 'il marker toglie il campo, come in translateArticle()');
   assert.doesNotThrow(() => gate(data));
@@ -393,6 +408,16 @@ test('#9b un body assente SENZA marker resta un buco bloccante', () => {
   );
 });
 
+test('#9d un locale del tutto assente e\' un buco, non un locale da saltare', () => {
+  const gate = makeGate();
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO } } };
+  assert.throws(
+    () => gate(data),
+    (error) => error?.qualityReject === true && /\[fr\/body1\] Sezione presente nell'italiano/.test(error.message),
+    'senza data.content.fr il gate saltava il locale e l\'articolo arrivava alla scrittura',
+  );
+});
+
 test('#9c un locale senza alcun body passa solo se ogni body e\' in attesa', () => {
   const gate = makeGate();
   assert.throws(
@@ -400,7 +425,7 @@ test('#9c un locale senza alcun body passa solo se ogni body e\' in attesa', () 
     (error) => error?.qualityReject === true && /translation-section-missing/.test(error.message),
     'tre body spariti senza marker non possono saltare il gate',
   );
-  const tuttiPending = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } };
+  const tuttiPending = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO }, de: { ...EN_LUNGO }, fr: { ...EN_LUNGO } } };
   for (const field of ['body1', 'body2', 'body3']) {
     markBodyTranslationPending(tuttiPending, { locale: 'en', field, reason: 'retry-error' });
   }
@@ -420,6 +445,7 @@ test('#10 il retry di troncamento di translateArticle confronta con l\'italiano'
   const loop = src.slice(start, src.indexOf('markBodyTranslationPending(data', start));
   assert.match(loop.split('\n')[0], /referenceText: itContent\[field\]/, 'il retry deve passare l\'italiano come riferimento');
   assert.match(loop.split('\n')[0], /\blocale\b/, 'senza locale il confronto si spegne (l\'italiano non si giudica)');
+  assert.match(loop, /i\.rule === 'paragraph-drop'/, 'il retry non deve togliere un body solo accorpato (paragraph-drop)');
   const calls = loop.match(/detectTruncation\([^)]*\)/g) || [];
   assert.equal(calls.length, 2, 'rilevazione e verifica del retry: due chiamate');
   for (const call of calls) assert.match(call, /truncationOpts/, `${call} non usa il riferimento italiano`);
