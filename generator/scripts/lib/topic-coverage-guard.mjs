@@ -761,23 +761,25 @@ const CANTON_ALIASES = [
  * L'ordine conta: il primo che combacia vince, e `sistema-sanitario` sta prima
  * di `lamal-premi` perché una guida al sistema sanitario nomina anche la cassa
  * malati mentre il contrario non è vero (sono due pilastri distinti del pool,
- * e confonderli marcava una coppia legittima su Basilea).
+ * e confonderli marcava una coppia legittima su Basilea). Anche
+ * `imposta-autoveicoli` precede `imposta-cantonale`: «imposta cantonale sugli
+ * autoveicoli» è il pilastro specifico, non quello generico.
  */
 const CANTON_THEMES = [
   ['sistema-sanitario', /(sistema sanitario)/],
   ['lpp', /(secondo pilastro)/],
   ['terzo-pilastro', /(terzo pilastro|pilastro 3a)/],
   ['lamal-premi', /(premi cassa malati|premi lamal|premi della cassa malati|premi assicurazione malattia)/],
+  ['imposta-autoveicoli', /(imposta sugli autoveicoli|imposta cantonale sugli autoveicoli|tassa sugli autoveicoli)/],
   ['imposta-cantonale', /(impost[ae] cantonal[ei])/],
   ['salario-minimo', /(salario minimo)/],
   ['assistenza-sociale', /(assistenza sociale)/],
-  ['imposta-autoveicoli', /(imposta sugli autoveicoli|tassa sugli autoveicoli)/],
   ['incentivi-energetici', /(incentivi energetici|sussidi energetici)/],
-  ['autorizzazione-edilizia', /(autorizzazione edilizia|permesso edilizio)/],
+  ['autorizzazione-edilizia', /(autorizzazione edilizia|autorizzazioni edilizie|permesso edilizio|permessi edilizi)/],
   ['voto-cantonale', /(voto cantonale)/],
   ['elezioni-cantonali', /(elezioni cantonali)/],
   ['protezione-civile', /(protezione civile)/],
-  ['assicurazione-immobili', /(assicurazione (degli )?immobili)/],
+  ['assicurazione-immobili', /(assicurazione (degli )?(immobili|edifici))/],
   ['formazione-continua', /(formazione continua)/],
   ['dichiarazione-imposte', /(dichiarazione (delle )?imposte)/],
   ['costo-vita', /(costo (della )?vita)/],
