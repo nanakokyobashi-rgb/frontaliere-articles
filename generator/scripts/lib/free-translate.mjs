@@ -2010,19 +2010,19 @@ function mergeTranslationOutcome(target, source) {
   target.incomplete = target.incomplete || source.incomplete === true;
 }
 
-export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
+/**
+ * Sorgente pronta per un motore: normalizzata e con i token protetti mascherati.
+ * `null` su una sorgente vuota. E' l'ingresso di `freeTranslate` e di
+ * `translateWithCodexEngine`: un solo punto, perche' due motori che vedono la
+ * stessa sorgente in due forme diverse non sono «la stessa pipeline».
+ */
+function _prepareEngineSource(text, sourceLang, fieldType) {
   const rawSourceClean = normalizeBlock(text);
   const sourceInput = fieldType === 'title' && String(sourceLang || '').toLowerCase().startsWith('de')
     ? normalizeGermanGenderForms(text)
     : text;
   const sourceClean = normalizeBlock(sourceInput);
-  if (!sourceClean) return '';
-  if (sourceLang === targetLang) return sourceClean;
-
-  _cascadeStats.calls++;
-  const fieldStats = _fieldStats(fieldType);
-  fieldStats.calls++;
-
+  if (!sourceClean) return null;
   // Protected tokens: mask DACH gender trigraphs ("(m/w/d)") before any tier
   // sees them. Handed the raw code, translators expand the letters as words —
   // live IT titles came back as "(lunedì/mercoledì/d)" (m→Monday, w→Wednesday).
@@ -2031,27 +2031,43 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // fraction of titles that actually carry a trigraph — no `tokens.length`
   // branch is needed to keep the common case untouched.
   const { text: clean, tokens: protectedTokens } = maskProtectedTokens(sourceClean);
+  return { rawSourceClean, sourceClean, clean, protectedTokens };
+}
 
-  // Single exit transform: balance markdown markers, restore the protected
-  // tokens in the TARGET locale's display form, apply the protected-term
-  // glossary so meaning-inverted MT output (e.g. German "Nachtwache" → IT
-  // "orologio notturno") is corrected regardless of which tier produced it, and
-  // strip template placeholders that leaked through. `fieldType` defaults to
-  // 'title' (preserving the original behaviour for the short-text/title path);
-  // description callers pass 'description' so broad single-word fallback rules
-  // are skipped and legitimate body prose ("nel nostro orologio") is never
-  // rewritten. Glossary triggers are matched against the UNMASKED source.
-  const finalize = (out) => {
-    const finalized = finalizeTranslatedText({
-      sourceText: sourceClean,
-      translatedText: balanceMarkdownMarkers(out),
-      targetLang,
-      fieldType,
-      protectedTokens,
-    });
-    if (!finalized) noteTranslationOutcome(_outcome, 'incomplete');
-    return finalized;
-  };
+/**
+ * Single exit transform: balance markdown markers, restore the protected
+ * tokens in the TARGET locale's display form, apply the protected-term
+ * glossary so meaning-inverted MT output (e.g. German "Nachtwache" → IT
+ * "orologio notturno") is corrected regardless of which tier produced it, and
+ * strip template placeholders that leaked through. `fieldType` defaults to
+ * 'title' (preserving the original behaviour for the short-text/title path);
+ * description callers pass 'description' so broad single-word fallback rules
+ * are skipped and legitimate body prose ("nel nostro orologio") is never
+ * rewritten. Glossary triggers are matched against the UNMASKED source.
+ */
+function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }) {
+  const finalized = finalizeTranslatedText({
+    sourceText: prepared.sourceClean,
+    translatedText: balanceMarkdownMarkers(out),
+    targetLang,
+    fieldType,
+    protectedTokens: prepared.protectedTokens,
+  });
+  if (!finalized) noteTranslationOutcome(outcome, 'incomplete');
+  return finalized;
+}
+
+export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
+  const prepared = _prepareEngineSource(text, sourceLang, fieldType);
+  if (!prepared) return '';
+  const { rawSourceClean, sourceClean, clean } = prepared;
+  if (sourceLang === targetLang) return sourceClean;
+
+  _cascadeStats.calls++;
+  const fieldStats = _fieldStats(fieldType);
+  fieldStats.calls++;
+
+  const finalize = (out) => _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 
   /** Try a tier: track success/error/passthrough, return result or '' */
   async function tryTier(tierName, fn) {
@@ -2272,6 +2288,53 @@ export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fie
   }
 
   return '';
+}
+
+/**
+ * Il tier Codex da SOLO, con un trasporto iniettato: il motore `codex` della
+ * bonifica locale (`retranslate-blocking-bodies.mjs --engine codex`, #1084
+ * item 2), scelto dal proprietario il 2026-10-04 mentre DeepL ha la quota
+ * esaurita e Azure risponde 401001 su entrambe le chiavi.
+ *
+ * Non e' un secondo motore con regole sue: e' il tier `codex` della cascata
+ * senza la cascata intorno. Stessa sorgente (`_prepareEngineSource`: blocco
+ * normalizzato, token protetti mascherati), stesso prompt e stessa pulizia
+ * della risposta (`_codexTranslateOne`: `_codexTranslateMessages` con i
+ * marcatori della chiamata), stesso rifiuto dell'eco della sorgente
+ * (`rejectedAsPassthroughWithSourceVariants`, contato nelle statistiche come
+ * `codex`) e stessa uscita unica (`_finalizeEngineOutput`: marker Markdown,
+ * token protetti, glossario). Cambia solo chi esegue Codex: `call` ha la firma
+ * di `callLLM(messages, opts)`; in CI e' la lane del broker, in locale e'
+ * `codex exec` (`lib/codex-exec-call.mjs`).
+ *
+ * Nessun budget di chiamate o di tempo, nessuna condizione «DeepL e Azure fuori
+ * gioco»: quelle regole proteggono un processo di CI con un tetto di durata e
+ * una cascata da preservare; qui il chiamante ha scelto esplicitamente il
+ * motore. Un errore del trasporto si propaga: `translateFieldFreeMt` lo
+ * converte in campo vuoto, e la bonifica salta l'articolo intero.
+ *
+ * @param {object} args
+ * @param {string} args.text
+ * @param {string} args.sourceLang
+ * @param {string} args.targetLang
+ * @param {('title'|'description')} [args.fieldType='description']
+ * @param {(messages: Array<{role: string, content: string}>, opts: object) => Promise<string>} args.call
+ * @returns {Promise<string>} traduzione finalizzata, oppure '' (eco o vuoto)
+ */
+export async function translateWithCodexEngine({ text, sourceLang, targetLang, fieldType = 'description', call, _outcome = null }) {
+  if (typeof call !== 'function') throw new TypeError('translateWithCodexEngine: `call` è richiesto');
+  const prepared = _prepareEngineSource(text, sourceLang, fieldType);
+  if (!prepared) return '';
+  if (sourceLang === targetLang) return prepared.sourceClean;
+  const out = await _codexTranslateOne(call, {}, prepared.clean, sourceLang, targetLang);
+  if (rejectedAsPassthroughWithSourceVariants('codex', prepared.clean, prepared.rawSourceClean, out, _outcome)) {
+    return '';
+  }
+  if (!out) {
+    noteTranslationOutcome(_outcome, 'incomplete');
+    return '';
+  }
+  return _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 }
 
 /**
