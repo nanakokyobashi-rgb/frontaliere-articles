@@ -138,6 +138,7 @@ export const TITLE = 'gate content su main: offender nel corpus generato dai bot
  * lascerebbe scoperta la meta' del difetto che non si e' ancora manifestata.
  */
 export const CONTENT_GATES = [
+  'generator/tests/brogeda-editorial-correction.test.mjs',
   'generator/tests/historical-unknown-dates.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',

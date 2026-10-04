@@ -249,7 +249,7 @@ jobs:
           - Esegue entrambe le guardie del corpus prima del commit, con il checkout completo degli input che le guardie devono scansionare.
 
           ## Non implementato (ancora)
-          - Nessuno: per scelta, nessun residuo in questa PR.
+          - Nessuno. *(by construction)* **Motivo:** il loop applica in un solo giro tutti i titoli osservati sopra soglia. **Prossimo passo:** nessuno.
           BODY
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
               --title 'fix(seo): shorten Bing article titles' --body-file "$body" \

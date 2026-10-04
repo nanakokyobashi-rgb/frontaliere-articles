@@ -99796,6 +99796,201 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuovo-teatro-mutuo-2026': {
+    title: 'Varese approva mutuo da 10,8 milioni per il nuovo teatro',
+    description: 'Il Consiglio comunale di Varese ha approvato la variazione di bilancio per il nuovo teatro: investimento di circa 22 milioni, mutuo Cassa Depositi e Prestiti',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, approva, mutuo, milioni',
+    ogTitle: 'Varese approva mutuo da 10,8 milioni per il nuovo teatro',
+    ogDescription: 'Il 1 ottobre il Consiglio comunale di Varese ha votato la variazione di bilancio che aumenta l\'investimento per il nuovo teatro a circa 22 milioni di euro, prevedendo un mutuo flessibile di 10,8 milioni con Cassa Depositi e Prestiti, da erogare',
+    canonicalPath: '/articoli-frontaliere/nuovo-teatro-mutuo-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese approva mutuo da 10,8 milioni per il nuovo teatro",
+      "description": "Il Consiglio comunale di Varese ha approvato la variazione di bilancio per il nuovo teatro: investimento di circa 22 milioni, mutuo Cassa Depositi e Prestiti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/nuovo-teatro-mutuo-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Rendering del nuovo teatro di Varese con le montagne sullo sfondo"
+      },
+      "datePublished": "2026-10-04T06:01:14+00:00",
+      "dateModified": "2026-10-04T06:01:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/nuovo-teatro-mutuo-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-festa-cairate-2026-monastero': {
+    title: 'Festa di Cairate 2026: arte, sapori e musica al Monastero',
+    description: 'La sedicesima Festa di Cairate torna il 4 ottobre 2026 al Monastero di Santa Maria Assunta con Camminar Gustando, visite guidate, mostre, mercatino',
+    keywords: 'frontalieri, ticino, svizzera, italia, festa, cairate, arte, sapori',
+    ogTitle: 'Festa di Cairate 2026: arte, sapori e musica al Monastero',
+    ogDescription: 'Domenica 4 ottobre 2026 dalle 10, Cairate ospita la sedicesima edizione della sua festa popolare nel suggestivo Monastero di Santa Maria Assunta. Tra le iniziative: Camminar Gustando (tessera 10 € dalle 12 alle 14.30), visite guidate, mostre',
+    canonicalPath: '/articoli-frontaliere/festa-cairate-2026-monastero/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Festa di Cairate 2026: arte, sapori e musica al Monastero",
+      "description": "La sedicesima Festa di Cairate torna il 4 ottobre 2026 al Monastero di Santa Maria Assunta con Camminar Gustando, visite guidate, mostre, mercatino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/festa-cairate-2026-monastero.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cortile del Monastero di Santa Maria Assunta durante la Festa di Cairate con stand gastronomici e musica"
+      },
+      "datePublished": "2026-10-04T06:15:59+00:00",
+      "dateModified": "2026-10-04T06:15:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/festa-cairate-2026-monastero/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-maga-giornata-contemporaneo': {
+    title: 'Al MA*GA di gallarate la giornata del contemporaneo',
+    description: 'Sabato 10 ottobre al Museo MA*GA di Gallarate ingresso gratuito, finissage di tre mostre, libri, video e performance per la XXII Giornata del Contemporaneo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallarate, giornata, contemporaneo, sabato',
+    ogTitle: 'MA*GA Gallarate: libri, performance e ricerca',
+    ogDescription: 'Il Museo MA*GA di Gallarate celebra la XXII Giornata del Contemporaneo con il finissage di tre esposizioni, la presentazione di due volumi, una performance e la chiusura affidata a Martina Rota nel festival MILANoLTRE.',
+    canonicalPath: '/articoli-frontaliere/maga-giornata-contemporaneo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Al MA*GA di gallarate la giornata del contemporaneo",
+      "description": "Sabato 10 ottobre al Museo MA*GA di Gallarate ingresso gratuito, finissage di tre mostre, libri, video e performance per la XXII Giornata del Contemporaneo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/maga-giornata-contemporaneo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Museo MA*GA di Gallarate per la Giornata del Contemporaneo"
+      },
+      "datePublished": "2026-10-04T06:33:28+00:00",
+      "dateModified": "2026-10-04T06:33:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/maga-giornata-contemporaneo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-licenza-sospesa-bar-busto-2026': {
+    title: 'Busto Arsizio: licenza sospesa 15 giorni per aggressione',
+    description: 'Il Questore di Varese ha sospeso per 15 giorni la licenza di un bar di Busto Arsizio dopo l\'aggressione del 20 settembre con lancio di pietre vicino',
+    keywords: 'frontalieri, ticino, svizzera, italia, busto, arsizio, licenza, sospesa',
+    ogTitle: 'Sospensione licenza bar Busto Arsizio aggressione',
+    ogDescription: 'Il Questore di Varese ha ordinato la sospensione per quindici giorni della licenza di un bar di Busto Arsizio a seguito di una violenta aggressione avvenuta la sera del 20 settembre. Pietre sono state lanciate contro un uomo, mettendo in pericolo',
+    canonicalPath: '/articoli-frontaliere/licenza-sospesa-bar-busto-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Busto Arsizio: licenza sospesa 15 giorni per aggressione",
+      "description": "Il Questore di Varese ha sospeso per 15 giorni la licenza di un bar di Busto Arsizio dopo l'aggressione del 20 settembre con lancio di pietre vicino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/licenza-sospesa-bar-busto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bar di Busto Arsizio con polizia dopo aggressione"
+      },
+      "datePublished": "2026-10-04T06:49:38+00:00",
+      "dateModified": "2026-10-04T06:49:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/licenza-sospesa-bar-busto-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fondazione-morandini-eventi-ottobre-2026': {
+    title: 'Eventi ottobre 2026: Fondazione Morandini a Varese',
+    description: 'Scopri i quattro appuntamenti di ottobre 2026 alla Fondazione Marcello Morandini di Varese: visite per bambini, concerto dell\'Orchestra della Scala',
+    keywords: 'frontalieri, ticino, svizzera, italia, eventi, ottobre, fondazione, morandini',
+    ogTitle: 'Eventi ottobre 2026: Fondazione Morandini a Varese',
+    ogDescription: 'La Fondazione Marcello Morandini di Varese presenta un ricco programma di eventi a ottobre 2026, tra visite guidate per i più piccoli, un concerto con i contrabbassisti della Scala, la presentazione del catalogo della mostra «Antonio Barrese',
+    canonicalPath: '/articoli-frontaliere/fondazione-morandini-eventi-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eventi ottobre 2026: Fondazione Morandini a Varese",
+      "description": "Scopri i quattro appuntamenti di ottobre 2026 alla Fondazione Marcello Morandini di Varese: visite per bambini, concerto dell'Orchestra della Scala",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fondazione-morandini-eventi-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Interno della Fondazione Marcello Morandini a Varese con installazioni luminose della mostra 'Antonio Barrese: Morfologie di luce'."
+      },
+      "datePublished": "2026-10-04T07:21:29+00:00",
+      "dateModified": "2026-10-04T07:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fondazione-morandini-eventi-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
