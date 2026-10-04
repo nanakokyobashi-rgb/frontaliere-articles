@@ -99250,6 +99250,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tamponamento-autostrada-sud': {
+    title: 'Grave incidente sull’A2 a Coldrerio | Frontaliere Ticino',
+    description: 'Incidente sull’A2 a Coldrerio: una 68enne ferita lievemente, il passeggero 73enne in gravi condizioni e traffico congestionato sull’A2 nel Mendrisiotto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, grave, incidente, sull, coldrerio',
+    ogTitle: 'A2 a Coldrerio, grave incidente in direzione sud',
+    ogDescription: 'La polizia cantonale segnala un tamponamento sull’autostrada A2 a Coldrerio: l’auto ha colpito un autoarticolato fermo. La strada è stata chiusa per i soccorsi, con forti disagi tra Mendrisio, Chiasso, Melide e Lugano.',
+    canonicalPath: '/articoli-frontaliere/tamponamento-autostrada-sud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Grave incidente sull’A2 a Coldrerio",
+      "description": "Incidente sull’A2 a Coldrerio: una 68enne ferita lievemente, il passeggero 73enne in gravi condizioni e traffico congestionato sull’A2 nel Mendrisiotto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tamponamento-autostrada-sud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autostrada A2 a Coldrerio dopo un grave incidente in direzione sud"
+      },
+      "datePublished": "2026-10-04T00:18:56+00:00",
+      "dateModified": "2026-10-04T00:18:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tamponamento-autostrada-sud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
