@@ -445,7 +445,8 @@ test('#10 il retry di troncamento di translateArticle confronta con l\'italiano'
   const loop = src.slice(start, src.indexOf('markBodyTranslationPending(data', start));
   assert.match(loop.split('\n')[0], /referenceText: itContent\[field\]/, 'il retry deve passare l\'italiano come riferimento');
   assert.match(loop.split('\n')[0], /\blocale\b/, 'senza locale il confronto si spegne (l\'italiano non si giudica)');
-  assert.match(loop, /i\.rule === 'paragraph-drop'/, 'il retry non deve togliere un body solo accorpato (paragraph-drop)');
+  assert.match(loop, /isRealTranslationTruncation\(detectTruncation\(text, truncationOpts\)\)/, 'il retry non deve togliere un body solo accorpato (paragraph-drop)');
+  assert.match(cutFunction('isRealTranslationTruncation', ['paragraph-drop']), /i\.rule === 'paragraph-drop'/);
   const calls = loop.match(/detectTruncation\([^)]*\)/g) || [];
   assert.equal(calls.length, 2, 'rilevazione e verifica del retry: due chiamate');
   for (const call of calls) assert.match(call, /truncationOpts/, `${call} non usa il riferimento italiano`);
@@ -458,6 +459,16 @@ test('#10 il retry di troncamento di translateArticle confronta con l\'italiano'
     detectTruncation(meta, { label: 'en/body1', locale: 'en', referenceText: IT_LUNGO.body1 })
       .some((i) => i.code === 'translation-semantic-truncation'),
   );
+});
+
+// ── #11 La seconda corsia dei body in attesa usa lo stesso predicato ───────
+test('#11 la seconda corsia Codex rifiuta un body ridotto come il retry di troncamento', () => {
+  const at = src.indexOf('rejectReason: ({ locale, field, itValue, text }) => {');
+  assert.notEqual(at, -1, 'rejectReason della seconda corsia non trovato — aggiornare questo test');
+  const body = src.slice(at, src.indexOf('finalize:', at));
+  assert.match(body, /referenceText: itValue/, 'senza riferimento italiano un body chiuso ma ridotto passa la corsia');
+  assert.match(body, /\blocale\b[^\n]*referenceText/, 'senza locale il confronto si spegne');
+  assert.match(body, /isRealTranslationTruncation\(/, 'stesso predicato del retry, non una seconda regola');
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {

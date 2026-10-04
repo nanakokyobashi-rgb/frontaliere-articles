@@ -11008,6 +11008,20 @@ function pendingBodyLaneShouldStop() {
   return _pendingBodyCodexDeadlineMs !== null && Date.now() + 15_000 >= _pendingBodyCodexDeadlineMs;
 }
 
+/**
+ * Il body tradotto e' troncato abbastanza da NON accettarlo: ogni rilievo di
+ * `detectTruncation()` tranne `translation-semantic-truncation` con
+ * `rule: 'paragraph-drop'` (70-85% delle parole con un paragrafo in meno), che
+ * puo' essere un semplice accorpamento. Chi lo usa, se il retry fallisce, lascia
+ * il body in attesa — cioe' lo TOGLIE — quindi agisce solo sulla perdita
+ * misurata (`word-ratio`) e sui troncamenti formali; il gate di ammissione
+ * resta la diagnosi. Un solo predicato per il retry di troncamento e per la
+ * seconda corsia dei body in attesa.
+ */
+function isRealTranslationTruncation(issues) {
+  return issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
+}
+
 async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
@@ -11565,12 +11579,7 @@ ${terminologyByLang[targetLang] || ''}`;
       // rilievo `major` arrivava solo al gate di ammissione, che blocca i soli
       // `critical`, e il body ridotto finiva su disco.
       const truncationOpts = { label: `${locale}/${field}`, locale, referenceText: itContent[field] };
-      // `paragraph-drop` (70-85% delle parole con un paragrafo in meno) puo'
-      // essere solo un accorpamento: il retry, che se fallisce lascia il body in
-      // attesa e quindi lo TOGLIE, agisce sulla perdita misurata (`word-ratio`)
-      // e su ogni troncamento formale; il gate di ammissione resta la diagnosi.
-      const isRealTruncation = (issues) => issues.some((i) => !(i.code === 'translation-semantic-truncation' && i.rule === 'paragraph-drop'));
-      const isTruncated = isRealTruncation(detectTruncation(text, truncationOpts));
+      const isTruncated = isRealTranslationTruncation(detectTruncation(text, truncationOpts));
       if (!isTruncated) continue;
       const itValue = itContent[field];
       let pendingReason = 'truncation-retry-unusable';
@@ -11611,7 +11620,7 @@ ${terminologyByLang[targetLang] || ''}`;
         // accettazione di un body tradotto.
         const retriedPassthrough = isSourcePassthrough(retried, itValue);
         if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
-        if (retried && !retriedPassthrough && !isRealTruncation(detectTruncation(retried, truncationOpts))) {
+        if (retried && !retriedPassthrough && !isRealTranslationTruncation(detectTruncation(retried, truncationOpts))) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;
@@ -11715,7 +11724,11 @@ ${terminologyByLang[targetLang] || ''}`;
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
-      if (detectTruncation(text, { label: `${locale}/${field}` }).length > 0) return 'troncato';
+      // Stesso predicato del retry di troncamento: riferimento italiano, quindi
+      // anche `translation-semantic-truncation` `word-ratio` (un body chiuso da
+      // un punto ma ridotto), e `paragraph-drop` lasciato alla diagnosi.
+      const truncation = detectTruncation(text, { label: `${locale}/${field}`, locale, referenceText: itValue });
+      if (isRealTranslationTruncation(truncation)) return 'troncato';
       return null;
     },
     finalize: (text) => sanitizeBodyText(text),
