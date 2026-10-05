@@ -293,6 +293,33 @@ export function unreadableCouplings(couplings = []) {
 }
 
 /**
+ * Gli accoppiamenti DICHIARATI dal manifest e non scritti nel testo: l'artefatto
+ * di una `scalarFingerprint` (`corpusPath`, per esempio
+ * `host/shell-contract-fingerprint.json`) e' il digest dei valori della voce che
+ * lo dichiara (`host/constants.ts`, `adapted`). Non vive sotto un albero di
+ * test, quindi `isFixture` lo dava per sorgente normale e la passata lo copiava
+ * DA SOLO: la corpus PR 2176 ha portato il digest 082cd6c3 del sito (PR 11496 del
+ * sito) senza la meta' host del contratto, e `shell-contract-fingerprint.test.mjs`
+ * («host chrome drifted») e `scalarFingerprintVerdict` del drift check sono
+ * andati rossi insieme, con il manifest ancora sul digest vecchio.
+ *
+ * Ritorna `Map(corpusPath -> [{ path, mode, declaredBy }])`: ogni artefatto
+ * dichiarato diventa un fixture accoppiato alla voce che lo dichiara, e
+ * `permanentBlock` lo tratta con la regola dei fixture. Una voce che dichiara
+ * il proprio stesso path come artefatto non si accoppia a se stessa.
+ */
+export function scalarFingerprintCouplings(manifest) {
+  const out = new Map();
+  for (const entry of manifest?.files || []) {
+    const artifact = entry?.scalarFingerprint?.corpusPath;
+    if (!artifact || artifact === entry.path) continue;
+    if (!out.has(artifact)) out.set(artifact, []);
+    out.get(artifact).push({ path: entry.path, mode: entry.mode || 'non registrato', declaredBy: 'scalarFingerprint' });
+  }
+  return out;
+}
+
+/**
  * Decide se UNA voce va copiata giù dal sito. Pura: prende gli hash già
  * calcolati, come `classify()` — è questo a renderla testabile offline, senza
  * rete e senza scrivere niente.
@@ -346,7 +373,9 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [],
   // copiato da solo mette rossa la PR di trasporto, che resta aperta e spegne
   // il canale. Vale a prescindere dallo stato, così la ragione è leggibile
   // anche quando il fixture e' ancora `stable`.
-  if (isFixture(entry.path)) {
+  // Un artefatto dichiarato da una `scalarFingerprint` e' un fixture anche fuori
+  // da un albero di test: vedi `scalarFingerprintCouplings`.
+  if (isFixture(entry.path) || couplings.some((c) => c.declaredBy)) {
     // Il buio PRIMA dell'accoppiamento: se non ho letto un file del sottoalbero
     // non so se cita il fixture, e «non lo so» non è «non lo cita».
     const blind = unreadableCouplings(couplings);
@@ -1773,6 +1802,7 @@ async function main() {
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
   const outOfScopePrefixes = (manifest.scope?.outOfScope || []).map((x) => x.prefix);
   const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
+  const declaredCouplings = scalarFingerprintCouplings(manifest);
   const today = new Date().toISOString().slice(0, 10);
 
   const candidates = [];
@@ -1795,8 +1825,10 @@ async function main() {
     const sitePath = entry.sitePath || rel;
     const base = entry.baseline || { site: null, corpus: null };
 
+    const declared = declaredCouplings.get(rel) || [];
     const fixture = isFixture(rel);
-    const couplings = fixture ? localCouplings(rel, modeOf) : [];
+    const scanned = fixture ? localCouplings(rel, modeOf) : [];
+    const couplings = [...scanned, ...declared.filter((d) => !scanned.some((c) => c.path === d.path))];
     if (fixture) {
       const currentSnapshot = couplingSnapshot(couplings);
       const diff = couplingDiff(entry.couplingSnapshot, currentSnapshot);
