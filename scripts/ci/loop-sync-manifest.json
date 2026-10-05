@@ -4901,6 +4901,46 @@
         "corpus": "0380d00aa2d146ea",
         "alignedAt": "2026-10-04"
       }
+    },
+    {
+      "path": "generator/scripts/lib/canton-notices-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto lato consumatore e letture del dataset `canton-notices.json` (avvisi ufficiali cantonali, D11/P9g), prodotto sul sito da `scripts/crawl-canton-notices.mjs`. Vive solo qui: e' la meta' consumatrice di un contratto HTTP, sul sito non esiste un omonimo e copiarlo la' invertirebbe la direzione del REWIRE.",
+      "baseline": {
+        "site": null,
+        "corpus": "492680c228144b7d",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-services-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Meta' pura dell'aggregatore dei servizi per cantone (P9f, D11): shaper per blocco (premi, aste targhe, turni farmacia, meteo) sui JSON che il sito pubblica sul CDN, modello `daily-brief-data.mjs`. Nessun omonimo sul sito: il sito produce gli artefatti, il corpus li riassume per gli hub.",
+      "baseline": {
+        "site": null,
+        "corpus": "090a7598983b04ed",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-canton-notices.mjs",
+      "mode": "corpus-only",
+      "reason": "Refresh morbido di `canton-notices.json` (D11/P9g) dal CDN del sito, nel REWIRE set: forma verificata da `lib/canton-notices-data.mjs` e inchiodata in `generator/tests/lib/rewire-contracts.mjs`. Nessun omonimo sul sito (il produttore e' `scripts/crawl-canton-notices.mjs`).",
+      "baseline": {
+        "site": null,
+        "corpus": "57437f0323034ae7",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-canton-services-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Refresh dell'aggregatore dei servizi per cantone (P9f): legge quattro artefatti del CDN del sito (health-premiums, plate-auctions, pharmacy-duty-cantons, weather-snapshot), morbido sull'irraggiungibile e duro sulla forma. Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "e40082fb50f893b5",
+        "alignedAt": "2026-10-05"
+      }
     }
   ]
 }

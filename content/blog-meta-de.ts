@@ -12613,6 +12613,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-05.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 5. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-05.seoDescription': 'Grenzgänger-Bulletin vom 5. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-05.ogDescription': 'Die Zahlen vom 5. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.pedemontana-avviso-truffa.title': 'Pedemontana-Betrug: gefälschte Mitteilung über 6,95 euro',
+    'blog.article.pedemontana-avviso-truffa.excerpt': 'Eine SMS über eine angeblich nicht bezahlte Maut ist im Umlauf: Der Link führt zu einer Klon-Website und zielt auf Bank- oder Kartendaten ab.',
+    'blog.article.pedemontana-avviso-truffa.imageAlt': 'Gefälschte Pedemontana-Zahlungsaufforderung auf einem Smartphone',
+    'blog.article.ticinoskills-2026-gordola-event.title': 'TicinoSkills 2026: Rennen, Orientierung und 50 Jahre SBV TI',
+    'blog.article.ticinoskills-2026-gordola-event.excerpt': 'Vom 1. bis 3. Oktober 2026 nahmen in Gordola 44 Lernende an regionalen Meisterschaften teil, über 600 Orientierungsstudenten besuchten die Veranstaltung und fast 400 Familien nahmen am Samstag anlässlich des 50-jährigen Bestehens des SBV TI teil.',
+    'blog.article.ticinoskills-2026-gordola-event.imageAlt': 'Junge Lernende führen eine praktische Aufgabe bei TicinoSkills 2026 in Gordola aus, im Hintergrund das SSIC TI‑Zentrum und schweizerische Fahnen.',
 };
 
 export default blogMetaDe;
