@@ -1,0 +1,75 @@
+{
+  "_comment": "Configurazione degli hub tematici cantonali (P10, D17). `keywordTopics`: classificatore deterministico a parole chiave per i due temi che la tassonomia dell'engine non ha (eventi, servizi; `CANTON_HUB_TOPIC_CLUSTERS` in engine/shared/cantonSectionCopy.mjs li dichiara senza cluster). I termini sono stem confrontati a INIZIO parola, senza maiuscole ne' diacritici (`termHits`), ciascuno contro il testo della propria lingua. Punteggio per locale = 3 x (occorrenze nel titolo, max 2) + (occorrenze nell'estratto, max 3); l'articolo entra nel tema se la somma sulle 4 locali raggiunge `minScore`, almeno un termine compare in un titolo e nessun termine `exclude` compare in un titolo. `neighbours`: Paesi confinanti di ogni gruppo URL (geografia, non dato di dataset), usati solo per scegliere la variante dell'intro. `ranking`: pesi dell'ordinamento delle news promosse; `minTopicStrength` e' il coseno minimo fra l'articolo e i seed del suo cluster perche' entri in un hub (sotto, il tema e' solo sfiorato), `fullTopicStrength` il coseno che vale rilevanza piena.",
+  "schemaVersion": 1,
+  "maxCuratedArticles": 8,
+  "maxKeyFacts": 4,
+  "ranking": {
+    "freshnessHalfLifeDays": 60,
+    "minTopicStrength": 0.08,
+    "fullTopicStrength": 0.3,
+    "weights": {
+      "freshness": 0.4,
+      "relevance": 0.4,
+      "quality": 0.2
+    },
+    "neutralQuality": 0.5
+  },
+  "keywordTopics": {
+    "eventi": {
+      "minScore": 6,
+      "terms": {
+        "it": ["evento", "eventi", "festival", "sagra", "sagre", "concerto", "concerti", "mostra", "mostre", "fiera", "fiere", "mercatino", "mercatini", "carnevale", "spettacol", "rassegna", "manifestazion", "fine settimana", "weekend", "cosa fare"],
+        "en": ["event", "festival", "concert", "exhibition", "fair", "christmas market", "carnival", "show", "weekend", "what to do", "things to do"],
+        "de": ["veranstaltung", "festival", "konzert", "ausstellung", "messe", "weihnachtsmarkt", "fasnacht", "wochenende", "openair", "open air", "volksfest"],
+        "fr": ["événement", "festival", "concert", "exposition", "foire", "marché de noël", "carnaval", "spectacle", "week-end", "fête", "que faire"]
+      },
+      "exclude": {
+        "it": ["incidente", "arrest", "rapina", "processo", "condann", "evento sismico", "evento meteo"],
+        "en": ["accident", "arrest", "robbery", "trial", "convict"],
+        "de": ["unfall", "verhaft", "raub", "prozess", "verurteil"],
+        "fr": ["accident", "arrêt", "braquage", "procès", "condamn"]
+      }
+    },
+    "servizi": {
+      "minScore": 6,
+      "terms": {
+        "it": ["farmaci", "cassa malati", "casse malati", "premi di cassa", "lamal", "ospedal", "pronto soccorso", "medico di famiglia", "sanità", "sanitari", "permesso di dimora", "permessi di lavoro", "sportello", "asilo nido", "asili nido", "rifiuti", "targhe", "patente", "allerta meteo", "servizi pubblici", "posta"],
+        "en": ["pharmac", "health insurance", "hospital", "emergency room", "family doctor", "healthcare", "residence permit", "work permit", "counter service", "childcare", "nursery", "waste", "number plate", "licence plate", "driving licence", "weather alert", "public service", "post office"],
+        "de": ["apotheke", "krankenkasse", "krankenversicherung", "spital", "notfall", "hausarzt", "gesundheitswesen", "aufenthaltsbewilligung", "arbeitsbewilligung", "schalter", "kita", "kinderkrippe", "abfall", "kontrollschild", "führerausweis", "unwetterwarnung", "service public", "poststelle"],
+        "fr": ["pharmaci", "assurance-maladie", "caisse maladie", "caisses maladie", "hôpital", "urgences", "médecin de famille", "santé publique", "permis de séjour", "permis de travail", "guichet", "crèche", "déchets", "plaque d’immatriculation", "permis de conduire", "alerte météo", "service public", "office de poste"]
+      },
+      "exclude": {
+        "it": ["incidente", "muore", "morto", "morta", "arrest", "rapina"],
+        "en": ["accident", "crash", "dies", "dead", "arrest", "robbery"],
+        "de": ["unfall", "stirbt", "tot ", "verhaft", "raub"],
+        "fr": ["accident", "meurt", "décès", "arrêt", "braquage"]
+      }
+    }
+  },
+  "neighbours": {
+    "AG": ["DE"],
+    "APPENZELLO": [],
+    "BE": [],
+    "BASILEA": ["DE", "FR"],
+    "FR": [],
+    "GE": ["FR"],
+    "GL": [],
+    "GR": ["IT", "AT", "LI"],
+    "JU": ["FR"],
+    "LU": [],
+    "NE": ["FR"],
+    "NW": [],
+    "OW": [],
+    "SG": ["AT", "LI", "DE"],
+    "SH": ["DE"],
+    "SO": ["FR"],
+    "SZ": [],
+    "TG": ["DE"],
+    "TI": ["IT"],
+    "UR": [],
+    "VD": ["FR"],
+    "VS": ["IT", "FR"],
+    "ZG": [],
+    "ZH": ["DE"]
+  }
+}
