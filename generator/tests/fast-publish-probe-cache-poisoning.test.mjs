@@ -193,7 +193,7 @@ test('anche la sonda sull\'apex passa da poll_origin', () => {
   // quindi la sonda che scrive la entry che riceve un lettore.
   assert.match(
     verify,
-    /poll_origin "\$u" 8[\s\S]{0,400}jq -r '\.shards\[\]\.url'/,
+    /poll_origin "\$u" 1 8[\s\S]{0,400}jq -r '\.shards\[\]\.urls\[\]'/,
     'il loop sull\'apex deve usare poll_origin (una sola implementazione, un solo cache-bust)',
   );
   assert.ok(
