@@ -98,7 +98,7 @@ for (const input of INPUTS) {
 }
 
 const view = buildCantonServices(inputs, CANTON_GROUPS);
-const summary = `${view.counts.sourcesOk}/4 sources, ${view.counts.cantonsWithBlock}/24 cantons with a block, by block ${JSON.stringify(view.counts.byBlock)}`;
+const summary = `${view.counts.sourcesOk}/4 sources usable (${view.counts.sourcesReachable} reachable), ${view.counts.cantonsWithBlock}/24 cantons with a block, by block ${JSON.stringify(view.counts.byBlock)}`;
 for (const id of view.unmappedWeatherCities) {
   console.log(`::warning::[refresh-canton-services-data] weather city '${id}' has no canton in WEATHER_CITY_CANTON — map it, do not guess`);
 }

@@ -4897,7 +4897,7 @@
       "reason": "Meta' pura dell'aggregatore dei servizi per cantone (P9f, D11): shaper per blocco (premi, aste targhe, turni farmacia, meteo) sui JSON che il sito pubblica sul CDN, modello `daily-brief-data.mjs`. Nessun omonimo sul sito: il sito produce gli artefatti, il corpus li riassume per gli hub.",
       "baseline": {
         "site": null,
-        "corpus": "0141182e5433dcaa",
+        "corpus": "11fbb7925254f50a",
         "alignedAt": "2026-10-05"
       }
     },
@@ -4917,7 +4917,7 @@
       "reason": "Refresh dell'aggregatore dei servizi per cantone (P9f): legge quattro artefatti del CDN del sito (health-premiums, plate-auctions, pharmacy-duty-cantons, weather-snapshot), morbido sull'irraggiungibile e duro sulla forma. Nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "b4cd0f52d52ba32b",
+        "corpus": "e40082fb50f893b5",
         "alignedAt": "2026-10-05"
       }
     }

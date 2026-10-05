@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url';
 import {
   CANTON_GROUPS,
   assertPharmacyDutyCantonsShape,
+  assertPremiumsShape,
   MIN_CANTONS_WITH_BLOCK,
   PLATE_AUCTIONS_MAX_AGE_MS,
   WEATHER_MAX_AGE_MS,
@@ -165,6 +166,22 @@ test('contratto per voce: turno con date illeggibili, URL senza host, cantone me
   ag[1].endsAt = `${new Date(NOW + 2 * HOUR + 2 * HOUR).toISOString().slice(0, 19)}+02:00`;
   const block = shapePlateAuctions(pa, ['AG'], { nowMs: NOW });
   assert.equal(Date.parse(block.nextEndsAt), Math.min(Date.parse(ag[0].endsAt), Date.parse(ag[1].endsAt)));
+});
+
+test('fonti raggiungibili ma inutilizzabili non contano; citta\' senza misure e regioni non numeriche', () => {
+  const stale = { ...recording('weather-snapshot', NOW), generatedAt: new Date(NOW - 48 * HOUR).toISOString() };
+  const view = buildCantonServices({ premiums: recording('health-premiums', NOW), plateAuctions: null, pharmacyDuties: null, weather: stale }, CANTON_GROUPS, { nowMs: NOW });
+  assert.equal(view.counts.sourcesReachable, 2);
+  assert.equal(view.counts.sourcesOk, 1);
+  assert.match(viewThresholdFailures(view).join('\n'), /fonti utilizzabili/);
+
+  const nullCity = recording('weather-snapshot', NOW);
+  for (const id of Object.keys(nullCity.cities)) nullCity.cities[id] = null;
+  assert.equal(shapeWeather(nullCity, ['TI'], { nowMs: NOW }).available, false);
+
+  const badRegion = recording('health-premiums', NOW);
+  badRegion.quotes.TI.nord = badRegion.quotes.TI[Object.keys(badRegion.quotes.TI)[0]];
+  assert.throws(() => assertPremiumsShape(badRegion), /non-numeric region key/);
 });
 
 test('soglie della vista: con una sola fonte raggiungibile non si scrive', () => {

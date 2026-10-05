@@ -118,6 +118,14 @@ export function assertPremiumsShape(doc) {
   if (!Number.isInteger(doc.year)) throw new ShapeError('health-premiums: year is not an integer');
   if (!isObj(doc.quotes) || Object.keys(doc.quotes).length < 20) throw new ShapeError('health-premiums: quotes{} missing or with fewer than 20 cantons');
   if (!Array.isArray(doc.insurers)) throw new ShapeError('health-premiums: insurers[] missing');
+  // Le regioni di premio sono numeri (0-3): una chiave diversa diventerebbe
+  // `region: NaN`, cioe' `null` nel JSON della vista.
+  for (const [canton, regions] of Object.entries(doc.quotes)) {
+    if (!isObj(regions)) throw new ShapeError(`health-premiums: quotes.${canton} is not an object`);
+    for (const region of Object.keys(regions)) {
+      if (!/^\d+$/.test(region)) throw new ShapeError(`health-premiums: quotes.${canton} has a non-numeric region key ${JSON.stringify(region)}`);
+    }
+  }
 }
 
 /**
@@ -188,7 +196,7 @@ export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
     .sort((a, b) => b.currentBidChf - a.currentBidChf)
     .slice(0, MAX_AUCTION_HIGHLIGHTS)
     .map((a) => ({
-      plate: a.normalizedPlate ?? `${a.platePrefix ?? ''}${a.plateNumber ?? ''}`,
+      plate: typeof a.normalizedPlate === 'string' && a.normalizedPlate ? a.normalizedPlate : `${a.platePrefix ?? ''}${a.plateNumber ?? ''}`,
       currentBidChf: a.currentBidChf,
       endsAt: new Date(Date.parse(a.endsAt)).toISOString(),
       url: httpUrlOrNull(a.officialDetailUrl),
@@ -197,7 +205,7 @@ export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
     available: true,
     generatedAt: doc.generatedAt,
     officialUrls: [...new Set(sources.map((s) => httpUrlOrNull(s.officialUrl)).filter(Boolean))],
-    sourceStatus: sources.map((s) => s.status ?? null),
+    sourceStatus: sources.map((s) => (typeof s.status === 'string' ? s.status : null)),
     activeCount: active.length,
     bidMedianChf: median(bids),
     bidMaxChf: bids.length ? Math.max(...bids) : null,
@@ -238,7 +246,7 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
   if (c.state !== 'fresh') return unavailable(`rilascio dei turni non pubblicabile (${c.state})`);
   // Senza un'ora d'importazione leggibile la freschezza non si puo' misurare:
   // il blocco degrada invece di saltare il controllo.
-  const fetched = Date.parse(c.fetchedAt ?? doc.generatedAt ?? '');
+  const fetched = isoTimestampMs(c.fetchedAt ?? doc.generatedAt);
   if (!Number.isFinite(fetched)) return unavailable('turni senza data di importazione leggibile: freschezza non verificabile');
   if (nowMs - fetched < -CLOCK_SKEW_MS) return unavailable(`turni datati nel futuro (${c.fetchedAt ?? doc.generatedAt})`);
   if (nowMs - fetched > PHARMACY_MAX_AGE_MS) return unavailable(`turni importati ${Math.round((nowMs - fetched) / HOUR_MS)} h fa (max ${PHARMACY_MAX_AGE_MS / HOUR_MS} h)`);
@@ -256,9 +264,10 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
   if (!upcoming.length) return unavailable('nessun turno in corso o in arrivo nella finestra pubblicata');
   return {
     available: true,
-    fetchedAt: c.fetchedAt ?? null,
-    sourceUrl: c.sourceUrl ?? null,
-    dutyHubPath: doc.dutyHubPath ?? null,
+    fetchedAt: new Date(fetched).toISOString(),
+    sourceUrl: httpUrlOrNull(c.sourceUrl),
+    // percorso interno del sito: solo «/…/» (barra finale obbligatoria sul sito)
+    dutyHubPath: typeof doc.dutyHubPath === 'string' && /^\/[a-z0-9/-]*\/$/.test(doc.dutyHubPath) ? doc.dutyHubPath : null,
     duties: upcoming.map((d) => ({
       pharmacy: d.pharmacy,
       city: typeof d.city === 'string' ? d.city : null,
@@ -287,8 +296,10 @@ export function shapeWeather(doc, members, { nowMs = Date.now() } = {}) {
   if (age > WEATHER_MAX_AGE_MS) return unavailable(`snapshot meteo vecchio di ${Math.round(age / HOUR_MS)} h (max ${WEATHER_MAX_AGE_MS / HOUR_MS} h)`);
   const cities = [];
   for (const [id, city] of Object.entries(doc.cities)) {
-    if (!members.includes(cityCanton(id, city))) continue;
-    const today = Array.isArray(city?.daily7) ? city.daily7[0] : null;
+    if (!isObj(city) || !members.includes(cityCanton(id, city))) continue;
+    const today = Array.isArray(city.daily7) ? city.daily7[0] : null;
+    // Una citta' senza nessuna misura usabile non e' un dato meteo: non entra.
+    if (finite(city.current?.temperature) == null && finite(today?.tempMax) == null && finite(today?.tempMin) == null) continue;
     cities.push({
       cityId: id,
       name: typeof city?.name === 'string' ? city.name : null,
@@ -341,13 +352,19 @@ export function buildCantonServices(inputs, groups, { nowMs = Date.now() } = {})
     };
     cantons[group] = { members, availableBlocks: Object.values(blocks).filter((b) => b.available).length, blocks };
   }
-  const sources = Object.fromEntries(Object.entries(inputs).map(([k, v]) => [k, { reachable: v != null }]));
+  // Raggiungibile non vuol dire utilizzabile: una fonte vecchia o vuota e'
+  // raggiungibile ma non produce blocchi, e non deve contare per la soglia.
+  const all = Object.values(cantons);
+  const sources = Object.fromEntries(
+    Object.entries(inputs).map(([k, v]) => [k, { reachable: v != null, usable: all.some((c) => c.blocks[k]?.available) }]),
+  );
   return {
     schemaVersion: 1,
     generatedAt: new Date(nowMs).toISOString(),
     sources,
     counts: {
-      sourcesOk: Object.values(sources).filter((s) => s.reachable).length,
+      sourcesReachable: Object.values(sources).filter((s) => s.reachable).length,
+      sourcesOk: Object.values(sources).filter((s) => s.usable).length,
       cantonsWithBlock: Object.values(cantons).filter((c) => c.availableBlocks > 0).length,
       byBlock: Object.fromEntries(Object.keys(Object.values(cantons)[0]?.blocks ?? {}).map((b) => [b, Object.values(cantons).filter((c) => c.blocks[b].available).length])),
     },
@@ -359,7 +376,7 @@ export function buildCantonServices(inputs, groups, { nowMs = Date.now() } = {})
 /** @returns {string[]} motivi per NON scrivere la vista */
 export function viewThresholdFailures(view) {
   const out = [];
-  if (view.counts.sourcesOk < MIN_SOURCES_OK) out.push(`solo ${view.counts.sourcesOk} fonti raggiungibili (min ${MIN_SOURCES_OK})`);
+  if (view.counts.sourcesOk < MIN_SOURCES_OK) out.push(`solo ${view.counts.sourcesOk} fonti utilizzabili, cioe' con almeno un blocco disponibile (min ${MIN_SOURCES_OK})`);
   if (view.counts.cantonsWithBlock < MIN_CANTONS_WITH_BLOCK) out.push(`solo ${view.counts.cantonsWithBlock} cantoni con almeno un blocco (min ${MIN_CANTONS_WITH_BLOCK})`);
   return out;
 }
