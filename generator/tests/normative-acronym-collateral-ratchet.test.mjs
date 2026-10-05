@@ -66,7 +66,12 @@ const MASSIMALE_FILE = {
   // Restano 4 file giudiziari veri («art. 84a LTF», Legge sul Tribunale
   // federale) e 33 file della «legge federale sul traffico (LTF)», anch'essa
   // inventata ma fuori dalla classe di quella scheda.
-  LTF: 37,
+  // ED-FAB-3 (2026-10-05): 37 -> 4. Tolta anche la LTF «legge sul traffico»
+  // (stradale, ferroviario, aereo) da 12 sorgenti it e dalle 21 traduzioni.
+  // Restano SOLO i 4 file giudiziari veri di `assistenza-fiscale-svizzera-
+  // italia-…` («art. 84a LTF», Legge sul Tribunale federale, RS 173.110):
+  // da qui in poi il massimale coincide con gli usi legittimi.
+  LTF: 4,
   RPS: 10,
   LSO: 8,
   LPF: 6,
