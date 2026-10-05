@@ -7,6 +7,13 @@
  * proprio quel file: lasciato lì, resterebbe il credito di una copertina che
  * non c'è più, che il sito tira comunque giù col pull del corpus.
  *
+ * La copertina però è un FILE, non un articolo: il campo `image` può nominare
+ * la copertina di un altro articolo (oggi 10 copertine sono condivise, fra cui
+ * `a2-giornico-cantiere-disagi-frontalieri`, riusata da
+ * `laccordo-italia-svizzera-del-2020-…`). Una copertina che un altro articolo
+ * pubblicato usa ancora, in qualunque sezione, resta per intero: file,
+ * miniatura, credito e voce del catalogo del giornalista.
+ *
  * Lo script chiama `main()` a fine file e risolve la radice dalla propria
  * posizione, quindi qui gira davvero: copiato con i suoi import in un albero
  * temporaneo, su superfici minime della sezione svizzera.
@@ -42,17 +49,30 @@ function creditFor(cover) {
   return finalizeCreditRecord(verdict.template, { cover, modified: 'cropped' });
 }
 
-/** Le superfici che il ritiro di un articolo svizzero legge e riscrive, più le due copertine e i loro crediti. */
-function corpusTree({ credited = true } = {}) {
+/**
+ * Le superfici che il ritiro di un articolo svizzero legge e riscrive, più le
+ * copertine, i loro crediti e il catalogo del giornalista.
+ *
+ * `covers` mappa l'id di un articolo svizzero alla chiave della copertina che
+ * il suo `image` dichiara (di default la propria); `swiss` aggiunge articoli
+ * svizzeri oltre al ritirato e al vincitore, `frontaliere` articoli del
+ * registro frontaliere, entrambi come `{ id, cover }`.
+ */
+function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = [] } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retire-credit-'));
   for (const file of relativeImportClosure(path.join(REPO, 'scripts/retire-article.mjs'))) {
     const rel = path.relative(REPO, file);
     fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true });
     fs.cpSync(file, path.join(root, rel));
   }
-  const row = (id) => `  {\n    id: '${id}',\n    category: 'news',\n    date: '2026-10-01',\n    image: '/images/blog/${id}.webp',\n  },\n`;
-  write(root, 'content/blog-articles-data.ts', 'export const RAW_ARTICLES = [\n];\n');
-  write(root, 'content/swiss-articles-data.ts', `export const RAW_SWISS_ARTICLES = [\n${row(RETIRED)}${row(WINNER)}];\n`);
+  const row = ({ id, cover = id }) => `  {\n    id: '${id}',\n    category: 'news',\n    date: '2026-10-01',\n    image: '/images/blog/${cover}.webp',\n  },\n`;
+  const swissRows = [
+    { id: RETIRED, cover: covers[RETIRED] ?? RETIRED },
+    { id: WINNER, cover: covers[WINNER] ?? WINNER },
+    ...swiss,
+  ];
+  write(root, 'content/blog-articles-data.ts', `export const RAW_ARTICLES = [\n${frontaliere.map(row).join('')}];\n`);
+  write(root, 'content/swiss-articles-data.ts', `export const RAW_SWISS_ARTICLES = [\n${swissRows.map(row).join('')}];\n`);
   write(root, 'content/routerSwissData.ts', [
     'export const SWISS_SLUGS = {',
     `  '${RETIRED}': { it: 'ritirata-ch', en: 'retired-ch', de: 'zurueckgezogen-ch', fr: 'retiree-ch' },`,
@@ -77,11 +97,15 @@ function corpusTree({ credited = true } = {}) {
     [RETIRED]: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Locarno_1.jpg',
     [WINNER]: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Locarno_1.jpg',
   }, null, 2));
-  for (const id of [RETIRED, WINNER]) {
-    write(root, `public/images/blog/${id}.webp`, 'RIFF');
-    write(root, `public/images/blog/thumbnails/${id}-480w.webp`, 'RIFF');
-    if (credited) writeCreditRecord(root, creditFor(`/images/blog/${id}.webp`));
+  // Ogni file di copertina esiste, anche quello col nome dell'id che nessun
+  // `image` dichiara più: è il caso di un articolo passato a una copertina altrui.
+  const keys = new Set([RETIRED, WINNER, ...[...swissRows, ...frontaliere].map((r) => r.cover ?? r.id)]);
+  for (const key of keys) {
+    write(root, `public/images/blog/${key}.webp`, 'RIFF');
+    write(root, `public/images/blog/thumbnails/${key}-480w.webp`, 'RIFF');
+    if (credited) writeCreditRecord(root, creditFor(`/images/blog/${key}.webp`));
   }
+  write(root, 'public/data/journalist-image-catalog.json', `${JSON.stringify([...keys].map((key) => ({ path: `/images/blog/${key}.webp`, words: [key] })))}\n`);
   return root;
 }
 
@@ -90,6 +114,22 @@ function retire(root, ...extra) {
 }
 
 const exists = (root, rel) => fs.existsSync(path.join(root, rel));
+const catalogPaths = (root) => JSON.parse(fs.readFileSync(path.join(root, 'public/data/journalist-image-catalog.json'), 'utf-8')).map((e) => e.path);
+const coverFiles = (key) => [
+  `public/images/blog/${key}.webp`,
+  `public/images/blog/thumbnails/${key}-480w.webp`,
+  `content/image-credits/blog/${key}.json`,
+];
+
+function assertCoverKept(root, key) {
+  for (const rel of coverFiles(key)) assert.ok(exists(root, rel), `${rel}: la copertina condivisa doveva restare`);
+  assert.ok(catalogPaths(root).includes(`/images/blog/${key}.webp`), `voce di catalogo di ${key} rimossa`);
+}
+
+function assertCoverGone(root, key) {
+  for (const rel of coverFiles(key)) assert.ok(!exists(root, rel), `${rel} esiste ancora`);
+  assert.ok(!catalogPaths(root).includes(`/images/blog/${key}.webp`), `voce di catalogo di ${key} ancora presente`);
+}
 
 test('il ritiro cancella il credito della copertina insieme alla copertina', () => {
   const root = corpusTree();
@@ -123,6 +163,66 @@ test('una copertina senza credito si ritira come prima', () => {
     assert.doesNotMatch(result.stdout, /credito della copertina/);
     assert.ok(!exists(root, `public/images/blog/${RETIRED}.webp`));
     assert.ok(!exists(root, 'content/image-credits/blog'), 'nessun record creato');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('la voce di catalogo della copertina ritirata se ne va con la copertina', () => {
+  const root = corpusTree();
+  try {
+    const result = retire(root);
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assertCoverGone(root, RETIRED);
+    assertCoverKept(root, WINNER);
+    assert.doesNotMatch(result.stdout, /conservata/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una copertina condivisa nella stessa sezione resta, e il dry-run lo dice', () => {
+  const root = corpusTree({ swiss: [{ id: 'gemella-ch', cover: RETIRED }] });
+  try {
+    const dry = retire(root, '--dry-run');
+    assert.equal(dry.status, 0, dry.stdout + dry.stderr);
+    assert.match(dry.stdout, new RegExp(`copertina ${RETIRED} conservata: usata da gemella-ch`));
+    assert.doesNotMatch(dry.stdout, /credito della copertina/, 'il piano non accoda il credito di una copertina in uso');
+
+    const result = retire(root);
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assertCoverKept(root, RETIRED);
+    assert.ok(!exists(root, `content/blog-body-ch/it/${RETIRED}.ts`), 'il resto del ritiro avviene comunque');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una copertina condivisa con un articolo dell\'altra sezione resta', () => {
+  const root = corpusTree({ frontaliere: [{ id: 'gemella-frontaliere', cover: RETIRED }] });
+  try {
+    const result = retire(root);
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, new RegExp(`copertina ${RETIRED} conservata: usata da gemella-frontaliere`));
+    assertCoverKept(root, RETIRED);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('ritirare chi riusa la copertina di un altro non tocca nulla dell\'altro', () => {
+  // Il caso reale: `laccordo-…` dichiara `image: '/images/blog/a2-giornico-….webp'`.
+  const root = corpusTree({ covers: { [RETIRED]: WINNER } });
+  try {
+    const dry = retire(root, '--dry-run');
+    assert.equal(dry.status, 0, dry.stdout + dry.stderr);
+    assert.match(dry.stdout, new RegExp(`copertina ${WINNER} conservata: usata da ${WINNER}`));
+
+    const result = retire(root);
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assertCoverKept(root, WINNER);
+    // Il file col nome del ritirato non lo usa nessuno: se ne va come prima.
+    assertCoverGone(root, RETIRED);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
