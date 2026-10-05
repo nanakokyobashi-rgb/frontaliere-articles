@@ -70,6 +70,7 @@ import {
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
 import { classify } from '../../scripts/ci/loop-drift-check.mjs';
+import { readManifestSnapshot } from '../../scripts/ci/handoff-to-site.mjs';
 import { parsePositiveNum } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -613,6 +614,15 @@ test('sul manifest reale: host/shell-contract-fingerprint.json non si trasporta 
   const couplings = scalarFingerprintCouplings(manifest).get(rel) || [];
   assert.ok(couplings.some((c) => c.path === 'host/constants.ts' && c.mode !== 'identical'), 'la voce che dichiara il digest e’ la meta’ adapted');
   assert.ok(permanentBlock(entry, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }));
+});
+
+test('l’handoff considera stranded l’artefatto scalarFingerprint fuori dai test', () => {
+  const manifestPath = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
+  const snapshot = readManifestSnapshot(manifestPath);
+  assert.ok(
+    snapshot.stranded.has('host/shell-contract-fingerprint.json'),
+    'il digest dichiarato da host/constants.ts adapted non deve autorizzare la chiusura dell’handoff',
+  );
 });
 
 test('il delta degli accoppiamenti distingue inizializzazione, aggiunte e rimozioni', () => {
