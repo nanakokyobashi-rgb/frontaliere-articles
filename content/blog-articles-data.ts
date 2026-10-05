@@ -39762,6 +39762,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tifosi-azioni-ambri-evento',
+ category: 'novita',
+ date: '2026-10-05T14:41:12.153Z',
+ image: '/images/blog/tifosi-azioni-ambri-evento.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
