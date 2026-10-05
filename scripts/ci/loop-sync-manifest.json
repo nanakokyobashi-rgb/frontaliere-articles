@@ -2059,10 +2059,10 @@
       "sitePath": "scripts/lib/ai-meta-response.mjs",
       "mode": "corpus-only-pending",
       "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616",
-      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. La copia del sito e' stata introdotta da valerielinc-ops/frontaliere-si-o-no#11616, ancora aperta: qui i byte coincidono, ma il blob non e' nella storia di `main` del sito, quindi resta pending e tracciata finche' la PR non atterra; dopo, promuovere a `identical` con `loop-drift-check --init --only`.",
+      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Il file esiste sul `main` del sito dalla valerielinc-ops/frontaliere-si-o-no#11578, ma nella versione precedente: questi byte (le correzioni delle review di questa PR) arrivano sul sito con valerielinc-ops/frontaliere-si-o-no#11616, ancora aperta, e il loro blob non e' nella storia di `main` del sito, quindi la voce resta pending e tracciata finche' la PR non atterra. Il drift check puo' segnalarla `corpus-only-pending-landed` gia' ora, perche' il path esiste sul sito: NON promuoverla prima del merge della #11616 (si registrerebbe una baseline divergente); dopo il merge, verificare che i due file siano byte-identici e promuovere a `identical` con `loop-drift-check --init --only`.",
       "baseline": {
         "site": null,
-        "corpus": "0e5274d45566119d",
+        "corpus": "6e007da08c1c1ee2",
         "alignedAt": "2026-10-05"
       }
     },
