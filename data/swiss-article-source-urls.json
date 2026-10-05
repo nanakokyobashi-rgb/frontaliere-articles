@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/riserve-naturali-messe-a-dura-prova-da-siccit%c3%a0/91999663": {
-    "articleId": "riserve-naturali-siccita-estate-2024",
-    "ts": "2026-09-03T16:11:14.748Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/svizzera/svizzera/1947883/medici-di-famiglia-e-dell-infanzia-criticano-il-nuovo-tariffario-medico": {
     "articleId": "tariffario-ambulatoriale-cure-base",
     "ts": "2026-09-03T17:34:19.168Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/rischi-informatici-sottovalutati-da-molte-pmi%2c-studio/92167766": {
     "articleId": "rischi-cyber-pmi-svizzere",
     "ts": "2026-10-05T10:27:11.803Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/guy-parmelin-in-india%3a-per-un-accordo-che-protegga-gli-investimenti/92167943": {
+    "articleId": "india-aels-protezione-capitali",
+    "ts": "2026-10-05T11:04:37.392Z",
     "keyForm": 2
   }
 }
