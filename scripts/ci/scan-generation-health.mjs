@@ -36,7 +36,9 @@
  *  1. **I titoli dei commit su `main`.** `generate-article.yml` distingue già
  *     onestamente ciò che ha prodotto: `Generate blog article (<sezione>)` vs
  *     `Record rejected topic candidates (<sezione> — no article generated)`.
- *     Una sola chiamata API per 100 commit, e dà sezione + istante.
+ *     Una sola chiamata API per 100 commit, e dà sezione + istante. Le
+ *     sezioni cantonali (`canton-<codice>`) sono riconosciute e contate a
+ *     parte (`perCanton`), ma non alimentano nessuna condizione.
  *  2. **I marker nei log delle run**, machine-readable e già in produzione:
  *       `event=<e> chain=<c> → section=<s> dry_run=<d>`  (generate-article.yml)
  *       `PRESPEND_GATE_OUTCOME emptied=… recovered=… status=… section=…`
@@ -73,6 +75,15 @@
  *    causa, la stessa cura e nessuna soglia difendibile — perché quella quota
  *    varia legittimamente con la produttività (misurata: 70% delle invocazioni
  *    il 2026-08-01, 47% nelle ultime 34 ore).
+ *
+ *  · **Le sezioni cantonali** (`generate-article-<cantone>.yml`). I loro commit
+ *    sono riconosciuti e contati a parte (`perCanton`, una riga nel log della
+ *    passata), ma nessuna condizione li legge: le soglie qui sotto sono
+ *    misurate sullo storico della coppia frontaliere/svizzera, e per un cantone
+ *    che pubblica 1-4 articoli al giorno uno storico non esiste ancora. Una
+ *    `section-dry` per cantone scritta oggi sarebbe una soglia scelta, non
+ *    misurata. Le run rosse dei chiamanti cantonali restano di
+ *    `scan-failed-runs.mjs`, che non le distingue dalle altre.
  *
  *  · **Il singolo run senza articolo.** È l'esito normale che il workflow
  *    dichiara esplicitamente. Sorvegliarlo produrrebbe decine di segnali al
@@ -587,8 +598,13 @@ export const MIN_LOG_SUCCESS_RATE = 0.5;
 // Parser puri — nessuna rete, nessun filesystem. Sono il cuore testabile.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const COMMIT_ARTICLE_RE = /^Generate blog article \(([a-z]+)\)$/;
-const COMMIT_REJECTED_RE = /^Record rejected topic candidates \(([a-z]+) — no article generated\)$/;
+// La sezione e' `frontaliere`, `svizzera` oppure `canton-<codice>` (i chiamanti
+// `generate-article-<cantone>.yml`, P8 del piano «sezioni cantonali»).
+const COMMIT_ARTICLE_RE = /^Generate blog article \(([a-z]+(?:-[a-z]+)?)\)$/;
+const COMMIT_REJECTED_RE = /^Record rejected topic candidates \(([a-z]+(?:-[a-z]+)?) — no article generated\)$/;
+
+/** Sezione di un chiamante cantonale (`canton-ti`, …). */
+export const CANTON_SECTION_RE = /^canton-[a-z]+$/;
 
 /**
  * Cosa dice di sé il titolo di un commit di generazione.
@@ -1903,6 +1919,12 @@ export function collectCommits(repo, lookbackHours, {
   const perSection = Object.fromEntries(
     SECTIONS.map((s) => [s, { articles: 0, rejected: 0, lastArticleAt: null, timestamps: [] }]),
   );
+  // Le sezioni cantonali si CONTANO a parte e non entrano nelle condizioni:
+  // `generation-idle` e `section-dry` sono tarate sullo storico della coppia
+  // frontaliere/svizzera, e un articolo cantonale non deve ne' accenderle ne'
+  // tenerle spente al posto loro. Una soglia per cantone richiede uno storico
+  // che ancora non esiste (vedi «Il criterio di taratura» in testa al file).
+  const perCanton = {};
   let total = 0;
   let rejected = 0;
   let lastArticleAt = null;
@@ -1935,6 +1957,15 @@ export function collectCommits(repo, lookbackHours, {
       if (ts < cutoff) { reachedCutoff = true; continue; }
       total++;
       const parsed = parseGenerationCommit(line.slice(tab + 1));
+      if (parsed && CANTON_SECTION_RE.test(parsed.section)) {
+        const canton = perCanton[parsed.section] ||= { articles: 0, rejected: 0, lastArticleAt: null };
+        if (parsed.kind === 'rejected') canton.rejected++;
+        else {
+          canton.articles++;
+          if (canton.lastArticleAt === null || ts > canton.lastArticleAt) canton.lastArticleAt = ts;
+        }
+        continue;
+      }
       if (!parsed || !perSection[parsed.section]) continue;
       if (parsed.kind === 'rejected') {
         rejected++;
@@ -1964,7 +1995,21 @@ export function collectCommits(repo, lookbackHours, {
     rejected,
     lastArticleAt,
     perSection,
+    perCanton,
   };
+}
+
+/**
+ * Una riga di log per le sezioni cantonali viste nella finestra, o `null` se
+ * non ce ne sono. Solo telemetria: nessuna condizione le legge.
+ *
+ * @param {Record<string, { articles: number, rejected: number, lastArticleAt: number|null }>} perCanton
+ */
+export function formatCantonCommitSummary(perCanton) {
+  const entries = Object.entries(perCanton || {}).sort(([a], [b]) => a.localeCompare(b));
+  if (!entries.length) return null;
+  return entries.map(([section, c]) => `${section} articles=${c.articles} rejected=${c.rejected}`
+    + ` last=${c.lastArticleAt === null ? 'n/d' : new Date(c.lastArticleAt).toISOString()}`).join('; ');
 }
 
 /**
@@ -2176,6 +2221,8 @@ async function main() {
     + ` corpus=${measurements.corpus.available ? measurements.corpus.total : 'n/d'}`
     + `${dryRun ? ' (dry-run)' : ''}`,
   );
+  const cantonSummary = measurements.commits.available ? formatCantonCommitSummary(measurements.commits.perCanton) : null;
+  if (cantonSummary) console.log(`[generation-health] sezioni cantonali (solo conteggio, nessuna condizione): ${cantonSummary}`);
   if (measurements.runs.available && measurements.runs.outcomes) {
     const o = measurements.runs.outcomes;
     console.log(
