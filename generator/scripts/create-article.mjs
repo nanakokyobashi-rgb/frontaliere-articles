@@ -229,19 +229,19 @@ import {
   buildWinnerFingerprintMessage as _topicBuildFingerprintMessage,
   loadDemandVocabulary as _loadDemandVocabulary,
   loadExperimentalCandidates as _loadExperimentalCandidates,
-  loadTodayPicksByCluster as _loadTodayPicksByCluster,
-  persistTodayPicksByCluster as _persistTodayPicksByCluster,
-  loadExperimentalCounter as _loadExperimentalCounter,
-  persistExperimentalCounter as _persistExperimentalCounter,
-  loadEvergreenCounter as _loadEvergreenCounter,
-  persistEvergreenCounter as _persistEvergreenCounter,
+  loadTodayPicksByCluster as _loadTodayPicksByClusterAt,
+  persistTodayPicksByCluster as _persistTodayPicksByClusterAt,
+  loadExperimentalCounter as _loadExperimentalCounterAt,
+  persistExperimentalCounter as _persistExperimentalCounterAt,
+  loadEvergreenCounter as _loadEvergreenCounterAt,
+  persistEvergreenCounter as _persistEvergreenCounterAt,
   rankAndSelectHeadlines as _rankAndSelectHeadlines,
-  loadEvergreenRejectedTracker as _loadEvergreenRejectedTracker,
+  loadEvergreenRejectedTracker as _loadEvergreenRejectedTrackerAt,
   isEvergreenRejected as _isEvergreenRejected,
   appendEvergreenRejected as _appendEvergreenRejected,
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
-  persistEvergreenRejectedTracker as _persistEvergreenRejectedTracker,
+  persistEvergreenRejectedTracker as _persistEvergreenRejectedTrackerAt,
   isTopicGateAbortedUrl as _isTopicGateAbortedUrl,
   recordTopicGateAbortedUrl as _recordTopicGateAbortedUrl,
 } from './lib/article-topic-selector.mjs';
@@ -251,8 +251,8 @@ import {
 // data/quota-state.json and tuned daily by tune-discovery-quota.mjs
 // (Phase 4). Counter increments ONLY after a successful publish.
 import {
-  loadQuotaState as _loadQuotaState,
-  saveQuotaState as _saveQuotaState,
+  loadQuotaState as _loadQuotaStateAt,
+  saveQuotaState as _saveQuotaStateAt,
   decideSlot as _decideSlot,
   incrementCounter as _incrementCounter,
 } from './lib/scheduler/quotaController.mjs';
@@ -287,7 +287,21 @@ import {
   webpDimensions,
   writeCreditRecord,
 } from './lib/commons-credit.mjs';
-import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+// Sezioni cantonali (P6b): voci di ARTICLE_SECTION_CONFIGS, gate D16, stato per
+// sezione D18 e testi di prompt dal profilo; scanner delle loro fonti.
+import {
+  CANTON_SECTION_DISABLED_MARKER,
+  CANTON_SECTIONS_ENABLED_ENV,
+  buildCantonProfile,
+  cantonClassifierPrompt,
+  cantonHeadlineSelectionPrompt,
+  cantonPromptLines,
+  cantonSectionConfigs,
+  cantonSectionSkeletons,
+  resolveCantonSectionGate,
+} from './lib/canton-section-profile.mjs';
+import { createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
@@ -717,6 +731,9 @@ function sectionAdmissionKeywords(national) {
 // see the comment above FRONTALIERE_EVENTS_CULTURE_KEYWORDS.
 function hasAdmissionSignal(text, national) {
   if (!text || typeof text !== 'string') return false;
+  // Sezione cantonale: lessico nazionale + termini DE/FR del profilo, e la
+  // cronaca solo se nel cantone e con impatto pratico (SECTION_PROFILE).
+  if (national === undefined && IS_CANTON) return SECTION_PROFILE.hasAdmission(text);
   const lower = text.toLowerCase();
   if (sectionAdmissionKeywords(national).some(k => lower.includes(k))) return true;
   const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
@@ -725,6 +742,7 @@ function hasAdmissionSignal(text, national) {
 
 function countAdmissionHits(text, national) {
   if (!text || typeof text !== 'string') return 0;
+  if (national === undefined && IS_CANTON) return SECTION_PROFILE.countAdmission(text);
   const lower = text.toLowerCase();
   const hits = sectionAdmissionKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
   const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
@@ -733,12 +751,14 @@ function countAdmissionHits(text, national) {
 
 function hasTopicalSignal(text, national) {
   if (!text || typeof text !== 'string') return false;
+  if (national === undefined && IS_CANTON) return SECTION_PROFILE.hasTopical(text);
   const lower = text.toLowerCase();
   return sectionTopicalKeywords(national).some(k => lower.includes(k));
 }
 
 function countTopicalHits(text, national) {
   if (!text || typeof text !== 'string') return 0;
+  if (national === undefined && IS_CANTON) return SECTION_PROFILE.countTopical(text);
   const lower = text.toLowerCase();
   return sectionTopicalKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
 }
@@ -895,7 +915,9 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
 async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
   const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
-  const prompt = IS_FRONTALIERE
+  const prompt = IS_CANTON
+    ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
+    : IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, per i FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino e per chi vive in Ticino e nelle province di confine.
 
 È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. È RILEVANTE anche se non nomina i frontalieri: viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su strade ticinesi, A2/A9, strade delle province di Varese, Como e VCO, treni TILO/FFS), posti di lavoro in aziende o enti in Ticino (licenziamenti, riorganizzazioni, appalti, assunzioni), finanze e politica del Canton Ticino (preventivo, imposte, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO (cronaca nera, incidenti stradali, sport, cultura ed eventi). ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
@@ -1134,9 +1156,12 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // strict-anchor match alone (e.g. bare "frontalier") must NOT bypass
     // the classifier (see comment block above).
     classifierCalls += 1;
+    // `lead`: l'attacco che alcune fonti cantonali danno insieme al titolo
+    // (feed a pagamento title+lead, API json): e' l'unico sommario che hanno.
+    // Le headline delle sezioni storiche non lo portano mai.
     const summary = Array.isArray(h?.relatedHeadlines) && h.relatedHeadlines.length > 0
       ? h.relatedHeadlines.slice(0, 2).join(' · ')
-      : '';
+      : (h?.lead ? String(h.lead) : '');
     plan.push({ h, headlineText, urlText, summary, kind: 'classify' });
   }
 
@@ -3091,11 +3116,34 @@ function write(rel, content) {
  * nazionali) invece di far fallire un articolo gia' pagato.
  */
 function registryCantonsOrNone(data, sourceUrl) {
+  let cantons = [];
   try {
-    return registryCantonsForArticle(data, sourceUrl);
+    cantons = registryCantonsForArticle(data, sourceUrl);
   } catch (err) {
     console.error(`  ⚠️ canton-classifier: ${err?.message || err} — voce senza campo canton`);
-    return [];
+    cantons = [];
+  }
+  // Un articolo di una sezione cantonale e' di quel cantone per costruzione
+  // (D13: implicito nella sezione): il codice della sezione sta sempre primo,
+  // gli altri che il classificatore riconosce restano come multi-label.
+  if (IS_CANTON) return [SECTION_PROFILE.canton, ...cantons.filter((c) => c !== SECTION_PROFILE.canton)];
+  return cantons;
+}
+
+/**
+ * Al primo articolo di una sezione cantonale i suoi file sorgente non esistono
+ * ancora (registro, mappa slug, meta per locale, SEO: path del core). Li crea
+ * VUOTI, nella forma che gli scrittori sotto riconoscono come «primo
+ * articolo»; un file gia' presente non si tocca. Chiamata dentro
+ * beginRegisterLock, cioe' solo quando si sta davvero per registrare.
+ */
+function ensureCantonSectionFiles() {
+  if (!IS_CANTON) return;
+  for (const [rel, content] of Object.entries(cantonSectionSkeletons(SECTION_NAME))) {
+    if (existsSync(resolve(rel))) continue;
+    mkdirSync(path.dirname(resolve(rel)), { recursive: true });
+    write(rel, content);
+    console.error(`  🆕 ${corpusPath(rel)}: file della sezione ${SECTION_NAME} creato vuoto (primo articolo)`);
   }
 }
 
@@ -3106,6 +3154,7 @@ function beginRegisterLock(id) {
   // OTHER section. Without the recorded section the cross-check would look
   // for a svizzera id in the frontaliere files, find it nowhere, and clear
   // the marker as "nothing written" over a split corpus.
+  ensureCantonSectionFiles();
   return beginRegisterLockImpl(PROJECT_ROOT, id, SECTION_NAME);
 }
 
@@ -3317,6 +3366,14 @@ export const ARTICLE_SECTION_CONFIGS = {
     sourceQuotaFile: 'data/swiss-article-source-quotas.json',
     sourceUrlsFile: 'data/swiss-article-source-urls.json',
   },
+  // Le 24 sezioni cantonali (P6b, D14): una voce per ogni `kind: 'canton'` di
+  // ARTICLE_SECTION_CORE_ALL — anche le INATTIVE, perche' il dedup fra sezioni
+  // (ledger URL->id, id globali, meta) deve vedere anche cio' che un cantone
+  // acceso ieri ha gia' scritto. Path dal core, profilo da
+  // generator/data/canton-sections.json, stato sotto data/sections/<id>/ (D18).
+  // Generare e' un'altra cosa: lo decide resolveCantonSectionGate (D16) in
+  // testa a main().
+  ...cantonSectionConfigs(),
 };
 
 // The filename validator in register-lock.mjs and this exported config must
@@ -3325,6 +3382,38 @@ export const ARTICLE_SECTION_CONFIGS = {
 // first article registration when a malformed section would already have
 // written unrelated state.
 assertSectionConfigKeys(ARTICLE_SECTION_CONFIGS);
+
+/**
+ * Il profilo di sezione per `kind`. frontaliere e national descrivono il
+ * comportamento storico (i rami `IS_FRONTALIERE` del file); canton e' il
+ * profilo costruito da lib/canton-section-profile.mjs sul lessico nazionale.
+ *
+ * @param {string} sectionName
+ */
+function buildSectionProfile(sectionName) {
+  const kind = ARTICLE_SECTION_CORE_ALL[sectionName]?.kind;
+  if (kind === 'canton') {
+    return buildCantonProfile(sectionName, {
+      nationalTopicalKeywords: SVIZZERA_TOPICAL_KEYWORDS,
+      // Ammissione senza i token eventi/cultura, come frontaliere (#189): un
+      // festival non e' un fatto con impatto pratico sul cantone.
+      nationalAdmissionKeywords: SVIZZERA_TOPICAL_KEYWORDS.filter((k) => !FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)),
+    });
+  }
+  if (kind !== 'frontaliere' && kind !== 'national') {
+    throw new Error(`sezione "${sectionName}" senza tipo nel core (frontaliere | national | canton)`);
+  }
+  const frontaliere = kind === 'frontaliere';
+  return Object.freeze({
+    kind,
+    section: sectionName,
+    // La macchina discovery / Google News, il ranker sulla domanda GSC e il
+    // pool evergreen restano quelli di prima per entrambe le sezioni storiche.
+    discoveryPool: true,
+    demandRanker: true,
+    evergreenPool: frontaliere ? 'frontaliere' : 'national',
+  });
+}
 
 /** Parse --section=<name> from argv (default frontaliere). Validates. */
 function parseSectionArg(argv) {
@@ -3343,7 +3432,69 @@ function parseSectionArg(argv) {
 
 const SECTION_NAME = parseSectionArg(process.argv.slice(2));
 const SECTION = ARTICLE_SECTION_CONFIGS[SECTION_NAME];
-const IS_FRONTALIERE = SECTION_NAME === 'frontaliere';
+// Il TIPO della sezione (frontaliere | national | canton) viene dal core, non
+// dal nome. I rami di sezione leggono SECTION_PROFILE (pool, ranker, lessico e
+// ancore della cantonale) o i due flag qui sotto, derivati dal tipo: i rami
+// solo-frontaliere (ancore fiscali, densita' frontalieri, cronaca locale TI)
+// restano su IS_FRONTALIERE, vero per la sola sezione frontaliere, quindi i
+// rami frontaliere e nazionale sono quelli di prima byte per byte; quelli in
+// cui la cantonale non puo' usare ne' il testo frontaliere ne' quello nazionale
+// (prompt, REGOLA #0, fact-check punto 11) leggono CANTON_LINES.
+const SECTION_PROFILE = buildSectionProfile(SECTION_NAME);
+const IS_FRONTALIERE = SECTION_PROFILE.kind === 'frontaliere';
+const IS_CANTON = SECTION_PROFILE.kind === 'canton';
+// Testi di prompt e log della sezione cantonale; null altrove.
+const CANTON_LINES = IS_CANTON ? cantonPromptLines(SECTION_PROFILE) : null;
+
+// ── --dry-run-scan ──
+// Misura una sezione senza toccarla: scansione delle fonti, recency e quota
+// undated, gate di ancora e topicale, ledger URL, memo del topic-gate, dedup
+// di tema, gate pre-spend (classifier LLM) e selezione della headline. Esce 0
+// alla selezione (o quando non resta niente da selezionare) con un riepilogo
+// per stadio, PRIMA di qualunque generazione, registrazione o scrittura di
+// stato. Il lock di registrazione non viene nemmeno risolto (vedi main()).
+const DRY_RUN_SCAN = process.argv.slice(2).includes('--dry-run-scan');
+const DRY_RUN_STAGES = {};
+
+async function exitDryRunScan({ chosen, tier, pool, poolSize }) {
+  const h = RUN_REPORT.headlines || {};
+  const src = RUN_REPORT.sources || {};
+  const summary = {
+    section: SECTION_NAME,
+    kind: SECTION_PROFILE.kind,
+    sources: {
+      configured: src.configured ?? 0,
+      productive: src.succeeded ?? 0,
+      sterile: src.sterile ?? 0,
+      failed: src.failed ?? 0,
+    },
+    stages: {
+      scanned: h.total ?? 0,
+      recent: h.recent ?? 0,
+      undated: h.undated ?? 0,
+      afterRecencyAndUndatedQuota: (h.usedRecent ?? 0) + (h.usedUndated ?? 0),
+      droppedAnchorless: h.droppedAnchorless ?? 0,
+      droppedNonTopical: h.droppedNonTopical ?? 0,
+      afterScanGates: DRY_RUN_STAGES.afterScanGates ?? 0,
+      afterUrlLedger: DRY_RUN_STAGES.afterUrlLedger ?? DRY_RUN_STAGES.afterScanGates ?? 0,
+      afterTopicGateMemo: DRY_RUN_STAGES.afterTopicGateMemo ?? 0,
+      afterTopicDedup: DRY_RUN_STAGES.afterTopicDedup ?? 0,
+      afterPreSpendGate: DRY_RUN_STAGES.afterPreSpendGate ?? 0,
+      selectionPool: poolSize,
+      selected: chosen ? 1 : 0,
+    },
+    selected: chosen ? { headline: chosen.headline || '', url: chosen.url || '', source: chosen.source || '', tier, pool } : null,
+    cantonSources: src.canton || undefined,
+  };
+  console.error(`DRY_RUN_SCAN_SUMMARY ${JSON.stringify({ section: summary.section, sources: summary.sources, stages: summary.stages })}`);
+  if (chosen) console.error(`DRY_RUN_SCAN_SELECTED section=${SECTION_NAME} tier=${tier} "${String(chosen.headline || '').slice(0, 120)}" ${chosen.url || ''}`);
+  process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
+  finalizeRunReport('dry-run', { notes: [...RUN_REPORT.notes, 'dry-run-scan: nessuna generazione'] });
+  // NON exitAfterFlush: il flush scriverebbe nel ledger condiviso dei modelli
+  // (Firestore) i punteggi delle chiamate di misura. Il dry-run non scrive
+  // stato, nemmeno quello: i punteggi restano in memoria e si perdono qui.
+  await exitAfterDrain(0);
+}
 // Stamped here rather than in the RUN_REPORT literal because SECTION_NAME is
 // parsed from argv ~700 lines later than the report is declared.
 RUN_REPORT.section = SECTION_NAME;
@@ -3351,6 +3502,29 @@ RUN_REPORT.section = SECTION_NAME;
 // Section-keyed source-tracking files (frontaliere defaults = original paths).
 const SOURCE_QUOTA_FILE = SECTION.sourceQuotaFile;
 const SOURCE_URLS_FILE = SECTION.sourceUrlsFile;
+
+// ── Stato globale partizionato per sezione (D18) ──
+// `quota-state.json` e i contatori `topic-candidates-*` erano UN file per
+// tutte le sezioni: con 24 scrittori cantonali paralleli il contatore
+// proven/discovery si ruba gli slot e ogni push litiga sugli stessi byte. Le
+// sezioni cantonali hanno i loro sotto data/sections/<id>/ (SECTION.statePaths);
+// frontaliere e svizzera non hanno statePaths e i loader ricevono `{}`, cioe'
+// i path di sempre. Gli wrapper tengono i nomi dei call site storici.
+const SECTION_STATE_PATHS = SECTION.statePaths || null;
+function sectionStateOpts(key) {
+  return SECTION_STATE_PATHS ? { path: SECTION_STATE_PATHS[key] } : {};
+}
+const SECTION_CONSUMED_PATH = SECTION_STATE_PATHS ? SECTION_STATE_PATHS.consumed : CONSUMED_TRACKER_PATH;
+function _loadQuotaState() { return _loadQuotaStateAt(sectionStateOpts('quotaState')); }
+function _saveQuotaState(state) { return _saveQuotaStateAt(state, sectionStateOpts('quotaState')); }
+function _loadExperimentalCounter() { return _loadExperimentalCounterAt(sectionStateOpts('experimentalCounter')); }
+function _persistExperimentalCounter(state) { return _persistExperimentalCounterAt(state, sectionStateOpts('experimentalCounter')); }
+function _loadEvergreenCounter() { return _loadEvergreenCounterAt(sectionStateOpts('evergreenCounter')); }
+function _persistEvergreenCounter(state) { return _persistEvergreenCounterAt(state, sectionStateOpts('evergreenCounter')); }
+function _loadTodayPicksByCluster() { return _loadTodayPicksByClusterAt(Date.now(), sectionStateOpts('todayPicks')); }
+function _persistTodayPicksByCluster(state) { return _persistTodayPicksByClusterAt(state, Date.now(), sectionStateOpts('todayPicks')); }
+function _loadEvergreenRejectedTracker() { return _loadEvergreenRejectedTrackerAt(sectionStateOpts('evergreenRejected')); }
+function _persistEvergreenRejectedTracker(tracker) { return _persistEvergreenRejectedTrackerAt(tracker, sectionStateOpts('evergreenRejected')); }
 
 if (!IS_FRONTALIERE) {
   console.error(`📦 Sezione attiva: ${SECTION_NAME} (${SECTION.label}) — hub /${SECTION.hubSlug.it}/`);
@@ -3371,6 +3545,14 @@ if (!IS_FRONTALIERE) {
 // condividere un marcatore: le costruisce headline-selection-protocol.mjs e le
 // asserisce generator/tests/headline-selection-protocol.test.mjs.
 function HEADLINE_SELECTION_PROMPT(headlineList, recentArticles) {
+  // Sezione cantonale: stesso protocollo H<n>, criteri del cantone (profilo).
+  if (IS_CANTON) {
+    return cantonHeadlineSelectionPrompt(SECTION_PROFILE, {
+      headlineList,
+      recentArticles,
+      jsonQuoteSafetyRule: JSON_QUOTE_SAFETY_RULE_IT,
+    });
+  }
   return IS_FRONTALIERE
     ? `Sei un editor del sito Frontaliere Ticino (frontaliereticino.ch).
 Devi scegliere UN articolo da queste headline di notizie ticinesi per scrivere un pezzo per i frontalieri.
@@ -3441,7 +3623,18 @@ const SECTION_META_IT_FILE = `services/locales/${SECTION.metaPrefix}-it.ts`; // 
 
 /** Read the active section's slug-data source (routerBlogData|routerSwissData). */
 function readSectionSlugData() {
-  return read(SECTION_SLUG_DATA_FILE);
+  return readSectionSourceFile(SECTION_SLUG_DATA_FILE);
+}
+
+/**
+ * Un file sorgente della sezione attiva. Una sezione cantonale che non ha
+ * ancora pubblicato non ha ancora i suoi file (li crea la prima registrazione,
+ * `ensureCantonSectionFiles`): per lei «assente» vuol dire «vuota», non un
+ * errore. Per le sezioni storiche il file assente resta un errore, come prima.
+ */
+function readSectionSourceFile(rel) {
+  if (IS_CANTON && !existsSync(resolve(rel))) return '';
+  return read(rel);
 }
 
 /**
@@ -3480,7 +3673,7 @@ function getAllArticleIds() {
 
 /** Read the active section's IT meta source (blog-meta-it | blog-meta-ch-it). */
 function readSectionMetaIt() {
-  return read(SECTION_META_IT_FILE);
+  return readSectionSourceFile(SECTION_META_IT_FILE);
 }
 
 /**
@@ -5742,6 +5935,11 @@ const EVERGREEN_FACTS_BRIEFS = [EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH]
  * un articolo frontaliero.
  */
 export function evergreenFactsBriefFor(sectionName) {
+  // Le sezioni cantonali (`canton-<codice>`, P6b) ricevono il brief svizzero:
+  // il loro ground truth e' federale e cantonale, non quello frontaliere
+  // Ticino-Italia. I fatti per cantone (fisco, pensioni) arrivano dai dataset
+  // di categoria (P9d/P9e), non da qui. Resta una funzione PURA del nome.
+  if (String(sectionName || '').startsWith('canton-')) return EVERGREEN_FACTS_BRIEF_CH;
   return sectionName === 'svizzera' ? EVERGREEN_FACTS_BRIEF_CH : EVERGREEN_FACTS_BRIEF;
 }
 
@@ -5865,7 +6063,9 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '') {
       + `— la coda oltre il cap è verificata solo dai gate deterministici`);
   }
 
-  const prompt = `${IS_FRONTALIERE
+  const prompt = `${IS_CANTON
+    ? CANTON_LINES.factCheckPersona
+    : IS_FRONTALIERE
     ? 'Sei un fact-checker senior specializzato in diritto fiscale svizzero e italiano, con focus specifico su frontalieri e Canton Ticino.'
     : 'Sei un fact-checker senior specializzato in affari svizzeri a livello nazionale (economia, fiscalità federale e cantonale, mercato del lavoro, diritto), per un pubblico di residenti in Svizzera.'}
 
@@ -5919,7 +6119,7 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
    - Ministri o funzionari con nomi plausibili ma non verificabili
    - Accordi/protocolli bilaterali mai firmati (controllare attentamente)
 
-${IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
+${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreen) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
 
    ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
 
@@ -6867,7 +7067,9 @@ async function buildStatsAstraPromptContent(token) {
   const parts = String(token || '').split('/').map((part) => decodeSyntheticSourceToken(part, 'ASTRA'));
   const cadence = parts[0] || 'monthly';
   const period = parts[1] || '';
-  const section = parts[2] === 'svizzera' || SECTION_NAME === 'svizzera' ? 'svizzera' : 'frontaliere';
+  // Le tabelle nazionali valgono anche per una sezione cantonale (P6b), che
+  // pero' non raggiunge mai una fonte ASTRA: niente pool evergreen ne' discovery.
+  const section = parts[2] === 'svizzera' || SECTION_NAME === 'svizzera' || IS_CANTON ? 'svizzera' : 'frontaliere';
   try {
     if (!snap.exists) {
       throw new Error('config/astra_vehicle_stats Firestore doc missing — refresh-astra-vehicle-stats has not run yet.');
@@ -7877,14 +8079,56 @@ export function selectUndatedBySourceQuota(undated, opts = {}) {
   return { picked, perSourceCounts, capped };
 }
 
+// ── Step 1c-bis: una fonte della sezione cantonale ──────────
+// Le fonti cantonali dichiarano parser e quirk (canton-sections.json, P5):
+// lib/canton-news-sources.mjs sa leggere i loro formati (json-entities,
+// json-api, sitemap a periodo, news sitemap) e RIUSA per RSS/Atom e link HTML
+// gli estrattori qui sopra. La contabilita' (produttive / sterili / fallite) e
+// la regola «se ci sono voci recenti, solo quelle» sono le stesse delle fonti
+// storiche; il resto della pipeline (recency, quota undated, gate) e' comune.
+const CANTON_RESERVE_MIN_HEADLINES = 8;
+// Un solo throttle per run: due fonti dello stesso host (nau.ch/ort/…)
+// condividono il crawl-delay di quell'host.
+let _cantonHostThrottle = null;
+
+async function fetchCantonSourceHeadlines(source, domain) {
+  if (!_cantonHostThrottle) _cantonHostThrottle = createHostThrottle();
+  if (!RUN_REPORT.sources.canton) RUN_REPORT.sources.canton = [];
+  const entry = { url: source.url, parser: source.parser, reserve: source.reserve === true, requests: 0, items: 0, recent: 0, status: 'failed' };
+  RUN_REPORT.sources.canton.push(entry);
+  const { headlines: raw, requests, notes } = await scanCantonSource(source, {
+    throttle: _cantonHostThrottle,
+    extractRssItems,
+    extractHeadlines,
+  });
+  entry.requests = requests;
+  entry.items = raw.length;
+  // Se ci sono voci recenti, solo quelle (come le fonti storiche RSS).
+  // Altrimenti NON tutte, a differenza delle storiche: una voce con una data
+  // piu' vecchia della finestra e' verificabilmente stantia e si scarta qui;
+  // restano le senza data, che a valle passano dalla quota undated per fonte.
+  const recent = raw.filter((h) => h.date && isWithinDays(h.date, MAX_ARTICLE_AGE_DAYS));
+  entry.recent = recent.length;
+  entry.status = recent.length > 0 || raw.some((h) => !h.date) ? 'ok' : 'sterile';
+  const budget = sourceRequestBudget(source);
+  const extra = [Number.isFinite(budget) ? `budget ${budget} richieste` : '', ...notes].filter(Boolean).join('; ');
+  console.error(`  📡 ${domain} [${source.parser}]: ${recent.length} recenti su ${raw.length}${extra ? ` (${extra})` : ''}`);
+  return recent.length > 0 ? recent : raw.filter((h) => !h.date);
+}
+
 // ── Step 1c: Scan all news sources for recent headlines ─────
 async function scanNewsSources() {
   // Section-keyed source list: frontaliere → Ticino/frontalieri feeds (default),
   // svizzera → national CH feeds (NEWS_SOURCES_SVIZZERA).
-  const newsSources = SECTION.newsSources;
+  // Sezione cantonale: le fonti sono oggetti del profilo ({ url, parser,
+  // quirks, reserve }), lette da lib/canton-news-sources.mjs; le fonti di
+  // riserva (`reserve: true`) entrano solo se le primarie non bastano (sotto).
+  const newsSources = IS_CANTON ? SECTION.newsSources.filter((src) => !src.reserve) : SECTION.newsSources;
   const rssFallbackMap = SECTION.rssFallbackMap;
   console.error(
-    IS_FRONTALIERE
+    IS_CANTON
+      ? CANTON_LINES.scanLabel
+      : IS_FRONTALIERE
       ? '🔍 Scansione fonti di notizie ticinesi...\n'
       : '🔍 Scansione fonti di notizie nazionali svizzere...\n',
   );
@@ -7892,83 +8136,92 @@ async function scanNewsSources() {
   RUN_REPORT.sources.configured = newsSources.length;
   RUN_REPORT.sources.scanned = newsSources.length;
   RUN_REPORT.sources.domains = newsSources.map((u) => {
-    try { return new URL(u).hostname.replace(/^www\d?\./, ''); } catch { return u; }
+    const raw = typeof u === 'string' ? u : u.url;
+    try { return new URL(raw).hostname.replace(/^www\d?\./, ''); } catch { return raw; }
   });
 
-  const fetches = newsSources.map(async (sourceUrl) => {
-    const domain = new URL(sourceUrl).hostname.replace('www.', '').replace('www3.', '');
+  const scanOneSource = async (sourceUrl) => {
+    const isCantonSource = typeof sourceUrl !== 'string';
+    const domain = new URL(isCantonSource ? sourceUrl.url : sourceUrl).hostname.replace('www.', '').replace('www3.', '');
     try {
-      const res = await fetch(sourceUrl, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-          'Accept': 'application/rss+xml, application/xml, text/xml, text/html, application/xhtml+xml',
-        },
-        signal: AbortSignal.timeout(15000),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const content = await res.text();
-
       let headlines;
-      if (isRssFeed(content)) {
-        // ── RSS/Atom feed: use dedicated parser ──
-        headlines = extractRssItems(content, sourceUrl);
-        // Filter RSS items to last 3 days (RSS has reliable dates)
-        const recent = headlines.filter(h => h.date && isWithinDays(h.date, MAX_ARTICLE_AGE_DAYS));
-        if (recent.length > 0) {
-          console.error(`  📡 ${domain}: ${recent.length} articoli RSS recenti (${headlines.length} totali)`);
-          headlines = recent;
-        } else if (headlines.length > 0) {
-          console.error(`  📡 ${domain}: ${headlines.length} articoli RSS (nessuno negli ultimi ${MAX_ARTICLE_AGE_DAYS} giorni)`);
-          // Fallback: scrape the base HTML site for this feed
-          const fallbackUrl = rssFallbackMap[sourceUrl];
-          if (fallbackUrl) {
-            try {
-              const fbRes = await fetch(fallbackUrl, {
-                headers: {
-                  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-                  'Accept': 'text/html,application/xhtml+xml',
-                },
-                signal: AbortSignal.timeout(15000),
-              });
-              if (fbRes.ok) {
-                const fbHtml = await fbRes.text();
-                headlines = extractHeadlines(fbHtml, fallbackUrl);
-                console.error(`  🌐 ${domain}: HTML fallback → ${headlines.length} articoli da ${new URL(fallbackUrl).hostname}`);
+      if (isCantonSource) {
+        // Fonte di una sezione cantonale: parser e quirk dal profilo, letta da
+        // lib/canton-news-sources.mjs (vedi fetchCantonSourceHeadlines). La
+        // contabilita' produttive/sterili/fallite sotto e' la stessa.
+        headlines = await fetchCantonSourceHeadlines(sourceUrl, domain);
+      } else {
+        const res = await fetch(sourceUrl, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+            'Accept': 'application/rss+xml, application/xml, text/xml, text/html, application/xhtml+xml',
+          },
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const content = await res.text();
+
+        if (isRssFeed(content)) {
+          // ── RSS/Atom feed: use dedicated parser ──
+          headlines = extractRssItems(content, sourceUrl);
+          // Filter RSS items to last 3 days (RSS has reliable dates)
+          const recent = headlines.filter(h => h.date && isWithinDays(h.date, MAX_ARTICLE_AGE_DAYS));
+          if (recent.length > 0) {
+            console.error(`  📡 ${domain}: ${recent.length} articoli RSS recenti (${headlines.length} totali)`);
+            headlines = recent;
+          } else if (headlines.length > 0) {
+            console.error(`  📡 ${domain}: ${headlines.length} articoli RSS (nessuno negli ultimi ${MAX_ARTICLE_AGE_DAYS} giorni)`);
+            // Fallback: scrape the base HTML site for this feed
+            const fallbackUrl = rssFallbackMap[sourceUrl];
+            if (fallbackUrl) {
+              try {
+                const fbRes = await fetch(fallbackUrl, {
+                  headers: {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+                    'Accept': 'text/html,application/xhtml+xml',
+                  },
+                  signal: AbortSignal.timeout(15000),
+                });
+                if (fbRes.ok) {
+                  const fbHtml = await fbRes.text();
+                  headlines = extractHeadlines(fbHtml, fallbackUrl);
+                  console.error(`  🌐 ${domain}: HTML fallback → ${headlines.length} articoli da ${new URL(fallbackUrl).hostname}`);
+                }
+              } catch (fbErr) {
+                console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
               }
-            } catch (fbErr) {
-              console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
+            } else {
+              // No fallback — use all RSS items even if older
+              console.error(`  📡 ${domain}: nessun fallback, uso tutti gli articoli RSS`);
             }
           } else {
-            // No fallback — use all RSS items even if older
-            console.error(`  📡 ${domain}: nessun fallback, uso tutti gli articoli RSS`);
-          }
-        } else {
-          console.error(`  📡 ${domain}: RSS vuoto (0 articoli)`);
-          // Try fallback HTML
-          const fallbackUrl = rssFallbackMap[sourceUrl];
-          if (fallbackUrl) {
-            try {
-              const fbRes = await fetch(fallbackUrl, {
-                headers: {
-                  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-                  'Accept': 'text/html,application/xhtml+xml',
-                },
-                signal: AbortSignal.timeout(15000),
-              });
-              if (fbRes.ok) {
-                const fbHtml = await fbRes.text();
-                headlines = extractHeadlines(fbHtml, fallbackUrl);
-                console.error(`  🌐 ${domain}: HTML fallback → ${headlines.length} articoli`);
+            console.error(`  📡 ${domain}: RSS vuoto (0 articoli)`);
+            // Try fallback HTML
+            const fallbackUrl = rssFallbackMap[sourceUrl];
+            if (fallbackUrl) {
+              try {
+                const fbRes = await fetch(fallbackUrl, {
+                  headers: {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+                    'Accept': 'text/html,application/xhtml+xml',
+                  },
+                  signal: AbortSignal.timeout(15000),
+                });
+                if (fbRes.ok) {
+                  const fbHtml = await fbRes.text();
+                  headlines = extractHeadlines(fbHtml, fallbackUrl);
+                  console.error(`  🌐 ${domain}: HTML fallback → ${headlines.length} articoli`);
+                }
+              } catch (fbErr) {
+                console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
               }
-            } catch (fbErr) {
-              console.error(`  ⚠️ ${domain}: fallback HTML fallito: ${fbErr.message}`);
             }
           }
+        } else {
+          // ── HTML page: use existing <a href> parser ──
+          headlines = extractHeadlines(content, sourceUrl);
+          console.error(`  🌐 ${domain}: ${headlines.length} articoli HTML`);
         }
-      } else {
-        // ── HTML page: use existing <a href> parser ──
-        headlines = extractHeadlines(content, sourceUrl);
-        console.error(`  🌐 ${domain}: ${headlines.length} articoli HTML`);
       }
 
       // ── Il terzo stato (issue #190 punto 3) ──
@@ -7991,11 +8244,30 @@ async function scanNewsSources() {
       RUN_REPORT.sources.failed += 1;
       return [];
     }
-  });
+  };
+  const fetches = newsSources.map(scanOneSource);
 
   const results = await Promise.all(fetches);
   for (const batch of results) {
     allHeadlines.push(...batch);
+  }
+
+  // Fonti di riserva della sezione cantonale: entrano solo se le primarie
+  // hanno prodotto meno di CANTON_RESERVE_MIN_HEADLINES headline (il profilo le
+  // marca `reserve` perche' sono lente, poco selettive o intermittenti).
+  if (IS_CANTON) {
+    const reserves = SECTION.newsSources.filter((src) => src.reserve);
+    if (reserves.length > 0 && allHeadlines.length < CANTON_RESERVE_MIN_HEADLINES) {
+      console.error(`  🧰 ${allHeadlines.length} headline dalle fonti primarie (< ${CANTON_RESERVE_MIN_HEADLINES}): scansiono ${reserves.length} fonti di riserva`);
+      RUN_REPORT.sources.configured += reserves.length;
+      RUN_REPORT.sources.scanned += reserves.length;
+      for (const src of reserves) {
+        try { RUN_REPORT.sources.domains.push(new URL(src.url).hostname.replace(/^www\d?\./, '')); } catch { RUN_REPORT.sources.domains.push(src.url); }
+      }
+      for (const batch of await Promise.all(reserves.map(scanOneSource))) {
+        allHeadlines.push(...batch);
+      }
+    }
   }
 
   // Le tre classi in chiaro, sempre — anche a zero sterili, perche' e' la riga
@@ -8014,17 +8286,25 @@ async function scanNewsSources() {
   // tag but whose title/body contains the keyword. Standard RSS+tag-page
   // crawl misses these. Currently covers comozero.it + malpensa24.it.
   // Same headline shape as extractRssItems, drop-in merge.
-  try {
-    const wpHeadlines = await fetchWordpressSearchHeadlines();
-    if (wpHeadlines.length > 0) {
-      console.error(`  🔌 wp-search: ${wpHeadlines.length} articoli totali da ricerca WordPress`);
-      allHeadlines.push(...wpHeadlines);
+  // Non per le sezioni cantonali: le due testate della ricerca WordPress
+  // (comozero, malpensa24) sono fonti della sezione frontaliere.
+  if (!IS_CANTON) {
+    try {
+      const wpHeadlines = await fetchWordpressSearchHeadlines();
+      if (wpHeadlines.length > 0) {
+        console.error(`  🔌 wp-search: ${wpHeadlines.length} articoli totali da ricerca WordPress`);
+        allHeadlines.push(...wpHeadlines);
+      }
+    } catch (err) {
+      console.error(`  ⚠️ wp-search fallito globalmente: ${err.message}`);
     }
-  } catch (err) {
-    console.error(`  ⚠️ wp-search fallito globalmente: ${err.message}`);
   }
 
-  console.error(`\n  📊 Totale: ${allHeadlines.length} articoli trovati da ${newsSources.length} fonti + WP search`);
+  console.error(
+    IS_CANTON
+      ? `\n  📊 Totale: ${allHeadlines.length} articoli trovati da ${RUN_REPORT.sources.configured} fonti del cantone`
+      : `\n  📊 Totale: ${allHeadlines.length} articoli trovati da ${newsSources.length} fonti + WP search`,
+  );
 
   // Filter: only keep articles from the last 3 days
   const recent = allHeadlines.filter(h => {
@@ -8101,11 +8381,19 @@ async function scanNewsSources() {
       // legacy anchor regex, and otherwise aliases such as Taverne are
       // discarded before `hasAdmissionSignal()` can see them.
       const localNewsCandidate = IS_FRONTALIERE && isLocalNews(h.headline || text);
-      if (dropAnchorless && !hasDomainAnchor(text) && !localNewsCandidate) {
+      // Sezione cantonale: l'ancora e' il cantone (luogo nel testo, testata o
+      // ente del solo cantone, o un segnale frontalieri per le fonti del lato
+      // estero), non il lessico Ticino/confine di hasDomainAnchor. Il lead, dove
+      // la fonte lo da', e' parte del testo giudicato.
+      const gateText = IS_CANTON && h.lead ? `${text} ${h.lead}` : text;
+      const anchored = IS_CANTON
+        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url)
+        : hasDomainAnchor(text) || localNewsCandidate;
+      if (dropAnchorless && !anchored) {
         droppedAnchor += 1;
         continue;
       }
-      if (dropNonTopical && !hasAdmissionSignal(text)) {
+      if (dropNonTopical && !hasAdmissionSignal(gateText)) {
         droppedTopic += 1;
         continue;
       }
@@ -8113,7 +8401,7 @@ async function scanNewsSources() {
     }
     if (droppedAnchor > 0) {
       RUN_REPORT.headlines.droppedAnchorless = (RUN_REPORT.headlines.droppedAnchorless || 0) + droppedAnchor;
-      console.error(`  🚫 Anchor-gate: ${droppedAnchor} headline scartate (nessun token Ticino/frontaliere/comune CH/città IT confine)`);
+      console.error(`  🚫 Anchor-gate: ${droppedAnchor} headline scartate (${IS_CANTON ? CANTON_LINES.anchorLabel : 'nessun token Ticino/frontaliere/comune CH/città IT confine'})`);
     }
     if (droppedTopic > 0) {
       RUN_REPORT.headlines.droppedNonTopical = (RUN_REPORT.headlines.droppedNonTopical || 0) + droppedTopic;
@@ -8121,7 +8409,9 @@ async function scanNewsSources() {
       // "lavoro/fisco/permess/economi/transport/policy" while running on the
       // national section, which is how the mismatch stayed invisible in 224
       // runs of logs.
-      const lexicon = IS_FRONTALIERE
+      const lexicon = IS_CANTON
+        ? CANTON_LINES.lexiconLabel
+        : IS_FRONTALIERE
         ? 'lavoro/fisco/permess/economi/transport/policy'
         : `nazionale: ${SECTION_NAME} — economia/fisco/energia/sanità/scuola/migrazione/istituzioni`;
       console.error(`  🚫 Topical-gate: ${droppedTopic} headline scartate (nessun token ${lexicon})`);
@@ -8130,7 +8420,16 @@ async function scanNewsSources() {
   };
 
   // If no recent articles found, fall back to all headlines (homepage articles are likely recent)
-  if (recent.length === 0) {
+  //
+  // Non per una sezione cantonale: le sue fonti sono spesso elenchi
+  // istituzionali e archivi, e «tutte le headline» vorrebbe dire voci datate
+  // vecchie e navigazione al ranker. Li' senza voci recenti passano solo le
+  // senza data, con la quota per fonte qui sotto (le datate vecchie sono gia'
+  // state scartate per fonte in fetchCantonSourceHeadlines).
+  if (recent.length === 0 && IS_CANTON) {
+    console.error('  ⚠️  Nessun articolo con data negli ultimi 3 giorni — sezione cantonale: solo le headline senza data, con la quota per fonte\n');
+  }
+  if (recent.length === 0 && !IS_CANTON) {
     console.error('  ⚠️  Nessun articolo con data negli ultimi 3 giorni — uso tutti gli headline\n');
     RUN_REPORT.headlines.usedRecent = 0;
     RUN_REPORT.headlines.usedUndated = undated.length;
@@ -8877,12 +9176,16 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
   // resta solo cio' che quel messaggio non dice — testata, sezione, e il
   // compito. Ripetere il ruolo in inglese nel messaggio `user` non aggiungeva
   // vincolo, aggiungeva token su ogni singola chiamata.
-  const systemRoleLine = IS_FRONTALIERE
+  const systemRoleLine = IS_CANTON
+    ? CANTON_LINES.systemRoleLine
+    : IS_FRONTALIERE
     ? `You write for "Frontaliere Ticino" (frontaliereticino.ch). Based on the following source, write a blog article.`
     : `You write for "Frontaliere Ticino" (frontaliereticino.ch), national Switzerland section — economy, fiscal policy, labour market, cost of living, housing, federal & cantonal politics, for a general Swiss-resident audience. Based on the following source, write a blog article.`;
 
   const reachMinimumImplicationsLine = localNewsSource
     ? `- Racconta i fatti della fonte e cosa cambia per chi vive o si sposta nella zona; i frontalieri solo se la fonte ne parla`
+    : IS_CANTON
+    ? CANTON_LINES.reachLine
     : IS_FRONTALIERE
     ? `- Analizza le IMPLICAZIONI PRATICHE per i frontalieri (cosa cambia nella vita quotidiana)`
     : `- Analizza le IMPLICAZIONI PRATICHE a livello nazionale/cantonale (cosa cambia nella vita di chi vive o lavora in Svizzera)`;
@@ -8901,7 +9204,9 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
     ? `- NON aggiungere procedure, checklist, scadenze o strumenti del sito che la notizia non richiede`
     : `- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`;
 
-  const topicalRelevanceGate = IS_FRONTALIERE
+  const topicalRelevanceGate = IS_CANTON
+    ? CANTON_LINES.topicalRelevanceGate
+    : IS_FRONTALIERE
     ? `═══ REGOLA #0 — GATE DI RILEVANZA TOPICA (BLOCCANTE — PRIMA DI TUTTO) ═══
 
 Prima di scrivere, valuta se la fonte ha un nesso REALE e VERIFICABILE con chi vive al confine e lavora in Ticino, anche se non nomina i frontalieri. Esempi di nesso reale:
@@ -8951,7 +9256,9 @@ NON inventare un angolo "implicazioni pratiche" su un evento irrilevante per rie
   // DEVE riguardare…»), che e' il compito di REGOLA #0 e di
   // `editorialFundamentalBlock` — un terzo posto in cui dirlo non aggiunge
   // vincolo, aggiunge token.
-  const styleColorLine = IS_FRONTALIERE
+  const styleColorLine = IS_CANTON
+    ? CANTON_LINES.styleColorLine
+    : IS_FRONTALIERE
     ? `Colore locale: valichi (Brogeda, Gaggiolo), comuni (Chiasso, Mendrisio, Lugano, Bellinzona, Locarno), enti (Canton Ticino, SUPSI, USI, EOC, DFE, SECO).`
     : `Colore nazionale: cantoni e città (Zurigo, Ginevra, Berna, Basilea, Losanna, Lugano…), istituzioni federali (Consiglio federale, Parlamento, Amministrazione federale, UST/BFS, SECO, BNS/SNB), uffici cantonali.`;
 
@@ -9013,7 +9320,9 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   // qui dentro lo schema JSON e di nuovo in REGOLE FINALI
   // (`imagePromptFinalLine`) — con l'unico frammento non ridondante («non
   // sembrare AI») che ora vive qui.
-  const imagePromptSchemaLine = IS_FRONTALIERE
+  const imagePromptSchemaLine = IS_CANTON
+    ? CANTON_LINES.imagePromptSchemaLine
+    : IS_FRONTALIERE
     ? `"imagePrompt": "Prompt per immagine fotorealistica DSLR ambientata in Ticino, che non sembri AI. Max 2 frasi EN.",`
     : `"imagePrompt": "Prompt per immagine editoriale fotorealistica DSLR di una scena svizzera nazionale/cantonale pertinente al tema, che non sembri AI. Max 2 frasi EN.",`;
 
@@ -9349,6 +9658,8 @@ Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore r
 
   const systemRoleQualifier = localNewsSource
     ? 'di cronaca locale in Ticino e nelle province di Varese, Como e VCO'
+    : IS_CANTON
+    ? CANTON_LINES.systemRoleQualifier
     : IS_FRONTALIERE
     ? 'di lavoro transfrontaliero in Ticino'
     : 'di affari svizzeri a livello nazionale';
@@ -10818,9 +11129,18 @@ async function expandShortItalianContent(data, targetWords, { boundToText = fals
     // and frontaliere context the local branch forbids.
     const expandPersona = localNews
       ? 'Sei un giornalista di cronaca locale in Ticino e nelle province di Varese, Como e VCO.'
+      : IS_CANTON
+      ? CANTON_LINES.expandPersona
       : IS_FRONTALIERE
       ? 'Sei un giornalista finanziario esperto di lavoro transfrontaliero in Ticino.'
       : 'Sei un giornalista finanziario esperto di affari svizzeri a livello nazionale.';
+    // Sezione cantonale: l'espansione gira dopo il fact-check e senza un nuovo
+    // controllo, quindi come per la cronaca locale non puo' chiedere fatti
+    // nuovi — la riga nazionale («cantoni o citta' svizzere, normative con
+    // date e importi») porterebbe altri cantoni e dettagli non nella fonte.
+    const enrichmentLine = IS_CANTON && !boundToText
+      ? CANTON_LINES.expandEnrichmentLine
+      : expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews);
     const expandPrompt = `${expandPersona}
 
 TESTO ATTUALE (${currentWords} parole):
@@ -10831,7 +11151,7 @@ RIFERIMENTO DEL TITOLO (SOLO INPUT, NON RIPETERE): ${it.title || ''}
 ISTRUZIONI:
 - Riscrivi ed ESPANDI questo testo a circa ${targetFieldWords} parole (MASSIMO ${MAX_BODY_FIELD_WORDS} parole — NON superare questo limite)
 - Mantieni lo stesso tono, stile e struttura
-${expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews)}
+${enrichmentLine}
 - NON aggiungere frasi generiche o filler — solo informazioni utili e verificabili
 - Mantieni la formattazione esistente (##, -, >, 📊, 💡, ⚠️). Citazioni (>) MAX 1 per articolo, solo per citazioni dirette brevi
 - GRASSETTO: massimo 2-3 parole in grassetto nell'intero testo, preferisci ZERO
@@ -13578,7 +13898,9 @@ async function generateArticleImage(data) {
     if (entry.keywords.some(k => subjectTitle.includes(k))) { topicSubject = entry.queries[0]; break; }
   }
   const subjectLine = topicSubject ? `\n\nMAIN SUBJECT: ${topicSubject}. This must be the dominant element in the frame.` : '';
-  const fallbackImagePrompt = IS_FRONTALIERE
+  const fallbackImagePrompt = IS_CANTON
+    ? CANTON_LINES.fallbackImagePrompt
+    : IS_FRONTALIERE
     ? `Professional editorial photo for a news article about cross-border workers in Ticino, Switzerland. Lake Lugano, warm lighting.`
     : `Professional editorial photo for a Swiss national news article. A recognizable Swiss national or cantonal scene appropriate to the topic, natural warm lighting.`;
   const prompt = (data.imagePrompt || fallbackImagePrompt)
@@ -14941,8 +15263,18 @@ function gitAddAll(data) {
   }
   // Phase 3 — Smarter generator: stage the topic-candidates consumed tracker
   // when it exists (created by the topic-candidate selection branch in main).
-  if (existsSync(resolve(CONSUMED_TRACKER_PATH))) {
-    files.push(CONSUMED_TRACKER_PATH);
+  if (existsSync(resolve(SECTION_CONSUMED_PATH))) {
+    files.push(SECTION_CONSUMED_PATH);
+  }
+  // Sezione cantonale (D18): il resto del suo stato partizionato (quota-state,
+  // contatori, picks del giorno, rifiuti evergreen/topic-gate) vive sotto
+  // data/sections/<id>/ e va nello STESSO commit dell'articolo, o il run dopo
+  // ripartirebbe da contatori e memorie vecchie. Le storiche non hanno
+  // statePaths: i loro file condivisi li prende il workflow, come prima.
+  if (SECTION_STATE_PATHS) {
+    for (const [key, rel] of Object.entries(SECTION_STATE_PATHS)) {
+      if (key !== 'consumed' && existsSync(resolve(rel))) files.push(rel);
+    }
   }
   // Include generated blog hero image (web path → filesystem path under public/).
   // WebP-only: optimizeImageToWebp emits a single file; no JPG sidecar.
@@ -15281,15 +15613,54 @@ async function exitAfterFlush(code) {
 }
 
 async function main() {
+  // Sezione cantonale spenta (D16): `enabled` nel profilo o l'elenco di
+  // Remote Config CANTON_ARTICLE_SECTIONS_ENABLED, default nessun cantone.
+  // Prima di ogni lettura o scrittura: una sezione spenta non tocca niente ed
+  // esce 0 con un marcatore che il workflow (P8) e i log possono contare.
+  if (IS_CANTON) {
+    const gate = resolveCantonSectionGate(SECTION_NAME);
+    if (gate.unknown.length > 0) {
+      console.error(`  ⚠️ ${CANTON_SECTIONS_ENABLED_ENV}: token non riconosciuti ignorati: ${gate.unknown.join(', ')}`);
+    }
+    if (!gate.enabled) {
+      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo enabled=false, assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
+      finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME}`] });
+      await exitAfterFlush(0);
+      return;
+    }
+    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${gate.via === 'profile' ? 'profilo enabled' : CANTON_SECTIONS_ENABLED_ENV})`);
+    // Lo stato della sezione vive in data/sections/<id>/ (D18) e write() non
+    // crea cartelle: senza questa riga il primo salvataggio del ledger URL->id
+    // fallirebbe (in silenzio, e' un best-effort) e il dedup della fonte
+    // ripartirebbe da zero a ogni run. Non in dry-run: li' non si scrive niente.
+    if (!DRY_RUN_SCAN) mkdirSync(path.dirname(resolve(SOURCE_URLS_FILE)), { recursive: true });
+  }
+
   // Prima di qualsiasi altra cosa: se una registrazione precedente e' stata
   // interrotta a meta' delle 9 scritture, il corpus e' incoerente e generare
   // sopra lo peggiorerebbe soltanto (issue #562). Il controllo e'
   // deterministico e gratuito, quindi sta qui e non dopo la generazione.
-  resolveRegisterLockAtStartup();
+  // `--dry-run-scan` non registra niente e non deve nemmeno ripulire un marker
+  // orfano: e' una misura, non un run.
+  if (DRY_RUN_SCAN) {
+    console.error(`🧪 DRY_RUN_SCAN section=${SECTION_NAME}: scansione fonti, filtri, gate pre-spend e selezione — nessuna generazione, nessuna scrittura`);
+  } else {
+    resolveRegisterLockAtStartup();
+  }
 
   // Positional <url> = first non-flag argv (so `--section=` can precede it).
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
   let headlines = null;
+
+  // `--dry-run-scan` misura la SCANSIONE delle fonti: con una URL esplicita
+  // non c'e' scansione, e la modalita' manuale arriverebbe alla generazione e
+  // alla scrittura del corpus. La combinazione e' un errore d'uso, non un run.
+  if (DRY_RUN_SCAN && url) {
+    console.error(`❌ --dry-run-scan non accetta una URL (${url}): misura la scansione delle fonti della sezione, che una URL esplicita salta.`);
+    finalizeRunReport('error', { notes: [...RUN_REPORT.notes, 'dry-run-scan con URL esplicita: rifiutato'] });
+    await exitAfterFlush(2);
+    return;
+  }
 
   // Disk space pre-flight: when LOCAL_LLM_ENABLED the model (e.g. qwen2.5:14b,
   // ~9GB) can fill the runner disk, causing ENOSPC on later stdout writes instead
@@ -15367,7 +15738,9 @@ async function main() {
     const quotaState = _loadQuotaState();
     const evidenceForDiscovery = _evidenceIndex; // alias — already loaded above
     const slotDecision = _decideSlot(quotaState);
-    const slotKind = forceEvergreen ? 'proven' : slotDecision.slotKind;
+    // Sezione cantonale: sempre `proven` (le sue fonti), il pool discovery e'
+    // costruito sulla domanda GSC delle sezioni storiche (SECTION_PROFILE).
+    const slotKind = forceEvergreen || !SECTION_PROFILE.discoveryPool ? 'proven' : slotDecision.slotKind;
     let chosenPool = slotKind;
     let _discoveryHeadlines = null;
     let _discoveryCandidatesById = new Map();
@@ -15448,13 +15821,17 @@ async function main() {
       } else {
         headlines = _discoveryHeadlines;
       }
+      DRY_RUN_STAGES.afterScanGates = (headlines || []).length;
     } else {
       console.error(
-        IS_FRONTALIERE
+        IS_CANTON
+          ? CANTON_LINES.phase1Label
+          : IS_FRONTALIERE
           ? '🤖 Fase 1: Ricerca articolo da fonti ticinesi...\n'
           : '🤖 Fase 1: Ricerca articolo da fonti nazionali svizzere...\n',
       );
       headlines = await scanNewsSources();
+      DRY_RUN_STAGES.afterScanGates = headlines.length;
       // Cross-pool dedup applied for proven slot too: drop any news headline
       // already covered by an orphan-query (these get a guaranteed slot via
       // the discovery pool when their slot comes around). Cheap — orphan list
@@ -15492,14 +15869,14 @@ async function main() {
       // past its deadline — the direct-source pool + evergreen safety net still
       // produce an article. (_buildDiscoveryPool has its own per-fetch timeouts
       // too; this is the belt to that suspenders.)
-      if (slotKind === 'proven' && evidenceForDiscovery && wallBudgetExceeded()) {
+      if (SECTION_PROFILE.discoveryPool && slotKind === 'proven' && evidenceForDiscovery && wallBudgetExceeded()) {
         // Observability: make the budget-skip visible (the removed dead branch
         // used to log its own skip); silence here would hide why no Google-News
         // candidates entered the pool on a budget-tight run.
         console.error('GOOGLE_NEWS_INJECT skipped=wall_budget_exceeded');
         RUN_REPORT.notes.push('Google-News injection skipped: wall budget exceeded before pool build');
       }
-      if (slotKind === 'proven' && evidenceForDiscovery && !wallBudgetExceeded()) {
+      if (SECTION_PROFILE.discoveryPool && slotKind === 'proven' && evidenceForDiscovery && !wallBudgetExceeded()) {
         try {
           _provenHeadlinesForDiscovery = headlines.slice();
           const provenStrings = headlines.map((h) => String(h.headline || ''));
@@ -15546,6 +15923,7 @@ async function main() {
       if (beforeSourceFilter > headlines.length) {
         console.error(`  📋 Post-filtro URL: ${headlines.length}/${beforeSourceFilter} headline rimanenti\n`);
       }
+      DRY_RUN_STAGES.afterUrlLedger = headlines.length;
 
       // ── Pre-filter: fonti gia' rifiutate dal topic-gate (REGOLA #0) ──
       // Il verdetto di un abort e' sulla fonte, e nessun modello puo'
@@ -15585,9 +15963,11 @@ async function main() {
         }
         return true;
       });
+      DRY_RUN_STAGES.afterTopicGateMemo = beforeTopicFilter;
       if (beforeTopicFilter > headlines.length) {
         console.error(`  📋 Post-filtro topic: ${headlines.length}/${beforeTopicFilter} headline rimanenti\n`);
       }
+      DRY_RUN_STAGES.afterTopicDedup = headlines.length;
 
       // ── Pre-spend topic gate (REGOLA #0 short-circuit, 2026-05-15) ──
       // Before the Tentativo loop burns ~5-7k tokens per headline on
@@ -15608,6 +15988,7 @@ async function main() {
       if (beforePreSpendGate > headlines.length) {
         console.error(`  📋 Post-pre-spend gate: ${headlines.length}/${beforePreSpendGate} headline rimanenti\n`);
       }
+      DRY_RUN_STAGES.afterPreSpendGate = headlines.length;
 
       const quotaPools = buildSourceQuotaPools(headlines);
       const poolPlan = [];
@@ -15675,10 +16056,10 @@ async function main() {
             let rankerTier = null;
             let rankerScoreObj = null;
             let rankerCluster = null;
-            if (_demandVocabulary || _experimentalCandidates || _evidenceIndex) {
+            if (SECTION_PROFILE.demandRanker && (_demandVocabulary || _experimentalCandidates || _evidenceIndex)) {
               try {
                 console.error(`\n🎯 Ranker [${pool.name}] (tentativo ${attempt}/${MAX_DUPLICATE_RETRIES}): pool=${availableHeadlines.length} headlines mode=${_evidenceIndex ? 'cascade' : 'legacy'}`);
-                const consumed = _topicLoadConsumedTracker(CONSUMED_TRACKER_PATH);
+                const consumed = _topicLoadConsumedTracker(SECTION_CONSUMED_PATH);
                 const picks = await _rankAndSelectHeadlines(availableHeadlines, _demandVocabulary, {
                   experimentalCandidates: _experimentalCandidates,
                   experimentalCounter: _experimentalCounterState.count,
@@ -15744,6 +16125,9 @@ async function main() {
               rankerTier = 'llm-fallback';
             }
 
+            // --dry-run-scan: la selezione e' l'ultimo stadio misurato.
+            if (DRY_RUN_SCAN) await exitDryRunScan({ chosen, tier: rankerTier, pool: pool.name, poolSize: availableHeadlines.length });
+
             if (chosen?.url?.startsWith('evergreen://')) {
               const keyword = chosen.headline || chosen.keyword || process.env._EVERGREEN_KEYWORD || '';
               const check = preFlightEvergreenCheck({
@@ -15807,9 +16191,9 @@ async function main() {
                 if (_pickedTier === 'experimental' && _picked && _picked._experimentalCandidate) {
                   const exp = _picked._experimentalCandidate;
                   if (exp.id) {
-                    const consumed = _topicLoadConsumedTracker(CONSUMED_TRACKER_PATH);
+                    const consumed = _topicLoadConsumedTracker(SECTION_CONSUMED_PATH);
                     const updated = _topicAppendConsumedId(consumed, exp.id);
-                    _topicPersistConsumedTracker(updated, CONSUMED_TRACKER_PATH);
+                    _topicPersistConsumedTracker(updated, SECTION_CONSUMED_PATH);
                   }
                 }
                 // Phase 3 — increment quota counter ONLY now (success). Spec § 6.6:
@@ -16015,8 +16399,24 @@ async function main() {
     const candidateSuccess = false;
 
     // ── Phase 2: Evergreen fallback — only reached if news scan produced nothing usable ──
-    if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
+    if (!newsSuccess && !candidateSuccess && DRY_RUN_SCAN) {
+      // Nessuna headline e' arrivata alla selezione: la misura finisce qui,
+      // anche a budget wall-clock esaurito (il riepilogo e' il contratto).
+      await exitDryRunScan({ chosen: null, tier: null, pool: null, poolSize: 0 });
+    } else if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
       console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
+    } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool) {
+      // Sezione cantonale: nessun pool evergreen generico per costruzione (i
+      // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del
+      // cantone sono gli hub tematici di P10). Nessuna news utilizzabile = nessun
+      // articolo in questo run, dichiarato come le altre ragioni legittime.
+      console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
+      finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
+      // Ragione legittima #7 di sette — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
+      // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
+      // del sito, dove create-article non ha sezioni cantonali, e il suo elenco
+      // resta quello delle sei ragioni comuni ai due repo.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess) {
       console.error('📚 Fase 2: Fallback evergreen — generazione articolo SEO long-tail...\n');
 
@@ -16105,7 +16505,7 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        // Ragione legittima #1 di sei: niente da pubblicare. Exit 4 e non 0 —
+        // Ragione legittima #1 di sette: niente da pubblicare. Exit 4 e non 0 —
         // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
         // e' un percorso che non ha dichiarato niente, ed e' rosso.
         await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -16249,7 +16649,7 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            // Ragione legittima #2 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+            // Ragione legittima #2 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
             await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
@@ -16258,7 +16658,7 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      // Ragione legittima #3 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #3 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
@@ -16591,7 +16991,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
       // `failure` contro 254s per una `success`.
       //
-      // NON e' un `success` muto e non e' una delle sei ragioni legittime: si
+      // NON e' un `success` muto e non e' una delle sette ragioni legittime: si
       // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
       // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
       // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
@@ -18565,7 +18965,7 @@ if (invokedDirectly) {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
-      + ' senza aver prodotto un articolo e senza dichiarare una delle sei ragioni legittime'
+      + ' senza aver prodotto un articolo e senza dichiarare una delle sette ragioni legittime'
       + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
@@ -18731,7 +19131,7 @@ if (invokedDirectly) {
     if (isLegitimateQuotaDeferral(e)) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
-      // Ragione legittima #6 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #6 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     finalizeRunReport('error', {
@@ -18759,7 +19159,7 @@ if (invokedDirectly) {
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #5 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #5 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
@@ -18769,7 +19169,7 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #4 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #4 di sette — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });

@@ -62,6 +62,7 @@ import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs
 import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scripts/lib/exhaustion-disposition.mjs';
 import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 import { isLocalNews } from '../scripts/lib/local-news.mjs';
+import { buildCantonProfile, cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -150,6 +151,9 @@ const DEPS = [
   // Cronaca locale senza angolo frontaliere (2026-09-25): sceglie il blocco
   // MUST-COVER e le righe body2/implicazioni della cronaca.
   'isLocalNewsWithoutFrontaliereAngle',
+  // Sezione cantonale (P6b): il flag di tipo e le righe del profilo cantonale
+  // (REGOLA #0, ruolo, colore locale) che sostituiscono quelle nazionali.
+  'IS_CANTON', 'CANTON_LINES',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -233,6 +237,8 @@ const BASE_DEPS = {
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
+  IS_CANTON: false,
+  CANTON_LINES: null,
 };
 
 /** Assembla catturando stderr: il blocco logga, e il log e' parte del contratto. */
@@ -252,11 +258,14 @@ function assemble(overrides) {
 
 /** Il ramo NEWS: fonte reale scrapata. `section` di default 'frontaliere', come il call-site reale prima di #96 — passala esplicitamente per l'altra sezione. */
 function newsPrompt(extra = {}, section = 'frontaliere', deps = {}) {
+  const canton = section.startsWith('canton-');
   return assemble({
     ...deps,
     pageContent: NEWS_PAGE_CONTENT,
     url: 'https://www.tio.ch/ticino/economia/1812345/imposta-fonte-frontalieri-nuove-aliquote',
     IS_FRONTALIERE: section === 'frontaliere',
+    IS_CANTON: canton,
+    CANTON_LINES: canton ? cantonPromptLines(buildCantonProfile(section, { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] })) : null,
     SECTION_NAME: section,
     sourceContext: {
       headline: 'Imposta alla fonte, il Ticino rivede le aliquote per i frontalieri sopra i 120mila franchi',
@@ -446,6 +455,21 @@ test('il ramo NEWS SVIZZERA resta sotto il tetto — non solo l\'evergreen svizz
     + 'Se e\' salito, il tetto su MAX_DOMAIN_FACTS_CHARS in create-article.mjs va rivisto: senza, la sezione '
     + 'svizzera smette di generare da notizia reale, solo da evergreen.',
   );
+});
+
+test('il ramo NEWS di una sezione CANTONALE resta sotto il tetto e porta le righe del cantone', () => {
+  // P6b: la sezione cantonale sostituisce REGOLA #0, ruolo e colore locale
+  // con quelli del suo profilo (contesto frontalieri compreso) e riceve il
+  // brief svizzero. Il prompt deve restare nello stesso budget del ramo
+  // nazionale e NON portare la REGOLA #0 nazionale, che rifiuterebbe la
+  // cronaca cantonale con impatto pratico.
+  const news = newsPrompt({}, 'canton-be');
+  assert.ok(news.estTokens <= PROMPT_TOKEN_CEILING, `prompt news canton-be stimato in ${news.estTokens} token, sopra ${PROMPT_TOKEN_CEILING}`);
+  assert.match(news.prompt, /nesso REALE e VERIFICABILE con chi vive o lavora nel Canton Berna/);
+  assert.match(news.prompt, /Colore locale: comuni, enti e istituzioni del Canton Berna/);
+  assert.doesNotMatch(news.prompt, /a livello NAZIONALE\. Esempi di nesso reale/);
+  const ch = newsPrompt({}, 'svizzera');
+  assert.match(ch.prompt, /a livello NAZIONALE\. Esempi di nesso reale/, 'premessa: la svizzera tiene la sua REGOLA #0');
 });
 
 test('il ramo NEWS regge anche il retry, che e\' il tentativo piu\' pesante', () => {

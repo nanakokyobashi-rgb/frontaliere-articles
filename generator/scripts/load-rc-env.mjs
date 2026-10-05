@@ -318,6 +318,17 @@ const RC_TO_ENV = {
   // Unset in RC by default (the action treats unset the same as any value
   // other than '0': proceed).
   ENABLE_OMNIROUTE_FALLBACK:      ['ENABLE_OMNIROUTE_FALLBACK'],
+
+  // Sezioni articoli per cantone (piano «sezioni cantonali», D16): l'elenco
+  // dei cantoni che POSSONO generare oltre a quelli con `enabled: true` in
+  // generator/data/canton-sections.json — codici di gruppo («TI, GR, BE»), id
+  // di sezione («canton-ti») o `all`, separati da virgole o spazi. Letto da
+  // resolveCantonSectionGate (generator/scripts/lib/canton-section-profile.mjs)
+  // in testa a create-article.mjs: una sezione spenta esce 0 con
+  // CANTON_SECTION_DISABLED. Assente o vuoto in Remote Config = nessun cantone
+  // (default sicuro): un vuoto e un assente vogliono dire la stessa cosa, quindi
+  // la chiave NON sta in ALLOW_EMPTY_RC_KEYS.
+  CANTON_ARTICLE_SECTIONS_ENABLED: ['CANTON_ARTICLE_SECTIONS_ENABLED'],
 };
 
 /**

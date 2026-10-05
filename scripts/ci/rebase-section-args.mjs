@@ -31,12 +31,15 @@ import { fileURLToPath } from 'node:url';
  * Le tre categorie per sezione, in ordine di sezione.
  *
  * @param {Record<string, object>} [sections] `SECTIONS` di article-surfaces (iniettabile nei test)
- * @returns {{ bookkeeping: string[], registries: string[], takeTheirs: string[] }}
+ * @returns {{ bookkeeping: string[], registries: string[], takeTheirs: string[], counters: string[] }}
  */
 export function sectionRebaseSurfaces(sections) {
   const bookkeeping = [];
   const registries = [];
   const takeTheirs = [];
+  // Stato globale partizionato per sezione (D18, solo le cantonali): cache
+  // riscritte per intero (path nudo) e contatori `path:campo` (--merge-counter).
+  const counters = [];
   const entries = Object.entries(sections ?? {});
   if (entries.length === 0) throw new Error('nessuna sezione attiva: niente da dichiarare al rebase');
   for (const [section, cfg] of entries) {
@@ -48,7 +51,11 @@ export function sectionRebaseSurfaces(sections) {
     if (!Array.isArray(cfg.metaFiles) || cfg.metaFiles.length === 0) {
       throw new Error(`sezione '${section}': metaFiles non dichiarati in article-surfaces.mjs`);
     }
-    bookkeeping.push(cfg.sourceLedger, cfg.sourceQuotaFile);
+    bookkeeping.push(cfg.sourceLedger, cfg.sourceQuotaFile, ...(cfg.stateBookkeeping || []));
+    for (const spec of cfg.stateCounters || []) {
+      if (!/^[^\s:]+:[A-Za-z_]\w*$/.test(spec)) throw new Error(`sezione '${section}': contatore '${spec}' non nella forma path:campo`);
+      counters.push(spec);
+    }
     registries.push(
       cfg.registryFile,
       cfg.slugDataFile,
@@ -58,14 +65,15 @@ export function sectionRebaseSurfaces(sections) {
     );
     takeTheirs.push(`${cfg.bodyDir}/`, `${cfg.sidecarDir}/`);
   }
-  return { bookkeeping, registries, takeTheirs };
+  return { bookkeeping, registries, takeTheirs, counters };
 }
 
 /** Gli stessi elenchi, come argomenti per `rebase-onto-remote.sh`. */
 export function sectionRebaseArgs(sections) {
-  const { bookkeeping, registries, takeTheirs } = sectionRebaseSurfaces(sections);
+  const { bookkeeping, registries, takeTheirs, counters } = sectionRebaseSurfaces(sections);
   return [
     ...bookkeeping,
+    ...counters.flatMap((c) => ['--merge-counter', c]),
     ...registries.flatMap((p) => ['--merge-registry', p]),
     ...takeTheirs.flatMap((p) => ['--take-theirs', p]),
   ];

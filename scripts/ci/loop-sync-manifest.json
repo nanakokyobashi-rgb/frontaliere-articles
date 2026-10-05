@@ -2392,6 +2392,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-section-profile.mjs",
+      "mode": "corpus-only",
+      "reason": "La sezione cantonale vista da create-article.mjs (P6b del piano sezioni cantonali): voci di ARTICLE_SECTION_CONFIGS per le 24 sezioni `kind: canton` del core (path di registro, slug, meta e corpi da ARTICLE_SECTION_CORE_ALL, profilo da generator/data/canton-sections.json), gate D16 (`enabled` nel profilo o CANTON_ARTICLE_SECTIONS_ENABLED da Remote Config), stato per sezione D18 sotto data/sections/<id>/ e i suoi argomenti per rebase-onto-remote.sh, scheletri dei file al primo articolo, lessico di ammissione DE/FR e testi di prompt del cantone. Corpus-only: la generazione e il profilo editoriale vivono solo qui; il sito legge le sezioni come JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "4339022550d58da1",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-news-sources.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner delle fonti news delle sezioni cantonali (P6b): parser json-entities (iCMS NW/OW/SH), json-api (zh.ch, be.ch), news-sitemap e sitemap a periodo (settimana ISO, mese, anno), riuso di extractRssItems/extractHeadlines di create-article.mjs per RSS/Atom e link HTML; quirk del profilo (crawl-delay per host, maxRequestsPerRun, charset dichiarato, pubDate vuoto, anno sbagliato nei time datetime, paywall title+lead) e User-Agent dichiarato (D10). Corpus-only: le fonti per cantone e il generatore che le legge esistono solo nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "8c5ed8cc6cdb3a46",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/registry-canton-field.mjs",
       "mode": "corpus-only",
       "reason": "Lettura e scrittura testuale della riga `canton: [...]` nelle voci di content/*-articles-data.ts (inserita dopo articleType, idempotente, codici validati); importata da registry-article-type.mjs (renderRegistryEntry), dal backfill e dai test senza `npm ci`. Corpus-only: il registry vive solo qui, il sito legge articles.json attraverso l'allowlist di scripts/lib/registry-api-entry.mjs che non contiene `canton`.",
