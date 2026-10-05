@@ -204,7 +204,43 @@ abort_and_fail() {
   return 1
 }
 
+# Il conflitto non e' l'unico modo di perdere l'incremento di un contatore: due
+# run partiti da N che scrivono entrambi N+1 producono lo STESSO blob, git non
+# segnala nessun conflitto e il rebase finisce su N+1 invece di N+2. Quindi, a
+# rebase riuscito, ogni contatore dichiarato si riporta a upstream + l'incremento
+# del commit pre-rebase (merge-counter-conflict.mjs --reconcile). Mai fatale:
+# se qualcosa non torna il rebase resta quello che git ha prodotto, cioe' il
+# comportamento di prima.
+reconcile_counters() {
+  [ "$COUNTER_SPECS" != " " ] || return 0
+  local upstream_sha changed
+  upstream_sha="$(git rev-parse --verify --quiet FETCH_HEAD)" || return 0
+  # shellcheck disable=SC2086
+  changed="$(node "$COUNTER_RESOLVER" --reconcile "$PRE_REBASE" "$upstream_sha" $COUNTER_SPECS)" || {
+    echo "::warning::counter reconciliation after the rebase did not run — counters left as the rebase produced them"
+    return 0
+  }
+  [ -n "$changed" ] || return 0
+  # shellcheck disable=SC2086
+  if ! git add -- $changed; then
+    git checkout -- $changed 2>/dev/null || true
+    echo "::warning::counter reconciliation could not be staged — counters left as the rebase produced them"
+    return 0
+  fi
+  if [ "$(git rev-parse HEAD)" != "$upstream_sha" ]; then
+    git commit -q --amend --no-edit || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
+  else
+    # Il commit rigiocato e' sparito (vuoto dopo il rebase) ma il suo
+    # incremento no: serve un commit che lo porti.
+    git commit -q -m "Reconcile counters after rebase" || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
+  fi
+  echo "reconciled counters after the rebase: $(echo $changed)"
+}
+
+PRE_REBASE="$(git rev-parse HEAD)"
+
 if git pull --rebase "$REMOTE" "$TARGET"; then
+  reconcile_counters
   exit 0
 fi
 
@@ -229,7 +265,7 @@ fi
 # so a state that stops changing ends in an abort rather than a spin.
 progress_marker=""
 for _pass in $(seq 1 20); do
-  rebase_in_progress || { echo "rebase completed"; exit 0; }
+  rebase_in_progress || { echo "rebase completed"; reconcile_counters; exit 0; }
 
   conflicted="$(git diff --name-only --diff-filter=U)"
 

@@ -120,7 +120,7 @@ export function sectionSurfaces(coreList = ARTICLE_SECTION_CORE_LIST, surfaces =
 }
 
 function parseLedger(text, label) {
-  if (text == null || text === '') return {};
+  if (text == null) return {};
   let parsed;
   try {
     parsed = JSON.parse(text);
@@ -140,12 +140,22 @@ function parseLedger(text, label) {
  * @returns {Record<string, {slugIds: string[], registryIds: string[], ledger: Record<string, unknown>}>}
  */
 export function snapshotSections(surfaces, readAt, label) {
+  // `null` = il path non c'e' (sezione ancora vuota): legittimo. Un file che
+  // c'e' ma e' vuoto non lo e': letto come «nessun id / nessuna voce» toglierebbe
+  // quella sezione dal confronto proprio mentre dovrebbe fermare un duplicato.
+  const read = (path) => {
+    const text = readAt(path);
+    if (text != null && text.trim() === '') {
+      throw new Error(`${label}:${path} e' presente ma vuoto: non e' una sezione senza articoli, e' una superficie illeggibile`);
+    }
+    return text;
+  };
   const out = {};
   for (const s of surfaces) {
     out[s.section] = {
-      slugIds: slugIdsOf(readAt(s.slugDataFile)),
-      registryIds: registryIdsOf(readAt(s.registryFile)),
-      ledger: parseLedger(readAt(s.sourceLedger), `${label}:${s.sourceLedger}`),
+      slugIds: slugIdsOf(read(s.slugDataFile)),
+      registryIds: registryIdsOf(read(s.registryFile)),
+      ledger: parseLedger(read(s.sourceLedger), `${label}:${s.sourceLedger}`),
     };
   }
   return out;

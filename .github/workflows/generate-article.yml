@@ -1869,7 +1869,20 @@ jobs:
             # merge-counter-conflict.mjs. data/quota-state.json (`runCounter`) e'
             # lo stesso contatore e passa dalla stessa strada; se la fusione non e'
             # dimostrabile l'helper ricade su «prendi upstream», cioe' su cio' che
-            # quel file aveva prima.
+            # quel file aveva prima. Il conflitto non e' l'unico modo di perdere un
+            # incremento: due run da N che scrivono entrambi N+1 danno lo STESSO
+            # blob e nessun conflitto, quindi a rebase riuscito l'helper riconcilia
+            # comunque ogni contatore dichiarato (upstream + incremento pre-rebase).
+            #
+            # data/topic-candidates-today-picks.json (TODAY_PICKS_BY_CLUSTER_PATH,
+            # persistTodayPicksByCluster) e' la stessa classe del consumed tracker:
+            # non tracciato oggi, ma riscritto per intero dopo una pubblicazione
+            # del ranker e quindi preso da `git add -A`; due run che lo creano
+            # sarebbero un add/add che aborta. E' un tetto giornaliero per
+            # cluster, cache del giorno: si prende upstream. La guardia in
+            # rebase-onto-remote.test.mjs deriva da article-topic-selector.mjs
+            # OGNI path scritto da una persist*: uno nuovo fuori da queste liste
+            # fa rosso li'.
             #
             # content/image-credits/blog/ (P14) e' un target PER-ARTICOLO come i
             # corpi e l'hero: per una copertina Commons il generatore scrive
@@ -1887,6 +1900,7 @@ jobs:
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/topic-candidates-evergreen-rejected.json \
               data/topic-candidates-consumed.json \
+              data/topic-candidates-today-picks.json \
               data/blog-images-used.json \
               public/data/journalist-image-catalog.json \
               data/article-source-urls.json \

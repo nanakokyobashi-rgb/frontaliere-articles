@@ -36,7 +36,9 @@ import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from '../../scripts/lib/image-credit-records.mjs';
 import { QUOTA_STATE_PATH } from '../scripts/lib/scheduler/quotaController.mjs';
-import { EVERGREEN_COUNTER_PATH, EXPERIMENTAL_COUNTER_PATH } from '../scripts/lib/article-topic-selector.mjs';
+import * as topicSelector from '../scripts/lib/article-topic-selector.mjs';
+
+const { EVERGREEN_COUNTER_PATH, EXPERIMENTAL_COUNTER_PATH } = topicSelector;
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -453,6 +455,35 @@ test('generate-article.yml declares the quota-state ledger as a counter (#496, D
     + `and the generated article is lost (issue #496). Declared counters: ${JSON.stringify(counters)}`,
   );
   assert.ok(!bookkeeping.includes(QUOTA_STATE_PATH), `${QUOTA_STATE_PATH} must not be in two categories`);
+});
+
+test('ogni file che article-topic-selector.mjs scrive con una persist* e\' dichiarato in una categoria', () => {
+  // La classe, non i singoli file: le funzioni `persist*` del selettore
+  // riscrivono per intero un file di stato che `git add -A` porta nel commit,
+  // tracciato o no. Fuori da ogni lista un conflitto (o un add/add di due run
+  // che lo creano) abortisce il rebase. I path si leggono dalle costanti che le
+  // persist* usano come default, non si ricopiano.
+  const { bookkeeping, registries, takeTheirs, counters } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  const declared = new Set([...bookkeeping, ...registries, ...counters.map((c) => c.slice(0, c.lastIndexOf(':')))]);
+  const selectorSrc = readFileSync(path.resolve(HERE, '../scripts/lib/article-topic-selector.mjs'), 'utf8');
+  const persisted = [];
+  for (const m of selectorSrc.matchAll(/export function (persist\w+)\(/g)) {
+    const from = sliceFrom(selectorSrc, m[0], { label: m[1] });
+    const body = from.slice(0, from.indexOf('\n}\n'));
+    const constName = /\b([A-Z][A-Z0-9_]*_PATH)\b/.exec(body)?.[1];
+    assert.ok(constName, `${m[1]}: non trovo la costante *_PATH del file che scrive`);
+    const p = topicSelector[constName];
+    assert.equal(typeof p, 'string', `${constName} non e' esportata da article-topic-selector.mjs`);
+    persisted.push({ fn: m[1], p });
+  }
+  assert.ok(persisted.length >= 5, `attese almeno 5 persist*, trovate: ${JSON.stringify(persisted)}`);
+  for (const { fn, p } of persisted) {
+    assert.ok(
+      declared.has(p) || takeTheirs.some((prefix) => p.startsWith(prefix)),
+      `${p} e' riscritto per intero da ${fn}() e finisce in git add -A, ma non e' dichiarato in nessuna categoria `
+      + `di rebase-onto-remote.sh in generate-article.yml: un conflitto li' abortisce il rebase e l'articolo e' perso.`,
+    );
+  }
 });
 
 test('generate-article.yml declares the topic-candidates counters as counters (D18)', () => {
@@ -1114,6 +1145,45 @@ test('un conflitto sui contatori somma gli incrementi dei due lati, e l\'articol
     assert.equal(quota.runCounter, 13, 'upstream 12 + (11 − 10)');
     assert.equal(quota.currentQuota, 70, 'gli altri campi restano quelli di upstream');
     assert.equal(quota.lastTune, '2026-10-05');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('due run che scrivono lo STESSO valore (nessun conflitto) non perdono un incremento', () => {
+  // Base 10, upstream 11, questo run 11: blob identici, git non vede conflitto
+  // e il rebase finirebbe su 11. La riconciliazione a rebase riuscito porta 12.
+  const w = counterWorld();
+  try {
+    landUpstream(w, [[EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`, 'u ever']]);
+    write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    write(w.work, 'content/blog-body/it/articolo-parallelo.ts', 'export const p = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, out);
+    assert.match(out, /reconciled counters after the rebase/);
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'upstream 11 + (11 − 10)');
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-parallelo.ts')));
+    assert.equal(git(w.work, 'log', '--format=%s', '-1').trim(), 'Generate blog article (frontaliere)',
+      'la riconciliazione si aggiunge al commit dell\'articolo, non ne crea un altro');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'nessun residuo nel working tree');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un rebase senza contatori toccati da upstream lascia i contatori come sono', () => {
+  const w = counterWorld();
+  try {
+    landUpstream(w, [['README.md', 'altro\n', 'upstream unrelated']]);
+    write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, out);
+    assert.doesNotMatch(out, /reconciled counters/);
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 11);
   } finally {
     w.cleanup();
   }

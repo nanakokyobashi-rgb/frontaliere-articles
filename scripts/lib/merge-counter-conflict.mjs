@@ -55,7 +55,7 @@
  * stage 3 (`--theirs`) e' il commit RIGIOCATO, l'inverso di un merge.
  */
 import { execFileSync } from 'node:child_process';
-import { realpathSync, writeFileSync } from 'node:fs';
+import { readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 function parseCounterDoc(text, field, label) {
@@ -130,7 +130,86 @@ function readStage(stage, path) {
   }
 }
 
+function git(args) {
+  return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+}
+
+/** Il blob di `path` a `rev`; null se il path non c'e' o la revisione non si legge. */
+function readAt(rev, path) {
+  try {
+    if (!git(['ls-tree', '--name-only', rev, '--', path]).trim()) return null;
+    return git(['show', `${rev}:${path}`]);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Riconciliazione DOPO un rebase riuscito: il conflitto non e' l'unico modo
+ * di perdere un incremento. Due run partiti da N che scrivono entrambi N+1
+ * producono lo STESSO blob, git non vede nessun conflitto e il rebase finisce
+ * con N+1 invece di N+2. Qui si ricalcola, per ogni contatore, il valore che
+ * il commit rigiocato deve portare — upstream + (pre-rebase − base comune) —
+ * e si riscrive in working tree quello che differisce. Stampa su stdout un
+ * path per riga, uno per file riscritto; il chiamante fa `git add` + amend.
+ *
+ * Tutto cio' che non si sa dimostrare (file assente o illeggibile su un lato,
+ * decremento) si lascia com'e', con un avviso: e' il comportamento di prima.
+ */
+export function reconcileCounters(preRebase, upstream, specs, { log = console.log, warn = console.error } = {}) {
+  let base = null;
+  try {
+    base = git(['merge-base', preRebase, upstream]).trim() || null;
+  } catch {
+    base = null;
+  }
+  const rewritten = [];
+  for (const raw of specs) {
+    const spec = parseCounterSpec(raw);
+    if (!spec) {
+      warn(`::warning::riconciliazione contatori: spec non valida '${raw}'`);
+      continue;
+    }
+    const mine = readAt(preRebase, spec.path);
+    const up = readAt(upstream, spec.path);
+    if (mine == null || up == null) continue;
+    const result = mergeCounterDocuments({
+      base: base ? readAt(base, spec.path) : null,
+      upstream: up,
+      replayed: mine,
+      field: spec.field,
+    });
+    if (!result.ok) {
+      warn(`::warning::${spec.path}: riconciliazione del contatore non dimostrabile — ${result.reason}`);
+      continue;
+    }
+    let current;
+    try {
+      current = JSON.parse(readFileSync(spec.path, 'utf8'));
+    } catch {
+      warn(`::warning::${spec.path}: contatore assente o illeggibile dopo il rebase — non lo riconcilio`);
+      continue;
+    }
+    if (!current || typeof current !== 'object' || Array.isArray(current)) continue;
+    if (current[spec.field] === result.value) continue;
+    writeFileSync(spec.path, `${JSON.stringify({ ...current, [spec.field]: result.value }, null, 2)}\n`);
+    warn(`riconciliazione contatore: ${spec.path} ${spec.field} ${current[spec.field]} → ${result.value} (${result.rule})`);
+    rewritten.push(spec.path);
+  }
+  for (const p of rewritten) log(p);
+  return rewritten;
+}
+
 function main(argv) {
+  if (argv[0] === '--reconcile') {
+    const [, preRebase, upstream, ...specs] = argv;
+    if (!preRebase || !upstream || specs.length === 0) {
+      console.error('uso: merge-counter-conflict.mjs --reconcile <pre-rebase> <upstream> <path>:<campo>...');
+      return 2;
+    }
+    reconcileCounters(preRebase, upstream, specs);
+    return 0;
+  }
   if (argv.length !== 1) {
     console.error('uso: merge-counter-conflict.mjs <path>:<campo>');
     return 2;

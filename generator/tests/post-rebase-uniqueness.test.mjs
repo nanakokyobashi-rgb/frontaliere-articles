@@ -331,6 +331,22 @@ test('CLI: un file che c\'e\' ma non si legge e\' un errore, non una sezione vuo
   }
 });
 
+test('CLI: una superficie presente ma vuota e\' un errore, non «nessuna voce»', () => {
+  // Il ledger della sezione sorella a zero byte, letto come `{}`, non avrebbe
+  // fermato la stessa URL registrata da upstream un attimo prima.
+  for (const surface of ['sourceLedger', 'slugDataFile', 'registryFile']) {
+    const mine = sectionFiles(SECOND, { ids: ['mio'], ledger: { [URL_A]: entry('mio') } });
+    const w = world({ upstream: { [FIRST[surface]]: '' }, mine, rebased: mine });
+    try {
+      const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+      assert.equal(code, 2, `${surface}: ${out}`);
+      assert.match(out, new RegExp(`${ERROR_MARKER}: .*presente ma vuoto`), surface);
+    } finally {
+      w.cleanup();
+    }
+  }
+});
+
 // ── Il cablaggio nel workflow ──────────────────────────────────────────────
 
 test('generate-article.yml esegue il controllo dopo un rebase riuscito e non pusha se fallisce', () => {
