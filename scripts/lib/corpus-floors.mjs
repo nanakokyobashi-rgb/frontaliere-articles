@@ -33,6 +33,13 @@ import { findAllSeoEntryMatches } from './seo-entry.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
+import {
+  API_SECTIONS,
+  CORPUS_SECTIONS,
+  KNOWN_SECTION_IDS,
+  SECTION_LOCALES,
+  sectionSourceSurfaces,
+} from './corpus-sections.mjs';
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -192,56 +199,90 @@ export function missingCorpusMessage(what, rel) {
  * l'artefatto sorgente piu' vicino alla cardinalita' che il manifest dichiara:
  * il registro TS che `build-api.mjs` legge e' UN file solo, quindi contarne le
  * voci significherebbe fidarsi dello stesso parse che il gate deve sorvegliare.
+ *
+ * ── Le sezioni vengono dal core ────────────────────────────────────────────
+ *
+ * Queste mappe erano scritte a mano per frontaliere e svizzera. Ora sono
+ * derivate da `scripts/lib/corpus-sections.mjs`, cioe' dal core delle sezioni
+ * (lista ATTIVA): una sezione accesa nel core ha il suo pavimento senza toccare
+ * questo file. Le funzioni sotto accettano pero' QUALSIASI sezione nota al
+ * core, attiva o no (`sourceOf`), cosi' la regola di una famiglia si prova sul
+ * suo id vero prima che la famiglia venga accesa.
+ *
+ * `SECTION_COUNTERS` / `SECTION_SITEMAPS` restano le sole sezioni con una
+ * superficie API PROPRIA (contatore e sitemap col loro nome nel manifest):
+ * le sezioni cantonali pubblicano in superfici aggregate di famiglia, che non
+ * esistono ancora (vedi `sectionApiSurfaces`).
  */
-export const SECTION_BODY_DIRS = {
-  frontaliere: path.join('content', 'blog-body', 'it'),
-  svizzera: path.join('content', 'blog-body-ch', 'it'),
-};
+export const SECTION_BODY_DIRS = Object.freeze(Object.fromEntries(
+  CORPUS_SECTIONS.map((s) => [s.section, path.join(s.bodyDir, 'it')]),
+));
 
-/** Le chiavi del manifest e i file della sitemap delle due sezioni. */
-export const SECTION_COUNTERS = {
-  frontaliere: 'articles',
-  svizzera: 'swissArticles',
-};
+/** Le chiavi del manifest e i file della sitemap delle sezioni con superficie API propria. */
+export const SECTION_COUNTERS = Object.freeze(Object.fromEntries(
+  API_SECTIONS.map((s) => [s.section, s.api.counter]),
+));
 
-export const SECTION_SITEMAPS = {
-  frontaliere: 'sitemap-blog.xml',
-  svizzera: 'sitemap-blog-ch.xml',
-};
+export const SECTION_SITEMAPS = Object.freeze(Object.fromEntries(
+  API_SECTIONS.map((s) => [s.section, s.api.sitemap]),
+));
 
 export const ARCHIVE_SITEMAP = 'sitemap-articles-archive.xml';
 export { ARTICLES_PAGE_SIZE as ARCHIVE_PAGE_SIZE };
 
-/** Slug maps read by the runtime sitemap writer, per section. */
-const SECTION_SLUG_FILES = {
-  frontaliere: path.join('content', 'routerBlogData.ts'),
-  svizzera: path.join('content', 'routerSwissData.ts'),
-};
+/** Le superfici sorgente di una sezione nota al core (attiva o no). */
+function sourceOf(section) {
+  if (!KNOWN_SECTION_IDS.includes(section)) throw new Error(`unknown corpus section: ${section}`);
+  return sectionSourceSurfaces(section);
+}
 
-const SECTION_SLUG_EXPORTS = {
-  frontaliere: 'BLOG_SLUGS',
-  svizzera: 'SWISS_SLUGS',
-};
+/** Registro e metadati che definiscono l'atteso dei corpi, per sezione attiva. */
+export const SECTION_REGISTRY_FILES = Object.freeze(Object.fromEntries(
+  CORPUS_SECTIONS.map((s) => [s.section, s.registryFile]),
+));
 
-/** Canonical-override maps read by the runtime sitemap writer, per section. */
-const SECTION_CANONICAL_OVERRIDE_FILES = {
-  frontaliere: path.join('engine', 'shared', 'frontaliere-article-canonical-overrides.json'),
-  svizzera: path.join('content', 'swiss-article-canonical-overrides.json'),
-};
+/** Prefisso dei file meta per sezione attiva (`blog-meta-ch-` → `blog-meta-ch-it.ts`). */
+export const SECTION_META_PREFIXES = Object.freeze(Object.fromEntries(
+  CORPUS_SECTIONS.map((s) => [s.section, `${path.basename(s.metaPrefix)}-`]),
+));
 
-/** Registro e metadati che definiscono l'atteso dei corpi, per sezione. */
-export const SECTION_REGISTRY_FILES = {
-  frontaliere: path.join('content', 'blog-articles-data.ts'),
-  svizzera: path.join('content', 'swiss-articles-data.ts'),
-};
+/**
+ * Una sezione con politica `family` (le cantonali) senza registro sorgente e'
+ * una sezione NUOVA, non un corpus sparito: il suo pavimento proprio e' 0.
+ * Il corpus sparito lo vedono comunque le sezioni storiche, che stanno sotto
+ * lo stesso `content/` e restano fail-closed.
+ */
+export function floorPolicyOf(section) {
+  return sourceOf(section).floorPolicy;
+}
 
-export const SECTION_META_PREFIXES = {
-  frontaliere: 'blog-meta-',
-  svizzera: 'blog-meta-ch-',
-};
+/**
+ * True per una sezione `family` che non ha ancora un registro sorgente: una
+ * sezione appena accesa, con zero articoli. E' l'UNICO caso in cui un registro
+ * assente vale 0 invece di un rifiuto, e vale solo per la politica `family`.
+ */
+function isNewFamilySection(root, section) {
+  if (floorPolicyOf(section) !== 'family') return false;
+  return !fs.existsSync(path.join(root, sourceOf(section).registryFile));
+}
+
+/**
+ * Il verdetto di pavimento di una FAMIGLIA di sezioni (politica `family`):
+ * somma dei sorgenti contro somma degli emessi. Una sezione nuova a 0 non pesa
+ * ne' sull'una ne' sull'altra; una famiglia con articoli in sorgente e niente
+ * di emesso e' un troncamento, esattamente come per una sezione storica.
+ *
+ * @param {Array<{section: string, source: number, emitted: number}>} rows
+ */
+export function familyFloorVerdict(rows, retention = FLOOR_RETENTION) {
+  const source = rows.reduce((total, row) => total + row.source, 0);
+  const emitted = rows.reduce((total, row) => total + row.emitted, 0);
+  const floor = floorFrom(source, retention);
+  return { sections: rows.map((row) => row.section), source, emitted, floor, truncated: emitted < floor };
+}
 
 /** Locali che build-api.mjs carica per ogni sezione. */
-export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+export const SECTION_META_LOCALES = SECTION_LOCALES;
 
 const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
 const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
@@ -300,16 +341,13 @@ function registryDataFromSource(source, rel, what) {
 }
 
 function readRegistryData(root, section) {
-  const rel = SECTION_REGISTRY_FILES[section];
-  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  const rel = sourceOf(section).registryFile;
   const source = readReference(root, rel, `${section} registry`);
   return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
 }
 
 function readSlugMap(root, section) {
-  const rel = SECTION_SLUG_FILES[section];
-  const slugConst = SECTION_SLUG_EXPORTS[section];
-  if (!rel || !slugConst) throw new Error(`unknown corpus section: ${section}`);
+  const { slugFile: rel, slugExport: slugConst } = sourceOf(section);
   const source = readReference(root, rel, `${section} slug map`);
   const slugs = parseArticleUrlSlugs(source, slugConst);
   if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
@@ -317,8 +355,9 @@ function readSlugMap(root, section) {
 }
 
 function readCanonicalOverrideSlugs(root, section) {
-  const rel = SECTION_CANONICAL_OVERRIDE_FILES[section];
-  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  const rel = sourceOf(section).canonicalOverrides;
+  // Una sezione senza file di override (le cantonali) non ombreggia niente.
+  if (!rel) return new Set();
   let parsed;
   try {
     parsed = JSON.parse(readReference(root, rel, `${section} canonical overrides`));
@@ -413,7 +452,7 @@ function previousCorpusRevision(root, configuredRevision = historyRevisionFromEn
 }
 
 function previousRegistryData(root, section, revision) {
-  const rel = SECTION_REGISTRY_FILES[section];
+  const rel = sourceOf(section).registryFile;
   // Presenza dal TREE, lettura dal BLOB, come `readGitFileAtRevision` di
   // `scripts/ci/verify-api-floors.mjs`. Il checkout di `tests.yml` e' un
   // partial clone (`filter: blob:none`): il blob storico arriva su richiesta,
@@ -479,8 +518,7 @@ function truncatedRegistryError(section, current, highWater) {
 
 /** Quanti file-meta locali sono presenti per la sezione. */
 export function countPresentLocales(root, section) {
-  const prefix = SECTION_META_PREFIXES[section];
-  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  const prefix = `${path.basename(sourceOf(section).metaPrefix)}-`;
   const rel = path.join('content', `${prefix}*.ts`);
   let names;
   try {
@@ -509,8 +547,7 @@ function metadataArticleIds(source) {
 
 /** Ogni locale deve esporre tutti gli ID del registro, non solo un file. */
 export function validateLocaleMetadata(root, section, registryIds) {
-  const prefix = SECTION_META_PREFIXES[section];
-  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  const prefix = `${path.basename(sourceOf(section).metaPrefix)}-`;
   for (const locale of SECTION_META_LOCALES) {
     const rel = path.join('content', `${prefix}${locale}.ts`);
     const ids = metadataArticleIds(readReference(root, rel, `${section} locale metadata`));
@@ -543,6 +580,7 @@ export function expectedBodyFiles(
   section,
   { previousRegistryCount, previousRevision } = {},
 ) {
+  if (isNewFamilySection(root, section)) return 0;
   const registry = readRegistryData(root, section);
   const highWater = registryHighWater(root, section, registry, {
     previousRegistryCount,
@@ -563,8 +601,7 @@ export function countRegistryArticles(root, section) {
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
 export function countSourceArticles(root, section) {
-  const rel = SECTION_BODY_DIRS[section];
-  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  const rel = path.join(sourceOf(section).bodyDir, 'it');
   return countCorpusFiles(root, rel, '.ts', section);
 }
 
@@ -578,11 +615,12 @@ export function countSourceArticles(root, section) {
  * esplicitamente allo slug IT di una entry del registro.
  */
 export function countSourceSitemapEntries(root, section) {
+  if (isNewFamilySection(root, section)) return 0;
   const registry = readRegistryData(root, section);
   const slugMap = readSlugMap(root, section);
   const shadowed = readCanonicalOverrideSlugs(root, section);
 
-  if (section === 'frontaliere') {
+  if (sourceOf(section).retiredDailyEditions) {
     for (const id of selectRetiredDailyEditions([...registry.ids])) {
       const slug = slugMap[id]?.it;
       if (slug) shadowed.add(slug);
@@ -599,7 +637,7 @@ export function countSourceSitemapEntries(root, section) {
  * distinguere un corpus corto da una serializzazione corta.
  */
 export function countSourceArchiveSitemapUrls(root, section) {
-  const metaRel = path.join('content', `${SECTION_META_PREFIXES[section]}it.ts`);
+  const metaRel = sourceOf(section).metaFile('it');
   const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
   const slugMap = readSlugMap(root, section);
   const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
@@ -622,11 +660,19 @@ export function countSourceImages(root) {
  * quel caso lo rifiutava incondizionatamente). Le due sorgenti — registro e
  * corpi — stanno entrambe sotto `content/`, quindi si azzerano INSIEME: e'
  * esattamente il caso in cui il pavimento serve.
+ *
+ * Eccezione per costruzione, non per tolleranza: una sezione con politica
+ * `family` (le cantonali) parte legittimamente da zero articoli, quindi il suo
+ * pavimento proprio vale 0 e il troncamento si giudica sulla famiglia
+ * (`familyFloorVerdict`). Il «corpus non materializzato» resta rifiutato dalle
+ * sezioni storiche, che vivono sotto lo stesso `content/`; i loro pavimenti
+ * non cambiano.
  */
 export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
   const source = countSourceArticles(root, section);
   if (source === 0) {
-    throw new Error(missingCorpusMessage(section, path.join(root, SECTION_BODY_DIRS[section])));
+    if (floorPolicyOf(section) === 'family') return 0;
+    throw new Error(missingCorpusMessage(section, path.join(root, sourceOf(section).bodyDir, 'it')));
   }
   return floorFrom(source, retention);
 }

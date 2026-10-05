@@ -19,6 +19,8 @@
  *   meta-<locale>.json      title/excerpt/imageAlt per article, frontaliere
  *   meta-ch-<locale>.json   same, svizzera
  *   slugs.json         id -> per-locale slug, reverse map, and fallback provenance
+ *   (the sections are the ACTIVE ones of the section core, with the published
+ *   names above declared once in scripts/lib/corpus-sections.mjs)
  *   sitemap-blog.xml / sitemap-blog-ch.xml   article sitemaps, with hreflang
  *   rss*.xml           ten RSS feeds (two sections x four locales + main copy)
  *   news-ticker-live.json  the homepage ticker's five newest articles
@@ -80,6 +82,9 @@ import {
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
 import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
+// Le sezioni da pubblicare vengono dal core (lista ATTIVA), con i nomi della
+// superficie pubblicata dichiarati una volta in corpus-sections.mjs.
+import { API_SECTIONS, assertActiveSectionsPublishable } from './lib/corpus-sections.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Allowlist dei campi pubblici di articles.json / swiss-articles.json.
 import { toPublicRegistryEntry } from './lib/registry-api-entry.mjs';
@@ -98,8 +103,10 @@ import {
   collectSeoEntryMetadata,
   floorFrom,
   ARCHIVE_SITEMAP,
-  SECTION_SITEMAPS,
+  countSourceArticles,
   countSourceSitemapEntries,
+  familyFloorVerdict,
+  floorPolicyOf,
   sectionFloor,
 } from './lib/corpus-floors.mjs';
 import {
@@ -176,14 +183,34 @@ const write = (name, value) => {
 
 const load = async (rel) => import(path.join(ROOT, rel));
 
-const { ARTICLES } = await load('content/blog-articles-data.ts');
-const { SWISS_ARTICLES } = await load('content/swiss-articles-data.ts');
-if (!Array.isArray(ARTICLES) || ARTICLES.length === 0) {
-  throw new Error('ARTICLES is empty — refusing to publish an empty registry');
+// ── Le sezioni vengono dal core ────────────────────────────────────────────
+//
+// Ogni loop qui sotto itera `API_SECTIONS`, cioe' le sezioni ATTIVE del core
+// (`engine/shared/articleSectionCore.mjs`) che hanno una superficie pubblicata
+// propria, nell'ordine del core: frontaliere, svizzera. I nomi dei file
+// (`articles.json`, `meta-ch-<loc>.json`, la chiave `swiss` di slugs.json, …)
+// sono quelli di sempre, dichiarati in `scripts/lib/corpus-sections.mjs`.
+// Una sezione attiva SENZA superficie pubblicata (oggi: qualunque cantone,
+// finche' non arrivano le superfici di famiglia) e' un rifiuto qui, prima di
+// scrivere un solo byte: saltarla pubblicherebbe un set troncato.
+assertActiveSectionsPublishable();
+const SECTION_REGISTRIES = {};
+for (const section of API_SECTIONS) {
+  const registry = (await load(section.registryFile))[section.registryExport];
+  if (!Array.isArray(registry) || (section.kind === 'frontaliere' && registry.length === 0)) {
+    throw new Error(
+      section.kind === 'frontaliere'
+        ? `${section.registryExport} is empty — refusing to publish an empty registry`
+        : `${section.registryExport} is not an array`,
+    );
+  }
+  SECTION_REGISTRIES[section.section] = registry;
 }
-if (!Array.isArray(SWISS_ARTICLES)) {
-  throw new Error('SWISS_ARTICLES is not an array');
-}
+// Il registro frontaliere ha consumer che sono suoi per costruzione (ticker
+// della homepage, edizioni quotidiane ritirate): li si nomina per tipo.
+const FRONTALIERE = API_SECTIONS.find((section) => section.kind === 'frontaliere');
+if (!FRONTALIERE) throw new Error('nessuna sezione di tipo frontaliere attiva nel core — refusing to publish');
+const ARTICLES = SECTION_REGISTRIES[FRONTALIERE.section];
 
 const commit = (() => {
   try {
@@ -203,55 +230,72 @@ if (!commit) {
 // un campo interno del registry (es. `articleType`) non entra nel contratto
 // HTTP per caso (scripts/lib/registry-api-entry.mjs).
 const markRegistryRelease = (registry) => registry.map((article) => toPublicRegistryEntry(article, commit));
-write('articles.json', markRegistryRelease(ARTICLES));
-write('swiss-articles.json', markRegistryRelease(SWISS_ARTICLES));
-
-for (const loc of LOCALES) {
-  const meta = (await load(`content/blog-meta-${loc}.ts`)).default;
-  const metaCh = (await load(`content/blog-meta-ch-${loc}.ts`)).default;
-  if (!meta || typeof meta !== 'object') throw new Error(`blog-meta-${loc} default is not an object`);
-  if (!metaCh || typeof metaCh !== 'object') throw new Error(`blog-meta-ch-${loc} default is not an object`);
-  write(`meta-${loc}.json`, meta);
-  write(`meta-ch-${loc}.json`, metaCh);
+for (const section of API_SECTIONS) {
+  write(section.api.registry, markRegistryRelease(SECTION_REGISTRIES[section.section]));
 }
 
-const blogSlugs = await load('content/routerBlogData.ts');
-const swissSlugs = await load('content/routerSwissData.ts');
+// Per locale e poi per sezione: e' l'ordine in cui i file sono sempre stati
+// scritti, quindi anche l'ordine di `manifest.files`.
+for (const loc of LOCALES) {
+  for (const section of API_SECTIONS) {
+    const metaName = path.basename(section.metaFile(loc), '.ts');
+    const meta = (await load(section.metaFile(loc))).default;
+    if (!meta || typeof meta !== 'object') throw new Error(`${metaName} default is not an object`);
+    write(section.api.metaFile(loc), meta);
+  }
+}
+
+/** Il modulo della mappa slug di ogni sezione: mappa, inversa e provenienza dei fallback. */
+const SECTION_SLUG_MODULES = {};
+for (const section of API_SECTIONS) {
+  const mod = await load(section.slugFile);
+  SECTION_SLUG_MODULES[section.section] = {
+    slugs: mod[section.slugExport],
+    reverse: mod[section.reverseExport],
+    fallbackReasons: mod[section.fallbackReasonsExport],
+  };
+}
+const slugMapOf = (section) => SECTION_SLUG_MODULES[section].slugs;
 const reservedSlugEntries = [];
-for (const [section, slugMap] of [
-  ['blog', blogSlugs.BLOG_SLUGS],
-  ['swiss', swissSlugs.SWISS_SLUGS],
-]) {
-  for (const [id, locales] of Object.entries(slugMap ?? {})) {
+for (const section of API_SECTIONS) {
+  for (const [id, locales] of Object.entries(slugMapOf(section.section) ?? {})) {
     for (const [locale, slug] of Object.entries(locales ?? {})) {
-      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section}.${id}.${locale}=${slug}`);
+      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section.api.slugsKey}.${id}.${locale}=${slug}`);
     }
   }
 }
-for (const [section, reverseMap] of [
-  ['blogReverse', blogSlugs.REVERSE_BLOG],
-  ['swissReverse', swissSlugs.REVERSE_SWISS],
-]) {
-  for (const [locale, slugs] of Object.entries(reverseMap ?? {})) {
+for (const section of API_SECTIONS) {
+  for (const [locale, slugs] of Object.entries(SECTION_SLUG_MODULES[section.section].reverse ?? {})) {
     for (const slug of Object.keys(slugs ?? {})) {
-      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section}.${locale}.${slug}`);
+      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section.api.reverseKey}.${locale}.${slug}`);
     }
   }
 }
 if (reservedSlugEntries.length > 0) {
   throw new Error(`reserved published slug(s) in source maps: ${reservedSlugEntries.join(', ')}`);
 }
-write('slugs.json', {
-  commit,
-  blog: blogSlugs.BLOG_SLUGS,
-  blogReverse: blogSlugs.REVERSE_BLOG,
-  fallbackReasons: {
-    blog: blogSlugs.BLOG_SLUG_FALLBACK_REASONS ?? {},
-    swiss: swissSlugs.SWISS_SLUG_FALLBACK_REASONS ?? {},
-  },
-  swiss: swissSlugs.SWISS_SLUGS ?? null,
-  swissReverse: swissSlugs.REVERSE_SWISS ?? null,
-});
+// L'ordine delle chiavi e' quello storico — la prima sezione, poi
+// `fallbackReasons` di tutte, poi le altre — perche' slugs.json resti
+// byte-identico a prima che le sezioni venissero dal core.
+{
+  const [first, ...rest] = API_SECTIONS;
+  const slugsDoc = {
+    commit,
+    [first.api.slugsKey]: slugMapOf(first.section) ?? null,
+    [first.api.reverseKey]: SECTION_SLUG_MODULES[first.section].reverse ?? null,
+    fallbackReasons: Object.fromEntries(
+      API_SECTIONS.map((section) => [
+        section.api.slugsKey,
+        SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
+      ]),
+    ),
+  };
+  for (const section of rest) {
+    slugsDoc[section.api.slugsKey] = slugMapOf(section.section) ?? null;
+    slugsDoc[section.api.reverseKey] = SECTION_SLUG_MODULES[section.section].reverse ?? null;
+  }
+  write('slugs.json', slugsDoc);
+}
 
 
 
@@ -286,54 +330,64 @@ const writeXml = (name, { xml, count }) => {
 // Canonical overrides travel WITH the corpus: they decide which swiss articles
 // may appear in the sitemap at all, so keeping them in the site repo would leave
 // this publisher unable to produce a correct file.
-const shadowedSwissSlugs = new Set(
-  Object.keys(
-    JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'swiss-article-canonical-overrides.json'), 'utf-8'))
-      .overrides ?? {},
-  ),
-);
-console.log(`[build-api] shadowed swiss slugs excluded: ${shadowedSwissSlugs.size}`);
+//
+// The frontaliere file (issue #138 item 1) is the engine's, not the corpus's:
+// it ships inside packages/articles/engine/shared/ on the site and lands at
+// engine/shared/ here via mirror-articles-engine.yml (see that file's _doc for
+// why it lives in the engine and not in content/). Same shape as the swiss map
+// — a flat `overrides` object keyed by the shadowed slug — so the same
+// Object.keys() extraction applies unchanged; the only structural difference
+// is an extra `_groups` block that documents which shadowed slugs share a
+// winner, which this reader does not need. Which file belongs to which section
+// is declared once, in corpus-sections.mjs (`canonicalOverrides`).
+const SECTION_CANONICAL_SHADOW = {};
+for (const section of API_SECTIONS) {
+  const shadowed = new Set(
+    section.canonicalOverrides
+      ? Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, section.canonicalOverrides), 'utf-8')).overrides ?? {})
+      : [],
+  );
+  SECTION_CANONICAL_SHADOW[section.section] = shadowed;
+  console.log(`[build-api] shadowed ${section.section} slugs excluded: ${shadowed.size}`);
+}
+const shadowedFrontaliereSlugs = SECTION_CANONICAL_SHADOW[FRONTALIERE.section];
 
-// Same mechanism, frontaliere section (issue #138 item 1). The file is the
-// engine's, not the corpus's: it ships inside packages/articles/engine/shared/
-// on the site and lands at engine/shared/ here via mirror-articles-engine.yml
-// (see that file's _doc for why it lives in the engine and not in content/).
-// Same shape as the swiss map — a flat `overrides` object keyed by the
-// shadowed slug — so the same Object.keys() extraction applies unchanged; the
-// only structural difference is an extra `_groups` block that documents which
-// shadowed slugs share a winner, which this reader does not need.
-const shadowedFrontaliereSlugs = new Set(
-  Object.keys(
-    JSON.parse(
-      fs.readFileSync(path.join(ROOT, 'engine', 'shared', 'frontaliere-article-canonical-overrides.json'), 'utf-8'),
-    ).overrides ?? {},
-  ),
-);
-console.log(`[build-api] shadowed frontaliere slugs excluded: ${shadowedFrontaliereSlugs.size}`);
-
-const metaIt = (await load('content/blog-meta-it.ts')).default;
-const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
+const SECTION_META_IT = {};
+for (const section of API_SECTIONS) {
+  SECTION_META_IT[section.section] = (await load(section.metaFile('it'))).default;
+}
 // Daily editions carry their date in the id, and slugs.it === id, so the
 // retired set plugs straight into buildSitemap's shadowed parameter.
 const retiredDailyEditions = selectRetiredDailyEditions(ARTICLES.map((a) => a.id));
 console.log(`[build-api] retired daily editions de-listed from sitemap: ${retiredDailyEditions.size}`);
 const retiredDailyEditionSlugs = new Set(
-  [...retiredDailyEditions].map((id) => blogSlugs.BLOG_SLUGS?.[id]?.it ?? id),
+  [...retiredDailyEditions].map((id) => slugMapOf(FRONTALIERE.section)?.[id]?.it ?? id),
 );
-// buildSitemap takes a single `shadowed` set, so the frontaliere call unions
-// the two de-listing reasons — retired daily editions and canonical-shadowed
-// duplicates — the same way the svizzera call already gets its own dedicated set.
-const frontaliereSitemapShadow = new Set([...retiredDailyEditionSlugs, ...shadowedFrontaliereSlugs]);
-const sitemapCounts = {
-  blog: writeXml(
-    SECTION_SITEMAPS.frontaliere,
-    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow),
-  ),
-  blogCh: writeXml(
-    SECTION_SITEMAPS.svizzera,
-    buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
-  ),
-};
+// buildSitemap takes a single `shadowed` set, so the section that publishes
+// daily editions (frontaliere) unions the two de-listing reasons — retired
+// daily editions and canonical-shadowed duplicates — while every other section
+// gets its own canonical set alone, as svizzera always did.
+const SECTION_SITEMAP_SHADOW = Object.fromEntries(
+  API_SECTIONS.map((section) => [
+    section.section,
+    section.retiredDailyEditions
+      ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
+      : SECTION_CANONICAL_SHADOW[section.section],
+  ]),
+);
+const sitemapCounts = {};
+for (const section of API_SECTIONS) {
+  sitemapCounts[section.section] = writeXml(
+    section.api.sitemap,
+    buildSitemap(
+      SECTION_REGISTRIES[section.section],
+      section.section,
+      slugMapOf(section.section),
+      SECTION_META_IT[section.section],
+      SECTION_SITEMAP_SHADOW[section.section],
+    ),
+  );
+}
 // I pavimenti sono relativi al registro IT meno le esclusioni esplicite già
 // validate (canonical override e daily edition ritirate), non al predicato del
 // builder: un filtro nuovo o una slug map troncata deve far scattare il floor,
@@ -341,26 +395,42 @@ const sitemapCounts = {
 // locale, mentre questa sitemap ha una sola URL per articolo. Il vecchio `< 100`
 // proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
 // svizzera; un parse troncato restava quindi pubblicabile senza errori.
-const sitemapSources = {
-  blog: countSourceSitemapEntries(ROOT, 'frontaliere'),
-  blogCh: countSourceSitemapEntries(ROOT, 'svizzera'),
-};
-for (const [key, file] of [
-  ['blog', SECTION_SITEMAPS.frontaliere],
-  ['blogCh', SECTION_SITEMAPS.svizzera],
-]) {
-  const source = sitemapSources[key];
+//
+// Politica per tipo (corpus-floors.mjs, `KIND_FLOOR_POLICY`): le sezioni
+// storiche hanno il pavimento proprio e una sitemap vuota e' un rifiuto; una
+// sezione di famiglia (cantonale) parte legittimamente a zero, quindi si
+// giudica la famiglia nel suo insieme. Con le due sezioni storiche la regola e'
+// esattamente quella di prima.
+const sitemapSources = {};
+const familySitemapRows = [];
+for (const section of API_SECTIONS) {
+  const file = section.api.sitemap;
+  const source = countSourceSitemapEntries(ROOT, section.section);
+  sitemapSources[section.section] = source;
+  if (floorPolicyOf(section.section) === 'family') {
+    familySitemapRows.push({ section: section.section, source, emitted: sitemapCounts[section.section] });
+    continue;
+  }
   if (source <= 0) {
     throw new Error(`${file} has no emittable IT registry entries — refusing to publish an empty sitemap`);
   }
   const floor = floorFrom(source);
-  if (sitemapCounts[key] < floor) {
+  if (sitemapCounts[section.section] < floor) {
     throw new Error(
-      `${file} has only ${sitemapCounts[key]} urls against ${source} emittable IT registry entries ` +
+      `${file} has only ${sitemapCounts[section.section]} urls against ${source} emittable IT registry entries ` +
         `(floor ${floor}) — refusing to publish a truncated sitemap`,
     );
   }
-  console.log(`[build-api] ${file}: ${sitemapCounts[key]} urls (floor ${floor}, derived from emitted IT entries)`);
+  console.log(`[build-api] ${file}: ${sitemapCounts[section.section]} urls (floor ${floor}, derived from emitted IT entries)`);
+}
+if (familySitemapRows.length > 0) {
+  const verdict = familyFloorVerdict(familySitemapRows);
+  if (verdict.truncated) {
+    throw new Error(
+      `family sitemaps (${verdict.sections.join(', ')}) have only ${verdict.emitted} urls against ${verdict.source} ` +
+        `emittable IT registry entries (floor ${verdict.floor}) — refusing to publish a truncated family`,
+    );
+  }
 }
 
 // ── Archive pages (issue #4974) ───────────────────────────────────────────
@@ -389,10 +459,15 @@ function archiveBase(section, locale) {
 const archiveSources = {};
 function buildArchiveSitemap() {
   const urls = [];
-  for (const section of ['frontaliere', 'svizzera']) {
+  const familyRows = [];
+  for (const section of API_SECTIONS.map(({ section: id }) => id)) {
     const total = readArticleArchiveUnionSlugs(fs, path, ROOT, section).size;
+    // Per una sezione di famiglia `sectionFloor` vale 0 (sezione nuova): il
+    // troncamento si giudica sulla famiglia, dopo il loop.
     const floor = sectionFloor(ROOT, section);
-    if (total < floor) {
+    if (floorPolicyOf(section) === 'family') {
+      familyRows.push({ section, source: countSourceArticles(ROOT, section), emitted: total });
+    } else if (total < floor) {
       throw new Error(
         `${section} archive has only ${total} entries against ${floor} required by the corpus floor ` +
           `— refusing to publish a truncated archive sitemap`,
@@ -423,6 +498,15 @@ function buildArchiveSitemap() {
         parts.push(`  </url>`);
         urls.push(parts.join('\n'));
       }
+    }
+  }
+  if (familyRows.length > 0) {
+    const verdict = familyFloorVerdict(familyRows);
+    if (verdict.truncated) {
+      throw new Error(
+        `family archives (${verdict.sections.join(', ')}) have only ${verdict.emitted} entries against ` +
+          `${verdict.floor} required by the corpus floor — refusing to publish a truncated archive sitemap`,
+      );
     }
   }
   return {
@@ -496,7 +580,7 @@ const rssSections = buildAllRssFeeds({
   fs,
   path,
   rootDir: ROOT,
-  registries: { frontaliere: ARTICLES, svizzera: SWISS_ARTICLES },
+  registries: Object.fromEntries(API_SECTIONS.map(({ section }) => [section, SECTION_REGISTRIES[section]])),
   layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
   // Il corpus e' il produttore REALE dei dieci feed: il sito chiama
   // buildAllRssFeeds solo dai test. Se questa riga manca, la riparazione della
@@ -508,15 +592,23 @@ const rssSections = buildAllRssFeeds({
 
 let rssFeedCount = 0;
 let rssItemTotal = 0;
+// Stessa politica per tipo delle sitemap: una sezione storica senza feed, o un
+// suo feed senza item, e' un rifiuto; una sezione di famiglia nuova puo' non
+// averne, e il rifiuto passa alla famiglia (articoli in sorgente, zero item
+// emessi in tutta la famiglia).
+const familyRssRows = [];
 for (const section of rssSections) {
-  if (section.feeds.length === 0) {
+  const familyPolicy = floorPolicyOf(section.id) === 'family';
+  if (section.feeds.length === 0 && !familyPolicy) {
     throw new Error(
       `rss: section '${section.id}' produced no feeds (${section.articleCount} articles parsed) — refusing to publish`,
     );
   }
+  let sectionItems = 0;
   for (const [name, xml] of section.feeds) {
     const items = countXmlTags(xml, 'item');
-    if (items === 0) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    if (items === 0 && !familyPolicy) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    sectionItems += items;
     // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
     // not ours to edit here (a change would be overwritten on the next mirror
     // run). Sanitising where this script writes them keeps the fix in the repo
@@ -530,6 +622,14 @@ for (const section of rssSections) {
     rssItemTotal += items;
     console.log(`[build-api] ${name}: ${items} items, ${byteSize(clean)} bytes`);
   }
+  if (familyPolicy) familyRssRows.push({ section: section.id, source: section.articleCount, emitted: sectionItems });
+}
+if (familyRssRows.length > 0 && familyFloorVerdict(familyRssRows).source > 0
+    && familyRssRows.every((row) => row.emitted === 0)) {
+  throw new Error(
+    `rss: family sections (${familyRssRows.map((row) => row.section).join(', ')}) have articles but no <item> ` +
+      'in any feed — refusing to publish',
+  );
 }
 
 // ── News-ticker payload ───────────────────────────────────────────
@@ -581,7 +681,7 @@ const { computeTickerArticles } = await load('engine/newsTickerDataPlugin.ts');
 const tickerArticles = computeTickerArticles(fs, path, ROOT, ARTICLES, {
   hubLocales: LOCALES,
   metaDir: 'content',
-  slugDataFile: 'content/routerBlogData.ts',
+  slugDataFile: FRONTALIERE.slugFile,
 });
 if (tickerArticles.length === 0) {
   throw new Error('news-ticker-live.json would be empty — refusing to publish');
@@ -740,8 +840,15 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     }
   };
 
-  collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow);
-  collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs);
+  for (const section of API_SECTIONS) {
+    collect(
+      SECTION_REGISTRIES[section.section],
+      section.section,
+      slugMapOf(section.section),
+      SECTION_META_IT[section.section],
+      SECTION_SITEMAP_SHADOW[section.section],
+    );
+  }
 
   const candidatesXmlRaw =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
@@ -910,10 +1017,10 @@ write('manifest.json', {
   commit,
   generatedAt: new Date().toISOString(),
   counts: {
-    articles: ARTICLES.length,
-    swissArticles: SWISS_ARTICLES.length,
-    sitemapBlogUrls: sitemapCounts.blog,
-    sitemapBlogChUrls: sitemapCounts.blogCh,
+    // I contatori storici col loro nome (`articles`, `swissArticles`,
+    // `sitemapBlogUrls`, `sitemapBlogChUrls`): li leggono il sito e i gate.
+    ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.counter, SECTION_REGISTRIES[section.section].length])),
+    ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.sitemapCounter, sitemapCounts[section.section]])),
     sitemapArchiveUrls: sitemapCounts.archive,
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
@@ -924,6 +1031,15 @@ write('manifest.json', {
     borderRankingEntries,
     dailyBriefBlocks,
     plateAuctionEditorialLocales,
+    // Additiva: la stessa cardinalita' per sezione, con l'id del core come
+    // chiave. E' la forma che non cambia quando si accende una sezione: i
+    // contatori col nome fisso qui sopra restano per i consumer che li leggono.
+    bySection: Object.fromEntries(
+      API_SECTIONS.map((section) => [
+        section.section,
+        { articles: SECTION_REGISTRIES[section.section].length, sitemapUrls: sitemapCounts[section.section] },
+      ]),
+    ),
   },
   files: written,
 });
@@ -1064,10 +1180,11 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     .filter((xml) => countXmlTags(xml, 'rss') > 0);
 
   const derived = {
-    articles: derivedAlways('articles.json', () => jsonOut('articles.json').length),
-    swissArticles: derivedAlways('swiss-articles.json', () => jsonOut('swiss-articles.json').length),
-    sitemapBlogUrls: sitemapUrls(SECTION_SITEMAPS.frontaliere),
-    sitemapBlogChUrls: sitemapUrls(SECTION_SITEMAPS.svizzera),
+    ...Object.fromEntries(API_SECTIONS.map((section) => [
+      section.api.counter,
+      derivedAlways(section.api.registry, () => jsonOut(section.api.registry).length),
+    ])),
+    ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.sitemapCounter, sitemapUrls(section.api.sitemap)])),
     sitemapArchiveUrls: sitemapUrls(ARCHIVE_SITEMAP),
     rssFeeds: feeds.length,
     rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
@@ -1117,10 +1234,22 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // qui e non semplicemente dimenticato, perche' il controllo di
   // esaustivita' sotto e' la parte che protegge dal contatore FUTURO.
   const NOT_ON_DISK = new Set(['tickerArticlesShadowed']);
+  // `bySection` non e' un numero: e' la stessa cardinalita' dei contatori
+  // storici, per sezione. Si ri-deriva dai byte serviti come gli altri e si
+  // confronta per valore qui sotto, quindi NON sta in NOT_ON_DISK.
+  const derivedBySection = Object.fromEntries(
+    API_SECTIONS.map((section) => [
+      section.section,
+      {
+        articles: exists(section.api.registry) ? jsonOut(section.api.registry).length : null,
+        sitemapUrls: exists(section.api.sitemap) ? countXmlTags(readOut(section.api.sitemap), 'url') : null,
+      },
+    ]),
+  );
 
   const declared = jsonOut('manifest.json').counts;
   const unchecked = Object.keys(declared).filter(
-    (key) => !(key in derived) && !NOT_ON_DISK.has(key),
+    (key) => !(key in derived) && !NOT_ON_DISK.has(key) && key !== 'bySection',
   );
   if (unchecked.length) {
     throw new Error(
@@ -1134,6 +1263,20 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     if (actual === null) continue; // artefatto assente: gia' segnalato sopra
     if (declared[key] !== actual) {
       mismatches.push(`${key}: declared ${declared[key]}, on disk ${actual}`);
+    }
+  }
+  // Sezioni dichiarate e sezioni ri-derivate devono essere lo STESSO insieme:
+  // una sezione in piu' o in meno in `bySection` e' un set diverso, non un
+  // dettaglio di presentazione.
+  const declaredBySection = declared.bySection ?? {};
+  const bySectionIds = new Set([...Object.keys(declaredBySection), ...Object.keys(derivedBySection)]);
+  for (const id of bySectionIds) {
+    for (const field of ['articles', 'sitemapUrls']) {
+      const want = derivedBySection[id]?.[field];
+      if (want === null) continue; // artefatto assente: gia' segnalato sopra
+      if (declaredBySection[id]?.[field] !== want) {
+        mismatches.push(`bySection.${id}.${field}: declared ${declaredBySection[id]?.[field]}, on disk ${want}`);
+      }
     }
   }
   // `slugs.json` non ha un contatore proprio in `counts`, ma indicizza lo
@@ -1169,7 +1312,9 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
         { requireMarkers: true },
       ),
     );
-    const indexed = { blog: ['articles.json', 'articles'], swiss: ['swiss-articles.json', 'swissArticles'] };
+    const indexed = Object.fromEntries(
+      API_SECTIONS.map((section) => [section.api.slugsKey, [section.api.registry, section.api.counter]]),
+    );
     for (const [section, [registry, counter]] of Object.entries(indexed)) {
       const keys = Object.keys(slugs?.[section] ?? {});
       if (keys.length !== declared[counter]) {

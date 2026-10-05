@@ -19,7 +19,16 @@ function stepText(name) {
 
 test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   const resolveStep = stepText('Resolve mode, article ids and section');
-  assert.match(resolveStep, /grep -E '\^content\/blog-body\(-ch\)\?\/\[a-z\]\{2\}\/\.\+\\\.ts\$'/);
+  // Le cartelle dei corpi, la sezione di ogni corpo e lo shard vengono dal
+  // core (scripts/ci/fast-publish-section.mjs), non da una regex e un `case`
+  // scritti nel workflow; il comportamento dell'helper e' provato in
+  // core-driven-consumers.test.mjs.
+  assert.match(resolveStep, /body_re="\$\(node scripts\/ci\/fast-publish-section\.mjs body-regex\)"/);
+  assert.match(resolveStep, /grep -E "\$body_re"/);
+  assert.match(resolveStep, /body_section="\$\(node scripts\/ci\/fast-publish-section\.mjs section-of "\$body"\)"/);
+  assert.match(resolveStep, /shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$section"\)"/);
+  assert.match(resolveStep, /echo "shard=\$shard"/);
+  assert.doesNotMatch(resolveStep, /body_section=svizzera/);
   assert.match(resolveStep, /sort -u/);
   assert.match(resolveStep, /ids\+=\("\$body_id"\)/);
   assert.match(resolveStep, /echo "ids=\$ids_json"/);

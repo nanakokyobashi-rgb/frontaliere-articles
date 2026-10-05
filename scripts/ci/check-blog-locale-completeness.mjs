@@ -17,12 +17,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { detectLanguageWithConfidence } from '../../generator/scripts/lib/detect-language.mjs';
+import { CORPUS_SECTIONS } from '../lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-export const BODY_ROOTS = Object.freeze([
-  { rel: 'content/blog-body', name: 'frontaliere' },
-  { rel: 'content/blog-body-ch', name: 'svizzera' },
-]);
+// Le radici dei corpi vengono dal core (sezioni ATTIVE), non da una coppia
+// scritta a mano: una sezione accesa nel core e' sorvegliata senza toccare qui.
+export const BODY_ROOTS = Object.freeze(
+  CORPUS_SECTIONS.map((section) => Object.freeze({ rel: section.bodyDir, name: section.section })),
+);
 export const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const TARGET_LOCALES = Object.freeze(['en', 'de', 'fr']);
 // Keep this in lockstep with buildBodyFile() in

@@ -200,10 +200,21 @@ function canonicalSurfaces(core) {
   };
 }
 
-/** Descrittori per sezione: le superfici su cui `create-article.mjs` scrive. */
-export const SECTIONS = {
+/**
+ * Le superfici di SCRITTURA che il core non porta, per tipo di sezione: sono
+ * i target di `create-article.mjs` (`ARTICLE_SECTION_CONFIGS`) e il legame e'
+ * provato da `generator/tests/rebase-onto-remote.test.mjs`, che deriva i suoi
+ * attesi da create-article e li cerca negli argomenti di rebase prodotti da qui.
+ *
+ * Il tipo `canton` manca apposta: dove scrive un articolo cantonale (ledger,
+ * quote, sidecar, chunk SEO) lo decide create-article quando impara a
+ * generarlo (P6 del piano «sezioni cantonali»). Fino ad allora una sezione
+ * cantonale ATTIVA fa lanciare questo modulo all'import: e' lo stesso
+ * «sezione nel core senza ledger = errore, non sezione saltata» di
+ * `check-post-rebase-uniqueness.mjs`, anticipato al primo lettore.
+ */
+const KIND_WRITE_SURFACES = {
   frontaliere: {
-    ...canonicalSurfaces(ARTICLE_SECTION_CORE.frontaliere),
     fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS',
     // `ALL_BLOG_ARTICLE_IDS` è un array letterale indipendente, non derivato
     // da `BLOG_SLUGS`: rimuovere la riga slug non lo tocca. `routerSwissData.ts`
@@ -217,11 +228,14 @@ export const SECTIONS = {
     idUnionFile: 'content/blogArticleIds.ts',
     seoFiles: null, // scoperti a runtime: content/seo/seo-blog*.ts
     seoGlobPrefix: 'content/seo/seo-blog',
+    // Il chunk SEO in cui create-article APPENDE oggi (`seoFile`): il solo dei
+    // chunk `seo-blog*.ts` che un run concorrente puo' toccare.
+    seoWriteFile: 'content/seo/seo-blog-5.ts',
     sourceLedger: 'data/article-source-urls.json',
+    sourceQuotaFile: 'data/article-source-quotas.json',
     sidecarDir: 'data/blog-articles',
   },
-  svizzera: {
-    ...canonicalSurfaces(ARTICLE_SECTION_CORE.svizzera),
+  national: {
     fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS',
     idListVar: null,
     // `create-article.mjs`: la sezione svizzera NON mantiene la union
@@ -229,10 +243,32 @@ export const SECTIONS = {
     idUnionFile: null,
     seoFiles: ['content/seo/seo-blog-ch.ts'],
     seoGlobPrefix: null,
+    seoWriteFile: 'content/seo/seo-blog-ch.ts',
     sourceLedger: 'data/swiss-article-source-urls.json',
+    sourceQuotaFile: 'data/swiss-article-source-quotas.json',
     sidecarDir: 'data/swiss-articles',
   },
 };
+
+/**
+ * Descrittori per sezione ATTIVA: le superfici su cui `create-article.mjs`
+ * scrive. Le sezioni vengono da `ARTICLE_SECTION_CORE`, non da un elenco qui.
+ */
+export const SECTIONS = Object.fromEntries(
+  Object.entries(ARTICLE_SECTION_CORE).map(([section, core]) => {
+    const extras = Object.prototype.hasOwnProperty.call(KIND_WRITE_SURFACES, core.kind)
+      ? KIND_WRITE_SURFACES[core.kind]
+      : undefined;
+    if (!extras) {
+      throw new Error(
+        `article-surfaces: la sezione attiva '${section}' (tipo ${core.kind}) non ha superfici di scrittura ` +
+          'dichiarate (ledger URL→id, quote, sidecar, chunk SEO): le definisce create-article per le sezioni ' +
+          'cantonali (P6). Senza, ritiro, rebase e dedup fra sezioni non sono verificabili.',
+      );
+    }
+    return [section, { ...canonicalSurfaces(core), ...extras }];
+  }),
+);
 
 const SOURCE_LEDGER_FILES = new Set(Object.values(SECTIONS).map(({ sourceLedger }) => sourceLedger));
 

@@ -482,6 +482,14 @@ function makeCorpusMirror() {
   };
   mirror('content');
   mirror('generator');
+  // Le suite derivano le radici dei corpi dal core delle sezioni via
+  // `scripts/lib/corpus-sections.mjs`: il modulo serve nel mirror. Symlinkato
+  // basta, perche' Node lo risolve al file vero e i suoi import relativi
+  // (engine/shared, generator/scripts/lib) con lui; non legge la ROOT.
+  for (const rel of ['scripts/lib/corpus-sections.mjs']) {
+    fs.mkdirSync(path.dirname(path.join(tmp, rel)), { recursive: true });
+    fs.symlinkSync(path.join(ROOT, rel), path.join(tmp, rel));
+  }
   // Le due suite: copie vere, cosi' la loro ROOT e' il mirror.
   for (const suite of SUITES) {
     fs.rmSync(path.join(tmp, suite), { force: true });
