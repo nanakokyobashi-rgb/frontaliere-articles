@@ -249,10 +249,11 @@ test('build-api.mjs passes the UNFILTERED registries to the RSS builder and to t
   assert.ok(rssCall, 'could not find the buildAllRssFeeds({...}) call to inspect');
   // Since C1 the registries are keyed by the core's section ids; each one is
   // the module export as loaded, with no filter between the load and here.
+  // Since P7 the family sections (cantons) are passed too, same rule.
   assert.match(src, /SECTION_REGISTRIES\[section\.section\] = registry;/);
   assert.match(
     rssCall[0],
-    /registries:\s*Object\.fromEntries\(API_SECTIONS\.map\(\(\{ section \}\) => \[section, SECTION_REGISTRIES\[section\]\]\)\)/,
+    /registries:\s*Object\.fromEntries\(PUBLISHED_API_SECTIONS\.map\(\(\{ section \}\) => \[section, SECTION_REGISTRIES\[section\]\]\)\)/,
     'the RSS registries are no longer the raw per-section registries. Filtering them HERE is a ' +
       'caller-side divergence: engine/rssFeeds.mjs is the single implementation shared with the site ' +
       '(its header forbids a second copy for exactly this reason), and both override files document ' +

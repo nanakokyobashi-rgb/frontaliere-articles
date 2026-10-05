@@ -17,7 +17,7 @@
  */
 
 import { isReservedPublishedSlug } from './published-slug-guard.mjs';
-import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 
 export const SITE = 'https://frontaliereticino.ch';
 
@@ -77,7 +77,29 @@ export function countSitemapEntries(entries, slugMap, shadowed = new Set()) {
  *   that failure is preventable before it is published.
  */
 export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
-  const paths = SECTION_PATHS[section];
+  const urls = buildArticleUrlBlocks(entries, SECTION_PATHS[section], slugMap, meta, shadowed);
+  return {
+    xml:
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
+      `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n` +
+      `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+      urls.join('\n') +
+      `\n</urlset>\n`,
+    count: urls.length,
+  };
+}
+
+/**
+ * I blocchi `<url>` degli articoli di una sezione, uno per articolo con la loc
+ * IT e gli alternate delle quattro locali. E' il corpo di `buildSitemap`
+ * (stesso output byte per byte) separato perche' anche la sitemap di una
+ * sezione di famiglia (`buildFamilySectionSitemap`) elenca i suoi articoli
+ * con la stessa forma.
+ *
+ * @param {Record<string, string>} paths prefisso della sezione per locale (`/articoli-x/`)
+ */
+export function buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed = new Set()) {
   const sectionPath = paths.it;
   const urls = [];
   for (const a of entries) {
@@ -117,6 +139,89 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
     parts.push(`  </url>`);
     urls.push(parts.join('\n'));
   }
+  return urls;
+}
+
+/** Il prefisso per locale di QUALSIASI sezione nota al core (attiva o no). */
+export function sectionPathsOf(section) {
+  const core = ARTICLE_SECTION_CORE_ALL[section];
+  if (!core) throw new Error(`sectionPathsOf: sezione sconosciuta "${section}"`);
+  return Object.fromEntries(
+    Object.entries(core.indexSlug).map(([locale, slug]) => [locale, locale === 'it' ? `/${slug}/` : `/${locale}/${slug}/`]),
+  );
+}
+
+/** Lo slug dell'archivio completo per locale (`/<sezione>/tutti/` e la sua catena `page-N`). */
+export const ARCHIVE_ALL_SLUG = Object.freeze({ it: 'tutti', en: 'all', de: 'alle', fr: 'tous' });
+
+const SITEMAP_LOCALES = ['it', 'en', 'de', 'fr'];
+
+/**
+ * Le pagine di sezione (non articoli) di una sezione di famiglia, ciascuna come
+ * `{ key, paths: {it,en,de,fr}, priority, alternates }`: la landing, i suoi hub
+ * tematici (`topicHubs` del core, slug riservati D2) e l'archivio `tutti` con
+ * le pagine `page-N`. Gli alternate stanno sulle pagine che li portano
+ * (landing, hub, pagina 1 dell'archivio), come nella sitemap dell'archivio
+ * storico.
+ *
+ * Gli hub ci sono SEMPRE: decisione del proprietario (2026-10-05), nessuna
+ * pagina cantonale e' `noindex`, nemmeno sotto soglia. Una sezione che non ha
+ * ancora contenuti sufficienti resta `draft` nel registro, e il Worker non
+ * serve ne' le sue pagine ne' questa sitemap.
+ *
+ * @param {string} section id di una sezione con `topicHubs` (le cantonali)
+ * @param {number} archiveTotal articoli che l'archivio pagina
+ * @param {number} pageSize articoli per pagina dell'archivio (ARTICLES_PAGE_SIZE dell'host)
+ */
+export function familySectionPages(section, archiveTotal, pageSize) {
+  if (!Number.isInteger(pageSize) || pageSize <= 0) throw new Error(`familySectionPages: pageSize non valido (${pageSize})`);
+  const core = ARTICLE_SECTION_CORE_ALL[section];
+  if (!core?.topicHubs) throw new Error(`familySectionPages: "${section}" non ha hub tematici nel core`);
+  const base = sectionPathsOf(section);
+  const at = (suffix) => Object.fromEntries(SITEMAP_LOCALES.map((loc) => [loc, `${base[loc]}${suffix(loc)}`]));
+  const pages = [{ key: 'landing', paths: base, priority: '0.8', alternates: true }];
+  for (const [topic, slugs] of Object.entries(core.topicHubs)) {
+    pages.push({ key: `hub:${topic}`, paths: at((loc) => `${slugs[loc]}/`), priority: '0.7', alternates: true });
+  }
+  const archivePages = Math.max(1, Math.ceil(archiveTotal / pageSize));
+  for (let page = 1; page <= archivePages; page++) {
+    pages.push({
+      key: page === 1 ? 'archive' : `archive:${page}`,
+      paths: at((loc) => (page === 1 ? `${ARCHIVE_ALL_SLUG[loc]}/` : `${ARCHIVE_ALL_SLUG[loc]}/page-${page}/`)),
+      priority: page === 1 ? '0.6' : '0.4',
+      alternates: page === 1,
+    });
+  }
+  return pages;
+}
+
+/**
+ * La sitemap di UNA sezione di famiglia (`sitemap-articles-<id>.xml`): le sue
+ * pagine di sezione (una `<url>` per locale) e poi i suoi articoli (loc IT con
+ * gli alternate, come `sitemap-blog.xml`). `articleCount` e' il numero di
+ * articoli emessi, separato da `count` perche' i pavimenti si misurano sugli
+ * articoli: contare anche landing e hub li renderebbe sempre soddisfatti.
+ */
+export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pageSize, shadowed = new Set() }) {
+  const paths = sectionPathsOf(section);
+  const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed);
+  const pageUrls = [];
+  for (const page of familySectionPages(section, articleUrls.length, pageSize)) {
+    for (const loc of SITEMAP_LOCALES) {
+      const parts = [`  <url>`, `    <loc>${SITE}${xmlEsc(page.paths[loc])}</loc>`];
+      if (page.alternates) {
+        for (const alt of SITEMAP_LOCALES) {
+          parts.push(`    <xhtml:link rel="alternate" hreflang="${alt}" href="${SITE}${xmlEsc(page.paths[alt])}" />`);
+        }
+        parts.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${xmlEsc(page.paths.it)}" />`);
+      }
+      parts.push(`    <changefreq>daily</changefreq>`);
+      parts.push(`    <priority>${page.priority}</priority>`);
+      parts.push(`  </url>`);
+      pageUrls.push(parts.join('\n'));
+    }
+  }
+  const urls = [...pageUrls, ...articleUrls];
   return {
     xml:
       `<?xml version="1.0" encoding="UTF-8"?>\n` +
@@ -126,5 +231,7 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
       urls.join('\n') +
       `\n</urlset>\n`,
     count: urls.length,
+    articleCount: articleUrls.length,
+    pageCount: pageUrls.length,
   };
 }

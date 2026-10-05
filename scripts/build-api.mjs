@@ -81,10 +81,39 @@ import {
 // Pure XML builder, no .ts imports on purpose (see that file's header): lets
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
-import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
+import {
+  SITE,
+  xmlEsc,
+  SECTION_PATHS,
+  ARCHIVE_ALL_SLUG,
+  buildSitemap,
+  buildFamilySectionSitemap,
+} from './lib/build-sitemap.mjs';
 // Le sezioni da pubblicare vengono dal core (lista ATTIVA), con i nomi della
 // superficie pubblicata dichiarati una volta in corpus-sections.mjs.
-import { API_SECTIONS, assertActiveSectionsPublishable } from './lib/corpus-sections.mjs';
+import {
+  API_SECTIONS,
+  PUBLISHED_API_SECTIONS,
+  activeApiFamilies,
+  assertActiveSectionsPublishable,
+} from './lib/corpus-sections.mjs';
+// Il registro delle sezioni (dichiarato in sections/registry.json, verita' del
+// rollout) e i documenti che ne derivano: catalogo per il sito, copia per il
+// Worker, indice delle sitemap per sezione (piano «sezioni cantonali», P7).
+import {
+  EDGE_SECTION_REGISTRY_FILE,
+  SECTIONS_CATALOG_FILE,
+  SECTION_SITEMAP_INDEX_FILE,
+  buildEdgeRegistry,
+  buildSectionsCatalog,
+  buildSitemapIndex,
+  edgeRegistryPublishable,
+  effectiveStatuses,
+  latestArticleDate,
+  loadDeclaredRegistry,
+  resolveKillSwitch,
+  validateEdgeSectionRegistry,
+} from './lib/section-registry.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Allowlist dei campi pubblici di articles.json / swiss-articles.json.
 import { toPublicRegistryEntry } from './lib/registry-api-entry.mjs';
@@ -175,6 +204,7 @@ const write = (name, value) => {
   // sulla forma serializzata non ci sarebbe piu' niente da vedere (#133).
   reportStrippedControlCharsDeep(file, value, cleanValue);
   const json = JSON.stringify(cleanValue);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, json);
   written[name] = byteSize(json);
   console.log(`[build-api] ${name}: ${byteSize(json)} bytes`);
@@ -194,8 +224,21 @@ const load = async (rel) => import(path.join(ROOT, rel));
 // finche' non arrivano le superfici di famiglia) e' un rifiuto qui, prima di
 // scrivere un solo byte: saltarla pubblicherebbe un set troncato.
 assertActiveSectionsPublishable();
+// Il registro dichiarato delle sezioni si valida PRIMA di scrivere un solo
+// byte: un registro fuori contratto e' un errore del commit che l'ha toccato.
+const declaredSections = loadDeclaredRegistry(ROOT);
+// Le sezioni di FAMIGLIA (le cantonali accese) si leggono come le storiche, con
+// una differenza sola: una sezione di famiglia appena accesa non ha ancora i
+// suoi file (create-article li crea al primo articolo), e l'assenza vale
+// registro vuoto — la stessa regola di `isNewFamilySection` nei pavimenti.
+// Un file presente ma illeggibile resta un errore.
+const familyFileMissing = (section, rel) => section.api.family !== null && !fs.existsSync(path.join(ROOT, rel));
 const SECTION_REGISTRIES = {};
-for (const section of API_SECTIONS) {
+for (const section of PUBLISHED_API_SECTIONS) {
+  if (familyFileMissing(section, section.registryFile)) {
+    SECTION_REGISTRIES[section.section] = [];
+    continue;
+  }
   const registry = (await load(section.registryFile))[section.registryExport];
   if (!Array.isArray(registry) || (section.kind === 'frontaliere' && registry.length === 0)) {
     throw new Error(
@@ -245,26 +288,82 @@ for (const loc of LOCALES) {
   }
 }
 
+/** Il meta di una sezione per locale; `{}` per una sezione di famiglia ancora senza file. */
+async function loadSectionMeta(section, loc) {
+  if (familyFileMissing(section, section.metaFile(loc))) return {};
+  const meta = (await load(section.metaFile(loc))).default;
+  if (!meta || typeof meta !== 'object') throw new Error(`${path.basename(section.metaFile(loc), '.ts')} default is not an object`);
+  return meta;
+}
+
+// ── Superfici di famiglia (le sezioni cantonali accese) ──────────────────
+//
+// Una famiglia pubblica UN registro (`canton-articles.json`, ogni riga con la
+// sua `section`), UN meta per locale (`meta-canton-<loc>.json`) e UNA chiave di
+// slugs.json (sotto). Le chiavi `blog.article.<id>.*` e gli id articolo sono
+// un namespace unico fra tutte le sezioni (i18n condiviso, D6/D14), quindi
+// unire i meta e' sicuro solo se nessuna chiave si ripete: una ripetizione e'
+// un rifiuto, non un «vince l'ultima». Senza famiglie accese (oggi) non si
+// scrive niente qui, e dist/api resta quello di prima.
+const API_FAMILIES = activeApiFamilies(PUBLISHED_API_SECTIONS);
+for (const family of API_FAMILIES) {
+  const seen = new Map();
+  const rows = [];
+  for (const section of family.sections) {
+    for (const article of SECTION_REGISTRIES[section.section]) {
+      if (seen.has(article.id)) {
+        throw new Error(`${family.api.registry}: id "${article.id}" in ${seen.get(article.id)} e in ${section.section} — refusing`);
+      }
+      seen.set(article.id, section.section);
+      rows.push({ ...toPublicRegistryEntry(article, commit), section: section.section });
+    }
+  }
+  write(family.api.registry, rows);
+  for (const loc of LOCALES) {
+    const merged = {};
+    const owner = {};
+    for (const section of family.sections) {
+      for (const [key, value] of Object.entries(await loadSectionMeta(section, loc))) {
+        if (Object.prototype.hasOwnProperty.call(merged, key)) {
+          throw new Error(`${family.api.metaFile(loc)}: chiave "${key}" in ${owner[key]} e in ${section.section} — refusing`);
+        }
+        merged[key] = value;
+        owner[key] = section.section;
+      }
+    }
+    write(family.api.metaFile(loc), merged);
+  }
+}
+
 /** Il modulo della mappa slug di ogni sezione: mappa, inversa e provenienza dei fallback. */
 const SECTION_SLUG_MODULES = {};
-for (const section of API_SECTIONS) {
+for (const section of PUBLISHED_API_SECTIONS) {
+  if (familyFileMissing(section, section.slugFile)) {
+    if (SECTION_REGISTRIES[section.section].length > 0) {
+      throw new Error(`${section.slugFile} assente mentre il registro di ${section.section} ha articoli — refusing`);
+    }
+    SECTION_SLUG_MODULES[section.section] = { slugs: {}, reverse: null, fallbackReasons: {} };
+    continue;
+  }
   const mod = await load(section.slugFile);
   SECTION_SLUG_MODULES[section.section] = {
     slugs: mod[section.slugExport],
-    reverse: mod[section.reverseExport],
+    reverse: section.reverseExport ? mod[section.reverseExport] : null,
     fallbackReasons: mod[section.fallbackReasonsExport],
   };
 }
 const slugMapOf = (section) => SECTION_SLUG_MODULES[section].slugs;
 const reservedSlugEntries = [];
-for (const section of API_SECTIONS) {
+for (const section of PUBLISHED_API_SECTIONS) {
+  const key = section.api.family === null ? section.api.slugsKey : `${section.api.slugsKey}.${section.section}`;
   for (const [id, locales] of Object.entries(slugMapOf(section.section) ?? {})) {
     for (const [locale, slug] of Object.entries(locales ?? {})) {
-      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section.api.slugsKey}.${id}.${locale}=${slug}`);
+      if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${key}.${id}.${locale}=${slug}`);
     }
   }
 }
-for (const section of API_SECTIONS) {
+for (const section of PUBLISHED_API_SECTIONS) {
+  if (!section.api.reverseKey) continue;
   for (const [locale, slugs] of Object.entries(SECTION_SLUG_MODULES[section.section].reverse ?? {})) {
     for (const slug of Object.keys(slugs ?? {})) {
       if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${section.api.reverseKey}.${locale}.${slug}`);
@@ -293,6 +392,18 @@ if (reservedSlugEntries.length > 0) {
   for (const section of rest) {
     slugsDoc[section.api.slugsKey] = slugMapOf(section.section) ?? null;
     slugsDoc[section.api.reverseKey] = SECTION_SLUG_MODULES[section.section].reverse ?? null;
+  }
+  // Le famiglie in coda, solo se accese: senza cantoni slugs.json resta
+  // byte-identico. Annidate per sezione (`cantons.<canton-id>.<id>`), perche'
+  // chi risolve uno slug deve sapere sotto quale prefisso vive; niente mappa
+  // inversa, che il consumer deriva.
+  for (const family of API_FAMILIES) {
+    slugsDoc[family.api.slugsKey] = Object.fromEntries(
+      family.sections.map((section) => [section.section, slugMapOf(section.section) ?? {}]),
+    );
+    slugsDoc.fallbackReasons[family.api.slugsKey] = Object.fromEntries(
+      family.sections.map((section) => [section.section, SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {}]),
+    );
   }
   write('slugs.json', slugsDoc);
 }
@@ -341,7 +452,7 @@ const writeXml = (name, { xml, count }) => {
 // winner, which this reader does not need. Which file belongs to which section
 // is declared once, in corpus-sections.mjs (`canonicalOverrides`).
 const SECTION_CANONICAL_SHADOW = {};
-for (const section of API_SECTIONS) {
+for (const section of PUBLISHED_API_SECTIONS) {
   const shadowed = new Set(
     section.canonicalOverrides
       ? Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, section.canonicalOverrides), 'utf-8')).overrides ?? {})
@@ -353,8 +464,8 @@ for (const section of API_SECTIONS) {
 const shadowedFrontaliereSlugs = SECTION_CANONICAL_SHADOW[FRONTALIERE.section];
 
 const SECTION_META_IT = {};
-for (const section of API_SECTIONS) {
-  SECTION_META_IT[section.section] = (await load(section.metaFile('it'))).default;
+for (const section of PUBLISHED_API_SECTIONS) {
+  SECTION_META_IT[section.section] = await loadSectionMeta(section, 'it');
 }
 // Daily editions carry their date in the id, and slugs.it === id, so the
 // retired set plugs straight into buildSitemap's shadowed parameter.
@@ -367,16 +478,50 @@ const retiredDailyEditionSlugs = new Set(
 // daily editions (frontaliere) unions the two de-listing reasons — retired
 // daily editions and canonical-shadowed duplicates — while every other section
 // gets its own canonical set alone, as svizzera always did.
+//
+// Una sezione di famiglia de-lista anche gli articoli che il SUO registro
+// dichiarato ritira (`gone`) o sposta (`redirects`): il Worker li serve 410 o
+// 301, e una `<loc>` che non risponde 200 non sta in una sitemap.
+const retiredByRegistry = (section) => {
+  const entry = declaredSections.sections[section.section];
+  if (!entry) return [];
+  const moved = new Set([...Object.keys(entry.redirects ?? {}), ...(entry.gone ?? [])]);
+  const itPrefix = SECTION_PATHS[section.section]?.it;
+  return Object.values(slugMapOf(section.section) ?? {})
+    .map((slugs) => slugs?.it)
+    .filter((slug) => slug && itPrefix && moved.has(`${itPrefix}${slug}/`));
+};
 const SECTION_SITEMAP_SHADOW = Object.fromEntries(
-  API_SECTIONS.map((section) => [
+  PUBLISHED_API_SECTIONS.map((section) => [
     section.section,
     section.retiredDailyEditions
       ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
-      : SECTION_CANONICAL_SHADOW[section.section],
+      : section.api.family !== null
+        ? new Set([...SECTION_CANONICAL_SHADOW[section.section], ...retiredByRegistry(section)])
+        : SECTION_CANONICAL_SHADOW[section.section],
   ]),
 );
+// La dimensione di pagina dell'archivio viene dalla sorgente unica dell'host
+// (il valore cablato nel SiteShellContract dell'engine): la usano la sitemap
+// dell'archivio storico e quella di ogni sezione di famiglia.
+const { ARTICLES_PAGE_SIZE } = await load('host/seoHubsData.ts');
 const sitemapCounts = {};
-for (const section of API_SECTIONS) {
+/** Articoli emessi per sezione di famiglia: il pavimento si misura su questi, non su landing e hub. */
+const familySitemapArticles = {};
+for (const section of PUBLISHED_API_SECTIONS) {
+  if (section.api.family !== null) {
+    const built = buildFamilySectionSitemap({
+      section: section.section,
+      entries: SECTION_REGISTRIES[section.section],
+      slugMap: slugMapOf(section.section),
+      meta: SECTION_META_IT[section.section],
+      pageSize: ARTICLES_PAGE_SIZE,
+      shadowed: SECTION_SITEMAP_SHADOW[section.section],
+    });
+    sitemapCounts[section.section] = writeXml(section.api.sitemap, built);
+    familySitemapArticles[section.section] = built.articleCount;
+    continue;
+  }
   sitemapCounts[section.section] = writeXml(
     section.api.sitemap,
     buildSitemap(
@@ -403,12 +548,12 @@ for (const section of API_SECTIONS) {
 // esattamente quella di prima.
 const sitemapSources = {};
 const familySitemapRows = [];
-for (const section of API_SECTIONS) {
+for (const section of PUBLISHED_API_SECTIONS) {
   const file = section.api.sitemap;
   const source = countSourceSitemapEntries(ROOT, section.section);
   sitemapSources[section.section] = source;
   if (floorPolicyOf(section.section) === 'family') {
-    familySitemapRows.push({ section: section.section, source, emitted: sitemapCounts[section.section] });
+    familySitemapRows.push({ section: section.section, source, emitted: familySitemapArticles[section.section] ?? 0 });
     continue;
   }
   if (source <= 0) {
@@ -447,10 +592,14 @@ if (familySitemapRows.length > 0) {
 // (`readArticleArchiveUnionSlugs`), so this file cannot list a page the
 // archive does not have. The page size comes from the host's single source,
 // which is the value wired into the engine's SiteShellContract.
-const ARCHIVE_ALL_SLUG = { it: 'tutti', en: 'all', de: 'alle', fr: 'tous' };
+//
+// Solo le sezioni con superficie PROPRIA: l'archivio di una sezione di
+// famiglia sta nella SUA sitemap (`buildFamilySectionSitemap`), che il Worker
+// serve solo mentre la sezione e' live — questo file invece e' servito sempre.
+// `ARCHIVE_ALL_SLUG` viene da build-sitemap.mjs, la stessa tabella che usa la
+// sitemap di famiglia.
 const { readArticleArchiveUnionSlugs } = await load('engine/shared/articleArchiveUnion.ts');
 const { ARTICLE_SECTIONS } = await load('articleSections.ts');
-const { ARTICLES_PAGE_SIZE } = await load('host/seoHubsData.ts');
 
 function archiveBase(section, locale) {
   const prefix = locale === 'it' ? '' : `/${locale}`;
@@ -582,7 +731,7 @@ const rssSections = buildAllRssFeeds({
   fs,
   path,
   rootDir: ROOT,
-  registries: Object.fromEntries(API_SECTIONS.map(({ section }) => [section, SECTION_REGISTRIES[section]])),
+  registries: Object.fromEntries(PUBLISHED_API_SECTIONS.map(({ section }) => [section, SECTION_REGISTRIES[section]])),
   layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
   // Il corpus e' il produttore REALE dei dieci feed: il sito chiama
   // buildAllRssFeeds solo dai test. Se questa riga manca, la riparazione della
@@ -1018,6 +1167,70 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   );
 }
 
+// ── Registro delle sezioni (piano «sezioni articoli per cantone», P7) ────────
+//
+// `sections/registry.json` dichiara lo stato di ogni sezione cantonale; qui
+// diventa il catalogo per il sito (`sections.json`), la copia che il Worker
+// legge da R2 (`edge/sections/registry.json`) e l'indice delle sitemap per
+// sezione (`sitemap-cantons.xml`). Il kill-switch di Remote Config spegne le
+// sezioni elencate; la copia per il Worker non si scrive se il kill-switch non
+// e' verificabile e una sezione e' dichiarata live (vedi section-registry.mjs).
+// Con tutte le sezioni in `draft` (oggi) i documenti esistono ma non accendono
+// niente: il Worker resta fail-closed e l'indice non viene emesso.
+const killSwitch = resolveKillSwitch(process.env);
+const effectiveSections = effectiveStatuses(declaredSections, killSwitch);
+if (killSwitch.unknown.length) {
+  console.warn(
+    `::warning::CANTON_ARTICLE_SECTIONS_KILL: token non riconosciuti ignorati: ${killSwitch.unknown.join(', ')} ` +
+      '(attesi codici di gruppo, id canton-<x> o all)',
+  );
+}
+const killedSections = Object.keys(effectiveSections).filter((id) => effectiveSections[id].killed);
+console.log(
+  `[build-api] sections: kill-switch ${killSwitch.state}` +
+    (killedSections.length ? `, spente: ${killedSections.join(', ')}` : ', nessuna sezione spenta'),
+);
+const PUBLISHED_BY_ID = Object.fromEntries(PUBLISHED_API_SECTIONS.map((section) => [section.section, section]));
+const sectionsCatalog = buildSectionsCatalog({
+  declared: declaredSections,
+  effective: effectiveSections,
+  killSwitch,
+  commit,
+  articles: Object.fromEntries(
+    Object.keys(declaredSections.sections).map((id) => [id, SECTION_REGISTRIES[id]?.length ?? 0]),
+  ),
+  sitemapOf: (id) => {
+    // Una sezione live e' attiva per costruzione (declaredRegistryErrors), quindi
+    // ha la sua sitemap scritta qui sopra; il controllo resta, perche' una
+    // sitemap annunciata e non emessa e' un 404 dichiarato in robots.txt.
+    const file = PUBLISHED_BY_ID[id]?.api.sitemap;
+    if (!file || written[file] === undefined) throw new Error(`sezione live ${id} senza sitemap emessa — refusing`);
+    return file;
+  },
+});
+write(SECTIONS_CATALOG_FILE, sectionsCatalog);
+if (edgeRegistryPublishable(declaredSections, killSwitch)) {
+  const edgeRegistry = buildEdgeRegistry({ declared: declaredSections, effective: effectiveSections, commit });
+  if (!validateEdgeSectionRegistry(edgeRegistry)) {
+    throw new Error(`${EDGE_SECTION_REGISTRY_FILE}: il Worker rifiuterebbe questo registro — refusing`);
+  }
+  write(EDGE_SECTION_REGISTRY_FILE, edgeRegistry);
+} else {
+  console.warn(
+    `::warning::${EDGE_SECTION_REGISTRY_FILE} non emesso: Remote Config non verificato (manca RC_ENV_LOADED=1) ` +
+      'e almeno una sezione e\' dichiarata live — il Worker resta sull\'ultimo registro pubblicato su R2',
+  );
+}
+const liveSections = sectionsCatalog.sections.filter((entry) => entry.status === 'live');
+const sitemapIndexXml = buildSitemapIndex(
+  liveSections.map((entry) => ({ file: entry.sitemap.slice(1), lastmod: latestArticleDate(SECTION_REGISTRIES[entry.id]) })),
+);
+if (sitemapIndexXml) {
+  writeXml(SECTION_SITEMAP_INDEX_FILE, { xml: sitemapIndexXml, count: liveSections.length });
+} else {
+  console.log(`[build-api] ${SECTION_SITEMAP_INDEX_FILE}: not emitted — nessuna sezione live (un indice vuoto viola lo schema)`);
+}
+
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
@@ -1029,6 +1242,12 @@ write('manifest.json', {
     // `sitemapBlogUrls`, `sitemapBlogChUrls`): li leggono il sito e i gate.
     ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.counter, SECTION_REGISTRIES[section.section].length])),
     ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.sitemapCounter, sitemapCounts[section.section]])),
+    // Le famiglie accese: un contatore aggregato per registro e uno per le
+    // sitemap delle sue sezioni. Assenti finche' la famiglia e' spenta.
+    ...Object.fromEntries(API_FAMILIES.flatMap((family) => [
+      [family.api.counter, family.sections.reduce((n, section) => n + SECTION_REGISTRIES[section.section].length, 0)],
+      [family.api.sitemapCounter, family.sections.reduce((n, section) => n + sitemapCounts[section.section], 0)],
+    ])),
     sitemapArchiveUrls: sitemapCounts.archive,
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
@@ -1039,11 +1258,16 @@ write('manifest.json', {
     borderRankingEntries,
     dailyBriefBlocks,
     plateAuctionEditorialLocales,
+    // Il registro delle sezioni: voci del catalogo, quelle live dopo il
+    // kill-switch, e le sitemap elencate dall'indice (0 = indice non emesso).
+    sections: sectionsCatalog.sections.length,
+    sectionsLive: liveSections.length,
+    sectionSitemaps: liveSections.length,
     // Additiva: la stessa cardinalita' per sezione, con l'id del core come
     // chiave. E' la forma che non cambia quando si accende una sezione: i
     // contatori col nome fisso qui sopra restano per i consumer che li leggono.
     bySection: Object.fromEntries(
-      API_SECTIONS.map((section) => [
+      PUBLISHED_API_SECTIONS.map((section) => [
         section.section,
         { articles: SECTION_REGISTRIES[section.section].length, sitemapUrls: sitemapCounts[section.section] },
       ]),
@@ -1193,6 +1417,10 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       derivedAlways(section.api.registry, () => jsonOut(section.api.registry).length),
     ])),
     ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.sitemapCounter, sitemapUrls(section.api.sitemap)])),
+    ...Object.fromEntries(API_FAMILIES.flatMap((family) => [
+      [family.api.counter, derivedAlways(family.api.registry, () => jsonOut(family.api.registry).length)],
+      [family.api.sitemapCounter, family.sections.reduce((n, section) => n + (sitemapUrls(section.api.sitemap) ?? 0), 0)],
+    ])),
     sitemapArchiveUrls: sitemapUrls(ARCHIVE_SITEMAP),
     rssFeeds: feeds.length,
     rssItems: feeds.reduce((total, xml) => total + countXmlTags(xml, 'item'), 0),
@@ -1235,6 +1463,23 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       PLATE_AUCTION_EDITORIAL,
       () => Object.keys(jsonOut(PLATE_AUCTION_EDITORIAL).evergreen ?? {}).length,
     ),
+    sections: derivedAlways(SECTIONS_CATALOG_FILE, () => jsonOut(SECTIONS_CATALOG_FILE).sections.length),
+    sectionsLive: derivedAlways(
+      SECTIONS_CATALOG_FILE,
+      () => jsonOut(SECTIONS_CATALOG_FILE).sections.filter((entry) => entry.status === 'live').length,
+    ),
+    // L'indice e' opzionale per costruzione (nessuna sezione live = nessun
+    // indice), e la sua assenza e' legittima solo se il catalogo servito non
+    // ha sezioni live: e' quella la sorgente terza, non il contatore.
+    sectionSitemaps: derivedOptional(
+      SECTION_SITEMAP_INDEX_FILE,
+      () => {
+        if (!exists(SECTIONS_CATALOG_FILE)) return null;
+        const live = jsonOut(SECTIONS_CATALOG_FILE).sections.filter((entry) => entry.status === 'live').length;
+        return live ? `${live} sezioni live in ${SECTIONS_CATALOG_FILE}` : null;
+      },
+      () => countXmlTags(readOut(SECTION_SITEMAP_INDEX_FILE), 'sitemap'),
+    ),
   };
 
   // `tickerArticlesShadowed` conta cio' che e' stato ESCLUSO dal ticker:
@@ -1246,16 +1491,21 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // storici, per sezione. Si ri-deriva dai byte serviti come gli altri e si
   // confronta per valore qui sotto, quindi NON sta in NOT_ON_DISK.
   const derivedBySection = Object.fromEntries(
-    API_SECTIONS.map((section) => [
+    PUBLISHED_API_SECTIONS.map((section) => [
       section.section,
       {
-        articles: exists(section.api.registry) ? jsonOut(section.api.registry).length : null,
+        articles: !exists(section.api.registry)
+          ? null
+          : section.api.family === null
+            ? jsonOut(section.api.registry).length
+            : jsonOut(section.api.registry).filter((row) => row?.section === section.section).length,
         sitemapUrls: exists(section.api.sitemap) ? countXmlTags(readOut(section.api.sitemap), 'url') : null,
       },
     ]),
   );
 
   const declared = jsonOut('manifest.json').counts;
+  const declaredCommit = jsonOut('manifest.json').commit;
   const unchecked = Object.keys(declared).filter(
     (key) => !(key in derived) && !NOT_ON_DISK.has(key) && key !== 'bySection',
   );
@@ -1346,6 +1596,66 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
             `${extra.length} slug senza articolo (${extra.slice(0, 5).join(', ') || '—'})`,
         );
       }
+    }
+  }
+
+  // Le famiglie: stesso confronto per INSIEME del blocco qui sopra, sezione per
+  // sezione — `slugs.<famiglia>.<id>` contro le righe del registro aggregato
+  // con `section === <id>` — piu' il marker di release su ogni riga, che per i
+  // registri storici controlla `validateReleaseMarkers`.
+  // L'assenza di slugs.json e' gia' un mismatch del blocco qui sopra.
+  const familySlugs = exists('slugs.json') ? jsonOut('slugs.json') : null;
+  for (const family of familySlugs ? API_FAMILIES : []) {
+    if (!exists(family.api.registry)) continue; // gia' in `absent`
+    const rows = jsonOut(family.api.registry);
+    const staleRows = rows.filter((row) => row?.commit !== declaredCommit).length;
+    if (staleRows) mismatches.push(`${family.api.registry}: ${staleRows} righe senza il commit del manifest`);
+    const known = new Set(family.sections.map((section) => section.section));
+    const stray = rows.filter((row) => !known.has(row?.section)).length;
+    if (stray) mismatches.push(`${family.api.registry}: ${stray} righe con una section fuori dalla famiglia attiva`);
+    const nested = familySlugs[family.api.slugsKey] ?? {};
+    for (const id of Object.keys(nested)) {
+      if (!known.has(id)) mismatches.push(`slugs.${family.api.slugsKey}.${id}: sezione non attiva nella famiglia`);
+    }
+    for (const section of family.sections) {
+      const registryIds = new Set(rows.filter((row) => row?.section === section.section).map((row) => row?.id));
+      const indexed = Object.keys(nested[section.section] ?? {});
+      const missing = [...registryIds].filter((id) => !indexed.includes(id));
+      const extra = indexed.filter((id) => !registryIds.has(id));
+      if (missing.length || extra.length) {
+        mismatches.push(
+          `slugs.${family.api.slugsKey}.${section.section} indexes a different set than ${family.api.registry}: ` +
+            `${missing.length} ids senza slug (${missing.slice(0, 5).join(', ') || '—'}), ` +
+            `${extra.length} slug senza articolo (${extra.slice(0, 5).join(', ') || '—'})`,
+        );
+      }
+    }
+  }
+
+  // Il registro per il Worker deve dire ESATTAMENTE cio' che dice il catalogo
+  // servito (stato per sezione, commit), e deve essere accettabile dal parse
+  // del Worker: un registro che il Worker scarta e' un cambio che non arriva
+  // mai. La sua assenza e' legittima solo nel caso previsto (kill-switch non
+  // verificato con una sezione dichiarata live).
+  if (exists(SECTIONS_CATALOG_FILE)) {
+    const catalog = jsonOut(SECTIONS_CATALOG_FILE);
+    if (catalog.commit !== declaredCommit) mismatches.push(`${SECTIONS_CATALOG_FILE}: commit ${catalog.commit}, manifest ${declaredCommit}`);
+    if (exists(EDGE_SECTION_REGISTRY_FILE)) {
+      const edge = jsonOut(EDGE_SECTION_REGISTRY_FILE);
+      if (!validateEdgeSectionRegistry(edge)) mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: il Worker lo rifiuterebbe`);
+      if (edge.commit !== declaredCommit) mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: commit ${edge.commit}, manifest ${declaredCommit}`);
+      const ids = new Set([...Object.keys(edge.sections ?? {}), ...catalog.sections.map((entry) => entry.id)]);
+      for (const id of ids) {
+        const want = catalog.sections.find((entry) => entry.id === id)?.status;
+        if (edge.sections?.[id]?.status !== want) {
+          mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: ${id} ${edge.sections?.[id]?.status} contro ${want} in ${SECTIONS_CATALOG_FILE}`);
+        }
+      }
+    } else if (!(catalog.killSwitch?.state === 'unverified' && catalog.sections.some((entry) => entry.declaredStatus === 'live'))) {
+      mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: assente senza la sola ragione ammessa (kill-switch non verificato con sezioni live)`);
+    }
+    for (const entry of catalog.sections.filter((e) => e.status === 'live')) {
+      if (!entry.sitemap || !exists(entry.sitemap.slice(1))) mismatches.push(`${entry.id}: live con sitemap ${entry.sitemap} assente`);
     }
   }
 
