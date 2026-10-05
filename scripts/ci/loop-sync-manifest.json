@@ -657,8 +657,8 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "1c042095f029e09c",
-        "corpus": "1c042095f029e09c",
+        "site": "ae9d697695dc1ee7",
+        "corpus": "ae9d697695dc1ee7",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2089,10 +2089,11 @@
       "sitePath": "scripts/lib/ai-meta-response.mjs",
       "mode": "corpus-only-pending",
       "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616",
-      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Il file esiste sul `main` del sito dalla valerielinc-ops/frontaliere-si-o-no#11578, ma nella versione precedente: questi byte (le correzioni delle review di questa PR) arrivano sul sito con valerielinc-ops/frontaliere-si-o-no#11616, ancora aperta, e il loro blob non e' nella storia di `main` del sito, quindi la voce resta pending e tracciata finche' la PR non atterra. Il drift check puo' segnalarla `corpus-only-pending-landed` gia' ora, perche' il path esiste sul sito: NON promuoverla prima del merge della #11616 (si registrerebbe una baseline divergente); dopo il merge, verificare che i due file siano byte-identici e promuovere a `identical` con `loop-drift-check --init --only`.",
+      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Il path esiste gia' sul `main` del sito dalla PR #11578, ma il suo blob live e' quello precedente (`05c117576579f3dd08b94ca0584409f7ba3d5122`). `expectedSiteBlob` pinna il contenuto corretto del head corrente della PR sito #11616 (`9d5703c094e4c6027b43349ac2fa6c246763aaee`): finche' il path live non contiene esattamente quel Git blob, il drift check restituisce `corpus-only-pending-stale-twin`; la sola presenza del file non e' un atterraggio e non va promossa. Dopo il merge della #11616, verificare l'identita' dei due file e promuovere a `identical` con `loop-drift-check --init --only`.",
+      "expectedSiteBlob": "9d5703c094e4c6027b43349ac2fa6c246763aaee",
       "baseline": {
         "site": null,
-        "corpus": "6e007da08c1c1ee2",
+        "corpus": "231e56bdce5bb50b",
         "alignedAt": "2026-10-05"
       }
     },
@@ -3147,9 +3148,9 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "24b481091caa6589",
-        "corpus": "24b481091caa6589",
-        "alignedAt": "2026-10-03"
+        "site": "8ebeaf931647a156",
+        "corpus": "8ebeaf931647a156",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -4879,6 +4880,46 @@
         "site": null,
         "corpus": "0380d00aa2d146ea",
         "alignedAt": "2026-10-04"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-notices-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto lato consumatore e letture del dataset `canton-notices.json` (avvisi ufficiali cantonali, D11/P9g), prodotto sul sito da `scripts/crawl-canton-notices.mjs`. Vive solo qui: e' la meta' consumatrice di un contratto HTTP, sul sito non esiste un omonimo e copiarlo la' invertirebbe la direzione del REWIRE.",
+      "baseline": {
+        "site": null,
+        "corpus": "492680c228144b7d",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-services-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Meta' pura dell'aggregatore dei servizi per cantone (P9f, D11): shaper per blocco (premi, aste targhe, turni farmacia, meteo) sui JSON che il sito pubblica sul CDN, modello `daily-brief-data.mjs`. Nessun omonimo sul sito: il sito produce gli artefatti, il corpus li riassume per gli hub.",
+      "baseline": {
+        "site": null,
+        "corpus": "090a7598983b04ed",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-canton-notices.mjs",
+      "mode": "corpus-only",
+      "reason": "Refresh morbido di `canton-notices.json` (D11/P9g) dal CDN del sito, nel REWIRE set: forma verificata da `lib/canton-notices-data.mjs` e inchiodata in `generator/tests/lib/rewire-contracts.mjs`. Nessun omonimo sul sito (il produttore e' `scripts/crawl-canton-notices.mjs`).",
+      "baseline": {
+        "site": null,
+        "corpus": "57437f0323034ae7",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-canton-services-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Refresh dell'aggregatore dei servizi per cantone (P9f): legge quattro artefatti del CDN del sito (health-premiums, plate-auctions, pharmacy-duty-cantons, weather-snapshot), morbido sull'irraggiungibile e duro sulla forma. Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "e40082fb50f893b5",
+        "alignedAt": "2026-10-05"
       }
     }
   ]

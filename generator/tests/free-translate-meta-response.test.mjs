@@ -167,4 +167,36 @@ describe('detectAiMetaResponse — il gemello corpus del rilevatore', () => {
     assert.equal(detectAiMetaResponse('Please provide the actual job title you are applying for.'), null);
     assert.equal(detectAiMetaResponse('Can you provide the text of your cover letter in German or Italian?'), null);
   });
+
+  test('I see / I find chiede input solo quando nomina davvero il testo da tradurre', () => {
+    for (const request of [
+      "I don't see any text in your message to translate.",
+      "I can't see the job title you want translated.",
+      'I cannot find the actual title you want me to translate.',
+      'I need to see the job data to provide an accurate translation.',
+      'I need to check the existing translations in the repository.',
+      'I need to see the context of where this job title is used.',
+      'I need to see the actual job file to identify which title needs translation.',
+      'Non vedo alcun titolo nel messaggio.',
+      'Ich sehe keinen Stellentitel in Ihrer Nachricht.',
+      'Je ne vois pas de titre à traduire.',
+    ]) assert.equal(detectAiMetaResponse(request)?.kind, 'clarification', request);
+
+    for (const prose of [
+      "I don't see any reason to leave the canton.",
+      'I cannot find a better job in Ticino.',
+      "I can't see any reason to change our approach.",
+      'I need to understand the needs of our customers.',
+      'I need more information about your experience in the interview.',
+      'Ho bisogno di più tempo per decidere.',
+      "J'ai besoin de plus de temps.",
+    ]) assert.equal(detectAiMetaResponse(prose), null, prose);
+  });
+
+  test('la narrazione di traduzione accetta titolo esplicito e lingua sorgente', () => {
+    assert.equal(
+      detectAiMetaResponse('We need to translate the job title "GL & VAT Accountant" from German to English.')?.kind,
+      'agent-narration',
+    );
+  });
 });

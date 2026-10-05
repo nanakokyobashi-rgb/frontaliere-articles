@@ -57,6 +57,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { coveredByManifest } from '../../scripts/ci/twin-census-pr-gate.mjs';
+import { gitBlobSha } from '../../scripts/ci/loop-drift-check.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -258,6 +259,20 @@ test('files: sitePath e baseline coerenti col mode', () => {
     if (f.mode !== 'not-ported') {
       assert.ok(f.baseline.corpus, `${f.path}: manca \`baseline.corpus\``);
     }
+  }
+});
+
+test('files: expectedSiteBlob di un pending e\' il blob reale del contenuto atteso', () => {
+  for (const f of manifest.files) {
+    if (f.expectedSiteBlob === undefined) continue;
+    assert.equal(f.mode, 'corpus-only-pending', `${f.path}: expectedSiteBlob e' riservato a un gemello pending`);
+    assert.equal(typeof f.sitePath, 'string', `${f.path}: expectedSiteBlob senza sitePath esplicito`);
+    assert.match(f.expectedSiteBlob, /^[a-f0-9]{40}$/, `${f.path}: expectedSiteBlob non e' un Git blob SHA-1`);
+    assert.equal(
+      f.expectedSiteBlob,
+      gitBlobSha(fs.readFileSync(path.join(ROOT, f.path))),
+      `${f.path}: expectedSiteBlob non pinna il contenuto presente nel corpus; non promuovere una copia stantia.`,
+    );
   }
 });
 

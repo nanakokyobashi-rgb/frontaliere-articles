@@ -99333,6 +99333,113 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bollettino-frontaliere-2026-10-05': {
+    title: 'Bollettino del frontaliere – 5 ottobre 2026: 1336 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 5 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 5 ottobre 2026: 1336 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 5 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-05/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 5 ottobre 2026: 1336 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 5 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-05.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 5 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-05T12:09:11+00:00",
+      "dateModified": "2026-10-05T12:09:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-05/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pedemontana-avviso-truffa': {
+    title: 'Truffa Pedemontana: falso avviso da 6,95 euro | Frontaliere Ticino',
+    description: 'Un SMS annuncia un pedaggio Pedemontana non pagato da 6,95 euro: il link porta a un sito clone che mira ai dati bancari o della carta. Verifica l\'indirizzo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, truffa, pedemontana, falso, avviso',
+    ogTitle: 'Truffa Pedemontana: falso avviso da 6,95 euro',
+    ogDescription: 'Un SMS chiede 6,95 euro per un pedaggio Pedemontana non pagato e invita a pagare entro 24 ore. Il link porta a una pagina clone con loghi e informazioni di pagamento e mira ai dati bancari o della carta. La fonte indica come verificare l\'indirizzo.',
+    canonicalPath: '/articoli-frontaliere/pedemontana-avviso-truffa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Truffa Pedemontana: falso avviso da 6,95 euro",
+      "description": "Un SMS annuncia un pedaggio Pedemontana non pagato da 6,95 euro: il link porta a un sito clone che mira ai dati bancari o della carta. Verifica l'indirizzo.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Avviso falso di pagamento Pedemontana visualizzato su uno smartphone"
+      },
+      "datePublished": "2026-10-05T12:20:02+00:00",
+      "dateModified": "2026-10-05T12:20:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pedemontana-avviso-truffa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ticinoskills-2026-gordola-event': {
+    title: 'TicinoSkills 2026: gare, orientamento e 50 anni SSIC TI',
+    description: 'Dal 1° al 3 ottobre 2026 a Gordola, TicinoSkills 2026 ha visto 44 apprendisti gareggiare, oltre 600 studenti in orientamento partecipare e quasi 400 famiglie',
+    keywords: 'frontalieri, ticino, svizzera, italia, ticinoskills, gare, orientamento, anni',
+    ogTitle: 'TicinoSkills 2026: gare, orientamento e 50 anni SSIC TI',
+    ogDescription: 'Scopri tutti i dettagli di TicinoSkills 2026: le gare dei 44 apprendisti, le visite di oltre 600 studenti in orientamento, la partecipazione di quasi 400 famiglie al sabato e i festeggiamenti per il cinquantesimo anniversario del Centro SSIC TI',
+    canonicalPath: '/articoli-frontaliere/ticinoskills-2026-gordola-event/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "TicinoSkills 2026: gare, orientamento e 50 anni SSIC TI",
+      "description": "Dal 1° al 3 ottobre 2026 a Gordola, TicinoSkills 2026 ha visto 44 apprendisti gareggiare, oltre 600 studenti in orientamento partecipare e quasi 400 famiglie",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ticinoskills-2026-gordola-event.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Apprendisti impegnati in una prova pratica durante TicinoSkills 2026 a Gordola, con lo sfondo del centro SSIC TI e bandiere svizzere."
+      },
+      "datePublished": "2026-10-05T13:08:37+00:00",
+      "dateModified": "2026-10-05T13:08:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ticinoskills-2026-gordola-event/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

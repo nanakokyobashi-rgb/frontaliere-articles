@@ -12611,6 +12611,17 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.avs-13a-rendita-iva-aumento.title': '13e rente AVS : le Conseil fédéral : «Voici pourquoi nous augmenterons la TVA»',
     'blog.article.avs-13a-rendita-iva-aumento.excerpt': 'En décembre arrive la première 13e rente AVS pour 2,6 millions de retraités. Le Parlement a décidé une augmentation de la TVA pour financer la mesure, par un vote populaire le 29 novembre.',
     'blog.article.avs-13a-rendita-iva-aumento.imageAlt': 'Le Château de Bellinzona sous un ciel clair, symbole de la gouvernance suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-05.title': 'Bulletin du frontalier – 5 octobre 2026 : 1\'336 nouvelles offres d\'emploi hier',
+    'blog.article.bollettino-frontaliere-2026-10-05.excerpt': 'Les chiffres du jour, 5 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-05.imageAlt': 'Les chiffres du jour pour les frontaliers – 5 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-05.seoDescription': 'Bulletin du frontalier du 5 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-05.ogDescription': 'Les chiffres du 5 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.pedemontana-avviso-truffa.title': 'Arnaque Pedemontana : faux avis de 6,95 euro',
+    'blog.article.pedemontana-avviso-truffa.excerpt': 'Un SMS concernant un prétendu péage impayé circule : le lien mène vers un site clone et vise les données bancaires ou celles de la carte.',
+    'blog.article.pedemontana-avviso-truffa.imageAlt': 'Fausse demande de paiement Pedemontana sur un smartphone',
+    'blog.article.ticinoskills-2026-gordola-event.title': 'TicinoSkills 2026 : courses, orientation et 50 ans ssic TI',
+    'blog.article.ticinoskills-2026-gordola-event.excerpt': 'Du 1er au 3 octobre 2026 à Gordola, 44 apprentis ont participé aux championnats régionaux, plus de 600 étudiants en orientation ont visité l\'événement et près de 400 familles ont participé le samedi, à l\'occasion des 50 ans du SSIC TI.',
+    'blog.article.ticinoskills-2026-gordola-event.imageAlt': 'Apprentis réalisant une tâche pratique lors de TicinoSkills 2026 à Gordola, avec le centre SSIC TI et les drapeaux suisses en arrière‑plan.',
 };
 
 export default blogMetaFr;

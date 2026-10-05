@@ -59,6 +59,9 @@ const ENTRY_POINTS = [
   // Consumatore del dataset carburanti per cantone (P9b), stessa forma dei tre
   // sopra: --help esce prima di qualunque fetch.
   'refresh-fuel-cantons.mjs',
+  // Dataset di categoria degli hub cantonali (D11, P9f/P9g).
+  'refresh-canton-notices.mjs',
+  'refresh-canton-services-data.mjs',
 ];
 
 /**

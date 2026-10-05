@@ -71,6 +71,33 @@ test('corpus-only-pending: il gemello e\' comparso → stato -landed, istruzione
   assert.match(verdict.detail, /identical.*adapted|adapted.*identical/i, "l'uscita e' un'istruzione di promozione, non un mode gia' cambiato da solo");
 });
 
+test('corpus-only-pending: un path esistente con blob vecchio resta stale-twin, non landed', () => {
+  const entry = {
+    path: 'generator/scripts/lib/ai-meta-response.mjs',
+    sitePath: 'scripts/lib/ai-meta-response.mjs',
+    mode: 'corpus-only-pending',
+    expectedSiteBlob: 'b'.repeat(40),
+    trackingIssue: 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616',
+    reason: 'il sito deve ricevere la versione aggiornata',
+  };
+  const verdict = classify(entry, { site: 'a'.repeat(16), siteBlob: 'c'.repeat(40), corpus: 'b'.repeat(16) }, BASE);
+  assert.equal(verdict.state, 'corpus-only-pending-stale-twin');
+  assert.equal(verdict.actionable, true);
+  assert.match(verdict.detail, /sola presenza del path non prova/);
+  assert.deepEqual(verdict.hashes, { siteBlob: 'c'.repeat(40), expectedSiteBlob: 'b'.repeat(40) });
+});
+
+test('corpus-only-pending: landed richiede il blob atteso, non un qualsiasi 200', () => {
+  const entry = {
+    path: 'generator/scripts/lib/ai-meta-response.mjs',
+    sitePath: 'scripts/lib/ai-meta-response.mjs',
+    mode: 'corpus-only-pending',
+    expectedSiteBlob: 'b'.repeat(40),
+  };
+  const verdict = classify(entry, { site: 'a'.repeat(16), siteBlob: 'b'.repeat(40), corpus: 'b'.repeat(16) }, BASE);
+  assert.equal(verdict.state, 'corpus-only-pending-landed');
+});
+
 test('corpus-only-pending senza trackingIssue: resta actionable ma segnala il campo mancante', () => {
   // Il test offline dello schema (loop-sync-manifest-scope.test.mjs) impedisce
   // che una voce del genere entri nel manifest reale; questo test copre solo

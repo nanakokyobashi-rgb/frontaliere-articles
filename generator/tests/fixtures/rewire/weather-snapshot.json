@@ -1,0 +1,105 @@
+{
+ "generatedAt": "2026-10-05T05:49:46.217Z",
+ "cities": {
+  "lugano": {
+   "cityId": "lugano",
+   "current": {
+    "temperature": 15.7,
+    "weatherCode": 80,
+    "isDay": true,
+    "windSpeedKmh": 3.1,
+    "humidity": 87,
+    "apparentTemp": 15
+   },
+   "daily7": [
+    {
+     "date": "2026-10-05",
+     "tempMax": 22.35,
+     "tempMin": 14.95,
+     "weatherCode": 80,
+     "precipProb": 23,
+     "sunrise": "2026-10-05T07:27",
+     "sunset": "2026-10-05T18:56"
+    },
+    {
+     "date": "2026-10-06",
+     "tempMax": 21.6,
+     "tempMin": 13,
+     "weatherCode": 3,
+     "precipProb": 13,
+     "sunrise": "2026-10-06T07:28",
+     "sunset": "2026-10-06T18:54"
+    }
+   ],
+   "confidence": "high",
+   "generatedAt": "2026-10-05T05:49:32.256Z"
+  },
+  "bellinzona": {
+   "cityId": "bellinzona",
+   "current": {
+    "temperature": 16,
+    "weatherCode": 80,
+    "isDay": true,
+    "windSpeedKmh": 2.8,
+    "humidity": 80,
+    "apparentTemp": 16.8
+   },
+   "daily7": [
+    {
+     "date": "2026-10-05",
+     "tempMax": 22.45,
+     "tempMin": 14.1,
+     "weatherCode": 80,
+     "precipProb": 78,
+     "sunrise": "2026-10-05T07:27",
+     "sunset": "2026-10-05T18:56"
+    },
+    {
+     "date": "2026-10-06",
+     "tempMax": 21.05,
+     "tempMin": 11.3,
+     "weatherCode": 3,
+     "precipProb": 28,
+     "sunrise": "2026-10-06T07:28",
+     "sunset": "2026-10-06T18:54"
+    }
+   ],
+   "confidence": "high",
+   "generatedAt": "2026-10-05T05:49:34.068Z"
+  },
+  "como": {
+   "cityId": "como",
+   "current": {
+    "temperature": 15.35,
+    "weatherCode": 2,
+    "isDay": true,
+    "windSpeedKmh": 4.6,
+    "humidity": 83,
+    "apparentTemp": 14.8
+   },
+   "daily7": [
+    {
+     "date": "2026-10-05",
+     "tempMax": 22.3,
+     "tempMin": 15,
+     "weatherCode": 80,
+     "precipProb": 20,
+     "sunrise": "2026-10-05T07:26",
+     "sunset": "2026-10-05T18:56"
+    },
+    {
+     "date": "2026-10-06",
+     "tempMax": 21.95,
+     "tempMin": 14,
+     "weatherCode": 3,
+     "precipProb": 5,
+     "sunrise": "2026-10-06T07:28",
+     "sunset": "2026-10-06T18:54"
+    }
+   ],
+   "confidence": "high",
+   "generatedAt": "2026-10-05T05:49:40.795Z"
+  }
+ },
+ "alerts": {}
+}
