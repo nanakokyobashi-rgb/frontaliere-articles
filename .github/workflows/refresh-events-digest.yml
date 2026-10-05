@@ -41,6 +41,7 @@ on:
       - 'generator/scripts/refresh-events-dataset.mjs'
       - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/events-digest-content.mjs'
+      - 'generator/scripts/lib/events-digest-meta.mjs'
       - 'generator/scripts/lib/events-utils.mjs'
   workflow_dispatch:
     inputs:

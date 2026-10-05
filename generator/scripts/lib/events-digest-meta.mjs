@@ -35,9 +35,20 @@ export function cantonDigestSeo(groupKey) {
  * resolveDigestCanton, which throws on an unknown code.
  */
 export function digestCantonFromArgs(argv = process.argv.slice(2), env = process.env) {
+  // An explicit flag wins over the environment and must carry a value: a
+  // `--canton` / `--canton=` left empty is a typo, never "Ticino" and never
+  // whatever EVENTS_DIGEST_CANTON happens to hold.
   const index = argv.indexOf('--canton');
-  const raw = index >= 0 ? argv[index + 1] : argv.find((arg) => arg.startsWith('--canton='))?.slice('--canton='.length);
-  const value = String(raw ?? env.EVENTS_DIGEST_CANTON ?? '').trim();
-  if (index >= 0 && (!value || value.startsWith('--'))) throw new Error('--canton needs a canton code');
-  return value ? resolveDigestCanton(value) : undefined;
+  const inline = argv.find((arg) => arg.startsWith('--canton='));
+  if (index >= 0 || inline !== undefined) {
+    const value = String(index >= 0 ? argv[index + 1] ?? '' : inline.slice('--canton='.length)).trim();
+    if (!value || value.startsWith('--')) throw new Error('--canton needs a canton code');
+    return resolveDigestCanton(value);
+  }
+  if (env.EVENTS_DIGEST_CANTON !== undefined) {
+    const value = String(env.EVENTS_DIGEST_CANTON).trim();
+    if (!value) throw new Error('EVENTS_DIGEST_CANTON is set but empty');
+    return resolveDigestCanton(value);
+  }
+  return undefined;
 }

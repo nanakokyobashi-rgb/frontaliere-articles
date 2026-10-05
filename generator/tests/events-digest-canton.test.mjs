@@ -47,6 +47,12 @@ describe('digestCantonFromArgs', () => {
     assert.throws(() => digestCantonFromArgs(['--canton', 'XX'], {}), /unknown canton/);
     assert.throws(() => digestCantonFromArgs(['--canton'], {}), /needs a canton/);
     assert.throws(() => digestCantonFromArgs(['--canton', '--dry-run'], {}), /needs a canton/);
+    assert.throws(() => digestCantonFromArgs(['--canton='], {}), /needs a canton/);
+    // Il flag esplicito vince sull'ambiente anche quando e' vuoto: niente ripiego silenzioso.
+    assert.throws(() => digestCantonFromArgs(['--canton'], { EVENTS_DIGEST_CANTON: 'GR' }), /needs a canton/);
+    assert.throws(() => digestCantonFromArgs(['--canton='], { EVENTS_DIGEST_CANTON: 'GR' }), /needs a canton/);
+    assert.equal(digestCantonFromArgs(['--canton', 'BE'], { EVENTS_DIGEST_CANTON: 'GR' }), 'BE');
+    assert.throws(() => digestCantonFromArgs([], { EVENTS_DIGEST_CANTON: ' ' }), /set but empty/);
   });
 });
 
