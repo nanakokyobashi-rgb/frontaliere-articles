@@ -701,6 +701,15 @@ const MUTATIONS = {
       'Un hub cantonale senza il suo cantone non deve sovrascrivere quello buono.',
     ],
     [
+      'curva dell\'onere troncata a quattro redditi',
+      mutated(c, (p) => {
+        p.burden.incomeBracketsCHF = p.burden.incomeBracketsCHF.slice(0, 4);
+        for (const canton of Object.values(p.cantons)) canton.burdenPct[String(p.year)] = canton.burdenPct[String(p.year)].slice(0, 4);
+      }),
+      /incomeBracketsCHF is not a list of 5 incomes/,
+      'Una curva coerente ma con meno punti passerebbe il controllo riga per riga: il contratto e\' di cinque redditi.',
+    ],
+    [
       'onere come stringhe',
       mutated(c, (p) => { p.cantons.ZH.burdenPct[String(p.year)] = p.cantons.ZH.burdenPct[String(p.year)].map(String); }),
       /ZH burdenPct \d{4} is not 5 percentages/,

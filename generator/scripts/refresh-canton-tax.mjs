@@ -60,6 +60,8 @@ const CANTONS = [
 ];
 /** Soglia del produttore (validate-canton-tax-data.mjs): tariffe alla fonte per almeno 24 cantoni. */
 const MIN_WITHHOLDING_CANTONS = 24;
+/** Redditi lordi annui di riferimento dell'onere (30k, 60k, 100k, 150k, 250k). */
+const BURDEN_BRACKETS = 5;
 
 const CHECK_ONLY =
   process.argv.includes('--check') || process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
@@ -107,8 +109,10 @@ if (!Number.isInteger(year)) fail(`${SOURCE} has no integer year`);
 const calendarYear = new Date().getUTCFullYear();
 if (year < calendarYear - 1) fail(`${SOURCE}: dataset year ${year} is stale (calendar ${calendarYear}) — refusing`);
 const brackets = payload.burden?.incomeBracketsCHF;
-if (!Array.isArray(brackets) || brackets.length < 2 || brackets.some((v) => !Number.isFinite(v))) {
-  fail(`${SOURCE}: burden.incomeBracketsCHF is not a list of incomes`);
+// Il contratto e' di ESATTAMENTE cinque redditi di riferimento: una curva con
+// meno (o piu') punti e' un dataset troncato o di un'altra forma.
+if (!Array.isArray(brackets) || brackets.length !== BURDEN_BRACKETS || brackets.some((v) => !Number.isFinite(v))) {
+  fail(`${SOURCE}: burden.incomeBracketsCHF is not a list of ${BURDEN_BRACKETS} incomes`);
 }
 const cantons = payload.cantons;
 if (!cantons || typeof cantons !== 'object' || Array.isArray(cantons)) fail(`${SOURCE}: cantons is not an object`);
@@ -116,8 +120,8 @@ const missing = CANTONS.filter((c) => !cantons[c]);
 if (missing.length) fail(`${SOURCE}: cantons missing: ${missing.join(',')}`);
 for (const code of CANTONS) {
   const row = cantons[code].burdenPct?.[String(year)];
-  if (!Array.isArray(row) || row.length !== brackets.length || row.some((v) => !Number.isFinite(v) || v <= 0 || v >= 50)) {
-    fail(`${SOURCE}: ${code} burdenPct ${year} is not ${brackets.length} percentages in (0,50)`);
+  if (!Array.isArray(row) || row.length !== BURDEN_BRACKETS || row.some((v) => !Number.isFinite(v) || v <= 0 || v >= 50)) {
+    fail(`${SOURCE}: ${code} burdenPct ${year} is not ${BURDEN_BRACKETS} percentages in (0,50)`);
   }
   // Al reddito piu' alto nessun capoluogo svizzero sta sotto il 5% (minimo
   // misurato 13,43% nel 2026, 250k): un valore piu' basso e' un cambio di unita'
@@ -138,5 +142,8 @@ if (CHECK_ONLY) {
 }
 
 fs.mkdirSync(path.dirname(CACHE), { recursive: true });
-fs.writeFileSync(CACHE, raw, 'utf-8');
+// Scrittura atomica: un run interrotto non lascia una cache a meta'.
+const tmp = `${CACHE}.${process.pid}.tmp`;
+fs.writeFileSync(tmp, raw, 'utf-8');
+fs.renameSync(tmp, CACHE);
 log(`canton-tax ${year}: 26 cantons, withholding ${withWithholding.length}/26 from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);

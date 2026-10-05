@@ -133,5 +133,8 @@ if (CHECK_ONLY) {
 }
 
 fs.mkdirSync(path.dirname(CACHE), { recursive: true });
-fs.writeFileSync(CACHE, raw, 'utf-8');
+// Scrittura atomica: un run interrotto non lascia una cache a meta'.
+const tmp = `${CACHE}.${process.pid}.tmp`;
+fs.writeFileSync(tmp, raw, 'utf-8');
+fs.renameSync(tmp, CACHE);
 log(`pension-parameters ${year}: AVS ${avs.minMonthlyCHF}-${avs.maxMonthlyCHF}, 26 cantons from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);
