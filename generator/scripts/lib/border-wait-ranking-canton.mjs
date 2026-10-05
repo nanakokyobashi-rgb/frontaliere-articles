@@ -71,14 +71,17 @@ export function staticMetaFor(canton = 'TI') {
 
 /**
  * Crossings of one canton in the window. Ticino keeps its region-based test
- * (the original scoping), but an explicit `null` is a registry tombstone and
- * must be excluded; an absent field remains compatible with legacy windows.
+ * only for legacy windows where `canton` is absent; once the field is present,
+ * the published group is authoritative, including explicit `null` tombstones.
  * Every other canton uses the `canton` the site publishes for each crossing
  * (URL group code: BS/BL → BASILEA). A window published before that field
  * existed ranks nothing, and main() refuses the empty article.
  */
 export function crossingInCanton(canton, slug, stats) {
-  if (canton === 'TI') return stats?.canton !== null && isTicinoCrossing(slug);
+  if (canton === 'TI') {
+    const hasCanton = stats !== null && typeof stats === 'object' && Object.hasOwn(stats, 'canton');
+    return hasCanton ? stats.canton === 'TI' : isTicinoCrossing(slug);
+  }
   return stats?.canton === canton;
 }
 
