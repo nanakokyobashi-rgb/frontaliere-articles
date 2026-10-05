@@ -35,6 +35,7 @@ import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
+import { detectAiMetaResponse } from './ai-meta-response.mjs';
 import {
   extractOAuthErrorReason,
   getServiceAccountAccessToken,
@@ -307,6 +308,13 @@ const _cascadeStats = {
   // bucket canonico `tierPassthroughs` (contratto #1210); questo sotto-bucket
   // conserva la cardinalità per segmento per la calibrazione del pavimento.
   tierPassthroughChunks: {},
+  // Tier che hanno risposto PARLANDO della richiesta invece di tradurla: un
+  // rifiuto («Sorry, I can't help with that.»), una richiesta dell'input («I
+  // need to see the actual text…»), la narrazione di un agente («Let me check
+  // the translation cache files…»), un'etichetta del template rimasta senza
+  // valore («Traduzione:»). Vedi `rejectedAsMetaResponse`. Stessa unita' di
+  // `tierPassthroughs`: tentativi di tier, non campi.
+  tierMetaResponses: {},
   // Per-field-type split of calls/successes. The cumulative `successes` above is
   // summed across every field type, so a run that translates short titles fine
   // but has every (long) description rejected by all providers still reports
@@ -381,6 +389,10 @@ export function logCascadeSummary() {
     .sort((a, b) => b[1] - a[1]);
   if (passChunks.length) {
     console.log('   Tier passthrough (chunk, sorgente resa verbatim): ' + passChunks.map(([k, v]) => `${k}=${v}`).join(', '));
+  }
+  const meta = Object.entries(s.tierMetaResponses).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  if (meta.length) {
+    console.log('   Tier meta-risposta (rifiuto/richiesta/narrazione, scartata): ' + meta.map(([k, v]) => `${k}=${v}`).join(', '));
   }
   const health = getInstanceHealthStats();
   const down = Object.entries(health).filter(([, h]) => h.failures >= HEALTH_FAILURE_THRESHOLD);
@@ -567,6 +579,31 @@ function rejectedAsPassthroughWithSourceVariants(
   if (rejectedAsPassthrough(tierName, normalizedSource, out, outcome, granularity)) return true;
   return rawSource !== normalizedSource
     && rejectedAsPassthrough(tierName, rawSource, out, outcome, granularity);
+}
+
+/**
+ * Un tier che risponde CON UNA META-RISPOSTA non ha tradotto (scheda
+ * AI-REFUSAL, trovata dalla PR del sito 11540): «I need to see the actual job
+ * title you want translated…» e' finito in `titleByLocale.en` di un annuncio
+ * e pubblicato sotto /en/. Il testo e' non vuoto, diverso dalla sorgente e in
+ * una lingua plausibile, quindi nessun altro controllo della cascata lo
+ * scarta. Vale un MISS, come il passthrough: il tier successivo prova, e se
+ * rispondono cosi' tutti la cascata rende '' e il campo resta da tradurre.
+ * NON conta come passthrough nell'esito (`incomplete`): una meta-risposta non
+ * prova che la sorgente sia intraducibile, e il memo negativo del passthrough
+ * non deve scattare. Il rilevatore e' `ai-meta-response.mjs`, gemello
+ * `identical` del sito.
+ *
+ * @param {string} tierName
+ * @param {string} source  testo dato in pasto al motore
+ * @param {string} out     testo reso dal motore
+ * @returns {boolean} true se `out` e' una meta-risposta (e il tier e' stato contato)
+ */
+function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
+  if (!out || !detectAiMetaResponse(out, { source })) return false;
+  _cascadeStats.tierMetaResponses[tierName] = (_cascadeStats.tierMetaResponses[tierName] || 0) + 1;
+  noteTranslationOutcome(outcome, 'incomplete');
+  return true;
 }
 
 /**
@@ -2127,6 +2164,11 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (rejectedAsPassthroughWithSourceVariants(tierName, clean, rawSourceClean, result, _outcome)) {
         return '';
       }
+      // Un rifiuto o una domanda del modello non e' una traduzione: MISS, il
+      // tier successivo prova (vedi `rejectedAsMetaResponse`).
+      if (rejectedAsMetaResponse(tierName, sourceClean, result, _outcome)) {
+        return '';
+      }
       if (result) {
         _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
         _cascadeStats.successes++;
@@ -2413,6 +2455,8 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
+  // Stesso fail-closed su un rifiuto o una richiesta dell'input del modello.
+  if (rejectedAsMetaResponse('codex', prepared.sourceClean, out, _outcome)) return '';
   return _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 }
 
