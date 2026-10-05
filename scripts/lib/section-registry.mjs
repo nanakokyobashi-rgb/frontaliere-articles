@@ -256,6 +256,48 @@ export function loadDeclaredRegistry(root, core) {
   return doc;
 }
 
+// ── Sorgenti di una sezione di famiglia ─────────────────────────────────────
+
+/**
+ * Se un file sorgente di una sezione di FAMIGLIA manca legittimamente.
+ * Una sezione appena accesa non ha ancora nessun file (create-article li crea
+ * tutti insieme al primo articolo): e' «nuova» se manca il REGISTRO, e allora
+ * devono mancare anche mappa slug e meta. Ogni insieme parziale lancia:
+ * trattarlo come vuoto pubblicherebbe una famiglia troncata con registro,
+ * sitemap e counts concordi.
+ *
+ * @returns {boolean} true = file assente di una sezione nuova (vale vuoto); false = file presente
+ */
+export function familySourceMissing({ section, rel, registryRel, present, registryPresent }) {
+  if (present === registryPresent) return !present;
+  throw new Error(
+    present
+      ? `${rel} esiste ma ${registryRel} no: sezione ${section} parziale — refusing`
+      : `${rel} assente mentre ${registryRel} esiste: sezione ${section} parziale — refusing`,
+  );
+}
+
+/**
+ * Gli slug IT degli articoli che il registro dichiarato ritira (`gone`) o
+ * sposta (`redirects`) in ALMENO una locale: il registro accetta path canonici
+ * in qualsiasi lingua, e la voce di sitemap di un articolo porta la loc IT e
+ * i quattro alternate insieme, quindi una sola variante 410/301 toglie
+ * l'articolo intero.
+ *
+ * @param {{ redirects?: Record<string, string>, gone?: string[] } | undefined} entry voce del registro
+ * @param {Record<string, Record<string, string>>} slugMap id → slug per locale
+ * @param {Record<string, string>} prefixes prefisso della sezione per locale (`/articoli-x/`)
+ */
+export function registryRetiredSlugs(entry, slugMap, prefixes) {
+  if (!entry) return [];
+  const moved = new Set([...Object.keys(entry.redirects ?? {}), ...(entry.gone ?? [])]);
+  if (moved.size === 0) return [];
+  return Object.values(slugMap ?? {})
+    .filter((slugs) => LOCALES.some((loc) => slugs?.[loc] && moved.has(`${prefixes[loc]}${slugs[loc]}/`)))
+    .map((slugs) => slugs?.it)
+    .filter(Boolean);
+}
+
 // ── Kill-switch ──────────────────────────────────────────────────────────────
 
 /**
@@ -382,6 +424,7 @@ export function buildSectionsCatalog({ declared, effective, killSwitch, commit, 
  * @param {Array<{ file: string, lastmod?: string | null }>} sitemaps
  */
 export function buildSitemapIndex(sitemaps) {
+  if (!Array.isArray(sitemaps)) throw new Error('buildSitemapIndex: atteso un array di { file, lastmod? }');
   if (!sitemaps.length) return null;
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const blocks = sitemaps.map(({ file, lastmod }) => {

@@ -43,10 +43,12 @@ import {
   declaredRegistryErrors,
   edgeRegistryPublishable,
   effectiveStatuses,
+  familySourceMissing,
   latestArticleDate,
   loadDeclaredRegistry,
   matchSectionPath,
   parseKillSwitch,
+  registryRetiredSlugs,
   registrySectionIds,
   resolveKillSwitch,
   validateEdgeSectionRegistry,
@@ -296,6 +298,11 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   // Gli articoli hanno la stessa forma della sitemap blog.
   const blocks = buildArticleUrlBlocks(entries, { it: '/articoli-ticino/', en: '/en/ticino-articles/', de: '/de/tessin-artikel/', fr: '/fr/articles-tessin/' }, slugMap, {});
   assert.ok(built.xml.includes(blocks.join('\n')));
+  // Una pagina di sezione ritirata dal registro in una locale esce in tutte e quattro.
+  const cut = buildFamilySectionSitemap({ section: 'canton-ti', entries, slugMap, meta: {}, pageSize: 2,
+    retiredPaths: new Set(['/en/ticino-articles/fuel/']) });
+  assert.equal(cut.pageCount, built.pageCount - 4);
+  assert.ok(!cut.xml.includes('/articoli-ticino/carburanti/'));
   // Sezione senza articoli: le pagine ci sono comunque, archivio di una pagina.
   assert.equal(familySectionPages('canton-gr', 0, 24).length, 1 + 6 + 1);
   assert.throws(() => familySectionPages('frontaliere', 0, 24), /hub tematici/);
@@ -361,6 +368,36 @@ test('corpus-sections: gli export dichiarati coincidono con quelli che create-ar
   }
 });
 
+test('famiglia: una sezione nuova non ha nessun file; un insieme parziale e\' un rifiuto', () => {
+  const base = { section: 'canton-ti', rel: 'content/blog-meta-canton-ti-de.ts', registryRel: 'content/cantons/canton-ti/registry.ts' };
+  assert.equal(familySourceMissing({ ...base, present: false, registryPresent: false }), true, 'sezione nuova: vale vuoto');
+  assert.equal(familySourceMissing({ ...base, present: true, registryPresent: true }), false);
+  assert.throws(() => familySourceMissing({ ...base, present: false, registryPresent: true }), /assente mentre .*registry\.ts esiste.*parziale/);
+  assert.throws(() => familySourceMissing({ ...base, present: true, registryPresent: false }), /esiste ma .*registry\.ts no.*parziale/);
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /familySourceMissing\(\{/);
+  assert.match(build, /if \(familyFileMissing\(section, section\.metaFile\(loc\)\)\) return \{\};/);
+});
+
+test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale esce intero', () => {
+  const prefixes = { it: '/articoli-ticino/', en: '/en/ticino-articles/', de: '/de/tessin-artikel/', fr: '/fr/articles-tessin/' };
+  const slugMap = {
+    a: { it: 'a-it', en: 'a-en', de: 'a-de', fr: 'a-fr' },
+    b: { it: 'b-it', en: 'b-en', de: 'b-de', fr: 'b-fr' },
+    c: { it: 'c-it', en: 'c-en', de: 'c-de', fr: 'c-fr' },
+    d: { it: 'd-it', en: 'd-en', de: 'd-de', fr: 'd-fr' },
+  };
+  const entry = {
+    gone: ['/en/ticino-articles/a-en/', '/articoli-ticino/carburanti/'],
+    redirects: { '/fr/articles-tessin/b-fr/': '/fr/articles-tessin/', '/articoli-ticino/c-it/': '/articoli-ticino/d-it/' },
+  };
+  assert.deepEqual(registryRetiredSlugs(entry, slugMap, prefixes), ['a-it', 'b-it', 'c-it']);
+  assert.deepEqual(registryRetiredSlugs({}, slugMap, prefixes), []);
+  assert.deepEqual(registryRetiredSlugs(undefined, slugMap, prefixes), []);
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /registryRetiredSlugs\(declaredSections\.sections\[section\.section\]/);
+});
+
 // ── 6. Pubblicazione su R2 ───────────────────────────────────────────────────
 
 function fakeDist({ live = [], index = true, edge = true }) {
@@ -381,6 +418,7 @@ function fakeDist({ live = [], index = true, edge = true }) {
 }
 
 test('edge: nessuna sezione live → registro e poi cancellazione dell\'indice', () => {
+  // (ordine comune a tutti i casi: l'indice si tocca solo DOPO il registro)
   const { ops } = planSectionEdge(fakeDist({}));
   assert.deepEqual(ops.map((op) => [op.op, op.key]), [
     ['upload', 'edge/sections/registry.json'],
@@ -391,14 +429,19 @@ test('edge: nessuna sezione live → registro e poi cancellazione dell\'indice',
   assert.deepEqual(ops[1].purge, ['https://frontaliereticino.ch/sitemap-cantons.xml', 'https://cdn.frontaliereticino.ch/edge/sitemap-cantons.xml']);
 });
 
-test('edge: sezioni live → sitemap, indice, registro per ultimo', () => {
+test('edge: sezioni live → sitemap, registro, indice solo dopo il registro', () => {
   const { ops } = planSectionEdge(fakeDist({ live: ['canton-ti', 'canton-gr'] }));
   assert.deepEqual(ops.map((op) => [op.op, op.key]), [
     ['upload', 'edge/sitemap-articles-canton-gr.xml'],
     ['upload', 'edge/sitemap-articles-canton-ti.xml'],
-    ['upload', 'edge/sitemap-cantons.xml'],
     ['upload', 'edge/sections/registry.json'],
+    ['upload', 'edge/sitemap-cantons.xml'],
   ]);
+  // Un indice nuovo sopra un registro vecchio annuncerebbe sitemap non servite:
+  // l'esecutore si ferma al registro non confermato, prima dell'indice.
+  const src = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
+  assert.match(src, /if \(op\.registry\) break;/);
+  assert.match(src, /if \(op\.registry && failures > 0\) \{[\s\S]*?break;/);
   assert.ok(ops[0].purge.includes('https://frontaliereticino.ch/sitemap-articles-canton-gr.xml'));
   assert.ok(ops[0].purge.includes('https://cdn.frontaliereticino.ch/edge/sitemap-articles-canton-gr.xml'));
 });
@@ -419,6 +462,9 @@ test('edge: purge a blocchi da 30 senza duplicati', () => {
   const urls = Array.from({ length: 65 }, (_, i) => `https://x/${i % 61}`);
   const chunks = purgeChunks(urls);
   assert.deepEqual(chunks.map((c) => c.length), [30, 30, 1]);
+  assert.throws(() => purgeChunks(urls, 0), /size non valido/);
+  assert.throws(() => purgeChunks(urls, -1), /size non valido/);
+  assert.throws(() => buildSitemapIndex(null), /atteso un array/);
 });
 
 test('delete-cdn-file.sh: solo chiavi delle sezioni cantonali', () => {
@@ -452,7 +498,7 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
 
 test('publish-api: osserva il registro e spinge registro e sitemap cantonali dopo il deploy', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
-  for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh']) {
+  for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
     assert.ok(wf.includes(`      - '${p}'\n`), p);
   }
   const step = wf.slice(wf.indexOf('- name: Push the section registry and the canton sitemaps to the edge'));

@@ -109,8 +109,10 @@ import {
   buildSitemapIndex,
   edgeRegistryPublishable,
   effectiveStatuses,
+  familySourceMissing,
   latestArticleDate,
   loadDeclaredRegistry,
+  registryRetiredSlugs,
   resolveKillSwitch,
   validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
@@ -229,13 +231,28 @@ assertActiveSectionsPublishable();
 const declaredSections = loadDeclaredRegistry(ROOT);
 // Le sezioni di FAMIGLIA (le cantonali accese) si leggono come le storiche, con
 // una differenza sola: una sezione di famiglia appena accesa non ha ancora i
-// suoi file (create-article li crea al primo articolo), e l'assenza vale
-// registro vuoto — la stessa regola di `isNewFamilySection` nei pavimenti.
-// Un file presente ma illeggibile resta un errore.
-const familyFileMissing = (section, rel) => section.api.family !== null && !fs.existsSync(path.join(ROOT, rel));
+// suoi file (create-article li crea TUTTI INSIEME al primo articolo), e
+// l'assenza vale sezione vuota — la stessa regola di `isNewFamilySection` nei
+// pavimenti. Vale solo per la sezione INTERA: e' «nuova» la sezione di
+// famiglia senza registro, e allora non deve avere nemmeno mappa slug e meta.
+// Un insieme parziale (registro senza meta di una locale, meta senza
+// registro) e' un rifiuto: trattarlo come vuoto pubblicherebbe una famiglia
+// troncata con registro, sitemap e counts verdi. Un file presente ma
+// illeggibile resta un errore.
+const isNewFamilySection = (section) =>
+  section.api.family !== null && !fs.existsSync(path.join(ROOT, section.registryFile));
+const familyFileMissing = (section, rel) =>
+  section.api.family !== null &&
+  familySourceMissing({
+    section: section.section,
+    rel,
+    registryRel: section.registryFile,
+    present: fs.existsSync(path.join(ROOT, rel)),
+    registryPresent: !isNewFamilySection(section),
+  });
 const SECTION_REGISTRIES = {};
 for (const section of PUBLISHED_API_SECTIONS) {
-  if (familyFileMissing(section, section.registryFile)) {
+  if (isNewFamilySection(section)) {
     SECTION_REGISTRIES[section.section] = [];
     continue;
   }
@@ -288,7 +305,7 @@ for (const loc of LOCALES) {
   }
 }
 
-/** Il meta di una sezione per locale; `{}` per una sezione di famiglia ancora senza file. */
+/** Il meta di una sezione per locale; `{}` solo per una sezione di famiglia NUOVA (nessun file). */
 async function loadSectionMeta(section, loc) {
   if (familyFileMissing(section, section.metaFile(loc))) return {};
   const meta = (await load(section.metaFile(loc))).default;
@@ -339,9 +356,6 @@ for (const family of API_FAMILIES) {
 const SECTION_SLUG_MODULES = {};
 for (const section of PUBLISHED_API_SECTIONS) {
   if (familyFileMissing(section, section.slugFile)) {
-    if (SECTION_REGISTRIES[section.section].length > 0) {
-      throw new Error(`${section.slugFile} assente mentre il registro di ${section.section} ha articoli — refusing`);
-    }
     SECTION_SLUG_MODULES[section.section] = { slugs: {}, reverse: null, fallbackReasons: {} };
     continue;
   }
@@ -481,16 +495,12 @@ const retiredDailyEditionSlugs = new Set(
 //
 // Una sezione di famiglia de-lista anche gli articoli che il SUO registro
 // dichiarato ritira (`gone`) o sposta (`redirects`): il Worker li serve 410 o
-// 301, e una `<loc>` che non risponde 200 non sta in una sitemap.
-const retiredByRegistry = (section) => {
-  const entry = declaredSections.sections[section.section];
-  if (!entry) return [];
-  const moved = new Set([...Object.keys(entry.redirects ?? {}), ...(entry.gone ?? [])]);
-  const itPrefix = SECTION_PATHS[section.section]?.it;
-  return Object.values(slugMapOf(section.section) ?? {})
-    .map((slugs) => slugs?.it)
-    .filter((slug) => slug && itPrefix && moved.has(`${itPrefix}${slug}/`));
-};
+// 301, e ne' una `<loc>` ne' un alternate che non risponde 200 stanno in una
+// sitemap. Il registro accetta path canonici in QUALSIASI locale, quindi
+// basta che UNA variante dell'articolo sia ritirata per toglierlo intero
+// (la voce porta loc IT e i quattro alternate insieme).
+const retiredByRegistry = (section) =>
+  registryRetiredSlugs(declaredSections.sections[section.section], slugMapOf(section.section), SECTION_PATHS[section.section]);
 const SECTION_SITEMAP_SHADOW = Object.fromEntries(
   PUBLISHED_API_SECTIONS.map((section) => [
     section.section,
@@ -517,6 +527,10 @@ for (const section of PUBLISHED_API_SECTIONS) {
       meta: SECTION_META_IT[section.section],
       pageSize: ARTICLES_PAGE_SIZE,
       shadowed: SECTION_SITEMAP_SHADOW[section.section],
+      retiredPaths: new Set([
+        ...Object.keys(declaredSections.sections[section.section]?.redirects ?? {}),
+        ...(declaredSections.sections[section.section]?.gone ?? []),
+      ]),
     });
     sitemapCounts[section.section] = writeXml(section.api.sitemap, built);
     familySitemapArticles[section.section] = built.articleCount;

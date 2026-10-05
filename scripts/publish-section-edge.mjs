@@ -10,17 +10,18 @@
  *   edge/sitemap-articles-<canton-id>.xml  servita solo se la sezione e' live
  *   edge/sitemap-cantons.xml               l'indice (dichiarato in robots.txt)
  *
- * ORDINE: prima le sitemap delle sezioni live, poi l'indice, poi il registro.
- * Il registro e' cio' che rende visibile un cambio di stato, quindi arriva
- * quando tutto cio' che annuncia e' gia' al suo posto; se un upload precedente
- * non e' confermato il registro NON sale (resta lo stato di prima, coerente
- * con le copie che R2 ha davvero).
+ * ORDINE: prima le sitemap delle sezioni live, poi il registro, per ULTIMO
+ * l'indice. Il registro e' cio' che rende visibile un cambio di stato, quindi
+ * arriva quando le sitemap che il Worker servira' sono gia' al loro posto; se
+ * un upload precedente non e' confermato il registro NON sale (resta lo stato
+ * di prima, coerente con le copie che R2 ha davvero). L'indice e' solo un
+ * annuncio e si scrive (o si cancella) SOLO dopo la conferma del registro: un
+ * indice nuovo sopra un registro vecchio elencherebbe sitemap che il Worker
+ * non serve, e lo step e' continue-on-error, quindi resterebbe cosi'.
  *
  * L'indice senza sezioni live non si riscrive vuoto (schema: minimo un
- * `<sitemap>`): si CANCELLA, DOPO il registro — nello spegnimento si ritira
- * prima lo stato e poi l'annuncio — cosi' il Worker torna al 404 di prima
- * invece di annunciare sitemap che non serve piu'. (Questo ordine garantisce
- * anche che rclone sia gia' installato dall'upload del registro.)
+ * `<sitemap>`): si CANCELLA, cosi' il Worker torna al 404 di prima invece di
+ * annunciare sitemap che non serve piu'.
  *
  * Registro assente in dist/api (kill-switch di Remote Config non verificato con
  * una sezione dichiarata live, vedi scripts/lib/section-registry.mjs): non si
@@ -85,16 +86,6 @@ export function planSectionEdge(distDir) {
     return { ops, notes };
   }
 
-  const hasIndex = fs.existsSync(at(SECTION_SITEMAP_INDEX_FILE));
-  if (hasIndex) {
-    ops.push({
-      op: 'upload',
-      local: at(SECTION_SITEMAP_INDEX_FILE),
-      key: `edge/${SECTION_SITEMAP_INDEX_FILE}`,
-      cacheControl: SITEMAP_CACHE_CONTROL,
-      purge: purgeFor(SECTION_SITEMAP_INDEX_FILE),
-    });
-  }
   ops.push({
     op: 'upload',
     local: at(EDGE_SECTION_REGISTRY_FILE),
@@ -103,7 +94,15 @@ export function planSectionEdge(distDir) {
     purge: [`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`],
     registry: true,
   });
-  if (!hasIndex) {
+  if (fs.existsSync(at(SECTION_SITEMAP_INDEX_FILE))) {
+    ops.push({
+      op: 'upload',
+      local: at(SECTION_SITEMAP_INDEX_FILE),
+      key: `edge/${SECTION_SITEMAP_INDEX_FILE}`,
+      cacheControl: SITEMAP_CACHE_CONTROL,
+      purge: purgeFor(SECTION_SITEMAP_INDEX_FILE),
+    });
+  } else {
     ops.push({ op: 'delete', key: `edge/${SECTION_SITEMAP_INDEX_FILE}`, purge: purgeFor(SECTION_SITEMAP_INDEX_FILE) });
   }
   return { ops, notes };
@@ -111,6 +110,7 @@ export function planSectionEdge(distDir) {
 
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
 export function purgeChunks(urls, size = PURGE_CHUNK) {
+  if (!Number.isInteger(size) || size <= 0) throw new Error(`purgeChunks: size non valido (${size})`);
   const unique = [...new Set(urls)];
   const chunks = [];
   for (let i = 0; i < unique.length; i += size) chunks.push(unique.slice(i, i + size));
@@ -126,7 +126,9 @@ function run(cmd, args) {
 
 export function main(argv = process.argv.slice(2)) {
   const distIdx = argv.indexOf('--dist');
-  const distDir = path.resolve(ROOT, distIdx >= 0 ? argv[distIdx + 1] : 'dist/api');
+  const distArg = distIdx >= 0 ? argv[distIdx + 1] : 'dist/api';
+  if (!distArg || distArg.startsWith('--')) throw new Error('--dist richiede una cartella (es. --dist dist/api)');
+  const distDir = path.resolve(ROOT, distArg);
   const dryRun = argv.includes('--dry-run');
   const { ops, notes } = planSectionEdge(distDir);
   for (const note of notes) console.log(`::notice::[section-edge] ${note}`);
@@ -147,7 +149,8 @@ export function main(argv = process.argv.slice(2)) {
       if (!stdout.includes('✅ uploaded')) {
         failures++;
         console.log(`::warning::[section-edge] upload non confermato: ${op.key}`);
-        // Senza registro nuovo, l'indice resta quello che il registro vecchio annuncia.
+        // Senza registro nuovo confermato l'indice non si tocca: resta quello
+        // che il registro vecchio annuncia.
         if (op.registry) break;
         continue;
       }

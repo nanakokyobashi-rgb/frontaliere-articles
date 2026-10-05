@@ -53,6 +53,10 @@ on:
       - 'scripts/lib/section-registry.mjs'
       - 'scripts/publish-section-edge.mjs'
       - 'scripts/lib/delete-cdn-file.sh'
+      # Il loader di Remote Config e' un input del publisher da quando porta il
+      # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker
+      # RC_ENV_LOADED che build-api legge: un fix al loader deve ripubblicare.
+      - 'generator/scripts/load-rc-env.mjs'
       - 'scripts/lib/count-xml-tags.mjs'
       - 'scripts/lib/ticker-shadow-check.mjs'
       - 'scripts/lib/published-slug-guard.mjs'
@@ -730,8 +734,8 @@ jobs:
       # sezione live il Worker resta fail-closed, quindi oggi questo step scrive
       # un registro tutto `draft` e cancella un indice che non esiste.
       #
-      # Separato dallo step sopra perche' ha un ordine suo (sitemap, indice,
-      # registro per ultimo) e un purge suo a blocchi di 30: le due liste
+      # Separato dallo step sopra perche' ha un ordine suo (sitemap, registro,
+      # indice solo a registro confermato) e un purge suo a blocchi di 30: le due liste
       # insieme supererebbero il tetto del purge `files`. Il kill-switch di
       # Remote Config (CANTON_ARTICLE_SECTIONS_KILL) e' gia' applicato da
       # build-api; se Remote Config non e' verificato con una sezione live,

@@ -201,12 +201,16 @@ export function familySectionPages(section, archiveTotal, pageSize) {
  * gli alternate, come `sitemap-blog.xml`). `articleCount` e' il numero di
  * articoli emessi, separato da `count` perche' i pavimenti si misurano sugli
  * articoli: contare anche landing e hub li renderebbe sempre soddisfatti.
+ * `retiredPaths` sono i path che il registro della sezione dichiara `gone` o
+ * `redirects`: una pagina di sezione con UNA variante locale ritirata esce
+ * intera (le sue `<url>` si citano a vicenda come alternate).
  */
-export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pageSize, shadowed = new Set() }) {
+export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pageSize, shadowed = new Set(), retiredPaths = new Set() }) {
   const paths = sectionPathsOf(section);
   const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed);
   const pageUrls = [];
   for (const page of familySectionPages(section, articleUrls.length, pageSize)) {
+    if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
     for (const loc of SITEMAP_LOCALES) {
       const parts = [`  <url>`, `    <loc>${SITE}${xmlEsc(page.paths[loc])}</loc>`];
       if (page.alternates) {
