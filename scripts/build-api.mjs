@@ -1219,54 +1219,56 @@ if (killSwitch.unknown.length) {
   );
 }
 const killedSections = Object.keys(effectiveSections).filter((id) => effectiveSections[id].killed);
-const heldSections = Object.keys(effectiveSections).filter((id) => effectiveSections[id].held);
 console.log(
   `[build-api] sections: kill-switch ${killSwitch.state}` +
-    (killedSections.length ? `, spente: ${killedSections.join(', ')}` : ', nessuna sezione spenta') +
-    (heldSections.length ? `, tenute draft senza verifica: ${heldSections.join(', ')}` : ''),
+    (killedSections.length ? `, spente: ${killedSections.join(', ')}` : ', nessuna sezione spenta'),
 );
 const PUBLISHED_BY_ID = Object.fromEntries(PUBLISHED_API_SECTIONS.map((section) => [section.section, section]));
+// Il catalogo NON porta lo stato delle sezioni: quello ha una sola fonte, il
+// registro che il Worker legge da R2 (vedi buildSectionsCatalog).
 const sectionsCatalog = buildSectionsCatalog({
   declared: declaredSections,
-  effective: effectiveSections,
-  killSwitch,
   commit,
   articles: Object.fromEntries(
     Object.keys(declaredSections.sections).map((id) => [id, SECTION_REGISTRIES[id]?.length ?? 0]),
   ),
-  sitemapOf: (id) => {
-    // Una sezione live e' attiva per costruzione (declaredRegistryErrors), quindi
-    // ha la sua sitemap scritta qui sopra; il controllo resta, perche' una
-    // sitemap annunciata e non emessa e' un 404 dichiarato in robots.txt.
-    const file = PUBLISHED_BY_ID[id]?.api.sitemap;
-    if (!file || !Object.prototype.hasOwnProperty.call(written, file)) {
-      throw new Error(`sezione live ${id} senza sitemap emessa — refusing`);
-    }
-    return file;
-  },
+  sitemapOf: (id) => PUBLISHED_BY_ID[id]?.api.sitemap ?? null,
 });
 write(SECTIONS_CATALOG_FILE, sectionsCatalog);
+// Registro e indice si emettono INSIEME o per niente: sono la release che
+// publish-section-edge.mjs porta su R2 con un solo flip. Senza kill-switch
+// verificabile e con una sezione dichiarata live non si emette nessuno dei
+// due, e su R2 resta la release precedente.
+let liveSectionIds = [];
 if (edgeRegistryPublishable(declaredSections, killSwitch)) {
   const edgeRegistry = buildEdgeRegistry({ declared: declaredSections, effective: effectiveSections, commit });
   if (!validateEdgeSectionRegistry(edgeRegistry)) {
     throw new Error(`${EDGE_SECTION_REGISTRY_FILE}: il Worker rifiuterebbe questo registro — refusing`);
   }
   write(EDGE_SECTION_REGISTRY_FILE, edgeRegistry);
+  liveSectionIds = Object.keys(edgeRegistry.sections).filter((id) => edgeRegistry.sections[id].status === 'live');
+  const sitemapIndexXml = buildSitemapIndex(
+    liveSectionIds.map((id) => {
+      // Una sezione live e' attiva per costruzione (declaredRegistryErrors),
+      // quindi ha la sua sitemap scritta qui sopra; il controllo resta, perche'
+      // una sitemap annunciata e non emessa e' un 404 dichiarato in robots.txt.
+      const file = PUBLISHED_BY_ID[id]?.api.sitemap;
+      if (!file || !Object.prototype.hasOwnProperty.call(written, file)) {
+        throw new Error(`sezione live ${id} senza sitemap emessa — refusing`);
+      }
+      return { file, lastmod: latestArticleDate(SECTION_REGISTRIES[id]) };
+    }),
+  );
+  if (sitemapIndexXml) {
+    writeXml(SECTION_SITEMAP_INDEX_FILE, { xml: sitemapIndexXml, count: liveSectionIds.length });
+  } else {
+    console.log(`[build-api] ${SECTION_SITEMAP_INDEX_FILE}: not emitted — nessuna sezione live (un indice vuoto viola lo schema)`);
+  }
 } else {
   console.warn(
-    `::warning::${EDGE_SECTION_REGISTRY_FILE} non emesso: Remote Config non verificato (manca RC_ENV_LOADED=1) ` +
-      'e almeno una sezione e\' dichiarata live — il Worker resta sull\'ultimo registro pubblicato su R2, ' +
-      `e ${SECTIONS_CATALOG_FILE} tiene quelle sezioni draft (mai avanti rispetto al Worker)`,
+    `::warning::${EDGE_SECTION_REGISTRY_FILE} e ${SECTION_SITEMAP_INDEX_FILE} non emessi: Remote Config non verificato ` +
+      '(manca RC_ENV_LOADED=1) e almeno una sezione e\' dichiarata live — il Worker resta sull\'ultima release pubblicata su R2',
   );
-}
-const liveSections = sectionsCatalog.sections.filter((entry) => entry.status === 'live');
-const sitemapIndexXml = buildSitemapIndex(
-  liveSections.map((entry) => ({ file: entry.sitemap.slice(1), lastmod: latestArticleDate(SECTION_REGISTRIES[entry.id]) })),
-);
-if (sitemapIndexXml) {
-  writeXml(SECTION_SITEMAP_INDEX_FILE, { xml: sitemapIndexXml, count: liveSections.length });
-} else {
-  console.log(`[build-api] ${SECTION_SITEMAP_INDEX_FILE}: not emitted — nessuna sezione live (un indice vuoto viola lo schema)`);
 }
 
 // Written last: it records the byte size of every other artifact.
@@ -1296,11 +1298,11 @@ write('manifest.json', {
     borderRankingEntries,
     dailyBriefBlocks,
     plateAuctionEditorialLocales,
-    // Il registro delle sezioni: voci del catalogo, quelle live dopo il
-    // kill-switch, e le sitemap elencate dall'indice (0 = indice non emesso).
+    // Le sezioni del catalogo e le sitemap elencate dall'indice (0 = indice
+    // non emesso). Quante sezioni sono LIVE non e' un contatore del manifest:
+    // lo stato servito lo dice solo il registro su R2.
     sections: sectionsCatalog.sections.length,
-    sectionsLive: liveSections.length,
-    sectionSitemaps: liveSections.length,
+    sectionSitemaps: liveSectionIds.length,
     // Additiva: la stessa cardinalita' per sezione, con l'id del core come
     // chiave. E' la forma che non cambia quando si accende una sezione: i
     // contatori col nome fisso qui sopra restano per i consumer che li leggono.
@@ -1502,19 +1504,16 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       () => Object.keys(jsonOut(PLATE_AUCTION_EDITORIAL).evergreen ?? {}).length,
     ),
     sections: derivedAlways(SECTIONS_CATALOG_FILE, () => jsonOut(SECTIONS_CATALOG_FILE).sections.length),
-    sectionsLive: derivedAlways(
-      SECTIONS_CATALOG_FILE,
-      () => jsonOut(SECTIONS_CATALOG_FILE).sections.filter((entry) => entry.status === 'live').length,
-    ),
-    // L'indice e' opzionale per costruzione (nessuna sezione live = nessun
-    // indice), e la sua assenza e' legittima solo se il catalogo servito non
-    // ha sezioni live: e' quella la sorgente terza, non il contatore.
+    // L'indice e' opzionale per costruzione, e la sua assenza e' legittima
+    // solo se il registro edge emesso non ha sezioni live (o non e' stato
+    // emesso affatto: release intera rimandata). La sorgente terza e' il
+    // registro su disco, non il contatore.
     sectionSitemaps: derivedOptional(
       SECTION_SITEMAP_INDEX_FILE,
       () => {
-        if (!exists(SECTIONS_CATALOG_FILE)) return null;
-        const live = jsonOut(SECTIONS_CATALOG_FILE).sections.filter((entry) => entry.status === 'live').length;
-        return live ? `${live} sezioni live in ${SECTIONS_CATALOG_FILE}` : null;
+        if (!exists(EDGE_SECTION_REGISTRY_FILE)) return null;
+        const live = Object.values(jsonOut(EDGE_SECTION_REGISTRY_FILE).sections ?? {}).filter((entry) => entry?.status === 'live').length;
+        return live ? `${live} sezioni live in ${EDGE_SECTION_REGISTRY_FILE}` : null;
       },
       () => countXmlTags(readOut(SECTION_SITEMAP_INDEX_FILE), 'sitemap'),
     ),
@@ -1670,31 +1669,33 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     }
   }
 
-  // Il registro per il Worker deve dire ESATTAMENTE cio' che dice il catalogo
-  // servito (stato per sezione, commit), e deve essere accettabile dal parse
-  // del Worker: un registro che il Worker scarta e' un cambio che non arriva
-  // mai. La sua assenza e' legittima solo nel caso previsto (kill-switch non
-  // verificato con una sezione dichiarata live).
+  // Il catalogo non porta stato (una sola fonte: il registro per il Worker) e
+  // la release edge e' coerente in se': registro accettabile dal parse del
+  // Worker — un registro che il Worker scarta e' un cambio che non arriva mai
+  // —, stesso commit del manifest, e l'indice che elenca ESATTAMENTE le
+  // sitemap delle sezioni live, tutte presenti.
   if (exists(SECTIONS_CATALOG_FILE)) {
     const catalog = jsonOut(SECTIONS_CATALOG_FILE);
     if (catalog.commit !== declaredCommit) mismatches.push(`${SECTIONS_CATALOG_FILE}: commit ${catalog.commit}, manifest ${declaredCommit}`);
-    if (exists(EDGE_SECTION_REGISTRY_FILE)) {
-      const edge = jsonOut(EDGE_SECTION_REGISTRY_FILE);
-      if (!validateEdgeSectionRegistry(edge)) mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: il Worker lo rifiuterebbe`);
-      if (edge.commit !== declaredCommit) mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: commit ${edge.commit}, manifest ${declaredCommit}`);
-      const ids = new Set([...Object.keys(edge.sections ?? {}), ...catalog.sections.map((entry) => entry.id)]);
-      for (const id of ids) {
-        const want = catalog.sections.find((entry) => entry.id === id)?.status;
-        if (edge.sections?.[id]?.status !== want) {
-          mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: ${id} ${edge.sections?.[id]?.status} contro ${want} in ${SECTIONS_CATALOG_FILE}`);
-        }
-      }
-    } else if (!(catalog.killSwitch?.state === 'unverified' && catalog.sections.some((entry) => entry.declaredStatus === 'live'))) {
-      mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: assente senza la sola ragione ammessa (kill-switch non verificato con sezioni live)`);
+    if (catalog.authoritative !== false || (catalog.sections ?? []).some((entry) => 'status' in entry || 'declaredStatus' in entry)) {
+      mismatches.push(`${SECTIONS_CATALOG_FILE}: porta uno stato di sezione — lo stato servito ha una sola fonte, il registro su R2`);
     }
-    for (const entry of catalog.sections.filter((e) => e.status === 'live')) {
-      if (!entry.sitemap || !exists(entry.sitemap.slice(1))) mismatches.push(`${entry.id}: live con sitemap ${entry.sitemap} assente`);
+  }
+  if (exists(EDGE_SECTION_REGISTRY_FILE)) {
+    const edge = jsonOut(EDGE_SECTION_REGISTRY_FILE);
+    if (!validateEdgeSectionRegistry(edge)) mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: il Worker lo rifiuterebbe`);
+    if (edge.commit !== declaredCommit) mismatches.push(`${EDGE_SECTION_REGISTRY_FILE}: commit ${edge.commit}, manifest ${declaredCommit}`);
+    const live = Object.keys(edge.sections ?? {}).filter((id) => edge.sections[id]?.status === 'live');
+    const listed = exists(SECTION_SITEMAP_INDEX_FILE)
+      ? [...readOut(SECTION_SITEMAP_INDEX_FILE).matchAll(/<loc>[^<]*\/(sitemap-articles-[a-z-]+\.xml)<\/loc>/g)].map((m) => m[1]).sort()
+      : [];
+    const wanted = live.map((id) => `sitemap-articles-${id}.xml`).sort();
+    if (listed.join(',') !== wanted.join(',')) {
+      mismatches.push(`${SECTION_SITEMAP_INDEX_FILE}: elenca [${listed.join(', ')}], le sezioni live vogliono [${wanted.join(', ')}]`);
     }
+    for (const file of wanted) if (!exists(file)) mismatches.push(`${file}: sezione live senza sitemap in dist/api`);
+  } else if (exists(SECTION_SITEMAP_INDEX_FILE)) {
+    mismatches.push(`${SECTION_SITEMAP_INDEX_FILE}: emesso senza ${EDGE_SECTION_REGISTRY_FILE} — la release edge e' intera o assente`);
   }
 
   // Le immagini sono l'unico artefatto che il consumer non puo' ri-derivare,

@@ -10,8 +10,10 @@
  *      `indexSlug`, `topics`, e facoltativi `redirects`/`gone`. E' la verita'
  *      (D9): accendere un cantone e' un commit qui.
  *   2. `dist/api/sections.json` (pubblicato su Pages): il catalogo che il sito
- *      legge a runtime (blocco di navigazione «Articoli per cantone»), con lo
- *      stato EFFETTIVO, i percorsi, i conteggi e la sitemap di ogni sezione.
+ *      legge a runtime (blocco di navigazione «Articoli per cantone»): slug,
+ *      percorsi, temi, conteggi e sitemap di ogni sezione — SENZA stato. Lo
+ *      stato servito ha una sola fonte, il documento 3 (vedi
+ *      `buildSectionsCatalog`).
  *   3. `dist/api/edge/sections/registry.json` → R2 `edge/sections/registry.json`:
  *      la copia nel formato ESATTO che il Worker valida
  *      (`parseCorpusSectionRegistry` in
@@ -36,9 +38,8 @@
  * per il Worker NON viene scritta (resta servita l'ultima su R2, che il
  * kill-switch l'aveva gia' applicato) — mai riaccendere una sezione spenta
  * perche' Remote Config non ha risposto.
- * Nello stesso caso il catalogo tiene `draft` le
- * sezioni dichiarate `live` (`killSwitch.held`): puo' restare indietro rispetto
- * al Worker, mai annunciare una sezione che il Worker serve ancora 404.
+ * Il catalogo non porta stato, quindi non puo' annunciare niente che il
+ * Worker non serva.
  *
  * ── Regole speculari al Worker ─────────────────────────────────────────────
  *
@@ -339,26 +340,14 @@ export function resolveKillSwitch(env = process.env, all = ARTICLE_SECTION_CORE_
 
 /**
  * Stato effettivo per sezione: `live` dichiarato e spento → `draft`.
- *
- * FAIL-CLOSED senza verifica: se il kill-switch non e' verificabile, nessuna
- * sezione dichiarata `live` esce `live` (`held: true`). In quel caso la copia
- * per il Worker non viene scritta (`edgeRegistryPublishable`) e su R2 resta
- * l'ultimo registro verificato; se il catalogo dicesse comunque `live`, alla
- * prima attivazione annuncerebbe pagine che il Worker serve ancora 404. Il
- * catalogo puo' quindi restare indietro rispetto al Worker (nasconde una
- * sezione gia' servita) ma mai avanti.
- *
- * @returns {Record<string, { declared: string, status: string, killed: boolean, held: boolean }>}
+ * @returns {Record<string, { declared: string, status: string, killed: boolean }>}
  */
 export function effectiveStatuses(declared, killSwitch) {
   const killed = new Set(killSwitch.sections);
-  const verified = killSwitch.state === 'verified';
   return Object.fromEntries(
     Object.entries(declared.sections).map(([id, entry]) => {
-      const live = entry.status === 'live';
-      const off = live && killed.has(id);
-      const held = live && !off && !verified;
-      return [id, { declared: entry.status, status: off || held ? 'draft' : entry.status, killed: off, held }];
+      const off = entry.status === 'live' && killed.has(id);
+      return [id, { declared: entry.status, status: off ? 'draft' : entry.status, killed: off }];
     }),
   );
 }
@@ -403,34 +392,41 @@ export function validateEdgeSectionRegistry(raw, all = ARTICLE_SECTION_CORE_ALL)
   return redirectCycle(raw.sections) === null;
 }
 
+/** Dove si legge lo stato SERVITO delle sezioni: il registro su R2, lo stesso che legge il Worker. */
+export const EDGE_SECTION_REGISTRY_URL = `https://cdn.frontaliereticino.ch/${EDGE_SECTION_REGISTRY_FILE}`;
+
 /**
- * `dist/api/sections.json`: il catalogo delle sezioni per il sito. `articles`
- * per id (0 per una sezione non attiva o senza registro).
+ * `dist/api/sections.json`: il CATALOGO delle sezioni per il sito — cosa
+ * sono (slug, percorsi, temi, sitemap, quanti articoli), NON in che stato
+ * sono. Lo stato servito (`live|draft|retired`) ha UNA sola fonte: il
+ * registro su R2 che il Worker applica (`statusSource`). Il catalogo viaggia
+ * con GitHub Pages e il registro con R2: se portassero entrambi lo stato,
+ * un fallimento parziale fra i due li farebbe divergere («il catalogo dice
+ * live, il Worker dice draft», o il contrario allo spegnimento). Senza stato
+ * nel catalogo quella divergenza non e' rappresentabile: chi deve sapere cosa
+ * e' live (navigazione, SPA, riconciliazione) legge `statusSource`.
+ *
+ * `articles` per id (0 per una sezione non attiva o senza registro);
+ * `sitemapOf(id)` il nome della sitemap di una sezione attiva, o null.
  */
-export function buildSectionsCatalog({ declared, effective, killSwitch, commit, articles = {}, sitemapOf }) {
+export function buildSectionsCatalog({ declared, commit, articles = {}, sitemapOf = () => null }) {
   return {
     schema: 1,
     commit,
-    killSwitch: {
-      state: killSwitch.state,
-      applied: Object.keys(effective).filter((id) => effective[id].killed),
-      // Sezioni dichiarate live e tenute draft perche' Remote Config non e' verificato.
-      held: Object.keys(effective).filter((id) => effective[id].held),
-      unknown: killSwitch.unknown,
-    },
+    authoritative: false,
+    statusSource: EDGE_SECTION_REGISTRY_URL,
     sections: Object.entries(declared.sections).map(([id, entry]) => {
-      const live = effective[id].status === 'live';
+      const sitemap = sitemapOf(id);
       return {
         id,
         kind: entry.kind,
         canton: entry.canton,
-        status: effective[id].status,
-        declaredStatus: entry.status,
         indexSlug: { ...entry.indexSlug },
         paths: Object.fromEntries(sectionRoutes(id).map((r) => [r.locale, `${r.prefix}/`])),
         topics: Object.entries(entry.topics).map(([topic, slug]) => ({ id: topic, slug: { ...slug } })),
         counts: { articles: articles[id] ?? 0 },
-        sitemap: live ? `/${sitemapOf(id)}` : null,
+        // Il Worker la serve solo mentre la sezione e' live nel registro.
+        sitemap: sitemap ? `/${sitemap}` : null,
       };
     }),
   };

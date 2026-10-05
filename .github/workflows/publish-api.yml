@@ -623,30 +623,25 @@ jobs:
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
       # Il registro delle sezioni cantonali e le loro sitemap (piano «sezioni
-      # articoli per cantone», P7). Il Worker del sito li legge da R2
-      # (`edge/sections/registry.json`, `edge/sitemap-articles-<canton-id>.xml`,
-      # `edge/sitemap-cantons.xml`): finche' il registro non dichiara una
-      # sezione live il Worker resta fail-closed, quindi oggi questo step scrive
-      # un registro tutto `draft` e cancella un indice che non esiste.
+      # articoli per cantone», P7). Lo stato servito (live|draft|retired) ha UNA
+      # sola fonte: `edge/sections/registry.json` su R2, che il Worker del sito
+      # applica. `sections.json` su Pages e' un catalogo senza stato, quindi non
+      # ci sono due superfici di stato che un fallimento parziale possa far
+      # divergere.
       #
-      # PRIMA del deploy Pages, e non best-effort quando conta. `sections.json`
-      # (il catalogo che il sito legge) esce con Pages: se uscisse prima di
-      # questo push, un upload fallito lascerebbe il catalogo ad annunciare
-      # `live` una sezione che il Worker serve ancora 404, o a dichiarare spenta
-      # una sezione che il registro vecchio su R2 serve ancora. Lo script legge
-      # il registro che R2 ha adesso: se lo stato delle sezioni da pubblicare
-      # DIFFERISCE (accensione, spegnimento, ritiro) e un'operazione non e'
-      # confermata o mancano le credenziali, esce 1 — il publish si ferma qui,
-      # col catalogo di prima ancora su Pages — dopo aver ripristinato il
-      # registro precedente se quello nuovo era gia' salito. Se lo stato e' lo
-      # stesso (oggi: tutto draft) un problema di R2 e' un warning e gli
-      # articoli si pubblicano lo stesso.
+      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
+      # della release su chiavi versionate per commit (riletta e confrontata per
+      # sha256), poi i file referenziati ai path fissi e, per ultimo, UN PUT del
+      # puntatore — l'unico passo che cambia cio' che il Worker serve. Prima del
+      # flip un fallimento non cambia niente; dopo, lo stato e' gia' coerente.
       #
-      # Ordine interno: sitemap delle sezioni live, registro, indice solo a
-      # registro confermato; purge a blocchi di 30. Il kill-switch di Remote
-      # Config (CANTON_ARTICLE_SECTIONS_KILL) e' gia' applicato da build-api;
-      # se Remote Config non e' verificato con una sezione live, build-api non
-      # scrive il registro e qui non si tocca quello su R2.
+      # Esce 1, e ferma il publish prima del deploy Pages, quando lo stato delle
+      # sezioni da pubblicare DIFFERISCE da quello che R2 ha gia' (accensione,
+      # spegnimento, ritiro) e un passo non e' confermato o mancano le
+      # credenziali. Se lo stato e' lo stesso (oggi: tutto draft) un problema di
+      # R2 e' un warning e gli articoli si pubblicano lo stesso. Il kill-switch
+      # di Remote Config e' gia' applicato da build-api; se non e' verificabile
+      # con una sezione live, build-api non emette la release e R2 resta com'e'.
       - name: Push the section registry and the canton sitemaps to the edge
         run: node scripts/publish-section-edge.mjs
 

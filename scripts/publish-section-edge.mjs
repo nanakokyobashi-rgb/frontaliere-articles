@@ -1,132 +1,97 @@
 #!/usr/bin/env node
 /**
- * publish-section-edge.mjs — porta all'edge (R2 + purge) il registro delle
- * sezioni cantonali e le loro sitemap, scritti da build-api.mjs in dist/api/.
+ * publish-section-edge.mjs — porta su R2 la RELEASE del registro delle sezioni
+ * cantonali (registro, sitemap delle sezioni live, indice) scritta da
+ * build-api.mjs in dist/api/, con un flip atomico.
  *
- * Gira in publish-api.yml dopo il deploy Pages, accanto alla spinta delle
- * sitemap blog. Il Worker del sito legge da R2:
+ * ── Una sola fonte dello stato servito ─────────────────────────────────────
  *
- *   edge/sections/registry.json            quale sezione e' live|draft|retired
- *   edge/sitemap-articles-<canton-id>.xml  servita solo se la sezione e' live
- *   edge/sitemap-cantons.xml               l'indice (dichiarato in robots.txt)
+ * Cio' che e' `live|draft|retired` lo dice UN documento: il registro su R2,
+ * `edge/sections/registry.json`, che il Worker del sito applica
+ * (`parseCorpusSectionRegistry` in infra/cloudflare-worker/locale-router.js).
+ * `sections.json` su GitHub Pages e' un catalogo senza stato (vedi
+ * `buildSectionsCatalog`), quindi non esistono due superfici di stato che un
+ * fallimento parziale possa far divergere.
  *
- * ORDINE: prima le sitemap delle sezioni live, poi il registro, per ULTIMO
- * l'indice. Il registro e' cio' che rende visibile un cambio di stato, quindi
- * arriva quando le sitemap che il Worker servira' sono gia' al loro posto; se
- * un upload precedente non e' confermato il registro NON sale (resta lo stato
- * di prima, coerente con le copie che R2 ha davvero). L'indice e' solo un
- * annuncio e si scrive (o si cancella) SOLO dopo la conferma del registro: un
- * indice nuovo sopra un registro vecchio elencherebbe sitemap che il Worker
- * non serve, e lo step e' continue-on-error, quindi resterebbe cosi'.
+ * ── Protocollo di pubblicazione ────────────────────────────────────────────
  *
- * L'indice senza sezioni live non si riscrive vuoto (schema: minimo un
- * `<sitemap>`): si CANCELLA, cosi' il Worker torna al 404 di prima invece di
- * annunciare sitemap che non serve piu'.
+ * 0. LETTURA. Si legge dal CDN il registro che R2 ha adesso. Il push e'
+ *    OBBLIGATORIO se lo stato delle sezioni da pubblicare (status, redirects,
+ *    gone) differisce da quello — in OGNI direzione: accensione, spegnimento,
+ *    ritiro — o se R2 non e' leggibile e la release dichiara qualcosa di
+ *    non-draft. Se lo stato e' lo stesso la release cambia solo il `commit`.
  *
- * Registro assente in dist/api (kill-switch di Remote Config non verificato con
- * una sezione dichiarata live, vedi scripts/lib/section-registry.mjs): non si
- * tocca ne' il registro ne' l'indice su R2, che restano quelli dell'ultima
- * pubblicazione verificata.
+ * 1. STAGING (niente di visibile cambia). Ogni file della release sale su una
+ *    chiave VERSIONATA per commit,
+ *    `edge/sections/_releases/<commit>/{registry.json,sitemap-articles-<id>.xml,sitemap-cantons.xml}`,
+ *    e viene riletto dal CDN: lo sha256 dei byte serviti deve essere quello dei
+ *    byte locali. Il Worker non legge mai `_releases/` (non e' un prefisso di
+ *    sezione). Un fallimento qui: exit, nessun cambio, niente da ripristinare.
  *
- * PURGE: ogni chiave scritta o cancellata si purga sia all'apex (l'URL che il
- * pubblico chiede) sia sul cdn (la subrequest del Worker ha un cacheTtl suo),
- * a blocchi di 30 (tetto del purge `files` del piano free, che
- * cf-purge-cache.mjs rifiuta di superare).
+ * 2. FLIP. Prima i file REFERENZIATI ai path fissi che il Worker legge — le
+ *    sitemap delle sezioni live, `edge/sitemap-articles-<id>.xml`, che il
+ *    Worker serve solo per le sezioni live nel registro ANCORA in vigore:
+ *    scriverle non cambia quali URL rispondono — e per ULTIMO, con un solo
+ *    PUT, il puntatore `edge/sections/registry.json`: il registro nel formato
+ *    del Worker piu' `release` (commit, prefisso e sha256 dei file). E'
+ *    l'UNICO passo che cambia cio' che il Worker serve. Un fallimento prima
+ *    del PUT, o del PUT stesso: lo stato servito resta quello di prima.
  *
- * PRIMA DEL DEPLOY PAGES, e fail-closed quando conta. `sections.json` (il
- * catalogo che il sito legge) viaggia con Pages: catalogo e registro devono
- * descrivere lo stesso stato. Quindi publish-api.yml esegue questo script
- * prima di caricare l'artefatto Pages, e lo script:
- *   1. legge il registro che R2 ha ADESSO (`fetchPreviousRegistry`);
- *   2. se lo stato delle sezioni da pubblicare DIFFERISCE (accensione,
- *      spegnimento, ritiro, redirect/gone) il push e' OBBLIGATORIO: credenziali
- *      assenti o un'operazione non confermata fanno uscire 1 e fermano il
- *      publish, col catalogo di prima ancora su Pages;
- *   3. se il registro nuovo era gia' salito e un passo successivo fallisce,
- *      RIPRISTINA quello di prima, perche' Worker e catalogo non restino su
- *      due commit diversi;
- *   4. se lo stato e' lo stesso (oggi: tutto `draft`), il push cambia solo il
- *      `commit`: un problema di R2 e' un warning ed esce 0, e non ferma la
- *      pubblicazione degli articoli.
+ * 3. DOPO IL FLIP (lo stato e' gia' coerente). Purge del puntatore (il Worker
+ *    lo rilegge comunque ogni 60 s), poi l'indice `edge/sitemap-cantons.xml`
+ *    — scritto, o CANCELLATO se nessuna sezione e' live (un `<sitemapindex>`
+ *    vuoto viola lo schema) — e il purge di sitemap e indice. L'indice sta
+ *    dopo il flip perche' e' un annuncio derivato dal registro: scritto prima,
+ *    un flip fallito lo lascerebbe ad annunciare sitemap che il Worker non
+ *    serve. Un fallimento qui non tocca lo stato: si riprova al publish
+ *    successivo, che riscrive tutto.
+ *
+ * 4. PULIZIA (best-effort). I file della release precedente, nominati dal
+ *    puntatore precedente, vengono cancellati.
+ *
+ * ESITO. Un fallimento in un push OBBLIGATORIO esce 1: publish-api.yml si
+ * ferma prima del deploy Pages, e lo stato servito e' — per costruzione —
+ * quello di prima (fasi 0-2) o quello nuovo e coerente (fasi 3-4). Se lo stato
+ * non cambiava, un problema di R2 e' un warning ed esce 0: non ferma la
+ * pubblicazione degli articoli.
+ *
+ * Registro assente in dist/api (kill-switch di Remote Config non verificato
+ * con una sezione dichiarata live, vedi scripts/lib/section-registry.mjs):
+ * nessuna release, R2 resta com'e'.
  *
  * Uso: node scripts/publish-section-edge.mjs [--dist dist/api] [--dry-run]
- *        [--previous <file>|absent|unknown]   stato precedente dato a mano (test, diagnosi)
  */
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   EDGE_SECTION_REGISTRY_FILE,
-  SECTIONS_CATALOG_FILE,
   SECTION_SITEMAP_INDEX_FILE,
+  validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const APEX = 'https://frontaliereticino.ch';
 export const CDN = 'https://cdn.frontaliereticino.ch';
 export const PURGE_CHUNK = 30;
+export const RELEASES_PREFIX = 'edge/sections/_releases';
 /** Il Worker rilegge il registro ogni 60 s: un max-age piu' lungo al cdn ritarderebbe il flip. */
 export const REGISTRY_CACHE_CONTROL = 'public,max-age=60';
 /** Stessa classe delle sitemap blog spinte da publish-api.yml. */
 export const SITEMAP_CACHE_CONTROL = 'public,max-age=600';
+/** Una chiave di release non cambia mai contenuto. */
+export const RELEASE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
+
+const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 
 /**
- * Il piano delle operazioni, puro: legge solo cio' che build-api ha scritto.
- * @param {string} distDir
- * @returns {{ ops: Array<{ op: 'upload'|'delete', local?: string, key: string, cacheControl?: string, purge: string[] }>, notes: string[] }}
- */
-export function planSectionEdge(distDir) {
-  const at = (name) => path.join(distDir, name);
-  const notes = [];
-  const catalogPath = at(SECTIONS_CATALOG_FILE);
-  if (!fs.existsSync(catalogPath)) throw new Error(`${SECTIONS_CATALOG_FILE} assente in ${distDir}: build-api non l'ha scritto`);
-  const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-  const ops = [];
-  const purgeFor = (file) => [`${APEX}/${file}`, `${CDN}/edge/${file}`];
-
-  for (const entry of catalog.sections.filter((e) => e.status === 'live')) {
-    const file = String(entry.sitemap ?? '').replace(/^\//, '');
-    if (!/^sitemap-articles-canton-[a-z]+\.xml$/.test(file)) throw new Error(`${entry.id}: sitemap "${entry.sitemap}" fuori forma`);
-    if (!fs.existsSync(at(file))) throw new Error(`${entry.id}: live ma ${file} manca in ${distDir}`);
-    ops.push({ op: 'upload', local: at(file), key: `edge/${file}`, cacheControl: SITEMAP_CACHE_CONTROL, purge: purgeFor(file) });
-  }
-
-  if (!fs.existsSync(at(EDGE_SECTION_REGISTRY_FILE))) {
-    notes.push(
-      `${EDGE_SECTION_REGISTRY_FILE} non emesso (kill-switch non verificato): registro e indice su R2 restano quelli pubblicati`,
-    );
-    return { ops, notes };
-  }
-
-  ops.push({
-    op: 'upload',
-    local: at(EDGE_SECTION_REGISTRY_FILE),
-    key: EDGE_SECTION_REGISTRY_FILE,
-    cacheControl: REGISTRY_CACHE_CONTROL,
-    purge: [`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`],
-    registry: true,
-  });
-  if (fs.existsSync(at(SECTION_SITEMAP_INDEX_FILE))) {
-    ops.push({
-      op: 'upload',
-      local: at(SECTION_SITEMAP_INDEX_FILE),
-      key: `edge/${SECTION_SITEMAP_INDEX_FILE}`,
-      cacheControl: SITEMAP_CACHE_CONTROL,
-      purge: purgeFor(SECTION_SITEMAP_INDEX_FILE),
-    });
-  } else {
-    ops.push({ op: 'delete', key: `edge/${SECTION_SITEMAP_INDEX_FILE}`, purge: purgeFor(SECTION_SITEMAP_INDEX_FILE) });
-  }
-  return { ops, notes };
-}
-
-/**
- * Lo stato di un registro edge ridotto a cio' che il Worker applica: per ogni
+ * Lo stato di un registro ridotto a cio' che il Worker applica: per ogni
  * sezione `status`, `redirects`, `gone` (una sezione assente vale `draft`,
- * come nel Worker). Il `commit` non e' stato.
+ * come nel Worker). `commit` e `release` non sono stato.
  */
 export function registryState(doc) {
   const out = {};
@@ -141,66 +106,51 @@ export function registryState(doc) {
 }
 
 /**
- * Se questo push DEVE riuscire perche' il publish prosegua.
+ * La release da pubblicare, letta da cio' che build-api ha scritto; `null` se
+ * build-api non ha emesso il registro (allora non c'e' niente da pubblicare).
  *
- * `sections.json` esce con Pages subito dopo: catalogo e registro devono dire
- * lo stesso stato. Il push e' quindi obbligatorio ogni volta che lo stato da
- * pubblicare DIFFERISCE da quello che R2 ha gia' — in entrambe le direzioni:
- * un'accensione (il catalogo annuncerebbe una sezione che il Worker serve 404)
- * e uno spegnimento o un ritiro (il catalogo direbbe spenta una sezione che il
- * registro vecchio serve ancora). Se lo stato e' lo stesso, il push cambia
- * solo il `commit` e un problema di R2 non deve fermare gli articoli.
- *
- * `previous`: `{ state: 'ok', doc }` il registro letto da R2; `{ state:
- * 'absent' }` mai pubblicato (vale tutto `draft`); `{ state: 'unknown' }`
- * illeggibile — allora non si puo' dimostrare che lo stato coincide, e il
- * push e' obbligatorio appena il catalogo dichiara qualcosa di non-draft.
- *
- * @param {string} distDir
- * @param {{ state: 'ok' | 'absent' | 'unknown', doc?: unknown }} previous
+ * @returns {null | {
+ *   commit: string, prefix: string, registry: object, live: string[],
+ *   files: Array<{ name: string, local: string, sha256: string, releaseKey: string }>,
+ *   pointer: object,
+ * }}
  */
-export function edgePushIsMandatory(distDir, previous) {
+export function planRelease(distDir) {
   const at = (name) => path.join(distDir, name);
-  const catalog = JSON.parse(fs.readFileSync(at(SECTIONS_CATALOG_FILE), 'utf8'));
-  const declaresSomething = (catalog.sections ?? []).some(
-    (entry) => entry.status !== 'draft' || (entry.declaredStatus ?? 'draft') !== 'draft',
-  );
-  if (!previous || previous.state === 'unknown') return declaresSomething;
-  // Registro non emesso (kill-switch non verificato): non c'e' niente da
-  // spingere, il catalogo tiene draft le sezioni live e R2 resta com'e'.
-  if (!fs.existsSync(at(EDGE_SECTION_REGISTRY_FILE))) return false;
-  const next = JSON.parse(fs.readFileSync(at(EDGE_SECTION_REGISTRY_FILE), 'utf8'));
-  return registryState(next) !== registryState(previous.state === 'ok' ? previous.doc : { sections: {} });
+  if (!fs.existsSync(at(EDGE_SECTION_REGISTRY_FILE))) return null;
+  const registry = JSON.parse(fs.readFileSync(at(EDGE_SECTION_REGISTRY_FILE), 'utf8'));
+  if (!validateEdgeSectionRegistry(registry)) throw new Error(`${EDGE_SECTION_REGISTRY_FILE}: il Worker rifiuterebbe questo registro`);
+  const live = Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
+  const prefix = `${RELEASES_PREFIX}/${registry.commit}`;
+  const names = ['registry.json', ...live.map((id) => `sitemap-articles-${id}.xml`)];
+  const hasIndex = fs.existsSync(at(SECTION_SITEMAP_INDEX_FILE));
+  if (hasIndex !== live.length > 0) {
+    throw new Error(`${SECTION_SITEMAP_INDEX_FILE} ${hasIndex ? 'presente' : 'assente'} con ${live.length} sezioni live: release incoerente`);
+  }
+  if (hasIndex) names.push(SECTION_SITEMAP_INDEX_FILE);
+  const files = names.map((name) => {
+    const local = at(name === 'registry.json' ? EDGE_SECTION_REGISTRY_FILE : name);
+    if (!fs.existsSync(local)) throw new Error(`${name}: manca in ${distDir} (sezione live senza sitemap?)`);
+    return { name, local, sha256: sha256(fs.readFileSync(local)), releaseKey: `${prefix}/${name}` };
+  });
+  const pointer = {
+    ...registry,
+    release: { commit: registry.commit, prefix, files: Object.fromEntries(files.map((f) => [f.name, f.sha256])) },
+  };
+  // Il puntatore E' il registro che il Worker legge: deve restare nel suo contratto.
+  if (!validateEdgeSectionRegistry(pointer)) throw new Error('puntatore fuori dal contratto del Worker');
+  return { commit: registry.commit, prefix, registry, live, files, pointer };
 }
 
 /**
- * Il registro che R2 ha ADESSO, letto dal CDN con un cache-buster.
- * @returns {Promise<{ state: 'ok', doc: unknown, raw: string } | { state: 'absent' } | { state: 'unknown' }>}
+ * Se questo push DEVE riuscire perche' il publish prosegua (fase 0 dell'header).
+ * @param {object} registry il registro da pubblicare
+ * @param {{ state: 'ok' | 'absent' | 'unknown', doc?: unknown }} previous
  */
-export async function fetchPreviousRegistry(fetchImpl = fetch) {
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const res = await fetchImpl(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}?_secb=${Date.now()}.${attempt}`, {
-        headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
-        signal: AbortSignal.timeout(15000),
-      });
-      if (res.status === 404) return { state: 'absent' };
-      if (res.status === 200) {
-        const raw = await res.text();
-        return { state: 'ok', doc: JSON.parse(raw), raw };
-      }
-    } catch {
-      /* ritenta, poi illeggibile */
-    }
-  }
-  return { state: 'unknown' };
-}
-
-/** `--previous <file>|absent|unknown`: lo stato precedente dato a mano (test, diagnosi) invece che letto dal CDN. */
-function previousFromArg(value) {
-  if (value === 'absent' || value === 'unknown') return { state: value };
-  const raw = fs.readFileSync(path.resolve(value), 'utf8');
-  return { state: 'ok', doc: JSON.parse(raw), raw };
+export function pushIsMandatory(registry, previous) {
+  const nothing = registryState({ sections: {} });
+  if (!previous || previous.state === 'unknown') return registryState(registry) !== nothing;
+  return registryState(registry) !== (previous.state === 'ok' ? registryState(previous.doc) : nothing);
 }
 
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
@@ -219,121 +169,144 @@ function run(cmd, args) {
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
 }
 
-const VALUE_FLAGS = ['--dist', '--previous'];
+/** Le operazioni vere su R2 e Cloudflare; i test ne passano di finte. */
+export const realIo = {
+  upload: (local, key, cacheControl) => run('bash', ['scripts/lib/upload-cdn-file.sh', local, key, cacheControl]).stdout.includes('✅ uploaded'),
+  remove: (key) => run('bash', ['scripts/lib/delete-cdn-file.sh', key]).stdout.includes('✅ deleted'),
+  purge: (urls) =>
+    purgeChunks(urls).every(
+      (chunk) => run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]).code === 0,
+    ),
+  /** GET sul CDN con cache-buster: `{ status, body }`, o `{ status: 0 }` se la rete non risponde. */
+  fetchBytes: async (url) => {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch(`${url}?_secb=${Date.now()}.${attempt}`, {
+          headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
+          signal: AbortSignal.timeout(15000),
+        });
+        if (res.status === 200) return { status: 200, body: Buffer.from(await res.arrayBuffer()) };
+        if (res.status === 404) return { status: 404 };
+      } catch {
+        /* ritenta */
+      }
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+    return { status: 0 };
+  },
+};
+
+/** Il registro che R2 ha ADESSO. */
+export async function readPreviousRegistry(io) {
+  const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
+  if (res.status === 404) return { state: 'absent' };
+  if (res.status !== 200) return { state: 'unknown' };
+  try {
+    return { state: 'ok', doc: JSON.parse(res.body.toString('utf8')) };
+  } catch {
+    return { state: 'unknown' };
+  }
+}
+
+/**
+ * Esegue il protocollo dell'header su una release. Ritorna
+ * `{ code, phase, flipped }`: `phase` e' dove si e' fermato (`done` se in fondo),
+ * `flipped` se il puntatore e' stato scritto.
+ */
+export async function publishRelease(release, { io, env = process.env, log = console.log, tmpDir = os.tmpdir() }) {
+  const previous = await readPreviousRegistry(io);
+  const mandatory = pushIsMandatory(release.registry, previous);
+  log(
+    `[section-edge] release ${release.commit.slice(0, 8)}: registro su R2 ${previous.state}; push ` +
+      (mandatory ? 'OBBLIGATORIO (lo stato delle sezioni cambia, o non e\' dimostrabile che coincida)' : 'facoltativo (stesso stato delle sezioni)'),
+  );
+  const stop = (phase, what, flipped) => {
+    const where = flipped ? 'lo stato servito e\' gia\' quello nuovo e coerente' : 'lo stato servito resta quello di prima';
+    if (mandatory) log(`::error::[section-edge] ${phase}: ${what} — ${where}; il publish si ferma`);
+    else log(`::warning::[section-edge] ${phase}: ${what} — ${where}; lo stato delle sezioni non cambiava, il publish prosegue`);
+    return { code: mandatory ? 1 : 0, phase, flipped };
+  };
+
+  const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
+  if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
+
+  // 1. Staging su chiavi versionate, con rilettura e confronto dello sha256.
+  for (const file of release.files) {
+    if (!io.upload(file.local, file.releaseKey, RELEASE_CACHE_CONTROL)) return stop('staging', `upload non confermato: ${file.releaseKey}`, false);
+  }
+  for (const file of release.files) {
+    const served = await io.fetchBytes(`${CDN}/${file.releaseKey}`);
+    if (served.status !== 200 || sha256(served.body) !== file.sha256) {
+      return stop('staging', `${file.releaseKey} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`, false);
+    }
+  }
+
+  // 2. Flip: i file referenziati ai path fissi, poi UN PUT del puntatore.
+  const sitemaps = release.files.filter((f) => f.name.startsWith('sitemap-articles-'));
+  for (const file of sitemaps) {
+    if (!io.upload(file.local, `edge/${file.name}`, SITEMAP_CACHE_CONTROL)) return stop('flip', `sitemap non caricata: edge/${file.name}`, false);
+  }
+  const pointerDir = fs.mkdtempSync(path.join(tmpDir, 'section-edge-'));
+  const pointerFile = path.join(pointerDir, 'registry.json');
+  fs.writeFileSync(pointerFile, JSON.stringify(release.pointer));
+  const flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
+  fs.rmSync(pointerDir, { recursive: true, force: true });
+  if (!flipped) return stop('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`, false);
+
+  // 3. Dopo il flip: purge, indice, purge. Lo stato e' gia' coerente.
+  const problems = [];
+  if (!io.purge([`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`])) problems.push('purge del puntatore (il Worker lo rilegge entro 60 s)');
+  const index = release.files.find((f) => f.name === SECTION_SITEMAP_INDEX_FILE);
+  const indexKey = `edge/${SECTION_SITEMAP_INDEX_FILE}`;
+  const indexOk = index ? io.upload(index.local, indexKey, SITEMAP_CACHE_CONTROL) : io.remove(indexKey);
+  if (!indexOk) problems.push(`indice ${index ? 'non caricato' : 'non cancellato'}: ${indexKey}`);
+  const fixed = [...sitemaps.map((f) => f.name), SECTION_SITEMAP_INDEX_FILE];
+  if (!io.purge(fixed.flatMap((name) => [`${APEX}/${name}`, `${CDN}/edge/${name}`]))) problems.push('purge di sitemap e indice');
+
+  // 4. Pulizia della release precedente (best-effort, mai un fallimento).
+  const old = previous.state === 'ok' ? previous.doc?.release : null;
+  if (old?.prefix && old.prefix !== release.prefix && String(old.prefix).startsWith(`${RELEASES_PREFIX}/`)) {
+    for (const name of Object.keys(old.files ?? {})) {
+      if (!io.remove(`${old.prefix}/${name}`)) log(`::notice::[section-edge] release precedente non ripulita: ${old.prefix}/${name}`);
+    }
+  }
+
+  if (problems.length) return stop('dopo il flip', problems.join('; '), true);
+  log(`[section-edge] release ${release.commit.slice(0, 8)} pubblicata: ${release.files.length} file, ${release.live.length} sezioni live`);
+  return { code: 0, phase: 'done', flipped: true };
+}
 
 function parseCli(argv) {
-  const out = { dist: 'dist/api', dryRun: false, previous: null };
+  const out = { dist: 'dist/api', dryRun: false };
   const seen = new Set();
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (seen.has(arg)) throw new Error(`${arg} va indicato una volta sola`);
     seen.add(arg);
     if (arg === '--dry-run') out.dryRun = true;
-    else if (VALUE_FLAGS.includes(arg)) {
+    else if (arg === '--dist') {
       const value = argv[++i];
-      if (!value || value.startsWith('--')) throw new Error(`${arg} richiede un valore`);
-      out[arg.slice(2)] = value;
-    } else throw new Error(`argomenti sconosciuti: ${arg} (ammessi: --dist <cartella>, --previous <file|absent|unknown>, --dry-run)`);
+      if (!value || value.startsWith('--')) throw new Error('--dist richiede una cartella (es. --dist dist/api)');
+      out.dist = value;
+    } else throw new Error(`argomenti sconosciuti: ${arg} (ammessi: --dist <cartella>, --dry-run)`);
   }
   return out;
 }
 
-/**
- * Riporta su R2 il registro di prima dopo un push riuscito a meta'. Il
- * workflow si ferma prima del deploy Pages, quindi il catalogo servito resta
- * quello vecchio: anche il registro deve tornare quello vecchio, o Worker e
- * catalogo descriverebbero due commit diversi.
- * @returns {boolean} true se il ripristino e' confermato
- */
-function rollbackRegistry(previous, tmpDir) {
-  let ok = false;
-  if (previous.state === 'ok') {
-    const file = path.join(tmpDir, 'previous-registry.json');
-    fs.writeFileSync(file, previous.raw);
-    ok = run('bash', ['scripts/lib/upload-cdn-file.sh', file, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL]).stdout.includes('✅ uploaded');
-  } else if (previous.state === 'absent') {
-    ok = run('bash', ['scripts/lib/delete-cdn-file.sh', EDGE_SECTION_REGISTRY_FILE]).stdout.includes('✅ deleted');
-  }
-  if (ok) run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${CDN}/${EDGE_SECTION_REGISTRY_FILE}`]);
-  return ok;
-}
-
-export async function main(argv = process.argv.slice(2), env = process.env) {
+export async function main(argv = process.argv.slice(2), { env = process.env, io = realIo, log = console.log } = {}) {
   const cli = parseCli(argv);
   const distDir = path.resolve(ROOT, cli.dist);
-  const { ops, notes } = planSectionEdge(distDir);
-  for (const note of notes) console.log(`::notice::[section-edge] ${note}`);
+  if (!fs.existsSync(distDir)) throw new Error(`${cli.dist}: cartella inesistente (build-api non ha girato?)`);
+  const release = planRelease(distDir);
+  if (!release) {
+    log(`::notice::[section-edge] ${EDGE_SECTION_REGISTRY_FILE} non emesso (kill-switch non verificato): nessuna release, R2 resta com'e'`);
+    return 0;
+  }
   if (cli.dryRun) {
-    console.log(JSON.stringify(ops, null, 2));
+    log(JSON.stringify({ commit: release.commit, prefix: release.prefix, live: release.live, files: release.files.map((f) => f.releaseKey), pointer: release.pointer }, null, 2));
     return 0;
   }
-  const previous = cli.previous ? previousFromArg(cli.previous) : await fetchPreviousRegistry();
-  const mustSucceed = edgePushIsMandatory(distDir, previous);
-  console.log(
-    `[section-edge] registro su R2: ${previous.state}; push ${mustSucceed ? 'OBBLIGATORIO (lo stato delle sezioni cambia, o non e\' dimostrabile che coincida)' : 'facoltativo (stesso stato delle sezioni)'}`,
-  );
-  const stop = (what) => {
-    if (mustSucceed) {
-      console.log(`::error::[section-edge] ${what} — lo stato delle sezioni cambia: il publish si ferma, il catalogo su Pages resta quello di prima`);
-      return 1;
-    }
-    console.log(`::warning::[section-edge] ${what} — lo stato delle sezioni su R2 e' gia' quello da pubblicare: il publish prosegue`);
-    return 0;
-  };
-  const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
-  if (missingCreds.length) return stop(`credenziali assenti (${missingCreds.join(', ')}): registro e sitemap cantonali NON caricati`);
-
-  let failures = 0;
-  let registryUploaded = false;
-  const purged = [];
-  for (const op of ops) {
-    if (op.registry && failures > 0) {
-      console.log('::warning::[section-edge] registro NON caricato: un upload precedente non e\' confermato');
-      failures++;
-      break;
-    }
-    if (op.op === 'upload') {
-      const { stdout } = run('bash', ['scripts/lib/upload-cdn-file.sh', op.local, op.key, op.cacheControl]);
-      if (!stdout.includes('✅ uploaded')) {
-        failures++;
-        console.log(`::warning::[section-edge] upload non confermato: ${op.key}`);
-        // Senza registro nuovo confermato l'indice non si tocca: resta quello
-        // che il registro vecchio annuncia.
-        if (op.registry) break;
-        continue;
-      }
-      if (op.registry) registryUploaded = true;
-    } else {
-      const { stdout } = run('bash', ['scripts/lib/delete-cdn-file.sh', op.key]);
-      if (!stdout.includes('✅ deleted')) {
-        failures++;
-        console.log(`::warning::[section-edge] cancellazione non confermata: ${op.key}`);
-        continue;
-      }
-    }
-    purged.push(...op.purge);
-  }
-  for (const chunk of purgeChunks(purged)) {
-    const { code } = run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
-    if (code !== 0) failures++;
-  }
-  console.log(`[section-edge] ${ops.length} operazioni, ${purged.length} URL purgate, ${failures} fallimenti`);
-  if (!failures) return 0;
-
-  // Push riuscito a META' con un registro nuovo gia' su R2 e il publish che
-  // sta per fermarsi: si ripristina il registro di prima, cosi' il Worker non
-  // resta su uno stato che il catalogo servito non descrive.
-  if (registryUploaded && mustSucceed) {
-    const tmpDir = fs.mkdtempSync(path.join(env.RUNNER_TEMP || os.tmpdir(), 'section-edge-'));
-    const restored = rollbackRegistry(previous, tmpDir);
-    fs.rmSync(tmpDir, { recursive: true, force: true });
-    console.log(
-      restored
-        ? '::warning::[section-edge] registro ripristinato allo stato precedente'
-        : `::error::[section-edge] registro NON ripristinato (stato precedente: ${previous.state}): R2 ha il registro nuovo, Pages il catalogo vecchio — rilanciare publish-api`,
-    );
-  }
-  return stop('operazioni non confermate');
+  return (await publishRelease(release, { io, env, log, tmpDir: env.RUNNER_TEMP || os.tmpdir() })).code;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {

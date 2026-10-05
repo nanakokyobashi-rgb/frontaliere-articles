@@ -74,7 +74,14 @@ import {
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
-import { edgePushIsMandatory, planSectionEdge, purgeChunks, registryState } from '../../scripts/publish-section-edge.mjs';
+import {
+  main as edgeMain,
+  planRelease,
+  publishRelease,
+  purgeChunks,
+  pushIsMandatory,
+  registryState,
+} from '../../scripts/publish-section-edge.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
@@ -201,19 +208,9 @@ test('kill-switch: verificato solo col marker del loader; spegne live, non tocca
   doc.sections['canton-gr'].status = 'retired';
   doc.sections['canton-be'].status = 'live';
   const eff = effectiveStatuses(doc, ks);
-  assert.deepEqual(eff['canton-ti'], { declared: 'live', status: 'draft', killed: true, held: false });
-  assert.deepEqual(eff['canton-gr'], { declared: 'retired', status: 'retired', killed: false, held: false });
-  assert.deepEqual(eff['canton-be'], { declared: 'live', status: 'live', killed: false, held: false });
-  // Senza verifica nessuna sezione dichiarata live esce live: il catalogo non
-  // deve andare avanti rispetto al registro che il Worker ha su R2.
-  const unverified = effectiveStatuses(doc, resolveKillSwitch({ CANTON_ARTICLE_SECTIONS_KILL: 'TI' }));
-  assert.deepEqual(unverified['canton-ti'], { declared: 'live', status: 'draft', killed: true, held: false });
-  assert.deepEqual(unverified['canton-be'], { declared: 'live', status: 'draft', killed: false, held: true });
-  assert.deepEqual(unverified['canton-gr'], { declared: 'retired', status: 'retired', killed: false, held: false });
-  const held = buildSectionsCatalog({ declared: doc, effective: unverified, killSwitch: { state: 'unverified', unknown: [] },
-    commit: COMMIT, sitemapOf: () => { throw new Error('nessuna sezione live: non va chiesta nessuna sitemap'); } });
-  assert.deepEqual(held.killSwitch, { state: 'unverified', applied: ['canton-ti'], held: ['canton-be'], unknown: [] });
-  assert.ok(held.sections.every((entry) => entry.status !== 'live' && entry.sitemap === null));
+  assert.deepEqual(eff['canton-ti'], { declared: 'live', status: 'draft', killed: true });
+  assert.deepEqual(eff['canton-gr'], { declared: 'retired', status: 'retired', killed: false });
+  assert.deepEqual(eff['canton-be'], { declared: 'live', status: 'live', killed: false });
 });
 
 test('copia per il Worker: scritta se verificato o se nessuna sezione e\' live', () => {
@@ -251,26 +248,31 @@ test('copia per il Worker: formato di parseCorpusSectionRegistry, accettata dal 
   );
 });
 
-test('catalogo sections.json: stato effettivo, percorsi, temi, sitemap solo se live', () => {
+test('catalogo sections.json: cosa sono le sezioni, MAI in che stato sono (una sola fonte: il registro su R2)', () => {
   const doc = committed();
   doc.sections['canton-ti'].status = 'live';
-  const ks = { state: 'verified', sections: [], unknown: [] };
+  doc.sections['canton-gr'].status = 'retired';
   const catalog = buildSectionsCatalog({
     declared: doc,
-    effective: effectiveStatuses(doc, ks),
-    killSwitch: ks,
     commit: COMMIT,
     articles: { 'canton-ti': 3 },
-    sitemapOf: (id) => `sitemap-articles-${id}.xml`,
+    sitemapOf: (id) => (id === 'canton-ti' ? 'sitemap-articles-canton-ti.xml' : null),
   });
+  assert.equal(catalog.authoritative, false);
+  assert.equal(catalog.statusSource, 'https://cdn.frontaliereticino.ch/edge/sections/registry.json');
   assert.equal(catalog.sections.length, 24);
   const ti = catalog.sections.find((entry) => entry.id === 'canton-ti');
+  assert.deepEqual(Object.keys(ti), ['id', 'kind', 'canton', 'indexSlug', 'paths', 'topics', 'counts', 'sitemap']);
   assert.deepEqual(ti.paths, { it: '/articoli-ticino/', en: '/en/ticino-articles/', de: '/de/tessin-artikel/', fr: '/fr/articles-tessin/' });
   assert.deepEqual(ti.topics.map((t) => t.id), ['carburanti', 'fisco', 'mobilita', 'eventi', 'pensioni', 'servizi']);
   assert.equal(ti.sitemap, '/sitemap-articles-canton-ti.xml');
   assert.deepEqual(ti.counts, { articles: 3 });
-  assert.equal(catalog.sections.find((entry) => entry.id === 'canton-gr').sitemap, null);
-  assert.deepEqual(catalog.killSwitch, { state: 'verified', applied: [], held: [], unknown: [] });
+  // Nessuna traccia dello stato, ne' effettivo ne' dichiarato, in nessuna voce.
+  assert.ok(!/"(status|declaredStatus|killSwitch)"/.test(JSON.stringify(catalog)));
+  assert.ok(!/live|retired|draft/.test(JSON.stringify(catalog.sections)));
+  // E build-api lo impone sul file scritto.
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /catalog\.authoritative !== false \|\| \(catalog\.sections \?\? \[\]\)\.some\(\(entry\) => 'status' in entry/);
 });
 
 // ── 4. Sitemap ───────────────────────────────────────────────────────────────
@@ -414,121 +416,222 @@ test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale es
   assert.match(build, /source: Math\.max\(0, source - retiredSource\)/);
 });
 
-// ── 6. Pubblicazione su R2 ───────────────────────────────────────────────────
+// ── 6. Pubblicazione su R2: staging versionato, flip atomico ─────────────────
 
-function fakeDist({ live = [], index = true, edge = true }) {
+const DRAFT_ALL = () => ({ schema: 1, commit: COMMIT, sections: Object.fromEntries(registrySectionIds().map((id) => [id, { status: 'draft' }])) });
+const withLive = (ids, commit = COMMIT) => {
+  const doc = DRAFT_ALL();
+  doc.commit = commit;
+  for (const id of ids) doc.sections[id] = { status: 'live' };
+  return doc;
+};
+
+/** Un dist/api come lo scrive build-api per un dato registro. */
+function fakeDist(registry, { index = undefined } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'section-edge-'));
-  const sections = registrySectionIds().map((id) => ({
-    id,
-    status: live.includes(id) ? 'live' : 'draft',
-    sitemap: live.includes(id) ? `/sitemap-articles-${id}.xml` : null,
-  }));
-  writeFileSync(path.join(dir, 'sections.json'), JSON.stringify({ schema: 1, sections }));
-  for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), '<urlset/>');
-  if (live.length && index) writeFileSync(path.join(dir, 'sitemap-cantons.xml'), '<sitemapindex/>');
-  if (edge) {
-    mkdirSync(path.join(dir, 'edge/sections'), { recursive: true });
-    writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), '{}');
-  }
+  const live = Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
+  mkdirSync(path.join(dir, 'edge/sections'), { recursive: true });
+  writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(registry));
+  for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), `<urlset><!-- ${id} --></urlset>`);
+  if (index ?? live.length > 0) writeFileSync(path.join(dir, 'sitemap-cantons.xml'), '<sitemapindex/>');
   return dir;
 }
 
-test('edge: nessuna sezione live → registro e poi cancellazione dell\'indice', () => {
-  // (ordine comune a tutti i casi: l'indice si tocca solo DOPO il registro)
-  const { ops } = planSectionEdge(fakeDist({}));
-  assert.deepEqual(ops.map((op) => [op.op, op.key]), [
-    ['upload', 'edge/sections/registry.json'],
-    ['delete', 'edge/sitemap-cantons.xml'],
-  ]);
-  assert.deepEqual(ops[0].purge, ['https://cdn.frontaliereticino.ch/edge/sections/registry.json']);
-  assert.equal(ops[0].cacheControl, 'public,max-age=60');
-  assert.deepEqual(ops[1].purge, ['https://frontaliereticino.ch/sitemap-cantons.xml', 'https://cdn.frontaliereticino.ch/edge/sitemap-cantons.xml']);
-});
-
-test('edge: sezioni live → sitemap, registro, indice solo dopo il registro', () => {
-  const { ops } = planSectionEdge(fakeDist({ live: ['canton-ti', 'canton-gr'] }));
-  assert.deepEqual(ops.map((op) => [op.op, op.key]), [
-    ['upload', 'edge/sitemap-articles-canton-gr.xml'],
-    ['upload', 'edge/sitemap-articles-canton-ti.xml'],
-    ['upload', 'edge/sections/registry.json'],
-    ['upload', 'edge/sitemap-cantons.xml'],
-  ]);
-  // Un indice nuovo sopra un registro vecchio annuncerebbe sitemap non servite:
-  // l'esecutore si ferma al registro non confermato, prima dell'indice.
-  const src = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
-  assert.match(src, /if \(op\.registry\) break;/);
-  assert.match(src, /if \(op\.registry && failures > 0\) \{[\s\S]*?break;/);
-  assert.ok(ops[0].purge.includes('https://frontaliereticino.ch/sitemap-articles-canton-gr.xml'));
-  assert.ok(ops[0].purge.includes('https://cdn.frontaliereticino.ch/edge/sitemap-articles-canton-gr.xml'));
-});
-
-test('edge: registro non emesso (kill-switch non verificato) → registro e indice su R2 intatti', () => {
-  const { ops, notes } = planSectionEdge(fakeDist({ live: ['canton-ti'], edge: false }));
-  assert.deepEqual(ops.map((op) => [op.op, op.key]), [['upload', 'edge/sitemap-articles-canton-ti.xml']]);
-  assert.match(notes.join('\n'), /non emesso/);
-});
-
-test('edge: una sezione live senza la sua sitemap e\' un errore, non un upload mancato', () => {
-  const dir = fakeDist({ live: ['canton-ti'] });
-  rmSync(path.join(dir, 'sitemap-articles-canton-ti.xml'));
-  assert.throws(() => planSectionEdge(dir), /live ma sitemap-articles-canton-ti\.xml manca/);
-});
-
-test('edge: obbligatorio quando lo stato delle sezioni cambia rispetto a R2, in entrambe le direzioni', () => {
-  const draftAll = { schema: 1, commit: 'aaaaaaa', sections: Object.fromEntries(registrySectionIds().map((id) => [id, { status: 'draft' }])) };
-  const tiLive = { schema: 1, commit: 'bbbbbbb', sections: { ...draftAll.sections, 'canton-ti': { status: 'live' } } };
-  const withEdge = (dir, doc) => {
-    writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(doc));
-    return dir;
+/** R2 + CDN finti: `store` e' cio' che R2 ha, `fail` decide quale operazione fallisce. */
+function fakeIo({ previous, fail = () => false, corrupt = () => false } = {}) {
+  const store = new Map();
+  if (previous !== undefined) store.set(EDGE_SECTION_REGISTRY_FILE, Buffer.from(JSON.stringify(previous)));
+  const ops = [];
+  return {
+    store,
+    ops,
+    upload: (local, key, cacheControl) => {
+      ops.push(`put ${key}`);
+      if (fail('upload', key)) return false;
+      store.set(key, corrupt(key) ? Buffer.from('troncato') : readFileSync(local));
+      store.set(`cc:${key}`, cacheControl);
+      return true;
+    },
+    remove: (key) => {
+      ops.push(`del ${key}`);
+      if (fail('remove', key)) return false;
+      store.delete(key);
+      return true;
+    },
+    purge: (urls) => {
+      ops.push(`purge ${urls.length}`);
+      return !fail('purge', urls.join(','));
+    },
+    fetchBytes: async (url) => {
+      const key = url.replace('https://cdn.frontaliereticino.ch/', '');
+      if (fail('fetch', key)) return { status: 0 };
+      return store.has(key) ? { status: 200, body: store.get(key) } : { status: 404 };
+    },
   };
-  // Il commit non e' stato; una sezione assente vale draft.
-  assert.equal(registryState(draftAll), registryState({ sections: {} }));
-  assert.notEqual(registryState(tiLive), registryState(draftAll));
+}
+
+const CREDS = { R2_ACCESS_KEY_ID: 'x', R2_SECRET_ACCESS_KEY: 'x', R2_S3_ENDPOINT: 'x', R2_BUCKET: 'x', CF_API_TOKEN: 'x' };
+const servedState = (io) => registryState(JSON.parse(io.store.get(EDGE_SECTION_REGISTRY_FILE)?.toString('utf8') ?? '{"sections":{}}'));
+async function publish(registry, ioOptions, env = CREDS) {
+  const io = fakeIo(ioOptions);
+  const logs = [];
+  const before = servedState(io);
+  const result = await publishRelease(planRelease(fakeDist(registry)), { io, env, log: (line) => logs.push(line) });
+  return { io, logs, before, result };
+}
+
+test('edge: lo stato e\' status+redirects+gone; commit e release non sono stato', () => {
+  assert.equal(registryState(DRAFT_ALL()), registryState({ sections: {} }), 'una sezione assente vale draft');
+  assert.equal(registryState(withLive(['canton-ti'], 'aaaaaaa')), registryState({ ...withLive(['canton-ti'], 'bbbbbbb'), release: { commit: 'x' } }));
+  assert.notEqual(registryState(withLive(['canton-ti'])), registryState(DRAFT_ALL()));
   assert.notEqual(
     registryState({ sections: { 'canton-ti': { status: 'live', gone: ['/articoli-ticino/x/'] } } }),
-    registryState(tiLive),
+    registryState(withLive(['canton-ti'])),
   );
+});
 
-  const allDraft = withEdge(fakeDist({}), draftAll);
-  assert.equal(edgePushIsMandatory(allDraft, { state: 'absent' }), false, 'oggi: tutto draft, mai pubblicato');
-  assert.equal(edgePushIsMandatory(allDraft, { state: 'ok', doc: { ...draftAll, commit: 'ccccccc' } }), false, 'cambia solo il commit');
-  assert.equal(edgePushIsMandatory(allDraft, { state: 'unknown' }), false);
-  // SPEGNIMENTO: R2 serve ancora la sezione, il catalogo nuovo la direbbe draft.
-  assert.equal(edgePushIsMandatory(allDraft, { state: 'ok', doc: tiLive }), true);
-  // ACCENSIONE, e stato invariato a sezione live.
-  const live = withEdge(fakeDist({ live: ['canton-ti'] }), tiLive);
-  assert.equal(edgePushIsMandatory(live, { state: 'absent' }), true);
-  assert.equal(edgePushIsMandatory(live, { state: 'ok', doc: draftAll }), true);
-  assert.equal(edgePushIsMandatory(live, { state: 'ok', doc: { ...tiLive, commit: 'ddddddd' } }), false);
+test('edge: push obbligatorio a OGNI cambio di stato rispetto a R2 — accensione, spegnimento, ritiro', () => {
+  const live = withLive(['canton-ti']);
+  const retired = DRAFT_ALL();
+  retired.sections['canton-ti'] = { status: 'retired' };
+  assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'absent' }), false, 'oggi: tutto draft, mai pubblicato');
+  assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'ok', doc: { ...DRAFT_ALL(), commit: 'ccccccc' } }), false, 'cambia solo il commit');
+  assert.equal(pushIsMandatory(live, { state: 'absent' }), true, 'accensione');
+  assert.equal(pushIsMandatory(live, { state: 'ok', doc: DRAFT_ALL() }), true, 'accensione');
+  assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'ok', doc: live }), true, 'spegnimento');
+  assert.equal(pushIsMandatory(retired, { state: 'ok', doc: live }), true, 'ritiro');
+  assert.equal(pushIsMandatory(live, { state: 'ok', doc: { ...live, commit: 'ddddddd' } }), false);
   // R2 illeggibile: non si puo' dimostrare che lo stato coincide.
-  assert.equal(edgePushIsMandatory(live, { state: 'unknown' }), true);
-  // Registro non emesso (kill-switch non verificato): niente da spingere.
-  assert.equal(edgePushIsMandatory(fakeDist({ edge: false }), { state: 'ok', doc: tiLive }), false);
+  assert.equal(pushIsMandatory(live, { state: 'unknown' }), true);
+  assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'unknown' }), false);
+});
 
-  // In un sottoprocesso: lo script parla su stdout, e un test non deve scrivere
-  // sulla pipe dei frame del runner (scripts/ci/check-node-test-stdout.mjs).
-  // `--previous` da' lo stato di R2 a mano: nessuna rete nel test.
-  const edge = (...args) => spawnSync(process.execPath, [path.join(ROOT, 'scripts/publish-section-edge.mjs'), ...args], {
-    encoding: 'utf8',
-    env: { PATH: process.env.PATH },
-  });
-  const prev = path.join(mkdtempSync(path.join(tmpdir(), 'prev-')), 'registry.json');
-  writeFileSync(prev, JSON.stringify(tiLive));
-  const refused = edge('--dist', allDraft, '--previous', prev);
-  assert.equal(refused.status, 1, 'spegnimento senza credenziali: il publish si ferma');
-  assert.match(refused.stdout, /push OBBLIGATORIO/);
-  assert.match(refused.stdout, /::error::\[section-edge\] credenziali assenti.*il publish si ferma/);
-  const tolerated = edge('--dist', allDraft, '--previous', 'absent');
-  assert.equal(tolerated.status, 0);
-  assert.match(tolerated.stdout, /::warning::\[section-edge\] credenziali assenti/);
-  for (const [args, re] of [[['--dist'], /--dist richiede/], [['--boh'], /sconosciuti/], [['--dry-run', '--dry-run'], /una volta sola/]]) {
-    const res = edge(...args);
-    assert.equal(res.status, 1);
-    assert.match(res.stderr, re);
+test('edge: la release ha chiavi versionate per commit e un puntatore nel contratto del Worker', () => {
+  const release = planRelease(fakeDist(withLive(['canton-ti', 'canton-gr'])));
+  assert.equal(release.prefix, `edge/sections/_releases/${COMMIT}`);
+  assert.deepEqual(release.files.map((f) => f.releaseKey), [
+    `edge/sections/_releases/${COMMIT}/registry.json`,
+    `edge/sections/_releases/${COMMIT}/sitemap-articles-canton-gr.xml`,
+    `edge/sections/_releases/${COMMIT}/sitemap-articles-canton-ti.xml`,
+    `edge/sections/_releases/${COMMIT}/sitemap-cantons.xml`,
+  ]);
+  assert.equal(validateEdgeSectionRegistry(release.pointer), true);
+  assert.equal(registryState(release.pointer), registryState(release.registry));
+  assert.deepEqual(Object.keys(release.pointer.release.files), release.files.map((f) => f.name));
+  assert.ok(release.files.every((f) => /^[0-9a-f]{64}$/.test(f.sha256)));
+  // Niente registro in dist (kill-switch non verificato): nessuna release.
+  assert.equal(planRelease(mkdtempSync(path.join(tmpdir(), 'no-edge-'))), null);
+  // Release incoerenti: rifiuto, non un upload parziale.
+  assert.throws(() => planRelease(fakeDist(withLive(['canton-ti']), { index: false })), /release incoerente/);
+  assert.throws(() => planRelease(fakeDist(DRAFT_ALL(), { index: true })), /release incoerente/);
+  const noSitemap = fakeDist(withLive(['canton-ti']));
+  rmSync(path.join(noSitemap, 'sitemap-articles-canton-ti.xml'));
+  assert.throws(() => planRelease(noSitemap), /sitemap-articles-canton-ti\.xml: manca/);
+});
+
+test('edge: ordine — staging verificato, sitemap, UN put del puntatore, poi indice e purge', async () => {
+  const { io, result } = await publish(withLive(['canton-ti']), { previous: DRAFT_ALL() });
+  assert.deepEqual(result, { code: 0, phase: 'done', flipped: true });
+  const rel = `edge/sections/_releases/${COMMIT}`;
+  assert.deepEqual(io.ops, [
+    `put ${rel}/registry.json`,
+    `put ${rel}/sitemap-articles-canton-ti.xml`,
+    `put ${rel}/sitemap-cantons.xml`,
+    'put edge/sitemap-articles-canton-ti.xml',
+    'put edge/sections/registry.json',
+    'purge 1',
+    'put edge/sitemap-cantons.xml',
+    'purge 4',
+  ]);
+  assert.equal(io.ops.filter((op) => op === 'put edge/sections/registry.json').length, 1);
+  assert.equal(io.store.get('cc:edge/sections/registry.json'), 'public,max-age=60');
+  assert.equal(servedState(io), registryState(withLive(['canton-ti'])));
+  assert.equal(JSON.parse(io.store.get('edge/sections/registry.json')).release.prefix, rel);
+});
+
+test('edge: nessuna sezione live → l\'indice si cancella, dopo il flip; la release precedente si ripulisce', async () => {
+  const previous = { ...withLive(['canton-ti'], 'aaaaaaa'), release: { commit: 'aaaaaaa', prefix: 'edge/sections/_releases/aaaaaaa', files: { 'registry.json': 'x', 'sitemap-cantons.xml': 'y' } } };
+  const { io, result } = await publish(DRAFT_ALL(), { previous });
+  assert.equal(result.code, 0);
+  assert.deepEqual(io.ops.slice(-6), [
+    'put edge/sections/registry.json',
+    'purge 1',
+    'del edge/sitemap-cantons.xml',
+    'purge 2',
+    'del edge/sections/_releases/aaaaaaa/registry.json',
+    'del edge/sections/_releases/aaaaaaa/sitemap-cantons.xml',
+  ]);
+  assert.equal(servedState(io), registryState(DRAFT_ALL()), 'spegnimento arrivato al Worker');
+});
+
+test('edge: un fallimento PRIMA del flip non cambia lo stato servito, in accensione e in spegnimento', async () => {
+  const cases = [
+    ['accensione', withLive(['canton-ti']), DRAFT_ALL()],
+    ['spegnimento', DRAFT_ALL(), withLive(['canton-ti'], 'aaaaaaa')],
+  ];
+  const failures = [
+    ['staging: upload', (op, key) => op === 'upload' && key.includes('/_releases/'), {}],
+    ['staging: byte non corrispondenti', () => false, { corrupt: (key) => key.endsWith('/_releases/' + COMMIT + '/registry.json') }],
+    ['staging: CDN illeggibile', (op, key) => op === 'fetch' && key.includes('/_releases/'), {}],
+    ['flip: sitemap', (op, key) => op === 'upload' && key === 'edge/sitemap-articles-canton-ti.xml', {}],
+    ['flip: puntatore', (op, key) => op === 'upload' && key === 'edge/sections/registry.json', {}],
+  ];
+  for (const [direction, next, previous] of cases) {
+    for (const [what, fail, extra] of failures) {
+      if (what === 'flip: sitemap' && direction === 'spegnimento') continue; // nessuna sitemap live da scrivere
+      const { io, logs, before, result } = await publish(next, { previous, fail, ...extra });
+      assert.equal(result.code, 1, `${direction} / ${what}: il push e' obbligatorio, deve fermare il publish`);
+      assert.equal(result.flipped, false, `${direction} / ${what}`);
+      assert.equal(servedState(io), before, `${direction} / ${what}: lo stato servito non deve cambiare`);
+      assert.ok(!io.ops.some((op) => op.endsWith('edge/sitemap-cantons.xml') && !op.includes('_releases')), `${direction} / ${what}: indice toccato prima del flip`);
+      assert.match(logs.join('\n'), /::error::\[section-edge\].*lo stato servito resta quello di prima; il publish si ferma/);
+    }
   }
-  // Un push riuscito a meta' ripristina il registro di prima.
-  const src = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
-  assert.match(src, /if \(registryUploaded && mustSucceed\) \{[\s\S]*?rollbackRegistry\(previous, tmpDir\)/);
+});
+
+test('edge: un fallimento DOPO il flip lascia lo stato nuovo e coerente, ed esce non-zero', async () => {
+  for (const fail of [
+    (op) => op === 'purge',
+    (op, key) => op === 'upload' && key === 'edge/sitemap-cantons.xml',
+  ]) {
+    const { io, logs, result } = await publish(withLive(['canton-ti']), { previous: DRAFT_ALL(), fail });
+    assert.deepEqual([result.code, result.phase, result.flipped], [1, 'dopo il flip', true]);
+    assert.equal(servedState(io), registryState(withLive(['canton-ti'])));
+    assert.match(logs.join('\n'), /lo stato servito e' gia' quello nuovo e coerente/);
+  }
+});
+
+test('edge: senza cambio di stato un problema di R2 non ferma gli articoli; con un cambio, le credenziali sono obbligatorie', async () => {
+  const sameState = await publish(DRAFT_ALL(), { previous: { ...DRAFT_ALL(), commit: 'aaaaaaa' }, fail: (op) => op === 'upload' });
+  assert.equal(sameState.result.code, 0);
+  assert.match(sameState.logs.join('\n'), /::warning::\[section-edge\].*il publish prosegue/);
+  const noCredsSame = await publish(DRAFT_ALL(), {}, {});
+  assert.deepEqual([noCredsSame.result.code, noCredsSame.io.ops], [0, []]);
+  const noCredsFlip = await publish(DRAFT_ALL(), { previous: withLive(['canton-ti'], 'aaaaaaa') }, {});
+  assert.deepEqual([noCredsFlip.result.code, noCredsFlip.io.ops], [1, []], 'uno spegnimento senza credenziali ferma il publish');
+});
+
+test('edge: CLI — senza registro in dist nessuna release; argomenti malformati rifiutati', async () => {
+  const logs = [];
+  const none = mkdtempSync(path.join(tmpdir(), 'no-edge-'));
+  assert.equal(await edgeMain(['--dist', none], { env: {}, io: fakeIo(), log: (l) => logs.push(l) }), 0);
+  assert.match(logs.join('\n'), /nessuna release/);
+  await assert.rejects(edgeMain(['--dist'], { log: () => {} }), /--dist richiede/);
+  await assert.rejects(edgeMain(['--boh'], { log: () => {} }), /sconosciuti/);
+  await assert.rejects(edgeMain(['--dry-run', '--dry-run'], { log: () => {} }), /una volta sola/);
+  await assert.rejects(edgeMain(['--dist', path.join(none, 'non-esiste')], { log: () => {} }), /cartella inesistente/);
+  const dry = [];
+  assert.equal(await edgeMain(['--dist', fakeDist(DRAFT_ALL()), '--dry-run'], { io: fakeIo(), log: (l) => dry.push(l) }), 0);
+  assert.equal(JSON.parse(dry.join('')).prefix, `edge/sections/_releases/${COMMIT}`);
+});
+
+test('edge: purge a blocchi da 30 senza duplicati', () => {
+  const urls = Array.from({ length: 65 }, (_, i) => `https://x/${i % 61}`);
+  const chunks = purgeChunks(urls);
+  assert.deepEqual(chunks.map((c) => c.length), [30, 30, 1]);
+  assert.throws(() => purgeChunks(urls, 0), /size non valido/);
+  assert.throws(() => purgeChunks(urls, -1), /size non valido/);
+  assert.throws(() => buildSitemapIndex(null), /atteso un array/);
 });
 
 test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del renderer (meta IT ∪ mappa slug)', () => {
@@ -552,15 +655,6 @@ test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non
   assert.doesNotMatch(build, /source: section\.articleCount/);
 });
 
-test('edge: purge a blocchi da 30 senza duplicati', () => {
-  const urls = Array.from({ length: 65 }, (_, i) => `https://x/${i % 61}`);
-  const chunks = purgeChunks(urls);
-  assert.deepEqual(chunks.map((c) => c.length), [30, 30, 1]);
-  assert.throws(() => purgeChunks(urls, 0), /size non valido/);
-  assert.throws(() => purgeChunks(urls, -1), /size non valido/);
-  assert.throws(() => buildSitemapIndex(null), /atteso un array/);
-});
-
 test('delete-cdn-file.sh: solo chiavi delle sezioni cantonali', () => {
   const run = (key) => spawnSync('bash', [path.join(ROOT, 'scripts/lib/delete-cdn-file.sh'), key], {
     encoding: 'utf8',
@@ -569,7 +663,7 @@ test('delete-cdn-file.sh: solo chiavi delle sezioni cantonali', () => {
   for (const bad of ['data/blog-index-svizzera-it.json', 'edge/sitemap-blog.xml', 'edge/sections/../rss.xml', 'images/x.webp']) {
     assert.equal(run(bad).status, 1, bad);
   }
-  for (const ok of ['edge/sitemap-cantons.xml', '/edge/sitemap-articles-canton-ti.xml', 'edge/sections/registry.json']) {
+  for (const ok of ['edge/sitemap-cantons.xml', '/edge/sitemap-articles-canton-ti.xml', 'edge/sections/registry.json', `edge/sections/_releases/${COMMIT}/sitemap-cantons.xml`]) {
     const res = run(ok);
     assert.equal(res.status, 0, ok);
     assert.match(res.stdout, /credentials missing/, 'senza credenziali non tocca niente');
@@ -590,7 +684,7 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
   assert.ok(templateAt > 0 && markerAt > templateAt, 'il marker va scritto solo dopo aver letto il template');
 });
 
-test('publish-api: osserva il registro e spinge registro e sitemap cantonali dopo il deploy', () => {
+test('publish-api: osserva il registro e pubblica la release edge PRIMA del deploy Pages, senza continue-on-error', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
     assert.ok(wf.includes(`      - '${p}'\n`), p);
