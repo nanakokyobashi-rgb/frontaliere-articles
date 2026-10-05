@@ -122,6 +122,28 @@ test('la verifica finale vede ancora il residuo VERO, in ogni forma scritta', ()
   }
 });
 
+test('il percorso di una copertina condivisa non è un residuo dell\'id', () => {
+  // Un altro articolo può dichiarare come copertina il file col nome dell'id
+  // ritirato: `scripts/retire-article.mjs` la conserva, e la verifica finale
+  // non deve chiamarla rimozione parziale.
+  for (const text of [
+    `    image: '/images/blog/${ID}.webp',\n`,
+    `  url: 'https://cdn.example.org/images/blog/${ID}.webp',\n`,
+    `  image: '/images/blog/thumbnails/${ID}-480w.webp',\n`,
+  ]) {
+    assert.equal(mentionsId(text, ID), false, `falso residuo su: ${text.trim()}`);
+  }
+  // Ma l'id nudo, accanto a un percorso di copertina, è ancora un residuo.
+  for (const text of [
+    `    id: '${ID}',\n    image: '/images/blog/${ID}.webp',\n`,
+    `  'blog-${ID}': { image: { url: '/images/blog/${ID}.webp' } },\n`,
+    `  '/images/${ID}.webp'\n`,
+    `  '/images/blog/${ID}'\n`,
+  ]) {
+    assert.equal(mentionsId(text, ID), true, `residuo non visto in: ${text.trim()}`);
+  }
+});
+
 test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
   // Il difetto che questo caso ferma non è un falso residuo, è la DERIVA: la
   // verifica finale dello script e il gate di PR guardano le stesse superfici,

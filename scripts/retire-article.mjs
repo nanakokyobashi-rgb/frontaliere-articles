@@ -65,6 +65,7 @@ import {
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
 import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from './lib/image-credit-records.mjs';
+import { coverKey } from '../engine/shared/imageCredits.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -233,13 +234,70 @@ function removeJsonByKey(file, id) {
   return { changed: true, text: `${JSON.stringify(map, null, 2)}\n` };
 }
 
-/** Rimuove dal catalogo immagini l'oggetto il cui `path` nomina l'id. */
-function removeFromImageCatalog(file, id) {
+/**
+ * Rimuove dal catalogo immagini ogni oggetto il cui `path` nomina una delle
+ * copertine `keys` (chiavi di `coverKey`, non id di articolo: la copertina di
+ * un articolo può portare il nome di un altro).
+ */
+function removeFromImageCatalog(file, keys) {
   const list = JSON.parse(read(file));
   if (!Array.isArray(list)) throw new Error(`${file}: atteso un array`);
-  const kept = list.filter((e) => !(e && typeof e.path === 'string' && e.path.includes(`/${id}.webp`)));
+  const names = keys.map((key) => `/${key}.webp`);
+  const kept = list.filter((e) => !(e && typeof e.path === 'string' && names.some((n) => e.path.includes(n))));
   if (kept.length === list.length) return { changed: false, text: null };
   return { changed: true, text: `${JSON.stringify(kept)}\n` };
+}
+
+/**
+ * Ogni blocco `{ id: '…', … }` di un registro di sezione, delimitato con
+ * `matchingDelimiter` come in `removeRegistryEntry`: una regex che si ferma
+ * alla prima `}` perderebbe il campo `image` dietro un oggetto annidato, e qui
+ * un'immagine persa vuol dire una copertina altrui cancellata. Graffe
+ * sbilanciate sono un errore, non un registro più corto.
+ *
+ * Non importa `readRegistry` da `scripts/build-blog-index.mjs`: quel modulo
+ * esegue la build all'import.
+ */
+function registryBlocks(file) {
+  const src = read(file);
+  const out = [];
+  const rx = /\bid:\s*'([^']+)',/g;
+  let m;
+  while ((m = rx.exec(src)) !== null) {
+    const open = src.lastIndexOf('{', m.index);
+    if (open === -1) throw new Error(`${file}: nessuna '{' prima di id '${m[1]}'`);
+    const close = matchingDelimiter(src, open);
+    if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a ${m[1]}`);
+    out.push({ id: m[1], block: src.slice(open, close + 1) });
+    rx.lastIndex = close + 1;
+  }
+  return out;
+}
+
+/** Il valore letterale del campo `image` di un blocco di registro, o undefined. */
+function registryImage(block) {
+  return (block.match(/\bimage:\s*(['"`])([^'"`]*)\1/) ?? [])[2];
+}
+
+/**
+ * `coverKey(image) → [id…]` per tutti gli articoli pubblicati di ENTRAMBE le
+ * sezioni, tranne `excludeId`. Una copertina può essere condivisa anche fra
+ * frontaliere e svizzera: guardare solo il registro del ritirato la darebbe
+ * per libera.
+ */
+function coverKeysInUse(excludeId) {
+  /** @type {Map<string, string[]>} */
+  const inUse = new Map();
+  for (const cfg of Object.values(SECTIONS)) {
+    for (const { id, block } of registryBlocks(cfg.registryFile)) {
+      if (id === excludeId) continue;
+      const key = coverKey(registryImage(block));
+      if (!key) continue;
+      if (!inUse.has(key)) inUse.set(key, []);
+      inUse.get(key).push(id);
+    }
+  }
+  return inUse;
 }
 
 
@@ -277,7 +335,7 @@ function main() {
   const winnerSection = findSection(winner); // esiste? altrimenti throw: mai ritirare verso il nulla
   console.log(`ritiro '${id}' (${section}) → vincitore '${winner}' (${winnerSection})${dryRun ? '  [DRY RUN]' : ''}`);
 
-  /** @type {Array<{file: string, what: string}>} */
+  /** @type {Array<{file: string, what: string, kept?: boolean}>} */
   const planned = [];
   /** @type {Array<[string, string]>} */
   const writes = [];
@@ -405,9 +463,34 @@ function main() {
     planned.push({ file: IMAGES_LEDGER, what: 'provenienza immagine' });
   }
 
+  // 9-10. Quali copertine si possono togliere. La copertina dell'articolo è
+  //     quella che dichiara il suo campo `image` (`ownKey`), che non porta per
+  //     forza il nome dell'id: un articolo può riusare la copertina di un altro
+  //     (es. due articoli con `image: '/images/blog/<id-dell-altro>.webp'`).
+  //     Restano candidati anche i file col nome dell'id, che prima di questo
+  //     controllo erano l'unica cosa cancellata. Una chiave ancora usata da un
+  //     altro articolo pubblicato, in QUALUNQUE sezione, si conserva per intero:
+  //     copertina, miniatura, credito (P14) e voce di catalogo descrivono il
+  //     file, non l'articolo, e servono all'articolo che resta.
+  const retiredBlock = registryBlocks(cfg.registryFile).find((b) => b.id === id);
+  const ownKey = coverKey(retiredBlock && registryImage(retiredBlock.block)) ?? id;
+  const inUse = coverKeysInUse(id);
+  /** @type {string[]} */
+  const removableCovers = [];
+  for (const key of new Set([ownKey, id])) {
+    const users = inUse.get(key);
+    if (users) {
+      planned.push({ file: `public/images/blog/${key}.webp`, what: `copertina ${key} conservata: usata da ${users.join(', ')}`, kept: true });
+    } else {
+      removableCovers.push(key);
+    }
+  }
+
   // 9. catalogo immagini del giornalista
   if (assertRegularFileIfPresent(ROOT, IMAGE_CATALOG, 'target da scrivere (catalogo immagini)')) {
-    const cat = removeFromImageCatalog(IMAGE_CATALOG, id);
+    const cat = removableCovers.length > 0
+      ? removeFromImageCatalog(IMAGE_CATALOG, removableCovers)
+      : { changed: false, text: null };
     if (cat.changed) {
       queueWriteTarget(writes, IMAGE_CATALOG, cat.text, 'catalogo immagini');
       planned.push({ file: IMAGE_CATALOG, what: 'voce di catalogo' });
@@ -415,12 +498,14 @@ function main() {
   }
 
   // 10. asset immagine, e con la copertina il suo credito (P14): il record
-  //     `content/image-credits/blog/<id>.json` descrive proprio questo file, e
+  //     `content/image-credits/blog/<key>.json` descrive proprio questo file, e
   //     senza il file resterebbe il credito di una copertina che non c'è più.
-  for (const asset of [`public/images/blog/${id}.webp`, `public/images/blog/thumbnails/${id}-480w.webp`]) {
-    queueDeleteTarget(deletes, planned, asset, 'asset');
+  for (const key of removableCovers) {
+    for (const asset of [`public/images/blog/${key}.webp`, `public/images/blog/thumbnails/${key}-480w.webp`]) {
+      queueDeleteTarget(deletes, planned, asset, 'asset');
+    }
+    queueDeleteTarget(deletes, planned, `${IMAGE_CREDIT_RECORDS_DIR}/${key}.json`, 'credito della copertina');
   }
-  queueDeleteTarget(deletes, planned, `${IMAGE_CREDIT_RECORDS_DIR}/${id}.json`, 'credito della copertina');
 
   // Il ledger dei ritirati è scritto atomicamente più avanti, ma va letto e
   // validato ora: una directory, una symlink o un JSON rotto non devono poter
@@ -499,7 +584,7 @@ function main() {
     }
     process.exit(1);
   }
-  console.log(`\nfatto: '${id}' rimosso da ${planned.length} superfici, slug preservati in ${RETIRED_LEDGER}.`);
+  console.log(`\nfatto: '${id}' rimosso da ${planned.filter((p) => !p.kept).length} superfici, slug preservati in ${RETIRED_LEDGER}.`);
 }
 
 main();
