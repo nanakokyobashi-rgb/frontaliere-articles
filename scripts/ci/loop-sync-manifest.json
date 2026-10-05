@@ -4897,7 +4897,7 @@
       "reason": "Meta' pura dell'aggregatore dei servizi per cantone (P9f, D11): shaper per blocco (premi, aste targhe, turni farmacia, meteo) sui JSON che il sito pubblica sul CDN, modello `daily-brief-data.mjs`. Nessun omonimo sul sito: il sito produce gli artefatti, il corpus li riassume per gli hub.",
       "baseline": {
         "site": null,
-        "corpus": "11fbb7925254f50a",
+        "corpus": "c4a0beb7ce541fc8",
         "alignedAt": "2026-10-05"
       }
     },

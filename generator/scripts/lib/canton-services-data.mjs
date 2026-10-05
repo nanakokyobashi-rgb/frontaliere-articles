@@ -84,7 +84,15 @@ function httpUrlOrNull(value) {
 
 /** Millisecondi di un timestamp ISO 8601 con fuso; NaN per qualunque altra cosa. */
 function isoTimestampMs(value) {
-  return typeof value === 'string' && ISO_TIMESTAMP.test(value) ? Date.parse(value) : NaN;
+  if (typeof value !== 'string' || !ISO_TIMESTAMP.test(value)) return NaN;
+  // La forma non basta: Date.parse normalizza 2026-02-31 in un altro giorno.
+  // Giorno di calendario, ora e fuso devono esistere davvero.
+  const [, y, mo, d, h, mi, sec = '0', off] = /^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)(?::(\d\d))?(?:\.\d+)?(Z|[+-]\d\d:\d\d)$/.exec(value);
+  const day = new Date(Date.UTC(+y, +mo - 1, +d));
+  if (day.getUTCFullYear() !== +y || day.getUTCMonth() !== +mo - 1 || day.getUTCDate() !== +d) return NaN;
+  if (+h > 23 || +mi > 59 || +sec > 59) return NaN;
+  if (off !== 'Z' && (+off.slice(1, 3) > 14 || +off.slice(4) > 59)) return NaN;
+  return Date.parse(value);
 }
 
 /**
@@ -176,7 +184,7 @@ export function assertPlateAuctionsShape(doc) {
   if (doc.schema !== 1) throw new ShapeError(`plate-auctions: schema is ${JSON.stringify(doc.schema)}, expected 1`);
   if (!Array.isArray(doc.auctions)) throw new ShapeError('plate-auctions: auctions[] missing');
   if (!isObj(doc.sources)) throw new ShapeError('plate-auctions: sources{} missing');
-  if (!Number.isFinite(Date.parse(doc.generatedAt ?? ''))) throw new ShapeError('plate-auctions: generatedAt is not a date');
+  if (!Number.isFinite(isoTimestampMs(doc.generatedAt))) throw new ShapeError('plate-auctions: generatedAt is not a date');
 }
 
 export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
@@ -186,19 +194,33 @@ export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
   if (age > PLATE_AUCTIONS_MAX_AGE_MS) return unavailable(`snapshot aste vecchio di ${Math.round(age / HOUR_MS)} h (max ${PLATE_AUCTIONS_MAX_AGE_MS / HOUR_MS} h)`);
   const codes = new Set(members.map((m) => m.toUpperCase()));
   const sources = members.map((m) => doc.sources[m.toLowerCase()]).filter(Boolean);
-  const active = doc.auctions.filter(
-    (a) => codes.has(String(a?.sourceKey ?? '').toUpperCase()) && (a.auctionStatus === 'active' || a.auctionStatus === 'upcoming') && Date.parse(a.endsAt ?? '') > nowMs,
-  );
+  // Ogni record si valida prima di entrare nei conteggi: scadenza come istante
+  // reale, offerta numero finito >= 0 (altrimenti assente). Un record con la
+  // scadenza illeggibile resta fuori e viene contato, non indovinato.
+  let invalidRecords = 0;
+  const active = [];
+  for (const a of doc.auctions) {
+    if (!isObj(a) || !codes.has(String(a.sourceKey ?? '').toUpperCase())) continue;
+    if (a.auctionStatus !== 'active' && a.auctionStatus !== 'upcoming') continue;
+    const ends = isoTimestampMs(a.endsAt);
+    if (!Number.isFinite(ends)) {
+      invalidRecords++;
+      continue;
+    }
+    if (ends <= nowMs) continue;
+    const bid = finite(a.currentBidChf);
+    active.push({ ...a, endsMs: ends, bid: bid != null && bid >= 0 ? bid : null });
+  }
   if (!sources.length) return unavailable(`nessuna fonte aste registrata per ${members.join('+')}`);
-  const bids = active.map((a) => finite(a.currentBidChf)).filter((v) => v != null && v > 0);
+  const bids = active.map((a) => a.bid).filter((v) => v != null && v > 0);
   const highlights = active
-    .filter((a) => finite(a.currentBidChf) != null)
-    .sort((a, b) => b.currentBidChf - a.currentBidChf)
+    .filter((a) => a.bid != null)
+    .sort((a, b) => b.bid - a.bid || a.endsMs - b.endsMs)
     .slice(0, MAX_AUCTION_HIGHLIGHTS)
     .map((a) => ({
       plate: typeof a.normalizedPlate === 'string' && a.normalizedPlate ? a.normalizedPlate : `${a.platePrefix ?? ''}${a.plateNumber ?? ''}`,
-      currentBidChf: a.currentBidChf,
-      endsAt: new Date(Date.parse(a.endsAt)).toISOString(),
+      currentBidChf: a.bid,
+      endsAt: new Date(a.endsMs).toISOString(),
       url: httpUrlOrNull(a.officialDetailUrl),
     }));
   return {
@@ -210,7 +232,8 @@ export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
     bidMedianChf: median(bids),
     bidMaxChf: bids.length ? Math.max(...bids) : null,
     // per istante, non per stringa: fusi diversi ordinerebbero male
-    nextEndsAt: active.length ? new Date(Math.min(...active.map((a) => Date.parse(a.endsAt)))).toISOString() : null,
+    nextEndsAt: active.length ? new Date(Math.min(...active.map((a) => a.endsMs))).toISOString() : null,
+    ...(invalidRecords ? { invalidRecords } : {}),
     highlights,
   };
 }
@@ -285,7 +308,7 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
 /** @throws {ShapeError} */
 export function assertWeatherShape(doc) {
   if (!isObj(doc)) throw new ShapeError('weather-snapshot: not an object');
-  if (!Number.isFinite(Date.parse(doc.generatedAt ?? ''))) throw new ShapeError('weather-snapshot: generatedAt is not a date');
+  if (!Number.isFinite(isoTimestampMs(doc.generatedAt))) throw new ShapeError('weather-snapshot: generatedAt is not a date');
   if (!isObj(doc.cities) || !Object.keys(doc.cities).length) throw new ShapeError('weather-snapshot: cities{} missing or empty');
 }
 

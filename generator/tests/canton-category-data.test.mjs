@@ -184,6 +184,21 @@ test('fonti raggiungibili ma inutilizzabili non contano; citta\' senza misure e 
   assert.throws(() => assertPremiumsShape(badRegion), /non-numeric region key/);
 });
 
+test('timestamp impossibili e record d\'asta non validi non entrano nella vista', () => {
+  const duties = recording('pharmacy-duty-cantons', NOW);
+  duties.cantons.TI.duties[0].startsAt = '2026-02-31T08:00:00Z';
+  assert.throws(() => assertPharmacyDutyCantonsShape(duties), /no valid startsAt < endsAt/);
+
+  const pa = recording('plate-auctions', NOW);
+  const ag = pa.auctions.filter((a) => a.sourceKey === 'AG');
+  ag[0].endsAt = 'presto';
+  ag[1].currentBidChf = -500;
+  const block = shapePlateAuctions(pa, ['AG'], { nowMs: NOW });
+  assert.equal(block.invalidRecords, 1);
+  assert.ok(block.highlights.every((h) => h.currentBidChf >= 0));
+  assert.ok(block.bidMaxChf == null || block.bidMaxChf >= 0);
+});
+
 test('soglie della vista: con una sola fonte raggiungibile non si scrive', () => {
   const view = buildCantonServices({ premiums: null, plateAuctions: null, pharmacyDuties: null, weather: recording('weather-snapshot', NOW) }, CANTON_GROUPS, { nowMs: NOW });
   assert.ok(viewThresholdFailures(view).length >= 1);
