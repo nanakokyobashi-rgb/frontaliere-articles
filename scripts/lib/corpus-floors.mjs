@@ -267,10 +267,15 @@ function isNewFamilySection(root, section) {
 }
 
 /**
- * Il verdetto di pavimento di una FAMIGLIA di sezioni (politica `family`):
- * somma dei sorgenti contro somma degli emessi. Una sezione nuova a 0 non pesa
- * ne' sull'una ne' sull'altra; una famiglia con articoli in sorgente e niente
- * di emesso e' un troncamento, esattamente come per una sezione storica.
+ * Il verdetto di pavimento di una FAMIGLIA di sezioni (politica `family`).
+ *
+ * Due condizioni, entrambe necessarie:
+ *   - nessuna sezione con articoli in sorgente puo' uscire a ZERO (`emptied`):
+ *     la somma non deve poter nascondere una sezione svuotata dietro le
+ *     altre, che e' il troncamento peggiore perche' tocca una sezione intera;
+ *   - la famiglia nel suo insieme deve reggere il pavimento relativo
+ *     (somma dei sorgenti contro somma degli emessi).
+ * Una sezione nuova a 0 in sorgente non pesa su nessuna delle due.
  *
  * @param {Array<{section: string, source: number, emitted: number}>} rows
  */
@@ -278,7 +283,15 @@ export function familyFloorVerdict(rows, retention = FLOOR_RETENTION) {
   const source = rows.reduce((total, row) => total + row.source, 0);
   const emitted = rows.reduce((total, row) => total + row.emitted, 0);
   const floor = floorFrom(source, retention);
-  return { sections: rows.map((row) => row.section), source, emitted, floor, truncated: emitted < floor };
+  const emptied = rows.filter((row) => row.source > 0 && row.emitted === 0).map((row) => row.section);
+  return {
+    sections: rows.map((row) => row.section),
+    source,
+    emitted,
+    floor,
+    emptied,
+    truncated: emitted < floor || emptied.length > 0,
+  };
 }
 
 /** Locali che build-api.mjs carica per ogni sezione. */

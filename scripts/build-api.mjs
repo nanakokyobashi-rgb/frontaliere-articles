@@ -428,7 +428,8 @@ if (familySitemapRows.length > 0) {
   if (verdict.truncated) {
     throw new Error(
       `family sitemaps (${verdict.sections.join(', ')}) have only ${verdict.emitted} urls against ${verdict.source} ` +
-        `emittable IT registry entries (floor ${verdict.floor}) — refusing to publish a truncated family`,
+        `emittable IT registry entries (floor ${verdict.floor}; emptied: ${verdict.emptied.join(', ') || 'none'}) ` +
+        '— refusing to publish a truncated family',
     );
   }
 }
@@ -505,7 +506,8 @@ function buildArchiveSitemap() {
     if (verdict.truncated) {
       throw new Error(
         `family archives (${verdict.sections.join(', ')}) have only ${verdict.emitted} entries against ` +
-          `${verdict.floor} required by the corpus floor — refusing to publish a truncated archive sitemap`,
+          `${verdict.floor} required by the corpus floor (emptied: ${verdict.emptied.join(', ') || 'none'}) ` +
+          '— refusing to publish a truncated archive sitemap',
       );
     }
   }
@@ -624,12 +626,18 @@ for (const section of rssSections) {
   }
   if (familyPolicy) familyRssRows.push({ section: section.id, source: section.articleCount, emitted: sectionItems });
 }
-if (familyRssRows.length > 0 && familyFloorVerdict(familyRssRows).source > 0
-    && familyRssRows.every((row) => row.emitted === 0)) {
-  throw new Error(
-    `rss: family sections (${familyRssRows.map((row) => row.section).join(', ')}) have articles but no <item> ` +
-      'in any feed — refusing to publish',
-  );
+// Per i feed vale solo la meta' «nessuna sezione svuotata» del verdetto di
+// famiglia: un feed e' una finestra (RSS_MAX_ITEMS), quindi la somma degli item
+// non si confronta con la somma degli articoli. Ogni sezione di famiglia con
+// articoli in sorgente deve emettere almeno un item, anche se le altre ne
+// emettono.
+if (familyRssRows.length > 0) {
+  const { emptied } = familyFloorVerdict(familyRssRows);
+  if (emptied.length > 0) {
+    throw new Error(
+      `rss: family section(s) ${emptied.join(', ')} have articles but no <item> in any feed — refusing to publish`,
+    );
+  }
 }
 
 // ── News-ticker payload ───────────────────────────────────────────

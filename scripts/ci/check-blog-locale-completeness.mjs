@@ -18,13 +18,33 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { detectLanguageWithConfidence } from '../../generator/scripts/lib/detect-language.mjs';
 import { CORPUS_SECTIONS } from '../lib/corpus-sections.mjs';
+import { floorFrom } from '../lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 // Le radici dei corpi vengono dal core (sezioni ATTIVE), non da una coppia
 // scritta a mano: una sezione accesa nel core e' sorvegliata senza toccare qui.
+// `floorPolicy` e `registryFile` decidono quali pavimenti valgono per la radice
+// (vedi `inspectBlogLocaleCompleteness`).
 export const BODY_ROOTS = Object.freeze(
-  CORPUS_SECTIONS.map((section) => Object.freeze({ rel: section.bodyDir, name: section.section })),
+  CORPUS_SECTIONS.map((section) => Object.freeze({
+    rel: section.bodyDir,
+    name: section.section,
+    floorPolicy: section.floorPolicy,
+    registryFile: section.registryFile,
+  })),
 );
+
+const REGISTRY_ID_RE = /^\s*id:\s*(?:'[^']+'|"[^"]+")/gm;
+
+/** Voci del registro sorgente; 0 se il registro non esiste (sezione di famiglia nuova). */
+function registryEntryCount(root, rel) {
+  try {
+    return (fs.readFileSync(path.join(root, rel), 'utf8').match(REGISTRY_ID_RE) ?? []).length;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return 0;
+    throw error;
+  }
+}
 export const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const TARGET_LOCALES = Object.freeze(['en', 'de', 'fr']);
 // Keep this in lockstep with buildBodyFile() in
@@ -304,17 +324,33 @@ export function inspectBlogLocaleCompleteness({
   minItalianFiles = MIN_ITALIAN_FILES,
   minItalianFields = MIN_ITALIAN_FIELDS,
   checkLanguage = false,
+  bodyRoots = BODY_ROOTS,
 } = {}) {
   const violations = [];
   const sections = [];
-  for (const bodyRoot of BODY_ROOTS) {
+  // I pavimenti ASSOLUTI (anti-checkout-sparse) valgono per le radici con
+  // politica `section`, le storiche. Una radice di famiglia (cantonale) parte
+  // legittimamente a zero corpi: per lei il riferimento e' il suo registro, e
+  // si giudica la famiglia — nessuna sezione con voci nel registro puo' avere
+  // zero corpi italiani, e il totale deve reggere il pavimento relativo.
+  const familyRows = [];
+  for (const bodyRoot of bodyRoots) {
     const italianDir = path.join(root, bodyRoot.rel, 'it');
     const italianFiles = listTsFiles(italianDir);
     const expectedByFile = new Map();
     const sourceByFile = new Map();
     let italianFields = 0;
+    const familyRoot = bodyRoot.floorPolicy === 'family';
+    if (familyRoot) {
+      familyRows.push({
+        section: bodyRoot.name,
+        rel: bodyRoot.rel,
+        registry: registryEntryCount(root, bodyRoot.registryFile),
+        files: italianFiles.length,
+      });
+    }
 
-    if (italianFiles.length < minItalianFiles) {
+    if (!familyRoot && italianFiles.length < minItalianFiles) {
       addViolation(violations, {
         code: 'source-floor',
         section: bodyRoot.name,
@@ -372,7 +408,7 @@ export function inspectBlogLocaleCompleteness({
         });
       }
     }
-    if (italianFields < minItalianFields) {
+    if (!familyRoot && italianFields < minItalianFields) {
       addViolation(violations, {
         code: 'source-field-floor',
         section: bodyRoot.name,
@@ -392,6 +428,31 @@ export function inspectBlogLocaleCompleteness({
       italianFiles: italianFiles.length,
       italianFields,
       expectedFiles: expectedByFile.size,
+    });
+  }
+
+  const familyRegistry = familyRows.reduce((total, row) => total + row.registry, 0);
+  const familyFiles = familyRows.reduce((total, row) => total + row.files, 0);
+  const familyFloor = floorFrom(familyRegistry);
+  for (const row of familyRows) {
+    if (row.registry > 0 && row.files === 0) {
+      addViolation(violations, {
+        code: 'family-source-floor',
+        section: row.section,
+        locale: 'it',
+        path: path.join(row.rel, 'it'),
+        message: `${row.rel}/it: 0 file italiani contro ${row.registry} voci del registro`,
+      });
+    }
+  }
+  if (familyRows.length > 0 && familyFiles < familyFloor) {
+    addViolation(violations, {
+      code: 'family-source-floor',
+      section: familyRows.map((row) => row.section).join(','),
+      locale: 'it',
+      path: familyRows.map((row) => `${row.rel}/it`).join(', '),
+      message: `famiglia ${familyRows.map((row) => row.section).join(', ')}: ${familyFiles} file italiani `
+        + `contro ${familyRegistry} voci dei registri (floor ${familyFloor})`,
     });
   }
 

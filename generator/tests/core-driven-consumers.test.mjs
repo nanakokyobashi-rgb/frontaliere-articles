@@ -17,7 +17,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -52,7 +52,10 @@ import {
 import { SECTIONS as SURFACE_SECTIONS } from '../../scripts/lib/article-surfaces.mjs';
 import { bodyRegex, sectionOf, shardOf } from '../../scripts/ci/fast-publish-section.mjs';
 import { sectionRebaseArgs } from '../../scripts/ci/rebase-section-args.mjs';
-import { BODY_ROOTS as LOCALE_BODY_ROOTS } from '../../scripts/ci/check-blog-locale-completeness.mjs';
+import {
+  BODY_ROOTS as LOCALE_BODY_ROOTS,
+  inspectBlogLocaleCompleteness,
+} from '../../scripts/ci/check-blog-locale-completeness.mjs';
 import { SECTIONS as RECONCILE_SECTIONS } from '../../scripts/reconcile-article-shards.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -253,6 +256,44 @@ test('pavimenti: il verdetto di famiglia rifiuta il troncamento, non la sezione 
   assert.equal(cut.truncated, true);
   assert.equal(cut.floor, 54);
   assert.deepEqual(cut.sections, ['canton-ti', 'canton-gr']);
+  // La somma non nasconde una sezione svuotata dietro le altre (review #2212).
+  const hidden = familyFloorVerdict([
+    { section: 'canton-ti', source: 3, emitted: 0 },
+    { section: 'canton-gr', source: 100, emitted: 100 },
+  ]);
+  assert.ok(hidden.emitted >= hidden.floor, 'il caso deve reggere il pavimento aggregato');
+  assert.equal(hidden.truncated, true);
+  assert.deepEqual(hidden.emptied, ['canton-ti']);
+});
+
+test('build-api: RSS di famiglia rifiuta ogni sezione con articoli e zero item, non solo la famiglia vuota', () => {
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /const \{ emptied \} = familyFloorVerdict\(familyRssRows\);/);
+  assert.doesNotMatch(build, /familyRssRows\.every\(/);
+});
+
+test('locale completeness: una radice di famiglia nuova non scatta i pavimenti assoluti, una svuotata si', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'core-locale-'));
+  const ti = { rel: 'content/blog-body-canton-ti', name: 'canton-ti', floorPolicy: 'family',
+    registryFile: 'content/cantons/canton-ti/registry.ts' };
+  const fresh = inspectBlogLocaleCompleteness({ root, bodyRoots: [ti] });
+  assert.deepEqual(fresh.violations, [], 'una sezione cantonale appena accesa, senza registro ne\' corpi, e\' legittima');
+  mkdirSync(path.join(root, 'content/cantons/canton-ti'), { recursive: true });
+  writeFileSync(path.join(root, ti.registryFile), ['a', 'b', 'c'].map((id) => `  {\n    id: '${id}',\n  },\n`).join(''));
+  const emptied = inspectBlogLocaleCompleteness({ root, bodyRoots: [ti] });
+  assert.ok(emptied.violations.some((v) => v.code === 'family-source-floor' && v.section === 'canton-ti'));
+  // Le radici storiche restano sui pavimenti assoluti.
+  const historical = inspectBlogLocaleCompleteness({ root, bodyRoots: [LOCALE_BODY_ROOTS[0]] });
+  assert.ok(historical.violations.some((v) => v.code === 'source-floor'));
+});
+
+test('publish-api: osserva corpus-sections e deriva dal core le cartelle dei corpi del preflight', () => {
+  const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  assert.match(wf, /^      - 'scripts\/lib\/corpus-sections\.mjs'$/m);
+  assert.match(wf, /^      - 'generator\/scripts\/lib\/corpus-paths\.mjs'$/m);
+  assert.match(wf, /import\('\.\/scripts\/lib\/corpus-sections\.mjs'\)/);
+  assert.match(wf, /git diff --name-only "\$BEFORE" HEAD -- "\$\{body_dir_list\[@\]\}"/);
+  assert.doesNotMatch(wf, /-- content\/blog-body content\/blog-body-ch/);
 });
 
 test('RSS: con la lista attiva di oggi nessun profilo cantonale viene chiesto all\'engine', () => {
