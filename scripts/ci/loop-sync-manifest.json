@@ -159,6 +159,16 @@
       }
     },
     {
+      "path": "scripts/ci/canton-generation-admit.mjs",
+      "mode": "corpus-only",
+      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run in_progress dei chiamanti cantonali, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
+      "baseline": {
+        "site": null,
+        "corpus": "6c122bb4827e9470",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section.mjs",
       "mode": "corpus-only",
       "reason": "Sezione e shard Pages di un fast-publish derivati da ARTICLE_SECTION_CORE (lista attiva): regex dei corpi, sezione di un corpo, shard di una sezione, con errore esplicito per le sezioni servite da R2 (shardKey null). Esiste solo qui perche' fast-publish-article.yml e publish-article-fast.mjs che lo usano pubblicano dal corpus; il sito non ha un fast-publish che derivi la sezione dal path di un corpo.",
@@ -175,6 +185,16 @@
       "baseline": {
         "site": null,
         "corpus": "9771a71da3aaa747",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/generate-canton-article-workflows.mjs",
+      "mode": "corpus-only",
+      "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "f978004d43015b6b",
         "alignedAt": "2026-10-05"
       }
     },
