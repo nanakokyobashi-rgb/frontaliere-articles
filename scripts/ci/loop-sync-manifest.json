@@ -2231,6 +2231,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/normalize-prompt-section-headings.mjs",
+      "mode": "corpus-only",
+      "reason": "Riporta a titoli normali, nel solo casing, le intestazioni `##`-`####` di un body `it` pubblicato che sono per intero un'etichetta di sezione del prompt in MAIUSCOLO (`## ESEMPIO CONCRETO`, `leaked-prompt-scaffolding`), decisione del proprietario del 2026-10-05 «Titoli normali». Lo usano solo `generator/scripts/retranslate-blocking-bodies.mjs` e `.github/workflows/bonifica-blocking-bodies.yml`, che il sito non ha: i body pubblicati e la loro bonifica vivono qui, il sito li consuma via HTTP, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "d908997d78893446",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/daily-brief-content.mjs",
       "mode": "corpus-only",
       "reason": "Composizione del Bollettino del Frontaliere, edizione datata quotidiana nata su questo repo. Nessun omonimo sul sito.",

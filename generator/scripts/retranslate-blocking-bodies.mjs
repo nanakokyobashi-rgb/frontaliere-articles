@@ -59,6 +59,14 @@
  * altra forma del marcatore resta intatta e si risolve a mano
  * (`planTitleMarkerRemoval`).
  *
+ * Nello stesso ramo, con la decisione del proprietario del 2026-10-05
+ * («Titoli normali»), le intestazioni `##`-`####` che sono per intero
+ * un'etichetta di sezione del prompt in MAIUSCOLO (`## ESEMPIO CONCRETO`,
+ * «marcatore di sezione del prompt» per la guardia) diventano titoli normali
+ * (`lib/normalize-prompt-section-headings.mjs`): cambia solo il casing di
+ * quelle righe, con la stessa prova del diff riga per riga e dei byte del
+ * file. Ogni altra forma dell'etichetta resta intatta (`skipped`).
+ *
  * E dalla regola di forma: l'uscita della cascata passa da `sanitizeBodyText()`
  * come nel percorso di produzione. Le graffe spaiate dell'MT (la chiusura mal
  * fatta delle virgolette basse tedesche) non sono nel vocabolario di
@@ -168,6 +176,7 @@ import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/strip-leaked-title-marker.mjs';
+import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/normalize-prompt-section-headings.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -1331,27 +1340,44 @@ export const TITLE_MARKER_REPAIR_CODE = 'leaked-prompt-scaffolding';
  *   - `forma-non-riparabile: <motivo>: <riga>`: il token compare in una forma
  *     che non e' una riga intera (intestazione, titolo su un'altra riga…);
  *   - `forma-non-riparabile: nessuna-riga-marcatore`: niente da togliere;
+ *   - `forma-non-riparabile: diff-oltre-le-intestazioni (<campo>)`: le
+ *     conversioni dichiarate per il campo non sono quelle di
+ *     `normalizePromptSectionHeadings` (riga assente, fuori ordine, non solo
+ *     casing) o lasciano un'intestazione-etichetta non convertita;
  *   - `forma-non-riparabile: diff-oltre-la-riga (<campo>)`: il testo che si
- *     scriverebbe (dopo la sanificazione) differisce
- *     dal pubblicato per piu' della riga tolta;
+ *     scriverebbe (dopo la sanificazione) differisce dal pubblicato, con le
+ *     intestazioni convertite, per piu' della riga tolta;
  *   - `forma-non-riparabile: file-oltre-la-riga`: riscrivere il campo
  *     cambierebbe altri byte del file (campo non nella forma canonica dello
  *     scrittore, caratteri di controllo che `writeAtomic` toglierebbe).
  *
- * Si riscrivono SOLO i campi da cui una riga e' stata tolta: gli altri restano
- * byte per byte come sono.
+ * Con `convertedByField` (decisione del 2026-10-05) la stessa prova copre le
+ * intestazioni-etichetta del prompt convertite nel solo casing: il pubblicato,
+ * con ESATTAMENTE quelle conversioni riapplicate, meno le righe tolte, deve
+ * essere il testo da scrivere.
+ *
+ * Si riscrivono SOLO i campi da cui una riga e' stata tolta o in cui
+ * un'intestazione e' stata convertita: gli altri restano byte per byte.
  */
 export function planTitleMarkerRemoval({
-  src, id, oldCodes = [], oldSections = {}, newSections = {}, removedByField = {}, skipped = [],
+  src, id, oldCodes = [], oldSections = {}, newSections = {}, removedByField = {}, convertedByField = {}, skipped = [],
 }) {
   const others = oldCodes.filter((code) => code !== TITLE_MARKER_REPAIR_CODE);
   if (others.length) return { issue: 'codici-misti', src: null };
   if (skipped.length) return { issue: `forma-non-riparabile: ${skipped.join(' | ')}`, src: null };
-  const changed = Object.keys(removedByField).filter((f) => removedByField[f]?.length);
+  const changed = [...new Set([...Object.keys(removedByField), ...Object.keys(convertedByField)])]
+    .filter((f) => removedByField[f]?.length || convertedByField[f]?.length);
   if (!changed.length) return { issue: 'forma-non-riparabile: nessuna-riga-marcatore', src: null };
   const fields = [...new Set([...Object.keys(oldSections), ...Object.keys(newSections)])];
   for (const f of fields) {
-    if (!diffIsExactlyRemovedLines(oldSections[f], newSections[f], removedByField[f] || [])) {
+    // Prima le intestazioni (righe 1:1, solo casing), poi la riga tolta.
+    const withHeadings = typeof oldSections[f] === 'string'
+      ? applyConvertedHeadings(oldSections[f], convertedByField[f] || [])
+      : oldSections[f];
+    if (withHeadings === null) {
+      return { issue: `forma-non-riparabile: diff-oltre-le-intestazioni (${f})`, src: null };
+    }
+    if (!diffIsExactlyRemovedLines(withHeadings, newSections[f], removedByField[f] || [])) {
       return { issue: `forma-non-riparabile: diff-oltre-la-riga (${f})`, src: null };
     }
   }
@@ -1751,9 +1777,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
 
   const newSections = {};
   let missingField = null;
-  // Solo sull'italiano con scaffolding: la riga del prompt da togliere, per campo.
+  // Solo sull'italiano con scaffolding: la riga del prompt da togliere e le
+  // intestazioni-etichetta del prompt da riportare a titoli normali, per campo.
   const titleMarkerRepair = isSourceLocale && oldCodes.includes(TITLE_MARKER_REPAIR_CODE)
-    ? { removedByField: {}, skipped: [] }
+    ? { removedByField: {}, convertedByField: {}, skipped: [] }
     : null;
   if (isSourceLocale) {
     // L'italiano e' il sorgente: ri-tradurlo non ha senso. Si riscrive IN
@@ -1767,12 +1794,19 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     // 2026-10-04, site 7682): e' la cancellazione del token esatto del prompt
     // che il gate stesso prescrive, non una riscrittura, e si scrive solo se
     // `planTitleMarkerRemoval` prova che il diff e' quella riga e nient'altro.
+    // Con la decisione del 2026-10-05 lo stesso ramo riporta a titoli normali
+    // le intestazioni che sono per intero un'etichetta del prompt in
+    // MAIUSCOLO: solo il casing di quelle righe, provato dallo stesso piano.
     // Ogni altra forma del marcatore, e ogni rigenerazione editoriale
     // (istituzioni fabbricate, scaffolding in prosa), resta un'altra
     // operazione: qui la pagina non si tocca.
     for (const f of Object.keys(italianSections)) {
       let source = italianSections[f];
       if (titleMarkerRepair) {
+        const headings = normalizePromptSectionHeadings(source);
+        source = headings.value;
+        titleMarkerRepair.convertedByField[f] = headings.converted;
+        titleMarkerRepair.skipped.push(...headings.skipped.map((s) => `${f} ${s}`));
         const stripped = stripLeakedTitleMarkerLine(source);
         source = stripped.value;
         titleMarkerRepair.removedByField[f] = stripped.removed;
@@ -1849,6 +1883,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
       oldSections,
       newSections: checkedSections,
       removedByField: titleMarkerRepair.removedByField,
+      convertedByField: titleMarkerRepair.convertedByField,
       skipped: titleMarkerRepair.skipped,
     })
     : null;
@@ -1863,6 +1898,9 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
   if (titleMarkerRepair) {
     row.removedLines = Object.values(titleMarkerRepair.removedByField).flat();
+    row.convertedHeadings = Object.values(titleMarkerRepair.convertedByField)
+      .flat()
+      .map(({ from, to }) => `${from} → ${to}`);
     // Sull'italiano non c'e' cascata: un campo che resta vuoto e' un campo
     // fatto della sola riga del prompt. La pagina resta intatta come prima
     // (fail-closed); cambia solo il motivo, che non deve citare la cascata.

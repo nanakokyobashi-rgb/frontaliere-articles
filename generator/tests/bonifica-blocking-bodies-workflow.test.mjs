@@ -682,6 +682,20 @@ test('body della PR: la rimozione della riga TITOLO ARTICOLO sull\'italiano non 
   assert.doesNotMatch(body, /cascata MT/);
   assert.match(body, /1 `it` da cui e' stata tolta la sola riga `TITOLO ARTICOLO: …` del prompt \(nessun testo generato/);
   assert.match(body, /`services\/locales\/blog-body\/it\/a`: codici leaked-prompt-scaffolding → nessuno \(tolta la sola riga `TITOLO ARTICOLO`\)\./);
-  assert.match(body, /`services\/locales\/blog-body\/it\/b` .* blocked: la riga `TITOLO ARTICOLO` non e' nella sola forma rimovibile/);
+  assert.match(body, /`services\/locales\/blog-body\/it\/b` .* blocked: la riga `TITOLO ARTICOLO` o l'intestazione-etichetta del prompt non e' nella sola forma riparabile/);
   assert.match(body, /`services\/locales\/blog-body\/it\/c` .* blocked: oltre allo scaffolding la pagina ha altri codici/);
+});
+
+test('body della PR: le intestazioni-etichetta riportate a titoli normali sull\'italiano non sono descritte come cascata MT', () => {
+  const it = (id, extra) => ({ id, locale: 'it', dir: DIR, codes: ['leaked-prompt-scaffolding'], oldCodes: ['leaked-prompt-scaffolding'], newCodes: [], removedLines: [], convertedHeadings: [], ...extra });
+  const report = { mode: 'apply', total: 2, results: [
+    it('a', { written: true, reason: 'pulita', convertedHeadings: ['## ESEMPIO CONCRETO → ## Esempio concreto'] }),
+    it('b', { written: false, reason: 'forma-non-riparabile: body2 etichetta-senza-intestazione: ESEMPIO CONCRETO:' }),
+  ] };
+  const body = buildPrBody({ report });
+  assert.equal(evaluateBodyContract(body).blocking, 0, body);
+  assert.doesNotMatch(body, /cascata MT/);
+  assert.match(body, /1 `it` con le intestazioni-etichetta del prompt in MAIUSCOLO riportate a titoli normali \(nessun testo generato, diff = solo il casing/);
+  assert.match(body, /`services\/locales\/blog-body\/it\/a`: codici leaked-prompt-scaffolding → nessuno \(intestazioni a titoli normali: `## ESEMPIO CONCRETO → ## Esempio concreto`\)\./);
+  assert.match(body, /`services\/locales\/blog-body\/it\/b` .* blocked: la riga `TITOLO ARTICOLO` o l'intestazione-etichetta del prompt non e' nella sola forma riparabile/);
 });

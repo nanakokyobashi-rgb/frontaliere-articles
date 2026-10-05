@@ -2030,3 +2030,146 @@ test('it non-scaffolding: una riscrittura che non e\' la rimozione con fatti vuo
     fs.rmSync(tmp, { recursive: true, force: true });
   }
 });
+
+// ── Italiano con intestazioni-etichetta del prompt: solo il casing ─────────
+//
+// Decisione del proprietario del 2026-10-05 («Titoli normali»): nelle pagine
+// `it` che la guardia segnala per «marcatore di sezione del prompt»
+// (`## ESEMPIO CONCRETO`) le intestazioni che sono, per intero, un'etichetta
+// del prompt in MAIUSCOLO diventano titoli normali, con un diff limitato a
+// quelle righe e al loro casing. Caso reale: body2 di
+// `frontaliere-piastrellista-ticino-stipendio-requisiti` (fixture con le sue
+// intestazioni e prosa neutra). Rosso se la pagina resta nello stock, se la
+// scrittura cambia altro oltre al casing di quelle righe, se una forma non
+// riconosciuta viene editata o se il percorso non dichiara le conversioni.
+
+const LABEL_HEADINGS = [
+  ['## INTRODUZIONE', '## Introduzione'],
+  ['## STIPENDIO E REQUISITI', '## Stipendio e requisiti'],
+  ['## RICONOSCIMENTO DEL TITOLO', '## Riconoscimento del titolo'],
+  ['## ESEMPIO CONCRETO', '## Esempio concreto'],
+  ['## CHECKLIST OPERATIVE', '## Checklist operative'],
+  ['## CONFRONTO TRA SCENARI PRATICI', '## Confronto tra scenari pratici'],
+  ['## CONCLUSIONE', '## Conclusione'],
+];
+const labelBody = (pick) => LABEL_HEADINGS.map((pair) => `${pair[pick]}\n${IT_LONG}`).join('\n\n');
+
+test('it scaffolding: --apply converte le intestazioni-etichetta del prompt nel solo casing', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-it-headings-'));
+  try {
+    const rel = 'content/blog-body/it/piastre.ts';
+    const fields = { body1: IT_BODY1, body2: labelBody(0), body3: IT_LONG };
+    const original = fileFor('piastre', fields);
+    writeItFixture(tmp, { [rel]: original });
+
+    const dry = runItScan(tmp);
+    assert.deepEqual(dry.results.map((r) => [r.id, r.reason, r.written]), [['piastre', 'pulita', false]]);
+    assert.deepEqual(dry.results[0].convertedHeadings, LABEL_HEADINGS.map(([from, to]) => `${from} → ${to}`));
+    assert.deepEqual(dry.results[0].removedLines, []);
+    assert.equal(fs.readFileSync(path.join(tmp, rel), 'utf8'), original, 'senza --apply il file resta byte per byte');
+
+    const applied = runItScan(tmp, '--apply');
+    assert.deepEqual(applied.results.map((r) => [r.id, r.reason, r.written]), [['piastre', 'pulita', true]]);
+    const after = fs.readFileSync(path.join(tmp, rel), 'utf8');
+    let expected = original;
+    for (const [from, to] of LABEL_HEADINGS) expected = expected.replace(from, to);
+    assert.equal(after, expected, 'il file cambia solo nelle righe di intestazione');
+    assert.equal(after.length, original.length, 'solo casing: stessa lunghezza');
+    assert.equal(after.toLowerCase(), original.toLowerCase(), 'solo casing');
+    assert.equal(readBodyField(after, 'piastre', 'body2'), labelBody(1));
+    assert.equal(readBodyField(after, 'piastre', 'body1'), IT_BODY1);
+    assert.equal(readBodyField(after, 'piastre', 'body3'), IT_LONG);
+
+    // La pagina esce dallo stock: un secondo giro non la trova piu'.
+    assert.deepEqual(runItScan(tmp).results, []);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('it scaffolding: riga TITOLO ARTICOLO e intestazioni-etichetta nella stessa pagina, entrambe e nient\'altro', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-it-headings-title-'));
+  try {
+    const rel = 'content/blog-body-ch/it/doppio.ts';
+    const original = fileFor('doppio', { body1: `${IT_BODY1}\n\n${TITLE_LINE}`, body2: labelBody(0), body3: IT_LONG });
+    writeItFixture(tmp, { [rel]: original });
+    const applied = runItScan(tmp, '--apply');
+    assert.deepEqual(applied.results.map((r) => [r.id, r.reason, r.written]), [['doppio', 'pulita', true]]);
+    assert.deepEqual(applied.results[0].removedLines, [TITLE_LINE]);
+    assert.equal(applied.results[0].convertedHeadings.length, LABEL_HEADINGS.length);
+    let expected = original.replace(`\\n${TITLE_LINE}`, '');
+    for (const [from, to] of LABEL_HEADINGS) expected = expected.replace(from, to);
+    assert.equal(fs.readFileSync(path.join(tmp, rel), 'utf8'), expected);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('it scaffolding: etichette fuori forma, codici misti e diff piu\' largo lasciano la pagina intatta', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-it-headings-skip-'));
+  try {
+    const rels = writeItFixture(tmp, {
+      // Etichetta senza `#`: il gate la segnala, ma non e' un'intestazione.
+      'content/blog-body/it/nuda.ts': fileFor('nuda', {
+        body1: IT_BODY1,
+        body2: `## INTRODUZIONE\n${IT_LONG}\n\nESEMPIO CONCRETO:\n${IT_LONG}`,
+        body3: IT_LONG,
+      }),
+      // Intestazioni convertibili E un'istituzione inventata.
+      'content/blog-body/it/misti.ts': fileFor('misti', {
+        body1: IT_BODY1,
+        body2: `${labelBody(0)}\n\nSecondo l'Ufficio federale delle imposte (UFI), circa 2.000 lavoratori sono coinvolti.`,
+        body3: IT_LONG,
+      }),
+      // La graffa spaiata la toglierebbe la sanificazione: un'altra modifica.
+      'content/blog-body/it/largo.ts': fileFor('largo', {
+        body1: IT_BODY1,
+        body2: `${labelBody(0)}\n\nIl permesso G resta valido. }`,
+        body3: IT_LONG,
+      }),
+    });
+    const before = snapshotFiles(tmp, rels);
+    const applied = runItScan(tmp, '--apply');
+    const byId = Object.fromEntries(applied.results.map((r) => [r.id, r]));
+    assert.deepEqual(Object.keys(byId).sort(), ['largo', 'misti', 'nuda']);
+    for (const r of applied.results) assert.equal(r.written, false, `${r.id}: ${r.reason}`);
+    assert.match(byId.nuda.reason, /^forma-non-riparabile: body2 etichetta-senza-intestazione: ESEMPIO CONCRETO:/);
+    assert.equal(byId.misti.reason, 'codici-misti');
+    assert.equal(byId.largo.reason, 'forma-non-riparabile: diff-oltre-la-riga (body2)');
+    assert.deepEqual(snapshotFiles(tmp, rels), before, 'nessuna di queste pagine va riscritta');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('planTitleMarkerRemoval: una conversione che non e\' solo casing di un\'intestazione-etichetta e\' rifiutata', () => {
+  const old = `## ESEMPIO CONCRETO\n${IT_LONG}`;
+  const src = fileFor('x', { body1: IT_BODY1, body2: old });
+  const base = {
+    src,
+    id: 'x',
+    oldCodes: ['leaked-prompt-scaffolding'],
+    oldSections: { body1: IT_BODY1, body2: old },
+    removedByField: {},
+    skipped: [],
+  };
+  const good = planTitleMarkerRemoval({
+    ...base,
+    newSections: { body1: IT_BODY1, body2: `## Esempio concreto\n${IT_LONG}` },
+    convertedByField: { body2: [{ from: '## ESEMPIO CONCRETO', to: '## Esempio concreto' }] },
+  });
+  assert.equal(good.issue, null);
+  assert.equal(readBodyField(good.src, 'x', 'body2'), `## Esempio concreto\n${IT_LONG}`);
+  // Testo scritto diverso dalla conversione dichiarata.
+  assert.deepEqual(planTitleMarkerRemoval({
+    ...base,
+    newSections: { body1: IT_BODY1, body2: `## Esempio pratico\n${IT_LONG}` },
+    convertedByField: { body2: [{ from: '## ESEMPIO CONCRETO', to: '## Esempio concreto' }] },
+  }), { issue: 'forma-non-riparabile: diff-oltre-la-riga (body2)', src: null });
+  // Conversione dichiarata che non e' quella del modulo.
+  assert.deepEqual(planTitleMarkerRemoval({
+    ...base,
+    newSections: { body1: IT_BODY1, body2: `## Esempio Concreto\n${IT_LONG}` },
+    convertedByField: { body2: [{ from: '## ESEMPIO CONCRETO', to: '## Esempio Concreto' }] },
+  }), { issue: 'forma-non-riparabile: diff-oltre-le-intestazioni (body2)', src: null });
+});
