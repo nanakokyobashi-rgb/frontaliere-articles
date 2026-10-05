@@ -540,12 +540,13 @@ test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', 
   assert.throws(() => cronExpression({ cronMinute: 5, cadenceHours: 6 }, 6), /sfasamento/);
 });
 
-test('push.paths: solo il proprio file e i path del corpus della propria sezione', () => {
+test('push.paths: solo i path del corpus della propria sezione', () => {
   for (const { canton, file, pushPaths, pushBranches } of CALLERS) {
     const { section } = canton;
     assert.equal(pushBranches, 'main', `${file}: un branch di backup non deve generare`);
-    assert.equal(pushPaths[0], `${WORKFLOWS_DIR}/${file}`, `${file}: il self-test e' il proprio file`);
-    const corpus = pushPaths.slice(1);
+    assert.ok(pushPaths.length >= 3, file);
+    assert.ok(pushPaths.every((p) => p.startsWith('content/')), `${file}: un caller cantonale non deve auto-avviarsi quando cambia il proprio YAML`);
+    const corpus = pushPaths;
     assert.ok(corpus.length >= 3, file);
     for (const p of corpus) {
       assert.ok(p.startsWith('content/'), `${file}: ${p} non e' corpus — un run che non produce scrive solo sotto data/, e non deve ripartire`);
