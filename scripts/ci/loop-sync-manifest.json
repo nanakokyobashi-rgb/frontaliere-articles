@@ -1971,7 +1971,7 @@
       "reason": "Cancellazione di UNA chiave R2 fra quelle delle sezioni cantonali (allowlist edge/sitemap-cantons.xml, edge/sitemap-articles-canton-<x>.xml, edge/sections/**): serve a ritirare l'indice sitemap-cantons.xml quando nessuna sezione e' piu' live, perche' un sitemapindex vuoto viola lo schema e il Worker deve tornare al 404. Fratello di upload-cdn-file.sh (additivo per contratto). Corpus-only: la pubblicazione R2 delle sezioni cantonali e' solo del corpus (P7).",
       "baseline": {
         "site": null,
-        "corpus": "30589f618b72bfeb",
+        "corpus": "bf236684aef08222",
         "alignedAt": "2026-10-05"
       }
     },
@@ -1981,7 +1981,7 @@
       "reason": "Il registro delle sezioni articolo cantonali visto dal pubblicatore (P7 del piano sezioni cantonali, D3/D9/D14): validazione di sections/registry.json contro il core (insieme chiuso, parita' di kind/canton/indexSlug/topics, live solo se attiva) e contro le regole di parseCorpusSectionRegistry del Worker del sito (prefissi, forma canonica, redirect same-origin, cicli), kill-switch Remote Config CANTON_ARTICLE_SECTIONS_KILL col marker RC_ENV_LOADED, costruzione di sections.json, della copia edge/sections/registry.json per il Worker e dell'indice sitemap-cantons.xml. Corpus-only: il registro e la pubblicazione R2 delle sezioni vivono solo qui; il sito ne applica la regola nel Worker leggendo il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "1f14a6fe87bd1897",
+        "corpus": "cdbd522399ecd101",
         "alignedAt": "2026-10-05"
       }
     },
