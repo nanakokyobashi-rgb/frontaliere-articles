@@ -148,6 +148,18 @@ function checkWindow(name) {
     if (!Number.isInteger(s?.totalSamples) || s.totalSamples < 0) {
       fail(`${SOURCE}: ${name}.${slug}.totalSamples is not a non-negative integer — refusing`);
     }
+    // `canton` (URL group code, e.g. TI, BASILEA) decides which canton's
+    // ranking a crossing enters. Absent is tolerated — a window published
+    // before the field existed: non-Ticino rankings then rank nothing and the
+    // generator refuses the empty article. Present, it must be a group code or
+    // null (a crossing no longer in the site registry): a lowercase name or a
+    // BFS half-canton code would silently file crossings under no ranking.
+    if (s && 'canton' in s && s.canton !== null && !/^(?:[A-Z]{2}|APPENZELLO|BASILEA)$/.test(String(s.canton))) {
+      fail(`${SOURCE}: ${name}.${slug}.canton is ${JSON.stringify(s.canton)}, not a canton URL group code — refusing`);
+    }
+    if (s?.canton === 'BS' || s?.canton === 'BL' || s?.canton === 'AI' || s?.canton === 'AR') {
+      fail(`${SOURCE}: ${name}.${slug}.canton is the half-canton ${s.canton}, not its URL group — refusing`);
+    }
   }
   return Object.keys(per).length;
 }

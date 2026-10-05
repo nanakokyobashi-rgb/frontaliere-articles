@@ -3,6 +3,7 @@ node_modules/
 generator/data/border-wait-averages.json
 .tmp/
 generator/data/border-wait-ranking-window.json
+generator/data/road-events.json
 data/events.json
 generator/data/fuel-prices-cantons.json
 

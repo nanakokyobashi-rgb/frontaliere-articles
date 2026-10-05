@@ -97,7 +97,9 @@ export const REWIRE_CONTRACTS = [
     fixture: 'generator/tests/fixtures/rewire/border-wait-ranking-window.json',
     recorded: {
       at: '2026-08-10',
-      trimmedTo: '10 valichi sui 141 pubblicati (8 ticinesi + 2 no), numeri non alterati',
+      trimmedTo:
+        '10 valichi sui 141 pubblicati (8 ticinesi + 2 no), numeri non alterati; `canton` aggiunto ' +
+        '2026-10-05 dalla finestra pubblicata col campo nuovo (P9c), valori non alterati',
     },
     readBy: [
       {
@@ -111,11 +113,12 @@ export const REWIRE_CONTRACTS = [
           'perCrossing',
           'weightedAvgMinutes',
           'totalSamples',
+          'canton',
         ],
       },
       {
         file: 'generator/scripts/generate-border-wait-ranking-article.mjs',
-        fields: ['current', 'previous', 'perCrossing'],
+        fields: ['current', 'previous', 'perCrossing', 'canton'],
       },
       {
         file: 'generator/scripts/lib/border-wait-ranking.mjs',
@@ -275,6 +278,46 @@ export const REWIRE_CONTRACTS = [
         'producer degli hub cantonali (P10) deve cablare `npm run refresh:fuel-cantons` nel proprio ' +
         'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
         'solo dal `--check` di rewire-contract-watch.yml.',
+    },
+  },
+  {
+    id: 'road-events',
+    artifact: 'road-events.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/collect-road-events.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-road-events.mjs',
+      envUrl: 'ROAD_EVENTS_URL',
+      cache: 'generator/data/road-events.json',
+    },
+    failureMode: 'soft',
+    symptom:
+      'chiusure, cantieri e disagi del trasporto pubblico per cantone (P9c). Nessun generatore li ' +
+      'legge ancora; quando gli hub mobilita\' cantonali li useranno (P11), un `canton` col codice ' +
+      'BFS del semicantone (BS invece di BASILEA) o un tipo fuori dai quattro filerebbe gli eventi ' +
+      'sotto nessun hub, in silenzio.',
+    fixture: 'generator/tests/fixtures/rewire/road-events.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo:
+        '9 eventi sui 702 di un run del producer (5 ASTRA DATEX II in TI/BASILEA/GE/BE, uno con geo; ' +
+        '4 dai feed cantonali FR/GE/BASILEA/TI), sources ridotte agli stessi, testi non alterati',
+    },
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-road-events.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'events', 'id', 'canton', 'type', 'title', 'url', 'validFrom', 'validTo', 'source', 'observedAt'],
+      },
+    ],
+    producedUnread: ['sources', 'titleByLocale', 'publishedAt', 'geo'],
+    notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora il dataset: gli hub mobilita\' cantonali e i loro articoli ' +
+        'arrivano con P11 del programma sezioni per cantone, che cablera\' `npm run refresh:road-events` ' +
+        'nel workflow che li genera e spostera\' questa voce in `workflows`.',
     },
   },
 ];

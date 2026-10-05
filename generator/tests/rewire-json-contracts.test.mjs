@@ -68,13 +68,13 @@ const TODAY = new Date().toISOString().slice(0, 10);
 
 /**
  * Il payload registrato, rimesso in data quando il contratto lo richiede.
- * Hanno un gate di staleness il border-wait window e il dataset carburanti per
- * cantone; gli altri no.
+ * Hanno un gate di staleness il border-wait window, il dataset carburanti per
+ * cantone e road-events; gli altri no.
  */
 function servable(c) {
   const payload = readFixture(c);
   if (c.id === 'border-wait-window') return freshenWindow(payload, TODAY);
-  if (c.id === 'fuel-cantons') return freshenGeneratedAt(payload, new Date().toISOString());
+  if (c.id === 'fuel-cantons' || c.id === 'road-events') return freshenGeneratedAt(payload, new Date().toISOString());
   return payload;
 }
 
@@ -188,8 +188,8 @@ const mutated = (c, fn) => {
 test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', () => {
   assert.equal(
     REWIRE_CONTRACTS.length,
-    4,
-    'il REWIRE set e\' di tre artefatti (issue #101) piu\' il dataset carburanti per cantone (P9b)',
+    5,
+    'il REWIRE set e\' di tre artefatti (issue #101) piu\' i dataset carburanti (P9b) e road-events (P9c) per cantone',
   );
   const missing = [];
   for (const c of REWIRE_CONTRACTS) {
@@ -361,6 +361,18 @@ const MUTATIONS = {
       /days ago — refusing to build a ranking article from stale data/,
       'Il publisher fermo e\' il fallimento che sembra un successo: numeri del mese scorso, articolo di questa settimana.',
     ],
+    [
+      'canton col codice del semicantone',
+      mutated(c, (p) => { p.current.perCrossing['anieres'].canton = 'BS'; }),
+      /canton is the half-canton BS, not its URL group/,
+      'Le classifiche per cantone usano il codice del GRUPPO URL (BASILEA): BS non entrerebbe in nessuna.',
+    ],
+    [
+      'canton come nome invece che codice',
+      mutated(c, (p) => { p.current.perCrossing['anieres'].canton = 'Ginevra'; }),
+      /canton is "Ginevra", not a canton URL group code/,
+      'Un nome localizzato non combacia con nessun --canton: il valico sparirebbe dalla sua classifica.',
+    ],
   ],
   'border-wait-averages': (c) => [
     [
@@ -478,6 +490,44 @@ const MUTATIONS = {
       mutated(c, (p) => { p.records[0].side = 'LI'; }),
       /is not CH\|FR\|AT\|IT\|DE/,
       'Il blocco dati conosce cinque lati: un sesto verrebbe ignorato o mal etichettato.',
+    ],
+  ],
+  'road-events': (c) => [
+    [
+      'events[] vuoto',
+      mutated(c, (p) => { p.events = []; }),
+      /carries zero events/,
+      'Zero eventi in cache = hub mobilita\' vuoti per tutti i cantoni.',
+    ],
+    [
+      'schemaVersion diverso',
+      mutated(c, (p) => { p.schemaVersion = 2; }),
+      /schemaVersion is 2, expected 1/,
+      'Una forma nuova non va interpretata con le regole della vecchia.',
+    ],
+    [
+      'canton col codice del semicantone',
+      mutated(c, (p) => { p.events[0].canton = 'BL'; }),
+      /half-canton BL, not its URL group/,
+      'Gli hub sono per gruppo URL (BASILEA, APPENZELLO): BL non ne raggiungerebbe nessuno.',
+    ],
+    [
+      'tipo fuori dai quattro',
+      mutated(c, (p) => { p.events[0].type = 'incidente'; }),
+      /type "incidente" is not one of/,
+      'Il tipo decide in quale blocco dell\'hub finisce l\'evento.',
+    ],
+    [
+      'url non https',
+      mutated(c, (p) => { p.events.find((e) => e.url).url = 'http://example.org/x'; }),
+      /url is not https or null/,
+      'Un link stampato in un articolo deve essere https.',
+    ],
+    [
+      'snapshot vecchio di giorni',
+      mutated(c, (p) => { p.generatedAt = '2026-01-01T00:00:00.000Z'; }),
+      /refusing stale road events/,
+      'Il collector fermo e\' il fallimento che sembra un successo: chiusure gia\' riaperte date per attive.',
     ],
   ],
   'events-dataset': (c) => [
