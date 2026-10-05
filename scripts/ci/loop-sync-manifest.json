@@ -2057,10 +2057,11 @@
     {
       "path": "generator/scripts/lib/ai-meta-response.mjs",
       "sitePath": "scripts/lib/ai-meta-response.mjs",
-      "mode": "identical",
-      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Nato sul sito con la scheda AI-REFUSAL (58 titoli e 40 descrizioni di annunci vivi pubblicati cosi', misura del 2026-10-05); puro e senza import proprio per poter essere byte-identico.",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616",
+      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. La copia del sito e' stata introdotta da valerielinc-ops/frontaliere-si-o-no#11616, ancora aperta: qui i byte coincidono, ma il blob non e' nella storia di `main` del sito, quindi resta pending e tracciata finche' la PR non atterra; dopo, promuovere a `identical` con `loop-drift-check --init --only`.",
       "baseline": {
-        "site": "0e5274d45566119d",
+        "site": null,
         "corpus": "0e5274d45566119d",
         "alignedAt": "2026-10-05"
       }
