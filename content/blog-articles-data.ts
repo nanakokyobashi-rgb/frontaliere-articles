@@ -11002,7 +11002,6 @@ const RAW_ARTICLES = [
  date: '2026-04-28T17:51:13.855Z',
  image: '/images/blog/nuova-pista-ciclopedonale-bodio-giornico-2026.webp',
  hasCalculator: true,
- canton: ['TI'],
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },

@@ -119,6 +119,8 @@ describe('omonimi e falsi amici', () => {
     assert.equal(isInCantonArea('AG', 'Pendolari dal Baden-Württemberg.'), false);
     assert.equal(isInCantonArea('TI', 'Il Parco del Ticino in Lombardia.'), false);
     assert.equal(isInCantonArea('TI', 'Boffalora sopra Ticino festeggia.'), false);
+    assert.equal(isInCantonArea('TI', 'Fiume Ticino in secca a Sesto Calende.'), false);
+    assert.equal(isInCantonArea('TI', 'Gli argini del Ticino cedono a Pavia.'), false);
     assert.equal(isInCantonArea('BE', 'Un bovaro bernese in canile.'), false);
     assert.equal(isInCantonArea('ZH', 'Uno studio dell\'ETH di Zurigo sul Bedretto.'), false);
     assert.equal(isInCantonArea('GR', 'Il WEF di Davos apre con Trump. A Davos neve.'), false);
@@ -136,6 +138,10 @@ describe('omonimi e falsi amici', () => {
     assert.equal(isInCantonArea('TI', 'Gordola: revocato l\'avviso di scomparsa.'), true);
     // «Sessa Aurunca»: il nome e' seguito da un'altra parola maiuscola.
     assert.equal(isInCantonArea('TI', 'Un incidente a Sessa Aurunca.'), false);
+    // Omonimi esterni con complemento: non il comune ticinese.
+    assert.equal(isInCantonArea('TI', 'Un incidente a Sant\'Antonino di Susa.'), false);
+    assert.equal(isInCantonArea('TI', 'Festa a Castel San Pietro Terme.'), false);
+    assert.equal(isInCantonArea('TI', 'Un cantiere a Sant\'Antonino, vicino a Bellinzona.'), true);
   });
 
   test('la residenza di una persona non e\' il luogo della notizia', () => {
@@ -337,6 +343,8 @@ describe('campo canton nel registry', () => {
   test('codici validati', () => {
     assert.throws(() => renderCantonLine(['ticino'], ''), /non valido/u);
     assert.throws(() => renderCantonLine(["TI'"], ''), /non valido/u);
+    assert.throws(() => renderCantonLine(['XX'], ''), /non valido/u);
+    assert.throws(() => renderCantonLine(['BL'], ''), /non valido/u);
     assert.equal(renderCantonLine(['BASILEA', 'APPENZELLO'], ' '), " canton: ['BASILEA', 'APPENZELLO'],");
   });
 

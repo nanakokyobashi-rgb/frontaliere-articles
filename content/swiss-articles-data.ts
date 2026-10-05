@@ -24500,6 +24500,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     image: '/images/blog/lugano-trasparenza-partecipate.webp',
     hasCalculator: true,
     articleType: 'news',
+    canton: ['TI'],
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },

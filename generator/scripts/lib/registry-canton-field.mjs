@@ -11,12 +11,26 @@
  * `generator/data/canton-url-slugs.json`, ordinati per punteggio decrescente.
  * Assente = nessun cantone assegnato (un articolo nazionale o italiano).
  *
- * Solo funzioni pure su testo: le importano il backfill e i test `node --test`
+ * Funzioni su testo e solo builtin (l'unica lettura e' l'elenco dei codici da
+ * `canton-url-slugs.json`): le importano il backfill e i test `node --test`
  * senza `npm ci`, e il registry resta un sorgente TS letto come testo (stesso
  * pattern di `registry-article-type.mjs:readRegistryEntries`).
  */
 
-const CODE_RE = /^[A-Z]{2}$|^(?:APPENZELLO|BASILEA)$/u;
+import { readFileSync } from 'node:fs';
+
+/**
+ * I codici ammessi sono i 24 gruppi URL di `generator/data/canton-url-slugs.json`
+ * (una sorgente sola): un codice che l'hub non risolve non entra nel registry.
+ */
+let _codes = null;
+export function cantonGroupCodes() {
+  if (_codes === null) {
+    const file = new URL('../../data/canton-url-slugs.json', import.meta.url);
+    _codes = new Set(Object.keys(JSON.parse(readFileSync(file, 'utf8')).cantons));
+  }
+  return _codes;
+}
 
 /**
  * Le voci del registry con la loro posizione: [{ id, start, end, text }].
@@ -51,8 +65,9 @@ export function readRegistryCantons(source) {
 
 /** La riga `canton: [...]`, con i codici validati (fail-closed). */
 export function renderCantonLine(cantons, propIndent) {
+  const codes = cantonGroupCodes();
   for (const c of cantons) {
-    if (!CODE_RE.test(c)) throw new Error(`renderCantonLine: codice cantone non valido ${JSON.stringify(c)}`);
+    if (!codes.has(c)) throw new Error(`renderCantonLine: codice cantone non valido ${JSON.stringify(c)}`);
   }
   return `${propIndent}canton: [${cantons.map((c) => `'${c}'`).join(', ')}],`;
 }

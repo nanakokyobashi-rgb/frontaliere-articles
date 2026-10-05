@@ -18,7 +18,9 @@
  * assegnazioni da verificare a mano.
  *
  * Idempotente: rieseguito su un registry gia' riempito non cambia nulla, e
- * riallinea le voci se il classificatore o il testo cambiano.
+ * riallinea le voci se il classificatore o il testo cambiano. Ogni registry e'
+ * scritto in modo atomico, ma i due registry non insieme: un'interruzione fra
+ * i due lascia il secondo come prima, e un nuovo `--write` lo completa.
  */
 
 import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';

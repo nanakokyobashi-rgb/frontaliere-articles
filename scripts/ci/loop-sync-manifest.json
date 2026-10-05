@@ -2339,7 +2339,7 @@
       "reason": "Classificatore deterministico (nessun LLM) del campo multi-label `canton` degli articoli frontaliere/svizzera, D13 del piano sezioni cantonali: 24 gruppi URL di canton-url-slugs.json, nomi del cantone in quattro lingue, demonimi, comuni >= 10'000 abitanti e comuni minori in forma locativa da generator/data/canton-classifier-places.json, dominio della fonte da canton-sections.json; omonimi (Berna governo federale, Zug, Giura, comuni di piu' cantoni), residenza delle persone, cornice «frontalieri che lavorano in Ticino» e portata nazionale esclusi. Lo usano il backfill generator/scripts/backfill-article-cantons.mjs e create-article.mjs alla registrazione. Corpus-only: il registry e la generazione vivono solo in questo repo e il campo non entra nell'API pubblicata.",
       "baseline": {
         "site": null,
-        "corpus": "80c6d20860aa899b",
+        "corpus": "e56c5e34fea24853",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2349,7 +2349,7 @@
       "reason": "Lettura e scrittura testuale della riga `canton: [...]` nelle voci di content/*-articles-data.ts (inserita dopo articleType, idempotente, codici validati); importata da registry-article-type.mjs (renderRegistryEntry), dal backfill e dai test senza `npm ci`. Corpus-only: il registry vive solo qui, il sito legge articles.json attraverso l'allowlist di scripts/lib/registry-api-entry.mjs che non contiene `canton`.",
       "baseline": {
         "site": null,
-        "corpus": "836e13ac1b333d63",
+        "corpus": "4f996899ef5c3532",
         "alignedAt": "2026-10-05"
       }
     },

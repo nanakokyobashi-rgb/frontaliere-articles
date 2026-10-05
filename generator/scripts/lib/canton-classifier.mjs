@@ -69,7 +69,7 @@
  *      che lavorano in Ticino», FRAMING_PHRASES) non conta fuori dal titolo.
  * Il dominio della fonte aggiunge punti ma non ancora mai da solo un cantone.
  *
- * Misura del 2026-10-05 (backfill sui 6741 articoli frontaliere+svizzera):
+ * Misura del 2026-10-05 (backfill sui 6744 articoli frontaliere+svizzera):
  * 3021 articoli con almeno un cantone, campione di 50 verificato a mano nella
  * PR che introduce questo modulo.
  *
@@ -280,6 +280,9 @@ const EXCLUDED_PHRASES = [
   /Friburgo\s+(?:in|im)\s+Br(?:isgovia|eisgau)/giu,
   /Freiburg\s+(?:im|in)\s+Breisgau/giu,
   /\b(?:Parco|parco|Valle|valle|fiume|Fiume|sponda|sponde|Consorzio|consorzio)\s+(?:\w+\s+){0,2}(?:del|dal)\s+Ticino/gu,
+  // Il fiume nominato direttamente: «fiume Ticino», «il Ticino in piena»
+  // resta ambiguo e conta, ma «fiume Ticino» / «argini del Ticino» no.
+  /\b(?:[Ff]iume|[Aa]rgin[ei]|[Gg]reto|[Ss]ponda|[Ss]ponde|[Ff]oce|[Pp]iena)\s+(?:(?:del|dal)\s+)?Ticino/gu,
   /\b(?:sopra|sul|lungo\s+il|del\s+fiume)\s+Ticino/gu,
   /\b(?:Oleggio|Boffalora|Robecco|Bernate|Cassolnovo|Turbigo|Vizzola|Sesto\s+Calende|Vigevano|Pavia)\s+(?:sul\s+|sopra\s+)?Ticino/gu,
   /\bbovar[oi]\s+bernes[ei]/giu,
@@ -318,6 +321,9 @@ const FRAMING_PHRASES = [
 const CLUB_LEADS = new Set([
   'il', 'lo', 'del', 'dello', 'al', 'allo', 'dal', 'dallo', 'col', 'contro', 'sul', 'sullo',
 ]);
+
+/** Connettivi che legano un toponimo al suo complemento: «di Susa», «sul Naviglio». */
+const PLACE_COMPLEMENT_LINKS = new Set(['di', 'd', 'sul', 'sulla']);
 
 /** Articoli indeterminativi: «un ticinese», «una vallesana» sono persone. */
 const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
@@ -667,6 +673,20 @@ export function createCantonClassifier({
     return opens && /^\s*[:,\u2013\u2014]/u.test(text.slice(tokens[j].end));
   }
 
+  /**
+   * «Sant'Antonino di Susa»: un comune minore seguito da di/sul + parola
+   * maiuscola e' un altro luogo (la classe di OUTSIDE_AREA_HOMONYMS_RE di
+   * local-news.mjs, senza elencarli). Non «della»/«del»: «la filiale di
+   * Bioggio della Banca Raiffeisen» e' ancora Bioggio.
+   */
+  function followedByPlaceComplement(text, tokens, j) {
+    const link = tokens[j + 1];
+    const name = tokens[j + 2];
+    if (!link || !name || !name.upper || !PLACE_COMPLEMENT_LINKS.has(link.norm)) return false;
+    return /^[\s]+$/u.test(text.slice(tokens[j].end, link.start))
+      && /^[\s']+$/u.test(text.slice(link.end, name.start));
+  }
+
   function followedByCapital(text, tokens, j) {
     const next = tokens[j + 1];
     if (!next || !next.upper) return false;
@@ -709,7 +729,8 @@ export function createCantonClassifier({
         const unconfirmed = entry.guarded && !isCantonContext(text, tokens, i);
         if (unconfirmed && !keepUnconfirmed) continue;
         if (entry.locativeOnly
-          && ((!isLocative(text, tokens, i) && !isDateline(text, tokens, i, j)) || followedByCapital(text, tokens, j))) continue;
+          && ((!isLocative(text, tokens, i) && !isDateline(text, tokens, i, j))
+            || followedByCapital(text, tokens, j) || followedByPlaceComplement(text, tokens, j))) continue;
         if (cityKeys.has(best.key) && isClubContext(text, tokens, i)) continue;
         if (entry.kind !== 'name' && explicitOtherCanton(text, tokens[j].end, entry.group)) continue;
         if (entry.kind === 'name' && entry.group === 'UR' && followedByCapital(text, tokens, j)) continue;
