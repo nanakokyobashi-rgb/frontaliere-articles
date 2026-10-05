@@ -449,12 +449,15 @@ async function runResolveHero({ root, image, apiTitle, original = { width: 2560,
   };
   const resolveHeroImage = new Function(
     'fs', 'path', 'PROJECT_ROOT', 'fetch', '__sharp', 'console', 'appendCatalogEntry', 'findBestFallbackImage',
-    'STATIC_FALLBACK_IMAGE', 'BLOG_IMAGE_HARD_MAX_BYTES', 'resolveCommonsPick', 'creditRecordForCover', 'webpDimensions',
+    'STATIC_FALLBACK_IMAGE', 'BLOG_IMAGE_TARGET_MAX_BYTES', 'BLOG_IMAGE_HARD_MAX_BYTES',
+    'BLOG_IMAGE_WIDTH', 'BLOG_IMAGE_HEIGHT', 'BLOG_IMAGE_QUALITY_PASSES', 'resolveCommonsPick',
+    'creditRecordForCover', 'webpDimensions',
     'writeCreditRecord',
     `${RESOLVE_HERO.replace(SHARP_IMPORT, '__sharp')}\nreturn resolveHeroImage;`,
   )(
     fs, path, root, download, sharp, quiet, (p) => calls.catalog.push(p), () => '/images/places/lugano-view.webp',
-    'lugano-view.webp', 320 * 1024,
+    'lugano-view.webp', 190 * 1024, 320 * 1024, 1200, 675,
+    [75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
     (args) => credit.resolveCommonsPick({ ...args, fetchImpl: apiFetch, fetchedAt: '2026-10-04' }),
     credit.creditRecordForCover, credit.webpDimensions, writeCreditRecord,
   );
