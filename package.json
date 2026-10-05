@@ -28,6 +28,8 @@
     "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
     "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs",
     "refresh:events": "node generator/scripts/refresh-events-dataset.mjs",
+    "refresh:canton-tax": "node generator/scripts/refresh-canton-tax.mjs",
+    "refresh:pension-parameters": "node generator/scripts/refresh-pension-parameters.mjs",
     "test:shell-contract": "npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs"
   }
 }

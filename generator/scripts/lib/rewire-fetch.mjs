@@ -1,6 +1,6 @@
 /**
- * Fetch helper for the three REWIRE consumers (border-wait window,
- * averages, events). Cloudflare returns HTTP 403 to GitHub Actions'
+ * Fetch helper for the REWIRE consumers (border-wait window, averages,
+ * events, canton-tax, pension-parameters). Cloudflare returns HTTP 403 to GitHub Actions'
  * default Node/undici User-Agent (measured 2026-08-25 on
  * generator-ci.yml: both CDN and same-origin). A named UA is the
  * first retry; callers then decide the policy via explicit env:

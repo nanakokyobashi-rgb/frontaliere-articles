@@ -4,6 +4,8 @@ generator/data/border-wait-averages.json
 .tmp/
 generator/data/border-wait-ranking-window.json
 data/events.json
+generator/data/canton-tax.json
+generator/data/pension-parameters.json
 
 # Responsive 480w WebP thumbnails: the .webp outputs are COMMITTED (git is the
 # cache, see scripts/generate-image-thumbnails.mjs). The SHA manifest stays

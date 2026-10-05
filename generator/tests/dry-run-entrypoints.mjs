@@ -56,6 +56,10 @@ const ENTRY_POINTS = [
   // stati aggiunti (issue #101). L'omissione non era visibile: la lista e'
   // scritta a mano e nessun controllo la confronta con `generator/scripts/`.
   'refresh-events-dataset.mjs',
+  // I due `refresh` dei dataset annuali D11 (fisco, pensioni): stessa forma
+  // degli altri, `--help` e `DRY_RUN` inclusi.
+  'refresh-canton-tax.mjs',
+  'refresh-pension-parameters.mjs',
 ];
 
 /**
