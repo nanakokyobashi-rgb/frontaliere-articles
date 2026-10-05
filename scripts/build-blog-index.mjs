@@ -87,6 +87,7 @@ import {
 // nessun consumer puo' verificare prima di usarla.
 import { declareApiArtifacts, byteSize } from './lib/api-manifest.mjs';
 import { buildImageCreditsIndex, corpusCreditReader } from './lib/image-credit-records.mjs';
+import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -101,10 +102,15 @@ const API_ROOT = path.dirname(OUT);
 const writtenShards = {};
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const SECTIONS = [
-  { name: 'frontaliere', registry: 'content/blog-articles-data.ts', metaPrefix: 'blog-meta' },
-  { name: 'svizzera', registry: 'content/swiss-articles-data.ts', metaPrefix: 'blog-meta-ch' },
-];
+// Le sezioni ATTIVE del core, non una terza copia scritta a mano: registro e
+// prefisso meta vengono da `scripts/lib/corpus-sections.mjs`, che li deriva da
+// `ARTICLE_SECTION_CORE`. Con le due sezioni storiche gli shard sono gli stessi
+// di sempre (`blog-index-frontaliere-*`, `blog-index-svizzera-*`).
+const SECTIONS = CORPUS_SECTIONS.map((section) => ({
+  name: section.section,
+  registry: section.registryFile,
+  metaPrefix: path.basename(section.metaPrefix),
+}));
 const expectedShards = new Set(
   SECTIONS.flatMap((section) => LOCALES.flatMap((locale) => [
     path.relative(API_ROOT, path.join(OUT, `blog-index-${section.name}-${locale}.json`)),
@@ -154,6 +160,10 @@ const creditReader = corpusCreditReader(ROOT, (message) => creditWarnings.push(m
  * azzera INSIEME. `readRegistry` in quel caso ritorna `[]` senza lanciare, e
  * `0 < 0` e' falso: senza questa eccezione lo script scriverebbe e
  * pubblicherebbe un indice VUOTO sopra quello live.
+ *
+ * Una sezione di famiglia (cantonale) appena accesa ha invece pavimento 0 per
+ * costruzione (`sectionFloor`, politica `family`): parte senza articoli, e il
+ * «content/ non materializzato» lo rifiutano comunque le sezioni storiche.
  */
 function sectionEntryFloor(section) {
   return sectionFloor(ROOT, section);

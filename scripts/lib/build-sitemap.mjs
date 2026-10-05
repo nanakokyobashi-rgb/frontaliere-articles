@@ -1,6 +1,6 @@
 /**
- * Pure sitemap-XML builder shared by both article sections (frontaliere,
- * svizzera). Extracted out of scripts/build-api.mjs (issue #138 item 1) so it
+ * Pure sitemap-XML builder shared by every active article section (frontaliere,
+ * svizzera today, from the section core). Extracted out of scripts/build-api.mjs (issue #138 item 1) so it
  * can be imported by `node --test` without pulling in the rest of that script
  * — which loads the corpus's `.ts` content files via extensionless relative
  * specifiers and therefore requires `tsx`. The `tests (node --test)` gate
@@ -17,6 +17,7 @@
  */
 
 import { isReservedPublishedSlug } from './published-slug-guard.mjs';
+import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 
 export const SITE = 'https://frontaliereticino.ch';
 
@@ -30,20 +31,22 @@ export const xmlEsc = (s) =>
 // Per-locale section prefix. hreflang alternates are NOT optional decoration: the
 // site's committed sitemaps carry five links per url (it/en/de/fr/x-default) and
 // publishing without them would silently drop every alternate from the index.
-export const SECTION_PATHS = {
-  frontaliere: {
-    it: '/articoli-frontaliere/',
-    en: '/en/cross-border-articles/',
-    de: '/de/grenzgaenger-artikel/',
-    fr: '/fr/articles-frontalier/',
-  },
-  svizzera: {
-    it: '/articoli-svizzera/',
-    en: '/en/swiss-articles/',
-    de: '/de/schweiz-artikel/',
-    fr: '/fr/articles-suisse/',
-  },
-};
+//
+// Derived from the section core (`indexSlug`), ACTIVE sections only: this was a
+// hand-written copy of the same slugs, and a section switched on in the core
+// would have had no path here. IT lives at the apex, the other locales under
+// `/<locale>/` — the same rule the site router and `archiveBase` in build-api use.
+export const SECTION_PATHS = Object.freeze(Object.fromEntries(
+  Object.entries(ARTICLE_SECTION_CORE).map(([section, core]) => [
+    section,
+    Object.freeze(Object.fromEntries(
+      Object.entries(core.indexSlug).map(([locale, slug]) => [
+        locale,
+        locale === 'it' ? `/${slug}/` : `/${locale}/${slug}/`,
+      ]),
+    )),
+  ]),
+));
 
 function sitemapEntryIsEmitted(article, slugMap, shadowed) {
   const slug = slugMap?.[article.id]?.it;

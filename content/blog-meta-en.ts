@@ -12629,6 +12629,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.hotel-collina-oro-licenziamenti.title': 'Ticino, Villa Principe Leopoldo: 76 layoffs',
     'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro will close for months: the project is worth 12 million and involves 76 redundancies out of 81 employees.',
     'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Canton Ticino',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hotel in Ticino: closes and dismisses 76 employees',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro invests 12 million francs, closes for months and announces 76 redundancies out of 81 employees.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Ticino',
+    'blog.article.gallerie-castelletto-sesto-calende.title': 'Tunnels: Castelletto-Sesto Calende closed for two nights',
+    'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Maintenance work on the motorway tunnels: the stretch between Castelletto and Sesto Calende closed for two nights. Also closed: Castronno-Cavaria and Solbiate-Varese.',
+    'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Motorway tunnel area near Varese',
 };
 
 export default blogMetaEn;

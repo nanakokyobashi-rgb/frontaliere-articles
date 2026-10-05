@@ -4,6 +4,9 @@
 #
 # Usage:
 #   bash scripts/lib/rebase-onto-remote.sh <remote-url> <target-branch> [bookkeeping-path...]
+#     [--merge-registry <path>] [--take-theirs <prefix/>] [--merge-counter <path>:<field>]
+#     [--section-surfaces]   # i path di ogni sezione ATTIVA del core, derivati
+#                            # da scripts/ci/rebase-section-args.mjs
 #
 # Exit 0 = HEAD is now rebased onto <target-branch> (the caller can retry its
 #          push). Exit 1 = the rebase could not be completed safely; the tree is
@@ -133,6 +136,29 @@ COUNTERS=" "
 COUNTER_SPECS=" "
 while [ "$#" -gt 0 ]; do
   case "$1" in
+    --section-surfaces)
+      # Gli argomenti PER SEZIONE (registri, ledger, cartelle per-articolo di
+      # ogni sezione attiva del core) non si scrivono a mano nel chiamante: li
+      # deriva scripts/ci/rebase-section-args.mjs da article-surfaces.mjs, cioe'
+      # da ARTICLE_SECTION_CORE. Una sezione accesa nel core e' dichiarata qui
+      # senza toccare generate-article.yml. Se la derivazione fallisce non si
+      # ripiega su un elenco parziale: un target non dichiarato fa abortire il
+      # rebase e perdere l'articolo (issue #255/#281/#285), quindi e' un errore
+      # d'uso (exit 2) prima di qualunque operazione git.
+      section_args="$(node "$SCRIPT_DIR/../ci/rebase-section-args.mjs")" || {
+        echo "::error::--section-surfaces: scripts/ci/rebase-section-args.mjs failed — refusing to rebase with an undeclared section"
+        exit 2
+      }
+      [ -n "$section_args" ] || { echo "::error::--section-surfaces: no per-section paths derived"; exit 2; }
+      shift
+      # Un token per riga, nessuno spazio nei path: si rimettono in coda agli
+      # argomenti ancora da leggere, cosi' passano dalle stesse categorie.
+      while IFS= read -r token; do
+        if [ -n "$token" ]; then set -- "$@" "$token"; fi
+      done <<EOF_SECTION_ARGS
+$section_args
+EOF_SECTION_ARGS
+      ;;
     --merge-counter)
       [ "$#" -ge 2 ] || { echo "::error::--merge-counter requires <path>:<field>"; exit 2; }
       case "$2" in

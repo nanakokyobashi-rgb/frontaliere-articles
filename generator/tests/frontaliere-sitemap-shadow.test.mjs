@@ -44,6 +44,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
+import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const OVERRIDES_PATH = path.join(ROOT, 'engine', 'shared', 'frontaliere-article-canonical-overrides.json');
@@ -134,22 +135,34 @@ test('buildSitemap with an empty shadow set (pre-fix behaviour) lists all four �
 test('build-api.mjs reads the frontaliere override file and feeds it into the frontaliere buildSitemap call', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
 
-  assert.ok(
-    src.includes("'engine', 'shared', 'frontaliere-article-canonical-overrides.json'") ||
-      src.includes('engine/shared/frontaliere-article-canonical-overrides.json'),
-    "build-api.mjs no longer reads engine/shared/frontaliere-article-canonical-overrides.json — " +
+  // Since the sections come from the core (C1), WHICH override file belongs to
+  // which section is declared once in scripts/lib/corpus-sections.mjs, and
+  // build-api reads `section.canonicalOverrides` for every published section.
+  assert.equal(
+    sectionSourceSurfaces('frontaliere').canonicalOverrides,
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+    "the frontaliere section no longer declares engine/shared/frontaliere-article-canonical-overrides.json — " +
       'the frontaliere sitemap will list shadowed pages again',
   );
-
-  // The frontaliere buildSitemap(...) call must NOT go back to passing only
-  // retiredDailyEditions — that was exactly the pre-fix state.
-  const callMatch = src.match(/buildSitemap\(\s*ARTICLES,\s*'frontaliere'[^)]*\)/s);
-  assert.ok(callMatch, 'could not find the frontaliere buildSitemap(...) call to inspect');
-  assert.doesNotMatch(
-    callMatch[0],
-    /buildSitemap\(\s*ARTICLES,\s*'frontaliere',\s*blogSlugs\.BLOG_SLUGS,\s*metaIt,\s*retiredDailyEditions\s*\)/,
-    'the frontaliere call passes ONLY retiredDailyEditions again — canonical-shadowed slugs would leak back into sitemap-blog.xml',
+  assert.equal(sectionSourceSurfaces('frontaliere').retiredDailyEditions, true);
+  assert.match(
+    src,
+    /fs\.readFileSync\(path\.join\(ROOT, section\.canonicalOverrides\), 'utf-8'\)/,
+    'build-api.mjs no longer reads each section\'s canonical-override file',
   );
+
+  // The frontaliere sitemap shadow must NOT go back to retiredDailyEditions
+  // alone — that was exactly the pre-fix state: the section that retires
+  // daily editions unions them WITH its canonical-shadowed slugs.
+  assert.match(
+    src,
+    /section\.retiredDailyEditions\s*\?\s*new Set\(\[\.\.\.retiredDailyEditionSlugs, \.\.\.SECTION_CANONICAL_SHADOW\[section\.section\]\]\)/,
+    'the daily-edition section no longer unions canonical-shadowed slugs into its sitemap shadow — ' +
+      'canonical-shadowed slugs would leak back into sitemap-blog.xml',
+  );
+  const callMatch = src.match(/buildSitemap\(\s*SECTION_REGISTRIES\[section\.section\],[^;]*?\)\s*,\s*\);/s);
+  assert.ok(callMatch, 'could not find the per-section buildSitemap(...) call to inspect');
+  assert.match(callMatch[0], /SECTION_SITEMAP_SHADOW\[section\.section\],?\s*\)/);
 });
 
 // Same class of defect, second surface: `collect()` (build-api.mjs) emits
@@ -162,23 +175,17 @@ test('build-api.mjs reads the frontaliere override file and feeds it into the fr
 test('build-api.mjs feeds the shadow sets into both collect(...) calls that build sitemap-news-candidates.xml', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
 
-  const frontaliereCall = src.match(/collect\(\s*ARTICLES,\s*'frontaliere'[^)]*\)/s);
-  assert.ok(frontaliereCall, 'could not find the frontaliere collect(...) call to inspect');
+  // One collect(...) per published section (the sections come from the core
+  // since C1), each fed the SAME shadow set as that section's sitemap.
+  const collectCall = src.match(/for \(const section of API_SECTIONS\) \{\s*collect\(([^;]*?)\);\s*\}/s);
+  assert.ok(collectCall, 'could not find the per-section collect(...) loop to inspect');
   assert.match(
-    frontaliereCall[0],
-    /,\s*frontaliereSitemapShadow\s*\)/,
-    'the frontaliere collect(...) call no longer passes frontaliereSitemapShadow — canonical-shadowed ' +
-      'frontaliere pages could leak back into sitemap-news-candidates.xml while still inside the 48h window',
+    collectCall[1],
+    /SECTION_REGISTRIES\[section\.section\],[\s\S]*,\s*SECTION_SITEMAP_SHADOW\[section\.section\],?\s*$/,
+    'the collect(...) call no longer passes the section\'s sitemap shadow set — canonical-shadowed ' +
+      'pages could leak back into sitemap-news-candidates.xml while still inside the 48h window',
   );
-
-  const svizzeraCall = src.match(/collect\(\s*SWISS_ARTICLES,\s*'svizzera'[^)]*\)/s);
-  assert.ok(svizzeraCall, 'could not find the svizzera collect(...) call to inspect');
-  assert.match(
-    svizzeraCall[0],
-    /,\s*shadowedSwissSlugs\s*\)/,
-    'the svizzera collect(...) call no longer passes shadowedSwissSlugs — canonical-shadowed swiss pages ' +
-      'could leak back into sitemap-news-candidates.xml while still inside the 48h window',
-  );
+  assert.doesNotMatch(src, /collect\([^)]*new Set\(\)\s*\)/, 'a collect(...) call with an empty shadow set');
 });
 
 // ── The other half of the contract: where the shadowing deliberately STOPS ──
@@ -240,10 +247,13 @@ test('build-api.mjs passes the UNFILTERED registries to the RSS builder and to t
 
   const rssCall = src.match(/buildAllRssFeeds\(\{[\s\S]*?\n\}\);/);
   assert.ok(rssCall, 'could not find the buildAllRssFeeds({...}) call to inspect');
+  // Since C1 the registries are keyed by the core's section ids; each one is
+  // the module export as loaded, with no filter between the load and here.
+  assert.match(src, /SECTION_REGISTRIES\[section\.section\] = registry;/);
   assert.match(
     rssCall[0],
-    /registries:\s*\{\s*frontaliere:\s*ARTICLES,\s*svizzera:\s*SWISS_ARTICLES\s*\}/,
-    'the RSS registries are no longer the raw ARTICLES/SWISS_ARTICLES. Filtering them HERE is a ' +
+    /registries:\s*Object\.fromEntries\(API_SECTIONS\.map\(\(\{ section \}\) => \[section, SECTION_REGISTRIES\[section\]\]\)\)/,
+    'the RSS registries are no longer the raw per-section registries. Filtering them HERE is a ' +
       'caller-side divergence: engine/rssFeeds.mjs is the single implementation shared with the site ' +
       '(its header forbids a second copy for exactly this reason), and both override files document ' +
       'RSS as out of scope. Change the `_doc` and the engine module, not this call site',

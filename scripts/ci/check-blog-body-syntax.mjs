@@ -100,23 +100,30 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import {
   expectedBodyFiles,
+  floorPolicyOf,
   floorFrom,
   historyRevisionFromEnv,
   missingCorpusMessage,
 } from '../lib/corpus-floors.mjs';
+import { CORPUS_SECTIONS } from '../lib/corpus-sections.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 /**
- * ENTRAMBI i corpora. Sul sito questo guard copriva solo `blog-body` e mai
+ * Le radici vengono dal core (sezioni ATTIVE, `scripts/lib/corpus-sections.mjs`):
+ * una sezione accesa nel core e' sorvegliata senza toccare questo file, e una
+ * sezione cantonale appena accesa vale 0 corpi attesi (`expectedBodyFiles`,
+ * politica `family`) invece di un rifiuto.
+ *
+ * ENTRAMBI i corpora storici. Sul sito questo guard copriva solo `blog-body` e mai
  * `blog-body-ch`: e' cosi' che l'apostrofo del 2026-07-29 e' passato. Qui le
  * due radici sono `content/blog-body` e `content/blog-body-ch` (il sito le ha
  * sotto `services/locales/`).
  */
-export const BLOG_BODY_ROOTS = [
-  { rel: 'content/blog-body', section: 'frontaliere' },
-  { rel: 'content/blog-body-ch', section: 'svizzera' },
-];
+export const BLOG_BODY_ROOTS = CORPUS_SECTIONS.map((section) => ({
+  rel: section.bodyDir,
+  section: section.section,
+}));
 
 /** Deriva i riferimenti dei due pavimenti senza contare la directory del gate. */
 export function deriveFloorModel(
@@ -197,6 +204,10 @@ export function floorViolations(
         continue;
       }
     }
+    // Una sezione di famiglia (cantonale) appena accesa non ha ancora corpi:
+    // 0 attesi e' il suo stato legittimo, non un riferimento mancante. Le
+    // radici storiche restano fail-closed sotto.
+    if (expectedFiles === 0 && section && floorPolicyOf(section) === 'family') continue;
     if (expectedFiles !== undefined) {
       if (!Number.isFinite(expectedFiles) || expectedFiles <= 0) {
         violations.push(missingCorpusMessage('blog-body', rel));
@@ -231,7 +242,7 @@ export function floorViolations(
     );
   } else if (missingReferenceCount > 0 && expectedTotal === 0) {
     violations.push(
-      `TOTALE: ${missingCorpusMessage('blog-body', 'content/blog-articles-data.ts / content/swiss-articles-data.ts')}`,
+      `TOTALE: ${missingCorpusMessage('blog-body', CORPUS_SECTIONS.map((section) => section.registryFile).join(' / '))}`,
     );
   }
   return violations;

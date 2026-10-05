@@ -39783,6 +39783,27 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hotel-ticino-76-licenziamenti',
+ category: 'novita',
+ date: '2026-10-05T16:27:36.721Z',
+ image: '/images/blog/hotel-ticino-76-licenziamenti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'gallerie-castelletto-sesto-calende',
+ category: 'pratico',
+ date: '2026-10-05T16:57:29.122Z',
+ image: '/images/blog/gallerie-castelletto-sesto-calende.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

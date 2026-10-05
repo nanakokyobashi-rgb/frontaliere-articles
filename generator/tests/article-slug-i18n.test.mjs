@@ -360,8 +360,12 @@ describe('cablaggio in create-article.mjs', () => {
     assert.match(SRC, /data\._slugI18nFallbacks/);
     const api = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
     assert.match(api, /fallbackReasons:/);
-    assert.match(api, /BLOG_SLUG_FALLBACK_REASONS/);
-    assert.match(api, /SWISS_SLUG_FALLBACK_REASONS/);
+    // Dal 2026-10 (C1) build-api legge l'export dei fallback di OGNI sezione
+    // dal suo modulo slug, col nome dichiarato in corpus-sections.mjs.
+    assert.match(api, /fallbackReasons: mod\[section\.fallbackReasonsExport\]/);
+    const sections = fs.readFileSync(path.join(ROOT, 'scripts', 'lib', 'corpus-sections.mjs'), 'utf-8');
+    assert.match(sections, /fallbackReasonsExport: 'BLOG_SLUG_FALLBACK_REASONS'/);
+    assert.match(sections, /fallbackReasonsExport: 'SWISS_SLUG_FALLBACK_REASONS'/);
   });
 });
 

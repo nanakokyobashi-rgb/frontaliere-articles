@@ -68,6 +68,7 @@ import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
+import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const argv = process.argv.slice(2);
@@ -91,13 +92,38 @@ const LOCALES = argOf('--locales', 'it,en,de,fr').split(',').map((s) => s.trim()
 const MIN_LANDING_BYTES = 4096;
 
 /**
+ * Le sezioni ATTIVE del core che hanno un hub su uno shard Pages: era la quarta
+ * copia scritta a mano di frontaliere/svizzera (con `shardKey`), ora e'
+ * `scripts/lib/corpus-sections.mjs`, derivato da `ARTICLE_SECTION_CORE`.
+ *
+ * Una sezione con `shardKey: null` (le cantonali, D3 del piano) non ha uno
+ * shard da rinfrescare: la sua landing la pubblica il publisher R2. Non e' un
+ * salto silenzioso — e' elencata nel log — e chiederla per nome con
+ * `--section` e' un errore, non un no-op verde.
+ */
+const SHARD_SECTIONS = CORPUS_SECTIONS.filter((section) => section.shardKey);
+const R2_SECTIONS = CORPUS_SECTIONS.filter((section) => !section.shardKey);
+if (R2_SECTIONS.length > 0) {
+  console.log(
+    `[hub-landing] served from R2, not refreshed here: ${R2_SECTIONS.map((section) => section.section).join(', ')}`,
+  );
+}
+if (ONLY_SECTION && !SHARD_SECTIONS.some((section) => section.section === ONLY_SECTION)) {
+  console.error(
+    `[hub-landing] --section "${ONLY_SECTION}" has no Pages shard among the active sections ` +
+      `(${SHARD_SECTIONS.map((section) => section.section).join(', ')}) — refusing to report a no-op as a refresh`,
+  );
+  process.exit(1);
+}
+
+/**
  * Sections whose landing this run MUST end up writing. If one of these
  * refreshes nothing, the mechanism is broken and the run must say so —
  * reporting "nothing to refresh" and exiting 0 is precisely the
  * silent-staleness shape that let the hub sit a week behind in the first
  * place.
  *
- * BOTH sections now, not just frontaliere. Svizzera was excused here because
+ * EVERY shard section now (both historical ones), not just frontaliere. Svizzera was excused here because
  * its landing genuinely had no grid to swap — and that exemption is exactly
  * what kept the failure quiet: 617 articles behind 9 KB of copy, four locales,
  * a full run of green logs every time. `ensureArticleHubCards` removes the
@@ -106,29 +132,19 @@ const MIN_LANDING_BYTES = 4096;
  * legitimately leave untouched.
  */
 const EXPECT_GRID = new Set(
-  argOf('--expect-grid', 'frontaliere,svizzera').split(',').map((s) => s.trim()).filter(Boolean),
+  argOf('--expect-grid', SHARD_SECTIONS.map((section) => section.section).join(','))
+    .split(',').map((s) => s.trim()).filter(Boolean),
 );
 
-const SECTIONS = [
-  {
-    name: 'frontaliere',
-    shardKey: 'articolifrontaliere',
-    registry: 'content/blog-articles-data.ts',
-    registryExport: 'ARTICLES',
-    slugFile: 'content/routerBlogData.ts',
-    slugExport: 'BLOG_SLUGS',
-    metaPrefix: 'blog-meta',
-  },
-  {
-    name: 'svizzera',
-    shardKey: 'articolisvizzera',
-    registry: 'content/swiss-articles-data.ts',
-    registryExport: 'SWISS_ARTICLES',
-    slugFile: 'content/routerSwissData.ts',
-    slugExport: 'SWISS_SLUGS',
-    metaPrefix: 'blog-meta-ch',
-  },
-].filter((s) => !ONLY_SECTION || s.name === ONLY_SECTION);
+const SECTIONS = SHARD_SECTIONS.map((section) => ({
+  name: section.section,
+  shardKey: section.shardKey,
+  registry: section.registryFile,
+  registryExport: section.registryExport,
+  slugFile: section.slugFile,
+  slugExport: section.slugExport,
+  metaPrefix: path.basename(section.metaPrefix),
+})).filter((s) => !ONLY_SECTION || s.name === ONLY_SECTION);
 
 const shardSlugs = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/lib/section-shard-slugs.json'), 'utf-8'));
 const shardOwners = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/lib/section-shard-owners.json'), 'utf-8'));

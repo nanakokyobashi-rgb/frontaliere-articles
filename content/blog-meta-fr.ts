@@ -12631,6 +12631,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.hotel-collina-oro-licenziamenti.title': 'Tessin, villa principe leopoldo : 76 licenciements',
     'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo de Collina d\'Oro fermera pendant des mois : le projet représente 12 millions et concerne 76 licenciements sur 81 employés.',
     'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro, dans le canton du Tessin',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hôtel au Tessin : il ferme et licencie 76 employés',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro investit 12 millions de francs, ferme pendant des mois et annonce le licenciement de 76 de ses 81 employés.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro, au Tessin',
+    'blog.article.gallerie-castelletto-sesto-calende.title': 'Tunnels : Castelletto-Sesto Calende fermé pendant deux nuits',
+    'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Entretien des tunnels de l\'autoroute : le tronçon entre Castelletto et Sesto Calende fermé pendant deux nuits. Fermeture également de Castronno-Cavaria et de Solbiate-Varese.',
+    'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Tunnel autoroutier dans la région de Varèse (Varese)',
 };
 
 export default blogMetaFr;

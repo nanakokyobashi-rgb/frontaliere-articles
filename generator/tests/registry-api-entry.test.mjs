@@ -91,7 +91,9 @@ describe('voce pubblica del registry (allowlist)', () => {
     assert.ok(mark, 'markRegistryRelease non trovato in build-api.mjs');
     assert.match(mark[0], /toPublicRegistryEntry\(article, commit\)/);
     assert.doesNotMatch(mark[0], /\.\.\.article/);
-    assert.match(src, /write\('articles\.json', markRegistryRelease\(ARTICLES\)\)/);
-    assert.match(src, /write\('swiss-articles\.json', markRegistryRelease\(SWISS_ARTICLES\)\)/);
+    // Dal 2026-10 (C1) i registri pubblicati (articles.json, swiss-articles.json)
+    // si scrivono in un loop sulle sezioni del core, sempre via la proiezione.
+    assert.match(src, /write\(section\.api\.registry, markRegistryRelease\(SECTION_REGISTRIES\[section\.section\]\)\)/);
+    assert.equal((src.match(/write\(section\.api\.registry,/g) ?? []).length, 1, 'un solo writer dei registri pubblicati');
   });
 });
