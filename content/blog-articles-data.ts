@@ -37798,6 +37798,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sequestri-contanti-brogeda',
+ category: 'pratico',
+ date: '2026-10-05T08:04:32.317Z',
+ image: '/images/blog/sequestri-contanti-brogeda.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
