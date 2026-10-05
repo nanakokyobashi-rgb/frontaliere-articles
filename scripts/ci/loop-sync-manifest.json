@@ -595,6 +595,16 @@
       }
     },
     {
+      "path": "scripts/ci/validate-canton-sections.mjs",
+      "mode": "corpus-only",
+      "reason": "Validatore del profilo editoriale corpus-only delle 24 sezioni cantonali (generator/data/canton-sections.json, D14 del piano sezioni cantonali): copertura dei gruppi di canton-url-slugs.json, URL https unici per cantone, DEAD_NEWS_DOMAINS e liste globali lette dal sorgente di create-article.mjs, policy robots D10 anche fra cantoni, cronMinute unici e fuori dai minuti di generate-article.yml, budget D19. Eseguito su ogni PR da generator/tests/canton-sections.test.mjs. Non esiste sul sito e non deve: il profilo, le fonti per cantone e il generatore che le consuma vivono solo nel corpus; il sito legge le sezioni come JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "403b6f7029b0818c",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
