@@ -271,6 +271,20 @@ export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SH
 }
 
 /**
+ * L'HTML con i nodi INATTIVI resi spazi, a pari lunghezza (gli indici restano
+ * quelli del documento): commenti, `<script>`, `<style>`, `<template>`. Li'
+ * dentro un `<a>`, un `<nav>` o un `<h1>` non sono markup della pagina — un
+ * menu in un template, un titolo vecchio in un commento — e chi cerca link o
+ * titoli nel sorgente non deve trovarli.
+ *
+ * @param {string} html
+ * @returns {string}
+ */
+export function maskInactiveMarkup(html) {
+  return String(html || '').replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, (m) => ' '.repeat(m.length));
+}
+
+/**
  * I titoli che una pagina dichiara di se': `og:title`, `twitter:title`,
  * `<title>` e gli `<h1>`. Servono alla verifica qui sotto perche' il testo che
  * `extractArticleText` estrae e' il CORPO (`articleBody`, i paragrafi di
@@ -281,7 +295,9 @@ export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SH
  * @returns {string} i titoli, uno per riga ('' se non ce n'e')
  */
 export function pageTitleEvidence(html) {
-  const src = String(html || '');
+  // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
+  // script o un template puo' essere il titolo di un'altra notizia.
+  const src = maskInactiveMarkup(html);
   const out = [];
   for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];

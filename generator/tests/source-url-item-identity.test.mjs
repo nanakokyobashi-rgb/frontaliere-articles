@@ -228,6 +228,8 @@ test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina re
 test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una pagina che non ne ha', () => {
   const html = '<html><head><title>Titolo | Testata</title><meta content="Titolo da og" property="og:title"><meta name=\'twitter:title\' content=\'Titolo da twitter\'><meta property="og:description" content="non un titolo"></head><body><h1 class="t">Titolo <em>in pagina</em></h1><p>corpo</p></body></html>';
   assert.deepEqual(pageTitleEvidence(html).split('\n'), ['Titolo da og', 'Titolo da twitter', 'Titolo | Testata', 'Titolo in pagina']);
+  // Un titolo in un commento, in uno script o in un template non e' della pagina.
+  assert.equal(pageTitleEvidence('<!-- <h1>Titolo vecchio</h1> --><script>var t = "<title>Titolo in uno script</title>";</script><template><h1>Titolo in un template</h1></template><h1>Titolo vero</h1>'), 'Titolo vero');
   assert.equal(pageTitleEvidence('<p>solo corpo</p>'), '');
   assert.equal(pageTitleEvidence(''), '');
 });

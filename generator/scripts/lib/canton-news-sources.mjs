@@ -64,7 +64,7 @@
  * User-Agent onesto (D10: niente UA camuffato), lo stesso dei crawler eventi.
  */
 
-import { itemIdentityToken, newsUrlKey, withItemIdentity } from './source-url-ledger.mjs';
+import { itemIdentityToken, maskInactiveMarkup, newsUrlKey, withItemIdentity } from './source-url-ledger.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -214,6 +214,8 @@ function roleTokens(attrs) {
  * `banner`/`contentinfo` solo fuori da article, aside, main, nav e section.
  */
 const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
+/** Gli stessi contenitori dichiarati con `role` su un elemento qualunque (`<div role="main">`). */
+const SECTIONING_ROLES = new Set(['article', 'complementary', 'main', 'region']);
 /** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
 function containsMainContent(masked) {
   const re = /<([a-zA-Z][\w-]*)\b([^>]*)>/g;
@@ -228,7 +230,8 @@ function containsMainContent(masked) {
  * Le aree di navigazione e la cornice del sito tolte da una pagina HTML:
  * ogni `<nav>`, ogni elemento con `role="navigation|banner|contentinfo"`, e
  * `<header>`/`<footer>` quando sono del sito (fuori da article, aside, main,
- * section). Il resto del documento resta byte per byte com'era.
+ * section e dai loro equivalenti `role=`). Commenti, script, stile e template
+ * escono resi spazi; il resto del documento resta byte per byte com'era.
  *
  * Perche' esiste (P5b, misurato il 2026-10-05): `extractHeadlines` tiene ogni
  * `<a>` con un testo di 15-300 caratteri. Sulla pagina news di eoc.ch quelli
@@ -246,27 +249,37 @@ function containsMainContent(masked) {
  * @returns {{ html: string, removed: number }} la pagina senza le aree, e quante
  */
 export function stripPageChrome(html) {
-  const src = String(html || '');
-  // Commenti, script e stile non sono markup: un `<nav>` scritto in un template
-  // JS non apre niente. Mascherati a pari lunghezza, gli indici restano quelli
-  // del documento originale.
-  const masked = src.replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, (m) => ' '.repeat(m.length));
+  // Commenti, script, stile e template non sono markup della pagina: un
+  // `<nav>` scritto in un template JS non apre niente, e un `<a>` li' dentro
+  // non e' un link. Resi spazi a pari lunghezza (gli indici restano quelli del
+  // documento), e cosi' restano anche in uscita: l'estrattore non li vede.
+  const masked = maskInactiveMarkup(html);
   const tagRe = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*)>/g;
   const ranges = [];
   let sectioningDepth = 0;
+  // Fine degli elementi `role="main|article|…"` aperti: finche' ce n'e' uno,
+  // header e footer sono di quella sezione.
+  const roleSectionEnds = [];
   let m;
   while ((m = tagRe.exec(masked)) !== null) {
     const closing = m[1] === '/';
     const name = m[2].toLowerCase();
     const attrs = m[3] || '';
+    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= m.index) roleSectionEnds.pop();
     if (SECTIONING_TAGS.has(name)) {
       sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
       if (closing) continue;
     }
     if (closing || /\/\s*$/.test(attrs)) continue;
+    const roles = roleTokens(attrs);
+    if (!SECTIONING_TAGS.has(name) && roles.some((r) => SECTIONING_ROLES.has(r))) {
+      const sectionEnd = matchingCloseEnd(masked, name, tagRe.lastIndex);
+      if (sectionEnd !== -1) roleSectionEnds.push(sectionEnd);
+    }
+    const inSection = sectioningDepth > 0 || roleSectionEnds.length > 0;
     const isChrome = name === 'nav'
-      || roleTokens(attrs).some((r) => CHROME_ROLES.has(r))
-      || ((name === 'header' || name === 'footer') && sectioningDepth === 0);
+      || roles.some((r) => CHROME_ROLES.has(r))
+      || ((name === 'header' || name === 'footer') && !inSection);
     if (!isChrome) continue;
     const end = matchingCloseEnd(masked, name, tagRe.lastIndex);
     if (end === -1) continue;
@@ -280,14 +293,14 @@ export function stripPageChrome(html) {
     // aperti E chiusi li' dentro) non sposta il conteggio.
     tagRe.lastIndex = end;
   }
-  if (ranges.length === 0) return { html: src, removed: 0 };
+  if (ranges.length === 0) return { html: masked, removed: 0 };
   let out = '';
   let at = 0;
   for (const [start, end] of ranges) {
-    out += src.slice(at, start);
+    out += masked.slice(at, start);
     at = end;
   }
-  return { html: out + src.slice(at), removed: ranges.length };
+  return { html: out + masked.slice(at), removed: ranges.length };
 }
 
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */

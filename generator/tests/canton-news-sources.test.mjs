@@ -413,7 +413,22 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   const out = stripPageChrome(html);
   assert.equal(out.removed, 4);
   for (const gone of ['/chi', '/menu', 'Torna alla pagina iniziale', '/privacy-policy']) assert.ok(!out.html.includes(gone), `${gone} doveva sparire`);
-  for (const kept of ['/news/1"', '/news/1#c', '/news/2', 'non e\' markup']) assert.ok(out.html.includes(kept), `${kept} doveva restare`);
+  for (const kept of ['/news/1"', '/news/1#c', '/news/2']) assert.ok(out.html.includes(kept), `${kept} doveva restare`);
+  // Lo script non apre un <nav> (le aree tolte restano 4) e il suo contenuto
+  // esce reso spazi: un <a> scritto in uno script, un template o un commento
+  // non e' un link della pagina.
+  assert.ok(!out.html.includes('non e\' markup'));
+  const inactive = '<template><a href="/menu/t">Voce di un menu in un template</a></template><!-- <a href="/old">Un vecchio link commentato via</a> --><style>a{}</style><p><a href="/news/9">Titolo del nono comunicato</a></p>';
+  const cleaned = stripPageChrome(inactive);
+  assert.equal(cleaned.removed, 0);
+  assert.equal(cleaned.html.length, inactive.length, 'a pari lunghezza');
+  assert.deepEqual(extractHeadlines(cleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/9']);
+  assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 3, 'premessa: l\'estrattore storico li prende tutti');
+  // header/footer dentro role="main" o role="article" sono della sezione.
+  const ariaSection = '<div role="main"><header><a href="/news/10">Titolo del decimo comunicato</a></header><div role="article"><footer><a href="/news/11">Titolo dell undicesimo comunicato</a></footer></div></div><footer><a href="/impressum">Impressum e note legali</a></footer>';
+  const aria = stripPageChrome(ariaSection);
+  assert.equal(aria.removed, 1);
+  assert.ok(aria.html.includes('/news/10') && aria.html.includes('/news/11') && !aria.html.includes('/impressum'));
   // Solo l'attributo `role`: data-role e aria-role non marcano niente, e
   // role="main" dentro un'area la rende contenuto (come <main>).
   const dataRole = '<article data-role="navigation"><a href="/news/4">Titolo del quarto comunicato</a></article><div aria-role="banner"><a href="/news/5">Titolo del quinto comunicato</a></div>';
