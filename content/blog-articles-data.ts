@@ -37848,6 +37848,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'avs-13a-rendita-iva-aumento',
+ category: 'pensione',
+ date: '2026-10-05T11:25:01.725Z',
+ image: '/images/blog/avs-13a-rendita-iva-aumento.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
