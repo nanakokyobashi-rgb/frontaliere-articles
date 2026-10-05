@@ -602,7 +602,7 @@ const MUTATIONS = {
     [
       'events[] vuoto',
       mutated(c, (p) => { p.events = []; }),
-      /carries zero events/,
+      /carries zero public events — refusing to cache an empty dataset/,
       'Zero eventi SOVRASCRIVE il digest corretto sulla URL evergreen.',
     ],
     [
@@ -614,7 +614,7 @@ const MUTATIONS = {
     [
       'nessun evento con startDate',
       mutated(c, (p) => { for (const e of p.events) delete e.startDate; }),
-      /not one event carries a startDate/,
+      /not one public event carries a startDate — refusing/,
       'Tutta la selezione del weekend passa da startDate: senza, ogni evento e\' fuori finestra.',
     ],
   ],
