@@ -80,6 +80,12 @@ test('loop-drift-check: i due passi di rete escalano sullo stesso opt-in', () =>
   );
 });
 
+test('loop-drift-check: il ratchet dei gemelli adapted (issue #339) va rosso sullo stesso opt-in del report', () => {
+  // Una crescita del drift la fa il sito: sulle PR e sul dispatch di sola
+  // ispezione resta un avviso, esattamente come il report.
+  assert.equal(escalationCondition('Ratchet dei gemelli adapted in drift'), escalationCondition(REPORT));
+});
+
 test('loop-drift-check: il report accetta anche `1` e `True` e il rosso gia\' riportato non duplica issue', () => {
   for (const stepName of [REPORT, PROVENANCE]) {
     const cond = escalationCondition(stepName);

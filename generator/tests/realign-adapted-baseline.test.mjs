@@ -41,6 +41,7 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = '.github/workflows/transport-identical-twins-realign.yml';
 const MANIFEST_REL = 'scripts/ci/loop-sync-manifest.json';
+const RATCHET_REL = 'scripts/ci/adapted-drift-ratchet.json';
 
 const REL = 'scripts/ci/esempio.mjs';
 const entry = (over = {}) => ({
@@ -385,15 +386,15 @@ test('workflow: trigger a orario e a mano, e il job dei trasporti resta sul solo
   assert.match(jobBlock('realign-adapted'), /\n    if: github\.event_name == 'schedule' \|\| github\.event_name == 'workflow_dispatch'\n/);
 });
 
-test('workflow: il push e\' condizionato al diff del SOLO manifest, e gli input non entrano nello script', () => {
+test('workflow: il push e\' condizionato al diff del SOLO manifest (e del ratchet adapted), e gli input non entrano nello script', () => {
   const job = jobBlock('realign-adapted');
-  const diffGuard = job.indexOf(`"$(git diff --name-only)" != "${MANIFEST_REL}"`);
+  const diffGuard = job.indexOf(`git diff --name-only | grep -vxF -e ${MANIFEST_REL} -e ${RATCHET_REL}`);
   const noChange = job.indexOf(`git diff --quiet -- ${MANIFEST_REL}`);
   const add = job.indexOf(`git add -- ${MANIFEST_REL}`);
   const push = job.indexOf('git push origin HEAD:main');
   assert.ok(noChange >= 0 && diffGuard > noChange, 'manca il controllo «solo il manifest e\' cambiato»');
   assert.ok(add > diffGuard && push > add, 'il push deve venire dopo il controllo sul diff');
-  assert.doesNotMatch(job, /git add (?!-- scripts\/ci\/loop-sync-manifest\.json)/);
+  assert.doesNotMatch(job, /git add (?!-- scripts\/ci\/(?:loop-sync-manifest|adapted-drift-ratchet)\.json)/);
   assert.match(job, /for attempt in 1 2 3; do/);
   // Il checkout non deve persistere il token del job: coprirebbe il PAT del push.
   assert.match(job, /persist-credentials: false/);

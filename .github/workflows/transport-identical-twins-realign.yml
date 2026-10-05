@@ -241,11 +241,17 @@ jobs:
               echo "Nessuna baseline adapted da riallineare."
               exit "$final"
             fi
-            if [ -n "$(git diff --name-only)" ] && [ "$(git diff --name-only)" != "scripts/ci/loop-sync-manifest.json" ]; then
-              echo "::error::Il riallineamento adapted ha modificato file oltre il manifest."
+            # Oltre al manifest puo' cambiare solo il ratchet dei gemelli adapted
+            # in drift: i path riallineati ne escono (issue #339).
+            unexpected="$(git diff --name-only | grep -vxF -e scripts/ci/loop-sync-manifest.json -e scripts/ci/adapted-drift-ratchet.json || true)"
+            if [ -n "$unexpected" ]; then
+              echo "::error::Il riallineamento adapted ha modificato file oltre il manifest e il ratchet: $unexpected"
               exit 1
             fi
             git add -- scripts/ci/loop-sync-manifest.json
+            if ! git diff --quiet -- scripts/ci/adapted-drift-ratchet.json; then
+              git add -- scripts/ci/adapted-drift-ratchet.json
+            fi
             git commit -m "chore(loop): riallinea baseline adapted dichiarate"
             if git push origin HEAD:main; then
               # Le voci certificate sono su main; un esito parziale (rc=3)

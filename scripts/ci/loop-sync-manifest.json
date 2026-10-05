@@ -4271,6 +4271,46 @@
       }
     },
     {
+      "path": "scripts/ci/lib/adapted-drift.mjs",
+      "mode": "corpus-only",
+      "reason": "Regola del ratchet dei gemelli `adapted` in drift (issue #339): stato a tre vie dagli hash, verdetto del ratchet a elenco, potatura. Vive solo qui: il manifest e il suo drift sono del corpus, il sito non sorveglia se stesso.",
+      "baseline": {
+        "site": null,
+        "corpus": "78e3fb29d3a367e9",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/adapted-drift-ratchet.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate `adapted-drift-budget` di loop-drift-check.yml (issue #339): legge il report JSON del drift check nello stesso job e va rosso se un gemello `adapted` entra in drift fuori dall'elenco registrato. Solo qui, come loop-drift-check.mjs.",
+      "baseline": {
+        "site": null,
+        "corpus": "1020acee5ae055a9",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/adapted-drift-register.mjs",
+      "mode": "corpus-only",
+      "reason": "Registro dei gemelli `adapted` in drift con l'esito del merge a 3 vie (`git merge-file`) di ciascuno, pubblicato come issue `Loop drift: gemelli adapted da riconciliare a mano` (issue #339). Lavora sul manifest di questo repo e su un clone del sito: il sito non ha un gemello.",
+      "baseline": {
+        "site": null,
+        "corpus": "9f5c041a39e25f86",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/adapted-drift-ratchet.json",
+      "mode": "corpus-only",
+      "reason": "Elenco dei gemelli `adapted` in drift accettati come debito (issue #339), letto da adapted-drift-ratchet.mjs e potato dal job realign-adapted. Dato del manifest di questo repo, senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "7833d2c442be65b0",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/verify-crawler-contract-provenance.mjs",
       "mode": "corpus-only",
       "reason": "L'osservazione del lato SITO dei digest di generator/data/crawler-cross-repo-contract.json (issue #916): `generatorSha256` e i 24 `sourceSha256` non hanno un gemello in questo checkout, quindi l'unico modo di verificarli e' chiederli al sito. Vive solo qui per la stessa ragione del drift check e del trasporto: e' questo il lato che RICEVE il ciclo, e il sito non ha bisogno di verificare la provenienza di se stesso.",
