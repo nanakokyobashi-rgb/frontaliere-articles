@@ -98653,6 +98653,74 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uyba-esordio-pari-novara': {
+    title: 'Uyba esordisce alla pari con Novara: Igor vince al tie-break',
+    description: 'La Uyba perde 3-2 al tie-break contro Igor Novara al Biella Forum davanti a 1679 spettatori; Grozer segna 26 punti e la squadra conquista un punto nel primo',
+    keywords: 'frontalieri, ticino, svizzera, italia, uyba, esordisce, alla, pari',
+    ogTitle: 'Uyba esordisce alla pari con Novara: Igor vince al tie-break',
+    ogDescription: 'Nel primo turno di Serie A1 femminile, la Laica Busto Arsizio cede 3-2 al tie-break a Igor Novara al Biella Forum. La partita, seguita da 1679 spettatori, vede Leana Grozer chiudere con 26 punti. Nonostante la sconfitta, l\'Uyba porta a casa un punto',
+    canonicalPath: '/articoli-frontaliere/uyba-esordio-pari-novara/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Uyba esordisce alla pari con Novara: Igor vince al tie-break",
+      "description": "La Uyba perde 3-2 al tie-break contro Igor Novara al Biella Forum davanti a 1679 spettatori; Grozer segna 26 punti e la squadra conquista un punto nel primo",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/uyba-esordio-pari-novara.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uyba e Novara in azione al Biella Forum durante il primo set, con il pubblico sugli spalti"
+      },
+      "datePublished": "2026-10-05T00:09:59+00:00",
+      "dateModified": "2026-10-05T00:09:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/uyba-esordio-pari-novara/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-gran-fondo-varese-2025': {
+    title: 'Varese: Gran Fondo da record con 5.000 iscritti',
+    description: 'Decima edizione della Gran Fondo Tre Valli Varesine chiusa il 4 ottobre: 5.000 iscritti, 2.000 stranieri e 25 nazioni. Vittorie di Ferraro Morey e Rumasaite.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, gran, fondo, record',
+    ogTitle: 'Varese: Gran Fondo da record con 5.000 iscritti',
+    ogDescription: 'La decima edizione della Gran Fondo Tre Valli Varesine ha battuto ogni record: 5.000 iscritti da oltre 25 nazioni. Domenica 4 ottobre, vittoria di Alessio Ferraro Morey e della lituana Rasa Rumasaite nella prova regina di 130 km.',
+    canonicalPath: '/articoli-frontaliere/gran-fondo-varese-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: Gran Fondo da record con 5.000 iscritti",
+      "description": "Decima edizione della Gran Fondo Tre Valli Varesine chiusa il 4 ottobre: 5.000 iscritti, 2.000 stranieri e 25 nazioni. Vittorie di Ferraro Morey e Rumasaite.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/gran-fondo-varese-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ciclisti in gara sulla strada di Varese durante la Gran Fondo Tre Valli Varesine"
+      },
+      "datePublished": "2026-10-05T00:34:02+00:00",
+      "dateModified": "2026-10-05T00:34:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gran-fondo-varese-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

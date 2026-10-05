@@ -24,14 +24,18 @@
  * Zero rete per la PR che non aggiunge file, o che aggiunge solo file gia'
  * coperti dal manifest (`files`, `scope.roots`, `scope.outOfScope`): il caso
  * di gran lunga piu' frequente, per esempio le PR di contenuto sotto
- * `content/`. Altrimenti UNA chiamata `git/trees?recursive=1` al sito, con il
- * token del job. Lo sha del blob dei file aggiunti si legge dall'albero di HEAD
- * (`git ls-tree`), che il checkout `blob:none` ha sempre: niente download.
+ * `content/`. Altrimenti una chiamata `git/trees?recursive=1` al sito, con il
+ * token del job; se GitHub segnala `truncated`, il gate rileggerebbe il tree
+ * non ricorsivo un sotto-albero alla volta. Lo sha del blob dei file aggiunti
+ * si legge dall'albero di HEAD (`git ls-tree`), che il checkout `blob:none` ha
+ * sempre: niente download.
  *
  * ## Fail-closed
  *
- * Un albero del sito non leggibile o troncato non e' un «nessun gemello»: il
- * gate esce 1 dicendo perche', come il censimento dello schedule.
+ * Un tree del sito non leggibile, o una pagina della lettura paginata non
+ * leggibile, non e' un «nessun gemello»: il gate esce 1 dicendo perche', come
+ * il censimento dello schedule. Un `truncated` ricorsivo e' recuperabile solo
+ * quando il tree root e tutte le sue pagine non ricorsive sono leggibili.
  *
  * Rimedio quando fallisce: registra il file in `scripts/ci/loop-sync-manifest.json`
  * (`identical` con `sitePath` e baseline dei due lati, oppure `adapted`), o
@@ -112,13 +116,23 @@ export function addedFiles({ base, head, cwd = ROOT }) {
   return paths.filter((p) => sha.has(p)).map((p) => ({ path: p, sha: sha.get(p) }));
 }
 
-/** Gli sha di tutti i blob del sito; lancia se l'albero non e' leggibile per intero. */
-export async function siteBlobShas({ repo, ref, token, fetchImpl = fetch, attempts = 3, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
+const TREE_API = 'https://api.github.com/repos';
+
+function treeUrl(repo, treeSha, recursive = false) {
+  return `${TREE_API}/${repo}/git/trees/${treeSha}${recursive ? '?recursive=1' : ''}`;
+}
+
+function treeHeaders(token) {
   const headers = { 'User-Agent': 'twin-census-pr-gate', Accept: 'application/vnd.github+json' };
   if (token) headers.Authorization = `Bearer ${token}`;
-  const url = `https://api.github.com/repos/${repo}/git/trees/${ref}?recursive=1`;
+  return headers;
+}
+
+/** Legge una pagina tree con lo stesso retry conservativo del gate originario. */
+async function fetchTreePage({ url, repo, treeSha, headers, fetchImpl, attempts, sleep }) {
   let lastError;
-  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+  const maxAttempts = Math.max(1, Number.isInteger(attempts) ? attempts : 3);
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     if (attempt > 1) await sleep(2000 * (attempt - 1));
     let res;
     try {
@@ -128,19 +142,129 @@ export async function siteBlobShas({ repo, ref, token, fetchImpl = fetch, attemp
       continue;
     }
     if (res.ok) {
-      const body = await res.json();
-      // Un albero troncato darebbe un verdetto costruito su meta' dei dati.
-      if (body.truncated !== false) throw new Error(`l'albero di ${repo}@${ref} e' troncato: il censimento non e' affidabile`);
-      // Un 200 senza `tree` e' una risposta che non si sa leggere, non un sito
-      // senza file: un Set vuoto renderebbe pulito ogni candidato.
-      if (!Array.isArray(body?.tree)) throw new Error(`l'albero di ${repo}@${ref} non ha un campo \`tree\` leggibile`);
-      return new Set(body.tree.filter((e) => e.type === 'blob').map((e) => e.sha));
+      try {
+        return await res.json();
+      } catch (error) {
+        throw new Error(`GET tree ${repo}@${treeSha} → JSON illeggibile: ${error?.message || error}`);
+      }
     }
-    lastError = new Error(`GET tree ${repo}@${ref} → HTTP ${res.status}`);
+    lastError = new Error(`GET tree ${repo}@${treeSha} → HTTP ${res.status}`);
     // Un 4xx non migliora ritentando (permessi, ref inesistente); 429 e 5xx si'.
     if (res.status < 500 && res.status !== 429) throw lastError;
   }
-  throw lastError;
+  throw lastError || new Error(`GET tree ${repo}@${treeSha} → nessuna risposta leggibile`);
+}
+
+function readableTreeEntries(body, { repo, treeSha }) {
+  // Un albero troncato darebbe un verdetto costruito su meta' dei dati.
+  if (body?.truncated !== false) {
+    throw new Error(`l'albero di ${repo}@${treeSha} e' troncato: il censimento non e' affidabile`);
+  }
+  // Un 200 senza `tree` e' una risposta che non si sa leggere, non un sito
+  // senza file: un Set vuoto renderebbe pulito ogni candidato.
+  if (!Array.isArray(body?.tree)) {
+    throw new Error(`l'albero di ${repo}@${treeSha} non ha un campo \`tree\` leggibile`);
+  }
+  return body.tree;
+}
+
+function blobShasFromRecursiveTree(entries, { repo, treeSha }) {
+  const shas = new Set();
+  for (const entry of entries) {
+    if (!entry || !['blob', 'tree', 'commit'].includes(entry.type)) {
+      throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce con tipo illeggibile`);
+    }
+    if (entry.type === 'tree') {
+      if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
+        throw new Error(`l'albero di ${repo}@${treeSha} contiene un sotto-albero senza SHA leggibile`);
+      }
+      continue;
+    }
+    if (entry.type !== 'blob') continue;
+    if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
+      throw new Error(`l'albero di ${repo}@${treeSha} contiene un blob senza SHA leggibile`);
+    }
+    shas.add(entry.sha);
+  }
+  return shas;
+}
+
+/**
+ * Recupera tutti gli sha dei blob senza il limite dell'albero ricorsivo.
+ *
+ * GitHub non pagina `recursive=1`: quando quel payload e' `truncated`, la via
+ * supportata e' leggere il root e ogni sotto-albero senza `recursive`, uno per
+ * pagina. La coda evita la ricorsione JS e `seenTrees` impedisce richieste
+ * duplicate se una risposta non valida riusa un tree SHA.
+ */
+export async function siteBlobShasPagination({ repo, ref, token, fetchImpl = fetch, attempts = 3, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
+  const headers = treeHeaders(token);
+  const pending = [ref];
+  let nextTree = 0;
+  const seenTrees = new Set();
+  const shas = new Set();
+  while (nextTree < pending.length) {
+    const treeSha = pending[nextTree++];
+    if (seenTrees.has(treeSha)) continue;
+    seenTrees.add(treeSha);
+    const body = await fetchTreePage({
+      url: treeUrl(repo, treeSha),
+      repo,
+      treeSha,
+      headers,
+      fetchImpl,
+      attempts,
+      sleep,
+    });
+    const entries = readableTreeEntries(body, { repo, treeSha });
+    for (const entry of entries) {
+      if (!entry || !['blob', 'tree', 'commit'].includes(entry.type)) {
+        throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce con tipo illeggibile`);
+      }
+      if (entry.type === 'blob') {
+        if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
+          throw new Error(`l'albero di ${repo}@${treeSha} contiene un blob senza SHA leggibile`);
+        }
+        shas.add(entry.sha);
+      } else if (entry.type === 'tree') {
+        if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
+          throw new Error(`l'albero di ${repo}@${treeSha} contiene un sotto-albero senza SHA leggibile`);
+        }
+        pending.push(entry.sha);
+      }
+    }
+  }
+  return shas;
+}
+
+/** Gli sha di tutti i blob del sito; recupera per sotto-alberi se il tree e' troncato. */
+export async function siteBlobShas({ repo, ref, token, fetchImpl = fetch, attempts = 3, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
+  const headers = treeHeaders(token);
+  const body = await fetchTreePage({
+    url: treeUrl(repo, ref, true),
+    repo,
+    treeSha: ref,
+    headers,
+    fetchImpl,
+    attempts,
+    sleep,
+  });
+  if (body?.truncated === true) {
+    // Il tree SHA e' necessario per non mischiare due revisioni se il ref si
+    // muove fra la risposta ricorsiva e il recupero paginato.
+    if (typeof body.sha !== 'string' || body.sha.length === 0) {
+      throw new Error(`l'albero di ${repo}@${ref} e' troncato e non espone uno SHA root recuperabile`);
+    }
+    return siteBlobShasPagination({
+      repo,
+      ref: body.sha,
+      token,
+      fetchImpl,
+      attempts,
+      sleep,
+    });
+  }
+  return blobShasFromRecursiveTree(readableTreeEntries(body, { repo, treeSha: ref }), { repo, treeSha: ref });
 }
 
 /**

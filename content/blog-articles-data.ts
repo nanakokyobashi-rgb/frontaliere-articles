@@ -37658,6 +37658,26 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'uyba-esordio-pari-novara',
+ category: 'novita',
+ date: '2026-10-05T00:09:59.685Z',
+ image: '/images/blog/uyba-esordio-pari-novara.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'gran-fondo-varese-2025',
+ category: 'novita',
+ date: '2026-10-05T00:34:01.978Z',
+ image: '/images/blog/gran-fondo-varese-2025.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

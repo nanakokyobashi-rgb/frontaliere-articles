@@ -97221,6 +97221,74 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rita-fuhrer-consiglio-federale-donne': {
+    title: 'Consiglio federale senza donne: l\'analisi di Rita Fuhrer',
+    description: 'L\'ex consigliera zurighese Rita Fuhrer commenta la successione in Consiglio federale, ricordando la sua candidatura UDC del 2000 e il dibattito sui criteri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, senza, donne',
+    ogTitle: 'Rita Fuhrer: Nessun problema se in Consiglio federale non ci sono donne',
+    ogDescription: 'L\'ex consigliera di Stato zurighese Rita Fuhrer interviene sul dibattito della successione in Consiglio federale, ripercorrendo la sua candidatura UDC nel 2000 e ribadendo che il criterio principale deve essere l\'idoneità della persona.',
+    canonicalPath: '/articoli-svizzera/rita-fuhrer-consiglio-federale-donne/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale senza donne: l'analisi di Rita Fuhrer",
+      "description": "L'ex consigliera zurighese Rita Fuhrer commenta la successione in Consiglio federale, ricordando la sua candidatura UDC del 2000 e il dibattito sui criteri.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rita-fuhrer-consiglio-federale-donne.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo Federale a Berna con cielo sereno"
+      },
+      "datePublished": "2026-10-05T00:21:47+00:00",
+      "dateModified": "2026-10-05T00:21:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rita-fuhrer-consiglio-federale-donne/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-voto-zurigo-referendum': {
+    title: 'Voto cantonale a Zurigo: guida a iniziative e referendum',
+    description: 'Voto cantonale a Zurigo: guida pratica a iniziative e referendum, calendario, aventi diritto e informazioni ufficiali per esprimere il voto in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, cantonale, zurigo, iniziative',
+    ogTitle: 'Voto cantonale a Zurigo: iniziative e referendum',
+    ogDescription: 'Prima di una votazione nel Cantone di Zurigo, separa il piano cantonale da quello federale: quattro date federali annue, soglie diverse per iniziativa e referendum e doppia maggioranza per le modifiche costituzionali.',
+    canonicalPath: '/articoli-svizzera/guida-voto-zurigo-referendum/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto cantonale a Zurigo: guida a iniziative e referendum",
+      "description": "Voto cantonale a Zurigo: guida pratica a iniziative e referendum, calendario, aventi diritto e informazioni ufficiali per esprimere il voto in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/guida-voto-zurigo-referendum.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Schede per il voto cantonale nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-05T00:47:51+00:00",
+      "dateModified": "2026-10-05T00:47:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-voto-zurigo-referendum/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
