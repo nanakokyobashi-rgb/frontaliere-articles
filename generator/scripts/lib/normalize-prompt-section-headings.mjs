@@ -66,6 +66,8 @@ export const PROMPT_SECTION_LABELS = Object.freeze([
   { label: 'CONFRONTO TRA SCENARI PRATICI', source: EXPAND, phrase: 'confronti tra scenari pratici' },
   { label: 'CONFRONTI TRA SCENARI PRATICI', source: EXPAND, phrase: 'confronti tra scenari pratici' },
   { label: 'RIFERIMENTI A COMUNI TICINESI SPECIFICI', source: EXPAND, phrase: 'riferimenti a comuni ticinesi specifici' },
+  // Ramo non frontaliere della stessa riga (articoli `blog-body-ch`).
+  { label: 'RIFERIMENTI A CANTONI O CITTÀ SVIZZERE PERTINENTI AL TEMA', source: EXPAND, phrase: 'riferimenti a cantoni o città svizzere pertinenti al tema' },
   { label: 'STIPENDIO E REQUISITI', source: EVERGREEN, phrase: 'ticino stipendio requisiti' },
   { label: 'RICONOSCIMENTO DEL TITOLO', source: EVERGREEN, phrase: 'riconoscimento del titolo di studio' },
   { label: 'RICONOSCIMENTO DEL TITOLO DI STUDIO', source: EVERGREEN, phrase: 'riconoscimento del titolo di studio' },

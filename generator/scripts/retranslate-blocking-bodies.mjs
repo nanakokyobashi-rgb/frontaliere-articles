@@ -1900,7 +1900,8 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     row.removedLines = Object.values(titleMarkerRepair.removedByField).flat();
     row.convertedHeadings = Object.values(titleMarkerRepair.convertedByField)
       .flat()
-      .map(({ from, to }) => `${from} → ${to}`);
+      // Il `\r` di una riga CRLF resta nel file, non nel report.
+      .map(({ from, to }) => `${from.replace(/\r$/u, '')} → ${to.replace(/\r$/u, '')}`);
     // Sull'italiano non c'e' cascata: un campo che resta vuoto e' un campo
     // fatto della sola riga del prompt. La pagina resta intatta come prima
     // (fail-closed); cambia solo il motivo, che non deve citare la cascata.
