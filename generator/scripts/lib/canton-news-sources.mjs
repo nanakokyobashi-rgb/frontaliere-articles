@@ -193,15 +193,21 @@ function parseSqlDateTime(raw) {
 const CHROME_ROLES = new Set(['navigation', 'banner', 'contentinfo']);
 
 /**
- * I token dell'attributo `role` di un tag, dai suoi attributi. Solo
- * l'attributo `role`: `data-role="navigation"` e `aria-role` sono un'altra
- * cosa (un `\brole` li prenderebbe, perche' fra `-` e `r` c'e' un confine di
- * parola), e un `<article data-role="navigation">` e' contenuto, non menu.
+ * I token dell'attributo `role` di un tag. Gli attributi si leggono uno per
+ * uno, col loro valore fra virgolette: solo un attributo che SI CHIAMA `role`
+ * conta. `data-role="navigation"` e' un altro attributo, e in
+ * `<main data-note="foo role=navigation">` la scritta `role=` e' il valore di
+ * un altro attributo: cercarla nel testo grezzo toglierebbe `<main>`.
  */
 function roleTokens(attrs) {
-  const m = /(?:^|\s)role\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i.exec(String(attrs || ''));
-  return m ? (m[1] ?? m[2] ?? m[3] ?? '').toLowerCase().split(/\s+/).filter(Boolean) : [];
+  const attrRe = /([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
+  let m;
+  while ((m = attrRe.exec(String(attrs || ''))) !== null) {
+    if (m[1].toLowerCase() === 'role') return (m[2] ?? m[3] ?? m[4] ?? '').toLowerCase().split(/\s+/).filter(Boolean);
+  }
+  return [];
 }
+
 /**
  * Contenitori che rendono `<header>`/`<footer>` l'intestazione di una SEZIONE
  * e non del sito: e' la regola HTML-AAM per cui un header/footer e' landmark

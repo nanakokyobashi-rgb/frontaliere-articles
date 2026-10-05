@@ -423,6 +423,10 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   const dataMain = '<div class="x" role="navigation"><div data-role="main"><a href="/menu/2">Seconda voce del menu laterale</a></div></div>';
   assert.deepEqual(stripPageChrome(dataMain), { html: '', removed: 1 });
   assert.equal(stripPageChrome("<ul ROLE='presentation Navigation'><li><a href=\"/m\">Voce di menu qualunque</a></li></ul><p>resta</p>").html, '<p>resta</p>');
+  // `role=` scritto DENTRO il valore di un altro attributo non e' un ruolo.
+  const inValue = '<main data-note="foo role=navigation"><a href="/news/7">Titolo del settimo comunicato</a></main><div title=\'x role="banner"\'><a href="/news/8">Titolo dell ottavo comunicato</a></div>';
+  assert.deepEqual(stripPageChrome(inValue), { html: inValue, removed: 0 });
+  assert.equal(stripPageChrome('<div class=menu role=navigation><a href="/m3">Terza voce del menu laterale</a></div>ok').html, 'ok');
   // Un'area senza chiusura non si taglia fino in fondo al documento.
   const open = '<nav><a href="/a">Voce di un menu non chiuso</a><main><a href="/news/3">Titolo del terzo comunicato</a></main>';
   assert.deepEqual(stripPageChrome(open), { html: open, removed: 0 });

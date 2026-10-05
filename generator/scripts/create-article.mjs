@@ -3740,7 +3740,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, pageCarriesItem } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -7521,6 +7521,10 @@ export function isolateMainSourceHtml(html) {
 // article, so a module-level handoff keeps the change local instead of
 // reshaping a return type threaded through the whole generation path.
 let lastSourcePublishedAt = '';
+// I titoli che la pagina dichiara di se' (og:title, <title>, <h1>): il testo
+// estratto e' il corpo, senza l'h1, e la verifica degli URL riusati
+// (checkItemOnPage) ha bisogno di entrambi. Stessa vita di lastSourcePublishedAt.
+let lastSourcePageTitle = '';
 
 async function fetchPageContent(url) {
   // Clear FIRST, unconditionally, before any early return.
@@ -7537,6 +7541,7 @@ async function fetchPageContent(url) {
   // Same reasoning as the `_localFallbackUsedThisHeadline` reset in
   // generateAndValidateArticle(): per-headline state must not leak forward.
   lastSourcePublishedAt = '';
+  lastSourcePageTitle = '';
 
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
@@ -7613,6 +7618,7 @@ async function fetchPageContent(url) {
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
+    lastSourcePageTitle = pageTitleEvidence(html);
     const ageNote = lastSourcePublishedAt
       ? ` — fonte del ${lastSourcePublishedAt.slice(0, 10)}`
       : ' — data fonte non rilevata';
@@ -16712,22 +16718,24 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 1: Fetch page content
   const pageContent = await fetchPageContent(url);
 
-  // Step 1a: su un URL riusato la pagina deve parlare ancora di QUESTO item.
+  // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
   // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
   // un'altra, il titolo scelto e i fatti della pagina non sono piu' la stessa
   // notizia, e l'articolo uscirebbe col titolo di un aggiornamento e i fatti
-  // di un altro (vedi pageCarriesItem in lib/source-url-ledger.mjs). L'abort
-  // e' ricordato sull'URL CON l'identita' (il chiamante), quindi vale per
-  // questo item e non per le notizie successive allo stesso indirizzo.
-  // Fail-closed: una pagina non scaricata (fetchPageContent torna '') non ha
-  // verificato niente, e per un URL riusato «senza contesto» vuol dire senza
-  // sapere di quale notizia si parla.
+  // di un altro. checkItemOnPage (lib/source-url-ledger.mjs) confronta titolo
+  // e giornata dell'item con i titoli, il testo e la data della pagina, ed e'
+  // fail-closed: una pagina non scaricata non ha verificato niente. L'abort e'
+  // ricordato sull'URL CON l'identita' (il chiamante), quindi vale per questo
+  // item e non per le notizie successive allo stesso indirizzo.
   if (itemIdentityOf(sourceUrl) !== null) {
-    const itemHeadline = String(sourceContext?.headline || '');
-    if (typeof pageContent !== 'string' || pageContent.length === 0 || !pageCarriesItem(pageContent, itemHeadline)) {
-      console.error(`\n⏭️  URL riusato: la pagina non e' leggibile o non porta piu' questo item («${itemHeadline.slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
-      RUN_REPORT.notes.push(`Source skipped pre-LLM: reused URL no longer carries the item (url=${url})`);
-      const err = new Error(`topic-gate abort: la pagina di un URL riusato non e' leggibile o non porta piu' l'item scelto (${url})`);
+    const itemCheck = checkItemOnPage(
+      { title: lastSourcePageTitle, text: typeof pageContent === 'string' ? pageContent : '', publishedAt: lastSourcePublishedAt },
+      { headline: sourceContext?.headline, date: sourceContext?.date },
+    );
+    if (!itemCheck.ok) {
+      console.error(`\n⏭️  URL riusato: la pagina non e' (piu') questo item [${itemCheck.reason}] («${String(sourceContext?.headline || '').slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
+      RUN_REPORT.notes.push(`Source skipped pre-LLM: reused URL is not this item, ${itemCheck.reason} (url=${url})`);
+      const err = new Error(`topic-gate abort: la pagina di un URL riusato non e' l'item scelto, ${itemCheck.reason} (${url})`);
       err.topicGateAbort = true;
       throw err;
     }

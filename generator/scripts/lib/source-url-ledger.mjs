@@ -253,31 +253,87 @@ export function itemIdentityToken(text, date = null) {
 export const ITEM_ON_PAGE_MIN_SHARE = 0.6;
 
 /**
- * La pagina scaricata parla ancora di QUESTO item?
+ * Il testo porta le parole distintive (almeno 4 lettere) di questo titolo?
+ * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
+ * lettera. Un titolo senza parole distintive non si puo' verificare e non
+ * passa.
+ *
+ * @param {string} text
+ * @param {string} headline
+ * @returns {boolean}
+ */
+export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SHARE } = {}) {
+  const words = [...new Set(normalizeItemText(headline).split(' ').filter((w) => w.length >= 4))];
+  if (words.length === 0) return false;
+  const page = new Set(normalizeItemText(text).split(' '));
+  const found = words.filter((w) => page.has(w)).length;
+  return found / words.length >= minShare;
+}
+
+/**
+ * I titoli che una pagina dichiara di se': `og:title`, `twitter:title`,
+ * `<title>` e gli `<h1>`. Servono alla verifica qui sotto perche' il testo che
+ * `extractArticleText` estrae e' il CORPO (`articleBody`, i paragrafi di
+ * `<article>`/`<main>`), senza l'`h1`: un articolo che non ripete nel corpo le
+ * parole del proprio titolo verrebbe scartato pur essendo l'item giusto.
+ *
+ * @param {string} html
+ * @returns {string} i titoli, uno per riga ('' se non ce n'e')
+ */
+export function pageTitleEvidence(html) {
+  const src = String(html || '');
+  const out = [];
+  for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
+    const tag = m[0];
+    if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
+    const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
+    if (content) out.push(content[1] ?? content[2] ?? '');
+  }
+  for (const m of src.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
+  return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
+}
+
+/**
+ * La pagina scaricata e' ancora QUESTO item? La verifica per gli URL riusati,
+ * prima di generare.
  *
  * Un URL riusato porta la notizia del momento: fra la lettura del feed e la
  * generazione, o per una voce che il feed riporta accanto a una piu' recente
  * allo stesso indirizzo, la pagina puo' essere gia' passata a un'altra
  * notizia. Generare allora vorrebbe dire il titolo di un aggiornamento con i
  * fatti di un altro. Misurato il 2026-10-05 su
- * `/graubuenden/verkehrsticker-1574112`: la pagina porta «Flims», «Trin»,
- * «Verkehr fliesst wieder» e nessuna delle parole dei titoli di maggio, giugno
- * e agosto («Pontresina», «Isla-Bella», «Töffunfall»).
+ * `/graubuenden/verkehrsticker-1574112`: la pagina dichiara `og:title` «Nach
+ * Unfall zwischen Flims und Trin: Verkehr fliesst wieder» e
+ * `article:published_time` 2026-10-05T10:49:15Z — il titolo e l'istante della
+ * voce del feed — e nessuna delle parole dei titoli di maggio, giugno e agosto.
  *
- * Il confronto e' sulle parole distintive del titolo (almeno 4 lettere), non
- * sulla frase: il corpo estratto non sempre ripete il titolo alla lettera.
- * Un titolo senza parole distintive non si puo' verificare e non passa.
+ * Due condizioni, entrambe necessarie:
+ *   1. le parole del titolo stanno nei titoli della pagina o nel suo testo;
+ *   2. se l'item e la pagina dichiarano entrambi una data, e' la stessa
+ *      giornata (UTC): l'identita' dell'item comprende la giornata, e lo
+ *      stesso titolo riemesso un altro giorno e' un'altra notizia. Dove la
+ *      pagina non dichiara una data il confronto non si puo' fare e decide la
+ *      sola condizione 1.
+ * Senza titoli ne' testo (pagina non scaricata) non si e' verificato niente:
+ * la risposta e' no.
  *
- * @param {string} pageText il testo estratto dalla pagina
- * @param {string} headline il titolo dell'item
- * @returns {boolean}
+ * @param {{ title?: string, text?: string, publishedAt?: string | Date | null }} page
+ * @param {{ headline?: string, date?: string | Date | null }} item
+ * @returns {{ ok: boolean, reason: 'ok' | 'no-page' | 'title-not-on-page' | 'other-day' }}
  */
-export function pageCarriesItem(pageText, headline, { minShare = ITEM_ON_PAGE_MIN_SHARE } = {}) {
-  const words = [...new Set(normalizeItemText(headline).split(' ').filter((w) => w.length >= 4))];
-  if (words.length === 0) return false;
-  const page = new Set(normalizeItemText(pageText).split(' '));
-  const found = words.filter((w) => page.has(w)).length;
-  return found / words.length >= minShare;
+export function checkItemOnPage(page, item) {
+  const evidence = `${page?.title || ''}\n${page?.text || ''}`;
+  if (!evidence.trim()) return { ok: false, reason: 'no-page' };
+  if (!pageCarriesItem(evidence, item?.headline || '')) return { ok: false, reason: 'title-not-on-page' };
+  const dayOf = (raw) => {
+    if (!raw) return '';
+    const d = raw instanceof Date ? raw : new Date(raw);
+    return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+  };
+  const itemDay = dayOf(item?.date);
+  const pageDay = dayOf(page?.publishedAt);
+  if (itemDay && pageDay && itemDay !== pageDay) return { ok: false, reason: 'other-day' };
+  return { ok: true, reason: 'ok' };
 }
 
 /** L'URL con l'identita' dell'item nel frammento (un frammento gia' presente e' sostituito). */

@@ -44,7 +44,9 @@ import {
   legacyNewsUrlKey,
   makeLedgerEntry,
   newsUrlKey,
+  checkItemOnPage,
   pageCarriesItem,
+  pageTitleEvidence,
   stripItemIdentity,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
@@ -199,7 +201,38 @@ test('pageCarriesItem: la pagina reale del ticker porta la notizia di oggi e nes
   assert.equal(pageCarriesItem('', TITLES[3]), false);
 });
 
-test('la generazione si ferma se la pagina di un URL riusato non porta piu\' l\'item scelto', () => {
+test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina reale del ticker', () => {
+  const html = readFileSync(path.join(HERE, 'fixtures', 'canton-sources', 'suedostschweiz-verkehrsticker-page.html'), 'utf8');
+  const title = pageTitleEvidence(html);
+  assert.match(title, /Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder/);
+  // Il corpo estratto non porta l'h1 (extractArticleText da' i paragrafi):
+  // qui un corpo che del titolo non ripete quasi niente.
+  const body = 'Die Strasse war am Mittag während rund einer Stunde nur einspurig befahrbar. Verletzt wurde niemand.';
+  assert.equal(pageCarriesItem(body, TITLES[3]), false, 'premessa: il solo corpo non basterebbe');
+  const page = { title, text: body, publishedAt: '2026-10-05T10:49:15.000Z' };
+  const today = new Date('2026-10-05T10:49:15Z');
+  assert.deepEqual(checkItemOnPage(page, { headline: TITLES[3], date: today }), { ok: true, reason: 'ok' });
+  // Un'altra notizia allo stesso indirizzo.
+  assert.deepEqual(checkItemOnPage(page, { headline: TITLES[2], date: new Date('2026-08-26T09:00:00Z') }), { ok: false, reason: 'title-not-on-page' });
+  // Lo stesso titolo, ma l'item e' di un altro giorno: e' un'altra notizia.
+  assert.deepEqual(checkItemOnPage(page, { headline: TITLES[3], date: new Date('2026-10-02T08:00:00Z') }), { ok: false, reason: 'other-day' });
+  // La pagina non dichiara una data: decide il titolo.
+  assert.equal(checkItemOnPage({ title, text: body, publishedAt: '' }, { headline: TITLES[3], date: today }).ok, true);
+  assert.equal(checkItemOnPage({ title, text: body, publishedAt: 'non una data' }, { headline: TITLES[3], date: today }).ok, true);
+  // Pagina non scaricata, o item senza titolo: non si e' verificato niente.
+  assert.deepEqual(checkItemOnPage({ title: '', text: '', publishedAt: '' }, { headline: TITLES[3], date: today }), { ok: false, reason: 'no-page' });
+  assert.equal(checkItemOnPage(page, { headline: '', date: today }).ok, false);
+  assert.equal(checkItemOnPage(page, {}).ok, false);
+});
+
+test('pageTitleEvidence: og:title, twitter:title, <title> e <h1>; niente da una pagina che non ne ha', () => {
+  const html = '<html><head><title>Titolo | Testata</title><meta content="Titolo da og" property="og:title"><meta name=\'twitter:title\' content=\'Titolo da twitter\'><meta property="og:description" content="non un titolo"></head><body><h1 class="t">Titolo <em>in pagina</em></h1><p>corpo</p></body></html>';
+  assert.deepEqual(pageTitleEvidence(html).split('\n'), ['Titolo da og', 'Titolo da twitter', 'Titolo | Testata', 'Titolo in pagina']);
+  assert.equal(pageTitleEvidence('<p>solo corpo</p>'), '');
+  assert.equal(pageTitleEvidence(''), '');
+});
+
+test('la generazione si ferma se la pagina di un URL riusato non e\' l\'item scelto', () => {
   const start = SRC.indexOf('async function generateAndValidateArticle(sourceUrl, sourceContext = null) {');
   const fn = SRC.slice(start, SRC.indexOf('\n}\n', start));
   const fetchAt = fn.indexOf('const pageContent = await fetchPageContent(url);');
@@ -208,10 +241,14 @@ test('la generazione si ferma se la pagina di un URL riusato non porta piu\' l\'
   assert.ok(fetchAt !== -1 && guardAt > fetchAt, 'la guardia deve stare subito dopo la fetch della pagina');
   assert.ok(firstLlm > guardAt, 'e prima della prima chiamata al modello');
   const guard = fn.slice(guardAt, fn.indexOf('\n  }\n', guardAt));
-  assert.match(guard, /!pageCarriesItem\(pageContent, itemHeadline\)/);
-  // Fail-closed: una pagina non scaricata non ha verificato niente.
-  assert.match(guard, /pageContent\.length === 0 \|\| !pageCarriesItem/);
+  // Titoli, testo e data della pagina contro titolo e data dell'item.
+  assert.match(guard, /checkItemOnPage\(\s*\{ title: lastSourcePageTitle, text: [^}]*pageContent[^}]*, publishedAt: lastSourcePublishedAt \},\s*\{ headline: sourceContext\?\.headline, date: sourceContext\?\.date \},/);
+  assert.match(guard, /if \(!itemCheck\.ok\) \{/);
   assert.match(guard, /err\.topicGateAbort = true;/, 'un abort che il ciclo ricorda sull\'item e passa alla headline successiva');
+  // I titoli della pagina vengono dalla stessa fetch del testo, e si azzerano con lei.
+  const fetchFn = SRC.slice(SRC.indexOf('async function fetchPageContent(url) {'), SRC.indexOf('\nconst MAX_ARTICLE_AGE_DAYS'));
+  assert.match(fetchFn, /lastSourcePageTitle = '';/);
+  assert.match(fetchFn, /lastSourcePageTitle = pageTitleEvidence\(html\);/);
 });
 
 // ── Il cablaggio in create-article.mjs ──────────────────────────────────────
