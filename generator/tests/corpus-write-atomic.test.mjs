@@ -52,6 +52,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-pharmacy-evergreen-guides.mjs', 'nessun workflow: producer rerunnable lanciato a mano'],
   ['generator/scripts/generate-journalist-image-catalog.mjs', 'generate-article.yml'],
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'bonifica-blocking-bodies.yml'],
+  ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
 ];
 
 // `create-article.mjs` e' nella classe ed e' gia' atomico dal round 1, ma la
