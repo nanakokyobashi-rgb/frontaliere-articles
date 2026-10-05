@@ -110,6 +110,28 @@ test('meteo: snapshot vecchio = non disponibile; una citta\' CH senza cantone vi
   assert.equal(shapeWeather(withNew, ['GR'], { nowMs: NOW }).cities[0].name, 'Chur');
 });
 
+test('timestamp nel futuro e ora di importazione illeggibile degradano, i turni escono in ordine cronologico', () => {
+  const later = new Date(NOW + 2 * HOUR).toISOString();
+  assert.match(shapePlateAuctions({ ...recording('plate-auctions', NOW), generatedAt: later }, ['AG'], { nowMs: NOW }).reason, /nel futuro/);
+  assert.match(shapeWeather({ ...recording('weather-snapshot', NOW), generatedAt: later }, ['TI'], { nowMs: NOW }).reason, /nel futuro/);
+  assert.match(cantonNoticesProblem({ ...recording('canton-notices', NOW), generatedAt: later }, { nowMs: NOW }), /in the future/);
+
+  const doc = recording('pharmacy-duty-cantons', NOW);
+  const noClock = structuredClone(doc);
+  delete noClock.generatedAt;
+  noClock.cantons.TI.fetchedAt = null;
+  assert.match(shapePharmacyDuties(noClock, 'TI', { nowMs: NOW }).reason, /non verificabile/);
+
+  const shuffled = structuredClone(doc);
+  const base = NOW + HOUR;
+  shuffled.cantons.TI.duties = Array.from({ length: 9 }, (_, i) => ({
+    pharmacy: `Farmacia ${i}`, city: 'Lugano', coverageName: 'Luganese', dutyType: 'day',
+    startsAt: new Date(base + i * HOUR).toISOString(), endsAt: new Date(base + (i + 1) * HOUR).toISOString(),
+  })).reverse();
+  const block = shapePharmacyDuties(shuffled, 'TI', { nowMs: NOW });
+  assert.deepEqual(block.duties.map((d) => d.pharmacy), ['Farmacia 0', 'Farmacia 1', 'Farmacia 2', 'Farmacia 3', 'Farmacia 4', 'Farmacia 5']);
+});
+
 test('soglie della vista: con una sola fonte raggiungibile non si scrive', () => {
   const view = buildCantonServices({ premiums: null, plateAuctions: null, pharmacyDuties: null, weather: recording('weather-snapshot', NOW) }, CANTON_GROUPS, { nowMs: NOW });
   assert.ok(viewThresholdFailures(view).length >= 1);

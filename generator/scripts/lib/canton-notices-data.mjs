@@ -38,6 +38,9 @@ export function cantonNoticesProblem(payload, { nowMs = Date.now() } = {}) {
   if (payload.schemaVersion !== 1) return `schemaVersion is ${JSON.stringify(payload.schemaVersion)}, expected 1`;
   const generated = Date.parse(payload.generatedAt ?? '');
   if (!Number.isFinite(generated)) return 'generatedAt is not a date';
+  // Un generatedAt nel futuro (oltre dieci minuti di orologio sfasato) non e'
+  // fresco: e' un orologio sbagliato, e il gate di eta' non lo vedrebbe mai.
+  if (generated - nowMs > 10 * 60_000) return `generatedAt ${payload.generatedAt} is in the future`;
   const ageDays = (nowMs - generated) / 86_400_000;
   if (ageDays > MAX_AGE_DAYS) return `generatedAt is ${ageDays.toFixed(1)} days old (max ${MAX_AGE_DAYS}) — the notices crawler stopped`;
   if (!Array.isArray(payload.notices)) return 'has no notices[] array';

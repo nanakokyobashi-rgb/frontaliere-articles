@@ -35,6 +35,13 @@ export const PHARMACY_MAX_AGE_MS = 48 * HOUR_MS;
 /** I premi sono annuali: l'anno pubblicato non puo' essere piu' vecchio dell'anno in corso. */
 export const PREMIUMS_MAX_YEAR_LAG = 0;
 
+/**
+ * Tolleranza sull'orologio del produttore. Un timestamp piu' avanti di cosi'
+ * non e' «freschissimo»: e' un orologio sbagliato, e con un controllo solo su
+ * `age > max` un payload fermo resterebbe disponibile oltre la soglia.
+ */
+export const CLOCK_SKEW_MS = 10 * 60_000;
+
 /** Soglie della vista: sotto, la vista non si scrive (meglio la copia precedente). */
 export const MIN_SOURCES_OK = 2;
 export const MIN_CANTONS_WITH_BLOCK = 20;
@@ -148,6 +155,7 @@ export function assertPlateAuctionsShape(doc) {
 export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
   if (!doc) return unavailable('plate-auctions.json non raggiungibile');
   const age = nowMs - Date.parse(doc.generatedAt);
+  if (age < -CLOCK_SKEW_MS) return unavailable(`snapshot aste datato nel futuro (${doc.generatedAt})`);
   if (age > PLATE_AUCTIONS_MAX_AGE_MS) return unavailable(`snapshot aste vecchio di ${Math.round(age / HOUR_MS)} h (max ${PLATE_AUCTIONS_MAX_AGE_MS / HOUR_MS} h)`);
   const codes = new Set(members.map((m) => m.toUpperCase()));
   const sources = members.map((m) => doc.sources[m.toLowerCase()]).filter(Boolean);
@@ -191,9 +199,18 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
   const c = doc.cantons[group];
   if (!c) return unavailable('nessuna fonte ufficiale di turni farmacia leggibile a macchina per questo cantone');
   if (c.state !== 'fresh') return unavailable(`rilascio dei turni non pubblicabile (${c.state})`);
+  // Senza un'ora d'importazione leggibile la freschezza non si puo' misurare:
+  // il blocco degrada invece di saltare il controllo.
   const fetched = Date.parse(c.fetchedAt ?? doc.generatedAt ?? '');
-  if (Number.isFinite(fetched) && nowMs - fetched > PHARMACY_MAX_AGE_MS) return unavailable(`turni importati ${Math.round((nowMs - fetched) / HOUR_MS)} h fa (max ${PHARMACY_MAX_AGE_MS / HOUR_MS} h)`);
-  const upcoming = c.duties.filter((d) => Date.parse(d.endsAt) > nowMs).slice(0, MAX_DUTIES);
+  if (!Number.isFinite(fetched)) return unavailable('turni senza data di importazione leggibile: freschezza non verificabile');
+  if (nowMs - fetched < -CLOCK_SKEW_MS) return unavailable(`turni datati nel futuro (${c.fetchedAt ?? doc.generatedAt})`);
+  if (nowMs - fetched > PHARMACY_MAX_AGE_MS) return unavailable(`turni importati ${Math.round((nowMs - fetched) / HOUR_MS)} h fa (max ${PHARMACY_MAX_AGE_MS / HOUR_MS} h)`);
+  // Ordine cronologico PRIMA del tetto: il contratto non garantisce l'ordine,
+  // e tagliare una lista disordinata scarterebbe i turni piu' vicini.
+  const upcoming = c.duties
+    .filter((d) => Date.parse(d.endsAt) > nowMs)
+    .sort((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt) || Date.parse(a.endsAt) - Date.parse(b.endsAt))
+    .slice(0, MAX_DUTIES);
   if (!upcoming.length) return unavailable('nessun turno in corso o in arrivo nella finestra pubblicata');
   return {
     available: true,
@@ -216,6 +233,7 @@ export function assertWeatherShape(doc) {
 export function shapeWeather(doc, members, { nowMs = Date.now() } = {}) {
   if (!doc) return unavailable('weather-snapshot.json non raggiungibile');
   const age = nowMs - Date.parse(doc.generatedAt);
+  if (age < -CLOCK_SKEW_MS) return unavailable(`snapshot meteo datato nel futuro (${doc.generatedAt})`);
   if (age > WEATHER_MAX_AGE_MS) return unavailable(`snapshot meteo vecchio di ${Math.round(age / HOUR_MS)} h (max ${WEATHER_MAX_AGE_MS / HOUR_MS} h)`);
   const cities = [];
   for (const [id, city] of Object.entries(doc.cities)) {
