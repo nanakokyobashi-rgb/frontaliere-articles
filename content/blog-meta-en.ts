@@ -12629,6 +12629,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.hotel-collina-oro-licenziamenti.title': 'Ticino, Villa Principe Leopoldo: 76 layoffs',
     'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro will close for months: the project is worth 12 million and involves 76 redundancies out of 81 employees.',
     'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Canton Ticino',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hotel in Ticino: closes and dismisses 76 employees',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro invests 12 million francs, closes for months and announces 76 redundancies out of 81 employees.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Ticino',
 };
 
 export default blogMetaEn;

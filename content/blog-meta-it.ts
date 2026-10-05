@@ -12630,6 +12630,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.hotel-collina-oro-licenziamenti.title': 'Ticino, villa principe leopoldo: 76 licenziamenti',
     'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiuderà per mesi: il progetto vale 12 milioni e riguarda 76 licenziamenti su 81 dipendenti.',
     'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo a Collina d\'Oro, nel Canton Ticino',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hotel in Ticino: chiude e licenzia 76 dipendenti',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro investe 12 milioni di franchi, chiude per mesi e annuncia 76 licenziamenti su 81 dipendenti.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo a Collina d\'Oro, nel Canton Ticino',
 };
 
 export default blogMetaIt;
