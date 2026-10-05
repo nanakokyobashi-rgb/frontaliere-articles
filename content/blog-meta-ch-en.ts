@@ -7748,6 +7748,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Ticino Open Doors Login: Railway, Commerce and Buildings',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Saturday 10 October, 09.00-13.00 in Bellinzona, Porte Aperte login Ticino presents rail, commerce and the new AFC Informatico/a training of buildings and infrastructures, launched in August 2027.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Visitors at Porte Aperte login Ticino observe an electrotrain and building automation tools in Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Cyber risks: Swiss SMEs underestimate the dangers',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'A VZ-HSLU analysis indicates that cyber incidents are the top global risk: nearly 58\'000 digital crimes in Switzerland in 2025.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Swiss SME team reviews cyber risks in an office',
 };
 
 export default blogMetaChEn;

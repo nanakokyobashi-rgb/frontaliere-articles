@@ -7748,6 +7748,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Offene Türen Login Tessin: Bahn, Handel und Gebäude',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Am Samstag, 10. Oktober, 09.00-13.00 Uhr in Bellinzona, präsentiert Porte Aperte Login Tessin Bahn, Handel und die im August 2027 gestartete neue Ausbildung EFZ Gebäude- und Infrastrukturinformatiker/in.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Besucher bei den offenen Türen login Ticino beobachten einen Elektrozug und Gebäudeautomatisierungswerkzeuge in Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Cyberrisiken: Schweizer KMU unterschätzen die Gefahren',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Eine VZ-HSLU-Analyse zeigt, dass Cybervorfälle das weltweit größte Risiko darstellen: In der Schweiz gab es im Jahr 2025 knapp 58\'000 digitale Straftaten.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Schweizer KMU prüft Cyberrisiken im Büro',
 };
 
 export default blogMetaChDe;

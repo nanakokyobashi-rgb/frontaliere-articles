@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/inflazione-aumenta-in-svizzera%2c-banca-nazionale-ritoccher%c3%a0-tassi%3f/92001563": {
-    "articleId": "inflazione-svizzera-bns-tassi",
-    "ts": "2026-09-03T15:18:35.895Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/riserve-naturali-messe-a-dura-prova-da-siccit%c3%a0/91999663": {
     "articleId": "riserve-naturali-siccita-estate-2024",
     "ts": "2026-09-03T16:11:14.748Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954740/edifici-formazione-vicino-futuro-infrastrutture-afc-binari": {
     "articleId": "porte-aperte-login-ticino",
     "ts": "2026-10-05T09:48:17.635Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/rischi-informatici-sottovalutati-da-molte-pmi%2c-studio/92167766": {
+    "articleId": "rischi-cyber-pmi-svizzere",
+    "ts": "2026-10-05T10:27:11.803Z",
     "keyForm": 2
   }
 }

@@ -97799,6 +97799,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rischi-cyber-pmi-svizzere': {
+    title: 'Rischi informatici: PMI svizzere sottovalutano i pericoli',
+    description: 'Studio VZ-HSLU: quasi 58\'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rischi, informatici, svizzere, sottovalutano',
+    ogTitle: 'PMI svizzere e rischi informatici sottovalutati',
+    ogDescription: 'Lo studio VZ-HSLU spiega perché un attacco può interrompere l\'attività, danneggiare dati e sistemi e mettere sotto pressione la liquidità. Nel 2025 in Svizzera sono stati registrati quasi 58\'000 reati digitali; il tasso di risoluzione è stato',
+    canonicalPath: '/articoli-svizzera/rischi-cyber-pmi-svizzere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rischi informatici: PMI svizzere sottovalutano i pericoli",
+      "description": "Studio VZ-HSLU: quasi 58'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rischi-cyber-pmi-svizzere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "PMI svizzera analizza i rischi informatici in ufficio"
+      },
+      "datePublished": "2026-10-05T10:27:11+00:00",
+      "dateModified": "2026-10-05T10:27:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rischi-cyber-pmi-svizzere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

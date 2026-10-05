@@ -7748,6 +7748,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Portes ouvertes login Ticino : chemin de fer, commerce et bâtiments',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Samedi 10 octobre, 09.00-13.00 à Bellinzona, Portes ouvertes login Ticino présentent le chemin de fer, le commerce et la nouvelle formation CFC d\'informaticien/ne des bâtiments et des infrastructures, lancée en août 2027.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Visiteurs aux portes ouvertes login Ticino observent un électrotrain et des outils d\'automatisation du bâtiment à Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Risques informatiques : les PME suisses sous-estiment les dangers',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Une analyse VZ-HSLU signale que les incidents informatiques constituent le premier risque mondial : en Suisse, en 2025, près de 58\'000 délits numériques.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Une PME suisse analyse les risques informatiques au bureau',
 };
 
 export default blogMetaChFr;

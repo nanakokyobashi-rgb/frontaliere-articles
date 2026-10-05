@@ -7748,6 +7748,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Porte Aperte login Ticino: ferrovia, commercio e edifici',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Sabato 10 ottobre, 09.00-13.00 a Bellinzona, Porte Aperte login Ticino presenta ferrovia, commercio e la nuova formazione AFC Informatico/a degli edifici e delle infrastrutture, avviata ad agosto 2027.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Visitatori alle Porte Aperte login Ticino osservano un elettrotreno e strumenti di automazione edilizia a Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Rischi informatici: PMI svizzere sottovalutano i pericoli',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Un\'analisi VZ-HSLU segnala che gli incidenti informatici sono il primo rischio globale: in Svizzera nel 2025 quasi 58\'000 reati digitali.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'PMI svizzera analizza i rischi informatici in ufficio',
 };
 
 export default blogMetaChIt;
