@@ -12642,6 +12642,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana: 8,4 milioni per sicurezza e viabilità',
     'blog.article.investimenti-viabilita-lariana-como.excerpt': 'La Provincia di Como investe in sicurezza e percorribilità sulla S.P. 583 Lariana: nuovi marciapiedi, barriere salvamotociclisti e rifacimento piani viabili.',
     'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Strada provinciale Lariana lungo il Lago di Como con interventi di sicurezza',
+    'blog.article.biasca-accoltellamento-21enne.title': 'Ticino, 21enne italiano accoltellato: rischia la vita',
+    'blog.article.biasca-accoltellamento-21enne.excerpt': 'A Biasca un 21enne cittadino italiano, residente nel distretto di Leventina, è stato gravemente accoltellato: la vita è in pericolo.',
+    'blog.article.biasca-accoltellamento-21enne.imageAlt': 'Via Bellinzona a Biasca, in Ticino, dove sono intervenuti polizia e soccorritori.',
 };
 
 export default blogMetaIt;

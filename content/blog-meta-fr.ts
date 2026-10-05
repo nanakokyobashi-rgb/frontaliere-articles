@@ -12643,6 +12643,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana : 8,4 millions pour la sécurité et la voirie',
     'blog.article.investimenti-viabilita-lariana-como.excerpt': 'La Province de Como investit dans la sécurité et la praticabilité de la S.P. 583 Lariana : nouveaux trottoirs, barrières de protection pour motocyclistes et réfection des chaussées.',
     'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Route provinciale Lariana le long du lac de Côme avec aménagements de sécurité (Como)',
+    'blog.article.biasca-accoltellamento-21enne.title': 'Tessin, 21 ans, poignardé : il risque sa vie',
+    'blog.article.biasca-accoltellamento-21enne.excerpt': 'À Biasca, un citoyen italien de 21 ans, résidant dans le district de Léventine, a été gravement poignardé : sa vie est en danger.',
+    'blog.article.biasca-accoltellamento-21enne.imageAlt': 'La via Bellinzona à Biasca, au Tessin, où la police et les secours sont intervenus.',
 };
 
 export default blogMetaFr;

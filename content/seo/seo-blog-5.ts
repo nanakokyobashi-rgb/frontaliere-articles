@@ -99678,6 +99678,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-biasca-accoltellamento-21enne': {
+    title: 'Ticino, 21enne italiano accoltellato: rischia la vita',
+    description: 'Biasca, un 21enne italiano è stato gravemente accoltellato in via Bellinzona. Sono in corso accertamenti e ricerche dell\'autore o degli autori: la vita è',
+    keywords: 'frontalieri, ticino, svizzera, italia, 21enne, italiano, accoltellato, rischia',
+    ogTitle: 'Ticino, 21enne italiano accoltellato: rischia la vita',
+    ogDescription: 'Una richiesta è arrivata poco prima delle 15 alla Cecal per un uomo gravemente accoltellato in via Bellinzona a Biasca. Sul posto Polizia cantonale, Polizia Tre Valli e Tre Valli Soccorso. In corso accertamenti e ricerca dell\'autore o degli autori.',
+    canonicalPath: '/articoli-frontaliere/biasca-accoltellamento-21enne/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino, 21enne italiano accoltellato: rischia la vita",
+      "description": "Biasca, un 21enne italiano è stato gravemente accoltellato in via Bellinzona. Sono in corso accertamenti e ricerche dell'autore o degli autori: la vita è",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/biasca-accoltellamento-21enne.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via Bellinzona a Biasca, in Ticino, dove sono intervenuti polizia e soccorritori."
+      },
+      "datePublished": "2026-10-05T23:38:30+00:00",
+      "dateModified": "2026-10-05T23:38:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/biasca-accoltellamento-21enne/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

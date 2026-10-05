@@ -12641,6 +12641,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana: 8,4 million for safety and road infrastructure',
     'blog.article.investimenti-viabilita-lariana-como.excerpt': 'The Province of Como invests in safety and road accessibility along the S.P. 583 Lariana: new sidewalks, motorcyclist protection barriers and road resurfacing.',
     'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Lariana provincial road along Lake Como with safety improvements',
+    'blog.article.biasca-accoltellamento-21enne.title': 'Ticino, 21-year-old Italian stabbed: his life is at risk',
+    'blog.article.biasca-accoltellamento-21enne.excerpt': 'In Biasca, a 21-year-old Italian citizen residing in the Leventina district was seriously stabbed: his life is in danger.',
+    'blog.article.biasca-accoltellamento-21enne.imageAlt': 'Via Bellinzona in Biasca, Ticino, where police officers and rescuers intervened.',
 };
 
 export default blogMetaEn;

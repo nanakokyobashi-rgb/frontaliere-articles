@@ -39825,6 +39825,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'biasca-accoltellamento-21enne',
+ category: 'novita',
+ date: '2026-10-05T23:38:30.856Z',
+ image: '/images/blog/biasca-accoltellamento-21enne.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

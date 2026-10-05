@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3926505": "littering-lavoro-e-aviatione-novita-del-1-augusto",
   "https://www.tio.ch/ticino/cronaca/1941911/lucibello-nessun-arricchimento-personale-o-uso-fraudolento-di-fondi": "lucibello-disti-verifica-fondi",
   "https://www.tvsvizzera.it/tvs/qui-svizzera/inflazione-ancora-in-calo-in-svizzera-scende-allo-04-in-luglio/91837164": "inflazione-svizzera-luglio-2026",
   "https://www.ticinonews.ch/ticino/cadenazzo-quartino-da-fine-agosto-si-attivano-i-semafori-intelligenti-440058": "semafori-intelligenti-cadenazzo-quartino",
@@ -1976,6 +1975,11 @@
   "https://comozero.it/attualita/lago-di-como-maxi-investimenti-anti-ingorgo-e-barriere-salva-motociclisti-rivoluzione-viabilita-sulla-lariana": {
     "articleId": "investimenti-viabilita-lariana-como",
     "ts": "2026-10-05T22:55:10.375Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/cronaca/ticino-italiano-21enne-trovato-ferito-dalla-polizia-rischia-la-vita-indagini-in-corso": {
+    "articleId": "biasca-accoltellamento-21enne",
+    "ts": "2026-10-05T23:38:31.265Z",
     "keyForm": 2
   }
 }
