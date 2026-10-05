@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+    
+                <url>
+                    <loc>https://www.frapp.ch/fr/articles/stories/veronica-vancardo-800m-diamond-league-et-morat-fribourg</loc>
+                    <news:news>
+                        <news:publication>
+                            <news:name>Frapp</news:name>
+                            <news:language>fr</news:language>
+                        </news:publication>
+                        <news:publication_date>2026-10-05T14:39:00+02:00</news:publication_date>
+                        <news:title>Veronica Vancardo sur les JO: "je me permets d'y rêver"</news:title>
+                    </news:news>
+                    <image:image>
+                      <image:loc>https://media.frapp.ch/image/2026/10/1540138/X8mQjAJqsNqvjfh7BWelIMi0UVvmSkAOOwQZzDvE.jpg</image:loc>
+                    </image:image>
+                </url>
+<url>
+                    <loc>https://www.frapp.ch/fr/articles/stories/tamedia-biffe-34-nouveaux-postes</loc>
+                    <news:news>
+                        <news:publication>
+                            <news:name>Frapp</news:name>
+                            <news:language>fr</news:language>
+                        </news:publication>
+                        <news:publication_date>2026-10-05T13:33:00+02:00</news:publication_date>
+                        <news:title>Tamedia biffe 34 nouveaux postes</news:title>
+                    </news:news>
+                    <image:image>
+                      <image:loc>https://media.frapp.ch/image/2026/10/1540123/20261005132650531.jpg</image:loc>
+                    </image:image>
+                </url>
+</urlset>

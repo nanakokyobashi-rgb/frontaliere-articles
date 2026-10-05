@@ -261,7 +261,10 @@ test('un token del service account rifiutato da Cloud Translation passa al fallb
 test('il tetto giornaliero del progetto non attiva il fallback OAuth', () => {
   const out = runServiceAccountRejection({ refusal: 'quota' });
   assert.match(out, /RESULTS=\["",""\]/);
-  assert.match(out, /BEARERS=sa,sa/);
+  // Nessun bearer OAuth. Il secondo campo, in sequenza, non arriva nemmeno
+  // all'API: il rifiuto di quota del primo ha messo il tier in pausa
+  // (free-translate-googlecloud-quota-cooldown.test.mjs).
+  assert.match(out, /BEARERS=sa$/m);
 });
 
 test('due campi concorrenti con il token del service account rifiutato arrivano entrambi al fallback OAuth', () => {

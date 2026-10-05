@@ -421,7 +421,7 @@ const SHARP_IMPORT = "(await import('sharp')).default";
 /**
  * The real resolveHeroImage. Commons answers from the fixture, the download
  * returns bytes, and a fake sharp writes a WebP header of the size it would
- * produce (1200×675 when it resizes, else the original).
+ * produce a 1200×675 WebP, cropping larger uploads to the shared social geometry.
  */
 async function runResolveHero({ root, image, apiTitle, original = { width: 2560, height: 1920 }, writeCreditRecord = credit.writeCreditRecord }) {
   assert.ok(RESOLVE_HERO.includes(SHARP_IMPORT), 'the sharp import moved: update the harness');
@@ -449,12 +449,15 @@ async function runResolveHero({ root, image, apiTitle, original = { width: 2560,
   };
   const resolveHeroImage = new Function(
     'fs', 'path', 'PROJECT_ROOT', 'fetch', '__sharp', 'console', 'appendCatalogEntry', 'findBestFallbackImage',
-    'STATIC_FALLBACK_IMAGE', 'BLOG_IMAGE_HARD_MAX_BYTES', 'resolveCommonsPick', 'creditRecordForCover', 'webpDimensions',
+    'STATIC_FALLBACK_IMAGE', 'BLOG_IMAGE_TARGET_MAX_BYTES', 'BLOG_IMAGE_HARD_MAX_BYTES',
+    'BLOG_IMAGE_WIDTH', 'BLOG_IMAGE_HEIGHT', 'BLOG_IMAGE_QUALITY_PASSES', 'resolveCommonsPick',
+    'creditRecordForCover', 'webpDimensions',
     'writeCreditRecord',
     `${RESOLVE_HERO.replace(SHARP_IMPORT, '__sharp')}\nreturn resolveHeroImage;`,
   )(
     fs, path, root, download, sharp, quiet, (p) => calls.catalog.push(p), () => '/images/places/lugano-view.webp',
-    'lugano-view.webp', 320 * 1024,
+    'lugano-view.webp', 190 * 1024, 320 * 1024, 1200, 675,
+    [75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20],
     (args) => credit.resolveCommonsPick({ ...args, fetchImpl: apiFetch, fetchedAt: '2026-10-04' }),
     credit.creditRecordForCover, credit.webpDimensions, writeCreditRecord,
   );
@@ -475,7 +478,7 @@ test('journalist path: a creditable Commons pick is used with its record', async
     assert.equal(data._generatedImagePath, '/images/blog/articolo-firmato.webp');
     const record = JSON.parse(fs.readFileSync(path.join(root, 'content/image-credits/blog/articolo-firmato.json'), 'utf-8'));
     assert.deepEqual(data._imageCredit, record);
-    assert.equal(record.modified, 'resized', 'kept at 2560×1920: re-encoded, same shape');
+    assert.equal(record.modified, 'cropped', 'large uploads use the shared 1200×675 social geometry');
     assert.deepEqual(calls.catalog, ['/images/blog/articolo-firmato.webp']);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

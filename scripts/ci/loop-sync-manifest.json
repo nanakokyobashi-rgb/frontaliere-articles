@@ -715,9 +715,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b8c729e37f891333",
-        "corpus": "b8c729e37f891333",
-        "alignedAt": "2026-10-04"
+        "site": "4c710e799877f56f",
+        "corpus": "4c710e799877f56f",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -1396,8 +1396,8 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "30b1c966e5bfae39",
-        "corpus": "30b1c966e5bfae39",
+        "site": "a9c64aebc070caef",
+        "corpus": "a9c64aebc070caef",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2160,8 +2160,8 @@
       "mode": "identical",
       "reason": "Gemello identico del rilevatore delle meta-risposte dei modelli usato in `tryTier`.",
       "baseline": {
-        "site": "73a11cfc59ac5e0d",
-        "corpus": "73a11cfc59ac5e0d",
+        "site": "0162e079d566499d",
+        "corpus": "0162e079d566499d",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2377,8 +2377,8 @@
       "reason": "Immagine di testata del Bollettino del Frontaliere. Nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "9cf499df15b47c3e",
-        "alignedAt": "2026-08-09"
+        "corpus": "0d418d160b45beb5",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -2408,6 +2408,26 @@
       "baseline": {
         "site": null,
         "corpus": "e56c5e34fea24853",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-section-profile.mjs",
+      "mode": "corpus-only",
+      "reason": "La sezione cantonale vista da create-article.mjs (P6b del piano sezioni cantonali): voci di ARTICLE_SECTION_CONFIGS per le 24 sezioni `kind: canton` del core (path di registro, slug, meta e corpi da ARTICLE_SECTION_CORE_ALL, profilo da generator/data/canton-sections.json), gate D16 (`enabled` nel profilo o CANTON_ARTICLE_SECTIONS_ENABLED da Remote Config), stato per sezione D18 sotto data/sections/<id>/ e i suoi argomenti per rebase-onto-remote.sh, scheletri dei file al primo articolo, lessico di ammissione DE/FR e testi di prompt del cantone. Corpus-only: la generazione e il profilo editoriale vivono solo qui; il sito legge le sezioni come JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "4339022550d58da1",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-news-sources.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner delle fonti news delle sezioni cantonali (P6b): parser json-entities (iCMS NW/OW/SH), json-api (zh.ch, be.ch), news-sitemap e sitemap a periodo (settimana ISO, mese, anno), riuso di extractRssItems/extractHeadlines di create-article.mjs per RSS/Atom e link HTML; quirk del profilo (crawl-delay per host, maxRequestsPerRun, charset dichiarato, pubDate vuoto, anno sbagliato nei time datetime, paywall title+lead) e User-Agent dichiarato (D10). Corpus-only: le fonti per cantone e il generatore che le legge esistono solo nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "8c5ed8cc6cdb3a46",
         "alignedAt": "2026-10-05"
       }
     },
@@ -4987,6 +5007,16 @@
       "baseline": {
         "site": null,
         "corpus": "090a7598983b04ed",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/blog-image-policy.mjs",
+      "mode": "corpus-only",
+      "reason": "Policy condivisa per gli hero WebP degli articoli: dimensioni 1200x675, target sotto 200 KiB e quality ladder comune a `create-article.mjs`, `publish-journalist-article.mjs` e allo script di manutenzione. Il sito non esegue piu' questi producer dopo il cutover del generatore e non possiede un gemello operativo di questo modulo; la policy resta quindi nel corpus, dove vengono creati e pubblicati gli asset.",
+      "baseline": {
+        "site": null,
+        "corpus": "65c00b71923c29c4",
         "alignedAt": "2026-10-05"
       }
     },

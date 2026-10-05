@@ -80,6 +80,13 @@ import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
+import {
+  BLOG_IMAGE_TARGET_MAX_BYTES,
+  BLOG_IMAGE_HARD_MAX_BYTES,
+  BLOG_IMAGE_WIDTH,
+  BLOG_IMAGE_HEIGHT,
+  BLOG_IMAGE_QUALITY_PASSES,
+} from './lib/blog-image-policy.mjs';
 import { creditRecordForCover, resolveCommonsPick, webpDimensions, writeCreditRecord } from './lib/commons-credit.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -97,8 +104,6 @@ const CATEGORIES = ['fiscale', 'pratico', 'novita', 'pensione'];
 // yields a match — same catalog image used by the evergreen digest article
 // (scripts/generate-events-digest-article.mjs's STATIC_META.image).
 const STATIC_FALLBACK_IMAGE = 'lugano-view.webp';
-
-const BLOG_IMAGE_HARD_MAX_BYTES = 320 * 1024; // matches create-article.mjs's BLOG_IMAGE_HARD_MAX_BYTES
 
 function slugify(input) {
   return String(input || '')
@@ -220,6 +225,7 @@ async function resolveHeroImage(data, doc) {
   if (commonsPick.commons && !commonsPick.ok) {
     console.warn(`  ⚠️  Commons pick «${commonsPick.title}» cannot be credited (${commonsPick.reasons.join(', ')}) — using the fallback image`);
   } else if (/^https?:\/\//i.test(rawImage)) {
+    let destPath = null;
     try {
       const res = await fetch(rawImage, { signal: AbortSignal.timeout(20000) });
       if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`);
@@ -227,21 +233,23 @@ async function resolveHeroImage(data, doc) {
       const sharp = (await import('sharp')).default;
       const destDir = path.join(PROJECT_ROOT, 'public', 'images', 'blog');
       fs.mkdirSync(destDir, { recursive: true });
-      const destPath = path.join(destDir, `${data.id}.webp`);
+      destPath = path.join(destDir, `${data.id}.webp`);
 
-      const meta = await sharp(buf).rotate().metadata();
-      const needsResize = (meta.width || 0) < 1200 || (meta.height || 0) < 675;
-      let quality = 78;
-      const render = async (q) => {
-        let pipeline = sharp(buf).rotate();
-        if (needsResize) pipeline = pipeline.resize({ width: 1200, height: 675, fit: 'cover' });
-        await pipeline.webp({ quality: q }).toFile(destPath);
+      const render = async (quality) => {
+        const pipeline = sharp(buf)
+          .rotate()
+          .resize({ width: BLOG_IMAGE_WIDTH, height: BLOG_IMAGE_HEIGHT, fit: 'cover', position: 'attention' });
+        await pipeline.webp({ quality, effort: 6 }).toFile(destPath);
         return fs.statSync(destPath).size;
       };
-      let size = await render(quality);
-      while (size > BLOG_IMAGE_HARD_MAX_BYTES && quality > 40) {
-        quality -= 10;
-        size = await render(quality);
+      let qualityIndex = 0;
+      let size = await render(BLOG_IMAGE_QUALITY_PASSES[qualityIndex]);
+      while (size > BLOG_IMAGE_TARGET_MAX_BYTES && qualityIndex < BLOG_IMAGE_QUALITY_PASSES.length - 1) {
+        qualityIndex += 1;
+        size = await render(BLOG_IMAGE_QUALITY_PASSES[qualityIndex]);
+      }
+      if (size > BLOG_IMAGE_HARD_MAX_BYTES) {
+        throw new Error(`hero image remains above hard cap (${size} bytes)`);
       }
       const cover = `/images/blog/${data.id}.webp`;
       if (commonsPick.commons) {
@@ -263,6 +271,7 @@ async function resolveHeroImage(data, doc) {
       appendCatalogEntry(data._generatedImagePath);
       return { source: commonsPick.commons ? 'commons-pick' : 'journalist-upload', bytes: size };
     } catch (err) {
+      if (destPath) fs.rmSync(destPath, { force: true });
       console.warn(`  ⚠️  custom hero image download/processing failed (non-fatal): ${err.message}`);
     }
   }

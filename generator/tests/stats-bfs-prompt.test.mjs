@@ -281,7 +281,11 @@ describe('expandEnrichmentLine — la variante legata al testo', () => {
     expect(src).toContain('expandShortItalianContent(data, adaptiveMinWords, {\n        boundToText: isStatsBfsSource,');
     // Un solo punto di costruzione: se il prompt tornasse a incorporare la
     // riga, questo test smetterebbe di misurare ciò che finisce nel prompt.
-    expect(src).toContain('${expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews)}');
+    // Dal P6b la riga passa da `enrichmentLine` (la sezione cantonale ha la
+    // sua, senza fatti nuovi), ma il testo legato a stats-bfs resta questo.
+    expect(src).toContain(': expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews);');
+    expect(src).toContain('const enrichmentLine = IS_CANTON && !boundToText');
+    expect(src).toContain('${enrichmentLine}');
   });
 });
 

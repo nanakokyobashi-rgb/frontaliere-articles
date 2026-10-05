@@ -12635,6 +12635,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.gallerie-castelletto-sesto-calende.title': 'Tunnels: Castelletto-Sesto Calende closed for two nights',
     'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Maintenance work on the motorway tunnels: the stretch between Castelletto and Sesto Calende closed for two nights. Also closed: Castronno-Cavaria and Solbiate-Varese.',
     'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Motorway tunnel area near Varese',
+    'blog.article.analisi-salario-prestazioni.title': 'Ticino: Avanti motion on salary and benefits',
+    'blog.article.analisi-salario-prestazioni.excerpt': 'The Grand Council gives the green light to Speziali (Plr)\'s report: analysis and simulations on higher pay and fewer benefits.',
+    'blog.article.analisi-salario-prestazioni.imageAlt': 'Civic building in Ticino',
 };
 
 export default blogMetaEn;

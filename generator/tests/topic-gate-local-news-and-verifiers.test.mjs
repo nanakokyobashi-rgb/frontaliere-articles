@@ -36,7 +36,10 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
 
 function frontaliereGate() {
-  const start = SRC.indexOf('const topicalRelevanceGate = IS_FRONTALIERE');
+  // Dal P6b il ramo cantonale viene prima (`IS_CANTON ? CANTON_LINES… :`): il
+  // ramo frontaliere e' quello che segue `: IS_FRONTALIERE` nella stessa catena.
+  const chain = SRC.indexOf('const topicalRelevanceGate = IS_CANTON');
+  const start = SRC.indexOf(': IS_FRONTALIERE', chain);
   const end = SRC.indexOf('    : `═══ REGOLA #0', start);
   assert.ok(start !== -1 && end > start, 'REGOLA #0 frontaliere non trovata');
   return SRC.slice(start, end);
