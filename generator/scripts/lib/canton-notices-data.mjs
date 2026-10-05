@@ -63,8 +63,8 @@ const ISO_TIME = /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/;
 export function cantonNoticesProblem(payload, { nowMs = Date.now() } = {}) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return 'is not an object';
   if (payload.schemaVersion !== 1) return `schemaVersion is ${JSON.stringify(payload.schemaVersion)}, expected 1`;
-  const generated = Date.parse(payload.generatedAt ?? '');
-  if (!Number.isFinite(generated)) return 'generatedAt is not a date';
+  if (!isRealInstant(payload.generatedAt)) return 'generatedAt is not a date';
+  const generated = Date.parse(payload.generatedAt);
   // Un generatedAt nel futuro (oltre dieci minuti di orologio sfasato) non e'
   // fresco: e' un orologio sbagliato, e il gate di eta' non lo vedrebbe mai.
   if (generated - nowMs > 10 * 60_000) return `generatedAt ${payload.generatedAt} is in the future`;

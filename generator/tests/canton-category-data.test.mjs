@@ -199,6 +199,17 @@ test('timestamp impossibili e record d\'asta non validi non entrano nella vista'
   assert.ok(block.bidMaxChf == null || block.bidMaxChf >= 0);
 });
 
+test('ogni timestamp letto, anche dagli shaper chiamati senza assert, passa dal round-trip', () => {
+  assert.match(shapePlateAuctions({ ...recording('plate-auctions', NOW), generatedAt: '2026-02-31T10:00:00Z' }, ['AG'], { nowMs: NOW }).reason, /generatedAt valido/);
+  assert.match(shapeWeather({ ...recording('weather-snapshot', NOW), generatedAt: '2026-13-01T10:00:00Z' }, ['TI'], { nowMs: NOW }).reason, /generatedAt valido/);
+  assert.match(cantonNoticesProblem({ ...recording('canton-notices', NOW), generatedAt: '2026-02-31T10:00:00.000Z' }, { nowMs: NOW }), /generatedAt is not a date/);
+  const duties = recording('pharmacy-duty-cantons', NOW);
+  const real = duties.cantons.TI.duties.length;
+  duties.cantons.TI.duties.push({ pharmacy: 'Fantasma', startsAt: '2026-02-30T08:00:00Z', endsAt: '2099-01-01T08:00:00Z' });
+  const block = shapePharmacyDuties(duties, 'TI', { nowMs: NOW });
+  assert.ok(block.duties.every((d) => d.pharmacy !== 'Fantasma'), `turno con data impossibile pubblicato (${real} reali)`);
+});
+
 test('soglie della vista: con una sola fonte raggiungibile non si scrive', () => {
   const view = buildCantonServices({ premiums: null, plateAuctions: null, pharmacyDuties: null, weather: recording('weather-snapshot', NOW) }, CANTON_GROUPS, { nowMs: NOW });
   assert.ok(viewThresholdFailures(view).length >= 1);

@@ -189,7 +189,9 @@ export function assertPlateAuctionsShape(doc) {
 
 export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
   if (!doc) return unavailable('plate-auctions.json non raggiungibile');
-  const age = nowMs - Date.parse(doc.generatedAt);
+  const generated = isoTimestampMs(doc.generatedAt);
+  if (!Number.isFinite(generated)) return unavailable('snapshot aste senza generatedAt valido');
+  const age = nowMs - generated;
   if (age < -CLOCK_SKEW_MS) return unavailable(`snapshot aste datato nel futuro (${doc.generatedAt})`);
   if (age > PLATE_AUCTIONS_MAX_AGE_MS) return unavailable(`snapshot aste vecchio di ${Math.round(age / HOUR_MS)} h (max ${PLATE_AUCTIONS_MAX_AGE_MS / HOUR_MS} h)`);
   const codes = new Set(members.map((m) => m.toUpperCase()));
@@ -275,14 +277,12 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
   if (nowMs - fetched > PHARMACY_MAX_AGE_MS) return unavailable(`turni importati ${Math.round((nowMs - fetched) / HOUR_MS)} h fa (max ${PHARMACY_MAX_AGE_MS / HOUR_MS} h)`);
   // Ordine cronologico PRIMA del tetto: il contratto non garantisce l'ordine,
   // e tagliare una lista disordinata scarterebbe i turni piu' vicini.
+  // Ogni lettura di un timestamp passa dal validatore con round-trip, anche
+  // se il documento e' gia' passato dall'assert: lo shaper e' esportato.
   const upcoming = c.duties
-    .filter((d) => Date.parse(d.endsAt) > nowMs)
-    .sort(
-      (a, b) =>
-        Date.parse(a.startsAt) - Date.parse(b.startsAt) ||
-        Date.parse(a.endsAt) - Date.parse(b.endsAt) ||
-        String(a.pharmacy).localeCompare(String(b.pharmacy)),
-    )
+    .map((d) => ({ d, start: isoTimestampMs(d?.startsAt), end: isoTimestampMs(d?.endsAt) }))
+    .filter((x) => Number.isFinite(x.start) && Number.isFinite(x.end) && x.end > x.start && x.end > nowMs && typeof x.d?.pharmacy === 'string' && x.d.pharmacy.trim())
+    .sort((a, b) => a.start - b.start || a.end - b.end || a.d.pharmacy.localeCompare(b.d.pharmacy))
     .slice(0, MAX_DUTIES);
   if (!upcoming.length) return unavailable('nessun turno in corso o in arrivo nella finestra pubblicata');
   return {
@@ -291,14 +291,14 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
     sourceUrl: httpUrlOrNull(c.sourceUrl),
     // percorso interno del sito: solo «/…/» (barra finale obbligatoria sul sito)
     dutyHubPath: typeof doc.dutyHubPath === 'string' && /^\/[a-z0-9/-]*\/$/.test(doc.dutyHubPath) ? doc.dutyHubPath : null,
-    duties: upcoming.map((d) => ({
-      pharmacy: d.pharmacy,
+    duties: upcoming.map(({ d, start, end }) => ({
+      pharmacy: d.pharmacy.trim(),
       city: typeof d.city === 'string' ? d.city : null,
       coverageName: typeof d.coverageName === 'string' ? d.coverageName : null,
       dutyType: typeof d.dutyType === 'string' ? d.dutyType : null,
       // normalizzati: nella vista escono solo timestamp UTC validati
-      startsAt: new Date(Date.parse(d.startsAt)).toISOString(),
-      endsAt: new Date(Date.parse(d.endsAt)).toISOString(),
+      startsAt: new Date(start).toISOString(),
+      endsAt: new Date(end).toISOString(),
     })),
   };
 }
@@ -314,7 +314,9 @@ export function assertWeatherShape(doc) {
 
 export function shapeWeather(doc, members, { nowMs = Date.now() } = {}) {
   if (!doc) return unavailable('weather-snapshot.json non raggiungibile');
-  const age = nowMs - Date.parse(doc.generatedAt);
+  const generated = isoTimestampMs(doc.generatedAt);
+  if (!Number.isFinite(generated)) return unavailable('snapshot meteo senza generatedAt valido');
+  const age = nowMs - generated;
   if (age < -CLOCK_SKEW_MS) return unavailable(`snapshot meteo datato nel futuro (${doc.generatedAt})`);
   if (age > WEATHER_MAX_AGE_MS) return unavailable(`snapshot meteo vecchio di ${Math.round(age / HOUR_MS)} h (max ${WEATHER_MAX_AGE_MS / HOUR_MS} h)`);
   const cities = [];
