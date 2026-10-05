@@ -2751,8 +2751,17 @@ const NEWS_SOURCES = [
   // comozero
   'https://comozero.it/',
   'https://www.comozero.it/feed/',
-  // varesenews (tag frontalieri + generale)
-  'https://www.varesenews.it/tag/frontalieri/feed/',
+  // varesenews (generale)
+  //
+  // 2026-10-05: `tag/frontalieri/feed/` RIMOSSO. Risponde 200 text/xml con 42
+  // item, ma il filtro del tag e' ignorato: **0 item su 42** portano la
+  // categoria `frontalieri` (i primi sono baseball per ciechi e un incidente a
+  // Gallarate), ed e' una copia in cache del feed generale qui sotto di un
+  // giorno prima. Lo stesso nel log del runner (run 37271569871): «varesenews.it:
+  // 42 articoli RSS recenti» accanto ai 45 del generale. Contava come fonte frontalieri
+  // dedicata e consumava classificatore su doppioni. Il segnale frontalieri
+  // di VareseNews arriva dalla pagina HTML del tag (piu' sotto), che invece e'
+  // filtrata davvero: 16 articoli in testa, tutti ristorni/frontalieri/confine.
   'https://www.varesenews.it/feed/',
   // varesenoi
   'https://www.varesenoi.it/rss.xml',
@@ -2783,7 +2792,9 @@ const NEWS_SOURCES = [
   // 2026-05-13: cdt.ch/news/lavoro 404 (CDT has no lavoro news category); replaced with cdt.ch/lifestyle/portafoglio (finance/fiscal coverage)
   'https://www.cdt.ch/lifestyle/portafoglio',
   'https://www.laregione.ch/economia',
-  'https://www.varesenews.it/tag/frontalieri/',          // HTML fallback
+  // 2026-10-05: la pagina HTML del tag E' filtrata (16 articoli frontalieri in
+  // testa, poi la sidebar del sito) — al contrario del suo /feed/, rimosso sopra.
+  'https://www.varesenews.it/tag/frontalieri/',
   'https://www.varesenoi.it/sommario/argomenti/economia-7.html',
   // ── 2026-05-07: frontaliere-dedicated feeds (Wave 2 — strategic) —
   // sindacati, ACIF, fiscalità tecnica, comparis. Primary signal:
@@ -2816,9 +2827,21 @@ const NEWS_SOURCES = [
   'https://www.lavoroediritti.com/feed/',                 // IT labor & fiscal news (replaces login-walled Ipsoa)
   // Geo-specific cross-border ──
   'https://www.corriere.it/dynamic-feed/rss/section/cronache.xml',  // borderline but covers IT-CH cronaca
-  'https://www.varesenews.it/tag/dogana-svizzera/feed/',   // dogana feed
+  // 2026-10-05: varesenews.it/tag/dogana-svizzera/feed/ RIMOSSO. 200 text/xml,
+  // 100 item tutti generalisti (scuole, incidenti, ciclismo): **0 su 100** con
+  // la categoria del tag, 3 su 100 che nominano anche solo Svizzera/confine.
+  // Il tag stesso e' quasi vuoto: la sua pagina HTML elenca 2 articoli
+  // taggati, del 2025-03 e del 2023-09. Nessun sostituto da adottare.
   // 2026-05-13: cdt.ch/news/eu-frontaliere removed — no such category exists on CDT; coverage already provided by /news/svizzera, /news/economia, /news/mondo
-  'https://comozero.it/categoria/frontalieri/',            // comozero frontalieri tag
+  // 2026-10-05: comozero.it/categoria/frontalieri/ → argomento/frontalieri/feed/.
+  // La vecchia URL risponde 200 ma solo dopo un redirect a UN articolo (i
+  // ristorni ai Comuni di frontiera): l'estrattore leggeva i link di una
+  // pagina articolo, non un elenco («comozero.it: 24 articoli HTML» nella run
+  // 37271569871, la sidebar di quell'articolo); e il suo /feed/ e' 404. Il feed
+  // dell'argomento e' application/rss+xml, 16 item, **16 su 16** con la
+  // categoria `frontalieri`, 2 negli ultimi 7 giorni, 0 in comune con il feed
+  // generale di comozero gia' in lista.
+  'https://comozero.it/argomento/frontalieri/feed/',
   // 2026-05-13: varesenoi.it/sommario/argomenti/economia-7/economia-frontalieri-1.html removed (404, sub-category no longer exists); /sommario/argomenti/economia-7.html above already covers economia
   'https://www.varesenoi.it/?s=frontalieri',               // varesenoi WP search for frontalieri (HTML, dead sub-category replacement)
   // swissinfo.ch RSS removed — 410 Gone (FRO-415, re-confirmed 2026-05-13 — HTML home page added above as replacement)
@@ -2828,6 +2851,9 @@ const NEWS_SOURCES = [
   // FRONTALIERI_DOMAIN_RE relevance gate as every other source. Both
   // curl-verified live before adding (INPS/Agenzia Entrate have no
   // frontaliere-scoped feed, only site-wide news).
+  // 2026-10-05: il feed INPS scrive `<pubdate>dd/mm/yyyy</pubdate>`, che il parse
+  // precedente leggeva come mm/dd (date sbagliate, future o nulle). Ora passa da
+  // `parseFeedDate`: 50 item, 50 datati, 12 negli ultimi 7 giorni.
   'https://www.inps.it/it/it.rss.news.xml',                // INPS — pensioni/AVS-INPS/NASpI national news
   'https://www.agenziaentrate.gov.it/portale/c/portal/rss/entrate?idrss=0753fcb1-1a42-4f8c-f40d-02793c6aefb4', // Agenzia Entrate — comunicati (730, quadro CE, dichiarazioni)
 ];
@@ -2843,7 +2869,10 @@ const RSS_FALLBACK_MAP = {
   'https://www3.ti.ch/xml/rss/rss-comunicati-1108.xml': 'https://www.ti.ch/comunicati',
   'https://www3.ti.ch/xml/rss/rss-attualita.xml': 'https://www.ti.ch/attualita',
   'https://www.comozero.it/feed/': 'https://www.comozero.it/',
-  'https://www.varesenews.it/tag/frontalieri/feed/': 'https://www.varesenews.it/tag/frontalieri/',
+  // Fallback dell'argomento frontalieri: pagina HTML con <time datetime> su ogni
+  // card (26), quindi le headline vecchie arrivano datate e la finestra di eta'
+  // le scarta invece di farle entrare nel secchio undated.
+  'https://comozero.it/argomento/frontalieri/feed/': 'https://comozero.it/argomento/frontalieri/',
   'https://www.varesenews.it/feed/': 'https://www.varesenews.it/',
   'https://www.varesenoi.it/rss.xml': 'https://www.varesenoi.it/sommario/argomenti/economia-7.html',
   // Spento insieme alla sua voce in NEWS_SOURCES (sito giu' dal 2026-08, TCP timeout).
@@ -2916,6 +2945,13 @@ const NEWS_SOURCES_SVIZZERA = [
   'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_svizzera.xml', // 26 item, 26 datati
   // ── HTML con titoli veri, in ordine di densità misurata sul gate ──
   'https://www.seco.admin.ch/it/comunicati-stampa',                            // SECO lavoro/economia — 17/22 passano il gate
+  // 2026-10-05: NON e' morto, anche se da una rete residenziale sembra. Con lo
+  // User-Agent dello scanner (`Mozilla/5.0 (Macintosh; …) AppleWebKit/537.36`)
+  // da un Mac fuori dai runner risponde 403 (377 byte, WAF); con un UA
+  // dichiaratamente non-browser (`curl/…`, `FrontaliereBot/1.0`) 200. Dal
+  // runner GitHub, nella run 37270323780 del 2026-10-05 (scansione di questa
+  // lista), lo stesso UA ha avuto 200: «admin.ch: 20 articoli HTML». Prima di
+  // condannarlo serve un 403 nel log del runner, non una sonda locale.
   'https://www.admin.ch/it/newnsb',                                            // Consiglio federale — 15/20; era …/documentazione/comunicati-stampa.html (301)
   'https://www.tio.ch/svizzera/economia',                                      // [dup:frontaliere] 26/38
   'https://www.cdt.ch/news/economia',                                          // [dup:frontaliere] 10/40 — CDT non espone alcun feed (rss e feed: 404)
@@ -7509,6 +7545,52 @@ export function parseHeadlineDate(text) {
   return null;
 }
 
+// ── Data di un item di feed (<pubDate>, <dc:date>, <updated>, …) ────────────
+//
+// 2026-10-05: il feed INPS (https://www.inps.it/it/it.rss.news.xml, 50 item)
+// scrive `<pubdate>02/10/2026</pubdate>` — giorno/mese/anno, senza ora. Il
+// parse era `new Date(raw)`, che per V8 legge le forme numeriche con lo
+// slash in ordine AMERICANO mese/giorno. Misurato sullo stesso feed:
+//   · `02/10/2026` → 2026-02-09 (il 2 ottobre diventa febbraio: «vecchio»);
+//   · `25/09/2026` → Invalid Date → item senza data;
+//   · `11/09/2026` → 2026-11-08 e `10/09/2026` → 2026-10-08: date FUTURE,
+//     che `isWithinDays` (solo `date >= cutoff`) conta come recenti.
+// Nella run 37271569871 del 2026-10-05 (scansione di NEWS_SOURCES) il log
+// diceva «inps.it: 6 articoli RSS recenti (50 totali)»: erano i 6 item di
+// settembre con giorno <= 12, finiti nel futuro, mentre i comunicati veri
+// della settimana cadevano fuori finestra. Nessun errore, nessun warning.
+// Con l'estrattore reale sullo stesso feed: prima 20 item datati su 50, 6 nel
+// futuro, 0 negli ultimi 7 giorni; dopo 50 datati, 0 nel futuro, 12 nei 7
+// giorni.
+//
+// La forma numerica giorno-prima va quindi letta qui, esplicitamente, con la
+// stessa scelta dichiarata di `parseHeadlineDate` (fonti CH/IT/DE/FR: l'ordine
+// americano su questi domini non esiste) e la stessa validazione calendariale
+// di `buildCalendarDate`. Solo quando l'INTERO valore ha quella forma
+// (eventualmente seguita da un'ora): RFC-822 (`Mon, 05 Oct 2026 06:23:11
+// +0000`) e ISO-8601 non passano da qui e restano a `new Date`, esattamente
+// come prima.
+const FEED_DAY_FIRST_DATE_RE = /^([0-3]?\d)([./-])(0?[1-9]|1[0-2])\2(20\d{2})(?:[\sT,]+([01]?\d|2[0-3]):([0-5]\d)(?::([0-5]\d))?)?$/;
+
+/**
+ * @param {string | null | undefined} raw — testo del campo data dell'item
+ * @returns {Date | null} null se il valore manca o non e' una data valida
+ */
+export function parseFeedDate(raw) {
+  if (!raw || typeof raw !== 'string') return null;
+  const value = raw.trim();
+  if (!value) return null;
+  const dayFirst = value.match(FEED_DAY_FIRST_DATE_RE);
+  if (dayFirst) {
+    const d = buildCalendarDate(Number(dayFirst[4]), Number(dayFirst[3]) - 1, Number(dayFirst[1]));
+    if (!d) return null;
+    if (dayFirst[5] !== undefined) d.setHours(Number(dayFirst[5]), Number(dayFirst[6]), Number(dayFirst[7] || 0), 0);
+    return d;
+  }
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
 /** A quale lingua attribuire un nome di mese, per la sola etichetta di formato. */
 function monthFormatTag(name) {
   if (/^(gennaio|gen|febbraio|marzo|aprile|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|dicembre|dic)$/.test(name)) return 'it-textual';
@@ -7668,9 +7750,9 @@ function extractRssItems(xml, feedUrl) {
       const headline = (title?.[1] || title?.[2] || '').replace(/<[^>]+>/g, '').trim();
       const href = (link?.[1] || '').trim();
       if (!headline || headline.length < 10 || !href) continue;
-      let parsedDate = null;
-      if (date?.[1]) { try { parsedDate = new Date(date[1]); if (isNaN(parsedDate.getTime())) parsedDate = null; } catch { parsedDate = null; } }
-      results.push({ url: href, headline, date: parsedDate });
+      // `parseFeedDate`, non `new Date`: vedi il commento del 2026-10-05 sopra
+      // la funzione (dd/mm/yyyy letto come mm/dd).
+      results.push({ url: href, headline, date: parseFeedDate(date?.[1]) });
     }
   } else {
     // RSS 2.0: <item><title>…</title><link>…</link><pubDate>…</pubDate></item>
@@ -7689,9 +7771,7 @@ function extractRssItems(xml, feedUrl) {
       // Resolve relative URLs
       if (href) { try { href = new URL(href, feedUrl).href; } catch { /* keep as-is */ } }
       if (!href || !href.startsWith('http')) continue;
-      let parsedDate = null;
-      if (date?.[1]) { try { parsedDate = new Date(date[1].trim()); if (isNaN(parsedDate.getTime())) parsedDate = null; } catch { parsedDate = null; } }
-      results.push({ url: href, headline, date: parsedDate });
+      results.push({ url: href, headline, date: parseFeedDate(date?.[1]) });
     }
   }
 
