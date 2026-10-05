@@ -231,6 +231,15 @@ test('siteBlobShasPagination: una pagina illeggibile resta rossa', async () => {
     }),
     /troncato/,
   );
+  await assert.rejects(
+    siteBlobShasPagination({
+      repo: 'o/r',
+      ref: 'root-sha',
+      fetchImpl: async () => response(200, { truncated: false, tree: [{ type: 'mystery', sha: 'unknown' }] }),
+      sleep: noSleep,
+    }),
+    /tipo illeggibile/,
+  );
 });
 
 test('siteBlobShas: un 200 senza `tree` non e\' un sito vuoto', async () => {

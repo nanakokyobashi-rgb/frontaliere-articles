@@ -219,7 +219,7 @@ export async function siteBlobShasPagination({ repo, ref, token, fetchImpl = fet
     const entries = readableTreeEntries(body, { repo, treeSha });
     for (const entry of entries) {
       if (!entry || !['blob', 'tree', 'commit'].includes(entry.type)) {
-        throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce senza tipo leggibile`);
+        throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce con tipo illeggibile`);
       }
       if (entry.type === 'blob') {
         if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
