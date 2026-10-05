@@ -5049,6 +5049,166 @@
         "corpus": "e40082fb50f893b5",
         "alignedAt": "2026-10-05"
       }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/articles.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Bacino delle news di un cantone (sezione propria + frontaliere/svizzera col campo `canton`), assegnazione al tema con la tassonomia dell'engine o il classificatore a parole chiave, ordinamento e dedup.",
+      "baseline": {
+        "site": null,
+        "corpus": "d5dbee13c5b9a717",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-border-wait.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «attese ai valichi»: legge la finestra del contratto REWIRE `border-wait-window` per il campo `canton` di ogni valico.",
+      "baseline": {
+        "site": null,
+        "corpus": "9d41a6767616e1d5",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-common.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Contratto dei blocchi dati degli hub (codici di omissione, soglie minime di validita', controllo di freschezza), modello `daily-brief-data.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "b22904bf7f8cd35e",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-events.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prossimi eventi»: legge la cache del contratto REWIRE `events-dataset` filtrando per i membri del gruppo cantonale.",
+      "baseline": {
+        "site": null,
+        "corpus": "1c53e1ea0f68d5fb",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-fuel.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prezzi dei carburanti»: legge la cache del contratto REWIRE `fuel-cantons` (dichiarato in `readBy` di `generator/tests/lib/rewire-contracts.mjs`).",
+      "baseline": {
+        "site": null,
+        "corpus": "1b8751ac8559ed44",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-notices.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «avvisi ufficiali»: legge la cache del contratto REWIRE `canton-notices` tramite `canton-notices-data.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "fb7788b237047303",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-pensions.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub pensioni (parametri federali, casse cantonali, imposta sul capitale) dal dataset annuale `pension-parameters` (contratto REWIRE `pension-parameters`).",
+      "baseline": {
+        "site": null,
+        "corpus": "d4bd91ce2f3e62c2",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-road-events.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «chiusure e cantieri»: legge la cache del contratto REWIRE `road-events`.",
+      "baseline": {
+        "site": null,
+        "corpus": "cf2eea9964d750f1",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-services.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub servizi (premi, turni farmacia, aste targhe, meteo): legge la vista `canton-services.json` costruita da `refresh-canton-services-data.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "ad08fbd446206252",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-tax.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub fisco (onere fiscale, imposta alla fonte) dal dataset annuale `canton-tax` (contratto REWIRE `canton-tax`).",
+      "baseline": {
+        "site": null,
+        "corpus": "06af9b6879d30248",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/build.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Costruzione pura del file dati di un hub: blocchi, fatti chiave, news, link, validazione con le regole del renderer dell'engine, impronta del contenuto e `updatedAt` stabile.",
+      "baseline": {
+        "site": null,
+        "corpus": "5cb78cba903fe0d1",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/copy.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Intro evergreen deterministica degli hub nelle 4 locali (nessun LLM, nessuna cifra) e controllo di coerenza toponimi/cantone sul testo scritto dal producer.",
+      "baseline": {
+        "site": null,
+        "corpus": "0a38e3a80a575063",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/engine-loader.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Carica `topicClusters.ts`/`topicTaxonomy.ts`/`relatedArticlesIndex.ts` dell'engine da uno script `.mjs` sotto `node` puro (hook di resolve per gli import relativi senza estensione).",
+      "baseline": {
+        "site": null,
+        "corpus": "7b978a976db30076",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/format.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Formattazione di numeri e date per le 4 locali senza `Intl`: i file degli hub sono committati e confrontati byte per byte, non possono dipendere dalla versione di ICU del runner.",
+      "baseline": {
+        "site": null,
+        "corpus": "9ea275f3cd8ce695",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/links.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Link a strumenti e pagine di categoria per (cantone, tema, locale), dal catalogo verificato sulle sitemap e dai file slug.",
+      "baseline": {
+        "site": null,
+        "corpus": "866fe1cd11f2d453",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Path dei file dati degli hub tematici cantonali (`content/cantons/<sezione>/hubs/<tema>.json`), importato anche da `scripts/lib/article-surfaces.mjs` per dichiararli fra le superfici di scrittura della sezione.",
+      "baseline": {
+        "site": null,
+        "corpus": "5aa5b161c07a95ea",
+        "alignedAt": "2026-10-05"
+      }
     }
   ]
 }
