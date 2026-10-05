@@ -268,14 +268,13 @@ test('build-api: meta-<locale>.json non filtra i campi', () => {
   // allowlist, questa asserzione lo dice. Contratto NOMINATO e non importato —
   // la classe che CLAUDE.md chiama «un contratto che non ha forma di import».
   const src = fs.readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf-8');
+  // Dal 2026-10 (C1) le sezioni vengono dal core: una sola write per sezione
+  // e locale (meta-<loc>.json e meta-ch-<loc>.json), sul default export intero.
   assert.ok(
-    src.includes('write(`meta-${loc}.json`, meta);'),
+    src.includes('const meta = (await load(section.metaFile(loc))).default;') &&
+      src.includes('write(section.api.metaFile(loc), meta);'),
     'build-api.mjs non scrive piu\' l\'oggetto meta intero: se ora filtra i campi, ' +
-      'un campo nuovo del blocco meta non raggiunge meta-<locale>.json.',
-  );
-  assert.ok(
-    src.includes('write(`meta-ch-${loc}.json`, metaCh);'),
-    'build-api.mjs non scrive piu\' l\'oggetto meta-ch intero.',
+      'un campo nuovo del blocco meta non raggiunge meta-<locale>.json / meta-ch-<locale>.json.',
   );
 });
 

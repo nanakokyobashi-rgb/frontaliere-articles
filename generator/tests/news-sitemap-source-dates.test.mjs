@@ -25,8 +25,13 @@ function render(entries, clock) {
   const context = {
     Date: Clock, RSS_SECTIONS: [], ROOT: '/', OUT: '/out', path,
     fs: { writeFileSync: (p, body) => outputs.set(p, body) },
-    ARTICLES: entries, SWISS_ARTICLES: [], blogSlugs: { BLOG_SLUGS: slugMap }, swissSlugs: { SWISS_SLUGS: {} },
-    metaIt: {}, metaChIt: {}, frontaliereSitemapShadow: new Set(), shadowedSwissSlugs: new Set(),
+    // Le sezioni vengono dal core (C1): il blocco itera API_SECTIONS e legge
+    // registro, mappa slug, meta IT e ombre per id di sezione.
+    API_SECTIONS: [{ section: 'frontaliere' }, { section: 'svizzera' }],
+    SECTION_REGISTRIES: { frontaliere: entries, svizzera: [] },
+    slugMapOf: (section) => (section === 'frontaliere' ? slugMap : {}),
+    SECTION_META_IT: { frontaliere: {}, svizzera: {} },
+    SECTION_SITEMAP_SHADOW: { frontaliere: new Set(), svizzera: new Set() },
     SECTION_PATHS: { frontaliere: Object.fromEntries(locales.map(l => [l, `/${l}/news/`])), svizzera: {} },
     SITE, LOCALES: locales, NEWS_CANDIDATES: 'news.xml', isArticleNewsEligible,
     NEWS_SITEMAP_WINDOW_HOURS, isReservedPublishedSlug, xmlEsc, sanitizeXmlDocument, assertNoControlChars,

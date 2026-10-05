@@ -42,6 +42,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
+import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 import { expect } from './lib/expect-shim.mjs';
 import {
   FABRICATED_INSTITUTION_ACRONYMS,
@@ -49,7 +50,8 @@ import {
 } from '../scripts/lib/article-factuality-gates.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-const BODY_ROOTS = ['blog-body', 'blog-body-ch'];
+// Dal core (sezioni attive), come ogni altro elenco di radici dei corpi.
+const BODY_ROOTS = CORPUS_SECTIONS.map((section) => path.basename(section.bodyDir));
 const LOCALES = ['it', 'de', 'en', 'fr'];
 
 function getArticleFiles() {

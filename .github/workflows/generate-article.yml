@@ -1813,11 +1813,12 @@ jobs:
             # l'articolo — LLM, quattro traduzioni DeepL, immagine hero, tutto
             # gia' pagato — perso davvero, non ritardato. Tre occorrenze
             # misurate: #255 sui path FRONTALIERE, #281 e #285 sui gemelli
-            # SVIZZERA. Entrambe le famiglie sono qui sotto, e
-            # `generator/tests/rebase-onto-remote.test.mjs` deriva l'elenco
-            # atteso da `ARTICLE_SECTION_CORE` + `corpusPath()` invece di
-            # ricopiarlo: un target di scrittura nuovo che non arriva qui fa
-            # rosso il test, che e' esattamente cio' che a #225 non successe.
+            # SVIZZERA. Ogni sezione attiva e' dichiarata da `--section-surfaces`
+            # (vedi sotto), e `generator/tests/rebase-onto-remote.test.mjs`
+            # deriva l'elenco atteso da `ARTICLE_SECTION_CORE` + `corpusPath()`
+            # e da create-article.mjs invece di ricopiarlo: un target di
+            # scrittura nuovo che non arriva all'helper fa rosso il test, che e'
+            # esattamente cio' che a #225 non successe.
             # data/article-source-urls.json e data/swiss-article-source-urls.json
             # (issue #496) sono i ledger URL->id di source-url-ledger.mjs, non
             # registri del corpus: `saveSourceUrls` in create-article.mjs legge
@@ -1892,6 +1893,18 @@ jobs:
             # public/images/blog/, altrimenti l'immagine di un run porterebbe il
             # credito della foto dell'altro.
             #
+            # ── I path PER SEZIONE vengono dal core (`--section-surfaces`) ──
+            #
+            # Registri, mappe slug, meta per locale, chunk SEO di scrittura,
+            # ledger URL->id e quote, corpi e sidecar di OGNI sezione attiva non
+            # sono piu' elencati qui: `--section-surfaces` fa derivare all'helper
+            # l'elenco da scripts/ci/rebase-section-args.mjs, che lo legge da
+            # SECTIONS di scripts/lib/article-surfaces.mjs, cioe' da
+            # ARTICLE_SECTION_CORE. Le categorie restano quelle descritte sopra
+            # (ledger e quote = prendi upstream, registri = --merge-registry,
+            # corpi e sidecar = --take-theirs). Qui restano solo i path che non
+            # dipendono da quante sezioni esistono.
+            #
             # Il backoff deve precedere fetch+rebase: dormire DOPO il rebase
             # rende HEAD gia' stantio prima del tentativo successivo, proprio
             # durante le raffiche di push dei crawler.
@@ -1903,32 +1916,10 @@ jobs:
               data/topic-candidates-today-picks.json \
               data/blog-images-used.json \
               public/data/journalist-image-catalog.json \
-              data/article-source-urls.json \
-              data/swiss-article-source-urls.json \
-              data/article-source-quotas.json \
-              data/swiss-article-source-quotas.json \
               --merge-counter data/quota-state.json:runCounter \
               --merge-counter data/topic-candidates-experimental-counter.json:count \
               --merge-counter data/topic-candidates-evergreen-counter.json:count \
-              --merge-registry content/blog-articles-data.ts \
-              --merge-registry content/routerBlogData.ts \
-              --merge-registry content/blogArticleIds.ts \
-              --merge-registry content/blog-meta-it.ts \
-              --merge-registry content/blog-meta-en.ts \
-              --merge-registry content/blog-meta-de.ts \
-              --merge-registry content/blog-meta-fr.ts \
-              --merge-registry content/seo/seo-blog-5.ts \
-              --merge-registry content/swiss-articles-data.ts \
-              --merge-registry content/routerSwissData.ts \
-              --merge-registry content/blog-meta-ch-it.ts \
-              --merge-registry content/blog-meta-ch-en.ts \
-              --merge-registry content/blog-meta-ch-de.ts \
-              --merge-registry content/blog-meta-ch-fr.ts \
-              --merge-registry content/seo/seo-blog-ch.ts \
-              --take-theirs content/blog-body/ \
-              --take-theirs content/blog-body-ch/ \
-              --take-theirs data/blog-articles/ \
-              --take-theirs data/swiss-articles/ \
+              --section-surfaces \
               --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ || rebased=0
             # ── Ricontrollo dopo il rebase (D18) ──

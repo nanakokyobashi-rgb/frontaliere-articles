@@ -33,6 +33,13 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+          # Le suite di guardia piu' la chiusura dei loro import, per CARTELLA
+          # e non file per file: l'elenco a mano mancava gia' di
+          # generator/scripts/lib/article-factuality-gates.mjs, e le suite
+          # derivano le radici dei corpi dal core delle sezioni
+          # (scripts/lib/corpus-sections.mjs -> engine/shared/). Un import
+          # assente fa fallire lo step di guardia per una ragione che non e'
+          # il corpus, cioe' rifiuta ogni scrittura.
           sparse-checkout: |
             AGENTS.md
             .github/workflows/bing-seo-loop.yml
@@ -42,12 +49,14 @@ jobs:
             generator/tests/bing-seo-loop.test.mjs
             generator/tests/article-fabrication-guard.test.mjs
             generator/tests/prompt-placeholder-guard.test.mjs
-            generator/tests/lib/expect-shim.mjs
-            generator/scripts/create-article.mjs
-            generator/scripts/load-rc-env.mjs
-            generator/scripts/lib/google-service-account-token.mjs
-            generator/scripts/repair-prompt-placeholders.mjs
-            generator/scripts/lib/prompt-placeholder-guard.mjs
+            generator/tests/lib/
+            generator/scripts/
+            generator/data/
+            generator/services/
+            engine/shared/
+            host/shared/
+            scripts/ci/
+            scripts/lib/
           sparse-checkout-cone-mode: false
 
       - name: Setup Node.js
@@ -115,7 +124,8 @@ jobs:
       # before opening the PR. The producer-wide contract therefore applies
       # here too: both corpus guards must inspect the complete corpus before
       # this workflow commits anything. The sparse checkout above includes
-      # exactly the guard inputs, so a missing file cannot become a false green.
+      # the guard inputs and the directories of their import closure, so a
+      # missing file cannot become a false green (nor a false red).
       - name: Guard — le correzioni Bing non raggiungono main se violano le guardie
         id: guard
         if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
