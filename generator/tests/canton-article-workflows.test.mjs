@@ -107,12 +107,14 @@ test('un file generato che il generatore non prevede piu\' e\' segnalato come or
     assert.deepEqual(checkGenerated(dir), []);
 
     writeFileSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-xx.yml'), `${AUTO_GENERATED_MARKER}\nname: x\n`);
+    writeFileSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-xx-self-test.yml'), `${AUTO_GENERATED_MARKER}\nname: x\n`);
     writeFileSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-ti.yml'), `${readWorkflow('generate-article-ti.yml')}# a mano\n`);
     rmSync(path.join(dir, WORKFLOWS_DIR, 'generate-article-gr.yml'));
     assert.deepEqual(checkGenerated(dir).sort(), [
       'generate-article-gr.yml: manca',
       'generate-article-ti.yml: diverge dal generato',
       'generate-article-xx.yml: generato ma non piu\' previsto (orfano)',
+      'generate-article-xx-self-test.yml: generato ma non piu\' previsto (orfano)',
     ]);
   } finally {
     rmSync(dir, { recursive: true, force: true });

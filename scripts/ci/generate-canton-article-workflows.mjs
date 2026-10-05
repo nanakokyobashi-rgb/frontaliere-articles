@@ -707,7 +707,7 @@ export function checkGenerated(root = ROOT) {
   // Un file col marcatore che il generatore non produce piu' e' un orfano: un
   // cantone tolto dal profilo continuerebbe ad avere il suo cron.
   for (const file of readdirSync(path.join(root, WORKFLOWS_DIR))) {
-    if (!/^generate-article-[a-z0-9]+\.yml$/.test(file) || expected.has(file)) continue;
+    if (!/^generate-article-[a-z0-9-]+\.yml$/.test(file) || expected.has(file)) continue;
     const text = readFileSync(path.join(root, WORKFLOWS_DIR, file), 'utf8');
     if (text.startsWith(AUTO_GENERATED_MARKER)) problems.push(`${file}: generato ma non piu' previsto (orfano)`);
   }
