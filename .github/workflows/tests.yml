@@ -334,12 +334,85 @@ jobs:
       # dentro una famiglia la catena resta fail-fast (col rosso dei test questo
       # non gira), ma un rosso di un'ALTRA famiglia non deve saltarlo — che e'
       # la proprieta' che i workflow separati avevano e che va conservata.
+      # Su `workflow_dispatch` GitHub non popola `github.event.pull_request`.
+      # Il dispatcher di recovery puo' quindi non avere un `base_sha` esplicito:
+      # in quel caso si risolve la PR dalla branch del dispatch, si confronta la
+      # base corrente con l'eventuale input e si rifiuta ogni ambiguita'. Mai
+      # lasciare che i gate ricadano silenziosamente su `origin/main`.
+      - name: Resolve and validate recovery base SHA
+        id: recovery_base
+        if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() && steps.unit_gates.conclusion == 'success' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+          INPUT_BASE_SHA: ${{ inputs.base_sha }}
+          EVENT_PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          DISPATCH_REF: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          resolved_base=''
+          if [ "$EVENT_NAME" = 'pull_request' ]; then
+            resolved_base="$EVENT_PR_BASE_SHA"
+          elif [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            pr_json=''
+            if [ -n "$INPUT_PR_NUMBER" ]; then
+              if ! printf '%s' "$INPUT_PR_NUMBER" | grep -Eq '^[1-9][0-9]*$'; then
+                echo "::error::Numero PR non valido per il dispatch di recovery: $INPUT_PR_NUMBER"
+                exit 1
+              fi
+              if ! pr_json=$(gh api "repos/$REPO/pulls/$INPUT_PR_NUMBER"); then
+                echo "::error::Impossibile leggere la PR #$INPUT_PR_NUMBER per validare la base del dispatch."
+                exit 1
+              fi
+            else
+              if [ -z "$DISPATCH_REF" ]; then
+                echo '::error::Il dispatch di recovery non espone una branch da associare a una PR.'
+                exit 1
+              fi
+              if ! pr_pages=$(gh api --paginate --slurp "repos/$REPO/pulls?state=open&per_page=100"); then
+                echo '::error::Impossibile enumerare le PR aperte per risolvere la base del dispatch di recovery.'
+                exit 1
+              fi
+              matches=$(printf '%s' "$pr_pages" | jq -c \
+                --arg branch "$DISPATCH_REF" --arg repo "$REPO" \
+                '[.[][] | select(.state == "open" and .head.ref == $branch and .head.repo.full_name == $repo)]')
+              match_count=$(printf '%s' "$matches" | jq -r 'length')
+              if [ "$match_count" -ne 1 ]; then
+                echo "::error::La branch di recovery $DISPATCH_REF non identifica una sola PR aperta (match=$match_count)."
+                exit 1
+              fi
+              pr_json=$(printf '%s' "$matches" | jq -c '.[0]')
+            fi
+
+            pr_state=$(printf '%s' "$pr_json" | jq -r '.state // ""')
+            base_repo=$(printf '%s' "$pr_json" | jq -r '.base.repo.full_name // ""')
+            resolved_base=$(printf '%s' "$pr_json" | jq -r '.base.sha // ""')
+            if [ "$pr_state" != 'open' ] || [ "$base_repo" != "$REPO" ] || [ -z "$resolved_base" ]; then
+              echo "::error::La PR di recovery non espone una base valida nel repository $REPO."
+              exit 1
+            fi
+
+            if [ -n "$INPUT_BASE_SHA" ] && [ "$INPUT_BASE_SHA" != "$resolved_base" ]; then
+              echo "::error::base_sha del dispatch ($INPUT_BASE_SHA) diversa dalla base corrente della PR ($resolved_base)."
+              exit 1
+            fi
+          fi
+
+          if [ "$EVENT_NAME" != 'push' ] && [ -z "$resolved_base" ]; then
+            echo "::error::Base SHA non verificabile per l'evento $EVENT_NAME: gate diff-scoped fermato."
+            exit 1
+          fi
+          printf 'base_sha=%s\n' "$resolved_base" >> "$GITHUB_OUTPUT"
+
       - name: Baseline verificabili nel manifest del ciclo (diff-scoped)
         if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() && steps.unit_gates.conclusion == 'success' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          BASE_SHA: ${{ inputs.base_sha || github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ steps.recovery_base.outputs.base_sha }}
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
@@ -356,7 +429,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           SITE_REF: main
-          BASE_SHA: ${{ inputs.base_sha || github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ steps.recovery_base.outputs.base_sha }}
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
         # In un dispatch di recovery il checkout resta sul ref del dispatch: lo
         # script legge file aggiunti E manifest dalla SHA richiesta (che scarica
