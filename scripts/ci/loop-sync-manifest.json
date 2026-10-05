@@ -637,9 +637,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "65bc7f8e65b88fbc",
-        "corpus": "65bc7f8e65b88fbc",
-        "alignedAt": "2026-10-04"
+        "site": "1c042095f029e09c",
+        "corpus": "1c042095f029e09c",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -1346,9 +1346,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "55b3792f1756ff0a",
-        "corpus": "55b3792f1756ff0a",
-        "alignedAt": "2026-10-04"
+        "site": "30b1c966e5bfae39",
+        "corpus": "30b1c966e5bfae39",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -2016,9 +2016,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "c349bc4c956a7e34",
-        "corpus": "c349bc4c956a7e34",
-        "alignedAt": "2026-09-09"
+        "site": "9feeaae40dc431f6",
+        "corpus": "9feeaae40dc431f6",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -2089,9 +2089,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "7b9dc0d8767d26b9",
-        "corpus": "7b9dc0d8767d26b9",
-        "alignedAt": "2026-10-04"
+        "site": "3eac2436981ae561",
+        "corpus": "3eac2436981ae561",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -3282,9 +3282,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "9a29e7c057dc9f79",
-        "corpus": "9a29e7c057dc9f79",
-        "alignedAt": "2026-10-04"
+        "site": "fc57a59813a2ab09",
+        "corpus": "fc57a59813a2ab09",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -4053,9 +4053,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1b175fe8929c8803",
-        "corpus": "1b175fe8929c8803",
-        "alignedAt": "2026-09-29"
+        "site": "0b80c7dee45fa550",
+        "corpus": "0b80c7dee45fa550",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -4592,7 +4592,21 @@
         "site": "07d2982b682b6f1f",
         "corpus": "07d2982b682b6f1f",
         "alignedAt": "2026-10-04"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "generator/tests/followup-mint-admission.test.mjs",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/tests/followup-mint-gate-cross-repo-sources.test.mjs",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/tests/twin-census-pr-gate.test.mjs",
+          "mode": "non registrato"
+        }
+      ]
     },
     {
       "path": "scripts/lib/plate-auction-editorial.mjs",
