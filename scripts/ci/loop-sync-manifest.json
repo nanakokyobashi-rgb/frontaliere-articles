@@ -2046,8 +2046,8 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "9feeaae40dc431f6",
-        "corpus": "9feeaae40dc431f6",
+        "site": "a77b360a0093b11a",
+        "corpus": "a77b360a0093b11a",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2131,8 +2131,8 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3eac2436981ae561",
-        "corpus": "3eac2436981ae561",
+        "site": "636d181718b28132",
+        "corpus": "636d181718b28132",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2561,9 +2561,9 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a03d0cdf61be8da7",
-        "corpus": "a03d0cdf61be8da7",
-        "alignedAt": "2026-08-09"
+        "site": "1a2339a5235f043a",
+        "corpus": "1a2339a5235f043a",
+        "alignedAt": "2026-10-05"
       }
     },
     {
