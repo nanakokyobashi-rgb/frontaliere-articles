@@ -37808,6 +37808,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'prevenzione-salute-aziende-ticinesi',
+ category: 'pratico',
+ date: '2026-10-05T08:37:00.594Z',
+ image: '/images/blog/prevenzione-salute-aziende-ticinesi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
