@@ -68,6 +68,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
+import {
+  BLOG_IMAGE_TARGET_MAX_BYTES,
+  BLOG_IMAGE_HARD_MAX_BYTES,
+  BLOG_IMAGE_WIDTH,
+  BLOG_IMAGE_HEIGHT,
+  BLOG_IMAGE_QUALITY_PASSES,
+} from './lib/blog-image-policy.mjs';
 import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
@@ -1392,8 +1399,6 @@ const BASE_URL = 'https://frontaliereticino.ch';
 // Model aliases for callLLM opts (used by callers that pass opts.model)
 const GH_MODEL_HEAVY = AI_MODELS.GPT4O;
 const GH_MODEL_LIGHT = AI_MODELS.GPT4O_MINI;
-const BLOG_IMAGE_TARGET_MAX_BYTES = 220 * 1024; // target ~220KB
-const BLOG_IMAGE_HARD_MAX_BYTES = 320 * 1024;   // hard cap ~320KB
 const MIN_BODY_CHARS = 2500;  // ~400 words minimum; 800 chars was too permissive
 const MIN_BODY_CHARS_FLOOR = Math.max(
   1500,
@@ -4184,7 +4189,7 @@ async function optimizeImageToWebp(inputPath, outputPath) {
     const encodeWithQuality = async (quality) => {
       return sharp(inputPath)
         .rotate()
-        .resize({ width: 1200, height: 675, fit: 'cover', position: 'attention' })
+        .resize({ width: BLOG_IMAGE_WIDTH, height: BLOG_IMAGE_HEIGHT, fit: 'cover', position: 'attention' })
         // effort 4 → 6 squeezes another ~2-3 % bytes at ~2x encoding cost.
         // Article creation is one-shot per article (not hot path), so the
         // slower encoder is acceptable.
@@ -4193,11 +4198,10 @@ async function optimizeImageToWebp(inputPath, outputPath) {
     };
 
     const before = statSync(inputPath).size;
-    let outBuffer = await encodeWithQuality(75);
-    const qualityPasses = [70, 65, 60, 55];
-    for (const q of qualityPasses) {
-      if (outBuffer.length <= BLOG_IMAGE_TARGET_MAX_BYTES) break;
+    let outBuffer;
+    for (const q of BLOG_IMAGE_QUALITY_PASSES) {
       outBuffer = await encodeWithQuality(q);
+      if (outBuffer.length <= BLOG_IMAGE_TARGET_MAX_BYTES) break;
     }
 
     writeFileSync(outputPath, outBuffer);
@@ -4237,8 +4241,7 @@ async function optimizeImageToWebp(inputPath, outputPath) {
   const before = existsSync(inputPath) ? statSync(inputPath).size : statSync(outputPath).size;
 
   // Iterative quality reduction if the target byte cap is exceeded.
-  const qualityPasses = [70, 65, 60, 55];
-  for (const q of qualityPasses) {
+  for (const q of BLOG_IMAGE_QUALITY_PASSES.slice(1)) {
     const currentSize = statSync(outputPath).size;
     if (currentSize <= BLOG_IMAGE_TARGET_MAX_BYTES) break;
 
