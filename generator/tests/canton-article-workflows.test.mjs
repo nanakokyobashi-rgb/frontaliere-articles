@@ -31,6 +31,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL, isCantonSection } from '../../engine/shared/articleSectionCore.mjs';
 import {
   AUTO_GENERATED_MARKER,
+  CANTON_SELF_TEST_WORKFLOW,
   CORE_FORBIDDEN_LITERALS,
   CORE_REPLACEMENTS,
   CORE_WORKFLOW,
@@ -39,6 +40,7 @@ import {
   buildAll,
   buildCoreWorkflow,
   buildFromRepo,
+  buildSelfTestWorkflow,
   callerWorkflowFile,
   checkGenerated,
   cronExpression,
@@ -55,6 +57,7 @@ const readWorkflow = (file) => readFileSync(path.join(ROOT, WORKFLOWS_DIR, file)
 
 const SOURCE = readWorkflow(SOURCE_WORKFLOW);
 const CORE = readWorkflow(CORE_WORKFLOW);
+const SELF_TEST = readWorkflow(CANTON_SELF_TEST_WORKFLOW);
 const PROFILES = loadCantonSectionProfiles();
 const CANTONS = [...PROFILES.cantons].sort((a, b) => a.section.localeCompare(b.section));
 const OFFSETS = hourOffsets(CANTONS);
@@ -73,7 +76,7 @@ const PAIR = {
 test('core e chiamanti su disco sono byte-identici al generato', () => {
   assert.deepEqual(checkGenerated(ROOT), [], 'rigenera con: node scripts/ci/generate-canton-article-workflows.mjs');
   const files = buildFromRepo(ROOT);
-  assert.equal(files.size, 25, 'un core e 24 chiamanti');
+  assert.equal(files.size, 26, 'un core, un self-test e 24 chiamanti');
   for (const [file, content] of files) {
     assert.equal(readWorkflow(file), content, file);
     assert.ok(content.startsWith(`${AUTO_GENERATED_MARKER}\n`), `${file}: manca il marcatore in testa`);
@@ -540,12 +543,11 @@ test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', 
   assert.throws(() => cronExpression({ cronMinute: 5, cadenceHours: 6 }, 6), /sfasamento/);
 });
 
-test('push.paths: solo il proprio file e i path del corpus della propria sezione', () => {
+test('push.paths: solo i path del corpus della propria sezione', () => {
   for (const { canton, file, pushPaths, pushBranches } of CALLERS) {
     const { section } = canton;
     assert.equal(pushBranches, 'main', `${file}: un branch di backup non deve generare`);
-    assert.equal(pushPaths[0], `${WORKFLOWS_DIR}/${file}`, `${file}: il self-test e' il proprio file`);
-    const corpus = pushPaths.slice(1);
+    const corpus = pushPaths;
     assert.ok(corpus.length >= 3, file);
     for (const p of corpus) {
       assert.ok(p.startsWith('content/'), `${file}: ${p} non e' corpus — un run che non produce scrive solo sotto data/, e non deve ripartire`);
@@ -564,6 +566,21 @@ test('push.paths: solo il proprio file e i path del corpus della propria sezione
     for (const state of [paths.sourceUrlsFile, paths.evergreenRejectedFile, paths.quotaStateFile, `${paths.sidecarDir}/x.json`]) {
       assert.ok(!pushPaths.some((p) => pathMatches(p, state)), `${file}: lo stato ${state} farebbe ripartire un run secco`);
     }
+  }
+});
+
+test('un solo self-test runtime copre core e caller senza fan-out', () => {
+  const canonical = CANTONS[0];
+  assert.equal(SELF_TEST, buildSelfTestWorkflow(canonical));
+  assert.match(SELF_TEST, /^name: Generate Blog Article \(cantons self-test\)$/m);
+  assert.match(SELF_TEST, new RegExp(`- '${WORKFLOWS_DIR}/${SOURCE_WORKFLOW.replace('.', '\\.')}'`));
+  assert.match(SELF_TEST, new RegExp(`- '${WORKFLOWS_DIR}/${CORE_WORKFLOW.replace('.', '\\.')}'`));
+  assert.match(SELF_TEST, new RegExp(`- '${WORKFLOWS_DIR}/generate-article-\\*\\.yml'`));
+  assert.equal((SELF_TEST.match(/uses: \.\/\.github\/workflows\/generate-article-core\.yml/g) || []).length, 1);
+  assert.match(SELF_TEST, /section_gate: canton/);
+  assert.match(SELF_TEST, new RegExp(`caller_workflow: ${callerWorkflowFile(canonical.code)}`));
+  for (const { file, pushPaths } of CALLERS) {
+    assert.ok(!pushPaths.includes(`${WORKFLOWS_DIR}/${file}`), `${file}: self-test duplicato nel caller`);
   }
 });
 
