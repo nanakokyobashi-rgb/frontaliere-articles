@@ -190,15 +190,33 @@ function parseSqlDateTime(raw) {
 // ── Navigazione delle pagine HTML ────────────────────────────────────────────
 
 /** Ruoli ARIA che marcano un'area di navigazione o la cornice del sito. */
-const CHROME_ROLE_RE = /\brole\s*=\s*["']?(?:navigation|banner|contentinfo)\b/i;
+const CHROME_ROLES = new Set(['navigation', 'banner', 'contentinfo']);
+
+/**
+ * I token dell'attributo `role` di un tag, dai suoi attributi. Solo
+ * l'attributo `role`: `data-role="navigation"` e `aria-role` sono un'altra
+ * cosa (un `\brole` li prenderebbe, perche' fra `-` e `r` c'e' un confine di
+ * parola), e un `<article data-role="navigation">` e' contenuto, non menu.
+ */
+function roleTokens(attrs) {
+  const m = /(?:^|\s)role\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i.exec(String(attrs || ''));
+  return m ? (m[1] ?? m[2] ?? m[3] ?? '').toLowerCase().split(/\s+/).filter(Boolean) : [];
+}
 /**
  * Contenitori che rendono `<header>`/`<footer>` l'intestazione di una SEZIONE
  * e non del sito: e' la regola HTML-AAM per cui un header/footer e' landmark
  * `banner`/`contentinfo` solo fuori da article, aside, main, nav e section.
  */
 const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
-/** Il contenuto principale della pagina: un'area che lo contiene non e' cornice. */
-const MAIN_CONTENT_RE = /<main(?=[\s/>])|\brole\s*=\s*["']?main\b/i;
+/** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
+function containsMainContent(masked) {
+  const re = /<([a-zA-Z][\w-]*)\b([^>]*)>/g;
+  let m;
+  while ((m = re.exec(masked)) !== null) {
+    if (m[1].toLowerCase() === 'main' || roleTokens(m[2]).includes('main')) return true;
+  }
+  return false;
+}
 
 /**
  * Le aree di navigazione e la cornice del sito tolte da una pagina HTML:
@@ -241,7 +259,7 @@ export function stripPageChrome(html) {
     }
     if (closing || /\/\s*$/.test(attrs)) continue;
     const isChrome = name === 'nav'
-      || CHROME_ROLE_RE.test(attrs)
+      || roleTokens(attrs).some((r) => CHROME_ROLES.has(r))
       || ((name === 'header' || name === 'footer') && sectioningDepth === 0);
     if (!isChrome) continue;
     const end = matchingCloseEnd(masked, name, tagRe.lastIndex);
@@ -250,7 +268,7 @@ export function stripPageChrome(html) {
     // marcato male, non un menu: aarau.ch avvolge sottomenu E `<main>` in un
     // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
     // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
-    if (MAIN_CONTENT_RE.test(masked.slice(tagRe.lastIndex, end))) continue;
+    if (containsMainContent(masked.slice(tagRe.lastIndex, end))) continue;
     ranges.push([m.index, end]);
     // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
     // aperti E chiusi li' dentro) non sposta il conteggio.
@@ -442,9 +460,12 @@ export function headlineFromUrlSlug(url) {
  *
  * @param {string} xml
  * @param {string} sitemapUrl
+ * @param {{ dedup?: boolean }} [opts] `dedup: false` per le fonti che riusano
+ *   gli URL: li' due voci con lo stesso `<loc>` sono due notizie, e il dedup
+ *   si fa dopo l'identita' dell'item (vedi `applyItemIdentity`)
  * @returns {Array<{url: string, headline: string, date: Date | null, language?: string, titleFromSlug?: boolean}>}
  */
-export function extractSitemapNewsItems(xml, sitemapUrl) {
+export function extractSitemapNewsItems(xml, sitemapUrl, { dedup = true } = {}) {
   const out = [];
   // Anche con prefisso di namespace (`<sm:url>`, `<sm:loc>`): una forma non
   // riconosciuta ridurrebbe a zero la fonte in silenzio.
@@ -474,7 +495,26 @@ export function extractSitemapNewsItems(xml, sitemapUrl) {
       ...(titleFromSlug ? { titleFromSlug: true } : {}),
     });
   }
-  return dedupByUrl(out);
+  return dedup ? dedupByUrl(out) : out;
+}
+
+/**
+ * Un feed RSS/Atom spezzato in un documento per voce (stesso involucro, una
+ * sola `<item>`/`<entry>`). Serve alle fonti che riusano gli URL:
+ * `extractRssItems` deduplica per URL DENTRO il feed, quindi due voci con lo
+ * stesso `<link>` e titoli diversi — due notizie, li' — ne lascerebbero una
+ * prima che l'identita' dell'item possa distinguerle. Letta una voce alla
+ * volta, l'estrattore resta quello vero e non ha niente da deduplicare.
+ *
+ * @param {string} xml
+ * @returns {string[]} un documento per voce; `[xml]` se non si riconoscono voci
+ */
+export function feedItemDocuments(xml) {
+  const src = String(xml || '');
+  const blocks = [...src.matchAll(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi)].map((m) => m[0]);
+  if (blocks.length === 0) return [src];
+  const isAtom = /<feed[\s>]/i.test(src.slice(0, 500));
+  return blocks.map((b) => (isAtom ? `<feed xmlns="http://www.w3.org/2005/Atom">${b}</feed>` : `<rss version="2.0"><channel>${b}</channel></rss>`));
 }
 
 /**
@@ -751,10 +791,16 @@ export async function scanCantonSource(source, ctx) {
     switch (source.parser) {
       case 'rss':
       case 'atom': {
-        const items = ctx.extractRssItems(text, url);
-        if (!quirks.paywall) return items;
-        const leads = rssItemLeads(text, url);
-        return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
+        // Fonte che riusa gli URL: una voce alla volta, cosi' ne' il dedup
+        // dell'estrattore ne' la mappa dei lead (per URL) fondono due notizie
+        // allo stesso indirizzo. Vedi feedItemDocuments.
+        const docs = quirks.urlReusedForDifferentStories ? feedItemDocuments(text) : [text];
+        return docs.flatMap((doc) => {
+          const items = ctx.extractRssItems(doc, url);
+          if (!quirks.paywall) return items;
+          const leads = rssItemLeads(doc, url);
+          return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
+        });
       }
       case 'html-links': {
         // Prima la cornice del sito (menu, header, footer), poi i link che
@@ -772,7 +818,7 @@ export async function scanCantonSource(source, ctx) {
         return extractJsonApiItems(text, url);
       default:
         // news-sitemap, sitemap, weekly-sitemap
-        return extractSitemapNewsItems(text, url);
+        return extractSitemapNewsItems(text, url, { dedup: !quirks.urlReusedForDifferentStories });
     }
   };
   const accept = ['html-links', 'json-entities'].includes(source.parser)
@@ -800,6 +846,14 @@ export async function scanCantonSource(source, ctx) {
   if (failures.length === urls.length) throw new Error(failures.join('; '));
   notes.push(...failures);
   if (period) notes.push(`periodi: ${urls.map((u) => u.split('/').pop()).join(', ')}`);
+  // L'identita' dell'item PRIMA del dedup: su una fonte che riusa gli URL due
+  // voci con lo stesso indirizzo (nello stesso feed, o in due periodi della
+  // stessa sitemap) sono due notizie finche' il titolo non dice il contrario.
+  if (quirks.urlReusedForDifferentStories) {
+    const reused = applyItemIdentity(headlines, quirks.urlReusedForDifferentStories);
+    if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza titolo ne' data scartate (nessuna identita')`);
+    headlines = reused.headlines;
+  }
   headlines = dedupByUrl(headlines);
   if (quirks.emptyPubDate) notes.push('pubDate vuoto: voci senza data (quota undated, data dalla pagina in generazione)');
 
@@ -808,11 +862,6 @@ export async function scanCantonSource(source, ctx) {
   }
   if (quirks.paywall) {
     headlines = headlines.map((h) => ({ ...h, _paywall: quirks.paywall }));
-  }
-  if (quirks.urlReusedForDifferentStories) {
-    const reused = applyItemIdentity(headlines, quirks.urlReusedForDifferentStories);
-    if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza titolo ne' data scartate (nessuna identita')`);
-    headlines = reused.headlines;
   }
   if (quirks.emptyPubDate) {
     headlines = headlines.map((h) => (h.date ? h : { ...h, _undatedReason: 'emptyPubDate' }));

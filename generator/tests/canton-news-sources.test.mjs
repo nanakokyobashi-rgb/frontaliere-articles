@@ -38,6 +38,7 @@ import {
   extractJsonApiItems,
   extractJsonEntitiesItems,
   extractSitemapNewsItems,
+  feedItemDocuments,
   filterArticleLinks,
   isoWeekOf,
   periodSitemapUrls,
@@ -407,6 +408,15 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   assert.equal(out.removed, 4);
   for (const gone of ['/chi', '/menu', 'Torna alla pagina iniziale', '/privacy-policy']) assert.ok(!out.html.includes(gone), `${gone} doveva sparire`);
   for (const kept of ['/news/1"', '/news/1#c', '/news/2', 'non e\' markup']) assert.ok(out.html.includes(kept), `${kept} doveva restare`);
+  // Solo l'attributo `role`: data-role e aria-role non marcano niente, e
+  // role="main" dentro un'area la rende contenuto (come <main>).
+  const dataRole = '<article data-role="navigation"><a href="/news/4">Titolo del quarto comunicato</a></article><div aria-role="banner"><a href="/news/5">Titolo del quinto comunicato</a></div>';
+  assert.deepEqual(stripPageChrome(dataRole), { html: dataRole, removed: 0 });
+  const roleMain = '<div role="navigation"><div role="main"><a href="/news/6">Titolo del sesto comunicato</a></div></div>';
+  assert.deepEqual(stripPageChrome(roleMain), { html: roleMain, removed: 0 });
+  const dataMain = '<div class="x" role="navigation"><div data-role="main"><a href="/menu/2">Seconda voce del menu laterale</a></div></div>';
+  assert.deepEqual(stripPageChrome(dataMain), { html: '', removed: 1 });
+  assert.equal(stripPageChrome("<ul ROLE='presentation Navigation'><li><a href=\"/m\">Voce di menu qualunque</a></li></ul><p>resta</p>").html, '<p>resta</p>');
   // Un'area senza chiusura non si taglia fino in fondo al documento.
   const open = '<nav><a href="/a">Voce di un menu non chiuso</a><main><a href="/news/3">Titolo del terzo comunicato</a></main>';
   assert.deepEqual(stripPageChrome(open), { html: open, removed: 0 });
@@ -490,4 +500,50 @@ test('applyItemIdentity: titolo dallo slug → vale la data; senza titolo ne\' d
   assert.equal(out.identified, 1);
   assert.notEqual(newsUrlKey(out.headlines[0].url), newsUrlKey(next.headlines[0].url), 'il titolo e\' lo slug riusato: distingue la data');
   assert.deepEqual(applyItemIdentity([at(null)]), { headlines: [], identified: 0, dropped: 1 });
+});
+
+test('URL riusati: due voci con lo stesso link nello STESSO feed restano due notizie (identita\' prima del dedup)', async () => {
+  // Il feed reale, con la voce del ticker ripetuta sotto un altro titolo: e'
+  // cio' che il contenitore titolava il 2026-08-26 (Wayback Machine). Stesso
+  // <link>, stesso <guid>.
+  const xml = fixture('suedostschweiz-graubuenden.xml').toString('utf8');
+  const item = /<item>(?:(?!<\/item>)[\s\S])*verkehrsticker-1574112[\s\S]*?<\/item>/.exec(xml)[0];
+  const earlierTitle = 'Schwerer Töffunfall bei Pontresina: Betrieb der RhB kurzzeitig eingestellt';
+  const twice = xml.replace(item, `${item}\n${item.replace(/<title>[\s\S]*?<\/title>/, `<title>${earlierTitle}</title>`).replace(/<description>[\s\S]*?<\/description>/, '<description>Die RhB-Strecke war kurz unterbrochen.</description>')}`);
+  assert.equal(extractRssItems(twice, SOS_FEED).filter((h) => h.url === TICKER_URL).length, 1, 'premessa: l\'estrattore storico ne tiene una');
+  assert.equal(feedItemDocuments(twice).length, 6);
+
+  const { impl } = fakeFetch({ [SOS_FEED]: { body: twice, contentType: 'application/rss+xml; charset=UTF-8' } });
+  const out = await scanCantonSource(sourceOf('GR', SOS_FEED), ctx(impl));
+  const ticker = out.headlines.filter((h) => stripItemIdentity(h.url) === TICKER_URL);
+  assert.equal(ticker.length, 2);
+  assert.equal(new Set(ticker.map((h) => newsUrlKey(h.url))).size, 2);
+  assert.deepEqual(ticker.map((h) => h.headline).sort(), ['Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder', earlierTitle].sort());
+  // Ognuna col SUO lead, non con quello dell'altra (la mappa dei lead e' per URL).
+  assert.match(ticker.find((h) => h.headline === earlierTitle).lead, /RhB-Strecke/);
+  assert.doesNotMatch(ticker.find((h) => h.headline !== earlierTitle).lead, /RhB-Strecke/);
+  // La stessa voce ripetuta identica, invece, resta una.
+  const { impl: impl2 } = fakeFetch({ [SOS_FEED]: { body: xml.replace(item, `${item}\n${item}`), contentType: 'application/rss+xml' } });
+  const dup = await scanCantonSource(sourceOf('GR', SOS_FEED), ctx(impl2));
+  assert.equal(dup.headlines.length, 5);
+});
+
+test('URL riusati in una sitemap: stesso <loc> in due voci, due notizie; senza il quirk resta il dedup', async () => {
+  const url = 'https://www.suedostschweiz.ch/news-sitemap.xml';
+  const entry = (title, at) => `<url><loc>${TICKER_URL}</loc><news:news><news:publication_date>${at}</news:publication_date><news:title>${title}</news:title></news:news></url>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">${entry('Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder', '2026-10-05T12:49:15+02:00')}${entry('Julierpass nach Steinschlag wieder offen', '2026-10-05T08:10:00+02:00')}</urlset>`;
+  assert.equal(extractSitemapNewsItems(xml, url).length, 1);
+  assert.equal(extractSitemapNewsItems(xml, url, { dedup: false }).length, 2);
+  const { impl } = fakeFetch({ [url]: { body: xml, contentType: 'application/xml' } });
+  const out = await scanCantonSource(sourceOf('GL', url), ctx(impl));
+  assert.equal(out.headlines.length, 2);
+  assert.equal(new Set(out.headlines.map((h) => newsUrlKey(h.url))).size, 2);
+});
+
+test('feedItemDocuments: Atom e RSS, e un documento senza voci torna com\'e\'', () => {
+  const atom = '<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><title>F</title><entry><title>Primo titolo di prova</title><link href="https://x.ch/a"/><updated>2026-10-05T10:00:00Z</updated></entry><entry><title>Secondo titolo di prova</title><link href="https://x.ch/a"/><updated>2026-10-05T11:00:00Z</updated></entry></feed>';
+  const docs = feedItemDocuments(atom);
+  assert.equal(docs.length, 2);
+  assert.deepEqual(docs.flatMap((d) => extractRssItems(d, 'https://x.ch/feed')).map((h) => h.headline), ['Primo titolo di prova', 'Secondo titolo di prova']);
+  assert.deepEqual(feedItemDocuments('<rss><channel></channel></rss>'), ['<rss><channel></channel></rss>']);
 });
