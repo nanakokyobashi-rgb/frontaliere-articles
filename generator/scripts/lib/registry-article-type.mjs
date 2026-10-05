@@ -32,11 +32,14 @@
  * girano senza `npm ci`. Un test che importasse `create-article.mjs` sarebbe
  * rosso su `main` dal primo giorno. Qui stanno quindi le funzioni pure,
  * importate sia dal generatore sia da `generator/tests/registry-article-type.test.mjs`.
- * L'unico import e' `article-meta-block.mjs`, a sua volta senza dipendenze:
- * l'escape dei valori a singoli apici ha una sola definizione.
+ * Gli unici import sono `article-meta-block.mjs` (l'escape dei valori a singoli
+ * apici ha una sola definizione) e `registry-canton-field.mjs` (la riga
+ * `canton:`, scritta identica dal generatore e dal backfill), entrambi senza
+ * dipendenze.
  */
 
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
+import { renderCantonLine } from './registry-canton-field.mjs';
 
 /** I due valori ammessi nel registry. */
 export const REGISTRY_ARTICLE_TYPES = Object.freeze(['news', 'evergreen']);
@@ -108,14 +111,15 @@ export function resolveArticleType(data, opts = {}) {
 /**
  * Le righe di una voce nuova del registry, nell'ordine in cui
  * `modifyBlogArticlesTsx` le ha sempre scritte, con `articleType` subito dopo
- * `hasCalculator`.
+ * `hasCalculator` e, se l'articolo ha cantoni, `canton` subito dopo
+ * `articleType`.
  *
  * Fail-closed: e' l'UNICO scrittore del registry, quindi un produttore futuro
  * che arriva qui senza passare da `registryArticleType`/`resolveArticleType`
  * fa lanciare la registrazione invece di scrivere una voce senza tipo.
  *
  * @param {{id: string, category: string, hasCalculator?: boolean, articleType?: unknown,
- *   author?: {slug?: string, name?: string}}} data
+ *   canton?: string[], author?: {slug?: string, name?: string}}} data
  * @param {{objIndent: string, propIndent: string, today: string, imagePath: string}} layout
  * @returns {string[]}
  */
@@ -135,6 +139,11 @@ export function renderRegistryEntry(data, { objIndent, propIndent, today, imageP
     `${propIndent}hasCalculator: ${data.hasCalculator ? 'true' : 'false'},`,
     `${propIndent}articleType: '${data.articleType}',`,
   ];
+  // D13 sezioni cantonali: il campo multi-label `canton`, interno al corpus
+  // (fuori dall'allowlist di registry-api-entry.mjs). Assente se vuoto.
+  if (Array.isArray(data.canton) && data.canton.length > 0) {
+    lines.push(renderCantonLine(data.canton, propIndent));
+  }
   // A2: persist byline so BlogArticles.tsx can render an author link.
   if (data.author?.slug) {
     lines.push(`${propIndent}authorSlug: '${escapeForSingleQuoteTS(data.author.slug)}',`);

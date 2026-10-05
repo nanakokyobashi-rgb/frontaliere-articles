@@ -10,6 +10,8 @@
  * a `content/blog-articles-data.ts` per uso interno del corpus — per primo
  * `articleType`/`verifiedAt`, letti solo dall'audit evergreen — finiva
  * nell'API per caso, senza che nessuno decidesse di estendere il contratto.
+ * Lo stesso vale per `canton` (D13 sezioni cantonali), letto dagli hub
+ * cantonali dentro il corpus.
  *
  * COME
  * ────

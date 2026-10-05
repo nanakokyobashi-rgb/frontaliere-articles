@@ -2334,6 +2334,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-classifier.mjs",
+      "mode": "corpus-only",
+      "reason": "Classificatore deterministico (nessun LLM) del campo multi-label `canton` degli articoli frontaliere/svizzera, D13 del piano sezioni cantonali: 24 gruppi URL di canton-url-slugs.json, nomi del cantone in quattro lingue, demonimi, comuni >= 10'000 abitanti e comuni minori in forma locativa da generator/data/canton-classifier-places.json, dominio della fonte da canton-sections.json; omonimi (Berna governo federale, Zug, Giura, comuni di piu' cantoni), residenza delle persone, cornice «frontalieri che lavorano in Ticino» e portata nazionale esclusi. Lo usano il backfill generator/scripts/backfill-article-cantons.mjs e create-article.mjs alla registrazione. Corpus-only: il registry e la generazione vivono solo in questo repo e il campo non entra nell'API pubblicata.",
+      "baseline": {
+        "site": null,
+        "corpus": "e56c5e34fea24853",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/registry-canton-field.mjs",
+      "mode": "corpus-only",
+      "reason": "Lettura e scrittura testuale della riga `canton: [...]` nelle voci di content/*-articles-data.ts (inserita dopo articleType, idempotente, codici validati); importata da registry-article-type.mjs (renderRegistryEntry), dal backfill e dai test senza `npm ci`. Corpus-only: il registry vive solo qui, il sito legge articles.json attraverso l'allowlist di scripts/lib/registry-api-entry.mjs che non contiene `canton`.",
+      "baseline": {
+        "site": null,
+        "corpus": "4f996899ef5c3532",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/cantone-toponimi-coerenza.mjs",
       "mode": "corpus-only",
       "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
@@ -4446,7 +4466,7 @@
     {
       "path": "scripts/lib/registry-api-entry.mjs",
       "mode": "corpus-only",
-      "reason": "Proiezione della voce di registry su un'allowlist esplicita per dist/api/articles.json e swiss-articles.json, cosi' un campo interno del registry (articleType, verifiedAt) non entra nel contratto HTTP per caso. Corpus-only perche' quei file sono la superficie che QUESTO repo pubblica: il sito li consuma, non li produce.",
+      "reason": "Proiezione della voce di registry su un'allowlist esplicita per dist/api/articles.json e swiss-articles.json, cosi' un campo interno del registry (articleType, verifiedAt, canton) non entra nel contratto HTTP per caso. Corpus-only perche' quei file sono la superficie che QUESTO repo pubblica: il sito li consuma, non li produce.",
       "baseline": {
         "site": null,
         "corpus": "87c33613739a51f3",
@@ -4818,8 +4838,8 @@
       "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (radici a inizio parola sul testo normalizzato) E il luogo (Ticino dall'elenco BFS di generator/data/ticino-municipalities.json, i nomi comuni solo dopo una preposizione di luogo; comuni di confine delle sole province VA, CO e VB dall'indice di topic-coverage-guard.mjs), legati frase per frase: il luogo piu' vicino al genere, introdotto da una preposizione di luogo dell'evento o come dateline, decide dove e' avvenuto il fatto (un luogo al genitivo, organizzatore o proprietario, decide solo se la frase non ne nomina uno dell'evento); un demonimo («un ticinese») o un fiume («sul Ticino») non lo collocano, e lo sport si colloca con il luogo della squadra, non con quello della partita. Sulla sezione frontaliere una headline che isLocalNews ancora anche il gate geografico della scansione (filterByAnchor). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt, dell'espansione, di CTA e link interni e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "f90a6a7728fa1c95",
-        "alignedAt": "2026-09-25"
+        "corpus": "a7f8c2fd15299d56",
+        "alignedAt": "2026-10-05"
       }
     },
     {
