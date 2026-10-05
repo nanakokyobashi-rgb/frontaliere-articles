@@ -1981,7 +1981,7 @@
       "reason": "Il registro delle sezioni articolo cantonali visto dal pubblicatore (P7 del piano sezioni cantonali, D3/D9/D14): validazione di sections/registry.json contro il core (insieme chiuso, parita' di kind/canton/indexSlug/topics, live solo se attiva) e contro le regole di parseCorpusSectionRegistry del Worker del sito (prefissi, forma canonica, redirect same-origin, cicli), kill-switch Remote Config CANTON_ARTICLE_SECTIONS_KILL col marker RC_ENV_LOADED, costruzione di sections.json, della copia edge/sections/registry.json per il Worker e dell'indice sitemap-cantons.xml. Corpus-only: il registro e la pubblicazione R2 delle sezioni vivono solo qui; il sito ne applica la regola nel Worker leggendo il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "b9f42a92c34b8428",
+        "corpus": "a65446063b33c6dc",
         "alignedAt": "2026-10-05"
       }
     },
