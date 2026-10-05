@@ -33,10 +33,11 @@ const LEADING_WINDOW_CHARS = 320;
 
 const A = "['’]"; // apostrophe, ASCII or typographic
 
-// A single-quoted input can contain an apostrophe between letters (for
-// example, `Chef d'équipe`); only allow that internal form so the final quote
-// remains the delimiter. Double and typographic quotes close on their own mark.
-const TRANSLATION_QUOTED_INPUT = String.raw`(?:"[^"\n]{1,160}"|“[^”\n]{1,160}”|«[^»\n]{1,160}»|'(?:[^'\n]|(?<=[\p{L}\p{N}])'(?=[\p{L}\p{N}])){1,160}')`;
+// Single-quoted inputs can contain an apostrophe between letters (for example,
+// `Chef d'équipe` or `Chef d’équipe`); only allow that internal form so the
+// final quote remains the delimiter. Double, typographic double and guillemet
+// quotes close on their own mark.
+const TRANSLATION_QUOTED_INPUT = String.raw`(?:"[^"\n]{1,160}"|“[^”\n]{1,160}”|‘(?:[^’'\n]|(?<=[\p{L}\p{N}])['’](?=[\p{L}\p{N}])){1,160}’|«[^»\n]{1,160}»|'(?:[^'\n]|(?<=[\p{L}\p{N}])'(?=[\p{L}\p{N}])){1,160}')`;
 
 // What a clarification request is ABOUT: the input the model was handed (the
 // title, the text, the message, the translation, the job data…), after at most
