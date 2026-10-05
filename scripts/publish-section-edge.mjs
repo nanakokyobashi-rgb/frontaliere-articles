@@ -15,14 +15,19 @@
  *
  * ── Protocollo di pubblicazione ────────────────────────────────────────────
  *
- * 0. LETTURA. Si legge dal CDN il registro che R2 ha adesso. Il push e'
- *    OBBLIGATORIO se lo stato delle sezioni da pubblicare (status, redirects,
- *    gone) differisce da quello — in OGNI direzione: accensione, spegnimento,
- *    ritiro — e ANCHE quando lo stato precedente non e' dimostrabile (CDN
- *    illeggibile, o un documento che non rispetta il contratto del Worker):
- *    una release tutta `draft` sopra un registro che non si riesce a leggere
- *    potrebbe essere uno spegnimento. Solo se lo stato letto e' lo stesso la
- *    release cambia soltanto il `commit`, e il push e' facoltativo.
+ * 0. LETTURA. Si legge dal CDN il registro che R2 ha adesso (il puntatore
+ *    della release precedente). Il push e' OBBLIGATORIO se la release da
+ *    pubblicare DIFFERISCE da quella servita (`releaseDiffers`):
+ *      · nello stato delle sezioni (status, redirects, gone) — in OGNI
+ *        direzione: accensione, spegnimento, ritiro;
+ *      · o nei BYTE di un artefatto servito a path fisso (una sitemap di
+ *        sezione, l'indice): stessi stati ma una sitemap nuova e' comunque una
+ *        superficie che il Worker servirebbe vecchia;
+ *      · o quando lo stato precedente non e' dimostrabile (CDN illeggibile, o
+ *        un documento fuori dal contratto del Worker) — anche per una release
+ *        tutta `draft`, che potrebbe essere uno spegnimento.
+ *    Solo se niente di servito cambia (oggi: tutto `draft`, nessuna sitemap)
+ *    la release cambia soltanto il `commit`, e il push e' facoltativo.
  *
  * 1. STAGING (niente di visibile cambia). Ogni file della release sale su una
  *    chiave VERSIONATA per commit,
@@ -40,23 +45,30 @@
  *    l'UNICO passo che cambia cio' che il Worker serve. Un fallimento prima
  *    del PUT, o del PUT stesso: lo stato servito resta quello di prima.
  *
- * 3. DOPO IL FLIP (lo stato e' gia' coerente). Purge del puntatore (il Worker
- *    lo rilegge comunque ogni 60 s), poi l'indice `edge/sitemap-cantons.xml`
- *    — scritto, o CANCELLATO se nessuna sezione e' live (un `<sitemapindex>`
- *    vuoto viola lo schema) — e il purge di sitemap e indice. L'indice sta
- *    dopo il flip perche' e' un annuncio derivato dal registro: scritto prima,
- *    un flip fallito lo lascerebbe ad annunciare sitemap che il Worker non
- *    serve. Un fallimento qui non tocca lo stato: si riprova al publish
- *    successivo, che riscrive tutto.
+ * 3. DOPO IL FLIP. L'indice `edge/sitemap-cantons.xml` — scritto, o
+ *    CANCELLATO se nessuna sezione e' live (un `<sitemapindex>` vuoto viola lo
+ *    schema) — con fino a 3 tentativi. Sta dopo il flip perche' e' un annuncio
+ *    derivato dal registro: scritto prima, un flip fallito lo lascerebbe ad
+ *    annunciare sitemap che il Worker non serve. Se dopo i tentativi l'indice
+ *    non e' aggiornato, registro nuovo e indice vecchio sarebbero una coppia
+ *    incoerente: si RIPRISTINA il puntatore precedente (registro e indice
+ *    tornano la coppia di prima) e si esce con errore.
+ *    Poi le sitemap ai path fissi delle sezioni che NON sono piu' live
+ *    (presenti nella release precedente, assenti in questa) vengono cancellate,
+ *    e si purga l'UNIONE di cio' che la release precedente e la nuova
+ *    servono: puntatore, indice, sitemap nuove e sitemap rimosse, su apex e
+ *    cdn. Un purge o una cancellazione falliti non toccano lo stato (il
+ *    Worker rilegge il registro entro 60 s e non serve la sitemap di una
+ *    sezione non live): si esce con errore e il publish successivo riprova.
  *
  * 4. PULIZIA (best-effort). I file della release precedente, nominati dal
  *    puntatore precedente, vengono cancellati.
  *
  * ESITO. Un fallimento in un push OBBLIGATORIO esce 1: publish-api.yml si
  * ferma prima del deploy Pages, e lo stato servito e' — per costruzione —
- * quello di prima (fasi 0-2) o quello nuovo e coerente (fasi 3-4). Se lo stato
- * non cambiava, un problema di R2 e' un warning ed esce 0: non ferma la
- * pubblicazione degli articoli.
+ * quello di prima (fasi 0-2, o fase 3 con ripristino) o quello nuovo e
+ * coerente. Se niente di servito cambiava, un problema di R2 e' un warning ed
+ * esce 0: non ferma la pubblicazione degli articoli.
  *
  * Registro assente in dist/api (kill-switch di Remote Config non verificato
  * con una sezione dichiarata live, vedi scripts/lib/section-registry.mjs):
@@ -90,6 +102,7 @@ export const SITEMAP_CACHE_CONTROL = 'public,max-age=600';
 export const RELEASE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
 
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
+const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 /**
  * Lo stato di un registro ridotto a cio' che il Worker applica: per ogni
@@ -145,16 +158,47 @@ export function planRelease(distDir) {
   return { commit: registry.commit, prefix, registry, live, files, pointer };
 }
 
+const FIXED_ARTIFACT_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
+
 /**
- * Se questo push DEVE riuscire perche' il publish prosegua (fase 0 dell'header).
- * @param {object} registry il registro da pubblicare
+ * Gli artefatti che una release serve a un path FISSO (sitemap di sezione,
+ * indice), come `{ nome: sha256 }`. Il registro non c'e': il suo contenuto
+ * servito e' lo stato, che si confronta a parte (il `commit` cambia sempre).
+ * Per un puntatore senza `release` (mai pubblicato da questo protocollo) le
+ * sitemap delle sezioni live si assumono servite, con hash ignoto.
+ */
+export function fixedArtifacts(doc) {
+  const out = {};
+  for (const [id, entry] of Object.entries(doc?.sections ?? {})) {
+    if (entry?.status === 'live') out[`sitemap-articles-${id}.xml`] = null;
+  }
+  for (const [name, hash] of Object.entries(doc?.release?.files ?? {})) {
+    if (FIXED_ARTIFACT_RE.test(name)) out[name] = typeof hash === 'string' ? hash : null;
+  }
+  return out;
+}
+
+/**
+ * Se la release da pubblicare differisce da quella servita: nello stato delle
+ * sezioni, o nei byte di un artefatto a path fisso (fase 0 dell'header).
+ * @param {{ registry: object, pointer: object }} release
  * @param {{ state: 'ok' | 'absent' | 'unknown', doc?: unknown }} previous
  */
-export function pushIsMandatory(registry, previous) {
+export function releaseDiffers(release, previous) {
   // Stato precedente non dimostrabile: fail-closed, anche per una release
   // tutta draft (se R2 serviva una sezione live, questo e' uno spegnimento).
   if (!previous || previous.state === 'unknown') return true;
-  return registryState(registry) !== registryState(previous.state === 'ok' ? previous.doc : { sections: {} });
+  const before = previous.state === 'ok' ? previous.doc : { sections: {} };
+  if (registryState(release.registry) !== registryState(before)) return true;
+  const next = fixedArtifacts(release.pointer);
+  const prev = fixedArtifacts(before);
+  const names = new Set([...Object.keys(next), ...Object.keys(prev)]);
+  return [...names].some((name) => !next[name] || next[name] !== prev[name]);
+}
+
+/** Compatibilita' di nome: il push e' obbligatorio quando la release differisce. */
+export function pushIsMandatory(registry, previous) {
+  return releaseDiffers({ registry, pointer: registry }, previous);
 }
 
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
@@ -200,17 +244,35 @@ export const realIo = {
   },
 };
 
+/** Quante volte si prova a scrivere (o cancellare) l'indice dopo il flip. */
+export const INDEX_ATTEMPTS = 3;
+
+/** Riscrive su R2 il puntatore precedente (o lo cancella se non c'era). */
+function restorePointer(previous, io, tmpDir) {
+  if (previous.state === 'absent') return io.remove(EDGE_SECTION_REGISTRY_FILE);
+  if (previous.state !== 'ok') return false;
+  const dir = fs.mkdtempSync(path.join(tmpDir, 'section-edge-restore-'));
+  try {
+    const file = path.join(dir, 'registry.json');
+    fs.writeFileSync(file, previous.raw);
+    return io.upload(file, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 /** Il registro che R2 ha ADESSO. */
 export async function readPreviousRegistry(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
   if (res.status !== 200) return { state: 'unknown' };
   try {
-    const doc = JSON.parse(res.body.toString('utf8'));
+    const raw = res.body.toString('utf8');
+    const doc = JSON.parse(raw);
     // Un 200 non basta: conta come stato precedente solo un registro che il
     // Worker accetterebbe. Qualunque altra cosa (una pagina d'errore in JSON,
     // un documento troncato) non dimostra niente.
-    return validateEdgeSectionRegistry(doc) ? { state: 'ok', doc } : { state: 'unknown' };
+    return validateEdgeSectionRegistry(doc) ? { state: 'ok', doc, raw } : { state: 'unknown' };
   } catch {
     return { state: 'unknown' };
   }
@@ -223,15 +285,17 @@ export async function readPreviousRegistry(io) {
  */
 export async function publishRelease(release, { io, env = process.env, log = console.log, tmpDir = os.tmpdir() }) {
   const previous = await readPreviousRegistry(io);
-  const mandatory = pushIsMandatory(release.registry, previous);
+  const mandatory = releaseDiffers(release, previous);
   log(
     `[section-edge] release ${release.commit.slice(0, 8)}: registro su R2 ${previous.state}; push ` +
-      (mandatory ? 'OBBLIGATORIO (lo stato delle sezioni cambia, o non e\' dimostrabile che coincida)' : 'facoltativo (stesso stato delle sezioni)'),
+      (mandatory
+        ? 'OBBLIGATORIO (stato o artefatti serviti cambiano, o non e\' dimostrabile che coincidano)'
+        : 'facoltativo (stesso stato, stessi artefatti serviti)'),
   );
   const stop = (phase, what, flipped) => {
     const where = flipped ? 'lo stato servito e\' gia\' quello nuovo e coerente' : 'lo stato servito resta quello di prima';
     if (mandatory) log(`::error::[section-edge] ${phase}: ${what} — ${where}; il publish si ferma`);
-    else log(`::warning::[section-edge] ${phase}: ${what} — ${where}; lo stato delle sezioni non cambiava, il publish prosegue`);
+    else log(`::warning::[section-edge] ${phase}: ${what} — ${where}; niente di servito cambiava, il publish prosegue`);
     return { code: mandatory ? 1 : 0, phase, flipped };
   };
 
@@ -265,20 +329,49 @@ export async function publishRelease(release, { io, env = process.env, log = con
   }
   if (!flipped) return stop('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`, false);
 
-  // 3. Dopo il flip: purge, indice, purge. Lo stato e' gia' coerente.
-  const problems = [];
-  if (!io.purge([`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`])) problems.push('purge del puntatore (il Worker lo rilegge entro 60 s)');
+  // 3. Dopo il flip: indice (ritentato; se non passa, si torna al puntatore di
+  //    prima), sitemap delle sezioni non piu' live, purge dell'unione.
   const index = release.files.find((f) => f.name === SECTION_SITEMAP_INDEX_FILE);
   const indexKey = `edge/${SECTION_SITEMAP_INDEX_FILE}`;
-  const indexOk = index ? io.upload(index.local, indexKey, SITEMAP_CACHE_CONTROL) : io.remove(indexKey);
-  if (!indexOk) problems.push(`indice ${index ? 'non caricato' : 'non cancellato'}: ${indexKey}`);
-  const fixed = [...sitemaps.map((f) => f.name), SECTION_SITEMAP_INDEX_FILE];
-  if (!io.purge(fixed.flatMap((name) => [`${APEX}/${name}`, `${CDN}/edge/${name}`]))) problems.push('purge di sitemap e indice');
+  let indexOk = false;
+  for (let attempt = 1; attempt <= INDEX_ATTEMPTS && !indexOk; attempt++) {
+    indexOk = index ? io.upload(index.local, indexKey, SITEMAP_CACHE_CONTROL) : io.remove(indexKey);
+  }
+  const nextNames = sitemaps.map((f) => f.name);
+  const removedNames = Object.keys(fixedArtifacts(previous.state === 'ok' ? previous.doc : null)).filter(
+    (name) => name !== SECTION_SITEMAP_INDEX_FILE && !nextNames.includes(name),
+  );
+  const purgeUrls = [
+    `${CDN}/${EDGE_SECTION_REGISTRY_FILE}`,
+    ...[...nextNames, ...removedNames, SECTION_SITEMAP_INDEX_FILE].flatMap((name) => [`${APEX}/${name}`, `${CDN}/edge/${name}`]),
+  ];
+  if (!indexOk) {
+    // Registro nuovo + indice vecchio = coppia incoerente: si ripristina il
+    // puntatore precedente, cosi' registro e indice tornano la coppia di prima.
+    const restored = restorePointer(previous, io, tmpDir);
+    io.purge(purgeUrls);
+    return stop(
+      'dopo il flip',
+      `indice ${index ? 'non caricato' : 'non cancellato'} dopo ${INDEX_ATTEMPTS} tentativi: ` +
+        (restored
+          ? 'puntatore precedente ripristinato'
+          : `puntatore precedente NON ripristinato (stato precedente: ${previous.state}) — registro nuovo e indice vecchio, rilanciare publish-api`),
+      !restored,
+    );
+  }
+  const problems = [];
+  for (const name of removedNames) {
+    if (!io.remove(`edge/${name}`)) problems.push(`sitemap di una sezione non piu' live non cancellata: edge/${name}`);
+  }
+  if (!io.purge(purgeUrls)) problems.push('purge (il Worker rilegge il registro entro 60 s)');
 
   // 4. Pulizia della release precedente (best-effort, mai un fallimento).
   const old = previous.state === 'ok' ? previous.doc?.release : null;
   if (old?.prefix && old.prefix !== release.prefix && String(old.prefix).startsWith(`${RELEASES_PREFIX}/`)) {
-    for (const name of Object.keys(old.files ?? {})) {
+    // Solo nomi di file semplici e distinti: il puntatore precedente e' un
+    // dato letto dalla rete, non un elenco di chiavi da cancellare alla cieca.
+    const names = [...new Set(Object.keys(isPlainObject(old.files) ? old.files : {}))].filter((name) => /^[a-z0-9][a-z0-9.-]*$/.test(name));
+    for (const name of names) {
       if (!io.remove(`${old.prefix}/${name}`)) log(`::notice::[section-edge] release precedente non ripulita: ${old.prefix}/${name}`);
     }
   }

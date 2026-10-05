@@ -77,9 +77,12 @@ import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
 import {
   main as edgeMain,
   planRelease,
+  INDEX_ATTEMPTS,
+  fixedArtifacts,
   publishRelease,
   purgeChunks,
   readPreviousRegistry,
+  releaseDiffers,
   pushIsMandatory,
   registryState,
 } from '../../scripts/publish-section-edge.mjs';
@@ -443,9 +446,11 @@ function fakeIo({ previous, fail = () => false, corrupt = () => false } = {}) {
   const store = new Map();
   if (previous !== undefined) store.set(EDGE_SECTION_REGISTRY_FILE, Buffer.from(JSON.stringify(previous)));
   const ops = [];
+  const purged = [];
   return {
     store,
     ops,
+    purged,
     upload: (local, key, cacheControl) => {
       ops.push(`put ${key}`);
       if (fail('upload', key)) return false;
@@ -461,6 +466,7 @@ function fakeIo({ previous, fail = () => false, corrupt = () => false } = {}) {
     },
     purge: (urls) => {
       ops.push(`purge ${urls.length}`);
+      purged.push(...urls);
       return !fail('purge', urls.join(','));
     },
     fetchBytes: async (url) => {
@@ -501,7 +507,8 @@ test('edge: push obbligatorio a OGNI cambio di stato rispetto a R2 — accension
   assert.equal(pushIsMandatory(live, { state: 'ok', doc: DRAFT_ALL() }), true, 'accensione');
   assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'ok', doc: live }), true, 'spegnimento');
   assert.equal(pushIsMandatory(retired, { state: 'ok', doc: live }), true, 'ritiro');
-  assert.equal(pushIsMandatory(live, { state: 'ok', doc: { ...live, commit: 'ddddddd' } }), false);
+  // Stesso stato, ma la sitemap della sezione live non ha un hash dimostrabile: obbligatorio (vedi il test sui byte serviti).
+  assert.equal(pushIsMandatory(live, { state: 'ok', doc: { ...live, commit: 'ddddddd' } }), true);
   // R2 illeggibile: lo stato precedente non e' dimostrabile, quindi fail-closed
   // ANCHE per una release tutta draft (potrebbe essere uno spegnimento).
   assert.equal(pushIsMandatory(live, { state: 'unknown' }), true);
@@ -542,9 +549,15 @@ test('edge: ordine — staging verificato, sitemap, UN put del puntatore, poi in
     `put ${rel}/sitemap-cantons.xml`,
     'put edge/sitemap-articles-canton-ti.xml',
     'put edge/sections/registry.json',
-    'purge 1',
     'put edge/sitemap-cantons.xml',
-    'purge 4',
+    'purge 5',
+  ]);
+  assert.deepEqual(io.purged, [
+    'https://cdn.frontaliereticino.ch/edge/sections/registry.json',
+    'https://frontaliereticino.ch/sitemap-articles-canton-ti.xml',
+    'https://cdn.frontaliereticino.ch/edge/sitemap-articles-canton-ti.xml',
+    'https://frontaliereticino.ch/sitemap-cantons.xml',
+    'https://cdn.frontaliereticino.ch/edge/sitemap-cantons.xml',
   ]);
   assert.equal(io.ops.filter((op) => op === 'put edge/sections/registry.json').length, 1);
   assert.equal(io.store.get('cc:edge/sections/registry.json'), 'public,max-age=60');
@@ -552,19 +565,80 @@ test('edge: ordine — staging verificato, sitemap, UN put del puntatore, poi in
   assert.equal(JSON.parse(io.store.get('edge/sections/registry.json')).release.prefix, rel);
 });
 
-test('edge: nessuna sezione live → l\'indice si cancella, dopo il flip; la release precedente si ripulisce', async () => {
-  const previous = { ...withLive(['canton-ti'], 'aaaaaaa'), release: { commit: 'aaaaaaa', prefix: 'edge/sections/_releases/aaaaaaa', files: { 'registry.json': 'x', 'sitemap-cantons.xml': 'y' } } };
+test('edge: spegnimento → indice e sitemap della sezione non piu\' live cancellati e purgati (unione delle due release)', async () => {
+  const previous = {
+    ...withLive(['canton-ti'], 'aaaaaaa'),
+    release: { commit: 'aaaaaaa', prefix: 'edge/sections/_releases/aaaaaaa', files: { 'registry.json': 'x', 'sitemap-articles-canton-ti.xml': 'y', 'sitemap-cantons.xml': 'z', '../boh': 'w' } },
+  };
   const { io, result } = await publish(DRAFT_ALL(), { previous });
   assert.equal(result.code, 0);
-  assert.deepEqual(io.ops.slice(-6), [
+  assert.deepEqual(io.ops.slice(-7), [
     'put edge/sections/registry.json',
-    'purge 1',
     'del edge/sitemap-cantons.xml',
-    'purge 2',
+    'del edge/sitemap-articles-canton-ti.xml',
+    'purge 5',
     'del edge/sections/_releases/aaaaaaa/registry.json',
+    'del edge/sections/_releases/aaaaaaa/sitemap-articles-canton-ti.xml',
     'del edge/sections/_releases/aaaaaaa/sitemap-cantons.xml',
   ]);
+  for (const url of ['https://frontaliereticino.ch/sitemap-articles-canton-ti.xml', 'https://cdn.frontaliereticino.ch/edge/sitemap-articles-canton-ti.xml']) {
+    assert.ok(io.purged.includes(url), `${url} va purgata anche se la sezione non e' piu' live`);
+  }
+  assert.ok(!io.ops.some((op) => op.includes('boh')), 'un nome non semplice nel puntatore precedente non diventa una chiave da cancellare');
   assert.equal(servedState(io), registryState(DRAFT_ALL()), 'spegnimento arrivato al Worker');
+  // Un puntatore precedente SENZA `release` (pre-protocollo): le sitemap delle sue sezioni live si considerano servite.
+  const legacy = await publish(DRAFT_ALL(), { previous: withLive(['canton-gr'], 'aaaaaaa') });
+  assert.ok(legacy.io.ops.includes('del edge/sitemap-articles-canton-gr.xml'));
+});
+
+test('edge: stessi stati ma una sitemap servita diversa → il push e\' obbligatorio', async () => {
+  const live = withLive(['canton-ti']);
+  const release = planRelease(fakeDist(live));
+  const servedSame = { state: 'ok', doc: { ...release.pointer, commit: 'aaaaaaa' } };
+  assert.equal(releaseDiffers(release, servedSame), false, 'stessi stati, stessi byte: cambia solo il commit');
+  const stale = clone(servedSame);
+  stale.doc.release.files['sitemap-articles-canton-ti.xml'] = 'f'.repeat(64);
+  assert.equal(releaseDiffers(release, stale), true, 'la sitemap servita e\' vecchia');
+  const staleIndex = clone(servedSame);
+  staleIndex.doc.release.files['sitemap-cantons.xml'] = 'e'.repeat(64);
+  assert.equal(releaseDiffers(release, staleIndex), true);
+  // Puntatore precedente senza hash (pre-protocollo): non si puo' dire che i byte coincidano.
+  assert.equal(releaseDiffers(release, { state: 'ok', doc: withLive(['canton-ti'], 'aaaaaaa') }), true);
+  assert.deepEqual(fixedArtifacts(release.pointer), {
+    'sitemap-articles-canton-ti.xml': release.pointer.release.files['sitemap-articles-canton-ti.xml'],
+    'sitemap-cantons.xml': release.pointer.release.files['sitemap-cantons.xml'],
+  });
+  // E un guasto di R2 in quel caso ferma il publish (prima valeva «facoltativo»).
+  const failed = await publish(live, { previous: stale.doc, fail: (op, key) => op === 'upload' && key.includes('/_releases/') });
+  assert.deepEqual([failed.result.code, failed.result.flipped], [1, false]);
+});
+
+test('edge: indice non aggiornato dopo il flip → 3 tentativi, poi si torna al puntatore di prima', async () => {
+  // Transitorio: passa al secondo tentativo, nessun ripristino.
+  let calls = 0;
+  const flaky = await publish(withLive(['canton-ti']), { previous: DRAFT_ALL(), fail: (op, key) => op === 'upload' && key === 'edge/sitemap-cantons.xml' && ++calls < 2 });
+  assert.deepEqual([flaky.result.code, flaky.result.phase], [0, 'done']);
+  assert.equal(flaky.io.ops.filter((op) => op === 'put edge/sitemap-cantons.xml').length, 2);
+  // Permanente, in accensione e in spegnimento: registro e indice tornano la coppia di prima.
+  for (const [next, previous, indexOp] of [
+    [withLive(['canton-ti']), { ...DRAFT_ALL(), commit: 'aaaaaaa' }, 'put edge/sitemap-cantons.xml'],
+    [DRAFT_ALL(), withLive(['canton-ti'], 'aaaaaaa'), 'del edge/sitemap-cantons.xml'],
+  ]) {
+    const { io, logs, before, result } = await publish(next, {
+      previous,
+      fail: (op, key) => (op === 'upload' || op === 'remove') && key === 'edge/sitemap-cantons.xml',
+    });
+    assert.equal(io.ops.filter((op) => op === indexOp).length, INDEX_ATTEMPTS);
+    assert.deepEqual([result.code, result.phase, result.flipped], [1, 'dopo il flip', false]);
+    assert.equal(servedState(io), before, 'puntatore ripristinato: lo stato servito e\' quello di prima');
+    assert.equal(JSON.parse(io.store.get('edge/sections/registry.json')).commit, 'aaaaaaa');
+    assert.match(logs.join('\n'), /puntatore precedente ripristinato/);
+    assert.ok(!io.ops.some((op) => op.startsWith('del edge/sitemap-articles-')), 'niente altro viene rimosso dopo un ripristino');
+  }
+  // Mai pubblicato prima: ripristinare = togliere il puntatore.
+  const first = await publish(withLive(['canton-ti']), { fail: (op, key) => op === 'upload' && key === 'edge/sitemap-cantons.xml' });
+  assert.equal(first.result.code, 1);
+  assert.ok(!first.io.store.has('edge/sections/registry.json'));
 });
 
 test('edge: un fallimento PRIMA del flip non cambia lo stato servito, in accensione e in spegnimento', async () => {
@@ -592,20 +666,18 @@ test('edge: un fallimento PRIMA del flip non cambia lo stato servito, in accensi
   }
 });
 
-test('edge: un fallimento DOPO il flip lascia lo stato nuovo e coerente, ed esce non-zero', async () => {
-  for (const fail of [
-    (op) => op === 'purge',
-    (op, key) => op === 'upload' && key === 'edge/sitemap-cantons.xml',
-  ]) {
-    const { io, logs, result } = await publish(withLive(['canton-ti']), { previous: DRAFT_ALL(), fail });
-    assert.deepEqual([result.code, result.phase, result.flipped], [1, 'dopo il flip', true]);
-    assert.equal(servedState(io), registryState(withLive(['canton-ti'])));
-    assert.match(logs.join('\n'), /lo stato servito e' gia' quello nuovo e coerente/);
-  }
+test('edge: purge o pulizia falliti DOPO il flip lasciano lo stato nuovo e coerente, ed escono non-zero', async () => {
+  const purge = await publish(withLive(['canton-ti']), { previous: DRAFT_ALL(), fail: (op) => op === 'purge' });
+  assert.deepEqual([purge.result.code, purge.result.phase, purge.result.flipped], [1, 'dopo il flip', true]);
+  assert.equal(servedState(purge.io), registryState(withLive(['canton-ti'])));
+  assert.match(purge.logs.join('\n'), /lo stato servito e' gia' quello nuovo e coerente/);
+  const stuck = await publish(DRAFT_ALL(), { previous: withLive(['canton-ti'], 'aaaaaaa'), fail: (op, key) => op === 'remove' && key === 'edge/sitemap-articles-canton-ti.xml' });
+  assert.deepEqual([stuck.result.code, stuck.result.flipped], [1, true]);
+  assert.equal(servedState(stuck.io), registryState(DRAFT_ALL()), 'il Worker non serve piu\' la sezione, anche se la sua sitemap e\' ancora su R2');
 });
 
 test('edge: senza cambio di stato un problema di R2 non ferma gli articoli; con un cambio, le credenziali sono obbligatorie', async () => {
-  const sameState = await publish(DRAFT_ALL(), { previous: { ...DRAFT_ALL(), commit: 'aaaaaaa' }, fail: (op) => op === 'upload' });
+  const sameState = await publish(DRAFT_ALL(), { previous: { ...DRAFT_ALL(), commit: 'aaaaaaa' }, fail: (op) => op === 'upload' || op === 'remove' });
   assert.equal(sameState.result.code, 0);
   assert.match(sameState.logs.join('\n'), /::warning::\[section-edge\].*il publish prosegue/);
   const noCredsSame = await publish(DRAFT_ALL(), {}, {});
