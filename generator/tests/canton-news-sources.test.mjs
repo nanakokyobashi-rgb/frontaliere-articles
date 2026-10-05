@@ -358,6 +358,12 @@ test('eoc.ch: tolta la cornice restano link che non sono comunicati, e li toglie
     links.filter((h) => !h.date).map((h) => new URL(h.url).pathname).sort(),
     ['/eoc-sport.html', '/info/search.html', '/media-e-news/news.html'],
   );
+  // La pagina stessa in forma canonica: slash, frammento e tracciamento non
+  // la rendono un articolo; un parametro identificante si'.
+  const selfForms = ['https://www.eoc.ch/media-e-news/news.html/', 'https://WWW.eoc.ch/media-e-news/news.html#top', 'https://www.eoc.ch/media-e-news/news.html?utm_source=nav&fbclid=x']
+    .map((url) => ({ url, headline: 'Tutte le notizie e i comunicati', date: null }));
+  assert.equal(filterArticleLinks(selfForms, EOC_URL, { quirks: {} }).headlines.length, 0);
+  assert.equal(filterArticleLinks([{ url: `${EOC_URL}?id=7`, headline: 'Un comunicato identificato dalla query', date: null }], EOC_URL, { quirks: {} }).headlines.length, 1);
   // Senza pattern cade solo il link alla pagina stessa (vale per ogni fonte).
   const generic = filterArticleLinks(links, EOC_URL, { quirks: {} });
   assert.equal(generic.dropped, 1);
@@ -458,7 +464,7 @@ test('suedostschweiz: lo stesso URL con un\'altra notizia e\' un\'altra voce per
   assert.notEqual(newsUrlKey(earlier.url), newsUrlKey(ticker.url), 'due notizie, due chiavi');
   assert.equal(newsUrlKey(TICKER_URL), 'https://www.suedostschweiz.ch/graubuenden/verkehrsticker-1574112', 'premessa: senza identita\' la chiave e\' il contenitore');
   // La stessa notizia riletta (maiuscole, punteggiatura, entita') resta se' stessa.
-  const [again] = applyItemIdentity([{ url: TICKER_URL, headline: 'NACH UNFALL zwischen Flims und Trin – Verkehr fliesst wieder!', date: null }]).headlines;
+  const [again] = applyItemIdentity([{ url: TICKER_URL, headline: 'NACH UNFALL zwischen Flims und Trin – Verkehr fliesst wieder!', date: ticker.date }]).headlines;
   assert.equal(newsUrlKey(again.url), newsUrlKey(ticker.url));
   // L'indirizzo da scaricare e da citare e' quello del sito.
   assert.equal(stripItemIdentity(ticker.url), TICKER_URL);
@@ -500,6 +506,11 @@ test('applyItemIdentity: l\'identita\' e\' sempre il titolo della fonte; un tito
   const fromFeed = applyItemIdentity([{ url, headline: title, date: new Date('2026-10-05T12:54:14Z') }]).headlines[0];
   const fromSitemap = applyItemIdentity([{ url, headline: title, date: new Date('2026-10-05T12:55:02Z') }]).headlines[0];
   assert.equal(newsUrlKey(fromFeed.url), newsUrlKey(fromSitemap.url));
+  // Lo stesso titolo un altro giorno e' un'altra notizia (un contenitore
+  // ripete i titoli), e una voce senza data ha per identita' il solo titolo.
+  const nextDay = applyItemIdentity([{ url, headline: title, date: new Date('2026-10-08T07:00:00Z') }]).headlines[0];
+  const undated = applyItemIdentity([{ url, headline: title, date: null }]).headlines[0];
+  assert.equal(new Set([fromFeed, nextDay, undated].map((h) => newsUrlKey(h.url))).size, 3);
   // Una sitemap senza news:title darebbe lo slug del contenitore come titolo:
   // non identifica la notizia, e un'impronta della data farebbe una seconda
   // chiave per l'item che il feed identifica col titolo.
@@ -527,6 +538,7 @@ test('URL riusati: due voci con lo stesso link nello STESSO feed restano due not
   // Ognuna col SUO lead, non con quello dell'altra (la mappa dei lead e' per URL).
   assert.match(ticker.find((h) => h.headline === earlierTitle).lead, /RhB-Strecke/);
   assert.doesNotMatch(ticker.find((h) => h.headline !== earlierTitle).lead, /RhB-Strecke/);
+  assert.ok(out.notes.some((n) => /URL riusati: 6 voci con l'identita' dell'item/.test(n)), out.notes.join(' | '));
   // La stessa voce ripetuta identica, invece, resta una.
   const { impl: impl2 } = fakeFetch({ [SOS_FEED]: { body: xml.replace(item, `${item}\n${item}`), contentType: 'application/rss+xml' } });
   const dup = await scanCantonSource(sourceOf('GR', SOS_FEED), ctx(impl2));

@@ -171,7 +171,7 @@ import { createHash } from 'node:crypto';
 // ## La forma: l'identita' viaggia NELL'URL, come frammento
 //
 // Lo scanner (`canton-news-sources.mjs`, quirk `urlReusedForDifferentStories`
-// del profilo) aggiunge all'URL `#ft-item=<impronta del titolo>`. Il frammento
+// del profilo) aggiunge all'URL `#ft-item=<impronta di titolo e giornata>`. Il frammento
 // non arriva mai al server, quindi l'URL resta scaricabile cosi' com'e'; e
 // poiche' ogni consumatore di create-article.mjs (ledger, memo del topic-gate,
 // dedup del pool) passa da `newsUrlKey`, basta che la chiave lo conservi
@@ -180,8 +180,9 @@ import { createHash } from 'node:crypto';
 // continua a essere ignorato: per gli URL senza `#ft-item=` la chiave non
 // cambia di un byte.
 //
-// Il costo dichiarato: un titolo ritoccato dalla redazione cambia l'impronta, e
-// la stessa notizia puo' ripassare dal ledger. E' un duplicato che PASSA, e
+// Il costo dichiarato: un titolo ritoccato dalla redazione, o una voce
+// ripubblicata un altro giorno, cambia l'impronta, e la stessa notizia puo'
+// ripassare dal ledger. E' un duplicato che PASSA, e
 // sotto ci sono `preFlightHeadlineCheck`, `checkForDuplicates` e
 // `checkSemanticNearDuplicate`; il collasso di notizie diverse sulla stessa
 // chiave, invece, non ha niente sotto. Stessa asimmetria della denylist qui
@@ -223,17 +224,29 @@ function normalizeItemText(text) {
 }
 
 /**
- * Impronta stabile del titolo che distingue l'item. Maiuscole, accenti,
- * punteggiatura e forma delle entita' HTML non contano: «Verkehr fliesst
- * wieder!» e «verkehr fliesst wieder» sono lo stesso item.
+ * Impronta stabile di cio' che distingue l'item: il titolo e, dove la fonte la
+ * da', la GIORNATA di pubblicazione (UTC). Maiuscole, accenti, punteggiatura e
+ * forma delle entita' HTML non contano: «Verkehr fliesst wieder!» e «verkehr
+ * fliesst wieder» sono lo stesso item.
  *
- * @param {string} text
+ * Perche' anche la giornata: un contenitore ripete i titoli («Julierpass
+ * gesperrt» oggi e fra tre giorni sono due notizie), e col solo titolo la
+ * seconda resterebbe «gia' usata» fino alla scadenza del ledger. Perche' la
+ * giornata e non l'istante: la stessa voce letta dal feed e dalla news sitemap
+ * della testata deve avere UNA chiave (misurato su suedostschweiz.ch il
+ * 2026-10-05: `pubDate` e `news:publication_date` coincidono al secondo, ma
+ * l'invariante non deve dipendere dal secondo), e una voce che resta nel feed
+ * per giorni col suo `pubDate` resta se' stessa.
+ *
+ * @param {string} text il titolo dato dalla fonte
+ * @param {Date | null} [date] la data di pubblicazione, se c'e'
  * @returns {string | null} 12 cifre esadecimali, o null se non resta testo
  */
-export function itemIdentityToken(text) {
+export function itemIdentityToken(text, date = null) {
   const normalized = normalizeItemText(text);
   if (!normalized) return null;
-  return createHash('sha1').update(normalized).digest('hex').slice(0, 12);
+  const day = date instanceof Date && !Number.isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : '';
+  return createHash('sha1').update(day ? `${normalized}\n${day}` : normalized).digest('hex').slice(0, 12);
 }
 
 /** Quota minima delle parole del titolo che la pagina deve portare (vedi sotto). */

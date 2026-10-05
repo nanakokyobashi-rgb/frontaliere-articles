@@ -16719,12 +16719,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // di un altro (vedi pageCarriesItem in lib/source-url-ledger.mjs). L'abort
   // e' ricordato sull'URL CON l'identita' (il chiamante), quindi vale per
   // questo item e non per le notizie successive allo stesso indirizzo.
-  if (itemIdentityOf(sourceUrl) !== null && typeof pageContent === 'string' && pageContent.length > 0) {
+  // Fail-closed: una pagina non scaricata (fetchPageContent torna '') non ha
+  // verificato niente, e per un URL riusato «senza contesto» vuol dire senza
+  // sapere di quale notizia si parla.
+  if (itemIdentityOf(sourceUrl) !== null) {
     const itemHeadline = String(sourceContext?.headline || '');
-    if (!pageCarriesItem(pageContent, itemHeadline)) {
-      console.error(`\n⏭️  URL riusato: la pagina non porta piu' questo item («${itemHeadline.slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
+    if (typeof pageContent !== 'string' || pageContent.length === 0 || !pageCarriesItem(pageContent, itemHeadline)) {
+      console.error(`\n⏭️  URL riusato: la pagina non e' leggibile o non porta piu' questo item («${itemHeadline.slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
       RUN_REPORT.notes.push(`Source skipped pre-LLM: reused URL no longer carries the item (url=${url})`);
-      const err = new Error(`topic-gate abort: la pagina di un URL riusato non porta piu' l'item scelto (${url})`);
+      const err = new Error(`topic-gate abort: la pagina di un URL riusato non e' leggibile o non porta piu' l'item scelto (${url})`);
       err.topicGateAbort = true;
       throw err;
     }

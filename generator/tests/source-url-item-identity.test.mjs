@@ -123,6 +123,12 @@ test('itemIdentityToken: maiuscole, accenti, punteggiatura e forma delle entita\
   assert.equal(itemIdentityToken('Stra&szlig;e gesperrt'), itemIdentityToken('Straße gesperrt'));
   assert.notEqual(itemIdentityToken(TITLES[1]), itemIdentityToken(TITLES[2]), 'due incidenti a Pontresina sono due notizie');
   for (const empty of ['', '   ', '—', '&nbsp;&hellip;', null, undefined]) assert.equal(itemIdentityToken(empty), null);
+  // La giornata di pubblicazione fa parte dell'identita'; l'ora no.
+  const day = (iso) => itemIdentityToken(TITLES[0], new Date(iso));
+  assert.equal(day('2026-10-05T06:00:00Z'), day('2026-10-05T21:30:00Z'));
+  assert.notEqual(day('2026-10-05T06:00:00Z'), day('2026-10-08T06:00:00Z'));
+  assert.notEqual(day('2026-10-05T06:00:00Z'), itemIdentityToken(TITLES[0]));
+  assert.equal(itemIdentityToken(TITLES[0], new Date('non una data')), itemIdentityToken(TITLES[0]));
 });
 
 test('withItemIdentity / stripItemIdentity: andata e ritorno, e un frammento preesistente e\' sostituito', () => {
@@ -197,12 +203,14 @@ test('la generazione si ferma se la pagina di un URL riusato non porta piu\' l\'
   const start = SRC.indexOf('async function generateAndValidateArticle(sourceUrl, sourceContext = null) {');
   const fn = SRC.slice(start, SRC.indexOf('\n}\n', start));
   const fetchAt = fn.indexOf('const pageContent = await fetchPageContent(url);');
-  const guardAt = fn.indexOf('if (itemIdentityOf(sourceUrl) !== null && typeof pageContent === \'string\' && pageContent.length > 0) {');
+  const guardAt = fn.indexOf('if (itemIdentityOf(sourceUrl) !== null) {');
   const firstLlm = fn.indexOf('callGemini(');
   assert.ok(fetchAt !== -1 && guardAt > fetchAt, 'la guardia deve stare subito dopo la fetch della pagina');
   assert.ok(firstLlm > guardAt, 'e prima della prima chiamata al modello');
   const guard = fn.slice(guardAt, fn.indexOf('\n  }\n', guardAt));
   assert.match(guard, /!pageCarriesItem\(pageContent, itemHeadline\)/);
+  // Fail-closed: una pagina non scaricata non ha verificato niente.
+  assert.match(guard, /pageContent\.length === 0 \|\| !pageCarriesItem/);
   assert.match(guard, /err\.topicGateAbort = true;/, 'un abort che il ciclo ricorda sull\'item e passa alla headline successiva');
 });
 
@@ -221,7 +229,7 @@ test('la generazione lavora sull\'indirizzo senza identita\' e registra nel ledg
 
 test('lo scanner e\' l\'unico a costruire l\'identita\', con le funzioni del ledger', () => {
   const scanner = readFileSync(path.join(HERE, '..', 'scripts', 'lib', 'canton-news-sources.mjs'), 'utf8');
-  assert.match(scanner, /import \{ itemIdentityToken, withItemIdentity \} from '\.\/source-url-ledger\.mjs';/);
+  assert.match(scanner, /import \{[^}]*\bitemIdentityToken\b[^}]*\bwithItemIdentity\b[^}]*\} from '\.\/source-url-ledger\.mjs';/);
   // Un valore condiviso ha UNA sorgente: il nome del frammento non si riscrive altrove.
   assert.doesNotMatch(scanner.replace(/^\s*(\*|\/\/).*$/gm, ''), /ft-item/);
   assert.doesNotMatch(SRC.replace(/^\s*(\*|\/\/).*$/gm, ''), /ft-item/);

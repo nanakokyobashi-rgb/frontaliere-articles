@@ -64,7 +64,7 @@
  * User-Agent onesto (D10: niente UA camuffato), lo stesso dei crawler eventi.
  */
 
-import { itemIdentityToken, withItemIdentity } from './source-url-ledger.mjs';
+import { itemIdentityToken, newsUrlKey, withItemIdentity } from './source-url-ledger.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -301,23 +301,16 @@ function matchingCloseEnd(masked, name, from) {
   return -1;
 }
 
-function urlWithoutHash(raw) {
-  try {
-    const u = new URL(raw);
-    u.hash = '';
-    return u.href;
-  } catch {
-    return String(raw || '');
-  }
-}
-
 /**
  * I link di una pagina `html-links` che sono articoli, tolti quelli che la
  * cornice non marca come navigazione (menu laterali in `<div>`, ricerche
  * suggerite, «salta al contenuto»). Due regole:
  *
- *   1. un link alla pagina stessa (l'URL dell'elenco, frammento a parte) non
- *      e' mai un articolo: vale per ogni fonte;
+ *   1. un link alla pagina stessa non e' mai un articolo: vale per ogni
+ *      fonte. «Stessa» e' la forma canonica del ledger (`newsUrlKey`: slash
+ *      finale, maiuscole dell'host, frammento e parametri di tracciamento non
+ *      contano; quelli identificanti si'), non l'uguaglianza delle stringhe:
+ *      `/news/` e `/news?utm_source=nav` sono l'elenco, `/news?id=7` no;
  *   2. `quirks.articlePathPattern` (regex su path + query), dove il profilo lo
  *      dichiara: restano solo i link che lo rispettano. Su eoc.ch, dopo
  *      `stripPageChrome`, restavano 7 link che non sono comunicati (le
@@ -336,11 +329,11 @@ function urlWithoutHash(raw) {
  * @returns {{ headlines: Array<object>, dropped: number }}
  */
 export function filterArticleLinks(headlines, pageUrl, source = {}) {
-  const self = urlWithoutHash(pageUrl);
+  const self = newsUrlKey(pageUrl);
   const pattern = source?.quirks?.articlePathPattern;
   const re = pattern ? new RegExp(pattern) : null;
   const kept = headlines.filter((h) => {
-    if (urlWithoutHash(h.url) === self) return false;
+    if (newsUrlKey(h.url) === self) return false;
     if (!re) return true;
     try {
       const u = new URL(h.url);
@@ -641,11 +634,10 @@ export function applyDatetimeYearOffset(items, offset, now = new Date()) {
  *     a 16 minuti, e con l'impronta del titolo sarebbe ripassato dal ledger
  *     come notizia nuova.
  *
- * L'impronta e' SEMPRE del titolo dato dalla fonte, mai di altro: lo stesso
- * item letto dal feed e dalla news sitemap della stessa testata deve avere la
- * stessa chiave, e un'impronta della data in un caso e del titolo nell'altro
- * ne farebbe due voci che passano entrambe dal ledger. Dove il titolo e'
- * ricavato dallo slug (`titleFromSlug`, sitemap senza `news:title`) la voce
+ * L'impronta e' quella di `itemIdentityToken`: il titolo dato dalla fonte piu'
+ * la giornata di pubblicazione, la stessa regola per feed e sitemap, cosi' lo
+ * stesso item letto dall'uno e dall'altra ha una chiave sola. Dove il titolo
+ * e' ricavato dallo slug (`titleFromSlug`, sitemap senza `news:title`) la voce
  * non ha un'identita' — lo slug e' proprio cio' che la fonte riusa — e si
  * scarta: la notizia arriva dal feed, che il titolo lo porta.
  *
@@ -666,7 +658,7 @@ export function applyItemIdentity(headlines, scope = true) {
         continue;
       }
     }
-    const token = h.titleFromSlug ? null : itemIdentityToken(h.headline);
+    const token = h.titleFromSlug ? null : itemIdentityToken(h.headline, h.date);
     if (!token) continue;
     identified += 1;
     out.push({ ...h, url: withItemIdentity(h.url, token) });
@@ -852,6 +844,7 @@ export async function scanCantonSource(source, ctx) {
   // stessa sitemap) sono due notizie finche' il titolo non dice il contrario.
   if (quirks.urlReusedForDifferentStories) {
     const reused = applyItemIdentity(headlines, quirks.urlReusedForDifferentStories);
+    notes.push(`URL riusati: ${reused.identified} voci con l'identita' dell'item`);
     if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza un titolo della fonte scartate (nessuna identita')`);
     headlines = reused.headlines;
   }
