@@ -92,6 +92,10 @@ on:
         description: 'SHA esatta della head della PR per i dispatch di recovery'
         required: false
         type: string
+      base_sha:
+        description: 'SHA esatta della base della PR per i dispatch di recovery'
+        required: false
+        type: string
 
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
@@ -335,7 +339,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ inputs.base_sha || github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
@@ -352,7 +356,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           SITE_REF: main
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ inputs.base_sha || github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
         # In un dispatch di recovery il checkout resta sul ref del dispatch: lo
         # script legge file aggiunti E manifest dalla SHA richiesta (che scarica

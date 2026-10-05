@@ -107,6 +107,22 @@ test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR
     /\n\s+head_sha:\n\s+description:/,
     'Il dispatch di recovery deve dichiarare la SHA esatta passata dal workflow trusted.',
   );
+  assert.match(
+    yaml,
+    /\n\s+base_sha:\n\s+description:/,
+    'Il dispatch di recovery deve dichiarare la SHA esatta della base della PR.',
+  );
+  for (const name of [
+    'Baseline verificabili nel manifest del ciclo (diff-scoped)',
+    'Gemelli aggiunti dalla PR dichiarati nel manifest (diff-scoped)',
+  ]) {
+    const block = stepBlock(yaml, name);
+    assert.match(
+      block,
+      /BASE_SHA:\s+\$\{\{\s*inputs\.base_sha\s*\|\|\s*github\.event\.pull_request\.base\.sha\s*\}\}/,
+      `${name} deve usare la base SHA passata dal dispatch di recovery.`,
+    );
+  }
   const bodyContract = stepBlock(yaml, 'PR-body completeness + multi-issue Closes (zero-Claude)');
   assert.match(bodyContract, /inputs\.pr_number/);
   const resolve = stepBlock(yaml, 'Resolve PR');
