@@ -793,10 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/controllo-lavoratori-a-distanza-reato-senza-accordo-o-autorizzazione/2694982": {
-      "section": "frontaliere",
-      "ts": 1791003371812
-    },
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954446/lunedi-proteste-istituti-disagi-francia": {
       "section": "svizzera",
       "ts": 1791012987043
@@ -1028,6 +1024,14 @@
     "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
       "section": "frontaliere",
       "ts": 1791173353121
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1954213/startup-intelligenza-team-classifica-farmaci-lugano-aziende-top100-svizzera-swiss": {
+      "section": "frontaliere",
+      "ts": 1791177074339
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/bellucci-in-semifinale-senza-giocare-a-jingshan-lo-attende-il-turco-erel/2696431": {
+      "section": "frontaliere",
+      "ts": 1791177565447
     }
   }
 }
