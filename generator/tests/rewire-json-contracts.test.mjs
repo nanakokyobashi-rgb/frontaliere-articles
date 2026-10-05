@@ -444,6 +444,36 @@ const MUTATIONS = {
       'Gli hub sono per gruppo URL (BL/BS -> BASILEA): un codice reale non si aggancerebbe a nessun hub.',
     ],
     [
+      'generatedAt nel futuro',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() + 3 * 86_400_000).toISOString(); }),
+      /is in the future — refusing/,
+      'Un\'eta\' negativa passerebbe il gate dei 7 giorni per sempre: un timestamp sbagliato terrebbe verde il watcher.',
+    ],
+    [
+      'cantons con un gruppo ripetuto 24 volte',
+      mutated(c, (p) => { p.cantons = Array(24).fill('TI'); }),
+      /is not the list of the 24 canton URL groups/,
+      'La sola lunghezza autorizzerebbe un dataset che ha perso gli altri 23 gruppi.',
+    ],
+    [
+      'cantons con un codice reale al posto del gruppo',
+      mutated(c, (p) => { p.cantons = p.cantons.map((x) => (x === 'BASILEA' ? 'BS' : x)); }),
+      /is not the list of the 24 canton URL groups/,
+      'La lista deve essere quella canonica di canton-url-slugs.json, non 24 stringhe qualsiasi.',
+    ],
+    [
+      'record duplicato per (canton, side, fuel)',
+      mutated(c, (p) => { p.records.push({ ...p.records[0], avg: p.records[0].avg + 0.01 }); }),
+      /duplicate record for/,
+      'Due righe confliggenti lascerebbero all\'hub la scelta di quale prezzo stampare.',
+    ],
+    [
+      'observedAt numerico',
+      mutated(c, (p) => { p.records[0].observedAt = Date.now(); }),
+      /observedAt .* is not an ISO instant/,
+      'Un epoch o una data senza fuso verrebbe formattato nel fuso del runner.',
+    ],
+    [
       'lato sconosciuto',
       mutated(c, (p) => { p.records[0].side = 'LI'; }),
       /is not CH\|FR\|AT\|IT\|DE/,

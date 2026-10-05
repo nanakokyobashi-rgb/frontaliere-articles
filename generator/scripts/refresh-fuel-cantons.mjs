@@ -37,6 +37,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchFirstOk } from './lib/rewire-fetch.mjs';
+// The canonical 24 URL groups (AI/AR -> APPENZELLO, BL/BS -> BASILEA), the same
+// table the site keys the dataset on: the published `cantons` list must be
+// exactly this set, not merely 24 entries.
+import CANTON_URL_SLUGS from '../data/canton-url-slugs.json' with { type: 'json' };
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(
@@ -73,6 +77,15 @@ const CURRENCIES = new Set(['CHF', 'EUR']);
 const PRICE_MIN = 0.5;
 const PRICE_MAX = 5;
 const MAX_AGE_DAYS = 7;
+// A timestamp from the future is a producer clock/format bug, not fresh data:
+// with a negative age it would sail past the staleness gate forever. One hour
+// of tolerance for clock skew between runners.
+const MAX_FUTURE_SKEW_MS = 3_600_000;
+const CANONICAL_CANTONS = Object.keys(CANTON_URL_SLUGS.cantons).sort();
+// Full ISO-8601 instant with an explicit zone: the hubs will format it, and a
+// bare number or a zoneless date would be read in whatever zone the runner has.
+const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
+const isIsoInstant = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
 
 const CHECK_ONLY =
   process.argv.includes('--check') || process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
@@ -114,18 +127,26 @@ if (payload.schemaVersion !== SUPPORTED_SCHEMA) {
   fail(`${SOURCE} has schemaVersion ${JSON.stringify(payload.schemaVersion)}, expected ${SUPPORTED_SCHEMA} — refusing an unrecognised shape`);
 }
 
+if (!isIsoInstant(payload.generatedAt)) fail(`${SOURCE}: generatedAt ${JSON.stringify(payload.generatedAt)} is not an ISO instant`);
 const generatedMs = Date.parse(payload.generatedAt);
-if (!Number.isFinite(generatedMs)) fail(`${SOURCE}: generatedAt ${JSON.stringify(payload.generatedAt)} is not a date`);
+if (generatedMs - Date.now() > MAX_FUTURE_SKEW_MS) {
+  fail(`${SOURCE}: generatedAt ${payload.generatedAt} is in the future — refusing (producer clock or format bug)`);
+}
 const ageDays = (Date.now() - generatedMs) / 86_400_000;
 if (ageDays > MAX_AGE_DAYS) {
   fail(`${SOURCE}: generatedAt is ${Math.floor(ageDays)} days ago — refusing stale data (publisher stopped?)`);
 }
 
 const cantons = Array.isArray(payload.cantons) ? payload.cantons : null;
-if (!cantons || cantons.length !== 24 || !cantons.every((c) => typeof c === 'string' && c)) {
+const sameGroups = cantons
+  && cantons.length === CANONICAL_CANTONS.length
+  && new Set(cantons).size === cantons.length
+  && [...cantons].sort().every((c, i) => c === CANONICAL_CANTONS[i]);
+if (!sameGroups) {
   fail(`${SOURCE}: cantons is not the list of the 24 canton URL groups — refusing`);
 }
 const knownCantons = new Set(cantons);
+const seenKeys = new Set();
 
 const records = Array.isArray(payload.records) ? payload.records : null;
 if (!records) fail(`${SOURCE} has no records[] array — refusing`);
@@ -144,8 +165,12 @@ for (const [i, r] of records.entries()) {
   if (!isPrice(r.min)) fail(`${at}.min ${JSON.stringify(r.min)} is not a per-litre price`);
   if (r.min > r.avg) fail(`${at}: min ${r.min} is above avg ${r.avg}`);
   if (!Number.isInteger(r.stations) || r.stations < 1) fail(`${at}.stations ${JSON.stringify(r.stations)} is not a positive integer`);
-  if (!Number.isFinite(Date.parse(r.observedAt))) fail(`${at}.observedAt ${JSON.stringify(r.observedAt)} is not a date`);
+  if (!isIsoInstant(r.observedAt)) fail(`${at}.observedAt ${JSON.stringify(r.observedAt)} is not an ISO instant`);
   if (typeof r.source !== 'string' || !r.source.trim()) fail(`${at}.source is empty`);
+  // One row per (canton, side, fuel): two would leave a hub to pick one.
+  const key = `${r.canton}/${r.side}/${r.fuel}`;
+  if (seenKeys.has(key)) fail(`${at}: duplicate record for ${key}`);
+  seenKeys.add(key);
 }
 
 const withData = new Set(records.map((r) => r.canton)).size;
@@ -155,6 +180,9 @@ if (CHECK_ONLY) {
   process.exit(0);
 }
 
+// temp + rename: an interrupted run never leaves a half-written cache.
 fs.mkdirSync(path.dirname(CACHE), { recursive: true });
-fs.writeFileSync(CACHE, raw, 'utf-8');
+const tmp = `${CACHE}.${process.pid}.tmp`;
+fs.writeFileSync(tmp, raw, 'utf-8');
+fs.renameSync(tmp, CACHE);
 log(`${records.length} records over ${withData} cantons from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);
