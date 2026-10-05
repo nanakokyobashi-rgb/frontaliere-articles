@@ -234,13 +234,10 @@ async function resolveHeroImage(data, doc) {
       fs.mkdirSync(destDir, { recursive: true });
       const destPath = path.join(destDir, `${data.id}.webp`);
 
-      const meta = await sharp(buf).rotate().metadata();
-      const needsResize = (meta.width || 0) !== BLOG_IMAGE_WIDTH || (meta.height || 0) !== BLOG_IMAGE_HEIGHT;
       const render = async (quality) => {
-        let pipeline = sharp(buf).rotate();
-        if (needsResize) {
-          pipeline = pipeline.resize({ width: BLOG_IMAGE_WIDTH, height: BLOG_IMAGE_HEIGHT, fit: 'cover', position: 'attention' });
-        }
+        const pipeline = sharp(buf)
+          .rotate()
+          .resize({ width: BLOG_IMAGE_WIDTH, height: BLOG_IMAGE_HEIGHT, fit: 'cover', position: 'attention' });
         await pipeline.webp({ quality, effort: 6 }).toFile(destPath);
         return fs.statSync(destPath).size;
       };
