@@ -36,6 +36,9 @@
  * per il Worker NON viene scritta (resta servita l'ultima su R2, che il
  * kill-switch l'aveva gia' applicato) — mai riaccendere una sezione spenta
  * perche' Remote Config non ha risposto.
+ * Nello stesso caso il catalogo tiene `draft` le
+ * sezioni dichiarate `live` (`killSwitch.held`): puo' restare indietro rispetto
+ * al Worker, mai annunciare una sezione che il Worker serve ancora 404.
  *
  * ── Regole speculari al Worker ─────────────────────────────────────────────
  *
@@ -336,14 +339,26 @@ export function resolveKillSwitch(env = process.env, all = ARTICLE_SECTION_CORE_
 
 /**
  * Stato effettivo per sezione: `live` dichiarato e spento → `draft`.
- * @returns {Record<string, { declared: string, status: string, killed: boolean }>}
+ *
+ * FAIL-CLOSED senza verifica: se il kill-switch non e' verificabile, nessuna
+ * sezione dichiarata `live` esce `live` (`held: true`). In quel caso la copia
+ * per il Worker non viene scritta (`edgeRegistryPublishable`) e su R2 resta
+ * l'ultimo registro verificato; se il catalogo dicesse comunque `live`, alla
+ * prima attivazione annuncerebbe pagine che il Worker serve ancora 404. Il
+ * catalogo puo' quindi restare indietro rispetto al Worker (nasconde una
+ * sezione gia' servita) ma mai avanti.
+ *
+ * @returns {Record<string, { declared: string, status: string, killed: boolean, held: boolean }>}
  */
 export function effectiveStatuses(declared, killSwitch) {
   const killed = new Set(killSwitch.sections);
+  const verified = killSwitch.state === 'verified';
   return Object.fromEntries(
     Object.entries(declared.sections).map(([id, entry]) => {
-      const off = entry.status === 'live' && killed.has(id);
-      return [id, { declared: entry.status, status: off ? 'draft' : entry.status, killed: off }];
+      const live = entry.status === 'live';
+      const off = live && killed.has(id);
+      const held = live && !off && !verified;
+      return [id, { declared: entry.status, status: off || held ? 'draft' : entry.status, killed: off, held }];
     }),
   );
 }
@@ -396,7 +411,13 @@ export function buildSectionsCatalog({ declared, effective, killSwitch, commit, 
   return {
     schema: 1,
     commit,
-    killSwitch: { state: killSwitch.state, applied: Object.keys(effective).filter((id) => effective[id].killed), unknown: killSwitch.unknown },
+    killSwitch: {
+      state: killSwitch.state,
+      applied: Object.keys(effective).filter((id) => effective[id].killed),
+      // Sezioni dichiarate live e tenute draft perche' Remote Config non e' verificato.
+      held: Object.keys(effective).filter((id) => effective[id].held),
+      unknown: killSwitch.unknown,
+    },
     sections: Object.entries(declared.sections).map(([id, entry]) => {
       const live = effective[id].status === 'live';
       return {
@@ -445,8 +466,9 @@ export function buildSitemapIndex(sitemaps) {
 export function latestArticleDate(entries) {
   let best = null;
   for (const entry of entries ?? []) {
-    const value = entry?.updatedAt || entry?.date;
-    if (typeof value !== 'string' || Number.isNaN(Date.parse(value))) continue;
+    // Un `updatedAt` illeggibile non deve nascondere una `date` valida.
+    const value = [entry?.updatedAt, entry?.date].find((v) => typeof v === 'string' && !Number.isNaN(Date.parse(v)));
+    if (value === undefined) continue;
     if (best === null || Date.parse(value) > Date.parse(best)) best = value;
   }
   return best;

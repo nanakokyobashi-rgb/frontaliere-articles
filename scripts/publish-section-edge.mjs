@@ -125,6 +125,9 @@ function run(cmd, args) {
 }
 
 export function main(argv = process.argv.slice(2)) {
+  const unknown = argv.filter((arg, i) => arg !== '--dist' && arg !== '--dry-run' && argv[i - 1] !== '--dist');
+  if (unknown.length) throw new Error(`argomenti sconosciuti: ${unknown.join(' ')} (ammessi: --dist <cartella>, --dry-run)`);
+  if (argv.filter((arg) => arg === '--dist').length > 1) throw new Error('--dist va indicato una volta sola');
   const distIdx = argv.indexOf('--dist');
   const distArg = distIdx >= 0 ? argv[distIdx + 1] : 'dist/api';
   if (!distArg || distArg.startsWith('--')) throw new Error('--dist richiede una cartella (es. --dist dist/api)');

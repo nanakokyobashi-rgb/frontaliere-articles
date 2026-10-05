@@ -88,6 +88,7 @@ import {
   ARCHIVE_ALL_SLUG,
   buildSitemap,
   buildFamilySectionSitemap,
+  countSitemapEntries,
 } from './lib/build-sitemap.mjs';
 // Le sezioni da pubblicare vengono dal core (lista ATTIVA), con i nomi della
 // superficie pubblicata dichiarati una volta in corpus-sections.mjs.
@@ -567,7 +568,21 @@ for (const section of PUBLISHED_API_SECTIONS) {
   const source = countSourceSitemapEntries(ROOT, section.section);
   sitemapSources[section.section] = source;
   if (floorPolicyOf(section.section) === 'family') {
-    familySitemapRows.push({ section: section.section, source, emitted: familySitemapArticles[section.section] ?? 0 });
+    // Gli articoli che il registro ritira (`gone`/`redirects`) escono dalla
+    // sitemap per scelta dichiarata: vanno tolti anche dal RIFERIMENTO, come
+    // gli override canonici, altrimenti un ritiro intenzionale oltre il 10%
+    // sembrerebbe un troncamento e fermerebbe l'intera pubblicazione.
+    const retired = new Set(retiredByRegistry(section));
+    const retiredSource = countSitemapEntries(
+      SECTION_REGISTRIES[section.section].filter((article) => retired.has(slugMapOf(section.section)?.[article.id]?.it)),
+      slugMapOf(section.section),
+      SECTION_CANONICAL_SHADOW[section.section],
+    );
+    familySitemapRows.push({
+      section: section.section,
+      source: Math.max(0, source - retiredSource),
+      emitted: familySitemapArticles[section.section] ?? 0,
+    });
     continue;
   }
   if (source <= 0) {
@@ -1200,9 +1215,11 @@ if (killSwitch.unknown.length) {
   );
 }
 const killedSections = Object.keys(effectiveSections).filter((id) => effectiveSections[id].killed);
+const heldSections = Object.keys(effectiveSections).filter((id) => effectiveSections[id].held);
 console.log(
   `[build-api] sections: kill-switch ${killSwitch.state}` +
-    (killedSections.length ? `, spente: ${killedSections.join(', ')}` : ', nessuna sezione spenta'),
+    (killedSections.length ? `, spente: ${killedSections.join(', ')}` : ', nessuna sezione spenta') +
+    (heldSections.length ? `, tenute draft senza verifica: ${heldSections.join(', ')}` : ''),
 );
 const PUBLISHED_BY_ID = Object.fromEntries(PUBLISHED_API_SECTIONS.map((section) => [section.section, section]));
 const sectionsCatalog = buildSectionsCatalog({
@@ -1234,7 +1251,8 @@ if (edgeRegistryPublishable(declaredSections, killSwitch)) {
 } else {
   console.warn(
     `::warning::${EDGE_SECTION_REGISTRY_FILE} non emesso: Remote Config non verificato (manca RC_ENV_LOADED=1) ` +
-      'e almeno una sezione e\' dichiarata live — il Worker resta sull\'ultimo registro pubblicato su R2',
+      'e almeno una sezione e\' dichiarata live — il Worker resta sull\'ultimo registro pubblicato su R2, ' +
+      `e ${SECTIONS_CATALOG_FILE} tiene quelle sezioni draft (mai avanti rispetto al Worker)`,
   );
 }
 const liveSections = sectionsCatalog.sections.filter((entry) => entry.status === 'live');

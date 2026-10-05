@@ -200,9 +200,19 @@ test('kill-switch: verificato solo col marker del loader; spegne live, non tocca
   doc.sections['canton-gr'].status = 'retired';
   doc.sections['canton-be'].status = 'live';
   const eff = effectiveStatuses(doc, ks);
-  assert.deepEqual(eff['canton-ti'], { declared: 'live', status: 'draft', killed: true });
-  assert.deepEqual(eff['canton-gr'], { declared: 'retired', status: 'retired', killed: false });
-  assert.deepEqual(eff['canton-be'], { declared: 'live', status: 'live', killed: false });
+  assert.deepEqual(eff['canton-ti'], { declared: 'live', status: 'draft', killed: true, held: false });
+  assert.deepEqual(eff['canton-gr'], { declared: 'retired', status: 'retired', killed: false, held: false });
+  assert.deepEqual(eff['canton-be'], { declared: 'live', status: 'live', killed: false, held: false });
+  // Senza verifica nessuna sezione dichiarata live esce live: il catalogo non
+  // deve andare avanti rispetto al registro che il Worker ha su R2.
+  const unverified = effectiveStatuses(doc, resolveKillSwitch({ CANTON_ARTICLE_SECTIONS_KILL: 'TI' }));
+  assert.deepEqual(unverified['canton-ti'], { declared: 'live', status: 'draft', killed: true, held: false });
+  assert.deepEqual(unverified['canton-be'], { declared: 'live', status: 'draft', killed: false, held: true });
+  assert.deepEqual(unverified['canton-gr'], { declared: 'retired', status: 'retired', killed: false, held: false });
+  const held = buildSectionsCatalog({ declared: doc, effective: unverified, killSwitch: { state: 'unverified', unknown: [] },
+    commit: COMMIT, sitemapOf: () => { throw new Error('nessuna sezione live: non va chiesta nessuna sitemap'); } });
+  assert.deepEqual(held.killSwitch, { state: 'unverified', applied: ['canton-ti'], held: ['canton-be'], unknown: [] });
+  assert.ok(held.sections.every((entry) => entry.status !== 'live' && entry.sitemap === null));
 });
 
 test('copia per il Worker: scritta se verificato o se nessuna sezione e\' live', () => {
@@ -259,7 +269,7 @@ test('catalogo sections.json: stato effettivo, percorsi, temi, sitemap solo se l
   assert.equal(ti.sitemap, '/sitemap-articles-canton-ti.xml');
   assert.deepEqual(ti.counts, { articles: 3 });
   assert.equal(catalog.sections.find((entry) => entry.id === 'canton-gr').sitemap, null);
-  assert.deepEqual(catalog.killSwitch, { state: 'verified', applied: [], unknown: [] });
+  assert.deepEqual(catalog.killSwitch, { state: 'verified', applied: [], held: [], unknown: [] });
 });
 
 // ── 4. Sitemap ───────────────────────────────────────────────────────────────
@@ -271,6 +281,7 @@ test('indice sitemap-cantons.xml: mai vuoto (lo schema chiede almeno un <sitemap
   assert.match(xml, /<loc>https:\/\/frontaliereticino\.ch\/sitemap-articles-canton-ti\.xml<\/loc>\n {4}<lastmod>2026-10-05T10:00:00Z<\/lastmod>/);
   assert.equal(latestArticleDate([{ date: '2026-10-01' }, { date: '2026-09-01', updatedAt: '2026-10-03T00:00:00Z' }, { date: 'x' }]), '2026-10-03T00:00:00Z');
   assert.equal(latestArticleDate([]), null);
+  assert.equal(latestArticleDate([{ updatedAt: 'boh', date: '2026-10-02' }]), '2026-10-02', 'un updatedAt illeggibile non nasconde la date');
 });
 
 test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, articoli', () => {
@@ -396,6 +407,8 @@ test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale es
   assert.deepEqual(registryRetiredSlugs(undefined, slugMap, prefixes), []);
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /registryRetiredSlugs\(declaredSections\.sections\[section\.section\]/);
+  // I ritiri dichiarati escono anche dal riferimento del pavimento di famiglia.
+  assert.match(build, /source: Math\.max\(0, source - retiredSource\)/);
 });
 
 // ── 6. Pubblicazione su R2 ───────────────────────────────────────────────────
