@@ -619,6 +619,16 @@ test('tre echi di fila fermano il tier come tre fallimenti, e restano contati co
   assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
 });
 
+test('tre rifiuti di fila fermano il tier come tre fallimenti (review della PR 2166)', async () => {
+  // Un rifiuto non e' un eco della sorgente: prima di questa guardia la lane lo
+  // contava come traduzione riuscita, azzerava lo streak e non si fermava mai.
+  const calls = stubCodex("Sorry, I can't help with that.");
+  const { value, lines } = await captureLog(async () => [await it(), await it(), await it(), await it()]);
+  assert.deepEqual(value, Array(4).fill(`MYMEMORY ${EN}`));
+  assert.equal(calls.length, 3);
+  assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
+});
+
 test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo eventi)', async () => {
   // Stato del tier azzerato: il caso precedente lo ha fermato con tre echi.
   stubCodex(`CODEX ${EN}`);
