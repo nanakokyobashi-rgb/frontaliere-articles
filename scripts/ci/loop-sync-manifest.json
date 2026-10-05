@@ -5056,7 +5056,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Bacino delle news di un cantone (sezione propria + frontaliere/svizzera col campo `canton`), assegnazione al tema con la tassonomia dell'engine o il classificatore a parole chiave, ordinamento e dedup.",
       "baseline": {
         "site": null,
-        "corpus": "fd74648779623f4c",
+        "corpus": "4c336c5162bcc520",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5076,7 +5076,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Contratto dei blocchi dati degli hub (codici di omissione, soglie minime di validita', controllo di freschezza), modello `daily-brief-data.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "fc4069206e1fb6fc",
+        "corpus": "c0142f36607d4382",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5086,7 +5086,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prossimi eventi»: legge la cache del contratto REWIRE `events-dataset` filtrando per i membri del gruppo cantonale.",
       "baseline": {
         "site": null,
-        "corpus": "fa294e9529c580a3",
+        "corpus": "1037a805a5af6a76",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5136,7 +5136,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub servizi (premi, turni farmacia, aste targhe, meteo): legge la vista `canton-services.json` costruita da `refresh-canton-services-data.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "0b10d761d34b23ce",
+        "corpus": "da3843f916da3283",
         "alignedAt": "2026-10-05"
       }
     },
