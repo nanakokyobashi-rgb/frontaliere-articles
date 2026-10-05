@@ -61,7 +61,12 @@ const ROOT = path.resolve(import.meta.dirname, '..', '..');
  * in prosa scade, questo si rimisura a ogni run.
  */
 const MASSIMALE_FILE = {
-  LTF: 103,
+  // ED-FAB-2 (2026-10-05): 103 -> 37. Tolta la LTF inventata come legge
+  // fiscale/sui frontalieri/sul lavoro da 24 sorgenti it e dalle traduzioni.
+  // Restano 4 file giudiziari veri («art. 84a LTF», Legge sul Tribunale
+  // federale) e 33 file della «legge federale sul traffico (LTF)», anch'essa
+  // inventata ma fuori dalla classe di quella scheda.
+  LTF: 37,
   RPS: 10,
   LSO: 8,
   LPF: 6,
@@ -194,13 +199,24 @@ test('#332: il ratchet non e\' vacuo — almeno una sigla e\' davvero contata', 
   );
 });
 
-test('#332: nessuna di queste sigle e\' (ancora) nella denylist di fabbricazione', () => {
+test('#332: nessuna di queste sigle e\' (ancora) nella denylist di fabbricazione senza contesto', () => {
   // Guard di CONFINE, non di contenuto. Se un giorno una di queste sigle viene
   // provata fabbricata e finisce in FABRICATED_NORM_ACRONYMS, il gate vero la
   // rigetta e il massimale qui diventa una seconda verita' che dice il
   // contrario. Meglio che il file cada e costringa a togliercela.
+  //
+  // Eccezione: una voce con `context` o `veto` rigetta la sigla solo in un
+  // contesto, quindi l'omonimo reale resta lecito e continua a contare qui.
+  // E' il caso di `LTF`: inventata come legge fiscale/del lavoro (ED-FAB-2,
+  // 22 sorgenti italiane bonificate), vera come Legge sul Tribunale federale
+  // («art. 84a LTF»). Il gate vieta la prima, il ratchet impedisce che la
+  // somma delle due cresca: non dicono cose in disaccordo.
   return import('../scripts/lib/article-factuality-gates.mjs').then(({ FABRICATED_NORM_ACRONYMS }) => {
-    const inDenylist = new Set((FABRICATED_NORM_ACRONYMS || []).map((e) => String(e.acronym).toUpperCase()));
+    const inDenylist = new Set(
+      (FABRICATED_NORM_ACRONYMS || [])
+        .filter((e) => !e.context && !e.veto)
+        .map((e) => String(e.acronym).toUpperCase()),
+    );
     const doppie = Object.keys(MASSIMALE_FILE).filter((s) => inDenylist.has(s));
     assert.deepEqual(
       doppie,
