@@ -12626,6 +12626,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tifosi-azioni-ambri-evento.title': 'Ambrì-Piotta, fans united to become shareholders',
     'blog.article.tifosi-azioni-ambri-evento.excerpt': 'Saturday, October 17, in the warehouse next to the Gottardo Arena, bingo, a screened match and a party: every franc raised will be invested in Hcap shares.',
     'blog.article.tifosi-azioni-ambri-evento.imageAlt': 'Ambrì-Piotta fans gathering for the event beside the Gottardo Arena',
+    'blog.article.hotel-collina-oro-licenziamenti.title': 'Ticino, Villa Principe Leopoldo: 76 layoffs',
+    'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro will close for months: the project is worth 12 million and involves 76 redundancies out of 81 employees.',
+    'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Canton Ticino',
 };
 
 export default blogMetaEn;

@@ -7769,6 +7769,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bern-risanamento-energia.title': 'Energieförderung im Kanton Bern: Voraussetzungen und Gesuch',
     'blog.article.bern-risanamento-energia.excerpt': 'Im Kanton Bern betreffen die Programme Gebäude und Anlagen: technische Voraussetzungen, Gesuch vor Beginn der Arbeiten und zuständige kantonale Stelle.',
     'blog.article.bern-risanamento-energia.imageAlt': 'Schweizer Gebäude bei einer energetischen Sanierung',
+    'blog.article.deduzioni-3a-2027.title': 'Säule 3a: Maximale Steuerabzüge 2027',
+    'blog.article.deduzioni-3a-2027.excerpt': 'Ab dem 1. Januar 2027 steigt die abzugsfähige Obergrenze der Säule 3a mit der 2. Säule auf 7373 Franken und ohne Säule auf 36864 Franken.',
+    'blog.article.deduzioni-3a-2027.imageAlt': 'Taschenrechner und Schweizer Steuerpapiere für Abzüge der Säule 3a',
 };
 
 export default blogMetaChDe;

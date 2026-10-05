@@ -1838,21 +1838,21 @@
       "path": "generator/scripts/generate-border-wait-ranking-article.mjs",
       "sitePath": "scripts/generate-border-wait-ranking-article.mjs",
       "mode": "adapted",
-      "reason": "Classifica delle dogane (evergreen). Il gemello che diverge di piu' (78 righe al 2026-08-09, 176 righe di diff al 2026-09-25), e la divergenza grossa NON e' il trasporto ma un REWIRE della sorgente dati (issue valerielinc-ops#4974 item 3): sul sito lo script legge `data/border-wait-history/` — 90 file giornalieri, 1,7 GB di telemetria che resta la'; qui legge l'aggregato da ~32 KB che `refresh-border-wait-window.mjs` ne estrae, quindi `computeRanking`/`computeTrend` (che prendono una directory) diventano `rankingFromStats`/`trendFromStats` (che prendono le statistiche gia' aggregate). Le funzioni pure sotto sono le stesse. Restano poi le divergenze di trasporto degli altri: `PROJECT_ROOT` a due livelli, `corpusPath()` e la guardia sui control char. L'assenza mancata: se il sito cambia la FORMA di quelle statistiche, qui non fallisce niente finche' un articolo non esce sbagliato. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-08-09 (`eae01748163e0032`), qui `42c085ba6e171e57`. Il delta e' tutto di questo lato: #131 (report degli strip dei control char), #177 (rifiuto di pubblicare lo stub noData sopra la classifica evergreen quando i valichi ticinesi classificati sono meno di 2), #320 (`sanitizePromptPlaceholders`), #386, #564 (write atomico dei body e del JSON della classifica), #1097 (`resolveRegisterLockAtStartup`), #1250 (`assertArticlePassesFactualityGates`, `_deterministicBodySections: ['body4']`), #1427 (`assertGeneratedArticleQuality`), #1665 (main-guard su `realpathSync`). Non si porta al sito, per scelta: sul sito `generate-border-wait-ranking-weekly.yml` ha `# schedule:  # DISABLED AT CUTOVER` e solo `workflow_dispatch` con `dry_run`/`human_approval`, mentre qui lo stesso workflow gira ogni lunedi'; il porting non avrebbe effetto in produzione e dipenderebbe da export che il `create-article.mjs` del sito non ha. Il producer vivo e' questo: baseline corpus rigenerata sull'hash di oggi, baseline sito invariata.",
+      "reason": "Classifica delle dogane (evergreen). Il gemello che diverge di piu' (78 righe al 2026-08-09, 176 righe di diff al 2026-09-25), e la divergenza grossa NON e' il trasporto ma un REWIRE della sorgente dati (issue valerielinc-ops#4974 item 3): sul sito lo script legge `data/border-wait-history/` — 90 file giornalieri, 1,7 GB di telemetria che resta la'; qui legge l'aggregato da ~32 KB che `refresh-border-wait-window.mjs` ne estrae, quindi `computeRanking`/`computeTrend` (che prendono una directory) diventano `rankingFromStats`/`trendFromStats` (che prendono le statistiche gia' aggregate). Le funzioni pure sotto sono le stesse. Restano poi le divergenze di trasporto degli altri: `PROJECT_ROOT` a due livelli, `corpusPath()` e la guardia sui control char. L'assenza mancata: se il sito cambia la FORMA di quelle statistiche, qui non fallisce niente finche' un articolo non esce sbagliato. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-08-09 (`eae01748163e0032`), qui `42c085ba6e171e57`. Il delta e' tutto di questo lato: #131 (report degli strip dei control char), #177 (rifiuto di pubblicare lo stub noData sopra la classifica evergreen quando i valichi ticinesi classificati sono meno di 2), #320 (`sanitizePromptPlaceholders`), #386, #564 (write atomico dei body e del JSON della classifica), #1097 (`resolveRegisterLockAtStartup`), #1250 (`assertArticlePassesFactualityGates`, `_deterministicBodySections: ['body4']`), #1427 (`assertGeneratedArticleQuality`), #1665 (main-guard su `realpathSync`). Non si porta al sito, per scelta: sul sito `generate-border-wait-ranking-weekly.yml` ha `# schedule:  # DISABLED AT CUTOVER` e solo `workflow_dispatch` con `dry_run`/`human_approval`, mentre qui lo stesso workflow gira ogni lunedi'; il porting non avrebbe effetto in produzione e dipenderebbe da export che il `create-article.mjs` del sito non ha. Il producer vivo e' questo: baseline corpus rigenerata sull'hash di oggi, baseline sito invariata. P9c 2026-10-05: `--canton` (classifica per cantone di confine; Ticino invariato, id `classifica-dogane-ticino`) e filtro sul campo `canton` della finestra pubblicata. Anche questo delta e' solo di qui, per la stessa scelta: il gemello del sito e' dormiente.",
       "baseline": {
         "site": "eae01748163e0032",
-        "corpus": "42c085ba6e171e57",
-        "alignedAt": "2026-09-25"
+        "corpus": "8277cf2be568e218",
+        "alignedAt": "2026-10-05"
       }
     },
     {
       "path": "generator/scripts/refresh-border-wait-window.mjs",
       "mode": "corpus-only",
-      "reason": "Meta' CONSUMATRICE di un contratto cross-repo, non un gemello: fetcha `border-wait-ranking-window.json` che il sito pubblica con `scripts/publish-border-wait-window.mjs`. I due nomi sono diversi per costruzione (uno pubblica, l'altro consuma) e i due file DEVONO restare diversi, quindi non esiste nessun path da confrontare — e' il punto cieco della issue #101: il drift check confronta per path, i closure test seguono gli import, e qui non c'e' ne' l'uno ne' l'altro perche' i due capi si parlano via HTTP. Hard gate: e' il dato dell'articolo evergreen `classifica-dogane-ticino`, e sotto due valichi ticinesi superstiti l'articolo diventa uno stub senza che niente fallisca. La forma e' inchiodata offline da `generator/tests/rewire-json-contracts.test.mjs` (registro delle coppie in `generator/tests/lib/rewire-contracts.mjs`) e verificata sui dati veri da `.github/workflows/rewire-contract-watch.yml`.",
+      "reason": "Meta' CONSUMATRICE di un contratto cross-repo, non un gemello: fetcha `border-wait-ranking-window.json` che il sito pubblica con `scripts/publish-border-wait-window.mjs`. I due nomi sono diversi per costruzione (uno pubblica, l'altro consuma) e i due file DEVONO restare diversi, quindi non esiste nessun path da confrontare — e' il punto cieco della issue #101: il drift check confronta per path, i closure test seguono gli import, e qui non c'e' ne' l'uno ne' l'altro perche' i due capi si parlano via HTTP. Hard gate: e' il dato dell'articolo evergreen `classifica-dogane-ticino`, e sotto due valichi ticinesi superstiti l'articolo diventa uno stub senza che niente fallisca. La forma e' inchiodata offline da `generator/tests/rewire-json-contracts.test.mjs` (registro delle coppie in `generator/tests/lib/rewire-contracts.mjs`) e verificata sui dati veri da `.github/workflows/rewire-contract-watch.yml`. Dal 2026-10-05 (P9c) valida anche `canton` di ogni valico quando presente: codice del gruppo URL o null, mai il semicantone (BS invece di BASILEA).",
       "baseline": {
         "site": null,
-        "corpus": "6ab814fe07adacf4",
-        "alignedAt": "2026-08-10"
+        "corpus": "f441a901b238f03c",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -1873,6 +1873,26 @@
         "site": null,
         "corpus": "bb221335bb9073cb",
         "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/border-wait-ranking-canton.mjs",
+      "mode": "corpus-only",
+      "reason": "Meta' per cantone del generatore della classifica dogane (P9c): metadati evergreen per cantone, filtro sul `canton` della finestra pubblicata, snapshot e parser di `--canton`. Esiste solo qui perche' il generatore vivo e' questo (il gemello del sito e' dormiente, vedi la voce di generate-border-wait-ranking-article.mjs) ed e' separato dal generatore per restare senza dipendenze npm: `generator/tests/border-wait-ranking-canton.test.mjs` lo carica nel job unit della Generator CI, che non fa `npm ci`.",
+      "baseline": {
+        "site": null,
+        "corpus": "0a8aa1a717e0fe6b",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-road-events.mjs",
+      "mode": "corpus-only",
+      "reason": "Quarta meta' consumatrice (P9c, sezioni per cantone): `road-events.json`, prodotto sul sito da `scripts/collect-road-events.mjs` (ASTRA DATEX II + feed mobilita' cantonali). Come le altre tre, il produttore ha un altro nome per costruzione e i due capi si parlano via HTTP: la forma e' inchiodata offline da `generator/tests/rewire-json-contracts.test.mjs` (contratto `road-events` in `generator/tests/lib/rewire-contracts.mjs`) e a orologio da `rewire-contract-watch.yml`. Soft sulla raggiungibilita' perche' nessun generatore lo legge ancora (P11), hard sulla forma: codice del semicantone al posto del gruppo URL, tipo fuori dai quattro, snapshot di oltre 48 ore.",
+      "baseline": {
+        "site": null,
+        "corpus": "da1ccea8fb267eb6",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -2087,13 +2107,11 @@
     {
       "path": "generator/scripts/lib/ai-meta-response.mjs",
       "sitePath": "scripts/lib/ai-meta-response.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616",
-      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Il path esiste gia' sul `main` del sito dalla PR #11578, ma il suo blob live e' quello precedente (`05c117576579f3dd08b94ca0584409f7ba3d5122`). `expectedSiteBlob` pinna il contenuto corretto del head corrente della PR sito #11616 (`9d5703c094e4c6027b43349ac2fa6c246763aaee`): finche' il path live non contiene esattamente quel Git blob, il drift check restituisce `corpus-only-pending-stale-twin`; la sola presenza del file non e' un atterraggio e non va promossa. Dopo il merge della #11616, verificare l'identita' dei due file e promuovere a `identical` con `loop-drift-check --init --only`.",
-      "expectedSiteBlob": "9d5703c094e4c6027b43349ac2fa6c246763aaee",
+      "mode": "identical",
+      "reason": "Gemello identico del rilevatore delle meta-risposte dei modelli usato in `tryTier`.",
       "baseline": {
-        "site": null,
-        "corpus": "231e56bdce5bb50b",
+        "site": "73a11cfc59ac5e0d",
+        "corpus": "73a11cfc59ac5e0d",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2196,9 +2214,9 @@
       "sitePath": "scripts/lib/border-wait-ranking-content.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3abebcd10fe6cbed",
-        "corpus": "3abebcd10fe6cbed",
-        "alignedAt": "2026-08-09"
+        "site": "bee339da19623d4b",
+        "corpus": "bee339da19623d4b",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -3789,8 +3807,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "1575491ae29ffabc",
-        "corpus": "1575491ae29ffabc",
+        "site": "914d98fbe777fb1b",
+        "corpus": "914d98fbe777fb1b",
         "alignedAt": "2026-10-05"
       }
     },
@@ -3849,8 +3867,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fcbb09b97ff76c0e",
-        "corpus": "fcbb09b97ff76c0e",
+        "site": "e806a05d5b559e92",
+        "corpus": "e806a05d5b559e92",
         "alignedAt": "2026-10-05"
       }
     },
@@ -3939,8 +3957,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d7c45e844a1c6d81",
-        "corpus": "d7c45e844a1c6d81",
+        "site": "8b8c71e004515421",
+        "corpus": "8b8c71e004515421",
         "alignedAt": "2026-10-05"
       }
     },
@@ -3960,8 +3978,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "4b9bd9ab13816822",
-        "corpus": "4b9bd9ab13816822",
+        "site": "570bfc873010903f",
+        "corpus": "570bfc873010903f",
         "alignedAt": "2026-10-05"
       }
     },

@@ -39772,6 +39772,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hotel-collina-oro-licenziamenti',
+ category: 'novita',
+ date: '2026-10-05T15:51:02.657Z',
+ image: '/images/blog/hotel-collina-oro-licenziamenti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
