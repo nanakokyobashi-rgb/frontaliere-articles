@@ -55,7 +55,7 @@ import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { REWIRE_CONTRACTS, contract, freshenWindow } from './lib/rewire-contracts.mjs';
+import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenWindow } from './lib/rewire-contracts.mjs';
 import { rankingFromStats, trendFromStats, MIN_SAMPLES_FOR_RANKING } from '../scripts/lib/border-wait-ranking.mjs';
 import { importSpecifiers, relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
@@ -68,11 +68,14 @@ const TODAY = new Date().toISOString().slice(0, 10);
 
 /**
  * Il payload registrato, rimesso in data quando il contratto lo richiede.
- * Solo il border-wait window ha un gate di staleness; gli altri due no.
+ * Hanno un gate di staleness il border-wait window e il dataset carburanti per
+ * cantone; gli altri no.
  */
 function servable(c) {
   const payload = readFixture(c);
-  return c.id === 'border-wait-window' ? freshenWindow(payload, TODAY) : payload;
+  if (c.id === 'border-wait-window') return freshenWindow(payload, TODAY);
+  if (c.id === 'fuel-cantons') return freshenGeneratedAt(payload, new Date().toISOString());
+  return payload;
 }
 
 /**
@@ -183,7 +186,11 @@ const mutated = (c, fn) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', () => {
-  assert.equal(REWIRE_CONTRACTS.length, 3, 'il REWIRE set e\' di tre artefatti (issue #101)');
+  assert.equal(
+    REWIRE_CONTRACTS.length,
+    4,
+    'il REWIRE set e\' di tre artefatti (issue #101) piu\' il dataset carburanti per cantone (P9b)',
+  );
   const missing = [];
   for (const c of REWIRE_CONTRACTS) {
     for (const rel of [c.consumer.refresh, c.fixture, ...c.readBy.map((r) => r.file)]) {
@@ -193,7 +200,7 @@ test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', 
   assert.deepEqual(missing, [], `File dichiarati nel registro REWIRE e assenti:\n  ${missing.join('\n  ')}`);
 });
 
-test('i tre refresh importano solo builtin Node o path relativi — la copia in temp dir li porta', () => {
+test('ogni refresh importa solo builtin Node o path relativi — la copia in temp dir li porta', () => {
   const offenders = [];
   for (const c of REWIRE_CONTRACTS) {
     const src = read(c.consumer.refresh);
@@ -385,6 +392,62 @@ const MUTATIONS = {
       mutated(c, (p) => { p['chiasso-brogeda'] = '4-15 min'; }),
       /is not an object/,
       'Un appiattimento della forma per-valico passerebbe come stringa e romperebbe l\'assegnazione a valle.',
+    ],
+  ],
+  'fuel-cantons': (c) => [
+    [
+      'records[] assente',
+      mutated(c, (p) => { delete p.records; }),
+      /has no records\[\] array/,
+      'Senza record il blocco dati dell\'hub sparirebbe sovrascrivendo una cache buona.',
+    ],
+    [
+      'records[] vuoto',
+      mutated(c, (p) => { p.records = []; }),
+      /carries zero records/,
+      'Un dataset vuoto caching-ato sopra uno buono spegne il blocco in silenzio.',
+    ],
+    [
+      'schemaVersion diverso',
+      mutated(c, (p) => { p.schemaVersion = 2; }),
+      /expected 1 — refusing an unrecognised shape/,
+      'E\' l\'unico segnale di versione: una forma nuova va letta consapevolmente, non indovinata.',
+    ],
+    [
+      'generatedAt vecchio di oltre 7 giorni',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() - 10 * 86_400_000).toISOString(); }),
+      /days ago — refusing stale data/,
+      'Il producer gira ogni giorno: un dataset fermo stampa prezzi della settimana scorsa come di oggi.',
+    ],
+    [
+      'prezzo in millesimi',
+      mutated(c, (p) => { p.records[0].avg = 1995; }),
+      /\.avg 1995 is not a per-litre price/,
+      'Un cambio di unita\' passerebbe come numero e finirebbe stampato nel confronto CH/estero.',
+    ],
+    [
+      'lato CH in euro',
+      mutated(c, (p) => { p.records.find((r) => r.side === 'CH').currency = 'EUR'; }),
+      /side CH priced in EUR/,
+      'Il confronto CH/estero converte in base alla valuta: una valuta scambiata inverte il verdetto.',
+    ],
+    [
+      'min sopra la media',
+      mutated(c, (p) => { p.records[0].min = p.records[0].avg + 0.1; }),
+      /is above avg/,
+      'Un minimo sopra la media e\' un campo scambiato dal producer.',
+    ],
+    [
+      'cantone fuori dai 24 gruppi',
+      mutated(c, (p) => { p.records[0].canton = 'BS'; }),
+      /is not one of the 24 groups/,
+      'Gli hub sono per gruppo URL (BL/BS -> BASILEA): un codice reale non si aggancerebbe a nessun hub.',
+    ],
+    [
+      'lato sconosciuto',
+      mutated(c, (p) => { p.records[0].side = 'LI'; }),
+      /is not CH\|FR\|AT\|IT\|DE/,
+      'Il blocco dati conosce cinque lati: un sesto verrebbe ignorato o mal etichettato.',
     ],
   ],
   'events-dataset': (c) => [

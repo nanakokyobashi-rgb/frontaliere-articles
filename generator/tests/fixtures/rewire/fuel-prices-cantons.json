@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-05T07:19:20.048Z",
+  "fuels": [
+    "sp95",
+    "diesel"
+  ],
+  "sides": [
+    "CH",
+    "FR",
+    "AT",
+    "IT",
+    "DE"
+  ],
+  "cantons": [
+    "AG",
+    "APPENZELLO",
+    "BASILEA",
+    "BE",
+    "FR",
+    "GE",
+    "GL",
+    "GR",
+    "JU",
+    "LU",
+    "NE",
+    "NW",
+    "OW",
+    "SG",
+    "SH",
+    "SO",
+    "SZ",
+    "TG",
+    "TI",
+    "UR",
+    "VD",
+    "VS",
+    "ZG",
+    "ZH"
+  ],
+  "exchangeRate": {
+    "provider": "ECB",
+    "chfPerEur": 0.9279,
+    "eurPerChf": 1.077702
+  },
+  "sources": {
+    "CH": {
+      "status": "ok",
+      "provider": "TCS Benzinpreis-Radar",
+      "stationCount": 97,
+      "snapshotAt": "2026-10-04T12:51:26.609Z",
+      "scope": "border-strip",
+      "note": "National Swiss coverage is not collected: the TCS terms of use allow private use only."
+    },
+    "IT": {
+      "status": "ok",
+      "provider": "MIMIT Osservaprezzi carburanti",
+      "stationCount": 790,
+      "priceSnapshotDate": "2026-10-03"
+    },
+    "FR": {
+      "provider": "prix-carburants.gouv.fr",
+      "url": "https://donnees.roulez-eco.fr/opendata/instantane",
+      "status": "ok",
+      "stationCount": 416
+    },
+    "AT": {
+      "provider": "E-Control Spritpreisrechner",
+      "url": "https://api.e-control.at/sprit/1.0/search/gas-stations/by-region",
+      "status": "ok"
+    },
+    "DE": {
+      "provider": "Tankerkönig",
+      "url": "https://creativecommons.tankerkoenig.de/json/list.php",
+      "status": "skipped",
+      "reason": "TANKERKOENIG_API_KEY not configured (Remote Config)"
+    }
+  },
+  "coverage": {
+    "expectedCantons": [
+      "APPENZELLO",
+      "BASILEA",
+      "GE",
+      "GR",
+      "JU",
+      "NE",
+      "SG",
+      "SO",
+      "TI",
+      "VD",
+      "VS"
+    ],
+    "cantonsWithData": [
+      "APPENZELLO",
+      "BASILEA",
+      "GE",
+      "GR",
+      "JU",
+      "NE",
+      "SG",
+      "SO",
+      "TI",
+      "VD",
+      "VS"
+    ],
+    "expectedCantonsWithData": [
+      "APPENZELLO",
+      "BASILEA",
+      "GE",
+      "GR",
+      "JU",
+      "NE",
+      "SG",
+      "SO",
+      "TI",
+      "VD",
+      "VS"
+    ],
+    "cantonsWithoutData": [
+      "AG",
+      "BE",
+      "FR",
+      "GL",
+      "LU",
+      "NW",
+      "OW",
+      "SH",
+      "SZ",
+      "TG",
+      "UR",
+      "ZG",
+      "ZH"
+    ],
+    "minExpectedCoverage": 0.75
+  },
+  "records": [
+    {
+      "canton": "GE",
+      "side": "FR",
+      "fuel": "sp95",
+      "currency": "EUR",
+      "avg": 2.219,
+      "median": 2.219,
+      "min": 1.99,
+      "stations": 193,
+      "observedAt": "2026-10-05T07:08:58.000Z",
+      "source": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+      "area": "FR-74,FR-01",
+      "coverage": "departement"
+    },
+    {
+      "canton": "GE",
+      "side": "FR",
+      "fuel": "diesel",
+      "currency": "EUR",
+      "avg": 2.393,
+      "median": 2.397,
+      "min": 2.249,
+      "stations": 211,
+      "observedAt": "2026-10-05T07:08:57.000Z",
+      "source": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
+      "area": "FR-74,FR-01",
+      "coverage": "departement"
+    },
+    {
+      "canton": "SG",
+      "side": "AT",
+      "fuel": "sp95",
+      "currency": "EUR",
+      "avg": 1.786,
+      "median": 1.789,
+      "min": 1.777,
+      "stations": 10,
+      "observedAt": "2026-10-05T07:19:20.048Z",
+      "source": "E-Control Spritpreisrechner",
+      "area": "AT-BL8",
+      "coverage": "cheapest-published"
+    },
+    {
+      "canton": "SG",
+      "side": "AT",
+      "fuel": "diesel",
+      "currency": "EUR",
+      "avg": 2.09,
+      "median": 2.092,
+      "min": 2.077,
+      "stations": 12,
+      "observedAt": "2026-10-05T07:19:20.048Z",
+      "source": "E-Control Spritpreisrechner",
+      "area": "AT-BL8",
+      "coverage": "cheapest-published"
+    },
+    {
+      "canton": "TI",
+      "side": "CH",
+      "fuel": "sp95",
+      "currency": "CHF",
+      "avg": 1.995,
+      "median": 1.99,
+      "min": 1.73,
+      "stations": 47,
+      "observedAt": "2026-10-04T12:51:22.639Z",
+      "source": "TCS Benzinpreis-Radar",
+      "area": "CH (fascia entro 25 km dal confine italiano)",
+      "coverage": "border-strip"
+    },
+    {
+      "canton": "TI",
+      "side": "CH",
+      "fuel": "diesel",
+      "currency": "CHF",
+      "avg": 2.301,
+      "median": 2.29,
+      "min": 2.11,
+      "stations": 43,
+      "observedAt": "2026-10-04T12:51:22.639Z",
+      "source": "TCS Benzinpreis-Radar",
+      "area": "CH (fascia entro 25 km dal confine italiano)",
+      "coverage": "border-strip"
+    },
+    {
+      "canton": "TI",
+      "side": "IT",
+      "fuel": "sp95",
+      "currency": "EUR",
+      "avg": 2.053,
+      "median": 2.029,
+      "min": 1.987,
+      "stations": 303,
+      "observedAt": "2026-10-03T05:49:59.000Z",
+      "source": "MIMIT Osservaprezzi carburanti (open data)",
+      "area": "IT-CO,IT-VA,IT-VB",
+      "coverage": "border-municipalities-self-service"
+    },
+    {
+      "canton": "TI",
+      "side": "IT",
+      "fuel": "diesel",
+      "currency": "EUR",
+      "avg": 2.257,
+      "median": 2.23,
+      "min": 2.159,
+      "stations": 302,
+      "observedAt": "2026-10-03T05:49:59.000Z",
+      "source": "MIMIT Osservaprezzi carburanti (open data)",
+      "area": "IT-CO,IT-VA,IT-VB",
+      "coverage": "border-municipalities-self-service"
+    }
+  ]
+}

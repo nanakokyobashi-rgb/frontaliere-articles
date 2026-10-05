@@ -81,13 +81,20 @@ jobs:
       - name: events.json
         run: node generator/scripts/refresh-events-dataset.mjs --check
 
+      # Soft come le medie: dataset di categoria carburanti per cantone (P9b),
+      # letto dagli hub cantonali. Un publisher irraggiungibile (anche il 404
+      # prima della prima build giornaliera del sito) esce 0; un documento
+      # fetchato e sbagliato, o fermo da oltre 7 giorni, esce non-zero.
+      - name: fuel-prices-cantons.json
+        run: node generator/scripts/refresh-fuel-cantons.mjs --check
+
       # Il rosso qui non si ripara qui. Lo dice il job, cosi' chi apre la run non
-      # deve ricostruirlo: il registro delle tre coppie produttore/consumatore sta
+      # deve ricostruirlo: il registro delle coppie produttore/consumatore sta
       # in generator/tests/lib/rewire-contracts.mjs.
       - name: Dove si ripara
         if: failure()
         run: |
           echo "::error::Un contratto REWIRE non combacia piu' con i dati pubblicati."
-          echo "Il produttore di tutti e tre vive nel repo del SITO e da qui non e' modificabile."
-          echo "Le tre coppie produttore/consumatore, con i campi letti e il sintomo di ognuna:"
+          echo "Il produttore di tutti i contratti vive nel repo del SITO e da qui non e' modificabile."
+          echo "Le coppie produttore/consumatore, con i campi letti e il sintomo di ognuna:"
           echo "  generator/tests/lib/rewire-contracts.mjs"
