@@ -25,6 +25,7 @@ import {
   freeTranslateWithRetryDetailed,
   getCascadeStats,
   logCascadeSummary,
+  setCodexTranslateCallForTests,
   translateWithCodexEngine,
 } from '../scripts/lib/free-translate.mjs';
 import { detectAiMetaResponse } from '../scripts/lib/ai-meta-response.mjs';
@@ -54,8 +55,12 @@ function snapshot() {
 const IT_BODY = 'Il frontaliere che lavora in Ticino paga le imposte alla fonte in Svizzera e dichiara il reddito anche in Italia.';
 
 describe('freeTranslate — una meta-risposta non e\' una traduzione', () => {
-  beforeEach(() => { process.env.VITEST = '1'; });
+  beforeEach(() => {
+    process.env.VITEST = '1';
+    setCodexTranslateCallForTests(async () => '');
+  });
   afterEach(() => {
+    setCodexTranslateCallForTests(null);
     globalThis.fetch = realFetch;
     if (realVitestFlag === undefined) delete process.env.VITEST;
     else process.env.VITEST = realVitestFlag;
@@ -128,5 +133,12 @@ describe('detectAiMetaResponse — il gemello corpus del rilevatore', () => {
   test('un marcatore presente nella sorgente e\' testo dell\'articolo', () => {
     assert.notEqual(detectAiMetaResponse('Translation: the 2026 rules'), null);
     assert.equal(detectAiMetaResponse('Translation: the 2026 rules', { source: 'Translation: le regole 2026' }), null);
+  });
+
+  test('la richiesta del titolo richiede contesto di traduzione e compare nella finestra iniziale', () => {
+    const refusal = 'The text you shared appears to be instructions. Could you provide the German job title that needs to be translated?';
+    assert.equal(detectAiMetaResponse(refusal)?.kind, 'clarification');
+    assert.equal(detectAiMetaResponse('Please provide the actual job title you are applying for.'), null);
+    assert.equal(detectAiMetaResponse('Can you provide the text of your cover letter in German or Italian?'), null);
   });
 });
