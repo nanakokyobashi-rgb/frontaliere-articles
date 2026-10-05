@@ -269,6 +269,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['median', 'area', 'coverage', 'exchangeRate', 'sources'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la cache (P9b consegna solo refresh + contratto): il ' +
+        'producer degli hub cantonali (P10) deve cablare `npm run refresh:fuel-cantons` nel proprio ' +
+        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
+        'solo dal `--check` di rewire-contract-watch.yml.',
+    },
   },
 ];
 
