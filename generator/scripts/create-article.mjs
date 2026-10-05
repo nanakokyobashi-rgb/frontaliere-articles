@@ -3740,7 +3740,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, pageCarriesItem } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -16711,6 +16711,24 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Step 1: Fetch page content
   const pageContent = await fetchPageContent(url);
+
+  // Step 1a: su un URL riusato la pagina deve parlare ancora di QUESTO item.
+  // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
+  // un'altra, il titolo scelto e i fatti della pagina non sono piu' la stessa
+  // notizia, e l'articolo uscirebbe col titolo di un aggiornamento e i fatti
+  // di un altro (vedi pageCarriesItem in lib/source-url-ledger.mjs). L'abort
+  // e' ricordato sull'URL CON l'identita' (il chiamante), quindi vale per
+  // questo item e non per le notizie successive allo stesso indirizzo.
+  if (itemIdentityOf(sourceUrl) !== null && typeof pageContent === 'string' && pageContent.length > 0) {
+    const itemHeadline = String(sourceContext?.headline || '');
+    if (!pageCarriesItem(pageContent, itemHeadline)) {
+      console.error(`\n⏭️  URL riusato: la pagina non porta piu' questo item («${itemHeadline.slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
+      RUN_REPORT.notes.push(`Source skipped pre-LLM: reused URL no longer carries the item (url=${url})`);
+      const err = new Error(`topic-gate abort: la pagina di un URL riusato non porta piu' l'item scelto (${url})`);
+      err.topicGateAbort = true;
+      throw err;
+    }
+  }
 
   // Step 1b: Early topical pre-flight on the source page itself (2026-05-12).
   // Why: the geographic anchor-gate is too permissive (any Locarnese /

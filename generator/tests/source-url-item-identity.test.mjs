@@ -44,6 +44,7 @@ import {
   legacyNewsUrlKey,
   makeLedgerEntry,
   newsUrlKey,
+  pageCarriesItem,
   stripItemIdentity,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
@@ -110,13 +111,18 @@ test('newsUrlKey: l\'identita\' convive con la query identificante e con i param
   assert.equal(newsUrlKey(url), `https://example.ch/dettaglio?news_id=42#${ITEM_IDENTITY_FRAGMENT}=${token}`);
 });
 
-test('itemIdentityToken: maiuscole, accenti e punteggiatura non contano (un\'entita\' vale da separatore); il testo si\'', () => {
+test('itemIdentityToken: maiuscole, accenti, punteggiatura e forma delle entita\' non contano; il testo si\'', () => {
   const a = itemIdentityToken('Schwerer Töffunfall bei Pontresina: Betrieb der RhB kurzzeitig eingestellt');
   assert.match(a, /^[0-9a-f]{12}$/);
   assert.equal(itemIdentityToken('  SCHWERER TOFFUNFALL bei Pontresina – Betrieb der RhB kurzzeitig eingestellt!  '), a);
-  assert.equal(itemIdentityToken('Schwerer T&ouml;ffunfall bei Pontresina: Betrieb der RhB kurzzeitig eingestellt'), itemIdentityToken('Schwerer T ffunfall bei Pontresina Betrieb der RhB kurzzeitig eingestellt'));
+  // Lo stesso titolo, tre serializzazioni: una chiave sola.
+  for (const variant of ['Schwerer T&ouml;ffunfall', 'Schwerer T&#246;ffunfall', 'Schwerer T&#xF6;ffunfall', 'Schwerer To\u0308ffunfall']) {
+    assert.equal(itemIdentityToken(`${variant} bei Pontresina: Betrieb der RhB kurzzeitig eingestellt`), a, variant);
+  }
+  assert.equal(itemIdentityToken('Caf&eacute; &amp; Bar: l&#039;apertura &laquo;storica&raquo;'), itemIdentityToken('Café & Bar: l\'apertura «storica»'));
+  assert.equal(itemIdentityToken('Stra&szlig;e gesperrt'), itemIdentityToken('Straße gesperrt'));
   assert.notEqual(itemIdentityToken(TITLES[1]), itemIdentityToken(TITLES[2]), 'due incidenti a Pontresina sono due notizie');
-  for (const empty of ['', '   ', '—', null, undefined]) assert.equal(itemIdentityToken(empty), null);
+  for (const empty of ['', '   ', '—', '&nbsp;&hellip;', null, undefined]) assert.equal(itemIdentityToken(empty), null);
 });
 
 test('withItemIdentity / stripItemIdentity: andata e ritorno, e un frammento preesistente e\' sostituito', () => {
@@ -171,6 +177,33 @@ test('URL riusato: ne\' il ponte di forma 1 ne\' il ramo fuzzy sullo slug del co
   assert.equal(used(container).used, true);
   const fuzzy = makeIsSourceUrlAlreadyUsed({ ledgers: { 'canton-gr': {}, svizzera: {} }, articleIds })(container);
   assert.equal(fuzzy.signal, 'url_slug_match');
+});
+
+// ── La pagina porta ancora l'item? ──────────────────────────────────────────
+
+test('pageCarriesItem: la pagina reale del ticker porta la notizia di oggi e nessuna delle precedenti', () => {
+  // La pagina del 2026-10-05 (ridotta: script e stile tolti), come testo.
+  const page = readFileSync(path.join(HERE, 'fixtures', 'canton-sources', 'suedostschweiz-verkehrsticker-page.html'), 'utf8').replace(/<[^>]+>/g, ' ');
+  assert.equal(pageCarriesItem(page, TITLES[3]), true, 'il titolo del feed di oggi');
+  for (const earlier of TITLES.slice(0, 3)) assert.equal(pageCarriesItem(page, earlier), false, earlier);
+  // Il corpo non ripete il titolo alla lettera: contano le parole distintive.
+  assert.equal(pageCarriesItem('Zwischen Flims und Trin kam es zu einem Unfall. Der Verkehr fliesst inzwischen wieder.', TITLES[3]), true);
+  // Un titolo senza parole distintive non si puo' verificare: non passa.
+  assert.equal(pageCarriesItem(page, 'A 13: Stau'), false);
+  assert.equal(pageCarriesItem('', TITLES[3]), false);
+});
+
+test('la generazione si ferma se la pagina di un URL riusato non porta piu\' l\'item scelto', () => {
+  const start = SRC.indexOf('async function generateAndValidateArticle(sourceUrl, sourceContext = null) {');
+  const fn = SRC.slice(start, SRC.indexOf('\n}\n', start));
+  const fetchAt = fn.indexOf('const pageContent = await fetchPageContent(url);');
+  const guardAt = fn.indexOf('if (itemIdentityOf(sourceUrl) !== null && typeof pageContent === \'string\' && pageContent.length > 0) {');
+  const firstLlm = fn.indexOf('callGemini(');
+  assert.ok(fetchAt !== -1 && guardAt > fetchAt, 'la guardia deve stare subito dopo la fetch della pagina');
+  assert.ok(firstLlm > guardAt, 'e prima della prima chiamata al modello');
+  const guard = fn.slice(guardAt, fn.indexOf('\n  }\n', guardAt));
+  assert.match(guard, /!pageCarriesItem\(pageContent, itemHeadline\)/);
+  assert.match(guard, /err\.topicGateAbort = true;/, 'un abort che il ciclo ricorda sull\'item e passa alla headline successiva');
 });
 
 // ── Il cablaggio in create-article.mjs ──────────────────────────────────────

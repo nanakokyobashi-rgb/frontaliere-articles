@@ -492,14 +492,19 @@ test('Tamedia: identita\' dell\'item solo sui ticker; un articolo ritoccato nel 
   assert.equal(first.filter((h) => itemIdentityOf(h.url)).length, 2, 'e solo loro');
 });
 
-test('applyItemIdentity: titolo dallo slug → vale la data; senza titolo ne\' data la voce non ha identita\'', () => {
+test('applyItemIdentity: l\'identita\' e\' sempre il titolo della fonte; un titolo ricavato dallo slug non ne ha', () => {
   const url = 'https://www.suedostschweiz.ch/glarus/meldungen-aus-dem-glarnerland-1916134';
-  const at = (iso) => ({ url, headline: 'meldungen aus dem glarnerland', date: iso ? new Date(iso) : null, titleFromSlug: true });
-  const out = applyItemIdentity([at('2026-10-05T12:54:14Z')]);
-  const next = applyItemIdentity([at('2026-10-06T07:10:00Z')]);
-  assert.equal(out.identified, 1);
-  assert.notEqual(newsUrlKey(out.headlines[0].url), newsUrlKey(next.headlines[0].url), 'il titolo e\' lo slug riusato: distingue la data');
-  assert.deepEqual(applyItemIdentity([at(null)]), { headlines: [], identified: 0, dropped: 1 });
+  const title = 'Bye bye Billettschalter: SBB schliessen Reisezentrum in Ziegelbrücke';
+  // Lo stesso item dal feed e dalla news sitemap (date diverse: pubDate e
+  // news:publication_date non coincidono al secondo): UNA chiave.
+  const fromFeed = applyItemIdentity([{ url, headline: title, date: new Date('2026-10-05T12:54:14Z') }]).headlines[0];
+  const fromSitemap = applyItemIdentity([{ url, headline: title, date: new Date('2026-10-05T12:55:02Z') }]).headlines[0];
+  assert.equal(newsUrlKey(fromFeed.url), newsUrlKey(fromSitemap.url));
+  // Una sitemap senza news:title darebbe lo slug del contenitore come titolo:
+  // non identifica la notizia, e un'impronta della data farebbe una seconda
+  // chiave per l'item che il feed identifica col titolo.
+  const slugged = { url, headline: 'meldungen aus dem glarnerland', date: new Date('2026-10-05T12:54:14Z'), titleFromSlug: true };
+  assert.deepEqual(applyItemIdentity([slugged]), { headlines: [], identified: 0, dropped: 1 });
 });
 
 test('URL riusati: due voci con lo stesso link nello STESSO feed restano due notizie (identita\' prima del dedup)', async () => {

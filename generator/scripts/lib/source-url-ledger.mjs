@@ -192,26 +192,79 @@ export const ITEM_IDENTITY_FRAGMENT = 'ft-item';
 
 const ITEM_IDENTITY_RE = new RegExp(`^#${ITEM_IDENTITY_FRAGMENT}=([0-9a-f]{12})$`);
 
+/** Entita' HTML con nome che valgono un carattere preciso (le altre, vedi sotto). */
+const NAMED_CHAR_ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', szlig: 'ß', aelig: 'æ', oelig: 'œ', oslash: 'ø' };
+
 /**
- * Impronta stabile di cio' che distingue l'item (il titolo; la data di
- * pubblicazione dove la fonte non da' titoli). Maiuscole, accenti e
- * punteggiatura non contano: «Verkehr fliesst wieder!» e «verkehr fliesst
- * wieder» sono lo stesso item. Un'entita' HTML (`&amp;`, `&#039;`) vale da
- * separatore, come il carattere di punteggiatura che quasi sempre codifica.
+ * Il testo di un titolo ridotto a cio' che lo identifica: entita' HTML
+ * decodificate, accenti e maiuscole tolti, punteggiatura resa spazio.
  *
- * @param {string} text
- * @returns {string | null} 12 cifre esadecimali, o null se non resta testo
+ * Le entita' si DECODIFICANO prima di normalizzare, non si buttano: lo stesso
+ * titolo arriva come `Caf&eacute;`, `Caf&#233;` o `Café` secondo come la fonte
+ * serializza quel giorno (o da quale dei suoi feed lo si legge), e tre
+ * impronte per un titolo sono tre passaggi dal ledger. Le lettere accentate
+ * con nome (`&eacute;`, `&uuml;`, `&ccedil;`…) valgono la lettera base, che e'
+ * cio' che NFKD + rimozione dei diacritici lascia del carattere vero; ogni
+ * altra entita' con nome e' punteggiatura (`&laquo;`, `&ndash;`, `&hellip;`).
  */
-export function itemIdentityToken(text) {
-  const normalized = String(text ?? '')
-    .replace(/&(?:#x?[0-9a-f]+|[a-z]+);/gi, ' ')
+function normalizeItemText(text) {
+  return String(text ?? '')
+    .replace(/&#(x[0-9a-f]+|\d+);/gi, (m, code) => {
+      const n = code[0] === 'x' || code[0] === 'X' ? parseInt(code.slice(1), 16) : parseInt(code, 10);
+      return Number.isInteger(n) && n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : ' ';
+    })
+    .replace(/&([a-z])(?:acute|grave|circ|uml|tilde|cedil|ring|caron);/gi, '$1')
+    .replace(/&([a-z]+\d*);/gi, (m, name) => NAMED_CHAR_ENTITIES[name.toLowerCase()] ?? ' ')
     .normalize('NFKD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()
     .replace(/[^\p{L}\p{N}]+/gu, ' ')
     .trim();
+}
+
+/**
+ * Impronta stabile del titolo che distingue l'item. Maiuscole, accenti,
+ * punteggiatura e forma delle entita' HTML non contano: «Verkehr fliesst
+ * wieder!» e «verkehr fliesst wieder» sono lo stesso item.
+ *
+ * @param {string} text
+ * @returns {string | null} 12 cifre esadecimali, o null se non resta testo
+ */
+export function itemIdentityToken(text) {
+  const normalized = normalizeItemText(text);
   if (!normalized) return null;
   return createHash('sha1').update(normalized).digest('hex').slice(0, 12);
+}
+
+/** Quota minima delle parole del titolo che la pagina deve portare (vedi sotto). */
+export const ITEM_ON_PAGE_MIN_SHARE = 0.6;
+
+/**
+ * La pagina scaricata parla ancora di QUESTO item?
+ *
+ * Un URL riusato porta la notizia del momento: fra la lettura del feed e la
+ * generazione, o per una voce che il feed riporta accanto a una piu' recente
+ * allo stesso indirizzo, la pagina puo' essere gia' passata a un'altra
+ * notizia. Generare allora vorrebbe dire il titolo di un aggiornamento con i
+ * fatti di un altro. Misurato il 2026-10-05 su
+ * `/graubuenden/verkehrsticker-1574112`: la pagina porta «Flims», «Trin»,
+ * «Verkehr fliesst wieder» e nessuna delle parole dei titoli di maggio, giugno
+ * e agosto («Pontresina», «Isla-Bella», «Töffunfall»).
+ *
+ * Il confronto e' sulle parole distintive del titolo (almeno 4 lettere), non
+ * sulla frase: il corpo estratto non sempre ripete il titolo alla lettera.
+ * Un titolo senza parole distintive non si puo' verificare e non passa.
+ *
+ * @param {string} pageText il testo estratto dalla pagina
+ * @param {string} headline il titolo dell'item
+ * @returns {boolean}
+ */
+export function pageCarriesItem(pageText, headline, { minShare = ITEM_ON_PAGE_MIN_SHARE } = {}) {
+  const words = [...new Set(normalizeItemText(headline).split(' ').filter((w) => w.length >= 4))];
+  if (words.length === 0) return false;
+  const page = new Set(normalizeItemText(pageText).split(' '));
+  const found = words.filter((w) => page.has(w)).length;
+  return found / words.length >= minShare;
 }
 
 /** L'URL con l'identita' dell'item nel frammento (un frammento gia' presente e' sostituito). */

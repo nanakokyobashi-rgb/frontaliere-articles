@@ -2439,7 +2439,7 @@
           },
           "items7d": 5,
           "verifiedAt": "2026-10-05",
-          "notes": "Solo fallback del feed: 31 URL con news:publication_date (ultime ore), 5 sotto /glarus/. Titoli non presenti nel file. Da usare solo se il feed /feed/glarus fallisce."
+          "notes": "Solo fallback del feed: 31 URL con news:publication_date (ultime ore), 5 sotto /glarus/. Rimisurato il 2026-10-05 (P5b): 48 voci, tutte con news:title, uguale al titolo del feed; una voce senza titolo verrebbe scartata (URL riusati: l'identita' e' il titolo). Da usare solo se il feed /feed/glarus fallisce."
         },
         {
           "url": "https://www.gl.ch/public-newsroom.html/30",

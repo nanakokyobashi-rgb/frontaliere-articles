@@ -641,10 +641,13 @@ export function applyDatetimeYearOffset(items, offset, now = new Date()) {
  *     a 16 minuti, e con l'impronta del titolo sarebbe ripassato dal ledger
  *     come notizia nuova.
  *
- * L'impronta e' del TITOLO dato dalla fonte. Dove il titolo e' ricavato dallo
- * slug (`titleFromSlug`, sitemap senza `news:title`) non identifica niente —
- * lo slug e' proprio cio' che la fonte riusa — e vale la data di
- * pubblicazione; una voce senza titolo ne' data non ha identita' e si scarta.
+ * L'impronta e' SEMPRE del titolo dato dalla fonte, mai di altro: lo stesso
+ * item letto dal feed e dalla news sitemap della stessa testata deve avere la
+ * stessa chiave, e un'impronta della data in un caso e del titolo nell'altro
+ * ne farebbe due voci che passano entrambe dal ledger. Dove il titolo e'
+ * ricavato dallo slug (`titleFromSlug`, sitemap senza `news:title`) la voce
+ * non ha un'identita' — lo slug e' proprio cio' che la fonte riusa — e si
+ * scarta: la notizia arriva dal feed, che il titolo lo porta.
  *
  * @param {Array<{url: string, headline: string, date: Date | null, titleFromSlug?: boolean}>} headlines
  * @param {true | string} scope il valore del quirk
@@ -663,9 +666,7 @@ export function applyItemIdentity(headlines, scope = true) {
         continue;
       }
     }
-    const token = h.titleFromSlug
-      ? (h.date ? itemIdentityToken(h.date.toISOString()) : null)
-      : itemIdentityToken(h.headline);
+    const token = h.titleFromSlug ? null : itemIdentityToken(h.headline);
     if (!token) continue;
     identified += 1;
     out.push({ ...h, url: withItemIdentity(h.url, token) });
@@ -851,7 +852,7 @@ export async function scanCantonSource(source, ctx) {
   // stessa sitemap) sono due notizie finche' il titolo non dice il contrario.
   if (quirks.urlReusedForDifferentStories) {
     const reused = applyItemIdentity(headlines, quirks.urlReusedForDifferentStories);
-    if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza titolo ne' data scartate (nessuna identita')`);
+    if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza un titolo della fonte scartate (nessuna identita')`);
     headlines = reused.headlines;
   }
   headlines = dedupByUrl(headlines);
