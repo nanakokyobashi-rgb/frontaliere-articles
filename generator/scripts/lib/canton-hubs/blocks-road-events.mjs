@@ -81,8 +81,13 @@ export function shapeRoadEventsBlock(dataset, { canton, nowMs }) {
     .filter(({ to }) => !Number.isFinite(to) || to >= nowMs)
     .map((x) => ({ ...x, start: Number.isFinite(x.from) ? x.from : instantMs(x.e.observedAt) }))
     .filter(({ start }) => Number.isFinite(start) && start <= horizon)
+    // Per tipo; dentro il tipo prima cio' che e' gia' in corso, poi cio' che
+    // sta per cominciare, ciascuno dal piu' vicino nel tempo: con piu' righe
+    // del tetto la chiusura di domani non deve cedere il posto a quella fra
+    // due settimane.
     .sort((a, b) => TYPE_ORDER.indexOf(a.e.type) - TYPE_ORDER.indexOf(b.e.type)
-      || b.start - a.start
+      || Number(a.start > nowMs) - Number(b.start > nowMs)
+      || a.start - b.start
       || String(a.e.id).localeCompare(String(b.e.id)));
   if (active.length < th.minRows) return omitted(id, 'empty', `nessuna limitazione attiva per ${canton}`);
 

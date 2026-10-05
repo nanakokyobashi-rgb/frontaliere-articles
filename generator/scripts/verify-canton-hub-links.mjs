@@ -14,6 +14,12 @@
  * `canton-url-slugs.json` che usa il sito (`eventsBasePathForCanton`), quindi
  * per quelle si verifica il gemello italiano.
  *
+ * Copre TUTTI i link che il producer puo' emettere, compresi quelli agli
+ * articoli evergreen del cantone (digest eventi del weekend, classifica dei
+ * valichi): la mappa degli evergreen si costruisce qui come la costruisce
+ * `generate-canton-hubs.mjs`, dal registro frontaliere, e i loro URL si
+ * cercano in `sitemap-blog.xml` nella locale del link.
+ *
  * Uso:
  *   node generator/scripts/verify-canton-hub-links.mjs [--section canton-ti[,canton-gr]] [--warn]
  * Senza --section controlla tutti i 24 gruppi. `--warn` esce 0 anche con link
@@ -28,13 +34,14 @@ import { CANTON_HUB_TOPIC_KEYS } from '../../engine/shared/cantonArticleSectionC
 import { cantonSectionIds } from './lib/canton-section-profile.mjs';
 import { eventsBasePathForCanton } from './lib/events-utils.mjs';
 import { HUB_LOCALES } from './lib/canton-hubs/format.mjs';
-import { buildHubLinks } from './lib/canton-hubs/links.mjs';
+import { loadSectionArticles } from './lib/canton-hubs/articles.mjs';
+import { borderRankingArticleId, buildHubLinks, eventsDigestArticleId } from './lib/canton-hubs/links.mjs';
 import { REWIRE_FETCH_HEADERS } from './lib/rewire-fetch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const ORIGIN = (process.env.SITE_ORIGIN || 'https://frontaliereticino.ch').replace(/\/$/, '');
 /** Le sitemap che contengono le pagine linkate: le altre (annunci, articoli) non servono. */
-const RELEVANT = /sitemap-(pages|fuel-[a-z-]+|border-wait|health-premiums|farmacie|plate-auctions-\d+|weather|eventi|jobs-[a-z-]+)\.xml$/;
+const RELEVANT = /sitemap-(pages|fuel-[a-z-]+|border-wait|health-premiums|farmacie|plate-auctions-\d+|weather|eventi|jobs-[a-z-]+|blog)\.xml$/;
 
 const args = process.argv.slice(2);
 const warnOnly = args.includes('--warn');
@@ -64,8 +71,14 @@ if (children.length === 0) {
 const published = new Set();
 for (const url of children) {
   const xml = await get(url);
-  for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) published.add(toPath(m[1]));
-  for (const m of xml.matchAll(/hreflang="[^"]+"\s+href="([^"]+)"/g)) published.add(toPath(m[1]));
+  // `<loc>` con o senza prefisso di namespace e con eventuale CDATA; gli
+  // alternate si leggono tag per tag, qualunque sia l'ordine degli attributi.
+  for (const m of xml.matchAll(/<(?:[a-z]+:)?loc>\s*(?:<!\[CDATA\[)?\s*([^<\]\s]+)\s*(?:\]\]>)?\s*<\/(?:[a-z]+:)?loc>/g)) published.add(toPath(m[1]));
+  for (const tag of xml.matchAll(/<(?:[a-z]+:)?link\b[^>]*>/g)) {
+    if (!/\bhreflang\s*=/.test(tag[0])) continue;
+    const href = /\bhref\s*=\s*["']([^"']+)["']/.exec(tag[0]);
+    if (href) published.add(toPath(href[1]));
+  }
 }
 
 const catalogue = JSON.parse(fs.readFileSync(path.join(ROOT, 'generator/data/canton-hub-links.json'), 'utf8'));
@@ -80,13 +93,23 @@ function sitemapTwin(canton, locale, url) {
   return url;
 }
 
+// Gli evergreen come li vede il producer: solo quelli davvero nel registro.
+const frontaliere = new Map(loadSectionArticles(ROOT, 'frontaliere').map((a) => [a.id, a]));
+
 let checked = 0;
+let evergreenLinks = 0;
 const missing = [];
 for (const section of sections) {
   const canton = ARTICLE_SECTION_CORE_ALL[section].canton;
+  const evergreenArticles = new Map(
+    [eventsDigestArticleId(canton), borderRankingArticleId(canton, cantonUrlSlugs)]
+      .filter((id) => id && frontaliere.has(id))
+      .map((id) => [id, frontaliere.get(id)]),
+  );
+  evergreenLinks += evergreenArticles.size;
   for (const topic of CANTON_HUB_TOPIC_KEYS) {
     for (const locale of HUB_LOCALES) {
-      for (const link of buildHubLinks({ canton, topic, locale, catalogue, cantonUrlSlugs })) {
+      for (const link of buildHubLinks({ canton, topic, locale, catalogue, cantonUrlSlugs, evergreenArticles })) {
         const probe = sitemapTwin(canton, locale, link.url);
         if (probe === null) continue;
         checked += 1;
@@ -96,7 +119,7 @@ for (const section of sections) {
   }
 }
 
-console.log(`[verify-canton-hub-links] ${checked} link di ${sections.length} sezioni controllati su ${children.length} sitemap (${published.size} URL pubblicati), ${missing.length} mancanti`);
+console.log(`[verify-canton-hub-links] ${checked} link di ${sections.length} sezioni (di cui ${evergreenLinks} articoli evergreen, nelle 4 locali) controllati su ${children.length} sitemap (${published.size} URL pubblicati), ${missing.length} mancanti`);
 if (missing.length) {
   for (const m of [...new Set(missing)]) console.log(`${warnOnly ? '::warning::' : '::error::'}[verify-canton-hub-links] non in sitemap: ${m}`);
   process.exit(warnOnly ? 0 : 1);

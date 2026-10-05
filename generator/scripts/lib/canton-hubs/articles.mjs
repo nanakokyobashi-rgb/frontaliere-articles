@@ -29,7 +29,7 @@ import { readTsStringMap } from '../../backfill-article-cantons.mjs';
 import { readEntryCanton, registryEntrySpans } from '../registry-canton-field.mjs';
 import { foldForMatch, termHits } from '../canton-section-profile.mjs';
 import { DAILY_EDITION_ID_RE } from '../daily-brief-content.mjs';
-import { DAY_MS } from './blocks-common.mjs';
+import { CLOCK_SKEW_MS, DAY_MS } from './blocks-common.mjs';
 import { HUB_LOCALES, clip, isoDayOf } from './format.mjs';
 
 /** Le due sezioni storiche da cui un hub cantonale promuove via campo `canton`. */
@@ -54,12 +54,23 @@ function shadowedSlugs(root, section) {
   return new Set();
 }
 
-/** Qualita' gia' calcolata dal ranker di create-article (sidecar), in [0,1], o null. */
+/**
+ * Qualita' gia' calcolata dal ranker di create-article (sidecar
+ * `_score_breakdown`), portata in [0,1), o null se il sidecar non la porta.
+ *
+ * `score`/`finalScore` NON sono in [0,1]: nel ranker a cascata sono un
+ * punteggio di domanda non negativo e senza tetto (puo' valere 0,4 come 12).
+ * Tagliarlo a 1 metterebbe alla pari tutti i candidati sopra 1 e spegnerebbe
+ * la componente; qui la scala e' dichiarata: s / (1 + s), monotona, che
+ * conserva l'ordine fra due punteggi qualunque e satura dolcemente.
+ */
 export function sidecarQuality(sidecar) {
   const s = sidecar?._score_breakdown;
   if (!s || typeof s !== 'object') return null;
   const v = [s.score, s.finalScore].find((x) => typeof x === 'number' && Number.isFinite(x));
-  return v == null ? null : Math.min(1, Math.max(0, v));
+  if (v == null) return null;
+  const positive = Math.max(0, v);
+  return positive / (1 + positive);
 }
 
 /** Path radice-relativo della landing di una sezione in una locale. */
@@ -196,8 +207,9 @@ const titleKey = (title) => foldForMatch(title).replace(/[^a-z0-9]+/g, ' ').trim
  */
 export function selectCuratedArticles({ pool, section, config, engine, nowMs }) {
   const today = Date.parse(`${isoDayOf(nowMs)}T00:00:00Z`);
-  // Un articolo datato nel futuro non e' ancora una news da promuovere.
-  const eligible = pool.filter((a) => Date.parse(a.date) <= nowMs + DAY_MS);
+  // Un articolo datato nel futuro non e' ancora una news da promuovere: passa
+  // solo lo sfasamento d'orologio fra chi ha scritto la data e questo runner.
+  const eligible = pool.filter((a) => Date.parse(a.date) <= nowMs + CLOCK_SKEW_MS);
   const inputs = eligible.map((a) => ({ articleId: a.id, title: a.title.it, excerpt: a.excerpt.it, datePub: a.date, category: a.category }));
   const seeds = engine.TOPIC_CLUSTERS.map((t) => ({ key: t.key, seedText: t.seedText }));
   // Solo il match DIRETTO sui seed (`threshold` sopra ogni coseno possibile

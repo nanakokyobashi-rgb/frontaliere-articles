@@ -113,8 +113,13 @@ jobs:
         if: steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::Remote Config non caricato (GITHUB_PAT assente): senza, l'elenco dei cantoni accesi non e' affidabile e il push non farebbe partire publish-api.yml"
+          # Il token del push: GITHUB_PAT_NANAKO (AGENTS.md: push, merge e
+          # dispatch), con GITHUB_PAT come riserva — e' quello con cui pushano
+          # su main gli altri produttori del corpus. Mai il GITHUB_TOKEN: non
+          # farebbe partire publish-api.yml.
+          PUSH_TOKEN="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$PUSH_TOKEN" ]; then
+            echo "::error::Remote Config non caricato (GITHUB_PAT_NANAKO e GITHUB_PAT assenti): senza, l'elenco dei cantoni accesi non e' affidabile e il push non farebbe partire publish-api.yml"
             exit 1
           fi
 
@@ -153,7 +158,10 @@ jobs:
           echo "sezioni: $SECTIONS"
 
       # ── Dataset di categoria (D11): letti, mai ricrawlati ────────────────
-      # Uno step per dataset, ognuno soft: vedi l'intestazione.
+      # Uno step per dataset, ognuno soft: vedi l'intestazione. Anche in
+      # dry-run i refresh scrivono le loro cache (senza, il producer non
+      # avrebbe niente da costruire): sono file gitignored sul runner, che non
+      # entrano in nessun commit — in dry-run lo step di commit non gira.
       - name: Fetch fuel prices per canton
         if: steps.sections.outputs.count != '0'
         run: |
@@ -225,8 +233,13 @@ jobs:
           git config user.email "valerielinc@gmail.com"
           git commit -m "Refresh canton hubs"
 
+          PUSH_TOKEN="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$PUSH_TOKEN" ]; then
+            echo "::error::GITHUB_PAT_NANAKO e GITHUB_PAT assenti — un push col GITHUB_TOKEN non farebbe partire publish-api.yml"
+            exit 1
+          fi
           TARGET="${{ github.ref_name }}"
-          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          REMOTE="https://x-access-token:${PUSH_TOKEN}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3 4 5; do
             if git push "$REMOTE" "HEAD:$TARGET"; then
               echo "pushed to $TARGET"

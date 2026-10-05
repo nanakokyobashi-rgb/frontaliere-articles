@@ -82,7 +82,9 @@ function usable(id, dataset, nowMs) {
   }
   const calendarYear = new Date(nowMs).getUTCFullYear();
   if (dataset.year < calendarYear - BLOCK_THRESHOLDS.pensions.maxYearLag) return omitted(id, 'stale', `pension-parameters ${dataset.year} troppo vecchio per il ${calendarYear}`);
-  if (dataset.year > calendarYear + 1) return omitted(id, 'invalid', `pension-parameters ${dataset.year} nel futuro`);
+  // Anno in corso o precedente, come dice la soglia: un dataset dell'anno
+  // prossimo non si pubblica come attuale prima che l'anno cominci.
+  if (dataset.year > calendarYear) return omitted(id, 'invalid', `pension-parameters ${dataset.year} oltre l'anno in corso (${calendarYear})`);
   return null;
 }
 

@@ -7,7 +7,7 @@
  */
 import { noticesFor } from '../canton-notices-data.mjs';
 import { clip, httpsUrlOrNull } from './format.mjs';
-import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, isObj, omitted } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, freshnessProblem, isObj, omitted } from './blocks-common.mjs';
 
 export const NOTICES_BLOCK_ID = 'avvisi-ufficiali';
 
@@ -35,8 +35,10 @@ export function shapeNoticesBlock(dataset, { canton, topic, nowMs }) {
   const oldest = nowMs - th.maxItemAgeDays * DAY_MS;
   const seen = new Set();
   const rows = noticesFor(dataset, canton, { category: topic, limit: 200 })
-    // Un avviso senza data non si puo' dire recente: qui entrano solo i datati.
-    .filter((n) => typeof n.publishedAt === 'string' && Date.parse(n.publishedAt) >= oldest && Date.parse(n.publishedAt) <= nowMs + DAY_MS)
+    // Un avviso senza data non si puo' dire recente, e uno datato nel futuro
+    // non e' ancora uscito: entrano solo i datati fino a ora (piu' lo
+    // sfasamento d'orologio ammesso).
+    .filter((n) => typeof n.publishedAt === 'string' && Date.parse(n.publishedAt) >= oldest && Date.parse(n.publishedAt) <= nowMs + CLOCK_SKEW_MS)
     .map((n) => ({ n, url: httpsUrlOrNull(n.url) }))
     .filter(({ url }) => url)
     .filter(({ url }) => (seen.has(url) ? false : (seen.add(url), true)))

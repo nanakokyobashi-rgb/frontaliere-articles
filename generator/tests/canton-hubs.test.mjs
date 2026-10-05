@@ -26,9 +26,10 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
-import { keywordTopicScore, loadCantonPool, selectCuratedArticles } from '../scripts/lib/canton-hubs/articles.mjs';
-import { BLOCK_THRESHOLDS, DAY_MS, HOUR_MS, OMIT_CODES } from '../scripts/lib/canton-hubs/blocks-common.mjs';
+import { keywordTopicScore, loadCantonPool, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
+import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
+import { shapeRoadEventsBlock } from '../scripts/lib/canton-hubs/blocks-road-events.mjs';
 import { HUB_MIN_CONTENT_WORDS, TOPIC_BLOCKS, buildHubFile, hubContentHash, hubFilePaths, validateHubInput } from '../scripts/lib/canton-hubs/build.mjs';
 import { buildHubIntro, cantonPlace, foreignToponymsInCopy } from '../scripts/lib/canton-hubs/copy.mjs';
 import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
@@ -116,6 +117,9 @@ const CORPUS = [
   article('vivere-a-comune', 'frontaliere', 'Vivere a Castelseprio e lavorare in Ticino da frontaliere', 'Guida pratica: tasse, imposte, pensione, trasporti e benzina per chi si trasferisce.', { cantons: ['TI'], days: 1 }),
   article('bollettino-frontaliere-2026-10-04', 'frontaliere', 'Bollettino del frontaliere: benzina, dogana e cambio', 'Prezzi della benzina e dei carburanti, code in dogana.', { cantons: ['TI'], days: 1 }),
   article('ti-futuro', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte del futuro', 'Imposte e dichiarazione.', { cantons: ['TI'], days: -5 }),
+  // Nove ore nel futuro: oltre lo sfasamento d'orologio ammesso, quindi non ancora
+  // una news (e non lo diventa nemmeno nei run successivi del test di stabilita').
+  article('ti-fra-nove-ore', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte di stasera', 'Imposte e dichiarazione.', { cantons: ['TI'], days: -0.375 }),
   // Multi-label: Ticino e Grigioni.
   article('trasporti-ti-gr', 'svizzera', 'Trasporti pubblici e treni tra Ticino e Grigioni: nuovi abbonamenti', 'Abbonamenti dei trasporti pubblici, treni e autobus fra i due cantoni.', { cantons: ['TI', 'GR'], days: 3 }),
   // Grigioni.
@@ -350,6 +354,15 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
   assert.equal(omittedCode('canton-ti', 'servizi', 'premi-cassa-malati', (d) => { d.services.cantons.TI.blocks.premiums = { available: false, reason: 'x' }; }), 'empty');
   assert.equal(omittedCode('canton-ti', 'mobilita', 'avvisi-ufficiali', (d) => { d.notices.generatedAt = old(BLOCK_THRESHOLDS.notices.maxAgeMs + HOUR_MS); }), 'stale');
   assert.equal(omittedCode('canton-ti', 'mobilita', 'avvisi-ufficiali', (d) => { d.notices.notices.forEach((n) => { n.publishedAt = null; }); }), 'empty');
+  // Un avviso datato nel futuro non e' ancora uscito: non entra, nemmeno di poche ore.
+  assert.equal(omittedCode('canton-ti', 'mobilita', 'avvisi-ufficiali', (d) => { d.notices.notices.forEach((n) => { n.publishedAt = new Date(NOW + 3 * HOUR_MS).toISOString(); }); }), 'empty');
+  // Dataset annuali: anno in corso o precedente, mai il prossimo.
+  const nextYear = new Date(NOW).getUTCFullYear() + 1;
+  assert.equal(omittedCode('canton-ti', 'fisco', 'onere-fiscale', (d) => { d.tax.cantons.TI.burdenPct[String(nextYear)] = d.tax.cantons.TI.burdenPct[String(d.tax.year)]; d.tax.year = nextYear; }), 'invalid');
+  assert.equal(omittedCode('canton-ti', 'fisco', 'imposta-alla-fonte', (d) => { d.tax.year = nextYear; }), 'invalid');
+  assert.equal(omittedCode('canton-ti', 'pensioni', 'parametri-previdenza', (d) => { d.pensions.year = nextYear; }), 'invalid');
+  assert.equal(omittedCode('canton-ti', 'pensioni', 'casse-cantonali', (d) => { d.pensions.year = nextYear; }), 'invalid');
+  assert.equal(omittedCode('canton-ti', 'fisco', 'onere-fiscale', (d) => { d.tax.cantons.TI.burdenPct[String(d.tax.year - 1)] = d.tax.cantons.TI.burdenPct[String(d.tax.year)]; d.tax.year -= 1; }), 'fresh');
 
   // Ogni blocco dichiarato appartiene a un dataset noto e ha un'eta' di conservazione.
   for (const [topic, specs] of Object.entries(TOPIC_BLOCKS)) {
@@ -363,6 +376,43 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
       assert.equal(out.code, 'missing', 'cache assente = missing, per ogni blocco');
     }
   }
+});
+
+test('chiusure e cantieri: oltre il tetto restano le limitazioni in corso e le piu\' imminenti', () => {
+  const at = (days) => new Date(NOW + days * DAY_MS).toISOString();
+  const closure = (id, startDays) => ({ id, canton: 'TI', type: 'chiusura', title: `Chiusura ${id}`, url: null, validFrom: at(startDays), validTo: at(startDays + 30), source: 'fixture', observedAt: at(0) });
+  const dataset = {
+    schemaVersion: 1,
+    generatedAt: at(0),
+    events: [
+      closure('fra-12-giorni', 12), closure('fra-5-giorni', 5), closure('domani', 1),
+      ...[1, 2, 3, 4, 5, 6, 7].map((d) => closure(`in-corso-da-${d}`, -d)),
+      { ...closure('cantiere-in-corso', -2), type: 'cantiere' },
+      { ...closure('oltre-orizzonte', BLOCK_THRESHOLDS.roadEvents.horizonDays + 3) },
+      { ...closure('finita', -20), validTo: at(-1) },
+    ],
+  };
+  const block = shapeRoadEventsBlock(dataset, { canton: 'TI', nowMs: NOW });
+  assert.equal(block.available, true);
+  const labels = block.render('it').items.map((it) => it.label.replace('Chiusura ', ''));
+  assert.equal(labels.length, BLOCK_THRESHOLDS.roadEvents.maxRows);
+  assert.deepEqual(labels, [7, 6, 5, 4, 3, 2, 1].map((d) => `in-corso-da-${d}`).concat('domani'), 'prima in corso, poi imminenti, dal piu\' vicino');
+  assert.ok(!labels.includes('fra-12-giorni') && !labels.includes('oltre-orizzonte') && !labels.includes('finita'));
+  // I conteggi dei fatti chiave restano sul totale attivo, non sulle righe mostrate.
+  assert.deepEqual(block.render('it').keyFacts.map((f) => f.value), ['10', '1']);
+});
+
+test('qualita\' del sidecar: scala dichiarata, nessuna saturazione a 1', () => {
+  assert.equal(sidecarQuality(null), null);
+  assert.equal(sidecarQuality({ _score_breakdown: null }), null);
+  assert.equal(sidecarQuality({ _score_breakdown: { stage: 'x' } }), null);
+  assert.equal(sidecarQuality({ _score_breakdown: { score: 0 } }), 0);
+  assert.equal(sidecarQuality({ _score_breakdown: { score: -3 } }), 0);
+  assert.equal(sidecarQuality({ _score_breakdown: { finalScore: 1 } }), 0.5);
+  // Il punteggio del ranker a cascata non ha tetto: due valori sopra 1 devono restare distinti e ordinati.
+  const low = sidecarQuality({ _score_breakdown: { score: 3 } });
+  const high = sidecarQuality({ _score_breakdown: { score: 9 } });
+  assert.ok(low < high && high < 1, `${low} < ${high} < 1`);
 });
 
 test('un fetch fallito non toglie un blocco ancora valido: si conserva quello pubblicato, entro la sua eta\' massima', () => {
@@ -462,7 +512,8 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   assert.ok(!idsOf(pool).includes('bollettino-frontaliere-2026-10-04'), 'le edizioni datate del bollettino non sono news da promuovere');
 
   assert.deepEqual(idsOf(byTopic.carburanti), ['ti-benzina-prezzi']);
-  assert.deepEqual(idsOf(byTopic.fisco), ['imposta-fonte-ticino'], 'titolo doppio deduplicato, articolo datato nel futuro escluso');
+  assert.deepEqual(idsOf(byTopic.fisco), ['imposta-fonte-ticino'], 'titolo doppio deduplicato, articoli datati nel futuro esclusi (anche di poche ore)');
+  assert.ok(9 * HOUR_MS > CLOCK_SKEW_MS, 'il caso «fra nove ore» deve stare oltre la tolleranza d\'orologio');
   assert.deepEqual(idsOf(byTopic.pensioni), ['avs-rendite-ticino']);
   assert.deepEqual(idsOf(byTopic.mobilita), ['dogana-chiasso-traffico', 'trasporti-ti-gr'], 'a parita\' di tema, prima il piu\' del cantone e il piu\' recente');
   assert.deepEqual(idsOf(byTopic.eventi), ['ti-festival-locarno']);
@@ -510,10 +561,11 @@ test('tetto, ordinamento e qualita\' gia\' calcolata', async () => {
   assert.deepEqual(serial, [...serial].sort(), 'a parita\' di tema vince la freschezza');
   assert.equal(serial[0], 'fisco-00');
 
-  // Due articoli gemelli per tema e data: quello col punteggio di qualita' piu' alto sta davanti.
+  // Due articoli gemelli per tema e data, entrambi con un punteggio del ranker
+  // sopra 1: quello piu' alto sta davanti (un taglio a 1 li metterebbe alla pari).
   const pair = [
-    article('fisco-basso', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte, parte prima', 'Imposte e aliquote.', { cantons: ['TI'], days: 3, quality: 0.1 }),
-    article('fisco-alto', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte, parte seconda', 'Imposte e aliquote.', { cantons: ['TI'], days: 3, quality: 0.95 }),
+    article('fisco-basso', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte, parte prima', 'Imposte e aliquote.', { cantons: ['TI'], days: 3, quality: 2 }),
+    article('fisco-alto', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte, parte seconda', 'Imposte e aliquote.', { cantons: ['TI'], days: 3, quality: 12 }),
   ];
   const ranked = idsOf((await curatedFor('canton-ti', [...CORPUS, ...filler, ...pair])).byTopic.fisco);
   assert.ok(ranked.includes('fisco-alto') && ranked.includes('fisco-basso'));
@@ -821,6 +873,10 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   }
   assert.match(wf, /rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+--section-surfaces/);
   assert.match(wf, /persist-credentials: false/);
+  // Push col PAT della regola di AGENTS.md, con quello degli altri produttori come riserva; mai il GITHUB_TOKEN.
+  assert.match(wf, /PUSH_TOKEN="\$\{GITHUB_PAT_NANAKO:-\$\{GITHUB_PAT:-\}\}"/);
+  assert.match(wf, /REMOTE="https:\/\/x-access-token:\$\{PUSH_TOKEN\}@github\.com\//);
+  assert.doesNotMatch(wf, /x-access-token:\$\{GITHUB_TOKEN\}|secrets\.GITHUB_TOKEN/);
   assert.match(wf, /group: refresh-canton-hubs/);
   // Il producer gira DOPO i refresh e PRIMA del commit; il commit non gira in dry-run.
   const order = ['Fetch fuel prices per canton', 'Generate the canton hubs', 'Commit and push'].map((n) => wf.indexOf(`- name: ${n}`));
