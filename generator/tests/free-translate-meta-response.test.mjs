@@ -130,6 +130,20 @@ describe('translateWithCodexEngine — fail-closed anche sulla meta-risposta', (
 });
 
 describe('detectAiMetaResponse — il gemello corpus del rilevatore', () => {
+  test('«we need to …» apre testi veri; solo l\'input citato con la lingua di arrivo e\' una meta-risposta', () => {
+    for (const legit of [
+      'We need to produce high-quality components for the automotive industry.',
+      'We need to translate our software into German and French.',
+    ]) assert.equal(detectAiMetaResponse(legit), null, legit);
+    assert.equal(detectAiMetaResponse('We need to translate "GL & VAT Accountant" to English.')?.kind, 'agent-narration');
+  });
+
+  test('una citazione nella sorgente non esenta una traduzione che apre con il rifiuto', () => {
+    const source = "Il chatbot risponde «Sorry, I can't help with that.» alle domande fuori tema.";
+    assert.equal(detectAiMetaResponse("Sorry, I can't help with that.", { source })?.kind, 'refusal');
+    assert.equal(detectAiMetaResponse("Sorry, I can't help with that.", { source: "Sorry, I can't help with that." }), null);
+  });
+
   test('il rifiuto e\' riconosciuto qualunque separatore segua le scuse', () => {
     for (const refusal of [
       "Sorry — I can't help with that.", "Sorry – I can't help with that.", "Sorry: I can't help with that.",
