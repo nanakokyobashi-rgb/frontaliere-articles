@@ -68,7 +68,10 @@ const fail = (msg) => {
   process.exit(1);
 };
 
-const isIso = (v) => typeof v === 'string' && Number.isFinite(Date.parse(v));
+// An explicit ISO-8601 instant (the producer writes toISOString()), not whatever
+// Date.parse happens to accept: a locale date would otherwise reach the cache.
+const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(?:Z|[+-]\d{2}:\d{2})$/;
+const isIso = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
 
 const got = await fetchFirstOk(SOURCES);
 if (!got.ok) {

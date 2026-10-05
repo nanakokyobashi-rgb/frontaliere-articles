@@ -30,6 +30,8 @@
     "refresh:events": "node generator/scripts/refresh-events-dataset.mjs",
     "refresh:fuel-cantons": "node generator/scripts/refresh-fuel-cantons.mjs",
     "refresh:road-events": "node generator/scripts/refresh-road-events.mjs",
+    "refresh:canton-notices": "node generator/scripts/refresh-canton-notices.mjs",
+    "refresh:canton-services": "node generator/scripts/refresh-canton-services-data.mjs",
     "test:shell-contract": "npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs"
   }
 }

@@ -55,7 +55,7 @@ import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenWindow } from './lib/rewire-contracts.mjs';
+import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
 import { rankingFromStats, trendFromStats, MIN_SAMPLES_FOR_RANKING } from '../scripts/lib/border-wait-ranking.mjs';
 import { importSpecifiers, relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
@@ -67,16 +67,25 @@ const readFixture = (c) => JSON.parse(read(c.fixture));
 const TODAY = new Date().toISOString().slice(0, 10);
 
 /**
- * Il payload registrato, rimesso in data quando il contratto lo richiede.
- * Hanno un gate di staleness il border-wait window, il dataset carburanti per
- * cantone e road-events; gli altri no.
+ * Il payload registrato, rimesso in data quando il contratto lo richiede:
+ * border-wait window (finestra settimanale), carburanti per cantone e road-events
+ * (`generatedAt`) e i contratti con `freshen` (timestamp traslati o anno
+ * corrente, vedi `freshenRecording`).
  */
 function servable(c) {
   const payload = readFixture(c);
   if (c.id === 'border-wait-window') return freshenWindow(payload, TODAY);
   if (c.id === 'fuel-cantons' || c.id === 'road-events') return freshenGeneratedAt(payload, new Date().toISOString());
-  return payload;
+  return c.freshen ? freshenRecording(c, payload) : payload;
 }
+
+/**
+ * Gli altri contratti che hanno lo STESSO consumatore (l'aggregatore dei
+ * servizi legge quattro artefatti): mentre se ne esercita uno, gli altri tre
+ * vanno serviti dai loro fixture, altrimenti il test leggerebbe la CDN vera e
+ * smetterebbe di essere ermetico.
+ */
+const siblingsOf = (c) => REWIRE_CONTRACTS.filter((o) => o.id !== c.id && o.consumer.refresh === c.consumer.refresh);
 
 /**
  * Messaggio di fallimento che dice la DIREZIONE, non solo che qualcosa non
@@ -148,6 +157,8 @@ async function runRefresh(c, body, { check = true } = {}) {
   const script = copyRefreshTree(root, c.consumer.refresh);
 
   const served = await serve(body);
+  const siblings = await Promise.all(siblingsOf(c).map(async (o) => ({ o, srv: await serve(asBody(servable(o))) })));
+  const siblingEnv = Object.fromEntries(siblings.map(({ o, srv }) => [o.consumer.envUrl, srv.url]));
   try {
     // `spawn` e non `spawnSync`: il server sta in QUESTO processo, e una spawn
     // sincrona blocca l'event loop — la richiesta del figlio non verrebbe mai
@@ -155,7 +166,7 @@ async function runRefresh(c, body, { check = true } = {}) {
     // trovarlo, perche' il sintomo e' «i test sono lenti», non «sbagliati».
     const res = await new Promise((resolve) => {
       const child = spawn(process.execPath, check ? [script, '--check'] : [script], {
-        env: { ...process.env, [c.consumer.envUrl]: served.url },
+        env: { ...process.env, ...siblingEnv, [c.consumer.envUrl]: served.url },
       });
       let out = '';
       child.stdout.on('data', (d) => (out += d));
@@ -169,6 +180,7 @@ async function runRefresh(c, body, { check = true } = {}) {
     return { ...res, root };
   } finally {
     await served.close();
+    await Promise.all(siblings.map(({ srv }) => srv.close()));
   }
 }
 
@@ -188,8 +200,8 @@ const mutated = (c, fn) => {
 test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', () => {
   assert.equal(
     REWIRE_CONTRACTS.length,
-    5,
-    'il REWIRE set e\' di tre artefatti (issue #101) piu\' i dataset carburanti (P9b) e road-events (P9c) per cantone',
+    10,
+    'il REWIRE set e\' di dieci artefatti: i tre della issue #101, i carburanti per cantone (P9b), gli avvisi cantonali (P9g), i quattro input dei servizi (P9f) e road-events (P9c)',
   );
   const missing = [];
   for (const c of REWIRE_CONTRACTS) {
@@ -291,6 +303,17 @@ for (const c of REWIRE_CONTRACTS) {
     assert.equal(status, 0, why(c, `Scrittura fallita:\n${out}`));
     const cache = path.join(root, c.consumer.cache);
     assert.ok(fs.existsSync(cache), why(c, `Uscito 0 senza scrivere ${c.consumer.cache}`));
+    if (c.consumer.view) {
+      // La cache e' una VISTA derivata da piu' artefatti: non puo' essere il
+      // documento scaricato. Si controlla che questo input ci sia entrato.
+      const view = JSON.parse(fs.readFileSync(cache, 'utf8'));
+      assert.equal(view.sources?.[c.consumer.inputKey]?.reachable, true, why(c, `La vista non registra l'input '${c.consumer.inputKey}' come letto:\n${out}`));
+      assert.ok(
+        Object.values(view.cantons ?? {}).some((x) => x.blocks?.[c.consumer.inputKey]?.available),
+        why(c, `Nessun cantone ha il blocco '${c.consumer.inputKey}' disponibile dalla registrazione:\n${out}`),
+      );
+      return;
+    }
     assert.deepEqual(
       JSON.parse(fs.readFileSync(cache, 'utf8')),
       payload,
@@ -530,6 +553,12 @@ const MUTATIONS = {
       'Un orologio sbagliato del producer passerebbe il gate di eta\' per sempre.',
     ],
     [
+      'data locale invece di ISO',
+      mutated(c, (p) => { p.events[0].observedAt = 'Mon, 05 Oct 2026 10:00:00 GMT'; }),
+      /observedAt is not an ISO date/,
+      'Il contratto dichiara istanti ISO: una data locale accettata da Date.parse passerebbe ambigua.',
+    ],
+    [
       'id duplicato',
       mutated(c, (p) => { p.events[1].id = p.events[0].id; }),
       /is duplicated/,
@@ -589,10 +618,74 @@ const MUTATIONS = {
       'Tutta la selezione del weekend passa da startDate: senza, ogni evento e\' fuori finestra.',
     ],
   ],
+  'canton-notices': (c) => [
+    ['notices[] assente', mutated(c, (p) => { delete p.notices; }), /has no notices\[\] array/, 'Senza la lista gli hub non hanno avvisi da mostrare.'],
+    [
+      'dataset troncato sotto il minimo',
+      mutated(c, (p) => { p.notices = p.notices.slice(0, 10); }),
+      /carries 10 notices/,
+      'Un publish parziale sembrerebbe un elenco valido con pochi avvisi.',
+    ],
+    [
+      'canton che non e\' un gruppo URL',
+      mutated(c, (p) => { p.notices[0].canton = 'BS'; }),
+      /is not a URL group/,
+      'BS e BL stanno nel gruppo BASILEA: un codice reale al posto del gruppo non trova nessun hub.',
+    ],
+    [
+      'categoria fuori dagli hub',
+      mutated(c, (p) => { p.notices[0].category = 'cronaca'; }),
+      /is not a hub category/,
+      'Una categoria nuova finirebbe in un blocco che non esiste.',
+    ],
+    [
+      'publishedAt in formato locale',
+      mutated(c, (p) => { p.notices[0].publishedAt = '02.10.2026'; }),
+      /neither null nor an ISO date/,
+      'L\'ordinamento per data e\' lessicografico su ISO: dd.mm.yyyy lo romperebbe.',
+    ],
+    [
+      'crawler fermo da giorni',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() - 10 * 86_400_000).toISOString(); }),
+      /days old/,
+      'Il produttore fermo e\' il fallimento che sembra un successo: avvisi vecchi presentati come attuali.',
+    ],
+    [
+      'id duplicato',
+      mutated(c, (p) => { p.notices[1].id = p.notices[0].id; }),
+      /duplicate id/,
+      'L\'id e\' la chiave di dedup degli hub: due voci con lo stesso id ne nascondono una.',
+    ],
+  ],
+  'health-premiums': (c) => [
+    ['quotes{} assente', mutated(c, (p) => { delete p.quotes; }), /quotes\{\} missing/, 'Senza quotes non c\'e\' nessun premio da riassumere.'],
+    ['year non intero', mutated(c, (p) => { p.year = String(p.year); }), /year is not an integer/, 'L\'anno decide se i premi sono quelli in vigore.'],
+  ],
+  'plate-auctions': (c) => [
+    ['schema cambiato', mutated(c, (p) => { p.schema = 2; }), /schema is 2/, 'Uno schema nuovo va letto apposta, non indovinato.'],
+    ['auctions[] assente', mutated(c, (p) => { delete p.auctions; }), /auctions\[\] missing/, 'Zero aste lette come «nessuna asta attiva».'],
+  ],
+  'pharmacy-duty-cantons': (c) => [
+    ['schemaVersion cambiato', mutated(c, (p) => { p.schemaVersion = 2; }), /schemaVersion is 2/, 'Uno schema nuovo va letto apposta.'],
+    [
+      'duties non e\' una lista',
+      mutated(c, (p) => { p.cantons.TI.duties = {}; }),
+      /TI\.duties\[\] missing/,
+      'I turni sono la sola cosa che il blocco mostra.',
+    ],
+  ],
+  'weather-snapshot': (c) => [
+    ['cities{} vuoto', mutated(c, (p) => { p.cities = {}; }), /cities\{\} missing or empty/, 'Zero citta\' = blocco meteo sparito senza errore.'],
+    ['generatedAt non data', mutated(c, (p) => { p.generatedAt = 'oggi'; }), /generatedAt is not a date/, 'La freschezza del meteo si misura su questo campo.'],
+  ],
 };
 
+test('ogni contratto ha i suoi casi di deformazione', () => {
+  assert.deepEqual(REWIRE_CONTRACTS.map((c) => c.id).filter((id) => typeof MUTATIONS[id] !== 'function'), []);
+});
+
 for (const c of REWIRE_CONTRACTS) {
-  for (const [name, body, expected, rationale] of MUTATIONS[c.id](c)) {
+  for (const [name, body, expected, rationale] of MUTATIONS[c.id]?.(c) ?? []) {
     test(`[${c.id}] rifiuta: ${name}`, async () => {
       const { status, out } = await runRefresh(c, body);
       assert.notEqual(status, 0, why(c, `Deformazione ACCETTATA: ${name}.\n${rationale}\n\n${out}`));
