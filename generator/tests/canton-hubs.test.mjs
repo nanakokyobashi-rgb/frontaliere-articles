@@ -642,6 +642,22 @@ test('eventi: conta l\'intersezione con la finestra, non solo il giorno d\'inizi
   assert.equal(block.render('it').keyFacts[0].value, '5');
 });
 
+test('eventi: la stessa voce da due agende e\' una riga, due eventi omonimi in due comuni sono due righe', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const ev = (id, comune, extra = {}) => ({ id, title: 'Mercato settimanale', startDate: tomorrow, canton: 'TI', comune, ...extra });
+  const dataset = {
+    generatedAt: new Date(NOW - HOUR_MS).toISOString(),
+    events: [
+      ev('tio:1', 'Lugano'), ev('guidle:9', 'Lugano', { title: 'MERCATO  settimanale' }),
+      ev('tio:2', 'Bellinzona'), ev('tio:3', 'Locarno'),
+      ev('tio:4', undefined, { venue: 'Piazza Grande' }), ev('guidle:5', undefined, { venue: 'Piazza Grande' }),
+    ],
+  };
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.deepEqual(block.render('it').items.map((it) => it.detail).sort(), ['Bellinzona', 'Locarno', 'Lugano', 'Piazza Grande']);
+});
+
 test('meteo: basta la previsione di oggi, come nella vista dei servizi', () => {
   const view = (cities) => ({
     schemaVersion: 1,

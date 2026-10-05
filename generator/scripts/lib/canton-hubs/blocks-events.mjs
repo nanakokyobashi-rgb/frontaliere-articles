@@ -78,9 +78,12 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
       || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
       || a.title.localeCompare(b.title)
       || String(a.id ?? '').localeCompare(String(b.id ?? '')))
-    // Lo stesso evento arriva da piu' agende: una riga per titolo e giorno.
+    // Lo stesso evento arriva da piu' agende: una riga per giorno, titolo e
+    // LUOGO. Il luogo sta nella chiave perche' due eventi omonimi lo stesso
+    // giorno in due comuni (un mercato, una festa nazionale) sono due eventi.
     .filter((e) => {
-      const key = `${e.firstUsefulDay}|${foldForMatch(e.title).replace(/[^a-z0-9]+/g, ' ').trim()}`;
+      const fold = (v) => foldForMatch(typeof v === 'string' ? v : '').replace(/[^a-z0-9]+/g, ' ').trim();
+      const key = `${e.firstUsefulDay}|${fold(e.title)}|${fold(e.comune) || fold(e.venue)}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
