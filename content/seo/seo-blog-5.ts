@@ -99575,6 +99575,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-gallerie-castelletto-sesto-calende': {
+    title: 'Gallerie: due notti chiuso Castelletto-Sesto Calende',
+    description: 'Manutenzione alle gallerie dell\'autostrada: chiuso per due notti il tratto tra Castelletto e Sesto Calende. Stop anche a Castronno-Cavaria e Solbiate-Varese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallerie, notti, chiuso, castelletto-sesto',
+    ogTitle: 'Castelletto-Sesto Calende chiuso per due notti',
+    ogDescription: 'Due notti di chiusura per manutenzione alle gallerie tra Castelletto e Sesto Calende. La notizia segnala anche i tratti Castronno-Cavaria e Solbiate-Varese: ecco i soli dati disponibili per chi attraversa la zona.',
+    canonicalPath: '/articoli-frontaliere/gallerie-castelletto-sesto-calende/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gallerie: due notti chiuso Castelletto-Sesto Calende",
+      "description": "Manutenzione alle gallerie dell'autostrada: chiuso per due notti il tratto tra Castelletto e Sesto Calende. Stop anche a Castronno-Cavaria e Solbiate-Varese.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/gallerie-castelletto-sesto-calende.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autostrada con gallerie nell'area di Varese"
+      },
+      "datePublished": "2026-10-05T16:57:29+00:00",
+      "dateModified": "2026-10-05T16:57:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gallerie-castelletto-sesto-calende/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;
