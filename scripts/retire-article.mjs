@@ -274,9 +274,110 @@ function registryBlocks(file) {
   return out;
 }
 
-/** Il valore letterale del campo `image` di un blocco di registro, o undefined. */
-function registryImage(block) {
-  return (block.match(/\bimage:\s*(['"`])([^'"`]*)\1/) ?? [])[2];
+/** Maschera stringhe e commenti lasciando intatti gli offset del sorgente. */
+function registryCodeOnly(source) {
+  const chars = source.split('');
+  const blank = (index) => {
+    if (source[index] !== '\n' && source[index] !== '\r') chars[index] = ' ';
+  };
+  let quote = null;
+  for (let i = 0; i < source.length; i += 1) {
+    const ch = source[i];
+    if (quote !== null) {
+      blank(i);
+      if (ch === '\\') {
+        if (i + 1 < source.length) blank(i + 1);
+        i += 1;
+      } else if (ch === quote) quote = null;
+      continue;
+    }
+    if (ch === '/' && source[i + 1] === '/') {
+      blank(i);
+      blank(i + 1);
+      i += 2;
+      while (i < source.length && source[i] !== '\n') {
+        blank(i);
+        i += 1;
+      }
+      i -= 1;
+      continue;
+    }
+    if (ch === '/' && source[i + 1] === '*') {
+      const end = source.indexOf('*/', i + 2);
+      if (end === -1) throw new Error('commento non terminato nel blocco registry');
+      for (let j = i; j < end + 2; j += 1) blank(j);
+      i = end + 1;
+      continue;
+    }
+    if (ch === "'" || ch === '"' || ch === '`') {
+      quote = ch;
+      blank(i);
+    }
+  }
+  if (quote !== null) throw new Error('stringa non terminata nel blocco registry');
+  return chars.join('');
+}
+
+/**
+ * Tutte le proprietà `image` del record, con profondità e letterale statico se
+ * il valore è una singola stringa non escapata. I commenti e le stringhe
+ * contenute in altri campi non possono fingersi proprietà.
+ */
+function registryImageMatches(block) {
+  const code = registryCodeOnly(block);
+  const matches = [];
+  const property = /(?<![\w$])image(?![\w$])\s*:/g;
+  let depth = 0;
+  let scannedTo = 0;
+  let match;
+  while ((match = property.exec(code)) !== null) {
+    for (let i = scannedTo; i < match.index; i += 1) {
+      if (code[i] === '{') depth += 1;
+      else if (code[i] === '}') depth -= 1;
+      if (depth < 0) throw new Error('graffe sbilanciate nel blocco registry');
+    }
+
+    let valueStart = property.lastIndex;
+    while (valueStart < block.length && /\s/.test(block[valueStart])) valueStart += 1;
+    const quote = block[valueStart];
+    let literal;
+    let staticLiteral = false;
+    if (quote === "'" || quote === '"') {
+      let end = valueStart + 1;
+      for (; end < block.length; end += 1) {
+        if (block[end] === '\\') { end += 1; continue; }
+        if (block[end] === quote) break;
+      }
+      if (end < block.length) {
+        const raw = block.slice(valueStart + 1, end);
+        let after = end + 1;
+        while (after < code.length && /\s/.test(code[after])) after += 1;
+        if (!raw.includes('\\') && (code[after] === ',' || code[after] === '}')) {
+          literal = raw;
+          staticLiteral = true;
+        }
+      }
+    }
+    matches.push({ depth, literal: staticLiteral ? literal : undefined });
+    scannedTo = property.lastIndex;
+  }
+  return matches;
+}
+
+/** Unica proprietà `image`, al livello del record, come stringa statica. */
+function registryImageLiteral(block, id) {
+  const matches = registryImageMatches(block);
+  if (matches.length !== 1) {
+    throw new Error(`registry ${id}: attesa una sola proprietà image, trovate ${matches.length}`);
+  }
+  const [match] = matches;
+  if (match.depth !== 1) {
+    throw new Error(`registry ${id}: proprietà image annidata (profondità ${match.depth})`);
+  }
+  if (typeof match.literal !== 'string') {
+    throw new Error(`registry ${id}: image non è una stringa statica letterale`);
+  }
+  return match.literal;
 }
 
 /**
@@ -291,7 +392,7 @@ function coverKeysInUse(excludeId) {
   for (const cfg of Object.values(SECTIONS)) {
     for (const { id, block } of registryBlocks(cfg.registryFile)) {
       if (id === excludeId) continue;
-      const key = coverKey(registryImage(block));
+      const key = coverKey(registryImageLiteral(block, id));
       if (!key) continue;
       if (!inUse.has(key)) inUse.set(key, []);
       inUse.get(key).push(id);
@@ -473,11 +574,15 @@ function main() {
   //     copertina, miniatura, credito (P14) e voce di catalogo descrivono il
   //     file, non l'articolo, e servono all'articolo che resta.
   const retiredBlock = registryBlocks(cfg.registryFile).find((b) => b.id === id);
-  const ownKey = coverKey(retiredBlock && registryImage(retiredBlock.block)) ?? id;
+  if (!retiredBlock) throw new Error(`registry ${cfg.registryFile}: blocco di ${id} non trovato`);
+  const ownKey = coverKey(registryImageLiteral(retiredBlock.block, id));
   const inUse = coverKeysInUse(id);
   /** @type {string[]} */
   const removableCovers = [];
-  for (const key of new Set([ownKey, id])) {
+  // L'id resta un candidato indipendente solo dopo aver provato che il record
+  // espone una proprietà image statica. Se image è dinamica/assente/ambigua,
+  // registryImageLiteral ha già fermato il piano invece di indovinare l'id.
+  for (const key of new Set([...(ownKey ? [ownKey] : []), id])) {
     const users = inUse.get(key);
     if (users) {
       planned.push({ file: `public/images/blog/${key}.webp`, what: `copertina ${key} conservata: usata da ${users.join(', ')}`, kept: true });

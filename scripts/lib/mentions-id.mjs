@@ -51,15 +51,28 @@
 /** Cartella delle copertine: `<COVER_DIR><chiave>.<ext>` è un file, non un id. */
 const COVER_DIR = '/images/blog/';
 
+/**
+ * La menzione è una chiave di file cover, non un id articolo, solo quando è
+ * immediatamente dentro `/images/blog/` e seguita dall'estensione. Il prefisso
+ * `blog-` è una chiave SEO valida anche senza un path e quindi va escluso solo
+ * in questa forma di percorso.
+ */
+export function isCoverPathMention(text, id, index, mention) {
+  if (typeof text !== 'string' || typeof id !== 'string' || !Number.isInteger(index)) return false;
+  if (mention !== id && mention !== `blog-${id}`) return false;
+  if (index < COVER_DIR.length) return false;
+  return text.slice(index - COVER_DIR.length, index) === COVER_DIR
+    && text[index + mention.length] === '.';
+}
+
 export function mentionsId(text, id) {
   if (typeof id !== 'string' || id.length === 0) return false;
   const re = new RegExp(`[a-z0-9-]*${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[a-z0-9-]*`, 'g');
   for (const m of text.matchAll(re)) {
+    if (isCoverPathMention(text, id, m.index, m[0])) continue;
     if (m[0] === `blog-${id}`) return true;
     if (m[0] !== id) continue;
-    const isCoverPath = text.slice(Math.max(0, m.index - COVER_DIR.length), m.index) === COVER_DIR
-      && text[m.index + id.length] === '.';
-    if (!isCoverPath) return true;
+    return true;
   }
   return false;
 }

@@ -47,7 +47,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeOnly } from './lib/reachable-source.mjs';
-import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
+import { isCoverPathMention, mentionsId } from '../../scripts/lib/mentions-id.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import {
@@ -130,6 +130,7 @@ test('il percorso di una copertina condivisa non è un residuo dell\'id', () => 
     `    image: '/images/blog/${ID}.webp',\n`,
     `  url: 'https://cdn.example.org/images/blog/${ID}.webp',\n`,
     `  image: '/images/blog/thumbnails/${ID}-480w.webp',\n`,
+    `  image: '/images/blog/blog-${ID}.webp',\n`,
   ]) {
     assert.equal(mentionsId(text, ID), false, `falso residuo su: ${text.trim()}`);
   }
@@ -142,6 +143,18 @@ test('il percorso di una copertina condivisa non è un residuo dell\'id', () => 
   ]) {
     assert.equal(mentionsId(text, ID), true, `residuo non visto in: ${text.trim()}`);
   }
+});
+
+test('isCoverPathMention precede il riconoscimento della chiave SEO blog-<id>', () => {
+  const cover = `/images/blog/blog-${ID}.webp`;
+  const mention = `blog-${ID}`;
+  const index = cover.indexOf(mention);
+  assert.equal(isCoverPathMention(cover, ID, index, mention), true);
+  assert.equal(mentionsId(cover, ID), false);
+
+  // Fuori dal path immagini, la stessa forma resta una chiave SEO dell'articolo.
+  assert.equal(isCoverPathMention(mention, ID, 0, mention), false);
+  assert.equal(mentionsId(`'${mention}': { title: 'titolo' }`, ID), true);
 });
 
 test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {

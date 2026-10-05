@@ -113,6 +113,14 @@ function retire(root, ...extra) {
   return spawnSync(process.execPath, [path.join(root, 'scripts/retire-article.mjs'), RETIRED, '--winner', WINNER, ...extra], { cwd: root, encoding: 'utf8' });
 }
 
+function replaceRetiredImageProperty(root, replacement) {
+  const registry = path.join(root, 'content/swiss-articles-data.ts');
+  const source = fs.readFileSync(registry, 'utf8');
+  const property = `    image: '/images/blog/${RETIRED}.webp',\n`;
+  assert.ok(source.includes(property), 'la fixture deve contenere il campo image statico atteso');
+  fs.writeFileSync(registry, source.replace(property, replacement));
+}
+
 const exists = (root, rel) => fs.existsSync(path.join(root, rel));
 const catalogPaths = (root) => JSON.parse(fs.readFileSync(path.join(root, 'public/data/journalist-image-catalog.json'), 'utf-8')).map((e) => e.path);
 const coverFiles = (key) => [
@@ -225,5 +233,53 @@ test('ritirare chi riusa la copertina di un altro non tocca nulla dell\'altro', 
     assertCoverGone(root, RETIRED);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il retirement accetta una sola image letterale e ignora stringhe/commenti', () => {
+  const root = corpusTree();
+  try {
+    replaceRetiredImageProperty(root, [
+      `    note: "image: '/images/blog/non-e-una-cover.webp'",`,
+      '    // image: getDynamicCover(),',
+      `    image: '/images/blog/${RETIRED}.webp',`,
+      '',
+    ].join('\n'));
+    const result = retire(root, '--dry-run');
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, new RegExp(`public/images/blog/${RETIRED}\\.webp`));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il retirement rifiuta image dinamiche, assenti, duplicate o annidate prima di scrivere', () => {
+  const invalidProperties = [
+    ['dinamica', `    image: coverFor('${RETIRED}'),\n`],
+    ['template dinamico', "    image: `/images/blog/${RETIRED}.webp`,\n"],
+    ['assente', ''],
+    ['duplicata', [
+      `    image: '/images/blog/${RETIRED}.webp',`,
+      `    image: '/images/blog/${WINNER}.webp',`,
+      '',
+    ].join('\n')],
+    ['annidata', `    metadata: { image: '/images/blog/${RETIRED}.webp' },\n`],
+  ];
+
+  for (const [label, replacement] of invalidProperties) {
+    const root = corpusTree();
+    try {
+      replaceRetiredImageProperty(root, replacement);
+      const registry = path.join(root, 'content/swiss-articles-data.ts');
+      const before = fs.readFileSync(registry, 'utf8');
+      const result = retire(root);
+      assert.notEqual(result.status, 0, `${label}: un blocco image ambiguo non deve pianificare la rimozione`);
+      assert.match(`${result.stdout}\n${result.stderr}`, /registry ritirata-ch:.*image/i, label);
+      assert.equal(fs.readFileSync(registry, 'utf8'), before, `${label}: il registro non va riscritto`);
+      assert.ok(exists(root, `content/blog-body-ch/it/${RETIRED}.ts`), `${label}: il corpo ritirato deve restare`);
+      assertCoverKept(root, RETIRED);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   }
 });

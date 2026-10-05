@@ -28,6 +28,20 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+const TESTS_WORKFLOW = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
+
+test('tests.yml recovery dispatch richiede e passa la base SHA effettiva ai gate diff-scoped', () => {
+  const dispatchStart = TESTS_WORKFLOW.indexOf('  workflow_dispatch:');
+  const permissionsStart = TESTS_WORKFLOW.indexOf('\npermissions:', dispatchStart);
+  assert.ok(dispatchStart >= 0 && permissionsStart > dispatchStart, 'workflow_dispatch non trovato');
+  const dispatch = TESTS_WORKFLOW.slice(dispatchStart, permissionsStart);
+  assert.match(dispatch, /base_sha:\s*\n\s*description:.*base della PR[\s\S]*?required: false[\s\S]*?type: string/);
+  assert.match(TESTS_WORKFLOW, /github\.event_name == 'workflow_dispatch' && inputs\.pr_number != ''/);
+  assert.match(TESTS_WORKFLOW, /rifiuto il fallback a origin\/main/);
+
+  const baseBindings = TESTS_WORKFLOW.match(/BASE_SHA: \$\{\{ inputs\.base_sha \|\| github\.event\.pull_request\.base\.sha \}\}/g) ?? [];
+  assert.equal(baseBindings.length, 2, 'baseline e twin-census devono ricevere entrambi la base esplicita');
+});
 
 /** Lo sha del blob git di un contenuto: lo stesso nei due repo se i byte sono uguali. */
 const blobSha = (body) =>

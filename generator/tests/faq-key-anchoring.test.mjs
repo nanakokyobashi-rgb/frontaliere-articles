@@ -52,6 +52,7 @@ import { fileURLToPath } from 'node:url';
 import * as batch from '../scripts/batch-add-faq-to-articles.mjs';
 import * as fixLocales from '../scripts/fix-faq-locales.mjs';
 import { faqLineRe, faqPresentForId } from '../scripts/lib/prompt-placeholder-guard.mjs';
+import { escapeRegExpLiteral } from '../scripts/lib/escape-regexp.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 
@@ -212,4 +213,21 @@ test('repair: lo script passa l id alle due funzioni ancorate', () => {
     !/'blog\\\.article\\\.\[\^'\]\+\\\.faq'\\s\*:\\s\*'\(\(\?:/.test(src),
     'regex .faq non ancorata all id rimasta nello script',
   );
+});
+
+test('repair: cleanBody1 usa l escape condiviso dell id, senza allargare body1', () => {
+  const src = fs.readFileSync(path.join(QUI, '..', 'scripts', 'repair-prompt-placeholders.mjs'), 'utf-8');
+  const start = src.indexOf('function cleanBody1(');
+  const end = src.indexOf('\n}\n', start);
+  assert.ok(start >= 0 && end > start, 'cleanBody1 non trovato nello script');
+  const cleanBody1 = src.slice(start, end);
+  assert.match(src, /import\s+\{\s*escapeRegExpLiteral\s*\}\s+from\s+'\.\/lib\/escape-regexp\.mjs'/);
+  assert.match(cleanBody1, /new RegExp\([\s\S]*escapeRegExpLiteral\(String\(id\)\)[\s\S]*\)\.exec\(src\)/);
+
+  // `a.c` deve indicizzare la propria chiave; senza escape il punto matcha
+  // anche `abc` e cleanBody1 può leggere un body diverso da quello richiesto.
+  const id = { toString: () => 'a.c' };
+  const body1Re = new RegExp(`'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\.body1'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`);
+  const bodies = "'blog.article.a.c.body1': 'corpo corretto', 'blog.article.abc.body1': 'corpo sbagliato'";
+  assert.equal(body1Re.exec(bodies)?.[1], 'corpo corretto');
 });
