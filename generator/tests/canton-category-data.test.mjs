@@ -137,6 +137,10 @@ test('contratto per voce: turno con date illeggibili, URL senza host, cantone me
   const duties = recording('pharmacy-duty-cantons', NOW);
   duties.cantons.TI.duties[0].startsAt = 'domani';
   assert.throws(() => assertPharmacyDutyCantonsShape(duties), /no valid startsAt < endsAt/);
+  // un numero JSON non e' un timestamp, anche se Date.parse lo accetterebbe
+  const numeric = recording('pharmacy-duty-cantons', NOW);
+  numeric.cantons.TI.duties[0].startsAt = 2026;
+  assert.throws(() => assertPharmacyDutyCantonsShape(numeric), /no valid startsAt < endsAt/);
 
   const notices = recording('canton-notices', NOW);
   notices.notices[0].url = 'https:///amtsmitteilungen/1';

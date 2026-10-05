@@ -70,6 +70,12 @@ const WEATHER_IT_CITIES = new Set(['como', 'varese', 'lecco']);
 
 export class ShapeError extends Error {}
 
+const ISO_TIMESTAMP = /^\d{4}-\d\d-\d\dT\d\d:\d\d(?::\d\d(?:\.\d+)?)?(?:Z|[+-]\d\d:\d\d)$/;
+/** Millisecondi di un timestamp ISO 8601 con fuso; NaN per qualunque altra cosa. */
+function isoTimestampMs(value) {
+  return typeof value === 'string' && ISO_TIMESTAMP.test(value) ? Date.parse(value) : NaN;
+}
+
 /**
  * Gruppo URL → cantoni membri: la stessa tabella di
  * `generator/data/canton-url-slugs.json` (`cantons` + `cantonGroups`), qui
@@ -196,8 +202,10 @@ export function assertPharmacyDutyCantonsShape(doc) {
     // Ogni turno, non solo la lista: un turno con date illeggibili verrebbe
     // ordinato con NaN e pubblicato come disponibile.
     c.duties.forEach((d, i) => {
-      const start = Date.parse(d?.startsAt ?? '');
-      const end = Date.parse(d?.endsAt ?? '');
+      // Solo stringhe ISO con ora e fuso: Date.parse convertirebbe in silenzio
+      // numeri e altri valori JSON, che poi finirebbero tali e quali nella vista.
+      const start = isoTimestampMs(d?.startsAt);
+      const end = isoTimestampMs(d?.endsAt);
       if (typeof d?.pharmacy !== 'string' || !d.pharmacy.trim()) throw new ShapeError(`pharmacy-duty-cantons: ${g}.duties[${i}].pharmacy missing`);
       if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) {
         throw new ShapeError(`pharmacy-duty-cantons: ${g}.duties[${i}] has no valid startsAt < endsAt`);
@@ -221,7 +229,12 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
   // e tagliare una lista disordinata scarterebbe i turni piu' vicini.
   const upcoming = c.duties
     .filter((d) => Date.parse(d.endsAt) > nowMs)
-    .sort((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt) || Date.parse(a.endsAt) - Date.parse(b.endsAt))
+    .sort(
+      (a, b) =>
+        Date.parse(a.startsAt) - Date.parse(b.startsAt) ||
+        Date.parse(a.endsAt) - Date.parse(b.endsAt) ||
+        String(a.pharmacy).localeCompare(String(b.pharmacy)),
+    )
     .slice(0, MAX_DUTIES);
   if (!upcoming.length) return unavailable('nessun turno in corso o in arrivo nella finestra pubblicata');
   return {
@@ -229,7 +242,15 @@ export function shapePharmacyDuties(doc, group, { nowMs = Date.now() } = {}) {
     fetchedAt: c.fetchedAt ?? null,
     sourceUrl: c.sourceUrl ?? null,
     dutyHubPath: doc.dutyHubPath ?? null,
-    duties: upcoming.map((d) => ({ pharmacy: d.pharmacy, city: d.city ?? null, coverageName: d.coverageName ?? null, dutyType: d.dutyType ?? null, startsAt: d.startsAt, endsAt: d.endsAt })),
+    duties: upcoming.map((d) => ({
+      pharmacy: d.pharmacy,
+      city: typeof d.city === 'string' ? d.city : null,
+      coverageName: typeof d.coverageName === 'string' ? d.coverageName : null,
+      dutyType: typeof d.dutyType === 'string' ? d.dutyType : null,
+      // normalizzati: nella vista escono solo timestamp UTC validati
+      startsAt: new Date(Date.parse(d.startsAt)).toISOString(),
+      endsAt: new Date(Date.parse(d.endsAt)).toISOString(),
+    })),
   };
 }
 

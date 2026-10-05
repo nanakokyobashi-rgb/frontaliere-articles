@@ -86,7 +86,8 @@ const dateKey = (n) => String(n.publishedAt ?? '');
  * recente; quelli senza data in coda. E' la lettura che faranno gli hub.
  */
 export function noticesFor(payload, canton, { category = null, limit = 10 } = {}) {
-  const max = Number.isFinite(limit) ? Math.max(0, Math.floor(limit)) : 10;
+  const n = Number(limit);
+  const max = Number.isFinite(n) ? Math.max(0, Math.floor(n)) : 10;
   return (payload?.notices ?? [])
     .filter((n) => n.canton === canton && (!category || n.category === category))
     .sort((a, b) => (a.publishedAt === null) - (b.publishedAt === null) || dateKey(b).localeCompare(dateKey(a)))
