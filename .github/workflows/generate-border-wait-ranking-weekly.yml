@@ -263,11 +263,17 @@ jobs:
             COMMIT_MESSAGE="Weekly border-wait ranking digest refresh"
             # Keep an interrupted registration marker with the partial writes;
             # the next run needs the evidence to refuse or repair the split.
+            # The evergreen refresh also bumps the registry freshness and the
+            # NewsArticle dateModified. Leaving either file unstaged makes a
+            # concurrent push retry's pull --rebase refuse the dirty worktree,
+            # losing the digest commit after the producer already succeeded.
             git add public/data/border-wait-ranking.json \
                     content/blog-body/it/classifica-dogane-ticino.ts \
                     content/blog-body/en/classifica-dogane-ticino.ts \
                     content/blog-body/de/classifica-dogane-ticino.ts \
-                    content/blog-body/fr/classifica-dogane-ticino.ts
+                    content/blog-body/fr/classifica-dogane-ticino.ts \
+                    content/blog-articles-data.ts \
+                    content/seo/seo-blog-5.ts
             # Quote the pathspec so a missing file cannot expand into an empty
             # argument, and -A also stages marker deletions.
             if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then

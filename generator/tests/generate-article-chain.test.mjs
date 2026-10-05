@@ -1012,6 +1012,23 @@ test('tutti i writer deterministici dei body bloccano il commit su localizzazion
   }
 });
 
+test('il refresh border-wait committa anche i metadati evergreen che aggiorna', () => {
+  const commit = sliceBetween(
+    BORDER_WAIT_WF,
+    '      - name: Commit and push',
+    '      - name: Summary',
+  );
+  const stageAt = commit.indexOf('git add public/data/border-wait-ranking.json');
+  assert.notEqual(stageAt, -1, 'border-wait: staging dell output principale sparito');
+  const stage = commit.slice(stageAt, commit.indexOf('\n          if git diff --cached --quiet;', stageAt));
+  for (const path of ['content/blog-articles-data.ts', 'content/seo/seo-blog-5.ts']) {
+    assert.ok(
+      stage.includes(path),
+      `border-wait: il commit non include ${path}, scritto dal refresh evergreen`,
+    );
+  }
+});
+
 // ── L'ANELLO CHE MANCAVA: il dispatch del successore (2026-08-18) ────────────
 //
 // Il buco misurato: 6,8h di tempo davvero morto su 50,2h (14%), perche' un
