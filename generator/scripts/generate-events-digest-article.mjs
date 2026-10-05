@@ -13,16 +13,25 @@
  * repo"). The always-fresh per-weekend surface stays the SSG digest landing pages
  * (`/eventi/ticino/questo-weekend/`), which this article links to.
  *
+ * Per canton (P9a, sezioni cantonali): `--canton <CODE>` (or
+ * `EVENTS_DIGEST_CANTON=<CODE>`) builds that canton's own evergreen digest,
+ * `eventi-weekend-<it slug>` (identity table `CANTON_DIGEST_ARTICLES` in
+ * lib/events-digest-content.mjs; half-cantons map onto their URL group).
+ * Without it the script does exactly what it always did: the Ticino digest
+ * `eventi-weekend-ticino`. refresh-events-digest.yml still runs only that one;
+ * the other cantons are switched on by the section rollout, not here.
+ *
  * Usage:
- *   node scripts/generate-events-digest-article.mjs            # register or refresh
- *   DRY_RUN=1 node scripts/generate-events-digest-article.mjs  # plan only, no writes
- *   TODAY_ISO=2027-01-01 node scripts/...                      # pin "today" (tests/CI)
+ *   node scripts/generate-events-digest-article.mjs                 # Ticino: register or refresh
+ *   node scripts/generate-events-digest-article.mjs --canton GR     # Graubünden digest
+ *   DRY_RUN=1 node scripts/generate-events-digest-article.mjs       # plan only, no writes
+ *   TODAY_ISO=2027-01-01 node scripts/...                           # pin "today" (tests/CI)
  */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeFileSync, mkdirSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
 import { loadEventsDataset, isoDay } from './lib/events-utils.mjs';
-import { buildWeekendDigestArticle } from './lib/events-digest-content.mjs';
+import { buildWeekendDigestArticle, resolveDigestCanton, CANTON_DIGEST_ARTICLES } from './lib/events-digest-content.mjs';
 import {
   registerArticleFiles,
   checkArticleIdExists,
@@ -74,13 +83,49 @@ const STATIC_META = {
   },
 };
 
+/**
+ * Evergreen metadata of a non-Ticino canton digest, from the canton's
+ * "in <canton>" phrase (registered once, never refreshed, like STATIC_META).
+ * The cover is the site-wide fallback place image, the same one the other
+ * producers fall back to (publish-journalist-article.mjs STATIC_FALLBACK_IMAGE).
+ */
+export function staticMetaForCanton(groupKey) {
+  if (groupKey === 'TI') return STATIC_META;
+  const place = CANTON_DIGEST_ARTICLES[groupKey].place.it;
+  return {
+    ...STATIC_META,
+    seo: {
+      title: `Eventi del weekend ${place}: cosa fare`,
+      description: `Agenda degli eventi del weekend ${place}: concerti, mostre, feste e mercati, comune per comune, aggiornata ogni giorno.`,
+      keywords: `eventi ${place}, eventi weekend ${place}, cosa fare ${place}, agenda eventi ${place}`,
+      ogTitle: `Eventi del weekend ${place}`,
+      ogDescription: `Concerti, mostre, feste e mercati questo weekend ${place}, comune per comune. Aggiornato ogni giorno.`,
+      headline: `Eventi del weekend ${place}: cosa fare sabato e domenica`,
+      breadcrumbName: 'Eventi del weekend',
+    },
+  };
+}
+
+/**
+ * Canton requested on the command line (`--canton GR` / `--canton=GR`) or
+ * via EVENTS_DIGEST_CANTON; undefined means Ticino. Validated by
+ * resolveDigestCanton, which throws on an unknown code.
+ */
+export function digestCantonFromArgs(argv = process.argv.slice(2), env = process.env) {
+  const index = argv.indexOf('--canton');
+  const raw = index >= 0 ? argv[index + 1] : argv.find((arg) => arg.startsWith('--canton='))?.slice('--canton='.length);
+  const value = String(raw ?? env.EVENTS_DIGEST_CANTON ?? '').trim();
+  if (index >= 0 && (!value || value.startsWith('--'))) throw new Error('--canton needs a canton code');
+  return value ? resolveDigestCanton(value) : undefined;
+}
+
 /** Build the full registration `data` object from the current weekend's events. */
-export function buildData(todayIso) {
-  const dataset = loadEventsDataset(path.join(REPO_ROOT, 'data', 'events.json'));
-  const article = buildWeekendDigestArticle({ events: dataset.events, todayIso });
+export function buildData(todayIso, { canton, datasetPath = path.join(REPO_ROOT, 'data', 'events.json') } = {}) {
+  const dataset = loadEventsDataset(datasetPath);
+  const article = buildWeekendDigestArticle({ events: dataset.events, todayIso, canton });
   return {
     id: article.id,
-    ...STATIC_META,
+    ...staticMetaForCanton(resolveDigestCanton(canton)),
     // Niente `inspectSlugForPromptPlaceholder` qui, e non e' una dimenticanza
     // (issue #382 item 4): `article.slugs` e' `DIGEST_ARTICLE_SLUGS`, quattro
     // stringhe letterali nel sorgente di `lib/events-digest-content.mjs`. Lo
@@ -139,7 +184,8 @@ export { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod };
 async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const todayIso = process.env.TODAY_ISO || isoDay(new Date());
-  const data = buildData(todayIso);
+  const canton = digestCantonFromArgs();
+  const data = buildData(todayIso, { canton });
   // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
   // dell'id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
   // registry, quindi `checkArticleIdExists()` risponde `true` sopra un corpus
