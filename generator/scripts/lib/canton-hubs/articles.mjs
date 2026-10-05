@@ -44,12 +44,21 @@ function readIfExists(file) {
   }
 }
 
-/** Gli slug IT de-listati dai canonical override di una sezione storica. */
+/**
+ * Gli slug IT de-listati dai canonical override di una sezione storica: le
+ * chiavi dell'oggetto `overrides` del file (stessa lettura di `build-api.mjs`).
+ * Un file presente ma senza un oggetto `overrides` e' una forma sconosciuta e
+ * si rifiuta: promuovere un duplicato non canonico e' peggio che fermarsi.
+ */
 function shadowedSlugs(root, section) {
   for (const rel of CANONICAL_OVERRIDE_FILES[section] ?? []) {
     const raw = readIfExists(path.join(root, rel));
     if (raw == null) continue;
-    return new Set(Object.keys(JSON.parse(raw)).filter((k) => !k.startsWith('_')));
+    const overrides = JSON.parse(raw)?.overrides;
+    if (!overrides || typeof overrides !== 'object' || Array.isArray(overrides)) {
+      throw new Error(`canton-hubs: ${rel} non ha un oggetto \`overrides\`: canonical override illeggibili`);
+    }
+    return new Set(Object.keys(overrides));
   }
   return new Set();
 }

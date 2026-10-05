@@ -36,7 +36,9 @@ export const BLOCK_THRESHOLDS = Object.freeze({
   // Il sito lo riscrive ogni giorno (stessa soglia di refresh-fuel-cantons.mjs).
   fuel: Object.freeze({ maxAgeMs: 7 * DAY_MS, minStations: 3, minRows: 1 }),
   // crawl-events gira ogni giorno; tre giorni senza un giro e' un produttore fermo.
-  events: Object.freeze({ maxAgeMs: 3 * DAY_MS, windowDays: 14, minRows: 3, maxRows: 10 }),
+  // `maxSpanDays`: un evento ancora in corso entra se dura al piu' cosi'; oltre
+  // e' una rassegna permanente o una serie ricorrente annuale, non un appuntamento.
+  events: Object.freeze({ maxAgeMs: 3 * DAY_MS, windowDays: 14, maxSpanDays: 31, minRows: 3, maxRows: 10 }),
   // La finestra e' settimanale (stessa soglia di refresh-border-wait-window.mjs).
   borderWait: Object.freeze({ maxAgeMs: 14 * DAY_MS, minRows: 2, maxRows: 8 }),
   // collect-road-events gira ogni tre ore (stessa soglia di refresh-road-events.mjs).

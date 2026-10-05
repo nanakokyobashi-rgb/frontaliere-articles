@@ -25,10 +25,12 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
-import { keywordTopicScore, loadCantonPool, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
+import { keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
 import { shapeRoadEventsBlock } from '../scripts/lib/canton-hubs/blocks-road-events.mjs';
+import { shapeEventsBlock } from '../scripts/lib/canton-hubs/blocks-events.mjs';
+import { shapeWeatherBlock } from '../scripts/lib/canton-hubs/blocks-services.mjs';
 import { HUB_MIN_CONTENT_WORDS, TOPIC_BLOCKS, buildHubFile, hubContentHash, hubFilePaths, validateHubInput } from '../scripts/lib/canton-hubs/build.mjs';
 import { buildHubIntro, cantonPlace, foreignToponymsInCopy } from '../scripts/lib/canton-hubs/copy.mjs';
 import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
@@ -119,6 +121,8 @@ const CORPUS = [
   // Nove ore nel futuro: oltre lo sfasamento d'orologio ammesso, quindi non ancora
   // una news (e non lo diventa nemmeno nei run successivi del test di stabilita').
   article('ti-fra-nove-ore', 'frontaliere', 'Imposte in Ticino: la dichiarazione delle imposte di stasera', 'Imposte e dichiarazione.', { cantons: ['TI'], days: -0.375 }),
+  // De-listato da un canonical override: e' un doppione non canonico, non si promuove.
+  article('imposta-fonte-ombra', 'frontaliere', 'Imposta alla fonte e imposte in Ticino: guida alle aliquote', 'Imposte, aliquote e dichiarazione dei redditi.', { cantons: ['TI'], days: 1 }),
   // Multi-label: Ticino e Grigioni.
   article('trasporti-ti-gr', 'svizzera', 'Trasporti pubblici e treni tra Ticino e Grigioni: nuovi abbonamenti', 'Abbonamenti dei trasporti pubblici, treni e autobus fra i due cantoni.', { cantons: ['TI', 'GR'], days: 3 }),
   // Grigioni.
@@ -158,6 +162,12 @@ function writeCorpus(root, articles = CORPUS) {
       write(`${sectionWriteSurfaces(section).sidecarDir}/${a.id}.json`, JSON.stringify({ id: a.id, _score_breakdown: { score: a.quality } }));
     }
   }
+  // Canonical override nella forma vera dei due file: `{ _doc, overrides: { <slug ombra>: <URL vincitore> } }`.
+  fs.mkdirSync(path.join(root, 'engine/shared'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'engine/shared/frontaliere-article-canonical-overrides.json'), JSON.stringify({
+    _doc: 'fixture',
+    overrides: { 'imposta-fonte-ombra': 'https://frontaliereticino.ch/articoli-frontaliere/imposta-fonte-ticino/' },
+  }));
   // I dati che il producer legge dalla radice, oltre al corpus.
   for (const rel of ['generator/data/canton-hub-topics.json', 'generator/data/canton-hub-links.json', 'generator/data/canton-url-slugs.json']) {
     fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true });
@@ -509,6 +519,7 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   assert.ok(idsOf(pool).includes('trasporti-ti-gr'), 'multi-label');
   assert.ok(!idsOf(pool).includes('imposte-zurigo'), 'un altro cantone resta fuori');
   assert.ok(!idsOf(pool).includes('bollettino-frontaliere-2026-10-04'), 'le edizioni datate del bollettino non sono news da promuovere');
+  assert.ok(!idsOf(pool).includes('imposta-fonte-ombra'), 'uno slug de-listato da un canonical override non entra nel bacino');
 
   assert.deepEqual(idsOf(byTopic.carburanti), ['ti-benzina-prezzi']);
   assert.deepEqual(idsOf(byTopic.fisco), ['imposta-fonte-ticino'], 'titolo doppio deduplicato, articoli datati nel futuro esclusi (anche di poche ore)');
@@ -529,6 +540,68 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   const be = await curatedFor('canton-be');
   assert.deepEqual(idsOf(be.byTopic.fisco), ['imposte-berna']);
   assert.deepEqual(idsOf(be.byTopic.pensioni), ['avs-berna']);
+});
+
+test('canonical override: si leggono le chiavi di `overrides`; una forma sconosciuta ferma il producer', () => {
+  const root = writeCorpus(tmpRoot());
+  const ids = () => loadSectionArticles(root, 'frontaliere').map((a) => a.id);
+  assert.ok(!ids().includes('imposta-fonte-ombra'));
+  assert.ok(ids().includes('imposta-fonte-ticino'));
+  const file = path.join(root, 'engine/shared/frontaliere-article-canonical-overrides.json');
+  // Senza override l'articolo e' un articolo come gli altri: e' davvero il file a escluderlo.
+  fs.writeFileSync(file, JSON.stringify({ _doc: 'fixture', overrides: {} }));
+  assert.ok(ids().includes('imposta-fonte-ombra'));
+  // Le chiavi di primo livello NON sono slug: un file senza `overrides` non si interpreta.
+  fs.writeFileSync(file, JSON.stringify({ 'imposta-fonte-ombra': 'https://example.org/' }));
+  assert.throws(() => ids(), /non ha un oggetto `overrides`/);
+  // I due file veri del repo hanno quella forma.
+  for (const rel of ['engine/shared/frontaliere-article-canonical-overrides.json', 'content/swiss-article-canonical-overrides.json']) {
+    const overrides = readJson(rel).overrides;
+    assert.ok(overrides && typeof overrides === 'object' && Object.keys(overrides).length > 0, `${rel}: overrides vuoto o assente`);
+  }
+});
+
+test('eventi: conta l\'intersezione con la finestra, non solo il giorno d\'inizio', () => {
+  const day = (offset) => new Date(NOW + offset * DAY_MS).toISOString().slice(0, 10);
+  const ev = (id, start, end, extra = {}) => ({ id, title: `Evento ${id}`, startDate: day(start), ...(end == null ? {} : { endDate: day(end) }), canton: 'TI', ...extra });
+  const dataset = {
+    generatedAt: new Date(NOW - HOUR_MS).toISOString(),
+    events: [
+      ev('in-corso', -1, 2), ev('finito-ieri', -3, -1), ev('oggi', 0, null), ev('fra-tre-giorni', 3, 4),
+      ev('serie-annuale', -200, 150), ev('oltre-finestra', BLOCK_THRESHOLDS.events.windowDays + 2, null), ev('finisce-oggi', -5, 0),
+    ],
+  };
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  const items = block.render('it').items;
+  assert.deepEqual(items.map((it) => it.label.replace('Evento ', '')), ['oggi', 'in-corso', 'finisce-oggi', 'fra-tre-giorni']);
+  assert.match(items[1].detail, /^in corso, ultimo giorno: /);
+  assert.equal(items[1].date, day(0), 'un evento gia\' in corso si data a oggi, non al suo inizio');
+  assert.equal(items[3].date, day(3));
+  assert.equal(block.render('it').keyFacts[0].value, '4');
+});
+
+test('meteo: basta la previsione di oggi, come nella vista dei servizi', () => {
+  const view = (cities) => ({
+    schemaVersion: 1,
+    generatedAt: new Date(NOW - HOUR_MS).toISOString(),
+    cantons: { TI: { blocks: { weather: { available: true, generatedAt: new Date(NOW - HOUR_MS).toISOString(), cities } } } },
+  });
+  const block = shapeWeatherBlock(view([
+    { name: 'Lugano', temperatureC: 17.6, todayMinC: 12, todayMaxC: 21 },
+    { name: 'Bellinzona', temperatureC: null, todayMinC: 10.4, todayMaxC: 19.6 },
+    { name: 'Chiasso', temperatureC: null, todayMinC: null, todayMaxC: 22 },
+    { name: 'Senza dati', temperatureC: null, todayMinC: null, todayMaxC: null },
+  ]), { canton: 'TI', nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.deepEqual(block.render('it').items, [
+    { label: 'Bellinzona', value: 'oggi da 10 a 20 °C' },
+    { label: 'Chiasso', value: 'massima di oggi 22 °C' },
+    { label: 'Lugano', value: '18 °C', detail: 'oggi da 12 a 21 °C' },
+  ]);
+  // Tutte le citta' solo con previsione: il blocco resta.
+  assert.equal(shapeWeatherBlock(view([{ name: 'Locarno', temperatureC: null, todayMinC: 9, todayMaxC: null }]), { canton: 'TI', nowMs: NOW }).available, true);
+  assert.equal(shapeWeatherBlock(view([{ name: 'Locarno', temperatureC: null, todayMinC: null, todayMaxC: null }]), { canton: 'TI', nowMs: NOW }).code, 'empty');
 });
 
 test('link delle news: URL della sezione di ORIGINE, nella locale della pagina', async () => {
@@ -742,6 +815,14 @@ test('coerenza toponimi/cantone: il testo evergreen di un hub non nomina un altr
 
 test('formattazione per locale, senza Intl', () => {
   assert.equal(fmtNumber(1234.5, 'it', 2), '1234,50');
+  // Italiano: le quattro cifre non si separano, dalle cinque si'.
+  assert.equal(fmtNumber(999, 'it'), '999');
+  assert.equal(fmtNumber(1000, 'it'), '1000');
+  assert.equal(fmtNumber(9999, 'it'), '9999');
+  assert.equal(fmtNumber(10000, 'it'), '10.000');
+  assert.equal(fmtNumber(1000000, 'it'), '1.000.000');
+  assert.equal(fmtNumber(1000, 'en'), '1,000');
+  assert.equal(fmtNumber(1000, 'de'), '1’000');
   assert.equal(fmtNumber(12345.5, 'it', 2), '12.345,50');
   assert.equal(fmtNumber(12345.5, 'en', 2), '12,345.50');
   assert.equal(fmtNumber(12345.5, 'de', 2), '12’345.50');
@@ -877,6 +958,13 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   assert.match(wf, /REMOTE="https:\/\/x-access-token:\$\{PUSH_TOKEN\}@github\.com\//);
   assert.doesNotMatch(wf, /x-access-token:\$\{GITHUB_TOKEN\}|secrets\.GITHUB_TOKEN/);
   assert.match(wf, /group: refresh-canton-hubs/);
+  // Il controllo dei link sta prima del commit e un link mancante lo ferma: niente
+  // continue-on-error, niente --warn; solo le sitemap irraggiungibili sono tollerate.
+  const linkStep = steps.find((s) => s.startsWith('Check hub links'));
+  assert.ok(linkStep && wf.indexOf('- name: Check hub links') < wf.indexOf('- name: Commit and push'));
+  assert.doesNotMatch(linkStep, /continue-on-error|--warn\b/);
+  assert.match(linkStep, /verify-canton-hub-links\.mjs --section "\$SECTIONS" --soft-network/);
+  assert.doesNotMatch(wf, /continue-on-error: true/);
   // Il producer gira DOPO i refresh e PRIMA del commit; il commit non gira in dry-run.
   const order = ['Fetch fuel prices per canton', 'Generate the canton hubs', 'Commit and push'].map((n) => wf.indexOf(`- name: ${n}`));
   assert.ok(order.every((i) => i > 0) && order[0] < order[1] && order[1] < order[2]);

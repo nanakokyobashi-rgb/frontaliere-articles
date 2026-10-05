@@ -211,15 +211,16 @@ jobs:
           node generator/scripts/generate-canton-hubs.mjs "${ARGS[@]}"
 
       # I link a strumenti e pagine di categoria vengono da un catalogo
-      # verificato sulle sitemap: qui si ricontrolla contro quelle live. Non
-      # blocca (una sitemap momentaneamente irraggiungibile non deve fermare
-      # gli hub), ma un link sparito diventa un'annotazione sul run.
+      # verificato sulle sitemap: qui si ricontrolla contro quelle live, PRIMA
+      # del commit. Un link che non e' piu' in sitemap ferma il job (exit 1):
+      # un hub con un link rotto non si pubblica. Solo le sitemap
+      # irraggiungibili sono tollerate (`--soft-network`: annotazione ed exit
+      # 0), perche' un guasto di rete non dice niente sui link.
       - name: Check hub links against the published sitemaps
         if: steps.sections.outputs.count != '0'
-        continue-on-error: true
         env:
           SECTIONS: ${{ steps.sections.outputs.list }}
-        run: node generator/scripts/verify-canton-hub-links.mjs --section "$SECTIONS" --warn
+        run: node generator/scripts/verify-canton-hub-links.mjs --section "$SECTIONS" --soft-network
 
       - name: Commit and push
         if: steps.sections.outputs.count != '0' && steps.mode.outputs.dry != 'true'

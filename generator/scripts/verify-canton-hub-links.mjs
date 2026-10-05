@@ -22,8 +22,11 @@
  *
  * Uso:
  *   node generator/scripts/verify-canton-hub-links.mjs [--section canton-ti[,canton-gr]] [--warn]
- * Senza --section controlla tutti i 24 gruppi. `--warn` esce 0 anche con link
- * mancanti (annotazione GitHub), per i workflow che non devono fermarsi.
+ * Senza --section controlla tutti i 24 gruppi. Un link mancante e' sempre
+ * exit 1. `--soft-network` rende exit 0 (con annotazione) il SOLO caso in cui
+ * le sitemap non si riescono a scaricare: e' la modalita' del workflow, che
+ * non deve fermarsi per un guasto di rete ma deve fermarsi per un link rotto.
+ * `--warn` (diagnostica a mano) esce 0 anche con link mancanti.
  * SITE_ORIGIN cambia l'origine (default https://frontaliereticino.ch).
  */
 import fs from 'node:fs';
@@ -45,6 +48,7 @@ const RELEVANT = /sitemap-(pages|fuel-[a-z-]+|border-wait|health-premiums|farmac
 
 const args = process.argv.slice(2);
 const warnOnly = args.includes('--warn');
+const softNetwork = args.includes('--soft-network');
 const sectionArg = args.find((a) => a.startsWith('--section='))?.slice('--section='.length) ?? (args.includes('--section') ? args[args.indexOf('--section') + 1] : null);
 const sections = sectionArg ? sectionArg.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean) : cantonSectionIds();
 for (const s of sections) {
@@ -62,18 +66,38 @@ async function get(url) {
 
 const toPath = (u) => u.replace(ORIGIN, '').replace(/&amp;/g, '&');
 
-const index = await get(`${ORIGIN}/sitemap.xml`);
-const children = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).filter((u) => RELEVANT.test(u));
+/** `<loc>` con o senza prefisso di namespace e con eventuale CDATA. */
+const LOC_RE = /<(?:[a-z]+:)?loc>\s*(?:<!\[CDATA\[)?\s*([^<\]\s]+)\s*(?:\]\]>)?\s*<\/(?:[a-z]+:)?loc>/g;
+
+/** Guasto di rete o del server: l'unico esito che `--soft-network` perdona. */
+function networkFailure(err) {
+  const line = `[verify-canton-hub-links] sitemap non scaricabili (${err?.message ?? err}): link NON verificati in questo run`;
+  console.log(`${softNetwork ? '::warning::' : '::error::'}${line}`);
+  process.exit(softNetwork ? 0 : 1);
+}
+
+let index;
+try {
+  index = await get(`${ORIGIN}/sitemap.xml`);
+} catch (err) {
+  networkFailure(err);
+}
+const children = [...index.matchAll(LOC_RE)].map((m) => m[1]).filter((u) => RELEVANT.test(u));
 if (children.length === 0) {
   console.error('::error::[verify-canton-hub-links] nessuna sitemap pertinente nell\'indice: il controllo sarebbe vuoto');
   process.exit(1);
 }
 const published = new Set();
 for (const url of children) {
-  const xml = await get(url);
+  let xml;
+  try {
+    xml = await get(url);
+  } catch (err) {
+    networkFailure(err);
+  }
   // `<loc>` con o senza prefisso di namespace e con eventuale CDATA; gli
   // alternate si leggono tag per tag, qualunque sia l'ordine degli attributi.
-  for (const m of xml.matchAll(/<(?:[a-z]+:)?loc>\s*(?:<!\[CDATA\[)?\s*([^<\]\s]+)\s*(?:\]\]>)?\s*<\/(?:[a-z]+:)?loc>/g)) published.add(toPath(m[1]));
+  for (const m of xml.matchAll(LOC_RE)) published.add(toPath(m[1]));
   for (const tag of xml.matchAll(/<(?:[a-z]+:)?link\b[^>]*>/g)) {
     if (!/\bhreflang\s*=/.test(tag[0])) continue;
     const href = /\bhref\s*=\s*["']([^"']+)["']/.exec(tag[0]);

@@ -5,7 +5,7 @@
  * evento: qui si filtra per i membri del gruppo URL, senza ricrawlare (D11).
  */
 import { eventsBasePathForCanton } from '../events-utils.mjs';
-import { clip, fmtNumber, httpsUrlOrNull, isoDayOf } from './format.mjs';
+import { clip, fmtDay, fmtNumber, httpsUrlOrNull, isoDayOf } from './format.mjs';
 import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, inGroup, isObj, omitted } from './blocks-common.mjs';
 import { foldForMatch } from '../canton-section-profile.mjs';
 
@@ -20,6 +20,7 @@ const TXT = {
     source: 'Agenda eventi di Frontaliere Ticino',
     fact: (days) => `Eventi in calendario nei prossimi ${days} giorni`,
     note: 'dall’agenda eventi del sito',
+    ongoing: (day) => `in corso, ultimo giorno: ${day}`,
   },
   en: {
     title: (days) => `Events in the next ${days} days`,
@@ -27,6 +28,7 @@ const TXT = {
     source: 'Frontaliere Ticino events calendar',
     fact: (days) => `Events scheduled in the next ${days} days`,
     note: 'from the site’s events calendar',
+    ongoing: (day) => `ongoing, last day: ${day}`,
   },
   de: {
     title: (days) => `Veranstaltungen der nächsten ${days} Tage`,
@@ -34,6 +36,7 @@ const TXT = {
     source: 'Veranstaltungskalender von Frontaliere Ticino',
     fact: (days) => `Veranstaltungen in den nächsten ${days} Tagen`,
     note: 'aus dem Veranstaltungskalender der Website',
+    ongoing: (day) => `läuft, letzter Tag: ${day}`,
   },
   fr: {
     title: (days) => `Événements des ${days} prochains jours`,
@@ -41,6 +44,7 @@ const TXT = {
     source: 'Agenda des événements de Frontaliere Ticino',
     fact: (days) => `Événements prévus dans les ${days} prochains jours`,
     note: 'd’après l’agenda du site',
+    ongoing: (day) => `en cours, dernier jour : ${day}`,
   },
 };
 
@@ -62,14 +66,22 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
   const upcoming = dataset.events
     .filter((e) => isObj(e) && inGroup(members, e.canton))
     .filter((e) => typeof e.title === 'string' && e.title.trim() && typeof e.startDate === 'string' && DAY_RE.test(e.startDate))
-    .filter((e) => e.startDate >= today && e.startDate <= until)
-    .sort((a, b) => a.startDate.localeCompare(b.startDate)
+    // Intersezione con la finestra, non solo l'inizio: un evento di piu' giorni
+    // cominciato ieri e ancora in corso e' un appuntamento di oggi. Senza
+    // `endDate` l'evento dura il solo giorno d'inizio.
+    .map((e) => ({ ...e, lastDay: typeof e.endDate === 'string' && DAY_RE.test(e.endDate) && e.endDate >= e.startDate ? e.endDate : e.startDate }))
+    .filter((e) => e.lastDay >= today && e.startDate <= until)
+    .filter((e) => e.startDate >= today || (Date.parse(e.lastDay) - Date.parse(e.startDate)) / DAY_MS <= th.maxSpanDays)
+    // Ordinati per il primo giorno utile (oggi, per quelli gia' in corso).
+    .map((e) => ({ ...e, firstUsefulDay: e.startDate < today ? today : e.startDate }))
+    .sort((a, b) => a.firstUsefulDay.localeCompare(b.firstUsefulDay)
+      || b.startDate.localeCompare(a.startDate)
       || String(a.startTime ?? '').localeCompare(String(b.startTime ?? ''))
       || a.title.localeCompare(b.title)
       || String(a.id ?? '').localeCompare(String(b.id ?? '')))
     // Lo stesso evento arriva da piu' agende: una riga per titolo e giorno.
     .filter((e) => {
-      const key = `${e.startDate}|${foldForMatch(e.title).replace(/[^a-z0-9]+/g, ' ').trim()}`;
+      const key = `${e.firstUsefulDay}|${foldForMatch(e.title).replace(/[^a-z0-9]+/g, ' ').trim()}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
@@ -93,10 +105,13 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
         items: rows.map((e) => {
           const place = [e.venue, e.comune].map((v) => (typeof v === 'string' ? v.trim() : '')).filter(Boolean);
           const url = httpsUrlOrNull(e.url);
+          const where = place.length ? clip([...new Set(place)].join(', '), 100) : '';
+          const ongoing = e.startDate < today ? t.ongoing(fmtDay(e.lastDay, locale)) : '';
+          const detail = [where, ongoing].filter(Boolean).join(' — ');
           return {
             label: clip(e.titleByLocale?.[locale] || e.title, 120),
-            ...(place.length ? { detail: clip([...new Set(place)].join(', '), 100) } : {}),
-            date: e.startDate,
+            ...(detail ? { detail } : {}),
+            date: e.firstUsefulDay,
             ...(url ? { url } : {}),
           };
         }),

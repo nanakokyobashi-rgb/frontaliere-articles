@@ -37,7 +37,7 @@ const TXT = {
       fact: 'Aste di targhe in corso',
       note: (median) => `offerta mediana ${median}`,
     },
-    weather: { title: 'Meteo', description: 'Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.', detail: (min, max) => `oggi da ${min} a ${max} °C`, source: 'Meteo di Frontaliere Ticino' },
+    weather: { title: 'Meteo', description: 'Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.', detail: (min, max) => `oggi da ${min} a ${max} °C`, max: (v) => `massima di oggi ${v} °C`, min: (v) => `minima di oggi ${v} °C`, source: 'Meteo di Frontaliere Ticino' },
   },
   en: {
     premiums: {
@@ -59,7 +59,7 @@ const TXT = {
       fact: 'Plate auctions running',
       note: (median) => `typical bid ${median}`,
     },
-    weather: { title: 'Weather', description: 'Current temperature and today’s forecast in the canton’s cities covered by the site.', detail: (min, max) => `today from ${min} to ${max} °C`, source: 'Frontaliere Ticino weather' },
+    weather: { title: 'Weather', description: 'Current temperature and today’s forecast in the canton’s cities covered by the site.', detail: (min, max) => `today from ${min} to ${max} °C`, max: (v) => `today’s high ${v} °C`, min: (v) => `today’s low ${v} °C`, source: 'Frontaliere Ticino weather' },
   },
   de: {
     premiums: {
@@ -81,7 +81,7 @@ const TXT = {
       fact: 'Laufende Kontrollschild-Auktionen',
       note: (median) => `mittleres Gebot ${median}`,
     },
-    weather: { title: 'Wetter', description: 'Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.', detail: (min, max) => `heute ${min} bis ${max} °C`, source: 'Wetter von Frontaliere Ticino' },
+    weather: { title: 'Wetter', description: 'Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.', detail: (min, max) => `heute ${min} bis ${max} °C`, max: (v) => `Höchstwert heute ${v} °C`, min: (v) => `Tiefstwert heute ${v} °C`, source: 'Wetter von Frontaliere Ticino' },
   },
   fr: {
     premiums: {
@@ -103,7 +103,7 @@ const TXT = {
       fact: 'Enchères de plaques en cours',
       note: (median) => `offre centrale ${median}`,
     },
-    weather: { title: 'Météo', description: 'Température actuelle et prévision du jour dans les villes du canton suivies par le site.', detail: (min, max) => `aujourd’hui de ${min} à ${max} °C`, source: 'Météo de Frontaliere Ticino' },
+    weather: { title: 'Météo', description: 'Température actuelle et prévision du jour dans les villes du canton suivies par le site.', detail: (min, max) => `aujourd’hui de ${min} à ${max} °C`, max: (v) => `maximale du jour ${v} °C`, min: (v) => `minimale du jour ${v} °C`, source: 'Météo de Frontaliere Ticino' },
   },
 };
 
@@ -227,7 +227,10 @@ export function shapeWeatherBlock(view, { canton, nowMs }) {
   const { block, skip } = fromView(id, view, canton, 'weather', nowMs);
   if (skip) return skip;
   const cities = (Array.isArray(block.cities) ? block.cities : [])
-    .filter((c) => isObj(c) && typeof c.name === 'string' && c.name && finite(c.temperatureC) != null)
+    // Stessa regola della vista dei servizi: basta una temperatura qualunque,
+    // attuale o prevista per oggi.
+    .filter((c) => isObj(c) && typeof c.name === 'string' && c.name
+      && (finite(c.temperatureC) != null || finite(c.todayMaxC) != null || finite(c.todayMinC) != null))
     .sort((a, b) => a.name.localeCompare(b.name));
   if (!cities.length) return omitted(id, 'empty', `nessuna citta' con temperatura per ${canton}`);
   return {
@@ -240,13 +243,18 @@ export function shapeWeatherBlock(view, { canton, nowMs }) {
       return {
         title: t.title,
         description: t.description,
-        items: cities.map((c) => ({
-          label: c.name,
-          value: `${fmtNumber(Math.round(c.temperatureC), locale)} °C`,
-          ...(finite(c.todayMinC) != null && finite(c.todayMaxC) != null
-            ? { detail: t.detail(fmtNumber(Math.round(c.todayMinC), locale), fmtNumber(Math.round(c.todayMaxC), locale)) }
-            : {}),
-        })),
+        items: cities.map((c) => {
+          const deg = (v) => fmtNumber(Math.round(v), locale);
+          const range = finite(c.todayMinC) != null && finite(c.todayMaxC) != null;
+          if (finite(c.temperatureC) != null) {
+            return { label: c.name, value: `${deg(c.temperatureC)} °C`, ...(range ? { detail: t.detail(deg(c.todayMinC), deg(c.todayMaxC)) } : {}) };
+          }
+          // Solo previsione: il valore e' la previsione di oggi, dichiarata come tale.
+          if (range) return { label: c.name, value: t.detail(deg(c.todayMinC), deg(c.todayMaxC)) };
+          return finite(c.todayMaxC) != null
+            ? { label: c.name, value: t.max(deg(c.todayMaxC)) }
+            : { label: c.name, value: t.min(deg(c.todayMinC)) };
+        }),
         sourceName: t.source,
         keyFacts: [],
       };
