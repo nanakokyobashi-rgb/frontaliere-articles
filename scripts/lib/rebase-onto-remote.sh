@@ -75,6 +75,19 @@
 # cannot prove safe (a conflict boundary that falls mid-entry FUSES two records,
 # which is worse than losing the article because it is silent), and when it
 # refuses we abort exactly as before.
+#
+# ── Il QUARTO ramo: i contatori (`--merge-counter <path>:<campo>`, D18) ──────
+#
+# `data/topic-candidates-{experimental,evergreen}-counter.json` e
+# `data/quota-state.json` sono contatori riscritti per intero a ogni run che
+# pubblica. «Prendi upstream» perde l'incremento di questo run, «prendi il
+# commit rigiocato» perde tutti quelli atterrati upstream nel frattempo: con
+# molti scrittori paralleli (le sezioni cantonali) entrambe fanno derivare la
+# rotazione 1-su-N che governano. Passano quindi da
+# `merge-counter-conflict.mjs`, che scrive upstream + (rigiocato − base). Se la
+# fusione non e' dimostrabile (lato illeggibile, decremento) si ricade su
+# «prendi upstream», cioe' sul comportamento che questi file avevano prima:
+# un contatore sbagliato di uno costa meno di un articolo perso.
 set -euo pipefail
 
 REMOTE="${1:?remote url required}"
@@ -83,13 +96,15 @@ shift 2
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MERGE_RESOLVER="$SCRIPT_DIR/merge-content-registry-conflict.mjs"
+COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 
-# THREE categories, deliberately not one list: they mean different things about
+# FOUR categories, deliberately not one list: they mean different things about
 # the file, and collapsing any two of them resolves a conflict the wrong way.
 #
 #   (bare path)        cache di bookkeeping   → prendi UPSTREAM
 #   --merge-registry   registro append-only   → unisci i RECORD
 #   --take-theirs      file PER-ARTICOLO      → prendi il commit rigiocato
+#   --merge-counter    contatore (path:campo) → upstream + incremento rigiocato
 #
 # Appending a registry to the bookkeeping allowlist would have "resolved" it by
 # taking upstream — i.e. by deleting this run's article from the registry while
@@ -112,8 +127,22 @@ MERGE_RESOLVER="$SCRIPT_DIR/merge-content-registry-conflict.mjs"
 ALLOWED=" "
 REGISTRIES=" "
 THEIRS_PREFIXES=""
+# COUNTERS tiene i path (per classificare), COUNTER_SPECS le coppie path:campo
+# (per risolvere).
+COUNTERS=" "
+COUNTER_SPECS=" "
 while [ "$#" -gt 0 ]; do
   case "$1" in
+    --merge-counter)
+      [ "$#" -ge 2 ] || { echo "::error::--merge-counter requires <path>:<field>"; exit 2; }
+      case "$2" in
+        ?*:?*) ;;
+        *) echo "::error::--merge-counter requires <path>:<field>, got '$2'"; exit 2 ;;
+      esac
+      COUNTERS="$COUNTERS${2%:*} "
+      COUNTER_SPECS="$COUNTER_SPECS$2 "
+      shift 2
+      ;;
     --merge-registry)
       [ "$#" -ge 2 ] || { echo "::error::--merge-registry requires a path"; exit 2; }
       REGISTRIES="$REGISTRIES$2 "
@@ -135,10 +164,22 @@ done
 # Guard against an empty argument list: with no paths declared in any category
 # nothing can ever be resolved, and silently degrading to "always abort" would
 # hide a caller bug behind behaviour that looks exactly like the old code.
-if [ "$ALLOWED" = " " ] && [ "$REGISTRIES" = " " ] && [ -z "$THEIRS_PREFIXES" ]; then
-  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry and no --take-theirs paths"
+if [ "$ALLOWED" = " " ] && [ "$REGISTRIES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
+  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry, no --take-theirs and no --merge-counter paths"
   exit 2
 fi
+
+# La coppia path:campo dichiarata per il contatore $1.
+counter_spec_of() {
+  local candidate="$1" spec
+  for spec in $COUNTER_SPECS; do
+    if [ "${spec%:*}" = "$candidate" ]; then
+      echo "$spec"
+      return 0
+    fi
+  done
+  return 1
+}
 
 # Vero se $1 comincia con uno dei prefissi dichiarati con --take-theirs.
 is_per_article() {
@@ -163,7 +204,43 @@ abort_and_fail() {
   return 1
 }
 
+# Il conflitto non e' l'unico modo di perdere l'incremento di un contatore: due
+# run partiti da N che scrivono entrambi N+1 producono lo STESSO blob, git non
+# segnala nessun conflitto e il rebase finisce su N+1 invece di N+2. Quindi, a
+# rebase riuscito, ogni contatore dichiarato si riporta a upstream + l'incremento
+# del commit pre-rebase (merge-counter-conflict.mjs --reconcile). Mai fatale:
+# se qualcosa non torna il rebase resta quello che git ha prodotto, cioe' il
+# comportamento di prima.
+reconcile_counters() {
+  [ "$COUNTER_SPECS" != " " ] || return 0
+  local upstream_sha changed
+  upstream_sha="$(git rev-parse --verify --quiet FETCH_HEAD)" || return 0
+  # shellcheck disable=SC2086
+  changed="$(node "$COUNTER_RESOLVER" --reconcile "$PRE_REBASE" "$upstream_sha" $COUNTER_SPECS)" || {
+    echo "::warning::counter reconciliation after the rebase did not run — counters left as the rebase produced them"
+    return 0
+  }
+  [ -n "$changed" ] || return 0
+  # shellcheck disable=SC2086
+  if ! git add -- $changed; then
+    git checkout -- $changed 2>/dev/null || true
+    echo "::warning::counter reconciliation could not be staged — counters left as the rebase produced them"
+    return 0
+  fi
+  if [ "$(git rev-parse HEAD)" != "$upstream_sha" ]; then
+    git commit -q --amend --no-edit || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
+  else
+    # Il commit rigiocato e' sparito (vuoto dopo il rebase) ma il suo
+    # incremento no: serve un commit che lo porti.
+    git commit -q -m "Reconcile counters after rebase" || { git reset -q -- $changed; git checkout -- $changed 2>/dev/null || true; return 0; }
+  fi
+  echo "reconciled counters after the rebase: $(echo $changed)"
+}
+
+PRE_REBASE="$(git rev-parse HEAD)"
+
 if git pull --rebase "$REMOTE" "$TARGET"; then
+  reconcile_counters
   exit 0
 fi
 
@@ -188,7 +265,7 @@ fi
 # so a state that stops changing ends in an abort rather than a spin.
 progress_marker=""
 for _pass in $(seq 1 20); do
-  rebase_in_progress || { echo "rebase completed"; exit 0; }
+  rebase_in_progress || { echo "rebase completed"; reconcile_counters; exit 0; }
 
   conflicted="$(git diff --name-only --diff-filter=U)"
 
@@ -217,6 +294,9 @@ for _pass in $(seq 1 20); do
           ;;
       esac
       is_per_article "$f" && continue
+      case "$COUNTERS" in
+        *" $f "*) continue ;;
+      esac
       case "$ALLOWED" in
         *" $f "*) ;;
         *)
@@ -274,12 +354,36 @@ EOF
 $conflicted
 EOF
 
+    # Ramo 4 — contatori: upstream + l'incremento del commit rigiocato. Il
+    # resolver scrive solo se la fusione e' dimostrabile; altrimenti si prende
+    # upstream come per una cache di bookkeeping, cioe' il comportamento che
+    # questi file avevano prima del ramo.
+    while IFS= read -r f; do
+      [ -n "$f" ] || continue
+      spec="$(counter_spec_of "$f")" || continue
+      if node "$COUNTER_RESOLVER" "$spec"; then
+        git add -- "$f"
+        echo "resolved counter conflict by summing both sides: $f"
+      elif git checkout --ours -- "$f" 2>/dev/null; then
+        git add -- "$f"
+        echo "::warning::counter merge refused on '$f' — resolved by taking upstream, as for a bookkeeping cache"
+      else
+        git rm -q -f -- "$f" 2>/dev/null || true
+        echo "::warning::counter merge refused on '$f' and upstream has no copy — dropped, as for a bookkeeping cache"
+      fi
+    done <<EOF
+$conflicted
+EOF
+
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       case "$REGISTRIES" in
         *" $f "*) continue ;;  # gia' risolto dal merge per record
       esac
       is_per_article "$f" && continue  # gia' risolto dal ramo per-articolo
+      case "$COUNTERS" in
+        *" $f "*) continue ;;  # gia' risolto dal ramo contatori
+      esac
       # `--ours` is the upstream copy (see the header note). If the file does
       # not exist upstream at all the checkout fails, and dropping it is the
       # same decision: prefer upstream's view of a scratch cache.

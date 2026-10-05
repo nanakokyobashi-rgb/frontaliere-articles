@@ -81,7 +81,11 @@ quietly relocated into the published corpus.
   surface. Main now publishes it to `public/data/`, so the fetch has something
   to fetch. Absence is not an error — the overlay is cosmetic and
   `borderCrossings.ts` falls back to its editorial defaults, so a network blip
-  must never fail a generation run.
+  must never fail a generation run. No production workflow runs it today, and
+  no generator reads `avgWaitMorning`/`avgWaitEvening`: the overlay is empty in
+  production with no effect on any article. `productionFetch` in
+  `tests/lib/rewire-contracts.mjs` records that, and the contract test fails the
+  day a workflow starts (or stops) fetching it without the declaration moving.
 - **Border-wait ranking window** — `scripts/refresh-border-wait-window.mjs`
   fetches `border-wait-ranking-window.json`, the aggregate the weekly ranking
   article is built from. In main that article read `data/border-wait-history/**`

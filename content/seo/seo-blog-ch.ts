@@ -97663,6 +97663,380 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-svizzera-aumento-asi': {
+    title: 'Affitti in Svizzera: aumento del 32% in vent\'anni',
+    description: 'Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L\'ASI denuncia l\'impatto su redditi e inquilini. Scopri i dati e le richieste.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, aumento, vent, anni',
+    ogTitle: 'Affitti in Svizzera: +32% in vent\'anni e alloggi costosi',
+    ogDescription: 'L\'Associazione svizzera inquilini analizza i rincari del 32,1% tra il 2005 e il 2025. Impatto su famiglie a basso reddito, tassi di riferimento all\'1,25% e trasformazioni della proprietà immobiliare in Svizzera.',
+    canonicalPath: '/articoli-svizzera/affitti-svizzera-aumento-asi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera: aumento del 32% in vent'anni",
+      "description": "Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L'ASI denuncia l'impatto su redditi e inquilini. Scopri i dati e le richieste.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-aumento-asi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi di residenza in Svizzera con affitti in aumento"
+      },
+      "datePublished": "2026-10-05T07:50:21+00:00",
+      "dateModified": "2026-10-05T07:50:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-svizzera-aumento-asi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-iva-avs-novembre-2026': {
+    title: 'Voto IVA per AVS: data e dettagli della votazione federale',
+    description: 'Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, data, dettagli, votazione',
+    ogTitle: 'Voto IVA per l AVS del 26 novembre 2026: guida completa alle aliquote e alla 13a mensilità',
+    ogDescription: 'Tutti i dettagli sulla votazione federale del 26 novembre 2026 per il finanziamento della 13a mensilità AVS tramite l aumento dell IVA. Analisi delle aliquote, delle riserve e delle scadenze ufficiali della Confederazione.',
+    canonicalPath: '/articoli-svizzera/voto-iva-avs-novembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto IVA per AVS: data e dettagli della votazione federale",
+      "description": "Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/voto-iva-avs-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna in primo piano per il voto sull IVA"
+      },
+      "datePublished": "2026-10-05T08:19:02+00:00",
+      "dateModified": "2026-10-05T08:19:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-iva-avs-novembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-villa-principe-leopoldo-chiude': {
+    title: 'Villa Principe Leopoldo chiude per lavori e licenzia',
+    description: 'L\'Hotel Villa Principe Leopoldo a Collina d\'Oro chiude il 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura',
+    keywords: 'frontalieri, ticino, svizzera, italia, villa, principe, leopoldo, chiude',
+    ogTitle: 'Villa Principe Leopoldo chiude per lavori e licenzia 76 persone',
+    ogDescription: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude temporaneamente dal 30 dicembre per un investimento di 12 milioni. Previsto il licenziamento di 76 dipendenti su 81 e riapertura a maggio.',
+    canonicalPath: '/articoli-svizzera/villa-principe-leopoldo-chiude/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Villa Principe Leopoldo chiude per lavori e licenzia",
+      "description": "L'Hotel Villa Principe Leopoldo a Collina d'Oro chiude il 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/villa-principe-leopoldo-chiude.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro"
+      },
+      "datePublished": "2026-10-05T08:50:48+00:00",
+      "dateModified": "2026-10-05T08:50:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/villa-principe-leopoldo-chiude/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-porte-aperte-login-ticino': {
+    title: 'Porte Aperte login Ticino: ferrovia, commercio e edifici',
+    description: 'Scopri l\'evento Porte Aperte login Ticino del 10 ottobre a Bellinzona: ferrovia, commercio e la nuova formazione AFC Informatico/a degli edifici',
+    keywords: 'frontalieri, ticino, svizzera, italia, porte, aperte, login, ferrovia',
+    ogTitle: 'Porte Aperte login Ticino: ferrovia, commercio e AFC 2027',
+    ogDescription: 'L\'evento Porte Aperte login Ticino offre una giornata orientativa a Bellinzona il 10 ottobre dalle 09.00 alle 13.00. I partecipanti possono esplorare le professioni ferroviarie, il commercio al dettaglio e scoprire in anteprima la nuova formazione',
+    canonicalPath: '/articoli-svizzera/porte-aperte-login-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porte Aperte login Ticino: ferrovia, commercio e edifici",
+      "description": "Scopri l'evento Porte Aperte login Ticino del 10 ottobre a Bellinzona: ferrovia, commercio e la nuova formazione AFC Informatico/a degli edifici",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/porte-aperte-login-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Visitatori alle Porte Aperte login Ticino osservano un elettrotreno e strumenti di automazione edilizia a Bellinzona"
+      },
+      "datePublished": "2026-10-05T09:48:17+00:00",
+      "dateModified": "2026-10-05T09:48:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/porte-aperte-login-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rischi-cyber-pmi-svizzere': {
+    title: 'Rischi informatici: PMI svizzere sottovalutano i pericoli',
+    description: 'Studio VZ-HSLU: quasi 58\'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rischi, informatici, svizzere, sottovalutano',
+    ogTitle: 'PMI svizzere e rischi informatici sottovalutati',
+    ogDescription: 'Lo studio VZ-HSLU spiega perché un attacco può interrompere l\'attività, danneggiare dati e sistemi e mettere sotto pressione la liquidità. Nel 2025 in Svizzera sono stati registrati quasi 58\'000 reati digitali; il tasso di risoluzione è stato',
+    canonicalPath: '/articoli-svizzera/rischi-cyber-pmi-svizzere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rischi informatici: PMI svizzere sottovalutano i pericoli",
+      "description": "Studio VZ-HSLU: quasi 58'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rischi-cyber-pmi-svizzere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "PMI svizzera analizza i rischi informatici in ufficio"
+      },
+      "datePublished": "2026-10-05T10:27:11+00:00",
+      "dateModified": "2026-10-05T10:27:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rischi-cyber-pmi-svizzere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-india-aels-protezione-capitali': {
+    title: 'Parmelin in India: accordo per proteggere gli investimenti',
+    description: 'Guy Parmelin in India: Berna cerca un accordo sugli investimenti; India-AELS punta su accesso al mercato, certezza del diritto, proprietà intellettuale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, india, accordo, proteggere',
+    ogTitle: 'Parmelin in India: accordo per proteggere gli investimenti',
+    ogDescription: 'La visita di Stato di tre giorni porta a Nuova Delhi il dossier economico svizzero: Berna chiede di accelerare la protezione degli investimenti, mentre l\'accordo India-AELS e la dichiarazione su mobilità e formazione definiscono gli altri fronti.',
+    canonicalPath: '/articoli-svizzera/india-aels-protezione-capitali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parmelin in India: accordo per proteggere gli investimenti",
+      "description": "Guy Parmelin in India: Berna cerca un accordo sugli investimenti; India-AELS punta su accesso al mercato, certezza del diritto, proprietà intellettuale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/india-aels-protezione-capitali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guy Parmelin a Nuova Delhi per colloqui su investimenti e accordo commerciale India-AELS."
+      },
+      "datePublished": "2026-10-05T11:04:37+00:00",
+      "dateModified": "2026-10-05T11:04:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/india-aels-protezione-capitali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aumento-iva-finanziamento-13esima-avs': {
+    title: 'Aumento IVA per la 13esima AVS | Frontaliere Ticino',
+    description: 'Il 29 novembre svizzeri al voto per l\'aumento dell\'IVA necessario a finanziare la 13esima rendita AVS. Dettagli su aliquote, costi e posizioni. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, 13esima, novembre, vota',
+    ogTitle: 'Aumento IVA per finanziare la 13esima AVS: si vota il 29 novembre',
+    ogDescription: 'Il futuro della 13esima rendita AVS dipende dal voto popolare del 29 novembre sull\'aumento dell\'IVA. Scopri i dettagli dell\'aumento proposto, i costi previsti e le diverse posizioni politiche. Un\'analisi per comprendere l\'impatto sulle famiglie',
+    canonicalPath: '/articoli-svizzera/aumento-iva-finanziamento-13esima-avs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento IVA per la 13esima AVS",
+      "description": "Il 29 novembre svizzeri al voto per l'aumento dell'IVA necessario a finanziare la 13esima rendita AVS. Dettagli su aliquote, costi e posizioni. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/aumento-iva-finanziamento-13esima-avs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale svizzero a Berna, sede del governo e del parlamento."
+      },
+      "datePublished": "2026-10-05T11:44:07+00:00",
+      "dateModified": "2026-10-05T11:44:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aumento-iva-finanziamento-13esima-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lugano-trasparenza-partecipate': {
+    title: 'Lugano: l\'UDC propone più trasparenza sui compensi',
+    description: 'L\'UDC di Lugano propone una mozione per pubblicare i compensi di Cda e CEO delle società partecipate dalla Città per garantire maggiore trasparenza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, propone, trasparenza, compensi',
+    ogTitle: 'Lugano: l\'UDC propone più trasparenza sui compensi',
+    ogDescription: 'Una mozione dell\'UDC chiede la pubblicazione annuale delle retribuzioni di CEO e membri dei Cda delle società partecipate dalla Città di Lugano per sostituire le speculazioni con dati istituzionali.',
+    canonicalPath: '/articoli-svizzera/lugano-trasparenza-partecipate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano: l'UDC propone più trasparenza sui compensi",
+      "description": "L'UDC di Lugano propone una mozione per pubblicare i compensi di Cda e CEO delle società partecipate dalla Città per garantire maggiore trasparenza.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lugano-trasparenza-partecipate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il centro culturale LAC di Lugano affacciato sul lago."
+      },
+      "datePublished": "2026-10-05T11:58:26+00:00",
+      "dateModified": "2026-10-05T11:58:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lugano-trasparenza-partecipate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tamedia-taglio-posti-lavoro': {
+    title: 'Tamedia taglia 34 posti: riorganizzazione in vista',
+    description: 'Tamedia annuncia la soppressione di 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori. Informazioni previste entro fine ottobre. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, tamedia, taglia, posti, riorganizzazione',
+    ogTitle: 'Tamedia taglia 34 posti a tempo pieno',
+    ogDescription: 'L\'azienda editoriale Tamedia avvia una riorganizzazione che prevede il taglio di 34 posti a tempo pieno, coinvolgendo 41 collaboratori nelle redazioni svizzere.',
+    canonicalPath: '/articoli-svizzera/tamedia-taglio-posti-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tamedia taglia 34 posti: riorganizzazione in vista",
+      "description": "Tamedia annuncia la soppressione di 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori. Informazioni previste entro fine ottobre. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tamedia-taglio-posti-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di un'azienda editoriale svizzera in un contesto urbano"
+      },
+      "datePublished": "2026-10-05T12:36:39+00:00",
+      "dateModified": "2026-10-05T12:36:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tamedia-taglio-posti-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guy-parmelin-visita-india': {
+    title: 'Parmelin in India: focus su economia e investimenti',
+    description: 'Il consigliere federale Guy Parmelin in missione in India per rafforzare la cooperazione economica, la tutela della proprietà intellettuale e la mobilità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, india, focus, economia',
+    ogTitle: 'Parmelin in India: focus su economia e investimenti',
+    ogDescription: 'Il consigliere federale Guy Parmelin a New Delhi per rafforzare i legami economici tra Svizzera e India, tra accordi commerciali e cooperazione scientifica.',
+    canonicalPath: '/articoli-svizzera/guy-parmelin-visita-india/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parmelin in India: focus su economia e investimenti",
+      "description": "Il consigliere federale Guy Parmelin in missione in India per rafforzare la cooperazione economica, la tutela della proprietà intellettuale e la mobilità.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/guy-parmelin-visita-india.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il consigliere federale Guy Parmelin in visita ufficiale"
+      },
+      "datePublished": "2026-10-05T13:21:32+00:00",
+      "dateModified": "2026-10-05T13:21:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guy-parmelin-visita-india/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bern-risanamento-energia': {
+    title: 'Incentivi energetici Canton Berna: requisiti e domanda',
+    description: 'Guida agli incentivi energetici nel Cantone di Berna: risanamento di edifici e impianti, requisiti tecnici, domanda prima dei lavori e ufficio cantonale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incentivi, energetici, canton, berna',
+    ogTitle: 'Incentivi energetici Canton Berna: requisiti e domanda',
+    ogDescription: 'Nel Cantone di Berna la domanda per gli incentivi energetici va presentata prima dei lavori. La verifica riguarda programmi di risanamento per edifici e impianti, requisiti tecnici, termini, importi e ufficio cantonale competente.',
+    canonicalPath: '/articoli-svizzera/bern-risanamento-energia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incentivi energetici Canton Berna: requisiti e domanda",
+      "description": "Guida agli incentivi energetici nel Cantone di Berna: risanamento di edifici e impianti, requisiti tecnici, domanda prima dei lavori e ufficio cantonale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/bern-risanamento-energia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio svizzero in fase di risanamento energetico"
+      },
+      "datePublished": "2026-10-05T14:08:53+00:00",
+      "dateModified": "2026-10-05T14:08:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bern-risanamento-energia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -132,7 +132,7 @@ const TICINO_SOURCE = path.resolve(
  * capital letter and not followed by another capitalised word: «a Paradiso»,
  * «di Tenero», not «paradiso fiscale», «il governo vira», «a Sessa Aurunca».
  */
-const AMBIGUOUS_TICINO_NAMES = new Set([
+export const AMBIGUOUS_TICINO_NAMES = new Set([
   'paradiso', 'pura', 'quinto', 'tenero', 'contra', 'agno', 'tresa',
   'campo', 'bosco', 'lema', 'vaglio', 'taverne', 'montagnola', 'rodi', 'agra',
   'rivera', 'serravalle', 'vernate', 'muzzano', 'lumino', 'curio', 'sessa', 'manno',
@@ -147,6 +147,12 @@ const AMBIGUOUS_TICINO_NAMES = new Set([
  * whose localities (Cresciano, Iragna, Lodrino, Osogna) count by name.
  */
 const GENERIC_ALONE = new Set(['monti', 'borgo', 'riviera']);
+
+/**
+ * Esportati per canton-classifier.mjs, che applica le stesse esclusioni ai
+ * comuni minori di tutti i cantoni: una lista sola.
+ */
+export const GENERIC_ALONE_TICINO_NAMES = GENERIC_ALONE;
 
 /** Places outside the area whose name contains a Ticino comune. */
 const OUTSIDE_AREA_HOMONYMS_RE = /\b(?:castel san pietro terme|sant antonino di susa)\b/g;

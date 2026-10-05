@@ -349,6 +349,9 @@ import {
   resolveArticleType,
   renderRegistryEntry,
 } from './lib/registry-article-type.mjs';
+// D13 sezioni cantonali: il campo multi-label `canton` della voce del registry,
+// dal classificatore deterministico (nessun LLM, nessun gate).
+import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
 // Solo per sapere QUALI sezioni dichiarano l'elenco id come letterale
@@ -3076,6 +3079,21 @@ function write(rel, content) {
 // The lock mechanism itself lives in lib/register-lock.mjs, not here — see
 // that module's header for why (this file imports jsdom statically, so
 // nothing inside it is reachable by `node --test` without node_modules).
+/**
+ * I cantoni della voce del registry (D13). Dato additivo e interno: non
+ * decide nulla della generazione e non entra nell'API pubblicata, quindi un
+ * errore del classificatore lascia la voce senza `canton` (come gli articoli
+ * nazionali) invece di far fallire un articolo gia' pagato.
+ */
+function registryCantonsOrNone(data, sourceUrl) {
+  try {
+    return registryCantonsForArticle(data, sourceUrl);
+  } catch (err) {
+    console.error(`  ⚠️ canton-classifier: ${err?.message || err} — voce senza campo canton`);
+    return [];
+  }
+}
+
 function beginRegisterLock(id) {
   // SECTION_NAME travels INTO the lock file: `generate-article.yml` runs the
   // two sections in the same checkout (the retry chain alternates them), so
@@ -17518,6 +17536,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // nessun file deve essere gia' stato scritto. Sovrascrive di proposito un
   // eventuale `articleType` arrivato dal payload del modello.
   data.articleType = registryArticleTypeForRun(RUN_REPORT.selectedArticleType, url);
+  data.canton = registryCantonsOrNone(data, url);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
@@ -18425,6 +18444,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.
   data.articleType = resolveArticleType(data, opts);
+  data.canton = registryCantonsOrNone(data, data.sourceUrl || '');
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

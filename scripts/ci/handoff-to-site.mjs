@@ -73,7 +73,12 @@ import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 // copie divergono in silenzio, e qui divergere significa chiudere una issue che
 // nessun canale risolvera'. Entrambi i moduli hanno la guardia `argv` sul
 // proprio `main`, quindi importarli non fa ne' rete ne' scritture.
-import { permanentBlock, isFixture, localCouplings } from './transport-identical-twins.mjs';
+import {
+  permanentBlock,
+  isFixture,
+  localCouplings,
+  scalarFingerprintCouplings,
+} from './transport-identical-twins.mjs';
 // Le issue che il manifest tiene APERTE (`corpus-only-pending` → `trackingIssue`).
 // Sorgente unica, come `mirrorLockedPaths()`: la lista viene dal manifest, non da
 // numeri ricopiati qui che divergerebbero al primo cambio di voce (AGENTS.md #6).
@@ -170,14 +175,25 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
   // `identical` sotto `.github/workflows/` resta bloccato quando il token non
   // ha lo scope `workflows`: passare solo `mode: identical` al ramo fixture lo
   // farebbe sembrare trasportabile e lascerebbe il fixture fuori da `stranded`.
+  // Gli artefatti `scalarFingerprint` sono accoppiamenti dichiarati dal
+  // manifest, non testo scansionabile: usiamo la stessa mappa del trasporto
+  // perche' un artefatto fuori dagli alberi di test non possa diventare
+  // stranded solo perche' `isFixture()` non lo riconosce.
   // Misuriamo prima la chiusura di `permanentBlock`, poi la passiamo a
   // `descentBlock` così la permanenza si propaga lungo la stessa catena del
   // trasporto vero.
+  const declaredCouplings = scalarFingerprintCouplings(man);
   const couplingsOf = new Map();
   for (const f of files) {
-    if (MIRROR_LOCKED_MODES.has(f.mode) && isFixture(f.path)) {
-      couplingsOf.set(f.path, localCouplings(f.path, modeOf));
-    }
+    if (!MIRROR_LOCKED_MODES.has(f.mode)) continue;
+    const fixture = isFixture(f.path);
+    const scanned = fixture ? localCouplings(f.path, modeOf) : [];
+    const declared = declaredCouplings.get(f.path) || [];
+    if (!fixture && !declared.length) continue;
+    couplingsOf.set(
+      f.path,
+      [...scanned, ...declared.filter((d) => !scanned.some((c) => c.path === d.path))],
+    );
   }
   const blockedForever = new Set();
   for (let changed = true; changed; ) {
@@ -300,11 +316,13 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
  * (il token del ciclo non ha lo scope `workflows`: «restano una copia a mano»),
  * ed e' esattamente cio' che un verdetto `blocked-workflows-scope` nomina.
  *
- * Un fixture segue la stessa regola del trasporto: il suo sottoalbero deve
- * essere leggibile e ogni accoppiamento deve restare `identical`. Il chiamante
- * passa gli accoppiamenti misurati da `localCouplings`, invece di trattare la
- * semplice forma «fixture» come un blocco permanente: altrimenti il hand-off
- * parcheggerebbe anche fixture che il trasporto copia davvero.
+ * Un fixture e un artefatto `scalarFingerprint` seguono la stessa regola del
+ * trasporto: il sottoalbero del primo deve essere leggibile e ogni
+ * accoppiamento del secondo deve restare `identical`. Il chiamante passa gli
+ * accoppiamenti misurati da `localCouplings` e quelli dichiarati dal manifest,
+ * invece di trattare la semplice forma «fixture» come un blocco permanente:
+ * altrimenti il hand-off parcheggerebbe anche fixture che il trasporto copia
+ * davvero, o chiuderebbe un artefatto che il trasporto rifiuta per sempre.
  *
  * `localCouplings` conserva il mode dichiarato, mentre `permanentBlock` guarda
  * anche la destinazione effettiva: per esempio un gemello `identical` sotto

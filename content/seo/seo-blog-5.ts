@@ -99129,6 +99129,385 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sequestri-contanti-brogeda': {
+    title: 'Contanti non dichiarati: sequestri a Brogeda | Frontaliere Ticino',
+    description: 'A Como-Brogeda la Guardia di Finanza ha sequestrato 128.500 e 113.450 euro dopo due controlli su contanti oltre la soglia di 10.000 euro. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, contanti, dichiarati, sequestri, brogeda',
+    ogTitle: 'Oltre 240 mila euro sequestrati a Brogeda',
+    ogDescription: 'Due controlli al valico autostradale di Como-Brogeda hanno portato al ritrovamento di oltre 240 mila euro in contanti. Le somme eccedenti la soglia di 10.000 euro sono state sequestrate come garanzia per le sanzioni amministrative.',
+    canonicalPath: '/articoli-frontaliere/sequestri-contanti-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Contanti non dichiarati: sequestri a Brogeda",
+      "description": "A Como-Brogeda la Guardia di Finanza ha sequestrato 128.500 e 113.450 euro dopo due controlli su contanti oltre la soglia di 10.000 euro. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/sequestri-contanti-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veicoli al valico autostradale di Como-Brogeda"
+      },
+      "datePublished": "2026-10-05T08:04:32+00:00",
+      "dateModified": "2026-10-05T08:04:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestri-contanti-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prevenzione-salute-aziende-ticinesi': {
+    title: 'Salute mentale: il DSS porta la prevenzione nelle aziende',
+    description: 'Il DSS e il Forum GSA Ticino promuovono la salute mentale nelle aziende. Scopri i dati su stress e apprendisti e come partecipare agli eventi di prevenzione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, porta, prevenzione',
+    ogTitle: 'Salute mentale sul lavoro: nuove iniziative in Ticino',
+    ogDescription: 'Il DSS e il Forum GSA Ticino lanciano programmi di prevenzione aziendale. Analisi dei dati sullo stress lavorativo e dettagli sugli appuntamenti formativi del 16 ottobre.',
+    canonicalPath: '/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salute mentale: il DSS porta la prevenzione nelle aziende",
+      "description": "Il DSS e il Forum GSA Ticino promuovono la salute mentale nelle aziende. Scopri i dati su stress e apprendisti e come partecipare agli eventi di prevenzione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prevenzione-salute-aziende-ticinesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro professionale in un ufficio ticinese."
+      },
+      "datePublished": "2026-10-05T08:37:00+00:00",
+      "dateModified": "2026-10-05T08:37:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-osservatorio-varese-spettacolo-galileo': {
+    title: 'Osservatorio di Varese: arriva lo spettacolo Galileo',
+    description: 'Sabato 17 ottobre l\'Osservatorio Schiaparelli di Varese ospita lo spettacolo teatrale Galileo, oltre le stelle, seguito dall\'osservazione di Luna e Saturno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, osservatorio, varese, arriva, spettacolo',
+    ogTitle: 'Osservatorio di Varese: arriva lo spettacolo Galileo',
+    ogDescription: 'Sabato 17 ottobre l\'Osservatorio Astronomico G.V. Schiaparelli a Varese Campo dei Fiori ospita la compagnia teatrale Corrado D\'Elia con lo spettacolo Galileo, oltre le stelle, seguito da un\'osservazione astronomica.',
+    canonicalPath: '/articoli-frontaliere/osservatorio-varese-spettacolo-galileo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Osservatorio di Varese: arriva lo spettacolo Galileo",
+      "description": "Sabato 17 ottobre l'Osservatorio Schiaparelli di Varese ospita lo spettacolo teatrale Galileo, oltre le stelle, seguito dall'osservazione di Luna e Saturno.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/osservatorio-varese-spettacolo-galileo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Osservatorio astronomico a Varese"
+      },
+      "datePublished": "2026-10-05T09:15:25+00:00",
+      "dateModified": "2026-10-05T09:15:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/osservatorio-varese-spettacolo-galileo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-valuta-intercettata-brogeda': {
+    title: 'Doppio sequestro di valuta al valico di Brogeda',
+    description: 'Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, doppio, sequestro, valuta, valico',
+    ogTitle: 'Doppio sequestro di valuta a Brogeda',
+    ogDescription: 'La cronaca del valico di Brogeda riferisce due operazioni distinte svolte nei giorni scorsi: doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro. Il testo non aggiunge altri dettagli sull\'episodio.',
+    canonicalPath: '/articoli-frontaliere/valuta-intercettata-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Doppio sequestro di valuta al valico di Brogeda",
+      "description": "Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/valuta-intercettata-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Valico di Brogeda, teatro di due operazioni con oltre 240mila euro intercettati"
+      },
+      "datePublished": "2026-10-05T10:10:43+00:00",
+      "dateModified": "2026-10-05T10:10:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/valuta-intercettata-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-unione-confronto-pilastro-ch-it': {
+    title: 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    description: 'L\'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro: il quadro per LPP, AVS e imposta alla fonte. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, unione, chiede',
+    ogTitle: 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    ogDescription: 'La richiesta dell\'Unione Frontalieri Italiani riporta il secondo pilastro al centro del confronto tra Italia e Svizzera. Per chi lavora in Canton Ticino, LPP, AVS, permesso G, imposta alla fonte e doppia imposizione restano piani distinti.',
+    canonicalPath: '/articoli-frontaliere/unione-confronto-pilastro-ch-it/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Secondo pilastro: l'Unione chiede confronto CH-IT",
+      "description": "L'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro: il quadro per LPP, AVS e imposta alla fonte. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/unione-confronto-pilastro-ch-it.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sul secondo pilastro e una borsa da pendolare in Ticino"
+      },
+      "datePublished": "2026-10-05T10:48:06+00:00",
+      "dateModified": "2026-10-05T10:48:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/unione-confronto-pilastro-ch-it/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-13a-rendita-iva-aumento': {
+    title: '13a rendita AVS: il Consiglio federale: «Ecco perché aumenteremo l’IVA»',
+    description: 'La Svizzera vota il 29 novembre sull\'aumento dell\'IVA per finanziare la prima 13a rendita AVS, in arrivo a dicembre per 2,6 milioni di pensionati. Dettagli',
+    keywords: 'frontalieri, ticino, svizzera, italia, rendita, consiglio, federale, ecco',
+    ogTitle: '13a rendita AVS: il Consiglio federale spiega l\'aumento dell\'IVA',
+    ogDescription: 'A dicembre 2024 i pensionati svizzeri riceveranno la prima 13a rendita AVS. Il 29 novembre si vota sull\'aumento dell\'IVA per coprirne i costi. Scopri come cambieranno le aliquote e quali saranno le entrate previste.',
+    canonicalPath: '/articoli-frontaliere/avs-13a-rendita-iva-aumento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "13a rendita AVS: il Consiglio federale: «Ecco perché aumenteremo l’IVA»",
+      "description": "La Svizzera vota il 29 novembre sull'aumento dell'IVA per finanziare la prima 13a rendita AVS, in arrivo a dicembre per 2,6 milioni di pensionati. Dettagli",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/avs-13a-rendita-iva-aumento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castel Grande di Bellinzona, simbolo della Svizzera, sotto un cielo sereno."
+      },
+      "datePublished": "2026-10-05T11:25:01+00:00",
+      "dateModified": "2026-10-05T11:25:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/avs-13a-rendita-iva-aumento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-05': {
+    title: 'Bollettino del frontaliere – 5 ottobre 2026: 1336 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 5 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 5 ottobre 2026: 1336 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 5 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-05/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 5 ottobre 2026: 1336 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 5 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-05.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 5 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-05T12:09:11+00:00",
+      "dateModified": "2026-10-05T12:09:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-05/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pedemontana-avviso-truffa': {
+    title: 'Truffa Pedemontana: falso avviso da 6,95 euro | Frontaliere Ticino',
+    description: 'Un SMS annuncia un pedaggio Pedemontana non pagato da 6,95 euro: il link porta a un sito clone che mira ai dati bancari o della carta. Verifica l\'indirizzo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, truffa, pedemontana, falso, avviso',
+    ogTitle: 'Truffa Pedemontana: falso avviso da 6,95 euro',
+    ogDescription: 'Un SMS chiede 6,95 euro per un pedaggio Pedemontana non pagato e invita a pagare entro 24 ore. Il link porta a una pagina clone con loghi e informazioni di pagamento e mira ai dati bancari o della carta. La fonte indica come verificare l\'indirizzo.',
+    canonicalPath: '/articoli-frontaliere/pedemontana-avviso-truffa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Truffa Pedemontana: falso avviso da 6,95 euro",
+      "description": "Un SMS annuncia un pedaggio Pedemontana non pagato da 6,95 euro: il link porta a un sito clone che mira ai dati bancari o della carta. Verifica l'indirizzo.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Avviso falso di pagamento Pedemontana visualizzato su uno smartphone"
+      },
+      "datePublished": "2026-10-05T12:20:02+00:00",
+      "dateModified": "2026-10-05T12:20:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pedemontana-avviso-truffa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ticinoskills-2026-gordola-event': {
+    title: 'TicinoSkills 2026: gare, orientamento e 50 anni SSIC TI',
+    description: 'Dal 1° al 3 ottobre 2026 a Gordola, TicinoSkills 2026 ha visto 44 apprendisti gareggiare, oltre 600 studenti in orientamento partecipare e quasi 400 famiglie',
+    keywords: 'frontalieri, ticino, svizzera, italia, ticinoskills, gare, orientamento, anni',
+    ogTitle: 'TicinoSkills 2026: gare, orientamento e 50 anni SSIC TI',
+    ogDescription: 'Scopri tutti i dettagli di TicinoSkills 2026: le gare dei 44 apprendisti, le visite di oltre 600 studenti in orientamento, la partecipazione di quasi 400 famiglie al sabato e i festeggiamenti per il cinquantesimo anniversario del Centro SSIC TI',
+    canonicalPath: '/articoli-frontaliere/ticinoskills-2026-gordola-event/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "TicinoSkills 2026: gare, orientamento e 50 anni SSIC TI",
+      "description": "Dal 1° al 3 ottobre 2026 a Gordola, TicinoSkills 2026 ha visto 44 apprendisti gareggiare, oltre 600 studenti in orientamento partecipare e quasi 400 famiglie",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ticinoskills-2026-gordola-event.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Apprendisti impegnati in una prova pratica durante TicinoSkills 2026 a Gordola, con lo sfondo del centro SSIC TI e bandiere svizzere."
+      },
+      "datePublished": "2026-10-05T13:08:37+00:00",
+      "dateModified": "2026-10-05T13:08:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ticinoskills-2026-gordola-event/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fairtiq-bonus-ticino-2026-2027': {
+    title: 'Più viaggi, meno paghi: con FAIRTIQ sconti fino al 20%',
+    description: 'Scopri il FAIRTIQ Bonus Ticino, l\'iniziativa che offre sconti automatici fino al 20% sui viaggi in Ticino dal 1° ottobre 2026 al 31 marzo 2027. Info su soglie',
+    keywords: 'frontalieri, ticino, svizzera, italia, viaggi, meno, paghi, fairtiq',
+    ogTitle: 'Più viaggi, meno paghi: con FAIRTIQ sconti fino al 20%',
+    ogDescription: 'Il FAIRTIQ Bonus Ticino ti permette di risparmiare sui tuoi spostamenti in Ticino. Dal 1° ottobre 2026 al 31 marzo 2027, ottieni sconti automatici fino al 20% sui viaggi successivi una volta raggiunte le soglie mensili di 10, 50 o 100 franchi',
+    canonicalPath: '/articoli-frontaliere/fairtiq-bonus-ticino-2026-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Più viaggi, meno paghi: con FAIRTIQ sconti fino al 20%",
+      "description": "Scopri il FAIRTIQ Bonus Ticino, l'iniziativa che offre sconti automatici fino al 20% sui viaggi in Ticino dal 1° ottobre 2026 al 31 marzo 2027. Info su soglie",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/fairtiq-bonus-ticino-2026-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano con lago e montagne, e un mezzo di trasporto pubblico in primo piano."
+      },
+      "datePublished": "2026-10-05T13:47:46+00:00",
+      "dateModified": "2026-10-05T13:47:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fairtiq-bonus-ticino-2026-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tifosi-azioni-ambri-evento': {
+    title: 'Ambrì-Piotta, tifosi uniti per diventare azionisti',
+    description: 'Sabato 17 ottobre, tifosi dell’Ambrì-Piotta si ritrovano alla Gottardo Arena: raccolta fondi per quote Hcap, tombola, partita e festa notturna fino alle 2.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ambrì-piotta, tifosi, uniti, diventare',
+    ogTitle: 'Ambrì-Piotta, tifosi uniti per diventare azionisti',
+    ogDescription: 'Il 17 ottobre il capannone accanto alla Gottardo Arena ospita tombola, aperitivo, maccheronata, partita del Ginevra Servette su maxi-schermo e festa fino alle 2. Il programma sostiene la raccolta destinata all’acquisto di quote dell’Hcap.',
+    canonicalPath: '/articoli-frontaliere/tifosi-azioni-ambri-evento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ambrì-Piotta, tifosi uniti per diventare azionisti",
+      "description": "Sabato 17 ottobre, tifosi dell’Ambrì-Piotta si ritrovano alla Gottardo Arena: raccolta fondi per quote Hcap, tombola, partita e festa notturna fino alle 2.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tifosi-azioni-ambri-evento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tifosi biancoblù riuniti per l’evento dell’Ambrì-Piotta alla Gottardo Arena"
+      },
+      "datePublished": "2026-10-05T14:41:12+00:00",
+      "dateModified": "2026-10-05T14:41:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tifosi-azioni-ambri-evento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

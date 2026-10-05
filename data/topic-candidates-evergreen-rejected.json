@@ -793,34 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954446/lunedi-proteste-istituti-disagi-francia": {
-      "section": "svizzera",
-      "ts": 1791012987043
-    },
-    "frontaliere::https://comozero.it/attualita/lombardia-82-milioni-di-euro-per-potenziare-la-rete-ferroviaria-anche-a-como": {
-      "section": "frontaliere",
-      "ts": 1791023059255
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nasce-lo-sportello-dellagricoltura-per-imprese-e-operatori-del-ticino-e-lago-maggiore/2695627": {
-      "section": "frontaliere",
-      "ts": 1791026283479
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/fim-cisl-dei-laghi-linclusione-e-un-diritto-dalle-storie-di-disabilita-alla-contrattazione-in-azienda/2697043": {
-      "section": "frontaliere",
-      "ts": 1791029170390
-    },
-    "svizzera::https://www.laregione.ch/svizzera/svizzera/1954477/scappano-su-un-monopattino-elettrico-ferito-un-agente": {
-      "section": "svizzera",
-      "ts": 1791032005242
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1954490/locarno-demenza-auto-aiuto-malattia-gruppo": {
-      "section": "svizzera",
-      "ts": 1791034948364
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/il-coraggio-di-cambiare-ecco-la-squadra-di-avanti-con-ticinolavoro-per-il-consiglio-di-stato-443888": {
-      "section": "frontaliere",
-      "ts": 1791036505506
-    },
     "svizzera::https://www.tio.ch/dal-mondo/attualita/1954495/ucraina-kiev-mosca-stranieri-ministero": {
       "section": "svizzera",
       "ts": 1791037537100
@@ -1036,6 +1008,30 @@
     "frontaliere::https://comozero.it/punti-di-vista/turismo-a-como-5-milioni-di-tassa-di-soggiorno-una-cifra-uguale-per-trasporti-e-nidi-gratis-casa-o-tariffe-parcheggi": {
       "section": "frontaliere",
       "ts": 1791184701070
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-lallarme-di-confapi-varese-cosi-si-penalizzano-le-pmi-industriali/2698117": {
+      "section": "frontaliere",
+      "ts": 1791188571654
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/sacha-lembo-nominato-direttore-del-controllo-cantonale-delle-finanze-443971": {
+      "section": "frontaliere",
+      "ts": 1791190885729
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/villa-principe-leopoldo-76-licenziamenti-per-la-ristrutturazione-dellhotel-443974": {
+      "section": "frontaliere",
+      "ts": 1791201995923
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/rinaldi-piccola-industria-la-pmi-e-un-presidio-sociale-energia-credito-e-competenze-le-sfide-delle-imprese-varesine/2698249": {
+      "section": "frontaliere",
+      "ts": 1791209698429
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/05/leggi-notizia/argomenti/economia-13/articolo/riforma-dellartigianato-lallarme-di-confapi-varese-a-rischio-la-competitivita-delle-pmi-i.html": {
+      "section": "frontaliere",
+      "ts": 1791209932659
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/scuola-imprese-e-territorio-a-saronno-un-convegno-sulle-nuove-sfide-degli-istituti-tecnici/2698585": {
+      "section": "frontaliere",
+      "ts": 1791210021979
     }
   }
 }

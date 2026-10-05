@@ -79,9 +79,9 @@
  *     non compare, c'è un lavoro tracciato (`entry.trackingIssue`) da seguire;
  *   - a differenza di `corpus-only`, QUESTO script interroga davvero il sito
  *     (`sitePath || path`): se il fetch smette di rispondere 404, il gemello è
- *     atterrato e lo stato diventa `corpus-only-pending-landed` — l'istruzione
- *     è promuovere la voce a mano (`identical`/`adapted` + `--init`), perché
- *     un contenuto appena arrivato può non essere ancora quello atteso;
+ *     atterrato e lo stato diventa `corpus-only-pending-landed` — se la voce
+ *     ha `expectedSiteBlob`, deve combaciare quel blob; un path omonimo con una
+ *     versione precedente resta `corpus-only-pending-stale-twin`;
  *   - se il lavoro tracciato viene abbandonato, la retromarcia è manuale: si
  *     toglie `trackingIssue` e si torna a `corpus-only`. Nessuno script lo fa
  *     da solo, per la stessa ragione per cui non mergia né riscrive: è una
@@ -1238,13 +1238,14 @@ function gitBlobSha(buf) {
  * @param {string|null} a.blobSha  git blob SHA del file in QUESTO repo; null se
  *   assente o illeggibile → mai un verdetto (fail-open)
  * @param {string} [a.sitePath]    path dichiarato sul sito, se diverso
+ * @param {string} [a.expectedSiteBlob] blob Git atteso sul path per un pending
  * @param {boolean} [a.trackingIssueClosed] abilita il controllo di un pending
  * @param {Map<string,string[]>|null} a.siteBlobIndex  blobSha → path sul sito.
  *   null quando l'inventario non è disponibile (rete giù, `--no-provenance`):
  *   fail-open, come tutto il resto dello script.
  * @returns {{misclassified: boolean, sitePaths: string[]}}
  */
-function corpusOnlyTwinVerdict({ mode, path: corpusPath, blobSha, sitePath, trackingIssueClosed = false, siteBlobIndex }) {
+function corpusOnlyTwinVerdict({ mode, path: corpusPath, blobSha, sitePath, expectedSiteBlob, trackingIssueClosed = false, siteBlobIndex }) {
   // `corpus-only-pending` resta silenzioso finche' la issue e' aperta: il
   // lavoro e' gia' tracciato. Una issue chiusa senza promozione, invece, e'
   // proprio il caso in cui il backstop deve tornare a guardare.
@@ -1257,6 +1258,19 @@ function corpusOnlyTwinVerdict({ mode, path: corpusPath, blobSha, sitePath, trac
   // della voce; per un pending puo' essere il `sitePath` alternativo.
   const expectedPath = sitePath || corpusPath;
   const pathIndex = siteBlobIndex.paths || new Set([...siteBlobIndex.values()].flat());
+  if (mode === 'corpus-only-pending' && expectedSiteBlob) {
+    // Un pending puo' puntare a un path che esiste gia' per una versione
+    // precedente. La sola presenza non prova l'atterraggio: conta il blob
+    // atteso sul path dichiarato.
+    const expectedPaths = new Set(siteBlobIndex.get(expectedSiteBlob) || []);
+    const expectedPathMatch = expectedPath && expectedPaths.has(expectedPath);
+    return {
+      misclassified: Boolean(expectedPathMatch),
+      sitePaths: expectedPathMatch ? [expectedPath] : [],
+      contentPaths: [...expectedPaths].sort(),
+      pathMatch: Boolean(expectedPathMatch),
+    };
+  }
   const pathMatch = expectedPath && pathIndex.has(expectedPath);
   if (pathMatch) sitePaths.add(expectedPath);
   if (!sitePaths.size) return { misclassified: false, sitePaths: [] };
@@ -1731,6 +1745,17 @@ function classify(entry, now, base, deps = manifestDepsOf(entry), pinners = impl
     // tolto, che è una storia diversa da "non è mai esistito").
     const tracking = entry.trackingIssue ? ` Tracciato in ${entry.trackingIssue}.` : ' ATTENZIONE: nessun `trackingIssue` dichiarato.';
     if (now.site !== null) {
+      if (entry.expectedSiteBlob && now.siteBlob !== entry.expectedSiteBlob) {
+        return {
+          state: 'corpus-only-pending-stale-twin',
+          actionable: true,
+          headline: 'il path esiste sul sito, ma il gemello e\' ancora su un blob precedente',
+          detail:
+            `${reason || ''}${tracking} Il blob live e' \`${now.siteBlob || 'non verificato'}\`, quello atteso e' ` +
+            `\`${entry.expectedSiteBlob}\`: la sola presenza del path non prova che il lavoro tracciato sia atterrato.`,
+          hashes: { siteBlob: now.siteBlob || null, expectedSiteBlob: entry.expectedSiteBlob },
+        };
+      }
       return {
         state: 'corpus-only-pending-landed',
         actionable: true,
@@ -1967,6 +1992,7 @@ async function main() {
       siteBytes = entry.mode === 'corpus-only' ? null : await siteFile(sitePath);
       now = {
         site: siteBytes === null ? null : sha256(siteBytes),
+        siteBlob: siteBytes === null ? null : gitBlobSha(siteBytes),
         corpus: localHash(rel, { committed: INIT }),
       };
     } catch (e) {
@@ -2266,6 +2292,7 @@ async function main() {
         mode: entry.mode,
         path: entry.path,
         sitePath: entry.sitePath,
+        expectedSiteBlob: entry.expectedSiteBlob,
         trackingIssueClosed: closedPending.has(entry.path),
         blobSha,
         siteBlobIndex: index,
@@ -2322,7 +2349,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', REUSABLE_PIN_STATE, 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', SECTION_DRIFT_STATE, 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', REUSABLE_PIN_STATE, 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', SECTION_DRIFT_STATE, 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'corpus-only-pending-stale-twin', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -2363,6 +2390,7 @@ async function main() {
       section('both-moved-converged', '🟢 Modificato su entrambi i lati, ma gia\' convergente — solo da ri-baselinare'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
       section('corpus-only-pending-landed', '🟢 Il gemello atteso è arrivato sul sito — pronta la promozione'),
+      section('corpus-only-pending-stale-twin', '⏳ Il path esiste, ma il gemello sul sito è stantio'),
       section('missing-here', '⚠️ Dichiarato nel manifest ma assente'),
       section('removed-on-site', '⚠️ Non più sul sito'),
       section('corpus-ahead', '⬆️ Modificato qui — candidato a risalire al sito'),
@@ -2377,7 +2405,7 @@ async function main() {
       '',
       '`ghost-baseline` (issue #148) è diverso da tutte le altre classi: non descrive dove si è mosso il codice, dice che il DATO della baseline non è mai stato reale — verificato contro l\'intera storia disponibile del path su quel lato (o, se la storia supera il cap di ricerca, la entry non compare qui: un mancato match parziale resta silenzioso per non produrre falsi rossi). La correzione è ricalcolare la baseline dal contenuto REALE — l\'hash del blob a cui quel lato era davvero allineato alla data di `alignedAt` — e non semplicemente rilanciare `--init`, perché `--init` scrive `now`, che per una entry già rotta potrebbe anch\'esso non essere il valore che ci si aspetta. Se `now` è invece il valore giusto (la voce è nuova e non si è più mossa), `--init --only <path>` la registra da sola, senza dichiarare allineate le altre trecento (issue #653).',
       '',
-      '`corpus-only-pending` non è un errore neanche lei: è un promemoria che punta a un lavoro già tracciato altrove (vedi `trackingIssue` in ogni riga). Non richiede un\'azione qui finché non diventa `-landed` — a quel punto la voce va promossa a mano.',
+      '`corpus-only-pending` non è un errore neanche lei: è un promemoria che punta a un lavoro già tracciato altrove (vedi `trackingIssue` in ogni riga). Se porta `expectedSiteBlob`, la sola presenza del path non basta: `-stale-twin` indica che il sito serve ancora un blob precedente, e solo il blob atteso diventa `-landed`; a quel punto la voce va promossa a mano.',
       '',
       'Dopo un allineamento voluto: `node scripts/ci/loop-drift-check.mjs --init` e committa il manifest.',
       '',

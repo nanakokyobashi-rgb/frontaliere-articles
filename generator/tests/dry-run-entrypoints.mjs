@@ -56,6 +56,12 @@ const ENTRY_POINTS = [
   // stati aggiunti (issue #101). L'omissione non era visibile: la lista e'
   // scritta a mano e nessun controllo la confronta con `generator/scripts/`.
   'refresh-events-dataset.mjs',
+  // Consumatore del dataset carburanti per cantone (P9b), stessa forma dei tre
+  // sopra: --help esce prima di qualunque fetch.
+  'refresh-fuel-cantons.mjs',
+  // Dataset di categoria degli hub cantonali (D11, P9f/P9g).
+  'refresh-canton-notices.mjs',
+  'refresh-canton-services-data.mjs',
   // I due `refresh` dei dataset annuali D11 (fisco, pensioni): stessa forma
   // degli altri, `--help` e `DRY_RUN` inclusi.
   'refresh-canton-tax.mjs',

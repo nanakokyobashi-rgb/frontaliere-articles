@@ -1,8 +1,4 @@
 {
-  "https://www.tvsvizzera.it/tvs/relazioni-italo-svizzere/frontalieri-in-vallese-unaltra-svizzera-qui-non-sono-un-problema-politico/91785826": "frontalieri-vallese-differenza-ticino",
-  "https://www.varesenoi.it/2026/08/02/leggi-notizia/articolo/guida-unambulanza-e-lavora-sei-giorni-al-mese-guadagno-2300-euro.html": "ambulanza-spagna-guadagno-2300-euro",
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1941108/bce-e-bns-ferme-cosa-cambia-per-chi-vive-tra-italia-e-svizzera": "bce-bns-ferme-cambi-per-frontalieri",
-  "https://www.laregione.ch/culture/spettacoli/1941490/fiori-nella-ghisa-ruggine-nel-presente": "teatro-periferico-locarno-memoria",
   "https://www.tio.ch/ticino/attualita/1941597/lavoro-ristorazione-difficolta-mestiere-ticino": "lavoro-ristorazione-difficolta-ticino",
   "https://www.swissinfo.ch/ita/azienda-trasporti-zurigo%2c-%22ecco-perch%c3%a9-abbiamo-scelto-bus-cinesi%22/91840564": "azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi",
   "https://www.tio.ch/ticino/attualita/1941660/sa-lavoro-vallemaggia-posti-matrimonio-vale": "matrimonio-aziendale-vallemaggia-100",
@@ -1914,6 +1910,56 @@
   "https://www.tio.ch/ticino/cronaca/1954692/traffico-galleria-camion-nicolao-avaria": {
     "articleId": "camion-avaria-san-nicolao",
     "ts": "2026-10-05T07:32:18.995Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/denaro-non-dichiarato-sequestrati-240-mila-euro-al-valico-di-chiasso-brogeda-443957": {
+    "articleId": "sequestri-contanti-brogeda",
+    "ts": "2026-10-05T08:04:32.638Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1954714/stress-e-salute-mentale-il-dss-porta-la-prevenzione-nelle-aziende-ticinesi": {
+    "articleId": "prevenzione-salute-aziende-ticinesi",
+    "ts": "2026-10-05T08:37:00.964Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/05/leggi-notizia/argomenti/eventi-20/articolo/allosservatorio-astronomico-di-varese-arriva-lo-spettacolo-galileo-oltre-le-stelle.html": {
+    "articleId": "osservatorio-varese-spettacolo-galileo",
+    "ts": "2026-10-05T09:15:25.868Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/estero/confine/1954732/doppio-sequestro-di-valuta-al-valico-di-brogeda": {
+    "articleId": "valuta-intercettata-brogeda",
+    "ts": "2026-10-05T10:10:44.044Z",
+    "keyForm": 2
+  },
+  "https://www.vconews.it/2026/10/05/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/secondo-pilastro-lunione-frontalieri-italiani-chiede-un-confronto-con-italia-e-svizzera-1.html": {
+    "articleId": "unione-confronto-pilastro-ch-it",
+    "ts": "2026-10-05T10:48:07.168Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1954725/avs-aumento-iva-franchi-13a-consiglio-federale-dovrebbe-rendita-finanziamento": {
+    "articleId": "avs-13a-rendita-iva-aumento",
+    "ts": "2026-10-05T11:25:02.095Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1954626/un-avviso-di-pagamento-da-pedemontana-occhio-alla-possibile-truffa": {
+    "articleId": "pedemontana-avviso-truffa",
+    "ts": "2026-10-05T12:20:03.080Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/ticinoskills-2026-tre-giorni-di-competizioni-e-scoperte-professionali-a-gordola-443977": {
+    "articleId": "ticinoskills-2026-gordola-event",
+    "ts": "2026-10-05T13:08:37.707Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1954816/fairtiq-bonus-viaggi-aziende-ticino-sconti": {
+    "articleId": "fairtiq-bonus-ticino-2026-2027",
+    "ts": "2026-10-05T13:47:46.301Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/bellinzonese/1954772/i-tifosi-si-uniscono-per-diventare-azionisti-dell-ambri-piotta": {
+    "articleId": "tifosi-azioni-ambri-evento",
+    "ts": "2026-10-05T14:41:12.777Z",
     "keyForm": 2
   }
 }

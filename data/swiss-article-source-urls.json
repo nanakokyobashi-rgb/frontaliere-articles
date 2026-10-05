@@ -1,54 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/seco%3a-%22non-%c3%a8-un-boom%2c-ma-la-crescita-ha-un%27ampia-base%22/91999934": {
-    "articleId": "seco-ampia-base-crescita",
-    "ts": "2026-09-03T14:40:29.726Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1947849/svizzera-pacchetto-governi-bilaterali-iii": {
-    "articleId": "bilaterali-iii-governi-cantonali",
-    "ts": "2026-09-03T14:48:14.035Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/u6ueja33fa4o": {
-    "articleId": "ricercatore-psi-spintronica-quantistica",
-    "ts": "2026-09-03T14:56:47.956Z",
-    "keyForm": 2
-  },
-  "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
-    "articleId": "seco-apprendistato-tirocini",
-    "ts": "2026-10-01T00:18:20.848Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/inflazione-aumenta-in-svizzera%2c-banca-nazionale-ritoccher%c3%a0-tassi%3f/92001563": {
-    "articleId": "inflazione-svizzera-bns-tassi",
-    "ts": "2026-09-03T15:18:35.895Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/riserve-naturali-messe-a-dura-prova-da-siccit%c3%a0/91999663": {
-    "articleId": "riserve-naturali-siccita-estate-2024",
-    "ts": "2026-09-03T16:11:14.748Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/svizzera/svizzera/1947883/medici-di-famiglia-e-dell-infanzia-criticano-il-nuovo-tariffario-medico": {
-    "articleId": "tariffario-ambulatoriale-cure-base",
-    "ts": "2026-09-03T17:34:19.168Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/aeroporto-di-ginevra-%c3%a8-un-motore-per-la-regione%2c-vale-3%2c3-miliardi/92002579": {
-    "articleId": "aeroporto-ginevra-motore-3-3-miliardi",
-    "ts": "2026-09-03T19:31:08.188Z",
-    "keyForm": 2
-  },
-  "https://www.cdt.ch/news/svizzera/swiss-life-prevede-di-tagliare-600-posti-di-lavoro-entro-il-2028-438041": {
-    "articleId": "assicurazioni-tagli-occupazione-2028",
-    "ts": "2026-09-03T21:39:03.599Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/cronaca/1946429/ricerca-eoc-guarda-svizzera-giornata": {
-    "articleId": "ricerca-medicina-ticino-innovazione",
-    "ts": "2026-09-04T04:37:39.508Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1947960/bally-caslano-lavoro-ag-stabilimento": {
     "articleId": "bally-caslano-licenziamenti-2025",
     "ts": "2026-09-04T04:55:26.729Z",
@@ -2497,6 +2447,56 @@
   "https://www.swissinfo.ch/ita/associazione-inquilini-lancia-allarme-su-prezzi-affitti/92166278": {
     "articleId": "allarme-aumento-affitti-svizzera",
     "ts": "2026-10-05T07:13:59.342Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954697/svizzera-associazione-reddito-alloggi-affitti-anni": {
+    "articleId": "affitti-svizzera-aumento-asi",
+    "ts": "2026-10-05T07:50:21.367Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gz4zhubyfjyi": {
+    "articleId": "voto-iva-avs-novembre-2026",
+    "ts": "2026-10-05T08:19:03.204Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1954699/villa-principe-leopoldo-chiude-per-lavori-e-lascia-a-casa-76-persone": {
+    "articleId": "villa-principe-leopoldo-chiude",
+    "ts": "2026-10-05T08:50:48.995Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954740/edifici-formazione-vicino-futuro-infrastrutture-afc-binari": {
+    "articleId": "porte-aperte-login-ticino",
+    "ts": "2026-10-05T09:48:17.635Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/rischi-informatici-sottovalutati-da-molte-pmi%2c-studio/92167766": {
+    "articleId": "rischi-cyber-pmi-svizzere",
+    "ts": "2026-10-05T10:27:11.803Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/guy-parmelin-in-india%3a-per-un-accordo-che-protegga-gli-investimenti/92167943": {
+    "articleId": "india-aels-protezione-capitali",
+    "ts": "2026-10-05T11:04:37.392Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/13esima-avs%3a-necessario-un-aumento-dell%27iva-per-finanziarla/92167551": {
+    "articleId": "aumento-iva-finanziamento-13esima-avs",
+    "ts": "2026-10-05T11:44:07.692Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1954774/compensi-di-cda-e-ceo-delle-partecipate-l-udc-vuole-piu-trasparenza": {
+    "articleId": "lugano-trasparenza-partecipate",
+    "ts": "2026-10-05T11:58:26.583Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954783/svizzera-posti-collaboratori-coinvolti-tamedia-tempo": {
+    "articleId": "tamedia-taglio-posti-lavoro",
+    "ts": "2026-10-05T12:36:39.449Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954786/india-parmelin-guy-visita-svizzera": {
+    "articleId": "guy-parmelin-visita-india",
+    "ts": "2026-10-05T13:21:32.663Z",
     "keyForm": 2
   }
 }

@@ -169,6 +169,33 @@ test('un pending con tracking chiuso e `sitePath` alternativo viene rilevato anc
   );
 });
 
+test('un pending con expectedSiteBlob non scambia il vecchio path per atterraggio', () => {
+  const sitePath = 'scripts/lib/ai-meta-response.mjs';
+  const expectedSiteBlob = 'b'.repeat(40);
+  const stale = corpusOnlyTwinVerdict({
+    mode: 'corpus-only-pending',
+    path: 'generator/scripts/lib/ai-meta-response.mjs',
+    sitePath,
+    expectedSiteBlob,
+    trackingIssueClosed: true,
+    blobSha: 'a'.repeat(40),
+    siteBlobIndex: new Map([['c'.repeat(40), [sitePath]]]),
+  });
+  assert.equal(stale.misclassified, false);
+
+  const landed = corpusOnlyTwinVerdict({
+    mode: 'corpus-only-pending',
+    path: 'generator/scripts/lib/ai-meta-response.mjs',
+    sitePath,
+    expectedSiteBlob,
+    trackingIssueClosed: true,
+    blobSha: 'a'.repeat(40),
+    siteBlobIndex: new Map([[expectedSiteBlob, [sitePath]]]),
+  });
+  assert.equal(landed.misclassified, true);
+  assert.deepEqual(landed.sitePaths, [sitePath]);
+});
+
 test('inventario mancante o file illeggibile → mai un verdetto (fail-open)', () => {
   // `siteBlobIndex()` restituisce null su rete giù o albero `truncated`: un
   // inventario a metà darebbe falsi NEGATIVI, e un dato mancante non deve mai

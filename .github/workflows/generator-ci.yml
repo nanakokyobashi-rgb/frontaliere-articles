@@ -182,6 +182,18 @@ jobs:
           REWIRE_SKIP_WAF_403: '1'
         run: node generator/scripts/refresh-events-dataset.mjs --check
 
+      # Dataset di categoria degli hub cantonali (D11). Entrambi morbidi
+      # sull'irraggiungibile (gli hub rendono senza quel blocco), duri su cio'
+      # che scaricano: un documento di un'altra forma esce non-zero.
+      - name: Canton notices dataset well-shaped (P9g)
+        env:
+          REWIRE_SKIP_WAF_403: '1'
+        run: node generator/scripts/refresh-canton-notices.mjs --check
+
+      - name: Canton services inputs well-shaped (P9f)
+        env:
+          REWIRE_SKIP_WAF_403: '1'
+        run: node generator/scripts/refresh-canton-services-data.mjs --check
       # I due dataset annuali di categoria D11 (fisco, pensioni): hard gate per
       # la stessa ragione — cifre fiscali/previdenziali vecchie o malformate non
       # devono arrivare a un hub cantonale ne' al brief di fattualita'.
