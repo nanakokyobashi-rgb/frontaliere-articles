@@ -24545,6 +24545,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'greggio-export-pre-guerra',
+    category: 'novita',
+    date: '2026-10-05T23:22:16.833Z',
+    image: '/images/blog/greggio-export-pre-guerra.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

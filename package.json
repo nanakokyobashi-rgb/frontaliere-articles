@@ -32,6 +32,10 @@
     "refresh:road-events": "node generator/scripts/refresh-road-events.mjs",
     "refresh:canton-notices": "node generator/scripts/refresh-canton-notices.mjs",
     "refresh:canton-services": "node generator/scripts/refresh-canton-services-data.mjs",
+    "generate:canton-hubs": "node generator/scripts/generate-canton-hubs.mjs",
+    "verify:canton-hub-links": "node generator/scripts/verify-canton-hub-links.mjs",
+    "refresh:canton-tax": "node generator/scripts/refresh-canton-tax.mjs",
+    "refresh:pension-parameters": "node generator/scripts/refresh-pension-parameters.mjs",
     "test:shell-contract": "npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs"
   }
 }

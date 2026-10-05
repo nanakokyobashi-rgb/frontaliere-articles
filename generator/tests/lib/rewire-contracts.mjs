@@ -5,7 +5,7 @@
  *
  * ## Cosa e' un «contratto» qui, e perche' nessun guard esistente lo vede
  *
- * Tre artefatti JSON che il SITO pubblica su `cdn.frontaliereticino.ch/data/` e
+ * Artefatti JSON che il SITO pubblica su `cdn.frontaliereticino.ch/data/` e
  * che QUESTO repo consuma. I due capi sono due file diversi, in due repo
  * diversi, con NOMI DIVERSI, e non si importano: si parlano via HTTP.
  *
@@ -30,7 +30,7 @@
  *
  * ## Cosa fa questo file, che il fixture da solo non farebbe
  *
- * Dichiara l'accoppiamento. Le tre coppie produttore↔consumatore smettono di
+ * Dichiara l'accoppiamento. Le coppie produttore↔consumatore smettono di
  * essere una cosa che si scopre leggendo due intestazioni in due repo e
  * diventano un dato, con sopra le asserzioni di
  * `generator/tests/rewire-json-contracts.test.mjs`.
@@ -41,17 +41,17 @@
  * pinna **l'aspettativa del consumatore**: fallisce quando cambia il
  * consumatore (o quando qualcuno indebolisce la validazione del `refresh`), NON
  * quando cambia il produttore. La meta' che vede muoversi il produttore e'
- * l'altra: i `--check` dei tre `refresh` contro i dati veri, che
+ * l'altra: i `--check` dei `refresh` contro i dati veri, che
  * `.github/workflows/rewire-contract-watch.yml` esegue a orologio. Le due meta'
  * non sono alternative — coprono direzioni diverse, e servono entrambe.
  */
 
-/** Cartella pubblica del sito da cui i tre `refresh` fetchano (con fallback same-origin). */
+/** Cartella pubblica del sito da cui i `refresh` fetchano (con fallback same-origin). */
 export const CDN_DATA_BASE = 'https://cdn.frontaliereticino.ch/data';
 
 /**
  * Le coppie: le tre del REWIRE originale piu' i dataset di categoria (D11)
- * costruiti con la stessa forma.
+ * costruiti con la stessa forma (carburanti, avvisi, servizi, fisco, pensioni).
  *
  * `producer.path` e' un path del repo del SITO: qui non esiste, e non deve
  * esistere. E' documentazione verificabile a mano, non un riferimento risolto —
@@ -128,11 +128,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/lib/border-wait-ranking.mjs',
         fields: ['weightedAvgMinutes', 'totalSamples'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-border-wait.mjs',
+        fields: ['current', 'perCrossing', 'weekStart', 'weekEnd', 'canton'],
+      },
     ],
     producedUnread: ['generatedFor'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      workflows: ['generate-border-wait-ranking-weekly.yml'],
+      workflows: ['generate-border-wait-ranking-weekly.yml', 'refresh-canton-hubs.yml'],
       ci: ['generator-ci.yml'],
     },
   },
@@ -217,11 +221,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/lib/events-digest-content.mjs',
         fields: ['startDate', 'startTime', 'title', 'canton'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-events.mjs',
+        fields: ['events', 'generatedAt', 'startDate', 'startTime', 'title', 'titleByLocale', 'canton', 'comune', 'venue', 'url', 'id'],
+      },
     ],
     producedUnread: ['totalEvents'],
     notJsonExpect: /did not return JSON/,
     productionFetch: {
-      workflows: ['refresh-events-digest.yml'],
+      workflows: ['refresh-canton-hubs.yml', 'refresh-events-digest.yml'],
     },
   },
   {
@@ -273,15 +281,15 @@ export const REWIRE_CONTRACTS = [
           'source',
         ],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-fuel.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'records', 'canton', 'side', 'fuel', 'currency', 'avg', 'min', 'stations', 'observedAt', 'source'],
+      },
     ],
     producedUnread: ['median', 'area', 'coverage', 'exchangeRate', 'sources'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la cache (P9b consegna solo refresh + contratto): il ' +
-        'producer degli hub cantonali (P10) deve cablare `npm run refresh:fuel-cantons` nel proprio ' +
-        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
-        'solo dal `--check` di rewire-contract-watch.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -316,15 +324,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/lib/canton-notices-data.mjs',
         fields: ['schemaVersion', 'generatedAt', 'notices', 'id', 'canton', 'category', 'title', 'url', 'publishedAt', 'observedAt', 'source'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-notices.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'notices', 'title', 'url', 'publishedAt'],
+      },
     ],
     producedUnread: ['sourcesRegistry', 'totalNotices', 'health', 'language'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la cache (P9g consegna solo refresh + contratto): il ' +
-        'producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-notices` nel proprio ' +
-        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
-        'dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   // ── P9f: i quattro input dell'aggregatore dei servizi ─────────────────────
@@ -364,11 +372,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['rankings'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -404,11 +408,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['complete', 'bidCount'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -444,11 +444,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['windowDays', 'unresolvedDuties'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -484,11 +480,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['alerts', 'confidence'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -505,10 +497,10 @@ export const REWIRE_CONTRACTS = [
     },
     failureMode: 'soft',
     symptom:
-      'chiusure, cantieri e disagi del trasporto pubblico per cantone (P9c). Nessun generatore li ' +
-      'legge ancora; quando gli hub mobilita\' cantonali li useranno (P11), un `canton` col codice ' +
-      'BFS del semicantone (BS invece di BASILEA) o un tipo fuori dai quattro filerebbe gli eventi ' +
-      'sotto nessun hub, in silenzio.',
+      'chiusure, cantieri e disagi del trasporto pubblico per cantone (P9c), letti dal blocco ' +
+      '«chiusure e cantieri» degli hub mobilita\' cantonali (P10): un `canton` col codice BFS del ' +
+      'semicantone (BS invece di BASILEA) o un tipo fuori dai quattro filerebbe gli eventi sotto ' +
+      'nessun hub, in silenzio.',
     fixture: 'generator/tests/fixtures/rewire/road-events.json',
     recorded: {
       at: '2026-10-05',
@@ -521,15 +513,118 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/refresh-road-events.mjs',
         fields: ['schemaVersion', 'generatedAt', 'events', 'id', 'canton', 'type', 'title', 'url', 'validFrom', 'validTo', 'source', 'observedAt'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-road-events.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'events', 'id', 'canton', 'type', 'title', 'titleByLocale', 'url', 'validFrom', 'validTo', 'observedAt'],
+      },
     ],
-    producedUnread: ['sources', 'titleByLocale', 'publishedAt', 'geo'],
+    producedUnread: ['sources', 'publishedAt', 'geo'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora il dataset: gli hub mobilita\' cantonali e i loro articoli ' +
-        'arrivano con P11 del programma sezioni per cantone, che cablera\' `npm run refresh:road-events` ' +
-        'nel workflow che li genera e spostera\' questa voce in `workflows`.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
+  },
+  {
+    id: 'canton-tax',
+    artifact: 'canton-tax/latest.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/fetch-canton-tax-data.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-tax.mjs',
+      envUrl: 'CANTON_TAX_URL',
+      cache: 'generator/data/canton-tax.json',
+    },
+    failureMode: 'hard',
+    freshen: 'shift-year',
+    symptom:
+      'gli hub fiscali cantonali e il brief di fattualita\' degli articoli cantonali citerebbero onere e ' +
+      'aliquote alla fonte non verificati o di un anno vecchio: e\' la classe di cifre per cui 94 evergreen ' +
+      'svizzeri su 110 sono stati bocciati al fact-check.',
+    fixture: 'generator/tests/fixtures/rewire/canton-tax.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo:
+        '26 cantoni, onere del solo anno del dataset (il produttore pubblica anche i due precedenti), ' +
+        'tariffe alla fonte ridotte ai codici A0/R0 senza imposta minima; numeri non alterati',
+    },
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-canton-tax.mjs',
+        fields: ['schemaVersion', 'year', 'burden', 'incomeBracketsCHF', 'cantons', 'burdenPct', 'withholding', 'ratesPct', 'A0'],
+      },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-tax.mjs',
+        fields: ['schemaVersion', 'year', 'generatedAt', 'sources', 'burden', 'incomeBracketsCHF', 'cantons', 'capital', 'municipality', 'burdenPct', 'withholding', 'monthlyIncomesCHF', 'ratesPct', 'A0', 'withholdingSource'],
+      },
+    ],
+    producedUnread: ['taxAuthority', 'deadlines', 'deadlinesSource'],
+    productionFetch: {
+      workflows: ['refresh-canton-hubs.yml'],
+    },
+    notJsonExpect: /did not return JSON/,
+  },
+  {
+    id: 'pension-parameters',
+    artifact: 'pension-parameters/latest.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/fetch-pension-parameters.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-pension-parameters.mjs',
+      envUrl: 'PENSION_PARAMETERS_URL',
+      cache: 'generator/data/pension-parameters.json',
+    },
+    failureMode: 'hard',
+    freshen: 'shift-year',
+    symptom:
+      'rendita AVS, soglie LPP e massimali 3a di un anno vecchio finirebbero negli hub pensioni e nel ' +
+      'brief di fattualita\': il sito stesso ha pubblicato 2\'450 CHF di rendita massima 2026 quando la ' +
+      'cifra ufficiale era 2\'520.',
+    fixture: 'generator/tests/fixtures/rewire/pension-parameters.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo:
+        '26 cantoni con la cassa di compensazione; cassa pensioni pubblica e imposta sul capitale tenute ' +
+        'solo per GE, GR, TI, VS e ZH; numeri non alterati',
+    },
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-pension-parameters.mjs',
+        fields: [
+          'schemaVersion',
+          'year',
+          'federal',
+          'avs',
+          'minMonthlyCHF',
+          'maxMonthlyCHF',
+          'lpp',
+          'entryThresholdCHF',
+          'coordinationDeductionCHF',
+          'maxInsuredSalaryCHF',
+          'minInterestRatePct',
+          'minConversionRatePct',
+          'pillar3a',
+          'maxWithLppCHF',
+          'maxWithoutLppCHF',
+          'cantons',
+          'compensationFund',
+          'url',
+          'name',
+        ],
+      },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-pensions.mjs',
+        fields: ['schemaVersion', 'year', 'generatedAt', 'federal', 'avs', 'minMonthlyCHF', 'maxMonthlyCHF', 'contributions', 'employeePct', 'lpp', 'entryThresholdCHF', 'coordinationDeductionCHF', 'minConversionRatePct', 'pillar3a', 'maxWithLppCHF', 'maxWithoutLppCHF', 'cantons', 'compensationFund', 'publicPensionFund', 'capitalWithdrawalTax', 'amountsCHF', 'taxCHF', 'municipality', 'url', 'name'],
+      },
+    ],
+    producedUnread: ['sources', 'unemployment'],
+    productionFetch: {
+      workflows: ['refresh-canton-hubs.yml'],
+    },
+    notJsonExpect: /did not return JSON/,
   },
 ];
 
@@ -550,6 +645,7 @@ export const REWIRE_CONTRACTS = [
  */
 export function freshenRecording(c, payload, nowMs = Date.now()) {
   if (c.freshen === 'current-year') return { ...structuredClone(payload), year: new Date(nowMs).getUTCFullYear() };
+  if (c.freshen === 'shift-year') return freshenYear(payload, new Date(nowMs).getUTCFullYear());
   if (c.freshen !== 'shift-timestamps') return payload;
   const anchor = Date.parse(payload.generatedAt);
   const delta = nowMs - 3600_000 - anchor; // un'ora fa: «appena pubblicato»
@@ -609,6 +705,31 @@ export function freshenWindow(payload, todayIso) {
   for (const half of ['current', 'previous']) {
     shifted[half].weekStart = isoShift(shifted[half].weekStart, delta);
     shifted[half].weekEnd = isoShift(shifted[half].weekEnd, delta);
+  }
+  return shifted;
+}
+
+/**
+ * Rimette in anno un dataset annuale (canton-tax, pension-parameters).
+ *
+ * I due `refresh` rifiutano un `year` piu' vecchio di un anno rispetto al
+ * calendario — il gate che distingue «il publisher si e' fermato» da «va tutto
+ * bene». Una registrazione e' datata per definizione: senza traslazione il
+ * fixture comincerebbe a fallire da solo fra due anni. Si sposta l'anno in
+ * blocco (campo `year`, `burden.years` e le chiavi per anno di `burdenPct`),
+ * lasciando intatto ogni numero; il gate di staleness ha il suo caso di
+ * mutazione che porta l'anno indietro apposta.
+ */
+export function freshenYear(payload, currentYear) {
+  const delta = currentYear - payload.year;
+  const shifted = structuredClone(payload);
+  if (delta === 0) return shifted;
+  shifted.year += delta;
+  if (Array.isArray(shifted.burden?.years)) shifted.burden.years = shifted.burden.years.map((y) => y + delta);
+  for (const canton of Object.values(shifted.cantons || {})) {
+    if (canton && canton.burdenPct && typeof canton.burdenPct === 'object') {
+      canton.burdenPct = Object.fromEntries(Object.entries(canton.burdenPct).map(([y, v]) => [String(Number(y) + delta), v]));
+    }
   }
   return shifted;
 }
