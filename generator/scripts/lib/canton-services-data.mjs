@@ -71,6 +71,17 @@ const WEATHER_IT_CITIES = new Set(['como', 'varese', 'lecco']);
 export class ShapeError extends Error {}
 
 const ISO_TIMESTAMP = /^\d{4}-\d\d-\d\dT\d\d:\d\d(?::\d\d(?:\.\d+)?)?(?:Z|[+-]\d\d:\d\d)$/;
+/** Solo link assoluti http(s) con host: gli hub li renderanno cliccabili. */
+function httpUrlOrNull(value) {
+  if (typeof value !== 'string') return null;
+  try {
+    const u = new URL(value);
+    return (u.protocol === 'https:' || u.protocol === 'http:') && u.hostname ? u.href : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Millisecondi di un timestamp ISO 8601 con fuso; NaN per qualunque altra cosa. */
 function isoTimestampMs(value) {
   return typeof value === 'string' && ISO_TIMESTAMP.test(value) ? Date.parse(value) : NaN;
@@ -143,7 +154,7 @@ export function shapePremiums(doc, members, { nowMs = Date.now() } = {}) {
   return {
     available: true,
     year: doc.year,
-    fetchedAt: doc.fetchedAt ?? null,
+    fetchedAt: Number.isFinite(isoTimestampMs(doc.fetchedAt)) ? doc.fetchedAt : null,
     basis: { ageClass: 'ERW', franchiseChf: 300, accident: true, model: 'standard', unit: 'CHF/mese' },
     regions,
   };
@@ -176,16 +187,22 @@ export function shapePlateAuctions(doc, members, { nowMs = Date.now() } = {}) {
     .filter((a) => finite(a.currentBidChf) != null)
     .sort((a, b) => b.currentBidChf - a.currentBidChf)
     .slice(0, MAX_AUCTION_HIGHLIGHTS)
-    .map((a) => ({ plate: a.normalizedPlate ?? `${a.platePrefix ?? ''}${a.plateNumber ?? ''}`, currentBidChf: a.currentBidChf, endsAt: a.endsAt, url: a.officialDetailUrl ?? null }));
+    .map((a) => ({
+      plate: a.normalizedPlate ?? `${a.platePrefix ?? ''}${a.plateNumber ?? ''}`,
+      currentBidChf: a.currentBidChf,
+      endsAt: new Date(Date.parse(a.endsAt)).toISOString(),
+      url: httpUrlOrNull(a.officialDetailUrl),
+    }));
   return {
     available: true,
     generatedAt: doc.generatedAt,
-    officialUrls: [...new Set(sources.map((s) => s.officialUrl).filter(Boolean))],
+    officialUrls: [...new Set(sources.map((s) => httpUrlOrNull(s.officialUrl)).filter(Boolean))],
     sourceStatus: sources.map((s) => s.status ?? null),
     activeCount: active.length,
     bidMedianChf: median(bids),
     bidMaxChf: bids.length ? Math.max(...bids) : null,
-    nextEndsAt: active.map((a) => a.endsAt).sort()[0] ?? null,
+    // per istante, non per stringa: fusi diversi ordinerebbero male
+    nextEndsAt: active.length ? new Date(Math.min(...active.map((a) => Date.parse(a.endsAt)))).toISOString() : null,
     highlights,
   };
 }

@@ -4887,7 +4887,7 @@
       "reason": "Contratto lato consumatore e letture del dataset `canton-notices.json` (avvisi ufficiali cantonali, D11/P9g), prodotto sul sito da `scripts/crawl-canton-notices.mjs`. Vive solo qui: e' la meta' consumatrice di un contratto HTTP, sul sito non esiste un omonimo e copiarlo la' invertirebbe la direzione del REWIRE.",
       "baseline": {
         "site": null,
-        "corpus": "60fbcaf9a60fdeb1",
+        "corpus": "9dfdeb3c4f7ef910",
         "alignedAt": "2026-10-05"
       }
     },
@@ -4897,7 +4897,7 @@
       "reason": "Meta' pura dell'aggregatore dei servizi per cantone (P9f, D11): shaper per blocco (premi, aste targhe, turni farmacia, meteo) sui JSON che il sito pubblica sul CDN, modello `daily-brief-data.mjs`. Nessun omonimo sul sito: il sito produce gli artefatti, il corpus li riassume per gli hub.",
       "baseline": {
         "site": null,
-        "corpus": "936e8ad6f997cf23",
+        "corpus": "0141182e5433dcaa",
         "alignedAt": "2026-10-05"
       }
     },

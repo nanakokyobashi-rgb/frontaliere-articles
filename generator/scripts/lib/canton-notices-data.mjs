@@ -29,6 +29,22 @@ export const MAX_AGE_DAYS = 4;
 
 const ISO_DAY = /^\d{4}-\d\d-\d\d$/;
 
+/** Giorno di calendario esistente (2026-02-31 no). */
+function isRealDay(value) {
+  if (typeof value !== 'string' || !ISO_DAY.test(value)) return false;
+  const t = Date.parse(`${value}T00:00:00Z`);
+  return Number.isFinite(t) && new Date(t).toISOString().slice(0, 10) === value;
+}
+
+/** Istante ISO UTC esistente: la forma non basta (2026-10-05T99:99:99Z). */
+function isRealInstant(value) {
+  if (typeof value !== 'string' || !ISO_TIME.test(value)) return false;
+  const t = Date.parse(value);
+  if (!Number.isFinite(t)) return false;
+  // il round-trip scarta ore/minuti fuori scala che qualche motore normalizza
+  return new Date(t).toISOString().slice(0, 19) === value.slice(0, 19);
+}
+
 /** `https:///path` passerebbe una regex: si chiede a URL un protocollo http(s) e un host. */
 function isAbsoluteHttpUrl(value) {
   if (typeof value !== 'string' || /\s/.test(value)) return false;
@@ -68,10 +84,10 @@ export function cantonNoticesProblem(payload, { nowMs = Date.now() } = {}) {
     if (!NOTICE_CATEGORIES.includes(n.category)) return `${where}: category ${JSON.stringify(n.category)} is not a hub category`;
     if (typeof n.title !== 'string' || n.title.length < 8 || n.title.length > 240) return `${where}: title is not an 8-240 char string`;
     if (!isAbsoluteHttpUrl(n.url)) return `${where}: url is not an absolute http(s) URL with a host`;
-    if (n.publishedAt !== null && !(typeof n.publishedAt === 'string' && (ISO_DAY.test(n.publishedAt) || ISO_TIME.test(n.publishedAt)))) {
+    if (n.publishedAt !== null && !(isRealDay(n.publishedAt) || isRealInstant(n.publishedAt))) {
       return `${where}: publishedAt ${JSON.stringify(n.publishedAt)} is neither null nor an ISO date`;
     }
-    if (typeof n.observedAt !== 'string' || !ISO_TIME.test(n.observedAt)) return `${where}: observedAt is not an ISO timestamp`;
+    if (!isRealInstant(n.observedAt)) return `${where}: observedAt is not an ISO timestamp`;
     if (typeof n.source !== 'string' || !n.source) return `${where}: source is missing`;
     cantons.add(n.canton);
   }
@@ -86,7 +102,8 @@ const dateKey = (n) => String(n.publishedAt ?? '');
  * recente; quelli senza data in coda. E' la lettura che faranno gli hub.
  */
 export function noticesFor(payload, canton, { category = null, limit = 10 } = {}) {
-  const n = Number(limit);
+  // null/undefined/non numerico = tetto di default, non zero
+  const n = limit == null || limit === '' ? NaN : Number(limit);
   const max = Number.isFinite(n) ? Math.max(0, Math.floor(n)) : 10;
   return (payload?.notices ?? [])
     .filter((n) => n.canton === canton && (!category || n.category === category))

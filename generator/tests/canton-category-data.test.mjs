@@ -150,6 +150,21 @@ test('contratto per voce: turno con date illeggibili, URL senza host, cantone me
   weather.cities.chur = { ...weather.cities.lugano, cityId: 'chur', canton: 'XX' };
   assert.deepEqual(unmappedWeatherCities(weather), ['chur']);
   assert.equal(noticesFor(recording('canton-notices', NOW), 'TI', { limit: -3 }).length, 0);
+  assert.ok(noticesFor(recording('canton-notices', NOW), 'TI', { limit: null }).length > 0);
+  // forma giusta, data impossibile
+  for (const [field, value] of [['publishedAt', '2026-99-99'], ['publishedAt', '2026-02-31'], ['observedAt', '2026-10-05T99:99:99Z']]) {
+    const bad = recording('canton-notices', NOW);
+    bad.notices[0][field] = value;
+    assert.ok(cantonNoticesProblem(bad, { nowMs: NOW }), `${field}=${value} accettato`);
+  }
+  // prossima scadenza per istante, non per stringa
+  const pa = recording('plate-auctions', NOW);
+  const ag = pa.auctions.filter((a) => a.sourceKey === 'AG');
+  ag[0].endsAt = new Date(NOW + 5 * HOUR).toISOString();
+  // stesso istante scritto con fuso +02:00: lessicograficamente «dopo» quello UTC delle 5 h
+  ag[1].endsAt = `${new Date(NOW + 2 * HOUR + 2 * HOUR).toISOString().slice(0, 19)}+02:00`;
+  const block = shapePlateAuctions(pa, ['AG'], { nowMs: NOW });
+  assert.equal(Date.parse(block.nextEndsAt), Math.min(Date.parse(ag[0].endsAt), Date.parse(ag[1].endsAt)));
 });
 
 test('soglie della vista: con una sola fonte raggiungibile non si scrive', () => {
