@@ -31,7 +31,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeFileSync, mkdirSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
 import { loadEventsDataset, isoDay } from './lib/events-utils.mjs';
-import { buildWeekendDigestArticle, resolveDigestCanton, CANTON_DIGEST_ARTICLES } from './lib/events-digest-content.mjs';
+import { buildWeekendDigestArticle, resolveDigestCanton } from './lib/events-digest-content.mjs';
+import { cantonDigestSeo, digestCantonFromArgs } from './lib/events-digest-meta.mjs';
 import {
   registerArticleFiles,
   checkArticleIdExists,
@@ -84,40 +85,17 @@ const STATIC_META = {
 };
 
 /**
- * Evergreen metadata of a non-Ticino canton digest, from the canton's
- * "in <canton>" phrase (registered once, never refreshed, like STATIC_META).
- * The cover is the site-wide fallback place image, the same one the other
+ * Evergreen metadata of a canton digest: Ticino keeps STATIC_META as is; the
+ * other cantons get their own SEO block (lib/events-digest-meta.mjs). The
+ * cover is the site-wide fallback place image, the same one the other
  * producers fall back to (publish-journalist-article.mjs STATIC_FALLBACK_IMAGE).
  */
 export function staticMetaForCanton(groupKey) {
   if (groupKey === 'TI') return STATIC_META;
-  const place = CANTON_DIGEST_ARTICLES[groupKey].place.it;
-  return {
-    ...STATIC_META,
-    seo: {
-      title: `Eventi del weekend ${place}: cosa fare`,
-      description: `Agenda degli eventi del weekend ${place}: concerti, mostre, feste e mercati, comune per comune, aggiornata ogni giorno.`,
-      keywords: `eventi ${place}, eventi weekend ${place}, cosa fare ${place}, agenda eventi ${place}`,
-      ogTitle: `Eventi del weekend ${place}`,
-      ogDescription: `Concerti, mostre, feste e mercati questo weekend ${place}, comune per comune. Aggiornato ogni giorno.`,
-      headline: `Eventi del weekend ${place}: cosa fare sabato e domenica`,
-      breadcrumbName: 'Eventi del weekend',
-    },
-  };
+  return { ...STATIC_META, seo: cantonDigestSeo(groupKey) };
 }
 
-/**
- * Canton requested on the command line (`--canton GR` / `--canton=GR`) or
- * via EVENTS_DIGEST_CANTON; undefined means Ticino. Validated by
- * resolveDigestCanton, which throws on an unknown code.
- */
-export function digestCantonFromArgs(argv = process.argv.slice(2), env = process.env) {
-  const index = argv.indexOf('--canton');
-  const raw = index >= 0 ? argv[index + 1] : argv.find((arg) => arg.startsWith('--canton='))?.slice('--canton='.length);
-  const value = String(raw ?? env.EVENTS_DIGEST_CANTON ?? '').trim();
-  if (index >= 0 && (!value || value.startsWith('--'))) throw new Error('--canton needs a canton code');
-  return value ? resolveDigestCanton(value) : undefined;
-}
+export { digestCantonFromArgs };
 
 /** Build the full registration `data` object from the current weekend's events. */
 export function buildData(todayIso, { canton, datasetPath = path.join(REPO_ROOT, 'data', 'events.json') } = {}) {

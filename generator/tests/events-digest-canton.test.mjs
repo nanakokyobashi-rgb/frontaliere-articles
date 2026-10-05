@@ -4,25 +4,32 @@
  * `generate-events-digest-article.mjs` senza cantone resta il digest Ticino
  * (`eventi-weekend-ticino`, invariato); con `--canton <CODE>` o
  * `EVENTS_DIGEST_CANTON` costruisce il digest evergreen del gruppo cantonale
- * (`eventi-weekend-<slug it>`), che conta solo i suoi eventi. Nessuna rete:
- * il dataset e' la fixture del contratto REWIRE `events-dataset`.
+ * (`eventi-weekend-<slug it>`), che conta solo i suoi eventi. Nessuna rete e
+ * nessuna dipendenza npm (il job unit non fa `npm ci`): il produttore importa
+ * create-article.mjs, quindi qui si provano i moduli che usa — e il suo
+ * cablaggio si legge dal sorgente. Il dataset e' la fixture del contratto
+ * REWIRE `events-dataset`.
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cantonDigestSeo, digestCantonFromArgs } from '../scripts/lib/events-digest-meta.mjs';
 import {
-  buildData,
-  digestCantonFromArgs,
-  staticMetaForCanton,
-} from '../scripts/generate-events-digest-article.mjs';
-import { CANTON_DIGEST_ARTICLES, DIGEST_ARTICLE_SLUGS } from '../scripts/lib/events-digest-content.mjs';
-import { assertGeneratedArticleQuality, assertArticlePassesFactualityGates } from '../scripts/create-article.mjs';
+  buildWeekendDigestArticle,
+  CANTON_DIGEST_ARTICLES,
+  DIGEST_ARTICLE_ID,
+  DIGEST_ARTICLE_SLUGS,
+} from '../scripts/lib/events-digest-content.mjs';
+import { loadEventsDataset } from '../scripts/lib/events-utils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATASET = path.join(__dirname, 'fixtures', 'rewire', 'events.json');
+const PRODUCER = path.join(__dirname, '..', 'scripts', 'generate-events-digest-article.mjs');
 // Venerdi': il weekend della fixture e' 2026-08-15/16.
 const TODAY = '2026-08-14';
+const { events } = loadEventsDataset(DATASET);
 
 describe('digestCantonFromArgs', () => {
   it('senza argomenti ne\' env resta il Ticino (undefined)', () => {
@@ -43,24 +50,22 @@ describe('digestCantonFromArgs', () => {
   });
 });
 
-describe('buildData per cantone', () => {
-  it('Ticino: identita\' e metadati invariati', () => {
-    const ti = buildData(TODAY, { datasetPath: DATASET });
+describe('digest per cantone sulla fixture events-dataset', () => {
+  it('Ticino: identita\' invariata, con o senza cantone esplicito', () => {
+    const ti = buildWeekendDigestArticle({ events, todayIso: TODAY });
+    assert.equal(ti.id, DIGEST_ARTICLE_ID);
     assert.equal(ti.id, 'eventi-weekend-ticino');
     assert.deepEqual(ti.slugs, DIGEST_ARTICLE_SLUGS);
-    assert.equal(ti.seo.title, 'Eventi del weekend in Ticino: cosa fare');
-    assert.equal(ti.image, 'lugano-view.webp');
-    assert.equal(ti._eventCount, 4);
-    assert.deepEqual(buildData(TODAY, { datasetPath: DATASET, canton: 'TI' }), ti);
+    assert.equal(ti.eventCount, 4);
+    assert.deepEqual(buildWeekendDigestArticle({ events, todayIso: TODAY, canton: 'TI' }), ti);
   });
 
   it('un altro cantone: id stabile, slug dalla tabella, conteggio solo dei suoi eventi', () => {
-    const sz = buildData(TODAY, { datasetPath: DATASET, canton: 'SZ' });
+    const sz = buildWeekendDigestArticle({ events, todayIso: TODAY, canton: 'SZ' });
     assert.equal(sz.id, 'eventi-weekend-svitto');
     assert.deepEqual(sz.slugs, CANTON_DIGEST_ARTICLES.SZ.slugs);
-    assert.equal(sz._eventCount, 1);
-    assert.equal(sz._weekend, '2026-08-15..2026-08-16');
-    assert.equal(sz.seo.title, 'Eventi del weekend nel Canton Svitto: cosa fare');
+    assert.equal(sz.eventCount, 1);
+    assert.equal(`${sz.weekendStart}..${sz.weekendEnd}`, '2026-08-15..2026-08-16');
     assert.match(sz.content.it.body1, /nel Canton Svitto ci è un evento/);
     assert.match(sz.content.it.body2, /\(\/eventi\/svitto\/einsiedeln\/\)/);
     assert.match(sz.content.de.body1, /\/de\/veranstaltungen\/schwyz\/dieses-wochenende\//);
@@ -68,21 +73,25 @@ describe('buildData per cantone', () => {
     assert.match(sz.content.it.body2, /## Eventi anche in altri cantoni/);
     assert.match(sz.content.it.body2, /\(\/eventi\/ticino\/lugano\/\)/);
   });
+});
 
-  it('i metadati evergreen nominano il cantone, mai il Ticino', () => {
+describe('metadati evergreen per cantone', () => {
+  it('nominano il cantone, mai il Ticino, per tutti i 23 gruppi', () => {
     for (const group of Object.keys(CANTON_DIGEST_ARTICLES)) {
-      const meta = staticMetaForCanton(group);
+      const seo = cantonDigestSeo(group);
       const place = CANTON_DIGEST_ARTICLES[group].place.it;
-      assert.equal(meta.seo.headline, `Eventi del weekend ${place}: cosa fare sabato e domenica`);
-      assert.doesNotMatch(JSON.stringify(meta.seo), /Ticino|ticino/);
+      assert.equal(seo.title, `Eventi del weekend ${place}: cosa fare`);
+      assert.equal(seo.headline, `Eventi del weekend ${place}: cosa fare sabato e domenica`);
+      assert.doesNotMatch(JSON.stringify(seo), /Ticino|ticino/);
     }
+    assert.throws(() => cantonDigestSeo('TI'), /no canton digest/);
   });
 
-  it('il digest di un altro cantone passa gli stessi gate di qualita\' e fattualita\' del refresh', () => {
-    for (const canton of ['SZ', 'GR', 'JU']) {
-      const data = buildData(TODAY, { datasetPath: DATASET, canton });
-      assert.doesNotThrow(() => assertGeneratedArticleQuality(data), `${canton}: gate di qualita'`);
-      assert.doesNotThrow(() => assertArticlePassesFactualityGates(data), `${canton}: gate di fattualita'`);
-    }
+  it('il produttore passa il cantone al builder e ai metadati (cablaggio letto dal sorgente)', () => {
+    const src = fs.readFileSync(PRODUCER, 'utf-8');
+    assert.match(src, /const canton = digestCantonFromArgs\(\);\n\s*const data = buildData\(todayIso, \{ canton \}\);/);
+    assert.match(src, /buildWeekendDigestArticle\(\{ events: dataset\.events, todayIso, canton \}\)/);
+    assert.match(src, /\.\.\.staticMetaForCanton\(resolveDigestCanton\(canton\)\),/);
+    assert.match(src, /if \(groupKey === 'TI'\) return STATIC_META;/);
   });
 });
