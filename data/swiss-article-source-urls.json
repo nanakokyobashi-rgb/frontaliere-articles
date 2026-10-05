@@ -1,9 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
-    "articleId": "seco-apprendistato-tirocini",
-    "ts": "2026-10-01T00:18:20.848Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/inflazione-aumenta-in-svizzera%2c-banca-nazionale-ritoccher%c3%a0-tassi%3f/92001563": {
     "articleId": "inflazione-svizzera-bns-tassi",
     "ts": "2026-09-03T15:18:35.895Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1954699/villa-principe-leopoldo-chiude-per-lavori-e-lascia-a-casa-76-persone": {
     "articleId": "villa-principe-leopoldo-chiude",
     "ts": "2026-10-05T08:50:48.995Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954740/edifici-formazione-vicino-futuro-infrastrutture-afc-binari": {
+    "articleId": "porte-aperte-login-ticino",
+    "ts": "2026-10-05T09:48:17.635Z",
     "keyForm": 2
   }
 }
