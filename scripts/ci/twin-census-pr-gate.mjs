@@ -171,7 +171,16 @@ function readableTreeEntries(body, { repo, treeSha }) {
 function blobShasFromRecursiveTree(entries, { repo, treeSha }) {
   const shas = new Set();
   for (const entry of entries) {
-    if (entry?.type !== 'blob') continue;
+    if (!entry || !['blob', 'tree', 'commit'].includes(entry.type)) {
+      throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce con tipo illeggibile`);
+    }
+    if (entry.type === 'tree') {
+      if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
+        throw new Error(`l'albero di ${repo}@${treeSha} contiene un sotto-albero senza SHA leggibile`);
+      }
+      continue;
+    }
+    if (entry.type !== 'blob') continue;
     if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
       throw new Error(`l'albero di ${repo}@${treeSha} contiene un blob senza SHA leggibile`);
     }
@@ -208,7 +217,7 @@ export async function siteBlobShasPagination({ repo, ref, token, fetchImpl = fet
     });
     const entries = readableTreeEntries(body, { repo, treeSha });
     for (const entry of entries) {
-      if (!entry || typeof entry.type !== 'string') {
+      if (!entry || !['blob', 'tree', 'commit'].includes(entry.type)) {
         throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce senza tipo leggibile`);
       }
       if (entry.type === 'blob') {
