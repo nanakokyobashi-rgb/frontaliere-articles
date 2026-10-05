@@ -4814,16 +4814,6 @@
         "corpus": "0380d00aa2d146ea",
         "alignedAt": "2026-10-04"
       }
-    },
-    {
-      "path": "scripts/ci/image-credits-revalidate.mjs",
-      "mode": "corpus-only",
-      "reason": "P14 C4: la rivalidazione mensile dei crediti delle copertine Wikimedia Commons (`.github/workflows/image-credits-revalidate.yml`). Legge il log di `scripts/backfill-image-credits.mjs --check` dopo un nuovo `--fetch` e apre, o commenta, UNA issue `needs-human` con i problemi per tipo (file cancellato, licenza, autore, restrizione, nuova versione, rinomina) e il rimedio; elenca anche le copertine Commons di cui `--check` legge l'header, per il checkout sparse della run. Sul sito non esiste e non deve: i record dei crediti vivono nel corpus e il sito li riceve via HTTP.",
-      "baseline": {
-        "site": null,
-        "corpus": "033ccd89f8204033",
-        "alignedAt": "2026-10-04"
-      }
     }
   ]
 }
