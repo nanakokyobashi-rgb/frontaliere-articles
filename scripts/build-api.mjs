@@ -1204,7 +1204,9 @@ const sectionsCatalog = buildSectionsCatalog({
     // ha la sua sitemap scritta qui sopra; il controllo resta, perche' una
     // sitemap annunciata e non emessa e' un 404 dichiarato in robots.txt.
     const file = PUBLISHED_BY_ID[id]?.api.sitemap;
-    if (!file || written[file] === undefined) throw new Error(`sezione live ${id} senza sitemap emessa — refusing`);
+    if (!file || !Object.prototype.hasOwnProperty.call(written, file)) {
+      throw new Error(`sezione live ${id} senza sitemap emessa — refusing`);
+    }
     return file;
   },
 });
