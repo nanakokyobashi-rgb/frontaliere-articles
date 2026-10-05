@@ -2504,6 +2504,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/events-digest-meta.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del digest eventi per cantone (P9a): argomento --canton/EVENTS_DIGEST_CANTON e blocco SEO evergreen dei cantoni non ticinesi, usati da generate-events-digest-article.mjs. Separati dal produttore solo perche' il produttore importa create-article.mjs (dipendenze npm) e il job unit di Generator CI non fa npm ci. Il gemello del produttore sul sito e' dormiente (la generazione degli articoli vive qui dal cutover), quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "8cc84eaadb3db65c",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "generator/scripts/lib/events-utils.mjs",
       "sitePath": "scripts/lib/events-utils.mjs",
       "mode": "adapted",

@@ -997,6 +997,9 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       produttore: 'generate-events-digest-article.mjs',
       contenuto: 'lib/events-digest-content.mjs',
       costante: 'DIGEST_ARTICLE_SLUGS',
+      // P9a: il digest degli altri cantoni copia gli slug dalla tabella
+      // letterale CANTON_DIGEST_ARTICLES (pinnata dal test dedicato sotto).
+      altreRighe: ['slugs: { ...identity.slugs },'],
     },
     {
       produttore: 'generate-border-wait-ranking-article.mjs',
@@ -1005,7 +1008,7 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
     },
   ];
 
-  for (const { produttore, contenuto, costante } of EVERGREEN) {
+  for (const { produttore, contenuto, costante, altreRighe = [] } of EVERGREEN) {
     it(`${produttore}: lo slug e' la costante letterale ${costante}`, () => {
       const srcProd = leggiScript(produttore);
       const srcCont = leggiScript(contenuto);
@@ -1018,7 +1021,7 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       //    l'UNICO punto di assegnazione: un `includes` di sola presenza
       //    lascerebbe passare un secondo `slugs:` che mischia un campo di
       //    modello accanto alla costante.
-      assert.deepEqual(righeSlugs(srcCont), [`slugs: { ...${costante} },`],
+      assert.deepEqual(righeSlugs(srcCont), [`slugs: { ...${costante} },`, ...altreRighe],
         `${contenuto} non assegna piu' gli slug SOLO copiando ${costante}`);
       // 3. E la costante e' un letterale: quattro stringhe, nessuna interpolazione.
       const m = new RegExp(`export const ${costante} = \\{([^}]*)\\};`).exec(srcCont);
@@ -1029,6 +1032,23 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       for (const [, locale, valore] of valori) asseriscilSlugLetterale(valore, `${costante}.${locale}`);
     });
   }
+
+  it('lib/events-digest-content.mjs: gli slug dei digest cantonali sono letterali in CANTON_DIGEST_ARTICLES', () => {
+    const srcCont = leggiScript('lib/events-digest-content.mjs');
+    // `identity` viene SOLO dalla tabella, indicizzata dal gruppo cantonale.
+    const assegnazioni = srcCont.split('\n').map((r) => r.trim()).filter((r) => /^const identity\b/.test(r));
+    assert.deepEqual(assegnazioni, ['const identity = CANTON_DIGEST_ARTICLES[groupKey];']);
+    const tabella = /export const CANTON_DIGEST_ARTICLES = \{\n([\s\S]*?)\n\};/.exec(srcCont);
+    assert.ok(tabella, "CANTON_DIGEST_ARTICLES non e' piu' un oggetto letterale");
+    assert.ok(!tabella[1].includes('${'), "CANTON_DIGEST_ARTICLES ha un'interpolazione: gli slug non sono piu' letterali");
+    const voci = [...tabella[1].matchAll(/id: '([^']*)', slugs: \{ it: '([^']*)', en: '([^']*)', de: '([^']*)', fr: '([^']*)' \}/g)];
+    assert.equal(voci.length, tabella[1].split('\n').filter((r) => r.trim()).length, 'una riga della tabella non ha la forma id + 4 slug letterali');
+    assert.ok(voci.length >= 23, `attesi i 23 gruppi non ticinesi, trovati ${voci.length}`);
+    for (const [, id, ...slugs] of voci) {
+      asseriscilSlugLetterale(id, `CANTON_DIGEST_ARTICLES ${id}`);
+      for (const slug of slugs) asseriscilSlugLetterale(slug, `CANTON_DIGEST_ARTICLES ${id}`);
+    }
+  });
 
   it('generate-daily-brief-article.mjs: lo slug e\' un template che interpola solo la data ISO', () => {
     const srcProd = leggiScript('generate-daily-brief-article.mjs');
