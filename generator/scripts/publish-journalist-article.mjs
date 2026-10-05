@@ -225,6 +225,7 @@ async function resolveHeroImage(data, doc) {
   if (commonsPick.commons && !commonsPick.ok) {
     console.warn(`  ⚠️  Commons pick «${commonsPick.title}» cannot be credited (${commonsPick.reasons.join(', ')}) — using the fallback image`);
   } else if (/^https?:\/\//i.test(rawImage)) {
+    let destPath = null;
     try {
       const res = await fetch(rawImage, { signal: AbortSignal.timeout(20000) });
       if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`);
@@ -232,7 +233,7 @@ async function resolveHeroImage(data, doc) {
       const sharp = (await import('sharp')).default;
       const destDir = path.join(PROJECT_ROOT, 'public', 'images', 'blog');
       fs.mkdirSync(destDir, { recursive: true });
-      const destPath = path.join(destDir, `${data.id}.webp`);
+      destPath = path.join(destDir, `${data.id}.webp`);
 
       const render = async (quality) => {
         const pipeline = sharp(buf)
@@ -270,6 +271,7 @@ async function resolveHeroImage(data, doc) {
       appendCatalogEntry(data._generatedImagePath);
       return { source: commonsPick.commons ? 'commons-pick' : 'journalist-upload', bytes: size };
     } catch (err) {
+      if (destPath) fs.rmSync(destPath, { force: true });
       console.warn(`  ⚠️  custom hero image download/processing failed (non-fatal): ${err.message}`);
     }
   }

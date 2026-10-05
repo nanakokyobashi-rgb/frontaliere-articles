@@ -27,11 +27,18 @@ test('article hero policy stays below the SEO image-size threshold', () => {
 test('all hero producers consume the shared byte and dimension policy', () => {
   const createArticle = readFileSync(path.join(HERE, '../scripts/create-article.mjs'), 'utf8');
   const journalistPublisher = readFileSync(path.join(HERE, '../scripts/publish-journalist-article.mjs'), 'utf8');
+  const dailyBriefImage = readFileSync(path.join(HERE, '../scripts/lib/daily-brief-image.mjs'), 'utf8');
   const maintenanceScript = readFileSync(path.join(HERE, '../scripts/optimize-blog-images.mjs'), 'utf8');
   assert.match(createArticle, /BLOG_IMAGE_QUALITY_PASSES/);
   assert.match(createArticle, /BLOG_IMAGE_TARGET_MAX_BYTES/);
   assert.match(journalistPublisher, /BLOG_IMAGE_QUALITY_PASSES/);
   assert.match(journalistPublisher, /BLOG_IMAGE_TARGET_MAX_BYTES/);
+  assert.match(journalistPublisher, /if \(destPath\) fs\.rmSync\(destPath, \{ force: true \}\)/);
+  assert.match(dailyBriefImage, /BLOG_IMAGE_QUALITY_PASSES/);
+  assert.match(dailyBriefImage, /BLOG_IMAGE_TARGET_MAX_BYTES/);
+  assert.match(dailyBriefImage, /BLOG_IMAGE_HARD_MAX_BYTES/);
   assert.match(maintenanceScript, /BLOG_IMAGE_WIDTH/);
   assert.match(maintenanceScript, /BLOG_IMAGE_HEIGHT/);
+  assert.match(maintenanceScript, /metadata\(\)/);
+  assert.match(maintenanceScript, /sourceGeometryOk/);
 });

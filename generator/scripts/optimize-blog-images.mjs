@@ -47,7 +47,19 @@ async function encodeAtQuality(input, quality) {
 async function optimize(name) {
   const input = path.join(HERO_DIR, name);
   const original = await fs.stat(input);
-  if (original.size <= BLOG_IMAGE_TARGET_MAX_BYTES) return { name, before: original.size, after: original.size, changed: false };
+  const metadata = await sharp(input).metadata();
+  const geometryOk = metadata.width === BLOG_IMAGE_WIDTH && metadata.height === BLOG_IMAGE_HEIGHT;
+  if (original.size <= BLOG_IMAGE_TARGET_MAX_BYTES && geometryOk) {
+    return {
+      name,
+      before: original.size,
+      after: original.size,
+      width: metadata.width,
+      height: metadata.height,
+      sourceGeometryOk: true,
+      changed: false,
+    };
+  }
 
   let best = null;
   for (const quality of BLOG_IMAGE_QUALITY_PASSES) {
@@ -56,17 +68,26 @@ async function optimize(name) {
     if (candidate.byteLength <= BLOG_IMAGE_TARGET_MAX_BYTES) break;
   }
 
-  if (write && best && best.candidate.byteLength < original.size) {
+  const shouldRewrite = !geometryOk || (best && best.candidate.byteLength < original.size);
+  if (write && best && shouldRewrite) {
     const temp = `${input}.tmp-${process.pid}`;
-    await fs.writeFile(temp, best.candidate);
-    await fs.rename(temp, input);
+    try {
+      await fs.writeFile(temp, best.candidate);
+      await fs.rename(temp, input);
+    } catch (error) {
+      await fs.rm(temp, { force: true });
+      throw error;
+    }
   }
   return {
     name,
     before: original.size,
     after: best?.candidate.byteLength ?? original.size,
+    width: metadata.width,
+    height: metadata.height,
+    sourceGeometryOk: geometryOk,
     quality: best?.quality,
-    changed: Boolean(write && best && best.candidate.byteLength < original.size),
+    changed: Boolean(write && best && shouldRewrite),
   };
 }
 
@@ -82,10 +103,12 @@ for (const name of names) {
 }
 
 const over = results.filter((result) => result.after > BLOG_IMAGE_TARGET_MAX_BYTES);
-for (const result of results.filter((result) => result.changed || result.after > BLOG_IMAGE_TARGET_MAX_BYTES)) {
+const badGeometry = results.filter((result) => result.sourceGeometryOk === false);
+for (const result of results.filter((result) => result.changed || result.after > BLOG_IMAGE_TARGET_MAX_BYTES || result.sourceGeometryOk === false)) {
   const mode = result.changed ? 'rewritten' : 'over-target';
-  console.log(`[blog-images] ${mode} ${result.name}: ${result.before} -> ${result.after} bytes${result.quality ? ` (q${result.quality})` : ''}`);
+  const geometry = result.sourceGeometryOk === false ? ` geometry=${result.width}x${result.height} expected=${BLOG_IMAGE_WIDTH}x${BLOG_IMAGE_HEIGHT}` : '';
+  console.log(`[blog-images] ${mode} ${result.name}: ${result.before} -> ${result.after} bytes${result.quality ? ` (q${result.quality})` : ''}${geometry}`);
 }
-console.log(`[blog-images] checked=${results.length} target=${BLOG_IMAGE_TARGET_MAX_BYTES} bytes rewritten=${results.filter((r) => r.changed).length} over=${over.length}`);
+console.log(`[blog-images] checked=${results.length} target=${BLOG_IMAGE_TARGET_MAX_BYTES} bytes rewritten=${results.filter((r) => r.changed).length} over=${over.length} badGeometry=${badGeometry.length}`);
 
-if (check && over.length > 0) process.exitCode = 2;
+if (check && (over.length > 0 || badGeometry.length > 0)) process.exitCode = 2;
