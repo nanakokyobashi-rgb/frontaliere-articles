@@ -5036,7 +5036,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Bacino delle news di un cantone (sezione propria + frontaliere/svizzera col campo `canton`), assegnazione al tema con la tassonomia dell'engine o il classificatore a parole chiave, ordinamento e dedup.",
       "baseline": {
         "site": null,
-        "corpus": "7d6ec124534c0aa8",
+        "corpus": "fd74648779623f4c",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5086,7 +5086,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «avvisi ufficiali»: legge la cache del contratto REWIRE `canton-notices` tramite `canton-notices-data.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "69d8e534064cbef4",
+        "corpus": "3ad5374c4e6b984c",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5096,7 +5096,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub pensioni (parametri federali, casse cantonali, imposta sul capitale) dal dataset annuale `pension-parameters`; opzionali come quelli del fisco.",
       "baseline": {
         "site": null,
-        "corpus": "5ccb695fd952253d",
+        "corpus": "718c1a88815eef88",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5106,7 +5106,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «chiusure e cantieri»: legge la cache del contratto REWIRE `road-events`.",
       "baseline": {
         "site": null,
-        "corpus": "0b9db99e06d6f1da",
+        "corpus": "52a010707e32b8fa",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5126,7 +5126,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub fisco (onere fiscale, imposta alla fonte) dal dataset annuale `canton-tax`; opzionali finche' refresh e contratto non arrivano con la PR corpus P9d+e.",
       "baseline": {
         "site": null,
-        "corpus": "87d1befd2bd81f4d",
+        "corpus": "2c9e56924c69a624",
         "alignedAt": "2026-10-05"
       }
     },
