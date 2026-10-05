@@ -3483,9 +3483,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "c584aaf489c71a41",
-        "corpus": "c584aaf489c71a41",
-        "alignedAt": "2026-08-09"
+        "site": "3cdd32148bd86613",
+        "corpus": "3cdd32148bd86613",
+        "alignedAt": "2026-10-05"
       },
       "couplingSnapshot": [
         {
