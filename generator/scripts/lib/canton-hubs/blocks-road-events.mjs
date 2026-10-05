@@ -80,7 +80,8 @@ export function shapeRoadEventsBlock(dataset, { canton, nowMs }) {
     // di osservazione del producer.
     .filter(({ to }) => !Number.isFinite(to) || to >= nowMs)
     .map((x) => ({ ...x, start: Number.isFinite(x.from) ? x.from : instantMs(x.e.observedAt) }))
-    .filter(({ start }) => Number.isFinite(start) && start <= horizon)
+    // Estremo escluso: `horizonDays` giorni esatti da ora.
+    .filter(({ start }) => Number.isFinite(start) && start < horizon)
     // Per tipo; dentro il tipo prima cio' che e' gia' in corso, poi cio' che
     // sta per cominciare, ciascuno dal piu' vicino nel tempo: con piu' righe
     // del tetto la chiusura di domani non deve cedere il posto a quella fra

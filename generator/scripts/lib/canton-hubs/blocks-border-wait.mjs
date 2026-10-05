@@ -136,9 +136,11 @@ export function shapeBorderWaitBlock(window, { canton, nowMs, crossingNames = ne
 
 /**
  * `slug → nome` dal registro dei valichi (`generator/data/borderCrossings.ts`),
- * letto come testo: e' TypeScript e questo modulo gira sotto `node` puro. Un
- * valico il cui slug pubblicato non coincide con lo slug del nome resta senza
- * voce e prende il nome derivato dallo slug.
+ * letto come testo: e' TypeScript e questo modulo gira sotto `node` puro. Lo
+ * slug pubblicato si ricava dal nome con e senza la parte fra parentesi
+ * («Chiasso Centro (Ponte Chiasso)» → `chiasso-centro`), come fa il sito. Un
+ * valico con uno slug assegnato a mano resta senza voce e prende il nome
+ * derivato dallo slug: e' solo l'etichetta della riga, il link usa lo slug.
  */
 export function parseCrossingNames(source) {
   const out = new Map();
@@ -146,8 +148,10 @@ export function parseCrossingNames(source) {
   let m;
   while ((m = rx.exec(String(source ?? ''))) !== null) {
     const name = m[2].replace(/\\(['"])/g, '$1');
-    const slug = name.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    if (slug && !out.has(slug)) out.set(slug, name);
+    const slugOf = (text) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    for (const slug of [slugOf(name), slugOf(name.replace(/\s*\([^)]*\)/g, ''))]) {
+      if (slug && !out.has(slug)) out.set(slug, name);
+    }
   }
   return out;
 }

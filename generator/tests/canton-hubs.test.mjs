@@ -595,6 +595,26 @@ test('canonical override: si leggono le chiavi di `overrides`; una forma sconosc
   // Le chiavi di primo livello NON sono slug: un file senza `overrides` non si interpreta.
   fs.writeFileSync(file, JSON.stringify({ 'imposta-fonte-ombra': 'https://example.org/' }));
   assert.throws(() => ids(), /non ha un oggetto `overrides`/);
+  // Stessa classe: un registro con articoli ma senza mappa slug o senza una meta
+  // di locale e' un corpus troncato, non «nessuna news».
+  fs.writeFileSync(file, JSON.stringify({ overrides: {} }));
+  const metaDe = path.join(root, sectionSourceSurfaces('frontaliere').metaFile('de'));
+  const savedMeta = fs.readFileSync(metaDe, 'utf8');
+  fs.rmSync(metaDe);
+  assert.throws(() => ids(), /meta de mancante per frontaliere/);
+  fs.writeFileSync(metaDe, savedMeta);
+  fs.rmSync(path.join(root, sectionSourceSurfaces('frontaliere').slugFile));
+  assert.throws(() => ids(), /mappa slug mancante per frontaliere/);
+  fs.writeFileSync(path.join(root, sectionSourceSurfaces('frontaliere').registryFile), 'export const ARTICLES = [];\n');
+  assert.throws(() => ids(), /non ha voci: corpus troncato/);
+  // Lo scheletro di una sezione cantonale (nessun file, o registro vuoto) e' invece legittimo…
+  assert.deepEqual(loadSectionArticles(root, 'canton-be'), []);
+  fs.mkdirSync(path.join(root, 'content/cantons/canton-be'), { recursive: true });
+  fs.writeFileSync(path.join(root, sectionSourceSurfaces('canton-be').registryFile), 'export const CANTON_ARTICLES: Article[] = [\n];\n');
+  assert.deepEqual(loadSectionArticles(root, 'canton-be'), []);
+  // …ma una sezione cantonale CON articoli e senza mappa slug no.
+  fs.writeFileSync(path.join(root, sectionSourceSurfaces('canton-be').registryFile), "export const CANTON_ARTICLES: Article[] = [\n  {\n    id: 'be-uno',\n    date: '2026-10-01',\n  },\n];\n");
+  assert.throws(() => loadSectionArticles(root, 'canton-be'), /mappa slug mancante per canton-be/);
   // I due file veri del repo hanno quella forma.
   for (const rel of ['engine/shared/frontaliere-article-canonical-overrides.json', 'content/swiss-article-canonical-overrides.json']) {
     const overrides = readJson(rel).overrides;
@@ -609,17 +629,17 @@ test('eventi: conta l\'intersezione con la finestra, non solo il giorno d\'inizi
     generatedAt: new Date(NOW - HOUR_MS).toISOString(),
     events: [
       ev('in-corso', -1, 2), ev('finito-ieri', -3, -1), ev('oggi', 0, null), ev('fra-tre-giorni', 3, 4),
-      ev('serie-annuale', -200, 150), ev('oltre-finestra', BLOCK_THRESHOLDS.events.windowDays + 2, null), ev('finisce-oggi', -5, 0),
+      ev('serie-annuale', -200, 150), ev('oltre-finestra', BLOCK_THRESHOLDS.events.windowDays, null), ev('ultimo-giorno-utile', BLOCK_THRESHOLDS.events.windowDays - 1, null), ev('finisce-oggi', -5, 0),
     ],
   };
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
   assert.equal(block.available, true);
   const items = block.render('it').items;
-  assert.deepEqual(items.map((it) => it.label.replace('Evento ', '')), ['oggi', 'in-corso', 'finisce-oggi', 'fra-tre-giorni']);
+  assert.deepEqual(items.map((it) => it.label.replace('Evento ', '')), ['oggi', 'in-corso', 'finisce-oggi', 'fra-tre-giorni', 'ultimo-giorno-utile'], 'windowDays giorni di calendario, oggi compreso: estremo escluso');
   assert.match(items[1].detail, /^in corso, ultimo giorno: /);
   assert.equal(items[1].date, day(0), 'un evento gia\' in corso si data a oggi, non al suo inizio');
   assert.equal(items[3].date, day(3));
-  assert.equal(block.render('it').keyFacts[0].value, '4');
+  assert.equal(block.render('it').keyFacts[0].value, '5');
 });
 
 test('meteo: basta la previsione di oggi, come nella vista dei servizi', () => {
@@ -839,6 +859,7 @@ test('i Paesi confinanti dichiarati coprono quelli del registro dei valichi', ()
   }
   assert.deepEqual(Object.keys(CONFIG.neighbours).sort(), Object.keys(CANTON_URL_SLUGS.cantons).sort());
   assert.ok(parseCrossingNames(src).size > 100);
+  assert.equal(parseCrossingNames("{ name: 'Chiasso Centro (Ponte Chiasso)', country: 'IT' }").get('chiasso-centro'), 'Chiasso Centro (Ponte Chiasso)');
 });
 
 test('coerenza toponimi/cantone: il testo evergreen di un hub non nomina un altro cantone', () => {

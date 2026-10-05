@@ -59,6 +59,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
   if (stale) return omitted(id, stale.code, stale.reason);
 
   const today = isoDayOf(nowMs);
+  // Estremo ESCLUSO: `windowDays` giorni di calendario, oggi compreso.
   const until = isoDayOf(nowMs + th.windowDays * DAY_MS);
   const seen = new Set();
   const upcoming = dataset.events
@@ -68,7 +69,7 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
     // cominciato ieri e ancora in corso e' un appuntamento di oggi. Senza
     // `endDate` l'evento dura il solo giorno d'inizio.
     .map((e) => ({ ...e, lastDay: isRealDay(e.endDate) && e.endDate >= e.startDate ? e.endDate : e.startDate }))
-    .filter((e) => e.lastDay >= today && e.startDate <= until)
+    .filter((e) => e.lastDay >= today && e.startDate < until)
     .filter((e) => e.startDate >= today || (Date.parse(e.lastDay) - Date.parse(e.startDate)) / DAY_MS <= th.maxSpanDays)
     // Ordinati per il primo giorno utile (oggi, per quelli gia' in corso).
     .map((e) => ({ ...e, firstUsefulDay: e.startDate < today ? today : e.startDate }))

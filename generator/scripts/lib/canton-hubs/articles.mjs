@@ -107,26 +107,31 @@ export function loadSectionArticles(root, section) {
     if (isCantonSection(section)) return [];
     throw new Error(`canton-hubs: registro mancante per la sezione ${section} (${src.registryFile})`);
   }
-  const slugSource = readIfExists(path.join(root, src.slugFile));
-  let slugs = {};
-  if (slugSource != null) {
-    try {
-      slugs = parseArticleUrlSlugs(slugSource, src.slugExport);
-    } catch (err) {
-      // Lo scheletro di una sezione appena accesa ha la mappa vuota.
-      if (!isCantonSection(section) || !/empty/.test(String(err?.message))) throw err;
-    }
+  const entries = registryEntrySpans(registry);
+  // Registro senza voci: lo scheletro di una sezione cantonale appena accesa
+  // (mappa slug e meta vuote o assenti sono il suo stato legittimo). Le due
+  // sezioni storiche non sono mai vuote: per loro e' un corpus troncato.
+  if (entries.length === 0) {
+    if (isCantonSection(section)) return [];
+    throw new Error(`canton-hubs: il registro di ${section} (${src.registryFile}) non ha voci: corpus troncato`);
   }
+  // Da qui in poi il registro HA articoli: mappa slug e meta di tutte le
+  // locali sono obbligatorie. Senza, ogni voce verrebbe scartata in silenzio e
+  // l'hub uscirebbe senza news come se il cantone non ne avesse.
+  const slugSource = readIfExists(path.join(root, src.slugFile));
+  if (slugSource == null) throw new Error(`canton-hubs: mappa slug mancante per ${section} (${src.slugFile}) con ${entries.length} voci nel registro`);
+  const slugs = parseArticleUrlSlugs(slugSource, src.slugExport);
   const meta = Object.fromEntries(HUB_LOCALES.map((locale) => {
     const text = readIfExists(path.join(root, src.metaFile(locale)));
-    return [locale, text == null ? new Map() : readTsStringMap(text)];
+    if (text == null) throw new Error(`canton-hubs: meta ${locale} mancante per ${section} (${src.metaFile(locale)}) con ${entries.length} voci nel registro`);
+    return [locale, readTsStringMap(text)];
   }));
   const sidecarDir = path.join(root, sectionWriteSurfaces(section).sidecarDir);
   const shadowed = shadowedSlugs(root, section);
   const ownCanton = isCantonSection(section) ? ARTICLE_SECTION_CORE_ALL[section].canton : null;
 
   const out = [];
-  for (const { id, text } of registryEntrySpans(registry)) {
+  for (const { id, text } of entries) {
     if (DAILY_EDITION_ID_RE.test(id)) continue;
     const date = /\bdate:\s*'([^']+)'/u.exec(text)?.[1];
     // Una data impossibile nel registro non diventa la data di una news promossa.
