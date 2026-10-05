@@ -2367,7 +2367,7 @@
       "reason": "La sezione cantonale vista da create-article.mjs (P6b del piano sezioni cantonali): voci di ARTICLE_SECTION_CONFIGS per le 24 sezioni `kind: canton` del core (path di registro, slug, meta e corpi da ARTICLE_SECTION_CORE_ALL, profilo da generator/data/canton-sections.json), gate D16 (`enabled` nel profilo o CANTON_ARTICLE_SECTIONS_ENABLED da Remote Config), stato per sezione D18 sotto data/sections/<id>/ e i suoi argomenti per rebase-onto-remote.sh, scheletri dei file al primo articolo, lessico di ammissione DE/FR e testi di prompt del cantone. Corpus-only: la generazione e il profilo editoriale vivono solo qui; il sito legge le sezioni come JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "f5b23079bdb878dd",
+        "corpus": "6fae40c39859f788",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2377,7 +2377,7 @@
       "reason": "Scanner delle fonti news delle sezioni cantonali (P6b): parser json-entities (iCMS NW/OW/SH), json-api (zh.ch, be.ch), news-sitemap e sitemap a periodo (settimana ISO, mese, anno), riuso di extractRssItems/extractHeadlines di create-article.mjs per RSS/Atom e link HTML; quirk del profilo (crawl-delay per host, maxRequestsPerRun, charset dichiarato, pubDate vuoto, anno sbagliato nei time datetime, paywall title+lead) e User-Agent dichiarato (D10). Corpus-only: le fonti per cantone e il generatore che le legge esistono solo nel corpus.",
       "baseline": {
         "site": null,
-        "corpus": "34a2bb9dfb386fa0",
+        "corpus": "d46b5f68d950325c",
         "alignedAt": "2026-10-05"
       }
     },
