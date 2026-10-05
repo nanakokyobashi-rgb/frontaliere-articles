@@ -62,6 +62,9 @@ const ENTRY_POINTS = [
   // Dataset di categoria degli hub cantonali (D11, P9f/P9g).
   'refresh-canton-notices.mjs',
   'refresh-canton-services-data.mjs',
+
+  // Quarto contratto REWIRE (P9c): gli hub mobilita' per cantone.
+  'refresh-road-events.mjs',
 ];
 
 /**
