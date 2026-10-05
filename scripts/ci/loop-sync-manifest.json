@@ -159,6 +159,16 @@
       }
     },
     {
+      "path": "scripts/ci/check-post-rebase-uniqueness.mjs",
+      "mode": "corpus-only",
+      "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni) che generate-article.yml esegue dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
+      "baseline": {
+        "site": null,
+        "corpus": "9771a71da3aaa747",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/native-automerge-gate.mjs",
       "mode": "adapted",
       "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507). Seconda divergenza dal 2026-09-24 (#1784): `parseActionsJobUrl` accetta solo la forma grezza canonica del `details_url` (niente dot-segment anche codificati, whitespace, userinfo/porta, slash finali, zeri iniziali), la stessa regola di `workflowRunIdentity` in native-automerge-sweep-policy.mjs legata da generator/tests/actions-details-url-canonical.test.mjs; il gemello del sito legge ancora il path gia' normalizzato da `new URL`, e la risalita va fatta la'. Terza divergenza dal 2026-09-25 (#1870): il corpus accetta una LGTM del fallback Codex (`github-actions[bot]` + marker) su un commit PRECEDENTE alla HEAD, perche' il `Re-review guard` di tests.yml la riporta dopo un merge di main senza far girare Codex e nessuna review nuova arriva mai sulla HEAD; `codexCarryForwardDecision` la ammette solo con la prova letta dal gate stesso: check `tests` verde sulla HEAD, marker `REVIEW_INPUT_REVISION` uguale al body corrente non modificato dopo l'inizio del review gate, guard riuscito dopo la review con claim, Codex e abort `skipped` (nomi da vitestCheck.mjs, pinnati da generator/tests/review-step-names.test.mjs) e un `tests` verde sul commit della review chiuso dopo la review. Il sito non ha questo ramo per costruzione: il suo tests.yml pubblica una review carry-forward sulla HEAD (`Publish carry-forward LGTM`) e il suo gate nativo pretende la HEAD esatta, quindi non c'e' niente da risalire.",
@@ -649,6 +659,16 @@
       "baseline": {
         "site": "1c042095f029e09c",
         "corpus": "1c042095f029e09c",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/lib/merge-counter-conflict.mjs",
+      "mode": "corpus-only",
+      "reason": "Resolver del quarto ramo di rebase-onto-remote.sh (`--merge-counter <path>:<campo>`, D18): somma all'upstream l'incremento del commit rigiocato sui contatori riscritti per intero (topic-candidates-*-counter.json, quota-state.json). Nessun omonimo sul sito, come rebase-onto-remote.sh di cui e' parte.",
+      "baseline": {
+        "site": null,
+        "corpus": "a25a56f6060e3961",
         "alignedAt": "2026-10-05"
       }
     },
@@ -1978,7 +1998,7 @@
     {
       "path": "scripts/lib/rebase-onto-remote.sh",
       "mode": "corpus-only",
-      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--take-theirs` per i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Le tre categorie restano tre liste apposta: confonderle toglierebbe dal registro l'articolo appena generato lasciandone i corpi sul posto.",
+      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--take-theirs` per i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Dal 2026-10-05 (D18) un QUARTO ramo `--merge-counter <path>:<campo>` per i contatori riscritti per intero (`topic-candidates-{experimental,evergreen}-counter.json`, `quota-state.json`): passano da merge-counter-conflict.mjs, che scrive upstream + l'incremento del commit rigiocato, e se la fusione non e' dimostrabile ricadono su «prendi upstream». Le quattro categorie restano quattro liste apposta: confonderle toglierebbe dal registro l'articolo appena generato lasciandone i corpi sul posto, o perderebbe incrementi dei contatori.",
       "baseline": {
         "site": null,
         "corpus": "fe4d0086b9bfdca7",

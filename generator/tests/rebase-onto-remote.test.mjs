@@ -35,7 +35,11 @@ import { backstop, findDuplicates, mergeSource } from '../../scripts/lib/merge-c
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from '../../scripts/lib/image-credit-records.mjs';
-import { sliceBetween } from './lib/anchored-slice.mjs';
+import { QUOTA_STATE_PATH } from '../scripts/lib/scheduler/quotaController.mjs';
+import * as topicSelector from '../scripts/lib/article-topic-selector.mjs';
+
+const { EVERGREEN_COUNTER_PATH, EXPERIMENTAL_COUNTER_PATH } = topicSelector;
+import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
@@ -328,20 +332,24 @@ test('a plain divergence with no conflict rebases cleanly', () => {
 function parseHelperArgs(yamlText) {
   const lines = yamlText.split('\n');
   const start = lines.findIndex((l) => l.includes('bash scripts/lib/rebase-onto-remote.sh'));
-  if (start === -1) return { bookkeeping: [], registries: [], takeTheirs: [] };
+  if (start === -1) return { bookkeeping: [], registries: [], takeTheirs: [], counters: [] };
   const bookkeeping = [];
   const registries = [];
   const takeTheirs = [];
+  const counters = [];
   for (let i = start; i < lines.length; i++) {
     const line = lines[i];
-    // Le tre categorie stanno nello STESSO comando e vogliono dire cose diverse
-    // — prendi upstream / unisci i record / prendi il commit rigiocato — quindi
-    // si separano qui invece di finire in un elenco solo che nessuna assert
-    // potrebbe piu' distinguere.
+    // Le quattro categorie stanno nello STESSO comando e vogliono dire cose
+    // diverse — prendi upstream / unisci i record / prendi il commit rigiocato /
+    // somma gli incrementi — quindi si separano qui invece di finire in un
+    // elenco solo che nessuna assert potrebbe piu' distinguere.
     const clean = line.replace(/\\\s*$/, '').trim();
     if (clean.startsWith('--take-theirs')) {
       const prefix = clean.split(/\s+/)[1];
       if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
+    } else if (clean.startsWith('--merge-counter')) {
+      const spec = clean.split(/\s+/)[1];
+      if (spec) counters.push(spec);
     } else {
       const target = line.includes('--merge-registry') ? registries : bookkeeping;
       for (const token of clean.split(/\s+/)) {
@@ -350,7 +358,7 @@ function parseHelperArgs(yamlText) {
     }
     if (!/\\\s*$/.test(line)) break; // the shell continuation ended
   }
-  return { bookkeeping, registries, takeTheirs };
+  return { bookkeeping, registries, takeTheirs, counters };
 }
 
 function allowlistFromWorkflow(yamlText) {
@@ -422,29 +430,87 @@ test('generate-article.yml declares the topic-candidates consumed tracker as boo
   );
 });
 
-test('generate-article.yml declares the quota-state ledger as bookkeeping (#496)', () => {
+test('generate-article.yml declares the quota-state ledger as a counter (#496, D18)', () => {
   // QUOTA_STATE_PATH is a fourth sibling in the same class as the two ledgers
-  // and the consumed tracker above, found during this issue's own review: it
-  // is one file SHARED across both sections (no swiss- variant), read whole
-  // by loadQuotaState() and rewritten whole by saveQuotaState() — which
-  // create-article.mjs calls after every successful publish. Derived from its
-  // own source of truth (quotaController.mjs), not copied, for the same
-  // reason as the sourceUrlsFile/sourceQuotaFile regex above.
-  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  // and the consumed tracker above, found during #496's own review: it is one
+  // file SHARED across both sections (no swiss- variant), read whole by
+  // loadQuotaState() and rewritten whole by saveQuotaState() — which
+  // create-article.mjs calls after every successful publish. #496 declared it
+  // as bookkeeping (take upstream); D18 moved it to --merge-counter, because
+  // what create-article changes in it is `runCounter + 1` and taking upstream
+  // drops that increment. Path imported from its own source of truth.
+  const { bookkeeping, counters } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
   const quotaControllerSrc = readFileSync(
     path.resolve(HERE, '../scripts/lib/scheduler/quotaController.mjs'),
     'utf8',
   );
-  const m = /QUOTA_STATE_PATH\s*=\s*'([^']+)'/.exec(quotaControllerSrc);
-  assert.ok(m, 'could not find QUOTA_STATE_PATH in quotaController.mjs');
-  const quotaStatePath = m[1];
+  // The field the generator increments is the field the merge sums.
+  assert.match(quotaControllerSrc, /runCounter:\s*safe\.runCounter \+ 1/,
+    'incrementCounter() no longer increments runCounter: update the --merge-counter field in generate-article.yml');
   assert.ok(
-    allowlist.includes(quotaStatePath),
-    `${quotaStatePath} is the saveQuotaState() ledger — loaded whole and rewritten whole after every successful `
-    + `publish (create-article.mjs calls _saveQuotaState(_incrementCounter(...))) — but is missing from the `
-    + `bookkeeping allowlist in generate-article.yml. A conflict there aborts the rebase and the generated article `
-    + `is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+    counters.includes(`${QUOTA_STATE_PATH}:runCounter`),
+    `${QUOTA_STATE_PATH} is the saveQuotaState() counter — rewritten whole after every successful publish with `
+    + `runCounter + 1 — but is not declared as --merge-counter ${QUOTA_STATE_PATH}:runCounter in generate-article.yml. `
+    + `As a bare path a conflict takes upstream and loses this run's increment; undeclared it aborts the rebase `
+    + `and the generated article is lost (issue #496). Declared counters: ${JSON.stringify(counters)}`,
   );
+  assert.ok(!bookkeeping.includes(QUOTA_STATE_PATH), `${QUOTA_STATE_PATH} must not be in two categories`);
+});
+
+test('ogni file che article-topic-selector.mjs scrive con una persist* e\' dichiarato in una categoria', () => {
+  // La classe, non i singoli file: le funzioni `persist*` del selettore
+  // riscrivono per intero un file di stato che `git add -A` porta nel commit,
+  // tracciato o no. Fuori da ogni lista un conflitto (o un add/add di due run
+  // che lo creano) abortisce il rebase. I path si leggono dalle costanti che le
+  // persist* usano come default, non si ricopiano.
+  const { bookkeeping, registries, takeTheirs, counters } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  const declared = new Set([...bookkeeping, ...registries, ...counters.map((c) => c.slice(0, c.lastIndexOf(':')))]);
+  const selectorSrc = readFileSync(path.resolve(HERE, '../scripts/lib/article-topic-selector.mjs'), 'utf8');
+  const persisted = [];
+  for (const m of selectorSrc.matchAll(/export function (persist\w+)\(/g)) {
+    const from = sliceFrom(selectorSrc, m[0], { label: m[1] });
+    const body = from.slice(0, from.indexOf('\n}\n'));
+    const constName = /\b([A-Z][A-Z0-9_]*_PATH)\b/.exec(body)?.[1];
+    assert.ok(constName, `${m[1]}: non trovo la costante *_PATH del file che scrive`);
+    const p = topicSelector[constName];
+    assert.equal(typeof p, 'string', `${constName} non e' esportata da article-topic-selector.mjs`);
+    persisted.push({ fn: m[1], p });
+  }
+  assert.ok(persisted.length >= 5, `attese almeno 5 persist*, trovate: ${JSON.stringify(persisted)}`);
+  for (const { fn, p } of persisted) {
+    assert.ok(
+      declared.has(p) || takeTheirs.some((prefix) => p.startsWith(prefix)),
+      `${p} e' riscritto per intero da ${fn}() e finisce in git add -A, ma non e' dichiarato in nessuna categoria `
+      + `di rebase-onto-remote.sh in generate-article.yml: un conflitto li' abortisce il rebase e l'articolo e' perso.`,
+    );
+  }
+});
+
+test('generate-article.yml declares the topic-candidates counters as counters (D18)', () => {
+  // EXPERIMENTAL_COUNTER_PATH / EVERGREEN_COUNTER_PATH are rewritten whole by
+  // persistExperimentalCounter()/persistEvergreenCounter() as `{count}` and
+  // staged by `git add -A`: 198 and 133 of the last 200 generator commits
+  // touched them (2026-10-05), yet they were on NO list, so a conflict there
+  // aborted the rebase like #76/#225/#496. Imported, not copied: a renamed
+  // counter makes this red instead of reopening the hole.
+  const { bookkeeping, registries, takeTheirs, counters } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  const selectorSrc = readFileSync(path.resolve(HERE, '../scripts/lib/article-topic-selector.mjs'), 'utf8');
+  for (const [p, persist] of [
+    [EXPERIMENTAL_COUNTER_PATH, 'persistExperimentalCounter'],
+    [EVERGREEN_COUNTER_PATH, 'persistEvergreenCounter'],
+  ]) {
+    const from = sliceFrom(selectorSrc, `export function ${persist}(`, { label: persist });
+    const body = from.slice(0, from.indexOf('\n}\n'));
+    assert.match(body, /JSON\.stringify\(\{ count:/, `${persist} no longer writes {count}: update the --merge-counter field`);
+    assert.ok(
+      counters.includes(`${p}:count`),
+      `${p} is a whole-file counter rewritten by ${persist}() and staged by git add -A, but is not declared as `
+      + `--merge-counter ${p}:count in generate-article.yml. Declared counters: ${JSON.stringify(counters)}`,
+    );
+    assert.ok(!bookkeeping.includes(p) && !registries.includes(p), `${p} must not be in two categories`);
+    assert.ok(!takeTheirs.some((prefix) => p.startsWith(prefix)),
+      `${p} under --take-theirs would drop every increment that landed upstream meanwhile`);
+  }
 });
 
 test('a conflict on the journalist image catalog resolves instead of aborting', () => {
@@ -586,9 +652,10 @@ function allIds(ids) {
 
 /** Gli argomenti che il WORKFLOW passa davvero, non una lista riscritta qui. */
 function helperArgsFromWorkflow() {
-  const { bookkeeping, registries, takeTheirs } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  const { bookkeeping, registries, takeTheirs, counters } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
   return [
     ...bookkeeping,
+    ...counters.flatMap((c) => ['--merge-counter', c]),
     ...registries.flatMap((r) => ['--merge-registry', r]),
     ...takeTheirs.flatMap((p) => ['--take-theirs', p]),
   ];
@@ -995,8 +1062,8 @@ test('i prefissi --take-theirs coprono i target per-articolo di ENTRAMBE le sezi
   }
 });
 
-test('un conflitto di solo bookkeeping resta risolto anche con le altre due categorie dichiarate', () => {
-  // Le tre categorie convivono nella STESSA invocazione, e il caso piu' comune
+test('un conflitto di solo bookkeeping resta risolto anche con le altre categorie dichiarate', () => {
+  // Le quattro categorie convivono nella STESSA invocazione, e il caso piu' comune
   // (#76, #225) e' un conflitto di sola cache mentre registri e prefissi
   // per-articolo sono dichiarati ma non toccati. E' l'unica combinazione che i
   // test sopra non attraversano — quelli sul bookkeeping passano la sola
@@ -1017,6 +1084,138 @@ test('un conflitto di solo bookkeeping resta risolto anche con le altre due cate
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/nuovo-articolo.ts')));
     assert.match(git(w.work, 'show', `HEAD:${BOOKKEEPING}`), /other/);
+  } finally {
+    w.cleanup();
+  }
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+// I CONTATORI — `--merge-counter <path>:<campo>` (D18)
+// ════════════════════════════════════════════════════════════════════════════
+//
+// «Prendi upstream» perde l'incremento di questo run, «prendi il commit
+// rigiocato» perde quelli atterrati upstream nel frattempo. L'assert e' sul
+// VALORE: base 10, upstream 12 (due run altrui), questo run 11 → 13.
+
+/** Un mondo con i contatori nella base comune, come sono committati davvero. */
+function counterWorld({ experimental = 10, evergreen = 10, runCounter = 10 } = {}) {
+  const w = makeWorld();
+  write(w.work, EXPERIMENTAL_COUNTER_PATH, `${JSON.stringify({ count: experimental }, null, 2)}\n`);
+  write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: evergreen }, null, 2)}\n`);
+  write(w.work, QUOTA_STATE_PATH, `${JSON.stringify({
+    version: 1, runCounter, currentQuota: 80, lastTune: null, history: [],
+  }, null, 2)}\n`);
+  commitAll(w.work, 'seed counters');
+  git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+  return w;
+}
+
+const countOf = (w, rel, field = 'count') => JSON.parse(git(w.work, 'show', `HEAD:${rel}`))[field];
+
+test('un conflitto sui contatori somma gli incrementi dei due lati, e l\'articolo sopravvive', () => {
+  const w = counterWorld();
+  try {
+    // Due run altrui atterrati upstream: +2 su ciascun contatore, e il tuning
+    // ha cambiato currentQuota (un campo che create-article non scrive).
+    landUpstream(w, [
+      [EXPERIMENTAL_COUNTER_PATH, `${JSON.stringify({ count: 12 }, null, 2)}\n`, 'u exp'],
+      [EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 12 }, null, 2)}\n`, 'u ever'],
+      [QUOTA_STATE_PATH, `${JSON.stringify({
+        version: 1, runCounter: 12, currentQuota: 70, lastTune: '2026-10-05', history: [],
+      }, null, 2)}\n`, 'u quota'],
+    ]);
+
+    write(w.work, EXPERIMENTAL_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    write(w.work, QUOTA_STATE_PATH, `${JSON.stringify({
+      version: 1, runCounter: 11, currentQuota: 80, lastTune: null, history: [],
+    }, null, 2)}\n`);
+    write(w.work, 'content/blog-body/it/articolo-contato.ts', 'export const c = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, `un conflitto di soli contatori deve risolversi, non abortire:\n${out}`);
+    assert.match(out, /resolved counter conflict by summing both sides/);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-contato.ts')));
+    assert.equal(countOf(w, EXPERIMENTAL_COUNTER_PATH), 13, 'upstream 12 + (11 − 10)');
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 13, 'upstream 12 + (11 − 10)');
+    const quota = JSON.parse(git(w.work, 'show', `HEAD:${QUOTA_STATE_PATH}`));
+    assert.equal(quota.runCounter, 13, 'upstream 12 + (11 − 10)');
+    assert.equal(quota.currentQuota, 70, 'gli altri campi restano quelli di upstream');
+    assert.equal(quota.lastTune, '2026-10-05');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('due run che scrivono lo STESSO valore (nessun conflitto) non perdono un incremento', () => {
+  // Base 10, upstream 11, questo run 11: blob identici, git non vede conflitto
+  // e il rebase finirebbe su 11. La riconciliazione a rebase riuscito porta 12.
+  const w = counterWorld();
+  try {
+    landUpstream(w, [[EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`, 'u ever']]);
+    write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    write(w.work, 'content/blog-body/it/articolo-parallelo.ts', 'export const p = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, out);
+    assert.match(out, /reconciled counters after the rebase/);
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'upstream 11 + (11 − 10)');
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-parallelo.ts')));
+    assert.equal(git(w.work, 'log', '--format=%s', '-1').trim(), 'Generate blog article (frontaliere)',
+      'la riconciliazione si aggiunge al commit dell\'articolo, non ne crea un altro');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'nessun residuo nel working tree');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un rebase senza contatori toccati da upstream lascia i contatori come sono', () => {
+  const w = counterWorld();
+  try {
+    landUpstream(w, [['README.md', 'altro\n', 'upstream unrelated']]);
+    write(w.work, EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 11 }, null, 2)}\n`);
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, out);
+    assert.doesNotMatch(out, /reconciled counters/);
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 11);
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un contatore che non si sa fondere ricade su «prendi upstream», non aborta', () => {
+  // Il ripiego e' il comportamento che quota-state.json aveva prima del ramo:
+  // un contatore sbagliato di uno costa meno di un articolo perso.
+  const w = counterWorld();
+  try {
+    landUpstream(w, [[EVERGREEN_COUNTER_PATH, `${JSON.stringify({ count: 12 }, null, 2)}\n`, 'u ever']]);
+    write(w.work, EVERGREEN_COUNTER_PATH, '{"count": "rotto"}\n');
+    write(w.work, 'content/blog-body/it/articolo-ripiego.ts', 'export const r = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, `il ripiego deve risolvere:\n${out}`);
+    assert.match(out, /counter merge refused on 'data\/topic-candidates-evergreen-counter\.json'/);
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-ripiego.ts')));
+    assert.equal(countOf(w, EVERGREEN_COUNTER_PATH), 12, 'ripiego = copia upstream');
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('--merge-counter senza campo e\' un errore del chiamante', () => {
+  const w = makeWorld();
+  try {
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-counter', EVERGREEN_COUNTER_PATH);
+    assert.equal(code, 2, out);
+    assert.match(out, /--merge-counter requires <path>:<field>/);
   } finally {
     w.cleanup();
   }
