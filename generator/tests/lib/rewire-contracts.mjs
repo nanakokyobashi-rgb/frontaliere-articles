@@ -1,5 +1,5 @@
 /**
- * Il registro dei tre contratti JSON del REWIRE set (issue #101, che nasce dalla
+ * Il registro dei contratti JSON del REWIRE set (issue #101, che nasce dalla
  * `reason` lasciata aperta dalla #92; il REWIRE originale e' l'item 3 della
  * #4974 sul repo del sito).
  *
@@ -192,7 +192,210 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['totalEvents'],
     notJsonExpect: /did not return JSON/,
   },
+  {
+    id: 'canton-notices',
+    artifact: 'canton-notices.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/crawl-canton-notices.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-notices.mjs',
+      envUrl: 'CANTON_NOTICES_URL',
+      cache: 'generator/data/canton-notices.json',
+    },
+    failureMode: 'soft',
+    symptom:
+      'il blocco «avvisi ufficiali» degli hub cantonali (P10) elenca titolo, link e data di comunicati ' +
+      'fiscali, AVS/pensioni, mobilita\' e servizi: un documento troncato o di un\'altra forma metterebbe ' +
+      'negli hub link sbagliati o vuoti come se fossero l\'elenco ufficiale.',
+    fixture: 'generator/tests/fixtures/rewire/canton-notices.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo: '205 avvisi sui 1041 del giro (max 10 per cantone, 21 cantoni), registro e salute ridotti al sommario',
+    },
+    freshen: 'shift-timestamps',
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-canton-notices.mjs',
+        fields: ['notices', 'canton', 'publishedAt'],
+      },
+      {
+        file: 'generator/scripts/lib/canton-notices-data.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'notices', 'id', 'canton', 'category', 'title', 'url', 'publishedAt', 'observedAt', 'source'],
+      },
+    ],
+    producedUnread: ['sourcesRegistry', 'totalNotices', 'health', 'language'],
+    notJsonExpect: /is not valid JSON/,
+  },
+  // ── P9f: i quattro input dell'aggregatore dei servizi ─────────────────────
+  // Un solo consumatore per quattro artefatti: l'armatura serve gli altri tre
+  // dai loro fixture mentre ne esercita uno (`consumer.inputKey`), e la cache e'
+  // una VISTA derivata, non il documento scaricato (`consumer.view`).
+  {
+    id: 'health-premiums',
+    artifact: 'health-premiums.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/fetch-health-premiums.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-services-data.mjs',
+      envUrl: 'HEALTH_PREMIUMS_URL',
+      cache: 'generator/data/canton-services.json',
+      view: true,
+      inputKey: 'premiums',
+    },
+    failureMode: 'soft',
+    symptom:
+      'il blocco premi dell\'hub servizi riporta minimo/mediana/massimo del premio adulto standard per ' +
+      'regione: una chiave cambiata (classe d\'eta\', franchigia, modello) darebbe cifre di un\'altra base.',
+    fixture: 'generator/tests/fixtures/rewire/health-premiums.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo: 'quotes ridotte a 2 assicuratori (CSS id 8, id 32) e alla sola base ERW/con infortunio/franchigia 300, niente comuni ne\' premi per comune',
+    },
+    freshen: 'current-year',
+    readBy: [
+      {
+        file: 'generator/scripts/lib/canton-services-data.mjs',
+        fields: ['year', 'quotes', 'insurers', 'ERW', 'withAccident', 'standard', 'fetchedAt'],
+      },
+    ],
+    producedUnread: ['rankings'],
+    notJsonExpect: /is not valid JSON/,
+  },
+  {
+    id: 'plate-auctions',
+    artifact: 'plate-auctions.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'functions/index.js (refreshPlateAuctions) + .github/workflows/refresh-plate-auctions.yml',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-services-data.mjs',
+      envUrl: 'PLATE_AUCTIONS_URL',
+      cache: 'generator/data/canton-services.json',
+      view: true,
+      inputKey: 'plateAuctions',
+    },
+    failureMode: 'soft',
+    symptom:
+      'il blocco aste dell\'hub servizi conta le aste attive e cita le offerte piu\' alte con il link ' +
+      'ufficiale: uno stato o un campo rinominato svuoterebbe il blocco senza errori.',
+    fixture: 'generator/tests/fixtures/rewire/plate-auctions.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo: '2 aste attive per fonte (36 su 17720), storico tolto, fonti ridotte ai campi pubblici',
+    },
+    freshen: 'shift-timestamps',
+    readBy: [
+      {
+        file: 'generator/scripts/lib/canton-services-data.mjs',
+        fields: ['schema', 'generatedAt', 'auctions', 'sources', 'sourceKey', 'auctionStatus', 'endsAt', 'currentBidChf', 'normalizedPlate', 'officialDetailUrl', 'officialUrl', 'status'],
+      },
+    ],
+    producedUnread: ['complete', 'bidCount'],
+    notJsonExpect: /is not valid JSON/,
+  },
+  {
+    id: 'pharmacy-duty-cantons',
+    artifact: 'pharmacy-duty-cantons.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/publish-pharmacy-duty-cantons.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-services-data.mjs',
+      envUrl: 'PHARMACY_DUTY_CANTONS_URL',
+      cache: 'generator/data/canton-services.json',
+      view: true,
+      inputKey: 'pharmacyDuties',
+    },
+    failureMode: 'soft',
+    symptom:
+      'il blocco turni farmacia dell\'hub servizi elenca le prossime farmacie di turno: un rilascio non ' +
+      'fresco pubblicato come buono manderebbe la gente nella farmacia sbagliata.',
+    fixture: 'generator/tests/fixtures/rewire/pharmacy-duty-cantons.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo: '3 turni per gruppo cantonale (6 gruppi con fonte ufficiale)',
+    },
+    freshen: 'shift-timestamps',
+    readBy: [
+      {
+        file: 'generator/scripts/lib/canton-services-data.mjs',
+        fields: ['schemaVersion', 'cantons', 'duties', 'state', 'fetchedAt', 'sourceUrl', 'dutyHubPath', 'pharmacy', 'city', 'coverageName', 'dutyType', 'startsAt', 'endsAt'],
+      },
+    ],
+    producedUnread: ['windowDays', 'unresolvedDuties'],
+    notJsonExpect: /is not valid JSON/,
+  },
+  {
+    id: 'weather-snapshot',
+    artifact: 'weather-snapshot.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/update-weather.ts (copiato in dist/data da build-plugins/weatherCityPagesPlugin.ts)',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-services-data.mjs',
+      envUrl: 'WEATHER_SNAPSHOT_URL',
+      cache: 'generator/data/canton-services.json',
+      view: true,
+      inputKey: 'weather',
+    },
+    failureMode: 'soft',
+    symptom:
+      'il blocco meteo dell\'hub servizi riporta temperatura e massime/minime delle citta\' del cantone: ' +
+      'uno snapshot fermo pubblicherebbe il meteo di giorni fa come attuale.',
+    fixture: 'generator/tests/fixtures/rewire/weather-snapshot.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo: '3 citta\' su 8 (lugano, bellinzona, como), 2 giorni di previsione, niente orario ne\' allerte',
+    },
+    freshen: 'shift-timestamps',
+    readBy: [
+      {
+        file: 'generator/scripts/lib/canton-services-data.mjs',
+        fields: ['generatedAt', 'cities', 'current', 'temperature', 'weatherCode', 'daily7', 'tempMax', 'tempMin', 'precipProb'],
+      },
+    ],
+    producedUnread: ['alerts', 'confidence'],
+    notJsonExpect: /is not valid JSON/,
+  },
 ];
+
+/**
+ * Rimette in data una registrazione che ha un gate di freschezza nel
+ * consumatore (stesso ragionamento di `freshenWindow`: un fixture congelato
+ * fallirebbe da solo col calendario per una ragione che con la FORMA non
+ * c'entra).
+ *
+ * - `shift-timestamps`: ogni timestamp ISO del documento trasla dello stesso
+ *   delta (ancora: `generatedAt`), ogni data `YYYY-MM-DD` dello stesso numero
+ *   di giorni — l'ordine e le distanze, cioe' cio' che il consumatore misura,
+ *   restano identici;
+ * - `current-year`: il campo `year` diventa l'anno in corso (i premi sono
+ *   annuali e il consumatore rifiuta un anno passato).
+ *
+ * I gate di freschezza restano coperti dai casi di mutazione dedicati.
+ */
+export function freshenRecording(c, payload, nowMs = Date.now()) {
+  if (c.freshen === 'current-year') return { ...structuredClone(payload), year: new Date(nowMs).getUTCFullYear() };
+  if (c.freshen !== 'shift-timestamps') return payload;
+  const anchor = Date.parse(payload.generatedAt);
+  const delta = nowMs - 3600_000 - anchor; // un'ora fa: «appena pubblicato»
+  const days = Math.round(delta / DAY_MS);
+  const walk = (v) => {
+    if (Array.isArray(v)) return v.map(walk);
+    if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, walk(x)]));
+    if (typeof v === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d(:\d\d(\.\d+)?)?(Z|[+-]\d\d:\d\d)$/.test(v)) return new Date(Date.parse(v) + delta).toISOString();
+    if (typeof v === 'string' && /^\d{4}-\d\d-\d\d$/.test(v)) return isoShift(v, days);
+    return v;
+  };
+  return walk(payload);
+}
 
 /** Un contratto per id — perche' i test parlino per nome invece che per indice. */
 export function contract(id) {

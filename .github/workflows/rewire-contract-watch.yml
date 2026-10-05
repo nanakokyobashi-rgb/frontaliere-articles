@@ -1,6 +1,6 @@
 name: REWIRE contract watch
 
-# I tre artefatti JSON che il SITO pubblica e che questo repo consuma, verificati
+# Gli artefatti JSON che il SITO pubblica e che questo repo consuma, verificati
 # contro i DATI VERI a orologio (issue #101).
 #
 # ── Perche' non basta la suite offline ──────────────────────────────────────
@@ -81,6 +81,15 @@ jobs:
       - name: events.json
         run: node generator/scripts/refresh-events-dataset.mjs --check
 
+      # Morbidi per progetto (D11, P9f/P9g): un produttore irraggiungibile toglie
+      # un blocco a un hub, non lo ferma. Escono comunque non-zero se hanno
+      # SCARICATO un documento di un'altra forma — che e' il caso che conta.
+      - name: canton-notices.json
+        run: node generator/scripts/refresh-canton-notices.mjs --check
+
+      - name: health-premiums.json, plate-auctions.json, pharmacy-duty-cantons.json, weather-snapshot.json
+        run: node generator/scripts/refresh-canton-services-data.mjs --check
+
       # Il rosso qui non si ripara qui. Lo dice il job, cosi' chi apre la run non
       # deve ricostruirlo: il registro delle tre coppie produttore/consumatore sta
       # in generator/tests/lib/rewire-contracts.mjs.
@@ -88,6 +97,6 @@ jobs:
         if: failure()
         run: |
           echo "::error::Un contratto REWIRE non combacia piu' con i dati pubblicati."
-          echo "Il produttore di tutti e tre vive nel repo del SITO e da qui non e' modificabile."
-          echo "Le tre coppie produttore/consumatore, con i campi letti e il sintomo di ognuna:"
+          echo "Il produttore di tutti vive nel repo del SITO e da qui non e' modificabile."
+          echo "Le coppie produttore/consumatore, con i campi letti e il sintomo di ognuna:"
           echo "  generator/tests/lib/rewire-contracts.mjs"

@@ -1,0 +1,1095 @@
+{
+ "fetchedAt": "2026-10-04T10:36:48.239Z",
+ "year": 2026,
+ "sourceUrl": "https://opendata.bagnet.ch/?r=/download&path=L1ByYWVtaWVuL0FyY2hpdl9QcmFlbWllbl8yMDI2LnppcA%3D%3D#Prämien_CH.csv",
+ "quotes": {
+  "AG": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 487,
+        "telmed": 512.3,
+        "standard": 563
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 555.3,
+        "hausarzt": 488.7,
+        "telmed": 483.2
+       }
+      }
+     }
+    }
+   }
+  },
+  "AI": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 369.8,
+        "telmed": 393.7,
+        "standard": 435
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 539.9,
+        "hausarzt": 496.8,
+        "telmed": 469.8
+       }
+      }
+     }
+    }
+   }
+  },
+  "AR": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 475.2,
+        "telmed": 505.9,
+        "standard": 559
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 524.1,
+        "hausarzt": 482.2,
+        "telmed": 456.1
+       }
+      }
+     }
+    }
+   }
+  },
+  "BE": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 577.1,
+        "telmed": 614.7,
+        "standard": 683
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 704.1,
+        "hausarzt": 633.7,
+        "telmed": 612.7
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 513.8,
+        "telmed": 547.2,
+        "standard": 608
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 615.3,
+        "hausarzt": 553.8,
+        "telmed": 535.5
+       }
+      }
+     }
+    }
+   },
+   "3": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 497,
+        "telmed": 513,
+        "standard": 570
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 564.2,
+        "hausarzt": 507.8,
+        "telmed": 491
+       }
+      }
+     }
+    }
+   }
+  },
+  "BL": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 559.1,
+        "telmed": 600.9,
+        "standard": 664
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 736.2,
+        "hausarzt": 677.4,
+        "telmed": 640.6
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 522.9,
+        "telmed": 558.9,
+        "standard": 621
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 656.9,
+        "hausarzt": 604.4,
+        "telmed": 571.6
+       }
+      }
+     }
+    }
+   }
+  },
+  "BS": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 575.9,
+        "telmed": 619,
+        "standard": 684
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 776.7,
+        "hausarzt": 714.6,
+        "telmed": 675.9
+       }
+      }
+     }
+    }
+   }
+  },
+  "FR": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 522,
+        "telmed": 546.3,
+        "standard": 607
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 591.7,
+        "hausarzt": 544.4,
+        "telmed": 514.9
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 479.4,
+        "telmed": 493.1,
+        "standard": 551
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 532.5,
+        "hausarzt": 489.9,
+        "telmed": 463.3
+       }
+      }
+     }
+    }
+   }
+  },
+  "GE": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 609.3,
+        "telmed": 665,
+        "standard": 743
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 765.2,
+        "telmed": 665.9
+       }
+      }
+     }
+    }
+   }
+  },
+  "GL": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 501.1,
+        "telmed": 512.3,
+        "standard": 563
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 568.6,
+        "hausarzt": 523.2,
+        "telmed": 494.8
+       }
+      }
+     }
+    }
+   }
+  },
+  "GR": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 473.9,
+        "telmed": 501.4,
+        "standard": 551
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 583.6,
+        "hausarzt": 519.5,
+        "telmed": 507.8
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 449.7,
+        "telmed": 478.7,
+        "standard": 529
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 541.3,
+        "hausarzt": 481.8,
+        "telmed": 471
+       }
+      }
+     }
+    }
+   },
+   "3": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 427.6,
+        "telmed": 455.2,
+        "standard": 503
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 535.8,
+        "hausarzt": 476.9,
+        "telmed": 466.2
+       }
+      }
+     }
+    }
+   }
+  },
+  "JU": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 566.2,
+        "telmed": 609.7,
+        "standard": 670
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 704.7,
+        "telmed": 613.2
+       }
+      }
+     }
+    }
+   }
+  },
+  "LU": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 473.8,
+        "telmed": 518.9,
+        "standard": 564
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 575.4,
+        "hausarzt": 523.7,
+        "telmed": 500.6
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 441.7,
+        "telmed": 478.7,
+        "standard": 529
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 538.1,
+        "hausarzt": 489.7,
+        "telmed": 468.2
+       }
+      }
+     }
+    }
+   },
+   "3": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 438.6,
+        "telmed": 458.8,
+        "standard": 507
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 518.3,
+        "hausarzt": 471.7,
+        "telmed": 451
+       }
+      }
+     }
+    }
+   }
+  },
+  "NE": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 594.2,
+        "telmed": 629.1,
+        "standard": 699
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 686.2,
+        "telmed": 597.1
+       }
+      }
+     }
+    }
+   }
+  },
+  "NW": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 443.6,
+        "telmed": 448.7,
+        "standard": 507
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 478.1,
+        "hausarzt": 435.1,
+        "telmed": 416.1
+       }
+      }
+     }
+    }
+   }
+  },
+  "OW": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 434,
+        "telmed": 443.9,
+        "standard": 496
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 497,
+        "hausarzt": 452.3,
+        "telmed": 432.5
+       }
+      }
+     }
+    }
+   }
+  },
+  "SG": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 491.9,
+        "telmed": 517.7,
+        "standard": 572
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 566.7,
+        "hausarzt": 515.7,
+        "telmed": 493.1
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 444.4,
+        "telmed": 481.4,
+        "standard": 529
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 525.4,
+        "hausarzt": 478.2,
+        "telmed": 457.1
+       }
+      }
+     }
+    }
+   },
+   "3": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 446.3,
+        "telmed": 461.8,
+        "standard": 516
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 514.7,
+        "hausarzt": 468.4,
+        "telmed": 447.8
+       }
+      }
+     }
+    }
+   }
+  },
+  "SH": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 535.1,
+        "telmed": 550.4,
+        "standard": 615
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 565.2,
+        "hausarzt": 514.4,
+        "telmed": 491.8
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 514.5,
+        "telmed": 523.3,
+        "standard": 588
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 528.5,
+        "hausarzt": 481,
+        "telmed": 459.8
+       }
+      }
+     }
+    }
+   }
+  },
+  "SO": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 516.3,
+        "telmed": 551.5,
+        "standard": 606
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 584.9,
+        "hausarzt": 532.3,
+        "telmed": 508.9
+       }
+      }
+     }
+    }
+   }
+  },
+  "SZ": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 445.5,
+        "telmed": 463.5,
+        "standard": 515
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 545.1,
+        "hausarzt": 496.1,
+        "telmed": 474.3
+       }
+      }
+     }
+    }
+   }
+  },
+  "TG": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 459.9,
+        "telmed": 489.6,
+        "standard": 541
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 600.9,
+        "hausarzt": 540.9,
+        "telmed": 522.8
+       }
+      }
+     }
+    }
+   }
+  },
+  "TI": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 621.2,
+        "telmed": 680.8,
+        "standard": 744
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 697.6,
+        "telmed": 607
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 609.8,
+        "telmed": 638,
+        "standard": 705
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 677.3,
+        "telmed": 589.3
+       }
+      }
+     }
+    }
+   }
+  },
+  "UR": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 400.8,
+        "telmed": 436.8,
+        "standard": 480
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 465.5,
+        "hausarzt": 423.7,
+        "telmed": 405
+       }
+      }
+     }
+    }
+   }
+  },
+  "VD": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 575.9,
+        "telmed": 638.7,
+        "standard": 698
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 678.9,
+        "telmed": 590.7
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 554.4,
+        "telmed": 600.6,
+        "standard": 660
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 646.4,
+        "telmed": 562.4
+       }
+      }
+     }
+    }
+   }
+  },
+  "VS": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 499.7,
+        "telmed": 520,
+        "standard": 581
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 607.6,
+        "telmed": 528.7
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 447.2,
+        "telmed": 468,
+        "standard": 520
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 543.4,
+        "hausarzt": 500,
+        "telmed": 472.8
+       }
+      }
+     }
+    }
+   }
+  },
+  "ZG": {
+   "0": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 361.7,
+        "telmed": 385.2,
+        "standard": 428
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 434.4,
+        "hausarzt": 395.4,
+        "telmed": 378
+       }
+      }
+     }
+    }
+   }
+  },
+  "ZH": {
+   "1": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 530.6,
+        "telmed": 592.4,
+        "standard": 651
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 657.4,
+        "hausarzt": 591.7,
+        "telmed": 572
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 484.6,
+        "telmed": 537.8,
+        "standard": 591
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 577.2,
+        "hausarzt": 519.5,
+        "telmed": 502.2
+       }
+      }
+     }
+    }
+   },
+   "3": {
+    "8": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "hausarzt": 472.4,
+        "telmed": 505.9,
+        "standard": 559
+       }
+      }
+     }
+    },
+    "32": {
+     "ERW": {
+      "withAccident": {
+       "300": {
+        "standard": 532.4,
+        "hausarzt": 479.2,
+        "telmed": 463.2
+       }
+      }
+     }
+    }
+   }
+  },
+  "ZE": {
+   "0": {}
+  },
+  "ZR": {
+   "0": {}
+  }
+ },
+ "insurers": [
+  {
+   "id": "8",
+   "name": "CSS",
+   "website": "https://www.css.ch"
+  },
+  {
+   "id": "32",
+   "name": "Aquilana",
+   "website": "https://www.aquilana.ch"
+  }
+ ],
+ "rankings": {
+  "cheapest": [
+   {
+    "municipality": "7076-Vaz/Obervaz",
+    "canton": "GR",
+    "bfsNr": 3506,
+    "avgPremium": 478.15,
+    "numInsurers": 24
+   },
+   {
+    "municipality": "7083-Lantsch/Lenz",
+    "canton": "GR",
+    "bfsNr": 3513,
+    "avgPremium": 478.15,
+    "numInsurers": 24
+   }
+  ]
+ }
+}
