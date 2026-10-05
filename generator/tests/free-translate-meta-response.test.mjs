@@ -43,8 +43,8 @@ function stubCascade(myMemoryAnswer) {
   };
 }
 
-function metaCount() {
-  return getCascadeStats().tierMetaResponses?.myMemory || 0;
+function metaCount(tierName = 'myMemory') {
+  return getCascadeStats().tierMetaResponses?.[tierName] || 0;
 }
 
 function snapshot() {
@@ -64,6 +64,44 @@ describe('freeTranslate — una meta-risposta non e\' una traduzione', () => {
     globalThis.fetch = realFetch;
     if (realVitestFlag === undefined) delete process.env.VITEST;
     else process.env.VITEST = realVitestFlag;
+  });
+
+  test('un rifiuto veloce di un proxy non interrompe la gara prima della traduzione valida', async () => {
+    const refusal = "Sorry — I can't help with that.";
+    const valid = 'The border commuter pays tax in Switzerland.';
+    const before = metaCount('mozhi:duckduckgo');
+    globalThis.fetch = async (url, { signal } = {}) => {
+      const u = String(url);
+      if (u.includes('api.mymemory.translated.net')) {
+        const q = new URL(u).searchParams.get('q');
+        return { ok: true, json: async () => ({ responseData: { translatedText: q, match: 1 } }) };
+      }
+      if (u.includes('mozhi.adminforge.de')) {
+        return { ok: true, json: async () => ({ 'translated-text': refusal }) };
+      }
+      if (u.includes('mozhi.pussthecat.org')) {
+        return new Promise((resolve, reject) => {
+          const timer = setTimeout(() => {
+            signal?.removeEventListener('abort', onAbort);
+            resolve({ ok: true, json: async () => ({ 'translated-text': valid }) });
+          }, 20);
+          const onAbort = () => {
+            clearTimeout(timer);
+            const error = new Error('aborted by the competing proxy');
+            error.name = 'AbortError';
+            reject(error);
+          };
+          if (signal?.aborted) onAbort();
+          else signal?.addEventListener('abort', onAbort, { once: true });
+        });
+      }
+      if (u.includes('mozhi.aryak.me')) return { ok: false, status: 503 };
+      return { ok: false, status: 503 };
+    };
+
+    const out = await freeTranslate({ text: IT_BODY, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
+    assert.equal(out, valid, 'la meta-risposta non deve interrompere la gara');
+    assert.equal(metaCount('mozhi:duckduckgo') - before, 1);
   });
 
   for (const answer of [
@@ -86,6 +124,25 @@ describe('freeTranslate — una meta-risposta non e\' una traduzione', () => {
       assert.equal(snapshot().hits - before.hits, 0);
     });
   }
+
+  test('il consumer corpus scarta i rifiuti inglesi con separatori non coperti dal gemello shared', async () => {
+    const refusals = [
+      "Sorry — I can't help with that.",
+      "Sorry – I can't help with that.",
+      "Sorry: I can't help with that.",
+      "Sorry; I can't help with that.",
+      "I'm sorry — I cannot translate this text.",
+    ];
+    assert.equal(detectAiMetaResponse(refusals[0], { source: IT_BODY }), null);
+
+    for (const answer of refusals) {
+      stubCascade(answer);
+      const before = metaCount();
+      const out = await freeTranslate({ text: IT_BODY, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
+      assert.equal(out, '', answer);
+      assert.equal(metaCount() - before, 1, answer);
+    }
+  });
 
   test('il memo negativo del passthrough non scatta su una meta-risposta', async () => {
     stubCascade("Sorry, I can't help with that.");

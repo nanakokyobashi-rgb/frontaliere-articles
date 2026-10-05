@@ -581,6 +581,24 @@ function rejectedAsPassthroughWithSourceVariants(
     && rejectedAsPassthrough(tierName, rawSource, out, outcome, granularity);
 }
 
+// Il rilevatore shared resta byte-identico al sito. Qui il consumer corpus
+// copre anche separatori d'apertura comuni che il pattern shared non accetta
+// ancora: «Sorry — I can't help», «I'm sorry: I cannot…» e varianti.
+const CORPUS_SEPARATOR_REFUSAL = /^(?:sorry|i['’]m sorry|i am sorry)\s*[:;—–-]\s*(?:but\s+)?i\b/i;
+
+function detectCorpusMetaResponse(text, source = '') {
+  const detected = detectAiMetaResponse(text, { source });
+  if (detected) return detected;
+
+  const head = String(text ?? '').replace(/^[\s#>*_`"'«»“”„\-•]+/u, '');
+  const match = head.match(CORPUS_SEPARATOR_REFUSAL);
+  if (!match) return null;
+
+  const marker = match[0].trim();
+  if (String(source ?? '').toLowerCase().includes(marker.toLowerCase())) return null;
+  return { kind: 'refusal', marker };
+}
+
 /**
  * Un tier che risponde CON UNA META-RISPOSTA non ha tradotto (scheda
  * AI-REFUSAL, trovata dalla PR del sito 11540): «I need to see the actual job
@@ -600,10 +618,18 @@ function rejectedAsPassthroughWithSourceVariants(
  * @returns {boolean} true se `out` e' una meta-risposta (e il tier e' stato contato)
  */
 function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
-  if (!out || !detectAiMetaResponse(out, { source })) return false;
+  if (!out || !detectCorpusMetaResponse(out, source)) return false;
   _cascadeStats.tierMetaResponses[tierName] = (_cascadeStats.tierMetaResponses[tierName] || 0) + 1;
   noteTranslationOutcome(outcome, 'incomplete');
   return true;
+}
+
+/** Una gara tra proxy restituisce solo una traduzione accettabile. */
+function acceptedRaceCandidate(tierName, source, translated, outcome) {
+  if (!translated) return '';
+  if (rejectedAsPassthrough(tierName, source, translated, outcome)) return '';
+  if (rejectedAsMetaResponse(tierName, source, translated, outcome)) return '';
+  return translated;
 }
 
 /**
@@ -842,7 +868,8 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
 
 // ── Parallel Race Helper ─────────────────────────────────────────────────────
 // Probe multiple instances in parallel, return the first valid translation.
-// Much faster than sequential probing when some instances are slow/down.
+// Provider callbacks must reject passthroughs and meta-responses before a
+// candidate can abort its competitors or mark its instance healthy.
 async function raceInstances(instances, fetchFn, outcome = null) {
   const healthy = instances.filter(isInstanceHealthy);
   if (healthy.length === 0) {
@@ -934,11 +961,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translation || '');
-    // Dentro `raceInstances`: se questa istanza rende l'eco NON deve vincere la
-    // gara, le altre stanno ancora provando. Percio' il rifiuto resta qui e non
-    // sale in `tryTier` — ma passa dalla formula condivisa e viene contato.
-    if (translated && !rejectedAsPassthrough('lingva', q, translated, attemptOutcome)) return translated;
-    return '';
+    return acceptedRaceCandidate('lingva', q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -961,8 +984,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translated_text || '');
-    if (translated && !rejectedAsPassthrough('simplyTranslate', q, translated, attemptOutcome)) return translated;
-    return '';
+    return acceptedRaceCandidate('simplyTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -1020,8 +1042,7 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translatedText || '');
-    if (translated && !rejectedAsPassthrough('libreTranslate', q, translated, attemptOutcome)) return translated;
-    return '';
+    return acceptedRaceCandidate('libreTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -1049,8 +1070,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
     // nomi diversi (`mozhiDdg`, `mozhiGoogle`, `mozhiYandex`, `mozhiDeepL`) e da
     // qui dentro non sono ricostruibili, quindi il bucket usa `mozhi:<engine>`
     // invece di inventare una corrispondenza che poi deriva.
-    if (translated && !rejectedAsPassthrough(`mozhi:${engine}`, q, translated, attemptOutcome)) return translated;
-    return '';
+    return acceptedRaceCandidate(`mozhi:${engine}`, q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -1624,7 +1644,7 @@ async function _translateGroupWithCodex(group) {
   // indietro il testo, senza mai far scattare lo stop.
   const translated = unique.some((text) => {
     const out = byText.get(text);
-    return out && !isSourcePassthrough(text, out);
+    return out && !isSourcePassthrough(text, out) && !detectCorpusMetaResponse(out, text);
   });
   if (translated) _codexConsecutiveFailures = 0;
   else _noteCodexFailure();
