@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-05T07:46:13.459Z",
+  "sources": [
+    {
+      "id": "astra-datex2",
+      "status": "ok",
+      "count": 749,
+      "coverage": 93.2
+    },
+    {
+      "id": "fr-police",
+      "status": "ok",
+      "count": 3
+    },
+    {
+      "id": "ge-police",
+      "status": "ok",
+      "count": 3
+    },
+    {
+      "id": "basilea-bvb",
+      "status": "ok",
+      "count": 1
+    },
+    {
+      "id": "ti-polizia",
+      "status": "ok",
+      "count": 4
+    }
+  ],
+  "events": [
+    {
+      "id": "astra-datex2:situation.657065.1",
+      "canton": "TI",
+      "type": "cantiere",
+      "title": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite tempor",
+      "titleByLocale": {
+        "it": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite tempor",
+        "de": "A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite F",
+        "fr": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.9 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitati"
+      },
+      "url": null,
+      "validFrom": "2026-10-02T12:42:00.000Z",
+      "validTo": "2026-10-19T03:00:00.000Z",
+      "publishedAt": null,
+      "source": "astra-datex2",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "astra-datex2:situation.657415.1",
+      "canton": "TI",
+      "type": "chiusura",
+      "title": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Lugano Nord E Galleria Galleria Grancia Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa",
+      "titleByLocale": {
+        "it": "Revocato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Lugano Nord E Galleria Galleria Grancia Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa",
+        "de": "Aufgehoben: A2 Gotthard -> Chiasso zwischen Anschluss Lugano-Nord und Tunnel San Salvatore-Tunnel Sachlage: Stau Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
+        "fr": "Révoqué: A2 St-Gothard -> Chiasso entre Jonction autoroutière Lugano-Nord et Tunnel Tunnel de Grancia Situation: bouchon Raison: véhicule en panne Gestion du trafic: voie de droite fermée"
+      },
+      "url": null,
+      "validFrom": "2026-10-05T04:10:00.000Z",
+      "validTo": null,
+      "publishedAt": null,
+      "source": "astra-datex2",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "astra-datex2:situation.656761.1",
+      "canton": "BASILEA",
+      "type": "chiusura",
+      "title": "A2 Basel -> Luzern tra Svincolo autostradale Basel-Kleinhüningen Nord E Svincolo autostradale Basel-Wettstein Situazione: chiusa cantiere, lunghezza [km] 1.8",
+      "titleByLocale": {
+        "it": "A2 Basel -> Luzern tra Svincolo autostradale Basel-Kleinhüningen Nord E Svincolo autostradale Basel-Wettstein Situazione: chiusa cantiere, lunghezza [km] 1.8",
+        "de": "A2 Basel -> Luzern zwischen Anschluss Basel-Kleinhüningen Nord und Anschluss Basel-Wettstein Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.8",
+        "fr": "A2 Bâle -> Lucerne entre Jonction autoroutière Bâle-Kleinhüningen Nord et Jonction autoroutière Bâle-Wettstein Situation: fermé travaux, longueur [km] 1.8"
+      },
+      "url": null,
+      "validFrom": "2026-10-01T13:05:00.000Z",
+      "validTo": "2026-10-16T03:00:00.000Z",
+      "publishedAt": null,
+      "source": "astra-datex2",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "astra-datex2:situation.657062.1",
+      "canton": "GE",
+      "type": "chiusura",
+      "title": "A1 Lausanne -> Genève tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Meyrin Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
+      "titleByLocale": {
+        "it": "A1 Lausanne -> Genève tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Meyrin Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
+        "de": "A1 Lausanne -> Genf zwischen Anschluss Flughafen Genf und Anschluss Meyrin Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.1",
+        "fr": "A1 Lausanne -> Genève entre Jonction autoroutière Aéroport de Genève et Jonction autoroutière Meyrin Situation: sortie fermée travaux, longueur [km] 0.1"
+      },
+      "url": null,
+      "validFrom": "2026-10-02T20:15:00.000Z",
+      "validTo": "2026-10-09T02:45:00.000Z",
+      "publishedAt": null,
+      "source": "astra-datex2",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "astra-datex2:situation.498960.1",
+      "canton": "BE",
+      "type": "chiusura",
+      "title": "Bösingenstrasse, 3177 Laupen, Switzerland in tutte le direzioni Situazione: ponte chiuso Causa: lavori di costruzione",
+      "titleByLocale": {
+        "it": "Bösingenstrasse, 3177 Laupen, Switzerland in tutte le direzioni Situazione: ponte chiuso Causa: lavori di costruzione",
+        "de": "Bösingenstrasse, 3177 Laupen, Switzerland in beide Richtungen Sachlage: Brücke gesperrt Ursache: Bauarbeiten",
+        "fr": "Bösingenstrasse, 3177 Laupen, Switzerland dans les deux sens Situation: pont fermé Raison: travaux de construction"
+      },
+      "url": null,
+      "validFrom": "2024-09-02T04:00:00.000Z",
+      "validTo": "2027-08-27T15:00:00.000Z",
+      "publishedAt": null,
+      "source": "astra-datex2",
+      "observedAt": "2026-10-05T07:46:13.459Z",
+      "geo": {
+        "lat": 46.9,
+        "lng": 7.24
+      }
+    },
+    {
+      "id": "fr-police:https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4",
+      "canton": "FR",
+      "type": "chiusura",
+      "title": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
+      "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4",
+      "validFrom": null,
+      "validTo": null,
+      "publishedAt": "2026-10-01T08:52:05.000Z",
+      "source": "fr-police",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "ge-police:https://www.ge.ch/node/45082",
+      "canton": "GE",
+      "type": "traffico",
+      "title": "Perturbations de la circulation - Samedi 3 octobre",
+      "url": "https://www.ge.ch/node/45082",
+      "validFrom": null,
+      "validTo": null,
+      "publishedAt": "2026-10-01T13:27:12.000Z",
+      "source": "ge-police",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "basilea-bvb:https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/",
+      "canton": "BASILEA",
+      "type": "tp",
+      "title": "slowUp: Busumleitungen am Sonntag",
+      "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/",
+      "validFrom": null,
+      "validTo": null,
+      "publishedAt": "2026-09-17T06:48:07.000Z",
+      "source": "basilea-bvb",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    },
+    {
+      "id": "ti-polizia:https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193",
+      "canton": "TI",
+      "type": "traffico",
+      "title": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+      "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193",
+      "validFrom": null,
+      "validTo": null,
+      "publishedAt": "2026-10-03T09:15:01.000Z",
+      "source": "ti-polizia",
+      "observedAt": "2026-10-05T07:46:13.459Z"
+    }
+  ]
+}

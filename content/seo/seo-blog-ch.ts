@@ -98037,6 +98037,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-deduzioni-3a-2027': {
+    title: 'Pilastro 3a: deduzioni fiscali massime 2027 | Frontaliere Ticino',
+    description: 'Dal 1° gennaio 2027 cambiano i limiti del pilastro 3a: 7373 franchi per chi ha un 2° pilastro e 36864 per chi non lo possiede. Confronto con gli importi',
+    keywords: 'frontalieri, ticino, svizzera, italia, pilastro, deduzioni, fiscali, massime',
+    ogTitle: 'Pilastro 3a: deduzioni massime 2027',
+    ogDescription: 'La comunicazione pubblicata a Berna il 5 ottobre 2026 fissa i nuovi tetti della deduzione fiscale per il pilastro 3a. Dal 1° gennaio 2027 il limite sarà di 7373 franchi con un 2° pilastro e di 36864 franchi senza.',
+    canonicalPath: '/articoli-svizzera/deduzioni-3a-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pilastro 3a: deduzioni fiscali massime 2027",
+      "description": "Dal 1° gennaio 2027 cambiano i limiti del pilastro 3a: 7373 franchi per chi ha un 2° pilastro e 36864 per chi non lo possiede. Confronto con gli importi",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/deduzioni-3a-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Calcolatrice e documenti fiscali svizzeri per le deduzioni del pilastro 3a"
+      },
+      "datePublished": "2026-10-05T15:21:39+00:00",
+      "dateModified": "2026-10-05T15:21:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/deduzioni-3a-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -99508,6 +99508,73 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hotel-collina-oro-licenziamenti': {
+    title: 'Ticino, villa principe leopoldo: 76 licenziamenti',
+    description: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude per mesi: il progetto di Dot Life vale 12 milioni e prevede 76 licenziamenti su 81 dipendenti attuali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, villa, principe, leopoldo, licenziamenti',
+    ogTitle: 'Ticino, Villa Principe Leopoldo: 76 licenziamenti',
+    ogDescription: 'La struttura di Collina d\'Oro si prepara a una chiusura temporanea. Il piano della proprietaria Dot Life SA prevede lavori da 12 milioni, 76 tagli su 81 dipendenti e una riassunzione futura non garantita per tutti.',
+    canonicalPath: '/articoli-frontaliere/hotel-collina-oro-licenziamenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino, villa principe leopoldo: 76 licenziamenti",
+      "description": "L'Hotel Villa Principe Leopoldo di Collina d'Oro chiude per mesi: il progetto di Dot Life vale 12 milioni e prevede 76 licenziamenti su 81 dipendenti attuali.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/hotel-collina-oro-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro, nel Canton Ticino"
+      },
+      "datePublished": "2026-10-05T15:51:02+00:00",
+      "dateModified": "2026-10-05T15:51:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hotel-collina-oro-licenziamenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hotel-ticino-76-licenziamenti': {
+    title: 'Hotel in Ticino: chiude e licenzia 76 dipendenti',
+    description: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude per mesi: Dot Life investe 12 milioni di franchi e annuncia 76 licenziamenti su 81 dipendenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, hotel, chiude, licenzia, dipendenti',
+    ogTitle: 'Hotel in Ticino: chiude e licenzia 76 dipendenti',
+    ogDescription: 'A Collina d\'Oro il progetto da 12 milioni di franchi dell\'Hotel Villa Principe Leopoldo comporta 76 licenziamenti su 81 dipendenti. La chiusura durerà diversi mesi e la riassunzione di tutti non è garantita. La fine dei cantieri è prevista il 1°',
+    canonicalPath: '/articoli-frontaliere/hotel-ticino-76-licenziamenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hotel in Ticino: chiude e licenzia 76 dipendenti",
+      "description": "L'Hotel Villa Principe Leopoldo di Collina d'Oro chiude per mesi: Dot Life investe 12 milioni di franchi e annuncia 76 licenziamenti su 81 dipendenti",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/hotel-ticino-76-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro, nel Canton Ticino"
+      },
+      "datePublished": "2026-10-05T16:27:36+00:00",
+      "dateModified": "2026-10-05T16:27:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hotel-ticino-76-licenziamenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

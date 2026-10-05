@@ -24535,6 +24535,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'deduzioni-3a-2027',
+    category: 'fiscale',
+    date: '2026-10-05T15:21:39.547Z',
+    image: '/images/blog/deduzioni-3a-2027.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
