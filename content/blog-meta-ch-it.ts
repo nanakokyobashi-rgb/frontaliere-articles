@@ -7763,6 +7763,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tamedia-taglio-posti-lavoro.title': 'Tamedia taglia 34 posti: riorganizzazione in vista',
     'blog.article.tamedia-taglio-posti-lavoro.excerpt': 'L\'azienda editoriale annuncia la soppressione di 34 posti a tempo pieno coinvolgendo 41 collaboratori tra Svizzera tedesca e romanda entro fine ottobre.',
     'blog.article.tamedia-taglio-posti-lavoro.imageAlt': 'Sede di un\'azienda editoriale svizzera in un contesto urbano',
+    'blog.article.guy-parmelin-visita-india.title': 'Parmelin in India: focus su economia e investimenti',
+    'blog.article.guy-parmelin-visita-india.excerpt': 'Il consigliere federale Guy Parmelin a New Delhi per rafforzare la cooperazione economica, la tutela della proprietà intellettuale e le intese sulla migrazione.',
+    'blog.article.guy-parmelin-visita-india.imageAlt': 'Il consigliere federale Guy Parmelin in visita ufficiale',
+    'blog.article.bern-risanamento-energia.title': 'Incentivi energetici Canton Berna: requisiti e domanda',
+    'blog.article.bern-risanamento-energia.excerpt': 'Nel Cantone di Berna i programmi riguardano edifici e impianti: requisiti tecnici, domanda prima dei lavori e ufficio cantonale competente.',
+    'blog.article.bern-risanamento-energia.imageAlt': 'Edificio svizzero in fase di risanamento energetico',
 };
 
 export default blogMetaChIt;
