@@ -7772,6 +7772,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.deduzioni-3a-2027.title': 'Säule 3a: Maximale Steuerabzüge 2027',
     'blog.article.deduzioni-3a-2027.excerpt': 'Ab dem 1. Januar 2027 steigt die abzugsfähige Obergrenze der Säule 3a mit der 2. Säule auf 7373 Franken und ohne Säule auf 36864 Franken.',
     'blog.article.deduzioni-3a-2027.imageAlt': 'Taschenrechner und Schweizer Steuerpapiere für Abzüge der Säule 3a',
+    'blog.article.greggio-export-pre-guerra.title': 'Rohöl: Nahostexporte auf Vorkriegsniveau',
+    'blog.article.greggio-export-pre-guerra.excerpt': 'Die Rohölexporte aus dem Nahen Osten, mit Ausnahme des Iran, übertreffen das Vorkriegsniveau. Brent bei 101,44 Dollar und WTI bei 90,02: Alternative Routen nehmen zu.',
+    'blog.article.greggio-export-pre-guerra.imageAlt': 'Panorama von Lugano zur Beobachtung der internationalen Energiemärkte',
 };
 
 export default blogMetaChDe;

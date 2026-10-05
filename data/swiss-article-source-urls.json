@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4054323": {
-    "articleId": "sondaggio-ssr-votazioni-27-settembre",
-    "ts": "2026-09-04T08:34:04.899Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/valute-e-frontiere/1947992/economia-svizzera-in-accelerazione-e-una-buona-notizia-anche-per-i-frontalieri": {
     "articleId": "economia-svizzera-accelerazione-frontalieri",
     "ts": "2026-09-04T09:08:24.755Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/6ck3kzvxbnq4": {
     "articleId": "deduzioni-3a-2027",
     "ts": "2026-10-05T15:21:39.951Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4133730": {
+    "articleId": "greggio-export-pre-guerra",
+    "ts": "2026-10-05T23:22:17.175Z",
     "keyForm": 2
   }
 }
