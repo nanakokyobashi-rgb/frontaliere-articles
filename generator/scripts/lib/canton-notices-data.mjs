@@ -28,6 +28,17 @@ export const MIN_CANTONS = 15;
 export const MAX_AGE_DAYS = 4;
 
 const ISO_DAY = /^\d{4}-\d\d-\d\d$/;
+
+/** `https:///path` passerebbe una regex: si chiede a URL un protocollo http(s) e un host. */
+function isAbsoluteHttpUrl(value) {
+  if (typeof value !== 'string' || /\s/.test(value)) return false;
+  try {
+    const u = new URL(value);
+    return (u.protocol === 'https:' || u.protocol === 'http:') && u.hostname.length > 0 && /^https?:\/\/[^/]/.test(value);
+  } catch {
+    return false;
+  }
+}
 const ISO_TIME = /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$/;
 
 /**
@@ -56,7 +67,7 @@ export function cantonNoticesProblem(payload, { nowMs = Date.now() } = {}) {
     if (!CANTON_GROUP_CODES.includes(n.canton)) return `${where}: canton ${JSON.stringify(n.canton)} is not a URL group`;
     if (!NOTICE_CATEGORIES.includes(n.category)) return `${where}: category ${JSON.stringify(n.category)} is not a hub category`;
     if (typeof n.title !== 'string' || n.title.length < 8 || n.title.length > 240) return `${where}: title is not an 8-240 char string`;
-    if (typeof n.url !== 'string' || !/^https?:\/\/[^\s]+$/.test(n.url)) return `${where}: url is not an absolute http(s) URL`;
+    if (!isAbsoluteHttpUrl(n.url)) return `${where}: url is not an absolute http(s) URL with a host`;
     if (n.publishedAt !== null && !(typeof n.publishedAt === 'string' && (ISO_DAY.test(n.publishedAt) || ISO_TIME.test(n.publishedAt)))) {
       return `${where}: publishedAt ${JSON.stringify(n.publishedAt)} is neither null nor an ISO date`;
     }
@@ -75,8 +86,9 @@ const dateKey = (n) => String(n.publishedAt ?? '');
  * recente; quelli senza data in coda. E' la lettura che faranno gli hub.
  */
 export function noticesFor(payload, canton, { category = null, limit = 10 } = {}) {
+  const max = Number.isFinite(limit) ? Math.max(0, Math.floor(limit)) : 10;
   return (payload?.notices ?? [])
     .filter((n) => n.canton === canton && (!category || n.category === category))
     .sort((a, b) => (a.publishedAt === null) - (b.publishedAt === null) || dateKey(b).localeCompare(dateKey(a)))
-    .slice(0, limit);
+    .slice(0, max);
 }

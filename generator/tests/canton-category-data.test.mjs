@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CANTON_GROUPS,
+  assertPharmacyDutyCantonsShape,
   MIN_CANTONS_WITH_BLOCK,
   PLATE_AUCTIONS_MAX_AGE_MS,
   WEATHER_MAX_AGE_MS,
@@ -130,6 +131,21 @@ test('timestamp nel futuro e ora di importazione illeggibile degradano, i turni 
   })).reverse();
   const block = shapePharmacyDuties(shuffled, 'TI', { nowMs: NOW });
   assert.deepEqual(block.duties.map((d) => d.pharmacy), ['Farmacia 0', 'Farmacia 1', 'Farmacia 2', 'Farmacia 3', 'Farmacia 4', 'Farmacia 5']);
+});
+
+test('contratto per voce: turno con date illeggibili, URL senza host, cantone meteo sconosciuto', () => {
+  const duties = recording('pharmacy-duty-cantons', NOW);
+  duties.cantons.TI.duties[0].startsAt = 'domani';
+  assert.throws(() => assertPharmacyDutyCantonsShape(duties), /no valid startsAt < endsAt/);
+
+  const notices = recording('canton-notices', NOW);
+  notices.notices[0].url = 'https:///amtsmitteilungen/1';
+  assert.match(cantonNoticesProblem(notices, { nowMs: NOW }), /with a host/);
+
+  const weather = recording('weather-snapshot', NOW);
+  weather.cities.chur = { ...weather.cities.lugano, cityId: 'chur', canton: 'XX' };
+  assert.deepEqual(unmappedWeatherCities(weather), ['chur']);
+  assert.equal(noticesFor(recording('canton-notices', NOW), 'TI', { limit: -3 }).length, 0);
 });
 
 test('soglie della vista: con una sola fonte raggiungibile non si scrive', () => {

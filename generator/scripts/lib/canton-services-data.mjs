@@ -63,6 +63,8 @@ export const WEATHER_CITY_CANTON = Object.freeze({
   locarno: 'TI',
   chiasso: 'TI',
 });
+/** I 26 codici cantonali reali (i membri dei 24 gruppi URL). */
+const SWISS_CANTON_CODES = new Set(['AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH']);
 /** Citta' italiane dello snapshot: lato residenza dei frontalieri, nessun cantone. */
 const WEATHER_IT_CITIES = new Set(['como', 'varese', 'lecco']);
 
@@ -191,6 +193,16 @@ export function assertPharmacyDutyCantonsShape(doc) {
   if (!isObj(doc.cantons) || !Object.keys(doc.cantons).length) throw new ShapeError('pharmacy-duty-cantons: cantons{} missing or empty');
   for (const [g, c] of Object.entries(doc.cantons)) {
     if (!Array.isArray(c?.duties)) throw new ShapeError(`pharmacy-duty-cantons: ${g}.duties[] missing`);
+    // Ogni turno, non solo la lista: un turno con date illeggibili verrebbe
+    // ordinato con NaN e pubblicato come disponibile.
+    c.duties.forEach((d, i) => {
+      const start = Date.parse(d?.startsAt ?? '');
+      const end = Date.parse(d?.endsAt ?? '');
+      if (typeof d?.pharmacy !== 'string' || !d.pharmacy.trim()) throw new ShapeError(`pharmacy-duty-cantons: ${g}.duties[${i}].pharmacy missing`);
+      if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) {
+        throw new ShapeError(`pharmacy-duty-cantons: ${g}.duties[${i}] has no valid startsAt < endsAt`);
+      }
+    });
   }
 }
 
@@ -258,13 +270,17 @@ export function shapeWeather(doc, members, { nowMs = Date.now() } = {}) {
  * `canton` se c'e', altrimenti la mappa. I gruppi URL si risolvono dai membri.
  */
 function cityCanton(id, city) {
-  return typeof city?.canton === 'string' ? city.canton : WEATHER_CITY_CANTON[id] ?? null;
+  // Solo un codice cantonale vero: un valore sconosciuto non appartiene a
+  // nessun gruppo e farebbe sparire la citta' in silenzio, quindi conta come
+  // non mappato (e `unmappedWeatherCities` lo segnala).
+  if (city?.canton != null) return SWISS_CANTON_CODES.has(city.canton) ? city.canton : null;
+  return WEATHER_CITY_CANTON[id] ?? null;
 }
 
 /** Citta' CH dello snapshot senza cantone (ne' campo ne' mappa): da mappare, non da indovinare. */
 export function unmappedWeatherCities(doc) {
   return Object.entries(doc?.cities ?? {})
-    .filter(([id, city]) => !cityCanton(id, city) && city?.country !== 'IT' && !WEATHER_IT_CITIES.has(id))
+    .filter(([id, city]) => !cityCanton(id, city) && city?.country !== 'IT' && !WEATHER_IT_CITIES.has(String(id).toLowerCase()))
     .map(([id]) => id);
 }
 
