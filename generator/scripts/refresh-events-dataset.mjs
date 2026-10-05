@@ -40,6 +40,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchFirstOk, isCiWafBlock } from './lib/rewire-fetch.mjs';
+import { stripPrivateEventRecords } from './lib/private-event-records.mjs';
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(
@@ -137,11 +138,19 @@ if (typeof payload.schemaVersion !== 'number') {
 const dated = events.filter((e) => e && typeof e.startDate === 'string' && e.startDate).length;
 if (dated === 0) fail(`${SOURCE}: not one event carries a startDate — refusing`);
 
+// Private-source records (Eventfrog, AGB §17(3)/(6)) never enter the corpus:
+// the digest built from this cache is a reuse their terms forbid. The site
+// already keeps them out of the published file; a count here means it did not.
+const { payload: publicPayload, removed: privateRecords } = stripPrivateEventRecords(payload);
+if (privateRecords > 0) {
+  console.log(`::warning::[refresh-events-dataset] ${SOURCE} carried ${privateRecords} private-source event record(s); dropped before caching`);
+}
+
 if (CHECK_ONLY) {
-  log(`--check: ${events.length} events (${dated} dated) from ${SOURCE}, wrote nothing`);
+  log(`--check: ${events.length} events (${dated} dated) from ${SOURCE}, ${privateRecords} private dropped, wrote nothing`);
   process.exit(0);
 }
 
 fs.mkdirSync(path.dirname(CACHE), { recursive: true });
-fs.writeFileSync(CACHE, raw, 'utf-8');
-log(`${events.length} events (${dated} dated) from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);
+fs.writeFileSync(CACHE, privateRecords > 0 ? `${JSON.stringify(publicPayload)}\n` : raw, 'utf-8');
+log(`${publicPayload.events.length} events (${dated} dated) from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);
