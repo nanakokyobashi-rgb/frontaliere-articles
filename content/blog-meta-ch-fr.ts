@@ -7748,6 +7748,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Portes ouvertes login Ticino : chemin de fer, commerce et bâtiments',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Samedi 10 octobre, 09.00-13.00 à Bellinzona, Portes ouvertes login Ticino présentent le chemin de fer, le commerce et la nouvelle formation CFC d\'informaticien/ne des bâtiments et des infrastructures, lancée en août 2027.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Visiteurs aux portes ouvertes login Ticino observent un électrotrain et des outils d\'automatisation du bâtiment à Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Risques informatiques : les PME suisses sous-estiment les dangers',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Une analyse VZ-HSLU signale que les incidents informatiques constituent le premier risque mondial : en Suisse, en 2025, près de 58\'000 délits numériques.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Une PME suisse analyse les risques informatiques au bureau',
+    'blog.article.india-aels-protezione-capitali.title': 'Parmelin en Inde : accord pour protéger les investissements',
+    'blog.article.india-aels-protezione-capitali.excerpt': 'Depuis New Delhi, Guy Parmelin indique que Berne souhaite un accord sur la protection des investissements et accorde de l\'importance à la propriété intellectuelle.',
+    'blog.article.india-aels-protezione-capitali.imageAlt': 'Guy Parmelin à New Delhi pour des discussions sur les investissements et l’accord commercial Inde-AELE.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.title': 'Hausse de la TVA pour la 13e rente AVS',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.excerpt': 'Le 29 novembre, un vote aura lieu sur l\'augmentation de la TVA de 8,1% à 8,5% pour financer la 13e rente AVS, qui nécessite 4,2 milliards de francs par an.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.imageAlt': 'Palais fédéral à Berne, siège du gouvernement et du parlement suisses.',
+    'blog.article.lugano-trasparenza-partecipate.title': 'Lugano : l\'UDC propose davantage de transparence sur les rémunérations',
+    'blog.article.lugano-trasparenza-partecipate.excerpt': 'Une motion de l\'UDC demande la publication annuelle des rémunérations des CEO et des conseils d\'administration des sociétés détenues par la Ville de Lugano.',
+    'blog.article.lugano-trasparenza-partecipate.imageAlt': 'Le centre culturel LAC à Lugano surplombant le lac.',
 };
 
 export default blogMetaChFr;

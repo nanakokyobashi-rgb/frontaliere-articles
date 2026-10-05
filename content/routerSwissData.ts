@@ -2605,6 +2605,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'voto-iva-avs-novembre-2026': { it: 'voto-iva-avs-novembre-2026', en: 'vat-avs-vote-november-2026', de: 'mwst-ahv-abstimmung-november-2026', fr: 'vote-tva-avs-novembre-2026' },
  'villa-principe-leopoldo-chiude': { it: 'villa-principe-leopoldo-chiude', en: 'villa-principe-leopoldo-closes', de: 'villa-principe-leopoldo-schliesst', fr: 'villa-principe-leopoldo-ferme' },
  'porte-aperte-login-ticino': { it: 'porte-aperte-login-ticino', en: 'open-doors-login-ticino', de: 'offene-tueren-login-ticino', fr: 'portes-ouvertes-login-ticino' },
+ 'rischi-cyber-pmi-svizzere': { it: 'rischi-cyber-pmi-svizzere', en: 'swiss-sme-cyber-risks', de: 'cyberrisiken-schweizer-kmu', fr: 'cyber-risques-pme-suisses' },
+ 'india-aels-protezione-capitali': { it: 'india-aels-protezione-capitali', en: 'parmelin-india-investment-protection', de: 'parmelin-indien-investitionsschutz', fr: 'parmelin-inde-protection-investissements' },
+ 'aumento-iva-finanziamento-13esima-avs': { it: 'aumento-iva-finanziamento-13esima-avs', en: 'vat-increase-13th-pillar-ahv-financing', de: 'mwst-erhoehung-13-ahv-finanzierung', fr: 'hausse-tva-financement-13e-avs' },
+ 'lugano-trasparenza-partecipate': { it: 'lugano-trasparenza-partecipate', en: 'lugano-transparency-municipal-companies', de: 'lugano-transparenz-beteiligungen', fr: 'lugano-transparence-societes-participations' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

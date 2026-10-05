@@ -7748,6 +7748,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Ticino Open Doors Login: Railway, Commerce and Buildings',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Saturday 10 October, 09.00-13.00 in Bellinzona, Porte Aperte login Ticino presents rail, commerce and the new AFC Informatico/a training of buildings and infrastructures, launched in August 2027.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Visitors at Porte Aperte login Ticino observe an electrotrain and building automation tools in Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Cyber risks: Swiss SMEs underestimate the dangers',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'A VZ-HSLU analysis indicates that cyber incidents are the top global risk: nearly 58\'000 digital crimes in Switzerland in 2025.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Swiss SME team reviews cyber risks in an office',
+    'blog.article.india-aels-protezione-capitali.title': 'Parmelin in India: agreement to protect investments',
+    'blog.article.india-aels-protezione-capitali.excerpt': 'From New Delhi, Guy Parmelin reports that Bern hopes for an agreement on investment protection and highlights the importance of intellectual property.',
+    'blog.article.india-aels-protezione-capitali.imageAlt': 'Guy Parmelin in New Delhi for talks on investment protection and the India-AELS trade agreement.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.title': 'VAT increase for the 13th AVS pension',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.excerpt': 'On 29 November, voters will decide on increasing VAT from 8,1% to 8,5% to finance the 13th AVS pension, which requires 4,2 billion francs annually.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.imageAlt': 'Swiss Federal Palace in Bern, seat of the government and parliament.',
+    'blog.article.lugano-trasparenza-partecipate.title': 'Lugano: the UDC proposes greater transparency regarding compensation',
+    'blog.article.lugano-trasparenza-partecipate.excerpt': 'A motion by the UDC calls for the annual publication of the salaries of CEOs and boards of directors of companies owned by the City of Lugano.',
+    'blog.article.lugano-trasparenza-partecipate.imageAlt': 'The LAC cultural center in Lugano overlooking the lake.',
 };
 
 export default blogMetaChEn;

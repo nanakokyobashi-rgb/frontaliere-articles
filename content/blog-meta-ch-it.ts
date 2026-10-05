@@ -7748,6 +7748,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Porte Aperte login Ticino: ferrovia, commercio e edifici',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Sabato 10 ottobre, 09.00-13.00 a Bellinzona, Porte Aperte login Ticino presenta ferrovia, commercio e la nuova formazione AFC Informatico/a degli edifici e delle infrastrutture, avviata ad agosto 2027.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Visitatori alle Porte Aperte login Ticino osservano un elettrotreno e strumenti di automazione edilizia a Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Rischi informatici: PMI svizzere sottovalutano i pericoli',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Un\'analisi VZ-HSLU segnala che gli incidenti informatici sono il primo rischio globale: in Svizzera nel 2025 quasi 58\'000 reati digitali.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'PMI svizzera analizza i rischi informatici in ufficio',
+    'blog.article.india-aels-protezione-capitali.title': 'Parmelin in India: accordo per proteggere gli investimenti',
+    'blog.article.india-aels-protezione-capitali.excerpt': 'Da Nuova Delhi, Guy Parmelin riferisce che Berna auspica un accordo sulla protezione degli investimenti e valorizza la proprietà intellettuale.',
+    'blog.article.india-aels-protezione-capitali.imageAlt': 'Guy Parmelin a Nuova Delhi per colloqui su investimenti e accordo commerciale India-AELS.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.title': 'Aumento IVA per la 13esima AVS',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.excerpt': 'Il 29 novembre si vota sull\'aumento dell\'IVA dall\'8,1% all\'8,5% per finanziare la 13esima rendita AVS, che necessita di 4,2 miliardi di franchi annui.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.imageAlt': 'Palazzo federale svizzero a Berna, sede del governo e del parlamento.',
+    'blog.article.lugano-trasparenza-partecipate.title': 'Lugano: l\'UDC propone più trasparenza sui compensi',
+    'blog.article.lugano-trasparenza-partecipate.excerpt': 'Una mozione dell\'UDC chiede la pubblicazione annuale delle retribuzioni di CEO e Cda delle società partecipate dalla Città di Lugano.',
+    'blog.article.lugano-trasparenza-partecipate.imageAlt': 'Il centro culturale LAC di Lugano affacciato sul lago.',
 };
 
 export default blogMetaChIt;

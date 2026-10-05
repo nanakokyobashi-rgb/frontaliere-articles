@@ -12600,6 +12600,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.osservatorio-varese-spettacolo-galileo.title': 'Varese Observatory: the Galileo show arrives',
     'blog.article.osservatorio-varese-spettacolo-galileo.excerpt': 'On Saturday, October 17, the G.V. Schiaparelli Observatory will host Corrado D\'Elia\'s play, followed by observation of the Moon and Saturn.',
     'blog.article.osservatorio-varese-spettacolo-galileo.imageAlt': 'Astronomical observatory in Varese',
+    'blog.article.valuta-intercettata-brogeda.title': 'Double currency seizure at the Brogeda border crossing',
+    'blog.article.valuta-intercettata-brogeda.excerpt': 'At the Brogeda border crossing, in two separate operations, customs officers and financial police officers from Ponte Chiasso intercepted over 240mila euro in recent days.',
+    'blog.article.valuta-intercettata-brogeda.imageAlt': 'Brogeda border crossing linked to two operations involving over 240,000 euros',
+    'blog.article.unione-confronto-pilastro-ch-it.title': 'Second pillar: the Union calls for a CH-IT comparison',
+    'blog.article.unione-confronto-pilastro-ch-it.excerpt': 'The Unione Frontalieri Italiani calls for a comparison between Italy and Switzerland on the second pillar, a central issue for cross-border workers\' pension provision.',
+    'blog.article.unione-confronto-pilastro-ch-it.imageAlt': 'Second-pillar documents and a commuter bag in Ticino',
+    'blog.article.avs-13a-rendita-iva-aumento.title': '13th AHV pension: Federal Council: “Here’s why we will increase VAT”',
+    'blog.article.avs-13a-rendita-iva-aumento.excerpt': 'In December, the first 13th AVS pension arrives for 2,6 million pensioners. Parliament has decided on a VAT increase to finance the measure, with a popular vote on November 29.',
+    'blog.article.avs-13a-rendita-iva-aumento.imageAlt': 'Bellinzona\'s Castel Grande under a clear sky, a symbol of Swiss governance.',
 };
 
 export default blogMetaEn;

@@ -7748,6 +7748,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.porte-aperte-login-ticino.title': 'Offene Türen Login Tessin: Bahn, Handel und Gebäude',
     'blog.article.porte-aperte-login-ticino.excerpt': 'Am Samstag, 10. Oktober, 09.00-13.00 Uhr in Bellinzona, präsentiert Porte Aperte Login Tessin Bahn, Handel und die im August 2027 gestartete neue Ausbildung EFZ Gebäude- und Infrastrukturinformatiker/in.',
     'blog.article.porte-aperte-login-ticino.imageAlt': 'Besucher bei den offenen Türen login Ticino beobachten einen Elektrozug und Gebäudeautomatisierungswerkzeuge in Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Cyberrisiken: Schweizer KMU unterschätzen die Gefahren',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Eine VZ-HSLU-Analyse zeigt, dass Cybervorfälle das weltweit größte Risiko darstellen: In der Schweiz gab es im Jahr 2025 knapp 58\'000 digitale Straftaten.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Schweizer KMU prüft Cyberrisiken im Büro',
+    'blog.article.india-aels-protezione-capitali.title': 'Parmelin in Indien: Abkommen zum Schutz von Investitionen',
+    'blog.article.india-aels-protezione-capitali.excerpt': 'Aus Neu-Delhi berichtet Guy Parmelin, dass Bern ein Abkommen zum Schutz der Investitionen anstrebt und die Bedeutung des geistigen Eigentums hervorhebt.',
+    'blog.article.india-aels-protezione-capitali.imageAlt': 'Guy Parmelin in Neu-Delhi bei Gesprächen über Investitionsschutz und das Handelsabkommen Indien-AELS.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.title': 'Erhöhung der Mehrwertsteuer für die 13. AHV-Rente',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.excerpt': 'Am 29. November wird über die Erhöhung der Mehrwertsteuer von 8,1% auf 8,5% zur Finanzierung der 13. AHV-Rente abgestimmt, für die jährlich 4,2 Milliarden Franken benötigt werden.',
+    'blog.article.aumento-iva-finanziamento-13esima-avs.imageAlt': 'Bundeshaus in Bern, Sitz von Regierung und Parlament der Schweiz.',
+    'blog.article.lugano-trasparenza-partecipate.title': 'Lugano: Die UDC schlägt mehr Transparenz bei den Vergütungen vor',
+    'blog.article.lugano-trasparenza-partecipate.excerpt': 'Eine Motion der UDC fordert die jährliche Veröffentlichung der Vergütungen der CEOs und Verwaltungsratsmitglieder der Unternehmen, an denen die Stadt Lugano beteiligt ist.',
+    'blog.article.lugano-trasparenza-partecipate.imageAlt': 'Das Kulturzentrum LAC in Lugano mit Blick auf den See.',
 };
 
 export default blogMetaChDe;

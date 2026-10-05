@@ -97799,6 +97799,142 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rischi-cyber-pmi-svizzere': {
+    title: 'Rischi informatici: PMI svizzere sottovalutano i pericoli',
+    description: 'Studio VZ-HSLU: quasi 58\'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rischi, informatici, svizzere, sottovalutano',
+    ogTitle: 'PMI svizzere e rischi informatici sottovalutati',
+    ogDescription: 'Lo studio VZ-HSLU spiega perché un attacco può interrompere l\'attività, danneggiare dati e sistemi e mettere sotto pressione la liquidità. Nel 2025 in Svizzera sono stati registrati quasi 58\'000 reati digitali; il tasso di risoluzione è stato',
+    canonicalPath: '/articoli-svizzera/rischi-cyber-pmi-svizzere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rischi informatici: PMI svizzere sottovalutano i pericoli",
+      "description": "Studio VZ-HSLU: quasi 58'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rischi-cyber-pmi-svizzere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "PMI svizzera analizza i rischi informatici in ufficio"
+      },
+      "datePublished": "2026-10-05T10:27:11+00:00",
+      "dateModified": "2026-10-05T10:27:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rischi-cyber-pmi-svizzere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-india-aels-protezione-capitali': {
+    title: 'Parmelin in India: accordo per proteggere gli investimenti',
+    description: 'Guy Parmelin in India: Berna cerca un accordo sugli investimenti; India-AELS punta su accesso al mercato, certezza del diritto, proprietà intellettuale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, india, accordo, proteggere',
+    ogTitle: 'Parmelin in India: accordo per proteggere gli investimenti',
+    ogDescription: 'La visita di Stato di tre giorni porta a Nuova Delhi il dossier economico svizzero: Berna chiede di accelerare la protezione degli investimenti, mentre l\'accordo India-AELS e la dichiarazione su mobilità e formazione definiscono gli altri fronti.',
+    canonicalPath: '/articoli-svizzera/india-aels-protezione-capitali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parmelin in India: accordo per proteggere gli investimenti",
+      "description": "Guy Parmelin in India: Berna cerca un accordo sugli investimenti; India-AELS punta su accesso al mercato, certezza del diritto, proprietà intellettuale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/india-aels-protezione-capitali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guy Parmelin a Nuova Delhi per colloqui su investimenti e accordo commerciale India-AELS."
+      },
+      "datePublished": "2026-10-05T11:04:37+00:00",
+      "dateModified": "2026-10-05T11:04:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/india-aels-protezione-capitali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aumento-iva-finanziamento-13esima-avs': {
+    title: 'Aumento IVA per la 13esima AVS | Frontaliere Ticino',
+    description: 'Il 29 novembre svizzeri al voto per l\'aumento dell\'IVA necessario a finanziare la 13esima rendita AVS. Dettagli su aliquote, costi e posizioni. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, 13esima, novembre, vota',
+    ogTitle: 'Aumento IVA per finanziare la 13esima AVS: si vota il 29 novembre',
+    ogDescription: 'Il futuro della 13esima rendita AVS dipende dal voto popolare del 29 novembre sull\'aumento dell\'IVA. Scopri i dettagli dell\'aumento proposto, i costi previsti e le diverse posizioni politiche. Un\'analisi per comprendere l\'impatto sulle famiglie',
+    canonicalPath: '/articoli-svizzera/aumento-iva-finanziamento-13esima-avs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento IVA per la 13esima AVS",
+      "description": "Il 29 novembre svizzeri al voto per l'aumento dell'IVA necessario a finanziare la 13esima rendita AVS. Dettagli su aliquote, costi e posizioni. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/aumento-iva-finanziamento-13esima-avs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale svizzero a Berna, sede del governo e del parlamento."
+      },
+      "datePublished": "2026-10-05T11:44:07+00:00",
+      "dateModified": "2026-10-05T11:44:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aumento-iva-finanziamento-13esima-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lugano-trasparenza-partecipate': {
+    title: 'Lugano: l\'UDC propone più trasparenza sui compensi',
+    description: 'L\'UDC di Lugano propone una mozione per pubblicare i compensi di Cda e CEO delle società partecipate dalla Città per garantire maggiore trasparenza.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, propone, trasparenza, compensi',
+    ogTitle: 'Lugano: l\'UDC propone più trasparenza sui compensi',
+    ogDescription: 'Una mozione dell\'UDC chiede la pubblicazione annuale delle retribuzioni di CEO e membri dei Cda delle società partecipate dalla Città di Lugano per sostituire le speculazioni con dati istituzionali.',
+    canonicalPath: '/articoli-svizzera/lugano-trasparenza-partecipate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano: l'UDC propone più trasparenza sui compensi",
+      "description": "L'UDC di Lugano propone una mozione per pubblicare i compensi di Cda e CEO delle società partecipate dalla Città per garantire maggiore trasparenza.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lugano-trasparenza-partecipate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il centro culturale LAC di Lugano affacciato sul lago."
+      },
+      "datePublished": "2026-10-05T11:58:26+00:00",
+      "dateModified": "2026-10-05T11:58:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lugano-trasparenza-partecipate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

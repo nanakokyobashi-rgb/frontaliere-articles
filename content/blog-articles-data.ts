@@ -37828,6 +37828,36 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'valuta-intercettata-brogeda',
+ category: 'novita',
+ date: '2026-10-05T10:10:43.621Z',
+ image: '/images/blog/valuta-intercettata-brogeda.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'unione-confronto-pilastro-ch-it',
+ category: 'pensione',
+ date: '2026-10-05T10:48:06.796Z',
+ image: '/images/blog/unione-confronto-pilastro-ch-it.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
+ {
+ id: 'avs-13a-rendita-iva-aumento',
+ category: 'pensione',
+ date: '2026-10-05T11:25:01.725Z',
+ image: '/images/blog/avs-13a-rendita-iva-aumento.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

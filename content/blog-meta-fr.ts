@@ -12602,6 +12602,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.osservatorio-varese-spettacolo-galileo.title': 'Observatoire de Varese : le spectacle Galileo arrive',
     'blog.article.osservatorio-varese-spettacolo-galileo.excerpt': 'Samedi 17 octobre, l\'Observatoire G.V. Schiaparelli accueille la pièce théâtrale de Corrado D\'Elia, suivie de l\'observation de la Lune et de Saturne.',
     'blog.article.osservatorio-varese-spettacolo-galileo.imageAlt': 'Observatoire astronomique à Varèse (Varese)',
+    'blog.article.valuta-intercettata-brogeda.title': 'Double saisie de devises au poste-frontière de Brogeda',
+    'blog.article.valuta-intercettata-brogeda.excerpt': 'Au poste-frontière de Brogeda, lors de deux opérations distinctes, des douaniers et des agents de la Guardia di Finanza de Ponte Chiasso ont intercepté plus de 240mila euro ces derniers jours.',
+    'blog.article.valuta-intercettata-brogeda.imageAlt': 'Poste-frontière de Brogeda, avec deux opérations et plus de 240 000 euros interceptés',
+    'blog.article.unione-confronto-pilastro-ch-it.title': 'Deuxième pilier : l\'Union demande une comparaison CH-IT',
+    'blog.article.unione-confronto-pilastro-ch-it.excerpt': 'L\'Union Frontalière Italienne demande une confrontation entre l\'Italie et la Suisse sur le deuxième pilier, thème central pour la prévoyance des frontaliers.',
+    'blog.article.unione-confronto-pilastro-ch-it.imageAlt': 'Documents sur le deuxième pilier et sac de pendulaire au Tessin',
+    'blog.article.avs-13a-rendita-iva-aumento.title': '13e rente AVS : le Conseil fédéral : «Voici pourquoi nous augmenterons la TVA»',
+    'blog.article.avs-13a-rendita-iva-aumento.excerpt': 'En décembre arrive la première 13e rente AVS pour 2,6 millions de retraités. Le Parlement a décidé une augmentation de la TVA pour financer la mesure, par un vote populaire le 29 novembre.',
+    'blog.article.avs-13a-rendita-iva-aumento.imageAlt': 'Le Château de Bellinzona sous un ciel clair, symbole de la gouvernance suisse.',
 };
 
 export default blogMetaFr;

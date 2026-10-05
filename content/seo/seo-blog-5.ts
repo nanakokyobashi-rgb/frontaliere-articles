@@ -99231,6 +99231,108 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-valuta-intercettata-brogeda': {
+    title: 'Doppio sequestro di valuta al valico di Brogeda',
+    description: 'Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, doppio, sequestro, valuta, valico',
+    ogTitle: 'Doppio sequestro di valuta a Brogeda',
+    ogDescription: 'La cronaca del valico di Brogeda riferisce due operazioni distinte svolte nei giorni scorsi: doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro. Il testo non aggiunge altri dettagli sull\'episodio.',
+    canonicalPath: '/articoli-frontaliere/valuta-intercettata-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Doppio sequestro di valuta al valico di Brogeda",
+      "description": "Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/valuta-intercettata-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Valico di Brogeda, teatro di due operazioni con oltre 240mila euro intercettati"
+      },
+      "datePublished": "2026-10-05T10:10:43+00:00",
+      "dateModified": "2026-10-05T10:10:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/valuta-intercettata-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-unione-confronto-pilastro-ch-it': {
+    title: 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    description: 'L\'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro: il quadro per LPP, AVS e imposta alla fonte. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, unione, chiede',
+    ogTitle: 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    ogDescription: 'La richiesta dell\'Unione Frontalieri Italiani riporta il secondo pilastro al centro del confronto tra Italia e Svizzera. Per chi lavora in Canton Ticino, LPP, AVS, permesso G, imposta alla fonte e doppia imposizione restano piani distinti.',
+    canonicalPath: '/articoli-frontaliere/unione-confronto-pilastro-ch-it/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Secondo pilastro: l'Unione chiede confronto CH-IT",
+      "description": "L'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro: il quadro per LPP, AVS e imposta alla fonte. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/unione-confronto-pilastro-ch-it.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sul secondo pilastro e una borsa da pendolare in Ticino"
+      },
+      "datePublished": "2026-10-05T10:48:06+00:00",
+      "dateModified": "2026-10-05T10:48:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/unione-confronto-pilastro-ch-it/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-13a-rendita-iva-aumento': {
+    title: '13a rendita AVS: il Consiglio federale: «Ecco perché aumenteremo l’IVA»',
+    description: 'La Svizzera vota il 29 novembre sull\'aumento dell\'IVA per finanziare la prima 13a rendita AVS, in arrivo a dicembre per 2,6 milioni di pensionati. Dettagli',
+    keywords: 'frontalieri, ticino, svizzera, italia, rendita, consiglio, federale, ecco',
+    ogTitle: '13a rendita AVS: il Consiglio federale spiega l\'aumento dell\'IVA',
+    ogDescription: 'A dicembre 2024 i pensionati svizzeri riceveranno la prima 13a rendita AVS. Il 29 novembre si vota sull\'aumento dell\'IVA per coprirne i costi. Scopri come cambieranno le aliquote e quali saranno le entrate previste.',
+    canonicalPath: '/articoli-frontaliere/avs-13a-rendita-iva-aumento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "13a rendita AVS: il Consiglio federale: «Ecco perché aumenteremo l’IVA»",
+      "description": "La Svizzera vota il 29 novembre sull'aumento dell'IVA per finanziare la prima 13a rendita AVS, in arrivo a dicembre per 2,6 milioni di pensionati. Dettagli",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/avs-13a-rendita-iva-aumento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castel Grande di Bellinzona, simbolo della Svizzera, sotto un cielo sereno."
+      },
+      "datePublished": "2026-10-05T11:25:01+00:00",
+      "dateModified": "2026-10-05T11:25:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/avs-13a-rendita-iva-aumento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
