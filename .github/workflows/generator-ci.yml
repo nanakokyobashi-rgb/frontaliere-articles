@@ -173,7 +173,7 @@ jobs:
       # ogni fallimento e ritorna zero eventi, e il digest renderizza «nessun
       # evento questo weekend» SOVRASCRIVENDO quello corretto sulla URL evergreen.
       #
-      # Questi tre `--check` girano solo sui path di questo workflow, quindi non
+      # Questi `--check` girano solo sui path di questo workflow, quindi non
       # partono per una modifica del SITO: la copertura a orologio e'
       # rewire-contract-watch.yml, e la forma e' inchiodata offline da
       # generator/tests/rewire-json-contracts.test.mjs.

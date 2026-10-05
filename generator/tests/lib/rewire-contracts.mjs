@@ -5,7 +5,7 @@
  *
  * ## Cosa e' un «contratto» qui, e perche' nessun guard esistente lo vede
  *
- * Tre artefatti JSON che il SITO pubblica su `cdn.frontaliereticino.ch/data/` e
+ * Gli artefatti JSON che il SITO pubblica su `cdn.frontaliereticino.ch/data/` e
  * che QUESTO repo consuma. I due capi sono due file diversi, in due repo
  * diversi, con NOMI DIVERSI, e non si importano: si parlano via HTTP.
  *
@@ -30,7 +30,7 @@
  *
  * ## Cosa fa questo file, che il fixture da solo non farebbe
  *
- * Dichiara l'accoppiamento. Le tre coppie produttore↔consumatore smettono di
+ * Dichiara l'accoppiamento. Le coppie produttore↔consumatore smettono di
  * essere una cosa che si scopre leggendo due intestazioni in due repo e
  * diventano un dato, con sopra le asserzioni di
  * `generator/tests/rewire-json-contracts.test.mjs`.
@@ -41,12 +41,12 @@
  * pinna **l'aspettativa del consumatore**: fallisce quando cambia il
  * consumatore (o quando qualcuno indebolisce la validazione del `refresh`), NON
  * quando cambia il produttore. La meta' che vede muoversi il produttore e'
- * l'altra: i `--check` dei tre `refresh` contro i dati veri, che
+ * l'altra: i `--check` dei `refresh` contro i dati veri, che
  * `.github/workflows/rewire-contract-watch.yml` esegue a orologio. Le due meta'
  * non sono alternative — coprono direzioni diverse, e servono entrambe.
  */
 
-/** Cartella pubblica del sito da cui i tre `refresh` fetchano (con fallback same-origin). */
+/** Cartella pubblica del sito da cui i `refresh` fetchano (con fallback same-origin). */
 export const CDN_DATA_BASE = 'https://cdn.frontaliereticino.ch/data';
 
 /**

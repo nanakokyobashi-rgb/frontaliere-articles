@@ -1,16 +1,16 @@
 /**
- * rewire-json-contracts.test.mjs — i tre contratti JSON del REWIRE set,
+ * rewire-json-contracts.test.mjs — i contratti JSON del REWIRE set,
  * inchiodati dal lato del CONSUMATORE (issue #101).
  *
  * ## Il buco che chiude
  *
- * Il sito pubblica tre artefatti su `cdn.frontaliereticino.ch/data/` e questo
+ * Il sito pubblica gli artefatti su `cdn.frontaliereticino.ch/data/` e questo
  * repo li consuma. I due capi hanno nomi diversi e non si importano, quindi il
  * legame non e' visto da nessuno dei guard esistenti — ne' dal drift check (che
  * confronta per path), ne' dai closure test (che seguono gli import), ne' da
  * `loop-references-exist.test.mjs` (che verifica che un path citato ESISTA: la
- * sua esistenza non dice niente sulla sua forma). Il razionale completo, e le
- * tre coppie, stanno in `generator/tests/lib/rewire-contracts.mjs`.
+ * sua esistenza non dice niente sulla sua forma). Il razionale completo e le
+ * coppie stanno in `generator/tests/lib/rewire-contracts.mjs`.
  *
  * Prima di questo file, `generator/tests/` non conteneva una sola riga che
  * nominasse border-wait o events-dataset. Il sintomo di una rottura non era un
@@ -33,7 +33,7 @@
  *
  * ## Perche' lo script viene COPIATO in una temp dir
  *
- * I tre `refresh` risolvono la propria cache da `import.meta.url`, non da `cwd`:
+ * I `refresh` risolvono la propria cache da `import.meta.url`, non da `cwd`:
  * eseguirli in loco leggerebbe (e, senza `--check`, scriverebbe) le cache vere
  * del repo. Su `refresh-border-wait-averages.mjs` non e' teorico — la guardia
  * anti-shrink confronta col file di cache ESISTENTE, quindi su una macchina che
@@ -279,7 +279,7 @@ test('ogni campo dichiarato letto esiste nel fixture ED e\' nominato dal file ch
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 2. La forma registrata passa, in tutti e tre
+// 2. La forma registrata passa, per tutti i contratti
 // ─────────────────────────────────────────────────────────────────────────────
 
 for (const c of REWIRE_CONTRACTS) {
@@ -290,7 +290,7 @@ for (const c of REWIRE_CONTRACTS) {
 
   test(`[${c.id}] un 200 che non e' JSON non viene mai cachato`, async () => {
     // La forma piu' comune di rottura di una pubblicazione statica: una pagina
-    // di errore servita con 200. Nessuno dei tre puo' permettersi di scriverla
+    // di errore servita con 200. Nessuno dei refresh puo' permettersi di scriverla
     // sopra una copia buona.
     const { status, out } = await runRefresh(c, '<!doctype html><title>502</title>', { contentType: 'text/html' });
     assert.notEqual(status, 0, why(c, `Una pagina HTML servita con 200 e' stata accettata:\n${out}`));

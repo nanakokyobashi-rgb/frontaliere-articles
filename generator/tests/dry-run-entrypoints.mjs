@@ -63,7 +63,7 @@ const ENTRY_POINTS = [
   'refresh-canton-notices.mjs',
   'refresh-canton-services-data.mjs',
 
-  // Quarto contratto REWIRE (P9c): gli hub mobilita' per cantone.
+  // Contratto REWIRE P9c: gli hub mobilita' per cantone.
   'refresh-road-events.mjs',
 ];
 
