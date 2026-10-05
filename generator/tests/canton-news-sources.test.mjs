@@ -261,6 +261,12 @@ test('crawl-delay: due richieste allo stesso host distanziate, host diversi no',
   await throttle.run('b.ch', 10, async () => {});
   assert.deepEqual(waits, [10000], 'la seconda richiesta ad a.ch aspetta 10 s dalla fine della prima; b.ch non aspetta');
   assert.equal(throttle.requestsTo('a.ch'), 2);
+  // Il ritardo e' dell'host: una seconda fonte dello stesso host che dichiara
+  // un crawl-delay minore non accorcia l'attesa.
+  waits.length = 0;
+  await throttle.run('c.ch', 30, async () => {});
+  await throttle.run('c.ch', 1, async () => {});
+  assert.deepEqual(waits, [30000]);
   // Un crawl-delay oltre la soglia non si aspetta: diventa una richiesta per run.
   assert.equal(sourceRequestBudget({ quirks: { crawlDelaySeconds: MAX_INLINE_CRAWL_DELAY_SECONDS + 1 } }), 1);
   assert.equal(sourceRequestBudget({ quirks: { crawlDelaySeconds: 30 } }), Infinity);

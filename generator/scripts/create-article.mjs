@@ -3485,7 +3485,10 @@ async function exitDryRunScan({ chosen, tier, pool, poolSize }) {
   if (chosen) console.error(`DRY_RUN_SCAN_SELECTED section=${SECTION_NAME} tier=${tier} "${String(chosen.headline || '').slice(0, 120)}" ${chosen.url || ''}`);
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
   finalizeRunReport('dry-run', { notes: [...RUN_REPORT.notes, 'dry-run-scan: nessuna generazione'] });
-  await exitAfterFlush(0);
+  // NON exitAfterFlush: il flush scriverebbe nel ledger condiviso dei modelli
+  // (Firestore) i punteggi delle chiamate di misura. Il dry-run non scrive
+  // stato, nemmeno quello: i punteggi restano in memoria e si perdono qui.
+  await exitAfterDrain(0);
 }
 // Stamped here rather than in the RUN_REPORT literal because SECTION_NAME is
 // parsed from argv ~700 lines later than the report is declared.
@@ -8097,15 +8100,17 @@ async function fetchCantonSourceHeadlines(source, domain) {
   });
   entry.requests = requests;
   entry.items = raw.length;
-  // Stessa regola delle fonti storiche RSS: se ci sono voci recenti, solo
-  // quelle; altrimenti tutte, e decide la recency comune a valle.
+  // Se ci sono voci recenti, solo quelle (come le fonti storiche RSS).
+  // Altrimenti NON tutte, a differenza delle storiche: una voce con una data
+  // piu' vecchia della finestra e' verificabilmente stantia e si scarta qui;
+  // restano le senza data, che a valle passano dalla quota undated per fonte.
   const recent = raw.filter((h) => h.date && isWithinDays(h.date, MAX_ARTICLE_AGE_DAYS));
   entry.recent = recent.length;
-  entry.status = raw.length > 0 ? 'ok' : 'sterile';
+  entry.status = recent.length > 0 || raw.some((h) => !h.date) ? 'ok' : 'sterile';
   const budget = sourceRequestBudget(source);
   const extra = [Number.isFinite(budget) ? `budget ${budget} richieste` : '', ...notes].filter(Boolean).join('; ');
   console.error(`  📡 ${domain} [${source.parser}]: ${recent.length} recenti su ${raw.length}${extra ? ` (${extra})` : ''}`);
-  return recent.length > 0 ? recent : raw;
+  return recent.length > 0 ? recent : raw.filter((h) => !h.date);
 }
 
 // ── Step 1c: Scan all news sources for recent headlines ─────
@@ -8409,7 +8414,16 @@ async function scanNewsSources() {
   };
 
   // If no recent articles found, fall back to all headlines (homepage articles are likely recent)
-  if (recent.length === 0) {
+  //
+  // Non per una sezione cantonale: le sue fonti sono spesso elenchi
+  // istituzionali e archivi, e «tutte le headline» vorrebbe dire voci datate
+  // vecchie e navigazione al ranker. Li' senza voci recenti passano solo le
+  // senza data, con la quota per fonte qui sotto (le datate vecchie sono gia'
+  // state scartate per fonte in fetchCantonSourceHeadlines).
+  if (recent.length === 0 && IS_CANTON) {
+    console.error('  ⚠️  Nessun articolo con data negli ultimi 3 giorni — sezione cantonale: solo le headline senza data, con la quota per fonte\n');
+  }
+  if (recent.length === 0 && !IS_CANTON) {
     console.error('  ⚠️  Nessun articolo con data negli ultimi 3 giorni — uso tutti gli headline\n');
     RUN_REPORT.headlines.usedRecent = 0;
     RUN_REPORT.headlines.usedUndated = undated.length;
@@ -15615,6 +15629,16 @@ async function main() {
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
   let headlines = null;
 
+  // `--dry-run-scan` misura la SCANSIONE delle fonti: con una URL esplicita
+  // non c'e' scansione, e la modalita' manuale arriverebbe alla generazione e
+  // alla scrittura del corpus. La combinazione e' un errore d'uso, non un run.
+  if (DRY_RUN_SCAN && url) {
+    console.error(`❌ --dry-run-scan non accetta una URL (${url}): misura la scansione delle fonti della sezione, che una URL esplicita salta.`);
+    finalizeRunReport('error', { notes: [...RUN_REPORT.notes, 'dry-run-scan con URL esplicita: rifiutato'] });
+    await exitAfterFlush(2);
+    return;
+  }
+
   // Disk space pre-flight: when LOCAL_LLM_ENABLED the model (e.g. qwen2.5:14b,
   // ~9GB) can fill the runner disk, causing ENOSPC on later stdout writes instead
   // of a clear error. Detect and abort early with an actionable message.
@@ -15774,6 +15798,7 @@ async function main() {
       } else {
         headlines = _discoveryHeadlines;
       }
+      DRY_RUN_STAGES.afterScanGates = (headlines || []).length;
     } else {
       console.error(
         IS_CANTON

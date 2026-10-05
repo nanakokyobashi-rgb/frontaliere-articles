@@ -275,6 +275,25 @@ test('--dry-run-scan: misura fino alla selezione ed esce prima di generare o scr
   assert.ok(exitAt !== -1 && genAt !== -1 && exitAt < genAt, 'l\'uscita del dry-run deve precedere ogni passo dopo la selezione');
   const fn = CREATE_ARTICLE.slice(CREATE_ARTICLE.indexOf('async function exitDryRunScan('), CREATE_ARTICLE.indexOf('async function exitDryRunScan(') + 2500);
   assert.match(fn, /DRY_RUN_SCAN_SUMMARY/);
-  assert.match(fn, /await exitAfterFlush\(0\);/);
+  // Uscita SENZA il flush del ledger condiviso dei modelli (Firestore).
+  assert.match(fn, /await exitAfterDrain\(0\);/);
+  const fnCode = fn.replace(/^\s*\/\/.*$/gm, '');
+  assert.doesNotMatch(fnCode, /exitAfterFlush|flushScores/, 'il dry-run non deve scrivere i punteggi dei modelli');
   assert.doesNotMatch(fn, /(?<!stdout\.)write\(|persist|_save|saveSource/, 'il riepilogo non scrive stato');
+  // Con una URL esplicita non c'e' scansione: la modalita' manuale genererebbe
+  // e scriverebbe. La combinazione si rifiuta prima di ogni altra cosa.
+  const urlAt = main.indexOf('let url = process.argv.slice(2).find(');
+  const reject = main.indexOf('if (DRY_RUN_SCAN && url) {');
+  const manual = main.indexOf('// ── Manual URL mode ──');
+  assert.ok(urlAt !== -1 && reject > urlAt && manual > reject, 'dry-run + URL va rifiutato subito dopo la lettura della URL');
+  assert.match(main.slice(reject, reject + 600), /await exitAfterFlush\(2\);\n\s+return;/);
+});
+
+test('sezione cantonale senza voci recenti: niente ripiego su TUTTE le headline', () => {
+  // Le storiche, senza voci recenti, mandano al ranker tutte le headline; una
+  // cantonale (archivi istituzionali, navigazione) passa solo le senza data,
+  // con la quota per fonte, e le datate stantie si scartano per fonte.
+  assert.match(CREATE_ARTICLE, /if \(recent\.length === 0 && !IS_CANTON\) \{/);
+  const helper = CREATE_ARTICLE.slice(CREATE_ARTICLE.indexOf('async function fetchCantonSourceHeadlines('));
+  assert.match(helper.slice(0, 3000), /return recent\.length > 0 \? recent : raw\.filter\(\(h\) => !h\.date\);/);
 });

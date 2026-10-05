@@ -443,12 +443,14 @@ export function createHostThrottle({ sleep = (ms) => new Promise((r) => setTimeo
      * @param {() => Promise<any>} task
      */
     run(host, delaySeconds, task) {
-      const entry = hosts.get(host) || { tail: Promise.resolve(), last: 0, used: 0 };
+      const entry = hosts.get(host) || { tail: Promise.resolve(), last: 0, used: 0, delayMs: 0 };
       hosts.set(host, entry);
-      const delayMs = Math.min(Number(delaySeconds) || 0, MAX_INLINE_CRAWL_DELAY_SECONDS) * 1000;
+      // Il crawl-delay e' dell'HOST, non della fonte: due fonti dello stesso
+      // host con ritardi dichiarati diversi rispettano il piu' severo.
+      entry.delayMs = Math.max(entry.delayMs, Math.min(Number(delaySeconds) || 0, MAX_INLINE_CRAWL_DELAY_SECONDS) * 1000);
       const result = entry.tail.then(async () => {
-        if (entry.used > 0 && delayMs > 0) {
-          const wait = entry.last + delayMs - now();
+        if (entry.used > 0 && entry.delayMs > 0) {
+          const wait = entry.last + entry.delayMs - now();
           if (wait > 0) await sleep(wait);
         }
         entry.used += 1;
