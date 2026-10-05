@@ -11,7 +11,6 @@ on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/generate-article-ju.yml'
       - 'content/blog-body-canton-ju/**'
       - 'content/blog-meta-canton-ju-it.ts'
       - 'content/blog-meta-canton-ju-en.ts'
