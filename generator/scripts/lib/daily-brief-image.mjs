@@ -17,8 +17,16 @@
  * (DejaVu on ubuntu) and emoji become tofu boxes. Labels are plain text.
  */
 
-const WIDTH = 1200;
-const HEIGHT = 675;
+import {
+  BLOG_IMAGE_HARD_MAX_BYTES,
+  BLOG_IMAGE_HEIGHT,
+  BLOG_IMAGE_QUALITY_PASSES,
+  BLOG_IMAGE_TARGET_MAX_BYTES,
+  BLOG_IMAGE_WIDTH,
+} from './blog-image-policy.mjs';
+
+const WIDTH = BLOG_IMAGE_WIDTH;
+const HEIGHT = BLOG_IMAGE_HEIGHT;
 
 const esc = (s) =>
   String(s ?? '')
@@ -167,10 +175,20 @@ export async function renderDailyBriefImage(svg, heroPath, thumbPath) {
     );
   }
   const input = Buffer.from(svg);
-  const hero = await sharp(input, { density: 96 })
-    .resize(WIDTH, HEIGHT, { fit: 'fill' })
-    .webp({ quality: 82, effort: 6 })
-    .toBuffer();
+  let hero = null;
+  let quality = null;
+  for (const candidateQuality of BLOG_IMAGE_QUALITY_PASSES) {
+    const candidate = await sharp(input, { density: 96 })
+      .resize(WIDTH, HEIGHT, { fit: 'fill' })
+      .webp({ quality: candidateQuality, effort: 6 })
+      .toBuffer();
+    hero = candidate;
+    quality = candidateQuality;
+    if (candidate.byteLength <= BLOG_IMAGE_TARGET_MAX_BYTES) break;
+  }
+  if (!hero || hero.byteLength > BLOG_IMAGE_HARD_MAX_BYTES) {
+    throw new Error(`daily brief hero remains above hard cap (${hero?.byteLength ?? 0} bytes)`);
+  }
   const thumb = await sharp(hero).resize({ width: 480 }).webp({ quality: 68, effort: 6 }).toBuffer();
   const { writeFileSync, mkdirSync } = await import('node:fs');
   const { dirname } = await import('node:path');
@@ -178,5 +196,5 @@ export async function renderDailyBriefImage(svg, heroPath, thumbPath) {
   mkdirSync(dirname(thumbPath), { recursive: true });
   writeFileSync(heroPath, hero);
   writeFileSync(thumbPath, thumb);
-  return { heroBytes: hero.length, thumbBytes: thumb.length };
+  return { heroBytes: hero.length, thumbBytes: thumb.length, quality };
 }
