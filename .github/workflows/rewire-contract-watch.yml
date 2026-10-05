@@ -1,7 +1,8 @@
 name: REWIRE contract watch
 
 # Gli artefatti JSON che il SITO pubblica e che questo repo consuma — i tre del
-# REWIRE (issue #101) piu' il dataset carburanti per cantone (P9b) — verificati
+# REWIRE (issue #101), il dataset carburanti per cantone (P9b), gli avvisi
+# ufficiali (P9g) e i quattro input dei servizi (P9f) — verificati
 # contro i DATI VERI a orologio.
 #
 # ── Perche' non basta la suite offline ──────────────────────────────────────
@@ -88,6 +89,15 @@ jobs:
       # fetchato e sbagliato, o fermo da oltre 7 giorni, esce non-zero.
       - name: fuel-prices-cantons.json
         run: node generator/scripts/refresh-fuel-cantons.mjs --check
+
+      # Morbidi per progetto (D11, P9f/P9g): un produttore irraggiungibile toglie
+      # un blocco a un hub, non lo ferma. Escono comunque non-zero se hanno
+      # SCARICATO un documento di un'altra forma — che e' il caso che conta.
+      - name: canton-notices.json
+        run: node generator/scripts/refresh-canton-notices.mjs --check
+
+      - name: health-premiums.json, plate-auctions.json, pharmacy-duty-cantons.json, weather-snapshot.json
+        run: node generator/scripts/refresh-canton-services-data.mjs --check
 
       # Il rosso qui non si ripara qui. Lo dice il job, cosi' chi apre la run non
       # deve ricostruirlo: il registro delle coppie produttore/consumatore sta
