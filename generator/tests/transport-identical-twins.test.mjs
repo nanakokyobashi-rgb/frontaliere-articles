@@ -57,6 +57,7 @@ import {
   readsContentOf,
   parseRatio,
   permanentBlock,
+  scalarFingerprintCouplings,
   reconcileItem,
   reconcileSummaryMarkdown,
   realignFromCommitted,
@@ -570,6 +571,48 @@ test('il manifest NOMINATO in prosa non e\u2019 un accoppiamento; LETTO lo resta
     permanentBlock(entry, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }),
     'e il blocco conservativo resta: la copia a mano e\u2019 l\u2019unica azione che lo sblocca',
   );
+});
+
+// Corpus PR 2176: il trasporto ha copiato `host/shell-contract-fingerprint.json`
+// (digest 082cd6c3 del sito) senza `host/constants.ts`, `adapted`, di cui e' il
+// digest. L'artefatto non vive sotto un albero di test, quindi la regola dei
+// fixture non lo vedeva: ora l'accoppiamento lo dichiara il manifest stesso.
+test('un artefatto scalarFingerprint e’ accoppiato alla voce che lo dichiara', () => {
+  const manifest = {
+    files: [
+      { path: 'host/constants.ts', mode: 'adapted', scalarFingerprint: { corpusPath: 'host/fp.json', sha256: 'a'.repeat(64) } },
+      { path: 'host/fp.json', mode: 'identical' },
+      { path: 'host/self.json', mode: 'identical', scalarFingerprint: { corpusPath: 'host/self.json' } },
+    ],
+  };
+  const map = scalarFingerprintCouplings(manifest);
+  assert.deepEqual(map.get('host/fp.json'), [{ path: 'host/constants.ts', mode: 'adapted', declaredBy: 'scalarFingerprint' }]);
+  assert.equal(map.has('host/self.json'), false, 'una voce non si accoppia a se stessa');
+  assert.equal(isFixture('host/fp.json'), false, 'il caso esiste proprio perche’ il path non ha forma di fixture');
+
+  const reason = permanentBlock(twin({ path: 'host/fp.json' }), { couplings: map.get('host/fp.json') });
+  assert.ok(reason, 'l’artefatto non si copia senza la sua meta’ adapted');
+  assert.match(reason, /host\/constants\.ts/);
+  const v = transportVerdict(twin({ path: 'host/fp.json' }), { site: 'bbbb', corpus: 'aaaa' }, BASE, { couplings: map.get('host/fp.json') });
+  assert.equal(v.transport, false);
+  assert.equal(v.permanent, true);
+
+  // Un accoppiamento dichiarato verso un `identical` non blocca: le due meta'
+  // possono viaggiare insieme.
+  assert.equal(
+    permanentBlock(twin({ path: 'host/fp.json' }), { couplings: [{ path: 'host/x.ts', mode: 'identical', declaredBy: 'scalarFingerprint' }] }),
+    null,
+  );
+});
+
+test('sul manifest reale: host/shell-contract-fingerprint.json non si trasporta senza host/constants.ts', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const rel = 'host/shell-contract-fingerprint.json';
+  const entry = manifest.files.find((e) => e.path === rel);
+  assert.ok(entry, `${rel} non e’ piu’ nel manifest`);
+  const couplings = scalarFingerprintCouplings(manifest).get(rel) || [];
+  assert.ok(couplings.some((c) => c.path === 'host/constants.ts' && c.mode !== 'identical'), 'la voce che dichiara il digest e’ la meta’ adapted');
+  assert.ok(permanentBlock(entry, { outOfScopePrefixes: manifest.scope.outOfScope || [], couplings }));
 });
 
 test('il delta degli accoppiamenti distingue inizializzazione, aggiunte e rimozioni', () => {
