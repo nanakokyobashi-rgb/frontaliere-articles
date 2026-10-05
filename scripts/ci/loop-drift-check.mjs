@@ -114,6 +114,8 @@
  * Uso:
  *   node scripts/ci/loop-drift-check.mjs             # report leggibile + exit 0
  *   node scripts/ci/loop-drift-check.mjs --json      # report JSON su stdout
+ *   LOOP_DRIFT_REPORT_JSON=<file> node scripts/ci/loop-drift-check.mjs
+ *                                                    # ...e lo stesso JSON anche su file (gate a ratchet)
  *   node scripts/ci/loop-drift-check.mjs --strict    # exit 1 se c'è drift azionabile
  *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti (TUTTE le voci)
  *   node scripts/ci/loop-drift-check.mjs --init --only <path>[,<path>]
@@ -2299,9 +2301,17 @@ async function main() {
   results.push(...await reusablePinResults({ workflows: localWorkflowSources(), readSite: siteFile }));
 
   const actionable = results.filter((r) => r.actionable);
+  const jsonReport = { siteRepo: SITE_REPO, siteRef: SITE_REF, alignedAt: manifest.alignedAt, results, actionable: actionable.length };
+
+  // Il report strutturato su file, accanto al testo: il gate a ratchet dei
+  // gemelli `adapted` (`adapted-drift-ratchet.mjs`, issue #339) lo legge nello
+  // stesso job senza rileggere il sito una seconda volta.
+  if (process.env.LOOP_DRIFT_REPORT_JSON) {
+    fs.writeFileSync(process.env.LOOP_DRIFT_REPORT_JSON, `${JSON.stringify(jsonReport)}\n`);
+  }
 
   if (AS_JSON) {
-    console.log(JSON.stringify({ siteRepo: SITE_REPO, siteRef: SITE_REF, alignedAt: manifest.alignedAt, results, actionable: actionable.length }, null, 2));
+    console.log(JSON.stringify(jsonReport, null, 2));
   } else {
     const byState = results.reduce((acc, r) => ((acc[r.state] = (acc[r.state] || 0) + 1), acc), {});
     console.log(`Ciclo autonomo — divergenza vs ${SITE_REPO}@${SITE_REF}`);

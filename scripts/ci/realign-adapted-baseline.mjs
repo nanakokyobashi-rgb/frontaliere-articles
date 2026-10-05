@@ -60,11 +60,15 @@
  * Le tre prove valgono uguali; la terza diventa «il file del corpus ha ancora
  * l'hash di `baseline.corpus`».
  *
+ * Un path riallineato esce anche da `scripts/ci/adapted-drift-ratchet.json`
+ * (`lib/adapted-drift.mjs`): il gate a ratchet torna a sorvegliarlo come un
+ * gemello allineato, e un nuovo drift su quel file e' di nuovo un rosso.
+ *
  * ## Cosa NON fa
  *
  * Non riallinea il drift GIA' esistente e non dichiarato: quello richiede la
  * lettura della diff file per file. Non allenta `--init` (la lettura resta dal
- * `main` del sito, issue #148). Non apre PR e non tocca altro che il manifest.
+ * `main` del sito, issue #148). Non apre PR e non tocca altro che il manifest e il ratchet.
  *
  * Uso:
  *   node scripts/ci/realign-adapted-baseline.mjs                 # PR del corpus mergiate nella finestra
@@ -102,6 +106,7 @@ import { createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { sha256, siteFile } from './loop-drift-check.mjs';
 import { MANIFEST_PATH } from './transport-realign-body.mjs';
+import { pruneRatchetFile } from './lib/adapted-drift.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const TOOL = 'realign-adapted-baseline';
@@ -564,6 +569,15 @@ async function main(argv) {
     } else if (reverted) {
       fs.writeFileSync(path.join(ROOT, MANIFEST_PATH), `${JSON.stringify(after, null, 2)}\n`);
     }
+    // Il ratchet dei gemelli `adapted` in drift (issue #339) si abbassa qui, nel
+    // momento in cui la baseline si muove davvero: toglierlo nella PR che porta
+    // il file lo farebbe scendere prima del riallineamento, e il gate andrebbe
+    // rosso nella finestra fra il merge e questa passata.
+    const pruned = pruneRatchetFile(
+      ROOT,
+      rows.filter((row) => row.decision.status === 'realigned').map((row) => row.declaration.path),
+    );
+    if (pruned.length) console.log(`${TOOL}: tolti dal ratchet dei gemelli adapted in drift: ${pruned.join(', ')}`);
   }
 
   const describe = (row) => {

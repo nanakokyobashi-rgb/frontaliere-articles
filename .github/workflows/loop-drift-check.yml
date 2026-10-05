@@ -106,6 +106,9 @@ jobs:
             args+=(--issue --strict)
           fi
           REPORT_LOG="$(mktemp)"
+          # Lo stesso report in JSON, per il ratchet qui sotto: nessuna seconda
+          # lettura del sito.
+          export LOOP_DRIFT_REPORT_JSON="$RUNNER_TEMP/loop-drift-report.json"
           set +e
           node scripts/ci/loop-drift-check.mjs "${args[@]}" >"$REPORT_LOG" 2>&1
           DRIFT_STATUS=$?
@@ -125,6 +128,27 @@ jobs:
             echo "loop-drift: uscita $DRIFT_STATUS senza prova di report persistito" >&2
             false
           fi
+
+      # Gate `adapted-drift-budget` (issue #339): il numero di gemelli `adapted`
+      # in drift non cresce. L'elenco accettato come debito e'
+      # `scripts/ci/adapted-drift-ratchet.json`; un path in drift che non c'e'
+      # e' un rosso sullo schedule (e sul dispatch con `report_issue`), un
+      # avviso sulle PR — la crescita la fa il sito, non chi apre la PR. Sulle
+      # PR e' invece sempre un rosso AGGIUNGERE path all'elenco rispetto a
+      # main: un drift nuovo si riconcilia, non si dichiara accettato. Il job
+      # `realign-adapted` toglie dall'elenco i path che riattesta.
+      # Legge il report del passo sopra: niente rete, niente REST.
+      - name: Ratchet dei gemelli adapted in drift
+        if: always()
+        run: |
+          args=(--report "$RUNNER_TEMP/loop-drift-report.json")
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.report_issue }}" = "true" ] || [ "${{ github.event.inputs.report_issue }}" = "1" ] || [ "${{ github.event.inputs.report_issue }}" = "True" ]; then
+            args+=(--enforce)
+          fi
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            args+=(--base-ref "origin/${{ github.base_ref }}")
+          fi
+          node scripts/ci/adapted-drift-ratchet.mjs "${args[@]}"
 
       # I 24 artifact cross-repo hanno tre famiglie di digest e finora solo una
       # era confrontata con qualcosa (issue #916): `generatorSha256` e i 24
