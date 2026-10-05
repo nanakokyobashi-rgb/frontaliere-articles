@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1947849/svizzera-pacchetto-governi-bilaterali-iii": {
-    "articleId": "bilaterali-iii-governi-cantonali",
-    "ts": "2026-09-03T14:48:14.035Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/u6ueja33fa4o": {
     "articleId": "ricercatore-psi-spintronica-quantistica",
     "ts": "2026-09-03T14:56:47.956Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1954697/svizzera-associazione-reddito-alloggi-affitti-anni": {
     "articleId": "affitti-svizzera-aumento-asi",
     "ts": "2026-10-05T07:50:21.367Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gz4zhubyfjyi": {
+    "articleId": "voto-iva-avs-novembre-2026",
+    "ts": "2026-10-05T08:19:03.204Z",
     "keyForm": 2
   }
 }
