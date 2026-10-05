@@ -134,7 +134,6 @@ import { reportStrippedControlChars } from '../generator/scripts/lib/control-cha
 // Sezioni valide e shard Pages vengono dal core (lista ATTIVA), come in
 // fast-publish-article.yml: niente coppia frontaliere/svizzera scritta a mano.
 import { shardOf } from './ci/fast-publish-section.mjs';
-import { ARTICLE_SECTION_CORE_LIST } from '../engine/shared/articleSectionCore.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -179,10 +178,7 @@ function parseArgs(argv) {
   try {
     out.shardKey = shardOf(out.section);
   } catch (err) {
-    console.error(
-      `[publish-article-fast] --section "${out.section}": ${err.message} ` +
-        `(sezioni attive: ${ARTICLE_SECTION_CORE_LIST.map((core) => core.section).join(', ')})`,
-    );
+    console.error(`[publish-article-fast] --section "${out.section}": ${err.message}`);
     process.exit(1);
   }
   out.id = out.ids[0];
