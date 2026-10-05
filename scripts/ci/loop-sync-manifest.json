@@ -5116,7 +5116,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub pensioni (parametri federali, casse cantonali, imposta sul capitale) dal dataset annuale `pension-parameters` (contratto REWIRE `pension-parameters`).",
       "baseline": {
         "site": null,
-        "corpus": "718c1a88815eef88",
+        "corpus": "f7a6d2601aa3fead",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5146,7 +5146,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub fisco (onere fiscale, imposta alla fonte) dal dataset annuale `canton-tax` (contratto REWIRE `canton-tax`).",
       "baseline": {
         "site": null,
-        "corpus": "2c9e56924c69a624",
+        "corpus": "584159ac63ae118a",
         "alignedAt": "2026-10-05"
       }
     },
