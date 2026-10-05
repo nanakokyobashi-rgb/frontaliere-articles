@@ -793,18 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.laregione.ch/svizzera/svizzera/1954477/scappano-su-un-monopattino-elettrico-ferito-un-agente": {
-      "section": "svizzera",
-      "ts": 1791032005242
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1954490/locarno-demenza-auto-aiuto-malattia-gruppo": {
-      "section": "svizzera",
-      "ts": 1791034948364
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/il-coraggio-di-cambiare-ecco-la-squadra-di-avanti-con-ticinolavoro-per-il-consiglio-di-stato-443888": {
-      "section": "frontaliere",
-      "ts": 1791036505506
-    },
     "svizzera::https://www.tio.ch/dal-mondo/attualita/1954495/ucraina-kiev-mosca-stranieri-ministero": {
       "section": "svizzera",
       "ts": 1791037537100
@@ -1032,6 +1020,18 @@
     "frontaliere::https://www.ticinonews.ch/ticino/villa-principe-leopoldo-76-licenziamenti-per-la-ristrutturazione-dellhotel-443974": {
       "section": "frontaliere",
       "ts": 1791201995923
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/rinaldi-piccola-industria-la-pmi-e-un-presidio-sociale-energia-credito-e-competenze-le-sfide-delle-imprese-varesine/2698249": {
+      "section": "frontaliere",
+      "ts": 1791209698429
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/05/leggi-notizia/argomenti/economia-13/articolo/riforma-dellartigianato-lallarme-di-confapi-varese-a-rischio-la-competitivita-delle-pmi-i.html": {
+      "section": "frontaliere",
+      "ts": 1791209932659
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/scuola-imprese-e-territorio-a-saronno-un-convegno-sulle-nuove-sfide-degli-istituti-tecnici/2698585": {
+      "section": "frontaliere",
+      "ts": 1791210021979
     }
   }
 }
