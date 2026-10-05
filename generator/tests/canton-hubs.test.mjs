@@ -26,7 +26,7 @@ import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs'
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
 import { keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
-import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES } from '../scripts/lib/canton-hubs/blocks-common.mjs';
+import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
 import { shapeRoadEventsBlock } from '../scripts/lib/canton-hubs/blocks-road-events.mjs';
 import { shapeEventsBlock } from '../scripts/lib/canton-hubs/blocks-events.mjs';
@@ -385,6 +385,47 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
       assert.equal(out.code, 'missing', 'cache assente = missing, per ogni blocco');
     }
   }
+});
+
+test('date impossibili: nessuno shaper le pubblica, il validatore le rifiuta', () => {
+  assert.ok(Number.isFinite(instantMs('2026-10-05T09:00:00Z')));
+  assert.ok(Number.isFinite(instantMs('2026-10-05T09:00:00.123+02:00')));
+  assert.ok(Number.isFinite(instantMs('2028-02-29T00:00:00Z')), 'anno bisestile');
+  for (const bad of ['2026-02-31T12:00:00Z', '2026-02-29T12:00:00Z', '2026-13-01T00:00:00Z', '2026-10-05T24:00:00Z', '2026-10-05T10:60:00Z', '2026-10-05T10:00:61Z', '2026-10-05T10:00:00+15:00', '2026-10-05T10:00:00', '2026-10-05', 1791190800000, null]) {
+    assert.ok(Number.isNaN(instantMs(bad)), `instantMs accetta ${JSON.stringify(bad)}`);
+  }
+  assert.equal(isRealDay('2026-10-05'), true);
+  for (const bad of ['2026-02-31', '2026-00-10', '2026-10-32', '26-10-05', '2026-10-05T00:00:00Z', null]) assert.equal(isRealDay(bad), false, String(bad));
+  assert.equal(dateMs('2026-10-05'), Date.parse('2026-10-05T00:00:00Z'));
+  assert.ok(Number.isNaN(dateMs('2026-02-31')) && Number.isNaN(dateMs('ieri')));
+
+  // Uno snapshot datato in un giorno che non esiste e' `invalid` per OGNI blocco che ha un istante di snapshot.
+  const impossible = '2026-09-31T12:00:00Z';
+  const code = (section, topic, id, mutate) => {
+    const datasets = fixtureDatasets();
+    mutate(datasets);
+    return buildOne(section, topic, { datasets }).blocks.find((b) => b.id === id).code;
+  };
+  assert.equal(code('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'eventi', 'prossimi-eventi', (d) => { d.events.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'mobilita', 'chiusure-cantieri', (d) => { d.roadEvents.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'mobilita', 'avvisi-ufficiali', (d) => { d.notices.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'servizi', 'premi-cassa-malati', (d) => { d.services.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'mobilita', 'attese-valichi', (d) => { d.borderWait.current.weekEnd = '2026-09-31'; }), 'invalid');
+  assert.equal(code('canton-ti', 'fisco', 'onere-fiscale', (d) => { d.tax.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'pensioni', 'casse-cantonali', (d) => { d.pensions.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'servizi', 'aste-targhe', (d) => { d.services.cantons.TI.blocks.plateAuctions.generatedAt = impossible; }), 'invalid');
+  assert.equal(code('canton-ti', 'servizi', 'premi-cassa-malati', (d) => { d.services.cantons.TI.blocks.premiums.fetchedAt = impossible; }), 'invalid');
+  // Righe con una data impossibile non entrano nei blocchi.
+  assert.equal(code('canton-ti', 'eventi', 'prossimi-eventi', (d) => { d.events.events.forEach((e) => { e.startDate = '2026-11-31'; }); }), 'empty');
+  assert.equal(code('canton-ti', 'mobilita', 'avvisi-ufficiali', (d) => { d.notices.notices.forEach((n) => { n.publishedAt = '2026-09-31'; }); }), 'empty');
+  // E il validatore finale non lascia passare una data impossibile, ovunque stia.
+  const input = structuredClone(buildOne('canton-ti', 'eventi').file.locales.it);
+  input.dataBlocks[0].items[0].date = '2026-02-31';
+  assert.throws(() => validateHubInput(input), /data non valida/);
+  input.dataBlocks[0].items[0].date = '2026-10-06';
+  input.updatedAt = '2026-02-31T12:00:00Z';
+  assert.throws(() => validateHubInput(input), /data non valida/);
 });
 
 test('chiusure e cantieri: oltre il tetto restano le limitazioni in corso e le piu\' imminenti', () => {

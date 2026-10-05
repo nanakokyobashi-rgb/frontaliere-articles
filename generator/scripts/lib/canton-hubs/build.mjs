@@ -19,7 +19,7 @@
 import { createHash } from 'node:crypto';
 import { ARTICLE_SECTION_CORE_ALL } from '../../../../engine/shared/articleSectionCore.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';
-import { BLOCK_THRESHOLDS, DAY_MS, instantMs } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, DAY_MS, dateMs, instantMs } from './blocks-common.mjs';
 import { shapeFuelBlock } from './blocks-fuel.mjs';
 import { shapeEventsBlock } from './blocks-events.mjs';
 import { shapeBorderWaitBlock } from './blocks-border-wait.mjs';
@@ -104,8 +104,9 @@ function checkHref(url, what) {
   throw new Error(`${what}: URL non ammesso: ${JSON.stringify(value)}`);
 }
 
+/** Piu' severo di `requireDate` del renderer, che si fida di `Date.parse`: qui il giorno deve esistere. */
 function checkDate(value, what) {
-  if (typeof value !== 'string' || !Number.isFinite(Date.parse(value))) throw new Error(`${what}: data non valida: ${JSON.stringify(value)}`);
+  if (!Number.isFinite(dateMs(value))) throw new Error(`${what}: data non valida: ${JSON.stringify(value)}`);
 }
 
 function checkKeys(obj, allowed, what) {

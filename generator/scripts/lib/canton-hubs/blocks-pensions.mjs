@@ -8,7 +8,7 @@
  * `refresh-pension-parameters.mjs`. Senza cache i blocchi sono `missing`.
  */
 import { fmtChf, fmtPct, httpsUrlOrNull } from './format.mjs';
-import { BLOCK_THRESHOLDS, finite, isObj, omitted } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, finite, instantMs, isObj, omitted } from './blocks-common.mjs';
 
 export const PENSION_BLOCK_IDS = Object.freeze({ federal: 'parametri-previdenza', funds: 'casse-cantonali', capital: 'imposta-capitale' });
 
@@ -80,6 +80,8 @@ function usable(id, dataset, nowMs) {
   if (!isObj(dataset) || dataset.schemaVersion !== 1 || !Number.isInteger(dataset.year) || !isObj(dataset.federal) || !isObj(dataset.cantons)) {
     return omitted(id, 'invalid', 'pension-parameters.json: forma non riconosciuta');
   }
+  // `generatedAt` diventa l'`updatedAt` del blocco: deve essere un istante vero.
+  if (!Number.isFinite(instantMs(dataset.generatedAt))) return omitted(id, 'invalid', 'pension-parameters.json: generatedAt non e\' un istante valido');
   const calendarYear = new Date(nowMs).getUTCFullYear();
   if (dataset.year < calendarYear - BLOCK_THRESHOLDS.pensions.maxYearLag) return omitted(id, 'stale', `pension-parameters ${dataset.year} troppo vecchio per il ${calendarYear}`);
   // Anno in corso o precedente, come dice la soglia: un dataset dell'anno

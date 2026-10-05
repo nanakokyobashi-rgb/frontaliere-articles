@@ -115,6 +115,13 @@ function fromView(id, view, canton, key, nowMs) {
   const block = view.cantons[canton]?.blocks?.[key];
   if (!isObj(block)) return { skip: omitted(id, 'invalid', `canton-services.json: blocco ${key} assente per ${canton}`) };
   if (block.available !== true) return { skip: omitted(id, 'empty', String(block.reason ?? 'non disponibile')) };
+  // L'istante dello snapshot del blocco, se dichiarato, diventa il suo
+  // `updatedAt`: una data impossibile rende il blocco `invalid`.
+  for (const key2 of ['generatedAt', 'fetchedAt']) {
+    if (block[key2] != null && !Number.isFinite(instantMs(block[key2]))) {
+      return { skip: omitted(id, 'invalid', `canton-services.json: ${key}.${key2} non e' un istante valido`) };
+    }
+  }
   return { block };
 }
 
@@ -164,7 +171,7 @@ export function shapePharmacyDutiesBlock(view, { canton, nowMs }) {
   return {
     id,
     available: true,
-    updatedAt: block.fetchedAt,
+    updatedAt: block.fetchedAt ?? view.generatedAt,
     maxAgeMs: BLOCK_THRESHOLDS.services.maxAgeMs,
     render(locale) {
       const t = TXT[locale].duties;
@@ -198,7 +205,7 @@ export function shapePlateAuctionsBlock(view, { canton, nowMs }) {
   return {
     id,
     available: true,
-    updatedAt: block.generatedAt,
+    updatedAt: block.generatedAt ?? view.generatedAt,
     maxAgeMs: BLOCK_THRESHOLDS.services.maxAgeMs,
     render(locale) {
       const t = TXT[locale].auctions;
@@ -236,7 +243,7 @@ export function shapeWeatherBlock(view, { canton, nowMs }) {
   return {
     id,
     available: true,
-    updatedAt: block.generatedAt,
+    updatedAt: block.generatedAt ?? view.generatedAt,
     maxAgeMs: BLOCK_THRESHOLDS.services.maxAgeMs,
     render(locale) {
       const t = TXT[locale].weather;

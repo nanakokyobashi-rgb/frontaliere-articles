@@ -6,12 +6,10 @@
  */
 import { eventsBasePathForCanton } from '../events-utils.mjs';
 import { clip, fmtDay, fmtNumber, httpsUrlOrNull, isoDayOf } from './format.mjs';
-import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, inGroup, isObj, omitted } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, DAY_MS, freshnessProblem, inGroup, isObj, isRealDay, omitted } from './blocks-common.mjs';
 import { foldForMatch } from '../canton-section-profile.mjs';
 
 export const EVENTS_BLOCK_ID = 'prossimi-eventi';
-
-const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 const TXT = {
   it: {
@@ -65,11 +63,11 @@ export function shapeEventsBlock(dataset, { canton, members, nowMs }) {
   const seen = new Set();
   const upcoming = dataset.events
     .filter((e) => isObj(e) && inGroup(members, e.canton))
-    .filter((e) => typeof e.title === 'string' && e.title.trim() && typeof e.startDate === 'string' && DAY_RE.test(e.startDate))
+    .filter((e) => typeof e.title === 'string' && e.title.trim() && isRealDay(e.startDate))
     // Intersezione con la finestra, non solo l'inizio: un evento di piu' giorni
     // cominciato ieri e ancora in corso e' un appuntamento di oggi. Senza
     // `endDate` l'evento dura il solo giorno d'inizio.
-    .map((e) => ({ ...e, lastDay: typeof e.endDate === 'string' && DAY_RE.test(e.endDate) && e.endDate >= e.startDate ? e.endDate : e.startDate }))
+    .map((e) => ({ ...e, lastDay: isRealDay(e.endDate) && e.endDate >= e.startDate ? e.endDate : e.startDate }))
     .filter((e) => e.lastDay >= today && e.startDate <= until)
     .filter((e) => e.startDate >= today || (Date.parse(e.lastDay) - Date.parse(e.startDate)) / DAY_MS <= th.maxSpanDays)
     // Ordinati per il primo giorno utile (oggi, per quelli gia' in corso).

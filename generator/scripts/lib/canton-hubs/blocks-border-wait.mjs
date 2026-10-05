@@ -7,11 +7,9 @@
  */
 import { rankingFromStats } from '../border-wait-ranking.mjs';
 import { fmtDay, fmtNumber } from './format.mjs';
-import { BLOCK_THRESHOLDS, DAY_MS, HOUR_MS, isObj, omitted } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, DAY_MS, HOUR_MS, isObj, isRealDay, omitted } from './blocks-common.mjs';
 
 export const BORDER_WAIT_BLOCK_ID = 'attese-valichi';
-
-const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 /** Pagina «oggi» di un valico sul sito, per locale (pattern di `sitemap-border-wait.xml`). */
 export const BORDER_WAIT_SECTION = Object.freeze({
@@ -80,7 +78,7 @@ export function shapeBorderWaitBlock(window, { canton, nowMs, crossingNames = ne
   const th = BLOCK_THRESHOLDS.borderWait;
   if (window == null) return omitted(id, 'missing', 'border-wait-ranking-window.json non in cache');
   const current = window?.current;
-  if (!isObj(current) || !isObj(current.perCrossing) || !DAY_RE.test(String(current.weekEnd)) || !DAY_RE.test(String(current.weekStart))) {
+  if (!isObj(current) || !isObj(current.perCrossing) || !isRealDay(current.weekEnd) || !isRealDay(current.weekStart)) {
     return omitted(id, 'invalid', 'border-wait-ranking-window.json: forma non riconosciuta');
   }
   const mine = Object.fromEntries(Object.entries(current.perCrossing).filter(([, s]) => isObj(s) && s.canton === canton));

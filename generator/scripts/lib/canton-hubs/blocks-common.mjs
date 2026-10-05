@@ -60,11 +60,41 @@ export function omitted(id, code, reason) {
 export const isObj = (v) => v != null && typeof v === 'object' && !Array.isArray(v);
 export const finite = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 
-const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$/;
+const ISO_INSTANT_RE = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
+const ISO_DAY_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
-/** Millisecondi di un istante ISO con fuso esplicito, o NaN. */
+/** Il giorno esiste nel calendario? (`Date` normalizzerebbe il 31 febbraio al 3 marzo.) */
+function realCalendarDay(y, m, d) {
+  const t = new Date(Date.UTC(y, m - 1, d));
+  return t.getUTCFullYear() === y && t.getUTCMonth() === m - 1 && t.getUTCDate() === d;
+}
+
+/** `YYYY-MM-DD` di un giorno che esiste davvero. */
+export function isRealDay(value) {
+  const m = typeof value === 'string' ? ISO_DAY_RE.exec(value) : null;
+  return Boolean(m) && realCalendarDay(Number(m[1]), Number(m[2]), Number(m[3]));
+}
+
+/**
+ * Millisecondi di un istante ISO con fuso esplicito, o NaN. La forma non
+ * basta: `Date.parse` accetta e normalizza date impossibili
+ * (`2026-02-31T12:00:00Z`), che finirebbero come `updatedAt` negli hub
+ * pubblicati. Giorno, ora, minuti, secondi e offset si controllano uno per uno.
+ */
 export function instantMs(value) {
-  return typeof value === 'string' && ISO_INSTANT_RE.test(value) ? Date.parse(value) : NaN;
+  const m = typeof value === 'string' ? ISO_INSTANT_RE.exec(value) : null;
+  if (!m) return NaN;
+  const [, y, mo, d, h, mi, sec = '0', offset] = m;
+  if (!realCalendarDay(Number(y), Number(mo), Number(d))) return NaN;
+  if (Number(h) > 23 || Number(mi) > 59 || Number(sec) > 59) return NaN;
+  if (offset !== 'Z' && (Number(offset.slice(1, 3)) > 14 || Number(offset.slice(4)) > 59)) return NaN;
+  return Date.parse(value);
+}
+
+/** Millisecondi di una data valida — giorno `YYYY-MM-DD` (a mezzanotte UTC) o istante ISO — o NaN. */
+export function dateMs(value) {
+  if (isRealDay(value)) return Date.parse(`${value}T00:00:00Z`);
+  return instantMs(value);
 }
 
 /**

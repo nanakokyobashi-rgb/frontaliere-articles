@@ -8,7 +8,7 @@
  * avvisi ufficiali, news e strumenti.
  */
 import { fmtChf, fmtPct, httpsUrlOrNull } from './format.mjs';
-import { BLOCK_THRESHOLDS, finite, isObj, omitted } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, finite, instantMs, isObj, omitted } from './blocks-common.mjs';
 
 export const TAX_BLOCK_IDS = Object.freeze({ burden: 'onere-fiscale', withholding: 'imposta-alla-fonte' });
 
@@ -74,6 +74,8 @@ function usable(id, dataset, nowMs) {
   if (!isObj(dataset) || dataset.schemaVersion !== 1 || !Number.isInteger(dataset.year) || !isObj(dataset.cantons)) {
     return omitted(id, 'invalid', 'canton-tax.json: forma non riconosciuta');
   }
+  // `generatedAt` diventa l'`updatedAt` del blocco: deve essere un istante vero.
+  if (!Number.isFinite(instantMs(dataset.generatedAt))) return omitted(id, 'invalid', 'canton-tax.json: generatedAt non e\' un istante valido');
   const calendarYear = new Date(nowMs).getUTCFullYear();
   if (dataset.year < calendarYear - BLOCK_THRESHOLDS.tax.maxYearLag) return omitted(id, 'stale', `canton-tax ${dataset.year} troppo vecchio per il ${calendarYear}`);
   // Anno in corso o precedente, come dice la soglia: un dataset dell'anno

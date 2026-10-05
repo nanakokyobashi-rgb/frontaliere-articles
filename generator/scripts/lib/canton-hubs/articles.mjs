@@ -29,7 +29,7 @@ import { readTsStringMap } from '../../backfill-article-cantons.mjs';
 import { readEntryCanton, registryEntrySpans } from '../registry-canton-field.mjs';
 import { foldForMatch, termHits } from '../canton-section-profile.mjs';
 import { DAILY_EDITION_ID_RE } from '../daily-brief-content.mjs';
-import { CLOCK_SKEW_MS, DAY_MS } from './blocks-common.mjs';
+import { CLOCK_SKEW_MS, DAY_MS, dateMs } from './blocks-common.mjs';
 import { HUB_LOCALES, clip, isoDayOf } from './format.mjs';
 
 /** Le due sezioni storiche da cui un hub cantonale promuove via campo `canton`. */
@@ -129,7 +129,8 @@ export function loadSectionArticles(root, section) {
   for (const { id, text } of registryEntrySpans(registry)) {
     if (DAILY_EDITION_ID_RE.test(id)) continue;
     const date = /\bdate:\s*'([^']+)'/u.exec(text)?.[1];
-    if (!date || !Number.isFinite(Date.parse(date))) continue;
+    // Una data impossibile nel registro non diventa la data di una news promossa.
+    if (!date || !Number.isFinite(dateMs(date))) continue;
     const slug = slugs[id];
     if (!slug || HUB_LOCALES.some((l) => typeof slug[l] !== 'string' || !slug[l] || isReservedPublishedSlug(slug[l]))) continue;
     if (shadowed.has(slug.it)) continue;
@@ -218,7 +219,7 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
   const today = Date.parse(`${isoDayOf(nowMs)}T00:00:00Z`);
   // Un articolo datato nel futuro non e' ancora una news da promuovere: passa
   // solo lo sfasamento d'orologio fra chi ha scritto la data e questo runner.
-  const eligible = pool.filter((a) => Date.parse(a.date) <= nowMs + CLOCK_SKEW_MS);
+  const eligible = pool.filter((a) => dateMs(a.date) <= nowMs + CLOCK_SKEW_MS);
   const inputs = eligible.map((a) => ({ articleId: a.id, title: a.title.it, excerpt: a.excerpt.it, datePub: a.date, category: a.category }));
   const seeds = engine.TOPIC_CLUSTERS.map((t) => ({ key: t.key, seedText: t.seedText }));
   // Solo il match DIRETTO sui seed (`threshold` sopra ogni coseno possibile
