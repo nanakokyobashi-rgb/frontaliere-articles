@@ -69,7 +69,9 @@ const SOURCES = ENV_URL
 // Written where events-utils.mjs's EVENTS_DATASET_PATH expects it: the repo
 // root's data/, not generator/data/. Gitignored — this is a fetched cache, and
 // committing 1.9 MB of other-repo data on every run would be noise in the corpus.
-const CACHE = path.join(
+// EVENTS_DATASET_CACHE overrides it only for generator/tests/private-event-records.test.mjs,
+// which must exercise the write path without touching the repo's data/.
+const CACHE = process.env.EVENTS_DATASET_CACHE || path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
   '..',
@@ -125,26 +127,29 @@ try {
   fail(`${SOURCE} did not return JSON: ${err.message}`);
 }
 
-// Shape gate. A 200 carrying an HTML error page, or a truncated write caught
-// mid-deploy, must not be cached over a good copy — the digest cannot tell the
-// difference and would render an empty weekend from it.
-const events = Array.isArray(payload?.events) ? payload.events : null;
-if (!events) fail(`${SOURCE} has no events[] array — refusing`);
-if (events.length === 0) fail(`${SOURCE} carries zero events — refusing to cache an empty dataset`);
+if (!Array.isArray(payload?.events)) fail(`${SOURCE} has no events[] array — refusing`);
 if (typeof payload.schemaVersion !== 'number') {
   fail(`${SOURCE} has no numeric schemaVersion — refusing an unrecognised shape`);
 }
 
-const dated = events.filter((e) => e && typeof e.startDate === 'string' && e.startDate).length;
-if (dated === 0) fail(`${SOURCE}: not one event carries a startDate — refusing`);
-
 // Private-source records (Eventfrog, AGB §17(3)/(6)) never enter the corpus:
 // the digest built from this cache is a reuse their terms forbid. The site
 // already keeps them out of the published file; a count here means it did not.
+// Stripped BEFORE the content gates below, so the gates judge what would
+// actually be cached: a payload of private records only must be refused, not
+// cached as an empty dataset the digest would render as "no events".
 const { payload: publicPayload, removed: privateRecords } = stripPrivateEventRecords(payload);
 if (privateRecords > 0) {
   console.log(`::warning::[refresh-events-dataset] ${SOURCE} carried ${privateRecords} private-source event record(s); dropped before caching`);
 }
+
+// Content gate, on the filtered payload. A 200 carrying an HTML error page, or
+// a truncated write caught mid-deploy, must not be cached over a good copy —
+// the digest cannot tell the difference and would render an empty weekend.
+const events = publicPayload.events;
+if (events.length === 0) fail(`${SOURCE} carries zero public events — refusing to cache an empty dataset`);
+const dated = events.filter((e) => e && typeof e.startDate === 'string' && e.startDate).length;
+if (dated === 0) fail(`${SOURCE}: not one public event carries a startDate — refusing`);
 
 if (CHECK_ONLY) {
   log(`--check: ${events.length} events (${dated} dated) from ${SOURCE}, ${privateRecords} private dropped, wrote nothing`);
@@ -153,4 +158,4 @@ if (CHECK_ONLY) {
 
 fs.mkdirSync(path.dirname(CACHE), { recursive: true });
 fs.writeFileSync(CACHE, privateRecords > 0 ? `${JSON.stringify(publicPayload)}\n` : raw, 'utf-8');
-log(`${publicPayload.events.length} events (${dated} dated) from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);
+log(`${events.length} events (${dated} dated) from ${SOURCE} → ${path.relative(process.cwd(), CACHE)}`);

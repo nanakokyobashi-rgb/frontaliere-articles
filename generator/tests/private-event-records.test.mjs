@@ -10,7 +10,9 @@
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import http from 'node:http';
+import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -65,9 +67,9 @@ function serve(body) {
   });
 }
 
-function runScript(env) {
+function runScript(env, args = ['--check']) {
   return new Promise((resolve) => {
-    const child = spawn(process.execPath, [SCRIPT, '--check'], { env: { ...process.env, ...env }, cwd: ROOT });
+    const child = spawn(process.execPath, [SCRIPT, ...args], { env: { ...process.env, DRY_RUN: '', ...env }, cwd: ROOT });
     let out = '';
     child.stdout.on('data', (d) => (out += d));
     child.stderr.on('data', (d) => (out += d));
@@ -83,10 +85,54 @@ describe('refresh-events-dataset.mjs', () => {
       const { code, out } = await runScript({ EVENTS_DATASET_URL: `http://127.0.0.1:${port}/events.json`, GITHUB_ACTIONS: '' });
       assert.equal(code, 0, out);
       assert.match(out, /carried 1 private-source event record\(s\); dropped before caching/);
-      assert.match(out, /--check: 2 events .* 1 private dropped, wrote nothing/);
+      assert.match(out, /--check: 1 events .* 1 private dropped, wrote nothing/);
       assert.doesNotMatch(out, /Jazz/);
     } finally {
       server.close();
     }
+  });
+
+  // The content gates judge the FILTERED payload: what would be cached.
+  async function runAgainst(payload, args) {
+    const server = await serve(JSON.stringify(payload));
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'refresh-events-'));
+    const cache = path.join(dir, 'events.json');
+    try {
+      const { port } = server.address();
+      const result = await runScript(
+        { EVENTS_DATASET_URL: `http://127.0.0.1:${port}/events.json`, EVENTS_DATASET_CACHE: cache, GITHUB_ACTIONS: '' },
+        args,
+      );
+      return { ...result, cache };
+    } finally {
+      server.close();
+    }
+  }
+
+  for (const args of [['--check'], []]) {
+    const mode = args.length ? '--check' : 'write';
+    it(`${mode}: a payload of private records only is refused, nothing written`, async () => {
+      const { code, out, cache } = await runAgainst({ schemaVersion: 1, events: [FROG, { ...FROG, id: 'eventfrog:10' }] }, args);
+      assert.notEqual(code, 0, out);
+      assert.match(out, /zero public events — refusing/);
+      assert.equal(fs.existsSync(cache), false);
+    });
+
+    it(`${mode}: the only startDate on a private record is refused, nothing written`, async () => {
+      const undated = { id: 'tio-agenda:2', title: 'Senza data', sourceKey: 'tio-agenda' };
+      const { code, out, cache } = await runAgainst({ schemaVersion: 1, events: [undated, FROG] }, args);
+      assert.notEqual(code, 0, out);
+      assert.match(out, /not one public event carries a startDate — refusing/);
+      assert.equal(fs.existsSync(cache), false);
+    });
+  }
+
+  it('write: a valid mixed payload is cached without the private records', async () => {
+    const { code, out, cache } = await runAgainst({ schemaVersion: 1, totalEvents: 2, events: [TIO, FROG] }, []);
+    assert.equal(code, 0, out);
+    const written = JSON.parse(fs.readFileSync(cache, 'utf8'));
+    assert.deepEqual(written.events, [TIO]);
+    assert.equal(written.totalEvents, 1);
+    assert.doesNotMatch(fs.readFileSync(cache, 'utf8'), /eventfrog/);
   });
 });
