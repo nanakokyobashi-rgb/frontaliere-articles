@@ -2107,13 +2107,11 @@
     {
       "path": "generator/scripts/lib/ai-meta-response.mjs",
       "sitePath": "scripts/lib/ai-meta-response.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616",
-      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Il path esiste gia' sul `main` del sito dalla PR #11578, ma il suo blob live e' quello precedente (`05c117576579f3dd08b94ca0584409f7ba3d5122`). `expectedSiteBlob` pinna il contenuto corretto del head corrente della PR sito #11616 (`9d5703c094e4c6027b43349ac2fa6c246763aaee`): finche' il path live non contiene esattamente quel Git blob, il drift check restituisce `corpus-only-pending-stale-twin`; la sola presenza del file non e' un atterraggio e non va promossa. Dopo il merge della #11616, verificare l'identita' dei due file e promuovere a `identical` con `loop-drift-check --init --only`.",
-      "expectedSiteBlob": "9d5703c094e4c6027b43349ac2fa6c246763aaee",
+      "mode": "identical",
+      "reason": "Gemello identico del rilevatore delle meta-risposte dei modelli usato in `tryTier`.",
       "baseline": {
-        "site": null,
-        "corpus": "231e56bdce5bb50b",
+        "site": "73a11cfc59ac5e0d",
+        "corpus": "73a11cfc59ac5e0d",
         "alignedAt": "2026-10-05"
       }
     },
