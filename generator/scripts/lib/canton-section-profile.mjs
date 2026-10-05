@@ -22,8 +22,10 @@
  *     `quota-state.json` e i contatori `topic-candidates-*` di una sezione
  *     cantonale stanno sotto `data/sections/<id>/`. 24 scrittori paralleli non
  *     si contendono gli stessi file; frontaliere e svizzera tengono i path di
- *     sempre (questo modulo non li tocca). `cantonRebaseArgs` dichiara al
- *     rebase gli stessi path con la strategia giusta per ciascuno.
+ *     sempre (questo modulo non li tocca). `scripts/lib/article-surfaces.mjs`
+ *     legge `cantonSectionPaths` per le superfici del tipo `canton`, e da li'
+ *     li ricevono il rebase (`--section-surfaces`) e il ricontrollo di
+ *     unicita' dopo il rebase.
  *   - COME si ammette una notizia: lessico nazionale + termini tedeschi e
  *     francesi (le fonti cantonali non sono italiane) + nome del cantone;
  *     cronaca locale solo se NEL cantone (`isInCantonArea` di P6a) e con
@@ -317,34 +319,6 @@ export function cantonSectionPaths(section) {
     embeddingsBinPath: `${state}/article-embeddings.bin`,
     embeddingsMetaPath: `${state}/article-embeddings-meta.json`,
   };
-}
-
-/**
- * Gli argomenti di `scripts/lib/rebase-onto-remote.sh` per i file di una
- * sezione cantonale, nella forma che lo script accetta. Le categorie sono
- * quelle del workflow per frontaliere/svizzera:
- *   - ledger e cache riscritti per intero        → path nudo (prendi upstream);
- *   - contatori (D18, `--merge-counter` di P1)    → upstream + incremento;
- *   - registri append-only                        → `--merge-registry`;
- *   - file per articolo (corpi, sidecar)          → `--take-theirs` (prefisso).
- * I path globali (immagini, crediti, catalogo giornalisti) restano nel
- * workflow chiamante: non dipendono dalla sezione.
- *
- * @param {string} section
- * @returns {string[]}
- */
-export function cantonRebaseArgs(section) {
-  const p = cantonSectionPaths(section);
-  const bookkeeping = [p.sourceUrlsFile, p.sourceQuotaFile, p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile];
-  const counters = [`${p.quotaStateFile}:runCounter`, `${p.experimentalCounterFile}:count`, `${p.evergreenCounterFile}:count`];
-  const registries = [p.registryFile, p.slugDataFile, ...p.metaFiles, p.seoFile].map((f) => corpusPath(f));
-  const perArticle = [`${corpusPath(`services/locales/${p.bodyDir}`)}/`, `${p.sidecarDir}/`];
-  return [
-    ...bookkeeping,
-    ...counters.flatMap((c) => ['--merge-counter', c]),
-    ...registries.flatMap((r) => ['--merge-registry', r]),
-    ...perArticle.flatMap((t) => ['--take-theirs', t]),
-  ];
 }
 
 // ── La voce di ARTICLE_SECTION_CONFIGS ───────────────────────────────────────

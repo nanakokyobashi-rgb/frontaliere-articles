@@ -30,7 +30,6 @@ import {
   buildCantonProfile,
   cantonClassifierPrompt,
   cantonPromptLines,
-  cantonRebaseArgs,
   cantonSectionConfigs,
   cantonSectionIds,
   cantonSectionPaths,
@@ -40,6 +39,8 @@ import {
   termHits,
 } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
+import { sectionWriteSurfaces } from '../../scripts/lib/article-surfaces.mjs';
+import { sectionRebaseArgs } from '../../scripts/ci/rebase-section-args.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..', '..');
@@ -145,7 +146,10 @@ test('gate D16 cablato: Remote Config mappata, controllo in testa a main() prima
 // ── D18: rebase ─────────────────────────────────────────────────────────────
 
 test('gli argomenti di rebase coprono ogni file scritto, con la strategia giusta', () => {
-  const args = cantonRebaseArgs('canton-ti');
+  // Le superfici del tipo `canton` di article-surfaces.mjs (P3) sono derivate
+  // da cantonSectionPaths: e' da li' che --section-surfaces le passa al rebase
+  // quando il cantone e' acceso nel core.
+  const args = sectionRebaseArgs({ 'canton-ti': sectionWriteSurfaces('canton-ti') });
   const p = cantonSectionPaths('canton-ti');
   const after = (flag) => args.flatMap((a, i) => (a === flag ? [args[i + 1]] : []));
   const bare = args.filter((a, i) => !a.startsWith('--') && !String(args[i - 1] || '').startsWith('--'));
