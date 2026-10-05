@@ -3,10 +3,9 @@
  * `canton-tax/latest.json` del sito (onere fiscale ESTV per capoluogo e
  * tariffe dell'imposta alla fonte per cantone).
  *
- * OPZIONALI PER COSTRUZIONE: il `refresh` e il contratto REWIRE di questo
- * dataset arrivano con la PR del corpus P9d+e. Finche' nessun workflow scrive
- * `generator/data/canton-tax.json` i due blocchi sono `missing` e l'hub fisco
- * si regge su intro, avvisi ufficiali, news e strumenti.
+ * Contratto REWIRE `canton-tax`, cache scritta da `refresh-canton-tax.mjs`.
+ * Senza cache i due blocchi sono `missing` e l'hub fisco si regge su intro,
+ * avvisi ufficiali, news e strumenti.
  */
 import { fmtChf, fmtPct, httpsUrlOrNull } from './format.mjs';
 import { BLOCK_THRESHOLDS, finite, isObj, omitted } from './blocks-common.mjs';
@@ -71,7 +70,7 @@ const TXT = {
 };
 
 function usable(id, dataset, nowMs) {
-  if (dataset == null) return omitted(id, 'missing', 'canton-tax.json non in cache (refresh in arrivo con P9d+e)');
+  if (dataset == null) return omitted(id, 'missing', 'canton-tax.json non in cache');
   if (!isObj(dataset) || dataset.schemaVersion !== 1 || !Number.isInteger(dataset.year) || !isObj(dataset.cantons)) {
     return omitted(id, 'invalid', 'canton-tax.json: forma non riconosciuta');
   }

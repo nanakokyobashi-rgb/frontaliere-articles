@@ -19,10 +19,6 @@ name: Refresh Canton Hubs
 # entro la sua eta' massima — e l'hub resta valido e indicizzabile (nessun
 # noindex, decisions.md). Un errore del producer invece ferma tutto prima del
 # commit.
-#
-# Fisco e pensioni: i dataset `canton-tax` e `pension-parameters` hanno refresh
-# e contratto nella PR del corpus P9d+e; quando arriva, aggiunge qui i suoi
-# due step e i blocchi (gia' scritti, oggi `missing`) si accendono da soli.
 on:
   schedule:
     # Ogni giorno alle 08:23 UTC: dopo il build giornaliero dei carburanti del
@@ -191,6 +187,16 @@ jobs:
         if: steps.sections.outputs.count != '0'
         run: |
           npm run refresh:canton-services || echo "::warning::canton-services non costruita: i blocchi dell'hub servizi si omettono o restano quelli pubblicati"
+
+      - name: Fetch canton tax data
+        if: steps.sections.outputs.count != '0'
+        run: |
+          npm run refresh:canton-tax || echo "::warning::canton-tax non scaricato: i blocchi onere fiscale e imposta alla fonte si omettono o restano quelli pubblicati"
+
+      - name: Fetch pension parameters
+        if: steps.sections.outputs.count != '0'
+        run: |
+          npm run refresh:pension-parameters || echo "::warning::pension-parameters non scaricato: i blocchi dell'hub pensioni si omettono o restano quelli pubblicati"
 
       - name: Generate the canton hubs
         id: producer

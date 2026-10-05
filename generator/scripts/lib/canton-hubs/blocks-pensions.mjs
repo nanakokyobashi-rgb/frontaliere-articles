@@ -4,8 +4,8 @@
  * cassa di compensazione e cassa pensione pubblica del cantone, imposta sul
  * prelievo del capitale nel capoluogo).
  *
- * OPZIONALI PER COSTRUZIONE, come `blocks-tax.mjs`: `refresh` e contratto
- * arrivano con la PR del corpus P9d+e; senza cache i blocchi sono `missing`.
+ * Contratto REWIRE `pension-parameters`, cache scritta da
+ * `refresh-pension-parameters.mjs`. Senza cache i blocchi sono `missing`.
  */
 import { fmtChf, fmtPct, httpsUrlOrNull } from './format.mjs';
 import { BLOCK_THRESHOLDS, finite, isObj, omitted } from './blocks-common.mjs';
@@ -76,7 +76,7 @@ const TXT = {
 };
 
 function usable(id, dataset, nowMs) {
-  if (dataset == null) return omitted(id, 'missing', 'pension-parameters.json non in cache (refresh in arrivo con P9d+e)');
+  if (dataset == null) return omitted(id, 'missing', 'pension-parameters.json non in cache');
   if (!isObj(dataset) || dataset.schemaVersion !== 1 || !Number.isInteger(dataset.year) || !isObj(dataset.federal) || !isObj(dataset.cantons)) {
     return omitted(id, 'invalid', 'pension-parameters.json: forma non riconosciuta');
   }

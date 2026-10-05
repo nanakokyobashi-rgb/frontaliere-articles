@@ -6,8 +6,7 @@
  *
  * Niente rete: i dataset sono le registrazioni REWIRE gia' in repo
  * (`fixtures/rewire/`), rimesse in data con gli stessi helper dei test di
- * contratto, piu' due registrazioni ridotte di fisco e pensioni
- * (`fixtures/canton-hubs/`). Il corpus e' un albero temporaneo scritto qui,
+ * contratto. Il corpus e' un albero temporaneo scritto qui,
  * nella forma che i lettori veri leggono (registro, mappa slug, meta).
  * L'engine (tassonomia e TF-IDF) e' quello VERO, caricato da `engine/`.
  */
@@ -87,8 +86,8 @@ function fixtureDatasets() {
     roadEvents: shifted('road-events'),
     notices: shifted('canton-notices'),
     services,
-    tax: readJson('generator/tests/fixtures/canton-hubs/canton-tax.json'),
-    pensions: readJson('generator/tests/fixtures/canton-hubs/pension-parameters.json'),
+    tax: freshenRecording(contract('canton-tax'), rewire('canton-tax'), NOW),
+    pensions: freshenRecording(contract('pension-parameters'), rewire('pension-parameters'), NOW),
   };
 }
 
@@ -342,7 +341,7 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
   assert.equal(omittedCode('canton-ti', 'mobilita', 'chiusure-cantieri', (d) => { d.roadEvents.generatedAt = old(BLOCK_THRESHOLDS.roadEvents.maxAgeMs + HOUR_MS); }), 'stale');
   assert.equal(omittedCode('canton-ti', 'mobilita', 'chiusure-cantieri', (d) => { d.roadEvents.events.forEach((e) => { e.validFrom = old(10 * DAY_MS); e.validTo = old(DAY_MS); }); }), 'empty');
 
-  // fisco e pensioni: opzionali finche' il loro refresh non e' su main
+  // fisco e pensioni
   assert.equal(omittedCode('canton-ti', 'fisco', 'onere-fiscale', (d) => { d.tax = null; }), 'missing');
   assert.equal(omittedCode('canton-ti', 'fisco', 'imposta-alla-fonte', (d) => { d.tax.year = 2020; }), 'stale');
   assert.equal(omittedCode('canton-ti', 'pensioni', 'parametri-previdenza', (d) => { d.pensions = null; }), 'missing');
@@ -855,10 +854,10 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   // Ogni step dopo la risoluzione delle sezioni e' condizionato a count != 0.
   const steps = wf.split(/\n {6}- name: /).slice(1);
   const after = steps.slice(steps.findIndex((s) => s.startsWith('Resolve canton sections')) + 1);
-  assert.ok(after.length >= 9);
+  assert.ok(after.length >= 11);
   for (const step of after) assert.match(step, /if: .*steps\.sections\.outputs\.count != '0'/, `step senza guardia: ${step.split('\n')[0]}`);
   // I refresh di produzione: uno per dataset, nessuno puo' fermare il job.
-  for (const name of ['fuel-cantons', 'events', 'border-wait-window', 'road-events', 'canton-notices', 'canton-services']) {
+  for (const name of ['fuel-cantons', 'events', 'border-wait-window', 'road-events', 'canton-notices', 'canton-services', 'canton-tax', 'pension-parameters']) {
     const line = wf.split('\n').find((l) => l.includes(`npm run refresh:${name} `));
     assert.ok(line, `refresh:${name} non cablato`);
     assert.match(line, /\|\| echo "::warning::/, `refresh:${name} deve essere soft`);

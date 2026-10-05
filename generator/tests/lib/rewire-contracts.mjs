@@ -5,7 +5,7 @@
  *
  * ## Cosa e' un «contratto» qui, e perche' nessun guard esistente lo vede
  *
- * Tre artefatti JSON che il SITO pubblica su `cdn.frontaliereticino.ch/data/` e
+ * Artefatti JSON che il SITO pubblica su `cdn.frontaliereticino.ch/data/` e
  * che QUESTO repo consuma. I due capi sono due file diversi, in due repo
  * diversi, con NOMI DIVERSI, e non si importano: si parlano via HTTP.
  *
@@ -30,7 +30,7 @@
  *
  * ## Cosa fa questo file, che il fixture da solo non farebbe
  *
- * Dichiara l'accoppiamento. Le tre coppie produttore↔consumatore smettono di
+ * Dichiara l'accoppiamento. Le coppie produttore↔consumatore smettono di
  * essere una cosa che si scopre leggendo due intestazioni in due repo e
  * diventano un dato, con sopra le asserzioni di
  * `generator/tests/rewire-json-contracts.test.mjs`.
@@ -41,17 +41,17 @@
  * pinna **l'aspettativa del consumatore**: fallisce quando cambia il
  * consumatore (o quando qualcuno indebolisce la validazione del `refresh`), NON
  * quando cambia il produttore. La meta' che vede muoversi il produttore e'
- * l'altra: i `--check` dei tre `refresh` contro i dati veri, che
+ * l'altra: i `--check` dei `refresh` contro i dati veri, che
  * `.github/workflows/rewire-contract-watch.yml` esegue a orologio. Le due meta'
  * non sono alternative — coprono direzioni diverse, e servono entrambe.
  */
 
-/** Cartella pubblica del sito da cui i tre `refresh` fetchano (con fallback same-origin). */
+/** Cartella pubblica del sito da cui i `refresh` fetchano (con fallback same-origin). */
 export const CDN_DATA_BASE = 'https://cdn.frontaliereticino.ch/data';
 
 /**
  * Le coppie: le tre del REWIRE originale piu' i dataset di categoria (D11)
- * costruiti con la stessa forma.
+ * costruiti con la stessa forma (carburanti, avvisi, servizi, fisco, pensioni).
  *
  * `producer.path` e' un path del repo del SITO: qui non esiste, e non deve
  * esistere. E' documentazione verificabile a mano, non un riferimento risolto —
@@ -524,6 +524,108 @@ export const REWIRE_CONTRACTS = [
       workflows: ['refresh-canton-hubs.yml'],
     },
   },
+  {
+    id: 'canton-tax',
+    artifact: 'canton-tax/latest.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/fetch-canton-tax-data.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-canton-tax.mjs',
+      envUrl: 'CANTON_TAX_URL',
+      cache: 'generator/data/canton-tax.json',
+    },
+    failureMode: 'hard',
+    freshen: 'shift-year',
+    symptom:
+      'gli hub fiscali cantonali e il brief di fattualita\' degli articoli cantonali citerebbero onere e ' +
+      'aliquote alla fonte non verificati o di un anno vecchio: e\' la classe di cifre per cui 94 evergreen ' +
+      'svizzeri su 110 sono stati bocciati al fact-check.',
+    fixture: 'generator/tests/fixtures/rewire/canton-tax.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo:
+        '26 cantoni, onere del solo anno del dataset (il produttore pubblica anche i due precedenti), ' +
+        'tariffe alla fonte ridotte ai codici A0/R0 senza imposta minima; numeri non alterati',
+    },
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-canton-tax.mjs',
+        fields: ['schemaVersion', 'year', 'burden', 'incomeBracketsCHF', 'cantons', 'burdenPct', 'withholding', 'ratesPct', 'A0'],
+      },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-tax.mjs',
+        fields: ['schemaVersion', 'year', 'generatedAt', 'sources', 'burden', 'incomeBracketsCHF', 'cantons', 'capital', 'municipality', 'burdenPct', 'withholding', 'monthlyIncomesCHF', 'ratesPct', 'A0', 'withholdingSource'],
+      },
+    ],
+    producedUnread: ['taxAuthority', 'deadlines', 'deadlinesSource'],
+    productionFetch: {
+      workflows: ['refresh-canton-hubs.yml'],
+    },
+    notJsonExpect: /did not return JSON/,
+  },
+  {
+    id: 'pension-parameters',
+    artifact: 'pension-parameters/latest.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/fetch-pension-parameters.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-pension-parameters.mjs',
+      envUrl: 'PENSION_PARAMETERS_URL',
+      cache: 'generator/data/pension-parameters.json',
+    },
+    failureMode: 'hard',
+    freshen: 'shift-year',
+    symptom:
+      'rendita AVS, soglie LPP e massimali 3a di un anno vecchio finirebbero negli hub pensioni e nel ' +
+      'brief di fattualita\': il sito stesso ha pubblicato 2\'450 CHF di rendita massima 2026 quando la ' +
+      'cifra ufficiale era 2\'520.',
+    fixture: 'generator/tests/fixtures/rewire/pension-parameters.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo:
+        '26 cantoni con la cassa di compensazione; cassa pensioni pubblica e imposta sul capitale tenute ' +
+        'solo per GE, GR, TI, VS e ZH; numeri non alterati',
+    },
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-pension-parameters.mjs',
+        fields: [
+          'schemaVersion',
+          'year',
+          'federal',
+          'avs',
+          'minMonthlyCHF',
+          'maxMonthlyCHF',
+          'lpp',
+          'entryThresholdCHF',
+          'coordinationDeductionCHF',
+          'maxInsuredSalaryCHF',
+          'minInterestRatePct',
+          'minConversionRatePct',
+          'pillar3a',
+          'maxWithLppCHF',
+          'maxWithoutLppCHF',
+          'cantons',
+          'compensationFund',
+          'url',
+          'name',
+        ],
+      },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-pensions.mjs',
+        fields: ['schemaVersion', 'year', 'generatedAt', 'federal', 'avs', 'minMonthlyCHF', 'maxMonthlyCHF', 'contributions', 'employeePct', 'lpp', 'entryThresholdCHF', 'coordinationDeductionCHF', 'minConversionRatePct', 'pillar3a', 'maxWithLppCHF', 'maxWithoutLppCHF', 'cantons', 'compensationFund', 'publicPensionFund', 'capitalWithdrawalTax', 'amountsCHF', 'taxCHF', 'municipality', 'url', 'name'],
+      },
+    ],
+    producedUnread: ['sources', 'unemployment'],
+    productionFetch: {
+      workflows: ['refresh-canton-hubs.yml'],
+    },
+    notJsonExpect: /did not return JSON/,
+  },
 ];
 
 /**
@@ -543,6 +645,7 @@ export const REWIRE_CONTRACTS = [
  */
 export function freshenRecording(c, payload, nowMs = Date.now()) {
   if (c.freshen === 'current-year') return { ...structuredClone(payload), year: new Date(nowMs).getUTCFullYear() };
+  if (c.freshen === 'shift-year') return freshenYear(payload, new Date(nowMs).getUTCFullYear());
   if (c.freshen !== 'shift-timestamps') return payload;
   const anchor = Date.parse(payload.generatedAt);
   const delta = nowMs - 3600_000 - anchor; // un'ora fa: «appena pubblicato»
@@ -602,6 +705,31 @@ export function freshenWindow(payload, todayIso) {
   for (const half of ['current', 'previous']) {
     shifted[half].weekStart = isoShift(shifted[half].weekStart, delta);
     shifted[half].weekEnd = isoShift(shifted[half].weekEnd, delta);
+  }
+  return shifted;
+}
+
+/**
+ * Rimette in anno un dataset annuale (canton-tax, pension-parameters).
+ *
+ * I due `refresh` rifiutano un `year` piu' vecchio di un anno rispetto al
+ * calendario — il gate che distingue «il publisher si e' fermato» da «va tutto
+ * bene». Una registrazione e' datata per definizione: senza traslazione il
+ * fixture comincerebbe a fallire da solo fra due anni. Si sposta l'anno in
+ * blocco (campo `year`, `burden.years` e le chiavi per anno di `burdenPct`),
+ * lasciando intatto ogni numero; il gate di staleness ha il suo caso di
+ * mutazione che porta l'anno indietro apposta.
+ */
+export function freshenYear(payload, currentYear) {
+  const delta = currentYear - payload.year;
+  const shifted = structuredClone(payload);
+  if (delta === 0) return shifted;
+  shifted.year += delta;
+  if (Array.isArray(shifted.burden?.years)) shifted.burden.years = shifted.burden.years.map((y) => y + delta);
+  for (const canton of Object.values(shifted.cantons || {})) {
+    if (canton && canton.burdenPct && typeof canton.burdenPct === 'object') {
+      canton.burdenPct = Object.fromEntries(Object.entries(canton.burdenPct).map(([y, v]) => [String(Number(y) + delta), v]));
+    }
   }
   return shifted;
 }

@@ -159,6 +159,16 @@
       }
     },
     {
+      "path": "scripts/ci/canton-generation-admit.mjs",
+      "mode": "corpus-only",
+      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run in_progress dei chiamanti cantonali, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
+      "baseline": {
+        "site": null,
+        "corpus": "6c122bb4827e9470",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section.mjs",
       "mode": "corpus-only",
       "reason": "Sezione e shard Pages di un fast-publish derivati da ARTICLE_SECTION_CORE (lista attiva): regex dei corpi, sezione di un corpo, shard di una sezione, con errore esplicito per le sezioni servite da R2 (shardKey null). Esiste solo qui perche' fast-publish-article.yml e publish-article-fast.mjs che lo usano pubblicano dal corpus; il sito non ha un fast-publish che derivi la sezione dal path di un corpo.",
@@ -175,6 +185,16 @@
       "baseline": {
         "site": null,
         "corpus": "9771a71da3aaa747",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/generate-canton-article-workflows.mjs",
+      "mode": "corpus-only",
+      "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "f978004d43015b6b",
         "alignedAt": "2026-10-05"
       }
     },
@@ -4008,8 +4028,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "570bfc873010903f",
-        "corpus": "570bfc873010903f",
+        "site": "739cc56d75ae95b0",
+        "corpus": "739cc56d75ae95b0",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5093,7 +5113,7 @@
     {
       "path": "generator/scripts/lib/canton-hubs/blocks-pensions.mjs",
       "mode": "corpus-only",
-      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub pensioni (parametri federali, casse cantonali, imposta sul capitale) dal dataset annuale `pension-parameters`; opzionali come quelli del fisco.",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub pensioni (parametri federali, casse cantonali, imposta sul capitale) dal dataset annuale `pension-parameters` (contratto REWIRE `pension-parameters`).",
       "baseline": {
         "site": null,
         "corpus": "718c1a88815eef88",
@@ -5123,7 +5143,7 @@
     {
       "path": "generator/scripts/lib/canton-hubs/blocks-tax.mjs",
       "mode": "corpus-only",
-      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub fisco (onere fiscale, imposta alla fonte) dal dataset annuale `canton-tax`; opzionali finche' refresh e contratto non arrivano con la PR corpus P9d+e.",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub fisco (onere fiscale, imposta alla fonte) dal dataset annuale `canton-tax` (contratto REWIRE `canton-tax`).",
       "baseline": {
         "site": null,
         "corpus": "2c9e56924c69a624",
