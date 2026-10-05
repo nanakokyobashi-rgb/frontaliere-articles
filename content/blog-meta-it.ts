@@ -12562,6 +12562,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.novantaquattro-scatti-varese.title': 'Varese, 94 foto tra ciclismo e StraWoman',
     'blog.article.novantaquattro-scatti-varese.excerpt': 'A Varese circa 5.000 ciclisti da oltre 40 Paesi e più di 3.000 donne per una domenica tra Gran Fondo Tre Valli Varesine e StraWoman.',
     'blog.article.novantaquattro-scatti-varese.imageAlt': 'Ciclisti e partecipanti alla StraWoman nel centro di Varese',
+    'blog.article.openjobmetis-scafati-vittoria-basket.title': 'Openjobmetis vince a Scafati: primo successo ufficiale',
+    'blog.article.openjobmetis-scafati-vittoria-basket.excerpt': 'La Openjobmetis vince 78-85 a Scafati conquistando la prima vittoria ufficiale della stagione e la seconda di sempre sul parquet campano.',
+    'blog.article.openjobmetis-scafati-vittoria-basket.imageAlt': 'Partita di basket della Openjobmetis a Scafati',
+    'blog.article.storia-restauro-torre-velasca.title': 'Torre Velasca: storia e restauro a Villa Recalcati',
+    'blog.article.storia-restauro-torre-velasca.excerpt': 'L\'Ordine degli Architetti di Varese racconta il restauro del 2021-2025 e la storia della Torre Velasca tra architettura, design e riqualificazione.',
+    'blog.article.storia-restauro-torre-velasca.imageAlt': 'La Torre Velasca di Milano, esempio di architettura moderna e restauro.',
+    'blog.article.bellucci-finale-jingshan-2026.title': 'Mattia Bellucci si ferma a un titolo da Jingshan',
+    'blog.article.bellucci-finale-jingshan-2026.excerpt': 'Bellucci perde la finale dell\'Open di Jingshan contro Harris al tie-break decisivo dopo due match point non sfruttati. Il varesotto sale al numero 86 ATP.',
+    'blog.article.bellucci-finale-jingshan-2026.imageAlt': 'Mattia Bellucci in azione durante un torneo Challenger su cemento',
 };
 
 export default blogMetaIt;

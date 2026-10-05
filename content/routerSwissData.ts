@@ -2591,6 +2591,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'rita-fuhrer-consiglio-federale-donne': { it: 'rita-fuhrer-consiglio-federale-donne', en: 'rita-fuhrer-federal-council-women', de: 'rita-fuhrer-bundesrat-frauen', fr: 'rita-fuhrer-conseil-federal-femmes' },
  'guida-voto-zurigo-referendum': { it: 'guida-voto-zurigo-referendum', en: 'zurich-cantonal-vote-guide', de: 'kantonale-abstimmung-zuerich-leitfaden', fr: 'guide-votation-canton-zurich' },
  'elezioni-cantonali-zurigo-vademecum': { it: 'elezioni-cantonali-zurigo-vademecum', en: 'zurich-cantonal-elections-voting-guide', de: 'zuerich-kantonswahlen-wahlleitfaden', fr: 'elections-cantonales-zurich-guide-vote' },
+ 'protezione-civile-zurigo': { it: 'protezione-civile-zurigo', en: 'zurich-civil-protection-requirements-allowances', de: 'zivilschutz-zuerich-entschaedigung', fr: 'protection-civile-zurich-indemnites' },
+ 'assicurazione-immobili-zurigo': { it: 'assicurazione-immobili-zurigo', en: 'zurich-building-insurance-guide', de: 'gebaeudeversicherung-zuerich-ratgeber', fr: 'assurance-immobilier-zurich-guide' },
+ 'formazione-continua-zurigo-contributi': { it: 'formazione-continua-zurigo-contributi', en: 'zurich-continuing-education-grants', de: 'weiterbildung-zuerich-beitraege', fr: 'formation-continue-zurich-subventions' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

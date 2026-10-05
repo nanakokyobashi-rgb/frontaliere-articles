@@ -7706,6 +7706,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.elezioni-cantonali-zurigo-vademecum.title': 'Elezioni cantonali a Zurigo: guida a calendario e voto',
     'blog.article.elezioni-cantonali-zurigo-vademecum.excerpt': 'Guida pratica alle elezioni cantonali nel Cantone di Zurigo: cosa controllare su calendario, modalità di voto, liste e informazioni ufficiali.',
     'blog.article.elezioni-cantonali-zurigo-vademecum.imageAlt': 'Materiale informativo per le elezioni cantonali nel Cantone di Zurigo',
+    'blog.article.protezione-civile-zurigo.title': 'Protezione civile Canton Zurigo: requisiti e indennità',
+    'blog.article.protezione-civile-zurigo.excerpt': 'Nel Cantone di Zurigo la protezione civile è coordinata a livello cantonale. Convocazioni e indennità si verificano presso l\'autorità competente.',
+    'blog.article.protezione-civile-zurigo.imageAlt': 'Operatori della protezione civile davanti a un edificio pubblico svizzero',
+    'blog.article.assicurazione-immobili-zurigo.title': 'Assicurazione immobili Canton Zurigo: obbligo e premi',
+    'blog.article.assicurazione-immobili-zurigo.excerpt': 'In Svizzera l\'assicurazione degli edifici è obbligatoria o organizzata diversamente secondo il Cantone: guida pratica per Zurigo su premi e sinistri.',
+    'blog.article.assicurazione-immobili-zurigo.imageAlt': 'Edificio residenziale nel Canton Zurigo per una guida sull\'assicurazione immobili',
+    'blog.article.formazione-continua-zurigo-contributi.title': 'Formazione continua Canton Zurigo: requisiti e contributi',
+    'blog.article.formazione-continua-zurigo-contributi.excerpt': 'Nel Canton Zurigo programmi riconosciuti, requisiti, termini e contributi vanno verificati presso la fonte ufficiale cantonale.',
+    'blog.article.formazione-continua-zurigo-contributi.imageAlt': 'Aula svizzera per un corso di formazione continua con adulti al lavoro.',
 };
 
 export default blogMetaChIt;

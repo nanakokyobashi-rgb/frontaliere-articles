@@ -98789,6 +98789,108 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-openjobmetis-scafati-vittoria-basket': {
+    title: 'Openjobmetis vince a Scafati: primo successo ufficiale',
+    description: 'La Openjobmetis vince 78-85 a Scafati e conquista la prima vittoria ufficiale della stagione. Migliore in campo Hale con 25 punti. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, openjobmetis, vince, scafati, primo',
+    ogTitle: 'Openjobmetis vince a Scafati: primo successo ufficiale',
+    ogDescription: 'La Openjobmetis supera Scafati per 78-85 al PalaMangano e conquista la prima vittoria ufficiale della stagione. Protagonista Hunter Hale con 25 punti e 7 assist.',
+    canonicalPath: '/articoli-frontaliere/openjobmetis-scafati-vittoria-basket/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Openjobmetis vince a Scafati: primo successo ufficiale",
+      "description": "La Openjobmetis vince 78-85 a Scafati e conquista la prima vittoria ufficiale della stagione. Migliore in campo Hale con 25 punti. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/openjobmetis-scafati-vittoria-basket.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di basket della Openjobmetis a Scafati"
+      },
+      "datePublished": "2026-10-05T02:06:47+00:00",
+      "dateModified": "2026-10-05T02:06:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/openjobmetis-scafati-vittoria-basket/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-storia-restauro-torre-velasca': {
+    title: 'Torre Velasca: storia e restauro a Villa Recalcati',
+    description: 'Approfondimento sul restauro della Torre Velasca (2021-2025) presentato a Villa Recalcati: architettura, design e la storia della celebre maniglia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, torre, velasca, storia, restauro',
+    ogTitle: 'Torre Velasca: storia e restauro a Villa Recalcati',
+    ogDescription: 'L\'Ordine degli Architetti di Varese ha analizzato il restauro della Torre Velasca, un\'opera tra cantiere storico e conservazione, protagonista a Villa Recalcati.',
+    canonicalPath: '/articoli-frontaliere/storia-restauro-torre-velasca/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Torre Velasca: storia e restauro a Villa Recalcati",
+      "description": "Approfondimento sul restauro della Torre Velasca (2021-2025) presentato a Villa Recalcati: architettura, design e la storia della celebre maniglia.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/storia-restauro-torre-velasca.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La Torre Velasca di Milano, esempio di architettura moderna e restauro."
+      },
+      "datePublished": "2026-10-05T02:50:57+00:00",
+      "dateModified": "2026-10-05T02:50:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/storia-restauro-torre-velasca/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bellucci-finale-jingshan-2026': {
+    title: 'Mattia Bellucci si ferma a un titolo da Jingshan',
+    description: 'Mattia Bellucci perde la finale Challenger di Jingshan contro Harris al tie-break. Guadagnati 50 punti ATP e risalita al numero 86 del ranking. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, mattia, bellucci, ferma, titolo',
+    ogTitle: 'Mattia Bellucci si ferma in finale a Jingshan contro Harris',
+    ogDescription: 'La finale dell\'Open di Jingshan sfugge a Mattia Bellucci, battuto da Lloyd Harris al tie-break del terzo set dopo due match point mancati. Per il varesotto arrivano comunque 50 punti ATP e il salto al numero 86 del ranking da lunedì.',
+    canonicalPath: '/articoli-frontaliere/bellucci-finale-jingshan-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mattia Bellucci si ferma a un titolo da Jingshan",
+      "description": "Mattia Bellucci perde la finale Challenger di Jingshan contro Harris al tie-break. Guadagnati 50 punti ATP e risalita al numero 86 del ranking. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/bellucci-finale-jingshan-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mattia Bellucci in azione durante un torneo Challenger su cemento"
+      },
+      "datePublished": "2026-10-05T03:15:22+00:00",
+      "dateModified": "2026-10-05T03:15:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellucci-finale-jingshan-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

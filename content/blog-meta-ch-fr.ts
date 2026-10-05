@@ -7706,6 +7706,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.elezioni-cantonali-zurigo-vademecum.title': 'Élections cantonales à Zurich : guide du calendrier et du vote',
     'blog.article.elezioni-cantonali-zurigo-vademecum.excerpt': 'Guide pratique des élections cantonales dans le canton de Zurich : ce qu\'il faut vérifier concernant le calendrier, les modalités de vote, les listes et les informations officielles.',
     'blog.article.elezioni-cantonali-zurigo-vademecum.imageAlt': 'Documents d\'information pour les élections cantonales à Zurich',
+    'blog.article.protezione-civile-zurigo.title': 'Protection civile Canton de Zurich : conditions et indemnités',
+    'blog.article.protezione-civile-zurigo.excerpt': 'Dans le canton de Zurich, la protection civile est coordonnée au niveau cantonal. Les convocations et les indemnités sont à vérifier auprès de l\'autorité compétente.',
+    'blog.article.protezione-civile-zurigo.imageAlt': 'Personnel de la protection civile devant un bâtiment public suisse',
+    'blog.article.assicurazione-immobili-zurigo.title': 'Assurance des immeubles dans le canton de Zurich : obligation et primes',
+    'blog.article.assicurazione-immobili-zurigo.excerpt': 'En Suisse, l\'assurance des bâtiments est obligatoire ou organisée différemment selon le canton : guide pratique pour Zurich sur les primes et les sinistres.',
+    'blog.article.assicurazione-immobili-zurigo.imageAlt': 'Immeuble résidentiel du canton de Zurich pour un guide d\'assurance',
+    'blog.article.formazione-continua-zurigo-contributi.title': 'Formation continue Canton de Zurich : exigences et cotisations',
+    'blog.article.formazione-continua-zurigo-contributi.excerpt': 'Dans le canton de Zurich, les programmes reconnus, les exigences, les délais et les contributions doivent être vérifiés auprès de la source cantonale officielle.',
+    'blog.article.formazione-continua-zurigo-contributi.imageAlt': 'Salle de formation suisse pour la formation continue d\'adultes.',
 };
 
 export default blogMetaChFr;

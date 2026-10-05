@@ -7706,6 +7706,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.elezioni-cantonali-zurigo-vademecum.title': 'Kantonswahlen in Zürich: Kalender- und Abstimmungsleitfaden',
     'blog.article.elezioni-cantonali-zurigo-vademecum.excerpt': 'Praktischer Leitfaden zu den Kantonswahlen im Kanton Zürich: Was ist in Kalender, Abstimmungsmodalitäten, Listen und amtlichen Informationen zu beachten?',
     'blog.article.elezioni-cantonali-zurigo-vademecum.imageAlt': 'Informationsmaterial für Kantonswahlen im Kanton Zürich',
+    'blog.article.protezione-civile-zurigo.title': 'Zivilschutz Kanton Zürich: Voraussetzungen und Entschädigungen',
+    'blog.article.protezione-civile-zurigo.excerpt': 'Im Kanton Zürich ist der Zivilschutz kantonal koordiniert. Einberufungen und Entschädigungen erfolgen bei der zuständigen Behörde.',
+    'blog.article.protezione-civile-zurigo.imageAlt': 'Zivilschutzpersonal vor einem öffentlichen Gebäude in der Schweiz',
+    'blog.article.assicurazione-immobili-zurigo.title': 'Gebäudeversicherung im Kanton Zürich: Pflicht und Prämien',
+    'blog.article.assicurazione-immobili-zurigo.excerpt': 'In der Schweiz ist die Gebäudeversicherung obligatorisch oder je nach Kanton anders organisiert: Praktischer Leitfaden für Zürich zu Prämien und Schadenfällen.',
+    'blog.article.assicurazione-immobili-zurigo.imageAlt': 'Wohngebäude im Kanton Zürich für einen Ratgeber zur Gebäudeversicherung',
+    'blog.article.formazione-continua-zurigo-contributi.title': 'Weiterbildung im Kanton Zürich: Anforderungen und Beiträge',
+    'blog.article.formazione-continua-zurigo-contributi.excerpt': 'Im Kanton Zürich müssen anerkannte Programme, Anforderungen, Fristen und Beiträge anhand der offiziellen kantonalen Quelle überprüft werden.',
+    'blog.article.formazione-continua-zurigo-contributi.imageAlt': 'Schweizer Kursraum für berufliche Weiterbildung mit erwachsenen Lernenden.',
 };
 
 export default blogMetaChDe;

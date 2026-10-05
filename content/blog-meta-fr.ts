@@ -12563,6 +12563,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.novantaquattro-scatti-varese.title': 'Varese, 94 photos entre cyclisme et StraWoman',
     'blog.article.novantaquattro-scatti-varese.excerpt': 'À Varese, environ 5.000 cyclistes venus de plus de 40 pays et plus de 3.000 femmes pour un dimanche entre Gran Fondo Tre Valli Varesine et StraWoman.',
     'blog.article.novantaquattro-scatti-varese.imageAlt': 'Cyclistes et participantes de la StraWoman dans le centre de Varèse (Varese)',
+    'blog.article.openjobmetis-scafati-vittoria-basket.title': 'Openjobmetis s\'impose à Scafati : premier succès officiel',
+    'blog.article.openjobmetis-scafati-vittoria-basket.excerpt': 'L\'Openjobmetis s\'impose 78-85 à Scafati, décrochant la première victoire officielle de la saison et la deuxième de son histoire sur le parquet campanien.',
+    'blog.article.openjobmetis-scafati-vittoria-basket.imageAlt': 'Match de basket de l\'Openjobmetis à Scafati',
+    'blog.article.storia-restauro-torre-velasca.title': 'Tour Velasca : histoire et restauration à la Villa Recalcati',
+    'blog.article.storia-restauro-torre-velasca.excerpt': 'L\'Ordre des architectes de Varese raconte la restauration de 2021 à 2025 et l\'histoire de la Torre Velasca entre architecture, design et réhabilitation.',
+    'blog.article.storia-restauro-torre-velasca.imageAlt': 'La tour Torre Velasca à Milan, exemple d\'architecture moderne et de restauration.',
+    'blog.article.bellucci-finale-jingshan-2026.title': 'Mattia Bellucci s’arrête à un pas du titre à Jingshan',
+    'blog.article.bellucci-finale-jingshan-2026.excerpt': 'Bellucci perd la finale de l’Open de Jingshan contre Harris au tie-break décisif après deux balles de match non converties. Le joueur de la province de Varèse monte au numéro 86 ATP.',
+    'blog.article.bellucci-finale-jingshan-2026.imageAlt': 'Mattia Bellucci en action lors d un tournoi Challenger sur dur',
 };
 
 export default blogMetaFr;

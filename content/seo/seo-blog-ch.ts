@@ -97323,6 +97323,108 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-protezione-civile-zurigo': {
+    title: 'Protezione civile Canton Zurigo: requisiti e indennità',
+    description: 'Protezione civile nel Cantone di Zurigo: requisiti, convocazioni e indennità nel quadro federale. Guida alle verifiche presso l\'autorità cantonale competente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, civile, canton, zurigo',
+    ogTitle: 'Protezione civile Canton Zurigo: requisiti e indennità',
+    ogDescription: 'Nel Cantone di Zurigo la protezione civile opera sotto coordinamento cantonale nell\'ambito della legge federale. Obblighi, convocazioni e indennità non vanno ricavati da importi generici: la verifica spetta all\'autorità competente.',
+    canonicalPath: '/articoli-svizzera/protezione-civile-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione civile Canton Zurigo: requisiti e indennità",
+      "description": "Protezione civile nel Cantone di Zurigo: requisiti, convocazioni e indennità nel quadro federale. Guida alle verifiche presso l'autorità cantonale competente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/protezione-civile-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operatori della protezione civile davanti a un edificio pubblico svizzero"
+      },
+      "datePublished": "2026-10-05T01:48:52+00:00",
+      "dateModified": "2026-10-05T01:48:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/protezione-civile-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assicurazione-immobili-zurigo': {
+    title: 'Assicurazione immobili Canton Zurigo: obbligo e premi',
+    description: 'Guida all\'assicurazione immobili nel Canton Zurigo: obbligo secondo il Cantone, ente o assicuratore autorizzato, coperture, premi e sinistri da verificare.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicurazione, immobili, canton, zurigo',
+    ogTitle: 'Assicurazione edifici a Zurigo: obbligo e premi',
+    ogDescription: 'Nel Canton Zurigo l\'obbligo per l\'assicurazione degli edifici dipende dal Cantone. La guida separa ente cantonale e assicuratore autorizzato e offre una traccia pratica per verificare coperture, premi e procedura in caso di sinistro.',
+    canonicalPath: '/articoli-svizzera/assicurazione-immobili-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicurazione immobili Canton Zurigo: obbligo e premi",
+      "description": "Guida all'assicurazione immobili nel Canton Zurigo: obbligo secondo il Cantone, ente o assicuratore autorizzato, coperture, premi e sinistri da verificare.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/assicurazione-immobili-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale nel Canton Zurigo per una guida sull'assicurazione immobili"
+      },
+      "datePublished": "2026-10-05T02:31:44+00:00",
+      "dateModified": "2026-10-05T02:31:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assicurazione-immobili-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-formazione-continua-zurigo-contributi': {
+    title: 'Formazione continua Canton Zurigo: requisiti e contributi',
+    description: 'Formazione continua nel Canton Zurigo: requisiti, programmi riconosciuti, termini della domanda e contributi da verificare presso la fonte ufficiale cantonale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, formazione, continua, canton, zurigo',
+    ogTitle: 'Canton Zurigo: requisiti per la formazione continua',
+    ogDescription: 'Nel Canton Zurigo la formazione continua non ha una procedura nazionale unica: requisiti, programmi riconosciuti, scadenze e importi vanno controllati presso l\'ufficio cantonale o l\'istituzione competente, distinguendo AFC/ESTV, UFAS/BSV e UST/BFS.',
+    canonicalPath: '/articoli-svizzera/formazione-continua-zurigo-contributi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Formazione continua Canton Zurigo: requisiti e contributi",
+      "description": "Formazione continua nel Canton Zurigo: requisiti, programmi riconosciuti, termini della domanda e contributi da verificare presso la fonte ufficiale cantonale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/formazione-continua-zurigo-contributi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula svizzera per un corso di formazione continua con adulti al lavoro."
+      },
+      "datePublished": "2026-10-05T03:02:04+00:00",
+      "dateModified": "2026-10-05T03:02:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/formazione-continua-zurigo-contributi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
