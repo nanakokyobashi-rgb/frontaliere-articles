@@ -1,6 +1,6 @@
-# Fast-publish one article: render its 4 locale pages + the section archive and
-# push them straight to the article shard repos and the CDN, skipping the full
-# site build.
+# Fast-publish one or more articles: render their 4 locale pages + the section
+# archive and push them straight to the article shard repos and the CDN,
+# skipping the full site build.
 #
 # WHY THIS EXISTS (issue #4974 item 3, migration §10.4 step 4)
 # ───────────────────────────────────────────────────────────
@@ -76,7 +76,11 @@ on:
   workflow_dispatch:
     inputs:
       article_id:
-        description: 'Article id to publish (empty = derive from the last corpus commit)'
+        description: 'Single article id (empty = derive all ids from the last corpus commit)'
+        required: false
+        type: string
+      article_ids:
+        description: 'JSON array of article ids to publish together (takes precedence over article_id)'
         required: false
         type: string
       section:
@@ -113,16 +117,34 @@ jobs:
           # workflow anyway.
           persist-credentials: false
 
-      - name: Resolve mode, article id and section
+      - name: Resolve mode, article ids and section
         id: mode
+        env:
+          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          ARTICLE_ID_INPUT: ${{ inputs.article_id }}
+          SECTION_INPUT: ${{ inputs.section }}
+          DRY_RUN_INPUT: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
+          ids=()
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             # Dispatch says what it wants; default stays dry so a manual poke
             # cannot publish by accident.
             dry=true
-            [ "${{ inputs.dry_run }}" = "false" ] && dry=false
+            [ "$DRY_RUN_INPUT" = "false" ] && dry=false
+            section="$SECTION_INPUT"
+            if [ -n "$ARTICLE_IDS_INPUT" ]; then
+              ids_json="$(printf '%s' "$ARTICLE_IDS_INPUT" | jq -ce '
+                if type == "array" and length > 0 and all(.[]; type == "string" and length > 0)
+                then unique
+                else error("article_ids must be a non-empty JSON array of article ids")
+                end
+              ')"
+              mapfile -t ids < <(printf '%s' "$ids_json" | jq -r '.[]')
+            elif [ -n "$ARTICLE_ID_INPUT" ]; then
+              ids=("$ARTICLE_ID_INPUT")
+            fi
           else
             # A push publishes, unless a kill switch says otherwise, and unless
             # it carries no article at all: a push that only touched this
@@ -140,39 +162,53 @@ jobs:
               dry=true
             fi
           fi
+
+          # Keep the legacy empty-dispatch behavior: with no explicit id, use
+          # the body files from the last corpus commit. Collect every match,
+          # not just the first one, so a batch commit is published whole.
+          if [ "${#ids[@]}" -eq 0 ]; then
+            changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
+            mapfile -t bodies < <(
+              printf '%s\n' "$changed" \
+                | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' \
+                | sort -u || true
+            )
+            for body in "${bodies[@]}"; do
+              [ -f "$body" ] || continue
+              body_id="$(basename "$body" .ts)"
+              case "$body" in
+                content/blog-body-ch/*) body_section=svizzera ;;
+                *)                      body_section=frontaliere ;;
+              esac
+              if [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
+                echo "::error::one commit changes both article sections; publish them in separate commits"
+                exit 1
+              fi
+              section="$body_section"
+              ids+=("$body_id")
+            done
+          fi
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
 
-          id="${{ inputs.article_id }}"
-          section="${{ inputs.section }}"
-
-          if [ -z "$id" ]; then
-            # Derive from the corpus commit: a generated article always adds a
-            # body file per locale under content/blog-body{,-ch}/<loc>/<id>.ts.
-            # `grep || true` — under `set -e` a no-match exit 1 would kill the
-            # step, and "no article in this push" is a normal outcome, not a
-            # failure.
-            body="$(git diff --name-only HEAD~1 HEAD 2>/dev/null \
-                    | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' | head -1 || true)"
-            if [ -n "$body" ]; then
-              id="$(basename "$body" .ts)"
-              case "$body" in
-                content/blog-body-ch/*) section=svizzera ;;
-                *)                      section=frontaliere ;;
-              esac
-            fi
-          fi
-
-          if [ -z "$id" ]; then
-            echo "no article body in this push — nothing to publish"
+          if [ "${#ids[@]}" -eq 0 ]; then
+            echo "no article body in this event — nothing to publish"
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
+          fi
+          ids_json="$(printf '%s\n' "${ids[@]}" | jq -R . | jq -cs 'unique')"
+          id="$(printf '%s' "$ids_json" | jq -r '.[0]')"
+          section="${section:-frontaliere}"
+          if [ "$section" != "frontaliere" ] && [ "$section" != "svizzera" ]; then
+            echo "::error::section must be frontaliere or svizzera"
+            exit 1
           fi
           {
             echo "skip=false"
             echo "id=$id"
-            echo "section=${section:-frontaliere}"
+            echo "ids=$ids_json"
+            echo "section=$section"
           } >> "$GITHUB_OUTPUT"
-          echo "resolved id=$id section=${section:-frontaliere} dry=$dry"
+          echo "resolved ids=$(printf '%s' "$ids_json" | jq -r 'join(", ")') section=$section dry=$dry"
 
       - name: Set up Node
         if: steps.mode.outputs.skip != 'true'
@@ -234,12 +270,14 @@ jobs:
           done
           [ "$fail" = "0" ] || exit 1
 
-      - name: Render the article (fast path)
+      - name: Render the articles (fast path)
         if: steps.mode.outputs.skip != 'true'
+        env:
+          ARTICLE_IDS_JSON: ${{ steps.mode.outputs.ids }}
         run: |
           set -euo pipefail
           npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
-            --id "${{ steps.mode.outputs.id }}" \
+            --ids "$ARTICLE_IDS_JSON" \
             --section "${{ steps.mode.outputs.section }}" \
             --out "$RUNNER_TEMP/fast-dist" \
             --summary "$RUNNER_TEMP/fast-summary.json"
@@ -271,6 +309,8 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
+          article_count="$(jq -r '.ids | length' "$summary")"
+          expected_ids="$(jq -c '.ids | sort' "$summary")"
 
           # Every path the summary promises must exist and be non-empty. A
           # zero-item archive renders "successfully" (the core EMITS-EMPTY by
@@ -278,9 +318,21 @@ jobs:
           # something.
           fail=0
           for loc in it en de fr; do
-            n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .paths | length' "$summary")"
-            if [ "${n:-0}" -lt 3 ]; then
-              echo "::error::locale $loc has only ${n:-0} paths (expected article + bridge + >=1 archive page)"
+            article_n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .articlePaths | length' "$summary")"
+            bridge_n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .bridgePaths | length' "$summary")"
+            hub_n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .hubPaths | length' "$summary")"
+            article_ids="$(jq -c --arg l "$loc" '[.shards[] | select(.locale==$l) | .articleIds[]?] | sort' "$summary")"
+            bridge_ids="$(jq -c --arg l "$loc" '[.shards[] | select(.locale==$l) | .bridgeIds[]?] | sort' "$summary")"
+            if [ "${article_n:-0}" -ne "$article_count" ] || [ "$article_ids" != "$expected_ids" ]; then
+              echo "::error::locale $loc has ${article_n:-0} article path(s) or the wrong article IDs (expected $article_count paths for $expected_ids; got $article_ids)"
+              fail=1
+            fi
+            if [ "${bridge_n:-0}" -ne "$article_count" ] || [ "$bridge_ids" != "$expected_ids" ]; then
+              echo "::error::locale $loc has ${bridge_n:-0} bridge path(s) or the wrong bridge IDs (expected $article_count paths for $expected_ids; got $bridge_ids)"
+              fail=1
+            fi
+            if [ "${hub_n:-0}" -lt 1 ]; then
+              echo "::error::locale $loc has no hub archive page"
               fail=1
             fi
           done
@@ -295,7 +347,7 @@ jobs:
           # The archive must not be empty. This is the defect that made the
           # first local render produce four pages with zero <li> items when the
           # corpus symlinks were missing — it did not fail, it published nothing.
-          it_archive="$(jq -r '.shards[] | select(.locale=="it") | .paths[2]' "$summary")"
+          it_archive="$(jq -r '.shards[] | select(.locale=="it") | .hubPaths[0]' "$summary")"
           items="$(grep -o '<li>' "$dist/$it_archive" | wc -l)"
           if [ "$items" -lt 1 ]; then
             echo "::error::IT archive $it_archive lists 0 articles — refusing to publish an empty archive over the live one"
@@ -310,7 +362,7 @@ jobs:
           # Measured: 4 of 42 rendered files differ, all of them article pages,
           # and nothing anywhere reports a problem. Same silent-degradation class
           # as the empty archive above, so it gets the same treatment.
-          it_article="$(jq -r '.shards[] | select(.locale=="it") | .paths[0]' "$summary")"
+          it_article="$(jq -r '.shards[] | select(.locale=="it") | .articlePaths[0]' "$summary")"
           if ! grep -q '"author":{"@type":"Person"' "$dist/$it_article"; then
             echo "::error::$it_article has no Person author in its NewsArticle JSON-LD — the article registry did not resolve (check the data/*-articles-data.ts symlinks)"
             fail=1
@@ -680,19 +732,20 @@ jobs:
               "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$PROBE_SEQ"
           }
 
-          # Poll $1 until it answers 200, at most $2 times. Last code observed
-          # is left in $POLL_CODE. $1 is never requested as-is: see probe_url.
+          # Poll $1 until it answers 200, at most $2 times, with optional curl
+          # timeout $3. Last code observed is left in $POLL_CODE. $1 is never
+          # requested as-is: see probe_url.
           poll_origin() {
-            local u="$1" attempts="$2" i
+            local u="$1" attempts="$2" timeout="${3:-20}" i
             POLL_CODE=000
             for i in $(seq 1 "$attempts"); do
               echo "poll_origin attempt $i/$attempts"
               set +e
-              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time "$timeout" \
                            -H 'Cache-Control: no-cache' "$(probe_url "$u")")"
               set -e
               [ "$POLL_CODE" = "200" ] && return 0
-              sleep 15
+              if [ "$i" -lt "$attempts" ]; then sleep 15; fi
             done
             return 1
           }
@@ -718,9 +771,26 @@ jobs:
           fi
 
           echo "── origin (hard gate)"
+          declare -A pages_rebuild_requested=()
+          declare -A origin_locale_gate_started=()
           while IFS=$'\t' read -r loc p0; do
             u="https://origin-$shard-$loc.frontaliereticino.ch/${p0%index.html}"
             repo="$owner/frontaliere-$shard-$loc"
+
+            # Wait/recover once per locale until its Pages deployment is live;
+            # then check each remaining article path once against that same build.
+            # A missing batch member cannot be repaired by repeating the same
+            # Pages wait for every ID, and doing so could exceed this job's timeout.
+            if [ -n "${origin_locale_gate_started[$loc]:-}" ]; then
+              if poll_origin "$u" 1 8; then
+                echo "  200  $u"
+              else
+                echo "::error::$u answers $POLL_CODE after the locale deployment gate passed"
+                fail=1
+              fi
+              continue
+            fi
+            origin_locale_gate_started[$loc]=1
 
             if poll_origin "$u" 12; then
               echo "  200  $u"
@@ -736,9 +806,15 @@ jobs:
             # legitimately outlast a 3-minute poll and still land moments
             # later. Requesting a second build here would race the one
             # already running, so this branch only waits; only `errored`
-            # (a build that already gave up) gets a rebuild request.
+            # (a build that already gave up) gets one rebuild request per locale.
             case "$PAGES_STATUS" in
               errored)
+                if [ -n "${pages_rebuild_requested[$loc]:-}" ]; then
+                  echo "::error::the Pages build for $repo is still 'errored' after its one rebuild request"
+                  fail=1
+                  continue
+                fi
+                pages_rebuild_requested[$loc]=1
                 echo "── the Pages build errored; requesting one rebuild of $repo"
                 set +e
                 rc="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
@@ -770,7 +846,7 @@ jobs:
             pages_latest "$repo"
             echo "::error::$u answers $POLL_CODE after a second poll — GitHub Pages build for $repo is '$PAGES_STATUS'${PAGES_ERROR:+ ($PAGES_ERROR)}. The push landed; this is a Pages build failure on the shard, not a missing article."
             fail=1
-          done < <(jq -r '.shards[] | [.locale, .paths[0]] | @tsv' "$summary")
+          done < <(jq -r '.shards[] | .locale as $l | .articlePaths[] | [$l, .] | @tsv' "$summary")
 
           # The apex probe goes through poll_origin too — same cache-bust, one
           # implementation. It used to be an inline copy of the same loop with a
@@ -792,9 +868,9 @@ jobs:
           # the part this pipeline can actually break.
           echo "── apex (best effort, through the Worker; edge freshness is the purge steps' job)"
           while IFS= read -r u; do
-            if poll_origin "$u" 8; then echo "  200  $u"
+            if poll_origin "$u" 1 8; then echo "  200  $u"
             else echo "::warning::$u still answers $POLL_CODE through the Worker on a cache-busted probe — so this is the apex routing or the shard origin itself, not a stale edge entry"; fi
-          done < <(jq -r '.shards[].url' "$summary")
+          done < <(jq -r '.shards[].urls[]' "$summary")
 
           [ "$fail" = "0" ] || exit 1
 
@@ -869,7 +945,7 @@ jobs:
           {
             echo "### fast-publish-article"
             echo
-            echo "- id: \`${{ steps.mode.outputs.id }}\`"
+            echo "- ids: \`${{ steps.mode.outputs.ids }}\`"
             echo "- section: \`${{ steps.mode.outputs.section }}\`"
             echo "- mode: \`$([ "${{ steps.mode.outputs.dry }}" = "true" ] && echo DRY || echo ARMED)\`"
             if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then

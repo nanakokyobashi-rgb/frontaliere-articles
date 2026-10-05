@@ -1,14 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/s-hhonja-wbo": {
-    "articleId": "comitato-consultivo-svizzera-digitale",
-    "ts": "2026-09-03T14:15:06.214Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1947841/ubs-pil-crescita-corregge-rialzo-stima": {
-    "articleId": "ubs-pil-crescita-2026-rialzo",
-    "ts": "2026-09-03T14:31:01.468Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/seco%3a-%22non-%c3%a8-un-boom%2c-ma-la-crescita-ha-un%27ampia-base%22/91999934": {
     "articleId": "seco-ampia-base-crescita",
     "ts": "2026-09-03T14:40:29.726Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/ticino/attualita/1954213/startup-intelligenza-team-classifica-farmaci-lugano-aziende-top100-svizzera-swiss": {
     "articleId": "startup-ticinesi-top100-2026",
     "ts": "2026-10-05T06:15:19.071Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/settanta-franchi-per-nove-ore-di-lavoro-gli-autisti-di-uber-in-svizzera-chiedono-condizioni-migliori/92151939": {
+    "articleId": "autisti-uber-svizzera-condizioni",
+    "ts": "2026-10-05T06:45:07.834Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/associazione-inquilini-lancia-allarme-su-prezzi-affitti/92166278": {
+    "articleId": "allarme-aumento-affitti-svizzera",
+    "ts": "2026-10-05T07:13:59.342Z",
     "keyForm": 2
   }
 }

@@ -7730,6 +7730,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.startup-ticinesi-top100-2026.title': 'Tre aziende ticinesi nella Top100 Swiss Startup Award 2026',
     'blog.article.startup-ticinesi-top100-2026.excerpt': 'InkVivo, Jaipur Robotics e In Virtuo Laboratories rappresentano il Ticino nella classifica delle cento startup svizzere più promettenti del 2026.',
     'blog.article.startup-ticinesi-top100-2026.imageAlt': 'Tre startup ticinesi tra le cento più promettenti al Top100 Swiss Startup Award 2026',
+    'blog.article.autisti-uber-svizzera-condizioni.title': 'Settanta franchi per nove ore di lavoro: la protesta',
+    'blog.article.autisti-uber-svizzera-condizioni.excerpt': 'I conducenti di Uber in Svizzera denunciano condizioni peggiorate e chiedono maggiori diritti e tutele. Tra tariffe basse e l\'arrivo di Bolt.',
+    'blog.article.autisti-uber-svizzera-condizioni.imageAlt': 'Autisti di Uber in Svizzera chiedono condizioni di lavoro migliori',
+    'blog.article.allarme-aumento-affitti-svizzera.title': 'Affitti in Svizzera: +32% in vent\'anni, l\'allarme dell\'ASI',
+    'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'L\'Associazione svizzera inquilini segnala un rincaro del 32,1% tra il 2005 e il 2025. Sotto pressione i redditi bassi: chi guadagna meno di 4\'000 franchi spende il 37,8% per la casa.',
+    'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Edificio residenziale urbano in Svizzera',
 };
 
 export default blogMetaChIt;

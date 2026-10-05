@@ -23236,6 +23236,26 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'autisti-uber-svizzera-condizioni',
+    category: 'novita',
+    date: '2026-10-05T06:45:07.535Z',
+    image: '/images/blog/autisti-uber-svizzera-condizioni.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'allarme-aumento-affitti-svizzera',
+    category: 'pratico',
+    date: '2026-10-05T07:13:59.007Z',
+    image: '/images/blog/allarme-aumento-affitti-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
