@@ -90,6 +90,14 @@ describe('classifica dogane per cantone', () => {
     assert.equal(buildData(TODAY, w, 'TI')._rankedCount, 8);
   });
 
+  it('Ticino esclude un valico con `canton: null`, tombstone del registry', () => {
+    const w = fixture();
+    for (const half of ['current', 'previous']) w[half].perCrossing['gaggiolo'].canton = null;
+    const snapshot = computeSnapshot(TODAY, w, 'TI');
+    assert.equal(snapshot.ranking.length, 7);
+    assert.doesNotMatch(JSON.stringify(snapshot), /gaggiolo/);
+  });
+
   it('un cantone senza foto dichiarata non puo\' essere registrato (immagine nulla)', () => {
     assert.equal(staticMetaFor('GE').image, null);
     assert.equal(staticMetaFor('TI').image, 'mendrisio.webp');
