@@ -793,18 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/attualita/lombardia-82-milioni-di-euro-per-potenziare-la-rete-ferroviaria-anche-a-como": {
-      "section": "frontaliere",
-      "ts": 1791023059255
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nasce-lo-sportello-dellagricoltura-per-imprese-e-operatori-del-ticino-e-lago-maggiore/2695627": {
-      "section": "frontaliere",
-      "ts": 1791026283479
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/fim-cisl-dei-laghi-linclusione-e-un-diritto-dalle-storie-di-disabilita-alla-contrattazione-in-azienda/2697043": {
-      "section": "frontaliere",
-      "ts": 1791029170390
-    },
     "svizzera::https://www.laregione.ch/svizzera/svizzera/1954477/scappano-su-un-monopattino-elettrico-ferito-un-agente": {
       "section": "svizzera",
       "ts": 1791032005242
@@ -1040,6 +1028,10 @@
     "frontaliere::https://www.ticinonews.ch/ticino/sacha-lembo-nominato-direttore-del-controllo-cantonale-delle-finanze-443971": {
       "section": "frontaliere",
       "ts": 1791190885729
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/villa-principe-leopoldo-76-licenziamenti-per-la-ristrutturazione-dellhotel-443974": {
+      "section": "frontaliere",
+      "ts": 1791201995923
     }
   }
 }
