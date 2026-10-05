@@ -592,7 +592,9 @@ export const REWIRE_CONTRACTS = [
     fixture: 'generator/tests/fixtures/rewire/pension-parameters.json',
     recorded: {
       at: '2026-10-05',
-      trimmedTo: 'documento intero (26 cantoni), numeri non alterati',
+      trimmedTo:
+        '26 cantoni con la cassa di compensazione; cassa pensioni pubblica e imposta sul capitale tenute ' +
+        'solo per GE, GR, TI, VS e ZH; numeri non alterati',
     },
     readBy: [
       {
