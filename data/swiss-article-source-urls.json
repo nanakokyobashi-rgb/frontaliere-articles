@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/cronaca/1946429/ricerca-eoc-guarda-svizzera-giornata": {
-    "articleId": "ricerca-medicina-ticino-innovazione",
-    "ts": "2026-09-04T04:37:39.508Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1947960/bally-caslano-lavoro-ag-stabilimento": {
     "articleId": "bally-caslano-licenziamenti-2025",
     "ts": "2026-09-04T04:55:26.729Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1954783/svizzera-posti-collaboratori-coinvolti-tamedia-tempo": {
     "articleId": "tamedia-taglio-posti-lavoro",
     "ts": "2026-10-05T12:36:39.449Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954786/india-parmelin-guy-visita-svizzera": {
+    "articleId": "guy-parmelin-visita-india",
+    "ts": "2026-10-05T13:21:32.663Z",
     "keyForm": 2
   }
 }
