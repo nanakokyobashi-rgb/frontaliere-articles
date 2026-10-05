@@ -65,6 +65,8 @@
  * ragione di `cross-section-dedup.mjs`.
  */
 
+import { createHash } from 'node:crypto';
+
 // ── La CHIAVE del ledger ─────────────────────────────────────────────────────
 //
 // ## Il difetto che chiude
@@ -138,6 +140,102 @@
 // a valle: senza il ponte, per la durata della transizione la stessa fonte
 // potrebbe produrre un articolo in entrambe le sezioni.
 
+// ── L'identita' dell'ITEM, quando l'URL non basta ───────────────────────────
+//
+// ## Il difetto che chiude (P5b)
+//
+// Ogni chiave qui sotto assume che un URL sia UN documento. Alcune testate
+// hanno pagine-contenitore a URL fisso il cui contenuto e' la notizia del
+// momento: il feed le riemette con lo stesso `<link>` (e lo stesso `<guid>`,
+// che e' il permalink) e un titolo diverso a ogni aggiornamento.
+//
+// MISURATO il 2026-10-05 sui feed di suedostschweiz.ch (canton-gr, canton-gl):
+//
+//   /graubuenden/verkehrsticker-1574112          «Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder»
+//   /graubuenden/kurzvermeldet-2-1413736         «Schluein vs. Sana Surselva: …»
+//   /graubuenden/bonaduz-feuerwehr-loescht-brand-auf-dach-mit-photovoltaikanlage-1413717
+//                                                «Deshalb war die Strasse gesperrt: Anhänger von Lastwagen …»
+//   /glarus/meldungen-aus-dem-glarnerland-1916134 «Bye bye Billettschalter: SBB schliessen Reisezentrum …»
+//
+// e sul feed Tamedia di bazonline (canton-basilea): tre «Ticker» permanenti
+// (`/ticker-ukraine-russland-krieg-moskau-kyjiw-34-…`) il cui titolo e'
+// l'ultima notizia. L'ultimo esempio di suedostschweiz dice perche' non basta
+// riconoscere la parola «ticker» nello slug: il contenitore e' nato come
+// articolo sull'incendio di Bonaduz e oggi porta un incidente stradale.
+//
+// Con la chiave sul solo URL: generato UN articolo da un contenitore, ogni
+// notizia successiva a quell'indirizzo e' «URL gia' usata»; un abort di
+// REGOLA #0 su una notizia blocca le successive per 48 h; e il ramo fuzzy
+// confronta con gli id esistenti uno slug che non descrive piu' la notizia.
+//
+// ## La forma: l'identita' viaggia NELL'URL, come frammento
+//
+// Lo scanner (`canton-news-sources.mjs`, quirk `urlReusedForDifferentStories`
+// del profilo) aggiunge all'URL `#ft-item=<impronta del titolo>`. Il frammento
+// non arriva mai al server, quindi l'URL resta scaricabile cosi' com'e'; e
+// poiche' ogni consumatore di create-article.mjs (ledger, memo del topic-gate,
+// dedup del pool) passa da `newsUrlKey`, basta che la chiave lo conservi
+// perche' TUTTI distinguano due notizie allo stesso indirizzo — senza far
+// passare un secondo campo per ognuno di quei punti. Ogni altro frammento
+// continua a essere ignorato: per gli URL senza `#ft-item=` la chiave non
+// cambia di un byte.
+//
+// Il costo dichiarato: un titolo ritoccato dalla redazione cambia l'impronta, e
+// la stessa notizia puo' ripassare dal ledger. E' un duplicato che PASSA, e
+// sotto ci sono `preFlightHeadlineCheck`, `checkForDuplicates` e
+// `checkSemanticNearDuplicate`; il collasso di notizie diverse sulla stessa
+// chiave, invece, non ha niente sotto. Stessa asimmetria della denylist qui
+// sotto.
+
+/** Nome del frammento che porta l'identita' dell'item (`#ft-item=<impronta>`). */
+export const ITEM_IDENTITY_FRAGMENT = 'ft-item';
+
+const ITEM_IDENTITY_RE = new RegExp(`^#${ITEM_IDENTITY_FRAGMENT}=([0-9a-f]{12})$`);
+
+/**
+ * Impronta stabile di cio' che distingue l'item (il titolo; la data di
+ * pubblicazione dove la fonte non da' titoli). Maiuscole, accenti e
+ * punteggiatura non contano: «Verkehr fliesst wieder!» e «verkehr fliesst
+ * wieder» sono lo stesso item. Un'entita' HTML (`&amp;`, `&#039;`) vale da
+ * separatore, come il carattere di punteggiatura che quasi sempre codifica.
+ *
+ * @param {string} text
+ * @returns {string | null} 12 cifre esadecimali, o null se non resta testo
+ */
+export function itemIdentityToken(text) {
+  const normalized = String(text ?? '')
+    .replace(/&(?:#x?[0-9a-f]+|[a-z]+);/gi, ' ')
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+  if (!normalized) return null;
+  return createHash('sha1').update(normalized).digest('hex').slice(0, 12);
+}
+
+/** L'URL con l'identita' dell'item nel frammento (un frammento gia' presente e' sostituito). */
+export function withItemIdentity(rawUrl, token) {
+  const raw = String(rawUrl ?? '');
+  if (!token) return raw;
+  const at = raw.indexOf('#');
+  return `${at === -1 ? raw : raw.slice(0, at)}#${ITEM_IDENTITY_FRAGMENT}=${token}`;
+}
+
+/** L'impronta dell'item portata dall'URL, o null. */
+export function itemIdentityOf(rawUrl) {
+  const raw = String(rawUrl ?? '');
+  const at = raw.indexOf('#');
+  if (at === -1) return null;
+  return ITEM_IDENTITY_RE.exec(raw.slice(at))?.[1] ?? null;
+}
+
+/** L'URL senza l'identita' dell'item: l'indirizzo da citare e da mostrare. */
+export function stripItemIdentity(rawUrl) {
+  const raw = String(rawUrl ?? '');
+  return itemIdentityOf(raw) ? raw.slice(0, raw.indexOf('#')) : raw;
+}
+
 /** La forma di chiave che questo modulo scrive: path + query identificante. */
 export const SOURCE_URL_KEY_FORM = 2;
 
@@ -189,7 +287,9 @@ export function legacyNewsUrlKey(rawUrl) {
  * documento, ordinati, con i marcatori di tracciamento tolti.
  *
  * Proprietà su cui si appoggia la compatibilità: se dopo il filtro non resta
- * nessun parametro, il risultato è **identico** a `legacyNewsUrlKey`.
+ * nessun parametro, e l'URL non porta l'identità di un item (`#ft-item=…`,
+ * vedi sopra), il risultato è **identico** a `legacyNewsUrlKey`. Con
+ * l'identità dell'item la chiave la porta in coda, in entrambi i casi.
  *
  * Il NOME del parametro viene minuscolizzato (uil.it emette lo stesso feed con
  * `ID_News` e `ID_NEWS`: sono lo stesso documento), il VALORE no — un id può
@@ -216,7 +316,11 @@ export function newsUrlKey(rawUrl) {
     if (!v) continue;
     parts.push([name.toLowerCase(), v]);
   }
-  if (parts.length === 0) return base;
+  // L'identita' dell'item (`#ft-item=…`), dove lo scanner l'ha messa: vedi il
+  // blocco «L'identita' dell'ITEM» sopra. Nessun altro frammento entra in chiave.
+  const item = itemIdentityOf(raw);
+  const suffix = item ? `#${ITEM_IDENTITY_FRAGMENT}=${item}` : '';
+  if (parts.length === 0) return `${base}${suffix}`;
   parts.sort((a, b) => (a[0] === b[0] ? (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0) : a[0] < b[0] ? -1 : 1));
   // Il taglio a MAX_KEY_PARAMS è su una lista GIÀ ordinata, quindi è
   // deterministico: due volte lo stesso URL danno due volte la stessa chiave.
@@ -224,7 +328,7 @@ export function newsUrlKey(rawUrl) {
   // visto nel reale (massimo misurato: 4) e, se capitasse, cadrebbe negli
   // strati di dedup a valle.
   const query = parts.slice(0, MAX_KEY_PARAMS).map(([n, v]) => `${n}=${v}`).join('&');
-  return `${base}?${query}`;
+  return `${base}?${query}${suffix}`;
 }
 
 /**

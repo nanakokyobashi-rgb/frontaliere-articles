@@ -3740,7 +3740,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -3929,8 +3929,13 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
   // Serve soprattutto al ramo CROSS-SEZIONE di #251, che e' l'unico senza una
   // rete a valle: per la durata della transizione una fonte gia' usata
   // dall'altra sezione sotto la chiave vecchia resta bloccata.
+  //
+  // Non per un URL che porta l'identita' di un item (`#ft-item=…`): li' il path
+  // nudo e' un contenitore che la fonte riusa per notizie diverse, e una voce
+  // sul path nudo non dice quale notizia fosse (vedi source-url-ledger.mjs).
+  const reusedUrl = itemIdentityOf(headlineUrl) !== null;
   const legacyKey = legacyNewsUrlKey(headlineUrl);
-  if (legacyKey !== normalized) {
+  if (!reusedUrl && legacyKey !== normalized) {
     const legacy = findCrossSectionSourceDuplicate(
       legacyKey,
       ledgerViewsForLookup(loadAllSectionSourceUrls(), SECTION_NAME, { keyForm: 1 }),
@@ -3940,6 +3945,11 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
   }
 
   // Fuzzy URL slug vs existing article ID match
+  // Saltato per gli URL riusati: lo slug del contenitore non descrive la
+  // notizia (suedostschweiz, 2026-10-05: sotto `bonaduz-feuerwehr-loescht-brand-…`
+  // c'e' un incidente stradale), quindi il confronto con gli id esistenti
+  // bloccherebbe una notizia nuova per le parole di una vecchia.
+  if (reusedUrl) return { used: false };
   const urlWords = extractUrlSlugWords(headlineUrl);
   if (urlWords.length < 2) return { used: false };
 
@@ -16675,7 +16685,12 @@ async function main() {
 }
 
 /** Core article pipeline: fetch → generate IT → validate → duplicates → translate → sanitize → image → modify files → git */
-async function generateAndValidateArticle(url, sourceContext = null) {
+async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
+  // Una fonte che riusa gli URL arriva con l'identita' dell'item nel frammento
+  // (`#ft-item=…`, vedi lib/source-url-ledger.mjs). Quella forma serve al
+  // LEDGER (in fondo, recordSourceUrl); tutto il resto — scaricare la pagina,
+  // i gate, la citazione pubblicata — usa l'indirizzo com'e' sul sito.
+  const url = stripItemIdentity(sourceUrl);
   // Scope the local-only wall-clock guard to THIS headline (2026-07-06,
   // PR #3704 review): the flag is set by any callLLM() in the process that
   // cascades to local/fallback — including a PREVIOUS headline's retries,
@@ -17985,7 +18000,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   }
 
   // Track source URL for future duplicate prevention
-  recordSourceUrl(url, data.id);
+  recordSourceUrl(sourceUrl, data.id);
 
   // Step 5: Git add
   console.error('\n📦 Staging file:');

@@ -48,9 +48,23 @@
  *                            da sommario al classifier
  *   - `datetimeYearOffset` → `<time datetime>` con l'anno sbagliato (ur.ch:
  *                            2626): le date oltre domani si correggono dell'offset
+ *   - `articlePathPattern` → fonti `html-links`: regex su path + query dei link
+ *                            che sono articoli; gli altri sono navigazione
+ *                            (vedi `filterArticleLinks`)
+ *   - `urlReusedForDifferentStories` → la fonte riemette lo stesso URL con
+ *                            notizie diverse (ticker, «Kurzmeldungen»),
+ *                            ovunque (`true`) o sui path di una regex:
+ *                            l'identita' dell'item e' URL + titolo, portata
+ *                            nell'URL come `#ft-item=…` (vedi
+ *                            `applyItemIdentity` e `source-url-ledger.mjs`)
+ *
+ * Su ogni fonte `html-links` la cornice del sito (`<nav>`, header e footer di
+ * pagina) si toglie prima di cercare i link: vedi `stripPageChrome`.
  *
  * User-Agent onesto (D10: niente UA camuffato), lo stesso dei crawler eventi.
  */
+
+import { itemIdentityToken, withItemIdentity } from './source-url-ledger.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -171,6 +185,153 @@ function parseSqlDateTime(raw) {
   const m = /^\s*(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?\s*$/.exec(String(raw || ''));
   if (!m) return null;
   return validDate(new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]), Number(m[4] || 0), Number(m[5] || 0), Number(m[6] || 0)));
+}
+
+// ── Navigazione delle pagine HTML ────────────────────────────────────────────
+
+/** Ruoli ARIA che marcano un'area di navigazione o la cornice del sito. */
+const CHROME_ROLE_RE = /\brole\s*=\s*["']?(?:navigation|banner|contentinfo)\b/i;
+/**
+ * Contenitori che rendono `<header>`/`<footer>` l'intestazione di una SEZIONE
+ * e non del sito: e' la regola HTML-AAM per cui un header/footer e' landmark
+ * `banner`/`contentinfo` solo fuori da article, aside, main, nav e section.
+ */
+const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
+/** Il contenuto principale della pagina: un'area che lo contiene non e' cornice. */
+const MAIN_CONTENT_RE = /<main(?=[\s/>])|\brole\s*=\s*["']?main\b/i;
+
+/**
+ * Le aree di navigazione e la cornice del sito tolte da una pagina HTML:
+ * ogni `<nav>`, ogni elemento con `role="navigation|banner|contentinfo"`, e
+ * `<header>`/`<footer>` quando sono del sito (fuori da article, aside, main,
+ * section). Il resto del documento resta byte per byte com'era.
+ *
+ * Perche' esiste (P5b, misurato il 2026-10-05): `extractHeadlines` tiene ogni
+ * `<a>` con un testo di 15-300 caratteri. Sulla pagina news di eoc.ch quelli
+ * sono 93 link, 9 dei quali articoli: gli altri 84 sono il menu del sito
+ * («Soggiorno in ospedale», «Orari visite e sedi»), senza data. Quando nessun
+ * comunicato cade nella finestra di recency la fonte cede le sue voci SENZA
+ * data, cioe' il menu, e il dry-run di P6b ne ha scelta una come notizia.
+ *
+ * Un `<header>` dentro `<article>` resta: e' la forma WordPress del titolo
+ * dell'articolo (`<article><header><h2><a>`), cioe' proprio il link da tenere.
+ * Un elemento senza chiusura bilanciata resta: tagliare fino alla fine del
+ * documento costerebbe piu' di qualche link di menu.
+ *
+ * @param {string} html
+ * @returns {{ html: string, removed: number }} la pagina senza le aree, e quante
+ */
+export function stripPageChrome(html) {
+  const src = String(html || '');
+  // Commenti, script e stile non sono markup: un `<nav>` scritto in un template
+  // JS non apre niente. Mascherati a pari lunghezza, gli indici restano quelli
+  // del documento originale.
+  const masked = src.replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, (m) => ' '.repeat(m.length));
+  const tagRe = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*)>/g;
+  const ranges = [];
+  let sectioningDepth = 0;
+  let m;
+  while ((m = tagRe.exec(masked)) !== null) {
+    const closing = m[1] === '/';
+    const name = m[2].toLowerCase();
+    const attrs = m[3] || '';
+    if (SECTIONING_TAGS.has(name)) {
+      sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
+      if (closing) continue;
+    }
+    if (closing || /\/\s*$/.test(attrs)) continue;
+    const isChrome = name === 'nav'
+      || CHROME_ROLE_RE.test(attrs)
+      || ((name === 'header' || name === 'footer') && sectioningDepth === 0);
+    if (!isChrome) continue;
+    const end = matchingCloseEnd(masked, name, tagRe.lastIndex);
+    if (end === -1) continue;
+    // Una «navigazione» che contiene il contenuto principale e' un wrapper
+    // marcato male, non un menu: aarau.ch avvolge sottomenu E `<main>` in un
+    // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
+    // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
+    if (MAIN_CONTENT_RE.test(masked.slice(tagRe.lastIndex, end))) continue;
+    ranges.push([m.index, end]);
+    // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
+    // aperti E chiusi li' dentro) non sposta il conteggio.
+    tagRe.lastIndex = end;
+  }
+  if (ranges.length === 0) return { html: src, removed: 0 };
+  let out = '';
+  let at = 0;
+  for (const [start, end] of ranges) {
+    out += src.slice(at, start);
+    at = end;
+  }
+  return { html: out + src.slice(at), removed: ranges.length };
+}
+
+/** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
+function matchingCloseEnd(masked, name, from) {
+  const re = new RegExp(`<(/?)${name}(?=[\\s/>])[^>]*>`, 'gi');
+  re.lastIndex = from;
+  let depth = 1;
+  let m;
+  while ((m = re.exec(masked)) !== null) {
+    if (m[1] === '/') {
+      depth -= 1;
+      if (depth === 0) return re.lastIndex;
+    } else if (!/\/\s*>$/.test(m[0])) {
+      depth += 1;
+    }
+  }
+  return -1;
+}
+
+function urlWithoutHash(raw) {
+  try {
+    const u = new URL(raw);
+    u.hash = '';
+    return u.href;
+  } catch {
+    return String(raw || '');
+  }
+}
+
+/**
+ * I link di una pagina `html-links` che sono articoli, tolti quelli che la
+ * cornice non marca come navigazione (menu laterali in `<div>`, ricerche
+ * suggerite, «salta al contenuto»). Due regole:
+ *
+ *   1. un link alla pagina stessa (l'URL dell'elenco, frammento a parte) non
+ *      e' mai un articolo: vale per ogni fonte;
+ *   2. `quirks.articlePathPattern` (regex su path + query), dove il profilo lo
+ *      dichiara: restano solo i link che lo rispettano. Su eoc.ch, dopo
+ *      `stripPageChrome`, restavano 7 link che non sono comunicati (le
+ *      ricerche suggerite, l'elenco stesso, un sondaggio); i 9 comunicati
+ *      stanno tutti sotto `/media-e-news/news/<anno>/`.
+ *
+ * Il pattern e' DICHIARATO per fonte e non inferito dai link datati della
+ * pagina, perche' l'inferenza sbaglia proprio sulle testate: misurato il
+ * 2026-10-05, su lacote.ch i soli link datati sono il widget `/flash-sport/` e
+ * su lemanbleu.ch le `/fr/Emissions/`, mentre le notizie sono i link SENZA
+ * data fuori da quelle cartelle. Una regola automatica le avrebbe tolte.
+ *
+ * @param {Array<{url: string, headline: string, date: Date | null}>} headlines
+ * @param {string} pageUrl
+ * @param {{ quirks?: { articlePathPattern?: string } }} [source]
+ * @returns {{ headlines: Array<object>, dropped: number }}
+ */
+export function filterArticleLinks(headlines, pageUrl, source = {}) {
+  const self = urlWithoutHash(pageUrl);
+  const pattern = source?.quirks?.articlePathPattern;
+  const re = pattern ? new RegExp(pattern) : null;
+  const kept = headlines.filter((h) => {
+    if (urlWithoutHash(h.url) === self) return false;
+    if (!re) return true;
+    try {
+      const u = new URL(h.url);
+      return re.test(u.pathname + u.search);
+    } catch {
+      return false;
+    }
+  });
+  return { headlines: kept, dropped: headlines.length - kept.length };
 }
 
 // ── Parser ───────────────────────────────────────────────────────────────────
@@ -423,6 +584,55 @@ export function applyDatetimeYearOffset(items, offset, now = new Date()) {
   });
 }
 
+// ── Fonti che riusano gli URL ────────────────────────────────────────────────
+
+/**
+ * `urlReusedForDifferentStories`: l'URL della voce prende l'identita'
+ * dell'item (`#ft-item=<impronta>`), cosi' due notizie allo stesso indirizzo
+ * non sono piu' la stessa voce per ledger, memo del topic-gate e dedup. Il
+ * perche' e la misura sono in `source-url-ledger.mjs`.
+ *
+ * Il quirk dice DOVE la fonte riusa gli URL:
+ *   - `true`: ovunque. suedostschweiz.ch: il contenitore non si riconosce
+ *     dall'indirizzo (uno e' nato come articolo su un incendio a Bonaduz);
+ *   - una regex sul path: solo li'. Tamedia: `^/ticker-`. Fuori dal pattern
+ *     l'URL resta l'identita', ed e' voluto: il 2026-10-05 lo stesso articolo
+ *     di bazonline (`/femizid-binningen-…`) ha cambiato titolo fra due letture
+ *     a 16 minuti, e con l'impronta del titolo sarebbe ripassato dal ledger
+ *     come notizia nuova.
+ *
+ * L'impronta e' del TITOLO dato dalla fonte. Dove il titolo e' ricavato dallo
+ * slug (`titleFromSlug`, sitemap senza `news:title`) non identifica niente —
+ * lo slug e' proprio cio' che la fonte riusa — e vale la data di
+ * pubblicazione; una voce senza titolo ne' data non ha identita' e si scarta.
+ *
+ * @param {Array<{url: string, headline: string, date: Date | null, titleFromSlug?: boolean}>} headlines
+ * @param {true | string} scope il valore del quirk
+ * @returns {{ headlines: Array<object>, identified: number, dropped: number }}
+ */
+export function applyItemIdentity(headlines, scope = true) {
+  const pathRe = typeof scope === 'string' ? new RegExp(scope) : null;
+  const out = [];
+  let identified = 0;
+  for (const h of headlines) {
+    if (pathRe) {
+      let path = null;
+      try { path = new URL(h.url).pathname; } catch { /* URL illeggibile: resta com'e' */ }
+      if (path === null || !pathRe.test(path)) {
+        out.push(h);
+        continue;
+      }
+    }
+    const token = h.titleFromSlug
+      ? (h.date ? itemIdentityToken(h.date.toISOString()) : null)
+      : itemIdentityToken(h.headline);
+    if (!token) continue;
+    identified += 1;
+    out.push({ ...h, url: withItemIdentity(h.url, token) });
+  }
+  return { headlines: out, identified, dropped: headlines.length - out.length };
+}
+
 // ── Cortesia verso l'host ────────────────────────────────────────────────────
 
 /**
@@ -546,8 +756,16 @@ export async function scanCantonSource(source, ctx) {
         const leads = rssItemLeads(text, url);
         return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
       }
-      case 'html-links':
-        return ctx.extractHeadlines(text, url);
+      case 'html-links': {
+        // Prima la cornice del sito (menu, header, footer), poi i link che
+        // non sono articoli: vedi stripPageChrome e filterArticleLinks.
+        const page = stripPageChrome(text);
+        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url), url, source);
+        if (page.removed > 0 || links.dropped > 0) {
+          notes.push(`navigazione: ${page.removed} aree tolte, ${links.dropped} link non articolo scartati`);
+        }
+        return links.headlines;
+      }
       case 'json-entities':
         return extractJsonEntitiesItems(text, url);
       case 'json-api':
@@ -590,6 +808,11 @@ export async function scanCantonSource(source, ctx) {
   }
   if (quirks.paywall) {
     headlines = headlines.map((h) => ({ ...h, _paywall: quirks.paywall }));
+  }
+  if (quirks.urlReusedForDifferentStories) {
+    const reused = applyItemIdentity(headlines, quirks.urlReusedForDifferentStories);
+    if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza titolo ne' data scartate (nessuna identita')`);
+    headlines = reused.headlines;
   }
   if (quirks.emptyPubDate) {
     headlines = headlines.map((h) => (h.date ? h : { ...h, _undatedReason: 'emptyPubDate' }));

@@ -15,7 +15,11 @@
  *   - i quirk: charset dichiarato nel prologo XML, pubDate vuoto, anno
  *     sbagliato nei `<time datetime>`, paywall title+lead, crawl-delay e
  *     budget di richieste, periodo delle sitemap settimanali;
- *   - lo User-Agent e' quello dichiarato (D10: niente UA camuffato).
+ *   - lo User-Agent e' quello dichiarato (D10: niente UA camuffato);
+ *   - P5b: su una pagina `html-links` i link di navigazione non entrano nel
+ *     pool (cornice del sito tolta, `articlePathPattern` dove dichiarato), e
+ *     una fonte che riusa gli URL per notizie diverse da' a ogni voce
+ *     un'identita' che il ledger distingue (`urlReusedForDifferentStories`).
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -28,16 +32,20 @@ import {
   MAX_INLINE_CRAWL_DELAY_SECONDS,
   SUPPORTED_CANTON_PARSERS,
   applyDatetimeYearOffset,
+  applyItemIdentity,
   createHostThrottle,
   decodeResponseBody,
   extractJsonApiItems,
   extractJsonEntitiesItems,
   extractSitemapNewsItems,
+  filterArticleLinks,
   isoWeekOf,
   periodSitemapUrls,
   scanCantonSource,
   sourceRequestBudget,
+  stripPageChrome,
 } from '../scripts/lib/canton-news-sources.mjs';
+import { itemIdentityOf, newsUrlKey, stripItemIdentity } from '../scripts/lib/source-url-ledger.mjs';
 import { PARSERS } from '../../scripts/ci/validate-canton-sections.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -308,4 +316,178 @@ test('User-Agent dichiarato (D10) e niente HTTP/2 chiesto a undici (http1Only pe
 test('un parser fuori elenco e\' un errore, non una fonte vuota', async () => {
   const { impl } = fakeFetch({});
   await assert.rejects(scanCantonSource({ url: 'https://x.ch/a.csv', parser: 'csv', quirks: {} }, ctx(impl)), /non supportato/);
+});
+
+// ── P5b: navigazione delle pagine html-links ────────────────────────────────
+//
+// Le tre pagine sono le risposte reali del 2026-10-05, ridotte (script, stile
+// e immagini tolti; al massimo 3 voci per lista e 4 blocchi uguali per
+// contenitore): la struttura nav/header/main/footer e' quella del sito.
+
+const EOC_URL = 'https://www.eoc.ch/media-e-news/news.html';
+
+test('eoc.ch: il menu del sito non entra nel pool, restano i comunicati', async () => {
+  const html = fixture('eoc-news.html').toString('utf8');
+  const before = extractHeadlines(html, EOC_URL);
+  // La premessa, cioe' il difetto: 53 link, 4 comunicati, e fra gli altri la
+  // voce di menu che il dry-run di P6b ha scelto come notizia.
+  assert.equal(before.length, 53);
+  assert.equal(before.filter((h) => h.date).length, 4);
+  assert.ok(before.some((h) => h.headline === 'Soggiorno in ospedale'), 'premessa: il menu e\' nel pool dell\'estrattore storico');
+
+  const source = sourceOf('TI', EOC_URL);
+  const { impl } = fakeFetch({ [EOC_URL]: { body: html, contentType: 'text/html; charset=UTF-8' } });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 4);
+  for (const h of out.headlines) {
+    assert.match(new URL(h.url).pathname, /^\/media-e-news\/news\/2026\//);
+    assert.ok(h.date, `${h.url} e' un comunicato datato`);
+  }
+  assert.ok(out.notes.some((n) => /navigazione: 4 aree tolte, 3 link non articolo scartati/.test(n)), `nota della fonte: ${out.notes.join(' | ')}`);
+});
+
+test('eoc.ch: tolta la cornice restano link che non sono comunicati, e li toglie articlePathPattern', () => {
+  const html = fixture('eoc-news.html').toString('utf8');
+  const page = stripPageChrome(html);
+  assert.equal(page.removed, 4, 'header, footer, breadcrumb e menu mobile');
+  const links = extractHeadlines(page.html, EOC_URL);
+  // La ricerca suggerita, il sondaggio e l'elenco stesso stanno in <main>,
+  // fuori da ogni <nav>: e' il caso per cui serve il pattern dichiarato.
+  assert.deepEqual(
+    links.filter((h) => !h.date).map((h) => new URL(h.url).pathname).sort(),
+    ['/eoc-sport.html', '/info/search.html', '/media-e-news/news.html'],
+  );
+  // Senza pattern cade solo il link alla pagina stessa (vale per ogni fonte).
+  const generic = filterArticleLinks(links, EOC_URL, { quirks: {} });
+  assert.equal(generic.dropped, 1);
+  assert.ok(!generic.headlines.some((h) => new URL(h.url).pathname === '/media-e-news/news.html'));
+  const declared = filterArticleLinks(links, EOC_URL, sourceOf('TI', EOC_URL));
+  assert.equal(declared.headlines.length, 4);
+  assert.equal(declared.dropped, 3);
+});
+
+test('zug4you.ch: <header> dentro <article> e\' il titolo dell\'articolo e resta', async () => {
+  const url = 'https://www.zug4you.ch/en/news';
+  const html = fixture('zug4you-news.html').toString('utf8');
+  // Togliere OGNI <header> (la regola ingenua) azzererebbe la fonte: i 4
+  // titoli stanno tutti in `<article><header><h2><a>`.
+  const naive = html.replace(/<(header|footer)\b[\s\S]*?<\/\1>/gi, '');
+  assert.equal(extractHeadlines(naive, url).length, 0, 'premessa: i titoli sono dentro <header>');
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource(sourceOf('ZG', url), ctx(impl));
+  assert.equal(out.headlines.length, 4);
+  assert.ok(out.headlines.every((h) => /^\/en\/news\/news-articles\/a\//.test(new URL(h.url).pathname)));
+});
+
+test('aarau.ch: un role="navigation" che contiene <main> non e\' un menu', async () => {
+  const url = 'https://www.aarau.ch/politik-verwaltung/news.html/203';
+  const html = fixture('aarau-news.html').toString('utf8');
+  assert.match(html, /<div[^>]*role="navigation"[^>]*>[\s\S]*<main[\s>]/, 'premessa: il wrapper marcato navigazione avvolge <main>');
+  const before = extractHeadlines(html, url);
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource(sourceOf('AG', url), ctx(impl));
+  // Nessun comunicato datato perso, e il menu (38 link su 48) fuori.
+  assert.equal(out.headlines.filter((h) => h.date).length, before.filter((h) => h.date).length);
+  assert.equal(before.filter((h) => h.date).length, 9);
+  assert.equal(before.length, 48);
+  assert.equal(out.headlines.length, 10);
+});
+
+test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatto', () => {
+  const html = [
+    '<body><header><a href="/chi">Chi siamo, la nostra storia</a></header>',
+    '<div role="navigation"><a href="/menu">Una voce del menu laterale</a></div>',
+    '<main><nav class="crumb"><a href="/">Torna alla pagina iniziale</a></nav>',
+    '<article><header><h2><a href="/news/1">Titolo del primo comunicato</a></h2></header><footer><a href="/news/1#c">Commenta questo comunicato</a></footer></article>',
+    '<section><header><a href="/news/2">Titolo del secondo comunicato</a></header></section></main>',
+    '<script>var t = "<nav><a href=\\"/x\\">non e\' markup</a>";</script>',
+    '<footer><a href="/privacy-policy">Informativa sulla privacy</a></footer></body>',
+  ].join('\n');
+  const out = stripPageChrome(html);
+  assert.equal(out.removed, 4);
+  for (const gone of ['/chi', '/menu', 'Torna alla pagina iniziale', '/privacy-policy']) assert.ok(!out.html.includes(gone), `${gone} doveva sparire`);
+  for (const kept of ['/news/1"', '/news/1#c', '/news/2', 'non e\' markup']) assert.ok(out.html.includes(kept), `${kept} doveva restare`);
+  // Un'area senza chiusura non si taglia fino in fondo al documento.
+  const open = '<nav><a href="/a">Voce di un menu non chiuso</a><main><a href="/news/3">Titolo del terzo comunicato</a></main>';
+  assert.deepEqual(stripPageChrome(open), { html: open, removed: 0 });
+  assert.deepEqual(stripPageChrome(''), { html: '', removed: 0 });
+});
+
+test('articlePathPattern: ogni dichiarazione del profilo e\' su una fonte html-links e compila', () => {
+  const declared = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => s.quirks?.articlePathPattern).map((s) => ({ code: c.code, ...s })));
+  assert.ok(declared.length >= 20, `attese almeno 20 fonti con articlePathPattern, trovate ${declared.length}`);
+  for (const s of declared) {
+    assert.equal(s.parser, 'html-links', `${s.code} ${s.url}`);
+    assert.doesNotThrow(() => new RegExp(s.quirks.articlePathPattern), `${s.code} ${s.url}`);
+    // Il pattern non deve tenere la pagina-elenco stessa.
+    assert.equal(filterArticleLinks([{ url: s.url, headline: 'x', date: null }], s.url, s).headlines.length, 0, `${s.url}: l'elenco non e' un articolo`);
+  }
+});
+
+// ── P5b: fonti che riusano gli URL ──────────────────────────────────────────
+
+const SOS_FEED = 'https://www.suedostschweiz.ch/feed/graubuenden';
+const TICKER_URL = 'https://www.suedostschweiz.ch/graubuenden/verkehrsticker-1574112';
+
+test('suedostschweiz: lo stesso URL con un\'altra notizia e\' un\'altra voce per il ledger', async () => {
+  const xml = fixture('suedostschweiz-graubuenden.xml').toString('utf8');
+  const source = sourceOf('GR', SOS_FEED);
+  assert.equal(source.quirks.urlReusedForDifferentStories, true);
+  const { impl } = fakeFetch({ [SOS_FEED]: { body: xml, contentType: 'application/rss+xml; charset=UTF-8' } });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 5);
+  const ticker = out.headlines.find((h) => stripItemIdentity(h.url) === TICKER_URL);
+  assert.equal(ticker.headline, 'Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder');
+  assert.match(ticker.url, /#ft-item=[0-9a-f]{12}$/);
+  assert.ok(ticker.lead, 'il lead (paywall title+lead) si aggancia ancora per URL');
+  assert.ok(out.headlines.every((h) => itemIdentityOf(h.url)), 'ogni voce della fonte porta l\'identita\'');
+
+  // La stessa pagina il 2026-06-25 (Wayback Machine, snapshot 20260625124821)
+  // titolava un incidente a Pontresina: stesso URL, stesso guid, altra notizia.
+  const [earlier] = applyItemIdentity([{ url: TICKER_URL, headline: 'Pontresina: Beinverletzung nach Unfall mit Töff auf schneebedeckter Strasse', date: new Date('2026-06-25T10:00:00Z') }]).headlines;
+  assert.notEqual(newsUrlKey(earlier.url), newsUrlKey(ticker.url), 'due notizie, due chiavi');
+  assert.equal(newsUrlKey(TICKER_URL), 'https://www.suedostschweiz.ch/graubuenden/verkehrsticker-1574112', 'premessa: senza identita\' la chiave e\' il contenitore');
+  // La stessa notizia riletta (maiuscole, punteggiatura, entita') resta se' stessa.
+  const [again] = applyItemIdentity([{ url: TICKER_URL, headline: 'NACH UNFALL zwischen Flims und Trin – Verkehr fliesst wieder!', date: null }]).headlines;
+  assert.equal(newsUrlKey(again.url), newsUrlKey(ticker.url));
+  // L'indirizzo da scaricare e da citare e' quello del sito.
+  assert.equal(stripItemIdentity(ticker.url), TICKER_URL);
+});
+
+test('suedostschweiz: tutte le fonti del dominio dichiarano il riuso degli URL', () => {
+  const sources = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => new URL(s.url).hostname === 'www.suedostschweiz.ch').map((s) => `${c.code} ${s.url} ${s.quirks.urlReusedForDifferentStories}`));
+  assert.equal(sources.length, 4);
+  for (const s of sources) assert.match(s, / true$/, s);
+});
+
+test('Tamedia: identita\' dell\'item solo sui ticker; un articolo ritoccato nel titolo resta la stessa voce', async () => {
+  const feed = 'https://partner-feeds.publishing.tamedia.ch/rss/bazonline/';
+  const source = sourceOf('BASILEA', feed);
+  assert.equal(source.quirks.urlReusedForDifferentStories, '^/ticker-');
+  const scan = async (name) => {
+    const { impl } = fakeFetch({ [feed]: { body: fixture(name), contentType: 'application/rss+xml; charset=utf-8' } });
+    return (await scanCantonSource(source, ctx(impl))).headlines;
+  };
+  // Due letture reali a 16 minuti (2026-10-05): fra l'una e l'altra la
+  // redazione ha cambiato il titolo dell'articolo sul processo di Binningen.
+  const first = await scan('tamedia-bazonline.xml');
+  const later = await scan('tamedia-bazonline-later.xml');
+  const binningen = (list) => list.find((h) => h.url.includes('/femizid-binningen-'));
+  assert.notEqual(binningen(first).headline, binningen(later).headline, 'premessa: il titolo e\' cambiato');
+  assert.equal(itemIdentityOf(binningen(first).url), null);
+  assert.equal(newsUrlKey(binningen(first).url), newsUrlKey(binningen(later).url), 'stesso articolo, stessa chiave');
+  const tickers = first.filter((h) => new URL(h.url).pathname.startsWith('/ticker-'));
+  assert.equal(tickers.length, 2);
+  assert.ok(tickers.every((h) => itemIdentityOf(h.url)), 'i ticker portano l\'identita\' dell\'item');
+  assert.equal(first.filter((h) => itemIdentityOf(h.url)).length, 2, 'e solo loro');
+});
+
+test('applyItemIdentity: titolo dallo slug → vale la data; senza titolo ne\' data la voce non ha identita\'', () => {
+  const url = 'https://www.suedostschweiz.ch/glarus/meldungen-aus-dem-glarnerland-1916134';
+  const at = (iso) => ({ url, headline: 'meldungen aus dem glarnerland', date: iso ? new Date(iso) : null, titleFromSlug: true });
+  const out = applyItemIdentity([at('2026-10-05T12:54:14Z')]);
+  const next = applyItemIdentity([at('2026-10-06T07:10:00Z')]);
+  assert.equal(out.identified, 1);
+  assert.notEqual(newsUrlKey(out.headlines[0].url), newsUrlKey(next.headlines[0].url), 'il titolo e\' lo slug riusato: distingue la data');
+  assert.deepEqual(applyItemIdentity([at(null)]), { headlines: [], identified: 0, dropped: 1 });
 });

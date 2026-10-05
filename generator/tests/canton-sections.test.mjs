@@ -181,6 +181,36 @@ test('viola: enum non validi e dato di categoria fra le news', () => {
   expectViolation(doc, /quirk sconosciuto "inventato"/);
 });
 
+test('viola: articlePathPattern non ancorato, non compilabile o fuori da html-links (P5b)', () => {
+  const htmlSource = (doc) => doc.cantons.flatMap((c) => c.newsSources.map((s) => [c, s])).find(([, s]) => s.parser === 'html-links');
+  const rssSource = (doc) => doc.cantons.flatMap((c) => c.newsSources.map((s) => [c, s])).find(([, s]) => s.parser === 'rss');
+  let doc = clone();
+  htmlSource(doc)[1].quirks.articlePathPattern = 'news/';
+  expectViolation(doc, /quirk articlePathPattern="news\/" non valido/);
+  doc = clone();
+  htmlSource(doc)[1].quirks.articlePathPattern = '^/news/(';
+  expectViolation(doc, /quirk articlePathPattern=.* non valido/);
+  doc = clone();
+  rssSource(doc)[1].quirks.articlePathPattern = '^/news/';
+  expectViolation(doc, /quirk articlePathPattern non si applica al parser "rss"/);
+});
+
+test('viola: urlReusedForDifferentStories diverso da true o da una regex di path, o su html-links (P5b)', () => {
+  const find = (doc, parser) => doc.cantons.flatMap((c) => c.newsSources).find((s) => s.parser === parser);
+  let doc = clone();
+  find(doc, 'rss').quirks.urlReusedForDifferentStories = 'ticker';
+  expectViolation(doc, /quirk urlReusedForDifferentStories="ticker" non valido/);
+  doc = clone();
+  find(doc, 'rss').quirks.urlReusedForDifferentStories = false;
+  expectViolation(doc, /quirk urlReusedForDifferentStories=false non valido/);
+  doc = clone();
+  find(doc, 'html-links').quirks.urlReusedForDifferentStories = true;
+  expectViolation(doc, /quirk urlReusedForDifferentStories non si applica al parser "html-links"/);
+  doc = clone();
+  find(doc, 'rss').quirks.urlReusedForDifferentStories = '^/ticker-';
+  assert.deepEqual(validateCantonSections(doc, CTX), []);
+});
+
 test('viola: ai-input=no non puo\' stare in una fonte ammessa', () => {
   const doc = clone();
   firstNews(doc, 'NE').quirks.contentSignal = 'ai-train=no, ai-input=no';
