@@ -1,0 +1,103 @@
+[
+ {
+  "id": "d755c2ec-3e6f-4cd5-b8ac-13a9bc3f9fe7",
+  "lastModifiedOn": "2026-10-05T11:01:05.30134",
+  "publishOn": "2026-10-05T11:00:00",
+  "deactivateOn": null,
+  "contentList": [
+   {
+    "id": "35eb6678-0005-4048-b17e-34f32cabff0d",
+    "title": "Blumenstein/Zeugenaufruf: Autofahrer nach Kollision mit Velo gesucht",
+    "lead": "Am Freitag vor einer Woche kam es in Blumenstein zu einem Verkehrsunfall zwischen einem Velo und einem Auto. Der Velofahrer wurde dabei verletzt. Die Kantonspolizei Bern sucht Zeuginnen und Zeugen, insbesondere der Autofahrer wird gebeten, sich zu melden.",
+    "languageCode": "de",
+    "content": "",
+    "lightboxLabels": null,
+    "assets": [],
+    "newsId": "d755c2ec-3e6f-4cd5-b8ac-13a9bc3f9fe7",
+    "heading": "",
+    "enabled": true,
+    "ogImage": "165b9596-c012-417b-ab42-bdf02bcd12e4",
+    "ogDescription": "",
+    "ogImageSrc": ""
+   }
+  ],
+  "primaryOuTag": "be-oe:sid/police",
+  "ouTags": [
+   "be-oe:sid/police"
+  ],
+  "topicTags": [],
+  "contentTypeTags": [
+   "be-inhaltstyp:news/medienmitteilung"
+  ]
+ },
+ {
+  "id": "a442dc99-e2f3-4858-bf5b-9c0dac0acf84",
+  "lastModifiedOn": "2026-10-02T16:03:55.998987",
+  "publishOn": "2026-10-05T08:30:00",
+  "deactivateOn": null,
+  "contentList": [
+   {
+    "id": "6aacd6f9-d497-4422-a0de-7b55b40130a2",
+    "title": "Biel: Umgestaltung des Knotens Reuchenettestrasse–Lienhardstrasse kommt voran",
+    "lead": "",
+    "languageCode": "de",
+    "content": "",
+    "lightboxLabels": null,
+    "assets": [],
+    "newsId": "a442dc99-e2f3-4858-bf5b-9c0dac0acf84",
+    "heading": "",
+    "enabled": true,
+    "ogImage": "43b13fc5-4cf3-4d14-b818-a12d954898d7",
+    "ogDescription": "",
+    "ogImageSrc": ""
+   }
+  ],
+  "primaryOuTag": "be-oe:bvd",
+  "ouTags": [
+   "be-oe:bvd",
+   "be-oe:bvd/tba"
+  ],
+  "topicTags": [
+   "be-themen:strassen"
+  ],
+  "contentTypeTags": [
+   "be-inhaltstyp:news/medienmitteilung",
+   "be-inhaltstyp:news/nav-teil"
+  ]
+ },
+ {
+  "id": "b16cf391-7d9a-4da5-a145-5475a2758f8d",
+  "lastModifiedOn": "2026-10-02T11:49:00.565026",
+  "publishOn": "2026-10-05T08:30:00",
+  "deactivateOn": null,
+  "contentList": [
+   {
+    "id": "606bdf24-c28e-4bd8-bab9-faabb2903d35",
+    "title": "Zollbrück: Sanierung der Bahnhofstrasse",
+    "lead": "",
+    "languageCode": "de",
+    "content": "",
+    "lightboxLabels": null,
+    "assets": [],
+    "newsId": "b16cf391-7d9a-4da5-a145-5475a2758f8d",
+    "heading": "",
+    "enabled": true,
+    "ogImage": "3edd6e8d-82a8-4960-a77f-b741f7f20895",
+    "ogDescription": "",
+    "ogImageSrc": ""
+   }
+  ],
+  "primaryOuTag": "be-oe:bvd",
+  "ouTags": [
+   "be-oe:bvd",
+   "be-oe:bvd/tba"
+  ],
+  "topicTags": [
+   "be-themen:strassen"
+  ],
+  "contentTypeTags": [
+   "be-inhaltstyp:news/medienmitteilung",
+   "be-inhaltstyp:news/nav-teil"
+  ]
+ }
+]

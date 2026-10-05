@@ -12628,6 +12628,18 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tifosi-azioni-ambri-evento.title': 'Ambrì-Piotta, des supporters unis pour devenir actionnaires',
     'blog.article.tifosi-azioni-ambri-evento.excerpt': 'Samedi 17 octobre, dans le hangar à côté de la Gottardo Arena, loto, match projeté et fête : chaque franc récolté sera investi dans des actions de l’Hcap.',
     'blog.article.tifosi-azioni-ambri-evento.imageAlt': 'Les fans de l’Ambrì-Piotta réunis pour l’événement près de la Gottardo Arena',
+    'blog.article.hotel-collina-oro-licenziamenti.title': 'Tessin, villa principe leopoldo : 76 licenciements',
+    'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo de Collina d\'Oro fermera pendant des mois : le projet représente 12 millions et concerne 76 licenciements sur 81 employés.',
+    'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro, dans le canton du Tessin',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hôtel au Tessin : il ferme et licencie 76 employés',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro investit 12 millions de francs, ferme pendant des mois et annonce le licenciement de 76 de ses 81 employés.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro, au Tessin',
+    'blog.article.gallerie-castelletto-sesto-calende.title': 'Tunnels : Castelletto-Sesto Calende fermé pendant deux nuits',
+    'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Entretien des tunnels de l\'autoroute : le tronçon entre Castelletto et Sesto Calende fermé pendant deux nuits. Fermeture également de Castronno-Cavaria et de Solbiate-Varese.',
+    'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Tunnel autoroutier dans la région de Varèse (Varese)',
+    'blog.article.analisi-salario-prestazioni.title': 'Ticino : motion Avanti sur le salaire et les prestations',
+    'blog.article.analisi-salario-prestazioni.excerpt': 'Le Grand Conseil donne son feu vert au rapport de Speziali (PLR): analyses et simulations sur davantage de salaire et moins de prestations.',
+    'blog.article.analisi-salario-prestazioni.imageAlt': 'Bâtiment institutionnel au Tessin',
 };
 
 export default blogMetaFr;

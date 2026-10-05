@@ -166,6 +166,7 @@ test('la derivazione trova i produttori del corpus e non passa a vuoto', () => {
   const nomi = producers.map((p) => p.file);
   for (const atteso of [
     'batch-faq-articles.yml',
+    'generate-article-core.yml',
     'generate-article.yml',
     'generate-border-wait-ranking-weekly.yml',
     'generate-daily-brief.yml',
@@ -482,6 +483,14 @@ function makeCorpusMirror() {
   };
   mirror('content');
   mirror('generator');
+  // Le suite derivano le radici dei corpi dal core delle sezioni via
+  // `scripts/lib/corpus-sections.mjs`: il modulo serve nel mirror. Symlinkato
+  // basta, perche' Node lo risolve al file vero e i suoi import relativi
+  // (engine/shared, generator/scripts/lib) con lui; non legge la ROOT.
+  for (const rel of ['scripts/lib/corpus-sections.mjs']) {
+    fs.mkdirSync(path.dirname(path.join(tmp, rel)), { recursive: true });
+    fs.symlinkSync(path.join(ROOT, rel), path.join(tmp, rel));
+  }
   // Le due suite: copie vere, cosi' la loro ROOT e' il mirror.
   for (const suite of SUITES) {
     fs.rmSync(path.join(tmp, suite), { force: true });
@@ -537,7 +546,28 @@ function runGuardBlock(block, { dir, nodeExit }) {
   return res;
 }
 
-for (const p of producers.filter((x) => x.file !== 'generate-article.yml')) {
+// `generate-article-core.yml` e' il riusabile GENERATO da `generate-article.yml`
+// (scripts/ci/generate-canton-article-workflows.mjs): il suo step di guardia e'
+// quello della sorgente, identico — lo confronta step per step
+// canton-article-workflows.test.mjs — quindi ha la stessa forma e la stessa
+// esclusione, per lo stesso motivo.
+const ARTICLE_OUTPUT_GATED = new Set(['generate-article.yml', 'generate-article-core.yml']);
+
+test('il riusabile dei cantoni porta la stessa guardia di generate-article.yml', () => {
+  const [source, core] = ['generate-article.yml', 'generate-article-core.yml'].map((f) => producers.find((p) => p.file === f));
+  assert.ok(source && core, 'generate-article.yml e il suo riusabile devono essere entrambi produttori');
+  const guardStep = (w) => {
+    const at = w.active.indexOf(`      - name: ${GUARD_NAME}`);
+    assert.notEqual(at, -1, `${w.file}: step di guardia assente`);
+    const rest = w.active.slice(at);
+    const next = rest.slice(1).search(/\n {6}- name: /);
+    return (next === -1 ? rest : rest.slice(0, next + 1)).replace(/\n\s*\n/g, '\n').trimEnd();
+  };
+  assert.equal(guardStep(core), guardStep(source));
+  assert.match(guardStep(core), /steps\.generate\.outputs\.article == 'true'/);
+});
+
+for (const p of producers.filter((x) => !ARTICLE_OUTPUT_GATED.has(x.file))) {
   // `generate-article.yml` e' escluso da questo strato e da nessun altro: la
   // sua guardia e' condizionata a `steps.generate.outputs.article`, un output
   // di GitHub Actions che non esiste dentro il blocco shell — la sua

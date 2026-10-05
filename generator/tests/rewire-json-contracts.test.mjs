@@ -71,14 +71,14 @@ const CURRENT_YEAR = new Date().getUTCFullYear();
 
 /**
  * Il payload registrato, rimesso in data quando il contratto lo richiede:
- * border-wait window (finestra settimanale), carburanti per cantone
+ * border-wait window (finestra settimanale), carburanti per cantone e road-events
  * (`generatedAt`) e i contratti con `freshen` (timestamp traslati o anno
  * corrente, vedi `freshenRecording`).
  */
 function servable(c) {
   const payload = readFixture(c);
   if (c.id === 'border-wait-window') return freshenWindow(payload, TODAY);
-  if (c.id === 'fuel-cantons') return freshenGeneratedAt(payload, new Date().toISOString());
+  if (c.id === 'fuel-cantons' || c.id === 'road-events') return freshenGeneratedAt(payload, new Date().toISOString());
   return c.freshen ? freshenRecording(c, payload) : payload;
 }
 
@@ -203,8 +203,8 @@ const mutated = (c, fn) => {
 test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', () => {
   assert.equal(
     REWIRE_CONTRACTS.length,
-    11,
-    'il REWIRE set e\' di undici artefatti: i tre della issue #101, i carburanti per cantone (P9b), gli avvisi cantonali (P9g), i quattro input dei servizi (P9f) e i dataset annuali fisco e pensioni (P9d/P9e)',
+    12,
+    'il REWIRE set e\' di dodici artefatti: i tre della issue #101, i carburanti per cantone (P9b), gli avvisi cantonali (P9g), i quattro input dei servizi (P9f), road-events (P9c) e i dataset annuali fisco e pensioni (P9d/P9e)',
   );
   const missing = [];
   for (const c of REWIRE_CONTRACTS) {
@@ -387,6 +387,24 @@ const MUTATIONS = {
       /days ago — refusing to build a ranking article from stale data/,
       'Il publisher fermo e\' il fallimento che sembra un successo: numeri del mese scorso, articolo di questa settimana.',
     ],
+    [
+      'canton col codice del semicantone',
+      mutated(c, (p) => { p.current.perCrossing['anieres'].canton = 'BS'; }),
+      /canton is the half-canton BS, not its URL group/,
+      'Le classifiche per cantone usano il codice del GRUPPO URL (BASILEA): BS non entrerebbe in nessuna.',
+    ],
+    [
+      'canton come nome invece che codice',
+      mutated(c, (p) => { p.current.perCrossing['anieres'].canton = 'Ginevra'; }),
+      /canton is "Ginevra", not a canton URL group code/,
+      'Un nome localizzato non combacia con nessun --canton: il valico sparirebbe dalla sua classifica.',
+    ],
+    [
+      'canton di due lettere fuori dai 24 gruppi',
+      mutated(c, (p) => { p.current.perCrossing['anieres'].canton = 'CH'; }),
+      /canton is "CH", not a canton URL group code/,
+      'Un codice sconosciuto esce dal filtro per cantone: la classifica uscirebbe troncata senza errore.',
+    ],
   ],
   'border-wait-averages': (c) => [
     [
@@ -506,6 +524,77 @@ const MUTATIONS = {
       'Il blocco dati conosce cinque lati: un sesto verrebbe ignorato o mal etichettato.',
     ],
   ],
+  'road-events': (c) => [
+    [
+      'events[] vuoto',
+      mutated(c, (p) => { p.events = []; }),
+      /carries zero events/,
+      'Zero eventi in cache = hub mobilita\' vuoti per tutti i cantoni.',
+    ],
+    [
+      'schemaVersion diverso',
+      mutated(c, (p) => { p.schemaVersion = 2; }),
+      /schemaVersion is 2, expected 1/,
+      'Una forma nuova non va interpretata con le regole della vecchia.',
+    ],
+    [
+      'canton col codice del semicantone',
+      mutated(c, (p) => { p.events[0].canton = 'BL'; }),
+      /half-canton BL, not its URL group/,
+      'Gli hub sono per gruppo URL (BASILEA, APPENZELLO): BL non ne raggiungerebbe nessuno.',
+    ],
+    [
+      'canton di due lettere fuori dai 24 gruppi',
+      mutated(c, (p) => { p.events[0].canton = 'XX'; }),
+      /canton "XX" is not one of the 24 canton URL groups/,
+      'Un codice sconosciuto non si aggancia a nessun hub: l\'evento sparirebbe in silenzio.',
+    ],
+    [
+      'generatedAt nel futuro',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() + 72 * 3_600_000).toISOString(); }),
+      /is in the future/,
+      'Un orologio sbagliato del producer passerebbe il gate di eta\' per sempre.',
+    ],
+    [
+      'data locale invece di ISO',
+      mutated(c, (p) => { p.events[0].observedAt = 'Mon, 05 Oct 2026 10:00:00 GMT'; }),
+      /observedAt is not an ISO date/,
+      'Il contratto dichiara istanti ISO: una data locale accettata da Date.parse passerebbe ambigua.',
+    ],
+    [
+      'id duplicato',
+      mutated(c, (p) => { p.events[1].id = p.events[0].id; }),
+      /is duplicated/,
+      'Due eventi con lo stesso id collasserebbero in uno a valle.',
+    ],
+    [
+      'validFrom dopo validTo',
+      mutated(c, (p) => {
+        const e = p.events.find((x) => x.validFrom && x.validTo);
+        [e.validFrom, e.validTo] = [e.validTo, e.validFrom];
+      }),
+      /validFrom is after validTo/,
+      'Una finestra rovesciata non e\' mai attiva: l\'evento sarebbe mostrato o nascosto a caso.',
+    ],
+    [
+      'tipo fuori dai quattro',
+      mutated(c, (p) => { p.events[0].type = 'incidente'; }),
+      /type "incidente" is not one of/,
+      'Il tipo decide in quale blocco dell\'hub finisce l\'evento.',
+    ],
+    [
+      'url non https',
+      mutated(c, (p) => { p.events.find((e) => e.url).url = 'http://example.org/x'; }),
+      /url is not https or null/,
+      'Un link stampato in un articolo deve essere https.',
+    ],
+    [
+      'snapshot vecchio di giorni',
+      mutated(c, (p) => { p.generatedAt = '2026-01-01T00:00:00.000Z'; }),
+      /refusing stale road events/,
+      'Il collector fermo e\' il fallimento che sembra un successo: chiusure gia\' riaperte date per attive.',
+    ],
+  ],
   'events-dataset': (c) => [
     [
       'events[] assente',
@@ -516,7 +605,7 @@ const MUTATIONS = {
     [
       'events[] vuoto',
       mutated(c, (p) => { p.events = []; }),
-      /carries zero events/,
+      /carries zero public events — refusing to cache an empty dataset/,
       'Zero eventi SOVRASCRIVE il digest corretto sulla URL evergreen.',
     ],
     [
@@ -528,7 +617,7 @@ const MUTATIONS = {
     [
       'nessun evento con startDate',
       mutated(c, (p) => { for (const e of p.events) delete e.startDate; }),
-      /not one event carries a startDate/,
+      /not one public event carries a startDate — refusing/,
       'Tutta la selezione del weekend passa da startDate: senza, ogni evento e\' fuori finestra.',
     ],
   ],

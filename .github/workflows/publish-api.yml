@@ -40,6 +40,11 @@ on:
       # The shared sitemap emitter is also a publisher input: changing its
       # filtering or XML shape must republish the API immediately.
       - 'scripts/lib/build-sitemap.mjs'
+      # Which sections are published, under which names, and with which floor
+      # policy: build-api, build-blog-index and the floors read it (with the
+      # path mapping it depends on). A change there changes the surface.
+      - 'scripts/lib/corpus-sections.mjs'
+      - 'generator/scripts/lib/corpus-paths.mjs'
       - 'scripts/lib/count-xml-tags.mjs'
       - 'scripts/lib/ticker-shadow-check.mjs'
       - 'scripts/lib/published-slug-guard.mjs'
@@ -226,10 +231,18 @@ jobs:
           set -uo pipefail
           scan_mode="full"
           files=""
-          if [ "$EVENT_NAME" = "push" ] && [ -n "${BEFORE:-}" ] && \
+          # Le cartelle dei corpi vengono dal core delle sezioni (ATTIVE), non
+          # da una coppia scritta qui: una sezione accesa nel core ha i suoi
+          # corpi nel diff. Se l'elenco non e' derivabile si resta sulla
+          # scansione piena, mai su un diff ristretto alle cartelle storiche.
+          body_dirs=""
+          if body_dirs=$(node --input-type=module -e "const { CORPUS_SECTIONS } = await import('./scripts/lib/corpus-sections.mjs'); console.log(CORPUS_SECTIONS.map((s) => s.bodyDir).join('\n'));") \
+             && [ -n "$body_dirs" ] && \
+             [ "$EVENT_NAME" = "push" ] && [ -n "${BEFORE:-}" ] && \
              [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && \
              git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
-            if diff_out=$(git diff --name-only "$BEFORE" HEAD -- content/blog-body content/blog-body-ch 2>/dev/null); then
+            mapfile -t body_dir_list <<< "$body_dirs"
+            if diff_out=$(git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" 2>/dev/null); then
               scan_mode="changed"
               files="$diff_out"
             fi

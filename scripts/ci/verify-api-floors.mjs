@@ -642,10 +642,10 @@ export async function expectFromCorpus(root) {
     }
   }
   return {
-    sourceArticles: {
-      frontaliere: countSourceArticles(root, 'frontaliere'),
-      svizzera: countSourceArticles(root, 'svizzera'),
-    },
+    // Le sezioni con contatore proprio nel manifest, dal core: non una coppia scritta a mano.
+    sourceArticles: Object.fromEntries(
+      Object.keys(SECTION_COUNTERS).map((section) => [section, countSourceArticles(root, section)]),
+    ),
     ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
     ...(Object.keys(sourceArchiveSitemapUrls).length ? { sourceArchiveSitemapUrls } : {}),
     ...(Object.keys(sourceArchiveSitemapErrors).length ? { sourceArchiveSitemapErrors } : {}),

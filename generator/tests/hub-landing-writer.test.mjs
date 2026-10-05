@@ -28,6 +28,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 const writer = readFileSync(path.join(ROOT, 'scripts', 'refresh-hub-landing.mjs'), 'utf-8');
@@ -54,9 +55,15 @@ test('the writer does not fall back to refresh-only', () => {
 });
 
 test('no section is excused from having its landing written', () => {
-  const m = writer.match(/argOf\('--expect-grid',\s*'([^']*)'\)/);
-  assert.ok(m, "could not find the --expect-grid default in refresh-hub-landing.mjs");
-  const expected = m[1].split(',').map((s) => s.trim()).filter(Boolean).sort();
+  // Since C1 the sections come from the core: the --expect-grid default is
+  // EVERY active section with a Pages shard, not a hand-written list.
+  assert.match(
+    writer,
+    /argOf\('--expect-grid', SHARD_SECTIONS\.map\(\(section\) => section\.section\)\.join\(','\)\)/,
+    "could not find the --expect-grid default (every shard section) in refresh-hub-landing.mjs",
+  );
+  assert.match(writer, /const SHARD_SECTIONS = CORPUS_SECTIONS\.filter\(\(section\) => section\.shardKey\);/);
+  const expected = CORPUS_SECTIONS.filter((section) => section.shardKey).map((section) => section.section).sort();
   assert.deepEqual(
     expected,
     ['frontaliere', 'svizzera'],
@@ -66,12 +73,12 @@ test('no section is excused from having its landing written', () => {
 });
 
 test('the writer covers both sections in the first place', () => {
-  for (const name of ['frontaliere', 'svizzera']) {
-    assert.ok(
-      writer.includes(`name: '${name}'`),
-      `SECTIONS is missing "${name}" — EXPECT_GRID cannot catch a section the loop never visits.`,
-    );
-  }
+  // The loop visits SECTIONS, derived from the same SHARD_SECTIONS as EXPECT_GRID,
+  // so EXPECT_GRID can never name a section the loop does not visit.
+  assert.match(writer, /const SECTIONS = SHARD_SECTIONS\.map\(\(section\) => \(\{\s*name: section\.section,/);
+  assert.match(writer, /for \(const section of SECTIONS\)/);
+  // A section requested by name that has no Pages shard is an error, not a green no-op.
+  assert.match(writer, /refusing to report a no-op as a refresh/);
 });
 
 test('the mirrored engine exposes create-or-refresh and keeps its fail-closed contract', () => {

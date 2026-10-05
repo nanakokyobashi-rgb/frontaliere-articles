@@ -10,7 +10,7 @@
 // fast path and the full build apart.
 //
 // CLI:
-//   npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <frontaliere|svizzera> --out <scratchDistDir> --summary <summaryJsonPath>
+//   npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <active section with a Pages shard: frontaliere|svizzera today> --out <scratchDistDir> --summary <summaryJsonPath>
 //
 // Pipeline (mirrors postWalkCoordinatorPlugin.ts's real per-file order —
 // see build-plugins/postWalkWorker.mjs for the production analogue):
@@ -131,6 +131,9 @@ import { spawnSync } from 'node:child_process';
 // that would swallow them.
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
+// Sezioni valide e shard Pages vengono dal core (lista ATTIVA), come in
+// fast-publish-article.yml: niente coppia frontaliere/svizzera scritta a mano.
+import { shardOf } from './ci/fast-publish-section.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -166,11 +169,16 @@ function parseArgs(argv) {
   ];
   if (missing.length > 0) {
     console.error(`[publish-article-fast] missing required flag(s): ${missing.map((k) => `--${k}`).join(', ')}`);
-    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <frontaliere|svizzera> --out <scratchDistDir> --summary <summaryJsonPath>');
+    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath>');
     process.exit(1);
   }
-  if (out.section !== 'frontaliere' && out.section !== 'svizzera') {
-    console.error(`[publish-article-fast] --section must be "frontaliere" or "svizzera", got "${out.section}"`);
+  // Prima di qualunque render: la sezione deve essere ATTIVA nel core e avere
+  // uno shard Pages. Una sezione servita da R2 (`shardKey: null`, le
+  // cantonali) e' un errore esplicito, mai un ripiego sullo shard di un'altra.
+  try {
+    out.shardKey = shardOf(out.section);
+  } catch (err) {
+    console.error(`[publish-article-fast] --section "${out.section}": ${err.message}`);
     process.exit(1);
   }
   out.id = out.ids[0];
@@ -454,7 +462,7 @@ async function main() {
   }
 
   // ── Summary JSON for stream B (shard push) / stream C (workflow) ──
-  const sectionShardKey = args.section === 'frontaliere' ? 'articolifrontaliere' : 'articolisvizzera';
+  const sectionShardKey = args.shardKey;
   const shardSlugs = JSON.parse(
     fs.readFileSync(path.join(ROOT_DIR, 'scripts', 'lib', 'section-shard-slugs.json'), 'utf-8'),
   );

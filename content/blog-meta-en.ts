@@ -12626,6 +12626,18 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tifosi-azioni-ambri-evento.title': 'Ambrì-Piotta, fans united to become shareholders',
     'blog.article.tifosi-azioni-ambri-evento.excerpt': 'Saturday, October 17, in the warehouse next to the Gottardo Arena, bingo, a screened match and a party: every franc raised will be invested in Hcap shares.',
     'blog.article.tifosi-azioni-ambri-evento.imageAlt': 'Ambrì-Piotta fans gathering for the event beside the Gottardo Arena',
+    'blog.article.hotel-collina-oro-licenziamenti.title': 'Ticino, Villa Principe Leopoldo: 76 layoffs',
+    'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro will close for months: the project is worth 12 million and involves 76 redundancies out of 81 employees.',
+    'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Canton Ticino',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hotel in Ticino: closes and dismisses 76 employees',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d \'Oro invests 12 million francs, closes for months and announces 76 redundancies out of 81 employees.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro, Ticino',
+    'blog.article.gallerie-castelletto-sesto-calende.title': 'Tunnels: Castelletto-Sesto Calende closed for two nights',
+    'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Maintenance work on the motorway tunnels: the stretch between Castelletto and Sesto Calende closed for two nights. Also closed: Castronno-Cavaria and Solbiate-Varese.',
+    'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Motorway tunnel area near Varese',
+    'blog.article.analisi-salario-prestazioni.title': 'Ticino: Avanti motion on salary and benefits',
+    'blog.article.analisi-salario-prestazioni.excerpt': 'The Grand Council gives the green light to Speziali (Plr)\'s report: analysis and simulations on higher pay and fewer benefits.',
+    'blog.article.analisi-salario-prestazioni.imageAlt': 'Civic building in Ticino',
 };
 
 export default blogMetaEn;

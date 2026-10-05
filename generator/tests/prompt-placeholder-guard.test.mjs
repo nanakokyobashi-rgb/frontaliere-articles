@@ -37,6 +37,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 import {
   SCHEMA_PLACEHOLDER_LITERALS,
   HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS,
@@ -56,6 +57,8 @@ import {
 } from '../scripts/lib/prompt-placeholder-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+/** Le cartelle dei corpi sotto `content/`, una per sezione ATTIVA del core. */
+const BODY_ROOT_DIRS = CORPUS_SECTIONS.map((section) => path.basename(section.bodyDir));
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
 const createArticleSrc = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
 
@@ -971,7 +974,9 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
 // produttori del corpus non lo chiamano, e la misura di #382 lo registra come
 // 0/3. Ma la copertura mancante si misura sul rischio, non sulle chiamate: in
 // questi tre lo slug non passa da nessun modello, e' scritto nel sorgente —
-// due costanti letterali e un template che interpola solo la data ISO. Una
+// una costante letterale (digest eventi), un prefisso fisso + lo slug del
+// cantone da una tabella letterale (classifica dogane, per cantone dal P9c) e
+// un template che interpola solo la data ISO (Bollettino). Una
 // guard aggiunta li' non potrebbe mai scattare: sarebbe rumore che invecchia.
 //
 // Quello che invece serve e' un OSSERVATORE della premessa. Questi test non
@@ -1000,11 +1005,6 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       // P9a: il digest degli altri cantoni copia gli slug dalla tabella
       // letterale CANTON_DIGEST_ARTICLES (pinnata dal test dedicato sotto).
       altreRighe: ['slugs: { ...identity.slugs },'],
-    },
-    {
-      produttore: 'generate-border-wait-ranking-article.mjs',
-      contenuto: 'lib/border-wait-ranking-content.mjs',
-      costante: 'RANKING_ARTICLE_SLUGS',
     },
   ];
 
@@ -1048,6 +1048,45 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       asseriscilSlugLetterale(id, `CANTON_DIGEST_ARTICLES ${id}`);
       for (const slug of slugs) asseriscilSlugLetterale(slug, `CANTON_DIGEST_ARTICLES ${id}`);
     }
+  });
+
+  // La classifica dogane e' per cantone dal P9c: lo slug non e' piu' UNA
+  // costante ma una funzione del cantone. Resta calcolato senza modello: un
+  // prefisso fisso per locale + lo slug del cantone, preso da una tabella
+  // letterale. Si inchiodano tutti e tre i pezzi, e il cablaggio.
+  it('generate-border-wait-ranking-article.mjs: lo slug e\' prefisso fisso + slug letterale del cantone', async () => {
+    const srcProd = leggiScript('generate-border-wait-ranking-article.mjs');
+    const srcCont = leggiScript('lib/border-wait-ranking-content.mjs');
+    assert.ok(srcProd.length > 1000 && srcCont.length > 1000, 'sorgente vuoto o troncato: il test passerebbe a vuoto');
+    // 1. Il produttore prende gli slug SOLO dal builder, in un punto solo.
+    assert.deepEqual(righeSlugs(srcProd), ['slugs: article.slugs,'],
+      'il produttore assegna `slugs` da qualcosa che non e\' l\'articolo costruito dal builder');
+    assert.ok(srcProd.includes("from './lib/border-wait-ranking-content.mjs'"), 'il produttore non importa piu\' il builder');
+    // 2. Il builder ha DUE punti `slugs:` e solo questi: il ritorno di
+    //    rankingArticleIdentity e la copia nell'articolo.
+    assert.deepEqual(righeSlugs(srcCont), ['slugs: {', 'slugs: { ...identity.slugs },'],
+      'il builder assegna `slugs` in un punto nuovo: va deciso se serve lo slug guard');
+    assert.ok(srcCont.includes('const identity = rankingArticleIdentity(canton);'), 'l\'articolo non prende piu\' l\'identita\' da rankingArticleIdentity');
+    // 3. Dentro rankingArticleIdentity gli slug interpolano solo profile.slug.<locale>.
+    const corpo = /export function rankingArticleIdentity\(canton = 'TI'\) \{([\s\S]*?)\n\}/.exec(srcCont);
+    assert.ok(corpo, 'rankingArticleIdentity non e\' piu\' riconoscibile');
+    // Solo l'oggetto ritornato: il messaggio d'errore per un cantone sconosciuto non e' uno slug.
+    const ritorno = corpo[1].slice(corpo[1].indexOf('return {'));
+    assert.ok(ritorno.startsWith('return {'), 'rankingArticleIdentity non ritorna piu\' un oggetto letterale');
+    const interpolazioni = [...new Set([...ritorno.matchAll(/\$\{([^}]*)\}/g)].map((x) => x[1].trim()))].sort();
+    assert.deepEqual(interpolazioni, ['profile.slug.de', 'profile.slug.en', 'profile.slug.fr', 'profile.slug.it'],
+      `rankingArticleIdentity interpola ${JSON.stringify(interpolazioni)}: qualcosa oltre allo slug del cantone entra nello slug`);
+    // 4. La tabella dei cantoni e' letterale e ogni slug risultante e' canonico;
+    //    Ticino resta la costante storica.
+    const mod = await import('../scripts/lib/border-wait-ranking-content.mjs');
+    for (const canton of Object.keys(mod.BORDER_RANKING_CANTONS)) {
+      const { id, slugs } = mod.rankingArticleIdentity(canton);
+      asseriscilSlugLetterale(id, `rankingArticleIdentity(${canton}).id`);
+      for (const [locale, valore] of Object.entries(slugs)) asseriscilSlugLetterale(valore, `rankingArticleIdentity(${canton}).${locale}`);
+    }
+    assert.deepEqual(mod.rankingArticleIdentity('TI').slugs, mod.RANKING_ARTICLE_SLUGS);
+    const m = /export const RANKING_ARTICLE_SLUGS = \{([^}]*)\};/.exec(srcCont);
+    assert.ok(m && !m[1].includes('${'), 'RANKING_ARTICLE_SLUGS non e\' piu\' un oggetto letterale');
   });
 
   it('generate-daily-brief-article.mjs: lo slug e\' un template che interpola solo la data ISO', () => {
@@ -1196,7 +1235,8 @@ describe('gate — METADATI pubblicati (title/excerpt/imageAlt)', () => {
 });
 
 describe('gate — CORPI e FAQ pubblicati (body1..N, faq)', () => {
-  const files = [...walk(path.join(ROOT, 'content', 'blog-body')), ...walk(path.join(ROOT, 'content', 'blog-body-ch'))];
+  // Le radici dei corpi vengono dal core (sezioni attive), non da una coppia scritta a mano.
+  const files = BODY_ROOT_DIRS.flatMap((radice) => [...walk(path.join(ROOT, 'content', radice))]);
 
   it('trova piu\' di 10.000 file body (idem)', () => {
     assert.ok(files.length > 10000, `trovati solo ${files.length} file body`);
@@ -1256,7 +1296,7 @@ describe('gate — CORPI e FAQ pubblicati (body1..N, faq)', () => {
 // difetto arriva come rosso di TUTTE le PR, qui come una lista di file.
 describe('gate — nessuna FAQ orfana: en/de/fr non possono avere una faq che `it` non ha', () => {
   const LOCALI = ['it', 'en', 'de', 'fr'];
-  const RADICI = ['blog-body', 'blog-body-ch'];
+  const RADICI = BODY_ROOT_DIRS;
   // Ancorata all'id del filename, non alla prima chiave `.faq` del file: stesso
   // anti-pattern gia' corretto in `faqQuestionsInBodyText` per #289 — senza
   // l'ancora una `.faq` di un id estraneo verrebbe attribuita a `id`.

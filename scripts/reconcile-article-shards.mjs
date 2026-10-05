@@ -66,6 +66,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { API_SECTIONS } from './lib/corpus-sections.mjs';
 import {
   countSourceArticles,
   floorFrom,
@@ -97,13 +98,15 @@ const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 
 export const LOCALES = ['it', 'en', 'de', 'fr'];
 
-// sezione → shard → chiave dentro slugs.json. Le due sezioni articolo sono
-// quelle di scripts/lib/section-shard-slugs.json; `slugsKey` segue la forma
-// che scripts/build-api.mjs pubblica ({ blog, swiss, ... }).
-export const SECTIONS = [
-  { section: 'frontaliere', shard: 'articolifrontaliere', slugsKey: 'blog' },
-  { section: 'svizzera', shard: 'articolisvizzera', slugsKey: 'swiss' },
-];
+// sezione → shard → chiave dentro slugs.json, dal core: le sezioni ATTIVE con
+// uno shard Pages (`shardKey`, che coincide con le chiavi di
+// scripts/lib/section-shard-slugs.json) e la `slugsKey` con cui
+// scripts/build-api.mjs le pubblica ({ blog, swiss, ... }), dichiarata una
+// volta in scripts/lib/corpus-sections.mjs. Le sezioni servite da R2
+// (`shardKey: null`, le cantonali) non hanno shard da riconciliare qui.
+export const SECTIONS = API_SECTIONS
+  .filter((section) => section.shardKey)
+  .map((section) => ({ section: section.section, shard: section.shardKey, slugsKey: section.api.slugsKey }));
 
 /**
  * Path della pagina articolo DENTRO il repo shard (e quindi sull'origin che

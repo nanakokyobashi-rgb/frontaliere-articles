@@ -46,6 +46,7 @@ import { dirname, join, resolve } from 'node:path';
 // La stessa funzione del gate: se questo test contasse col needle testuale
 // verificherebbe una formula diversa da quella spedita.
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
+import { API_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = readFileSync(resolve(ROOT, 'scripts/build-api.mjs'), 'utf-8');
@@ -86,8 +87,20 @@ test('ogni contatore di manifest.counts e’ ri-derivato o dichiarato non ri-der
   const counts = /counts: \{([\s\S]*?)\n  \},/.exec(SRC);
   assert.ok(counts, 'scripts/build-api.mjs deve costruire manifest.counts');
   const keys = [...counts[1].matchAll(/^\s{4}(\w+)[,:]/gm)].map((m) => m[1]);
-  assert.ok(keys.length >= 12, `attesi almeno 12 contatori, trovati ${keys.length}`);
+  // I contatori PER SEZIONE (C1, sezioni dal core) non sono scritti uno per
+  // riga: escono da uno spread su API_SECTIONS, con i nomi storici dichiarati
+  // in corpus-sections.mjs. Il gate deve ri-derivarli con lo STESSO spread.
+  const SECTION_SPREADS = [
+    /\.\.\.Object\.fromEntries\(API_SECTIONS\.map\(\(section\) => \[section\.api\.counter,/,
+    /\.\.\.Object\.fromEntries\(API_SECTIONS\.map\(\(section\) => \[section\.api\.sitemapCounter,/,
+  ];
   const gate = sliceFrom(SRC, 'const derived = {');
+  for (const spread of SECTION_SPREADS) assert.match(counts[1], spread);
+  assert.match(gate, /\.\.\.Object\.fromEntries\(API_SECTIONS\.map\(\(section\) => \[\s*section\.api\.counter,/);
+  assert.match(gate, /\.\.\.Object\.fromEntries\(API_SECTIONS\.map\(\(section\) => \[section\.api\.sitemapCounter, sitemapUrls\(/);
+  const sectionKeys = API_SECTIONS.flatMap((section) => [section.api.counter, section.api.sitemapCounter]);
+  assert.deepEqual(sectionKeys, ['articles', 'sitemapBlogUrls', 'swissArticles', 'sitemapBlogChUrls']);
+  assert.ok(keys.length + sectionKeys.length >= 12, `attesi almeno 12 contatori, trovati ${keys.length + sectionKeys.length}`);
   for (const key of keys) {
     assert.ok(
       new RegExp(`\\b${key}\\b`).test(gate),
@@ -115,9 +128,10 @@ test('slugs.json e’ confrontato col manifest dal lato che pubblica, non solo d
 
 test('producer e reader condividono il marker della release sui registri', () => {
   assert.match(SRC, /const markRegistryRelease = \(registry\) => registry\.map/);
-  assert.match(SRC, /write\('articles\.json', markRegistryRelease\(ARTICLES\)\)/);
-  assert.match(SRC, /write\('swiss-articles\.json', markRegistryRelease\(SWISS_ARTICLES\)\)/);
-  assert.match(SRC, /write\('slugs\.json', \{\n  commit,/);
+  // Dal 2026-10 (C1) i registri e slugs.json si scrivono per sezione del core.
+  assert.match(SRC, /write\(section\.api\.registry, markRegistryRelease\(SECTION_REGISTRIES\[section\.section\]\)\)/);
+  assert.match(SRC, /const slugsDoc = \{\n    commit,/);
+  assert.match(SRC, /write\('slugs\.json', slugsDoc\);/);
   assert.match(SRC, /RELEASE_MARKER_CONTRACT_FIELD\]: RELEASE_MARKER_CONTRACT_VERSION/);
   assert.match(SRC, /validateReleaseMarkers\([\s\S]*requireMarkers: true/);
 });
@@ -187,7 +201,15 @@ test('nessun contatore mappa l’ARTEFATTO ASSENTE su 0 in accordo col manifest'
   const entries = [...body.matchAll(/^    (\w+): ([\s\S]*?)(?=\n    \w+:|$)/gm)];
   // Guardia di vacuita': se il ritaglio smette di agganciare, il ciclo sotto
   // gira a vuoto e questo test diventa verde per assenza di casi.
-  assert.ok(entries.length >= 11, `attese almeno 11 voci in \`derived\`, trovate ${entries.length}`);
+  // Le voci per sezione (C1) sono due spread su API_SECTIONS: il registro
+  // passa da derivedAlways, la sitemap da sitemapUrls.
+  const spreads = [...body.matchAll(/^    \.\.\.Object\.fromEntries\(API_SECTIONS\.map\(([\s\S]*?)\)\),$/gm)];
+  assert.equal(spreads.length, 2, `attesi 2 spread per sezione in \`derived\`, trovati ${spreads.length}`);
+  assert.ok(spreads.every(([, rhs]) => wired.some((fn) => rhs.includes(fn))));
+  assert.ok(
+    entries.length + spreads.length * API_SECTIONS.length >= 11,
+    `attese almeno 11 voci in \`derived\`, trovate ${entries.length + spreads.length * API_SECTIONS.length}`,
+  );
   for (const [, key, rhs] of entries) {
     assert.ok(
       wired.some((fn) => rhs.includes(fn)),

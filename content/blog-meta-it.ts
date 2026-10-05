@@ -12627,6 +12627,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tifosi-azioni-ambri-evento.title': 'Ambrì-Piotta, tifosi uniti per diventare azionisti',
     'blog.article.tifosi-azioni-ambri-evento.excerpt': 'Sabato 17 ottobre, nel capannone accanto alla Gottardo Arena, tombola, partita proiettata e festa: ogni franco raccolto andrà in azioni dell’Hcap.',
     'blog.article.tifosi-azioni-ambri-evento.imageAlt': 'Tifosi biancoblù riuniti per l’evento dell’Ambrì-Piotta alla Gottardo Arena',
+    'blog.article.hotel-collina-oro-licenziamenti.title': 'Ticino, villa principe leopoldo: 76 licenziamenti',
+    'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiuderà per mesi: il progetto vale 12 milioni e riguarda 76 licenziamenti su 81 dipendenti.',
+    'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo a Collina d\'Oro, nel Canton Ticino',
+    'blog.article.hotel-ticino-76-licenziamenti.title': 'Hotel in Ticino: chiude e licenzia 76 dipendenti',
+    'blog.article.hotel-ticino-76-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro investe 12 milioni di franchi, chiude per mesi e annuncia 76 licenziamenti su 81 dipendenti.',
+    'blog.article.hotel-ticino-76-licenziamenti.imageAlt': 'Hotel Villa Principe Leopoldo a Collina d\'Oro, nel Canton Ticino',
+    'blog.article.gallerie-castelletto-sesto-calende.title': 'Gallerie: due notti chiuso Castelletto-Sesto Calende',
+    'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Manutenzione alle gallerie dell\'autostrada: chiuso per due notti il tratto tra Castelletto e Sesto Calende. Stop anche a Castronno-Cavaria e Solbiate-Varese.',
+    'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Autostrada con gallerie nell\'area di Varese',
+    'blog.article.analisi-salario-prestazioni.title': 'Ticino: mozione Avanti su salario e prestazioni',
+    'blog.article.analisi-salario-prestazioni.excerpt': 'Il Gran Consiglio dà via libera al rapporto di Speziali (Plr): analisi e simulazioni su più salario e meno prestazioni.',
+    'blog.article.analisi-salario-prestazioni.imageAlt': 'Edificio istituzionale in Ticino',
 };
 
 export default blogMetaIt;
