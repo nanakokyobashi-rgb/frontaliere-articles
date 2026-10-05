@@ -12628,6 +12628,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tifosi-azioni-ambri-evento.title': 'Ambrì-Piotta, des supporters unis pour devenir actionnaires',
     'blog.article.tifosi-azioni-ambri-evento.excerpt': 'Samedi 17 octobre, dans le hangar à côté de la Gottardo Arena, loto, match projeté et fête : chaque franc récolté sera investi dans des actions de l’Hcap.',
     'blog.article.tifosi-azioni-ambri-evento.imageAlt': 'Les fans de l’Ambrì-Piotta réunis pour l’événement près de la Gottardo Arena',
+    'blog.article.hotel-collina-oro-licenziamenti.title': 'Tessin, villa principe leopoldo : 76 licenciements',
+    'blog.article.hotel-collina-oro-licenziamenti.excerpt': 'L\'Hotel Villa Principe Leopoldo de Collina d\'Oro fermera pendant des mois : le projet représente 12 millions et concerne 76 licenciements sur 81 employés.',
+    'blog.article.hotel-collina-oro-licenziamenti.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro, dans le canton du Tessin',
 };
 
 export default blogMetaFr;
