@@ -7775,6 +7775,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.greggio-export-pre-guerra.title': 'Crude oil: Middle Eastern exports at pre-war levels',
     'blog.article.greggio-export-pre-guerra.excerpt': 'Crude oil exports from the Middle East, excluding Iran, exceed pre-war levels. Brent at 101,44 dollars and WTI at 90,02: alternative routes are growing.',
     'blog.article.greggio-export-pre-guerra.imageAlt': 'Lugano panorama linked to monitoring international energy markets',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Defenseless Switzerland: missile defense delay and VAT',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'The delivery of the Bodluv GR2 anti-missile system is delayed; the Patriot already ordered will be delayed by years. Funding could come from an increase in VAT, still awaiting approval by Parliament. Suppliers: France and Israel.',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustration of a Swiss missile defense system on the Alps with euro coins representing a possible VAT increase',
 };
 
 export default blogMetaChEn;

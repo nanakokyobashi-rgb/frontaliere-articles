@@ -7775,6 +7775,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.greggio-export-pre-guerra.title': 'Rohöl: Nahostexporte auf Vorkriegsniveau',
     'blog.article.greggio-export-pre-guerra.excerpt': 'Die Rohölexporte aus dem Nahen Osten, mit Ausnahme des Iran, übertreffen das Vorkriegsniveau. Brent bei 101,44 Dollar und WTI bei 90,02: Alternative Routen nehmen zu.',
     'blog.article.greggio-export-pre-guerra.imageAlt': 'Panorama von Lugano zur Beobachtung der internationalen Energiemärkte',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Wehrlose Schweiz: Verzögerung Raketenabwehr und Mehrwertsteuer',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'Die Lieferung des Bodluv GR2-Raketenabwehrsystems verzögert sich; der bereits bestellte Patriot wird sich um Jahre verzögern. Die Finanzierung könnte durch eine Mehrwertsteuererhöhung erfolgen, die noch vom Parlament genehmigt werden muss. Lieferanten: Frankreich und Israel.',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustration eines schweizerischen Raketenabwehrsystems in den Alpen mit Euro-Münzen, die eine mögliche Mehrwertsteuererhöhung symbolisieren',
 };
 
 export default blogMetaChDe;

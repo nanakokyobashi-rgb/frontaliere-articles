@@ -2614,6 +2614,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bern-risanamento-energia': { it: 'bern-risanamento-energia', en: 'bern-energy-incentives-requirements', de: 'energiefoerderung-bern-voraussetzungen', fr: 'subventions-energie-berne-conditions' },
  'deduzioni-3a-2027': { it: 'deduzioni-3a-2027', en: 'pillar3-tax-deduction-2027', de: 'abzug-saeule-3a-2027', fr: 'deduction-pilier-3a-2027' },
  'greggio-export-pre-guerra': { it: 'greggio-export-pre-guerra', en: 'crude-oil-middle-east-prewar', de: 'rohoel-export-nahost-vorkriegsniveau', fr: 'petrole-brut-export-moyen-orient' },
+ 'svizzera-patriot-bodluv-iva-attesa': { it: 'svizzera-patriot-bodluv-iva-attesa', en: 'defenseless-switzerland-missile-defense-delay-and-vat', de: 'wehrlose-schweiz-verzogerung-raketenabwehr-und-mehrwertsteuer', fr: 'suisse-sans-defense-retard-de-la-defense-antimissile-et-tva' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

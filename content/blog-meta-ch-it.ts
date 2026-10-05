@@ -7775,6 +7775,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.greggio-export-pre-guerra.title': 'Greggio: export mediorientale ai livelli pre-guerra',
     'blog.article.greggio-export-pre-guerra.excerpt': 'Le esportazioni di greggio dal Medio Oriente, escluso l\'Iran, superano i livelli pre-guerra. Brent a 101,44 dollari e WTI a 90,02: le rotte alternative crescono.',
     'blog.article.greggio-export-pre-guerra.imageAlt': 'Panorama di Lugano associato alla lettura dei mercati energetici internazionali',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Svizzera indifesa: ritardo difesa missilizia e IVA',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'La fornitura del sistema antimissile Bodluv GR2 è in ritardo; il Patriot già ordinato subirà anni di ritardo. Il finanziamento potrebbe passare da un aumento dell’IVA, ancora da approvare dal Parlamento. Fornitori: Francia e Israele.',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustrazione di un sistema di difesa antimissile svizzero sulle Alpi con monete euro che rappresentano un possibile aumento dell\'IVA',
 };
 
 export default blogMetaChIt;
