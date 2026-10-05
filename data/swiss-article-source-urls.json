@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1947883/medici-di-famiglia-e-dell-infanzia-criticano-il-nuovo-tariffario-medico": {
-    "articleId": "tariffario-ambulatoriale-cure-base",
-    "ts": "2026-09-03T17:34:19.168Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/aeroporto-di-ginevra-%c3%a8-un-motore-per-la-regione%2c-vale-3%2c3-miliardi/92002579": {
     "articleId": "aeroporto-ginevra-motore-3-3-miliardi",
     "ts": "2026-09-03T19:31:08.188Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/guy-parmelin-in-india%3a-per-un-accordo-che-protegga-gli-investimenti/92167943": {
     "articleId": "india-aels-protezione-capitali",
     "ts": "2026-10-05T11:04:37.392Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/13esima-avs%3a-necessario-un-aumento-dell%27iva-per-finanziarla/92167551": {
+    "articleId": "aumento-iva-finanziamento-13esima-avs",
+    "ts": "2026-10-05T11:44:07.692Z",
     "keyForm": 2
   }
 }
