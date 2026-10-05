@@ -1,20 +1,20 @@
 #!/usr/bin/env -S npx -y tsx
-// publish-article-fast.mjs (#4837 stream A — near-instant single-article publish)
+// publish-article-fast.mjs (#4837 stream A — near-instant article publish)
 //
-// Renders ONE blog article's static HTML for all 4 locales WITHOUT running the
+// Renders one or more blog articles' static HTML for all 4 locales WITHOUT running the
 // full `vite build` (~25-34 min, OOM-prone). Reuses the EXACT same functions
 // the full build's closeBundle hooks call, in the same order, so the output is
-// byte-identical to what a full build would emit for this one article (see
+// byte-identical to what a full build would emit for these articles (see
 // scripts/check-article-byte-identity.mjs). Do NOT reimplement any transform
 // here — import + call the shared function; a fork would silently drift the
 // fast path and the full build apart.
 //
 // CLI:
-//   npx -y tsx scripts/publish-article-fast.mjs --id <articleId> --section <frontaliere|svizzera> --out <scratchDistDir> --summary <summaryJsonPath>
+//   npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <frontaliere|svizzera> --out <scratchDistDir> --summary <summaryJsonPath>
 //
 // Pipeline (mirrors postWalkCoordinatorPlugin.ts's real per-file order —
 // see build-plugins/postWalkWorker.mjs for the production analogue):
-//   1. renderArticlePages({onlyArticleId}) — 4 locale index.html (+ a
+//   1. renderArticlePages({onlyArticleIds}) — 4 locale index.html (+ a
 //      placeholder flat .html sibling, immediately replaced by step 2).
 //   2. flat-redirect transform — buildFlatBridgeFromSibling() derives the
 //      redirect-bridge sibling from the JUST-rendered index.html. Built from
@@ -136,24 +136,44 @@ const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 
 function parseArgs(argv) {
-  const out = {};
+  const out = { ids: [] };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === '--id') out.id = argv[++i];
-    else if (a === '--section') out.section = argv[++i];
+    if (a === '--id') out.ids.push(argv[++i]);
+    else if (a === '--ids') {
+      try {
+        const ids = JSON.parse(argv[++i]);
+        if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) {
+          throw new Error('expected a non-empty-string array');
+        }
+        out.ids.push(...ids);
+      } catch (err) {
+        console.error(`[publish-article-fast] --ids must be a JSON array of article ids: ${err.message}`);
+        process.exit(1);
+      }
+    } else if (a === '--section') out.section = argv[++i];
     else if (a === '--out') out.out = argv[++i];
     else if (a === '--summary') out.summary = argv[++i];
   }
-  const missing = ['id', 'section', 'out', 'summary'].filter((k) => !out[k]);
+  out.ids = [...new Set(out.ids)];
+  if (out.ids.some((id) => typeof id !== 'string' || !id)) {
+    console.error('[publish-article-fast] article ids must be non-empty strings');
+    process.exit(1);
+  }
+  const missing = [
+    ...(out.ids.length ? [] : ['id or ids']),
+    ...['section', 'out', 'summary'].filter((k) => !out[k]),
+  ];
   if (missing.length > 0) {
     console.error(`[publish-article-fast] missing required flag(s): ${missing.map((k) => `--${k}`).join(', ')}`);
-    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs --id <articleId> --section <frontaliere|svizzera> --out <scratchDistDir> --summary <summaryJsonPath>');
+    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <frontaliere|svizzera> --out <scratchDistDir> --summary <summaryJsonPath>');
     process.exit(1);
   }
   if (out.section !== 'frontaliere' && out.section !== 'svizzera') {
     console.error(`[publish-article-fast] --section must be "frontaliere" or "svizzera", got "${out.section}"`);
     process.exit(1);
   }
+  out.id = out.ids[0];
   return out;
 }
 
@@ -234,7 +254,7 @@ async function main() {
     rootDir: ROOT_DIR,
     distDir,
     section: args.section,
-    onlyArticleId: args.id,
+    onlyArticleIds: args.ids,
   });
 
   // Remove the symlink itself (unlink — the final path component IS the
@@ -242,13 +262,14 @@ async function main() {
   // before any of steps 2-7, none of which need distDir/images to exist.
   fs.rmSync(scratchImagesLink, { force: true });
 
-  if (entries.length === 0) {
+  const renderedIds = new Set(entries.map((entry) => entry.articleId));
+  const missingIds = args.ids.filter((id) => !renderedIds.has(id));
+  if (missingIds.length > 0) {
     console.error(
-      `[publish-article-fast] article id "${args.id}" not found in section "${args.section}" — check --id/--section`,
+      `[publish-article-fast] article id(s) not found in section "${args.section}": ${missingIds.join(', ')} — check --ids/--section`,
     );
     process.exit(1);
   }
-  const entry = entries[0];
 
   // ── Steps 2-5: flat-redirect -> contextual links -> hreflang -> hero-image CDN ──
   const { buildFlatBridgeFromSibling } = await import('../engine/flatHtmlRedirect.ts');
@@ -258,44 +279,46 @@ async function main() {
   const { BASE_URL } = await import('../host/constants.ts');
 
   const locales = ['it', 'en', 'de', 'fr'];
-  for (const locale of locales) {
-    const indexRel = entry.paths[locale];
-    const flatRel = entry.flatPaths[locale];
-    if (!indexRel || !flatRel) continue; // locale not rendered (defensive — both sections render all 4)
+  for (const entry of entries) {
+    for (const locale of locales) {
+      const indexRel = entry.paths[locale];
+      const flatRel = entry.flatPaths[locale];
+      if (!indexRel || !flatRel) continue; // locale not rendered (defensive — both sections render all 4)
 
-    const indexAbs = path.join(distDir, indexRel);
-    const flatAbs = path.join(distDir, flatRel);
-    const slashUrl = entry.urls[locale];
+      const indexAbs = path.join(distDir, indexRel);
+      const flatAbs = path.join(distDir, flatRel);
+      const slashUrl = entry.urls[locale];
 
-    const freshIndexHtml = fs.readFileSync(indexAbs, 'utf-8');
+      const freshIndexHtml = fs.readFileSync(indexAbs, 'utf-8');
 
-    // 2. flat-redirect transform (built from the fresh, pre-postprocess content)
-    const bridgeHtml = buildFlatBridgeFromSibling(freshIndexHtml, slashUrl);
+      // 2. flat-redirect transform (built from the fresh, pre-postprocess content)
+      const bridgeHtml = buildFlatBridgeFromSibling(freshIndexHtml, slashUrl);
 
-    // 3. contextual links (index.html only)
-    const linked = injectContextualLinks(freshIndexHtml, locale);
-    let indexHtml = linked.html;
+      // 3. contextual links (index.html only)
+      const linked = injectContextualLinks(freshIndexHtml, locale);
+      let indexHtml = linked.html;
 
-    // 4. hreflang postprocess — all 4 locale index.html for this article
-    // already exist in distDir, so existsCheck can hit the real filesystem.
-    const hreflangResult = transformHreflang(indexHtml, distDir, BASE_URL, (absPath) => fs.existsSync(absPath));
-    if (hreflangResult) indexHtml = hreflangResult.html;
+      // 4. hreflang postprocess — all 4 locale index.html for this article
+      // already exist in distDir, so existsCheck can hit the real filesystem.
+      const hreflangResult = transformHreflang(indexHtml, distDir, BASE_URL, (absPath) => fs.existsSync(absPath));
+      if (hreflangResult) indexHtml = hreflangResult.html;
 
-    // 5. hero-image CDN rewrite — applied to both files, matching
-    // blogImageCdnFinalizePlugin's unconditional whole-dist walk.
-    indexHtml = rewriteBlogImageRefs(indexHtml);
-    const finalBridgeHtml = rewriteBlogImageRefs(bridgeHtml);
+      // 5. hero-image CDN rewrite — applied to both files, matching
+      // blogImageCdnFinalizePlugin's unconditional whole-dist walk.
+      indexHtml = rewriteBlogImageRefs(indexHtml);
+      const finalBridgeHtml = rewriteBlogImageRefs(bridgeHtml);
 
-    // Last transform before the bytes hit disk, so it covers steps 1-5 and
-    // anything a later step inserts through them. A clean page comes back
-    // byte-identical, which keeps the byte-identity contract with the full
-    // build intact (scripts/check-article-byte-identity.mjs).
-    const indexClean = sanitizeHtmlDocument(indexHtml);
-    reportStrippedControlChars(indexAbs, indexHtml, indexClean);
-    fs.writeFileSync(indexAbs, indexClean, 'utf-8');
-    const flatClean = sanitizeHtmlDocument(finalBridgeHtml);
-    reportStrippedControlChars(flatAbs, finalBridgeHtml, flatClean);
-    fs.writeFileSync(flatAbs, flatClean, 'utf-8');
+      // Last transform before the bytes hit disk, so it covers steps 1-5 and
+      // anything a later step inserts through them. A clean page comes back
+      // byte-identical, which keeps the byte-identity contract with the full
+      // build intact (scripts/check-article-byte-identity.mjs).
+      const indexClean = sanitizeHtmlDocument(indexHtml);
+      reportStrippedControlChars(indexAbs, indexHtml, indexClean);
+      fs.writeFileSync(indexAbs, indexClean, 'utf-8');
+      const flatClean = sanitizeHtmlDocument(finalBridgeHtml);
+      reportStrippedControlChars(flatAbs, finalBridgeHtml, flatClean);
+      fs.writeFileSync(flatAbs, flatClean, 'utf-8');
+    }
   }
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
@@ -439,19 +462,33 @@ async function main() {
 
   // subtree convention matches scripts/lib/section-shard-slugs.json's own
   // documented formula: it -> <slug>, en/de/fr -> <loc>/<slug>.
-  // Hub-archive relpaths for this locale are appended after the article's
-  // own 2 paths — push-article-shard-incremental.sh takes an arbitrary list
-  // of relpaths per locale/section invocation, so no separate push call or
+  // All article pages, redirect bridges, and hub-archive paths for this locale
+  // are sent together — push-article-shard-incremental.sh takes an arbitrary
+  // list of relpaths per locale/section invocation, so no separate push call or
   // workflow change is needed (.github/workflows/fast-publish-article.yml
   // already forwards every entry in `paths[]`).
-  const shards = locales.map((locale) => ({
-    locale,
-    subtree: locale === 'it' ? slugMap.it : `${locale}/${slugMap[locale]}`,
-    paths: [entry.paths[locale], entry.flatPaths[locale], ...hubResult.pathsByLocale[locale]],
-    url: entry.urls[locale],
-  }));
+  const shards = locales.map((locale) => {
+    const articleIds = entries.filter((entry) => entry.paths[locale]).map((entry) => entry.articleId);
+    const bridgeIds = entries.filter((entry) => entry.flatPaths[locale]).map((entry) => entry.articleId);
+    const articlePaths = entries.map((entry) => entry.paths[locale]).filter(Boolean);
+    const bridgePaths = entries.map((entry) => entry.flatPaths[locale]).filter(Boolean);
+    const hubPaths = hubResult.pathsByLocale[locale] ?? [];
+    const urls = entries.map((entry) => entry.urls[locale]).filter(Boolean);
+    return {
+      locale,
+      subtree: locale === 'it' ? slugMap.it : `${locale}/${slugMap[locale]}`,
+      articleIds,
+      bridgeIds,
+      articlePaths,
+      bridgePaths,
+      hubPaths,
+      paths: [...articlePaths, ...bridgePaths, ...hubPaths],
+      url: urls[0],
+      urls,
+    };
+  });
 
-  // Derive cdnUploads from entry.img's ACTUAL resolved directory — NOT a
+  // Derive cdnUploads from each entry.img's ACTUAL resolved directory — NOT a
   // hardcoded `images/blog/`. resolveImagePath() (ogPagesPlugin.ts) resolves
   // most articles to a per-article /images/blog/<slug>.<ext> hero, but a
   // meaningful minority (47/3018 in data/blog-articles-data.ts, e.g. the
@@ -464,34 +501,43 @@ async function main() {
   // article, breaking stream B/C's CDN push. DEFAULT_IMG ('/og-image.png',
   // last-resort fallback, not under images/) has no thumbnail and is already
   // a static site asset — never listed here.
-  const heroImgRel = entry.img.replace(/^\/+/, ''); // e.g. "images/blog/foo.webp" | "images/places/lugano-view.webp"
-  const heroDir = path.dirname(heroImgRel); // e.g. "images/blog" | "images/places"
-  const cdnUploads = [];
-  if (heroDir.startsWith('images/') || heroDir === 'images') {
-    const heroExt = path.extname(heroImgRel) || '.webp';
-    const heroBase = path.basename(heroImgRel, heroExt);
-    const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
-    const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
-    if (fs.existsSync(path.join(ROOT_DIR, heroLocal))) {
-      cdnUploads.push({ local: heroLocal, key: path.join(heroDir, `${heroBase}${heroExt}`) });
-    } else {
-      console.error(`[publish-article-fast] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
-    }
-    if (fs.existsSync(path.join(ROOT_DIR, thumbLocal))) {
-      cdnUploads.push({ local: thumbLocal, key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`) });
-    } else {
-      console.error(`[publish-article-fast] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
+  const cdnUploadsByKey = new Map();
+  for (const entry of entries) {
+    const heroImgRel = entry.img.replace(/^\/+/, ''); // e.g. "images/blog/foo.webp" | "images/places/lugano-view.webp"
+    const heroDir = path.dirname(heroImgRel); // e.g. "images/blog" | "images/places"
+    if (heroDir.startsWith('images/') || heroDir === 'images') {
+      const heroExt = path.extname(heroImgRel) || '.webp';
+      const heroBase = path.basename(heroImgRel, heroExt);
+      const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
+      const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
+      if (fs.existsSync(path.join(ROOT_DIR, heroLocal))) {
+        cdnUploadsByKey.set(path.join(heroDir, `${heroBase}${heroExt}`), {
+          local: heroLocal,
+          key: path.join(heroDir, `${heroBase}${heroExt}`),
+        });
+      } else {
+        console.error(`[publish-article-fast] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
+      }
+      if (fs.existsSync(path.join(ROOT_DIR, thumbLocal))) {
+        cdnUploadsByKey.set(path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`), {
+          local: thumbLocal,
+          key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`),
+        });
+      } else {
+        console.error(`[publish-article-fast] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
+      }
     }
   }
+  const cdnUploads = [...cdnUploadsByKey.values()];
 
-  const summary = { id: args.id, section: args.section, shards, cdnUploads };
+  const summary = { id: args.ids.length === 1 ? args.id : null, ids: args.ids, section: args.section, shards, cdnUploads };
   const summaryPath = path.resolve(args.summary);
   fs.mkdirSync(path.dirname(summaryPath), { recursive: true });
   fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + '\n', 'utf-8');
 
   const wallMs = Date.now() - t0;
   console.log(
-    `[publish-article-fast] done — id=${args.id} section=${args.section} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
+    `[publish-article-fast] done — ids=${args.ids.join(',')} section=${args.section} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
   );
   console.log(`[publish-article-fast] summary written to ${summaryPath}`);
 }

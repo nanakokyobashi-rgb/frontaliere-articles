@@ -12584,6 +12584,21 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.gianpaolo-calzi-solbiatese.title': 'Solbiatese calcio : gianpaolo calzi, nouveau responsable du secteur technique',
     'blog.article.gianpaolo-calzi-solbiatese.excerpt': 'La Solbiatese Calcio annonce l’arrivée de Gianpaolo Calzi en tant que nouveau responsable du secteur technique, avec pour objectif de renforcer la structure du club.',
     'blog.article.gianpaolo-calzi-solbiatese.imageAlt': 'Stade de football moderne dans un cadre paysager au Tessin.',
+    'blog.article.sequestro-contanti-como-brogeda.title': 'Saisie d\'espèces à Como-Brogeda : plus de 240 mila euro',
+    'blog.article.sequestro-contanti-como-brogeda.excerpt': 'Plus de 240.000 euro en espèces saisis au poste-frontière de Como-Brogeda par ADM et Guardia di Finanza lors de deux interventions distinctes.',
+    'blog.article.sequestro-contanti-como-brogeda.imageAlt': 'Contrôles douaniers et saisie de liquidités à la frontière de Como-Brogeda',
+    'blog.article.raduno-auto-moto-cocquio.title': 'Cocquio Trevisago : rassemblement non autorisé dans la via Appennini',
+    'blog.article.raduno-auto-moto-cocquio.excerpt': 'Dimanche 4 octobre, une vingtaine de motos et trois voitures ont occupé la via Appennini pour des courses de vitesse et des wheelings. Les carabiniers de Besozzo sont intervenus.',
+    'blog.article.raduno-auto-moto-cocquio.imageAlt': 'Intervention des carabiniers dans la Via Appennini à Cocquio Trevisago',
+    'blog.article.camion-avaria-san-nicolao.title': 'Camion en panne dans le tunnel San Nicolao',
+    'blog.article.camion-avaria-san-nicolao.excerpt': 'Un camion en panne dans le tunnel San Nicolao crée des perturbations sur l\'A2 : voie de gauche praticable vers le sud et retards pouvant aller jusqu\'à 20 minutes vers le nord.',
+    'blog.article.camion-avaria-san-nicolao.imageAlt': 'Camion en panne dans le tunnel San Nicolao, circulation perturbée sur l\'A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Espèces non déclarées : saisies à Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Deux contrôles au poste-frontière autoroutier de Como-Brogeda ont conduit à la saisie de 128.500 et 113.450 euros, des montants excédant le seuil de 10.000 euros.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Véhicules au poste-frontière autoroutier de Como-Brogeda',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Santé mentale : le DSS introduit la prévention dans les entreprises',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'Le DSS et le Forum GSA Ticino promeuvent la santé mentale au travail. Données : 32,3% des jeunes tessinois se sentent vidés, 61% des apprentis souffrent.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Environnement de travail professionnel dans un bureau au Tessin.',
 };
 
 export default blogMetaFr;

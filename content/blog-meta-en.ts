@@ -12582,6 +12582,21 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.gianpaolo-calzi-solbiatese.title': 'Solbiatese calcium: gianpaolo calzi new technical area',
     'blog.article.gianpaolo-calzi-solbiatese.excerpt': 'Solbiatese Calcio announces the entry of Gianpaolo Calzi as the new Head of the Technical Area, aiming to strengthen the corporate structure.',
     'blog.article.gianpaolo-calzi-solbiatese.imageAlt': 'Modern football stadium in a landscape setting in Ticino.',
+    'blog.article.sequestro-contanti-como-brogeda.title': 'Cash seizure in Como-Brogeda: over 240 thousand euro',
+    'blog.article.sequestro-contanti-como-brogeda.excerpt': 'More than 240.000 euro in cash seized at the Como-Brogeda border crossing by ADM and the Guardia di Finanza in two separate operations.',
+    'blog.article.sequestro-contanti-como-brogeda.imageAlt': 'Customs checks and cash seizure at Como-Brogeda border crossing',
+    'blog.article.raduno-auto-moto-cocquio.title': 'Cocquio Trevisago: unauthorized gathering on via Appennini',
+    'blog.article.raduno-auto-moto-cocquio.excerpt': 'Sunday, October 4, around twenty motorcycles and three cars took over via Appennini for speed races and wheelies. Carabinieri officers from Besozzo intervened.',
+    'blog.article.raduno-auto-moto-cocquio.imageAlt': 'Carabinieri intervention in via Appennini, Cocquio Trevisago',
+    'blog.article.camion-avaria-san-nicolao.title': 'Truck breakdown in the San Nicolao tunnel',
+    'blog.article.camion-avaria-san-nicolao.excerpt': 'A truck breakdown in the San Nicolao tunnel is causing disruptions on the A2: the left lane is passable southbound and delays of up to 20 minutes northbound.',
+    'blog.article.camion-avaria-san-nicolao.imageAlt': 'Truck breakdown in the San Nicolao tunnel causing disruption on the A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Undeclared cash: seizures at Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Two checks at the Como-Brogeda motorway border crossing led to the seizure of 128.500 and 113.450 euro, amounts exceeding the threshold of 10.000 euro.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Vehicles at the Como-Brogeda highway border crossing',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Mental health: DSS brings prevention into companies',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'DSS and Forum GSA Ticino promote mental health at work. Data: 32,3% of young people in Ticino feel drained, 61% of apprentices are suffering.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Professional work environment in a Ticino office.',
 };
 
 export default blogMetaEn;

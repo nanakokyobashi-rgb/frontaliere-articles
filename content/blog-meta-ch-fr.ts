@@ -7730,6 +7730,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.startup-ticinesi-top100-2026.title': 'Trois entreprises tessinoises dans le Top100 Swiss Startup Award 2026',
     'blog.article.startup-ticinesi-top100-2026.excerpt': 'InkVivo, Jaipur Robotics et In Virtuo Laboratories représentent le Tessin dans le classement des cent startups suisses les plus prometteuses de 2026.',
     'blog.article.startup-ticinesi-top100-2026.imageAlt': 'Trois start-up tessinoises parmi les cent plus prometteuses au Top100 Swiss Startup Award 2026',
+    'blog.article.autisti-uber-svizzera-condizioni.title': 'Soixante-dix francs pour neuf heures de travail : la protestation',
+    'blog.article.autisti-uber-svizzera-condizioni.excerpt': 'Les conducteurs d\'Uber en Suisse dénoncent la dégradation de leurs conditions et demandent davantage de droits et de protections. Entre tarifs bas et arrivée de Bolt.',
+    'blog.article.autisti-uber-svizzera-condizioni.imageAlt': 'Les chauffeurs Uber en Suisse demandent de meilleures conditions',
+    'blog.article.allarme-aumento-affitti-svizzera.title': 'Loyers en Suisse : +32% en vingt ans, l\'alerte de l\'ASI',
+    'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'L\'Association suisse des locataires signale une hausse de 32,1% entre 2005 et 2025. Les bas revenus sont sous pression : les personnes qui gagnent moins de 4\'000 francs consacrent 37,8% au logement.',
+    'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Immeuble résidentiel dans une ville suisse',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Loyers en Suisse : hausse de 32% en vingt ans',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'L\'Association suisse des locataires signale des hausses de 32,1% entre 2005 et 2025. Pression sur les revenus faibles et moyens et nouvelles revendications politiques.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Immeubles résidentiels en Suisse avec des loyers en hausse',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'Vote sur la TVA pour l\'AVS : date et détails de la votation fédérale',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'Le 26 novembre 2026, on vote sur le financement de la 13e mensualité de l\'AVS par l\'augmentation de la TVA. Découvrez les taux, les échéances et les répercussions sur le budget.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Palais fédéral à Berne pour le vote sur la TVA',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo ferme pour travaux et licencie',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro ferme à partir du 30 décembre pour des travaux de 12 millions. 76 licenciements prévus sur 81 employés et réouverture en mai.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro',
 };
 
 export default blogMetaChFr;

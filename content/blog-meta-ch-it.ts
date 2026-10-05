@@ -7730,6 +7730,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.startup-ticinesi-top100-2026.title': 'Tre aziende ticinesi nella Top100 Swiss Startup Award 2026',
     'blog.article.startup-ticinesi-top100-2026.excerpt': 'InkVivo, Jaipur Robotics e In Virtuo Laboratories rappresentano il Ticino nella classifica delle cento startup svizzere più promettenti del 2026.',
     'blog.article.startup-ticinesi-top100-2026.imageAlt': 'Tre startup ticinesi tra le cento più promettenti al Top100 Swiss Startup Award 2026',
+    'blog.article.autisti-uber-svizzera-condizioni.title': 'Settanta franchi per nove ore di lavoro: la protesta',
+    'blog.article.autisti-uber-svizzera-condizioni.excerpt': 'I conducenti di Uber in Svizzera denunciano condizioni peggiorate e chiedono maggiori diritti e tutele. Tra tariffe basse e l\'arrivo di Bolt.',
+    'blog.article.autisti-uber-svizzera-condizioni.imageAlt': 'Autisti di Uber in Svizzera chiedono condizioni di lavoro migliori',
+    'blog.article.allarme-aumento-affitti-svizzera.title': 'Affitti in Svizzera: +32% in vent\'anni, l\'allarme dell\'ASI',
+    'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'L\'Associazione svizzera inquilini segnala un rincaro del 32,1% tra il 2005 e il 2025. Sotto pressione i redditi bassi: chi guadagna meno di 4\'000 franchi spende il 37,8% per la casa.',
+    'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Edificio residenziale urbano in Svizzera',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Affitti in Svizzera: aumento del 32% in vent\'anni',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'L\'Associazione svizzera inquilini segnala rincari del 32,1% tra il 2005 e il 2025. Pressione su redditi bassi e medi e nuove richieste politiche.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Palazzi di residenza in Svizzera con affitti in aumento',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'Voto IVA per AVS: data e dettagli della votazione federale',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'Il 26 novembre 2026 si vota sul finanziamento della 13a mensilità AVS tramite l aumento dell IVA. Scopri aliquote, scadenze e impatti sul bilancio.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Palazzo federale a Berna in primo piano per il voto sull IVA',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo chiude per lavori e licenzia',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude dal 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura a maggio.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hotel Villa Principe Leopoldo a Collina d\'Oro',
 };
 
 export default blogMetaChIt;

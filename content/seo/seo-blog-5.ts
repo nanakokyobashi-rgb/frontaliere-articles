@@ -99027,6 +99027,176 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sequestro-contanti-como-brogeda': {
+    title: 'Sequestro di contanti a Como-Brogeda: oltre 240 mila euro',
+    description: 'Scopri i dettagli dei controlli doganali a Como-Brogeda dove ADM e Guardia di Finanza hanno sequestrato oltre 240.000 euro in contanti in due interventi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sequestro, contanti, como-brogeda, oltre',
+    ogTitle: 'Sequestro di contanti a Como-Brogeda: oltre 240 mila euro',
+    ogDescription: 'Intercettati oltre 240.000 euro in contanti al valico autostradale di Como-Brogeda nei controlli di ADM e Guardia di Finanza. Scopri tutti i dettagli degli interventi.',
+    canonicalPath: '/articoli-frontaliere/sequestro-contanti-como-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sequestro di contanti a Como-Brogeda: oltre 240 mila euro",
+      "description": "Scopri i dettagli dei controlli doganali a Como-Brogeda dove ADM e Guardia di Finanza hanno sequestrato oltre 240.000 euro in contanti in due interventi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/sequestro-contanti-como-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controlli doganali e sequestro di denaro al valico di Como-Brogeda"
+      },
+      "datePublished": "2026-10-05T06:29:04+00:00",
+      "dateModified": "2026-10-05T06:29:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestro-contanti-como-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-raduno-auto-moto-cocquio': {
+    title: 'Cocquio Trevisago: raduno non autorizzato in via Appennini',
+    description: 'Raduno non autorizzato di moto e auto in via Appennini a Cocquio Trevisago: residenti chiamano i carabinieri di Besozzo. Dettagli sull\'intervento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cocquio, trevisago, raduno, autorizzato',
+    ogTitle: 'Cocquio Trevisago: raduno non autorizzato in via Appennini',
+    ogDescription: 'Domenica 4 ottobre un raduno non autorizzato di moto e auto in via Appennini a Cocquio Trevisago ha richiesto l\'intervento dei carabinieri di Besozzo dopo le segnalazioni dei residenti.',
+    canonicalPath: '/articoli-frontaliere/raduno-auto-moto-cocquio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cocquio Trevisago: raduno non autorizzato in via Appennini",
+      "description": "Raduno non autorizzato di moto e auto in via Appennini a Cocquio Trevisago: residenti chiamano i carabinieri di Besozzo. Dettagli sull'intervento.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/raduno-auto-moto-cocquio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Intervento dei carabinieri in via Appennini a Cocquio Trevisago"
+      },
+      "datePublished": "2026-10-05T06:57:36+00:00",
+      "dateModified": "2026-10-05T06:57:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/raduno-auto-moto-cocquio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-camion-avaria-san-nicolao': {
+    title: 'Camion in avaria nella galleria San Nicolao | Frontaliere Ticino',
+    description: 'Camion in avaria nella galleria San Nicolao: disagi sull\'A2 verso sud e traffico congestionato tra Mendrisio e il tunnel, con ritardi fino a 20 minuti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, camion, avaria, nella, galleria',
+    ogTitle: 'Camion in avaria nella galleria San Nicolao',
+    ogDescription: 'La viabilità sull\'A2 è condizionata da un camion in avaria nella galleria San Nicolao. Verso sud è percorribile solo la corsia di sinistra già da Grancia; verso nord il TCS segnala congestione tra Mendrisio e il tunnel, con ritardi fino a 20 minuti.',
+    canonicalPath: '/articoli-frontaliere/camion-avaria-san-nicolao/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Camion in avaria nella galleria San Nicolao",
+      "description": "Camion in avaria nella galleria San Nicolao: disagi sull'A2 verso sud e traffico congestionato tra Mendrisio e il tunnel, con ritardi fino a 20 minuti.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/camion-avaria-san-nicolao.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Camion in avaria nella galleria San Nicolao e disagi sull'A2"
+      },
+      "datePublished": "2026-10-05T07:32:18+00:00",
+      "dateModified": "2026-10-05T07:32:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/camion-avaria-san-nicolao/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sequestri-contanti-brogeda': {
+    title: 'Contanti non dichiarati: sequestri a Brogeda | Frontaliere Ticino',
+    description: 'A Como-Brogeda la Guardia di Finanza ha sequestrato 128.500 e 113.450 euro dopo due controlli su contanti oltre la soglia di 10.000 euro. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, contanti, dichiarati, sequestri, brogeda',
+    ogTitle: 'Oltre 240 mila euro sequestrati a Brogeda',
+    ogDescription: 'Due controlli al valico autostradale di Como-Brogeda hanno portato al ritrovamento di oltre 240 mila euro in contanti. Le somme eccedenti la soglia di 10.000 euro sono state sequestrate come garanzia per le sanzioni amministrative.',
+    canonicalPath: '/articoli-frontaliere/sequestri-contanti-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Contanti non dichiarati: sequestri a Brogeda",
+      "description": "A Como-Brogeda la Guardia di Finanza ha sequestrato 128.500 e 113.450 euro dopo due controlli su contanti oltre la soglia di 10.000 euro. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/sequestri-contanti-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veicoli al valico autostradale di Como-Brogeda"
+      },
+      "datePublished": "2026-10-05T08:04:32+00:00",
+      "dateModified": "2026-10-05T08:04:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestri-contanti-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prevenzione-salute-aziende-ticinesi': {
+    title: 'Salute mentale: il DSS porta la prevenzione nelle aziende',
+    description: 'Il DSS e il Forum GSA Ticino promuovono la salute mentale nelle aziende. Scopri i dati su stress e apprendisti e come partecipare agli eventi di prevenzione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, porta, prevenzione',
+    ogTitle: 'Salute mentale sul lavoro: nuove iniziative in Ticino',
+    ogDescription: 'Il DSS e il Forum GSA Ticino lanciano programmi di prevenzione aziendale. Analisi dei dati sullo stress lavorativo e dettagli sugli appuntamenti formativi del 16 ottobre.',
+    canonicalPath: '/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salute mentale: il DSS porta la prevenzione nelle aziende",
+      "description": "Il DSS e il Forum GSA Ticino promuovono la salute mentale nelle aziende. Scopri i dati su stress e apprendisti e come partecipare agli eventi di prevenzione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prevenzione-salute-aziende-ticinesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro professionale in un ufficio ticinese."
+      },
+      "datePublished": "2026-10-05T08:37:00+00:00",
+      "dateModified": "2026-10-05T08:37:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

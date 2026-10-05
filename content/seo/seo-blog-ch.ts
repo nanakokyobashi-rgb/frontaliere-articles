@@ -97595,6 +97595,176 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-autisti-uber-svizzera-condizioni': {
+    title: 'Settanta franchi per nove ore di lavoro: la protesta',
+    description: 'I conducenti di Uber in Svizzera chiedono tutele e condizioni migliori. Tariffe in calo, status dei lavoratori e differenze tra Zurigo e Ginevra.',
+    keywords: 'frontalieri, ticino, svizzera, italia, settanta, franchi, nove, lavoro',
+    ogTitle: 'Settanta franchi per nove ore: la protesta degli autisti Uber in Svizzera',
+    ogDescription: 'I conducenti Uber in Svizzera denunciano guadagni in calo e chiedono tutele. Analisi sulla qualificazione del rapporto di lavoro tra Zurigo, Ginevra e le richieste del sindacato Unia.',
+    canonicalPath: '/articoli-svizzera/autisti-uber-svizzera-condizioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Settanta franchi per nove ore di lavoro: la protesta",
+      "description": "I conducenti di Uber in Svizzera chiedono tutele e condizioni migliori. Tariffe in calo, status dei lavoratori e differenze tra Zurigo e Ginevra.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/autisti-uber-svizzera-condizioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autisti di Uber in Svizzera chiedono condizioni di lavoro migliori"
+      },
+      "datePublished": "2026-10-05T06:45:07+00:00",
+      "dateModified": "2026-10-05T06:45:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/autisti-uber-svizzera-condizioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-allarme-aumento-affitti-svizzera': {
+    title: 'Affitti in Svizzera: +32% in vent\'anni, l\'allarme dell\'ASI',
+    description: 'L\'Associazione svizzera inquilini segnala un rincaro del 32,1% dal 2005. Sotto pressione i redditi bassi: chi guadagna meno di 4\'000 franchi spende il 37,8%',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, vent, anni, allarme',
+    ogTitle: 'Affitti in Svizzera: +32% in vent\'anni, l\'allarme dell\'ASI',
+    ogDescription: 'L\'Associazione svizzera inquilini lancia l\'allarme: gli affitti sono cresciuti del 32,1% in vent\'anni. Particolarmente colpite le famiglie con redditi bassi, che destinano oltre il 37% del budget alla casa.',
+    canonicalPath: '/articoli-svizzera/allarme-aumento-affitti-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera: +32% in vent'anni, l'allarme dell'ASI",
+      "description": "L'Associazione svizzera inquilini segnala un rincaro del 32,1% dal 2005. Sotto pressione i redditi bassi: chi guadagna meno di 4'000 franchi spende il 37,8%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/allarme-aumento-affitti-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale urbano in Svizzera"
+      },
+      "datePublished": "2026-10-05T07:13:59+00:00",
+      "dateModified": "2026-10-05T07:13:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/allarme-aumento-affitti-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-svizzera-aumento-asi': {
+    title: 'Affitti in Svizzera: aumento del 32% in vent\'anni',
+    description: 'Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L\'ASI denuncia l\'impatto su redditi e inquilini. Scopri i dati e le richieste.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, aumento, vent, anni',
+    ogTitle: 'Affitti in Svizzera: +32% in vent\'anni e alloggi costosi',
+    ogDescription: 'L\'Associazione svizzera inquilini analizza i rincari del 32,1% tra il 2005 e il 2025. Impatto su famiglie a basso reddito, tassi di riferimento all\'1,25% e trasformazioni della proprietà immobiliare in Svizzera.',
+    canonicalPath: '/articoli-svizzera/affitti-svizzera-aumento-asi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera: aumento del 32% in vent'anni",
+      "description": "Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L'ASI denuncia l'impatto su redditi e inquilini. Scopri i dati e le richieste.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-aumento-asi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi di residenza in Svizzera con affitti in aumento"
+      },
+      "datePublished": "2026-10-05T07:50:21+00:00",
+      "dateModified": "2026-10-05T07:50:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-svizzera-aumento-asi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-iva-avs-novembre-2026': {
+    title: 'Voto IVA per AVS: data e dettagli della votazione federale',
+    description: 'Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, data, dettagli, votazione',
+    ogTitle: 'Voto IVA per l AVS del 26 novembre 2026: guida completa alle aliquote e alla 13a mensilità',
+    ogDescription: 'Tutti i dettagli sulla votazione federale del 26 novembre 2026 per il finanziamento della 13a mensilità AVS tramite l aumento dell IVA. Analisi delle aliquote, delle riserve e delle scadenze ufficiali della Confederazione.',
+    canonicalPath: '/articoli-svizzera/voto-iva-avs-novembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto IVA per AVS: data e dettagli della votazione federale",
+      "description": "Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/voto-iva-avs-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna in primo piano per il voto sull IVA"
+      },
+      "datePublished": "2026-10-05T08:19:02+00:00",
+      "dateModified": "2026-10-05T08:19:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-iva-avs-novembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-villa-principe-leopoldo-chiude': {
+    title: 'Villa Principe Leopoldo chiude per lavori e licenzia',
+    description: 'L\'Hotel Villa Principe Leopoldo a Collina d\'Oro chiude il 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura',
+    keywords: 'frontalieri, ticino, svizzera, italia, villa, principe, leopoldo, chiude',
+    ogTitle: 'Villa Principe Leopoldo chiude per lavori e licenzia 76 persone',
+    ogDescription: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude temporaneamente dal 30 dicembre per un investimento di 12 milioni. Previsto il licenziamento di 76 dipendenti su 81 e riapertura a maggio.',
+    canonicalPath: '/articoli-svizzera/villa-principe-leopoldo-chiude/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Villa Principe Leopoldo chiude per lavori e licenzia",
+      "description": "L'Hotel Villa Principe Leopoldo a Collina d'Oro chiude il 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/villa-principe-leopoldo-chiude.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro"
+      },
+      "datePublished": "2026-10-05T08:50:48+00:00",
+      "dateModified": "2026-10-05T08:50:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/villa-principe-leopoldo-chiude/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

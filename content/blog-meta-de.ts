@@ -12581,6 +12581,21 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.gianpaolo-calzi-solbiatese.title': 'Solbiatese calcio: gianpaolo calzi neuer Leiter des technischen Bereichs',
     'blog.article.gianpaolo-calzi-solbiatese.excerpt': 'Die Solbiatese Calcio gibt bekannt, dass Gianpaolo Calzi als neuer Leiter des technischen Bereichs zum Verein stößt, um die Vereinsstruktur zu stärken.',
     'blog.article.gianpaolo-calzi-solbiatese.imageAlt': 'Modernes Fußballstadion in einer Landschaftsumgebung im Tessin.',
+    'blog.article.sequestro-contanti-como-brogeda.title': 'Bargeldbeschlagnahme in Como-Brogeda: über 240.000 Euro',
+    'blog.article.sequestro-contanti-como-brogeda.excerpt': 'Über 240.000 Euro in bar, die von ADM und Guardia di Finanza in zwei getrennten Interventionen an der Grenze von Como-Brogeda beschlagnahmt wurden.',
+    'blog.article.sequestro-contanti-como-brogeda.imageAlt': 'Zollkontrollen und Bargeldbeschlagnahme am Grenzübergang Como-Brogeda',
+    'blog.article.raduno-auto-moto-cocquio.title': 'Cocquio Trevisago: nicht genehmigte Versammlung in der Via Appennini',
+    'blog.article.raduno-auto-moto-cocquio.excerpt': 'Am Sonntag, den 4. Oktober, besetzten etwa zwanzig Motorräder und drei Autos die Via Apennini für Geschwindigkeitsrennen und Anstiege. Die Carabinieri von Besozzo intervenierten.',
+    'blog.article.raduno-auto-moto-cocquio.imageAlt': 'Polizeieinsatz in der Via Appennini in Cocquio Trevisago',
+    'blog.article.camion-avaria-san-nicolao.title': 'Lastwagen mit Panne im Tunnel San Nicolao',
+    'blog.article.camion-avaria-san-nicolao.excerpt': 'Ein liegen gebliebener Lastwagen im Tunnel San Nicolao sorgt auf der A2 für Behinderungen: In Richtung Süden ist die linke Fahrspur befahrbar, in Richtung Norden kommt es zu Verzögerungen von bis zu 20 Minuten.',
+    'blog.article.camion-avaria-san-nicolao.imageAlt': 'Pannenlastwagen im San-Nicolao-Tunnel verursacht Behinderungen auf der A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Nicht deklariertes Bargeld: Beschlagnahmungen in Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Zwei Kontrollen am Autobahngrenzübergang Como-Brogeda führten zur Beschlagnahme von 128.500 und 113.450 Euro, Beträgen über der Schwelle von 10.000 Euro.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Fahrzeuge am Autobahn-Grenzübergang Como-Brogeda',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Psychische Gesundheit: DSS bringt Prävention in Unternehmen',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'Das DSS und das Forum GSA Tessin fördern die psychische Gesundheit am Arbeitsplatz. Daten: 32,3% der jungen Tessiner fühlen sich leer, 61% der Lernenden leiden.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Professionelle Arbeitsumgebung in einem Büro im Tessin.',
 };
 
 export default blogMetaDe;

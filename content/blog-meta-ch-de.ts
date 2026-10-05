@@ -7730,6 +7730,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.startup-ticinesi-top100-2026.title': 'Drei Tessiner Unternehmen beim Top100 Swiss Startup Award 2026',
     'blog.article.startup-ticinesi-top100-2026.excerpt': 'InkVivo, Jaipur Robotics und In Virtuo Laboratories vertreten das Tessin in der Rangliste der hundert vielversprechendsten Schweizer Startups des Jahres 2026.',
     'blog.article.startup-ticinesi-top100-2026.imageAlt': 'Drei Tessiner Start-ups unter den vielversprechendsten beim Top100 Swiss Startup Award 2026',
+    'blog.article.autisti-uber-svizzera-condizioni.title': 'Siebzig Franken für neun Arbeitsstunden: der Protest',
+    'blog.article.autisti-uber-svizzera-condizioni.excerpt': 'Die Uber-Fahrer in der Schweiz beklagen verschlechterte Bedingungen und fordern mehr Rechte und Schutz. Zwischen niedrigen Tarifen und dem Aufkommen von Bolt.',
+    'blog.article.autisti-uber-svizzera-condizioni.imageAlt': 'Uber-Fahrer in der Schweiz fordern bessere Arbeitsbedingungen',
+    'blog.article.allarme-aumento-affitti-svizzera.title': 'Laut ASI sind die Mieten in der Schweiz in zwanzig Jahren um 32 % gestiegen.',
+    'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'Der Schweizer Mieterverband berichtet von einem Anstieg der Wohnkosten um 32,1 % zwischen 2005 und 2025. Besonders betroffen sind Geringverdiener: Wer weniger als 4.000 Franken verdient, gibt 37,8 % für Wohnen aus.',
+    'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Wohngebäude in einer Schweizer Stadt',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Mieten in der Schweiz: Anstieg um 32% in zwanzigJahren',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'Der Schweizerische Mieterverband meldet Preissteigerungen von 32,1 Prozent zwischen 2005 und 2025. Druck auf niedrige und mittlere Einkommen und neue politische Forderungen.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Wohngebäude in der Schweiz mit steigenden Mieten',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'MWST-Abstimmung für AHV: Datum und Details',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'Am 26. November 2026 wird über die Finanzierung des 13. AHV-Monatsgeldes mittels Mehrwertsteuererhöhung abgestimmt. Entdecken Sie Sätze, Fristen und Auswirkungen auf die Bilanz.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Bundeshaus in Bern für die MWST-Abstimmung',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo schließt wegen Bauarbeiten und entlässt',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'Das Hotel Villa Principe Leopoldo in Collina d\'Oro schließt ab dem 30. Dezember wegen Bauarbeiten für 12 Millionen. Vorgesehen sind 76 Entlassungen bei 81 Beschäftigten und eine Wiedereröffnung im Mai.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro',
 };
 
 export default blogMetaChDe;

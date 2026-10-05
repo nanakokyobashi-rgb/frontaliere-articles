@@ -7730,6 +7730,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.startup-ticinesi-top100-2026.title': 'Three Ticino companies in the Top100 Swiss Startup Award 2026',
     'blog.article.startup-ticinesi-top100-2026.excerpt': 'InkVivo, Jaipur Robotics, and In Virtuo Laboratories represent Ticino in the ranking of the one hundred most promising Swiss startups of 2026.',
     'blog.article.startup-ticinesi-top100-2026.imageAlt': 'Three Ticino startups among the top 100 most promising at the Top100 Swiss Startup Award 2026',
+    'blog.article.autisti-uber-svizzera-condizioni.title': 'Seventy francs for nine hours of work: the protest',
+    'blog.article.autisti-uber-svizzera-condizioni.excerpt': 'Uber drivers in Switzerland denounce worsening conditions and demand greater rights and protections. Amid low fares and Bolt\'s arrival.',
+    'blog.article.autisti-uber-svizzera-condizioni.imageAlt': 'Uber drivers in Switzerland demand better working conditions',
+    'blog.article.allarme-aumento-affitti-svizzera.title': 'Rents in Switzerland: +32% in twenty years, ASI sounds the alarm',
+    'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'The Swiss Tenants\' Association reports a 32,1% increase between 2005 and 2025. Low incomes are under pressure: those earning less than 4\'000 francs spend 37,8% on housing.',
+    'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Residential building in a Swiss city',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Rents in Switzerland: 32% increase in twenty years',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'The Swiss Tenants Association reports rent increases of 32,1% between 2005 and 2025. Pressure on low and middle incomes and new political demands.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Residential buildings in Switzerland with rising rents',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'VAT vote for AHV: date and details of the federal vote',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'On November 26, 2026, a vote will be held on financing the AVS 13th monthly payment through the VAT increase. Discover rates, deadlines, and impacts on the budget.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Federal Palace in Bern for the VAT vote',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo closes for renovations and lays off staff',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d\'Oro will close from December 30 for 12 million in renovation work. 76 layoffs out of 81 employees are expected, with reopening in May.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro',
 };
 
 export default blogMetaChEn;

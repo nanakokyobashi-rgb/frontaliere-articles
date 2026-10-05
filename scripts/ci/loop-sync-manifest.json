@@ -159,6 +159,16 @@
       }
     },
     {
+      "path": "scripts/ci/check-post-rebase-uniqueness.mjs",
+      "mode": "corpus-only",
+      "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni) che generate-article.yml esegue dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
+      "baseline": {
+        "site": null,
+        "corpus": "9771a71da3aaa747",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/native-automerge-gate.mjs",
       "mode": "adapted",
       "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507). Seconda divergenza dal 2026-09-24 (#1784): `parseActionsJobUrl` accetta solo la forma grezza canonica del `details_url` (niente dot-segment anche codificati, whitespace, userinfo/porta, slash finali, zeri iniziali), la stessa regola di `workflowRunIdentity` in native-automerge-sweep-policy.mjs legata da generator/tests/actions-details-url-canonical.test.mjs; il gemello del sito legge ancora il path gia' normalizzato da `new URL`, e la risalita va fatta la'. Terza divergenza dal 2026-09-25 (#1870): il corpus accetta una LGTM del fallback Codex (`github-actions[bot]` + marker) su un commit PRECEDENTE alla HEAD, perche' il `Re-review guard` di tests.yml la riporta dopo un merge di main senza far girare Codex e nessuna review nuova arriva mai sulla HEAD; `codexCarryForwardDecision` la ammette solo con la prova letta dal gate stesso: check `tests` verde sulla HEAD, marker `REVIEW_INPUT_REVISION` uguale al body corrente non modificato dopo l'inizio del review gate, guard riuscito dopo la review con claim, Codex e abort `skipped` (nomi da vitestCheck.mjs, pinnati da generator/tests/review-step-names.test.mjs) e un `tests` verde sul commit della review chiuso dopo la review. Il sito non ha questo ramo per costruzione: il suo tests.yml pubblica una review carry-forward sulla HEAD (`Publish carry-forward LGTM`) e il suo gate nativo pretende la HEAD esatta, quindi non c'e' niente da risalire.",
@@ -595,6 +605,16 @@
       }
     },
     {
+      "path": "scripts/ci/validate-canton-sections.mjs",
+      "mode": "corpus-only",
+      "reason": "Validatore del profilo editoriale corpus-only delle 24 sezioni cantonali (generator/data/canton-sections.json, D14 del piano sezioni cantonali): copertura dei gruppi di canton-url-slugs.json, URL https unici per cantone, DEAD_NEWS_DOMAINS e liste globali lette dal sorgente di create-article.mjs, policy robots D10 anche fra cantoni, cronMinute unici e fuori dai minuti di generate-article.yml, budget D19. Eseguito su ogni PR da generator/tests/canton-sections.test.mjs. Non esiste sul sito e non deve: il profilo, le fonti per cantone e il generatore che le consuma vivono solo nel corpus; il sito legge le sezioni come JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "403b6f7029b0818c",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
@@ -637,9 +657,19 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "65bc7f8e65b88fbc",
-        "corpus": "65bc7f8e65b88fbc",
-        "alignedAt": "2026-10-04"
+        "site": "1c042095f029e09c",
+        "corpus": "1c042095f029e09c",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/lib/merge-counter-conflict.mjs",
+      "mode": "corpus-only",
+      "reason": "Resolver del quarto ramo di rebase-onto-remote.sh (`--merge-counter <path>:<campo>`, D18): somma all'upstream l'incremento del commit rigiocato sui contatori riscritti per intero (topic-candidates-*-counter.json, quota-state.json). Nessun omonimo sul sito, come rebase-onto-remote.sh di cui e' parte.",
+      "baseline": {
+        "site": null,
+        "corpus": "a25a56f6060e3961",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -1346,9 +1376,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "55b3792f1756ff0a",
-        "corpus": "55b3792f1756ff0a",
-        "alignedAt": "2026-10-04"
+        "site": "30b1c966e5bfae39",
+        "corpus": "30b1c966e5bfae39",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -1968,7 +1998,7 @@
     {
       "path": "scripts/lib/rebase-onto-remote.sh",
       "mode": "corpus-only",
-      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--take-theirs` per i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Le tre categorie restano tre liste apposta: confonderle toglierebbe dal registro l'articolo appena generato lasciandone i corpi sul posto.",
+      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--take-theirs` per i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Dal 2026-10-05 (D18) un QUARTO ramo `--merge-counter <path>:<campo>` per i contatori riscritti per intero (`topic-candidates-{experimental,evergreen}-counter.json`, `quota-state.json`): passano da merge-counter-conflict.mjs, che scrive upstream + l'incremento del commit rigiocato, e se la fusione non e' dimostrabile ricadono su «prendi upstream». Le quattro categorie restano quattro liste apposta: confonderle toglierebbe dal registro l'articolo appena generato lasciandone i corpi sul posto, o perderebbe incrementi dei contatori.",
       "baseline": {
         "site": null,
         "corpus": "fe4d0086b9bfdca7",
@@ -2016,9 +2046,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "c349bc4c956a7e34",
-        "corpus": "c349bc4c956a7e34",
-        "alignedAt": "2026-09-09"
+        "site": "9feeaae40dc431f6",
+        "corpus": "9feeaae40dc431f6",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -2101,9 +2131,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "7b9dc0d8767d26b9",
-        "corpus": "7b9dc0d8767d26b9",
-        "alignedAt": "2026-10-04"
+        "site": "3eac2436981ae561",
+        "corpus": "3eac2436981ae561",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -3067,7 +3097,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 71074a81… registra Organization come tipo base dell'identita' canonica e conserva lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #11021 e corpus #2055; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 082cd6c3… registra il riferimento content-addressed a gtag-init.js in GTAG_SNIPPET (`/assets/gtag-init.js?v=<sha256[:12] di GTAG_INIT_CONTENT>`, sito PR #11496, issue 9403), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS entrano nella chiusura; conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #11496 e corpus PR 2176; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -3078,7 +3108,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "71074a8133a8eeb3592ee8e10b82c2be1021e8dadd173eeacf67d87392bad94d"
+        "sha256": "082cd6c37e2cbed2c86e6ae91b1c9af6de9b1ef9b91def9a93f49765522670cd"
       }
     },
     {
@@ -3294,9 +3324,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "9a29e7c057dc9f79",
-        "corpus": "9a29e7c057dc9f79",
-        "alignedAt": "2026-10-04"
+        "site": "fc57a59813a2ab09",
+        "corpus": "fc57a59813a2ab09",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -4065,9 +4095,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1b175fe8929c8803",
-        "corpus": "1b175fe8929c8803",
-        "alignedAt": "2026-09-29"
+        "site": "0b80c7dee45fa550",
+        "corpus": "0b80c7dee45fa550",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -4604,7 +4634,21 @@
         "site": "07d2982b682b6f1f",
         "corpus": "07d2982b682b6f1f",
         "alignedAt": "2026-10-04"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "generator/tests/followup-mint-admission.test.mjs",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/tests/followup-mint-gate-cross-repo-sources.test.mjs",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/tests/twin-census-pr-gate.test.mjs",
+          "mode": "non registrato"
+        }
+      ]
     },
     {
       "path": "scripts/lib/plate-auction-editorial.mjs",

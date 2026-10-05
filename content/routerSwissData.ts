@@ -2599,6 +2599,11 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'veicoli-berna-calcolo-pratico': { it: 'veicoli-berna-calcolo-pratico', en: 'bern-vehicle-tax-calculation-payment', de: 'bern-autosteuer-berechnung-zahlung', fr: 'berne-impot-vehicules-calcul-paiement' },
  'prezzi-pellet-ticino-aumenti': { it: 'prezzi-pellet-ticino-aumenti', en: 'ticino-pellet-prices-increases', de: 'tessin-pelletpreise-eroehungen', fr: 'prix-pellets-tessin-augmentations' },
  'startup-ticinesi-top100-2026': { it: 'startup-ticinesi-top100-2026', en: 'ticino-startups-top100-2026', de: 'tessiner-start-ups-top100-2026', fr: 'start-up-tessinoises-top100-2026' },
+ 'autisti-uber-svizzera-condizioni': { it: 'autisti-uber-svizzera-condizioni', en: 'uber-drivers-switzerland-conditions', de: 'uber-fahrer-schweiz-bedingungen', fr: 'chauffeurs-uber-suisse-conditions' },
+ 'allarme-aumento-affitti-svizzera': { it: 'allarme-aumento-affitti-svizzera', en: 'rent-hike-alarm-switzerland', de: 'mieterhoehungen-alarm-schweiz', fr: 'hausse-loyers-alerte-suisse' },
+ 'affitti-svizzera-aumento-asi': { it: 'affitti-svizzera-aumento-asi', en: 'switzerland-rents-increase-asi', de: 'mieten-schweiz-anstieg-asi', fr: 'loyers-suisse-hausse-asi' },
+ 'voto-iva-avs-novembre-2026': { it: 'voto-iva-avs-novembre-2026', en: 'vat-avs-vote-november-2026', de: 'mwst-ahv-abstimmung-november-2026', fr: 'vote-tva-avs-novembre-2026' },
+ 'villa-principe-leopoldo-chiude': { it: 'villa-principe-leopoldo-chiude', en: 'villa-principe-leopoldo-closes', de: 'villa-principe-leopoldo-schliesst', fr: 'villa-principe-leopoldo-ferme' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
