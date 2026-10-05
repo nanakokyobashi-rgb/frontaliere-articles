@@ -37,7 +37,28 @@ test('il dispatch accetta una lista JSON e il workflow la passa al renderer batc
 test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary', () => {
   assert.match(publisher, /const missingIds = args\.ids\.filter/);
   assert.match(publisher, /for \(const entry of entries\)/);
+  assert.match(publisher, /articleIds = entries\.filter\(\(entry\) => entry\.paths\[locale\]\)/);
+  assert.match(publisher, /bridgeIds = entries\.filter\(\(entry\) => entry\.flatPaths\[locale\]\)/);
   assert.match(publisher, /articlePaths = entries\.map/);
   assert.match(publisher, /bridgePaths = entries\.map/);
   assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.hubPaths\]/);
+  assert.match(publisher, /url: urls\[0\],[\s\S]*urls,/);
+});
+
+test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il batch', () => {
+  const validation = stepText('Validate what was rendered');
+  assert.match(validation, /\.articlePaths \| length/);
+  assert.match(validation, /\.bridgePaths \| length/);
+  assert.match(validation, /\.hubPaths \| length/);
+  assert.match(validation, /\.articleIds\[\]\?/);
+  assert.match(validation, /\.bridgeIds\[\]\?/);
+  assert.match(validation, /expected_ids/);
+
+  const probe = stepText('Verify the article is actually readable');
+  assert.match(probe, /\.articlePaths\[\]/);
+  assert.match(probe, /\.urls\[\]/);
+  assert.match(probe, /origin_locale_gate_started/);
+  assert.match(probe, /poll_origin "\$u" 1 8/);
+  assert.doesNotMatch(probe, /\.articlePaths\[0\]/);
+  assert.doesNotMatch(probe, /\.shards\[\]\.url(?:'|\s|$)/);
 });

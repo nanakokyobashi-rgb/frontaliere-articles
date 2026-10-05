@@ -310,7 +310,7 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
           article_count="$(jq -r '.ids | length' "$summary")"
-          expected_paths=$((article_count * 2 + 1))
+          expected_ids="$(jq -c '.ids | sort' "$summary")"
 
           # Every path the summary promises must exist and be non-empty. A
           # zero-item archive renders "successfully" (the core EMITS-EMPTY by
@@ -318,9 +318,21 @@ jobs:
           # something.
           fail=0
           for loc in it en de fr; do
-            n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .paths | length' "$summary")"
-            if [ "${n:-0}" -lt "$expected_paths" ]; then
-              echo "::error::locale $loc has only ${n:-0} paths (expected ${expected_paths}: ${article_count} articles + bridges + >=1 archive page)"
+            article_n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .articlePaths | length' "$summary")"
+            bridge_n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .bridgePaths | length' "$summary")"
+            hub_n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .hubPaths | length' "$summary")"
+            article_ids="$(jq -c --arg l "$loc" '[.shards[] | select(.locale==$l) | .articleIds[]?] | sort' "$summary")"
+            bridge_ids="$(jq -c --arg l "$loc" '[.shards[] | select(.locale==$l) | .bridgeIds[]?] | sort' "$summary")"
+            if [ "${article_n:-0}" -ne "$article_count" ] || [ "$article_ids" != "$expected_ids" ]; then
+              echo "::error::locale $loc has ${article_n:-0} article path(s) or the wrong article IDs (expected $article_count paths for $expected_ids; got $article_ids)"
+              fail=1
+            fi
+            if [ "${bridge_n:-0}" -ne "$article_count" ] || [ "$bridge_ids" != "$expected_ids" ]; then
+              echo "::error::locale $loc has ${bridge_n:-0} bridge path(s) or the wrong bridge IDs (expected $article_count paths for $expected_ids; got $bridge_ids)"
+              fail=1
+            fi
+            if [ "${hub_n:-0}" -lt 1 ]; then
+              echo "::error::locale $loc has no hub archive page"
               fail=1
             fi
           done
@@ -720,19 +732,20 @@ jobs:
               "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$PROBE_SEQ"
           }
 
-          # Poll $1 until it answers 200, at most $2 times. Last code observed
-          # is left in $POLL_CODE. $1 is never requested as-is: see probe_url.
+          # Poll $1 until it answers 200, at most $2 times, with optional curl
+          # timeout $3. Last code observed is left in $POLL_CODE. $1 is never
+          # requested as-is: see probe_url.
           poll_origin() {
-            local u="$1" attempts="$2" i
+            local u="$1" attempts="$2" timeout="${3:-20}" i
             POLL_CODE=000
             for i in $(seq 1 "$attempts"); do
               echo "poll_origin attempt $i/$attempts"
               set +e
-              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time "$timeout" \
                            -H 'Cache-Control: no-cache' "$(probe_url "$u")")"
               set -e
               [ "$POLL_CODE" = "200" ] && return 0
-              sleep 15
+              if [ "$i" -lt "$attempts" ]; then sleep 15; fi
             done
             return 1
           }
@@ -758,9 +771,26 @@ jobs:
           fi
 
           echo "── origin (hard gate)"
+          declare -A pages_rebuild_requested=()
+          declare -A origin_locale_gate_started=()
           while IFS=$'\t' read -r loc p0; do
             u="https://origin-$shard-$loc.frontaliereticino.ch/${p0%index.html}"
             repo="$owner/frontaliere-$shard-$loc"
+
+            # Wait/recover once per locale until its Pages deployment is live;
+            # then check each remaining article path once against that same build.
+            # A missing batch member cannot be repaired by repeating the same
+            # Pages wait for every ID, and doing so could exceed this job's timeout.
+            if [ -n "${origin_locale_gate_started[$loc]:-}" ]; then
+              if poll_origin "$u" 1 8; then
+                echo "  200  $u"
+              else
+                echo "::error::$u answers $POLL_CODE after the locale deployment gate passed"
+                fail=1
+              fi
+              continue
+            fi
+            origin_locale_gate_started[$loc]=1
 
             if poll_origin "$u" 12; then
               echo "  200  $u"
@@ -776,9 +806,15 @@ jobs:
             # legitimately outlast a 3-minute poll and still land moments
             # later. Requesting a second build here would race the one
             # already running, so this branch only waits; only `errored`
-            # (a build that already gave up) gets a rebuild request.
+            # (a build that already gave up) gets one rebuild request per locale.
             case "$PAGES_STATUS" in
               errored)
+                if [ -n "${pages_rebuild_requested[$loc]:-}" ]; then
+                  echo "::error::the Pages build for $repo is still 'errored' after its one rebuild request"
+                  fail=1
+                  continue
+                fi
+                pages_rebuild_requested[$loc]=1
                 echo "── the Pages build errored; requesting one rebuild of $repo"
                 set +e
                 rc="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
@@ -810,7 +846,7 @@ jobs:
             pages_latest "$repo"
             echo "::error::$u answers $POLL_CODE after a second poll — GitHub Pages build for $repo is '$PAGES_STATUS'${PAGES_ERROR:+ ($PAGES_ERROR)}. The push landed; this is a Pages build failure on the shard, not a missing article."
             fail=1
-          done < <(jq -r '.shards[] | [.locale, .articlePaths[0]] | @tsv' "$summary")
+          done < <(jq -r '.shards[] | .locale as $l | .articlePaths[] | [$l, .] | @tsv' "$summary")
 
           # The apex probe goes through poll_origin too — same cache-bust, one
           # implementation. It used to be an inline copy of the same loop with a
@@ -832,9 +868,9 @@ jobs:
           # the part this pipeline can actually break.
           echo "── apex (best effort, through the Worker; edge freshness is the purge steps' job)"
           while IFS= read -r u; do
-            if poll_origin "$u" 8; then echo "  200  $u"
+            if poll_origin "$u" 1 8; then echo "  200  $u"
             else echo "::warning::$u still answers $POLL_CODE through the Worker on a cache-busted probe — so this is the apex routing or the shard origin itself, not a stale edge entry"; fi
-          done < <(jq -r '.shards[].url' "$summary")
+          done < <(jq -r '.shards[].urls[]' "$summary")
 
           [ "$fail" = "0" ] || exit 1
 

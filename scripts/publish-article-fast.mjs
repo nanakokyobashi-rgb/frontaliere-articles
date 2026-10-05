@@ -468,6 +468,8 @@ async function main() {
   // workflow change is needed (.github/workflows/fast-publish-article.yml
   // already forwards every entry in `paths[]`).
   const shards = locales.map((locale) => {
+    const articleIds = entries.filter((entry) => entry.paths[locale]).map((entry) => entry.articleId);
+    const bridgeIds = entries.filter((entry) => entry.flatPaths[locale]).map((entry) => entry.articleId);
     const articlePaths = entries.map((entry) => entry.paths[locale]).filter(Boolean);
     const bridgePaths = entries.map((entry) => entry.flatPaths[locale]).filter(Boolean);
     const hubPaths = hubResult.pathsByLocale[locale] ?? [];
@@ -475,6 +477,8 @@ async function main() {
     return {
       locale,
       subtree: locale === 'it' ? slugMap.it : `${locale}/${slugMap[locale]}`,
+      articleIds,
+      bridgeIds,
       articlePaths,
       bridgePaths,
       hubPaths,
