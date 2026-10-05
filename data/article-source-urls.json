@@ -1,5 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/08/02/leggi-notizia/articolo/guida-unambulanza-e-lavora-sei-giorni-al-mese-guadagno-2300-euro.html": "ambulanza-spagna-guadagno-2300-euro",
   "https://www.tio.ch/newsblog/valute-e-frontiere/1941108/bce-e-bns-ferme-cosa-cambia-per-chi-vive-tra-italia-e-svizzera": "bce-bns-ferme-cambi-per-frontalieri",
   "https://www.laregione.ch/culture/spettacoli/1941490/fiori-nella-ghisa-ruggine-nel-presente": "teatro-periferico-locarno-memoria",
   "https://www.tio.ch/ticino/attualita/1941597/lavoro-ristorazione-difficolta-mestiere-ticino": "lavoro-ristorazione-difficolta-ticino",
@@ -1948,6 +1947,11 @@
   "https://www.tio.ch/ticino/cronaca/1954626/un-avviso-di-pagamento-da-pedemontana-occhio-alla-possibile-truffa": {
     "articleId": "pedemontana-avviso-truffa",
     "ts": "2026-10-05T12:20:03.080Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/ticinoskills-2026-tre-giorni-di-competizioni-e-scoperte-professionali-a-gordola-443977": {
+    "articleId": "ticinoskills-2026-gordola-event",
+    "ts": "2026-10-05T13:08:37.707Z",
     "keyForm": 2
   }
 }

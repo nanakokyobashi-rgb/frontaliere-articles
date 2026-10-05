@@ -1,0 +1,2756 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-05T08:17:36.003Z",
+ "sourcesRegistry": {
+  "schemaVersion": 1,
+  "curatedAt": "2026-10-05",
+  "derivedFrom": {
+   "repo": "nanakokyobashi-rgb/frontaliere-articles",
+   "path": "generator/data/canton-sections.json",
+   "schemaVersion": 1,
+   "verifiedAt": "2026-10-05"
+  }
+ },
+ "categories": [
+  "fisco",
+  "pensioni",
+  "mobilita",
+  "servizi",
+  "eventi",
+  "carburanti"
+ ],
+ "totalNotices": 205,
+ "sources": {
+  "ag-aargauverkehr-773aef": {
+   "canton": "AG",
+   "publisher": "Aargau Verkehr AG (WSB/BDWM, bus regionali)",
+   "url": "https://www.aargauverkehr.ch/aktuell",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "ag-landkreis-waldshut-7f54be": {
+   "canton": "AG",
+   "publisher": "Landratsamt Waldshut",
+   "url": "https://www.landkreis-waldshut.de/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "ag-baden-b851b9": {
+   "canton": "AG",
+   "publisher": "Stadt Baden",
+   "url": "https://www.baden.ch/newsfeed-rss",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "ag-aarau-0d0328": {
+   "canton": "AG",
+   "publisher": "Stadt Aarau",
+   "url": "https://www.aarau.ch/politik-verwaltung/news.html/203",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "ag-kantonsspitalbaden-6d3821": {
+   "canton": "AG",
+   "publisher": "Kantonsspital Baden",
+   "url": "https://www.kantonsspitalbaden.ch/news",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "appenzello-ai-179ebf": {
+   "canton": "APPENZELLO",
+   "publisher": "Steuerverwaltung Appenzell Innerrhoden",
+   "url": "https://www.ai.ch/themen/steuern/aktuelles/news_listing_rss",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "appenzello-ar-e2a80a": {
+   "canton": "APPENZELLO",
+   "publisher": "Steuerverwaltung Appenzell Ausserrhoden",
+   "url": "https://www.ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "appenzello-ai-82cf1c": {
+   "canton": "APPENZELLO",
+   "publisher": "Kanton Appenzell Innerrhoden (Standeskommission / Ratskanzlei)",
+   "url": "https://www.ai.ch/rss.xml",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "appenzello-ar-c74741": {
+   "canton": "APPENZELLO",
+   "publisher": "Kanton Appenzell Ausserrhoden (Medienmitteilungen della amministrazione)",
+   "url": "https://www.ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "appenzello-ar-34e443": {
+   "canton": "APPENZELLO",
+   "publisher": "Departement Bau und Volkswirtschaft AR",
+   "url": "https://www.ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "be-bernmobil-aa4f83": {
+   "canton": "BE",
+   "publisher": "BERNMOBIL",
+   "url": "https://www.bernmobil.ch/de/unternehmen/medien",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "be-bls-49781c": {
+   "canton": "BE",
+   "publisher": "BLS AG",
+   "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "be-bern-c73c67": {
+   "canton": "BE",
+   "publisher": "Stadt Bern (Mediencenter)",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/news_listing_rss",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "basilea-bvb-d1fb1e": {
+   "canton": "BASILEA",
+   "publisher": "Basler Verkehrs-Betriebe (BVB)",
+   "url": "https://www.bvb.ch/de/feed/",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "basilea-bs-7a7823": {
+   "canton": "BASILEA",
+   "publisher": "Steuerverwaltung Basel-Stadt",
+   "url": "https://www.bs.ch/steuerverwaltung",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "basilea-bs-1b9e93": {
+   "canton": "BASILEA",
+   "publisher": "Kanton Basel-Stadt (Medienmitteilungen)",
+   "url": "https://www.bs.ch/rss",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "fr-fr-e4b7d1": {
+   "canton": "FR",
+   "publisher": "Service cantonal des contributions FR (fr.ch)",
+   "url": "https://www.fr.ch/directions-services/163/rss.xml",
+   "kind": "fisco",
+   "language": "fr"
+  },
+  "fr-fr-a8850c": {
+   "canton": "FR",
+   "publisher": "Kantonale Steuerverwaltung FR (fr.ch/de)",
+   "url": "https://www.fr.ch/de/directions-services/163/rss.xml",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "ge-ge-eb55ac": {
+   "canton": "GE",
+   "publisher": "Administration fiscale cantonale (AFC) Ginevra",
+   "url": "https://www.ge.ch/rss/organisation/51",
+   "kind": "fisco",
+   "language": "fr"
+  },
+  "ge-statistique-ge-d20a4e": {
+   "canton": "GE",
+   "publisher": "OCSTAT - Office cantonal de la statistique",
+   "url": "https://statistique.ge.ch/rss",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "gl-gl-fa653e": {
+   "canton": "GL",
+   "publisher": "Kanton Glarus - Steuerverwaltung",
+   "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern.html/507",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "gl-glarus-nord-2b7bfe": {
+   "canton": "GL",
+   "publisher": "Gemeinde Glarus Nord - Aktuelles",
+   "url": "https://www.glarus-nord.ch/services/aktuelles.html/2313",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "gl-glarus-550800": {
+   "canton": "GL",
+   "publisher": "Gemeinde Glarus (capoluogo) - Mitteilungen",
+   "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3422",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "gr-rhb-487c8c": {
+   "canton": "GR",
+   "publisher": "Rhätische Bahn (RhB) - Medienmitteilungen",
+   "url": "https://www.rhb.ch/de/medien/medienmitteilungen/",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "gr-gr-11a005": {
+   "canton": "GR",
+   "publisher": "Steuerverwaltung Graubünden - Mitteilungen",
+   "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/redirect.aspx",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "gr-gr-7fa971": {
+   "canton": "GR",
+   "publisher": "Kanton Graubünden - Standeskanzlei, Medienmitteilungen",
+   "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/Seiten/Aktuell.aspx",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "ju-les-cj-fee1cd": {
+   "canton": "JU",
+   "publisher": "Chemins de fer du Jura (CJ)",
+   "url": "https://www.les-cj.ch/Info-trafic",
+   "kind": "trasporti",
+   "language": "fr"
+  },
+  "ju-ecasjura-8114b1": {
+   "canton": "JU",
+   "publisher": "Caisse de compensation du canton du Jura (ECAS Jura)",
+   "url": "https://www.ecasjura.ch/fr/Actualites.html",
+   "kind": "previdenza",
+   "language": "fr"
+  },
+  "ju-delemont-52edb2": {
+   "canton": "JU",
+   "publisher": "Ville de Delemont",
+   "url": "https://www.delemont.ch/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles.html",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "lu-stadtluzern-010fa8": {
+   "canton": "LU",
+   "publisher": "Stadt Luzern",
+   "url": "https://www.stadtluzern.ch/aktuelles/termine.rss",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "ne-ne-56def7": {
+   "canton": "NE",
+   "publisher": "Cantone di Neuchatel - Cultura e patrimonio",
+   "url": "https://www.ne.ch/actualites/17/rss.xml",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "ne-ne-32e8b5": {
+   "canton": "NE",
+   "publisher": "Cantone di Neuchatel - Sport e tempo libero",
+   "url": "https://www.ne.ch/actualites/16/rss.xml",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "ne-neuchatelville-914b34": {
+   "canton": "NE",
+   "publisher": "Ville de Neuchatel",
+   "url": "https://www.neuchatelville.ch/medias/actualites",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "nw-steuern-nw-6df33c": {
+   "canton": "NW",
+   "publisher": "Steuerverwaltung Nidwalden",
+   "url": "https://www.steuern-nw.ch/feed/",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "nw-nw-2d7d83": {
+   "canton": "NW",
+   "publisher": "Kanton Nidwalden - Medienmitteilungen (Regierungsrat, Direktionen, Aemter, Kantonspolizei)",
+   "url": "https://www.nw.ch/aktuellesinformationen",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "nw-hergiswil-baee06": {
+   "canton": "NW",
+   "publisher": "Gemeinde Hergiswil",
+   "url": "https://www.hergiswil.ch/news",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "nw-buochs-7ccb44": {
+   "canton": "NW",
+   "publisher": "Gemeinde Buochs",
+   "url": "https://www.buochs.ch/aktuellesinformationen",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "nw-stansstad-dce13a": {
+   "canton": "NW",
+   "publisher": "Gemeinde Stansstad",
+   "url": "https://www.stansstad.ch/portraet/neuigkeiten.html/17",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "sg-sg-f01750": {
+   "canton": "SG",
+   "publisher": "Kanton St.Gallen – Verkehr (ÖV, Strassenverkehr, Schifffahrt)",
+   "url": "https://www.sg.ch/tools/newsuebersicht.newsArea__42.newsArea__50.newsArea__61.newsArea__66.newsType__News.html",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "sg-sg-0580b6": {
+   "canton": "SG",
+   "publisher": "Kanton St.Gallen – Steuern (Steueramt)",
+   "url": "https://www.sg.ch/tools/newsuebersicht.newsArea__58.newsType__News.html",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "sg-presse-vorarlberg-a3fdbf": {
+   "canton": "SG",
+   "publisher": "Land Vorarlberg – Landeskorrespondenz",
+   "url": "https://presse.vorarlberg.at/land/dist/vlk_aktuell.html",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "sh-tiefbau-sh-9a50c2": {
+   "canton": "SH",
+   "publisher": "Tiefbauamt Schaffhausen",
+   "url": "https://tiefbau-sh.ch/medien/",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "sh-svash-d525f2": {
+   "canton": "SH",
+   "publisher": "SVA Schaffhausen (AHV/IV, Ausgleichskasse)",
+   "url": "https://www.svash.ch/feed/",
+   "kind": "previdenza",
+   "language": "de"
+  },
+  "sh-pksh-01a2c7": {
+   "canton": "SH",
+   "publisher": "Pensionskasse Schaffhausen",
+   "url": "https://www.pksh.ch/feed/",
+   "kind": "previdenza",
+   "language": "de"
+  },
+  "sh-konstanz-4bef7b": {
+   "canton": "SH",
+   "publisher": "Stadt Konstanz (Pressemitteilungen)",
+   "url": "https://www.konstanz.de/site/Konstanz/pmrss/30221/feed.xml",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "so-so-4adb17": {
+   "canton": "SO",
+   "publisher": "Kanton Solothurn – Steueramt",
+   "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "so-pkso-d9f05a": {
+   "canton": "SO",
+   "publisher": "Pensionskasse Kanton Solothurn (PKSO)",
+   "url": "https://pkso.ch/ihre-pkso/news-1",
+   "kind": "previdenza",
+   "language": "de"
+  },
+  "so-so-84043e": {
+   "canton": "SO",
+   "publisher": "Kanton Solothurn – Staatskanzlei",
+   "url": "https://so.ch/verwaltung/staatskanzlei/medien/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "sz-sz-20063e": {
+   "canton": "SZ",
+   "publisher": "Kanton Schwyz (Regierungsrat/Verwaltung)",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen.html/8756-8757-8803-10391",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "sz-spital-schwyz-2d7347": {
+   "canton": "SZ",
+   "publisher": "Spital Schwyz",
+   "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news.html",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "sz-spital-lachen-56b3e0": {
+   "canton": "SZ",
+   "publisher": "Spital Lachen (Ausserschwyz)",
+   "url": "https://spital-lachen.ch/ueber-uns/aktuelles/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "sz-ameos-f934e6": {
+   "canton": "SZ",
+   "publisher": "Spital Einsiedeln (AMEOS)",
+   "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "tg-steuerverwaltung-tg-7c9ebf": {
+   "canton": "TG",
+   "publisher": "Steuerverwaltung Thurgau",
+   "url": "https://steuerverwaltung.tg.ch/",
+   "kind": "fisco",
+   "language": "de"
+  },
+  "tg-tg-4c22c7": {
+   "canton": "TG",
+   "publisher": "Kanton Thurgau (Portal)",
+   "url": "https://www.tg.ch/",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "tg-frauenfeld-c1a129": {
+   "canton": "TG",
+   "publisher": "Stadt Frauenfeld",
+   "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/aktuelle-meldungen.html/570",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "ti-tilo-cd8001": {
+   "canton": "TI",
+   "publisher": "TILO",
+   "url": "https://www.tilo.ch/",
+   "kind": "trasporti",
+   "language": "it"
+  },
+  "ur-gotthardtunnel-9d63fb": {
+   "canton": "UR",
+   "publisher": "ASTRA - Seconda galleria del Gottardo (gotthardtunnel.ch)",
+   "url": "https://gotthardtunnel.ch/aktuelles/news",
+   "kind": "trasporti",
+   "language": "de"
+  },
+  "ur-ksuri-38c16a": {
+   "canton": "UR",
+   "publisher": "Kantonsspital Uri",
+   "url": "https://www.ksuri.ch/aktuelles/neuigkeiten",
+   "kind": "istituzionale",
+   "language": "de"
+  },
+  "vd-mobilis-vaud-865d15": {
+   "canton": "VD",
+   "publisher": "Mobilis Vaud (comunita tariffale)",
+   "url": "https://www.mobilis-vaud.ch/feed/",
+   "kind": "trasporti",
+   "language": "fr"
+  },
+  "vd-cpev-e49755": {
+   "canton": "VD",
+   "publisher": "Caisse de pensions de l'Etat de Vaud (CPEV)",
+   "url": "https://www.cpev.ch/actualites",
+   "kind": "previdenza",
+   "language": "fr"
+  },
+  "vd-vd-923552": {
+   "canton": "VD",
+   "publisher": "Etat de Vaud",
+   "url": "https://www.vd.ch/actualites/flux.rss",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "vd-lausanne-fc4711": {
+   "canton": "VD",
+   "publisher": "Ville de Lausanne",
+   "url": "https://www.lausanne.ch/ressources/RSS/decisions_municipales.xml",
+   "kind": "istituzionale",
+   "language": "fr"
+  },
+  "vs-ossolanews-dd4171": {
+   "canton": "VS",
+   "publisher": "Ossolanews (Viabilita' e trasporti)",
+   "url": "https://www.ossolanews.it/links/rss/argomenti/viabilita-e-trasporti-8/rss.xml",
+   "kind": "trasporti",
+   "language": "it"
+  },
+  "vs-vs-953ff9": {
+   "canton": "VS",
+   "publisher": "Service cantonal des contributions VS",
+   "url": "https://www.vs.ch/web/scc/news",
+   "kind": "fisco",
+   "language": "fr"
+  }
+ },
+ "notices": [
+  {
+   "id": "95e550a35ffd4f30",
+   "canton": "AG",
+   "category": "eventi",
+   "title": "Veranstaltung im Wald",
+   "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857",
+   "publishedAt": "2026-10-02",
+   "source": "ag-aarau-0d0328",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "2684bb6eb7de7555",
+   "canton": "AG",
+   "category": "mobilita",
+   "title": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
+   "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603",
+   "publishedAt": "2026-10-05T06:34:00.000Z",
+   "source": "ag-baden-b851b9",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5f091ae0ec697882",
+   "canton": "AG",
+   "category": "mobilita",
+   "title": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
+   "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/",
+   "publishedAt": "2026-09-24",
+   "source": "ag-landkreis-waldshut-7f54be",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "18508a2416d5cb31",
+   "canton": "AG",
+   "category": "mobilita",
+   "title": "Sperrung der A98 bei Laufenburg: Verspätungen im...",
+   "url": "https://www.landkreis-waldshut.de/news/sperrung-der-a98-bei-laufenburg-verspaetungen-im-ersatzverkehr-diese-woche-moeglich/",
+   "publishedAt": "2026-09-23",
+   "source": "ag-landkreis-waldshut-7f54be",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1979387a854e6930",
+   "canton": "AG",
+   "category": "mobilita",
+   "title": "WSB: Ersatzverkehr und Bauarbeiten zwischen Aarau und Schöftland",
+   "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland",
+   "publishedAt": "2026-09-02",
+   "source": "ag-aargauverkehr-773aef",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3caeff98507f2516",
+   "canton": "AG",
+   "category": "mobilita",
+   "title": "Neue Haltestelle Isenlauf in Betrieb – gemeinsam mit der Nachbarschaft gefeiert",
+   "url": "https://www.aargauverkehr.ch/aktuell/meldungen/neue-haltestelle-isenlauf-in-betrieb-gemeinsam-mit-der-nachbarschaft-gefeiert",
+   "publishedAt": "2026-08-25",
+   "source": "ag-aargauverkehr-773aef",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0c4c4c0e0cb554af",
+   "canton": "AG",
+   "category": "mobilita",
+   "title": "Aargau Verkehr modernisiert Haltestelle Bremgarten Isenlauf",
+   "url": "https://www.aargauverkehr.ch/aktuell/meldungen/aargau-verkehr-modernisiert-haltestelle-bremgarten-isenlauf",
+   "publishedAt": "2026-05-21",
+   "source": "ag-aargauverkehr-773aef",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "8b9c612bc11c079c",
+   "canton": "AG",
+   "category": "servizi",
+   "title": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
+   "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11849",
+   "publishedAt": "2026-09-25",
+   "source": "ag-aarau-0d0328",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "2fcbe59d35f2a659",
+   "canton": "AG",
+   "category": "servizi",
+   "title": "Das neue KSB-Magazin ist da: Geschichten, die Hoffnung machen",
+   "url": "https://www.kantonsspitalbaden.ch/news/das-neue-ksb-magazin-ist-da-geschichten-die-hoffnung-machen",
+   "publishedAt": "2026-09-24",
+   "source": "ag-kantonsspitalbaden-6d3821",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "7030a3a2b8be93c6",
+   "canton": "AG",
+   "category": "servizi",
+   "title": "Gesundheitsamt legt ersten Basisgesundheitsbericht vor:...",
+   "url": "https://www.landkreis-waldshut.de/news/gesundheitsamt-waldshut-legt-ersten-basisgesundheitsbericht-vor-fokus-auf-praevention-und-gesundheitsfoerderung/",
+   "publishedAt": "2026-09-24",
+   "source": "ag-landkreis-waldshut-7f54be",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "466fafb0dbbecaaa",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Kantonale Steuerverwaltung - Stand der Veranlagungen",
+   "url": "https://www.ai.ch/themen/steuern/aktuelles/steuern-stand-der-veranlagungen",
+   "publishedAt": "2026-10-01T09:00:00.000Z",
+   "source": "appenzello-ai-179ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "810ed5e765b8edbc",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Warnung vor betrügerischen E-Mails im Namen von eTax",
+   "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax",
+   "publishedAt": "2026-09-15T12:58:00.000Z",
+   "source": "appenzello-ai-179ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ff513d4c3c3e316b",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Kein Säule 3a-Abzug für Grenzgängerinnen und Grenzgänger mit Wohnsitz in der Schweiz und Arbeitsort im Fürstentum Liechtenstein",
+   "url": "https://www.ai.ch/themen/steuern/aktuelles/kein-saeule-3a-abzug-fuer-grenzgaengerinnen-und-grenzgaenger-mit-wohnsitz-in-der-schweiz-und-arbeitsort-im-fuerstentum-liechtenstein",
+   "publishedAt": "2026-02-26T12:37:00.000Z",
+   "source": "appenzello-ai-179ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "48f171476934ac2d",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Einlagen in Erneuerungsfonds bei Stockwerkeigentum",
+   "url": "https://www.ai.ch/themen/steuern/aktuelles/1-1-einlagen-in-erneuerungsfonds-bei-stockwerkeigentum",
+   "publishedAt": "2026-02-25T09:22:00.000Z",
+   "source": "appenzello-ai-179ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "474060861fb88b60",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Einlagen in Erneuerungsfonds bei Stockwerkeigentum (und Flurgenossenschaften)",
+   "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/einlagen-in-erneuerungsfonds-bei-stockwerkeigentum-und-flurgenossenschaften/",
+   "publishedAt": "2026-02-16",
+   "source": "appenzello-ar-e2a80a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "16b564df7964c4a2",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Quellensteuertarife 2026",
+   "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/quellensteuertarife-206/",
+   "publishedAt": "2025-12-17",
+   "source": "appenzello-ar-e2a80a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "95ee022276442453",
+   "canton": "APPENZELLO",
+   "category": "fisco",
+   "title": "Steuern: Informationen für 2026",
+   "url": "https://ar.ch/verwaltung/departement-finanzen/steuerverwaltung/news-aus-der-steuerverwaltung/detail/news/steuern-informationen-fuer-2026/",
+   "publishedAt": "2025-12-11",
+   "source": "appenzello-ar-e2a80a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1a018cf2addd8c25",
+   "canton": "APPENZELLO",
+   "category": "mobilita",
+   "title": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+   "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/",
+   "publishedAt": "2026-09-29",
+   "source": "appenzello-ar-34e443",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "d5b7744a79b38dc1",
+   "canton": "APPENZELLO",
+   "category": "mobilita",
+   "title": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+   "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/",
+   "publishedAt": "2026-09-29",
+   "source": "appenzello-ar-c74741",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1905c073c61ea79c",
+   "canton": "APPENZELLO",
+   "category": "mobilita",
+   "title": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
+   "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45",
+   "publishedAt": "2026-09-16T09:23:00.000Z",
+   "source": "appenzello-ai-82cf1c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9026d4be0397affe",
+   "canton": "BASILEA",
+   "category": "eventi",
+   "title": "Ausstellung des Kunstkredits Basel-Stadt: Neue Perspektiven entdecken",
+   "url": "https://www.bs.ch/medienmitteilungen/pd/2026-ausstellung-des-kunstkredits-basel-stadt-neue-perspektiven-entdecken",
+   "publishedAt": null,
+   "source": "basilea-bs-1b9e93",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "44ddffa0ab4cd874",
+   "canton": "BASILEA",
+   "category": "fisco",
+   "title": "Unterstützungsangebote für die Steuererklärung 2025",
+   "url": "https://www.bs.ch/medienmitteilungen/fd/2026-unterstuetzungsangebote-fuer-die-steuererklaerung-2025",
+   "publishedAt": "2026-02-05",
+   "source": "basilea-bs-7a7823",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "351f1243b3e2603e",
+   "canton": "BASILEA",
+   "category": "fisco",
+   "title": "Einführung neues Kundenleitsystem",
+   "url": "https://www.bs.ch/news/2026-einfuehrung-neues-kundenleitsystem",
+   "publishedAt": null,
+   "source": "basilea-bs-7a7823",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "403c97a6733ed850",
+   "canton": "BASILEA",
+   "category": "fisco",
+   "title": "Zweite Hochrechnung prognostiziert deutlich höhere Steuereinnahmen von Unternehmen",
+   "url": "https://www.bs.ch/medienmitteilungen/2026-zweite-hochrechnung-prognostiziert-deutlich-hoehere-steuereinnahmen-von-unternehmen",
+   "publishedAt": null,
+   "source": "basilea-bs-1b9e93",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "79fbb237772a9196",
+   "canton": "BASILEA",
+   "category": "fisco",
+   "title": "Warnung vor betrügerischen E-Mails zu Steuerzahlungen und Mahnungen",
+   "url": "https://www.bs.ch/news/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen",
+   "publishedAt": null,
+   "source": "basilea-bs-7a7823",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "84abd22161f34ea1",
+   "canton": "BASILEA",
+   "category": "fisco",
+   "title": "Warnung vor betrügerischen E-Mails zu Steuerzahlungen und Mahnungen",
+   "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen",
+   "publishedAt": null,
+   "source": "basilea-bs-1b9e93",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9bc6541c23b790a0",
+   "canton": "BASILEA",
+   "category": "fisco",
+   "title": "Die Kantonspolizei Basel-Stadt warnt vor betrügerischen Anrufen in der Region Basel",
+   "url": "https://www.bs.ch/news/2026-die-kantonspolizei-basel-stadt-warnt-vor-betruegerischen-anrufen-der-region-basel",
+   "publishedAt": null,
+   "source": "basilea-bs-7a7823",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "b213e388d4216ee8",
+   "canton": "BASILEA",
+   "category": "mobilita",
+   "title": "Auf der Suche nach einem originellen Geschenk?",
+   "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/",
+   "publishedAt": "2026-09-21T14:13:47.000Z",
+   "source": "basilea-bvb-d1fb1e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3483d0db61bd38f5",
+   "canton": "BASILEA",
+   "category": "mobilita",
+   "title": "slowUp: Busumleitungen am Sonntag",
+   "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/",
+   "publishedAt": "2026-09-17T06:48:07.000Z",
+   "source": "basilea-bvb-d1fb1e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "83300dfc9216da71",
+   "canton": "BASILEA",
+   "category": "mobilita",
+   "title": "Mobil bleiben – heute und morgen",
+   "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/",
+   "publishedAt": "2026-09-17T06:18:35.000Z",
+   "source": "basilea-bvb-d1fb1e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "00d9fc596a0726bb",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Die Berner Kunsteisbahnen starten in die neue Saison",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison",
+   "publishedAt": "2026-09-28T11:28:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "4230691b71d6c7bc",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt",
+   "publishedAt": "2026-09-28T08:05:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5ec7f5976c7eb6b0",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Baubewilligung für Tram Bern-Ostermundigen",
+   "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen",
+   "publishedAt": "2026-09-28",
+   "source": "be-bernmobil-aa4f83",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e0a3ed7d85bc9c92",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse",
+   "publishedAt": "2026-09-27T12:24:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "51739672675ce80c",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur",
+   "publishedAt": "2026-09-17T03:00:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0d000a4facf51b42",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Gemeinderat genehmigt Leistungsvertrag mit Aufenthaltsraum «La Gare»",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gemeinderat-genehmigt-leistungsvertrag-mit-aufenthaltsraum-la-gare",
+   "publishedAt": "2026-09-17T02:57:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "c43b19fb89d6b792",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Städtische Bau- und Verkehrsmassnahmen ZBB: Teilbaubewilligung",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/staedtische-bau-und-verkehrsmassnahmen-zbb-teilbaubewilligung",
+   "publishedAt": "2026-09-16T08:30:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3f51cf624a963a1e",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Sechs ÖV-Haltekanten werden hindernisfrei umgestaltet",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sechs-oev-haltekanten-werden-hindernisfrei-umgestaltet",
+   "publishedAt": "2026-09-14T08:00:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "438c68bb70d3f0d4",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "Schwarztorstrasse: Verbesserungen für den Fuss-/Veloverkehr",
+   "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/schwarztorstrasse-verbesserungen-fuer-den-fuss-veloverkehr",
+   "publishedAt": "2026-09-10T08:30:00.000Z",
+   "source": "be-bern-c73c67",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "f826d8cd5b42217f",
+   "canton": "BE",
+   "category": "mobilita",
+   "title": "BLS senkt mit gezielten Massnahmen Kosten",
+   "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/09-08-mm-kostensenkungsmassnahmen",
+   "publishedAt": "2026-09-08",
+   "source": "be-bls-49781c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "2a89ad600f4d10a5",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Änderungen bei den QR-Codes",
+   "url": "https://www.fr.ch/de/find/kstv/news/aenderungen-bei-den-qr-codes",
+   "publishedAt": "2026-08-06T07:20:00.000Z",
+   "source": "fr-fr-a8850c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "669a66d378f31f77",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Modification des codes QR",
+   "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr",
+   "publishedAt": "2026-08-06T07:20:00.000Z",
+   "source": "fr-fr-e4b7d1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "2b250a0047c54a23",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Faits marquants et chiffres clés (SCC) 2024",
+   "url": "https://www.fr.ch/dfin/scc/faits-marquants-et-chiffres-cles-scc-2024",
+   "publishedAt": "2026-02-12T07:32:55.000Z",
+   "source": "fr-fr-e4b7d1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "5cccc9418cd5b6bf",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Wichtige Ereignisse und Kennzahlen (KSTV) 2024",
+   "url": "https://www.fr.ch/de/find/kstv/wichtige-ereignisse-und-kennzahlen-kstv-2024",
+   "publishedAt": "2026-02-12T07:32:55.000Z",
+   "source": "fr-fr-a8850c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "85f033b1c8f6b7f9",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Liste des personnes morales exonérées pour but d’utilité ou de service public",
+   "url": "https://www.fr.ch/dfin/scc/actualites/liste-des-personnes-morales-exonerees-pour-but-dutilite-ou-de-service-public",
+   "publishedAt": "2026-02-03T08:40:04.000Z",
+   "source": "fr-fr-e4b7d1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "fb99fbb3e69ee0a1",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Verzeichnis der steuerbefreiten juristischen Personen, die öffentliche oder gemeinnützige Zwecke verfolgen",
+   "url": "https://www.fr.ch/de/find/kstv/news/verzeichnis-der-steuerbefreiten-juristischen-personen-die-oeffentliche-oder-gemeinnuetzige-zwecke-verfolgen",
+   "publishedAt": "2026-02-03T08:40:04.000Z",
+   "source": "fr-fr-a8850c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "5882b9c6b349a28a",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Individualbesteuerung",
+   "url": "https://www.fr.ch/de/steuern/natuerliche-personen/individualbesteuerung",
+   "publishedAt": "2026-01-28T14:33:55.000Z",
+   "source": "fr-fr-a8850c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "61981a86d8a6a189",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Imposition individuelle",
+   "url": "https://www.fr.ch/impots/personnes-physiques/imposition-individuelle",
+   "publishedAt": "2026-01-28T14:33:55.000Z",
+   "source": "fr-fr-e4b7d1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "9ca503ed93300ca3",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Principales nouveautés fiscales pour la période fiscale 2025 et aperçu des nouveautés pour la période fiscale 2026",
+   "url": "https://www.fr.ch/dfin/scc/actualites/principales-nouveautes-fiscales-pour-la-periode-fiscale-2024-et-apercu-des-nouveautes-pour-la-periode-fiscale-2025",
+   "publishedAt": "2026-01-19T11:55:00.000Z",
+   "source": "fr-fr-e4b7d1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "f43e14f1e0a18542",
+   "canton": "FR",
+   "category": "fisco",
+   "title": "Wichtigste Neuerungen im Steuerwesen für die Steuerperiode 2025 und Überblick über die Neuerungen für die Steuerperiode 2026",
+   "url": "https://www.fr.ch/de/find/kstv/news/wichtigste-neuerungen-im-steuerwesen-fuer-die-steuerperiode-2025-und-ueberblick-ueber-die-neuerungen-fuer-die-steuerperiode-2026",
+   "publishedAt": "2026-01-19T11:55:00.000Z",
+   "source": "fr-fr-a8850c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "22234882f236441b",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Personnes morales 2023. Baisse des recettes fiscales",
+   "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043",
+   "publishedAt": "2026-09-29T12:30:00.000Z",
+   "source": "ge-statistique-ge-d20a4e",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "19994603f8987a86",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Dites STOP à l'envoi de papier!",
+   "url": "https://www.ge.ch/node/45036",
+   "publishedAt": "2026-09-29",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "2466b15732b1299a",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Guide fiscal 2025 pour les indépendants",
+   "url": "https://www.ge.ch/node/44809",
+   "publishedAt": "2026-09-08",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "e3b647361a3567a3",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Présentation de l'espace fiscal des e-démarches pour les professionnels",
+   "url": "https://www.ge.ch/node/44795",
+   "publishedAt": "2026-09-08",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "08b5b0797d9c774a",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Guide fiscal PM 2026 pour les associations et fondations",
+   "url": "https://www.ge.ch/node/44627",
+   "publishedAt": "2026-09-04",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "3db485c95474acf8",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Alerte sécurité",
+   "url": "https://www.ge.ch/node/44646",
+   "publishedAt": "2026-09-04",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "4c261da4cc8a1caf",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Guide fiscal PM 2026 pour les sociétés de capitaux",
+   "url": "https://www.ge.ch/node/44625",
+   "publishedAt": "2026-09-04",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "3293c09391481878",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Nouvelle norme internationale: le code QR évolue",
+   "url": "https://www.ge.ch/node/44413",
+   "publishedAt": "2026-08-17",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "b2fa88c48d92bc64",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Présentation de l'espace fiscal des e-démarches",
+   "url": "https://www.ge.ch/node/44222",
+   "publishedAt": "2026-07-28",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "48ae12c12824d7fb",
+   "canton": "GE",
+   "category": "fisco",
+   "title": "Annonce d’aliénation immobilière",
+   "url": "https://www.ge.ch/node/1417",
+   "publishedAt": "2026-06-26",
+   "source": "ge-ge-eb55ac",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "e6456f14b345ae0a",
+   "canton": "GL",
+   "category": "eventi",
+   "title": "Gelungener Anlass «Glarus begrüsst alle»",
+   "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223",
+   "publishedAt": "2026-09-21",
+   "source": "gl-glarus-550800",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "6b3e133f9f720700",
+   "canton": "GL",
+   "category": "eventi",
+   "title": "Erfolgreiche Veranstaltung von «Gesundes Glarus» zum Thema «Palliative Versorgung neu gedacht»",
+   "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30044/newsarchive/1",
+   "publishedAt": "2026-06-01",
+   "source": "gl-glarus-550800",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "02b7fec04127c668",
+   "canton": "GL",
+   "category": "eventi",
+   "title": "Glarus als lebendige Marktstadt mit Weltrekordversuch",
+   "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30004/newsarchive/1",
+   "publishedAt": "2026-05-18",
+   "source": "gl-glarus-550800",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "85a11bd0303fa7db",
+   "canton": "GL",
+   "category": "fisco",
+   "title": "eQst.GL – Online Abrechnung Quellensteuer",
+   "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165",
+   "publishedAt": "2026-08-21",
+   "source": "gl-gl-fa653e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "a3963bd36dffe3f6",
+   "canton": "GL",
+   "category": "mobilita",
+   "title": "Wanderwegsperrung Äschen - Niederseewald Näfels",
+   "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30267",
+   "publishedAt": "2026-10-02",
+   "source": "gl-glarus-nord-2b7bfe",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e4df70c701ed4604",
+   "canton": "GL",
+   "category": "mobilita",
+   "title": "Ausbau Bushaltestelle Römerturm, Filzbach",
+   "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249",
+   "publishedAt": "2026-09-29",
+   "source": "gl-glarus-nord-2b7bfe",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3060c318a78f2a7b",
+   "canton": "GL",
+   "category": "mobilita",
+   "title": "Wanderwegsperrung Cholholz - Unternideren Bilten",
+   "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30240",
+   "publishedAt": "2026-09-28",
+   "source": "gl-glarus-nord-2b7bfe",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "6ec1b931d0c23087",
+   "canton": "GL",
+   "category": "servizi",
+   "title": "Neue Podcastfolge mit Fokus der Abteilung Baubewilligungen",
+   "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30032/newsarchive/1",
+   "publishedAt": "2026-05-26",
+   "source": "gl-glarus-550800",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "28c664dd481964e3",
+   "canton": "GR",
+   "category": "fisco",
+   "title": "Systemwechsel bei der Wohneigentumsbesteuerung und Einführung einer besonderen Liegenschaftssteuer",
+   "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx",
+   "publishedAt": "2026-08-27",
+   "source": "gr-gr-11a005",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1f332accdbaaf7aa",
+   "canton": "GR",
+   "category": "fisco",
+   "title": "Übergangsregelung bis zum Inkrafttreten des Bundesgesetzes über die Wohneigentumsbesteuerung",
+   "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/%C3%9Cbergangsregelung-bis-zum-Inkrafttreten-des-Bundesgesetzes-%C3%BCber-die-Wohneigentumsbesteuerung.aspx",
+   "publishedAt": "2026-02-26",
+   "source": "gr-gr-11a005",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1585e5fbf9155842",
+   "canton": "GR",
+   "category": "fisco",
+   "title": "Kein Säule 3a-Abzug für Grenzgänger mit Wohnsitz in Graubünden und Arbeitsort in Liechtenstein",
+   "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Kein-S%C3%A4ule-3a-Abzug-f%C3%BCr-Grenzg%C3%A4nger-mit-Wohnsitz-in-Graub%C3%BCnden-und-Arbeitsort-in-Liechtenstein.aspx",
+   "publishedAt": "2026-02-11",
+   "source": "gr-gr-11a005",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "4bee6183ce95cf8b",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
+   "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx",
+   "publishedAt": "2026-09-24",
+   "source": "gr-gr-7fa971",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "bab69b129a4d5e58",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
+   "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx",
+   "publishedAt": "2026-09-16",
+   "source": "gr-gr-7fa971",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "adb0421d19016803",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
+   "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx",
+   "publishedAt": "2026-09-01",
+   "source": "gr-gr-7fa971",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9b51da5693f72393",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
+   "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/",
+   "publishedAt": "2026-08-20",
+   "source": "gr-rhb-487c8c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "a39f531e7ad5780e",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
+   "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/",
+   "publishedAt": "2026-06-23",
+   "source": "gr-rhb-487c8c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "f762b35a046fb98d",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Positive Stimmung an der GV der RhB",
+   "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/",
+   "publishedAt": "2026-06-12",
+   "source": "gr-rhb-487c8c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "563f54e9643c4b91",
+   "canton": "GR",
+   "category": "mobilita",
+   "title": "Neue Partnerbahn für die RhB",
+   "url": "https://www.rhb.ch/de/medien/medienmitteilungen/neue-partnerbahn-fuer-die-rhb/",
+   "publishedAt": "2026-06-01",
+   "source": "gr-rhb-487c8c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3add97b079c212e6",
+   "canton": "JU",
+   "category": "eventi",
+   "title": "Marché hebdomadaire : changements de jours en raison du 1er août et de l'Assomption",
+   "url": "https://www.delemont.ch/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles/Marche-hebdomadaire-changements-de-jours-en-raison-du-1er-aout-et-de-l-Assomption.html",
+   "publishedAt": null,
+   "source": "ju-delemont-52edb2",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "6db8f161a15550d3",
+   "canton": "JU",
+   "category": "eventi",
+   "title": "Fête Né pour lire",
+   "url": "https://www.delemont.ch/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles/Fete-Ne-pour-lire-1.html",
+   "publishedAt": null,
+   "source": "ju-delemont-52edb2",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "8714b1426c85f859",
+   "canton": "JU",
+   "category": "eventi",
+   "title": "Samedi, c'est la foire d'été à Delémont",
+   "url": "https://www.delemont.ch/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles/Samedi-c-est-la-foire-d-ete-a-Delemont-3.html",
+   "publishedAt": null,
+   "source": "ju-delemont-52edb2",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "c5ef5e35079a6647",
+   "canton": "JU",
+   "category": "eventi",
+   "title": "La Fête nationale fait son grand retour au Parc urbain de Delémont !",
+   "url": "https://www.delemont.ch/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles/La-Fete-nationale-fait-son-grand-retour-au-Parc-urbain-de-Delemont.html",
+   "publishedAt": null,
+   "source": "ju-delemont-52edb2",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1dfc8ae7998b0540",
+   "canton": "JU",
+   "category": "mobilita",
+   "title": "Interruption du trafic ferroviaire entre Tramelan et Les Breuleux",
+   "url": "https://www.les-cj.ch/InfoTrafic/Interruption-du-trafic-ferroviaire-entre-Tramelan-et-Les-Breuleux",
+   "publishedAt": null,
+   "source": "ju-les-cj-fee1cd",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5c4014f552af6da1",
+   "canton": "JU",
+   "category": "mobilita",
+   "title": "Tramelan, Place du Marché | Arrêt de bus non desservi du 05 au 09 octobre 2026",
+   "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026",
+   "publishedAt": null,
+   "source": "ju-les-cj-fee1cd",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "70d6c484ae6de895",
+   "canton": "JU",
+   "category": "mobilita",
+   "title": "Travaux de nuit | Les Breuleux - Les Vacheries Brunier",
+   "url": "https://www.les-cj.ch/InfoTrafic/Travaux-de-nuit-Les-Breuleux-Les-Vacheries-Brunier",
+   "publishedAt": null,
+   "source": "ju-les-cj-fee1cd",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "c420f19f3caf51e0",
+   "canton": "JU",
+   "category": "mobilita",
+   "title": "Avenue de la Gare - D'un lieu de passage à un lieu de destination",
+   "url": "https://www.delemont.ch/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles/Avenue-de-la-Gare-D-un-lieu-de-passage-a-un-lieu-de-destination.html",
+   "publishedAt": null,
+   "source": "ju-delemont-52edb2",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "81705dbfc7a3a4ba",
+   "canton": "JU",
+   "category": "pensioni",
+   "title": "Primes et réduction de primes jurassiennes 2027 dans l’assurance-maladie",
+   "url": "https://www.ecasjura.ch/fr/Actualites/Primes-et-reduction-de-primes-jurassiennes-2027-dans-l-assurance-maladie.html",
+   "publishedAt": "2026-08-18",
+   "source": "ju-ecasjura-8114b1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "948840ff09aff3fd",
+   "canton": "JU",
+   "category": "pensioni",
+   "title": "Mois de la santé mentale : Conférence « L’AI à vos côtés pour préserver l’emploi » - 15.09.2026",
+   "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html",
+   "publishedAt": "2026-06-17",
+   "source": "ju-ecasjura-8114b1",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9a499cb068b7dc9b",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Kunstausstellung Weltformat",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/6840391",
+   "publishedAt": "2026-10-02T22:00:00.000Z",
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3f10cb050726996b",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Ausstellung NachtLeben",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7626901",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "4ba25b7c29f3e18a",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Winter Qi Gong Waldfriedhof Staffeln",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7694293",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5ca335fa746b447f",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Im Gespräch über Sicherheit und Sauberkeit",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7688353",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "655474a7b1fd8b8c",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Wissen am Mittag",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7649719",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "8477705674877aec",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "KulTour - Blick hinter die Türen von Kulturschaffenden",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7629577",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "8925630c2a2d7190",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Lebensreise - Lesung Emilia Roig",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7456402",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9e801f55963e371f",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Bewegung und Begegnung - Feldenkrais",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7648402",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ec03e55e599ab462",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Salonkonzert",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7463707",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "f4c68be1cb8dd0f8",
+   "canton": "LU",
+   "category": "eventi",
+   "title": "Salonkonzert",
+   "url": "https://www.stadtluzern.ch/_rte/anlass/7463704",
+   "publishedAt": null,
+   "source": "lu-stadtluzern-010fa8",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "70fdef116af4e079",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
+   "url": "https://www.neuchatelville.ch/medias/actualites/detail/la-porte-des-possibles-une-exposition-collective-qui-place-la-jeunesse-au-coeur-de-la-ville",
+   "publishedAt": "2026-09-30",
+   "source": "ne-neuchatelville-914b34",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "fa7f78c1babe9a62",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Fête des vendanges 2026 : forte affluence sous une météo estivale et bilan sécuritaire positif",
+   "url": "https://www.neuchatelville.ch/medias/actualites/detail/fete-des-vendanges-2026-forte-affluence-sous-une-meteo-estivale-et-bilan-securitaire-positif",
+   "publishedAt": "2026-09-28",
+   "source": "ne-neuchatelville-914b34",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "19c8fe4727421381",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Architectures de papier. Une exposition sur Neuchâtel, ville bâtie, rêvée, dessinée",
+   "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee",
+   "publishedAt": "2026-09-09",
+   "source": "ne-neuchatelville-914b34",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0457e663dd136fac",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Portail Culture : une nouvelle plateforme au service des actrices et acteurs culturel-le-s",
+   "url": "https://www.ne.ch/communiques-de-presse/portail-culture-une-nouvelle-plateforme-au-service-des-actrices-et-acteurs-culturel-le-s",
+   "publishedAt": null,
+   "source": "ne-ne-56def7",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "05a4522266c737c8",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Le conservateur cantonal rejoint la Commission fédérale des monuments historiques",
+   "url": "https://www.ne.ch/communiques-de-presse/le-conservateur-cantonal-rejoint-la-commission-federale-des-monuments-historiques",
+   "publishedAt": null,
+   "source": "ne-ne-56def7",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "0a96bfb4bf42affc",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Appel à projets pour les jeunes sur le thème du sport féminin",
+   "url": "https://www.ne.ch/communiques-de-presse/appel-projets-pour-les-jeunes-sur-le-theme-du-sport-feminin",
+   "publishedAt": null,
+   "source": "ne-ne-32e8b5",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "0d91564ddf1ce546",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Les Archives de l’État testent leurs procédures de sauvetage en cas de sinistre",
+   "url": "https://www.ne.ch/communiques-de-presse/les-archives-de-letat-testent-leurs-procedures-de-sauvetage-en-cas-de-sinistre",
+   "publishedAt": null,
+   "source": "ne-ne-56def7",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "1a7155a490a8d877",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Le Laténium achève son année anniversaire en ouvrant la voie aux futurs désirables",
+   "url": "https://www.ne.ch/communiques-de-presse/le-latenium-acheve-son-annee-anniversaire-en-ouvrant-la-voie-aux-futurs-desirables",
+   "publishedAt": null,
+   "source": "ne-ne-56def7",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "2e9556853120fd8e",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "La quatrième édition du Forum du sport neuchâtelois consacrée aux infrastructures sportives de demain",
+   "url": "https://www.ne.ch/communiques-de-presse/la-quatrieme-edition-du-forum-du-sport-neuchatelois-consacree-aux-infrastructures-sportives-de-demain",
+   "publishedAt": null,
+   "source": "ne-ne-32e8b5",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "307bef927398c317",
+   "canton": "NE",
+   "category": "eventi",
+   "title": "Trois artistes neuchâtelois-e-s sélectionné-e-s pour une résidence artistique à Paris",
+   "url": "https://www.ne.ch/communiques-de-presse/trois-artistes-neuchatelois-e-s-selectionne-e-s-pour-une-residence-artistique-paris-0",
+   "publishedAt": null,
+   "source": "ne-ne-56def7",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "6f0b6a9b5c8597e9",
+   "canton": "NW",
+   "category": "fisco",
+   "title": "Vorsicht vor Phishing-Mails",
+   "url": "https://www.steuern-nw.ch/vorsicht-vor-phishing-mails/",
+   "publishedAt": "2026-09-14T10:34:56.000Z",
+   "source": "nw-steuern-nw-6df33c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "34c6fa79e30461d8",
+   "canton": "NW",
+   "category": "fisco",
+   "title": "Steuergesetzrevision 2029 – Abschaffung des Eigenmietwerts",
+   "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/",
+   "publishedAt": "2026-07-31T13:10:57.000Z",
+   "source": "nw-steuern-nw-6df33c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "b0e843fa7b16768a",
+   "canton": "NW",
+   "category": "fisco",
+   "title": "Anpassung der Richtlinie Pauschale Rückstellungen",
+   "url": "https://www.steuern-nw.ch/anpassung-der-richtlinie-pauschale-rueckstellungen/",
+   "publishedAt": "2025-12-18T08:31:23.000Z",
+   "source": "nw-steuern-nw-6df33c",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "df0207b2918a9814",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
+   "url": "https://www.buochs.ch/_rte/information/3000736",
+   "publishedAt": "2026-10-01",
+   "source": "nw-buochs-7ccb44",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1b3a98271723f481",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
+   "url": "https://www.nw.ch/_rte/information/138538",
+   "publishedAt": "2026-09-29",
+   "source": "nw-nw-2d7d83",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "b8bbcc88edea713b",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "Baustart \"Sanierung Ufermauer Steinibach\", entlang der Montanastrasse",
+   "url": "https://www.hergiswil.ch/_rte/information/2997787",
+   "publishedAt": "2026-09-29",
+   "source": "nw-hergiswil-baee06",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "6ce70b1550e0c078",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "Baustellen-News 24.09.2026",
+   "url": "https://www.buochs.ch/_rte/information/2994295",
+   "publishedAt": "2026-09-24",
+   "source": "nw-buochs-7ccb44",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5b6b4fb089c0c44c",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
+   "url": "https://www.buochs.ch/_rte/information/2966428",
+   "publishedAt": "2026-08-27",
+   "source": "nw-buochs-7ccb44",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "4372ecedcbf327ec",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
+   "url": "https://www.buochs.ch/_rte/information/2962954",
+   "publishedAt": "2026-08-24",
+   "source": "nw-buochs-7ccb44",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e4bebc86ac0f1724",
+   "canton": "NW",
+   "category": "mobilita",
+   "title": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
+   "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852",
+   "publishedAt": "2026-08-21",
+   "source": "nw-stansstad-dce13a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "4d70b95466cc681d",
+   "canton": "SG",
+   "category": "fisco",
+   "title": "Einlagen in Erneuerungsfonds bei Stockwerkeigentum",
+   "url": "https://www.sg.ch/news/sgch_steuern/2026/02/einlagen-in-erneuerungsfonds-bei-stockwerkeigentum---uebergangsr.html",
+   "publishedAt": "2026-02-17",
+   "source": "sg-sg-0580b6",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5bb0095158d78fb3",
+   "canton": "SG",
+   "category": "fisco",
+   "title": "Neue Online-Steuererklärung E-Tax SG",
+   "url": "https://www.sg.ch/news/sgch_allgemein/2026/01/neue-online-steuererklaerung-e-tax-sg.html",
+   "publishedAt": "2026-01-14",
+   "source": "sg-sg-0580b6",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "a0744ba494dfee37",
+   "canton": "SG",
+   "category": "fisco",
+   "title": "Erhöhung des maximalen km-Ansatzes für Fahrkosten im Zusammenhang mit bereits genehmigten Spesenreglementen",
+   "url": "https://www.sg.ch/news/sgch_steuern/2025/12/erhoehung-des-maximalen-km-ansatzes-fuer-fahrkosten-im-zusammenh.html",
+   "publishedAt": "2025-12-03",
+   "source": "sg-sg-0580b6",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "59e1bbc00b723799",
+   "canton": "SG",
+   "category": "fisco",
+   "title": "Kein Säule 3a-Abzug für Grenzgängerinnen und Grenzgänger mit Wohnsitz in der Schweiz und Arbeitsort im Fürstentum Liechtenstein",
+   "url": "https://www.sg.ch/news/sgch_steuern/2025/11/kein-saeule-3a-abzug-fuer-grenzgaengerinnen-und-grenzgaenger-mit.html",
+   "publishedAt": "2025-11-26",
+   "source": "sg-sg-0580b6",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "f713f27a5716b62c",
+   "canton": "SG",
+   "category": "mobilita",
+   "title": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
+   "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch",
+   "publishedAt": "2026-10-03",
+   "source": "sg-presse-vorarlberg-a3fdbf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e51b5004e1e7099d",
+   "canton": "SG",
+   "category": "mobilita",
+   "title": "Dienstag, 29.9.2026 Neuer Bahnhof Wolfurt: Modernes Tor zum öffentlichen Verkehr im Rheintal",
+   "url": "https://presse.vorarlberg.at/land/public/Neuer-Bahnhof-Wolfurt-Modernes-Tor-zum-ffentlichen-Verkehr-im-Rheintal",
+   "publishedAt": "2026-09-29",
+   "source": "sg-presse-vorarlberg-a3fdbf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3625e662395c370b",
+   "canton": "SG",
+   "category": "mobilita",
+   "title": "Montag, 21.9.2026 Abteilung Wohnbauförderung: Kein Parteienverkehr am 23. September 2026",
+   "url": "https://presse.vorarlberg.at/land/public/Abteilung-Wohnbauf-rderung-Kein-Parteienverkehr-am-23-September-2026",
+   "publishedAt": "2026-09-23",
+   "source": "sg-presse-vorarlberg-a3fdbf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "79edb4d4d28ccb17",
+   "canton": "SG",
+   "category": "mobilita",
+   "title": "St.Galler Regierungsrätin wird Präsidentin der BPUK",
+   "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html",
+   "publishedAt": "2026-09-18",
+   "source": "sg-sg-f01750",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "98f4cd9c34201c6d",
+   "canton": "SG",
+   "category": "mobilita",
+   "title": "Freitag, 18.9.2026 Verkehrsbeschränkungen auf der L 51 Laternser Straße in Zwischenwasser",
+   "url": "https://presse.vorarlberg.at/land/public/Verkehrsbeschr-nkungen-auf-der-L-51-Laternser-Stra-e-in-Zwischenwasser",
+   "publishedAt": "2026-09-18",
+   "source": "sg-presse-vorarlberg-a3fdbf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e990a7feb4e6d1c2",
+   "canton": "SG",
+   "category": "mobilita",
+   "title": "Mittwoch, 16.9.2026 Verkehrsverbund Vorarlberg lädt zum „VMOBIL Forum“ - Fahrgäste gestalten Mobilitätszukunft mit",
+   "url": "https://presse.vorarlberg.at/land/public/Verkehrsverbund-Vorarlberg-l-dt-zum-VMOBIL-Forum-Fahrg-ste-gestalten-Mobilit-tszukunft-mit",
+   "publishedAt": "2026-09-16",
+   "source": "sg-presse-vorarlberg-a3fdbf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "219840d134dfe1ea",
+   "canton": "SH",
+   "category": "eventi",
+   "title": "Neue Ausstellung von Christoph Kneip in der vhs-Galerie in Konstanz",
+   "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung",
+   "publishedAt": "2026-10-05T08:10:08.000Z",
+   "source": "sh-konstanz-4bef7b",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "37e89290e9e37607",
+   "canton": "SH",
+   "category": "mobilita",
+   "title": "Bürgerentscheid zum Fahrradparkhaus am Bahnhof am 29. November",
+   "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt",
+   "publishedAt": "2026-08-06T13:28:29.000Z",
+   "source": "sh-konstanz-4bef7b",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "3636635a943d4305",
+   "canton": "SH",
+   "category": "mobilita",
+   "title": "Bauarbeiten Aufwertung Ortsdurchfahrt Neuhausen am Rheinfall: Sperrung obere Rheinfallstrasse bis Juni 2026",
+   "url": "https://tiefbau-sh.ch/medien/mm_baustart_neuhausen-2/",
+   "publishedAt": "2025-10-16",
+   "source": "sh-tiefbau-sh-9a50c2",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e800fda0fea13307",
+   "canton": "SH",
+   "category": "pensioni",
+   "title": "Planen Sie Ihre Pensionierung mit dem RentenKompass",
+   "url": "https://www.pksh.ch/planen-sie-ihre-pensionierung-mit-dem-rentenkompass/",
+   "publishedAt": "2026-09-10T12:28:30.000Z",
+   "source": "sh-pksh-01a2c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0d87dbcc718777e2",
+   "canton": "SH",
+   "category": "pensioni",
+   "title": "Ersatzwahl Mitglied der Verwaltungskommission",
+   "url": "https://www.pksh.ch/ersatzwahl-mitglied-der-verwaltungskommission-2/",
+   "publishedAt": "2026-08-21T07:12:57.000Z",
+   "source": "sh-pksh-01a2c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "a08f21a2898c11f0",
+   "canton": "SH",
+   "category": "pensioni",
+   "title": "Mitteilung zum Geschäftsbericht 2025",
+   "url": "https://www.pksh.ch/mitteilung-zum-geschaeftsbericht-2025/",
+   "publishedAt": "2026-03-31T13:19:57.000Z",
+   "source": "sh-pksh-01a2c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0750760c21342fca",
+   "canton": "SH",
+   "category": "pensioni",
+   "title": "Jahresbericht 2025",
+   "url": "https://www.svash.ch/jahresbericht-2025/",
+   "publishedAt": "2026-03-16T08:58:42.000Z",
+   "source": "sh-svash-d525f2",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9a3ea5ad6e59d720",
+   "canton": "SH",
+   "category": "pensioni",
+   "title": "Auszahlungstermine AHV/IV-Leistungen, Ergänzungsleistungen 2026",
+   "url": "https://www.svash.ch/auszahlungstermine-ahv-iv-leistungen-ergaenzungsleistungen/",
+   "publishedAt": "2025-12-16T03:30:06.000Z",
+   "source": "sh-svash-d525f2",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "f6d175790b0d42a2",
+   "canton": "SH",
+   "category": "pensioni",
+   "title": "Die 13. Altersrente wird erstmals im Dezember 2026 ausbezahlt",
+   "url": "https://www.svash.ch/die-13-altersrente-wird-erstmals-im-dezember-2026-ausbezahlt/",
+   "publishedAt": "2025-11-12T15:47:05.000Z",
+   "source": "sh-svash-d525f2",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "b1cd18a7b68df3b7",
+   "canton": "SO",
+   "category": "fisco",
+   "title": "Ja zur Revision des Gesetzes über die Staats- und Gemeindesteuern 2027",
+   "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/ja-zur-revision-des-gesetzes-ueber-die-staats-und-gemeindesteuern-2027/",
+   "publishedAt": "2026-09-25",
+   "source": "so-so-84043e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "296c9599b1e2c470",
+   "canton": "SO",
+   "category": "fisco",
+   "title": "Neuorganisation Abteilung Natürliche Personen",
+   "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/",
+   "publishedAt": "2026-06-17",
+   "source": "so-so-4adb17",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ee5fa9778b7019c2",
+   "canton": "SO",
+   "category": "fisco",
+   "title": "Versand der Vorbezugsrechnungen 2026",
+   "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/versand-der-vorbezugsrechnungen-2026/",
+   "publishedAt": "2026-02-12",
+   "source": "so-so-4adb17",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3e9d7cbcdc944043",
+   "canton": "SO",
+   "category": "fisco",
+   "title": "Steuererklärung 2025",
+   "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/steuererklaerung-2025/",
+   "publishedAt": "2026-01-27",
+   "source": "so-so-4adb17",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "dff890bf39401379",
+   "canton": "SO",
+   "category": "mobilita",
+   "title": "Bielstrasse Solothurn: Platz wird saniert und Baumbestand erneuert",
+   "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/bielstrasse-solothurn-platz-wird-saniert-und-baumbestand-erneuert/",
+   "publishedAt": "2026-10-01",
+   "source": "so-so-84043e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "468ba4ef1756834a",
+   "canton": "SO",
+   "category": "mobilita",
+   "title": "Verkehr ’45: Kanton Solothurn begrüsst wichtige Vorhaben und fordert verlässliche Perspektiven",
+   "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/",
+   "publishedAt": "2026-09-29",
+   "source": "so-so-84043e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "bbfe7b651188d590",
+   "canton": "SO",
+   "category": "pensioni",
+   "title": "Vorsorge-Update 2026",
+   "url": "https://pkso.ch/blog-detail/vorsorge-update-2026-20",
+   "publishedAt": "2026-06-01",
+   "source": "so-pkso-d9f05a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "6d9ed3d612cfe6ce",
+   "canton": "SO",
+   "category": "pensioni",
+   "title": "Vorsorgeausweise",
+   "url": "https://pkso.ch/blog-detail/vorsorgeausweise-17",
+   "publishedAt": "2025-12-31",
+   "source": "so-pkso-d9f05a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1675de6a412f1d17",
+   "canton": "SO",
+   "category": "pensioni",
+   "title": "Auf Kurs #1 2026",
+   "url": "https://pkso.ch/blog-detail/auf-kurs-1-2026-6",
+   "publishedAt": null,
+   "source": "so-pkso-d9f05a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1dadb59af4ec80e2",
+   "canton": "SO",
+   "category": "pensioni",
+   "title": "Kontoangaben",
+   "url": "https://pkso.ch/blog-detail/kontoangaben-12",
+   "publishedAt": null,
+   "source": "so-pkso-d9f05a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "c4f9814e156d4c08",
+   "canton": "SZ",
+   "category": "fisco",
+   "title": "Regierungsrat sieht keinen steuerlichen Anpassungsbedarf bei Forschungs- und Entwicklungsabzug",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125",
+   "publishedAt": "2026-09-25",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "396c7def1d3c66a7",
+   "canton": "SZ",
+   "category": "mobilita",
+   "title": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212",
+   "publishedAt": "2026-10-01",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "6095e92a81c25e75",
+   "canton": "SZ",
+   "category": "mobilita",
+   "title": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123",
+   "publishedAt": "2026-09-24",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "c588f9c5099f39b4",
+   "canton": "SZ",
+   "category": "mobilita",
+   "title": "Neubau der Busdrehscheibe Brunnen Bahnhof",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134",
+   "publishedAt": "2026-09-24",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "51dedb702108a7c1",
+   "canton": "SZ",
+   "category": "servizi",
+   "title": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211",
+   "publishedAt": "2026-09-30",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "a6611fcd2d5682d1",
+   "canton": "SZ",
+   "category": "servizi",
+   "title": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127",
+   "publishedAt": "2026-09-25",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "6b0225897ad34dd5",
+   "canton": "SZ",
+   "category": "servizi",
+   "title": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
+   "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162",
+   "publishedAt": "2026-09-24",
+   "source": "sz-sz-20063e",
+   "language": "de",
+   "observedAt": "2026-10-05T08:17:36.003Z"
+  },
+  {
+   "id": "c6c5d8de7b823995",
+   "canton": "SZ",
+   "category": "servizi",
+   "title": "Rettungsdienst Schwyz AG:",
+   "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html",
+   "publishedAt": "2026-07-27",
+   "source": "sz-spital-schwyz-2d7347",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9cf2e81b21858296",
+   "canton": "SZ",
+   "category": "servizi",
+   "title": "Stärkung des Adipositaszentrums mit neuer Leitung",
+   "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/",
+   "publishedAt": "2026-07-02",
+   "source": "sz-spital-lachen-56b3e0",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "c0ecb0184e804756",
+   "canton": "SZ",
+   "category": "servizi",
+   "title": "Anpassung im Bereich der Notfallversorgung",
+   "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/",
+   "publishedAt": "2026-07-01",
+   "source": "sz-ameos-f934e6",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "af47ba08ba4f3dc7",
+   "canton": "TG",
+   "category": "fisco",
+   "title": "Warnung vor betrügerischen Telefonanrufen",
+   "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80223",
+   "publishedAt": "2026-09-25",
+   "source": "tg-steuerverwaltung-tg-7c9ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "154e43ea1f70c852",
+   "canton": "TG",
+   "category": "fisco",
+   "title": "Steuerseminar Thurgau 2026",
+   "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80079",
+   "publishedAt": "2026-09-16",
+   "source": "tg-steuerverwaltung-tg-7c9ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "f7868293a4206ff1",
+   "canton": "TG",
+   "category": "fisco",
+   "title": "Warnung Phishing",
+   "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050",
+   "publishedAt": "2026-09-14",
+   "source": "tg-steuerverwaltung-tg-7c9ebf",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "3cb4643ff87e4d66",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Sanierung der Fabrikstrasse in Bischofszell",
+   "url": "https://www.tg.ch/news.html/485/news/80333",
+   "publishedAt": "2026-10-02",
+   "source": "tg-tg-4c22c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5763d171f7a7009f",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
+   "url": "https://www.tg.ch/news.html/485/news/80332",
+   "publishedAt": "2026-10-02",
+   "source": "tg-tg-4c22c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "82792f0b613ce63d",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Hauptstrasse in Hüttwilen wird gesperrt",
+   "url": "https://www.tg.ch/news.html/485/news/80334",
+   "publishedAt": "2026-10-02",
+   "source": "tg-tg-4c22c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "8f0efd01191b1fef",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Regierungsrat lehnt die Vorlage Verkehr '45 hinsichtlich des Ausbaus der Eisenbahninfrastruktur ab",
+   "url": "https://www.tg.ch/news.html/485/news/80285",
+   "publishedAt": "2026-10-01",
+   "source": "tg-tg-4c22c7",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "15b3d8d5a95cba85",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Sanierung des Kugelfangs: Mehrverkehr auf der Mühletobelstrasse",
+   "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12518",
+   "publishedAt": "2026-09-28",
+   "source": "tg-frauenfeld-c1a129",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "32a615f77f736746",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Strassensperrung wegen Deckbelagsarbeiten an der Äusseren Stammerau und der Walzmühlestrasse",
+   "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12516",
+   "publishedAt": "2026-09-28",
+   "source": "tg-frauenfeld-c1a129",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "b1ab4e165e2286ac",
+   "canton": "TG",
+   "category": "mobilita",
+   "title": "Sperrung Obergriesenstrasse aufgehoben",
+   "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12448",
+   "publishedAt": "2026-09-11",
+   "source": "tg-frauenfeld-c1a129",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "7e24c11a0331870d",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
+   "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html",
+   "publishedAt": "2026-10-05",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "9d4fb999f87be8d0",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
+   "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html",
+   "publishedAt": "2026-09-30",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "72ad77a8e64826ad",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
+   "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html",
+   "publishedAt": "2026-09-28",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "d7ea118e6d70d83e",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
+   "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html",
+   "publishedAt": "2026-09-22",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "fb280d1ca6972fd1",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Alcuni collegamenti S50 soppressi tra Busto Arsizio e Malpensa Aeroporto dal 14 settembre al 30 ottobre 2026.",
+   "url": "https://www.tilo.ch/avvisi/260908_Interruzione-Saronno.html",
+   "publishedAt": "2026-09-08",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "34d773f1cdc5f95e",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Alla Gottardo Arena con il BancaStato Express",
+   "url": "https://www.tilo.ch/news/2026/hcap2026.html",
+   "publishedAt": "2026-09-07",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "5fae71d1100ec354",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Collegamenti TILO S10 sostituiti da bus tra Chiasso e Melide in alcune notti domenica/lunedì dal 13 settembre al 19 ottobre 2026.",
+   "url": "https://www.tilo.ch/avvisi/260907_Maroggia-binario-750m.html",
+   "publishedAt": "2026-09-07",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "b39886aaa001df4d",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Un FLIRT TILO alla Swissminiatur",
+   "url": "https://www.tilo.ch/news/2026/260528_swissminiatur.html",
+   "publishedAt": "2026-05-28",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "bbd21f0b57f62c7d",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Offerte per il tempo libero con RailAway",
+   "url": "https://www.tilo.ch/news/2026/railaway.html",
+   "publishedAt": "2026-04-15",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ca38fd1f40c96a07",
+   "canton": "TI",
+   "category": "mobilita",
+   "title": "Adattamento dell’offerta TILO S30 tra Cadenazzo e Luino a partire dall’11 aprile 2026.",
+   "url": "https://www.tilo.ch/avvisi/260330_Adattamenti-S30-2026.html",
+   "publishedAt": "2026-03-30",
+   "source": "ti-tilo-cd8001",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "aebde0630ba48d7c",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "Die Sanierung der ersten Gotthardröhre",
+   "url": "https://gotthardtunnel.ch/news/sanierung-erste-roehre",
+   "publishedAt": "2026-07-13",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0b561bd920b0e612",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "5 Fragen an Charly Simmen, Sicherheitsbeauftragter der Baustelle Göschenen",
+   "url": "https://gotthardtunnel.ch/news/5-fragen-charly-simmen",
+   "publishedAt": "2026-07-10",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1e03585f60a0c873",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "Zwei Dörfer in Orange",
+   "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange",
+   "publishedAt": "2026-07-08",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "349313a803fdc132",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "TBM «Paulina» hat Vortrieb auf der Gotthard-Südseite wieder aufgenommen – dank grossem Einsatz aller Beteiligten!",
+   "url": "https://gotthardtunnel.ch/news/tbm-paulina",
+   "publishedAt": "2026-05-28",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1081564c485b7c32",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "Gotthard-Strassentunnel: TBM «Paulina» startet wieder – Austausch mit Behörden von Uri und Tessin",
+   "url": "https://gotthardtunnel.ch/news/tunnelbohrmaschine-sueden-startet-wieder",
+   "publishedAt": "2026-05-18",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "c9845a39e221fcdb",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "Die Betonproduktion im Fokus",
+   "url": "https://gotthardtunnel.ch/news/betonproduktion-im-fokus",
+   "publishedAt": "2026-05-13",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "d60b6417addf1f98",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "Durchschlag Störzone Nord am 29. April 2026",
+   "url": "https://gotthardtunnel.ch/news/durchschlag-stoerzone-nord-am-29-april-2026",
+   "publishedAt": "2026-04-29",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "de88507dde4891ea",
+   "canton": "UR",
+   "category": "mobilita",
+   "title": "A2 Zweite Röhre Gotthard: Anpassungen im Süden greifen – Bau im Norden verläuft weiter nach Plan",
+   "url": "https://gotthardtunnel.ch/news/anpassung-vortrieb-sued",
+   "publishedAt": "2026-02-19",
+   "source": "ur-gotthardtunnel-9d63fb",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "8aef37db9244ce8d",
+   "canton": "UR",
+   "category": "servizi",
+   "title": "Roboter ROSA unterstützt neu bei Knieprothesen",
+   "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen",
+   "publishedAt": "2026-09-15",
+   "source": "ur-ksuri-38c16a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "d2fd636536c9b907",
+   "canton": "UR",
+   "category": "servizi",
+   "title": "Kantonsspital Uri schliesst öffentliche Vortragsreihe erfolgreich ab",
+   "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/kantonsspital-uri-schliesst-oeffentliche-vortragsreihe-erfolgreich-ab",
+   "publishedAt": "2026-05-22",
+   "source": "ur-ksuri-38c16a",
+   "language": "de",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "1aa81f539e46b80c",
+   "canton": "VD",
+   "category": "eventi",
+   "title": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
+   "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440",
+   "publishedAt": "2026-10-01T11:30:00.000Z",
+   "source": "vd-lausanne-fc4711",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e7e6b8636410cba6",
+   "canton": "VD",
+   "category": "fisco",
+   "title": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
+   "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous",
+   "publishedAt": "2026-08-26T16:00:54.000Z",
+   "source": "vd-vd-923552",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "057a764475e779ca",
+   "canton": "VD",
+   "category": "mobilita",
+   "title": "Tarifs à compter du 13 décembre 2026",
+   "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/",
+   "publishedAt": "2026-09-30T14:50:25.000Z",
+   "source": "vd-mobilis-vaud-865d15",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "fd37a6e270c7f414",
+   "canton": "VD",
+   "category": "mobilita",
+   "title": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
+   "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320",
+   "publishedAt": "2026-09-24T12:00:00.000Z",
+   "source": "vd-lausanne-fc4711",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "d40514f8106e22ad",
+   "canton": "VD",
+   "category": "mobilita",
+   "title": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
+   "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330",
+   "publishedAt": "2026-09-23T07:00:00.000Z",
+   "source": "vd-lausanne-fc4711",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ad427dfd80e645ba",
+   "canton": "VD",
+   "category": "mobilita",
+   "title": "Communiqué de presse Abo Mobilis plus",
+   "url": "https://www.mobilis-vaud.ch/communique-de-presse-abo-mobilis-plus/",
+   "publishedAt": "2026-06-11T08:56:01.000Z",
+   "source": "vd-mobilis-vaud-865d15",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "980b6b6dc09dfc94",
+   "canton": "VD",
+   "category": "mobilita",
+   "title": "Communiqué de presse",
+   "url": "https://www.mobilis-vaud.ch/mobilis-adapte-ses-tarifs-pour-repondre-au-contexte-federal/",
+   "publishedAt": "2026-03-31T10:00:27.000Z",
+   "source": "vd-mobilis-vaud-865d15",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ee1bc25553b868a5",
+   "canton": "VD",
+   "category": "mobilita",
+   "title": "Communiqué de presse Abo Week-end",
+   "url": "https://www.mobilis-vaud.ch/communique-de-presse-abo-week-end/",
+   "publishedAt": "2026-01-23T14:24:24.000Z",
+   "source": "vd-mobilis-vaud-865d15",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "791104a25c3394c0",
+   "canton": "VD",
+   "category": "pensioni",
+   "title": "Une nouvelle salle communautaire disponible à Morges",
+   "url": "https://www.cpev.ch/actualites/une-nouvelle-salle-communautaire-disponible-morges",
+   "publishedAt": "2026-10-05",
+   "source": "vd-cpev-e49755",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "046f73847f104db5",
+   "canton": "VD",
+   "category": "pensioni",
+   "title": "Première séance d’information et d’échange avec les parties prenantes de la Caisse",
+   "url": "https://www.cpev.ch/actualites/premiere-seance-dinformation-et-dechange-avec-les-parties-prenantes-de-la-caisse",
+   "publishedAt": "2026-09-30",
+   "source": "vd-cpev-e49755",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "ba1ee0864f89fe1c",
+   "canton": "VS",
+   "category": "fisco",
+   "title": "Messagerie électronique chiffrée",
+   "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49665371",
+   "publishedAt": "2026-08-11",
+   "source": "vs-vs-953ff9",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "e62ed34536cc2eb6",
+   "canton": "VS",
+   "category": "fisco",
+   "title": "Arnaque par courriel",
+   "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538",
+   "publishedAt": "2026-08-04",
+   "source": "vs-vs-953ff9",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "7a43a5dd59a78538",
+   "canton": "VS",
+   "category": "fisco",
+   "title": "Délai de traitement rallongé pour les taxations 2024",
+   "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=45173220",
+   "publishedAt": "2026-02-02",
+   "source": "vs-vs-953ff9",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "7a71b19e3389e879",
+   "canton": "VS",
+   "category": "fisco",
+   "title": "VSTax 2025 / Tell Tax",
+   "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=45115843",
+   "publishedAt": "2026-01-30",
+   "source": "vs-vs-953ff9",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "05740aa9c4d6ef16",
+   "canton": "VS",
+   "category": "fisco",
+   "title": "Changements dans le Tell Tax",
+   "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=44951740",
+   "publishedAt": "2026-01-23",
+   "source": "vs-vs-953ff9",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "d48eb82fc83176ef",
+   "canton": "VS",
+   "category": "fisco",
+   "title": "Tranches d’impôt – suppression de l’impôt anticipé supputé",
+   "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=44556935",
+   "publishedAt": "2026-01-12",
+   "source": "vs-vs-953ff9",
+   "language": "fr",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "eceec27b5f5e120e",
+   "canton": "VS",
+   "category": "mobilita",
+   "title": "Controlli della velocità in Ticino: ecco dove saranno gli autovelox dal 5 all’11 ottobre",
+   "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-ticino-ecco-dove-saranno-gli-autovelox-dal-5-all11-ottobre.html",
+   "publishedAt": "2026-10-05T07:01:46.000Z",
+   "source": "vs-ossolanews-dd4171",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  },
+  {
+   "id": "0d93bccb3c867a48",
+   "canton": "VS",
+   "category": "mobilita",
+   "title": "Anas, un nuovo bando per la messa in sicurezza dei versanti rocciosi sulla rete stradale",
+   "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-un-nuovo-bando-per-la-messa-in-sicurezza-dei-versanti-rocciosi-sulla-rete-stradale-2.html",
+   "publishedAt": "2026-10-05T06:23:00.000Z",
+   "source": "vs-ossolanews-dd4171",
+   "language": "it",
+   "observedAt": "2026-10-05T08:14:50.053Z"
+  }
+ ],
+ "health": {
+  "generatedAt": "2026-10-05T08:17:36.003Z",
+  "summary": {
+   "sources": 175,
+   "attempted": 175,
+   "ok": 163,
+   "okRatio": 0.931,
+   "byStatus": {
+    "ok": 163,
+    "http-error": 2,
+    "robots-unreachable": 10
+   },
+   "failing": [],
+   "patternMiss": [],
+   "notices": 1041,
+   "dated": 770,
+   "cantons": 23,
+   "byCategory": {
+    "eventi": 45,
+    "mobilita": 323,
+    "servizi": 386,
+    "fisco": 97,
+    "pensioni": 190
+   }
+  }
+ }
+}
