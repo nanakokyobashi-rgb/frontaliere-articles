@@ -159,6 +159,16 @@
       }
     },
     {
+      "path": "scripts/ci/canton-generation-admit.mjs",
+      "mode": "corpus-only",
+      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run in_progress dei chiamanti cantonali, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
+      "baseline": {
+        "site": null,
+        "corpus": "6c122bb4827e9470",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section.mjs",
       "mode": "corpus-only",
       "reason": "Sezione e shard Pages di un fast-publish derivati da ARTICLE_SECTION_CORE (lista attiva): regex dei corpi, sezione di un corpo, shard di una sezione, con errore esplicito per le sezioni servite da R2 (shardKey null). Esiste solo qui perche' fast-publish-article.yml e publish-article-fast.mjs che lo usano pubblicano dal corpus; il sito non ha un fast-publish che derivi la sezione dal path di un corpo.",
@@ -175,6 +185,16 @@
       "baseline": {
         "site": null,
         "corpus": "9771a71da3aaa747",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/generate-canton-article-workflows.mjs",
+      "mode": "corpus-only",
+      "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "f978004d43015b6b",
         "alignedAt": "2026-10-05"
       }
     },
@@ -1792,7 +1812,7 @@
       "path": "generator/scripts/load-rc-env.mjs",
       "sitePath": "scripts/load-rc-env.mjs",
       "mode": "adapted",
-      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa.",
+      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa. Divergenza VOLUTA dal 2026-10-05: `EVENTFROG_ENABLED`, `EVENTFROG_PUBLIC_API_KEY` e `EVENTFROG_PUBLIC_API_KEY_EXPIRES_AT` sono mappati solo nel sito e non vanno portati qui: il corpus non deve poter leggere dati Eventfrog (AGB §17(3)/(6), decisione D5 del proprietario), e `generator/scripts/lib/private-event-records.mjs` ne scarta i record all'ingresso del dataset eventi.",
       "baseline": {
         "site": "c13e7688b3c1c2e4",
         "corpus": "f85aa0a4a0bdcd2b",
@@ -5017,6 +5037,16 @@
       "baseline": {
         "site": null,
         "corpus": "65c00b71923c29c4",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/private-event-records.mjs",
+      "mode": "corpus-only",
+      "reason": "Seconda linea di difesa all'ingresso del dataset eventi nel corpus (refresh-events-dataset.mjs): scarta i record delle fonti private (Eventfrog, AGB §17(3)/(6), decisione D5 del 2026-10-05) prima della cache che legge il digest. Sul sito il predicato equivalente vive in `scripts/lib/private-event-sources.mjs`, con API diversa e dentro l'assemblatore: il confine fra i repo e' HTTP, quindi la duplicazione e' voluta e non e' un gemello.",
+      "baseline": {
+        "site": null,
+        "corpus": "a85d9ee0d540bd52",
         "alignedAt": "2026-10-05"
       }
     },
