@@ -200,10 +200,11 @@ function blobShasFromRecursiveTree(entries, { repo, treeSha }) {
 export async function siteBlobShasPagination({ repo, ref, token, fetchImpl = fetch, attempts = 3, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
   const headers = treeHeaders(token);
   const pending = [ref];
+  let nextTree = 0;
   const seenTrees = new Set();
   const shas = new Set();
-  while (pending.length > 0) {
-    const treeSha = pending.shift();
+  while (nextTree < pending.length) {
+    const treeSha = pending[nextTree++];
     if (seenTrees.has(treeSha)) continue;
     seenTrees.add(treeSha);
     const body = await fetchTreePage({
