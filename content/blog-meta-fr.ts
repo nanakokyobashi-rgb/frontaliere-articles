@@ -12640,6 +12640,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.analisi-salario-prestazioni.title': 'Ticino : motion Avanti sur le salaire et les prestations',
     'blog.article.analisi-salario-prestazioni.excerpt': 'Le Grand Conseil donne son feu vert au rapport de Speziali (PLR): analyses et simulations sur davantage de salaire et moins de prestations.',
     'blog.article.analisi-salario-prestazioni.imageAlt': 'Bâtiment institutionnel au Tessin',
+    'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana : 8,4 millions pour la sécurité et la voirie',
+    'blog.article.investimenti-viabilita-lariana-como.excerpt': 'La Province de Como investit dans la sécurité et la praticabilité de la S.P. 583 Lariana : nouveaux trottoirs, barrières de protection pour motocyclistes et réfection des chaussées.',
+    'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Route provinciale Lariana le long du lac de Côme avec aménagements de sécurité (Como)',
 };
 
 export default blogMetaFr;

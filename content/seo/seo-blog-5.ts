@@ -99644,6 +99644,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-investimenti-viabilita-lariana-como': {
+    title: 'Lariana: 8,4 milioni per sicurezza e viabilità',
+    description: 'Provincia di Como investe sulla S.P. 583 Lariana: barriere salvamotociclisti, nuovi marciapiedi e rifacimento piani viabili. Scopri i dettagli e i cantieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lariana, milioni, sicurezza, viabilità',
+    ogTitle: 'Lariana: 8,4 milioni per sicurezza e viabilità',
+    ogDescription: 'La Provincia di Como ha presentato il piano per la S.P. 583 Lariana: investimenti per 8,4 milioni di euro, nuovi marciapiedi, barriere salvamotociclisti e lavori notturni dal 12 ottobre.',
+    canonicalPath: '/articoli-frontaliere/investimenti-viabilita-lariana-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lariana: 8,4 milioni per sicurezza e viabilità",
+      "description": "Provincia di Como investe sulla S.P. 583 Lariana: barriere salvamotociclisti, nuovi marciapiedi e rifacimento piani viabili. Scopri i dettagli e i cantieri.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/investimenti-viabilita-lariana-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada provinciale Lariana lungo il Lago di Como con interventi di sicurezza"
+      },
+      "datePublished": "2026-10-05T22:55:10+00:00",
+      "dateModified": "2026-10-05T22:55:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/investimenti-viabilita-lariana-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

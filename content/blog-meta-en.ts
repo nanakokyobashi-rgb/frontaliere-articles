@@ -12638,6 +12638,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.analisi-salario-prestazioni.title': 'Ticino: Avanti motion on salary and benefits',
     'blog.article.analisi-salario-prestazioni.excerpt': 'The Grand Council gives the green light to Speziali (Plr)\'s report: analysis and simulations on higher pay and fewer benefits.',
     'blog.article.analisi-salario-prestazioni.imageAlt': 'Civic building in Ticino',
+    'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana: 8,4 million for safety and road infrastructure',
+    'blog.article.investimenti-viabilita-lariana-como.excerpt': 'The Province of Como invests in safety and road accessibility along the S.P. 583 Lariana: new sidewalks, motorcyclist protection barriers and road resurfacing.',
+    'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Lariana provincial road along Lake Como with safety improvements',
 };
 
 export default blogMetaEn;

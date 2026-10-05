@@ -12637,6 +12637,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.analisi-salario-prestazioni.title': 'Tessin: Avanti-Motion zu Lohn und Leistungen',
     'blog.article.analisi-salario-prestazioni.excerpt': 'Der Grosse Rat gibt dem Bericht von Speziali (FDP) grünes Licht: Analysen und Simulationen zu mehr Lohn und weniger Leistungen.',
     'blog.article.analisi-salario-prestazioni.imageAlt': 'Öffentliches Gebäude im Tessin',
+    'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana: 8,4 Millionen für Sicherheit und Verkehr',
+    'blog.article.investimenti-viabilita-lariana-como.excerpt': 'Die Provinz Como investiert in Sicherheit und Befahrbarkeit auf der S.P. 583 Lariana: neue Gehwege, Schutzplanken zum Schutz von Motorradfahrern und Erneuerung der Fahrbahndecken.',
+    'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Provinzstraße Lariana am Comer See mit Sicherheitsmaßnahmen (Como)',
 };
 
 export default blogMetaDe;

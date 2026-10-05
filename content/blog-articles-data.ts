@@ -39815,6 +39815,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'investimenti-viabilita-lariana-como',
+ category: 'novita',
+ date: '2026-10-05T22:55:09.946Z',
+ image: '/images/blog/investimenti-viabilita-lariana-como.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

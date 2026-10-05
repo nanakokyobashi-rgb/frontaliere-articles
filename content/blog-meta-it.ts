@@ -12639,6 +12639,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.analisi-salario-prestazioni.title': 'Ticino: mozione Avanti su salario e prestazioni',
     'blog.article.analisi-salario-prestazioni.excerpt': 'Il Gran Consiglio dà via libera al rapporto di Speziali (Plr): analisi e simulazioni su più salario e meno prestazioni.',
     'blog.article.analisi-salario-prestazioni.imageAlt': 'Edificio istituzionale in Ticino',
+    'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana: 8,4 milioni per sicurezza e viabilità',
+    'blog.article.investimenti-viabilita-lariana-como.excerpt': 'La Provincia di Como investe in sicurezza e percorribilità sulla S.P. 583 Lariana: nuovi marciapiedi, barriere salvamotociclisti e rifacimento piani viabili.',
+    'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Strada provinciale Lariana lungo il Lago di Como con interventi di sicurezza',
 };
 
 export default blogMetaIt;
