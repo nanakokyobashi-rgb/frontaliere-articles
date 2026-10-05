@@ -2050,6 +2050,7 @@ const LABEL_HEADINGS = [
   ['## ESEMPIO CONCRETO', '## Esempio concreto'],
   ['## CHECKLIST OPERATIVE', '## Checklist operative'],
   ['## CONFRONTO TRA SCENARI PRATICI', '## Confronto tra scenari pratici'],
+  ['## RIFERIMENTI A CANTONI O CITTÀ SVIZZERE PERTINENTI AL TEMA', '## Riferimenti a cantoni o città svizzere pertinenti al tema'],
   ['## CONCLUSIONE', '## Conclusione'],
 ];
 const labelBody = (pick) => LABEL_HEADINGS.map((pair) => `${pair[pick]}\n${IT_LONG}`).join('\n\n');
