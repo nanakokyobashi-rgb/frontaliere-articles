@@ -692,3 +692,54 @@ test('[border-wait-window] la soglia dei campioni scarta davvero, e in silenzio'
   }
   assert.ok(Object.keys(trend).length > 0, why(c, 'Nessun valico ha un trend: la sezione settimanale sarebbe vuota.'));
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5. Chi scarica davvero la cache che i consumatori leggono
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Workflow → invocazioni del `refresh` di un contratto che SCRIVONO la cache
+ * (niente `--check`, niente `DRY_RUN`), per path diretto o per script npm.
+ * Le righe di commento non contano.
+ */
+function fetchingWorkflows(c) {
+  const scripts = JSON.parse(read('package.json')).scripts ?? {};
+  const npmNames = Object.entries(scripts)
+    .filter(([, cmd]) => String(cmd).includes(c.consumer.refresh))
+    .map(([name]) => name);
+  const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const patterns = [
+    new RegExp(escape(c.consumer.refresh)),
+    ...npmNames.map((n) => new RegExp(`npm run ${escape(n)}(?![\\w:-])`)),
+  ];
+  const dir = path.join(ROOT, '.github/workflows');
+  const found = new Set();
+  for (const file of fs.readdirSync(dir).filter((f) => /\.ya?ml$/.test(f))) {
+    for (const line of fs.readFileSync(path.join(dir, file), 'utf8').split('\n')) {
+      if (/^\s*#/.test(line)) continue;
+      if (!patterns.some((re) => re.test(line))) continue;
+      if (/--check\b|DRY_RUN=(1|true)/.test(line)) continue;
+      // Un path nominato fuori da un comando (filtri `paths:` dei trigger) non scarica niente.
+      if (/^\s*-\s*['"]?generator\//.test(line)) continue;
+      found.add(file);
+    }
+  }
+  return [...found].sort();
+}
+
+for (const c of REWIRE_CONTRACTS) {
+  test(`[${c.id}] chi scarica la cache e' dichiarato, in entrambe le direzioni`, () => {
+    const pf = c.productionFetch;
+    assert.ok(pf && (Array.isArray(pf.workflows) || typeof pf.none === 'string'), why(c,
+      '`productionFetch` manca: dichiara i workflow che scaricano l\'artefatto (`workflows`, `ci`) ' +
+        'oppure `none` con il motivo. Un consumatore che legge una cache che nessuno riempie e\' ' +
+        'esattamente il buco di `border-wait-averages`.'));
+    const declared = pf.none !== undefined ? [] : [...pf.workflows, ...(pf.ci ?? [])].sort();
+    if (pf.none !== undefined) assert.ok(pf.none.trim().length > 40, why(c, '`none` senza un motivo scritto'));
+    assert.deepEqual(fetchingWorkflows(c), declared, why(c,
+      'I workflow che eseguono il refresh SENZA --check non sono quelli dichiarati in ' +
+        '`productionFetch`. Se hai cablato (o tolto) il download in un workflow, aggiorna la ' +
+        'dichiarazione nello stesso commit; se e\' sparito per errore, i lettori della cache in ' +
+        'produzione stanno leggendo una cache vuota.'));
+  });
+}

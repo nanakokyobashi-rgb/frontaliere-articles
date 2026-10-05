@@ -7736,6 +7736,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.allarme-aumento-affitti-svizzera.title': 'Laut ASI sind die Mieten in der Schweiz in zwanzig Jahren um 32 % gestiegen.',
     'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'Der Schweizer Mieterverband berichtet von einem Anstieg der Wohnkosten um 32,1 % zwischen 2005 und 2025. Besonders betroffen sind Geringverdiener: Wer weniger als 4.000 Franken verdient, gibt 37,8 % für Wohnen aus.',
     'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Wohngebäude in einer Schweizer Stadt',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Mieten in der Schweiz: Anstieg um 32% in zwanzigJahren',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'Der Schweizerische Mieterverband meldet Preissteigerungen von 32,1 Prozent zwischen 2005 und 2025. Druck auf niedrige und mittlere Einkommen und neue politische Forderungen.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Wohngebäude in der Schweiz mit steigenden Mieten',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'MWST-Abstimmung für AHV: Datum und Details',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'Am 26. November 2026 wird über die Finanzierung des 13. AHV-Monatsgeldes mittels Mehrwertsteuererhöhung abgestimmt. Entdecken Sie Sätze, Fristen und Auswirkungen auf die Bilanz.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Bundeshaus in Bern für die MWST-Abstimmung',
 };
 
 export default blogMetaChDe;

@@ -12591,6 +12591,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.camion-avaria-san-nicolao.title': 'Truck breakdown in the San Nicolao tunnel',
     'blog.article.camion-avaria-san-nicolao.excerpt': 'A truck breakdown in the San Nicolao tunnel is causing disruptions on the A2: the left lane is passable southbound and delays of up to 20 minutes northbound.',
     'blog.article.camion-avaria-san-nicolao.imageAlt': 'Truck breakdown in the San Nicolao tunnel causing disruption on the A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Undeclared cash: seizures at Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Two checks at the Como-Brogeda motorway border crossing led to the seizure of 128.500 and 113.450 euro, amounts exceeding the threshold of 10.000 euro.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Vehicles at the Como-Brogeda highway border crossing',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Mental health: DSS brings prevention into companies',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'DSS and Forum GSA Ticino promote mental health at work. Data: 32,3% of young people in Ticino feel drained, 61% of apprentices are suffering.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Professional work environment in a Ticino office.',
 };
 
 export default blogMetaEn;

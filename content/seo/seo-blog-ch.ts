@@ -97663,6 +97663,74 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-svizzera-aumento-asi': {
+    title: 'Affitti in Svizzera: aumento del 32% in vent\'anni',
+    description: 'Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L\'ASI denuncia l\'impatto su redditi e inquilini. Scopri i dati e le richieste.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, aumento, vent, anni',
+    ogTitle: 'Affitti in Svizzera: +32% in vent\'anni e alloggi costosi',
+    ogDescription: 'L\'Associazione svizzera inquilini analizza i rincari del 32,1% tra il 2005 e il 2025. Impatto su famiglie a basso reddito, tassi di riferimento all\'1,25% e trasformazioni della proprietà immobiliare in Svizzera.',
+    canonicalPath: '/articoli-svizzera/affitti-svizzera-aumento-asi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera: aumento del 32% in vent'anni",
+      "description": "Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L'ASI denuncia l'impatto su redditi e inquilini. Scopri i dati e le richieste.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-aumento-asi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi di residenza in Svizzera con affitti in aumento"
+      },
+      "datePublished": "2026-10-05T07:50:21+00:00",
+      "dateModified": "2026-10-05T07:50:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-svizzera-aumento-asi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-iva-avs-novembre-2026': {
+    title: 'Voto IVA per AVS: data e dettagli della votazione federale',
+    description: 'Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, data, dettagli, votazione',
+    ogTitle: 'Voto IVA per l AVS del 26 novembre 2026: guida completa alle aliquote e alla 13a mensilità',
+    ogDescription: 'Tutti i dettagli sulla votazione federale del 26 novembre 2026 per il finanziamento della 13a mensilità AVS tramite l aumento dell IVA. Analisi delle aliquote, delle riserve e delle scadenze ufficiali della Confederazione.',
+    canonicalPath: '/articoli-svizzera/voto-iva-avs-novembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto IVA per AVS: data e dettagli della votazione federale",
+      "description": "Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/voto-iva-avs-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna in primo piano per il voto sull IVA"
+      },
+      "datePublished": "2026-10-05T08:19:02+00:00",
+      "dateModified": "2026-10-05T08:19:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-iva-avs-novembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -66,6 +66,14 @@ export const CDN_DATA_BASE = 'https://cdn.frontaliereticino.ch/data';
  * `producedUnread` sono i campi che il produttore emette e che qui non legge
  * nessuno. Sono asseriti come NON letti: se domani qualcuno li leggesse, la
  * voce va tolta consapevolmente invece di scoprirlo a valle.
+ *
+ * `productionFetch` dichiara CHI scarica davvero l'artefatto (il `refresh`
+ * senza `--check`): `workflows` sono i workflow di produzione, `ci` quelli di
+ * test. Oppure `none` con il motivo, quando nessun workflow lo scarica. Il
+ * test lo confronta in entrambe le direzioni con le invocazioni nei workflow:
+ * un consumatore che legge una cache che nessun job riempie non e' piu'
+ * invisibile (il caso `border-wait-averages`, rimasto non scaricato da quando
+ * il REWIRE l'ha spostato qui senza che nessun test lo notasse).
  */
 export const REWIRE_CONTRACTS = [
   {
@@ -116,6 +124,10 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['generatedFor'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      workflows: ['generate-border-wait-ranking-weekly.yml'],
+      ci: ['generator-ci.yml'],
+    },
   },
   {
     id: 'border-wait-averages',
@@ -131,9 +143,11 @@ export const REWIRE_CONTRACTS = [
     },
     failureMode: 'soft',
     symptom:
-      'le stringhe sono GIA\' formattate per il rendering e finiscono verbatim nel corpo di un ' +
-      'articolo (`borderCrossings.ts` le assegna a `avgWaitMorning`/`avgWaitEvening`). L\'assenza e\' ' +
-      'coperta dai default editoriali; il caso brutto e\' un formato che passa il gate ed e\' sbagliato.',
+      'le stringhe sono GIA\' formattate per il rendering: `borderCrossings.ts` le assegna a ' +
+      '`avgWaitMorning`/`avgWaitEvening`, che OGGI nessun generatore del corpus legge (verificato ' +
+      '2026-10-05: `borderCrossings.ts` e\' importato solo da `evergreen-topic-generator.mjs`, per la ' +
+      'geografia). L\'assenza e\' coperta dai default editoriali; il caso brutto, il giorno in cui un ' +
+      'articolo le stampera\', e\' un formato che passa il gate ed e\' sbagliato.',
     fixture: 'generator/tests/fixtures/rewire/border-wait-averages.json',
     recorded: {
       at: '2026-08-10',
@@ -151,6 +165,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: [],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun workflow lo scarica e nessun generatore ne legge i valori: l\'overlay di ' +
+        '`borderCrossings.ts` resta vuoto in produzione senza effetti su alcun articolo. Il primo ' +
+        'generatore che stampera\' `avgWaitMorning`/`avgWaitEvening` deve cablare ' +
+        '`npm run refresh:border-wait` nel proprio workflow e spostare questa voce in `workflows`.',
+    },
   },
   {
     id: 'events-dataset',
@@ -192,6 +213,9 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['totalEvents'],
     notJsonExpect: /did not return JSON/,
+    productionFetch: {
+      workflows: ['refresh-events-digest.yml'],
+    },
   },
   {
     // Quarto artefatto, fuori dal REWIRE originale ma con la stessa forma:
