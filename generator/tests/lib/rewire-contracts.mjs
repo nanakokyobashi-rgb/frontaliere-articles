@@ -118,6 +118,10 @@ export const REWIRE_CONTRACTS = [
       },
       {
         file: 'generator/scripts/generate-border-wait-ranking-article.mjs',
+        fields: ['current', 'perCrossing'],
+      },
+      {
+        file: 'generator/scripts/lib/border-wait-ranking-canton.mjs',
         fields: ['current', 'previous', 'perCrossing', 'canton'],
       },
       {

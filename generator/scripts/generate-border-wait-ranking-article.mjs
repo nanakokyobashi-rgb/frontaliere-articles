@@ -40,8 +40,8 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeFileSync, mkdirSync, existsSync, readFileSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
-import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './lib/border-wait-ranking.mjs';
-import { buildBorderWaitRankingArticle, BORDER_RANKING_CANTONS } from './lib/border-wait-ranking-content.mjs';
+import { buildBorderWaitRankingArticle } from './lib/border-wait-ranking-content.mjs';
+import { staticMetaFor, computeCantonSnapshot, cantonFromArgs } from './lib/border-wait-ranking-canton.mjs';
 import {
   registerArticleFiles,
   checkArticleIdExists,
@@ -51,7 +51,6 @@ import {
   buildBodyFile,
 } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
-import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -79,74 +78,6 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 const WINDOW_PATH = path.join(__dirname, '..', 'data', 'border-wait-ranking-window.json');
 const RANKING_JSON_PATH = path.join(REPO_ROOT, 'public', 'data', 'border-wait-ranking.json');
 
-// Evergreen metadata — registered once, NEVER refreshed (no date/count inside).
-const STATIC_META = {
-  category: 'novita',
-  image: 'mendrisio.webp', // → /images/places/mendrisio.webp (exists in catalog, dogana/confine keywords)
-  hasCalculator: false,
-  author: { slug: 'redazione', name: 'Redazione Frontaliere Ticino' },
-  seo: {
-    title: 'Classifica delle dogane in Ticino: le migliori e le peggiori',
-    description:
-      "Ogni dogana ticinese classificata per tempo medio di attesa, con trend settimanale e quanti minuti si perdono (o guadagnano) scegliendo un valico piuttosto che un altro.",
-    keywords:
-      'dogane ticino, tempi attesa dogana, classifica dogane, traffico confine ticino, valico ticino, coda dogana',
-    ogTitle: 'Classifica delle dogane in Ticino',
-    ogDescription:
-      "Le dogane ticinesi classificate per tempo di attesa: le più veloci, le più lente, e quanti minuti di vita si perdono a sceglierne una piuttosto che un'altra.",
-    headline: 'Classifica delle dogane in Ticino: le migliori e le peggiori per tempo di attesa',
-    breadcrumbName: 'Classifica dogane',
-  },
-};
-
-/**
- * Photo of each canton's ranking, from the site's `/images/places/` catalog.
- * Only Ticino has one today (the catalog holds Ticino places only); a canton
- * missing here cannot be REGISTERED — the dry run still works — so the first
- * publication of a new canton (P11) has to choose its image consciously
- * instead of inheriting a Ticino photo.
- */
-const RANKING_IMAGE = { TI: STATIC_META.image };
-
-/**
- * Evergreen metadata of a canton's ranking. Ticino returns STATIC_META itself
- * (registered once in 2026, never rewritten); the others are derived from the
- * same place phrases the article body uses.
- */
-export function staticMetaFor(canton = 'TI') {
-  if (canton === 'TI') return STATIC_META;
-  const profile = BORDER_RANKING_CANTONS[canton];
-  if (!profile) throw new Error(`no border-wait ranking for canton ${canton}`);
-  const it = profile.it;
-  const name = it.of.replace(/^(del Canton|della regione di|del|dei|della|dell'|di)\s*/, '');
-  return {
-    ...STATIC_META,
-    image: RANKING_IMAGE[canton] ?? null,
-    seo: {
-      title: `Classifica delle dogane ${it.in}: le migliori e le peggiori`,
-      description:
-        `Ogni dogana ${it.of} classificata per tempo medio di attesa, con trend settimanale e quanti minuti si perdono (o guadagnano) scegliendo un valico piuttosto che un altro.`,
-      keywords: `dogane ${name.toLowerCase()}, tempi attesa dogana, classifica dogane, traffico confine ${name.toLowerCase()}, valichi ${name.toLowerCase()}, coda dogana`,
-      ogTitle: `Classifica delle dogane ${it.in}`,
-      ogDescription:
-        `Le dogane ${it.of} classificate per tempo di attesa: le più veloci, le più lente, e quanti minuti di vita si perdono a sceglierne una piuttosto che un'altra.`,
-      headline: `Classifica delle dogane ${it.in}: le migliori e le peggiori per tempo di attesa`,
-      breadcrumbName: 'Classifica dogane',
-    },
-  };
-}
-
-/**
- * Crossings of one canton in the window. Ticino keeps its region-based test
- * (the original scoping, independent of the producer's new field); every
- * other canton uses the `canton` the site publishes for each crossing
- * (URL group code: BS/BL → BASILEA). A window published before that field
- * existed ranks nothing, and main() refuses the empty article.
- */
-export function crossingInCanton(canton, slug, stats) {
-  if (canton === 'TI') return isTicinoCrossing(slug);
-  return stats?.canton === canton;
-}
 
 /**
  * Load the aggregate window fetched by refresh-border-wait-window.mjs.
@@ -176,31 +107,12 @@ export function loadWindow(windowPath = WINDOW_PATH) {
 }
 
 /**
- * Compute the current ranking/trend/fun-facts/week-window/movers snapshot for
- * todayIso, from the fetched aggregate window.
+ * Compute the current ranking/trend/fun-facts/week-window/movers snapshot of
+ * ONE canton for todayIso, from the fetched aggregate window (default: the
+ * cached one). The logic lives in lib/border-wait-ranking-canton.mjs.
  */
 export function computeSnapshot(todayIso, windowPayload = loadWindow(), canton = 'TI') {
-  // This snapshot feeds ONE canton's evergreen ranking (default Ticino, whose
-  // embedded live chart also reads it via buildRankingJson below).
-  // rankingFromStats/trendFromStats are generic aggregation over ALL
-  // registered crossings (141, every corridor), so scope to the canton here,
-  // once, before funFacts/movers derive from it — otherwise another canton's
-  // crossing could surface as this article's best/worst/biggest mover.
-  const current = windowPayload.current.perCrossing;
-  const inCanton = (slug) => crossingInCanton(canton, slug, current[slug]);
-  const rankingAll = rankingFromStats(current);
-  const ranking = rankingAll
-    .filter((r) => inCanton(r.slug))
-    .map((r, idx) => ({ ...r, rank: idx + 1 }));
-  const trendAll = trendFromStats(
-    current,
-    windowPayload.previous?.perCrossing ?? {},
-  );
-  const trend = Object.fromEntries(Object.entries(trendAll).filter(([slug]) => inCanton(slug)));
-  const funFacts = computeFunFacts(ranking);
-  const { weekStart, weekEnd } = computeWeekWindow(todayIso, 7);
-  const movers = computeMovers(trend);
-  return { ranking, trend, funFacts, weekStart, weekEnd, movers };
+  return computeCantonSnapshot(todayIso, windowPayload, canton);
 }
 
 /** Build the full registration `data` object from the current ranking snapshot. */
@@ -286,17 +198,6 @@ export function buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart
   };
 }
 
-/** `--canton=XX` / BORDER_WAIT_CANTON, default TI; validated against the profiles. */
-export function cantonFromArgs(argv = process.argv, env = process.env) {
-  const arg = argv.find((a) => a.startsWith('--canton='))?.slice('--canton='.length);
-  const canton = String(arg || env.BORDER_WAIT_CANTON || 'TI').trim().toUpperCase();
-  if (!BORDER_RANKING_CANTONS[canton]) {
-    throw new Error(
-      `--canton=${canton}: no border-wait ranking for this canton (known: ${Object.keys(BORDER_RANKING_CANTONS).join(', ')})`,
-    );
-  }
-  return canton;
-}
 
 async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';

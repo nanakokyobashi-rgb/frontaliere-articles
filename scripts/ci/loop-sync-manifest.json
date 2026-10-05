@@ -1841,7 +1841,7 @@
       "reason": "Classifica delle dogane (evergreen). Il gemello che diverge di piu' (78 righe al 2026-08-09, 176 righe di diff al 2026-09-25), e la divergenza grossa NON e' il trasporto ma un REWIRE della sorgente dati (issue valerielinc-ops#4974 item 3): sul sito lo script legge `data/border-wait-history/` — 90 file giornalieri, 1,7 GB di telemetria che resta la'; qui legge l'aggregato da ~32 KB che `refresh-border-wait-window.mjs` ne estrae, quindi `computeRanking`/`computeTrend` (che prendono una directory) diventano `rankingFromStats`/`trendFromStats` (che prendono le statistiche gia' aggregate). Le funzioni pure sotto sono le stesse. Restano poi le divergenze di trasporto degli altri: `PROJECT_ROOT` a due livelli, `corpusPath()` e la guardia sui control char. L'assenza mancata: se il sito cambia la FORMA di quelle statistiche, qui non fallisce niente finche' un articolo non esce sbagliato. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-08-09 (`eae01748163e0032`), qui `42c085ba6e171e57`. Il delta e' tutto di questo lato: #131 (report degli strip dei control char), #177 (rifiuto di pubblicare lo stub noData sopra la classifica evergreen quando i valichi ticinesi classificati sono meno di 2), #320 (`sanitizePromptPlaceholders`), #386, #564 (write atomico dei body e del JSON della classifica), #1097 (`resolveRegisterLockAtStartup`), #1250 (`assertArticlePassesFactualityGates`, `_deterministicBodySections: ['body4']`), #1427 (`assertGeneratedArticleQuality`), #1665 (main-guard su `realpathSync`). Non si porta al sito, per scelta: sul sito `generate-border-wait-ranking-weekly.yml` ha `# schedule:  # DISABLED AT CUTOVER` e solo `workflow_dispatch` con `dry_run`/`human_approval`, mentre qui lo stesso workflow gira ogni lunedi'; il porting non avrebbe effetto in produzione e dipenderebbe da export che il `create-article.mjs` del sito non ha. Il producer vivo e' questo: baseline corpus rigenerata sull'hash di oggi, baseline sito invariata. P9c 2026-10-05: `--canton` (classifica per cantone di confine; Ticino invariato, id `classifica-dogane-ticino`) e filtro sul campo `canton` della finestra pubblicata. Anche questo delta e' solo di qui, per la stessa scelta: il gemello del sito e' dormiente.",
       "baseline": {
         "site": "eae01748163e0032",
-        "corpus": "bd45c9703a023716",
+        "corpus": "8277cf2be568e218",
         "alignedAt": "2026-10-05"
       }
     },
@@ -1873,6 +1873,16 @@
         "site": null,
         "corpus": "bb221335bb9073cb",
         "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/border-wait-ranking-canton.mjs",
+      "mode": "corpus-only",
+      "reason": "Meta' per cantone del generatore della classifica dogane (P9c): metadati evergreen per cantone, filtro sul `canton` della finestra pubblicata, snapshot e parser di `--canton`. Esiste solo qui perche' il generatore vivo e' questo (il gemello del sito e' dormiente, vedi la voce di generate-border-wait-ranking-article.mjs) ed e' separato dal generatore per restare senza dipendenze npm: `generator/tests/border-wait-ranking-canton.test.mjs` lo carica nel job unit della Generator CI, che non fa `npm ci`.",
+      "baseline": {
+        "site": null,
+        "corpus": "0a8aa1a717e0fe6b",
+        "alignedAt": "2026-10-05"
       }
     },
     {

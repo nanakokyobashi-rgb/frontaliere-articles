@@ -17,12 +17,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  buildData,
   cantonFromArgs,
-  computeSnapshot,
+  computeCantonSnapshot as computeSnapshot,
   staticMetaFor,
-} from '../scripts/generate-border-wait-ranking-article.mjs';
-import { RANKING_ARTICLE_ID, rankingArticleIdentity } from '../scripts/lib/border-wait-ranking-content.mjs';
+} from '../scripts/lib/border-wait-ranking-canton.mjs';
+import {
+  RANKING_ARTICLE_ID,
+  buildBorderWaitRankingArticle,
+  rankingArticleIdentity,
+} from '../scripts/lib/border-wait-ranking-content.mjs';
 import { freshenWindow } from './lib/rewire-contracts.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -32,6 +35,18 @@ const fixture = () =>
     JSON.parse(fs.readFileSync(path.join(HERE, 'fixtures/rewire/border-wait-ranking-window.json'), 'utf8')),
     TODAY,
   );
+
+/**
+ * Lo stesso assemblaggio di `buildData()` nel generatore, senza importarlo:
+ * il generatore tira dentro create-article.mjs e le sue dipendenze npm, che il
+ * job unit della Generator CI non installa. Il cablaggio del generatore sul
+ * lib e' inchiodato dall'ultimo test qui sotto.
+ */
+function buildData(todayIso, windowPayload, canton = 'TI') {
+  const snapshot = computeSnapshot(todayIso, windowPayload, canton);
+  const article = buildBorderWaitRankingArticle({ ...snapshot, todayIso, canton });
+  return { id: article.id, ...staticMetaFor(canton), slugs: article.slugs, content: article.content, _rankedCount: article._rankedCount };
+}
 
 /** Il fixture registrato con un secondo valico ginevrino, per avere una classifica GE non degenere. */
 function withGeneva() {
@@ -85,5 +100,14 @@ describe('classifica dogane per cantone', () => {
     assert.equal(cantonFromArgs(['node', 'x', '--canton=ge'], {}), 'GE');
     assert.equal(cantonFromArgs(['node', 'x'], { BORDER_WAIT_CANTON: 'basilea' }), 'BASILEA');
     assert.throws(() => cantonFromArgs(['node', 'x', '--canton=ZG'], {}), /no border-wait ranking for this canton/);
+  });
+
+  it('il generatore usa il lib per cantone: snapshot, metadati e --canton', () => {
+    const src = fs.readFileSync(path.join(HERE, '../scripts/generate-border-wait-ranking-article.mjs'), 'utf8');
+    assert.match(src, /import \{ staticMetaFor, computeCantonSnapshot, cantonFromArgs \} from '\.\/lib\/border-wait-ranking-canton\.mjs';/);
+    assert.match(src, /return computeCantonSnapshot\(todayIso, windowPayload, canton\);/);
+    assert.match(src, /\.\.\.staticMetaFor\(canton\),/);
+    assert.match(src, /const canton = cantonFromArgs\(\);/);
+    assert.match(src, /buildBorderWaitRankingArticle\(\{ ranking, trend, funFacts, weekStart, weekEnd, movers, todayIso, canton \}\)/);
   });
 });
