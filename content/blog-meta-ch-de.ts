@@ -7763,6 +7763,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tamedia-taglio-posti-lavoro.title': 'Tamedia baut 34 Stellen ab: Reorganisation steht bevor',
     'blog.article.tamedia-taglio-posti-lavoro.excerpt': 'Das Medienunternehmen kündigt den Abbau von 34 Vollzeitstellen an, wobei bis Ende Oktober 41 Mitarbeitende in der Deutsch- und Westschweiz betroffen sind.',
     'blog.article.tamedia-taglio-posti-lavoro.imageAlt': 'Hauptsitz eines Schweizer Medienunternehmens in städtischer Umgebung',
+    'blog.article.guy-parmelin-visita-india.title': 'Parmelin in Indien: Fokus auf Wirtschaft und Investitionen',
+    'blog.article.guy-parmelin-visita-india.excerpt': 'Bundesrat Guy Parmelin in New Delhi zur Stärkung der wirtschaftlichen Zusammenarbeit, des Schutzes des geistigen Eigentums und der Vereinbarungen zur Migration.',
+    'blog.article.guy-parmelin-visita-india.imageAlt': 'Bundesrat Guy Parmelin auf offiziellem Besuch',
+    'blog.article.bern-risanamento-energia.title': 'Energieförderung im Kanton Bern: Voraussetzungen und Gesuch',
+    'blog.article.bern-risanamento-energia.excerpt': 'Im Kanton Bern betreffen die Programme Gebäude und Anlagen: technische Voraussetzungen, Gesuch vor Beginn der Arbeiten und zuständige kantonale Stelle.',
+    'blog.article.bern-risanamento-energia.imageAlt': 'Schweizer Gebäude bei einer energetischen Sanierung',
+    'blog.article.deduzioni-3a-2027.title': 'Säule 3a: Maximale Steuerabzüge 2027',
+    'blog.article.deduzioni-3a-2027.excerpt': 'Ab dem 1. Januar 2027 steigt die abzugsfähige Obergrenze der Säule 3a mit der 2. Säule auf 7373 Franken und ohne Säule auf 36864 Franken.',
+    'blog.article.deduzioni-3a-2027.imageAlt': 'Taschenrechner und Schweizer Steuerpapiere für Abzüge der Säule 3a',
 };
 
 export default blogMetaChDe;
