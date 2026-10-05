@@ -12636,6 +12636,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.gallerie-castelletto-sesto-calende.title': 'Gallerie: due notti chiuso Castelletto-Sesto Calende',
     'blog.article.gallerie-castelletto-sesto-calende.excerpt': 'Manutenzione alle gallerie dell\'autostrada: chiuso per due notti il tratto tra Castelletto e Sesto Calende. Stop anche a Castronno-Cavaria e Solbiate-Varese.',
     'blog.article.gallerie-castelletto-sesto-calende.imageAlt': 'Autostrada con gallerie nell\'area di Varese',
+    'blog.article.analisi-salario-prestazioni.title': 'Ticino: mozione Avanti su salario e prestazioni',
+    'blog.article.analisi-salario-prestazioni.excerpt': 'Il Gran Consiglio dà via libera al rapporto di Speziali (Plr): analisi e simulazioni su più salario e meno prestazioni.',
+    'blog.article.analisi-salario-prestazioni.imageAlt': 'Edificio istituzionale in Ticino',
 };
 
 export default blogMetaIt;

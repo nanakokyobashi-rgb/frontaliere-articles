@@ -99609,6 +99609,41 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-analisi-salario-prestazioni': {
+    title: 'Ticino: mozione Avanti su salario e prestazioni',
+    description: 'Il Gran Consiglio ticinese approva il rapporto di Speziali (Plr): analisi e simulazioni sull\'impatto tra più salario e meno prestazioni per chi lavora',
+    keywords: 'frontalieri, ticino, svizzera, italia, mozione, avanti, salario, prestazioni',
+    ogTitle: 'Ticino: mozione Avanti su salario e prestazioni',
+    ogDescription: 'Il via libera del Gran Consiglio riguarda il rapporto di Speziali (Plr). La mozione di Avanti porta al centro analisi e simulazioni sul rapporto tra un salario più alto e prestazioni ridotte, senza importi o scadenze indicati.',
+    canonicalPath: '/articoli-frontaliere/analisi-salario-prestazioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino: mozione Avanti su salario e prestazioni",
+      "description": "Il Gran Consiglio ticinese approva il rapporto di Speziali (Plr): analisi e simulazioni sull'impatto tra più salario e meno prestazioni per chi lavora",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/analisi-salario-prestazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio istituzionale in Ticino"
+      },
+      "datePublished": "2026-10-05T18:09:49+00:00",
+      "dateModified": "2026-10-05T18:09:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/analisi-salario-prestazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

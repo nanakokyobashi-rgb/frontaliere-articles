@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1941660/sa-lavoro-vallemaggia-posti-matrimonio-vale": "matrimonio-aziendale-vallemaggia-100",
   "https://www.tio.ch/newsblog/valute-e-frontiere/1941112/tasso-spread-euro-cambio-riferimento-importo-valuta": "spread-nel-cambio-valuta-cos-e-quanto-ti-costa-davvero",
   "https://www.rsi.ch/s/3926505": "littering-lavoro-e-aviatione-novita-del-1-augusto",
   "https://www.tio.ch/ticino/cronaca/1941911/lucibello-nessun-arricchimento-personale-o-uso-fraudolento-di-fondi": "lucibello-disti-verifica-fondi",
@@ -1968,6 +1967,11 @@
   "https://www.varesenoi.it/2026/10/05/leggi-notizia/argomenti/territorio/articolo/manutenzione-alle-gallerie-dellautostrada-chiuso-per-due-notti-il-tratto-tra-castelletto-e-sesto-c.html": {
     "articleId": "gallerie-castelletto-sesto-calende",
     "ts": "2026-10-05T16:57:29.515Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/ticino/1954878/quanto-resta-in-tasca-lavorando-di-piu-passa-la-mozione-di-avanti": {
+    "articleId": "analisi-salario-prestazioni",
+    "ts": "2026-10-05T18:09:50.262Z",
     "keyForm": 2
   }
 }

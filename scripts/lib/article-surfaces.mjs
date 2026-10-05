@@ -26,9 +26,10 @@ import {
 } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ledgerArticleId } from '../../generator/scripts/lib/source-url-ledger.mjs';
+import { cantonSectionConfig, cantonSectionPaths } from '../../generator/scripts/lib/canton-section-profile.mjs';
 import { mentionsId } from './mentions-id.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
@@ -206,12 +207,14 @@ function canonicalSurfaces(core) {
  * provato da `generator/tests/rebase-onto-remote.test.mjs`, che deriva i suoi
  * attesi da create-article e li cerca negli argomenti di rebase prodotti da qui.
  *
- * Il tipo `canton` manca apposta: dove scrive un articolo cantonale (ledger,
- * quote, sidecar, chunk SEO) lo decide create-article quando impara a
- * generarlo (P6 del piano «sezioni cantonali»). Fino ad allora una sezione
- * cantonale ATTIVA fa lanciare questo modulo all'import: e' lo stesso
- * «sezione nel core senza ledger = errore, non sezione saltata» di
- * `check-post-rebase-uniqueness.mjs`, anticipato al primo lettore.
+ * Il tipo `canton` e' una FUNZIONE della sezione: ogni cantone scrive in file
+ * suoi (D18), e i path li decide create-article tramite
+ * `generator/scripts/lib/canton-section-profile.mjs` (P6b), la stessa sorgente
+ * delle sue voci di ARTICLE_SECTION_CONFIGS. Oltre a ledger, quote, sidecar e
+ * chunk SEO, una sezione cantonale ha il suo stato globale partizionato:
+ * `stateBookkeeping` (cache riscritte per intero: prendi upstream) e
+ * `stateCounters` (`path:campo`, `--merge-counter`). Le storiche quei file li
+ * condividono e li dichiara il workflow.
  */
 const KIND_WRITE_SURFACES = {
   frontaliere: {
@@ -248,6 +251,28 @@ const KIND_WRITE_SURFACES = {
     sourceQuotaFile: 'data/swiss-article-source-quotas.json',
     sidecarDir: 'data/swiss-articles',
   },
+  canton: (section) => {
+    const p = cantonSectionPaths(section);
+    const seo = corpusPath(p.seoFile);
+    return {
+      fallbackReasonsConstName: cantonSectionConfig(section).fallbackReasonsConstName,
+      // Id liberi come svizzera: `ALL_CANTON_ARTICLE_IDS` e' Object.keys(...).
+      idListVar: null,
+      idUnionFile: null,
+      seoFiles: [seo],
+      seoGlobPrefix: null,
+      seoWriteFile: seo,
+      sourceLedger: p.sourceUrlsFile,
+      sourceQuotaFile: p.sourceQuotaFile,
+      sidecarDir: p.sidecarDir,
+      stateBookkeeping: [p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile],
+      stateCounters: [
+        `${p.quotaStateFile}:runCounter`,
+        `${p.experimentalCounterFile}:count`,
+        `${p.evergreenCounterFile}:count`,
+      ],
+    };
+  },
 };
 
 /**
@@ -256,19 +281,34 @@ const KIND_WRITE_SURFACES = {
  */
 export const SECTIONS = Object.fromEntries(
   Object.entries(ARTICLE_SECTION_CORE).map(([section, core]) => {
-    const extras = Object.prototype.hasOwnProperty.call(KIND_WRITE_SURFACES, core.kind)
+    const declared = Object.prototype.hasOwnProperty.call(KIND_WRITE_SURFACES, core.kind)
       ? KIND_WRITE_SURFACES[core.kind]
       : undefined;
+    const extras = typeof declared === 'function' ? declared(section) : declared;
     if (!extras) {
       throw new Error(
         `article-surfaces: la sezione attiva '${section}' (tipo ${core.kind}) non ha superfici di scrittura ` +
-          'dichiarate (ledger URL→id, quote, sidecar, chunk SEO): le definisce create-article per le sezioni ' +
-          'cantonali (P6). Senza, ritiro, rebase e dedup fra sezioni non sono verificabili.',
+          'dichiarate (ledger URL→id, quote, sidecar, chunk SEO) in KIND_WRITE_SURFACES. Senza, ritiro, ' +
+          'rebase e dedup fra sezioni non sono verificabili.',
       );
     }
     return [section, { ...canonicalSurfaces(core), ...extras }];
   }),
 );
+
+/**
+ * Le superfici di scrittura di UNA sezione nota al core, attiva o no: serve
+ * ai test e a chi prepara l'accensione di un cantone (le sezioni inattive non
+ * sono in SECTIONS).
+ *
+ * @param {string} section
+ */
+export function sectionWriteSurfaces(section) {
+  const core = ARTICLE_SECTION_CORE_ALL[section];
+  if (!core) throw new Error(`article-surfaces: sezione sconosciuta '${section}'`);
+  const declared = KIND_WRITE_SURFACES[core.kind];
+  return { ...canonicalSurfaces(core), ...(typeof declared === 'function' ? declared(section) : declared) };
+}
 
 const SOURCE_LEDGER_FILES = new Set(Object.values(SECTIONS).map(({ sourceLedger }) => sourceLedger));
 
