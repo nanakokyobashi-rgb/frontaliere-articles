@@ -802,7 +802,11 @@ for (const section of rssSections) {
     rssItemTotal += items;
     console.log(`[build-api] ${name}: ${items} items, ${byteSize(clean)} bytes`);
   }
-  if (familyPolicy) familyRssRows.push({ section: section.id, source: section.articleCount, emitted: sectionItems });
+  // Il riferimento e' il corpus (i corpi IT della sezione), non
+  // `section.articleCount`: quello lo produce lo stesso parser dei chunk SEO
+  // che scrive il feed, quindi un chunk SEO mancante o troncato lo azzererebbe
+  // insieme agli item e la sezione svuotata passerebbe per «nuova».
+  if (familyPolicy) familyRssRows.push({ section: section.id, source: countSourceArticles(ROOT, section.id), emitted: sectionItems });
 }
 // Per i feed vale solo la meta' «nessuna sezione svuotata» del verdetto di
 // famiglia: un feed e' una finestra (RSS_MAX_ITEMS), quindi la somma degli item

@@ -33,10 +33,21 @@
  * a blocchi di 30 (tetto del purge `files` del piano free, che
  * cf-purge-cache.mjs rifiuta di superare).
  *
+ * PRIMA DEL DEPLOY PAGES, e fail-closed quando conta. `sections.json` (il
+ * catalogo che il sito legge) viaggia con Pages: se uscisse prima di questo
+ * push, un upload fallito lascerebbe il catalogo ad annunciare `live` una
+ * sezione che il Worker serve ancora 404 — o, al contrario, a dichiarare
+ * spenta una sezione che il registro vecchio su R2 serve ancora. Quindi
+ * publish-api.yml esegue questo script prima di caricare l'artefatto Pages, e
+ * un'operazione non confermata (o le credenziali assenti) fa uscire 1 — e
+ * ferma il publish — ogni volta che il catalogo ha una sezione DICHIARATA
+ * live (`declaredStatus`, cosi' vale anche per una sezione spenta dal
+ * kill-switch: e' proprio allora che il registro DEVE arrivare). Senza sezioni
+ * dichiarate live il registro e' tutto `draft` come quello gia' su R2: il
+ * fallimento e' un warning ed esce 0, e un problema di R2 non ferma la
+ * pubblicazione degli articoli.
+ *
  * Uso: node scripts/publish-section-edge.mjs [--dist dist/api] [--dry-run]
- * Esce 1 se un'operazione non e' andata a buon fine (lo step e'
- * continue-on-error: il fallimento resta visibile senza fermare un publish
- * buono).
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -108,6 +119,16 @@ export function planSectionEdge(distDir) {
   return { ops, notes };
 }
 
+/**
+ * True se il catalogo ha almeno una sezione DICHIARATA live (anche se spenta
+ * dal kill-switch o tenuta draft senza verifica): allora il push del registro
+ * deve riuscire, o il publish si ferma (vedi l'header).
+ */
+export function edgePushIsMandatory(distDir) {
+  const catalog = JSON.parse(fs.readFileSync(path.join(distDir, SECTIONS_CATALOG_FILE), 'utf8'));
+  return (catalog.sections ?? []).some((entry) => entry.declaredStatus === 'live' || entry.status === 'live');
+}
+
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
 export function purgeChunks(urls, size = PURGE_CHUNK) {
   if (!Number.isInteger(size) || size <= 0) throw new Error(`purgeChunks: size non valido (${size})`);
@@ -124,7 +145,7 @@ function run(cmd, args) {
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
 }
 
-export function main(argv = process.argv.slice(2)) {
+export function main(argv = process.argv.slice(2), env = process.env) {
   const unknown = argv.filter((arg, i) => arg !== '--dist' && arg !== '--dry-run' && argv[i - 1] !== '--dist');
   if (unknown.length) throw new Error(`argomenti sconosciuti: ${unknown.join(' ')} (ammessi: --dist <cartella>, --dry-run)`);
   if (argv.filter((arg) => arg === '--dist').length > 1) throw new Error('--dist va indicato una volta sola');
@@ -137,6 +158,17 @@ export function main(argv = process.argv.slice(2)) {
   for (const note of notes) console.log(`::notice::[section-edge] ${note}`);
   if (dryRun) {
     console.log(JSON.stringify(ops, null, 2));
+    return 0;
+  }
+  const mustSucceed = edgePushIsMandatory(distDir);
+  const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
+  if (missingCreds.length) {
+    const what = `credenziali assenti (${missingCreds.join(', ')}): registro e sitemap cantonali NON caricati`;
+    if (mustSucceed) {
+      console.log(`::error::[section-edge] ${what} — una sezione e' dichiarata live, il publish si ferma`);
+      return 1;
+    }
+    console.log(`::warning::[section-edge] ${what} — nessuna sezione dichiarata live, il Worker tiene il registro gia' su R2`);
     return 0;
   }
   let failures = 0;
@@ -172,6 +204,10 @@ export function main(argv = process.argv.slice(2)) {
     if (code !== 0) failures++;
   }
   console.log(`[section-edge] ${ops.length} operazioni, ${purged.length} URL purgate, ${failures} fallimenti`);
+  if (failures && !mustSucceed) {
+    console.log('::warning::[section-edge] operazioni non confermate, ma nessuna sezione e\' dichiarata live: il publish prosegue');
+    return 0;
+  }
   return failures ? 1 : 0;
 }
 

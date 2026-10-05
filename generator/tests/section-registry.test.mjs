@@ -66,6 +66,7 @@ import {
   sectionSourceSurfaces,
 } from '../../scripts/lib/corpus-sections.mjs';
 import {
+  archiveUnionSize,
   buildArticleUrlBlocks,
   buildFamilySectionSitemap,
   buildSitemap,
@@ -73,7 +74,7 @@ import {
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
-import { planSectionEdge, purgeChunks } from '../../scripts/publish-section-edge.mjs';
+import { edgePushIsMandatory, main as edgeMain, planSectionEdge, purgeChunks } from '../../scripts/publish-section-edge.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
@@ -471,6 +472,44 @@ test('edge: una sezione live senza la sua sitemap e\' un errore, non un upload m
   assert.throws(() => planSectionEdge(dir), /live ma sitemap-articles-canton-ti\.xml manca/);
 });
 
+test('edge: obbligatorio se una sezione e\' dichiarata live (anche spenta), best-effort altrimenti', () => {
+  const none = fakeDist({});
+  assert.equal(edgePushIsMandatory(none), false);
+  assert.equal(edgePushIsMandatory(fakeDist({ live: ['canton-ti'] })), true);
+  // Spenta dal kill-switch: status draft ma dichiarata live — e' proprio allora che il registro DEVE arrivare.
+  const killed = fakeDist({});
+  const doc = JSON.parse(readFileSync(path.join(killed, 'sections.json'), 'utf8'));
+  doc.sections[0].declaredStatus = 'live';
+  writeFileSync(path.join(killed, 'sections.json'), JSON.stringify(doc));
+  assert.equal(edgePushIsMandatory(killed), true);
+  // Credenziali assenti: errore se obbligatorio, warning ed exit 0 altrimenti (nessun upload tentato).
+  assert.equal(edgeMain(['--dist', killed], {}), 1);
+  assert.equal(edgeMain(['--dist', none], {}), 0);
+  assert.throws(() => edgeMain(['--dist'], {}), /--dist richiede/);
+  assert.throws(() => edgeMain(['--boh'], {}), /sconosciuti/);
+});
+
+test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del renderer (meta IT ∪ mappa slug)', () => {
+  assert.equal(archiveUnionSize({ 'blog.article.a.title': 'A', 'blog.article.b.title': 'B', 'blog.article.a.excerpt': 'x' }, { b: {}, c: {} }), 3);
+  assert.equal(archiveUnionSize(undefined, undefined), 0);
+  // 3 id nell'unione ma un solo articolo con slug IT: l'archivio ha 2 pagine (pageSize 2), e la sitemap le elenca entrambe.
+  const built = buildFamilySectionSitemap({
+    section: 'canton-ti',
+    entries: [{ id: 'a', date: '2026-10-01' }, { id: 'b', date: '2026-10-01' }],
+    slugMap: { a: { it: 'a-it' }, c: { en: 'c-en' } },
+    meta: { 'blog.article.a.title': 'A', 'blog.article.b.title': 'B' },
+    pageSize: 2,
+  });
+  assert.equal(built.articleCount, 1);
+  assert.ok(built.xml.includes('<loc>https://frontaliereticino.ch/articoli-ticino/tutti/page-2/</loc>'));
+});
+
+test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non il parser del feed', () => {
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /familyRssRows\.push\(\{ section: section\.id, source: countSourceArticles\(ROOT, section\.id\), emitted: sectionItems \}\)/);
+  assert.doesNotMatch(build, /source: section\.articleCount/);
+});
+
 test('edge: purge a blocchi da 30 senza duplicati', () => {
   const urls = Array.from({ length: 65 }, (_, i) => `https://x/${i % 61}`);
   const chunks = purgeChunks(urls);
@@ -514,10 +553,13 @@ test('publish-api: osserva il registro e spinge registro e sitemap cantonali dop
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
     assert.ok(wf.includes(`      - '${p}'\n`), p);
   }
-  const step = wf.slice(wf.indexOf('- name: Push the section registry and the canton sitemaps to the edge'));
-  assert.ok(step.length > 0);
-  assert.match(step.slice(0, 600), /if: steps\.deploy\.outcome == 'success'\n\s+continue-on-error: true/);
-  assert.match(step.slice(0, 900), /node scripts\/publish-section-edge\.mjs/);
+  // Prima del deploy Pages e senza continue-on-error: il catalogo (Pages) non
+  // deve mai uscire prima del registro (R2) che descrive.
+  const at = wf.indexOf('      - name: Push the section registry and the canton sitemaps to the edge\n');
+  assert.ok(at > 0);
+  assert.equal(wf.slice(at, wf.indexOf('\n\n', at)), '      - name: Push the section registry and the canton sitemaps to the edge\n        run: node scripts/publish-section-edge.mjs');
+  assert.ok(at > wf.indexOf('- name: Verify artifact') && at < wf.indexOf('- uses: actions/configure-pages'));
+  assert.ok(at < wf.indexOf('uses: actions/deploy-pages'));
   // Il build gira dopo il caricamento di Remote Config: il kill-switch e il marker sono nell'ambiente.
   assert.ok(wf.indexOf('node generator/scripts/load-rc-env.mjs') < wf.indexOf('scripts/build-api.mjs\n'));
   assert.match(wf, /for f in articles\.json slugs\.json manifest\.json sections\.json; do/);

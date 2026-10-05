@@ -196,6 +196,25 @@ export function familySectionPages(section, archiveTotal, pageSize) {
 }
 
 /**
+ * Quanti articoli pagina l'archivio `/tutti/` di una sezione: l'UNIONE degli
+ * id che hanno un titolo nel meta IT e degli id della mappa slug. E' la stessa
+ * unione di `readArticleArchiveUnionSlugs` (engine/shared/articleArchiveUnion.ts),
+ * cioe' quella su cui il renderer dell'archivio decide quante `page-N`
+ * emettere: contare qui un insieme diverso (per esempio solo le righe del
+ * registro con uno slug IT) lascerebbe fuori dalla sitemap una pagina che il
+ * renderer emette. Niente esclusioni: il renderer non conosce i ritiri del
+ * registro, quindi le sue pagine sono quelle dell'unione intera.
+ */
+export function archiveUnionSize(metaIt, slugMap) {
+  const ids = new Set(Object.keys(slugMap ?? {}));
+  for (const key of Object.keys(metaIt ?? {})) {
+    const m = /^blog\.article\.(.+)\.title$/.exec(key);
+    if (m) ids.add(m[1]);
+  }
+  return ids.size;
+}
+
+/**
  * La sitemap di UNA sezione di famiglia (`sitemap-articles-<id>.xml`): le sue
  * pagine di sezione (una `<url>` per locale) e poi i suoi articoli (loc IT con
  * gli alternate, come `sitemap-blog.xml`). `articleCount` e' il numero di
@@ -204,12 +223,14 @@ export function familySectionPages(section, archiveTotal, pageSize) {
  * `retiredPaths` sono i path che il registro della sezione dichiara `gone` o
  * `redirects`: una pagina di sezione con UNA variante locale ritirata esce
  * intera (le sue `<url>` si citano a vicenda come alternate).
+ * Le pagine dell'archivio si contano su `archiveUnionSize` (la stessa unione
+ * del renderer), non sugli articoli elencati qui.
  */
 export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pageSize, shadowed = new Set(), retiredPaths = new Set() }) {
   const paths = sectionPathsOf(section);
   const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed);
   const pageUrls = [];
-  for (const page of familySectionPages(section, articleUrls.length, pageSize)) {
+  for (const page of familySectionPages(section, archiveUnionSize(meta, slugMap), pageSize)) {
     if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
     for (const loc of SITEMAP_LOCALES) {
       const parts = [`  <url>`, `    <loc>${SITE}${xmlEsc(page.paths[loc])}</loc>`];

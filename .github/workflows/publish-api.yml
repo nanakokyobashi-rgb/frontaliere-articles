@@ -622,6 +622,31 @@ jobs:
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
+      # Il registro delle sezioni cantonali e le loro sitemap (piano «sezioni
+      # articoli per cantone», P7). Il Worker del sito li legge da R2
+      # (`edge/sections/registry.json`, `edge/sitemap-articles-<canton-id>.xml`,
+      # `edge/sitemap-cantons.xml`): finche' il registro non dichiara una
+      # sezione live il Worker resta fail-closed, quindi oggi questo step scrive
+      # un registro tutto `draft` e cancella un indice che non esiste.
+      #
+      # PRIMA del deploy Pages, e non best-effort quando conta. `sections.json`
+      # (il catalogo che il sito legge) esce con Pages: se uscisse prima di
+      # questo push, un upload fallito lascerebbe il catalogo ad annunciare
+      # `live` una sezione che il Worker serve ancora 404, o a dichiarare spenta
+      # una sezione che il registro vecchio su R2 serve ancora. Lo script esce 1
+      # — e il publish si ferma qui, col catalogo di prima ancora su Pages —
+      # quando una sezione e' DICHIARATA live e un'operazione non e' confermata
+      # o mancano le credenziali; senza sezioni dichiarate live (oggi) un
+      # problema di R2 e' un warning e gli articoli si pubblicano lo stesso.
+      #
+      # Ordine interno: sitemap delle sezioni live, registro, indice solo a
+      # registro confermato; purge a blocchi di 30. Il kill-switch di Remote
+      # Config (CANTON_ARTICLE_SECTIONS_KILL) e' gia' applicato da build-api;
+      # se Remote Config non e' verificato con una sezione live, build-api non
+      # scrive il registro e qui non si tocca quello su R2.
+      - name: Push the section registry and the canton sitemaps to the edge
+        run: node scripts/publish-section-edge.mjs
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
@@ -726,34 +751,6 @@ jobs:
             # which is a no-op for anything already purged.
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
           fi
-
-      # Il registro delle sezioni cantonali e le loro sitemap (piano «sezioni
-      # articoli per cantone», P7). Il Worker del sito li legge da R2
-      # (`edge/sections/registry.json`, `edge/sitemap-articles-<canton-id>.xml`,
-      # `edge/sitemap-cantons.xml`): finche' il registro non dichiara una
-      # sezione live il Worker resta fail-closed, quindi oggi questo step scrive
-      # un registro tutto `draft` e cancella un indice che non esiste.
-      #
-      # Separato dallo step sopra perche' ha un ordine suo (sitemap, registro,
-      # indice solo a registro confermato) e un purge suo a blocchi di 30: le due liste
-      # insieme supererebbero il tetto del purge `files`. Il kill-switch di
-      # Remote Config (CANTON_ARTICLE_SECTIONS_KILL) e' gia' applicato da
-      # build-api; se Remote Config non e' verificato con una sezione live,
-      # build-api non scrive il registro e qui non si tocca quello su R2.
-      #
-      # Best-effort come lo step sopra (stesse credenziali), ma un'operazione
-      # non confermata fa uscire 1: lo step resta rosso e visibile senza
-      # fermare un publish buono.
-      - name: Push the section registry and the canton sitemaps to the edge
-        if: steps.deploy.outcome == 'success'
-        continue-on-error: true
-        run: |
-          set -euo pipefail
-          if [ -z "${R2_ACCESS_KEY_ID:-}" ] || [ -z "${CF_API_TOKEN:-}" ]; then
-            echo "::warning::R2/CF credentials absent — the Worker keeps the registry already on R2"
-            exit 0
-          fi
-          node scripts/publish-section-edge.mjs
 
       # Tell the site the surface moved. The publisher knows when it has
       # published, so the push is the event — the consumer's schedule is only a
