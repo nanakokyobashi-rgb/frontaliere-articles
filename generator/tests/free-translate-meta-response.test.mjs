@@ -136,6 +136,10 @@ describe('detectAiMetaResponse — il gemello corpus del rilevatore', () => {
       'We need to translate our software into German and French.',
     ]) assert.equal(detectAiMetaResponse(legit), null, legit);
     assert.equal(detectAiMetaResponse('We need to translate "GL & VAT Accountant" to English.')?.kind, 'agent-narration');
+    for (const refusal of [
+      `We need to translate "Chef d'équipe" into English.`,
+      `We need to translate “Chef d'équipe” into English.`,
+    ]) assert.equal(detectAiMetaResponse(refusal)?.kind, 'agent-narration', refusal);
   });
 
   test('una citazione nella sorgente non esenta una traduzione che apre con il rifiuto', () => {
