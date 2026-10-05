@@ -249,6 +249,12 @@ const RC_TO_ENV = {
   FAL_KEY:                        ['FAL_KEY'],
   PEXELS_API_KEY:                 ['PEXELS_API_KEY'],
 
+  // Events crawler of the site (scripts/crawl-openagenda-events.mjs,
+  // crawl-events.yml): OpenAgenda public read key (`oa_pk_…`), created by the
+  // owner at openagenda.com/settings/apiKey. Mapped here too so the parameter
+  // is not inert in this repo (adapted twin of the site loader).
+  OPENAGENDA_PUBLIC_KEY:          ['OPENAGENDA_PUBLIC_KEY'],
+
   // Resend webhook (newsletter delivery tracking)
   RESEND_WEBHOOK_SECRET:          ['RESEND_WEBHOOK_SECRET'],
 
