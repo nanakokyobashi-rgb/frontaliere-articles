@@ -373,6 +373,12 @@ const MUTATIONS = {
       /canton is "Ginevra", not a canton URL group code/,
       'Un nome localizzato non combacia con nessun --canton: il valico sparirebbe dalla sua classifica.',
     ],
+    [
+      'canton di due lettere fuori dai 24 gruppi',
+      mutated(c, (p) => { p.current.perCrossing['anieres'].canton = 'CH'; }),
+      /canton is "CH", not a canton URL group code/,
+      'Un codice sconosciuto esce dal filtro per cantone: la classifica uscirebbe troncata senza errore.',
+    ],
   ],
   'border-wait-averages': (c) => [
     [
@@ -510,6 +516,33 @@ const MUTATIONS = {
       mutated(c, (p) => { p.events[0].canton = 'BL'; }),
       /half-canton BL, not its URL group/,
       'Gli hub sono per gruppo URL (BASILEA, APPENZELLO): BL non ne raggiungerebbe nessuno.',
+    ],
+    [
+      'canton di due lettere fuori dai 24 gruppi',
+      mutated(c, (p) => { p.events[0].canton = 'XX'; }),
+      /canton "XX" is not one of the 24 canton URL groups/,
+      'Un codice sconosciuto non si aggancia a nessun hub: l\'evento sparirebbe in silenzio.',
+    ],
+    [
+      'generatedAt nel futuro',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() + 72 * 3_600_000).toISOString(); }),
+      /is in the future/,
+      'Un orologio sbagliato del producer passerebbe il gate di eta\' per sempre.',
+    ],
+    [
+      'id duplicato',
+      mutated(c, (p) => { p.events[1].id = p.events[0].id; }),
+      /is duplicated/,
+      'Due eventi con lo stesso id collasserebbero in uno a valle.',
+    ],
+    [
+      'validFrom dopo validTo',
+      mutated(c, (p) => {
+        const e = p.events.find((x) => x.validFrom && x.validTo);
+        [e.validFrom, e.validTo] = [e.validTo, e.validFrom];
+      }),
+      /validFrom is after validTo/,
+      'Una finestra rovesciata non e\' mai attiva: l\'evento sarebbe mostrato o nascosto a caso.',
     ],
     [
       'tipo fuori dai quattro',

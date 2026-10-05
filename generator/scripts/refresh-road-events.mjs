@@ -29,6 +29,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchFirstOk } from './lib/rewire-fetch.mjs';
+// The 24 canton URL groups are the one source of truth for `canton`: a code
+// outside them (CH, DE, a typo) would reach no hub. Imported, not copied, so
+// the set cannot drift; the contract test copies relative imports with the script.
+import cantonUrlSlugs from '../data/canton-url-slugs.json' with { type: 'json' };
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(
@@ -52,10 +56,11 @@ const CHECK_ONLY =
 
 /** The site republishes every 3 hours; two days without a new snapshot means it stopped. */
 const MAX_AGE_HOURS = 48;
+/** Clock skew tolerated on generatedAt; beyond it a future date would pass the age gate forever. */
+const MAX_FUTURE_SKEW_HOURS = 1;
 const TYPES = new Set(['chiusura', 'cantiere', 'traffico', 'tp']);
-// URL group codes (canton-url-slugs.json): 22 two-letter cantons + the two groups.
-const CANTON_RE = /^(?:[A-Z]{2}|APPENZELLO|BASILEA)$/;
-const HALF_CANTONS = new Set(['AI', 'AR', 'BL', 'BS']);
+const CANTON_GROUPS = new Set(Object.keys(cantonUrlSlugs.cantons ?? {}));
+const HALF_CANTONS = new Set(Object.values(cantonUrlSlugs.cantonGroups ?? {}).flatMap((g) => g.members ?? []));
 
 const log = (msg) => console.log(`[refresh-road-events] ${msg}`);
 const fail = (msg) => {
@@ -87,24 +92,33 @@ if (!Array.isArray(payload.events)) fail(`${SOURCE}: has no events[] array — r
 if (payload.events.length === 0) fail(`${SOURCE}: carries zero events — refusing`);
 
 const ageHours = (Date.now() - Date.parse(payload.generatedAt)) / 3_600_000;
+if (ageHours < -MAX_FUTURE_SKEW_HOURS) {
+  fail(`${SOURCE}: generatedAt ${payload.generatedAt} is in the future — refusing (a stuck clock would pass the age gate forever)`);
+}
 if (ageHours > MAX_AGE_HOURS) {
   fail(`${SOURCE}: generatedAt ${payload.generatedAt} is ${Math.round(ageHours)}h old — refusing stale road events`);
 }
 
+const seenIds = new Set();
 payload.events.forEach((e, i) => {
   const at = `events[${i}]`;
   if (typeof e?.id !== 'string' || !e.id) fail(`${SOURCE}: ${at}.id missing — refusing`);
+  if (seenIds.has(e.id)) fail(`${SOURCE}: ${at}.id ${JSON.stringify(e.id)} is duplicated — refusing`);
+  seenIds.add(e.id);
   if (HALF_CANTONS.has(e.canton)) {
     fail(`${SOURCE}: ${at}.canton is the half-canton ${e.canton}, not its URL group — refusing`);
   }
-  if (!CANTON_RE.test(String(e.canton))) {
-    fail(`${SOURCE}: ${at}.canton ${JSON.stringify(e.canton)} is not a canton URL group code — refusing`);
+  if (!CANTON_GROUPS.has(e.canton)) {
+    fail(`${SOURCE}: ${at}.canton ${JSON.stringify(e.canton)} is not one of the 24 canton URL groups — refusing`);
   }
   if (!TYPES.has(e.type)) fail(`${SOURCE}: ${at}.type ${JSON.stringify(e.type)} is not one of ${[...TYPES].join('|')} — refusing`);
   if (typeof e.title !== 'string' || !e.title.trim()) fail(`${SOURCE}: ${at}.title is empty — refusing`);
   if (e.url !== null && !/^https:\/\//.test(String(e.url))) fail(`${SOURCE}: ${at}.url is not https or null — refusing`);
   for (const k of ['validFrom', 'validTo']) {
     if (e[k] !== null && !isIso(e[k])) fail(`${SOURCE}: ${at}.${k} is not an ISO date or null — refusing`);
+  }
+  if (e.validFrom && e.validTo && Date.parse(e.validFrom) > Date.parse(e.validTo)) {
+    fail(`${SOURCE}: ${at}.validFrom is after validTo — refusing`);
   }
   if (typeof e.source !== 'string' || !e.source) fail(`${SOURCE}: ${at}.source missing — refusing`);
   if (!isIso(e.observedAt)) fail(`${SOURCE}: ${at}.observedAt is not an ISO date — refusing`);
@@ -116,5 +130,8 @@ if (CHECK_ONLY) {
   process.exit(0);
 }
 fs.mkdirSync(path.dirname(CACHE), { recursive: true });
-fs.writeFileSync(CACHE, `${JSON.stringify(payload, null, 2)}\n`);
+// temp + rename: a kill mid-write must not leave a truncated cache behind.
+const tmp = `${CACHE}.${process.pid}.tmp`;
+fs.writeFileSync(tmp, `${JSON.stringify(payload, null, 2)}\n`);
+fs.renameSync(tmp, CACHE);
 log(`cached ${payload.events.length} events in ${cantons.size} cantons (generated ${payload.generatedAt})`);
