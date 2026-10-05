@@ -4180,8 +4180,8 @@ async function optimizeImageToWebp(inputPath, outputPath) {
   // (which doubled disk usage in dist/ for zero SEO benefit — see PR migrating
   // 2400+ articles to WebP-only heroes). WebP is universally supported (~99%
   // browsers), accepted by FB/X/LinkedIn og:image, and indexed by Google Image
-  // Search. q75 produces ~85-100 KB at 1200×675 — comparable to the prior
-  // mozjpeg q72 size, smaller than the prior q82 WebP sidecar.
+  // Search. Start at q75 and lower quality only when the shared byte target
+  // requires it; photographic heroes vary substantially in compressibility.
   try {
     const sharpModule = await import('sharp');
     const sharp = sharpModule.default || sharpModule;
