@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='ISO-8859-1' standalone='no'?>
+<rss version='2.0'>
+<channel>
+<title>Infos OCSTAT - Actualités et Publications</title>
+<link>https://statistique.ge.ch/actualites/welcome.asp</link>
+<description>Actualités et Publications de l'OCSTAT</description>
+<language>fr</language>
+<copyright>© Etat de Genève</copyright>
+<ttl>60</ttl>
+<image>
+<title>Infos OCSTAT - Actualités et Publications</title>
+<link>http://www.ge.ch/statistique/actualites/welcome.asp</link>
+<url>http://www.ge.ch/images/ecusson.gif</url>
+<width>58</width>
+<height>87</height>
+</image>
+<item>
+<title><![CDATA[L'économie genevoise bénéficie du regain de l'activité mondiale ]]></title>
+<description><![CDATA[ <img src='/images/actu/2022/' /> <p></p> ]]></description>
+<link>https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&amp;utm_medium=itm&amp;utm_term=rss&amp;utm_content=guid_10876&amp;utm_campaign=ocstat&amp;url=https://www.ge.ch/document/gpe%2Dsynthese%2Dtrimestrielle%2Dseptembre%2D2026</link>
+<pubDate>Mon, 5 Oct 2026 14:30:00 +0200</pubDate>
+<guid isPermaLink="false">https://statistique.ge.ch/rss/affiche_detail.asp?guid=10876</guid>
+</item>
+<item>
+<title><![CDATA[Le vieillissement de la population genevoise ]]></title>
+<description><![CDATA[ <img src='/images/actu/2022/' /> <p></p> ]]></description>
+<link>https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&amp;utm_medium=itm&amp;utm_term=rss&amp;utm_content=guid_10875&amp;utm_campaign=ocstat&amp;url=/statistique/tel/publications/2026/informations%5Fstatistiques/autres%5Fthemes/is%5Fpopulation%5F09%5F2026.pdf</link>
+<pubDate>Fri, 2 Oct 2026 14:15:00 +0200</pubDate>
+<guid isPermaLink="false">https://statistique.ge.ch/rss/affiche_detail.asp?guid=10875</guid>
+</item>
+</channel>
+</rss>

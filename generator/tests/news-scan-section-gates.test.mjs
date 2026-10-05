@@ -51,6 +51,7 @@ import { fileURLToPath } from 'node:url';
 
 import { hasDomainAnchor } from '../scripts/lib/discovery/domainAnchor.mjs';
 import { countLocalNewsHits, isLocalNews } from '../scripts/lib/local-news.mjs';
+import { buildCantonProfile, cantonPromptLines } from '../scripts/lib/canton-section-profile.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -98,12 +99,16 @@ assert.match(PRIORITIZE_SRC, /function prioritizeFrontalieriHeadlines\(/, 'il bl
  * Evaluates the three blocks with the module-scope names they close over
  * injected, for one section.
  */
-function loadGates(section) {
+function loadGates(section, cantonProfile = null) {
   const isFrontaliere = section === 'frontaliere';
+  const isCanton = cantonProfile !== null;
   const logs = [];
   const runReport = { headlines: {} };
   const api = new Function(
     'IS_FRONTALIERE',
+    'IS_CANTON',
+    'SECTION_PROFILE',
+    'CANTON_LINES',
     'SECTION_NAME',
     'hasDomainAnchor',
     'RUN_REPORT',
@@ -112,13 +117,16 @@ function loadGates(section) {
     'countLocalNewsHits',
     `${LEXICON_SRC}\n${FILTER_SRC}\n${PRIORITIZE_SRC}\nreturn {
        TOPICAL_KEYWORDS, SVIZZERA_TOPICAL_KEYWORDS, FRONTALIERI_KEYWORDS,
-       FRONTALIERE_ADMISSION_KEYWORDS,
+       FRONTALIERE_ADMISSION_KEYWORDS, FRONTALIERE_EVENTS_CULTURE_KEYWORDS,
        hasTopicalSignal, countTopicalHits, filterByAnchor,
        hasAdmissionSignal, countAdmissionHits,
        prioritizeFrontalieriHeadlines,
      };`,
   )(
     isFrontaliere,
+    isCanton,
+    cantonProfile ?? { kind: isFrontaliere ? 'frontaliere' : 'national' },
+    isCanton ? cantonPromptLines(cantonProfile) : null,
     section,
     hasDomainAnchor,
     runReport,
@@ -127,6 +135,20 @@ function loadGates(section) {
     countLocalNewsHits,
   );
   return { ...api, logs, runReport };
+}
+
+/**
+ * Il gate di una sezione cantonale, col profilo VERO costruito sul lessico
+ * nazionale VERO (estratto qui sopra), come fa buildSectionProfile in
+ * create-article.mjs.
+ */
+function loadCantonGates(section) {
+  const base = loadGates('svizzera');
+  const profile = buildCantonProfile(section, {
+    nationalTopicalKeywords: base.SVIZZERA_TOPICAL_KEYWORDS,
+    nationalAdmissionKeywords: base.SVIZZERA_TOPICAL_KEYWORDS.filter((k) => !base.FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)),
+  });
+  return loadGates(section, profile);
 }
 
 const FRONT = loadGates('frontaliere');
@@ -461,4 +483,54 @@ test('SOURCE_DROP_OFF_TOPIC: a road accident page is admitted on frontaliere, st
 test('SOURCE_DROP_OFF_TOPIC: a page with no work, fiscal, commute or local-news signal is still dropped', () => {
   const pageBody = 'Una chiesetta ortodossa macedone apre le porte ai fedeli della regione.';
   assert.equal(FRONT.countAdmissionHits(pageBody), 0);
+});
+
+// ── Sezioni cantonali (P6b) ────────────────────────────────────────────────
+//
+// Le fonti cantonali sono tedesche e francesi: con il solo lessico nazionale
+// (italiano) il gate topicale le scarterebbe TUTTE. Il profilo cantonale
+// aggiunge i termini DE/FR e il nome del cantone, e ammette la cronaca solo se
+// nel cantone e con impatto pratico. Le headline sono quelle reali delle fonti
+// BE del profilo (be.ch, bern.ch, ajour.ch) il 2026-10-05.
+
+const BE = loadCantonGates('canton-be');
+const beHeadline = (headline, url = 'https://www.bern.ch/mediencenter/x') => ({ headline, url });
+
+test('canton-be: lavoro, fisco, governo cantonale e mobilita\' in tedesco/francese passano il gate topicale', () => {
+  for (const t of [
+    'Regierungsrat erhöht den Steuerfuss nicht',
+    'Biel: Umgestaltung des Knotens Reuchenettestrasse kommt voran – Umleitung ab Montag',
+    'Le Conseil-exécutif adopte le budget 2027',
+    'Grenzgänger: neue Regeln bei der Quellensteuer',
+  ]) {
+    assert.ok(BE.hasAdmissionSignal(`${t} https://www.be.ch/x`), `scartata: ${t}`);
+  }
+});
+
+test('canton-be: cronaca senza impatto pratico resta fuori, con impatto pratico nel cantone entra', () => {
+  assert.equal(BE.hasAdmissionSignal('Thun: Einbrecher in Einfamilienhaus festgenommen'), false);
+  assert.equal(BE.hasAdmissionSignal('Fussball: YB gewinnt gegen Basel'), false);
+  assert.equal(BE.hasAdmissionSignal('Thun: nach Unfall bleibt die Strasse bis Mittag gesperrt'), true);
+});
+
+test('canton-be: il gate di ancora vuole il cantone, non il lessico Ticino/confine', () => {
+  BE.runReport.headlines = {};
+  const kept = BE.filterByAnchor([
+    beHeadline('Thun: Strasse wegen Bauarbeiten gesperrt', 'https://www.example-news.ch/a'),
+    beHeadline('Regierungsrat erhöht den Steuerfuss nicht', 'https://www.bern.ch/mediencenter/b'),
+    beHeadline('Zürich: neue Tramlinie gesperrt wegen Bauarbeiten', 'https://www.example-news.ch/c'),
+  ]);
+  assert.deepEqual(kept.map((k) => k.url), ['https://www.example-news.ch/a', 'https://www.bern.ch/mediencenter/b']);
+  assert.ok(BE.logs.some((l) => /Anchor-gate: 1 headline scartate \(nessun luogo del Canton Berna/.test(l)), BE.logs.join('\n'));
+});
+
+test('canton-be: i rami nazionale e frontaliere NON cambiano con la sezione cantonale nello stesso file', () => {
+  // Stesso testo, tre sezioni: le due storiche rispondono come prima del P6b.
+  const t = 'Regierungsrat erhöht den Steuerfuss nicht';
+  assert.equal(FRONT.hasAdmissionSignal(t), false);
+  assert.equal(CH.hasAdmissionSignal(t), false);
+  assert.equal(BE.hasAdmissionSignal(t), true);
+  // E con `national` esplicito il ramo cantonale non interviene.
+  assert.equal(BE.hasAdmissionSignal(t, true), CH.hasAdmissionSignal(t, true));
+  assert.equal(BE.countTopicalHits('Svizzera: PIL in crescita', false), FRONT.countTopicalHits('Svizzera: PIL in crescita', false));
 });

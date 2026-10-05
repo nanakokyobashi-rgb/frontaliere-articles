@@ -48,6 +48,7 @@ import {
   selectionCorrectionNote,
 } from '../scripts/lib/headline-selection-protocol.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
+import { buildCantonProfile, cantonHeadlineSelectionPrompt } from '../scripts/lib/canton-section-profile.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -88,7 +89,9 @@ const selectArticleCode = codeOnly(selectArticleSrc);
 /** Il prompt VERO, valutato con le sole dipendenze iniettate. */
 const makePrompt = new Function(
   '__d',
-  `const { IS_FRONTALIERE, JSON_QUOTE_SAFETY_RULE_IT } = __d;\n`
+  // IS_CANTON / SECTION_PROFILE / cantonHeadlineSelectionPrompt: il ramo
+  // della sezione cantonale (P6b); spento di default, come per le storiche.
+  `const { IS_FRONTALIERE, JSON_QUOTE_SAFETY_RULE_IT, IS_CANTON = false, SECTION_PROFILE = null, cantonHeadlineSelectionPrompt = null } = __d;\n`
   + `${cutDecl('function HEADLINE_SELECTION_PROMPT(headlineList, recentArticles) {')}\n`
   + 'return HEADLINE_SELECTION_PROMPT;',
 );
@@ -251,12 +254,24 @@ test('il promemoria di correzione nomina la forma attesa e l’intervallo', () =
 test('il prompt VERO chiede selectedId e non nomina più selectedIndex', () => {
   const HEADLINE_SELECTION_PROMPT = makePrompt({ IS_FRONTALIERE: true, JSON_QUOTE_SAFETY_RULE_IT });
   const HEADLINE_SELECTION_PROMPT_CH = makePrompt({ IS_FRONTALIERE: false, JSON_QUOTE_SAFETY_RULE_IT });
-  for (const [label, build] of [['frontaliere', HEADLINE_SELECTION_PROMPT], ['svizzera', HEADLINE_SELECTION_PROMPT_CH]]) {
+  const HEADLINE_SELECTION_PROMPT_GR = makePrompt({
+    IS_FRONTALIERE: false,
+    IS_CANTON: true,
+    SECTION_PROFILE: buildCantonProfile('canton-gr', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] }),
+    cantonHeadlineSelectionPrompt,
+    JSON_QUOTE_SAFETY_RULE_IT,
+  });
+  for (const [label, build] of [['frontaliere', HEADLINE_SELECTION_PROMPT], ['svizzera', HEADLINE_SELECTION_PROMPT_CH], ['canton-gr', HEADLINE_SELECTION_PROMPT_GR]]) {
     const prompt = build(formatCandidateList(CANDIDATES), formatPublishedDigest(PUBLISHED));
     assert.match(prompt, /"selectedId"/, `ramo ${label}: il prompt non chiede selectedId`);
     assert.ok(!/selectedIndex/.test(prompt), `ramo ${label}: il prompt chiede ancora un indice nudo`);
     assert.match(prompt, /CHIAVE/, `ramo ${label}: il prompt non spiega che la chiave è l'unica cosa selezionabile`);
+    const listed = prompt.split('\n').filter((l) => /^(H\d+ »|• )/.test(l));
+    assert.equal(listed.length, CANDIDATES.length + PUBLISHED.length, `ramo ${label}: righe di lista mancanti o rese in altro modo`);
   }
+  const gr = HEADLINE_SELECTION_PROMPT_GR(formatCandidateList(CANDIDATES), formatPublishedDigest(PUBLISHED));
+  assert.match(gr, /Canton Grigioni/, 'il ramo cantonale nomina il suo cantone');
+  assert.ok(gr.includes(JSON_QUOTE_SAFETY_RULE_IT), 'il ramo cantonale porta la stessa regola JSON');
 });
 
 test('nel prompt VERO le due liste restano distinguibili riga per riga', () => {
