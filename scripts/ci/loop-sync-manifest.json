@@ -5086,7 +5086,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prossimi eventi»: legge la cache del contratto REWIRE `events-dataset` filtrando per i membri del gruppo cantonale.",
       "baseline": {
         "site": null,
-        "corpus": "bb6927b4cdc68143",
+        "corpus": "1c53e1ea0f68d5fb",
         "alignedAt": "2026-10-05"
       }
     },
