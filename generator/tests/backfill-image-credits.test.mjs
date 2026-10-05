@@ -292,7 +292,7 @@ test('--check after a new --fetch: an unchanged file is not a change, a changed 
   try {
     write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
     assert.equal(run(root, '--build').status, 0);
-    // The monthly revalidation: the same metadata, read again a month later.
+    // The same metadata, read again a month later.
     const snapshot = JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8'));
     write(root, SNAPSHOT_FILE, serializeSnapshot({ ...snapshot, fetchedAt: '2026-11-07' }));
     assert.deepEqual(checkTree(root), [], 'a re-read on another day that finds every file unchanged is clean');

@@ -28,9 +28,9 @@
  *            overrides file well-formed and applied, no credited cover's
  *            literal still claiming the photo, and — once the snapshot exists —
  *            a rebuild in memory identical to the tree but for `fetchedAt`,
- *            each difference named by field. After a new --fetch this is the
- *            monthly revalidation (`scripts/ci/image-credits-revalidate.mjs`):
- *            a file Commons still describes the same way is not a change.
+ *            each difference named by field. After a new --fetch it tells which
+ *            records changed: a file Commons still describes the same way is
+ *            not a change.
  *
  * The overrides file (`data/image-credit-overrides.json`), schema 1:
  *
@@ -571,7 +571,7 @@ export function applyBackfill(root, plan) {
  * dotted paths (`author.name`, `licence.url`, `commons.revision`). Not
  * `fetchedAt`: it says when Commons was read, and a re-read that finds the file
  * unchanged changes nothing — without this, every new --fetch would make every
- * record differ, and the monthly revalidation would report all of them.
+ * record differ, and the check would report all of them.
  *
  * @param {Record<string, any>} current
  * @param {Record<string, any>} rebuilt
