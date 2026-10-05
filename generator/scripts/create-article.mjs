@@ -14637,6 +14637,16 @@ function validateStructuredData(data) {
   if (!ogT) throw new Error(`[validate-ld] Empty ogTitle for ${entryKey}`);
   if (!ogD) throw new Error(`[validate-ld] Empty ogDescription for ${entryKey}`);
   if (!cp) throw new Error(`[validate-ld] Empty canonicalPath for ${entryKey}`);
+  // The site's URL contract is slash-terminated: a canonicalPath without the
+  // final slash publishes the non-canonical duplicate. modifySeoService() has
+  // built it with the slash since #2060, but nothing stopped the no-slash form
+  // from coming back (the frontaliere section wrote it until 2026-10-03, and
+  // the site review flagged it on two corpus syncs, site PRs 10987 and 11114).
+  // Older frontaliere entries without it are not touched: this check reads
+  // only the entry just written, so it cannot fail on history.
+  if (!cp.startsWith('/') || !cp.endsWith('/')) {
+    throw new Error(`[validate-ld] canonicalPath "${cp}" for ${entryKey} must start and end with "/" (trailing-slash canonical contract)`);
+  }
   if (data._imageCredit) {
     // P14: a credited Commons cover carries no rights field in the literal —
     // the engine builds all five from the record (see modifySeoService).
