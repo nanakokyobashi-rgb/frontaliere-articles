@@ -238,17 +238,34 @@ export function formatViolation(v) {
   return `${VIOLATION_MARKER} ${parts.join(' ')}`;
 }
 
-function gitReader(cwd, rev) {
+/**
+ * Il lettore di un file a una revisione. `null` SOLO se il path non c'e' in
+ * quell'albero (una sezione ancora vuota, un ledger mai scritto): lo dice
+ * `git ls-tree`, non un `git show` fallito. Un path che c'e' ma non si legge
+ * (blob mancante in un clone parziale, oggetto corrotto, buffer superato) e'
+ * un ERRORE: trattarlo da «assente» lascerebbe quella sezione fuori dal
+ * confronto e farebbe uscire 0 proprio sul duplicato da fermare.
+ */
+export function gitReader(cwd, rev) {
+  const run = (args) => execFileSync('git', args, {
+    cwd,
+    encoding: 'utf8',
+    maxBuffer: 256 * 1024 * 1024,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  const why = (e) => String(e?.stderr || e?.message || e).trim().split('\n')[0];
   return (path) => {
+    let listed;
     try {
-      return execFileSync('git', ['show', `${rev}:${path}`], {
-        cwd,
-        encoding: 'utf8',
-        maxBuffer: 256 * 1024 * 1024,
-        stdio: ['ignore', 'pipe', 'ignore'],
-      });
-    } catch {
-      return null;
+      listed = run(['ls-tree', '--name-only', rev, '--', path]).trim();
+    } catch (e) {
+      throw new Error(`git ls-tree ${rev} -- ${path} fallito: ${why(e)}`);
+    }
+    if (!listed) return null;
+    try {
+      return run(['show', `${rev}:${path}`]);
+    } catch (e) {
+      throw new Error(`${rev.slice(0, 12)}:${path} esiste ma non si legge: ${why(e)}`);
     }
   };
 }

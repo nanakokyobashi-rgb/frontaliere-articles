@@ -12,7 +12,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -302,6 +302,30 @@ test('CLI non eseguibile: exit 2 con il suo marcatore, mai un falso «ok»', () 
     const missing = runScript(w.root, '--produced', 'non-esiste');
     assert.equal(missing.code, 2, missing.out);
     assert.match(missing.out, new RegExp(ERROR_MARKER));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI: un file che c\'e\' ma non si legge e\' un errore, non una sezione vuota', () => {
+  // Il caso che un `git show` fallito trattato da «assente» faceva passare: il
+  // registro dell'altra sezione c'e' (l'albero lo elenca) ma il suo blob manca,
+  // come in un clone parziale o con un oggetto corrotto. Leggerlo come vuoto
+  // toglieva dal confronto proprio il duplicato.
+  const mine = sectionFiles(SECOND, { ids: ['stesso-id'] });
+  // Un id in piu' rende i blob di upstream diversi da quelli del nostro commit.
+  const upstream = sectionFiles(FIRST, { ids: ['stesso-id', 'solo-upstream'] });
+  const w = world({ upstream, mine, rebased: mine });
+  try {
+    const blob = git(w.root, 'rev-parse', `${w.against}:${FIRST.slugDataFile}`).trim();
+    const regBlob = git(w.root, 'rev-parse', `${w.against}:${FIRST.registryFile}`).trim();
+    for (const b of [blob, regBlob]) {
+      rmSync(path.join(w.root, '.git', 'objects', b.slice(0, 2), b.slice(2)), { force: true });
+    }
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 2, out);
+    assert.match(out, new RegExp(`${ERROR_MARKER}: .*esiste ma non si legge`));
+    assert.doesNotMatch(out, new RegExp(OK_MARKER));
   } finally {
     w.cleanup();
   }
