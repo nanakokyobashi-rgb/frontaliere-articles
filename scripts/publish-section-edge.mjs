@@ -18,8 +18,11 @@
  * 0. LETTURA. Si legge dal CDN il registro che R2 ha adesso. Il push e'
  *    OBBLIGATORIO se lo stato delle sezioni da pubblicare (status, redirects,
  *    gone) differisce da quello — in OGNI direzione: accensione, spegnimento,
- *    ritiro — o se R2 non e' leggibile e la release dichiara qualcosa di
- *    non-draft. Se lo stato e' lo stesso la release cambia solo il `commit`.
+ *    ritiro — e ANCHE quando lo stato precedente non e' dimostrabile (CDN
+ *    illeggibile, o un documento che non rispetta il contratto del Worker):
+ *    una release tutta `draft` sopra un registro che non si riesce a leggere
+ *    potrebbe essere uno spegnimento. Solo se lo stato letto e' lo stesso la
+ *    release cambia soltanto il `commit`, e il push e' facoltativo.
  *
  * 1. STAGING (niente di visibile cambia). Ogni file della release sale su una
  *    chiave VERSIONATA per commit,
@@ -148,9 +151,10 @@ export function planRelease(distDir) {
  * @param {{ state: 'ok' | 'absent' | 'unknown', doc?: unknown }} previous
  */
 export function pushIsMandatory(registry, previous) {
-  const nothing = registryState({ sections: {} });
-  if (!previous || previous.state === 'unknown') return registryState(registry) !== nothing;
-  return registryState(registry) !== (previous.state === 'ok' ? registryState(previous.doc) : nothing);
+  // Stato precedente non dimostrabile: fail-closed, anche per una release
+  // tutta draft (se R2 serviva una sezione live, questo e' uno spegnimento).
+  if (!previous || previous.state === 'unknown') return true;
+  return registryState(registry) !== registryState(previous.state === 'ok' ? previous.doc : { sections: {} });
 }
 
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
@@ -202,7 +206,11 @@ export async function readPreviousRegistry(io) {
   if (res.status === 404) return { state: 'absent' };
   if (res.status !== 200) return { state: 'unknown' };
   try {
-    return { state: 'ok', doc: JSON.parse(res.body.toString('utf8')) };
+    const doc = JSON.parse(res.body.toString('utf8'));
+    // Un 200 non basta: conta come stato precedente solo un registro che il
+    // Worker accetterebbe. Qualunque altra cosa (una pagina d'errore in JSON,
+    // un documento troncato) non dimostra niente.
+    return validateEdgeSectionRegistry(doc) ? { state: 'ok', doc } : { state: 'unknown' };
   } catch {
     return { state: 'unknown' };
   }
@@ -246,11 +254,15 @@ export async function publishRelease(release, { io, env = process.env, log = con
   for (const file of sitemaps) {
     if (!io.upload(file.local, `edge/${file.name}`, SITEMAP_CACHE_CONTROL)) return stop('flip', `sitemap non caricata: edge/${file.name}`, false);
   }
+  let flipped = false;
   const pointerDir = fs.mkdtempSync(path.join(tmpDir, 'section-edge-'));
-  const pointerFile = path.join(pointerDir, 'registry.json');
-  fs.writeFileSync(pointerFile, JSON.stringify(release.pointer));
-  const flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
-  fs.rmSync(pointerDir, { recursive: true, force: true });
+  try {
+    const pointerFile = path.join(pointerDir, 'registry.json');
+    fs.writeFileSync(pointerFile, JSON.stringify(release.pointer));
+    flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
+  } finally {
+    fs.rmSync(pointerDir, { recursive: true, force: true });
+  }
   if (!flipped) return stop('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`, false);
 
   // 3. Dopo il flip: purge, indice, purge. Lo stato e' gia' coerente.

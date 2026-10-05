@@ -69,7 +69,7 @@ for try in 1 2; do
     deletefile ":s3:$R2_BUCKET/$cdn_key" 2>&1)"
   rc=$?
   # Una chiave gia' assente e' lo stato voluto, non un errore.
-  if [ "$rc" -eq 0 ] || printf '%s' "$out" | grep -qiE 'not found|NoSuchKey|object not found'; then
+  if [ "$rc" -eq 0 ] || printf '%s' "$out" | grep -qiE 'not found|NoSuchKey|no such key|404|does not exist|doesn.t exist'; then
     attempt_ok=1
     break
   fi

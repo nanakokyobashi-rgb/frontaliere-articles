@@ -79,6 +79,7 @@ import {
   planRelease,
   publishRelease,
   purgeChunks,
+  readPreviousRegistry,
   pushIsMandatory,
   registryState,
 } from '../../scripts/publish-section-edge.mjs';
@@ -501,9 +502,11 @@ test('edge: push obbligatorio a OGNI cambio di stato rispetto a R2 — accension
   assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'ok', doc: live }), true, 'spegnimento');
   assert.equal(pushIsMandatory(retired, { state: 'ok', doc: live }), true, 'ritiro');
   assert.equal(pushIsMandatory(live, { state: 'ok', doc: { ...live, commit: 'ddddddd' } }), false);
-  // R2 illeggibile: non si puo' dimostrare che lo stato coincide.
+  // R2 illeggibile: lo stato precedente non e' dimostrabile, quindi fail-closed
+  // ANCHE per una release tutta draft (potrebbe essere uno spegnimento).
   assert.equal(pushIsMandatory(live, { state: 'unknown' }), true);
-  assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'unknown' }), false);
+  assert.equal(pushIsMandatory(DRAFT_ALL(), { state: 'unknown' }), true);
+  assert.equal(pushIsMandatory(DRAFT_ALL(), undefined), true);
 });
 
 test('edge: la release ha chiavi versionate per commit e un puntatore nel contratto del Worker', () => {
@@ -609,6 +612,23 @@ test('edge: senza cambio di stato un problema di R2 non ferma gli articoli; con 
   assert.deepEqual([noCredsSame.result.code, noCredsSame.io.ops], [0, []]);
   const noCredsFlip = await publish(DRAFT_ALL(), { previous: withLive(['canton-ti'], 'aaaaaaa') }, {});
   assert.deepEqual([noCredsFlip.result.code, noCredsFlip.io.ops], [1, []], 'uno spegnimento senza credenziali ferma il publish');
+});
+
+test('edge: uno stato precedente non dimostrabile ferma il publish, anche per una release tutta draft', async () => {
+  // CDN illeggibile mentre R2 serve una sezione live: lo staging fallisce e il
+  // publish NON deve proseguire lasciando R2 sulla vecchia release live.
+  const unreadable = await publish(DRAFT_ALL(), { previous: withLive(['canton-ti'], 'aaaaaaa'), fail: (op) => op === 'fetch' });
+  assert.deepEqual([unreadable.result.code, unreadable.result.flipped], [1, false]);
+  assert.match(unreadable.logs.join('\n'), /registro su R2 unknown; push OBBLIGATORIO/);
+  // Un 200 che non e' un registro nel contratto del Worker non dimostra niente.
+  for (const bogus of [{ error: 'not found' }, { schema: 1, commit: 'HEAD', sections: {} }, { schema: 2, commit: COMMIT, sections: {} }]) {
+    assert.deepEqual(await readPreviousRegistry(fakeIo({ previous: bogus })), { state: 'unknown' });
+  }
+  assert.equal((await readPreviousRegistry(fakeIo())).state, 'absent');
+  assert.equal((await readPreviousRegistry(fakeIo({ previous: withLive(['canton-ti']) }))).state, 'ok');
+  // Senza credenziali e con lo stato precedente illeggibile: stop, niente caricato.
+  const blind = await publish(DRAFT_ALL(), { fail: (op) => op === 'fetch' }, {});
+  assert.deepEqual([blind.result.code, blind.io.ops], [1, []]);
 });
 
 test('edge: CLI — senza registro in dist nessuna release; argomenti malformati rifiutati', async () => {
