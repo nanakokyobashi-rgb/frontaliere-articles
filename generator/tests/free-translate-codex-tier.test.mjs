@@ -106,7 +106,6 @@ function codexCounters() {
     hits: s.tierHits.codex || 0,
     errors: s.tierErrors.codex || 0,
     passthroughs: s.tierPassthroughs.codex || 0,
-    metaResponses: s.tierMetaResponses.codex || 0,
   };
 }
 
@@ -598,30 +597,6 @@ test('una richiesta di gruppo fallita e\' un errore per ogni suo testo e un fall
   });
 });
 
-test('batch di sole meta-risposte conta un fallimento e alimenta il breaker Codex', async () => {
-  const before = codexCounters();
-  const refusal = "Sorry — I can't help with that.";
-  const calls = stubCodex((messages) => {
-    const items = batchItems(messages);
-    if (!items) return refusal;
-    return JSON.stringify({ items: items.map(({ id }) => ({ id, text: refusal })) });
-  });
-
-  const { value, lines } = await captureLog(async () => withLanes(1, async () => {
-    const first = await Promise.all(numbered(4).map((text) => it(text)));
-    const second = await Promise.all(numbered(3).map((text) => it(text)));
-    return [...first, ...second];
-  }));
-
-  assert.deepEqual(value, Array(7).fill(`MYMEMORY ${EN}`));
-  assert.equal(calls.length, 3);
-  assert.equal(batchItems(calls[0].messages), null);
-  assert.equal(batchItems(calls[1].messages).length, 3);
-  assert.equal(batchItems(calls[2].messages), null);
-  assert.equal(codexCounters().metaResponses - before.metaResponses, 5);
-  assert.equal(lines.filter((line) => line.includes('3 fallimenti consecutivi')).length, 1);
-});
-
 test('tre fallimenti consecutivi fermano il tier, contati come errori del tier', async () => {
   const before = codexCounters();
   const calls = stubCodex(() => { throw new Error('broker non raggiungibile'); });
@@ -641,6 +616,16 @@ test('tre echi di fila fermano il tier come tre fallimenti, e restano contati co
   assert.deepEqual(value, Array(4).fill(`MYMEMORY ${EN}`));
   assert.equal(calls.length, 3);
   assert.equal(codexCounters().passthroughs - before.passthroughs, 3);
+  assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
+});
+
+test('tre rifiuti di fila fermano il tier come tre fallimenti (review della PR 2166)', async () => {
+  // Un rifiuto non e' un eco della sorgente: prima di questa guardia la lane lo
+  // contava come traduzione riuscita, azzerava lo streak e non si fermava mai.
+  const calls = stubCodex("Sorry, I can't help with that.");
+  const { value, lines } = await captureLog(async () => [await it(), await it(), await it(), await it()]);
+  assert.deepEqual(value, Array(4).fill(`MYMEMORY ${EN}`));
+  assert.equal(calls.length, 3);
   assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
 });
 

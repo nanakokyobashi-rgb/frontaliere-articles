@@ -581,24 +581,6 @@ function rejectedAsPassthroughWithSourceVariants(
     && rejectedAsPassthrough(tierName, rawSource, out, outcome, granularity);
 }
 
-// Il rilevatore shared resta byte-identico al sito. Qui il consumer corpus
-// copre anche separatori d'apertura comuni che il pattern shared non accetta
-// ancora: «Sorry — I can't help», «I'm sorry: I cannot…» e varianti.
-const CORPUS_SEPARATOR_REFUSAL = /^(?:sorry|i['’]m sorry|i am sorry)\s*[:;—–-]\s*(?:but\s+)?i\b/i;
-
-function detectCorpusMetaResponse(text, source = '') {
-  const detected = detectAiMetaResponse(text, { source });
-  if (detected) return detected;
-
-  const head = String(text ?? '').replace(/^[\s#>*_`"'«»“”„\-•]+/u, '');
-  const match = head.match(CORPUS_SEPARATOR_REFUSAL);
-  if (!match) return null;
-
-  const marker = match[0].trim();
-  if (String(source ?? '').toLowerCase().includes(marker.toLowerCase())) return null;
-  return { kind: 'refusal', marker };
-}
-
 /**
  * Un tier che risponde CON UNA META-RISPOSTA non ha tradotto (scheda
  * AI-REFUSAL, trovata dalla PR del sito 11540): «I need to see the actual job
@@ -618,18 +600,10 @@ function detectCorpusMetaResponse(text, source = '') {
  * @returns {boolean} true se `out` e' una meta-risposta (e il tier e' stato contato)
  */
 function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
-  if (!out || !detectCorpusMetaResponse(out, source)) return false;
+  if (!out || !detectAiMetaResponse(out, { source })) return false;
   _cascadeStats.tierMetaResponses[tierName] = (_cascadeStats.tierMetaResponses[tierName] || 0) + 1;
   noteTranslationOutcome(outcome, 'incomplete');
   return true;
-}
-
-/** Una gara tra proxy restituisce solo una traduzione accettabile. */
-function acceptedRaceCandidate(tierName, source, translated, outcome) {
-  if (!translated) return '';
-  if (rejectedAsPassthrough(tierName, source, translated, outcome)) return '';
-  if (rejectedAsMetaResponse(tierName, source, translated, outcome)) return '';
-  return translated;
 }
 
 /**
@@ -866,10 +840,24 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
   return '';
 }
 
+/**
+ * Il verdetto di UNA istanza dentro `raceInstances`: la sua risposta puo'
+ * vincere la gara solo se e' una traduzione. Un eco della sorgente o una
+ * meta-risposta («Sorry, I can't help with that.», «Traduzione:») resta qui e
+ * vale '': non vince, non ferma le altre istanze ancora in corsa e non marca
+ * l'istanza come sana. Scartarla dopo, in `tryTier`, era troppo tardi: la gara
+ * aveva gia' abortito i candidati validi.
+ */
+function acceptedRaceAnswer(tierName, source, translated, attemptOutcome) {
+  if (!translated) return '';
+  if (rejectedAsPassthrough(tierName, source, translated, attemptOutcome)) return '';
+  if (rejectedAsMetaResponse(tierName, source, translated, attemptOutcome)) return '';
+  return translated;
+}
+
 // ── Parallel Race Helper ─────────────────────────────────────────────────────
 // Probe multiple instances in parallel, return the first valid translation.
-// Provider callbacks must reject passthroughs and meta-responses before a
-// candidate can abort its competitors or mark its instance healthy.
+// Much faster than sequential probing when some instances are slow/down.
 async function raceInstances(instances, fetchFn, outcome = null) {
   const healthy = instances.filter(isInstanceHealthy);
   if (healthy.length === 0) {
@@ -961,7 +949,10 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translation || '');
-    return acceptedRaceCandidate('lingva', q, translated, attemptOutcome);
+    // Dentro `raceInstances`: se questa istanza rende l'eco NON deve vincere la
+    // gara, le altre stanno ancora provando. Percio' il rifiuto resta qui e non
+    // sale in `tryTier` — ma passa dalla formula condivisa e viene contato.
+    return acceptedRaceAnswer('lingva', q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -984,7 +975,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translated_text || '');
-    return acceptedRaceCandidate('simplyTranslate', q, translated, attemptOutcome);
+    return acceptedRaceAnswer('simplyTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -1042,7 +1033,7 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeBlock(data?.translatedText || '');
-    return acceptedRaceCandidate('libreTranslate', q, translated, attemptOutcome);
+    return acceptedRaceAnswer('libreTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -1070,7 +1061,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
     // nomi diversi (`mozhiDdg`, `mozhiGoogle`, `mozhiYandex`, `mozhiDeepL`) e da
     // qui dentro non sono ricostruibili, quindi il bucket usa `mozhi:<engine>`
     // invece di inventare una corrispondenza che poi deriva.
-    return acceptedRaceCandidate(`mozhi:${engine}`, q, translated, attemptOutcome);
+    return acceptedRaceAnswer(`mozhi:${engine}`, q, translated, attemptOutcome);
   }, outcome);
 }
 
@@ -1631,8 +1622,11 @@ async function _translateGroupWithCodex(group) {
   // passthrough della sorgente, quindi `tryTier` non la riconoscerebbe da
   // solo. Filtrare la mappa prima di costruire i risultati copre sia la
   // risposta singola sia quella batch senza scartare gli item sani del gruppo.
+  // Una meta-risposta (rifiuto, richiesta dell'input) vale come l'eco del
+  // prompt: '' qui, cosi' conta anche come fallimento della lane qui sotto e
+  // una batch di soli rifiuti non azzera lo streak dello stop.
   for (const [source, out] of byText) {
-    if (out && codexPromptEchoMarker(out, source)) byText.set(source, '');
+    if (out && (codexPromptEchoMarker(out, source) || detectAiMetaResponse(out, { source }))) byText.set(source, '');
   }
   const results = group.map((item) => byText.get(item.clean) || '');
   group.forEach((item, index) => {
@@ -1644,7 +1638,7 @@ async function _translateGroupWithCodex(group) {
   // indietro il testo, senza mai far scattare lo stop.
   const translated = unique.some((text) => {
     const out = byText.get(text);
-    return out && !isSourcePassthrough(text, out) && !detectCorpusMetaResponse(out, text);
+    return out && !isSourcePassthrough(text, out);
   });
   if (translated) _codexConsecutiveFailures = 0;
   else _noteCodexFailure();

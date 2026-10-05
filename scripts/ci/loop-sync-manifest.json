@@ -2060,8 +2060,8 @@
       "mode": "identical",
       "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Nato sul sito con la scheda AI-REFUSAL (58 titoli e 40 descrizioni di annunci vivi pubblicati cosi', misura del 2026-10-05); puro e senza import proprio per poter essere byte-identico.",
       "baseline": {
-        "site": "b7a5a3c6a1d4209e",
-        "corpus": "b7a5a3c6a1d4209e",
+        "site": "a4bf8cc22bb66595",
+        "corpus": "a4bf8cc22bb66595",
         "alignedAt": "2026-10-05"
       }
     },
