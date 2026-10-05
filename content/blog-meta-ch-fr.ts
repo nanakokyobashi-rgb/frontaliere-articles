@@ -7763,6 +7763,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tamedia-taglio-posti-lavoro.title': 'Tamedia supprime 34 postes : une réorganisation en vue',
     'blog.article.tamedia-taglio-posti-lavoro.excerpt': 'L\'entreprise éditoriale annonce la suppression de 34 postes à temps plein, concernant 41 collaborateurs en Suisse alémanique et en Suisse romande d\'ici fin octobre.',
     'blog.article.tamedia-taglio-posti-lavoro.imageAlt': 'Siège d\'une entreprise de médias suisse dans un cadre urbain',
+    'blog.article.guy-parmelin-visita-india.title': 'Parmelin en Inde : l’accent sur l’économie et les investissements',
+    'blog.article.guy-parmelin-visita-india.excerpt': 'Le conseiller fédéral Guy Parmelin à New Delhi pour renforcer la coopération économique, la protection de la propriété intellectuelle et les accords sur la migration.',
+    'blog.article.guy-parmelin-visita-india.imageAlt': 'Le conseiller fédéral Guy Parmelin en visite officielle',
+    'blog.article.bern-risanamento-energia.title': 'Incitations énergétiques du canton de Berne : exigences et demande',
+    'blog.article.bern-risanamento-energia.excerpt': 'Dans le canton de Berne, les programmes concernent les bâtiments et les installations : exigences techniques, demande avant les travaux et office cantonal compétent.',
+    'blog.article.bern-risanamento-energia.imageAlt': 'Bâtiment suisse en cours de rénovation énergétique',
+    'blog.article.deduzioni-3a-2027.title': 'Pilier 3a : déductions fiscales maximales en 2027',
+    'blog.article.deduzioni-3a-2027.excerpt': 'À partir du 1er janvier 2027, le plafond déductible du pilier 3a passera à 7373 francs avec un 2e pilier et à 36864 francs sans 2e pilier.',
+    'blog.article.deduzioni-3a-2027.imageAlt': 'Calculatrice et documents fiscaux suisses pour les déductions du pilier 3a',
 };
 
 export default blogMetaChFr;

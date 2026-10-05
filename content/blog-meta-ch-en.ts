@@ -7763,6 +7763,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tamedia-taglio-posti-lavoro.title': 'Tamedia cuts 34 jobs: reorganization ahead',
     'blog.article.tamedia-taglio-posti-lavoro.excerpt': 'The publishing company announces the elimination of 34 full-time positions, affecting 41 employees across German- and French-speaking Switzerland by the end of October.',
     'blog.article.tamedia-taglio-posti-lavoro.imageAlt': 'Headquarters of a Swiss media company in an urban setting',
+    'blog.article.guy-parmelin-visita-india.title': 'Parmelin in India: focus on the economy and investment',
+    'blog.article.guy-parmelin-visita-india.excerpt': 'Federal Councillor Guy Parmelin in New Delhi to strengthen economic cooperation, intellectual property protection and migration agreements.',
+    'blog.article.guy-parmelin-visita-india.imageAlt': 'Federal Councillor Guy Parmelin on an official visit',
+    'blog.article.bern-risanamento-energia.title': 'Energy incentives in the Canton of Bern: requirements and application',
+    'blog.article.bern-risanamento-energia.excerpt': 'In the Canton of Bern, the programs concern buildings and installations: technical requirements, application before work begins, and the competent cantonal office.',
+    'blog.article.bern-risanamento-energia.imageAlt': 'Swiss building undergoing energy renovation',
+    'blog.article.deduzioni-3a-2027.title': 'Pillar 3a: maximum tax deductions for 2027',
+    'blog.article.deduzioni-3a-2027.excerpt': 'From January 1, 2027, the deductible ceiling for pillar 3a will rise to 7373 francs with the 2nd pillar and to 36864 without it.',
+    'blog.article.deduzioni-3a-2027.imageAlt': 'Calculator and Swiss tax papers for pillar 3a deductions',
 };
 
 export default blogMetaChEn;
