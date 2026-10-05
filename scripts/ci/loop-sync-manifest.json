@@ -5056,7 +5056,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Bacino delle news di un cantone (sezione propria + frontaliere/svizzera col campo `canton`), assegnazione al tema con la tassonomia dell'engine o il classificatore a parole chiave, ordinamento e dedup.",
       "baseline": {
         "site": null,
-        "corpus": "b61312e20faeb466",
+        "corpus": "d5dbee13c5b9a717",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5066,7 +5066,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «attese ai valichi»: legge la finestra del contratto REWIRE `border-wait-window` per il campo `canton` di ogni valico.",
       "baseline": {
         "site": null,
-        "corpus": "94ca06916d46ceae",
+        "corpus": "9d41a6767616e1d5",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5086,7 +5086,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prossimi eventi»: legge la cache del contratto REWIRE `events-dataset` filtrando per i membri del gruppo cantonale.",
       "baseline": {
         "site": null,
-        "corpus": "ea48b975c086699b",
+        "corpus": "bb6927b4cdc68143",
         "alignedAt": "2026-10-05"
       }
     },
@@ -5126,7 +5126,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «chiusure e cantieri»: legge la cache del contratto REWIRE `road-events`.",
       "baseline": {
         "site": null,
-        "corpus": "52a010707e32b8fa",
+        "corpus": "cf2eea9964d750f1",
         "alignedAt": "2026-10-05"
       }
     },
