@@ -74,7 +74,7 @@ const EN = 'The G permit is renewed every five years at the migration office of 
 
 const premium = { deepl: 200, azure: 200 };
 // MyMemory che rimanda la sorgente: eco rifiutato, la cascata prosegue fino in fondo.
-const free = { mymemoryEcho: false, googleEcho: false };
+const free = { mymemoryEcho: false, googleEcho: false, mymemoryDown: false };
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (url) => {
   const u = String(url);
@@ -90,6 +90,7 @@ globalThis.fetch = async (url) => {
     const q = new URL(u).searchParams.get('q');
     return { ok: true, status: 200, text: async () => JSON.stringify([[[q, q]]]) };
   }
+  if (free.mymemoryDown && u.includes('api.mymemory.translated.net')) throw new Error('offline nel test');
   if (u.includes('api.mymemory.translated.net')) {
     const translatedText = free.mymemoryEcho ? new URL(u).searchParams.get('q') : `MYMEMORY ${EN}`;
     return { ok: true, json: async () => ({ responseData: { translatedText, match: 1 } }) };
@@ -751,6 +752,25 @@ test('FREE_TRANSLATE_CODEX_TIER=last: un testo rimandato identico da due motori 
   } finally {
     free.mymemoryEcho = false;
     free.googleEcho = false;
+    delete process.env.FREE_TRANSLATE_CODEX_TIER;
+  }
+});
+
+test('FREE_TRANSLATE_CODEX_TIER=last: gli echi di UN solo motore (endpoint e tentativi) non bastano a saltare Codex', async () => {
+  // Google gratuito prova due endpoint e tre tentativi: sono piu' echi dello
+  // stesso motore, non due motori che concordano.
+  process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
+  free.googleEcho = true;
+  free.mymemoryDown = true;
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    const googleEchoesBefore = getCascadeStats().tierPassthroughs.google || 0;
+    assert.equal(await it(), `CODEX ${EN}`);
+    assert.ok((getCascadeStats().tierPassthroughs.google || 0) - googleEchoesBefore >= 2);
+    assert.equal(calls.length, 1);
+  } finally {
+    free.googleEcho = false;
+    free.mymemoryDown = false;
     delete process.env.FREE_TRANSLATE_CODEX_TIER;
   }
 });

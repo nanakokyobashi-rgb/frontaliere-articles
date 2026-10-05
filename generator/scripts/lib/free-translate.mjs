@@ -141,6 +141,11 @@ function _noteGoogleCloudQuotaRefusal(now = Date.now()) {
 // Codex tier skip it (see the tier at the end of freeTranslate).
 const CODEX_LAST_SKIP_ECHOES = 2;
 let _codexLastInvariantSkips = 0;
+// Distinct tiers that handed back the text of the call in progress, per
+// outcome. A tier that echoes on several endpoints, attempts or chunks counts
+// once: the `last` Codex tier is skipped only when two DIFFERENT engines agree
+// that the text is invariant.
+const _echoTiersByOutcome = new WeakMap();
 
 // Hugging Face OPUS-MT (Helsinki-NLP open-source translation models)
 const HF_TOKEN = (process.env.HF_TOKEN || process.env.HUGGINGFACE_API_KEY || '').trim();
@@ -440,7 +445,7 @@ export function logCascadeSummary() {
     console.log(`   🔑 Azure: ${active}/${AZURE_TRANSLATOR_KEYS.length} keys active, region=${AZURE_REGION}${_azureExhaustedKeys.size > 0 ? ` (${_azureExhaustedKeys.size} exhausted)` : ''}`);
   }
   if (_codexLastInvariantSkips > 0) {
-    console.log(`   🤖 Codex Luna Max (last): ${_codexLastInvariantSkips} texts not sent, already echoed ${CODEX_LAST_SKIP_ECHOES}+ times by the cascade`);
+    console.log(`   🤖 Codex Luna Max (last): ${_codexLastInvariantSkips} texts not sent, already echoed by ${CODEX_LAST_SKIP_ECHOES}+ engines`);
   }
   if (_codexCalls > 0 || _codexStopReason) {
     const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
@@ -594,6 +599,7 @@ function rejectedAsPassthrough(tierName, source, out, outcome = null, granularit
     _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + 1;
   }
   noteTranslationOutcome(outcome, 'passthroughs');
+  if (outcome) _echoTiersByOutcome.get(outcome)?.add(tierName);
   return true;
 }
 
@@ -2202,12 +2208,14 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   const fieldStats = _fieldStats(fieldType);
   fieldStats.calls++;
 
-  // Echoes of THIS text (any tier, including the ones that reject an echo
-  // internally): the count is the growth during this call. Callers that pass
-  // no outcome get a local one: every use of `_outcome` in the tiers is
-  // accounting, never a decision.
+  // Engines that handed THIS text back unchanged (including the ones that
+  // reject an echo internally), for the `last` Codex tier below. Lines of a
+  // structured description share `_outcome` but run one after the other, so
+  // the set restarts with each call. Callers that pass no outcome
+  // (fix-untranslated-titles/descriptions) get a local one: every use of
+  // `_outcome` in the tiers is accounting, never a decision.
   if (!_outcome) _outcome = {};
-  const echoesBefore = _outcome.passthroughs || 0;
+  _echoTiersByOutcome.set(_outcome, new Set());
 
   const finalize = (out) => _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 
@@ -2404,13 +2412,13 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
 
   // Tier finale: Codex Luna Max in coda alla cascata, solo con
   // FREE_TRANSLATE_CODEX_TIER=last (translate-pending, fasi 2d/2e dopo Argos).
-  // Non per un testo che la cascata ha gia' visto rimandare identico almeno due
-  // volte (un nome, una sigla, «Sede: Lugano»): Codex lo rimanda identico
+  // Non per un testo che almeno due motori diversi hanno gia' rimandato
+  // identico (un nome, una sigla, «Sede: Lugano»): Codex lo rimanda identico
   // anche lui, e tre echi di fila spengono il tier per il resto del processo.
   // Il budget resta ai testi che i motori gratuiti non traducono. Sul run
   // translate-pending 37272320066 (2026-10-05) la fase 2e lo ha perso cosi'
   // dopo tre chiamate, con 27 chiamate di budget ancora libere.
-  if ((_outcome.passthroughs || 0) - echoesBefore >= CODEX_LAST_SKIP_ECHOES) {
+  if ((_echoTiersByOutcome.get(_outcome)?.size || 0) >= CODEX_LAST_SKIP_ECHOES) {
     _codexLastInvariantSkips += 1;
   } else {
     const tLast = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome, 'last'));
