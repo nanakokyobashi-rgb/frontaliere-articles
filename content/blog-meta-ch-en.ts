@@ -7769,6 +7769,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bern-risanamento-energia.title': 'Energy incentives in the Canton of Bern: requirements and application',
     'blog.article.bern-risanamento-energia.excerpt': 'In the Canton of Bern, the programs concern buildings and installations: technical requirements, application before work begins, and the competent cantonal office.',
     'blog.article.bern-risanamento-energia.imageAlt': 'Swiss building undergoing energy renovation',
+    'blog.article.deduzioni-3a-2027.title': 'Pillar 3a: maximum tax deductions for 2027',
+    'blog.article.deduzioni-3a-2027.excerpt': 'From January 1, 2027, the deductible ceiling for pillar 3a will rise to 7373 francs with the 2nd pillar and to 36864 without it.',
+    'blog.article.deduzioni-3a-2027.imageAlt': 'Calculator and Swiss tax papers for pillar 3a deductions',
 };
 
 export default blogMetaChEn;

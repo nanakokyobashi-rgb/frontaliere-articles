@@ -7769,6 +7769,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bern-risanamento-energia.title': 'Incentivi energetici Canton Berna: requisiti e domanda',
     'blog.article.bern-risanamento-energia.excerpt': 'Nel Cantone di Berna i programmi riguardano edifici e impianti: requisiti tecnici, domanda prima dei lavori e ufficio cantonale competente.',
     'blog.article.bern-risanamento-energia.imageAlt': 'Edificio svizzero in fase di risanamento energetico',
+    'blog.article.deduzioni-3a-2027.title': 'Pilastro 3a: deduzioni fiscali massime 2027',
+    'blog.article.deduzioni-3a-2027.excerpt': 'Dal 1° gennaio 2027 il tetto deducibile del pilastro 3a salirà a 7373 franchi con il 2° pilastro e a 36864 senza.',
+    'blog.article.deduzioni-3a-2027.imageAlt': 'Calcolatrice e documenti fiscali svizzeri per le deduzioni del pilastro 3a',
 };
 
 export default blogMetaChIt;

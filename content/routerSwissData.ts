@@ -2612,6 +2612,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tamedia-taglio-posti-lavoro': { it: 'tamedia-taglio-posti-lavoro', en: 'tamedia-job-cuts-announcement', de: 'tamedia-stellenabbau-ankuendigung', fr: 'tamedia-suppression-postes-travail' },
  'guy-parmelin-visita-india': { it: 'guy-parmelin-visita-india', en: 'guy-parmelin-india-visit', de: 'guy-parmelin-indien-besuch', fr: 'guy-parmelin-visite-inde' },
  'bern-risanamento-energia': { it: 'bern-risanamento-energia', en: 'bern-energy-incentives-requirements', de: 'energiefoerderung-bern-voraussetzungen', fr: 'subventions-energie-berne-conditions' },
+ 'deduzioni-3a-2027': { it: 'deduzioni-3a-2027', en: 'pillar3-tax-deduction-2027', de: 'abzug-saeule-3a-2027', fr: 'deduction-pilier-3a-2027' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

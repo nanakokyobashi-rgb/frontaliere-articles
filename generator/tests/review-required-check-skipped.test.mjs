@@ -96,7 +96,7 @@ test('un run PR che soddisfa il check con review gate skipped deve essere rosso'
   );
 });
 
-test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR reale', () => {
+test('workflow_dispatch risolve e valida la base PR prima dei gate diff-scoped', () => {
   assert.match(
     yaml,
     /workflow_dispatch:\n\s+inputs:\n\s+pr_number:/,
@@ -107,6 +107,38 @@ test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR
     /\n\s+head_sha:\n\s+description:/,
     'Il dispatch di recovery deve dichiarare la SHA esatta passata dal workflow trusted.',
   );
+  assert.match(
+    yaml,
+    /\n\s+base_sha:\n\s+description:/,
+    'Il dispatch di recovery deve dichiarare la SHA esatta della base della PR.',
+  );
+  const recoveryBase = stepBlock(yaml, 'Resolve and validate recovery base SHA');
+  assert.match(recoveryBase, /github\.event_name/);
+  assert.match(recoveryBase, /inputs\.pr_number/);
+  assert.match(recoveryBase, /inputs\.base_sha/);
+  assert.match(recoveryBase, /gh api/);
+  assert.match(recoveryBase, /\.base\.sha/);
+  assert.match(recoveryBase, /INPUT_BASE_SHA.*resolved_base/);
+  assert.match(recoveryBase, /match_count/);
+  assert.match(recoveryBase, /base_sha=.*GITHUB_OUTPUT/);
+  assert.match(recoveryBase, /exit 1/);
+
+  const recoveryBaseOffset = yaml.indexOf('- name: Resolve and validate recovery base SHA');
+  for (const name of [
+    'Baseline verificabili nel manifest del ciclo (diff-scoped)',
+    'Gemelli aggiunti dalla PR dichiarati nel manifest (diff-scoped)',
+  ]) {
+    const block = stepBlock(yaml, name);
+    assert.match(
+      block,
+      /BASE_SHA:\s+\$\{\{\s*steps\.recovery_base\.outputs\.base_sha\s*\}\}/,
+      `${name} deve usare la base SHA verificata prima del gate.`,
+    );
+    assert.ok(
+      recoveryBaseOffset < yaml.indexOf(`- name: ${name}`),
+      `La base verificata deve essere risolta prima di ${name}.`,
+    );
+  }
   const bodyContract = stepBlock(yaml, 'PR-body completeness + multi-issue Closes (zero-Claude)');
   assert.match(bodyContract, /inputs\.pr_number/);
   const resolve = stepBlock(yaml, 'Resolve PR');
