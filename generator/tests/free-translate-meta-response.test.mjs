@@ -167,4 +167,18 @@ describe('detectAiMetaResponse — il gemello corpus del rilevatore', () => {
     assert.equal(detectAiMetaResponse('Please provide the actual job title you are applying for.'), null);
     assert.equal(detectAiMetaResponse('Can you provide the text of your cover letter in German or Italian?'), null);
   });
+
+  test('I see / I find chiede input solo quando nomina davvero il testo da tradurre', () => {
+    for (const request of [
+      "I don't see any text in your message to translate.",
+      "I can't see the job title you want translated.",
+      'I cannot find the actual title you want me to translate.',
+    ]) assert.equal(detectAiMetaResponse(request)?.kind, 'clarification', request);
+
+    for (const prose of [
+      "I don't see any reason to leave the canton.",
+      'I cannot find a better job in Ticino.',
+      "I can't see any reason to change our approach.",
+    ]) assert.equal(detectAiMetaResponse(prose), null, prose);
+  });
 });
