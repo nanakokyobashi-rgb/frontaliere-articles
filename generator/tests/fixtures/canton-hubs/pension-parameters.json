@@ -1,0 +1,193 @@
+{
+ "schemaVersion": 1,
+ "year": 2026,
+ "generatedAt": "2026-10-05T09:44:09.891Z",
+ "sources": [
+  {
+   "id": "ahv-iv-leaflets",
+   "publisher": "Centro d'informazione AVS/AI con l'UFAS",
+   "url": "https://www.ahv-iv.ch/p/3.01.d",
+   "note": "Promemoria 3.01, 2.01, 2.08: URL permanenti, anno dichiarato in copertina"
+  },
+  {
+   "id": "bsv-pillar-3a",
+   "publisher": "Ufficio federale delle assicurazioni sociali (UFAS/BSV)",
+   "url": "https://www.bsv.admin.ch/it/contributi-al-pilastro-3a"
+  },
+  {
+   "id": "bsv-occupational",
+   "publisher": "Ufficio federale delle assicurazioni sociali (UFAS/BSV)",
+   "url": "https://www.bsv.admin.ch/de/altersvorsorge-beruflichen-vorsorge"
+  },
+  {
+   "id": "fedlex-bvg",
+   "publisher": "Raccolta sistematica del diritto federale",
+   "url": "https://www.fedlex.admin.ch/eli/cc/1983/797_797_797/it"
+  },
+  {
+   "id": "ahv-iv-cantonal-funds",
+   "publisher": "Centro d'informazione AVS/AI",
+   "url": "https://www.ahv-iv.ch/de/Kontakte/Kantonale-Ausgleichskassen"
+  },
+  {
+   "id": "estv-capital-tax",
+   "publisher": "Amministrazione federale delle contribuzioni (ESTV/AFC)",
+   "url": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/capital-payment"
+  },
+  {
+   "id": "public-pension-funds",
+   "publisher": "Siti delle casse pensioni cantonali",
+   "url": null,
+   "note": "Lista curata, verificata il 2026-10-05"
+  }
+ ],
+ "federal": {
+  "avs": {
+   "minMonthlyCHF": 1260,
+   "maxMonthlyCHF": 2520,
+   "maxAnnualCHF": 30240,
+   "fullContributionYears": 44,
+   "asOf": 2026,
+   "source": "https://www.ahv-iv.ch/p/3.01.d"
+  },
+  "contributions": {
+   "avsPct": 8.7,
+   "aiPct": 1.4,
+   "apgPct": 0.5,
+   "totalPct": 10.6,
+   "employeePct": 5.3,
+   "asOf": 2026,
+   "source": "https://www.ahv-iv.ch/p/2.01.d"
+  },
+  "unemployment": {
+   "totalPct": 2.2,
+   "employeePct": 1.1,
+   "salaryCapCHF": 148200,
+   "asOf": 2025,
+   "source": "https://www.ahv-iv.ch/p/2.08.d"
+  },
+  "lpp": {
+   "entryThresholdCHF": 22680,
+   "coordinationDeductionCHF": 26460,
+   "minCoordinatedSalaryCHF": 3780,
+   "maxInsuredSalaryCHF": 90720,
+   "minInterestRatePct": 1.25,
+   "minInterestRateSince": 2024,
+   "minConversionRatePct": 6.8,
+   "derivation": "soglie art. 2, 7 e 8 LPP: 3/4, 7/8, 1/8 e 3 volte la rendita AVS massima annua; conversione minima art. 14 cpv. 2 LPP",
+   "source": "https://www.fedlex.admin.ch/eli/cc/1983/797_797_797/it",
+   "interestSource": "https://www.bsv.admin.ch/de/altersvorsorge-beruflichen-vorsorge"
+  },
+  "pillar3a": {
+   "maxWithLppCHF": 7258,
+   "maxWithoutLppCHF": 36288,
+   "derivation": "art. 7 cpv. 1 OPP3: 8% e 40% del limite superiore LPP",
+   "source": "https://www.bsv.admin.ch/it/contributi-al-pilastro-3a"
+  }
+ },
+ "capitalWithdrawalTax": {
+  "scenario": "Uomo solo senza figli, prelievo a 65 anni, nessuna confessione, residente nel capoluogo cantonale: imposta totale (federale + cantonale + comunale) in CHF sul capitale di previdenza prelevato",
+  "amountsCHF": [
+   100000,
+   250000,
+   500000
+  ],
+  "year": 2026
+ },
+ "publicPensionFundsVerifiedAt": "2026-10-05",
+ "cantons": {
+  "TI": {
+   "compensationFund": {
+    "name": "Istituto delle assicurazioni sociali",
+    "url": "https://www4.ti.ch/dss/ias"
+   },
+   "publicPensionFund": {
+    "name": "Istituto di previdenza del Cantone Ticino (IPCT)",
+    "url": "https://www.ipct.ch/"
+   },
+   "capitalWithdrawalTax": {
+    "municipality": "Bellinzona",
+    "bfsId": 5002,
+    "taxCHF": [
+     4397,
+     13551,
+     35342
+    ]
+   }
+  },
+  "GR": {
+   "compensationFund": {
+    "name": "Sozialversicherungsanstalt des Kantons Graubünden",
+    "url": "https://www.sva.gr.ch"
+   },
+   "publicPensionFund": {
+    "name": "Pensionskasse Graubünden (PKGR)",
+    "url": "https://www.pkgr.ch/"
+   },
+   "capitalWithdrawalTax": {
+    "municipality": "Chur",
+    "bfsId": 3901,
+    "taxCHF": [
+     3237,
+     10651,
+     28501
+    ]
+   }
+  },
+  "BE": {
+   "compensationFund": {
+    "name": "Ausgleichskasse des Kantons Bern",
+    "url": "https://www.akbern.ch"
+   },
+   "publicPensionFund": {
+    "name": "Bernische Pensionskasse (BPK)",
+    "url": "https://bpk.ch/"
+   },
+   "capitalWithdrawalTax": {
+    "municipality": "Bern",
+    "bfsId": 351,
+    "taxCHF": [
+     4628,
+     16323,
+     41259
+    ]
+   }
+  },
+  "AI": {
+   "compensationFund": {
+    "name": "Ausgleichskasse Appenzell Innerrhoden",
+    "url": "https://www.akai.ch"
+   },
+   "publicPensionFund": null,
+   "capitalWithdrawalTax": {
+    "municipality": "Appenzell",
+    "bfsId": 3101,
+    "taxCHF": [
+     3311,
+     11501,
+     25701
+    ]
+   }
+  },
+  "AR": {
+   "compensationFund": {
+    "name": "Sozialversicherungen Appenzell Ausserrhoden",
+    "url": "https://www.sovar.ch"
+   },
+   "publicPensionFund": {
+    "name": "Pensionskasse Appenzell Ausserrhoden (PKAR)",
+    "url": "https://www.pkar.ch/"
+   },
+   "capitalWithdrawalTax": {
+    "municipality": "Herisau",
+    "bfsId": 3001,
+    "taxCHF": [
+     7937,
+     22401,
+     49543
+    ]
+   }
+  }
+ },
+ "_comment": "Registrazione ridotta a TI, GR, BE, AI, AR della fixture REWIRE della PR corpus P9d+e (dataset del sito pension-parameters/latest.json, 2026-10-05), numeri non alterati: serve ai test degli hub cantonali finche' refresh e contratto di questo dataset non sono su main."
+}

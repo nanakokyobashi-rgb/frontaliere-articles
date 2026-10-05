@@ -1,0 +1,258 @@
+{
+ "schemaVersion": 1,
+ "year": 2026,
+ "generatedAt": "2026-10-05T07:54:42.677Z",
+ "sources": [
+  {
+   "id": "estv-tax-burden",
+   "publisher": "Amministrazione federale delle contribuzioni (ESTV/AFC)",
+   "url": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+   "note": "Export JSON ufficiale dello strumento «Steuerbelastung», capoluoghi cantonali"
+  },
+  {
+   "id": "estv-withholding-tariffs",
+   "publisher": "Amministrazione federale delle contribuzioni (ESTV/AFC)",
+   "url": "https://www.estv2.admin.ch/qst/2026/loehne/tar2026.zip",
+   "page": "https://www.estv.admin.ch/de/quellensteuertarife-import-in-lohnbuchhaltungssysteme",
+   "recordFormat": "https://www.estv.admin.ch/dam/de/sd-web/AvojuyFCZY95/qst-tarife-recordformate-loehne-2025-de.pdf",
+   "note": "Tariffe dell'imposta alla fonte sui salari fornite dai cantoni, file annuali ESTV"
+  },
+  {
+   "id": "estv-withholding-authorities",
+   "publisher": "Amministrazione federale delle contribuzioni (ESTV/AFC)",
+   "url": "https://www.estv.admin.ch/de/quellensteuer-links-zu-den-kantonalen-behoerden",
+   "note": "Pagina dell'imposta alla fonte di ogni amministrazione cantonale"
+  }
+ ],
+ "burden": {
+  "scenario": "Persona sola senza figli, nessuna confessione (niente imposta di culto), capoluogo cantonale, onere totale (federale + cantonale + comunale + imposta personale) in % del reddito lordo da lavoro",
+  "incomeBracketsCHF": [
+   30000,
+   60000,
+   100000,
+   150000,
+   250000
+  ],
+  "years": [
+   2026
+  ],
+  "unit": "percent of gross annual income"
+ },
+ "withholding": {
+  "monthlyIncomesCHF": [
+   4000,
+   6000,
+   8000,
+   10000,
+   15000
+  ],
+  "codes": [
+   "A0",
+   "R0"
+  ],
+  "unit": "percent of gross monthly wage subject to withholding",
+  "codeLegend": {
+   "A0": "persona sola senza figli",
+   "R0": "frontaliere italiano (accordo 2023, art. 3 cpv. 1) come A0"
+  },
+  "churchTaxLegend": {
+   "N": "senza imposta di culto",
+   "Y": "con imposta di culto (il cantone non pubblica la variante senza)"
+  }
+ },
+ "deadlines": {
+  "note": "Nessuna fonte ufficiale pubblica le scadenze della dichiarazione per cantone in forma strutturata: campo null, vedi deadlinesSource di ogni cantone."
+ },
+ "cantons": {
+  "TI": {
+   "capital": {
+    "municipality": "Bellinzona",
+    "bfsId": 5002
+   },
+   "burdenPct": {
+    "2026": [
+     2.91,
+     8.92,
+     14.43,
+     19,
+     24.82
+    ]
+   },
+   "withholding": {
+    "validFrom": "2026-01-01",
+    "fileCreatedOn": "2025-11-26",
+    "churchTax": "N",
+    "ratesPct": {
+     "A0": [
+      6.4,
+      10.1,
+      12.8,
+      14.9,
+      19.1
+     ],
+     "R0": [
+      5.1,
+      8,
+      10.2,
+      11.9,
+      15.2
+     ]
+    }
+   },
+   "withholdingSource": "https://www.ti.ch/fonte",
+   "taxAuthority": {
+    "withholdingUrl": "https://www.ti.ch/fonte"
+   },
+   "deadlines": null,
+   "deadlinesSource": "https://www.ti.ch/fonte"
+  },
+  "GR": {
+   "capital": {
+    "municipality": "Chur",
+    "bfsId": 3901
+   },
+   "burdenPct": {
+    "2026": [
+     1.07,
+     7.72,
+     12.57,
+     16.45,
+     21.43
+    ]
+   },
+   "withholding": {
+    "validFrom": "2026-01-01",
+    "fileCreatedOn": "2025-12-10",
+    "churchTax": "N",
+    "ratesPct": {
+     "A0": [
+      4.95,
+      8.37,
+      10.54,
+      12.38,
+      15.94
+     ],
+     "R0": [
+      3.96,
+      6.7,
+      8.43,
+      9.9,
+      12.75
+     ]
+    }
+   },
+   "withholdingSource": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/steuererklaerung/quellensteuer/Seiten/default.aspx",
+   "taxAuthority": {
+    "withholdingUrl": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/steuererklaerung/quellensteuer/Seiten/default.aspx"
+   },
+   "deadlines": null,
+   "deadlinesSource": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/steuererklaerung/quellensteuer/Seiten/default.aspx"
+  },
+  "BE": {
+   "capital": {
+    "municipality": "Bern",
+    "bfsId": 351
+   },
+   "burdenPct": {
+    "2026": [
+     6.91,
+     12.75,
+     16.37,
+     20.31,
+     26.21
+    ]
+   },
+   "withholding": {
+    "validFrom": "2026-01-01",
+    "fileCreatedOn": "2025-11-27",
+    "churchTax": "N",
+    "ratesPct": {
+     "A0": [
+      8.47,
+      11.93,
+      13.95,
+      15.98,
+      20.55
+     ]
+    }
+   },
+   "withholdingSource": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html",
+   "taxAuthority": {
+    "withholdingUrl": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html"
+   },
+   "deadlines": null,
+   "deadlinesSource": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html"
+  },
+  "AI": {
+   "capital": {
+    "municipality": "Appenzell",
+    "bfsId": 3101
+   },
+   "burdenPct": {
+    "2026": [
+     3.86,
+     7.57,
+     10.29,
+     13.17,
+     16.81
+    ]
+   },
+   "withholding": {
+    "validFrom": "2026-01-01",
+    "fileCreatedOn": "2025-12-09",
+    "churchTax": "N",
+    "ratesPct": {
+     "A0": [
+      6.29,
+      8.69,
+      10.17,
+      11.75,
+      14.95
+     ]
+    }
+   },
+   "withholdingSource": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer",
+   "taxAuthority": {
+    "withholdingUrl": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer"
+   },
+   "deadlines": null,
+   "deadlinesSource": "https://www.ai.ch/themen/steuern/steuerarten/quellensteuer"
+  },
+  "AR": {
+   "capital": {
+    "municipality": "Herisau",
+    "bfsId": 3001
+   },
+   "burdenPct": {
+    "2026": [
+     5.47,
+     10.45,
+     14.37,
+     17.99,
+     22.83
+    ]
+   },
+   "withholding": {
+    "validFrom": "2026-01-01",
+    "fileCreatedOn": "2025-12-02",
+    "churchTax": "N",
+    "ratesPct": {
+     "A0": [
+      6.91,
+      9.81,
+      11.95,
+      13.92,
+      17.49
+     ]
+    }
+   },
+   "withholdingSource": "https://www.ar.ch/verwaltung/departement-finanzen/steuerverwaltung/formulare-und-wegleitungen/#?category=94",
+   "taxAuthority": {
+    "withholdingUrl": "https://www.ar.ch/verwaltung/departement-finanzen/steuerverwaltung/formulare-und-wegleitungen/#?category=94"
+   },
+   "deadlines": null,
+   "deadlinesSource": "https://www.ar.ch/verwaltung/departement-finanzen/steuerverwaltung/formulare-und-wegleitungen/#?category=94"
+  }
+ },
+ "_comment": "Registrazione ridotta a TI, GR, BE, AI, AR della fixture REWIRE della PR corpus P9d+e (dataset del sito canton-tax/latest.json, 2026-10-05), numeri non alterati: serve ai test degli hub cantonali finche' refresh e contratto di questo dataset non sono su main."
+}
