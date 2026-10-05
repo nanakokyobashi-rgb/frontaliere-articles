@@ -74,7 +74,7 @@ import {
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
-import { edgePushIsMandatory, main as edgeMain, planSectionEdge, purgeChunks } from '../../scripts/publish-section-edge.mjs';
+import { edgePushIsMandatory, planSectionEdge, purgeChunks } from '../../scripts/publish-section-edge.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
@@ -483,10 +483,21 @@ test('edge: obbligatorio se una sezione e\' dichiarata live (anche spenta), best
   writeFileSync(path.join(killed, 'sections.json'), JSON.stringify(doc));
   assert.equal(edgePushIsMandatory(killed), true);
   // Credenziali assenti: errore se obbligatorio, warning ed exit 0 altrimenti (nessun upload tentato).
-  assert.equal(edgeMain(['--dist', killed], {}), 1);
-  assert.equal(edgeMain(['--dist', none], {}), 0);
-  assert.throws(() => edgeMain(['--dist'], {}), /--dist richiede/);
-  assert.throws(() => edgeMain(['--boh'], {}), /sconosciuti/);
+  // In un sottoprocesso: lo script parla su stdout, e un test non deve scrivere
+  // sulla pipe dei frame del runner (scripts/ci/check-node-test-stdout.mjs).
+  const edge = (...args) => spawnSync(process.execPath, [path.join(ROOT, 'scripts/publish-section-edge.mjs'), ...args], {
+    encoding: 'utf8',
+    env: { PATH: process.env.PATH },
+  });
+  const refused = edge('--dist', killed);
+  assert.equal(refused.status, 1);
+  assert.match(refused.stdout, /::error::\[section-edge\] credenziali assenti.*il publish si ferma/);
+  const tolerated = edge('--dist', none);
+  assert.equal(tolerated.status, 0);
+  assert.match(tolerated.stdout, /::warning::\[section-edge\] credenziali assenti/);
+  assert.match(edge('--dist').stderr, /--dist richiede/);
+  assert.match(edge('--boh').stderr, /sconosciuti/);
+  assert.equal(edge('--boh').status, 1);
 });
 
 test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del renderer (meta IT ∪ mappa slug)', () => {
