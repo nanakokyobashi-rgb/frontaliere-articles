@@ -4,6 +4,7 @@ generator/data/border-wait-averages.json
 .tmp/
 generator/data/border-wait-ranking-window.json
 data/events.json
+generator/data/fuel-prices-cantons.json
 # Cache dei dataset di categoria letti dal sito via HTTP (D11/P9f-g): dati di un altro repo.
 generator/data/canton-notices.json
 generator/data/canton-services.json

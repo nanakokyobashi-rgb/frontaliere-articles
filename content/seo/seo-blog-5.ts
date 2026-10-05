@@ -99129,6 +99129,176 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sequestri-contanti-brogeda': {
+    title: 'Contanti non dichiarati: sequestri a Brogeda | Frontaliere Ticino',
+    description: 'A Como-Brogeda la Guardia di Finanza ha sequestrato 128.500 e 113.450 euro dopo due controlli su contanti oltre la soglia di 10.000 euro. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, contanti, dichiarati, sequestri, brogeda',
+    ogTitle: 'Oltre 240 mila euro sequestrati a Brogeda',
+    ogDescription: 'Due controlli al valico autostradale di Como-Brogeda hanno portato al ritrovamento di oltre 240 mila euro in contanti. Le somme eccedenti la soglia di 10.000 euro sono state sequestrate come garanzia per le sanzioni amministrative.',
+    canonicalPath: '/articoli-frontaliere/sequestri-contanti-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Contanti non dichiarati: sequestri a Brogeda",
+      "description": "A Como-Brogeda la Guardia di Finanza ha sequestrato 128.500 e 113.450 euro dopo due controlli su contanti oltre la soglia di 10.000 euro. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/sequestri-contanti-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veicoli al valico autostradale di Como-Brogeda"
+      },
+      "datePublished": "2026-10-05T08:04:32+00:00",
+      "dateModified": "2026-10-05T08:04:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestri-contanti-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prevenzione-salute-aziende-ticinesi': {
+    title: 'Salute mentale: il DSS porta la prevenzione nelle aziende',
+    description: 'Il DSS e il Forum GSA Ticino promuovono la salute mentale nelle aziende. Scopri i dati su stress e apprendisti e come partecipare agli eventi di prevenzione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, porta, prevenzione',
+    ogTitle: 'Salute mentale sul lavoro: nuove iniziative in Ticino',
+    ogDescription: 'Il DSS e il Forum GSA Ticino lanciano programmi di prevenzione aziendale. Analisi dei dati sullo stress lavorativo e dettagli sugli appuntamenti formativi del 16 ottobre.',
+    canonicalPath: '/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salute mentale: il DSS porta la prevenzione nelle aziende",
+      "description": "Il DSS e il Forum GSA Ticino promuovono la salute mentale nelle aziende. Scopri i dati su stress e apprendisti e come partecipare agli eventi di prevenzione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prevenzione-salute-aziende-ticinesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro professionale in un ufficio ticinese."
+      },
+      "datePublished": "2026-10-05T08:37:00+00:00",
+      "dateModified": "2026-10-05T08:37:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-osservatorio-varese-spettacolo-galileo': {
+    title: 'Osservatorio di Varese: arriva lo spettacolo Galileo',
+    description: 'Sabato 17 ottobre l\'Osservatorio Schiaparelli di Varese ospita lo spettacolo teatrale Galileo, oltre le stelle, seguito dall\'osservazione di Luna e Saturno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, osservatorio, varese, arriva, spettacolo',
+    ogTitle: 'Osservatorio di Varese: arriva lo spettacolo Galileo',
+    ogDescription: 'Sabato 17 ottobre l\'Osservatorio Astronomico G.V. Schiaparelli a Varese Campo dei Fiori ospita la compagnia teatrale Corrado D\'Elia con lo spettacolo Galileo, oltre le stelle, seguito da un\'osservazione astronomica.',
+    canonicalPath: '/articoli-frontaliere/osservatorio-varese-spettacolo-galileo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Osservatorio di Varese: arriva lo spettacolo Galileo",
+      "description": "Sabato 17 ottobre l'Osservatorio Schiaparelli di Varese ospita lo spettacolo teatrale Galileo, oltre le stelle, seguito dall'osservazione di Luna e Saturno.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/osservatorio-varese-spettacolo-galileo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Osservatorio astronomico a Varese"
+      },
+      "datePublished": "2026-10-05T09:15:25+00:00",
+      "dateModified": "2026-10-05T09:15:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/osservatorio-varese-spettacolo-galileo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-valuta-intercettata-brogeda': {
+    title: 'Doppio sequestro di valuta al valico di Brogeda',
+    description: 'Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, doppio, sequestro, valuta, valico',
+    ogTitle: 'Doppio sequestro di valuta a Brogeda',
+    ogDescription: 'La cronaca del valico di Brogeda riferisce due operazioni distinte svolte nei giorni scorsi: doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro. Il testo non aggiunge altri dettagli sull\'episodio.',
+    canonicalPath: '/articoli-frontaliere/valuta-intercettata-brogeda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Doppio sequestro di valuta al valico di Brogeda",
+      "description": "Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/valuta-intercettata-brogeda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Valico di Brogeda, teatro di due operazioni con oltre 240mila euro intercettati"
+      },
+      "datePublished": "2026-10-05T10:10:43+00:00",
+      "dateModified": "2026-10-05T10:10:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/valuta-intercettata-brogeda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-unione-confronto-pilastro-ch-it': {
+    title: 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    description: 'L\'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro: il quadro per LPP, AVS e imposta alla fonte. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, unione, chiede',
+    ogTitle: 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    ogDescription: 'La richiesta dell\'Unione Frontalieri Italiani riporta il secondo pilastro al centro del confronto tra Italia e Svizzera. Per chi lavora in Canton Ticino, LPP, AVS, permesso G, imposta alla fonte e doppia imposizione restano piani distinti.',
+    canonicalPath: '/articoli-frontaliere/unione-confronto-pilastro-ch-it/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Secondo pilastro: l'Unione chiede confronto CH-IT",
+      "description": "L'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro: il quadro per LPP, AVS e imposta alla fonte. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/unione-confronto-pilastro-ch-it.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sul secondo pilastro e una borsa da pendolare in Ticino"
+      },
+      "datePublished": "2026-10-05T10:48:06+00:00",
+      "dateModified": "2026-10-05T10:48:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/unione-confronto-pilastro-ch-it/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

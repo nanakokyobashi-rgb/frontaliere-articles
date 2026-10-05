@@ -7736,6 +7736,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.allarme-aumento-affitti-svizzera.title': 'Rents in Switzerland: +32% in twenty years, ASI sounds the alarm',
     'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'The Swiss Tenants\' Association reports a 32,1% increase between 2005 and 2025. Low incomes are under pressure: those earning less than 4\'000 francs spend 37,8% on housing.',
     'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Residential building in a Swiss city',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Rents in Switzerland: 32% increase in twenty years',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'The Swiss Tenants Association reports rent increases of 32,1% between 2005 and 2025. Pressure on low and middle incomes and new political demands.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Residential buildings in Switzerland with rising rents',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'VAT vote for AHV: date and details of the federal vote',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'On November 26, 2026, a vote will be held on financing the AVS 13th monthly payment through the VAT increase. Discover rates, deadlines, and impacts on the budget.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Federal Palace in Bern for the VAT vote',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo closes for renovations and lays off staff',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'The Hotel Villa Principe Leopoldo in Collina d\'Oro will close from December 30 for 12 million in renovation work. 76 layoffs out of 81 employees are expected, with reopening in May.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro',
+    'blog.article.porte-aperte-login-ticino.title': 'Ticino Open Doors Login: Railway, Commerce and Buildings',
+    'blog.article.porte-aperte-login-ticino.excerpt': 'Saturday 10 October, 09.00-13.00 in Bellinzona, Porte Aperte login Ticino presents rail, commerce and the new AFC Informatico/a training of buildings and infrastructures, launched in August 2027.',
+    'blog.article.porte-aperte-login-ticino.imageAlt': 'Visitors at Porte Aperte login Ticino observe an electrotrain and building automation tools in Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Cyber risks: Swiss SMEs underestimate the dangers',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'A VZ-HSLU analysis indicates that cyber incidents are the top global risk: nearly 58\'000 digital crimes in Switzerland in 2025.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Swiss SME team reviews cyber risks in an office',
 };
 
 export default blogMetaChEn;

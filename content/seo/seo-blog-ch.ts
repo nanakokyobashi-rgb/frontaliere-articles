@@ -97663,6 +97663,176 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-svizzera-aumento-asi': {
+    title: 'Affitti in Svizzera: aumento del 32% in vent\'anni',
+    description: 'Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L\'ASI denuncia l\'impatto su redditi e inquilini. Scopri i dati e le richieste.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, aumento, vent, anni',
+    ogTitle: 'Affitti in Svizzera: +32% in vent\'anni e alloggi costosi',
+    ogDescription: 'L\'Associazione svizzera inquilini analizza i rincari del 32,1% tra il 2005 e il 2025. Impatto su famiglie a basso reddito, tassi di riferimento all\'1,25% e trasformazioni della proprietà immobiliare in Svizzera.',
+    canonicalPath: '/articoli-svizzera/affitti-svizzera-aumento-asi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera: aumento del 32% in vent'anni",
+      "description": "Gli affitti in Svizzera sono saliti del 32,1% tra il 2005 e il 2025. L'ASI denuncia l'impatto su redditi e inquilini. Scopri i dati e le richieste.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-aumento-asi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi di residenza in Svizzera con affitti in aumento"
+      },
+      "datePublished": "2026-10-05T07:50:21+00:00",
+      "dateModified": "2026-10-05T07:50:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-svizzera-aumento-asi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-iva-avs-novembre-2026': {
+    title: 'Voto IVA per AVS: data e dettagli della votazione federale',
+    description: 'Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, data, dettagli, votazione',
+    ogTitle: 'Voto IVA per l AVS del 26 novembre 2026: guida completa alle aliquote e alla 13a mensilità',
+    ogDescription: 'Tutti i dettagli sulla votazione federale del 26 novembre 2026 per il finanziamento della 13a mensilità AVS tramite l aumento dell IVA. Analisi delle aliquote, delle riserve e delle scadenze ufficiali della Confederazione.',
+    canonicalPath: '/articoli-svizzera/voto-iva-avs-novembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto IVA per AVS: data e dettagli della votazione federale",
+      "description": "Scopri i dettagli sul voto del 26 novembre 2026 per l aumento dell IVA destinato alla 13a mensilità AVS. Aliquote, scadenze e impatti finanziari in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/voto-iva-avs-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna in primo piano per il voto sull IVA"
+      },
+      "datePublished": "2026-10-05T08:19:02+00:00",
+      "dateModified": "2026-10-05T08:19:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-iva-avs-novembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-villa-principe-leopoldo-chiude': {
+    title: 'Villa Principe Leopoldo chiude per lavori e licenzia',
+    description: 'L\'Hotel Villa Principe Leopoldo a Collina d\'Oro chiude il 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura',
+    keywords: 'frontalieri, ticino, svizzera, italia, villa, principe, leopoldo, chiude',
+    ogTitle: 'Villa Principe Leopoldo chiude per lavori e licenzia 76 persone',
+    ogDescription: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude temporaneamente dal 30 dicembre per un investimento di 12 milioni. Previsto il licenziamento di 76 dipendenti su 81 e riapertura a maggio.',
+    canonicalPath: '/articoli-svizzera/villa-principe-leopoldo-chiude/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Villa Principe Leopoldo chiude per lavori e licenzia",
+      "description": "L'Hotel Villa Principe Leopoldo a Collina d'Oro chiude il 30 dicembre per lavori da 12 milioni. Previsti 76 licenziamenti su 81 dipendenti e riapertura",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/villa-principe-leopoldo-chiude.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro"
+      },
+      "datePublished": "2026-10-05T08:50:48+00:00",
+      "dateModified": "2026-10-05T08:50:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/villa-principe-leopoldo-chiude/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-porte-aperte-login-ticino': {
+    title: 'Porte Aperte login Ticino: ferrovia, commercio e edifici',
+    description: 'Scopri l\'evento Porte Aperte login Ticino del 10 ottobre a Bellinzona: ferrovia, commercio e la nuova formazione AFC Informatico/a degli edifici',
+    keywords: 'frontalieri, ticino, svizzera, italia, porte, aperte, login, ferrovia',
+    ogTitle: 'Porte Aperte login Ticino: ferrovia, commercio e AFC 2027',
+    ogDescription: 'L\'evento Porte Aperte login Ticino offre una giornata orientativa a Bellinzona il 10 ottobre dalle 09.00 alle 13.00. I partecipanti possono esplorare le professioni ferroviarie, il commercio al dettaglio e scoprire in anteprima la nuova formazione',
+    canonicalPath: '/articoli-svizzera/porte-aperte-login-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porte Aperte login Ticino: ferrovia, commercio e edifici",
+      "description": "Scopri l'evento Porte Aperte login Ticino del 10 ottobre a Bellinzona: ferrovia, commercio e la nuova formazione AFC Informatico/a degli edifici",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/porte-aperte-login-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Visitatori alle Porte Aperte login Ticino osservano un elettrotreno e strumenti di automazione edilizia a Bellinzona"
+      },
+      "datePublished": "2026-10-05T09:48:17+00:00",
+      "dateModified": "2026-10-05T09:48:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/porte-aperte-login-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rischi-cyber-pmi-svizzere': {
+    title: 'Rischi informatici: PMI svizzere sottovalutano i pericoli',
+    description: 'Studio VZ-HSLU: quasi 58\'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rischi, informatici, svizzere, sottovalutano',
+    ogTitle: 'PMI svizzere e rischi informatici sottovalutati',
+    ogDescription: 'Lo studio VZ-HSLU spiega perché un attacco può interrompere l\'attività, danneggiare dati e sistemi e mettere sotto pressione la liquidità. Nel 2025 in Svizzera sono stati registrati quasi 58\'000 reati digitali; il tasso di risoluzione è stato',
+    canonicalPath: '/articoli-svizzera/rischi-cyber-pmi-svizzere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rischi informatici: PMI svizzere sottovalutano i pericoli",
+      "description": "Studio VZ-HSLU: quasi 58'000 reati digitali in Svizzera nel 2025; solo poco meno del 12% delle aziende svizzere ha una copertura contro i rischi informatici.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rischi-cyber-pmi-svizzere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "PMI svizzera analizza i rischi informatici in ufficio"
+      },
+      "datePublished": "2026-10-05T10:27:11+00:00",
+      "dateModified": "2026-10-05T10:27:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rischi-cyber-pmi-svizzere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

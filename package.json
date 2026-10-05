@@ -28,6 +28,7 @@
     "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
     "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs",
     "refresh:events": "node generator/scripts/refresh-events-dataset.mjs",
+    "refresh:fuel-cantons": "node generator/scripts/refresh-fuel-cantons.mjs",
     "refresh:canton-notices": "node generator/scripts/refresh-canton-notices.mjs",
     "refresh:canton-services": "node generator/scripts/refresh-canton-services-data.mjs",
     "test:shell-contract": "npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs"

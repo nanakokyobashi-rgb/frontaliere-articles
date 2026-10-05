@@ -55,7 +55,7 @@ import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { REWIRE_CONTRACTS, contract, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
+import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
 import { rankingFromStats, trendFromStats, MIN_SAMPLES_FOR_RANKING } from '../scripts/lib/border-wait-ranking.mjs';
 import { importSpecifiers, relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
@@ -67,13 +67,15 @@ const readFixture = (c) => JSON.parse(read(c.fixture));
 const TODAY = new Date().toISOString().slice(0, 10);
 
 /**
- * Il payload registrato, rimesso in data quando il contratto lo richiede
- * (border-wait window: finestra settimanale; gli altri con `freshen`:
- * timestamp traslati o anno corrente, vedi `freshenRecording`).
+ * Il payload registrato, rimesso in data quando il contratto lo richiede:
+ * border-wait window (finestra settimanale), carburanti per cantone
+ * (`generatedAt`) e i contratti con `freshen` (timestamp traslati o anno
+ * corrente, vedi `freshenRecording`).
  */
 function servable(c) {
   const payload = readFixture(c);
   if (c.id === 'border-wait-window') return freshenWindow(payload, TODAY);
+  if (c.id === 'fuel-cantons') return freshenGeneratedAt(payload, new Date().toISOString());
   return c.freshen ? freshenRecording(c, payload) : payload;
 }
 
@@ -198,8 +200,8 @@ const mutated = (c, fn) => {
 test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', () => {
   assert.equal(
     REWIRE_CONTRACTS.length,
-    8,
-    'il REWIRE set e\' di otto artefatti: i tre della issue #101, gli avvisi cantonali (P9g) e i quattro input dei servizi (P9f)',
+    9,
+    'il REWIRE set e\' di nove artefatti: i tre della issue #101, i carburanti per cantone (P9b), gli avvisi cantonali (P9g) e i quattro input dei servizi (P9f)',
   );
   const missing = [];
   for (const c of REWIRE_CONTRACTS) {
@@ -210,7 +212,7 @@ test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', 
   assert.deepEqual(missing, [], `File dichiarati nel registro REWIRE e assenti:\n  ${missing.join('\n  ')}`);
 });
 
-test('i tre refresh importano solo builtin Node o path relativi — la copia in temp dir li porta', () => {
+test('ogni refresh importa solo builtin Node o path relativi — la copia in temp dir li porta', () => {
   const offenders = [];
   for (const c of REWIRE_CONTRACTS) {
     const src = read(c.consumer.refresh);
@@ -413,6 +415,92 @@ const MUTATIONS = {
       mutated(c, (p) => { p['chiasso-brogeda'] = '4-15 min'; }),
       /is not an object/,
       'Un appiattimento della forma per-valico passerebbe come stringa e romperebbe l\'assegnazione a valle.',
+    ],
+  ],
+  'fuel-cantons': (c) => [
+    [
+      'records[] assente',
+      mutated(c, (p) => { delete p.records; }),
+      /has no records\[\] array/,
+      'Senza record il blocco dati dell\'hub sparirebbe sovrascrivendo una cache buona.',
+    ],
+    [
+      'records[] vuoto',
+      mutated(c, (p) => { p.records = []; }),
+      /carries zero records/,
+      'Un dataset vuoto caching-ato sopra uno buono spegne il blocco in silenzio.',
+    ],
+    [
+      'schemaVersion diverso',
+      mutated(c, (p) => { p.schemaVersion = 2; }),
+      /expected 1 — refusing an unrecognised shape/,
+      'E\' l\'unico segnale di versione: una forma nuova va letta consapevolmente, non indovinata.',
+    ],
+    [
+      'generatedAt vecchio di oltre 7 giorni',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() - 10 * 86_400_000).toISOString(); }),
+      /days ago — refusing stale data/,
+      'Il producer gira ogni giorno: un dataset fermo stampa prezzi della settimana scorsa come di oggi.',
+    ],
+    [
+      'prezzo in millesimi',
+      mutated(c, (p) => { p.records[0].avg = 1995; }),
+      /\.avg 1995 is not a per-litre price/,
+      'Un cambio di unita\' passerebbe come numero e finirebbe stampato nel confronto CH/estero.',
+    ],
+    [
+      'lato CH in euro',
+      mutated(c, (p) => { p.records.find((r) => r.side === 'CH').currency = 'EUR'; }),
+      /side CH priced in EUR/,
+      'Il confronto CH/estero converte in base alla valuta: una valuta scambiata inverte il verdetto.',
+    ],
+    [
+      'min sopra la media',
+      mutated(c, (p) => { p.records[0].min = p.records[0].avg + 0.1; }),
+      /is above avg/,
+      'Un minimo sopra la media e\' un campo scambiato dal producer.',
+    ],
+    [
+      'cantone fuori dai 24 gruppi',
+      mutated(c, (p) => { p.records[0].canton = 'BS'; }),
+      /is not one of the 24 groups/,
+      'Gli hub sono per gruppo URL (BL/BS -> BASILEA): un codice reale non si aggancerebbe a nessun hub.',
+    ],
+    [
+      'generatedAt nel futuro',
+      mutated(c, (p) => { p.generatedAt = new Date(Date.now() + 3 * 86_400_000).toISOString(); }),
+      /is in the future — refusing/,
+      'Un\'eta\' negativa passerebbe il gate dei 7 giorni per sempre: un timestamp sbagliato terrebbe verde il watcher.',
+    ],
+    [
+      'cantons con un gruppo ripetuto 24 volte',
+      mutated(c, (p) => { p.cantons = Array(24).fill('TI'); }),
+      /is not the list of the 24 canton URL groups/,
+      'La sola lunghezza autorizzerebbe un dataset che ha perso gli altri 23 gruppi.',
+    ],
+    [
+      'cantons con un codice reale al posto del gruppo',
+      mutated(c, (p) => { p.cantons = p.cantons.map((x) => (x === 'BASILEA' ? 'BS' : x)); }),
+      /is not the list of the 24 canton URL groups/,
+      'La lista deve essere quella canonica di canton-url-slugs.json, non 24 stringhe qualsiasi.',
+    ],
+    [
+      'record duplicato per (canton, side, fuel)',
+      mutated(c, (p) => { p.records.push({ ...p.records[0], avg: p.records[0].avg + 0.01 }); }),
+      /duplicate record for/,
+      'Due righe confliggenti lascerebbero all\'hub la scelta di quale prezzo stampare.',
+    ],
+    [
+      'observedAt numerico',
+      mutated(c, (p) => { p.records[0].observedAt = Date.now(); }),
+      /observedAt .* is not an ISO instant/,
+      'Un epoch o una data senza fuso verrebbe formattato nel fuso del runner.',
+    ],
+    [
+      'lato sconosciuto',
+      mutated(c, (p) => { p.records[0].side = 'LI'; }),
+      /is not CH\|FR\|AT\|IT\|DE/,
+      'Il blocco dati conosce cinque lati: un sesto verrebbe ignorato o mal etichettato.',
     ],
   ],
   'events-dataset': (c) => [
@@ -691,3 +779,54 @@ test('[border-wait-window] la soglia dei campioni scarta davvero, e in silenzio'
   }
   assert.ok(Object.keys(trend).length > 0, why(c, 'Nessun valico ha un trend: la sezione settimanale sarebbe vuota.'));
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5. Chi scarica davvero la cache che i consumatori leggono
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Workflow → invocazioni del `refresh` di un contratto che SCRIVONO la cache
+ * (niente `--check`, niente `DRY_RUN`), per path diretto o per script npm.
+ * Le righe di commento non contano.
+ */
+function fetchingWorkflows(c) {
+  const scripts = JSON.parse(read('package.json')).scripts ?? {};
+  const npmNames = Object.entries(scripts)
+    .filter(([, cmd]) => String(cmd).includes(c.consumer.refresh))
+    .map(([name]) => name);
+  const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const patterns = [
+    new RegExp(escape(c.consumer.refresh)),
+    ...npmNames.map((n) => new RegExp(`npm run ${escape(n)}(?![\\w:-])`)),
+  ];
+  const dir = path.join(ROOT, '.github/workflows');
+  const found = new Set();
+  for (const file of fs.readdirSync(dir).filter((f) => /\.ya?ml$/.test(f))) {
+    for (const line of fs.readFileSync(path.join(dir, file), 'utf8').split('\n')) {
+      if (/^\s*#/.test(line)) continue;
+      if (!patterns.some((re) => re.test(line))) continue;
+      if (/--check\b|DRY_RUN=(1|true)/.test(line)) continue;
+      // Un path nominato fuori da un comando (filtri `paths:` dei trigger) non scarica niente.
+      if (/^\s*-\s*['"]?generator\//.test(line)) continue;
+      found.add(file);
+    }
+  }
+  return [...found].sort();
+}
+
+for (const c of REWIRE_CONTRACTS) {
+  test(`[${c.id}] chi scarica la cache e' dichiarato, in entrambe le direzioni`, () => {
+    const pf = c.productionFetch;
+    assert.ok(pf && (Array.isArray(pf.workflows) || typeof pf.none === 'string'), why(c,
+      '`productionFetch` manca: dichiara i workflow che scaricano l\'artefatto (`workflows`, `ci`) ' +
+        'oppure `none` con il motivo. Un consumatore che legge una cache che nessuno riempie e\' ' +
+        'esattamente il buco di `border-wait-averages`.'));
+    const declared = pf.none !== undefined ? [] : [...pf.workflows, ...(pf.ci ?? [])].sort();
+    if (pf.none !== undefined) assert.ok(pf.none.trim().length > 40, why(c, '`none` senza un motivo scritto'));
+    assert.deepEqual(fetchingWorkflows(c), declared, why(c,
+      'I workflow che eseguono il refresh SENZA --check non sono quelli dichiarati in ' +
+        '`productionFetch`. Se hai cablato (o tolto) il download in un workflow, aggiorna la ' +
+        'dichiarazione nello stesso commit; se e\' sparito per errore, i lettori della cache in ' +
+        'produzione stanno leggendo una cache vuota.'));
+  });
+}

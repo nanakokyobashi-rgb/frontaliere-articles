@@ -12592,6 +12592,21 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.camion-avaria-san-nicolao.title': 'Camion in avaria nella galleria San Nicolao',
     'blog.article.camion-avaria-san-nicolao.excerpt': 'Un camion in avaria nella galleria San Nicolao crea disagi sull\'A2: corsia sinistra percorribile verso sud e ritardi fino a 20 minuti verso nord.',
     'blog.article.camion-avaria-san-nicolao.imageAlt': 'Camion in avaria nella galleria San Nicolao e disagi sull\'A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Contanti non dichiarati: sequestri a Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Due controlli al valico autostradale di Como-Brogeda hanno portato al sequestro di 128.500 e 113.450 euro, eccedenze oltre la soglia di 10.000 euro.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Veicoli al valico autostradale di Como-Brogeda',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Salute mentale: il DSS porta la prevenzione nelle aziende',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'Il DSS e il Forum GSA Ticino promuovono la salute mentale sul lavoro. Dati: il 32,3% dei giovani ticinesi si sente svuotato, il 61% degli apprendisti soffre.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Ambiente di lavoro professionale in un ufficio ticinese.',
+    'blog.article.osservatorio-varese-spettacolo-galileo.title': 'Osservatorio di Varese: arriva lo spettacolo Galileo',
+    'blog.article.osservatorio-varese-spettacolo-galileo.excerpt': 'Sabato 17 ottobre l\'Osservatorio G.V. Schiaparelli ospita la pièce teatrale di Corrado D\'Elia seguita dall\'osservazione di Luna e Saturno.',
+    'blog.article.osservatorio-varese-spettacolo-galileo.imageAlt': 'Osservatorio astronomico a Varese',
+    'blog.article.valuta-intercettata-brogeda.title': 'Doppio sequestro di valuta al valico di Brogeda',
+    'blog.article.valuta-intercettata-brogeda.excerpt': 'Al valico di Brogeda, in due operazioni distinte, doganieri e finanzieri di Ponte Chiasso hanno intercettato oltre 240mila euro nei giorni scorsi.',
+    'blog.article.valuta-intercettata-brogeda.imageAlt': 'Valico di Brogeda, teatro di due operazioni con oltre 240mila euro intercettati',
+    'blog.article.unione-confronto-pilastro-ch-it.title': 'Secondo pilastro: l\'Unione chiede confronto CH-IT',
+    'blog.article.unione-confronto-pilastro-ch-it.excerpt': 'L\'Unione Frontalieri Italiani chiede un confronto tra Italia e Svizzera sul secondo pilastro, tema centrale per la previdenza dei frontalieri.',
+    'blog.article.unione-confronto-pilastro-ch-it.imageAlt': 'Documenti sul secondo pilastro e una borsa da pendolare in Ticino',
 };
 
 export default blogMetaIt;

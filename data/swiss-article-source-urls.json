@@ -1,29 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/seco%3a-%22non-%c3%a8-un-boom%2c-ma-la-crescita-ha-un%27ampia-base%22/91999934": {
-    "articleId": "seco-ampia-base-crescita",
-    "ts": "2026-09-03T14:40:29.726Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1947849/svizzera-pacchetto-governi-bilaterali-iii": {
-    "articleId": "bilaterali-iii-governi-cantonali",
-    "ts": "2026-09-03T14:48:14.035Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/u6ueja33fa4o": {
-    "articleId": "ricercatore-psi-spintronica-quantistica",
-    "ts": "2026-09-03T14:56:47.956Z",
-    "keyForm": 2
-  },
-  "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
-    "articleId": "seco-apprendistato-tirocini",
-    "ts": "2026-10-01T00:18:20.848Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/inflazione-aumenta-in-svizzera%2c-banca-nazionale-ritoccher%c3%a0-tassi%3f/92001563": {
-    "articleId": "inflazione-svizzera-bns-tassi",
-    "ts": "2026-09-03T15:18:35.895Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/riserve-naturali-messe-a-dura-prova-da-siccit%c3%a0/91999663": {
     "articleId": "riserve-naturali-siccita-estate-2024",
     "ts": "2026-09-03T16:11:14.748Z",
@@ -2497,6 +2472,31 @@
   "https://www.swissinfo.ch/ita/associazione-inquilini-lancia-allarme-su-prezzi-affitti/92166278": {
     "articleId": "allarme-aumento-affitti-svizzera",
     "ts": "2026-10-05T07:13:59.342Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954697/svizzera-associazione-reddito-alloggi-affitti-anni": {
+    "articleId": "affitti-svizzera-aumento-asi",
+    "ts": "2026-10-05T07:50:21.367Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gz4zhubyfjyi": {
+    "articleId": "voto-iva-avs-novembre-2026",
+    "ts": "2026-10-05T08:19:03.204Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1954699/villa-principe-leopoldo-chiude-per-lavori-e-lascia-a-casa-76-persone": {
+    "articleId": "villa-principe-leopoldo-chiude",
+    "ts": "2026-10-05T08:50:48.995Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954740/edifici-formazione-vicino-futuro-infrastrutture-afc-binari": {
+    "articleId": "porte-aperte-login-ticino",
+    "ts": "2026-10-05T09:48:17.635Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/rischi-informatici-sottovalutati-da-molte-pmi%2c-studio/92167766": {
+    "articleId": "rischi-cyber-pmi-svizzere",
+    "ts": "2026-10-05T10:27:11.803Z",
     "keyForm": 2
   }
 }

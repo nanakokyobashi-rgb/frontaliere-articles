@@ -7736,6 +7736,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.allarme-aumento-affitti-svizzera.title': 'Loyers en Suisse : +32% en vingt ans, l\'alerte de l\'ASI',
     'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'L\'Association suisse des locataires signale une hausse de 32,1% entre 2005 et 2025. Les bas revenus sont sous pression : les personnes qui gagnent moins de 4\'000 francs consacrent 37,8% au logement.',
     'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Immeuble résidentiel dans une ville suisse',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Loyers en Suisse : hausse de 32% en vingt ans',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'L\'Association suisse des locataires signale des hausses de 32,1% entre 2005 et 2025. Pression sur les revenus faibles et moyens et nouvelles revendications politiques.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Immeubles résidentiels en Suisse avec des loyers en hausse',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'Vote sur la TVA pour l\'AVS : date et détails de la votation fédérale',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'Le 26 novembre 2026, on vote sur le financement de la 13e mensualité de l\'AVS par l\'augmentation de la TVA. Découvrez les taux, les échéances et les répercussions sur le budget.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Palais fédéral à Berne pour le vote sur la TVA',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo ferme pour travaux et licencie',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro ferme à partir du 30 décembre pour des travaux de 12 millions. 76 licenciements prévus sur 81 employés et réouverture en mai.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hôtel Villa Principe Leopoldo à Collina d\'Oro',
+    'blog.article.porte-aperte-login-ticino.title': 'Portes ouvertes login Ticino : chemin de fer, commerce et bâtiments',
+    'blog.article.porte-aperte-login-ticino.excerpt': 'Samedi 10 octobre, 09.00-13.00 à Bellinzona, Portes ouvertes login Ticino présentent le chemin de fer, le commerce et la nouvelle formation CFC d\'informaticien/ne des bâtiments et des infrastructures, lancée en août 2027.',
+    'blog.article.porte-aperte-login-ticino.imageAlt': 'Visiteurs aux portes ouvertes login Ticino observent un électrotrain et des outils d\'automatisation du bâtiment à Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Risques informatiques : les PME suisses sous-estiment les dangers',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Une analyse VZ-HSLU signale que les incidents informatiques constituent le premier risque mondial : en Suisse, en 2025, près de 58\'000 délits numériques.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Une PME suisse analyse les risques informatiques au bureau',
 };
 
 export default blogMetaChFr;

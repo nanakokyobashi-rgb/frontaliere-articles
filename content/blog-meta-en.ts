@@ -12591,6 +12591,21 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.camion-avaria-san-nicolao.title': 'Truck breakdown in the San Nicolao tunnel',
     'blog.article.camion-avaria-san-nicolao.excerpt': 'A truck breakdown in the San Nicolao tunnel is causing disruptions on the A2: the left lane is passable southbound and delays of up to 20 minutes northbound.',
     'blog.article.camion-avaria-san-nicolao.imageAlt': 'Truck breakdown in the San Nicolao tunnel causing disruption on the A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Undeclared cash: seizures at Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Two checks at the Como-Brogeda motorway border crossing led to the seizure of 128.500 and 113.450 euro, amounts exceeding the threshold of 10.000 euro.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Vehicles at the Como-Brogeda highway border crossing',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Mental health: DSS brings prevention into companies',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'DSS and Forum GSA Ticino promote mental health at work. Data: 32,3% of young people in Ticino feel drained, 61% of apprentices are suffering.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Professional work environment in a Ticino office.',
+    'blog.article.osservatorio-varese-spettacolo-galileo.title': 'Varese Observatory: the Galileo show arrives',
+    'blog.article.osservatorio-varese-spettacolo-galileo.excerpt': 'On Saturday, October 17, the G.V. Schiaparelli Observatory will host Corrado D\'Elia\'s play, followed by observation of the Moon and Saturn.',
+    'blog.article.osservatorio-varese-spettacolo-galileo.imageAlt': 'Astronomical observatory in Varese',
+    'blog.article.valuta-intercettata-brogeda.title': 'Double currency seizure at the Brogeda border crossing',
+    'blog.article.valuta-intercettata-brogeda.excerpt': 'At the Brogeda border crossing, in two separate operations, customs officers and financial police officers from Ponte Chiasso intercepted over 240mila euro in recent days.',
+    'blog.article.valuta-intercettata-brogeda.imageAlt': 'Brogeda border crossing linked to two operations involving over 240,000 euros',
+    'blog.article.unione-confronto-pilastro-ch-it.title': 'Second pillar: the Union calls for a CH-IT comparison',
+    'blog.article.unione-confronto-pilastro-ch-it.excerpt': 'The Unione Frontalieri Italiani calls for a comparison between Italy and Switzerland on the second pillar, a central issue for cross-border workers\' pension provision.',
+    'blog.article.unione-confronto-pilastro-ch-it.imageAlt': 'Second-pillar documents and a commuter bag in Ticino',
 };
 
 export default blogMetaEn;

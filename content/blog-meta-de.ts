@@ -12590,6 +12590,21 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.camion-avaria-san-nicolao.title': 'Lastwagen mit Panne im Tunnel San Nicolao',
     'blog.article.camion-avaria-san-nicolao.excerpt': 'Ein liegen gebliebener Lastwagen im Tunnel San Nicolao sorgt auf der A2 für Behinderungen: In Richtung Süden ist die linke Fahrspur befahrbar, in Richtung Norden kommt es zu Verzögerungen von bis zu 20 Minuten.',
     'blog.article.camion-avaria-san-nicolao.imageAlt': 'Pannenlastwagen im San-Nicolao-Tunnel verursacht Behinderungen auf der A2',
+    'blog.article.sequestri-contanti-brogeda.title': 'Nicht deklariertes Bargeld: Beschlagnahmungen in Brogeda',
+    'blog.article.sequestri-contanti-brogeda.excerpt': 'Zwei Kontrollen am Autobahngrenzübergang Como-Brogeda führten zur Beschlagnahme von 128.500 und 113.450 Euro, Beträgen über der Schwelle von 10.000 Euro.',
+    'blog.article.sequestri-contanti-brogeda.imageAlt': 'Fahrzeuge am Autobahn-Grenzübergang Como-Brogeda',
+    'blog.article.prevenzione-salute-aziende-ticinesi.title': 'Psychische Gesundheit: DSS bringt Prävention in Unternehmen',
+    'blog.article.prevenzione-salute-aziende-ticinesi.excerpt': 'Das DSS und das Forum GSA Tessin fördern die psychische Gesundheit am Arbeitsplatz. Daten: 32,3% der jungen Tessiner fühlen sich leer, 61% der Lernenden leiden.',
+    'blog.article.prevenzione-salute-aziende-ticinesi.imageAlt': 'Professionelle Arbeitsumgebung in einem Büro im Tessin.',
+    'blog.article.osservatorio-varese-spettacolo-galileo.title': 'Observatorium von Varese: Das Stück Galileo kommt',
+    'blog.article.osservatorio-varese-spettacolo-galileo.excerpt': 'Samstag, 17. Oktober beherbergt das Observatorium G.V. Schiaparelli das Theaterstück von Corrado D\'Elia, gefolgt von der Beobachtung des Mondes und des Saturns.',
+    'blog.article.osservatorio-varese-spettacolo-galileo.imageAlt': 'Astronomische Sternwarte in Varese',
+    'blog.article.valuta-intercettata-brogeda.title': 'Zweifache Beschlagnahmung von Devisen am Grenzübergang Brogeda',
+    'blog.article.valuta-intercettata-brogeda.excerpt': 'Am Grenzübergang Brogeda haben Zollbeamte und Finanzpolizisten aus Ponte Chiasso in zwei getrennten Vorgängen in den vergangenen Tagen über 240mila euro abgefangen.',
+    'blog.article.valuta-intercettata-brogeda.imageAlt': 'Grenzübergang Brogeda mit zwei Einsätzen und über 240.000 abgefangenen Euro',
+    'blog.article.unione-confronto-pilastro-ch-it.title': 'Zweite Säule: Die Union fordert einen CH-IT-Austausch',
+    'blog.article.unione-confronto-pilastro-ch-it.excerpt': 'Die Unione Frontalieri Italiani fordert einen Vergleich zwischen Italien und der Schweiz zur zweiten Säule, einem zentralen Thema für die Vorsorge der Grenzgänger.',
+    'blog.article.unione-confronto-pilastro-ch-it.imageAlt': 'Unterlagen zur zweiten Säule und eine Pendler-Tasche im Tessin',
 };
 
 export default blogMetaDe;

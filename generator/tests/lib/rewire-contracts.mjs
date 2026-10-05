@@ -50,7 +50,8 @@
 export const CDN_DATA_BASE = 'https://cdn.frontaliereticino.ch/data';
 
 /**
- * Le tre coppie.
+ * Le coppie: le tre del REWIRE originale piu' i dataset di categoria (D11)
+ * costruiti con la stessa forma.
  *
  * `producer.path` e' un path del repo del SITO: qui non esiste, e non deve
  * esistere. E' documentazione verificabile a mano, non un riferimento risolto —
@@ -65,6 +66,14 @@ export const CDN_DATA_BASE = 'https://cdn.frontaliereticino.ch/data';
  * `producedUnread` sono i campi che il produttore emette e che qui non legge
  * nessuno. Sono asseriti come NON letti: se domani qualcuno li leggesse, la
  * voce va tolta consapevolmente invece di scoprirlo a valle.
+ *
+ * `productionFetch` dichiara CHI scarica davvero l'artefatto (il `refresh`
+ * senza `--check`): `workflows` sono i workflow di produzione, `ci` quelli di
+ * test. Oppure `none` con il motivo, quando nessun workflow lo scarica. Il
+ * test lo confronta in entrambe le direzioni con le invocazioni nei workflow:
+ * un consumatore che legge una cache che nessun job riempie non e' piu'
+ * invisibile (il caso `border-wait-averages`, rimasto non scaricato da quando
+ * il REWIRE l'ha spostato qui senza che nessun test lo notasse).
  */
 export const REWIRE_CONTRACTS = [
   {
@@ -115,6 +124,10 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['generatedFor'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      workflows: ['generate-border-wait-ranking-weekly.yml'],
+      ci: ['generator-ci.yml'],
+    },
   },
   {
     id: 'border-wait-averages',
@@ -130,9 +143,11 @@ export const REWIRE_CONTRACTS = [
     },
     failureMode: 'soft',
     symptom:
-      'le stringhe sono GIA\' formattate per il rendering e finiscono verbatim nel corpo di un ' +
-      'articolo (`borderCrossings.ts` le assegna a `avgWaitMorning`/`avgWaitEvening`). L\'assenza e\' ' +
-      'coperta dai default editoriali; il caso brutto e\' un formato che passa il gate ed e\' sbagliato.',
+      'le stringhe sono GIA\' formattate per il rendering: `borderCrossings.ts` le assegna a ' +
+      '`avgWaitMorning`/`avgWaitEvening`, che OGGI nessun generatore del corpus legge (verificato ' +
+      '2026-10-05: `borderCrossings.ts` e\' importato solo da `evergreen-topic-generator.mjs`, per la ' +
+      'geografia). L\'assenza e\' coperta dai default editoriali; il caso brutto, il giorno in cui un ' +
+      'articolo le stampera\', e\' un formato che passa il gate ed e\' sbagliato.',
     fixture: 'generator/tests/fixtures/rewire/border-wait-averages.json',
     recorded: {
       at: '2026-08-10',
@@ -150,6 +165,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: [],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun workflow lo scarica e nessun generatore ne legge i valori: l\'overlay di ' +
+        '`borderCrossings.ts` resta vuoto in produzione senza effetti su alcun articolo. Il primo ' +
+        'generatore che stampera\' `avgWaitMorning`/`avgWaitEvening` deve cablare ' +
+        '`npm run refresh:border-wait` nel proprio workflow e spostare questa voce in `workflows`.',
+    },
   },
   {
     id: 'events-dataset',
@@ -191,6 +213,69 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['totalEvents'],
     notJsonExpect: /did not return JSON/,
+    productionFetch: {
+      workflows: ['refresh-events-digest.yml'],
+    },
+  },
+  {
+    // Quarto artefatto, fuori dal REWIRE originale ma con la stessa forma:
+    // dataset di categoria carburanti per cantone (P9b del programma sezioni
+    // cantonali, decisione D11). Nessun generatore lo legge ancora: lo
+    // leggeranno gli hub cantonali (P10), e a quel punto i loro file entrano
+    // in `readBy`.
+    id: 'fuel-cantons',
+    artifact: 'fuel-prices-cantons.json',
+    producer: {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      path: 'scripts/build-fuel-cantons-dataset.mjs',
+    },
+    consumer: {
+      refresh: 'generator/scripts/refresh-fuel-cantons.mjs',
+      envUrl: 'FUEL_CANTONS_URL',
+      cache: 'generator/data/fuel-prices-cantons.json',
+    },
+    failureMode: 'soft',
+    symptom:
+      'i prezzi finiscono come numeri in un blocco dati degli hub cantonali: un\'unita\' cambiata ' +
+      '(centesimi, millesimi), una valuta scambiata fra lato CH ed estero o un dataset fermo da giorni ' +
+      'stamperebbero un confronto CH/estero sbagliato senza che niente fallisca. L\'assenza invece e\' ' +
+      'coperta: senza cache il blocco non compare.',
+    fixture: 'generator/tests/fixtures/rewire/fuel-prices-cantons.json',
+    recorded: {
+      at: '2026-10-05',
+      trimmedTo:
+        '8 record sui 32 di un run locale del producer (TI CH+IT, GE FR, SG AT), numeri non alterati; ' +
+        'blocchi di testa (cantons, sources, coverage, exchangeRate) completi',
+    },
+    readBy: [
+      {
+        file: 'generator/scripts/refresh-fuel-cantons.mjs',
+        fields: [
+          'schemaVersion',
+          'generatedAt',
+          'cantons',
+          'records',
+          'canton',
+          'side',
+          'fuel',
+          'currency',
+          'avg',
+          'min',
+          'stations',
+          'observedAt',
+          'source',
+        ],
+      },
+    ],
+    producedUnread: ['median', 'area', 'coverage', 'exchangeRate', 'sources'],
+    notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la cache (P9b consegna solo refresh + contratto): il ' +
+        'producer degli hub cantonali (P10) deve cablare `npm run refresh:fuel-cantons` nel proprio ' +
+        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
+        'solo dal `--check` di rewire-contract-watch.yml.',
+    },
   },
   {
     id: 'canton-notices',
@@ -227,6 +312,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['sourcesRegistry', 'totalNotices', 'health', 'language'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la cache (P9g consegna solo refresh + contratto): il ' +
+        'producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-notices` nel proprio ' +
+        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
+        'dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+    },
   },
   // ── P9f: i quattro input dell'aggregatore dei servizi ─────────────────────
   // Un solo consumatore per quattro artefatti: l'armatura serve gli altri tre
@@ -264,6 +356,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['rankings'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
+        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
+        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
+        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+    },
   },
   {
     id: 'plate-auctions',
@@ -297,6 +396,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['complete', 'bidCount'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
+        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
+        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
+        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+    },
   },
   {
     id: 'pharmacy-duty-cantons',
@@ -330,6 +436,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['windowDays', 'unresolvedDuties'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
+        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
+        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
+        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+    },
   },
   {
     id: 'weather-snapshot',
@@ -363,6 +476,13 @@ export const REWIRE_CONTRACTS = [
     ],
     producedUnread: ['alerts', 'confidence'],
     notJsonExpect: /is not valid JSON/,
+    productionFetch: {
+      none:
+        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
+        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
+        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
+        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+    },
   },
 ];
 
@@ -406,6 +526,17 @@ export function contract(id) {
 
 const DAY_MS = 86_400_000;
 const isoShift = (iso, days) => new Date(Date.parse(`${iso}T00:00:00Z`) + days * DAY_MS).toISOString().slice(0, 10);
+
+/**
+ * Rimette in data la registrazione del dataset carburanti per cantone: il
+ * `refresh` rifiuta un `generatedAt` piu' vecchio di 7 giorni (il sito lo
+ * scrive ogni giorno, quindi vecchio = publisher fermo), e la registrazione
+ * comincerebbe a fallire da sola. Si sposta solo `generatedAt` a `nowIso`; il
+ * gate di staleness ha il suo caso di mutazione.
+ */
+export function freshenGeneratedAt(payload, nowIso) {
+  return { ...structuredClone(payload), generatedAt: nowIso };
+}
 
 /**
  * Rimette in data la registrazione del border-wait window.

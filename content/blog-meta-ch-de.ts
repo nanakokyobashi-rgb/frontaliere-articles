@@ -7736,6 +7736,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.allarme-aumento-affitti-svizzera.title': 'Laut ASI sind die Mieten in der Schweiz in zwanzig Jahren um 32 % gestiegen.',
     'blog.article.allarme-aumento-affitti-svizzera.excerpt': 'Der Schweizer Mieterverband berichtet von einem Anstieg der Wohnkosten um 32,1 % zwischen 2005 und 2025. Besonders betroffen sind Geringverdiener: Wer weniger als 4.000 Franken verdient, gibt 37,8 % für Wohnen aus.',
     'blog.article.allarme-aumento-affitti-svizzera.imageAlt': 'Wohngebäude in einer Schweizer Stadt',
+    'blog.article.affitti-svizzera-aumento-asi.title': 'Mieten in der Schweiz: Anstieg um 32% in zwanzigJahren',
+    'blog.article.affitti-svizzera-aumento-asi.excerpt': 'Der Schweizerische Mieterverband meldet Preissteigerungen von 32,1 Prozent zwischen 2005 und 2025. Druck auf niedrige und mittlere Einkommen und neue politische Forderungen.',
+    'blog.article.affitti-svizzera-aumento-asi.imageAlt': 'Wohngebäude in der Schweiz mit steigenden Mieten',
+    'blog.article.voto-iva-avs-novembre-2026.title': 'MWST-Abstimmung für AHV: Datum und Details',
+    'blog.article.voto-iva-avs-novembre-2026.excerpt': 'Am 26. November 2026 wird über die Finanzierung des 13. AHV-Monatsgeldes mittels Mehrwertsteuererhöhung abgestimmt. Entdecken Sie Sätze, Fristen und Auswirkungen auf die Bilanz.',
+    'blog.article.voto-iva-avs-novembre-2026.imageAlt': 'Bundeshaus in Bern für die MWST-Abstimmung',
+    'blog.article.villa-principe-leopoldo-chiude.title': 'Villa Principe Leopoldo schließt wegen Bauarbeiten und entlässt',
+    'blog.article.villa-principe-leopoldo-chiude.excerpt': 'Das Hotel Villa Principe Leopoldo in Collina d\'Oro schließt ab dem 30. Dezember wegen Bauarbeiten für 12 Millionen. Vorgesehen sind 76 Entlassungen bei 81 Beschäftigten und eine Wiedereröffnung im Mai.',
+    'blog.article.villa-principe-leopoldo-chiude.imageAlt': 'Hotel Villa Principe Leopoldo in Collina d\'Oro',
+    'blog.article.porte-aperte-login-ticino.title': 'Offene Türen Login Tessin: Bahn, Handel und Gebäude',
+    'blog.article.porte-aperte-login-ticino.excerpt': 'Am Samstag, 10. Oktober, 09.00-13.00 Uhr in Bellinzona, präsentiert Porte Aperte Login Tessin Bahn, Handel und die im August 2027 gestartete neue Ausbildung EFZ Gebäude- und Infrastrukturinformatiker/in.',
+    'blog.article.porte-aperte-login-ticino.imageAlt': 'Besucher bei den offenen Türen login Ticino beobachten einen Elektrozug und Gebäudeautomatisierungswerkzeuge in Bellinzona',
+    'blog.article.rischi-cyber-pmi-svizzere.title': 'Cyberrisiken: Schweizer KMU unterschätzen die Gefahren',
+    'blog.article.rischi-cyber-pmi-svizzere.excerpt': 'Eine VZ-HSLU-Analyse zeigt, dass Cybervorfälle das weltweit größte Risiko darstellen: In der Schweiz gab es im Jahr 2025 knapp 58\'000 digitale Straftaten.',
+    'blog.article.rischi-cyber-pmi-svizzere.imageAlt': 'Schweizer KMU prüft Cyberrisiken im Büro',
 };
 
 export default blogMetaChDe;
