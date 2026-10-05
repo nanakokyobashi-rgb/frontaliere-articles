@@ -4941,6 +4941,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/blog-image-policy.mjs",
+      "mode": "corpus-only",
+      "reason": "Policy condivisa per gli hero WebP degli articoli: dimensioni 1200x675, target sotto 200 KiB e quality ladder comune a `create-article.mjs`, `publish-journalist-article.mjs` e allo script di manutenzione. Il sito non esegue piu' questi producer dopo il cutover del generatore e non possiede un gemello operativo di questo modulo; la policy resta quindi nel corpus, dove vengono creati e pubblicati gli asset.",
+      "baseline": {
+        "site": null,
+        "corpus": "65c00b71923c29c4",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "generator/scripts/refresh-canton-notices.mjs",
       "mode": "corpus-only",
       "reason": "Refresh morbido di `canton-notices.json` (D11/P9g) dal CDN del sito, nel REWIRE set: forma verificata da `lib/canton-notices-data.mjs` e inchiodata in `generator/tests/lib/rewire-contracts.mjs`. Nessun omonimo sul sito (il produttore e' `scripts/crawl-canton-notices.mjs`).",
