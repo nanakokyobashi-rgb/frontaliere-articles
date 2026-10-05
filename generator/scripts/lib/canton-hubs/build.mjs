@@ -364,8 +364,16 @@ export function buildHubFile({ section, topic, profile, datasets, curated, confi
   const draft = { schemaVersion: HUB_SCHEMA_VERSION, id, section, canton, topic, updatedAt: '', contentHash: '', blocks: blocksMeta, locales };
   const contentHash = hubContentHash(draft);
   if (prev && prev.contentHash === contentHash && hubContentHash(prev) === contentHash) {
-    for (const locale of HUB_LOCALES) validateHubInput(prev.locales[locale]);
-    return { file: prev, changed: false, blocks: report };
+    // Stesso contenuto: si tiene il file com'e', purche' passi ancora le
+    // regole di oggi. Se non le passa (regole cambiate dopo che fu scritto) si
+    // prosegue e lo si riscrive, invece di restare bloccati su un file vecchio.
+    let stillValid = true;
+    try {
+      for (const locale of HUB_LOCALES) validateHubInput(prev.locales[locale]);
+    } catch {
+      stillValid = false;
+    }
+    if (stillValid) return { file: prev, changed: false, blocks: report };
   }
   const updatedAt = new Date(nowMs).toISOString();
   draft.updatedAt = updatedAt;

@@ -5136,7 +5136,7 @@
       "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Costruzione pura del file dati di un hub: blocchi, fatti chiave, news, link, validazione con le regole del renderer dell'engine, impronta del contenuto e `updatedAt` stabile.",
       "baseline": {
         "site": null,
-        "corpus": "055ee38b90d8e72e",
+        "corpus": "b4156283b915f2e8",
         "alignedAt": "2026-10-05"
       }
     },
