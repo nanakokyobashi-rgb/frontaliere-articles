@@ -39751,6 +39751,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fairtiq-bonus-ticino-2026-2027',
+ category: 'novita',
+ date: '2026-10-05T13:47:45.992Z',
+ image: '/images/blog/fairtiq-bonus-ticino-2026-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
