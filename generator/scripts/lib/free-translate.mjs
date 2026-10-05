@@ -116,6 +116,31 @@ function _noteGoogleCloudFailure(reason) {
   _googleCloudLastFailure = reason;
   _googleCloudFailures += 1;
 }
+// Quota circuit breaker (twin of the site's, valerielinc-ops/frontaliere-si-o-no
+// PR tp-cascade-breaker-20261005). A refusal for the quota said nothing about
+// the next text, so the tier was called again for every one of them:
+// translate-pending run 37272320066 (2026-10-05) sent 976 requests in the
+// title fix and 2270 in the description fix, refused 403
+// userRateLimitExceeded, each one a round trip before the next tier. Some
+// calls in between succeeded (593 chars), so it is a rate, not a closed day:
+// after a quota refusal the tier is skipped for a cooldown that doubles on
+// every refusal up to the ceiling, and a successful call resets it.
+const GOOGLE_CLOUD_QUOTA_COOLDOWN_MIN_MS = 60_000;
+const GOOGLE_CLOUD_QUOTA_COOLDOWN_MAX_MS = 15 * 60_000;
+let _googleCloudCooldownMs = 0;
+let _googleCloudCooldownUntil = 0;
+let _googleCloudCooldownSkips = 0;
+function _noteGoogleCloudQuotaRefusal(now = Date.now()) {
+  _googleCloudCooldownMs = Math.min(
+    GOOGLE_CLOUD_QUOTA_COOLDOWN_MAX_MS,
+    Math.max(GOOGLE_CLOUD_QUOTA_COOLDOWN_MIN_MS, _googleCloudCooldownMs * 2),
+  );
+  _googleCloudCooldownUntil = now + _googleCloudCooldownMs;
+}
+// Echoes of the same text, from the tiers before it, that make the `last`
+// Codex tier skip it (see the tier at the end of freeTranslate).
+const CODEX_LAST_SKIP_ECHOES = 2;
+let _codexLastInvariantSkips = 0;
 
 // Hugging Face OPUS-MT (Helsinki-NLP open-source translation models)
 const HF_TOKEN = (process.env.HF_TOKEN || process.env.HUGGINGFACE_API_KEY || '').trim();
@@ -414,6 +439,9 @@ export function logCascadeSummary() {
     const active = AZURE_TRANSLATOR_KEYS.length - _azureExhaustedKeys.size;
     console.log(`   🔑 Azure: ${active}/${AZURE_TRANSLATOR_KEYS.length} keys active, region=${AZURE_REGION}${_azureExhaustedKeys.size > 0 ? ` (${_azureExhaustedKeys.size} exhausted)` : ''}`);
   }
+  if (_codexLastInvariantSkips > 0) {
+    console.log(`   🤖 Codex Luna Max (last): ${_codexLastInvariantSkips} texts not sent, already echoed ${CODEX_LAST_SKIP_ECHOES}+ times by the cascade`);
+  }
   if (_codexCalls > 0 || _codexStopReason) {
     const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
     console.log(`   🤖 Codex Luna Max: ${_codexCalls}/${maxCalls} calls (${_codexTexts} texts), ${Math.round(_codexSpentNow() / 1000)}s${_codexStopReason ? ` (stopped: ${_codexStopReason})` : ''}`);
@@ -422,9 +450,10 @@ export function logCascadeSummary() {
     _gcServiceAccountAvailable ? 'service-account' : '',
     _gcOAuthAvailable ? 'OAuth2' : '',
   ].filter(Boolean).join('+') || 'none';
-  const gcFailures = _googleCloudFailures
+  const gcFailures = (_googleCloudFailures
     ? `, ${_googleCloudFailures} call(s) refused (last: ${_googleCloudLastFailure})`
-    : '';
+    : '')
+    + (_googleCloudCooldownSkips > 0 ? `, ${_googleCloudCooldownSkips} skipped in quota cooldown` : '');
   console.log(`   🔑 Google Cloud Translation: auth=${gcAuth}, ${_googleCloudDailyChars}/${GOOGLE_CLOUD_DAILY_LIMIT} daily chars used${gcFailures}`);
 }
 
@@ -1818,6 +1847,11 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
     noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }
+  if (Date.now() < _googleCloudCooldownUntil) {
+    _googleCloudCooldownSkips += 1;
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
 
   try {
     // The provenance travels with the token: comparing it with the shared
@@ -1852,6 +1886,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       const refusal = await res.text().catch(() => '');
       if (GOOGLE_CLOUD_QUOTA_REFUSAL.test(refusal)) {
         _noteGoogleCloudFailure(`HTTP ${res.status} quota`);
+        _noteGoogleCloudQuotaRefusal();
         noteTranslationOutcome(outcome, 'incomplete');
         return '';
       }
@@ -1866,7 +1901,12 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       res = await request(token);
     }
     if (res.status === 401 || res.status === 403 || res.status === 429) {
-      _noteGoogleCloudFailure(`HTTP ${res.status}`);
+      const refusal = res.status === 403 && typeof res.text === 'function'
+        ? await res.text().catch(() => '')
+        : '';
+      const quota = res.status === 429 || GOOGLE_CLOUD_QUOTA_REFUSAL.test(refusal);
+      _noteGoogleCloudFailure(`HTTP ${res.status}${quota && res.status === 403 ? ' quota' : ''}`);
+      if (quota) _noteGoogleCloudQuotaRefusal();
       noteTranslationOutcome(outcome, 'incomplete');
       return ''; // quota exceeded, or API/scope not enabled for this token
     }
@@ -1886,6 +1926,8 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
     // faceva sforare il cap di 16K/giorno che questo contatore esiste per
     // rispettare. Il giudizio «e' la sorgente?» e' salito in `tryTier`.
     _googleCloudDailyChars += clean.length;
+    _googleCloudCooldownMs = 0;
+    _googleCloudCooldownUntil = 0;
     return translated;
   } catch (error) {
     _noteGoogleCloudFailure(error?.name === 'TimeoutError' ? 'timeout' : 'request-error');
@@ -2160,6 +2202,13 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   const fieldStats = _fieldStats(fieldType);
   fieldStats.calls++;
 
+  // Echoes of THIS text (any tier, including the ones that reject an echo
+  // internally): the count is the growth during this call. Callers that pass
+  // no outcome get a local one: every use of `_outcome` in the tiers is
+  // accounting, never a decision.
+  if (!_outcome) _outcome = {};
+  const echoesBefore = _outcome.passthroughs || 0;
+
   const finalize = (out) => _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 
   /** Try a tier: track success/error/passthrough, return result or '' */
@@ -2355,8 +2404,18 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
 
   // Tier finale: Codex Luna Max in coda alla cascata, solo con
   // FREE_TRANSLATE_CODEX_TIER=last (translate-pending, fasi 2d/2e dopo Argos).
-  const tLast = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome, 'last'));
-  if (tLast) return finalize(tLast);
+  // Non per un testo che la cascata ha gia' visto rimandare identico almeno due
+  // volte (un nome, una sigla, «Sede: Lugano»): Codex lo rimanda identico
+  // anche lui, e tre echi di fila spengono il tier per il resto del processo.
+  // Il budget resta ai testi che i motori gratuiti non traducono. Sul run
+  // translate-pending 37272320066 (2026-10-05) la fase 2e lo ha perso cosi'
+  // dopo tre chiamate, con 27 chiamate di budget ancora libere.
+  if ((_outcome.passthroughs || 0) - echoesBefore >= CODEX_LAST_SKIP_ECHOES) {
+    _codexLastInvariantSkips += 1;
+  } else {
+    const tLast = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome, 'last'));
+    if (tLast) return finalize(tLast);
+  }
 
   _cascadeStats.failures++;
   return '';
