@@ -695,9 +695,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b8c729e37f891333",
-        "corpus": "b8c729e37f891333",
-        "alignedAt": "2026-10-04"
+        "site": "4c710e799877f56f",
+        "corpus": "4c710e799877f56f",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -1376,8 +1376,8 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "30b1c966e5bfae39",
-        "corpus": "30b1c966e5bfae39",
+        "site": "a9c64aebc070caef",
+        "corpus": "a9c64aebc070caef",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2110,8 +2110,8 @@
       "mode": "identical",
       "reason": "Gemello identico del rilevatore delle meta-risposte dei modelli usato in `tryTier`.",
       "baseline": {
-        "site": "73a11cfc59ac5e0d",
-        "corpus": "73a11cfc59ac5e0d",
+        "site": "0162e079d566499d",
+        "corpus": "0162e079d566499d",
         "alignedAt": "2026-10-05"
       }
     },
