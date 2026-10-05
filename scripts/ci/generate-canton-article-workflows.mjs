@@ -42,8 +42,10 @@
  *     deterministico fra i cantoni della stessa cadenza (24 cantoni nella
  *     stessa ora si contenderebbero il tetto globale; per chi ha uno slot al
  *     giorno, perderlo vuol dire perdere la giornata);
- *   - `push.paths`: il file del chiamante (self-test) e i soli path del corpus
- *     della sezione, cosi' l'articolo di un cantone non sveglia gli altri 23;
+ *   - `push.paths`: i soli path del corpus della sezione, cosi' una modifica
+ *     batch ai 24 caller generati non crea una raffica di run e l'articolo di
+ *     un cantone non sveglia gli altri 23; le modifiche ai caller restano
+ *     coperte dal test del generatore e dal gate `tests`;
  *   - concurrency `generate-article-<sezione>` sul job che scrive;
  *   - catena via dispatch spenta (`chain_dispatch: false`).
  *
@@ -558,7 +560,6 @@ on:
   push:
     branches: [main]
     paths:
-      - '${WORKFLOWS_DIR}/${file}'
 ${pushPaths.map((p) => `      - '${p}'`).join('\n')}
   workflow_dispatch:
     inputs:
