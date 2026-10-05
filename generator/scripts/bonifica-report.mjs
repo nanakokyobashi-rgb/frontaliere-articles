@@ -147,8 +147,8 @@ const REASON_GLOSS = [
   ['sorgente-mancante', 'manca il body italiano di riferimento'],
   ['italiano-illeggibile', 'il body italiano di riferimento non si legge'],
   ['chiave-assente', 'una chiave del body non si trova nel file di destinazione'],
-  ['forma-non-riparabile', 'la riga `TITOLO ARTICOLO` non e\' nella sola forma rimovibile, o toglierla cambierebbe altro oltre alla riga: pagina intatta, da sistemare a mano in una PR editoriale'],
-  ['codici-misti', 'oltre allo scaffolding la pagina ha altri codici `critical`: togliere la sola riga `TITOLO ARTICOLO` non basta'],
+  ['forma-non-riparabile', 'la riga `TITOLO ARTICOLO` o l\'intestazione-etichetta del prompt non e\' nella sola forma riparabile, o ripararla cambierebbe altro oltre a quelle righe: pagina intatta, da sistemare a mano in una PR editoriale'],
+  ['codici-misti', 'oltre allo scaffolding la pagina ha altri codici `critical`: togliere la riga `TITOLO ARTICOLO` o riportare le intestazioni-etichetta a titoli normali non basta'],
 ];
 
 function glossOf(reason) {
@@ -178,17 +178,29 @@ export function buildPrBody({ report, before = null, after = null, runUrl = '' }
   const notWritten = results.filter((r) => r.written !== true);
   const runRef = runUrl ? `run ${runUrl}` : 'run del workflow';
   // Sull'italiano (scaffolding) non gira nessuna cascata: lo strumento toglie
-  // la sola riga `TITOLO ARTICOLO` e riporta le righe tolte in `removedLines`.
+  // la sola riga `TITOLO ARTICOLO` (`removedLines`) e/o riporta a titoli
+  // normali le intestazioni-etichetta del prompt (`convertedHeadings`).
   const isLineRemoval = (r) => Array.isArray(r.removedLines) && r.removedLines.length > 0;
+  const isHeadingCase = (r) => Array.isArray(r.convertedHeadings) && r.convertedHeadings.length > 0;
+  const isDeterministic = (r) => isLineRemoval(r) || isHeadingCase(r);
   const removalCount = written.filter(isLineRemoval).length;
-  const mtCount = written.length - removalCount;
+  const headingCount = written.filter(isHeadingCase).length;
+  const mtCount = written.length - written.filter(isDeterministic).length;
   const howWritten = [
     mtCount ? `${mtCount} ri-tradotti dalla cascata MT di produzione` : '',
     removalCount ? `${removalCount} \`it\` da cui e\' stata tolta la sola riga \`TITOLO ARTICOLO: …\` del prompt (nessun testo generato, diff = la riga)` : '',
+    headingCount ? `${headingCount} \`it\` con le intestazioni-etichetta del prompt in MAIUSCOLO riportate a titoli normali (nessun testo generato, diff = solo il casing di quelle intestazioni)` : '',
   ].filter(Boolean).join('; ') || 'nessuno scritto';
+  const repairNote = (r) => {
+    const notes = [
+      isLineRemoval(r) ? 'tolta la sola riga `TITOLO ARTICOLO`' : '',
+      isHeadingCase(r) ? `intestazioni a titoli normali: ${r.convertedHeadings.map((c) => `\`${c}\``).join(', ')}` : '',
+    ].filter(Boolean);
+    return notes.length ? ` (${notes.join('; ')})` : '';
+  };
 
   const done = capped(
-    written.map((r) => `- \`${pairKey(r)}\`: codici ${codesOf(r.oldCodes)} → ${codesOf(r.newCodes)}${isLineRemoval(r) ? ' (tolta la sola riga `TITOLO ARTICOLO`)' : ''}.`),
+    written.map((r) => `- \`${pairKey(r)}\`: codici ${codesOf(r.oldCodes)} → ${codesOf(r.newCodes)}${repairNote(r)}.`),
     (n) => `- Altre ${n} coppie scritte con lo stesso esito: elenco completo nel report della ${runRef}.`,
   );
   const open = capped(
