@@ -22,16 +22,26 @@
  * content builder) so it MUST run under `tsx`, not plain `node` — same
  * constraint as scripts/check-border-data-health.mjs.
  *
+ * PER CANTON (plan P9c). `--canton=<code>` (or BORDER_WAIT_CANTON) picks the
+ * canton URL group; default `TI`, which is the original article and keeps its
+ * id `classifica-dogane-ticino`, its SEO metadata and its live-chart snapshot
+ * byte for byte. Any other border canton gets its own stable id
+ * (`classifica-dogane-<slug>`, from rankingArticleIdentity()) and ranks only
+ * the crossings whose `canton` in the published window is that canton. The
+ * live-chart snapshot stays Ticino-only (the component reads one fixed file).
+ * No workflow runs a non-Ticino canton yet: that is P11.
+ *
  * Usage:
  *   npx tsx scripts/generate-border-wait-ranking-article.mjs            # register or refresh
+ *   npx tsx scripts/generate-border-wait-ranking-article.mjs --canton=GE
  *   DRY_RUN=1 npx tsx scripts/generate-border-wait-ranking-article.mjs  # plan only, no writes
  *   TODAY_ISO=2027-01-01 npx tsx scripts/...                            # pin "today" (tests/CI)
  */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeFileSync, mkdirSync, existsSync, readFileSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
-import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './lib/border-wait-ranking.mjs';
 import { buildBorderWaitRankingArticle } from './lib/border-wait-ranking-content.mjs';
+import { staticMetaFor, computeCantonSnapshot, cantonFromArgs } from './lib/border-wait-ranking-canton.mjs';
 import {
   registerArticleFiles,
   checkArticleIdExists,
@@ -41,7 +51,6 @@ import {
   buildBodyFile,
 } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
-import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -69,25 +78,6 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 const WINDOW_PATH = path.join(__dirname, '..', 'data', 'border-wait-ranking-window.json');
 const RANKING_JSON_PATH = path.join(REPO_ROOT, 'public', 'data', 'border-wait-ranking.json');
 
-// Evergreen metadata — registered once, NEVER refreshed (no date/count inside).
-const STATIC_META = {
-  category: 'novita',
-  image: 'mendrisio.webp', // → /images/places/mendrisio.webp (exists in catalog, dogana/confine keywords)
-  hasCalculator: false,
-  author: { slug: 'redazione', name: 'Redazione Frontaliere Ticino' },
-  seo: {
-    title: 'Classifica delle dogane in Ticino: le migliori e le peggiori',
-    description:
-      "Ogni dogana ticinese classificata per tempo medio di attesa, con trend settimanale e quanti minuti si perdono (o guadagnano) scegliendo un valico piuttosto che un altro.",
-    keywords:
-      'dogane ticino, tempi attesa dogana, classifica dogane, traffico confine ticino, valico ticino, coda dogana',
-    ogTitle: 'Classifica delle dogane in Ticino',
-    ogDescription:
-      "Le dogane ticinesi classificate per tempo di attesa: le più veloci, le più lente, e quanti minuti di vita si perdono a sceglierne una piuttosto che un'altra.",
-    headline: 'Classifica delle dogane in Ticino: le migliori e le peggiori per tempo di attesa',
-    breadcrumbName: 'Classifica dogane',
-  },
-};
 
 /**
  * Load the aggregate window fetched by refresh-border-wait-window.mjs.
@@ -117,43 +107,25 @@ export function loadWindow(windowPath = WINDOW_PATH) {
 }
 
 /**
- * Compute the current ranking/trend/fun-facts/week-window/movers snapshot for
- * todayIso, from the fetched aggregate window.
+ * Compute the current ranking/trend/fun-facts/week-window/movers snapshot of
+ * ONE canton for todayIso, from the fetched aggregate window (default: the
+ * cached one). The logic lives in lib/border-wait-ranking-canton.mjs.
  */
-export function computeSnapshot(todayIso, windowPayload = loadWindow()) {
-  // This snapshot feeds the evergreen "Classifica delle dogane in Ticino"
-  // article + its embedded live chart (buildRankingJson below) — both
-  // Ticino-only by identity. rankingFromStats/trendFromStats are generic
-  // aggregation over ALL registered crossings (now 134, incl. the 108
-  // non-Ticino Germany/Austria/Liechtenstein/France-corridor ones from
-  // #4889), so scope to Ticino here, once, before funFacts/movers derive
-  // from it — otherwise a foreign crossing could surface as this
-  // Ticino-only article's best/worst/biggest mover.
-  const rankingAll = rankingFromStats(windowPayload.current.perCrossing);
-  const ranking = rankingAll
-    .filter((r) => isTicinoCrossing(r.slug))
-    .map((r, idx) => ({ ...r, rank: idx + 1 }));
-  const trendAll = trendFromStats(
-    windowPayload.current.perCrossing,
-    windowPayload.previous?.perCrossing ?? {},
-  );
-  const trend = Object.fromEntries(Object.entries(trendAll).filter(([slug]) => isTicinoCrossing(slug)));
-  const funFacts = computeFunFacts(ranking);
-  const { weekStart, weekEnd } = computeWeekWindow(todayIso, 7);
-  const movers = computeMovers(trend);
-  return { ranking, trend, funFacts, weekStart, weekEnd, movers };
+export function computeSnapshot(todayIso, windowPayload = loadWindow(), canton = 'TI') {
+  return computeCantonSnapshot(todayIso, windowPayload, canton);
 }
 
 /** Build the full registration `data` object from the current ranking snapshot. */
-export function buildData(todayIso, windowPayload = loadWindow()) {
-  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, windowPayload);
-  const article = buildBorderWaitRankingArticle({ ranking, trend, funFacts, weekStart, weekEnd, movers, todayIso });
+export function buildData(todayIso, windowPayload = loadWindow(), canton = 'TI') {
+  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, windowPayload, canton);
+  const article = buildBorderWaitRankingArticle({ ranking, trend, funFacts, weekStart, weekEnd, movers, todayIso, canton });
   return {
     id: article.id,
-    ...STATIC_META,
+    ...staticMetaFor(canton),
     // Niente `inspectSlugForPromptPlaceholder` qui, e non e' una dimenticanza
     // (issue #382 item 4): `article.slugs` e' `RANKING_ARTICLE_SLUGS`, quattro
-    // stringhe letterali nel sorgente di `lib/border-wait-ranking-content.mjs`.
+    // stringhe derivate in `lib/border-wait-ranking-content.mjs` da tabelle
+    // letterali (rankingArticleIdentity: prefisso fisso + slug del cantone).
     // Lo slug guard esiste perche' in `create-article.mjs` lo slug lo propone
     // il MODELLO, e un segnaposto del prompt puo' finirci dentro; qui non c'e'
     // nessun modello nella catena — `wiring — i tre produttori senza slug
@@ -226,14 +198,16 @@ export function buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart
   };
 }
 
+
 async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const todayIso = process.env.TODAY_ISO || new Date().toISOString().slice(0, 10);
+  const canton = cantonFromArgs();
   // Loaded once and threaded through, so the two calls cannot disagree if the
   // cache is refreshed mid-run.
   const windowPayload = loadWindow();
-  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, windowPayload);
-  const data = buildData(todayIso, windowPayload);
+  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, windowPayload, canton);
+  const data = buildData(todayIso, windowPayload, canton);
   // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
   // dell'id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
   // registry, quindi `checkArticleIdExists()` risponde `true` sopra un corpus
@@ -246,11 +220,11 @@ async function main() {
   const exists = checkArticleIdExists(data.id);
 
   console.log(
-    `🛂 border-wait ranking article — id=${data.id} ranked=${data._rankedCount} exists=${exists} dry=${dryRun}`,
+    `🛂 border-wait ranking article — canton=${canton} id=${data.id} ranked=${data._rankedCount} exists=${exists} dry=${dryRun}`,
   );
 
   // The evergreen article already ranks under this URL. Fewer than 2 known
-  // Ticino crossings means buildBorderWaitRankingArticle() falls back to the
+  // crossings of the canton means buildBorderWaitRankingArticle() falls back to the
   // `noData` stub copy (content.mjs: `hasData = known.length >= 2`) — a run
   // that would silently REPLACE a correct ranking with a content-free page
   // instead of failing loud. This is data the run itself computed, not an
@@ -258,7 +232,12 @@ async function main() {
   // stop here rather than let registerArticleFiles/refreshBodyFiles publish it.
   if (data._rankedCount < 2 && !dryRun) {
     throw new Error(
-      `only ${data._rankedCount} ranked Ticino crossing(s) — refusing to publish the noData stub over the evergreen ranking article`,
+      `only ${data._rankedCount} ranked ${canton} crossing(s) — refusing to publish the noData stub over the evergreen ranking article`,
+    );
+  }
+  if (!data.image && !dryRun) {
+    throw new Error(
+      `no image declared for the ${canton} ranking (RANKING_IMAGE) — choose one before its first publication`,
     );
   }
 
@@ -269,6 +248,9 @@ async function main() {
     return;
   }
 
+  // The live chart (InlineBorderWaitRanking) reads ONE fixed file, the
+  // Ticino ranking: another canton must never overwrite it.
+  if (canton === 'TI') {
   mkdirSync(path.dirname(RANKING_JSON_PATH), { recursive: true });
   // Atomico come le scritture del body, e per una ragione PIU' forte: questo
   // JSON viene ripubblicato verbatim in `dist/api/border-wait-ranking.json` da
@@ -289,6 +271,7 @@ async function main() {
     throw err;
   }
   console.log(`  ✅ ${path.relative(REPO_ROOT, RANKING_JSON_PATH)}`);
+  }
 
   if (!exists) {
     console.log('📂 first run — registering the evergreen article across the blog system…');
