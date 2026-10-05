@@ -98,6 +98,16 @@ test('livelli ### e ####, due punti finali e spazi multipli dopo i # sono preser
   assert.deepEqual(out.skipped, []);
 });
 
+test('le etichette dei due rami di expandEnrichmentLine (frontaliere e nazionale) si convertono', () => {
+  const text = `## RIFERIMENTI A COMUNI TICINESI SPECIFICI\n${PROSE}\n## RIFERIMENTI A CANTONI O CITTÀ SVIZZERE PERTINENTI AL TEMA\n${PROSE}\n## ESEMPIO CONCRETO\n${PROSE}`;
+  const out = normalizePromptSectionHeadings(text);
+  assert.equal(
+    out.value,
+    `## Riferimenti a comuni ticinesi specifici\n${PROSE}\n## Riferimenti a cantoni o città svizzere pertinenti al tema\n${PROSE}\n## Esempio concreto\n${PROSE}`,
+  );
+  assert.deepEqual(out.skipped, []);
+});
+
 test('un testo senza etichette, o con etichette gia\' normali, esce identico', () => {
   for (const text of [
     '',
