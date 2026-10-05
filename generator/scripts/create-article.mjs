@@ -11128,6 +11128,13 @@ async function expandShortItalianContent(data, targetWords, { boundToText = fals
       : IS_FRONTALIERE
       ? 'Sei un giornalista finanziario esperto di lavoro transfrontaliero in Ticino.'
       : 'Sei un giornalista finanziario esperto di affari svizzeri a livello nazionale.';
+    // Sezione cantonale: l'espansione gira dopo il fact-check e senza un nuovo
+    // controllo, quindi come per la cronaca locale non puo' chiedere fatti
+    // nuovi — la riga nazionale («cantoni o citta' svizzere, normative con
+    // date e importi») porterebbe altri cantoni e dettagli non nella fonte.
+    const enrichmentLine = IS_CANTON && !boundToText
+      ? CANTON_LINES.expandEnrichmentLine
+      : expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews);
     const expandPrompt = `${expandPersona}
 
 TESTO ATTUALE (${currentWords} parole):
@@ -11138,7 +11145,7 @@ RIFERIMENTO DEL TITOLO (SOLO INPUT, NON RIPETERE): ${it.title || ''}
 ISTRUZIONI:
 - Riscrivi ed ESPANDI questo testo a circa ${targetFieldWords} parole (MASSIMO ${MAX_BODY_FIELD_WORDS} parole — NON superare questo limite)
 - Mantieni lo stesso tono, stile e struttura
-${expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews)}
+${enrichmentLine}
 - NON aggiungere frasi generiche o filler — solo informazioni utili e verificabili
 - Mantieni la formattazione esistente (##, -, >, 📊, 💡, ⚠️). Citazioni (>) MAX 1 per articolo, solo per citazioni dirette brevi
 - GRASSETTO: massimo 2-3 parole in grassetto nell'intero testo, preferisci ZERO
@@ -16376,11 +16383,12 @@ async function main() {
     const candidateSuccess = false;
 
     // ── Phase 2: Evergreen fallback — only reached if news scan produced nothing usable ──
-    if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
-      console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
-    } else if (!newsSuccess && !candidateSuccess && DRY_RUN_SCAN) {
-      // Nessuna headline e' arrivata alla selezione: la misura finisce qui.
+    if (!newsSuccess && !candidateSuccess && DRY_RUN_SCAN) {
+      // Nessuna headline e' arrivata alla selezione: la misura finisce qui,
+      // anche a budget wall-clock esaurito (il riepilogo e' il contratto).
       await exitDryRunScan({ chosen: null, tier: null, pool: null, poolSize: 0 });
+    } else if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
+      console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
     } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool) {
       // Sezione cantonale: nessun pool evergreen generico per costruzione (i
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del

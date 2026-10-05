@@ -650,6 +650,9 @@ NON inventare un angolo "implicazioni per i frontalieri" né consigli generici a
     styleColorLine: `Colore locale: comuni, enti e istituzioni del Canton ${name} (governo e parlamento cantonale, uffici cantonali) citati dalla fonte; cifre in CHF.`,
     systemRoleQualifier: `di affari del Canton ${name}`,
     expandPersona: `Sei un giornalista esperto di affari del Canton ${name} (lavoro, fisco, servizi, mobilità).`,
+    // L'espansione di un body corto gira DOPO il fact-check: niente fatti
+    // nuovi, come per la cronaca locale (expandEnrichmentLine in create-article).
+    expandEnrichmentLine: `- Aggiungi PROFONDITÀ solo con ciò che il testo già contiene: dettagli dei fatti, contesto del Canton ${name} e implicazioni pratiche per chi vive o lavora nel cantone che il testo già documenta. NON aggiungere NESSUN fatto, numero, comune, altro cantone, normativa, data o importo che non sia già scritto nel TESTO ATTUALE qui sopra.`,
     imagePromptSchemaLine: `"imagePrompt": "Prompt per immagine editoriale fotorealistica DSLR di una scena del Canton ${name} pertinente al tema, che non sembri AI. Max 2 frasi EN.",`,
     fallbackImagePrompt: `Professional editorial photo for a regional Swiss news article about the canton of ${name}. A recognizable local scene appropriate to the topic, natural warm lighting.`,
   });

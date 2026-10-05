@@ -156,6 +156,13 @@ test('sitemap senza news:title: titolo dallo slug, marcato', () => {
   assert.equal(item.titleFromSlug, true);
 });
 
+test('sitemap con prefisso di namespace (<sm:url>): letta, non sterile', () => {
+  const xml = '<sm:urlset xmlns:sm="http://www.sitemaps.org/schemas/sitemap/0.9"><sm:url><sm:loc>https://www.example.ch/news/kantonsstrasse-wegen-bauarbeiten-gesperrt</sm:loc><sm:lastmod>2026-10-05</sm:lastmod></sm:url></sm:urlset>';
+  const [item] = extractSitemapNewsItems(xml, 'https://www.example.ch/sitemap.xml');
+  assert.equal(item.url, 'https://www.example.ch/news/kantonsstrasse-wegen-bauarbeiten-gesperrt');
+  assert.equal(item.date.toISOString().slice(0, 10), '2026-10-05');
+});
+
 test('weekly-sitemap: periodo ISO corrente e precedente; budget 1 sceglie il piu\' utile', () => {
   assert.deepEqual(isoWeekOf(new Date('2026-10-05T10:00:00Z')), { year: 2026, week: 41 });
   assert.deepEqual(isoWeekOf(new Date('2027-01-01T10:00:00Z')), { year: 2026, week: 53 });

@@ -281,16 +281,18 @@ export function headlineFromUrlSlug(url) {
  */
 export function extractSitemapNewsItems(xml, sitemapUrl) {
   const out = [];
-  const urlRe = /<url[\s>][\s\S]*?<\/url>/gi;
+  // Anche con prefisso di namespace (`<sm:url>`, `<sm:loc>`): una forma non
+  // riconosciuta ridurrebbe a zero la fonte in silenzio.
+  const urlRe = /<(?:[\w-]+:)?url[\s>][\s\S]*?<\/(?:[\w-]+:)?url>/gi;
   let m;
   while ((m = urlRe.exec(String(xml || ''))) !== null) {
     const block = m[0];
-    const loc = /<loc>\s*(?:<!\[CDATA\[)?\s*([^<\]]+?)\s*(?:\]\]>)?\s*<\/loc>/i.exec(block);
+    const loc = /<(?:[\w-]+:)?loc>\s*(?:<!\[CDATA\[)?\s*([^<\]]+?)\s*(?:\]\]>)?\s*<\/(?:[\w-]+:)?loc>/i.exec(block);
     const url = absoluteUrl(decodeHtmlEntities(loc?.[1] || ''), sitemapUrl);
     if (!url) continue;
     const title = /<news:title>([\s\S]*?)<\/news:title>/i.exec(block);
     const pub = /<news:publication_date>([\s\S]*?)<\/news:publication_date>/i.exec(block)
-      || /<lastmod>([\s\S]*?)<\/lastmod>/i.exec(block);
+      || /<(?:[\w-]+:)?lastmod>([\s\S]*?)<\/(?:[\w-]+:)?lastmod>/i.exec(block);
     const lang = /<news:language>([\s\S]*?)<\/news:language>/i.exec(block);
     let headline = stripTags(title?.[1] || '');
     let titleFromSlug = false;

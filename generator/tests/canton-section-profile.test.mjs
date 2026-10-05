@@ -249,6 +249,10 @@ test('prompt cantonali: stesso formato di risposta delle storiche, cantone e con
   assert.match(lines.topicalRelevanceGate, /"abort_topical_relevance": true/);
   assert.match(lines.factCheckRelevance(false), /rilevanza_topica/);
   assert.equal(lines.factCheckRelevance(true).includes('NON sono nessi reali'), false, 'per un evergreen il paragrafo sulla cronaca sparisce, come nelle storiche');
+  // L'espansione gira dopo il fact-check: la riga cantonale non chiede fatti
+  // nuovi (ne' altri cantoni), a differenza di quella nazionale.
+  assert.match(lines.expandEnrichmentLine, /NON aggiungere NESSUN fatto, numero, comune, altro cantone/);
+  assert.match(CREATE_ARTICLE, /const enrichmentLine = IS_CANTON && !boundToText\n\s+\? CANTON_LINES\.expandEnrichmentLine/);
 });
 
 test('create-article: i rami cantonali leggono il profilo, e le storiche restano sui loro testi', () => {
