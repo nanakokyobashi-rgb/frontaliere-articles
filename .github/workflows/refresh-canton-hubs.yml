@@ -156,27 +156,33 @@ jobs:
       # Uno step per dataset, ognuno soft: vedi l'intestazione.
       - name: Fetch fuel prices per canton
         if: steps.sections.outputs.count != '0'
-        run: npm run refresh:fuel-cantons || echo "::warning::fuel-prices-cantons non scaricato: il blocco prezzi carburanti si omette o resta quello pubblicato"
+        run: |
+          npm run refresh:fuel-cantons || echo "::warning::fuel-prices-cantons non scaricato: il blocco prezzi carburanti si omette o resta quello pubblicato"
 
       - name: Fetch the events dataset
         if: steps.sections.outputs.count != '0'
-        run: npm run refresh:events || echo "::warning::events.json non scaricato: il blocco prossimi eventi si omette o resta quello pubblicato"
+        run: |
+          npm run refresh:events || echo "::warning::events.json non scaricato: il blocco prossimi eventi si omette o resta quello pubblicato"
 
       - name: Fetch the border-wait window
         if: steps.sections.outputs.count != '0'
-        run: npm run refresh:border-wait-window || echo "::warning::border-wait-ranking-window non scaricato: il blocco attese ai valichi si omette o resta quello pubblicato"
+        run: |
+          npm run refresh:border-wait-window || echo "::warning::border-wait-ranking-window non scaricato: il blocco attese ai valichi si omette o resta quello pubblicato"
 
       - name: Fetch road events
         if: steps.sections.outputs.count != '0'
-        run: npm run refresh:road-events || echo "::warning::road-events non scaricato: il blocco chiusure e cantieri si omette o resta quello pubblicato"
+        run: |
+          npm run refresh:road-events || echo "::warning::road-events non scaricato: il blocco chiusure e cantieri si omette o resta quello pubblicato"
 
       - name: Fetch canton notices
         if: steps.sections.outputs.count != '0'
-        run: npm run refresh:canton-notices || echo "::warning::canton-notices non scaricato: il blocco avvisi ufficiali si omette o resta quello pubblicato"
+        run: |
+          npm run refresh:canton-notices || echo "::warning::canton-notices non scaricato: il blocco avvisi ufficiali si omette o resta quello pubblicato"
 
       - name: Build the canton services view
         if: steps.sections.outputs.count != '0'
-        run: npm run refresh:canton-services || echo "::warning::canton-services non costruita: i blocchi dell'hub servizi si omettono o restano quelli pubblicati"
+        run: |
+          npm run refresh:canton-services || echo "::warning::canton-services non costruita: i blocchi dell'hub servizi si omettono o restano quelli pubblicati"
 
       - name: Generate the canton hubs
         id: producer

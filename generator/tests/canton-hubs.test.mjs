@@ -812,6 +812,13 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
     assert.match(line, /\|\| echo "::warning::/, `refresh:${name} deve essere soft`);
     assert.ok(JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).scripts[`refresh:${name}`]);
   }
+  // Un `run:` su una riga e' uno scalare YAML semplice: un «: » dentro lo rende
+  // un file non valido, e il workflow fallisce all'avvio senza eseguire un job
+  // (successo al primo push di questo file, sugli `echo "::warning::…: …"`).
+  for (const line of wf.split('\n')) {
+    const inline = /^\s+run: (?![|>])(.*)$/.exec(line);
+    if (inline) assert.doesNotMatch(inline[1], /: /, `run: su una riga con «: » — usa un blocco \`run: |\`: ${line.trim()}`);
+  }
   assert.match(wf, /rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+--section-surfaces/);
   assert.match(wf, /persist-credentials: false/);
   assert.match(wf, /group: refresh-canton-hubs/);
