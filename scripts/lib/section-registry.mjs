@@ -471,5 +471,8 @@ export function latestArticleDate(entries) {
     if (value === undefined) continue;
     if (best === null || Date.parse(value) > Date.parse(best)) best = value;
   }
+  // `<lastmod>` vuole una data W3C: una stringa leggibile da Date.parse ma
+  // non ISO («Oct 5, 2026») si normalizza invece di finire tale e quale nell'XML.
+  if (best !== null && !/^\d{4}-\d{2}-\d{2}(T[\d:.]+(Z|[+-]\d{2}:\d{2})?)?$/.test(best)) return new Date(best).toISOString();
   return best;
 }

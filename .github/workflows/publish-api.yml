@@ -633,11 +633,14 @@ jobs:
       # (il catalogo che il sito legge) esce con Pages: se uscisse prima di
       # questo push, un upload fallito lascerebbe il catalogo ad annunciare
       # `live` una sezione che il Worker serve ancora 404, o a dichiarare spenta
-      # una sezione che il registro vecchio su R2 serve ancora. Lo script esce 1
-      # — e il publish si ferma qui, col catalogo di prima ancora su Pages —
-      # quando una sezione e' DICHIARATA live e un'operazione non e' confermata
-      # o mancano le credenziali; senza sezioni dichiarate live (oggi) un
-      # problema di R2 e' un warning e gli articoli si pubblicano lo stesso.
+      # una sezione che il registro vecchio su R2 serve ancora. Lo script legge
+      # il registro che R2 ha adesso: se lo stato delle sezioni da pubblicare
+      # DIFFERISCE (accensione, spegnimento, ritiro) e un'operazione non e'
+      # confermata o mancano le credenziali, esce 1 — il publish si ferma qui,
+      # col catalogo di prima ancora su Pages — dopo aver ripristinato il
+      # registro precedente se quello nuovo era gia' salito. Se lo stato e' lo
+      # stesso (oggi: tutto draft) un problema di R2 e' un warning e gli
+      # articoli si pubblicano lo stesso.
       #
       # Ordine interno: sitemap delle sezioni live, registro, indice solo a
       # registro confermato; purge a blocchi di 30. Il kill-switch di Remote

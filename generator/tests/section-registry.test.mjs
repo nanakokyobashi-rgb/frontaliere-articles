@@ -74,7 +74,7 @@ import {
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
-import { edgePushIsMandatory, planSectionEdge, purgeChunks } from '../../scripts/publish-section-edge.mjs';
+import { edgePushIsMandatory, planSectionEdge, purgeChunks, registryState } from '../../scripts/publish-section-edge.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
@@ -283,6 +283,8 @@ test('indice sitemap-cantons.xml: mai vuoto (lo schema chiede almeno un <sitemap
   assert.equal(latestArticleDate([{ date: '2026-10-01' }, { date: '2026-09-01', updatedAt: '2026-10-03T00:00:00Z' }, { date: 'x' }]), '2026-10-03T00:00:00Z');
   assert.equal(latestArticleDate([]), null);
   assert.equal(latestArticleDate([{ updatedAt: 'boh', date: '2026-10-02' }]), '2026-10-02', 'un updatedAt illeggibile non nasconde la date');
+  assert.equal(latestArticleDate([{ date: 'Oct 5, 2026 10:00 UTC' }]), '2026-10-05T10:00:00.000Z', 'una data non ISO si normalizza');
+  assert.equal(latestArticleDate([{ date: '2026-10-05T10:00:00+02:00' }]), '2026-10-05T10:00:00+02:00');
 });
 
 test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, articoli', () => {
@@ -472,32 +474,61 @@ test('edge: una sezione live senza la sua sitemap e\' un errore, non un upload m
   assert.throws(() => planSectionEdge(dir), /live ma sitemap-articles-canton-ti\.xml manca/);
 });
 
-test('edge: obbligatorio se una sezione e\' dichiarata live (anche spenta), best-effort altrimenti', () => {
-  const none = fakeDist({});
-  assert.equal(edgePushIsMandatory(none), false);
-  assert.equal(edgePushIsMandatory(fakeDist({ live: ['canton-ti'] })), true);
-  // Spenta dal kill-switch: status draft ma dichiarata live — e' proprio allora che il registro DEVE arrivare.
-  const killed = fakeDist({});
-  const doc = JSON.parse(readFileSync(path.join(killed, 'sections.json'), 'utf8'));
-  doc.sections[0].declaredStatus = 'live';
-  writeFileSync(path.join(killed, 'sections.json'), JSON.stringify(doc));
-  assert.equal(edgePushIsMandatory(killed), true);
-  // Credenziali assenti: errore se obbligatorio, warning ed exit 0 altrimenti (nessun upload tentato).
+test('edge: obbligatorio quando lo stato delle sezioni cambia rispetto a R2, in entrambe le direzioni', () => {
+  const draftAll = { schema: 1, commit: 'aaaaaaa', sections: Object.fromEntries(registrySectionIds().map((id) => [id, { status: 'draft' }])) };
+  const tiLive = { schema: 1, commit: 'bbbbbbb', sections: { ...draftAll.sections, 'canton-ti': { status: 'live' } } };
+  const withEdge = (dir, doc) => {
+    writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(doc));
+    return dir;
+  };
+  // Il commit non e' stato; una sezione assente vale draft.
+  assert.equal(registryState(draftAll), registryState({ sections: {} }));
+  assert.notEqual(registryState(tiLive), registryState(draftAll));
+  assert.notEqual(
+    registryState({ sections: { 'canton-ti': { status: 'live', gone: ['/articoli-ticino/x/'] } } }),
+    registryState(tiLive),
+  );
+
+  const allDraft = withEdge(fakeDist({}), draftAll);
+  assert.equal(edgePushIsMandatory(allDraft, { state: 'absent' }), false, 'oggi: tutto draft, mai pubblicato');
+  assert.equal(edgePushIsMandatory(allDraft, { state: 'ok', doc: { ...draftAll, commit: 'ccccccc' } }), false, 'cambia solo il commit');
+  assert.equal(edgePushIsMandatory(allDraft, { state: 'unknown' }), false);
+  // SPEGNIMENTO: R2 serve ancora la sezione, il catalogo nuovo la direbbe draft.
+  assert.equal(edgePushIsMandatory(allDraft, { state: 'ok', doc: tiLive }), true);
+  // ACCENSIONE, e stato invariato a sezione live.
+  const live = withEdge(fakeDist({ live: ['canton-ti'] }), tiLive);
+  assert.equal(edgePushIsMandatory(live, { state: 'absent' }), true);
+  assert.equal(edgePushIsMandatory(live, { state: 'ok', doc: draftAll }), true);
+  assert.equal(edgePushIsMandatory(live, { state: 'ok', doc: { ...tiLive, commit: 'ddddddd' } }), false);
+  // R2 illeggibile: non si puo' dimostrare che lo stato coincide.
+  assert.equal(edgePushIsMandatory(live, { state: 'unknown' }), true);
+  // Registro non emesso (kill-switch non verificato): niente da spingere.
+  assert.equal(edgePushIsMandatory(fakeDist({ edge: false }), { state: 'ok', doc: tiLive }), false);
+
   // In un sottoprocesso: lo script parla su stdout, e un test non deve scrivere
   // sulla pipe dei frame del runner (scripts/ci/check-node-test-stdout.mjs).
+  // `--previous` da' lo stato di R2 a mano: nessuna rete nel test.
   const edge = (...args) => spawnSync(process.execPath, [path.join(ROOT, 'scripts/publish-section-edge.mjs'), ...args], {
     encoding: 'utf8',
     env: { PATH: process.env.PATH },
   });
-  const refused = edge('--dist', killed);
-  assert.equal(refused.status, 1);
+  const prev = path.join(mkdtempSync(path.join(tmpdir(), 'prev-')), 'registry.json');
+  writeFileSync(prev, JSON.stringify(tiLive));
+  const refused = edge('--dist', allDraft, '--previous', prev);
+  assert.equal(refused.status, 1, 'spegnimento senza credenziali: il publish si ferma');
+  assert.match(refused.stdout, /push OBBLIGATORIO/);
   assert.match(refused.stdout, /::error::\[section-edge\] credenziali assenti.*il publish si ferma/);
-  const tolerated = edge('--dist', none);
+  const tolerated = edge('--dist', allDraft, '--previous', 'absent');
   assert.equal(tolerated.status, 0);
   assert.match(tolerated.stdout, /::warning::\[section-edge\] credenziali assenti/);
-  assert.match(edge('--dist').stderr, /--dist richiede/);
-  assert.match(edge('--boh').stderr, /sconosciuti/);
-  assert.equal(edge('--boh').status, 1);
+  for (const [args, re] of [[['--dist'], /--dist richiede/], [['--boh'], /sconosciuti/], [['--dry-run', '--dry-run'], /una volta sola/]]) {
+    const res = edge(...args);
+    assert.equal(res.status, 1);
+    assert.match(res.stderr, re);
+  }
+  // Un push riuscito a meta' ripristina il registro di prima.
+  const src = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
+  assert.match(src, /if \(registryUploaded && mustSucceed\) \{[\s\S]*?rollbackRegistry\(previous, tmpDir\)/);
 });
 
 test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del renderer (meta IT ∪ mappa slug)', () => {
