@@ -22,6 +22,7 @@ import {
   ensureLocalCommit,
   manifestAt,
   siteBlobShas,
+  siteBlobShasPagination,
   twinCensusVerdict,
 } from '../../scripts/ci/twin-census-pr-gate.mjs';
 
@@ -194,6 +195,42 @@ test('siteBlobShas: l\'albero intero da\' gli sha dei soli blob', async () => {
     sleep: noSleep,
   });
   assert.deepEqual([...shas], ['a']);
+});
+
+test('siteBlobShas: un albero ricorsivo troncato recupera root e sotto-alberi per pagina', async () => {
+  const calls = [];
+  const paged = async (url) => {
+    calls.push(url);
+    if (url.endsWith('/trees/HEAD?recursive=1')) return response(200, { truncated: true, sha: 'root-sha' });
+    if (url.endsWith('/trees/root-sha')) {
+      return response(200, {
+        truncated: false,
+        tree: [{ type: 'blob', sha: 'a' }, { type: 'tree', sha: 'subtree-sha' }],
+      });
+    }
+    if (url.endsWith('/trees/subtree-sha')) return response(200, { truncated: false, tree: [{ type: 'blob', sha: 'b' }] });
+    throw new Error(`URL inatteso: ${url}`);
+  };
+  assert.deepEqual([...await siteBlobShas({ repo: 'o/r', ref: 'HEAD', fetchImpl: paged, sleep: noSleep })].sort(), ['a', 'b']);
+  assert.deepEqual(calls, [
+    'https://api.github.com/repos/o/r/git/trees/HEAD?recursive=1',
+    'https://api.github.com/repos/o/r/git/trees/root-sha',
+    'https://api.github.com/repos/o/r/git/trees/subtree-sha',
+  ]);
+});
+
+test('siteBlobShasPagination: una pagina illeggibile resta rossa', async () => {
+  await assert.rejects(
+    siteBlobShasPagination({
+      repo: 'o/r',
+      ref: 'root-sha',
+      fetchImpl: async (url) => url.endsWith('/trees/root-sha')
+        ? response(200, { truncated: false, tree: [{ type: 'tree', sha: 'subtree-sha' }] })
+        : response(200, { truncated: true, tree: [] }),
+      sleep: noSleep,
+    }),
+    /troncato/,
+  );
 });
 
 test('siteBlobShas: un 200 senza `tree` non e\' un sito vuoto', async () => {
