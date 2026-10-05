@@ -60,9 +60,17 @@ const { selectUndatedBySourceQuota, UNDATED_TOTAL_BUDGET, UNDATED_PER_SOURCE_QUO
   '{ selectUndatedBySourceQuota, UNDATED_TOTAL_BUDGET, UNDATED_PER_SOURCE_QUOTA }',
 );
 
-const { parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS } = sandbox(
+const { parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS, parseFeedDate } = sandbox(
   sliceBlock('export const RECOGNIZED_HEADLINE_DATE_FORMATS = [', 'function monthFormatTag(name) {'),
-  '{ parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS }',
+  '{ parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS, parseFeedDate }',
+);
+
+// `extractRssItems` dipende da `parseFeedDate` (e questo da `buildCalendarDate`):
+// stesso blocco dei formati + la funzione, valutati insieme.
+const { extractRssItems } = sandbox(
+  sliceBlock('export const RECOGNIZED_HEADLINE_DATE_FORMATS = [', 'function monthFormatTag(name) {')
+    + sliceBlock('function extractRssItems(xml, feedUrl) {', 'function extractRssItems(xml, feedUrl) {'),
+  '{ extractRssItems }',
 );
 
 const headlines = (source, n) => Array.from({ length: n }, (_, i) => ({ source, url: `https://${source}/${i}`, headline: `${source} ${i}` }));
@@ -216,5 +224,85 @@ describe('(c) una fonte che risponde 200 e non produce nulla e’ «sterile», n
     // frase della issue, ed e' questa riga a smentirla.
     assert.match(SRC, /produttive, .*sterili, .*fallite/s);
     assert.match(SRC, /Sterili: \$\{RUN_REPORT\.sources\.sterileDomains\.join\(', '\)\}/);
+  });
+});
+
+// ── (d) Data degli item di feed ────────────────────────────────────────────
+//
+// 2026-10-05: il feed INPS scrive `<pubdate>02/10/2026</pubdate>`. Il parse
+// era `new Date(raw)`, che legge le forme numeriche con lo slash come
+// mese/giorno: 02/10 diventava 10 febbraio, 25/09 Invalid Date, 11/09 il
+// 9 novembre — una data FUTURA che `isWithinDays` conta come recente.
+
+describe('(d) parseFeedDate legge giorno-prima le date numeriche dei feed', () => {
+  const ymd = (d) => [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+
+  it('dd/mm/yyyy, dd.mm.yyyy e dd-mm-yyyy: giorno prima, mai mese prima', () => {
+    assert.deepEqual(ymd(parseFeedDate('02/10/2026')), [2026, 10, 2]);
+    assert.deepEqual(ymd(parseFeedDate('25/09/2026')), [2026, 9, 25]);
+    assert.deepEqual(ymd(parseFeedDate('11/09/2026')), [2026, 9, 11]);
+    assert.deepEqual(ymd(parseFeedDate(' 5.10.2026 ')), [2026, 10, 5]);
+    assert.deepEqual(ymd(parseFeedDate('05-10-2026')), [2026, 10, 5]);
+  });
+
+  it('l’ora che segue la data, se c’e’, viene conservata', () => {
+    const d = parseFeedDate('02/10/2026 14:35');
+    assert.deepEqual([...ymd(d), d.getHours(), d.getMinutes()], [2026, 10, 2, 14, 35]);
+    const s = parseFeedDate('02/10/2026T08:05:09');
+    assert.deepEqual([s.getHours(), s.getMinutes(), s.getSeconds()], [8, 5, 9]);
+  });
+
+  it('date numeriche impossibili: null, non un trabocco nel mese dopo', () => {
+    for (const impossible of ['31/04/2026', '30/02/2026', '00/10/2026', '32.10.2026']) {
+      assert.equal(parseFeedDate(impossible), null, `accettata: ${impossible}`);
+    }
+  });
+
+  it('RFC-822 e ISO-8601 restano identici a new Date (nessun cambio per i formati gia’ letti)', () => {
+    for (const raw of [
+      'Mon, 05 Oct 2026 06:23:11 +0000',
+      'Sat, 03 Oct 2026 08:43:39 +0200',
+      'Fri, 02 Oct 2026 07:28:26 GMT',
+      '2026-10-05T06:23:11Z',
+      '2026-10-03T08:43:39+02:00',
+      '2026-10-05',
+    ]) {
+      assert.equal(parseFeedDate(raw).getTime(), new Date(raw).getTime(), raw);
+    }
+  });
+
+  it('valore assente o non data: null', () => {
+    for (const noise of [undefined, null, '', '   ', 'not-a-date', 'ieri']) {
+      assert.equal(parseFeedDate(noise), null, `falso positivo su: ${noise}`);
+    }
+  });
+
+  it('extractRssItems: un feed in forma INPS esce con le date giuste, in entrambi i rami', () => {
+    const rss = `<?xml version="1.0"?><rss version="2.0"><channel>
+      <item><title>Pensioni dei lavoratori autonomi: chiarimenti</title><link>https://www.inps.it/a</link><pubdate>02/10/2026</pubdate></item>
+      <item><title>NASpI: nuove istruzioni operative 2026</title><link>https://www.inps.it/b</link><pubDate>11/09/2026</pubDate></item>
+      <item><title>Avviso senza data valida per il test</title><link>https://www.inps.it/c</link><pubDate>non pervenuta</pubDate></item>
+      <item><title>Comunicato con data RFC-822 standard</title><link>https://www.inps.it/d</link><pubDate>Mon, 05 Oct 2026 06:23:11 +0000</pubDate></item>
+    </channel></rss>`;
+    const items = extractRssItems(rss, 'https://www.inps.it/it/it.rss.news.xml');
+    assert.equal(items.length, 4);
+    assert.deepEqual(ymd(items[0].date), [2026, 10, 2]);
+    assert.deepEqual(ymd(items[1].date), [2026, 9, 11], 'l’11 settembre non deve diventare il 9 novembre');
+    assert.equal(items[2].date, null);
+    assert.equal(items[3].date.toISOString(), '2026-10-05T06:23:11.000Z');
+
+    const atom = `<feed xmlns="http://www.w3.org/2005/Atom">
+      <entry><title>Comunicato Atom con data numerica</title><link href="https://example.ch/e"/><updated>25/09/2026</updated></entry>
+    </feed>`;
+    const [entry] = extractRssItems(atom, 'https://example.ch/atom.xml');
+    assert.deepEqual(ymd(entry.date), [2026, 9, 25]);
+  });
+
+  it('extractRssItems non torna a new Date sul campo data', () => {
+    const at = SRC.indexOf('function extractRssItems(xml, feedUrl) {');
+    assert.notEqual(at, -1);
+    const body = SRC.slice(at, SRC.indexOf('\n}\n', at));
+    assert.doesNotMatch(body, /new Date\(/, 'extractRssItems costruisce di nuovo le date a mano');
+    assert.equal((body.match(/parseFeedDate\(date\?\.\[1\]\)/g) || []).length, 2, 'Atom e RSS devono passare entrambi da parseFeedDate');
   });
 });
