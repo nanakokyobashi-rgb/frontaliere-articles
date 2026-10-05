@@ -1991,7 +1991,7 @@
       "reason": "Cancellazione di UNA chiave R2 fra quelle delle sezioni cantonali (allowlist edge/sitemap-cantons.xml, edge/sitemap-articles-canton-<x>.xml, edge/sections/**): serve a ritirare l'indice sitemap-cantons.xml quando nessuna sezione e' piu' live, perche' un sitemapindex vuoto viola lo schema e il Worker deve tornare al 404. Fratello di upload-cdn-file.sh (additivo per contratto). Corpus-only: la pubblicazione R2 delle sezioni cantonali e' solo del corpus (P7).",
       "baseline": {
         "site": null,
-        "corpus": "bf236684aef08222",
+        "corpus": "4cb08648147fd9e7",
         "alignedAt": "2026-10-05"
       }
     },
