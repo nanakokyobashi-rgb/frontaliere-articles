@@ -71,8 +71,9 @@ jobs:
 
       # Soft per progetto: l'overlay e' cosmetico e `generator/data/borderCrossings.ts`
       # ha i default editoriali dietro. Esce comunque non-zero se ha FETCHATO
-      # qualcosa che non era un documento di medie — che e' il caso che conta,
-      # perche' quelle stringhe finiscono verbatim nel corpo di un articolo.
+      # qualcosa che non era un documento di medie. Oggi nessun generatore legge
+      # quelle stringhe (productionFetch `none` nel registro): il controllo tiene
+      # la forma pronta per il giorno in cui un articolo le stampera'.
       - name: border-wait-averages.json
         run: node generator/scripts/refresh-border-wait-averages.mjs --check
 
@@ -89,6 +90,11 @@ jobs:
       # fetchato e sbagliato, o fermo da oltre 7 giorni, esce non-zero.
       - name: fuel-prices-cantons.json
         run: node generator/scripts/refresh-fuel-cantons.mjs --check
+      # Soft sulla raggiungibilita' (nessun generatore lo legge ancora, P11),
+      # hard sulla forma e sulla freschezza: uno snapshot di oltre 48 ore vuol
+      # dire che il collector road-events del SITO si e' fermato.
+      - name: road-events.json
+        run: node generator/scripts/refresh-road-events.mjs --check
 
       # Morbidi per progetto (D11, P9f/P9g): un produttore irraggiungibile toglie
       # un blocco a un hub, non lo ferma. Escono comunque non-zero se hanno

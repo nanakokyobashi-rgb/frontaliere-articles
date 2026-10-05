@@ -33,13 +33,20 @@ const LEADING_WINDOW_CHARS = 320;
 
 const A = "['’]"; // apostrophe, ASCII or typographic
 
+// A single-quoted input can contain an apostrophe between letters (for
+// example, `Chef d'équipe`); only allow that internal form so the final quote
+// remains the delimiter. The same holds for the typographic single quotes
+// ‘…’, whose closing mark ’ doubles as the typographic apostrophe
+// (`‘Chef d’équipe’`). Double and angle quotes close on their own mark.
+const TRANSLATION_QUOTED_INPUT = String.raw`(?:"[^"\n]{1,160}"|“[^”\n]{1,160}”|«[^»\n]{1,160}»|'(?:[^'\n]|(?<=[\p{L}\p{N}])'(?=[\p{L}\p{N}])){1,160}'|‘(?:[^’\n]|(?<=[\p{L}\p{N}])’(?=[\p{L}\p{N}])){1,160}’)`;
+
 // What a clarification request is ABOUT: the input the model was handed (the
 // title, the text, the message, the translation, the job data…), after at most
 // three words («the actual job title», «the existing translations», «the
 // context of»). «I don't see any reason», «I cannot find a better job in
 // Ticino» or «Ho bisogno di più tempo» are first-person prose of a real ad or
 // letter, not a model asking for its input.
-const EN_INPUT = String.raw`(?:(?:the|a|an|any|your|this|that|which)\s+)?(?:[\w'’-]+\s+){0,3}?(?:job\s+)?(?:titles?|text|message|input|content|translations?|source|document|files?|data|repository|context|description|posting)\b`;
+const EN_INPUT = String.raw`(?:(?:the|a|an|any|your|this|that|which)\s+)?(?:[\w'’-]+\s+){0,3}?(?:job\s+)?(?:titles?|text|message|input|content|translations?|source|document|files?|data|repository|context|description|posting|phrase)\b`;
 const IT_INPUT = String.raw`(?:(?:il|lo|la|i|gli|le|un|uno|una|alcun|nessun)\s+)?(?:[\wàèéìòù'’-]+\s+){0,3}?(?:titol[oi]|test[oi]|messaggio|traduzion[ei]|dati|file|contesto|annuncio)\b`;
 const DE_INPUT = String.raw`(?:[\wäöüß-]+\s+){0,3}?(?:titel|stellentitel|text|nachricht|übersetzung|kontext|daten|datei)\b`;
 const FR_INPUT = String.raw`(?:(?:le|la|les|l['’]|un|une|du|de|des|d['’])\s*)?(?:[\wàâçéèêëîïôûù'’-]+\s+){0,3}?(?:titre|texte|message|traduction|contexte|données|fichier|annonce)s?\b`;
@@ -64,13 +71,14 @@ const LEADING_PATTERNS = [
   ['clarification', new RegExp(`^(?:j${A}ai besoin de (?:voir |savoir |vérifier |plus de )|je ne (?:vois|trouve) (?:pas|aucun|aucune) )${FR_INPUT}`, 'i')],
   // ── agent narration: the model announces work instead of doing it ─────────
   ['agent-narration', new RegExp(`^(?:i${A}ll|i will|i${A}m going to|i am going to) (?:translate|check|help|look|search|read|start|first|need|find|review|provide|examine)\\b`, 'i')],
-  ['agent-narration', /^(?:let me (?:check|see|look|find|search|first|read|translate|help|examine|review|verify)|looking at (?:the|this|your) (?:git|repo|files?|job|title|data|translation|text|message|request)|the user (?:wants|asks|is asking|would like) (?:me|us) to)\b/i],
+  ['agent-narration', new RegExp(String.raw`^(?:let me (?:check|see|look|find|search|first|read|translate|help|examine|review|verify)|looking at (?:the|this|your) (?:git|repo|files?|job|title|data|translation|text|message|request)|the user (?:wants|asks|is asking|would like) (?:me|us) to|the user (?:has (?:provided|given)|provided|gave) (?:${EN_INPUT}|${TRANSLATION_QUOTED_INPUT})[^.?!\n]{0,120}\b(?:for (?:translation|translating)|to translate))\b`, 'iu')],
   // «We need to translate "GL & VAT Accountant" to English.»: only with the
   // quoted input AND the target language. «We need to produce…», «We need to
   // translate our software into German» open real ads and articles.
-  // Each quote style closes on its own mark, so an apostrophe inside double or
-  // typographic quotes («"Chef d'équipe"») stays part of the quoted input.
-  ['agent-narration', /^we need to (?:translate|output|return) (?:(?:the )?(?:job )?title\s+)?(?:"[^"\n]{1,160}"|“[^”\n]{1,160}”|«[^»\n]{1,160}»|'[^'\n]{1,160}') (?:from (?:the )?[a-z]+(?:[ -][a-z]+)*\s+)?(?:in)?to (?:english|italian|german|french|en|it|de|fr)\b/i],
+  ['agent-narration', new RegExp(
+    String.raw`^we need to (?:translate|output|return) (?:(?:(?:the )?(?:job )?title|the phrase)\s+)?${TRANSLATION_QUOTED_INPUT} (?:from (?:the )?[a-z]+(?:[ -][a-z]+)*\s+)?(?:in(?:to)?|to) (?:english|italian|german|french|en|it|de|fr)\b`,
+    'iu',
+  )],
   ['agent-narration', /^(?:the |here(?:'s| is) the )?translat(?:ed|ion)(?: (?:job )?title| text)? (?:is|would be)\b/i],
   ['agent-narration', /^(?:procedo a tradurre|traduco (?:il|questo)|ich übersetze (?:den|diesen)|je vais traduire)\b/i],
   // ── the answer opens with a template label («Traduzione:», «Traduzione:
