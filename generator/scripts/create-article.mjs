@@ -8258,6 +8258,9 @@ async function scanNewsSources() {
       console.error(`  🧰 ${allHeadlines.length} headline dalle fonti primarie (< ${CANTON_RESERVE_MIN_HEADLINES}): scansiono ${reserves.length} fonti di riserva`);
       RUN_REPORT.sources.configured += reserves.length;
       RUN_REPORT.sources.scanned += reserves.length;
+      for (const src of reserves) {
+        try { RUN_REPORT.sources.domains.push(new URL(src.url).hostname.replace(/^www\d?\./, '')); } catch { RUN_REPORT.sources.domains.push(src.url); }
+      }
       for (const batch of await Promise.all(reserves.map(scanOneSource))) {
         allHeadlines.push(...batch);
       }
@@ -15259,6 +15262,16 @@ function gitAddAll(data) {
   // when it exists (created by the topic-candidate selection branch in main).
   if (existsSync(resolve(SECTION_CONSUMED_PATH))) {
     files.push(SECTION_CONSUMED_PATH);
+  }
+  // Sezione cantonale (D18): il resto del suo stato partizionato (quota-state,
+  // contatori, picks del giorno, rifiuti evergreen/topic-gate) vive sotto
+  // data/sections/<id>/ e va nello STESSO commit dell'articolo, o il run dopo
+  // ripartirebbe da contatori e memorie vecchie. Le storiche non hanno
+  // statePaths: i loro file condivisi li prende il workflow, come prima.
+  if (SECTION_STATE_PATHS) {
+    for (const [key, rel] of Object.entries(SECTION_STATE_PATHS)) {
+      if (key !== 'consumed' && existsSync(resolve(rel))) files.push(rel);
+    }
   }
   // Include generated blog hero image (web path → filesystem path under public/).
   // WebP-only: optimizeImageToWebp emits a single file; no JPG sidecar.

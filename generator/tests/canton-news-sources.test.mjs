@@ -207,6 +207,9 @@ test('charset: il prologo XML ISO-8859-1 vince sull\'assenza di charset nell\'he
   const decoded = decodeResponseBody(bytes, { contentType: 'text/xml' });
   assert.equal(decoded.charset, 'iso-8859-1');
   assert.match(decoded.text, /L'économie genevoise/);
+  const odd = decodeResponseBody(Buffer.from('abc'), { contentType: 'text/xml; charset=x-unknown-cs' });
+  assert.equal(odd.charset, 'utf-8');
+  assert.equal(odd.unsupported, 'x-unknown-cs', 'un charset sconosciuto si dichiara, non si nasconde');
   assert.doesNotMatch(decodeResponseBody(bytes, { contentType: 'text/xml', forcedCharset: 'utf-8' }).text, /L'économie genevoise/, 'premessa: in UTF-8 le lettere accentate si rompono');
 
   const source = sourceOf('GE', 'https://statistique.ge.ch/rss');
@@ -274,6 +277,10 @@ test('crawl-delay: due richieste allo stesso host distanziate, host diversi no',
   await throttle.run('c.ch', 30, async () => {});
   await throttle.run('c.ch', 1, async () => {});
   assert.deepEqual(waits, [30000]);
+  // Oltre la soglia vale una richiesta per run all'HOST: la seconda fonte
+  // dello stesso host non la ottiene, nemmeno dichiarando un ritardo minore.
+  await throttle.run('d.ch', 500, async () => {});
+  await assert.rejects(throttle.run('d.ch', 1, async () => {}), /una sola richiesta per run/);
   // Un crawl-delay oltre la soglia non si aspetta: diventa una richiesta per run.
   assert.equal(sourceRequestBudget({ quirks: { crawlDelaySeconds: MAX_INLINE_CRAWL_DELAY_SECONDS + 1 } }), 1);
   assert.equal(sourceRequestBudget({ quirks: { crawlDelaySeconds: 30 } }), Infinity);

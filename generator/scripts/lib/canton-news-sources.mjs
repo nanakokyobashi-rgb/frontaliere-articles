@@ -108,13 +108,17 @@ export function decodeResponseBody(body, { contentType = null, forcedCharset = n
   const declared = forcedCharset || charsetFromContentType(contentType) || charsetFromDocumentHead(head) || 'utf-8';
   let charset = declared.toLowerCase();
   let decoder;
+  let unsupported = null;
   try {
     decoder = new TextDecoder(charset);
   } catch {
+    // Dichiarato ma sconosciuto a TextDecoder: si decodifica UTF-8 e lo si
+    // DICE (nota della fonte), perche' il testo potrebbe essere alterato.
+    unsupported = charset;
     charset = 'utf-8';
     decoder = new TextDecoder('utf-8');
   }
-  return { text: decoder.decode(bytes), charset };
+  return { text: decoder.decode(bytes), charset, ...(unsupported ? { unsupported } : {}) };
 }
 
 // ── Entita' e testo ──────────────────────────────────────────────────────────
@@ -445,12 +449,18 @@ export function createHostThrottle({ sleep = (ms) => new Promise((r) => setTimeo
      * @param {() => Promise<any>} task
      */
     run(host, delaySeconds, task) {
-      const entry = hosts.get(host) || { tail: Promise.resolve(), last: 0, used: 0, delayMs: 0 };
+      const entry = hosts.get(host) || { tail: Promise.resolve(), last: 0, used: 0, delayMs: 0, singleShot: false };
       hosts.set(host, entry);
+      // Un crawl-delay che non si aspetta dentro un run vale UNA richiesta per
+      // run all'HOST, non a ciascuna delle sue fonti.
+      if (Number(delaySeconds) > MAX_INLINE_CRAWL_DELAY_SECONDS) entry.singleShot = true;
       // Il crawl-delay e' dell'HOST, non della fonte: due fonti dello stesso
       // host con ritardi dichiarati diversi rispettano il piu' severo.
       entry.delayMs = Math.max(entry.delayMs, Math.min(Number(delaySeconds) || 0, MAX_INLINE_CRAWL_DELAY_SECONDS) * 1000);
       const result = entry.tail.then(async () => {
+        if (entry.singleShot && entry.used > 0) {
+          throw new Error(`crawl-delay di ${host} oltre ${MAX_INLINE_CRAWL_DELAY_SECONDS} s: una sola richiesta per run all'host, gia' usata`);
+        }
         if (entry.used > 0 && entry.delayMs > 0) {
           const wait = entry.last + entry.delayMs - now();
           if (wait > 0) await sleep(wait);
@@ -517,7 +527,8 @@ export async function scanCantonSource(source, ctx) {
         contentType: res.headers?.get?.('content-type') ?? null,
         forcedCharset: quirks.charset || null,
       });
-      if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
+      if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
+      else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
       return decoded.text;
     });
   };

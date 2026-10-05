@@ -188,6 +188,9 @@ test('create-article passa i path della sezione ai loader dello stato globale', 
     assert.match(CREATE_ARTICLE, re, `${wrapper} non legge lo stato della sezione`);
   }
   assert.doesNotMatch(CREATE_ARTICLE, /_topic(?:Load|Persist)ConsumedTracker\([^)]*CONSUMED_TRACKER_PATH\)/, 'il consumed tracker deve passare da SECTION_CONSUMED_PATH');
+  // E lo stato partizionato entra nello stesso commit dell'articolo.
+  const add = CREATE_ARTICLE.slice(CREATE_ARTICLE.indexOf('function gitAddAll(data) {'));
+  assert.match(add.slice(0, 6000), /if \(SECTION_STATE_PATHS\) \{\n\s+for \(const \[key, rel\] of Object\.entries\(SECTION_STATE_PATHS\)\)/);
 });
 
 // ── File vuoti al primo articolo ────────────────────────────────────────────
