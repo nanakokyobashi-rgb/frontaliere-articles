@@ -16,9 +16,10 @@
  *      stesso esito. E' la prova che il core puo' sostituire la sorgente, non
  *      una promessa.
  *   3. Un chiamante cantonale non deve svegliare gli altri 23, non deve
- *      ripartire su un run che non ha prodotto niente e non deve dispatchare
- *      una catena. Sono proprieta' dei trigger, cioe' righe che GitHub
- *      interpreta prima che esista uno step.
+ *      auto-attivarsi quando vengono aggiornati insieme i caller generati,
+ *      non deve ripartire su un run che non ha prodotto niente e non deve
+ *      dispatchare una catena. Sono proprieta' dei trigger, cioe' righe che
+ *      GitHub interpreta prima che esista uno step.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -540,12 +541,16 @@ test('cron: minuto e cadenza vengono dal profilo, e gli slot non si ammassano', 
   assert.throws(() => cronExpression({ cronMinute: 5, cadenceHours: 6 }, 6), /sfasamento/);
 });
 
-test('push.paths: solo il proprio file e i path del corpus della propria sezione', () => {
+test('push.paths: solo i path del corpus della propria sezione, senza self-test per-cantone', () => {
   for (const { canton, file, pushPaths, pushBranches } of CALLERS) {
     const { section } = canton;
     assert.equal(pushBranches, 'main', `${file}: un branch di backup non deve generare`);
-    assert.equal(pushPaths[0], `${WORKFLOWS_DIR}/${file}`, `${file}: il self-test e' il proprio file`);
-    const corpus = pushPaths.slice(1);
+    assert.equal(
+      pushPaths.some((p) => p.startsWith(`${WORKFLOWS_DIR}/`)),
+      false,
+      `${file}: un aggiornamento coordinato dei caller non deve creare un burst di self-test`,
+    );
+    const corpus = pushPaths;
     assert.ok(corpus.length >= 3, file);
     for (const p of corpus) {
       assert.ok(p.startsWith('content/'), `${file}: ${p} non e' corpus — un run che non produce scrive solo sotto data/, e non deve ripartire`);
