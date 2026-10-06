@@ -25,7 +25,10 @@ import {
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
-const TEMPLATE_HEADING_SENTINEL_RE = /0H0(\d+)Q0/g;
+// Template-heading sentinels are block tokens. Two non-global patterns on
+// purpose: a shared `g` regex would carry `lastIndex` across lines.
+const TEMPLATE_HEADING_SENTINEL_LINE_RE = /^0H0(\d+)Q0$/;
+const TEMPLATE_HEADING_SENTINEL_ANY_RE = /0H0\d+Q0/;
 
 const templateLocale = (locale) => {
   const value = String(locale ?? '').trim().toLowerCase();
@@ -75,12 +78,38 @@ function maskTemplateHeadings(text, sourceLang, targetLang) {
   return {
     masked,
     expected: originals.length,
-    restore: (translated) => restoreIndexedSentinels(
-      translated,
-      TEMPLATE_HEADING_SENTINEL_RE,
-      originals,
-    ),
+    restore: (translated) => restoreTemplateHeadingSentinels(translated, originals),
   };
+}
+
+/**
+ * Restore template headings by position, not just by index. A nav link or a
+ * municipality name may legitimately move inside a sentence, so
+ * `restoreIndexedSentinels` only requires each index once. A heading is a
+ * block: it opens the section that follows it. It must therefore come back
+ * alone on its line and in source order; `0H00Q0 - testo` would emit an
+ * inline heading and a swapped pair would attach each block to the wrong
+ * heading, both with a body that no longer has its canonical shape. Either
+ * case fails closed, like a dropped sentinel.
+ *
+ * @param {string} value
+ * @param {string[]} originals canonical target headings, in source order
+ * @returns {{ text: string, ok: boolean }}
+ */
+function restoreTemplateHeadingSentinels(value, originals) {
+  let next = 0;
+  let valid = true;
+  const text = String(value ?? '').split('\n').map((line) => {
+    if (!TEMPLATE_HEADING_SENTINEL_ANY_RE.test(line)) return line;
+    const whole = TEMPLATE_HEADING_SENTINEL_LINE_RE.exec(line.trim());
+    if (!whole || Number(whole[1]) !== next || next >= originals.length) {
+      valid = false;
+      return line;
+    }
+    next += 1;
+    return originals[Number(whole[1])];
+  }).join('\n');
+  return { text, ok: valid && next === originals.length };
 }
 
 // Free-MT translates titles, excerpts, body sections and FAQ fields through

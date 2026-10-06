@@ -504,6 +504,39 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
       'ogni rifiuto free-MT deve pagare il cap del campo',
     );
   });
+
+  test('ogni motivo emesso da translateFieldFreeMt addebita il campo al cap', () => {
+    // L'elenco dei motivi non si scrive a mano due volte: lo si legge dal
+    // motore. Un motivo nuovo emesso li' e dimenticato nell'allow-list del
+    // registro lasciava `wasFreeMtUnusable` a false: il campo rifiutato
+    // saltava il cap dei retry LLM (corpus 2313, `mangled-template-heading`).
+    const motore = readFileSync(
+      path.join(__dirname, '..', 'scripts', 'lib', 'article-free-mt.mjs'),
+      'utf-8',
+    );
+    const emissioni = [...motore.matchAll(
+      /reason:\s*(?:'([a-z][a-z-]*)'|[^,\n]*?\?\s*'([a-z][a-z-]*)'\s*:\s*'([a-z][a-z-]*)')/g,
+    )];
+    const chiamate = motore.match(/onUnusableOutput\(/g) ?? [];
+    assert.ok(chiamate.length >= 8, 'il motore deve segnalare i suoi rifiuti');
+    assert.equal(
+      emissioni.length,
+      chiamate.length,
+      'ogni chiamata a onUnusableOutput deve dichiarare il motivo con un letterale leggibile da questo test',
+    );
+
+    const motivi = new Set(emissioni.flatMap((m) => m.slice(1).filter(Boolean)));
+    assert.ok(motivi.has('mangled-template-heading'));
+    for (const reason of motivi) {
+      const report = createFreeMtRecoveryReport();
+      recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason });
+      assert.equal(
+        wasFreeMtUnusable(report, 'de', 'body1'),
+        true,
+        `il motivo «${reason}» deve addebitare il campo al cap dei retry`,
+      );
+    }
+  });
 });
 
 // ── #868 item 2/3/5 + #831 item 3 — la catena eventi ───────────────────────

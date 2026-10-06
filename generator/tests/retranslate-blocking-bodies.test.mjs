@@ -425,6 +425,67 @@ test('sentinella del titolo alterata o persa fallisce chiusa il campo', async ()
   }
 });
 
+test('sentinella del titolo dentro una riga o fuori ordine fallisce chiusa il campo', async () => {
+  const source = ['## In breve', 'Sintesi italiana.', '## Fatti chiave', '- Un fatto italiano.'].join('\n');
+  const casi = {
+    // Il motore ha fuso il titolo con la riga seguente: ripristinato alla
+    // lettera diventerebbe un titolo in mezzo a una riga di prosa.
+    'sentinella seguita da testo sulla stessa riga': (text) => text.replace('0H00Q0\n', '0H00Q0 - '),
+    'sentinella preceduta da testo sulla stessa riga': (text) => text.replace('\n0H01Q0', ' 0H01Q0'),
+    // Ogni indice compare una volta sola, ma i due blocchi finirebbero sotto
+    // il titolo sbagliato.
+    'sentinelle scambiate di posto': (text) => text
+      .replace('0H00Q0', '0HXQ0').replace('0H01Q0', '0H00Q0').replace('0HXQ0', '0H01Q0'),
+    'sentinella ripetuta': (text) => text.replace('0H01Q0', '0H00Q0'),
+  };
+
+  for (const [nome, altera] of Object.entries(casi)) {
+    const signals = [];
+    let received;
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+      fieldName: 'body1',
+      translate: async ({ text }) => {
+        received = text;
+        return altera(text);
+      },
+      onUnusableOutput: (event) => signals.push(event),
+    });
+
+    assert.notEqual(altera(received), received, `${nome}: il caso deve alterare davvero l'uscita`);
+    assert.equal(out, '', nome);
+    assert.deepEqual(signals, [{
+      targetLang: 'de',
+      fieldType: 'description',
+      fieldName: 'body1',
+      reason: 'mangled-template-heading',
+    }], nome);
+  }
+});
+
+test('sentinella del titolo sola sulla riga torna canonica anche con spazi e ritorni a capo CRLF', async () => {
+  const source = ['## In breve', 'Sintesi italiana.', '## Fatti chiave', '- Un fatto italiano.'].join('\n');
+  const out = await translateFieldFreeMt({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'fr',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate: async ({ text }) => text
+      .split('\n')
+      .map((line) => (line.startsWith('0') ? `  ${line} ` : `MT ${line}`))
+      .join('\r\n'),
+  });
+
+  const lines = out.split('\n').map((line) => line.replace(/\r$/, ''));
+  assert.equal(lines[0], getTldrHeading('fr'));
+  assert.equal(lines[2], getKeyFactsHeading('fr'));
+  assert.equal(/0H0\d+Q0/.test(out), false);
+});
+
 test('replaceBodyField col valore attuale e un no-op byte per byte', () => {
   const src = fileFor('x', { body1: 'uno **grassetto**', body2: 'due (con parentesi)', body3: 'tre' });
   const current = readBodyField(src, 'x', 'body2');
