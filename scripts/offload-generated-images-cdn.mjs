@@ -391,6 +391,7 @@ function findActiveHeadBounds(html) {
     cursor = tag.end + 1;
   }
 
+  if (contentStart < 0) return null;
   cursor = contentStart;
   while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
