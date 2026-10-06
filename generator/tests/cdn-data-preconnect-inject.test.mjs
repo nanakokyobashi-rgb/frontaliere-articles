@@ -101,6 +101,14 @@ test('does not accept a CDN marker that lives only in a template', () => {
   assert.ok(output.includes(CDN), 'il marker attivo deve essere iniettato nella head');
 });
 
+test('does not accept a bare CDN property mention as an initializer', () => {
+  const html = '<!doctype html><html><head><script>const key = "__CDN_DATA_BASE__";</script>'
+    + '<meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  assert.equal((output.match(/window\.__CDN_DATA_BASE__/g) || []).length, 1);
+  assert.ok(output.includes(CDN), 'la configurazione deve essere assegnata allo script attivo');
+});
+
 test('keeps CDN payloads when one HTML page has no active head', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-cdn-charset-guard-'));
   try {

@@ -63,9 +63,14 @@ const HTML_VOID_ELEMENTS = new Set([
   'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
   'param', 'source', 'track', 'wbr',
 ]);
-const HTML_RAW_TEXT_ELEMENTS = new Set([
-  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
-  'noembed', 'noframes',
+// `<title>` and `<textarea>` are active document content at the top level;
+// they are raw-text only while nested in a template. Keeping the sets apart
+// prevents the metadata bridge from masking the page's real title.
+const HTML_INACTIVE_RAW_TEXT_ELEMENTS = new Set([
+  'script', 'style', 'noscript', 'iframe', 'xmp', 'noembed', 'noframes',
+]);
+const HTML_TEMPLATE_RAW_TEXT_ELEMENTS = new Set([
+  ...HTML_INACTIVE_RAW_TEXT_ELEMENTS, 'textarea', 'title',
 ]);
 
 function isSelfClosingStartTag(html: string, nameEnd: number, end: number): boolean {
@@ -160,7 +165,7 @@ function skipTemplateElement(html: string, afterOpening: number): number {
       } else if (!tag.selfClosing) {
         depth += 1;
       }
-    } else if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    } else if (!tag.closing && !tag.selfClosing && HTML_TEMPLATE_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = skipRawTextElement(html, tag.end + 1, tag.name);
       if (afterRawText < 0) return html.length;
       cursor = afterRawText;
@@ -202,7 +207,7 @@ function maskInactiveMarkup(html = '') {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    if (!tag.closing && !tag.selfClosing && HTML_INACTIVE_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = skipRawTextElement(source, tag.end + 1, tag.name);
       const afterInactive = afterRawText < 0 ? source.length : afterRawText;
       blank(start, afterInactive);

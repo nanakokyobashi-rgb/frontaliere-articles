@@ -455,6 +455,13 @@ function isExecutableScriptTag(html, tag, start) {
     || value.endsWith('/javascript') || value.endsWith('/ecmascript');
 }
 
+function hasCdnBaseAssignment(script) {
+  // The initializer emitted by this script is a concrete URL assignment. A
+  // generic application script that merely mentions the property must not
+  // suppress injection and allow the local runtime payload to be deleted.
+  return /\bwindow\.__CDN_DATA_BASE__\s*=\s*(["']https?:\/\/[^"']+["'])/i.test(script);
+}
+
 /**
  * Idempotency is valid only for an executable script inside the real head.
  * A substring in a comment, template, JSON-LD block, or body must not make us
@@ -491,7 +498,7 @@ function hasExecutableCdnBaseMarker(html, head) {
         const close = findRawTextClose(html, tagEnd, rawName);
         if (!close || close.end > head.end) return false;
         if (rawName === 'script' && isExecutableScriptTag(html, tag, start)
-          && html.slice(tagEnd, close.start).includes('__CDN_DATA_BASE__')) {
+          && hasCdnBaseAssignment(html.slice(tagEnd, close.start))) {
           return true;
         }
         cursor = close.end;
