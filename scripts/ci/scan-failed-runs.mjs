@@ -328,9 +328,11 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
 //     issue a se';
 //   - `RUN_LEVEL_SIGNATURE`, quando la run e' fallita senza avviare NESSUN job.
 //     E' il caso misurato (18 issue aperte su 18 il 2026-10-06, tutte
-//     «nessun job fallito riportato dall'API»): una run che muore prima di
-//     qualunque job non ha ancora letto niente del cantone, quindi la causa e'
-//     nella definizione generata o nel core condiviso, cioe' comune.
+//     «nessun job fallito riportato dall'API»), ma l'API non dimostra da sola
+//     che la causa sia comune: un input o una definizione invalida puo' essere
+//     specifica del caller. Per questo la firma run-level include anche il
+//     caller; senza un'evidenza piu' forte, questi fallimenti non si
+//     sopprimono fra cantoni diversi.
 // Una lettura dei job FALLITA non e' una firma: quel membro non copre e non e'
 // coperto. Niente titolo di famiglia: la issue resta quella del membro
 // rappresentante, cosi' `close-recovered-failure-issues.mjs` la chiude come
@@ -365,14 +367,21 @@ export const RUN_LEVEL_SIGNATURE = '(run-level: nessun job avviato)';
 // una sola sorgente per chi la scrive (`main`) e per chi la rilegge qui sotto.
 export const NO_FAILED_JOBS_LINE = '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';
 
+/** Firma run-level resa specifica del caller quando si usa per una famiglia. */
+function runLevelSignature(caller = '') {
+  const value = String(caller || '').trim();
+  return value ? `${RUN_LEVEL_SIGNATURE} | caller: ${value}` : RUN_LEVEL_SIGNATURE;
+}
+
 /**
  * Firma di un guasto. Con `runLevel` (lettura riuscita, zero job falliti) e'
- * `RUN_LEVEL_SIGNATURE`; altrimenti gli step falliti, ordinati e senza
- * duplicati. Vuota quando non c'e' niente di leggibile: una firma vuota non
- * prova una causa comune, quindi non copre nessuno. Pura.
+ * `RUN_LEVEL_SIGNATURE`, resa specifica del `caller` se fornito; altrimenti
+ * gli step falliti, ordinati e senza duplicati. Vuota quando non c'e' niente
+ * di leggibile: una firma vuota non prova una causa comune, quindi non copre
+ * nessuno. Pura.
  */
-export function failureSignature(jobs, { runLevel = false } = {}) {
-  if (runLevel) return RUN_LEVEL_SIGNATURE;
+export function failureSignature(jobs, { runLevel = false, caller = '' } = {}) {
+  if (runLevel) return runLevelSignature(caller);
   const steps = (Array.isArray(jobs) ? jobs : [])
     .map((job) => String(job?.step || '').trim())
     .filter(Boolean);
@@ -381,12 +390,17 @@ export function failureSignature(jobs, { runLevel = false } = {}) {
 
 const ISSUE_BODY_FAILED_STEP_RE = /step fallito: `([^`]+)`/g;
 
-/** La stessa firma, riletta dal corpo generico di una issue gia' aperta. Pura. */
-export function failureSignatureFromIssueBody(body) {
+/**
+ * La stessa firma, riletta dal corpo generico di una issue gia' aperta. Per un
+ * fallimento run-level `caller` e' il workflow dal titolo della issue: il
+ * corpo prova solo l'assenza di job falliti, non che la causa sia condivisa.
+ * Pura.
+ */
+export function failureSignatureFromIssueBody(body, { caller = '' } = {}) {
   const text = String(body || '');
   const steps = [...text.matchAll(ISSUE_BODY_FAILED_STEP_RE)].map((m) => m[1].trim()).filter(Boolean);
   if (steps.length > 0) return [...new Set(steps)].sort().join(' | ');
-  return text.includes(NO_FAILED_JOBS_LINE) ? RUN_LEVEL_SIGNATURE : '';
+  return text.includes(NO_FAILED_JOBS_LINE) ? runLevelSignature(caller) : '';
 }
 
 /**
@@ -404,7 +418,10 @@ export function planFamilyCollapse(entries) {
   const representatives = new Map();
   for (const entry of Array.isArray(entries) ? entries : []) {
     const family = workflowFamilyOf(entry?.name);
-    const signature = failureSignature(entry?.jobs, { runLevel: entry?.runLevel === true });
+    const signature = failureSignature(entry?.jobs, {
+      runLevel: entry?.runLevel === true,
+      caller: entry?.name,
+    });
     if (!family || !signature) continue;
     const key = `${family.id}\u0000${signature}`;
     const representative = representatives.get(key);
@@ -438,16 +455,20 @@ export const FAMILY_COVER_MAX_AGE_HOURS = 24;
  */
 export function openSiblingIssueCovering(entry, openIssues, { now = Date.now() } = {}) {
   const family = workflowFamilyOf(entry?.name);
-  const signature = failureSignature(entry?.jobs, { runLevel: entry?.runLevel === true });
+  const signature = failureSignature(entry?.jobs, {
+    runLevel: entry?.runLevel === true,
+    caller: entry?.name,
+  });
   if (!family || !signature) return null;
   const ownTitle = `Workflow Failure: ${entry.name}`;
   return (Array.isArray(openIssues) ? openIssues : []).find((issue) => {
     const title = String(issue?.title || '');
     if (!title.startsWith('Workflow Failure: ') || title === ownTitle) return false;
-    if (!family.nameRe.test(title.slice('Workflow Failure: '.length))) return false;
+    const issueWorkflowName = title.slice('Workflow Failure: '.length);
+    if (!family.nameRe.test(issueWorkflowName)) return false;
     const openedAt = Date.parse(issue?.createdAt ?? '');
     if (!Number.isFinite(openedAt) || now - openedAt > FAMILY_COVER_MAX_AGE_HOURS * 3_600_000) return false;
-    return failureSignatureFromIssueBody(issue?.body) === signature;
+    return failureSignatureFromIssueBody(issue?.body, { caller: issueWorkflowName }) === signature;
   }) || null;
 }
 

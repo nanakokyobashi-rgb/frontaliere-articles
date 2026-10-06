@@ -4,10 +4,11 @@
  * Run with `node --test generator/tests/scan-failed-runs-family.test.mjs`.
  *
  * Il caso misurato: il 2026-10-05 i caller cantonali generati sono falliti
- * tutti insieme per una sola causa, e lo scanner ha aperto una issue per
- * cantone — 18 aperte il 2026-10-06, tutte senza nessun job fallito. Il triage
- * le ha instradate una per una, e i fixer in parallelo hanno prodotto sei PR
- * sugli stessi 26 file.
+ * tutti insieme e lo scanner ha aperto una issue per cantone — 18 aperte il
+ * 2026-10-06, tutte senza nessun job fallito. La firma run-level non dimostra
+ * però una causa comune: un input cantonale può fallire prima di avviare un
+ * job. Il test tiene quindi distinti i caller run-level, mentre conserva il
+ * collasso per gli step falliti condivisi.
  *
  * Lo scanner SOPPRIME una segnalazione, quindi ogni caso positivo ha accanto
  * i negativi che lo tengono stretto: firma diversa, firma illeggibile, issue
@@ -93,6 +94,11 @@ test('firma: step falliti ordinati e senza duplicati; vuota se non c\'è niente 
   assert.equal(failureSignature([{ name: 'generate / generate', step: null }]), '');
   assert.equal(failureSignature([]), '', 'una lista vuota senza `runLevel` non è una firma: può essere una lettura fallita');
   assert.equal(failureSignature([], { runLevel: true }), RUN_LEVEL_SIGNATURE);
+  assert.equal(
+    failureSignature([], { runLevel: true, caller: canton('vs') }),
+    `${RUN_LEVEL_SIGNATURE} | caller: ${canton('vs')}`,
+    'una firma run-level deve distinguere il caller: l’API non prova una causa comune',
+  );
 });
 
 test('firma riletta dal corpo di una issue: combacia con quella calcolata dai job', () => {
@@ -100,6 +106,10 @@ test('firma riletta dal corpo di una issue: combacia con quella calcolata dai jo
   const lines = jobs.map((j) => `- \`${j.name}\` — step fallito: \`${j.step}\`\n  ${j.url}`).join('\n');
   assert.equal(failureSignatureFromIssueBody(issueBody(canton('vs'), lines)), failureSignature(jobs));
   assert.equal(failureSignatureFromIssueBody(issueBody(canton('vs'), NO_FAILED_JOBS_LINE)), RUN_LEVEL_SIGNATURE);
+  assert.equal(
+    failureSignatureFromIssueBody(issueBody(canton('vs'), NO_FAILED_JOBS_LINE), { caller: canton('vs') }),
+    `${RUN_LEVEL_SIGNATURE} | caller: ${canton('vs')}`,
+  );
   // Un corpo che non è quello generico (report ricco, issue scritta a mano) non ha firma.
   assert.equal(failureSignatureFromIssueBody('**Un articolo generato per intero è stato buttato via.**'), '');
   assert.equal(failureSignatureFromIssueBody(''), '');
@@ -107,13 +117,11 @@ test('firma riletta dal corpo di una issue: combacia con quella calcolata dai jo
 
 // ── Stessa passata ──────────────────────────────────────────────────────────
 
-test('IL CASO 2026-10-05: N caller falliti a livello di run → un rappresentante', () => {
+test('N caller falliti a livello di run restano distinti senza causa condivisa verificabile', () => {
   const codes = ['vs', 'appenzello', 'ti', 'lu', 'ge', 'fr', 'sz', 'be', 'ow', 'so'];
   const plan = planFamilyCollapse(codes.map(runLevelEntry));
-  assert.equal(plan.covered.size, codes.length - 1, 'tutti i fratelli devono essere coperti dal primo');
-  for (const code of codes.slice(1)) assert.equal(plan.covered.get(canton(code)), canton('vs'));
-  assert.equal(plan.covered.has(canton('vs')), false, 'il rappresentante non è coperto da nessuno');
-  assert.deepEqual(plan.siblings.get(canton('vs')).map((s) => s.name), codes.slice(1).map(canton));
+  assert.equal(plan.covered.size, 0, 'un run-level senza job non dimostra una causa comune fra caller');
+  assert.equal(plan.siblings.size, 0);
 });
 
 test('firme diverse nella stessa famiglia restano issue separate', () => {
@@ -147,8 +155,18 @@ test('un workflow fuori famiglia con la stessa firma non entra nel gruppo', () =
 
 // ── Passate successive: una issue già aperta ────────────────────────────────
 
-test('una issue aperta di un fratello con la stessa firma copre il membro', () => {
+test('una issue run-level aperta di un fratello non copre un caller diverso', () => {
   const sibling = openSiblingIssueCovering(runLevelEntry('fr'), [openIssue('vs')], { now: NOW });
+  assert.equal(sibling, null);
+});
+
+test('una issue aperta di un fratello copre ancora una firma di step condivisa', () => {
+  const jobLines = '- `generate / generate` — step fallito: `Generate article`\n  https://example.invalid/job';
+  const sibling = openSiblingIssueCovering(
+    { name: canton('fr'), jobs: [job('Generate article')] },
+    [openIssue('vs', { jobLines })],
+    { now: NOW },
+  );
   assert.equal(sibling?.number, 2236);
 });
 
