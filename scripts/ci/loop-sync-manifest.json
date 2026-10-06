@@ -134,6 +134,14 @@
       {
         "prefix": "data/evergreen-verifications.json",
         "reason": "Registro delle verifiche evergreen scritto dal generatore (#2096), che oggi contiene solo `{}`: il censimento lo trova 'byte-identico' a `packages/articles/engine/shared/article-reviewed-by.json` del sito perche' due JSON vuoti hanno lo stesso sha del blob, non perche' siano lo stesso file. Il sito non ha nessun gemello di questo registro e non c'e' una fix che scende o risale. Se il registro diventa codice condiviso col sito, la riga va tolta e il file registrato."
+      },
+      {
+        "prefix": "services/seo/imageObjectLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/imageObjectLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
+      },
+      {
+        "prefix": "services/seo/organizationLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/organizationLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
       }
     ]
   },
