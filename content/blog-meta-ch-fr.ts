@@ -7820,6 +7820,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Feux d\'artifice, la droite lance le non à l\'initiative',
     'blog.article.fuochi-artificio-no.excerpt': 'La campagne démarre mardi contre l\'initiative sur les feux d\'artifice : le vote a lieu le 29 novembre. Le Centre, le PLR, l\'UDC et le monde économique soutiennent le non.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Feux d\'artifice au-dessus d\'une ville suisse pendant le débat sur l\'initiative',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidat de l’UDC au Conseil fédéral',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Le canton de Schwytz propose André Rüegsegger pour succéder à Guy Parmelin : c’est la première candidature officielle après l’annonce de la démission en fin d’année.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, image symbolique de la politique fédérale suisse.',
 };
 
 export default blogMetaChFr;

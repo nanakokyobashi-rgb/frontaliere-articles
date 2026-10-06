@@ -1,5 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/finanze-cantonali-disavanzo-di-497-milioni-migliore-di-83-milioni-440141": "disavanzo-cantonale-ticino-frontalieri",
   "https://ilgiornaledelticino.ch/clima-piu-disteso-e-trimestrali-in-arrivo-swiss-market-index-al-rilancio": "borse-zurigo-chiude-in-verde-new-york-si-concede-una-fuga",
   "https://www.ticinonews.ch/svizzera/frontalieri-in-ticino-cifre-in-lieve-aumento-440207": "frontalierieticinoaumento",
   "https://www.rsi.ch/s/3936801": "aumento-dei-frontalieri-attivi-in-svizzera",
@@ -2036,6 +2035,11 @@
   "https://www.ticinonews.ch/ticino/stazione-ffs-di-giubiasco-concluso-il-rinnovo-dello-stabile-viaggiatori-444038": {
     "articleId": "stazione-ffs-giubiasco-rinnovo",
     "ts": "2026-10-06T10:59:23.191Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955019/chiasso-kimono-oriente-cultura-arriva-trame": {
+    "articleId": "trame-oriente-chiasso",
+    "ts": "2026-10-06T11:41:53.650Z",
     "keyForm": 2
   }
 }

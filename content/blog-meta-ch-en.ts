@@ -7820,6 +7820,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Fireworks, the right launches the no campaign against the initiative',
     'blog.article.fuochi-artificio-no.excerpt': 'Campaign against the fireworks initiative kicks off on Tuesday: the vote is on November 29. Centro, PLR, UDC and the business community support the no vote.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Fireworks above a Swiss town during the debate on the initiative',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger UDC candidate for the Federal Council',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'The Canton of Schwyz puts forward André Rüegsegger to succeed Guy Parmelin: it is the first official candidacy following the announcement of his resignation at the end of the year.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, a symbolic image for Swiss federal politics.',
 };
 
 export default blogMetaChEn;
