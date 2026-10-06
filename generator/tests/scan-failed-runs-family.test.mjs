@@ -114,7 +114,11 @@ test('firma: step falliti ordinati e senza duplicati; vuota se non c\'è niente 
   assert.ok(signature.startsWith(RUN_LEVEL_SIGNATURE) && signature.includes(SHA) && signature.includes('push'), signature);
   assert.equal(signature, runLevelSignature({ event: 'PUSH', headSha: SHA.toUpperCase() }), 'evento e SHA si confrontano senza distinzione di maiuscole');
   assert.notEqual(signature, runLevelSignature({ event: 'push', headSha: OTHER_SHA }));
-  assert.notEqual(signature, runLevelSignature({ event: 'schedule', headSha: SHA }));
+  // Ogni caller ha il suo cron: due failure `schedule` sullo stesso SHA possono
+  // essere indipendenti, e `gh run list` non dice quale schedule le ha avviate.
+  // Fuori da `push` non esiste una firma di livello run.
+  assert.equal(runLevelSignature({ event: 'schedule', headSha: SHA }), '');
+  assert.equal(runLevelSignature({ event: 'workflow_dispatch', headSha: SHA }), '');
 });
 
 test('firma riletta dal corpo di una issue: combacia con quella calcolata dai job', () => {
@@ -144,6 +148,18 @@ test('run-level su commit o eventi diversi NON si collassa: può essere un difet
     runLevelEntry('lu', { headSha: undefined }),
   ]);
   assert.equal(plan.covered.size, 0, 'senza lo stesso commit e lo stesso evento non c\'è evidenza di una causa condivisa');
+});
+
+test('run-level `schedule`: stesso SHA, cron diversi → ogni cantone resta una issue', () => {
+  // Il caso della review: `generate-article-ag.yml` gira al minuto 21 e
+  // `generate-article-appenzello.yml` al 43. Stesso commit, inneschi diversi.
+  const scheduled = ['ag', 'appenzello', 'vs'].map((code) => runLevelEntry(code, { event: 'schedule' }));
+  assert.equal(planFamilyCollapse(scheduled).covered.size, 0);
+  assert.equal(
+    openSiblingIssueCovering(scheduled[1], [openIssue('ag', { event: 'schedule' })], { now: NOW }),
+    null,
+    'una issue `schedule` aperta non copre un altro cantone',
+  );
 });
 
 test('IL CASO 2026-10-05: N caller falliti a livello di run sullo stesso push → un rappresentante', () => {

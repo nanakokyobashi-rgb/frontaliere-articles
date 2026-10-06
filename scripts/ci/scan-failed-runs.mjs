@@ -332,10 +332,12 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
 //     da solo NON basta: anche un solo caller puo' morire prima dei job per un
 //     difetto suo (un input o una definizione cantonale invalida). La firma
 //     porta quindi l'evidenza verificabile della causa condivisa: lo STESSO
-//     commit e lo STESSO evento. Allo stesso commit i caller escono da un'unica
-//     esecuzione del generatore e chiamano lo stesso core, e se a morire prima
-//     dei job e' piu' di uno la differenza fra loro (il cantone) non puo'
-//     essere la causa. Commit diversi, o SHA illeggibile: nessuna copertura.
+//     `push` sullo STESSO commit. Un push e' un innesco unico: i caller che
+//     partono da li' escono da un'unica esecuzione del generatore e chiamano
+//     lo stesso core, e se a morire prima dei job e' piu' di uno la differenza
+//     fra loro (il cantone) non puo' essere la causa. Commit diversi, SHA
+//     illeggibile, o un evento diverso da `push` (ogni caller ha il suo cron:
+//     due `schedule` sullo stesso SHA sono inneschi distinti): nessuna copertura.
 // Una lettura dei job FALLITA non e' una firma: quel membro non copre e non e'
 // coperto. Niente titolo di famiglia: la issue resta quella del membro
 // rappresentante, cosi' `close-recovered-failure-issues.mjs` la chiude come
@@ -367,6 +369,8 @@ export function workflowFamilyOf(name) {
 /** Prefisso della firma di una run fallita senza avviare nessun job. */
 export const RUN_LEVEL_SIGNATURE = '(run-level: nessun job avviato)';
 const FULL_SHA_RE = /^[0-9a-f]{40}$/i;
+/** L'unico evento per cui una failure di livello run si collassa fra caller. */
+export const RUN_LEVEL_COLLAPSIBLE_EVENT = 'push';
 
 /**
  * Firma di livello run: «nessun job» + stesso evento + stesso commit. Vuota
@@ -376,7 +380,12 @@ const FULL_SHA_RE = /^[0-9a-f]{40}$/i;
 export function runLevelSignature({ event, headSha } = {}) {
   const sha = String(headSha || '').trim().toLowerCase();
   const kind = String(event || '').trim().toLowerCase();
-  if (!FULL_SHA_RE.test(sha) || !kind) return '';
+  // Solo `push`: e' l'unico evento in cui «stesso commit» identifica anche lo
+  // stesso innesco. Ogni caller ha il SUO cron (ag al minuto 21, appenzello al
+  // 43, …) e `gh run list` non dice quale schedule ha avviato la run: due
+  // failure `schedule` sullo stesso SHA possono essere indipendenti, e lo
+  // stesso vale per due `workflow_dispatch`. Li' ogni cantone resta una issue.
+  if (!FULL_SHA_RE.test(sha) || kind !== RUN_LEVEL_COLLAPSIBLE_EVENT) return '';
   return `${RUN_LEVEL_SIGNATURE} evento=${kind} commit=${sha}`;
 }
 // La riga che il corpo generico scrive quando l'API non riporta job falliti:
