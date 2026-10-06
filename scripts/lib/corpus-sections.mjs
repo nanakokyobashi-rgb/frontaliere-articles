@@ -43,6 +43,9 @@
  * Solo builtin Node (regola di `scripts/ci/**` e `scripts/lib/**`): il core e
  * `corpus-paths.mjs` sono moduli puri.
  */
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   ARTICLE_SECTION_CORE_ALL,
   ARTICLE_SECTION_CORE_LIST,
@@ -59,6 +62,64 @@ import { loadCantonSectionProfiles } from '../../generator/scripts/lib/canton-se
  * profilo editoriale che il bootstrap passa al core mirrorato.
  */
 function enabledCantonCodes(profiles = loadCantonSectionProfiles()) {
+  if (!profiles || !Array.isArray(profiles.cantons)) {
+    throw new Error('canton-sections.json: manca l\'array cantons');
+  }
+  const codes = [];
+  for (const profile of profiles.cantons) {
+    if (!profile || typeof profile !== 'object') {
+      throw new Error('canton-sections.json: voce cantone non valida');
+    }
+    if (typeof profile.code !== 'string' || typeof profile.section !== 'string') {
+      throw new Error('canton-sections.json: code e section sono obbligatori');
+    }
+    if (typeof profile.enabled !== 'boolean') {
+      throw new Error(`canton-sections.json: enabled non booleano per ${profile.section}`);
+    }
+    const core = ARTICLE_SECTION_CORE_ALL[profile.section];
+    if (!core || core.kind !== 'canton' || core.canton !== profile.code) {
+      throw new Error(`canton-sections.json: ${profile.section}/${profile.code} non corrisponde al core cantonale`);
+    }
+    if (profile.enabled) codes.push(profile.code);
+  }
+  return Object.freeze(codes);
+}
+
+/** Codici cantonali `enabled: true`: la sola sorgente dell'attivazione D22. */
+export const CORPUS_ACTIVE_CANTON_CODES = enabledCantonCodes();
+
+/** Vista attiva del core per gli host del corpus; non leggere il core attivo altrove. */
+export function activeCorpusCoreEntries() {
+  return activeArticleSections();
+}
+
+/** Mappa attiva condivisa da gate, generatori e superfici. */
+export function activeCorpusCoreMap() {
+  return Object.fromEntries(activeCorpusCoreEntries().map((entry) => [entry.section, entry]));
+}
+
+/**
+ * Configura l'engine una sola volta all'avvio del processo e aggiorna le viste
+ * derivate. Il core rifiuta una riconfigurazione diversa dopo la prima lettura.
+ */
+export function configureCorpusActiveSections() {
+  configureActiveCantonSections([...CORPUS_ACTIVE_CANTON_CODES]);
+  refreshActiveSectionViews(true);
+  return activeCorpusCoreEntries();
+}
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+function loadCorpusCantonProfiles() {
+  return JSON.parse(readFileSync(path.join(ROOT, 'generator/data/canton-sections.json'), 'utf8'));
+}
+
+/**
+ * L'attivazione delle sezioni e' un dato del corpus, non del registro servito.
+ * `sections/registry.json` decide solo draft/live/retired; qui si legge il
+ * profilo editoriale che il bootstrap passa al core mirrorato.
+ */
+function enabledCantonCodes(profiles = loadCorpusCantonProfiles()) {
   if (!profiles || !Array.isArray(profiles.cantons)) {
     throw new Error('canton-sections.json: manca l\'array cantons');
   }
