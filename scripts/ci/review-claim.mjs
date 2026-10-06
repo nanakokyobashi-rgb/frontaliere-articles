@@ -25,8 +25,6 @@ export const REVIEW_CLAIM_STATES = Object.freeze([
   'completed',
   'failed-terminal',
   'failed-transient',
-  'failed-terminal',
-  'failed-transient',
   'released',
 ]);
 
@@ -523,7 +521,7 @@ function finalizeClaim(base, repo) {
   const nowSec = Math.floor(Date.now() / 1000);
   const finalCause = cause || (state === 'completed'
     ? (reviewFallbackApproved ? 'completed' : 'verdict_posted')
-    : state);
+    : state === 'failed-terminal' ? 'non_retryable' : 'none');
   const finalEvent = {
     ...current,
     state,

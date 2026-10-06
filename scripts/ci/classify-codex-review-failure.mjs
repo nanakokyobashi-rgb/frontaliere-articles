@@ -59,7 +59,8 @@ function walk(value, visit) {
 }
 
 function eventType(event) {
-  return String(event?.type || event?.event || '').toLowerCase();
+  const candidate = String(event?.type || event?.event || '').toLowerCase();
+  return /^[a-z][a-z0-9_.:-]{0,80}$/u.test(candidate) ? candidate : '';
 }
 
 function eventCounts(events) {
@@ -239,22 +240,27 @@ function textSignals(raw, events) {
 }
 
 /**
- * @param {{outcome?: string, raw?: string, timedOut?: boolean, durationMs?: number|string}} input
+ * @param {{outcome?: string, raw?: string, timedOut?: boolean, durationMs?: number|string,
+ *          exitCode?: number|string, reviewPosted?: boolean, sideEffectDetected?: boolean}} input
  */
 export function classifyCodexReviewFailure({
   outcome = '',
   raw = '',
   timedOut = false,
   durationMs = null,
+  exitCode = null,
   reviewPosted = false,
   sideEffectDetected = null,
-} = {}) {
+  } = {}) {
   const normalizedOutcome = String(outcome || '').toLowerCase();
   const telemetry = summarizeCodexDiagnostics(raw);
   const events = parseJsonEvents(raw);
   const structured = structuredSignals(events);
   const text = textSignals(raw, events);
   const measuredDurationMs = Number(durationMs);
+  const exitCodeKnown = exitCode !== null && exitCode !== undefined && String(exitCode).trim() !== '';
+  const nonZeroExit = !exitCodeKnown
+    || (Number.isFinite(Number(exitCode)) && Number(exitCode) !== 0);
   const watchdogExpired = timedOut === true
     || (Number.isFinite(measuredDurationMs) && measuredDurationMs >= CODEX_REVIEW_WATCHDOG_TIMEOUT_MS);
 
@@ -290,6 +296,7 @@ export function classifyCodexReviewFailure({
     return { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: structured.numTurns, source: 'outcome' };
   }
   const startupFailure = normalizedOutcome === 'failure'
+    && nonZeroExit
     && Number.isFinite(measuredDurationMs)
     && measuredDurationMs >= 0
     && measuredDurationMs < CODEX_REVIEW_STARTUP_FAILURE_THRESHOLD_MS
@@ -315,6 +322,7 @@ function main() {
   const outcome = process.argv[3] || process.env.REVIEW_OUTCOME || '';
   const timedOut = String(process.env.CODEX_TIMED_OUT || '').toLowerCase() === 'true';
   const durationMs = process.env.CODEX_DURATION_MS || null;
+  const exitCode = process.env.CODEX_EXIT_CODE || null;
   const reviewPosted = String(process.env.CODEX_REVIEW_POSTED || '').toLowerCase() === 'true';
   const sideEffectDetected = process.env.CODEX_SIDE_EFFECT_DETECTED || null;
   let raw = '';
@@ -331,6 +339,7 @@ function main() {
     raw,
     timedOut,
     durationMs,
+    exitCode,
     reviewPosted,
     sideEffectDetected,
   });

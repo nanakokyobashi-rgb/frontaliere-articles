@@ -1624,6 +1624,7 @@ runs:
           if candidate_failure=$(
             CODEX_TIMED_OUT="$codex_timed_out" \
             CODEX_DURATION_MS="${CODEX_DURATION_MS:-}" \
+            CODEX_EXIT_CODE="${CODEX_EXIT_CODE:-}" \
             CODEX_REVIEW_POSTED="${CODEX_REVIEW_POSTED:-false}" \
             CODEX_SIDE_EFFECT_DETECTED="$side_effect_detected" \
             "$TRUSTED_NODE" "$RUNTIME_ROOT/ci/classify-codex-review-failure.mjs" \

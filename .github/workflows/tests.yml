@@ -1656,6 +1656,7 @@ jobs:
             if ! CLASSIFICATION_JSON=$(
               CODEX_TIMED_OUT="${CODEX_TIMED_OUT:-false}" \
               CODEX_DURATION_MS="${CODEX_DURATION_MS:-}" \
+              CODEX_EXIT_CODE="${CODEX_EXIT_CODE:-}" \
               CODEX_REVIEW_POSTED="${CODEX_REVIEW_POSTED:-false}" \
               CODEX_SIDE_EFFECT_DETECTED="${CODEX_SIDE_EFFECT_DETECTED:-}" \
               node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"
@@ -1702,6 +1703,7 @@ jobs:
           # second identical failure terminal.
           if [ "$CLASSIFICATION_CAUSE" = 'startup_failure' ]; then
             set_review_output review_aborted true
+            set_review_output review_abort_cause startup_failure
             set_review_output retryable_failure true
             echo "::warning::Codex review fallita all'avvio senza turni (diagnostic=${DIAGNOSTIC_LINE:-unclassified}, durata=${CODEX_DURATION_MS:-?}ms): un solo retry ammesso sulla stessa HEAD."
             exit 1
