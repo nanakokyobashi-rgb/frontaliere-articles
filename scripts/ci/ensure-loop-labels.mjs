@@ -69,6 +69,7 @@ export const LABELS = [
   ['stale-review', 'f9d0c4', 'Stallo rilevato: la PR non ha segnale a valle'],
   ['collision-risk', 'e99695', 'Modifica file gia toccati da un altra PR aperta'],
   ['has-conflicts', 'b60205', 'Conflitto reale con main: autorebase sospeso finche il branch non viene risolto'],
+  ['agent:resolving-conflict', '0e8a16', 'Lock temporaneo mentre un agente risolve un conflitto sul branch'],
   ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
   ['agent:vision-approved', '5319e7', 'Rientro automatico autorizzato da VISION.md vision-v1; label transitoria di hand-off al fixer'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
