@@ -187,6 +187,7 @@ function runScan({
   checksMalformed = false,
   reviewsMalformed = false,
   commentsMalformed = false,
+  gitFetchError = false,
   dryRun = false,
   // Risposta di `gh api repos/:r/commits/:sha --jq .commit.committer.date`,
   // cioe' l'orologio del gate di eta'. Il default combacia con
@@ -218,6 +219,9 @@ function runScan({
     const fixReviewsMalformed = path.join(dir, 'reviews-malformed');
     const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
+    const fixGitFetchError = path.join(dir, 'git-fetch-error');
+    const fixLiveReads = path.join(dir, 'live-reads');
+    const fixMergeTreeState = path.join(dir, 'merge-tree-state');
     const normalizedComments = posted.map((comment, index) => ({
       id: Number.isSafeInteger(Number(comment?.id)) && Number(comment.id) > 0 ? Number(comment.id) : index + 1,
       body: typeof comment?.body === 'string' ? comment.body : '',
@@ -244,6 +248,13 @@ function runScan({
     writeFileSync(fixChecksMalformed, checksMalformed ? 'true' : 'false');
     writeFileSync(fixReviewsMalformed, reviewsMalformed ? 'true' : 'false');
     writeFileSync(fixCommentsMalformed, commentsMalformed ? 'true' : 'false');
+    writeFileSync(fixGitFetchError, gitFetchError ? 'true' : 'false');
+    writeFileSync(fixLiveReads, '');
+    writeFileSync(fixMergeTreeState, String(prs?.[0]?.mergeable || 'UNKNOWN'));
+    const fixMergeTreeSecond = path.join(dir, 'merge-tree-second');
+    const fixMergeTreeCalls = path.join(dir, 'merge-tree-calls');
+    writeFileSync(fixMergeTreeSecond, String(prs?.[0]?._mergeTreeSecond || ''));
+    writeFileSync(fixMergeTreeCalls, '');
 
     // `gh`: serve le letture del rescuer e registra le scritture
     // (add-label, remove-label, comment, workflow run). Ogni
@@ -333,6 +344,15 @@ case "$sub" in
       */pulls/*)
         if [ "$jq" = '.head.sha' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.head?.sha||"")+"\\n")' ${JSON.stringify(fixPrs)}
+        elif [[ "$jq" == *"@tsv"* ]]; then
+          # Rilettura della classe F: lo stato CORRENTE della PR. _live nella
+          # fixture simula ciò che è cambiato fra la prima prova e la seconda;
+          # _liveSecond e _liveAfterSecondProof simulano il cambio arrivato
+          # alla rilettura dopo la seconda prova, che il secondo gate deve
+          # bloccare; _liveError simula una lettura fallita.
+          node -e 'const value=require(process.argv[1]); const fs=require("fs"); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const counter=process.argv[2]; fs.appendFileSync(counter,"x"); const second=fs.readFileSync(counter,"utf8").length>1; const pr={...base,...(base?._live||{}),...(second?(base?._liveSecond||{}):{}),...(second?(base?._liveAfterSecondProof||{}):{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"-", pr.head?.ref||"-", String(Boolean(pr.draft)), pr.mergeable_state||"unknown", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)} ${JSON.stringify(fixLiveReads)}
+        elif [ "$jq" = '.mergeable_state // ""' ]; then
+          node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; if (pr?.mergeable_state === "__error__") process.exit(1); process.stdout.write(String(pr?.mergeable_state||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
         else
@@ -420,8 +440,36 @@ exec /usr/bin/grep "$@"
 `,
     );
     chmodSync(path.join(bin, 'gh'), 0o755);
+    writeFileSync(
+      path.join(bin, 'git'),
+      `#!/usr/bin/env bash
+case "\$1" in
+  fetch)
+    if [[ "\$(cat ${JSON.stringify(fixGitFetchError)})" == "true" ]]; then exit 1; fi
+    exit 0
+    ;;
+  rev-parse)
+    printf '%s\\n' ${JSON.stringify(HEAD_SHA)}
+    ;;
+  merge-tree)
+    printf 'x' >> ${JSON.stringify(path.join(dir, 'merge-tree-calls'))}
+    state="\$(cat ${JSON.stringify(fixMergeTreeState)})"
+    if [ "\$(wc -c < ${JSON.stringify(path.join(dir, 'merge-tree-calls'))})" -gt 1 ] && [ -s ${JSON.stringify(path.join(dir, 'merge-tree-second'))} ]; then
+      state="\$(cat ${JSON.stringify(path.join(dir, 'merge-tree-second'))})"
+    fi
+    case "\$state" in
+      CONFLICTING) exit 1 ;;
+      MERGEABLE) exit 0 ;;
+      *) exit 2 ;;
+    esac
+    ;;
+  *) exit 0 ;;
+esac
+`,
+    );
     chmodSync(path.join(bin, 'date'), 0o755);
     chmodSync(path.join(bin, 'grep'), 0o755);
+    chmodSync(path.join(bin, 'git'), 0o755);
 
     const script = path.join(dir, 'scan.sh');
     writeFileSync(script, SCAN_RUN);
@@ -968,6 +1016,348 @@ test('#314 — stallo rientrato: `stale-review` viene TOLTA, non lasciata lì', 
   );
 });
 
+// ── F. Conflitto con main: verde, LGTM, auto-merge armato, e ferma ──────────
+//
+// Lo stato di #2246, #2249 e #2205 del 2026-10-06: test verdi e `## LGTM`
+// sull'head, quindi nessuna delle altre classi scatta — e l'`else` toglieva la
+// `stale-review` messa da pr-autorebase, cioè il solo segnale che porta la PR
+// a `recycle-stale-prs`. Stesso input del test «stallo rientrato» qui sopra,
+// più la label `has-conflicts`: l'esito deve essere l'opposto.
+
+const conflicted = (labels = [], over = {}) => openPr({
+  base: { ref: 'main' },
+  mergeable: 'CONFLICTING',
+  mergeable_state: 'dirty',
+  labels: [{ name: 'has-conflicts' }, ...labels.map((name) => ({ name }))],
+  ...over,
+});
+
+test('F — verde con LGTM sull\'head ma in conflitto: la classe scatta e la label resta', opts, () => {
+  const r = runScan({
+    prs: conflicted(['stale-review']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  assert.deepEqual(
+    r.unlabeled,
+    [],
+    'Una PR in conflitto si è vista togliere `stale-review`: non mergerà mai (nessun workflow ' +
+      `\`pull_request\` parte) e \`recycle-stale-prs\` non la vede più.\n${r.stdout}`,
+  );
+  const body = only(r);
+  assert.match(body, /conflitto con `main`/, body);
+  assert.match(body, new RegExp(`class=F head=${HEAD_SHA.slice(0, 7)}`), body);
+});
+
+test('F — senza `stale-review`: viene etichettata, non lasciata muta', opts, () => {
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  assert.deepEqual(r.labeled, [901], `Classe F senza label: il recycle non può prenderla.\n${r.stdout}`);
+  assert.equal(r.comments.length, 1, r.stdout);
+});
+
+test('F — una label conservata senza conflitto corrente lascia la PR invariata', opts, () => {
+  for (const mergeable of ['MERGEABLE', 'UNKNOWN', undefined]) {
+    const r = runScan({
+      prs: conflicted(['stale-review'], { mergeable }),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    });
+    assert.deepEqual(r.labeled, [], `${mergeable}: label aggiunta su una PR non verificata\n${r.stdout}`);
+    assert.deepEqual(r.unlabeled, [], `${mergeable}: label rimossa su una PR non verificata\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${mergeable}: commento F su una PR non verificata\n${r.stdout}`);
+  }
+});
+
+test('F — fetch illeggibile lascia invariata la label conservata', opts, () => {
+  const r = runScan({
+    prs: conflicted(['stale-review']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    gitFetchError: true,
+  });
+  assert.deepEqual(r.labeled, [], r.stdout);
+  assert.deepEqual(r.unlabeled, [], r.stdout);
+  assert.deepEqual(r.comments, [], r.stdout);
+});
+
+test('F — precede le altre classi: con i test rossi il rimedio non è un rerun', opts, () => {
+  // Senza la precedenza cadrebbe in C, che rilancia `tests.yml`: su una PR in
+  // conflitto quel run non può partire.
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'failure' }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding' }),
+  });
+  const body = only(r);
+  assert.match(body, /conflitto con `main`/, body);
+  assert.deepEqual(r.reruns, [], `Rerun chiesto su una PR in conflitto.\n${r.stdout}`);
+  assert.deepEqual(r.workflowRuns, [], `Dispatch chiesto su una PR in conflitto.\n${r.stdout}`);
+});
+
+test('F — i guard fail-closed non saltano una PR in conflitto, salvo needs-human', opts, () => {
+  // Review di #2274: nella catena A–E la F arrivava dopo una dozzina di
+  // `continue` (check o review illeggibili, fixer non verificabile), ognuno dei
+  // quali lasciava la PR senza `stale-review`. Il conflitto non dipende da
+  // quei dati: la label si applica comunque. `needs-human` è invece un veto
+  // terminale e deve lasciare la PR invariata.
+  for (const input of [
+    { checksError: true },
+    { reviewsError: true },
+    { checksMalformed: true },
+    { reviewsMalformed: true },
+    { fixerRunsError: true },
+  ]) {
+    const r = runScan({ prs: conflicted(), checks: checkRuns({ concl: 'success' }), reviews: [], ...input });
+    assert.deepEqual(r.labeled, [901], `${JSON.stringify(input)}: PR in conflitto saltata da un guard\n${r.stdout}`);
+    assert.match(only(r), /conflitto con `main`/);
+  }
+  const needsHuman = runScan({
+    prs: conflicted(['needs-human']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: fuori scope' }),
+  });
+  assert.deepEqual(needsHuman.labeled, [], needsHuman.stdout);
+  assert.deepEqual(needsHuman.unlabeled, [], needsHuman.stdout);
+  assert.deepEqual(needsHuman.comments, [], needsHuman.stdout);
+});
+
+test('F — l\'archivio della prova è plumbing puro: storia completa, nessun working tree', () => {
+  // Tre review consecutive hanno letto in modo opposto la coppia
+  // `filter`/`sparse-checkout` di actions/checkout. Il passo non la usa più:
+  // un repository vuoto, un fetch parziale di main, e basta.
+  const start = WF.indexOf('      - name: Prepare object store for conflict proofs (plumbing only, no working tree)');
+  assert.notEqual(start, -1, 'passo dell\'archivio della prova F non trovato');
+  const end = WF.indexOf('\n      - name:', start + 1);
+  const step = WF.slice(start, end === -1 ? undefined : end);
+  assert.match(step, /git init --quiet \./, step);
+  assert.match(step, /fetch --quiet --no-tags --filter=blob:none origin/, 'serve il clone parziale senza blob');
+  // Promisor dichiarato, e filtro ripetuto anche sui fetch della prova: in un
+  // archivio fresco i blob devono restare lazy-fetchabili, non arrivare tutti.
+  assert.match(step, /git config --local remote\.origin\.promisor true/, step);
+  assert.match(step, /git config --local remote\.origin\.partialclonefilter blob:none/, step);
+  const proofFetch = /f_merge_tree_state\(\) \{[\s\S]*?\n {14}\}/.exec(WF)?.[0] || '';
+  assert.match(proofFetch, /git fetch --no-tags --quiet --filter=blob:none origin/, 'il fetch della prova deve ripetere il filtro');
+  assert.match(step, /"\+refs\/heads\/main:refs\/remotes\/origin\/main"/, 'la ref di main deve essere quella che usa la prova');
+  // Storia completa: nessun `--depth`, altrimenti merge-tree non raggiunge il merge-base.
+  assert.equal(/--depth|--shallow/.test(step), false, 'un fetch shallow renderebbe la prova sempre unknown');
+  // Nessun working tree: niente checkout, niente actions/checkout prima dello scan.
+  assert.equal(/git (checkout|switch|reset|restore)\b/.test(step), false, 'la prova non deve materializzare file');
+  const beforeScan = WF.slice(0, WF.indexOf('      - name: Scan open PRs and flag stalled ones'));
+  assert.equal(/uses: actions\/checkout@/.test(beforeScan), false, 'nessun actions/checkout prima dello scan');
+  // Se l\'archivio non si crea lo scan parte lo stesso: la classe F resta unknown, A–E lavorano.
+  assert.match(step, /continue-on-error: true/, step);
+});
+
+test('F — commenti illeggibili: la label si applica lo stesso, il commento si rinvia', opts, () => {
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    commentsError: true,
+  });
+  assert.deepEqual(r.labeled, [901], `La label è il segnale per il recycle: non dipende dai commenti.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], r.stdout);
+});
+
+test('F — dry_run: nessuna label e nessun commento', opts, () => {
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    dryRun: true,
+  });
+  assert.deepEqual(r.labeled, [], r.stdout);
+  assert.deepEqual(r.comments, [], r.stdout);
+});
+
+test('F — label rimasta ma GitHub dice mergeabile: non è F, decidono le altre classi', opts, () => {
+  // Review di #2274: una PR già pulita con `has-conflicts` conservata da un
+  // ricalcolo fallito riceverebbe `stale-review` e verrebbe chiusa dal
+  // recycle. Qui è verde con LGTM sulla HEAD: nessuna classe scatta, e la
+  // `stale-review` viene tolta come per ogni stallo rientrato.
+  for (const state of ['clean', 'unstable', 'blocked', 'behind']) {
+    const r = runScan({
+      prs: conflicted(['stale-review'], { mergeable_state: state }),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    });
+    assert.deepEqual(r.comments, [], `${state}: classe F su una PR che GitHub dà per mergeabile\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [901], `${state}: la PR deve proseguire verso le altre classi\n${r.stdout}`);
+  }
+});
+
+test('F — conflitto non verificabile: la PR resta INVARIATA', opts, () => {
+  // `unknown` mentre GitHub ricalcola, campo assente, lettura fallita: né
+  // label né commento, e nemmeno la rimozione di una `stale-review` esistente.
+  for (const state of ['unknown', '', '__error__']) {
+    const r = runScan({
+      prs: conflicted(['stale-review'], { mergeable_state: state }),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    });
+    assert.deepEqual(r.comments, [], `${state || 'vuoto'}\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [], `${state || 'vuoto'}: una lettura non verificabile non deve cambiare niente\n${r.stdout}`);
+  }
+});
+
+const greenLgtm = () => ({
+  checks: checkRuns({ concl: 'success' }),
+  reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+});
+
+test('F — solo PR verso main: su un altro target il conflitto con main non la riguarda', opts, () => {
+  for (const base of [{ ref: 'release/2026-10' }, undefined]) {
+    const r = runScan({ prs: conflicted([], { base }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `base=${base?.ref}: etichettata su un conflitto che non riguarda il suo target\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], r.stdout);
+  }
+});
+
+test('F — agent:resolving-conflict: qualcuno sta risolvendo, la PR resta invariata', opts, () => {
+  // Il lock di chi risolve il conflitto sul branch: `stale-review` la
+  // metterebbe sulla strada del recycle mentre ci si lavora.
+  const locked = runScan({ prs: conflicted(['agent:resolving-conflict']), ...greenLgtm() });
+  assert.deepEqual(locked.labeled, [], locked.stdout);
+  assert.deepEqual(locked.comments, [], locked.stdout);
+  // Con `stale-review` già presente non la si toglie nemmeno.
+  const lockedStale = runScan({ prs: conflicted(['agent:resolving-conflict', 'stale-review']), ...greenLgtm() });
+  assert.deepEqual(lockedStale.unlabeled, [], lockedStale.stdout);
+  // Il lock arriva fra la prova e la label: nessuna mutation.
+  const lateLock = runScan({
+    prs: conflicted([], { _live: { labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'agent:resolving-conflict' }] } }),
+    ...greenLgtm(),
+  });
+  assert.deepEqual(lateLock.labeled, [], lateLock.stdout);
+  assert.deepEqual(lateLock.comments, [], lateLock.stdout);
+});
+
+test('F — base non leggibile con has-conflicts: nessuna classe può mutare la PR', opts, () => {
+  // Con un target noto e diverso da main la PR prosegue verso le classi A–E
+  // (qui: verde con LGTM, quindi `stale-review` viene tolta). Con un target
+  // ILLEGGIBILE no: non si sa a cosa si riferisca il conflitto, e la PR resta
+  // esattamente com'è.
+  const known = runScan({ prs: conflicted(['stale-review'], { base: { ref: 'release/2026-10' } }), ...greenLgtm() });
+  assert.deepEqual(known.unlabeled, [901], known.stdout);
+  for (const base of [undefined, {}, { ref: '' }]) {
+    const r = runScan({ prs: conflicted(['stale-review'], { base }), ...greenLgtm() });
+    assert.deepEqual(r.unlabeled, [], `base=${JSON.stringify(base)}: mutation senza aver verificato il target\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.comments, [], r.stdout);
+  }
+});
+
+test('F — la PR cambia fra la prova e la label: nessuna mutation', opts, () => {
+  // Review di #2274: un push dopo il fetch lascerebbe la prova sulla vecchia
+  // HEAD e la label sulla nuova, con il recycle a 24 ore dietro.
+  for (const [what, live] of [
+    ['HEAD nuova', { head: { ref: 'fix/qualcosa', sha: OLD_SHA } }],
+    ['conflitto rientrato', { mergeable_state: 'clean' }],
+    ['GitHub sta ricalcolando', { mergeable_state: 'unknown' }],
+    ['label tolta da pr-autorebase', { labels: [] }],
+    ['needs-human arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'needs-human' }] }],
+    ['base cambiata', { base: { ref: 'release/2026-10' } }],
+    ['PR chiusa', { state: 'closed' }],
+    ['diventata draft', { draft: true }],
+    ['non più del ciclo', { head: { ref: 'feat/umana', sha: HEAD_SHA }, labels: [{ name: 'has-conflicts' }] }],
+  ]) {
+    const r = runScan({ prs: conflicted([], { _live: live }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `${what}: label applicata a un oggetto diverso da quello provato\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${what}\n${r.stdout}`);
+  }
+  const unreadable = runScan({ prs: conflicted([], { _liveError: true }), ...greenLgtm() });
+  assert.deepEqual(unreadable.labeled, [], unreadable.stdout);
+  assert.deepEqual(unreadable.comments, [], unreadable.stdout);
+});
+
+test('F — la prova che autorizza la label è il merge-tree DOPO la rilettura', opts, () => {
+  // main si muove fra la prima prova e la label: `mergeable_state` è ancora
+  // `dirty` (cache), ma il secondo merge-tree dice che il conflitto è rientrato.
+  for (const second of ['MERGEABLE', 'UNKNOWN']) {
+    const r = runScan({ prs: conflicted([], { _mergeTreeSecond: second }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `secondo merge-tree ${second}: label su una PR non più provata in conflitto\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], r.stdout);
+  }
+});
+
+test('F — un veto o un push arrivati DURANTE la seconda prova: nessuna mutation', opts, () => {
+  // Review di #2274: la rilettura finiva prima del secondo fetch/merge-tree,
+  // e `recycle-stale-prs` seleziona `stale-review` senza guardare i veto.
+  // `_liveSecond` è ciò che la PR è diventata alla seconda rilettura.
+  const base = [{ name: 'has-conflicts' }, { name: 'agent:autofix' }];
+  for (const [what, liveSecond] of [
+    ['needs-human', { labels: [...base, { name: 'needs-human' }] }],
+    ['agent:resolving-conflict', { labels: [...base, { name: 'agent:resolving-conflict' }] }],
+    ['push di una HEAD nuova', { head: { ref: 'fix/qualcosa', sha: OLD_SHA } }],
+    ['conflitto tolto da pr-autorebase', { labels: [{ name: 'agent:autofix' }] }],
+    ['PR chiusa', { state: 'closed' }],
+  ]) {
+    const r = runScan({ prs: conflicted([], { _liveSecond: liveSecond }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `${what}: label applicata dopo un cambiamento arrivato durante la prova\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${what}: su una differenza si salta anche il commento\n${r.stdout}`);
+  }
+  // Senza cambiamenti le due riletture concordano e la classe scatta.
+  const steady = runScan({ prs: conflicted(), ...greenLgtm() });
+  assert.deepEqual(steady.labeled, [901], steady.stdout);
+});
+
+test('F — un cambio dopo la seconda prova blocca label e commento', opts, () => {
+  // La prima rilettura e il secondo merge-tree possono essere entrambi validi,
+  // ma un workflow concorrente può ancora aggiungere un veto o cambiare il
+  // record prima della mutation. Il gate finale deve leggere la PR e le label
+  // dopo la prova, non affidarsi al record letto prima di essa.
+  for (const [what, live] of [
+    ['needs-human arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'needs-human' }] }],
+    ['agent:resolving-conflict arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'agent:resolving-conflict' }] }],
+    ['HEAD cambiata nel frattempo', { head: { ref: 'fix/qualcosa', sha: OLD_SHA } }],
+    ['base cambiata nel frattempo', { base: { ref: 'release/2026-10' } }],
+    ['PR chiusa nel frattempo', { state: 'closed' }],
+    ['conflitto rientrato nel frattempo', { mergeable_state: 'clean' }],
+  ]) {
+    const r = runScan({ prs: conflicted([], { _liveAfterSecondProof: live }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `${what}: label applicata dopo una rilettura non più valida\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${what}: commento pubblicato dopo una rilettura non più valida\n${r.stdout}`);
+  }
+});
+
+test('F — la label si decide sulle label RILETTE, non sullo snapshot', opts, () => {
+  // Lo snapshot aveva `stale-review`, ma un altro workflow l'ha tolta nella
+  // finestra: senza l'add la PR resterebbe senza il segnale per il recycle.
+  const removed = runScan({
+    prs: conflicted(['stale-review'], { _live: { labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }] } }),
+    ...greenLgtm(),
+  });
+  assert.deepEqual(removed.labeled, [901], removed.stdout);
+  // E il contrario: assente nello snapshot, già presente alla rilettura.
+  const added = runScan({
+    prs: conflicted([], { _live: { labels: [{ name: 'has-conflicts' }, { name: 'stale-review' }] } }),
+    ...greenLgtm(),
+  });
+  assert.deepEqual(added.labeled, [], added.stdout);
+  assert.equal(added.comments.length, 1, added.stdout);
+});
+
+test('F — idempotenza: stesso head già segnalato, nessun secondo commento', opts, () => {
+  const first = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  const again = runScan({
+    prs: conflicted(['stale-review']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    comments: [{ body: only(first) }],
+  });
+  assert.deepEqual(again.comments, [], `Classe F ri-commentata sullo stesso head.\n${again.stdout}`);
+  assert.deepEqual(again.unlabeled, [], again.stdout);
+});
+
 test('#314 — con un run in volo la label NON viene tolta: lo stato non è noto', opts, () => {
   // Fail-safe: `TESTS_PENDING > 0` significa "non lo sappiamo ancora", e
   // togliere la label lì cancellerebbe un segnale valido per un run che deve
@@ -1345,8 +1735,14 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
   // `stale-review` ferme >24h — è che questa PR non può far chiudere niente
   // che prima restasse aperto.
   const src = readFileSync(WF_PATH, 'utf8');
+  // Il ramo D non è più il primo della catena (lo precede F, il conflitto con
+  // main): si individua dalla riga di predicato che precede `CLASS="D"`, non
+  // dalla posizione.
   const chain = src.slice(src.indexOf('REASON=""; RESCUE=""'));
-  const dBranch = chain.slice(0, chain.indexOf('\n            elif '));
+  const dAt = chain.indexOf('\n              CLASS="D"');
+  assert.notEqual(dAt, -1, 'ramo D non trovato nella catena di classificazione');
+  const dBranch = chain.slice(chain.lastIndexOf('\n', dAt - 1), dAt);
+  assert.match(dBranch, /^\n\s+(?:el)?if \[/, `predicato del ramo D non riconosciuto: ${dBranch}`);
   for (const required of ['-n "$LAST_CID"', '"$LAST_CID" != "$HEAD"', '"$TESTS_CONCL" = "success"']) {
     assert.ok(
       dBranch.includes(required),
