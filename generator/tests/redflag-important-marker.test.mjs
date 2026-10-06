@@ -179,6 +179,46 @@ test('la narrow di #1106 non spegne il secondo finding VERO sulla riga (#977)', 
   assert.equal(REDFLAG_IMPORTANT_RE.test('- `a.mjs:L1`: 🟡 Nit: rinomina `x`. 🔴 Important: la sitemap perde gli slug'), true);
 });
 
+// --- àncora di posizione senza punteggiatura (sito, PR 9339) ----------------
+// `path:L<n>: 🔴 Important testo` è il formato di uscita di REVIEW.md. Quando il
+// reviewer ometteva i due punti dopo la severità, nessuna delle tre copie vedeva
+// il 🔴: con `## LGTM` nella stessa review la PR passava il gate con un Important
+// aperto. Il sito lo aveva chiuso; qui mancava.
+test('il marker dopo una location label vale anche senza punteggiatura dopo Important', () => {
+  for (const line of [
+    'scripts/ci/x.mjs:L12: 🔴 Important il ramo non chiude',
+    '- scripts/ci/x.mjs:L12-14: 🔴 **Important** il ramo non chiude',
+    'PR body:L9: 🔴 Important il claim non ha una misura',
+    '`a.mjs:L1`: 🔴 Important guard mancante',
+    '- `a.mjs:L1: 🔴 Important guard mancante',
+    '> generator/scripts/lib/free-translate.mjs:L967: 🔴 Important nel recovery una riga torna uguale',
+  ]) {
+    assert.equal(REDFLAG_IMPORTANT_RE.test(line), true, line);
+  }
+  const body = '## Findings (Important: 1, Nit: 0)\n\nscripts/ci/x.mjs:L12: 🔴 Important il ramo non chiude\n\n## LGTM';
+  assert.equal(REDFLAG_IMPORTANT_RE.test(body), true, 'un LGTM nella stessa review non spegne il marker ancorato');
+});
+
+test('senza la label a inizio riga la forma senza punteggiatura resta prosa (#3330 non si riapre)', () => {
+  for (const line of [
+    'Correction: zero 🔴 Important findings (both nits are non-blocking).',
+    'Nessun 🔴 Important trovato in scripts/ci/x.mjs:L12 dopo la correzione.',
+    '`a.mjs:L1`: 🟡 Nit: non e\' un 🔴 Important vero, solo naming.',
+    'Il test pinna `x.mjs:L1: 🔴 Important guard` come fixture.',
+    // La label da sola con la severita' e nient'altro non e' un finding.
+    'scripts/ci/x.mjs:L12: 🔴 Important',
+    'scripts/ci/x.mjs:L12: 🔴 Important   ',
+  ]) {
+    assert.equal(REDFLAG_IMPORTANT_RE.test(line), false, line);
+  }
+});
+
+test('il testo del finding ancorato sta sulla STESSA riga: JS e grep giudicano uguale', () => {
+  // Con `\s+\S` la copia JS leggerebbe come testo la riga successiva, mentre
+  // `grep` (orientato alla riga) no: le tre copie divergerebbero su questo corpo.
+  assert.equal(REDFLAG_IMPORTANT_RE.test('scripts/ci/x.mjs:L12: 🔴 Important\nriga successiva'), false);
+});
+
 // --- coerenza col conteggio dichiarato, nelle due direzioni -----------------
 const declared = (body) => {
   const header = body.match(/^#{1,4}\s*Findings\b[^\n]*/m);
