@@ -54,11 +54,8 @@
     "host/shared/literalMarkdown.ts",
     "host/shared/seoContentTokens.ts",
     "scripts/ci/auto-merge-eval.mjs",
-    "scripts/ci/collect-followup-batch.mjs",
     "scripts/ci/followup-drainer.mjs",
-    "scripts/ci/followup-resolution-match.mjs",
     "scripts/ci/gate-minted-followups.mjs",
-    "scripts/ci/lessons-harvester-registry.json",
     "scripts/ci/lib/constants.mjs",
     "scripts/ci/lib/machine-broken.mjs",
     "scripts/ci/lib/vitestCheck.mjs",
@@ -72,7 +69,6 @@
     "scripts/ci/review-test-policy.mjs",
     "scripts/ci/unwedge-pages-deploy-queue.mjs",
     "scripts/lib/cdn-asset-existence.mjs",
-    "scripts/lib/classify-issue.mjs",
     "scripts/lib/push-article-shard-incremental.sh"
   ]
 }

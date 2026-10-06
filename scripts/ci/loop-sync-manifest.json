@@ -535,9 +535,10 @@
       "mode": "adapted",
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla; `commandReferent()` ora accetta anche file senza estensione e directory, cioe' il contratto adattato del follow-up #8067. Aggiornata la SOLA baseline `corpus`: il lato `site` e `alignedAt` restano al 2026-09-13 perche' il sito si e' mosso per conto suo da allora e quel drift non l'ha riconciliato nessuno — riscriverlo qui lo cancellerebbe dal report senza che nessuno lo abbia guardato.",
       "baseline": {
-        "site": "2fc97767d9b96296",
-        "corpus": "e4d3ee34ecc957f8",
-        "alignedAt": "2026-09-13"
+        "site": "9d02fce29db5e79d",
+        "corpus": "29609a6b75d08f0d",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:28.281Z"
       }
     },
     {
@@ -1110,9 +1111,10 @@
       "mode": "adapted",
       "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci. RIALLINEATO 2026-09-02 (corpus-ahead, issue #722): due aggiunte locali dopo la baseline, entrambe `route: 'none'` come `crawler-transient`, nessuna presente sul sito (verificato su raw.githubusercontent.com/valerielinc-ops/frontaliere-si-o-no@main). (1) categoria `backlog` (nanako#28 punto 6, nanako#40): la label vince su qualunque categoria decisa dal titolo perche' una issue-contenitore puo' nominare 'publish' o 'engine' nel corpo senza essere quel guasto; prima l'unico modo di escluderla era `fu-parked`, un uso improprio della label (significa 'parcheggiata dopo troppi tentativi', non 'non e' lavoro per un agente'). (2) assorbimento di `needs-human` (issue #649): se il triage instrada comunque un'issue che porta gia' quella label, il route normale brucerebbe un run del fixer su qualcosa che `needs-human-sweep.yml` ha gia' giudicato non risolvibile in automatico — osservato sul digest dello sweep stesso, rientrato in `agent:fix` lo stesso giorno. Non e' un miglioramento del meccanismo da proporre al sito: entrambe le label (`backlog`, `needs-human`) e i workflow che le gestiscono (`needs-human-sweep.yml`) sono topologia di QUESTO loop, che il sito non ha. RIALLINEATO 2026-09-11 (corpus-ahead, issue #1294): esporta anche il predicato locale usato da `triage-sweep.mjs`, mantenendo la decisione delle label fuori da copie inline.",
       "baseline": {
-        "site": "04d09fd104293724",
-        "corpus": "aa6c19b96f5b3cbb",
-        "alignedAt": "2026-09-11"
+        "site": "e7d86d8bb43b6c33",
+        "corpus": "8152d132bdc14074",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:30.031Z"
       }
     },
     {
@@ -1390,10 +1392,10 @@
       "mode": "adapted",
       "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): i due lati usano contratti DIVERSI per il marker di triage, ciascuno coerente con il prompt di `post-merge-followup.yml` del proprio repo (sito: riga `Created/updated:`; qui: `Follow-up item: FU-…`, bucket giornaliero, skip anti-nipote), e quella differenza resta per scelta. Audit dei commit solo-corpus dal 2026-09-10: gia' sul sito #1589, #1593 e #1822; portato con valerielinc-ops/frontaliere-si-o-no#10288 FU-009 di #1785 (uno zero si attesta solo con una riga di esito fuori da recinti e citazioni; la review del sito ha aggiunto la chiusura dei recinti alla CommonMark e le intestazioni ancorate a fine riga, riapplicate qui nella stessa PR con i test in `followup-marker-attestation.test.mjs`); non applicabili per contratto #1383, #1642, #1703 e #1783(a); osservabilita' senza caso osservato #1375, #1386, #1399 e #1783(c). I commit gemelli (#1572, #1581, #1718, #1390, #1943, #1951) sono gia' su entrambi i lati. Baseline come `--init --only --force` sui due hash di oggi.",
       "baseline": {
-        "site": "1a31e2baab9eceec",
-        "corpus": "494b4d89a67c0746",
-        "alignedAt": "2026-09-29",
-        "forcedAt": "2026-09-29T11:05:39.916Z"
+        "site": "e95de573ea7eac19",
+        "corpus": "e55a806fce7e1d86",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:30.205Z"
       }
     },
     {
@@ -1442,9 +1444,10 @@
       "mode": "adapted",
       "reason": "Registro delle decisioni del lessons-harvester: stesso schema del sito (parseLessonsRegistry nel gemello identical harvest-agent-lessons.mjs, sito #10225), ma voci diverse per costruzione, perche' ogni repo registra i propri cluster e le proprie PR. Si corregge lo schema nel sito, le voci in ciascun repo.",
       "baseline": {
-        "site": "5d68789d78ab1bcd",
-        "corpus": "68fb354dfe1ef885",
-        "alignedAt": "2026-09-28"
+        "site": "e3e9e7e9844bca7c",
+        "corpus": "f8415f541c3a95a0",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:30.315Z"
       }
     },
     {
