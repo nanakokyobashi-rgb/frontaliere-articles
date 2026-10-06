@@ -28,6 +28,7 @@ import {
   familySiblingsNote,
   openSiblingIssueCovering,
   planFamilyCollapse,
+  runLevelSignature,
   workflowFamilyOf,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 
@@ -36,19 +37,31 @@ const WORKFLOWS = path.resolve(HERE, '../../.github/workflows');
 const NOW = Date.parse('2026-10-06T03:00:00Z');
 const canton = (code) => `Generate Blog Article (canton-${code})`;
 const job = (step) => ({ name: 'generate / generate', step, url: 'https://example.invalid/job' });
-const runLevelEntry = (code) => ({ name: canton(code), jobs: [], runLevel: true, runUrl: `https://example.invalid/run/${code}` });
+const SHA = 'a'.repeat(40);
+const OTHER_SHA = 'b'.repeat(40);
+const runLevelEntry = (code, over = {}) => ({
+  name: canton(code), jobs: [], runLevel: true, event: 'push', headSha: SHA, runUrl: `https://example.invalid/run/${code}`, ...over,
+});
 
 /** Il corpo generico come lo scrive `main`, ridotto alle righe che contano. */
-const issueBody = (name, jobLines) => [
+const issueBody = (name, jobLines, { event = 'push', sha = SHA } = {}) => [
   `Il workflow **${name}** è fallito.`,
+  '',
+  '- Run: https://example.invalid/run',
+  '- Branch: `main`',
+  `- Evento: \`${event}\``,
+  ...(sha ? [`- Commit: \`${sha}\``] : []),
+  '- Concluso: 2026-10-05T20:49:01Z',
   '',
   '**Job falliti**',
   jobLines,
 ].join('\n');
-const openIssue = (code, { number = 2236, jobLines = NO_FAILED_JOBS_LINE, createdAt = '2026-10-05T22:37:00Z' } = {}) => ({
+const openIssue = (code, {
+  number = 2236, jobLines = NO_FAILED_JOBS_LINE, createdAt = '2026-10-05T22:37:00Z', event = 'push', sha = SHA,
+} = {}) => ({
   number,
   title: `Workflow Failure: ${canton(code)}`,
-  body: issueBody(canton(code), jobLines),
+  body: issueBody(canton(code), jobLines, { event, sha }),
   createdAt,
 });
 
@@ -92,14 +105,29 @@ test('firma: step falliti ordinati e senza duplicati; vuota se non c\'è niente 
   assert.equal(failureSignature([job('Generate article'), job('Commit and push'), job('Generate article')]), 'Commit and push | Generate article');
   assert.equal(failureSignature([{ name: 'generate / generate', step: null }]), '');
   assert.equal(failureSignature([]), '', 'una lista vuota senza `runLevel` non è una firma: può essere una lettura fallita');
-  assert.equal(failureSignature([], { runLevel: true }), RUN_LEVEL_SIGNATURE);
+  // «Nessun job» da solo non è una firma: serve l'evidenza della causa
+  // condivisa, cioè lo stesso evento sullo stesso commit.
+  assert.equal(failureSignature([], { runLevel: true }), '');
+  assert.equal(failureSignature([], { runLevel: true, event: 'push' }), '');
+  assert.equal(failureSignature([], { runLevel: true, event: 'push', headSha: 'abc123' }), '', 'uno SHA abbreviato non identifica un commit');
+  const signature = failureSignature([], { runLevel: true, event: 'push', headSha: SHA });
+  assert.ok(signature.startsWith(RUN_LEVEL_SIGNATURE) && signature.includes(SHA) && signature.includes('push'), signature);
+  assert.equal(signature, runLevelSignature({ event: 'PUSH', headSha: SHA.toUpperCase() }), 'evento e SHA si confrontano senza distinzione di maiuscole');
+  assert.notEqual(signature, runLevelSignature({ event: 'push', headSha: OTHER_SHA }));
+  assert.notEqual(signature, runLevelSignature({ event: 'schedule', headSha: SHA }));
 });
 
 test('firma riletta dal corpo di una issue: combacia con quella calcolata dai job', () => {
   const jobs = [job('Generate article')];
   const lines = jobs.map((j) => `- \`${j.name}\` — step fallito: \`${j.step}\`\n  ${j.url}`).join('\n');
   assert.equal(failureSignatureFromIssueBody(issueBody(canton('vs'), lines)), failureSignature(jobs));
-  assert.equal(failureSignatureFromIssueBody(issueBody(canton('vs'), NO_FAILED_JOBS_LINE)), RUN_LEVEL_SIGNATURE);
+  assert.equal(
+    failureSignatureFromIssueBody(issueBody(canton('vs'), NO_FAILED_JOBS_LINE)),
+    runLevelSignature({ event: 'push', headSha: SHA }),
+  );
+  // Le issue aperte prima di questa modifica non hanno la riga «Commit»:
+  // nessuna firma, quindi non coprono nessuno.
+  assert.equal(failureSignatureFromIssueBody(issueBody(canton('vs'), NO_FAILED_JOBS_LINE, { sha: '' })), '');
   // Un corpo che non è quello generico (report ricco, issue scritta a mano) non ha firma.
   assert.equal(failureSignatureFromIssueBody('**Un articolo generato per intero è stato buttato via.**'), '');
   assert.equal(failureSignatureFromIssueBody(''), '');
@@ -107,7 +135,18 @@ test('firma riletta dal corpo di una issue: combacia con quella calcolata dai jo
 
 // ── Stessa passata ──────────────────────────────────────────────────────────
 
-test('IL CASO 2026-10-05: N caller falliti a livello di run → un rappresentante', () => {
+test('run-level su commit o eventi diversi NON si collassa: può essere un difetto del singolo caller', () => {
+  const plan = planFamilyCollapse([
+    runLevelEntry('vs'),
+    runLevelEntry('fr', { headSha: OTHER_SHA }),
+    runLevelEntry('ti', { event: 'schedule' }),
+    runLevelEntry('ge', { headSha: '' }),
+    runLevelEntry('lu', { headSha: undefined }),
+  ]);
+  assert.equal(plan.covered.size, 0, 'senza lo stesso commit e lo stesso evento non c\'è evidenza di una causa condivisa');
+});
+
+test('IL CASO 2026-10-05: N caller falliti a livello di run sullo stesso push → un rappresentante', () => {
   const codes = ['vs', 'appenzello', 'ti', 'lu', 'ge', 'fr', 'sz', 'be', 'ow', 'so'];
   const plan = planFamilyCollapse(codes.map(runLevelEntry));
   assert.equal(plan.covered.size, codes.length - 1, 'tutti i fratelli devono essere coperti dal primo');
@@ -164,10 +203,15 @@ test('firma diversa, issue vecchia, data illeggibile o titolo fuori famiglia: ne
   const old = new Date(NOW - (FAMILY_COVER_MAX_AGE_HOURS + 1) * 3_600_000).toISOString();
   assert.equal(cover(openIssue('vs', { createdAt: old })), null, 'una issue parcheggiata non deve coprire per sempre');
   assert.equal(cover(openIssue('vs', { createdAt: '' })), null);
+  // Stesso «nessun job», ma un altro commit o nessun commit nel corpo.
+  assert.equal(cover(openIssue('vs', { sha: OTHER_SHA })), null);
+  assert.equal(cover(openIssue('vs', { sha: '' })), null, 'una issue senza la riga «Commit» non prova la causa condivisa');
+  assert.equal(cover(openIssue('vs', { event: 'schedule' })), null);
   assert.equal(cover({ ...openIssue('vs'), title: 'Workflow Failure: Generate Blog Article' }), null);
   assert.equal(cover({ ...openIssue('vs'), title: `[crawler-goal] ${canton('vs')}` }), null);
   // Lettura dei job non riuscita: nessuna firma, quindi nessuna copertura.
   assert.equal(cover(openIssue('vs'), { name: canton('fr'), jobs: [] }), null);
+  assert.equal(cover(openIssue('vs'), runLevelEntry('fr', { headSha: '' })), null);
   assert.equal(openSiblingIssueCovering(runLevelEntry('fr'), null, { now: NOW }), null);
 });
 
@@ -185,6 +229,12 @@ test('la issue del rappresentante dice al fixer che è una classe e dove corregg
   assert.match(note, /- Generate Blog Article \(canton-ti\)$/m);
   assert.equal(familySiblingsNote(family, []), '');
   assert.equal(familySiblingsNote(null, [{ name: canton('fr') }]), '');
+});
+
+test('il corpo generico scrive il commit: senza, la firma non sarebbe rileggibile', () => {
+  const src = readFileSync(path.resolve(HERE, '../../scripts/ci/scan-failed-runs.mjs'), 'utf8');
+  assert.match(src, /\`- Commit: \\\`\$\{String\(run\.headSha\)\.toLowerCase\(\)\}\\\`\`/, 'la riga «- Commit:» deve stare nel corpo generico');
+  assert.match(src, /'--json', 'databaseId,[^']*headSha[^']*'/, 'la lettura delle run deve chiedere headSha');
 });
 
 test('la riga «nessun job fallito» ha una sola sorgente', () => {

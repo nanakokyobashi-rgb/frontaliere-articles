@@ -326,11 +326,16 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
 //   - gli step falliti, quando almeno un job e' partito. Un cantone che
 //     fallisce su uno step diverso (la sua fonte, il suo profilo) resta una
 //     issue a se';
-//   - `RUN_LEVEL_SIGNATURE`, quando la run e' fallita senza avviare NESSUN job.
-//     E' il caso misurato (18 issue aperte su 18 il 2026-10-06, tutte
-//     «nessun job fallito riportato dall'API»): una run che muore prima di
-//     qualunque job non ha ancora letto niente del cantone, quindi la causa e'
-//     nella definizione generata o nel core condiviso, cioe' comune.
+//   - la firma di livello run (`runLevelSignature`), quando la run e' fallita
+//     senza avviare NESSUN job — il caso misurato: 18 issue aperte su 18 il
+//     2026-10-06, tutte «nessun job fallito riportato dall'API». «Nessun job»
+//     da solo NON basta: anche un solo caller puo' morire prima dei job per un
+//     difetto suo (un input o una definizione cantonale invalida). La firma
+//     porta quindi l'evidenza verificabile della causa condivisa: lo STESSO
+//     commit e lo STESSO evento. Allo stesso commit i caller escono da un'unica
+//     esecuzione del generatore e chiamano lo stesso core, e se a morire prima
+//     dei job e' piu' di uno la differenza fra loro (il cantone) non puo'
+//     essere la causa. Commit diversi, o SHA illeggibile: nessuna copertura.
 // Una lettura dei job FALLITA non e' una firma: quel membro non copre e non e'
 // coperto. Niente titolo di famiglia: la issue resta quella del membro
 // rappresentante, cosi' `close-recovered-failure-issues.mjs` la chiude come
@@ -359,20 +364,34 @@ export function workflowFamilyOf(name) {
   return GENERATED_WORKFLOW_FAMILIES.find((family) => family.nameRe.test(value)) || null;
 }
 
-/** Firma di una run fallita senza avviare nessun job. */
+/** Prefisso della firma di una run fallita senza avviare nessun job. */
 export const RUN_LEVEL_SIGNATURE = '(run-level: nessun job avviato)';
+const FULL_SHA_RE = /^[0-9a-f]{40}$/i;
+
+/**
+ * Firma di livello run: «nessun job» + stesso evento + stesso commit. Vuota
+ * se evento o SHA non sono leggibili — senza l'evidenza della causa condivisa
+ * un membro non copre e non e' coperto. Pura.
+ */
+export function runLevelSignature({ event, headSha } = {}) {
+  const sha = String(headSha || '').trim().toLowerCase();
+  const kind = String(event || '').trim().toLowerCase();
+  if (!FULL_SHA_RE.test(sha) || !kind) return '';
+  return `${RUN_LEVEL_SIGNATURE} evento=${kind} commit=${sha}`;
+}
 // La riga che il corpo generico scrive quando l'API non riporta job falliti:
 // una sola sorgente per chi la scrive (`main`) e per chi la rilegge qui sotto.
 export const NO_FAILED_JOBS_LINE = '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';
 
 /**
  * Firma di un guasto. Con `runLevel` (lettura riuscita, zero job falliti) e'
- * `RUN_LEVEL_SIGNATURE`; altrimenti gli step falliti, ordinati e senza
- * duplicati. Vuota quando non c'e' niente di leggibile: una firma vuota non
- * prova una causa comune, quindi non copre nessuno. Pura.
+ * `runLevelSignature` di evento e commit della run; altrimenti gli step
+ * falliti, ordinati e senza duplicati. Vuota quando non c'e' niente di
+ * leggibile: una firma vuota non prova una causa comune, quindi non copre
+ * nessuno. Pura.
  */
-export function failureSignature(jobs, { runLevel = false } = {}) {
-  if (runLevel) return RUN_LEVEL_SIGNATURE;
+export function failureSignature(jobs, { runLevel = false, event = '', headSha = '' } = {}) {
+  if (runLevel) return runLevelSignature({ event, headSha });
   const steps = (Array.isArray(jobs) ? jobs : [])
     .map((job) => String(job?.step || '').trim())
     .filter(Boolean);
@@ -380,13 +399,29 @@ export function failureSignature(jobs, { runLevel = false } = {}) {
 }
 
 const ISSUE_BODY_FAILED_STEP_RE = /step fallito: `([^`]+)`/g;
+// Le due righe del corpo generico da cui si rilegge la firma di livello run.
+const ISSUE_BODY_EVENT_RE = /^- Evento: `([^`]+)`$/m;
+const ISSUE_BODY_COMMIT_RE = /^- Commit: `([0-9a-f]{40})`$/im;
 
 /** La stessa firma, riletta dal corpo generico di una issue gia' aperta. Pura. */
 export function failureSignatureFromIssueBody(body) {
   const text = String(body || '');
   const steps = [...text.matchAll(ISSUE_BODY_FAILED_STEP_RE)].map((m) => m[1].trim()).filter(Boolean);
   if (steps.length > 0) return [...new Set(steps)].sort().join(' | ');
-  return text.includes(NO_FAILED_JOBS_LINE) ? RUN_LEVEL_SIGNATURE : '';
+  if (!text.includes(NO_FAILED_JOBS_LINE)) return '';
+  return runLevelSignature({
+    event: ISSUE_BODY_EVENT_RE.exec(text)?.[1],
+    headSha: ISSUE_BODY_COMMIT_RE.exec(text)?.[1],
+  });
+}
+
+/** La firma di un membro di famiglia, dai suoi job e dalla sua run. Pura. */
+function entrySignature(entry) {
+  return failureSignature(entry?.jobs, {
+    runLevel: entry?.runLevel === true,
+    event: entry?.event,
+    headSha: entry?.headSha,
+  });
 }
 
 /**
@@ -394,7 +429,7 @@ export function failureSignatureFromIssueBody(body) {
  * firma). Il primo di ogni gruppo, nell'ordine servito, e' il rappresentante;
  * gli altri sono coperti da lui. Membri senza firma restano fuori. Pura.
  *
- * @param {Array<{name: string, jobs: Array, runLevel?: boolean, runUrl?: string}>} entries
+ * @param {Array<{name: string, jobs: Array, runLevel?: boolean, event?: string, headSha?: string, runUrl?: string}>} entries
  * @returns {{ covered: Map<string, string>, siblings: Map<string, Array<{name: string, runUrl: string}>> }}
  *   `covered`: membro → rappresentante; `siblings`: rappresentante → membri coperti.
  */
@@ -404,7 +439,7 @@ export function planFamilyCollapse(entries) {
   const representatives = new Map();
   for (const entry of Array.isArray(entries) ? entries : []) {
     const family = workflowFamilyOf(entry?.name);
-    const signature = failureSignature(entry?.jobs, { runLevel: entry?.runLevel === true });
+    const signature = entrySignature(entry);
     if (!family || !signature) continue;
     const key = `${family.id}\u0000${signature}`;
     const representative = representatives.get(key);
@@ -431,14 +466,14 @@ export const FAMILY_COVER_MAX_AGE_HOURS = 24;
  * `FAMILY_COVER_MAX_AGE_HOURS`, e il suo corpo riporta la stessa firma non
  * vuota. Una data di apertura illeggibile non copre. Pura.
  *
- * @param {{name: string, jobs: Array, runLevel?: boolean}} entry
+ * @param {{name: string, jobs: Array, runLevel?: boolean, event?: string, headSha?: string}} entry
  * @param {Array<{number: number, title: string, body: string, createdAt: string}>} openIssues
  * @param {{now?: number}} [opts]
  * @returns {{number: number, title: string}|null}
  */
 export function openSiblingIssueCovering(entry, openIssues, { now = Date.now() } = {}) {
   const family = workflowFamilyOf(entry?.name);
-  const signature = failureSignature(entry?.jobs, { runLevel: entry?.runLevel === true });
+  const signature = entrySignature(entry);
   if (!family || !signature) return null;
   const ownTitle = `Workflow Failure: ${entry.name}`;
   return (Array.isArray(openIssues) ? openIssues : []).find((issue) => {
@@ -1128,7 +1163,7 @@ function failedRuns() {
     const raw = gh(
       ['run', 'list', '--repo', REPO, '--status', 'failure', '--limit', String(FAILED_RUNS_SAFETY_CAP),
         '--created', endIso === null ? `>=${startIso}` : `${startIso}..${endIso}`,
-        '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,url'],
+        '--json', 'databaseId,workflowName,conclusion,event,createdAt,updatedAt,headBranch,headSha,url'],
       null,
     );
     return parseRunListJson(raw);
@@ -2144,6 +2179,8 @@ async function main() {
       name,
       jobs: partitionFailedJobsByOwner(read.jobs).ordinary,
       runLevel: read.jobs.length === 0,
+      event: selected.run.event,
+      headSha: selected.run.headSha,
       runUrl: selected.run.url,
     };
     familyEntries.push(selected.familyEntry);
@@ -2280,6 +2317,7 @@ async function main() {
       `- Run: ${run.url}`,
       `- Branch: \`${run.headBranch || '?'}\``,
       `- Evento: \`${run.event || '?'}\``,
+      ...(FULL_SHA_RE.test(String(run.headSha || '')) ? [`- Commit: \`${String(run.headSha).toLowerCase()}\``] : []),
       `- Concluso: ${run.updatedAt || run.createdAt}`,
       '',
       '**Job falliti**',
