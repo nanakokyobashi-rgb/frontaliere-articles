@@ -7820,6 +7820,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Fuochi d\'artificio, la destra lancia il no all\'iniziativa',
     'blog.article.fuochi-artificio-no.excerpt': 'Campagna al via martedì contro l\'iniziativa sui fuochi d\'artificio: il voto è il 29 novembre. Centro, PLR, UDC e mondo economico sostengono il no.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Fuochi d\'artificio sopra una città svizzera durante il dibattito sull\'iniziativa',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidato UDC per il Consiglio federale',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l\'annuncio delle dimissioni a fine anno.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, immagine simbolica per la politica federale svizzera.',
 };
 
 export default blogMetaChIt;
