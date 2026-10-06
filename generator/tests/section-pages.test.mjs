@@ -18,6 +18,7 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LI
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
   UPLOAD_ORDER,
+  archiveReleasePages,
   articleReleasePages,
   articleReleaseSnapshot,
   assertPublishableSection,
@@ -28,6 +29,7 @@ import {
   pageDefects,
   pageEntry,
   obsoleteArticlePages,
+  obsoleteArchivePages,
   parseArgs,
   publish,
   publishedStatus,
@@ -115,6 +117,18 @@ test('publisher: ritiri e cambi di slug cancellano solo le vecchie URL articolo'
   assert.ok(obsolete.every((page) => !current.some((live) => live.canonicalPath === page.canonicalPath)));
   assert.ok(!obsolete.some((page) => page.canonicalPath.includes('kept')));
   assert.match(read('scripts/publish-section-pages.mjs'), /scripts\/lib\/delete-cdn-file\.sh/);
+});
+
+test('publisher: una riduzione del corpus cancella anche le pagine archivio ritirate', () => {
+  const previousArticles = Array.from({ length: 101 }, (_, index) => ({ id: `old-${index}` }));
+  const currentArticles = previousArticles.slice(0, 99);
+  const previous = archiveReleasePages('canton-ti', previousArticles);
+  const current = archiveReleasePages('canton-ti', currentArticles);
+  const obsolete = obsoleteArchivePages(previous, current);
+  assert.equal(previous.length, 8, 'due pagine per quattro locali nella release precedente');
+  assert.equal(current.length, 4, 'una pagina per quattro locali nella release corrente');
+  assert.equal(obsolete.length, 4, 'la seconda pagina di archivio viene ritirata per ogni locale');
+  assert.ok(obsolete.every((page) => page.kind === 'archive' && page.canonicalPath.includes('/page-2/')));
 });
 
 test('publisher: una sezione cantonale nuova o vuota ha una release articolo vuota, ma una coppia parziale si ferma', () => {

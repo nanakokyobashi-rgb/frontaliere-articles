@@ -55,6 +55,8 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
+import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
 import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline } from './lib/article-render-pipeline.mjs';
@@ -228,6 +230,26 @@ export function articleReleasePages(section, { ids, slugs }) {
  * annunciata non viene mai toccata.
  */
 export function obsoleteArticlePages(previousPages, currentPages) {
+  const current = new Set(currentPages.map((page) => page.canonicalPath));
+  return previousPages.filter((page) => !current.has(page.canonicalPath));
+}
+
+/** Pagine `/tutti/` che una release di una sezione cantonale deve servire. */
+export function archiveReleasePages(section, articlePages) {
+  const articleIds = new Set(articlePages.map((page) => page.id).filter(Boolean));
+  const totalPages = Math.max(1, Math.ceil(articleIds.size / ARTICLES_PAGE_SIZE));
+  return sectionRoutes(section).flatMap((route) => {
+    const archiveBase = `${route.prefix}/${CANTON_ARCHIVE_ALL_SLUG[route.locale]}`;
+    return Array.from({ length: totalPages }, (_, index) => {
+      const page = index + 1;
+      const canonicalPath = `${archiveBase}${page === 1 ? '/' : `/page-${page}/`}`;
+      return pageEntry(section, `${canonicalPath.slice(1)}index.html`, 'archive');
+    });
+  });
+}
+
+/** Vecchie pagine di archivio non piu' emesse dopo una riduzione del corpus. */
+export function obsoleteArchivePages(previousPages, currentPages) {
   const current = new Set(currentPages.map((page) => page.canonicalPath));
   return previousPages.filter((page) => !current.has(page.canonicalPath));
 }
@@ -552,7 +574,7 @@ export async function main(argv = process.argv.slice(2)) {
   const publishing = args.publish && !args.dryRun;
   const currentArticlePages = articleReleaseSnapshot(ROOT_DIR, section);
   const previousArticlePages = previousArticleReleasePages(ROOT_DIR, section, args.previousRevision);
-  const obsoletePages = obsoleteArticlePages(previousArticlePages, currentArticlePages);
+  const previousArchivePages = archiveReleasePages(section, previousArticlePages);
   // Preflight the same registry the Worker serves before deciding whether a
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
@@ -590,6 +612,11 @@ export async function main(argv = process.argv.slice(2)) {
     ...CANTON_HUB_LOCALES.flatMap((loc) => hubResult.pathsByLocale[loc] ?? []).map((rel) => pageEntry(section, rel, 'archive')),
     ...hubs.pages.map((page) => rendererPageEntry(section, page, 'hub')),
     ...landingPages.map((page) => rendererPageEntry(section, page, 'landing')),
+  ];
+  const currentArchivePages = pages.filter((page) => page.kind === 'archive');
+  const obsoletePages = [
+    ...obsoleteArticlePages(previousArticlePages, currentArticlePages),
+    ...obsoleteArchivePages(previousArchivePages, currentArchivePages),
   ];
 
   const defects = [];
