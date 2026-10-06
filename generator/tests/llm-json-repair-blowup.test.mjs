@@ -167,6 +167,16 @@ test('repairLlmJsonArray documents the 24-root scan budget', () => {
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { q: 'noise-0', a: 'N' });
 });
 
+test('repairLlmJsonArray does not spend the root budget on nested openers in a lateral candidate', () => {
+  const nestedOpenerCount = 96;
+  const lateralCandidate = `${'['.repeat(nestedOpenerCount + 1)}1${']'.repeat(nestedOpenerCount + 1)}`;
+  const raw = `{"meta":"noise"} ${lateralCandidate} [{"q":"real","a":"A"}]`;
+  const repaired = repairLlmJsonArray(raw, {
+    validateCandidate: (candidate) => candidate?.[0]?.q === 'real',
+  });
+  assert.deepEqual(JSON.parse(repaired), [{ q: 'real', a: 'A' }]);
+});
+
 test('scanStringEnd examines the malformed-quote suffix linearly', () => {
   const measure = (quoteCount) => {
     const raw = `preamble [${'"'.repeat(quoteCount)}x`;
