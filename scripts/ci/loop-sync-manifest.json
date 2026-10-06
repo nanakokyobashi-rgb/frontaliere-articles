@@ -4591,6 +4591,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/manifest-entry-rules.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica delle regole di forma delle voci del manifest e della guardia di scrittura condivisa dai writer automatici (issue #2337). Il test di scope e gli script del ciclo la usano; non esiste sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "31e85d1c7e1590d0",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "scripts/ci/adapted-drift-ratchet.mjs",
       "mode": "corpus-only",
       "reason": "Gate `adapted-drift-budget` di loop-drift-check.yml (issue #339): legge il report JSON del drift check nello stesso job e va rosso se un gemello `adapted` entra in drift fuori dall'elenco registrato. Solo qui, come loop-drift-check.mjs.",

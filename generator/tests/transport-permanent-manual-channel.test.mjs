@@ -143,12 +143,20 @@ test('il workflow non lascia che il no permanente fermi la copia', () => {
 
 test('il realign scrive il manifest solo dopo tutti i gate di verifica', () => {
   const src = read(SCRIPT);
-  const gate = src.indexOf('if (mismatched.length || normalization.length)');
-  const unreadable = src.indexOf('if (unreadable.length)', gate);
-  const write = src.indexOf('if (corrections.length) fs.writeFileSync', unreadable);
+  const start = src.indexOf('function realignMain(');
+  const end = src.indexOf('\n}\n', start);
+  assert.ok(start >= 0 && end > start, 'realignMain deve esistere');
+  const body = src.slice(start, end);
+  const gate = body.indexOf('if (mismatched.length || normalization.length)');
+  const unreadable = body.indexOf('if (unreadable.length)', gate);
+  // Lo scrittore e' quello con la guardia delle regole di voce (#2337): una
+  // scrittura diretta del manifest, prima o dopo i gate, la aggirerebbe.
+  const write = body.indexOf('writeManifestWithGuard({');
   assert.ok(gate >= 0);
   assert.ok(unreadable > gate);
   assert.ok(write > unreadable, 'la scrittura deve avvenire dopo mismatch e path non verificabili');
+  assert.equal(body.indexOf('writeManifestWithGuard({', write + 1), -1, 'una sola scrittura del manifest nel realign');
+  assert.doesNotMatch(body, /fs\.writeFileSync\(\s*MANIFEST_PATH/, 'il realign non scrive il manifest senza la guardia');
 });
 
 test('un mismatch del batch viene escluso, mentre i path sani vengono riallineati', () => {
