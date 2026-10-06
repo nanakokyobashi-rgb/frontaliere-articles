@@ -100120,6 +100120,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-monte-olimpino-collegamenti-tilo': {
+    title: 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    description: 'Tra il 9 ottobre e il 23 novembre 2026 la galleria Monte Olimpino 1 chiude nei weekend: cambiano RE80, S10, S40 ed EuroCity tra Chiasso e Como. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, monte, olimpino, modifiche, tilo',
+    ogTitle: 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    ogDescription: 'Quattro finestre di lavori tra ottobre e novembre 2026 modificano i treni tra Chiasso e Como: RE80 via Monte Olimpino 2 con coincidenza a Cucciago, S10 e S40 fino a/da Chiasso, EuroCity senza fermata a Como S. Giovanni.',
+    canonicalPath: '/articoli-frontaliere/monte-olimpino-collegamenti-tilo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como",
+      "description": "Tra il 9 ottobre e il 23 novembre 2026 la galleria Monte Olimpino 1 chiude nei weekend: cambiano RE80, S10, S40 ed EuroCity tra Chiasso e Como. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/monte-olimpino-collegamenti-tilo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1."
+      },
+      "datePublished": "2026-10-06T10:25:21+00:00",
+      "dateModified": "2026-10-06T10:25:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/monte-olimpino-collegamenti-tilo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

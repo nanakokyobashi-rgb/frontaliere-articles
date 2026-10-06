@@ -12681,6 +12681,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.carovita-sindacati-recupero-divario.title': 'Carovita, i sindacati chiedono recupero divario nel Preventivo 2027',
     'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Tra dicembre 2020 e settembre 2026, il rincaro è salito dell\'8,5% mentre gli stipendi del personale cantonale, parapubblico e sociosanitario sono stati adeguati solo del 3%.',
     'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Veduta di Bellinzona con il Castel Grande sotto un cielo sereno.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Nei weekend 9-12, 16-19 ottobre e 13-16, 20-23 novembre 2026, la chiusura cambia RE80, S10 e S40 tra Chiasso e Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1.',
 };
 
 export default blogMetaIt;
