@@ -100,12 +100,19 @@ jobs:
           # Il branch della PR puo' non contenere ancora l'helper, e comunque
           # non e' lui a decidere le regole del proprio preflight.
           ref: ${{ github.event.repository.default_branch }}
-          sparse-checkout: |
-            scripts/ci
-            generator/scripts/load-rc-env.mjs
-            generator/scripts/lib/google-service-account-token.mjs
+          sparse-checkout: scripts/ci
           sparse-checkout-cone-mode: false
-          persist-credentials: false
+          # Keep the checkout credential long enough for the trusted loader
+          # blobs to be materialized below when the sparse fetch is lazy.
+          persist-credentials: true
+
+      - name: Materialize trusted Remote Config loader
+        run: |
+          set -euo pipefail
+          mkdir -p generator/scripts/lib
+          git show HEAD:generator/scripts/load-rc-env.mjs > generator/scripts/load-rc-env.mjs
+          git show HEAD:generator/scripts/lib/google-service-account-token.mjs \
+            > generator/scripts/lib/google-service-account-token.mjs
 
       - name: Setup Node.js for Remote Config
         uses: actions/setup-node@v7
