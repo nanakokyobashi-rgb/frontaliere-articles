@@ -264,6 +264,7 @@ import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs'
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { generateImageFromSpec } from '../../engine/shared/generatedImageEngine.mjs';
+import { isGeneratedImagePath } from '../../engine/shared/generatedImageRegistry.mjs';
 import {
   appendGeneratedImageRecord,
   hasValidBlogImageRecord,
@@ -14016,6 +14017,17 @@ function articleImageAssetId(data) {
   return `article-${(normalized || 'article').slice(0, 110)}`;
 }
 
+function governedArticleImageOutputDir() {
+  // The corpus engine arrives through the site mirror and can lag by one
+  // cycle. Derive the byte directory from the same path contract as the
+  // engine record so an old base remains valid until the blog-path engine is
+  // mirrored, while the current contract writes article heroes under blog/.
+  const blogProbe = '/images/blog/article-contract-probe.webp';
+  return isGeneratedImagePath(blogProbe)
+    ? resolve('public/images/blog')
+    : resolve('public/images/generated');
+}
+
 /**
  * Generate a new article hero only through the governed image engine.
  *
@@ -14048,7 +14060,7 @@ async function generateArticleImage(data) {
         variant: 'article hero',
       },
       {
-        outputDir: resolve('public/images/blog'),
+        outputDir: governedArticleImageOutputDir(),
         assetId,
         maxAttempts: 3,
         deadlineAt: imageDeadline,
