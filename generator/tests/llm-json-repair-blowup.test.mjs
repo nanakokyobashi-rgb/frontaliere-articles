@@ -119,6 +119,29 @@ test('repairLlmJsonArray does not exhaust the candidate budget on nested arrays'
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
 });
 
+test('repairLlmJsonArray extracts a real FAQ payload after corrupt prose leaves an unmatched nested opener', () => {
+  const raw = '[[ prosa corrotta [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray collapses deeply nested malformed containers before the candidate budget and stays linear', { timeout: 15_000 }, () => {
+  const measure = (depth) => {
+    const raw = `${'['.repeat(depth + 1)} prosa corrotta [{"q":"real","a":"A"}]`;
+    const startedAt = performance.now();
+    const parsed = JSON.parse(repairLlmJsonArray(raw));
+    return { ms: performance.now() - startedAt, parsed };
+  };
+
+  const shallow = measure(97);
+  const deep = measure(388);
+  assert.deepEqual(shallow.parsed, [{ q: 'real', a: 'A' }]);
+  assert.deepEqual(deep.parsed, [{ q: 'real', a: 'A' }]);
+  assert.ok(
+    deep.ms < shallow.ms * 10 + 250,
+    `la crescita non e' quasi lineare: 97=${shallow.ms.toFixed(0)} ms, 388=${deep.ms.toFixed(0)} ms`,
+  );
+});
+
 test('repairLlmJsonArray scans many unbalanced openers in near-linear time', { timeout: 15_000 }, () => {
   const measure = (openerCount) => {
     const raw = `preamble [unbalanced ${'['.repeat(openerCount)}`;
