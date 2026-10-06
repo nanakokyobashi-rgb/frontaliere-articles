@@ -1,6 +1,14 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import {
+  mkdtempSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import {
   applyRegistryArticleTypes,
@@ -156,4 +164,120 @@ describe('scrittura del registry', () => {
 test('il lettore TS decodifica il body3 italiano con apostrofi ed escape', () => {
   const source = "'blog.article.demo.body3': 'L\\'articolo\\n\\nFonte',";
   assert.equal(readTsStringMap(source).get('blog.article.demo.body3'), "L'articolo\n\nFonte");
+});
+
+describe('ledger di lettura e piano di backfill', () => {
+  test('il ledger reale copre i 210 stale con forma e conteggi attesi', () => {
+    const rows = backfillType.readArticleTypeReadings();
+    const counts = Object.fromEntries(['news', 'evergreen', 'unclassified'].map((decision) => [
+      decision,
+      rows.filter((row) => row.decision === decision).length,
+    ]));
+    assert.equal(rows.length, 210);
+    assert.deepEqual(counts, { news: 47, evergreen: 22, unclassified: 141 });
+    assert.equal(new Set(rows.map((row) => row.id)).size, 210);
+    for (const row of rows) {
+      assert.deepEqual(Object.keys(row).sort(), ['basis', 'decision', 'id', 'readAt', 'reason']);
+      assert.equal(row.basis, 'reading');
+      assert.match(row.readAt, /^\d{4}-\d{2}-\d{2}$/u);
+      assert.ok(row.reason.length > 0);
+    }
+  });
+
+  test('il ledger rifiuta id assenti e decisioni non ammesse', () => {
+    withFixture((root) => {
+      const file = join(root, 'data/article-type-readings.json');
+      const rows = JSON.parse(readFileSync(file, 'utf8'));
+      rows[0].id = 'non-presente-nel-registry';
+      writeFileSync(file, `${JSON.stringify(rows, null, 2)}\n`);
+      assert.throws(() => backfillType.readArticleTypeReadings(root), /id assente dal registry/u);
+
+      rows[0].id = 'ledger-news';
+      rows[0].decision = 'not-a-type';
+      writeFileSync(file, `${JSON.stringify(rows, null, 2)}\n`);
+      assert.throws(() => backfillType.readArticleTypeReadings(root), /decisione non valida/u);
+    });
+  });
+
+  function withFixture(callback) {
+    const root = mkdtempSync(join(tmpdir(), 'frontaliere-backfill-'));
+    mkdirSync(join(root, 'content/blog-body/it'), { recursive: true });
+    mkdirSync(join(root, 'content/blog-body-ch/it'), { recursive: true });
+    mkdirSync(join(root, 'data'), { recursive: true });
+    const entry = (id, articleType = '') => [
+      '  {',
+      `    id: '${id}',`,
+      "    category: 'pratico',",
+      "    date: '2026-03-01',",
+      "    image: '/images/blog/x.webp',",
+      '    hasCalculator: false,',
+      articleType ? `    articleType: '${articleType}',` : '',
+      "    verifiedAt: '2026-10-01',",
+      '  },',
+    ].filter(Boolean).join('\n');
+    writeFileSync(
+      join(root, 'content/blog-articles-data.ts'),
+      `const articles = [\n${[
+        entry('ledger-news'),
+        entry('ledger-guide'),
+        entry('ledger-uncertain'),
+        entry('citation-news'),
+        entry('already-typed', 'news'),
+      ].join('\n')}\n];\n`,
+    );
+    writeFileSync(join(root, 'content/swiss-articles-data.ts'), `const articles = [\n${entry('swiss-citation')}\n];\n`);
+    writeFileSync(
+      join(root, 'content/blog-body/it/citation-news.ts'),
+      "const fields = {\n  'blog.article.citation-news.body3': 'Testo.\\n\\n*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/123)*',\n};\n",
+    );
+    writeFileSync(
+      join(root, 'content/blog-body-ch/it/swiss-citation.ts'),
+      "const fields = {\n  'blog.article.swiss-citation.body3': 'Testo.\\n\\n*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/124)*',\n};\n",
+    );
+    writeFileSync(join(root, 'data/article-type-readings.json'), `${JSON.stringify([
+      { id: 'ledger-news', decision: 'news', reason: 'Cronaca datata inequivocabile.', readAt: '2026-10-06', basis: 'reading' },
+      { id: 'ledger-guide', decision: 'evergreen', reason: 'Guida pratica inequivocabile.', readAt: '2026-10-06', basis: 'reading' },
+      { id: 'ledger-uncertain', decision: 'unclassified', reason: 'La lettura non distingue con certezza il tipo.', readAt: '2026-10-06', basis: 'reading' },
+    ], null, 2)}\n`);
+    try {
+      return callback(root);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  }
+
+  test('il piano usa il ledger solo per frontaliere e conserva il fallback per citazione', () => {
+    withFixture((root) => {
+      const plan = backfillType.planBackfill(root);
+      assert.deepEqual(
+        [...plan.frontaliere.typesById.entries()].sort(),
+        [['citation-news', 'news'], ['ledger-guide', 'evergreen'], ['ledger-news', 'news']],
+      );
+      assert.equal(plan.frontaliere.withoutType, 1);
+      assert.equal(plan.frontaliere.missingBody, 1);
+      assert.deepEqual([...plan.svizzera.typesById.entries()], [['swiss-citation', 'news']]);
+    });
+  });
+
+  test("apply e' idempotente e scrive solo articleType, senza verifiedAt", () => {
+    withFixture((root) => {
+      const beforeFront = readFileSync(join(root, 'content/blog-articles-data.ts'), 'utf8');
+      const beforeSwiss = readFileSync(join(root, 'content/swiss-articles-data.ts'), 'utf8');
+      const plan = backfillType.planBackfill(root);
+      const expectedFront = applyRegistryArticleTypes(beforeFront, plan.frontaliere.typesById).source;
+      const expectedSwiss = applyRegistryArticleTypes(beforeSwiss, plan.svizzera.typesById).source;
+      assert.deepEqual(backfillType.applyPlan(plan), { frontaliere: 3, svizzera: 1 });
+      assert.equal(readFileSync(join(root, 'content/blog-articles-data.ts'), 'utf8'), expectedFront);
+      assert.equal(readFileSync(join(root, 'content/swiss-articles-data.ts'), 'utf8'), expectedSwiss);
+      assert.equal(
+        (readFileSync(join(root, 'content/blog-articles-data.ts'), 'utf8').match(/verifiedAt:/gu) || []).length,
+        5,
+      );
+
+      const secondPlan = backfillType.planBackfill(root);
+      const frontAfterFirst = readFileSync(join(root, 'content/blog-articles-data.ts'), 'utf8');
+      assert.deepEqual(backfillType.applyPlan(secondPlan), { frontaliere: 0, svizzera: 0 });
+      assert.equal(readFileSync(join(root, 'content/blog-articles-data.ts'), 'utf8'), frontAfterFirst);
+    });
+  });
 });

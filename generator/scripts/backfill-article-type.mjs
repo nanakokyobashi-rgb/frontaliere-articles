@@ -3,9 +3,13 @@
  * Backfill dimostrabile di `articleType` sui due registry del corpus.
  *
  * Senza opzioni esegue un dry-run. `--apply` inserisce solo la riga
- * `articleType` sulle voci legacy per cui il corpo italiano porta la citazione
- * finale unica scritta dal generatore, col tipo che il writer assegna a quella
- * run (`registryArticleTypeForRun`). Ogni voce ambigua resta senza tipo.
+ * `articleType` sulle voci legacy senza tipo: per la sezione frontaliere usa
+ * prima il ledger di lettura editoriale, mentre per le voci fuori da quel
+ * ledger conserva il backfill dimostrabile dalla citazione finale unica
+ * scritta dal generatore, col tipo che il writer assegna a quella run
+ * (`registryArticleTypeForRun`). Una decisione `unclassified` e ogni voce
+ * ambigua restano senza tipo. Il ledger non autorizza mai la scrittura di
+ * `verifiedAt` o di altri campi.
  */
 
 import { existsSync, readFileSync, realpathSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -23,6 +27,11 @@ import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 export { readTsStringLiteral, readTsStringMap };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+export const ARTICLE_TYPE_READINGS_PATH = 'data/article-type-readings.json';
+
+const LEDGER_DECISIONS = new Set(['news', 'evergreen', 'unclassified']);
+const LEDGER_KEYS = ['basis', 'decision', 'id', 'readAt', 'reason'];
 
 export const SECTIONS = Object.freeze({
   frontaliere: {
@@ -86,8 +95,71 @@ function body3For(root, bodyDir, id) {
   return { body3: fields.get(`blog.article.${id}.body3`) || '', hasBody: true };
 }
 
+/**
+ * Legge e valida il ledger delle letture articolo per articolo.
+ *
+ * Il ledger e' intenzionalmente indipendente da
+ * `data/evergreen-verifications.json`: una decisione editoriale di tipo non
+ * e' una verifica di freschezza. Fail-closed su forma, duplicati e ID che non
+ * esistono nel registry frontaliere.
+ */
+export function readArticleTypeReadings(root = ROOT) {
+  const file = path.join(root, ARTICLE_TYPE_READINGS_PATH);
+  let rows;
+  try {
+    rows = JSON.parse(readFileSync(file, 'utf8'));
+  } catch (error) {
+    throw new Error(`ledger article type illeggibile (${file}): ${error.message}`);
+  }
+  if (!Array.isArray(rows)) throw new Error('ledger article type: la radice deve essere un array');
+
+  const registryFile = path.join(root, SECTIONS.frontaliere.registry);
+  const registryIds = new Set(readRegistryEntries(readFileSync(registryFile, 'utf8')).map((entry) => entry.id));
+  const seen = new Set();
+  const expectedKeys = [...LEDGER_KEYS].sort().join('|');
+
+  for (const [index, row] of rows.entries()) {
+    if (!row || typeof row !== 'object' || Array.isArray(row)) {
+      throw new Error(`ledger article type: voce ${index + 1} non e' un oggetto`);
+    }
+    const actualKeys = Object.keys(row).sort().join('|');
+    if (actualKeys !== expectedKeys) {
+      throw new Error(
+        `ledger article type: voce ${index + 1} con forma inattesa `
+          + `(atteso ${expectedKeys}, trovato ${actualKeys})`,
+      );
+    }
+    if (typeof row.id !== 'string' || row.id.trim() === '') {
+      throw new Error(`ledger article type: voce ${index + 1} con id non valido`);
+    }
+    if (seen.has(row.id)) throw new Error(`ledger article type: id duplicato ${row.id}`);
+    seen.add(row.id);
+    if (!registryIds.has(row.id)) {
+      throw new Error(`ledger article type: id assente dal registry frontaliere ${row.id}`);
+    }
+    if (!LEDGER_DECISIONS.has(row.decision)) {
+      throw new Error(`ledger article type: decisione non valida per ${row.id}: ${JSON.stringify(row.decision)}`);
+    }
+    if (typeof row.reason !== 'string' || row.reason.trim() === '') {
+      throw new Error(`ledger article type: motivo mancante per ${row.id}`);
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/u.test(row.readAt)) {
+      throw new Error(`ledger article type: readAt non valida per ${row.id}: ${JSON.stringify(row.readAt)}`);
+    }
+    const readAt = new Date(`${row.readAt}T00:00:00Z`);
+    if (Number.isNaN(readAt.getTime()) || readAt.toISOString().slice(0, 10) !== row.readAt) {
+      throw new Error(`ledger article type: readAt non valida per ${row.id}: ${row.readAt}`);
+    }
+    if (row.basis !== 'reading') {
+      throw new Error(`ledger article type: basis non valida per ${row.id}: ${JSON.stringify(row.basis)}`);
+    }
+  }
+  return rows;
+}
+
 /** Costruisce il piano senza scrivere file. */
 export function planBackfill(root = ROOT) {
+  const readingsById = new Map(readArticleTypeReadings(root).map((row) => [row.id, row]));
   const result = {};
   for (const [section, spec] of Object.entries(SECTIONS)) {
     const registryFile = path.join(root, spec.registry);
@@ -99,6 +171,16 @@ export function planBackfill(root = ROOT) {
     for (const entry of entries) {
       if (entry.articleType !== undefined) continue;
       const { body3, hasBody } = body3For(root, spec.bodyDir, entry.id);
+      const reading = section === 'frontaliere' ? readingsById.get(entry.id) : undefined;
+      if (reading) {
+        if (reading.decision === 'news' || reading.decision === 'evergreen') {
+          typesById.set(entry.id, reading.decision);
+        } else {
+          withoutType += 1;
+          if (!hasBody) missingBody += 1;
+        }
+        continue;
+      }
       const type = articleTypeFromItalianBody(body3);
       if (type) typesById.set(entry.id, type);
       else {
@@ -156,7 +238,7 @@ function printSummary(plan, apply) {
   console.log(apply ? 'modalità: apply' : 'modalità: dry-run (nessun file modificato)');
 }
 
-function applyPlan(plan) {
+export function applyPlan(plan) {
   const changed = {};
   for (const [section, row] of Object.entries(plan)) {
     const result = applyRegistryArticleTypes(row.source, row.typesById);

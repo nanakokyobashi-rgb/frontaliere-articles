@@ -154,7 +154,7 @@ export function describePayloadRejection({ raw, repaired, parsed, parseErr = nul
   const tronc = classifyTruncation(rawStr);
 
   // `kept` e' il numero che avrebbe chiuso l'incidente del 2026-08-18 da solo:
-  // repairLlmJson() aveva tenuto il 3,4% di un documento da 12.780 caratteri.
+  // Il repair aveva tenuto il 3,4% di un documento da 12.780 caratteri.
   // Un valore basso accusa il RITAGLIO, non il modello.
   const kept = rawStr.length > 0 ? Math.round((repStr.length / rawStr.length) * 1000) / 10 : 0;
 

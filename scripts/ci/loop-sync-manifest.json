@@ -272,9 +272,10 @@
       "mode": "adapted",
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
-        "site": "82a682cdf5586ce4",
-        "corpus": "a2753413d81077de",
-        "alignedAt": "2026-09-12"
+        "site": "d1fc5b37f2f0c55d",
+        "corpus": "fc74a2c3e737fe83",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:32:17.150Z"
       }
     },
     {
@@ -569,12 +570,12 @@
     },
     {
       "path": "scripts/ci/followup-has-candidates.mjs",
-      "mode": "identical",
-      "reason": "Gate no-op invocato per nome da collect-followup-batch.mjs, stessa classe di is-followup-fix-pr.mjs: assente nel corpus e inghiottito da runGate. Importa bulletState da scripts/lib/pr-body-sections-check.mjs e isReviewerBot da scripts/ci/lib/constants.mjs, entrambi gia' presenti nel corpus.",
+      "mode": "adapted",
+      "reason": "Il sito conserva la logica generale di audit dei rinvii per decisione (decisionDeferralSpecificity): decisioni vaghe restano candidati finche' non hanno motivo e prossimo passo concreti. Il corpus mantiene isManagedReview perche' il suo scripts/ci/lib/constants.mjs e i workflow/test includono l'identita' e il fallback Codex marcato; il sito usa isReviewerBot per il proprio contratto di review. Questa differenza resta intenzionale.",
       "baseline": {
-        "site": "6e925df5c6641f7c",
-        "corpus": "6e925df5c6641f7c",
-        "alignedAt": "2026-09-11"
+        "site": "88ce559e743b5143",
+        "corpus": "1dcb22df125cc3e0",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -601,9 +602,9 @@
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "67a3c95f72f9029f",
-        "corpus": "67a3c95f72f9029f",
-        "alignedAt": "2026-08-07"
+        "site": "5f9932099a50149a",
+        "corpus": "5f9932099a50149a",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -638,9 +639,9 @@
       "path": "scripts/ci/pr-contribution-fingerprint.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "566902d2f27a3f4c",
-        "corpus": "566902d2f27a3f4c",
-        "alignedAt": "2026-08-07"
+        "site": "185c2a177882f683",
+        "corpus": "185c2a177882f683",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -745,9 +746,9 @@
       "path": "scripts/lib/pr-body-closes-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "217cfab9469cfe03",
-        "corpus": "217cfab9469cfe03",
-        "alignedAt": "2026-08-07"
+        "site": "9d0fa856b688ef1a",
+        "corpus": "9d0fa856b688ef1a",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -947,9 +948,9 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "613f1c89ff5888a0",
-        "corpus": "613f1c89ff5888a0",
-        "alignedAt": "2026-10-04"
+        "site": "896a7c71ea559b4c",
+        "corpus": "896a7c71ea559b4c",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1057,11 +1058,11 @@
     {
       "path": "scripts/ci/lib/parent-close-recurrence.mjs",
       "mode": "identical",
-      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` dice se un monitor (`🔁 **Reopened**` di `scripts/lib/github-issue-creator.mjs`) ha riaperto il padre decomposto DOPO l'ultimo marker `DECOMPOSED_INTO`; in quel caso il PARENT-CLOSE non lo richiude (valerielinc-ops/frontaliere-si-o-no#11312, origine site 5661; qui #339 «Loop drift», 25 PARENT-CLOSE e 35 riaperture al 2026-10-04). Copiata byte-per-byte dal sito: modulo puro, nessun adattamento. Il drainer adattato importa `reopenedAfterDecomposition` e `decomposedIntoNumbers` (unica definizione di `DECOMPOSED_INTO_RE`, come sul sito); il resto del delta del drainer non e' riconciliato in questo giro. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` confronta lo sha256 del file con questa baseline.",
+      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` riconosce `🔁 **Reopened**` e `🔁 Recurrence on workflow run.` dopo l'ultimo marker `DECOMPOSED_INTO`; `decideParentRearm` aggiunge la decisione pura, l'idempotenza per riapertura, il tetto per issue e il fail-closed sui dati illeggibili. Il modulo resta copiato byte-per-byte dal sito (merge `valerielinc-ops/frontaliere-si-o-no#11941`, poi #11968, #11975 e #11987 per gli spareggi al secondo), senza adattamento; la baseline è stata ricalcolata sui due file reali. Il drainer corpus adattato importa anche il formatter del marker e applica parser numerico locale, route/classificatore e guard `manifest-pinned-issues.mjs` prima del PARENT-REARM. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` sorveglia l'identità del modulo.",
       "baseline": {
-        "site": "2547bd9672848f53",
-        "corpus": "2547bd9672848f53",
-        "alignedAt": "2026-10-04"
+        "site": "4c01b7bcfe6c1b97",
+        "corpus": "4c01b7bcfe6c1b97",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1075,12 +1076,12 @@
     },
     {
       "path": "scripts/ci/lib/reopen-breaker.mjs",
-      "mode": "identical",
-      "reason": "Precondizione + circuit breaker del close+reopen di pr-autorebase (valerielinc-ops/frontaliere-si-o-no#5914). Registrata contestualmente allo script che la importa: e' una dipendenza NUOVA introdotta da quella PR e non censita qui, quindi una discesa drift-repair del solo pr-autorebase.mjs — che il manifest sorveglia file per file — avrebbe portato l'import senza il modulo e rotto l'autorebase con ERR_MODULE_NOT_FOUND. E' la stessa forma del punto cieco di loop-scripts-closure.test.mjs. Nessuna stringa e' cablata: il nome del check arriva da lib/constants.mjs, che qui e' adapted, cosi' il file resta identical e il messaggio resta corretto su entrambi i repo.",
+      "mode": "adapted",
+      "reason": "La logica generale di precondizione e breaker, inclusi stuck-red e le distinzioni review-skipped/review-aborted, segue il sito. Il corpus mantiene decideNeedsHumanPass e il ramo needs-human-pass perche' scripts/ci/pr-autorebase.mjs e i test corpus lo usano per la passata unica sulle PR parcheggiate; il sito ha rimosso quel veto con #9030. Il corpus conserva inoltre i propri messaggi e nomi di review adattati.",
       "baseline": {
-        "site": "3e9607e06d32673c",
-        "corpus": "3e9607e06d32673c",
-        "alignedAt": "2026-09-05"
+        "site": "d379326b6a9b5446",
+        "corpus": "7c334ed5ba569ac1",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2077,7 +2078,7 @@
     {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
-      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre sia il catalogo public/images/blog sia le copertine governate public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
+      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre il catalogo e le copertine governate sotto public/images/blog, oltre agli eventuali asset governati sotto public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
         "corpus": "08b806da4017d729",
@@ -2334,9 +2335,10 @@
       "mode": "adapted",
       "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il cap del ledger evergreen portato a 2048. Le sezioni frontaliere e svizzera condividono lo stesso file di stato e i pool correnti hanno circa 537 e 610 topic: il vecchio cap 500 espelleva rifiuti ancora validi dalla FIFO, permettendo alle run successive di riprovarli. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
       "baseline": {
-        "site": "963503e2e083d20a",
-        "corpus": "0d9e75ceb94e873a",
-        "alignedAt": "2026-08-09"
+        "site": "f2dee9a957a468d3",
+        "corpus": "720ed7bd9d3a345c",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:32:19.685Z"
       }
     },
     {
@@ -2992,9 +2994,10 @@
       "sitePath": "scripts/lib/llm-payload-diagnostics.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "f2b824a165d0aa28",
-        "corpus": "007e5a5b07e0e7d2",
-        "alignedAt": "2026-09-07"
+        "site": "7e5415ea50f9ac8e",
+        "corpus": "9bd0a39e7a1a03cd",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:32:20.046Z"
       },
       "reason": "Il gemello e' atterrato sul sito come `scripts/lib/llm-payload-diagnostics.mjs` (issue valerielinc-ops/frontaliere-si-o-no#6027, chiusa il 2026-08-19), ma la voce era rimasta `corpus-only-pending`: senza `sitePath` loop-drift-check cercava `generator/scripts/lib/...` DENTRO il sito, dove non esiste, quindi non l'ha mai vista `-landed` e il censimento opt-in la contava stale contro una trackingIssue chiusa (issue #988). `adapted` e non `identical` perche' i due lati non sono byte-identici, pur avendo lo stesso comportamento: stessa riga di diagnostica, stessi campi sempre presenti anche a zero, stesse soglie. Divergono su due punti, entrambi voluti: (a) la costante privata del cap sulle chiavi elencate, `MAX_DIAG_KEYS` sul sito e `MAX_KEYS` qui — un nome, non una semantica, e non e' esportata; (b) l'intestazione, che su ciascun lato dichiara l'altro come gemello e tiene le misure nella forma in cui sono state prese: qui i numeri di run (32134269129, 32140039370) e il dettaglio del desync di `findMatchingClose()`, sul sito la loro sintesi con il rimando al corpus. Nessuna delle due e' un fix di comportamento mancante a un lato, quindi non c'e' niente da portare; registrarla `identical` la farebbe leggere `undeclared-drift` alla prima passata e `transportVerdict()` smetterebbe di copiare il gemello senza che niente fallisca."
     },
@@ -3461,9 +3464,10 @@
       "mode": "adapted",
       "reason": "Link al CSS critico. Estratto per chiusura di `build-plugins/shared/criticalCss.ts` (893 righe la', 24 qui: il resto e' il payload CSS inline che il percorso articolo non emette). Stessa nota sulla guardia inesistente.",
       "baseline": {
-        "site": "0c5a992dec3b8ff6",
+        "site": "7ccd19b0d3a8ea26",
         "corpus": "0d394f21212a14bb",
-        "alignedAt": "2026-08-09"
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:24:24.340Z"
       }
     },
     {
@@ -4595,6 +4599,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/manifest-entry-rules.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica delle regole di forma delle voci del manifest e della guardia di scrittura condivisa dai writer automatici (issue #2337). Il test di scope e gli script del ciclo la usano; non esiste sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "31e85d1c7e1590d0",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "scripts/ci/adapted-drift-ratchet.mjs",
       "mode": "corpus-only",
       "reason": "Gate `adapted-drift-budget` di loop-drift-check.yml (issue #339): legge il report JSON del drift check nello stesso job e va rosso se un gemello `adapted` entra in drift fuori dall'elenco registrato. Solo qui, come loop-drift-check.mjs.",
@@ -5361,6 +5375,16 @@
       "baseline": {
         "site": null,
         "corpus": "4403a7a168643f6c",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "data/article-type-readings.json",
+      "mode": "corpus-only",
+      "reason": "Ledger editoriale delle letture articolo per articolo usato dal backfill di `articleType` per i 210 stale frontaliere. Non esiste sul sito: la classificazione e la sua prova di lettura appartengono al corpus, mentre il sito consuma il registry pubblicato via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
       }
     }

@@ -85,6 +85,7 @@ export function isDailyBucketTitle(title = '') {
 // identical callers consume the same pure contract.
 export const AGGREGATE_ITEM_COUNT_RE = /\b(\d+)\s+items?\s+(?:deferred|deferit[oi])\b/i;
 export const AGGREGATE_KEYWORD_RE = /\b(?:sweep|batch|bulk)\b/i;
+const AGGREGATE_HEADING_ITEM_RE = /^#{2,3}[ \t]*(?:Item[ \t]*)?(?!\d{4}\b)\d+[ \t]*[.)—–]/gim;
 
 /**
  * Righe dentro un blocco recintato rimosse prima del conteggio (#926).
@@ -125,10 +126,14 @@ export function stripFencedBlocks(text) {
   return fence ? [...out, ...lines.slice(fenceStart)].join('\n') : out.join('\n');
 }
 
+export function countAggregateHeadingItems(body) {
+  const b = stripFencedBlocks(body);
+  return (b.match(AGGREGATE_HEADING_ITEM_RE) || []).length;
+}
+
 export function hasEnumeratedItems(body) {
   const b = stripFencedBlocks(body);
-  const numberedSections = (b.match(/^#{2,3}[ \t]*(?:Item[ \t]*)?(?!\d{4}\b)\d+[ \t]*[.)—–]/gim) || []).length;
-  if (numberedSections >= 2) return true;
+  if (countAggregateHeadingItems(b) >= 2) return true;
   const lines = b.split('\n');
   const orderedBoldItems = lines.reduce((count, line, index) => {
     const match = /^[ \t]*\d+[.)][ \t]+(.*)$/.exec(line);
@@ -808,10 +813,11 @@ export function hasFalsifiableAcceptance(itemText) {
 /**
  * Heading riconosciuti per gli item. Il primo ramo è il formato stabile dei bucket
  * giornalieri; il secondo mantiene la compatibilità con le follow-up già pubblicate.
- * La regex è intenzionalmente ancorata a `###` e a inizio riga: un heading citato dentro
+ * La regex è intenzionalmente ancorata a due o tre `#` e a inizio riga:
+ * gli item stabili possono vivere a H2, mentre quelli numerati restano a H3.
  * un blocco fenced resta materia per il controllo lossless del mint gate.
  */
-const FOLLOWUP_ITEM_HEADING_LINE_RE = /^###\s+(?:(FU-\d{4}-\d{2}-\d{2}-\d{3})\s*[—–-]\s*(.*?)|(\d+)\.\s*(.*))\s*$/i;
+const FOLLOWUP_ITEM_HEADING_LINE_RE = /^(#{2,3})\s+(?:(FU-\d{4}-\d{2}-\d{2}-\d{3})\s*[—–-]\s*(.*?)|(\d+)\.\s*(.*))\s*$/i;
 
 /**
  * Split Markdown into lines while marking fenced/quoted lines as protected.
@@ -939,7 +945,7 @@ export function parseFollowupItems(body) {
   for (const record of markdownRecords(source)) {
     if (record.protected) continue;
     const match = FOLLOWUP_ITEM_HEADING_LINE_RE.exec(record.line);
-    if (match) matches.push({ ...match, index: record.start });
+    if (match && (match[1] === '###' || match[2])) matches.push({ ...match, index: record.start });
   }
   const parsed = matches.map((match, index) => {
     const heading = match[0];
@@ -948,13 +954,13 @@ export function parseFollowupItems(body) {
     // Legacy callers historically received the suffix immediately after `### N.`
     // (including its leading space). Stable headings own the short title, so their
     // text starts after the complete heading line.
-    const contentStart = match[3]
+    const contentStart = match[4]
       ? start + heading.indexOf('.') + 1
       : start + heading.length;
     const text = source.slice(contentStart, end);
-    const id = match[1] || null;
-    const number = match[3] ? Number(match[3]) : null;
-    const title = (match[2] ?? match[4] ?? '').trim();
+    const id = match[2] || null;
+    const number = match[4] ? Number(match[4]) : null;
+    const title = (match[3] ?? match[5] ?? '').trim();
     return {
       id,
       number,
@@ -1126,10 +1132,19 @@ export function dedupeDailyItems(items, bucketTargetRepository = '') {
       continue;
     }
     const index = byFingerprint.get(fingerprint);
-    unique[index] = mergeDailyItemSources(unique[index], item);
+    const kept = unique[index];
+    if (item?.state === 'done' && kept?.state !== 'done') {
+      const survivor = mergeDailyItemSources(item, kept);
+      unique[index] = null;
+      byFingerprint.set(fingerprint, unique.length);
+      unique.push(survivor);
+      duplicates.push({ item: kept, fingerprint, kept: survivor });
+      continue;
+    }
+    unique[index] = mergeDailyItemSources(kept, item);
     duplicates.push({ item, fingerprint, kept: unique[index] });
   }
-  return { items: unique, duplicates };
+  return { items: unique.filter(Boolean), duplicates };
 }
 
 /**
