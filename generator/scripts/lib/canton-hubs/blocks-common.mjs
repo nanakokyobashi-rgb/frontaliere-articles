@@ -34,7 +34,7 @@ export const OMIT_CODES = Object.freeze(['missing', 'stale', 'invalid', 'empty',
  */
 export const BLOCK_THRESHOLDS = Object.freeze({
   // Il sito lo riscrive ogni giorno (stessa soglia di refresh-fuel-cantons.mjs).
-  fuel: Object.freeze({ maxAgeMs: 7 * DAY_MS, minStations: 3, minRows: 1 }),
+  fuel: Object.freeze({ maxAgeMs: 7 * DAY_MS, nationalMaxAgeMs: 62 * DAY_MS, minStations: 3, minRows: 1 }),
   // crawl-events gira ogni giorno; tre giorni senza un giro e' un produttore fermo.
   // `maxSpanDays`: un evento ancora in corso entra se dura al piu' cosi'; oltre
   // e' una rassegna permanente o una serie ricorrente annuale, non un appuntamento.

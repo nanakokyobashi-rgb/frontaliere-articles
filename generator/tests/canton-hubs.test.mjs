@@ -28,6 +28,7 @@ import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-servic
 import { keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
+import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
 import { shapeRoadEventsBlock } from '../scripts/lib/canton-hubs/blocks-road-events.mjs';
 import { shapeEventsBlock } from '../scripts/lib/canton-hubs/blocks-events.mjs';
 import { shapeWeatherBlock } from '../scripts/lib/canton-hubs/blocks-services.mjs';
@@ -336,7 +337,7 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
   assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.generatedAt = old(BLOCK_THRESHOLDS.fuel.maxAgeMs + HOUR_MS); }), 'stale');
   assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.generatedAt = new Date(NOW + DAY_MS).toISOString(); }), 'invalid');
   assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel = { records: 'x' }; }), 'invalid');
-  assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.records.forEach((r) => { r.stations = BLOCK_THRESHOLDS.fuel.minStations - 1; }); }), 'empty');
+  assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.records.forEach((r) => { r.stations = r.granularity === 'national' ? 0 : BLOCK_THRESHOLDS.fuel.minStations - 1; }); }), 'empty');
   assert.equal(omittedCode('canton-be', 'carburanti', 'prezzi-carburanti', () => {}), 'empty');
 
   // eventi
@@ -385,6 +386,32 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
       assert.equal(out.code, 'missing', 'cache assente = missing, per ogni blocco');
     }
   }
+});
+
+test('la cache carburanti legacy senza granularita resta leggibile durante il passaggio HTTP', () => {
+  const legacy = fixtureDatasets().fuel;
+  legacy.records.forEach((record) => { delete record.granularity; });
+  const block = shapeFuelBlock(legacy, { canton: 'TI', nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.match(block.render('it').items[0].detail, /media regionale/);
+  assert.match(block.render('it').keyFacts[0].note, /media regionale/);
+});
+
+test('il blocco carburanti rifiuta null esplicito e national non svizzero', () => {
+  const base = fixtureDatasets().fuel;
+  const nullRecord = structuredClone(base.records[0]);
+  nullRecord.granularity = null;
+  assert.equal(shapeFuelBlock({ ...base, records: [nullRecord] }, { canton: 'TI', nowMs: NOW }).available, false);
+
+  const nonSwissNational = structuredClone(base.records.find((r) => r.side === 'CH' && r.fuel === 'sp95'));
+  nonSwissNational.side = 'IT';
+  nonSwissNational.currency = 'EUR';
+  nonSwissNational.granularity = 'national';
+  assert.equal(shapeFuelBlock({ ...base, records: [nonSwissNational] }, { canton: 'TI', nowMs: NOW }).available, false);
+
+  const multiStationNational = structuredClone(base.records.find((r) => r.side === 'CH' && r.fuel === 'diesel'));
+  multiStationNational.stations = 2;
+  assert.equal(shapeFuelBlock({ ...base, records: [multiStationNational] }, { canton: 'TI', nowMs: NOW }).available, false);
 });
 
 test('date impossibili: nessuno shaper le pubblica, il validatore le rifiuta', () => {
@@ -482,6 +509,29 @@ test('un fetch fallito non toglie un blocco ancora valido: si conserva quello pu
   assert.equal(late.changed, true);
   assert.deepEqual(late.file.locales.it.dataBlocks, []);
   assert.deepEqual(late.file.locales.it.keyFacts, []);
+
+  // Un blocco composto solo dalla media nazionale può usare la finestra di
+  // 62 giorni: il limite di carry del blocco non deve troncarlo a 7 giorni.
+  const nationalOnly = fixtureDatasets();
+  nationalOnly.fuel.records = nationalOnly.fuel.records.filter((r) => r.canton === 'TI' && r.side === 'CH');
+  const nationalFirst = buildOne('canton-ti', 'carburanti', { datasets: nationalOnly });
+  const nationalCarry = buildOne('canton-ti', 'carburanti', {
+    datasets: withoutFuel,
+    previous: nationalFirst.file,
+    nowMs: NOW + 8 * DAY_MS,
+  });
+  assert.equal(nationalCarry.blocks[0].status, 'carried');
+
+  // Il blocco precedente e' stato scritto oggi, ma le sue medie nazionali
+  // osservano un mese oltre la soglia: il carry non puo' prorogarle di 7 giorni.
+  const nationalTooOld = structuredClone(first.file);
+  for (const locale of HUB_LOCALES) {
+    const block = nationalTooOld.locales[locale].dataBlocks.find((b) => b.id === 'prezzi-carburanti');
+    for (const item of block.items) item.date = new Date(NOW - BLOCK_THRESHOLDS.fuel.nationalMaxAgeMs - DAY_MS).toISOString();
+  }
+  nationalTooOld.blocks[0].carryUntilAt = new Date(NOW - DAY_MS).toISOString();
+  const beyondNational = buildOne('canton-ti', 'carburanti', { datasets: withoutFuel, previous: nationalTooOld, nowMs: NOW + DAY_MS });
+  assert.equal(beyondNational.blocks[0].status, 'omitted');
 
   // Un dataset presente ma VECCHIO non si conserva: e' il produttore fermo, non un fetch perso.
   const stale = fixtureDatasets();
