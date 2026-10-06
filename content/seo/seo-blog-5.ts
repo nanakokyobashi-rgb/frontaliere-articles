@@ -100329,6 +100329,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-white-hash-sequestro-varese': {
+    title: 'Varese, la Polizia di Stato sequestra la nuova White Hash',
+    description: 'A Varese la Polizia di Stato ha sequestrato la nuova White Hash, sostanza granulosa ad alto contenuto di Thc. Segnalato un giovane da pochi giorni maggiorenne.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, polizia, stato, sequestra',
+    ogTitle: 'Varese, sequestrata la nuova White Hash',
+    ogDescription: 'Durante un pattugliamento appiedato tra le vie del centro di Varese, gli agenti hanno recuperato una bustina gettata a terra da un giovane da pochi giorni maggiorenne. Il narcotest ha poi confermato la positività della sostanza.',
+    canonicalPath: '/articoli-frontaliere/white-hash-sequestro-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, la Polizia di Stato sequestra la nuova White Hash",
+      "description": "A Varese la Polizia di Stato ha sequestrato la nuova White Hash, sostanza granulosa ad alto contenuto di Thc. Segnalato un giovane da pochi giorni maggiorenne.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/white-hash-sequestro-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sequestro della White Hash da parte della Polizia di Stato a Varese"
+      },
+      "datePublished": "2026-10-06T14:27:41+00:00",
+      "dateModified": "2026-10-06T14:27:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/white-hash-sequestro-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

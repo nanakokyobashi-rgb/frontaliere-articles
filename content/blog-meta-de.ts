@@ -12699,6 +12699,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.crisi-attrattivita-como-lecco.title': 'Como und Lecco: Risiko des Verlusts von 14mila Arbeitskräften bis 2029',
     'blog.article.crisi-attrattivita-como-lecco.excerpt': 'Warnung von UIL: Wohnungsmangel, schwierige Verkehrsanbindung und unzureichende Dienstleistungen drohen Tausende Menschen im erwerbsfähigen Alter aus dem Gebiet zu vertreiben.',
     'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Personenzug an einem Bahnhof zwischen Como und Lecco',
+    'blog.article.white-hash-sequestro-varese.title': 'Varese, die Polizia di Stato beschlagnahmt das neue White Hash',
+    'blog.article.white-hash-sequestro-varese.excerpt': 'Am 5. Oktober hat die Polizia di Stato in Varese White Hash, eine Substanz mit hohem THC-Gehalt, beschlagnahmt. Ein seit wenigen Tagen volljähriger junger Mann wurde gemeldet.',
+    'blog.article.white-hash-sequestro-varese.imageAlt': 'Beschlagnahmung von White Hash durch die Staatspolizei in Varese',
 };
 
 export default blogMetaDe;

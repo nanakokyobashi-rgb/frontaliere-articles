@@ -12701,6 +12701,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.crisi-attrattivita-como-lecco.title': 'Como e Lecco: rischio perdita 14mila lavoratori entro 2029',
     'blog.article.crisi-attrattivita-como-lecco.excerpt': 'Allarme UIL: mancanza di case, mobilità complessa e servizi carenti rischiano di allontanare migliaia di persone in età lavorativa dal territorio.',
     'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Treno passeggeri in arrivo in una stazione tra Como e Lecco',
+    'blog.article.white-hash-sequestro-varese.title': 'Varese, la Polizia di Stato sequestra la nuova White Hash',
+    'blog.article.white-hash-sequestro-varese.excerpt': 'Il 5 ottobre a Varese la Polizia di Stato ha sequestrato White Hash, sostanza ad alto contenuto di Thc. Segnalato un giovane da pochi giorni maggiorenne.',
+    'blog.article.white-hash-sequestro-varese.imageAlt': 'Sequestro della White Hash da parte della Polizia di Stato a Varese',
 };
 
 export default blogMetaIt;
