@@ -14,7 +14,7 @@
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { normalizeReviewInputRevision, reviewHasInputRevision } from './review-test-policy.mjs';
 import { isManagedReview } from './lib/constants.mjs';
 import { isKnownReviewState } from './lib/review-states.mjs';
@@ -556,6 +556,14 @@ function claimMain() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   if (process.argv.includes('--claim')) claimMain();
 }

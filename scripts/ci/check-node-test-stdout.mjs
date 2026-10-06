@@ -74,6 +74,14 @@ function main(argv) {
   return 1;
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   process.exitCode = main(process.argv.slice(2));
 }
