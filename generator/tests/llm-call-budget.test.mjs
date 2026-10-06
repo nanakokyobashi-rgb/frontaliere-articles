@@ -451,6 +451,7 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
   assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
   assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
+  assert.match(img.text, /deadlineAt:\s*imageDeadline/);
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
 });
 

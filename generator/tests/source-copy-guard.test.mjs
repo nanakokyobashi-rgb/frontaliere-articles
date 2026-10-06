@@ -59,6 +59,18 @@ test('una citazione non attribuita o oltre 25 parole resta nel confronto', () =>
   assert.equal(longVerdict.safe, false);
 });
 
+test('calcola la posizione reale delle citazioni dopo un prefisso lungo', () => {
+  const quote = 'La fonte conferma una misura importante per i lavoratori frontalieri della regione';
+  const prefix = 'Contesto redazionale neutro. '.repeat(12);
+  const verdict = evaluateSourceCopy(
+    quote,
+    `${prefix} Secondo la fonte «${quote}».`,
+  );
+  assert.equal(verdict.allowedQuotes, 1);
+  assert.ok(verdict.maxWords < SOURCE_COPY_OVERLAP_THRESHOLD);
+  assert.equal(verdict.safe, true);
+});
+
 test('rigenera dopo il primo overlap e poi accetta la parafrasi', async () => {
   const drafts = [WORDS, 'Una parafrasi indipendente con lessico e struttura completamente diversi.'];
   const calls = [];

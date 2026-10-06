@@ -21,6 +21,7 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.match(imageAdapter, /generateImageFromSpec/);
   assert.match(imageAdapter, /scope: 'article-hero'/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
+  assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
   assert.doesNotMatch(imageAdapter, new RegExp(`fetch\\(|${RETIRED_FLASH_IMAGE_MODEL}|Pollinations|Together|Fal\\.ai|Pixabay|Pexels|Picsum`));
   assert.doesNotMatch(source, new RegExp(RETIRED_FLASH_IMAGE_MODEL));
   assert.match(source, /No governed image or valid catalog fallback/);

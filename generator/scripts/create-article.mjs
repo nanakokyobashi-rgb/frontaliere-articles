@@ -14043,6 +14043,7 @@ async function generateArticleImage(data) {
         outputDir: resolve('public/images/generated'),
         assetId,
         maxAttempts: 3,
+        deadlineAt: imageDeadline,
         onProviderAttempt: ({ provider, attempt }) => {
           console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
         },
