@@ -7799,6 +7799,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.edifici-berna-obbligo-premi.title': 'Property insurance in the Canton of Bern: obligation and premiums',
     'blog.article.edifici-berna-obbligo-premi.excerpt': 'In the Canton of Bern, the obligation and organization of building insurance follow the cantonal rule: a guide to the agency, premiums, and claims.',
     'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Swiss residential building and documents for property insurance',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'House and apartment prices in Switzerland: stable in September',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Single-family homes at -0,1% and apartments at +0,2% in September: Zurich records the sharpest decline, while Ticino grows in condominium ownership.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Swiss residential buildings illustrating regional property price trends',
 };
 
 export default blogMetaChEn;

@@ -98377,6 +98377,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-immobili-settembre-regioni': {
+    title: 'Prezzi case e appartamenti in Svizzera: settembre stabile',
+    description: 'A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, case, appartamenti, settembre',
+    ogTitle: 'Case e appartamenti: prezzi stabili a settembre',
+    ogDescription: 'L\'analisi degli annunci Immoscout, in collaborazione con IAZI, mostra prezzi nazionali quasi stabili in settembre, ma differenze regionali: Zurigo guida il calo delle case, mentre il Ticino sale per la proprietà per piani.',
+    canonicalPath: '/articoli-svizzera/prezzi-immobili-settembre-regioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi case e appartamenti in Svizzera: settembre stabile",
+      "description": "A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prezzi-immobili-settembre-regioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari"
+      },
+      "datePublished": "2026-10-06T06:36:57+00:00",
+      "dateModified": "2026-10-06T06:36:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-immobili-settembre-regioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

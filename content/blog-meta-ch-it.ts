@@ -7799,6 +7799,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.edifici-berna-obbligo-premi.title': 'Assicurazione immobili Canton Berna: obbligo e premi',
     'blog.article.edifici-berna-obbligo-premi.excerpt': 'Nel Cantone di Berna l\'obbligo e l\'organizzazione dell\'assicurazione degli edifici seguono la regola cantonale: guida a ente, premi e sinistri.',
     'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Edificio residenziale svizzero e documenti per l\'assicurazione immobiliare',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'Prezzi case e appartamenti in Svizzera: settembre stabile',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Case unifamiliari a -0,1% e appartamenti a +0,2% in settembre: Zurigo registra il calo più marcato, mentre il Ticino cresce nella proprietà per piani.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari',
 };
 
 export default blogMetaChIt;

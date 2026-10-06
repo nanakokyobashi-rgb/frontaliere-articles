@@ -7799,6 +7799,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.edifici-berna-obbligo-premi.title': 'Immobilienversicherung im Kanton Bern: Pflicht und Prämien',
     'blog.article.edifici-berna-obbligo-premi.excerpt': 'Im Kanton Bern richten sich die Pflicht und die Organisation der Gebäudeversicherung nach der kantonalen Regel: Kassenführung, Prämien und Schadenfälle.',
     'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Schweizer Wohngebäude und Unterlagen zur Gebäudeversicherung',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'Preise für Häuser und Wohnungen in der Schweiz: September stabil',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Einfamilienhäuser bei -0,1% und Wohnungen bei +0,2% im September: Zürich verzeichnet den stärksten Rückgang, während das Tessin beim Stockwerkeigentum zulegt.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Schweizer Wohngebäude als Symbol für regionale Immobilienpreisentwicklungen',
 };
 
 export default blogMetaChDe;
