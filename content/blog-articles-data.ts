@@ -39887,6 +39887,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lipomo-fiuto-roxy-cocaina',
+ category: 'novita',
+ date: '2026-10-06T05:08:37.021Z',
+ image: '/images/blog/lipomo-fiuto-roxy-cocaina.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

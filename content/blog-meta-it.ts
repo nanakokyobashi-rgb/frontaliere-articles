@@ -12660,6 +12660,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.casse-malati-proposte-esperti-risposta.title': 'Casse malati: 5% di aumento e proposte valutate da esperti',
     'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'Nel 2027 il premio cresce del 5%. Tre esperti analizzano cassa statale, prevenzione e costi: in Ticino dal 2029 metà dei cittadini potrebbe avere riduzioni.',
     'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Operazione dei Carabinieri ad Albate: sequestrati 111 grammi di cocaina, hashish e 390 euro. Due cittadini tunisini arrestati, un terzo denunciato.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Operazione antidroga dei Carabinieri con un pastore tedesco a Lipomo',
 };
 
 export default blogMetaIt;

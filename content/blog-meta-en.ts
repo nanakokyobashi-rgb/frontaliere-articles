@@ -12659,6 +12659,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.casse-malati-proposte-esperti-risposta.title': 'Health insurance funds: 5% increase and proposals evaluated by experts',
     'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'In 2027, the premium will increase by 5%. Three experts analyze the state fund, prevention and costs: in Ticino, from 2029, half of citizens could benefit from reductions.',
     'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panoramic view of Lake Lugano with the city in the background, morning light.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, Roxy\'s keen nose uncovers drugs: two arrests',
+    'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Carabinieri operation in Albate: 111 grams of cocaine, hashish and 390 euros seized. Two Tunisian citizens arrested, a third reported.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Drug operation with a German shepherd near an apartment building in Lipomo',
 };
 
 export default blogMetaEn;

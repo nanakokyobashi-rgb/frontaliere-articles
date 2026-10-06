@@ -794,14 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/la-scuola-europea-di-varese-diventa-scuola-ambasciatrice-del-parlamento-europeo/2696125": {
-      "section": "frontaliere",
-      "ts": 1791084763106
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-giornata-della-meraviglia-per-i-bimbi-della-guerra-ottiene-il-riconoscimento-del-parlamento/2696128": {
-      "section": "frontaliere",
-      "ts": 1791084801042
-    },
     "frontaliere::https://www.rsi.ch/info/economia/dazi-ue-sui-%e2%80%9cpacchettini%e2%80%9d-coinvolta-anche-la-posta-svizzera--4131072.html": {
       "section": "frontaliere",
       "ts": 1791092681481
@@ -945,6 +937,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-confartigianato-varese-le-critiche-richiedono-dati-comparabili/2698681": {
       "section": "frontaliere",
       "ts": 1791255486922
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1954785/non-paga-la-cassa-malati-da-due-anni-ora-finisce-davanti-al-pretore": {
+      "section": "frontaliere",
+      "ts": 1791262333741
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1791262398061
     }
   }
 }

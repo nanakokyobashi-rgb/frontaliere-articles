@@ -99882,6 +99882,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lipomo-fiuto-roxy-cocaina': {
+    title: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    description: 'Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lipomo, fiuto, roxy, scopre',
+    ogTitle: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    ogDescription: 'A Lipomo, i militari della Stazione di Albate hanno arrestato due cittadini tunisini dopo il sequestro di 111 grammi di cocaina, un bilancino e 390 euro. Il cane Roxy ha poi trovato 28 grammi di hashish e circa un grammo di cocaina in un\'abitazione.',
+    canonicalPath: '/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lipomo, il fiuto di Roxy scopre droga: due arresti",
+      "description": "Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lipomo-fiuto-roxy-cocaina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operazione antidroga dei Carabinieri con un pastore tedesco a Lipomo"
+      },
+      "datePublished": "2026-10-06T05:08:37+00:00",
+      "dateModified": "2026-10-06T05:08:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
