@@ -243,9 +243,9 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "bdccaeb8f1beec65",
-        "corpus": "bdccaeb8f1beec65",
-        "alignedAt": "2026-10-04"
+        "site": "12617640c1d85ce2",
+        "corpus": "12617640c1d85ce2",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2156,9 +2156,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "a77b360a0093b11a",
-        "corpus": "a77b360a0093b11a",
-        "alignedAt": "2026-10-05"
+        "site": "50c9061065249496",
+        "corpus": "50c9061065249496",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2869,9 +2869,9 @@
       "sitePath": "scripts/lib/itLanguageCheck.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b4c5d683eca4e7aa",
-        "corpus": "b4c5d683eca4e7aa",
-        "alignedAt": "2026-08-09"
+        "site": "9008c8f68cf5d904",
+        "corpus": "9008c8f68cf5d904",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3307,9 +3307,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "e08b2a738a9808b1",
-        "corpus": "e08b2a738a9808b1",
-        "alignedAt": "2026-10-03"
+        "site": "4e2b0a541c32ed70",
+        "corpus": "4e2b0a541c32ed70",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4060,9 +4060,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "340ae4a06bf98a94",
-        "corpus": "340ae4a06bf98a94",
-        "alignedAt": "2026-10-05"
+        "site": "113a5344297263e5",
+        "corpus": "113a5344297263e5",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4071,9 +4071,9 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "865b689c607e9ee7",
-        "corpus": "865b689c607e9ee7",
-        "alignedAt": "2026-10-05"
+        "site": "3a49e83a5550a36d",
+        "corpus": "3a49e83a5550a36d",
+        "alignedAt": "2026-10-06"
       }
     },
     {
