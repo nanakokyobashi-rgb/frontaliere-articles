@@ -254,8 +254,8 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "c03d168080900253",
-        "alignedAt": "2026-09-20"
+        "corpus": "04cd9caf770c4f97",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -835,10 +835,10 @@
       "mode": "adapted",
       "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
-        "site": "898810d03711dfd2",
-        "corpus": "743fe9c86cb0694e",
-        "alignedAt": "2026-09-25",
-        "forcedAt": "2026-09-25T05:32:09.362Z"
+        "site": "7b647c07268b94ce",
+        "corpus": "ebbc7d36f12a6d47",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T00:27:32.975Z"
       }
     },
     {
@@ -997,10 +997,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "f45def87435c51d7",
-        "corpus": "a552e64a97068278",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:11.436Z"
+        "site": "3a28a8c91ab5671b",
+        "corpus": "022da3ec92e72861",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T00:27:33.002Z"
       }
     },
     {
@@ -4245,10 +4245,10 @@
       "mode": "adapted",
       "reason": "Gate del check Node del corpus: conserva il carry-forward del contributo e il fallback deterministico per drift del workflow. Come il sito, una review Codex richiede evidenza della run, identità bot ammessa, marker e HEAD esatta. Dal 2026-09-25 le letture del gate passano da `lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso `failure_kind=transient` con il marker che `review-quota-rescuer.mjs` usa per rilanciare dopo il reset); il modulo e' nel manifest del bootstrap trusted. Adattamento al bucket REST del `GITHUB_TOKEN` di questo repo, che il sito non condivide.",
       "baseline": {
-        "site": "164fe984b258c1ed",
-        "corpus": "31450af30ed026ec",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:28.574Z"
+        "site": "0b1d7b6b0d508458",
+        "corpus": "c810d4cc0cceeb70",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T00:27:33.036Z"
       }
     },
     {

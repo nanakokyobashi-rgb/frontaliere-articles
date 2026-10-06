@@ -1428,7 +1428,7 @@ jobs:
             echo
             echo "## Deterministic body contract"
             if [ "${BODY_CONTRACT_OUTCOME:-}" = "success" ]; then
-              echo "✅ passed on the current body (sections, bullet states, Motivo/Prossimo passo, placeholders, Closes). The body cannot produce a 🔴 Important in this review: at most a 🟡 Nit anchored as \`PR body:L<n>\`."
+              echo "✅ passed on the current body (sections, bullet states, Motivo/Prossimo passo, placeholders, Closes). A body-only 🔴 whose first finding line starts with \`PR body:L<n>\` must carry a \`Body citation: \"<JSON string>\"\` line; the gate declassifies it only when that quoted text is absent from the current body after whitespace/Markdown normalization."
             else
               echo "Verdict unavailable (${BODY_CONTRACT_OUTCOME:-unknown}): apply the REVIEW.md body rules."
             fi
@@ -1565,7 +1565,7 @@ jobs:
 
             **🔴 su righe non cambiate.** L'identita' di un finding e' un id stabile `(path, simbolo, classe, prosa)` che NON contiene il numero di riga: un rebase o un merge di main non la sposta. Un `🔴 Important` NUOVO ancorato SOLO a righe che nessuno ha toccato dall'ultima review viene classificato dal gate (`DECLASSIFIED-UNCHANGED-LINE`) per lasciare una traccia verificabile, ma il percorso resta fail-closed: serve una review successiva che lo risolva esplicitamente prima del merge. Se il rilievo valeva anche allora, ripetilo con lo stesso id stabile e una review pulita; se sei convinto che sia una regressione, dichiarala: `🔴 Important: [regression] ...`, col tag SUBITO DOPO i due punti, e resta bloccante. Le classi ammesse sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`.
 
-            **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body: un dubbio su quelle regole vale al massimo un `🟡 Nit` ancorato `PR body:L<n>`, e il review gate declassa comunque un 🔴 cosi' ancorato su un contratto verde. Ogni stato che il contratto accetta in `## Non implementato (ancora)` — `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e qualunque altro `blocked: <causa>` — e' valido, e su quelli **non si emette 🔴**. Riemettere un 🔴 su una voce che il contratto ha accettato incastra il ciclo: il fixer declina con una ragione, il cap dei round scatta, e `needs-human` atterra con la diagnosi sbagliata su una PR che non ha niente da riparare. Il claim di performance senza baseline (step 7 di REVIEW.md) NON e' una regola del contratto e resta 🔴. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
+            **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body. Se un finding resta ancorato solo a `PR body:L<n>` come prefisso della prima riga, deve citare il testo contestato nella riga seguente: `Body citation: "<JSON string>"`, massimo 240 caratteri. Il review gate declassifica quel finding solo quando la citazione non compare piu' nel body corrente dopo la normalizzazione di spazi e Markdown e pubblica un commento esplicito `Finding superato`; citazione mancante, malformata o ancora presente resta 🔴. `NON_CONTRACT_BODY_RE` mantiene bloccante un claim di performance/capacita' senza baseline finche' compare nella riga corrente; se la citazione manca perche' l'affermazione e' stata rimossa, vale la regola stale. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
             Se il bundle porta una sezione `## Code contribution unchanged`, il codice NON e' cambiato dalla review citata: rigiudica SOLO il body della PR, riporta ogni 🔴 Important di codice ancora aperto con lo stesso path e la stessa riga, non scrivere mai `Fix di` per un anchor di codice, e risolvi un Important sul body solo se il body corrente lo ripara davvero.
 
             **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
@@ -1825,8 +1825,9 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
-          # Unica fonte di verita' sul body: un 🔴 del modello ancorato SOLO su
-          # `PR body:L<n>` non blocca quando questo contratto e' passato.
+          # Unica fonte di verita' sul body: un 🔴 ancorato SOLO su
+          # `PR body:L<n>` deve provare il superamento con una citazione testuale
+          # assente dal body corrente; il contratto verde da solo non basta.
           BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
         run: |
           set -euo pipefail
