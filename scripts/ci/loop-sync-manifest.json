@@ -264,9 +264,10 @@
       "mode": "adapted",
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
-        "site": "82a682cdf5586ce4",
-        "corpus": "a2753413d81077de",
-        "alignedAt": "2026-09-12"
+        "site": "d1fc5b37f2f0c55d",
+        "corpus": "fc74a2c3e737fe83",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:32:17.150Z"
       }
     },
     {
@@ -351,10 +352,10 @@
       "mode": "adapted",
       "reason": "Parser condiviso del fallback con riconoscimento corpus dei log testuali Claude/Anthropic e dei messaggi di quota legacy; il sito usa il parser degli eventi strutturati.",
       "baseline": {
-        "site": "617f7342bb1ab755",
-        "corpus": "748ee752af1354ac",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:08.000Z"
+        "site": "d6c27c773c46b556",
+        "corpus": "1f419e03b6446a4c",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:52.268Z"
       }
     },
     {
@@ -816,9 +817,10 @@
       "mode": "adapted",
       "reason": "Sul sito e' un re-export da functions/src/githubApiHeaders.js, perche' li' il builder deve finire nel bundle delle Cloud Functions. Questo repo non ha functions/ e non deploya nulla del genere, quindi l'implementazione e' inline. Attenzione: il pin X-GitHub-Api-Version ora esiste in due copie.",
       "baseline": {
-        "site": "20e4e76243cb60b0",
-        "corpus": "bb17921f280d33c5",
-        "alignedAt": "2026-08-07"
+        "site": "b68c2b4779ffdd16",
+        "corpus": "363fc63eb7e11f08",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:53.862Z"
       }
     },
     {
@@ -938,9 +940,9 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "613f1c89ff5888a0",
-        "corpus": "613f1c89ff5888a0",
-        "alignedAt": "2026-10-04"
+        "site": "896a7c71ea559b4c",
+        "corpus": "896a7c71ea559b4c",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1048,11 +1050,11 @@
     {
       "path": "scripts/ci/lib/parent-close-recurrence.mjs",
       "mode": "identical",
-      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` dice se un monitor (`🔁 **Reopened**` di `scripts/lib/github-issue-creator.mjs`) ha riaperto il padre decomposto DOPO l'ultimo marker `DECOMPOSED_INTO`; in quel caso il PARENT-CLOSE non lo richiude (valerielinc-ops/frontaliere-si-o-no#11312, origine site 5661; qui #339 «Loop drift», 25 PARENT-CLOSE e 35 riaperture al 2026-10-04). Copiata byte-per-byte dal sito: modulo puro, nessun adattamento. Il drainer adattato importa `reopenedAfterDecomposition` e `decomposedIntoNumbers` (unica definizione di `DECOMPOSED_INTO_RE`, come sul sito); il resto del delta del drainer non e' riconciliato in questo giro. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` confronta lo sha256 del file con questa baseline.",
+      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` riconosce `🔁 **Reopened**` e `🔁 Recurrence on workflow run.` dopo l'ultimo marker `DECOMPOSED_INTO`; `decideParentRearm` aggiunge la decisione pura, l'idempotenza per riapertura, il tetto per issue e il fail-closed sui dati illeggibili. Il modulo resta copiato byte-per-byte dal sito (merge `valerielinc-ops/frontaliere-si-o-no#11941`, poi #11968, #11975 e #11987 per gli spareggi al secondo), senza adattamento; la baseline è stata ricalcolata sui due file reali. Il drainer corpus adattato importa anche il formatter del marker e applica parser numerico locale, route/classificatore e guard `manifest-pinned-issues.mjs` prima del PARENT-REARM. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` sorveglia l'identità del modulo.",
       "baseline": {
-        "site": "2547bd9672848f53",
-        "corpus": "2547bd9672848f53",
-        "alignedAt": "2026-10-04"
+        "site": "4c01b7bcfe6c1b97",
+        "corpus": "4c01b7bcfe6c1b97",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1842,9 +1844,10 @@
       "mode": "adapted",
       "reason": "Catalogo delle immagini del giornalista. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Un solo adattamento oltre a quello: il ramo `DRY_RUN=1` in coda, che sul sito non esiste. Dal 2026-10-06 il corpus include solo copertine con record Commons, generated o editorial-upload validi; i nuovi producer scrivono direttamente il proprio registro e questo catalogo non puo' autorizzare da solo un file senza provenienza. Senza, uno smoke run di CI che voleva solo dimostrare che il modulo si CARICA finiva per creare public/data/ e scrivere il catalogo. Il gemello del sito non gira piu' da solo e non va aggiornato per questa policy corpus-only.",
       "baseline": {
-        "site": "43b2a0639c74c954",
-        "corpus": "21607559bddd68c3",
-        "alignedAt": "2026-08-09"
+        "site": "5416708524133f08",
+        "corpus": "1ca3910be781972d",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:53.976Z"
       }
     },
     {
@@ -2067,7 +2070,7 @@
     {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
-      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre sia il catalogo public/images/blog sia le copertine governate public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
+      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre il catalogo e le copertine governate sotto public/images/blog, oltre agli eventuali asset governati sotto public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
         "corpus": "08b806da4017d729",
@@ -2187,9 +2190,10 @@
       "mode": "adapted",
       "reason": "Il parser del corpus sceglie il primo segmento bold introdotto per evitare che una nota successiva diventi il titolo; adattamento necessario per il contract del corpus (#1507).",
       "baseline": {
-        "site": "6e837fa55b30715f",
-        "corpus": "75af08e1ca0b64d3",
-        "alignedAt": "2026-09-15"
+        "site": "353f72a5179dff04",
+        "corpus": "d0cb2ebf97bac115",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:54.083Z"
       }
     },
     {
@@ -2323,9 +2327,10 @@
       "mode": "adapted",
       "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il cap del ledger evergreen portato a 2048. Le sezioni frontaliere e svizzera condividono lo stesso file di stato e i pool correnti hanno circa 537 e 610 topic: il vecchio cap 500 espelleva rifiuti ancora validi dalla FIFO, permettendo alle run successive di riprovarli. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
       "baseline": {
-        "site": "963503e2e083d20a",
-        "corpus": "0d9e75ceb94e873a",
-        "alignedAt": "2026-08-09"
+        "site": "f2dee9a957a468d3",
+        "corpus": "720ed7bd9d3a345c",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:32:19.685Z"
       }
     },
     {
@@ -2559,6 +2564,16 @@
         "site": null,
         "corpus": "4f996899ef5c3532",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/ts-string-map.mjs",
+      "mode": "corpus-only",
+      "reason": "Lettore dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312). Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
+      "baseline": {
+        "site": null,
+        "corpus": "628630f8ef0e0852",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2960,10 +2975,10 @@
       "mode": "adapted",
       "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito. Lotto 2 issue #6369: portate nel gemello adattato le due correzioni di valerielinc-ops/frontaliere-si-o-no#11771 (preambolo con `{` non bilanciata e selezione di root array evitando un array annidato); riallineata la baseline ai blob verificati senza rendere i percorsi generator node:test identici al sito.",
       "baseline": {
-        "site": "dfad523d048204f2",
-        "corpus": "71381efc4d151f66",
+        "site": "86f58c7016d57bef",
+        "corpus": "01d6f42092d2b18c",
         "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "forcedAt": "2026-10-06T21:28:54.202Z"
       }
     },
     {
@@ -2971,9 +2986,10 @@
       "sitePath": "scripts/lib/llm-payload-diagnostics.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "f2b824a165d0aa28",
-        "corpus": "007e5a5b07e0e7d2",
-        "alignedAt": "2026-09-07"
+        "site": "7e5415ea50f9ac8e",
+        "corpus": "9bd0a39e7a1a03cd",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:32:20.046Z"
       },
       "reason": "Il gemello e' atterrato sul sito come `scripts/lib/llm-payload-diagnostics.mjs` (issue valerielinc-ops/frontaliere-si-o-no#6027, chiusa il 2026-08-19), ma la voce era rimasta `corpus-only-pending`: senza `sitePath` loop-drift-check cercava `generator/scripts/lib/...` DENTRO il sito, dove non esiste, quindi non l'ha mai vista `-landed` e il censimento opt-in la contava stale contro una trackingIssue chiusa (issue #988). `adapted` e non `identical` perche' i due lati non sono byte-identici, pur avendo lo stesso comportamento: stessa riga di diagnostica, stessi campi sempre presenti anche a zero, stesse soglie. Divergono su due punti, entrambi voluti: (a) la costante privata del cap sulle chiavi elencate, `MAX_DIAG_KEYS` sul sito e `MAX_KEYS` qui — un nome, non una semantica, e non e' esportata; (b) l'intestazione, che su ciascun lato dichiara l'altro come gemello e tiene le misure nella forma in cui sono state prese: qui i numeri di run (32134269129, 32140039370) e il dettaglio del desync di `findMatchingClose()`, sul sito la loro sintesi con il rimando al corpus. Nessuna delle due e' un fix di comportamento mancante a un lato, quindi non c'e' niente da portare; registrarla `identical` la farebbe leggere `undeclared-drift` alla prima passata e `transportVerdict()` smetterebbe di copiare il gemello senza che niente fallisca."
     },
@@ -3440,9 +3456,10 @@
       "mode": "adapted",
       "reason": "Link al CSS critico. Estratto per chiusura di `build-plugins/shared/criticalCss.ts` (893 righe la', 24 qui: il resto e' il payload CSS inline che il percorso articolo non emette). Stessa nota sulla guardia inesistente.",
       "baseline": {
-        "site": "0c5a992dec3b8ff6",
+        "site": "7ccd19b0d3a8ea26",
         "corpus": "0d394f21212a14bb",
-        "alignedAt": "2026-08-09"
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:24:24.340Z"
       }
     },
     {
@@ -3490,12 +3507,11 @@
     {
       "path": "host/shared/safeTruncate.ts",
       "sitePath": "build-plugins/shared/safeTruncate.ts",
-      "mode": "adapted",
-      "reason": "I due host condivisi sono temporaneamente diversi: il corpus conserva l'ottimizzazione senza il claim quantitativo e il sito main conserva il commento precedente; le baseline attestano i due blob reali e impediscono al trasporto automatico di sovrascrivere un lato. La riallineatura è tracciata nella PR sito #9881 e richiede il successivo trasporto del gemello.",
+      "mode": "identical",
       "baseline": {
-        "site": "392ed6e280a9c039",
-        "corpus": "5ced05e5850f4279",
-        "alignedAt": "2026-09-25"
+        "site": "7b3af6898dfb3f83",
+        "corpus": "7b3af6898dfb3f83",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -5341,6 +5357,16 @@
       "baseline": {
         "site": null,
         "corpus": "4403a7a168643f6c",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "data/article-type-readings.json",
+      "mode": "corpus-only",
+      "reason": "Ledger editoriale delle letture articolo per articolo usato dal backfill di `articleType` per i 210 stale frontaliere. Non esiste sul sito: la classificazione e la sua prova di lettura appartengono al corpus, mentre il sito consuma il registry pubblicato via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
       }
     }

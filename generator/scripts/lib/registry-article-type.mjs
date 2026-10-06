@@ -39,10 +39,21 @@
  */
 
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
-import { renderCantonLine } from './registry-canton-field.mjs';
+import { registryEntrySpans, renderCantonLine } from './registry-canton-field.mjs';
 
 /** I due valori ammessi nel registry. */
 export const REGISTRY_ARTICLE_TYPES = Object.freeze(['news', 'evergreen']);
+
+/** La riga `articleType:` usata sia dal generatore sia dai backfill. */
+export function renderArticleTypeLine(articleType, propIndent) {
+  if (!REGISTRY_ARTICLE_TYPES.includes(articleType)) {
+    throw new Error(
+      `renderArticleTypeLine: articleType non ammesso ${JSON.stringify(articleType)} `
+        + `(ammessi: ${REGISTRY_ARTICLE_TYPES.join(', ')})`,
+    );
+  }
+  return `${propIndent}articleType: '${articleType}',`;
+}
 
 const YMD_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -137,7 +148,7 @@ export function renderRegistryEntry(data, { objIndent, propIndent, today, imageP
     `${propIndent}date: '${today}',`,
     `${propIndent}image: '${imagePath}',`,
     `${propIndent}hasCalculator: ${data.hasCalculator ? 'true' : 'false'},`,
-    `${propIndent}articleType: '${data.articleType}',`,
+    renderArticleTypeLine(data.articleType, propIndent),
   ];
   // D13 sezioni cantonali: il campo multi-label `canton`, interno al corpus
   // (fuori dall'allowlist di registry-api-entry.mjs). Assente se vuoto.
@@ -153,6 +164,43 @@ export function renderRegistryEntry(data, { objIndent, propIndent, today, imageP
   }
   lines.push(`${objIndent}},`);
   return lines;
+}
+
+/**
+ * Inserisce `articleType` in una voce legacy che ne è priva.
+ * Le altre righe della voce restano byte-identiche.
+ */
+export function setEntryArticleType(entryText, articleType) {
+  const lines = String(entryText).split('\n');
+  const rendered = renderArticleTypeLine(articleType, '');
+  const existing = lines.findIndex((line) => /^\s*articleType:/u.test(line));
+  if (existing !== -1) {
+    const current = lines[existing].trim();
+    if (current === rendered) return entryText;
+    throw new Error(`setEntryArticleType: voce con articleType diverso da ${rendered}`);
+  }
+  const anchor = lines.findIndex((line) => /^\s*hasCalculator:/u.test(line));
+  if (anchor === -1) throw new Error('setEntryArticleType: voce senza hasCalculator su riga propria');
+  const indent = /^(\s*)/u.exec(lines[anchor])[1];
+  lines.splice(anchor + 1, 0, renderArticleTypeLine(articleType, indent));
+  return lines.join('\n');
+}
+
+/** Applica una mappa id -> tipo, toccando solo le voci presenti nella mappa. */
+export function applyRegistryArticleTypes(source, typesById) {
+  let out = '';
+  let last = 0;
+  let changed = 0;
+  for (const span of registryEntrySpans(source)) {
+    if (!typesById.has(span.id)) continue;
+    const next = setEntryArticleType(span.text, typesById.get(span.id));
+    if (next === span.text) continue;
+    out += source.slice(last, span.start) + next;
+    last = span.end;
+    changed += 1;
+  }
+  out += source.slice(last);
+  return { source: out, changed };
 }
 
 /**

@@ -31,10 +31,8 @@
     "REVIEW.md",
     "generator/scripts/batch-add-faq-to-articles.mjs",
     "generator/scripts/create-article.mjs",
-    "generator/scripts/generate-journalist-image-catalog.mjs",
     "generator/scripts/lib/ai-models.mjs",
     "generator/scripts/lib/article-free-mt.mjs",
-    "generator/scripts/lib/article-topic-selector.mjs",
     "generator/scripts/lib/atomic-write-json.mjs",
     "generator/scripts/lib/events-utils.mjs",
     "generator/scripts/load-rc-env.mjs",
@@ -53,12 +51,9 @@
     "host/firebaseAuthPersistence.ts",
     "host/htmlTemplate.ts",
     "host/seoHubsData.ts",
-    "host/shared/criticalCss.ts",
     "host/shared/literalMarkdown.ts",
-    "host/shared/safeTruncate.ts",
     "host/shared/seoContentTokens.ts",
     "scripts/ci/auto-merge-eval.mjs",
-    "scripts/ci/claude-rate-limit.mjs",
     "scripts/ci/collect-followup-batch.mjs",
     "scripts/ci/followup-drainer.mjs",
     "scripts/ci/followup-resolution-match.mjs",
@@ -78,8 +73,6 @@
     "scripts/ci/unwedge-pages-deploy-queue.mjs",
     "scripts/lib/cdn-asset-existence.mjs",
     "scripts/lib/classify-issue.mjs",
-    "scripts/lib/githubApiHeaders.mjs",
-    "scripts/lib/job-title-normalization.mjs",
     "scripts/lib/push-article-shard-incremental.sh"
   ]
 }
