@@ -39992,6 +39992,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bollettino-frontaliere-2026-10-06',
+ category: 'novita',
+ date: '2026-10-06T11:53:20.937Z',
+ image: '/images/blog/bollettino-frontaliere-2026-10-06.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'samuele-valente',
+ authorName: 'Samuele Valente',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

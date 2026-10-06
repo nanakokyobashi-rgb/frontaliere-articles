@@ -12688,6 +12688,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.trame-oriente-chiasso.title': 'Muster des Orients: Mini-Kimonos in Chiasso zu sehen',
     'blog.article.trame-oriente-chiasso.excerpt': 'In Chiasso präsentiert die Ausstellung Trame d\'Oriente von SAMS vom 8. bis 22. Oktober zehn Mini-Kimonos aus Vintage-Seidenstoffen zwischen japanischer Kultur und lokaler Schneiderei.',
     'blog.article.trame-oriente-chiasso.imageAlt': 'Zehn Mini-Kimonos aus Vintage-Seide bei der Ausstellung in Chiasso',
+    'blog.article.bollettino-frontaliere-2026-10-06.title': 'Grenzgänger-Tagesbulletin – 6. Oktober 2026: 746 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-06.excerpt': 'Die Zahlen von heute, 6. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 6. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Grenzgänger-Bulletin vom 6. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'Die Zahlen vom 6. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;
