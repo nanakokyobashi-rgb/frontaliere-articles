@@ -12643,6 +12643,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.biasca-accoltellamento-21enne.title': 'Tessin, 21-jähriger Italiener niedergestochen: Lebensgefahr',
     'blog.article.biasca-accoltellamento-21enne.excerpt': 'In Biasca wurde ein 21-jähriger italienischer Staatsbürger, der im Bezirk Leventina wohnhaft ist, schwer niedergestochen: Es besteht Lebensgefahr.',
     'blog.article.biasca-accoltellamento-21enne.imageAlt': 'Via Bellinzona in Biasca, Tessin, wo Polizei und Rettungskräfte im Einsatz waren.',
+    'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino: Lereti-Arbeiten in der via Copelli bis zum 27. November',
+    'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Erneuerung des Wasserversorgungsnetzes in der Via Copelli begonnen: Vorgesehen sind 400 Meter neue Leitungen und eine wechselseitige Einbahnregelung mit Ampel.',
+    'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Baustelle in der via Copelli in Luino zur Erneuerung des Wassernetzes',
 };
 
 export default blogMetaDe;

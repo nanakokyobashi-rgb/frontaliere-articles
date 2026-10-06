@@ -99712,6 +99712,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavori-lereti-via-copelli-luino': {
+    title: 'Luino: lavori Lereti in via Copelli fino al 27 novembre',
+    description: 'Cantiere Lereti a Luino in via Copelli: rinnovo rete idrica con senso unico alternato. Fine lavori prevista per il 27 novembre, salvo imprevisti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, luino, lavori, lereti, copelli',
+    ogTitle: 'Luino: lavori Lereti in via Copelli fino al 27 novembre',
+    ogDescription: 'Avviato il rinnovo della rete idrica in via Copelli a Luino: 400 metri di nuove tubazioni e senso unico alternato. Scopri i dettagli sul tratto interessato e le tempistiche.',
+    canonicalPath: '/articoli-frontaliere/lavori-lereti-via-copelli-luino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luino: lavori Lereti in via Copelli fino al 27 novembre",
+      "description": "Cantiere Lereti a Luino in via Copelli: rinnovo rete idrica con senso unico alternato. Fine lavori prevista per il 27 novembre, salvo imprevisti.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-lereti-via-copelli-luino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere stradale in via Copelli a Luino per il rinnovo della rete idrica"
+      },
+      "datePublished": "2026-10-06T00:22:58+00:00",
+      "dateModified": "2026-10-06T00:22:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-lereti-via-copelli-luino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

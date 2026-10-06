@@ -12645,6 +12645,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.biasca-accoltellamento-21enne.title': 'Ticino, 21enne italiano accoltellato: rischia la vita',
     'blog.article.biasca-accoltellamento-21enne.excerpt': 'A Biasca un 21enne cittadino italiano, residente nel distretto di Leventina, è stato gravemente accoltellato: la vita è in pericolo.',
     'blog.article.biasca-accoltellamento-21enne.imageAlt': 'Via Bellinzona a Biasca, in Ticino, dove sono intervenuti polizia e soccorritori.',
+    'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino: lavori Lereti in via Copelli fino al 27 novembre',
+    'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Avviato il rinnovo della rete acquedottistica in via Copelli: previsti 400 metri di nuove tubazioni e senso unico alternato con semaforo.',
+    'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Cantiere stradale in via Copelli a Luino per il rinnovo della rete idrica',
 };
 
 export default blogMetaIt;
