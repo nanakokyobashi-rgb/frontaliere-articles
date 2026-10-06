@@ -651,7 +651,7 @@ jobs:
       section_gate: canton
       chain_dispatch: false
       url: ''
-      dry_run: false
+      dry_run: true
 `;
 }
 

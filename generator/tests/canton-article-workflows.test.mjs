@@ -581,6 +581,7 @@ test('un solo self-test runtime copre core e caller senza fan-out', () => {
   assert.equal((SELF_TEST.match(/uses: \.\/\.github\/workflows\/generate-article-core\.yml/g) || []).length, 1);
   assert.match(SELF_TEST, /section_gate: canton/);
   assert.match(SELF_TEST, new RegExp(`caller_workflow: ${callerWorkflowFile(canonical.code)}`));
+  assert.match(SELF_TEST, /dry_run: true/);
   for (const { file, pushPaths } of CALLERS) {
     assert.ok(!pushPaths.includes(`${WORKFLOWS_DIR}/${file}`), `${file}: self-test duplicato nel caller`);
   }
