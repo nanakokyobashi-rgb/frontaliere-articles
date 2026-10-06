@@ -7796,6 +7796,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.berna-protezione-servizio-indennita.title': 'Protection civile du canton de Berne : exigences et indemnités',
     'blog.article.berna-protezione-servizio-indennita.excerpt': 'Dans le canton de Berne, la protection civile est coordonnée au niveau cantonal. Les convocations et les indemnités doivent être vérifiées auprès de l\'autorité compétente.',
     'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protection civile suisse devant un bâtiment administratif cantonal',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Assurance des immeubles dans le canton de Berne : obligation et primes',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'Dans le canton de Berne, l’obligation et l’organisation de l’assurance des bâtiments suivent la règle cantonale : guide sur l’organisme, les primes et les sinistres.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Immeuble résidentiel suisse et documents d\'assurance immobilière',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'Prix des maisons et des appartements en Suisse : septembre stable',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Maisons individuelles à -0,1% et appartements à +0,2% en septembre : Zurich enregistre la baisse la plus marquée, tandis que le Tessin progresse dans la propriété par étages.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Immeubles résidentiels suisses illustrant les écarts régionaux des prix',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli ne paie pas la caisse-maladie et se rend devant le juge',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, médecin de Mendrisio, compara devant le juge de paix pour non-paiement de l\'assurance maladie suisse',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Primes de caisse-maladie en hausse : vers 1000 francs par mois',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'L’année prochaine, la prime moyenne sera de 488 francs (+23, +5%) ; dans 14 ans, elle pourrait atteindre 966,20 francs si la tendance de 5% par an se poursuit.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Famille suisse examinant les dépenses de santé et les primes d\'assurance maladie autour de la table de cuisine',
 };
 
 export default blogMetaChFr;

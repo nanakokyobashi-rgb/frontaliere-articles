@@ -12666,6 +12666,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incidente-monte-generoso-varese.title': 'Incidente a Varese vicino all\'Università dell\'Insubria',
     'blog.article.incidente-monte-generoso-varese.excerpt': 'Un incidente è segnalato in via Monte Generoso, a Varese, a un passo dall\'Università dell\'Insubria.',
     'blog.article.incidente-monte-generoso-varese.imageAlt': 'Strada urbana vicino all\'Università dell\'Insubria a Varese',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Multe e pene: conversione in lavori utili in Ticino',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 casi in Ticino nel 2025. A Zurigo 1\'388 richieste: 4 ore di lavoro valgono 1 giorno di carcere.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Persona con guanti da lavoro che tiene un foglio con checklist in un corridoio ospedaliero in Ticino.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Dal 12 al 16 ottobre lavori di pavimentazione sulla cantonale a Gambarogno, tra il sottopasso FFS e la salita per Caviano - Scaiano. Attese fino a 30 minuti.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Lavori di pavimentazione sulla cantonale di Gambarogno tra il sottopasso FFS e Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'In settembre la disoccupazione svizzera resta al 3%, Ticino al 2,9% con 4\'800 disoccupati, mentre i posti vacanti salgono a 44\'200.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Vista di Lugano con professionisti e segno dell\'ufficio di collocamento, rappresentante il mercato del lavoro ticinese.',
 };
 
 export default blogMetaIt;

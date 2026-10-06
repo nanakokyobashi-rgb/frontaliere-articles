@@ -7796,6 +7796,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.berna-protezione-servizio-indennita.title': 'Zivilschutz im Kanton Bern: Voraussetzungen und Entschädigung',
     'blog.article.berna-protezione-servizio-indennita.excerpt': 'Im Kanton Bern wird der Zivilschutz auf kantonaler Ebene koordiniert. Aufgebote und Entschädigungen sind bei der zuständigen Behörde zu überprüfen.',
     'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Schweizer Zivilschutz vor einem kantonalen Verwaltungsgebäude',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Immobilienversicherung im Kanton Bern: Pflicht und Prämien',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'Im Kanton Bern richten sich die Pflicht und die Organisation der Gebäudeversicherung nach der kantonalen Regel: Kassenführung, Prämien und Schadenfälle.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Schweizer Wohngebäude und Unterlagen zur Gebäudeversicherung',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'Preise für Häuser und Wohnungen in der Schweiz: September stabil',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Einfamilienhäuser bei -0,1% und Wohnungen bei +0,2% im September: Zürich verzeichnet den stärksten Rückgang, während das Tessin beim Stockwerkeigentum zulegt.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Schweizer Wohngebäude als Symbol für regionale Immobilienpreisentwicklungen',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli zahlt seine Krankenversicherung nicht und muss sich vor Gericht verantworten.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, Arzt aus Mendrisio, erscheint beim Bezirksgericht wegen ausstehender Krankenkassenbeiträge',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Krankenkassenprämien steigen: auf dem Weg zu 1000 Franken pro Monat',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'Im nächsten Jahr wird die durchschnittliche Prämie 488 Franken betragen (+23, +5%); in 14 Jahren könnte sie 966,20 Franken erreichen, wenn der jährliche Trend von 5% anhält.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Schweizer Familie überprüft Gesundheitsausgaben und Krankenkassenprämien am Küchentisch',
 };
 
 export default blogMetaChDe;

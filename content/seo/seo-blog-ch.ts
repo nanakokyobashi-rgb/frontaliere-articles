@@ -98343,6 +98343,142 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-edifici-berna-obbligo-premi': {
+    title: 'Assicurazione immobili Canton Berna: obbligo e premi',
+    description: 'Assicurazione immobili nel Canton Berna: obbligo, ente competente, coperture, premi e procedura in caso di sinistro, con confronto alle altre voci svizzere.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicurazione, immobili, canton, berna',
+    ogTitle: 'Assicurazione immobili Canton Berna: obbligo e premi',
+    ogDescription: 'Nel Canton Berna il primo nodo è capire se l\'assicurazione degli edifici è obbligatoria e chi la gestisce. La guida separa ente cantonale, assicuratore autorizzato, premi, coperture e sinistro dalle imposte, dalla LAMal e dalla previdenza.',
+    canonicalPath: '/articoli-svizzera/edifici-berna-obbligo-premi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicurazione immobili Canton Berna: obbligo e premi",
+      "description": "Assicurazione immobili nel Canton Berna: obbligo, ente competente, coperture, premi e procedura in caso di sinistro, con confronto alle altre voci svizzere.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/edifici-berna-obbligo-premi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero e documenti per l'assicurazione immobiliare"
+      },
+      "datePublished": "2026-10-06T06:00:48+00:00",
+      "dateModified": "2026-10-06T06:00:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/edifici-berna-obbligo-premi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prezzi-immobili-settembre-regioni': {
+    title: 'Prezzi case e appartamenti in Svizzera: settembre stabile',
+    description: 'A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, case, appartamenti, settembre',
+    ogTitle: 'Case e appartamenti: prezzi stabili a settembre',
+    ogDescription: 'L\'analisi degli annunci Immoscout, in collaborazione con IAZI, mostra prezzi nazionali quasi stabili in settembre, ma differenze regionali: Zurigo guida il calo delle case, mentre il Ticino sale per la proprietà per piani.',
+    canonicalPath: '/articoli-svizzera/prezzi-immobili-settembre-regioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi case e appartamenti in Svizzera: settembre stabile",
+      "description": "A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prezzi-immobili-settembre-regioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari"
+      },
+      "datePublished": "2026-10-06T06:36:57+00:00",
+      "dateModified": "2026-10-06T06:36:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-immobili-settembre-regioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ostinelli-cassa-malati-udienza-pretore': {
+    title: 'Ostinelli non paga la cassa malati e va davanti al pretore',
+    description: 'Roberto Ostinelli, medico di Mendrisio, ha smesso di pagare la cassa malati svizzera da giugno 2024 e deve presentarsi davanti al pretore il 6 ottobre dopo aver',
+    keywords: 'frontalieri, ticino, svizzera, italia, ostinelli, paga, cassa, malati',
+    ogTitle: 'Ostinelli non paga la cassa malati e va davanti al pretore',
+    ogDescription: 'Il medico e parlamentare Roberto Ostinelli, residente a Mendrisio, non versa più il premio della cassa malati svizzera da giugno 2024, optando per un\'assicurazione internazionale da 140 euro al mese che dice valida anche in Svizzera. Dopo il rifiuto',
+    canonicalPath: '/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ostinelli non paga la cassa malati e va davanti al pretore",
+      "description": "Roberto Ostinelli, medico di Mendrisio, ha smesso di pagare la cassa malati svizzera da giugno 2024 e deve presentarsi davanti al pretore il 6 ottobre dopo aver",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ostinelli-cassa-malati-udienza-pretore.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Roberto Ostinelli, medico di Mendrisio, davanti al pretore per il mancato pagamento della cassa malati"
+      },
+      "datePublished": "2026-10-06T07:13:37+00:00",
+      "dateModified": "2026-10-06T07:13:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-costi-assicurazione-base-proiezione': {
+    title: 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    description: 'L\'anno prossimo il premio medio dell\'assicurazione base sarà 488 franchi (+23, +5%). Se il trend del 5% annuo continua, tra 14 anni si avvicinerà a 966,20',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, aumento',
+    ogTitle: 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    ogDescription: 'L\'articolo analizza l aumento previsto dei premi dell\'assicurazione obbligatoria: 488 franchi al mese l anno prossimo (+5%, +23 franchi). Secondo la proiezione del 5% annuo, il premio potrebbe raggiungere 966,20 franchi dopo 14 anni e più del doppio',
+    canonicalPath: '/articoli-svizzera/costi-assicurazione-base-proiezione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati in aumento: verso i 1000 franchi al mese",
+      "description": "L'anno prossimo il premio medio dell'assicurazione base sarà 488 franchi (+23, +5%). Se il trend del 5% annuo continua, tra 14 anni si avvicinerà a 966,20",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/costi-assicurazione-base-proiezione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera che controlla le spese sanitarie e i premi della cassa malati sul tavolo della cucina"
+      },
+      "datePublished": "2026-10-06T07:50:50+00:00",
+      "dateModified": "2026-10-06T07:50:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costi-assicurazione-base-proiezione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
