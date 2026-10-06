@@ -7796,6 +7796,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.berna-protezione-servizio-indennita.title': 'Protezione civile canton Berna: requisiti e indennità',
     'blog.article.berna-protezione-servizio-indennita.excerpt': 'Nel Cantone di Berna la protezione civile è coordinata a livello cantonale. Convocazioni e indennità vanno verificate presso l\'autorità competente.',
     'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protezione civile svizzera davanti a un edificio amministrativo cantonale',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Assicurazione immobili Canton Berna: obbligo e premi',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'Nel Cantone di Berna l\'obbligo e l\'organizzazione dell\'assicurazione degli edifici seguono la regola cantonale: guida a ente, premi e sinistri.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Edificio residenziale svizzero e documenti per l\'assicurazione immobiliare',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'Prezzi case e appartamenti in Svizzera: settembre stabile',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Case unifamiliari a -0,1% e appartamenti a +0,2% in settembre: Zurigo registra il calo più marcato, mentre il Ticino cresce nella proprietà per piani.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli non paga la cassa malati e va davanti al pretore',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un\'assicurazione internazionale.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, medico di Mendrisio, davanti al pretore per il mancato pagamento della cassa malati',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'L\'anno prossimo il premio medio sarà 488 franchi (+23, +5%); tra 14 anni potrebbe raggiungere 966,20 franchi se il trend del 5% annuo continua.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Famiglia svizzera che controlla le spese sanitarie e i premi della cassa malati sul tavolo della cucina',
 };
 
 export default blogMetaChIt;

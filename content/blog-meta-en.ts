@@ -12665,6 +12665,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-monte-generoso-varese.title': 'Accident in Varese near Università dell\'Insubria',
     'blog.article.incidente-monte-generoso-varese.excerpt': 'An accident has been reported on Via Monte Generoso, in Varese, just a stone’s throw from the University of Insubria.',
     'blog.article.incidente-monte-generoso-varese.imageAlt': 'Urban street near the University of Insubria in Varese',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Fines and sentences: conversion into community service in Ticino',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 cases in Ticino in 2025. In Zurich, 1\'388 requests: 4 hours of work are worth 1 day in prison.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Person wearing work gloves holding a checklist in a hospital corridor in Ticino.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: works on the cantonal road, delays of up to 30 minutes',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'From October 12 to 16, paving works on the cantonal road in Gambarogno, between the FFS underpass and the road uphill to Caviano - Scaiano. Delays of up to 30 minutes.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Paving works on the cantonal road in Gambarogno between the FFS underpass and Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Unemployment stable at 3% in Switzerland in September 2026',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'In September, unemployment in Switzerland remains at 3% and in Ticino at 2,9%, with 4\'800 unemployed, while job vacancies rise to 44\'200.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Lugano street view with commuters and a subtle unemployment office sign, illustrating the Ticino job market.',
 };
 
 export default blogMetaEn;

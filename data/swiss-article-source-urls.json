@@ -1,19 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/prezzo-olio-da-riscaldamento-alle-stelle%2c-colpa-di-usa-e-iran/92006003": {
-    "articleId": "prezzo-olio-riscaldamento-alle-stelle-usa-iran",
-    "ts": "2026-09-04T11:51:32.624Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1948018/la-sicurezza-informatica-al-centro-non-possiamo-limitarci-a-costruire-muri-sempre-piu-alti": {
-    "articleId": "sicurezza-informatica-cyber-security-day-ated",
-    "ts": "2026-09-04T12:08:12.075Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1948052/volkswagen-fornitori-conseguenze-volumi-industria": {
-    "articleId": "volkswagen-fornitori-svizzeri",
-    "ts": "2026-09-04T12:27:39.823Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/b2f6vq9fb0d6": {
     "articleId": "aggiornamento-direttiva-crs-2026",
     "ts": "2026-09-04T13:42:36.149Z",
@@ -2497,6 +2482,21 @@
   "https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
     "articleId": "tamedia-cancella-34-posti-lavoro",
     "ts": "2026-10-06T03:24:07.811Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954949/svizzera-prezzi-case-appartamenti-settembre": {
+    "articleId": "prezzi-immobili-settembre-regioni",
+    "ts": "2026-10-06T06:36:57.429Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1954785/non-paga-la-cassa-malati-da-due-anni-ora-finisce-davanti-al-pretore": {
+    "articleId": "ostinelli-cassa-malati-udienza-pretore",
+    "ts": "2026-10-06T07:13:38.028Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954942/premi-anni-aumento-diventera-afferma": {
+    "articleId": "costi-assicurazione-base-proiezione",
+    "ts": "2026-10-06T07:50:51.196Z",
     "keyForm": 2
   }
 }

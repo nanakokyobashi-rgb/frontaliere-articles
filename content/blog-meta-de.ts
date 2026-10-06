@@ -12664,6 +12664,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incidente-monte-generoso-varese.title': 'Unfall in Varese nahe der Università dell\'Insubria',
     'blog.article.incidente-monte-generoso-varese.excerpt': 'Ein Unfall wird in der Via Monte Generoso, Varese, nur einen Schritt von der Universität Insubria entfernt, gemeldet.',
     'blog.article.incidente-monte-generoso-varese.imageAlt': 'Stadtstrasse nahe der Universität Insubria in Varese',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Bussen und Strafen: Umwandlung in gemeinnützige Arbeit im Tessin',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 Fälle im Tessin im Jahr 2025. In Zürich 1\'388 Anfragen: 4 Stunden Arbeit entsprechen 1 Tag Haft.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Person mit Arbeitshandschuhen, die eine Checkliste in einem Krankenhausflur im Tessin hält.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: Arbeiten auf der Kantonsstrasse, Wartezeiten von bis zu 30 Minuten',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Vom 12. bis 16. Oktober Belagsarbeiten auf der Kantonsstrasse in Gambarogno, zwischen der FFS-Unterführung und der Auffahrt nach Caviano - Scaiano. Wartezeiten von bis zu 30 Minuten.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Belagsarbeiten auf der Kantonsstrasse in Gambarogno zwischen FFS-Unterführung und Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Arbeitslosigkeit in der Schweiz im September 2026 stabil bei 3%',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'Im September bleibt die Arbeitslosigkeit in der Schweiz bei 3%, im Tessin bei 2,9% mit 4\'800 Arbeitslosen, während die Zahl der offenen Stellen auf 44\'200 steigt.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Straßenansicht von Lugano mit Pendlerinnen und Pendler sowie einem dezenten Zeichen des Arbeitsamts, das den ticinesischen Arbeitsmarkt zeigt.',
 };
 
 export default blogMetaDe;
