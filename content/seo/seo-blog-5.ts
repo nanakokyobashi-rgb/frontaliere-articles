@@ -100188,6 +100188,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-trame-oriente-chiasso': {
+    title: 'Trame d\'Oriente: mini kimono in mostra a Chiasso',
+    description: 'A Chiasso, dall\'8 al 22 ottobre, la mostra Trame d\'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, trame, oriente, mini, kimono',
+    ogTitle: 'Trame d\'Oriente: mini kimono a Chiasso',
+    ogDescription: 'Dopo Castelgrande e la Biennale di Venezia, la collezione della SAMS di Biasca arriva nella Sala Diego Chiesa: dieci pezzi unici ispirati a motivi, colori e simbologia della tradizione nipponica, dall\'8 al 22 ottobre.',
+    canonicalPath: '/articoli-frontaliere/trame-oriente-chiasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trame d'Oriente: mini kimono in mostra a Chiasso",
+      "description": "A Chiasso, dall'8 al 22 ottobre, la mostra Trame d'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/trame-oriente-chiasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dieci mini kimono in sete vintage della mostra Trame d'Oriente a Chiasso"
+      },
+      "datePublished": "2026-10-06T11:41:53+00:00",
+      "dateModified": "2026-10-06T11:41:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trame-oriente-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

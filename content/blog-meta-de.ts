@@ -12685,6 +12685,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'SBB Bahnhof Giubiasco: Erneuerung abgeschlossen',
     'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'Das SBB Bahnhofsgebäude in Giubiasco wird am 8. Oktober 2026 nach rund 6,4 Millionen Umbauten wiedereröffnet: neue Services, Lift und Minergie-Standards.',
     'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Renoviertes FFS-Bahnhofsgebäude in Giubiasco',
+    'blog.article.trame-oriente-chiasso.title': 'Muster des Orients: Mini-Kimonos in Chiasso zu sehen',
+    'blog.article.trame-oriente-chiasso.excerpt': 'In Chiasso präsentiert die Ausstellung Trame d\'Oriente von SAMS vom 8. bis 22. Oktober zehn Mini-Kimonos aus Vintage-Seidenstoffen zwischen japanischer Kultur und lokaler Schneiderei.',
+    'blog.article.trame-oriente-chiasso.imageAlt': 'Zehn Mini-Kimonos aus Vintage-Seide bei der Ausstellung in Chiasso',
 };
 
 export default blogMetaDe;

@@ -12686,6 +12686,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Giubiasco FFS station: renovation completed',
     'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'The Giubiasco FFS station building will reopen on 8 October 2026 after work costing approximately 6,4 million: new services, lift and Minergie standards.',
     'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Renovated FFS station building in Giubiasco',
+    'blog.article.trame-oriente-chiasso.title': 'Threads of the East: mini kimonos on display in Chiasso',
+    'blog.article.trame-oriente-chiasso.excerpt': 'In Chiasso, from October 8 to 22, the exhibition Threads of the East by SAMS presents ten mini kimonos made from vintage silks, at the intersection of Japanese culture and local tailoring.',
+    'blog.article.trame-oriente-chiasso.imageAlt': 'Ten mini kimonos in vintage silk at the Trame d\'Oriente exhibition in Chiasso',
 };
 
 export default blogMetaEn;
