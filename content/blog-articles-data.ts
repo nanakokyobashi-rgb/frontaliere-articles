@@ -39857,6 +39857,36 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'guida-tre-valli-varesine-2026',
+ category: 'pratico',
+ date: '2026-10-06T03:13:40.523Z',
+ image: '/images/blog/guida-tre-valli-varesine-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'varese-conferenza-lavoro-salari-2026',
+ category: 'novita',
+ date: '2026-10-06T03:43:17.872Z',
+ image: '/images/blog/varese-conferenza-lavoro-salari-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'casse-malati-proposte-esperti-risposta',
+ category: 'pratico',
+ date: '2026-10-06T04:17:25.035Z',
+ image: '/images/blog/casse-malati-proposte-esperti-risposta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

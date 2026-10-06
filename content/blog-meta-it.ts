@@ -12651,6 +12651,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: aggregazione e bilancio 2026 a confronto',
     'blog.article.bellinzona-aggregazione-costi-2026.excerpt': 'Spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni: il punto sui costi dell\'aggregazione.',
     'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Centro di Bellinzona con edifici amministrativi e mura storiche all\'alba',
+    'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: orari, percorso e chiusure',
+    'blog.article.guida-tre-valli-varesine-2026.excerpt': '6 ottobre: partenza da Busto Arsizio, arrivo in via Sacco a Varese. Sei giri cittadini per uomini e donne.',
+    'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Ciclista in gara sulla Tre Valli Varesine, vista sul lago di Varese',
+    'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: conferenza su salari e diritti, 10 ottobre',
+    'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\' di Sinistra Italiana e AVS: orari, relatori e temi su precarietà e potere d\'acquisto.',
+    'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Casse malati: 5% di aumento e proposte valutate da esperti',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'Nel 2027 il premio cresce del 5%. Tre esperti analizzano cassa statale, prevenzione e costi: in Ticino dal 2029 metà dei cittadini potrebbe avere riduzioni.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino.',
 };
 
 export default blogMetaIt;

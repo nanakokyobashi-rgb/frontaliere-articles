@@ -98207,6 +98207,74 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tamedia-cancella-34-posti-lavoro': {
+    title: 'Tamedia cancella 34 posti di lavoro in cinque redazioni',
+    description: 'Tamedia sopprime 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori a Zurigo, Berna, Basilea, Losanna e Ginevra. Scopri il piano sociale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tamedia, cancella, posti, lavoro',
+    ogTitle: 'Tamedia taglia 34 posti di lavoro in Svizzera',
+    ogDescription: 'Annunciata la soppressione di 34 posizioni a tempo pieno e 41 collaboratori coinvolti nelle redazioni di Zurigo, Berna, Basilea, Losanna e Ginevra. Dettagli sul piano sociale e sulle misure di accompagnamento.',
+    canonicalPath: '/articoli-svizzera/tamedia-cancella-34-posti-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tamedia cancella 34 posti di lavoro in cinque redazioni",
+      "description": "Tamedia sopprime 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori a Zurigo, Berna, Basilea, Losanna e Ginevra. Scopri il piano sociale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tamedia-cancella-34-posti-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio Tamedia con redazione giornalistica in Svizzera"
+      },
+      "datePublished": "2026-10-06T03:24:07+00:00",
+      "dateModified": "2026-10-06T03:24:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tamedia-cancella-34-posti-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-neutralita-svizzera-voto-costituzione': {
+    title: 'Neutralità svizzera: respinta la stretta in Costituzione',
+    description: 'Il popolo svizzero ha respinto l\'iniziativa per una neutralità più rigida nella Costituzione e confermato l\'attuale interpretazione della neutralità elvetica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, respinta, stretta, costituzione',
+    ogTitle: 'Neutralità svizzera: respinta la stretta costituzionale',
+    ogDescription: 'L\'analisi sul rifiuto dell\'iniziativa per una concezione più rigida della neutralità mostra la conferma del sostegno popolare all\'attuale interpretazione elvetica e richiama i dubbi sulle intenzioni dei sostenitori.',
+    canonicalPath: '/articoli-svizzera/neutralita-svizzera-voto-costituzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità svizzera: respinta la stretta in Costituzione",
+      "description": "Il popolo svizzero ha respinto l'iniziativa per una neutralità più rigida nella Costituzione e confermato l'attuale interpretazione della neutralità elvetica.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/neutralita-svizzera-voto-costituzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande a Bellinzona in una scena editoriale sulla politica svizzera"
+      },
+      "datePublished": "2026-10-06T04:01:17+00:00",
+      "dateModified": "2026-10-06T04:01:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-svizzera-voto-costituzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

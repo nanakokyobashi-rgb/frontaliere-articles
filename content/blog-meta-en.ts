@@ -12650,6 +12650,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: merger and 2026 budget compared',
     'blog.article.bellinzona-aggregazione-costi-2026.excerpt': '2025 spending of 235,8 million and 2026 budget of 253,5 million: a look at the costs of the merger.',
     'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Bellinzona city center with administrative buildings and historic walls at dawn',
+    'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: times, route and closures',
+    'blog.article.guida-tre-valli-varesine-2026.excerpt': 'October 6: start from Busto Arsizio, finish on Via Sacco at Varese. Six city laps for men and women.',
+    'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Cyclist racing on the Tre Valli Varesine, view of Lake Varese',
+    'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: conference on wages and rights, October 10',
+    'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Saturday, October 10 at Varese, the conference \'Fondata sul lavoro\' by Sinistra Italiana and AVS: times, speakers and topics on job insecurity and purchasing power.',
+    'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Modern conference hall with economic data screen and view of Lombard lakes',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Health insurance funds: 5% increase and proposals evaluated by experts',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'In 2027, the premium will increase by 5%. Three experts analyze the state fund, prevention and costs: in Ticino, from 2029, half of citizens could benefit from reductions.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panoramic view of Lake Lugano with the city in the background, morning light.',
 };
 
 export default blogMetaEn;

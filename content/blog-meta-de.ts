@@ -12649,6 +12649,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: Aggregation und Bilanz 2026 im Vergleich',
     'blog.article.bellinzona-aggregazione-costi-2026.excerpt': 'Ausgaben 2025 in Höhe von 235,8 Millionen und Kostenvoranschlag 2026 in Höhe von 253,5 Millionen: der Punkt bei den Kosten des Zusammenschlusses.',
     'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Bellinzona-Stadtzentrum mit Verwaltungsbauten und historischen Mauern im Morgengrauen',
+    'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: Zeitplan, Strecke und Sperrungen',
+    'blog.article.guida-tre-valli-varesine-2026.excerpt': '6. Oktober: Start in Busto Arsizio, Ziel in der Via Sacco bei Varese. Sechs Stadtrunden für Männer und Frauen.',
+    'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Radfahrer beim Tre Valli Varesine, Blick auf den Varese-See',
+    'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: Konferenz über Löhne und Rechte, 10. Oktober',
+    'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Samstag, 10. Oktober bei Varese die Konferenz "Gegründet auf der Arbeit" der italienischen Linken und der AHV: Zeitpläne, Referenten und Themen zu Prekarität und Kaufkraft.',
+    'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Moderne Tagungshalle mit Wirtschaftsscreen und Blick auf die lombardischen Seen',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Krankenkassen: Anstieg um 5% und von Experten bewertete Vorschläge',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': '2027 steigt die Prämie um 5%. Drei Experten analysieren die staatliche Kasse, die Prävention und die Kosten: Im Tessin könnte ab 2029 die Hälfte der Bürger von Senkungen profitieren.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panorama über den Luganersee mit der Stadt im Hintergrund, Morgenlicht.',
 };
 
 export default blogMetaDe;
