@@ -205,17 +205,19 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
-  test('non scarta la traduzione per un ultimo chunk breve restituito verbatim', async () => {
+  test('non scarta la traduzione per un ultimo chunk breve con prefisso strutturale', async () => {
     const firstChunk = Array.from({ length: 100 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
     const secondChunk = Array.from({ length: 90 }, (_, i) => `Frase sorgente numero ${i + 100} con testo sufficiente.`).join(' ');
     const filler = Array.from({ length: 55 }, () => 'parola').join(' ');
     const longText = `${firstChunk} ${secondChunk} ${filler} ## FAQ`;
     let myMemoryCalls = 0;
+    const queries = [];
     globalThis.fetch = async (url) => {
       if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
       const query = new URL(url).searchParams.get('q') || '';
+      queries.push(query);
       myMemoryCalls += 1;
-      const translatedText = query.includes('## FAQ') ? query : `Translated chunk ${myMemoryCalls}`;
+      const translatedText = query === 'FAQ' ? query : `Translated chunk ${myMemoryCalls}`;
       return {
         ok: true,
         json: async () => ({ responseData: { translatedText, match: 1 } }),
@@ -227,6 +229,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
     assert.match(out, /Translated chunk/);
     assert.match(out, /## FAQ/);
+    assert.equal(queries.at(-1), 'FAQ');
     assert.ok(myMemoryCalls > 2);
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
     assert.ok(snapshot().chunks - before.chunks > 0);
@@ -740,14 +743,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         _outcome: outcome,
       });
 
-      const expected = IT.split('\n')
-        .map((line) => {
-          if (!line) return '';
-          const marker = line.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u)?.[0] || '';
-          return `${marker}vera traduzione`;
-        })
-        .join('\n');
-      assert.equal(out, expected);
+      assert.equal(
+        out,
+        '## vera traduzione\n- vera traduzione\n- vera traduzione\n\nvera traduzione',
+      );
       assert.equal(outcome.incomplete, true);
     } finally {
       setLocalOpusMtForTests(null);

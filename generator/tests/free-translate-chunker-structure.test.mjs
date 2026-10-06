@@ -60,10 +60,15 @@ function structureOf(text) {
 async function translateWithStub(source, translateChunk) {
   process.env.VITEST = '1';
   const calls = [];
+  const prefixByContent = new Map(source.split('\n').map((line) => {
+    const match = String(line).match(/^(\s*(?:#{1,6}\s+|[-*+•]\s+|\d+[.)]\s+|>\s+|\|\s*))(.*)$/u);
+    return [match ? match[2] : line, match?.[1] || ''];
+  }));
   const translateLine = (line) => {
-    const match = String(line).match(/^(\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+))(.*)$/u);
-    if (!match) return `[en] ${translateChunk(line)}`;
-    return `${match[1]}[en] ${translateChunk(match[2])}`;
+    const match = String(line).match(/^(\s*(?:#{1,6}\s+|[-*+•]\s+|\d+[.)]\s+|>\s+|\|\s*))(.*)$/u);
+    const content = match ? match[2] : line;
+    const prefix = match?.[1] || prefixByContent.get(content) || '';
+    return `${prefix}[en] ${translateChunk(content)}`;
   };
   globalThis.fetch = async (url) => {
     if (!String(url).includes('api.mymemory.translated.net')) {
@@ -120,8 +125,12 @@ test('il ramo lungo MyMemory traduce una riga per richiesta e ricompone i separa
   assert.equal(source.length, 5_877);
   assert.equal(source.split('\n').length, 12);
   assert.equal(calls.length, 9);
-  assert.equal(calls.reduce((sum, chunk) => sum + chunk.length, 0), 5_866);
+  assert.ok(calls.reduce((sum, chunk) => sum + chunk.length, 0) < source.length);
   assert.equal(calls.reduce((sum, chunk) => sum + (chunk.match(/\n/g) || []).length, 0), 0);
+  assert.equal(
+    calls.some((chunk) => /^(?:#{1,6}\s|[-*+•]\s|\d+[.)]\s|>\s|\|)/u.test(chunk)),
+    false,
+  );
   assert.deepEqual(structureOf(translated), structureOf(source));
   assert.equal((translated.match(/\n/g) || []).length, 11);
 });
@@ -144,13 +153,18 @@ test('il ramo breve MyMemory mantiene gli a capo nella chiamata singola', async 
   assert.equal((translated.match(/\n/g) || []).length, 4);
 });
 
-test('_chunkAtSentences usa il default quando maxChars non è un numero finito positivo', () => {
+test('_chunkAtSentences rifiuta un maxChars non intero positivo', () => {
   const source = 'parola '.repeat(120).trim();
   const expected = _chunkAtSentences(source);
 
-  for (const maxChars of [NaN, Infinity, 0, -1, '480', null]) {
-    assert.deepEqual(_chunkAtSentences(source, maxChars), expected, String(maxChars));
+  for (const maxChars of [0, 0.5, NaN, -1, Infinity, '480', null]) {
+    assert.throws(
+      () => _chunkAtSentences(source, maxChars),
+      TypeError,
+      String(maxChars),
+    );
   }
+  assert.deepEqual(_chunkAtSentences(source, undefined), expected);
 });
 
 test('_recomposeChunkParts fallisce esplicitamente se manca una parte tradotta', () => {

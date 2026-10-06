@@ -29,6 +29,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
+import { stripTranslationSentinels } from './translation-sentinels.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
@@ -513,43 +514,88 @@ function normalizeBlock(s) {
 }
 
 /**
- * Decide whether a source line deserves a translation request.
- *
- * MyMemory rejects strings shorter than three characters, but a two-character
- * word such as `No` or `Sì` is still real prose and must not be copied into the
- * target locale. Markdown markers, punctuation, numbers and the opaque
- * sentinels used by the article pipeline have no translatable content and stay
- * in the recomposed field without turning the whole field into a miss.
+ * Parse one normalized line once for both structure validation and recovery.
+ * The returned prefix is the source-owned Markdown marker; `text` is the only
+ * portion a provider should receive. The signature deliberately keeps the
+ * ordered number/delimiter and the unordered marker, so changing either is a
+ * structure miss even when the line count is unchanged.
  */
-const OPAQUE_LINE_TOKEN_RE = /(?:ZQX\d{1,3}XQZ|0NAV\d+0?|0M0\d+Q0)/giu;
+function lineStructuralSignature(line) {
+  const candidate = normalizeBlock(line);
+  if (!candidate) return { kind: 'empty', signature: 'empty', prefix: '', text: '' };
 
-export function hasTranslatableLineText(line) {
-  const candidate = String(line ?? '')
-    .trim()
-    .replace(/^(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u, '')
-    .replace(OPAQUE_LINE_TOKEN_RE, '')
-    .trim();
-  // Keep one- and two-letter all-caps language/status markers such as `OK`
-  // and `IT` opaque, while allowing ordinary short words (`No`, `Sì`) and
-  // meaningful three-letter headings such as `FAQ` through.
-  return /\p{L}/u.test(candidate) && !/^\p{Lu}{1,2}$/u.test(candidate);
+  const heading = candidate.match(/^(#{1,6})(?:\s+|$)/u);
+  if (heading) {
+    return {
+      kind: 'heading',
+      signature: `heading:${heading[1].length}`,
+      prefix: heading[0],
+      text: candidate.slice(heading[0].length),
+    };
+  }
+  const bullet = candidate.match(/^([-*+•])(?:\s+|$)/u);
+  if (bullet) {
+    return {
+      kind: 'bullet',
+      signature: `bullet:${bullet[1]}`,
+      prefix: bullet[0],
+      text: candidate.slice(bullet[0].length),
+    };
+  }
+  const ordered = candidate.match(/^(\d+)([.)])(?:\s+|$)/u);
+  if (ordered) {
+    return {
+      kind: 'ordered',
+      signature: `ordered:${ordered[1]}${ordered[2]}`,
+      prefix: ordered[0],
+      text: candidate.slice(ordered[0].length),
+    };
+  }
+  const quote = candidate.match(/^(>)(?:\s+|$)/u);
+  if (quote) {
+    return {
+      kind: 'quote',
+      signature: 'quote',
+      prefix: quote[0],
+      text: candidate.slice(quote[0].length),
+    };
+  }
+  const table = candidate.match(/^(\|)\s*/u);
+  if (table) {
+    return {
+      kind: 'table',
+      signature: 'table',
+      prefix: table[0],
+      text: candidate.slice(table[0].length),
+    };
+  }
+  return { kind: 'text', signature: 'text', prefix: '', text: candidate };
 }
 
-function lineStructuralMarker(line) {
-  const candidate = String(line ?? '').trimStart();
-  if (!candidate) return 'empty';
-  const heading = candidate.match(/^(#{1,6})(?:\s+|$)/u);
-  if (heading) return `heading:${heading[1].length}`;
-  const bullet = candidate.match(/^([-*+])(?:\s+|$)/u);
-  if (bullet) return `bullet:${bullet[1]}`;
-  const ordered = candidate.match(/^(\d+)([.)])(?:\s+|$)/u);
-  if (ordered) return `ordered:${ordered[1]}${ordered[2]}`;
-  return 'text';
+const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
+const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
+
+/**
+ * Decide whether a source line deserves a translation request.
+ *
+ * Opaque lines contain only protected sentinels/placeholders, numbers,
+ * punctuation, symbols, URLs or email addresses and are copied by the
+ * recomposer. Any remaining letter is translatable, regardless of length:
+ * `No`, `Sì`, `Ja` and `OK` are prose, not a reason to copy Italian into a
+ * target locale. MyMemory's three-character limitation is enforced only by
+ * `translateWithMyMemory`; a null from that tier is a tier miss.
+ */
+export function hasTranslatableLineText(line) {
+  const candidate = stripTranslationSentinels(lineStructuralSignature(line).text)
+    .replace(INLINE_OPAQUE_RE, '')
+    .replace(PLACEHOLDER_RE, '')
+    .trim();
+  return /\p{L}/u.test(candidate);
 }
 
 function lineStructure(text) {
   const normalized = normalizeBlock(text);
-  return normalized ? normalized.split('\n').map(lineStructuralMarker) : [];
+  return normalized ? normalized.split('\n').map((line) => lineStructuralSignature(line).signature) : [];
 }
 
 function hasSameLineStructure(sourceText, translatedText) {
@@ -560,10 +606,21 @@ function hasSameLineStructure(sourceText, translatedText) {
     && source.every((marker, index) => translated[index] === marker);
 }
 
-function hasSameLineMarker(sourceLine, translatedLine) {
-  const source = lineStructure(sourceLine);
-  const translated = lineStructure(translatedLine);
-  return source.length === 1 && translated.length === 1 && source[0] === translated[0];
+/**
+ * Restore the source-owned marker around a provider's one-line response.
+ * Providers may repeat or change a marker; strip their leading marker once
+ * (whatever family it is) and attach the source prefix exactly once. A plain
+ * source line receiving a new structural marker is rejected instead of
+ * inventing structure.
+ */
+function restoreSourceLineStructure(sourceLine, translatedLine) {
+  const source = lineStructuralSignature(sourceLine);
+  const translated = lineStructuralSignature(translatedLine);
+  if (source.signature === 'empty' || translated.signature === 'empty') return null;
+  if (source.kind === 'text' && translated.kind !== 'text') return null;
+  return source.kind === 'text'
+    ? translated.text
+    : `${source.prefix}${translated.text}`;
 }
 
 /**
@@ -639,9 +696,8 @@ const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;
 const TRANSLATABLE_WORD_RE = /[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*/gu;
 
 function isSubstantivePassthroughChunk(text) {
-  const candidate = normalizeBlock(text)
-    .replace(/https?:\/\/\S+/gi, ' ')
-    .replace(/\bZQX\d+XQZ\b/gi, ' ');
+  const candidate = stripTranslationSentinels(normalizeBlock(text))
+    .replace(/https?:\/\/\S+/gi, ' ');
   return (candidate.match(TRANSLATABLE_WORD_RE) || []).length >= MIN_SUBSTANTIVE_PASSTHROUGH_WORDS;
 }
 
@@ -823,13 +879,15 @@ function _packStructuredSegments(segments, maxChars) {
  * cannot flatten a structured request before the cascade can reassemble it.
  */
 export function _chunkAtSentences(text, maxChars = 480, { oneLinePerChunk = false } = {}) {
+  if (!Number.isInteger(maxChars) || maxChars < 1) {
+    throw new TypeError('_chunkAtSentences: maxChars must be an integer >= 1');
+  }
   const clean = normalizeBlock(text);
   if (!clean) return [];
-  const limit = Number.isFinite(maxChars) && maxChars > 0 ? maxChars : 480;
-  const lineGroups = _structuredLineGroups(clean, limit);
+  const lineGroups = _structuredLineGroups(clean, maxChars);
   return oneLinePerChunk
-    ? lineGroups.flatMap((segments) => _packStructuredSegments(segments, limit))
-    : _packStructuredSegments(lineGroups.flat(), limit);
+    ? lineGroups.flatMap((segments) => _packStructuredSegments(segments, maxChars))
+    : _packStructuredSegments(lineGroups.flat(), maxChars);
 }
 
 const CHUNK_PARTS_MISMATCH = 'ERR_CHUNK_PARTS_MISMATCH';
@@ -886,7 +944,7 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
 
     let translated;
     try {
-      translated = await fn(line.text);
+      translated = await fn(lineStructuralSignature(line.text).text);
     } catch (error) {
       return { ok: false, reason: 'recoveryFailed', error };
     }
@@ -894,14 +952,15 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
     if (!normalized || normalized.includes('\n')) {
       return { ok: false, reason: 'recoveryFailed' };
     }
-    if (!hasSameLineMarker(line.text, normalized)) {
+    const recomposedLine = restoreSourceLineStructure(line.text, normalized);
+    if (!recomposedLine) {
       return { ok: false, reason: 'recoveryFailed' };
     }
     const lineIsPassthrough = rejectedAsPassthroughWithSourceVariants(
       tierName,
       line.text,
       line.text,
-      normalized,
+      recomposedLine,
       outcome,
       'line',
     );
@@ -912,10 +971,10 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
       }
       return { ok: false, reason: 'recoveryFailed' };
     }
-    if (rejectedAsMetaResponse(tierName, line.text, normalized, outcome)) {
+    if (rejectedAsMetaResponse(tierName, line.text, recomposedLine, outcome)) {
       return { ok: false, reason: 'recoveryFailed' };
     }
-    translatedParts.push(normalized);
+    translatedParts.push(recomposedLine);
   }
 
   let recomposed;
@@ -2583,19 +2642,28 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         parts.push(chunk.text);
         continue;
       }
-      const mm = await translateWithMyMemory(chunk.text, sourceLang, targetLang);
+      const requestText = lineStructuralSignature(chunk.text).text;
+      const mm = await translateWithMyMemory(requestText, sourceLang, targetLang);
       if (!mm || mm.includes('MYMEMORY WARNING')) {
         noteTranslationOutcome(_outcome, 'incomplete');
-        return ''; // quota hit mid-chunk, abort
+        // A translatable line that this tier cannot serve (notably MyMemory's
+        // <3-character input limit) is a tier miss, never a source copy. The
+        // next cascade tier must receive the whole field.
+        return '';
       }
       const normalized = normalizeBlock(mm);
+      const recomposedLine = restoreSourceLineStructure(chunk.text, normalized);
+      if (!recomposedLine) {
+        noteTranslationOutcome(_outcome, 'incomplete');
+        return '';
+      }
       // Un eco sostanzioso invalida l'intero campo: assemblarlo con chunk
       // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
       // placeholder) resta invece nell'assemblato e viene giudicato da
       // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
-      if (rejectedAsPassthrough('myMemory', chunk.text, normalized, _outcome, 'chunk')
+      if (rejectedAsPassthrough('myMemory', chunk.text, recomposedLine, _outcome, 'chunk')
         && isSubstantivePassthroughChunk(chunk.text)) return '';
-      parts.push(normalized);
+      parts.push(recomposedLine);
     }
     // Ricomponi con i separatori della sorgente, non con uno spazio fisso: gli
     // echo per segmento sono gia' nel bucket `tierPassthroughChunks`, oltre al

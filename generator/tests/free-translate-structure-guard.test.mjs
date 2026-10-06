@@ -330,7 +330,7 @@ test('il recovery di righe brevi realmente tradotte resta un hit', async () => {
 });
 
 test('il recovery di sole righe non traducibili conserva la sorgente e conta un hit', async () => {
-  const source = ['OK', 'IT', '12345', '—'].join('\n');
+  const source = ['12345', '—', '!!!', 'https://example.com', 'mail@example.com', '{name}'].join('\n');
   const calls = stubFoldedMyMemory((line) => line);
   const before = getCascadeStats();
 
@@ -364,28 +364,42 @@ test('una sorgente a riga singola non paga chiamate di recupero', async () => {
 
 test('hasTranslatableLineText conserva le righe brevi o prive di lettere', async () => {
   for (const [line, expected] of [
-    ['OK', false],
-    ['IT', false],
+    ['OK', true],
+    ['IT', true],
+    ['Ja', true],
     ['No', true],
     ['Sì', true],
+    ['## Sì', true],
+    ['> No', true],
+    ['| Ja |', true],
+    ['Vai a 0NAV0', true],
     ['—', false],
     ['1.', false],
     ['!!!', false],
     ['12345', false],
+    ['https://example.com', false],
+    ['mail@example.com', false],
+    ['{name}', false],
+    ['{{name}}', false],
+    ['%s', false],
     ['ZQX0XQZ', false],
     ['0NAV0', false],
-    ['0M012Q0', false],
+    ['0M00Q0', false],
     ['Una riga traducibile', true],
   ]) {
     assert.equal(hasTranslatableLineText(line), expected, line);
   }
 
   const source = [
-    'OK',
-    'IT',
+    'Vai a 0NAV0',
     '—',
     '1.',
     '12345',
+    'https://example.com',
+    'mail@example.com',
+    'ZQX0XQZ',
+    '0NAV0',
+    '0M00Q0',
     'Questa riga contiene testo traducibile e resta nel campo.',
     'x'.repeat(5000),
   ].join('\n');
@@ -399,10 +413,70 @@ test('hasTranslatableLineText conserva le righe brevi o prive di lettere', async
 
   assert.notEqual(translated, '');
   assert.deepEqual(lineKinds(translated), lineKinds(source));
+  assert.equal(calls.includes('Vai a 0NAV0'), true);
   assert.equal(
-    calls.some((query) => ['OK', 'IT', '—', '1.', '12345', 'ZQX0XQZ', '0NAV0', '0M012Q0'].includes(query)),
+    calls.some((query) => [
+      '—',
+      '1.',
+      '12345',
+      'https://example.com',
+      'mail@example.com',
+      'ZQX0XQZ',
+      '0NAV0',
+      '0M00Q0',
+    ].includes(query)),
     false,
   );
+});
+
+test('una riga breve traducibile non servita da MyMemory fa proseguire la cascata', async () => {
+  const source = [
+    'Sì',
+    'No',
+    'Questa riga lunga permette di entrare nel ramo MyMemory a pezzi. '.repeat(120),
+  ].join('\n');
+  const myMemoryCalls = [];
+  const fallbackCalls = [];
+  globalThis.fetch = async (url) => {
+    const value = String(url);
+    if (value.includes('api-free.deepl.com')) {
+      return { ok: false, status: 503, json: async () => ({}) };
+    }
+    if (value.includes('api.cognitive.microsofttranslator.com')) {
+      return { ok: false, status: 503, text: async () => '' };
+    }
+    if (value.includes('api.mymemory.translated.net')) {
+      const query = new URL(value).searchParams.get('q') || '';
+      myMemoryCalls.push(query);
+      return {
+        ok: true,
+        json: async () => ({ responseData: { translatedText: `MM ${query}`, match: 1 } }),
+      };
+    }
+    if (value.includes('mozhi.adminforge.de/api/translate')) {
+      const query = new URL(value).searchParams.get('text') || '';
+      fallbackCalls.push(query);
+      return {
+        ok: true,
+        json: async () => ({
+          'translated-text': query.split('\n').map((line) => line ? `DE ${line}` : line).join('\n'),
+        }),
+      };
+    }
+    throw new Error('offline nel test');
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.match(translated, /^DE Sì\nDE No\n/);
+  assert.ok(fallbackCalls.length > 0);
+  assert.equal(myMemoryCalls.includes('Sì'), false);
+  assert.equal(myMemoryCalls.includes('No'), false);
 });
 
 test('il recovery rifiuta i marker Markdown alterati e ricompone quelli corretti', async () => {
@@ -414,15 +488,17 @@ test('il recovery rifiuta i marker Markdown alterati e ricompone quelli corretti
     'Paragrafo',
   ].join('\n');
   const perLine = new Map([
-    ['## Titolo', '## Titel'],
-    ['- Punto', '- Punkt'],
-    ['1. Passo', '1. Schritt'],
+    ['Titolo', '## Titel'],
+    ['Punto', '- Punkt'],
+    ['Passo', '1. Schritt'],
     ['Paragrafo', 'Absatz'],
   ]);
   let calls = 0;
+  const queries = [];
   globalThis.fetch = async (url) => {
     if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
     const query = new URL(url).searchParams.get('q') || '';
+    queries.push(query);
     calls += 1;
     const translatedText = calls === 1
       ? '# Titel\n* Punkt\n1) Schritt\n\nAbsatz'
@@ -441,5 +517,67 @@ test('il recovery rifiuta i marker Markdown alterati e ricompone quelli corretti
   });
 
   assert.equal(calls, 5);
+  assert.deepEqual(queries.slice(1), ['Titolo', 'Punto', 'Passo', 'Paragrafo']);
   assert.equal(translated, '## Titel\n- Punkt\n1. Schritt\n\nAbsatz');
+});
+
+test('il recovery riattacca il prefisso sorgente senza raddoppiarlo', async () => {
+  const source = '- Punto\n## Titolo';
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = calls.length === 1 ? 'Punto Titolo' : `- Tradotto ${query}`;
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.deepEqual(calls.slice(1), ['Punto', 'Titolo']);
+  assert.equal(translated, '- Tradotto Punto\n## Tradotto Titolo');
+});
+
+test('la firma strutturale copre citazioni, tabelle e tutti i prefissi di elenco', async () => {
+  const source = [
+    '> Citazione',
+    '| Cella | Valore |',
+    '* Punto',
+    '+ Altro',
+    '• Simbolo',
+  ].join('\n');
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = calls.length === 1
+      ? 'Citazione\nCella Valore\nPunto\nAltro\nSimbolo'
+      : `Tradotto ${query}`;
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.deepEqual(calls.slice(1), ['Citazione', 'Cella | Valore |', 'Punto', 'Altro', 'Simbolo']);
+  assert.equal(
+    translated,
+    '> Tradotto Citazione\n| Tradotto Cella | Valore |\n* Tradotto Punto\n+ Tradotto Altro\n• Tradotto Simbolo',
+  );
 });
