@@ -397,6 +397,23 @@ test('la cache carburanti legacy senza granularita resta leggibile durante il pa
   assert.match(block.render('it').keyFacts[0].note, /media regionale/);
 });
 
+test('il blocco carburanti rifiuta null esplicito e national non svizzero', () => {
+  const base = fixtureDatasets().fuel;
+  const nullRecord = structuredClone(base.records[0]);
+  nullRecord.granularity = null;
+  assert.equal(shapeFuelBlock({ ...base, records: [nullRecord] }, { canton: 'TI', nowMs: NOW }).available, false);
+
+  const nonSwissNational = structuredClone(base.records.find((r) => r.side === 'CH' && r.fuel === 'sp95'));
+  nonSwissNational.side = 'IT';
+  nonSwissNational.currency = 'EUR';
+  nonSwissNational.granularity = 'national';
+  assert.equal(shapeFuelBlock({ ...base, records: [nonSwissNational] }, { canton: 'TI', nowMs: NOW }).available, false);
+
+  const multiStationNational = structuredClone(base.records.find((r) => r.side === 'CH' && r.fuel === 'diesel'));
+  multiStationNational.stations = 2;
+  assert.equal(shapeFuelBlock({ ...base, records: [multiStationNational] }, { canton: 'TI', nowMs: NOW }).available, false);
+});
+
 test('date impossibili: nessuno shaper le pubblica, il validatore le rifiuta', () => {
   assert.ok(Number.isFinite(instantMs('2026-10-05T09:00:00Z')));
   assert.ok(Number.isFinite(instantMs('2026-10-05T09:00:00.123+02:00')));
@@ -492,6 +509,16 @@ test('un fetch fallito non toglie un blocco ancora valido: si conserva quello pu
   assert.equal(late.changed, true);
   assert.deepEqual(late.file.locales.it.dataBlocks, []);
   assert.deepEqual(late.file.locales.it.keyFacts, []);
+
+  // Il blocco precedente e' stato scritto oggi, ma le sue medie nazionali
+  // osservano un mese oltre la soglia: il carry non puo' prorogarle di 7 giorni.
+  const nationalTooOld = structuredClone(first.file);
+  for (const locale of HUB_LOCALES) {
+    const block = nationalTooOld.locales[locale].dataBlocks.find((b) => b.id === 'prezzi-carburanti');
+    for (const item of block.items) item.date = new Date(NOW - BLOCK_THRESHOLDS.fuel.nationalMaxAgeMs - DAY_MS).toISOString();
+  }
+  const beyondNational = buildOne('canton-ti', 'carburanti', { datasets: withoutFuel, previous: nationalTooOld, nowMs: NOW + DAY_MS });
+  assert.equal(beyondNational.blocks[0].status, 'omitted');
 
   // Un dataset presente ma VECCHIO non si conserva: e' il produttore fermo, non un fetch perso.
   const stale = fixtureDatasets();

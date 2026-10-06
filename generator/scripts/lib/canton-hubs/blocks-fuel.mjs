@@ -17,7 +17,7 @@ const GRANULARITIES = ['station', 'region', 'national'];
 // published legacy cache readable during the HTTP hand-off: an absent field
 // was necessarily a regional aggregate in schema 1. Unknown explicit values
 // remain invalid and are filtered below.
-const granularityOf = (record) => record.granularity ?? 'region';
+const granularityOf = (record) => Object.hasOwn(record, 'granularity') ? record.granularity : 'region';
 
 const TXT = {
   it: {
@@ -87,9 +87,10 @@ export function shapeFuelBlock(dataset, { canton, nowMs }) {
   const rows = dataset.records
     .filter((r) => isObj(r) && r.canton === canton)
     .filter((r) => SIDE_ORDER.includes(r.side) && FUEL_ORDER.includes(r.fuel))
-    .filter((r) => r.granularity == null || GRANULARITIES.includes(r.granularity))
+    .filter((r) => !Object.hasOwn(r, 'granularity') || GRANULARITIES.includes(r.granularity))
     .filter((r) => (r.currency === 'CHF' || r.currency === 'EUR') && (r.side === 'CH') === (r.currency === 'CHF'))
     .filter((r) => finite(r.avg) != null && finite(r.min) != null && r.min <= r.avg)
+    .filter((r) => granularityOf(r) !== 'national' || (r.side === 'CH' && r.stations === 1))
     .filter((r) => Number.isInteger(r.stations) && r.stations >= (granularityOf(r) === 'national' ? 1 : th.minStations))
     // Ogni record ha la sua data di rilevazione: una riga ferma da piu' della
     // soglia non si mostra accanto a righe fresche.

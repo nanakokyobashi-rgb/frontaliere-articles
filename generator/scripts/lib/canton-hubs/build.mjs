@@ -265,6 +265,21 @@ function carriedFromPrevious(previous, blockId, carryMs, nowMs) {
 }
 
 /**
+ * A fuel block may contain a national monthly row whose observation is much
+ * older than the daily producer snapshot. If the next fetch is missing, do
+ * not use the normal seven-day block carry to extend that row past its own
+ * 62-day validity window. Missing dates are unsafe to carry as well.
+ */
+function fuelCarryAllowed(previous, nowMs) {
+  const block = previous.locales[HUB_LOCALES[0]].dataBlocks.find((b) => b.id === 'prezzi-carburanti');
+  if (!block || !Array.isArray(block.items) || block.items.length === 0) return false;
+  return block.items.every((item) => {
+    const at = instantMs(item.date);
+    return Number.isFinite(at) && nowMs - at <= BLOCK_THRESHOLDS.fuel.nationalMaxAgeMs && nowMs - at >= -DAY_MS;
+  });
+}
+
+/**
  * @param {object} args
  * @param {string} args.section id della sezione cantonale (`canton-ti`)
  * @param {string} args.topic uno dei 6 temi
@@ -302,7 +317,10 @@ export function buildHubFile({ section, topic, profile, datasets, curated, confi
       report.push({ id: result.id, status: 'fresh' });
       continue;
     }
-    const carried = result.code === 'missing' && prev ? carriedFromPrevious(prev, result.id, spec.carryMs, nowMs) : null;
+    const canCarry = spec.dataset !== 'fuel' || !prev || fuelCarryAllowed(prev, nowMs);
+    const carried = result.code === 'missing' && prev && canCarry
+      ? carriedFromPrevious(prev, result.id, spec.carryMs, nowMs)
+      : null;
     if (carried) {
       resolved.push({ id: result.id, updatedAt: carried.updatedAt, carried: true, stored: carried.perLocale });
       report.push({ id: result.id, status: 'carried', code: result.code, reason: result.reason });

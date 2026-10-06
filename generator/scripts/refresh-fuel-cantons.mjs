@@ -77,7 +77,7 @@ const GRANULARITIES = new Set(['station', 'region', 'national']);
 // The producer adds this field in the companion site PR. During the HTTP
 // hand-off, schema 1 caches without it are the old regional aggregates; keep
 // them readable while still rejecting an unknown explicit value.
-const granularityOf = (record) => record.granularity ?? 'region';
+const granularityOf = (record) => Object.hasOwn(record, 'granularity') ? record.granularity : 'region';
 // Per-litre plausibility: outside this a unit changed (cents, thousandths).
 const PRICE_MIN = 0.5;
 const PRICE_MAX = 5;

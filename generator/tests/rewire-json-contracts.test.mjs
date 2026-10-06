@@ -524,6 +524,12 @@ const MUTATIONS = {
       'Il renderer deve distinguere una stazione da una media regionale o nazionale, senza inferirlo dal conteggio.',
     ],
     [
+      'granularita nulla esplicita',
+      mutated(c, (p) => { p.records[0].granularity = null; }),
+      /granularity null is not station\|region\|national/,
+      'Solo l\'assenza del campo è legacy: null esplicito non descrive una granularità pubblicabile.',
+    ],
+    [
       'lato sconosciuto',
       mutated(c, (p) => { p.records[0].side = 'LI'; }),
       /is not CH\|FR\|AT\|IT\|DE/,
