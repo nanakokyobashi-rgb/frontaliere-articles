@@ -12696,6 +12696,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'Les chiffres du jour pour les frontaliers – 6 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Bulletin du frontalier du 6 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'Les chiffres du 6 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.ciclabile-lumino-castione-fase-due.title': 'Piste cyclable Lumino-Castione : deuxième phase des travaux',
+    'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'Du lundi 12 octobre jusqu\'à fin avril 2027, des travaux auront lieu entre la via Quatorta et la gare FFS de Castione, avec deux nouveaux arrêts de bus.',
+    'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Deuxième phase des travaux de la piste cyclable entre Lumino et la gare FFS de Castione',
 };
 
 export default blogMetaFr;

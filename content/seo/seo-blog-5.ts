@@ -100261,6 +100261,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ciclabile-lumino-castione-fase-due': {
+    title: 'Ciclabile Lumino-Castione: seconda fase dei lavori',
+    description: 'Ciclabile Lumino-Castione: lavori da lunedì 12 ottobre a fine aprile 2027, due nuove fermate bus e traffico regolato dal lunedì al venerdì tra le 7 e le 17.30.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ciclabile, lumino-castione, seconda, fase',
+    ogTitle: 'Ciclabile Lumino-Castione: seconda fase dei lavori',
+    ogDescription: 'La seconda fase del percorso ciclabile lungo l\'ex Ferrovia Retica parte da lunedì 12 ottobre e prosegue fino a fine aprile 2027 tra Lumino e la stazione FFS di Castione. In programma anche due nuove fermate bus lungo via Bellinzona, con traffico',
+    canonicalPath: '/articoli-frontaliere/ciclabile-lumino-castione-fase-due/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ciclabile Lumino-Castione: seconda fase dei lavori",
+      "description": "Ciclabile Lumino-Castione: lavori da lunedì 12 ottobre a fine aprile 2027, due nuove fermate bus e traffico regolato dal lunedì al venerdì tra le 7 e le 17.30.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ciclabile-lumino-castione-fase-due.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Seconda fase dei lavori per la ciclabile tra Lumino e la stazione FFS di Castione"
+      },
+      "datePublished": "2026-10-06T12:30:34+00:00",
+      "dateModified": "2026-10-06T12:30:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ciclabile-lumino-castione-fase-due/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

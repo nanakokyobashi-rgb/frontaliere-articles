@@ -12695,6 +12695,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'I numeri del giorno per i frontalieri – 6 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Bollettino frontalieri del 6 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'I numeri del 6 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.ciclabile-lumino-castione-fase-due.title': 'Ciclabile Lumino-Castione: seconda fase dei lavori',
+    'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'Da lunedì 12 ottobre a fine aprile 2027 lavori tra via Quatorta e la stazione FFS di Castione, con due nuove fermate bus.',
+    'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Seconda fase dei lavori per la ciclabile tra Lumino e la stazione FFS di Castione',
 };
 
 export default blogMetaIt;

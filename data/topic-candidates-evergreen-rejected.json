@@ -794,26 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/futura-volley-la-prima-di-campionato-e-tosta-le-cocche-ospitano-perugia/2696113": {
-      "section": "frontaliere",
-      "ts": 1791097453407
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/kastritis-a-scafati-dovremo-essere-noi-stessi-della-valle-saltera-la-doppia-trasferta/2696329": {
-      "section": "frontaliere",
-      "ts": 1791098025788
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1954274/lascia-il-lavoro-per-salvare-cani-c-e-chi-li-regala-a-natale-e-poi-non-li-vuole-piu": {
-      "section": "svizzera",
-      "ts": 1791102161702
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954245/mendrisio-e-chiasso-sostengono-le-donne-che-vogliono-lavorare": {
-      "section": "frontaliere",
-      "ts": 1791111951172
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954587/migranti-spiaggia-polizia-ceuta-strutture": {
-      "section": "svizzera",
-      "ts": 1791115117783
-    },
     "svizzera::https://www.tio.ch/dal-mondo/attualita/1954607/nobel-ottobre-medicina-premio-economia": {
       "section": "svizzera",
       "ts": 1791125994294
@@ -981,6 +961,18 @@
     "frontaliere::https://www.varesenews.it/2026/10/alla-frontiera-aeroportuale-con-carte-da-gioco-da-collezione-per-oltre-27mila-euro-scatta-il-sequestro/2698471": {
       "section": "frontaliere",
       "ts": 1791266799144
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
+      "section": "frontaliere",
+      "ts": 1791288629715
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1954989/ticino-ecap-appuntamento-lavoro-unia-portinerie-cugnasco-interesse": {
+      "section": "frontaliere",
+      "ts": 1791288979074
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/salute-3/articolo/luoghi-di-lavoro-che-promuovono-salute-comune-di-varese-confindustria-varese-asst-sette-laghi-e-a.html": {
+      "section": "frontaliere",
+      "ts": 1791289055770
     }
   }
 }
