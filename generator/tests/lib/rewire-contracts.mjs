@@ -259,7 +259,7 @@ export const REWIRE_CONTRACTS = [
     recorded: {
       at: '2026-10-05',
       trimmedTo:
-        '8 record sui 32 di un run locale del producer (TI CH+IT, GE FR, SG AT), numeri non alterati; ' +
+        '8 record sui 32 di un run locale del producer (TI CH nazionale BFS + IT, GE FR, SG AT), numeri non alterati; ' +
         'blocchi di testa (cantons, sources, coverage, exchangeRate) completi',
     },
     readBy: [
@@ -279,11 +279,12 @@ export const REWIRE_CONTRACTS = [
           'stations',
           'observedAt',
           'source',
+          'granularity',
         ],
       },
       {
         file: 'generator/scripts/lib/canton-hubs/blocks-fuel.mjs',
-        fields: ['schemaVersion', 'generatedAt', 'records', 'canton', 'side', 'fuel', 'currency', 'avg', 'min', 'stations', 'observedAt', 'source'],
+        fields: ['schemaVersion', 'generatedAt', 'records', 'canton', 'side', 'fuel', 'currency', 'avg', 'min', 'stations', 'observedAt', 'source', 'granularity'],
       },
     ],
     producedUnread: ['median', 'area', 'coverage', 'exchangeRate', 'sources'],

@@ -261,7 +261,34 @@ function carriedFromPrevious(previous, blockId, carryMs, nowMs) {
     if (!block) return null;
     perLocale[locale] = { block, keyFacts: previous.locales[locale].keyFacts.slice(offset, offset + (meta.keyFacts || 0)) };
   }
-  return { updatedAt: meta.updatedAt, perLocale };
+  return { updatedAt: meta.updatedAt, carryUntilAt: meta.carryUntilAt, perLocale };
+}
+
+/**
+ * The fuel shaper calculates one deadline as the minimum of each row's own
+ * deadline: 7 days for station/region, 62 days for national. This lets the
+ * block carry preserve the per-row granularity without putting that detail in
+ * renderer-facing data. Old hub files have no deadline metadata, so their
+ * carry is conservative: every displayed row must still be within 7 days.
+ */
+function fuelCarryAllowed(previous, nowMs) {
+  const meta = previous.blocks.find((b) => b.id === 'prezzi-carburanti');
+  const carryUntilMs = instantMs(meta?.carryUntilAt);
+  if (Number.isFinite(carryUntilMs)) return nowMs <= carryUntilMs;
+  const block = previous.locales[HUB_LOCALES[0]].dataBlocks.find((b) => b.id === 'prezzi-carburanti');
+  if (!block || !Array.isArray(block.items) || block.items.length === 0) return false;
+  return block.items.every((item) => {
+    const at = instantMs(item.date);
+    return Number.isFinite(at) && nowMs - at <= BLOCK_THRESHOLDS.fuel.maxAgeMs && nowMs - at >= -DAY_MS;
+  });
+}
+
+function fuelCarryMs(previous, blockId, fallbackMs) {
+  const meta = previous.blocks.find((b) => b.id === blockId);
+  const carryUntilMs = instantMs(meta?.carryUntilAt);
+  const updatedMs = instantMs(meta?.updatedAt);
+  if (!Number.isFinite(carryUntilMs) || !Number.isFinite(updatedMs)) return fallbackMs;
+  return Math.max(0, carryUntilMs - updatedMs);
 }
 
 /**
@@ -298,13 +325,19 @@ export function buildHubFile({ section, topic, profile, datasets, curated, confi
   for (const spec of specs) {
     const result = spec.shape(datasets?.[spec.dataset] ?? null, ctx);
     if (result.available) {
-      resolved.push({ id: result.id, updatedAt: result.updatedAt, render: (locale) => result.render(locale) });
+      resolved.push({ id: result.id, updatedAt: result.updatedAt, carryUntilAt: result.carryUntilAt, render: (locale) => result.render(locale) });
       report.push({ id: result.id, status: 'fresh' });
       continue;
     }
-    const carried = result.code === 'missing' && prev ? carriedFromPrevious(prev, result.id, spec.carryMs, nowMs) : null;
+    const canCarry = spec.dataset !== 'fuel' || !prev || fuelCarryAllowed(prev, nowMs);
+    const carryMs = spec.dataset === 'fuel' && prev
+      ? fuelCarryMs(prev, result.id, spec.carryMs)
+      : spec.carryMs;
+    const carried = result.code === 'missing' && prev && canCarry
+      ? carriedFromPrevious(prev, result.id, carryMs, nowMs)
+      : null;
     if (carried) {
-      resolved.push({ id: result.id, updatedAt: carried.updatedAt, carried: true, stored: carried.perLocale });
+      resolved.push({ id: result.id, updatedAt: carried.updatedAt, carryUntilAt: carried.carryUntilAt, carried: true, stored: carried.perLocale });
       report.push({ id: result.id, status: 'carried', code: result.code, reason: result.reason });
     } else {
       report.push({ id: result.id, status: 'omitted', code: result.code, reason: result.reason });
@@ -340,7 +373,15 @@ export function buildHubFile({ section, topic, profile, datasets, curated, confi
       const kept = facts.slice(0, Math.max(0, maxFacts - keyFacts.length));
       keyFacts.push(...kept);
       dataBlocks.push(block);
-      if (locale === HUB_LOCALES[0]) blocksMeta[i] = { id: r.id, updatedAt: r.updatedAt, keyFacts: kept.length, ...(r.carried ? { carried: true } : {}) };
+      if (locale === HUB_LOCALES[0]) {
+        blocksMeta[i] = {
+          id: r.id,
+          updatedAt: r.updatedAt,
+          keyFacts: kept.length,
+          ...(r.carryUntilAt ? { carryUntilAt: r.carryUntilAt } : {}),
+          ...(r.carried ? { carried: true } : {}),
+        };
+      }
       else if (blocksMeta[i].keyFacts !== kept.length) throw new Error(`canton-hubs: ${id}: il blocco ${r.id} ha un numero diverso di fatti chiave in ${locale}`);
     });
 

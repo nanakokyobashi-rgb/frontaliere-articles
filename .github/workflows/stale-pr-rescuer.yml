@@ -217,11 +217,17 @@ jobs:
           git -C stale-rc-loader config remote.origin.partialclonefilter blob:none
           git -C stale-rc-loader -c protocol.version=2 fetch --quiet --no-tags --depth=1 --filter=blob:none origin \
             "+refs/heads/${DEFAULT_BRANCH}:refs/remotes/origin/${DEFAULT_BRANCH}"
-          mkdir -p stale-rc-loader/generator/scripts/lib
+          mkdir -p stale-rc-loader/generator/scripts/lib scripts/ci
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/load-rc-env.mjs" \
             > stale-rc-loader/generator/scripts/load-rc-env.mjs
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/google-service-account-token.mjs" \
             > stale-rc-loader/generator/scripts/lib/google-service-account-token.mjs
+          # The report step runs for scoped workflow_run invocations too. The
+          # full-scan custodian checkout is intentionally conditional, so the
+          # helper must be materialized before the scope gate rather than only
+          # included in that later sparse checkout.
+          git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:scripts/ci/report-rate-limit-budget.mjs" \
+            > scripts/ci/report-rate-limit-budget.mjs
 
       - name: Prepare Firebase credentials for rate-limit reads
         env:
