@@ -12644,6 +12644,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.biasca-accoltellamento-21enne.title': 'Ticino, 21-year-old Italian stabbed: his life is at risk',
     'blog.article.biasca-accoltellamento-21enne.excerpt': 'In Biasca, a 21-year-old Italian citizen residing in the Leventina district was seriously stabbed: his life is in danger.',
     'blog.article.biasca-accoltellamento-21enne.imageAlt': 'Via Bellinzona in Biasca, Ticino, where police officers and rescuers intervened.',
+    'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino: Lereti works on via Copelli until November 27',
+    'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Renewal of the water-supply network on via Copelli begins: 400 metres of new pipes and alternating one-way traffic with traffic lights are planned.',
+    'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Road construction site in via Copelli, Luino for water network renewal',
 };
 
 export default blogMetaEn;

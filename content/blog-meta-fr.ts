@@ -12646,6 +12646,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.biasca-accoltellamento-21enne.title': 'Tessin, 21 ans, poignardé : il risque sa vie',
     'blog.article.biasca-accoltellamento-21enne.excerpt': 'À Biasca, un citoyen italien de 21 ans, résidant dans le district de Léventine, a été gravement poignardé : sa vie est en danger.',
     'blog.article.biasca-accoltellamento-21enne.imageAlt': 'La via Bellinzona à Biasca, au Tessin, où la police et les secours sont intervenus.',
+    'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino : travaux de Lereti dans la via Copelli jusqu\'au 27 novembre',
+    'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Lancement du renouvellement du réseau d\'adduction d\'eau dans la via Copelli : 400 mètres de nouvelles canalisations sont prévus et une circulation alternée avec un feu de signalisation.',
+    'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Chantier routier via Copelli à Luino pour le renouvellement du réseau d\'eau',
 };
 
 export default blogMetaFr;

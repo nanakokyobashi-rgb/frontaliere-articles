@@ -940,6 +940,10 @@
     "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
       "section": "svizzera",
       "ts": 1791243786372
+    },
+    "frontaliere::https://www.rsi.ch/s/4131573": {
+      "section": "frontaliere",
+      "ts": 1791244728361
     }
   }
 }
