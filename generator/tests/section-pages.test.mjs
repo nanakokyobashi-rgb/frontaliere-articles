@@ -240,6 +240,7 @@ test('publisher: una URL obsoleta resta intatta finche\' API e edge non servono 
       releaseCommit: 'current-commit',
       publishedStatusImpl: async () => 'draft',
       releaseReadyImpl: async () => ({ ok: false, reason: 'manifest vecchio' }),
+      releaseReadyMaxWaitMs: 0,
       runImpl: (_command, args) => {
         calls.push(args.join(' '));
         if (args.some((arg) => arg.endsWith('retry-cmd.sh'))) return { code: 0, stdout: '' };
@@ -255,6 +256,56 @@ test('publisher: una URL obsoleta resta intatta finche\' API e edge non servono 
   assert.equal(result.failures, 1);
   assert.equal(result.deleted, 0);
   assert.ok(!calls.some((call) => call.includes('delete-cdn-file.sh')));
+});
+
+test('publisher: la readiness API viene ritentata prima della pulizia obsoleta', async () => {
+  const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
+  const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
+  const html = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'contenuto '.repeat(40)}</body></html>`;
+  const events = [];
+  let readinessAttempts = 0;
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  let result;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    result = await publish({
+      section: 'canton-ti',
+      pages: [current],
+      cdnUploads: [],
+      obsoletePages: [obsolete],
+      distDir: mkdtempSync(path.join(tmpdir(), 'publish-readiness-retry-')),
+      releaseCommit: 'current-commit',
+      publishedStatusImpl: async () => 'draft',
+      releaseReadyImpl: async () => {
+        readinessAttempts++;
+        return readinessAttempts < 3 ? { ok: false, reason: 'manifest vecchio' } : { ok: true };
+      },
+      releaseReadyMaxWaitMs: 1000,
+      releaseReadyRetryDelayMs: 0,
+      sleepImpl: async () => {},
+      runImpl: (_command, args) => {
+        if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) events.push('upload');
+        else if (args.some((arg) => arg.endsWith('delete-cdn-file.sh'))) events.push('delete');
+        else if (args.some((arg) => args.includes('scripts/cf-purge-cache.mjs'))) events.push('purge');
+        return {
+          code: 0,
+          stdout: args.some((arg) => arg.endsWith('delete-cdn-file.sh')) ? '✅ deleted' : '✅ uploaded',
+        };
+      },
+      probeImpl: async (url) => url === obsolete.cdnUrl
+        ? { ok: false, status: 'HTTP 404' }
+        : { ok: true, status: 200, body: html },
+    });
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+  }
+  assert.equal(readinessAttempts, 3);
+  assert.equal(result.failures, 0);
+  assert.equal(result.deleted, 1);
+  assert.ok(events.includes('delete'));
 });
 
 test('publisher: la cancellazione obsoleta arriva dopo purge e verifica della release corrente', async () => {

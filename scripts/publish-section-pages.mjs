@@ -76,6 +76,9 @@ export const EDGE_PREFIX = 'edge/sections';
 export const API_BASE = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 /** Le pagine si riscrivono a ogni publish e il Worker le tiene 5 min: stessa classe delle sitemap. */
 export const PAGE_CACHE_CONTROL = 'public,max-age=600';
+/** Dopo il deploy API la superficie pubblica puo' arrivare in ritardo: la delete attende, ma con un limite. */
+export const RELEASE_READY_MAX_WAIT_MS = 120_000;
+export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 
@@ -529,6 +532,34 @@ export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch 
 }
 
 /**
+ * Aspetta il flip coordinato di API e edge prima di cancellare URL ritirate.
+ * Il workflow puo' ritentare l'intero publisher, ma quel retry da solo non
+ * basta: ogni tentativo deve concedere alla pubblicazione API una finestra
+ * bounded, altrimenti una gara transitoria lascia per sempre chiavi obsolete
+ * fuori dalla sitemap e quindi invisibili al reconcile.
+ */
+export async function waitForPublishedReleaseReady(
+  expectedCommit,
+  {
+    section,
+    releaseReadyImpl = publishedReleaseReady,
+    sleepImpl = sleep,
+    maxWaitMs = RELEASE_READY_MAX_WAIT_MS,
+    retryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+  } = {},
+) {
+  const deadline = Date.now() + Math.max(0, maxWaitMs);
+  let last = { ok: false, reason: 'verifica release non eseguita' };
+  while (true) {
+    last = await releaseReadyImpl(expectedCommit, { section });
+    if (last === true || last?.ok) return last;
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) return last;
+    await sleepImpl(Math.min(Math.max(0, retryDelayMs), remaining));
+  }
+}
+
+/**
  * I dati hub mancanti sono tollerabili solo mentre il Worker serve certamente
  * la sezione come draft. In publish il registro edge e' la fonte effettiva;
  * in dry-run non si fa rete e si usa il registro committato come guardia.
@@ -548,6 +579,9 @@ export async function publish({
   publishedStatusImpl = publishedStatus,
   probeImpl = probe,
   releaseReadyImpl = publishedReleaseReady,
+  releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
+  releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+  sleepImpl = sleep,
 }) {
   let failures = 0;
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
@@ -636,7 +670,13 @@ export async function publish({
   }
 
   if (obsoletePages.length > 0) {
-    const releaseReady = await releaseReadyImpl(releaseCommit, { section });
+    const releaseReady = await waitForPublishedReleaseReady(releaseCommit, {
+      section,
+      releaseReadyImpl,
+      sleepImpl,
+      maxWaitMs: releaseReadyMaxWaitMs,
+      retryDelayMs: releaseReadyRetryDelayMs,
+    });
     if (!(releaseReady === true || releaseReady?.ok)) {
       console.error(`::error::[${LOG}] API/edge non hanno ancora servito la release corrente: ${releaseReady?.reason ?? 'verifica fallita'}; nessuna pagina obsoleta viene cancellata`);
       return { failures: failures + 1, uploaded: uploaded.length, deleted: 0, status };

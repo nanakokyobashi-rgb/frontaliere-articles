@@ -1072,6 +1072,9 @@ test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non
 });
 
 test('delete-cdn-file.sh: solo chiavi delle sezioni cantonali', () => {
+  const script = readFileSync(path.join(ROOT, 'scripts/lib/delete-cdn-file.sh'), 'utf8');
+  assert.match(script, /downloads\.rclone\.org\/rclone-current-linux-amd64\.zip/);
+  assert.match(script, /installazione rclone fallita/);
   const run = (key) => spawnSync('bash', [path.join(ROOT, 'scripts/lib/delete-cdn-file.sh'), key], {
     encoding: 'utf8',
     env: { PATH: process.env.PATH },
