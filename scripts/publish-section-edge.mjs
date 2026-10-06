@@ -93,7 +93,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
 import { familySectionPages } from './lib/build-sitemap.mjs';
@@ -520,7 +520,15 @@ export async function main(argv = process.argv.slice(2), { env = process.env, io
   return (await publishRelease(release, { io, env, log, tmpDir: env.RUNNER_TEMP || os.tmpdir() })).code;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().then(
     (code) => {
       process.exitCode = code;

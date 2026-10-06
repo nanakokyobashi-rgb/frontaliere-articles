@@ -23,10 +23,10 @@
  * i due lascia il secondo come prima, e un nuovo `--write` lo completa.
  */
 
-import { existsSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { defaultCantonClassifier } from './lib/canton-classifier.mjs';
 import { applyRegistryCantons, readRegistryCantons, registryEntrySpans } from './lib/registry-canton-field.mjs';
@@ -268,7 +268,15 @@ async function main() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().catch((err) => {
     console.error(err?.stack || err);
     process.exit(1);
