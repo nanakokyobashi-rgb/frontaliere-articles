@@ -89,6 +89,14 @@ test('repairLlmJsonArray keeps a wrapper when a trailing array is an example', (
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { faqs: [{ q: 'real', a: 'A' }] });
 });
 
+test('repairLlmJsonArray keeps a valid wrapper after a rejected balanced array', () => {
+  const raw = 'Example: [{"q":"example","a":"B"}] {"faqs":[{"q":"real","a":"A"}]}';
+  const repaired = repairLlmJsonArray(raw, {
+    validateCandidate: (candidate) => Boolean(candidate?.faqs),
+  });
+  assert.deepEqual(JSON.parse(repaired), { faqs: [{ q: 'real', a: 'A' }] });
+});
+
 test('la riparazione completa una virgola mancante dopo un oggetto annidato', () => {
   const raw = '{"id":"x","imageAlt":{"it":"it","en":"en","de":"de","fr":"fr"}"slugs":{"it":"x","en":"x","de":"de","fr":"fr"},"content":{"it":{"title":"T","body1":"B"}}}';
   const parsed = JSON.parse(repairLlmJson(raw));

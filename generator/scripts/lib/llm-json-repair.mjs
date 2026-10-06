@@ -773,13 +773,16 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
   const start = firstRootStart(source, rootOpeners);
   if (start === -1) return { start, candidates: [] };
 
+  const opener = source[start];
+  const firstCloseIdx = findMatchingClose(source, start, true);
+
   // If the preferred root itself is unterminated, later object roots are
   // normally its still-complete elements, not independent response roots.
   // Inspecting them as candidates makes a truncated array of FAQ objects
   // select the first object and discards the rest before the caller's salvage
   // path can recover them. A later preferred root can still be a real payload
   // after an unmatched preamble, so keep scanning that root shape only.
-  const laterRootOpeners = preferredRoot && source[start] === preferredRoot
+  const laterRootOpeners = preferredRoot && opener === preferredRoot && firstCloseIdx === -1
     ? [preferredRoot]
     : rootOpeners;
 
@@ -814,8 +817,6 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
     }
   };
 
-  const opener = source[start];
-  const firstCloseIdx = findMatchingClose(source, start, true);
   if (firstCloseIdx !== -1) {
     addCandidate(start, firstCloseIdx, true);
   } else {
