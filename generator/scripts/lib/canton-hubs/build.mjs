@@ -283,6 +283,14 @@ function fuelCarryAllowed(previous, nowMs) {
   });
 }
 
+function fuelCarryMs(previous, blockId, fallbackMs) {
+  const meta = previous.blocks.find((b) => b.id === blockId);
+  const carryUntilMs = instantMs(meta?.carryUntilAt);
+  const updatedMs = instantMs(meta?.updatedAt);
+  if (!Number.isFinite(carryUntilMs) || !Number.isFinite(updatedMs)) return fallbackMs;
+  return Math.max(0, carryUntilMs - updatedMs);
+}
+
 /**
  * @param {object} args
  * @param {string} args.section id della sezione cantonale (`canton-ti`)
@@ -322,8 +330,11 @@ export function buildHubFile({ section, topic, profile, datasets, curated, confi
       continue;
     }
     const canCarry = spec.dataset !== 'fuel' || !prev || fuelCarryAllowed(prev, nowMs);
+    const carryMs = spec.dataset === 'fuel' && prev
+      ? fuelCarryMs(prev, result.id, spec.carryMs)
+      : spec.carryMs;
     const carried = result.code === 'missing' && prev && canCarry
-      ? carriedFromPrevious(prev, result.id, spec.carryMs, nowMs)
+      ? carriedFromPrevious(prev, result.id, carryMs, nowMs)
       : null;
     if (carried) {
       resolved.push({ id: result.id, updatedAt: carried.updatedAt, carryUntilAt: carried.carryUntilAt, carried: true, stored: carried.perLocale });

@@ -510,6 +510,18 @@ test('un fetch fallito non toglie un blocco ancora valido: si conserva quello pu
   assert.deepEqual(late.file.locales.it.dataBlocks, []);
   assert.deepEqual(late.file.locales.it.keyFacts, []);
 
+  // Un blocco composto solo dalla media nazionale può usare la finestra di
+  // 62 giorni: il limite di carry del blocco non deve troncarlo a 7 giorni.
+  const nationalOnly = fixtureDatasets();
+  nationalOnly.fuel.records = nationalOnly.fuel.records.filter((r) => r.canton === 'TI' && r.side === 'CH');
+  const nationalFirst = buildOne('canton-ti', 'carburanti', { datasets: nationalOnly });
+  const nationalCarry = buildOne('canton-ti', 'carburanti', {
+    datasets: withoutFuel,
+    previous: nationalFirst.file,
+    nowMs: NOW + 8 * DAY_MS,
+  });
+  assert.equal(nationalCarry.blocks[0].status, 'carried');
+
   // Il blocco precedente e' stato scritto oggi, ma le sue medie nazionali
   // osservano un mese oltre la soglia: il carry non puo' prorogarle di 7 giorni.
   const nationalTooOld = structuredClone(first.file);
