@@ -27,9 +27,12 @@ import { fileURLToPath } from 'node:url';
 import {
   bodyContractIsGreen,
   classifyImportantFindings,
+  extractBodyCitation,
   isContractDomainBodyFinding,
   importantFindings,
+  normalizeBodyCitationText,
   prBodyFindingLine,
+  renderStaleBodyFindingComment,
 } from '../../scripts/ci/review-scope.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -49,48 +52,74 @@ const bodyFinding = (anchor, text) => [
   `\`${anchor}\`: 🔴 Important: ${text}`,
 ].join('\n');
 
-test('un 🔴 sul body cade quando il contratto deterministico e\' verde', () => {
+const bodyFindingWithCitation = (anchor, text, citation = text) => [
+  bodyFinding(anchor, text),
+  `Body citation: ${JSON.stringify(citation)}`,
+].join('\n');
+
+test('un 🔴 sul body richiede una citazione testuale assente per essere superato', () => {
   const review = bodyFinding('PR body:L5', 'la voce non dichiara uno stato accettabile.');
   const blocking = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs']);
-  assert.equal(blocking.blocking, true, 'senza il verdetto del contratto il finding deve restare bloccante');
-  assert.equal(blocking.bodyDeclassified.length, 0);
+  assert.equal(blocking.blocking, true, 'senza citazione il finding resta bloccante');
+  assert.equal(blocking.staleBodyDeclassified.length, 0);
 
-  const declassified = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs'], null, {
-    bodyContractPassed: true,
-    prBody: PR_BODY,
-  });
-  assert.equal(declassified.bodyDeclassified.length, 1, 'il contratto verde deve declassare il finding sul body');
-  assert.equal(declassified.blocking, false);
-  assert.equal(declassified.unresolved.length, 0);
-  assert.equal(declassified.outsideOnly, true,
-    'un finding declassato non lascia la PR senza una via di approvazione');
+  const stale = classifyImportantFindings(
+    bodyFindingWithCitation('PR body:L5', 'il claim non è più presente nel body.', 'testo rimosso dal body corrente'),
+    ['scripts/ci/review-scope.mjs'], null, {
+      bodyContractPassed: true,
+      prBody: `${PR_BODY}\n- Nessuno.`,
+    },
+  );
+  assert.equal(stale.staleBodyDeclassified.length, 1);
+  assert.equal(stale.blocking, false);
+  assert.equal(stale.unresolved.length, 0);
+  assert.equal(stale.outsideOnly, true);
+  assert.match(renderStaleBodyFindingComment(stale.staleBodyDeclassified[0], 'a'.repeat(40)), /Finding superato/);
+
+  const present = classifyImportantFindings(
+    bodyFindingWithCitation('PR body:L5', 'il claim è ancora nel body.', 'per scelta'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
+  );
+  assert.equal(present.staleBodyDeclassified.length, 0);
+  assert.equal(present.blocking, true);
+
+  const normalizedPresent = classifyImportantFindings(
+    bodyFindingWithCitation('PR body:L5', 'il testo resta presente.', 'blocked: owner-only'),
+    ['scripts/ci/review-scope.mjs'], null, {
+      bodyContractPassed: true,
+      prBody: `${PR_BODY}\n- **blocked:**   owner-only`,
+    },
+  );
+  assert.equal(normalizedPresent.staleBodyDeclassified.length, 0);
+  assert.equal(normalizedPresent.blocking, true);
+  assert.equal(normalizeBodyCitationText('**blocked:**   owner-only'), 'blocked: owner-only');
+  assert.equal(extractBodyCitation(bodyFindingWithCitation('PR body:L5', 'x', 'quote')), 'quote');
 });
 
 test('il declassamento non si concede senza la prova della posizione', () => {
   const review = bodyFinding('PR body:L5', 'la voce non dichiara uno stato accettabile.');
-  // Body non leggibile: nessun declassamento, il finding resta bloccante.
+  // Body non leggibile: nessuna prova di citazione assente, il finding resta bloccante.
   const noBody = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs'], null, {
     bodyContractPassed: true,
     prBody: null,
   });
-  assert.equal(noBody.bodyDeclassified.length, 0);
+  assert.equal(noBody.staleBodyDeclassified.length, 0);
   assert.equal(noBody.blocking, true);
 
-  // Riga FUORI da `## Non implementato`: il contratto non giudica quella
-  // sezione riga per riga, quindi il 🔴 resta.
+  // Senza citazione il finding resta bloccante anche se l'anchor punta altrove.
   const inImplementato = classifyImportantFindings(
     bodyFinding('PR body:L2', 'la voce Implementato non corrisponde al diff.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
   );
-  assert.equal(inImplementato.bodyDeclassified.length, 0);
+  assert.equal(inImplementato.staleBodyDeclassified.length, 0);
   assert.equal(inImplementato.blocking, true);
 
-  // Riga oltre la fine del body: posizione non provabile.
+  // Un anchor oltre la fine non compra comunque un declassamento senza quote.
   const outOfRange = classifyImportantFindings(
     bodyFinding('PR body:L99', 'voce senza stato.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
   );
-  assert.equal(outOfRange.bodyDeclassified.length, 0);
+  assert.equal(outOfRange.staleBodyDeclassified.length, 0);
   assert.equal(outOfRange.blocking, true);
 });
 
@@ -101,7 +130,7 @@ test('un claim di performance sul body resta 🔴 (regola della review, non del 
     bodyContractPassed: true,
     prBody: PR_BODY,
   });
-  assert.equal(result.bodyDeclassified.length, 0,
+  assert.equal(result.staleBodyDeclassified.length, 0,
     'REVIEW.md punto 7 non e\' una regola del contratto: il contratto verde non la chiude');
   assert.equal(result.blocking, true);
 });
@@ -120,7 +149,7 @@ test('un finding che cita un file non e\' un finding sul solo body', () => {
     bodyContractPassed: true,
     prBody: PR_BODY,
   });
-  assert.equal(result.bodyDeclassified.length, 0,
+  assert.equal(result.staleBodyDeclassified.length, 0,
     'con una citazione di file il finding va classificato sul diff, non declassato');
   assert.equal(result.inScope.length, 1);
   assert.equal(result.blocking, true);
@@ -140,7 +169,8 @@ test('il gate porta il verdetto del contratto e non pretende una follow-up che n
     'review-gate.mjs deve leggere il verdetto del contratto dall\'env');
   assert.match(gate, /bodyContractPassed: BODY_CONTRACT_PASSED/u,
     'il verdetto deve arrivare al classificatore');
-  assert.match(gate, /DECLASSIFIED-BODY/u, 'il declassamento deve lasciare una traccia nel log');
+  assert.match(gate, /DECLASSIFIED-STALE-BODY/u, 'il declassamento deve lasciare una traccia nel log');
+  assert.match(gate, /postStaleBodyFindingComment/u, 'il gate deve pubblicare la traccia esplicita');
   // La trappola del corpus: `outsideOnly` da solo non approvava, perche' qui
   // l'approvazione pretende anche `minted`. Senza questa congiunzione una PR
   // i cui unici 🔴 sono sul body resterebbe rossa pur essendo stata assolta.
@@ -168,7 +198,7 @@ test('il claim di performance resta 🔴 anche con parole che il primo filtro no
       bodyFinding('PR body:L5', `la voce promette ${word} migliore senza una misura.`),
       ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
     );
-    assert.equal(result.bodyDeclassified.length, 0, `«${word}» non deve essere declassato`);
+    assert.equal(result.staleBodyDeclassified.length, 0, `«${word}» senza citazione non deve essere declassato`);
     assert.equal(result.blocking, true);
   }
 });
@@ -185,7 +215,7 @@ test('il claim puo\' stare nella RIGA citata, non nel testo del finding', () => 
     bodyFinding('PR body:L5', 'questa voce non regge.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
-  assert.equal(result.bodyDeclassified.length, 0,
+  assert.equal(result.staleBodyDeclassified.length, 0,
     'il finding puo\' limitarsi a puntare la riga: il claim va cercato anche li\'');
 });
 
@@ -197,7 +227,7 @@ test('un finding con DUE anchor, uno fuori sezione, non si declassa', () => {
   const result = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs'], null, {
     bodyContractPassed: true, prBody: PR_BODY,
   });
-  assert.equal(result.bodyDeclassified.length, 0,
+  assert.equal(result.staleBodyDeclassified.length, 0,
     'L2 sta in `## Implementato`: il contratto non giudica quella riga');
   assert.equal(result.blocking, true);
   // Due anchor entrambi dentro la sezione restano declassabili.
@@ -206,7 +236,7 @@ test('un finding con DUE anchor, uno fuori sezione, non si declassa', () => {
      '`PR body:L5`: 🔴 Important: questa voce e anche `PR body:L6` non tornano.'].join('\n'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
   );
-  assert.equal(both.bodyDeclassified.length, 1);
+  assert.equal(both.staleBodyDeclassified.length, 0);
 });
 
 test('il verdetto del contratto si RICALCOLA dal body, per ogni consumer', () => {
@@ -254,23 +284,31 @@ test('diff illeggibile: i 🔴 sul body cadono E la PR resta approvabile', { con
   process.env.PATH = `${binDir}${path.delimiter}${previous.PATH}`;
   process.env.FAKE_PR_BODY = PR_BODY;
   try {
-    const result = await classifyAndMintReview(
-      bodyFinding('PR body:L5', 'la voce non dichiara uno stato accettabile.'),
+    process.env.FAKE_PR_BODY = `${PR_BODY}\n- testo rimosso dal body corrente`;
+    const presentResult = await classifyAndMintReview(
+      bodyFindingWithCitation('PR body:L5', 'il claim non è più presente.', 'testo rimosso dal body'),
       { repo: 'o/r', pr: 42, prUrl: 'https://x/pr/42', mutate: false },
     );
-    assert.equal(result.bodyDeclassified.length, 1, 'il finding sul body va declassato');
-    assert.equal(result.blocking, false);
-    assert.equal(result.outsideOnly, true,
+    assert.equal(presentResult.staleBodyDeclassified.length, 0, 'la citazione presente resta bloccante');
+    assert.equal(presentResult.blocking, true);
+    process.env.FAKE_PR_BODY = PR_BODY;
+    const staleResult = await classifyAndMintReview(
+      bodyFindingWithCitation('PR body:L5', 'il claim non è più presente.', 'testo rimosso dal body'),
+      { repo: 'o/r', pr: 42, prUrl: 'https://x/pr/42', mutate: false },
+    );
+    assert.equal(staleResult.staleBodyDeclassified.length, 1, 'il finding sul body va declassato solo con citazione assente');
+    assert.equal(staleResult.blocking, false);
+    assert.equal(staleResult.outsideOnly, true,
       'senza outsideOnly il gate non approva: il ramo non sbloccherebbe nulla');
-    assert.equal(result.minted, false, 'non c\'e\' niente fuori dal diff da tracciare');
+    assert.equal(staleResult.minted, false, 'non c\'e\' niente fuori dal diff da tracciare');
 
     // Un 🔴 di CODICE nello stesso ramo resta invece bloccante.
     const mixed = await classifyAndMintReview(
-      [bodyFinding('PR body:L5', 'la voce non dichiara uno stato accettabile.'),
+      [bodyFindingWithCitation('PR body:L5', 'il claim non è più presente.', 'testo rimosso dal body'),
        '`engine/x.mjs:10`: 🔴 Important: rotto.'].join('\n'),
       { repo: 'o/r', pr: 42, prUrl: 'https://x/pr/42', mutate: false },
     );
-    assert.equal(mixed.bodyDeclassified.length, 1);
+    assert.equal(mixed.staleBodyDeclassified.length, 1);
     assert.equal(mixed.blocking, true);
     assert.equal(mixed.outsideOnly, false);
   } finally {
@@ -282,9 +320,8 @@ test('diff illeggibile: i 🔴 sul body cadono E la PR resta approvabile', { con
 });
 
 test('un anchor a INTERVALLO si valida riga per riga, non solo sul primo estremo', () => {
-  // `PR body:L5-9` copre righe che possono uscire da `## Non implementato`:
-  // tenere solo `5` declassava un finding che parla anche di quelle. Finding
-  // della review incrementale su #1629.
+  // Un intervallo body senza citazione testuale resta bloccante in ogni forma:
+  // l'anchor da solo non è più una prova sufficiente.
   const body = [
     '## Implementato',              // 1
     '- Fa una cosa.',               // 2
@@ -300,27 +337,28 @@ test('un anchor a INTERVALLO si valida riga per riga, non solo sul primo estremo
     bodyFinding('PR body:L5-6', 'le due voci non tornano.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
-  assert.equal(inRange.bodyDeclassified.length, 1, 'un intervallo tutto dentro la sezione si declassa');
+  assert.equal(inRange.staleBodyDeclassified.length, 0);
+  assert.equal(inRange.blocking, true);
 
   const spanning = classifyImportantFindings(
     bodyFinding('PR body:L5-9', 'queste righe non tornano.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
-  assert.equal(spanning.bodyDeclassified.length, 0,
-    'L9 sta in `## Note`: il contratto non giudica quella riga');
+  assert.equal(spanning.staleBodyDeclassified.length, 0,
+    'senza citazione il finding resta bloccante');
   assert.equal(spanning.blocking, true);
 
   const reversed = classifyImportantFindings(
     bodyFinding('PR body:L6-5', 'intervallo rovesciato.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
-  assert.equal(reversed.bodyDeclassified.length, 0, 'un intervallo rovesciato si rifiuta');
+  assert.equal(reversed.staleBodyDeclassified.length, 0, 'un intervallo senza citazione si rifiuta');
 
   const past = classifyImportantFindings(
     bodyFinding('PR body:L5-99', 'intervallo oltre la fine.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
-  assert.equal(past.bodyDeclassified.length, 0, 'una riga oltre la fine non e\' verificabile');
+  assert.equal(past.staleBodyDeclassified.length, 0, 'una riga oltre la fine senza citazione non e\' verificabile');
 
   // Il testo della review lo scrive un modello: un intervallo enorme deve
   // essere RIFIUTATO prima di essere espanso, non espanso e poi scartato.
@@ -331,7 +369,7 @@ test('un anchor a INTERVALLO si valida riga per riga, non solo sul primo estremo
     bodyFinding('PR body:L1-999999999', 'intervallo assurdo.'),
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
-  assert.equal(huge.bodyDeclassified.length, 0);
+  assert.equal(huge.staleBodyDeclassified.length, 0);
   assert.ok(Date.now() - started < 1000,
     'l\'intervallo e\' stato espanso invece che rifiutato: il gate si puo\' fermare qui');
 });
