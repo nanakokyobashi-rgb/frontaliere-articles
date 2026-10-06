@@ -52,6 +52,7 @@ import {
   registryRetiredSlugs,
   registrySectionIds,
   resolveKillSwitch,
+  validateEdgeRelease,
   validateEdgeSectionRegistry,
 } from '../../scripts/lib/section-registry.mjs';
 import {
@@ -673,6 +674,22 @@ test('edge: il puntatore porta la release (base versionata, sha256 e bytes dei f
   for (const file of release.files) assert.deepEqual(rel.files[file.name], { sha256: file.sha256, bytes: file.bytes });
   assert.ok(release.files.every((f) => /^[0-9a-f]{64}$/.test(f.sha256) && f.bytes > 0));
   assert.equal(validateEdgeSectionRegistry(release.pointer), true);
+  // La forma che il Worker legge (`parseCorpusSectionRelease`, sito #11811): base ESATTAMENTE
+  // `edge/sections/_releases/<commit>/`, sha256 a 64 hex e bytes intero per ogni file; un `release`
+  // non valido fa scartare il registro intero, quindi qui deve essere un rifiuto prima di pubblicare.
+  assert.equal(validateEdgeRelease(rel), true);
+  for (const bad of [
+    { ...rel, base: 'edge/sections/_releases/0000000/' },
+    { ...rel, base: `edge/sections/_releases/${COMMIT}` },
+    { ...rel, commit: 'HEAD' },
+    { ...rel, files: { 'sitemap-cantons.xml': { sha256: 'abc', bytes: 1 } } },
+    { ...rel, files: { 'sitemap-cantons.xml': { sha256: 'f'.repeat(64), bytes: -1 } } },
+    { ...rel, files: { 'sitemap-cantons.xml': { sha256: 'f'.repeat(64) } } },
+    { ...rel, files: [] },
+  ]) {
+    assert.equal(validateEdgeRelease(bad), false, JSON.stringify(bad).slice(0, 80));
+    assert.equal(validateEdgeSectionRegistry({ ...release.pointer, release: bad }), false);
+  }
   // Tutto draft: nessun file, puntatore comunque valido.
   assert.deepEqual(planRelease(fakeDist(DRAFT_ALL())).pointer.release.files, {});
   // Niente registro in dist (kill-switch non verificato): nessuna release.

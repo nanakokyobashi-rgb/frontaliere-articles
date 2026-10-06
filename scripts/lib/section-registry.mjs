@@ -376,13 +376,31 @@ export function buildEdgeRegistry({ declared, effective, commit }) {
 }
 
 /**
+ * `parseCorpusSectionRelease` del Worker: la forma del puntatore di release
+ * (`release`) che il Worker accetta. `base` deve essere ESATTAMENTE
+ * `edge/sections/_releases/<commit>/` e ogni file deve portare `sha256` (64
+ * hex) e `bytes` (intero >= 0). Chiavi in piu' (`previous`) sono ignorate.
+ */
+export function validateEdgeRelease(release) {
+  if (!isPlainObject(release)) return false;
+  if (typeof release.commit !== 'string' || !COMMIT_RE.test(release.commit)) return false;
+  if (release.base !== `edge/sections/_releases/${release.commit}/`) return false;
+  if (!isPlainObject(release.files)) return false;
+  return Object.values(release.files).every(
+    (meta) => isPlainObject(meta) && typeof meta.sha256 === 'string' && /^[0-9a-f]{64}$/.test(meta.sha256) && Number.isSafeInteger(meta.bytes) && meta.bytes >= 0,
+  );
+}
+
+/**
  * Il parse del Worker sul documento emesso: true se il Worker lo accetterebbe.
- * Stesse condizioni di `parseCorpusSectionRegistry` (vedi l'header).
+ * Stesse condizioni di `parseCorpusSectionRegistry` (vedi l'header): un
+ * `release` presente ma non valido fa scartare il registro INTERO.
  */
 export function validateEdgeSectionRegistry(raw, all = ARTICLE_SECTION_CORE_ALL) {
   if (!isPlainObject(raw) || raw.schema !== 1) return false;
   if (typeof raw.commit !== 'string' || !COMMIT_RE.test(raw.commit)) return false;
   if (!isPlainObject(raw.sections)) return false;
+  if (raw.release !== undefined && !validateEdgeRelease(raw.release)) return false;
   const ids = registrySectionIds(all);
   for (const [id, entry] of Object.entries(raw.sections)) {
     if (!ids.includes(id)) return false;
