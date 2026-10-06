@@ -342,9 +342,14 @@ function readReference(root, rel, what) {
   }
 }
 
-function registryDataFromSource(source, rel, what) {
+function registryDataFromSource(source, rel, what, { allowEmpty = false } = {}) {
   const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
-  if (entries.length === 0) throw missingReference(what, rel);
+  if (entries.length === 0) {
+    if (allowEmpty && /=\s*\[\s*\]\s*;/.test(source)) {
+      return { count: 0, ids: new Set(), entryIds: [] };
+    }
+    throw missingReference(what, rel);
+  }
   const entryIds = entries.map((match) => match[1] ?? match[2]);
   return {
     count: entries.length,
@@ -353,17 +358,21 @@ function registryDataFromSource(source, rel, what) {
   };
 }
 
-function readRegistryData(root, section) {
+function readRegistryData(root, section, options = {}) {
   const rel = sourceOf(section).registryFile;
   const source = readReference(root, rel, `${section} registry`);
-  return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
+  return { ...registryDataFromSource(source, rel, `${section} registry`, options), rel };
 }
 
-function readSlugMap(root, section) {
+function readSlugMap(root, section, { allowEmpty = false } = {}) {
   const { slugFile: rel, slugExport: slugConst } = sourceOf(section);
   const source = readReference(root, rel, `${section} slug map`);
+  const escapedSlugConst = slugConst.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (allowEmpty && new RegExp(`\\b${escapedSlugConst}(?:\\s*:\\s*[^=\\n]+)?\\s*=\\s*\\{\\s*\\}\\s*;`, 'm').test(source)) {
+    return {};
+  }
   const slugs = parseArticleUrlSlugs(source, slugConst);
-  if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
+  if (!allowEmpty && Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
   return slugs;
 }
 
@@ -614,13 +623,21 @@ export function countRegistryArticles(root, section) {
 
 /**
  * Gli id articolo del registro sorgente di una sezione, nell'ordine del file.
- * Una sezione di famiglia senza registro e' una sezione nuova: nessun id. Per
- * ogni altro caso valgono le regole di `readRegistryData` (registro assente o
- * vuoto = riferimento mancante, un rifiuto).
+ * Una sezione di famiglia senza registro e' una sezione nuova: nessun id. Una
+ * coppia esplicitamente vuota (`Article[] = []` + mappa slug `{}`) e' invece
+ * lo scheletro valido di una sezione gia' materializzata; una coppia parziale
+ * resta un riferimento mancante o incoerente e viene rifiutata.
  */
 export function sourceRegistryIds(root, section) {
   if (isNewFamilySection(root, section)) return [];
-  return readRegistryData(root, section).entryIds;
+  const registry = readRegistryData(root, section, { allowEmpty: true });
+  if (registry.count > 0) return registry.entryIds;
+
+  const slugs = readSlugMap(root, section, { allowEmpty: true });
+  if (Object.keys(slugs).length > 0) {
+    throw new Error(`${section}: registry/slugs incoerenti (registro vuoto, slug non vuoti)`);
+  }
+  return [];
 }
 
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */

@@ -35,6 +35,7 @@ import {
 } from '../../scripts/publish-section-pages.mjs';
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
+import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
@@ -130,6 +131,7 @@ test('publisher: una sezione cantonale nuova o vuota ha una release articolo vuo
 
   writeFileSync(slugPath, 'export const CANTON_SLUGS: Record<string, Record<string, string>> = {\n};\n');
   assert.deepEqual(articleReleaseSnapshot(root, 'canton-ti'), []);
+  assert.deepEqual(sourceRegistryIds(root, 'canton-ti'), []);
 
   writeFileSync(slugPath, `export const CANTON_SLUGS = {
   'orphan': { it: 'orphan-it', en: 'orphan-en', de: 'orphan-de', fr: 'orphan-fr' },
@@ -172,6 +174,65 @@ test('publisher: un hero CDN non confermato blocca l\'HTML della stessa release'
   assert.equal(calls.length, 1);
   assert.match(calls[0].args.join(' '), /upload-cdn-file\.sh/);
   assert.ok(output.some((line) => line.includes('upload hero incompleto')));
+});
+
+test('publisher: cancella le URL ritirate solo dopo il verify della release corrente', async () => {
+  const current = pageEntry('canton-ti', 'articoli-ticino/kept/index.html', 'article');
+  const obsolete = pageEntry('canton-ti', 'articoli-ticino/gone/index.html', 'article');
+  const calls = [];
+  let deleted = false;
+  const output = [];
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  let result;
+  try {
+    console.log = (...args) => output.push(args.join(' '));
+    console.error = (...args) => output.push(args.join(' '));
+    result = await publish({
+      section: 'canton-ti',
+      pages: [current],
+      cdnUploads: [],
+      obsoletePages: [obsolete],
+      distDir: mkdtempSync(path.join(tmpdir(), 'publish-order-')),
+      publishedStatusImpl: async () => 'draft',
+      runImpl: (command, args) => {
+        const script = args.join(' ');
+        if (script.includes('upload-cdn-file.sh')) {
+          calls.push('upload');
+          return { code: 0, stdout: '✅ uploaded' };
+        }
+        if (script.includes('delete-cdn-file.sh')) {
+          deleted = true;
+          calls.push('delete');
+          return { code: 0, stdout: '✅ deleted' };
+        }
+        if (script.includes('cf-purge-cache.mjs')) {
+          calls.push('purge');
+          return { code: 0, stdout: '' };
+        }
+        throw new Error(`comando inatteso: ${command} ${script}`);
+      },
+      probeImpl: async (url) => {
+        if (url === obsolete.cdnUrl) {
+          calls.push('probe-obsolete');
+          assert.equal(deleted, true, 'la vecchia URL si verifica dopo la cancellazione');
+          return { status: 'HTTP 404' };
+        }
+        calls.push('probe-current');
+        return { ok: true, status: 'HTTP 200' };
+      },
+    });
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+  }
+  assert.equal(result.failures, 0);
+  assert.equal(result.deleted, 1);
+  assert.deepEqual(calls, ['upload', 'purge', 'probe-current', 'delete', 'purge', 'probe-obsolete']);
+  assert.deepEqual(output, [
+    '[publish-section-pages] preflight: sezione canton-ti nel registro pubblicato = draft',
+    '[publish-section-pages] verify: sezione canton-ti nel registro pubblicato = draft',
+  ]);
 });
 
 test('publisher: una pagina con noindex, senza meta di proprieta\', con asset same-origin o canonical altrui non esce', () => {

@@ -469,26 +469,27 @@ export async function publish({
       console.log(`::error::[${LOG}] pagina non caricata: ${page.edgeKey}`);
     }
   }
-  const deleted = [];
-  for (const page of obsoletePages) {
-    const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
-    if (stdout.includes('✅ deleted')) deleted.push(page);
-    else {
-      failures++;
-      console.log(`::error::[${LOG}] vecchia pagina non cancellata: ${page.edgeKey}`);
+
+  const purgePages = (pagesToPurge) => {
+    if (pagesToPurge.length === 0) return;
+    const purgeUrls = pagesToPurge.flatMap((page) => [page.apexUrl, page.cdnUrl]);
+    for (const chunk of purgeChunks(purgeUrls)) {
+      const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
+      if (code !== 0) failures++;
     }
-  }
-  const purgeUrls = [...uploaded, ...obsoletePages].flatMap((page) => [page.apexUrl, page.cdnUrl]);
-  for (const chunk of purgeChunks(purgeUrls)) {
-    const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
-    if (code !== 0) failures++;
-  }
+  };
+
+  // Rendi osservabili prima le pagine della release corrente. Le URL ritirate
+  // restano intatte finche' upload, purge e verify della nuova release non
+  // sono tutti riusciti: durante il publish-api concorrente sono ancora
+  // l'unica copia annunciata dalla sitemap/registry precedente.
+  purgePages(uploaded);
 
   const status = await publishedStatusImpl(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
-    return { failures: failures + 1, uploaded: uploaded.length, status: null };
+    return { failures: failures + 1, uploaded: uploaded.length, deleted: 0, status: null };
   }
   const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
@@ -506,6 +507,25 @@ export async function publish({
       }
     }
   }
+
+  // Non cancellare la release precedente se anche una sola pagina corrente
+  // non e' stata resa verificabile. In quel caso il retry deve poterla ancora
+  // servire mentre il registro/API resta sulla release precedente.
+  if (failures > 0) {
+    console.error(`::error::[${LOG}] release corrente non verificata: nessuna vecchia pagina viene cancellata`);
+    return { failures, uploaded: uploaded.length, deleted: 0, status };
+  }
+
+  const deleted = [];
+  for (const page of obsoletePages) {
+    const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
+    if (stdout.includes('✅ deleted')) deleted.push(page);
+    else {
+      failures++;
+      console.log(`::error::[${LOG}] vecchia pagina non cancellata: ${page.edgeKey}`);
+    }
+  }
+  purgePages(deleted);
   for (const page of obsoletePages) {
     const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
     if (old.status !== 'HTTP 404') {
