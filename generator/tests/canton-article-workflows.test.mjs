@@ -16,9 +16,10 @@
  *      stesso esito. E' la prova che il core puo' sostituire la sorgente, non
  *      una promessa.
  *   3. Un chiamante cantonale non deve svegliare gli altri 23, non deve
- *      ripartire su un run che non ha prodotto niente e non deve dispatchare
- *      una catena. Sono proprieta' dei trigger, cioe' righe che GitHub
- *      interpreta prima che esista uno step.
+ *      auto-attivarsi quando vengono aggiornati insieme i caller generati,
+ *      non deve ripartire su un run che non ha prodotto niente e non deve
+ *      dispatchare una catena. Sono proprieta' dei trigger, cioe' righe che
+ *      GitHub interpreta prima che esista uno step.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
