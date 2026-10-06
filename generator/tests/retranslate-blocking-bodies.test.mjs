@@ -82,6 +82,8 @@ import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 // concatenato.
 import { filterWrongLocalePairs, wrongLocalePair } from '../scripts/fix-faq-locales.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
+import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
+import { getKeyFactsHeading, getTldrHeading } from '../scripts/lib/ai-search-template.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -303,6 +305,124 @@ test('templateHeadingIssue: con `## Eckdaten` il motivo e\' il titolo, non il ge
     templateHeadingIssue({ italianSections: { body1: IT_TEMPLATE_BODY1 }, newSections, locale: 'de' }),
     new RegExp(TEMPLATE_HEADING_NOT_CANONICAL),
   );
+});
+
+test('translateFieldFreeMt sottrae entrambi i titoli, li canonizza in en/de/fr e supera la guardia', async () => {
+  const inputs = [];
+  const translated = {};
+  const source = IT_TEMPLATE_BODY1;
+
+  for (const locale of ['en', 'de', 'fr']) {
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: locale,
+      fieldType: 'description',
+      fieldName: 'body1',
+      translate: async ({ text }) => {
+        inputs.push(text);
+        assert.doesNotMatch(text, /^## In breve$/m);
+        assert.doesNotMatch(text, /^## Fatti chiave$/m);
+        // Il motore finto altera ogni riga di testo, ma conserva i token opachi.
+        return text.split('\n').map((line) => (
+          line.startsWith('0') ? line : `MT ${line}`
+        )).join('\n');
+      },
+    });
+    translated[locale] = out;
+    assert.match(out, new RegExp(`^${getTldrHeading(locale)}$`, 'm'));
+    assert.match(out, new RegExp(`^${getKeyFactsHeading(locale)}$`, 'm'));
+    assert.equal(
+      templateHeadingIssue({
+        italianSections: { body1: source },
+        newSections: { body1: out },
+        locale,
+      }),
+      null,
+    );
+  }
+
+  assert.equal(inputs.length, 3);
+  assert.equal(Object.keys(translated).length, 3);
+});
+
+test('translateFieldFreeMt ripristina ogni occorrenza ripetuta dello stesso titolo', async () => {
+  const source = ['## In breve', 'Primo testo.', '## In breve', 'Secondo testo.'].join('\n');
+  const out = await translateFieldFreeMt({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'title',
+    translate: async ({ text }) => text.split('\n').map((line) => (
+      line.startsWith('0') ? line : `MT ${line}`
+    )).join('\n'),
+  });
+
+  assert.equal(out.split(getTldrHeading('de')).length - 1, 2);
+  assert.equal(out.includes('## In breve'), false);
+});
+
+test('titolo assente o presente solo dentro una riga di prosa resta nel testo tradotto', async () => {
+  for (const source of [
+    'Solo prosa, senza titoli di template.',
+    'Nota: ## In breve è citato qui, ma la riga non è un titolo.',
+  ]) {
+    let received;
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'en',
+      fieldType: 'title',
+      translate: async ({ text }) => {
+        received = text;
+        return `MT ${text}`;
+      },
+    });
+
+    assert.equal(received, source);
+    assert.equal(out, `MT ${source}`);
+  }
+});
+
+test('lingua senza forma canonica lascia il titolo al motore senza inventare una forma', async () => {
+  const source = '## In breve\nTesto italiano.';
+  for (const targetLang of ['es', 'de-CH']) {
+    let received;
+    const out = await translateFieldFreeMt({
+      text: source,
+      sourceLang: 'it',
+      targetLang,
+      fieldType: 'title',
+      translate: async ({ text }) => {
+        received = text;
+        return `MT ${text}`;
+      },
+    });
+
+    assert.equal(received, source);
+    assert.equal(out, `MT ${source}`);
+  }
+});
+
+test('sentinella del titolo alterata o persa fallisce chiusa il campo', async () => {
+  for (const replacement of ['SENTINELLA-ALTERATA', '']) {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: '## In breve\nTesto italiano sufficiente.',
+      sourceLang: 'it',
+      targetLang: 'fr',
+      fieldType: 'title',
+      translate: async ({ text }) => text.replace(/^0[^\n]*$/gm, replacement),
+      onUnusableOutput: (event) => signals.push(event),
+    });
+
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{
+      targetLang: 'fr',
+      fieldType: 'title',
+      reason: 'mangled-template-heading',
+    }]);
+  }
 });
 
 test('replaceBodyField col valore attuale e un no-op byte per byte', () => {

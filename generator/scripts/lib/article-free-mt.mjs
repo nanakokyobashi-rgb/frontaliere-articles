@@ -15,6 +15,8 @@
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
+import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
+import { SUPPORTED_LOCALES } from './key-facts-specificity.mjs';
 import {
   comuneTopicKey,
   isMunicipalityIndexUsable,
@@ -23,6 +25,63 @@ import {
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
+const TEMPLATE_HEADING_SENTINEL_RE = /0H0(\d+)Q0/g;
+
+const templateLocale = (locale) => {
+  const value = String(locale ?? '').trim().toLowerCase();
+  return SUPPORTED_LOCALES.includes(value) ? value : null;
+};
+
+function templateHeadingPairs(sourceLang, targetLang) {
+  const sourceLocale = templateLocale(sourceLang);
+  const targetLocale = templateLocale(targetLang);
+  if (!sourceLocale || !targetLocale) return [];
+  return [
+    [getTldrHeading(sourceLocale), getTldrHeading(targetLocale)],
+    [getKeyFactsHeading(sourceLocale), getKeyFactsHeading(targetLocale)],
+  ];
+}
+
+/**
+ * Mask complete template-heading lines before machine translation. The
+ * headings are generator tokens, not prose: their canonical target-language
+ * form is restored by index afterwards, using the same heading getters as the
+ * factuality guard. A missing or mangled sentinel therefore fails closed.
+ *
+ * @param {string} text
+ * @param {string} sourceLang
+ * @param {string} targetLang
+ * @returns {{ masked: string, expected: number, restore: (s: string) => { text: string, ok: boolean } }}
+ */
+function maskTemplateHeadings(text, sourceLang, targetLang) {
+  const pairs = templateHeadingPairs(sourceLang, targetLang);
+  if (pairs.length === 0) {
+    return {
+      masked: String(text ?? ''),
+      expected: 0,
+      restore: (s) => ({ text: String(s ?? ''), ok: true }),
+    };
+  }
+  const bySourceHeading = new Map(
+    pairs.map(([source, target]) => [source.trim().toLowerCase(), target]),
+  );
+  const originals = [];
+  const masked = String(text ?? '').split('\n').map((line) => {
+    const target = bySourceHeading.get(line.trim().toLowerCase());
+    if (target === undefined) return line;
+    const index = originals.push(target) - 1;
+    return `0H0${index}Q0`;
+  }).join('\n');
+  return {
+    masked,
+    expected: originals.length,
+    restore: (translated) => restoreIndexedSentinels(
+      translated,
+      TEMPLATE_HEADING_SENTINEL_RE,
+      originals,
+    ),
+  };
+}
 
 // Free-MT translates titles, excerpts, body sections and FAQ fields through
 // this same function. The absolute floor used for article prose must therefore
@@ -351,9 +410,14 @@ export async function translateFieldFreeMt({
   const src = String(text ?? '').trim();
   if (!src) return '';
   const nav = maskNavLinks(src);
+  const templateHeadings = maskTemplateHeadings(nav.masked, sourceLang, targetLang);
   const municipalities = preserveMunicipalityNames
-    ? maskMunicipalityNames(nav.masked)
-    : { masked: nav.masked, expected: 0, restore: (s) => ({ text: String(s ?? ''), ok: true }) };
+    ? maskMunicipalityNames(templateHeadings.masked)
+    : {
+      masked: templateHeadings.masked,
+      expected: 0,
+      restore: (s) => ({ text: String(s ?? ''), ok: true }),
+    };
   let out;
   try {
     out = await translate({ text: municipalities.masked, sourceLang, targetLang, fieldType });
@@ -387,6 +451,15 @@ export async function translateFieldFreeMt({
     if (!r.ok) {
       onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'mangled-municipality-name' });
       onWarn(`free-MT ${targetLang}:${fieldType} municipality sentinel mangled (expected ${municipalities.expected})`);
+      return '';
+    }
+    restored = r.text;
+  }
+  if (templateHeadings.expected > 0) {
+    const r = templateHeadings.restore(restored);
+    if (!r.ok) {
+      onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'mangled-template-heading' });
+      onWarn(`free-MT ${targetLang}:${fieldType} template-heading sentinel mangled (expected ${templateHeadings.expected})`);
       return '';
     }
     restored = r.text;
