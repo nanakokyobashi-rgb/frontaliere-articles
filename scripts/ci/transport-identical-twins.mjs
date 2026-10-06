@@ -122,15 +122,28 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { classify, siteFile } from './loop-drift-check.mjs';
+import { classify, gitBlobSha, siteFile } from './loop-drift-check.mjs';
 // Dalla libreria e non da `scan-failed-runs.mjs`: quello e' una CLI che apre
 // issue, e importarla per leggere un numero tira dentro
 // `github-issue-creator.mjs` e le sue costanti di argv.
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { markdownCodeSpan } from './transport-realign-body.mjs';
+import {
+  EXIT_INVALID_MANIFEST,
+  guardManifestState,
+  writeManifestWithGuard,
+} from './lib/manifest-entry-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
+
+function manifestBlobSha(rel) {
+  try {
+    return gitBlobSha(fs.readFileSync(path.join(ROOT, rel)));
+  } catch {
+    return null;
+  }
+}
 
 const RAW_ARGS = process.argv.slice(2);
 const ARGS = new Set(RAW_ARGS);
@@ -1707,7 +1720,8 @@ function committedBytes(rel) {
 function realignMain(listFile) {
   const parsed = parseRealignList(fs.readFileSync(listFile, 'utf8'));
   const paths = parsed.paths;
-  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+  const manifestBytes = fs.readFileSync(MANIFEST_PATH);
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
   const resolved = resolveRealignRequests(manifest, paths);
   let attributes = [];
   let attributeProbeError = null;
@@ -1763,6 +1777,20 @@ function realignMain(listFile) {
   if (mismatched.length) {
     console.error(`transport-identical-twins: ${mismatched.length} path trasportati sono stati committati con byte diversi da quelli del sito. Registrarli come baseline darebbe ‘undeclared-drift’ permanente al drift check e li escluderebbe dal trasporto: correggi la copia (normalizzazione, filtro ‘clean’, staging), oppure degrada la voce a ‘adapted’ con la sua ‘reason’.`);
   }
+  const manifestWrite = corrections.length && !mismatched.length && !normalization.length && !unreadable.length
+    ? writeManifestWithGuard({
+      manifestPath: MANIFEST_PATH,
+      manifest,
+      originalBytes: manifestBytes,
+      blobShaForPath: manifestBlobSha,
+    })
+    : guardManifestState({
+      manifestPath: MANIFEST_PATH,
+      manifest: JSON.parse(manifestBytes.toString('utf8')),
+      originalBytes: manifestBytes,
+      blobShaForPath: manifestBlobSha,
+    });
+  if (!manifestWrite.ok) return EXIT_INVALID_MANIFEST;
   if (mismatched.length || normalization.length) {
     return 1;
   }
@@ -1771,7 +1799,6 @@ function realignMain(listFile) {
     console.error(`transport-identical-twins: ${unreadable.length} path trasportati non verificabili sul commit — la baseline resterebbe registrata su byte che nessuno ha committato`);
     return 1;
   }
-  if (corrections.length) fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
   return 0;
 }
 
@@ -1799,7 +1826,8 @@ async function main() {
     return 1;
   }
   if (REALIGN_FILE) return realignMain(REALIGN_FILE);
-  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+  const manifestBytes = fs.readFileSync(MANIFEST_PATH);
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
   const outOfScopePrefixes = (manifest.scope?.outOfScope || []).map((x) => x.prefix);
   const modeOf = new Map(manifest.files.map((e) => [e.path, e.mode]));
   const declaredCouplings = scalarFingerprintCouplings(manifest);
@@ -1963,8 +1991,22 @@ async function main() {
   }
 
   const manifestChanged = APPLY && (transported.length > 0 || realign.length > 0 || couplingSnapshotChanged);
-  if (APPLY && manifestChanged) {
-    fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
+  const manifestWrite = APPLY && manifestChanged
+    ? writeManifestWithGuard({
+      manifestPath: MANIFEST_PATH,
+      manifest,
+      originalBytes: manifestBytes,
+      blobShaForPath: manifestBlobSha,
+    })
+    : guardManifestState({
+      manifestPath: MANIFEST_PATH,
+      manifest: JSON.parse(manifestBytes.toString('utf8')),
+      originalBytes: manifestBytes,
+      blobShaForPath: manifestBlobSha,
+    });
+  if (!manifestWrite.ok) {
+    console.error(`transport-identical-twins: manifest non certificabile, nessuna modifica viene consegnata`);
+    return EXIT_INVALID_MANIFEST;
   }
 
   // «Niente da portare» non è un fallimento, ed è il caso NORMALE: chi chiama

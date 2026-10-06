@@ -58,22 +58,17 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { coveredByManifest } from '../../scripts/ci/twin-census-pr-gate.mjs';
 import { gitBlobSha } from '../../scripts/ci/loop-drift-check.mjs';
+import {
+  TRACKING_ISSUE_RE,
+  duplicateManifestEntryPaths,
+  manifestEntryRuleChecks,
+  MANIFEST_ENTRY_MODES,
+  validateManifestEntries,
+} from '../../scripts/ci/lib/manifest-entry-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
 const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
-
-/** I cinque mode che `loop-drift-check.mjs:classify()` sa trattare. */
-const MODES = new Set(['identical', 'adapted', 'corpus-only', 'corpus-only-pending', 'not-ported']);
-
-/**
- * Una issue APERTA sul sito che tracci il lavoro mancante — non un semplice
- * riferimento `owner#123` in prosa, che non e' verificabile ne' cliccabile da
- * un tool. Vedi issue #125: la differenza fra "non serve" e "serve e manca"
- * viveva solo in `reason`, dove non fallisce niente. Un URL fa fallire un
- * `assert.match`.
- */
-const TRACKING_ISSUE_RE = /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/issues\/\d+$/;
 
 /**
  * Gli alberi che DEVONO restare censiti. Vedi l'intestazione: sta qui e non nel
@@ -154,21 +149,25 @@ test('scope: sotto un albero censito nessun file resta senza mode', () => {
 });
 
 test('files: schema, mode noti, nessun path duplicato', () => {
-  const seen = new Set();
+  const duplicated = duplicateManifestEntryPaths(manifest);
   for (const f of manifest.files) {
     assert.equal(typeof f.path, 'string', `voce senza path: ${JSON.stringify(f)}`);
-    assert.ok(!seen.has(f.path), `path duplicato nel manifest: ${f.path}`);
-    seen.add(f.path);
-    assert.ok(MODES.has(f.mode), `mode sconosciuto su ${f.path}: ${f.mode}`);
+    assert.ok(!duplicated.has(f.path), `path duplicato nel manifest: ${f.path}`);
+    assert.ok(MANIFEST_ENTRY_MODES.includes(f.mode), `mode sconosciuto su ${f.path}: ${f.mode}`);
     assert.ok(f.baseline, `${f.path}: manca \`baseline\``);
   }
+});
+
+test('files: il validatore condiviso accetta il manifest reale', () => {
+  assert.deepEqual(validateManifestEntries(manifest), [], 'il manifest reale viola una regola di forma condivisa');
 });
 
 test('files: ogni mode diverso da identical porta una ragione', () => {
   for (const f of manifest.files) {
     if (f.mode === 'identical') continue;
+    const checks = manifestEntryRuleChecks(f);
     assert.ok(
-      (f.reason || '').trim().length > 0,
+      checks.hasReason,
       `${f.path} e' \`${f.mode}\` senza \`reason\`. Un file diverso dal sito senza una ragione ` +
         "scritta e' indistinguibile da uno andato alla deriva: e' la ragione a rendere " +
         'rileggibile la scelta fra sei mesi.',
@@ -178,7 +177,8 @@ test('files: ogni mode diverso da identical porta una ragione', () => {
 
 test('files: ogni `adapted` allineato indica l issue che governa l adattamento', () => {
   for (const f of manifest.files) {
-    if (f.mode !== 'adapted' || f.baseline?.site !== f.baseline?.corpus) continue;
+    const checks = manifestEntryRuleChecks(f);
+    if (!checks.requiresAdaptationIssue) continue;
     assert.match(
       f.adaptationIssue || '',
       TRACKING_ISSUE_RE,
@@ -224,19 +224,19 @@ test('gate-minted-followups: il mint corpus rispetta il cooldown fu-parked', () 
 
 test('files: sitePath e baseline coerenti col mode', () => {
   for (const f of manifest.files) {
+    const checks = manifestEntryRuleChecks(f);
     if (f.sitePath !== undefined) {
-      assert.notEqual(
-        f.sitePath,
-        f.path,
+      assert.ok(
+        checks.sitePathCoherent,
         `${f.path}: \`sitePath\` identico a \`path\` — ridondante, loop-drift-check usa gia' ` +
           '`entry.sitePath || rel`.',
       );
     }
     if (f.mode === 'corpus-only') {
-      assert.equal(f.sitePath, undefined, `${f.path}: \`corpus-only\` non puo' avere un \`sitePath\``);
+      assert.equal(checks.corpusOnlySitePathCoherent, true, `${f.path}: \`corpus-only\` non puo' avere un \`sitePath\``);
       assert.equal(
-        f.baseline.site,
-        null,
+        checks.corpusOnlySiteBaselineCoherent,
+        true,
         `${f.path}: \`corpus-only\` con \`baseline.site\` non nullo. loop-drift-check non lo ` +
           'legge mai per questo mode, quindi il valore e\' solo un\'affermazione falsa.',
       );
@@ -247,19 +247,19 @@ test('files: sitePath e baseline coerenti col mode', () => {
       // e' ancora comparso, quindi non c'e' un hash vero da registrare — solo
       // la promozione cosciente del mode lo rendera' legittimo.
       assert.equal(
-        f.baseline.site,
-        null,
+        checks.pendingSiteBaselineCoherent,
+        true,
         `${f.path}: \`corpus-only-pending\` con \`baseline.site\` non nullo. Il gemello non e' ` +
           'ancora comparso sul sito (o e\' comparso e la voce va promossa, non lasciata pending ' +
           'con un hash): in nessuno dei due casi un `--init` di routine deve scriverlo qui.',
       );
     } else {
-      assert.ok(f.baseline.site, `${f.path}: \`${f.mode}\` senza \`baseline.site\``);
+      assert.ok(checks.siteBaselineCoherent, `${f.path}: \`${f.mode}\` senza \`baseline.site\``);
     }
     // A newly declared corpus-only path has no historical blob to attest;
     // loop-drift-check deliberately represents that first baseline as null.
     if (f.mode !== 'not-ported' && f.baseline.corpus !== null) {
-      assert.ok(f.baseline.corpus, `${f.path}: manca \`baseline.corpus\``);
+      assert.ok(manifestEntryRuleChecks(f).corpusBaselineCoherent, `${f.path}: manca \`baseline.corpus\``);
     }
   }
 });
@@ -267,12 +267,15 @@ test('files: sitePath e baseline coerenti col mode', () => {
 test('files: expectedSiteBlob di un pending e\' il blob reale del contenuto atteso', () => {
   for (const f of manifest.files) {
     if (f.expectedSiteBlob === undefined) continue;
-    assert.equal(f.mode, 'corpus-only-pending', `${f.path}: expectedSiteBlob e' riservato a un gemello pending`);
-    assert.equal(typeof f.sitePath, 'string', `${f.path}: expectedSiteBlob senza sitePath esplicito`);
-    assert.match(f.expectedSiteBlob, /^[a-f0-9]{40}$/, `${f.path}: expectedSiteBlob non e' un Git blob SHA-1`);
+    const checks = manifestEntryRuleChecks(f, {
+      actualBlobSha: gitBlobSha(fs.readFileSync(path.join(ROOT, f.path))),
+    });
+    assert.equal(checks.expectedSiteBlobModeCoherent, true, `${f.path}: expectedSiteBlob e' riservato a un gemello pending`);
+    assert.equal(checks.expectedSiteBlobPathCoherent, true, `${f.path}: expectedSiteBlob senza sitePath esplicito`);
+    assert.equal(checks.expectedSiteBlobFormatCoherent, true, `${f.path}: expectedSiteBlob non e' un Git blob SHA-1`);
     assert.equal(
-      f.expectedSiteBlob,
-      gitBlobSha(fs.readFileSync(path.join(ROOT, f.path))),
+      checks.expectedSiteBlobMatchesContent,
+      true,
       `${f.path}: expectedSiteBlob non pinna il contenuto presente nel corpus; non promuovere una copia stantia.`,
     );
   }
@@ -312,9 +315,10 @@ test('files: expectedSiteBlob di un pending e\' il blob reale del contenuto atte
 test('files: nessun `identical` con le due baseline divergenti', () => {
   for (const f of manifest.files) {
     if (f.mode !== 'identical') continue;
+    const checks = manifestEntryRuleChecks(f);
     assert.equal(
-      f.baseline.site,
-      f.baseline.corpus,
+      checks.identicalBaselineCoherent,
+      true,
       `${f.path}: \`identical\` con le due baseline diverse (site \`${f.baseline.site}\`, corpus ` +
         `\`${f.baseline.corpus}\`). Al primo cron e' \`undeclared-drift\`, e un \`undeclared-drift\` il ` +
         'trasporto non lo copia: il gemello esce dalla copia automatica senza che niente fallisca. ' +
@@ -341,8 +345,9 @@ test('files: nessun `identical` con le due baseline divergenti', () => {
 test('files: `corpus-only-pending` porta un trackingIssue verificabile', () => {
   for (const f of manifest.files) {
     if (f.mode !== 'corpus-only-pending') continue;
+    const checks = manifestEntryRuleChecks(f);
     assert.ok(
-      typeof f.trackingIssue === 'string' && TRACKING_ISSUE_RE.test(f.trackingIssue),
+      checks.pendingTrackingIssueCoherent,
       `${f.path}: \`corpus-only-pending\` senza un \`trackingIssue\` valido (atteso URL ` +
         "completo tipo https://github.com/<owner>/<repo>/issues/<n>). Senza, e' un " +
         "'candidato' solo in prosa: esattamente il punto cieco che questo mode chiude.",
@@ -353,9 +358,10 @@ test('files: `corpus-only-pending` porta un trackingIssue verificabile', () => {
   // che non guardia niente.
   for (const f of manifest.files) {
     if (f.mode === 'corpus-only-pending') continue;
+    const checks = manifestEntryRuleChecks(f);
     assert.equal(
-      f.trackingIssue,
-      undefined,
+      checks.trackingIssueAbsentOutsidePending,
+      true,
       `${f.path}: \`trackingIssue\` su mode \`${f.mode}\` — letto solo per \`corpus-only-pending\`, ` +
         "altrove e' un campo morto. O il mode e' sbagliato, o il campo va tolto.",
     );
