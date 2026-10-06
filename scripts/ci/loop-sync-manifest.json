@@ -5253,6 +5253,16 @@
         "corpus": "5aa5b161c07a95ea",
         "alignedAt": "2026-10-05"
       }
+    },
+    {
+      "path": "scripts/lib/hub-landing-meta.mjs",
+      "mode": "corpus-only",
+      "reason": "Patch stale guardata dei metadati della landing italiana `/articoli-svizzera/`, applicata dal refresher che riscrive le pagine dello shard. Il sito non ha questo script: la landing e' servita dal corpus e il sito la consuma via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "7cd24238735091a4",
+        "alignedAt": "2026-10-06"
+      }
     }
   ]
 }
