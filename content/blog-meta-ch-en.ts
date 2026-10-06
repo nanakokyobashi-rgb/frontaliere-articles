@@ -7781,6 +7781,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-edilizio-berna-procedura.title': 'Building permit in Bern: requirements and procedure',
     'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Canton of Bern: when a building permit is required, which documents to prepare, and why work cannot begin before the permit.',
     'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Documents for a building permit application in the Canton of Bern',
+    'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, Swiss partner, cuts up to 700 jobs',
+    'blog.article.air-baltic-tagli-swiss.excerpt': 'The Latvian airline could cut 500-700 jobs out of approximately 3\'000. The flight schedule is unchanged; the cuts concern Riga, Vilnius and Tallinn.',
+    'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic plans staff cuts while keeping its current flight programme unchanged.',
 };
 
 export default blogMetaChEn;

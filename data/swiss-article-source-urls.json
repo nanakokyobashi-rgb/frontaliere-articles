@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948009/svizzera-patate-perdite-latte-canicola": {
-    "articleId": "latte-patate-cari-canicola-svizzera",
-    "ts": "2026-09-04T09:34:40.121Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4059840": {
     "articleId": "cpe-s-voto-bilaterali-iii",
     "ts": "2026-09-04T10:00:29.673Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1954843/svizzera-difesa-vbs-ritardo-fornitura-missili": {
     "articleId": "svizzera-patriot-bodluv-iva-attesa",
     "ts": "2026-10-05T23:53:48.339Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/air-baltic%2c-partner-di-swiss%2c-taglia-fino-a-700-posti-di-lavoro/92168766": {
+    "articleId": "air-baltic-tagli-swiss",
+    "ts": "2026-10-06T01:43:45.733Z",
     "keyForm": 2
   }
 }

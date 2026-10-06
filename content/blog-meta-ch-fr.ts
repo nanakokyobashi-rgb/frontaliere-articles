@@ -7781,6 +7781,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-edilizio-berna-procedura.title': 'Autorisation de construire à Berne : exigences et procédure',
     'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Canton de Berne : quand une autorisation de construire est nécessaire, quels documents préparer et pourquoi les travaux ne peuvent pas commencer avant l\'obtention de l\'autorisation.',
     'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Documents pour une demande de permis de construire dans le canton de Berne',
+    'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, partenaire de Swiss, supprime jusqu’à 700 postes',
+    'blog.article.air-baltic-tagli-swiss.excerpt': 'La compagnie lettone pourrait supprimer 500-700 postes sur environ 3\'000. Le programme de vols ne change pas ; les suppressions concernent Riga, Vilnius et Tallinn.',
+    'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic prévoit des suppressions de postes sans modifier le programme de vols actuel.',
 };
 
 export default blogMetaChFr;

@@ -7781,6 +7781,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-edilizio-berna-procedura.title': 'Autorizzazione edilizia a Berna: requisiti e procedura',
     'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Cantone di Berna: quando serve l\'autorizzazione edilizia, quali documenti preparare e perché i lavori non possono iniziare prima del permesso.',
     'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Documenti per una richiesta di autorizzazione edilizia nel Cantone di Berna',
+    'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, partner di Swiss, taglia fino a 700 posti',
+    'blog.article.air-baltic-tagli-swiss.excerpt': 'La compagnia lettone potrebbe tagliare 500-700 posti su circa 3\'000. Il programma di voli non cambia; i tagli riguardano Riga, Vilnius e Tallinn.',
+    'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic riduce il personale mentre mantiene invariato il programma di voli.',
 };
 
 export default blogMetaChIt;
