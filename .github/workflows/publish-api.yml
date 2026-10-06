@@ -746,6 +746,35 @@ jobs:
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
           fi
 
+      # La release edge delle sezioni cantonali (piano «sezioni articoli per
+      # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:
+      # `edge/sections/registry.json` su R2, che il Worker del sito applica, e
+      # che e' anche il puntatore alla release (sitemap e indice sotto
+      # `edge/sections/_releases/<commit>/`, immutabili). `sections.json` su
+      # Pages e' un catalogo senza stato.
+      #
+      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
+      # sotto la base della release (riletto e confrontato per sha256), verifica
+      # che le pagine delle sezioni live siano gia' su R2, poi UN PUT del
+      # puntatore cambia tutto insieme. Prima del PUT un fallimento non cambia
+      # cio' che il Worker serve; dopo, la release nuova e' servita intera.
+      #
+      # DOPO il deploy Pages e PRIMA della notifica al sito. Le superfici di
+      # famiglia (canton-articles.json, slugs.json.cantons, i feed) escono con
+      # Pages: se il puntatore girasse prima e il deploy poi fallisse, il
+      # Worker servirebbe una sezione live con Pages fermo alla release
+      # precedente. E la notifica `articles-published` fa riconciliare il sito:
+      # deve partire quando R2 serve gia' la release nuova, non prima. Quando il
+      # push e' obbligatorio (la release differisce da quella servita, o quella
+      # servita non e' dimostrabile) e un passo non e' confermato lo script esce
+      # 1: il job fallisce QUI e la notifica non parte, perche' annuncerebbe una
+      # superficie che R2 non serve; il sync schedulato del sito resta la rete.
+      # Se niente di servito cambia (oggi: tutto draft) un problema di R2 e' un
+      # warning e la notifica parte come sempre.
+      - name: Publish the canton sections release to the edge
+        if: steps.deploy.outcome == 'success'
+        run: node scripts/publish-section-edge.mjs
+
       # Tell the site the surface moved. The publisher knows when it has
       # published, so the push is the event — the consumer's schedule is only a
       # safety net for a dispatch that never arrives. Without this a new article
@@ -798,31 +827,3 @@ jobs:
           if [ "$code" != "204" ]; then
             echo "::warning::dispatch returned $code — the site will pick this up on its schedule"
           fi
-
-      # La release edge delle sezioni cantonali (piano «sezioni articoli per
-      # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:
-      # `edge/sections/registry.json` su R2, che il Worker del sito applica, e
-      # che e' anche il puntatore alla release (sitemap e indice sotto
-      # `edge/sections/_releases/<commit>/`, immutabili). `sections.json` su
-      # Pages e' un catalogo senza stato.
-      #
-      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
-      # sotto la base della release (riletto e confrontato per sha256), verifica
-      # che le pagine delle sezioni live siano gia' su R2, poi UN PUT del
-      # puntatore cambia tutto insieme. Prima del PUT un fallimento non cambia
-      # cio' che il Worker serve; dopo, la release nuova e' servita intera.
-      #
-      # DOPO il deploy Pages, e per ultimo. Le superfici di famiglia
-      # (canton-articles.json, slugs.json.cantons, i feed) escono con Pages: se
-      # il puntatore girasse prima e il deploy poi fallisse, il Worker
-      # servirebbe una sezione live con Pages fermo alla release precedente.
-      # In quest'ordine un deploy fallito lascia R2 com'era, e un flip fallito
-      # lascia Pages avanti di un catalogo che non porta stato. E' l'ultimo
-      # step perche' quando il push e' obbligatorio (la release differisce da
-      # quella servita, o quella servita non e' dimostrabile) e un passo non e'
-      # confermato esce 1: il job risulta fallito senza aver saltato la
-      # spinta delle sitemap blog ne' la notifica al sito. Se niente di servito
-      # cambia (oggi: tutto draft) un problema di R2 e' un warning.
-      - name: Publish the canton sections release to the edge
-        if: steps.deploy.outcome == 'success'
-        run: node scripts/publish-section-edge.mjs

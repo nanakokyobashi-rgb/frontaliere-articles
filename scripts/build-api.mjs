@@ -235,6 +235,18 @@ const PUBLISHED_BY_SECTION = Object.fromEntries(PUBLISHED_API_SECTIONS.map((sect
 // Il registro dichiarato delle sezioni si valida PRIMA di scrivere un solo
 // byte: un registro fuori contratto e' un errore del commit che l'ha toccato.
 const declaredSections = loadDeclaredRegistry(ROOT);
+// Lo stato che la release edge di QUESTO build dichiarera' (registro
+// dichiarato + kill-switch), calcolato subito perche' decide anche quali
+// superfici di lettura di una sezione di famiglia escono: i suoi feed RSS si
+// scrivono solo se la release la dichiara live. Se la release non si puo'
+// emettere (kill-switch non verificato con una sezione dichiarata live)
+// nessuna sezione conta come live.
+const killSwitch = resolveKillSwitch(process.env);
+const effectiveSections = effectiveStatuses(declaredSections, killSwitch);
+const releaseEmitted = edgeRegistryPublishable(declaredSections, killSwitch);
+const releaseLiveSections = new Set(
+  releaseEmitted ? Object.keys(effectiveSections).filter((id) => effectiveSections[id].status === 'live') : [],
+);
 // Le sezioni di FAMIGLIA (le cantonali accese) si leggono come le storiche, con
 // una differenza sola: una sezione di famiglia appena accesa non ha ancora i
 // suoi file (create-article li crea TUTTI INSIEME al primo articolo), e
@@ -823,6 +835,13 @@ let rssItemTotal = 0;
 const familyRssRows = [];
 for (const section of rssSections) {
   const familyPolicy = floorPolicyOf(section.id) === 'family';
+  // I feed di una sezione di famiglia sono una superficie di LETTURA (titoli,
+  // estratti, link agli articoli): escono su Pages solo se la release di
+  // questo build dichiara la sezione live. Per una sezione draft, ritirata o
+  // spenta dal kill-switch il Worker risponde 404 sulle sue pagine, e un feed
+  // pubblico ne esporrebbe comunque gli articoli. Il feed si costruisce lo
+  // stesso (il pavimento qui sotto lo giudica), ma non si scrive.
+  const publishFeeds = !familyPolicy || releaseLiveSections.has(section.id);
   if (section.feeds.length === 0 && !familyPolicy) {
     throw new Error(
       `rss: section '${section.id}' produced no feeds (${section.articleCount} articles parsed) — refusing to publish`,
@@ -837,6 +856,10 @@ for (const section of rssSections) {
     // not ours to edit here (a change would be overwritten on the next mirror
     // run). Sanitising where this script writes them keeps the fix in the repo
     // that owns the write, and covers whatever the shared builder hands over.
+    if (!publishFeeds) {
+      console.log(`[build-api] ${name}: not emitted — ${section.id} non e' live nella release (${items} items costruiti)`);
+      continue;
+    }
     const clean = sanitizeXmlDocument(xml);
     reportStrippedControlChars(path.join(OUT, name), xml, clean);
     assertNoControlChars(clean, name);
@@ -1262,8 +1285,6 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // e' verificabile e una sezione e' dichiarata live (vedi section-registry.mjs).
 // Con tutte le sezioni in `draft` (oggi) i documenti esistono ma non accendono
 // niente: il Worker resta fail-closed e l'indice non viene emesso.
-const killSwitch = resolveKillSwitch(process.env);
-const effectiveSections = effectiveStatuses(declaredSections, killSwitch);
 if (killSwitch.unknown.length) {
   console.warn(
     `::warning::CANTON_ARTICLE_SECTIONS_KILL: token non riconosciuti ignorati: ${killSwitch.unknown.join(', ')} ` +
@@ -1291,7 +1312,7 @@ write(SECTIONS_CATALOG_FILE, sectionsCatalog);
 // verificabile e con una sezione dichiarata live non si emette nessuno dei
 // due, e su R2 resta la release precedente.
 let liveSectionIds = [];
-if (edgeRegistryPublishable(declaredSections, killSwitch)) {
+if (releaseEmitted) {
   const edgeRegistry = buildEdgeRegistry({ declared: declaredSections, effective: effectiveSections, commit });
   if (!validateEdgeSectionRegistry(edgeRegistry)) {
     throw new Error(`${EDGE_SECTION_REGISTRY_FILE}: il Worker rifiuterebbe questo registro — refusing`);

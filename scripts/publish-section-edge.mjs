@@ -72,11 +72,13 @@
  *    precedente (una richiesta in volo puo' ancora leggerla).
  *
  * ESITO. In un push obbligatorio un fallimento esce 1 e il job di
- * publish-api.yml risulta fallito. Lo step gira DOPO il deploy Pages, per
- * ultimo: le superfici di famiglia (canton-articles.json, slugs.json.cantons,
- * i feed) escono con Pages, quindi il puntatore gira solo quando Pages ha gia'
- * la release nuova — un deploy fallito lascia R2 com'era, e un flip fallito
- * lascia Pages avanti di un catalogo che non porta stato. Se niente di servito
+ * publish-api.yml risulta fallito. Lo step gira DOPO il deploy Pages e PRIMA
+ * della notifica al sito: le superfici di famiglia (canton-articles.json,
+ * slugs.json.cantons, i feed) escono con Pages, quindi il puntatore gira solo
+ * quando Pages ha gia' la release nuova — un deploy fallito lascia R2 com'era,
+ * e un flip fallito lascia Pages avanti di un catalogo che non porta stato e
+ * FERMA il job prima di `Notify the site`, che annuncerebbe al sito una
+ * superficie che R2 non serve ancora. Se niente di servito
  * cambia (oggi: tutto `draft`, nessun file) un problema di R2 e' un warning ed
  * esce 0.
  *

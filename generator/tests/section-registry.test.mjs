@@ -86,7 +86,7 @@ import {
   engineViewRssLayout,
   seoChunkSources,
 } from '../../scripts/lib/engine-corpus-view.mjs';
-import { floorViolations } from '../../scripts/ci/verify-api-floors.mjs';
+import { floorViolations, unpublishedFamilySectionsOf } from '../../scripts/ci/verify-api-floors.mjs';
 import {
   declaredFiles,
   main as edgeMain,
@@ -512,7 +512,7 @@ test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-
   // un feed con item senza registro sorgente invece si'.
   const floors = readFileSync(path.join(ROOT, 'scripts/ci/verify-api-floors.mjs'), 'utf8');
   assert.match(floors, /RSS_SECTIONS\.filter\(\(section\) => isNewFamilySection\(root, section\.id\)\)/);
-  assert.match(floors, /if \(newFamily\.has\(feedSection\(feedName\)\)\) continue;/);
+  assert.match(floors, /if \(newFamily\.has\(owner\) \|\| unpublished\.has\(owner\)\) continue;/);
   assert.match(floors, /if \(newFamily\.has\(section\)\) \{[\s\S]*?if \(feed\.items > 0\) violations\.push/);
   const none = { feeds: [], missingFeeds: [], imageErrors: [] };
   assert.deepEqual(
@@ -520,6 +520,55 @@ test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-
       .filter((line) => /feed|RSS/.test(line)),
     [],
   );
+});
+
+test('i feed di una sezione di famiglia escono solo se la release la dichiara live (draft, ritirata, kill-switch: niente feed)', () => {
+  // build-api: lo stato della release si calcola PRIMA dei feed, dalla stessa
+  // coppia registro + kill-switch che scrive il puntatore, e una sezione di
+  // famiglia non live non scrive ne' conta feed.
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  const live = build.indexOf('const releaseLiveSections = new Set(');
+  const loop = build.indexOf('for (const section of rssSections) {');
+  assert.ok(live > 0 && loop > live, 'lo stato della release si decide prima di scrivere i feed');
+  assert.match(build.slice(live, live + 200), /releaseEmitted \? Object\.keys\(effectiveSections\)\.filter\(\(id\) => effectiveSections\[id\]\.status === 'live'\) : \[\]/);
+  assert.match(build, /const releaseEmitted = edgeRegistryPublishable\(declaredSections, killSwitch\);/);
+  assert.match(build, /if \(releaseEmitted\) \{\s+const edgeRegistry/, 'lo stesso booleano decide la release e i feed');
+  assert.equal(build.match(/resolveKillSwitch\(process\.env\)/g).length, 1, 'un solo kill-switch risolto per build');
+  const body = build.slice(loop, build.indexOf('rssItemTotal += items;', loop));
+  assert.match(body, /const publishFeeds = !familyPolicy \|\| releaseLiveSections\.has\(section\.id\);/);
+  const skip = body.indexOf('if (!publishFeeds) {');
+  assert.ok(skip > 0 && skip < body.indexOf('fs.writeFileSync('), 'il salto precede la scrittura');
+  assert.match(body.slice(skip, skip + 260), /continue;/);
+
+  // Lo stato effettivo: una sezione spenta dal kill-switch non e' live, e una
+  // release non emettibile non ne rende live nessuna.
+  const declared = { sections: { ...Object.fromEntries(registrySectionIds().map((id) => [id, { status: 'draft' }])), 'canton-ti': { status: 'live' } } };
+  const on = resolveKillSwitch({ RC_ENV_LOADED: '1' });
+  const off = resolveKillSwitch({ RC_ENV_LOADED: '1', CANTON_ARTICLE_SECTIONS_KILL: 'TI' });
+  assert.equal(effectiveStatuses(declared, on)['canton-ti'].status, 'live');
+  assert.equal(effectiveStatuses(declared, off)['canton-ti'].status, 'draft');
+  assert.equal(edgeRegistryPublishable(declared, resolveKillSwitch({})), false);
+
+  // verify-api-floors: per una sezione non live l'assenza dei feed e' lo stato
+  // voluto e la PRESENZA e' una violazione; per una sezione live tornano le
+  // regole di tutte le altre (feed atteso assente = rifiuto).
+  const expected = { sourceArticles: {}, feedSources: { 'canton-ti': 2 }, sourceImages: null, rssMaxItems: 50, newFamilySections: [], rssSections: [{ id: 'canton-ti', mainFeed: 'rss-canton-ti.xml' }] };
+  const feedLines = (measured) => floorViolations({ imageErrors: [], ...measured }, expected).filter((line) => /rss-canton-ti/.test(line));
+  assert.deepEqual(feedLines({ feeds: [], missingFeeds: ['rss-canton-ti.xml'], unpublishedFamilySections: ['canton-ti'] }), []);
+  assert.equal(feedLines({ feeds: [], missingFeeds: ['rss-canton-ti.xml'], unpublishedFamilySections: [] }).length, 1);
+  const leaked = feedLines({ feeds: [{ name: 'rss-canton-ti.xml', items: 2, newest: '2026-10-01' }], missingFeeds: [], unpublishedFamilySections: ['canton-ti'] });
+  assert.equal(leaked.length, 1);
+  assert.match(leaked[0], /non dichiara live/);
+
+  // measureDist legge lo stato dal puntatore che lo stesso build ha scritto:
+  // senza puntatore (release non emessa) nessuna sezione di famiglia e' live.
+  const dist = mkdtempSync(path.join(tmpdir(), 'unpublished-family-'));
+  const rss = [{ id: 'svizzera' }, { id: 'canton-ti' }, { id: 'canton-gr' }];
+  assert.deepEqual(unpublishedFamilySectionsOf(dist, rss), ['canton-ti', 'canton-gr'], 'le sezioni storiche non dipendono dalla release');
+  mkdirSync(path.join(dist, 'edge/sections'), { recursive: true });
+  writeFileSync(path.join(dist, 'edge/sections/registry.json'), JSON.stringify({ schema: 1, commit: COMMIT, sections: { 'canton-ti': { status: 'live' }, 'canton-gr': { status: 'retired' } } }));
+  assert.deepEqual(unpublishedFamilySectionsOf(dist, rss), ['canton-gr']);
+  assert.match(readFileSync(path.join(ROOT, 'scripts/ci/verify-api-floors.mjs'), 'utf8'), /const unpublishedFamilySections = unpublishedFamilySectionsOf\(distDir\);/);
 });
 
 test('Google News: le sezioni cantonali restano fuori dalla v1 (decisione D5), per scelta dichiarata', () => {
@@ -1068,16 +1117,27 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.ok(seen.size > 20, 'la chiusura e\' vuota: il test sarebbe vacuo');
   assert.deepEqual([...seen].filter((file) => !covered(file)).sort(), [], 'moduli importati dal publisher e non osservati da on.push.paths');
 
-  // DOPO il deploy Pages (le superfici di famiglia escono con Pages) e per
-  // ultimo: se fallisce non salta ne' le sitemap blog ne' la notifica al sito.
+  // DOPO il deploy Pages (le superfici di famiglia escono con Pages) e dopo la
+  // spinta delle sitemap blog, ma PRIMA della notifica al sito: il sito si
+  // riconcilia quando R2 serve gia' la release nuova, e un flip obbligatorio
+  // fallito (exit 1) ferma il job prima di annunciare una superficie non servita.
   const at = wf.indexOf('      - name: Publish the canton sections release to the edge\n');
+  const notify = wf.indexOf('      - name: Notify the site\n');
   assert.ok(at > wf.indexOf('uses: actions/deploy-pages'));
-  assert.ok(at > wf.indexOf('- name: Notify the site'));
-  assert.equal(wf.slice(at).trimEnd(), [
+  assert.ok(at > wf.indexOf('- name: Push the article sitemaps and the blog index to the edge'));
+  assert.ok(notify > at, 'la notifica al sito parte dopo il flip edge');
+  assert.equal(wf.slice(at, wf.indexOf('      # Tell the site the surface moved.')).trimEnd(), [
     '      - name: Publish the canton sections release to the edge',
     "        if: steps.deploy.outcome == 'success'",
     '        run: node scripts/publish-section-edge.mjs',
   ].join('\n'));
+  // Nessuno step fra il flip e la notifica, e la notifica non porta
+  // `always()`/`continue-on-error` a monte: un flip fallito la salta.
+  const edgeStep = wf.slice(at, notify);
+  assert.doesNotMatch(edgeStep, /continue-on-error/);
+  assert.doesNotMatch(edgeStep.replace(/^\s*#.*$/gm, ''), /- name: (?!Publish the canton sections release)/);
+  const notifyStep = wf.slice(notify);
+  assert.doesNotMatch(notifyStep.split('\n').slice(0, 12).join('\n'), /always\(\)|failure\(\)/);
   // Il build gira dopo il caricamento di Remote Config: il kill-switch e il marker sono nell'ambiente.
   assert.ok(wf.indexOf('node generator/scripts/load-rc-env.mjs') < wf.indexOf('scripts/build-api.mjs\n'));
   assert.match(wf, /for f in articles\.json slugs\.json manifest\.json sections\.json; do/);

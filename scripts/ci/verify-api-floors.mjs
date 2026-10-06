@@ -54,12 +54,14 @@ import {
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
   isNewFamilySection,
+  floorPolicyOf,
 } from '../lib/corpus-floors.mjs';
 // Stessa funzione del writer e del gate manifest.counts in build-api.mjs: un
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
 // alzerebbe la misura sopra il pavimento mascherando un feed troncato.
 import { countXmlTags } from '../lib/count-xml-tags.mjs';
 import { seoChunkSources } from '../lib/engine-corpus-view.mjs';
+import { EDGE_SECTION_REGISTRY_FILE } from '../lib/section-registry.mjs';
 import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -95,6 +97,21 @@ function feedNames(section) {
 /** I nomi di tutti i feed che la tabella RSS promette di pubblicare. */
 export function expectedFeedNames(sections = RSS_SECTIONS) {
   return [...new Set(sections.flatMap((section) => [...feedNames(section)]))];
+}
+
+/**
+ * Le sezioni di famiglia che la release edge di QUESTO build non dichiara live
+ * (tutte, se la release non e' stata emessa: kill-switch non verificato). I
+ * loro feed non devono uscire. Lo stato si legge dal puntatore che lo stesso
+ * build ha scritto in `dist/api`, non dal registro dichiarato: e' quello che
+ * tiene gia' conto del kill-switch.
+ */
+export function unpublishedFamilySectionsOf(distDir, sections = RSS_SECTIONS) {
+  const file = path.join(distDir, EDGE_SECTION_REGISTRY_FILE);
+  const edge = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf-8')).sections ?? {} : {};
+  return sections
+    .filter((section) => floorPolicyOf(section.id) === 'family' && edge[section.id]?.status !== 'live')
+    .map((section) => section.id);
 }
 
 export function feedSection(fileName, sections = RSS_SECTIONS) {
@@ -220,7 +237,7 @@ function feedPopulationReference(expected, section) {
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
  * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
- *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
+ *          missingFeeds?: string[], unpublishedFamilySections?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
  * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, sourceArchiveSitemapUrls?: Record<string, number>, sourceArchiveSitemapErrors?: Record<string, string>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
  *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
@@ -239,8 +256,15 @@ export function floorViolations(measured, expected, retention = undefined) {
   // nuova: al primo articolo esistono registro e chunk, e tornano le regole di
   // tutte le altre (chunk a zero = rifiuto).
   const newFamily = new Set(expected.newFamilySections ?? []);
+  // Una sezione di famiglia che la release edge NON dichiara live (draft,
+  // ritirata, spenta dal kill-switch, o release non emessa) non pubblica feed:
+  // sono una superficie di lettura e il Worker risponde 404 sulle sue pagine.
+  // L'assenza e' quindi lo stato voluto, e la PRESENZA e' la violazione.
+  const unpublished = new Set(measured.unpublishedFamilySections ?? []);
+  const rssSections = expected.rssSections ?? RSS_SECTIONS;
   for (const feedName of measured.missingFeeds ?? []) {
-    if (newFamily.has(feedSection(feedName))) continue;
+    const owner = feedSection(feedName, rssSections);
+    if (newFamily.has(owner) || unpublished.has(owner)) continue;
     violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
   }
 
@@ -326,9 +350,13 @@ export function floorViolations(measured, expected, retention = undefined) {
   // voci datate BLOCCA l'intera pubblicazione per un feed corto ma completo.
   const missingSeo = new Set();
   for (const feed of measured.feeds) {
-    const section = feedSection(feed.name);
+    const section = feedSection(feed.name, rssSections);
     if (section === null) {
       violations.push(`${feed.name}: nessuna sezione RSS_SECTIONS corrispondente — feed non mappato`);
+      continue;
+    }
+    if (unpublished.has(section)) {
+      violations.push(`${feed.name}: feed pubblicato per una sezione che la release edge non dichiara live`);
       continue;
     }
     if (newFamily.has(section)) {
@@ -611,7 +639,9 @@ export function measureDist(distDir) {
     }
   }
 
-  return { articleCounts: manifest.counts ?? {}, sitemaps, feeds, missingFeeds, images, imageErrors };
+  const unpublishedFamilySections = unpublishedFamilySectionsOf(distDir);
+
+  return { articleCounts: manifest.counts ?? {}, sitemaps, feeds, missingFeeds, images, imageErrors, unpublishedFamilySections };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
