@@ -93,7 +93,7 @@ jobs:
       failed_check_key: ${{ steps.pre.outputs.failed_check_key }}
       body_revision: ${{ steps.pre.outputs.body_revision }}
     steps:
-      - name: Checkout dell'helper del prefilter (solo `scripts/ci/`)
+      - name: Checkout degli helper del prefilter e del token runtime
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
@@ -101,6 +101,38 @@ jobs:
           # non e' lui a decidere le regole del proprio preflight.
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: scripts/ci
+          sparse-checkout-cone-mode: false
+          # Keep the checkout credential long enough for the trusted loader
+          # blobs to be materialized below when the sparse fetch is lazy.
+          persist-credentials: true
+
+      - name: Materialize trusted Remote Config loader
+        run: |
+          set -euo pipefail
+          mkdir -p generator/scripts/lib
+          git show HEAD:generator/scripts/load-rc-env.mjs > generator/scripts/load-rc-env.mjs
+          git show HEAD:generator/scripts/lib/google-service-account-token.mjs \
+            > generator/scripts/lib/google-service-account-token.mjs
+
+      - name: Setup Node.js for Remote Config
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials for rate-limit reads
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/redcheck-preflight-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/redcheck-preflight-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente — redcheck preflight resta sul GITHUB_TOKEN."
+          fi
+
+      - name: Load secrets from Remote Config for rate-limit reads
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
 
       - name: PR azionabile, e il rosso e' ancora quello della HEAD?
         id: pre
@@ -114,6 +146,9 @@ jobs:
           RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           skip() { echo "$1"; echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0; }
 
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
@@ -296,6 +331,23 @@ jobs:
             echo "body_revision=$body_sha"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Report preflight rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RATE_LIMIT_WORKFLOW: pr-redcheck-fixer
+        run: |
+          token_name=GITHUB_TOKEN
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            token_name=GITHUB_PAT_NANAKO
+          fi
+          RATE_LIMIT_TOKEN_NAME="$token_name" node scripts/ci/report-rate-limit-budget.mjs
+
+      - name: Cleanup preflight Firebase credentials
+        if: always()
+        run: rm -f /tmp/redcheck-preflight-sa.json
+
   redcheck-fix:
     needs: preflight
     if: needs.preflight.outputs.actionable == 'true'
@@ -386,6 +438,9 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           if ! trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha') \
             || ! printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'; then
             echo "::warning::Helper trusted non leggibile da main: nessun Codex in questo run, retryable."
@@ -479,7 +534,11 @@ jobs:
           CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
           CLAIM_TTL_SEC: '3600'
           GITHUB_RUN_ID: ${{ github.run_id }}
-        run: node scripts/ci/redcheck-review-prefilter.mjs --claim
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/redcheck-review-prefilter.mjs --claim
 
       - name: Fail closed when redcheck claim is unreadable
         if: steps.claim.outputs.claim_error == 'true'
@@ -541,6 +600,9 @@ jobs:
           EXPECTED_BODY_REVISION: ${{ needs.preflight.outputs.body_revision }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           MAX_ROUNDS=2
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           workflow_pat="${GITHUB_PAT_NANAKO:-}"
@@ -810,6 +872,9 @@ jobs:
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           # Baseline dei commenti PRE-Claude (dopo il marker del round): serve al
           # classify per distinguere «Claude ha lasciato una spiegazione» da
@@ -897,6 +962,9 @@ jobs:
           HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           OUT="$RUNNER_TEMP/redcheck"
           mkdir -p "$OUT"
 
@@ -1000,7 +1068,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
           CODEX_FALLBACK_MODE: '1'
-        run: node scripts/ci/check-quota-backoff.mjs
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs
 
       # La PR puo' avanzare dopo il marker, mentre un autore o il fixer gemello
       # sta lavorando. La verifica resta fail-closed e impedisce Codex; il
@@ -1022,6 +1094,9 @@ jobs:
           TRUSTED_MARKER_HELPER: ${{ steps.trusted_marker.outputs.path }}
         run: |
           set -euo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           if ! node "$TRUSTED_MARKER_HELPER" --verify-current \
             --repo "$REPO" --pr "$PR_NUMBER" \
             --marker "$EXPECTED_MARKER" --round "$EXPECTED_ROUND" \
@@ -1136,6 +1211,9 @@ jobs:
           TRUSTED_MARKER_HELPER: ${{ steps.trusted_marker.outputs.path }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
           # La PR può essere mergiata/chiusa mentre Codex è ancora in esecuzione
           # (race osservata su #911). In quel caso GitHub può cancellare il branch:
@@ -1376,6 +1454,9 @@ jobs:
           GUARD_PROCEED: ${{ steps.guard.outputs.proceed }}
           CODEX_OUTCOME: ${{ steps.codex_fix.outcome }}
         run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           if [ -n "${CLAIM_STATUS:-}" ]; then
             echo "CLAIM_STATUS ereditato dal classify ($CLAIM_STATUS)"
           elif [ "${GUARD_PROCEED:-}" != 'true' ]; then
@@ -1425,3 +1506,16 @@ jobs:
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
+
+      - name: Report rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RATE_LIMIT_WORKFLOW: pr-redcheck-fixer
+        run: |
+          token_name=GITHUB_TOKEN
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            token_name=GITHUB_PAT_NANAKO
+          fi
+          RATE_LIMIT_TOKEN_NAME="$token_name" node scripts/ci/report-rate-limit-budget.mjs

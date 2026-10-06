@@ -235,3 +235,14 @@ jobs:
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
+
+      - name: Report rate-limit budget
+        if: always()
+        run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          RATE_LIMIT_WORKFLOW=followup-drainer \
+            RATE_LIMIT_TOKEN_NAME=GITHUB_PAT_NANAKO \
+            RATE_LIMIT_RESOURCES=core,graphql \
+            GH_TOKEN="$runtime_pat" \
+            node scripts/ci/report-rate-limit-budget.mjs
+          unset runtime_pat

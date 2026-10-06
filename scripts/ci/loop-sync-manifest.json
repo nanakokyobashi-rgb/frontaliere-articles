@@ -510,6 +510,16 @@
       }
     },
     {
+      "path": "scripts/ci/report-rate-limit-budget.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservabilita' del budget GitHub API per il ciclo Actions del corpus: interroga il rate-limit del token gia' selezionato dal workflow, redige il valore e pubblica una riga `RATE_LIMIT_BUDGET` nel log e nel job summary. Il sito non consuma questo ciclo Actions e non ha un gemello operativo.",
+      "baseline": {
+        "site": null,
+        "corpus": "3ea954a109c16187",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/ci/content-gates-main.mjs",
       "mode": "corpus-only",
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",

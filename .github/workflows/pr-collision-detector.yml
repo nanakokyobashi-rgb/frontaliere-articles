@@ -27,6 +27,16 @@ on:
     # cron sotto carico. `converted_to_draft` non serve: la label appesa la
     # toglie il ricalcolo periodico, che è già il canale della rimozione.
     types: [opened, synchronize, reopened, ready_for_review]
+    # Fuori da questi path il grafo funnel-critical non può cambiare; il cron
+    # mantiene comunque la pulizia delle label stale. Evita una run/API scan
+    # su ogni PR che tocca solo contenuti non collidenti.
+    paths:
+      - 'scripts/lib/**'
+      - 'build-plugins/**'
+      - 'services/seoService.ts'
+      - 'services/seo/**'
+      - '.github/workflows/**'
+      - 'scripts/update-*.mjs'
   schedule:
     - cron: '18,48 * * * *'
   workflow_dispatch:
@@ -75,3 +85,11 @@ jobs:
           else
             node scripts/ci/pr-collision-detector.mjs
           fi
+
+      - name: Report rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RATE_LIMIT_WORKFLOW: pr-collision-detector
+        run: |
+          RATE_LIMIT_TOKEN_NAME=GITHUB_TOKEN node scripts/ci/report-rate-limit-budget.mjs

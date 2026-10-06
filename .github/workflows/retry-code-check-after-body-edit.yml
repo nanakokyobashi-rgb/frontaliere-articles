@@ -62,12 +62,33 @@ jobs:
           sparse-checkout: |
             scripts/lib
             scripts/ci/lib
+            scripts/ci/report-rate-limit-budget.mjs
+            generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/google-service-account-token.mjs
           persist-credentials: false
+
+      - name: Prepare Firebase credentials for runtime read token
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/body-recovery-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/body-recovery-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente — body recovery resta sul GITHUB_TOKEN."
+          fi
+
+      - name: Load secrets from Remote Config for runtime read token
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
 
       - name: Retry a failed body or review gate on the current head
         uses: actions/github-script@v9
         env:
-          BODY_RECOVERY_POLL_MS: '5000'
+          # Polling a cancelled run every 5s multiplied the installation quota
+          # cost while GitHub drained the old runner. The script backs this off
+          # exponentially, capped at one minute, within the same safety window.
+          BODY_RECOVERY_POLL_MS: '30000'
           # La finestra effettiva e' il minimo dei due: vanno alzati insieme.
           BODY_RECOVERY_WAIT_MS: '540000'
           BODY_RECOVERY_RATE_LIMIT_WAIT_MS: '540000'
@@ -77,7 +98,7 @@ jobs:
             const repo = context.repo;
             const number = context.payload.pull_request.number;
             const editedAt = Date.parse(context.payload.pull_request.updated_at || '');
-            const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 5000;
+            const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 30000;
             const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 540000;
             const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const rateLimitRetries = Number(process.env.BODY_RECOVERY_RATE_LIMIT_RETRIES) || 3;
@@ -91,6 +112,19 @@ jobs:
             const failClosedReserveMs = Math.min(15000, Math.max(1, Math.floor(recoveryWindowMs / 10)));
             const retryDeadline = recoveryDeadline - failClosedReserveMs;
             const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+            const runtimeReadToken = process.env.GITHUB_PAT_NANAKO || '';
+            const withRuntimeReadToken = options => runtimeReadToken
+              ? {
+                ...options,
+                request: {
+                  ...(options.request || {}),
+                  headers: {
+                    ...(options.request?.headers || {}),
+                    authorization: `token ${runtimeReadToken}`,
+                  },
+                },
+              }
+              : options;
             const headerValue = (headers, name) => {
               if (typeof headers?.get === 'function') return headers.get(name);
               return headers?.[name] ?? headers?.[name.toLowerCase()] ?? null;
@@ -192,7 +226,7 @@ jobs:
               // it is still enabled, so an unverifiable body cannot merge.
               // apiCall owns the single recovery deadline and bounded retry;
               // an outer retry loop could consume the fail-closed reserve.
-              const { data: currentPr } = await readApiCall('check native auto-merge', () => github.rest.pulls.get({ ...repo, pull_number: number }));
+              const { data: currentPr } = await readApiCall('check native auto-merge', () => github.rest.pulls.get(withRuntimeReadToken({ ...repo, pull_number: number })));
               if (currentPr.state !== 'open' || !currentPr.auto_merge) return;
               await apiCall('disable native auto-merge', () => github.graphql(`
                 mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
@@ -236,11 +270,11 @@ jobs:
               core.setFailed(message);
             };
             const main = async () => {
-              pr = (await readApiCall('load pull request', () => github.rest.pulls.get({ ...repo, pull_number: number }))).data;
+              pr = (await readApiCall('load pull request', () => github.rest.pulls.get(withRuntimeReadToken({ ...repo, pull_number: number })))).data;
             if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
-            const runs = await readApiCall('list tests workflow runs', () => github.paginate(github.rest.actions.listWorkflowRuns, {
+            const runs = await readApiCall('list tests workflow runs', () => github.paginate(github.rest.actions.listWorkflowRuns, withRuntimeReadToken({
               ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
-            }));
+            })));
             // Only runs that carry this PR's body contract and review: the
             // `pull_request` event on the PR branch.
             const latest = runs
@@ -250,12 +284,15 @@ jobs:
               core.info(`No tests run of PR #${number} exists on ${pr.head.sha}; the next push re-enters the code check.`);
               return;
             }
-            const getRun = async () => (await readApiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }))).data;
+            const getRun = async () => (await readApiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun(withRuntimeReadToken({ ...repo, run_id: latest.id })))).data;
             const settle = async attempt => {
               let run = await getRun();
+              let pollAttempt = 0;
               while (run.status !== 'completed') {
                 if (run.run_attempt !== attempt || Date.now() > retryDeadline) return null;
-                await sleep(Math.min(pollMs, Math.max(0, retryDeadline - Date.now())));
+                const delay = Math.min(pollMs * 2 ** Math.min(pollAttempt, 1), 60000);
+                pollAttempt += 1;
+                await sleep(Math.min(delay, Math.max(0, retryDeadline - Date.now())));
                 if (Date.now() > retryDeadline) return null;
                 run = await getRun();
               }
@@ -306,9 +343,9 @@ jobs:
               // Inspect the latest attempt only, never an old failure
               // underneath a running retry. A passed preflight alone is not
               // enough: the reviewer can also reject the body.
-              const jobs = await readApiCall('list tests workflow jobs', () => github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+              const jobs = await readApiCall('list tests workflow jobs', () => github.paginate(github.rest.actions.listJobsForWorkflowRun, withRuntimeReadToken({
                 ...repo, run_id: latest.id, filter: 'latest', per_page: 100,
-              }));
+              })));
               const failedBody = jobs.some(job => job.steps?.some(step => step.name.startsWith('PR-body completeness + multi-issue Closes') &&
                   step.conclusion === 'failure'));
               const reviewFailureSteps = new Set([
@@ -339,7 +376,7 @@ jobs:
             // Recheck both head and attempt right before the write. Duplicate
             // edit deliveries must not restart a retry that is already queued.
             const [{ data: currentPr }, currentRun] = await Promise.all([
-              readApiCall('recheck pull request before retry', () => github.rest.pulls.get({ ...repo, pull_number: number })),
+              readApiCall('recheck pull request before retry', () => github.rest.pulls.get(withRuntimeReadToken({ ...repo, pull_number: number }))),
               getRun(),
             ]);
             if (currentPr.state !== 'open' || currentPr.head.sha !== pr.head.sha ||
@@ -350,3 +387,20 @@ jobs:
             await main().catch(async error => {
               await failClosed(`Body recovery API failure: ${error.message}`);
             });
+
+      - name: Report rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RATE_LIMIT_WORKFLOW: retry-code-check-after-body-edit
+        run: |
+          token_name=GITHUB_TOKEN
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            token_name=GITHUB_PAT_NANAKO
+          fi
+          RATE_LIMIT_TOKEN_NAME="$token_name" node scripts/ci/report-rate-limit-budget.mjs
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/body-recovery-sa.json
