@@ -1,71 +1,68 @@
 #!/usr/bin/env node
 /**
- * publish-section-edge.mjs — porta su R2 la RELEASE del registro delle sezioni
- * cantonali (registro, sitemap delle sezioni live, indice) scritta da
- * build-api.mjs in dist/api/, con un flip atomico.
+ * publish-section-edge.mjs — porta su R2 la RELEASE delle sezioni cantonali
+ * (registro, sitemap delle sezioni live, indice) scritta da build-api.mjs in
+ * dist/api/, con un flip realmente versionato: UN solo PUT cambia cio' che il
+ * Worker serve.
  *
- * ── Una sola fonte dello stato servito ─────────────────────────────────────
+ * ── Una sola fonte, un solo oggetto mutabile ───────────────────────────────
  *
  * Cio' che e' `live|draft|retired` lo dice UN documento: il registro su R2,
  * `edge/sections/registry.json`, che il Worker del sito applica
  * (`parseCorpusSectionRegistry` in infra/cloudflare-worker/locale-router.js).
- * `sections.json` su GitHub Pages e' un catalogo senza stato (vedi
- * `buildSectionsCatalog`), quindi non esistono due superfici di stato che un
- * fallimento parziale possa far divergere.
+ * `sections.json` su GitHub Pages e' un catalogo senza stato.
  *
- * ── Protocollo di pubblicazione ────────────────────────────────────────────
+ * Quel documento e' anche il PUNTATORE alla release: oltre ai campi di stato
+ * (invariati, quelli che il Worker gia' legge) porta
  *
- * 0. LETTURA E SALVATAGGIO. Si rilegge dal CDN la superficie che R2 serve
- *    adesso (`readServedSurface`): il puntatore della release precedente e i
- *    BYTE di ogni artefatto a path fisso che la release precedente o la nuova
- *    toccano (sitemap di sezione, indice). Lo stato precedente e' DIMOSTRATO
- *    solo se il puntatore rispetta il contratto del Worker e ogni artefatto
- *    che dichiara c'e' con lo sha256 dichiarato; altrimenti vale `unknown`.
- *    Il push e' OBBLIGATORIO se la release differisce da quella servita
- *    (`releaseDiffers`): nello stato delle sezioni (status, redirects, gone —
- *    in ogni direzione: accensione, spegnimento, ritiro), nei byte di un
- *    artefatto a path fisso, o se lo stato precedente e' `unknown` (anche per
- *    una release tutta `draft`, che potrebbe essere uno spegnimento). I byte
- *    letti qui sono anche il SALVATAGGIO per il ripristino: se uno non e'
- *    leggibile non si scrive niente.
+ *   release: {
+ *     commit: "<sha>",
+ *     base: "edge/sections/_releases/<sha>/",
+ *     files: { "sitemap-cantons.xml": { sha256, bytes },
+ *              "sitemap-articles-<id>.xml": { sha256, bytes }, … },
+ *     previous: { base, files: [nomi] } | null      // la release che sostituisce
+ *   }
  *
- * 1. STAGING (niente di visibile cambia). Ogni file della release sale su una
- *    chiave VERSIONATA per commit,
- *    `edge/sections/_releases/<commit>/{registry.json,sitemap-articles-<id>.xml,sitemap-cantons.xml}`,
- *    e viene riletto dal CDN: lo sha256 dei byte serviti deve essere quello dei
- *    byte locali. Il Worker non legge mai `_releases/` (non e' un prefisso di
- *    sezione). Un fallimento qui: exit, nessun cambio, niente da ripristinare.
+ * Le sitemap e l'indice stanno SOLO sotto `release.base`, immutabili per
+ * commit: non esistono path fissi da sovrascrivere. Il Worker risolve
+ * `/sitemap-cantons.xml` e `/sitemap-articles-<id>.xml` come `<base><nome>`
+ * (404 se il nome non e' in `files`), quindi registro, sitemap e indice
+ * cambiano TUTTI INSIEME con il puntatore, e non c'e' niente da ripristinare.
  *
- * 2-3. TRANSAZIONE SUI PATH FISSI (quelli che il Worker legge; cambiarli nel
- *    Worker richiederebbe una modifica al sito, che qui non serve). In ordine:
- *    le sitemap delle sezioni live `edge/sitemap-articles-<id>.xml`; poi UN
- *    PUT del puntatore `edge/sections/registry.json` (il registro nel formato
- *    del Worker piu' `release`: commit, prefisso, sha256 dei file) — e' il
- *    passo che cambia lo STATO servito; poi l'indice `edge/sitemap-cantons.xml`,
- *    scritto o CANCELLATO se nessuna sezione e' live (un `<sitemapindex>` vuoto
- *    viola lo schema), con fino a 3 tentativi.
- *    Ogni chiave e' annotata prima di essere toccata. Se UN passo non e'
- *    confermato si RIPRISTINA tutto cio' che e' stato toccato, in ordine
- *    inverso, dai byte salvati alla fase 0 (o cancellando cio' che prima non
- *    c'era) — puntatore compreso — e si esce con errore: R2 torna alla
- *    superficie di prima, sitemap incluse. Solo se anche il ripristino non e'
- *    confermato la superficie puo' restare mista, e l'errore lo dice.
+ * ── Protocollo ─────────────────────────────────────────────────────────────
  *
- *    A transazione chiusa la release nuova e' servita e coerente. Restano due
- *    cose che non cambiano cio' che il Worker serve: cancellare le sitemap
- *    delle sezioni non piu' live (il Worker non le serve comunque) e il purge
- *    dell'UNIONE di cio' che le due release servono (puntatore, indice,
- *    sitemap nuove e rimosse, su apex e cdn). Se falliscono si esce con
- *    errore e il publish successivo riprova.
+ * 0. LETTURA. Si legge dal CDN il puntatore servito adesso e si rilegge OGNI
+ *    file che dichiara in `release.files`. Lo stato precedente e' NOTO solo se
+ *    il puntatore rispetta il contratto del Worker e ogni file c'e' con lo
+ *    sha256 dichiarato; altrimenti e' `unknown`. Il push e' OBBLIGATORIO se la
+ *    release differisce da quella servita (`releaseDiffers`) — nello stato
+ *    delle sezioni (status, redirects, gone: accensione, spegnimento, ritiro)
+ *    o nell'insieme/nei byte dei file — e SEMPRE se lo stato precedente e'
+ *    `unknown` (mai exit 0 su uno stato non dimostrato, nemmeno per una
+ *    release tutta `draft`: potrebbe essere uno spegnimento).
  *
- * 4. PULIZIA (best-effort). I file della release precedente, nominati dal
- *    puntatore precedente, vengono cancellati.
+ * 1. STAGING (niente di servito cambia). Ogni file sale sotto `release.base`
+ *    e viene riletto dal CDN: sha256 e lunghezza dei byte serviti devono
+ *    essere quelli locali. Fallimento: exit, nessun cambio.
  *
- * ESITO. Un fallimento in un push OBBLIGATORIO esce 1: publish-api.yml si
- * ferma prima del deploy Pages, e R2 serve — per costruzione — la superficie
- * di prima (fasi 0-1, o transazione ripristinata) o quella nuova e coerente.
- * Se niente di servito cambiava, un problema di R2 e' un warning ed esce 0:
- * non ferma la pubblicazione degli articoli.
+ * 2. FLIP. UN PUT del puntatore. E' l'unico passo che cambia cio' che il
+ *    Worker serve. Fallimento: la release servita resta quella di prima,
+ *    intera.
+ *
+ * 3. PURGE (la release nuova e' gia' servita, intera). Il puntatore e le URL
+ *    apex delle sitemap che la release precedente o la nuova espongono. Un
+ *    purge fallito non rende incoerente niente (il Worker rilegge il
+ *    puntatore entro 60 s, e i file di una release non cambiano mai): si esce
+ *    con errore e il publish successivo riprova.
+ *
+ * 4. PULIZIA (best-effort). Si cancella la release che la PRECEDENTE aveva
+ *    sostituito (`previous.release.previous`): mai la release puntata, mai la
+ *    precedente (una richiesta in volo puo' ancora leggerla).
+ *
+ * ESITO. In un push obbligatorio un fallimento esce 1 e publish-api.yml si
+ * ferma prima del deploy Pages. Se niente di servito cambia (oggi: tutto
+ * `draft`, nessun file) un problema di R2 e' un warning ed esce 0: non ferma
+ * la pubblicazione degli articoli.
  *
  * Registro assente in dist/api (kill-switch di Remote Config non verificato
  * con una sezione dichiarata live, vedi scripts/lib/section-registry.mjs):
@@ -93,8 +90,6 @@ export const PURGE_CHUNK = 30;
 export const RELEASES_PREFIX = 'edge/sections/_releases';
 /** Il Worker rilegge il registro ogni 60 s: un max-age piu' lungo al cdn ritarderebbe il flip. */
 export const REGISTRY_CACHE_CONTROL = 'public,max-age=60';
-/** Stessa classe delle sitemap blog spinte da publish-api.yml. */
-export const SITEMAP_CACHE_CONTROL = 'public,max-age=600';
 /** Una chiave di release non cambia mai contenuto. */
 export const RELEASE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
 
@@ -118,13 +113,40 @@ export function registryState(doc) {
   return JSON.stringify(Object.fromEntries(Object.entries(out).sort(([a], [b]) => a.localeCompare(b))));
 }
 
+/** Il prefisso (con `/` finale) dei file di una release. */
+export const releaseBase = (commit) => `${RELEASES_PREFIX}/${commit}/`;
+
+const RELEASE_FILE_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
+
+/**
+ * I file che un puntatore dichiara, come `{ nome: sha256 }`, o `null` se la
+ * dichiarazione non e' leggibile (manca `release` mentre una sezione e' live,
+ * base fuori da `_releases/`, nomi o hash fuori forma): allora non si puo'
+ * sapere cosa il Worker sta servendo.
+ */
+export function declaredFiles(doc) {
+  const release = doc?.release;
+  const anyLive = Object.values(doc?.sections ?? {}).some((entry) => entry?.status === 'live');
+  if (release === undefined || release === null) return anyLive ? null : {};
+  if (!isPlainObject(release) || !isPlainObject(release.files)) return null;
+  if (typeof release.base !== 'string' || !/^edge\/sections\/_releases\/[0-9a-f]{7,40}\/$/.test(release.base)) return null;
+  const out = {};
+  for (const [name, meta] of Object.entries(release.files)) {
+    if (!RELEASE_FILE_RE.test(name) || !isPlainObject(meta) || !/^[0-9a-f]{64}$/.test(meta.sha256 ?? '')) return null;
+    out[name] = meta.sha256;
+  }
+  return out;
+}
+
 /**
  * La release da pubblicare, letta da cio' che build-api ha scritto; `null` se
  * build-api non ha emesso il registro (allora non c'e' niente da pubblicare).
+ * Il puntatore si completa con `withPrevious` quando si conosce la release
+ * che sostituisce.
  *
  * @returns {null | {
- *   commit: string, prefix: string, registry: object, live: string[],
- *   files: Array<{ name: string, local: string, sha256: string, releaseKey: string }>,
+ *   commit: string, base: string, registry: object, live: string[],
+ *   files: Array<{ name: string, local: string, sha256: string, bytes: number, key: string }>,
  *   pointer: object,
  * }}
  */
@@ -134,68 +156,48 @@ export function planRelease(distDir) {
   const registry = JSON.parse(fs.readFileSync(at(EDGE_SECTION_REGISTRY_FILE), 'utf8'));
   if (!validateEdgeSectionRegistry(registry)) throw new Error(`${EDGE_SECTION_REGISTRY_FILE}: il Worker rifiuterebbe questo registro`);
   const live = Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
-  const prefix = `${RELEASES_PREFIX}/${registry.commit}`;
-  const names = ['registry.json', ...live.map((id) => `sitemap-articles-${id}.xml`)];
+  const base = releaseBase(registry.commit);
+  const names = live.map((id) => `sitemap-articles-${id}.xml`);
   const hasIndex = fs.existsSync(at(SECTION_SITEMAP_INDEX_FILE));
   if (hasIndex !== live.length > 0) {
     throw new Error(`${SECTION_SITEMAP_INDEX_FILE} ${hasIndex ? 'presente' : 'assente'} con ${live.length} sezioni live: release incoerente`);
   }
   if (hasIndex) names.push(SECTION_SITEMAP_INDEX_FILE);
   const files = names.map((name) => {
-    const local = at(name === 'registry.json' ? EDGE_SECTION_REGISTRY_FILE : name);
-    if (!fs.existsSync(local)) throw new Error(`${name}: manca in ${distDir} (sezione live senza sitemap?)`);
-    return { name, local, sha256: sha256(fs.readFileSync(local)), releaseKey: `${prefix}/${name}` };
+    if (!fs.existsSync(at(name))) throw new Error(`${name}: manca in ${distDir} (sezione live senza sitemap?)`);
+    const body = fs.readFileSync(at(name));
+    return { name, local: at(name), sha256: sha256(body), bytes: body.length, key: `${base}${name}` };
   });
   const pointer = {
     ...registry,
-    release: { commit: registry.commit, prefix, files: Object.fromEntries(files.map((f) => [f.name, f.sha256])) },
+    release: {
+      commit: registry.commit,
+      base,
+      files: Object.fromEntries(files.map((f) => [f.name, { sha256: f.sha256, bytes: f.bytes }])),
+      previous: null,
+    },
   };
   // Il puntatore E' il registro che il Worker legge: deve restare nel suo contratto.
   if (!validateEdgeSectionRegistry(pointer)) throw new Error('puntatore fuori dal contratto del Worker');
-  return { commit: registry.commit, prefix, registry, live, files, pointer };
-}
-
-const FIXED_ARTIFACT_RE = /^(sitemap-articles-canton-[a-z]+\.xml|sitemap-cantons\.xml)$/;
-
-/**
- * Gli artefatti che una release serve a un path FISSO (sitemap di sezione,
- * indice), come `{ nome: sha256 }`. Il registro non c'e': il suo contenuto
- * servito e' lo stato, che si confronta a parte (il `commit` cambia sempre).
- * Per un puntatore senza `release` (mai pubblicato da questo protocollo) le
- * sitemap delle sezioni live si assumono servite, con hash ignoto.
- */
-export function fixedArtifacts(doc) {
-  const out = {};
-  for (const [id, entry] of Object.entries(doc?.sections ?? {})) {
-    if (entry?.status === 'live') out[`sitemap-articles-${id}.xml`] = null;
-  }
-  for (const [name, hash] of Object.entries(doc?.release?.files ?? {})) {
-    if (FIXED_ARTIFACT_RE.test(name)) out[name] = typeof hash === 'string' ? hash : null;
-  }
-  return out;
+  return { commit: registry.commit, base, registry, live, files, pointer };
 }
 
 /**
  * Se la release da pubblicare differisce da quella servita: nello stato delle
- * sezioni, o nei byte di un artefatto a path fisso (fase 0 dell'header).
+ * sezioni o nei file (insieme dei nomi e sha256). Uno stato precedente non
+ * dimostrato differisce sempre.
  * @param {{ registry: object, pointer: object }} release
  * @param {{ state: 'ok' | 'absent' | 'unknown', doc?: unknown }} previous
  */
 export function releaseDiffers(release, previous) {
-  // Stato precedente non dimostrabile: fail-closed, anche per una release
-  // tutta draft (se R2 serviva una sezione live, questo e' uno spegnimento).
   if (!previous || previous.state === 'unknown') return true;
   const before = previous.state === 'ok' ? previous.doc : { sections: {} };
   if (registryState(release.registry) !== registryState(before)) return true;
-  const next = fixedArtifacts(release.pointer);
-  const prev = fixedArtifacts(before);
-  const names = new Set([...Object.keys(next), ...Object.keys(prev)]);
-  return [...names].some((name) => !next[name] || next[name] !== prev[name]);
-}
-
-/** Compatibilita' di nome: il push e' obbligatorio quando la release differisce. */
-export function pushIsMandatory(registry, previous) {
-  return releaseDiffers({ registry, pointer: registry }, previous);
+  const next = declaredFiles(release.pointer) ?? {};
+  const prev = declaredFiles(before);
+  if (prev === null) return true;
+  const sorted = (files) => JSON.stringify(Object.entries(files).sort(([a], [b]) => a.localeCompare(b)));
+  return sorted(next) !== sorted(prev);
 }
 
 /** Le URL da purgare, a blocchi da `size`, senza duplicati. */
@@ -241,73 +243,50 @@ export const realIo = {
   },
 };
 
-/** Quante volte si prova a scrivere (o cancellare) l'indice dopo il flip. */
-export const INDEX_ATTEMPTS = 3;
-
-/** Il registro che R2 ha ADESSO (solo il puntatore; gli artefatti li verifica `readServedSurface`). */
-export async function readPreviousRegistry(io) {
+/**
+ * La release che R2 serve ADESSO. `ok` solo se il puntatore rispetta il
+ * contratto del Worker, dichiara i suoi file in modo leggibile, e OGNI file
+ * dichiarato c'e' sotto la sua base con lo sha256 dichiarato. Un 200 non
+ * basta: una pagina d'errore in JSON, un puntatore troncato o una sitemap
+ * mancante non dimostrano niente, e valgono `unknown`.
+ * @returns {Promise<{ state: 'ok', doc: any } | { state: 'absent' } | { state: 'unknown', doc?: any }>}
+ */
+export async function readPreviousRelease(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
   if (res.status !== 200) return { state: 'unknown' };
+  let doc;
   try {
-    const raw = res.body.toString('utf8');
-    const doc = JSON.parse(raw);
-    // Un 200 non basta: conta come stato precedente solo un registro che il
-    // Worker accetterebbe. Qualunque altra cosa (una pagina d'errore in JSON,
-    // un documento troncato) non dimostra niente.
-    return validateEdgeSectionRegistry(doc) ? { state: 'ok', doc, raw } : { state: 'unknown' };
+    doc = JSON.parse(res.body.toString('utf8'));
   } catch {
     return { state: 'unknown' };
   }
-}
-
-/**
- * La superficie che R2 serve ADESSO: il puntatore e, riletti uno per uno, i
- * byte di ogni artefatto a path fisso che la release precedente o la nuova
- * toccano. Serve a due cose:
- *   - DIMOSTRARE lo stato precedente: un puntatore valido non basta, ogni
- *     artefatto che dichiara deve esserci con lo sha256 dichiarato; se uno
- *     manca o e' diverso, lo stato precedente vale `unknown`;
- *   - SALVARE cio' che la pubblicazione sta per sovrascrivere, per poterlo
- *     ripristinare se un passo successivo fallisce.
- *
- * @returns {Promise<{ previous: object, saved: Map<string, { state: 'present', body: Buffer } | { state: 'absent' } | { state: 'unknown' }> }>}
- */
-export async function readServedSurface(release, io) {
-  let previous = await readPreviousRegistry(io);
-  const declared = previous.state === 'ok' ? fixedArtifacts(previous.doc) : {};
-  const names = new Set([...Object.keys(declared), ...Object.keys(fixedArtifacts(release.pointer))]);
-  const saved = new Map();
-  for (const name of names) {
-    const res = await io.fetchBytes(`${CDN}/edge/${name}`);
-    saved.set(name, res.status === 200 ? { state: 'present', body: res.body } : res.status === 404 ? { state: 'absent' } : { state: 'unknown' });
+  if (!validateEdgeSectionRegistry(doc)) return { state: 'unknown' };
+  const files = declaredFiles(doc);
+  if (files === null) return { state: 'unknown', doc };
+  for (const [name, hash] of Object.entries(files)) {
+    const got = await io.fetchBytes(`${CDN}/${doc.release.base}${name}`);
+    if (got.status !== 200 || sha256(got.body) !== hash) return { state: 'unknown', doc };
   }
-  if (previous.state === 'ok') {
-    const proven = Object.entries(declared).every(([name, hash]) => {
-      const got = saved.get(name);
-      return typeof hash === 'string' && got.state === 'present' && sha256(got.body) === hash;
-    });
-    if (!proven) previous = { ...previous, state: 'unknown' };
-  }
-  return { previous, saved };
+  return { state: 'ok', doc };
 }
 
 /**
  * Esegue il protocollo dell'header su una release. Ritorna
  * `{ code, phase, flipped }`: `phase` e' dove si e' fermato (`done` se in fondo),
- * `flipped` se alla fine il Worker serve la release nuova.
+ * `flipped` se il puntatore e' stato scritto.
  */
 export async function publishRelease(release, { io, env = process.env, log = console.log, tmpDir = os.tmpdir() }) {
-  const { previous, saved } = await readServedSurface(release, io);
+  const previous = await readPreviousRelease(io);
   const mandatory = releaseDiffers(release, previous);
   log(
-    `[section-edge] release ${release.commit.slice(0, 8)}: superficie su R2 ${previous.state}; push ` +
+    `[section-edge] release ${release.commit.slice(0, 8)}: release su R2 ${previous.state}; push ` +
       (mandatory
-        ? 'OBBLIGATORIO (stato o artefatti serviti cambiano, o non e\' dimostrabile che coincidano)'
-        : 'facoltativo (stesso stato, stessi artefatti serviti)'),
+        ? 'OBBLIGATORIO (stato o file serviti cambiano, o la release servita non e\' dimostrabile)'
+        : 'facoltativo (stesso stato, stessi file)'),
   );
   const stop = (phase, what, flipped) => {
-    const where = flipped ? 'il Worker serve la release nuova' : 'il Worker serve la superficie di prima';
+    const where = flipped ? 'il Worker serve la release nuova, intera' : 'il Worker serve la release di prima, intera';
     if (mandatory) log(`::error::[section-edge] ${phase}: ${what} — ${where}; il publish si ferma`);
     else log(`::warning::[section-edge] ${phase}: ${what} — ${where}; niente di servito cambiava, il publish prosegue`);
     return { code: mandatory ? 1 : 0, phase, flipped };
@@ -315,113 +294,58 @@ export async function publishRelease(release, { io, env = process.env, log = con
 
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
   if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
-  // Senza i byte di cio' che si sta per sovrascrivere non c'e' ripristino possibile.
-  const unreadable = [...saved].filter(([, got]) => got.state === 'unknown').map(([name]) => `edge/${name}`);
-  if (unreadable.length) return stop('lettura', `artefatti serviti non leggibili (${unreadable.join(', ')}): niente caricato`, false);
 
-  // 1. Staging su chiavi versionate, con rilettura e confronto dello sha256.
+  // 1. Staging sotto la base della release, con rilettura di sha256 e lunghezza.
   for (const file of release.files) {
-    if (!io.upload(file.local, file.releaseKey, RELEASE_CACHE_CONTROL)) return stop('staging', `upload non confermato: ${file.releaseKey}`, false);
+    if (!io.upload(file.local, file.key, RELEASE_CACHE_CONTROL)) return stop('staging', `upload non confermato: ${file.key}`, false);
   }
   for (const file of release.files) {
-    const served = await io.fetchBytes(`${CDN}/${file.releaseKey}`);
-    if (served.status !== 200 || sha256(served.body) !== file.sha256) {
-      return stop('staging', `${file.releaseKey} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`, false);
+    const served = await io.fetchBytes(`${CDN}/${file.key}`);
+    if (served.status !== 200 || served.body.length !== file.bytes || sha256(served.body) !== file.sha256) {
+      return stop('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`, false);
     }
   }
 
-  // 2-3. La transazione sui path fissi. Ogni chiave toccata e' annotata PRIMA
-  // di toccarla; al primo passo non confermato si ripristina tutto, nell'ordine
-  // inverso, dai byte salvati — puntatore compreso.
-  const scratch = fs.mkdtempSync(path.join(tmpDir, 'section-edge-'));
+  // 2. Flip: UN PUT del puntatore. Ricorda la release che sostituisce, per la
+  //    pulizia del giro successivo (solo se e' una release diversa e leggibile).
+  const prevRelease = previous.doc?.release;
+  const prevFiles = previous.doc ? declaredFiles(previous.doc) : null;
+  const replaced = prevFiles && prevRelease?.base && prevRelease.base !== release.base ? { base: prevRelease.base, files: Object.keys(prevFiles) } : null;
+  const pointer = { ...release.pointer, release: { ...release.pointer.release, previous: replaced } };
+  let flipped = false;
+  const pointerDir = fs.mkdtempSync(path.join(tmpDir, 'section-edge-'));
   try {
-    const touched = [];
-    let pointerWritten = false;
-    const sitemaps = release.files.filter((f) => f.name.startsWith('sitemap-articles-'));
-    const index = release.files.find((f) => f.name === SECTION_SITEMAP_INDEX_FILE);
-    const nextNames = sitemaps.map((f) => f.name);
-    const removedNames = [...saved.keys()].filter((name) => name !== SECTION_SITEMAP_INDEX_FILE && !nextNames.includes(name));
-    const purgeUrls = [
-      `${CDN}/${EDGE_SECTION_REGISTRY_FILE}`,
-      ...[...new Set([...saved.keys(), SECTION_SITEMAP_INDEX_FILE])].flatMap((name) => [`${APEX}/${name}`, `${CDN}/edge/${name}`]),
-    ];
-    const putBytes = (key, bytes, cacheControl) => {
-      const file = path.join(scratch, `${touched.length}-${path.basename(key)}`);
-      fs.writeFileSync(file, bytes);
-      return io.upload(file, key, cacheControl);
-    };
-    const rollback = () => {
-      let ok = true;
-      if (pointerWritten) {
-        ok =
-          (previous.raw !== undefined
-            ? putBytes(EDGE_SECTION_REGISTRY_FILE, previous.raw, REGISTRY_CACHE_CONTROL)
-            : io.remove(EDGE_SECTION_REGISTRY_FILE)) && ok;
-      }
-      for (const name of [...touched].reverse()) {
-        const before = saved.get(name) ?? { state: 'absent' };
-        ok = (before.state === 'present' ? putBytes(`edge/${name}`, before.body, SITEMAP_CACHE_CONTROL) : io.remove(`edge/${name}`)) && ok;
-      }
-      io.purge(purgeUrls);
-      return ok;
-    };
-    const abort = (phase, what) => {
-      const restored = rollback();
-      return stop(
-        phase,
-        `${what}: ` +
-          (restored
-            ? 'path fissi e puntatore ripristinati ai byte di prima'
-            : 'RIPRISTINO NON CONFERMATO — la superficie su R2 puo\' essere mista, rilanciare publish-api'),
-        !restored && pointerWritten,
-      );
-    };
-
-    // 2. Flip: le sitemap delle sezioni live ai path fissi, poi UN PUT del puntatore.
-    for (const file of sitemaps) {
-      touched.push(file.name);
-      if (!io.upload(file.local, `edge/${file.name}`, SITEMAP_CACHE_CONTROL)) return abort('flip', `sitemap non caricata: edge/${file.name}`);
-    }
-    pointerWritten = true;
-    if (!putBytes(EDGE_SECTION_REGISTRY_FILE, JSON.stringify(release.pointer), REGISTRY_CACHE_CONTROL)) {
-      return abort('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
-    }
-
-    // 3. Dopo il flip: l'indice (ritentato), parte della stessa transazione.
-    const indexKey = `edge/${SECTION_SITEMAP_INDEX_FILE}`;
-    touched.push(SECTION_SITEMAP_INDEX_FILE);
-    let indexOk = false;
-    for (let attempt = 1; attempt <= INDEX_ATTEMPTS && !indexOk; attempt++) {
-      indexOk = index ? io.upload(index.local, indexKey, SITEMAP_CACHE_CONTROL) : io.remove(indexKey);
-    }
-    if (!indexOk) return abort('dopo il flip', `indice ${index ? 'non caricato' : 'non cancellato'} dopo ${INDEX_ATTEMPTS} tentativi`);
-
-    // Da qui la release nuova e' servita e coerente (registro, sitemap, indice).
-    // Cio' che resta non cambia cosa il Worker serve: le sitemap di sezioni non
-    // piu' live (il Worker non le serve comunque) e il purge.
-    const problems = [];
-    for (const name of removedNames) {
-      if (!io.remove(`edge/${name}`)) problems.push(`sitemap di una sezione non piu' live non cancellata: edge/${name}`);
-    }
-    if (!io.purge(purgeUrls)) problems.push('purge (il Worker rilegge il registro entro 60 s)');
-
-    // 4. Pulizia della release precedente (best-effort, mai un fallimento).
-    const old = previous.doc?.release;
-    if (old?.prefix && old.prefix !== release.prefix && String(old.prefix).startsWith(`${RELEASES_PREFIX}/`)) {
-      // Solo nomi di file semplici e distinti: il puntatore precedente e' un
-      // dato letto dalla rete, non un elenco di chiavi da cancellare alla cieca.
-      const names = [...new Set(Object.keys(isPlainObject(old.files) ? old.files : {}))].filter((name) => /^[a-z0-9][a-z0-9.-]*$/.test(name));
-      for (const name of names) {
-        if (!io.remove(`${old.prefix}/${name}`)) log(`::notice::[section-edge] release precedente non ripulita: ${old.prefix}/${name}`);
-      }
-    }
-
-    if (problems.length) return stop('dopo il flip', problems.join('; '), true);
-    log(`[section-edge] release ${release.commit.slice(0, 8)} pubblicata: ${release.files.length} file, ${release.live.length} sezioni live`);
-    return { code: 0, phase: 'done', flipped: true };
+    const pointerFile = path.join(pointerDir, 'registry.json');
+    fs.writeFileSync(pointerFile, JSON.stringify(pointer));
+    flipped = io.upload(pointerFile, EDGE_SECTION_REGISTRY_FILE, REGISTRY_CACHE_CONTROL);
   } finally {
-    fs.rmSync(scratch, { recursive: true, force: true });
+    fs.rmSync(pointerDir, { recursive: true, force: true });
   }
+  if (!flipped) return stop('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`, false);
+
+  // 3. Purge: il puntatore e le URL apex delle sitemap delle due release.
+  const names = new Set([...release.files.map((f) => f.name), ...Object.keys(prevFiles ?? {}), SECTION_SITEMAP_INDEX_FILE]);
+  const purged = io.purge([`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`, ...[...names].map((name) => `${APEX}/${name}`)]);
+
+  // 4. Pulizia (best-effort): la release che la precedente aveva sostituito.
+  //    Mai la release puntata, mai la precedente.
+  const stale = prevRelease?.previous;
+  if (
+    isPlainObject(stale) &&
+    typeof stale.base === 'string' &&
+    /^edge\/sections\/_releases\/[0-9a-f]{7,40}\/$/.test(stale.base) &&
+    stale.base !== release.base &&
+    stale.base !== prevRelease.base &&
+    Array.isArray(stale.files)
+  ) {
+    for (const name of [...new Set(stale.files)].filter((n) => typeof n === 'string' && RELEASE_FILE_RE.test(n))) {
+      if (!io.remove(`${stale.base}${name}`)) log(`::notice::[section-edge] release vecchia non ripulita: ${stale.base}${name}`);
+    }
+  }
+
+  if (!purged) return stop('purge', 'non confermato (il Worker rilegge il puntatore entro 60 s)', true);
+  log(`[section-edge] release ${release.commit.slice(0, 8)} pubblicata: ${release.files.length} file, ${release.live.length} sezioni live`);
+  return { code: 0, phase: 'done', flipped: true };
 }
 
 function parseCli(argv) {
@@ -451,7 +375,7 @@ export async function main(argv = process.argv.slice(2), { env = process.env, io
     return 0;
   }
   if (cli.dryRun) {
-    log(JSON.stringify({ commit: release.commit, prefix: release.prefix, live: release.live, files: release.files.map((f) => f.releaseKey), pointer: release.pointer }, null, 2));
+    log(JSON.stringify({ commit: release.commit, base: release.base, live: release.live, files: release.files.map((f) => f.key), pointer: release.pointer }, null, 2));
     return 0;
   }
   return (await publishRelease(release, { io, env, log, tmpDir: env.RUNNER_TEMP || os.tmpdir() })).code;

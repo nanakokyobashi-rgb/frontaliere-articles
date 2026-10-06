@@ -629,19 +629,23 @@ jobs:
       # ci sono due superfici di stato che un fallimento parziale possa far
       # divergere.
       #
-      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
-      # della release su chiavi versionate per commit (riletta e confrontata per
-      # sha256), poi i file referenziati ai path fissi e, per ultimo, UN PUT del
-      # puntatore — l'unico passo che cambia cio' che il Worker serve. Prima del
-      # flip un fallimento non cambia niente; dopo, lo stato e' gia' coerente.
+      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: sitemap e
+      # indice salgono SOLO su chiavi versionate per commit
+      # (`edge/sections/_releases/<commit>/…`, rilette e confrontate per
+      # sha256), poi UN PUT del puntatore `edge/sections/registry.json` — che
+      # porta lo stato e la release — cambia tutto insieme. Non ci sono path
+      # fissi da sovrascrivere ne' niente da ripristinare: prima del PUT un
+      # fallimento non cambia cio' che il Worker serve, dopo la release nuova
+      # e' servita intera.
       #
-      # Esce 1, e ferma il publish prima del deploy Pages, quando lo stato delle
-      # sezioni da pubblicare DIFFERISCE da quello che R2 ha gia' (accensione,
-      # spegnimento, ritiro) e un passo non e' confermato o mancano le
-      # credenziali. Se lo stato e' lo stesso (oggi: tutto draft) un problema di
-      # R2 e' un warning e gli articoli si pubblicano lo stesso. Il kill-switch
-      # di Remote Config e' gia' applicato da build-api; se non e' verificabile
-      # con una sezione live, build-api non emette la release e R2 resta com'e'.
+      # Esce 1, e ferma il publish prima del deploy Pages, quando la release
+      # da pubblicare DIFFERISCE da quella servita (stato delle sezioni o byte
+      # di un file) o quella servita non e' dimostrabile, e un passo non e'
+      # confermato o mancano le credenziali. Se niente di servito cambia (oggi:
+      # tutto draft, nessun file) un problema di R2 e' un warning e gli
+      # articoli si pubblicano lo stesso. Il kill-switch di Remote Config e'
+      # gia' applicato da build-api; se non e' verificabile con una sezione
+      # live, build-api non emette la release e R2 resta com'e'.
       - name: Push the section registry and the canton sitemaps to the edge
         run: node scripts/publish-section-edge.mjs
 

@@ -4,21 +4,19 @@
 # quelle che il corpus possiede per le sezioni cantonali.
 #
 # Fratello di upload-cdn-file.sh, che per contratto e' additivo e non puo'
-# cancellare niente. Serve a un caso solo, scritto nel Worker del sito
-# (`corpusEdgeFileForPath` in infra/cloudflare-worker/locale-router.js): quando
-# nessuna sezione cantonale e' piu' live, `edge/sitemap-cantons.xml` non va
-# riscritto vuoto (un `<sitemapindex>` senza `<sitemap>` viola lo schema) ma
-# tolto, cosi' il Worker risponde 404 come prima che esistesse. Lasciare la
-# copia vecchia significherebbe annunciare in robots.txt sitemap che il Worker
-# non serve piu'.
+# cancellare niente. Serve alla pulizia delle release versionate delle sezioni
+# cantonali (`edge/sections/_releases/<commit>/…`, vedi
+# scripts/publish-section-edge.mjs): ogni publish ne scrive una nuova, e quelle
+# non piu' puntate ne' precedenti vanno tolte, o il bucket crescerebbe di una
+# release per ogni commit.
 #
-# ALLOWLIST: solo `edge/sitemap-cantons.xml`, `edge/sitemap-articles-canton-<x>.xml`
-# e `edge/sections/**`. Qualunque altra chiave e' un errore d'uso (exit 1):
-# questo script non deve poter diventare un `rm` generico sul bucket.
+# ALLOWLIST: solo chiavi sotto `edge/sections/`. Qualunque altra chiave e' un
+# errore d'uso (exit 1): questo script non deve poter diventare un `rm`
+# generico sul bucket.
 #
 # rclone: lo riusa se c'e' gia' (PATH, o il binario che upload-cdn-file.sh ha
 # installato in $RUNNER_TEMP/rclone-bin nello stesso job) e NON lo installa —
-# il chiamante (scripts/publish-section-edge.mjs) carica sempre almeno un file
+# il chiamante (scripts/publish-section-edge.mjs) carica sempre il puntatore
 # prima di cancellare. Senza rclone: warning ed exit 0, come il fratello.
 #
 # Stessa postura di upload-cdn-file.sh: ogni fallimento di runtime e' un
@@ -35,7 +33,7 @@ if [ "$#" -ne 1 ]; then
 fi
 cdn_key="${1#/}"
 
-if ! [[ "$cdn_key" =~ ^edge/(sitemap-cantons\.xml|sitemap-articles-canton-[a-z]+\.xml|sections/[a-z0-9/._-]+)$ ]] \
+if ! [[ "$cdn_key" =~ ^edge/sections/[a-z0-9/._-]+$ ]] \
    || [[ "$cdn_key" == *..* ]]; then
   echo "::error::[cdn-delete] chiave fuori allowlist: $cdn_key" >&2
   exit 1
