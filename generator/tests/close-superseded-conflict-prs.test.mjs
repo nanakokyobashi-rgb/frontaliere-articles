@@ -386,6 +386,26 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   assert.match(src, /const PR_FIELDS = '[^']*baseRefName[^']*title[^']*|const PR_FIELDS = '[^']*title[^']*baseRefName/);
 });
 
+test('i checkout sparsi dei due workflow non hanno un `filter` che li annulla', () => {
+  // `actions/checkout`: «filter … Overrides sparse-checkout if set». Con
+  // entrambi il checkout materializza comunque content/, dist/ e public/, e
+  // il job del rescuer (8 minuti) scade prima dello scan.
+  for (const file of ['stale-pr-rescuer.yml', 'pr-autorebase.yml']) {
+    const lines = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8').split('\n');
+    const uses = lines.map((l, i) => (/^\s+uses: actions\/checkout@/.test(l) ? i : -1)).filter((i) => i >= 0);
+    assert.ok(uses.length > 0, `${file}: nessun checkout trovato`);
+    let sparse = 0;
+    for (const at of uses) {
+      const end = lines.findIndex((l, i) => i > at && /^\s+- (name|uses|id|run):/.test(l));
+      const step = lines.slice(at, end < 0 ? lines.length : end).filter((l) => !/^\s*#/.test(l)).join('\n');
+      if (!/^\s+sparse-checkout: /m.test(step)) continue;
+      sparse += 1;
+      assert.equal(/^\s+filter: /m.test(step), false, `${file}: un checkout ha sia \`filter\` sia \`sparse-checkout\`, e il primo annulla il secondo`);
+    }
+    assert.ok(sparse > 0, `${file}: atteso almeno un checkout sparso`);
+  }
+});
+
 test('lo sweep non cancella mai il branch e ha un tetto per run', () => {
   const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
   assert.equal(/['"]--delete-branch['"]/.test(src), false, 'la chiusura deve restare annullabile con `gh pr reopen`');

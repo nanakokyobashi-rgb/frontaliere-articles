@@ -79,7 +79,10 @@ jobs:
         with:
           # Serve l'intera storia per fare `git merge origin/main` sui branch.
           fetch-depth: 0
-          filter: blob:none
+          # Niente `filter:` esplicito: in `actions/checkout` un filtro non
+          # vuoto SOVRASCRIVE `sparse-checkout`, cioè con entrambi il checkout
+          # materializzava comunque content/, dist/ e public/. Lo sparse
+          # checkout fa già da sé un clone parziale senza blob.
           sparse-checkout: |
             /*
             !/content
