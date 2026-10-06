@@ -968,6 +968,75 @@ test('#314 — stallo rientrato: `stale-review` viene TOLTA, non lasciata lì', 
   );
 });
 
+// ── F. Conflitto con main: verde, LGTM, auto-merge armato, e ferma ──────────
+//
+// Lo stato di #2246, #2249 e #2205 del 2026-10-06: test verdi e `## LGTM`
+// sull'head, quindi nessuna delle altre classi scatta — e l'`else` toglieva la
+// `stale-review` messa da pr-autorebase, cioè il solo segnale che porta la PR
+// a `recycle-stale-prs`. Stesso input del test «stallo rientrato» qui sopra,
+// più la label `has-conflicts`: l'esito deve essere l'opposto.
+
+const conflicted = (labels = []) => openPr({
+  labels: [{ name: 'has-conflicts' }, ...labels.map((name) => ({ name }))],
+});
+
+test('F — verde con LGTM sull\'head ma in conflitto: la classe scatta e la label resta', opts, () => {
+  const r = runScan({
+    prs: conflicted(['stale-review']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  assert.deepEqual(
+    r.unlabeled,
+    [],
+    'Una PR in conflitto si è vista togliere `stale-review`: non mergerà mai (nessun workflow ' +
+      `\`pull_request\` parte) e \`recycle-stale-prs\` non la vede più.\n${r.stdout}`,
+  );
+  const body = only(r);
+  assert.match(body, /conflitto con `main`/, body);
+  assert.match(body, new RegExp(`class=F head=${HEAD_SHA.slice(0, 7)}`), body);
+});
+
+test('F — senza `stale-review`: viene etichettata, non lasciata muta', opts, () => {
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  assert.deepEqual(r.labeled, [901], `Classe F senza label: il recycle non può prenderla.\n${r.stdout}`);
+  assert.equal(r.comments.length, 1, r.stdout);
+});
+
+test('F — precede le altre classi: con i test rossi il rimedio non è un rerun', opts, () => {
+  // Senza la precedenza cadrebbe in C, che rilancia `tests.yml`: su una PR in
+  // conflitto quel run non può partire.
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'failure' }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding' }),
+  });
+  const body = only(r);
+  assert.match(body, /conflitto con `main`/, body);
+  assert.deepEqual(r.reruns, [], `Rerun chiesto su una PR in conflitto.\n${r.stdout}`);
+  assert.deepEqual(r.workflowRuns, [], `Dispatch chiesto su una PR in conflitto.\n${r.stdout}`);
+});
+
+test('F — idempotenza: stesso head già segnalato, nessun secondo commento', opts, () => {
+  const first = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  const again = runScan({
+    prs: conflicted(['stale-review']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    comments: [{ body: only(first) }],
+  });
+  assert.deepEqual(again.comments, [], `Classe F ri-commentata sullo stesso head.\n${again.stdout}`);
+  assert.deepEqual(again.unlabeled, [], again.stdout);
+});
+
 test('#314 — con un run in volo la label NON viene tolta: lo stato non è noto', opts, () => {
   // Fail-safe: `TESTS_PENDING > 0` significa "non lo sappiamo ancora", e
   // togliere la label lì cancellerebbe un segnale valido per un run che deve
@@ -1345,8 +1414,14 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
   // `stale-review` ferme >24h — è che questa PR non può far chiudere niente
   // che prima restasse aperto.
   const src = readFileSync(WF_PATH, 'utf8');
+  // Il ramo D non è più il primo della catena (lo precede F, il conflitto con
+  // main): si individua dalla riga di predicato che precede `CLASS="D"`, non
+  // dalla posizione.
   const chain = src.slice(src.indexOf('REASON=""; RESCUE=""'));
-  const dBranch = chain.slice(0, chain.indexOf('\n            elif '));
+  const dAt = chain.indexOf('\n              CLASS="D"');
+  assert.notEqual(dAt, -1, 'ramo D non trovato nella catena di classificazione');
+  const dBranch = chain.slice(chain.lastIndexOf('\n', dAt - 1), dAt);
+  assert.match(dBranch, /^\n\s+(?:el)?if \[/, `predicato del ramo D non riconosciuto: ${dBranch}`);
   for (const required of ['-n "$LAST_CID"', '"$LAST_CID" != "$HEAD"', '"$TESTS_CONCL" = "success"']) {
     assert.ok(
       dBranch.includes(required),

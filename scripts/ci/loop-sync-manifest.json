@@ -1253,6 +1253,16 @@
       }
     },
     {
+      "path": "scripts/ci/close-superseded-conflict-prs.mjs",
+      "mode": "corpus-only",
+      "reason": "Sweep zero-Claude eseguito da pr-autorebase.yml, che sul sito non esiste (merge queue nativa): chiude le PR del ciclo in conflitto con main che non hanno piu' niente da consegnare — riapplicazione di una PR di origine gia' mergiata, hand-off chiuso dal fixer con `already-fixed`, issue sorgente tutte chiuse. Sul sito lo stesso stato non si accumula: il 2026-10-06 aveva 3 PR aperte e nessuna `has-conflicts`, contro 6 nel corpus. Riusa i parser condivisi (`conflictHandoffOriginPr`, `lastFixOutcome`, `reapplyInFlight`, `closedIssueRefs`) senza copiarli.",
+      "baseline": {
+        "site": null,
+        "corpus": "983ee7d5d36e0b77",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/ci/pr-body-contract.mjs",
       "mode": "corpus-only",
       "reason": "Runner del gate sul body. I due moduli che fanno il lavoro (pr-body-sections-check, pr-body-closes-check) sono condivisi col sito e restano `identical`; questo e' solo la colla — il pr-body-contract.yml del sito incorpora invece una decina di check del suo dominio (CLS degli slot pubblicitari, lookbehind client, pattern sibling) che qui non hanno senso.",
@@ -1285,7 +1295,7 @@
     {
       "path": ".github/workflows/stale-pr-rescuer.yml",
       "mode": "adapted",
-      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site. Dal 2026-09-25 (bucket REST del `GITHUB_TOKEN` esaurito, 15 run del custode morte sulla prima lettura) il trigger `workflow_run` fa lo scan completo e il custode solo nel primo run partito in ogni finestra di 30 minuti (step `Decide scan scope`); gli altri run `workflow_run` classificano soltanto le PR del run di `tests` che li ha fatti nascere, e l'helper trusted del round-marker si materializza solo quando serve. Cron e dispatch restano completi. Il sito gira con un App token dal bucket separato: non e' un movimento da portare.",
+      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D/E/F con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. La classe F (conflitto con main, `has-conflicts`) e' la classe D del sito portata qui il 2026-10-06 con un'altra lettera, perche' D nel corpus e' gia' la review piu' vecchia dell'head: viene prima delle altre e tiene `stale-review` sulla PR in conflitto, che prima l'`else` toglieva. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site. Dal 2026-09-25 (bucket REST del `GITHUB_TOKEN` esaurito, 15 run del custode morte sulla prima lettura) il trigger `workflow_run` fa lo scan completo e il custode solo nel primo run partito in ogni finestra di 30 minuti (step `Decide scan scope`); gli altri run `workflow_run` classificano soltanto le PR del run di `tests` che li ha fatti nascere, e l'helper trusted del round-marker si materializza solo quando serve. Cron e dispatch restano completi. Il sito gira con un App token dal bucket separato: non e' un movimento da portare.",
       "baseline": {
         "site": "1d3108398b6a9623",
         "corpus": "0287a31f8b4606f8",

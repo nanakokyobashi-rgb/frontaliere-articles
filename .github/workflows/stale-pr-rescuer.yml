@@ -1,8 +1,18 @@
 name: Stale PR rescuer (self-healing signal)
 
 # Trasforma gli stalli silenziosi della pipeline PR in un segnale etichettato e
-# interrogabile entro ~1h, invece di lasciarli fermi per giorni. Cinque classi:
+# interrogabile entro ~1h, invece di lasciarli fermi per giorni. Sei classi:
 #
+#   F) CONFLITTO CON MAIN (`has-conflicts`, scritta da `pr-autorebase` con
+#      merge-tree). Viene PRIMA di tutte le altre perché le rende inerti:
+#      GitHub non avvia i workflow `pull_request` su una PR in conflitto, quindi
+#      nessun test, review o fixer può più partire su quella head. È la classe D
+#      del rescuer del sito, che qui mancava: una PR verde, con `## LGTM` sulla
+#      head e l'auto-merge armato non rientrava in nessuna delle altre cinque,
+#      cadeva nell'`else` e si vedeva TOGLIERE la `stale-review` che
+#      `pr-autorebase` le aveva appena messo proprio perché `recycle-stale-prs`
+#      la riprendesse. Misurato il 2026-10-06: #2246, #2249 e #2205 ferme da 4 a
+#      13 ore, in conflitto, con l'auto-merge armato e nessuna label di stallo.
 #   D) REVIEW PIÙ VECCHIA DELL'HEAD (direzione 3 della #201): esiste una review
 #      Claude, non ha chiuso con `## LGTM`, è su un commit che non è più l'head,
 #      e i test sono verdi sull'head. È la PR già riparata — tipicamente dal
@@ -307,6 +317,7 @@ jobs:
             HAS_LABEL=$(echo "$pr" | jq -r '[.labels[].name] | index("stale-review") // empty')
             HAS_AUTOFIX=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
             HAS_NEEDS_HUMAN_LABEL=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "needs-human") then "true" else "false" end')
+            HAS_CONFLICTS=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "has-conflicts") then "true" else "false" end')
             IS_DRAFT=$(echo "$pr" | jq -r '.isDraft')
 
             # Il rescuer e il recycle operano solo sulle PR del loop autonomo.
@@ -923,7 +934,16 @@ jobs:
             fi
 
             REASON=""; RESCUE=""; CLASS=""
-            if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
+            if [ "${HAS_CONFLICTS:-false}" = "true" ]; then
+              CLASS="F"
+              # F — prima delle altre: con il conflitto nessun `pull_request`
+              # parte, quindi lo stato dei check e della review su questa head
+              # non può più cambiare e le classi sotto leggerebbero un verde che
+              # non porta a nessun merge. La label NON va tolta dall'`else`:
+              # è il segnale che `recycle-stale-prs` aspetta.
+              REASON="conflitto con \`main\` (\`has-conflicts\` da pr-autorebase): GitHub non avvia i workflow \`pull_request\` su una PR in conflitto, quindi nessun test, review o fixer può partire su questa head e l'auto-merge non la prenderà"
+              RESCUE="nessun rerun possibile finché il conflitto resta. Con \`## LGTM\` pr-autorebase ha già affidato la riapplicazione a issue-fix (issue «riapplicare la PR su main»); una PR superata viene chiusa da \`close-superseded-conflict-prs.mjs\`, e se resta ferma la ricicla \`recycle-stale-prs\`. A mano: \`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, risolvi e push."
+            elif [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
               CLASS="D"
               # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
               # in più viene etichettata, cambia solo il rimedio consegnato.

@@ -144,6 +144,25 @@ jobs:
           unset runtime_pat
           exit "$rc"
 
+      # Una PR del ciclo in conflitto non riceve più eventi `pull_request`: se
+      # nel frattempo non ha più niente da consegnare (riapplicava una PR ormai
+      # mergiata, il fixer ha chiuso il suo hand-off con `already-fixed`, o le
+      # sue issue sorgente sono tutte chiuse) resta aperta senza un
+      # proprietario — `recycle-stale-prs` vuole `stale-review` da 24 ore e la
+      # sorgente OPEN. Misurato il 2026-10-06: #2205 ferma 13 ore e #2246 ferma
+      # 4 ore, entrambe con l'auto-merge armato. Gira DOPO l'autorebase, che
+      # ricalcola `has-conflicts` con merge-tree, e anche se quello fallisce.
+      # GITHUB_TOKEN basta: chiudere una PR non deve avviare nessun workflow,
+      # e il branch non viene cancellato.
+      - name: Close superseded conflicting loop PRs (zero-Claude)
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: node scripts/ci/close-superseded-conflict-prs.mjs
+
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
