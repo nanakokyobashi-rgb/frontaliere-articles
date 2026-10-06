@@ -105,7 +105,15 @@ test('the mirrored flat redirect scanner parses unquoted attribute values before
   assert.match(flatRedirect, /selfClosing: !closing && HTML_VOID_ELEMENTS\.has\(name\)/);
   assert.match(flatRedirect, /HTML_INACTIVE_RAW_TEXT_ELEMENTS/);
   assert.match(flatRedirect, /HTML_TEMPLATE_RAW_TEXT_ELEMENTS/);
+  assert.match(flatRedirect, /const HTML_RCDATA_ELEMENTS = new Set\(\['textarea', 'title'\]\)/);
   assert.match(flatRedirect, /unquoted attribute-value state/);
+});
+
+test('the flat bridge masks RCDATA for meta extraction and extracts its title separately', () => {
+  assert.match(flatRedirect, /HTML_RCDATA_ELEMENTS\.has\(tag\.name\)/);
+  assert.match(flatRedirect, /function extractActiveTitle\(html = ''\)/);
+  assert.match(flatRedirect, /const extracted = extractActiveTitle\(siblingHtml\)/);
+  assert.doesNotMatch(flatRedirect, /maskInactiveMarkup\(siblingHtml\)\.match\(\/<title/);
 });
 
 

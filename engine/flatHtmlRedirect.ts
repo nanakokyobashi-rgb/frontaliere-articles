@@ -63,14 +63,12 @@ const HTML_VOID_ELEMENTS = new Set([
   'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
   'param', 'source', 'track', 'wbr',
 ]);
-// `<title>` and `<textarea>` are active document content at the top level;
-// they are raw-text only while nested in a template. Keeping the sets apart
-// prevents the metadata bridge from masking the page's real title.
 const HTML_INACTIVE_RAW_TEXT_ELEMENTS = new Set([
   'script', 'style', 'noscript', 'iframe', 'xmp', 'noembed', 'noframes',
 ]);
+const HTML_RCDATA_ELEMENTS = new Set(['textarea', 'title']);
 const HTML_TEMPLATE_RAW_TEXT_ELEMENTS = new Set([
-  ...HTML_INACTIVE_RAW_TEXT_ELEMENTS, 'textarea', 'title',
+  ...HTML_INACTIVE_RAW_TEXT_ELEMENTS, ...HTML_RCDATA_ELEMENTS,
 ]);
 
 function isSelfClosingStartTag(html: string, nameEnd: number, end: number): boolean {
@@ -134,11 +132,15 @@ function skipComment(html: string, start: number): number {
   return end < 0 ? -1 : end + 3;
 }
 
-function skipRawTextElement(html: string, afterOpening: number, name: string): number {
-  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+function findRawTextClose(html: string, afterOpening: number, name: string): { start: number; end: number } | null {
+  const closing = new RegExp('</' + name + '\\s*>', 'ig');
   closing.lastIndex = afterOpening;
   const match = closing.exec(html);
-  return match ? match.index + match[0].length : -1;
+  return match ? { start: match.index, end: match.index + match[0].length } : null;
+}
+
+function skipRawTextElement(html: string, afterOpening: number, name: string): number {
+  return findRawTextClose(html, afterOpening, name)?.end ?? -1;
 }
 
 function skipTemplateElement(html: string, afterOpening: number): number {
@@ -178,9 +180,10 @@ function skipTemplateElement(html: string, afterOpening: number): number {
 
 /**
  * Keep only active document markup when extracting metadata. Comments,
- * scripts, styles, and templates can contain stale OG tags that are not part
- * of the rendered page but would otherwise be copied into the redirect
- * bridge. Template depth is tracked so nested templates remain inactive.
+ * scripts, styles, templates, and RCDATA contents can contain literal OG tags
+ * that are not metadata elements but would otherwise be copied into the
+ * redirect bridge. Title extraction is deliberately separate because the
+ * active title text is itself RCDATA.
  */
 function maskInactiveMarkup(html = '') {
   const source = String(html || '');
@@ -207,7 +210,9 @@ function maskInactiveMarkup(html = '') {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && HTML_INACTIVE_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    if (!tag.closing && !tag.selfClosing && (
+      HTML_INACTIVE_RAW_TEXT_ELEMENTS.has(tag.name) || HTML_RCDATA_ELEMENTS.has(tag.name)
+    )) {
       const afterRawText = skipRawTextElement(source, tag.end + 1, tag.name);
       const afterInactive = afterRawText < 0 ? source.length : afterRawText;
       blank(start, afterInactive);
@@ -223,6 +228,49 @@ function maskInactiveMarkup(html = '') {
     cursor = tag.end + 1;
   }
   return output.join('');
+}
+
+/**
+ * Extract the first active document title. Title is RCDATA: literal meta-tag
+ * text inside it is not a metadata element, so title extraction must walk the
+ * original source separately from the masked meta-tag source.
+ */
+function extractActiveTitle(html = ''): string {
+  const source = String(html || '');
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) return '';
+    if (source.startsWith('<!--', start)) {
+      const afterComment = skipComment(source, start);
+      if (afterComment < 0) return '';
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(source, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      cursor = skipTemplateElement(source, tag.end + 1);
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && (
+      HTML_INACTIVE_RAW_TEXT_ELEMENTS.has(tag.name) || tag.name === 'textarea'
+    )) {
+      const afterRawText = skipRawTextElement(source, tag.end + 1, tag.name);
+      if (afterRawText < 0) return '';
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'title') {
+      const closing = findRawTextClose(source, tag.end + 1, 'title');
+      return closing ? source.slice(tag.end + 1, closing.start).trim() : '';
+    }
+    cursor = tag.end + 1;
+  }
+  return '';
 }
 
 /**
@@ -284,10 +332,10 @@ export const NOINDEX_BRIDGE = (slashUrl: string, title: string, ogTags: string):
 
 /**
  * Build the redirect-bridge HTML directly from the canonical (sibling)
- * HTML content + the trailing-slash URL. Title and OG tags are extracted
- * via the same regex the post-walk transform uses, so a bridge produced
- * here is byte-identical to the one `transformFlatRedirect` would produce
- * given the same `siblingHtml`.
+ * HTML content + the trailing-slash URL. The title uses an RCDATA-aware
+ * active-markup scan and OG tags use its masked active-meta view, so a bridge
+ * produced here is byte-identical to the one `transformFlatRedirect` would
+ * produce given the same `siblingHtml`.
  *
  * Why public: build plugins that emit BOTH `dist/foo.html` and
  * `dist/foo/index.html` (cluster pages, jobs-seo-pages, …) can call this
@@ -304,12 +352,9 @@ export function buildFlatBridgeFromSibling(siblingHtml: string, slashUrl: string
   let title = `Redirecting to ${slashUrl}`;
   let ogTags = '';
   try {
-    const titleMatch = maskInactiveMarkup(siblingHtml).match(/<title[^>]*>([^<]+)<\/title>/i);
-    if (titleMatch && titleMatch[1]) {
-      const extracted = titleMatch[1].trim();
-      if (extracted.length > 0) {
-        title = extracted;
-      }
+    const extracted = extractActiveTitle(siblingHtml);
+    if (extracted.length > 0) {
+      title = extracted;
     }
     ogTags = extractOgTags(siblingHtml);
   } catch {

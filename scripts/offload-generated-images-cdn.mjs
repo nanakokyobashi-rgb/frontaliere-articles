@@ -456,10 +456,11 @@ function isExecutableScriptTag(html, tag, start) {
 }
 
 function hasCdnBaseAssignment(script) {
-  // The initializer emitted by this script is a concrete URL assignment. A
-  // generic application script that merely mentions the property must not
-  // suppress injection and allow the local runtime payload to be deleted.
-  return /\bwindow\.__CDN_DATA_BASE__\s*=\s*(["']https?:\/\/[^"']+["'])/i.test(script);
+  // The injected marker is a standalone script with this exact body. Requiring
+  // the whole body prevents an assignment-shaped comment/string in an
+  // application script from suppressing injection and allowing the local
+  // runtime payload to be deleted.
+  return /^\s*window\.__CDN_DATA_BASE__\s*=\s*["']https?:\/\/[^\s"'<>]+["'];?\s*$/i.test(script);
 }
 
 /**
