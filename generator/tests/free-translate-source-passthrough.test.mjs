@@ -718,9 +718,13 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     setLocalOpusMtForTests(async () => { throw new Error('modello non disponibile'); });
     globalThis.fetch = async (url) => {
       if (String(url).includes('api.mymemory.translated.net')) {
+        const query = new URL(url).searchParams.get('q') || '';
+        const translatedText = query.includes('\n')
+          ? 'vera traduzione'
+          : `${query.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u)?.[0] || ''}vera traduzione`;
         return {
           ok: true,
-          json: async () => ({ responseData: { translatedText: 'vera traduzione', match: 1 } }),
+          json: async () => ({ responseData: { translatedText, match: 1 } }),
         };
       }
       throw new Error('offline nel test');
@@ -736,10 +740,14 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         _outcome: outcome,
       });
 
-      assert.equal(
-        out,
-        IT.split('\n').map((line) => (line ? 'vera traduzione' : '')).join('\n'),
-      );
+      const expected = IT.split('\n')
+        .map((line) => {
+          if (!line) return '';
+          const marker = line.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u)?.[0] || '';
+          return `${marker}vera traduzione`;
+        })
+        .join('\n');
+      assert.equal(out, expected);
       assert.equal(outcome.incomplete, true);
     } finally {
       setLocalOpusMtForTests(null);

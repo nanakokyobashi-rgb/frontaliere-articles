@@ -529,9 +529,10 @@ export function hasTranslatableLineText(line) {
     .replace(/^(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u, '')
     .replace(OPAQUE_LINE_TOKEN_RE, '')
     .trim();
-  // Keep two-letter all-caps language/status markers such as `OK` and `IT`
-  // opaque, while allowing ordinary short words (`No`, `Sì`) through.
-  return /\p{L}/u.test(candidate) && !/^\p{Lu}{1,3}$/u.test(candidate);
+  // Keep one- and two-letter all-caps language/status markers such as `OK`
+  // and `IT` opaque, while allowing ordinary short words (`No`, `Sì`) and
+  // meaningful three-letter headings such as `FAQ` through.
+  return /\p{L}/u.test(candidate) && !/^\p{Lu}{1,2}$/u.test(candidate);
 }
 
 function lineStructuralMarker(line) {
