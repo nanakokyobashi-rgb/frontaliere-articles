@@ -115,3 +115,13 @@ test('the writer upgrades the stale Italian Switzerland landing head', () => {
   assert.equal(patchHubLandingMetadata(patched, 'svizzera', 'it'), patched, 'patch must be idempotent');
   assert.equal(patchHubLandingMetadata(stale, 'frontaliere', 'it'), stale, 'other sections pass through');
 });
+
+test('the metadata patch changes only the active head title', () => {
+  const stale = '<!-- <title>Articoli Svizzera | Frontaliere Ticino</title> -->'
+    + '<head><template><title>Articoli Svizzera | Frontaliere Ticino</title></template>'
+    + '<script>const fake = "<title>Articoli Svizzera | Frontaliere Ticino</title>";</script>'
+    + '<title>Articoli Svizzera | Frontaliere Ticino</title></head>';
+  const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
+  assert.equal((patched.match(/<title>Articoli sulla Svizzera 2026 \| Frontaliere Ticino<\/title>/g) || []).length, 1);
+  assert.equal((patched.match(/<title>Articoli Svizzera \| Frontaliere Ticino<\/title>/g) || []).length, 3);
+});

@@ -54,3 +54,12 @@ test('handles an unquoted charset after ignored head markup', () => {
   assert.ok(charsetAt < scriptAt);
   assert.equal((output.match(/window\.__CDN_DATA_BASE__/g) || []).length, 1);
 });
+
+test('ignores raw text nested inside a template before the real charset', () => {
+  const html = '<!doctype html><html><head><template><textarea><meta charset=utf-8></textarea><title><meta charset=utf-8></title></template><meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  const charsetAt = output.lastIndexOf('<meta charset=utf-8>');
+  const scriptAt = output.indexOf('window.__CDN_DATA_BASE__');
+  assert.ok(charsetAt < scriptAt);
+  assert.ok(charsetAt > output.indexOf('</template>'));
+});

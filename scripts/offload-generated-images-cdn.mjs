@@ -57,6 +57,7 @@ import { ASSETS_SAME_ORIGIN_RX } from '../host/shared/cdnAssetOffloadRx.mjs';
 
 const ORIGIN = 'https://frontaliereticino.ch';
 const SCAN_EXT = new Set(['.html', '.xml', '.txt']);
+const HTML_RAW_TEXT_TAGS = ['script', 'style', 'textarea', 'title'];
 
 // Offload targets: [dist subdir, url path prefix]. Only these prefixes are
 // rewritten/guarded/deleted.
@@ -251,13 +252,13 @@ function skipTemplateElement(html, afterOpening) {
       } else if (!tag.selfClosing) {
         depth++;
       }
-    } else if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'script')) {
-      const afterRawText = skipRawTextElement(html, tag.end + 1, 'script');
-      if (afterRawText < 0) return -1;
-      searchFrom = afterRawText;
-      continue;
-    } else if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'style')) {
-      const afterRawText = skipRawTextElement(html, tag.end + 1, 'style');
+    } else if (
+      !tag.closing &&
+      !tag.selfClosing &&
+      HTML_RAW_TEXT_TAGS.some((rawName) => isTagNamed(html, tag, rawName))
+    ) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      const afterRawText = skipRawTextElement(html, tag.end + 1, rawName);
       if (afterRawText < 0) return -1;
       searchFrom = afterRawText;
       continue;
@@ -300,7 +301,7 @@ function findCharsetMetaEnd(headContent) {
     }
     if (!tag.closing && !tag.selfClosing) {
       let skippedRawText = false;
-      for (const rawName of ['script', 'style', 'textarea', 'title']) {
+      for (const rawName of HTML_RAW_TEXT_TAGS) {
         if (isTagNamed(headContent, tag, rawName)) {
           const afterRawText = skipRawTextElement(headContent, tag.end + 1, rawName);
           if (afterRawText < 0) return -1;
