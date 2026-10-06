@@ -51,7 +51,14 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MOD = path.resolve(HERE, '../scripts/lib/llm-json-repair.mjs');
-const { fixJsonStringBody, findMatchingClose, repairLlmJson, repairLlmJsonArray } = await import(MOD);
+const {
+  fixJsonStringBody,
+  findMatchingClose,
+  getLlmJsonRepairScanMetrics,
+  repairLlmJson,
+  repairLlmJsonArray,
+  resetLlmJsonRepairScanMetrics,
+} = await import(MOD);
 
 /** La forma esatta che fa esplodere la ricorsione: catena di coppie
  *  chiave/valore con virgolette non escapate, dentro un valore di prosa. */
@@ -78,13 +85,36 @@ test('repairLlmJsonArray keeps a wrapper after an unmatched preferred root', () 
 });
 
 test('repairLlmJsonArray ignores an array inside a recoverable quoted preamble', () => {
-  const raw = '{ "preamble [inside]" ] ["real"]';
-  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), ['real']);
+  const raw = 'meta {"note":"x"} "quoted [1]", [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
 });
 
 test('repairLlmJsonArray keeps a response after malformed array preamble punctuation', () => {
   const raw = 'preamble [unbalanced, [{"q":"Q","a":"A"}]';
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
+});
+
+test('repairLlmJsonArray resynchronizes after a mismatched closer before a later FAQ root', () => {
+  const cases = [
+    '{"bad":[1} [{"q":"Q","a":"A"}]',
+    '[1} [{"q":"Q","a":"A"}]',
+    '{"bad":1] [{"q":"Q","a":"A"}]',
+    '{"bad":{"deeper":{"deepest":[1} [{"q":"Q","a":"A"}]',
+  ];
+
+  for (const raw of cases) {
+    assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }], raw);
+  }
+});
+
+test('repairLlmJsonArray keeps an incompatible closer outside an unfinished root at EOF', () => {
+  const cases = ['[1}', '{"bad":1]'];
+
+  for (const raw of cases) {
+    const repaired = repairLlmJsonArray(raw);
+    assert.equal(repaired, raw);
+    assert.throws(() => JSON.parse(repaired), SyntaxError);
+  }
 });
 
 test('repairLlmJsonArray does not promote a nested array inside an unterminated root', () => {
@@ -117,6 +147,93 @@ test('repairLlmJsonArray does not exhaust the candidate budget on nested arrays'
   const nested = Array.from({ length: 25 }, () => '{"tags":["nested"]}').join(' ');
   const raw = `[${nested} prose [{"q":"real","a":"A"}]`;
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray ignores a mismatched close while another frame is open', () => {
+  const raw = 'preamble {"broken":[1} , 2]} prose Risposta finale: [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray ignores ambiguous quote delimiters inside a quoted value', () => {
+  const raw = 'meta {"note":"prosa "chiave": [1,2] e } ancora"} [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray documents the 24-root scan budget', () => {
+  const preamble = Array.from({ length: 25 }, (_, i) => `{"q":"noise-${i}","a":"N"}`).join(' ');
+  const raw = `${preamble} Risposta finale: {"q":"real","a":"A"}`;
+  // By construction, the 25th later balanced root is outside the bounded
+  // candidate scan; the first valid root remains the safe fallback.
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { q: 'noise-0', a: 'N' });
+});
+
+test('repairLlmJsonArray does not spend the root budget on nested openers in a lateral candidate', () => {
+  const nestedOpenerCount = 96;
+  const lateralCandidate = `${'['.repeat(nestedOpenerCount + 1)}1${']'.repeat(nestedOpenerCount + 1)}`;
+  const raw = `{"meta":"noise"} ${lateralCandidate} [{"q":"real","a":"A"}]`;
+  const repaired = repairLlmJsonArray(raw, {
+    validateCandidate: (candidate) => candidate?.[0]?.q === 'real',
+  });
+  assert.deepEqual(JSON.parse(repaired), [{ q: 'real', a: 'A' }]);
+});
+
+test('scanStringEnd examines the malformed-quote suffix linearly', () => {
+  const measure = (quoteCount) => {
+    const raw = `preamble [${'"'.repeat(quoteCount)}x`;
+    resetLlmJsonRepairScanMetrics();
+    repairLlmJsonArray(raw);
+    const metrics = getLlmJsonRepairScanMetrics();
+    assert.ok(metrics.charactersExamined > 0);
+    return metrics.charactersExamined;
+  };
+
+  const n = measure(256);
+  const fourN = measure(1_024);
+  assert.ok(
+    fourN <= n * 5,
+    `la scansione dei quote cresce oltre il lineare: N=${n}, 4N=${fourN}`,
+  );
+});
+
+test('repairLlmJsonArray extracts a real FAQ payload after corrupt prose leaves an unmatched nested opener', () => {
+  const raw = '[[ prosa corrotta [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray collapses deeply nested malformed containers before the candidate budget and stays linear', { timeout: 15_000 }, () => {
+  const measure = (depth) => {
+    const raw = `${'['.repeat(depth + 1)} prosa corrotta [{"q":"real","a":"A"}]`;
+    const startedAt = performance.now();
+    const parsed = JSON.parse(repairLlmJsonArray(raw));
+    return { ms: performance.now() - startedAt, parsed };
+  };
+
+  const shallow = measure(97);
+  const deep = measure(388);
+  assert.deepEqual(shallow.parsed, [{ q: 'real', a: 'A' }]);
+  assert.deepEqual(deep.parsed, [{ q: 'real', a: 'A' }]);
+  assert.ok(
+    deep.ms < shallow.ms * 10 + 250,
+    `la crescita non e' quasi lineare: 97=${shallow.ms.toFixed(0)} ms, 388=${deep.ms.toFixed(0)} ms`,
+  );
+});
+
+test('repairLlmJsonArray scans many unbalanced openers in near-linear time', { timeout: 15_000 }, () => {
+  const measure = (openerCount) => {
+    const raw = `preamble [unbalanced ${'['.repeat(openerCount)}`;
+    const startedAt = performance.now();
+    const repaired = repairLlmJsonArray(raw);
+    return { ms: performance.now() - startedAt, repaired };
+  };
+
+  const small = measure(4_000);
+  const large = measure(16_000);
+  assert.equal(typeof large.repaired, 'string');
+  assert.ok(large.ms < 2_000, `16.000 opener non bilanciati hanno richiesto ${large.ms.toFixed(0)} ms`);
+  assert.ok(
+    large.ms < small.ms * 10 + 250,
+    `la crescita non e' quasi lineare: 4.000=${small.ms.toFixed(0)} ms, 16.000=${large.ms.toFixed(0)} ms`,
+  );
 });
 
 test('la riparazione completa una virgola mancante dopo un oggetto annidato', () => {

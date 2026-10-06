@@ -16,9 +16,10 @@
  *      stesso esito. E' la prova che il core puo' sostituire la sorgente, non
  *      una promessa.
  *   3. Un chiamante cantonale non deve svegliare gli altri 23, non deve
- *      ripartire su un run che non ha prodotto niente e non deve dispatchare
- *      una catena. Sono proprieta' dei trigger, cioe' righe che GitHub
- *      interpreta prima che esista uno step.
+ *      auto-attivarsi quando vengono aggiornati insieme i caller generati,
+ *      non deve ripartire su un run che non ha prodotto niente e non deve
+ *      dispatchare una catena. Sono proprieta' dei trigger, cioe' righe che
+ *      GitHub interpreta prima che esista uno step.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -284,6 +285,64 @@ exit 0
   });
 }
 
+/** Esegue il gate `admit` con un compare GitHub finto. */
+function runAdmit(workflow, { caller, changed }) {
+  return withBin((dir) => ({
+    gh: `#!/usr/bin/env bash
+case "\${2:-}" in
+  *compare*) cat "${dir}/changed" ;;
+  *) printf '%s\\n' '{"workflow_runs":[]}' ;;
+esac
+`,
+  }), (dir, bin) => {
+    writeFileSync(path.join(dir, 'changed'), `${changed.join('\n')}\n`);
+    writeFileSync(path.join(dir, 'out'), '');
+    writeFileSync(path.join(dir, 'step.sh'), extractRun(workflow, 'Skip when a generation is already in flight'));
+    const res = spawnSync('bash', [path.join(dir, 'step.sh')], {
+      encoding: 'utf8',
+      env: {
+        PATH: `${bin}:${process.env.PATH}`, HOME: dir, GITHUB_OUTPUT: path.join(dir, 'out'),
+        REPO: 'owner/repo', SELF_ID: '4242', EVENT_NAME: 'push',
+        PUSH_BEFORE: 'before', PUSH_SHA: 'after', CHAIN_DEPTH: '0', PARENT_RUN_ID: '',
+        CHAIN_MAX_RUNS_PER_HOUR: '', CALLER_WORKFLOW: caller,
+      },
+    });
+    return { status: res.status, stdout: res.stdout, outputs: readOutputs(path.join(dir, 'out')) };
+  });
+}
+
+test('admit elegge un solo self-test dry quando un commit cambia piu\' caller', () => {
+  const batch = [
+    '.github/workflows/generate-article.yml',
+    '.github/workflows/generate-article-appenzello.yml',
+    '.github/workflows/generate-article-ag.yml',
+    '.github/workflows/generate-article-core.yml',
+  ];
+  const elected = runAdmit(CORE, { caller: 'generate-article-ag.yml', changed: batch });
+  assert.equal(elected.status, 0);
+  assert.equal(elected.outputs.proceed, 'true');
+  assert.match(elected.stdout, /Self-test dry eletto per il batch: generate-article-ag\.yml/);
+
+  const skipped = runAdmit(CORE, { caller: 'generate-article-appenzello.yml', changed: batch });
+  assert.equal(skipped.status, 0);
+  assert.equal(skipped.outputs.proceed, 'false');
+  assert.match(skipped.stdout, /reason=self-test-batch/);
+
+  const single = runAdmit(CORE, {
+    caller: 'generate-article-appenzello.yml',
+    changed: ['.github/workflows/generate-article-appenzello.yml'],
+  });
+  assert.equal(single.outputs.proceed, 'true');
+
+  const source = runAdmit(SOURCE, {
+    caller: 'generate-article.yml',
+    changed: batch,
+  });
+  assert.equal(source.status, 0);
+  assert.equal(source.outputs.proceed, 'true');
+  assert.match(source.stdout, /workflow sorgente: non partecipa al batch cantonale/);
+});
+
 const pairGenerateEnv = (extra) => ({ BODY_PATH_RE: PAIR.bodyRe, PRIMARY_SECTION: PAIR.primary, SIBLING_SECTION: PAIR.sibling, ...extra });
 
 test('Generate the article: con gli input della coppia storica il core si comporta come la sorgente', () => {
@@ -544,8 +603,11 @@ test('push.paths: solo i path del corpus della propria sezione', () => {
   for (const { canton, file, pushPaths, pushBranches } of CALLERS) {
     const { section } = canton;
     assert.equal(pushBranches, 'main', `${file}: un branch di backup non deve generare`);
-    assert.ok(pushPaths.length >= 3, file);
-    assert.ok(pushPaths.every((p) => p.startsWith('content/')), `${file}: un caller cantonale non deve auto-avviarsi quando cambia il proprio YAML`);
+    assert.ok(pushPaths.length >= 3, `${file}: nessun path di corpus`);
+    assert.ok(
+      pushPaths.every((p) => p.startsWith('content/')),
+      `${file}: un wrapper non deve auto-avviarsi quando vengono rigenerati tutti i wrapper`,
+    );
     const corpus = pushPaths;
     assert.ok(corpus.length >= 3, file);
     for (const p of corpus) {

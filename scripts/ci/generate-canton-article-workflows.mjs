@@ -42,9 +42,10 @@
  *     deterministico fra i cantoni della stessa cadenza (24 cantoni nella
  *     stessa ora si contenderebbero il tetto globale; per chi ha uno slot al
  *     giorno, perderlo vuol dire perdere la giornata);
- *   - `push.paths`: i soli path del corpus della sezione, cosi' una modifica
- *     ai 24 caller non apre 24 self-test concorrenti e l'articolo di un
- *     cantone non sveglia gli altri 23;
+ *   - `push.paths`: il file del chiamante (self-test) e i soli path del corpus
+ *     della sezione, cosi' l'articolo di un cantone non sveglia gli altri 23;
+ *     se un commit rigenera piu' chiamanti, l'admit elegge un solo self-test
+ *     dry dal batch e gli altri escono senza consumare uno slot runner;
  *   - concurrency `generate-article-<sezione>` sul job che scrive;
  *   - catena via dispatch spenta (`chain_dispatch: false`).
  *
@@ -175,7 +176,8 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'admit: il nome del chiamante arriva per env',
     count: 1,
-    find: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n',
+    find: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n'
+      + '          CALLER_WORKFLOW: generate-article.yml\n',
     replace: '          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}\n'
       + '          CALLER_WORKFLOW: ${{ inputs.caller_workflow }}\n',
   },

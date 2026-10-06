@@ -99984,6 +99984,210 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gambarogno-pavimentazione-attese': {
+    title: 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    description: 'A Gambarogno lavori di pavimentazione dal 12 al 16 ottobre tra il sottopasso FFS e la salita per Caviano - Scaiano. Per la circolazione attese fino a 30 minuti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gambarogno, lavori, sulla, cantonale',
+    ogTitle: 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    ogDescription: 'Il Comune e il Dipartimento del territorio annunciano opere di pavimentazione sulla strada cantonale di Gambarogno. L\'intervento interessa il tratto tra il sottopasso FFS e la salita per Caviano - Scaiano, con attese previste fino a 30 minuti.',
+    canonicalPath: '/articoli-frontaliere/gambarogno-pavimentazione-attese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gambarogno: lavori sulla cantonale, attese fino a 30 minuti",
+      "description": "A Gambarogno lavori di pavimentazione dal 12 al 16 ottobre tra il sottopasso FFS e la salita per Caviano - Scaiano. Per la circolazione attese fino a 30 minuti.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/gambarogno-pavimentazione-attese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori di pavimentazione sulla cantonale di Gambarogno tra il sottopasso FFS e Caviano"
+      },
+      "datePublished": "2026-10-06T06:52:28+00:00",
+      "dateModified": "2026-10-06T06:52:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gambarogno-pavimentazione-attese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-settembre-ticino-2026': {
+    title: 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    description: 'A settembre 2026 la disoccupazione in Svizzera rimane stabile al 3%; il Ticino registra il 2,9% con 4\'800 disoccupati e i posti vacanti salgono a 44\'200. Guida',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, settembre, resta',
+    ogTitle: 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    ogDescription: 'Il bollettino SECO di settembre 2026 mostra una disoccupazione nazionale ferma al 3% e un ticinese al 2,9% con 4\'800 senza lavoro. I posti vacanti annunciati raggiungono 44\'200, in aumento di 6\'800 su base annua. L\'articolo spiega ai frontalieri',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-settembre-ticino-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione stabile al 3% in Svizzera a settembre 2026",
+      "description": "A settembre 2026 la disoccupazione in Svizzera rimane stabile al 3%; il Ticino registra il 2,9% con 4'800 disoccupati e i posti vacanti salgono a 44'200. Guida",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con professionisti e segno dell'ufficio di collocamento, rappresentante il mercato del lavoro ticinese."
+      },
+      "datePublished": "2026-10-06T07:34:13+00:00",
+      "dateModified": "2026-10-06T07:34:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-settembre-ticino-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontalieri-tassa-ingresso-rischi-comuni': {
+    title: 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    description: 'Scopri le novità per i frontalieri: tassa d\'ingresso fino a 4mila franchi, il no svizzero ai 900 milioni per i disoccupati e il rischio di 120 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, ingresso, ristorni, doppia',
+    ogTitle: 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    ogDescription: 'Un\'analisi approfondita sulle recenti sfide per i frontalieri: dalla tassa d\'ingresso fino a 4mila franchi al dibattito sui 900 milioni per i disoccupati e il rischio di 120 milioni per i comuni di frontiera. Il Nuovo Accordo Frontalieri',
+    canonicalPath: '/articoli-frontaliere/frontalieri-tassa-ingresso-rischi-comuni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: tassa ingresso, ristorni e doppia imposizione",
+      "description": "Scopri le novità per i frontalieri: tassa d'ingresso fino a 4mila franchi, il no svizzero ai 900 milioni per i disoccupati e il rischio di 120 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano e del suo lago, con edifici moderni che simboleggiano il contesto finanziario svizzero."
+      },
+      "datePublished": "2026-10-06T08:21:29+00:00",
+      "dateModified": "2026-10-06T08:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieri-tassa-ingresso-rischi-comuni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-carovita-sindacati-recupero-divario': {
+    title: 'Carovita, i sindacati chiedono recupero divario nel Preventivo 2027',
+    description: 'I sindacati OCST, VPOD e SIT chiedono al Cantone il recupero dell\'8,5% di rincaro non compensato dal 3% di adeguamento salariale tra 2020 e 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, carovita, sindacati, chiedono, recupero',
+    ogTitle: 'Carovita: sindacati chiedono recupero divario nel Preventivo 2027',
+    ogDescription: 'La petizione di OCST, VPOD e SIT chiede al Consiglio di Stato e Gran Consiglio di recuperare il divario tra l\'8,5% di rincaro e il 3% di adeguamento salariale tra dicembre 2020 e settembre 2026, con impatti su busta paga e pensioni.',
+    canonicalPath: '/articoli-frontaliere/carovita-sindacati-recupero-divario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carovita, i sindacati chiedono recupero divario nel Preventivo 2027",
+      "description": "I sindacati OCST, VPOD e SIT chiedono al Cantone il recupero dell'8,5% di rincaro non compensato dal 3% di adeguamento salariale tra 2020 e 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/carovita-sindacati-recupero-divario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Bellinzona con il Castel Grande sotto un cielo sereno."
+      },
+      "datePublished": "2026-10-06T09:15:31+00:00",
+      "dateModified": "2026-10-06T09:15:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/carovita-sindacati-recupero-divario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-monte-olimpino-collegamenti-tilo': {
+    title: 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    description: 'Tra il 9 ottobre e il 23 novembre 2026 la galleria Monte Olimpino 1 chiude nei weekend: cambiano RE80, S10, S40 ed EuroCity tra Chiasso e Como. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, monte, olimpino, modifiche, tilo',
+    ogTitle: 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    ogDescription: 'Quattro finestre di lavori tra ottobre e novembre 2026 modificano i treni tra Chiasso e Como: RE80 via Monte Olimpino 2 con coincidenza a Cucciago, S10 e S40 fino a/da Chiasso, EuroCity senza fermata a Como S. Giovanni.',
+    canonicalPath: '/articoli-frontaliere/monte-olimpino-collegamenti-tilo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como",
+      "description": "Tra il 9 ottobre e il 23 novembre 2026 la galleria Monte Olimpino 1 chiude nei weekend: cambiano RE80, S10, S40 ed EuroCity tra Chiasso e Como. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/monte-olimpino-collegamenti-tilo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1."
+      },
+      "datePublished": "2026-10-06T10:25:21+00:00",
+      "dateModified": "2026-10-06T10:25:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/monte-olimpino-collegamenti-tilo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stazione-ffs-giubiasco-rinnovo': {
+    title: 'Stazione FFS di Giubiasco: rinnovo concluso | Frontaliere Ticino',
+    description: 'La stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026 dopo un rinnovo da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, stazione, giubiasco, rinnovo, concluso',
+    ogTitle: 'Stazione FFS di Giubiasco: rinnovo concluso',
+    ogDescription: 'Dopo diversi anni di lavori, l\'edificio viaggiatori della stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026. Il progetto da circa 6,4 milioni porta nuovi spazi commerciali, servizi professionali, ascensore, pompa di calore e standard Minergie.',
+    canonicalPath: '/articoli-frontaliere/stazione-ffs-giubiasco-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stazione FFS di Giubiasco: rinnovo concluso",
+      "description": "La stazione FFS di Giubiasco riaprirà l'8 ottobre 2026 dopo un rinnovo da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/stazione-ffs-giubiasco-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio rinnovato della stazione FFS di Giubiasco"
+      },
+      "datePublished": "2026-10-06T10:59:22+00:00",
+      "dateModified": "2026-10-06T10:59:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stazione-ffs-giubiasco-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
