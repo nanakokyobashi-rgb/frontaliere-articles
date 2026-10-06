@@ -428,7 +428,7 @@ test('html-links: i testi generici recuperano il titolo strutturale delle tre fo
   ];
   assert.equal(PROFILE.cantons.length, 24, 'baseline P5b: 24 profili cantonali');
   const htmlLinkSources = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => s.parser === 'html-links'));
-  assert.equal(htmlLinkSources.length, 159, 'baseline P5b/R2: 159 fonti html-links nei 24 profili cantonali');
+  assert.equal(htmlLinkSources.length, 157, 'baseline P5b/R2: 157 fonti html-links nei 24 profili cantonali');
 
   for (const item of cases) {
     const html = fixture(item.fixture).toString('utf8');

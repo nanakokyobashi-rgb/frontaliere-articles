@@ -211,29 +211,6 @@
           "items7d": 56,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type text/xml;charset=UTF-8, 200 item totali e 56 negli ultimi 7 giorni. Titoli: Stadtrat: Öffentliches Interesse zu klein; Pilzschmaus zog Hunderte nach Mellingen; Kanton - Prämienverbilligung zugute? Feed regionale ad alta cadenza. /robots.txt risponde 404 HTML (file robots assente, non una regola di blocco); nessun divieto AI osservabile. Le pagine Impressum/Datenschutz pubbliche non riportano un divieto di accesso automatizzato."
-        },
-        {
-          "url": "https://www.soaktuell.ch/blog-feed.xml",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "soaktuell.ch",
-          "language": "de",
-          "kind": "media",
-          "topics": [
-            "cronaca",
-            "mobilita",
-            "eventi",
-            "fisco",
-            "lavoro",
-            "servizi",
-            "frontalieri"
-          ],
-          "quirks": {
-            "crawlDelaySeconds": 10
-          },
-          "items7d": 13,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale: status 200, content-type text/xml; charset=UTF-8, 20 item totali e 13 negli ultimi 7 giorni. Titoli: Warum eine Bundesrätin Esther Friedli unseren Einkaufstouristen weh tun könnte; Schluss mit Tempo 30 auf Durchfahrtsstrassen in den Dörfern; Glashütten: Schwere Kollision zwischen zwei Motorradfahrern. Portale regionale con copertura AG/SO: applicare filtro cantonale. robots.txt 200, Allow / e nessun blocco ClaudeBot/anthropic-ai/GPTBot; crawl-delay 10 è dichiarato per dotbot/AhrefsBot. Informazioni legali pubbliche consultate senza divieto crawler rilevato."
         }
       ],
       "categoryDataSources": {
@@ -5967,26 +5944,6 @@
           "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; 1 negli ultimi 7 giorni, 4 negli ultimi 30 (ultimo 2026-09-29)."
         },
         {
-          "url": "https://neuhausen.ch/aktuelles",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "Gemeinde Neuhausen am Rheinfall",
-          "language": "de",
-          "kind": "istituzionale",
-          "topics": [
-            "servizi",
-            "mobilita",
-            "eventi",
-            "cronaca"
-          ],
-          "quirks": {
-            "articlePathPattern": "^/fileupload/[^/?]+\\.pdf$"
-          },
-          "items7d": 0,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale: status 200, content-type text/html (201170 byte). Ultimo item 27.09.2026; campioni: «Abstimmungsresultate vom 27. September 2026», «Gemeinde unterstützt Haus der Begegnung und der Menschlichkeit» (17.09), «Erneuerung Spielplatz Schönegg» (10.09). robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagina legale comunale consultata."
-        },
-        {
           "url": "https://www.shkb.ch/244-news-medienmitteilungen",
           "format": "html",
           "parser": "html-links",
@@ -6353,29 +6310,6 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Posizioni del padronato SO (budget cantonale, mercato del lavoro, iniziativa 10 milioni)."
-        },
-        {
-          "url": "https://www.soaktuell.ch/blog-feed.xml",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "soaktuell.ch",
-          "language": "de",
-          "kind": "media",
-          "topics": [
-            "cronaca",
-            "mobilita",
-            "eventi",
-            "fisco",
-            "lavoro",
-            "servizi",
-            "frontalieri"
-          ],
-          "quirks": {
-            "crawlDelaySeconds": 10
-          },
-          "items7d": 13,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type text/xml; charset=UTF-8, 20 item totali e 13 negli ultimi 7 giorni. Titoli: Warum eine Bundesrätin Esther Friedli unseren Einkaufstouristen weh tun könnte; Schluss mit Tempo 30 auf Durchfahrtsstrassen in den Dörfern; Glashütten: Schwere Kollision zwischen zwei Motorradfahrern. Feed indipendente regionale: filtrare gli item effettivamente SO, perché copre anche AG. robots.txt 200, Allow / e nessun blocco ClaudeBot/anthropic-ai/GPTBot; crawl-delay 10 dichiarato per dotbot/AhrefsBot. Informazioni legali pubbliche consultate senza divieto crawler rilevato."
         }
       ],
       "categoryDataSources": {
@@ -6845,29 +6779,6 @@
           "items7d": 0,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Ultimo item 21.09.2026; campioni: «Gemeinsam für ein sauberes Lachen», «Die Gemeindeverwaltung bleibt am 7. September geschlossen», «Verkehrseinschränkungen + Sperrung Hintere Bahnhofstrasse/Poststrasse». robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum/Disclaimer consultato."
-        },
-        {
-          "url": "https://www.kuessnacht.ch/",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "Bezirk Küssnacht",
-          "language": "de",
-          "kind": "istituzionale",
-          "topics": [
-            "servizi",
-            "eventi",
-            "mobilita",
-            "fisco",
-            "cronaca"
-          ],
-          "quirks": {
-            "maxRequestsPerRun": 4,
-            "crawlDelaySeconds": 3,
-            "articlePathPattern": "^/verwaltung/news\\.html/104/news/\\d+/?$"
-          },
-          "items7d": 4,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Quattro item recenti: tre del 01.10 («Ferienpass», «erste Altersmesse», «Bauausschreibungen») e «Chilbi in Küssnacht 2026» del 29.09. Il sito restituisce 429 dopo 4 richieste/10 secondi: rispettare maxRequestsPerRun=4 e ritardo >=3 s. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum consultato."
         }
       ],
       "categoryDataSources": {
