@@ -12684,6 +12684,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
     'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Nei weekend 9-12, 16-19 ottobre e 13-16, 20-23 novembre 2026, la chiusura cambia RE80, S10 e S40 tra Chiasso e Como.',
     'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Stazione FFS di Giubiasco: rinnovo concluso',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'L\'edificio della stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026 dopo lavori da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Edificio rinnovato della stazione FFS di Giubiasco',
 };
 
 export default blogMetaIt;
