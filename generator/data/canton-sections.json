@@ -1,7 +1,7 @@
 {
-  "_comment": "Profilo editoriale corpus-only delle 24 sezioni cantonali (D14). Sorgente: i 24 report E-src verificati il 2026-10-05. newsSources alimenta generate-article-<canton> (P6/P8); categoryDataSources alimenta le pipeline dati di categoria (D11, P9), NON il generatore news. Policy robots (D10): una fonte il cui robots.txt nomina e blocca un agente AI di input (vedi aiInputAgents) sul path della fonte, o dichiara Content-Signal ai-input=no, NON entra in newsSources ne' in categoryDataSources ma in ownerDecisionPending con la regola esatta. ai-train=no da solo non esclude (il generatore non addestra modelli): resta in quirks.contentSignal. I token solo-addestramento (CCBot, Google-Extended, ...) bloccati sono annotati in quirks.trainingCrawlersBlocked. Un Disallow per User-agent * sul path esclude la fonte del tutto. Esclusi per costruzione: fonti gia' in NEWS_SOURCES/NEWS_SOURCES_SVIZZERA (D6/D12) e fonti a portata nazionale (sezione svizzera). enabled resta false finche' P11 non accende il pilota; cronMinute e dailyBudget sono verificati da scripts/ci/validate-canton-sections.mjs.",
+  "_comment": "Profilo editoriale corpus-only delle 24 sezioni cantonali (D14). Sorgente: i 24 report E-src e la riverifica R2 eseguita con lo scanner reale il 2026-10-06. newsSources alimenta generate-article-<canton> (P6/P8); categoryDataSources alimenta le pipeline dati di categoria (D11, P9), NON il generatore news. Policy robots (D10): una fonte il cui robots.txt nomina e blocca un agente AI di input (vedi aiInputAgents) sul path della fonte, o dichiara Content-Signal ai-input=no, NON entra in newsSources ne' in categoryDataSources ma in ownerDecisionPending con la regola esatta. ai-train=no da solo non esclude (il generatore non addestra modelli): resta in quirks.contentSignal. I token solo-addestramento (CCBot, Google-Extended, ...) bloccati sono annotati in quirks.trainingCrawlersBlocked. Un Disallow per User-agent * sul path esclude la fonte del tutto. Esclusi per costruzione: fonti gia' in NEWS_SOURCES/NEWS_SOURCES_SVIZZERA (D6/D12) e fonti a portata nazionale (sezione svizzera). enabled resta false finche' P11 non accende il pilota; cronMinute e dailyBudget sono verificati da scripts/ci/validate-canton-sections.mjs.",
   "schemaVersion": 1,
-  "verifiedAt": "2026-10-05",
+  "verifiedAt": "2026-10-06",
   "aiInputAgents": ["ClaudeBot", "Claude-Web", "anthropic-ai", "Claude-User", "Claude-SearchBot", "GPTBot", "ChatGPT-User", "OAI-SearchBot", "PerplexityBot"],
   "cantons": [
     {
@@ -189,6 +189,72 @@
           "items7d": 15,
           "verifiedAt": "2026-10-05",
           "notes": "15 link /news/<slug> server-rendered. items7d = numero di link (non filtrati per data). Sanita'/ospedali: unica fonte ospedaliera AG con lista leggibile (KSA medienmitteilungen: nessun link)."
+        },
+        {
+          "url": "https://www.dorfheftli.ch/?format=feed&type=rss",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Dorfheftli",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "eventi",
+            "servizi",
+            "lavoro",
+            "mobilita"
+          ],
+          "quirks": {
+            "contentSignal": "ai-input=yes, ai-train=no"
+          },
+          "items7d": 16,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/rss+xml; charset=utf-8, 16 item totali e 16 negli ultimi 7 giorni. Titoli: Grosser Empfang auf dem Dorfplatz; Moonlight; Alzbachfeld – Wo Wohnträume Gestalt annehmen. Testata locale indipendente con filtro geografico necessario. robots.txt 200: Allow / e Content-Signal ai-input=yes, ai-train=no; ClaudeBot, anthropic-ai, GPTBot, ChatGPT-User e OAI-SearchBot risultano esplicitamente Allow. Impressum consultato senza divieto di accesso automatizzato."
+        },
+        {
+          "url": "https://www.reussbote.ch/rss.xml",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Reussbote",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "eventi",
+            "fisco",
+            "lavoro",
+            "mobilita",
+            "servizi"
+          ],
+          "quirks": {
+            "robotsTxt": "absent"
+          },
+          "items7d": 56,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/xml;charset=UTF-8, 200 item totali e 56 negli ultimi 7 giorni. Titoli: Stadtrat: Öffentliches Interesse zu klein; Pilzschmaus zog Hunderte nach Mellingen; Kanton - Prämienverbilligung zugute? Feed regionale ad alta cadenza. /robots.txt risponde 404 HTML (file robots assente, non una regola di blocco); nessun divieto AI osservabile. Le pagine Impressum/Datenschutz pubbliche non riportano un divieto di accesso automatizzato."
+        },
+        {
+          "url": "https://www.soaktuell.ch/blog-feed.xml",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "soaktuell.ch",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "eventi",
+            "fisco",
+            "lavoro",
+            "servizi",
+            "frontalieri"
+          ],
+          "quirks": {
+            "crawlDelaySeconds": 10
+          },
+          "items7d": 13,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/xml; charset=UTF-8, 20 item totali e 13 negli ultimi 7 giorni. Titoli: Warum eine Bundesrätin Esther Friedli unseren Einkaufstouristen weh tun könnte; Schluss mit Tempo 30 auf Durchfahrtsstrassen in den Dörfern; Glashütten: Schwere Kollision zwischen zwei Motorradfahrern. Portale regionale con copertura AG/SO: applicare filtro cantonale. robots.txt 200, Allow / e nessun blocco ClaudeBot/anthropic-ai/GPTBot; crawl-delay 10 è dichiarato per dotbot/AhrefsBot. Informazioni legali pubbliche consultate senza divieto crawler rilevato."
         }
       ],
       "categoryDataSources": {
@@ -601,6 +667,46 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "WordPress RSS, 10 item (30 giorni: 10; ultimo 27.09.2026, 0 negli ultimi 7). Economia/lavoro/formazione per SG-AR-AI, piu' prese di posizione su iniziative federali (bilaterali). Ospita anche la cassa AVS IHK (non cantonale)."
+        },
+        {
+          "url": "https://www.appenzell.ch/de/footer/aktuelles/neuigkeiten.html",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Appenzellerland Tourismus AI",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "eventi",
+            "servizi",
+            "cronaca",
+            "mobilita"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/de/footer/aktuelles/neuigkeiten/detail/"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Un item databile nella finestra, «Alpabfahrten – Aktuelle Daten» (06.10.2026); campioni ulteriori: «Fotoausstellung Alpfahrt im Café s'Plätzli», «Brunnenwasser ist Trinkwasser», «Openair-Kino im Alpstein». robots.txt 200 con path consentito, nessun blocco AI/ai-input=no; AGB/Disclaimer consultati."
+        },
+        {
+          "url": "https://www.appkb.ch/ihre-appkb/aktuelles/aktuelles-news",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Appenzeller Kantonalbank",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "economia",
+            "pensioni",
+            "servizi",
+            "eventi"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/ihre-appkb/aktuelles/aktuelles-news/"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Due item nella sezione Aktuell 2026: «Vorsorgeanlass, 20. Oktober 2026» (01.10) e «Pensionierung bei der Appenzeller Kantonalbank» (29.09); campione ulteriore «Wegen Feiertag geschlossen» (21.09). L'anno è nella sezione e il giorno/mese nella lista. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum/note legali consultati."
         }
       ],
       "categoryDataSources": {
@@ -876,6 +982,46 @@
           "items7d": 46,
           "verifiedAt": "2026-10-05",
           "notes": "Sezione 'Ort Bern' di Nau.ch: 46 link articolo server-rendered (suffisso numerico), ma solo ~7/46 sono bernesi (resto nazionale/sport/lifestyle) e solo 4 sono sotto /ort/bern/: servono filtro per parole chiave a valle. Nessun feed RSS (404 su /rss e /ort/bern/rss). items7d = numero link (pagina senza date). robots.txt: Allow /."
+        },
+        {
+          "url": "https://www.api.news.apps.be.ch/api/atom/news?lang=de",
+          "format": "atom",
+          "parser": "atom",
+          "publisher": "Kanton Bern (be.ch, Atom-Newsfeed)",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "robotsTxt": "unreachable"
+          },
+          "items7d": 10,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/xml, 9.264 byte, 10 item/entry e 10 negli ultimi 7 giorni. Titoli: Ipsach: Arbeitskran eingeknickt – Bahnstrecke und Hauptstrasse gesperrt; Thun: Revokation Vermisstmeldung – 69-Jähriger aufgefunden; Englisberg/Zeugenaufruf: 69-jähriger dementer Mann vermisst. Feed Atom ufficiale collegato al catalogo RSS di be.ch, utile per la cronaca/polizia e gli avvisi cantonali. robots.txt esatto del sottodominio API risponde 403: non sono state applicate tecniche di bypass; le direttive AI non sono quindi verificabili su quel file."
+        },
+        {
+          "url": "https://www.api.news.apps.be.ch/api/atom/news?lang=fr",
+          "format": "atom",
+          "parser": "atom",
+          "publisher": "Canton de Berne (be.ch, flux Atom d'actualités)",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "robotsTxt": "unreachable"
+          },
+          "items7d": 10,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/xml, 9.258 byte, 10 item/entry e 10 negli ultimi 7 giorni. Titoli: Ipsach: Effondrement d’une grue de chantier – Ligne de chemin de fer et route principale fermées; Pneumonie enzootique: pas de nouvel élevage touché à ce jour; Chômage stable en septembre. È la variante francese dello stesso feed ufficiale: mantenere il flag di deduplicazione per le storie bilingui. robots.txt esatto del sottodominio API risponde 403; nessun bypass e nessuna assunzione sulle direttive non osservabili."
         }
       ],
       "categoryDataSources": {
@@ -974,7 +1120,28 @@
             "dataShape": "page"
           }
         ],
-        "servizi": []
+        "servizi": [
+          {
+            "url": "https://www.rrgr-service.apps.be.ch/api/gr/instances/1796b1af-bd1e-4ffa-a80d-ba08d1b8a2ed/render?guid=&lang=de",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Grosser Rat des Kantons Bern (RRGR)",
+            "language": "de",
+            "kind": "istituzionale",
+            "topics": [
+              "servizi",
+              "fisco",
+              "lavoro"
+            ],
+            "quirks": {
+              "robotsTxt": "unreachable"
+            },
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type text/xml; charset=utf-8, 120 item nel canale Eingereichte Vorstösse, ma tutti con pubDate vuoto: 0 item databili negli ultimi 7 giorni. Titoli: Wie reagiert der Kanton auf die dramatische Lage unserer Wälder? Ist die heutige Waldbewirtschaftung noch zeitgemäss?; Methernitha in Linden: Schwerer Missbrauch, behördliches Wegschauen, fehlende Aufarbeitung – was unternimmt der Kanton Bern? Feed ufficiale del Gran Consiglio, utile come archivio di atti e temi civici, non come flusso fresco. Il path /robots.txt del sottodominio risponde con HTML dell'app e non contiene direttive leggibili; non è stato aggirato.",
+            "dataShape": "feed"
+          }
+        ]
       },
       "ownerDecisionPending": [
         {
@@ -1170,6 +1337,28 @@
           "items7d": 3,
           "verifiedAt": "2026-10-05",
           "notes": "Servizio di consulenza commerciale per Grenzgänger DE->CH (Lörrach/Waldshut). Contenuto mirato ma promozionale: usare con cautela per fatti, non come fonte primaria. Feed da 600 KB."
+        },
+        {
+          "url": "https://www.riehen.ch/aktuelles/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Riehen",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "servizi",
+            "eventi",
+            "fisco"
+          ],
+          "quirks": {
+            "crawlDelaySeconds": 10,
+            "articlePathPattern": "^/aktuelles/meldungen/[^/]+\\.php$"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8, 10 item/entry nella pagina e 2 con data 30.09.2026 negli ultimi 7 giorni. Titoli misurati: Baustelle Mühlestiegstrasse 5; Baustelle Rebenstrasse; Baumschäden im Riehener und Bettinger Wald: Erholungsanlagen und Waldwege werden vorübergehend geschlossen. Lista server-rendered con link /aktuelles/meldungen/*.php; il volume è basso ma copre un comune Basel-Stadt non presente nelle fonti news. robots.txt 200, crawl-delay 10, nessun blocco ClaudeBot/anthropic-ai/GPTBot; impressum consultato senza divieto crawler rilevato."
         }
       ],
       "categoryDataSources": {
@@ -1271,7 +1460,26 @@
             "dataShape": "page"
           }
         ],
-        "servizi": []
+        "servizi": [
+          {
+            "url": "https://www.unibas.ch/newsFeeds?category=&month=&year=&query=&path=/de/Aktuell/News",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Universität Basel",
+            "language": "de",
+            "kind": "istituzionale",
+            "topics": [
+              "servizi",
+              "eventi",
+              "lavoro"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type text/xml;charset=UTF-8, 12 item totali e 0 negli ultimi 7 giorni; ultimo item 29.09.2026. Titoli: Odysseus in Süditalien; Neuer Vorsitz für die Regenz der Universität Basel; LEAF – Labore auf dem Weg zu mehr Nachhaltigkeit. Feed ufficiale dell'Università di Basilea per ricerca, campus e formazione. robots.txt 200 con User-agent * Allow / e nessun blocco AI nominato; impressum consultato senza divieto crawler rilevato.",
+            "dataShape": "feed"
+          }
+        ]
       },
       "ownerDecisionPending": [
         {
@@ -1630,6 +1838,44 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "13 link /actualites/AAAA-MM-GG/*, ultimo 2026-09-18. Volume basso."
+        },
+        {
+          "url": "https://www.fr.ch/directions-services/63/rss.xml",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Chancellerie d'État de Fribourg",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "eventi",
+            "fisco",
+            "lavoro"
+          ],
+          "quirks": {},
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/rss+xml; charset=utf-8, 50 item totali e 1 negli ultimi 7 giorni. Titoli: Dépôt d’une pétition intitulée « Pour une physiothérapie accessible et de proximité dans le canton de Fribourg »; Découvrez la liste complète des personnes candidates aux élections cantonales; Convocation du corps électoral en vue des élections cantonales de cet automne 2026. Feed dedicato della Cancelleria, con item del 05.10.2026 nel periodo. robots.txt www.fr.ch 200, nessun blocco ClaudeBot/anthropic-ai/GPTBot e nessun divieto di accesso automatizzato rilevato nei termini pubblici."
+        },
+        {
+          "url": "https://www.unifr.ch/news/de/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Universität Freiburg / Université de Fribourg",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "eventi",
+            "lavoro"
+          ],
+          "quirks": {
+            "crawlDelaySeconds": 1,
+            "articlePathPattern": "^/news/de/[0-9]+/"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8, 79.184 byte; lista server-rendered con 1 item/articolo negli ultimi 7 giorni (01.10.2026). Titoli misurati: Die Schweizer Gletscher verlieren weitere fünf Prozent ihres Volumens; Beliebt, praxisnah und zurück in Freiburg; LSD lässt das Gehirn nach dem Trip weiterlernen. Link articolo /news/de/<id>/<slug>. robots.txt 200 con crawl-delay 1 e nessun blocco AI nominato; nessun divieto crawler rilevato nelle informazioni legali pubbliche consultate."
         }
       ],
       "categoryDataSources": {
@@ -1662,6 +1908,39 @@
             "verifiedAt": "2026-10-05",
             "notes": "API WordPress pubblica (nessun login): 20 eventi, tutti aggiunti dal 2026-10-01. Titoli multilingua in `title.rendered`, link per regione (/la-gruyere/, /fribourg/, /schwarzsee/ ...). I feed /feed e /events/feed sono morti (vedi rejected). Contiene date evento solo in meta_box.",
             "dataShape": "agenda"
+          },
+          {
+            "url": "https://www.fr.ch/categories-thematiques/290/rss.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "État de Fribourg – Culture et tourisme",
+            "language": "fr",
+            "kind": "eventi",
+            "topics": [
+              "eventi"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 137 item totali e 0 stretti negli ultimi 7 giorni; ultimo item 29.09.2026. Titoli: L'État de Fribourg renouvelle ses aides pluriannuelles à la production culturelle pour la période 2027-2029; Culture - 1ère séance de la Conférence régionale chargée de préparer la mise sur pied d'Arcia; Aide cantonale en faveur du bilinguisme : appel à projets !. Feed culturale/turistico ufficiale, utile come archivio e agenda tematica a bassa freschezza; date RSS in formato locale. robots www.fr.ch 200 senza blocco AI.",
+            "dataShape": "feed"
+          },
+          {
+            "url": "https://www.fr.ch/directions-services/71401/rss.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Union fribourgeoise du tourisme (UFT)",
+            "language": "fr",
+            "kind": "eventi",
+            "topics": [
+              "eventi",
+              "servizi"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 12 item totali e 0 negli ultimi 7 giorni; ultimo item 12.03.2026. Titoli: Faits marquants et chiffres clés (UFT) 2024; Faits marquants et chiffres clés (UFT) 2023; Faits marquants et chiffres clés (UFT) 2022. Fonte ufficiale turistica lenta, da usare per contesto/evergreen e non per una coda news quotidiana. robots www.fr.ch 200 senza blocco AI.",
+            "dataShape": "feed"
           }
         ],
         "mobilita": [
@@ -1786,7 +2065,76 @@
             "dataShape": "page"
           }
         ],
-        "servizi": []
+        "servizi": [
+          {
+            "url": "https://www.fr.ch/directions-services/71396/rss.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Promotion économique du canton de Fribourg (PromFR)",
+            "language": "fr",
+            "kind": "economia",
+            "topics": [
+              "lavoro",
+              "servizi"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 50 item totali e 0 negli ultimi 7 giorni; ultimo item 24.09.2026. Titoli: L’esprit start-up souffle sur l’économie fribourgeoise; The Startup Mindset : ce que les start-ups nous apprennent; Prix IFF 2026–2027 : les candidatures sont ouvertes. Feed ufficiale per economia, impresa e lavoro; bassa cadenza recente. robots www.fr.ch 200 senza blocco AI.",
+            "dataShape": "feed"
+          },
+          {
+            "url": "https://www.fr.ch/directions-services/147/rss.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Service de la santé publique FR",
+            "language": "fr",
+            "kind": "servizi",
+            "topics": [
+              "servizi"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 50 item totali e 0 negli ultimi 7 giorni; ultimo item 23.09.2026. Titoli: Bouger, découvrir, partager : un après-midi pour les 60+; Tout sur la santé mentale; Hygiène et salubrité. Feed ufficiale sanitario, utile per il servizio ma non fresco nella finestra misurata. robots www.fr.ch 200 senza blocco AI.",
+            "dataShape": "feed"
+          },
+          {
+            "url": "https://www.fr.ch/directions-services/156/rss.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Fribourg pour tous",
+            "language": "fr",
+            "kind": "servizi",
+            "topics": [
+              "servizi",
+              "fisco"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 16 item totali e 0 negli ultimi 7 giorni; ultimo item 07.09.2026. Titoli: Primes d’assurance-maladie 2027 : comment économiser ?; Primes d’assurance-maladie 2027 : comment économiser ?; Vidéo de présentation. Feed ufficiale di orientamento sociale, salute e assicurazione; utile come servizio evergreen. robots www.fr.ch 200 senza blocco AI.",
+            "dataShape": "feed"
+          },
+          {
+            "url": "https://www.fr.ch/categories-thematiques/376/rss.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Université de Fribourg / Hautes écoles",
+            "language": "fr",
+            "kind": "istituzionale",
+            "topics": [
+              "servizi",
+              "lavoro",
+              "eventi"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 56 item totali e 0 negli ultimi 7 giorni; ultimo item 03.06.2026. Titoli: Faculté des sciences de l’éducation et de la formation à l’Université de Fribourg : retour sur un modèle unique en Suisse; Renouvellement de l'accréditation de la HES-SO; Formation des enseignant-e-s : une nouvelle faculté pour l’Université de Fribourg. Feed tematico ufficiale per università/formazione; archivio lento, date RSS localizzate. robots www.fr.ch 200 senza blocco AI.",
+            "dataShape": "feed"
+          }
+        ]
       },
       "ownerDecisionPending": [
         {
@@ -2176,6 +2524,80 @@
           "verifiedAt": "2026-10-05",
           "reserve": true,
           "notes": "Agglomerazione francese alle porte di Ginevra (tram/bus, siccità, eventi); ~6 link articolo, volume basso."
+        },
+        {
+          "url": "https://www.unige.ch/actualites/rss",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Université de Genève - actualités",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "lavoro",
+            "eventi"
+          ],
+          "quirks": {},
+          "items7d": 6,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml;charset=UTF-8. Items ultimi 7 giorni: 6. Titoli osservati: \"Dies academicus\"; \"Le programme de logement intergénérationnel 1h/m2 fête ses dix ans\"; \"IA et premier emploi - Table ronde jeudi 8 octobre\". Feed RSS con 15 item; 6 pubblicati dal 29 settembre (ricerca, campus, lavoro e vita locale). Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.unige.ch/cookies/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.  URL richiesto https://www.unige.ch/feed/rss reindirizza al canonico."
+        },
+        {
+          "url": "https://www.unige.ch/medias/rss/presse",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Université de Genève - communiqués de presse",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "lavoro",
+            "eventi"
+          ],
+          "quirks": {},
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml; charset=UTF-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Un phare cosmique détecté aux confins de l’Univers\"; \"Comment l’horloge biologique rythme les phases de l’éveil\"; \"L’hérédité n’est pas qu’une question d’ADN\". Feed RSS stampa con 20 item datati; 2 negli ultimi 7 giorni, utile per scienza, salute, innovazione e formazione. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.unige.ch/cookies/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.  URL richiesto https://www.unige.ch/feed/presse/rss reindirizza al canonico."
+        },
+        {
+          "url": "https://home.cern/feed/",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "CERN - official news",
+          "language": "en",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "lavoro",
+            "mobilita",
+            "eventi"
+          ],
+          "quirks": {
+            "maxRequestsPerRun": 1
+          },
+          "items7d": 10,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type application/rss+xml; charset=UTF-8. Items ultimi 7 giorni: 10. Titoli osservati: \"Operational Circular No. 12 and Administrative Circular No. 34\"; \"Want to develop your skills?\"; \"CERN entrepreneurship highlighted in global innovation report\". Feed RSS ufficiale CERN con 10 item tutti datati nella finestra; rilevanza locale filtrabile per personale, campus, lavoro e mobilità transfrontaliera a Meyrin. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://home.cern/privacy/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
+        },
+        {
+          "url": "https://www.hesge.ch/actualites",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "HES-SO Genève",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "lavoro",
+            "servizi",
+            "eventi",
+            "economia"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/actualites/[^/?]+$"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 2. Titoli osservati: \"La HES-SO Genève s’engage pour la santé mentale de sa communauté !\"; \"Tester, jouer, applaudir : Pulse célèbre la Team #12\"; \"14 nouveaux projets font leur rentrée chez Pulse\". Elenco HTML server-rendered; 2 card con data negli ultimi 7 giorni. articlePathPattern limita a /actualites/<slug>. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.hesge.ch/mentions-legales -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
@@ -2554,6 +2976,26 @@
           "items7d": null,
           "verifiedAt": "2026-10-05",
           "notes": "10 comunicati redazionali /zeitung/publizierte-news/<id>-<slug>, senza date nella lista (id 3527-3536). Nessun feed (404). Fonte secondaria, contenuti molto locali (societa', sport, eventi)."
+        },
+        {
+          "url": "https://glkb.ch/die-glkb/medien",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Glarner Kantonalbank",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "economia",
+            "servizi",
+            "pensioni",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/die-glkb/medien/(?:mitteilungen|stories)/[^/?]+$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo comunicato 18.09.2026; campioni: «Proto Chemicals gewinnt den 5. Glarner Nachhaltigkeitspreis», «Ad-hoc Glarner Kantonalbank mit erfolgreichem 1. Halbjahr 2026», «Glarner Kantonalbank zahlt Tier-2-Anleihe zurück». robots.txt 200, target consentito, nessun blocco AI/ai-input=no; privacy e informazioni pubbliche consultate. Fonte economica lenta ma specifica del cantone."
         }
       ],
       "categoryDataSources": {
@@ -2891,6 +3333,44 @@
           "items7d": 28,
           "verifiedAt": "2026-10-05",
           "notes": "Liechtenstein (confine con GR: Grenzgänger GR→FL, vedi anche comunicato STV su Säule 3a). 28 link /liechtenstein/<sezione>/<slug>-art-<id>, senza date in lista (stimato). /rss e /rss.xml = 404. volksblatt.li non raggiungibile."
+        },
+        {
+          "url": "https://www.gr.ch/DE/institutionen/verwaltung/dvs/awt/statistik/news/Seiten/Aktuell.aspx",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Kanton Graubünden - Statistik-News",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "lavoro",
+            "eventi"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/DE/institutionen/verwaltung/dvs/awt/statistik/news/Seiten/[^/?]+\\.aspx$"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 1. Titoli osservati: \"Beherbergungsstatistik: provisorische Monatsdaten August 2026\"; \"Beherbergungsstatistik: provisorische Monatsdaten Juli 2026\"; \"Beherbergungsstatistik: provisorische Monatsdaten August und Rückblick auf die Sommerhochsaison 2023\". Pagina HTML consentita, non sotto /_layouts/: 1 item del 05.10.2026. articlePathPattern /statistik/news/Seiten/<slug>.aspx; sostituisce il sottoinsieme statistico del feed vietato. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.gr.ch/de/Seiten/Impressum.aspx -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
+        },
+        {
+          "url": "https://www.gr.ch/DE/institutionen/verwaltung/diem/awn/aktuelles/Seiten/default.aspx",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Kanton Graubünden - Amt für Wald und Naturgefahren",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/DE/institutionen/verwaltung/diem/awn/aktuelles/"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Absolutes Feuerverbot bleibt in Teilen Graubündens bestehen\"; \"Gemeinde Poschiavo, Walderschliessung Urezza / Ampliamento strade forestali Urezza\"; \"Wald-Wild-Bericht Surselva – Zwischenbericht\". Pagina HTML consentita: 2 card del 01/05.10.2026. Copre divieti incendio, pericoli naturali e lavori/strade forestali. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.gr.ch/de/Seiten/Impressum.aspx -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
@@ -3020,7 +3500,48 @@
             "dataShape": "page"
           }
         ],
-        "servizi": []
+        "servizi": [
+          {
+            "url": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/afm/aktuelles/Seiten/Aktuell.aspx",
+            "format": "html",
+            "parser": "html-links",
+            "publisher": "Kanton Graubünden - Amt für Migration und Zivilrecht",
+            "language": "de",
+            "kind": "servizi",
+            "topics": [
+              "servizi",
+              "frontalieri",
+              "lavoro"
+            ],
+            "quirks": {
+              "articlePathPattern": "^/DE/institutionen/verwaltung/djsg/afm/aktuelles/"
+            },
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 0. Titoli osservati: \"Umstellung von weiteren Bewilligungen auf Kreditkartenformat verschoben\"; \"Umstellung der B-Bewilligungen auf Kreditkartenformat\"; \"Neue Ausländerausweise für EU-/EFTA-Bürger\". Pagina HTML consentita alternativa al feed /_layouts/: ultimo item 08.05.2026, 0 negli ultimi 7 giorni; fonte evergreen per permessi, migrazione e frontalieri. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.gr.ch/de/Seiten/Impressum.aspx -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
+            "reserve": true,
+            "dataShape": "page"
+          },
+          {
+            "url": "https://www.gr.ch/DE/institutionen/verwaltung/djsg/ga/fgf/aktuelles/Seiten/default.aspx",
+            "format": "html",
+            "parser": "html-links",
+            "publisher": "Kanton Graubünden - Gesundheitsamt, Gesundheitsförderung und Prävention",
+            "language": "de",
+            "kind": "servizi",
+            "topics": [
+              "servizi",
+              "eventi"
+            ],
+            "quirks": {
+              "articlePathPattern": "^/DE/institutionen/verwaltung/djsg/ga/fgf/aktuelles/Seiten/[^/?]+\\.aspx$"
+            },
+            "items7d": 1,
+            "verifiedAt": "2026-10-06",
+            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 1. Titoli osservati: \"Webinar «Hirnentwicklung & Digitale Medien» mit Dr. Barbara Studer am 10.11.2026\"; \"nicotinefree.ch: Wissen und Werkzeuge für Bezugspersonen von Jugendlichen\"; \"Infobus des SRK Graubünden: Beratung vor Ort\". Pagina HTML consentita: 1 item del 05.10.2026 e avvisi salute/servizi regionali. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.gr.ch/de/Seiten/Impressum.aspx -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
+            "dataShape": "page"
+          }
+        ]
       },
       "ownerDecisionPending": [
         {
@@ -3303,6 +3824,25 @@
             "items7d": 2,
             "verifiedAt": "2026-10-05",
             "notes": "Link /InfoTrafic/<slug> server-rendered (2-3 avvisi vivi, date nel testo 'du 05 au 09 octobre'); /Chantiers e /Actualites rispondono 200 con gli stessi link. Copre Franches-Montagnes/Jura bernois. Volume molto basso.",
+            "dataShape": "page"
+          },
+          {
+            "url": "https://www.jura.ch/fr/Autorites/Administration/DEC/SDT/Actualites-Consultations/Actualites-et-consultations-Developpement-territorial.html",
+            "format": "html",
+            "parser": "html-links",
+            "publisher": "Service du développement territorial - Canton du Jura",
+            "language": "fr",
+            "kind": "trasporti",
+            "topics": [
+              "mobilita",
+              "servizi"
+            ],
+            "quirks": {
+              "articlePathPattern": "^/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-\\d{4}/"
+            },
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 0. Titoli osservati: \"Les lignes de bus desservant Ocourt et Damvant maintenues pour les deux prochaines années\"; \"Des nouvelles images aériennes historiques disponibles dans le GéoPortail du Jura\"; \"Programme Bâtiments du Canton du Jura : l’épuisement du crédit disponible\". Pagina HTML di consultazione; 0 item negli ultimi 7 giorni, ultimo comunicato 18.09.2026. Copre orari 2027, bus, GeoPortail e pianificazione. articlePathPattern punta ai comunicati linked. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.jura.ch/fr/Accueil/Conditions-d-utilisation/Conditions-d-utilisation-du-site-Internet-de-la-Republique-et-Canton-du-Jura.html -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
             "dataShape": "page"
           }
         ],
@@ -3601,8 +4141,106 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "HTML: 11 link /YYYY/MM/DD/<slug> datati (ultimo 26.08.2026). Volume molto basso, solo sanita' psichiatrica."
+        },
+        {
+          "url": "https://www.ebikon.ch/news",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Ebikon",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "eventi",
+            "mobilita",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/topics/[^/?]+/[^/?]+/[^/?]+$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Ultimo item misurato 28.09.2026, quindi 0 nella finestra di 7 giorni; campioni: «Sonnige Rekordsaison ohne schweren Unfall», «Neues Elternbildungsangebot für das Rontal: jufa ImPuls», «Für 2027 sind im Kanton Luzern drei Giftsammlungen geplant». robots.txt 200, path consentito, nessun blocco AI/ai-input=no rilevato; pagina pubblica comunale e note legali consultate."
+        },
+        {
+          "url": "https://www.ewl-luzern.ch/medien/medienmitteilungen",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "ewl energie wasser luzern",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "carburanti"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/medien/medienmitteilungen/"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Ultimo item 22.09.2026; campioni: «ewl erneuert Pumpwerk Thorenberg», «ewl hält Gaspreise stabil», «Spannungserhöhung auf der VBL-Fahrleitung». robots.txt 200, target consentito, nessun blocco AI/ai-input=no; Datenschutzerklärung e pagina pubblica consultate. Fonte lenta, non un prezzo alla pompa."
+        },
+        {
+          "url": "https://vif.lu.ch/unsere_dienststelle/medien",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Kanton Luzern – Verkehr und Infrastruktur (VIF)",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "mobilita",
+            "servizi",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/html_mail\\.jsp(?:\\?|$)"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type text/html; charset=utf-8. Un item negli ultimi 7 giorni (05.10.2026): «Lammschlucht: Vollsperrung K 36 mit Umfahrungsbetrieb»; altri titoli d'archivio sono K33/K36 e cantieri cantonali. robots.txt 200: path consentito, nessun blocco AI o ai-input=no; Impressum/Disclaimer consultati senza divieto di accesso automatizzato."
+        },
+        {
+          "url": "https://www.lu.ch/verwaltung/BUWD/Medien",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Kanton Luzern – Bau, Umwelt und Wirtschaft (BUWD)",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "mobilita",
+            "eventi",
+            "servizi",
+            "lavoro",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/html_mail\\.jsp(?:\\?|$)"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Un item nella finestra 29.09–06.10.2026: «Kostenloses Online-Tool unterstützt Luzerner Gastronomiebetriebe bei nachhaltigen Menüentscheidungen»; campioni successivi: «Stimmberechtigte sagen Ja zu allen kantonalen Vorlagen», «Weinprämierung 2026: Die Siegerweine aus der Zentralschweiz stehen fest». robots.txt 200 e path consentito; nessuna direttiva AI/ai-input=no rilevata; note legali pubbliche consultate."
+        },
+        {
+          "url": "https://www.lu.ch/verwaltung/FD/Medien",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Kanton Luzern – Finanzdepartement",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "fisco",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/html_mail\\.jsp(?:\\?|$)"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo item 25.09.2026; campioni: «Wechsel an der Spitze der Dienststelle Personal: Roland Haas tritt als Personalleiter zurück», «Marianischer Saal ab Mitte Oktober wieder für bis zu 200 Personen geöffnet», «Hochrechnung II/2026: Ertragsüberschuss von 423,5 Millionen Franken». robots.txt 200 e path consentito, nessun blocco AI/ai-input=no; contatti e Disclaimer pubblici consultati."
         }
-      ],
+        ],
       "categoryDataSources": {
         "carburanti": [],
         "eventi": [
@@ -4118,6 +4756,26 @@
           "items7d": 2,
           "verifiedAt": "2026-10-05",
           "notes": "Comune di Morteau (capoluogo dei frontalieri del Doubs): 10 item, 2 negli ultimi 7 giorni. Il sito pubblica anche una brochure frontalieri (https://www.morteau.org/wp-content/uploads/2024/04/Brochure_Frontaliers_MAJ-11-04-2024.pdf)."
+        },
+        {
+          "url": "https://www.he-arc.ch/he-arc/actualites/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Haute École Arc - actualités",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "lavoro",
+            "eventi",
+            "economia"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/actualites/[^/?]+/?$"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 1. Titoli osservati: \"CR'UNCH - Programme Automne 2026\"; \"Le premier HE-ARCATHON a révélé des projets pour la santé de demain\"; \"85 titres en formation continue « Grand Public » décernés à la HEG Arc\". Lista HTML con 1 item del 30.09.2026; articlePathPattern /actualites/<slug>/. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.he-arc.ch/he-arc/mentions-legales/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
@@ -4441,6 +5099,46 @@
           "items7d": null,
           "verifiedAt": "2026-10-05",
           "notes": "HTML server-rendered: 10 link /portraet/neuigkeiten/details.html/19/news/<id> (items7d non misurabile: date solo nel dettaglio). Segnala la chiusura Zentralbahn Stansstad-Engelberg fino al 1.11.2026: unica fonte trovata sui cantieri ferroviari NW. Mescola offerte di lavoro."
+        },
+        {
+          "url": "https://www.unterwalden24.ch/feed/",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Unterwalden24 – Regionalportal Ob-/Nidwalden",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "eventi",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "maxRequestsPerRun": 1
+          },
+          "items7d": 5,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 12 item totali. Cinque item NW nella finestra: «Die legendäre Schmiedgasse von Stans», «Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden», «Vom Stall bis ins Chäs-Chessi: ... Nidwalden», «Odermatt, Gisin & Co.: So kämpfen sich Unterwaldens Ski-Asse ...» e «Keine Survival-Camp-Welle in Nidwalden». robots.txt nomina AI ma Allow: / e /feed/; solo /admin/ e /api/ vietati; AGB/Impressum consultati."
+        },
+        {
+          "url": "https://www.nidwalden.com/de/ueber-uns/medien",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Nidwalden Tourismus",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "eventi",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/de/ueber-uns/medien/medienmitteilung-detail"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultima media release 30.04.2026; campioni: «GV von Nidwalden Tourismus in der Sagi Dallenwil», «Ein kräftiger Juiz für die Region». 0 item negli ultimi 7 giorni, ma pagina e link dettaglio sono crawlable. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum/AGB consultati."
         }
       ],
       "categoryDataSources": {
@@ -4556,6 +5254,7 @@
       "cadenceHours": 12,
       "dailyBudget": 1,
       "cronMinute": 14,
+      "notes": "R2 del 2026-10-06: dopo la riverifica live il flusso resta sotto 5 item/settimana; cadenceHours e dailyBudget restano invariati.",
       "frontalieriContext": "Obvaldo e' un cantone interno senza confine nazionale (Svizzera centrale, ~38k abitanti): non esistono flussi di frontalieri significativi ne' valichi doganali ne' fonti lato estero pertinenti. Il pubblico e' fatto da residenti e lavoratori stranieri/permessi in Svizzera centrale (turismo a Engelberg, industria metalmeccanica, sanita'); i temi frontalieri vanno trattati in chiave nazionale (AVS, imposta alla fonte, LAMal). Nessuna fonte lato estero e' stata cercata per questo motivo.",
       "newsSources": [
         {
@@ -4570,6 +5269,69 @@
           "items7d": 3,
           "verifiedAt": "2026-10-05",
           "notes": "Elenco ufficiale comunicati/novita' del Cantone (Regierungsrat, Departemente, Aemter, Polizia, Vernehmlassungen). ATTENZIONE: la tabella e' riempita via JS ma i dati sono gia' nell'HTML come JSON con entita' (name = <a href=/_rte/information/138766>titolo</a>, datum dd.mm.yyyy, _kategorieId news|politik_info|vernehmlassung|mitteilungenaemter|mitteilungendepartemente): zero tag <a> reali, quindi l'estrattore HTML standard NON li vede; serve un parser dedicato (URL articolo = https://www.ow.ch/_rte/information/<id>, pagina dettaglio 200). Volume basso: ~3 negli ultimi 7 giorni, ~31 in 30. robots.txt vuoto. Nessun RSS (/rss e /medienmitteilungen 404)."
+        },
+        {
+          "url": "https://www.unterwalden24.ch/feed/",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Unterwalden24 – Regionalportal Ob-/Nidwalden",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "eventi",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "maxRequestsPerRun": 1
+          },
+          "items7d": 4,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 12 item nel feed. Quattro item OW nella finestra 29.09–06.10: «Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden», «Eiffelturm, Burj Khalifa – und jetzt Engelberg», «Zwischen Weltcup und Bauernhof: Janik Riebli aus Giswil» e «Odermatt, Gisin & Co.: So kämpfen sich Unterwaldens Ski-Asse in den Winter»; il feed è condiviso e va filtrato per OW/NW. robots.txt nomina gli user-agent AI ma consente esplicitamente / e /feed/ (vieta solo /admin/ e /api/); AGB/Impressum consultati senza divieto di raccolta."
+        },
+        {
+          "url": "https://www.engelberg.ch/entertainment-blog/engelberger-blog/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Engelberg-Titlis Tourismus – Engelberger Blog",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "eventi",
+            "servizi",
+            "mobilita",
+            "cronaca"
+          ],
+          "quirks": {
+            "datesInList": false,
+            "articlePathPattern": "^/(?:entertainment-blog/engelberger-blog|engelberger-blog/blogs)/[^/?]+/?$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Pagina HTML con link a storie («4 Jahreszeiten», «Gee Athertons grösste Challenge», «Alpabzug») ma senza date di pubblicazione esposte; 0 item databili negli ultimi 7 giorni. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; AGB/Impressum pubblici consultati."
+        },
+        {
+          "url": "https://obwaldenticker.ch/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "obwaldenticker.ch / belmedia",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "servizi",
+            "mobilita",
+            "eventi"
+          ],
+          "quirks": {
+            "datesInList": false,
+            "articlePathPattern": "^/20\\d{2}/\\d{2}/\\d{2}/[^/?]+/?$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Portale regionale con link HTML ma ultimo contenuto datato 04.09.2026; campioni: «30 Jahre RAV: ...», «Neue Plattform macht rund 60 Kleinseilbahnen in Uri und Nidwalden sichtbar», «Wanderungen/Naturangebote im Regionalraum». 0 item negli ultimi 7 giorni; robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum consultato."
         }
       ],
       "categoryDataSources": {
@@ -4924,6 +5686,47 @@
           "items7d": 28,
           "verifiedAt": "2026-10-05",
           "notes": "Nessun RSS/sitemap (404). 28 link /liechtenstein/<sezione>/<slug>-art-<id> sulla home di sezione; molti anchor senza testo (titolo da slug). Sezione economia: https://www.vaterland.li/liechtenstein/wirtschaft/ (200). robots: solo URL con parametri esclusi."
+        },
+        {
+          "url": "https://www.stadtwil.ch/news/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Stadt Wil",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "fisco",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/news/"
+          },
+          "items7d": 3,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Tre item nella finestra: «Erfolgreicher Informationsanlass rund ums Älterwerden» (05.10.2026), «Stadt Wil sucht neue Leitung Kommunikation» e «Mitteilungen der Baukommission» (30.09). Campioni ulteriori: «Mitteilungen des Stadtrats» (28.09), «Stimmbarometer» (23.09). robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagine legali pubbliche consultate."
+        },
+        {
+          "url": "https://www.unisg.ch/de/newsroom/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Universität St.Gallen (HSG) – Newsroom",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "economia",
+            "lavoro",
+            "servizi",
+            "eventi"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/de/newsroom/"
+          },
+          "items7d": 4,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Quattro item datati nella finestra: «Kinder-Uni 2026 – grosse Bühne für junge Superhirne» e «Mehr!»: Wirtschaftshistorisches Buch ...» (06.10), «SQUARE goes Minecraft» e «Malcolm Greens Graduation Groove» (05.10); pagina con link/paginazione HTML. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; privacy/impressum consultati."
         }
       ],
       "categoryDataSources": {
@@ -5265,6 +6068,46 @@
           "items7d": 1,
           "verifiedAt": "2026-10-05",
           "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; 1 negli ultimi 7 giorni, 4 negli ultimi 30 (ultimo 2026-09-29)."
+        },
+        {
+          "url": "https://neuhausen.ch/aktuelles",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Neuhausen am Rheinfall",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/fileupload/[^/?]+\\.pdf$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html (201170 byte). Ultimo item 27.09.2026; campioni: «Abstimmungsresultate vom 27. September 2026», «Gemeinde unterstützt Haus der Begegnung und der Menschlichkeit» (17.09), «Erneuerung Spielplatz Schönegg» (10.09). robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagina legale comunale consultata."
+        },
+        {
+          "url": "https://www.shkb.ch/244-news-medienmitteilungen",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Schaffhauser Kantonalbank",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "economia",
+            "pensioni",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/\\d+-[^/?]+$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo comunicato 17.07.2026; campioni: «Erfreuliches Halbjahresergebnis in herausforderndem Umfeld», «Michael Bührer wird Standortleiter in Stein am Rhein», «18. Immobilien-Event der Schaffhauser Kantonalbank». robots.txt 200, path consentito, nessun blocco AI/ai-input=no; note legali/privacy consultate."
         }
       ],
       "categoryDataSources": {
@@ -5613,6 +6456,29 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Posizioni del padronato SO (budget cantonale, mercato del lavoro, iniziativa 10 milioni)."
+        },
+        {
+          "url": "https://www.soaktuell.ch/blog-feed.xml",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "soaktuell.ch",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "eventi",
+            "fisco",
+            "lavoro",
+            "servizi",
+            "frontalieri"
+          ],
+          "quirks": {
+            "crawlDelaySeconds": 10
+          },
+          "items7d": 13,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type text/xml; charset=UTF-8, 20 item totali e 13 negli ultimi 7 giorni. Titoli: Warum eine Bundesrätin Esther Friedli unseren Einkaufstouristen weh tun könnte; Schluss mit Tempo 30 auf Durchfahrtsstrassen in den Dörfern; Glashütten: Schwere Kollision zwischen zwei Motorradfahrern. Feed indipendente regionale: filtrare gli item effettivamente SO, perché copre anche AG. robots.txt 200, Allow / e nessun blocco ClaudeBot/anthropic-ai/GPTBot; crawl-delay 10 dichiarato per dotbot/AhrefsBot. Informazioni legali pubbliche consultate senza divieto crawler rilevato."
         }
       ],
       "categoryDataSources": {
@@ -6041,6 +6907,70 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "10 link /artikel/ con data (ultima 29.6.2026): cadenza mensile. Il vecchio dominio spital-einsiedeln.ch fa redirect qui. Hub servizi."
+        },
+        {
+          "url": "https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Bezirk Einsiedeln",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "fisco",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/verwaltung/mitteilungen/aktuelle-mitteilungen(?:\\?|/).+"
+          },
+          "items7d": 4,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Quattro item nella finestra: «Schweizer Militär - Übung im Raum Egg - Staumauer Sihlsee» (05.10), «Einbürgerungsgesuche» (02.10), «Mitteilung aus dem Bezirksrat» e «Baugesuche» (01.10). robots.txt 200 con path consentito, nessun blocco AI/ai-input=no; privacy e pagine ufficiali consultate."
+        },
+        {
+          "url": "https://www.lachen.ch/aktuells/news.html/34/newsarchive/1",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Lachen",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "fisco"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/aktuells/(?:news\\.html/35|verkehrsbehinderungen\\.html/118)/news/\\d+"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Ultimo item 21.09.2026; campioni: «Gemeinsam für ein sauberes Lachen», «Die Gemeindeverwaltung bleibt am 7. September geschlossen», «Verkehrseinschränkungen + Sperrung Hintere Bahnhofstrasse/Poststrasse». robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum/Disclaimer consultato."
+        },
+        {
+          "url": "https://www.kuessnacht.ch/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Bezirk Küssnacht",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "eventi",
+            "mobilita",
+            "fisco",
+            "cronaca"
+          ],
+          "quirks": {
+            "maxRequestsPerRun": 4,
+            "crawlDelaySeconds": 3,
+            "articlePathPattern": "^/verwaltung/news\\.html/104/news/\\d+/?$"
+          },
+          "items7d": 4,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Quattro item recenti: tre del 01.10 («Ferienpass», «erste Altersmesse», «Bauausschreibungen») e «Chilbi in Küssnacht 2026» del 29.09. Il sito restituisce 429 dopo 4 richieste/10 secondi: rispettare maxRequestsPerRun=4 e ritardo >=3 s. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum consultato."
         }
       ],
       "categoryDataSources": {
@@ -6352,6 +7282,47 @@
           "items7d": 3,
           "verifiedAt": "2026-10-05",
           "notes": "Lato Germania: blog di una consulenza commerciale per Grenzgänger DE→CH (lead generation, tono promozionale): 10 item, 3 in 7 giorni (ultimo 2026-10-02). Tema frontalieri (fisco, previdenza, assicurazione). Usare come segnale di topic, non come fonte primaria."
+        },
+        {
+          "url": "https://www.tkb.ch/ueber-uns/medien-investoren/medienmitteilungen/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Thurgauer Kantonalbank (TKB)",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "economia",
+            "servizi",
+            "eventi",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/ueber-uns/medien-investoren/medienmitteilungen/"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo comunicato 17.09.2026; campioni: «Neue Fassade aus Recyclingmaterial», «TKB mit buntem Programm an der Wega», «Grossartige Stimmung am Sommerfest in Berg». robots.txt 200: GPTBot/OAI-SearchBot/ChatGPT-User/ClaudeBot/PerplexityBot hanno Allow: / e il path è consentito; nessun ai-input=no. Note legali pubbliche consultate."
+        },
+        {
+          "url": "https://www.arbon.ch/stadt/service-und-aktuelles/mitteilungen/medienmitteilungen.html/145",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Stadt Arbon",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "fisco",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/stadt/service-und-aktuelles/mitteilungen/"
+          },
+          "items7d": 3,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Tre item nella finestra: «Bring- und Holtag in Arbon: Weitergeben statt wegwerfen» (06.10), «109 Spenden für den neuen Badesteg» (05.10), «Stadtrat befasst sich mit Einsprachen und Einwendungen zur Altstadtaufwertung» (29.09); item del 28.09 fuori finestra. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagine legali comunali consultate."
         }
       ],
       "categoryDataSources": {
@@ -6801,6 +7772,25 @@
           "items7d": 8,
           "verifiedAt": "2026-10-05",
           "notes": "8 item recenti; unica fonte VCO verificata con feed. Stessa piattaforma di VareseNews."
+        },
+        {
+          "url": "https://www.locarno.ch/it/news",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Città di Locarno - attualità e comunicati",
+          "language": "it",
+          "kind": "istituzionale",
+          "topics": [
+            "mobilita",
+            "servizi",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/files/news/[^/?]+\\.pdf$"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 1. Titoli osservati: \"Comunicato - Senso unico via Rovedo causa opere di scavo\"; \"Comunicato - Chiusura via della Posta e via Ballerini\"; \"Cena di gala 2025 del Corpo civici pompieri di Locarno, arricchita da giubilei e promozioni\". Lista HTML/PDF con 1 comunicato del 30.09.2026; i PDF sono duplicati due volte nella pagina ma rappresentano una sola storia: deduplicare URL. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.locarno.ch/it/impressum -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
@@ -6878,6 +7868,25 @@
             "verifiedAt": "2026-10-05",
             "notes": "Sezione culture/spettacoli: 50 item, 23 negli ultimi 7 giorni; fonte secondaria per l'hub eventi (recensioni e annunci di concerti, mostre, festival). Non in NEWS_SOURCES.",
             "dataShape": "agenda"
+          },
+          {
+            "url": "https://www.locarno.ch/it/eventi",
+            "format": "html",
+            "parser": "html-links",
+            "publisher": "Città di Locarno - agenda eventi",
+            "language": "it",
+            "kind": "eventi",
+            "topics": [
+              "eventi"
+            ],
+            "quirks": {
+              "maxRequestsPerRun": 1,
+              "articlePathPattern": "^/it/eventi/[^/?]+$"
+            },
+            "items7d": 6,
+            "verifiedAt": "2026-10-06",
+            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 6. Titoli osservati: \"Ri-creazione: possiamo cambiare le regole del gioco?\"; \"Castagnata del Quartiere Rusca e Saleggi\"; \"Ascona-Locarno Run 2026\". Agenda HTML con 6 schede dal 07 al 11.10.2026 (eventi futuri nella finestra di 7 giorni, non pubblicazioni news). Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.locarno.ch/it/impressum -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
+            "dataShape": "agenda"
           }
         ],
         "mobilita": [
@@ -6912,7 +7921,25 @@
             "dataShape": "page"
           }
         ],
-        "fisco": [],
+        "fisco": [
+          {
+            "url": "https://www3.ti.ch/xml/rss/rss-attualita-1251.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Divisione delle contribuzioni - Cantone Ticino",
+            "language": "it",
+            "kind": "fisco",
+            "topics": [
+              "fisco",
+              "servizi"
+            ],
+            "quirks": {},
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml. Items ultimi 7 giorni: 0. Titoli osservati: \"Vi informiamo che è stata pubblicata la nuova circolare n. 32 relativa all’imposizione delle partecipazioni di collaboratore\"; \"Modifiche della Legge tributaria entrate in vigore con effetto retroattivo al 1° gennaio 2023\"; \"La Divisione delle contribuzioni comunica che a partire dal 01.01.2023 sono state abolite le Attestazioni vincolanti\". Feed RSS con 10 item, ultimo 18.08.2026: 0 negli ultimi 7 giorni, ma fonte ufficiale per circolari e prassi fiscali. Alcuni link assoluti sono malformati (https://www.ti.chhttps://...): normalizzare prima del fetch. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www4.ti.ch/tich/informazioni-legali/informazioni-legali -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
+            "reserve": true
+          }
+        ],
         "pensioni": [
           {
             "url": "https://www.ipct.ch/Comunicati",
@@ -6932,7 +7959,25 @@
             "dataShape": "page"
           }
         ],
-        "servizi": []
+        "servizi": [
+          {
+            "url": "https://www3.ti.ch/xml/rss/rss-attualita-1359.xml",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Sezione esecuzione e fallimenti - Cantone Ticino",
+            "language": "it",
+            "kind": "servizi",
+            "topics": [
+              "servizi",
+              "fisco"
+            ],
+            "quirks": {},
+            "items7d": 8,
+            "verifiedAt": "2026-10-06",
+            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml. Items ultimi 7 giorni: 8. Titoli osservati: \"Vendita di un diritto\"; \"Vendita all’asta di una pretesa\"; \"Vendita all’asta di 2 appartamenti + parcheggio a Lugano-Castagnola\". Feed RSS con 11 avvisi, 8 dal 29.09 al 06.10.2026; fonte di avvisi ufficiali/aste, non articolo editoriale. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www4.ti.ch/tich/informazioni-legali/informazioni-legali -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
+            "dataShape": "feed"
+          }
+        ]
       },
       "ownerDecisionPending": [
         {
@@ -7118,6 +8163,48 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Link server-rendered /aktuelles/neuigkeiten/<slug> con data testuale 'dd. Monat yyyy'; circa 1 notizia al mese (ultima 15.09.2026), 0 negli ultimi 7 giorni."
+        },
+        {
+          "url": "https://altdorf.ch/aktuelles/neuigkeiten",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Altdorf",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "fisco",
+            "cronaca"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/(?:organisation/politik/gemeindeversammlung/naechste-versammlungen|aktuelles/(?:veranstaltungen|sbb-spartageskarte-gemeinde))/?$"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Due item nella finestra: «Umgang der Wasserversorgung Altdorf mit der Trockenheit» (01.10.2026) e «Abstimmungs- und Wahlsonntag: So hat Altdorf abgestimmt» (27.09.2026); campione ulteriore «Nutzungsplanungsrevision: Altdorf strebt Verdichtung nach innen an» (24.09). robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagine legali comunali consultate."
+        },
+        {
+          "url": "https://www.ukb.ch/ueber-uns/news-und-medien/news-und-medienmitteilungen",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Urner Kantonalbank",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "economia",
+            "servizi",
+            "pensioni",
+            "lavoro"
+          ],
+          "quirks": {
+            "datesInList": false,
+            "articlePathPattern": "^/(?:ukb/)?ueber-uns/news-und-medien/news-und-medienmitteilungen/20\\d{6}(?:\\.html)?$"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html;charset=UTF-8. Elenco news con ultimo comunicato misurato 03.09.2026; campioni: «30 Jahre OK-Präsident: Urner Kantonalbank dankt Pirmin Walker», «Urner Kantonalbank: Weiterhin mit solidem Wachstum im Kerngeschäft», «Fassadenarbeiten an der Geschäftstelle Altdorf». Le date non sono esposte uniformemente nel DOM, perciò 0 conservativo negli ultimi 7 giorni. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; termini/privacy consultati."
         }
       ],
       "categoryDataSources": {
@@ -7309,6 +8396,64 @@
           "items7d": 104,
           "verifiedAt": "2026-10-05",
           "notes": "Portale francese dedicato ai frontalieri verso la Svizzera (Haute-Savoie/Ain/Doubs): fisco, assicurazioni, permessi, 'Hebdo du Frontalier'. Lista server-rendered con date. Nessun RSS (/feed 404). Copertura GE/VD indistinta."
+        },
+        {
+          "url": "https://actu.epfl.ch/feeds/rss/mediacom/fr/",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "EPFL - actu (Mediacom)",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "economia",
+            "lavoro",
+            "servizi",
+            "eventi"
+          ],
+          "quirks": {
+            "maxRequestsPerRun": 1
+          },
+          "items7d": 3,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type application/rss+xml; charset=utf-8. Items ultimi 7 giorni: 3. Titoli osservati: \"«Un superpouvoir, ça s'apprend aussi»\"; \"L'EPFL fête ses 1565 diplômées et diplômés 2026\"; \"Les surprenantes propriétés antivirales des bactéries alpines\". Feed RSS francese con 30 item e 3 negli ultimi 7 giorni; filtrare per Lausanne/VD perché contiene ricerca nazionale e internazionale. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.epfl.ch/about/overview/regulations-and-guidelines/disclaimer/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
+        },
+        {
+          "url": "https://www.chuv.ch/fr/actualites",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "CHUV - actualités",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "eventi",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/fr/actualites/actualite/news_actu_\\d+/"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=utf-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Symposium sur la maladie pulmonaire chez la personne âgée\"; \"Portes ouvertes des laboratoires : infos et inscriptions\"; \"Aurélie Moncorge, nouvelle physiothérapeute cheffe de service\". Pagina HTML server-rendered; 2 articoli del 05.10.2026. articlePathPattern /fr/actualites/actualite/news_actu_<id>/. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.chuv.ch/fr/impressum -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
+        },
+        {
+          "url": "https://www.vevey.ch/actualites?page=0",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Ville de Vevey - actualités",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/actualites/[^/?]+$"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Le Café Littéraire cherche sa nouvelle programmation culturelle\"; \"L'élection complémentaire à la Municipalité aura lieu le 29 novembre\"; \"L'aménagement transitoire de la place Robin distingué par le Flâneur d'Or 2026\". Pagina HTML con 2 articoli datati 01.10 e 29.09.2026; articlePathPattern /actualites/<slug>. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.vevey.ch/sites/default/files/confidentialite.pdf -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
@@ -7728,6 +8873,47 @@
           "items7d": 20,
           "verifiedAt": "2026-10-05",
           "notes": "28 item, 20 recenti; stessa nota di rilevanza di AostaSera."
+        },
+        {
+          "url": "https://www.martigny.ch/fr/bienvenue/actualites-24/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Ville de Martigny - actualités",
+          "language": "fr",
+          "kind": "istituzionale",
+          "topics": [
+            "servizi",
+            "mobilita",
+            "eventi",
+            "cronaca",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/fr/bienvenue/actualites/[^/?]+/?$"
+          },
+          "items7d": 2,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Fusion Martigny–Vernayaz : soutien unanime du Conseil général de Martigny\"; \"Le Stage dating octodurien confirme son succès pour sa 5e édition\"; \"L'Ancien Hôtel Clerc ouvre un nouveau chapitre de son histoire\". Pagina HTML con 2 card del 29.09.2026; articlePathPattern /fr/bienvenue/actualites/<slug>/. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.martigny.ch/fr/mentions-legales-3/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
+        },
+        {
+          "url": "https://www.regionvalaisromand.ch/fr/actualites-11.html",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Centre de développement régional - Région Valais romand",
+          "language": "fr",
+          "kind": "economia",
+          "topics": [
+            "mobilita",
+            "economia",
+            "servizi",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/fr/.+-\\d+\\.html$"
+          },
+          "items7d": 1,
+          "verifiedAt": "2026-10-06",
+          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 1. Titoli osservati: \"Entreprises : et si vous faisiez le point sur la mobilité de vos collaborateurs ?\"; \"200 nouveaux e-bikes pour l'Agglo Valais central\"; \"Comment attirer… et donner envie de rester ?\". Lista HTML con ultimo item 29.09.2026 e 1 item nel giorno-finestra; articlePathPattern /fr/<slug>-<id>.html. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.regionvalaisromand.ch/fr/homepage/mentionslegales-view-1.html -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
@@ -8183,6 +9369,46 @@
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Camera economica cantonale: WP RSS valido, 10 item ma ultimo 31.08.2026 (0 negli ultimi 7gg, ~2-3/mese). Utile per economia/fisco aziendale/eventi business."
+        },
+        {
+          "url": "https://www.zugerkb.ch/die-zugerkb/medien/medienmitteilungen",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Zuger Kantonalbank",
+          "language": "de",
+          "kind": "economia",
+          "topics": [
+            "economia",
+            "servizi",
+            "pensioni",
+            "lavoro"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/die-zugerkb/medien/"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo comunicato 18.09.2026; campioni: «Alexander Hunziker wird neuer Chief Investment Officer der Zuger Kantonalbank», «12'000 Franken für Schule Horbach», «Zuger Kantonalbank erzielt erfreuliches Halbjahresergebnis 2026». robots.txt 200 con path consentito, nessun blocco AI/ai-input=no; Datenschutzerklärung e pagine pubbliche consultate. Fonte lenta, utile per economia/previdenza."
+        },
+        {
+          "url": "https://baarerzytig.ch/c/mitteilungen",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Baarer Zytig",
+          "language": "de",
+          "kind": "media",
+          "topics": [
+            "cronaca",
+            "servizi",
+            "eventi",
+            "mobilita"
+          ],
+          "quirks": {
+            "articlePathPattern": "^/tc/(?:amtliche-mitteilungen|gemeindeversammlung|aus-dem-gemeinderat|wahlen-abstimmungen|offentliche-auflagen|baubewilligungen|schule-musikschule|polizeimeldungen)(?:/|$)"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Ultima edizione 09.09.2026; campioni: «Mitteilungen, Ausgabe 09.09.2026», «Aktionswochen Für es suubers Baar», «Büroschliessung am 4. September». robots.txt 200: nessun Disallow per il path e nessun valore ai-input=no; pagina Nutzung consultata, nessun divieto crawler rilevato. Testata locale indipendente, bassa cadenza."
         }
       ],
       "categoryDataSources": {
@@ -8234,6 +9460,26 @@
             "items7d": 1,
             "verifiedAt": "2026-10-05",
             "notes": "Filtro taxonomy lato server (trovato nel link della pagina Steuerverwaltung): 10 item solo fiscali/finanziari, ultimo 30.09.2026, ~1/7gg ma ~1 al mese in media (volume basso, evergreen utile per hub fisco).",
+            "dataShape": "page"
+          },
+          {
+            "url": "https://kr-geschaefte.zug.ch/gast/geschaefte",
+            "format": "html",
+            "parser": "html-links",
+            "publisher": "Kantonsrat Zug – Geschäftsverzeichnis",
+            "language": "de",
+            "kind": "istituzionale",
+            "topics": [
+              "fisco",
+              "servizi",
+              "lavoro"
+            ],
+            "quirks": {
+              "articlePathPattern": "^/gast/geschaefte/\\d+$"
+            },
+            "items7d": null,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type text/html; circa 272 pratiche selezionabili nel registro parlamentare; non è un feed di news e non si assegna un items7d. robots.txt 200 senza Disallow e senza blocco AI; registro pubblico usato come fonte di atti/fatti per fisco e servizi.",
             "dataShape": "page"
           }
         ],
@@ -8460,6 +9706,26 @@
           "items7d": 3,
           "verifiedAt": "2026-10-05",
           "notes": "10 item, 3 recenti (10-15 giorni di intervallo per item); portale-guida per frontalieri tedeschi: fisco, AHV/pensione, Krankenversicherung. Il body del feed e' pesante (600 KB)."
+        },
+        {
+          "url": "https://www.wetzikon.ch/de/aktuelles/rss.php",
+          "format": "rss",
+          "parser": "rss",
+          "publisher": "Stadt Wetzikon",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": [
+            "cronaca",
+            "mobilita",
+            "servizi",
+            "eventi"
+          ],
+          "quirks": {
+            "crawlDelaySeconds": 1
+          },
+          "items7d": 5,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type text/xml;charset=UTF-8, 10 item totali e 5 negli ultimi 7 giorni. Titoli misurati: Entwicklungsgebiet Binzacher: Stadt und SBB prüfen Varianten gemeinsam; Amtliche Publikation; Bauausschreibung. RSS comunale con avvisi ufficiali, cantieri e mobilita. robots.txt 200: crawl-delay 1 per bingbot, nessuna regola per ClaudeBot/anthropic-ai/GPTBot e path consentito; termini/impressum consultati, nessun divieto di accesso automatizzato rilevato."
         }
       ],
       "categoryDataSources": {
@@ -8479,7 +9745,26 @@
             "dataShape": "page"
           }
         ],
-        "eventi": [],
+        "eventi": [
+          {
+            "url": "https://www.agenda.uzh.ch/rss/agenda_xml.php?d=7",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Universität Zürich – Agenda",
+            "language": "de",
+            "kind": "eventi",
+            "topics": [
+              "eventi"
+            ],
+            "quirks": {
+              "robotsTxt": "absent"
+            },
+            "items7d": 14,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type application/xml, 20 item/eventi nel feed d=7; 14 hanno data compresa nell'intervallo di 7 giorni della misura. Il parametro rappresenta una finestra di eventi futuri, non pubblicazioni recenti. Titoli: Making Order from Disorder: Mutational Analysis as a Tool for Studying Energy Landscape of α-Synuclein self-assembly; Mental Health Awareness Week 2026; International Workshop: Linguistic Features as Text Structuring Devices in Early Chinese Texts. robots.txt del sottodominio 404 senza direttive; impressum/privacy UZH consultati, nessun divieto crawler rilevato.",
+            "dataShape": "agenda"
+          }
+        ],
         "mobilita": [],
         "fisco": [],
         "pensioni": [
@@ -8512,7 +9797,27 @@
             "dataShape": "page"
           }
         ],
-        "servizi": []
+        "servizi": [
+          {
+            "url": "https://www.wetzikon.ch/stadtwerke/aktuelles/rss.php",
+            "format": "rss",
+            "parser": "rss",
+            "publisher": "Stadtwerke Wetzikon",
+            "language": "de",
+            "kind": "servizi",
+            "topics": [
+              "servizi",
+              "mobilita"
+            ],
+            "quirks": {
+              "crawlDelaySeconds": 1
+            },
+            "items7d": 0,
+            "verifiedAt": "2026-10-06",
+            "notes": "GET reale: status 200, content-type text/xml;charset=UTF-8, 15 item totali e 0 negli ultimi 7 giorni; ultimo item 20.08.2026. Titoli: Unsere Energie- und Ressourcenspartipps; Legionellose in Wetzikon: Trinkwasser bleibt sicher; Abschaffung der Gemeindeabgaben ab dem 1.1.2026. Feed lento ma utile per energia, acqua e servizi comunali. robots.txt 200 con crawl-delay 1 per bingbot, nessun blocco AI nominato; termini/impressum consultati senza divieto crawler rilevato.",
+            "dataShape": "feed"
+          }
+        ]
       },
       "ownerDecisionPending": [
         {
