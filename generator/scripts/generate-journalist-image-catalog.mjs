@@ -129,9 +129,17 @@ if (invokedDirectly) {
   // append-only in normal operation, so a sharp drop means a bad rescan, not
   // that half the cover images vanished.
   const existing = readExistingCatalog();
-  if (existing.length > 0 && catalog.length < existing.length / 2) {
+  // The provenance policy deliberately removes historical entries whose file
+  // has no valid reader-facing record. Compare the shrink guard with the
+  // record-bearing subset, not with the old ungoverned catalog size: otherwise
+  // the first policy rollout is indistinguishable from a truncated checkout.
+  const existingRecordBearing = existing.filter((entry) => (
+    typeof entry?.path === 'string' && hasValidBlogImageRecord(PROJECT_ROOT, entry.path)
+  ));
+  if (existingRecordBearing.length > 0 && catalog.length < existingRecordBearing.length / 2) {
     console.error(
-      `::error::rescan would shrink journalist-image-catalog.json from ${existing.length} to ${catalog.length} entries — refusing to write`,
+      `::error::rescan would shrink journalist-image-catalog.json from ${existingRecordBearing.length} governed `
+        + `to ${catalog.length} entries (legacy catalog has ${existing.length}) — refusing to write`,
     );
     process.exit(1);
   }
