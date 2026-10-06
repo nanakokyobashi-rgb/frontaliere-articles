@@ -72,6 +72,11 @@ test('repairLlmJsonArray skips an unmatched array preamble before a balanced arr
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
 });
 
+test('repairLlmJsonArray crosses an unmatched quoted prose preamble', () => {
+  const raw = '{ preambolo "foo "bar" : ["Q"]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), ['Q']);
+});
+
 test('repairLlmJsonArray keeps a response after malformed array preamble punctuation', () => {
   const raw = 'preamble [unbalanced, [{"q":"Q","a":"A"}]';
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
@@ -95,6 +100,18 @@ test('repairLlmJsonArray keeps a valid wrapper after a rejected balanced array',
     validateCandidate: (candidate) => Boolean(candidate?.faqs),
   });
   assert.deepEqual(JSON.parse(repaired), { faqs: [{ q: 'real', a: 'A' }] });
+});
+
+test('repairLlmJsonArray preserves the truncated fallback when a later candidate is rejected', () => {
+  const raw = '[{"q":"truncated"} [{"q":"rejected"}]';
+  const repaired = repairLlmJsonArray(raw, { validateCandidate: () => false });
+  assert.equal(repaired, raw);
+});
+
+test('repairLlmJsonArray does not exhaust the candidate budget on nested arrays', () => {
+  const nested = Array.from({ length: 25 }, () => '{"tags":["nested"]}').join(' ');
+  const raw = `[${nested} prose [{"q":"real","a":"A"}]`;
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
 });
 
 test('la riparazione completa una virgola mancante dopo un oggetto annidato', () => {

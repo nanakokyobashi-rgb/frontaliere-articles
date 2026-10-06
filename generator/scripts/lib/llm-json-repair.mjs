@@ -743,15 +743,18 @@ function hasJsonPrefixSyntax(source, from, to) {
  */
 function isNestedRootCandidate(source, rootStart, candidateStart) {
   const stack = [source[rootStart]];
-  let inString = false;
 
   for (let i = rootStart + 1; i < candidateStart; i++) {
     const ch = source[i];
-    if (ch === '"' && !isEscapedAt(source, i)) {
-      inString = !inString;
+    if (ch === '"') {
+      // Use the same quote disambiguation as `findMatchingClose`. If the
+      // malformed preamble has no recoverable string end, it is prose
+      // context, not evidence that the real later root is nested.
+      const stringEnd = scanStringEnd(source, i, true);
+      if (stringEnd === -1) return false;
+      i = stringEnd - 1;
       continue;
     }
-    if (inString) continue;
 
     if (ch === '{' || ch === '[') {
       stack.push(ch);
@@ -761,7 +764,7 @@ function isNestedRootCandidate(source, rootStart, candidateStart) {
     }
   }
 
-  if (inString || stack.length > 1) return true;
+  if (stack.length > 1) return true;
 
   let previous = candidateStart - 1;
   while (previous > rootStart && /\s/.test(source[previous])) previous--;
@@ -800,7 +803,6 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
     let nextStart = nextRootStart(source, from, laterRootOpeners);
     let examined = 0;
     while (nextStart !== -1 && examined < MAX_LATER_CANDIDATES) {
-      examined++;
       const nextCloseIdx = findMatchingClose(source, nextStart, true);
       if (skipNested && isNestedRootCandidate(source, start, nextStart)) {
         const nextFrom = nextCloseIdx === -1 ? nextStart + 1 : nextCloseIdx + 1;
@@ -812,6 +814,7 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
         nextStart = nextRootStart(source, nextStart + 1, laterRootOpeners);
         continue;
       }
+      examined++;
       addCandidate(nextStart, nextCloseIdx, true);
       nextStart = nextRootStart(source, nextCloseIdx + 1, laterRootOpeners);
     }
@@ -824,14 +827,14 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
     // real FAQ array. Keep the historical truncated fallback for retry/error
     // diagnostics, but inspect later roots so a balanced preferred array is
     // not hidden by that unmatched opener (including an unmatched array).
-    if (preferredRoot) {
-      collectLaterBalancedCandidates(start + 1, { skipUnbalanced: true, skipNested: true });
-    }
-    // Keep the historical truncated-payload fallback: callers can still
-    // retry with a larger token budget.
+    // Keep it first: if every later candidate fails validation, the fallback
+    // path must still return the original truncated payload.
     const closer = opener === '[' ? ']' : '}';
     const end = source.lastIndexOf(closer);
     addCandidate(start, end > start ? end : source.length - 1, false);
+    if (preferredRoot) {
+      collectLaterBalancedCandidates(start + 1, { skipUnbalanced: true, skipNested: true });
+    }
   }
 
   // A later root can be the real response after an example in a prose
