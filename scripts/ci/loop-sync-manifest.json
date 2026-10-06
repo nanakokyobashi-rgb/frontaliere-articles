@@ -3312,7 +3312,7 @@
       "baseline": {
         "site": "a4e70e5bedf3dbf3",
         "corpus": "a4e70e5bedf3dbf3",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3411,9 +3411,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "d4204d47925bc6ec",
-        "corpus": "d4204d47925bc6ec",
-        "alignedAt": "2026-10-07"
+        "site": "642ce32dbd0422f3",
+        "corpus": "642ce32dbd0422f3",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3477,7 +3477,7 @@
       "baseline": {
         "site": "f1652b861b452480",
         "corpus": "f1652b861b452480",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3509,7 +3509,7 @@
       "baseline": {
         "site": "28740c7dfd69dbe6",
         "corpus": "28740c7dfd69dbe6",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3651,7 +3651,7 @@
       "baseline": {
         "site": "77084b29001782fc",
         "corpus": "77084b29001782fc",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       },
       "couplingSnapshot": [
         {
