@@ -2851,7 +2851,7 @@
       "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito. Lotto 2 issue #6369: portate nel gemello adattato le due correzioni di valerielinc-ops/frontaliere-si-o-no#11771 (preambolo con `{` non bilanciata e selezione di root array evitando un array annidato); riallineata la baseline ai blob verificati senza rendere i percorsi generator node:test identici al sito.",
       "baseline": {
         "site": "dfad523d048204f2",
-        "corpus": "59a3f933c6727fa0",
+        "corpus": "189e4e2df1f618c7",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T02:04:36.000Z"
       }
