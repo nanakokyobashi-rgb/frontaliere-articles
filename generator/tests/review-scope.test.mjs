@@ -10,6 +10,7 @@ import {
   importantFindings,
   mergeFollowupItems,
   normalizePath,
+  renderStaleBodyFindingComment,
 } from '../../scripts/ci/review-scope.mjs';
 import {
   citedTokens,
@@ -129,33 +130,57 @@ test('basename ambiguo resta non risolvibile e quindi bloccante', () => {
   assert.equal(result.blocking, true);
 });
 
-test('un finding BODY-only espone un terminale deterministico distinto dal fuori diff', () => {
-  const prBody = [
+test('un finding BODY-only supera solo quando la citazione non è più nel body', () => {
+  const quote = 'serve la finestra reale';
+  const finding = [
+    '`PR body:L5`: 🔴 Important: la voce non è un difetto di codice.',
+    `Body citation: ${JSON.stringify(quote)}`,
+  ].join('\n');
+  const currentBody = [
     '## Implementato',
     '- Fix applicato.',
     '',
     '## Non implementato (ancora)',
     '- Decisione esterna: `per scelta`. **Motivo:** serve la finestra reale. **Prossimo passo:** verificare dopo il deploy.',
   ].join('\n');
-  const bodyOnly = classifyImportantFindings(
-    '`PR body:L5`: 🔴 Important: la voce non e\' un difetto di codice.',
+  const stale = classifyImportantFindings(
+    finding,
     ['scripts/ci/review-scope.mjs'],
     ['scripts/ci/review-scope.mjs'],
-    { bodyContractPassed: true, prBody },
+    { bodyContractPassed: true, prBody: currentBody.replace('serve la finestra reale', 'serve la finestra') },
   );
-  assert.equal(bodyOnly.bodyDeclassified.length, 1);
-  assert.equal(bodyOnly.bodyOnly, true);
-  assert.equal(bodyOnly.outside.length, 0);
-  assert.equal(bodyOnly.blocking, false);
+  assert.equal(stale.staleBodyDeclassified.length, 1);
+  assert.equal(stale.bodyOnly, true);
+  assert.equal(stale.outside.length, 0);
+  assert.equal(stale.blocking, false);
+  assert.match(renderStaleBodyFindingComment(stale.staleBodyDeclassified[0], 'a'.repeat(40)), /Finding superato/);
+
+  const present = classifyImportantFindings(
+    finding,
+    ['scripts/ci/review-scope.mjs'],
+    ['scripts/ci/review-scope.mjs'],
+    { bodyContractPassed: true, prBody: currentBody },
+  );
+  assert.equal(present.staleBodyDeclassified.length, 0);
+  assert.equal(present.blocking, true);
+
+  const missing = classifyImportantFindings(
+    '`PR body:L5`: 🔴 Important: la voce non è un difetto di codice.',
+    ['scripts/ci/review-scope.mjs'],
+    ['scripts/ci/review-scope.mjs'],
+    { bodyContractPassed: true, prBody: currentBody },
+  );
+  assert.equal(missing.staleBodyDeclassified.length, 0);
+  assert.equal(missing.blocking, true);
 
   const mixed = classifyImportantFindings(
     [
-      '`PR body:L5`: 🔴 Important: la voce non e\' un difetto di codice.',
-      '`scripts/ci/review-scope.mjs:1`: 🔴 Important: il codice e\' rotto.',
+      finding,
+      '`scripts/ci/review-scope.mjs:1`: 🔴 Important: il codice è rotto.',
     ].join('\n'),
     ['scripts/ci/review-scope.mjs'],
     ['scripts/ci/review-scope.mjs'],
-    { bodyContractPassed: true, prBody },
+    { bodyContractPassed: true, prBody: currentBody.replace('serve la finestra reale', 'serve la finestra') },
   );
   assert.equal(mixed.bodyOnly, false, 'un finding di codice impedisce il terminale BODY-only');
   assert.equal(mixed.blocking, true);

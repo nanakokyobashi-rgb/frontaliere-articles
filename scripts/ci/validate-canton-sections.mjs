@@ -31,7 +31,8 @@
  *   6. `cronMinute` intero 0-59, unico fra i cantoni e diverso dai minuti di
  *      `generate-article.yml` (letti dal workflow: frontaliere/svizzera);
  *   7. enum validi (format, parser, kind, language, topics, categorie,
- *      dataShape, quirks) e `dailyBudget` conforme alla tabella D19;
+ *      dataShape, quirks — un quirk legato a un parser solo su quel parser) e
+ *      `dailyBudget` conforme alla tabella D19;
  *   8. un cantone `enabled` ha almeno una fonte news.
  *
  * Uso:  node scripts/ci/validate-canton-sections.mjs   (exit 1 se ci sono violazioni)
@@ -82,7 +83,31 @@ const QUIRKS = {
   robotsTxt: (v) => ['absent', 'unreachable'].includes(v),
   contentSignal: (v) => typeof v === 'string' && !/ai-input\s*=\s*no/i.test(v),
   trainingCrawlersBlocked: (v) => Array.isArray(v) && v.length > 0 && v.every((x) => typeof x === 'string'),
+  // P5b. Regex su path + query dei link-articolo di una pagina `html-links`:
+  // ancorata al path (`^/`), cosi' non puo' degradare a «contiene», e
+  // compilabile, perche' lo scanner la compila a ogni run.
+  articlePathPattern: isPathRegex,
+  // P5b. La fonte riemette lo stesso URL con notizie diverse: l'identita'
+  // dell'item e' URL + titolo (vedi generator/scripts/lib/source-url-ledger.mjs).
+  // `true` = ovunque; una regex sul path = solo li' (i «Ticker» di Tamedia).
+  urlReusedForDifferentStories: (v) => v === true || isPathRegex(v),
 };
+
+/** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
+const QUIRK_PARSERS = {
+  articlePathPattern: new Set(['html-links']),
+  urlReusedForDifferentStories: new Set(['rss', 'atom', 'news-sitemap', 'sitemap', 'weekly-sitemap']),
+};
+
+function isPathRegex(source) {
+  if (typeof source !== 'string' || !source.startsWith('^/')) return false;
+  try {
+    new RegExp(source);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -237,6 +262,7 @@ export function validateCantonSections(doc, ctx) {
       else for (const [k, v] of Object.entries(s.quirks)) {
         if (!QUIRKS[k]) err(where, `${lbl}: quirk sconosciuto "${k}"`);
         else if (!QUIRKS[k](v)) err(where, `${lbl}: quirk ${k}=${JSON.stringify(v)} non valido`);
+        else if (QUIRK_PARSERS[k] && !QUIRK_PARSERS[k].has(s.parser)) err(where, `${lbl}: quirk ${k} non si applica al parser "${s.parser}"`);
       }
       if (!(s.items7d === null || (Number.isInteger(s.items7d) && s.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
       if (!DATE_RE.test(s.verifiedAt || '')) err(where, `${lbl}: verifiedAt non YYYY-MM-DD`);

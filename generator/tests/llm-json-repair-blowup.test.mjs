@@ -51,11 +51,73 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MOD = path.resolve(HERE, '../scripts/lib/llm-json-repair.mjs');
-const { fixJsonStringBody, findMatchingClose, repairLlmJson } = await import(MOD);
+const { fixJsonStringBody, findMatchingClose, repairLlmJson, repairLlmJsonArray } = await import(MOD);
 
 /** La forma esatta che fa esplodere la ricorsione: catena di coppie
  *  chiave/valore con virgolette non escapate, dentro un valore di prosa. */
 const pseudoJsonInProse = (n) => `{"body1":"${'"chiave": "valore", '.repeat(n)}fine"}`;
+
+test('repairLlmJsonArray prefers a later direct array over an object preamble', () => {
+  const raw = 'meta {"note":"x"} [{"q":"Q","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
+});
+
+test('repairLlmJsonArray skips an unmatched object preamble before a balanced array', () => {
+  const raw = 'preamble {unbalanced [{"q":"Q","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
+});
+
+test('repairLlmJsonArray skips an unmatched array preamble before a balanced array', () => {
+  const raw = 'preamble [unbalanced [{"q":"Q","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
+});
+
+test('repairLlmJsonArray keeps a wrapper after an unmatched preferred root', () => {
+  const raw = 'preamble [unbalanced {"faq":[{"q":"Q","a":"A"}]}';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { faq: [{ q: 'Q', a: 'A' }] });
+});
+
+test('repairLlmJsonArray ignores an array inside a recoverable quoted preamble', () => {
+  const raw = '{ "preamble [inside]" ] ["real"]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), ['real']);
+});
+
+test('repairLlmJsonArray keeps a response after malformed array preamble punctuation', () => {
+  const raw = 'preamble [unbalanced, [{"q":"Q","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
+});
+
+test('repairLlmJsonArray does not promote a nested array inside an unterminated root', () => {
+  const raw = '[{"q":"Q","tags":["a"]}';
+  const repaired = repairLlmJsonArray(raw);
+  assert.notEqual(repaired, '["a"]');
+  assert.match(repaired, /"q"/);
+});
+
+test('repairLlmJsonArray keeps a wrapper when a trailing array is an example', () => {
+  const raw = '{"faqs":[{"q":"real","a":"A"}]} Example: [{"q":"example","a":"B"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { faqs: [{ q: 'real', a: 'A' }] });
+});
+
+test('repairLlmJsonArray keeps a valid wrapper after a rejected balanced array', () => {
+  const raw = 'Example: [{"q":"example","a":"B"}] {"faqs":[{"q":"real","a":"A"}]}';
+  const repaired = repairLlmJsonArray(raw, {
+    validateCandidate: (candidate) => Boolean(candidate?.faqs),
+  });
+  assert.deepEqual(JSON.parse(repaired), { faqs: [{ q: 'real', a: 'A' }] });
+});
+
+test('repairLlmJsonArray preserves the truncated fallback when a later candidate is rejected', () => {
+  const raw = '[{"q":"truncated"} [{"q":"rejected"}]';
+  const repaired = repairLlmJsonArray(raw, { validateCandidate: () => false });
+  assert.equal(repaired, raw);
+});
+
+test('repairLlmJsonArray does not exhaust the candidate budget on nested arrays', () => {
+  const nested = Array.from({ length: 25 }, () => '{"tags":["nested"]}').join(' ');
+  const raw = `[${nested} prose [{"q":"real","a":"A"}]`;
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
 
 test('la riparazione completa una virgola mancante dopo un oggetto annidato', () => {
   const raw = '{"id":"x","imageAlt":{"it":"it","en":"en","de":"de","fr":"fr"}"slugs":{"it":"x","en":"x","de":"de","fr":"fr"},"content":{"it":{"title":"T","body1":"B"}}}';

@@ -69,7 +69,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
-import { ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry } from '../../generator/scripts/lib/source-url-ledger.mjs';
+import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
 export const VIOLATION_MARKER = 'POST_REBASE_UNIQUENESS_VIOLATION';
@@ -220,9 +220,14 @@ export function findPostRebaseViolations({ producedBase, produced, against }) {
       newSourceUrls.push({ section, url, articleId: entry.articleId });
 
       let hit = findCrossSectionSourceDuplicate(url, others, section);
-      // Il ponte verso le voci di forma 1 (path nudo), come in create-article.
+      // Il ponte verso le voci di forma 1 (path nudo), come in create-article
+      // — e come li' NON per una chiave che porta l'identita' di un item
+      // (`#ft-item=…`): il suo path nudo e' un contenitore che la fonte riusa
+      // per notizie diverse, e una voce storica su quel path non e' questa
+      // notizia. Il ponte la segnalerebbe come duplicato cross-sezione e
+      // fermerebbe il push dopo il rebase.
       const legacyKey = legacyNewsUrlKey(url);
-      if (!hit.used && legacyKey !== url) hit = findCrossSectionSourceDuplicate(legacyKey, othersLegacy, section);
+      if (!hit.used && legacyKey !== url && itemIdentityOf(url) === null) hit = findCrossSectionSourceDuplicate(legacyKey, othersLegacy, section);
       if (hit.used) {
         violations.push({
           kind: 'source-url-cross-section',

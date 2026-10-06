@@ -14,7 +14,7 @@
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { normalizeReviewInputRevision, reviewHasInputRevision } from './review-test-policy.mjs';
 import { isManagedReview } from './lib/constants.mjs';
 import { isKnownReviewState } from './lib/review-states.mjs';
@@ -29,6 +29,19 @@ export const REVIEW_CLAIM_STATES = Object.freeze([
 ]);
 
 const CLAIM_STATE_SET = new Set(REVIEW_CLAIM_STATES);
+const CLAIM_CAUSE_SET = new Set([
+  'cancelled',
+  'completed',
+  'max_turns',
+  'non_retryable',
+  'probe_failed',
+  'rate_limit',
+  'released',
+  'server_error',
+  'startup_failure',
+  'none',
+  'verdict_posted',
+]);
 const CLAIM_MARKER_RE = /<!-- PR_REVIEW_CLAIM:\s*(\{[\s\S]*?\})\s*-->/;
 const CLAIM_ACTOR_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot\])?|claude(?:\[bot\])?|nanakokyobashi-rgb|valerielinc-ops)$/iu;
 const SHA_RE = /^[0-9a-f]{40}$/iu;
@@ -37,6 +50,11 @@ const FINGERPRINT_RE = /^[0-9a-f]{64}$/iu;
 
 function normalized(value) {
   return String(value ?? '').trim().replace(/\s+/gu, ' ');
+}
+
+function normalizedCause(value) {
+  const cause = normalized(value).toLowerCase();
+  return CLAIM_CAUSE_SET.has(cause) ? cause : '';
 }
 
 /**
@@ -124,6 +142,8 @@ export function parseReviewClaim(body) {
 
   const reviewRevision = normalizeReviewInputRevision(event.reviewRevision);
   if (reviewRevision === null) return null;
+  const cause = event.cause === undefined ? '' : normalizedCause(event.cause);
+  if (event.cause !== undefined && !cause) return null;
 
   const normalizedEvent = {
     ...event,
@@ -135,6 +155,7 @@ export function parseReviewClaim(body) {
     expiresAt: Number(event.expiresAt),
   };
   if (reviewRevision) normalizedEvent.reviewRevision = reviewRevision;
+  if (cause) normalizedEvent.cause = cause;
   if (normalizedEvent.key !== keyFromClaim(normalizedEvent)
       || normalizedEvent.dedupeKey !== dedupeKeyFromClaim(normalizedEvent)) return null;
   return normalizedEvent;
@@ -216,6 +237,9 @@ export function claimStatusFromOutcome({
   claudeOutcome = '',
   providerOutcome = '',
   executionText = '',
+  failureCause = '',
+  startupFailure = false,
+  priorClaims = [],
   retryableFailure = false,
   permanentFailure = false,
   reviewPosted = false,
@@ -224,8 +248,19 @@ export function claimStatusFromOutcome({
   const outcome = providerOutcome || claudeOutcome;
   if (proceed !== true && proceed !== 'true') return 'released';
   if (reviewFallbackApproved === true || reviewFallbackApproved === 'true') return 'completed';
-  if (permanentFailure === true || permanentFailure === 'true') return 'failed-terminal';
   if (reviewPosted === true || reviewPosted === 'true') return 'completed';
+  const cause = normalizedCause(failureCause);
+  const isStartupFailure = startupFailure === true || startupFailure === 'true'
+    || cause === 'startup_failure';
+  if (isStartupFailure) {
+    // The first unproven process-start failure gets one bounded retry. The
+    // second failure for the same dedupe key is terminal, so a broken provider
+    // cannot create an infinite rerun loop.
+    return (priorClaims || []).some((claim) => claim?.state === 'failed-transient')
+      ? 'failed-terminal'
+      : 'failed-transient';
+  }
+  if (permanentFailure === true || permanentFailure === 'true') return 'failed-terminal';
   const text = String(executionText || '');
   const transient = /(?:api_error_status|status_code|http_status|status)"?\s*:\s*"?429\b|\bHTTP\s*429\b|\b(?:overloaded|server_error|internal server error)\b|rate_limit_event|rate_limit_error/iu.test(text);
   if (retryableFailure === true || retryableFailure === 'true'
@@ -300,7 +335,9 @@ export function reviewWasPosted(repo, prNumber, headSha, reviewRevision = '', gh
 function claimBody(event) {
   return `${REVIEW_CLAIM_MARKER} ${JSON.stringify(event)} -->\n`
     + `_Review claim ${event.state} · PR #${event.prNumber} · HEAD ${event.headSha.slice(0, 12)} · `
-    + `${event.contributionFingerprint} · scade ${new Date(event.expiresAt * 1000).toISOString()}._`;
+    + `${event.contributionFingerprint}`
+    + (event.cause ? ` · causa ${event.cause}` : '')
+    + ` · scade ${new Date(event.expiresAt * 1000).toISOString()}._`;
 }
 
 function postClaim(repo, prNumber, event) {
@@ -317,6 +354,7 @@ function writeOutput(result) {
     claim_key: result.key || '',
     claim_dedupe_key: result.dedupeKey || '',
     claim_state: result.state || '',
+    claim_cause: result.cause || '',
     claim_reason: result.reason || '',
   };
   const lines = Object.entries(values)
@@ -451,7 +489,9 @@ function finalizeClaim(base, repo) {
   const executionText = process.env.EXEC_FILE && fs.existsSync(process.env.EXEC_FILE)
     ? fs.readFileSync(process.env.EXEC_FILE, 'utf8')
     : '';
-  const cause = normalized(process.env.REVIEW_ABORT_CAUSE || '').toLowerCase();
+  const cause = normalizedCause(process.env.REVIEW_ABORT_CAUSE || '');
+  const priorClaims = latestReviewClaims(comments, { dedupeKey: base.dedupeKey })
+    .filter((claim) => claim.token !== token);
   const reviewFallbackApproved = process.env.REVIEW_GATE_FALLBACK_APPROVED === 'true';
   const retryableCause = ['cancelled', 'max_turns', 'rate_limit', 'server_error'].includes(cause);
   const permanentCause = cause === 'non_retryable' || cause === 'probe_failed';
@@ -461,6 +501,9 @@ function finalizeClaim(base, repo) {
       proceed: process.env.PROCEED,
       providerOutcome: process.env.CODEX_OUTCOME || process.env.CLAUDE_OUTCOME || '',
       executionText,
+      failureCause: cause,
+      startupFailure: cause === 'startup_failure',
+      priorClaims,
       retryableFailure: process.env.RETRYABLE_FAILURE === 'true' || retryableCause,
       permanentFailure: process.env.PERMANENT_FAILURE === 'true' || permanentCause,
       reviewPosted: process.env.REVIEW_POSTED === 'true',
@@ -471,14 +514,18 @@ function finalizeClaim(base, repo) {
     if (permanentCause) state = 'failed-terminal';
     else state = 'failed-transient';
   }
-  if (current.state === state) return writeOutput({ ...base, allowed: true, token, state, reason: 'claim-already-finalized' });
+  if (current.state === state) return writeOutput({ ...base, allowed: true, token, state, cause: current.cause || cause, reason: 'claim-already-finalized' });
   if (current.state === 'completed' || current.state === 'failed-terminal') {
     throw new Error(`claim gia' terminale (${current.state})`);
   }
   const nowSec = Math.floor(Date.now() / 1000);
+  const finalCause = cause || (state === 'completed'
+    ? (reviewFallbackApproved ? 'completed' : 'verdict_posted')
+    : state === 'failed-terminal' ? 'non_retryable' : 'none');
   const finalEvent = {
     ...current,
     state,
+    cause: finalCause,
     issuedAt: nowSec,
     expiresAt: Math.max(nowSec, Number(current.expiresAt)),
     runId: String(process.env.GITHUB_RUN_ID || current.runId),
@@ -489,7 +536,7 @@ function finalizeClaim(base, repo) {
     : readComments(repo, base.prNumber);
   const verified = latestReviewClaims(after, { key: base.key }).find((claim) => claim.token === token);
   if (!verified || verified.state !== state) throw new Error('finalizzazione claim non verificabile');
-  return writeOutput({ ...base, allowed: true, token, state, reason: 'pr-head-claim-finalized' });
+  return writeOutput({ ...base, allowed: true, token, state, cause: finalCause, reason: 'pr-head-claim-finalized' });
 }
 
 function claimMain() {
@@ -509,6 +556,14 @@ function claimMain() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   if (process.argv.includes('--claim')) claimMain();
 }
