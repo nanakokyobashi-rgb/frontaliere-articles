@@ -30,8 +30,8 @@ export const SEO_DIR = path.join(ROOT, 'content', 'seo');
 export const META_IT = path.join(ROOT, 'content', 'blog-meta-it.ts');
 
 const SEO_FILES_RE = /^seo-blog.*\.ts$/;
-const OG_TITLE_RE = /\bogTitle\s*:\s*'((?:[^'\\]|\\.)*)'/;
-const HEADLINE_RE = /"headline"\s*:\s*"((?:[^"\\]|\\.)*)"/;
+const OG_TITLE_RE = /\b(ogTitle\s*:\s*')((?:[^'\\]|\\.)*)'/;
+const HEADLINE_RE = /("headline"\s*:\s*")((?:[^"\\]|\\.)*)"/;
 
 function decodeSingle(raw) {
   return unescapeTsValue(raw);
@@ -61,14 +61,14 @@ function readCanonicalTitles(metaSource) {
   return titles;
 }
 
-function fieldMatch(block, field) {
+export function fieldMatch(block, field) {
   if (field === 'ogTitle') {
     const match = OG_TITLE_RE.exec(block);
     if (!match) return null;
     return {
-      raw: match[1],
-      start: match.index + match[0].indexOf(match[1]),
-      end: match.index + match[0].indexOf(match[1]) + match[1].length,
+      raw: match[2],
+      start: match.index + match[1].length,
+      end: match.index + match[1].length + match[2].length,
       decode: decodeSingle,
       encode: encodeSingle,
     };
@@ -76,9 +76,9 @@ function fieldMatch(block, field) {
   const match = HEADLINE_RE.exec(block);
   if (!match) return null;
   return {
-    raw: match[1],
-    start: match.index + match[0].indexOf(match[1]),
-    end: match.index + match[0].indexOf(match[1]) + match[1].length,
+    raw: match[2],
+    start: match.index + match[1].length,
+    end: match.index + match[1].length + match[2].length,
     decode: decodeDouble,
     encode: encodeDouble,
   };

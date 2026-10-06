@@ -19,6 +19,7 @@ import {
   isStrictSeoTitlePrefix,
   repairSeoTitleField,
 } from '../scripts/lib/seo-title-repair.mjs';
+import { fieldMatch, repairFile } from '../scripts/repair-truncated-seo-titles.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SEO_DIR = path.join(ROOT, 'content', 'seo');
@@ -122,4 +123,19 @@ test('il generatore usa la stessa sorgente di riparazione per entrambi i campi',
   assert.match(source, /repairSeoTitleFields\(data\.seo, seoTitleCore\)/);
   assert.match(source, /data\.seo\.ogTitle = data\.seo\.ogTitle \? String\(data\.seo\.ogTitle\)\.trim\(\) : seoTitleCore/);
   assert.match(source, /data\.seo\.headline = data\.seo\.headline \? String\(data\.seo\.headline\)\.trim\(\) : seoTitleCore/);
+});
+
+test('gli offset del valore non possono collidere con il nome della proprieta\'', () => {
+  const source = `const seo = { ogTitle: 'ogTitle', jsonLd: { "headline": "headline" } };`;
+  const ogTitle = fieldMatch(source, 'ogTitle');
+  const headline = fieldMatch(source, 'headline');
+  assert.equal(source.slice(ogTitle.start, ogTitle.end), 'ogTitle');
+  assert.equal(source.slice(headline.start, headline.end), 'headline');
+  assert.equal(
+    repairFile(source, [
+      { ...ogTitle, encoded: 'riparato og' },
+      { ...headline, encoded: 'riparato jsonld' },
+    ]),
+    `const seo = { ogTitle: 'riparato og', jsonLd: { "headline": "riparato jsonld" } };`,
+  );
 });
