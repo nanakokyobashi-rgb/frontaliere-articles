@@ -12708,6 +12708,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lavoro-part-time-ticino-dati.title': 'Teilzeitarbeit bringt prozentual weniger ein',
     'blog.article.lavoro-part-time-ticino-dati.excerpt': 'Im Tessin arbeiten 65% der Beschäftigten in Vollzeit (5\'456 Franken/Monat) und 35% in Teilzeit mit einem auf Vollzeit hochgerechneten Lohn von 5\'121 Franken, also 335 Franken weniger.',
     'blog.article.lavoro-part-time-ticino-dati.imageAlt': 'Teilzeitbeschäftigter am Luganer Seeufer mit Alpenblick',
+    'blog.article.parlamento-ticino-a2-a13-priorita.title': 'Tessiner Parlament: A2-A13 soll wieder zu einer Priorität der USTRA werden',
+    'blog.article.parlamento-ticino-a2-a13-priorita.excerpt': 'Das Tessiner Parlament stimmt für eine Resolution gegen eine Verschiebung der Verbindung A2-A13 über 2050 hinaus. Das Locarnese ist die einzige grosse Region ohne direkten Autobahnanschluss.',
+    'blog.article.parlamento-ticino-a2-a13-priorita.imageAlt': 'Luftaufnahme des Locarnese mit Lago Maggiore und fehlender Autobahnanbindung',
 };
 
 export default blogMetaDe;

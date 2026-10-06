@@ -12711,6 +12711,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lavoro-part-time-ticino-dati.title': 'Le travail à temps partiel rapporte moins en pourcentage',
     'blog.article.lavoro-part-time-ticino-dati.excerpt': 'Au Tessin, 65% des salariés travaillent à temps plein (5\'456 francs/mois) et 35% à temps partiel, avec une rémunération de 5\'121 francs en équivalent temps plein, soit 335 francs de moins.',
     'blog.article.lavoro-part-time-ticino-dati.imageAlt': 'Travailleur à temps partiel sur le front du lac de Lugano avec vue sur les Alpes',
+    'blog.article.parlamento-ticino-a2-a13-priorita.title': 'Parlement tessinois : l’A2-A13 doit redevenir une priorité de l’OFROU',
+    'blog.article.parlamento-ticino-a2-a13-priorita.excerpt': 'Le Parlement tessinois vote une résolution pour ne pas reporter la liaison A2-A13 au-delà de 2050. Le Locarnese, seule grande région sans accès autoroutier direct.',
+    'blog.article.parlamento-ticino-a2-a13-priorita.imageAlt': 'Vue aérienne du Locarnese avec le Lac Majeur et liaison autoroutière manquante',
 };
 
 export default blogMetaFr;

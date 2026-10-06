@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1942262/frontalieri-lieve-aumento-in-ticino": "frontalieri-ticino-aumento-2026",
   "https://www.laregione.ch/culture/locarno-film-festival/1942206/il-graffio-nella-barba": "graffio-nella-barba-locarno-film-festival",
   "https://www.laregione.ch/culture/locarno-film-festival/1942190/claudio-simonetti-monsieur-peur": "claudio-simonetti-monsieur-peur",
   "https://www.varesenoi.it/2026/08/06/leggi-notizia/argomenti/economia-13/articolo/tra-varese-milano-e-la-svizzera-quando-una-compatta-usata-e-davvero-una-scelta-piu-intelligente.html": "compatta-usata-frontalieri-varese-milano",
@@ -2060,6 +2059,11 @@
   "https://www.laregione.ch/cantone/ticino/1955111/il-lavoro-part-time-rende-in-percentuale-meno": {
     "articleId": "lavoro-part-time-ticino-dati",
     "ts": "2026-10-06T17:01:18.081Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4139660": {
+    "articleId": "parlamento-ticino-a2-a13-priorita",
+    "ts": "2026-10-06T17:38:31.117Z",
     "keyForm": 2
   }
 }

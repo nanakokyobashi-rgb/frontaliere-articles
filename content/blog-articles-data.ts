@@ -40053,6 +40053,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'parlamento-ticino-a2-a13-priorita',
+ category: 'novita',
+ date: '2026-10-06T17:38:30.838Z',
+ image: '/images/blog/parlamento-ticino-a2-a13-priorita.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
