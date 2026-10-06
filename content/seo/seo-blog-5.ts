@@ -100052,6 +100052,74 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-tassa-ingresso-rischi-comuni': {
+    title: 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    description: 'Scopri le novità per i frontalieri: tassa d\'ingresso fino a 4mila franchi, il no svizzero ai 900 milioni per i disoccupati e il rischio di 120 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, ingresso, ristorni, doppia',
+    ogTitle: 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    ogDescription: 'Un\'analisi approfondita sulle recenti sfide per i frontalieri: dalla tassa d\'ingresso fino a 4mila franchi al dibattito sui 900 milioni per i disoccupati e il rischio di 120 milioni per i comuni di frontiera. Il Nuovo Accordo Frontalieri',
+    canonicalPath: '/articoli-frontaliere/frontalieri-tassa-ingresso-rischi-comuni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: tassa ingresso, ristorni e doppia imposizione",
+      "description": "Scopri le novità per i frontalieri: tassa d'ingresso fino a 4mila franchi, il no svizzero ai 900 milioni per i disoccupati e il rischio di 120 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano e del suo lago, con edifici moderni che simboleggiano il contesto finanziario svizzero."
+      },
+      "datePublished": "2026-10-06T08:21:29+00:00",
+      "dateModified": "2026-10-06T08:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieri-tassa-ingresso-rischi-comuni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-carovita-sindacati-recupero-divario': {
+    title: 'Carovita, i sindacati chiedono recupero divario nel Preventivo 2027',
+    description: 'I sindacati OCST, VPOD e SIT chiedono al Cantone il recupero dell\'8,5% di rincaro non compensato dal 3% di adeguamento salariale tra 2020 e 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, carovita, sindacati, chiedono, recupero',
+    ogTitle: 'Carovita: sindacati chiedono recupero divario nel Preventivo 2027',
+    ogDescription: 'La petizione di OCST, VPOD e SIT chiede al Consiglio di Stato e Gran Consiglio di recuperare il divario tra l\'8,5% di rincaro e il 3% di adeguamento salariale tra dicembre 2020 e settembre 2026, con impatti su busta paga e pensioni.',
+    canonicalPath: '/articoli-frontaliere/carovita-sindacati-recupero-divario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carovita, i sindacati chiedono recupero divario nel Preventivo 2027",
+      "description": "I sindacati OCST, VPOD e SIT chiedono al Cantone il recupero dell'8,5% di rincaro non compensato dal 3% di adeguamento salariale tra 2020 e 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/carovita-sindacati-recupero-divario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Bellinzona con il Castel Grande sotto un cielo sereno."
+      },
+      "datePublished": "2026-10-06T09:15:31+00:00",
+      "dateModified": "2026-10-06T09:15:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/carovita-sindacati-recupero-divario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
