@@ -518,6 +518,18 @@ const MUTATIONS = {
       'Un epoch o una data senza fuso verrebbe formattato nel fuso del runner.',
     ],
     [
+      'granularita sconosciuta',
+      mutated(c, (p) => { p.records[0].granularity = 'regional'; }),
+      /granularity .* is not station\|region\|national/,
+      'Il renderer deve distinguere una stazione da una media regionale o nazionale, senza inferirlo dal conteggio.',
+    ],
+    [
+      'granularita nulla esplicita',
+      mutated(c, (p) => { p.records[0].granularity = null; }),
+      /granularity null is not station\|region\|national/,
+      'Solo l\'assenza del campo è legacy: null esplicito non descrive una granularità pubblicabile.',
+    ],
+    [
       'lato sconosciuto',
       mutated(c, (p) => { p.records[0].side = 'LI'; }),
       /is not CH\|FR\|AT\|IT\|DE/,
@@ -798,6 +810,16 @@ test('[border-wait-averages] "N min" senza trattino resta accettato', async () =
   const body = mutated(c, (p) => { p['ponte-tresa'].morning = '2 min'; });
   const { status, out } = await runRefresh(c, body);
   assert.equal(status, 0, why(c, `Il ramo degenere "2 min" e' stato rifiutato:\n${out}`));
+});
+
+test('[fuel-cantons] la cache legacy senza granularita resta leggibile durante il passaggio HTTP', async () => {
+  const c = contract('fuel-cantons');
+  const body = mutated(c, (p) => {
+    for (const record of p.records) delete record.granularity;
+  });
+  const { status, out } = await runRefresh(c, body);
+  assert.equal(status, 0, why(c, `La cache schema 1 senza granularita e' stata rifiutata durante il passaggio HTTP:\n${out}`));
+  assert.match(out, /--check: .* records over .* cantons/);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -10,9 +10,9 @@
  * `scripts/build-fuel-cantons-dataset.mjs` in the daily run of
  * `update-fuel-prices.yml`: one flat record per (canton URL group, side,
  * fuel) — `canton`, `side` (CH|FR|AT|IT|DE), `fuel` (sp95|diesel),
- * `currency`, `avg`, `min`, `stations`, `observedAt`, `source`. The canton
- * hubs (P10) will read the cache this writes; nothing in the generator reads
- * it yet.
+ * `currency`, `avg`, `min`, `stations`, `observedAt`, `source`, and
+ * `granularity` (station|region|national). The canton hubs (P10) read the
+ * cache this writes.
  *
  * WHY SOFT
  *
@@ -73,6 +73,11 @@ const SUPPORTED_SCHEMA = 1;
 const SIDES = new Set(['CH', 'FR', 'AT', 'IT', 'DE']);
 const FUELS = new Set(['sp95', 'diesel']);
 const CURRENCIES = new Set(['CHF', 'EUR']);
+const GRANULARITIES = new Set(['station', 'region', 'national']);
+// The producer adds this field in the companion site PR. During the HTTP
+// hand-off, schema 1 caches without it are the old regional aggregates; keep
+// them readable while still rejecting an unknown explicit value.
+const granularityOf = (record) => Object.hasOwn(record, 'granularity') ? record.granularity : 'region';
 // Per-litre plausibility: outside this a unit changed (cents, thousandths).
 const PRICE_MIN = 0.5;
 const PRICE_MAX = 5;
@@ -167,6 +172,11 @@ for (const [i, r] of records.entries()) {
   if (!Number.isInteger(r.stations) || r.stations < 1) fail(`${at}.stations ${JSON.stringify(r.stations)} is not a positive integer`);
   if (!isIsoInstant(r.observedAt)) fail(`${at}.observedAt ${JSON.stringify(r.observedAt)} is not an ISO instant`);
   if (typeof r.source !== 'string' || !r.source.trim()) fail(`${at}.source is empty`);
+  const granularity = granularityOf(r);
+  if (!GRANULARITIES.has(granularity)) fail(`${at}.granularity ${JSON.stringify(r.granularity)} is not station|region|national`);
+  if (granularity === 'national' && (r.side !== 'CH' || r.stations !== 1)) {
+    fail(`${at}: national records must be Swiss records with stations=1`);
+  }
   // One row per (canton, side, fuel): two would leave a hub to pick one.
   const key = `${r.canton}/${r.side}/${r.fuel}`;
   if (seenKeys.has(key)) fail(`${at}: duplicate record for ${key}`);
