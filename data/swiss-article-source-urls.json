@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948195/polizia-intervento-goldach-entita-scuola-concluso-sg": {
-    "articleId": "intervento-polizia-goldach-scuola",
-    "ts": "2026-09-05T10:47:04.665Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/zh%3a-processo-junge-tat%3b-procura-chiede-condanna%2c-difesa-assoluzione/92008105": {
     "articleId": "processo-junge-tat-zurigo",
     "ts": "2026-09-05T10:54:48.947Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/industrializzare-la-luna%2c-nuova-frontiera-pure-per-aziende-svizzere/92175634": {
     "articleId": "luna-opportunita-aziende-svizzere",
     "ts": "2026-10-06T15:49:22.319Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/in-svizzera-10%27500-maiali-uccisi-per-malattia-polmonare/92176032": {
+    "articleId": "maiali-polmonite-enzootica-svizzera",
+    "ts": "2026-10-06T17:19:31.582Z",
     "keyForm": 2
   }
 }
