@@ -69,7 +69,7 @@ import {
   conflictHandoffExpectedHead,
   conflictHandoffOriginPr,
 } from './check-issue-already-resolved.mjs';
-import { lastFixOutcome } from './close-recovered-failure-issues.mjs';
+import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
 import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
@@ -104,6 +104,13 @@ export const HANDS_OFF_LABELS = Object.freeze(['needs-human', 'keep-open']);
 export const TRUSTED_ASSOCIATIONS = Object.freeze(['OWNER', 'MEMBER', 'COLLABORATOR']);
 export const TRUSTED_BOT_LOGINS = Object.freeze(['github-actions[bot]', 'frontaliere-automation[bot]']);
 export const SUPERSEDING_OUTCOME = 'already-fixed';
+// Il pre-flight di issue-fix (`check-issue-already-resolved.mjs`) emette lo
+// STESSO marker `FIX_OUTCOME: already-fixed` quando corto-circuita senza
+// avviare il fixer — per esempio «stessa HEAD di nuovo MERGEABLE». Quello non
+// è «il fixer ha guardato e non c'è niente da riapplicare»: se poi main si
+// muove e il conflitto ritorna sulla stessa HEAD, quel marker non vale più.
+// Ogni commento del pre-flight si apre con questa intestazione.
+export const PREFLIGHT_COMMENT_RE = /\*\*Pre-flight \(auto, zero-Claude\)\*\*/;
 
 const FIXER_BRANCH_RE = /^fix\/issue-(\d+)$/;
 
@@ -135,11 +142,20 @@ export function fixerIssueOfBranch(branch) {
  * (la risposta tipica subito dopo un push su main) o un campo assente sono
  * letture non verificabili e rimandano al tick dopo. Anche `CONFLICTING` è
  * una cache: la candidatura apre solo la strada, e la chiusura esige in più
- * `mergeTreeAllowsClose`, cioè `git merge-tree` ricalcolato sulla HEAD. Pura.
+ * `mergeTreeAllowsClose`, cioè `git merge-tree` ricalcolato sulla HEAD.
  *
+ * `allowUnknown` serve SOLO alla prima scrematura della lista: GitHub calcola
+ * `mergeable` su richiesta e lo azzera a ogni push su main, e qui main riceve
+ * un commit di articolo ogni pochi minuti, quindi la lista risponde quasi
+ * sempre `UNKNOWN`. Con `allowUnknown` quella PR passa come «da verificare» e
+ * viene riletta da sola (`rereadLivePr`, sempre stretta): senza, lo sweep
+ * resterebbe inerte. Nessuna chiusura avviene mai su `UNKNOWN`. Pura.
+ *
+ * @param {object} pr
+ * @param {{allowUnknown?: boolean}} [opts]
  * @returns {{ candidate: boolean, reason: string }}
  */
-export function isSweepCandidate(pr) {
+export function isSweepCandidate(pr, { allowUnknown = false } = {}) {
   const labels = labelNames(pr);
   if (!labels.includes(HANDOFF_CONFLICT_LABEL)) return { candidate: false, reason: 'no-conflict-label' };
   if (pr?.isDraft) return { candidate: false, reason: 'draft' };
@@ -149,8 +165,9 @@ export function isSweepCandidate(pr) {
   if (labels.some((name) => HANDS_OFF_LABELS.includes(name))) return { candidate: false, reason: 'hands-off-label' };
   const mergeable = String(pr?.mergeable || '').toUpperCase();
   if (mergeable === 'MERGEABLE') return { candidate: false, reason: 'mergeable-now' };
-  if (mergeable !== 'CONFLICTING') return { candidate: false, reason: 'conflict-unconfirmed' };
-  return { candidate: true, reason: 'conflicted-loop-pr' };
+  if (mergeable === 'CONFLICTING') return { candidate: true, reason: 'conflicted-loop-pr' };
+  if (allowUnknown && mergeable === 'UNKNOWN') return { candidate: true, reason: 'conflict-to-verify' };
+  return { candidate: false, reason: 'conflict-unconfirmed' };
 }
 
 /**
@@ -168,6 +185,51 @@ export function isTrustedComment(comment) {
   if (TRUSTED_ASSOCIATIONS.includes(association)) return true;
   const login = String(comment?.user?.login ?? comment?.author?.login ?? '');
   return TRUSTED_BOT_LOGINS.includes(login);
+}
+
+/**
+ * Il commento porta un verdetto del FIXER? Identità fidata, marker
+ * `FIX_OUTCOME`, e non un corto circuito del pre-flight. Pura.
+ */
+export function isFixerVerdictComment(comment) {
+  const body = String(comment?.body || '');
+  return isTrustedComment(comment) && FIX_OUTCOME_RE.test(body) && !PREFLIGHT_COMMENT_RE.test(body);
+}
+
+/**
+ * Gli eventi `has-conflicts` della PR da righe «<evento> <data ISO>», una per
+ * evento; null se una riga non ha quella forma. Testo semplice e non JSON di
+ * proposito: `gh api --jq` stampa gli oggetti su una riga o su più righe a
+ * seconda di chi lo esegue (un wrapper locale li indenta), e un parser a
+ * righe-JSON leggerebbe «illeggibile» proprio dove gira in prova. Pura.
+ */
+export function parseConflictEventLines(raw) {
+  if (typeof raw !== 'string') return null;
+  const events = [];
+  for (const line of raw.split('\n')) {
+    if (!line.trim()) continue;
+    const match = /^(labeled|unlabeled) (\d{4}-\d{2}-\d{2}T[0-9:.]+Z)$/.exec(line.trim());
+    if (!match) return null;
+    events.push({ event: match[1], label: HANDOFF_CONFLICT_LABEL, created_at: match[2] });
+  }
+  return events;
+}
+
+/**
+ * L'istante dell'ultima volta in cui `has-conflicts` è stata MESSA sulla PR,
+ * cioè la rilevazione corrente del conflitto; null se non c'è o non è
+ * leggibile. Un verdetto precedente parla di un conflitto precedente. Pura.
+ */
+export function currentConflictDetectedAt(events) {
+  if (!Array.isArray(events)) return null;
+  let last = null;
+  for (const event of events) {
+    const name = typeof event?.label === 'string' ? event.label : event?.label?.name;
+    if (name !== HANDOFF_CONFLICT_LABEL || event?.event !== 'labeled') continue;
+    const at = Date.parse(String(event.created_at ?? event.createdAt ?? ''));
+    if (Number.isFinite(at) && (last === null || at > last)) last = at;
+  }
+  return last;
 }
 
 /**
@@ -208,9 +270,10 @@ export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin }) {
  * @param {Array|null} p.comments  i commenti dell'hand-off (REST), o null se illeggibili
  * @param {Array|null} p.openPrs   le PR aperte, o null se la lista è illeggibile o troncata
  * @param {Array} [p.siblings]     tutti gli hand-off della PR (`number`, `labels`, `state`); default: il solo `handoff`
+ * @param {Array|null} p.conflictEvents  gli eventi `has-conflicts` della PR (`parseConflictEventLines`), o null se illeggibili
  * @returns {{ close: boolean, reason: string, handoff?: number, active?: number }}
  */
-export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings }) {
+export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictEvents }) {
   if (!handoff) return { close: false, reason: 'no-handoff' };
   if (conflictHandoffOriginPr(handoff.title) !== Number(pr?.number)) return { close: false, reason: 'handoff-of-another-pr' };
   const expectedHead = conflictHandoffExpectedHead(handoff.body);
@@ -231,13 +294,22 @@ export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, sibl
       return { close: false, reason: 'reapply-in-flight', active };
     }
   }
-  const outcome = lastFixOutcome(comments.filter(isTrustedComment));
+  // Solo verdetti del fixer: un corto circuito del pre-flight porta lo stesso
+  // marker ma non dice che il contenuto è già su main.
+  const outcome = lastFixOutcome(comments.filter(isFixerVerdictComment));
   if (!outcome) return { close: false, reason: 'no-trusted-verdict' };
   if (outcome.code !== SUPERSEDING_OUTCOME) return { close: false, reason: `verdict-${outcome.code}` };
   const openedAt = Date.parse(handoff.createdAt ?? handoff.created_at ?? '');
   if (!Number.isFinite(openedAt) || outcome.at === null || outcome.at <= openedAt) {
     return { close: false, reason: 'verdict-not-after-handoff' };
   }
+  // Il verdetto deve riguardare QUESTO conflitto: se `has-conflicts` è stata
+  // rimessa dopo (main si è mosso, il conflitto è rientrato e poi tornato
+  // sulla stessa HEAD), il fixer aveva guardato un altro stato di main.
+  if (!Array.isArray(conflictEvents)) return { close: false, reason: 'conflict-events-unreadable' };
+  const detectedAt = currentConflictDetectedAt(conflictEvents);
+  if (detectedAt === null) return { close: false, reason: 'conflict-detection-unknown' };
+  if (outcome.at <= detectedAt) return { close: false, reason: 'verdict-before-current-conflict' };
   return { close: true, reason: 'handoff-already-fixed', handoff: Number(handoff.number) };
 }
 
@@ -318,6 +390,11 @@ function readHandoffs(prNumber) {
     '--json', 'number,title,body,labels,createdAt,state']);
 }
 
+function readConflictEvents(prNumber) {
+  return parseConflictEventLines(gh(['api', '--paginate', `repos/${REPO}/issues/${Number(prNumber)}/events?per_page=100`,
+    '--jq', `.[] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "${HANDOFF_CONFLICT_LABEL}") | "\\(.event) \\(.created_at)"`]));
+}
+
 function readIssueComments(number) {
   const raw = gh(['api', '--paginate', '--slurp', `repos/${REPO}/issues/${Number(number)}/comments?per_page=100`]);
   if (raw === null) return null;
@@ -372,7 +449,8 @@ function decide(pr, openPrs) {
   const handoff = latestHandoffOf(pr.number, handoffs);
   const comments = handoff ? readIssueComments(handoff.number) : null;
   const siblings = handoffs.filter((issue) => conflictHandoffOriginPr(issue?.title) === Number(pr.number));
-  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings });
+  const conflictEvents = handoff ? readConflictEvents(pr.number) : null;
+  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictEvents });
 }
 
 function main() {
@@ -385,11 +463,12 @@ function main() {
     console.log('::warning::close-superseded-conflict-prs: PR aperte illeggibili → nessuna modifica.');
     return;
   }
-  const candidates = openPrs.filter((pr) => isSweepCandidate(pr).candidate);
+  // Scrematura larga (`UNKNOWN` ammesso), verifica stretta per ogni PR sotto.
+  const candidates = openPrs.filter((pr) => isSweepCandidate(pr, { allowUnknown: true }).candidate);
   const budget = runBudgetFromEnv();
   const closed = [];
   let examined = 0;
-  for (const pr of candidates) {
+  for (const listed of candidates) {
     if (closed.length >= MAX_CLOSES_PER_RUN) {
       console.log(`::warning::close-superseded-conflict-prs: cap di ${MAX_CLOSES_PER_RUN} chiusure raggiunto — ${candidates.length - examined} PR rimandate al prossimo tick.`);
       break;
@@ -399,6 +478,13 @@ function main() {
       break;
     }
     examined += 1;
+    // La lettura singola è quella che conta: stessa HEAD della lista e
+    // `CONFLICTING` confermato adesso. Il ciclo prosegue sull'oggetto riletto.
+    const pr = rereadLivePr(listed);
+    if (!pr) {
+      console.log(`PR #${listed.number}: conflitto non confermato da GitHub alla rilettura (o PR cambiata) → resta aperta.`);
+      continue;
+    }
     const treeState = mergeTreeState(pr);
     if (!mergeTreeAllowsClose(treeState)) {
       console.log(`PR #${pr.number}: merge-tree ${treeState} sulla HEAD corrente → conflitto non confermato, resta aperta.`);

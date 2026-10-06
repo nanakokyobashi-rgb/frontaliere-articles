@@ -17,8 +17,11 @@ import { fileURLToPath } from 'node:url';
 import {
   MAX_CLOSES_PER_RUN,
   SUPERSEDED_MARKER,
+  PREFLIGHT_COMMENT_RE,
   closingComment,
-  decideHandoffAlreadyFixed,
+  currentConflictDetectedAt,
+  decideHandoffAlreadyFixed as decideHandoffAlreadyFixedRaw,
+  isFixerVerdictComment,
   decideReapplyOfMergedOrigin,
   fixerIssueOfBranch,
   handoffTitleQuery,
@@ -26,6 +29,7 @@ import {
   isTrustedComment,
   mergeTreeAllowsClose,
   latestHandoffOf,
+  parseConflictEventLines,
 } from '../../scripts/ci/close-superseded-conflict-prs.mjs';
 import { buildConflictHandoffIssue } from '../../scripts/ci/pr-autorebase.mjs';
 
@@ -56,6 +60,14 @@ const handoffOf = (pr, over = {}) => {
     number: 2250, title, body, labels: [{ name: 'agent:triaged' }], createdAt: '2026-10-05T23:06:00Z', ...over,
   };
 };
+
+// La rilevazione corrente del conflitto sulla PR: `has-conflicts` messa alle
+// 23:06, prima del verdetto delle 00:18. I test che non parlano di questo
+// usano il default; quelli che ne parlano passano i propri eventi.
+const labeled = (at) => ({ event: 'labeled', label: 'has-conflicts', created_at: at });
+const unlabeled = (at) => ({ event: 'unlabeled', label: 'has-conflicts', created_at: at });
+const DETECTED = [labeled('2026-10-05T23:06:00Z')];
+const decideHandoffAlreadyFixed = (args) => decideHandoffAlreadyFixedRaw({ conflictEvents: DETECTED, ...args });
 
 const verdict = (code, over = {}) => ({
   body: `Root cause: già su main.\n<!-- FIX_OUTCOME: ${code} -->`,
@@ -90,6 +102,12 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
   // confermano il conflitto: lo sweep gira anche se l'autorebase che ricalcola
   // la label è fallito, quindi serve `CONFLICTING` da GitHub.
   assert.equal(reason({ mergeable: 'UNKNOWN' }), 'conflict-unconfirmed');
+  // Solo la scrematura della lista ammette `UNKNOWN` come «da verificare»:
+  // main riceve un commit ogni pochi minuti e la lista risponde quasi sempre
+  // così. La decisione gira poi sulla rilettura singola, che resta stretta.
+  assert.deepEqual(isSweepCandidate(loopPr({ mergeable: 'UNKNOWN' }), { allowUnknown: true }), { candidate: true, reason: 'conflict-to-verify' });
+  assert.equal(isSweepCandidate(loopPr({ mergeable: 'MERGEABLE' }), { allowUnknown: true }).candidate, false);
+  assert.equal(isSweepCandidate(loopPr({ mergeable: '' }), { allowUnknown: true }).candidate, false);
   assert.equal(reason({ mergeable: undefined }), 'conflict-unconfirmed');
   assert.equal(reason({ mergeable: '' }), 'conflict-unconfirmed');
 });
@@ -201,6 +219,70 @@ test('caso 2 — una riapplicazione in volo ha la precedenza sul verdetto', () =
   assert.equal(reason({ number: 2291, headRefName: 'codex/x', body: 'Supersedes #2246' }), 'reapply-in-flight');
 });
 
+test('caso 2 — il marker del pre-flight non è un verdetto del fixer', () => {
+  // `check-issue-already-resolved.mjs` emette `FIX_OUTCOME: already-fixed`
+  // anche quando corto-circuita («stessa HEAD di nuovo MERGEABLE»). Se poi
+  // main si muove e il conflitto torna sulla stessa HEAD, quel marker non
+  // deve chiudere la PR.
+  const pr = loopPr();
+  const preflight = verdict('already-fixed', {
+    body: '⏭️ **Pre-flight (auto, zero-Claude)**: la PR di origine **#2246** è aperta e di nuovo **MERGEABLE** sulla stessa HEAD.\n<!-- FIX_OUTCOME: already-fixed -->',
+  });
+  assert.equal(isFixerVerdictComment(preflight), false);
+  assert.equal(isFixerVerdictComment(verdict('already-fixed')), true);
+  assert.equal(isFixerVerdictComment({ ...verdict('already-fixed'), body: 'nessun marker' }), false);
+  assert.equal(
+    decideHandoffAlreadyFixed({ pr, handoff: handoffOf(pr), comments: [preflight], openPrs: [pr] }).reason,
+    'no-trusted-verdict',
+  );
+  // Un verdetto vero del fixer seguito da un corto circuito resta valido: il
+  // pre-flight non lo sostituisce e non lo annulla.
+  assert.equal(
+    decideHandoffAlreadyFixed({
+      pr, handoff: handoffOf(pr), comments: [verdict('already-fixed'), { ...preflight, created_at: '2026-10-06T01:00:00Z' }], openPrs: [pr],
+    }).close,
+    true,
+  );
+  // L'intestazione è quella che il pre-flight scrive davvero in ogni commento.
+  const src = readFileSync(path.join(ROOT, 'scripts/ci/check-issue-already-resolved.mjs'), 'utf8');
+  const headers = src.match(/\*\*Pre-flight \(auto, zero-Claude\)\*\*/g) || [];
+  assert.ok(headers.length >= 3, 'il pre-flight non usa più l\'intestazione riconosciuta da PREFLIGHT_COMMENT_RE');
+  assert.ok(PREFLIGHT_COMMENT_RE.test(headers[0]));
+});
+
+test('caso 2 — il verdetto deve seguire la rilevazione CORRENTE del conflitto', () => {
+  const pr = loopPr();
+  const reason = (conflictEvents) => decideHandoffAlreadyFixed({
+    pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr], conflictEvents,
+  }).reason;
+  assert.equal(reason(DETECTED), 'handoff-already-fixed');
+  // Conflitto rientrato e poi TORNATO dopo il verdetto delle 00:18: il fixer
+  // aveva guardato un altro stato di main.
+  assert.equal(
+    reason([labeled('2026-10-05T23:06:00Z'), unlabeled('2026-10-06T00:40:00Z'), labeled('2026-10-06T02:10:00Z')]),
+    'verdict-before-current-conflict',
+  );
+  assert.equal(reason(null), 'conflict-events-unreadable');
+  assert.equal(reason([]), 'conflict-detection-unknown');
+  assert.equal(reason([unlabeled('2026-10-05T23:06:00Z')]), 'conflict-detection-unknown');
+  assert.equal(currentConflictDetectedAt([labeled('2026-10-05T23:06:00Z'), labeled('2026-10-06T02:10:00Z')]), Date.parse('2026-10-06T02:10:00Z'));
+  assert.equal(currentConflictDetectedAt([{ event: 'labeled', label: 'stale-review', created_at: '2026-10-06T02:10:00Z' }]), null);
+});
+
+test('gli eventi della label si leggono da righe di testo, non da JSON', () => {
+  // Il formato JSON di `gh api --jq` cambia con chi lo esegue (compatto in
+  // CI, indentato da un wrapper locale): le righe «evento data» no.
+  assert.deepEqual(
+    parseConflictEventLines('labeled 2026-10-05T23:06:51Z\nunlabeled 2026-10-06T00:40:00Z\n\nlabeled 2026-10-06T02:10:00Z\n'),
+    [labeled('2026-10-05T23:06:51Z'), unlabeled('2026-10-06T00:40:00Z'), labeled('2026-10-06T02:10:00Z')],
+  );
+  assert.deepEqual(parseConflictEventLines(''), [], 'nessun evento è una lettura riuscita, non un errore');
+  // Qualunque altra forma — JSON, un errore di gh stampato su stdout — è illeggibile.
+  assert.equal(parseConflictEventLines('{\n  "event": "labeled"\n}'), null);
+  assert.equal(parseConflictEventLines('labeled ieri'), null);
+  assert.equal(parseConflictEventLines(null), null);
+});
+
 test('caso 2 — un marker incollato da fuori non chiude niente', () => {
   const pr = loopPr();
   const outsider = verdict('already-fixed', { author_association: 'NONE', user: { login: 'passante' } });
@@ -279,6 +361,11 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   // Prima decisione sullo snapshot, conferma sull'oggetto RILETTO: un body
   // cambiato fra le due letture non deve essere ignorato.
   assert.ok(before.includes('decide(pr, openPrs)'), 'manca la prima decisione');
+  // `allowUnknown` compare una sola volta, nella scrematura: ogni PR passa poi
+  // dalla rilettura stretta PRIMA di qualunque decisione.
+  assert.equal(src.split('allowUnknown: true').length - 1, 1, '`allowUnknown` va usato solo per filtrare la lista');
+  assert.ok(before.indexOf('const pr = rereadLivePr(listed);') < before.indexOf('decide(pr, openPrs)'), 'la rilettura stretta deve precedere la decisione');
+  assert.match(src, /function rereadLivePr[\s\S]{0,700}isSweepCandidate\(live\)\.candidate/, 'la rilettura deve restare stretta (niente allowUnknown)');
   assert.ok(before.includes('const live = rereadLivePr(pr);'), 'manca la rilettura della PR');
   assert.ok(before.includes('decide(live, freshOpenPrs)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
   assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 2, 'merge-tree va ricalcolato prima della decisione e prima della chiusura');
