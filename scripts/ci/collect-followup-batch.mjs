@@ -151,9 +151,11 @@ const repoArgs = REPO
  * Un item del corpus puo' avere come target un file del sito: in quel caso il
  * bucket giornaliero nasce NEL SITO, e il marker della PR corpus lo cita col
  * suo numero. Leggere il bucket solo in `GH_REPO` faceva rispondere a `gh`
- * «Could not resolve to an issue with the number 8944» — cioe' `null`, cioe'
- * «lettura indisponibile» — su OGNI bucket cross-repo: 4 delle 11 PR bloccate
- * nella run 35430183038 sono esattamente questo caso.
+ * «Could not resolve to an issue or pull request with the number of 8944»
+ * (il testo esatto e' quello che `ISSUE_NUMBER_NOT_FOUND_RE` riconosce, con
+ * «of») — cioe' `null`, cioe' «lettura indisponibile» — su OGNI bucket
+ * cross-repo: 4 delle 11 PR bloccate nella run 35430183038 sono esattamente
+ * questo caso.
  *
  * ponytail: entrambi i repo sono PUBBLICI, quindi il `GITHUB_TOKEN` del job
  * basta per la lettura cross-repo e non serve anticipare il caricamento dei PAT.
@@ -184,6 +186,11 @@ function gh(args, token = '') {
  * repository e' leggibile ma quel numero non e' una issue. Un repository
  * illeggibile o inesistente ha un altro messaggio («Could not resolve to a
  * Repository»), e resta una lettura indisponibile.
+ *
+ * Testo letto dal vivo il 2026-10-06 sui due repository, con «of» dopo
+ * «number»: `GraphQL: Could not resolve to an issue or pull request with the
+ * number of 99999999. (repository.issue)`. Una versione senza «of» non e' mai
+ * stata osservata: non allargare la regex a un messaggio citato a memoria.
  */
 export const ISSUE_NUMBER_NOT_FOUND_RE = /Could not resolve to an? (?:issue|Issue)(?: or pull request)? with the number of \d+/u;
 

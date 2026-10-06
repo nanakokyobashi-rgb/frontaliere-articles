@@ -316,10 +316,10 @@ test('nessun riferimento provato: esito NON positivo', () => {
 test('il bucket del sito viene trovato anche quando `GH_REPO` è il corpus', () => {
   // È il difetto misurato: un item del corpus con target un file del sito conia
   // NEL SITO, e il marker della PR corpus cita quel numero. Leggendo solo
-  // `GH_REPO`, `gh` risponde «Could not resolve to an issue with the number
-  // 9102»: è un 404 definitivo per il repository corrente, non una lettura
-  // indisponibile. Quattro delle 11 PR bloccate nella run 35430183038 sono
-  // esattamente questo caso.
+  // `GH_REPO`, `gh` risponde «Could not resolve to an issue or pull request
+  // with the number of 9102»: è un 404 definitivo per il repository corrente,
+  // non una lettura indisponibile. Quattro delle 11 PR bloccate nella run
+  // 35430183038 sono esattamente questo caso.
   const calls = [];
   const fakeGh = (args) => {
     const repo = args[args.indexOf('--repo') + 1];
@@ -358,6 +358,17 @@ test('ghBucketRead distingue un numero assente da un errore di lettura', () => {
   }
   assert.equal(ghBucketRead(['issue', 'view', '9102'], '', () => '{"number":9102}'), '{"number":9102}');
   assert.equal(ISSUE_NUMBER_NOT_FOUND_RE.test('Could not resolve to a Repository with the name'), false);
+});
+
+test('ISSUE_NUMBER_NOT_FOUND_RE riconosce il messaggio letterale di gh, letto dal vivo', () => {
+  // stderr di `gh issue view 99999999 --repo <owner>/<repo> --json number`,
+  // identico sui due repository il 2026-10-06. Il testo ha «of» dopo
+  // «number»: la regex segue questo, non una citazione a memoria.
+  const live = 'GraphQL: Could not resolve to an issue or pull request with the number of 99999999. (repository.issue)';
+  assert.equal(ISSUE_NUMBER_NOT_FOUND_RE.test(live), true);
+  assert.equal(ghBucketRead(['issue', 'view', '99999999'], '', () => {
+    throw Object.assign(new Error('gh failed'), { stderr: `${live}\n` });
+  }), false);
 });
 
 test('readBucketIssue usa la firma effettiva di ghBucketRead attraverso i due repository', () => {
