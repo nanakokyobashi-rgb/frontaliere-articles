@@ -13,6 +13,12 @@ const SIDE_ORDER = ['CH', 'IT', 'FR', 'DE', 'AT'];
 const FUEL_ORDER = ['sp95', 'diesel'];
 const GRANULARITIES = ['station', 'region', 'national'];
 
+// The producer adds `granularity` in the companion site PR. Keep an already
+// published legacy cache readable during the HTTP hand-off: an absent field
+// was necessarily a regional aggregate in schema 1. Unknown explicit values
+// remain invalid and are filtered below.
+const granularityOf = (record) => record.granularity ?? 'region';
+
 const TXT = {
   it: {
     title: 'Prezzi dei carburanti',
@@ -21,8 +27,10 @@ const TXT = {
     side: { CH: 'Svizzera', IT: 'Italia', FR: 'Francia', DE: 'Germania', AT: 'Austria' },
     detail: (min, stations, granularity) => granularity === 'national'
       ? 'media nazionale ufficiale'
-      : granularity === 'station' ? 'prezzo rilevato alla stazione' : `minimo ${min}, ${stations} stazioni rilevate`,
-    note: (day, granularity) => granularity === 'national' ? `media nazionale ufficiale, ${day}` : `media rilevata, ${day}`,
+      : granularity === 'station' ? 'prezzo rilevato alla stazione' : `media regionale: minimo ${min}, ${stations} stazioni rilevate`,
+    note: (day, granularity) => granularity === 'national'
+      ? `media nazionale ufficiale, ${day}`
+      : granularity === 'station' ? `prezzo rilevato alla stazione, ${day}` : `media regionale, ${day}`,
   },
   en: {
     title: 'Fuel prices',
@@ -31,8 +39,10 @@ const TXT = {
     side: { CH: 'Switzerland', IT: 'Italy', FR: 'France', DE: 'Germany', AT: 'Austria' },
     detail: (min, stations, granularity) => granularity === 'national'
       ? 'official national average'
-      : granularity === 'station' ? 'price recorded at station' : `lowest ${min}, ${stations} stations surveyed`,
-    note: (day, granularity) => granularity === 'national' ? `official national average, ${day}` : `recorded average, ${day}`,
+      : granularity === 'station' ? 'price recorded at station' : `regional average: lowest ${min}, ${stations} stations surveyed`,
+    note: (day, granularity) => granularity === 'national'
+      ? `official national average, ${day}`
+      : granularity === 'station' ? `price recorded at station, ${day}` : `regional average, ${day}`,
   },
   de: {
     title: 'Treibstoffpreise',
@@ -41,8 +51,10 @@ const TXT = {
     side: { CH: 'Schweiz', IT: 'Italien', FR: 'Frankreich', DE: 'Deutschland', AT: 'Österreich' },
     detail: (min, stations, granularity) => granularity === 'national'
       ? 'offizieller nationaler Durchschnitt'
-      : granularity === 'station' ? 'an der Tankstelle erhobener Preis' : `tiefster Preis ${min}, ${stations} erfasste Tankstellen`,
-    note: (day, granularity) => granularity === 'national' ? `offizieller nationaler Durchschnitt, ${day}` : `erhobener Durchschnitt, ${day}`,
+      : granularity === 'station' ? 'an der Tankstelle erhobener Preis' : `regionaler Durchschnitt: tiefster Preis ${min}, ${stations} erfasste Tankstellen`,
+    note: (day, granularity) => granularity === 'national'
+      ? `offizieller nationaler Durchschnitt, ${day}`
+      : granularity === 'station' ? `an der Tankstelle erhobener Preis, ${day}` : `regionaler Durchschnitt, ${day}`,
   },
   fr: {
     title: 'Prix des carburants',
@@ -51,8 +63,10 @@ const TXT = {
     side: { CH: 'Suisse', IT: 'Italie', FR: 'France', DE: 'Allemagne', AT: 'Autriche' },
     detail: (min, stations, granularity) => granularity === 'national'
       ? 'moyenne nationale officielle'
-      : granularity === 'station' ? 'prix relevé à la station' : `prix le plus bas ${min}, ${stations} stations relevées`,
-    note: (day, granularity) => granularity === 'national' ? `moyenne nationale officielle, ${day}` : `moyenne relevée, ${day}`,
+      : granularity === 'station' ? 'prix relevé à la station' : `moyenne régionale : prix le plus bas ${min}, ${stations} stations relevées`,
+    note: (day, granularity) => granularity === 'national'
+      ? `moyenne nationale officielle, ${day}`
+      : granularity === 'station' ? `prix relevé à la station, ${day}` : `moyenne régionale, ${day}`,
   },
 };
 
@@ -73,13 +87,13 @@ export function shapeFuelBlock(dataset, { canton, nowMs }) {
   const rows = dataset.records
     .filter((r) => isObj(r) && r.canton === canton)
     .filter((r) => SIDE_ORDER.includes(r.side) && FUEL_ORDER.includes(r.fuel))
-    .filter((r) => GRANULARITIES.includes(r.granularity))
+    .filter((r) => r.granularity == null || GRANULARITIES.includes(r.granularity))
     .filter((r) => (r.currency === 'CHF' || r.currency === 'EUR') && (r.side === 'CH') === (r.currency === 'CHF'))
     .filter((r) => finite(r.avg) != null && finite(r.min) != null && r.min <= r.avg)
-    .filter((r) => Number.isInteger(r.stations) && r.stations >= (r.granularity === 'national' ? 1 : th.minStations))
+    .filter((r) => Number.isInteger(r.stations) && r.stations >= (granularityOf(r) === 'national' ? 1 : th.minStations))
     // Ogni record ha la sua data di rilevazione: una riga ferma da piu' della
     // soglia non si mostra accanto a righe fresche.
-    .filter((r) => !freshnessProblem(r.observedAt, nowMs, r.granularity === 'national' ? th.nationalMaxAgeMs : th.maxAgeMs, 'record'))
+    .filter((r) => !freshnessProblem(r.observedAt, nowMs, granularityOf(r) === 'national' ? th.nationalMaxAgeMs : th.maxAgeMs, 'record'))
     .sort((a, b) => SIDE_ORDER.indexOf(a.side) - SIDE_ORDER.indexOf(b.side) || FUEL_ORDER.indexOf(a.fuel) - FUEL_ORDER.indexOf(b.fuel));
   if (rows.length < th.minRows) {
     return omitted(id, 'empty', `nessun prezzo con almeno ${th.minStations} stazioni per ${canton}`);
@@ -100,7 +114,7 @@ export function shapeFuelBlock(dataset, { canton, nowMs }) {
         items: rows.map((r) => ({
           label: label(r),
           value: fmtPerLitre(r.avg, r.currency, locale),
-          detail: t.detail(fmtPerLitre(r.min, r.currency, locale), fmtNumber(r.stations, locale), r.granularity),
+          detail: t.detail(fmtPerLitre(r.min, r.currency, locale), fmtNumber(r.stations, locale), granularityOf(r)),
           date: r.observedAt,
         })),
         sourceName: providers.join('; '),
@@ -108,7 +122,7 @@ export function shapeFuelBlock(dataset, { canton, nowMs }) {
         keyFacts: (rows.some((r) => r.side === 'CH') ? rows.filter((r) => r.side === 'CH') : rows).slice(0, 2).map((r) => ({
           label: label(r),
           value: fmtPerLitre(r.avg, r.currency, locale),
-          note: t.note(fmtDay(r.observedAt, locale), r.granularity),
+          note: t.note(fmtDay(r.observedAt, locale), granularityOf(r)),
           sourceName: String(r.source).trim(),
         })),
       };

@@ -28,6 +28,7 @@ import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-servic
 import { keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
+import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
 import { shapeRoadEventsBlock } from '../scripts/lib/canton-hubs/blocks-road-events.mjs';
 import { shapeEventsBlock } from '../scripts/lib/canton-hubs/blocks-events.mjs';
 import { shapeWeatherBlock } from '../scripts/lib/canton-hubs/blocks-services.mjs';
@@ -385,6 +386,15 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
       assert.equal(out.code, 'missing', 'cache assente = missing, per ogni blocco');
     }
   }
+});
+
+test('la cache carburanti legacy senza granularita resta leggibile durante il passaggio HTTP', () => {
+  const legacy = fixtureDatasets().fuel;
+  legacy.records.forEach((record) => { delete record.granularity; });
+  const block = shapeFuelBlock(legacy, { canton: 'TI', nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.match(block.render('it').items[0].detail, /media regionale/);
+  assert.match(block.render('it').keyFacts[0].note, /media regionale/);
 });
 
 test('date impossibili: nessuno shaper le pubblica, il validatore le rifiuta', () => {
