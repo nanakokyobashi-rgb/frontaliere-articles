@@ -16,7 +16,11 @@ import {
   closingMergedPr,
   closedIssueRefs,
   commandReferent,
+  countAggregateHeadingItems,
+  dedupeDailyItems,
   detectAlreadyResolved,
+  hasEnumeratedItems,
+  parseFollowupItems,
 } from '../../scripts/ci/followup-resolution-match.mjs';
 
 test('legacy quoted source paths remain file locators without widening token scope', () => {
@@ -55,6 +59,64 @@ test('COMANDO accetta directory e file senza estensione, ma non prosa senza refe
   assert.equal(commandReferent('find data/all-known-job-slugs/'), 'data/all-known-job-slugs/');
   assert.equal(commandReferent('node scripts/ci/followup-check'), 'scripts/ci/followup-check');
   assert.equal(commandReferent('npm test'), null);
+});
+
+test('il conteggio degli heading aggregati riconosce H2/H3 e ignora date e fence', () => {
+  const body = [
+    '## 2026-10-07 — daily bucket',
+    '## Item 1. primo',
+    '### 2. secondo',
+    '```markdown',
+    '## Item 3. dentro una fence',
+    '```',
+  ].join('\n');
+  assert.equal(countAggregateHeadingItems(body), 2);
+  assert.equal(hasEnumeratedItems(body), true);
+});
+
+test('gli item FU stabili sono validi a H2, mentre i numerati legacy restano a H3', () => {
+  const body = [
+    '## FU-2026-10-07-001 — Item stabile',
+    '- State: open',
+    '',
+    '### 2. Legacy a H3',
+    '- State: open',
+  ].join('\n');
+  const items = parseFollowupItems(body);
+  assert.equal(items.length, 2);
+  assert.equal(items[0].id, 'FU-2026-10-07-001');
+  assert.equal(items[0].number, null);
+  assert.equal(items[1].id, null);
+  assert.equal(items[1].number, 2);
+  assert.equal(parseFollowupItems('## 1. Legacy a H2\n- State: open').length, 0);
+});
+
+test('la deduplica conserva il done in qualunque ordine e unisce le Sources', () => {
+  const item = (state, source) => ({
+    state,
+    targetRepository: 'nanakokyobashi-rgb/frontaliere-articles',
+    targetFile: 'scripts/ci/followup-resolution-match.mjs',
+    suggestedAction: 'usare mergeDailyItemSources()',
+    text: [
+      '- Target repository: nanakokyobashi-rgb/frontaliere-articles',
+      '- Target file: scripts/ci/followup-resolution-match.mjs',
+      '- Suggested action: mergeDailyItemSources()',
+      `- State: ${state}`,
+      `- Sources: ${source}`,
+    ].join('\n'),
+  });
+
+  for (const items of [
+    [item('open', 'PR #101'), item('done', 'PR #102')],
+    [item('done', 'PR #101'), item('open', 'PR #102')],
+  ]) {
+    const result = dedupeDailyItems(items, 'nanakokyobashi-rgb/frontaliere-articles');
+    assert.equal(result.items.length, 1);
+    assert.equal(result.items[0].state, 'done');
+    assert.match(result.items[0].text, /PR #101/);
+    assert.match(result.items[0].text, /PR #102/);
+    assert.equal(result.duplicates[0].kept.state, 'done');
+  }
 });
 
 test('acceptance token: solo una chiamata eseguibile conta, non commenti stringhe regex o metodi', () => {
