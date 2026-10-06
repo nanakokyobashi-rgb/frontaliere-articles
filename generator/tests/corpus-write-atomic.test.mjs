@@ -50,7 +50,6 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-border-wait-ranking-article.mjs', 'generate-border-wait-ranking-weekly.yml'],
   ['generator/scripts/batch-add-faq-to-articles.mjs', 'batch-faq-articles.yml'],
   ['generator/scripts/generate-pharmacy-evergreen-guides.mjs', 'nessun workflow: producer rerunnable lanciato a mano'],
-  ['generator/scripts/generate-journalist-image-catalog.mjs', 'generate-article.yml'],
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'bonifica-blocking-bodies.yml'],
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
 ];
@@ -60,7 +59,13 @@ const CHOKE_POINTS = [
 // la forma e' diversa e ha gia' il suo test dedicato
 // (create-article-write-atomic.test.mjs), quindi qui vale solo per il
 // censimento di completezza in fondo, non per il controllo di forma.
-const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
+// Il catalogo immagini usa invece il writer condiviso `writeJsonAtomic`, gia'
+// verificato da register-lock-write-atomic.test.mjs: resta censito qui, ma non
+// deve continuare a pinzare una copia locale della stessa primitiva.
+const COVERED_ELSEWHERE = [
+  'generator/scripts/create-article.mjs',
+  'generator/scripts/generate-journalist-image-catalog.mjs',
+];
 
 // Scrivono sotto blog-body ma NON sono nella classe: nessun workflow li
 // invoca (verificato con un grep su .github/workflows/), quindi non esiste il
