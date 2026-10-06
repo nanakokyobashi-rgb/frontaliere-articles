@@ -10,17 +10,10 @@
  * la etichetta `has-conflicts` e, dopo un `## LGTM`, apre l'hand-off
  * «Conflitto con main dopo LGTM: riapplicare la PR #N su main» per issue-fix.
  * `reconcile-conflict-handoffs.mjs` chiude poi le ISSUE di hand-off il cui
- * lavoro è fatto. Nessuno dei due chiude la PR, e ci sono due esiti in cui la
- * PR resta aperta senza un proprietario:
+ * lavoro è fatto. Nessuno dei due chiude la PR, e c'è un esito in cui la PR
+ * resta aperta senza un proprietario:
  *
- *   1. `reapply-origin-merged` — la PR è essa stessa una riapplicazione
- *      (`fix/issue-<K>`, con #K hand-off della PR di origine #N) e #N nel
- *      frattempo ha mergiato: il contributo è su `main` dal ramo originale.
- *      Misurato il 2026-10-06: #2205 riapplicava #2201, mergiata alle 15:44;
- *      #2205 è rimasta aperta 13 ore, in conflitto, con l'auto-merge armato, e
- *      pr-autorebase le ha aperto un SECONDO hand-off (#2209).
- *
- *   2. `handoff-already-fixed` — il fixer ha lavorato l'hand-off della PR e ha
+ *   `handoff-already-fixed` — il fixer ha lavorato l'hand-off della PR e ha
  *      chiuso con `FIX_OUTCOME: already-fixed`: il contenuto era già su `main`
  *      per un'altra via, quindi non apre nessuna PR sostitutiva. Il verdetto
  *      conta solo se è un commento del fixer con identità trusted e senza la
@@ -33,13 +26,22 @@
  *      #2250, verdetto alle 00:18 — «i 24 caller sono byte-identici tra main e
  *      il branch approvato») ancora aperta e in conflitto alle 03:30.
  *
- * Non esiste un terzo caso «le issue sorgente sono chiuse»: che un'altra PR
- * abbia chiuso la stessa issue non prova che abbia consegnato QUESTO
- * contenuto (due fix parziali o diversi chiudono la stessa issue), e lì questa
- * PR può essere l'unica consegna rimasta. Quelle PR restano alla classe F del
- * rescuer e a `recycle-stale-prs`.
+ * Due casi provati in review NON ci sono, di proposito:
+ *   - «le issue sorgente sono chiuse»: che un'altra PR abbia chiuso la stessa
+ *     issue non prova che abbia consegnato QUESTO contenuto (due fix parziali
+ *     o diversi chiudono la stessa issue);
+ *   - «la PR riapplica un'origine che ha mergiato»: l'origine può aver
+ *     mergiato una HEAD diversa, o essere stata revertita. Il caso che lo
+ *     aveva motivato lo smentisce: #2205 riapplicava #2201 (mergiata), ma il
+ *     suo contenuto non era su main riga per riga, e qualcuno ne ha risolto il
+ *     conflitto e l'ha MERGIATA alle 07:57 del 2026-10-06. Chiuderla sarebbe
+ *     stato un errore, e una prova di contenuto abbastanza stretta da
+ *     evitarlo (hunk per hunk, senza rimozioni, file completi, main fissato)
+ *     costa più di quanto rende.
+ * In entrambi la PR può essere l'unica consegna rimasta: restano alla classe
+ * F del rescuer, al loro hand-off e a `recycle-stale-prs`.
  *
- * In entrambi i casi la PR non può più mergiare e nessuno la riprenderà:
+ * Nel caso coperto la PR non può più mergiare e nessuno la riprenderà:
  * `recycle-stale-prs` vuole `stale-review` da oltre 24 ore e la sorgente OPEN.
  *
  * ## Cosa NON fa
@@ -51,7 +53,7 @@
  * `reconcile-conflict-handoffs.mjs`, che dopo la grazia sull'origine chiusa
  * decide da sé, e la issue sorgente della PR resta al suo ciclo.
  *
- * Il caso 2 si fida di un verdetto del fixer, non di una prova byte a byte
+ * Il caso coperto si fida di un verdetto del fixer, non di una prova byte a byte
  * (`originContentOnMain` del riconciliatore fallirebbe proprio sul residuo di
  * sola prosa che il fixer ha giudicato equivalente). Per questo è stretto: il
  * verdetto deve essere l'ULTIMO dell'hand-off, successivo alla sua apertura,
@@ -76,12 +78,7 @@ import {
 import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
-import {
-  CONTENT_PROOF_MAX_FILES,
-  handoffRouted,
-  originContentOnMain,
-  reapplyInFlight,
-} from './reconcile-conflict-handoffs.mjs';
+import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
 import { hasClaimLabel } from './stale-claim-detector.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
@@ -114,7 +111,6 @@ export const TRUSTED_ASSOCIATIONS = Object.freeze(['OWNER', 'MEMBER', 'COLLABORA
 export const TRUSTED_BOT_LOGINS = Object.freeze(['github-actions[bot]', 'frontaliere-automation[bot]']);
 export const SUPERSEDING_OUTCOME = 'already-fixed';
 
-const FIXER_BRANCH_RE = /^fix\/issue-(\d+)$/;
 
 const labelNames = (item) => (item?.labels || [])
   .map((label) => (typeof label === 'string' ? label : label?.name))
@@ -129,12 +125,6 @@ export function handoffTitleQuery(prNumber) {
   return `riapplicare la PR #${Number(prNumber)} su main`;
 }
 
-/** Numero della issue lavorata dal branch del fixer (`fix/issue-<K>`), o null. Pura. */
-export function fixerIssueOfBranch(branch) {
-  const match = FIXER_BRANCH_RE.exec(String(branch || ''));
-  return match ? Number(match[1]) : null;
-}
-
 /**
  * La PR è un candidato dello sweep? Solo PR del ciclo, in conflitto secondo
  * merge-tree (`has-conflicts`), non draft e non dichiarate fuori dal ciclo.
@@ -146,12 +136,13 @@ export function fixerIssueOfBranch(branch) {
  * una cache: la candidatura apre solo la strada, e la chiusura esige in più
  * `mergeTreeAllowsClose`, cioè `git merge-tree` ricalcolato sulla HEAD.
  *
- * `allowUnknown` serve SOLO alla prima scrematura della lista: GitHub calcola
- * `mergeable` su richiesta e lo azzera a ogni push su main, e qui main riceve
- * un commit di articolo ogni pochi minuti, quindi la lista risponde quasi
- * sempre `UNKNOWN`. Con `allowUnknown` quella PR passa come «da verificare» e
- * viene riletta da sola (`rereadLivePr`, sempre stretta): senza, lo sweep
- * resterebbe inerte. Nessuna chiusura avviene mai su `UNKNOWN`. Pura.
+ * `allowUnknown`: GitHub calcola `mergeable` su richiesta e lo azzera a
+ * ogni push su main, e qui main riceve un commit di articolo ogni pochi
+ * minuti, quindi la risposta è quasi sempre `UNKNOWN`. Con `allowUnknown`
+ * quella PR passa come «da verificare»: lo usano la scrematura della lista e
+ * le riletture delle invarianti, che non decidono il conflitto. A deciderlo
+ * è sempre e solo `mergeTreeAllowsClose` sulla HEAD corrente: nessuna
+ * chiusura avviene mai senza un merge-tree `conflicted` appena calcolato. Pura.
  *
  * @param {object} pr
  * @param {{allowUnknown?: boolean}} [opts]
@@ -186,24 +177,6 @@ export function mergeTreeRefMatches(fetchedOid, expectedHead) {
   const fetched = String(fetchedOid || '').trim().toLowerCase();
   const expected = String(expectedHead || '').trim().toLowerCase();
   return /^[0-9a-f]{40}$/.test(fetched) && fetched === expected;
-}
-
-/**
- * L'elenco dei file letto è COMPLETO e dentro il limite della prova?
- * `/pulls/:n/files` si ferma a 3000 file senza dirlo: con un elenco troncato
- * `originContentOnMain` proverebbe solo la parte letta. Serve quindi che il
- * numero di file letti coincida con `changedFiles` della PR, e che resti
- * entro `CONTENT_PROOF_MAX_FILES`, lo stesso limite del riconciliatore. Pura.
- *
- * @returns {{ complete: boolean, reason: string }}
- */
-export function prFilesComplete(files, changedFiles) {
-  if (!Array.isArray(files)) return { complete: false, reason: 'file della PR illeggibili' };
-  const expected = Number(changedFiles);
-  if (!Number.isInteger(expected) || expected <= 0) return { complete: false, reason: 'changedFiles della PR illeggibile' };
-  if (files.length !== expected) return { complete: false, reason: `letti ${files.length} file su ${expected}: elenco incompleto` };
-  if (expected > CONTENT_PROOF_MAX_FILES) return { complete: false, reason: `${expected} file (> ${CONTENT_PROOF_MAX_FILES}): prova di contenuto non tentata` };
-  return { complete: true, reason: 'completo' };
 }
 
 /** Il commento viene da un'identità che può scrivere un verdetto del fixer? Pura. */
@@ -254,73 +227,6 @@ export function latestConflictLabelEventAt(events) {
     if (!latest || at >= latest.at) latest = { event: event.event, at };
   }
   return latest?.event === 'labeled' ? latest.at : null;
-}
-
-/**
- * Il primo file la cui patch RIMUOVE almeno una riga, o null. Dentro un hunk
- * una riga rimossa comincia con `-`; le intestazioni `---`/`+++` di un
- * diff completo stanno prima del primo `@@` e non contano. Pura.
- */
-export function firstFileWithRemovals(files) {
-  for (const file of Array.isArray(files) ? files : []) {
-    let inHunk = false;
-    for (const line of String(file?.patch || '').split('\n')) {
-      if (line.startsWith('@@')) { inHunk = true; continue; }
-      if (inHunk && line.startsWith('-')) return String(file?.filename || '(senza nome)');
-    }
-  }
-  return null;
-}
-
-/**
- * La prova di contenuto del caso 1. `originContentOnMain` dimostra il lato
- * NUOVO di ogni hunk (contesto e aggiunte) ma non le righe rimosse: una patch
- * che aggiunge una riga già su main e ne toglie una ancora presente
- * passerebbe, e chiudere la PR perderebbe la cancellazione. Quindi, fail-
- * closed: con anche una sola rimozione la prova non vale. Pura, dato
- * `readMainFile`.
- */
-export function reapplyContentProof(files, readMainFile, { changedFiles } = {}) {
-  if (!Array.isArray(files)) return null;
-  const completeness = prFilesComplete(files, changedFiles);
-  if (!completeness.complete) return { proven: false, reason: completeness.reason };
-  const withRemovals = firstFileWithRemovals(files);
-  if (withRemovals !== null) {
-    return { proven: false, reason: `${withRemovals}: la patch rimuove righe, e una rimozione non è dimostrabile su main` };
-  }
-  return originContentOnMain(files, readMainFile);
-}
-
-/**
- * Caso 1: la PR riapplica una PR di origine che ha già mergiato.
- *
- * @param {object} p
- * @param {object} p.pr            la PR candidata (`headRefName`)
- * @param {object|null} p.fixerIssue  la issue del branch `fix/issue-<K>` (`title`), o null
- * @param {object|null} p.origin   la PR di origine dell'hand-off (`state`), o null
- * @param {{proven: boolean, reason?: string}|null} p.contentProof  `originContentOnMain` sui file di QUESTA PR, o null se illeggibile
- * @returns {{ close: boolean, reason: string, origin?: number, handoff?: number, detail?: string }}
- */
-export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentProof }) {
-  const issueNumber = fixerIssueOfBranch(pr?.headRefName);
-  if (issueNumber === null) return { close: false, reason: 'not-a-fixer-branch' };
-  if (!fixerIssue) return { close: false, reason: 'fixer-issue-unreadable' };
-  const originNumber = conflictHandoffOriginPr(fixerIssue.title);
-  if (originNumber === null) return { close: false, reason: 'fixer-issue-not-a-handoff' };
-  if (Number(originNumber) === Number(pr?.number)) return { close: false, reason: 'handoff-of-itself' };
-  if (!origin) return { close: false, reason: 'origin-unreadable' };
-  if (String(origin.state || '').toUpperCase() !== 'MERGED') return { close: false, reason: 'origin-not-merged' };
-  // «L'origine ha mergiato» non basta: può aver mergiato una HEAD diversa da
-  // quella dell'hand-off (force-push), o il merge può essere stato revertito,
-  // e allora questa riapplicazione è l'unica consegna rimasta. La prova è sul
-  // contenuto: ogni hunk di QUESTA PR deve essere già su main adesso
-  // (`reapplyContentProof`: la prova del riconciliatore, rifiutata se la
-  // patch contiene rimozioni, che quella prova non vede).
-  if (!contentProof) return { close: false, reason: 'content-proof-unreadable' };
-  if (contentProof.proven !== true) {
-    return { close: false, reason: 'content-not-on-main', detail: String(contentProof.reason || '') };
-  }
-  return { close: true, reason: 'reapply-origin-merged', origin: originNumber, handoff: issueNumber };
 }
 
 /**
@@ -387,7 +293,6 @@ export function latestHandoffOf(prNumber, issues) {
 }
 
 const CLOSING_REASONS = Object.freeze({
-  'reapply-origin-merged': ({ origin, handoff }) => `questa PR riapplicava la PR di origine **#${origin}** (hand-off #${handoff}), che nel frattempo è stata mergiata, e ogni hunk di questa PR risulta già presente su \`main\`: qui non resta niente da consegnare.`,
   'handoff-already-fixed': ({ handoff }) => `il fixer ha lavorato l'hand-off **#${handoff}** di questa PR e ha chiuso con \`FIX_OUTCOME: ${SUPERSEDING_OUTCOME}\` — il contenuto approvato era già su \`main\` per un'altra via, quindi non esiste una PR sostitutiva. La verifica del fixer è nei commenti di #${handoff}.`,
 });
 
@@ -429,7 +334,7 @@ function ghJson(args) {
   }
 }
 
-const PR_FIELDS = 'number,title,body,baseRefName,headRefName,headRefOid,labels,isDraft,mergeable,changedFiles';
+const PR_FIELDS = 'number,title,body,baseRefName,headRefName,headRefOid,labels,isDraft,mergeable';
 
 function listOpenPrs() {
   const prs = ghJson(['pr', 'list', '--repo', REPO, '--state', 'open', '--limit', String(OPEN_PR_LIMIT),
@@ -440,14 +345,6 @@ function listOpenPrs() {
     return null;
   }
   return prs;
-}
-
-function readFixerIssue(number) {
-  return ghJson(['issue', 'view', String(number), '--repo', REPO, '--json', 'number,title,state']);
-}
-
-function readPrState(number) {
-  return ghJson(['pr', 'view', String(number), '--repo', REPO, '--json', 'number,state,mergedAt']);
 }
 
 function readHandoffs(prNumber) {
@@ -467,24 +364,6 @@ function readIssueComments(number) {
   }
 }
 
-/** I file della PR con la loro patch, o null se la lettura fallisce. */
-function readPrFiles(prNumber) {
-  const raw = gh(['api', '--paginate', '--slurp', `repos/${REPO}/pulls/${Number(prNumber)}/files?per_page=100`]);
-  if (raw === null) return null;
-  try {
-    const pages = JSON.parse(raw);
-    return Array.isArray(pages) && pages.every(Array.isArray) ? pages.flat() : null;
-  } catch {
-    return null;
-  }
-}
-
-/** Un file com'è su main adesso, o null. Stessa lettura del riconciliatore. */
-function readMainFile(filePath) {
-  const encoded = String(filePath).split('/').map(encodeURIComponent).join('/');
-  return gh(['api', '-H', 'Accept: application/vnd.github.raw+json', `repos/${REPO}/contents/${encoded}?ref=${BASE_BRANCH}`]);
-}
-
 function readConflictLabelEventAt(number) {
   const raw = gh(['api', '--paginate', '--slurp', `repos/${REPO}/issues/${Number(number)}/events?per_page=100`]);
   if (raw === null) return null;
@@ -502,13 +381,20 @@ function readConflictLabelEventAt(number) {
  * ancora candidata), altrimenti null. Rende l'oggetto riletto per intero:
  * la conferma deve decidere su titolo, body e label correnti, non sullo
  * snapshot iniziale.
+ *
+ * Qui si rileggono le INVARIANTI (aperta, HEAD, base, ciclo, label, non
+ * draft), non il conflitto: `mergeable=UNKNOWN` passa, perché GitHub lo
+ * azzera a ogni push su main — cioè ogni pochi minuti, e pretendere
+ * `CONFLICTING` a ogni rilettura lascerebbe lo sweep inerte. `MERGEABLE`
+ * invece scarta. La prova del conflitto è `mergeTreeState`, che ogni
+ * chiamante esegue accanto a questa rilettura, sulla stessa HEAD.
  */
 function rereadLivePr(pr) {
   const live = ghJson(['pr', 'view', String(pr.number), '--repo', REPO, '--json', `state,${PR_FIELDS}`]);
   if (!live || String(live.state || '').toUpperCase() !== 'OPEN') return null;
   if (Number(live.number) !== Number(pr.number)) return null;
   if (String(live.headRefOid || '') !== String(pr.headRefOid || '')) return null;
-  return isSweepCandidate(live).candidate ? live : null;
+  return isSweepCandidate(live, { allowUnknown: true }).candidate ? live : null;
 }
 
 /**
@@ -534,17 +420,6 @@ function mergeTreeState(pr) {
 }
 
 function decide(pr, openPrs) {
-  const fixerIssueNumber = fixerIssueOfBranch(pr.headRefName);
-  if (fixerIssueNumber !== null) {
-    const fixerIssue = readFixerIssue(fixerIssueNumber);
-    const originNumber = fixerIssue ? conflictHandoffOriginPr(fixerIssue.title) : null;
-    const origin = originNumber !== null && originNumber !== Number(pr.number) ? readPrState(originNumber) : null;
-    // La prova di contenuto costa una lettura per file: solo se l'origine è mergiata.
-    const files = String(origin?.state || '').toUpperCase() === 'MERGED' ? readPrFiles(pr.number) : null;
-    const contentProof = reapplyContentProof(files, readMainFile, { changedFiles: pr.changedFiles });
-    const reapply = decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentProof });
-    if (reapply.close) return reapply;
-  }
   const handoffs = readHandoffs(pr.number);
   if (!Array.isArray(handoffs)) return { close: false, reason: 'handoffs-unreadable' };
   if (handoffs.length >= HANDOFF_SEARCH_LIMIT) return { close: false, reason: 'handoffs-truncated' };
@@ -581,11 +456,12 @@ function main() {
       break;
     }
     examined += 1;
-    // La lettura singola è quella che conta: stessa HEAD della lista e
-    // `CONFLICTING` confermato adesso. Il ciclo prosegue sull'oggetto riletto.
+    // Rilettura delle invarianti: stessa HEAD della lista, ancora una PR del
+    // ciclo aperta verso main. Il ciclo prosegue sull'oggetto riletto; il
+    // conflitto lo prova il merge-tree qui sotto.
     const pr = rereadLivePr(listed);
     if (!pr) {
-      console.log(`PR #${listed.number}: conflitto non confermato da GitHub alla rilettura (o PR cambiata) → resta aperta.`);
+      console.log(`PR #${listed.number}: cambiata o non più candidata alla rilettura → resta aperta.`);
       continue;
     }
     const treeState = mergeTreeState(pr);

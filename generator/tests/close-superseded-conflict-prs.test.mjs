@@ -19,10 +19,6 @@ import {
   SUPERSEDED_MARKER,
   closingComment,
   decideHandoffAlreadyFixed,
-  decideReapplyOfMergedOrigin,
-  firstFileWithRemovals,
-  fixerIssueOfBranch,
-  reapplyContentProof,
   handoffTitleQuery,
   isSweepCandidate,
   isTrustedFixerOutcome,
@@ -31,7 +27,6 @@ import {
   mergeTreeAllowsClose,
   latestHandoffOf,
   mergeTreeRefMatches,
-  prFilesComplete,
 } from '../../scripts/ci/close-superseded-conflict-prs.mjs';
 import { buildConflictHandoffIssue } from '../../scripts/ci/pr-autorebase.mjs';
 
@@ -109,75 +104,20 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
 
 // ── Caso 1: riapplicazione di un'origine mergiata (#2205 → #2201) ───────────
 
-const reapplyPr = loopPr({ number: 2205, headRefName: 'fix/issue-2204', title: 'feat(mobilita): riapplica P9c su main' });
-const handoffOfOrigin = { number: 2204, title: 'Conflitto con main dopo LGTM: riapplicare la PR #2201 su main' };
-
-const PROVEN = { proven: true, checked: 12, files: ['generator/scripts/x.mjs'] };
-
-test('caso 1 — origine mergiata E contenuto di questa PR già su main: superata', () => {
-  assert.deepEqual(
-    decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: PROVEN }),
-    { close: true, reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 },
-  );
-  // La forma del titolo senza «dopo LGTM» è lo stesso hand-off.
-  const plain = { number: 2204, title: 'Conflitto con main: riapplicare la PR #2201 su main' };
-  assert.equal(decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: plain, origin: { state: 'MERGED' }, contentProof: PROVEN }).close, true);
-});
-
-test('caso 1 — origine mergiata ma contenuto NON provato su main: resta aperta', () => {
-  // Review di #2274: l'origine può aver mergiato una HEAD diversa da quella
-  // dell'hand-off, o il suo merge può essere stato revertito. Allora questa
-  // riapplicazione è l'unica consegna rimasta.
-  const decide = (contentProof) => decideReapplyOfMergedOrigin({
-    pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof,
-  });
-  assert.deepEqual(decide({ proven: false, reason: 'x.mjs: hunk 1/2 non applicato su main' }), {
-    close: false, reason: 'content-not-on-main', detail: 'x.mjs: hunk 1/2 non applicato su main',
-  });
-  assert.equal(decide(null).reason, 'content-proof-unreadable');
-  assert.equal(decide(undefined).reason, 'content-proof-unreadable');
-  assert.equal(decide({ proven: 'true' }).close, false, 'solo `proven === true` autorizza');
-});
-
-test('caso 1 — una patch con rimozioni non è dimostrabile: la prova fallisce chiusa', () => {
-  // Review di #2274: la prova del riconciliatore guarda solo contesto e
-  // aggiunte. Qui la riga aggiunta è già su main, quella rimossa c'è ancora:
-  // senza il rifiuto la PR verrebbe chiusa e la cancellazione persa.
-  const main = ['const a = 1;', 'const vecchia = true;', 'const nuova = true;', 'export { a };'].join('\n');
-  const additive = { filename: 'x.mjs', status: 'modified', patch: '@@ -1,3 +1,4 @@\n const a = 1;\n const vecchia = true;\n+const nuova = true;\n export { a };' };
-  const mixed = { filename: 'x.mjs', status: 'modified', patch: '@@ -1,3 +1,3 @@\n const a = 1;\n-const vecchia = true;\n+const nuova = true;\n export { a };' };
-  assert.equal(firstFileWithRemovals([additive]), null);
-  assert.equal(firstFileWithRemovals([additive, mixed]), 'x.mjs');
-  // Le intestazioni di un diff completo non sono rimozioni.
-  assert.equal(firstFileWithRemovals([{ filename: 'y.mjs', patch: '--- a/y.mjs\n+++ b/y.mjs\n@@ -1 +1,2 @@\n riga\n+altra' }]), null);
-  assert.equal(reapplyContentProof([additive], () => main, { changedFiles: 1 }).proven, true, 'una patch solo additiva già su main resta dimostrabile');
-  const refused = reapplyContentProof([mixed], () => main, { changedFiles: 1 });
-  assert.equal(refused.proven, false);
-  assert.match(refused.reason, /rimuove righe/);
-  assert.equal(reapplyContentProof(null, () => main), null, 'file illeggibili: nessuna prova');
+test('«riapplica un\'origine mergiata» NON è una ragione di chiusura', () => {
+  // Il caso c'era, ed è stato tolto: l'origine può aver mergiato una HEAD
+  // diversa o essere stata revertita, e la PR che lo aveva motivato lo
+  // smentisce — #2205 riapplicava #2201 (mergiata), ma il suo contenuto non
+  // era su main, qualcuno ne ha risolto il conflitto ed è stata MERGIATA.
+  const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
+  assert.equal(/decideReapplyOfMergedOrigin|originContentOnMain\(|readPrFiles/.test(src), false, 'lo sweep non deve chiudere una riapplicazione sulla base dello stato della sua origine');
+  assert.throws(() => closingComment({ reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 }), /ragione di chiusura sconosciuta/);
+  // Una riapplicazione in conflitto senza un verdetto sul PROPRIO hand-off resta aperta.
+  const reapply = loopPr({ number: 2205, headRefName: 'fix/issue-2204' });
   assert.equal(
-    decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: refused }).reason,
-    'content-not-on-main',
+    decideHandoffAlreadyFixed({ pr: reapply, handoff: null, comments: null, openPrs: [reapply] }).close,
+    false,
   );
-});
-
-test('caso 1 — un elenco di file incompleto o troppo lungo non è una prova', () => {
-  // `/pulls/:n/files` si ferma a 3000 file senza dirlo: l'elenco letto deve
-  // coincidere con `changedFiles` e stare nel limite del riconciliatore.
-  const file = (n) => ({ filename: `f${n}.mjs`, status: 'modified', patch: '@@ -1 +1,2 @@\n a\n+b' });
-  const main = 'a\nb';
-  assert.deepEqual(prFilesComplete([file(1)], 1), { complete: true, reason: 'completo' });
-  assert.equal(prFilesComplete([file(1)], 2).complete, false, 'letto un file su due');
-  assert.equal(prFilesComplete([file(1)], undefined).complete, false);
-  assert.equal(prFilesComplete([file(1)], 0).complete, false);
-  assert.equal(prFilesComplete(null, 1).complete, false);
-  const many = Array.from({ length: 101 }, (_, n) => file(n));
-  assert.match(prFilesComplete(many, 101).reason, /prova di contenuto non tentata/);
-  assert.equal(reapplyContentProof([file(1)], () => main, { changedFiles: 1 }).proven, true);
-  const truncated = reapplyContentProof([file(1)], () => main, { changedFiles: 3001 });
-  assert.equal(truncated.proven, false);
-  assert.match(truncated.reason, /elenco incompleto/);
-  assert.equal(reapplyContentProof([file(1)], () => main).proven, false, 'senza changedFiles la completezza non è dimostrabile');
 });
 
 test('merge-tree vale solo sulla ref realmente scaricata', () => {
@@ -209,23 +149,6 @@ test('l\'ultima cosa prima della chiusura è una rilettura della PR', () => {
   // La finestra irriducibile è dichiarata, non taciuta.
   assert.match(main, /FINESTRA RESIDUA, per costruzione/);
 });
-
-test('caso 1 — resta aperta finché l\'origine non è MERGED o non si legge', () => {
-  const reason = (over) => decideReapplyOfMergedOrigin({
-    pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: PROVEN, ...over,
-  }).reason;
-  assert.equal(reason({ origin: { state: 'OPEN' } }), 'origin-not-merged');
-  // Chiusa senza merge: il contributo NON è su main, la riapplicazione serve.
-  assert.equal(reason({ origin: { state: 'CLOSED' } }), 'origin-not-merged');
-  assert.equal(reason({ origin: null }), 'origin-unreadable');
-  assert.equal(reason({ fixerIssue: null }), 'fixer-issue-unreadable');
-  assert.equal(reason({ fixerIssue: { number: 2204, title: 'Workflow Failure: tests' } }), 'fixer-issue-not-a-handoff');
-  assert.equal(reason({ pr: loopPr({ headRefName: 'codex/altro' }) }), 'not-a-fixer-branch');
-  assert.equal(fixerIssueOfBranch('fix/issue-2204'), 2204);
-  assert.equal(fixerIssueOfBranch('fix/issue-2204-bis'), null);
-});
-
-// ── Caso 2: hand-off chiuso dal fixer con `already-fixed` (#2246 / #2250) ────
 
 test('caso 2 — verdetto already-fixed sull\'hand-off della HEAD corrente: superata', () => {
   const pr = loopPr();
@@ -425,7 +348,6 @@ test('solo merge-tree «conflicted» sulla HEAD corrente autorizza la chiusura',
 
 test('il commento di chiusura dice la ragione e come annullarla', () => {
   for (const decision of [
-    { reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 },
     { reason: 'handoff-already-fixed', handoff: 2250 },
   ]) {
     const body = closingComment(decision);
@@ -433,7 +355,7 @@ test('il commento di chiusura dice la ragione e come annullarla', () => {
     assert.match(body, /gh pr reopen/, body);
     assert.match(body, /branch NON è stato cancellato/, body);
   }
-  assert.match(closingComment({ reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 }), /#2201/);
+  assert.match(closingComment({ reason: 'handoff-already-fixed', handoff: 2250 }), /#2250/);
   assert.throws(() => closingComment({ reason: 'inventata' }), /ragione di chiusura sconosciuta/);
 });
 
@@ -446,11 +368,16 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   // Prima decisione sullo snapshot, conferma sull'oggetto RILETTO: un body
   // cambiato fra le due letture non deve essere ignorato.
   assert.ok(before.includes('decide(pr, openPrs)'), 'manca la prima decisione');
-  // `allowUnknown` compare una sola volta, nella scrematura: ogni PR passa poi
-  // dalla rilettura stretta PRIMA di qualunque decisione.
-  assert.equal(src.split('allowUnknown: true').length - 1, 1, '`allowUnknown` va usato solo per filtrare la lista');
-  assert.ok(before.indexOf('const pr = rereadLivePr(listed);') < before.indexOf('decide(pr, openPrs)'), 'la rilettura stretta deve precedere la decisione');
-  assert.match(src, /function rereadLivePr[\s\S]{0,700}isSweepCandidate\(live\)\.candidate/, 'la rilettura deve restare stretta (niente allowUnknown)');
+  // `mergeable=UNKNOWN` è la risposta tipica (main si muove ogni pochi
+  // minuti): scrematura e riletture delle invarianti lo ammettono, altrimenti
+  // lo sweep resterebbe inerte. Il conflitto lo decide SOLO merge-tree, che
+  // deve stare fra la rilettura e ogni decisione.
+  assert.equal(src.split('allowUnknown: true').length - 1, 2, '`allowUnknown`: scrematura della lista e rilettura delle invarianti, nient\'altro');
+  const reread = before.indexOf('const pr = rereadLivePr(listed);');
+  const tree = before.indexOf('mergeTreeState(pr)');
+  const first = before.indexOf('decide(pr, openPrs)');
+  assert.ok(reread >= 0 && reread < tree && tree < first, 'ordine atteso: rilettura delle invarianti, merge-tree, decisione');
+  assert.match(before.slice(tree, first), /if \(!mergeTreeAllowsClose\(treeState\)\) \{[\s\S]*?continue;/, 'senza merge-tree «conflicted» non si arriva alla decisione');
   assert.ok(before.includes('const live = rereadLivePr(pr);'), 'manca la rilettura della PR');
   assert.ok(before.includes('decide(live, freshOpenPrs)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
   assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 3, 'merge-tree va ricalcolato prima della decisione, prima della conferma e nella guardia finale');
