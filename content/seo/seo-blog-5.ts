@@ -100018,6 +100018,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disoccupazione-settembre-ticino-2026': {
+    title: 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    description: 'A settembre 2026 la disoccupazione in Svizzera rimane stabile al 3%; il Ticino registra il 2,9% con 4\'800 disoccupati e i posti vacanti salgono a 44\'200. Guida',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, settembre, resta',
+    ogTitle: 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    ogDescription: 'Il bollettino SECO di settembre 2026 mostra una disoccupazione nazionale ferma al 3% e un ticinese al 2,9% con 4\'800 senza lavoro. I posti vacanti annunciati raggiungono 44\'200, in aumento di 6\'800 su base annua. L\'articolo spiega ai frontalieri',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-settembre-ticino-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione stabile al 3% in Svizzera a settembre 2026",
+      "description": "A settembre 2026 la disoccupazione in Svizzera rimane stabile al 3%; il Ticino registra il 2,9% con 4'800 disoccupati e i posti vacanti salgono a 44'200. Guida",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con professionisti e segno dell'ufficio di collocamento, rappresentante il mercato del lavoro ticinese."
+      },
+      "datePublished": "2026-10-06T07:34:13+00:00",
+      "dateModified": "2026-10-06T07:34:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-settembre-ticino-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
