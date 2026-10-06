@@ -318,8 +318,12 @@ test('locale completeness: una radice di famiglia nuova non scatta i pavimenti a
 test('publish-api: osserva corpus-sections e deriva dal core le cartelle dei corpi del preflight', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   assert.match(wf, /^      - 'scripts\/lib\/corpus-sections\.mjs'$/m);
+  assert.match(wf, /^      - 'generator\/data\/canton-sections\.json'$/m);
   assert.match(wf, /^      - 'generator\/scripts\/lib\/corpus-paths\.mjs'$/m);
-  assert.match(wf, /import\('\.\/scripts\/lib\/corpus-sections\.mjs'\)/);
+  const bootstrapImport = wf.indexOf("await import('./host/cantonSectionsBootstrap.mjs')");
+  const corpusSectionsImport = wf.indexOf("await import('./scripts/lib/corpus-sections.mjs')");
+  assert.ok(bootstrapImport >= 0, 'publish-api preflight deve caricare il bootstrap D22');
+  assert.ok(corpusSectionsImport > bootstrapImport, 'publish-api preflight deve leggere le sezioni dopo il bootstrap D22');
   assert.match(wf, /git diff --name-only "\$BEFORE" HEAD -- "\$\{body_dir_list\[@\]\}"/);
   assert.doesNotMatch(wf, /-- content\/blog-body content\/blog-body-ch/);
 });
