@@ -163,6 +163,16 @@ test('generated and editorial records are reader-facing and discoverable by cove
   const root = tempRoot();
   try {
     const generated = generatedRecord();
+    const blogArticleHero = {
+      ...generated,
+      imageUrl: '/images/blog/article-governance-test.webp',
+    };
+    // The corpus can run this fixture before or after the site engine mirror
+    // lands. Use the new article-hero path when that engine accepts it, while
+    // retaining a valid legacy fixture for the pre-mirror base.
+    if (validateGeneratedImageRecord(blogArticleHero).valid) {
+      generated.imageUrl = blogArticleHero.imageUrl;
+    }
     const generatedFile = path.join(root, 'public', generated.imageUrl.slice(1));
     fs.mkdirSync(path.dirname(generatedFile), { recursive: true });
     fs.writeFileSync(generatedFile, Buffer.alloc(generated.bytes, 0x47));

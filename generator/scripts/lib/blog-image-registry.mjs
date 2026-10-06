@@ -1,8 +1,9 @@
 /**
  * Reader-facing provenance for blog cover images.
  *
- * Generated covers keep the strict engine record (and its canonical
- * `/images/generated/` path). Editorial uploads use a separate, explicit
+ * Generated covers keep the strict engine record (under `/images/blog/` for
+ * article heroes, with `/images/generated/` retained for other generated
+ * surfaces). Editorial uploads use a separate, explicit
  * record because the engine's `generated-provider` licence is not a licence
  * for a human-supplied photograph. The aggregate is published by
  * build-blog-index.mjs as `data/image-credits-blog.json`.
@@ -173,7 +174,8 @@ export function buildPublishedBlogImageRegistry(root, images = []) {
   const selected = new Set(images.map(normalizePath).filter(Boolean));
   const generated = Object.fromEntries(
     readGeneratedImageRecords(root)
-      .filter((record) => record.scope === 'article-hero' && record.imageUrl.startsWith('/images/generated/'))
+      .filter((record) => record.scope === 'article-hero'
+        && /^\/images\/(?:blog|generated)\//.test(record.imageUrl))
       .filter((record) => hasMaterializedImageRecord(root, record.imageUrl, record))
       .filter((record) => selected.size === 0 || selected.has(record.imageUrl))
       .map((record) => [record.imageUrl, record]),
