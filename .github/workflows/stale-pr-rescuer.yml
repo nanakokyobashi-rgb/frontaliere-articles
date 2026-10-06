@@ -4,7 +4,9 @@ name: Stale PR rescuer (self-healing signal)
 # interrogabile entro ~1h, invece di lasciarli fermi per giorni. Sei classi:
 #
 #   F) CONFLITTO CON MAIN (`has-conflicts`, scritta da `pr-autorebase` con
-#      merge-tree). Si valuta PRIMA di tutte le altre e prima dei loro guard
+#      merge-tree e confermata adesso da `mergeable_state=dirty` più un
+#      `git merge-tree` sulla HEAD corrente: la label da sola può essere rimasta
+#      da un ricalcolo fallito). Si valuta PRIMA di tutte le altre e prima dei loro guard
 #      fail-closed (check, review, quota, cap del fixer), perché le rende inerti:
 #      GitHub non avvia i workflow `pull_request` su una PR in conflitto, quindi
 #      nessun test, review o fixer può più partire su quella head. La label è solo
@@ -406,7 +408,29 @@ jobs:
             # sono verificabili, o il conflitto è rientrato, la PR resta
             # invariata; il commento, idempotente per (classe, HEAD), si rinvia
             # se i commenti non sono leggibili.
+            #
+            # La label da sola NON è una prova corrente: `pr-autorebase` la
+            # conserva apposta quando fetch o merge-tree non sono leggibili, e
+            # la toglie in best-effort. Una PR già pulita con la label rimasta
+            # riceverebbe `stale-review` e verrebbe chiusa dal recycle. Serve
+            # quindi una seconda fonte, indipendente e letta adesso: lo stato
+            # di GitHub. Solo `dirty` conferma; uno stato mergeabile smentisce
+            # la label (la PR prosegue verso le classi A–E come se non
+            # l'avesse); qualunque altra risposta — `unknown` mentre GitHub
+            # ricalcola, lettura fallita — lascia la PR INVARIATA.
+            F_CONFIRMED=false
             if [ "${HAS_CONFLICTS:-false}" = "true" ]; then
+              MERGEABLE_STATE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '.mergeable_state // ""' 2>/dev/null || true)
+              case "$MERGEABLE_STATE" in
+                dirty) F_CONFIRMED=true ;;
+                clean|unstable|blocked|behind|has_hooks)
+                  echo "PR #$N: label has-conflicts non confermata da GitHub (mergeable_state=$MERGEABLE_STATE) — valuto le altre classi" ;;
+                *)
+                  echo "PR #$N: conflitto non verificabile (mergeable_state=${MERGEABLE_STATE:-illeggibile}) — PR invariata"
+                  continue ;;
+              esac
+            fi
+            if [ "$F_CONFIRMED" = "true" ]; then
               F_TREE_STATE=unknown
               F_PR_REF="refs/remotes/origin/pr-$N-head"
               if git fetch --no-tags --quiet origin \

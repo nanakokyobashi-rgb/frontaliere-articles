@@ -146,8 +146,8 @@ jobs:
 
       # Una PR del ciclo in conflitto non riceve più eventi `pull_request`: se
       # nel frattempo non ha più niente da consegnare (riapplicava una PR ormai
-      # mergiata, il fixer ha chiuso il suo hand-off con `already-fixed`, o le
-      # sue issue sorgente sono tutte chiuse) resta aperta senza un
+      # mergiata, oppure il fixer ha chiuso il suo hand-off con `already-fixed`)
+      # resta aperta senza un
       # proprietario — `recycle-stale-prs` vuole `stale-review` da 24 ore e la
       # sorgente OPEN. Misurato il 2026-10-06: #2205 ferma 13 ore e #2246 ferma
       # 4 ore, entrambe con l'auto-merge armato. Gira DOPO l'autorebase, che

@@ -338,6 +338,8 @@ case "$sub" in
       */pulls/*)
         if [ "$jq" = '.head.sha' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.head?.sha||"")+"\\n")' ${JSON.stringify(fixPrs)}
+        elif [ "$jq" = '.mergeable_state // ""' ]; then
+          node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; if (pr?.mergeable_state === "__error__") process.exit(1); process.stdout.write(String(pr?.mergeable_state||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
         else
@@ -1007,6 +1009,7 @@ test('#314 — stallo rientrato: `stale-review` viene TOLTA, non lasciata lì', 
 const conflicted = (labels = [], over = {}) => openPr({
   base: { ref: 'main' },
   mergeable: 'CONFLICTING',
+  mergeable_state: 'dirty',
   labels: [{ name: 'has-conflicts' }, ...labels.map((name) => ({ name }))],
   ...over,
 });
@@ -1121,6 +1124,38 @@ test('F — dry_run: nessuna label e nessun commento', opts, () => {
   });
   assert.deepEqual(r.labeled, [], r.stdout);
   assert.deepEqual(r.comments, [], r.stdout);
+});
+
+test('F — label rimasta ma GitHub dice mergeabile: non è F, decidono le altre classi', opts, () => {
+  // Review di #2274: una PR già pulita con `has-conflicts` conservata da un
+  // ricalcolo fallito riceverebbe `stale-review` e verrebbe chiusa dal
+  // recycle. Qui è verde con LGTM sulla HEAD: nessuna classe scatta, e la
+  // `stale-review` viene tolta come per ogni stallo rientrato.
+  for (const state of ['clean', 'unstable', 'blocked', 'behind']) {
+    const r = runScan({
+      prs: conflicted(['stale-review'], { mergeable_state: state }),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    });
+    assert.deepEqual(r.comments, [], `${state}: classe F su una PR che GitHub dà per mergeabile\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [901], `${state}: la PR deve proseguire verso le altre classi\n${r.stdout}`);
+  }
+});
+
+test('F — conflitto non verificabile: la PR resta INVARIATA', opts, () => {
+  // `unknown` mentre GitHub ricalcola, campo assente, lettura fallita: né
+  // label né commento, e nemmeno la rimozione di una `stale-review` esistente.
+  for (const state of ['unknown', '', '__error__']) {
+    const r = runScan({
+      prs: conflicted(['stale-review'], { mergeable_state: state }),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    });
+    assert.deepEqual(r.comments, [], `${state || 'vuoto'}\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [], `${state || 'vuoto'}: una lettura non verificabile non deve cambiare niente\n${r.stdout}`);
+  }
 });
 
 test('F — idempotenza: stesso head già segnalato, nessun secondo commento', opts, () => {

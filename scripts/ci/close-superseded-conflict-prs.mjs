@@ -139,11 +139,20 @@ export function fixerIssueOfBranch(branch) {
  * (la risposta tipica subito dopo un push su main) o un campo assente sono
  * letture non verificabili e rimandano al tick dopo. Anche `CONFLICTING` è
  * una cache: la candidatura apre solo la strada, e la chiusura esige in più
- * `mergeTreeAllowsClose`, cioè `git merge-tree` ricalcolato sulla HEAD. Pura.
+ * `mergeTreeAllowsClose`, cioè `git merge-tree` ricalcolato sulla HEAD.
  *
+ * `allowUnknown` serve SOLO alla prima scrematura della lista: GitHub calcola
+ * `mergeable` su richiesta e lo azzera a ogni push su main, e qui main riceve
+ * un commit di articolo ogni pochi minuti, quindi la lista risponde quasi
+ * sempre `UNKNOWN`. Con `allowUnknown` quella PR passa come «da verificare» e
+ * viene riletta da sola (`rereadLivePr`, sempre stretta): senza, lo sweep
+ * resterebbe inerte. Nessuna chiusura avviene mai su `UNKNOWN`. Pura.
+ *
+ * @param {object} pr
+ * @param {{allowUnknown?: boolean}} [opts]
  * @returns {{ candidate: boolean, reason: string }}
  */
-export function isSweepCandidate(pr) {
+export function isSweepCandidate(pr, { allowUnknown = false } = {}) {
   const labels = labelNames(pr);
   if (!labels.includes(HANDOFF_CONFLICT_LABEL)) return { candidate: false, reason: 'no-conflict-label' };
   if (pr?.isDraft) return { candidate: false, reason: 'draft' };
@@ -153,8 +162,9 @@ export function isSweepCandidate(pr) {
   if (labels.some((name) => HANDS_OFF_LABELS.includes(name))) return { candidate: false, reason: 'hands-off-label' };
   const mergeable = String(pr?.mergeable || '').toUpperCase();
   if (mergeable === 'MERGEABLE') return { candidate: false, reason: 'mergeable-now' };
-  if (mergeable !== 'CONFLICTING') return { candidate: false, reason: 'conflict-unconfirmed' };
-  return { candidate: true, reason: 'conflicted-loop-pr' };
+  if (mergeable === 'CONFLICTING') return { candidate: true, reason: 'conflicted-loop-pr' };
+  if (allowUnknown && mergeable === 'UNKNOWN') return { candidate: true, reason: 'conflict-to-verify' };
+  return { candidate: false, reason: 'conflict-unconfirmed' };
 }
 
 /**
@@ -451,11 +461,12 @@ function main() {
     console.log('::warning::close-superseded-conflict-prs: PR aperte illeggibili → nessuna modifica.');
     return;
   }
-  const candidates = openPrs.filter((pr) => isSweepCandidate(pr).candidate);
+  // Scrematura larga (`UNKNOWN` ammesso), verifica stretta per ogni PR sotto.
+  const candidates = openPrs.filter((pr) => isSweepCandidate(pr, { allowUnknown: true }).candidate);
   const budget = runBudgetFromEnv();
   const closed = [];
   let examined = 0;
-  for (const pr of candidates) {
+  for (const listed of candidates) {
     if (closed.length >= MAX_CLOSES_PER_RUN) {
       console.log(`::warning::close-superseded-conflict-prs: cap di ${MAX_CLOSES_PER_RUN} chiusure raggiunto — ${candidates.length - examined} PR rimandate al prossimo tick.`);
       break;
@@ -465,6 +476,13 @@ function main() {
       break;
     }
     examined += 1;
+    // La lettura singola è quella che conta: stessa HEAD della lista e
+    // `CONFLICTING` confermato adesso. Il ciclo prosegue sull'oggetto riletto.
+    const pr = rereadLivePr(listed);
+    if (!pr) {
+      console.log(`PR #${listed.number}: conflitto non confermato da GitHub alla rilettura (o PR cambiata) → resta aperta.`);
+      continue;
+    }
     const treeState = mergeTreeState(pr);
     if (!mergeTreeAllowsClose(treeState)) {
       console.log(`PR #${pr.number}: merge-tree ${treeState} sulla HEAD corrente → conflitto non confermato, resta aperta.`);

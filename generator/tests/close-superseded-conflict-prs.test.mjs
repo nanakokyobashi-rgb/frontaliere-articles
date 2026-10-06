@@ -93,6 +93,12 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
   // confermano il conflitto: lo sweep gira anche se l'autorebase che ricalcola
   // la label è fallito, quindi serve `CONFLICTING` da GitHub.
   assert.equal(reason({ mergeable: 'UNKNOWN' }), 'conflict-unconfirmed');
+  // Solo la scrematura della lista ammette `UNKNOWN` come «da verificare»:
+  // main riceve un commit ogni pochi minuti e la lista risponde quasi sempre
+  // così. La decisione gira poi sulla rilettura singola, che resta stretta.
+  assert.deepEqual(isSweepCandidate(loopPr({ mergeable: 'UNKNOWN' }), { allowUnknown: true }), { candidate: true, reason: 'conflict-to-verify' });
+  assert.equal(isSweepCandidate(loopPr({ mergeable: 'MERGEABLE' }), { allowUnknown: true }).candidate, false);
+  assert.equal(isSweepCandidate(loopPr({ mergeable: '' }), { allowUnknown: true }).candidate, false);
   assert.equal(reason({ mergeable: undefined }), 'conflict-unconfirmed');
   assert.equal(reason({ mergeable: '' }), 'conflict-unconfirmed');
 });
@@ -348,6 +354,11 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   // Prima decisione sullo snapshot, conferma sull'oggetto RILETTO: un body
   // cambiato fra le due letture non deve essere ignorato.
   assert.ok(before.includes('decide(pr, openPrs)'), 'manca la prima decisione');
+  // `allowUnknown` compare una sola volta, nella scrematura: ogni PR passa poi
+  // dalla rilettura stretta PRIMA di qualunque decisione.
+  assert.equal(src.split('allowUnknown: true').length - 1, 1, '`allowUnknown` va usato solo per filtrare la lista');
+  assert.ok(before.indexOf('const pr = rereadLivePr(listed);') < before.indexOf('decide(pr, openPrs)'), 'la rilettura stretta deve precedere la decisione');
+  assert.match(src, /function rereadLivePr[\s\S]{0,700}isSweepCandidate\(live\)\.candidate/, 'la rilettura deve restare stretta (niente allowUnknown)');
   assert.ok(before.includes('const live = rereadLivePr(pr);'), 'manca la rilettura della PR');
   assert.ok(before.includes('decide(live, freshOpenPrs)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
   assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 2, 'merge-tree va ricalcolato prima della decisione e prima della chiusura');
