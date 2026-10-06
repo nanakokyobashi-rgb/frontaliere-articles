@@ -2618,6 +2618,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'permesso-edilizio-berna-procedura': { it: 'permesso-edilizio-berna-procedura', en: 'bern-building-permit-process', de: 'baubewilligung-bern-verfahren', fr: 'permis-construire-berne-procedure' },
  'air-baltic-tagli-swiss': { it: 'air-baltic-tagli-swiss', en: 'air-baltic-cuts-swiss-flights', de: 'air-baltic-stellenabbau-swiss', fr: 'air-baltic-suppressions-swiss' },
  'tamedia-cancella-34-posti-lavoro': { it: 'tamedia-cancella-34-posti-lavoro', en: 'tamedia-cuts-34-jobs', de: 'tamedia-streicht-34-stellen', fr: 'tamedia-supprime-34-postes' },
+ 'neutralita-svizzera-voto-costituzione': { it: 'neutralita-svizzera-voto-costituzione', en: 'swiss-neutrality-constitution-vote', de: 'schweizer-neutralitaet-verfassung-votum', fr: 'neutralite-suisse-vote-constitution' },
+ 'elezioni-berna-guida-voto': { it: 'elezioni-berna-guida-voto', en: 'bern-cantonal-elections-voting-guide', de: 'kantonale-wahlen-bern-abstimmungsfuehrer', fr: 'elections-cantonales-berne-guide-vote' },
+ 'berna-protezione-servizio-indennita': { it: 'berna-protezione-servizio-indennita', en: 'bern-civil-protection-service-allowance', de: 'bern-zivilschutz-dienst-entschaedigung', fr: 'berne-protection-civile-service-indemnite' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

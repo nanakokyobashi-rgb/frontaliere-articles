@@ -7787,6 +7787,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia cuts 34 jobs in five newsrooms',
     'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia eliminates 34 full-time positions, affecting 41 employees in the newsrooms in Zurich, Bern, Basel, Lausanne and Geneva.',
     'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Tamedia building with newsroom in Switzerland',
+    'blog.article.neutralita-svizzera-voto-costituzione.title': 'Swiss neutrality: constitutional tightening rejected',
+    'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'The Swiss people have confirmed the current interpretation of neutrality: the initiative for a stricter conception in the Constitution has been rejected.',
+    'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande in Bellinzona in an editorial scene about Swiss politics',
+    'blog.article.elezioni-berna-guida-voto.title': 'Cantonal elections in Bern: guide to the calendar and voting',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide to cantonal elections in Bern and institutional competences',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Civil protection, Canton of Bern: requirements and allowance',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'In the Canton of Bern, civil protection is coordinated at cantonal level. Call-up notices and allowances must be verified with the competent authority.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Swiss civil protection personnel outside a cantonal administration building',
 };
 
 export default blogMetaChEn;

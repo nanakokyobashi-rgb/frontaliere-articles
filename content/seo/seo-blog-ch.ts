@@ -98241,6 +98241,108 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neutralita-svizzera-voto-costituzione': {
+    title: 'Neutralità svizzera: respinta la stretta in Costituzione',
+    description: 'Il popolo svizzero ha respinto l\'iniziativa per una neutralità più rigida nella Costituzione e confermato l\'attuale interpretazione della neutralità elvetica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, respinta, stretta, costituzione',
+    ogTitle: 'Neutralità svizzera: respinta la stretta costituzionale',
+    ogDescription: 'L\'analisi sul rifiuto dell\'iniziativa per una concezione più rigida della neutralità mostra la conferma del sostegno popolare all\'attuale interpretazione elvetica e richiama i dubbi sulle intenzioni dei sostenitori.',
+    canonicalPath: '/articoli-svizzera/neutralita-svizzera-voto-costituzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità svizzera: respinta la stretta in Costituzione",
+      "description": "Il popolo svizzero ha respinto l'iniziativa per una neutralità più rigida nella Costituzione e confermato l'attuale interpretazione della neutralità elvetica.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/neutralita-svizzera-voto-costituzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande a Bellinzona in una scena editoriale sulla politica svizzera"
+      },
+      "datePublished": "2026-10-06T04:01:17+00:00",
+      "dateModified": "2026-10-06T04:01:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-svizzera-voto-costituzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-elezioni-berna-guida-voto': {
+    title: 'Elezioni cantonali a Berna: guida a calendario e voto',
+    description: 'Guida ufficiale alle elezioni cantonali nel Cantone di Berna: calendario, modalità di voto, liste, competenze fiscali, previdenza e regole di locazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, elezioni, cantonali, berna, calendario',
+    ogTitle: 'Elezioni cantonali Berna: guida a calendario, voto e competenze',
+    ogDescription: 'Scopri come orientarti nelle elezioni cantonali a Berna. Una panoramica completa su calendario, modalità di voto, liste, suddivisione fiscale, previdenza e regole sulla locazione.',
+    canonicalPath: '/articoli-svizzera/elezioni-berna-guida-voto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Elezioni cantonali a Berna: guida a calendario e voto",
+      "description": "Guida ufficiale alle elezioni cantonali nel Cantone di Berna: calendario, modalità di voto, liste, competenze fiscali, previdenza e regole di locazione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/elezioni-berna-guida-voto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida alle elezioni cantonali nel Cantone di Berna e competenze"
+      },
+      "datePublished": "2026-10-06T04:48:47+00:00",
+      "dateModified": "2026-10-06T04:48:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/elezioni-berna-guida-voto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-berna-protezione-servizio-indennita': {
+    title: 'Protezione civile canton Berna: requisiti e indennità',
+    description: 'Protezione civile nel canton Berna: legge federale, coordinamento cantonale. Convocazioni e indennità devono essere verificate presso l\'autorità competente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, civile, canton, berna',
+    ogTitle: 'Protezione civile canton Berna: requisiti e indennità',
+    ogDescription: 'Nel canton Berna la protezione civile segue un coordinamento cantonale nell\'ambito della legge federale. Requisiti, convocazioni e indennità non vanno dedotti da regole generiche: il riferimento è l\'autorità competente.',
+    canonicalPath: '/articoli-svizzera/berna-protezione-servizio-indennita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione civile canton Berna: requisiti e indennità",
+      "description": "Protezione civile nel canton Berna: legge federale, coordinamento cantonale. Convocazioni e indennità devono essere verificate presso l'autorità competente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/berna-protezione-servizio-indennita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Protezione civile svizzera davanti a un edificio amministrativo cantonale"
+      },
+      "datePublished": "2026-10-06T05:28:53+00:00",
+      "dateModified": "2026-10-06T05:28:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/berna-protezione-servizio-indennita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -7787,6 +7787,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia streicht 34 Arbeitsplätze in fünf Redaktionen',
     'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia streicht 34 Vollzeitstellen und betrifft 41 Mitarbeitende in den Redaktionen in Zürich, Bern, Basel, Lausanne und Genf.',
     'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Tamedia Gebäude mit Redaktion in der Schweiz',
+    'blog.article.neutralita-svizzera-voto-costituzione.title': 'Schweizer Neutralität: Verschärfung in der Verfassung abgelehnt',
+    'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Das Schweizer Volk hat die aktuelle Auslegung der Neutralität bestätigt: Die Initiative für eine strengere Auffassung in der Verfassung wurde abgelehnt.',
+    'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande in Bellinzona in einer redaktionellen Szene zur Schweizer Politik',
+    'blog.article.elezioni-berna-guida-voto.title': 'Kantonswahlen in Bern: Kalender- und Abstimmungsleitfaden',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Praktischer Leitfaden zu den kantonalen Wahlen im Kanton Bern: Wahlsystem, Zeitplan, Abstimmungsmodalitäten, Listen und institutionelle Kompetenzen.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Leitfaden zu den kantonalen Wahlen in Bern und Zuständigkeiten',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Zivilschutz im Kanton Bern: Voraussetzungen und Entschädigung',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'Im Kanton Bern wird der Zivilschutz auf kantonaler Ebene koordiniert. Aufgebote und Entschädigungen sind bei der zuständigen Behörde zu überprüfen.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Schweizer Zivilschutz vor einem kantonalen Verwaltungsgebäude',
 };
 
 export default blogMetaChDe;

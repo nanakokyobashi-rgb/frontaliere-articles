@@ -7787,6 +7787,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia supprime 34 emplois dans cinq rédactions',
     'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia supprime 34 postes à temps plein, ce qui concerne 41 collaborateurs dans les rédactions de Zurich, Berne, Bâle, Lausanne et Genève.',
     'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Bâtiment Tamedia avec rédaction en Suisse',
+    'blog.article.neutralita-svizzera-voto-costituzione.title': 'Neutralité suisse : le durcissement dans la Constitution a été rejeté',
+    'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Le peuple suisse a confirmé l’interprétation actuelle de la neutralité : l’initiative visant à inscrire une conception plus stricte dans la Constitution a été rejetée.',
+    'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande à Bellinzone dans une scène éditoriale sur la politique suisse',
+    'blog.article.elezioni-berna-guida-voto.title': 'Élections cantonales à Berne : guide du calendrier et du vote',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Guide pratique des élections cantonales dans le canton de Berne : système électoral, calendrier, modalités de vote, listes et compétences institutionnelles.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide des élection cantonales à Berne et compétences institutionnelles',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Protection civile du canton de Berne : exigences et indemnités',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'Dans le canton de Berne, la protection civile est coordonnée au niveau cantonal. Les convocations et les indemnités doivent être vérifiées auprès de l\'autorité compétente.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protection civile suisse devant un bâtiment administratif cantonal',
 };
 
 export default blogMetaChFr;

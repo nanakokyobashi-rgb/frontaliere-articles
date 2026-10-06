@@ -7787,6 +7787,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia cancella 34 posti di lavoro in cinque redazioni',
     'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia sopprime 34 posti a tempo pieno coinvolgendo 41 collaboratori nelle redazioni di Zurigo, Berna, Basilea, Losanna e Ginevra.',
     'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Edificio Tamedia con redazione giornalistica in Svizzera',
+    'blog.article.neutralita-svizzera-voto-costituzione.title': 'Neutralità svizzera: respinta la stretta in Costituzione',
+    'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Il popolo svizzero ha confermato l\'attuale interpretazione della neutralità: respinta l\'iniziativa per una concezione più rigida nella Costituzione.',
+    'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande a Bellinzona in una scena editoriale sulla politica svizzera',
+    'blog.article.elezioni-berna-guida-voto.title': 'Elezioni cantonali a Berna: guida a calendario e voto',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Guida pratica alle elezioni cantonali nel Cantone di Berna: sistema elettorale, calendario, modalità di voto, liste e competenze istituzionali.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guida alle elezioni cantonali nel Cantone di Berna e competenze',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Protezione civile canton Berna: requisiti e indennità',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'Nel Cantone di Berna la protezione civile è coordinata a livello cantonale. Convocazioni e indennità vanno verificate presso l\'autorità competente.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protezione civile svizzera davanti a un edificio amministrativo cantonale',
 };
 
 export default blogMetaChIt;

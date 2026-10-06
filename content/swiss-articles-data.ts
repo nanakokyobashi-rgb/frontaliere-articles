@@ -24596,6 +24596,38 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'neutralita-svizzera-voto-costituzione',
+    category: 'novita',
+    date: '2026-10-06T04:01:17.585Z',
+    image: '/images/blog/neutralita-svizzera-voto-costituzione.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'elezioni-berna-guida-voto',
+    category: 'pratico',
+    date: '2026-10-06T04:48:46.950Z',
+    image: '/images/blog/elezioni-berna-guida-voto.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'berna-protezione-servizio-indennita',
+    category: 'pratico',
+    date: '2026-10-06T05:28:53.054Z',
+    image: '/images/blog/berna-protezione-servizio-indennita.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

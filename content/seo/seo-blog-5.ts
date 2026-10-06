@@ -99814,6 +99814,108 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-conferenza-lavoro-salari-2026': {
+    title: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    description: 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\': orari, relatori e temi su precarietà e potere d\'acquisto per i lavoratori lombardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, conferenza, salari, diritti',
+    ogTitle: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    ogDescription: 'Scopri il programma della conferenza \'Fondata sul lavoro\' a Varese. Sabato 10 ottobre si parlerà di salari, sicurezza e precarietà con relatori di peso e le Rsu di importanti aziende come Electrolux e Beko.',
+    canonicalPath: '/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: conferenza su salari e diritti, 10 ottobre",
+      "description": "Sabato 10 ottobre a Varese la conferenza 'Fondata sul lavoro': orari, relatori e temi su precarietà e potere d'acquisto per i lavoratori lombardi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/varese-conferenza-lavoro-salari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi"
+      },
+      "datePublished": "2026-10-06T03:43:17+00:00",
+      "dateModified": "2026-10-06T03:43:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-casse-malati-proposte-esperti-risposta': {
+    title: 'Casse malati: 5% di aumento e proposte valutate da esperti',
+    description: 'Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, aumento, proposte',
+    ogTitle: 'Casse malati: esperti valutano le proposte',
+    ogDescription: 'Il premio nazionale cresce del 5% nel 2027. Tre esperti analizzano le proposte sulla cassa statale e la prevenzione: in Ticino, dal 2029, metà dei cittadini potrebbe vedere ridotti i premi. Ecco cosa cambia.',
+    canonicalPath: '/articoli-frontaliere/casse-malati-proposte-esperti-risposta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati: 5% di aumento e proposte valutate da esperti",
+      "description": "Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/casse-malati-proposte-esperti-risposta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino."
+      },
+      "datePublished": "2026-10-06T04:17:25+00:00",
+      "dateModified": "2026-10-06T04:17:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/casse-malati-proposte-esperti-risposta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lipomo-fiuto-roxy-cocaina': {
+    title: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    description: 'Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lipomo, fiuto, roxy, scopre',
+    ogTitle: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    ogDescription: 'A Lipomo, i militari della Stazione di Albate hanno arrestato due cittadini tunisini dopo il sequestro di 111 grammi di cocaina, un bilancino e 390 euro. Il cane Roxy ha poi trovato 28 grammi di hashish e circa un grammo di cocaina in un\'abitazione.',
+    canonicalPath: '/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lipomo, il fiuto di Roxy scopre droga: due arresti",
+      "description": "Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lipomo-fiuto-roxy-cocaina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operazione antidroga dei Carabinieri con un pastore tedesco a Lipomo"
+      },
+      "datePublished": "2026-10-06T05:08:37+00:00",
+      "dateModified": "2026-10-06T05:08:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

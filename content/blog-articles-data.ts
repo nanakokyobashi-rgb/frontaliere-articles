@@ -39867,6 +39867,36 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'varese-conferenza-lavoro-salari-2026',
+ category: 'novita',
+ date: '2026-10-06T03:43:17.872Z',
+ image: '/images/blog/varese-conferenza-lavoro-salari-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'casse-malati-proposte-esperti-risposta',
+ category: 'pratico',
+ date: '2026-10-06T04:17:25.035Z',
+ image: '/images/blog/casse-malati-proposte-esperti-risposta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lipomo-fiuto-roxy-cocaina',
+ category: 'novita',
+ date: '2026-10-06T05:08:37.021Z',
+ image: '/images/blog/lipomo-fiuto-roxy-cocaina.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

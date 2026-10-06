@@ -12652,6 +12652,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: Zeitplan, Strecke und Sperrungen',
     'blog.article.guida-tre-valli-varesine-2026.excerpt': '6. Oktober: Start in Busto Arsizio, Ziel in der Via Sacco bei Varese. Sechs Stadtrunden für Männer und Frauen.',
     'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Radfahrer beim Tre Valli Varesine, Blick auf den Varese-See',
+    'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: Konferenz über Löhne und Rechte, 10. Oktober',
+    'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Samstag, 10. Oktober bei Varese die Konferenz "Gegründet auf der Arbeit" der italienischen Linken und der AHV: Zeitpläne, Referenten und Themen zu Prekarität und Kaufkraft.',
+    'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Moderne Tagungshalle mit Wirtschaftsscreen und Blick auf die lombardischen Seen',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Krankenkassen: Anstieg um 5% und von Experten bewertete Vorschläge',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': '2027 steigt die Prämie um 5%. Drei Experten analysieren die staatliche Kasse, die Prävention und die Kosten: Im Tessin könnte ab 2029 die Hälfte der Bürger von Senkungen profitieren.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panorama über den Luganersee mit der Stadt im Hintergrund, Morgenlicht.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, Roxys Spürnase entdeckt Drogen: zwei Festnahmen',
+    'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Einsatz der Carabinieri in Albate: 111 Gramm Kokain, Haschisch und 390 Euro beschlagnahmt. Zwei tunesische Staatsangehörige festgenommen, ein dritter angezeigt.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Drogenfahndung mit einem Deutschen Schäferhund in Lipomo',
 };
 
 export default blogMetaDe;

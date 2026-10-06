@@ -12653,6 +12653,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: times, route and closures',
     'blog.article.guida-tre-valli-varesine-2026.excerpt': 'October 6: start from Busto Arsizio, finish on Via Sacco at Varese. Six city laps for men and women.',
     'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Cyclist racing on the Tre Valli Varesine, view of Lake Varese',
+    'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: conference on wages and rights, October 10',
+    'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Saturday, October 10 at Varese, the conference \'Fondata sul lavoro\' by Sinistra Italiana and AVS: times, speakers and topics on job insecurity and purchasing power.',
+    'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Modern conference hall with economic data screen and view of Lombard lakes',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Health insurance funds: 5% increase and proposals evaluated by experts',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'In 2027, the premium will increase by 5%. Three experts analyze the state fund, prevention and costs: in Ticino, from 2029, half of citizens could benefit from reductions.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panoramic view of Lake Lugano with the city in the background, morning light.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, Roxy\'s keen nose uncovers drugs: two arrests',
+    'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Carabinieri operation in Albate: 111 grams of cocaine, hashish and 390 euros seized. Two Tunisian citizens arrested, a third reported.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Drug operation with a German shepherd near an apartment building in Lipomo',
 };
 
 export default blogMetaEn;
