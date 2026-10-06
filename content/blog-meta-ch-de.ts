@@ -7820,6 +7820,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Feuerwerk: Die Rechte lanciert das Nein zur Initiative',
     'blog.article.fuochi-artificio-no.excerpt': 'Am Dienstag startet die Kampagne gegen die Feuerwerksinitiative: Die Abstimmung findet am 29. November statt. Die Mitte, FDP, SVP und die Wirtschaft unterstützen das Nein.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Feuerwerk über einer Schweizer Stadt während der Debatte über die Initiative',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger als SVP-Kandidat für den Bundesrat',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Der Kanton Schwyz schlägt André Rüegsegger als Nachfolger von Guy Parmelin vor: Es ist die erste offizielle Kandidatur nach der Ankündigung seines Rücktritts zum Jahresende.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande als Symbolbild für die Schweizer Bundespolitik.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Flughafen Zürich: Rekord mit 123\'000 Passagieren',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Am Sonntag, 4. Oktober, hat Zürich 123\'000 Reisende empfangen: ein noch vorläufiger Rekord, der mit den schulischen Herbstferien in mehreren deutschschweizerischen Kantonen zusammenhängt.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Flughafen Zürich mit einem Flugzeug auf der Startbahn und dem Terminal im Hintergrund',
+    'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli nimmt sich Zeit für eine eidgenössische Kandidatur',
+    'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, Zürcher SVP-Regierungsrätin, bestätigt ihre Kandidatur für den Bundesrat nicht und will die Antwort erst nach den Herbstferien geben; die Frist für die Kandidaturen läuft am 23. Oktober ab.',
+    'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Fotorealistischer Blick auf ein schweizerisches Bundesgebäude im Herbstsonnenschein.',
 };
 
 export default blogMetaChDe;

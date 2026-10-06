@@ -7820,6 +7820,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Fuochi d\'artificio, la destra lancia il no all\'iniziativa',
     'blog.article.fuochi-artificio-no.excerpt': 'Campagna al via martedì contro l\'iniziativa sui fuochi d\'artificio: il voto è il 29 novembre. Centro, PLR, UDC e mondo economico sostengono il no.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Fuochi d\'artificio sopra una città svizzera durante il dibattito sull\'iniziativa',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidato UDC per il Consiglio federale',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l\'annuncio delle dimissioni a fine anno.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, immagine simbolica per la politica federale svizzera.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Aeroporto di Zurigo: record con 123\'000 passeggeri',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Domenica 4 ottobre Zurigo ha accolto 123\'000 viaggiatori: record ancora provvisorio legato alle vacanze scolastiche autunnali in diversi Cantoni svizzero-tedeschi.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Aeroporto di Zurigo con un aereo sulla pista e il terminale sullo sfondo',
+    'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli prende tempo su candidatura federale',
+    'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, consigliera di Stato zurighese dell\'UDC, non conferma la candidatura al Consiglio federale e rimanda la risposta dopo le vacanze autunnali; il termine per le candidature è il 23 ottobre.',
+    'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Vista fotorealistica di un edificio federale svizzero al tramonto autunnale.',
 };
 
 export default blogMetaChIt;

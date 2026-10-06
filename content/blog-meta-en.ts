@@ -12694,6 +12694,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'The day\'s numbers for cross-border commuters – October 6, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Cross-border brief, October 6, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'The numbers for October 6, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.ciclabile-lumino-castione-fase-due.title': 'Lumino-Castione cycle path: second phase of the works',
+    'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'From Monday, October 12 to the end of April 2027, works between via Quatorta and the Castione FFS station, with two new bus stops',
+    'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Second phase of cycle path works between Lumino and Castione FFS station',
+    'blog.article.crisi-attrattivita-como-lecco.title': 'Como and Lecco: risk of losing 14 thousand workers by 2029',
+    'blog.article.crisi-attrattivita-como-lecco.excerpt': 'UIL warning: lack of housing, complex commuting and inadequate services risk driving thousands of working-age people away from the area.',
+    'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Passenger train arriving at a station between Como and Lecco',
 };
 
 export default blogMetaEn;

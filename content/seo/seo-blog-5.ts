@@ -100261,6 +100261,74 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ciclabile-lumino-castione-fase-due': {
+    title: 'Ciclabile Lumino-Castione: seconda fase dei lavori',
+    description: 'Ciclabile Lumino-Castione: lavori da lunedì 12 ottobre a fine aprile 2027, due nuove fermate bus e traffico regolato dal lunedì al venerdì tra le 7 e le 17.30.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ciclabile, lumino-castione, seconda, fase',
+    ogTitle: 'Ciclabile Lumino-Castione: seconda fase dei lavori',
+    ogDescription: 'La seconda fase del percorso ciclabile lungo l\'ex Ferrovia Retica parte da lunedì 12 ottobre e prosegue fino a fine aprile 2027 tra Lumino e la stazione FFS di Castione. In programma anche due nuove fermate bus lungo via Bellinzona, con traffico',
+    canonicalPath: '/articoli-frontaliere/ciclabile-lumino-castione-fase-due/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ciclabile Lumino-Castione: seconda fase dei lavori",
+      "description": "Ciclabile Lumino-Castione: lavori da lunedì 12 ottobre a fine aprile 2027, due nuove fermate bus e traffico regolato dal lunedì al venerdì tra le 7 e le 17.30.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ciclabile-lumino-castione-fase-due.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Seconda fase dei lavori per la ciclabile tra Lumino e la stazione FFS di Castione"
+      },
+      "datePublished": "2026-10-06T12:30:34+00:00",
+      "dateModified": "2026-10-06T12:30:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ciclabile-lumino-castione-fase-due/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-crisi-attrattivita-como-lecco': {
+    title: 'Como e Lecco: rischio perdita 14mila lavoratori entro 2029',
+    description: 'Allarme UIL per Como e Lecco: entro il 2029 rischio perdita di 14mila lavoratori per mancanza di case, mobilità carente e servizi insufficienti. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, lecco, rischio, perdita',
+    ogTitle: 'Como e Lecco: rischio perdita 14mila lavoratori entro 2029',
+    ogDescription: 'L\'allarme di UIL: nel Comasco il 54,5% dei profili cercati è introvabile. Case costose e trasporti complessi rendono il territorio meno attrattivo.',
+    canonicalPath: '/articoli-frontaliere/crisi-attrattivita-como-lecco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como e Lecco: rischio perdita 14mila lavoratori entro 2029",
+      "description": "Allarme UIL per Como e Lecco: entro il 2029 rischio perdita di 14mila lavoratori per mancanza di case, mobilità carente e servizi insufficienti. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/crisi-attrattivita-como-lecco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno passeggeri in arrivo in una stazione tra Como e Lecco"
+      },
+      "datePublished": "2026-10-06T13:26:39+00:00",
+      "dateModified": "2026-10-06T13:26:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/crisi-attrattivita-como-lecco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

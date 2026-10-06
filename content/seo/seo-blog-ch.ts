@@ -98615,6 +98615,108 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ruegsegger-candidato-federale': {
+    title: 'Rüegsegger candidato UDC per il Consiglio federale',
+    description: 'Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l\'annuncio delle dimissioni a fine anno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rüegsegger, candidato, consiglio, federale',
+    ogTitle: 'Rüegsegger candidato UDC al Consiglio federale',
+    ogDescription: 'La sezione UDC del Canton Svitto propone André Rüegsegger alla commissione di ricerca nazionale come prima candidatura ufficiale per la successione di Guy Parmelin. Il consigliere di Stato, 50 anni, è nell\'esecutivo svittese dal 2012.',
+    canonicalPath: '/articoli-svizzera/ruegsegger-candidato-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rüegsegger candidato UDC per il Consiglio federale",
+      "description": "Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l'annuncio delle dimissioni a fine anno.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ruegsegger-candidato-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande, immagine simbolica per la politica federale svizzera."
+      },
+      "datePublished": "2026-10-06T12:03:33+00:00",
+      "dateModified": "2026-10-06T12:03:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ruegsegger-candidato-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affluenza-scalo-zurigo-autunno': {
+    title: 'Aeroporto di Zurigo: record con 123\'000 passeggeri',
+    description: 'Zurigo: record con 123\'000 viaggiatori il 4 ottobre. Dati provvisori; picco dello scalo legato alle vacanze autunnali, numeri definitivi a metà novembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aeroporto, zurigo, record, passeggeri',
+    ogTitle: 'Aeroporto di Zurigo: 123\'000 viaggiatori in un giorno',
+    ogDescription: 'Domenica 4 ottobre, Zurigo ha accolto 123\'000 viaggiatori: record giornaliero ancora provvisorio. L\'affluenza è legata alle vacanze scolastiche autunnali in diversi Cantoni svizzero-tedeschi; i numeri definitivi arriveranno a metà novembre.',
+    canonicalPath: '/articoli-svizzera/affluenza-scalo-zurigo-autunno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aeroporto di Zurigo: record con 123'000 passeggeri",
+      "description": "Zurigo: record con 123'000 viaggiatori il 4 ottobre. Dati provvisori; picco dello scalo legato alle vacanze autunnali, numeri definitivi a metà novembre.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affluenza-scalo-zurigo-autunno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aeroporto di Zurigo con un aereo sulla pista e il terminale sullo sfondo"
+      },
+      "datePublished": "2026-10-06T12:52:17+00:00",
+      "dateModified": "2026-10-06T12:52:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affluenza-scalo-zurigo-autunno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rickli-tempo-candidatura-federal': {
+    title: 'Natalie Rickli prende tempo su candidatura federale',
+    description: 'Natalie Rickli, consigliera di Stato dell\'UDC, non conferma la candidatura al Consiglio federale, rimandando la decisione dopo le vacanze autunnali; il termine',
+    keywords: 'frontalieri, ticino, svizzera, italia, natalie, rickli, prende, tempo',
+    ogTitle: 'Natalie Rickli prende tempo su candidatura federale',
+    ogDescription: 'La consigliera di Stato zurighese Natalie Rickli, una delle favorite per la successione di Guy Parmelin, non ha ancora confermato la sua candidatura al Consiglio federale. Ha dichiarato di voler riflettere e di rispondere dopo le vacanze autunnali',
+    canonicalPath: '/articoli-svizzera/rickli-tempo-candidatura-federal/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Natalie Rickli prende tempo su candidatura federale",
+      "description": "Natalie Rickli, consigliera di Stato dell'UDC, non conferma la candidatura al Consiglio federale, rimandando la decisione dopo le vacanze autunnali; il termine",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rickli-tempo-candidatura-federal.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista fotorealistica di un edificio federale svizzero al tramonto autunnale."
+      },
+      "datePublished": "2026-10-06T14:04:52+00:00",
+      "dateModified": "2026-10-06T14:04:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rickli-tempo-candidatura-federal/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

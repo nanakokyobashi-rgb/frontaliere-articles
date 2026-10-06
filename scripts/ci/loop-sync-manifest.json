@@ -243,9 +243,9 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "bdccaeb8f1beec65",
-        "corpus": "bdccaeb8f1beec65",
-        "alignedAt": "2026-10-04"
+        "site": "12617640c1d85ce2",
+        "corpus": "12617640c1d85ce2",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1288,7 +1288,7 @@
     {
       "path": ".github/workflows/stale-pr-rescuer.yml",
       "mode": "adapted",
-      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site. Dal 2026-09-25 (bucket REST del `GITHUB_TOKEN` esaurito, 15 run del custode morte sulla prima lettura) il trigger `workflow_run` fa lo scan completo e il custode solo nel primo run partito in ogni finestra di 30 minuti (step `Decide scan scope`); gli altri run `workflow_run` classificano soltanto le PR del run di `tests` che li ha fatti nascere, e l'helper trusted del round-marker si materializza solo quando serve. Cron e dispatch restano completi. Il sito gira con un App token dal bucket separato: non e' un movimento da portare.",
+      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D/E/F con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. La classe F (conflitto con main, `has-conflicts`) e' la classe D del sito portata qui il 2026-10-06 con un'altra lettera, perche' D nel corpus e' gia' la review piu' vecchia dell'head: viene prima delle altre e tiene `stale-review` sulla PR in conflitto, che prima l'`else` toglieva. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site. Dal 2026-09-25 (bucket REST del `GITHUB_TOKEN` esaurito, 15 run del custode morte sulla prima lettura) il trigger `workflow_run` fa lo scan completo e il custode solo nel primo run partito in ogni finestra di 30 minuti (step `Decide scan scope`); gli altri run `workflow_run` classificano soltanto le PR del run di `tests` che li ha fatti nascere, e l'helper trusted del round-marker si materializza solo quando serve. Cron e dispatch restano completi. Il sito gira con un App token dal bucket separato: non e' un movimento da portare.",
       "baseline": {
         "site": "1d3108398b6a9623",
         "corpus": "0287a31f8b4606f8",
@@ -2156,9 +2156,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "a77b360a0093b11a",
-        "corpus": "a77b360a0093b11a",
-        "alignedAt": "2026-10-05"
+        "site": "50c9061065249496",
+        "corpus": "50c9061065249496",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2869,9 +2869,9 @@
       "sitePath": "scripts/lib/itLanguageCheck.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b4c5d683eca4e7aa",
-        "corpus": "b4c5d683eca4e7aa",
-        "alignedAt": "2026-08-09"
+        "site": "9008c8f68cf5d904",
+        "corpus": "9008c8f68cf5d904",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3307,9 +3307,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "e08b2a738a9808b1",
-        "corpus": "e08b2a738a9808b1",
-        "alignedAt": "2026-10-03"
+        "site": "4e2b0a541c32ed70",
+        "corpus": "4e2b0a541c32ed70",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4060,9 +4060,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "340ae4a06bf98a94",
-        "corpus": "340ae4a06bf98a94",
-        "alignedAt": "2026-10-05"
+        "site": "113a5344297263e5",
+        "corpus": "113a5344297263e5",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4071,9 +4071,9 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "865b689c607e9ee7",
-        "corpus": "865b689c607e9ee7",
-        "alignedAt": "2026-10-05"
+        "site": "3a49e83a5550a36d",
+        "corpus": "3a49e83a5550a36d",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4178,7 +4178,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "3a6f1cf792554903",
+        "corpus": "bc566aa2922518fe",
         "alignedAt": "2026-10-01"
       }
     },

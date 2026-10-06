@@ -7820,6 +7820,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Fireworks, the right launches the no campaign against the initiative',
     'blog.article.fuochi-artificio-no.excerpt': 'Campaign against the fireworks initiative kicks off on Tuesday: the vote is on November 29. Centro, PLR, UDC and the business community support the no vote.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Fireworks above a Swiss town during the debate on the initiative',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger UDC candidate for the Federal Council',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'The Canton of Schwyz puts forward André Rüegsegger to succeed Guy Parmelin: it is the first official candidacy following the announcement of his resignation at the end of the year.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, a symbolic image for Swiss federal politics.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Zurich Airport: record with 123\'000 passengers',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'On Sunday, October 4, Zurich welcomed 123\'000 travelers: a still-provisional record linked to the autumn school holidays in several German-speaking Swiss cantons.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Zurich Airport with an aircraft on the runway and the terminal in the background',
+    'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli is taking time to consider a federal candidacy',
+    'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, a Zurich cantonal councillor from the UDC, does not confirm her candidacy for the Federal Council and postpones her answer until after the autumn holidays; the deadline for applications is October 23.',
+    'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Photorealistic view of a Swiss federal building at autumn sunset.',
 };
 
 export default blogMetaChEn;

@@ -7820,6 +7820,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fuochi-artificio-no.title': 'Feux d\'artifice, la droite lance le non à l\'initiative',
     'blog.article.fuochi-artificio-no.excerpt': 'La campagne démarre mardi contre l\'initiative sur les feux d\'artifice : le vote a lieu le 29 novembre. Le Centre, le PLR, l\'UDC et le monde économique soutiennent le non.',
     'blog.article.fuochi-artificio-no.imageAlt': 'Feux d\'artifice au-dessus d\'une ville suisse pendant le débat sur l\'initiative',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidat de l’UDC au Conseil fédéral',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Le canton de Schwytz propose André Rüegsegger pour succéder à Guy Parmelin : c’est la première candidature officielle après l’annonce de la démission en fin d’année.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, image symbolique de la politique fédérale suisse.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Aéroport de Zurich : record avec 123\'000 passagers',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Dimanche 4 octobre, Zurich a accueilli 123\'000 voyageurs : record encore provisoire lié aux vacances scolaires d’automne dans plusieurs cantons alémaniques.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Aéroport de Zurich avec un avion sur la piste et le terminal en arrière-plan',
+    'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli temporise sur une candidature fédérale',
+    'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, conseillère d\'État zurichoise de l\'UDC, ne confirme pas sa candidature au Conseil fédéral et reporte sa réponse après les vacances d\'automne ; le délai pour les candidatures est fixé au 23 octobre.',
+    'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Vue photoréaliste d\'un bâtiment fédéral suisse au coucher de soleil d\'automne.',
 };
 
 export default blogMetaChFr;

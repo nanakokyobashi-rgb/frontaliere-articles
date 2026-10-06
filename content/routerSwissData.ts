@@ -2629,6 +2629,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'effettivo-esercito-2026-calo': { it: 'effettivo-esercito-2026-calo', en: 'army-strength-is-sufficient-now-but-will-fall-by-2030', de: 'der-armeebestand-ist-jetzt-ausreichend-wird-aber-bis-2030-sinken', fr: 'l-effectif-de-l-armee-est-suffisant-maintenant-mais-il-diminuera-d-ici-2030' },
  'perdita-ad-bilancio-2025': { it: 'perdita-ad-bilancio-2025', en: 'swiss-unemployment-insurance-loss-2025', de: 'arbeitslosenversicherung-verlust-2025', fr: 'assurance-chomage-perte-2025' },
  'fuochi-artificio-no': { it: 'fuochi-artificio-no', en: 'fireworks-no-initiative', de: 'feuerwerk-nein-initiative', fr: 'feux-artifice-non-initiative' },
+ 'ruegsegger-candidato-federale': { it: 'ruegsegger-candidato-federale', en: 'ruegsegger-federal-council', de: 'ruegsegger-bundesrat-kandidat', fr: 'ruegsegger-candidat-conseil-federal' },
+ 'affluenza-scalo-zurigo-autunno': { it: 'affluenza-scalo-zurigo-autunno', en: 'zurich-airport-autumn-record', de: 'flughafen-zuerich-herbst-rekord', fr: 'aeroport-zurich-record-automne' },
+ 'rickli-tempo-candidatura-federal': { it: 'rickli-tempo-candidatura-federal', en: 'rickli-takes-time-federal-candidacy', de: 'rickli-nimmt-zeit-bundeskandidatur', fr: 'rickli-prend-temps-candidature-federale' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

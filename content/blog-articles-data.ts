@@ -40002,6 +40002,26 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'ciclabile-lumino-castione-fase-due',
+ category: 'pratico',
+ date: '2026-10-06T12:30:34.016Z',
+ image: '/images/blog/ciclabile-lumino-castione-fase-due.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'crisi-attrattivita-como-lecco',
+ category: 'pratico',
+ date: '2026-10-06T13:26:39.306Z',
+ image: '/images/blog/crisi-attrattivita-como-lecco.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

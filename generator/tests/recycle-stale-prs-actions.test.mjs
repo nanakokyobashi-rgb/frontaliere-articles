@@ -136,7 +136,11 @@ case \"$command\" in
       exit 0
     fi
     if [ \"$sub\" = view ]; then
-      if printf '%s' \"$args\" | grep -q -- '--json state,headRepository'; then
+      if printf '%s' \"$args\" | grep -q -- '--json labels'; then
+        # Rilettura dei veto subito prima della close.
+        if [ \"\${FAKE_PR_LIVE_LABELS-stale-review,agent:autofix}\" = __error__ ]; then exit 1; fi
+        printf '%s\\n' \"\${FAKE_PR_LIVE_LABELS-stale-review,agent:autofix}\"
+      elif printf '%s' \"$args\" | grep -q -- '--json state,headRepository'; then
         printf '{\"state\":\"%s\",\"headRepository\":{\"nameWithOwner\":\"owner/repo\"},\"headRefName\":\"%s\",\"headRefOid\":\"%s\"}\\n' \"$(get_state PR_STATE)\" \"\${FAKE_HEAD_REF:-fix/issue-77}\" \"${SHA}\"
       elif printf '%s' \"$args\" | grep -q -- '--json state'; then
         printf '%s\\n' \"$(get_state PR_STATE)\"
@@ -264,6 +268,44 @@ test('happy path: close verificata, ref liberato e remove→verify→add→verif
   assert.match(result.stateText, /LABEL_PRESENT=true/);
   assert.match(result.stateText, /PREMATURE_DELETE=false/);
   assert.doesNotMatch(result.events.find((event) => event.startsWith('pr close 17')) || '', /--delete-branch/);
+});
+
+test('veto riletti dal consumatore: needs-human o lock di risoluzione fermano la close', () => {
+  // `stale-review` è scritta da altri e non può essere condizionale: fra la
+  // loro ultima rilettura e l'add-label un veto può arrivare. Il recycle lo
+  // rilegge sulle label di ADESSO, subito prima dell'operazione distruttiva.
+  for (const labels of [
+    'stale-review,agent:autofix,needs-human',
+    'stale-review,agent:autofix,agent:resolving-conflict',
+    'needs-human,stale-review',
+  ]) {
+    const result = runScenario({ FAKE_PR_LIVE_LABELS: labels });
+    assert.equal(eventIndex(result.events, /^pr close 17/), -1, `${labels}: PR chiusa sotto veto\n${result.output}`);
+    assert.equal(eventIndex(result.events, /^issue edit 77/), -1, `${labels}: issue ri-accodata sotto veto`);
+    assert.equal(eventIndex(result.events, /^api -X DELETE /), -1, `${labels}: ref cancellato sotto veto`);
+    assert.match(result.output, /veto presente alla rilettura/);
+    assert.match(result.stateText, /PR_STATE=OPEN/);
+  }
+});
+
+test('veto: segnale revocato o label non rileggibili → nessuna close (fail-closed)', () => {
+  const revoked = runScenario({ FAKE_PR_LIVE_LABELS: 'agent:autofix,has-conflicts' });
+  assert.equal(eventIndex(revoked.events, /^pr close 17/), -1, revoked.output);
+  assert.match(revoked.output, /segnale revocato/);
+  for (const labels of ['__error__', '']) {
+    const unreadable = runScenario({ FAKE_PR_LIVE_LABELS: labels });
+    assert.equal(eventIndex(unreadable.events, /^pr close 17/), -1, unreadable.output);
+    assert.match(unreadable.output, /label non rileggibili prima della close/);
+    assert.match(unreadable.stateText, /PR_STATE=OPEN/);
+  }
+});
+
+test('veto: la rilettura delle label precede la close e non c\'è altra I/O in mezzo', () => {
+  const result = runScenario();
+  const reread = eventIndex(result.events, /^pr view 17 .*--json labels/);
+  const close = eventIndex(result.events, /^pr close 17/);
+  assert.ok(reread >= 0 && close > reread, `rilettura=${reread} close=${close}\n${result.events.join('\n')}`);
+  assert.deepEqual(result.events.slice(reread + 1, close), [], 'fra la rilettura dei veto e la close non deve esserci nessuna chiamata gh');
 });
 
 test('close failure o stato ancora OPEN non raggiungono ref o label', () => {
