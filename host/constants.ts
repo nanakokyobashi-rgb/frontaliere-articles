@@ -48,7 +48,7 @@ export const SEO_STATIC_CSS_FILENAME = 'seo-static.css';
  * (it already imports child_process/node:fs), so reading process.env here is
  * safe — no client bundle pulls it in.
  */
-const ASSET_CDN_ORIGIN = ((): string => {
+export const ASSET_CDN_ORIGIN = ((): string => {
   const raw = (process.env.ASSET_CDN || '').trim().replace(/\/+$/, '');
   if (!raw) return '';
   try {
