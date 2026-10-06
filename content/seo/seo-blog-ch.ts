@@ -98683,6 +98683,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rickli-tempo-candidatura-federal': {
+    title: 'Natalie Rickli prende tempo su candidatura federale',
+    description: 'Natalie Rickli, consigliera di Stato dell\'UDC, non conferma la candidatura al Consiglio federale, rimandando la decisione dopo le vacanze autunnali; il termine',
+    keywords: 'frontalieri, ticino, svizzera, italia, natalie, rickli, prende, tempo',
+    ogTitle: 'Natalie Rickli prende tempo su candidatura federale',
+    ogDescription: 'La consigliera di Stato zurighese Natalie Rickli, una delle favorite per la successione di Guy Parmelin, non ha ancora confermato la sua candidatura al Consiglio federale. Ha dichiarato di voler riflettere e di rispondere dopo le vacanze autunnali',
+    canonicalPath: '/articoli-svizzera/rickli-tempo-candidatura-federal/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Natalie Rickli prende tempo su candidatura federale",
+      "description": "Natalie Rickli, consigliera di Stato dell'UDC, non conferma la candidatura al Consiglio federale, rimandando la decisione dopo le vacanze autunnali; il termine",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/rickli-tempo-candidatura-federal.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista fotorealistica di un edificio federale svizzero al tramonto autunnale."
+      },
+      "datePublished": "2026-10-06T14:04:52+00:00",
+      "dateModified": "2026-10-06T14:04:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rickli-tempo-candidatura-federal/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

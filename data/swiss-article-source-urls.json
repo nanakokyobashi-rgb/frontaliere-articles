@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/t5pmx9db2vpc": {
-    "articleId": "osce-conferenza-berna",
-    "ts": "2026-09-05T10:04:57.884Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948070/dispositivo-din-manifestazione-contenimento-dipartimento-g7-anti-g7-lecito": {
     "articleId": "manifestazione-anti-g7-dispositivo-lecito",
     "ts": "2026-09-05T10:26:36.163Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/aeroporto-zurigo%2c-domenica-da-record%3a-mai-cos%c3%ac-tanti-passeggeri/92172953": {
     "articleId": "affluenza-scalo-zurigo-autunno",
     "ts": "2026-10-06T12:52:18.106Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/natalie-rickli-prende-tempo-su-candidatura-al-consiglio-federale/92174535": {
+    "articleId": "rickli-tempo-candidatura-federal",
+    "ts": "2026-10-06T14:04:52.613Z",
     "keyForm": 2
   }
 }

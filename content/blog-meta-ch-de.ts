@@ -7826,6 +7826,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.affluenza-scalo-zurigo-autunno.title': 'Flughafen Zürich: Rekord mit 123\'000 Passagieren',
     'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Am Sonntag, 4. Oktober, hat Zürich 123\'000 Reisende empfangen: ein noch vorläufiger Rekord, der mit den schulischen Herbstferien in mehreren deutschschweizerischen Kantonen zusammenhängt.',
     'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Flughafen Zürich mit einem Flugzeug auf der Startbahn und dem Terminal im Hintergrund',
+    'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli nimmt sich Zeit für eine eidgenössische Kandidatur',
+    'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, Zürcher SVP-Regierungsrätin, bestätigt ihre Kandidatur für den Bundesrat nicht und will die Antwort erst nach den Herbstferien geben; die Frist für die Kandidaturen läuft am 23. Oktober ab.',
+    'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Fotorealistischer Blick auf ein schweizerisches Bundesgebäude im Herbstsonnenschein.',
 };
 
 export default blogMetaChDe;

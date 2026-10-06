@@ -7826,6 +7826,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.affluenza-scalo-zurigo-autunno.title': 'Aéroport de Zurich : record avec 123\'000 passagers',
     'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Dimanche 4 octobre, Zurich a accueilli 123\'000 voyageurs : record encore provisoire lié aux vacances scolaires d’automne dans plusieurs cantons alémaniques.',
     'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Aéroport de Zurich avec un avion sur la piste et le terminal en arrière-plan',
+    'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli temporise sur une candidature fédérale',
+    'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, conseillère d\'État zurichoise de l\'UDC, ne confirme pas sa candidature au Conseil fédéral et reporte sa réponse après les vacances d\'automne ; le délai pour les candidatures est fixé au 23 octobre.',
+    'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Vue photoréaliste d\'un bâtiment fédéral suisse au coucher de soleil d\'automne.',
 };
 
 export default blogMetaChFr;

@@ -2631,6 +2631,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fuochi-artificio-no': { it: 'fuochi-artificio-no', en: 'fireworks-no-initiative', de: 'feuerwerk-nein-initiative', fr: 'feux-artifice-non-initiative' },
  'ruegsegger-candidato-federale': { it: 'ruegsegger-candidato-federale', en: 'ruegsegger-federal-council', de: 'ruegsegger-bundesrat-kandidat', fr: 'ruegsegger-candidat-conseil-federal' },
  'affluenza-scalo-zurigo-autunno': { it: 'affluenza-scalo-zurigo-autunno', en: 'zurich-airport-autumn-record', de: 'flughafen-zuerich-herbst-rekord', fr: 'aeroport-zurich-record-automne' },
+ 'rickli-tempo-candidatura-federal': { it: 'rickli-tempo-candidatura-federal', en: 'rickli-takes-time-federal-candidacy', de: 'rickli-nimmt-zeit-bundeskandidatur', fr: 'rickli-prend-temps-candidature-federale' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
