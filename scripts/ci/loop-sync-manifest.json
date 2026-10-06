@@ -1011,10 +1011,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "3a28a8c91ab5671b",
+        "site": "f7f1b2d248169079",
         "corpus": "6880a0776c0ab697",
         "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T00:27:33.002Z"
+        "forcedAt": "2026-10-06T23:54:42.602Z"
       }
     },
     {
