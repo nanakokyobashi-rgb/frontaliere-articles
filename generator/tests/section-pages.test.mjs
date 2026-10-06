@@ -225,23 +225,33 @@ test('publisher: una URL obsoleta resta intatta finche\' API e edge non servono 
   const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
   const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
   const calls = [];
-  const result = await publish({
-    section: 'canton-ti',
-    pages: [current],
-    cdnUploads: [],
-    obsoletePages: [obsolete],
-    distDir: mkdtempSync(path.join(tmpdir(), 'publish-api-edge-')),
-    releaseCommit: 'current-commit',
-    publishedStatusImpl: async () => 'draft',
-    releaseReadyImpl: async () => ({ ok: false, reason: 'manifest vecchio' }),
-    runImpl: (_command, args) => {
-      calls.push(args.join(' '));
-      if (args.some((arg) => arg.endsWith('retry-cmd.sh'))) return { code: 0, stdout: '' };
-      if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) return { code: 0, stdout: '✅ uploaded' };
-      throw new Error(`non deve cancellare: ${args.join(' ')}`);
-    },
-    probeImpl: async () => ({ ok: true, status: 200, body: `<!doctype html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'contenuto '.repeat(40)}` }),
-  });
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  let result;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    result = await publish({
+      section: 'canton-ti',
+      pages: [current],
+      cdnUploads: [],
+      obsoletePages: [obsolete],
+      distDir: mkdtempSync(path.join(tmpdir(), 'publish-api-edge-')),
+      releaseCommit: 'current-commit',
+      publishedStatusImpl: async () => 'draft',
+      releaseReadyImpl: async () => ({ ok: false, reason: 'manifest vecchio' }),
+      runImpl: (_command, args) => {
+        calls.push(args.join(' '));
+        if (args.some((arg) => arg.endsWith('retry-cmd.sh'))) return { code: 0, stdout: '' };
+        if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) return { code: 0, stdout: '✅ uploaded' };
+        throw new Error(`non deve cancellare: ${args.join(' ')}`);
+      },
+      probeImpl: async () => ({ ok: true, status: 200, body: `<!doctype html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'contenuto '.repeat(40)}` }),
+    });
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+  }
   assert.equal(result.failures, 1);
   assert.equal(result.deleted, 0);
   assert.ok(!calls.some((call) => call.includes('delete-cdn-file.sh')));
@@ -345,12 +355,18 @@ test('publisher: il gate hero include le card della landing anche con refresh pa
     'images/places/thumbnails/landing-480w.webp',
   ]);
   const missing = [];
-  assert.deepEqual(heroCdnUploads({
-    rootDir: root,
-    entries: [],
-    htmlPages: [{ html: '<img src="/images/blog/not-on-disk.webp">' }],
-    missing,
-  }), []);
+  const realConsoleError = console.error;
+  try {
+    console.error = () => {};
+    assert.deepEqual(heroCdnUploads({
+      rootDir: root,
+      entries: [],
+      htmlPages: [{ html: '<img src="/images/blog/not-on-disk.webp">' }],
+      missing,
+    }), []);
+  } finally {
+    console.error = realConsoleError;
+  }
   assert.deepEqual(missing, [{ kind: 'hero', local: 'public/images/blog/not-on-disk.webp', key: 'images/blog/not-on-disk.webp' }]);
 });
 
