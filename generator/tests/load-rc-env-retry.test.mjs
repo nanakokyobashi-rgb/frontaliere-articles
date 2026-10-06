@@ -80,6 +80,11 @@ test('application-intent ranking flag is mapped and missing remains fail-closed'
   assert.equal(shouldExportRcValue(null, 'APPLICATION_INTENT_RANKING_ENABLED'), false);
 });
 
+test('il loader corpus conserva il mapping della chiave Tankerkönig', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
+  assert.match(source, /TANKERKOENIG_API_KEY:\s+\['TANKERKOENIG_API_KEY'\]/);
+});
+
 test('il loader nomina i parametri RC irrisolti senza loggare valori', () => {
   assert.equal(
     formatMissingRcKeys(['JOB_EMAIL_RANKING_SHRINK_K', 'JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES']),

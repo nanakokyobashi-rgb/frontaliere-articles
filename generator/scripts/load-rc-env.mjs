@@ -58,6 +58,9 @@ const RC_TO_ENV = {
   GH_MODELS_PAT_8:                ['GH_MODELS_PAT_8'],
   GH_MODELS_PAT_9:                ['GH_MODELS_PAT_9'],
   GOOGLE_MAPS_API_KEY:            ['GOOGLE_MAPS_API_KEY'],
+  // Optional German fuel overlay. The site producer skips the source safely
+  // when this manually issued Tankerkönig key is absent or rejected.
+  TANKERKOENIG_API_KEY:           ['TANKERKOENIG_API_KEY'],
   // Firebase Web API key. Pubblica per costruzione (finisce nel bundle client e
   // nella chiave di persistenza `firebase:authUser:<key>:[DEFAULT]`), ma
   // pubblica NON vuol dire scrivibile in un sorgente: inlinata in
