@@ -301,6 +301,10 @@ const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
 const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
+export const IMAGE_SOURCE_DIRS = Object.freeze([
+  IMAGE_SOURCE_DIR,
+  path.join('public', 'images', 'generated'),
+]);
 
 function countFiles(dir, ext) {
   const stat = fs.statSync(dir, { throwIfNoEntry: false });
@@ -660,7 +664,10 @@ export function countSourceArchiveSitemapUrls(root, section) {
 
 /** Quante immagini hero ci sono in sorgente. */
 export function countSourceImages(root) {
-  return countCorpusFiles(root, IMAGE_SOURCE_DIR, '.webp', 'images-manifest.json');
+  return IMAGE_SOURCE_DIRS.reduce(
+    (total, rel) => total + countCorpusFiles(root, rel, '.webp', 'images-manifest.json'),
+    0,
+  );
 }
 
 /**

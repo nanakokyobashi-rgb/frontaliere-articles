@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * create-article.mjs — Generate a complete blog article using Gemini AI.
+ * create-article.mjs — Generate a complete blog article using the configured LLM.
  *
  * Usage:
  *   node scripts/create-article.mjs                 # auto-scan Ticino news sources
@@ -12,12 +12,13 @@
  *   3. Checks against existing articles to avoid duplicates
  *   4. Generates full article in 4 languages + image
  *
- * Requires: GH_MODELS_PAT env var (text), GEMINI_API_KEY env var (images)
+ * Requires: GH_MODELS_PAT env var (text); the shared image engine owns image
+ * authentication and provider fallback.
  *
  * What it does:
  *   1. Fetches the web page content at the given URL
  *   2. Calls the configured LLM provider chain to generate article data in 4 languages
- *   3. Generates a contextual article image using Gemini native image generation
+ *   3. Generates a governed illustrative article image through the shared engine
  *   4. Validates CTA presence and enforces internal links to site tools
  *   5. Programmatically detects duplicates (Jaccard similarity on titles + ID/slug checks)
  *   6. Modifies 9 source files to register the new article
@@ -33,11 +34,9 @@
  *    nella lunghezza delle frasi, dati specifici, riferimenti locali e nomi.
  *    Evitare pattern tipici dell'AI (frasi filler, strutture ripetitive).
  *
- * 2. IMMAGINE CONTESTUALE: Generare un'immagine contestuale all'articolo
- *    tramite Gemini native image generation (modello gemini-3-pro-image-preview
- *    con fallback gemini-2.5-flash-image).
- *    Fallback: immagine del Ticino dal catalogo AVAILABLE_IMAGES.
- *    Le immagini generate vanno in public/images/blog/{article-id}.{png|jpg}.
+ * 2. IMMAGINE CONTESTUALE: generare una illustrazione contestuale tramite il
+ *    motore governato condiviso. Il fallback è esclusivamente una copertina
+ *    già presente nel catalogo con record di provenienza valido.
  *
  * 3. SEO IMMAGINI: Ogni immagine deve avere ALT tag descrittivi e parlanti,
  *    con informazioni necessarie per l'indicizzazione su Google e Bing.
@@ -270,23 +269,20 @@ import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTit
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
-import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
-// P14: author and licence of a Commons cover, read with the search request and
-// written as content/image-credits/blog/<id>.json. In a module because this
-// file is not importable from a test (jsdom); see its header.
+import { generateImageFromSpec } from '../../engine/shared/generatedImageEngine.mjs';
 import {
-  COMMONS_IMAGEINFO_PARAMS,
-  acceptCommonsCandidate,
-  chooseCommonsCredit,
-  coverCreditFor,
-  creditRecordForCover,
-  creditRecordPath,
-  loadCommonsUsage,
-  readCommonsPage,
-  utcDate,
-  webpDimensions,
-  writeCreditRecord,
-} from './lib/commons-credit.mjs';
+  appendGeneratedImageRecord,
+  hasValidBlogImageRecord,
+  imageRecordForPath,
+} from './lib/blog-image-registry.mjs';
+import {
+  evaluateSourceCopy,
+  logSourceCopyVerdict,
+  SOURCE_COPY_MAX_RETRIES,
+  SOURCE_COPY_MAX_QUOTE_WORDS,
+  SOURCE_COPY_OVERLAP_THRESHOLD,
+  SourceCopyError,
+} from './lib/source-copy-guard.mjs';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 // Sezioni cantonali (P6b): voci di ARTICLE_SECTION_CONFIGS, gate D16, stato per
 // sezione D18 e testi di prompt dal profilo; scanner delle loro fonti.
@@ -1416,10 +1412,8 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
 }
 
 // ── Config ──────────────────────────────────────────────────
-// Gemini — image generation (text calls now go through centralized ai-models.mjs)
-const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
-const IMAGE_MODEL_PRO = 'gemini-3-pro-image-preview';
-const IMAGE_MODEL_FLASH = 'gemini-2.5-flash-image';
+// Text calls go through centralized ai-models.mjs. Image calls go through the
+// shared governed engine imported above.
 const BASE_URL = 'https://frontaliereticino.ch';
 
 // Model aliases for callLLM opts (used by callers that pass opts.model)
@@ -1458,165 +1452,90 @@ const PLACES_IMAGES = [
   'swissminiatur.webp',
 ];
 
-// Build full fallback pool: places + all existing blog images (auto-grows)
-// Exclude the 10 most recent blog images so the homepage doesn't show duplicates
+// Build the catalog-only fallback pool. Every candidate must already have a
+// reader-facing provenance record; static place assets and unrecorded photos are
+// deliberately excluded from new article publication.
 const BLOG_IMAGES = (() => {
   try {
-    const all = readdirSync(resolve('public/images/blog')).filter(f => f.endsWith('.webp')).sort();
-    const light = all.filter((f) => {
-      try {
-        return statSync(resolve(`public/images/blog/${f}`)).size <= BLOG_IMAGE_HARD_MAX_BYTES;
-      } catch {
-        return false;
-      }
-    });
-    // Prefer lightweight assets for fallback rotation; if none, keep full list.
-    return light.length > 0 ? light : all;
+    return readdirSync(resolve('public/images/blog'))
+      .filter((file) => file.endsWith('.webp'))
+      .filter((file) => hasValidBlogImageRecord(PROJECT_ROOT, `/images/blog/${file}`))
+      .filter((file) => {
+        try {
+          return statSync(resolve(`public/images/blog/${file}`)).size <= BLOG_IMAGE_HARD_MAX_BYTES;
+        } catch {
+          return false;
+        }
+      })
+      .sort();
+  } catch {
+    return [];
   }
-  catch { return []; }
 })();
 
-// Combined pool with full paths for fallback rotation
-// Skip images used by the last 7 articles to avoid visual repetition on homepage
+// Skip images used by the last 7 articles to avoid visual repetition on homepage.
 const RECENT_ARTICLE_IMAGE_COUNT = 7;
 
 function _getRecentArticleImages() {
   try {
-    // FRO-360: ARTICLES array is now in data/blog-articles-data.ts.
-    // v1 simplification: this homepage image-dedup helper always reads the
-    // frontaliere registry (and the shared image catalog) for BOTH sections —
-    // it only avoids visual repetition of recently-used hero images, so cross-
-    // section reuse is harmless. Module-eval timing also predates SECTION.
     const blogSrc = readFileSync(resolve('data/blog-articles-data.ts'), 'utf8');
-    // Extract all image: '...' values from the ARTICLES array
-    const imageMatches = [...blogSrc.matchAll(/image:\s*['"]([^'"]+)['"]/g)].map(m => m[1]);
-    // Last N are the most recent articles
+    const imageMatches = [...blogSrc.matchAll(/image:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
     return imageMatches.slice(-RECENT_ARTICLE_IMAGE_COUNT);
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function _buildFallbackPool() {
   const recentImages = new Set(_getRecentArticleImages());
-  const allImages = [
-    ...PLACES_IMAGES.map(f => `/images/places/${f}`),
-    ...BLOG_IMAGES.map(f => `/images/blog/${f}`),
-  ];
-  const filtered = allImages.filter(img => !recentImages.has(img));
-  // If filtering removes too many, keep at least places
-  return filtered.length > 5 ? filtered : allImages;
+  const allImages = BLOG_IMAGES.map((file) => `/images/blog/${file}`);
+  const filtered = allImages.filter((image) => !recentImages.has(image));
+  return filtered.length > 0 ? filtered : allImages;
 }
 
 const FALLBACK_IMAGES = _buildFallbackPool();
 
-// Legacy: keep AVAILABLE_IMAGES for prompt catalog (AI picks from places names)
+// Keep the legacy field in the model contract. It is a placeholder only:
+// validation never uses an unrecorded place image as a publication fallback.
 const AVAILABLE_IMAGES = PLACES_IMAGES;
 
-// ─── Keyword-based fallback image matching ───────────────────────────────
-// Maps keywords (found in article title/id/category) to the best fallback image.
-// First match wins. Keys are lowercase. Values are paths from any pool image.
-//
-// Strategy: first try blog images whose filename contains the keyword (e.g.
-// "salario-minimo-ticino-..." matches keyword "salario"), then fall back to
-// curated place image mappings for broader themes.
-const IMAGE_KEYWORD_MAP = [
-  // Ticino places → matching place images
-  { keywords: ['ascona'], image: '/images/places/ascona.webp' },
-  { keywords: ['bellinzona', 'gendarmi', 'polizia', 'cantone', 'cantonale', 'governo', 'gran consiglio', 'amministrazione'], image: '/images/places/bellinzona.webp' },
-  { keywords: ['castelgrande', 'castello', 'castelli', 'patrimonio', 'unesco'], image: '/images/places/castelgrande.webp' },
-  { keywords: ['film', 'festival', 'cinema', 'locarno festival'], image: '/images/places/film-festival.webp' },
-  { keywords: ['foroglio', 'cascata', 'bavona', 'cevio', 'maggia', 'vallemaggia'], image: '/images/places/foroglio.webp' },
-  { keywords: ['foxtown', 'outlet', 'shopping', 'moda', 'fashion', 'negozio', 'acquisti', 'commercio'], image: '/images/places/foxtown.webp' },
-  { keywords: ['gandria', 'contrabbando', 'museo doganale'], image: '/images/places/gandria.webp' },
-  { keywords: ['lac-lugano', 'ceresio', 'navigazione', 'battello', 'crociera'], image: '/images/places/lac-lugano.webp' },
-  { keywords: ['lago', 'lugano', 'paradiso', 'campione'], image: '/images/places/lago-lugano.webp' },
-  { keywords: ['locarno', 'locarnese', 'brissago', 'gambarogno', 'muralto'], image: '/images/places/locarno.webp' },
-  { keywords: ['lugano', 'centro', 'città', 'urbano', 'usi', 'università'], image: '/images/places/lugano-view.webp' },
-  { keywords: ['mendrisio', 'chiasso', 'dogana', 'confine', 'frontiera', 'frontalier', 'valico', 'stabio', 'bizzarone', 'como'], image: '/images/places/mendrisio.webp' },
-  { keywords: ['monte brè', 'bré', 'funicolare'], image: '/images/places/monte-bre.webp' },
-  { keywords: ['monte generoso', 'generoso', 'ferrovia', 'cremagliera'], image: '/images/places/monte-generoso.webp' },
-  { keywords: ['san salvatore', 'salvatore', 'panorama'], image: '/images/places/monte-san-salvatore.webp' },
-  { keywords: ['swissminiatur', 'miniatura', 'melide', 'turismo', 'attrazione'], image: '/images/places/swissminiatur.webp' },
-  // Thematic fallbacks (broader topics)
-  { keywords: ['fisco', 'fiscal', 'tass', 'imposta', 'irpef', 'iva', 'dichiarazione', 'reddito', 'stipendio', 'salario', 'busta paga'], image: '/images/places/lugano-view.webp' },
-  { keywords: ['treno', 'tilo', 'ffs', 'sbb', 'trasporto', 'pendolar', 'ferrovia', 'trenitalia'], image: '/images/places/locarno.webp' },
-  { keywords: ['ospedale', 'sanità', 'salute', 'medic', 'lamal', 'cassa malati', 'assicurazion'], image: '/images/places/bellinzona.webp' },
-  { keywords: ['lavoro', 'occupazione', 'disoccupazione', 'impiego', 'assunzion', 'contratto'], image: '/images/places/lugano-view.webp' },
-  { keywords: ['scuol', 'educazione', 'formazione', 'studio', 'studente'], image: '/images/places/bellinzona.webp' },
-  { keywords: ['natura', 'montagna', 'sentiero', 'escursion', 'trekking', 'alpi'], image: '/images/places/monte-generoso.webp' },
-  { keywords: ['sport', 'hockey', 'calcio', 'palestra', 'atletica'], image: '/images/places/lugano-view.webp' },
-  { keywords: ['cultura', 'museo', 'arte', 'mostra', 'teatro', 'musica', 'concerto'], image: '/images/places/locarno.webp' },
-  { keywords: ['meteo', 'clima', 'pioggia', 'neve', 'temperature', 'alluvione', 'maltempo'], image: '/images/places/lago-lugano.webp' },
-  { keywords: ['auto', 'traffico', 'strada', 'autostrada', 'incidente', 'circolazione'], image: '/images/places/mendrisio.webp' },
-  { keywords: ['immobiliare', 'casa', 'affitto', 'appartamento', 'abitazione', 'residenza'], image: '/images/places/ascona.webp' },
-  { keywords: ['banca', 'credito', 'finanziario', 'borsa', 'cambio', 'chf', 'euro', 'franco'], image: '/images/places/lugano-view.webp' },
-  { keywords: ['pensione', 'avs', 'lpp', 'previdenza', 'pilastro', 'rendita', 'inps'], image: '/images/places/monte-san-salvatore.webp' },
-  { keywords: ['ristorante', 'gastronomia', 'cucina', 'vino', 'cibo', 'grotto'], image: '/images/places/ascona.webp' },
-];
-
 /**
- * Find the best fallback image matching article content by keywords.
- * 
- * Strategy (in order):
- * 1. Search existing blog image filenames for keyword overlap with article text.
- *    Blog images are named after their article (e.g. "salario-minimo-ticino-...webp"),
- *    so matching a blog filename to article keywords gives a topically relevant image.
- * 2. Fall back to curated IMAGE_KEYWORD_MAP (places + thematic).
- * 3. Return null → caller uses hash-based random.
- *
- * Images used by the last 7 articles are excluded from all results.
+ * Select an existing catalog cover with a valid reader-facing provenance
+ * record. A topical filename match is preferred, but any valid catalog cover
+ * is acceptable as the final deterministic fallback.
  */
 function findBestFallbackImage(data) {
   const recentImages = new Set(_getRecentArticleImages());
-
   const searchableText = [
     data.id || '',
     data.category || '',
     data.imagePrompt || '',
-    (data.content?.it?.title || data.content?.title || ''),
-    (data.content?.it?.excerpt || data.content?.excerpt || ''),
+    data.content?.it?.title || data.content?.title || '',
+    data.content?.it?.excerpt || data.content?.excerpt || '',
   ].join(' ').toLowerCase();
-
-  // Extract meaningful words (3+ chars) from article text for matching against filenames
   const articleWords = searchableText
     .replace(/[^a-zà-ÿ0-9\s-]/g, ' ')
     .split(/[\s-]+/)
-    .filter(w => w.length >= 4);
+    .filter((word) => word.length >= 4);
 
-  // Strategy 1: find a blog image whose filename shares keywords with the article
-  // Score each blog image by how many article words appear in its filename
   let bestBlogMatch = null;
   let bestBlogScore = 0;
-  for (const imgPath of FALLBACK_IMAGES) {
-    if (recentImages.has(imgPath)) continue;
-    if (!imgPath.startsWith('/images/blog/')) continue;
-    const filename = imgPath.replace('/images/blog/', '').replace(/\.(jpg|webp)$/i, '').toLowerCase();
-    let score = 0;
-    for (const word of articleWords) {
-      if (filename.includes(word)) score++;
-    }
+  for (const imagePath of FALLBACK_IMAGES) {
+    if (recentImages.has(imagePath)) continue;
+    const filename = imagePath.replace('/images/blog/', '').replace(/\.webp$/i, '').toLowerCase();
+    const score = articleWords.reduce((total, word) => total + (filename.includes(word) ? 1 : 0), 0);
     if (score > bestBlogScore) {
       bestBlogScore = score;
-      bestBlogMatch = imgPath;
+      bestBlogMatch = imagePath;
     }
   }
-  // Require at least 2 keyword overlaps to consider it a good match
-  if (bestBlogMatch && bestBlogScore >= 2) {
-    return bestBlogMatch;
-  }
+  if (bestBlogMatch && bestBlogScore >= 2) return bestBlogMatch;
 
-  // Strategy 2: curated keyword→image map (places + themes)
-  for (const entry of IMAGE_KEYWORD_MAP) {
-    if (recentImages.has(entry.image)) continue;
-    for (const kw of entry.keywords) {
-      if (searchableText.includes(kw)) {
-        if (FALLBACK_IMAGES.includes(entry.image)) {
-          return entry.image;
-        }
-      }
-    }
-  }
-
-  return null;
+  // The pool was built only from valid records. Keep the final choice explicit
+  // so an engine outage never turns into an untracked image.
+  return FALLBACK_IMAGES.find((imagePath) => !recentImages.has(imagePath))
+    || FALLBACK_IMAGES[0]
+    || null;
 }
 
 const CATEGORIES = ['fiscale', 'pratico', 'novita', 'pensione'];
@@ -4843,104 +4762,6 @@ async function splitBodyIntoSections(fullBody, title) {
 }
 
 /**
- * Read-only variant of generateArticleImage()'s Wikimedia/Pixabay/Pexels
- * search: returns candidate image URLs for a picker UI WITHOUT downloading
- * or writing any file (no sharp/fs writes) — download + webp conversion
- * happens later, at draft-save time, through the existing resolveHeroImage()
- * path in publish-journalist-article.mjs (any https:// URL is handled
- * identically whether it came from a Storage upload or a picked URL here).
- */
-async function findStockImageCandidates(data, count = 4) {
-  const candidates = [];
-
-  try {
-    const query = _buildWikimediaQueries(data)[0];
-    if (query) {
-      const wikiUrl =
-        `https://commons.wikimedia.org/w/api.php?action=query&generator=search` +
-        `&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=8` +
-        `&${COMMONS_IMAGEINFO_PARAMS}&iiurlwidth=1280&format=json`;
-      const res = await fetch(wikiUrl, {
-        signal: AbortSignal.timeout(15000),
-        headers: { 'User-Agent': 'FrontaliereBot/1.0 (https://frontaliereticino.ch; blog image)' },
-      });
-      if (res.ok) {
-        const json = await res.json();
-        const pages = Object.values(json.query?.pages || {});
-        for (const p of pages) {
-          const info = p.imageinfo?.[0];
-          const mime = (info?.mime || '').toLowerCase();
-          if (info?.thumburl && (mime.startsWith('image/jpeg') || mime.startsWith('image/png'))) {
-            // P14: a Commons photo is offered only with the credit it would
-            // carry (same rule as Strategy 4); one that cannot be credited is
-            // not a candidate. The publisher re-reads it from Commons anyway.
-            const verdict = acceptCommonsCandidate(readCommonsPage(p));
-            if (verdict.ok) {
-              candidates.push({ url: info.thumburl, source: 'wikimedia', attribution: p.title || null, credit: verdict.template });
-            }
-          }
-          if (candidates.length >= count) break;
-        }
-      }
-    }
-  } catch (err) {
-    console.warn(`  ⚠️  findStockImageCandidates/Wikimedia fallito: ${err.message}`);
-  }
-
-  const pixabayKey = process.env.PIXABAY_API_KEY;
-  if (candidates.length < count && pixabayKey) {
-    try {
-      const query = _buildWikimediaQueries(data)[0] || 'ticino switzerland';
-      const category = _inferPixabayCategory(data);
-      const res = await fetch(
-        `https://pixabay.com/api/?key=${pixabayKey}&q=${encodeURIComponent(query)}` +
-          `${category ? `&category=${encodeURIComponent(category)}` : ''}` +
-          `&image_type=photo&orientation=horizontal&per_page=20&min_width=1280&safesearch=true`,
-        { signal: AbortSignal.timeout(15000) },
-      );
-      if (res.ok) {
-        const json = await res.json();
-        const relevant = (json.hits || []).filter((h) => _isImageRelevant(h.tags, data));
-        for (const hit of relevant) {
-          const url = hit.largeImageURL || hit.webformatURL;
-          if (url) candidates.push({ url, source: 'pixabay', attribution: hit.user || null });
-          if (candidates.length >= count) break;
-        }
-      }
-    } catch (err) {
-      console.warn(`  ⚠️  findStockImageCandidates/Pixabay fallito: ${err.message}`);
-    }
-  }
-
-  const pexelsKey = process.env.PEXELS_API_KEY;
-  if (candidates.length < count && pexelsKey) {
-    try {
-      const query = _buildWikimediaQueries(data)[0] || 'ticino switzerland';
-      const res = await fetch(
-        `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&orientation=landscape&size=large&per_page=20`,
-        { headers: { Authorization: pexelsKey }, signal: AbortSignal.timeout(15000) },
-      );
-      if (res.ok) {
-        const json = await res.json();
-        const relevant = (json.photos || []).filter((p) =>
-          _isImageRelevant((p.alt || '').replace(/\s+/g, ','), data),
-        );
-        for (const photo of relevant) {
-          const url = photo.src?.large2x || photo.src?.large || photo.src?.original;
-          if (url) candidates.push({ url, source: 'pexels', attribution: photo.photographer || null });
-          if (candidates.length >= count) break;
-        }
-      }
-    } catch (err) {
-      console.warn(`  ⚠️  findStockImageCandidates/Pexels fallito: ${err.message}`);
-    }
-  }
-
-  return candidates.slice(0, count);
-}
-
-
-/**
  * JSON-Schema for the primary-locale article generation call.
  *
  * Forwarded to the LLM via `opts.jsonSchema` so providers with strict schema
@@ -5465,6 +5286,13 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
  */
 function factualityGateSourceText(url, pageContent) {
   return String(url || '').startsWith('evergreen://') ? '' : (pageContent || '');
+}
+
+// Anti-copy compares against the exact source material supplied to the
+// generator. Unlike the factuality gate, it must also inspect evergreen briefs:
+// those briefs are still input text and may not be reproduced verbatim.
+function sourceCopyInputText(pageContent) {
+  return String(pageContent || '');
 }
 
 /**
@@ -10071,6 +9899,12 @@ ${sourceContext._identityRefinement}
 Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore reale specifico dell'articolo, non il segnaposto), senza ripetere il valore appena rigettato.`
     : '';
 
+  const sourceCopyRefinementInstruction = sourceContext?._sourceCopyRefinement
+    ? `\n\n⚠️ TENTATIVO PRECEDENTE RIGETTATO — testo troppo vicino alla fonte:
+${sourceContext._sourceCopyRefinement}
+Riformula da zero il corpo italiano: non riutilizzare alcuna sequenza di ${SOURCE_COPY_OVERLAP_THRESHOLD} o più parole consecutive della fonte, salvo al massimo due citazioni brevi, attribuite e tra virgolette, di non più di ${SOURCE_COPY_MAX_QUOTE_WORDS} parole ciascuna.`
+    : '';
+
   // ── Multi-call generation with automatic model fallback ──
   // Supports model override via sourceContext._forceModel and temperature via sourceContext._temperature
   const forceModel = sourceContext?._forceModel;
@@ -10257,6 +10091,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // 12-token margin for the headline+fact-check combination alone): a single
   // relevant note beats three where two are stale.
   const _remediationFull = identityRefinementInstruction
+    || sourceCopyRefinementInstruction
     || (headlineRefinementInstruction + factCheckRefinementInstruction);
   const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
   const _shrinkLadder = [
@@ -12823,10 +12658,11 @@ function validate(data, opts = {}) {
     data.category = 'novita';
   }
 
-  // Default image to the first available place image; the downstream image
-  // validation block will pick a better fallback via keyword matching or hash.
+  // The legacy `image` field remains part of the model contract, but it is not
+  // a source for a new cover. The governed engine or a recorded catalog cover
+  // must decide the actual published path later in the pipeline.
   if (!data.image) {
-    console.error(`⚠️  Campo "image" mancante — uso fallback "${PLACES_IMAGES[0]}"`);
+    console.error(`⚠️  Campo "image" mancante — uso il placeholder di compatibilità "${PLACES_IMAGES[0]}"`);
     data.image = PLACES_IMAGES[0];
   }
 
@@ -13014,22 +12850,19 @@ function validate(data, opts = {}) {
     }
   }
   if (!AVAILABLE_IMAGES.includes(data.image)) {
-    // Try keyword-based matching first, then fall back to hash-based rotation
+    // A catalog fallback is allowed only when its provenance record is valid.
     const matched = findBestFallbackImage(data);
     if (matched) {
       console.error(`⚠️  Immagine "${data.image}" non trovata, uso match per keyword: "${matched}"`);
       data._generatedImagePath = matched;
-    } else {
-      const hash = [...(data.id || '')].reduce((acc, c) => acc + c.charCodeAt(0), 0);
-      const fallbackPath = FALLBACK_IMAGES[hash % FALLBACK_IMAGES.length];
-      console.error(`⚠️  Immagine "${data.image}" non trovata, uso fallback casuale "${fallbackPath}" (pool: ${FALLBACK_IMAGES.length} immagini)`);
-      data._generatedImagePath = fallbackPath;
+      const imageRecord = imageRecordForPath(PROJECT_ROOT, matched);
+      if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
     }
-    data.image = PLACES_IMAGES[0]; // dummy value, _generatedImagePath takes priority
+    data.image = PLACES_IMAGES[0]; // compatibility placeholder; path takes priority
   }
   // Validate new image fields (non-blocking — provide defaults)
   if (!data.imagePrompt) {
-    data.imagePrompt = `Professional editorial photo of Ticino Switzerland, Lake Lugano panorama, warm natural lighting`;
+    data.imagePrompt = `Illustrative editorial scene about the article topic in Ticino, with symbolic objects and places, warm natural palette`;
   }
   if (!data.imageAlt || typeof data.imageAlt !== 'object') {
     const itTitle = (data.content.it || data.content).title || data.id;
@@ -14156,745 +13989,79 @@ function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'
   }
 }
 
-// ── Image search helpers ──
+// ── Governed image generation ───────────────────────────────────────────────
 
-/**
- * Map of Italian keywords from article titles → English Wikimedia search terms.
- * `category`: Pixabay category used to tighten stock-photo ranking. Valid values:
- * backgrounds, fashion, nature, science, education, feelings, health, people,
- * religion, places, animals, industry, computer, food, sports, transportation,
- * travel, buildings, business, music.
- */
-const TOPIC_SEARCH_MAP = [
-  { keywords: ['benzina', 'carburante', 'petrolio', 'diesel', 'rifornimento'], queries: ['fuel station Switzerland', 'gas pump Europe'], category: 'transportation' },
-  { keywords: ['tasse', 'fiscale', 'imposta', 'irpef', 'fisco', 'deduzioni'], queries: ['tax office building', 'financial documents desk'], category: 'business' },
-  { keywords: ['salute', 'malattia', 'lamal', 'assicurazione', 'premio'], queries: ['hospital Switzerland modern', 'health insurance card'], category: 'health' },
-  { keywords: ['lavoro', 'impiego', 'occupazione', 'assunzione', 'disoccup'], queries: ['modern office workplace', 'job interview meeting'], category: 'business' },
-  { keywords: ['confine', 'dogana', 'frontiera', 'frontalier', 'permesso'], queries: ['Swiss Italian border crossing', 'customs checkpoint Europe'], category: 'places' },
-  { keywords: ['treno', 'ferrovia', 'trasporto', 'pendolar', 'tilo'], queries: ['train station Switzerland', 'commuter train Alps'], category: 'transportation' },
-  { keywords: ['casa', 'affitto', 'immobiliare', 'appartamento', 'mutuo'], queries: ['apartment building Switzerland', 'residential area Ticino'], category: 'buildings' },
-  { keywords: ['banca', 'finanziario', 'cambio', 'valuta', 'franco', 'euro'], queries: ['Swiss bank building', 'currency exchange counter'], category: 'business' },
-  { keywords: ['scuola', 'formazione', 'educazione', 'universit', 'corso'], queries: ['university campus Switzerland', 'classroom education'], category: 'education' },
-  { keywords: ['pensione', 'avs', 'pilastro', 'previdenza', 'anzian'], queries: ['retirement couple walking', 'pension fund documents'], category: 'people' },
-  { keywords: ['salario', 'stipendio', 'busta paga', 'reddito', 'retribuzion'], queries: ['salary paycheck document', 'business accounting office'], category: 'business' },
-  { keywords: ['dumping', 'sindacat', 'contratto', 'ccl'], queries: ['labor union protest Switzerland', 'workers rights demonstration'], category: 'people' },
-  { keywords: ['voto', 'elezioni', 'referendum', 'iniziativa', 'parlament'], queries: ['Swiss parliament Bern', 'voting ballot Switzerland'], category: 'buildings' },
-  { keywords: ['clima', 'meteo', 'alluvione', 'tempesta', 'neve'], queries: ['weather Alps Switzerland', 'storm clouds mountains'], category: 'nature' },
-  { keywords: ['polizia', 'sicurezza', 'reato', 'accident'], queries: ['police patrol Switzerland', 'road safety checkpoint'], category: 'transportation' },
-  { keywords: ['ospedale', 'medico', 'farmacia', 'sanitar'], queries: ['medical center Switzerland', 'doctor consultation'], category: 'health' },
-  { keywords: ['costruzione', 'cantiere', 'ediliz', 'ristrutturazione'], queries: ['construction site Switzerland', 'building renovation'], category: 'industry' },
-  { keywords: ['supermercato', 'spesa', 'prezzi', 'costo vita'], queries: ['supermarket grocery store', 'shopping food prices'], category: 'business' },
-  { keywords: ['auto', 'macchina', 'traffico', 'stradale', 'autostrada'], queries: ['highway traffic Switzerland', 'car road Alps'], category: 'transportation' },
-  { keywords: ['economia', 'pil', 'crescita', 'mercato', 'commercial'], queries: ['business district Zurich', 'economic growth chart'], category: 'business' },
-  { keywords: ['bambini', 'famiglia', 'asilo', 'nido', 'genitor'], queries: ['family park Switzerland', 'kindergarten playground'], category: 'people' },
-  { keywords: ['golfo', 'guerra', 'conflitto', 'geopolitica', 'medio oriente'], queries: ['oil tanker shipping port', 'cargo ship Mediterranean'], category: 'industry' },
-  { keywords: ['tecnologia', 'digitale', 'intelligenza artificiale', 'innovation'], queries: ['technology office workspace', 'digital innovation center'], category: 'computer' },
-];
-
-/**
- * Tag denylist: if a stock-photo hit is tagged with any of these AND the article
- * is not clearly about that topic, reject the hit. Prevents pasta images on
- * articles about "frontalieri" etc.
- */
-const IMAGE_TAG_DENYLIST = {
-  food: ['food', 'pasta', 'spaghetti', 'pizza', 'cheese', 'meal', 'dish', 'cooking', 'kitchen', 'restaurant', 'cuisine', 'recipe', 'ingredient', 'plate', 'breakfast', 'lunch', 'dinner', 'dessert', 'cake', 'bread', 'fruit', 'vegetable', 'wine', 'drink', 'coffee', 'beverage'],
-  people_closeup: ['wedding', 'bride', 'groom', 'kiss', 'romance', 'love', 'couple'],
-  pets: ['dog', 'cat', 'puppy', 'kitten', 'pet'],
-};
-
-/** Italian keywords that indicate the article IS about food/drink */
-const FOOD_ARTICLE_KEYWORDS = ['cibo', 'cucina', 'ristorante', 'pasta', 'pizza', 'gastronomi', 'enologi', 'vino', 'birra', 'caffè', 'caffe', 'ricetta', 'pranzo', 'cena', 'colazione'];
-
-/** Extract Italian article title (lowercased) for topic matching */
-function _articleTitleLower(data) {
-  return (data.title || data.content?.it?.title || data.content?.title || '').toLowerCase();
-}
-
-/** Return true if image tags appear relevant to the article (not an off-topic category). */
-function _isImageRelevant(tagsString, data) {
-  if (!tagsString) return true; // no tags → can't reject
-  const tags = tagsString.toLowerCase().split(/[,;|]/).map(t => t.trim()).filter(Boolean);
-  if (tags.length === 0) return true;
-  const title = _articleTitleLower(data);
-  const isFoodArticle = FOOD_ARTICLE_KEYWORDS.some(k => title.includes(k));
-  for (const [topic, denied] of Object.entries(IMAGE_TAG_DENYLIST)) {
-    if (topic === 'food' && isFoodArticle) continue;
-    if (tags.some(t => denied.includes(t))) return false;
-  }
-  return true;
-}
-
-/** Infer a Pixabay category hint from article title, or null if none matches. */
-function _inferPixabayCategory(data) {
-  const title = _articleTitleLower(data);
-  for (const entry of TOPIC_SEARCH_MAP) {
-    if (entry.keywords.some(k => title.includes(k))) return entry.category || null;
-  }
-  return null;
-}
-
-/** Build topic-specific search queries from article data */
-function _buildWikimediaQueries(data) {
-  const title = (data.title || data.content?.it?.title || data.content?.title || '').toLowerCase();
-  const category = (data.category || '').toLowerCase();
-  const queries = [];
-
-  // 1. Extract topic-based queries from title keywords
-  for (const entry of TOPIC_SEARCH_MAP) {
-    if (entry.keywords.some(k => title.includes(k))) {
-      queries.push(...entry.queries);
-      if (queries.length >= 3) break; // Max 3 topic queries
-    }
-  }
-
-  // 2. Check for city names in title
-  const cities = ['lugano', 'bellinzona', 'locarno', 'mendrisio', 'chiasso', 'ascona'];
-  const cityMatch = cities.find(c => title.includes(c));
-  if (cityMatch) {
-    queries.push(`${cityMatch} Switzerland photo`);
-  }
-
-  // 3. Category-based fallback if no topic match
-  if (queries.length === 0) {
-    const catMap = {
-      novita: ['Switzerland news editorial photo', 'Ticino newspaper press'],
-      fisco: ['tax office documents Swiss', 'financial calculation desk'],
-      lavoro: ['modern office workspace Swiss', 'job interview professional'],
-      salute: ['Swiss hospital medical center', 'health care pharmacy'],
-      vita: ['daily life Switzerland Ticino', 'Swiss town square people'],
-      economia: ['business district Swiss bank', 'economy finance Zurich'],
-    };
-    if (catMap[category]) {
-      queries.push(...catMap[category]);
-    }
-  }
-
-  // 4. Diverse generic fallbacks (rotated by day to avoid repetition)
-  const generics = [
-    'Swiss Alps panorama mountain', 'Lake Lugano sunset boating',
-    'Ticino village stone street', 'Bellinzona castle medieval',
-    'Mendrisio vineyard autumn', 'Locarno piazza grande',
-    'Swiss Italian architecture colorful', 'Gotthard pass scenic road',
-    'Como lake panorama', 'Swiss railway bridge Ticino',
-    'Ascona lakefront promenade', 'Lugano Monte Bre funicular',
-  ];
-  // Select 2-3 generics rotated by day of year
-  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
-  for (let i = 0; i < 3; i++) {
-    const idx = (dayOfYear + i * 4 + (data.id || '').length) % generics.length;
-    if (!queries.includes(generics[idx])) {
-      queries.push(generics[idx]);
-    }
-  }
-
-  return queries;
-}
-
-/**
- * Save a used Wikimedia image URL for dedup tracking. The dedup itself reads
- * this map as Commons FILE titles (`loadCommonsUsage`), together with the
- * credit records: comparing URLs let one photo reach five articles, because
- * the API now hands out `thumb.wikimedia.org/…?utm_*` forms of the same file.
- */
-function _saveUsedImageUrl(articleId, imageUrl) {
-  const trackingFile = path.join(process.cwd(), 'data', 'blog-images-used.json');
-  let entries = {};
-  try {
-    entries = JSON.parse(readFileSync(trackingFile, 'utf8'));
-  } catch { /* first use */ }
-  entries[articleId] = imageUrl;
-  writeFileSync(trackingFile, JSON.stringify(entries, null, 2) + '\n');
-}
-
-// ── Tetto alla fase immagini (2026-08-18) ─────────────────────────────────
-// `generateArticleImage` prova 9 strategie SERIALI con timeout da 90-120s
-// l'una: ~22 minuti nel caso peggiore. E gira DOPO che tutti i gate sono
-// passati, cioe' nel momento in cui perdere il lavoro costa di piu' — il
-// workflow ha un `timeout ... 2400s` che SIGKILLa il processo e butta
-// l'articolo intero. Allo scadere del budget si torna `null`, che e' il
-// percorso NORMALE quando Imagen non e' disponibile: `findBestFallbackImage`
-// esiste gia' e pesca dal catalogo Ticino. Il peggio che succede e'
-// un'immagine di repertorio su un articolo che altrimenti non esisterebbe.
 const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
-  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 180_000)),
+  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 600_000)),
 );
 
+function articleImageSubject(data) {
+  const title = String(data.title || data.content?.it?.title || data.content?.title || '').trim();
+  const context = String(data.imagePrompt || '').replace(/\s+/g, ' ').trim();
+  return [title, context].filter(Boolean).join(' — ').slice(0, 500);
+}
+
+function articleImageAssetId(data) {
+  const raw = String(data.id || 'article').toLowerCase();
+  const normalized = raw.replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
+  return `article-${(normalized || 'article').slice(0, 110)}`;
+}
+
+/**
+ * Generate a new article hero only through the governed image engine.
+ *
+ * The engine owns provider order, policy prompt, vision verification, metadata,
+ * and the canonical generated-image registry record. This adapter only supplies
+ * the article scope/subject and persists the record where the corpus publisher
+ * can expose it.
+ */
 async function generateArticleImage(data) {
-  // P14: only Strategy 4 sets it again. A credit left by an earlier attempt
-  // would strip the site's rights from an AI or stock cover's literal.
   delete data._imageCredit;
+  delete data._generatedImageRecord;
+  delete data._editorialImageRecord;
+
   const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
-  const imagePhaseExpired = (label) => {
-    if (Date.now() < imageDeadline) return false;
-    console.error(
-      `  ⏱️  Budget fase immagini (${Math.round(IMAGE_PHASE_BUDGET_MS / 1000)}s) esaurito prima di ${label}`
-      + ` — passo all'immagine di fallback dal catalogo.`,
-    );
-    return true;
-  };
-  // Derive concrete English subject clause from TOPIC_SEARCH_MAP so the generator
-  // doesn't default to generic "people in a street" when the title says "frontalieri".
-  const subjectTitle = _articleTitleLower(data);
-  let topicSubject = null;
-  for (const entry of TOPIC_SEARCH_MAP) {
-    if (entry.keywords.some(k => subjectTitle.includes(k))) { topicSubject = entry.queries[0]; break; }
-  }
-  const subjectLine = topicSubject ? `\n\nMAIN SUBJECT: ${topicSubject}. This must be the dominant element in the frame.` : '';
-  const fallbackImagePrompt = IS_CANTON
-    ? CANTON_LINES.fallbackImagePrompt
-    : IS_FRONTALIERE
-    ? `Professional editorial photo for a news article about cross-border workers in Ticino, Switzerland. Lake Lugano, warm lighting.`
-    : `Professional editorial photo for a Swiss national news article. A recognizable Swiss national or cantonal scene appropriate to the topic, natural warm lighting.`;
-  const prompt = (data.imagePrompt || fallbackImagePrompt)
-    + subjectLine
-    + '\n\nIMPORTANT: Generate ONLY the image, do NOT include any text, watermarks, labels, or captions on the image.'
-    + '\n\nSTYLE: Photorealistic editorial photograph indistinguishable from a real DSLR/mirrorless camera shot. Include natural lens characteristics: shallow depth of field, subtle chromatic aberration, realistic bokeh on out-of-focus areas, natural film grain, slight vignetting. Lighting must be natural and ambient — avoid flat, evenly-lit AI look. Include micro-imperfections: slight motion blur on peripheral elements, natural color temperature shifts, realistic shadow falloff. Absolutely NO AI artifacts, NO unnaturally smooth textures, NO perfect symmetry, NO CGI plastic look, NO HDR over-processing.';
-
-  const imgDir = resolve('public/images/blog');
-  mkdirSync(imgDir, { recursive: true });
-  const imgPath = resolve(`public/images/blog/${data.id}.webp`);
-
-  // ── Helper: save raw image buffer, optimize, return path or null ──
-  // `commons`: Strategy 4 catalogs the cover itself, once its credit is in place (P14).
-  async function _saveAndOptimize(rawBuffer, providerLabel, contentType = 'image/jpeg', { commons = false } = {}) {
-    if (rawBuffer.length < 5000) {
-      console.error(`  ⚠️ Immagine troppo piccola (${rawBuffer.length} bytes) da ${providerLabel}`);
-      return null;
-    }
-    const sourceExt = (contentType || '').includes('png') ? 'png' : (contentType || '').includes('webp') ? 'webp' : 'jpg';
-    const tempPath = resolve(`public/images/blog/${data.id}.source.${sourceExt}`);
-    writeFileSync(tempPath, rawBuffer);
-    const rawKB = (rawBuffer.length / 1024).toFixed(0);
-    const result = await optimizeImageToWebp(tempPath, imgPath);
-    if (existsSync(tempPath)) unlinkSync(tempPath);
-
-    if (result.ok) {
-      const finalKb = (result.after / 1024).toFixed(0);
-      const beforeKb = (result.before / 1024).toFixed(0);
-      const overTarget = result.after > BLOG_IMAGE_HARD_MAX_BYTES ? ' ⚠️ sopra hard cap' : '';
-      console.error(`  ✅ Immagine generata e ottimizzata: public/images/blog/${data.id}.webp (${beforeKb} KB → ${finalKb} KB, ${providerLabel})${overTarget}`);
-    } else {
-      if (rawBuffer.length > BLOG_IMAGE_HARD_MAX_BYTES) {
-        console.error(`  ⚠️ Immagine raw troppo pesante (${rawKB} KB) e optimizer non disponibile. Provo provider successivo...`);
-        return null;
-      }
-      writeFileSync(imgPath, rawBuffer);
-      console.error(`  ✅ Immagine generata (raw fallback): public/images/blog/${data.id}.webp (${rawKB} KB, ${providerLabel})`);
-    }
-
-    // ── Post-save width enforcement ──
-    // Google News, Discover, and Open Graph require ≥1200px wide images.
-    // If the optimizer (sharp or system binaries) wasn't available, or if the
-    // AI provider returned an undersized image, the saved file may be < 1200px.
-    // Force-upscale to 1200px wide to guarantee visibility on all Google surfaces.
-    try {
-      const sharpMod = await import('sharp');
-      const shp = sharpMod.default || sharpMod;
-      const meta = await shp(imgPath).metadata();
-      if (meta.width && (meta.width < 1200 || meta.height < 675)) {
-        const buf = await shp(imgPath)
-          .resize({ width: 1200, height: 675, fit: 'cover', position: 'attention' })
-          .webp({ quality: 75, effort: 4 })
-          .toBuffer();
-        writeFileSync(imgPath, buf);
-        console.error(`  📐 Resized ${meta.width}×${meta.height} → 1200×675 (Google Discover minimum)`);
-      }
-    } catch {
-      // sharp not available — image stays as-is (acceptable in rare CI edge cases)
-    }
-
-    const generatedPath = `/images/blog/${data.id}.webp`;
-    if (commons) return generatedPath;
-    // P14: this file now holds a picture that is not from Commons. A credit
-    // record left for it (an earlier attempt, a regenerated id) would credit
-    // someone else's photo on it.
-    const staleCredit = creditRecordPath(PROJECT_ROOT, data.id);
-    if (existsSync(staleCredit)) unlinkSync(staleCredit);
-    appendCatalogEntry(generatedPath);
-    return generatedPath;
+  if (Date.now() >= imageDeadline) {
+    console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
+    return null;
   }
 
-  // ── Strategy 1: Gemini native image generation (free tier) ──
-  if (imagePhaseExpired('Strategy 1')) return null;
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (apiKey) {
-    const modelsToTry = [IMAGE_MODEL_FLASH, IMAGE_MODEL_PRO];
-    let geminiQuotaExhausted = false;
-    for (const model of modelsToTry) {
-      if (geminiQuotaExhausted) break;
-      try {
-        const isPro = model === IMAGE_MODEL_PRO;
-        console.error(`🎨 Generazione immagine con ${isPro ? 'Gemini 3 Pro Image' : 'Gemini 2.5 Flash Image'}...`);
-
-        const endpoint = `${GEMINI_API_BASE}/${model}:generateContent?key=${apiKey}`;
-        // Note: imageSize:'1K' removed — it causes Gemini to output 1024x1024 squares.
-        // aspectRatio:'16:9' alone produces proper landscape output.
-        const generationConfig = isPro
-          ? { responseModalities: ['TEXT', 'IMAGE'], imageConfig: { aspectRatio: '16:9' } }
-          : { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '16:9' } };
-
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig,
-          }),
-          signal: AbortSignal.timeout(120000),
-        });
-
-        if (!res.ok) {
-          // 429 = quota exceeded — account-wide, skip all remaining Gemini models
-          if (res.status === 429) {
-            geminiQuotaExhausted = true;
-            throw new Error('quota Gemini esaurita (429)');
-          }
-          const errText = await res.text().catch(() => '');
-          throw new Error(`HTTP ${res.status}: ${errText.slice(0, 120)}`);
-        }
-
-        const json = await res.json();
-        const parts = json.candidates?.[0]?.content?.parts || [];
-        const imagePart = parts.find(p => p.inlineData?.data && !p.thought);
-        if (!imagePart) throw new Error('Nessuna immagine nella risposta Gemini');
-
-        const base64 = imagePart.inlineData.data;
-        const mimeType = imagePart.inlineData.mimeType || 'image/jpeg';
-        const rawBuffer = Buffer.from(base64, 'base64');
-        const saved = await _saveAndOptimize(rawBuffer, `Gemini/${model}`, mimeType);
-        if (saved) return saved;
-      } catch (e) {
-        console.error(`  ⚠️  Gemini fallito: ${e.message}`);
-      }
-    }
-  }
-
-  // ── Strategy 2: Pollinations.ai (free, no API key) ──
-  if (imagePhaseExpired('Strategy 2')) return null;
-  // https://gen.pollinations.ai — free AI image generation, no auth needed
-  // Migrated from image.pollinations.ai/prompt/ → gen.pollinations.ai/image/ (2025)
-  // Only try 2 models with 1 retry; if origin is down (530/502/503) skip all.
-  const pollinationsModels = ['flux', 'flux-realism'];
-  let pollinationsOriginDown = false;
-  for (const pModel of pollinationsModels) {
-    if (pollinationsOriginDown) break;
-    for (let attempt = 0; attempt < 2; attempt++) {
-      try {
-        if (attempt > 0) {
-          console.error(`  🔄 Retry Pollinations/${pModel} dopo 10s...`);
-          await new Promise(r => setTimeout(r, 10000));
-        }
-        console.error(`🎨 Generazione immagine con Pollinations.ai (${pModel})...`);
-        const encodedPrompt = encodeURIComponent(
-          prompt.replace(/\n/g, ' ').slice(0, 800)
-        );
-        const pollinationsUrl = `https://gen.pollinations.ai/image/${encodedPrompt}?width=1280&height=720&model=${pModel}&nologo=true&seed=${Date.now()}`;
-
-        const res = await fetch(pollinationsUrl, {
-          signal: AbortSignal.timeout(120000),
-          redirect: 'follow',
-        });
-
-        if (!res.ok) {
-          if ((res.status === 530 || res.status === 502 || res.status === 503) && attempt < 1) {
-            throw new Error(`HTTP ${res.status} (retry)`);
-          }
-          // Origin-level errors mean all models are down
-          if (res.status === 530 || res.status === 502 || res.status === 503) {
-            pollinationsOriginDown = true;
-          }
-          throw new Error(`HTTP ${res.status}`);
-        }
-
-        const contentType = res.headers.get('content-type') || '';
-        if (!contentType.startsWith('image/')) {
-          throw new Error(`Risposta non è un'immagine: ${contentType}`);
-        }
-
-        const arrayBuf = await res.arrayBuffer();
-        const rawBuffer = Buffer.from(arrayBuf);
-        const saved = await _saveAndOptimize(rawBuffer, `Pollinations/${pModel}`, contentType);
-        if (saved) return saved;
-        break;
-      } catch (e) {
-        console.error(`  ⚠️  Pollinations/${pModel} fallito: ${e.message}`);
-        if (e.message.includes('(retry)')) continue;
-        break;
-      }
-    }
-  }
-  if (pollinationsOriginDown) console.error('  ⚠️  Pollinations.ai non raggiungibile — origin down');
-
-  // ── Strategy 2b: Together.ai (FLUX.1-schnell-Free, free tier with key) ──
-  if (imagePhaseExpired('Strategy 2b')) return null;
-  // https://www.together.ai — free model, needs TOGETHER_API_KEY secret in GH
-  const togetherKey = process.env.TOGETHER_API_KEY;
-  if (togetherKey) {
-    try {
-      console.error('🎨 Generazione immagine con Together.ai (FLUX.1-schnell-Free)...');
-      const togetherRes = await fetch('https://api.together.xyz/v1/images/generations', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${togetherKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'black-forest-labs/FLUX.1-schnell-Free',
-          prompt: prompt.replace(/\n/g, ' ').slice(0, 800),
-          width: 1280,
-          height: 720,
-          steps: 4,
-          n: 1,
-          response_format: 'b64_json',
-        }),
-        signal: AbortSignal.timeout(90000),
-      });
-      if (!togetherRes.ok) {
-        const errText = await togetherRes.text().catch(() => '');
-        throw new Error(`HTTP ${togetherRes.status}: ${errText.slice(0, 200)}`);
-      }
-      const togetherJson = await togetherRes.json();
-      const b64 = togetherJson.data?.[0]?.b64_json;
-      if (!b64) throw new Error('Nessuna immagine nella risposta Together.ai');
-      const rawBuffer = Buffer.from(b64, 'base64');
-      const saved = await _saveAndOptimize(rawBuffer, 'Together.ai/FLUX-schnell', 'image/jpeg');
-      if (saved) return saved;
-    } catch (e) {
-      console.error(`  ⚠️  Together.ai fallito: ${e.message}`);
-    }
-  }
-
-  // ── Strategy 2c: Fal.ai (FLUX schnell, needs FAL_KEY secret in GH) ──
-  if (imagePhaseExpired('Strategy 2c')) return null;
-  // https://fal.ai — pay-per-use with free credits, very fast FLUX inference
-  const falKey = process.env.FAL_KEY;
-  if (falKey) {
-    try {
-      console.error('🎨 Generazione immagine con Fal.ai (FLUX schnell)...');
-      const falRes = await fetch('https://fal.run/fal-ai/flux/schnell', {
-        method: 'POST',
-        headers: {
-          Authorization: `Key ${falKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: prompt.replace(/\n/g, ' ').slice(0, 800),
-          image_size: 'landscape_16_9',
-          num_inference_steps: 4,
-          num_images: 1,
-        }),
-        signal: AbortSignal.timeout(90000),
-      });
-      if (!falRes.ok) {
-        const errText = await falRes.text().catch(() => '');
-        throw new Error(`HTTP ${falRes.status}: ${errText.slice(0, 200)}`);
-      }
-      const falJson = await falRes.json();
-      const falImgUrl = falJson.images?.[0]?.url;
-      if (!falImgUrl) throw new Error('Nessuna immagine nella risposta Fal.ai');
-      const falImgRes = await fetch(falImgUrl, { signal: AbortSignal.timeout(30000) });
-      if (!falImgRes.ok) throw new Error(`Download HTTP ${falImgRes.status}`);
-      const falBuf = Buffer.from(await falImgRes.arrayBuffer());
-      const falContentType = falImgRes.headers.get('content-type') || 'image/jpeg';
-      const saved = await _saveAndOptimize(falBuf, 'Fal.ai/FLUX-schnell', falContentType);
-      if (saved) return saved;
-    } catch (e) {
-      console.error(`  ⚠️  Fal.ai fallito: ${e.message}`);
-    }
-  }
-
-  // ── Strategy 3: HuggingFace Inference API (free, FLUX-schnell) ──
-  if (imagePhaseExpired('Strategy 3')) return null;
-  // https://huggingface.co/docs/api-inference — free tier with HF_TOKEN
-  // FLUX-1-schnell is one of the fastest open-source text-to-image models
-  // NOTE: HF migrated from api-inference.huggingface.co → router.huggingface.co (2025)
-  const hfToken = process.env.HF_TOKEN || process.env.HUGGINGFACE_TOKEN;
-  if (hfToken) {
-    const hfModels = [
-      'black-forest-labs/FLUX.1-schnell',
-      'stabilityai/stable-diffusion-xl-base-1.0',
-    ];
-    for (const hfModel of hfModels) {
-      try {
-        const shortName = hfModel.split('/').pop();
-        console.error(`🎨 Generazione immagine con HuggingFace/${shortName}...`);
-        const hfRes = await fetch(`https://router.huggingface.co/hf-inference/v2/models/${hfModel}`, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${hfToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            inputs: prompt.replace(/\n/g, ' ').slice(0, 800),
-            parameters: { width: 1280, height: 720 },
-          }),
-          signal: AbortSignal.timeout(120000),
-        });
-
-        if (!hfRes.ok) {
-          const errText = await hfRes.text().catch(() => '');
-          throw new Error(`HTTP ${hfRes.status}: ${errText.slice(0, 200)}`);
-        }
-
-        const contentType = hfRes.headers.get('content-type') || '';
-        if (!contentType.startsWith('image/')) {
-          throw new Error(`Risposta non è un'immagine: ${contentType}`);
-        }
-
-        const rawBuffer = Buffer.from(await hfRes.arrayBuffer());
-        const saved = await _saveAndOptimize(rawBuffer, `HuggingFace/${shortName}`, contentType);
-        if (saved) return saved;
-      } catch (e) {
-        console.error(`  ⚠️  HuggingFace/${hfModel.split('/').pop()} fallito: ${e.message}`);
-      }
-    }
-  }
-
-  // ── Strategy 4: Wikimedia Commons (free, no API key, keyword search) ──
-  if (imagePhaseExpired('Strategy 4')) return null;
-  // Searches freely licensed photos on Wikimedia Commons. Very reliable.
-  // P14: a Commons cover goes out only with its credit. The search request
-  // also asks for the licence metadata (`extmetadata`: no extra call); a file
-  // that cannot be credited — no machine-readable licence, GFDL-only, a reuse
-  // restriction such as personality rights, no clean author — is not a
-  // candidate, and the chosen one gets content/image-credits/blog/<id>.json
-  // before it is used. Dedup is by Commons FILE, not URL: a file another
-  // article already uses is taken only when no unused one is usable, after
-  // every query has been tried.
-  {
-    const searchQueries = _buildWikimediaQueries(data);
-    const commonsUsage = loadCommonsUsage(PROJECT_ROOT);
-    const fetchedAt = utcDate();
-    // Prefer landscape orientation (ratio > 1.3) and larger images
-    const candidateScore = ({ info }) => ((info.width || 1) / (info.height || 1) > 1.3 ? 10 : 0) + Math.min(info.width || 0, 2000) / 200;
-    /** Creditable files another article already uses: the last resort, below. */
-    const reusable = [];
-    const useCommonsCandidate = async (pick) => {
-      const imgUrl = pick.info.thumburl;
-      console.error(`  📥 Download: ${imgUrl.slice(0, 80)}...`);
-      const imgRes = await fetch(imgUrl, {
-        signal: AbortSignal.timeout(20000),
-        headers: { 'User-Agent': 'FrontaliereBot/1.0' },
-      });
-      if (!imgRes.ok) throw new Error(`Download HTTP ${imgRes.status}`);
-      const buf = Buffer.from(await imgRes.arrayBuffer());
-      const saved = await _saveAndOptimize(buf, `Wikimedia/${pick.query}`, imgRes.headers.get('content-type'), { commons: true });
-      if (!saved) return null;
-      // The cover is installed in order: its record, the usage map, the
-      // catalog. A step that fails undoes the ones before it — no credit, no
-      // Commons cover — so the next strategy starts clean and no other picture
-      // is ever published with this credit.
-      let recordFile = null;
-      try {
-        const record = creditRecordForCover(pick.credit, {
-          cover: saved,
-          original: { width: pick.info.width, height: pick.info.height },
-          coverSize: webpDimensions(readFileSync(imgPath)),
-        });
-        recordFile = writeCreditRecord(PROJECT_ROOT, record);
-        _saveUsedImageUrl(data.id, imgUrl);
-        appendCatalogEntry(saved);
-        data._imageCredit = record;
-        return saved;
-      } catch (e) {
-        console.error(`  ⚠️  Wikimedia «${pick.title}»: copertina non installata (${e.message}) — immagine e credito scartati`);
-        if (recordFile && existsSync(recordFile)) unlinkSync(recordFile);
-        delete data._imageCredit;
-        if (existsSync(imgPath)) unlinkSync(imgPath);
-        return null;
-      }
-    };
-
-    for (const query of searchQueries) {
-      try {
-        console.error(`🖼️ Ricerca immagine da Wikimedia Commons ("${query}")...`);
-        const wikiUrl = `https://commons.wikimedia.org/w/api.php?action=query&generator=search` +
-          `&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=12` +
-          `&${COMMONS_IMAGEINFO_PARAMS}&iiurlwidth=1280&format=json`;
-        const res = await fetch(wikiUrl, {
-          signal: AbortSignal.timeout(15000),
-          headers: { 'User-Agent': 'FrontaliereBot/1.0 (https://frontaliereticino.ch; blog image)' },
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        const pages = json.query?.pages || {};
-        // JPEG/PNG images with a thumbnail URL, that can be credited
-        const candidates = Object.values(pages)
-          .map((p) => {
-            const info = p.imageinfo?.[0];
-            if (!info?.thumburl) return null;
-            const mime = (info.mime || '').toLowerCase();
-            if (!mime.startsWith('image/jpeg') && !mime.startsWith('image/png')) return null;
-            const verdict = chooseCommonsCredit(readCommonsPage(p), commonsUsage, { fetchedAt });
-            if (!verdict.ok) return null;
-            return { info, query, title: verdict.title, credit: verdict.template, reused: verdict.reused };
-          })
-          .filter(Boolean)
-          .sort((a, b) => candidateScore(b) - candidateScore(a));
-        const fresh = candidates.filter((c) => !c.reused);
-        reusable.push(...candidates.filter((c) => c.reused));
-
-        if (fresh.length === 0) {
-          console.error(`  ⚠️  Wikimedia "${query}": nessun file accreditabile e non ancora usato`);
-          continue;
-        }
-
-        // Pick from top 5 candidates for variety (was top 3)
-        const pick = fresh[Math.floor(Math.random() * Math.min(5, fresh.length))];
-        const saved = await useCommonsCandidate(pick);
-        if (saved) return saved;
-      } catch (e) {
-        console.error(`  ⚠️  Wikimedia "${query}" fallito: ${e.message}`);
-      }
-    }
-
-    // Last resort (P14 design, Q5): a file already on another article, with
-    // the credit its record already carries — at most three tries.
-    const tried = new Set();
-    for (const pick of reusable.sort((a, b) => candidateScore(b) - candidateScore(a))) {
-      if (tried.has(pick.title)) continue;
-      if (tried.size >= 3 || imagePhaseExpired('il riuso Commons di Strategy 4')) break;
-      tried.add(pick.title);
-      try {
-        console.error(`🖼️ Wikimedia Commons: nessun file nuovo, riuso «${pick.title}» con il suo credito`);
-        const saved = await useCommonsCandidate(pick);
-        if (saved) return saved;
-      } catch (e) {
-        console.error(`  ⚠️  Wikimedia «${pick.title}» fallito: ${e.message}`);
-      }
-    }
-  }
-
-  // ── Strategy 5: Pixabay API (free, 100 req/min, needs key) ──
-  if (imagePhaseExpired('Strategy 5')) return null;
-  // Uses article-specific keyword search for relevant stock photos.
-  const pixabayKey = process.env.PIXABAY_API_KEY;
-  if (pixabayKey) {
-    const pixabayQueries = _buildWikimediaQueries(data).slice(0, 2).map(q => q.replace(/\bcommons\b/gi, '').trim());
-    if (pixabayQueries.length === 0) pixabayQueries.push('ticino switzerland');
-    pixabayQueries.push('swiss landscape lake');
-    const pxCategory = _inferPixabayCategory(data);
-    const categoryParam = pxCategory ? `&category=${encodeURIComponent(pxCategory)}` : '';
-
-    for (const pxQuery of pixabayQueries) {
-      try {
-        console.error(`🖼️ Ricerca immagine stock da Pixabay ("${pxQuery}"${pxCategory ? `, cat=${pxCategory}` : ''})...`);
-        const q = encodeURIComponent(pxQuery);
-        const res = await fetch(
-          `https://pixabay.com/api/?key=${pixabayKey}&q=${q}${categoryParam}&image_type=photo&orientation=horizontal&per_page=20&min_width=1280&safesearch=true`,
-          { signal: AbortSignal.timeout(15000) },
-        );
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        const hits = json.hits || [];
-        if (hits.length === 0) {
-          console.error(`  ⚠️  Pixabay "${pxQuery}": nessun risultato`);
-          continue;
-        }
-        // Filter hits by tag relevance to reject off-topic images (e.g. pasta on a highway article)
-        const relevant = hits.filter(h => _isImageRelevant(h.tags, data));
-        if (relevant.length === 0) {
-          console.error(`  ⚠️  Pixabay "${pxQuery}": tutti i risultati respinti dal filtro rilevanza (tags off-topic)`);
-          continue;
-        }
-        const pick = relevant[Math.floor(Math.random() * Math.min(5, relevant.length))];
-        const imgUrl = pick.largeImageURL || pick.webformatURL;
-        if (imgUrl) {
-          const imgRes = await fetch(imgUrl, { signal: AbortSignal.timeout(20000) });
-          if (imgRes.ok) {
-            const buf = Buffer.from(await imgRes.arrayBuffer());
-            const saved = await _saveAndOptimize(buf, `Pixabay/${pxQuery}`, imgRes.headers.get('content-type'));
-            if (saved) return saved;
-          }
-        }
-      } catch (e) {
-        console.error(`  ⚠️  Pixabay "${pxQuery}" fallito: ${e.message}`);
-      }
-    }
-  }
-
-  // ── Strategy 5b: Pexels API (stock foto CC0, needs PEXELS_API_KEY secret in GH) ──
-  if (imagePhaseExpired('Strategy 5b')) return null;
-  // https://www.pexels.com/api/ — free tier 200 req/hour, landscape orientation, high quality
-  const pexelsKey = process.env.PEXELS_API_KEY;
-  if (pexelsKey) {
-    const pexelsQueries = _buildWikimediaQueries(data).slice(0, 2).map(q => q.replace(/\bcommons\b/gi, '').trim());
-    if (pexelsQueries.length === 0) pexelsQueries.push('ticino switzerland');
-    pexelsQueries.push('swiss landscape lake');
-
-    for (const pxQuery of pexelsQueries) {
-      try {
-        console.error(`🖼️ Ricerca immagine stock da Pexels ("${pxQuery}")...`);
-        const q = encodeURIComponent(pxQuery);
-        const res = await fetch(
-          `https://api.pexels.com/v1/search?query=${q}&orientation=landscape&size=large&per_page=20`,
-          {
-            headers: { Authorization: pexelsKey },
-            signal: AbortSignal.timeout(15000),
-          },
-        );
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        const photos = json.photos || [];
-        if (photos.length === 0) {
-          console.error(`  ⚠️  Pexels "${pxQuery}": nessun risultato`);
-          continue;
-        }
-        // Pexels exposes `alt` (descriptive text). Reuse the same tag filter by
-        // tokenizing alt words.
-        const relevant = photos.filter(p => _isImageRelevant((p.alt || '').replace(/\s+/g, ','), data));
-        if (relevant.length === 0) {
-          console.error(`  ⚠️  Pexels "${pxQuery}": tutti i risultati respinti dal filtro rilevanza (alt off-topic)`);
-          continue;
-        }
-        const pick = relevant[Math.floor(Math.random() * Math.min(5, relevant.length))];
-        const imgUrl = pick.src?.large2x || pick.src?.large || pick.src?.original;
-        if (imgUrl) {
-          const imgRes = await fetch(imgUrl, { signal: AbortSignal.timeout(20000) });
-          if (imgRes.ok) {
-            const buf = Buffer.from(await imgRes.arrayBuffer());
-            const saved = await _saveAndOptimize(buf, `Pexels/${pxQuery}`, imgRes.headers.get('content-type'));
-            if (saved) return saved;
-          }
-        }
-      } catch (e) {
-        console.error(`  ⚠️  Pexels "${pxQuery}" fallito: ${e.message}`);
-      }
-    }
-  }
-
-  // ── Strategy 6: Lorem Picsum (always works, random professional photo) ──
-  if (imagePhaseExpired('Strategy 6')) return null;
-  // https://picsum.photos — Reliable service serving random stock photos.
-  // Not topic-relevant, but always returns a valid image — last resort before fallback.
+  const assetId = articleImageAssetId(data);
+  let result;
   try {
-    console.error('🖼️ Immagine stock da Lorem Picsum (random)...');
-    // Use article ID hash as seed for deterministic-per-article randomness
-    const seed = (data.id || 'default').split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0);
-    const absSeed = Math.abs(seed) % 10000;
-    const res = await fetch(`https://picsum.photos/seed/${absSeed}/1280/720`, {
-      signal: AbortSignal.timeout(20000),
-      redirect: 'follow',
-    });
-    if (res.ok) {
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.startsWith('image/')) {
-        const buf = Buffer.from(await res.arrayBuffer());
-        const saved = await _saveAndOptimize(buf, 'Picsum', contentType);
-        if (saved) return saved;
-      }
-    }
-  } catch (e) {
-    console.error(`  ⚠️  Lorem Picsum fallito: ${e.message}`);
+    result = await generateImageFromSpec(
+      {
+        scope: 'article-hero',
+        assetId,
+        subject: articleImageSubject(data),
+        area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
+        season: 'all seasons',
+        variant: 'article hero',
+      },
+      {
+        outputDir: resolve('public/images/generated'),
+        assetId,
+        maxAttempts: 3,
+        onProviderAttempt: ({ provider, attempt }) => {
+          console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
+        },
+      },
+    );
+  } catch (error) {
+    console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    return null;
   }
 
-  console.error('  ❌ Tutti i provider di image generation hanno fallito.');
-  console.error('     Uso immagine di fallback dal catalogo Ticino.');
-  return null; // fallback to AVAILABLE_IMAGES in modifyBlogArticlesTsx
+  appendGeneratedImageRecord(PROJECT_ROOT, result.record);
+  data._generatedImageRecord = result.record;
+  data._generatedImagePath = result.record.imageUrl;
+  console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);
+  return result.record.imageUrl;
 }
 
 // ── Step 4: Modify source files ─────────────────────────────
+
 
 // escapeForSingleQuoteTS ora vive in scripts/lib/article-meta-block.mjs, accanto
 // all'emettitore che lo usa per primo: un campo nuovo emesso senza il suo escape
@@ -15136,8 +14303,13 @@ function modifyBlogArticlesTsx(data) {
   let src = read(file);
   const today = new Date().toISOString();
 
-  // Use generated image if available, otherwise fallback to catalog image
-  const imagePath = data._generatedImagePath || `/images/places/${data.image}`;
+  const imagePath = data._generatedImagePath;
+  if (!imagePath) {
+    throw new Error(`No governed or recorded catalog hero image for article ${data.id}`);
+  }
+  if (!imageRecordForPath(PROJECT_ROOT, imagePath, { strict: true })) {
+    throw new Error(`Hero image has no valid provenance record: ${imagePath}`);
+  }
 
   // Detect indentation from the file (match the indent before 'id:' in existing entries)
   const indentMatch = src.match(/^(\s+)id: '/m);
@@ -15328,29 +14500,32 @@ function modifySeoService(data) {
   const publishedAt = toIsoWithTz(new Date())
   const modifiedAt = publishedAt
 
-  // Use generated image or fallback
-  const imagePath = data._generatedImagePath
-    ? data._generatedImagePath.replace(/^\//, '')
-    : `images/places/${data.image}`;
-
-  // P14 (§4.5): a Commons cover is credited by its record in
-  // content/image-credits/, from which the engine builds the ImageObject. The
-  // literal must not ALSO claim the photo for the site, so a credited cover —
-  // picked now, or reused by path (catalog pick, keyword fallback) — gets none
-  // of the five rights fields. Every other cover keeps the site's claim, byte
-  // for byte. validateStructuredData() below reads the same `_imageCredit`.
-  data._imageCredit = data._generatedImagePath
-    ? (data._imageCredit?.cover === data._generatedImagePath
-      ? data._imageCredit
-      : coverCreditFor(PROJECT_ROOT, data._generatedImagePath))
-    : null;
-  const imageRightsLines = data._imageCredit ? '' : `
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",`;
-
+  if (!data._generatedImagePath) {
+    throw new Error(`No governed or recorded catalog hero image for article ${data.id}`);
+  }
+  const imagePath = data._generatedImagePath.replace(/^\//, '');
+  const provenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
+  if (!provenance) {
+    throw new Error(`Hero image has no valid provenance record: ${data._generatedImagePath}`);
+  }
+  const coverRecord = provenance.record;
+  data._imageCredit = provenance.kind === 'wikimedia-commons' ? coverRecord : null;
+  data._generatedImageRecord = provenance.kind === 'generated' ? coverRecord : null;
+  data._editorialImageRecord = provenance.kind === 'editorial-upload' ? coverRecord : null;
+  const jsonValue = (value) => JSON.stringify(String(value ?? ''));
+  const imageRightsLines = provenance.kind === 'wikimedia-commons' ? '' : provenance.kind === 'generated' ? `
+        "acquireLicensePage": ${jsonValue(coverRecord.licenseUrl)},
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": ${jsonValue(coverRecord.licenseUrl)},
+        "creator": { "@type": "Organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": ${jsonValue(coverRecord.credit)},` : `
+        "acquireLicensePage": ${jsonValue(coverRecord.proofUrl)},
+        "copyrightNotice": ${jsonValue(`© ${coverRecord.rightsHolder}`)},
+        "license": ${jsonValue(coverRecord.license)},
+        "creator": { "@type": "Person", "name": ${jsonValue(coverRecord.author)} },
+        "creditText": ${jsonValue(coverRecord.author)},`;
+  const imageWidth = Number(coverRecord.width) || 1200;
+  const imageHeight = Number(coverRecord.height) || 675;
   // 1. SEO entry → section seo file. frontaliere → seo-blog-5.ts (latest split
   // chunk, keeps seo-blog.ts below the 500 kB Rollup warning); svizzera →
   // seo-blog-ch.ts (BLOG_CH_SEO_METADATA). canonicalPath/mainEntityOfPage use
@@ -15377,8 +14552,8 @@ function modifySeoService(data) {
       "image": {
         "@type": "ImageObject",${imageRightsLines}
         "url": \`\${BASE_URL}/${imagePath}\`,
-        "width": ${data._generatedImagePath ? 1200 : 1200},
-        "height": ${data._generatedImagePath ? 675 : 563},
+        "width": ${imageWidth},
+        "height": ${imageHeight},
         "caption": "${String(data.imageAlt?.it || data.seo.headline || '').replace(/"/g, '\\"')}"
       },
       "datePublished": "${publishedAt}",
@@ -15495,7 +14670,8 @@ function validateStructuredData(data) {
   const datePub = block.match(/"datePublished":\s*"([^"]+)"/)?.[1] ?? '';
   const dateMod = block.match(/"dateModified":\s*"([^"]+)"/)?.[1] ?? '';
   const siteOrganizationId = `${BASE}/#organization`;
-  const imageCreator = block.match(/"image"\s*:\s*\{[\s\S]*?"creator"\s*:\s*\{\s*"@type"\s*:\s*"([^"]+)"\s*,\s*"@id"\s*:\s*"([^"]+)"/);
+  const imageCreator = block.match(/"image"\s*:\s*\{[\s\S]*?"creator"\s*:\s*\{\s*"@type"\s*:\s*"([^"]+)"/);
+  const imageCreatorId = block.match(/"image"\s*:\s*\{[\s\S]*?"creator"\s*:\s*\{[\s\S]*?"@id"\s*:\s*"([^"]+)"/);
 
   // 3. Verify we got meaningful values
   if (!title) throw new Error(`[validate-ld] Empty title for ${entryKey}`);
@@ -15523,7 +14699,16 @@ function validateStructuredData(data) {
     if (claimed) {
       throw new Error(`[validate-ld] image.${claimed[1]} must be absent for ${entryKey}: the cover is credited by its Commons record`);
     }
-  } else if (imageCreator?.[1] !== 'Organization' || imageCreator?.[2] !== siteOrganizationId) {
+  } else if (data._generatedImageRecord || data._editorialImageRecord) {
+    const imageAt = block.search(/"image"\s*:\s*\{/);
+    const imageEnd = imageAt < 0 ? -1 : block.indexOf('"datePublished"', imageAt);
+    const imageBlock = imageAt < 0 ? '' : block.slice(imageAt, imageEnd < 0 ? undefined : imageEnd);
+    for (const field of ['acquireLicensePage', 'copyrightNotice', 'license', 'creator', 'creditText']) {
+      if (!imageBlock.includes(`"${field}"`)) {
+        throw new Error(`[validate-ld] image.${field} is required for governed editorial provenance on ${entryKey}`);
+      }
+    }
+  } else if (imageCreator?.[1] !== 'Organization' || imageCreatorId?.[1] !== siteOrganizationId) {
     throw new Error(`[validate-ld] image.creator must reference ${siteOrganizationId} as Organization for ${entryKey}`);
   }
 
@@ -15533,7 +14718,7 @@ function validateStructuredData(data) {
     '@type': 'Article',
     headline: ogT,
     description: ogD,
-    image: `${BASE}${data._generatedImagePath || `/images/places/${data.image}`}`,
+    image: `${BASE}${data._generatedImagePath}`,
     url: `${BASE}${cp}`,
     publisher: {
       '@type': 'Organization', '@id': siteOrganizationId, name: 'Frontaliere Ticino', url: BASE,
@@ -15727,6 +14912,9 @@ function gitAddAll(data) {
     if (existsSync(resolve(fsPath))) {
       files.push(fsPath);
     }
+  }
+  for (const registryPath of ['data/generated-image-registry.json', 'data/editorial-image-registry.json']) {
+    if (existsSync(resolve(registryPath))) files.push(registryPath);
   }
   execSync(`git add ${resolveGitAddPaths(PROJECT_ROOT, files).join(' ')}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
   console.error('  ✅ Tutti i file modificati aggiunti a git');
@@ -17223,6 +16411,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // id/slug rejection regenerated blind instead of being told what to fix.
   /** @type {string|null} */
   let lastIdentityErrors = null;
+  // Carries the previous source-copy verdict into the next prompt so the model
+  // is explicitly told to paraphrase rather than repeat the rejected run.
+  /** @type {string|null} */
+  let lastSourceCopyErrors = null;
   // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
   // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
   let lastPromptTokenBudget = 0;
@@ -17288,6 +16480,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Tracks the model used by the immediately preceding attempt, for
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
+  let sourceCopyRetries = 0;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Cost accounting for the rejection ledger. Counted here — at the top of
@@ -17359,6 +16552,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // Surface the previous attempt's id/slug rejection so callGemini can
       // tell the model exactly what was wrong with the value it echoed back.
       _identityRefinement: lastIdentityErrors || undefined,
+      // Surface the previous article/source overlap so the next body is
+      // regenerated with an explicit paraphrase instruction.
+      _sourceCopyRefinement: lastSourceCopyErrors || undefined,
       // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
       // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
       _promptTokenBudget: lastPromptTokenBudget || undefined,
@@ -17533,6 +16729,27 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       }
       throw validationErr;
     }
+    const sourceCopyVerdict = evaluateSourceCopy(
+      sourceCopyInputText(pageContent),
+      data.content.it,
+      { locale: 'it' },
+    );
+    logSourceCopyVerdict(data.id, sourceCopyVerdict);
+    if (!sourceCopyVerdict.safe) {
+      lastSourceCopyErrors = `Massimo overlap rilevato: ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}). `
+        + 'Riformula il corpo senza copiare la fonte.';
+      if (sourceCopyRetries < SOURCE_COPY_MAX_RETRIES && attempt < maxAttempts) {
+        sourceCopyRetries += 1;
+        console.error(`  🔄 Anti-copia: overlap di ${sourceCopyVerdict.maxWords} parole — rigenero (${sourceCopyRetries}/${SOURCE_COPY_MAX_RETRIES})...`);
+        continue;
+      }
+      throw new SourceCopyError(
+        `Anti-copia fallita: overlap massimo ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD})`,
+        sourceCopyVerdict,
+        { retries: sourceCopyRetries },
+      );
+    }
+    lastSourceCopyErrors = null;
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
@@ -18353,6 +17570,34 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     } catch { /* invalid URL — skip */ }
   }
 
+  // Final anti-copy check runs after citation/CTA/sanitizer mutations and on
+  // every published locale. The Italian check above is the regenerable gate;
+  // this is the fail-closed publication gate for the exact bytes we are about
+  // to write.
+  const sourceCopyFinalSource = sourceCopyInputText(pageContent);
+  const sourceCopyFinalVerdicts = ['it', 'en', 'de', 'fr'].map((locale) => {
+    const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
+    logSourceCopyVerdict(data.id, verdict);
+    return verdict;
+  });
+  const worstSourceCopy = sourceCopyFinalVerdicts.reduce(
+    (worst, verdict) => verdict.maxWords > worst.maxWords ? verdict : worst,
+    sourceCopyFinalVerdicts[0],
+  );
+  console.error(
+    `[source-copy] article=${data.id} max_overlap=${worstSourceCopy.maxWords}`
+      + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} locales=it,en,de,fr`,
+  );
+  const unsafeSourceCopy = sourceCopyFinalVerdicts.find((verdict) => !verdict.safe);
+  if (unsafeSourceCopy) {
+    throw new SourceCopyError(
+      `Anti-copia fallita dopo le trasformazioni finali (${unsafeSourceCopy.locale}): `
+        + `overlap massimo ${unsafeSourceCopy.maxWords} parole consecutive`,
+      unsafeSourceCopy,
+      { retries: sourceCopyRetries },
+    );
+  }
+
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
   console.error(`   ID: ${data.id}`);
   console.error(`   Categoria: ${data.category}`);
@@ -18385,20 +17630,27 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     delete data._sourceText;
   }
 
-  // Step 3b: Generate article image via Gemini native image generation
+  // Step 3b: Generate article image through the governed engine.
   console.error('🎨 Generazione immagine articolo:');
   const imagePath = await generateArticleImage(data);
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error(`  ✅ Immagine generata: ${imagePath}`);
   } else {
-    // Try keyword-based matching before falling back to AI-picked place image
+    // The only outage fallback is an already catalogued cover with a valid
+    // provenance record. An unrecorded place/photo is never publishable.
     const matched = findBestFallbackImage(data);
     if (matched) {
       data._generatedImagePath = matched;
-      console.error(`  ⚠️ Imagen non disponibile, uso match per keyword: ${matched}`);
+      const imageRecord = imageRecordForPath(PROJECT_ROOT, matched, { strict: true });
+      if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
+      if (!imageRecord) throw new Error(`Catalog fallback has no valid provenance record: ${matched}`);
+      console.error(`  ⚠️ Motore non disponibile, uso copertina catalogata: ${matched}`);
     } else {
-      console.error(`  ⚠️ Imagen non disponibile, uso immagine di fallback: /images/places/${data.image}`);
+      const error = new Error(`No governed image or valid catalog fallback for article ${data.id}`);
+      error.imagePolicyReject = true;
+      error.qualityReject = true;
+      throw error;
     }
   }
 
@@ -19359,12 +18611,12 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
 // candidates the shared pipeline above still expects.
-export { normalizeTitleCasing, collapseShoutingTitle, applyMicrocopyGuard, generateExcerpt, splitBodyIntoSections, findStockImageCandidates };
+export { normalizeTitleCasing, collapseShoutingTitle, applyMicrocopyGuard, generateExcerpt, splitBodyIntoSections };
 
 // Re-exported so eval/research harnesses (e.g. the local-LLM rewrite eval,
 // issue #3656) can run the SAME blocking fact-check gate used in production

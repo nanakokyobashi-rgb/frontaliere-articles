@@ -112,7 +112,7 @@ test('ogni contatore di manifest.counts e’ ri-derivato o dichiarato non ri-der
 test('la cartella delle immagini e’ confrontata con l’indice che la dichiara', () => {
   // L'immagine e' l'unico artefatto che il consumer non puo' ri-derivare:
   // una copia interrotta a meta' lascia l'indice pieno e la cartella corta.
-  assert.match(SRC, /images\/blog holds/);
+  assert.match(SRC, /images directories hold/);
 });
 
 test('slugs.json e’ confrontato col manifest dal lato che pubblica, non solo da chi legge', () => {
@@ -227,7 +227,7 @@ test('l’assenza legittima e’ decisa dall’INPUT del produttore, non dall’
   // manifest e fuori dal contatore.
   const gate = sliceFrom(SRC, 'const derived = {');
   for (const [counter, srcConst] of [
-    ['images', 'IMAGE_SRC_DIR'],
+    ['images', 'IMAGE_SRC_DIRS'],
     ['borderRankingEntries', 'BORDER_RANKING_SRC'],
     ['dailyBriefBlocks', 'DAILY_BRIEF_SRC'],
   ]) {
@@ -244,7 +244,6 @@ test('l’input del produttore ha UNA sorgente: writer e gate leggono la stessa 
   // Se il ramo che decide di NON emettere e il gate che giudica l'assenza si
   // sfasano, il gate torna cieco proprio dove serve (AGENTS.md #6).
   for (const [srcConst, literal] of [
-    ['IMAGE_SRC_DIR', "['public', 'images', 'blog']"],
     ['BORDER_RANKING_SRC', "['public', 'data', 'border-wait-ranking.json']"],
     ['DAILY_BRIEF_SRC', "['public', 'data', 'daily-brief.json']"],
   ]) {
@@ -253,6 +252,10 @@ test('l’input del produttore ha UNA sorgente: writer e gate leggono la stessa 
     const uses = [...SRC.matchAll(new RegExp(`\\b${srcConst}\\b`, 'g'))].length;
     assert.ok(uses >= 3, `${srcConst}: attese la dichiarazione + writer + gate, trovati ${uses} usi`);
   }
+  assert.ok(SRC.includes("const IMAGE_SRC_DIR = ['public', 'images', 'blog'];"));
+  assert.ok(SRC.includes("const IMAGE_SRC_DIRS = [IMAGE_SRC_DIR, ['public', 'images', 'generated']];"));
+  const imageSourceUses = [...SRC.matchAll(/\bIMAGE_SRC_DIRS\b/g)].length;
+  assert.ok(imageSourceUses >= 3, `IMAGE_SRC_DIRS: attese dichiarazione + writer + gate, trovati ${imageSourceUses} usi`);
   const paths = ["'public', 'data', 'border-wait-ranking.json'", "'public', 'data', 'daily-brief.json'"];
   for (const p of paths) {
     assert.ok(
@@ -289,10 +292,14 @@ test('sul set pubblicato un artefatto opzionale manca solo se manca il suo input
       `${input} esiste ma dist/api/${artifact} no: counts dichiara 0 e la ri-derivazione da’ 0, quindi il confronto per valore non lo vedrebbe`,
     );
   }
-  const webpDir = join(ROOT, 'public/images/blog');
-  const webp = existsSync(webpDir) ? readdirSync(webpDir).filter((f) => f.endsWith('.webp')).length : 0;
+  const webpDirs = ['public/images/blog', 'public/images/generated'];
+  const webp = webpDirs.reduce((total, dir) => total + (
+    existsSync(join(ROOT, dir))
+      ? readdirSync(join(ROOT, dir)).filter((f) => f.endsWith('.webp')).length
+      : 0
+  ), 0);
   if (webp > 0) {
-    assert.ok(existsSync(join(OUT, 'images-manifest.json')), `${webp} .webp in public/images/blog ma nessun images-manifest.json`);
+    assert.ok(existsSync(join(OUT, 'images-manifest.json')), `${webp} .webp in image source dirs ma nessun images-manifest.json`);
   }
 });
 

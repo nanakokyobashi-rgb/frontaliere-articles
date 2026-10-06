@@ -9,8 +9,8 @@
  *      doc at a time — a poison doc must never block the rest of the queue).
  *   2. Builds the exact `data` shape scripts/create-article.mjs expects from the
  *      journalist's IT content.
- *   3. Resolves the hero image (journalist upload → repo convention, or the
- *      SAME keyword/fallback logic the AI pipeline uses).
+ *   3. Resolves the hero image from a record-bearing catalog entry, a governed
+ *      engine generation, or a documented editorial upload.
  *   4. Runs the article through translateArticle() → enforceStrongInternalLinks()
  *      → registerArticleFiles() — the IDENTICAL multi-language registration
  *      pipeline automated content goes through (no parallel/duplicate system).
@@ -74,12 +74,19 @@ import {
   deriveAndSanitizeArticleSlugs,
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
+  generateArticleImage,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
 import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
+import { evaluateSourceCopy, logSourceCopyVerdict, SourceCopyError } from './lib/source-copy-guard.mjs';
+import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
-import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
+import {
+  appendEditorialImageRecord,
+  imageRecordForPath,
+  sha256File,
+} from './lib/blog-image-registry.mjs';
 import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
   BLOG_IMAGE_HARD_MAX_BYTES,
@@ -87,7 +94,6 @@ import {
   BLOG_IMAGE_HEIGHT,
   BLOG_IMAGE_QUALITY_PASSES,
 } from './lib/blog-image-policy.mjs';
-import { creditRecordForCover, resolveCommonsPick, webpDimensions, writeCreditRecord } from './lib/commons-credit.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -99,11 +105,6 @@ const BASE_URL = 'https://frontaliereticino.ch';
 // (services/journalistTypes.ts JOURNALIST_ARTICLE_CATEGORIES) already
 // constrains submissions to this same set — this is a defensive re-check only.
 const CATEGORIES = ['fiscale', 'pratico', 'novita', 'pensione'];
-
-// Static fallback used when neither a custom upload nor findBestFallbackImage()
-// yields a match — same catalog image used by the evergreen digest article
-// (scripts/generate-events-digest-article.mjs's STATIC_META.image).
-const STATIC_FALLBACK_IMAGE = 'lugano-view.webp';
 
 function slugify(input) {
   return String(input || '')
@@ -147,7 +148,7 @@ function buildPipelineData(docId, doc) {
     category,
     hasCalculator: false,
     image: '', // resolved by resolveHeroImage() below
-    imagePrompt: 'Professional editorial photo of Ticino Switzerland, Lake Lugano panorama, warm natural lighting',
+    imagePrompt: 'Illustrative editorial scene about the article topic in Ticino, with symbolic objects and places, warm natural palette',
     // Alt text: honor the journalist's own IT copy where given; other locales
     // fall back to the same generic pattern create-article.mjs's own
     // auto-generation uses (it never translates alt text either — see its
@@ -202,86 +203,149 @@ async function deriveJournalistContent(data, rawBody) {
   data.content.it.faq = await generateFaqIT(data.id, rawBody);
 }
 
-/** Resolve the hero image: a journalist's custom Storage upload wins; falls
- * back to the SAME keyword-match / static fallback the AI pipeline uses. */
-async function resolveHeroImage(data, doc) {
-  const rawImage = String(doc.image || '').trim();
-  // A catalog pick from the local, non-AI cover-image picker: already an
-  // optimized webp sitting in public/images/blog — reuse it as-is, exactly
-  // like findBestFallbackImage()'s own results below (no download/reprocess).
-  if (/^\/images\//.test(rawImage)) {
-    data._generatedImagePath = rawImage;
-    return { source: 'catalog-pick', path: rawImage };
+function journalistSourceText(doc) {
+  return typeof doc?.sourceText === 'string'
+    ? doc.sourceText
+    : typeof doc?.source?.text === 'string'
+      ? doc.source.text
+      : typeof doc?.sourceContent === 'string'
+        ? doc.sourceContent
+        : '';
+}
+
+function assertJournalistSourceCopySafe(data, sourceText) {
+  if (!sourceText.trim()) return null;
+  const verdicts = ['it', 'en', 'de', 'fr']
+    .filter((locale) => data.content[locale])
+    .map((locale) => {
+      const verdict = evaluateSourceCopy(sourceText, data.content[locale], { locale });
+      logSourceCopyVerdict(data.id, verdict);
+      return verdict;
+    });
+  const worst = verdicts.reduce((current, verdict) => verdict.maxWords > current.maxWords ? verdict : current, verdicts[0]);
+  console.error(`[source-copy] article=${data.id} max_overlap=${worst.maxWords} threshold=${worst.threshold} locales=${verdicts.map((v) => v.locale).join(',')}`);
+  const unsafe = verdicts.find((verdict) => !verdict.safe);
+  if (unsafe) {
+    throw new SourceCopyError(
+      `Anti-copia fallita per l'articolo redazionale (${unsafe.locale}): overlap massimo ${unsafe.maxWords} parole`,
+      unsafe,
+    );
   }
-  // P14: a Wikimedia Commons pick (the picker offers them) is used only with
-  // its credit: author and licence read from Commons now, the record written
-  // next to the cover. One that cannot be credited — no machine-readable
-  // licence, GFDL-only, deleted, a reuse restriction, no clean author, or
-  // Commons unreachable — is skipped for the fallback below. Any other URL
-  // (a journalist's own upload) is handled as before.
-  const commonsPick = /^https?:\/\//i.test(rawImage)
-    ? await resolveCommonsPick({ root: PROJECT_ROOT, url: rawImage })
-    : { commons: false };
-  if (commonsPick.commons && !commonsPick.ok) {
-    console.warn(`  ⚠️  Commons pick «${commonsPick.title}» cannot be credited (${commonsPick.reasons.join(', ')}) — using the fallback image`);
-  } else if (/^https?:\/\//i.test(rawImage)) {
+  return worst;
+}
+
+function setHeroProvenance(data, imagePath, provenance) {
+  data._generatedImagePath = imagePath;
+  data._imageCredit = provenance?.kind === 'wikimedia-commons' ? provenance.record : null;
+  data._generatedImageRecord = provenance?.kind === 'generated' ? provenance.record : null;
+  data._editorialImageRecord = provenance?.kind === 'editorial-upload' ? provenance.record : null;
+  data.image = imagePath.split('/').pop() || data.image;
+}
+
+/**
+ * Resolve a hero image under the publication policy:
+ * catalog record → governed engine → documented editorial upload → governed
+ * engine fallback. The URL branch is deliberately last and fail-closed.
+ */
+async function resolveHeroImage(data, doc) {
+  const rawImage = String(doc?.image || '').trim();
+  const imageSource = classifyJournalistImage(rawImage, doc);
+
+  if (imageSource.kind === 'catalog') {
+    const provenance = imageRecordForPath(PROJECT_ROOT, rawImage, { strict: true });
+    if (provenance) {
+      setHeroProvenance(data, rawImage, provenance);
+      return { source: 'catalog-pick', path: rawImage, provenance: provenance.kind };
+    }
+    console.warn(`  ⚠️  Catalog image rifiutata: manca un record valido (${rawImage})`);
+  }
+
+  const isRejectedUrl = imageSource.kind === 'rejected-url';
+  const isEditorialUpload = imageSource.kind === 'editorial-upload';
+  const upload = isEditorialUpload ? imageSource.metadata : null;
+  if (isRejectedUrl) {
+    console.warn(
+      `  ⚠️  URL immagine rifiutato (${imageSource.reason}): `
+        + 'mancano rightsHolder, license, proofUrl e author oppure lo schema non è HTTPS — non scarico la risorsa',
+    );
+  }
+
+  if (isEditorialUpload && upload) {
     let destPath = null;
     try {
-      const res = await fetch(rawImage, { signal: AbortSignal.timeout(20000) });
-      if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`);
-      const buf = Buffer.from(await res.arrayBuffer());
-      const sharp = (await import('sharp')).default;
+      const response = await fetch(rawImage, { signal: AbortSignal.timeout(20_000) });
+      if (!response.ok) throw new Error(`download failed: HTTP ${response.status}`);
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.toLowerCase().startsWith('image/')) {
+        throw new Error(`downloaded content is not an image (${contentType || 'missing content-type'})`);
+      }
+      const buffer = Buffer.from(await response.arrayBuffer());
+      const sharpModule = await import('sharp');
+      const sharp = sharpModule.default || sharpModule;
       const destDir = path.join(PROJECT_ROOT, 'public', 'images', 'blog');
       fs.mkdirSync(destDir, { recursive: true });
       destPath = path.join(destDir, `${data.id}.webp`);
-
       const render = async (quality) => {
-        const pipeline = sharp(buf)
+        const pipeline = sharp(buffer)
           .rotate()
           .resize({ width: BLOG_IMAGE_WIDTH, height: BLOG_IMAGE_HEIGHT, fit: 'cover', position: 'attention' });
         await pipeline.webp({ quality, effort: 6 }).toFile(destPath);
         return fs.statSync(destPath).size;
       };
       let qualityIndex = 0;
-      let size = await render(BLOG_IMAGE_QUALITY_PASSES[qualityIndex]);
-      while (size > BLOG_IMAGE_TARGET_MAX_BYTES && qualityIndex < BLOG_IMAGE_QUALITY_PASSES.length - 1) {
+      let bytes = await render(BLOG_IMAGE_QUALITY_PASSES[qualityIndex]);
+      qualityIndex += 1;
+      while (
+        bytes > BLOG_IMAGE_TARGET_MAX_BYTES
+        && qualityIndex < BLOG_IMAGE_QUALITY_PASSES.length
+      ) {
+        bytes = await render(BLOG_IMAGE_QUALITY_PASSES[qualityIndex]);
         qualityIndex += 1;
-        size = await render(BLOG_IMAGE_QUALITY_PASSES[qualityIndex]);
       }
-      if (size > BLOG_IMAGE_HARD_MAX_BYTES) {
-        throw new Error(`hero image remains above hard cap (${size} bytes)`);
+      if (bytes > BLOG_IMAGE_HARD_MAX_BYTES) {
+        throw new Error(`hero image remains above hard cap (${bytes} bytes)`);
       }
+      const dimensions = await sharp(destPath).metadata();
       const cover = `/images/blog/${data.id}.webp`;
-      if (commonsPick.commons) {
-        const record = creditRecordForCover(commonsPick.template, {
-          cover,
-          original: commonsPick.original,
-          coverSize: webpDimensions(fs.readFileSync(destPath)),
-        });
-        try {
-          writeCreditRecord(PROJECT_ROOT, record);
-        } catch (creditErr) {
-          // No credit, no Commons cover: the file must not reach the commit.
-          fs.rmSync(destPath, { force: true });
-          throw creditErr;
-        }
-        data._imageCredit = record;
-      }
-      data._generatedImagePath = cover;
-      appendCatalogEntry(data._generatedImagePath);
-      return { source: commonsPick.commons ? 'commons-pick' : 'journalist-upload', bytes: size };
-    } catch (err) {
+      const record = {
+        schema: 1,
+        source: 'editorial-upload',
+        cover,
+        rightsHolder: upload.rightsHolder,
+        license: upload.license,
+        proofUrl: upload.proofUrl,
+        author: upload.author,
+        sourceUrl: rawImage,
+        modified: 'cropped',
+        fetchedAt: new Date().toISOString(),
+        status: 'ok',
+        sha256: sha256File(destPath),
+        bytes,
+        width: dimensions.width,
+        height: dimensions.height,
+      };
+      appendEditorialImageRecord(PROJECT_ROOT, record);
+      setHeroProvenance(data, cover, { kind: 'editorial-upload', record });
+      return { source: 'editorial-upload', path: cover, bytes };
+    } catch (error) {
       if (destPath) fs.rmSync(destPath, { force: true });
-      console.warn(`  ⚠️  custom hero image download/processing failed (non-fatal): ${err.message}`);
+      console.warn(`  ⚠️  Upload editoriale rifiutato/non disponibile: ${error.message} — uso il motore governato`);
     }
   }
+
+  const generatedPath = await generateArticleImage(data);
+  if (generatedPath) {
+    return { source: 'generated-engine', path: generatedPath, provenance: 'generated' };
+  }
+
   const matched = findBestFallbackImage(data);
   if (matched) {
-    data._generatedImagePath = matched;
-    return { source: 'keyword-fallback', path: matched };
+    const provenance = imageRecordForPath(PROJECT_ROOT, matched, { strict: true });
+    if (!provenance) throw new Error(`Catalog fallback has no valid provenance record: ${matched}`);
+    setHeroProvenance(data, matched, provenance);
+    return { source: 'catalog-fallback', path: matched, provenance: provenance.kind };
   }
-  data.image = STATIC_FALLBACK_IMAGE;
-  return { source: 'static-fallback', path: data.image };
+  throw new Error(`No governed image or valid catalog fallback for journalist article ${data.id}`);
 }
 
 /**
@@ -324,6 +388,8 @@ async function processDoc(db, FieldValue, docSnap) {
     }
 
     await deriveJournalistContent(data, doc.content.it.body);
+    const sourceText = journalistSourceText(doc);
+    assertJournalistSourceCopySafe(data, sourceText);
 
     console.log('  🪪 optimizing SEO metadata (optimizeSeoMetadata)...');
     optimizeSeoMetadata(data);
@@ -402,6 +468,7 @@ async function processDoc(db, FieldValue, docSnap) {
 
     console.log('  🔗 enforcing internal links (enforceStrongInternalLinks)...');
     enforceStrongInternalLinks(data);
+    assertJournalistSourceCopySafe(data, sourceText);
 
     console.log('  📂 registering article files (registerArticleFiles)...');
     // registerArticleFiles() derives + sanitizes data.slugs AND builds the
@@ -592,4 +659,4 @@ if (invokedDirectly) {
   });
 }
 
-export { buildPipelineData, slugify, resolveHeroImage, resolveJournalistAuthor };
+export { buildPipelineData, slugify, editorialUploadMetadata, resolveHeroImage, resolveJournalistAuthor };

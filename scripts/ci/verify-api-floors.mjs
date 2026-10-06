@@ -52,7 +52,7 @@ import {
   countSourceSitemapEntries,
   countSourceArchiveSitemapUrls,
   SEO_CHUNK_DIR,
-  IMAGE_SOURCE_DIR,
+  IMAGE_SOURCE_DIRS,
   isNewFamilySection,
   floorPolicyOf,
 } from '../lib/corpus-floors.mjs';
@@ -69,6 +69,8 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 // Re-export per i consumer del verifier: la definizione condivisa vive nel
 // modulo dei floor, così writer e gate non possono divergere sui nomi.
 export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
+
+const IMAGE_SOURCE_LABEL = IMAGE_SOURCE_DIRS.join(' or ');
 
 /** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
  * Il 97% della retention degli articoli sarebbe rumore permanente per il
@@ -414,19 +416,19 @@ export function floorViolations(measured, expected, retention = undefined) {
   // un manifest assente con immagini attese e' una violazione esplicita.
   if (expected.sourceImages !== null) {
     if (expected.sourceImages === 0) {
-      violations.push(missingCorpusMessage('images-manifest.json', IMAGE_SOURCE_DIR));
+      violations.push(missingCorpusMessage('images-manifest.json', IMAGE_SOURCE_LABEL));
     } else if (measured.imageErrors?.length) {
       // The shape error is already a precise violation; do not add the less
       // useful "manifest assente" wording on top of it.
     } else if (measured.images === null) {
       violations.push(
-        `images-manifest.json assente: il corpus sorgente ne tiene ${expected.sourceImages} immagini in ${IMAGE_SOURCE_DIR}`,
+        `images-manifest.json assente: il corpus sorgente ne tiene ${expected.sourceImages} immagini in ${IMAGE_SOURCE_LABEL}`,
       );
     } else {
       const min = floor(expected.sourceImages);
       if (measured.images < min) {
         violations.push(
-          `images-manifest.json: ${measured.images} immagini contro ${expected.sourceImages} in ${IMAGE_SOURCE_DIR} (pavimento ${min})`,
+          `images-manifest.json: ${measured.images} immagini contro ${expected.sourceImages} in ${IMAGE_SOURCE_LABEL} (pavimento ${min})`,
         );
       }
     }
