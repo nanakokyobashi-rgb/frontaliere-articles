@@ -1,6 +1,7 @@
-// Pinna i filtri che impediscono ai consumer `workflow_run` di `tests` di
-// creare una run per ogni push su `main` (~29% delle run `tests` il
-// 2026-09-18/19), dove non esiste una PR su cui agire.
+// Pinna i filtri e le guardie che impediscono ai consumer `workflow_run` di
+// `tests` di spendere una run per ogni push su `main` (~29% delle run `tests`
+// il 2026-09-18/19), dove non esiste una PR su cui agire, senza escludere una
+// PR da fork il cui branch sorgente si chiama `main`.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -16,7 +17,7 @@ function triggerBlock(source, event) {
   return next < 0 ? rest : rest.slice(0, next + 1);
 }
 
-for (const file of ['enable-native-automerge.yml', 'pr-redcheck-fixer.yml']) {
+for (const file of ['pr-redcheck-fixer.yml']) {
   test(`${file}: workflow_run di tests esclude main`, () => {
     const block = triggerBlock(read(`.github/workflows/${file}`), 'workflow_run');
     assert.match(block, /workflows: \[('?)tests\1\]/);
@@ -25,6 +26,18 @@ for (const file of ['enable-native-automerge.yml', 'pr-redcheck-fixer.yml']) {
     assert.doesNotMatch(block, /\n {4}branches:/);
   });
 }
+
+test('enable-native-automerge: la guardia distingue main dal branch di una PR', () => {
+  const src = read('.github/workflows/enable-native-automerge.yml');
+  const block = triggerBlock(src, 'workflow_run');
+  assert.match(block, /workflows: \[tests\]/);
+  assert.doesNotMatch(block, /\n {4}branches-ignore:/);
+  assert.match(src, /github\.event\.workflow_run\.head_repository\.full_name == github\.repository/);
+  assert.match(src, /github\.event\.workflow_run\.head_repository\.full_name != ''/);
+  assert.match(src, /github\.event\.workflow_run\.event == 'push'/);
+  assert.match(src, /github\.event\.workflow_run\.event == 'workflow_dispatch'/);
+  assert.match(src, /github\.event\.workflow_run\.head_branch == github\.event\.repository\.default_branch/);
+});
 
 test('review-quota-rescuer: niente filtro branches (i fixer sorgente girano su main)', () => {
   const src = read('.github/workflows/review-quota-rescuer.yml');

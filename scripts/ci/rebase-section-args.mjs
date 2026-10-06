@@ -51,7 +51,9 @@ export function sectionRebaseSurfaces(sections) {
     if (!Array.isArray(cfg.metaFiles) || cfg.metaFiles.length === 0) {
       throw new Error(`sezione '${section}': metaFiles non dichiarati in article-surfaces.mjs`);
     }
-    bookkeeping.push(cfg.sourceLedger, cfg.sourceQuotaFile, ...(cfg.stateBookkeeping || []));
+    // `hubDataFiles` (solo le cantonali): i dati dei 6 hub tematici, rigenerati
+    // per intero dal loro producer — in conflitto vale upstream.
+    bookkeeping.push(cfg.sourceLedger, cfg.sourceQuotaFile, ...(cfg.stateBookkeeping || []), ...(cfg.hubDataFiles || []));
     for (const spec of cfg.stateCounters || []) {
       if (!/^[^\s:]+:[A-Za-z_]\w*$/.test(spec)) throw new Error(`sezione '${section}': contatore '${spec}' non nella forma path:campo`);
       counters.push(spec);

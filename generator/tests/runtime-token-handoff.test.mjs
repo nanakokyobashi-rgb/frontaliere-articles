@@ -144,6 +144,26 @@ test('ogni consumer critico re-inietta il token runtime nel comando che muta Git
   }
 });
 
+test('i consumer del lease usano il PAT runtime per il bucket REST separato', () => {
+  const files = [
+    'issue-fix.yml',
+    'issue-decompose.yml',
+    'pr-redflag-fixer.yml',
+    'pr-redcheck-fixer.yml',
+  ];
+  for (const file of files) {
+    const steps = source(file).split(/\n(?=      - name: )/).filter((step) => step.includes('QUOTA_LEASE_ACTION:'));
+    assert.ok(steps.length >= 2, `${file}: consumer lease inattesi o mancanti`);
+    for (const step of steps) {
+      assert.match(
+        step,
+        /if \[ -n "\$\{GITHUB_PAT_NANAKO:-\}" \]; then[\s\S]*export GH_TOKEN="\$GITHUB_PAT_NANAKO"/,
+        `${file}: il lease non passa il PAT dalla shell runtime nello stesso step`,
+      );
+    }
+  }
+});
+
 test('issue-fix passa la capability workflows dalla shell runtime al prompt', () => {
   const yaml = source('issue-fix.yml');
   assert.match(yaml, /echo "has_workflows_token=false" >> "\$GITHUB_OUTPUT"/);

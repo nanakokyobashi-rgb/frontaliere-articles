@@ -23,15 +23,22 @@
  *     ancora generata i file semplicemente non esistono, ed e' un'assenza
  *     legittima che i pavimenti trattano come «sezione nuova, floor 0».
  *   - `sectionApiSurfaces(id)`: COME si chiama la sezione nella superficie
- *     pubblicata. Esiste solo per i tipi che hanno un profilo API: oggi
- *     `frontaliere` e `national`, con i nomi storici che il sito legge. La
- *     famiglia `canton` non ha ancora un profilo: le sue superfici aggregate
- *     (`canton-articles.json`, `meta-canton-<loc>.json`, `slugs.json.cantons`)
- *     arrivano con la PR che le pubblica (P7 del piano «sezioni cantonali»).
- *     Fino ad allora una sezione cantonale ATTIVA fa fallire `build-api.mjs`
- *     con un errore esplicito, mai un salto silenzioso: e' la stessa scelta
- *     dell'engine (`rssFeeds.mjs` non ha un profilo RSS `canton` e rifiuta
- *     una sezione attiva senza profilo).
+ *     pubblicata. Due forme:
+ *       · superficie PROPRIA (`frontaliere`, `national`): i nomi storici che
+ *         il sito legge (`articles.json`, `meta-ch-<loc>.json`, …), uno per
+ *         sezione. `API_SECTIONS` elenca SOLO queste, come prima.
+ *       · superficie di FAMIGLIA (`canton`, P7 del piano «sezioni cantonali»):
+ *         le sezioni della famiglia condividono UN registro aggregato
+ *         (`canton-articles.json`, una riga per articolo con la sua
+ *         `section`), UN meta per locale (`meta-canton-<loc>.json`) e UNA
+ *         chiave di `slugs.json` (`cantons`, annidata per sezione); la sola
+ *         superficie per sezione e' la sitemap `sitemap-articles-<id>.xml`,
+ *         servita dal Worker solo mentre la sezione e' `live`.
+ *         `FAMILY_API_SECTIONS` elenca le sezioni ATTIVE di questa forma: con
+ *         la lista attiva di oggi e' vuota, quindi niente di cio' viene
+ *         emesso e `dist/api` resta quello di prima.
+ *     Il feed RSS di una sezione cantonale NON e' qui: e' dell'engine
+ *     (`rssFeeds.mjs`, profilo per tipo), che arriva col mirror.
  *
  * Solo builtin Node (regola di `scripts/ci/**` e `scripts/lib/**`): il core e
  * `corpus-paths.mjs` sono moduli puri.
@@ -68,21 +75,25 @@ const KIND_SOURCE_PROFILES = Object.freeze({
     retiredDailyEditions: false,
   }),
   canton: Object.freeze({
-    // La forma del registro cantonale la scrive create-article (P6): fino ad
-    // allora il nome dell'export non e' noto e nessuno lo deve indovinare.
-    registryExport: null,
+    // I nomi degli export che create-article scrive per una sezione cantonale
+    // (`cantonSectionSkeletons` del profilo cantonale di create-article, P6b):
+    // stesso registro `Article[]` delle storiche, mappa slug senza inversa.
+    // generator/tests/section-registry.test.mjs li confronta con quel
+    // generatore quando e' sul ramo, perche' uno scarto qui pubblicherebbe
+    // una famiglia vuota da un registro pieno.
+    registryExport: 'CANTON_ARTICLES',
     reverseExport: null,
-    fallbackReasonsExport: null,
+    fallbackReasonsExport: 'CANTON_SLUG_FALLBACK_REASONS',
     canonicalOverrides: null,
     retiredDailyEditions: false,
   }),
 });
 
 /**
- * I nomi della superficie pubblicata, per tipo. Sono un CONTRATTO col sito
- * (il pull dell'API nel repo del sito, `reconcile-article-shards.mjs`,
+ * I nomi della superficie pubblicata PROPRIA, per tipo. Sono un CONTRATTO col
+ * sito (il pull dell'API nel repo del sito, `reconcile-article-shards.mjs`,
  * `announced-surface.mjs`): non si derivano, si dichiarano una volta qui.
- * `canton` manca apposta — vedi l'header.
+ * `canton` non e' qui: pubblica in superfici di famiglia (sotto).
  */
 const KIND_API_PROFILES = Object.freeze({
   frontaliere: Object.freeze({
@@ -102,6 +113,27 @@ const KIND_API_PROFILES = Object.freeze({
     counter: 'swissArticles',
     sitemap: 'sitemap-blog-ch.xml',
     sitemapCounter: 'sitemapBlogChUrls',
+  }),
+});
+
+/**
+ * I nomi della superficie pubblicata di FAMIGLIA, per tipo (vedi l'header).
+ * `family` e' l'id della famiglia; `sitemapFile(id)` la sola superficie per
+ * sezione. Come quelli propri, sono un contratto: il Worker del sito serve
+ * `/sitemap-articles-<canton-id>.xml` da `edge/` con una regola sola
+ * (`corpusEdgeFileForPath` in infra/cloudflare-worker/locale-router.js), e il
+ * blocco di navigazione del sito leggera' i nomi aggregati.
+ */
+const KIND_FAMILY_API_PROFILES = Object.freeze({
+  canton: Object.freeze({
+    family: 'canton',
+    registry: 'canton-articles.json',
+    metaPrefix: 'meta-canton',
+    slugsKey: 'cantons',
+    reverseKey: null,
+    counter: 'cantonArticles',
+    sitemapCounter: 'sitemapCantonUrls',
+    sitemapFile: (id) => `sitemap-articles-${id}.xml`,
   }),
 });
 
@@ -159,32 +191,70 @@ export function sectionSourceSurfaces(id) {
 }
 
 /**
- * I nomi pubblicati di una sezione. Lancia per un tipo senza profilo API
- * (oggi `canton`): pubblicarla con nomi improvvisati, o saltarla, sarebbe un
- * set troncato che nessun gate vede.
+ * I nomi pubblicati di una sezione: la superficie propria del suo tipo, o
+ * quella della sua famiglia (con `family` valorizzato e `sitemap` gia' risolta
+ * per la sezione). Lancia per un tipo senza nessuno dei due profili:
+ * pubblicarla con nomi improvvisati, o saltarla, sarebbe un set troncato che
+ * nessun gate vede.
  *
  * @param {string} id
  */
 export function sectionApiSurfaces(id) {
   const core = articleSectionEntry(id);
-  if (!Object.prototype.hasOwnProperty.call(KIND_API_PROFILES, core.kind)) {
-    throw new Error(
-      `sezione "${id}" (tipo ${core.kind}) senza superficie API: i nomi pubblicati della famiglia ` +
-        `${core.kind} non sono ancora definiti (arrivano con la PR che pubblica le sezioni cantonali, P7). ` +
-        'Rifiuto di pubblicare un set che non la contiene.',
-    );
+  if (Object.prototype.hasOwnProperty.call(KIND_API_PROFILES, core.kind)) {
+    const api = KIND_API_PROFILES[core.kind];
+    return Object.freeze({
+      section: core.section,
+      kind: core.kind,
+      family: null,
+      ...api,
+      metaFile: (locale) => `${api.metaPrefix}-${locale}.json`,
+    });
   }
-  const api = KIND_API_PROFILES[core.kind];
+  if (Object.prototype.hasOwnProperty.call(KIND_FAMILY_API_PROFILES, core.kind)) {
+    const { sitemapFile, ...api } = KIND_FAMILY_API_PROFILES[core.kind];
+    return Object.freeze({
+      section: core.section,
+      kind: core.kind,
+      ...api,
+      sitemap: sitemapFile(core.section),
+      metaFile: (locale) => `${api.metaPrefix}-${locale}.json`,
+    });
+  }
+  throw new Error(
+    `sezione "${id}" (tipo ${core.kind}) senza superficie API: nessun profilo pubblicato, ne' proprio ne' di ` +
+      'famiglia, per questo tipo. Rifiuto di pubblicare un set che non la contiene.',
+  );
+}
+
+/**
+ * Il layout del corpus che `engine/rssFeeds.mjs` usa per una sezione con
+ * superficie PROPRIA, letto direttamente dalla radice del repo: chunk SEO in
+ * `content/seo`, meta e corpi in `content`, mappa slug in `content/`. E' il
+ * layout di sempre delle due sezioni storiche. Le sezioni di famiglia non
+ * passano di qui: il loro chunk SEO ha un altro nome nel corpus, e si leggono
+ * attraverso la vista di scripts/lib/engine-corpus-view.mjs.
+ */
+export function sectionRssLayout(id) {
+  const source = sectionSourceSurfaces(id);
   return Object.freeze({
-    section: core.section,
-    kind: core.kind,
-    ...api,
-    metaFile: (locale) => `${api.metaPrefix}-${locale}.json`,
+    seoDir: corpusPath('services/seo'),
+    localesDir: corpusPath('services/locales'),
+    slugDir: source.slugFile.slice(0, source.slugFile.lastIndexOf('/')),
   });
 }
 
-/** True se il tipo della sezione ha una superficie API propria. */
+/** True se il tipo della sezione ha una superficie API (propria o di famiglia). */
 export function hasApiSurfaces(id) {
+  const { kind } = articleSectionEntry(id);
+  return (
+    Object.prototype.hasOwnProperty.call(KIND_API_PROFILES, kind) ||
+    Object.prototype.hasOwnProperty.call(KIND_FAMILY_API_PROFILES, kind)
+  );
+}
+
+/** True se la sezione pubblica in superfici PROPRIE (i nomi storici). */
+export function hasOwnApiSurfaces(id) {
   return Object.prototype.hasOwnProperty.call(KIND_API_PROFILES, articleSectionEntry(id).kind);
 }
 
@@ -200,15 +270,50 @@ export function activeSourceSections(coreList = ARTICLE_SECTION_CORE_LIST) {
 export const CORPUS_SECTIONS = Object.freeze(activeSourceSections());
 
 /**
- * Le sezioni attive che hanno una superficie API propria. Una sezione attiva
- * SENZA profilo API non sparisce da qui in silenzio: `assertActiveSectionsPublishable`
- * la rifiuta, e `build-api.mjs` la chiama prima di scrivere qualunque file.
+ * Le sezioni attive pubblicabili (superficie propria o di famiglia), con
+ * sorgenti e nomi pubblicati, nell'ordine del core. Le sezioni senza nessun
+ * profilo API non sono qui e non spariscono in silenzio:
+ * `assertActiveSectionsPublishable` le rifiuta.
+ * @param {Array<{section: string}>} [coreList]
  */
-export const API_SECTIONS = Object.freeze(
-  ARTICLE_SECTION_CORE_LIST.filter((core) => hasApiSurfaces(core.section)).map((core) =>
-    Object.freeze({ ...sectionSourceSurfaces(core.section), api: sectionApiSurfaces(core.section) }),
-  ),
-);
+export function publishedApiSections(coreList = ARTICLE_SECTION_CORE_LIST) {
+  return coreList
+    .filter((core) => hasApiSurfaces(core.section))
+    .map((core) => Object.freeze({ ...sectionSourceSurfaces(core.section), api: sectionApiSurfaces(core.section) }));
+}
+
+/** Tutte le sezioni attive pubblicate: le storiche, poi le sezioni di famiglia accese. */
+export const PUBLISHED_API_SECTIONS = Object.freeze(publishedApiSections());
+
+/**
+ * Le sezioni attive con superficie API PROPRIA (oggi frontaliere e svizzera,
+ * con i loro nomi storici). E' l'elenco che i consumer storici iterano — i
+ * pavimenti per contatore, la riconciliazione degli shard — e resta tale
+ * anche quando un cantone si accende: una sezione di famiglia non ha un
+ * contatore suo in `manifest.counts`.
+ */
+export const API_SECTIONS = Object.freeze(PUBLISHED_API_SECTIONS.filter((section) => section.api.family === null));
+
+/**
+ * Le sezioni attive che pubblicano in una superficie di famiglia (oggi: le
+ * cantonali accese nel core; con la lista attiva di oggi, nessuna).
+ */
+export const FAMILY_API_SECTIONS = Object.freeze(PUBLISHED_API_SECTIONS.filter((section) => section.api.family !== null));
+
+/**
+ * Le famiglie accese, ciascuna con le sue sezioni attive nell'ordine del core:
+ * `[{ family: 'canton', api: <nomi aggregati>, sections: [...] }]`.
+ * @param {ReadonlyArray<{section: string, api: {family: string | null}}>} [sections]
+ */
+export function activeApiFamilies(sections = FAMILY_API_SECTIONS) {
+  const byFamily = new Map();
+  for (const section of sections) {
+    if (section.api.family === null) continue;
+    if (!byFamily.has(section.api.family)) byFamily.set(section.api.family, { family: section.api.family, api: section.api, sections: [] });
+    byFamily.get(section.api.family).sections.push(section);
+  }
+  return [...byFamily.values()];
+}
 
 /** Lancia se una sezione attiva non ha nomi pubblicati (vedi `sectionApiSurfaces`). */
 export function assertActiveSectionsPublishable(coreList = ARTICLE_SECTION_CORE_LIST) {

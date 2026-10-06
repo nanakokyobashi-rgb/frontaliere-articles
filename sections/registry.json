@@ -1,0 +1,1190 @@
+{
+  "_doc": [
+    "Stato DICHIARATO delle sezioni articolo cantonali (piano «sezioni articoli per cantone», D9/D14): e' la verita' sul rollout.",
+    "status: live = il Worker serve le pagine R2 della sezione e la sua sitemap; draft = la sezione non esiste per il pubblico (404 come prima); retired = 410 su tutto il prefisso salvo i redirect.",
+    "Una sezione live deve essere ATTIVA nel core (ACTIVE_CANTON_SECTIONS, mirror dal sito) e avere le pagine gia' su R2 (publish-section-pages --bootstrap) PRIMA del flip.",
+    "kind, canton, indexSlug e topics ripetono il core per chi legge questo file: un disaccordo col core e' un errore (scripts/lib/section-registry.mjs).",
+    "redirects { \"/<path canonico della sezione>/\": \"/<target>/\" } e gone [\"/<path>/\"] sono facoltativi e seguono le regole di parseCorpusSectionRegistry del Worker.",
+    "Override: Remote Config CANTON_ARTICLE_SECTIONS_KILL spegne (live -> draft) le sezioni elencate nei documenti pubblicati; assente = nessun override.",
+    "Pubblicato da scripts/build-api.mjs in dist/api/sections.json e dist/api/edge/sections/registry.json (-> R2 edge/sections/registry.json, letto dal Worker)."
+  ],
+  "schema": 1,
+  "sections": {
+    "canton-ag": {
+      "kind": "canton",
+      "canton": "AG",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-argovia",
+        "en": "aargau-articles",
+        "de": "aargau-artikel",
+        "fr": "articles-argovie"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-appenzello": {
+      "kind": "canton",
+      "canton": "APPENZELLO",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-appenzello",
+        "en": "appenzell-articles",
+        "de": "appenzell-artikel",
+        "fr": "articles-appenzell"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-basilea": {
+      "kind": "canton",
+      "canton": "BASILEA",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-basilea",
+        "en": "basel-articles",
+        "de": "basel-artikel",
+        "fr": "articles-bale"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-be": {
+      "kind": "canton",
+      "canton": "BE",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-berna",
+        "en": "bern-articles",
+        "de": "bern-artikel",
+        "fr": "articles-berne"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-fr": {
+      "kind": "canton",
+      "canton": "FR",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-friburgo",
+        "en": "fribourg-articles",
+        "de": "freiburg-artikel",
+        "fr": "articles-fribourg"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-ge": {
+      "kind": "canton",
+      "canton": "GE",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-ginevra",
+        "en": "geneva-articles",
+        "de": "genf-artikel",
+        "fr": "articles-geneve"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-gl": {
+      "kind": "canton",
+      "canton": "GL",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-glarona",
+        "en": "glarus-articles",
+        "de": "glarus-artikel",
+        "fr": "articles-glaris"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-gr": {
+      "kind": "canton",
+      "canton": "GR",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-grigioni",
+        "en": "graubunden-articles",
+        "de": "graubunden-artikel",
+        "fr": "articles-grisons"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-ju": {
+      "kind": "canton",
+      "canton": "JU",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-giura",
+        "en": "jura-articles",
+        "de": "jura-artikel",
+        "fr": "articles-jura"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-lu": {
+      "kind": "canton",
+      "canton": "LU",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-lucerna",
+        "en": "lucerne-articles",
+        "de": "luzern-artikel",
+        "fr": "articles-lucerne"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-ne": {
+      "kind": "canton",
+      "canton": "NE",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-neuchatel",
+        "en": "neuchatel-articles",
+        "de": "neuenburg-artikel",
+        "fr": "articles-neuchatel"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-nw": {
+      "kind": "canton",
+      "canton": "NW",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-nidvaldo",
+        "en": "nidwalden-articles",
+        "de": "nidwalden-artikel",
+        "fr": "articles-nidwald"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-ow": {
+      "kind": "canton",
+      "canton": "OW",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-obvaldo",
+        "en": "obwalden-articles",
+        "de": "obwalden-artikel",
+        "fr": "articles-obwald"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-sg": {
+      "kind": "canton",
+      "canton": "SG",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-san-gallo",
+        "en": "st-gallen-articles",
+        "de": "st-gallen-artikel",
+        "fr": "articles-saint-gall"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-sh": {
+      "kind": "canton",
+      "canton": "SH",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-sciaffusa",
+        "en": "schaffhausen-articles",
+        "de": "schaffhausen-artikel",
+        "fr": "articles-schaffhouse"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-so": {
+      "kind": "canton",
+      "canton": "SO",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-soletta",
+        "en": "solothurn-articles",
+        "de": "solothurn-artikel",
+        "fr": "articles-soleure"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-sz": {
+      "kind": "canton",
+      "canton": "SZ",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-svitto",
+        "en": "schwyz-articles",
+        "de": "schwyz-artikel",
+        "fr": "articles-schwytz"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-tg": {
+      "kind": "canton",
+      "canton": "TG",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-turgovia",
+        "en": "thurgau-articles",
+        "de": "thurgau-artikel",
+        "fr": "articles-thurgovie"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-ti": {
+      "kind": "canton",
+      "canton": "TI",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-ticino",
+        "en": "ticino-articles",
+        "de": "tessin-artikel",
+        "fr": "articles-tessin"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-ur": {
+      "kind": "canton",
+      "canton": "UR",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-uri",
+        "en": "uri-articles",
+        "de": "uri-artikel",
+        "fr": "articles-uri"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-vd": {
+      "kind": "canton",
+      "canton": "VD",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-vaud",
+        "en": "vaud-articles",
+        "de": "waadt-artikel",
+        "fr": "articles-vaud"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-vs": {
+      "kind": "canton",
+      "canton": "VS",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-vallese",
+        "en": "valais-articles",
+        "de": "wallis-artikel",
+        "fr": "articles-valais"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-zg": {
+      "kind": "canton",
+      "canton": "ZG",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-zugo",
+        "en": "zug-articles",
+        "de": "zug-artikel",
+        "fr": "articles-zoug"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    },
+    "canton-zh": {
+      "kind": "canton",
+      "canton": "ZH",
+      "status": "draft",
+      "indexSlug": {
+        "it": "articoli-zurigo",
+        "en": "zurich-articles",
+        "de": "zurich-artikel",
+        "fr": "articles-zurich"
+      },
+      "topics": {
+        "carburanti": {
+          "it": "carburanti",
+          "en": "fuel",
+          "de": "treibstoff",
+          "fr": "carburants"
+        },
+        "fisco": {
+          "it": "fisco",
+          "en": "tax",
+          "de": "steuern",
+          "fr": "fiscalite"
+        },
+        "mobilita": {
+          "it": "mobilita",
+          "en": "mobility",
+          "de": "mobilitaet",
+          "fr": "mobilite"
+        },
+        "eventi": {
+          "it": "eventi",
+          "en": "events",
+          "de": "veranstaltungen",
+          "fr": "evenements"
+        },
+        "pensioni": {
+          "it": "pensioni",
+          "en": "pensions",
+          "de": "renten",
+          "fr": "retraites"
+        },
+        "servizi": {
+          "it": "servizi",
+          "en": "services",
+          "de": "dienstleistungen",
+          "fr": "services"
+        }
+      }
+    }
+  }
+}

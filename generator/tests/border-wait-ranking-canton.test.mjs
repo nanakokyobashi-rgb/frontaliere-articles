@@ -86,10 +86,26 @@ describe('classifica dogane per cantone', () => {
       for (const s of Object.values(w[half].perCrossing)) delete s.canton;
     }
     assert.equal(buildData(TODAY, w, 'GE')._rankedCount, 0);
-    // Ticino non dipende dal campo: il filtro e' per regione, come prima.
+    // Per le finestre legacy senza campo, Ticino conserva il filtro regionale.
     assert.equal(buildData(TODAY, w, 'TI')._rankedCount, 8);
   });
 
+  it('Ticino esclude un valico esplicitamente assegnato a un altro cantone', () => {
+    const w = fixture();
+    for (const half of ['current', 'previous']) w[half].perCrossing['gaggiolo'].canton = 'GE';
+    const snapshot = computeSnapshot(TODAY, w, 'TI');
+    assert.equal(snapshot.ranking.length, 7);
+    assert.equal(snapshot.trend.gaggiolo, undefined);
+    assert.doesNotMatch(JSON.stringify(snapshot), /gaggiolo/);
+  });
+
+  it('Ticino esclude un valico con `canton: null`, tombstone del registry', () => {
+    const w = fixture();
+    for (const half of ['current', 'previous']) w[half].perCrossing['gaggiolo'].canton = null;
+    const snapshot = computeSnapshot(TODAY, w, 'TI');
+    assert.equal(snapshot.ranking.length, 7);
+    assert.doesNotMatch(JSON.stringify(snapshot), /gaggiolo/);
+  });
   it('un cantone senza foto dichiarata non puo\' essere registrato (immagine nulla)', () => {
     assert.equal(staticMetaFor('GE').image, null);
     assert.equal(staticMetaFor('TI').image, 'mendrisio.webp');

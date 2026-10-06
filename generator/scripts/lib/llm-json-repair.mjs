@@ -678,6 +678,8 @@ function normalizeJsonCandidate(input) {
 
 /** Maximum number of later top-level candidate roots inspected after the first one. */
 const MAX_LATER_CANDIDATES = 24;
+/** Extra bound for malformed/unbalanced openers that are discarded. */
+const MAX_LATER_SCANNED_ROOTS = MAX_LATER_CANDIDATES * 4;
 
 /**
  * The only safe reason to skip a valid first payload is an explicit response
@@ -707,9 +709,88 @@ function nextRootStart(source, from, rootOpeners) {
   }, -1);
 }
 
-function collectJsonCandidates(source, rootOpeners) {
+function hasJsonPrefixSyntax(source, from, to) {
+  let inString = false;
+  for (let i = from; i < to; i++) {
+    const ch = source[i];
+    if (ch === '"' && !isEscapedAt(source, i)) {
+      inString = !inString;
+      continue;
+    }
+    if (inString || /\s/.test(ch) || '{}[],:'.includes(ch)) continue;
+
+    const number = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(source.slice(i));
+    if (number) {
+      i += number[0].length - 1;
+      continue;
+    }
+    const literal = /^(?:true|false|null)\b/.exec(source.slice(i));
+    if (literal) {
+      i += literal[0].length - 1;
+      continue;
+    }
+    return false;
+  }
+  return !inString;
+}
+
+/**
+ * An unmatched preferred root may contain complete nested containers that are
+ * not response roots (for example `tags: ["a"]` in a truncated FAQ object).
+ * A malformed prose preamble can also leave an unmatched opener before the
+ * real response, so bracket depth alone cannot distinguish the two cases:
+ * `[unbalanced [` has the same depth as `[{"tags":[`. Treat a later opener as
+ * nested only when the prefix still has JSON structural context, while
+ * allowing an opener that follows the prose of a malformed preamble through.
+ */
+function isNestedRootCandidate(source, rootStart, candidateStart) {
+  const stack = [source[rootStart]];
+
+  for (let i = rootStart + 1; i < candidateStart; i++) {
+    const ch = source[i];
+    if (ch === '"') {
+      // Use the same quote disambiguation as `findMatchingClose`. If the
+      // malformed preamble has no recoverable string end, it is prose
+      // context, not evidence that the real later root is nested.
+      const stringEnd = scanStringEnd(source, i, true);
+      if (stringEnd === -1) return false;
+      if (stringEnd > candidateStart) return true;
+      i = stringEnd - 1;
+      continue;
+    }
+
+    if (ch === '{' || ch === '[') {
+      stack.push(ch);
+    } else if (ch === '}' || ch === ']') {
+      const opener = ch === '}' ? '{' : '[';
+      if (stack.at(-1) === opener) stack.pop();
+    }
+  }
+
+  // A syntactically JSON-like prefix means the opener is still inside the
+  // malformed root, even when a missing comma leaves whitespace before it.
+  // Prose such as `preamble [unbalanced ` fails this check and remains a
+  // boundary after which a real response root is allowed.
+  if (!hasJsonPrefixSyntax(source, rootStart + 1, candidateStart)) return false;
+  if (stack.length > 1) return true;
+
+  let previous = candidateStart - 1;
+  while (previous > rootStart && /\s/.test(source[previous])) previous--;
+  return source[rootStart] === '[' || [':', '[', '{', ','].includes(source[previous]);
+}
+
+function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {}) {
   const start = firstRootStart(source, rootOpeners);
   if (start === -1) return { start, candidates: [] };
+
+  const opener = source[start];
+  const firstCloseIdx = findMatchingClose(source, start, true);
+
+  // Keep both root shapes in the search even when the preferred root is
+  // unterminated. `isNestedRootCandidate` filters containers inside it, while
+  // validation/selection decides whether a later wrapper or direct array is
+  // the actual response.
+  const laterRootOpeners = rootOpeners;
 
   const candidates = [];
   const addCandidate = (candidateStart, candidateEnd, balanced) => {
@@ -721,45 +802,59 @@ function collectJsonCandidates(source, rootOpeners) {
     });
   };
 
-  const opener = source[start];
-  const firstCloseIdx = findMatchingClose(source, start, true);
+  const collectLaterBalancedCandidates = (from, { skipUnbalanced = false, skipNested = false } = {}) => {
+    let nextStart = nextRootStart(source, from, laterRootOpeners);
+    let scanned = 0;
+    let examined = 0;
+    while (nextStart !== -1 && scanned < MAX_LATER_SCANNED_ROOTS && examined < MAX_LATER_CANDIDATES) {
+      scanned++;
+      const nextCloseIdx = findMatchingClose(source, nextStart, true);
+      const nested = skipNested && isNestedRootCandidate(source, start, nextStart);
+      if (nested) {
+        const nextFrom = nextCloseIdx === -1 ? nextStart + 1 : nextCloseIdx + 1;
+        nextStart = nextRootStart(source, nextFrom, laterRootOpeners);
+        continue;
+      }
+      if (nextCloseIdx === -1) {
+        if (!skipUnbalanced) break;
+        nextStart = nextRootStart(source, nextStart + 1, laterRootOpeners);
+        continue;
+      }
+      examined++;
+      addCandidate(nextStart, nextCloseIdx, true);
+      nextStart = nextRootStart(source, nextCloseIdx + 1, laterRootOpeners);
+    }
+  };
+
   if (firstCloseIdx !== -1) {
     addCandidate(start, firstCloseIdx, true);
   } else {
-    // Keep the historical truncated-payload fallback: callers can still
-    // salvage complete leading FAQ pairs or retry with a larger token budget.
+    // In array mode, a malformed root in a prose preamble can precede the
+    // real FAQ array. Keep the historical truncated fallback for retry/error
+    // diagnostics, but inspect later roots so a balanced preferred array is
+    // not hidden by that unmatched opener (including an unmatched array).
+    // Keep it first: if every later candidate fails validation, the fallback
+    // path must still return the original truncated payload.
     const closer = opener === '[' ? ']' : '}';
     const end = source.lastIndexOf(closer);
     addCandidate(start, end > start ? end : source.length - 1, false);
+    if (preferredRoot) {
+      collectLaterBalancedCandidates(start + 1, { skipUnbalanced: true, skipNested: true });
+    }
   }
 
   // A later root can be the real response after an example in a prose
   // preamble. Inspect only a bounded number of TOP-LEVEL roots. Advancing
-  // past each matching close is load-bearing: searching from `nextStart + 1`
-  // counted every nested object/array in the example against the 24-candidate
-  // budget, so a deeply structured example could consume the whole budget
-  // before the real response was ever considered.
-  //
-  // When the first root is unbalanced there is no trustworthy boundary from
-  // which to distinguish later roots from nested salvage material. Keep the
-  // historical truncated-payload fallback and fail closed rather than
-  // guessing a later payload through that ambiguity.
+  // past each matching close prevents nested objects in an example consuming
+  // the whole candidate budget before the real response is considered.
   if (firstCloseIdx !== -1) {
-    let nextStart = nextRootStart(source, firstCloseIdx + 1, rootOpeners);
-    let examined = 0;
-    while (nextStart !== -1 && examined < MAX_LATER_CANDIDATES) {
-      examined++;
-      const nextCloseIdx = findMatchingClose(source, nextStart, true);
-      if (nextCloseIdx === -1) break;
-      addCandidate(nextStart, nextCloseIdx, true);
-      nextStart = nextRootStart(source, nextCloseIdx + 1, rootOpeners);
-    }
+    collectLaterBalancedCandidates(firstCloseIdx + 1);
   }
 
   return { start, candidates };
 }
 
-function selectJsonCandidate(source, parseable) {
+function selectJsonCandidate(source, parseable, { preferredRoot = null } = {}) {
   const balanced = parseable.filter((candidate) => candidate.balanced);
   const pool = balanced.length > 0 ? balanced : parseable;
   const topLevel = pool
@@ -774,18 +869,37 @@ function selectJsonCandidate(source, parseable) {
   const markedAnswers = topLevel.filter((candidate) => cueBefore(source, candidate.start, ANSWER_CUE_RE));
   if (markedAnswers.length) return markedAnswers[markedAnswers.length - 1];
 
+  // A response can contain a valid wrapper followed by a JSON example. Filter
+  // explicit examples before preferring the root shape; otherwise the example
+  // array wins over the real wrapper simply because arrays are preferred.
+  const nonExamples = topLevel.filter((candidate) => !cueBefore(source, candidate.start, EXAMPLE_CUE_RE));
+  const selectionCandidates = nonExamples.length ? nonExamples : topLevel;
+
+  // Array-shaped callers must not let a parseable object preamble hide a
+  // later direct array payload. Keep wrapped object responses supported by
+  // falling back to the complete top-level candidate list when no preferred
+  // root is present.
+  const preferred = preferredRoot
+    ? selectionCandidates.filter((candidate) => source[candidate.start] === preferredRoot)
+    : selectionCandidates;
+  const selectionPool = preferred.length ? preferred : selectionCandidates;
+
   // If the first candidate is explicitly an example, a later top-level
   // candidate is the only plausible answer. In every other case the first
   // valid candidate wins, so trailing examples cannot overwrite a response.
-  if (cueBefore(source, topLevel[0].start, EXAMPLE_CUE_RE)) {
-    return topLevel[1] ?? topLevel[0];
+  if (cueBefore(source, selectionPool[0].start, EXAMPLE_CUE_RE)) {
+    return selectionPool[1] ?? selectionPool[0];
   }
-  return topLevel[0];
+  return selectionPool[0];
 }
 
-function repairJsonDocument(raw, { rootOpeners = ['{'], validateCandidate = null } = {}) {
+function repairJsonDocument(raw, {
+  rootOpeners = ['{'],
+  preferredRoot = null,
+  validateCandidate = null,
+} = {}) {
   const c = insertMissingPropertyCommas(stripCodeFences(raw));
-  const { start, candidates } = collectJsonCandidates(c, rootOpeners);
+  const { start, candidates } = collectJsonCandidates(c, rootOpeners, { preferredRoot });
   if (start === -1) return normalizeJsonCandidate(c);
 
   const parseable = [];
@@ -801,7 +915,7 @@ function repairJsonDocument(raw, { rootOpeners = ['{'], validateCandidate = null
     }
   }
 
-  const best = selectJsonCandidate(c, parseable);
+  const best = selectJsonCandidate(c, parseable, { preferredRoot });
   if (best !== null) return best.repaired;
   return normalizeJsonCandidate(candidates[0]?.input ?? c);
 }
@@ -818,6 +932,7 @@ export function repairLlmJson(raw) {
 export function repairLlmJsonArray(raw, { validateCandidate = null } = {}) {
   return repairJsonDocument(raw, {
     rootOpeners: ['[', '{'],
+    preferredRoot: '[',
     validateCandidate,
   });
 }
