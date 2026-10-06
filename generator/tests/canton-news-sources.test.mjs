@@ -48,6 +48,7 @@ import {
 } from '../scripts/lib/canton-news-sources.mjs';
 import { itemIdentityOf, newsUrlKey, stripItemIdentity } from '../scripts/lib/source-url-ledger.mjs';
 import { PARSERS } from '../../scripts/ci/validate-canton-sections.mjs';
+import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FIX = path.join(HERE, 'fixtures', 'canton-sources');
@@ -62,8 +63,9 @@ const startAt = SRC.indexOf(START);
 const endAt = SRC.indexOf(END, startAt);
 assert.ok(startAt !== -1 && endAt !== -1, 'delimitatori degli estrattori non trovati in create-article.mjs — aggiornare questo test');
 const { extractRssItems, extractHeadlines } = new Function(
+  'decodeHtmlEntities',
   `${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
-)();
+)(decodeHtmlEntities);
 
 const fixture = (name) => fs.readFileSync(path.join(FIX, name));
 const sourceOf = (code, url) => {
@@ -305,7 +307,8 @@ test('maxRequestsPerRun: il budget si applica anche alle sitemap a periodo', asy
 test('User-Agent dichiarato (D10) e niente HTTP/2 chiesto a undici (http1Only per costruzione)', async () => {
   const { impl, calls } = fakeFetch({ 'https://www.zh.ch/api.json': { body: '{"news":[]}', contentType: 'application/json' } });
   await scanCantonSource({ url: 'https://www.zh.ch/api.json', parser: 'json-api', quirks: { http1Only: true } }, ctx(impl));
-  assert.equal(calls[0].init.headers['User-Agent'], CANTON_SOURCE_USER_AGENT);
+  assert.ok(calls.length > 0);
+  assert.ok(calls.every((call) => call.init.headers['User-Agent'] === CANTON_SOURCE_USER_AGENT));
   // be.ch risponde 500 a `Accept-Language: *` (il default di undici): la
   // lingua della fonte va dichiarata.
   assert.equal(calls[0].init.headers['Accept-Language'], 'de, *;q=0.5');
@@ -314,9 +317,102 @@ test('User-Agent dichiarato (D10) e niente HTTP/2 chiesto a undici (http1Only pe
   assert.doesNotMatch(moduleSrc.replace(/^\s*\*.*$/gm, ''), /allowH2/, 'lo scanner non deve abilitare HTTP/2');
 });
 
+test('D10: la pagina usa la stessa sorgente UA cantonale, lo storico resta invariato', () => {
+  const startAt = SRC.indexOf('const HISTORICAL_SOURCE_PAGE_USER_AGENT =');
+  const endAt = SRC.indexOf('async function fetchPageContent', startAt);
+  assert.ok(startAt !== -1 && endAt !== -1, 'policy UA della pagina non trovata');
+  const headersFor = new Function(
+    'IS_CANTON',
+    'CANTON_SOURCE_USER_AGENT',
+    SRC.slice(startAt, endAt) + '\nreturn sourcePageFetchHeaders;',
+  );
+  const cantonHeaders = headersFor(true, CANTON_SOURCE_USER_AGENT)();
+  assert.equal(cantonHeaders['User-Agent'], CANTON_SOURCE_USER_AGENT);
+  const historicalHeaders = headersFor(false, CANTON_SOURCE_USER_AGENT)();
+  assert.equal(historicalHeaders['User-Agent'], 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36');
+  assert.match(SRC, /scanCantonSource\(source,/);
+});
+
+test('D10: un 403 della fonte cantonale e\' un fallimento dichiarato, senza bypass', async () => {
+  const calls = [];
+  const impl = async (url, init) => {
+    calls.push({ url, init });
+    return {
+      ok: false,
+      status: 403,
+      headers: new Map(),
+      arrayBuffer: async () => new ArrayBuffer(0),
+    };
+  };
+  await assert.rejects(
+    scanCantonSource({ url: 'https://blocked.example/news', parser: 'html-links', quirks: {} }, ctx(impl)),
+    /HTTP 403/,
+  );
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].init.headers['User-Agent'], CANTON_SOURCE_USER_AGENT);
+});
+
 test('un parser fuori elenco e\' un errore, non una fonte vuota', async () => {
   const { impl } = fakeFetch({});
   await assert.rejects(scanCantonSource({ url: 'https://x.ch/a.csv', parser: 'csv', quirks: {} }, ctx(impl)), /non supportato/);
+});
+
+function legacyHeadlineCount(html, baseUrl) {
+  const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let count = 0;
+  let match;
+  while ((match = linkRe.exec(html)) !== null) {
+    const text = match[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    if (text.length < 15 || text.length > 300) continue;
+    let href;
+    try { href = new URL(match[1], baseUrl).href; } catch { continue; }
+    if (!href.startsWith('http')) continue;
+    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) continue;
+    count += 1;
+  }
+  return count;
+}
+
+test('html-links: i testi generici recuperano il titolo strutturale delle tre fonti sterili', async () => {
+  const cases = [
+    {
+      code: 'LU',
+      url: 'https://www.lups.ch/news/',
+      fixture: 'lups-news.html',
+      expected: ['Neue Angebote für die psychische Gesundheit im Kanton Luzern'],
+    },
+    {
+      code: 'AG',
+      url: 'https://www.rheinfelden.ch/de/aktuelles/',
+      fixture: 'rheinfelden-news.html',
+      expected: [
+        'Neue Verkehrsführung am Bahnhof Rheinfelden',
+        'Hinweise zum Herbstmarkt der Stadt Rheinfelden',
+      ],
+    },
+    {
+      code: 'SH',
+      url: 'https://www.singen.de/informieren/aktuelles/pressemitteilungen',
+      fixture: 'singen-news.html',
+      expected: ['Deutsch-französische Tanzbegegnung: Kultur verbindet Singen'],
+    },
+  ];
+  assert.equal(PROFILE.cantons.length, 24, 'baseline P5b: 24 profili cantonali');
+  const htmlLinkSources = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => s.parser === 'html-links'));
+  assert.equal(htmlLinkSources.length, 128, 'baseline P5b: 128 fonti html-links nei 24 profili cantonali');
+
+  for (const item of cases) {
+    const html = fixture(item.fixture).toString('utf8');
+    assert.equal(legacyHeadlineCount(html, item.url), 0, item.code + ': premessa sterile dell\'estrattore precedente');
+    const extracted = extractHeadlines(html, item.url);
+    assert.deepEqual(extracted.map((h) => h.headline), item.expected);
+    assert.ok(extracted.every((h) => !/^(mehr|weiterlesen|news lesen|mehr erfahren)$/i.test(h.headline)));
+
+    const source = sourceOf(item.code, item.url);
+    const { impl } = fakeFetch({ [item.url]: { body: html, contentType: 'text/html' } });
+    const out = await scanCantonSource(source, ctx(impl));
+    assert.deepEqual(out.headlines.map((h) => h.headline), item.expected);
+  }
 });
 
 // ── P5b: navigazione delle pagine html-links ────────────────────────────────
