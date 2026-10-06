@@ -30,6 +30,7 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/sha
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ledgerArticleId } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { cantonSectionConfig, cantonSectionPaths } from '../../generator/scripts/lib/canton-section-profile.mjs';
+import { hubFilePaths } from '../../generator/scripts/lib/canton-hubs/paths.mjs';
 import { mentionsId } from './mentions-id.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
@@ -215,6 +216,12 @@ function canonicalSurfaces(core) {
  * `stateBookkeeping` (cache riscritte per intero: prendi upstream) e
  * `stateCounters` (`path:campo`, `--merge-counter`). Le storiche quei file li
  * condividono e li dichiara il workflow.
+ *
+ * `hubDataFiles` sono i file dati dei 6 hub tematici (P10,
+ * `generate-canton-hubs.mjs`): ognuno e' riscritto PER INTERO dal solo
+ * producer degli hub a partire da dataset e corpus, quindi in un conflitto di
+ * rebase vale la copia upstream (categoria bookkeeping) e il run successivo
+ * lo rigenera.
  */
 const KIND_WRITE_SURFACES = {
   frontaliere: {
@@ -266,6 +273,7 @@ const KIND_WRITE_SURFACES = {
       sourceQuotaFile: p.sourceQuotaFile,
       sidecarDir: p.sidecarDir,
       stateBookkeeping: [p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile],
+      hubDataFiles: hubFilePaths(section),
       stateCounters: [
         `${p.quotaStateFile}:runCounter`,
         `${p.experimentalCounterFile}:count`,

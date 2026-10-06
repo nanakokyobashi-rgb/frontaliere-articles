@@ -510,7 +510,8 @@
     "affitti svizzera mercato immobiliare 2026 canton Basilea",
     "affitti svizzera mercato immobiliare 2026 canton San Gallo",
     "dichiarazione imposte svizzera guida pratica 2026 canton Basilea",
-    "imposta sugli autoveicoli canton Zurigo calcolo e pagamento"
+    "imposta sugli autoveicoli canton Zurigo calcolo e pagamento",
+    "voto cantonale canton Berna guida a iniziative e referendum"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -793,146 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/attualita/1954495/ucraina-kiev-mosca-stranieri-ministero": {
-      "section": "svizzera",
-      "ts": 1791037537100
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-varese-fondata-sul-lavoro-una-giornata-di-confronto-su-salari-diritti-e-sicurezza/2697295": {
-      "section": "frontaliere",
-      "ts": 1791039398765
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nasce-la-rete-badanti-alto-verbano-per-qualificare-il-lavoro-degli-assistenti-familiari/2696011": {
-      "section": "frontaliere",
-      "ts": 1791039517173
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/sicurezza-sul-lavoro-astuti-serve-una-procura-speciale-e-sanzioni-piu-severe/2696254": {
-      "section": "frontaliere",
-      "ts": 1791040655844
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nasce-la-segreteria-della-nidil-cgil-varese-la-sigla-dei-lavoratori-atipici-precari-e-in-partita-iva/2695771": {
-      "section": "frontaliere",
-      "ts": 1791041951221
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/ffim-cisl-dei-laghi-linclusione-non-termina-con-unassunzione-dalle-storie-di-disabilita-alla-contrattazione-in-azienda/2697043": {
-      "section": "frontaliere",
-      "ts": 1791042075833
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/avanti-con-ticino-e-lavoro-presenta-la-lista-per-le-elezioni-2027--4131573.html": {
-      "section": "frontaliere",
-      "ts": 1791045198411
-    },
-    "frontaliere::https://www.rsi.ch/s/4131573": {
-      "section": "frontaliere",
-      "ts": 1791045314757
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/avanti-con-ticinolavoro-scende-in-campo-mirante-in-governo-443895": {
-      "section": "frontaliere",
-      "ts": 1791045424093
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/cna-lombardia-nord-ovest-bene-meloni-su-riforma-legge-quadro-artigianato-subito-nuove-regole-per-un-settore-in-evoluzione/2696308": {
-      "section": "frontaliere",
-      "ts": 1791045514683
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/confartigianato-varese-la-crescita-dellartigianato-non-e-subordinata-alla-trasformazione-in-industria/2696083": {
-      "section": "frontaliere",
-      "ts": 1791045621642
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a2a-e-confindustria-varese-ai-innovazione-e-finanziamenti-europei-per-la-competitivita-delle-imprese/2695915": {
-      "section": "frontaliere",
-      "ts": 1791045675287
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1954293/migani-ltd-xy-corte-montezemolo-court-uk-fondo-investimenti-ers": {
-      "section": "frontaliere",
-      "ts": 1791045774586
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/confindustria-varese-scrive-ai-parlamentari-non-puo-essere-la-politica-a-definire-lindustria/2695645": {
-      "section": "frontaliere",
-      "ts": 1791045866296
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/02/leggi-notizia/argomenti/territorio/articolo/vergiate-chiusura-temporanea-della-sp-18-per-la-posa-dei-nuovi-portali-di-sagoma.html": {
-      "section": "frontaliere",
-      "ts": 1791046961875
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/bollette-lautunno-riporta-il-tema-dei-rincari-cresce-la-ricerca-di-prezzi-piu-prevedibili/2695054": {
-      "section": "frontaliere",
-      "ts": 1791047036981
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/avanti-con-ticinolavoro-presenta-la-lista-per-le-elezioni-2027--4131573.html": {
-      "section": "frontaliere",
-      "ts": 1791047117710
-    },
-    "frontaliere::https://www.rsi.ch/info/economia/inflazione-nell%e2%80%99eurozona-ai-massimi-da-3-anni--4129479.html": {
-      "section": "frontaliere",
-      "ts": 1791048383031
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/02/leggi-notizia/argomenti/economia-13/articolo/confartigianato-varese-la-crescita-dellartigianato-non-e-subordinata-alla-trasformazione-in-ind.html": {
-      "section": "frontaliere",
-      "ts": 1791048462515
-    },
-    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
-      "section": "frontaliere",
-      "ts": 1791048521775
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954529/creta-danni-piogge-inondazioni-alcuni": {
-      "section": "svizzera",
-      "ts": 1791049894497
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/ci-vuole-una-generazione-cosi-la-i-m-p-di-saronno-passa-dallazienda-di-famiglia-al-management/2695432": {
-      "section": "frontaliere",
-      "ts": 1791050078916
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/longevity-economy-a-materia-il-confronto-su-come-cambia-limpresa-quando-si-vive-piu-a-lungo/2694334": {
-      "section": "frontaliere",
-      "ts": 1791051413826
-    },
-    "frontaliere::https://comozero.it/attualita/como-nigeriano-estradato-per-mafia-dalla-svizzera-e-arrestato-dalla-polizia-di-frontiera": {
-      "section": "frontaliere",
-      "ts": 1791053468891
-    },
-    "svizzera::https://www.tio.ch/people/people/1954538/fuel-harbor-flesh-bucks-film-festival-zurich": {
-      "section": "svizzera",
-      "ts": 1791063979749
-    },
-    "svizzera::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
-      "section": "svizzera",
-      "ts": 1791064005267
-    },
-    "frontaliere::https://www.rsi.ch/info/economia/infomaniak-vola-al-debutto-in-borsa--4128432.html": {
-      "section": "frontaliere",
-      "ts": 1791065096588
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-imprese-si-puo-fare-a-villa-recalcati-il-bilancio-del-progetto-che-cambia-lorientamento/2695297": {
-      "section": "frontaliere",
-      "ts": 1791065171583
-    },
-    "frontaliere::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
-      "section": "frontaliere",
-      "ts": 1791065480590
-    },
-    "frontaliere::https://comozero.it/cronaca/provincia-di-como-lodiosa-truffa-ai-danni-di-una-89enne-derubata-dei-gioielli-lettera-del-sindaco-non-fidatevi": {
-      "section": "frontaliere",
-      "ts": 1791076221629
-    },
-    "frontaliere::https://comozero.it/attualita/como-vivo-da-un-mese-in-centro-storico-e-ho-scoperto-che-dormire-e-unimpresa-mi-colpisce-la-rassegnazione-dei-residenti-video": {
-      "section": "frontaliere",
-      "ts": 1791076277994
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-medea-di-giubiano-al-via-i-lavori-di-riqualificazione-da-14-milioni-di-euro/2695381": {
-      "section": "frontaliere",
-      "ts": 1791082559228
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-scuola-europea-di-varese-diventa-scuola-ambasciatrice-del-parlamento-europeo/2696125": {
-      "section": "frontaliere",
-      "ts": 1791084763106
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-giornata-della-meraviglia-per-i-bimbi-della-guerra-ottiene-il-riconoscimento-del-parlamento/2696128": {
-      "section": "frontaliere",
-      "ts": 1791084801042
-    },
-    "frontaliere::https://www.rsi.ch/info/economia/dazi-ue-sui-%e2%80%9cpacchettini%e2%80%9d-coinvolta-anche-la-posta-svizzera--4131072.html": {
-      "section": "frontaliere",
-      "ts": 1791092681481
-    },
     "frontaliere::https://www.varesenews.it/2026/10/futura-volley-la-prima-di-campionato-e-tosta-le-cocche-ospitano-perugia/2696113": {
       "section": "frontaliere",
       "ts": 1791097453407
@@ -1032,6 +893,94 @@
     "frontaliere::https://www.varesenews.it/2026/10/scuola-imprese-e-territorio-a-saronno-un-convegno-sulle-nuove-sfide-degli-istituti-tecnici/2698585": {
       "section": "frontaliere",
       "ts": 1791210021979
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/rinnovato-il-contratto-integrativo-alla-irca-fino-a-13-800-euro-di-premio-nei-quattro-anni-e-piu-tutele-sulla-conciliazione/2698855": {
+      "section": "frontaliere",
+      "ts": 1791239766194
+    },
+    "frontaliere::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
+      "section": "frontaliere",
+      "ts": 1791239840820
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/sicurezza-sul-lavoro-infortuni-in-calo-ma-aumentano-le-malattie-professionali-e-i-rischi-nella-logistica/2698822": {
+      "section": "frontaliere",
+      "ts": 1791242800729
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/vertenza-electrolux-il-nuovo-piano-prevede-1-250-uscite-volontarie-in-tre-anni-urso-pronti-a-sostenere-il-rilancio/2699077": {
+      "section": "frontaliere",
+      "ts": 1791242809075
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/air-baltic%2c-partner-di-swiss%2c-taglia-fino-a-700-posti-di-lavoro/92168766": {
+      "section": "frontaliere",
+      "ts": 1791242823880
+    },
+    "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
+      "section": "svizzera",
+      "ts": 1791243786372
+    },
+    "frontaliere::https://www.rsi.ch/s/4131573": {
+      "section": "frontaliere",
+      "ts": 1791244728361
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
+      "section": "frontaliere",
+      "ts": 1791249645914
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1954862/sentenza-del-cdm-sul-pg-pagani-anche-per-i-vertici-del-parlamento-e-tutto-a-posto": {
+      "section": "frontaliere",
+      "ts": 1791255421484
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-confartigianato-varese-le-critiche-richiedono-dati-comparabili/2698681": {
+      "section": "frontaliere",
+      "ts": 1791255486922
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1954785/non-paga-la-cassa-malati-da-due-anni-ora-finisce-davanti-al-pretore": {
+      "section": "frontaliere",
+      "ts": 1791262333741
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1791262398061
+    },
+    "frontaliere::https://www.rsi.ch/s/4136807": {
+      "section": "frontaliere",
+      "ts": 1791264868484
+    },
+    "frontaliere::https://www.rsi.ch/info/dialogo/la-svizzera-ai-vertici-della-robotica--4126224.html": {
+      "section": "frontaliere",
+      "ts": 1791264901389
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/bot-impiegati-al-telefono-amico-non-in-ticino-lo-psicologo-prudenza-444005": {
+      "section": "frontaliere",
+      "ts": 1791264919859
+    },
+    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954757/franchi-lavatoio-coop-brissago-legn-capanna-incella": {
+      "section": "frontaliere",
+      "ts": 1791264964372
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954941/riad-houthi-aeroporto-colpito-aramco-raffineria": {
+      "section": "svizzera",
+      "ts": 1791265633439
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1954682/shopping-sfrenato-con-le-carte-di-credito-degli-anziani-giovane-tirocinante-condannata-a-zurigo": {
+      "section": "svizzera",
+      "ts": 1791265645400
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1954715/paziente-neuchatel-bordo-ambulanza-conducente": {
+      "section": "svizzera",
+      "ts": 1791265652889
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/destagionalizzare-la-nuova-frontiera-del-turismo-ticinese--4136807.html": {
+      "section": "frontaliere",
+      "ts": 1791266734643
+    },
+    "frontaliere::https://www.rsi.ch/s/4136096": {
+      "section": "frontaliere",
+      "ts": 1791266768992
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/alla-frontiera-aeroportuale-con-carte-da-gioco-da-collezione-per-oltre-27mila-euro-scatta-il-sequestro/2698471": {
+      "section": "frontaliere",
+      "ts": 1791266799144
     }
   }
 }

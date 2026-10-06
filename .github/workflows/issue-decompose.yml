@@ -138,7 +138,13 @@ jobs:
           QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
           QUOTA_LEASE_TTL_SEC: '21600'
           GITHUB_RUN_ID: ${{ github.run_id }}
-        run: node scripts/ci/check-quota-backoff.mjs
+        # Il lease è una scansione ad alto volume: preferisce il PAT runtime,
+        # così non consuma il bucket REST dell'installation GITHUB_TOKEN.
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Codex lane quota lease unavailable (requeue zero-agent)
         if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
@@ -150,6 +156,9 @@ jobs:
           if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
             echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-decompose fermato fail-closed."
             exit 1
+          fi
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
           fi
           node scripts/ci/requeue-quota-lease.mjs \
             --issue "$ISSUE" \
@@ -263,7 +272,11 @@ jobs:
           QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
           QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
           GITHUB_RUN_ID: ${{ github.run_id }}
-        run: node scripts/ci/check-quota-backoff.mjs
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs
 
       - name: Cleanup Firebase credentials
         if: always()

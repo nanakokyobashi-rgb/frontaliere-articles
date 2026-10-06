@@ -234,6 +234,30 @@ test('classifies setup and provider failures without consuming a retryable claim
   }), 'completed');
 });
 
+test('a startup failure consumes exactly one retry for the same dedupe key', () => {
+  assert.equal(claimStatusFromOutcome({
+    proceed: true,
+    providerOutcome: 'failure',
+    failureCause: 'startup_failure',
+    startupFailure: true,
+    priorClaims: [],
+  }), 'failed-transient');
+  assert.equal(claimStatusFromOutcome({
+    proceed: true,
+    providerOutcome: 'failure',
+    failureCause: 'startup_failure',
+    startupFailure: true,
+    priorClaims: [claim({ state: 'failed-transient', cause: 'startup_failure' })],
+  }), 'failed-terminal');
+  assert.deepEqual(
+    parseReviewClaim(`<!-- PR_REVIEW_CLAIM: ${JSON.stringify(claim({
+      state: 'failed-transient',
+      cause: 'startup_failure',
+    }))} -->`),
+    claim({ state: 'failed-transient', cause: 'startup_failure' }),
+  );
+});
+
 test('a review verdict must carry exactly the current trusted body revision', () => {
   assert.equal(normalizeReviewInputRevision(` ${BODY_REVISION.toUpperCase()} `), BODY_REVISION);
   assert.equal(normalizeReviewInputRevision('body:not-a-sha'), null);

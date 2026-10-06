@@ -79,8 +79,16 @@ import {
   REDFLAG_IMPORTANT_RE,
   VITEST_CHECK_NAME,
 } from './lib/constants.mjs';
-import { classifyAndMintReview, prBodyFindingLine } from './review-scope.mjs';
-import { isMalformedReviewBody, reviewBodyDefects } from './lib/review-findings.mjs';
+import {
+  classifyAndMintReview,
+  prBodyFindingLine,
+  renderStaleBodyFindingComment,
+} from './review-scope.mjs';
+import {
+  isMalformedReviewBody,
+  reviewBodyDefects,
+  stableFindingId,
+} from './lib/review-findings.mjs';
 import { ghWithRateLimitRetry } from './lib/gh-rate-limit.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -89,16 +97,18 @@ const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
 const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION || '');
 // Il contratto deterministico del body di QUESTA run (step `PR-body
-// completeness`, id `body_contract`). Verde = unica fonte di verita' sul body:
-// un 🔴 del modello ancorato solo su `PR body:L<n>` non blocca. Qualunque
-// valore diverso da `success` lascia il giudizio al reviewer come prima.
+// completeness`, id `body_contract`) resta disponibile ai consumer, ma il
+// verde da solo non declassifica un 🔴 ancorato solo su `PR body:L<n>`:
+// serve la citazione testuale assente dal body corrente.
 // `true` quando lo step del contratto di QUESTA run e' passato; `null` = «non
 // lo so», e `review-scope.mjs` ricalcola il verdetto dal body con gli stessi
 // moduli del gate. Mai `false` implicito: un env mancante non deve spegnere il
 // declassamento, altrimenti i consumer senza quello step (il fixer, la CLI)
-// applicherebbero una politica diversa sulla stessa superficie.
+// applicassero una politica diversa sulla stessa superficie. Il verde da solo
+// non declassifica più un finding sul body: serve la citazione testuale assente.
 const BODY_CONTRACT_PASSED = process.env.BODY_CONTRACT_OUTCOME === 'success' ? true : null;
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
+const STALE_BODY_MARKER_PREFIX = 'REVIEW_GATE_STALE_BODY_FINDING:';
 let gateFailureKind = 'verdict';
 
 /**
@@ -413,6 +423,29 @@ function commentOnce(body) {
   }
 }
 
+/** Pubblica una sola traccia per ogni finding sul body ormai superato. */
+function postStaleBodyFindingComment(finding) {
+  const stableId = String(finding?.stableId || stableFindingId(finding));
+  const marker = `<!-- ${STALE_BODY_MARKER_PREFIX}${stableId} -->`;
+  let existing = '';
+  try {
+    existing = gh(['api', `repos/${REPO}/issues/${PR}/comments`, '--paginate', '--jq', '.[].body'], {
+      json: false,
+    });
+  } catch {
+    /* best-effort: il finding resta comunque non bloccante per prova locale */
+  }
+  if (existing.includes(marker)) return;
+  try {
+    execFileSync('gh', [
+      'pr', 'comment', PR, '--repo', REPO,
+      '--body', renderStaleBodyFindingComment(finding, HEAD_SHA, RUN_URL),
+    ], { stdio: 'inherit' });
+  } catch {
+    console.log('::warning::commento per il finding sul body non pubblicato (non bloccante).');
+  }
+}
+
 /** True se l'ultima review descrive ancora il contributo della head. */
 function reviewAppliesToHead(last) {
   if (last.commit_id === HEAD_SHA) return true;
@@ -490,10 +523,11 @@ async function main() {
           prUrl: `https://github.com/${REPO}/pull/${PR}`,
           bodyContractPassed: BODY_CONTRACT_PASSED,
         });
-        for (const finding of scope.bodyDeclassified ?? []) {
+        for (const finding of scope.staleBodyDeclassified ?? []) {
           console.log(
-            `review-gate: DECLASSIFIED-BODY finding=review-L${finding.lineNumber} anchor=PR body:L${prBodyFindingLine(finding) ?? '?'} reason=il contratto deterministico del body e' passato su questo body; una nota sul body vale al massimo un Nit`,
+            `review-gate: DECLASSIFIED-STALE-BODY finding=review-L${finding.lineNumber} anchor=PR body:L${prBodyFindingLine(finding) ?? '?'} reason=il testo citato non è più nel body attuale dopo la normalizzazione di spazi e Markdown`,
           );
+          postStaleBodyFindingComment(finding);
         }
         if (scope.outside.length > 0 && scope.minted) {
           console.log(
@@ -519,13 +553,13 @@ async function main() {
     }
     // La follow-up e' la traccia dei finding FUORI dal diff: senza di loro non
     // c'e' niente da tracciare, e pretendere comunque un conio terrebbe rossa
-    // una PR i cui unici 🔴 il contratto verde ha gia' chiuso.
+    // una PR i cui unici 🔴 hanno già una citazione assente provata.
     // A finding nuovo su righe non cambiate è classificabile e lascia una
     // traccia `DECLASSIFIED-UNCHANGED-LINE`, ma non è una prova di approvazione:
     // il vecchio ramo lo contava come `outsideOnly` e poteva quindi rendere
     // verde una review senza LGTM (caso reale #1647). Solo i finding fuori dal
-    // diff con follow-up persistita, o il body già chiuso dal contratto
-    // deterministico, possono usare il percorso non bloccante.
+    // diff con follow-up persistita, o il body con citazione assente provata,
+    // possono usare il percorso non bloccante.
     const unchangedLineDeclassified = (scope?.staleDeclassified?.length ?? 0) > 0;
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly
       && !unchangedLineDeclassified
