@@ -446,7 +446,7 @@ function findActiveHeadContent(html) {
 
 function isExecutableScriptTag(html, tag, start) {
   const source = html.slice(start, tag.end + 1);
-  const type = /\btype\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(source);
+  const type = /(?:^|\s)type\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(source);
   if (!type) return true;
   const value = (type[1] ?? type[2] ?? type[3] ?? '').trim().toLowerCase();
   if (!value || value === 'module') return true;
