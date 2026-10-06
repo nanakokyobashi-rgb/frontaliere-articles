@@ -768,6 +768,13 @@ const DECLARED_ABSENT = {
       'repo l\'intero meccanismo e\' inerte per un\'altra ragione ancora: non c\'e\' GitHub App, ' +
       'lo script warn-exit, e i workflow qui spingono con GITHUB_PAT_NANAKO.',
   },
+  'scripts/ci/mint-app-token.mjs :: deploy.yml': {
+    kind: 'site-only',
+    reason:
+      'Il commento descrive il re-arm del publisher deploy posseduto dal sito: qui il corpus non ' +
+      'ha quel workflow e nessun percorso locale dipende dalla sua presenza. La citazione è ' +
+      'provenienza del comportamento generale del token actions: write, non un import runtime.',
+  },
   'scripts/ci/scan-job-timeouts.mjs :: deploy-publish.yml': {
     kind: 'site-only',
     reason:
