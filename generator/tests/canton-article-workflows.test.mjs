@@ -15,11 +15,11 @@
  *      della sorgente, e con gli input della coppia storica devono dare lo
  *      stesso esito. E' la prova che il core puo' sostituire la sorgente, non
  *      una promessa.
- *   3. Un chiamante cantonale non deve svegliare gli altri 23, una modifica ai
- *      workflow non deve lanciare 24 self-test concorrenti, non deve ripartire
- *      su un run che non ha prodotto niente e non deve dispatchare una catena.
- *      Sono proprieta' dei trigger, cioe' righe che GitHub interpreta prima
- *      che esista uno step.
+ *   3. Un chiamante cantonale non deve svegliare gli altri 23, non deve
+ *      auto-attivarsi quando vengono aggiornati insieme i caller generati,
+ *      non deve ripartire su un run che non ha prodotto niente e non deve
+ *      dispatchare una catena. Sono proprieta' dei trigger, cioe' righe che
+ *      GitHub interpreta prima che esista uno step.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -603,8 +603,11 @@ test('push.paths: solo i path del corpus della propria sezione', () => {
   for (const { canton, file, pushPaths, pushBranches } of CALLERS) {
     const { section } = canton;
     assert.equal(pushBranches, 'main', `${file}: un branch di backup non deve generare`);
-    assert.ok(pushPaths.length >= 3, file);
-    assert.ok(pushPaths.every((p) => p.startsWith('content/')), `${file}: un caller cantonale non deve auto-avviarsi quando cambia il proprio YAML`);
+    assert.ok(pushPaths.length >= 3, `${file}: nessun path di corpus`);
+    assert.ok(
+      pushPaths.every((p) => p.startsWith('content/')),
+      `${file}: un wrapper non deve auto-avviarsi quando vengono rigenerati tutti i wrapper`,
+    );
     const corpus = pushPaths;
     assert.ok(corpus.length >= 3, file);
     for (const p of corpus) {

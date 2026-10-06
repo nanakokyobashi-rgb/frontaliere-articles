@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1947961/guerra-svp-junge-svizzera-neutralita-video-iniziativa-film-jsvp": {
-    "articleId": "soldati-svizzera-video-guerra",
-    "ts": "2026-09-04T16:44:26.090Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4058283": {
-    "articleId": "volkswagen-taglia-50mila-posti-2030",
-    "ts": "2026-09-04T17:04:53.316Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1947735/a-scuola-solo-4-giorni-l-esperimento-per-ora-convince": {
     "articleId": "scuola-4-giorni-belp",
     "ts": "2026-09-04T21:47:50.144Z",
@@ -2497,6 +2487,16 @@
   "https://www.admin.ch/it/newnsb/tjk4qygofev-": {
     "articleId": "effettivo-esercito-2026-calo",
     "ts": "2026-10-06T10:00:38.875Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955004/disoccupazione-perdita-assicurazione-franchi-miliardi": {
+    "articleId": "perdita-ad-bilancio-2025",
+    "ts": "2026-10-06T10:41:49.385Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4138042": {
+    "articleId": "fuochi-artificio-no",
+    "ts": "2026-10-06T11:19:54.602Z",
     "keyForm": 2
   }
 }
