@@ -100120,6 +100120,147 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-monte-olimpino-collegamenti-tilo': {
+    title: 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    description: 'Tra il 9 ottobre e il 23 novembre 2026 la galleria Monte Olimpino 1 chiude nei weekend: cambiano RE80, S10, S40 ed EuroCity tra Chiasso e Como. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, monte, olimpino, modifiche, tilo',
+    ogTitle: 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    ogDescription: 'Quattro finestre di lavori tra ottobre e novembre 2026 modificano i treni tra Chiasso e Como: RE80 via Monte Olimpino 2 con coincidenza a Cucciago, S10 e S40 fino a/da Chiasso, EuroCity senza fermata a Como S. Giovanni.',
+    canonicalPath: '/articoli-frontaliere/monte-olimpino-collegamenti-tilo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como",
+      "description": "Tra il 9 ottobre e il 23 novembre 2026 la galleria Monte Olimpino 1 chiude nei weekend: cambiano RE80, S10, S40 ed EuroCity tra Chiasso e Como. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/monte-olimpino-collegamenti-tilo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1."
+      },
+      "datePublished": "2026-10-06T10:25:21+00:00",
+      "dateModified": "2026-10-06T10:25:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/monte-olimpino-collegamenti-tilo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stazione-ffs-giubiasco-rinnovo': {
+    title: 'Stazione FFS di Giubiasco: rinnovo concluso | Frontaliere Ticino',
+    description: 'La stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026 dopo un rinnovo da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, stazione, giubiasco, rinnovo, concluso',
+    ogTitle: 'Stazione FFS di Giubiasco: rinnovo concluso',
+    ogDescription: 'Dopo diversi anni di lavori, l\'edificio viaggiatori della stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026. Il progetto da circa 6,4 milioni porta nuovi spazi commerciali, servizi professionali, ascensore, pompa di calore e standard Minergie.',
+    canonicalPath: '/articoli-frontaliere/stazione-ffs-giubiasco-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stazione FFS di Giubiasco: rinnovo concluso",
+      "description": "La stazione FFS di Giubiasco riaprirà l'8 ottobre 2026 dopo un rinnovo da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/stazione-ffs-giubiasco-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio rinnovato della stazione FFS di Giubiasco"
+      },
+      "datePublished": "2026-10-06T10:59:22+00:00",
+      "dateModified": "2026-10-06T10:59:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stazione-ffs-giubiasco-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trame-oriente-chiasso': {
+    title: 'Trame d\'Oriente: mini kimono in mostra a Chiasso',
+    description: 'A Chiasso, dall\'8 al 22 ottobre, la mostra Trame d\'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, trame, oriente, mini, kimono',
+    ogTitle: 'Trame d\'Oriente: mini kimono a Chiasso',
+    ogDescription: 'Dopo Castelgrande e la Biennale di Venezia, la collezione della SAMS di Biasca arriva nella Sala Diego Chiesa: dieci pezzi unici ispirati a motivi, colori e simbologia della tradizione nipponica, dall\'8 al 22 ottobre.',
+    canonicalPath: '/articoli-frontaliere/trame-oriente-chiasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trame d'Oriente: mini kimono in mostra a Chiasso",
+      "description": "A Chiasso, dall'8 al 22 ottobre, la mostra Trame d'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/trame-oriente-chiasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dieci mini kimono in sete vintage della mostra Trame d'Oriente a Chiasso"
+      },
+      "datePublished": "2026-10-06T11:41:53+00:00",
+      "dateModified": "2026-10-06T11:41:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trame-oriente-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-06': {
+    title: 'Bollettino del frontaliere – 6 ottobre 2026: 746 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 6 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 6 ottobre 2026: 746 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 6 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-06/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 6 ottobre 2026: 746 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 6 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-06.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 6 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-06T11:53:21+00:00",
+      "dateModified": "2026-10-06T11:53:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-06/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

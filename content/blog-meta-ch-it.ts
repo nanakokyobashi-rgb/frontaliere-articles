@@ -7811,6 +7811,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-lavoro-settembre-2026.title': 'La situazione sul mercato del lavoro nel mese di settembre 2026',
     'blog.article.mercato-lavoro-settembre-2026.excerpt': 'A settembre 2026, la Svizzera ha registrato 140’480 disoccupati, con un tasso fermo al 3%. Questo rappresenta un calo mensile dello 0,8%, ma un aumento annuo del 5,4%. I posti vacanti presso gli URC erano 44’199.',
     'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Panorama di una città svizzera che simboleggia il mercato del lavoro e l\'economia nazionale.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'L\'effettivo dell\'esercito è sufficiente ora ma calerà entro il 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'Al 1° marzo 2026 l\'esercito conta 147 017 militari, sufficienti per il regolamentare di 100 000, ma si prevede un calo sotto 130 000 entro il 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Vista delle caserme dell\'esercito svizzero vicino a Lugano con soldati in addestramento',
+    'blog.article.perdita-ad-bilancio-2025.title': 'Assicurazione disoccupazione: perdita 249 milioni nel 2025',
+    'blog.article.perdita-ad-bilancio-2025.excerpt': 'L\'AD chiude il 2025 in rosso di 249 milioni: uscite per 8,69 miliardi, entrate per 8,44 miliardi e disoccupazione media al 2,8%.',
+    'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Edificio federale a Berna, immagine simbolica del bilancio dell\'assicurazione disoccupazione',
+    'blog.article.fuochi-artificio-no.title': 'Fuochi d\'artificio, la destra lancia il no all\'iniziativa',
+    'blog.article.fuochi-artificio-no.excerpt': 'Campagna al via martedì contro l\'iniziativa sui fuochi d\'artificio: il voto è il 29 novembre. Centro, PLR, UDC e mondo economico sostengono il no.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Fuochi d\'artificio sopra una città svizzera durante il dibattito sull\'iniziativa',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidato UDC per il Consiglio federale',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l\'annuncio delle dimissioni a fine anno.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, immagine simbolica per la politica federale svizzera.',
 };
 
 export default blogMetaChIt;

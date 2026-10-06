@@ -2626,6 +2626,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ostinelli-cassa-malati-udienza-pretore': { it: 'ostinelli-cassa-malati-udienza-pretore', en: 'ostinelli-health-insurance-court-hearing', de: 'ostinelli-krankenkasse-gerichtstermin', fr: 'ostinelli-assurance-maladie-audience' },
  'costi-assicurazione-base-proiezione': { it: 'costi-assicurazione-base-proiezione', en: 'health-insurance-premiums-on-the-rise-heading-toward-1000-francs-a-month', de: 'krankenkassenpramien-steigen-auf-dem-weg-zu-1000-franken-pro-monat', fr: 'primes-de-caisse-maladie-en-hausse-vers-1000-francs-par-mois' },
  'mercato-lavoro-settembre-2026': { it: 'mercato-lavoro-settembre-2026', en: 'labor-market-september-2026', de: 'arbeitsmarkt-september-2026', fr: 'marche-travail-septembre-2026' },
+ 'effettivo-esercito-2026-calo': { it: 'effettivo-esercito-2026-calo', en: 'army-strength-is-sufficient-now-but-will-fall-by-2030', de: 'der-armeebestand-ist-jetzt-ausreichend-wird-aber-bis-2030-sinken', fr: 'l-effectif-de-l-armee-est-suffisant-maintenant-mais-il-diminuera-d-ici-2030' },
+ 'perdita-ad-bilancio-2025': { it: 'perdita-ad-bilancio-2025', en: 'swiss-unemployment-insurance-loss-2025', de: 'arbeitslosenversicherung-verlust-2025', fr: 'assurance-chomage-perte-2025' },
+ 'fuochi-artificio-no': { it: 'fuochi-artificio-no', en: 'fireworks-no-initiative', de: 'feuerwerk-nein-initiative', fr: 'feux-artifice-non-initiative' },
+ 'ruegsegger-candidato-federale': { it: 'ruegsegger-candidato-federale', en: 'ruegsegger-federal-council', de: 'ruegsegger-bundesrat-kandidat', fr: 'ruegsegger-candidat-conseil-federal' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -311,7 +311,7 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
 // ── Famiglie di workflow GENERATI ────────────────────────────────────────────
 // «Una issue per WORKFLOW» presume che due workflow siano due cose diverse. Non
 // vale per i caller generati da un'unica sorgente: i 24
-// `generate-article-<cantone>.yml` escono da
+// `generate-article-<cantone>.yml` e il self-test dry-run escono da
 // `scripts/ci/generate-canton-article-workflows.mjs` e chiamano tutti
 // `generate-article-core.yml`, quindi un difetto della sorgente o del core li
 // fa fallire TUTTI con la stessa firma. Misurato il 2026-10-05: il self-test
@@ -351,11 +351,11 @@ export const GENERATED_WORKFLOW_FAMILIES = Object.freeze([
     id: 'canton-article',
     // `display` e non `label`: generator/tests/loop-labels.test.mjs legge ogni
     // riga «label: …» come una label GitHub applicata dal ciclo.
-    display: 'Generate Blog Article (canton-*)',
+    display: 'Generate Blog Article (canton-* o cantons self-test)',
     // Frase cercata nei titoli delle issue aperte; l'appartenenza la decide
     // `nameRe`, la ricerca serve solo a restringere la lettura.
     titleSearch: 'Workflow Failure: Generate Blog Article',
-    nameRe: /^Generate Blog Article \(canton-[a-z0-9-]+\)$/,
+    nameRe: /^Generate Blog Article \((?:canton-[a-z0-9-]+|cantons self-test)\)$/,
     source: 'scripts/ci/generate-canton-article-workflows.mjs',
   }),
 ]);

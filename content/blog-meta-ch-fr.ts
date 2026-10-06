@@ -7811,6 +7811,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-lavoro-settembre-2026.title': 'La situation sur le marché du travail au mois de septembre 2026',
     'blog.article.mercato-lavoro-settembre-2026.excerpt': 'En septembre 2026, la Suisse a enregistré 140’480 chômeurs, avec un taux stable à 3%. Cela représente une baisse mensuelle de 0,8%, mais une hausse annuelle de 5,4%. Les postes vacants auprès des ORP étaient au nombre de 44’199.',
     'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Horizon d\'une ville suisse symbolisant le marché du travail et l\'économie nationale.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'L\'effectif de l\'armée est suffisant maintenant mais il diminuera d\'ici 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'Au 1er mars 2026, l\'armée compte 147 017 militaires, ce qui est suffisant pour la réglementation de 100 000, mais on prévoit une baisse en dessous de 130 000 d\'ici 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Vue des casernes de l\'armée suisse près de Lugano avec des soldats en entraînement',
+    'blog.article.perdita-ad-bilancio-2025.title': 'Assurance-chômage : perte de 249 millions en 2025',
+    'blog.article.perdita-ad-bilancio-2025.excerpt': 'L\'AD clôt l\'année 2025 dans le rouge, avec une perte de 249 millions : des dépenses de 8,69 milliards, des recettes de 8,44 milliards et un taux de chômage moyen de 2,8%.',
+    'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Bâtiment fédéral à Berne, image symbolique des comptes de l\'assurance-chômage suisse',
+    'blog.article.fuochi-artificio-no.title': 'Feux d\'artifice, la droite lance le non à l\'initiative',
+    'blog.article.fuochi-artificio-no.excerpt': 'La campagne démarre mardi contre l\'initiative sur les feux d\'artifice : le vote a lieu le 29 novembre. Le Centre, le PLR, l\'UDC et le monde économique soutiennent le non.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Feux d\'artifice au-dessus d\'une ville suisse pendant le débat sur l\'initiative',
+    'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidat de l’UDC au Conseil fédéral',
+    'blog.article.ruegsegger-candidato-federale.excerpt': 'Le canton de Schwytz propose André Rüegsegger pour succéder à Guy Parmelin : c’est la première candidature officielle après l’annonce de la démission en fin d’année.',
+    'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, image symbolique de la politique fédérale suisse.',
 };
 
 export default blogMetaChFr;
