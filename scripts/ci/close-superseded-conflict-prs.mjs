@@ -76,7 +76,12 @@ import {
 import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
-import { handoffRouted, originContentOnMain, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
+import {
+  CONTENT_PROOF_MAX_FILES,
+  handoffRouted,
+  originContentOnMain,
+  reapplyInFlight,
+} from './reconcile-conflict-handoffs.mjs';
 import { hasClaimLabel } from './stale-claim-detector.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
@@ -176,6 +181,31 @@ export function mergeTreeAllowsClose(state) {
   return state === 'conflicted';
 }
 
+/** La ref scaricata è proprio la HEAD giudicata? Confronto sull'OID intero. Pura. */
+export function mergeTreeRefMatches(fetchedOid, expectedHead) {
+  const fetched = String(fetchedOid || '').trim().toLowerCase();
+  const expected = String(expectedHead || '').trim().toLowerCase();
+  return /^[0-9a-f]{40}$/.test(fetched) && fetched === expected;
+}
+
+/**
+ * L'elenco dei file letto è COMPLETO e dentro il limite della prova?
+ * `/pulls/:n/files` si ferma a 3000 file senza dirlo: con un elenco troncato
+ * `originContentOnMain` proverebbe solo la parte letta. Serve quindi che il
+ * numero di file letti coincida con `changedFiles` della PR, e che resti
+ * entro `CONTENT_PROOF_MAX_FILES`, lo stesso limite del riconciliatore. Pura.
+ *
+ * @returns {{ complete: boolean, reason: string }}
+ */
+export function prFilesComplete(files, changedFiles) {
+  if (!Array.isArray(files)) return { complete: false, reason: 'file della PR illeggibili' };
+  const expected = Number(changedFiles);
+  if (!Number.isInteger(expected) || expected <= 0) return { complete: false, reason: 'changedFiles della PR illeggibile' };
+  if (files.length !== expected) return { complete: false, reason: `letti ${files.length} file su ${expected}: elenco incompleto` };
+  if (expected > CONTENT_PROOF_MAX_FILES) return { complete: false, reason: `${expected} file (> ${CONTENT_PROOF_MAX_FILES}): prova di contenuto non tentata` };
+  return { complete: true, reason: 'completo' };
+}
+
 /** Il commento viene da un'identità che può scrivere un verdetto del fixer? Pura. */
 export function isTrustedComment(comment) {
   const association = String(comment?.author_association ?? comment?.authorAssociation ?? '').toUpperCase();
@@ -250,8 +280,10 @@ export function firstFileWithRemovals(files) {
  * closed: con anche una sola rimozione la prova non vale. Pura, dato
  * `readMainFile`.
  */
-export function reapplyContentProof(files, readMainFile) {
+export function reapplyContentProof(files, readMainFile, { changedFiles } = {}) {
   if (!Array.isArray(files)) return null;
+  const completeness = prFilesComplete(files, changedFiles);
+  if (!completeness.complete) return { proven: false, reason: completeness.reason };
   const withRemovals = firstFileWithRemovals(files);
   if (withRemovals !== null) {
     return { proven: false, reason: `${withRemovals}: la patch rimuove righe, e una rimozione non è dimostrabile su main` };
@@ -397,7 +429,7 @@ function ghJson(args) {
   }
 }
 
-const PR_FIELDS = 'number,title,body,baseRefName,headRefName,headRefOid,labels,isDraft,mergeable';
+const PR_FIELDS = 'number,title,body,baseRefName,headRefName,headRefOid,labels,isDraft,mergeable,changedFiles';
 
 function listOpenPrs() {
   const prs = ghJson(['pr', 'list', '--repo', REPO, '--state', 'open', '--limit', String(OPEN_PR_LIMIT),
@@ -486,11 +518,19 @@ function rereadLivePr(pr) {
  */
 function mergeTreeState(pr) {
   const git = (args) => spawnSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: GIT_TIMEOUT_MS });
-  const fetched = git(['fetch', '--quiet', 'origin', BASE_BRANCH, `refs/pull/${Number(pr.number)}/head`]);
+  const head = String(pr.headRefOid || '').toLowerCase();
+  if (!/^[0-9a-f]{40}$/.test(head)) return 'unknown';
+  // Ref temporanea e non lo SHA dello snapshot: dopo un push il clone può
+  // avere ancora l'oggetto VECCHIO, e fondere quello darebbe la prova di una
+  // HEAD che non è più la PR. Si fonde ciò che il fetch ha portato adesso, e
+  // solo se è proprio la HEAD giudicata.
+  const ref = `refs/sweep/pr-${Number(pr.number)}-head`;
+  const fetched = git(['fetch', '--quiet', '--no-tags', 'origin',
+    `+refs/heads/${BASE_BRANCH}:refs/remotes/origin/${BASE_BRANCH}`, `+refs/pull/${Number(pr.number)}/head:${ref}`]);
   if (fetched.status !== 0) return 'unknown';
-  const head = String(pr.headRefOid || '');
-  if (!/^[0-9a-f]{40}$/i.test(head)) return 'unknown';
-  return classifyMergeTreeStatus(git(['merge-tree', '--write-tree', `origin/${BASE_BRANCH}`, head]).status);
+  const resolved = git(['rev-parse', '--verify', '--quiet', ref]);
+  if (resolved.status !== 0 || !mergeTreeRefMatches(resolved.stdout, head)) return 'unknown';
+  return classifyMergeTreeStatus(git(['merge-tree', '--write-tree', `refs/remotes/origin/${BASE_BRANCH}`, ref]).status);
 }
 
 function decide(pr, openPrs) {
@@ -501,7 +541,7 @@ function decide(pr, openPrs) {
     const origin = originNumber !== null && originNumber !== Number(pr.number) ? readPrState(originNumber) : null;
     // La prova di contenuto costa una lettura per file: solo se l'origine è mergiata.
     const files = String(origin?.state || '').toUpperCase() === 'MERGED' ? readPrFiles(pr.number) : null;
-    const contentProof = reapplyContentProof(files, readMainFile);
+    const contentProof = reapplyContentProof(files, readMainFile, { changedFiles: pr.changedFiles });
     const reapply = decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentProof });
     if (reapply.close) return reapply;
   }
@@ -578,6 +618,15 @@ function main() {
     }
     // Commento e chiusura in UNA chiamata, senza `--delete-branch`: una close
     // fallita non lascia un commento che il tick successivo ripeterebbe.
+    // `decide` qui sopra fa altre letture, anche lunghe: la HEAD può essere
+    // cambiata mentre giravano. L'ULTIMA cosa prima della close è quindi una
+    // rilettura della PR — stessa HEAD, ancora candidata stretta — senza
+    // nient'altro in mezzo. `gh pr close` non accetta una HEAD attesa: questa
+    // lettura è il confronto condizionale possibile.
+    if (!rereadLivePr(live)) {
+      console.log(`PR #${pr.number}: HEAD o stato cambiati durante la conferma → resta aperta.`);
+      continue;
+    }
     if (gh(['pr', 'close', String(pr.number), '--repo', REPO, '--comment', closingComment(decision)]) === null) {
       console.log(`::warning::PR #${pr.number}: chiusura fallita (${decision.reason}) → ritento al prossimo tick.`);
       continue;

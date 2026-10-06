@@ -30,6 +30,8 @@ import {
   latestConflictLabelEventAt,
   mergeTreeAllowsClose,
   latestHandoffOf,
+  mergeTreeRefMatches,
+  prFilesComplete,
 } from '../../scripts/ci/close-superseded-conflict-prs.mjs';
 import { buildConflictHandoffIssue } from '../../scripts/ci/pr-autorebase.mjs';
 
@@ -148,8 +150,8 @@ test('caso 1 — una patch con rimozioni non è dimostrabile: la prova fallisce 
   assert.equal(firstFileWithRemovals([additive, mixed]), 'x.mjs');
   // Le intestazioni di un diff completo non sono rimozioni.
   assert.equal(firstFileWithRemovals([{ filename: 'y.mjs', patch: '--- a/y.mjs\n+++ b/y.mjs\n@@ -1 +1,2 @@\n riga\n+altra' }]), null);
-  assert.equal(reapplyContentProof([additive], () => main).proven, true, 'una patch solo additiva già su main resta dimostrabile');
-  const refused = reapplyContentProof([mixed], () => main);
+  assert.equal(reapplyContentProof([additive], () => main, { changedFiles: 1 }).proven, true, 'una patch solo additiva già su main resta dimostrabile');
+  const refused = reapplyContentProof([mixed], () => main, { changedFiles: 1 });
   assert.equal(refused.proven, false);
   assert.match(refused.reason, /rimuove righe/);
   assert.equal(reapplyContentProof(null, () => main), null, 'file illeggibili: nessuna prova');
@@ -157,6 +159,50 @@ test('caso 1 — una patch con rimozioni non è dimostrabile: la prova fallisce 
     decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: refused }).reason,
     'content-not-on-main',
   );
+});
+
+test('caso 1 — un elenco di file incompleto o troppo lungo non è una prova', () => {
+  // `/pulls/:n/files` si ferma a 3000 file senza dirlo: l'elenco letto deve
+  // coincidere con `changedFiles` e stare nel limite del riconciliatore.
+  const file = (n) => ({ filename: `f${n}.mjs`, status: 'modified', patch: '@@ -1 +1,2 @@\n a\n+b' });
+  const main = 'a\nb';
+  assert.deepEqual(prFilesComplete([file(1)], 1), { complete: true, reason: 'completo' });
+  assert.equal(prFilesComplete([file(1)], 2).complete, false, 'letto un file su due');
+  assert.equal(prFilesComplete([file(1)], undefined).complete, false);
+  assert.equal(prFilesComplete([file(1)], 0).complete, false);
+  assert.equal(prFilesComplete(null, 1).complete, false);
+  const many = Array.from({ length: 101 }, (_, n) => file(n));
+  assert.match(prFilesComplete(many, 101).reason, /prova di contenuto non tentata/);
+  assert.equal(reapplyContentProof([file(1)], () => main, { changedFiles: 1 }).proven, true);
+  const truncated = reapplyContentProof([file(1)], () => main, { changedFiles: 3001 });
+  assert.equal(truncated.proven, false);
+  assert.match(truncated.reason, /elenco incompleto/);
+  assert.equal(reapplyContentProof([file(1)], () => main).proven, false, 'senza changedFiles la completezza non è dimostrabile');
+});
+
+test('merge-tree vale solo sulla ref realmente scaricata', () => {
+  // Dopo un push il clone può avere ancora l'oggetto vecchio: la prova si
+  // accetta solo se l'OID scaricato adesso è la HEAD giudicata.
+  assert.equal(mergeTreeRefMatches(`${HEAD}\n`, HEAD), true);
+  assert.equal(mergeTreeRefMatches(HEAD.toUpperCase(), HEAD), true);
+  assert.equal(mergeTreeRefMatches('f'.repeat(40), HEAD), false);
+  assert.equal(mergeTreeRefMatches(HEAD.slice(0, 12), HEAD), false, 'un prefisso non è un OID');
+  assert.equal(mergeTreeRefMatches('', HEAD), false);
+  const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
+  const fn = src.slice(src.indexOf('function mergeTreeState(pr)'), src.indexOf('function decide(pr, openPrs)'));
+  assert.ok(fn.indexOf('mergeTreeRefMatches(') < fn.indexOf("'merge-tree'"), 'il confronto dell\'OID deve precedere merge-tree');
+  assert.equal(/'merge-tree', '--write-tree', [^\]]*\bhead\b\]/.test(fn), false, 'merge-tree deve fondere la ref scaricata, non lo SHA dello snapshot');
+});
+
+test('l\'ultima cosa prima della chiusura è una rilettura della PR', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
+  const main = src.slice(src.indexOf('function main()'));
+  const closeAt = main.indexOf("gh(['pr', 'close'");
+  const finalCheck = main.lastIndexOf('rereadLivePr(live)', closeAt);
+  assert.notEqual(finalCheck, -1, 'manca la rilettura finale');
+  assert.ok(finalCheck > main.indexOf('decide(live, freshOpenPrs)'), 'la rilettura finale deve venire DOPO la decisione di conferma');
+  const between = main.slice(finalCheck, closeAt);
+  assert.equal(/\b(decide|listOpenPrs|mergeTreeState)\(/.test(between), false, 'niente letture lunghe fra la rilettura finale e la close');
 });
 
 test('caso 1 — resta aperta finché l\'origine non è MERGED o non si legge', () => {
