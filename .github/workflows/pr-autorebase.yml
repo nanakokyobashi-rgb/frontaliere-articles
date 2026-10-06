@@ -161,7 +161,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-        run: node scripts/ci/close-superseded-conflict-prs.mjs
+        # Deadline propria (4 minuti): lo sweep fa letture `gh` sincrone per ogni
+        # candidata e senza `CI_JOB_DEADLINE_EPOCH` il suo budget e' illimitato.
+        run: CI_JOB_DEADLINE_EPOCH=$(( $(date +%s) + 240 )) node scripts/ci/close-superseded-conflict-prs.mjs
 
       - name: Cleanup Firebase credentials
         if: always()

@@ -82,8 +82,12 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
   // La label è una fotografia di merge-tree: se GitHub dice MERGEABLE il
   // conflitto è appena rientrato e decide pr-autorebase, non questo sweep.
   assert.equal(reason({ mergeable: 'MERGEABLE' }), 'mergeable-now');
-  // `UNKNOWN` è la risposta tipica subito dopo un push su main: non smentisce.
-  assert.equal(isSweepCandidate(loopPr({ mergeable: 'UNKNOWN' })).candidate, true);
+  // `UNKNOWN` (tipico subito dopo un push su main) o un campo assente non
+  // confermano il conflitto: lo sweep gira anche se l'autorebase che ricalcola
+  // la label è fallito, quindi serve `CONFLICTING` da GitHub.
+  assert.equal(reason({ mergeable: 'UNKNOWN' }), 'conflict-unconfirmed');
+  assert.equal(reason({ mergeable: undefined }), 'conflict-unconfirmed');
+  assert.equal(reason({ mergeable: '' }), 'conflict-unconfirmed');
 });
 
 // ── Caso 1: riapplicazione di un'origine mergiata (#2205 → #2201) ───────────
@@ -187,23 +191,41 @@ test('l\'hand-off più recente della PR si trova con entrambe le forme del titol
 
 // ── Caso 3: ogni issue sorgente è già chiusa ────────────────────────────────
 
-test('caso 3 — tutte le issue dichiarate sono chiuse: nessuno la riciclerebbe', () => {
+const closedIssue = () => ({ state: 'CLOSED' });
+const mergedSiblings = [
+  { number: 2245, title: 'fix(cantoni): prevent generated workflow fan-out', body: 'Closes #2236' },
+  { number: 2248, title: 'fix(workflows): avoid canton self-test fanout', body: 'Fixes #2239' },
+];
+
+test('caso 3 — ogni sorgente è chiusa E consegnata da un\'altra PR mergiata', () => {
   const pr = loopPr({ body: 'Closes #2236\nFixes #2239' });
   assert.deepEqual(
-    decideSourceIssuesClosed({ pr, readIssue: () => ({ state: 'CLOSED' }) }),
-    { close: true, reason: 'source-issues-closed', issues: [2236, 2239] },
+    decideSourceIssuesClosed({ pr, readIssue: closedIssue, mergedPrs: mergedSiblings }),
+    { close: true, reason: 'source-issues-delivered', issues: [2236, 2239], deliveredBy: [2245, 2248] },
   );
+});
+
+test('caso 3 — una issue chiusa senza una PR mergiata che la chiude NON prova niente', () => {
+  // Chiusa a mano, `not planned`, o dal solo ritorno al verde del workflow:
+  // questa PR può essere l'unico percorso di consegna rimasto.
+  const pr = loopPr({ body: 'Closes #2236\nFixes #2239' });
+  const reason = (mergedPrs) => decideSourceIssuesClosed({ pr, readIssue: closedIssue, mergedPrs }).reason;
+  assert.equal(reason([]), 'source-issue-not-delivered');
+  assert.equal(reason([mergedSiblings[0]]), 'source-issue-not-delivered', 'una sola delle due sorgenti consegnata non basta');
+  // La PR stessa non è la prova della propria consegna.
+  assert.equal(reason([{ number: pr.number, title: pr.title, body: pr.body }]), 'source-issue-not-delivered');
+  // #22360 non è #2236.
+  assert.equal(reason([{ number: 2245, body: 'Closes #22360\nCloses #2239' }]), 'source-issue-not-delivered');
+  assert.equal(reason(null), 'merged-prs-unreadable');
 });
 
 test('caso 3 — una sorgente aperta, illeggibile o assente lascia la PR aperta', () => {
   const pr = loopPr({ body: 'Closes #2236\nFixes #2239' });
   const states = { 2236: { state: 'CLOSED' }, 2239: { state: 'OPEN' } };
-  assert.equal(decideSourceIssuesClosed({ pr, readIssue: (n) => states[n] }).reason, 'source-issue-open');
-  assert.equal(decideSourceIssuesClosed({ pr, readIssue: () => null }).reason, 'source-issue-unreadable');
-  assert.equal(
-    decideSourceIssuesClosed({ pr: loopPr({ body: 'nessuna keyword' }), readIssue: () => ({ state: 'CLOSED' }) }).reason,
-    'no-closing-keyword',
-  );
+  const reason = (over) => decideSourceIssuesClosed({ pr, readIssue: closedIssue, mergedPrs: mergedSiblings, ...over }).reason;
+  assert.equal(reason({ readIssue: (n) => states[n] }), 'source-issue-open');
+  assert.equal(reason({ readIssue: () => null }), 'source-issue-unreadable');
+  assert.equal(reason({ pr: loopPr({ body: 'nessuna keyword' }) }), 'no-closing-keyword');
 });
 
 // ── Commento e agganci ──────────────────────────────────────────────────────
@@ -212,7 +234,7 @@ test('il commento di chiusura dice la ragione e come annullarla', () => {
   for (const decision of [
     { reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 },
     { reason: 'handoff-already-fixed', handoff: 2250 },
-    { reason: 'source-issues-closed', issues: [2236] },
+    { reason: 'source-issues-delivered', issues: [2236], deliveredBy: [2245] },
   ]) {
     const body = closingComment(decision);
     assert.ok(body.startsWith(SUPERSEDED_MARKER), body);
@@ -220,8 +242,15 @@ test('il commento di chiusura dice la ragione e come annullarla', () => {
     assert.match(body, /branch NON è stato cancellato/, body);
   }
   assert.match(closingComment({ reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 }), /#2201/);
-  assert.match(closingComment({ reason: 'source-issues-closed', issues: [2236] }), /#2236/);
+  assert.match(closingComment({ reason: 'source-issues-delivered', issues: [2236], deliveredBy: [2245] }), /#2236.*#2245/);
   assert.throws(() => closingComment({ reason: 'inventata' }), /ragione di chiusura sconosciuta/);
+});
+
+test('la chiusura rilegge le prove, non solo la PR', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
+  const main = src.slice(src.indexOf('function main()'));
+  assert.equal(main.split('decide(pr, ').length - 1, 2, 'decisione e conferma: `decide` va eseguita due volte, la seconda subito prima della close');
+  assert.ok(main.indexOf('confirmed.reason !== decision.reason') < main.indexOf("'pr', 'close'"), 'la conferma deve precedere la chiusura');
 });
 
 test('lo sweep non cancella mai il branch e ha un tetto per run', () => {
@@ -241,4 +270,8 @@ test('pr-autorebase.yml esegue lo sweep dopo l\'autorebase, anche se questo fall
   assert.match(step, /if: always\(\)/, step);
   assert.match(step, /continue-on-error: true/, step);
   assert.match(step, /DRY_RUN: \$\{\{ github\.event\.inputs\.dry_run \}\}/, step);
+  // Senza la deadline `runBudgetFromEnv()` è illimitato: lo sweep fa letture
+  // `gh` sincrone per ogni candidata e deve fermarsi pulito prima del timeout.
+  const run = wf.slice(sweepAt - 120, sweepAt);
+  assert.match(run, /CI_JOB_DEADLINE_EPOCH=/, 'il passo dello sweep deve esportare la propria deadline');
 });
