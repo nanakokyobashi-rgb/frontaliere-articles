@@ -12651,6 +12651,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: aggregazione e bilancio 2026 a confronto',
     'blog.article.bellinzona-aggregazione-costi-2026.excerpt': 'Spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni: il punto sui costi dell\'aggregazione.',
     'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Centro di Bellinzona con edifici amministrativi e mura storiche all\'alba',
+    'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: orari, percorso e chiusure',
+    'blog.article.guida-tre-valli-varesine-2026.excerpt': '6 ottobre: partenza da Busto Arsizio, arrivo in via Sacco a Varese. Sei giri cittadini per uomini e donne.',
+    'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Ciclista in gara sulla Tre Valli Varesine, vista sul lago di Varese',
 };
 
 export default blogMetaIt;

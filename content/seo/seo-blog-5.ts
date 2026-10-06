@@ -99780,6 +99780,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-tre-valli-varesine-2026': {
+    title: 'Tre Valli Varesine 2026: orari, percorso e chiusure',
+    description: 'Guida alla Tre Valli Varesine e femminile del 6 ottobre: orari da Busto Arsizio, arrivo in via Sacco a Varese, sei giri cittadini e info sulle chiusure.',
+    keywords: 'frontalieri, ticino, svizzera, italia, valli, varesine, orari, percorso',
+    ogTitle: 'Tre Valli Varesine 2026: orari e percorso',
+    ogDescription: 'Il 6 ottobre si corrono la Tre Valli Women\'s Race e la 105a Tre Valli Varesine. Partenza da Busto Arsizio, arrivo in via Sacco a Varese. Sei giri cittadini e due tornate lunghe per gli uomini. Scopri orari e dettagli sulle chiusure.',
+    canonicalPath: '/articoli-frontaliere/guida-tre-valli-varesine-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre Valli Varesine 2026: orari, percorso e chiusure",
+      "description": "Guida alla Tre Valli Varesine e femminile del 6 ottobre: orari da Busto Arsizio, arrivo in via Sacco a Varese, sei giri cittadini e info sulle chiusure.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/guida-tre-valli-varesine-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ciclista in gara sulla Tre Valli Varesine, vista sul lago di Varese"
+      },
+      "datePublished": "2026-10-06T03:13:40+00:00",
+      "dateModified": "2026-10-06T03:13:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/guida-tre-valli-varesine-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

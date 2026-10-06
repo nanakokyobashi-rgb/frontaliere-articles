@@ -793,10 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-medea-di-giubiano-al-via-i-lavori-di-riqualificazione-da-14-milioni-di-euro/2695381": {
-      "section": "frontaliere",
-      "ts": 1791082559228
-    },
     "frontaliere::https://www.varesenews.it/2026/10/la-scuola-europea-di-varese-diventa-scuola-ambasciatrice-del-parlamento-europeo/2696125": {
       "section": "frontaliere",
       "ts": 1791084763106
@@ -940,6 +936,14 @@
     "frontaliere::https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
       "section": "frontaliere",
       "ts": 1791249645914
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1954862/sentenza-del-cdm-sul-pg-pagani-anche-per-i-vertici-del-parlamento-e-tutto-a-posto": {
+      "section": "frontaliere",
+      "ts": 1791255421484
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-confartigianato-varese-le-critiche-richiedono-dati-comparabili/2698681": {
+      "section": "frontaliere",
+      "ts": 1791255486922
     }
   }
 }

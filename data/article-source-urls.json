@@ -1,5 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/cadenazzo-quartino-da-fine-agosto-si-attivano-i-semafori-intelligenti-440058": "semafori-intelligenti-cadenazzo-quartino",
   "https://ilgiornaledelticino.ch/pala-piccone-pre-festival-tra-luci-ed-ombre-anzi-tra-luci-e-luci-troppe": "pre-festival-locarno-2024",
   "https://www.varesenoi.it/2026/08/04/leggi-notizia/argomenti/economia-13/articolo/poste-italiane-apre-le-selezioni-per-consulenti-finanziari-in-provincia-di-varese.html": "poste-italiane-consulenti-finanziari-varese",
   "https://www.laregione.ch/culture/locarno-film-festival/1941855/contro-il-sonno-della-rassegnazione-la-resistenza-dei-legami": "locarno-film-festival-resistenza-legami",
@@ -1988,6 +1987,11 @@
   "https://www.tio.ch/rubriche/ospite/1954889/servizi-costi-aggregazione-citta-domanda-bellinzona-successo-elio-biaggio": {
     "articleId": "bellinzona-aggregazione-costi-2026",
     "ts": "2026-10-06T01:28:31.124Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/guida-alla-tre-valli-varesine-percorsi-chiusure-e-corridori-al-via/2698591": {
+    "articleId": "guida-tre-valli-varesine-2026",
+    "ts": "2026-10-06T03:13:40.894Z",
     "keyForm": 2
   }
 }

@@ -12650,6 +12650,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: merger and 2026 budget compared',
     'blog.article.bellinzona-aggregazione-costi-2026.excerpt': '2025 spending of 235,8 million and 2026 budget of 253,5 million: a look at the costs of the merger.',
     'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Bellinzona city center with administrative buildings and historic walls at dawn',
+    'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: times, route and closures',
+    'blog.article.guida-tre-valli-varesine-2026.excerpt': 'October 6: start from Busto Arsizio, finish on Via Sacco at Varese. Six city laps for men and women.',
+    'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Cyclist racing on the Tre Valli Varesine, view of Lake Varese',
 };
 
 export default blogMetaEn;

@@ -12649,6 +12649,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: Aggregation und Bilanz 2026 im Vergleich',
     'blog.article.bellinzona-aggregazione-costi-2026.excerpt': 'Ausgaben 2025 in Höhe von 235,8 Millionen und Kostenvoranschlag 2026 in Höhe von 253,5 Millionen: der Punkt bei den Kosten des Zusammenschlusses.',
     'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Bellinzona-Stadtzentrum mit Verwaltungsbauten und historischen Mauern im Morgengrauen',
+    'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: Zeitplan, Strecke und Sperrungen',
+    'blog.article.guida-tre-valli-varesine-2026.excerpt': '6. Oktober: Start in Busto Arsizio, Ziel in der Via Sacco bei Varese. Sechs Stadtrunden für Männer und Frauen.',
+    'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Radfahrer beim Tre Valli Varesine, Blick auf den Varese-See',
 };
 
 export default blogMetaDe;
