@@ -12672,6 +12672,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
     'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Dal 12 al 16 ottobre lavori di pavimentazione sulla cantonale a Gambarogno, tra il sottopasso FFS e la salita per Caviano - Scaiano. Attese fino a 30 minuti.',
     'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Lavori di pavimentazione sulla cantonale di Gambarogno tra il sottopasso FFS e Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'In settembre la disoccupazione svizzera resta al 3%, Ticino al 2,9% con 4\'800 disoccupati, mentre i posti vacanti salgono a 44\'200.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Vista di Lugano con professionisti e segno dell\'ufficio di collocamento, rappresentante il mercato del lavoro ticinese.',
 };
 
 export default blogMetaIt;

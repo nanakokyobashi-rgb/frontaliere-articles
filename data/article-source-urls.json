@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1942044/francia-affitti-alloggio-spinge-trasferirsi": "svizzeri-fuga-alloglio-ticino",
   "https://ilgiornaledelticino.ch/pensieri-mostruosamente-proibiti-borsa-su-rotta-sullisola-dei-15000-punti": "borsa-rotta-isola-15000-punti",
   "https://www.varesenews.it/2026/08/lite-davanti-alla-stazione-di-tradate-nellora-di-punta-dei-pendolari-ferito-un-trentenne/2651647": "tradate-lite-ferito-trentenne",
   "https://www.varesenoi.it/2026/08/05/leggi-notizia/argomenti/video-6/articolo/caso-delmastro-la-protesta-di-avs-alla-camera-con-le-bende-sugli-occhi.html": "caso-delmastro-protesta-avs",
@@ -2016,6 +2015,11 @@
   "https://www.tio.ch/ticino/attualita/1954947/lavori-e-attese-sulla-strada-cantonale": {
     "articleId": "gambarogno-pavimentazione-attese",
     "ts": "2026-10-06T06:52:28.617Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/economia/disoccupazione-rimane-stabile-al-30-in-settembre-in-svizzera-444034": {
+    "articleId": "disoccupazione-settembre-ticino-2026",
+    "ts": "2026-10-06T07:34:13.889Z",
     "keyForm": 2
   }
 }

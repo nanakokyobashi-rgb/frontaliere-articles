@@ -12673,6 +12673,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno : travaux sur la route cantonale, temps d\'attente jusqu\'à 30 minutes',
     'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Du 12 au 16 octobre, des travaux de revêtement sont prévus sur la route cantonale à Gambarogno, entre le passage inférieur FFS et la montée vers Caviano - Scaiano. Temps d\'attente jusqu\'à 30 minutes.',
     'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Travaux de revêtement sur la route cantonale de Gambarogno entre le passage FFS et Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Le chômage en Suisse devrait rester stable à 3 % en septembre 2026.',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'En septembre, le chômage en Suisse est resté à 3 %, tandis qu\'au Tessin, il était de 2,9 % avec 4 800 chômeurs, tandis que le nombre d\'offres d\'emploi est passé à 44 200.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Vue d\'une rue de Lugano avec des travailleurs et un panneau discret du bureau de placement, illustrant le marché du travail tessinois.',
 };
 
 export default blogMetaFr;

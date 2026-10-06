@@ -12670,6 +12670,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: Arbeiten auf der Kantonsstrasse, Wartezeiten von bis zu 30 Minuten',
     'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Vom 12. bis 16. Oktober Belagsarbeiten auf der Kantonsstrasse in Gambarogno, zwischen der FFS-Unterführung und der Auffahrt nach Caviano - Scaiano. Wartezeiten von bis zu 30 Minuten.',
     'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Belagsarbeiten auf der Kantonsstrasse in Gambarogno zwischen FFS-Unterführung und Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Arbeitslosigkeit in der Schweiz im September 2026 stabil bei 3%',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'Im September bleibt die Arbeitslosigkeit in der Schweiz bei 3%, im Tessin bei 2,9% mit 4\'800 Arbeitslosen, während die Zahl der offenen Stellen auf 44\'200 steigt.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Straßenansicht von Lugano mit Pendlerinnen und Pendler sowie einem dezenten Zeichen des Arbeitsamts, das den ticinesischen Arbeitsmarkt zeigt.',
 };
 
 export default blogMetaDe;

@@ -7802,6 +7802,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.prezzi-immobili-settembre-regioni.title': 'Preise für Häuser und Wohnungen in der Schweiz: September stabil',
     'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Einfamilienhäuser bei -0,1% und Wohnungen bei +0,2% im September: Zürich verzeichnet den stärksten Rückgang, während das Tessin beim Stockwerkeigentum zulegt.',
     'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Schweizer Wohngebäude als Symbol für regionale Immobilienpreisentwicklungen',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli zahlt seine Krankenversicherung nicht und muss sich vor Gericht verantworten.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, Arzt aus Mendrisio, erscheint beim Bezirksgericht wegen ausstehender Krankenkassenbeiträge',
 };
 
 export default blogMetaChDe;
