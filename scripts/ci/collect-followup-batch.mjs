@@ -166,22 +166,43 @@ const BUCKET_REPOS = [...new Set([
   process.env.FOLLOWUP_CORPUS_REPO || 'nanakokyobashi-rgb/frontaliere-articles',
 ].filter(Boolean))];
 
-function gh(args, token = '', quiet = false) {
+function gh(args, token = '') {
   try {
     const env = token ? { ...process.env, GH_TOKEN: token } : process.env;
     return execFileSync('gh', args, {
       encoding: 'utf-8',
       maxBuffer: 32 * 1024 * 1024,
       env,
-      // `quiet`: un bucket assente dal primo repository e' l'esito ATTESO della
-      // ricerca cross-repo, non un guasto. Lasciar passare il
-      // «GraphQL: Could not resolve to an issue» di `gh` mette nel log della run
-      // una riga che sembra la causa del rosso: e' esattamente il genere di
-      // rumore che ha reso illeggibili le otto run rosse di questa finestra.
-      stdio: quiet ? ['ignore', 'pipe', 'ignore'] : undefined,
     });
   } catch {
     return null;
+  }
+}
+
+/**
+ * Il NOT_FOUND con cui GitHub risponde a `gh issue view <n>` quando il
+ * repository e' leggibile ma quel numero non e' una issue. Un repository
+ * illeggibile o inesistente ha un altro messaggio («Could not resolve to a
+ * Repository»), e resta una lettura indisponibile.
+ */
+export const ISSUE_NUMBER_NOT_FOUND_RE = /Could not resolve to an? (?:issue|Issue)(?: or pull request)? with the number of \d+/u;
+
+/**
+ * `gh` per la lettura di un bucket: stdout, `false` quando il repository ha
+ * risposto che quel numero non esiste, `null` per ogni altro errore.
+ */
+export function ghBucketRead(args, token = '', exec = execFileSync) {
+  try {
+    const env = token ? { ...process.env, GH_TOKEN: token } : process.env;
+    return exec('gh', args, {
+      encoding: 'utf-8',
+      maxBuffer: 32 * 1024 * 1024,
+      env,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } catch (error) {
+    const stderr = Buffer.isBuffer(error?.stderr) ? error.stderr.toString('utf8') : String(error?.stderr ?? '');
+    return ISSUE_NUMBER_NOT_FOUND_RE.test(stderr) ? false : null;
   }
 }
 
@@ -703,29 +724,22 @@ export function persistedBucketIssueMatches(issue, prNumber, prComments = '', ma
 
 /**
  * Read EVERY daily-bucket candidate numbered `bucket` across the repositories
- * that can hold it.
- *
- * I due repository numerano le proprie issue in modo INDIPENDENTE, quindi lo
- * stesso numero puo' esistere in entrambi. Fermarsi al primo JSON valido (o al
- * primo titolo da daily bucket) lasciava a una issue omonima del primo
- * repository il potere di impedire la lettura del secondo. Qui la scansione non
- * si ferma: il chiamante applica il predicato bucket/PR a ogni candidato.
- *
- * Returns `{ candidates, unreadable }`: `candidates` sono le issue con titolo
- * canonico da daily bucket e numero coincidente, `unreadable` dice se almeno
- * una lettura era indisponibile (`gh` non distingue un 404 da un guasto, quindi
- * un numero assente da un repository resta «non lo so» per quel repository).
+ * that can hold it. I due repository numerano le issue in modo INDIPENDENTE:
+ * la scansione non si ferma al primo JSON valido, e il chiamante applica il
+ * predicato bucket/PR a ogni candidato. `unreadable` dice se almeno una
+ * lettura era indisponibile; un numero che il repository dichiara inesistente
+ * (`run` -> `false`) e' una risposta definitiva, non un guasto.
  */
-export function readBucketIssue(bucket, run = gh, repos = BUCKET_REPOS) {
+export function readBucketIssue(bucket, run = ghBucketRead, repos = BUCKET_REPOS) {
   let unreadable = false;
   const candidates = [];
   for (const repo of repos) {
     const raw = run(
       ['issue', 'view', String(bucket), '--repo', repo, '--json', 'number,title,body'],
       bucketRepoToken(repo),
-      true,
     );
-    if (raw === null) { unreadable = true; continue; }
+    if (raw === false) continue;
+    if (raw === null || raw === undefined) { unreadable = true; continue; }
     let issue;
     try { issue = JSON.parse(raw); } catch { unreadable = true; continue; }
     if (issue && typeof issue === 'object' && !Array.isArray(issue)
