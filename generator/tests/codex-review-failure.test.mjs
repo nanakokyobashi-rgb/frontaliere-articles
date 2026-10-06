@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import {
   classifyCodexReviewFailure,
   CODEX_REVIEW_FAILURE_CAUSE,
+  CODEX_REVIEW_STARTUP_FAILURE_THRESHOLD_MS,
   CODEX_REVIEW_WATCHDOG_TIMEOUT_MS,
+  firstAllowedCodexDiagnostic,
+  summarizeCodexDiagnostics,
 } from '../../scripts/ci/classify-codex-review-failure.mjs';
 
 test('la soglia watchdog condivisa resta di 1800 secondi', () => {
@@ -83,6 +86,52 @@ test('un exit pulito senza gh pr review è un abort retryable', () => {
       raw: JSON.stringify({ type: 'codex_no_review', codex_no_review: true }),
     }),
     { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'structured' },
+  );
+});
+
+test('un failure rapido senza turni, review o side effect è startup_failure una sola volta provabile', () => {
+  const raw = [
+    'codex: prompt contains bearer-secret-that-must-not-leak',
+    'ERROR codex_core: stream disconnected before completion',
+  ].join('\n');
+  assert.deepEqual(
+    classifyCodexReviewFailure({
+      outcome: 'failure',
+      raw,
+      durationMs: CODEX_REVIEW_STARTUP_FAILURE_THRESHOLD_MS - 1,
+      reviewPosted: false,
+      sideEffectDetected: false,
+    }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.STARTUP_FAILURE, numTurns: null, source: 'startup' },
+  );
+  assert.equal(firstAllowedCodexDiagnostic(raw), 'stream_disconnected');
+  assert.doesNotMatch(firstAllowedCodexDiagnostic(raw), /bearer|secret|prompt/i);
+});
+
+test('un failure con un turno, review o side effect non entra nella finestra startup', () => {
+  const base = {
+    outcome: 'failure',
+    raw: JSON.stringify({ type: 'turn.started' }),
+    durationMs: 100,
+    sideEffectDetected: false,
+  };
+  assert.equal(classifyCodexReviewFailure({ ...base, reviewPosted: false }).cause, CODEX_REVIEW_FAILURE_CAUSE.NON_RETRYABLE);
+  assert.equal(classifyCodexReviewFailure({ ...base, raw: '', reviewPosted: true }).cause, CODEX_REVIEW_FAILURE_CAUSE.NON_RETRYABLE);
+  assert.equal(classifyCodexReviewFailure({ ...base, raw: '', sideEffectDetected: true }).cause, CODEX_REVIEW_FAILURE_CAUSE.NON_RETRYABLE);
+});
+
+test('la telemetria conta solo tipi JSONL e conserva solo diagnostica allowlisted', () => {
+  assert.deepEqual(
+    summarizeCodexDiagnostics([
+      JSON.stringify({ type: 'thread.started' }),
+      JSON.stringify({ type: 'turn.started' }),
+      'ERROR: model not found; prompt=private text',
+    ].join('\n')),
+    {
+      eventCounts: { 'thread.started': 1, 'turn.started': 1 },
+      turnEventCount: 1,
+      diagnostic: 'model_not_found',
+    },
   );
 });
 

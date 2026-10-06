@@ -59,12 +59,15 @@ const ENTRY_POINTS = [
   // Consumatore del dataset carburanti per cantone (P9b), stessa forma dei tre
   // sopra: --help esce prima di qualunque fetch.
   'refresh-fuel-cantons.mjs',
+  // Quarto contratto REWIRE (P9c): gli hub mobilita' per cantone.
+  'refresh-road-events.mjs',
   // Dataset di categoria degli hub cantonali (D11, P9f/P9g).
   'refresh-canton-notices.mjs',
   'refresh-canton-services-data.mjs',
-
-  // Contratto REWIRE P9c: gli hub mobilita' per cantone.
-  'refresh-road-events.mjs',
+  // I due `refresh` dei dataset annuali D11 (fisco, pensioni): stessa forma
+  // degli altri, `--help` e `DRY_RUN` inclusi.
+  'refresh-canton-tax.mjs',
+  'refresh-pension-parameters.mjs',
 ];
 
 /**

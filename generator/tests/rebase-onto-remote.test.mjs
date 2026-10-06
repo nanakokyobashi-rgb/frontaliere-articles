@@ -34,6 +34,8 @@ import { backstop, findDuplicates, mergeSource } from '../../scripts/lib/merge-c
 // sui registri dichiarati una guardia e non un elenco che invecchia da solo.
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { SECTIONS as SECTION_SURFACES } from '../../scripts/lib/article-surfaces.mjs';
+import { sectionRebaseArgs, sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from '../../scripts/lib/image-credit-records.mjs';
 import { QUOTA_STATE_PATH } from '../scripts/lib/scheduler/quotaController.mjs';
 import * as topicSelector from '../scripts/lib/article-topic-selector.mjs';
@@ -332,11 +334,12 @@ test('a plain divergence with no conflict rebases cleanly', () => {
 function parseHelperArgs(yamlText) {
   const lines = yamlText.split('\n');
   const start = lines.findIndex((l) => l.includes('bash scripts/lib/rebase-onto-remote.sh'));
-  if (start === -1) return { bookkeeping: [], registries: [], takeTheirs: [], counters: [] };
+  if (start === -1) return { bookkeeping: [], registries: [], takeTheirs: [], counters: [], sectionSurfaces: false };
   const bookkeeping = [];
   const registries = [];
   const takeTheirs = [];
   const counters = [];
+  let sectionSurfaces = false;
   for (let i = start; i < lines.length; i++) {
     const line = lines[i];
     // Le quattro categorie stanno nello STESSO comando e vogliono dire cose
@@ -344,7 +347,16 @@ function parseHelperArgs(yamlText) {
     // somma gli incrementi — quindi si separano qui invece di finire in un
     // elenco solo che nessuna assert potrebbe piu' distinguere.
     const clean = line.replace(/\\\s*$/, '').trim();
-    if (clean.startsWith('--take-theirs')) {
+    if (clean === '--section-surfaces') {
+      // I path per sezione non sono scritti nel workflow: l'helper li chiede a
+      // scripts/ci/rebase-section-args.mjs. Si espandono con la STESSA funzione,
+      // cosi' le guardie sotto continuano a vedere ogni path dichiarato.
+      sectionSurfaces = true;
+      const derived = sectionRebaseSurfaces(SECTION_SURFACES);
+      bookkeeping.push(...derived.bookkeeping);
+      registries.push(...derived.registries);
+      takeTheirs.push(...derived.takeTheirs);
+    } else if (clean.startsWith('--take-theirs')) {
       const prefix = clean.split(/\s+/)[1];
       if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
     } else if (clean.startsWith('--merge-counter')) {
@@ -358,7 +370,7 @@ function parseHelperArgs(yamlText) {
     }
     if (!/\\\s*$/.test(line)) break; // the shell continuation ended
   }
-  return { bookkeeping, registries, takeTheirs, counters };
+  return { bookkeeping, registries, takeTheirs, counters, sectionSurfaces };
 }
 
 function allowlistFromWorkflow(yamlText) {
@@ -652,7 +664,19 @@ function allIds(ids) {
 
 /** Gli argomenti che il WORKFLOW passa davvero, non una lista riscritta qui. */
 function helperArgsFromWorkflow() {
-  const { bookkeeping, registries, takeTheirs, counters } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  const { bookkeeping, registries, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  if (sectionSurfaces) {
+    // Come nel workflow: il flag, non la sua espansione. Cosi' i casi git sotto
+    // passano davvero dalla derivazione dentro rebase-onto-remote.sh.
+    const derived = new Set(sectionRebaseArgs(SECTION_SURFACES));
+    return [
+      ...bookkeeping.filter((p) => !derived.has(p)),
+      ...counters.flatMap((c) => ['--merge-counter', c]),
+      ...registries.filter((r) => !derived.has(r)).flatMap((r) => ['--merge-registry', r]),
+      ...takeTheirs.filter((p) => !derived.has(p)).flatMap((p) => ['--take-theirs', p]),
+      '--section-surfaces',
+    ];
+  }
   return [
     ...bookkeeping,
     ...counters.flatMap((c) => ['--merge-counter', c]),

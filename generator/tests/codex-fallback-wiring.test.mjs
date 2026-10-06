@@ -63,8 +63,12 @@ function stepBlock(lines, index) {
 // essere nell'uno o nell'altro stato mentre la modifica del sito viaggia.
 const CRAWLER_GROUP_WORKFLOW = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
 const TRANSLATION_WORKFLOW = '.github/workflows/translate-pending.yml';
+// generate-article-core.yml (2026-10-05) e' il riusabile dei 24 chiamanti
+// cantonali, generato da generate-article.yml: porta gli stessi step, quindi lo
+// stesso broker, e i controlli sotto valgono anche per lui.
 const NON_CRAWLER_CONSUMERS = [
   '.github/workflows/batch-faq-articles.yml',
+  '.github/workflows/generate-article-core.yml',
   '.github/workflows/generate-article.yml',
 ];
 

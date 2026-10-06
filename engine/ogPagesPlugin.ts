@@ -27,6 +27,8 @@ import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { computeSectionTopicAssignment } from './articleHubPagesPlugin';
 import { TOPIC_CLUSTERS, TOPIC_HUB_SEGMENT, type TopicLocale } from './topicTaxonomy';
+import { cantonHubTopicForCluster, cantonSectionLabel, cantonSectionLandingPath, cantonTopicHubLabel, cantonTopicHubPath } from './shared/cantonSectionCopy.mjs';
+import { CORPUS_ROUTE_OWNER_META_TAG } from './shared/corpusRouteOwner.mjs';
 
 /**
  * Empty SPA mount point, mirroring build-plugins/htmlTemplate.ts `rootShell`.
@@ -145,6 +147,22 @@ const SHELL_INDEX_SLUGS_BY_KIND: Record<OgSectionDescriptor['kind'], (shell: Sit
  national: (shell) => ({ ...shell.swissBlogIndexSlugs }),
  canton: (_shell, section) => ({ ...section.indexSlug }),
 };
+
+/** Root-relative section path, with the locale prefix used by non-Italian routes. */
+function localizedArticleSectionPath(indexSlug: string, locale: string): string {
+ const prefix = locale === 'it' ? '' : `/${locale}`;
+ return `${prefix}/${indexSlug}`;
+}
+
+/**
+ * Feed advertised by an article page. Canton feeds intentionally keep the
+ * historical root feed until the canton feed contract is published.
+ */
+function articleRssAlternatePath(section: OgSectionDescriptor, locale: string): string {
+ if (section.kind === 'canton') return '/rss.xml';
+ const baseName = section.kind === 'frontaliere' ? 'rss' : `rss-${section.name}`;
+ return `/${baseName}${locale === 'it' ? '' : `-${locale}`}.xml`;
+}
 
 export interface RenderArticlePagesOptions {
  rootDir: string;
@@ -364,6 +382,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // Parse article categories from blog-articles-data.ts for FAQ schema filtering
  const EVERGREEN_CATEGORIES = new Set(['fiscale', 'pratico', 'pensione']);
  const articleCategoryById: Record<string, string> = {};
+ const articlePublishedAtById: Record<string, string> = {};
  const articleUpdatedAtById: Record<string, string> = {};
  // Per-article author (E-E-A-T): was hardcoded to a single Person for every
  // article (JSON-LD + visible byline) — real values live alongside each
@@ -374,6 +393,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const articleDataSrc = fs.readFileSync(np.resolve(rootDir, SECTION.registry), 'utf-8');
  for (const article of readArticleRegistryMetadata(articleDataSrc)) {
  if (article.category !== undefined) articleCategoryById[article.id] = article.category;
+ if (article.date !== undefined) articlePublishedAtById[article.id] = article.date;
  if (article.updatedAt !== undefined) articleUpdatedAtById[article.id] = article.updatedAt;
  if (article.authorSlug !== undefined) articleAuthorSlugById[article.id] = article.authorSlug;
  if (article.authorName !== undefined) articleAuthorNameById[article.id] = article.authorName;
@@ -604,7 +624,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // Measured here, next to the resolution that produced the path, so the
  // size and the URL can never be computed from two different candidates.
  const imSize = resolveHeroSize(im);
- const datePub = b.match(/"datePublished":\s*"([^"]+)"/)?.[1] ?? '';
+ // The SEO entry is the preferred source when it carries an explicit editorial
+ // date. Older entries may omit that literal even though the article registry
+ // has one; use the registry as the fallback, and keep `''` when both sources
+ // say the publication date is unknown.
+ const datePub = b.match(/"datePublished":\s*"([^"]+)"/)?.[1]
+ || articlePublishedAtById[articleId]
+ || '';
  // dateModified: prefer updatedAt from blog-articles-data.ts, then sitemap <lastmod>,
  // then the SEO metadata literal (if any). BUILD_DATE_ISO in seo-blog.ts is a variable
  // reference that the regex can't capture, so we need these external sources.
@@ -1041,9 +1067,18 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const topic = topicByKey.get(topicAssignment.topicOf.get(currentId) ?? '');
  if (!topic) return '';
  const loc: TopicLocale = (locale === 'en' || locale === 'de' || locale === 'fr') ? locale : 'it';
+ // A canton section has no `/<section>/argomenti/<topic>/` hubs: its themes
+ // are the 6 direct children of the section (D2). Link the canton hub the
+ // article's topic feeds, or nothing (eventi/servizi have no cluster).
+ if (SECTION.kind === 'canton') {
+ const cantonTopic = cantonHubTopicForCluster(topic.key);
+ if (!cantonTopic) return '';
+ const cantonHref = cantonTopicHubPath(SECTION.name, cantonTopic, loc);
+ const cantonLabel = `${topicHubLinkPrefix[loc] ?? topicHubLinkPrefix.it}${cantonTopicHubLabel(SECTION.name, cantonTopic, loc)}`;
+ return `<li class="s-65FRzB"><a class="s-ty-PxH" href="${esc(cantonHref)}">${esc(cantonLabel)}</a></li>`;
+ }
  const indexSlug = blogIndexSlug[locale] ?? SECTION.indexSlug[loc] ?? SECTION.indexSlug.it;
- const prefix = locale === 'it' ? '' : `/${locale}`;
- const href = `${prefix}/${indexSlug}/${TOPIC_HUB_SEGMENT[loc]}/${topic.slug[loc]}/`;
+ const href = `${localizedArticleSectionPath(indexSlug, loc)}/${TOPIC_HUB_SEGMENT[loc]}/${topic.slug[loc]}/`;
  const label = `${topicHubLinkPrefix[loc] ?? topicHubLinkPrefix.it}${topic.label[loc]}`;
  return `<li class="s-65FRzB"><a class="s-ty-PxH" href="${esc(href)}">${esc(label)}</a></li>`;
  };
@@ -1057,8 +1092,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const items = hubItem + picks.map(art => {
  const slug = blogSlugs[art.articleId]?.[locale] ?? art.articleId;
  const indexSlug = blogIndexSlug[locale] ?? SECTION.indexSlug[locale as 'it' | 'en' | 'de' | 'fr'] ?? SECTION.indexSlug.it;
- const prefix = locale === 'it' ? '' : `/${locale}`;
- const href = `${prefix}/${indexSlug}/${slug}/`;
+ const href = `${localizedArticleSectionPath(indexSlug, locale)}/${slug}/`;
  const title = art.ogT.replace(/\s*\|\s*Frontaliere Ticino\s*$/i, '');
  return `<li class="s-65FRzB"><a class="s-ty-PxH" href="${esc(href)}">${esc(title)}</a></li>`;
  }).join('');
@@ -1085,7 +1119,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  if (locSlugs) {
  for (const l of ['en', 'de', 'fr']) {
  const as = locSlugs[l], bs = blogIndexSlug[l];
- if (as && bs) lp[l] = `/${l}/${bs}/${as}`;
+ if (as && bs) lp[l] = `${localizedArticleSectionPath(bs, l)}/${as}`;
  }
  }
 
@@ -1383,7 +1417,9 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // NewsArticle — Google News eligibility (Publisher Center answer/9607104)
  ldObj = {
  '@context': 'https://schema.org',
- '@type': 'NewsArticle',
+ // A corpus entry without an editorial publication date is an evergreen
+ // document. Keep it as WebPage until the registry supplies a real date.
+ '@type': en.datePub ? 'NewsArticle' : 'WebPage',
  '@id': `${full}#article`,
  headline: localizedTitle,
  description: localizedDesc,
@@ -1470,14 +1506,23 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const ldJsonStr = inlineScriptJson(ldObj);
 
  // BreadcrumbList for article pages (enables rich result breadcrumbs in Google)
- const sectionName = locale === 'en' ? 'Articles' : locale === 'de' ? 'Artikel' : locale === 'fr' ? 'Articles' : 'Articoli';
- const sectionSlug = blogIndexSlug[locale] || SECTION.indexSlug[(locale === 'en' || locale === 'de' || locale === 'fr') ? locale : 'it'];
+ const breadcrumbLocale = (locale === 'en' || locale === 'de' || locale === 'fr') ? locale : 'it';
+ // A canton section names itself («Articoli Ticino») and points at its
+ // landing in THIS locale (`/en/ticino-articles/`). The two historical
+ // sections keep their generic label and point at their localized landing.
+ const sectionName = SECTION.kind === 'canton'
+ ? cantonSectionLabel(SECTION.name, breadcrumbLocale)
+ : locale === 'en' ? 'Articles' : locale === 'de' ? 'Artikel' : locale === 'fr' ? 'Articles' : 'Articoli';
+ const sectionSlug = blogIndexSlug[locale] || SECTION.indexSlug[breadcrumbLocale];
+ const sectionCrumbUrl = SECTION.kind === 'canton'
+ ? `${BASE_URL}${cantonSectionLandingPath(SECTION.name, breadcrumbLocale)}`
+ : `${BASE_URL}${localizedArticleSectionPath(sectionSlug, breadcrumbLocale)}/`;
  const breadcrumbLd = inlineScriptJson({
  '@context': 'https://schema.org',
  '@type': 'BreadcrumbList',
  itemListElement: [
  { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
- { '@type': 'ListItem', position: 2, name: sectionName, item: `${BASE_URL}/${sectionSlug}/` },
+ { '@type': 'ListItem', position: 2, name: sectionName, item: sectionCrumbUrl },
  { '@type': 'ListItem', position: 3, name: localizedTitle },
  ],
  });
@@ -1577,14 +1622,14 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  <meta property="og:image:alt" content="${esc(localizedTitle)}">
  <meta property="og:locale" content="${LOC_TAG[locale] ?? 'it_CH'}">
  <meta property="og:site_name" content="Frontaliere Ticino">
- <meta name="robots" content="${ARTICLE_ROBOTS_INDEX_ENHANCED}">
+ <meta name="robots" content="${ARTICLE_ROBOTS_INDEX_ENHANCED}">${SECTION.kind === 'canton' ? `\n ${CORPUS_ROUTE_OWNER_META_TAG}` : ''}
  <meta property="fb:app_id" content="891036063797338">
  ${publishedDate ? `<meta property="article:published_time" content="${esc(publishedDate)}">` : ''}
  ${modifiedDate ? `<meta property="article:modified_time" content="${esc(modifiedDate)}">` : ''}
  <meta property="article:section" content="Frontalieri Ticino">
  <meta property="article:author" content="${esc(String(authorObj.url))}">
 ${href}
- <link rel="alternate" type="application/rss+xml" title="Frontaliere Ticino" href="${BASE_URL}/rss.xml">
+ <link rel="alternate" type="application/rss+xml" title="Frontaliere Ticino" href="${BASE_URL}${articleRssAlternatePath(SECTION, articleLocale)}">
  <script type="application/ld+json">${ldJsonStr}</script>
  <script type="application/ld+json">${breadcrumbLd}</script>${faqLdTag}
  <link rel="icon" type="image/svg+xml" href="/favicon.svg">`;
@@ -1619,6 +1664,11 @@ ${href}
  // the FAQ and before the related articles. Empty for an uncredited cover, so
  // those pages stay byte-identical. No caption on the hero above.
  const imageCreditHtml = imageCredit ? renderImageCreditHtml(imageCredit, articleLocale) : '';
+ // Historical sections have a locale-aware article landing. Keep the canton
+ // fallback unchanged until its separate route/feed contract is published.
+ const articleSectionNavPath = SECTION.kind === 'canton'
+  ? `/${SECTION.indexSlug.it}/`
+  : `${localizedArticleSectionPath(blogIndexSlug[articleLocale] ?? SECTION.indexSlug[articleLocale], articleLocale)}/`;
 
  const blogPreloads = [
  `<link rel="preload" as="image" href="${en.img}" fetchpriority="high">`,
@@ -1677,7 +1727,7 @@ ${headTags}
  ${OFFERWALL_FC_SNIPPET}
  </head>
  <body class="bg-surface-alt text-heading overflow-x-hidden">
- ${articleRootShell(true)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1><p class="article-byline s-L_lk4l">Di ${en.authorSlug && en.authorName ? `<a href="/autori/${en.authorSlug}/" rel="author">${esc(en.authorName)}</a>` : esc(en.authorName || 'Redazione Frontaliere Ticino')}${dateByline ? ` · ${dateByline}` : ''}</p>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${articleBodyHtml}${visibleFaqHtml}${imageCreditHtml}${buildRelatedArticlesHtml(en.articleId, articleCategoryById[en.articleId] || '', locale)}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="/${SECTION.indexSlug.it}/">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
+ ${articleRootShell(true)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1><p class="article-byline s-L_lk4l">Di ${en.authorSlug && en.authorName ? `<a href="/autori/${en.authorSlug}/" rel="author">${esc(en.authorName)}</a>` : esc(en.authorName || 'Redazione Frontaliere Ticino')}${dateByline ? ` · ${dateByline}` : ''}</p>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${articleBodyHtml}${visibleFaqHtml}${imageCreditHtml}${buildRelatedArticlesHtml(en.articleId, articleCategoryById[en.articleId] || '', locale)}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="${articleSectionNavPath}">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
  <script type="module" crossorigin fetchpriority="high" src="/assets/${entryJs}"></script>
  </body>
 </html>`;
@@ -1701,7 +1751,7 @@ ${headTags}
  ${OFFERWALL_FC_SNIPPET}
  </head>
  <body>
- ${articleRootShell(false)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${imageCreditHtml}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="/${SECTION.indexSlug.it}/">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
+ ${articleRootShell(false)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${imageCreditHtml}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="${articleSectionNavPath}">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
  </body>
 </html>`;
  };

@@ -32,7 +32,6 @@ const FINDING_MARKER_RE = /🔴|🟡\s*\*{0,2}\s*Nit\s*\*{0,2}(?:[:—-]|(?=\s+\
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 // Anchor di un finding il cui unico riferimento e' la descrizione della PR.
 const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?([1-9]\d*)(?:[-–]\d+)?(?=$|[`:\s])/iu;
-const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
 // TUTTI gli anchor `PR body:L<n>` del finding, non solo il primo, e con
 // l'INTERVALLO quando c'e' (`PR body:L5-9`). Un anchor a intervallo che parte
 // dentro `## Non implementato` puo' finire fuori — per esempio su una riga di
@@ -45,16 +44,68 @@ const UNIFIED_HUNK_HEADER_RE = /^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@[^\r\
 const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)(?:\s*[-–]\s*L?([1-9]\d*))?/giu;
 // Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
 // se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
-// 7) non e' una regola del contratto, e' una regola della review. La lista e'
-// deliberatamente LARGA: ogni termine in piu' lascia bloccante un finding in
-// piu', che e' la direzione sicura dell'errore. Stringerla richiede una
-// misura, allargarla no.
+// 7) non e' una regola del contratto, e' una regola della review. Il filtro si
+// applica alla riga corrente ancorata, non alla prosa del finding: quest'ultima
+// puo' descrivere una citazione che e' stata rimossa. La lista e' deliberatamente
+// LARGA: ogni termine in piu' lascia bloccante un claim ancora presente.
 const NON_CONTRACT_BODY_RE = new RegExp([
   'baseline', 'perf', 'performance', 'speed-?up', 'speed', 'faster', 'veloc',
   'throughput', 'latenc[yz]', 'latenza', 'benchmark', 'overhead', 'regressi',
   'misura', 'misurat', 'pre/post', 'revert', 'ottimizzazion', 'optimi[sz]',
-  'claim', 'risparmi', 'saving', 'p50', 'p90', 'p95', 'p99',
+  'claim', 'capacit', 'risparmi', 'saving', 'p50', 'p90', 'p95', 'p99',
 ].map((part) => `(?:${part})`).join('|'), 'iu');
+
+export const BODY_CITATION_MAX_LENGTH = 240;
+
+const BODY_CITATION_LINE_RE = /^\s*(?:[-*+]\s*)?Body citation:\s*(.*?)\s*$/iu;
+
+/**
+ * Estrae l'unica citazione machine-readable richiesta per un finding sul body.
+ * JSON rende non ambiguo il confine fra il testo citato e il resto del finding.
+ * Citazione assente, duplicata, malformata, vuota o troppo lunga = null:
+ * il finding resta bloccante.
+ */
+export function extractBodyCitation(text) {
+  let count = 0;
+  let citation = null;
+  for (const line of String(text || '').split(/\r?\n/u)) {
+    const match = line.match(BODY_CITATION_LINE_RE);
+    if (!match) continue;
+    count += 1;
+    let parsed;
+    try {
+      parsed = JSON.parse(match[1].trim());
+    } catch {
+      return null;
+    }
+    if (typeof parsed !== 'string' || !parsed.trim()
+        || parsed.length > BODY_CITATION_MAX_LENGTH) return null;
+    citation = parsed;
+  }
+  return count === 1 ? citation : null;
+}
+
+/** Non scambiare un path citato dentro la citazione del body per codice. */
+export function stripBodyCitationLines(text) {
+  return String(text || '')
+    .split(/\r?\n/u)
+    .filter((line) => !BODY_CITATION_LINE_RE.test(line))
+    .join('\n');
+}
+
+/** Confronta il testo ignorando solo layout e decorazione Markdown. */
+export function normalizeBodyCitationText(value) {
+  let text = String(value || '').normalize('NFKC').replace(/\r\n?/gu, '\n');
+  text = text
+    .replace(/<!--[\s\S]*?-->/gu, ' ')
+    .replace(/!\[([^\]]*)\]\([^)]*\)/gu, '$1')
+    .replace(/\[([^\]]+)\]\([^)]*\)/gu, '$1')
+    .replace(/```[^\n]*\n?/gu, '')
+    .replace(/`([^`\n]*)`/gu, '$1')
+    .replace(/^\s{0,3}(?:#{1,6}\s+|>\s?|[-*+]\s+|\d+\.\s+)/gmu, '')
+    .replace(/[*_~]/gu, '');
+  return text.replace(/\s+/gu, ' ').trim();
+}
 
 function resetImportantRegex() {
   REDFLAG_IMPORTANT_RE.lastIndex = 0;
@@ -160,7 +211,9 @@ export function importantFindings(body) {
       line,
       text,
       lineNumber: index + 1,
-      citations: extractFileCitations(text),
+      // `Body citation:` è metadato del finding, non un'ulteriore citazione
+      // di codice: il testo quotato può contenere a sua volta un path.
+      citations: extractFileCitations(stripBodyCitationLines(text)),
     };
   });
 }
@@ -202,25 +255,27 @@ function changedContains(changedFiles, resolvedPath) {
 export function prBodyFindingLine(finding) {
   const fromText = String(finding?.text || '').match(PR_BODY_ANCHOR_RE);
   if (fromText) return Number(fromText[1]);
-  const fromLine = String(finding?.line || '').match(PR_BODY_ANCHOR_LOOSE_RE);
+  const fromLine = String(finding?.line || '').match(PR_BODY_ANCHOR_RE);
   return fromLine ? Number(fromLine[1]) : null;
 }
 
+/** Un finding sul body ha solo l'anchor `PR body:L<n>`, senza file citati. */
+export function isBodyAnchoredFinding(finding) {
+  return Array.isArray(finding?.citations)
+    && finding.citations.length === 0
+    && prBodyFindingLine(finding) !== null;
+}
+
 /**
- * Vero quando il finding e' un 🔴 ancorato SOLO su `PR body:L<n>`, su una riga
- * che cade dentro `## Non implementato` — la sezione che il contratto
- * deterministico valida — e non parla di un claim che il contratto non sa
- * giudicare.
- *
- * Tutto il resto resta bloccante: una riga altrove nel body, un claim di
- * performance, o l'assenza del testo del body con cui provare la posizione.
- * Senza `prBody` non si declassa niente: la prova che l'anchor cade nella
- * sezione giusta e' parte del predicato, non un'assunzione.
+ * Predicato storico che descrive il dominio del contratto per i consumer che
+ * lo espongono ancora. Non è sufficiente per declassare un finding: il gate
+ * richiede sempre `Body citation:` e la prova che il testo sia assente. Il
+ * filtro `NON_CONTRACT_BODY_RE` guarda la riga corrente, non la prosa che può
+ * riferirsi a un'affermazione già rimossa.
  */
 export function isContractDomainBodyFinding(finding, prBody) {
   if (typeof prBody !== 'string' || !prBody) return false;
   const text = String(finding?.text || '');
-  if (NON_CONTRACT_BODY_RE.test(text)) return false;
   const lines = prBody.split(/\r?\n/u);
   PR_BODY_ANCHOR_ALL_RE.lastIndex = 0;
   const anchors = [];
@@ -255,11 +310,17 @@ export function isContractDomainBodyFinding(finding, prBody) {
   });
 }
 
+/** Anchor e filtro del contratto devono coincidere in ogni ramo stale-body. */
+function isStaleBodyFinding(finding, prBody) {
+  return isBodyAnchoredFinding(finding) && isContractDomainBodyFinding(finding, prBody);
+}
+
 /**
  * Il contratto deterministico del body, ricalcolato dal body stesso con gli
  * stessi moduli dello step `PR-body completeness` (`evaluateBodyContract`:
  * sezioni, `Closes`, stato bloccante di ogni voce; gli advisory non bloccano
- * quel gate e non bloccano qui).
+ * quel gate e non bloccano qui). Il suo esito non chiude da solo i finding
+ * ancorati al body: la prova testuale è classificata più sotto.
  *
  * Esiste perche' il verdetto NON puo' arrivare solo da una variabile d'ambiente
  * di `tests.yml`: `pr-redflag-fixer.yml` e la CLI di questo file classificano
@@ -295,13 +356,11 @@ function citationsFullyAnchored(finding) {
 }
 
 export function classifyImportantFindings(body, changedFiles, repositoryPaths = null, {
-  // Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`,
-  // step `PR-body completeness` di tests.yml) e' passato su QUESTO body nella
-  // stessa run. E' l'unica fonte di verita' sul body: un 🔴 del modello
-  // ancorato solo su `PR body:L<n>` vale allora al massimo un Nit.
+  // Retained for caller compatibility. A green body contract alone never
+  // declassifies a body finding: the textual-citation proof below is required.
   bodyContractPassed = false,
-  // Body corrente della PR: serve a PROVARE che la riga citata cade dentro
-  // `## Non implementato`. Assente → nessun declassamento.
+  // Body corrente della PR: serve a PROVARE che il testo citato non è più
+  // presente. Assente → nessun declassamento.
   prBody = null,
   // Id stabili (`lib/review-findings.mjs`) dei 🔴 gia' emessi dalle review
   // precedenti su questa PR. Un finding il cui id e' qui NON e' nuovo e non
@@ -321,8 +380,12 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   const outside = [];
   const inScope = [];
   const unresolved = [];
-  const bodyDeclassified = [];
+  const staleBodyDeclassified = [];
   const staleDeclassified = [];
+  const hasCurrentPrBody = typeof prBody === 'string';
+  const normalizedPrBody = hasCurrentPrBody
+    ? normalizeBodyCitationText(prBody)
+    : '';
 
   const allFindings = importantFindings(body);
   // Righe davvero CONFRONTATE fra l'ultima review e questa HEAD. Il seed con
@@ -350,10 +413,21 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // controlli — sul sito bastava invertire due righe per lasciar passare una
   // review malformata.
   for (const finding of allFindings) {
-    if (bodyContractPassed && finding.citations.length === 0
-        && isContractDomainBodyFinding(finding, prBody)) {
-      bodyDeclassified.push(finding);
-      continue;
+    if (isStaleBodyFinding(finding, prBody)) {
+      const bodyCitation = extractBodyCitation(finding.text);
+      const normalizedCitation = bodyCitation
+        ? normalizeBodyCitationText(bodyCitation)
+        : '';
+      if (normalizedCitation && hasCurrentPrBody
+          && !normalizedPrBody.includes(normalizedCitation)) {
+        staleBodyDeclassified.push({
+          ...finding,
+          bodyCitation,
+          stableId: stableFindingId(finding),
+        });
+        continue;
+      }
+      // Citazione assente, invalida o ancora presente: il finding resta rosso.
     }
     if (finding.citations.length === 0) {
       unresolved.push({ ...finding, reason: 'nessun file citato' });
@@ -431,13 +505,16 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     outside,
     inScope,
     unresolved,
-    bodyDeclassified,
+    // Alias mantenuto per i consumer più vecchi; contiene solo finding con la
+    // nuova prova di citazione assente, mai un declassamento da contratto verde.
+    bodyDeclassified: staleBodyDeclassified,
+    staleBodyDeclassified,
     staleDeclassified,
-    bodyOnly: bodyDeclassified.length > 0
+    bodyOnly: staleBodyDeclassified.length > 0
       && outside.length === 0
       && inScope.length === 0
       && unresolved.length === 0,
-    outsideOnly: (outside.length + bodyDeclassified.length + staleDeclassified.length) > 0
+    outsideOnly: (outside.length + staleBodyDeclassified.length + staleDeclassified.length) > 0
       && inScope.length === 0 && unresolved.length === 0,
     blocking: inScope.length > 0 || unresolved.length > 0,
   };
@@ -713,6 +790,21 @@ function safeText(value) {
   return String(value || '').replace(/\r?\n/g, ' ').trim();
 }
 
+/** Commento esplicito e idempotente per un finding sul body ormai superato. */
+export function renderStaleBodyFindingComment(finding, headSha, runUrl = '') {
+  const stableId = String(finding?.stableId || stableFindingId(finding));
+  const citation = String(finding?.bodyCitation || extractBodyCitation(finding?.text) || '');
+  return [
+    `<!-- REVIEW_GATE_STALE_BODY_FINDING:${stableId} -->`,
+    '⚠️ **Finding superato** — il testo citato non è più nel body attuale (spazi e Markdown normalizzati).',
+    '',
+    `- Finding: ${safeText(finding?.text || finding?.line)}`,
+    `- Body citation: ${JSON.stringify(citation)}`,
+    `- HEAD: \`${safeText(headSha)}\``,
+    runUrl ? `- Run: ${safeText(runUrl)}` : '',
+  ].filter(Boolean).join('\n');
+}
+
 function distinctiveToken(text) {
   const candidates = [];
   for (const match of String(text || '').matchAll(/`([^`\n]{3,90})`/gu)) {
@@ -913,17 +1005,30 @@ export async function classifyAndMintReview(body, {
   if (diffUnavailable) {
     const findings = importantFindings(body);
     const reason = changed.files.length === 0 ? 'empty' : changed.reason;
-    // Un finding sul body non dipende dal diff: il contratto lo ha gia'
-    // giudicato su questo stesso body. Senza questa separazione un diff
-    // illeggibile — una PR che rigenera migliaia di file di corpus e' il caso
-    // normale qui — resusciterebbe come bloccante proprio i 🔴 che il
-    // contratto verde ha appena chiuso, e lo farebbe per una ragione che non
-    // ha niente a che vedere con loro.
-    const bodyDeclassified = contractPassed
-      ? findings.filter((finding) => finding.citations.length === 0
-          && isContractDomainBodyFinding(finding, effectivePrBody))
-      : [];
-    const stillOpen = findings.filter((finding) => !bodyDeclassified.includes(finding));
+    // Un finding sul body non dipende dal diff: la sola prova ammessa è che la
+    // citazione testuale non compaia più nel body corrente. Un diff illeggibile
+    // (una PR che rigenera migliaia di file è il caso normale qui) non deve
+    // resuscitare finding già superati, ma non può chiudere quelli senza prova.
+    const normalizedPrBody = typeof effectivePrBody === 'string'
+      ? normalizeBodyCitationText(effectivePrBody)
+      : '';
+    const staleBodyDeclassified = findings
+      .filter((finding) => isStaleBodyFinding(finding, effectivePrBody))
+      .flatMap((finding) => {
+        const bodyCitation = extractBodyCitation(finding.text);
+        const normalizedCitation = bodyCitation
+          ? normalizeBodyCitationText(bodyCitation)
+          : '';
+        if (!normalizedCitation || typeof effectivePrBody !== 'string'
+            || normalizedPrBody.includes(normalizedCitation)) return [];
+        return [{
+          ...finding,
+          bodyCitation,
+          stableId: stableFindingId(finding),
+        }];
+      });
+    const staleBodyIds = new Set(staleBodyDeclassified.map((finding) => stableFindingId(finding)));
+    const stillOpen = findings.filter((finding) => !staleBodyIds.has(stableFindingId(finding)));
     return {
       findings,
       outside: [],
@@ -932,13 +1037,14 @@ export async function classifyAndMintReview(body, {
         ...finding,
         reason: `diff non verificabile (${reason})`,
       })),
-      bodyDeclassified,
-      bodyOnly: bodyDeclassified.length > 0 && stillOpen.length === 0,
+      bodyDeclassified: staleBodyDeclassified,
+      staleBodyDeclassified,
+      bodyOnly: staleBodyDeclassified.length > 0 && stillOpen.length === 0,
       // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
       // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
       // `outsideOnly` restava false e il gate non approvava comunque —
       // il ramo non avrebbe sbloccato niente.
-      outsideOnly: bodyDeclassified.length > 0 && stillOpen.length === 0,
+      outsideOnly: staleBodyDeclassified.length > 0 && stillOpen.length === 0,
       blocking: stillOpen.length > 0,
       minted: false,
       changedFiles: changed.files,
@@ -959,6 +1065,9 @@ export async function classifyAndMintReview(body, {
     changedLinesSince: history.changedLinesSince,
     uncomparablePaths: history.uncomparablePaths ?? null,
   });
+  for (const finding of result.staleBodyDeclassified ?? []) {
+    console.log(`review-scope: DECLASSIFIED-STALE-BODY finding=L${finding.lineNumber} id=${finding.stableId} reason=il testo citato non è più nel body attuale dopo la normalizzazione di spazi e Markdown`);
+  }
   for (const finding of result.staleDeclassified ?? []) {
     console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; il gate resta fail-closed, [regression] segnala esplicitamente la classe`);
   }

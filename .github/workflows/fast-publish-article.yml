@@ -71,6 +71,7 @@ on:
       # Self-test on change, always dry (see the `dry` resolution below).
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
+      - 'scripts/ci/fast-publish-section.mjs'
       # THE CHAIN LINK — a corpus push means an article was produced.
       - 'content/**'
   workflow_dispatch:
@@ -84,7 +85,7 @@ on:
         required: false
         type: string
       section:
-        description: 'frontaliere or svizzera (empty = derive)'
+        description: 'an active section of the core with a Pages shard, e.g. frontaliere or svizzera (empty = derive)'
         required: false
         type: string
       dry_run:
@@ -93,28 +94,31 @@ on:
         default: true
         type: boolean
 
-# Never cancel: a cancelled run can leave some locales pushed and others not.
-concurrency:
-  group: fast-publish-article
-  cancel-in-progress: false
-
 permissions:
   contents: read
 
 jobs:
-  publish:
+  # Sezione e shard si risolvono in un job a parte perche' la concurrency del
+  # job che pubblica e' PER SHARD (D8 del piano «sezioni cantonali»): due
+  # articoli di sezioni diverse scrivono in repo shard diversi e non devono
+  # aspettarsi, mentre due pubblicazioni sullo STESSO shard restano in fila.
+  # La chiave di concurrency di un job puo' leggere `needs`, non gli output di
+  # un suo step: da qui la separazione.
+  resolve:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 5
+    outputs:
+      skip: ${{ steps.mode.outputs.skip }}
+      dry: ${{ steps.mode.outputs.dry }}
+      id: ${{ steps.mode.outputs.id }}
+      ids: ${{ steps.mode.outputs.ids }}
+      section: ${{ steps.mode.outputs.section }}
+      shard: ${{ steps.mode.outputs.shard }}
     steps:
-      - name: Checkout
+      - name: Checkout (resolve)
         uses: actions/checkout@v7
         with:
           fetch-depth: 2
-          # persist-credentials: false is load-bearing, not hygiene. It stops
-          # actions/checkout leaving its GITHUB_TOKEN in an extraheader that
-          # would then be used ahead of the PAT for every shard push — the
-          # `contents: read` token, which cannot write and whose push fires no
-          # workflow anyway.
           persist-credentials: false
 
       - name: Resolve mode, article ids and section
@@ -166,20 +170,23 @@ jobs:
           # Keep the legacy empty-dispatch behavior: with no explicit id, use
           # the body files from the last corpus commit. Collect every match,
           # not just the first one, so a batch commit is published whole.
+          # Which directories hold article bodies, and which section owns each,
+          # comes from the section core (scripts/ci/fast-publish-section.mjs):
+          # the old `case` sent every non-`blog-body-ch` body to frontaliere,
+          # so a new section would have been published into another section's
+          # shard without an error.
           if [ "${#ids[@]}" -eq 0 ]; then
             changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
+            body_re="$(node scripts/ci/fast-publish-section.mjs body-regex)"
             mapfile -t bodies < <(
               printf '%s\n' "$changed" \
-                | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' \
+                | grep -E "$body_re" \
                 | sort -u || true
             )
             for body in "${bodies[@]}"; do
               [ -f "$body" ] || continue
               body_id="$(basename "$body" .ts)"
-              case "$body" in
-                content/blog-body-ch/*) body_section=svizzera ;;
-                *)                      body_section=frontaliere ;;
-              esac
+              body_section="$(node scripts/ci/fast-publish-section.mjs section-of "$body")"
               if [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
                 echo "::error::one commit changes both article sections; publish them in separate commits"
                 exit 1
@@ -198,31 +205,56 @@ jobs:
           ids_json="$(printf '%s\n' "${ids[@]}" | jq -R . | jq -cs 'unique')"
           id="$(printf '%s' "$ids_json" | jq -r '.[0]')"
           section="${section:-frontaliere}"
-          if [ "$section" != "frontaliere" ] && [ "$section" != "svizzera" ]; then
-            echo "::error::section must be frontaliere or svizzera"
-            exit 1
-          fi
+          # Validates the section against the ACTIVE core sections and returns
+          # its Pages shard. A section served from R2 (shardKey null, the canton
+          # sections) is an explicit error here, never a fallback to a shard
+          # that belongs to another section.
+          shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$section")"
           {
             echo "skip=false"
             echo "id=$id"
             echo "ids=$ids_json"
             echo "section=$section"
+            echo "shard=$shard"
           } >> "$GITHUB_OUTPUT"
-          echo "resolved ids=$(printf '%s' "$ids_json" | jq -r 'join(", ")') section=$section dry=$dry"
+          echo "resolved ids=$(printf '%s' "$ids_json" | jq -r 'join(", ")') section=$section shard=$shard dry=$dry"
+
+  publish:
+    needs: resolve
+    if: needs.resolve.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Never cancel: a cancelled run can leave some locales pushed and others not.
+    # Per shard, not global: the shard is the unit that a half-finished publish
+    # can leave inconsistent, and it comes from the section core (`shardKey`).
+    concurrency:
+      group: fast-publish-article-${{ needs.resolve.outputs.shard }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          # persist-credentials: false is load-bearing, not hygiene. It stops
+          # actions/checkout leaving its GITHUB_TOKEN in an extraheader that
+          # would then be used ahead of the PAT for every shard push — the
+          # `contents: read` token, which cannot write and whose push fires no
+          # workflow anyway.
+          persist-credentials: false
 
       - name: Set up Node
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         run: bash scripts/lib/npm-ci-retry.sh
 
       - name: Prepare Firebase credentials
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -235,19 +267,19 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Probe shard write access
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         run: |
           set -euo pipefail
           if [ -z "${GITHUB_PAT:-}" ]; then
             echo "::error::GITHUB_PAT missing after the Remote Config load"
             exit 1
           fi
-          section="${{ steps.mode.outputs.section }}"
-          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+          section="${{ needs.resolve.outputs.section }}"
+          shard="${{ needs.resolve.outputs.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
           # The receive-pack advertisement is permission-gated: a credential
@@ -271,14 +303,14 @@ jobs:
           [ "$fail" = "0" ] || exit 1
 
       - name: Render the articles (fast path)
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         env:
-          ARTICLE_IDS_JSON: ${{ steps.mode.outputs.ids }}
+          ARTICLE_IDS_JSON: ${{ needs.resolve.outputs.ids }}
         run: |
           set -euo pipefail
           npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
             --ids "$ARTICLE_IDS_JSON" \
-            --section "${{ steps.mode.outputs.section }}" \
+            --section "${{ needs.resolve.outputs.section }}" \
             --out "$RUNNER_TEMP/fast-dist" \
             --summary "$RUNNER_TEMP/fast-summary.json"
 
@@ -294,17 +326,17 @@ jobs:
       # per page — it leaves a page alone rather than write a half-formed one —
       # so the worst case here is the hub staying as stale as it already was.
       - name: Refresh the hub landing grid
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         continue-on-error: true
         run: |
           set -euo pipefail
           npx -y tsx@4.23.15 scripts/refresh-hub-landing.mjs \
             --out "$RUNNER_TEMP/fast-dist" \
-            --section "${{ steps.mode.outputs.section }}" \
+            --section "${{ needs.resolve.outputs.section }}" \
             --summary "$RUNNER_TEMP/hub-landing.json"
 
       - name: Validate what was rendered
-        if: steps.mode.outputs.skip != 'true'
+        if: needs.resolve.outputs.skip != 'true'
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
@@ -413,13 +445,13 @@ jobs:
           [ "$fail" = "0" ] || exit 1
 
       - name: Publish to shards and CDN
-        if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
-          section="${{ steps.mode.outputs.section }}"
-          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+          section="${{ needs.resolve.outputs.section }}"
+          shard="${{ needs.resolve.outputs.shard }}"
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -483,12 +515,12 @@ jobs:
           fi
 
       - name: Purge the edge cache for what was published
-        if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
-          section="${{ steps.mode.outputs.section }}"
-          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+          section="${{ needs.resolve.outputs.section }}"
+          shard="${{ needs.resolve.outputs.shard }}"
 
           # Without this the article stays 404 at the apex even though the shard
           # has it and the origin serves it. Measured on run 30814047357: push
@@ -583,12 +615,12 @@ jobs:
           bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
       - name: Verify the article is actually readable
-        if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
-          section="${{ steps.mode.outputs.section }}"
-          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+          section="${{ needs.resolve.outputs.section }}"
+          shard="${{ needs.resolve.outputs.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
           # Two checks, deliberately different in strength, because they answer
@@ -881,7 +913,7 @@ jobs:
         # when a negative entry is most likely to be sitting in the cache.
         # Skipping the cleanup on failure would leave that 404 behind on exactly
         # the runs that needed the cleanup most.
-        if: always() && steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
 
@@ -940,15 +972,15 @@ jobs:
           bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
       - name: Summary
-        if: always() && steps.mode.outputs.skip != 'true'
+        if: always() && needs.resolve.outputs.skip != 'true'
         run: |
           {
             echo "### fast-publish-article"
             echo
-            echo "- ids: \`${{ steps.mode.outputs.ids }}\`"
-            echo "- section: \`${{ steps.mode.outputs.section }}\`"
-            echo "- mode: \`$([ "${{ steps.mode.outputs.dry }}" = "true" ] && echo DRY || echo ARMED)\`"
-            if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then
+            echo "- ids: \`${{ needs.resolve.outputs.ids }}\`"
+            echo "- section: \`${{ needs.resolve.outputs.section }}\`"
+            echo "- mode: \`$([ "${{ needs.resolve.outputs.dry }}" = "true" ] && echo DRY || echo ARMED)\`"
+            if [ "${{ needs.resolve.outputs.dry }}" = "true" ]; then
               echo
               echo "Dry run: rendered, validated and probed shard write access. Pushed nothing."
               echo "A push touching \`content/**\` publishes; remove \`.github/FAST_PUBLISH_DISABLED\` if it is present."

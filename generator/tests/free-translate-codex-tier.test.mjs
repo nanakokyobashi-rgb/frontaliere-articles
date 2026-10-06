@@ -74,7 +74,7 @@ const EN = 'The G permit is renewed every five years at the migration office of 
 
 const premium = { deepl: 200, azure: 200 };
 // MyMemory che rimanda la sorgente: eco rifiutato, la cascata prosegue fino in fondo.
-const free = { mymemoryEcho: false };
+const free = { mymemoryEcho: false, googleEcho: false, mymemoryDown: false, lingvaEcho: false };
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (url) => {
   const u = String(url);
@@ -85,6 +85,15 @@ globalThis.fetch = async (url) => {
   if (u.includes('api.cognitive.microsofttranslator.com')) {
     if (premium.azure === 200) return { ok: true, status: 200, json: async () => [{ translations: [{ text: `AZURE ${EN}` }] }] };
     return { ok: false, status: premium.azure, json: async () => ({}), text: async () => 'credenziali rifiutate' };
+  }
+  if (free.googleEcho && u.includes('translate.googleapis.com/translate_a/single')) {
+    const q = new URL(u).searchParams.get('q');
+    return { ok: true, status: 200, text: async () => JSON.stringify([[[q, q]]]) };
+  }
+  if (free.mymemoryDown && u.includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+  if (free.lingvaEcho && u.includes('/api/v1/')) {
+    const q = decodeURIComponent(u.split('/').pop() || '');
+    return { ok: true, status: 200, json: async () => ({ translation: q }) };
   }
   if (u.includes('api.mymemory.translated.net')) {
     const translatedText = free.mymemoryEcho ? new URL(u).searchParams.get('q') : `MYMEMORY ${EN}`;
@@ -724,6 +733,67 @@ test('FREE_TRANSLATE_CODEX_TIER=last: Codex traduce in coda il testo che ogni al
     assert.equal(lines.filter((l) => l.includes('testi che nessun altro tier ha tradotto')).length, 1);
   } finally {
     free.mymemoryEcho = false;
+    delete process.env.FREE_TRANSLATE_CODEX_TIER;
+  }
+});
+
+test('FREE_TRANSLATE_CODEX_TIER=last: un testo rimandato identico da due motori non arriva a Codex', async () => {
+  // Un nome o una sigla: ogni motore lo rimanda identico, Codex farebbe lo
+  // stesso e tre echi di fila spegnerebbero il tier per i testi veri.
+  process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
+  free.mymemoryEcho = true;
+  free.googleEcho = true;
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    const { value, lines } = await captureLog(async () => {
+      const out = await it();
+      logCascadeSummary();
+      return out;
+    });
+    assert.equal(value, '');
+    assert.equal(calls.length, 0);
+    assert.ok(lines.some((l) => /Codex Luna Max \(last\): \d+ texts not sent/.test(l)), lines.join('\n'));
+  } finally {
+    free.mymemoryEcho = false;
+    free.googleEcho = false;
+    delete process.env.FREE_TRANSLATE_CODEX_TIER;
+  }
+});
+
+test('FREE_TRANSLATE_CODEX_TIER=last: l\'eco di un\'istanza in gara (Lingva) conta come motore', async () => {
+  // Le istanze in gara hanno un outcome proprio: senza il set condiviso
+  // Lingva non entrava fra i motori e Codex partiva lo stesso.
+  process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
+  free.lingvaEcho = true;
+  free.mymemoryEcho = true;
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    const lingvaBefore = getCascadeStats().tierPassthroughs.lingva || 0;
+    assert.equal(await it(), '');
+    assert.ok((getCascadeStats().tierPassthroughs.lingva || 0) - lingvaBefore >= 1);
+    assert.equal(calls.length, 0);
+  } finally {
+    free.lingvaEcho = false;
+    free.mymemoryEcho = false;
+    delete process.env.FREE_TRANSLATE_CODEX_TIER;
+  }
+});
+
+test('FREE_TRANSLATE_CODEX_TIER=last: gli echi di UN solo motore (endpoint e tentativi) non bastano a saltare Codex', async () => {
+  // Google gratuito prova due endpoint e tre tentativi: sono piu' echi dello
+  // stesso motore, non due motori che concordano.
+  process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
+  free.googleEcho = true;
+  free.mymemoryDown = true;
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    const googleEchoesBefore = getCascadeStats().tierPassthroughs.google || 0;
+    assert.equal(await it(), `CODEX ${EN}`);
+    assert.ok((getCascadeStats().tierPassthroughs.google || 0) - googleEchoesBefore >= 2);
+    assert.equal(calls.length, 1);
+  } finally {
+    free.googleEcho = false;
+    free.mymemoryDown = false;
     delete process.env.FREE_TRANSLATE_CODEX_TIER;
   }
 });

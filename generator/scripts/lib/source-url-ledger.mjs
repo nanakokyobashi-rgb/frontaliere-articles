@@ -65,6 +65,8 @@
  * ragione di `cross-section-dedup.mjs`.
  */
 
+import { createHash } from 'node:crypto';
+
 // ── La CHIAVE del ledger ─────────────────────────────────────────────────────
 //
 // ## Il difetto che chiude
@@ -138,6 +140,240 @@
 // a valle: senza il ponte, per la durata della transizione la stessa fonte
 // potrebbe produrre un articolo in entrambe le sezioni.
 
+// ── L'identita' dell'ITEM, quando l'URL non basta ───────────────────────────
+//
+// ## Il difetto che chiude (P5b)
+//
+// Ogni chiave qui sotto assume che un URL sia UN documento. Alcune testate
+// hanno pagine-contenitore a URL fisso il cui contenuto e' la notizia del
+// momento: il feed le riemette con lo stesso `<link>` (e lo stesso `<guid>`,
+// che e' il permalink) e un titolo diverso a ogni aggiornamento.
+//
+// MISURATO il 2026-10-05 sui feed di suedostschweiz.ch (canton-gr, canton-gl):
+//
+//   /graubuenden/verkehrsticker-1574112          «Nach Unfall zwischen Flims und Trin: Verkehr fliesst wieder»
+//   /graubuenden/kurzvermeldet-2-1413736         «Schluein vs. Sana Surselva: …»
+//   /graubuenden/bonaduz-feuerwehr-loescht-brand-auf-dach-mit-photovoltaikanlage-1413717
+//                                                «Deshalb war die Strasse gesperrt: Anhänger von Lastwagen …»
+//   /glarus/meldungen-aus-dem-glarnerland-1916134 «Bye bye Billettschalter: SBB schliessen Reisezentrum …»
+//
+// e sul feed Tamedia di bazonline (canton-basilea): tre «Ticker» permanenti
+// (`/ticker-ukraine-russland-krieg-moskau-kyjiw-34-…`) il cui titolo e'
+// l'ultima notizia. L'ultimo esempio di suedostschweiz dice perche' non basta
+// riconoscere la parola «ticker» nello slug: il contenitore e' nato come
+// articolo sull'incendio di Bonaduz e oggi porta un incidente stradale.
+//
+// Con la chiave sul solo URL: generato UN articolo da un contenitore, ogni
+// notizia successiva a quell'indirizzo e' «URL gia' usata»; un abort di
+// REGOLA #0 su una notizia blocca le successive per 48 h; e il ramo fuzzy
+// confronta con gli id esistenti uno slug che non descrive piu' la notizia.
+//
+// ## La forma: l'identita' viaggia NELL'URL, come frammento
+//
+// Lo scanner (`canton-news-sources.mjs`, quirk `urlReusedForDifferentStories`
+// del profilo) aggiunge all'URL `#ft-item=<impronta di titolo e giornata>`. Il frammento
+// non arriva mai al server, quindi l'URL resta scaricabile cosi' com'e'; e
+// poiche' ogni consumatore di create-article.mjs (ledger, memo del topic-gate,
+// dedup del pool) passa da `newsUrlKey`, basta che la chiave lo conservi
+// perche' TUTTI distinguano due notizie allo stesso indirizzo — senza far
+// passare un secondo campo per ognuno di quei punti. Ogni altro frammento
+// continua a essere ignorato: per gli URL senza `#ft-item=` la chiave non
+// cambia di un byte.
+//
+// Il costo dichiarato: un titolo ritoccato dalla redazione, o una voce
+// ripubblicata un altro giorno, cambia l'impronta, e la stessa notizia puo'
+// ripassare dal ledger. E' un duplicato che PASSA, e
+// sotto ci sono `preFlightHeadlineCheck`, `checkForDuplicates` e
+// `checkSemanticNearDuplicate`; il collasso di notizie diverse sulla stessa
+// chiave, invece, non ha niente sotto. Stessa asimmetria della denylist qui
+// sotto.
+
+/** Nome del frammento che porta l'identita' dell'item (`#ft-item=<impronta>`). */
+export const ITEM_IDENTITY_FRAGMENT = 'ft-item';
+
+const ITEM_IDENTITY_RE = new RegExp(`^#${ITEM_IDENTITY_FRAGMENT}=([0-9a-f]{12})$`);
+
+/** Entita' HTML con nome che valgono un carattere preciso (le altre, vedi sotto). */
+const NAMED_CHAR_ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', szlig: 'ß', aelig: 'æ', oelig: 'œ', oslash: 'ø' };
+
+/**
+ * Il testo di un titolo ridotto a cio' che lo identifica: entita' HTML
+ * decodificate, accenti e maiuscole tolti, punteggiatura resa spazio.
+ *
+ * Le entita' si DECODIFICANO prima di normalizzare, non si buttano: lo stesso
+ * titolo arriva come `Caf&eacute;`, `Caf&#233;` o `Café` secondo come la fonte
+ * serializza quel giorno (o da quale dei suoi feed lo si legge), e tre
+ * impronte per un titolo sono tre passaggi dal ledger. Le lettere accentate
+ * con nome (`&eacute;`, `&uuml;`, `&ccedil;`…) valgono la lettera base, che e'
+ * cio' che NFKD + rimozione dei diacritici lascia del carattere vero; ogni
+ * altra entita' con nome e' punteggiatura (`&laquo;`, `&ndash;`, `&hellip;`).
+ */
+function normalizeItemText(text) {
+  return String(text ?? '')
+    .replace(/&#(x[0-9a-f]+|\d+);/gi, (m, code) => {
+      const n = code[0] === 'x' || code[0] === 'X' ? parseInt(code.slice(1), 16) : parseInt(code, 10);
+      return Number.isInteger(n) && n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : ' ';
+    })
+    .replace(/&([a-z])(?:acute|grave|circ|uml|tilde|cedil|ring|caron);/gi, '$1')
+    .replace(/&([a-z]+\d*);/gi, (m, name) => NAMED_CHAR_ENTITIES[name.toLowerCase()] ?? ' ')
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
+/**
+ * Impronta stabile di cio' che distingue l'item: il titolo e, dove la fonte la
+ * da', la GIORNATA di pubblicazione (UTC). Maiuscole, accenti, punteggiatura e
+ * forma delle entita' HTML non contano: «Verkehr fliesst wieder!» e «verkehr
+ * fliesst wieder» sono lo stesso item.
+ *
+ * Perche' anche la giornata: un contenitore ripete i titoli («Julierpass
+ * gesperrt» oggi e fra tre giorni sono due notizie), e col solo titolo la
+ * seconda resterebbe «gia' usata» fino alla scadenza del ledger. Perche' la
+ * giornata e non l'istante: la stessa voce letta dal feed e dalla news sitemap
+ * della testata deve avere UNA chiave (misurato su suedostschweiz.ch il
+ * 2026-10-05: `pubDate` e `news:publication_date` coincidono al secondo, ma
+ * l'invariante non deve dipendere dal secondo), e una voce che resta nel feed
+ * per giorni col suo `pubDate` resta se' stessa.
+ *
+ * @param {string} text il titolo dato dalla fonte
+ * @param {Date | null} [date] la data di pubblicazione, se c'e'
+ * @returns {string | null} 12 cifre esadecimali, o null se non resta testo
+ */
+export function itemIdentityToken(text, date = null) {
+  const normalized = normalizeItemText(text);
+  if (!normalized) return null;
+  const day = date instanceof Date && !Number.isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : '';
+  return createHash('sha1').update(day ? `${normalized}\n${day}` : normalized).digest('hex').slice(0, 12);
+}
+
+/** Quota minima delle parole del titolo che la pagina deve portare (vedi sotto). */
+export const ITEM_ON_PAGE_MIN_SHARE = 0.6;
+
+/**
+ * Il testo porta le parole distintive (almeno 4 lettere) di questo titolo?
+ * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
+ * lettera. Un titolo senza parole distintive non si puo' verificare e non
+ * passa.
+ *
+ * @param {string} text
+ * @param {string} headline
+ * @returns {boolean}
+ */
+export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SHARE } = {}) {
+  const words = [...new Set(normalizeItemText(headline).split(' ').filter((w) => w.length >= 4))];
+  if (words.length === 0) return false;
+  const page = new Set(normalizeItemText(text).split(' '));
+  const found = words.filter((w) => page.has(w)).length;
+  return found / words.length >= minShare;
+}
+
+/**
+ * L'HTML con i nodi INATTIVI resi spazi, a pari lunghezza (gli indici restano
+ * quelli del documento): commenti, `<script>`, `<style>`, `<template>`. Li'
+ * dentro un `<a>`, un `<nav>` o un `<h1>` non sono markup della pagina — un
+ * menu in un template, un titolo vecchio in un commento — e chi cerca link o
+ * titoli nel sorgente non deve trovarli.
+ *
+ * @param {string} html
+ * @returns {string}
+ */
+export function maskInactiveMarkup(html) {
+  return String(html || '').replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, (m) => ' '.repeat(m.length));
+}
+
+/**
+ * I titoli che una pagina dichiara di se': `og:title`, `twitter:title`,
+ * `<title>` e gli `<h1>`. Servono alla verifica qui sotto perche' il testo che
+ * `extractArticleText` estrae e' il CORPO (`articleBody`, i paragrafi di
+ * `<article>`/`<main>`), senza l'`h1`: un articolo che non ripete nel corpo le
+ * parole del proprio titolo verrebbe scartato pur essendo l'item giusto.
+ *
+ * @param {string} html
+ * @returns {string} i titoli, uno per riga ('' se non ce n'e')
+ */
+export function pageTitleEvidence(html) {
+  // Solo markup attivo: un `<h1>` o un `<title>` dentro un commento, uno
+  // script o un template puo' essere il titolo di un'altra notizia.
+  const src = maskInactiveMarkup(html);
+  const out = [];
+  for (const m of src.matchAll(/<meta\b[^>]*>/gi)) {
+    const tag = m[0];
+    if (!/\b(?:property|name)\s*=\s*["']?(?:og:title|twitter:title)["'\s>]/i.test(tag)) continue;
+    const content = /\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i.exec(tag);
+    if (content) out.push(content[1] ?? content[2] ?? '');
+  }
+  for (const m of src.matchAll(/<(title|h1)\b[^>]*>([\s\S]*?)<\/\1\s*>/gi)) out.push(m[2].replace(/<[^>]+>/g, ' '));
+  return out.map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean).join('\n');
+}
+
+/**
+ * La pagina scaricata e' ancora QUESTO item? La verifica per gli URL riusati,
+ * prima di generare.
+ *
+ * Un URL riusato porta la notizia del momento: fra la lettura del feed e la
+ * generazione, o per una voce che il feed riporta accanto a una piu' recente
+ * allo stesso indirizzo, la pagina puo' essere gia' passata a un'altra
+ * notizia. Generare allora vorrebbe dire il titolo di un aggiornamento con i
+ * fatti di un altro. Misurato il 2026-10-05 su
+ * `/graubuenden/verkehrsticker-1574112`: la pagina dichiara `og:title` «Nach
+ * Unfall zwischen Flims und Trin: Verkehr fliesst wieder» e
+ * `article:published_time` 2026-10-05T10:49:15Z — il titolo e l'istante della
+ * voce del feed — e nessuna delle parole dei titoli di maggio, giugno e agosto.
+ *
+ * Due condizioni, entrambe necessarie:
+ *   1. le parole del titolo stanno nei titoli della pagina o nel suo testo;
+ *   2. se l'item e la pagina dichiarano entrambi una data, e' la stessa
+ *      giornata (UTC): l'identita' dell'item comprende la giornata, e lo
+ *      stesso titolo riemesso un altro giorno e' un'altra notizia. Dove la
+ *      pagina non dichiara una data il confronto non si puo' fare e decide la
+ *      sola condizione 1.
+ * Senza titoli ne' testo (pagina non scaricata) non si e' verificato niente:
+ * la risposta e' no.
+ *
+ * @param {{ title?: string, text?: string, publishedAt?: string | Date | null }} page
+ * @param {{ headline?: string, date?: string | Date | null }} item
+ * @returns {{ ok: boolean, reason: 'ok' | 'no-page' | 'title-not-on-page' | 'other-day' }}
+ */
+export function checkItemOnPage(page, item) {
+  const evidence = `${page?.title || ''}\n${page?.text || ''}`;
+  if (!evidence.trim()) return { ok: false, reason: 'no-page' };
+  if (!pageCarriesItem(evidence, item?.headline || '')) return { ok: false, reason: 'title-not-on-page' };
+  const dayOf = (raw) => {
+    if (!raw) return '';
+    const d = raw instanceof Date ? raw : new Date(raw);
+    return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+  };
+  const itemDay = dayOf(item?.date);
+  const pageDay = dayOf(page?.publishedAt);
+  if (itemDay && pageDay && itemDay !== pageDay) return { ok: false, reason: 'other-day' };
+  return { ok: true, reason: 'ok' };
+}
+
+/** L'URL con l'identita' dell'item nel frammento (un frammento gia' presente e' sostituito). */
+export function withItemIdentity(rawUrl, token) {
+  const raw = String(rawUrl ?? '');
+  if (!token) return raw;
+  const at = raw.indexOf('#');
+  return `${at === -1 ? raw : raw.slice(0, at)}#${ITEM_IDENTITY_FRAGMENT}=${token}`;
+}
+
+/** L'impronta dell'item portata dall'URL, o null. */
+export function itemIdentityOf(rawUrl) {
+  const raw = String(rawUrl ?? '');
+  const at = raw.indexOf('#');
+  if (at === -1) return null;
+  return ITEM_IDENTITY_RE.exec(raw.slice(at))?.[1] ?? null;
+}
+
+/** L'URL senza l'identita' dell'item: l'indirizzo da citare e da mostrare. */
+export function stripItemIdentity(rawUrl) {
+  const raw = String(rawUrl ?? '');
+  return itemIdentityOf(raw) ? raw.slice(0, raw.indexOf('#')) : raw;
+}
+
 /** La forma di chiave che questo modulo scrive: path + query identificante. */
 export const SOURCE_URL_KEY_FORM = 2;
 
@@ -189,7 +425,9 @@ export function legacyNewsUrlKey(rawUrl) {
  * documento, ordinati, con i marcatori di tracciamento tolti.
  *
  * Proprietà su cui si appoggia la compatibilità: se dopo il filtro non resta
- * nessun parametro, il risultato è **identico** a `legacyNewsUrlKey`.
+ * nessun parametro, e l'URL non porta l'identità di un item (`#ft-item=…`,
+ * vedi sopra), il risultato è **identico** a `legacyNewsUrlKey`. Con
+ * l'identità dell'item la chiave la porta in coda, in entrambi i casi.
  *
  * Il NOME del parametro viene minuscolizzato (uil.it emette lo stesso feed con
  * `ID_News` e `ID_NEWS`: sono lo stesso documento), il VALORE no — un id può
@@ -216,7 +454,11 @@ export function newsUrlKey(rawUrl) {
     if (!v) continue;
     parts.push([name.toLowerCase(), v]);
   }
-  if (parts.length === 0) return base;
+  // L'identita' dell'item (`#ft-item=…`), dove lo scanner l'ha messa: vedi il
+  // blocco «L'identita' dell'ITEM» sopra. Nessun altro frammento entra in chiave.
+  const item = itemIdentityOf(raw);
+  const suffix = item ? `#${ITEM_IDENTITY_FRAGMENT}=${item}` : '';
+  if (parts.length === 0) return `${base}${suffix}`;
   parts.sort((a, b) => (a[0] === b[0] ? (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0) : a[0] < b[0] ? -1 : 1));
   // Il taglio a MAX_KEY_PARAMS è su una lista GIÀ ordinata, quindi è
   // deterministico: due volte lo stesso URL danno due volte la stessa chiave.
@@ -224,7 +466,7 @@ export function newsUrlKey(rawUrl) {
   // visto nel reale (massimo misurato: 4) e, se capitasse, cadrebbe negli
   // strati di dedup a valle.
   const query = parts.slice(0, MAX_KEY_PARAMS).map(([n, v]) => `${n}=${v}`).join('&');
-  return `${base}?${query}`;
+  return `${base}?${query}${suffix}`;
 }
 
 /**

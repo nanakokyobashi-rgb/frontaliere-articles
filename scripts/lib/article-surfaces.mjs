@@ -26,9 +26,11 @@ import {
 } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ledgerArticleId } from '../../generator/scripts/lib/source-url-ledger.mjs';
+import { cantonSectionConfig, cantonSectionPaths } from '../../generator/scripts/lib/canton-section-profile.mjs';
+import { hubFilePaths } from '../../generator/scripts/lib/canton-hubs/paths.mjs';
 import { mentionsId } from './mentions-id.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
@@ -200,10 +202,29 @@ function canonicalSurfaces(core) {
   };
 }
 
-/** Descrittori per sezione: le superfici su cui `create-article.mjs` scrive. */
-export const SECTIONS = {
+/**
+ * Le superfici di SCRITTURA che il core non porta, per tipo di sezione: sono
+ * i target di `create-article.mjs` (`ARTICLE_SECTION_CONFIGS`) e il legame e'
+ * provato da `generator/tests/rebase-onto-remote.test.mjs`, che deriva i suoi
+ * attesi da create-article e li cerca negli argomenti di rebase prodotti da qui.
+ *
+ * Il tipo `canton` e' una FUNZIONE della sezione: ogni cantone scrive in file
+ * suoi (D18), e i path li decide create-article tramite
+ * `generator/scripts/lib/canton-section-profile.mjs` (P6b), la stessa sorgente
+ * delle sue voci di ARTICLE_SECTION_CONFIGS. Oltre a ledger, quote, sidecar e
+ * chunk SEO, una sezione cantonale ha il suo stato globale partizionato:
+ * `stateBookkeeping` (cache riscritte per intero: prendi upstream) e
+ * `stateCounters` (`path:campo`, `--merge-counter`). Le storiche quei file li
+ * condividono e li dichiara il workflow.
+ *
+ * `hubDataFiles` sono i file dati dei 6 hub tematici (P10,
+ * `generate-canton-hubs.mjs`): ognuno e' riscritto PER INTERO dal solo
+ * producer degli hub a partire da dataset e corpus, quindi in un conflitto di
+ * rebase vale la copia upstream (categoria bookkeeping) e il run successivo
+ * lo rigenera.
+ */
+const KIND_WRITE_SURFACES = {
   frontaliere: {
-    ...canonicalSurfaces(ARTICLE_SECTION_CORE.frontaliere),
     fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS',
     // `ALL_BLOG_ARTICLE_IDS` è un array letterale indipendente, non derivato
     // da `BLOG_SLUGS`: rimuovere la riga slug non lo tocca. `routerSwissData.ts`
@@ -217,11 +238,14 @@ export const SECTIONS = {
     idUnionFile: 'content/blogArticleIds.ts',
     seoFiles: null, // scoperti a runtime: content/seo/seo-blog*.ts
     seoGlobPrefix: 'content/seo/seo-blog',
+    // Il chunk SEO in cui create-article APPENDE oggi (`seoFile`): il solo dei
+    // chunk `seo-blog*.ts` che un run concorrente puo' toccare.
+    seoWriteFile: 'content/seo/seo-blog-5.ts',
     sourceLedger: 'data/article-source-urls.json',
+    sourceQuotaFile: 'data/article-source-quotas.json',
     sidecarDir: 'data/blog-articles',
   },
-  svizzera: {
-    ...canonicalSurfaces(ARTICLE_SECTION_CORE.svizzera),
+  national: {
     fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS',
     idListVar: null,
     // `create-article.mjs`: la sezione svizzera NON mantiene la union
@@ -229,10 +253,70 @@ export const SECTIONS = {
     idUnionFile: null,
     seoFiles: ['content/seo/seo-blog-ch.ts'],
     seoGlobPrefix: null,
+    seoWriteFile: 'content/seo/seo-blog-ch.ts',
     sourceLedger: 'data/swiss-article-source-urls.json',
+    sourceQuotaFile: 'data/swiss-article-source-quotas.json',
     sidecarDir: 'data/swiss-articles',
   },
+  canton: (section) => {
+    const p = cantonSectionPaths(section);
+    const seo = corpusPath(p.seoFile);
+    return {
+      fallbackReasonsConstName: cantonSectionConfig(section).fallbackReasonsConstName,
+      // Id liberi come svizzera: `ALL_CANTON_ARTICLE_IDS` e' Object.keys(...).
+      idListVar: null,
+      idUnionFile: null,
+      seoFiles: [seo],
+      seoGlobPrefix: null,
+      seoWriteFile: seo,
+      sourceLedger: p.sourceUrlsFile,
+      sourceQuotaFile: p.sourceQuotaFile,
+      sidecarDir: p.sidecarDir,
+      stateBookkeeping: [p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile],
+      hubDataFiles: hubFilePaths(section),
+      stateCounters: [
+        `${p.quotaStateFile}:runCounter`,
+        `${p.experimentalCounterFile}:count`,
+        `${p.evergreenCounterFile}:count`,
+      ],
+    };
+  },
 };
+
+/**
+ * Descrittori per sezione ATTIVA: le superfici su cui `create-article.mjs`
+ * scrive. Le sezioni vengono da `ARTICLE_SECTION_CORE`, non da un elenco qui.
+ */
+export const SECTIONS = Object.fromEntries(
+  Object.entries(ARTICLE_SECTION_CORE).map(([section, core]) => {
+    const declared = Object.prototype.hasOwnProperty.call(KIND_WRITE_SURFACES, core.kind)
+      ? KIND_WRITE_SURFACES[core.kind]
+      : undefined;
+    const extras = typeof declared === 'function' ? declared(section) : declared;
+    if (!extras) {
+      throw new Error(
+        `article-surfaces: la sezione attiva '${section}' (tipo ${core.kind}) non ha superfici di scrittura ` +
+          'dichiarate (ledger URL→id, quote, sidecar, chunk SEO) in KIND_WRITE_SURFACES. Senza, ritiro, ' +
+          'rebase e dedup fra sezioni non sono verificabili.',
+      );
+    }
+    return [section, { ...canonicalSurfaces(core), ...extras }];
+  }),
+);
+
+/**
+ * Le superfici di scrittura di UNA sezione nota al core, attiva o no: serve
+ * ai test e a chi prepara l'accensione di un cantone (le sezioni inattive non
+ * sono in SECTIONS).
+ *
+ * @param {string} section
+ */
+export function sectionWriteSurfaces(section) {
+  const core = ARTICLE_SECTION_CORE_ALL[section];
+  if (!core) throw new Error(`article-surfaces: sezione sconosciuta '${section}'`);
+  const declared = KIND_WRITE_SURFACES[core.kind];
+  return { ...canonicalSurfaces(core), ...(typeof declared === 'function' ? declared(section) : declared) };
+}
 
 const SOURCE_LEDGER_FILES = new Set(Object.values(SECTIONS).map(({ sourceLedger }) => sourceLedger));
 

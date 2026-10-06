@@ -58,6 +58,7 @@ import {
   collectMeasurements,
   evaluateConditions,
   findDuplicateTopicPairs,
+  formatCantonCommitSummary,
   isDegradedOutcome,
   pairKeyOf,
   parseGenerationCommit,
@@ -186,6 +187,16 @@ describe('parseGenerationCommit — i due esiti che il workflow già distingue',
       parseGenerationCommit('Record rejected topic candidates (svizzera — no article generated)'),
       { kind: 'rejected', section: 'svizzera' },
     );
+  });
+
+  test('riconosce le sezioni cantonali dei chiamanti generate-article-<cantone>.yml', () => {
+    assert.deepEqual(parseGenerationCommit('Generate blog article (canton-ti)'), { kind: 'article', section: 'canton-ti' });
+    assert.deepEqual(
+      parseGenerationCommit('Record rejected topic candidates (canton-appenzello — no article generated)'),
+      { kind: 'rejected', section: 'canton-appenzello' },
+    );
+    // Una sezione ha al piu' UN trattino: una forma piu' lunga non e' un id del core.
+    assert.equal(parseGenerationCommit('Generate blog article (canton-ti-extra)'), null);
   });
 
   test('non aggancia i commit che non sono di generazione', () => {
@@ -606,6 +617,38 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
     });
     assert.equal(m.total, 699);
     assert.equal(m.lastArticleAt, NOW - H);
+  });
+
+  // Le condizioni sono tarate sulla coppia frontaliere/svizzera: un articolo
+  // cantonale non deve ne' tenere spenta `generation-idle` (aggiornando
+  // `lastArticleAt`) ne' entrare in `perSection`. Si conta a parte.
+  test('conta le sezioni cantonali a parte, senza toccare le misure della coppia storica', () => {
+    const iso = (hoursAgo) => new Date(NOW - hoursAgo * H).toISOString();
+    const page = [
+      `${iso(1)}\tGenerate blog article (canton-ti)`,
+      `${iso(2)}\tRecord rejected topic candidates (canton-ti — no article generated)`,
+      `${iso(3)}\tGenerate blog article (canton-gr)`,
+      `${iso(5)}\tGenerate blog article (svizzera)`,
+      `${iso(6)}\tRecord rejected topic candidates (frontaliere — no article generated)`,
+    ].join('\n');
+    const m = collectCommits('owner/repo', 48, {
+      now: () => NOW,
+      resolveHead: () => TEST_MAIN_SHA,
+      fetchPage: () => page,
+    });
+    assert.deepEqual(m.perCanton, {
+      'canton-ti': { articles: 1, rejected: 1, lastArticleAt: NOW - 1 * H },
+      'canton-gr': { articles: 1, rejected: 0, lastArticleAt: NOW - 3 * H },
+    });
+    assert.equal(m.lastArticleAt, NOW - 5 * H, "l'ultimo articolo della coppia storica, non quello del cantone");
+    assert.equal(m.rejected, 1);
+    assert.deepEqual(Object.keys(m.perSection).sort(), [...SECTIONS].sort());
+    assert.equal(m.perSection.svizzera.articles, 1);
+    assert.equal(
+      formatCantonCommitSummary(m.perCanton),
+      `canton-gr articles=1 rejected=0 last=${iso(3)}; canton-ti articles=1 rejected=1 last=${iso(1)}`,
+    );
+    assert.equal(formatCantonCommitSummary({}), null);
   });
 
   test('pinna main una volta sola e passa lo stesso SHA a ogni pagina', () => {

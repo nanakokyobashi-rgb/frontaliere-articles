@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "generatedAt": "2026-10-05T09:44:09.891Z",
+  "sources": [
+    {
+      "id": "ahv-iv-leaflets",
+      "publisher": "Centro d'informazione AVS/AI con l'UFAS",
+      "url": "https://www.ahv-iv.ch/p/3.01.d",
+      "note": "Promemoria 3.01, 2.01, 2.08: URL permanenti, anno dichiarato in copertina"
+    },
+    {
+      "id": "bsv-pillar-3a",
+      "publisher": "Ufficio federale delle assicurazioni sociali (UFAS/BSV)",
+      "url": "https://www.bsv.admin.ch/it/contributi-al-pilastro-3a"
+    },
+    {
+      "id": "bsv-occupational",
+      "publisher": "Ufficio federale delle assicurazioni sociali (UFAS/BSV)",
+      "url": "https://www.bsv.admin.ch/de/altersvorsorge-beruflichen-vorsorge"
+    },
+    {
+      "id": "fedlex-bvg",
+      "publisher": "Raccolta sistematica del diritto federale",
+      "url": "https://www.fedlex.admin.ch/eli/cc/1983/797_797_797/it"
+    },
+    {
+      "id": "ahv-iv-cantonal-funds",
+      "publisher": "Centro d'informazione AVS/AI",
+      "url": "https://www.ahv-iv.ch/de/Kontakte/Kantonale-Ausgleichskassen"
+    },
+    {
+      "id": "estv-capital-tax",
+      "publisher": "Amministrazione federale delle contribuzioni (ESTV/AFC)",
+      "url": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/capital-payment"
+    },
+    {
+      "id": "public-pension-funds",
+      "publisher": "Siti delle casse pensioni cantonali",
+      "url": null,
+      "note": "Lista curata, verificata il 2026-10-05"
+    }
+  ],
+  "federal": {
+    "avs": {
+      "minMonthlyCHF": 1260,
+      "maxMonthlyCHF": 2520,
+      "maxAnnualCHF": 30240,
+      "fullContributionYears": 44,
+      "asOf": 2026,
+      "source": "https://www.ahv-iv.ch/p/3.01.d"
+    },
+    "contributions": {
+      "avsPct": 8.7,
+      "aiPct": 1.4,
+      "apgPct": 0.5,
+      "totalPct": 10.6,
+      "employeePct": 5.3,
+      "asOf": 2026,
+      "source": "https://www.ahv-iv.ch/p/2.01.d"
+    },
+    "unemployment": {
+      "totalPct": 2.2,
+      "employeePct": 1.1,
+      "salaryCapCHF": 148200,
+      "asOf": 2025,
+      "source": "https://www.ahv-iv.ch/p/2.08.d"
+    },
+    "lpp": {
+      "entryThresholdCHF": 22680,
+      "coordinationDeductionCHF": 26460,
+      "minCoordinatedSalaryCHF": 3780,
+      "maxInsuredSalaryCHF": 90720,
+      "minInterestRatePct": 1.25,
+      "minInterestRateSince": 2024,
+      "minConversionRatePct": 6.8,
+      "derivation": "soglie art. 2, 7 e 8 LPP: 3/4, 7/8, 1/8 e 3 volte la rendita AVS massima annua; conversione minima art. 14 cpv. 2 LPP",
+      "source": "https://www.fedlex.admin.ch/eli/cc/1983/797_797_797/it",
+      "interestSource": "https://www.bsv.admin.ch/de/altersvorsorge-beruflichen-vorsorge"
+    },
+    "pillar3a": {
+      "maxWithLppCHF": 7258,
+      "maxWithoutLppCHF": 36288,
+      "derivation": "art. 7 cpv. 1 OPP3: 8% e 40% del limite superiore LPP",
+      "source": "https://www.bsv.admin.ch/it/contributi-al-pilastro-3a"
+    }
+  },
+  "capitalWithdrawalTax": {
+    "scenario": "Uomo solo senza figli, prelievo a 65 anni, nessuna confessione, residente nel capoluogo cantonale: imposta totale (federale + cantonale + comunale) in CHF sul capitale di previdenza prelevato",
+    "amountsCHF": [
+      100000,
+      250000,
+      500000
+    ],
+    "year": 2026
+  },
+  "publicPensionFundsVerifiedAt": "2026-10-05",
+  "cantons": {
+    "AG": {
+      "compensationFund": {
+        "name": "SVA Aargau",
+        "url": "https://www.sva-ag.ch"
+      }
+    },
+    "AI": {
+      "compensationFund": {
+        "name": "Ausgleichskasse Appenzell Innerrhoden",
+        "url": "https://www.akai.ch"
+      }
+    },
+    "AR": {
+      "compensationFund": {
+        "name": "Sozialversicherungen Appenzell Ausserrhoden",
+        "url": "https://www.sovar.ch"
+      }
+    },
+    "BE": {
+      "compensationFund": {
+        "name": "Ausgleichskasse des Kantons Bern",
+        "url": "https://www.akbern.ch"
+      }
+    },
+    "BL": {
+      "compensationFund": {
+        "name": "SVA Basel-Landschaft",
+        "url": "https://www.sva-bl.ch"
+      }
+    },
+    "BS": {
+      "compensationFund": {
+        "name": "Ausgleichskasse Basel-Stadt",
+        "url": "https://www.ak-bs.ch"
+      }
+    },
+    "FR": {
+      "compensationFund": {
+        "name": "Ausgleichskasse des Kantons Freiburg",
+        "url": "https://www.ksvafr.ch"
+      }
+    },
+    "GE": {
+      "compensationFund": {
+        "name": "Office cantonal des assurances sociales",
+        "url": "https://www.ocas.ch"
+      },
+      "publicPensionFund": {
+        "name": "Caisse de prévoyance de l'Etat de Genève (CPEG)",
+        "url": "https://www.cpeg.ch/"
+      },
+      "capitalWithdrawalTax": {
+        "municipality": "Genève",
+        "bfsId": 6621,
+        "taxCHF": [
+          4125,
+          15551,
+          37051
+        ]
+      }
+    },
+    "GL": {
+      "compensationFund": {
+        "name": "sozialversicherungen glarus",
+        "url": "https://www.svgl.ch"
+      }
+    },
+    "GR": {
+      "compensationFund": {
+        "name": "Sozialversicherungsanstalt des Kantons Graubünden",
+        "url": "https://www.sva.gr.ch"
+      },
+      "publicPensionFund": {
+        "name": "Pensionskasse Graubünden (PKGR)",
+        "url": "https://www.pkgr.ch/"
+      },
+      "capitalWithdrawalTax": {
+        "municipality": "Chur",
+        "bfsId": 3901,
+        "taxCHF": [
+          3237,
+          10651,
+          28501
+        ]
+      }
+    },
+    "JU": {
+      "compensationFund": {
+        "name": "Etablissement cantonal des assurances sociales",
+        "url": "https://www.ecasjura.ch"
+      }
+    },
+    "LU": {
+      "compensationFund": {
+        "name": "WAS Ausgleichskasse Luzern",
+        "url": "https://www.was-luzern.ch"
+      }
+    },
+    "NE": {
+      "compensationFund": {
+        "name": "Ausgleichskasse des Kantons Neuenburg",
+        "url": "https://www.caisseavsne.ch/de"
+      }
+    },
+    "NW": {
+      "compensationFund": {
+        "name": "Ausgleichskasse Nidwalden",
+        "url": "https://www.aknw.ch"
+      }
+    },
+    "OW": {
+      "compensationFund": {
+        "name": "Ausgleichskasse IV-Stelle Obwalden",
+        "url": "https://www.akow.ch"
+      }
+    },
+    "SG": {
+      "compensationFund": {
+        "name": "SVA St.Gallen",
+        "url": "https://www.svasg.ch"
+      }
+    },
+    "SH": {
+      "compensationFund": {
+        "name": "SVA Schaffhausen",
+        "url": "https://www.svash.ch"
+      }
+    },
+    "SO": {
+      "compensationFund": {
+        "name": "Ausgleichskasse des Kantons Solothurn",
+        "url": "https://www.akso.ch"
+      }
+    },
+    "SZ": {
+      "compensationFund": {
+        "name": "SVA Schwyz",
+        "url": "https://www.sva-sz.ch"
+      }
+    },
+    "TG": {
+      "compensationFund": {
+        "name": "Sozialversicherungszentrum Thurgau",
+        "url": "https://www.svztg.ch"
+      }
+    },
+    "TI": {
+      "compensationFund": {
+        "name": "Istituto delle assicurazioni sociali",
+        "url": "https://www4.ti.ch/dss/ias"
+      },
+      "publicPensionFund": {
+        "name": "Istituto di previdenza del Cantone Ticino (IPCT)",
+        "url": "https://www.ipct.ch/"
+      },
+      "capitalWithdrawalTax": {
+        "municipality": "Bellinzona",
+        "bfsId": 5002,
+        "taxCHF": [
+          4397,
+          13551,
+          35342
+        ]
+      }
+    },
+    "UR": {
+      "compensationFund": {
+        "name": "Sozialversicherungsstelle Uri",
+        "url": "https://www.svsuri.ch"
+      }
+    },
+    "VD": {
+      "compensationFund": {
+        "name": "Caisse cantonale vaudoise de compensation",
+        "url": "https://www.caisseavsvaud.ch"
+      }
+    },
+    "VS": {
+      "compensationFund": {
+        "name": "Ausgleichskasse des Kantons Wallis",
+        "url": "https://www.avs.vs.ch"
+      },
+      "publicPensionFund": {
+        "name": "Caisse de prévoyance du Canton du Valais (CPVAL)",
+        "url": "https://cpval.ch/"
+      },
+      "capitalWithdrawalTax": {
+        "municipality": "Sion",
+        "bfsId": 6266,
+        "taxCHF": [
+          4737,
+          15335,
+          43921
+        ]
+      }
+    },
+    "ZG": {
+      "compensationFund": {
+        "name": "Ausgleichskasse Zug",
+        "url": "https://www.akzug.ch"
+      }
+    },
+    "ZH": {
+      "compensationFund": {
+        "name": "SVA Zürich",
+        "url": "https://www.svazurich.ch"
+      },
+      "publicPensionFund": {
+        "name": "BVK Personalvorsorge des Kantons Zürich",
+        "url": "https://bvk.ch/de/"
+      },
+      "capitalWithdrawalTax": {
+        "municipality": "Zürich",
+        "bfsId": 261,
+        "taxCHF": [
+          4817,
+          14601,
+          35068
+        ]
+      }
+    }
+  }
+}

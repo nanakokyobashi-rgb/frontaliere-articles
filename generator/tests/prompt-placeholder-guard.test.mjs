@@ -37,6 +37,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 import {
   SCHEMA_PLACEHOLDER_LITERALS,
   HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS,
@@ -56,6 +57,8 @@ import {
 } from '../scripts/lib/prompt-placeholder-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+/** Le cartelle dei corpi sotto `content/`, una per sezione ATTIVA del core. */
+const BODY_ROOT_DIRS = CORPUS_SECTIONS.map((section) => path.basename(section.bodyDir));
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
 const createArticleSrc = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
 
@@ -1232,7 +1235,8 @@ describe('gate — METADATI pubblicati (title/excerpt/imageAlt)', () => {
 });
 
 describe('gate — CORPI e FAQ pubblicati (body1..N, faq)', () => {
-  const files = [...walk(path.join(ROOT, 'content', 'blog-body')), ...walk(path.join(ROOT, 'content', 'blog-body-ch'))];
+  // Le radici dei corpi vengono dal core (sezioni attive), non da una coppia scritta a mano.
+  const files = BODY_ROOT_DIRS.flatMap((radice) => [...walk(path.join(ROOT, 'content', radice))]);
 
   it('trova piu\' di 10.000 file body (idem)', () => {
     assert.ok(files.length > 10000, `trovati solo ${files.length} file body`);
@@ -1292,7 +1296,7 @@ describe('gate — CORPI e FAQ pubblicati (body1..N, faq)', () => {
 // difetto arriva come rosso di TUTTE le PR, qui come una lista di file.
 describe('gate — nessuna FAQ orfana: en/de/fr non possono avere una faq che `it` non ha', () => {
   const LOCALI = ['it', 'en', 'de', 'fr'];
-  const RADICI = ['blog-body', 'blog-body-ch'];
+  const RADICI = BODY_ROOT_DIRS;
   // Ancorata all'id del filename, non alla prima chiave `.faq` del file: stesso
   // anti-pattern gia' corretto in `faqQuestionsInBodyText` per #289 — senza
   // l'ancora una `.faq` di un id estraneo verrebbe attribuita a `id`.

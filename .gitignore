@@ -9,6 +9,8 @@ generator/data/fuel-prices-cantons.json
 # Cache dei dataset di categoria letti dal sito via HTTP (D11/P9f-g): dati di un altro repo.
 generator/data/canton-notices.json
 generator/data/canton-services.json
+generator/data/canton-tax.json
+generator/data/pension-parameters.json
 
 # Responsive 480w WebP thumbnails: the .webp outputs are COMMITTED (git is the
 # cache, see scripts/generate-image-thumbnails.mjs). The SHA manifest stays

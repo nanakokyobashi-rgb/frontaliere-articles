@@ -1,34 +1,4 @@
 {
-  "https://www.rsi.ch/s/4054323": {
-    "articleId": "sondaggio-ssr-votazioni-27-settembre",
-    "ts": "2026-09-04T08:34:04.899Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1947992/economia-svizzera-in-accelerazione-e-una-buona-notizia-anche-per-i-frontalieri": {
-    "articleId": "economia-svizzera-accelerazione-frontalieri",
-    "ts": "2026-09-04T09:08:24.755Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1948009/svizzera-patate-perdite-latte-canicola": {
-    "articleId": "latte-patate-cari-canicola-svizzera",
-    "ts": "2026-09-04T09:34:40.121Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4059840": {
-    "articleId": "cpe-s-voto-bilaterali-iii",
-    "ts": "2026-09-04T10:00:29.673Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/prezzo-olio-da-riscaldamento-alle-stelle%2c-colpa-di-usa-e-iran/92006003": {
-    "articleId": "prezzo-olio-riscaldamento-alle-stelle-usa-iran",
-    "ts": "2026-09-04T11:51:32.624Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1948018/la-sicurezza-informatica-al-centro-non-possiamo-limitarci-a-costruire-muri-sempre-piu-alti": {
-    "articleId": "sicurezza-informatica-cyber-security-day-ated",
-    "ts": "2026-09-04T12:08:12.075Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948052/volkswagen-fornitori-conseguenze-volumi-industria": {
     "articleId": "volkswagen-fornitori-svizzeri",
     "ts": "2026-09-04T12:27:39.823Z",
@@ -685,8 +655,8 @@
     "keyForm": 2
   },
   "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
-    "articleId": "neutralita-voto-rigetto",
-    "ts": "2026-10-01T03:36:22.022Z",
+    "articleId": "neutralita-svizzera-voto-costituzione",
+    "ts": "2026-10-06T04:01:17.948Z",
     "keyForm": 2
   },
   "https://www.tio.ch/svizzera/politica/1949060/federale-essere-amherd-consiglio-prescrizione-consigliera-viola-chiede-acquisto-f-35": {
@@ -2497,6 +2467,36 @@
   "https://www.admin.ch/it/newnsb/6ck3kzvxbnq4": {
     "articleId": "deduzioni-3a-2027",
     "ts": "2026-10-05T15:21:39.951Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4133730": {
+    "articleId": "greggio-export-pre-guerra",
+    "ts": "2026-10-05T23:22:17.175Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1954843/svizzera-difesa-vbs-ritardo-fornitura-missili": {
+    "articleId": "svizzera-patriot-bodluv-iva-attesa",
+    "ts": "2026-10-05T23:53:48.339Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/air-baltic%2c-partner-di-swiss%2c-taglia-fino-a-700-posti-di-lavoro/92168766": {
+    "articleId": "air-baltic-tagli-swiss",
+    "ts": "2026-10-06T01:43:45.733Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
+    "articleId": "tamedia-cancella-34-posti-lavoro",
+    "ts": "2026-10-06T03:24:07.811Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954949/svizzera-prezzi-case-appartamenti-settembre": {
+    "articleId": "prezzi-immobili-settembre-regioni",
+    "ts": "2026-10-06T06:36:57.429Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1954785/non-paga-la-cassa-malati-da-due-anni-ora-finisce-davanti-al-pretore": {
+    "articleId": "ostinelli-cassa-malati-udienza-pretore",
+    "ts": "2026-10-06T07:13:38.028Z",
     "keyForm": 2
   }
 }

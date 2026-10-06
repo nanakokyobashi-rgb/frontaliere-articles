@@ -99508,6 +99508,550 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hotel-collina-oro-licenziamenti': {
+    title: 'Ticino, villa principe leopoldo: 76 licenziamenti',
+    description: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude per mesi: il progetto di Dot Life vale 12 milioni e prevede 76 licenziamenti su 81 dipendenti attuali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, villa, principe, leopoldo, licenziamenti',
+    ogTitle: 'Ticino, Villa Principe Leopoldo: 76 licenziamenti',
+    ogDescription: 'La struttura di Collina d\'Oro si prepara a una chiusura temporanea. Il piano della proprietaria Dot Life SA prevede lavori da 12 milioni, 76 tagli su 81 dipendenti e una riassunzione futura non garantita per tutti.',
+    canonicalPath: '/articoli-frontaliere/hotel-collina-oro-licenziamenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino, villa principe leopoldo: 76 licenziamenti",
+      "description": "L'Hotel Villa Principe Leopoldo di Collina d'Oro chiude per mesi: il progetto di Dot Life vale 12 milioni e prevede 76 licenziamenti su 81 dipendenti attuali.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/hotel-collina-oro-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro, nel Canton Ticino"
+      },
+      "datePublished": "2026-10-05T15:51:02+00:00",
+      "dateModified": "2026-10-05T15:51:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hotel-collina-oro-licenziamenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hotel-ticino-76-licenziamenti': {
+    title: 'Hotel in Ticino: chiude e licenzia 76 dipendenti',
+    description: 'L\'Hotel Villa Principe Leopoldo di Collina d\'Oro chiude per mesi: Dot Life investe 12 milioni di franchi e annuncia 76 licenziamenti su 81 dipendenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, hotel, chiude, licenzia, dipendenti',
+    ogTitle: 'Hotel in Ticino: chiude e licenzia 76 dipendenti',
+    ogDescription: 'A Collina d\'Oro il progetto da 12 milioni di franchi dell\'Hotel Villa Principe Leopoldo comporta 76 licenziamenti su 81 dipendenti. La chiusura durerà diversi mesi e la riassunzione di tutti non è garantita. La fine dei cantieri è prevista il 1°',
+    canonicalPath: '/articoli-frontaliere/hotel-ticino-76-licenziamenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hotel in Ticino: chiude e licenzia 76 dipendenti",
+      "description": "L'Hotel Villa Principe Leopoldo di Collina d'Oro chiude per mesi: Dot Life investe 12 milioni di franchi e annuncia 76 licenziamenti su 81 dipendenti",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/hotel-ticino-76-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Hotel Villa Principe Leopoldo a Collina d'Oro, nel Canton Ticino"
+      },
+      "datePublished": "2026-10-05T16:27:36+00:00",
+      "dateModified": "2026-10-05T16:27:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hotel-ticino-76-licenziamenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-gallerie-castelletto-sesto-calende': {
+    title: 'Gallerie: due notti chiuso Castelletto-Sesto Calende',
+    description: 'Manutenzione alle gallerie dell\'autostrada: chiuso per due notti il tratto tra Castelletto e Sesto Calende. Stop anche a Castronno-Cavaria e Solbiate-Varese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallerie, notti, chiuso, castelletto-sesto',
+    ogTitle: 'Castelletto-Sesto Calende chiuso per due notti',
+    ogDescription: 'Due notti di chiusura per manutenzione alle gallerie tra Castelletto e Sesto Calende. La notizia segnala anche i tratti Castronno-Cavaria e Solbiate-Varese: ecco i soli dati disponibili per chi attraversa la zona.',
+    canonicalPath: '/articoli-frontaliere/gallerie-castelletto-sesto-calende/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gallerie: due notti chiuso Castelletto-Sesto Calende",
+      "description": "Manutenzione alle gallerie dell'autostrada: chiuso per due notti il tratto tra Castelletto e Sesto Calende. Stop anche a Castronno-Cavaria e Solbiate-Varese.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/gallerie-castelletto-sesto-calende.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autostrada con gallerie nell'area di Varese"
+      },
+      "datePublished": "2026-10-05T16:57:29+00:00",
+      "dateModified": "2026-10-05T16:57:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gallerie-castelletto-sesto-calende/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-analisi-salario-prestazioni': {
+    title: 'Ticino: mozione Avanti su salario e prestazioni',
+    description: 'Il Gran Consiglio ticinese approva il rapporto di Speziali (Plr): analisi e simulazioni sull\'impatto tra più salario e meno prestazioni per chi lavora',
+    keywords: 'frontalieri, ticino, svizzera, italia, mozione, avanti, salario, prestazioni',
+    ogTitle: 'Ticino: mozione Avanti su salario e prestazioni',
+    ogDescription: 'Il via libera del Gran Consiglio riguarda il rapporto di Speziali (Plr). La mozione di Avanti porta al centro analisi e simulazioni sul rapporto tra un salario più alto e prestazioni ridotte, senza importi o scadenze indicati.',
+    canonicalPath: '/articoli-frontaliere/analisi-salario-prestazioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino: mozione Avanti su salario e prestazioni",
+      "description": "Il Gran Consiglio ticinese approva il rapporto di Speziali (Plr): analisi e simulazioni sull'impatto tra più salario e meno prestazioni per chi lavora",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/analisi-salario-prestazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio istituzionale in Ticino"
+      },
+      "datePublished": "2026-10-05T18:09:49+00:00",
+      "dateModified": "2026-10-05T18:09:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/analisi-salario-prestazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-investimenti-viabilita-lariana-como': {
+    title: 'Lariana: 8,4 milioni per sicurezza e viabilità',
+    description: 'Provincia di Como investe sulla S.P. 583 Lariana: barriere salvamotociclisti, nuovi marciapiedi e rifacimento piani viabili. Scopri i dettagli e i cantieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lariana, milioni, sicurezza, viabilità',
+    ogTitle: 'Lariana: 8,4 milioni per sicurezza e viabilità',
+    ogDescription: 'La Provincia di Como ha presentato il piano per la S.P. 583 Lariana: investimenti per 8,4 milioni di euro, nuovi marciapiedi, barriere salvamotociclisti e lavori notturni dal 12 ottobre.',
+    canonicalPath: '/articoli-frontaliere/investimenti-viabilita-lariana-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lariana: 8,4 milioni per sicurezza e viabilità",
+      "description": "Provincia di Como investe sulla S.P. 583 Lariana: barriere salvamotociclisti, nuovi marciapiedi e rifacimento piani viabili. Scopri i dettagli e i cantieri.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/investimenti-viabilita-lariana-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada provinciale Lariana lungo il Lago di Como con interventi di sicurezza"
+      },
+      "datePublished": "2026-10-05T22:55:10+00:00",
+      "dateModified": "2026-10-05T22:55:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/investimenti-viabilita-lariana-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-biasca-accoltellamento-21enne': {
+    title: 'Ticino, 21enne italiano accoltellato: rischia la vita',
+    description: 'Biasca, un 21enne italiano è stato gravemente accoltellato in via Bellinzona. Sono in corso accertamenti e ricerche dell\'autore o degli autori: la vita è',
+    keywords: 'frontalieri, ticino, svizzera, italia, 21enne, italiano, accoltellato, rischia',
+    ogTitle: 'Ticino, 21enne italiano accoltellato: rischia la vita',
+    ogDescription: 'Una richiesta è arrivata poco prima delle 15 alla Cecal per un uomo gravemente accoltellato in via Bellinzona a Biasca. Sul posto Polizia cantonale, Polizia Tre Valli e Tre Valli Soccorso. In corso accertamenti e ricerca dell\'autore o degli autori.',
+    canonicalPath: '/articoli-frontaliere/biasca-accoltellamento-21enne/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino, 21enne italiano accoltellato: rischia la vita",
+      "description": "Biasca, un 21enne italiano è stato gravemente accoltellato in via Bellinzona. Sono in corso accertamenti e ricerche dell'autore o degli autori: la vita è",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/biasca-accoltellamento-21enne.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via Bellinzona a Biasca, in Ticino, dove sono intervenuti polizia e soccorritori."
+      },
+      "datePublished": "2026-10-05T23:38:30+00:00",
+      "dateModified": "2026-10-05T23:38:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/biasca-accoltellamento-21enne/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavori-lereti-via-copelli-luino': {
+    title: 'Luino: lavori Lereti in via Copelli fino al 27 novembre',
+    description: 'Cantiere Lereti a Luino in via Copelli: rinnovo rete idrica con senso unico alternato. Fine lavori prevista per il 27 novembre, salvo imprevisti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, luino, lavori, lereti, copelli',
+    ogTitle: 'Luino: lavori Lereti in via Copelli fino al 27 novembre',
+    ogDescription: 'Avviato il rinnovo della rete idrica in via Copelli a Luino: 400 metri di nuove tubazioni e senso unico alternato. Scopri i dettagli sul tratto interessato e le tempistiche.',
+    canonicalPath: '/articoli-frontaliere/lavori-lereti-via-copelli-luino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luino: lavori Lereti in via Copelli fino al 27 novembre",
+      "description": "Cantiere Lereti a Luino in via Copelli: rinnovo rete idrica con senso unico alternato. Fine lavori prevista per il 27 novembre, salvo imprevisti.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-lereti-via-copelli-luino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere stradale in via Copelli a Luino per il rinnovo della rete idrica"
+      },
+      "datePublished": "2026-10-06T00:22:58+00:00",
+      "dateModified": "2026-10-06T00:22:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-lereti-via-copelli-luino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bellinzona-aggregazione-costi-2026': {
+    title: 'Bellinzona: aggregazione e bilancio 2026 a confronto',
+    description: 'Analisi dei costi dell\'aggregazione a Bellinzona: spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni. Verifica su efficienza e servizi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, aggregazione, bilancio, confronto',
+    ogTitle: 'Bellinzona: aggregazione e bilancio 2026 a confronto',
+    ogDescription: 'Dieci anni dopo l\'unione dei 13 Comuni, Bellinzona affronta il test dei conti: 235,8 milioni di spese nel 2025 e un preventivo 2026 di 253,5 milioni. Quale efficienza reale per i cittadini?',
+    canonicalPath: '/articoli-frontaliere/bellinzona-aggregazione-costi-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bellinzona: aggregazione e bilancio 2026 a confronto",
+      "description": "Analisi dei costi dell'aggregazione a Bellinzona: spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni. Verifica su efficienza e servizi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/bellinzona-aggregazione-costi-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di Bellinzona con edifici amministrativi e mura storiche all'alba"
+      },
+      "datePublished": "2026-10-06T01:28:30+00:00",
+      "dateModified": "2026-10-06T01:28:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellinzona-aggregazione-costi-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-tre-valli-varesine-2026': {
+    title: 'Tre Valli Varesine 2026: orari, percorso e chiusure',
+    description: 'Guida alla Tre Valli Varesine e femminile del 6 ottobre: orari da Busto Arsizio, arrivo in via Sacco a Varese, sei giri cittadini e info sulle chiusure.',
+    keywords: 'frontalieri, ticino, svizzera, italia, valli, varesine, orari, percorso',
+    ogTitle: 'Tre Valli Varesine 2026: orari e percorso',
+    ogDescription: 'Il 6 ottobre si corrono la Tre Valli Women\'s Race e la 105a Tre Valli Varesine. Partenza da Busto Arsizio, arrivo in via Sacco a Varese. Sei giri cittadini e due tornate lunghe per gli uomini. Scopri orari e dettagli sulle chiusure.',
+    canonicalPath: '/articoli-frontaliere/guida-tre-valli-varesine-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre Valli Varesine 2026: orari, percorso e chiusure",
+      "description": "Guida alla Tre Valli Varesine e femminile del 6 ottobre: orari da Busto Arsizio, arrivo in via Sacco a Varese, sei giri cittadini e info sulle chiusure.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/guida-tre-valli-varesine-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ciclista in gara sulla Tre Valli Varesine, vista sul lago di Varese"
+      },
+      "datePublished": "2026-10-06T03:13:40+00:00",
+      "dateModified": "2026-10-06T03:13:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/guida-tre-valli-varesine-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-varese-conferenza-lavoro-salari-2026': {
+    title: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    description: 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\': orari, relatori e temi su precarietà e potere d\'acquisto per i lavoratori lombardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, conferenza, salari, diritti',
+    ogTitle: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    ogDescription: 'Scopri il programma della conferenza \'Fondata sul lavoro\' a Varese. Sabato 10 ottobre si parlerà di salari, sicurezza e precarietà con relatori di peso e le Rsu di importanti aziende come Electrolux e Beko.',
+    canonicalPath: '/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: conferenza su salari e diritti, 10 ottobre",
+      "description": "Sabato 10 ottobre a Varese la conferenza 'Fondata sul lavoro': orari, relatori e temi su precarietà e potere d'acquisto per i lavoratori lombardi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/varese-conferenza-lavoro-salari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi"
+      },
+      "datePublished": "2026-10-06T03:43:17+00:00",
+      "dateModified": "2026-10-06T03:43:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-casse-malati-proposte-esperti-risposta': {
+    title: 'Casse malati: 5% di aumento e proposte valutate da esperti',
+    description: 'Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, aumento, proposte',
+    ogTitle: 'Casse malati: esperti valutano le proposte',
+    ogDescription: 'Il premio nazionale cresce del 5% nel 2027. Tre esperti analizzano le proposte sulla cassa statale e la prevenzione: in Ticino, dal 2029, metà dei cittadini potrebbe vedere ridotti i premi. Ecco cosa cambia.',
+    canonicalPath: '/articoli-frontaliere/casse-malati-proposte-esperti-risposta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati: 5% di aumento e proposte valutate da esperti",
+      "description": "Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/casse-malati-proposte-esperti-risposta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino."
+      },
+      "datePublished": "2026-10-06T04:17:25+00:00",
+      "dateModified": "2026-10-06T04:17:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/casse-malati-proposte-esperti-risposta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lipomo-fiuto-roxy-cocaina': {
+    title: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    description: 'Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lipomo, fiuto, roxy, scopre',
+    ogTitle: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    ogDescription: 'A Lipomo, i militari della Stazione di Albate hanno arrestato due cittadini tunisini dopo il sequestro di 111 grammi di cocaina, un bilancino e 390 euro. Il cane Roxy ha poi trovato 28 grammi di hashish e circa un grammo di cocaina in un\'abitazione.',
+    canonicalPath: '/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lipomo, il fiuto di Roxy scopre droga: due arresti",
+      "description": "Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lipomo-fiuto-roxy-cocaina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operazione antidroga dei Carabinieri con un pastore tedesco a Lipomo"
+      },
+      "datePublished": "2026-10-06T05:08:37+00:00",
+      "dateModified": "2026-10-06T05:08:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-incidente-monte-generoso-varese': {
+    title: 'Incidente a Varese vicino all\'Università dell\'Insubria',
+    description: 'Incidente a Varese in via Monte Generoso, vicino all\'Università dell\'Insubria: la notizia identifica luogo e riferimento, senza altri dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, varese, vicino, università',
+    ogTitle: 'Incidente a Varese in via Monte Generoso',
+    ogDescription: 'La cronaca segnala un incidente in via Monte Generoso, a Varese, a un passo dall\'Università dell\'Insubria. Il materiale disponibile conferma il luogo e il riferimento urbano, ma non aggiunge informazioni su cause, persone coinvolte o conseguenze.',
+    canonicalPath: '/articoli-frontaliere/incidente-monte-generoso-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente a Varese vicino all'Università dell'Insubria",
+      "description": "Incidente a Varese in via Monte Generoso, vicino all'Università dell'Insubria: la notizia identifica luogo e riferimento, senza altri dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/incidente-monte-generoso-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana vicino all'Università dell'Insubria a Varese"
+      },
+      "datePublished": "2026-10-06T05:43:39+00:00",
+      "dateModified": "2026-10-06T05:43:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-monte-generoso-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavori-pubblica-utilita-multe-pene': {
+    title: 'Multe e pene: conversione in lavori utili in Ticino',
+    description: '97 casi di conversione di pene in lavori utili in Ticino nel 2025. Rapporto 4:1 con il carcere, minimo 8 ore settimanali. Il modello zurighese raggiunge l\'80%',
+    keywords: 'frontalieri, ticino, svizzera, italia, multe, pene, conversione, lavori',
+    ogTitle: 'Multe e pene: conversione in lavori utili in Ticino',
+    ogDescription: 'In Ticino 97 persone hanno convertito pene in lavori utili nel 2025. Il modello zurighese mostra un tasso di successo tra il 75 e l\'80%. Scopri come funziona il rapporto ore-giorni di carcere.',
+    canonicalPath: '/articoli-frontaliere/lavori-pubblica-utilita-multe-pene/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Multe e pene: conversione in lavori utili in Ticino",
+      "description": "97 casi di conversione di pene in lavori utili in Ticino nel 2025. Rapporto 4:1 con il carcere, minimo 8 ore settimanali. Il modello zurighese raggiunge l'80%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-pubblica-utilita-multe-pene.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona con guanti da lavoro che tiene un foglio con checklist in un corridoio ospedaliero in Ticino."
+      },
+      "datePublished": "2026-10-06T06:23:25+00:00",
+      "dateModified": "2026-10-06T06:23:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-pubblica-utilita-multe-pene/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-gambarogno-pavimentazione-attese': {
+    title: 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    description: 'A Gambarogno lavori di pavimentazione dal 12 al 16 ottobre tra il sottopasso FFS e la salita per Caviano - Scaiano. Per la circolazione attese fino a 30 minuti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gambarogno, lavori, sulla, cantonale',
+    ogTitle: 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    ogDescription: 'Il Comune e il Dipartimento del territorio annunciano opere di pavimentazione sulla strada cantonale di Gambarogno. L\'intervento interessa il tratto tra il sottopasso FFS e la salita per Caviano - Scaiano, con attese previste fino a 30 minuti.',
+    canonicalPath: '/articoli-frontaliere/gambarogno-pavimentazione-attese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gambarogno: lavori sulla cantonale, attese fino a 30 minuti",
+      "description": "A Gambarogno lavori di pavimentazione dal 12 al 16 ottobre tra il sottopasso FFS e la salita per Caviano - Scaiano. Per la circolazione attese fino a 30 minuti.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/gambarogno-pavimentazione-attese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori di pavimentazione sulla cantonale di Gambarogno tra il sottopasso FFS e Caviano"
+      },
+      "datePublished": "2026-10-06T06:52:28+00:00",
+      "dateModified": "2026-10-06T06:52:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gambarogno-pavimentazione-attese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-settembre-ticino-2026': {
+    title: 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    description: 'A settembre 2026 la disoccupazione in Svizzera rimane stabile al 3%; il Ticino registra il 2,9% con 4\'800 disoccupati e i posti vacanti salgono a 44\'200. Guida',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, settembre, resta',
+    ogTitle: 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
+    ogDescription: 'Il bollettino SECO di settembre 2026 mostra una disoccupazione nazionale ferma al 3% e un ticinese al 2,9% con 4\'800 senza lavoro. I posti vacanti annunciati raggiungono 44\'200, in aumento di 6\'800 su base annua. L\'articolo spiega ai frontalieri',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-settembre-ticino-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione stabile al 3% in Svizzera a settembre 2026",
+      "description": "A settembre 2026 la disoccupazione in Svizzera rimane stabile al 3%; il Ticino registra il 2,9% con 4'800 disoccupati e i posti vacanti salgono a 44'200. Guida",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con professionisti e segno dell'ufficio di collocamento, rappresentante il mercato del lavoro ticinese."
+      },
+      "datePublished": "2026-10-06T07:34:13+00:00",
+      "dateModified": "2026-10-06T07:34:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-settembre-ticino-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

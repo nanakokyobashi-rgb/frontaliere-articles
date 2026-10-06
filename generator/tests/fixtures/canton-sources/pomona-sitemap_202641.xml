@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.pomona.ch/story/810677/walliser-hotellerie-zieht-trotz-g%C3%A4ster%C3%BCckgang-eine-positive-sommerbilanz</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.pomona.ch/fr/story/810677/malgr-une-baisse-de-la-frquentation-le-secteur-htelier-valaisan-dresse-un-bilan-positif-de-la-saison-estivale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pomona.ch/en/story/810677/the-valais-hotel-industry-reports-a-positive-summer-despite-a-decline-in-visitor-numbers"/>
+    <news:news>
+      <news:title>Walliser Hotellerie zieht trotz Gästerückgang eine positive Sommerbilanz</news:title>
+      <news:publication_date>2026-10-05T15:27:00.000Z</news:publication_date>
+      <news:publication>
+        <news:name>Pomona</news:name>
+        <news:language>de</news:language>
+      </news:publication>
+      <lastmod>2026-10-05T15:27:03.000Z</lastmod>
+    </news:news>
+  </url>
+<url>
+    <loc>https://www.pomona.ch/story/810745/wanderer-verungl%C3%BCckt-am-mont-pleureur-t%C3%B6dlich</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pomona.ch/en/story/810745/hiker-dies-in-an-accident-on-mont-pleureur"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.pomona.ch/fr/story/810745/un-randonneur-trouve-la-mort-dans-un-accident-au-mont-pleureur"/>
+    <news:news>
+      <news:title>Wanderer verunglückt am Mont Pleureur tödlich</news:title>
+      <news:publication_date>2026-10-05T15:14:09.000Z</news:publication_date>
+      <news:publication>
+        <news:name>Pomona</news:name>
+        <news:language>de</news:language>
+      </news:publication>
+      <lastmod>2026-10-05T15:14:09.000Z</lastmod>
+    </news:news>
+  </url>
+<url>
+    <loc>https://www.pomona.ch/story/810727/martin-k%C3%BChnis-wird-mit-pferd-citano-westschweizer-meister-im-springreiten</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pomona.ch/en/story/810727/martin-k%C3%BChnis-wins-the-western-switzerland-show-jumping-championship-with-his-horse-citano"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.pomona.ch/fr/story/810727/martin-k%C3%BChnis-remporte-le-titre-de-champion-de-suisse-romande-de-saut-dobstacles-avec-son-cheval-citano"/>
+    <news:news>
+      <news:title>Martin Kühnis wird mit Pferd Citano Westschweizer Meister im Springreiten</news:title>
+      <news:publication_date>2026-10-05T15:13:43.000Z</news:publication_date>
+      <news:publication>
+        <news:name>Pomona</news:name>
+        <news:language>de</news:language>
+      </news:publication>
+      <lastmod>2026-10-05T15:14:00.000Z</lastmod>
+    </news:news>
+  </url>
+</urlset>

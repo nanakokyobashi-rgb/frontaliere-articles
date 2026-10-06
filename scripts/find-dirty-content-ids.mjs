@@ -130,6 +130,7 @@ import { findControlChars, isInvalidControlCode, sanitizeHtmlDocument } from './
 // L'import non esegue niente: quel modulo lancia `main()` solo se e' lui
 // l'entry point di `process.argv[1]`.
 import { LOCALES, SECTIONS, expectedShardPath } from './reconcile-article-shards.mjs';
+import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import {
   ANNOUNCED_SURFACE_FILES,
   ANNOUNCED_SURFACE_MAX_ATTEMPTS,
@@ -214,11 +215,14 @@ export function validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissA
   return errors;
 }
 
-/** Directory dei corpi articolo -> sezione (id = nome file, locale = sottocartella). */
-export const BODY_DIR_SECTIONS = {
-  'blog-body': 'frontaliere',
-  'blog-body-ch': 'svizzera',
-};
+/**
+ * Directory dei corpi articolo -> sezione (id = nome file, locale = sottocartella).
+ * Dal core (sezioni ATTIVE, `scripts/lib/corpus-sections.mjs`), non scritta a
+ * mano: una sezione accesa nel core ha i suoi corpi riconosciuti anche qui.
+ */
+export const BODY_DIR_SECTIONS = Object.fromEntries(
+  CORPUS_SECTIONS.map((section) => [path.basename(section.bodyDir), section.section]),
+);
 
 export function sectionForBodyDir(dirName) {
   return BODY_DIR_SECTIONS[dirName] ?? null;

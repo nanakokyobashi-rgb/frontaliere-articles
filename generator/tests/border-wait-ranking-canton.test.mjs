@@ -106,7 +106,6 @@ describe('classifica dogane per cantone', () => {
     assert.equal(snapshot.ranking.length, 7);
     assert.doesNotMatch(JSON.stringify(snapshot), /gaggiolo/);
   });
-
   it('un cantone senza foto dichiarata non puo\' essere registrato (immagine nulla)', () => {
     assert.equal(staticMetaFor('GE').image, null);
     assert.equal(staticMetaFor('TI').image, 'mendrisio.webp');

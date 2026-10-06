@@ -159,12 +159,52 @@
       }
     },
     {
+      "path": "scripts/ci/canton-generation-admit.mjs",
+      "mode": "corpus-only",
+      "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run in_progress dei chiamanti cantonali, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
+      "baseline": {
+        "site": null,
+        "corpus": "6c122bb4827e9470",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/fast-publish-section.mjs",
+      "mode": "corpus-only",
+      "reason": "Sezione e shard Pages di un fast-publish derivati da ARTICLE_SECTION_CORE (lista attiva): regex dei corpi, sezione di un corpo, shard di una sezione, con errore esplicito per le sezioni servite da R2 (shardKey null). Esiste solo qui perche' fast-publish-article.yml e publish-article-fast.mjs che lo usano pubblicano dal corpus; il sito non ha un fast-publish che derivi la sezione dal path di un corpo.",
+      "baseline": {
+        "site": null,
+        "corpus": "39847766877ca5be",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "scripts/ci/check-post-rebase-uniqueness.mjs",
       "mode": "corpus-only",
       "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni) che generate-article.yml esegue dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
       "baseline": {
         "site": null,
         "corpus": "9771a71da3aaa747",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/generate-canton-article-workflows.mjs",
+      "mode": "corpus-only",
+      "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",
+      "baseline": {
+        "site": null,
+        "corpus": "f978004d43015b6b",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/rebase-section-args.mjs",
+      "mode": "corpus-only",
+      "reason": "Argomenti per sezione di rebase-onto-remote.sh (--section-surfaces) derivati da SECTIONS di article-surfaces.mjs, cioe' da ARTICLE_SECTION_CORE. Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "633cb7b133b741fe",
         "alignedAt": "2026-10-05"
       }
     },
@@ -214,8 +254,8 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "c03d168080900253",
-        "alignedAt": "2026-09-20"
+        "corpus": "1c354b0a6638d0f3",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -329,11 +369,11 @@
     {
       "path": "scripts/ci/classify-codex-review-failure.mjs",
       "mode": "corpus-only",
-      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione e failure non ritentabili. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
+      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione, startup failure con un solo retry bounded e failure non ritentabili. Espone solo conteggi di eventi e una diagnostica stderr da allowlist, mai prompt/risposta/JSONL grezzo. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "4a1c1a0afcf0cb86",
-        "alignedAt": "2026-09-16"
+        "corpus": "7a101891a3815f76",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -361,9 +401,10 @@
       "mode": "adapted",
       "reason": "Regressione del falso 429 osservato nella run corpus 33338838671: status=allowed con overageStatus=rejected deve restare un successo. Il sito usa Vitest e conserva la suite completa del parser; qui il gemello Node test pinna il caso di produzione e il controllo positivo status=rejected senza introdurre Vitest nel repo pubblicatore.",
       "baseline": {
-        "site": "2dc2ac1df1cb5dae",
-        "corpus": "beb958405d5e2d75",
-        "alignedAt": "2026-08-31"
+        "site": "2751cb3f3f6e92b4",
+        "corpus": "aab43957a2ca3fa0",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -695,9 +736,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b8c729e37f891333",
-        "corpus": "b8c729e37f891333",
-        "alignedAt": "2026-10-04"
+        "site": "4c710e799877f56f",
+        "corpus": "4c710e799877f56f",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -793,12 +834,12 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
-        "site": "898810d03711dfd2",
-        "corpus": "743fe9c86cb0694e",
-        "alignedAt": "2026-09-25",
-        "forcedAt": "2026-09-25T05:32:09.362Z"
+        "site": "7b647c07268b94ce",
+        "corpus": "9c601148e973f83d",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T00:27:32.975Z"
       }
     },
     {
@@ -843,12 +884,12 @@
     },
     {
       "path": "scripts/ci/loop-health-report.mjs",
-      "mode": "identical",
-      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): lo script del sito e' gia' portabile (GH_REPO, revisore per repo) e importa solo node:*, quindi gira identico qui, alimentato da .github/workflows/loop-health-report.yml con il GITHUB_TOKEN del corpus.",
+      "mode": "adapted",
+      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare.",
       "baseline": {
         "site": "5f12fc298ad39df9",
-        "corpus": "5f12fc298ad39df9",
-        "alignedAt": "2026-10-04"
+        "corpus": "b8d5c02a27ced312",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -957,10 +998,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "f45def87435c51d7",
-        "corpus": "a552e64a97068278",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:11.436Z"
+        "site": "3a28a8c91ab5671b",
+        "corpus": "6880a0776c0ab697",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T00:27:33.002Z"
       }
     },
     {
@@ -1075,7 +1116,7 @@
     {
       "path": ".github/workflows/issue-fix.yml",
       "mode": "adapted",
-      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`. RICONCILIATO 2026-09-06 da `both-moved` (#956, item 1). Le due mosse dalla baseline precedente sono di nuovo DISGIUNTE. Lato sito: il tetto di step `timeout-minutes` su `Run Claude fix` (classe #7310), PORTATO qui con il numero ri-misurato su questo repo invece che copiato; il resto del suo diff e' la chiave di concorrenza per-issue (che qui era gia' arrivata con #908) e un commento sul default di FOLLOWUP_MAX_INFLIGHT_FIX, che nel nostro file non compare. Lato corpus: il pre-flight di dispatch stantio (#918), la terza condizione `no-root-cause`+manifest per la consegna al sito (#316), la discovery PR del vecchio backstop/classificatore con `sort_by(.createdAt) | last` (#925) e l'eccezione «issue aggregata» nel prompt — tutte modifiche che il sito non ha, quindi `corpus-ahead` da far risalire di la', non drift da correggere qui. Nota sul perche' il `both-moved` era in parte artificiale: l'allineamento del 2026-09-03 aveva aggiornato `baseline.corpus` e `alignedAt` lasciando `baseline.site` a quello del 2026-08-09, quindi il lato sito risultava mosso anche per i tre giri gia' letti allora. F5 (2026-09-20): baseline sidecar per run+attempt e helper `pr-delivery-evidence.mjs` trasportato insieme al marker; il workflow adattato prova nuova PR, nuovo HEAD o OPEN -> MERGED corrente e tratta lookup unknown fail-closed, preservando skipped/cancelled/no-op.",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`. RICONCILIATO 2026-09-06 da `both-moved` (#956, item 1). Le due mosse dalla baseline precedente sono di nuovo DISGIUNTE. Lato sito: il tetto di step `timeout-minutes` su `Run Claude fix` (classe #7310), PORTATO qui con il numero ri-misurato su questo repo invece che copiato; il resto del suo diff e' la chiave di concorrenza per-issue (che qui era gia' arrivata con #908) e un commento sul default di FOLLOWUP_MAX_INFLIGHT_FIX, che nel nostro file non compare. Lato corpus: il pre-flight di dispatch stantio (#918), la terza condizione `no-root-cause`+manifest per la consegna al sito (#316), la discovery PR del vecchio backstop/classificatore con `sort_by(.createdAt) | last` (#925) e l'eccezione «issue aggregata» nel prompt — tutte modifiche che il sito non ha, quindi `corpus-ahead` da far risalire di la', non drift da correggere qui. Nota sul perche' il `both-moved` era in parte artificiale: l'allineamento del 2026-09-03 aveva aggiornato `baseline.corpus` e `alignedAt` lasciando `baseline.site` a quello del 2026-08-09, quindi il lato sito risultava mosso anche per i tre giri gia' letti allora. F5 (2026-09-20): baseline sidecar per run+attempt e helper `pr-delivery-evidence.mjs` trasportato insieme al marker; il workflow adattato prova nuova PR, nuovo HEAD o OPEN -> MERGED corrente e tratta lookup unknown fail-closed, preservando skipped/cancelled/no-op. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "528d65247c678beb",
         "corpus": "b7df63a69ab05087",
@@ -1085,7 +1126,7 @@
     {
       "path": ".github/workflows/issue-decompose.yml",
       "mode": "adapted",
-      "reason": "Stadio di decomposizione (sito #6228). Adattamenti: sender gate con gli account del progetto; identita' GITHUB_PAT_NANAKO invece della GitHub App; ponte RC generator/scripts/load-rc-env.mjs; QUOTA_BEACON_PEER_REPO verso il sito; ensure-loop-labels; prompt sul dominio del corpus (manifest/identical, node --test) e recupero di VISION.md dal sito se assente qui.",
+      "reason": "Stadio di decomposizione (sito #6228). Adattamenti: sender gate con gli account del progetto; identita' GITHUB_PAT_NANAKO invece della GitHub App; ponte RC generator/scripts/load-rc-env.mjs; QUOTA_BEACON_PEER_REPO verso il sito; ensure-loop-labels; prompt sul dominio del corpus (manifest/identical, node --test) e recupero di VISION.md dal sito se assente qui. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "3bcdb9b32a40a785",
         "corpus": "816752e6ace0032e",
@@ -1108,9 +1149,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test. RIALLINEATO 2026-08-09 senza portare nulla: il diff del sito dalla baseline precedente e' UNA riga, che aggiunge «CWV field criterion (#5001) docs/CWV-FIELD-CRITERION.md» alla sezione «Reference Docs». Qui non si applica per due motivi verificati: questo AGENTS.md non ha una sezione «Reference Docs» (le sue sono Cos'e' questo repo / La superficie pubblica / Non-negoziabili / Build e test / Credenziali / Il ciclo autonomo), e il repo non ha una cartella docs/ (404). Una modifica futura del sito che invece si applichi tornera' a comparire, perche' la baseline e' aggiornata all'hash di oggi, non disattivata.",
       "baseline": {
-        "site": "7b52bedf01d44f0d",
-        "corpus": "89844a388d163b80",
-        "alignedAt": "2026-09-03"
+        "site": "7d7fc256b858ca13",
+        "corpus": "dfa73cae2fda5969",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1118,9 +1160,10 @@
       "mode": "adapted",
       "reason": "Contratto del fixer adattato: categorie di questo repo, gate test node --test, e la catena assorbente del 429 descritta con i numeri del sito perche' e' la ragione per cui la telemetria FIX_OUTCOME e' obbligatoria.",
       "baseline": {
-        "site": "9c762fb417106a95",
-        "corpus": "90281612a9ae457f",
-        "alignedAt": "2026-08-07"
+        "site": "ca1f58b703f38b36",
+        "corpus": "7cdcf8c158a68181",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1276,9 +1319,10 @@
       "mode": "adapted",
       "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia il runner; qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch, e calcola la closure transitiva degli import statici/dinamici che il checkout sparse deve materializzare (#929, site #9528).",
       "baseline": {
-        "site": "ceab56f221d07ec1",
-        "corpus": "fb8e3ca0ab601792",
-        "alignedAt": "2026-09-19"
+        "site": "be1b0e165eae1c4b",
+        "corpus": "e41762ea8b88373b",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1294,7 +1338,7 @@
     {
       "path": ".github/workflows/pr-redflag-fixer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "99dd0bb1b3d86d95",
         "corpus": "5e93e30c34fe9f6b",
@@ -1376,8 +1420,8 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "30b1c966e5bfae39",
-        "corpus": "30b1c966e5bfae39",
+        "site": "a9c64aebc070caef",
+        "corpus": "a9c64aebc070caef",
         "alignedAt": "2026-10-05"
       }
     },
@@ -1494,9 +1538,10 @@
       "mode": "adapted",
       "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
       "baseline": {
-        "site": "8e3cbf379ad0cdf1",
-        "corpus": "5a092f55c91cc903",
-        "alignedAt": "2026-08-08"
+        "site": "cccbd0305799caee",
+        "corpus": "cf9615f8a607d4ce",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1505,9 +1550,10 @@
       "mode": "adapted",
       "reason": "Scan anti-allucinazioni su tutti i corpi (istituzioni/acronimi inventati, fatti errati noti, statistiche a fonte vaga). Adattamenti: path content/ al posto di services/locales/, node:test + expect-shim, offender aggregati per classe invece di it.each per file, sanity >3000 corpi IT perche' uno sparse checkout senza content/ non passi a vuoto. I PATTERN restano byte-identici al sito: nuove voci si aggiungono prima la' e si ricopiano qui. Misurato al porting: 0 offender su 15.076 file.",
       "baseline": {
-        "site": "ea03d049017092b7",
-        "corpus": "76a86e1937c4569a",
-        "alignedAt": "2026-08-08"
+        "site": "f4a9f610932ba9e9",
+        "corpus": "1ed72d4ab7dea050",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1583,9 +1629,10 @@
       "mode": "adapted",
       "reason": "Gemello di tests/pr-collision-detector-drafts.test.ts sul sito, riscritto per node --test perche' qui non c'e' vitest. Lo script sotto test e' mode: identical nel manifest e resta byte-identico; il test no, ed e' giusto cosi': e' il runner a differire, non il comportamento sotto test. Copre le draft che non devono partecipare al grafo delle collisioni (difetto osservato su questo repo, PR #33).",
       "baseline": {
-        "site": "edd15f5ad95271d2",
-        "corpus": "7592867878443da1",
-        "alignedAt": "2026-08-10"
+        "site": "30bb1b0cd005b04e",
+        "corpus": "14e2d62b63f14701",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1772,7 +1819,7 @@
       "path": "generator/scripts/load-rc-env.mjs",
       "sitePath": "scripts/load-rc-env.mjs",
       "mode": "adapted",
-      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa.",
+      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa. Divergenza VOLUTA dal 2026-10-05: `EVENTFROG_ENABLED`, `EVENTFROG_PUBLIC_API_KEY` e `EVENTFROG_PUBLIC_API_KEY_EXPIRES_AT` sono mappati solo nel sito e non vanno portati qui: il corpus non deve poter leggere dati Eventfrog (AGB §17(3)/(6), decisione D5 del proprietario), e `generator/scripts/lib/private-event-records.mjs` ne scarta i record all'ingresso del dataset eventi.",
       "baseline": {
         "site": "c13e7688b3c1c2e4",
         "corpus": "f85aa0a4a0bdcd2b",
@@ -1808,8 +1855,9 @@
       "reason": "Digest eventi del weekend (evergreen, registrato una volta e rinfrescato nei body). Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` per il layout `content/` invece di `services/locales/`, e la scrittura dei 4 body passa da `sanitizeText` (issue #66), oggi con il report di `reportStrippedControlChars` al posto di `findControlChars` (#131) — la stessa guardia al write di create-article.mjs, che sul sito non serve perche' i byte non atterrano li'. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-08-09 (`955467555a07c900`), qui `de0f7fddb5cf599d`. Il delta, letto per intero, e' tutto di questo lato: #131 (report degli strip dei control char), #320 (`sanitizePromptPlaceholders` in processo), #386 (solo commento: perche' qui non serve lo slug guard), #564 (write atomico temp+rename), #1097 (`resolveRegisterLockAtStartup` prima di ogni decisione sull'id), #1250 (`assertArticlePassesFactualityGates` e lock saltato in dry-run), #1427 (`assertGeneratedArticleQuality`), #1661 (main-guard su `realpathSync`). Non si porta al sito, per scelta: la copia del sito e' DORMIENTE dal cutover — nessun workflow del sito la esegue, mentre qui la lancia `refresh-events-digest.yml` ogni giovedi' — e il porting non avrebbe effetto in produzione; in piu' tre degli import nuovi (`assertArticlePassesFactualityGates`, `assertGeneratedArticleQuality`, `resolveRegisterLockAtStartup`) non esistono nel `create-article.mjs` del sito e `control-char-write-report.mjs` e' corpus-only. Il producer vivo e' questo: baseline corpus rigenerata sull'hash di oggi, baseline sito invariata, cosi' un movimento del sito torna a emergere come `site-ahead`.",
       "baseline": {
         "site": "955467555a07c900",
-        "corpus": "de0f7fddb5cf599d",
-        "alignedAt": "2026-09-25"
+        "corpus": "7c3ef5f6917d92b1",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1819,8 +1867,9 @@
       "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs. Il parser `../../scripts/lib/parse-positive-num.mjs` e' una dipendenza corpus-only dichiarata nel manifest: non va copiato nel gemello del sito. RICONCILIATO 2026-09-25 (both-moved, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483; producer vivo = corpus dopo il cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3): dalla baseline del 2026-08-09 il sito si e' mosso con la sola PR valerielinc-ops/frontaliere-si-o-no#8574 (`de42587f1ee3afe4`): `isWrongLocale` sul testo concatenato sostituito da `wrongLocalePair` per coppia, con `hasSourcePassthroughField` (un campo uguale alla sorgente allo STESSO indice, via `isSourcePassthrough`) piu' il rilevatore `detected !== expectedLocale` per coppia, e la guardia d'entrypoint. Qui, in 15 commit (#131, #227, #233, #392, #564, #994, #1020, #1257, #1316, #1367, #1369, #1371, #1393, #1428, #1665), il file e' diventato un superinsieme: `wrongLocalePair` a tre rami (verbatim, `=== sourceLang`, terza lingua conclamata, tarato da #1020 su 16'968 articoli×locale pubblicati), potatura delle coppie sbagliate con pavimento `MIN_FAQ_PAIRS` e ledger dei rifiuti, literal TS escapato, chiavi `.faq` ancorate all'id. Prima di dichiarare e' stato verificato caso per caso il controllo per campo del sito, e UN caso sfuggiva: il ramo verbatim confrontava la coppia INTERA, quindi una domanda italiana verbatim sopra una risposta tradotta passava (17 coppie pubblicate in 7 articoli×locale; misura nel docstring di `wrongLocalePair`). Riapplicato nella stessa PR come confronto per CAMPO e per contenuto — non per indice come sul sito, perche' qui la potatura sposta le coppie — con test in `generator/tests/retranslate-blocking-bodies.test.mjs`; copre anche `batch-add-faq-to-articles.mjs`, che importa il predicato. Resta una divergenza per scelta: il ramo di lingua del sito rifiuta `detected !== expectedLocale`, che sulle FAQ pubblicate da' il 2,0% di falsi positivi contro lo 0,7% del predicato corpus a parita' di recall (#1020). La copia del sito e' dormiente (`batch-faq-articles.yml` del sito ha lo `schedule` commentato al cutover), qui lo stesso workflow la esegue ogni notte. Baseline rigenerata come `--init --only --force` sui due hash di oggi (sito `de42587f1ee3afe4`, corpus `5953f4b97b263175`, che include la riapplicazione). RI-ATTESTATO 2026-09-29, solo lato corpus (`corpus-ahead`, valerielinc-ops/frontaliere-si-o-no#7483): dopo il 2026-09-25 il corpus ha aggiunto #1935 (il ramo `detected === sourceLang` di `wrongLocalePair` rifiuta solo con un eccesso di parole funzionali italiane: i nomi propri davano 43 falsi «lingua sbagliata» al giorno, 0/36 articoli riusciti; registro dei rifiuti nel batch), #1963 (chiavi della fingerprint sorgente canonicalizzate) e #1962 (fail-closed su un registro dei rifiuti corrotto, FU-006). Nessun port: la copia del sito resta dormiente, e il registro dei rifiuti vive accanto al batch notturno che gira solo qui. Il sito non si e' mosso (`de42587f1ee3afe4`), quindi la riattestazione e' quella di `--init --only` senza `--force` e la voce non porta `forcedAt`.",
       "baseline": {
         "site": "de42587f1ee3afe4",
-        "corpus": "935094f4f11001ab",
-        "alignedAt": "2026-09-29"
+        "corpus": "96d09dd1b788bc77",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1891,7 +1940,7 @@
       "reason": "Quarta meta' consumatrice (P9c, sezioni per cantone): `road-events.json`, prodotto sul sito da `scripts/collect-road-events.mjs` (ASTRA DATEX II + feed mobilita' cantonali). Come le altre tre, il produttore ha un altro nome per costruzione e i due capi si parlano via HTTP: la forma e' inchiodata offline da `generator/tests/rewire-json-contracts.test.mjs` (contratto `road-events` in `generator/tests/lib/rewire-contracts.mjs`) e a orologio da `rewire-contract-watch.yml`. Soft sulla raggiungibilita' perche' nessun generatore lo legge ancora (P11), hard sulla forma: codice del semicantone al posto del gruppo URL, tipo fuori dai quattro, snapshot di oltre 48 ore.",
       "baseline": {
         "site": null,
-        "corpus": "6966bd2c5be75b31",
+        "corpus": "da1ccea8fb267eb6",
         "alignedAt": "2026-10-05"
       }
     },
@@ -1936,13 +1985,53 @@
       }
     },
     {
+      "path": "scripts/lib/corpus-sections.mjs",
+      "mode": "corpus-only",
+      "reason": "Le sezioni articolo viste dal pubblicatore: superfici sorgente derivate da ARTICLE_SECTION_CORE (+ corpusPath), nomi della superficie pubblicata in dist/api per tipo, politica dei pavimenti per tipo. Corpus-only perche' build-api, i pavimenti e la superficie dist/api esistono solo in questo repo; il sito consuma i JSON via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "580f18b97f61fe7e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/delete-cdn-file.sh",
+      "mode": "corpus-only",
+      "reason": "Cancellazione di UNA chiave R2 fra quelle delle sezioni cantonali (allowlist edge/sitemap-cantons.xml, edge/sitemap-articles-canton-<x>.xml, edge/sections/**): serve a ritirare l'indice sitemap-cantons.xml quando nessuna sezione e' piu' live, perche' un sitemapindex vuoto viola lo schema e il Worker deve tornare al 404. Fratello di upload-cdn-file.sh (additivo per contratto). Corpus-only: la pubblicazione R2 delle sezioni cantonali e' solo del corpus (P7).",
+      "baseline": {
+        "site": null,
+        "corpus": "37feb520d4b627eb",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/section-registry.mjs",
+      "mode": "corpus-only",
+      "reason": "Il registro delle sezioni articolo cantonali visto dal pubblicatore (P7 del piano sezioni cantonali, D3/D9/D14): validazione di sections/registry.json contro il core (insieme chiuso, parita' di kind/canton/indexSlug/topics, live solo se attiva) e contro le regole di parseCorpusSectionRegistry del Worker del sito (prefissi, forma canonica, redirect same-origin, cicli), kill-switch Remote Config CANTON_ARTICLE_SECTIONS_KILL col marker RC_ENV_LOADED, costruzione di sections.json, della copia edge/sections/registry.json per il Worker e dell'indice sitemap-cantons.xml. Corpus-only: il registro e la pubblicazione R2 delle sezioni vivono solo qui; il sito ne applica la regola nel Worker leggendo il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "ffeedd4948f222ff",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/engine-corpus-view.mjs",
+      "mode": "corpus-only",
+      "reason": "Il corpus visto nel layout che l engine legge (services/locales, services/seo, packages/articles/content), costruito al volo con symlink in una cartella temporanea: alias di cartella validi per ogni sezione piu un alias per chunk SEO cantonale, che create-article scrive in content/cantons/<id>/seo.ts e l engine cerca come seo-blog-<id>.ts. Lo usano build-api per i feed RSS delle sezioni di famiglia e i pavimenti per contare i chunk dove stanno. Corpus-only: sul sito il layout dell engine e quello nativo, non serve nessuna vista.",
+      "baseline": {
+        "site": null,
+        "corpus": "66b40ab3f4c5a824",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "12927d8ee556aac7",
-        "alignedAt": "2026-09-12"
+        "corpus": "08b806da4017d729",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2000,9 +2089,10 @@
       "mode": "adapted",
       "reason": "Push incrementale degli shard articolo. Divergente anche da `be6b31d5`, e per due cose che sul sito non hanno senso: (1) `repo_root` risolto rispetto allo script e non a `$(pwd)`, perche' con cwd diversa `section-shard-owners.json` spariva e il default `// \"valerielinc-ops\"` di jq mandava il push all'OWNER SBAGLIATO — questi shard sono di nanakokyobashi-rgb; (2) la PAT mode: senza deploy key lo script usciva 0 in silenzio e il chiamante riportava successo (misurato su run 30813668145: ogni locale «not provisioned», zero HTML sugli shard, workflow verde). Qui, senza deploy key ma con `SHARD_PUSH_PAT`/`GITHUB_PAT`, pusha via HTTPS.",
       "baseline": {
-        "site": "c6f403314174da9b",
-        "corpus": "84649b82b65653cd",
-        "alignedAt": "2026-08-09"
+        "site": "1c957440f17edfdf",
+        "corpus": "07f29c2a09f00b7f",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -2107,13 +2197,11 @@
     {
       "path": "generator/scripts/lib/ai-meta-response.mjs",
       "sitePath": "scripts/lib/ai-meta-response.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/11616",
-      "reason": "Rilevatore delle META-RISPOSTE dei modelli (rifiuto, richiesta dell'input, narrazione del tool-use, etichetta del template rimasta senza valore) usato all'accettazione di ogni tier in `tryTier` di `free-translate.mjs` sui due lati e, solo qui, in `translateWithCodexEngine`. Il path esiste gia' sul `main` del sito dalla PR #11578, ma il suo blob live e' quello precedente (`05c117576579f3dd08b94ca0584409f7ba3d5122`). `expectedSiteBlob` pinna il contenuto corretto del head corrente della PR sito #11616 (`9d5703c094e4c6027b43349ac2fa6c246763aaee`): finche' il path live non contiene esattamente quel Git blob, il drift check restituisce `corpus-only-pending-stale-twin`; la sola presenza del file non e' un atterraggio e non va promossa. Dopo il merge della #11616, verificare l'identita' dei due file e promuovere a `identical` con `loop-drift-check --init --only`.",
-      "expectedSiteBlob": "9d5703c094e4c6027b43349ac2fa6c246763aaee",
+      "mode": "identical",
+      "reason": "Gemello identico del rilevatore delle meta-risposte dei modelli usato in `tryTier`.",
       "baseline": {
-        "site": null,
-        "corpus": "231e56bdce5bb50b",
+        "site": "0162e079d566499d",
+        "corpus": "0162e079d566499d",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2266,7 +2354,7 @@
     {
       "path": "generator/scripts/lib/source-url-ledger.mjs",
       "mode": "corpus-only",
-      "reason": "Forma delle voci dei due ledger URL->id (`{articleId, ts}` oltre alla stringa storica) e finestra oltre la quale una voce smette di bloccare la PROPRIA sezione. Nasce qui il 2026-08-18 perche' e' qui che la generazione vive: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non produce piu' — misurato, `data/article-source-urls.json` sul sito e' fermo al 2026-08-07 e non cresce da 11 giorni, mentre il ledger frontaliere di qui ha preso +89 voci in dieci giorni (48 l'08-08, 137 il 18-08). Non e' `corpus-only-pending`: sul sito il difetto non e' operativo, quindi non c'e' un lavoro da tracciare, e una issue li' aprirebbe una PR del fixer su un percorso morto. Il modulo e' tenuto PURO apposta, quindi se un giorno il sito tornasse a generare e' copiabile senza adattamenti. Da non confondere con `cross-section-dedup.mjs`, che e' `identical` e che questa fix NON tocca: le viste URL->id che gli arrivano restano a valori stringa.",
+      "reason": "Forma delle voci dei due ledger URL->id (`{articleId, ts}` oltre alla stringa storica) e finestra oltre la quale una voce smette di bloccare la PROPRIA sezione. Nasce qui il 2026-08-18 perche' e' qui che la generazione vive: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non produce piu' — misurato, `data/article-source-urls.json` sul sito e' fermo al 2026-08-07 e non cresce da 11 giorni, mentre il ledger frontaliere di qui ha preso +89 voci in dieci giorni (48 l'08-08, 137 il 18-08). Non e' `corpus-only-pending`: sul sito il difetto non e' operativo, quindi non c'e' un lavoro da tracciare, e una issue li' aprirebbe una PR del fixer su un percorso morto. Il modulo e' tenuto PURO apposta, quindi se un giorno il sito tornasse a generare e' copiabile senza adattamenti. Da non confondere con `cross-section-dedup.mjs`, che e' `identical` e che questa fix NON tocca: le viste URL->id che gli arrivano restano a valori stringa. Dal P5b qui vive anche l'identita' dell'ITEM (`#ft-item=<impronta del titolo>`), che `newsUrlKey` conserva in chiave per le fonti cantonali che riusano lo stesso URL per notizie diverse.",
       "baseline": {
         "site": null,
         "corpus": "13f65a4e0809abdb",
@@ -2329,8 +2417,8 @@
       "reason": "Immagine di testata del Bollettino del Frontaliere. Nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "9cf499df15b47c3e",
-        "alignedAt": "2026-08-09"
+        "corpus": "0d418d160b45beb5",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -2360,6 +2448,26 @@
       "baseline": {
         "site": null,
         "corpus": "e56c5e34fea24853",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-section-profile.mjs",
+      "mode": "corpus-only",
+      "reason": "La sezione cantonale vista da create-article.mjs (P6b del piano sezioni cantonali): voci di ARTICLE_SECTION_CONFIGS per le 24 sezioni `kind: canton` del core (path di registro, slug, meta e corpi da ARTICLE_SECTION_CORE_ALL, profilo da generator/data/canton-sections.json), gate D16 (`enabled` nel profilo o CANTON_ARTICLE_SECTIONS_ENABLED da Remote Config), stato per sezione D18 sotto data/sections/<id>/ e i suoi argomenti per rebase-onto-remote.sh, scheletri dei file al primo articolo, lessico di ammissione DE/FR e testi di prompt del cantone. Corpus-only: la generazione e il profilo editoriale vivono solo qui; il sito legge le sezioni come JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "4339022550d58da1",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-news-sources.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner delle fonti news delle sezioni cantonali (P6b): parser json-entities (iCMS NW/OW/SH), json-api (zh.ch, be.ch), news-sitemap e sitemap a periodo (settimana ISO, mese, anno), riuso di extractRssItems/extractHeadlines di create-article.mjs per RSS/Atom e link HTML; quirk del profilo (crawl-delay per host, maxRequestsPerRun, charset dichiarato, pubDate vuoto, anno sbagliato nei time datetime, paywall title+lead) e User-Agent dichiarato (D10). Dal P5b: sulle pagine html-links toglie la cornice del sito (nav, header e footer di pagina) e i link fuori da `articlePathPattern` dove il profilo lo dichiara, e per le fonti `urlReusedForDifferentStories` mette nell'URL l'identita' dell'item (`#ft-item=`, costruita con le funzioni di `source-url-ledger.mjs`). Corpus-only: le fonti per cantone e il generatore che le legge esistono solo nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "8c5ed8cc6cdb3a46",
         "alignedAt": "2026-10-05"
       }
     },
@@ -2770,11 +2878,12 @@
       "path": "generator/scripts/lib/llm-json-repair.mjs",
       "sitePath": "scripts/lib/llm-json-repair.mjs",
       "mode": "adapted",
-      "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito.",
+      "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito. Lotto 2 issue #6369: portate nel gemello adattato le due correzioni di valerielinc-ops/frontaliere-si-o-no#11771 (preambolo con `{` non bilanciata e selezione di root array evitando un array annidato); riallineata la baseline ai blob verificati senza rendere i percorsi generator node:test identici al sito.",
       "baseline": {
-        "site": "524dc16b7d1c0911",
-        "corpus": "88c317784c0cf492",
-        "alignedAt": "2026-09-01"
+        "site": "dfad523d048204f2",
+        "corpus": "71381efc4d151f66",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -3209,9 +3318,10 @@
       "mode": "adapted",
       "reason": "Dati slug/locale degli hub letti dall'engine via SiteShellContract. Estratto per chiusura di `build-plugins/seoHubsData.ts` (321 righe la', 64 qui); `SLUG_TABLES` non e' trasportato perche' la chiusura ne raggiunge due campi per locale, inlineati. Stessa nota sulla guardia inesistente.",
       "baseline": {
-        "site": "67299610cd5bcfe8",
-        "corpus": "6a1073ede10a5ee9",
-        "alignedAt": "2026-08-09"
+        "site": "1f017e5c86ede66c",
+        "corpus": "6e22c674d71bf3a4",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -3435,9 +3545,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "c584aaf489c71a41",
-        "corpus": "c584aaf489c71a41",
-        "alignedAt": "2026-08-09"
+        "site": "3cdd32148bd86613",
+        "corpus": "3cdd32148bd86613",
+        "alignedAt": "2026-10-05"
       },
       "couplingSnapshot": [
         {
@@ -3482,8 +3592,8 @@
       "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "c20461c76346d1c9",
-        "alignedAt": "2026-09-05"
+        "corpus": "1ad3e5591be93b55",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3520,8 +3630,9 @@
       "reason": "IL PUNTO CIECO CHE HA PERMESSO LA #5457. L'intestazione della copia di QUESTO repo dichiara «This repo is a SEPARATE COPY of the site's scripts/publish-article-fast.mjs» e chiede «If either copy is touched, touch both» — ma la dichiarazione esiste solo da questo lato, il file non era nel manifest, e nessun meccanismo la faceva rispettare. Cosi' la #65 ha cablato sanitizeHtmlDocument nei writeFileSync di questa copia (righe 292-293) e la copia del sito e' rimasta senza, agli stessi identici punti di scrittura, per giorni. E' la stessa classe gia' misurata sull'ordine render/offload, dove l'archivio live alternava sano e rotto a seconda di chi aveva pubblicato. `adapted` e non `identical` perche' divergono davvero e per costruzione (445 righe qui contro 333 la', 298 righe di diff): percorsi di render diversi, dipendenze diverse, e ora anche politiche diverse sui control character — qui si sanifica, la' si rifiuta (scripts/lib/control-char-publish-gate.mjs). Sorvegliato proprio perche' adattato: e' sui file adattati che una modifica di un lato si perde, «tanto e' diverso apposta». `baseline.site` ricalcolata da #148 dopo il merge di valerielinc-ops#5518, che ha toccato questo file sul sito. RIALLINEATO 2026-09-03 (corpus-ahead, issue #756): il movimento locale non dichiarato e' #139, che ha cablato `reportStrippedControlChars` (generator/scripts/lib/control-char-write-report.mjs) sui tre punti di scrittura HTML — index, bridge piatto e le pagine archivio dell'article-hub — perche' uno strip silenzioso sui byte che vanno live e' esattamente il caso che non fallisce. NON e' proponibile al sito: quel modulo e' `corpus-only` per costruzione (i choke point di scrittura li ha il generatore) e la' la politica sui control character e' il RIFIUTO, non lo strip, quindi non c'e' niente da riportare. Con l'aggiunta la copia locale passa da 445 a 451 righe e le due chiamate a `sanitizeHtmlDocument` citate sopra stanno ora alle righe 293 e 296. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-09-03 (`d301f81c84506ca8`), qui `2c426a08e15b2d6f`. Il delta e' uno solo, lo Step 7b dopo l'offload, in tre commit: `f9632aaa6` (#788/#790) la verifica di esistenza sul CDN degli `/assets/` riscritti (`scripts/lib/cdn-asset-existence.mjs`), `636489388` (#817/#839) la discriminante fra offload fallito e «niente da riscrivere» (`hasSameOriginAssetRef`, `formatOffloadCoverageReport`), `97526cbe8` (#1219/#1221) il margine misurato con l'orologio vero. Verificato che NON cambia i byte HTML renderizzati: lo Step 7b legge l'HTML gia' scritto (`readdirSync`/`readFileSync`), fa HEAD/GET verso il CDN e stampa, senza nessuna scrittura su `distDir`, e `cdn-asset-existence.mjs` non importa `node:fs`. Quindi `check-article-byte-identity.mjs`, che ogni settimana (`audit-article-corpus-drift.yml` del sito) rende con la copia del SITO e confronta con la produzione, non vede differenze da questo delta; il fingerprint deterministico di #788 vive in `host/` (contratto shell), non in questo file. Niente da portare, per scelta: sul sito la stessa guardia sta gia' in `scripts/offload-generated-images-cdn.mjs` (sito #7493), che la copia del sito esegue come offload, e il `fast-publish-article.yml` del sito e' solo `workflow_dispatch` con `dry_run: true` di default e `human_approval`; qui `fast-publish-article.yml` parte a ogni push di `content/**` su main. Baseline corpus rigenerata sull'hash di oggi, baseline sito invariata. Oggi 502 righe qui contro 440 la', 470 righe di diff; le due chiamate a `sanitizeHtmlDocument` citate sopra restano alle righe 293 e 296.",
       "baseline": {
         "site": "d301f81c84506ca8",
-        "corpus": "2c426a08e15b2d6f",
-        "alignedAt": "2026-09-25"
+        "corpus": "3cb42f8a3426f1c3",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -3530,8 +3641,8 @@
       "reason": "Sitemap-XML builder estratto da scripts/build-api.mjs (issue #138 item 1), cosi' e' importabile sotto un node --test puro (nessun import .ts) per un test comportamentale reale. Il sito non ha un file omonimo: costruisce le sue sitemap con un renderer diverso (build-plugins/ogPagesPlugin.ts), non con questo script.",
       "baseline": {
         "site": null,
-        "corpus": "72f1caaadb03c397",
-        "alignedAt": "2026-08-10"
+        "corpus": "5feedc1fc12196a5",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3789,8 +3900,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "1575491ae29ffabc",
-        "corpus": "1575491ae29ffabc",
+        "site": "914d98fbe777fb1b",
+        "corpus": "914d98fbe777fb1b",
         "alignedAt": "2026-10-05"
       }
     },
@@ -3849,8 +3960,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fcbb09b97ff76c0e",
-        "corpus": "fcbb09b97ff76c0e",
+        "site": "e806a05d5b559e92",
+        "corpus": "e806a05d5b559e92",
         "alignedAt": "2026-10-05"
       }
     },
@@ -3949,9 +4060,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fc268d811d8e6b48",
-        "corpus": "fc268d811d8e6b48",
-        "alignedAt": "2026-10-04"
+        "site": "340ae4a06bf98a94",
+        "corpus": "340ae4a06bf98a94",
+        "alignedAt": "2026-10-05"
       }
     },
     {
@@ -3960,8 +4071,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "285d97b91767ccba",
-        "corpus": "285d97b91767ccba",
+        "site": "865b689c607e9ee7",
+        "corpus": "865b689c607e9ee7",
         "alignedAt": "2026-10-05"
       }
     },
@@ -4067,7 +4178,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "e146832521a99cd2",
+        "corpus": "3a6f1cf792554903",
         "alignedAt": "2026-10-01"
       }
     },
@@ -4177,10 +4288,10 @@
       "mode": "adapted",
       "reason": "Gate del check Node del corpus: conserva il carry-forward del contributo e il fallback deterministico per drift del workflow. Come il sito, una review Codex richiede evidenza della run, identità bot ammessa, marker e HEAD esatta. Dal 2026-09-25 le letture del gate passano da `lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso `failure_kind=transient` con il marker che `review-quota-rescuer.mjs` usa per rilanciare dopo il reset); il modulo e' nel manifest del bootstrap trusted. Adattamento al bucket REST del `GITHUB_TOKEN` di questo repo, che il sito non condivide.",
       "baseline": {
-        "site": "164fe984b258c1ed",
-        "corpus": "31450af30ed026ec",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:28.574Z"
+        "site": "0b1d7b6b0d508458",
+        "corpus": "c810d4cc0cceeb70",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T00:27:33.036Z"
       }
     },
     {
@@ -4456,7 +4567,7 @@
     {
       "path": ".github/workflows/pr-redcheck-fixer.yml",
       "mode": "adapted",
-      "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo.",
+      "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "84011cb61e180899",
         "corpus": "97e1ec85a24e3a94",
@@ -4498,9 +4609,10 @@
       "mode": "adapted",
       "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",
       "baseline": {
-        "site": "fc90732f0e8c3af3",
-        "corpus": "1db7f81712ca6755",
-        "alignedAt": "2026-09-08"
+        "site": "8ec09e43fa2519a4",
+        "corpus": "a06e49c64e214cde",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -4943,6 +5055,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/blog-image-policy.mjs",
+      "mode": "corpus-only",
+      "reason": "Policy condivisa per gli hero WebP degli articoli: dimensioni 1200x675, target sotto 200 KiB e quality ladder comune a `create-article.mjs`, `publish-journalist-article.mjs` e allo script di manutenzione. Il sito non esegue piu' questi producer dopo il cutover del generatore e non possiede un gemello operativo di questo modulo; la policy resta quindi nel corpus, dove vengono creati e pubblicati gli asset.",
+      "baseline": {
+        "site": null,
+        "corpus": "65c00b71923c29c4",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/private-event-records.mjs",
+      "mode": "corpus-only",
+      "reason": "Seconda linea di difesa all'ingresso del dataset eventi nel corpus (refresh-events-dataset.mjs): scarta i record delle fonti private (Eventfrog, AGB §17(3)/(6), decisione D5 del 2026-10-05) prima della cache che legge il digest. Sul sito il predicato equivalente vive in `scripts/lib/private-event-sources.mjs`, con API diversa e dentro l'assemblatore: il confine fra i repo e' HTTP, quindi la duplicazione e' voluta e non e' un gemello.",
+      "baseline": {
+        "site": null,
+        "corpus": "a85d9ee0d540bd52",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
       "path": "generator/scripts/refresh-canton-notices.mjs",
       "mode": "corpus-only",
       "reason": "Refresh morbido di `canton-notices.json` (D11/P9g) dal CDN del sito, nel REWIRE set: forma verificata da `lib/canton-notices-data.mjs` e inchiodata in `generator/tests/lib/rewire-contracts.mjs`. Nessun omonimo sul sito (il produttore e' `scripts/crawl-canton-notices.mjs`).",
@@ -4959,6 +5091,166 @@
       "baseline": {
         "site": null,
         "corpus": "e40082fb50f893b5",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/articles.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Bacino delle news di un cantone (sezione propria + frontaliere/svizzera col campo `canton`), assegnazione al tema con la tassonomia dell'engine o il classificatore a parole chiave, ordinamento e dedup.",
+      "baseline": {
+        "site": null,
+        "corpus": "d5dbee13c5b9a717",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-border-wait.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «attese ai valichi»: legge la finestra del contratto REWIRE `border-wait-window` per il campo `canton` di ogni valico.",
+      "baseline": {
+        "site": null,
+        "corpus": "9d41a6767616e1d5",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-common.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Contratto dei blocchi dati degli hub (codici di omissione, soglie minime di validita', controllo di freschezza), modello `daily-brief-data.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "b22904bf7f8cd35e",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-events.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prossimi eventi»: legge la cache del contratto REWIRE `events-dataset` filtrando per i membri del gruppo cantonale.",
+      "baseline": {
+        "site": null,
+        "corpus": "1c53e1ea0f68d5fb",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-fuel.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «prezzi dei carburanti»: legge la cache del contratto REWIRE `fuel-cantons` (dichiarato in `readBy` di `generator/tests/lib/rewire-contracts.mjs`).",
+      "baseline": {
+        "site": null,
+        "corpus": "1b8751ac8559ed44",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-notices.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «avvisi ufficiali»: legge la cache del contratto REWIRE `canton-notices` tramite `canton-notices-data.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "fb7788b237047303",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-pensions.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub pensioni (parametri federali, casse cantonali, imposta sul capitale) dal dataset annuale `pension-parameters` (contratto REWIRE `pension-parameters`).",
+      "baseline": {
+        "site": null,
+        "corpus": "d4bd91ce2f3e62c2",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-road-events.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper del blocco «chiusure e cantieri»: legge la cache del contratto REWIRE `road-events`.",
+      "baseline": {
+        "site": null,
+        "corpus": "cf2eea9964d750f1",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-services.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub servizi (premi, turni farmacia, aste targhe, meteo): legge la vista `canton-services.json` costruita da `refresh-canton-services-data.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "ad08fbd446206252",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/blocks-tax.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Shaper dei blocchi dell'hub fisco (onere fiscale, imposta alla fonte) dal dataset annuale `canton-tax` (contratto REWIRE `canton-tax`).",
+      "baseline": {
+        "site": null,
+        "corpus": "06af9b6879d30248",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/build.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Costruzione pura del file dati di un hub: blocchi, fatti chiave, news, link, validazione con le regole del renderer dell'engine, impronta del contenuto e `updatedAt` stabile.",
+      "baseline": {
+        "site": null,
+        "corpus": "5cb78cba903fe0d1",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/copy.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Intro evergreen deterministica degli hub nelle 4 locali (nessun LLM, nessuna cifra) e controllo di coerenza toponimi/cantone sul testo scritto dal producer.",
+      "baseline": {
+        "site": null,
+        "corpus": "0a38e3a80a575063",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/engine-loader.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Carica `topicClusters.ts`/`topicTaxonomy.ts`/`relatedArticlesIndex.ts` dell'engine da uno script `.mjs` sotto `node` puro (hook di resolve per gli import relativi senza estensione).",
+      "baseline": {
+        "site": null,
+        "corpus": "7b978a976db30076",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/format.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Formattazione di numeri e date per le 4 locali senza `Intl`: i file degli hub sono committati e confrontati byte per byte, non possono dipendere dalla versione di ICU del runner.",
+      "baseline": {
+        "site": null,
+        "corpus": "9ea275f3cd8ce695",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/links.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Link a strumenti e pagine di categoria per (cantone, tema, locale), dal catalogo verificato sulle sitemap e dai file slug.",
+      "baseline": {
+        "site": null,
+        "corpus": "866fe1cd11f2d453",
+        "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/canton-hubs/paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer degli hub tematici cantonali (P10, D17), solo corpus: il sito pubblica i dataset di categoria e rende le pagine con l'engine, i DATI dell'hub nascono qui. Path dei file dati degli hub tematici cantonali (`content/cantons/<sezione>/hubs/<tema>.json`), importato anche da `scripts/lib/article-surfaces.mjs` per dichiararli fra le superfici di scrittura della sezione.",
+      "baseline": {
+        "site": null,
+        "corpus": "5aa5b161c07a95ea",
         "alignedAt": "2026-10-05"
       }
     }
