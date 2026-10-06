@@ -2615,6 +2615,8 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'deduzioni-3a-2027': { it: 'deduzioni-3a-2027', en: 'pillar3-tax-deduction-2027', de: 'abzug-saeule-3a-2027', fr: 'deduction-pilier-3a-2027' },
  'greggio-export-pre-guerra': { it: 'greggio-export-pre-guerra', en: 'crude-oil-middle-east-prewar', de: 'rohoel-export-nahost-vorkriegsniveau', fr: 'petrole-brut-export-moyen-orient' },
  'svizzera-patriot-bodluv-iva-attesa': { it: 'svizzera-patriot-bodluv-iva-attesa', en: 'defenseless-switzerland-missile-defense-delay-and-vat', de: 'wehrlose-schweiz-verzogerung-raketenabwehr-und-mehrwertsteuer', fr: 'suisse-sans-defense-retard-de-la-defense-antimissile-et-tva' },
+ 'permesso-edilizio-berna-procedura': { it: 'permesso-edilizio-berna-procedura', en: 'bern-building-permit-process', de: 'baubewilligung-bern-verfahren', fr: 'permis-construire-berne-procedure' },
+ 'air-baltic-tagli-swiss': { it: 'air-baltic-tagli-swiss', en: 'air-baltic-cuts-swiss-flights', de: 'air-baltic-stellenabbau-swiss', fr: 'air-baltic-suppressions-swiss' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

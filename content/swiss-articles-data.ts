@@ -24565,6 +24565,27 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'permesso-edilizio-berna-procedura',
+    category: 'pratico',
+    date: '2026-10-06T01:17:07.729Z',
+    image: '/images/blog/permesso-edilizio-berna-procedura.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'air-baltic-tagli-swiss',
+    category: 'novita',
+    date: '2026-10-06T01:43:45.507Z',
+    image: '/images/blog/air-baltic-tagli-swiss.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

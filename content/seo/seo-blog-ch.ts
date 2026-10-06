@@ -98139,6 +98139,74 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-edilizio-berna-procedura': {
+    title: 'Autorizzazione edilizia a Berna: requisiti e procedura',
+    description: 'Autorizzazione edilizia nel Cantone di Berna: requisiti, documenti, ruolo di comune e cantone, opposizioni e divieto di iniziare i lavori senza permesso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, autorizzazione, edilizia, berna, requisiti',
+    ogTitle: 'Permesso edilizio nel Cantone di Berna',
+    ogDescription: 'La procedura edilizia nel Cantone di Berna parte dalla verifica del permesso e dei documenti richiesti. Comune e cantone hanno un ruolo nel percorso; opposizioni e ricorsi vanno considerati prima di iniziare i lavori.',
+    canonicalPath: '/articoli-svizzera/permesso-edilizio-berna-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Autorizzazione edilizia a Berna: requisiti e procedura",
+      "description": "Autorizzazione edilizia nel Cantone di Berna: requisiti, documenti, ruolo di comune e cantone, opposizioni e divieto di iniziare i lavori senza permesso.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/permesso-edilizio-berna-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti per una richiesta di autorizzazione edilizia nel Cantone di Berna"
+      },
+      "datePublished": "2026-10-06T01:17:07+00:00",
+      "dateModified": "2026-10-06T01:17:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-edilizio-berna-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-air-baltic-tagli-swiss': {
+    title: 'Air Baltic, partner di Swiss, taglia fino a 700 posti',
+    description: 'Air Baltic, che opera anche per Swiss, prevede 500-700 tagli su circa 3\'000 posti. Il programma di voli resta invariato; coinvolte Riga, Vilnius e Tallinn.',
+    keywords: 'frontalieri, ticino, svizzera, italia, baltic, partner, swiss, taglia',
+    ogTitle: 'Air Baltic: fino a 700 tagli, partnership con Swiss',
+    ogDescription: 'Il nuovo piano aziendale della compagnia lettone punta su una flotta propria più ridotta di Airbus A220-300 e su partnership più solide durante tutto l\'anno. Cinque A220-300 erano in servizio per Swiss all\'inizio di marzo.',
+    canonicalPath: '/articoli-svizzera/air-baltic-tagli-swiss/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Air Baltic, partner di Swiss, taglia fino a 700 posti",
+      "description": "Air Baltic, che opera anche per Swiss, prevede 500-700 tagli su circa 3'000 posti. Il programma di voli resta invariato; coinvolte Riga, Vilnius e Tallinn.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/air-baltic-tagli-swiss.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Air Baltic riduce il personale mentre mantiene invariato il programma di voli."
+      },
+      "datePublished": "2026-10-06T01:43:45+00:00",
+      "dateModified": "2026-10-06T01:43:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/air-baltic-tagli-swiss/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
