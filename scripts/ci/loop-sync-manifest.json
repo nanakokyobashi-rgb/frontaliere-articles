@@ -3271,6 +3271,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/translation-sentinels.mjs",
+      "mode": "corpus-only",
+      "reason": "Registro condiviso delle sentinelle protette usate dal generatore corpus per classificare, mascherare e ripristinare token di traduzione. Esiste solo qui perché il sito non importa questo modulo e il suo percorso di traduzione ha già la propria implementazione locale.",
+      "baseline": {
+        "site": null,
+        "corpus": "554067ca6635298f",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "generator/scripts/lib/exhaustion-disposition.mjs",
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
       "mode": "identical",
