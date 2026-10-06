@@ -450,16 +450,19 @@ function isExecutableScriptTag(html, tag, start) {
   if (!type) return true;
   const value = (type[1] ?? type[2] ?? type[3] ?? '').trim().toLowerCase();
   if (!value || value === 'module') return true;
-  return value === 'text/javascript' || value === 'application/javascript'
-    || value === 'text/ecmascript' || value === 'application/ecmascript'
-    || value.endsWith('/javascript') || value.endsWith('/ecmascript');
+  const mime = value.split(';', 1)[0].trim();
+  return mime === 'text/javascript' || mime === 'application/javascript'
+    || mime === 'text/ecmascript' || mime === 'application/ecmascript'
+    || mime.endsWith('/javascript') || mime.endsWith('/ecmascript');
 }
 
 function hasCdnBaseAssignment(script) {
-  // The initializer emitted by this script is a concrete URL assignment. A
-  // generic application script that merely mentions the property must not
-  // suppress injection and allow the local runtime payload to be deleted.
-  return /\bwindow\.__CDN_DATA_BASE__\s*=\s*(["']https?:\/\/[^"']+["'])/i.test(script);
+  // The initializer emitted by this script is the complete script body below.
+  // Requiring that exact shape is deliberately stricter than searching for an
+  // assignment: comments, string literals, regex literals, and application
+  // code can all contain the same text while leaving the runtime unconfigured.
+  const source = String(script || '').trim();
+  return /^window\.__CDN_DATA_BASE__\s*=\s*(["'])https?:\/\/[^"'\\\r\n]+\1\s*;?$/i.test(source);
 }
 
 /**

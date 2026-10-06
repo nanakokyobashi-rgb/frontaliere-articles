@@ -109,6 +109,23 @@ test('does not accept a bare CDN property mention as an initializer', () => {
   assert.ok(output.includes(CDN), 'la configurazione deve essere assegnata allo script attivo');
 });
 
+test('does not accept a CDN assignment that only appears in a JS string', () => {
+  const html = '<!doctype html><html><head><script>'
+    + 'const example = \'window.__CDN_DATA_BASE__="https://stale.example"\';'
+    + '</script><meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  assert.equal((output.match(/window\.__CDN_DATA_BASE__/g) || []).length, 2);
+  assert.ok(output.includes(`window.__CDN_DATA_BASE__="${CDN}"`));
+});
+
+test('accepts the emitted CDN initializer with a JavaScript MIME parameter', () => {
+  const html = '<!doctype html><html><head><script type="text/javascript; charset=utf-8">'
+    + `window.__CDN_DATA_BASE__="${CDN}"`
+    + '</script><meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  assert.equal((output.match(/window\.__CDN_DATA_BASE__/g) || []).length, 1);
+});
+
 test('keeps CDN payloads when one HTML page has no active head', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-cdn-charset-guard-'));
   try {

@@ -182,9 +182,10 @@ function skipTemplateElement(html: string, afterOpening: number): number {
  * of the rendered page but would otherwise be copied into the redirect
  * bridge. Template depth is tracked so nested templates remain inactive.
  */
-function maskInactiveMarkup(html = '') {
+function maskInactiveMarkup(html = '', options: { maskRcdata?: boolean } = {}) {
   const source = String(html || '');
   const output = source.split('');
+  const maskRcdata = options.maskRcdata === true;
   const blank = (start: number, end: number) => {
     for (let index = start; index < end; index += 1) output[index] = ' ';
   };
@@ -207,7 +208,9 @@ function maskInactiveMarkup(html = '') {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && HTML_INACTIVE_RAW_TEXT_ELEMENTS.has(tag.name)) {
+    const isRcdata = maskRcdata && (tag.name === 'title' || tag.name === 'textarea');
+    if (!tag.closing && !tag.selfClosing
+      && (HTML_INACTIVE_RAW_TEXT_ELEMENTS.has(tag.name) || isRcdata)) {
       const afterRawText = skipRawTextElement(source, tag.end + 1, tag.name);
       const afterInactive = afterRawText < 0 ? source.length : afterRawText;
       blank(start, afterInactive);
@@ -246,7 +249,10 @@ export function extractOgTags(indexHtml: string): string {
   const metaRx = /<meta\b[^>]*\/?>/gi;
   const attrRx = /([^\s=/>]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
   let match: RegExpExecArray | null;
-  while ((match = metaRx.exec(maskInactiveMarkup(indexHtml)))) {
+  // RCDATA is rendered as text, so a literal `<meta>` inside the page title
+  // or a textarea is not active metadata. Title extraction below uses the
+  // default mask and therefore still sees the real document title.
+  while ((match = metaRx.exec(maskInactiveMarkup(indexHtml, { maskRcdata: true })))) {
     const tag = match[0];
     attrRx.lastIndex = 0;
     const attrs: Record<string, string> = {};
