@@ -15,6 +15,8 @@
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
+import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
+import { SUPPORTED_LOCALES } from './key-facts-specificity.mjs';
 import {
   comuneTopicKey,
   isMunicipalityIndexUsable,
@@ -23,6 +25,77 @@ import {
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
+
+const templateLocale = (locale) => {
+  const value = String(locale ?? '').trim().toLowerCase();
+  return SUPPORTED_LOCALES.includes(value) ? value : null;
+};
+
+function templateHeadingPairs(sourceLang, targetLang) {
+  const sourceLocale = templateLocale(sourceLang);
+  const targetLocale = templateLocale(targetLang);
+  if (!sourceLocale || !targetLocale) return [];
+  return [
+    [getTldrHeading(sourceLocale), getTldrHeading(targetLocale)],
+    [getKeyFactsHeading(sourceLocale), getKeyFactsHeading(targetLocale)],
+  ];
+}
+
+/**
+ * Split a field at every complete template-heading line.
+ *
+ * Template headings are generator tokens, not prose, and their target-language
+ * form is fixed by the same getters the factuality guard uses. They therefore
+ * never reach the engine: the runs of text between them are translated on their
+ * own and the canonical target heading is written back between the runs.
+ *
+ * A sentinel was the first attempt and it cannot hold. The free cascade does
+ * not preserve line structure: its long-text branch joins the sentence segments
+ * of a chunk, and then the chunks, with a space
+ * (`_chunkAtSentences` and `parts.join(' ')` in `free-translate.mjs`), so a token
+ * that must come back alone on its line comes back inline. Whatever the engine
+ * does to its input, a heading it never sees cannot be translated, merged into
+ * a sentence, reordered or dropped.
+ *
+ * Headings are recognised on `detectText` and the segments are cut from
+ * `payloadText`: the municipality mask in between rewrites names inside a line
+ * but never adds or removes a line, so the two texts are line-parallel.
+ *
+ * @param {string} detectText
+ * @param {string} payloadText
+ * @param {string} sourceLang
+ * @param {string} targetLang
+ * @returns {Array<{ kind: 'heading' | 'text', value: string }>}
+ */
+function splitAtTemplateHeadings(detectText, payloadText, sourceLang, targetLang) {
+  const payload = String(payloadText ?? '');
+  const pairs = templateHeadingPairs(sourceLang, targetLang);
+  if (pairs.length === 0) return [{ kind: 'text', value: payload }];
+  const bySourceHeading = new Map(
+    pairs.map(([source, target]) => [source.trim().toLowerCase(), target]),
+  );
+  const payloadLines = payload.split('\n');
+  const detectLines = String(detectText ?? '').split('\n');
+  const lines = detectLines.length === payloadLines.length ? detectLines : payloadLines;
+  const segments = [];
+  let run = [];
+  const flushRun = () => {
+    if (run.length === 0) return;
+    segments.push({ kind: 'text', value: run.join('\n') });
+    run = [];
+  };
+  lines.forEach((line, index) => {
+    const target = bySourceHeading.get(line.trim().toLowerCase());
+    if (target === undefined) {
+      run.push(payloadLines[index]);
+      return;
+    }
+    flushRun();
+    segments.push({ kind: 'heading', value: target });
+  });
+  flushRun();
+  return segments;
+}
 
 // Free-MT translates titles, excerpts, body sections and FAQ fields through
 // this same function. The absolute floor used for article prose must therefore
@@ -353,35 +426,62 @@ export async function translateFieldFreeMt({
   const nav = maskNavLinks(src);
   const municipalities = preserveMunicipalityNames
     ? maskMunicipalityNames(nav.masked)
-    : { masked: nav.masked, expected: 0, restore: (s) => ({ text: String(s ?? ''), ok: true }) };
-  let out;
-  try {
-    out = await translate({ text: municipalities.masked, sourceLang, targetLang, fieldType });
-  } catch (err) {
-    onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'error' });
-    onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);
-    return '';
+    : {
+      masked: nav.masked,
+      expected: 0,
+      restore: (s) => ({ text: String(s ?? ''), ok: true }),
+    };
+  const segments = splitAtTemplateHeadings(nav.masked, municipalities.masked, sourceLang, targetLang);
+  // Without template headings there is one segment and the field goes to the
+  // engine exactly as before: one call, its output taken verbatim.
+  const hasTemplateHeadings = segments.length > 1;
+  const parts = [];
+  for (const segment of segments) {
+    if (segment.kind === 'heading') {
+      parts.push(segment.value);
+      continue;
+    }
+    // Leading blank lines, the text to translate, trailing blank lines.
+    const core = segment.value.trim();
+    if (!core) {
+      parts.push(segment.value);
+      continue;
+    }
+    const coreStart = segment.value.indexOf(core);
+    const lead = segment.value.slice(0, coreStart);
+    const trail = segment.value.slice(coreStart + core.length);
+    let out;
+    try {
+      out = await translate({ text: core, sourceLang, targetLang, fieldType });
+    } catch (err) {
+      onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'error' });
+      onWarn(`free-MT ${targetLang}:${fieldType} failed (${err?.message || err})`);
+      return '';
+    }
+    // L'uscita di un MOTORE, non la prosa di un modello: qui vale il predicato
+    // severo, TUTTE le grafie di `null` (vedi il blocco «QUALE DEI DUE
+    // PREDICATI» in body2-payload-verdict.mjs). `Null`/`NULL` e' cio' che un
+    // motore della cascata gratuita emette quando NON ha una traduzione — un
+    // marker di fallimento, non la parola tedesca per «zero» scelta da qualcuno
+    // che sapeva cosa stava traducendo. Accettarlo su `targetLang === 'de'`
+    // pubblicava il marker verbatim in `content/`, in `meta-de.json`, nel feed
+    // RSS `de` e come segmento di slug `/de/blog/null` (#868 item 4).
+    // Scartarlo costa al piu' una recovery per-campo (retry mirato → fallback
+    // IT): un retry, non una pubblicazione sbagliata.
+    if (!hasUsableContentText(out)) {
+      onUnusableOutput({
+        targetLang,
+        fieldType,
+        ...(fieldName ? { fieldName } : {}),
+        reason: typeof out === 'string' ? 'unusable-text' : 'non-string',
+      });
+      return '';
+    }
+    // Between headings the blank lines come from the source, not from the
+    // engine: a block that comes back with stray edges must not move a heading.
+    parts.push(hasTemplateHeadings ? `${lead}${String(out).trim()}${trail}` : String(out));
   }
-  // L'uscita di un MOTORE, non la prosa di un modello: qui vale il predicato
-  // severo, TUTTE le grafie di `null` (vedi il blocco «QUALE DEI DUE
-  // PREDICATI» in body2-payload-verdict.mjs). `Null`/`NULL` e' cio' che un
-  // motore della cascata gratuita emette quando NON ha una traduzione — un
-  // marker di fallimento, non la parola tedesca per «zero» scelta da qualcuno
-  // che sapeva cosa stava traducendo. Accettarlo su `targetLang === 'de'`
-  // pubblicava il marker verbatim in `content/`, in `meta-de.json`, nel feed
-  // RSS `de` e come segmento di slug `/de/blog/null` (#868 item 4).
-  // Scartarlo costa al piu' una recovery per-campo (retry mirato → fallback
-  // IT): un retry, non una pubblicazione sbagliata.
-  if (!hasUsableContentText(out)) {
-    onUnusableOutput({
-      targetLang,
-      fieldType,
-      ...(fieldName ? { fieldName } : {}),
-      reason: typeof out === 'string' ? 'unusable-text' : 'non-string',
-    });
-    return '';
-  }
-  let restored = String(out);
+  let restored = parts.join('\n');
   if (municipalities.expected > 0) {
     const r = municipalities.restore(restored);
     if (!r.ok) {

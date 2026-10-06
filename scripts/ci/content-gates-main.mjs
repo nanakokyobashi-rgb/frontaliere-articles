@@ -136,6 +136,7 @@ export const CONTENT_GATES = [
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',
+  'generator/tests/article-unrendered-markup.test.mjs',
   'generator/tests/article-topic-coverage-guard.test.mjs',
   'generator/tests/article-source-echo.test.mjs',
   'generator/tests/blog-headline-validation.test.mjs',

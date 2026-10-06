@@ -71,6 +71,7 @@ const CACHE = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dat
 
 const SUPPORTED_SCHEMA = 1;
 const SIDES = new Set(['CH', 'FR', 'AT', 'IT', 'DE']);
+const SOURCE_HEALTH_KEYS = ['ch', 'it', 'fr', 'at', 'de'];
 const FUELS = new Set(['sp95', 'diesel']);
 const CURRENCIES = new Set(['CHF', 'EUR']);
 const GRANULARITIES = new Set(['station', 'region', 'national']);
@@ -130,6 +131,22 @@ if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
 }
 if (payload.schemaVersion !== SUPPORTED_SCHEMA) {
   fail(`${SOURCE} has schemaVersion ${JSON.stringify(payload.schemaVersion)}, expected ${SUPPORTED_SCHEMA} — refusing an unrecognised shape`);
+}
+
+// Schema 1 payloads from before the DE overlay may not have health yet, so the
+// field remains optional during the HTTP hand-off. When present, however, it
+// must be the producer's explicit per-source health contract: a skipped or
+// failed foreign source is information, not a reason to reject the dataset.
+if (payload.health !== undefined) {
+  if (!payload.health || typeof payload.health !== 'object' || Array.isArray(payload.health)) {
+    fail(`${SOURCE}.health is not an object — refusing`);
+  }
+  for (const key of SOURCE_HEALTH_KEYS) {
+    const value = payload.health[key];
+    const valid = value === 'ok' || value === 'skipped'
+      || (typeof value === 'string' && value.startsWith('failed:') && value.length > 'failed:'.length);
+    if (!valid) fail(`${SOURCE}.health.${key} ${JSON.stringify(value)} is not ok|skipped|failed:<reason>`);
+  }
 }
 
 if (!isIsoInstant(payload.generatedAt)) fail(`${SOURCE}: generatedAt ${JSON.stringify(payload.generatedAt)} is not an ISO instant`);

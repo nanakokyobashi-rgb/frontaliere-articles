@@ -70,11 +70,20 @@
       "status": "ok"
     },
     "DE": {
-      "provider": "Tankerkönig",
+      "provider": "Tankerkönig / MTS-K",
       "url": "https://creativecommons.tankerkoenig.de/json/list.php",
+      "license": "CC BY 4.0",
+      "attribution": "Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
       "status": "skipped",
-      "reason": "TANKERKOENIG_API_KEY not configured (Remote Config)"
+      "reason": "TANKERKOENIG_API_KEY is not configured (Remote Config); DE overlay skipped"
     }
+  },
+  "health": {
+    "ch": "ok",
+    "it": "ok",
+    "fr": "ok",
+    "at": "ok",
+    "de": "skipped"
   },
   "coverage": {
     "expectedCantons": [

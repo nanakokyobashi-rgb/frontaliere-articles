@@ -2562,6 +2562,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/ts-string-map.mjs",
+      "mode": "corpus-only",
+      "reason": "Lettore dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312). Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
+      "baseline": {
+        "site": null,
+        "corpus": "628630f8ef0e0852",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "generator/scripts/lib/cantone-toponimi-coerenza.mjs",
       "mode": "corpus-only",
       "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
