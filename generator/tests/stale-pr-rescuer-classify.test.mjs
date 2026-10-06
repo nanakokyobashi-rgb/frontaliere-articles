@@ -346,7 +346,7 @@ case "$sub" in
           # Rilettura della classe F subito prima della mutation: lo stato
           # CORRENTE della PR. _live nella fixture simula ciò che è cambiato
           # fra la prova e la label; _liveError una lettura fallita.
-          node -e 'const value=require(process.argv[1]); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const pr={...base,...(base?._live||{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"-", pr.head?.ref||"-", String(Boolean(pr.draft)), pr.mergeable_state||"unknown", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)}
+          node -e 'const value=require(process.argv[1]); const fs=require("fs"); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const counter=process.argv[2]; fs.appendFileSync(counter,"x"); const second=fs.readFileSync(counter,"utf8").length>1; const pr={...base,...(base?._live||{}),...(second?(base?._liveSecond||{}):{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"-", pr.head?.ref||"-", String(Boolean(pr.draft)), pr.mergeable_state||"unknown", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)} ${JSON.stringify(path.join(dir, 'live-reads'))}
         elif [ "$jq" = '.mergeable_state // ""' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; if (pr?.mergeable_state === "__error__") process.exit(1); process.stdout.write(String(pr?.mergeable_state||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.body // ""' ]; then
@@ -1279,6 +1279,27 @@ test('F — la prova che autorizza la label è il merge-tree DOPO la rilettura',
     assert.deepEqual(r.labeled, [], `secondo merge-tree ${second}: label su una PR non più provata in conflitto\n${r.stdout}`);
     assert.deepEqual(r.comments, [], r.stdout);
   }
+});
+
+test('F — un veto o un push arrivati DURANTE la seconda prova: nessuna mutation', opts, () => {
+  // Review di #2274: la rilettura finiva prima del secondo fetch/merge-tree,
+  // e `recycle-stale-prs` seleziona `stale-review` senza guardare i veto.
+  // `_liveSecond` è ciò che la PR è diventata alla seconda rilettura.
+  const base = [{ name: 'has-conflicts' }, { name: 'agent:autofix' }];
+  for (const [what, liveSecond] of [
+    ['needs-human', { labels: [...base, { name: 'needs-human' }] }],
+    ['agent:resolving-conflict', { labels: [...base, { name: 'agent:resolving-conflict' }] }],
+    ['push di una HEAD nuova', { head: { ref: 'fix/qualcosa', sha: OLD_SHA } }],
+    ['conflitto tolto da pr-autorebase', { labels: [{ name: 'agent:autofix' }] }],
+    ['PR chiusa', { state: 'closed' }],
+  ]) {
+    const r = runScan({ prs: conflicted([], { _liveSecond: liveSecond }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `${what}: label applicata dopo un cambiamento arrivato durante la prova\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${what}: su una differenza si salta anche il commento\n${r.stdout}`);
+  }
+  // Senza cambiamenti le due riletture concordano e la classe scatta.
+  const steady = runScan({ prs: conflicted(), ...greenLgtm() });
+  assert.deepEqual(steady.labeled, [901], steady.stdout);
 });
 
 test('F — la label si decide sulle label RILETTE, non sullo snapshot', opts, () => {

@@ -531,22 +531,27 @@ jobs:
               #      iniziale, e se l'add fallisce non si commenta.
               # Lettura fallita o qualunque differenza → PR invariata.
               # Nessun campo intermedio vuoto: `read` con IFS=tab li fonderebbe.
-              F_LIVE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '[.state, .head.sha, .base.ref, .head.ref, (.draft | tostring), (if (.mergeable_state // "") == "" then "unknown" else .mergeable_state end), ([.labels[]?.name] | join(","))] | @tsv' 2>/dev/null || true)
-              IFS=$'\t' read -r F_LIVE_STATE F_LIVE_HEAD F_LIVE_BASE F_LIVE_BRANCH F_LIVE_DRAFT F_LIVE_MERGEABLE F_LIVE_LABELS <<<"$F_LIVE" || true
-              F_LIVE_OK=true
-              [ "${F_LIVE_STATE:-}" = "open" ] || F_LIVE_OK=false
-              [ "${F_LIVE_HEAD:-}" = "$HEAD" ] || F_LIVE_OK=false
-              [ "${F_LIVE_BASE:-}" = "main" ] || F_LIVE_OK=false
-              [ "${F_LIVE_DRAFT:-}" = "false" ] || F_LIVE_OK=false
-              [ "${F_LIVE_MERGEABLE:-}" = "dirty" ] || F_LIVE_OK=false
-              case ",${F_LIVE_LABELS:-}," in *,has-conflicts,*) ;; *) F_LIVE_OK=false ;; esac
-              case ",${F_LIVE_LABELS:-}," in *,needs-human,*) F_LIVE_OK=false ;; esac
-              case ",${F_LIVE_LABELS:-}," in *,agent:resolving-conflict,*) F_LIVE_OK=false ;; esac
-              # Provenienza del ciclo, la stessa regola del filtro in cima.
-              case "${F_LIVE_BRANCH:-}" in
-                fix/*) ;;
-                *) case ",${F_LIVE_LABELS:-}," in *,agent:autofix,*) ;; *) F_LIVE_OK=false ;; esac ;;
-              esac
+              # Una rilettura completa della PR: imposta F_LIVE_* e F_LIVE_OK.
+              # In funzione perché serve DUE volte (vedi sotto).
+              f_reread_live() {
+                F_LIVE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '[.state, .head.sha, .base.ref, .head.ref, (.draft | tostring), (if (.mergeable_state // "") == "" then "unknown" else .mergeable_state end), ([.labels[]?.name] | join(","))] | @tsv' 2>/dev/null || true)
+                IFS=$'\t' read -r F_LIVE_STATE F_LIVE_HEAD F_LIVE_BASE F_LIVE_BRANCH F_LIVE_DRAFT F_LIVE_MERGEABLE F_LIVE_LABELS <<<"$F_LIVE" || true
+                F_LIVE_OK=true
+                [ "${F_LIVE_STATE:-}" = "open" ] || F_LIVE_OK=false
+                [ "${F_LIVE_HEAD:-}" = "$HEAD" ] || F_LIVE_OK=false
+                [ "${F_LIVE_BASE:-}" = "main" ] || F_LIVE_OK=false
+                [ "${F_LIVE_DRAFT:-}" = "false" ] || F_LIVE_OK=false
+                [ "${F_LIVE_MERGEABLE:-}" = "dirty" ] || F_LIVE_OK=false
+                case ",${F_LIVE_LABELS:-}," in *,has-conflicts,*) ;; *) F_LIVE_OK=false ;; esac
+                case ",${F_LIVE_LABELS:-}," in *,needs-human,*) F_LIVE_OK=false ;; esac
+                case ",${F_LIVE_LABELS:-}," in *,agent:resolving-conflict,*) F_LIVE_OK=false ;; esac
+                # Provenienza del ciclo, la stessa regola del filtro in cima.
+                case "${F_LIVE_BRANCH:-}" in
+                  fix/*) ;;
+                  *) case ",${F_LIVE_LABELS:-}," in *,agent:autofix,*) ;; *) F_LIVE_OK=false ;; esac ;;
+                esac
+              }
+              f_reread_live
               if [ "$F_LIVE_OK" != "true" ]; then
                 echo "PR #$N: stato cambiato o non rileggibile fra la prova e la label (state=${F_LIVE_STATE:-?} head=${F_LIVE_HEAD:0:7} base=${F_LIVE_BASE:-?} draft=${F_LIVE_DRAFT:-?} mergeable_state=${F_LIVE_MERGEABLE:-?}) — PR invariata"
                 continue
@@ -554,6 +559,24 @@ jobs:
               F_TREE_STATE=$(f_merge_tree_state "$N" "$F_LIVE_HEAD")
               if [ "$F_TREE_STATE" != "conflicted" ]; then
                 echo "PR #$N: merge-tree dopo la rilettura è $F_TREE_STATE — conflitto non più provato, PR invariata"
+                continue
+              fi
+              # Seconda rilettura, DOPO la prova e immediatamente prima della
+              # mutation: fetch e merge-tree durano secondi, e in quei secondi
+              # può arrivare un veto (`needs-human`, `agent:resolving-conflict`)
+              # o un push. `recycle-stale-prs` seleziona `stale-review` senza
+              # guardare i veto, quindi una label messa qui dopo un veto lo
+              # aggirerebbe. Le label rilette ORA sono anche quelle su cui si
+              # decide l'add. Su qualunque differenza si salta tutto, commento
+              # compreso.
+              #
+              # Finestra residua, per costruzione: l'API non offre un add-label
+              # condizionale, quindi fra questa lettura e `gh pr edit` resta il
+              # tempo di UNA chiamata. Non c'è una terza rilettura che la chiuda
+              # — ne aprirebbe un'altra identica.
+              f_reread_live
+              if [ "$F_LIVE_OK" != "true" ]; then
+                echo "PR #$N: stato o veto cambiati durante la prova (state=${F_LIVE_STATE:-?} head=${F_LIVE_HEAD:0:7} label=${F_LIVE_LABELS:-?}) — PR invariata"
                 continue
               fi
               case ",${F_LIVE_LABELS:-}," in
