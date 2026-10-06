@@ -59,7 +59,7 @@
  * ══════════════════════════════════════════════════════════════
  */
 
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, realpathSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, rmSync, realpathSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createInterface } from 'node:readline';
@@ -171,7 +171,7 @@ import {
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
-import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { AI_SEARCH_PROMPT_BLOCK_IT, findOrphanedKeyFactsList } from './lib/ai-search-template.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
@@ -5029,6 +5029,15 @@ function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
   for (const [locale, localeContent] of Object.entries(content)) {
     if (!localeContent || typeof localeContent !== 'object') continue;
     if (typeof localeContent.body1 !== 'string') continue;
+
+    const orphanedKeyFacts = findOrphanedKeyFactsList(localeContent.body1, locale);
+    if (orphanedKeyFacts) {
+      throw qualityRejectError(
+        `[key-facts-heading] ${data.id || '(id mancante)'} ${locale}: `
+        + `${orphanedKeyFacts.bulletCount} fatti chiave senza l'intestazione ${orphanedKeyFacts.heading}`,
+      );
+    }
+
     const result = stripVacuousFacts(localeContent.body1);
     if (result.rejected) {
       const sections = result.rejectedSections.join(', ');
@@ -14016,6 +14025,22 @@ function articleImageAssetId(data) {
   return `article-${(normalized || 'article').slice(0, 110)}`;
 }
 
+function materializeGovernedArticleImage(result) {
+  const record = result?.record;
+  const imageUrl = String(record?.imageUrl || '');
+  const articleHeroPath = /^\/images\/(?:blog|generated)\/[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+  if (record?.scope !== 'article-hero' || !articleHeroPath.test(imageUrl)) {
+    throw new Error(`Governed engine returned an invalid article-hero path: ${imageUrl || '<empty>'}`);
+  }
+  if (!result?.filePath || !existsSync(result.filePath)) {
+    throw new Error(`Governed engine returned no materialized image for ${imageUrl}`);
+  }
+  const destination = resolve(`public${imageUrl}`);
+  mkdirSync(path.dirname(destination), { recursive: true });
+  renameSync(result.filePath, destination);
+  return { destination, stagingDir: path.dirname(result.filePath) };
+}
+
 /**
  * Generate a new article hero only through the governed image engine.
  *
@@ -14036,6 +14061,7 @@ async function generateArticleImage(data) {
   }
 
   const assetId = articleImageAssetId(data);
+  const stagingDir = resolve(`.cache/generated-article-images/${assetId}-${process.pid}-${Date.now()}`);
   let result;
   try {
     result = await generateImageFromSpec(
@@ -14048,7 +14074,7 @@ async function generateArticleImage(data) {
         variant: 'article hero',
       },
       {
-        outputDir: resolve('public/images/generated'),
+        outputDir: stagingDir,
         assetId,
         maxAttempts: 3,
         deadlineAt: imageDeadline,
@@ -14058,11 +14084,27 @@ async function generateArticleImage(data) {
       },
     );
   } catch (error) {
+    if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
     return null;
   }
 
-  appendGeneratedImageRecord(PROJECT_ROOT, result.record);
+  let materialized;
+  try {
+    materialized = materializeGovernedArticleImage(result);
+    appendGeneratedImageRecord(PROJECT_ROOT, result.record);
+  } catch (error) {
+    if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
+    console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    return null;
+  } finally {
+    const cleanupDir = materialized?.stagingDir
+      || (result?.filePath ? path.dirname(result.filePath) : null)
+      || stagingDir;
+    if (cleanupDir && existsSync(cleanupDir)) {
+      rmSync(cleanupDir, { recursive: true, force: true });
+    }
+  }
   data._generatedImageRecord = result.record;
   data._generatedImagePath = result.record.imageUrl;
   console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);

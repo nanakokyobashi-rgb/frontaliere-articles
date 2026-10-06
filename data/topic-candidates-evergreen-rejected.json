@@ -794,30 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://lenews.ch/2026/10/02/film-zurich-film-festival-2026-excellent-international-films-and-top-stars": {
-      "section": "svizzera",
-      "ts": 1791138099858
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1954623/pubblico-edizione-festival-svizzera-poschiavo-valposchiavo-lettere": {
-      "section": "svizzera",
-      "ts": 1791138123624
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954638/copilota-aeroporto-tel-aviv-flydubai": {
-      "section": "svizzera",
-      "ts": 1791138143624
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954599/mirante-avanti-con-ticino-lavoro-punta-a-un-seggio-in-governo": {
-      "section": "frontaliere",
-      "ts": 1791139183489
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1954274/lascia-il-lavoro-per-salvare-cani-c-e-chi-li-regala-a-natale-e-poi-non-li-vuole-piu": {
-      "section": "frontaliere",
-      "ts": 1791139244256
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/la-festa-d%e2%80%99autunno-anima-lugano--4133136.html": {
-      "section": "frontaliere",
-      "ts": 1791143743510
-    },
     "frontaliere::https://www.rsi.ch/info/economia/swiss-steel-ristruttura-e-taglia-in-germania--4132557.html": {
       "section": "frontaliere",
       "ts": 1791148788078
@@ -1013,6 +989,22 @@
     "svizzera::https://www.admin.ch/it/newnsb/denn9j7b-c4v": {
       "section": "svizzera",
       "ts": 1791310754920
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/campeggio-alpino-la-verzasca-si-prepara-al-cantiere--4140344.html": {
+      "section": "frontaliere",
+      "ts": 1791320181309
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955098/il-governo-si-opponga-al-progetto-autostradale-meme": {
+      "section": "frontaliere",
+      "ts": 1791320350484
+    },
+    "frontaliere::https://www.laregione.ch/svizzera/svizzera/1955125/jessica-moretti-chiede-l-indennita-per-infortunio-sul-lavoro": {
+      "section": "frontaliere",
+      "ts": 1791320403933
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1955088/lavori-a-breno-otto-notti-di-sbarramenti-all-incrocio-inferiore": {
+      "section": "frontaliere",
+      "ts": 1791321480193
     }
   }
 }

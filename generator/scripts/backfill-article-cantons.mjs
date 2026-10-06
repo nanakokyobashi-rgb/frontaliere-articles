@@ -30,6 +30,11 @@ import { fileURLToPath } from 'node:url';
 
 import { defaultCantonClassifier } from './lib/canton-classifier.mjs';
 import { applyRegistryCantons, readRegistryCantons, registryEntrySpans } from './lib/registry-canton-field.mjs';
+import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
+
+// Riesportati: il lettore abita in `lib/ts-string-map.mjs`, condiviso con
+// `backfill-article-type.mjs`; i test del classificatore lo importano da qui.
+export { readTsStringLiteral, readTsStringMap };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -49,48 +54,6 @@ export const SECTIONS = Object.freeze({
     sidecarDir: 'data/swiss-articles',
   },
 });
-
-/** Decodifica il letterale TS che comincia a `i` (apice singolo, doppio o backtick). */
-export function readTsStringLiteral(src, i) {
-  const quote = src[i];
-  if (quote !== "'" && quote !== '"' && quote !== '`') return null;
-  let out = '';
-  let j = i + 1;
-  while (j < src.length) {
-    const c = src[j];
-    if (c === '\\') {
-      const n = src[j + 1];
-      if (n === 'n') out += '\n';
-      else if (n === 't') out += '\t';
-      else if (n === 'r') out += '';
-      else if (n === 'u' && /^[0-9a-fA-F]{4}$/u.test(src.slice(j + 2, j + 6))) {
-        out += String.fromCharCode(parseInt(src.slice(j + 2, j + 6), 16));
-        j += 6;
-        continue;
-      } else out += n ?? '';
-      j += 2;
-      continue;
-    }
-    if (c === quote) return { value: out, end: j + 1 };
-    out += c;
-    j += 1;
-  }
-  return null;
-}
-
-/** Tutte le coppie `'chiave': <letterale>` di un sorgente TS di stringhe. */
-export function readTsStringMap(src) {
-  const out = new Map();
-  const rx = /(['"])(blog\.article\.[^'"]+)\1\s*:\s*/gu;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const lit = readTsStringLiteral(src, m.index + m[0].length);
-    if (!lit) continue;
-    out.set(m[2], lit.value);
-    rx.lastIndex = lit.end;
-  }
-  return out;
-}
 
 function readJsonIfExists(file) {
   try {

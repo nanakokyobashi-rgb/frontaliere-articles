@@ -1,0 +1,1472 @@
+[
+  {
+    "id": "stop-ristorni-tassa-salute",
+    "decision": "news",
+    "reason": "Racconta la mozione interpartitica per sospendere i ristorni e la sua contestazione fiscale, con fatto e fonte datati al 27/05/2024; il centro è la cronaca politica, non una guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "riscaldamento-casa-ticino-norme",
+    "decision": "unclassified",
+    "reason": "Mescola le norme RUEn 2026 con una guida decisionale e la promozione di una consulenza per impianti, quindi non è inequivocabilmente né cronaca né guida atemporale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sostituzione-caldaia-ticino-2026",
+    "decision": "unclassified",
+    "reason": "Presenta il cambiamento RUEn 2026 insieme a una checklist pratica e a una consulenza commerciale sulla sostituzione della caldaia, un contenuto misto e datato.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "hic-sunt-leones-confini-ticino",
+    "decision": "news",
+    "reason": "Racconta la mostra fotografica Hic Sunt Leones, con inaugurazione e periodo di esposizione a Lugano fissati tra febbraio e maggio 2026: è cronaca di un evento, non una guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "carnevale-bambini-lugano-2026",
+    "decision": "news",
+    "reason": "Presenta i laboratori per bambini del Museo in erba, con date precise dal 16 al 20 febbraio 2026 e attività del 18 febbraio: evento puntuale d'archivio.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "arte-anima-ticino-frontalieri",
+    "decision": "news",
+    "reason": "Racconta la mostra Sentimento e osservazione al MASI/LAC, visitabile dal 18 aprile 2025 al 26 luglio 2026: le date dell'evento sono il fatto centrale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "carnevale-bambini-lugano-tinguely",
+    "decision": "news",
+    "reason": "Descrive l'atelier Tinguely del Museo in erba previsto il 18 febbraio 2026 dentro la settimana di Carnevale: cronaca di un'iniziativa con giorno, luogo e prenotazione.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "corpi-in-prestito-arte-agno",
+    "decision": "news",
+    "reason": "Annuncia la mostra Corpi in prestito a Serocca d'Agno, gratuita e aperta fino al 31 dicembre 2026: un evento culturale con sede e periodo determinati.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tf-permesso-integrazione-ticino",
+    "decision": "unclassified",
+    "reason": "Il fatto è la sentenza TF del 18 febbraio 2026, ma i body aggiungono una spiegazione generale sui requisiti del permesso e consigli pratici: notizia con guida, quindi contenuto misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-scontro-gobbi-berna",
+    "decision": "news",
+    "reason": "Racconta il confronto Gobbi-Berna e la mozione sui ristorni del 18 febbraio 2026, con posizioni istituzionali e precedenti: cronaca politica datata, non istruzioni operative.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "pendolarismo-affitto-tempo-ticino",
+    "decision": "unclassified",
+    "reason": "Parte da un sondaggio datato ma sviluppa un'analisi personale del trade-off e una guida con calcolo di costi, alternative e telelavoro: contenuto misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "centrodestra-stop-ristorni-2026",
+    "decision": "news",
+    "reason": "Racconta la mozione del centrodestra ticinese sui ristorni e la tassa sulla salute, con un atto politico e un contesto datato: cronaca istituzionale d'archivio.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-frontalieri-scontro-ticino-lombardia",
+    "decision": "news",
+    "reason": "Racconta il 20 febbraio 2026 la reazione lombarda alla mozione ticinese sui ristorni e le dichiarazioni di politici e sindacati: fatto politico datato.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-iva-contributi",
+    "decision": "news",
+    "reason": "Riferisce la proposta della Commissione degli Stati per finanziare la 13esima AVS, con iter parlamentare e sessione primaverile 2026: cronaca di una decisione annunciata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-finanziamento-misto",
+    "decision": "unclassified",
+    "reason": "Racconta lo scontro parlamentare sul finanziamento AVS ma include una sezione esplicita di consigli per monitorare l'iter e simulare il budget, quindi è misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-finanziamento-scontro",
+    "decision": "unclassified",
+    "reason": "Il centro è lo scontro parlamentare sulla 13esima AVS, ma i body aggiungono istruzioni per monitorare decisioni, rivalutare il budget e pianificare la pensione.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-imprese-allarme-ticino",
+    "decision": "news",
+    "reason": "Riferisce l'allarme delle imprese ticinesi del 20 febbraio 2026 su calo dei permessi G e blocco dei ristorni: dati e dichiarazioni sono cronaca economico-politica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "denaro-non-dichiarato-dogana-brogeda",
+    "decision": "unclassified",
+    "reason": "Parte dal fermo del 20 febbraio 2026 a Brogeda ma contiene una guida operativa su soglia, dichiarazione, sanzioni e trasferimenti di contante.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-stipendio-iva",
+    "decision": "news",
+    "reason": "Racconta il dibattito parlamentare sul finanziamento AVS e l'impatto prospettato fino al primo versamento di dicembre 2026: cronaca di iter politico, non guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "stop-ristorni-mozione-partiti",
+    "decision": "unclassified",
+    "reason": "Racconta la mozione sui ristorni ma chiude con consigli pratici su fonti ufficiali, documenti e status fiscale: notizia con guida operativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "partiti-ticino-stop-ristorni",
+    "decision": "unclassified",
+    "reason": "Descrive la mozione e la base giuridica, ma include consigli operativi su monitoraggio, commercialista e verifica dello status di frontaliere.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "conti-federali-aumento-iva-ticino",
+    "decision": "news",
+    "reason": "Riferisce il consuntivo federale 2025 e le misure prospettate per il 2027-2029, inclusa la proposta IVA: cronaca economica datata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-stipendi-iva",
+    "decision": "unclassified",
+    "reason": "Racconta la proposta di finanziamento AVS ma include una sezione pratica su come seguire l'iter e simulare il netto, quindi resta misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-lombardia-reazione",
+    "decision": "unclassified",
+    "reason": "Riferisce la reazione lombarda del 20 febbraio 2026 ma propone consigli pratici su aggiornamento, busta paga e pianificazione finanziaria.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "truffa-falso-bancario-ticino",
+    "decision": "unclassified",
+    "reason": "Parte dal comunicato di polizia del 20 febbraio 2026 sullo spoofing ma il body3 è una checklist dettagliata di prevenzione: notizia con guida pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dazi-usa-impatto-ticino",
+    "decision": "unclassified",
+    "reason": "Riferisce l'analisi dei dazi USA del 21 febbraio 2026 ma aggiunge istruzioni per monitorare negoziati, azienda e finanze: contenuto misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dumping-salari-architetti-ticino",
+    "decision": "unclassified",
+    "reason": "Racconta il caso del 20 febbraio 2026 ma sviluppa una guida per tutelarsi con contratto, registro ore, busta paga e sindacato.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-finanziamento-contributi",
+    "decision": "unclassified",
+    "reason": "Riferisce la proposta di contributi AVS dal 1° gennaio 2026 ma include un consiglio pratico per simulare il netto e preparare il budget.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-stipendio-trattenute",
+    "decision": "unclassified",
+    "reason": "Racconta il dibattito sul finanziamento AVS ma include scenari per la busta paga e indicazioni pratiche per proiettare il guadagno.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-finanziamento-misto-proposta",
+    "decision": "unclassified",
+    "reason": "Descrive la proposta parlamentare sul finanziamento AVS ma contiene una sezione di pianificazione e simulazione del budget, quindi non è cronaca pura.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-finanziamento-busta-paga",
+    "decision": "unclassified",
+    "reason": "Riferisce lo scontro sul finanziamento AVS ma chiude con una checklist per monitorare decisioni e pianificare il budget: contenuto misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-reazione-lombardia",
+    "decision": "unclassified",
+    "reason": "Racconta la risposta lombarda del 20 febbraio 2026 ma include consigli su informazione, pianificazione e partecipazione alle discussioni: notizia con guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "legionellosi-ticino-allarme",
+    "decision": "unclassified",
+    "reason": "Riferisce i dati UFSP 2024 e l'allarme sanitario ma contiene istruzioni di prevenzione su acqua, boiler e impianti: cronaca con guida pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-busta-paga-frontaliere",
+    "decision": "unclassified",
+    "reason": "Racconta lo scontro parlamentare sulla 13esima AVS ma include esempi numerici e una checklist per monitorare decisioni e budget: contenuto misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "acqua-mendrisiotto-prezzi-2026",
+    "decision": "news",
+    "reason": "Racconta la tariffa idrica fissata per il 2026 nel Basso Mendrisiotto e il compromesso del Sorvegliante dei prezzi: decisione puntuale, non guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "permesso-g-pro-contro-2026",
+    "decision": "unclassified",
+    "reason": "Il registry e i meta esistono, ma nel tree origin/main manca il file italiano con body1, body2 e body3: senza i tre testi richiesti non è possibile una classificazione per lettura.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "costo-reale-auto-frontaliere",
+    "decision": "unclassified",
+    "reason": "Analizza i costi dell'auto nel 2026 ma include alternative, car pooling, TILO e P+R con indicazioni operative: analisi e guida decisionale sono mescolate.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "checklist-documenti-lavoro-svizzera",
+    "decision": "unclassified",
+    "reason": "È una checklist pratica per i documenti necessari nel 2026, con scadenze e assicurazioni correnti: guida datata e non inequivocabilmente evergreen.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "asilo-nido-frontaliere-ticino",
+    "decision": "unclassified",
+    "reason": "La guida ai costi 2026, ai sussidi e alle liste d'attesa serve a decidere oggi e dipende da dati temporali: non è una guida stabile inequivocabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "costo-vita-svizzera-mappa",
+    "decision": "unclassified",
+    "reason": "Presenta lo studio e la mappa del costo della vita 2026 e aggiunge simulazioni e consigli di scelta: ricerca corrente più guida pratica, quindi dubbio.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "costo-vivere-mappa-comuni",
+    "decision": "news",
+    "reason": "Riporta il risultato di uno studio sui comuni, aggiornato al 2025 e pubblicato come notizia il 23 febbraio 2026; non prescrive una procedura o una guida dettagliata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "eurocity-bloccato-caos-pendolari",
+    "decision": "unclassified",
+    "reason": "Cronaca di un blocco EuroCity con diritti e alternative pratiche per i pendolari: l'evento datato e la guida conseguente sono inseparabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "cantieri-notturni-lugano-marzo-2026",
+    "decision": "unclassified",
+    "reason": "Descrive lavori notturni di marzo 2026 e fornisce una checklist di itinerari e orari: informazione temporanea con pianificazione operativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "bps-suisse-utili-consigli-crisi",
+    "decision": "unclassified",
+    "reason": "Riporta utili e intervista sulla crisi del 24 febbraio 2026, ma aggiunge consigli su investimenti e mutui: cronaca e consulenza sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "aumento-iva-esercito-impatto-spesa",
+    "decision": "unclassified",
+    "reason": "Parte dalla proposta IVA per l'esercito e termina con indicazioni su come prepararsi finanziariamente: notizia e pianificazione pratica non consentono una scelta netta.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "maternita-paternita-ticino",
+    "decision": "evergreen",
+    "reason": "Spiega in modo organico diritti, requisiti, durata e richiesta delle prestazioni di maternità e paternità; il nucleo è una guida generale, non un evento datato.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "inflazione-frontalieri-ticino",
+    "decision": "unclassified",
+    "reason": "Commenta il rapporto sull'inflazione di gennaio 2026 e propone gestione del cambio e del budget: dati correnti con consigli pratici.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "aprire-conto-bancario-frontaliere",
+    "decision": "evergreen",
+    "reason": "È una guida generale per aprire e scegliere un conto bancario svizzero da frontaliere, con requisiti e passaggi; gli esempi di costi 2026 sono accessori.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "assicurazione-malattia-famiglia",
+    "decision": "evergreen",
+    "reason": "Confronta le opzioni assicurative familiari e spiega come scegliere e attivare la copertura; i premi 2026 sono esempi, non il centro di un evento.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sciopero-treni-tilo-febbraio-2026",
+    "decision": "unclassified",
+    "reason": "È la cronaca dello sciopero TILO di febbraio 2026 con indicazioni per organizzare il viaggio: l'utilità pratica è legata all'evento scaduto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-congelati-ticino-italia",
+    "decision": "news",
+    "reason": "Riporta la proposta del Consiglio di Stato del 25 febbraio 2026 di congelare i ristorni: cronaca politica puntuale, con solo invito generico a seguire gli sviluppi.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "mutuo-casa-frontalieri-italia",
+    "decision": "unclassified",
+    "reason": "Unisce tassi e requisiti correnti del 2026 a una guida dettagliata per acquistare casa con mutuo: guida utile ma temporalmente vincolata e mista.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-congelati-gobbi-2026",
+    "decision": "news",
+    "reason": "Racconta la minaccia politica di congelamento dei ristorni formulata da Gobbi il 25 febbraio 2026; il contenuto è cronaca e non una procedura.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "asilo-nido-ticino-guida-2026",
+    "decision": "unclassified",
+    "reason": "È esplicitamente una guida 2026 a costi, sussidi, requisiti e liste d'attesa: la procedura dipende da dati temporali e non è evergreen inequivocabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ristorni-salute-2026-ticino",
+    "decision": "unclassified",
+    "reason": "Parte dalla proposta di congelare i ristorni del 25 febbraio e dà azioni su assicurazione e budget sanitario: cronaca con consigli sostanziali.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-salute-scontro-ticino-berna",
+    "decision": "news",
+    "reason": "Riporta lo scontro politico del 25 febbraio tra Gobbi e Berna sulla tassa sanitaria; contiene spiegazione, ma non una guida pratica autonoma.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "abbonamenti-sconti-treni-ticino",
+    "decision": "unclassified",
+    "reason": "Guida 2026 a sconti e requisiti degli abbonamenti ferroviari, con prezzi e condizioni correnti: il carattere temporale impedisce una scelta evergreen netta.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "confronto-assicurazioni-auto",
+    "decision": "unclassified",
+    "reason": "Confronta assicurazioni auto nel 2026 e aggiunge scadenze MFK e checklist documentale: guida pratica dipendente da regole e prezzi correnti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "permesso-b-vs-g-differenze",
+    "decision": "unclassified",
+    "reason": "Confronta i permessi B e G, ma lo fa con requisiti fiscali e amministrativi aggiornati al 2026 e indicazioni operative: guida potenzialmente soggetta a cambiamenti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "spese-sanitarie-frontalieri",
+    "decision": "unclassified",
+    "reason": "Spiega rimborsi, procedura, documenti e scadenze per le spese sanitarie nel 2026: è una guida, ma la materia e la data corrente la rendono non inequivocabilmente evergreen.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "cantieri-traffico-frontiera",
+    "decision": "unclassified",
+    "reason": "Racconta cantieri e disagi alla frontiera in un periodo specifico e dà consigli di percorso: informazione datata con pianificazione pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "cantieri-a9-disagi-frontiera",
+    "decision": "unclassified",
+    "reason": "Descrive lavori A9 e disagi temporanei, accompagnati da una checklist dettagliata per gli spostamenti: cronaca operativa, non evergreen.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "controlli-velocita-ticino-2026",
+    "decision": "news",
+    "reason": "Annuncia l'operazione di controllo velocità della polizia dal 2 all'8 marzo 2026: evento circoscritto, con solo richiamo generale alla sicurezza stradale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lavorare-germania-educatori",
+    "decision": "unclassified",
+    "reason": "Presenta un'opportunità di lavoro per educatori del 28 febbraio 2026 e indicazioni per candidarsi: annuncio datato con guida applicativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lavoro-educatori-germania-alternativa",
+    "decision": "unclassified",
+    "reason": "Tratta la stessa opportunità lavorativa corrente e aggiunge una checklist per i candidati: contenuto temporaneo e operativo misto.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "vandalismo-bus-frontalieri-ticino",
+    "decision": "unclassified",
+    "reason": "Racconta l'episodio di vandalismo del primo marzo e include istruzioni di sicurezza e segnalazione: cronaca datata con guida conseguente.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "controlli-stradali-ticino-frontalieri",
+    "decision": "news",
+    "reason": "Riferisce l'operazione di controlli stradali dal 2 all'8 marzo 2026; le raccomandazioni di prudenza restano generiche e l'evento è inequivocabilmente datato.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "comuni-confine-nuove-regole",
+    "decision": "unclassified",
+    "reason": "Spiega nuove regole fiscali per i comuni di confine e indica verifiche, consulente e passaggi pratici: norma corrente più guida, non scelta netta.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tragedia-stradale-frontaliere",
+    "decision": "unclassified",
+    "reason": "Riporta l'incidente mortale del 28 febbraio e aggiunge procedura assicurativa e per i superstiti: cronaca e istruzioni sensibili sono mescolate.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "chiasso-como-cantieri-a9-disagi",
+    "decision": "unclassified",
+    "reason": "Informa sulle chiusure del 3 e 4 marzo e offre una checklist per pianificare il percorso: evento temporaneo con guida situazionale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "confine-fiscale-nuovi-comuni",
+    "decision": "unclassified",
+    "reason": "Collega un caso e una regola fiscale datati a istruzioni per verificare lo status e rivolgersi al consulente: spiegazione normativa e guida mista.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "confine-a9-disagi-marzo",
+    "decision": "unclassified",
+    "reason": "Descrive chiusure A9 di marzo 2026 e consiglia come pianificare il viaggio: contenuto temporaneo e operativo, non evergreen.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "autostrada-a9-disagi-frontalieri",
+    "decision": "unclassified",
+    "reason": "Riguarda i lavori A9 di marzo e fornisce indicazioni di viaggio ai frontalieri: cronaca di viabilità con istruzioni legate al periodo.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "frontalieri-confine-disparita-fiscale",
+    "decision": "unclassified",
+    "reason": "Analizza il caso fiscale del 28 febbraio e offre una guida su status e consulenza: fatto corrente e orientamento pratico non separabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "frontiera-a9-disagi-marzo-2026",
+    "decision": "unclassified",
+    "reason": "Riporta chiusure e disagi A9 di marzo 2026 con suggerimenti di percorso: informazione datata di viabilità, non guida evergreen.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "confini-comunali-impatto-fiscale",
+    "decision": "unclassified",
+    "reason": "Parte dal caso di Misinto e dalla regola fiscale corrente e indica controlli e consulente: cronaca normativa con procedura pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "franco-forte-impatto-frontalieri",
+    "decision": "unclassified",
+    "reason": "Commenta il cambio del 25 febbraio e propone conversione, budget e scelte settoriali: analisi economica corrente con consigli pratici.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "a9-chiasso-como-cantieri-frontalieri",
+    "decision": "unclassified",
+    "reason": "Tratta i cantieri A9 di marzo e include indicazioni pratiche per gli spostamenti: evento di viabilità temporaneo con pianificazione.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "pendolarismo-fatale-frontaliere-porlezza",
+    "decision": "unclassified",
+    "reason": "La cronaca dell'incidente mortale del 28 febbraio 2026 è accompagnata da spiegazioni assicurative e consigli pratici sostanziali: notizia e guida restano miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sportello-lavoro-varese-frontalieri-ticino",
+    "decision": "unclassified",
+    "reason": "Annuncia lo sportello di Castronno del primo marzo 2026 ma aggiunge orientamento su CV, permesso G, LAMal e candidatura: servizio datato con guida operativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "controlli-stradali-intensivi-frontiera",
+    "decision": "unclassified",
+    "reason": "L'operazione radar dal 2 all'8 marzo 2026 è inequivocabilmente datata, ma l'articolo contiene soglie di multa e una checklist di guida articolata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "radar-confine-ticino-marzo",
+    "decision": "unclassified",
+    "reason": "Riporta i controlli mobili dal 2 all'8 marzo 2026 con dettagli di sanzioni, patente e prevenzione: cronaca temporanea più guida pratica sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sicurezza-stradale-ticino-marzo",
+    "decision": "unclassified",
+    "reason": "L'avviso ufficiale della settimana radar 2–8 marzo 2026 è centrale, ma l'articolo spiega multe, gestione della sanzione e comportamenti da adottare.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "a13-cantieri-frontalieri-ticino",
+    "decision": "unclassified",
+    "reason": "Descrive i lavori A13 dal 2 marzo al 26 giugno 2026 e aggiunge pianificazione di percorsi, orari e trasporto alternativo: informazione temporanea operativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "imposizione-individuale-donne-ticino",
+    "decision": "unclassified",
+    "reason": "Commenta il voto sull'imposizione individuale dell'8 marzo 2026, ma include valutazione del bilancio familiare e consigli fiscali: dibattito datato con orientamento pratico.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-salute-frontalieri-vantaggio-ticino",
+    "decision": "unclassified",
+    "reason": "Presenta una proposta politica sulla tassa salute e la accompagna con scenari, checklist fiscale e calcoli familiari: cronaca e guida non sono separabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "comuni-confine-fiscalita-disparita",
+    "decision": "unclassified",
+    "reason": "La vicenda di Misinto, datata 17 luglio 2023 e rilanciata il 28 febbraio 2026, conduce a una procedura su status, liste e consulenza fiscale: caso e guida misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "svincolo-a2-biasca-rischi-frontaliere",
+    "decision": "unclassified",
+    "reason": "Racconta l'interrogazione del 2 marzo 2026 sullo svincolo di Biasca e aggiunge istruzioni assicurative e di guida: cronaca con guida situazionale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lavori-linea-locarno-cadenazzo-2026",
+    "decision": "unclassified",
+    "reason": "Descrive sostituzioni bus nei fine settimana di marzo 2026 con orari, coincidenze, bici, assistenza e telelavoro: avviso temporaneo con checklist estesa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dichiarazione-imposta-digitale-ticino-26",
+    "decision": "unclassified",
+    "reason": "Spiega la dichiarazione 2026 con scadenza, rate, deduzioni e checklist per i frontalieri: guida pratica legata all'anno fiscale corrente.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-salute-lombardia-rinvio",
+    "decision": "unclassified",
+    "reason": "Riporta il rinvio lombardo del 5 marzo 2026 ma dedica i tre body a doppia imposizione, assicurazione e checklist fiscale: notizia e consulenza sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "trasporti-lombardia-ticino-record-tilo",
+    "decision": "news",
+    "reason": "Riporta il dato 2025 di 25 milioni di passeggeri TILO e le dichiarazioni collegate come cronaca di mobilità; le informazioni sul servizio restano generiche.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "confusione-tassa-salute-frontalieri",
+    "decision": "unclassified",
+    "reason": "Descrive lo scontro politico sulla tassa salute ma il nucleo operativo è monitoraggio normativo, documenti e scenari di budget: cronaca e orientamento sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "carburante-ticino-costo-aumenti",
+    "decision": "unclassified",
+    "reason": "Commenta i rincari correnti del carburante e propone confronto prezzi, car pooling e pianificazione del budget: analisi economica e guida pratica insieme.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "cpi-caso-hospita-rivalutazione-periti",
+    "decision": "news",
+    "reason": "Riferisce la richiesta parlamentare di rivalutare i periti nel caso Hospita per possibili conflitti d'interesse: cronaca istituzionale puntuale, senza guida operativa autonoma.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-salute-lombardia-frontalieri",
+    "decision": "unclassified",
+    "reason": "Riporta la posizione lombarda sulla tassa salute ma sviluppa scenari di doppia imposizione e una checklist per i frontalieri: notizia e guida fiscale sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dazi-usa-rimborsi-ritardi",
+    "decision": "unclassified",
+    "reason": "Annuncia ritardi nei rimborsi dei dazi e dedica i body a requisiti, documenti e procedura di richiesta: fatto corrente con guida sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ticino-spitex-contributo-pressione",
+    "decision": "unclassified",
+    "reason": "Spiega la tariffa Spitex prevista dal primo aprile 2026 con scenari di costo, esenzioni e checklist: riforma datata più guida pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "pirati-strada-ticino-italiani-2026",
+    "decision": "news",
+    "reason": "Racconta cinque infrazioni gravi accertate tra gennaio e febbraio 2026 e l'intensificazione dei controlli: cronaca di sicurezza datata, con consigli generici.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "comuni-locarno-futuro-aggregazione",
+    "decision": "unclassified",
+    "reason": "Descrive il laboratorio dei sette Comuni e offre scenari, scadenze e checklist per l'aggregazione: processo istituzionale in corso con orientamento pratico.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "votazioni-imposizione-ticino-2026",
+    "decision": "unclassified",
+    "reason": "È un aggiornamento parziale del voto dell'8 marzo 2026 e contiene passaggi procedurali, simulazioni e istruzioni per contribuenti: cronaca e guida sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "imposizione-individuale-ticino-2026",
+    "decision": "unclassified",
+    "reason": "Riporta l'approvazione dell'8 marzo 2026 ma aggiunge requisiti, moduli, deduzioni e checklist per frontalieri: riforma corrente con guida fiscale sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "incidente-viadotto-brogeda-como",
+    "decision": "unclassified",
+    "reason": "La cronaca dell'incidente dell'8 marzo 2026 include percorsi alternativi e una checklist di sicurezza e viabilità: evento datato con istruzioni operative.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "imposizione-individuale-rivoluzione-fiscale",
+    "decision": "unclassified",
+    "reason": "Riferisce il voto del 6 marzo 2026 e propone calcoli, documenti, consulenza e checklist per la nuova imposizione: cronaca normativa e guida miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "votazioni-federali-tassazione-individuale",
+    "decision": "unclassified",
+    "reason": "Commenta una votazione del 21 ottobre 2023 ma sviluppa scenari fiscali, aliquote e checklist per frontalieri: contenuto storico con guida non stabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ticino-carburante-alle-stelle-quadri-berna-riduca-tasse",
+    "decision": "news",
+    "reason": "Riferisce l'interpellanza di Quadri al Consiglio federale sulla riduzione temporanea delle tasse carburante; il resto spiega il contesto senza procedura personale dettagliata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "un-test-per-dare-un-nome-al-dolore",
+    "decision": "news",
+    "reason": "Presenta il test salivare per l'endometriosi, costo e mancato rimborso, con intervista e fonte del 9 marzo 2026: aggiornamento sanitario puntuale, non guida generale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "aumentare-gia-il-prezzo-della-benzina",
+    "decision": "unclassified",
+    "reason": "Analizza i rincari della benzina nel 2026 e propone una lista di risparmio, confronto prezzi e gestione del budget: notizia economica con guida pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "furti-supermercati-ponte-tresa",
+    "decision": "news",
+    "reason": "Riporta l'operazione di polizia e l'identificazione dei sospettati del 9 marzo 2026 a Lavena Ponte Tresa; le indicazioni ai cittadini restano generiche.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dumping-salariale-ticino-no",
+    "decision": "news",
+    "reason": "Racconta l'esito del voto dell'8 marzo sull'iniziativa contro il dumping salariale e la posizione del Consiglio di Stato: cronaca politica inequivocabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sospensione-costi-utenti-ticino",
+    "decision": "unclassified",
+    "reason": "Riferisce la mozione sulla sospensione dei costi Spitex ma sviluppa soglie, esenzioni, scenari familiari e checklist: dibattito sanitario con guida pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "investimento-pedone-bioggio",
+    "decision": "unclassified",
+    "reason": "La cronaca dell'investimento del 27 aprile 2024 contiene procedura probatoria, assicurazione e checklist per incidenti: evento datato con istruzioni sostanziali.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tir-colonna-disagi-valico-brogeda",
+    "decision": "unclassified",
+    "reason": "Descrive code di marzo 2026 a Brogeda e propone valichi, orari e pianificazione per autisti e frontalieri: viabilità temporanea con guida operativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "assicurazione-auto-rincari-2026",
+    "decision": "unclassified",
+    "reason": "Riporta il sondaggio sui rincari 2026 ma offre confronto premi, franchigia, coperture e checklist per cambiare assicurazione: analisi corrente più guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "a2-giornico-cantiere-disagi-frontalieri",
+    "decision": "unclassified",
+    "reason": "Descrive il cantiere A2 di Giornico con fasi, divieti, rimborsi e molte istruzioni operative: informazione temporanea fortemente guidata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-traffico-pesante-camion-elettrici",
+    "decision": "unclassified",
+    "reason": "Commenta la revisione TTPCP e include categorie, scadenze, calcoli e checklist per imprese di trasporto: riforma normativa con guida dipendente dal periodo.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "problemi-rotaia-bellinzona-lugano",
+    "decision": "unclassified",
+    "reason": "Riporta disagi e manutenzioni sulla tratta e spiega rimborsi, termini e procedura per i pendolari: cronaca infrastrutturale con guida pratica.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "permesso-g-apprendisti-frontali",
+    "decision": "unclassified",
+    "reason": "Annuncia la decisione del 9 marzo 2024 sul permesso G per apprendisti ma contiene requisiti, documenti, scadenze e procedure: riforma più guida amministrativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ufficio-postale-chiasso-trasloco",
+    "decision": "news",
+    "reason": "Riporta il trasferimento dell'ufficio postale di Chiasso annunciato l'11 marzo 2026, con data futura e fonte locale; i consigli restano generici.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "confine-tesissimo-assegni-familiari",
+    "decision": "unclassified",
+    "reason": "Racconta la mozione del 12 marzo 2026 sugli assegni familiari ma aggiunge verifica pratiche, monitoraggio pagamenti e segnalazioni: cronaca politica con guida sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "chiasso-piano-regolatore-telefonia",
+    "decision": "news",
+    "reason": "Riporta la sentenza del Tribunale federale del 13 marzo 2026 che impone la revisione del piano regolatore di Chiasso: cronaca giudiziaria puntuale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "pensione-et-ticino-sentiero",
+    "decision": "unclassified",
+    "reason": "Tratta un dibattito sull'età pensionabile e sviluppa scenari contributivi, previdenza complementare e checklist: riforma incerta con guida decisionale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "paradosso-ticino-lavoro",
+    "decision": "unclassified",
+    "reason": "Analizza candidature, salari e carenze formative con incentivi e checklist per candidati e aziende: quadro economico corrente più orientamento pratico.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lavena-ponte-tresa-giro-spaccio",
+    "decision": "news",
+    "reason": "Racconta l'operazione antidroga e gli arresti del 6 marzo 2024 a Lavena Ponte Tresa; le informazioni normative e preventive sono contesto generale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "cassa-malati-franchigia-minima-ticino",
+    "decision": "unclassified",
+    "reason": "Descrive la consultazione sulla franchigia minima con scadenza 30 giugno 2024 e propone scenari di costo e partecipazione: proposta normativa con guida temporale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "trin-tunnel-grave-frontalieri",
+    "decision": "unclassified",
+    "reason": "La cronaca del frontale nel tunnel di Trin è mescolata a responsabilità, assicurazione e checklist di sicurezza, peraltro con dati incoerenti: dubbio prudente.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "chiasso-verde-sufficiente",
+    "decision": "news",
+    "reason": "Riporta la risposta del Municipio di Chiasso a un'interrogazione sul verde pubblico e il dato di 8,7 metri quadrati per abitante: cronaca amministrativa, senza guida sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "borsa-di-zurigo-sprazzi-qu-c3-a0-l-27umor-grigio-resta",
+    "decision": "unclassified",
+    "reason": "È un resoconto di mercato con dati settimanali ma aggiunge consigli e strategie d'investimento: cronaca economica e orientamento finanziario sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "viaggio-delle-batterie-verso-seconda-vita",
+    "decision": "evergreen",
+    "reason": "Spiega il ciclo di raccolta, trattamento e recupero delle batterie e chiude con istruzioni generali di smaltimento: guida educativa stabile, non cronaca di un evento.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ticino-carburanti-prezzo-potere-acquisto",
+    "decision": "unclassified",
+    "reason": "Collega prezzi e proposta politica sulle accise a strategie di risparmio, car pooling e budget: analisi corrente con guida pratica, non categoria netta.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "aumento-franchigia-minima",
+    "decision": "news",
+    "reason": "Riferisce la proposta del Consiglio federale e le critiche dell'associazione consumatori sull'aumento da 300 a 400 franchi; non contiene una guida procedurale autonoma.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "chiusure-autostrada-confine-ticino-2026",
+    "decision": "unclassified",
+    "reason": "Annuncia chiusure A9 dal 16 al 19 marzo 2026 e fornisce deviazioni, orari e strategie di pendolarismo: avviso temporaneo con guida situazionale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sondaggio-tamedia-iva-esercito-avs",
+    "decision": "unclassified",
+    "reason": "Riporta un sondaggio vicino al voto dell'8 marzo e sviluppa scenari di finanziamento e impatto fiscale con checklist: cronaca e analisi pratica sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "inverno-ticino-nevicate-2026",
+    "decision": "unclassified",
+    "reason": "Descrive un'allerta neve contingente e propone preparazione di veicolo, casa e viaggi con checklist: bollettino meteo e guida situazionale insieme.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "nevicate-strade-bloccate-ticino",
+    "decision": "unclassified",
+    "reason": "Racconta disagi meteorologici recenti ma aggiunge piani aziendali, telelavoro, percorsi alternativi e checklist: cronaca temporanea con istruzioni.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "crescita-misera-libera-circolazione",
+    "decision": "unclassified",
+    "reason": "Commenta un'analisi economica su crescita e immigrazione e fornisce un percorso di valutazione del lavoro frontaliero: opinione e guida decisionale miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "treni-varese-milano-ceresio-express",
+    "decision": "news",
+    "reason": "Riporta il rilancio del 18 marzo 2026 della proposta Ceresio Express e le dichiarazioni del promotore: cronaca di mobilità, senza procedura personale sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "guida-cambio-franco-euro-frontaliere",
+    "decision": "evergreen",
+    "reason": "È esplicitamente una guida autonoma: confronta servizi, spread e cambio frazionato e spiega l'impatto fiscale con una checklist riutilizzabile, mentre i valori correnti sono esempi aggiornabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "guida-pensione-frontaliere-avs-lpp",
+    "decision": "evergreen",
+    "reason": "È una guida completa e procedurale su AVS, LPP, 3a, totalizzazione e domanda di pensione, con esempio e passi successivi: il nucleo resta una guida previdenziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "vivere-svizzera-vs-italia-frontaliere",
+    "decision": "evergreen",
+    "reason": "Guida comparativa esplicita su Permesso B/G, costi, sanità, fisco e decisione, con checklist; i numeri 2026 sono dati aggiornabili ma non cambiano la natura di guida.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dumping-salariale-diritti-lavoratore-ticino",
+    "decision": "evergreen",
+    "reason": "È una guida esplicita sui diritti contro il dumping: riconoscimento, organismi, procedura di documentazione e checklist; i minimi 2026 sono valori aggiornabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "malattia-frontaliere-guida-assicurazione",
+    "decision": "evergreen",
+    "reason": "Guida autonoma a LAMal/CMI, IJM, LAINF, malattia, infortunio e congedi, con requisiti e checklist; il nucleo è una guida previdenziale/sanitaria.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "strumenti-frontaliere-guida-comparatori",
+    "decision": "evergreen",
+    "reason": "Guida autonoma all'uso dei calcolatori e comparatori per stipendio, cambio, LAMal, pensione, fisco, permessi e lavoro; la catalogazione degli strumenti è il contenuto centrale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "caro-carburante-benzina-ticino",
+    "decision": "unclassified",
+    "reason": "Riporta la dichiarazione di Quadri del 15 marzo 2026 sul caro carburante ma aggiunge strategie di risparmio e budget: aggiornamento politico e guida pratica sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "bilaterali-iii-cassis-ticino",
+    "decision": "unclassified",
+    "reason": "Presenta l'intervento di Cassis e un pacchetto negoziale con date/scenari e checklist per imprese: cronaca politica e orientamento prospettico non consentono una scelta netta.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "fermato-brogeda-cocaina",
+    "decision": "news",
+    "reason": "Racconta l'arresto e il sequestro di 15 chili di cocaina al valico di Brogeda il 16 marzo 2026: cronaca giudiziaria inequivocabilmente datata.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "dominicano-auto-svizzera-arresto",
+    "decision": "news",
+    "reason": "Racconta l'arresto del 16 marzo 2026 a Chiasso di un conducente con oltre 15 chili di cocaina; il contesto legale resta secondario rispetto alla cronaca.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "salari-bassi-rischio-povert",
+    "decision": "unclassified",
+    "reason": "Riporta l'interrogazione PLR su salari bassi e rischio povertà, ma sviluppa proposte, scenari e checklist per il bilancio personale: dibattito e guida sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "crisi-spermatozoi-svizzera-ticino",
+    "decision": "unclassified",
+    "reason": "Unisce dati e studi sulla fertilità a consigli sanitari, costi FIV, sostegni finanziari e checklist: informazione datata e guida pratica sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lombardia-affitto-famiglie-varesine",
+    "decision": "unclassified",
+    "reason": "Riferisce il fondo regionale del 2026 ma contiene una procedura dettagliata di domanda, requisiti, documenti e simulazioni per frontalieri: cronaca e guida sono inseparabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sfruttamento-corsieri-ticino-2026",
+    "decision": "unclassified",
+    "reason": "L'inchiesta del 16 marzo 2026 sullo sfruttamento dei corrieri è affiancata da diritti, contatti, documentazione e segnalazioni: cronaca e orientamento operativo sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "infiltrazioni-criminali-ticino-grigioni",
+    "decision": "unclassified",
+    "reason": "È un confronto di dati 2022 e misure anticriminalità con checklist e proposte, ma non una cronaca datata né una guida procedurale inequivocabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "sargans-teenage-robbery-catch",
+    "decision": "unclassified",
+    "reason": "L'arresto del 15 marzo 2026 è il tema centrale, ma i body successivi aggiungono norme, prevenzione e checklist di sicurezza: cronaca e guida si sovrappongono.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "gadda-incalza-governo-frontalieri",
+    "decision": "unclassified",
+    "reason": "Riporta un'interrogazione politica e la collega a checklist, scenari fiscali e consigli per i frontalieri: aggiornamento istituzionale e guida sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "spazi-verdi-in-citta-rilassamento",
+    "decision": "evergreen",
+    "reason": "È un explainer-guida autonomo sui benefici degli spazi verdi e sulla loro progettazione, con checklist riutilizzabile; gli esempi locali non sono il nucleo della pagina.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "controlli-cantieri-mendrisio",
+    "decision": "unclassified",
+    "reason": "Descrive l'ispezione del 17 marzo 2026 ma offre anche requisiti, sanzioni e checklist per lavoratori e imprese: cronaca e guida normativa sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-avs-soluzione-mista-stati",
+    "decision": "unclassified",
+    "reason": "La proposta politica di finanziamento è accompagnata da calcoli, impatti per frontalieri e checklist di pianificazione: notizia e orientamento finanziario non sono separabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lo-statuto-s-non-deve-trasformarsi-in-permesso-b",
+    "decision": "unclassified",
+    "reason": "Riferisce una mozione ancora in discussione e ne spiega effetti e diritti con consigli pratici: analisi normativa corrente, non cronaca pura né guida autonoma.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "consiglio-stati-soluzione-mista-13esima-avs",
+    "decision": "news",
+    "reason": "Riferisce l'approvazione della soluzione mista da parte del Consiglio degli Stati nella sessione primaverile 2026; il resto è contesto e impatto, senza procedura personale sostanziale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "frode-cassa-compensazione-avs-ticino",
+    "decision": "unclassified",
+    "reason": "La frode da 2,7 milioni e l'inchiesta sono cronaca, ma i body spiegano prestazioni, domande IPG e misure di tutela con checklist: contenuti misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "deputazione-ticinese-italofoni-2024",
+    "decision": "news",
+    "reason": "Riporta l'incontro della deputazione ticinese con l'Amministrazione federale e le proposte politiche sulla rappresentanza italofona; non è una guida personale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "incidente-stradale-laghi",
+    "decision": "news",
+    "reason": "Racconta lo scontro tra auto e moto del 19 marzo sulla SP1, con soccorsi, ferito e chiusura della strada; i consigli restano commento generico.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "vivere-piu-lungo-ticino",
+    "decision": "unclassified",
+    "reason": "Mescola una statistica sull'aspettativa di vita con consigli sanitari e affermazioni su confini e tariffe: contenuto incoerente, non guida inequivocabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "contrabbando-ai-confine-aumentano-droga-e-sigarette",
+    "decision": "unclassified",
+    "reason": "Riporta sequestri e dati 2025 ma aggiunge norme, prevenzione, controlli e checklist per segnalare il contrabbando: cronaca e guida istituzionale sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "telefonate-choc-truffa-anziani-ticino",
+    "decision": "unclassified",
+    "reason": "Descrive truffe del 2023 ma il contenuto principale include prevenzione, numeri, procedure e più checklist operative: caso di cronaca e guida anti-truffa sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "salari-minimi-ccl-ticino-2026",
+    "decision": "news",
+    "reason": "Riferisce il voto del Consiglio degli Stati del 27 marzo 2026 sul progetto CCL e le sue conseguenze; i consigli finali non costituiscono una guida autonoma.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "strutture-dedicate-migranti-ticino",
+    "decision": "unclassified",
+    "reason": "Annuncia il piano cantonale per strutture dedicate ma sviluppa procedure, diritti, emergenze e checklist: decisione politica e istruzioni sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-automobilisti-svizzera",
+    "decision": "unclassified",
+    "reason": "Riporta l'approvazione della tassa di transito ma aggiunge modalità future, pianificazione dei percorsi e impatti economici: notizia prospettica e guida sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-transito-parlamento-ticino",
+    "decision": "unclassified",
+    "reason": "Descrive l'approvazione del 15 marzo 2026 insieme a tariffe, scenari aziendali e checklist operative: misura politica e orientamento pratico non sono separabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "franco-svizzero-impatti-ticino",
+    "decision": "unclassified",
+    "reason": "È un'analisi della politica BNS e del franco forte con strategie di copertura e checklist per imprese e famiglie: analisi corrente e guida finanziaria sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-transito-automobilisti-ticino",
+    "decision": "unclassified",
+    "reason": "Riferisce l'approvazione del 19 marzo 2026 ma fornisce dettagli di pagamento, scadenze e pianificazione dei costi ancora prospettici: cronaca e guida pratica sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "controlli-cantieri-mendrisiotto",
+    "decision": "unclassified",
+    "reason": "Racconta l'operazione di controllo ma i tre body aggiungono obblighi, sanzioni e checklist per imprese e frontalieri: il confine cronaca/guida resta dubbio.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "kebab-case-ticino-nubifragio-grigioni",
+    "decision": "unclassified",
+    "reason": "Riporta un contributo pubblico per danni del nubifragio 2024 e include requisiti, domanda e documenti per ottenerlo: evento amministrativo e guida procedurale sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "kebab-case-rossi-bruxelles-ticino",
+    "decision": "unclassified",
+    "reason": "Riferisce il contrasto UE sulla tassa di transito ma sviluppa tariffe, scenari e checklist per i veicoli stranieri: cronaca politica e guida pratica sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "guasto-tra-parabiago-e-rho",
+    "decision": "unclassified",
+    "reason": "Descrive un guasto ferroviario temporaneo con ritardi e aggiunge alternative di viaggio, rimborsi e checklist: avviso contingente e guida situazionale sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tassa-transito-ticino-pedemontana",
+    "decision": "unclassified",
+    "reason": "Riferisce una proposta di tassa di transito ancora in discussione e la sviluppa con sistemi, scenari e checklist: proposta politica e guida sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "franco-svizzero-a-valori-record-2026",
+    "decision": "unclassified",
+    "reason": "Mescola analisi corrente del franco e possibile intervento BNS con consigli su investimenti, debiti e budget: notizia economica e guida finanziaria sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "taglio-alle-accise-mette-sotto-pressione-i-distributori-ticinesi",
+    "decision": "unclassified",
+    "reason": "Racconta il taglio temporaneo delle accise e l'impatto sui distributori, ma include strategie e checklist operative: cronaca economica e guida gestionale sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "farmaci-competitiva-europa",
+    "decision": "news",
+    "reason": "Riferisce gli Stati generali dell'Economia della Salute del 20 marzo a Varese e il messaggio emerso sulle regole farmaceutiche; non offre una procedura personale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "iva-bassa-svizzera-immagine-ingannevole",
+    "decision": "unclassified",
+    "reason": "È un'intervista/analisi fiscale datata con proposte di semplificazione, checklist aziendali e consigli ai frontalieri: analisi e orientamento pratico sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "fatture-mediche-gonfiate-ticino",
+    "decision": "evergreen",
+    "reason": "La pagina è una guida autonoma a riconoscere e contestare fatture mediche: spiega diritti, prove, interlocutori e cinque passaggi operativi; le statistiche sono solo contesto aggiornabile.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "funivia-monteviasco-orari-corsi",
+    "decision": "news",
+    "reason": "Annuncia il potenziamento degli orari dal 21 marzo 2026 dopo la riapertura della funivia; consigli turistici e di consultazione non cambiano il carattere di aggiornamento di servizio.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "aumento-iva-costo-ticino-2026",
+    "decision": "unclassified",
+    "reason": "Analizza una proposta di aumento IVA ancora incerta e propone simulazioni e pianificazione finanziaria: dossier politico e guida al budget sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lavori-a8-castellanza-notturni-2026",
+    "decision": "unclassified",
+    "reason": "Avvisa delle chiusure A8 del 24-26 marzo 2026 e fornisce deviazioni e pianificazione del viaggio: avviso temporaneo e guida situazionale sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "quanto-costa-la-discriminazione",
+    "decision": "unclassified",
+    "reason": "Riporta dati e dichiarazioni del 21 marzo 2026 sulla discriminazione e aggiunge consigli su diritti, inclusione e assistenza: cronaca/analisi e guida sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "divieto-smartphone-scuola-ticino-2026",
+    "decision": "news",
+    "reason": "Riferisce la decisione del Liceo Lugano 3, in vigore dal 13 aprile 2026, sul deposito degli smartphone; il resto è spiegazione della misura, non guida autonoma.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "carenza-farmaci-ticino",
+    "decision": "news",
+    "reason": "Riferisce le misure presentate dal Consiglio federale contro la carenza di farmaci e il loro iter a breve/medio/lungo termine; non dà istruzioni sanitarie individuali.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lago-maggiore-accesso-tutto-l-anno",
+    "decision": "news",
+    "reason": "Racconta la camminata del 21 marzo 2026 di circa 100 persone per l'accesso alle rive; appelli e contesto normativo restano parte della cronaca dell'iniziativa.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "spiagge-libere-sul-lago-maggiore",
+    "decision": "news",
+    "reason": "Riferisce la manifestazione e la petizione delle Giovani Verdi sull'accesso pubblico alle spiagge, con una situazione contingente e una fonte datata; non è una guida procedurale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "infortuni-sul-lavoro-protesi-hi-tech",
+    "decision": "unclassified",
+    "reason": "Riferisce l'aggiornamento Inail 2026 sulle protesi ma aggiunge requisiti, domanda, documentazione e consulenza per accedere alle tutele: notizia e guida sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "bellinzona-scomparsa-ricerche-ticino-piemonte",
+    "decision": "news",
+    "reason": "Racconta la ricerca in corso di un 64enne scomparso a Bellinzona, con autorità, tempi e appello agli avvistamenti; la checklist è descrittiva dell'emergenza.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "auto-intrusione-frontalieri-ticino",
+    "decision": "unclassified",
+    "reason": "Descrive arresti e controlli del 2023 ma sviluppa una guida dettagliata per proteggere l'auto, denunciare e gestire l'assicurazione: cronaca e prevenzione sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "passaggio-statuto-s-permesso-b",
+    "decision": "evergreen",
+    "reason": "È una guida procedurale autonoma al passaggio dallo statuto S al permesso B: requisiti, documenti, scadenze, diritti, scenari e FAQ sono il contenuto centrale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "chiusure-notturne-autostrada",
+    "decision": "unclassified",
+    "reason": "Descrive chiusure A9 in date specifiche e offre deviazioni, orari e checklist: avviso di viabilità e guida situazionale non consentono una scelta netta.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "morte-bimbo-efamilia-ticino",
+    "decision": "unclassified",
+    "reason": "Parte da una storia familiare di lutto ma aggiunge sostegni economici, procedure funerarie, assicurazioni e checklist: testimonianza e guida pratica sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "bellinzona-paese-dormitorio",
+    "decision": "unclassified",
+    "reason": "Analizza la crisi commerciale di Bellinzona con dati e chiusure del 2023, ma propone strategie per imprese, residenti e rivitalizzazione: analisi e guida sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "ticino-attenti-ai-radar-2026",
+    "decision": "unclassified",
+    "reason": "Annuncia controlli radar dal 23 al 29 marzo 2026 e include sanzioni, contestazione e una guida estesa alla sicurezza stradale: avviso e guida sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "riapertura-casetta-chiosco-davesco",
+    "decision": "news",
+    "reason": "Annuncia la riapertura della Casetta il 28 marzo 2026 con orari stagionali e gestione comunale; normativa e contesto sono accessori all'aggiornamento locale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "giovani-ticino-comuni-innovazioni",
+    "decision": "unclassified",
+    "reason": "Analizza l'esodo giovanile e incentivi comunali con requisiti, domande, documenti e scenari: analisi di policy e guida alle agevolazioni sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "chiusure-notturne-a4-ticino",
+    "decision": "unclassified",
+    "reason": "Riferisce chiusure A4 di marzo 2023 e sviluppa deviazioni, orari e checklist per automobilisti: avviso storico e guida situazionale sono misti.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "controlli-radar-ticino",
+    "decision": "unclassified",
+    "reason": "Riferisce la riduzione dei radar ma dedica i body a multe, sicurezza, assicurazione e budget del frontaliere: notizia e guida di mobilità sono miste.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "frontalieri-casa-zurigo",
+    "decision": "evergreen",
+    "reason": "È una guida autonoma alla ricerca e valutazione di casa a Zurigo per frontalieri: budget, documenti, permesso, truffe, scenari e FAQ sono il nucleo.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "best-cross-border-worker-calculator-switzerland",
+    "decision": "evergreen",
+    "reason": "È un confronto-guida esplicito tra calcolatori per frontalieri, con criteri, tabella funzionale, punti di forza e limiti; i dati 2026 sono aggiornabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lamal-vs-cmi",
+    "decision": "evergreen",
+    "reason": "È una guida comparativa autonoma LAMal/CMI con costi, coperture, diritto di opzione, scenari e FAQ per decidere l'assicurazione sanitaria.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "primo-giorno-frontaliere",
+    "decision": "evergreen",
+    "reason": "È una checklist-guida completa per il primo giorno da frontaliere: documenti, permessi, tragitto, vignetta, stipendio e FAQ costituiscono l'intero articolo.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "tredicesima-frontaliere",
+    "decision": "evergreen",
+    "reason": "È una guida esplicita al calcolo della tredicesima netta del frontaliere, con regole contrattuali, deduzioni e impatto fiscale italiano.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "pilastro-3a-frontaliere",
+    "decision": "evergreen",
+    "reason": "È una guida comparativa al pilastro 3a per frontalieri: versamenti, deduzioni, liquidità, alternative, fornitori e FAQ sono il contenuto centrale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "permesso-g-vantaggi-svantaggi",
+    "decision": "evergreen",
+    "reason": "È una guida completa G vs B con vantaggi, svantaggi, fiscalità, previdenza, scenari concreti, FAQ e strumenti di confronto; le aliquote 2026 sono aggiornabili.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "lamal-vs-ssn-decisione",
+    "decision": "evergreen",
+    "reason": "È una guida decisionale autonoma LAMal/SSN con diritto di opzione, costi, coperture, tabelle e quattro scenari familiari e reddituali.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  },
+  {
+    "id": "trovare-lavoro-ticino",
+    "decision": "evergreen",
+    "reason": "È una guida completa alla ricerca di lavoro in Ticino: mercato, settori, portali, LinkedIn, agenzie e candidatura spontanea sono il contenuto centrale.",
+    "readAt": "2026-10-06",
+    "basis": "reading"
+  }
+]
