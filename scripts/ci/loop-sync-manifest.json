@@ -2362,6 +2362,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/seo-title-repair.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del generatore e della bonifica storica introdotto dalla riparazione dei prefissi SEO troncati: `generator/scripts/create-article.mjs` e `generator/scripts/repair-truncated-seo-titles.mjs` condividono qui la stessa regola clause-safe per `ogTitle` e `headline`. Il codice della generazione del corpus vive in `generator/` e questo helper non ha un consumer nel percorso di pubblicazione del sito, quindi non c'e' un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "bad812edb534e2a3",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "generator/scripts/lib/corpus-paths.mjs",
       "mode": "corpus-only",
       "reason": "L'helper `corpusPath()` che riscrive i path del sito nei path del corpus. E' la meta' di trasporto per cui esistono gli `adapted` di questa cartella: sul sito non ha senso, perche' li' il corpus E' il repo.",
