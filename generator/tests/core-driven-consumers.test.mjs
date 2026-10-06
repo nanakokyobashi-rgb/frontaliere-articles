@@ -328,6 +328,12 @@ test('publish-api: osserva corpus-sections e deriva dal core le cartelle dei cor
   assert.doesNotMatch(wf, /-- content\/blog-body content\/blog-body-ch/);
 });
 
+test('i preflight dei corpi caricano il bootstrap D22 prima delle sezioni', () => {
+  const bootstrapImport = /import ['"]\.\.\/\.\.\/host\/cantonSectionsBootstrap\.mjs['"]/;
+  assert.match(readFileSync(path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs'), 'utf8'), bootstrapImport);
+  assert.match(readFileSync(path.join(ROOT, 'scripts/ci/check-blog-locale-completeness.mjs'), 'utf8'), bootstrapImport);
+});
+
 test('RSS: con la lista attiva di oggi nessun profilo cantonale viene chiesto all\'engine', () => {
   // L'engine (P2) lancia per una sezione `canton` attiva senza profilo RSS
   // finche' P7/P11 non lo definiscono: con le due sezioni storiche non deve
