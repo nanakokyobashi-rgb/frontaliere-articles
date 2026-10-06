@@ -23,7 +23,9 @@ import {
   fixerIssueOfBranch,
   handoffTitleQuery,
   isSweepCandidate,
+  isTrustedFixerOutcome,
   isTrustedComment,
+  latestConflictLabelEventAt,
   mergeTreeAllowsClose,
   latestHandoffOf,
 } from '../../scripts/ci/close-superseded-conflict-prs.mjs';
@@ -32,6 +34,7 @@ import { buildConflictHandoffIssue } from '../../scripts/ci/pr-autorebase.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const HEAD = '244f876cdaaa64fa9a5530933f6356de47202ab8';
+const CONFLICT_DETECTED_AT = '2026-10-05T23:06:51Z';
 
 const loopPr = (over = {}) => ({
   number: 2246,
@@ -129,7 +132,13 @@ test('caso 1 — resta aperta finché l\'origine non è MERGED o non si legge', 
 test('caso 2 — verdetto already-fixed sull\'hand-off della HEAD corrente: superata', () => {
   const pr = loopPr();
   assert.deepEqual(
-    decideHandoffAlreadyFixed({ pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr] }),
+    decideHandoffAlreadyFixed({
+      pr,
+      handoff: handoffOf(pr),
+      comments: [verdict('already-fixed')],
+      openPrs: [pr],
+      conflictDetectedAt: CONFLICT_DETECTED_AT,
+    }),
     { close: true, reason: 'handoff-already-fixed', handoff: 2250 },
   );
 });
@@ -137,7 +146,8 @@ test('caso 2 — verdetto already-fixed sull\'hand-off della HEAD corrente: supe
 test('caso 2 — ogni condizione mancante lascia la PR aperta', () => {
   const pr = loopPr();
   const reason = (over) => decideHandoffAlreadyFixed({
-    pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr], ...over,
+    pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr],
+    conflictDetectedAt: CONFLICT_DETECTED_AT, ...over,
   }).reason;
   assert.equal(reason({ handoff: null }), 'no-handoff');
   assert.equal(reason({ handoff: handoffOf(loopPr({ number: 2249 })) }), 'handoff-of-another-pr');
@@ -165,6 +175,7 @@ test('caso 2 — claim parziale o hand-off in coda al fixer: il verdetto non bas
   const pr = loopPr();
   const reason = (labels) => decideHandoffAlreadyFixed({
     pr, handoff: handoffOf(pr, { labels: labels.map((name) => ({ name })) }), comments: [verdict('already-fixed')], openPrs: [pr],
+    conflictDetectedAt: CONFLICT_DETECTED_AT,
   }).reason;
   assert.equal(reason(['agent:remote']), 'handoff-in-progress');
   assert.equal(reason(['agent:local']), 'handoff-in-progress');
@@ -178,6 +189,7 @@ test('caso 2 — un hand-off duplicato ancora attivo blocca la chiusura', () => 
   const latest = handoffOf(pr, { number: 2300, createdAt: '2026-10-05T23:30:00Z', state: 'OPEN' });
   const decide = (older, openPrs = [pr]) => decideHandoffAlreadyFixed({
     pr, handoff: latest, comments: [verdict('already-fixed')], openPrs, siblings: [latest, older],
+    conflictDetectedAt: CONFLICT_DETECTED_AT,
   });
   const older = (over) => handoffOf(pr, { number: 2250, state: 'OPEN', ...over });
   assert.deepEqual(decide(older({ labels: [{ name: 'agent:in-progress' }] })), { close: false, reason: 'handoff-in-progress', active: 2250 });
@@ -196,6 +208,7 @@ test('caso 2 — una riapplicazione in volo ha la precedenza sul verdetto', () =
   const pr = loopPr();
   const reason = (reapply) => decideHandoffAlreadyFixed({
     pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr, reapply],
+    conflictDetectedAt: CONFLICT_DETECTED_AT,
   }).reason;
   assert.equal(reason({ number: 2290, headRefName: 'fix/issue-2250', body: '' }), 'reapply-in-flight');
   assert.equal(reason({ number: 2291, headRefName: 'codex/x', body: 'Supersedes #2246' }), 'reapply-in-flight');
@@ -206,12 +219,66 @@ test('caso 2 — un marker incollato da fuori non chiude niente', () => {
   const outsider = verdict('already-fixed', { author_association: 'NONE', user: { login: 'passante' } });
   assert.equal(isTrustedComment(outsider), false);
   assert.equal(
-    decideHandoffAlreadyFixed({ pr, handoff: handoffOf(pr), comments: [outsider], openPrs: [pr] }).reason,
+    decideHandoffAlreadyFixed({
+      pr, handoff: handoffOf(pr), comments: [outsider], openPrs: [pr], conflictDetectedAt: CONFLICT_DETECTED_AT,
+    }).reason,
     'no-trusted-verdict',
   );
   // Il fixer commenta anche come bot di Actions, che non ha un'associazione.
   assert.equal(isTrustedComment({ author_association: 'NONE', user: { login: 'github-actions[bot]' } }), true);
   assert.equal(isTrustedComment({ author_association: 'COLLABORATOR', user: { login: 'valerielinc-ops' } }), true);
+});
+
+test('caso 2 — il preflight zero-Claude con lo stesso marker non è un verdetto del fixer', () => {
+  const pr = loopPr();
+  const preflight = verdict('already-fixed', {
+    author_association: 'NONE',
+    user: { login: 'github-actions[bot]' },
+    body: '<!-- reconcile-bot -->\n⏭️ **Pre-flight (auto, zero-Claude)**\n<!-- FIX_OUTCOME: already-fixed -->',
+  });
+  assert.equal(isTrustedFixerOutcome(preflight), false);
+  assert.equal(
+    decideHandoffAlreadyFixed({
+      pr, handoff: handoffOf(pr), comments: [preflight], openPrs: [pr],
+      conflictDetectedAt: CONFLICT_DETECTED_AT,
+    }).reason,
+    'no-trusted-verdict',
+  );
+  const fixer = verdict('already-fixed', {
+    author_association: 'NONE',
+    user: { login: 'github-actions[bot]' },
+    body: 'Diagnosi issue-fix: già su main.\n<!-- FIX_OUTCOME: already-fixed -->',
+  });
+  assert.equal(isTrustedFixerOutcome(fixer), true);
+});
+
+test('caso 2 — un verdetto precedente all\'ultima rilevazione di conflitto non chiude', () => {
+  const pr = loopPr();
+  assert.equal(
+    decideHandoffAlreadyFixed({
+      pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr],
+      conflictDetectedAt: '2026-10-06T00:30:00Z',
+    }).reason,
+    'verdict-before-current-conflict',
+  );
+});
+
+test('la rilevazione corrente richiede l\'ultima transizione has-conflicts come labeled', () => {
+  assert.equal(
+    latestConflictLabelEventAt([
+      { event: 'labeled', label: { name: 'has-conflicts' }, created_at: CONFLICT_DETECTED_AT },
+      { event: 'unlabeled', label: { name: 'has-conflicts' }, created_at: '2026-10-06T00:30:00Z' },
+      { event: 'labeled', label: { name: 'has-conflicts' }, created_at: '2026-10-06T00:40:00Z' },
+    ]),
+    Date.parse('2026-10-06T00:40:00Z'),
+  );
+  assert.equal(
+    latestConflictLabelEventAt([
+      { event: 'labeled', label: { name: 'has-conflicts' }, created_at: CONFLICT_DETECTED_AT },
+      { event: 'unlabeled', label: { name: 'has-conflicts' }, created_at: '2026-10-06T00:30:00Z' },
+    ]),
+    null,
+  );
 });
 
 test('l\'hand-off più recente della PR si trova con entrambe le forme del titolo', () => {
@@ -240,7 +307,9 @@ test('una issue sorgente chiusa da un\'altra PR NON è una ragione di chiusura',
   // dichiara di chiudere una issue: la riprendono la classe F e il recycle.
   const pr = loopPr();
   assert.equal(
-    decideHandoffAlreadyFixed({ pr, handoff: handoffOf(pr), comments: [], openPrs: [pr] }).close,
+    decideHandoffAlreadyFixed({
+      pr, handoff: handoffOf(pr), comments: [], openPrs: [pr], conflictDetectedAt: CONFLICT_DETECTED_AT,
+    }).close,
     false,
   );
 });

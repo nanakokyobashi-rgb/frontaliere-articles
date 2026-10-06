@@ -187,6 +187,7 @@ function runScan({
   checksMalformed = false,
   reviewsMalformed = false,
   commentsMalformed = false,
+  gitFetchError = false,
   dryRun = false,
   // Risposta di `gh api repos/:r/commits/:sha --jq .commit.committer.date`,
   // cioe' l'orologio del gate di eta'. Il default combacia con
@@ -218,6 +219,8 @@ function runScan({
     const fixReviewsMalformed = path.join(dir, 'reviews-malformed');
     const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
+    const fixGitFetchError = path.join(dir, 'git-fetch-error');
+    const fixMergeTreeState = path.join(dir, 'merge-tree-state');
     const normalizedComments = posted.map((comment, index) => ({
       id: Number.isSafeInteger(Number(comment?.id)) && Number(comment.id) > 0 ? Number(comment.id) : index + 1,
       body: typeof comment?.body === 'string' ? comment.body : '',
@@ -244,6 +247,8 @@ function runScan({
     writeFileSync(fixChecksMalformed, checksMalformed ? 'true' : 'false');
     writeFileSync(fixReviewsMalformed, reviewsMalformed ? 'true' : 'false');
     writeFileSync(fixCommentsMalformed, commentsMalformed ? 'true' : 'false');
+    writeFileSync(fixGitFetchError, gitFetchError ? 'true' : 'false');
+    writeFileSync(fixMergeTreeState, String(prs?.[0]?.mergeable || 'UNKNOWN'));
 
     // `gh`: serve le letture del rescuer e registra le scritture
     // (add-label, remove-label, comment, workflow run). Ogni
@@ -420,8 +425,31 @@ exec /usr/bin/grep "$@"
 `,
     );
     chmodSync(path.join(bin, 'gh'), 0o755);
+    writeFileSync(
+      path.join(bin, 'git'),
+      `#!/usr/bin/env bash
+case "\$1" in
+  fetch)
+    if [[ "\$(cat ${JSON.stringify(fixGitFetchError)})" == "true" ]]; then exit 1; fi
+    exit 0
+    ;;
+  rev-parse)
+    printf '%s\\n' ${JSON.stringify(HEAD_SHA)}
+    ;;
+  merge-tree)
+    case "\$(cat ${JSON.stringify(fixMergeTreeState)})" in
+      CONFLICTING) exit 1 ;;
+      MERGEABLE) exit 0 ;;
+      *) exit 2 ;;
+    esac
+    ;;
+  *) exit 0 ;;
+esac
+`,
+    );
     chmodSync(path.join(bin, 'date'), 0o755);
     chmodSync(path.join(bin, 'grep'), 0o755);
+    chmodSync(path.join(bin, 'git'), 0o755);
 
     const script = path.join(dir, 'scan.sh');
     writeFileSync(script, SCAN_RUN);
@@ -976,8 +1004,11 @@ test('#314 — stallo rientrato: `stale-review` viene TOLTA, non lasciata lì', 
 // a `recycle-stale-prs`. Stesso input del test «stallo rientrato» qui sopra,
 // più la label `has-conflicts`: l'esito deve essere l'opposto.
 
-const conflicted = (labels = []) => openPr({
+const conflicted = (labels = [], over = {}) => openPr({
+  base: { ref: 'main' },
+  mergeable: 'CONFLICTING',
   labels: [{ name: 'has-conflicts' }, ...labels.map((name) => ({ name }))],
+  ...over,
 });
 
 test('F — verde con LGTM sull\'head ma in conflitto: la classe scatta e la label resta', opts, () => {
@@ -1005,6 +1036,31 @@ test('F — senza `stale-review`: viene etichettata, non lasciata muta', opts, (
   });
   assert.deepEqual(r.labeled, [901], `Classe F senza label: il recycle non può prenderla.\n${r.stdout}`);
   assert.equal(r.comments.length, 1, r.stdout);
+});
+
+test('F — una label conservata senza conflitto corrente lascia la PR invariata', opts, () => {
+  for (const mergeable of ['MERGEABLE', 'UNKNOWN', undefined]) {
+    const r = runScan({
+      prs: conflicted(['stale-review'], { mergeable }),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    });
+    assert.deepEqual(r.labeled, [], `${mergeable}: label aggiunta su una PR non verificata\n${r.stdout}`);
+    assert.deepEqual(r.unlabeled, [], `${mergeable}: label rimossa su una PR non verificata\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${mergeable}: commento F su una PR non verificata\n${r.stdout}`);
+  }
+});
+
+test('F — fetch illeggibile lascia invariata la label conservata', opts, () => {
+  const r = runScan({
+    prs: conflicted(['stale-review']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    gitFetchError: true,
+  });
+  assert.deepEqual(r.labeled, [], r.stdout);
+  assert.deepEqual(r.unlabeled, [], r.stdout);
+  assert.deepEqual(r.comments, [], r.stdout);
 });
 
 test('F — precede le altre classi: con i test rossi il rimedio non è un rerun', opts, () => {

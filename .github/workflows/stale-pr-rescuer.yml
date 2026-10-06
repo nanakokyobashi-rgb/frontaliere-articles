@@ -7,7 +7,10 @@ name: Stale PR rescuer (self-healing signal)
 #      merge-tree). Si valuta PRIMA di tutte le altre e prima dei loro guard
 #      fail-closed (check, review, quota, cap del fixer), perché le rende inerti:
 #      GitHub non avvia i workflow `pull_request` su una PR in conflitto, quindi
-#      nessun test, review o fixer può più partire su quella head. È la classe D
+#      nessun test, review o fixer può più partire su quella head. La label è solo
+#      una candidata: il rescuer ricalcola con `git merge-tree` sulla HEAD
+#      corrente, così una label conservata da un fetch/merge-tree illeggibile non
+#      diventa `stale-review` per una PR già pulita. È la classe D
 #      del rescuer del sito, che qui mancava: una PR verde, con `## LGTM` sulla
 #      head e l'auto-merge armato non rientrava in nessuna delle altre cinque,
 #      cadeva nell'`else` e si vedeva TOGLIERE la `stale-review` che
@@ -242,6 +245,17 @@ jobs:
           fi
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
+      # La classe F non può usare la label come prova: pr-autorebase la preserva
+      # quando il proprio fetch o merge-tree è illeggibile. Il checkout contiene
+      # solo la storia necessaria; il passo F scarica poi ogni ref PR corrente e
+      # ricalcola l'unione reale con `git merge-tree` prima di mutare la PR.
+      - name: Checkout main for current conflict proofs
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+          filter: blob:none
+
       - name: Scan open PRs and flag stalled ones
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -385,12 +399,36 @@ jobs:
             # `needs-human`, stato del fixer non verificabile — e ognuno di
             # quelli salterebbe la PR lasciandola senza `stale-review`. Per le
             # classi A–E è giusto (decidono su quei dati); per F no: il
-            # conflitto non dipende da check e review, e finché resta nessuno
-            # di quei dati può più cambiare. La label è il solo segnale che
-            # porta la PR a `recycle-stale-prs`, quindi si applica PER PRIMA e
-            # comunque; il commento, idempotente per (classe, HEAD), si rinvia
+            # conflitto non dipende da check e review. La label è però solo una
+            # candidata: `pr-autorebase` la conserva quando fetch o merge-tree
+            # sono illeggibili, quindi qui si ricalcola l'unione con la HEAD
+            # scaricata dalla ref PR corrente. Se fetch, HEAD o merge-tree non
+            # sono verificabili, o il conflitto è rientrato, la PR resta
+            # invariata; il commento, idempotente per (classe, HEAD), si rinvia
             # se i commenti non sono leggibili.
             if [ "${HAS_CONFLICTS:-false}" = "true" ]; then
+              F_TREE_STATE=unknown
+              F_PR_REF="refs/remotes/origin/pr-$N-head"
+              if git fetch --no-tags --quiet origin \
+                "refs/heads/main:refs/remotes/origin/main" \
+                "refs/pull/$N/head:$F_PR_REF" >/dev/null 2>&1; then
+                if F_FETCHED_HEAD=$(git rev-parse "$F_PR_REF" 2>/dev/null) \
+                  && [ "$F_FETCHED_HEAD" = "$HEAD" ]; then
+                  if git merge-tree --write-tree refs/remotes/origin/main "$F_PR_REF" >/dev/null 2>&1; then
+                    F_MERGE_STATUS=0
+                  else
+                    F_MERGE_STATUS=$?
+                  fi
+                  case "$F_MERGE_STATUS" in
+                    0) F_TREE_STATE=clean ;;
+                    1) F_TREE_STATE=conflicted ;;
+                  esac
+                fi
+              fi
+              if [ "$F_TREE_STATE" != "conflicted" ]; then
+                echo "PR #$N: has-conflicts conservata ma merge-tree corrente è $F_TREE_STATE — nessuna azione della classe F."
+                continue
+              fi
               REASON="conflitto con \`main\` (\`has-conflicts\` da pr-autorebase): GitHub non avvia i workflow \`pull_request\` su una PR in conflitto, quindi nessun test, review o fixer può partire su questa head e l'auto-merge non la prenderà"
               RESCUE="nessun rerun possibile finché il conflitto resta. Con \`## LGTM\` pr-autorebase ha già affidato la riapplicazione a issue-fix (issue «riapplicare la PR su main»); una PR superata viene chiusa da \`close-superseded-conflict-prs.mjs\`, e se resta ferma la ricicla \`recycle-stale-prs\`. A mano: \`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, risolvi e push."
               MARKER="<!-- stale-pr-rescuer class=F head=${HEAD:0:7} -->"

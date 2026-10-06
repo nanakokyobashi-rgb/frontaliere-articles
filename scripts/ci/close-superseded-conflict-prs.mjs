@@ -22,12 +22,16 @@
  *
  *   2. `handoff-already-fixed` — il fixer ha lavorato l'hand-off della PR e ha
  *      chiuso con `FIX_OUTCOME: already-fixed`: il contenuto era già su `main`
- *      per un'altra via, quindi non apre nessuna PR sostitutiva. Il testo
- *      dell'hand-off prevede «apri la PR con Supersedes e chiudi #N» oppure
- *      «il conflitto è rientrato, chiudi senza PR»; questo terzo esito non lo
- *      prevedeva nessuno. Misurato lo stesso giorno: #2246 (hand-off #2250,
- *      verdetto alle 00:18 — «i 24 caller sono byte-identici tra main e il
- *      branch approvato») ancora aperta e in conflitto alle 03:30.
+ *      per un'altra via, quindi non apre nessuna PR sostitutiva. Il verdetto
+ *      conta solo se è un commento del fixer con identità trusted e senza la
+ *      firma del preflight zero-Claude, e se arriva dopo l'ultima rilevazione
+ *      corrente di `has-conflicts`; i preflight che emettono lo stesso marker
+ *      non bastano. Il
+ *      testo dell'hand-off prevede «apri la PR con Supersedes e chiudi #N»
+ *      oppure «il conflitto è rientrato, chiudi senza PR»; questo terzo esito
+ *      non lo prevedeva nessuno. Misurato lo stesso giorno: #2246 (hand-off
+ *      #2250, verdetto alle 00:18 — «i 24 caller sono byte-identici tra main e
+ *      il branch approvato») ancora aperta e in conflitto alle 03:30.
  *
  * Non esiste un terzo caso «le issue sorgente sono chiuse»: che un'altra PR
  * abbia chiuso la stessa issue non prova che abbia consegnato QUESTO
@@ -69,7 +73,7 @@ import {
   conflictHandoffExpectedHead,
   conflictHandoffOriginPr,
 } from './check-issue-already-resolved.mjs';
-import { lastFixOutcome } from './close-recovered-failure-issues.mjs';
+import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
 import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
@@ -88,7 +92,7 @@ export const OPEN_PR_LIMIT = 200;
 // Gli hand-off letti per PR: uno per HEAD andata in conflitto, quindi pochi.
 // Una lista piena puo' avere tagliato il piu' recente: fail-closed.
 export const HANDOFF_SEARCH_LIMIT = 100;
-// Costo stimato di una PR: fino a sei letture `gh` ripetute due volte e una scrittura.
+// Costo stimato di una PR: fino a sette letture `gh` ripetute due volte e una scrittura.
 const PER_PR_BUDGET_MS = 40_000;
 const GH_TIMEOUT_MS = 30_000;
 const GIT_TIMEOUT_MS = 60_000;
@@ -171,6 +175,48 @@ export function isTrustedComment(comment) {
 }
 
 /**
+ * Un `FIX_OUTCOME` è una prova del fixer solo quando la sua provenienza è
+ * compatibile con issue-fix. Il preflight `check-issue-already-resolved.mjs`
+ * usa il bot trusted e scrive anch'esso `already-fixed`, ma non ha eseguito il
+ * fixer: per quello specifico esito scartiamo il suo marker
+ * `reconcile-bot`/`Pre-flight`, mentre un commento del bot trusted senza quella
+ * firma resta un verdetto del fixer. Gli altri esiti possono invece provenire
+ * dal backstop deterministico del workflow e restano leggibili anche quando
+ * l'autore è un bot trusted.
+ * Pura.
+ */
+export function isTrustedFixerOutcome(comment) {
+  if (!isTrustedComment(comment)) return false;
+  const match = FIX_OUTCOME_RE.exec(String(comment?.body || ''));
+  if (!match) return false;
+  if (match[1].toLowerCase() !== SUPERSEDING_OUTCOME) return true;
+  const body = String(comment?.body || '');
+  if (/<!--\s*reconcile-bot\s*-->/i.test(body)) return false;
+  if (/Pre-flight\s*\(auto,\s*zero-Claude\)/i.test(body)) return false;
+  return true;
+}
+
+/**
+ * Timestamp dell'ultima transizione della label `has-conflicts`, oppure null
+ * se gli eventi non sono leggibili. Un `labeled` corrente è la prova che la
+ * label non è un residuo di una rilevazione precedente: un `unlabeled` più
+ * recente o nessun evento rendono il caso non chiudibile. Pura.
+ */
+export function latestConflictLabelEventAt(events) {
+  if (!Array.isArray(events)) return null;
+  let latest = null;
+  for (const event of events) {
+    const label = typeof event?.label === 'string' ? event.label : event?.label?.name;
+    if (label !== HANDOFF_CONFLICT_LABEL) continue;
+    if (event?.event !== 'labeled' && event?.event !== 'unlabeled') continue;
+    const at = Date.parse(String(event?.created_at ?? event?.createdAt ?? ''));
+    if (!Number.isFinite(at)) continue;
+    if (!latest || at >= latest.at) latest = { event: event.event, at };
+  }
+  return latest?.event === 'labeled' ? latest.at : null;
+}
+
+/**
  * Caso 1: la PR riapplica una PR di origine che ha già mergiato.
  *
  * @param {object} p
@@ -208,14 +254,19 @@ export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin }) {
  * @param {Array|null} p.comments  i commenti dell'hand-off (REST), o null se illeggibili
  * @param {Array|null} p.openPrs   le PR aperte, o null se la lista è illeggibile o troncata
  * @param {Array} [p.siblings]     tutti gli hand-off della PR (`number`, `labels`, `state`); default: il solo `handoff`
+ * @param {number|string|null} p.conflictDetectedAt ultima applicazione corrente di `has-conflicts`
  * @returns {{ close: boolean, reason: string, handoff?: number, active?: number }}
  */
-export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings }) {
+export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt }) {
   if (!handoff) return { close: false, reason: 'no-handoff' };
   if (conflictHandoffOriginPr(handoff.title) !== Number(pr?.number)) return { close: false, reason: 'handoff-of-another-pr' };
   const expectedHead = conflictHandoffExpectedHead(handoff.body);
   const head = String(pr?.headRefOid || '').toLowerCase();
   if (!expectedHead || !head || !head.startsWith(expectedHead)) return { close: false, reason: 'handoff-head-mismatch' };
+  const conflictAt = typeof conflictDetectedAt === 'number'
+    ? conflictDetectedAt
+    : Date.parse(String(conflictDetectedAt || ''));
+  if (!Number.isFinite(conflictAt)) return { close: false, reason: 'conflict-detection-unreadable' };
   if (!Array.isArray(comments)) return { close: false, reason: 'handoff-comments-unreadable' };
   if (!Array.isArray(openPrs)) return { close: false, reason: 'open-prs-unreadable' };
   const family = Array.isArray(siblings) && siblings.length ? siblings : [handoff];
@@ -231,13 +282,14 @@ export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, sibl
       return { close: false, reason: 'reapply-in-flight', active };
     }
   }
-  const outcome = lastFixOutcome(comments.filter(isTrustedComment));
+  const outcome = lastFixOutcome(comments.filter(isTrustedFixerOutcome));
   if (!outcome) return { close: false, reason: 'no-trusted-verdict' };
   if (outcome.code !== SUPERSEDING_OUTCOME) return { close: false, reason: `verdict-${outcome.code}` };
   const openedAt = Date.parse(handoff.createdAt ?? handoff.created_at ?? '');
   if (!Number.isFinite(openedAt) || outcome.at === null || outcome.at <= openedAt) {
     return { close: false, reason: 'verdict-not-after-handoff' };
   }
+  if (outcome.at <= conflictAt) return { close: false, reason: 'verdict-before-current-conflict' };
   return { close: true, reason: 'handoff-already-fixed', handoff: Number(handoff.number) };
 }
 
@@ -329,6 +381,18 @@ function readIssueComments(number) {
   }
 }
 
+function readConflictLabelEventAt(number) {
+  const raw = gh(['api', '--paginate', '--slurp', `repos/${REPO}/issues/${Number(number)}/events?per_page=100`]);
+  if (raw === null) return null;
+  try {
+    const pages = JSON.parse(raw);
+    if (!Array.isArray(pages) || !pages.every(Array.isArray)) return null;
+    return latestConflictLabelEventAt(pages.flat());
+  } catch {
+    return null;
+  }
+}
+
 /**
  * La PR com'è ADESSO, se è ancora quella giudicata (aperta, stessa HEAD,
  * ancora candidata), altrimenti null. Rende l'oggetto riletto per intero:
@@ -370,9 +434,11 @@ function decide(pr, openPrs) {
   if (!Array.isArray(handoffs)) return { close: false, reason: 'handoffs-unreadable' };
   if (handoffs.length >= HANDOFF_SEARCH_LIMIT) return { close: false, reason: 'handoffs-truncated' };
   const handoff = latestHandoffOf(pr.number, handoffs);
+  const conflictDetectedAt = readConflictLabelEventAt(pr.number);
+  if (conflictDetectedAt === null) return { close: false, reason: 'conflict-detection-unreadable' };
   const comments = handoff ? readIssueComments(handoff.number) : null;
   const siblings = handoffs.filter((issue) => conflictHandoffOriginPr(issue?.title) === Number(pr.number));
-  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings });
+  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt });
 }
 
 function main() {
