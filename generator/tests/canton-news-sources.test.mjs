@@ -33,6 +33,7 @@ import {
   SUPPORTED_CANTON_PARSERS,
   applyDatetimeYearOffset,
   applyItemIdentity,
+  charsetFromDocumentHead,
   createHostThrottle,
   decodeResponseBody,
   extractJsonApiItems,
@@ -228,6 +229,14 @@ test('charset: il prologo XML ISO-8859-1 vince sull\'assenza di charset nell\'he
   const out = await scanCantonSource(source, ctx(impl));
   assert.ok(out.headlines.some((h) => /L'économie genevoise/.test(h.headline)), 'il titolo arriva decodificato giusto');
   assert.ok(out.notes.includes('charset iso-8859-1'));
+});
+
+test('charset: ignora dichiarazioni in markup inattivo prima della meta reale', () => {
+  const head = '<!-- <meta charset="iso-8859-1"> -->'
+    + '<template><meta charset="windows-1252"></template>'
+    + '<script>const fake = "<meta charset=ascii>";</script>'
+    + '<meta charset="utf-8">';
+  assert.equal(charsetFromDocumentHead(head), 'utf-8');
 });
 
 test('pubDate vuoto (bs.ch): voci SENZA data per la quota undated, mai «recenti»', async () => {

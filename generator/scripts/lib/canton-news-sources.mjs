@@ -101,7 +101,10 @@ export function charsetFromContentType(contentType) {
 
 /** Il charset dichiarato DENTRO il documento (prologo XML o meta HTML), o null. */
 export function charsetFromDocumentHead(asciiHead) {
-  const head = String(asciiHead || '');
+  // Only active document markup can declare the response charset. A stale
+  // `<meta charset>` in a comment, template, or script must not win over the
+  // real declaration that follows it.
+  const head = maskInactiveMarkup(String(asciiHead || ''));
   const xml = /<\?xml[^>]*\bencoding\s*=\s*["']([\w.:-]+)["']/i.exec(head);
   if (xml) return xml[1].toLowerCase();
   const meta = /<meta[^>]+charset\s*=\s*["']?([\w.:-]+)/i.exec(head);
