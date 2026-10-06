@@ -515,7 +515,7 @@
       "reason": "Osservabilita' del budget GitHub API per il ciclo Actions del corpus: interroga il rate-limit del token gia' selezionato dal workflow, redige il valore e pubblica una riga `RATE_LIMIT_BUDGET` nel log e nel job summary. Il sito non consuma questo ciclo Actions e non ha un gemello operativo.",
       "baseline": {
         "site": null,
-        "corpus": "78284fb11e085202",
+        "corpus": null,
         "alignedAt": "2026-10-06"
       }
     },
