@@ -125,6 +125,11 @@ function stubPremiumFailure() {
   };
 }
 
+function translatePreservingLineMarker(line, prefix) {
+  const match = String(line).match(/^(\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+))(.*)$/u);
+  return match ? `${match[1]}${prefix}${match[2]}` : `${prefix}${line}`;
+}
+
 function stubMyMemory({ fold = false, failRecovery = false } = {}) {
   const calls = [];
   const premiumFailure = stubPremiumFailure();
@@ -138,10 +143,14 @@ function stubMyMemory({ fold = false, failRecovery = false } = {}) {
     if (failRecovery && calls.length > 1) {
       return { ok: true, json: async () => ({ responseData: { translatedText: '', match: 1 } }) };
     }
-    const translated = fold && query.includes('\n') ? query.replace(/\n/g, ' ') : query;
+    const translated = fold && query.includes('\n')
+      ? `T ${query.replace(/\n/g, ' ')}`
+      : query.split('\n').map((line) => line
+        ? translatePreservingLineMarker(line, 'T ')
+        : line).join('\n');
     return {
       ok: true,
-      json: async () => ({ responseData: { translatedText: 'T ' + translated, match: 1 } }),
+      json: async () => ({ responseData: { translatedText: translated, match: 1 } }),
     };
   };
   return calls;
@@ -247,7 +256,13 @@ test('un recupero fallito fa proseguire la cascata e conta recoveryFailed', asyn
       return {
         ok: true,
         status: 200,
-        json: async () => [{ translations: [{ text: 'AZURE ' + text }] }],
+        json: async () => [{
+          translations: [{
+            text: text.split('\n').map((line) => line
+              ? translatePreservingLineMarker(line, 'AZURE ')
+              : line).join('\n'),
+          }],
+        }],
       };
     }
     throw new Error('offline nel test');
@@ -264,7 +279,7 @@ test('un recupero fallito fa proseguire la cascata e conta recoveryFailed', asyn
 
   assert.equal(deepLCalls, 2);
   assert.equal(azureCalls, 1);
-  assert.match(translated, /^AZURE /);
+  assert.match(translated, /^- AZURE /);
   assert.deepEqual(lineKinds(translated), lineKinds(source));
   assert.equal(
     (getCascadeStats().tierStructureFailures?.recoveryFailed?.deepl || 0) - beforeFailure,
@@ -351,10 +366,15 @@ test('hasTranslatableLineText conserva le righe brevi o prive di lettere', async
   for (const [line, expected] of [
     ['OK', false],
     ['IT', false],
+    ['No', true],
+    ['Sì', true],
     ['—', false],
     ['1.', false],
     ['!!!', false],
     ['12345', false],
+    ['ZQX0XQZ', false],
+    ['0NAV0', false],
+    ['0M012Q0', false],
     ['Una riga traducibile', true],
   ]) {
     assert.equal(hasTranslatableLineText(line), expected, line);
@@ -379,5 +399,47 @@ test('hasTranslatableLineText conserva le righe brevi o prive di lettere', async
 
   assert.notEqual(translated, '');
   assert.deepEqual(lineKinds(translated), lineKinds(source));
-  assert.equal(calls.some((query) => ['OK', 'IT', '—', '1.', '12345'].includes(query)), false);
+  assert.equal(
+    calls.some((query) => ['OK', 'IT', '—', '1.', '12345', 'ZQX0XQZ', '0NAV0', '0M012Q0'].includes(query)),
+    false,
+  );
+});
+
+test('il recovery rifiuta i marker Markdown alterati e ricompone quelli corretti', async () => {
+  const source = [
+    '## Titolo',
+    '- Punto',
+    '1. Passo',
+    '',
+    'Paragrafo',
+  ].join('\n');
+  const perLine = new Map([
+    ['## Titolo', '## Titel'],
+    ['- Punto', '- Punkt'],
+    ['1. Passo', '1. Schritt'],
+    ['Paragrafo', 'Absatz'],
+  ]);
+  let calls = 0;
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls += 1;
+    const translatedText = calls === 1
+      ? '# Titel\n* Punkt\n1) Schritt\n\nAbsatz'
+      : perLine.get(query);
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.equal(calls, 5);
+  assert.equal(translated, '## Titel\n- Punkt\n1. Schritt\n\nAbsatz');
 });

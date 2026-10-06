@@ -515,18 +515,40 @@ function normalizeBlock(s) {
 /**
  * Decide whether a source line deserves a translation request.
  *
- * MyMemory rejects strings shorter than three characters. Markers, punctuation
- * and numbers have no letters to translate and should stay in the recomposed
- * field without turning the whole field into a miss.
+ * MyMemory rejects strings shorter than three characters, but a two-character
+ * word such as `No` or `Sì` is still real prose and must not be copied into the
+ * target locale. Markdown markers, punctuation, numbers and the opaque
+ * sentinels used by the article pipeline have no translatable content and stay
+ * in the recomposed field without turning the whole field into a miss.
  */
+const OPAQUE_LINE_TOKEN_RE = /(?:ZQX\d{1,3}XQZ|0NAV\d+0?|0M0\d+Q0)/giu;
+
 export function hasTranslatableLineText(line) {
-  const candidate = String(line ?? '').trim();
-  return candidate.length >= 3 && /\p{L}/u.test(candidate);
+  const candidate = String(line ?? '')
+    .trim()
+    .replace(/^(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u, '')
+    .replace(OPAQUE_LINE_TOKEN_RE, '')
+    .trim();
+  // Keep two-letter all-caps language/status markers such as `OK` and `IT`
+  // opaque, while allowing ordinary short words (`No`, `Sì`) through.
+  return /\p{L}/u.test(candidate) && !/^\p{Lu}{1,3}$/u.test(candidate);
+}
+
+function lineStructuralMarker(line) {
+  const candidate = String(line ?? '').trimStart();
+  if (!candidate) return 'empty';
+  const heading = candidate.match(/^(#{1,6})(?:\s+|$)/u);
+  if (heading) return `heading:${heading[1].length}`;
+  const bullet = candidate.match(/^([-*+])(?:\s+|$)/u);
+  if (bullet) return `bullet:${bullet[1]}`;
+  const ordered = candidate.match(/^(\d+)([.)])(?:\s+|$)/u);
+  if (ordered) return `ordered:${ordered[1]}${ordered[2]}`;
+  return 'text';
 }
 
 function lineStructure(text) {
   const normalized = normalizeBlock(text);
-  return normalized ? normalized.split('\n').map((line) => line === '') : [];
+  return normalized ? normalized.split('\n').map(lineStructuralMarker) : [];
 }
 
 function hasSameLineStructure(sourceText, translatedText) {
@@ -534,7 +556,13 @@ function hasSameLineStructure(sourceText, translatedText) {
   const translated = lineStructure(translatedText);
   return source.length > 1
     && source.length === translated.length
-    && source.every((isEmpty, index) => translated[index] === isEmpty);
+    && source.every((marker, index) => translated[index] === marker);
+}
+
+function hasSameLineMarker(sourceLine, translatedLine) {
+  const source = lineStructure(sourceLine);
+  const translated = lineStructure(translatedLine);
+  return source.length === 1 && translated.length === 1 && source[0] === translated[0];
 }
 
 /**
@@ -863,6 +891,9 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
     }
     const normalized = normalizeBlock(translated);
     if (!normalized || normalized.includes('\n')) {
+      return { ok: false, reason: 'recoveryFailed' };
+    }
+    if (!hasSameLineMarker(line.text, normalized)) {
       return { ok: false, reason: 'recoveryFailed' };
     }
     const lineIsPassthrough = rejectedAsPassthroughWithSourceVariants(

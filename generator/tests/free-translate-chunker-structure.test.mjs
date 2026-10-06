@@ -60,6 +60,11 @@ function structureOf(text) {
 async function translateWithStub(source, translateChunk) {
   process.env.VITEST = '1';
   const calls = [];
+  const translateLine = (line) => {
+    const match = String(line).match(/^(\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+))(.*)$/u);
+    if (!match) return `[en] ${translateChunk(line)}`;
+    return `${match[1]}[en] ${translateChunk(match[2])}`;
+  };
   globalThis.fetch = async (url) => {
     if (!String(url).includes('api.mymemory.translated.net')) {
       throw new Error('offline nel test');
@@ -69,7 +74,10 @@ async function translateWithStub(source, translateChunk) {
     return {
       ok: true,
       json: async () => ({
-        responseData: { translatedText: `[en] ${translateChunk(query)}`, match: 1 },
+        responseData: {
+          translatedText: query.split('\n').map((line) => line ? translateLine(line) : line).join('\n'),
+          match: 1,
+        },
       }),
     };
   };
