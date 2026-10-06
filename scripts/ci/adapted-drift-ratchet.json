@@ -28,7 +28,6 @@
     "AGENTS.md",
     "FOLLOWUP.md",
     "ISSUES.md",
-    "REVIEW.md",
     "generator/scripts/batch-add-faq-to-articles.mjs",
     "generator/scripts/create-article.mjs",
     "generator/scripts/lib/ai-models.mjs",

@@ -134,6 +134,14 @@
       {
         "prefix": "data/evergreen-verifications.json",
         "reason": "Registro delle verifiche evergreen scritto dal generatore (#2096), che oggi contiene solo `{}`: il censimento lo trova 'byte-identico' a `packages/articles/engine/shared/article-reviewed-by.json` del sito perche' due JSON vuoti hanno lo stesso sha del blob, non perche' siano lo stesso file. Il sito non ha nessun gemello di questo registro e non c'e' una fix che scende o risale. Se il registro diventa codice condiviso col sito, la riga va tolta e il file registrato."
+      },
+      {
+        "prefix": "services/seo/imageObjectLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/imageObjectLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
+      },
+      {
+        "prefix": "services/seo/organizationLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/organizationLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
       }
     ]
   },
@@ -1011,10 +1019,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "3a28a8c91ab5671b",
+        "site": "f7f1b2d248169079",
         "corpus": "6880a0776c0ab697",
         "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T00:27:33.002Z"
+        "forcedAt": "2026-10-06T23:54:42.602Z"
       }
     },
     {
@@ -3305,9 +3313,9 @@
       "sitePath": "data/authors.ts",
       "mode": "identical",
       "baseline": {
-        "site": "0f89e0a3464c7e48",
-        "corpus": "0f89e0a3464c7e48",
-        "alignedAt": "2026-10-04"
+        "site": "a4e70e5bedf3dbf3",
+        "corpus": "a4e70e5bedf3dbf3",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3406,8 +3414,8 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "4e2b0a541c32ed70",
-        "corpus": "4e2b0a541c32ed70",
+        "site": "642ce32dbd0422f3",
+        "corpus": "642ce32dbd0422f3",
         "alignedAt": "2026-10-06"
       }
     },
@@ -3470,9 +3478,9 @@
       "sitePath": "build-plugins/shared/inlineJsonScript.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2d1b8c01016ef1d3",
-        "corpus": "2d1b8c01016ef1d3",
-        "alignedAt": "2026-08-09"
+        "site": "f1652b861b452480",
+        "corpus": "f1652b861b452480",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3502,9 +3510,9 @@
       "sitePath": "build-plugins/shared/railGutters.ts",
       "mode": "identical",
       "baseline": {
-        "site": "1b55f084ebc648f8",
-        "corpus": "1b55f084ebc648f8",
-        "alignedAt": "2026-09-28"
+        "site": "28740c7dfd69dbe6",
+        "corpus": "28740c7dfd69dbe6",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3654,9 +3662,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "3cdd32148bd86613",
-        "corpus": "3cdd32148bd86613",
-        "alignedAt": "2026-10-05"
+        "site": "77084b29001782fc",
+        "corpus": "77084b29001782fc",
+        "alignedAt": "2026-10-06"
       },
       "couplingSnapshot": [
         {
