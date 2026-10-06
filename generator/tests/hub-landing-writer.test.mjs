@@ -29,6 +29,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
+import { patchHubLandingMetadata, SWISS_HUB_ROOT_SEO_IT } from '../../scripts/lib/hub-landing-meta.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 const writer = readFileSync(path.join(ROOT, 'scripts', 'refresh-hub-landing.mjs'), 'utf-8');
@@ -96,4 +97,21 @@ test('the mirrored engine exposes create-or-refresh and keeps its fail-closed co
     /export const ARTICLE_HUB_GRID_OPEN = '<div class="ssg-article-grid">';/,
     'the grid marker must stay the literal both emitters agree on',
   );
+});
+
+
+test('the writer upgrades the stale Italian Switzerland landing head', () => {
+  const stale = '<head>'
+    + '<title>Articoli Svizzera | Frontaliere Ticino</title>'
+    + '<meta name="description" content="Informazioni utili per frontalieri Svizzera-Italia: articoli svizzera.">'
+    + '<meta property="og:title" content="Articoli Svizzera | Frontaliere Ticino">'
+    + '<meta property="og:description" content="Informazioni utili per frontalieri: articoli svizzera.">'
+    + '</head>';
+  const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
+  assert.match(patched, new RegExp(`<title>${SWISS_HUB_ROOT_SEO_IT.title}</title>`));
+  assert.match(patched, new RegExp(`name="description" content="${SWISS_HUB_ROOT_SEO_IT.description}`));
+  assert.match(patched, new RegExp(`property="og:title" content="${SWISS_HUB_ROOT_SEO_IT.title}`));
+  assert.match(patched, new RegExp(`property="og:description" content="${SWISS_HUB_ROOT_SEO_IT.ogDescription}`));
+  assert.equal(patchHubLandingMetadata(patched, 'svizzera', 'it'), patched, 'patch must be idempotent');
+  assert.equal(patchHubLandingMetadata(stale, 'frontaliere', 'it'), stale, 'other sections pass through');
 });

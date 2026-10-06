@@ -69,6 +69,7 @@ import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
+import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const argv = process.argv.slice(2);
@@ -388,7 +389,8 @@ for (const section of SECTIONS) {
 
     const abs = path.join(OUT, relPath);
     fs.mkdirSync(path.dirname(abs), { recursive: true });
-    const cleanPage = sanitizeHtmlDocument(patched);
+    const patchedWithMetadata = patchHubLandingMetadata(patched, section.name, locale);
+    const cleanPage = sanitizeHtmlDocument(patchedWithMetadata);
     reportStrippedControlChars(abs, patched, cleanPage);
     fs.writeFileSync(abs, cleanPage, 'utf-8');
 
