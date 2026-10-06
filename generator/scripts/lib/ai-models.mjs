@@ -9041,6 +9041,15 @@ export async function callSingleModel(messages, opts = {}) {
   o._resolverContext = _newResolverContext();
   const model = o.model || AI_MODELS.GPT4O;
 
+  // A direct caller has no fallback loop around this function. Once the
+  // primary Codex lane has opened its run-local circuit, reject before
+  // `_callModel` so a later translation field cannot spend another broker
+  // request on the same timeout/quota/auth failure; its caller can then move
+  // to the historical provider tier immediately.
+  if (getProvider(model) === PROVIDER.CODEX_CLI && _codexPrimaryCircuitOpen) {
+    throw new Error(`[${model}] skipped — ${_codexPrimaryCircuitReasonFor(PROVIDER.CODEX_CLI)}`);
+  }
+
   if (_shouldSkipExhausted(model)) {
     throw new Error(`[${model}] Model is exhausted for this run`);
   }

@@ -19,6 +19,7 @@ import {
   DEFAULT_CHAIN,
   __installScoreStoreForTests,
   callLLM,
+  callSingleModel,
   classifyExhaustionCause,
   getScoreBoard,
   getPreferredModel,
@@ -144,6 +145,23 @@ test('un timeout Codex apre il circuito per run e passa subito a Gemini', async 
   } finally {
     globalThis.fetch = realFetch;
   }
+});
+
+test('una chiamata diretta Codex successiva al circuito non riapre il broker', async () => {
+  behavior = (client) => {
+    client.end(`${JSON.stringify({ ok: false, error: 'Codex CLI timed out after 15000ms' })}\n`);
+  };
+  await assert.rejects(() => callSingleModel(messages, {
+    model: CODEX,
+    maxRetriesPerModel: 1,
+  }), /timed out/);
+  const requestsAfterFailure = requests.length;
+
+  await assert.rejects(() => callSingleModel(messages, {
+    model: CODEX,
+    maxRetriesPerModel: 1,
+  }), /primary circuit open for this run \(timeout\)/);
+  assert.equal(requests.length, requestsAfterFailure, 'il circuito deve saltare _callModel e la socket');
 });
 
 test('una quota Codex apre il circuito senza persistere un ban del modello', async () => {
