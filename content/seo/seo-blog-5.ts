@@ -100154,6 +100154,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stazione-ffs-giubiasco-rinnovo': {
+    title: 'Stazione FFS di Giubiasco: rinnovo concluso | Frontaliere Ticino',
+    description: 'La stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026 dopo un rinnovo da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, stazione, giubiasco, rinnovo, concluso',
+    ogTitle: 'Stazione FFS di Giubiasco: rinnovo concluso',
+    ogDescription: 'Dopo diversi anni di lavori, l\'edificio viaggiatori della stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026. Il progetto da circa 6,4 milioni porta nuovi spazi commerciali, servizi professionali, ascensore, pompa di calore e standard Minergie.',
+    canonicalPath: '/articoli-frontaliere/stazione-ffs-giubiasco-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stazione FFS di Giubiasco: rinnovo concluso",
+      "description": "La stazione FFS di Giubiasco riaprirà l'8 ottobre 2026 dopo un rinnovo da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/stazione-ffs-giubiasco-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio rinnovato della stazione FFS di Giubiasco"
+      },
+      "datePublished": "2026-10-06T10:59:22+00:00",
+      "dateModified": "2026-10-06T10:59:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stazione-ffs-giubiasco-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

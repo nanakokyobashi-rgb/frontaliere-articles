@@ -12685,6 +12685,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1 : modifications des services TILO entre Chiasso et Como',
     'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Pendant les week-ends du 9 au 12 et du 16 au 19 octobre ainsi que du 13 au 16 et du 20 au 23 novembre 2026, la fermeture affecte les RE80, S10 et S40 entre Chiasso et Como.',
     'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Train TILO près de Chiasso pendant les travaux au tunnel Monte Olimpino 1.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Gare FFS de Giubiasco : rénovation achevée',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'Le bâtiment de la gare FFS de Giubiasco rouvrira le 8 octobre 2026 après des travaux d’environ 6,4 millions : nouveaux services, ascenseur et standard Minergie.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Bâtiment rénové de la gare CFF de Giubiasco',
 };
 
 export default blogMetaFr;
