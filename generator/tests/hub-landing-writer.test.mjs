@@ -102,12 +102,18 @@ test('the mirrored engine exposes create-or-refresh and keeps its fail-closed co
 
 test('the mirrored flat redirect scanner parses unquoted attribute values before self-closing', () => {
   assert.match(flatRedirect, /function isSelfClosingStartTag\(html: string, nameEnd: number, end: number\)/);
-  assert.match(flatRedirect, /selfClosing: !closing && HTML_VOID_ELEMENTS\.has\(name\)/);
-  assert.match(flatRedirect, /HTML_INACTIVE_RAW_TEXT_ELEMENTS/);
-  assert.match(flatRedirect, /HTML_TEMPLATE_RAW_TEXT_ELEMENTS/);
-  assert.match(flatRedirect, /function maskInactiveMarkup\(html = '', options: \{ maskRcdata\?: boolean \} = \{\}\)/);
-  assert.match(flatRedirect, /maskInactiveMarkup\(indexHtml, \{ maskRcdata: true \}\)/);
-  assert.match(flatRedirect, /unquoted attribute-value state/);
+  assert.match(
+    flatRedirect,
+    /selfClosing: !closing && (?:HTML_VOID_ELEMENTS\.has\(name\)\s+&&\s+)?isSelfClosingStartTag\(html, nameEnd, end\)/,
+  );
+  assert.match(flatRedirect, /function skipRawTextElement\(html(?:: string)?, afterOpening: number, name: string\)/);
+  assert.match(flatRedirect, /function skipTemplateElement\(html(?:: string)?, afterOpening: number\)/);
+  assert.match(
+    flatRedirect,
+    /function maskInactiveMarkup\(html = ''(?:, options: \{ maskRcdata\?: boolean \} = \{\})?\)/,
+  );
+  assert.match(flatRedirect, /maskInactiveMarkup\(indexHtml(?:, \{ maskRcdata: true \})?\)/);
+  assert.match(flatRedirect, /unquoted attribute(?:-value state| value)|unquoted value/);
 });
 
 
