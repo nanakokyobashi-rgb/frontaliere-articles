@@ -351,10 +351,10 @@
       "mode": "adapted",
       "reason": "Parser condiviso del fallback con riconoscimento corpus dei log testuali Claude/Anthropic e dei messaggi di quota legacy; il sito usa il parser degli eventi strutturati.",
       "baseline": {
-        "site": "617f7342bb1ab755",
-        "corpus": "748ee752af1354ac",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:08.000Z"
+        "site": "d6c27c773c46b556",
+        "corpus": "1f419e03b6446a4c",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:52.268Z"
       }
     },
     {
@@ -816,9 +816,10 @@
       "mode": "adapted",
       "reason": "Sul sito e' un re-export da functions/src/githubApiHeaders.js, perche' li' il builder deve finire nel bundle delle Cloud Functions. Questo repo non ha functions/ e non deploya nulla del genere, quindi l'implementazione e' inline. Attenzione: il pin X-GitHub-Api-Version ora esiste in due copie.",
       "baseline": {
-        "site": "20e4e76243cb60b0",
-        "corpus": "bb17921f280d33c5",
-        "alignedAt": "2026-08-07"
+        "site": "b68c2b4779ffdd16",
+        "corpus": "363fc63eb7e11f08",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:53.862Z"
       }
     },
     {
@@ -1842,9 +1843,10 @@
       "mode": "adapted",
       "reason": "Catalogo delle immagini del giornalista. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Un solo adattamento oltre a quello: il ramo `DRY_RUN=1` in coda, che sul sito non esiste. Dal 2026-10-06 il corpus include solo copertine con record Commons, generated o editorial-upload validi; i nuovi producer scrivono direttamente il proprio registro e questo catalogo non puo' autorizzare da solo un file senza provenienza. Senza, uno smoke run di CI che voleva solo dimostrare che il modulo si CARICA finiva per creare public/data/ e scrivere il catalogo. Il gemello del sito non gira piu' da solo e non va aggiornato per questa policy corpus-only.",
       "baseline": {
-        "site": "43b2a0639c74c954",
-        "corpus": "21607559bddd68c3",
-        "alignedAt": "2026-08-09"
+        "site": "5416708524133f08",
+        "corpus": "1ca3910be781972d",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:53.976Z"
       }
     },
     {
@@ -2187,9 +2189,10 @@
       "mode": "adapted",
       "reason": "Il parser del corpus sceglie il primo segmento bold introdotto per evitare che una nota successiva diventi il titolo; adattamento necessario per il contract del corpus (#1507).",
       "baseline": {
-        "site": "6e837fa55b30715f",
-        "corpus": "75af08e1ca0b64d3",
-        "alignedAt": "2026-09-15"
+        "site": "353f72a5179dff04",
+        "corpus": "d0cb2ebf97bac115",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T21:28:54.083Z"
       }
     },
     {
@@ -2970,10 +2973,10 @@
       "mode": "adapted",
       "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito. Lotto 2 issue #6369: portate nel gemello adattato le due correzioni di valerielinc-ops/frontaliere-si-o-no#11771 (preambolo con `{` non bilanciata e selezione di root array evitando un array annidato); riallineata la baseline ai blob verificati senza rendere i percorsi generator node:test identici al sito.",
       "baseline": {
-        "site": "dfad523d048204f2",
-        "corpus": "71381efc4d151f66",
+        "site": "86f58c7016d57bef",
+        "corpus": "01d6f42092d2b18c",
         "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "forcedAt": "2026-10-06T21:28:54.202Z"
       }
     },
     {
@@ -3503,9 +3506,9 @@
       "mode": "adapted",
       "reason": "I due host condivisi sono temporaneamente diversi: il corpus conserva l'ottimizzazione senza il claim quantitativo e il sito main conserva il commento precedente; le baseline attestano i due blob reali e impediscono al trasporto automatico di sovrascrivere un lato. La riallineatura è tracciata nella PR sito #9881 e richiede il successivo trasporto del gemello.",
       "baseline": {
-        "site": "392ed6e280a9c039",
-        "corpus": "5ced05e5850f4279",
-        "alignedAt": "2026-09-25"
+        "site": "7b3af6898dfb3f83",
+        "corpus": "7b3af6898dfb3f83",
+        "alignedAt": "2026-10-06"
       }
     },
     {

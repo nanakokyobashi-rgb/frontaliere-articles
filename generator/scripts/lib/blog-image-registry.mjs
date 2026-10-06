@@ -174,8 +174,7 @@ export function buildPublishedBlogImageRegistry(root, images = []) {
   const selected = new Set(images.map(normalizePath).filter(Boolean));
   const generated = Object.fromEntries(
     readGeneratedImageRecords(root)
-      .filter((record) => record.scope === 'article-hero'
-        && /^\/images\/(?:blog|generated)\//.test(record.imageUrl))
+      .filter((record) => record.scope === 'article-hero' && validImagePath(record.imageUrl))
       .filter((record) => hasMaterializedImageRecord(root, record.imageUrl, record))
       .filter((record) => selected.size === 0 || selected.has(record.imageUrl))
       .map((record) => [record.imageUrl, record]),
