@@ -1183,7 +1183,7 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     assert.match(nominate[0], /titleByLocale\.de/);
   });
 
-  test('`loadEventsDataset` e’ il punto unico: legge, sanifica, e conta gli scarti', (t) => {
+  test('`loadEventsDataset` legge, sanifica, e conta gli scarti del digest', (t) => {
     const file = path.join(os.tmpdir(), `events-${process.pid}-${Date.now()}.json`);
     writeFileSync(file, JSON.stringify({
       schemaVersion: 1,

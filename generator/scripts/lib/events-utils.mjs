@@ -1788,9 +1788,10 @@ export function sanitizeDatasetEvents(events, locales = ['it', 'en', 'de', 'fr']
  * Read the assembled events dataset. Returns `{ schemaVersion, generatedAt,
  * events: [] }` on missing/malformed file — never throws.
  *
- * I record passano da `sanitizeDatasetEvents`: il file arriva dall'altro repo
- * senza essere passato da `enrich`, e questo e' il punto unico in cui questo
- * repo lo legge (#939 item 1).
+ * I record del digest passano da `sanitizeDatasetEvents`: il file arriva
+ * dall'altro repo senza essere passato da `enrich`, e questo e' il confine di
+ * lettura del digest (#939 item 1). Gli hub cantonali applicano lo stesso
+ * predicato nel loro loader prima di chiamare `shapeEventsBlock`.
  */
 export function loadEventsDataset(file = EVENTS_DATASET_PATH) {
   try {

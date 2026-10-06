@@ -44,6 +44,7 @@ import { parseCrossingNames } from './lib/canton-hubs/blocks-border-wait.mjs';
 import { buildHubFile, hubFilePath, hubFilePaths } from './lib/canton-hubs/build.mjs';
 import { loadTopicEngine } from './lib/canton-hubs/engine-loader.mjs';
 import { borderRankingArticleId, eventsDigestArticleId } from './lib/canton-hubs/links.mjs';
+import { sanitizeDatasetEvents } from './lib/events-utils.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -75,7 +76,14 @@ export function loadDatasets(root = ROOT, log = () => {}) {
   const out = {};
   for (const [key, rel] of Object.entries(DATASET_CACHES)) {
     try {
-      out[key] = readJson(path.join(root, rel));
+      const dataset = readJson(path.join(root, rel));
+      if (key === 'events' && dataset && Array.isArray(dataset.events)) {
+        // Gli hub e il digest pubblicano lo stesso testo: il confine di lettura
+        // deve applicare la stessa sanitizzazione, senza perdere generatedAt.
+        out[key] = { ...dataset, events: sanitizeDatasetEvents(dataset.events).events };
+      } else {
+        out[key] = dataset;
+      }
     } catch (err) {
       log(`::warning::[generate-canton-hubs] ${rel} non e' JSON valido (${err.message}): i suoi blocchi si omettono`);
       out[key] = {};

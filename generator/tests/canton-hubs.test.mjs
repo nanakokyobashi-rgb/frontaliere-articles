@@ -36,7 +36,7 @@ import { buildHubIntro, cantonPlace, foreignToponymsInCopy } from '../scripts/li
 import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
 import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct } from '../scripts/lib/canton-hubs/format.mjs';
 import { buildHubLinks, jobsPagePath } from '../scripts/lib/canton-hubs/links.mjs';
-import { enabledCantonSections, generateCantonHubs, parseArgs } from '../scripts/generate-canton-hubs.mjs';
+import { enabledCantonSections, generateCantonHubs, loadDatasets, parseArgs } from '../scripts/generate-canton-hubs.mjs';
 import { contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -656,6 +656,50 @@ test('eventi: la stessa voce da due agende e\' una riga, due eventi omonimi in d
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
   assert.equal(block.available, true);
   assert.deepEqual(block.render('it').items.map((it) => it.detail).sort(), ['Bellinzona', 'Locarno', 'Lugano', 'Piazza Grande']);
+});
+
+test('eventi degli hub: il loader sanifica il testo e conserva generatedAt', (t) => {
+  const root = tmpRoot();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+  const generatedAt = '2026-10-05T08:00:00.000Z';
+  fs.writeFileSync(path.join(root, 'data/events.json'), JSON.stringify({
+    schemaVersion: 1,
+    generatedAt,
+    events: [
+      {
+        id: 'corrupt',
+        title: 'Bergrestaurant Ch�mistube',
+        titleByLocale: { it: 'Bergrestaurant Ch�mistube', de: 'Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen' },
+        startDate: '2026-10-06',
+        canton: 'TI',
+      },
+      {
+        id: 'html',
+        title: '<strong>Sommerfest</strong>',
+        titleByLocale: { de: '<em>Sommerfest</em>' },
+        startDate: '2026-10-07',
+        canton: 'TI',
+      },
+      {
+        id: 'markdown',
+        title: '**Mercato del sabato**',
+        titleByLocale: { de: '**Samstagsmarkt**' },
+        startDate: '2026-10-08',
+        canton: 'TI',
+      },
+    ],
+  }));
+
+  const datasets = loadDatasets(root);
+  assert.equal(datasets.events.generatedAt, generatedAt);
+  const block = shapeEventsBlock(datasets.events, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.deepEqual(block.render('de').items.map((item) => item.label), [
+    'Treffpunkt: Mehrzweckplatz Zwischenbächen',
+    'Sommerfest',
+    'Samstagsmarkt',
+  ]);
 });
 
 test('meteo: basta la previsione di oggi, come nella vista dei servizi', () => {
