@@ -32,7 +32,6 @@ const FINDING_MARKER_RE = /🔴|🟡\s*\*{0,2}\s*Nit\s*\*{0,2}(?:[:—-]|(?=\s+\
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 // Anchor di un finding il cui unico riferimento e' la descrizione della PR.
 const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?([1-9]\d*)(?:[-–]\d+)?(?=$|[`:\s])/iu;
-const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
 // TUTTI gli anchor `PR body:L<n>` del finding, non solo il primo, e con
 // l'INTERVALLO quando c'e' (`PR body:L5-9`). Un anchor a intervallo che parte
 // dentro `## Non implementato` puo' finire fuori — per esempio su una riga di
@@ -45,15 +44,15 @@ const UNIFIED_HUNK_HEADER_RE = /^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@[^\r\
 const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)(?:\s*[-–]\s*L?([1-9]\d*))?/giu;
 // Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
 // se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
-// 7) non e' una regola del contratto, e' una regola della review. La lista e'
-// deliberatamente LARGA: ogni termine in piu' lascia bloccante un finding in
-// piu', che e' la direzione sicura dell'errore. Stringerla richiede una
-// misura, allargarla no.
+// 7) non e' una regola del contratto, e' una regola della review. Il filtro si
+// applica alla riga corrente ancorata, non alla prosa del finding: quest'ultima
+// puo' descrivere una citazione che e' stata rimossa. La lista e' deliberatamente
+// LARGA: ogni termine in piu' lascia bloccante un claim ancora presente.
 const NON_CONTRACT_BODY_RE = new RegExp([
   'baseline', 'perf', 'performance', 'speed-?up', 'speed', 'faster', 'veloc',
   'throughput', 'latenc[yz]', 'latenza', 'benchmark', 'overhead', 'regressi',
   'misura', 'misurat', 'pre/post', 'revert', 'ottimizzazion', 'optimi[sz]',
-  'claim', 'risparmi', 'saving', 'p50', 'p90', 'p95', 'p99',
+  'claim', 'capacit', 'risparmi', 'saving', 'p50', 'p90', 'p95', 'p99',
 ].map((part) => `(?:${part})`).join('|'), 'iu');
 
 export const BODY_CITATION_MAX_LENGTH = 240;
@@ -256,7 +255,7 @@ function changedContains(changedFiles, resolvedPath) {
 export function prBodyFindingLine(finding) {
   const fromText = String(finding?.text || '').match(PR_BODY_ANCHOR_RE);
   if (fromText) return Number(fromText[1]);
-  const fromLine = String(finding?.line || '').match(PR_BODY_ANCHOR_LOOSE_RE);
+  const fromLine = String(finding?.line || '').match(PR_BODY_ANCHOR_RE);
   return fromLine ? Number(fromLine[1]) : null;
 }
 
@@ -270,12 +269,13 @@ export function isBodyAnchoredFinding(finding) {
 /**
  * Predicato storico che descrive il dominio del contratto per i consumer che
  * lo espongono ancora. Non è sufficiente per declassare un finding: il gate
- * richiede sempre `Body citation:` e la prova che il testo sia assente.
+ * richiede sempre `Body citation:` e la prova che il testo sia assente. Il
+ * filtro `NON_CONTRACT_BODY_RE` guarda la riga corrente, non la prosa che può
+ * riferirsi a un'affermazione già rimossa.
  */
 export function isContractDomainBodyFinding(finding, prBody) {
   if (typeof prBody !== 'string' || !prBody) return false;
   const text = String(finding?.text || '');
-  if (NON_CONTRACT_BODY_RE.test(text)) return false;
   const lines = prBody.split(/\r?\n/u);
   PR_BODY_ANCHOR_ALL_RE.lastIndex = 0;
   const anchors = [];
@@ -308,6 +308,11 @@ export function isContractDomainBodyFinding(finding, prBody) {
     }
     return Boolean(section && /^Non implementato\b/iu.test(section));
   });
+}
+
+/** Anchor e filtro del contratto devono coincidere in ogni ramo stale-body. */
+function isStaleBodyFinding(finding, prBody) {
+  return isBodyAnchoredFinding(finding) && isContractDomainBodyFinding(finding, prBody);
 }
 
 /**
@@ -408,7 +413,7 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // controlli — sul sito bastava invertire due righe per lasciar passare una
   // review malformata.
   for (const finding of allFindings) {
-    if (isBodyAnchoredFinding(finding)) {
+    if (isStaleBodyFinding(finding, prBody)) {
       const bodyCitation = extractBodyCitation(finding.text);
       const normalizedCitation = bodyCitation
         ? normalizeBodyCitationText(bodyCitation)
@@ -1008,7 +1013,7 @@ export async function classifyAndMintReview(body, {
       ? normalizeBodyCitationText(effectivePrBody)
       : '';
     const staleBodyDeclassified = findings
-      .filter((finding) => isBodyAnchoredFinding(finding))
+      .filter((finding) => isStaleBodyFinding(finding, effectivePrBody))
       .flatMap((finding) => {
         const bodyCitation = extractBodyCitation(finding.text);
         const normalizedCitation = bodyCitation

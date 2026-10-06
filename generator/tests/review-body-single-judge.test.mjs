@@ -158,9 +158,51 @@ test('un finding che cita un file non e\' un finding sul solo body', () => {
 test('prBodyFindingLine legge l\'anchor dal testo e dalla riga del marker', () => {
   assert.equal(prBodyFindingLine({ text: '`PR body:L12`: 🔴 Important: x' }), 12);
   assert.equal(prBodyFindingLine({ text: '- PR body#L7 — nota' }), 7);
-  assert.equal(prBodyFindingLine({ line: 'qualcosa `PR body:L3` in mezzo', text: 'no anchor here' }), 3);
+  assert.equal(prBodyFindingLine({ line: 'qualcosa `PR body:L3` in mezzo', text: 'no anchor here' }), null);
   assert.equal(prBodyFindingLine({ text: 'nessun anchor' }), null);
   assert.equal(prBodyFindingLine({ text: '`PR body:L0`' }), null, 'L0 non e\' una riga valida');
+});
+
+test('un anchor body in mezzo alla prima riga non abilita il declassamento stale', () => {
+  const review = [
+    '## Findings (Important: 1)',
+    'nota `PR body:L5`: 🔴 Important: il claim è superato.',
+    'Body citation: "testo rimosso dal body corrente"',
+  ].join('\n');
+  const result = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs'], null, {
+    bodyContractPassed: true,
+    prBody: PR_BODY,
+  });
+  assert.equal(result.staleBodyDeclassified.length, 0);
+  assert.equal(result.blocking, true);
+});
+
+test('il filtro NON_CONTRACT_BODY_RE vale mentre il claim esiste, ma non congela un claim rimosso', () => {
+  const finding = bodyFindingWithCitation(
+    'PR body:L5',
+    'la capacità dichiarata non ha una baseline.',
+    'vecchia capacità dichiarata',
+  );
+  const current = [
+    '## Implementato',
+    '- Fa una cosa.',
+    '',
+    '## Non implementato (ancora)',
+    '- capacità dichiarata senza baseline pre-merge.',
+  ].join('\n');
+  const stillPresent = classifyImportantFindings(finding, ['scripts/ci/review-scope.mjs'], null, {
+    bodyContractPassed: true,
+    prBody: current,
+  });
+  assert.equal(stillPresent.staleBodyDeclassified.length, 0);
+  assert.equal(stillPresent.blocking, true);
+
+  const removed = classifyImportantFindings(finding, ['scripts/ci/review-scope.mjs'], null, {
+    bodyContractPassed: true,
+    prBody: PR_BODY,
+  });
+  assert.equal(removed.staleBodyDeclassified.length, 1);
+  assert.equal(removed.blocking, false);
 });
 
 test('il gate porta il verdetto del contratto e non pretende una follow-up che non esiste', () => {
@@ -284,6 +326,21 @@ test('diff illeggibile: i 🔴 sul body cadono E la PR resta approvabile', { con
   process.env.PATH = `${binDir}${path.delimiter}${previous.PATH}`;
   process.env.FAKE_PR_BODY = PR_BODY;
   try {
+    process.env.FAKE_PR_BODY = [
+      '## Implementato',
+      '- Fa una cosa.',
+      '',
+      '## Non implementato (ancora)',
+      '- capacità dichiarata senza baseline pre-merge.',
+    ].join('\n');
+    const performancePresent = await classifyAndMintReview(
+      bodyFindingWithCitation('PR body:L5', 'la capacità dichiarata non ha una baseline.', 'vecchia capacità dichiarata'),
+      { repo: 'o/r', pr: 42, prUrl: 'https://x/pr/42', mutate: false },
+    );
+    assert.equal(performancePresent.staleBodyDeclassified.length, 0,
+      'il ramo diff non verificabile deve mantenere il filtro del contratto');
+    assert.equal(performancePresent.blocking, true);
+
     process.env.FAKE_PR_BODY = `${PR_BODY}\n- testo rimosso dal body corrente`;
     const presentResult = await classifyAndMintReview(
       bodyFindingWithCitation('PR body:L5', 'il claim non è più presente.', 'testo rimosso dal body'),
