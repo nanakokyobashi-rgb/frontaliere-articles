@@ -623,7 +623,13 @@ jobs:
           QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
           QUOTA_LEASE_TTL_SEC: '3600'
           HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
-        run: node scripts/ci/check-quota-backoff.mjs
+        # Il lease è una scansione ad alto volume: preferisce il PAT runtime,
+        # così non consuma il bucket REST dell'installation GITHUB_TOKEN.
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Codex lane quota lease unavailable (expected skip)
         if: steps.quota_lease.outputs.lease_allowed != 'true'
@@ -1680,4 +1686,8 @@ jobs:
           QUOTA_LEASE_TARGET_TYPE: pr
           QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
           QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
-        run: node scripts/ci/check-quota-backoff.mjs
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs

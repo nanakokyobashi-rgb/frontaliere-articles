@@ -261,7 +261,7 @@ export function floorPolicyOf(section) {
  * sezione appena accesa, con zero articoli. E' l'UNICO caso in cui un registro
  * assente vale 0 invece di un rifiuto, e vale solo per la politica `family`.
  */
-function isNewFamilySection(root, section) {
+export function isNewFamilySection(root, section) {
   if (floorPolicyOf(section) !== 'family') return false;
   return !fs.existsSync(path.join(root, sourceOf(section).registryFile));
 }

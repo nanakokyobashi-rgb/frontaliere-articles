@@ -48,9 +48,23 @@
  *                            da sommario al classifier
  *   - `datetimeYearOffset` → `<time datetime>` con l'anno sbagliato (ur.ch:
  *                            2626): le date oltre domani si correggono dell'offset
+ *   - `articlePathPattern` → fonti `html-links`: regex su path + query dei link
+ *                            che sono articoli; gli altri sono navigazione
+ *                            (vedi `filterArticleLinks`)
+ *   - `urlReusedForDifferentStories` → la fonte riemette lo stesso URL con
+ *                            notizie diverse (ticker, «Kurzmeldungen»),
+ *                            ovunque (`true`) o sui path di una regex:
+ *                            l'identita' dell'item e' URL + titolo, portata
+ *                            nell'URL come `#ft-item=…` (vedi
+ *                            `applyItemIdentity` e `source-url-ledger.mjs`)
+ *
+ * Su ogni fonte `html-links` la cornice del sito (`<nav>`, header e footer di
+ * pagina) si toglie prima di cercare i link: vedi `stripPageChrome`.
  *
  * User-Agent onesto (D10: niente UA camuffato), lo stesso dei crawler eventi.
  */
+
+import { itemIdentityToken, maskInactiveMarkup, newsUrlKey, withItemIdentity } from './source-url-ledger.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -173,6 +187,183 @@ function parseSqlDateTime(raw) {
   return validDate(new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]), Number(m[4] || 0), Number(m[5] || 0), Number(m[6] || 0)));
 }
 
+// ── Navigazione delle pagine HTML ────────────────────────────────────────────
+
+/** Ruoli ARIA che marcano un'area di navigazione o la cornice del sito. */
+const CHROME_ROLES = new Set(['navigation', 'banner', 'contentinfo']);
+
+/**
+ * I token dell'attributo `role` di un tag. Gli attributi si leggono uno per
+ * uno, col loro valore fra virgolette: solo un attributo che SI CHIAMA `role`
+ * conta. `data-role="navigation"` e' un altro attributo, e in
+ * `<main data-note="foo role=navigation">` la scritta `role=` e' il valore di
+ * un altro attributo: cercarla nel testo grezzo toglierebbe `<main>`.
+ */
+function roleTokens(attrs) {
+  const attrRe = /([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
+  let m;
+  while ((m = attrRe.exec(String(attrs || ''))) !== null) {
+    if (m[1].toLowerCase() === 'role') return (m[2] ?? m[3] ?? m[4] ?? '').toLowerCase().split(/\s+/).filter(Boolean);
+  }
+  return [];
+}
+
+/**
+ * Contenitori che rendono `<header>`/`<footer>` l'intestazione di una SEZIONE
+ * e non del sito: e' la regola HTML-AAM per cui un header/footer e' landmark
+ * `banner`/`contentinfo` solo fuori da article, aside, main, nav e section.
+ */
+const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
+/** Gli stessi contenitori dichiarati con `role` su un elemento qualunque (`<div role="main">`). */
+const SECTIONING_ROLES = new Set(['article', 'complementary', 'main', 'region']);
+/** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
+function containsMainContent(masked) {
+  const re = /<([a-zA-Z][\w-]*)\b([^>]*)>/g;
+  let m;
+  while ((m = re.exec(masked)) !== null) {
+    if (m[1].toLowerCase() === 'main' || roleTokens(m[2]).includes('main')) return true;
+  }
+  return false;
+}
+
+/**
+ * Le aree di navigazione e la cornice del sito tolte da una pagina HTML:
+ * ogni `<nav>`, ogni elemento con `role="navigation|banner|contentinfo"`, e
+ * `<header>`/`<footer>` quando sono del sito (fuori da article, aside, main,
+ * section e dai loro equivalenti `role=`). Commenti, script, stile e template
+ * escono resi spazi; il resto del documento resta byte per byte com'era.
+ *
+ * Perche' esiste (P5b, misurato il 2026-10-05): `extractHeadlines` tiene ogni
+ * `<a>` con un testo di 15-300 caratteri. Sulla pagina news di eoc.ch quelli
+ * sono 93 link, 9 dei quali articoli: gli altri 84 sono il menu del sito
+ * («Soggiorno in ospedale», «Orari visite e sedi»), senza data. Quando nessun
+ * comunicato cade nella finestra di recency la fonte cede le sue voci SENZA
+ * data, cioe' il menu, e il dry-run di P6b ne ha scelta una come notizia.
+ *
+ * Un `<header>` dentro `<article>` resta: e' la forma WordPress del titolo
+ * dell'articolo (`<article><header><h2><a>`), cioe' proprio il link da tenere.
+ * Un elemento senza chiusura bilanciata resta: tagliare fino alla fine del
+ * documento costerebbe piu' di qualche link di menu.
+ *
+ * @param {string} html
+ * @returns {{ html: string, removed: number }} la pagina senza le aree, e quante
+ */
+export function stripPageChrome(html) {
+  // Commenti, script, stile e template non sono markup della pagina: un
+  // `<nav>` scritto in un template JS non apre niente, e un `<a>` li' dentro
+  // non e' un link. Resi spazi a pari lunghezza (gli indici restano quelli del
+  // documento), e cosi' restano anche in uscita: l'estrattore non li vede.
+  const masked = maskInactiveMarkup(html);
+  const tagRe = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*)>/g;
+  const ranges = [];
+  let sectioningDepth = 0;
+  // Fine degli elementi `role="main|article|…"` aperti: finche' ce n'e' uno,
+  // header e footer sono di quella sezione.
+  const roleSectionEnds = [];
+  let m;
+  while ((m = tagRe.exec(masked)) !== null) {
+    const closing = m[1] === '/';
+    const name = m[2].toLowerCase();
+    const attrs = m[3] || '';
+    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= m.index) roleSectionEnds.pop();
+    if (SECTIONING_TAGS.has(name)) {
+      sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
+      if (closing) continue;
+    }
+    if (closing || /\/\s*$/.test(attrs)) continue;
+    const roles = roleTokens(attrs);
+    if (!SECTIONING_TAGS.has(name) && roles.some((r) => SECTIONING_ROLES.has(r))) {
+      const sectionEnd = matchingCloseEnd(masked, name, tagRe.lastIndex);
+      if (sectionEnd !== -1) roleSectionEnds.push(sectionEnd);
+    }
+    const inSection = sectioningDepth > 0 || roleSectionEnds.length > 0;
+    const isChrome = name === 'nav'
+      || roles.some((r) => CHROME_ROLES.has(r))
+      || ((name === 'header' || name === 'footer') && !inSection);
+    if (!isChrome) continue;
+    const end = matchingCloseEnd(masked, name, tagRe.lastIndex);
+    if (end === -1) continue;
+    // Una «navigazione» che contiene il contenuto principale e' un wrapper
+    // marcato male, non un menu: aarau.ch avvolge sottomenu E `<main>` in un
+    // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
+    // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
+    if (containsMainContent(masked.slice(tagRe.lastIndex, end))) continue;
+    ranges.push([m.index, end]);
+    // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
+    // aperti E chiusi li' dentro) non sposta il conteggio.
+    tagRe.lastIndex = end;
+  }
+  if (ranges.length === 0) return { html: masked, removed: 0 };
+  let out = '';
+  let at = 0;
+  for (const [start, end] of ranges) {
+    out += masked.slice(at, start);
+    at = end;
+  }
+  return { html: out + masked.slice(at), removed: ranges.length };
+}
+
+/** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
+function matchingCloseEnd(masked, name, from) {
+  const re = new RegExp(`<(/?)${name}(?=[\\s/>])[^>]*>`, 'gi');
+  re.lastIndex = from;
+  let depth = 1;
+  let m;
+  while ((m = re.exec(masked)) !== null) {
+    if (m[1] === '/') {
+      depth -= 1;
+      if (depth === 0) return re.lastIndex;
+    } else if (!/\/\s*>$/.test(m[0])) {
+      depth += 1;
+    }
+  }
+  return -1;
+}
+
+/**
+ * I link di una pagina `html-links` che sono articoli, tolti quelli che la
+ * cornice non marca come navigazione (menu laterali in `<div>`, ricerche
+ * suggerite, «salta al contenuto»). Due regole:
+ *
+ *   1. un link alla pagina stessa non e' mai un articolo: vale per ogni
+ *      fonte. «Stessa» e' la forma canonica del ledger (`newsUrlKey`: slash
+ *      finale, maiuscole dell'host, frammento e parametri di tracciamento non
+ *      contano; quelli identificanti si'), non l'uguaglianza delle stringhe:
+ *      `/news/` e `/news?utm_source=nav` sono l'elenco, `/news?id=7` no;
+ *   2. `quirks.articlePathPattern` (regex su path + query), dove il profilo lo
+ *      dichiara: restano solo i link che lo rispettano. Su eoc.ch, dopo
+ *      `stripPageChrome`, restavano 7 link che non sono comunicati (le
+ *      ricerche suggerite, l'elenco stesso, un sondaggio); i 9 comunicati
+ *      stanno tutti sotto `/media-e-news/news/<anno>/`.
+ *
+ * Il pattern e' DICHIARATO per fonte e non inferito dai link datati della
+ * pagina, perche' l'inferenza sbaglia proprio sulle testate: misurato il
+ * 2026-10-05, su lacote.ch i soli link datati sono il widget `/flash-sport/` e
+ * su lemanbleu.ch le `/fr/Emissions/`, mentre le notizie sono i link SENZA
+ * data fuori da quelle cartelle. Una regola automatica le avrebbe tolte.
+ *
+ * @param {Array<{url: string, headline: string, date: Date | null}>} headlines
+ * @param {string} pageUrl
+ * @param {{ quirks?: { articlePathPattern?: string } }} [source]
+ * @returns {{ headlines: Array<object>, dropped: number }}
+ */
+export function filterArticleLinks(headlines, pageUrl, source = {}) {
+  const self = newsUrlKey(pageUrl);
+  const pattern = source?.quirks?.articlePathPattern;
+  const re = pattern ? new RegExp(pattern) : null;
+  const kept = headlines.filter((h) => {
+    if (newsUrlKey(h.url) === self) return false;
+    if (!re) return true;
+    try {
+      const u = new URL(h.url);
+      return re.test(u.pathname + u.search);
+    } catch {
+      return false;
+    }
+  });
+  return { headlines: kept, dropped: headlines.length - kept.length };
+}
+
 // ── Parser ───────────────────────────────────────────────────────────────────
 
 /**
@@ -281,9 +472,12 @@ export function headlineFromUrlSlug(url) {
  *
  * @param {string} xml
  * @param {string} sitemapUrl
+ * @param {{ dedup?: boolean }} [opts] `dedup: false` per le fonti che riusano
+ *   gli URL: li' due voci con lo stesso `<loc>` sono due notizie, e il dedup
+ *   si fa dopo l'identita' dell'item (vedi `applyItemIdentity`)
  * @returns {Array<{url: string, headline: string, date: Date | null, language?: string, titleFromSlug?: boolean}>}
  */
-export function extractSitemapNewsItems(xml, sitemapUrl) {
+export function extractSitemapNewsItems(xml, sitemapUrl, { dedup = true } = {}) {
   const out = [];
   // Anche con prefisso di namespace (`<sm:url>`, `<sm:loc>`): una forma non
   // riconosciuta ridurrebbe a zero la fonte in silenzio.
@@ -313,7 +507,26 @@ export function extractSitemapNewsItems(xml, sitemapUrl) {
       ...(titleFromSlug ? { titleFromSlug: true } : {}),
     });
   }
-  return dedupByUrl(out);
+  return dedup ? dedupByUrl(out) : out;
+}
+
+/**
+ * Un feed RSS/Atom spezzato in un documento per voce (stesso involucro, una
+ * sola `<item>`/`<entry>`). Serve alle fonti che riusano gli URL:
+ * `extractRssItems` deduplica per URL DENTRO il feed, quindi due voci con lo
+ * stesso `<link>` e titoli diversi — due notizie, li' — ne lascerebbero una
+ * prima che l'identita' dell'item possa distinguerle. Letta una voce alla
+ * volta, l'estrattore resta quello vero e non ha niente da deduplicare.
+ *
+ * @param {string} xml
+ * @returns {string[]} un documento per voce; `[xml]` se non si riconoscono voci
+ */
+export function feedItemDocuments(xml) {
+  const src = String(xml || '');
+  const blocks = [...src.matchAll(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi)].map((m) => m[0]);
+  if (blocks.length === 0) return [src];
+  const isAtom = /<feed[\s>]/i.test(src.slice(0, 500));
+  return blocks.map((b) => (isAtom ? `<feed xmlns="http://www.w3.org/2005/Atom">${b}</feed>` : `<rss version="2.0"><channel>${b}</channel></rss>`));
 }
 
 /**
@@ -421,6 +634,55 @@ export function applyDatetimeYearOffset(items, offset, now = new Date()) {
     fixed.setFullYear(fixed.getFullYear() + Number(offset || 0));
     return { ...it, date: fixed.getTime() <= tomorrow ? fixed : null };
   });
+}
+
+// ── Fonti che riusano gli URL ────────────────────────────────────────────────
+
+/**
+ * `urlReusedForDifferentStories`: l'URL della voce prende l'identita'
+ * dell'item (`#ft-item=<impronta>`), cosi' due notizie allo stesso indirizzo
+ * non sono piu' la stessa voce per ledger, memo del topic-gate e dedup. Il
+ * perche' e la misura sono in `source-url-ledger.mjs`.
+ *
+ * Il quirk dice DOVE la fonte riusa gli URL:
+ *   - `true`: ovunque. suedostschweiz.ch: il contenitore non si riconosce
+ *     dall'indirizzo (uno e' nato come articolo su un incendio a Bonaduz);
+ *   - una regex sul path: solo li'. Tamedia: `^/ticker-`. Fuori dal pattern
+ *     l'URL resta l'identita', ed e' voluto: il 2026-10-05 lo stesso articolo
+ *     di bazonline (`/femizid-binningen-…`) ha cambiato titolo fra due letture
+ *     a 16 minuti, e con l'impronta del titolo sarebbe ripassato dal ledger
+ *     come notizia nuova.
+ *
+ * L'impronta e' quella di `itemIdentityToken`: il titolo dato dalla fonte piu'
+ * la giornata di pubblicazione, la stessa regola per feed e sitemap, cosi' lo
+ * stesso item letto dall'uno e dall'altra ha una chiave sola. Dove il titolo
+ * e' ricavato dallo slug (`titleFromSlug`, sitemap senza `news:title`) la voce
+ * non ha un'identita' — lo slug e' proprio cio' che la fonte riusa — e si
+ * scarta: la notizia arriva dal feed, che il titolo lo porta.
+ *
+ * @param {Array<{url: string, headline: string, date: Date | null, titleFromSlug?: boolean}>} headlines
+ * @param {true | string} scope il valore del quirk
+ * @returns {{ headlines: Array<object>, identified: number, dropped: number }}
+ */
+export function applyItemIdentity(headlines, scope = true) {
+  const pathRe = typeof scope === 'string' ? new RegExp(scope) : null;
+  const out = [];
+  let identified = 0;
+  for (const h of headlines) {
+    if (pathRe) {
+      let path = null;
+      try { path = new URL(h.url).pathname; } catch { /* URL illeggibile: resta com'e' */ }
+      if (path === null || !pathRe.test(path)) {
+        out.push(h);
+        continue;
+      }
+    }
+    const token = h.titleFromSlug ? null : itemIdentityToken(h.headline, h.date);
+    if (!token) continue;
+    identified += 1;
+    out.push({ ...h, url: withItemIdentity(h.url, token) });
+  }
+  return { headlines: out, identified, dropped: headlines.length - out.length };
 }
 
 // ── Cortesia verso l'host ────────────────────────────────────────────────────
@@ -541,20 +803,34 @@ export async function scanCantonSource(source, ctx) {
     switch (source.parser) {
       case 'rss':
       case 'atom': {
-        const items = ctx.extractRssItems(text, url);
-        if (!quirks.paywall) return items;
-        const leads = rssItemLeads(text, url);
-        return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
+        // Fonte che riusa gli URL: una voce alla volta, cosi' ne' il dedup
+        // dell'estrattore ne' la mappa dei lead (per URL) fondono due notizie
+        // allo stesso indirizzo. Vedi feedItemDocuments.
+        const docs = quirks.urlReusedForDifferentStories ? feedItemDocuments(text) : [text];
+        return docs.flatMap((doc) => {
+          const items = ctx.extractRssItems(doc, url);
+          if (!quirks.paywall) return items;
+          const leads = rssItemLeads(doc, url);
+          return items.map((h) => (leads.has(h.url) ? { ...h, lead: leads.get(h.url) } : h));
+        });
       }
-      case 'html-links':
-        return ctx.extractHeadlines(text, url);
+      case 'html-links': {
+        // Prima la cornice del sito (menu, header, footer), poi i link che
+        // non sono articoli: vedi stripPageChrome e filterArticleLinks.
+        const page = stripPageChrome(text);
+        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url), url, source);
+        if (page.removed > 0 || links.dropped > 0) {
+          notes.push(`navigazione: ${page.removed} aree tolte, ${links.dropped} link non articolo scartati`);
+        }
+        return links.headlines;
+      }
       case 'json-entities':
         return extractJsonEntitiesItems(text, url);
       case 'json-api':
         return extractJsonApiItems(text, url);
       default:
         // news-sitemap, sitemap, weekly-sitemap
-        return extractSitemapNewsItems(text, url);
+        return extractSitemapNewsItems(text, url, { dedup: !quirks.urlReusedForDifferentStories });
     }
   };
   const accept = ['html-links', 'json-entities'].includes(source.parser)
@@ -582,6 +858,15 @@ export async function scanCantonSource(source, ctx) {
   if (failures.length === urls.length) throw new Error(failures.join('; '));
   notes.push(...failures);
   if (period) notes.push(`periodi: ${urls.map((u) => u.split('/').pop()).join(', ')}`);
+  // L'identita' dell'item PRIMA del dedup: su una fonte che riusa gli URL due
+  // voci con lo stesso indirizzo (nello stesso feed, o in due periodi della
+  // stessa sitemap) sono due notizie finche' il titolo non dice il contrario.
+  if (quirks.urlReusedForDifferentStories) {
+    const reused = applyItemIdentity(headlines, quirks.urlReusedForDifferentStories);
+    notes.push(`URL riusati: ${reused.identified} voci con l'identita' dell'item`);
+    if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza un titolo della fonte scartate (nessuna identita')`);
+    headlines = reused.headlines;
+  }
   headlines = dedupByUrl(headlines);
   if (quirks.emptyPubDate) notes.push('pubDate vuoto: voci senza data (quota undated, data dalla pagina in generazione)');
 

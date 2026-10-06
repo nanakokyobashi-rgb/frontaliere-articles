@@ -561,7 +561,6 @@ on:
   push:
     branches: [main]
     paths:
-      - '${WORKFLOWS_DIR}/${file}'
 ${pushPaths.map((p) => `      - '${p}'`).join('\n')}
   workflow_dispatch:
     inputs:

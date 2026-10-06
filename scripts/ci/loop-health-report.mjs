@@ -2,7 +2,7 @@
  * loop-health-report.mjs — osservabilità DETERMINISTICA del loop autonomo
  * (zero-model). Calcola le metriche di salute che altrimenti vanno raccolte
  * a mano: failure-rate dei workflow di automazione, PR con una sola review del
- * bot, zombie agent:fix e backlog della coda.
+ * bot, zombie agent:fix, backlog della coda e claim Codex terminali.
  *
  * Perché: il sistema si auto-ripara solo se l'osservazione è essa stessa
  * automatica. Questo report chiude il ciclo osserva→fixa→valida: dopo ogni
@@ -24,12 +24,32 @@ const argv = process.argv.slice(2);
 const DAYS = Number(argv.includes('--days') ? argv[argv.indexOf('--days') + 1] : 7);
 const NO_POST = argv.includes('--no-post');
 const TRACKER_TITLE = '📊 Loop health report (tracker)';
+const CLAIM_ALERT_TITLE = '🚨 Codex review head blocked';
+export const CODEX_CLAIM_HEAD_BLOCKED_HOURS = 6;
+export const CODEX_CLAIM_PR_LIST_LIMIT = 100;
+export const CODEX_CLAIM_COMMENT_LIMIT = 100;
 // Never eligible for followup-drainer's age-out close (#5615): a quiet stretch
 // with nothing to report still makes this tracker look old+idle to the
 // drainer, which would close it — the next run just recreates it, but the
 // historical comment thread is lost. Checked in isAgeOutEligible
 // (scripts/ci/followup-drainer.mjs); keep the literal in sync.
 const LBL_NO_AGE_OUT = 'agent:no-age-out';
+
+const CLAIM_HEALTH_MARKER_RE = /<!-- PR_REVIEW_CLAIM:\s*(\{[\s\S]*?\})\s*-->/gu;
+const CLAIM_HEALTH_STATE_SET = new Set([
+  'active', 'completed', 'failed-terminal', 'failed-transient', 'released',
+]);
+const CLAIM_HEALTH_CAUSE_SET = new Set([
+  'cancelled', 'completed', 'max_turns', 'non_retryable', 'probe_failed',
+  'rate_limit', 'released', 'server_error', 'startup_failure', 'none',
+  'verdict_posted',
+]);
+const CLAIM_HEALTH_ACTOR_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot\])?|claude(?:\[bot\])?|nanakokyobashi-rgb|valerielinc-ops)$/iu;
+const CLAIM_HEALTH_QUERY = [
+  'query($owner:String!,$name:String!,$number:Int!){',
+  'repository(owner:$owner,name:$name){pullRequest(number:$number){',
+  `comments(last:${CODEX_CLAIM_COMMENT_LIMIT}){pageInfo{hasPreviousPage}nodes{body createdAt databaseId author{login}}}}}}`,
+].join('');
 
 // Workflow di automazione osservati dal report. Il provider può cambiare: il
 // report non usa questi run per inferire consumo di modello o token.
@@ -95,6 +115,253 @@ const ACTIVE_JOB_STATUSES = new Set(['queued', 'waiting', 'requested', 'pending'
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return json ? JSON.parse(out) : out;
+}
+
+function unavailableClaimHealth(reason = 'github-api-error') {
+  return {
+    measured: false,
+    reason,
+    truncated: false,
+    inspectedPullRequests: 0,
+    terminalCount: null,
+    byDayCause: {},
+    blockedHeads: [],
+  };
+}
+
+function claimHealthEvent(comment) {
+  const login = String(comment?.author?.login || comment?.user?.login || '');
+  if (login && !CLAIM_HEALTH_ACTOR_RE.test(login)) return null;
+  const body = String(comment?.body || '');
+  for (const match of body.matchAll(CLAIM_HEALTH_MARKER_RE)) {
+    let event;
+    try { event = JSON.parse(match[1]); } catch { continue; }
+    const issuedAt = Number(event?.issuedAt);
+    const expiresAt = Number(event?.expiresAt);
+    const prNumber = String(event?.prNumber || '');
+    const headSha = String(event?.headSha || '').toLowerCase();
+    const token = String(event?.token || '');
+    const dedupeKey = String(event?.dedupeKey || '');
+    const state = String(event?.state || '');
+    if (event?.version !== 1
+        || !token
+        || !/^[1-9][0-9]*$/u.test(prNumber)
+        || !/^[0-9a-f]{40}$/u.test(headSha)
+        || !dedupeKey
+        || !CLAIM_HEALTH_STATE_SET.has(state)
+        || !Number.isFinite(issuedAt)
+        || !Number.isFinite(expiresAt)) continue;
+    const rawCause = String(event?.cause || '').trim().toLowerCase();
+    return {
+      token,
+      prNumber,
+      headSha,
+      dedupeKey,
+      state,
+      cause: CLAIM_HEALTH_CAUSE_SET.has(rawCause) ? rawCause : 'unknown',
+      issuedAt,
+      expiresAt,
+      commentAt: Date.parse(String(comment?.createdAt || comment?.created_at || '')) || 0,
+      commentId: Number(comment?.databaseId || comment?.id) || 0,
+    };
+  }
+  return null;
+}
+
+function claimHealthEventRank(event) {
+  return [Number(event?.issuedAt) || 0, Number(event?.commentAt) || 0, Number(event?.commentId) || 0];
+}
+
+function laterClaimHealthEvent(left, right) {
+  const a = claimHealthEventRank(left);
+  const b = claimHealthEventRank(right);
+  for (let i = 0; i < a.length; i += 1) {
+    if (a[i] !== b[i]) return a[i] > b[i] ? left : right;
+  }
+  return right;
+}
+
+function commentsForPullRequest(commentsByPr, number) {
+  if (commentsByPr instanceof Map) return commentsByPr.get(number) || commentsByPr.get(String(number)) || [];
+  if (commentsByPr && typeof commentsByPr === 'object') return commentsByPr[number] || [];
+  return [];
+}
+
+/**
+ * Summarize only the structured claim markers. Prompt, answer and JSONL text
+ * never enter the returned shape. The latest event for each dedupe key is the
+ * durable state; a transient event followed by its terminal retry counts once.
+ */
+export function summarizeReviewClaimHealth(
+  pullRequests = [],
+  commentsByPr = new Map(),
+  { sinceMs = 0, nowMs = Date.now(), blockedHours = CODEX_CLAIM_HEAD_BLOCKED_HOURS } = {},
+) {
+  const latest = new Map();
+  for (const pullRequest of Array.isArray(pullRequests) ? pullRequests : []) {
+    const number = Number(pullRequest?.number);
+    if (!Number.isInteger(number) || number <= 0) continue;
+    const comments = commentsForPullRequest(commentsByPr, number);
+    for (const comment of Array.isArray(comments) ? comments : []) {
+      const event = claimHealthEvent(comment);
+      if (!event || event.prNumber !== String(number)) continue;
+      const candidate = {
+        ...event,
+        prNumber: number,
+        prTitle: String(pullRequest?.title || ''),
+        prState: String(pullRequest?.state || ''),
+        prHeadSha: String(pullRequest?.headRefOid || '').toLowerCase(),
+      };
+      const key = `${number}|${event.dedupeKey}`;
+      const previous = latest.get(key);
+      latest.set(key, previous ? laterClaimHealthEvent(previous, candidate) : candidate);
+    }
+  }
+
+  const terminal = [...latest.values()].filter((event) => event.state === 'failed-terminal');
+  const inWindow = terminal.filter((event) => {
+    const time = event.issuedAt * 1000;
+    return Number.isFinite(time) && time >= sinceMs && time <= nowMs;
+  });
+  const byDayCause = {};
+  for (const event of inWindow) {
+    const day = new Date(event.issuedAt * 1000).toISOString().slice(0, 10);
+    byDayCause[day] ||= {};
+    byDayCause[day][event.cause] = (byDayCause[day][event.cause] || 0) + 1;
+  }
+
+  const ageLimitMs = Math.max(0, Number(blockedHours)) * 3_600_000;
+  const blockedHeads = terminal
+    .filter((event) => (
+      /^open$/iu.test(event.prState)
+      && event.prHeadSha
+      && event.prHeadSha === event.headSha
+      && event.issuedAt * 1000 <= nowMs
+      && nowMs - event.issuedAt * 1000 > ageLimitMs
+    ))
+    .map((event) => ({
+      prNumber: event.prNumber,
+      title: event.prTitle,
+      headSha: event.headSha,
+      cause: event.cause,
+      issuedAt: event.issuedAt,
+      ageHours: (nowMs - event.issuedAt * 1000) / 3_600_000,
+    }))
+    .sort((a, b) => b.ageHours - a.ageHours);
+
+  return {
+    measured: true,
+    truncated: false,
+    inspectedPullRequests: Array.isArray(pullRequests) ? pullRequests.length : 0,
+    terminalCount: inWindow.length,
+    byDayCause,
+    blockedHeads,
+  };
+}
+
+/** Bounded GitHub reader for claim health: all PRs and the last 100 comments per PR. */
+export function reviewClaimHealth(runGh = gh, {
+  repo = REPO,
+  since = isoDaysAgo(DAYS),
+  nowMs = Date.now(),
+  prLimit = CODEX_CLAIM_PR_LIST_LIMIT,
+  blockedHours = CODEX_CLAIM_HEAD_BLOCKED_HOURS,
+} = {}) {
+  const [owner, name] = String(repo || '').split('/');
+  const sinceMs = Date.parse(`${since}T00:00:00Z`);
+  const limit = Number(prLimit);
+  if (!owner || !name || !Number.isFinite(sinceMs) || !Number.isFinite(nowMs)
+      || !Number.isInteger(limit) || limit <= 0) return unavailableClaimHealth('invalid-input');
+  try {
+    const recentPullRequests = runGh([
+      'pr', 'list', '--repo', repo, '--state', 'all', '--search', `updated:>=${since}`,
+      '--json', 'number,title,headRefOid,state,updatedAt', '--limit', String(limit),
+    ]);
+    const openPullRequests = runGh([
+      'pr', 'list', '--repo', repo, '--state', 'open',
+      '--json', 'number,title,headRefOid,state,updatedAt', '--limit', String(limit),
+    ]);
+    const isValidPullRequestList = (pullRequests) => Array.isArray(pullRequests)
+      && pullRequests.every((pr) => Number.isInteger(pr?.number) && pr.number > 0);
+    if (!isValidPullRequestList(recentPullRequests) || !isValidPullRequestList(openPullRequests)) {
+      return unavailableClaimHealth('pull-request-list-malformed');
+    }
+    const byNumber = new Map();
+    for (const pullRequest of [...recentPullRequests, ...openPullRequests]) {
+      byNumber.set(pullRequest.number, { ...byNumber.get(pullRequest.number), ...pullRequest });
+    }
+    const pullRequests = [...byNumber.values()];
+    const commentsByPr = new Map();
+    let commentsTruncated = false;
+    for (const pullRequest of pullRequests) {
+      const out = runGh([
+        'api', 'graphql',
+        '-f', `query=${CLAIM_HEALTH_QUERY}`,
+        '-F', `owner=${owner}`,
+        '-F', `name=${name}`,
+        '-F', `number=${Number(pullRequest.number)}`,
+      ]);
+      if (Array.isArray(out?.errors) && out.errors.length > 0) {
+        return unavailableClaimHealth('claim-comments-api-error');
+      }
+      const connection = out?.data?.repository?.pullRequest?.comments;
+      const comments = connection?.nodes;
+      if (!Array.isArray(comments) || comments.some((comment) => typeof comment?.body !== 'string')) {
+        return unavailableClaimHealth('claim-comments-malformed');
+      }
+      commentsByPr.set(pullRequest.number, comments);
+      if (connection?.pageInfo?.hasPreviousPage === true) commentsTruncated = true;
+    }
+    const summary = summarizeReviewClaimHealth(pullRequests, commentsByPr, {
+      sinceMs,
+      nowMs,
+      blockedHours,
+    });
+    return {
+      ...summary,
+      truncated: recentPullRequests.length >= limit
+        || openPullRequests.length >= limit
+        || commentsTruncated,
+    };
+  } catch { return unavailableClaimHealth('github-api-error'); }
+}
+
+export function renderReviewClaimHealth(stats) {
+  if (!stats?.measured) {
+    return {
+      lines: ['**Codex review claim failed-terminal:** n/d (GitHub API non misurabile).'],
+      warnings: ['claim Codex failed-terminal non misurabili: GitHub API incompleta'],
+      incomplete: true,
+    };
+  }
+  const rows = Object.entries(stats.byDayCause || {}).sort(([a], [b]) => a.localeCompare(b));
+  const byDayCause = rows.length === 0
+    ? 'nessuno'
+    : rows.map(([day, causes]) => `${day}: ${Object.entries(causes).sort(([a], [b]) => a.localeCompare(b)).map(([cause, count]) => `${cause}=${count}`).join(', ')}`).join(' · ');
+  const lines = [
+    `**Codex review claim failed-terminal:** ${stats.terminalCount} nel periodo · per giorno/causa: ${byDayCause}.`,
+  ];
+  const warnings = [];
+  if (stats.truncated) warnings.push('osservazione claim Codex troncata: lista PR/commenti oltre il limite bounded');
+  if (stats.blockedHeads?.length) {
+    warnings.push(`${stats.blockedHeads.length} head PR bloccate da un claim Codex failed-terminal oltre ${CODEX_CLAIM_HEAD_BLOCKED_HOURS} h`);
+    lines.push(`**Head bloccate oltre soglia:** ${stats.blockedHeads.slice(0, 10).map((head) => `#${head.prNumber} (${head.cause}, ${head.ageHours.toFixed(1)} h)`).join(' · ')}.`);
+  }
+  return { lines, warnings, incomplete: Boolean(stats.truncated) };
+}
+
+export function reviewClaimAlertBody(stats, nowMs = Date.now()) {
+  const timestamp = new Date(nowMs).toISOString();
+  const heads = (stats?.blockedHeads || []).slice(0, 20);
+  return [
+    '## Codex review head blocked',
+    '',
+    `Alert deterministico aggiornato ${timestamp}: una head aperta resta bloccata oltre ${CODEX_CLAIM_HEAD_BLOCKED_HOURS} h da un claim failed-terminal.`,
+    '',
+    ...heads.map((head) => `- PR #${head.prNumber} — ${head.title || '(senza titolo)'} · causa ${head.cause} · età ${head.ageHours.toFixed(1)} h · HEAD ${head.headSha.slice(0, 12)}`),
+    '',
+    'La causa proviene esclusivamente dal marker strutturato del claim; il report non include prompt, risposta o JSONL.',
+  ].join('\n');
 }
 
 function isoDaysAgo(d) {
@@ -738,6 +1005,42 @@ function findTracker() {
   } catch { return { measured: false, number: null }; }
 }
 
+function findClaimAlert() {
+  try {
+    const found = gh(['issue', 'list', '--repo', REPO, '--state', 'open',
+      '--search', `in:title "${CLAIM_ALERT_TITLE}"`, '--json', 'number,title', '--limit', '5']);
+    if (!Array.isArray(found)) return { measured: false, number: null };
+    if (found.some((issue) => (
+      !Number.isInteger(issue?.number)
+      || issue.number <= 0
+      || typeof issue.title !== 'string'
+    ))) return { measured: false, number: null };
+    return { measured: true, number: (found.find((issue) => issue.title === CLAIM_ALERT_TITLE) || {}).number || null };
+  } catch { return { measured: false, number: null }; }
+}
+
+function postClaimAlert(stats) {
+  const alertInfo = findClaimAlert();
+  if (!alertInfo.measured) {
+    console.log('::warning::alert claim Codex non aggiornabile: GitHub API illeggibile');
+    return;
+  }
+  const body = reviewClaimAlertBody(stats);
+  let number = alertInfo.number;
+  let created = false;
+  try {
+    if (!number) {
+      const url = gh(['issue', 'create', '--repo', REPO, '--title', CLAIM_ALERT_TITLE,
+        '--body', body], { json: false });
+      number = Number((url.match(/\/issues\/(\d+)/) || [])[1]) || null;
+      created = Boolean(number);
+    }
+    if (number && !created) gh(['issue', 'comment', String(number), '--repo', REPO, '--body', body], { json: false });
+  } catch (error) {
+    console.log(`::warning::alert claim Codex non aggiornabile: ${String(error).slice(0, 160)}`);
+  }
+}
+
 /**
  * Stable key for a warning, so a streak survives the numbers changing.
  * "failure-rate 53% su issue-fix.yml (54/102 run eleggibili)" → "failure-rate:issue-fix.yml".
@@ -1091,6 +1394,13 @@ function main() {
     priorComments: trackerComments,
   }));
 
+  const claimHealth = reviewClaimHealth(gh, { repo: REPO, since });
+  const claimHealthReport = renderReviewClaimHealth(claimHealth);
+  if (claimHealthReport.incomplete) dataIncomplete = true;
+  warns.push(...claimHealthReport.warnings);
+  lines.push('');
+  lines.push(...claimHealthReport.lines);
+
   // Lo stadio di CHIUSURA del ciclo: senza questa sezione il report vedeva
   // solo l'ingresso (coda, zombie) e non le issue in attesa di verifica.
   // Resta PRIMA della sezione soglie: warnStreaks legge come avvisi tutti i
@@ -1138,6 +1448,7 @@ function main() {
       console.log(`Report postato su #${num}.`);
     } catch (e) { console.log(`::warning::comment fallito: ${String(e).slice(0, 160)}`); }
   }
+  if (claimHealth.measured && claimHealth.blockedHeads.length > 0) postClaimAlert(claimHealth);
 }
 
 // Guarded so the pure helpers above (warnKey/warnStreaks) can be unit-tested

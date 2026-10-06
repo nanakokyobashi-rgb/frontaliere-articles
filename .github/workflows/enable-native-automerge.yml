@@ -35,12 +35,10 @@ on:
   workflow_run:
     workflows: [tests]
     types: [completed]
-    # Una run `tests` su `main` (push, o dispatch col ref di default) ha come
-    # head_sha un commit di `main`: la ricerca `commits/<sha>/pulls` qui sotto
-    # non trova mai una PR aperta e il job esce senza fare nulla. Filtrarla al
-    # trigger evita di creare la run: il push su main e' ~29% delle run `tests`
-    # (58 su 200, 2026-09-18/19).
-    branches-ignore: [main]
+    # Non filtrare per branch qui: `workflow_run.head_branch` è anche il nome
+    # del branch sorgente di una PR da fork, quindi una PR chiamata `main`
+    # deve restare eleggibile. La guardia sul job sotto distingue il push o il
+    # dispatch sul repository principale dalla head di una PR.
 permissions:
   contents: read
   pull-requests: write
@@ -57,10 +55,17 @@ jobs:
     # manually replayed push event from producing a failed empty run while
     # dereferencing pull_request fields that do not exist.
     if: >-
-      github.event_name == 'workflow_run' ||
-      inputs.pr_number != '' ||
-      (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) ||
-      (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false)
+      (github.event_name != 'workflow_run' ||
+       (github.event.workflow_run.head_branch != '' &&
+        github.event.workflow_run.head_repository.full_name != '' &&
+        !(github.event.workflow_run.head_repository.full_name == github.repository &&
+          (github.event.workflow_run.event == 'push' ||
+           github.event.workflow_run.event == 'workflow_dispatch') &&
+          github.event.workflow_run.head_branch == github.event.repository.default_branch))) &&
+      (github.event_name == 'workflow_run' ||
+       inputs.pr_number != '' ||
+       (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) ||
+       (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false))
     runs-on: ubuntu-latest
     # A post-review enrollment failure must not repaint the already-green
     # required `tests` job. The gate itself remains fail-closed: no successful

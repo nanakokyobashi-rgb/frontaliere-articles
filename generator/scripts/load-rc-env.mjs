@@ -329,7 +329,27 @@ const RC_TO_ENV = {
   // (default sicuro): un vuoto e un assente vogliono dire la stessa cosa, quindi
   // la chiave NON sta in ALLOW_EMPTY_RC_KEYS.
   CANTON_ARTICLE_SECTIONS_ENABLED: ['CANTON_ARTICLE_SECTIONS_ENABLED'],
+
+  // Kill-switch delle sezioni articolo cantonali (piano «sezioni articoli per
+  // cantone», D9). Il rollout lo decide il registro committato
+  // sections/registry.json; questo parametro SPEGNE soltanto: le sezioni
+  // elencate (codici di gruppo `TI`, id `canton-ti` o `all`) escono `draft`
+  // dai documenti che build-api.mjs pubblica per il Worker. Assente in RC per
+  // default = nessun override. Chi lo legge (scripts/lib/section-registry.mjs)
+  // non si fida della sua assenza senza il marker RC_ENV_LOADED qui sotto.
+  CANTON_ARTICLE_SECTIONS_KILL:   ['CANTON_ARTICLE_SECTIONS_KILL'],
 };
+
+/**
+ * Marker di successo del caricamento. Questo script e' fail-open (esce 0
+ * anche quando non legge niente), quindi l'ASSENZA di una variabile non
+ * distingue «Remote Config non la definisce» da «Remote Config non ha
+ * risposto». Per i parametri la cui assenza e' il default sicuro di un
+ * override (oggi CANTON_ARTICLE_SECTIONS_KILL) la differenza conta: il marker
+ * viene scritto SOLO dopo aver letto il template, e sempre (anche se gia'
+ * presente nell'ambiente: descrive questa esecuzione).
+ */
+export const RC_LOADED_MARKER = 'RC_ENV_LOADED';
 
 /**
  * RC keys whose EMPTY value is a real signal, not a missing setting.
@@ -377,6 +397,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'ENABLE_CODEX_ARTICLE_FALLBACK',
   'OMNIROUTE_PROVIDER_ALLOWLIST',
   'ENABLE_OMNIROUTE_FALLBACK',
+  'CANTON_ARTICLE_SECTIONS_KILL',
 ]);
 
 export function rcValueState(value, rcKey) {
@@ -663,6 +684,9 @@ async function main() {
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
   const queuedEnvKeys = new Set();
+  // Il template e' stato letto: da qui in poi l'assenza di un parametro e' un
+  // dato di Remote Config, non un fallimento del caricamento.
+  lines.push(isCI ? `${RC_LOADED_MARKER}=1` : `export ${RC_LOADED_MARKER}='1'`);
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
     const value = getRcValue(template, rcKey);

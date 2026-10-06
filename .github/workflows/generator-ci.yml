@@ -212,6 +212,11 @@ jobs:
           REWIRE_SKIP_WAF_403: '1'
         run: node generator/scripts/refresh-pension-parameters.mjs --check
 
+      # Quarto contratto (P9c): soft sulla raggiungibilita' per costruzione (un
+      # 403 del WAF esce 0 senza env), hard sulla forma se il documento arriva.
+      - name: Road events dataset well-shaped
+        run: node generator/scripts/refresh-road-events.mjs --check
+
   dry-run:
     # The generator's own smoke test: load every entry point with writes
     # disabled (DRY_RUN=1, the convention the scripts already document) and

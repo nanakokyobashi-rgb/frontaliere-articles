@@ -31,6 +31,7 @@ import {
   isExpectedIssueFixNonDelivery,
   selectIssueFixCandidate,
   DEFAULT_RUN_QUERY_HORIZON_MIN,
+  DEFAULT_MAX_ISSUES,
   parseHorizonMin,
   parsePositiveNum,
   horizonPressure,
@@ -1101,10 +1102,10 @@ test('i workflow ordinari non vengono ritardati da una finestra di gate fissa', 
 
 /**
  * Il gate non e' l'unico punto in cui un allarme puo' sparire: il ciclo che
- * apre le issue si ferma a `MAX_ISSUES` (5 per default). Con piu' di cinque
- * workflow falliti nella stessa passata, un watchdog in coda all'ordine di
+ * apre le issue si ferma a `MAX_ISSUES`. Con piu' workflow falliti della
+ * capacita' nella stessa passata, un watchdog in coda all'ordine di
  * inserimento viene troncato, esce dalla finestra di lookback e la sua issue
- * non viene aperta mai. I workflow sorvegliati vanno quindi servit_i_ prima
+ * non viene aperta mai. I workflow sorvegliati vanno quindi serviti prima
  * del cap, non solo esentati dal gate.
  */
 test('i workflow di sorveglianza sono ordinati prima del cap MAX_ISSUES', () => {
@@ -1130,9 +1131,10 @@ test('i workflow di sorveglianza sono ordinati prima del cap MAX_ISSUES', () => 
 
 /**
  * L'ordinamento da solo non basta: `ALWAYS_ESCALATE_WORKFLOWS` ha 7 voci e
- * `MAX_ISSUES` ne vale 5, quindi una passata con sei o piu' sorvegliati falliti
- * ne troncava alcuni al cap — potenzialmente il reporter stesso, e allora non
- * resta nessuno a segnalare niente. I sorvegliati non contano verso il cap.
+ * Nelle assertions qui sotto `MAX_ISSUES` vale volutamente 5, quindi una
+ * passata con sei o piu' sorvegliati falliti ne troncava alcuni al cap —
+ * potenzialmente il reporter stesso, e allora non resta nessuno a segnalare
+ * niente. I sorvegliati non contano verso il cap.
  */
 test('il cap MAX_ISSUES non puo\' troncare un workflow di sorveglianza', () => {
   for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
@@ -1144,4 +1146,16 @@ test('il cap MAX_ISSUES non puo\' troncare un workflow di sorveglianza', () => {
 test('il cap MAX_ISSUES continua a troncare il rumore', () => {
   assert.equal(capReached({ name: 'Generate Blog Article', cappedOpened: 5, maxIssues: 5 }), true);
   assert.equal(capReached({ name: 'Generate Blog Article', cappedOpened: 4, maxIssues: 5 }), false);
+});
+
+test('il default del cap copre l\'ultima ondata osservata e resta bounded', () => {
+  assert.equal(DEFAULT_MAX_ISSUES, 40);
+  assert.equal(
+    capReached({ name: 'ordinary workflow', cappedOpened: 38, maxIssues: DEFAULT_MAX_ISSUES }),
+    false,
+  );
+  assert.equal(
+    capReached({ name: 'ordinary workflow', cappedOpened: DEFAULT_MAX_ISSUES, maxIssues: DEFAULT_MAX_ISSUES }),
+    true,
+  );
 });

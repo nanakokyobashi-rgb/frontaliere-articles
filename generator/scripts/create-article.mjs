@@ -301,7 +301,7 @@ import {
   cantonSectionSkeletons,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
-import { createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
+import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
@@ -3740,7 +3740,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey, itemIdentityOf, stripItemIdentity, checkItemOnPage, pageTitleEvidence } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -3929,8 +3929,13 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
   // Serve soprattutto al ramo CROSS-SEZIONE di #251, che e' l'unico senza una
   // rete a valle: per la durata della transizione una fonte gia' usata
   // dall'altra sezione sotto la chiave vecchia resta bloccata.
+  //
+  // Non per un URL che porta l'identita' di un item (`#ft-item=…`): li' il path
+  // nudo e' un contenitore che la fonte riusa per notizie diverse, e una voce
+  // sul path nudo non dice quale notizia fosse (vedi source-url-ledger.mjs).
+  const reusedUrl = itemIdentityOf(headlineUrl) !== null;
   const legacyKey = legacyNewsUrlKey(headlineUrl);
-  if (legacyKey !== normalized) {
+  if (!reusedUrl && legacyKey !== normalized) {
     const legacy = findCrossSectionSourceDuplicate(
       legacyKey,
       ledgerViewsForLookup(loadAllSectionSourceUrls(), SECTION_NAME, { keyForm: 1 }),
@@ -3940,6 +3945,11 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
   }
 
   // Fuzzy URL slug vs existing article ID match
+  // Saltato per gli URL riusati: lo slug del contenitore non descrive la
+  // notizia (suedostschweiz, 2026-10-05: sotto `bonaduz-feuerwehr-loescht-brand-…`
+  // c'e' un incidente stradale), quindi il confronto con gli id esistenti
+  // bloccherebbe una notizia nuova per le parole di una vecchia.
+  if (reusedUrl) return { used: false };
   const urlWords = extractUrlSlugWords(headlineUrl);
   if (urlWords.length < 2) return { used: false };
 
@@ -7511,6 +7521,23 @@ export function isolateMainSourceHtml(html) {
 // article, so a module-level handoff keeps the change local instead of
 // reshaping a return type threaded through the whole generation path.
 let lastSourcePublishedAt = '';
+// I titoli che la pagina dichiara di se' (og:title, <title>, <h1>): il testo
+// estratto e' il corpo, senza l'h1, e la verifica degli URL riusati
+// (checkItemOnPage) ha bisogno di entrambi. Stessa vita di lastSourcePublishedAt.
+let lastSourcePageTitle = '';
+
+// Le fonti delle sezioni storiche continuano a usare il comportamento
+// precedente. Per le sezioni cantonali la pagina dell'articolo deve dichiarare
+// lo stesso UA onesto dello scanner (D10): la costante vive nel modulo dello
+// scanner, che e' l'unica sorgente del valore cantonale.
+const HISTORICAL_SOURCE_PAGE_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
+
+function sourcePageFetchHeaders() {
+  return {
+    'User-Agent': IS_CANTON ? CANTON_SOURCE_USER_AGENT : HISTORICAL_SOURCE_PAGE_USER_AGENT,
+    'Accept': 'text/html,application/xhtml+xml',
+  };
+}
 
 async function fetchPageContent(url) {
   // Clear FIRST, unconditionally, before any early return.
@@ -7527,6 +7554,7 @@ async function fetchPageContent(url) {
   // Same reasoning as the `_localFallbackUsedThisHeadline` reset in
   // generateAndValidateArticle(): per-headline state must not leak forward.
   lastSourcePublishedAt = '';
+  lastSourcePageTitle = '';
 
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
@@ -7585,10 +7613,7 @@ async function fetchPageContent(url) {
   console.error(`📰 Fetching: ${absoluteUrl}`);
   try {
     const res = await fetch(absoluteUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-        'Accept': 'text/html,application/xhtml+xml',
-      },
+      headers: sourcePageFetchHeaders(),
       signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -7603,6 +7628,7 @@ async function fetchPageContent(url) {
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
+    lastSourcePageTitle = pageTitleEvidence(html);
     const ageNote = lastSourcePublishedAt
       ? ` — fonte del ${lastSourcePublishedAt.slice(0, 10)}`
       : ' — data fonte non rilevata';
@@ -7905,6 +7931,210 @@ function isWithinDays(date, days) {
   return date >= cutoff;
 }
 
+// Alcuni portali comunali usano un testo d'azione generico per il link alla
+// notizia. Non e' una headline: il titolo va cercato nella card che contiene
+// il link, senza allargare il pool ai link di menu gia' filtrati da P5b.
+const GENERIC_HEADLINE_LINK_LABELS = new Set([
+  'mehr',
+  'mehr anzeigen',
+  'mehr erfahren',
+  'mehr lesen',
+  'weiterlesen',
+  'weiter lesen',
+  'news lesen',
+  'lire la suite',
+  'en savoir plus',
+  'leggi tutto',
+  "leggi l'articolo",
+  'leggi l articolo',
+  'read more',
+  'read article',
+]);
+
+const HEADLINE_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+  'meta', 'param', 'source', 'track', 'wbr',
+]);
+
+function headlineAttributeValue(attrs, name) {
+  const re = new RegExp(
+    "(?:^|\\s)" + name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s\"'=<>]+))",
+    'i',
+  );
+  const match = re.exec(attrs || '');
+  return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+}
+
+function headlineTextFromMarkup(markup) {
+  return decodeHtmlEntities(String(markup || '')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim());
+}
+
+function normalizedGenericHeadlineLabel(text) {
+  return headlineTextFromMarkup(text)
+    .normalize('NFKC')
+    .toLocaleLowerCase('it')
+    .replace(/[\p{P}\p{S}]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isGenericHeadlineLinkLabel(text) {
+  return GENERIC_HEADLINE_LINK_LABELS.has(normalizedGenericHeadlineLabel(text));
+}
+
+function headlineMarkupWithoutActionLinks(markup) {
+  return String(markup || '').replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, (full, inner) => {
+    const openEnd = full.indexOf('>');
+    const openTag = openEnd === -1 ? full : full.slice(0, openEnd + 1);
+    const accessibleLabel = headlineAttributeValue(openTag, 'aria-label')
+      || headlineAttributeValue(openTag, 'title')
+      || inner;
+    return isGenericHeadlineLinkLabel(accessibleLabel) ? ' ' : full;
+  });
+}
+
+function headlineCandidateIsUsable(text) {
+  const candidate = headlineTextFromMarkup(headlineMarkupWithoutActionLinks(text));
+  if (candidate.length < 15 || candidate.length > 300) return null;
+  if (isGenericHeadlineLinkLabel(candidate)) return null;
+  if (/^[\d\s./,:-]+$/.test(candidate)) return null;
+  return candidate;
+}
+
+/** Stack degli elementi aperti davanti a un link, sufficiente per il markup
+ * server-rendered delle liste comunali (e tollerante verso HTML incompleto). */
+function headlineAncestorStack(html, before) {
+  const stack = [];
+  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
+  let match;
+  while ((match = tagRe.exec(html)) !== null && match.index < before) {
+    const closing = match[1] === '/';
+    const name = match[2].toLowerCase();
+    const attrs = match[3] || '';
+    if (closing) {
+      for (let i = stack.length - 1; i >= 0; i -= 1) {
+        if (stack[i].name !== name) continue;
+        stack.length = i;
+        break;
+      }
+      continue;
+    }
+    if (HEADLINE_VOID_ELEMENTS.has(name) || /\/\s*$/.test(attrs)) continue;
+    stack.push({ name, attrs, openEnd: tagRe.lastIndex, start: match.index });
+  }
+  return stack;
+}
+
+function headlineElementEnd(html, node) {
+  const closeRe = new RegExp('<(/?)' + node.name + '(?=[\\s/>])[^>]*>', 'gi');
+  closeRe.lastIndex = node.openEnd;
+  let depth = 1;
+  let match;
+  while ((match = closeRe.exec(html)) !== null) {
+    if (match[1] === '/') {
+      depth -= 1;
+      if (depth === 0) return { start: match.index, end: closeRe.lastIndex };
+    } else if (!/\/\s*>$/.test(match[0])) {
+      depth += 1;
+    }
+  }
+  return { start: html.length, end: html.length };
+}
+
+function headlineNodeHasHint(node) {
+  const value = headlineAttributeValue(node.attrs, 'class')
+    + ' ' + headlineAttributeValue(node.attrs, 'id')
+    + ' ' + headlineAttributeValue(node.attrs, 'role');
+  return /(?:^|[\s_-])(?:card|teaser|entry|item|tile|meldung|news)(?:$|[\s_-])/i.test(value);
+}
+
+function isHeadlineCardNode(node) {
+  return node.name === 'article' || node.name === 'li' || headlineNodeHasHint(node);
+}
+
+function headlineStackHasNavigation(stack) {
+  const sectioning = new Set(['article', 'main', 'section']);
+  let nearestSectioning = -1;
+  stack.forEach((node, index) => {
+    if (sectioning.has(node.name) || /^(article|main|section)$/i.test(headlineAttributeValue(node.attrs, 'role'))) {
+      nearestSectioning = index;
+    }
+  });
+  return stack.some((node, index) => {
+    if (/^(script|style|template)$/i.test(node.name)) return true;
+    if (node.name === 'nav') {
+      return true;
+    }
+    const role = headlineAttributeValue(node.attrs, 'role');
+    if (/^(header|footer)$/i.test(node.name)) {
+      // A header/footer after the nearest sectioning element belongs to the
+      // card/article. Before it, it is a page landmark wrapping the content.
+      return nearestSectioning === -1 || index < nearestSectioning;
+    }
+    if (!/^(banner|navigation|complementary|contentinfo|search)$/i.test(role)) {
+      return false;
+    }
+    // A navigation landmark can wrap a sectioning element in malformed or
+    // CMS-generated markup. It remains navigation: a descendant <main> or
+    // <section> must not turn a menu link into a headline.
+    return true;
+  });
+}
+
+function structuralHeadlineForLink(html, linkStart, anchorTag) {
+  const stack = headlineAncestorStack(html, linkStart);
+  if (headlineStackHasNavigation(stack)) return null;
+
+  const directAttributes = [
+    headlineAttributeValue(anchorTag, 'aria-label'),
+    headlineAttributeValue(anchorTag, 'title'),
+  ];
+  for (const value of directAttributes) {
+    const candidate = headlineCandidateIsUsable(value);
+    if (candidate) return candidate;
+  }
+
+  const cards = stack.filter(isHeadlineCardNode).reverse();
+  for (const card of cards) {
+    const range = headlineElementEnd(html, card);
+    const inner = html.slice(card.openEnd, range.start);
+    const candidates = [];
+    const addCandidate = (value, score, offset = 0) => {
+      const candidate = headlineCandidateIsUsable(value);
+      if (!candidate) return;
+      const absolute = card.openEnd + offset;
+      candidates.push({ candidate, score: score + (absolute <= linkStart ? 10 : 0), distance: Math.abs(linkStart - absolute) });
+    };
+
+    const cardAttributes = [
+      headlineAttributeValue(card.attrs, 'aria-label'),
+      headlineAttributeValue(card.attrs, 'title'),
+    ];
+    for (const value of cardAttributes) addCandidate(value, 95);
+
+    const headingRe = /<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi;
+    let match;
+    while ((match = headingRe.exec(inner)) !== null) addCandidate(match[1], 80, match.index);
+
+    const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+    while ((match = hintedRe.exec(inner)) !== null) {
+      const attrs = match[2] || '';
+      const hint = headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id');
+      if (/(?:title|headline|subject|caption)/i.test(hint)) {
+        addCandidate(match[3], 75, match.index);
+      }
+    }
+
+    candidates.sort((a, b) => b.score - a.score || a.distance - b.distance);
+    if (candidates.length > 0) return candidates[0].candidate;
+  }
+  return null;
+}
+
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const results = [];
@@ -7922,6 +8152,12 @@ function extractHeadlines(html, baseUrl) {
     // classifier's hasTopicalSignal/countAdmissionHits match with
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
+    if (isGenericHeadlineLinkLabel(text)) {
+      const anchorTagEnd = m[0].indexOf('>');
+      const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+      text = structuralHeadlineForLink(html, m.index, anchorTag);
+      if (!text) continue;
+    }
     // Only keep links with meaningful text (likely headlines)
     if (text.length < 15 || text.length > 300) continue;
     // Resolve relative URLs
@@ -16675,7 +16911,12 @@ async function main() {
 }
 
 /** Core article pipeline: fetch → generate IT → validate → duplicates → translate → sanitize → image → modify files → git */
-async function generateAndValidateArticle(url, sourceContext = null) {
+async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
+  // Una fonte che riusa gli URL arriva con l'identita' dell'item nel frammento
+  // (`#ft-item=…`, vedi lib/source-url-ledger.mjs). Quella forma serve al
+  // LEDGER (in fondo, recordSourceUrl); tutto il resto — scaricare la pagina,
+  // i gate, la citazione pubblicata — usa l'indirizzo com'e' sul sito.
+  const url = stripItemIdentity(sourceUrl);
   // Scope the local-only wall-clock guard to THIS headline (2026-07-06,
   // PR #3704 review): the flag is set by any callLLM() in the process that
   // cascades to local/fallback — including a PREVIOUS headline's retries,
@@ -16696,6 +16937,29 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 1: Fetch page content
   const pageContent = await fetchPageContent(url);
+
+  // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
+  // L'indirizzo porta la notizia del momento: se nel frattempo e' passata a
+  // un'altra, il titolo scelto e i fatti della pagina non sono piu' la stessa
+  // notizia, e l'articolo uscirebbe col titolo di un aggiornamento e i fatti
+  // di un altro. checkItemOnPage (lib/source-url-ledger.mjs) confronta titolo
+  // e giornata dell'item con i titoli, il testo e la data della pagina, ed e'
+  // fail-closed: una pagina non scaricata non ha verificato niente. L'abort e'
+  // ricordato sull'URL CON l'identita' (il chiamante), quindi vale per questo
+  // item e non per le notizie successive allo stesso indirizzo.
+  if (itemIdentityOf(sourceUrl) !== null) {
+    const itemCheck = checkItemOnPage(
+      { title: lastSourcePageTitle, text: typeof pageContent === 'string' ? pageContent : '', publishedAt: lastSourcePublishedAt },
+      { headline: sourceContext?.headline, date: sourceContext?.date },
+    );
+    if (!itemCheck.ok) {
+      console.error(`\n⏭️  URL riusato: la pagina non e' (piu') questo item [${itemCheck.reason}] («${String(sourceContext?.headline || '').slice(0, 70)}») (URL: ${url}). Provo un altro headline.`);
+      RUN_REPORT.notes.push(`Source skipped pre-LLM: reused URL is not this item, ${itemCheck.reason} (url=${url})`);
+      const err = new Error(`topic-gate abort: la pagina di un URL riusato non e' l'item scelto, ${itemCheck.reason} (${url})`);
+      err.topicGateAbort = true;
+      throw err;
+    }
+  }
 
   // Step 1b: Early topical pre-flight on the source page itself (2026-05-12).
   // Why: the geographic anchor-gate is too permissive (any Locarnese /
@@ -17985,7 +18249,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   }
 
   // Track source URL for future duplicate prevention
-  recordSourceUrl(url, data.id);
+  recordSourceUrl(sourceUrl, data.id);
 
   // Step 5: Git add
   console.error('\n📦 Staging file:');
