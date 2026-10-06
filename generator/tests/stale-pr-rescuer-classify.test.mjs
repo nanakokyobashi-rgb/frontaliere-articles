@@ -2269,3 +2269,20 @@ test('il custode delle PR orfane gira solo nello scan completo', () => {
   assert.ok(WF.indexOf('- name: Decide scan scope') < WF.indexOf('- name: Scan open PRs and flag stalled ones'));
   assert.match(WF, /SCAN_MODE: \$\{\{ steps\.scope\.outputs\.mode \}\}/);
 });
+
+test('il report del budget è disponibile anche negli scan scoped', () => {
+  const materialize = WF.indexOf('      - name: Materialize trusted Remote Config loader\n');
+  const scope = WF.indexOf('      - name: Decide scan scope\n');
+  assert.ok(materialize >= 0 && scope > materialize, 'ordine loader/scope inatteso');
+  const materializeBlock = WF.slice(materialize, scope);
+  assert.match(
+    materializeBlock,
+    /scripts\/ci\/report-rate-limit-budget\.mjs/,
+    'il report non è materializzato prima del gate scoped',
+  );
+  assert.match(
+    WF,
+    /sparse-checkout:[\s\S]*scripts\/ci\/report-rate-limit-budget\.mjs/,
+    'lo scan completo non porta il report nel checkout sparse',
+  );
+});
