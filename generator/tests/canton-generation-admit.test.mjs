@@ -39,6 +39,7 @@ import {
   CANTON_SECTIONS_ENABLED_ENV,
   loadCantonSectionProfiles,
 } from '../scripts/lib/canton-section-profile.mjs';
+import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SCRIPT = path.join(ROOT, 'scripts/ci/canton-generation-admit.mjs');
@@ -46,6 +47,11 @@ const CORE = readFileSync(path.join(ROOT, '.github/workflows/generate-article-co
 
 const SECTION = 'canton-ti';
 const PROFILES = loadCantonSectionProfiles();
+const DISABLED_PROFILES = {
+  ...PROFILES,
+  cantons: PROFILES.cantons.map((profile) => ({ ...profile, enabled: false })),
+};
+const DISABLED_SECTION = PROFILES.cantons.find((profile) => profile.enabled !== true)?.section ?? null;
 const TI_BUDGET = PROFILES.cantons.find((c) => c.section === SECTION).dailyBudget;
 
 /** Ambiente di un job in cui Remote Config e' arrivato e TI e' acceso. */
@@ -92,17 +98,20 @@ test('Remote Config non caricato: la sezione resta spenta, senza leggere niente'
 test('flag assente o vuoto: nessun cantone genera', () => {
   for (const value of [undefined, '', '  ', 'GR, BE']) {
     const r = readers();
-    const v = decide({ env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: value } }, r);
+    const v = decide({
+      env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: value },
+      profiles: DISABLED_PROFILES,
+    }, r);
     assert.equal(v.proceed, false, `flag=${JSON.stringify(value)}`);
     assert.equal(v.reason, 'canton-disabled');
     assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 }, 'una sezione spenta non costa una chiamata');
   }
 });
 
-test('il profilo committato oggi non accende nessun cantone', () => {
-  // `enabled: true` nel profilo apre il gate come il flag: finche' P11 non lo
-  // accende, il default sicuro e' che nessuno dei 24 lo sia.
-  assert.deepEqual(PROFILES.cantons.filter((c) => c.enabled === true).map((c) => c.section), []);
+test('il profilo committato e il core bootstrap condividono l\'insieme dei cantoni accesi', () => {
+  const profileSections = PROFILES.cantons.filter((c) => c.enabled === true).map((c) => c.section).sort();
+  const coreSections = Object.keys(activeCorpusCoreMap()).filter((section) => section.startsWith('canton-')).sort();
+  assert.deepEqual(coreSections, profileSections);
 });
 
 test('sezione accesa ma non attiva nel core: non genera', () => {
@@ -116,8 +125,14 @@ test('sezione accesa ma non attiva nel core: non genera', () => {
   assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 });
 });
 
-test('sul core di oggi nessun cantone e\' attivo, quindi nessuno passa nemmeno col flag', () => {
-  const v = decideCantonAdmission({ section: SECTION, env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: 'all' }, eventName: 'schedule', ...readers() });
+test('una sezione fuori dall\'insieme attivo non passa nemmeno col flag', () => {
+  const v = decideCantonAdmission({
+    section: SECTION,
+    env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: 'all' },
+    activeSections: { frontaliere: {}, svizzera: {} },
+    eventName: 'schedule',
+    ...readers(),
+  });
   assert.equal(v.proceed, false);
   assert.equal(v.reason, 'canton-inactive');
 });
@@ -260,7 +275,7 @@ test('un dispatch manuale salta budget, tetto e beacon — mai il flag', () => {
   assert.equal(v.reason, 'manual-dispatch');
   assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 });
 
-  const off = decide({ eventName: 'workflow_dispatch', env: { [RC_SENTINEL_ENV]: 'pat' } });
+  const off = decide({ eventName: 'workflow_dispatch', env: { [RC_SENTINEL_ENV]: 'pat' }, profiles: DISABLED_PROFILES });
   assert.equal(off.proceed, false);
   assert.equal(off.reason, 'canton-disabled');
 });
@@ -288,11 +303,15 @@ test('CLI: senza Remote Config esce 0 con il marcatore e proceed=false', () => {
   assert.match(res.output, /^reason=rc-unavailable$/m);
 });
 
-test('CLI: sezione spenta esce 0 con lo stesso marcatore di create-article.mjs', () => {
-  const res = runCli({ SECTION, [RC_SENTINEL_ENV]: 'pat' });
+test('CLI: sezione spenta esce 0 con lo stesso marcatore di create-article.mjs', (t) => {
+  if (!DISABLED_SECTION) {
+    t.skip('il profilo di test non contiene una sezione spenta');
+    return;
+  }
+  const res = runCli({ SECTION: DISABLED_SECTION, [RC_SENTINEL_ENV]: 'pat' });
   assert.equal(res.status, 0, res.stderr);
-  assert.match(res.stdout, new RegExp(`^${CANTON_SECTION_DISABLED_MARKER} section=canton-ti$`, 'm'));
-  assert.match(res.stdout, /GENERATION_OUTCOME kind=skipped reason=canton-disabled section=canton-ti/);
+  assert.match(res.stdout, new RegExp(`^${CANTON_SECTION_DISABLED_MARKER} section=${DISABLED_SECTION}$`, 'm'));
+  assert.match(res.stdout, new RegExp(`GENERATION_OUTCOME kind=skipped reason=canton-disabled section=${DISABLED_SECTION}`));
   assert.match(res.output, /^proceed=false$/m);
 });
 

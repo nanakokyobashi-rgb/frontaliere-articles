@@ -10,6 +10,7 @@
  * eight strings.
  */
 
+import './cantonSectionsBootstrap.mjs';
 import { ARTICLES_PAGE_SIZE as SHARED_ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 
 export type HubLocale = 'it' | 'en' | 'de' | 'fr';

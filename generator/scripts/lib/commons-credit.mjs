@@ -35,6 +35,7 @@
  * probe's jsdom reduction on all 531 probed files (same text and links).
  */
 
+import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {

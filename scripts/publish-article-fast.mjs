@@ -116,6 +116,7 @@
 // the symlink must not be alive while any subprocess may write/delete
 // through distDir). Nothing after step 1 needs distDir/images to exist.
 
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

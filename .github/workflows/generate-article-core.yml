@@ -270,6 +270,8 @@ jobs:
             engine/shared
             generator/data
             generator/scripts
+            host
+            scripts/lib
             scripts/ci
 
       - name: Section gate — setup Node.js

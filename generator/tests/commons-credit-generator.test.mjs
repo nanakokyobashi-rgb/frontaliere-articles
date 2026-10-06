@@ -7,6 +7,7 @@
  * that new covers use the mirrored engine or a record-bearing catalog entry.
  * It stays dependency-free so it runs before npm ci.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

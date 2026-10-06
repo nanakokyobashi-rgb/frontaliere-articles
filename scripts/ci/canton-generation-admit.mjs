@@ -21,7 +21,8 @@
  *        (`resolveCantonSectionGate`: `enabled` nel profilo oppure
  *        `CANTON_ARTICLE_SECTIONS_ENABLED` da Remote Config). Assente o vuoto =
  *        nessun cantone.
- *      - la sezione e' ATTIVA nel core (`ARTICLE_SECTION_CORE`)? Il rebase
+ *      - la sezione e' ATTIVA nel profilo corpus (`enabled`)? Il bootstrap
+ *        inietta lo stesso insieme nel core; il rebase
  *        (`--section-surfaces`), il ricontrollo di unicita' dopo il rebase e la
  *        pubblicazione leggono le sezioni attive: generare per una sezione
  *        spenta nel core vorrebbe dire scrivere file che il rebase non sa
@@ -57,13 +58,15 @@
  *
  * Solo builtin Node e moduli puri del corpus, come ogni script di `scripts/ci/`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, mkdtempSync, readFileSync, realpathSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { ARTICLE_SECTION_CORE, isCantonSection } from '../../engine/shared/articleSectionCore.mjs';
+import { isCantonSection } from '../../engine/shared/articleSectionCore.mjs';
+import { activeCorpusCoreMap } from '../lib/corpus-sections.mjs';
 import {
   CANTON_SECTION_DISABLED_MARKER,
   CANTON_SECTIONS_ENABLED_ENV,
@@ -166,7 +169,7 @@ export function decideCantonAdmission({
   section,
   env = process.env,
   eventName = '',
-  activeSections = ARTICLE_SECTION_CORE,
+  activeSections = activeCorpusCoreMap(),
   profiles,
   readArticleSubjects,
   readInProgressRuns,
@@ -197,8 +200,8 @@ export function decideCantonAdmission({
     return {
       proceed: false,
       reason: 'canton-inactive',
-      detail: `sezione accesa (${gate.via}) ma non attiva nel core (ACTIVE_CANTON_SECTIONS): `
-        + 'rebase, unicita\' e pubblicazione non la coprono',
+      detail: `sezione accesa (${gate.via}) ma non attiva nel profilo corpus (enabled): `
+        + 'bootstrap, rebase, unicita\' e pubblicazione non la coprono',
       unknown: gate.unknown,
     };
   }

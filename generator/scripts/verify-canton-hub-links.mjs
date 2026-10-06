@@ -29,6 +29,7 @@
  * `--warn` (diagnostica a mano) esce 0 anche con link mancanti.
  * SITE_ORIGIN cambia l'origine (default https://frontaliereticino.ch).
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

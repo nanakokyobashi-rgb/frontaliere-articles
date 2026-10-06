@@ -43,12 +43,75 @@
  * Solo builtin Node (regola di `scripts/ci/**` e `scripts/lib/**`): il core e
  * `corpus-paths.mjs` sono moduli puri.
  */
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   ARTICLE_SECTION_CORE_ALL,
   ARTICLE_SECTION_CORE_LIST,
+  activeArticleSections,
   articleSectionEntry,
+  configureActiveCantonSections,
 } from '../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+function loadCorpusCantonProfiles() {
+  return JSON.parse(readFileSync(path.join(ROOT, 'generator/data/canton-sections.json'), 'utf8'));
+}
+
+/**
+ * L'attivazione delle sezioni e' un dato del corpus, non del registro servito.
+ * `sections/registry.json` decide solo draft/live/retired; qui si legge il
+ * profilo editoriale che il bootstrap passa al core mirrorato.
+ */
+function enabledCantonCodes(profiles = loadCorpusCantonProfiles()) {
+  if (!profiles || !Array.isArray(profiles.cantons)) {
+    throw new Error('canton-sections.json: manca l\'array cantons');
+  }
+  const codes = [];
+  for (const profile of profiles.cantons) {
+    if (!profile || typeof profile !== 'object') {
+      throw new Error('canton-sections.json: voce cantone non valida');
+    }
+    if (typeof profile.code !== 'string' || typeof profile.section !== 'string') {
+      throw new Error('canton-sections.json: code e section sono obbligatori');
+    }
+    if (typeof profile.enabled !== 'boolean') {
+      throw new Error(`canton-sections.json: enabled non booleano per ${profile.section}`);
+    }
+    const core = ARTICLE_SECTION_CORE_ALL[profile.section];
+    if (!core || core.kind !== 'canton' || core.canton !== profile.code) {
+      throw new Error(`canton-sections.json: ${profile.section}/${profile.code} non corrisponde al core cantonale`);
+    }
+    if (profile.enabled) codes.push(profile.code);
+  }
+  return Object.freeze(codes);
+}
+
+/** Codici cantonali `enabled: true`: la sola sorgente dell'attivazione D22. */
+export const CORPUS_ACTIVE_CANTON_CODES = enabledCantonCodes();
+
+/** Vista attiva del core per gli host del corpus; non leggere il core attivo altrove. */
+export function activeCorpusCoreEntries() {
+  return activeArticleSections();
+}
+
+/** Mappa attiva condivisa da gate, generatori e superfici. */
+export function activeCorpusCoreMap() {
+  return Object.fromEntries(activeCorpusCoreEntries().map((entry) => [entry.section, entry]));
+}
+
+/**
+ * Configura l'engine una sola volta all'avvio del processo e aggiorna le viste
+ * derivate. Il core rifiuta una riconfigurazione diversa dopo la prima lettura.
+ */
+export function configureCorpusActiveSections() {
+  configureActiveCantonSections([...CORPUS_ACTIVE_CANTON_CODES]);
+  refreshActiveSectionViews(true);
+  return activeCorpusCoreEntries();
+}
 
 /** Le locali di ogni sezione: un file meta e una cartella corpi per locale. */
 export const SECTION_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -263,11 +326,12 @@ export function hasOwnApiSurfaces(id) {
  * cantoni accesi): la sola lista da iterare per decidere cosa costruire.
  * @param {Array<{section: string}>} [coreList]
  */
-export function activeSourceSections(coreList = ARTICLE_SECTION_CORE_LIST) {
+export function activeSourceSections(coreList = activeCorpusCoreEntries()) {
   return coreList.map((core) => sectionSourceSurfaces(core.section));
 }
 
-export const CORPUS_SECTIONS = Object.freeze(activeSourceSections());
+/** Gli export restano riferimenti stabili: il bootstrap li aggiorna in place. */
+export const CORPUS_SECTIONS = [];
 
 /**
  * Le sezioni attive pubblicabili (superficie propria o di famiglia), con
@@ -276,14 +340,14 @@ export const CORPUS_SECTIONS = Object.freeze(activeSourceSections());
  * `assertActiveSectionsPublishable` le rifiuta.
  * @param {Array<{section: string}>} [coreList]
  */
-export function publishedApiSections(coreList = ARTICLE_SECTION_CORE_LIST) {
+export function publishedApiSections(coreList = activeCorpusCoreEntries()) {
   return coreList
     .filter((core) => hasApiSurfaces(core.section))
     .map((core) => Object.freeze({ ...sectionSourceSurfaces(core.section), api: sectionApiSurfaces(core.section) }));
 }
 
 /** Tutte le sezioni attive pubblicate: le storiche, poi le sezioni di famiglia accese. */
-export const PUBLISHED_API_SECTIONS = Object.freeze(publishedApiSections());
+export const PUBLISHED_API_SECTIONS = [];
 
 /**
  * Le sezioni attive con superficie API PROPRIA (oggi frontaliere e svizzera,
@@ -292,13 +356,32 @@ export const PUBLISHED_API_SECTIONS = Object.freeze(publishedApiSections());
  * anche quando un cantone si accende: una sezione di famiglia non ha un
  * contatore suo in `manifest.counts`.
  */
-export const API_SECTIONS = Object.freeze(PUBLISHED_API_SECTIONS.filter((section) => section.api.family === null));
+export const API_SECTIONS = [];
 
 /**
  * Le sezioni attive che pubblicano in una superficie di famiglia (oggi: le
  * cantonali accese nel core; con la lista attiva di oggi, nessuna).
  */
-export const FAMILY_API_SECTIONS = Object.freeze(PUBLISHED_API_SECTIONS.filter((section) => section.api.family !== null));
+export const FAMILY_API_SECTIONS = [];
+
+function replaceArrayContents(target, values) {
+  target.splice(0, target.length, ...values);
+}
+
+function refreshActiveSectionViews(configured = false) {
+  const coreList = configured ? activeCorpusCoreEntries() : ARTICLE_SECTION_CORE_LIST;
+  const corpusSections = activeSourceSections(coreList);
+  const publishedSections = publishedApiSections(coreList);
+  replaceArrayContents(CORPUS_SECTIONS, corpusSections);
+  replaceArrayContents(PUBLISHED_API_SECTIONS, publishedSections);
+  replaceArrayContents(API_SECTIONS, publishedSections.filter((section) => section.api.family === null));
+  replaceArrayContents(FAMILY_API_SECTIONS, publishedSections.filter((section) => section.api.family !== null));
+}
+
+// Default sicuro per i consumer che importano il modulo fuori da un entrypoint
+// host. Gli entrypoint di produzione importano `host/cantonSectionsBootstrap`
+// prima di qualsiasi consumer dell'engine e rifanno questa vista dopo l'iniezione.
+refreshActiveSectionViews();
 
 /**
  * Le famiglie accese, ciascuna con le sue sezioni attive nell'ordine del core:
@@ -316,7 +399,7 @@ export function activeApiFamilies(sections = FAMILY_API_SECTIONS) {
 }
 
 /** Lancia se una sezione attiva non ha nomi pubblicati (vedi `sectionApiSurfaces`). */
-export function assertActiveSectionsPublishable(coreList = ARTICLE_SECTION_CORE_LIST) {
+export function assertActiveSectionsPublishable(coreList = activeCorpusCoreEntries()) {
   for (const core of coreList) sectionApiSurfaces(core.section);
   return true;
 }
@@ -331,7 +414,7 @@ export function assertActiveSectionsPublishable(coreList = ARTICLE_SECTION_CORE_
  * @param {Array<{section: string}>} [coreList]
  * @returns {{section: string, id: string, locale: string} | null}
  */
-export function sectionForBodyPath(rel, coreList = ARTICLE_SECTION_CORE_LIST) {
+export function sectionForBodyPath(rel, coreList = activeCorpusCoreEntries()) {
   const m = /^(content\/[^/]+)\/([a-z]{2})\/([^/]+)\.ts$/.exec(String(rel ?? ''));
   if (!m) return null;
   const [, dir, locale, id] = m;
