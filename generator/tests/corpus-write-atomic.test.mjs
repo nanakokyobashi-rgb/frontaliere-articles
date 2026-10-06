@@ -59,13 +59,13 @@ const CHOKE_POINTS = [
 // la forma e' diversa e ha gia' il suo test dedicato
 // (create-article-write-atomic.test.mjs), quindi qui vale solo per il
 // censimento di completezza in fondo, non per il controllo di forma.
-// Il catalogo immagini usa invece il writer condiviso `writeJsonAtomic`, gia'
-// verificato da register-lock-write-atomic.test.mjs: resta censito qui, ma non
-// deve continuare a pinzare una copia locale della stessa primitiva.
-const COVERED_ELSEWHERE = [
-  'generator/scripts/create-article.mjs',
-  'generator/scripts/generate-journalist-image-catalog.mjs',
-];
+// Il catalogo immagini e' uscito dal censimento: dal riallineamento col sito
+// scrive solo con il writer condiviso `writeJsonAtomic`, quindi non contiene
+// piu' nessuna primitiva di scrittura e il criterio (giustamente) non lo vede.
+// Tenerlo in una di queste liste lo renderebbe una voce cieca; il suo contratto
+// ha un test dedicato piu' sotto, che lo riporta nel censimento se torna a
+// scrivere da solo.
+const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
 
 // Scrivono sotto blog-body ma NON sono nella classe: nessun workflow li
 // invoca (verificato con un grep su .github/workflows/), quindi non esiste il
@@ -330,6 +330,22 @@ test('nel file del ranking sono atomici ENTRAMBI i choke-point, non solo il body
     + "tutta la superficie che quel run avrebbe ripubblicato.");
   assert.match(src, /renameSync\(\s*rankingTmp\s*,\s*RANKING_JSON_PATH\s*\)/,
     'il commit su RANKING_JSON_PATH deve passare da renameSync(rankingTmp, RANKING_JSON_PATH)');
+});
+
+test('il catalogo immagini scrive solo con il writer atomico condiviso', () => {
+  // `generate-article.yml` lo esegue sotto `timeout-minutes`: un SIGKILL a meta'
+  // di una scrittura diretta lascerebbe il catalogo troncato. Il commit passa
+  // da `writeJsonAtomic` (temp + rename, register-lock-write-atomic.test.mjs);
+  // una primitiva di scrittura propria lo farebbe rientrare nel censimento
+  // sopra come choke-point non elencato.
+  const src = codeOnly(fs.readFileSync(
+    path.join(root, 'generator/scripts/generate-journalist-image-catalog.mjs'), 'utf-8'));
+  assert.match(src, /from '\.\/lib\/atomic-write-json\.mjs'/,
+    'writeJsonAtomic va importato da generator/scripts/lib/atomic-write-json.mjs');
+  assert.match(src, /writeJsonAtomic\(\s*OUT_PATH\s*,/,
+    'il commit del catalogo deve passare da writeJsonAtomic(OUT_PATH, …)');
+  assert.doesNotMatch(src, /\b(?:writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\b/,
+    'il catalogo non deve avere una primitiva di scrittura propria accanto a writeJsonAtomic');
 });
 
 test('il verdetto missing precede dead quando il censimento trova due problemi', () => {
