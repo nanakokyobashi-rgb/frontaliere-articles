@@ -702,38 +702,6 @@ function firstRootStart(source, rootOpeners) {
   }, -1);
 }
 
-function nextRootStart(source, from, rootOpeners) {
-  return rootOpeners.reduce((next, opener) => {
-    const start = source.indexOf(opener, from);
-    return start === -1 ? next : next === -1 ? start : Math.min(next, start);
-  }, -1);
-}
-
-function hasJsonPrefixSyntax(source, from, to) {
-  let inString = false;
-  for (let i = from; i < to; i++) {
-    const ch = source[i];
-    if (ch === '"' && !isEscapedAt(source, i)) {
-      inString = !inString;
-      continue;
-    }
-    if (inString || /\s/.test(ch) || '{}[],:'.includes(ch)) continue;
-
-    const number = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(source.slice(i));
-    if (number) {
-      i += number[0].length - 1;
-      continue;
-    }
-    const literal = /^(?:true|false|null)\b/.exec(source.slice(i));
-    if (literal) {
-      i += literal[0].length - 1;
-      continue;
-    }
-    return false;
-  }
-  return !inString;
-}
-
 /**
  * An unmatched preferred root may contain complete nested containers that are
  * not response roots (for example `tags: ["a"]` in a truncated FAQ object).
@@ -743,40 +711,105 @@ function hasJsonPrefixSyntax(source, from, to) {
  * nested only when the prefix still has JSON structural context, while
  * allowing an opener that follows the prose of a malformed preamble through.
  */
-function isNestedRootCandidate(source, rootStart, candidateStart) {
-  const stack = [source[rootStart]];
+function isNestedRootCandidate(source, rootStart, candidate) {
+  if (candidate.depth > 1) return true;
+  if (!candidate.prefixJsonLike) return false;
 
-  for (let i = rootStart + 1; i < candidateStart; i++) {
+  let previous = candidate.start - 1;
+  while (previous > rootStart && /\s/.test(source[previous])) previous--;
+  return source[rootStart] === '[' || [':', '[', '{', ','].includes(source[previous]);
+}
+
+/**
+ * Scan structural bracket intervals once. Recoverable quoted strings are
+ * skipped as a whole, so openers in their contents never become candidates.
+ * An unclosed/non-recoverable string is left as prose: later roots remain
+ * discoverable through the historical fallback path.
+ */
+function scanStructuralRootCandidates(source, rootOpeners, start) {
+  const targetOpeners = new Set(rootOpeners);
+  const structuralStack = [];
+  const openFrames = { '{': [], '[': [] };
+  const candidates = [];
+  let firstRoot = null;
+  let firstCloseIdx = -1;
+  let firstClosed = false;
+  let recordedRoots = 0;
+  let prefixJsonLike = true;
+  let prefixInString = false;
+  let prefixTokenEnd = start + 1;
+
+  const recordCandidate = (frame) => {
+    if (recordedRoots >= MAX_LATER_SCANNED_ROOTS) return;
+    candidates.push(frame);
+    recordedRoots++;
+  };
+
+  for (let i = start; i < source.length; i++) {
     const ch = source[i];
-    if (ch === '"') {
-      // Use the same quote disambiguation as `findMatchingClose`. If the
-      // malformed preamble has no recoverable string end, it is prose
-      // context, not evidence that the real later root is nested.
+    if (ch === '"' && !isEscapedAt(source, i)) {
       const stringEnd = scanStringEnd(source, i, true);
-      if (stringEnd === -1) return false;
-      if (stringEnd > candidateStart) return true;
-      i = stringEnd - 1;
+      if (stringEnd !== -1) {
+        if (i > start) prefixInString = false;
+        i = stringEnd - 1;
+        continue;
+      }
+      if (i > start) prefixInString = !prefixInString;
       continue;
     }
 
+    if (i > start && i >= prefixTokenEnd && !prefixInString && prefixJsonLike) {
+      if (/\s/.test(ch) || '{}[],:'.includes(ch)) {
+        // JSON structural punctuation and whitespace are valid prefix syntax.
+      } else {
+        const number = /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(source.slice(i));
+        const literal = /^(?:true|false|null)\b/.exec(source.slice(i));
+        if (number) prefixTokenEnd = i + number[0].length;
+        else if (literal) prefixTokenEnd = i + literal[0].length;
+        else prefixJsonLike = false;
+      }
+    }
+
     if (ch === '{' || ch === '[') {
-      stack.push(ch);
-    } else if (ch === '}' || ch === ']') {
-      const opener = ch === '}' ? '{' : '[';
-      if (stack.at(-1) === opener) stack.pop();
+      const frame = {
+        open: ch,
+        start: i,
+        end: -1,
+        depth: structuralStack.length,
+        prefixJsonLike: prefixJsonLike && !prefixInString,
+      };
+      structuralStack.push(frame);
+      openFrames[ch].push(frame);
+
+      if (!firstRoot) firstRoot = frame;
+      else if (targetOpeners.has(ch) && (firstClosed || recordedRoots < MAX_LATER_SCANNED_ROOTS)) {
+        recordCandidate(frame);
+      }
+      continue;
+    }
+
+    if (ch !== '}' && ch !== ']') continue;
+    const opener = ch === '}' ? '{' : '[';
+    const frame = openFrames[opener].pop();
+    if (!frame) continue;
+    frame.end = i;
+    if (structuralStack.at(-1) === frame) structuralStack.pop();
+
+    if (frame === firstRoot) {
+      firstCloseIdx = i;
+      firstClosed = true;
+      candidates.length = 0;
+      recordedRoots = 0;
+      structuralStack.length = 0;
+      openFrames['{'].length = 0;
+      openFrames['['].length = 0;
+      prefixJsonLike = true;
+      prefixInString = false;
+      prefixTokenEnd = i + 1;
     }
   }
 
-  // A syntactically JSON-like prefix means the opener is still inside the
-  // malformed root, even when a missing comma leaves whitespace before it.
-  // Prose such as `preamble [unbalanced ` fails this check and remains a
-  // boundary after which a real response root is allowed.
-  if (!hasJsonPrefixSyntax(source, rootStart + 1, candidateStart)) return false;
-  if (stack.length > 1) return true;
-
-  let previous = candidateStart - 1;
-  while (previous > rootStart && /\s/.test(source[previous])) previous--;
-  return source[rootStart] === '[' || [':', '[', '{', ','].includes(source[previous]);
+  return { firstCloseIdx, candidates };
 }
 
 function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {}) {
@@ -784,13 +817,11 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
   if (start === -1) return { start, candidates: [] };
 
   const opener = source[start];
-  const firstCloseIdx = findMatchingClose(source, start, true);
-
-  // Keep both root shapes in the search even when the preferred root is
-  // unterminated. `isNestedRootCandidate` filters containers inside it, while
-  // validation/selection decides whether a later wrapper or direct array is
-  // the actual response.
-  const laterRootOpeners = rootOpeners;
+  const { firstCloseIdx, candidates: laterRootCandidates } = scanStructuralRootCandidates(
+    source,
+    rootOpeners,
+    start,
+  );
 
   const candidates = [];
   const addCandidate = (candidateStart, candidateEnd, balanced) => {
@@ -803,26 +834,26 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
   };
 
   const collectLaterBalancedCandidates = (from, { skipUnbalanced = false, skipNested = false } = {}) => {
-    let nextStart = nextRootStart(source, from, laterRootOpeners);
+    let cursor = from;
     let scanned = 0;
     let examined = 0;
-    while (nextStart !== -1 && scanned < MAX_LATER_SCANNED_ROOTS && examined < MAX_LATER_CANDIDATES) {
+    for (const candidate of laterRootCandidates) {
+      if (candidate.start < cursor || candidate.start < from) continue;
+      if (scanned >= MAX_LATER_SCANNED_ROOTS || examined >= MAX_LATER_CANDIDATES) break;
       scanned++;
-      const nextCloseIdx = findMatchingClose(source, nextStart, true);
-      const nested = skipNested && isNestedRootCandidate(source, start, nextStart);
-      if (nested) {
-        const nextFrom = nextCloseIdx === -1 ? nextStart + 1 : nextCloseIdx + 1;
-        nextStart = nextRootStart(source, nextFrom, laterRootOpeners);
+
+      if (skipNested && isNestedRootCandidate(source, start, candidate)) {
+        cursor = candidate.end === -1 ? candidate.start + 1 : candidate.end + 1;
         continue;
       }
-      if (nextCloseIdx === -1) {
+      if (candidate.end === -1) {
         if (!skipUnbalanced) break;
-        nextStart = nextRootStart(source, nextStart + 1, laterRootOpeners);
+        cursor = candidate.start + 1;
         continue;
       }
       examined++;
-      addCandidate(nextStart, nextCloseIdx, true);
-      nextStart = nextRootStart(source, nextCloseIdx + 1, laterRootOpeners);
+      addCandidate(candidate.start, candidate.end, true);
+      cursor = candidate.end + 1;
     }
   };
 
