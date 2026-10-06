@@ -107,6 +107,14 @@ test('repairLlmJsonArray resynchronizes after a mismatched closer before a later
   }
 });
 
+test('repairLlmJsonArray uses the strict key boundary before a malformed q value', () => {
+  // The index after the closing quote is the colon lookahead position. If the
+  // strict-key branch starts at the quote instead, it misses the colon after
+  // "q" and loses the later valid root.
+  const raw = '{"bad":[1} [{"q":}] [{"ok":"yes"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ ok: 'yes' }]);
+});
+
 test('repairLlmJsonArray keeps an incompatible closer outside an unfinished root at EOF', () => {
   const cases = ['[1}', '{"bad":1]'];
 

@@ -77,8 +77,8 @@ export const RATE_LIMITED_OUTCOME = 'rate-limited';
 /**
  * Beacon della finestra di quota. Deliberatamente un commento HTML SEPARATO dal
  * marker `<!-- FIX_OUTCOME: ... -->`: quest'ultimo è parsato con
- * `FIX_OUTCOME_RE` (definita in `close-recovered-failure-issues.mjs`, importata
- * da `followup-drainer.mjs` e dagli altri consumer), che
+ * `FIX_OUTCOME_RE` (definita in `claude-rate-limit-contract.mjs`, importata
+ * anche dagli altri consumer), che
  * non ammette attributi extra dentro lo stesso commento. Tenerli separati evita
  * di dover toccare quella regex (e di romperla per tutti gli altri codici).
  */
@@ -371,24 +371,44 @@ export function latestFixOutcomeFromComments(comments) {
   return latestFixOutcomeEntryFromComments(comments).outcome;
 }
 
+function hasSubsequentNonRateLimitedOutcome(comments, beacon) {
+  const beaconAt = commentTimestamp(beacon);
+  if (beaconAt === null) return false;
+
+  for (const comment of comments) {
+    if (!isAuthorizedFixOutcomeComment(comment)) continue;
+    const entry = fixOutcomeEntry(comment);
+    if (entry && entry.at > beaconAt && entry.outcome !== RATE_LIMITED_OUTCOME) return true;
+  }
+  return false;
+}
+
 /**
- * L'epoch di reset più LONTANO fra i beacon presenti in una lista di commenti,
- * o null. Il più lontano e non il più recente: se una issue ha accumulato più
- * beacon (finestre successive), quella che conta per il backoff è l'ultima a
- * chiudersi — riaprire il drain prima del reset reale riprodurrebbe esattamente
- * la cascata che il backoff esiste per fermare.
+ * L'epoch di reset più LONTANO fra i beacon ancora vivi in una lista di
+ * commenti, o null. Un beacon non è più vivo quando la stessa issue porta un
+ * `FIX_OUTCOME` successivo per timestamp che non sia `rate-limited`: quella
+ * run è arrivata oltre il punto in cui la quota risultava esaurita. Un altro
+ * `rate-limited` non invalida il beacon, perché non prova che Claude sia
+ * riuscito a partire.
+ *
+ * Fra i beacon vivi vince quello che si chiude per ULTIMO, non il più recente:
+ * se una issue ha accumulato finestre successive, riaprire il drain prima del
+ * reset reale riprodurrebbe esattamente la cascata che il backoff esiste per
+ * fermare.
  *
  * Unico punto di verità: la usano sia il pre-flight `check-quota-backoff.mjs`
  * sia `followup-drainer.mjs`. Duplicarla in due file la farebbe divergere alla
  * prima modifica (AGENTS.md #6). Pura → testabile.
  *
- * @param {Array<{body?: string}>} comments
+ * @param {Array<{body?: string, createdAt?: string, created_at?: string}>} comments
  * @returns {number|null}
  */
 export function maxQuotaResetsAt(comments) {
   let best = null;
-  for (const c of comments || []) {
+  const list = comments || [];
+  for (const c of list) {
     if (!isAuthorizedQuotaBeaconComment(c)) continue;
+    if (hasSubsequentNonRateLimitedOutcome(list, c)) continue;
     const r = parseQuotaResetsAt(c?.body || '');
     if (r !== null && (best === null || r > best)) best = r;
   }

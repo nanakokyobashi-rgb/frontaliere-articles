@@ -12,7 +12,7 @@ const BOLD_SEGMENT_RE = /(?<!\*)\*\*([^*\n]{1,240})\*\*(?!\*)/g;
 
 // A title is recoverable when a narrative sentence structurally introduces
 // the following bold segment. This avoids length/suffix heuristics: the
-// explanation may be short, and the actual title may be the final value.
+// explanation may be short, and later bold fragments belong to the explanation.
 // `\b` is deliberately avoided at the start of these expressions because
 // JavaScript word boundaries are ASCII-only (`Übersetzung` would not match).
 const NARRATIVE_TITLE_INTRODUCERS = [

@@ -3,7 +3,9 @@ import { describe, it } from 'node:test';
 
 import {
   detectClaudeRateLimit,
+  formatRateLimitComment,
   latestFixRunOutcomeEntryFromComments,
+  maxQuotaResetsAt,
   parseExecutionMessages,
   shouldRefundRateLimitedRound,
 } from '../../scripts/ci/claude-rate-limit.mjs';
@@ -116,6 +118,42 @@ describe('latestFixRunOutcomeEntryFromComments', () => {
       outcome: 'no-root-cause',
       at: Date.parse('2026-09-03T00:00:00Z'),
     });
+  });
+});
+
+describe('maxQuotaResetsAt ignora i beacon già superati', () => {
+  const bot = { login: 'github-actions' };
+
+  it('un esito successivo non rate-limited chiude il beacon', () => {
+    const comments = [
+      {
+        body: formatRateLimitComment({ resetsAt: 1_800_000_000 }),
+        author: bot,
+        createdAt: '2026-09-02T00:00:00Z',
+      },
+      {
+        body: '<!-- FIX_OUTCOME: already-fixed -->',
+        author: bot,
+        createdAt: '2026-09-03T00:00:00Z',
+      },
+    ];
+    assert.equal(maxQuotaResetsAt(comments), null);
+  });
+
+  it('un altro rate-limited successivo non chiude il beacon precedente', () => {
+    const comments = [
+      {
+        body: formatRateLimitComment({ resetsAt: 1_800_000_000 }),
+        author: bot,
+        createdAt: '2026-09-02T00:00:00Z',
+      },
+      {
+        body: formatRateLimitComment({ resetsAt: 1_700_000_000 }),
+        author: bot,
+        createdAt: '2026-09-03T00:00:00Z',
+      },
+    ];
+    assert.equal(maxQuotaResetsAt(comments), 1_800_000_000);
   });
 });
 
