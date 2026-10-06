@@ -1131,6 +1131,12 @@ test('F — l\'archivio della prova è plumbing puro: storia completa, nessun wo
   const step = WF.slice(start, end === -1 ? undefined : end);
   assert.match(step, /git init --quiet \./, step);
   assert.match(step, /fetch --quiet --no-tags --filter=blob:none origin/, 'serve il clone parziale senza blob');
+  // Promisor dichiarato, e filtro ripetuto anche sui fetch della prova: in un
+  // archivio fresco i blob devono restare lazy-fetchabili, non arrivare tutti.
+  assert.match(step, /git config --local remote\.origin\.promisor true/, step);
+  assert.match(step, /git config --local remote\.origin\.partialclonefilter blob:none/, step);
+  const proofFetch = /f_merge_tree_state\(\) \{[\s\S]*?\n {14}\}/.exec(WF)?.[0] || '';
+  assert.match(proofFetch, /git fetch --no-tags --quiet --filter=blob:none origin/, 'il fetch della prova deve ripetere il filtro');
   assert.match(step, /"\+refs\/heads\/main:refs\/remotes\/origin\/main"/, 'la ref di main deve essere quella che usa la prova');
   // Storia completa: nessun `--depth`, altrimenti merge-tree non raggiunge il merge-base.
   assert.equal(/--depth|--shallow/.test(step), false, 'un fetch shallow renderebbe la prova sempre unknown');

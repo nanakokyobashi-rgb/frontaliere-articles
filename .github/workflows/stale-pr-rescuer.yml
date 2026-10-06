@@ -278,6 +278,11 @@ jobs:
           # della classe F (`git fetch origin …`) la ritrovano nella config.
           git config --local http.https://github.com/.extraheader \
             "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          # Promisor ESPLICITO, non lasciato al primo fetch: è ciò che rende
+          # lazy-fetchabili i blob che `merge-tree` chiederà, e che fa
+          # ereditare il filtro ai fetch successivi dello scan.
+          git config --local remote.origin.promisor true
+          git config --local remote.origin.partialclonefilter blob:none
           git -c protocol.version=2 fetch --quiet --no-tags --filter=blob:none origin \
             "+refs/heads/main:refs/remotes/origin/main"
 
@@ -488,7 +493,7 @@ jobs:
               # fallito, ref diversa dalla HEAD attesa, oggetto mancante).
               f_merge_tree_state() {
                 local ref="refs/remotes/origin/pr-$1-head" fetched status
-                git fetch --no-tags --quiet origin \
+                git fetch --no-tags --quiet --filter=blob:none origin \
                   "refs/heads/main:refs/remotes/origin/main" \
                   "refs/pull/$1/head:$ref" >/dev/null 2>&1 || { echo unknown; return 0; }
                 fetched=$(git rev-parse "$ref" 2>/dev/null) || { echo unknown; return 0; }
@@ -506,7 +511,7 @@ jobs:
                 continue
               fi
               REASON="conflitto con \`main\` (\`has-conflicts\` da pr-autorebase): GitHub non avvia i workflow \`pull_request\` su una PR in conflitto, quindi nessun test, review o fixer può partire su questa head e l'auto-merge non la prenderà"
-              RESCUE="nessun rerun possibile finché il conflitto resta. Con \`## LGTM\` pr-autorebase ha già affidato la riapplicazione a issue-fix (issue «riapplicare la PR su main»); una PR superata viene chiusa da \`close-superseded-conflict-prs.mjs\`, e se resta ferma la ricicla \`recycle-stale-prs\`. A mano: \`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, risolvi e push."
+              RESCUE="nessun rerun possibile finché il conflitto resta. Con \`## LGTM\` pr-autorebase ha già affidato la riapplicazione a issue-fix (issue «riapplicare la PR su main»); se resta ferma la ricicla \`recycle-stale-prs\`. A mano: \`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, risolvi e push."
               MARKER="<!-- stale-pr-rescuer class=F head=${HEAD:0:7} -->"
               echo "::warning::PR #$N FERMA — $REASON"
               if [ "${DRY_RUN:-false}" = "true" ]; then echo "(dry-run) nessuna azione su PR #$N"; continue; fi
