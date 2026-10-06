@@ -415,6 +415,32 @@ test('html-links: i testi generici recuperano il titolo strutturale delle tre fo
   }
 });
 
+test('html-links: i landmark sono valutati rispetto al sectioning piu\u0300 vicino', () => {
+  const articleHeader = '<article><header><h2>Avviso importante per la mobilita\u0300 locale</h2><a href="/news/header">mehr</a></header></article>';
+  assert.deepEqual(
+    extractHeadlines(articleHeader, 'https://example.ch/').map((h) => h.headline),
+    ['Avviso importante per la mobilita\u0300 locale'],
+  );
+
+  const navigationWrapper = '<div role="navigation"><main><article><h2>Nuova ordinanza comunale sulla viabilita\u0300</h2><a href="/news/main">mehr</a></article></main></div>';
+  assert.deepEqual(
+    extractHeadlines(navigationWrapper, 'https://example.ch/').map((h) => h.headline),
+    ['Nuova ordinanza comunale sulla viabilita\u0300'],
+  );
+
+  const nativeNavigationWrapper = '<nav><main><article><h2>Nuovo servizio comunale per le famiglie</h2><a href="/news/native-main">mehr</a></article></main></nav>';
+  assert.deepEqual(
+    extractHeadlines(nativeNavigationWrapper, 'https://example.ch/').map((h) => h.headline),
+    ['Nuovo servizio comunale per le famiglie'],
+  );
+
+  const nestedNavigation = '<main><article><h2>Nuova ordinanza comunale sulla viabilita\u0300</h2><nav><a href="/menu">mehr</a></nav></article></main>';
+  assert.equal(extractHeadlines(nestedNavigation, 'https://example.ch/').length, 0);
+
+  const pageHeader = '<header><a href="/menu">mehr</a></header><main><p>contenuto</p></main>';
+  assert.equal(extractHeadlines(pageHeader, 'https://example.ch/').length, 0);
+});
+
 // ── P5b: navigazione delle pagine html-links ────────────────────────────────
 //
 // Le tre pagine sono le risposte reali del 2026-10-05, ridotte (script, stile

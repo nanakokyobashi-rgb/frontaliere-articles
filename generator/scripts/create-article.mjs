@@ -8046,16 +8046,30 @@ function isHeadlineCardNode(node) {
 
 function headlineStackHasNavigation(stack) {
   const sectioning = new Set(['article', 'main', 'section']);
-  let lastSection = -1;
+  let nearestSectioning = -1;
   stack.forEach((node, index) => {
-    if (sectioning.has(node.name) || /^(article|main|section)$/i.test(headlineAttributeValue(node.attrs, 'role'))) lastSection = index;
+    if (sectioning.has(node.name) || /^(article|main|section)$/i.test(headlineAttributeValue(node.attrs, 'role'))) {
+      nearestSectioning = index;
+    }
   });
   return stack.some((node, index) => {
-    if (index <= lastSection) return false;
-    if (/^(nav|script|style|template)$/i.test(node.name)) return true;
-    if (/^(header|footer)$/i.test(node.name)) return true;
+    if (/^(script|style|template)$/i.test(node.name)) return true;
+    if (node.name === 'nav') {
+      return nearestSectioning === -1 || index > nearestSectioning;
+    }
     const role = headlineAttributeValue(node.attrs, 'role');
-    return /^(banner|navigation|complementary|contentinfo|search)$/i.test(role);
+    if (/^(header|footer)$/i.test(node.name)) {
+      // A header/footer after the nearest sectioning element belongs to the
+      // card/article. Before it, it is a page landmark wrapping the content.
+      return nearestSectioning === -1 || index < nearestSectioning;
+    }
+    if (!/^(banner|navigation|complementary|contentinfo|search)$/i.test(role)) {
+      return false;
+    }
+    // A navigation landmark that wraps a real <main>/<article> is a common
+    // CMS mistake: keep content inside the nearest sectioning element. A
+    // landmark nested in that content remains navigation and is rejected.
+    return nearestSectioning === -1 || index > nearestSectioning;
   });
 }
 
