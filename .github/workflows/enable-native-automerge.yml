@@ -37,9 +37,10 @@ on:
     types: [completed]
     # Una run `tests` su `main` (push, o dispatch col ref di default) ha come
     # head_sha un commit di `main`: la ricerca `commits/<sha>/pulls` qui sotto
-    # non trova mai una PR aperta e il job esce senza fare nulla. Filtrarla al
-    # trigger evita di creare la run: il push su main e' ~29% delle run `tests`
-    # (58 su 200, 2026-09-18/19).
+    # non trova mai una PR aperta e il job deve restare un no-op. Il filtro al
+    # trigger è la prima barriera; la guardia esplicita sul job sotto resta la
+    # barriera autorevole per eventi consegnati o rigiocati con `head_branch`
+    # `main`, così il downloader non parte e non entra nella concorrenza inutile.
     branches-ignore: [main]
 permissions:
   contents: read
@@ -57,10 +58,13 @@ jobs:
     # manually replayed push event from producing a failed empty run while
     # dereferencing pull_request fields that do not exist.
     if: >-
-      github.event_name == 'workflow_run' ||
-      inputs.pr_number != '' ||
-      (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) ||
-      (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false)
+      (github.event_name != 'workflow_run' ||
+       (github.event.workflow_run.head_branch != '' &&
+        github.event.workflow_run.head_branch != 'main')) &&
+      (github.event_name == 'workflow_run' ||
+       inputs.pr_number != '' ||
+       (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) ||
+       (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false))
     runs-on: ubuntu-latest
     # A post-review enrollment failure must not repaint the already-green
     # required `tests` job. The gate itself remains fail-closed: no successful

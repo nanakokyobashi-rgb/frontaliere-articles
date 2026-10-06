@@ -33,6 +33,17 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
   assert.match(source, /NATIVE_AUTOMERGE_BOOTSTRAP_READY=false/);
 });
 
+test('un workflow_run su main resta un no-op anche se il filtro del trigger viene superato', () => {
+  const enableJob = source.slice(source.indexOf('\n  enable:\n'));
+  const condition = enableJob.match(/\n {4}if: >-\n((?: {6}.+\n)+)/)?.[1]
+    ?.replace(/\s+/g, ' ')
+    .trim();
+  assert.equal(
+    condition,
+    "(github.event_name != 'workflow_run' || (github.event.workflow_run.head_branch != '' && github.event.workflow_run.head_branch != 'main')) && (github.event_name == 'workflow_run' || inputs.pr_number != '' || (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) || (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false))",
+  );
+});
+
 test('tests richiama il gate dopo il verdetto, senza dipendere da pull_request_review', () => {
   const postReviewOffset = testsSource.indexOf('\n  post-review:');
   const postReview = testsSource.slice(postReviewOffset);
