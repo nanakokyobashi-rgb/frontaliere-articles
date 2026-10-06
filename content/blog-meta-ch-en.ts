@@ -7808,6 +7808,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.costi-assicurazione-base-proiezione.title': 'Health insurance premiums on the rise: heading toward 1000 francs a month',
     'blog.article.costi-assicurazione-base-proiezione.excerpt': 'Next year, the average premium will be 488 francs (+23, +5%); in 14 years it could reach 966,20 francs if the 5% annual trend continues.',
     'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Swiss family reviewing healthcare expenses and insurance premiums at the kitchen table',
+    'blog.article.mercato-lavoro-settembre-2026.title': 'The labor market situation in September 2026',
+    'blog.article.mercato-lavoro-settembre-2026.excerpt': 'In September 2026, Switzerland recorded 140’480 unemployed people, with the rate steady at 3%. This represents a monthly decrease of 0,8%, but an annual increase of 5,4%. There were 44’199 vacancies at the URCs.',
+    'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Skyline of a Swiss city symbolizing the labor market and national economy.',
 };
 
 export default blogMetaChEn;

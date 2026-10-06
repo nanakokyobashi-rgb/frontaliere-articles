@@ -98479,6 +98479,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mercato-lavoro-settembre-2026': {
+    title: 'La situazione sul mercato del lavoro nel mese di settembre 2026',
+    description: 'La SECO ha pubblicato i dati di settembre 2026: 140’480 disoccupati (3%), in calo mensile dello 0,8%, ma in aumento annuo del 5,4%. Posti vacanti URC a 44’199.',
+    keywords: 'frontalieri, ticino, svizzera, italia, situazione, mercato, lavoro, mese',
+    ogTitle: 'Mercato lavoro Svizzera: dati SECO settembre 2026',
+    ogDescription: 'I dati SECO di settembre 2026 rivelano 140’480 disoccupati in Svizzera con un tasso al 3%. Registrato un calo mensile dello 0,8% ma un aumento annuo del 5,4%. I posti vacanti presso gli URC sono 44’199. L\'analisi include anche disoccupazione',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-settembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La situazione sul mercato del lavoro nel mese di settembre 2026",
+      "description": "La SECO ha pubblicato i dati di settembre 2026: 140’480 disoccupati (3%), in calo mensile dello 0,8%, ma in aumento annuo del 5,4%. Posti vacanti URC a 44’199.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-settembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di una città svizzera che simboleggia il mercato del lavoro e l'economia nazionale."
+      },
+      "datePublished": "2026-10-06T08:45:47+00:00",
+      "dateModified": "2026-10-06T08:45:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-settembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

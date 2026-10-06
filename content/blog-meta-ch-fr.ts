@@ -7808,6 +7808,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.costi-assicurazione-base-proiezione.title': 'Primes de caisse-maladie en hausse : vers 1000 francs par mois',
     'blog.article.costi-assicurazione-base-proiezione.excerpt': 'L’année prochaine, la prime moyenne sera de 488 francs (+23, +5%) ; dans 14 ans, elle pourrait atteindre 966,20 francs si la tendance de 5% par an se poursuit.',
     'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Famille suisse examinant les dépenses de santé et les primes d\'assurance maladie autour de la table de cuisine',
+    'blog.article.mercato-lavoro-settembre-2026.title': 'La situation sur le marché du travail au mois de septembre 2026',
+    'blog.article.mercato-lavoro-settembre-2026.excerpt': 'En septembre 2026, la Suisse a enregistré 140’480 chômeurs, avec un taux stable à 3%. Cela représente une baisse mensuelle de 0,8%, mais une hausse annuelle de 5,4%. Les postes vacants auprès des ORP étaient au nombre de 44’199.',
+    'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Horizon d\'une ville suisse symbolisant le marché du travail et l\'économie nationale.',
 };
 
 export default blogMetaChFr;
