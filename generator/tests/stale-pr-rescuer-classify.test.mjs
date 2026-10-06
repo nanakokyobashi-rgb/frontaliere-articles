@@ -338,6 +338,11 @@ case "$sub" in
       */pulls/*)
         if [ "$jq" = '.head.sha' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.head?.sha||"")+"\\n")' ${JSON.stringify(fixPrs)}
+        elif [[ "$jq" == *"@tsv"* ]]; then
+          # Rilettura della classe F subito prima della mutation: lo stato
+          # CORRENTE della PR. _live nella fixture simula ciò che è cambiato
+          # fra la prova e la label; _liveError una lettura fallita.
+          node -e 'const value=require(process.argv[1]); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const pr={...base,...(base?._live||{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"", pr.mergeable_state||"", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.mergeable_state // ""' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; if (pr?.mergeable_state === "__error__") process.exit(1); process.stdout.write(String(pr?.mergeable_state||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.body // ""' ]; then
@@ -1167,6 +1172,40 @@ test('F — conflitto non verificabile: la PR resta INVARIATA', opts, () => {
     assert.deepEqual(r.labeled, [], r.stdout);
     assert.deepEqual(r.unlabeled, [], `${state || 'vuoto'}: una lettura non verificabile non deve cambiare niente\n${r.stdout}`);
   }
+});
+
+const greenLgtm = () => ({
+  checks: checkRuns({ concl: 'success' }),
+  reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+});
+
+test('F — solo PR verso main: su un altro target il conflitto con main non la riguarda', opts, () => {
+  for (const base of [{ ref: 'release/2026-10' }, undefined]) {
+    const r = runScan({ prs: conflicted([], { base }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `base=${base?.ref}: etichettata su un conflitto che non riguarda il suo target\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], r.stdout);
+  }
+});
+
+test('F — la PR cambia fra la prova e la label: nessuna mutation', opts, () => {
+  // Review di #2274: un push dopo il fetch lascerebbe la prova sulla vecchia
+  // HEAD e la label sulla nuova, con il recycle a 24 ore dietro.
+  for (const [what, live] of [
+    ['HEAD nuova', { head: { ref: 'fix/qualcosa', sha: OLD_SHA } }],
+    ['conflitto rientrato', { mergeable_state: 'clean' }],
+    ['GitHub sta ricalcolando', { mergeable_state: 'unknown' }],
+    ['label tolta da pr-autorebase', { labels: [] }],
+    ['needs-human arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'needs-human' }] }],
+    ['base cambiata', { base: { ref: 'release/2026-10' } }],
+    ['PR chiusa', { state: 'closed' }],
+  ]) {
+    const r = runScan({ prs: conflicted([], { _live: live }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `${what}: label applicata a un oggetto diverso da quello provato\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${what}\n${r.stdout}`);
+  }
+  const unreadable = runScan({ prs: conflicted([], { _liveError: true }), ...greenLgtm() });
+  assert.deepEqual(unreadable.labeled, [], unreadable.stdout);
+  assert.deepEqual(unreadable.comments, [], unreadable.stdout);
 });
 
 test('F — idempotenza: stesso head già segnalato, nessun secondo commento', opts, () => {
