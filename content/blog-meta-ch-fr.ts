@@ -7790,6 +7790,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.neutralita-svizzera-voto-costituzione.title': 'Neutralité suisse : le durcissement dans la Constitution a été rejeté',
     'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Le peuple suisse a confirmé l’interprétation actuelle de la neutralité : l’initiative visant à inscrire une conception plus stricte dans la Constitution a été rejetée.',
     'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande à Bellinzone dans une scène éditoriale sur la politique suisse',
+    'blog.article.elezioni-berna-guida-voto.title': 'Élections cantonales à Berne : guide du calendrier et du vote',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Guide pratique des élections cantonales dans le canton de Berne : système électoral, calendrier, modalités de vote, listes et compétences institutionnelles.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide des élection cantonales à Berne et compétences institutionnelles',
 };
 
 export default blogMetaChFr;
