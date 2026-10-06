@@ -51,10 +51,11 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
 import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline } from './lib/article-render-pipeline.mjs';
 import { CANTON_HUB_LOCALES, cantonHubDataFile, cantonHubTopics, readCantonHubData } from './lib/canton-hub-data.mjs';
@@ -62,6 +63,7 @@ import { sourceRegistryIds } from './lib/corpus-floors.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
+import { sectionSourceSurfaces } from './lib/corpus-sections.mjs';
 import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes, validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 
@@ -84,6 +86,7 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = ARTIC
       return v;
     };
     if (a === '--section') out.section = value();
+    else if (a === '--previous-revision') out.previousRevision = value();
     else if (a === '--id') out.ids.push(value());
     else if (a === '--ids') {
       let ids;
@@ -156,6 +159,92 @@ export function rendererPageEntry(section, rendered, kind) {
     throw new Error(`renderer ${kind}: edgeKey ${rendered.edgeKey} diverso da ${entry.edgeKey} per ${rendered.relPath}`);
   }
   return { ...entry, edgeKey: rendered.edgeKey };
+}
+
+const RELEASE_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+const REGISTRY_ID_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
+
+function releaseRegistryIds(source, rel) {
+  const ids = [...source.matchAll(REGISTRY_ID_RE)].map((match) => match[1] ?? match[2]);
+  if (!ids.length) throw new Error(`${rel}: registro senza id articolo`);
+  return ids;
+}
+
+function readGitFile(rootDir, revision, rel) {
+  const result = spawnSync('git', ['-C', rootDir, 'cat-file', '-e', `${revision}:${rel}`], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'ignore', 'ignore'],
+  });
+  if (result.status !== 0) return null;
+  return execFileSync('git', ['-C', rootDir, 'show', `${revision}:${rel}`], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    maxBuffer: 64 * 1024 * 1024,
+  });
+}
+
+/** URL canonici articolo di una release, derivati da registry + slug map. */
+export function articleReleasePages(section, { ids, slugs }) {
+  const routes = new Map(sectionRoutes(section).map((route) => [route.locale, route]));
+  const pages = [];
+  for (const id of ids) {
+    for (const locale of RELEASE_LOCALES) {
+      const slug = slugs[id]?.[locale] ?? id;
+      if (typeof slug !== 'string' || !slug.trim()) continue;
+      const route = routes.get(locale);
+      const canonicalPath = `${route.prefix}/${slug}/`.replace(/\/+/g, '/');
+      if (!/^\/[a-z0-9][a-z0-9/-]*\/$/.test(canonicalPath) || canonicalPath.includes('..')) {
+        throw new Error(`${section}: slug articolo non canonico per ${id}/${locale}: ${slug}`);
+      }
+      const edgeKey = `${EDGE_PREFIX}${canonicalPath}index.html`;
+      pages.push({
+        id,
+        locale,
+        canonicalPath,
+        edgeKey,
+        apexUrl: `${APEX}${canonicalPath}`,
+        cdnUrl: `${CDN_BASE}/${edgeKey}`,
+      });
+    }
+  }
+  return pages;
+}
+
+/**
+ * Confronta le URL della release precedente con quelle correnti. La lista e'
+ * una allowlist di sole pagine articolo canoniche della sezione: un cambio di
+ * slug e una rimozione producono una delete R2, mentre una URL ancora
+ * annunciata non viene mai toccata.
+ */
+export function obsoleteArticlePages(previousPages, currentPages) {
+  const current = new Set(currentPages.map((page) => page.canonicalPath));
+  return previousPages.filter((page) => !current.has(page.canonicalPath));
+}
+
+function articleReleaseSnapshot(rootDir, section, revision = null) {
+  const source = sectionSourceSurfaces(section);
+  const read = (rel) => (revision ? readGitFile(rootDir, revision, rel) : fs.readFileSync(path.join(rootDir, rel), 'utf8'));
+  const registry = read(source.registryFile);
+  const slugSource = read(source.slugFile);
+  if (registry === null && slugSource === null) return [];
+  if (registry === null || slugSource === null) {
+    throw new Error(`${section}: release ${revision ?? 'working tree'} ha registry/slugs incompleti`);
+  }
+  return articleReleasePages(section, {
+    ids: releaseRegistryIds(registry, source.registryFile),
+    slugs: parseArticleUrlSlugs(slugSource, source.slugExport),
+  });
+}
+
+function previousArticleReleasePages(rootDir, section, requestedRevision) {
+  let revision;
+  try {
+    revision = requestedRevision || execFileSync('git', ['-C', rootDir, 'rev-parse', 'HEAD~1'], { encoding: 'utf8' }).trim();
+  } catch {
+    return [];
+  }
+  if (/^0+$/.test(revision)) return [];
+  return articleReleaseSnapshot(rootDir, section, revision);
 }
 
 /**
@@ -314,7 +403,7 @@ export function hubMissingIsFatal({ declaredStatus, effectiveStatus, publishing 
   return (publishing ? effectiveStatus : declaredStatus) === 'live';
 }
 
-async function publish({ pages, cdnUploads, distDir, section }) {
+async function publish({ pages, cdnUploads, obsoletePages, distDir, section }) {
   let failures = 0;
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
   // into that state: otherwise the CDN verify below can be green while a live
@@ -341,7 +430,17 @@ async function publish({ pages, cdnUploads, distDir, section }) {
       console.log(`::error::[${LOG}] pagina non caricata: ${page.edgeKey}`);
     }
   }
-  for (const chunk of purgeChunks(uploaded.flatMap((page) => [page.apexUrl, page.cdnUrl]))) {
+  const deleted = [];
+  for (const page of obsoletePages) {
+    const { stdout } = run('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
+    if (stdout.includes('✅ deleted')) deleted.push(page);
+    else {
+      failures++;
+      console.log(`::error::[${LOG}] vecchia pagina non cancellata: ${page.edgeKey}`);
+    }
+  }
+  const purgeUrls = [...uploaded, ...obsoletePages].flatMap((page) => [page.apexUrl, page.cdnUrl]);
+  for (const chunk of purgeChunks(purgeUrls)) {
     const { code } = run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
     if (code !== 0) failures++;
   }
@@ -368,7 +467,14 @@ async function publish({ pages, cdnUploads, distDir, section }) {
       }
     }
   }
-  return { failures, uploaded: uploaded.length, status };
+  for (const page of obsoletePages) {
+    const old = await probe(page.cdnUrl, { attempts: 3, delayMs: 1000 });
+    if (old.status !== 'HTTP 404') {
+      failures++;
+      console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
+    }
+  }
+  return { failures, uploaded: uploaded.length, deleted: deleted.length, status };
 }
 
 export async function main(argv = process.argv.slice(2)) {
@@ -379,6 +485,9 @@ export async function main(argv = process.argv.slice(2)) {
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
+  const currentArticlePages = articleReleaseSnapshot(ROOT_DIR, section);
+  const previousArticlePages = previousArticleReleasePages(ROOT_DIR, section, args.previousRevision);
+  const obsoletePages = obsoleteArticlePages(previousArticlePages, currentArticlePages);
   // Preflight the same registry the Worker serves before deciding whether a
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
@@ -458,6 +567,7 @@ export async function main(argv = process.argv.slice(2)) {
     effectiveStatus,
     pages,
     cdnUploads,
+    obsoletePages,
     defects,
     published: null,
   };
@@ -483,7 +593,7 @@ export async function main(argv = process.argv.slice(2)) {
     console.log(`[${LOG}] dry-run: nessun upload. Summary: ${args.summary}`);
     return 0;
   }
-  summary.published = await publish({ pages, cdnUploads, distDir, section });
+  summary.published = await publish({ pages, cdnUploads, obsoletePages, distDir, section });
   writeSummary();
   console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pages.length} pagine, ${summary.published.failures} fallimenti`);
   return summary.published.failures ? 1 : 0;

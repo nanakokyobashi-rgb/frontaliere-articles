@@ -18,6 +18,7 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LI
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
   UPLOAD_ORDER,
+  articleReleasePages,
   assertPublishableSection,
   createRenderRoot,
   ensureRouteOwnerMeta,
@@ -25,6 +26,7 @@ import {
   inUploadOrder,
   pageDefects,
   pageEntry,
+  obsoleteArticlePages,
   parseArgs,
   publishedStatus,
   rendererPageEntry,
@@ -60,6 +62,7 @@ test('publisher: argomenti', () => {
   assert.throws(() => parseArgs(['--section']), /richiede un valore/);
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--ids', 'x', '--out', 'o', '--summary', 's']), /array JSON/);
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
+  assert.equal(parseArgs(['--section', 'canton-ti', '--previous-revision', 'abc1234', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).previousRevision, 'abc1234');
   assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--bootstrap', '--id', 'a', '--out', 'o', '--summary', 's']),
     /non si combina/,
@@ -91,6 +94,23 @@ test('publisher: chiave R2 = quella che il Worker calcola dal path canonico', ()
   const rendered = { relPath: 'en/ticino-articles/fuel/index.html', edgeKey: 'edge/sections/en/ticino-articles/fuel/index.html' };
   assert.equal(rendererPageEntry('canton-ti', rendered, 'hub').edgeKey, rendered.edgeKey);
   assert.throws(() => rendererPageEntry('canton-ti', { ...rendered, edgeKey: 'edge/sections/wrong/index.html' }, 'hub'), /diverso da/);
+});
+
+test('publisher: ritiri e cambi di slug cancellano solo le vecchie URL articolo', () => {
+  const slugs = (prefix) => Object.fromEntries(
+    ['gone', 'kept', 'renamed'].map((id) => [id, { it: `${prefix}-${id}-it`, en: `${prefix}-${id}-en`, de: `${prefix}-${id}-de`, fr: `${prefix}-${id}-fr` }]),
+  );
+  const previous = articleReleasePages('canton-ti', { ids: ['gone', 'kept', 'renamed'], slugs: slugs('old') });
+  const current = articleReleasePages('canton-ti', {
+    ids: ['kept', 'renamed'],
+    slugs: { ...slugs('old'), renamed: slugs('new').renamed },
+  });
+  const obsolete = obsoleteArticlePages(previous, current);
+  assert.equal(obsolete.length, 8, '4 locali ritirate + 4 URL del vecchio slug');
+  assert.ok(obsolete.every((page) => page.edgeKey.startsWith('edge/sections/')));
+  assert.ok(obsolete.every((page) => !current.some((live) => live.canonicalPath === page.canonicalPath)));
+  assert.ok(!obsolete.some((page) => page.canonicalPath.includes('kept')));
+  assert.match(read('scripts/publish-section-pages.mjs'), /scripts\/lib\/delete-cdn-file\.sh/);
 });
 
 test('publisher: una pagina con noindex, senza meta di proprieta\', con asset same-origin o canonical altrui non esce', () => {
@@ -310,12 +330,14 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/ci/fast-publish-section.mjs',
     'scripts/lib/article-render-pipeline.mjs',
     'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/delete-cdn-file.sh',
     'scripts/lib/section-registry.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
     'scripts/lib/upload-cdn-file.sh',
     'scripts/ci/retry-cmd.sh',
+    'scripts/offload-generated-images-cdn.mjs',
     'scripts/cf-purge-cache.mjs',
     'engine/cantonSectionPages.ts',
     'host/siteShellBootstrap.ts',
@@ -343,6 +365,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   }
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /git diff --name-status HEAD~1 HEAD/);
+  assert.match(wf, /Fetch previous published revision/);
+  assert.match(wf, /--previous-revision/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
     'generator/scripts/lib/control-char-write-report.mjs',
@@ -351,8 +375,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/ci/fast-publish-section.mjs',
     'scripts/ci/retry-cmd.sh',
     'scripts/cf-purge-cache.mjs',
+    'scripts/offload-generated-images-cdn.mjs',
     'scripts/lib/article-render-pipeline.mjs',
     'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/delete-cdn-file.sh',
     'scripts/lib/cdn-asset-existence.mjs',
     'scripts/lib/corpus-floors.mjs',
     'scripts/lib/corpus-sections.mjs',
@@ -364,6 +390,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(wf.includes("      - 'engine/**'\n"));
   assert.ok(wf.includes("      - 'host/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));
+  assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/offload-generated-images-cdn.mjs'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);

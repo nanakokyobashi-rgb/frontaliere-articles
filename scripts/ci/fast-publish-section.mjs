@@ -50,6 +50,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/article-render-pipeline.mjs',
   'scripts/lib/canton-hub-data.mjs',
   'scripts/lib/cdn-asset-existence.mjs',
+  'scripts/lib/delete-cdn-file.sh',
   'scripts/lib/corpus-floors.mjs',
   'scripts/lib/corpus-sections.mjs',
   'scripts/lib/engine-corpus-view.mjs',
@@ -57,6 +58,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/section-registry.mjs',
   'scripts/lib/upload-cdn-file.sh',
   'scripts/ci/retry-cmd.sh',
+  'scripts/offload-generated-images-cdn.mjs',
   'scripts/publish-section-edge.mjs',
   'scripts/publish-section-pages.mjs',
 ]);

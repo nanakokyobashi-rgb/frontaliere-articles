@@ -45,9 +45,11 @@ on:
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
+      - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
       - 'scripts/lib/cdn-asset-existence.mjs'
+      - 'scripts/lib/delete-cdn-file.sh'
       - 'scripts/lib/corpus-floors.mjs'
       - 'scripts/lib/corpus-sections.mjs'
       - 'scripts/lib/engine-corpus-view.mjs'
@@ -168,6 +170,16 @@ jobs:
           fetch-depth: 2
           persist-credentials: false
 
+      - name: Fetch previous published revision
+        if: github.event_name == 'push'
+        env:
+          PREVIOUS_REVISION: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]]; then
+            git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
+          fi
+
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -221,6 +233,9 @@ jobs:
         run: |
           set -euo pipefail
           args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
+          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ]; then
+            args+=(--previous-revision "${{ github.event.before }}")
+          fi
           if [ "$BOOTSTRAP" = "true" ]; then
             args+=(--bootstrap)
           else
