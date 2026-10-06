@@ -7778,6 +7778,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Wehrlose Schweiz: Verzögerung Raketenabwehr und Mehrwertsteuer',
     'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'Die Lieferung des Bodluv GR2-Raketenabwehrsystems verzögert sich; der bereits bestellte Patriot wird sich um Jahre verzögern. Die Finanzierung könnte durch eine Mehrwertsteuererhöhung erfolgen, die noch vom Parlament genehmigt werden muss. Lieferanten: Frankreich und Israel.',
     'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustration eines schweizerischen Raketenabwehrsystems in den Alpen mit Euro-Münzen, die eine mögliche Mehrwertsteuererhöhung symbolisieren',
+    'blog.article.permesso-edilizio-berna-procedura.title': 'Baubewilligung in Bern: Anforderungen und Verfahren',
+    'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Kanton Bern: wann eine Baubewilligung erforderlich ist, welche Unterlagen vorzubereiten sind und warum die Arbeiten nicht vor Erteilung der Bewilligung beginnen dürfen.',
+    'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Unterlagen für ein Baugesuch im Kanton Bern',
 };
 
 export default blogMetaChDe;

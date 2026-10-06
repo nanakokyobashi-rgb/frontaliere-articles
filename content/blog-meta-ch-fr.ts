@@ -7778,6 +7778,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Suisse sans défense : retard de la défense antimissile et TVA',
     'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'La livraison du système antimissile Bodluv GR2 est en retard ; le Patriot déjà commandé accusera plusieurs années de retard. Le financement pourrait passer par une hausse de la TVA, qui doit encore être approuvée par le Parlement. Fournisseurs : France et Israël.',
     'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustration d\'un système de défense antimissile suisse dans les Alpes avec des pièces euro représentant une possible augmentation de la TVA',
+    'blog.article.permesso-edilizio-berna-procedura.title': 'Autorisation de construire à Berne : exigences et procédure',
+    'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Canton de Berne : quand une autorisation de construire est nécessaire, quels documents préparer et pourquoi les travaux ne peuvent pas commencer avant l\'obtention de l\'autorisation.',
+    'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Documents pour une demande de permis de construire dans le canton de Berne',
 };
 
 export default blogMetaChFr;

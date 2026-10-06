@@ -7778,6 +7778,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Svizzera indifesa: ritardo difesa missilizia e IVA',
     'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'La fornitura del sistema antimissile Bodluv GR2 è in ritardo; il Patriot già ordinato subirà anni di ritardo. Il finanziamento potrebbe passare da un aumento dell’IVA, ancora da approvare dal Parlamento. Fornitori: Francia e Israele.',
     'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustrazione di un sistema di difesa antimissile svizzero sulle Alpi con monete euro che rappresentano un possibile aumento dell\'IVA',
+    'blog.article.permesso-edilizio-berna-procedura.title': 'Autorizzazione edilizia a Berna: requisiti e procedura',
+    'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Cantone di Berna: quando serve l\'autorizzazione edilizia, quali documenti preparare e perché i lavori non possono iniziare prima del permesso.',
+    'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Documenti per una richiesta di autorizzazione edilizia nel Cantone di Berna',
 };
 
 export default blogMetaChIt;
