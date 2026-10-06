@@ -2560,26 +2560,6 @@
           "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml; charset=UTF-8. Items ultimi 7 giorni: 2. Titoli osservati: \"Un phare cosmique détecté aux confins de l’Univers\"; \"Comment l’horloge biologique rythme les phases de l’éveil\"; \"L’hérédité n’est pas qu’une question d’ADN\". Feed RSS stampa con 20 item datati; 2 negli ultimi 7 giorni, utile per scienza, salute, innovazione e formazione. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.unige.ch/cookies/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.  URL richiesto https://www.unige.ch/feed/presse/rss reindirizza al canonico."
         },
         {
-          "url": "https://home.cern/feed/",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "CERN - official news",
-          "language": "en",
-          "kind": "istituzionale",
-          "topics": [
-            "servizi",
-            "lavoro",
-            "mobilita",
-            "eventi"
-          ],
-          "quirks": {
-            "maxRequestsPerRun": 1
-          },
-          "items7d": 10,
-          "verifiedAt": "2026-10-06",
-          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type application/rss+xml; charset=UTF-8. Items ultimi 7 giorni: 10. Titoli osservati: \"Operational Circular No. 12 and Administrative Circular No. 34\"; \"Want to develop your skills?\"; \"CERN entrepreneurship highlighted in global innovation report\". Feed RSS ufficiale CERN con 10 item tutti datati nella finestra; rilevanza locale filtrabile per personale, campus, lavoro e mobilità transfrontaliera a Meyrin. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://home.cern/privacy/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
-        },
-        {
           "url": "https://www.hesge.ch/actualites",
           "format": "html",
           "parser": "html-links",
@@ -5290,27 +5270,6 @@
           "items7d": 4,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 12 item nel feed. Quattro item OW nella finestra 29.09–06.10: «Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden», «Eiffelturm, Burj Khalifa – und jetzt Engelberg», «Zwischen Weltcup und Bauernhof: Janik Riebli aus Giswil» e «Odermatt, Gisin & Co.: So kämpfen sich Unterwaldens Ski-Asse in den Winter»; il feed è condiviso e va filtrato per OW/NW. robots.txt nomina gli user-agent AI ma consente esplicitamente / e /feed/ (vieta solo /admin/ e /api/); AGB/Impressum consultati senza divieto di raccolta."
-        },
-        {
-          "url": "https://www.engelberg.ch/entertainment-blog/engelberger-blog/",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "Engelberg-Titlis Tourismus – Engelberger Blog",
-          "language": "de",
-          "kind": "media",
-          "topics": [
-            "eventi",
-            "servizi",
-            "mobilita",
-            "cronaca"
-          ],
-          "quirks": {
-            "datesInList": false,
-            "articlePathPattern": "^/(?:entertainment-blog/engelberger-blog|engelberger-blog/blogs)/[^/?]+/?$"
-          },
-          "items7d": 0,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Pagina HTML con link a storie («4 Jahreszeiten», «Gee Athertons grösste Challenge», «Alpabzug») ma senza date di pubblicazione esposte; 0 item databili negli ultimi 7 giorni. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; AGB/Impressum pubblici consultati."
         },
         {
           "url": "https://obwaldenticker.ch/",
@@ -8165,27 +8124,6 @@
           "notes": "Link server-rendered /aktuelles/neuigkeiten/<slug> con data testuale 'dd. Monat yyyy'; circa 1 notizia al mese (ultima 15.09.2026), 0 negli ultimi 7 giorni."
         },
         {
-          "url": "https://altdorf.ch/aktuelles/neuigkeiten",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "Gemeinde Altdorf",
-          "language": "de",
-          "kind": "istituzionale",
-          "topics": [
-            "servizi",
-            "mobilita",
-            "eventi",
-            "fisco",
-            "cronaca"
-          ],
-          "quirks": {
-            "articlePathPattern": "^/(?:organisation/politik/gemeindeversammlung/naechste-versammlungen|aktuelles/(?:veranstaltungen|sbb-spartageskarte-gemeinde))/?$"
-          },
-          "items7d": 2,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Due item nella finestra: «Umgang der Wasserversorgung Altdorf mit der Trockenheit» (01.10.2026) e «Abstimmungs- und Wahlsonntag: So hat Altdorf abgestimmt» (27.09.2026); campione ulteriore «Nutzungsplanungsrevision: Altdorf strebt Verdichtung nach innen an» (24.09). robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagine legali comunali consultate."
-        },
-        {
           "url": "https://www.ukb.ch/ueber-uns/news-und-medien/news-und-medienmitteilungen",
           "format": "html",
           "parser": "html-links",
@@ -8396,26 +8334,6 @@
           "items7d": 104,
           "verifiedAt": "2026-10-05",
           "notes": "Portale francese dedicato ai frontalieri verso la Svizzera (Haute-Savoie/Ain/Doubs): fisco, assicurazioni, permessi, 'Hebdo du Frontalier'. Lista server-rendered con date. Nessun RSS (/feed 404). Copertura GE/VD indistinta."
-        },
-        {
-          "url": "https://actu.epfl.ch/feeds/rss/mediacom/fr/",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "EPFL - actu (Mediacom)",
-          "language": "fr",
-          "kind": "istituzionale",
-          "topics": [
-            "economia",
-            "lavoro",
-            "servizi",
-            "eventi"
-          ],
-          "quirks": {
-            "maxRequestsPerRun": 1
-          },
-          "items7d": 3,
-          "verifiedAt": "2026-10-06",
-          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type application/rss+xml; charset=utf-8. Items ultimi 7 giorni: 3. Titoli osservati: \"«Un superpouvoir, ça s'apprend aussi»\"; \"L'EPFL fête ses 1565 diplômées et diplômés 2026\"; \"Les surprenantes propriétés antivirales des bactéries alpines\". Feed RSS francese con 30 item e 3 negli ultimi 7 giorni; filtrare per Lausanne/VD perché contiene ricerca nazionale e internazionale. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.epfl.ch/about/overview/regulations-and-guidelines/disclaimer/ -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         },
         {
           "url": "https://www.chuv.ch/fr/actualites",
