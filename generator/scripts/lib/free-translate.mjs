@@ -29,7 +29,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
-import { stripTranslationSentinels } from './translation-sentinels.mjs';
+import { stripTranslationSentinels, translationSentinelRegExp } from './translation-sentinels.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
@@ -593,17 +593,26 @@ export function hasTranslatableLineText(line) {
   return /\p{L}/u.test(candidate);
 }
 
-function lineStructure(text) {
-  const normalized = normalizeBlock(text);
-  return normalized ? normalized.split('\n').map((line) => lineStructuralSignature(line).signature) : [];
+function hasVisibleLinePayload(line) {
+  const candidate = stripTranslationSentinels(lineStructuralSignature(line).text)
+    .replace(INLINE_OPAQUE_RE, '')
+    .replace(PLACEHOLDER_RE, '')
+    .trim();
+  return /[\p{L}\p{N}]/u.test(candidate);
 }
 
 function hasSameLineStructure(sourceText, translatedText) {
-  const source = lineStructure(sourceText);
-  const translated = lineStructure(translatedText);
-  return source.length > 1
-    && source.length === translated.length
-    && source.every((marker, index) => translated[index] === marker);
+  const sourceLines = normalizeBlock(sourceText).split('\n');
+  const translatedLines = normalizeBlock(translatedText).split('\n');
+  return sourceLines.length > 1
+    && sourceLines.length === translatedLines.length
+    && sourceLines.every((sourceLine, index) => {
+      const translatedLine = translatedLines[index];
+      if (lineStructuralSignature(sourceLine).signature !== lineStructuralSignature(translatedLine).signature) {
+        return false;
+      }
+      return !hasTranslatableLineText(sourceLine) || hasVisibleLinePayload(translatedLine);
+    });
 }
 
 /**
@@ -681,24 +690,6 @@ export function isSourcePassthrough(sourceText, translatedText) {
   const src = normalizeBlock(normalizeProtectedTokenSentinels(sourceText)).toLowerCase();
   if (!src) return false;
   return src === normalizeBlock(normalizeProtectedTokenSentinels(translatedText)).toLowerCase();
-}
-
-// Un segmento breve puo' essere un titolo, una URL o un placeholder che il
-// motore lascia intatto senza indicare che il body intero sia un passthrough.
-// Solo un segmento con abbastanza parole traducibili puo' quindi invalidare il
-// campo a chunk; l'eventuale eco breve resta nell'assemblato e viene giudicato
-// dal confronto sul campo intero in `tryTier`.
-// Misura corpus 2026-09-12 (content/blog-body{,-ch}):
-//   blog-body:    15'476 file, 46'524 campi, 48'298 chunk → 119 brevi / 48'179 sostanziosi
-//   blog-body-ch:  8'388 file, 25'164 campi, 25'589 chunk →  37 brevi / 25'552 sostanziosi
-//   totale:       23'864 file, 71'688 campi, 73'887 chunk → 156 brevi / 73'731 sostanziosi
-const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;
-const TRANSLATABLE_WORD_RE = /[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*/gu;
-
-function isSubstantivePassthroughChunk(text) {
-  const candidate = stripTranslationSentinels(normalizeBlock(text))
-    .replace(/https?:\/\/\S+/gi, ' ');
-  return (candidate.match(TRANSLATABLE_WORD_RE) || []).length >= MIN_SUBSTANTIVE_PASSTHROUGH_WORDS;
 }
 
 /** Record a passthrough already detected by the guard. */
@@ -780,14 +771,48 @@ function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
   return true;
 }
 
+function opaqueSpanRanges(text) {
+  const matcher = new RegExp(
+    `(?:${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${translationSentinelRegExp().source})`,
+    'giu',
+  );
+  return [...text.matchAll(matcher)].map((match) => ({
+    start: match.index,
+    end: match.index + match[0].length,
+  }));
+}
+
 function _splitOversizedSegment(text, maxChars, separatorAfter) {
   const parts = [];
   let remaining = text;
 
   while (remaining.length > maxChars) {
+    const opaqueSpans = opaqueSpanRanges(remaining);
     const space = remaining.lastIndexOf(' ', maxChars);
-    const splitAt = space > 0 ? space : maxChars;
-    const separator = space > 0 ? remaining.slice(splitAt, splitAt + 1) : '';
+    let splitAt = space > 0 ? space : maxChars;
+    const splitInsideOpaque = opaqueSpans.find(({ start, end }) => start < splitAt && splitAt < end);
+    if (splitInsideOpaque) splitAt = splitInsideOpaque.start;
+
+    // An opaque token longer than the provider limit cannot be split safely.
+    // Keep it as one explicitly marked segment so `_chunkAtSentences` can fail
+    // closed before any provider receives a URL, placeholder or sentinel
+    // fragment.
+    if (splitAt === 0) {
+      const opaque = opaqueSpans.find(({ start }) => start === 0);
+      if (opaque) {
+        const separator = remaining.slice(opaque.end).match(/^\s+/u)?.[0] || '';
+        parts.push({
+          text: remaining.slice(0, opaque.end),
+          separatorAfter: separator,
+          protectedOversize: opaque.end > maxChars,
+        });
+        remaining = remaining.slice(opaque.end + separator.length);
+        continue;
+      }
+      splitAt = maxChars;
+    }
+
+    const separator = remaining[splitAt] === ' ' ? remaining.slice(splitAt, splitAt + 1) : '';
     parts.push({ text: remaining.slice(0, splitAt), separatorAfter: separator });
     remaining = remaining.slice(splitAt + separator.length);
   }
@@ -852,23 +877,27 @@ function _packStructuredSegments(segments, maxChars) {
   const chunks = [];
   let current = null;
   let separatorAfter = '';
+  let protectedOversize = false;
 
   for (const segment of segments) {
     if (current === null) {
       current = segment.text;
       separatorAfter = segment.separatorAfter;
+      protectedOversize = Boolean(segment.protectedOversize);
       continue;
     }
     if (current.length + separatorAfter.length + segment.text.length <= maxChars) {
       current += `${separatorAfter}${segment.text}`;
       separatorAfter = segment.separatorAfter;
+      protectedOversize ||= Boolean(segment.protectedOversize);
     } else {
-      chunks.push({ text: current, separatorAfter });
+      chunks.push({ text: current, separatorAfter, protectedOversize });
       current = segment.text;
       separatorAfter = segment.separatorAfter;
+      protectedOversize = Boolean(segment.protectedOversize);
     }
   }
-  if (current !== null) chunks.push({ text: current, separatorAfter });
+  if (current !== null) chunks.push({ text: current, separatorAfter, protectedOversize });
   return chunks;
 }
 
@@ -885,9 +914,15 @@ export function _chunkAtSentences(text, maxChars = 480, { oneLinePerChunk = fals
   const clean = normalizeBlock(text);
   if (!clean) return [];
   const lineGroups = _structuredLineGroups(clean, maxChars);
-  return oneLinePerChunk
+  const chunks = oneLinePerChunk
     ? lineGroups.flatMap((segments) => _packStructuredSegments(segments, maxChars))
     : _packStructuredSegments(lineGroups.flat(), maxChars);
+  if (chunks.some(({ protectedOversize }) => protectedOversize)) {
+    const error = new RangeError('_chunkAtSentences: protected opaque span exceeds maxChars');
+    error.code = 'ERR_OPAQUE_SPAN_TOO_LARGE';
+    throw error;
+  }
+  return chunks;
 }
 
 const CHUNK_PARTS_MISMATCH = 'ERR_CHUNK_PARTS_MISMATCH';
@@ -933,7 +968,6 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
   }
 
   const translatedParts = [];
-  let substantivePassthroughRecorded = false;
   let translatableLines = 0;
   for (const line of lines) {
     if (!hasTranslatableLineText(line.text)) {
@@ -956,6 +990,9 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
     if (!recomposedLine) {
       return { ok: false, reason: 'recoveryFailed' };
     }
+    if (hasTranslatableLineText(line.text) && !hasVisibleLinePayload(recomposedLine)) {
+      return { ok: false, reason: 'recoveryFailed' };
+    }
     const lineIsPassthrough = rejectedAsPassthroughWithSourceVariants(
       tierName,
       line.text,
@@ -964,11 +1001,8 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
       outcome,
       'line',
     );
-    if (lineIsPassthrough && isSubstantivePassthroughChunk(line.text)) {
-      if (!substantivePassthroughRecorded) {
-        recordRejectedPassthrough(tierName, outcome);
-        substantivePassthroughRecorded = true;
-      }
+    if (lineIsPassthrough) {
+      recordRejectedPassthrough(tierName, outcome);
       return { ok: false, reason: 'recoveryFailed' };
     }
     if (rejectedAsMetaResponse(tierName, line.text, recomposedLine, outcome)) {
@@ -2518,7 +2552,11 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (rejectedAsMetaResponse(tierName, sourceClean, result, _outcome)) {
         return '';
       }
-      if (result && sourceClean.includes('\n') && !hasSameLineStructure(sourceClean, result)) {
+      if (
+        result
+        && (sourceClean.includes('\n') || result.includes('\n'))
+        && !hasSameLineStructure(sourceClean, result)
+      ) {
         const recovered = await recoverStructuredTier({
           tierName,
           sourceText: clean,
@@ -2657,12 +2695,11 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         noteTranslationOutcome(_outcome, 'incomplete');
         return '';
       }
-      // Un eco sostanzioso invalida l'intero campo: assemblarlo con chunk
-      // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
-      // placeholder) resta invece nell'assemblato e viene giudicato da
-      // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
-      if (rejectedAsPassthrough('myMemory', chunk.text, recomposedLine, _outcome, 'chunk')
-        && isSubstantivePassthroughChunk(chunk.text)) return '';
+      // Anche un eco breve invalida l'intero campo: assemblarlo con chunk
+      // tradotti produrrebbe testo misto. `hasTranslatableLineText` ha gia'
+      // escluso URL, placeholder, sentinelle e righe solo simboliche; una
+      // riga traducibile come «No» o «OK» non puo' quindi essere copiata.
+      if (rejectedAsPassthrough('myMemory', chunk.text, recomposedLine, _outcome, 'chunk')) return '';
       parts.push(recomposedLine);
     }
     // Ricomponi con i separatori della sorgente, non con uno spazio fisso: gli

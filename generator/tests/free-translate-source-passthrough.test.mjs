@@ -205,7 +205,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
-  test('non scarta la traduzione per un ultimo chunk breve con prefisso strutturale', async () => {
+  test('rifiuta anche un ultimo chunk breve con prefisso strutturale se e\' un eco', async () => {
     const firstChunk = Array.from({ length: 100 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
     const secondChunk = Array.from({ length: 90 }, (_, i) => `Frase sorgente numero ${i + 100} con testo sufficiente.`).join(' ');
     const filler = Array.from({ length: 55 }, () => 'parola').join(' ');
@@ -227,13 +227,12 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
     const out = await freeTranslate({ text: longText, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
 
-    assert.match(out, /Translated chunk/);
-    assert.match(out, /## FAQ/);
+    assert.equal(out, '');
     assert.equal(queries.at(-1), 'FAQ');
     assert.ok(myMemoryCalls > 2);
     assert.equal(snapshot().passthroughs - before.passthroughs, 1);
     assert.ok(snapshot().chunks - before.chunks > 0);
-    assert.equal(snapshot().hits - before.hits, 1);
+    assert.equal(snapshot().hits - before.hits, 0);
   });
 
   test('nomina il passthrough nel sommario della cascata', async () => {
@@ -266,12 +265,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.match(summary, /Tier passthrough \(chunk/);
   });
 
-  test('documenta la soglia dei chunk con la misura del corpus che la sostiene (#1320/FU-025)', () => {
+  test('documenta che ogni chunk traducibile deve essere tradotto', () => {
     const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
-    assert.match(source, /const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;/);
-    assert.match(source, /blog-body:\s+15'476 file, 46'524 campi, 48'298 chunk/);
-    assert.match(source, /blog-body-ch:\s+8'388 file, 25'164 campi, 25'589 chunk/);
-    assert.match(source, /totale:\s+23'864 file, 71'688 campi, 73'887 chunk/);
+    assert.match(source, /Anche un eco breve invalida l'intero campo/);
+    assert.doesNotMatch(source, /MIN_SUBSTANTIVE_PASSTHROUGH_WORDS/);
   });
 
   // ── IL VERSO INVERSO: cio' che NON deve cambiare ───────────────────────────

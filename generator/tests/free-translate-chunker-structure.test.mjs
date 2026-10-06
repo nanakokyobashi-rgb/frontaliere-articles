@@ -118,6 +118,19 @@ test('il chunker conserva separatori, round-trip e limite per righe lunghe', () 
   assert.equal(_recomposeChunkParts(longLineChunks), longLine);
 });
 
+test('non divide URL o placeholder opachi e fallisce chiuso se superano il limite', () => {
+  const longUrl = `https://${'x'.repeat(80)}.example.invalid/path`;
+  assert.throws(
+    () => _chunkAtSentences(`testo introduttivo ${longUrl} testo finale`, 40),
+    (error) => error?.code === 'ERR_OPAQUE_SPAN_TOO_LARGE',
+  );
+  const longPlaceholder = `{{${'token'.repeat(20)}}}`;
+  assert.throws(
+    () => _chunkAtSentences(`testo ${longPlaceholder} finale`, 40),
+    (error) => error?.code === 'ERR_OPAQUE_SPAN_TOO_LARGE',
+  );
+});
+
 test('il ramo lungo MyMemory traduce una riga per richiesta e ricompone i separatori', async () => {
   const source = makeReproductionBody();
   const { calls, translated } = await translateWithStub(source, (chunk) => chunk);
