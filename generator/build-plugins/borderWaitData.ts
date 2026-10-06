@@ -63,6 +63,26 @@ export type BorderCrossingSlug =
   | 'dumenza-cassinone'
   | 'camedo'
   | 'piaggio-valmara'
+  // Francia — Basel-Landschaft/Soletta/Basilea Città
+  | 'biel-benken-leymen'
+  | 'neuwiller-benken'
+  | 'neuwiller-allschwil'
+  | 'neuwiller-schonenbuch'
+  | 'allschwil-hegenheim'
+  | 'battwil-leymen'
+  | 'rodersdorf-leymen'
+  | 'rodersdorf-biederthal'
+  | 'kleinlutzel-kiffis'
+  | 'basel-saint-louis-a35'
+  | 'basel-bourgfelden-burgfelderstrasse'
+  | 'basel-saint-louis-elsasserstrasse'
+  | 'basel-saint-louis-flughafenstrasse'
+  | 'basel-huningue-kohlenstrasse'
+  // Francia — Giura
+  | 'lucelle'
+  | 'miecourt-courtavon'
+  // Italia — Grigioni
+  | 'mustair-taufers'
   // Germania (issue #4889, corridor 1 of 4)
   | 'basel-weil-am-rhein-hiltalingerstrasse'
   | 'basel-weil-am-rhein-autostrada-a2-a5'
@@ -225,6 +245,7 @@ export type BorderCrossingRegion =
   | 'ticino-varese'
   | 'ticino-verbano'
   | 'basilea-germania'
+  | 'basilea-francia'
   | 'argovia-germania'
   | 'zurigo-germania'
   | 'sciaffusa-germania'
@@ -237,12 +258,14 @@ export type BorderCrossingRegion =
   | 'vaud-francia'
   | 'neuchatel-francia'
   | 'giura-francia'
+  | 'grigioni-italia'
   | 'vallese-francia';
 
 export const BORDER_WAIT_LOCALES: readonly BorderWaitLocale[] = ['it', 'en', 'de', 'fr'] as const;
 
 /**
- * Full crossing registry (134) — must match ALL_BORDER_CROSSING_IDS in
+ * Full crossing registry (151) — must match the corpus border crossing
+ * registry for the routes and ranking consumer.
  * router.ts. New crossing → append its slug here too (see "Adding a new
  * crossing" checklist above BorderCrossingRegion, step 5).
  */
@@ -273,6 +296,21 @@ export const BORDER_WAIT_CROSSINGS: readonly BorderCrossingSlug[] = [
   'dumenza-cassinone',
   'camedo',
   'piaggio-valmara',
+  // Francia — BL (5), SO (4), BS (5)
+  'biel-benken-leymen',
+  'neuwiller-benken',
+  'neuwiller-allschwil',
+  'neuwiller-schonenbuch',
+  'allschwil-hegenheim',
+  'battwil-leymen',
+  'rodersdorf-leymen',
+  'rodersdorf-biederthal',
+  'kleinlutzel-kiffis',
+  'basel-saint-louis-a35',
+  'basel-bourgfelden-burgfelderstrasse',
+  'basel-saint-louis-elsasserstrasse',
+  'basel-saint-louis-flughafenstrasse',
+  'basel-huningue-kohlenstrasse',
   // Germania — BS (7)
   'basel-weil-am-rhein-hiltalingerstrasse',
   'basel-weil-am-rhein-autostrada-a2-a5',
@@ -391,6 +429,10 @@ export const BORDER_WAIT_CROSSINGS: readonly BorderCrossingSlug[] = [
   'boncourt-delle',
   'fahy-abbevillers',
   'goumois',
+  'lucelle',
+  'miecourt-courtavon',
+  // Italia — Grigioni
+  'mustair-taufers',
   // Francia — VS (3)
   'le-chatelard-vallorcine',
   'saint-gingolph',
@@ -437,6 +479,20 @@ export const BORDER_CROSSING_DISPLAY: Record<BorderCrossingSlug, string> = {
   'dumenza-cassinone': 'Dumenza Cassinone',
   camedo: 'Camedo (Re-Centovalli)',
   'piaggio-valmara': 'Piaggio Valmara (Cannobio-Brissago)',
+  'biel-benken-leymen': 'Biel-Benken – Leymen',
+  'neuwiller-benken': 'Neuwiller – Benken',
+  'neuwiller-allschwil': 'Neuwiller – Allschwil',
+  'neuwiller-schonenbuch': 'Neuwiller – Schönenbuch',
+  'allschwil-hegenheim': 'Allschwil – Hégenheim',
+  'battwil-leymen': 'Bättwil – Leymen',
+  'rodersdorf-leymen': 'Rodersdorf – Leymen',
+  'rodersdorf-biederthal': 'Rodersdorf – Biederthal',
+  'kleinlutzel-kiffis': 'Kleinlützel – Kiffis',
+  'basel-saint-louis-a35': 'Basel – Saint-Louis, A35',
+  'basel-bourgfelden-burgfelderstrasse': 'Basel – Bourgfelden, Burgfelderstrasse',
+  'basel-saint-louis-elsasserstrasse': 'Basel – Saint-Louis, Elsässerstrasse',
+  'basel-saint-louis-flughafenstrasse': 'Basel – Saint-Louis, Flughafenstrasse',
+  'basel-huningue-kohlenstrasse': 'Basel – Huningue, Kohlenstrasse',
   'basel-weil-am-rhein-hiltalingerstrasse': 'Basel – Weil am Rhein, Hiltalingerstrasse',
   'basel-weil-am-rhein-autostrada-a2-a5': 'Basel – Weil am Rhein, Autostrada A2/A5',
   'basel-weil-am-rhein-freiburgerstrasse': 'Basel – Weil am Rhein, Freiburgerstrasse',
@@ -542,6 +598,9 @@ export const BORDER_CROSSING_DISPLAY: Record<BorderCrossingSlug, string> = {
   'boncourt-delle': 'Boncourt-Delle (A16)',
   'fahy-abbevillers': 'Fahy-Abbévillers',
   goumois: 'Goumois',
+  lucelle: 'Lucelle',
+  'miecourt-courtavon': 'Miécourt – Courtavon',
+  'mustair-taufers': 'Müstair – Taufers',
   'le-chatelard-vallorcine': 'Le Châtelard-Vallorcine',
   'saint-gingolph': 'Saint-Gingolph',
   'morgins-chatel': 'Morgins-Châtel (Pas de Morgins)',
@@ -581,6 +640,20 @@ export const CROSSING_TO_REGION: Record<BorderCrossingSlug, BorderCrossingRegion
   'dumenza-cassinone': 'ticino-varese',
   camedo: 'ticino-verbano',
   'piaggio-valmara': 'ticino-verbano',
+  'biel-benken-leymen': 'basilea-francia',
+  'neuwiller-benken': 'basilea-francia',
+  'neuwiller-allschwil': 'basilea-francia',
+  'neuwiller-schonenbuch': 'basilea-francia',
+  'allschwil-hegenheim': 'basilea-francia',
+  'battwil-leymen': 'basilea-francia',
+  'rodersdorf-leymen': 'basilea-francia',
+  'rodersdorf-biederthal': 'basilea-francia',
+  'kleinlutzel-kiffis': 'basilea-francia',
+  'basel-saint-louis-a35': 'basilea-francia',
+  'basel-bourgfelden-burgfelderstrasse': 'basilea-francia',
+  'basel-saint-louis-elsasserstrasse': 'basilea-francia',
+  'basel-saint-louis-flughafenstrasse': 'basilea-francia',
+  'basel-huningue-kohlenstrasse': 'basilea-francia',
   'basel-weil-am-rhein-hiltalingerstrasse': 'basilea-germania',
   'basel-weil-am-rhein-autostrada-a2-a5': 'basilea-germania',
   'basel-weil-am-rhein-freiburgerstrasse': 'basilea-germania',
@@ -686,6 +759,9 @@ export const CROSSING_TO_REGION: Record<BorderCrossingSlug, BorderCrossingRegion
   'boncourt-delle': 'giura-francia',
   'fahy-abbevillers': 'giura-francia',
   goumois: 'giura-francia',
+  lucelle: 'giura-francia',
+  'miecourt-courtavon': 'giura-francia',
+  'mustair-taufers': 'grigioni-italia',
   'le-chatelard-vallorcine': 'vallese-francia',
   'saint-gingolph': 'vallese-francia',
   'morgins-chatel': 'vallese-francia',
@@ -806,6 +882,7 @@ export const BORDER_WAIT_REGIONS: readonly BorderCrossingRegion[] = [
   'ticino-varese',
   'ticino-verbano',
   'basilea-germania',
+  'basilea-francia',
   'argovia-germania',
   'zurigo-germania',
   'sciaffusa-germania',
@@ -818,6 +895,7 @@ export const BORDER_WAIT_REGIONS: readonly BorderCrossingRegion[] = [
   'vaud-francia',
   'neuchatel-francia',
   'giura-francia',
+  'grigioni-italia',
   'vallese-francia',
 ] as const;
 
@@ -830,6 +908,7 @@ export const BORDER_REGION_DISPLAY: Record<BorderCrossingRegion, string> = {
   'ticino-varese': 'Ticino — Varese',
   'ticino-verbano': 'Ticino — Verbano',
   'basilea-germania': 'Basilea — Germania',
+  'basilea-francia': 'Basilea — Francia',
   'argovia-germania': 'Argovia — Germania',
   'zurigo-germania': 'Zurigo — Germania',
   'sciaffusa-germania': 'Sciaffusa — Germania',
@@ -842,6 +921,7 @@ export const BORDER_REGION_DISPLAY: Record<BorderCrossingRegion, string> = {
   'vaud-francia': 'Vaud — Francia',
   'neuchatel-francia': 'Neuchâtel — Francia',
   'giura-francia': 'Giura — Francia',
+  'grigioni-italia': 'Grigioni — Italia',
   'vallese-francia': 'Vallese — Francia',
 };
 
@@ -860,6 +940,7 @@ export const REGION_TO_COUNTRY: Record<BorderCrossingRegion, 'IT' | 'DE' | 'AT' 
   'ticino-varese': 'IT',
   'ticino-verbano': 'IT',
   'basilea-germania': 'DE',
+  'basilea-francia': 'FR',
   'argovia-germania': 'DE',
   'zurigo-germania': 'DE',
   'sciaffusa-germania': 'DE',
@@ -872,6 +953,7 @@ export const REGION_TO_COUNTRY: Record<BorderCrossingRegion, 'IT' | 'DE' | 'AT' 
   'vaud-francia': 'FR',
   'neuchatel-francia': 'FR',
   'giura-francia': 'FR',
+  'grigioni-italia': 'IT',
   'vallese-francia': 'FR',
 };
 
@@ -936,7 +1018,7 @@ export function buildArchivePath(
  * services/router.ts so unknown `/traffico-dogane/...` URLs resolve to a known
  * route (guida/border sub-tab) instead of falling through to 404.
  *
- * Count: 4 locales × (1 root + 17 regional + 134 crossings) = 608 canonical paths.
+ * Count: 4 locales × (1 root + 19 regional + 151 crossings) = 684 canonical paths.
  */
 export const BORDER_WAIT_ROUTES: readonly string[] = (() => {
   const out: string[] = [];
