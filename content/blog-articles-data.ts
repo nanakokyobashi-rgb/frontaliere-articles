@@ -39939,6 +39939,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-tassa-ingresso-rischi-comuni',
+ category: 'fiscale',
+ date: '2026-10-06T08:21:29.058Z',
+ image: '/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

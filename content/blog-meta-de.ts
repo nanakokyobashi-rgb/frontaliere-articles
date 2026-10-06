@@ -12673,6 +12673,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.disoccupazione-settembre-ticino-2026.title': 'Arbeitslosigkeit in der Schweiz im September 2026 stabil bei 3%',
     'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'Im September bleibt die Arbeitslosigkeit in der Schweiz bei 3%, im Tessin bei 2,9% mit 4\'800 Arbeitslosen, während die Zahl der offenen Stellen auf 44\'200 steigt.',
     'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Straßenansicht von Lugano mit Pendlerinnen und Pendler sowie einem dezenten Zeichen des Arbeitsamts, das den ticinesischen Arbeitsmarkt zeigt.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Grenzgänger: Eintrittssteuer, Rückvergütungen und Doppelbesteuerung',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'Die Schweiz führt eine Eintrittssteuer von bis zu 4mila Franken für Arbeitnehmer und Selbstständige ein. Über 900 Millionen jährlich für Arbeitslose wird diskutiert, und für die Grenzgemeinden besteht das Risiko von 120 Millionen.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Panoramablick auf Lugano und seinen See, mit modernen Gebäuden, die den Schweizer Finanzkontext symbolisieren.',
 };
 
 export default blogMetaDe;

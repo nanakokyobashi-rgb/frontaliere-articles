@@ -100052,6 +100052,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-tassa-ingresso-rischi-comuni': {
+    title: 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    description: 'Scopri le novità per i frontalieri: tassa d\'ingresso fino a 4mila franchi, il no svizzero ai 900 milioni per i disoccupati e il rischio di 120 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, ingresso, ristorni, doppia',
+    ogTitle: 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    ogDescription: 'Un\'analisi approfondita sulle recenti sfide per i frontalieri: dalla tassa d\'ingresso fino a 4mila franchi al dibattito sui 900 milioni per i disoccupati e il rischio di 120 milioni per i comuni di frontiera. Il Nuovo Accordo Frontalieri',
+    canonicalPath: '/articoli-frontaliere/frontalieri-tassa-ingresso-rischi-comuni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: tassa ingresso, ristorni e doppia imposizione",
+      "description": "Scopri le novità per i frontalieri: tassa d'ingresso fino a 4mila franchi, il no svizzero ai 900 milioni per i disoccupati e il rischio di 120 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano e del suo lago, con edifici moderni che simboleggiano il contesto finanziario svizzero."
+      },
+      "datePublished": "2026-10-06T08:21:29+00:00",
+      "dateModified": "2026-10-06T08:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieri-tassa-ingresso-rischi-comuni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

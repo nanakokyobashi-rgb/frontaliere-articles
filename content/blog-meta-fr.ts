@@ -12676,6 +12676,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.disoccupazione-settembre-ticino-2026.title': 'Le chômage en Suisse devrait rester stable à 3 % en septembre 2026.',
     'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'En septembre, le chômage en Suisse est resté à 3 %, tandis qu\'au Tessin, il était de 2,9 % avec 4 800 chômeurs, tandis que le nombre d\'offres d\'emploi est passé à 44 200.',
     'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Vue d\'une rue de Lugano avec des travailleurs et un panneau discret du bureau de placement, illustrant le marché du travail tessinois.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Frontaliers : taxe d’entrée, rétrocessions et double imposition',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'La Suisse introduit une taxe d\'entrée pouvant atteindre 4mila francs pour les travailleurs et les indépendants. Il est question de 900 millions annuels pour les chômeurs et il y a un risque de 120 millions pour les communes frontalières.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Vue panoramique de Lugano et de son lac, avec des bâtiments modernes symbolisant le contexte financier suisse.',
 };
 
 export default blogMetaFr;
