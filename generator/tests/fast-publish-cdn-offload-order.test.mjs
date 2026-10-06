@@ -44,7 +44,11 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const SRC = readFileSync(resolve(here, '../../scripts/publish-article-fast.mjs'), 'utf8');
+// La catena (render, archivio, offload) vive in article-render-pipeline.mjs,
+// condivisa da publish-article-fast.mjs e publish-section-pages.mjs: l'ordine
+// si prova li', e che i due publisher la usino si prova sotto.
+const SRC = readFileSync(resolve(here, '../../scripts/lib/article-render-pipeline.mjs'), 'utf8');
+const PUBLISHERS = ['publish-article-fast.mjs', 'publish-section-pages.mjs'].map((f) => [f, readFileSync(resolve(here, '../../scripts', f), 'utf8')]);
 const WF = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
 
 test("l'archivio dell'hub è renderizzato prima dell'offload CDN", () => {
@@ -61,6 +65,17 @@ test("l'archivio dell'hub è renderizzato prima dell'offload CDN", () => {
     "l'archivio va renderizzato PRIMA dell'offload CDN, altrimenti i suoi /assets restano "
       + 'same-origin e rispondono 404 (issue #5270)',
   );
+});
+
+test('i publisher usano la catena condivisa, non una copia dei suoi passi', () => {
+  for (const [name, src] of PUBLISHERS) {
+    assert.match(src, /renderSectionArticlePipeline\(\{/, `${name} non chiama piu' la catena condivisa`);
+    assert.doesNotMatch(src, /offload-generated-images-cdn\.mjs'/, `${name} rilancia l'offload per conto suo`);
+    assert.doesNotMatch(src, /await renderArticleHubPages\(/, `${name} rende l'archivio fuori dalla catena`);
+  }
+  // Le pagine in piu' di un publisher (landing e hub cantonali) entrano PRIMA dell'offload.
+  const hook = SRC.indexOf('await beforeOffload(');
+  assert.ok(hook > SRC.indexOf('await renderArticleHubPages(') && hook < SRC.indexOf("'offload-generated-images-cdn.mjs'"));
 });
 
 test("l'archivio finisce nello stesso dist che l'offload percorre", () => {

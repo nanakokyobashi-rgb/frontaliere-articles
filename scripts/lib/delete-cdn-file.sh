@@ -15,9 +15,9 @@
 # generico sul bucket.
 #
 # rclone: lo riusa se c'e' gia' (PATH, o il binario che upload-cdn-file.sh ha
-# installato in $RUNNER_TEMP/rclone-bin nello stesso job) e NON lo installa —
-# il chiamante (scripts/publish-section-edge.mjs) carica sempre il puntatore
-# prima di cancellare. Senza rclone: warning ed exit 0, come il fratello.
+# installato in $RUNNER_TEMP/rclone-bin nello stesso job), ma sa anche
+# installarlo da solo. Le pagine cantonali possono avere una release senza
+# hero da caricare: il cleanup non puo' dipendere da un upload precedente.
 #
 # Stessa postura di upload-cdn-file.sh: ogni fallimento di runtime e' un
 # warning ed exit 0; chi vuole sapere se la cancellazione e' avvenuta legge
@@ -50,8 +50,28 @@ if [ -x "$rtmp/rclone-bin/rclone" ]; then
   export PATH="$rtmp/rclone-bin:$PATH"
 fi
 if ! command -v rclone >/dev/null 2>&1; then
-  echo "::warning::[cdn-delete] rclone assente — $cdn_key non cancellata"
-  exit 0
+  echo "[cdn-delete] rclone non trovato — installo il binario statico…"
+  # Come in upload-cdn-file.sh, unzip puo' uscire 1 dopo avere estratto un
+  # binario valido: il contratto e' il file verificato, non il solo exit code.
+  if curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 15 --max-time 120 \
+       https://downloads.rclone.org/rclone-current-linux-amd64.zip -o "$rtmp/rclone.zip"; then
+    unzip_rc=0
+    unzip -q -o -j "$rtmp/rclone.zip" '*/rclone' -d "$rtmp/rclone-bin" || unzip_rc=$?
+    if [ "$unzip_rc" -eq 1 ]; then
+      echo "::warning::[cdn-delete] archivio rclone estratto con warning (exit 1)"
+    elif [ "$unzip_rc" -ge 2 ]; then
+      echo "::warning::[cdn-delete] estrazione rclone fallita (unzip exit $unzip_rc)"
+    fi
+    if [ "$unzip_rc" -lt 2 ] && [ -s "$rtmp/rclone-bin/rclone" ] \
+       && chmod +x "$rtmp/rclone-bin/rclone" 2>/dev/null \
+       && timeout -k 5 30 "$rtmp/rclone-bin/rclone" version >/dev/null 2>&1; then
+      export PATH="$rtmp/rclone-bin:$PATH"
+    fi
+  fi
+  if ! command -v rclone >/dev/null 2>&1; then
+    echo "::warning::[cdn-delete] installazione rclone fallita — $cdn_key non cancellata"
+    exit 0
+  fi
 fi
 
 attempt_ok=0

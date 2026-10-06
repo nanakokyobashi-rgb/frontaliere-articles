@@ -118,9 +118,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import os from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
 // Output-boundary sanitisation (see scripts/lib/sanitize-control-chars.mjs).
 // The renderer is engine/ogPagesPlugin.ts, which arrives by mirror and is not
 // editable from this repo, so the guard sits where THIS script writes the
@@ -129,14 +127,12 @@ import { spawnSync } from 'node:child_process';
 // same two escaped inside the NewsArticle `headline`/`caption` and the
 // BreadcrumbList `name` — structured data served to crawlers, not to a browser
 // that would swallow them.
-import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
-import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
+import { heroCdnUploads, renderSectionArticlePipeline } from './lib/article-render-pipeline.mjs';
 // Sezioni valide e shard Pages vengono dal core (lista ATTIVA), come in
 // fast-publish-article.yml: niente coppia frontaliere/svizzera scritta a mano.
 import { shardOf } from './ci/fast-publish-section.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 
 function parseArgs(argv) {
   const out = { ids: [] };
@@ -192,274 +188,23 @@ async function main() {
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
 
-  // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
-  // top-level evaluation (an IIFE, not a function call re-read per use), to
-  // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). deploy.yml's
-  // build-locale job hardcodes ASSET_CDN: 'https://cdn.frontaliereticino.ch'
-  // for every real deploy build (including the `it` shard whose vite build
-  // renders this exact article HTML) — matching that here is required for
-  // byte-identity, not optional config. Must be set BEFORE the first import
-  // of ogPagesPlugin.ts/constants.ts below (module evaluation is cached —
-  // setting it later would be a no-op on a second call in the same process,
-  // and this script only ever does ONE render per invocation anyway).
-  // Without this, CDN_PRECONNECT_HINT is empty at render time, ogPagesPlugin
-  // never emits its own preconnect (normally placed right before the
-  // blog-chunk preload links), and step 7's offload script — which DOES get
-  // CDN_BASE below — then finds no existing same-origin preconnect to dedup
-  // against and injects a redundant preconnect+dns-prefetch pair of its own
-  // at the very top of <head> instead: a real, confirmed byte-identity
-  // divergence from production (see scripts/check-article-byte-identity.mjs),
-  // not a live-staleness artifact — verified by tracing both code paths and
-  // reproducing the exact live vs. fast-path <head> diff.
-  process.env.ASSET_CDN = CDN_BASE;
-
-  // Configure the site-shell contract. Must come AFTER the ASSET_CDN
-  // assignment above and BEFORE any engine import: host/constants.ts derives
-  // CDN_PRECONNECT_HINT from process.env.ASSET_CDN at module-evaluation time
-  // (an IIFE, not a per-use read), and the bootstrap imports it. Loading the
-  // bootstrap first leaves CDN_PRECONNECT_HINT empty, ogPagesPlugin then emits
-  // no preconnect, and step 7's offload script — finding no same-origin
-  // preconnect to dedup against — injects its own preconnect+dns-prefetch pair
-  // at the top of <head> instead. That is a real byte divergence from the full
-  // build, confirmed by diffing this script's output against the main repo's
-  // for the same article id.
-  //
-  // In the main repo this ordering is implicit: every `build-plugins/*` shim
-  // imports the bootstrap as a side effect. Here the host tree is ours and the
-  // wiring has to be explicit.
-  await import('../host/siteShellBootstrap.ts');
-
-  // Pin the process timezone to match the CI runner.
-  //
-  // No longer load-bearing: ogPagesPlugin's byline formatters used to read the
-  // calendar day through local `new Date(...)` accessors, so a CET developer
-  // machine and a UTC runner disagreed by a day for midnight-CET stamps. That
-  // was a real bug shipping on ~142 live articles (machine-readable `datetime`
-  // vs visible text off by one) and is fixed at the source in the same PR —
-  // both formatters now parse the ISO string's own fields, and the rendered
-  // bytes are identical under TZ=UTC and TZ=America/New_York.
-  //
-  // The pin stays as defence in depth: it keeps this script's environment
-  // identical to the deploy build's for any date handling added later, at zero
-  // cost. Must be set before the dynamic import below (Node reads TZ once).
-  process.env.TZ = 'UTC';
-
-  // ── Step 0: make public/images visible to resolveImagePath's existence
-  // checks (see the "Known gap" note in the file header). Symlink, not copy
-  // — ~3.5k files, no need to duplicate them per invocation. Torn down again
-  // right after step 1 — see the DANGER note above for why its lifetime must
-  // stay confined to the renderArticlePages call only.
-  const scratchImagesLink = path.join(distDir, 'images');
+  // La catena di render (passi 0-7b, nell'ordine che conta) vive in
+  // scripts/lib/article-render-pipeline.mjs, condivisa col publisher R2 delle
+  // sezioni cantonali: vedi il suo header e i commenti passo per passo.
+  let pipeline;
   try {
-    fs.symlinkSync(path.join(ROOT_DIR, 'public', 'images'), scratchImagesLink, 'dir');
+    pipeline = await renderSectionArticlePipeline({
+      rootDir: ROOT_DIR,
+      distDir,
+      section: args.section,
+      ids: args.ids,
+      logPrefix: 'publish-article-fast',
+    });
   } catch (err) {
-    if (err.code !== 'EEXIST') throw err;
-  }
-
-  // ── Step 1: render the 4 locale pages (Deliverables 1+2, #4837 stream A) ──
-  const { renderArticlePages } = await import('../engine/ogPagesPlugin.ts');
-  const { written, entries } = await renderArticlePages({
-    rootDir: ROOT_DIR,
-    distDir,
-    section: args.section,
-    onlyArticleIds: args.ids,
-  });
-
-  // Remove the symlink itself (unlink — the final path component IS the
-  // symlink, so this never follows it into public/images). Must happen
-  // before any of steps 2-7, none of which need distDir/images to exist.
-  fs.rmSync(scratchImagesLink, { force: true });
-
-  const renderedIds = new Set(entries.map((entry) => entry.articleId));
-  const missingIds = args.ids.filter((id) => !renderedIds.has(id));
-  if (missingIds.length > 0) {
-    console.error(
-      `[publish-article-fast] article id(s) not found in section "${args.section}": ${missingIds.join(', ')} — check --ids/--section`,
-    );
+    console.error(`[publish-article-fast] ${err.message}`);
     process.exit(1);
   }
-
-  // ── Steps 2-5: flat-redirect -> contextual links -> hreflang -> hero-image CDN ──
-  const { buildFlatBridgeFromSibling } = await import('../engine/flatHtmlRedirect.ts');
-  const { injectContextualLinks } = await import('../engine/blogContextualLinksPlugin.ts');
-  const { transformHreflang } = await import('../engine/hreflangPostprocess.ts');
-  const { rewriteBlogImageRefs } = await import('../engine/blogImageCdnFinalize.ts');
-  const { BASE_URL } = await import('../host/constants.ts');
-
-  const locales = ['it', 'en', 'de', 'fr'];
-  for (const entry of entries) {
-    for (const locale of locales) {
-      const indexRel = entry.paths[locale];
-      const flatRel = entry.flatPaths[locale];
-      if (!indexRel || !flatRel) continue; // locale not rendered (defensive — both sections render all 4)
-
-      const indexAbs = path.join(distDir, indexRel);
-      const flatAbs = path.join(distDir, flatRel);
-      const slashUrl = entry.urls[locale];
-
-      const freshIndexHtml = fs.readFileSync(indexAbs, 'utf-8');
-
-      // 2. flat-redirect transform (built from the fresh, pre-postprocess content)
-      const bridgeHtml = buildFlatBridgeFromSibling(freshIndexHtml, slashUrl);
-
-      // 3. contextual links (index.html only)
-      const linked = injectContextualLinks(freshIndexHtml, locale);
-      let indexHtml = linked.html;
-
-      // 4. hreflang postprocess — all 4 locale index.html for this article
-      // already exist in distDir, so existsCheck can hit the real filesystem.
-      const hreflangResult = transformHreflang(indexHtml, distDir, BASE_URL, (absPath) => fs.existsSync(absPath));
-      if (hreflangResult) indexHtml = hreflangResult.html;
-
-      // 5. hero-image CDN rewrite — applied to both files, matching
-      // blogImageCdnFinalizePlugin's unconditional whole-dist walk.
-      indexHtml = rewriteBlogImageRefs(indexHtml);
-      const finalBridgeHtml = rewriteBlogImageRefs(bridgeHtml);
-
-      // Last transform before the bytes hit disk, so it covers steps 1-5 and
-      // anything a later step inserts through them. A clean page comes back
-      // byte-identical, which keeps the byte-identity contract with the full
-      // build intact (scripts/check-article-byte-identity.mjs).
-      const indexClean = sanitizeHtmlDocument(indexHtml);
-      reportStrippedControlChars(indexAbs, indexHtml, indexClean);
-      fs.writeFileSync(indexAbs, indexClean, 'utf-8');
-      const flatClean = sanitizeHtmlDocument(finalBridgeHtml);
-      reportStrippedControlChars(flatAbs, finalBridgeHtml, flatClean);
-      fs.writeFileSync(flatAbs, flatClean, 'utf-8');
-    }
-  }
-
-  // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
-  // Re-renders each section's `/tutti/` archive + pagination into the SAME
-  // scratch distDir so the newly-published article is immediately LISTED,
-  // not just reachable by direct URL — otherwise it stays orphaned (no
-  // internal link points at it) until the next full deploy. Uses the SAME
-  // renderArticleHubPagesCore the full build's emitSeoHubs calls (see
-  // engine/articleHubPagesPlugin.ts, #4881), so hub-page bytes are provably
-  // identical to what a full build emits for this section — no second
-  // implementation, no copy-pasted rendering chrome.
-  //
-  // Not postprocessed through steps 2-5 above: those are article-body
-  // specific (flat-redirect bridge, contextual links keyed off THIS
-  // article's own related-articles picks, hero-image CDN rewrite) and do
-  // not apply to an archive listing page (no hero image, no flat bridge).
-  //
-  // BUT IT MUST RUN BEFORE THE CDN OFFLOAD, and used to run after (issue
-  // #5270). The archive HTML carries the same hardcoded `/assets/...`
-  // strings the article pages do (articleHubPagesPlugin.ts emits
-  // `src="/assets/${entryJs}"` as plain text). The offload below is the ONLY
-  // pass that turns those into CDN URLs — and no origin on the serving path
-  // hosts `/assets` at all (`https://frontaliereticino.ch/assets/index-entry.js`
-  // → 404), so an archive page that misses the rewrite ships with no CSS, no
-  // SPA bundle and no AdSense loader.
-  //
-  // A full build is immune (there the offload runs after the whole build,
-  // archive included) and the site repo's own copy of this script was fixed in
-  // valerielinc-ops/frontaliere-si-o-no#5271 — so the live archive healed
-  // whenever the SITE published and broke again whenever THIS repo did, which
-  // is exactly why it looked like a deploy-ordering problem for a day.
-  //
-  // The previous ordering grouped this under "not postprocessed through steps
-  // 2-6". That rationale is right for steps 2-5, which are per-article, and
-  // wrong for the offload, which is a whole-dist pass every emitted page
-  // needs — archive included.
-  const { renderArticleHubPages } = await import('../engine/articleHubPagesPlugin.ts');
-  const hubResult = await renderArticleHubPages({
-    rootDir: ROOT_DIR,
-    distDir,
-    section: args.section,
-  });
-
-  // The archive lists every article's TITLE, so it carries the same control
-  // bytes the article page does — one poisoned title contaminates every page
-  // of the /tutti/ chain in all 4 locales, not just its own URL. Steps 2-5
-  // deliberately skip these pages (they are article-body transforms); this is
-  // not an article-body transform, so it does not skip them. Rewritten only
-  // when something actually changed, so a clean archive keeps its bytes.
-  for (const locale of locales) {
-    for (const rel of hubResult.pathsByLocale[locale] ?? []) {
-      const abs = path.join(distDir, rel);
-      if (!fs.existsSync(abs)) continue;
-      const html = fs.readFileSync(abs, 'utf-8');
-      const clean = sanitizeHtmlDocument(html);
-      reportStrippedControlChars(abs, html, clean);
-      if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
-    }
-  }
-
-  // ── Step 7: offload-generated-images-cdn.mjs, unmodified, via subprocess ──
-  // The script hardcodes distDir = path.resolve(process.cwd(), 'dist'), so we
-  // spawn it with cwd = a temp dir containing a `dist` symlink to our real
-  // scratch --out dir — the same trick, not a fork of its logic.
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'publish-article-fast-'));
-  try {
-    fs.symlinkSync(distDir, path.join(tmpDir, 'dist'), 'dir');
-    const offloadScript = path.join(ROOT_DIR, 'scripts', 'offload-generated-images-cdn.mjs');
-    const result = spawnSync(process.execPath, [offloadScript], {
-      cwd: tmpDir,
-      env: { ...process.env, CDN_BASE },
-      stdio: 'inherit',
-    });
-    if (result.status !== 0) {
-      console.error(
-        `[publish-article-fast] offload-generated-images-cdn.mjs exited ${result.status} — ` +
-          'unexpected (the script catches its own errors and always exits 0); dist left as rendered pre-offload',
-      );
-    }
-  } finally {
-    fs.rmSync(tmpDir, { recursive: true, force: true });
-  }
-
-  // ── Step 7b: gli /assets/ appena riscritti sul CDN esistono davvero? ──
-  // L'offload riscrive OGNI `/assets/<file>` su ${CDN_BASE} senza guardia di
-  // esistenza. Per og/data/images l'ordine del deploy la rende superflua (i
-  // byte sono stati caricati prima); per /assets/ no: questo repo non builda
-  // né spinge dist/assets, quindi quei riferimenti puntano al bundle
-  // dell'ULTIMO deploy del sito. Da #764 il contratto trasporta anche
-  // `/assets/partnerize-tag.js`, emesso dal SITO: se non è sul CDN, ogni
-  // pagina pubblicata qui lo carica a vuoto — nessuna eccezione, nessun gate
-  // rosso, zero tracking affiliato. NON-FATAL e fail-open per costruzione
-  // (vedi scripts/lib/cdn-asset-existence.mjs): non si rinuncia a pubblicare
-  // un articolo perché manca uno script di tracking, ma il 404 smette di
-  // essere invisibile.
-  //
-  // Assenza di URL CDN NON vuol dire «niente da riscrivere» (#817): l'offload
-  // e' non-fatale e su qualunque errore lascia dist intatto ed esce 0, quindi
-  // i due mondi producevano la stessa riga rassicurante. La discriminante e'
-  // il `/assets/` SAME-ORIGIN superstite, che si raccoglie nella stessa
-  // passata.
-  try {
-    const { collectCdnAssetRefs, hasSameOriginAssetRef, verifyCdnAssetRefs, formatCdnAssetReport, formatOffloadCoverageReport } =
-      await import('./lib/cdn-asset-existence.mjs');
-    const refs = new Set();
-    const sameOriginFiles = [];
-    const collectFrom = (dir) => {
-      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-        const fp = path.join(dir, e.name);
-        if (e.isDirectory()) collectFrom(fp);
-        else if (e.isFile() && path.extname(fp) === '.html') {
-          const html = fs.readFileSync(fp, 'utf-8');
-          for (const url of collectCdnAssetRefs(html, CDN_BASE)) refs.add(url);
-          if (hasSameOriginAssetRef(html)) sameOriginFiles.push(path.relative(distDir, fp));
-        }
-      }
-    };
-    collectFrom(distDir);
-    for (const line of formatOffloadCoverageReport({ cdnRefCount: refs.size, sameOriginFiles })) {
-      console.log(line);
-    }
-    if (refs.size > 0) {
-      // Il margine si misura qui, con l'orologio vero: verifyCdnAssetRefs usa
-      // il proprio `now` iniettabile, e un tetto di cui non si sa quanto avanza
-      // non e' un tetto misurato (issue #1219).
-      const startedAt = Date.now();
-      const results = await verifyCdnAssetRefs({ urls: [...refs] });
-      const elapsedMs = Date.now() - startedAt;
-      for (const line of formatCdnAssetReport(results, '[cdn-asset-check]', { elapsedMs })) console.log(line);
-    }
-  } catch (err) {
-    console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
-  }
+  const { written, entries, hubResult, locales } = pipeline;
 
   // ── Summary JSON for stream B (shard push) / stream C (workflow) ──
   const sectionShardKey = args.shardKey;
@@ -496,47 +241,9 @@ async function main() {
     };
   });
 
-  // Derive cdnUploads from each entry.img's ACTUAL resolved directory — NOT a
-  // hardcoded `images/blog/`. resolveImagePath() (ogPagesPlugin.ts) resolves
-  // most articles to a per-article /images/blog/<slug>.<ext> hero, but a
-  // meaningful minority (47/3018 in data/blog-articles-data.ts, e.g. the
-  // shared `lugano-view.webp` stock photo used by 11 articles) resolve to a
-  // shared generic photo under /images/places/<name>.<ext> instead. Both
-  // directories follow the same `thumbnails/<basename>-480w.webp` sibling
-  // convention (confirmed: public/images/places/thumbnails/ exists with the
-  // same naming as public/images/blog/thumbnails/). Hardcoding `images/blog/`
-  // here would emit a nonexistent local path for every places/-resolved
-  // article, breaking stream B/C's CDN push. DEFAULT_IMG ('/og-image.png',
-  // last-resort fallback, not under images/) has no thumbnail and is already
-  // a static site asset — never listed here.
-  const cdnUploadsByKey = new Map();
-  for (const entry of entries) {
-    const heroImgRel = entry.img.replace(/^\/+/, ''); // e.g. "images/blog/foo.webp" | "images/places/lugano-view.webp"
-    const heroDir = path.dirname(heroImgRel); // e.g. "images/blog" | "images/places"
-    if (heroDir.startsWith('images/') || heroDir === 'images') {
-      const heroExt = path.extname(heroImgRel) || '.webp';
-      const heroBase = path.basename(heroImgRel, heroExt);
-      const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
-      const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
-      if (fs.existsSync(path.join(ROOT_DIR, heroLocal))) {
-        cdnUploadsByKey.set(path.join(heroDir, `${heroBase}${heroExt}`), {
-          local: heroLocal,
-          key: path.join(heroDir, `${heroBase}${heroExt}`),
-        });
-      } else {
-        console.error(`[publish-article-fast] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
-      }
-      if (fs.existsSync(path.join(ROOT_DIR, thumbLocal))) {
-        cdnUploadsByKey.set(path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`), {
-          local: thumbLocal,
-          key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`),
-        });
-      } else {
-        console.error(`[publish-article-fast] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
-      }
-    }
-  }
-  const cdnUploads = [...cdnUploadsByKey.values()];
+  // Hero e thumbnail di ogni articolo reso, dalla directory REALE in cui
+  // l'engine li ha risolti (images/blog o images/places): vedi heroCdnUploads.
+  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, logPrefix: 'publish-article-fast' });
 
   const summary = { id: args.ids.length === 1 ? args.id : null, ids: args.ids, section: args.section, shards, cdnUploads };
   const summaryPath = path.resolve(args.summary);

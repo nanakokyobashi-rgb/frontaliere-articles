@@ -57,6 +57,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { cantonHubCoverage } from './canton-hub-data.mjs';
 
 export const SECTION_REGISTRY_FILE = 'sections/registry.json';
 export const SECTIONS_CATALOG_FILE = 'sections.json';
@@ -202,10 +203,17 @@ function sameSlugs(a, b) {
  * pubblicherebbe ne' la sitemap ne' gli articoli e il Worker servirebbe 404
  * su una sezione dichiarata viva.
  *
+ * Con `missingHubsOf` (lo passa `loadDeclaredRegistry`, che ha il disco) una
+ * sezione `live` viene anche controllata per i dati dei suoi hub tematici.
+ * Un hub assente e' uno stato di rollout incompleto, non un registro
+ * malformato: la sezione viene degradata a `draft` da `effectiveStatuses`.
+ * Un file presente ma illeggibile o incompleto resta invece un errore
+ * bloccante, per non pubblicare dati troncati.
+ *
  * @param {unknown} doc
- * @param {{ all?: Record<string, any>, active?: Record<string, any> }} [core]
+ * @param {{ all?: Record<string, any>, active?: Record<string, any>, missingHubsOf?: (id: string) => string[] }} [core]
  */
-export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE } = {}) {
+export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE, missingHubsOf } = {}) {
   const errors = [];
   if (!isPlainObject(doc)) return ['il registro deve essere un oggetto JSON'];
   for (const key of Object.keys(doc)) if (!TOP_KEYS.has(key)) errors.push(`chiave sconosciuta "${key}" al livello superiore`);
@@ -239,6 +247,13 @@ export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, ac
     if (entry.status === 'live' && !Object.prototype.hasOwnProperty.call(active, id)) {
       errors.push(`${id}: dichiarata live ma non attiva nel core (ACTIVE_CANTON_SECTIONS) — nessuna sua pagina verrebbe pubblicata`);
     }
+    if (entry.status === 'live' && missingHubsOf) {
+      try {
+        missingHubsOf(id);
+      } catch (error) {
+        errors.push(`${id}: dati hub non validi (${error.message})`);
+      }
+    }
     errors.push(...routingErrors(id, entry, all));
   }
   const cycleFrom = redirectCycle(doc.sections);
@@ -255,7 +270,7 @@ export function loadDeclaredRegistry(root, core) {
   } catch (error) {
     throw new Error(`${SECTION_REGISTRY_FILE} illeggibile: ${error.message}`, { cause: error });
   }
-  const errors = declaredRegistryErrors(doc, core);
+  const errors = declaredRegistryErrors(doc, { missingHubsOf: (id) => cantonHubCoverage(root, id).missing, ...core });
   if (errors.length) throw new Error(`${SECTION_REGISTRY_FILE} non valido:\n  ${errors.join('\n  ')}`);
   return doc;
 }
@@ -339,15 +354,18 @@ export function resolveKillSwitch(env = process.env, all = ARTICLE_SECTION_CORE_
 }
 
 /**
- * Stato effettivo per sezione: `live` dichiarato e spento → `draft`.
+ * Stato effettivo per sezione: `live` dichiarato e spento o senza tutti gli
+ * hub → `draft`.
  * @returns {Record<string, { declared: string, status: string, killed: boolean }>}
  */
-export function effectiveStatuses(declared, killSwitch) {
+export function effectiveStatuses(declared, killSwitch, { missingHubsOf } = {}) {
   const killed = new Set(killSwitch.sections);
   return Object.fromEntries(
     Object.entries(declared.sections).map(([id, entry]) => {
       const off = entry.status === 'live' && killed.has(id);
-      return [id, { declared: entry.status, status: off ? 'draft' : entry.status, killed: off }];
+      const missing = entry.status === 'live' && missingHubsOf ? missingHubsOf(id) : [];
+      const unavailable = missing.length > 0;
+      return [id, { declared: entry.status, status: off || unavailable ? 'draft' : entry.status, killed: off }];
     }),
   );
 }

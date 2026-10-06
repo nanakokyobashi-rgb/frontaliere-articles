@@ -1,0 +1,125 @@
+name: reconcile-section-pages
+
+# Riconcilia le pagine ANNUNCIATE delle sezioni cantonali `live` con cio' che
+# R2 ha davvero, e ripubblica le mancanti dispatchando fast-publish-section.yml
+# (piano «sezioni articoli per cantone», P7b). Gemello di
+# reconcile-article-shards.yml per le sezioni servite dal Worker.
+#
+# fast-publish-section.yml pubblica gli articoli del commit che lo fa scattare:
+# un push con piu' commit, una run fallita a meta' o un upload non confermato
+# lasciano un articolo annunciato (slugs.json, sitemap di sezione, feed) e
+# assente su R2 — un 404 su un URL dichiarato. Qui si chiude quel buco, con un
+# CAP PER SEZIONE (D8) cosi' che un cantone con molti buchi non consumi il giro
+# degli altri.
+#
+# Finche' nessuna sezione e' live il rilevamento e' un no-op (zero sezioni).
+
+on:
+  workflow_run:
+    workflows: [fast-publish-section]
+    types: [completed]
+  schedule:
+    - cron: '23 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Rileva e riporta, non dispatcha backfill'
+        required: false
+        default: true
+        type: boolean
+      cap:
+        description: 'Articoli massimi per sezione in questo run'
+        required: false
+        default: '3'
+
+concurrency:
+  group: reconcile-section-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write # dispatch di fast-publish-section.yml
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Detect announced pages missing on R2
+        id: detect
+        env:
+          CAP_INPUT: ${{ inputs.cap }}
+        run: |
+          set -euo pipefail
+          node scripts/reconcile-section-pages.mjs \
+            --out "$RUNNER_TEMP/reconcile-sections.json" --cap "${CAP_INPUT:-3}"
+          echo "dispatch=$(jq -r '.counts.dispatch' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
+
+      # Niente catena stretta: se l'innesco era a sua volta un dispatch (un
+      # backfill di questo workflow, o un bootstrap manuale) si rileva e basta,
+      # e il prossimo giro lo fa il cron. E' la stessa regola di
+      # reconcile-article-shards.yml.
+      - name: Resolve backfill mode
+        id: mode
+        run: |
+          set -euo pipefail
+          allow=true
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
+            allow=false; echo "dispatch disabilitato: dry_run manuale"
+          elif [ "${{ github.event_name }}" = "workflow_run" ] && [ "${{ github.event.workflow_run.event }}" = "workflow_dispatch" ]; then
+            allow=false; echo "dispatch disabilitato: l'innesco era esso stesso un dispatch, ci pensa il cron"
+          fi
+          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+
+      # Il backfill e' un publisher a tutti gli effetti: eredita gli stessi
+      # interruttori del fast-publish, anche quando il reconcile nasce da
+      # workflow_run o dal cron. La detection resta attiva, ma non si carica
+      # una pagina live mentre il kill-switch tiene spenti gli upload.
+      - name: Resolve fast-publish kill-switch
+        id: arm
+        run: |
+          set -euo pipefail
+          allow=true
+          if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+            allow=false; echo "dispatch backfill disabilitato: .github/FAST_PUBLISH_DISABLED presente"
+          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+            allow=false; echo "dispatch backfill disabilitato: repo variable FAST_PUBLISH_ARMED=false"
+          fi
+          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+
+      - name: Backfill (dispatch fast-publish-section per sezione)
+        if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.dispatch != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          fail=0
+          while IFS=$'\t' read -r section ids; do
+            [ -n "$section" ] || continue
+            echo "── backfill $section ids=$ids"
+            if ! gh workflow run fast-publish-section.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                 -f section="$section" -f article_ids="$ids" -f bootstrap=false -f dry_run=false; then
+              echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
+              fail=1
+            fi
+          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
+          [ "$fail" = "0" ] || exit 1
+
+      - name: Report
+        if: always()
+        run: |
+          set -euo pipefail
+          r="$RUNNER_TEMP/reconcile-sections.json"
+          [ -s "$r" ] || exit 0
+          jq -r '"sezioni live \(.counts.sections), da ripubblicare \(.counts.dispatch), articoli mancanti \(.counts.missing), oltre il cap \(.counts.leftover), non verificabili \(.counts.unknown)"' "$r"

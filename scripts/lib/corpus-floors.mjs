@@ -247,23 +247,68 @@ export const SECTION_META_PREFIXES = Object.freeze(Object.fromEntries(
 ));
 
 /**
- * Una sezione con politica `family` (le cantonali) senza registro sorgente e'
- * una sezione NUOVA, non un corpus sparito: il suo pavimento proprio e' 0.
- * Il corpus sparito lo vedono comunque le sezioni storiche, che stanno sotto
- * lo stesso `content/` e restano fail-closed.
+ * Una sezione con politica `family` (le cantonali) senza la coppia registry/slugs
+ * e' una sezione NUOVA, non un corpus sparito: il suo pavimento proprio e' 0.
+ * Anche la coppia vuota esplicita (`Article[] = []` + slug map `{}`) e' valida.
+ * Una coppia parziale resta invece fail-closed; il corpus sparito lo vedono
+ * comunque le sezioni storiche, che stanno sotto lo stesso `content/`.
  */
 export function floorPolicyOf(section) {
   return sourceOf(section).floorPolicy;
 }
 
 /**
- * True per una sezione `family` che non ha ancora un registro sorgente: una
- * sezione appena accesa, con zero articoli. E' l'UNICO caso in cui un registro
- * assente vale 0 invece di un rifiuto, e vale solo per la politica `family`.
+ * True per una sezione `family` che non ha ancora alcuna superficie sorgente:
+ * una sezione appena accesa, con zero articoli. Un solo file presente non e'
+ * «nuovo»: e' una coppia parziale e deve fallire chiuso.
  */
 export function isNewFamilySection(root, section) {
   if (floorPolicyOf(section) !== 'family') return false;
-  return !fs.existsSync(path.join(root, sourceOf(section).registryFile));
+  const source = sourceOf(section);
+  return (
+    !fs.existsSync(path.join(root, source.registryFile)) &&
+    !fs.existsSync(path.join(root, source.slugFile))
+  );
+}
+
+const escapedLiteral = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+function isEmptyRegistrySource(source, exportName) {
+  return new RegExp(
+    `\\bconst\\s+${escapedLiteral(exportName)}(?:\\s*:\\s*[^=\\n]+)?\\s*=\\s*\\[\\s*\\]\\s*;`,
+    'm',
+  ).test(source);
+}
+
+function isEmptySlugSource(source, exportName) {
+  return new RegExp(
+    `\\bconst\\s+${escapedLiteral(exportName)}(?:\\s*:\\s*[^=\\n]+)?\\s*=\\s*\\{\\s*\\}\\s*;`,
+    'm',
+  ).test(source);
+}
+
+/** La coppia vuota esplicita di una sezione cantonale e' uno stato valido. */
+function isEmptyFamilySection(root, section) {
+  if (floorPolicyOf(section) !== 'family') return false;
+  assertFamilySourcePair(root, section);
+  const source = sourceOf(section);
+  const registryPath = path.join(root, source.registryFile);
+  const slugPath = path.join(root, source.slugFile);
+  if (!fs.existsSync(registryPath) || !fs.existsSync(slugPath)) return false;
+  return (
+    isEmptyRegistrySource(fs.readFileSync(registryPath, 'utf8'), source.registryExport) &&
+    isEmptySlugSource(fs.readFileSync(slugPath, 'utf8'), source.slugExport)
+  );
+}
+
+function assertFamilySourcePair(root, section) {
+  if (floorPolicyOf(section) !== 'family') return;
+  const source = sourceOf(section);
+  const registry = fs.existsSync(path.join(root, source.registryFile));
+  const slugs = fs.existsSync(path.join(root, source.slugFile));
+  if (registry !== slugs) {
+    throw new Error(`${section}: registry/slugs incompleti`);
+  }
 }
 
 /**
@@ -356,12 +401,16 @@ function registryDataFromSource(source, rel, what) {
 function readRegistryData(root, section) {
   const rel = sourceOf(section).registryFile;
   const source = readReference(root, rel, `${section} registry`);
+  if (isEmptyFamilySection(root, section)) {
+    return { count: 0, ids: new Set(), entryIds: [], rel };
+  }
   return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
 }
 
 function readSlugMap(root, section) {
   const { slugFile: rel, slugExport: slugConst } = sourceOf(section);
   const source = readReference(root, rel, `${section} slug map`);
+  if (isEmptyFamilySection(root, section)) return {};
   const slugs = parseArticleUrlSlugs(source, slugConst);
   if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
   return slugs;
@@ -593,7 +642,7 @@ export function expectedBodyFiles(
   section,
   { previousRegistryCount, previousRevision } = {},
 ) {
-  if (isNewFamilySection(root, section)) return 0;
+  if (isNewFamilySection(root, section) || isEmptyFamilySection(root, section)) return 0;
   const registry = readRegistryData(root, section);
   const highWater = registryHighWater(root, section, registry, {
     previousRegistryCount,
@@ -612,8 +661,20 @@ export function countRegistryArticles(root, section) {
   return readRegistryData(root, section).count;
 }
 
+/**
+ * Gli id articolo del registro sorgente di una sezione, nell'ordine del file.
+ * Una sezione di famiglia senza la coppia registry/slugs, o con la coppia
+ * esplicitamente vuota, e' una sezione nuova: nessun id. Ogni coppia parziale
+ * resta un rifiuto fail-closed.
+ */
+export function sourceRegistryIds(root, section) {
+  if (isNewFamilySection(root, section) || isEmptyFamilySection(root, section)) return [];
+  return readRegistryData(root, section).entryIds;
+}
+
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
 export function countSourceArticles(root, section) {
+  assertFamilySourcePair(root, section);
   const rel = path.join(sourceOf(section).bodyDir, 'it');
   return countCorpusFiles(root, rel, '.ts', section);
 }
@@ -628,7 +689,7 @@ export function countSourceArticles(root, section) {
  * esplicitamente allo slug IT di una entry del registro.
  */
 export function countSourceSitemapEntries(root, section) {
-  if (isNewFamilySection(root, section)) return 0;
+  if (isNewFamilySection(root, section) || isEmptyFamilySection(root, section)) return 0;
   const registry = readRegistryData(root, section);
   const slugMap = readSlugMap(root, section);
   const shadowed = readCanonicalOverrideSlugs(root, section);

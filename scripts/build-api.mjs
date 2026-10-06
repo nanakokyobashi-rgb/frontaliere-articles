@@ -119,6 +119,7 @@ import {
   resolveKillSwitch,
   validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
+import { cantonHubCoverage } from './lib/canton-hub-data.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Il corpus nel layout dell'engine, per i feed delle sezioni di famiglia.
 import { createEngineCorpusView, engineViewRssLayout } from './lib/engine-corpus-view.mjs';
@@ -242,7 +243,9 @@ const declaredSections = loadDeclaredRegistry(ROOT);
 // emettere (kill-switch non verificato con una sezione dichiarata live)
 // nessuna sezione conta come live.
 const killSwitch = resolveKillSwitch(process.env);
-const effectiveSections = effectiveStatuses(declaredSections, killSwitch);
+const effectiveSections = effectiveStatuses(declaredSections, killSwitch, {
+  missingHubsOf: (id) => cantonHubCoverage(ROOT, id).missing,
+});
 const releaseEmitted = edgeRegistryPublishable(declaredSections, killSwitch);
 const releaseLiveSections = new Set(
   releaseEmitted ? Object.keys(effectiveSections).filter((id) => effectiveSections[id].status === 'live') : [],

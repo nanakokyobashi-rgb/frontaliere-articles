@@ -560,6 +560,7 @@ test('tutte le superfici di famiglia seguono una sola decisione live effettiva',
   const off = resolveKillSwitch({ RC_ENV_LOADED: '1', CANTON_ARTICLE_SECTIONS_KILL: 'TI' });
   assert.equal(effectiveStatuses(declared, on)['canton-ti'].status, 'live');
   assert.equal(effectiveStatuses(declared, off)['canton-ti'].status, 'draft');
+  assert.equal(effectiveStatuses(declared, on, { missingHubsOf: () => ['eventi'] })['canton-ti'].status, 'draft');
   assert.equal(edgeRegistryPublishable(declared, resolveKillSwitch({})), false);
 
   // verify-api-floors: per una sezione non live l'assenza dei feed e' lo stato
@@ -1072,6 +1073,9 @@ test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non
 });
 
 test('delete-cdn-file.sh: solo chiavi delle sezioni cantonali', () => {
+  const script = readFileSync(path.join(ROOT, 'scripts/lib/delete-cdn-file.sh'), 'utf8');
+  assert.match(script, /downloads\.rclone\.org\/rclone-current-linux-amd64\.zip/);
+  assert.match(script, /installazione rclone fallita/);
   const run = (key) => spawnSync('bash', [path.join(ROOT, 'scripts/lib/delete-cdn-file.sh'), key], {
     encoding: 'utf8',
     env: { PATH: process.env.PATH },

@@ -29,6 +29,7 @@ on:
       - '.github/workflows/refresh-canton-hubs.yml'
       - 'generator/scripts/generate-canton-hubs.mjs'
       - 'generator/scripts/lib/canton-hubs/**'
+      - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/data/canton-hub-topics.json'
       - 'generator/data/canton-hub-links.json'
   workflow_dispatch:

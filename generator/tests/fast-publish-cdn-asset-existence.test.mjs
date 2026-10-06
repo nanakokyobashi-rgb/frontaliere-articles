@@ -168,7 +168,7 @@ test('formatCdnAssetReport avvisa SOLO sui mancanti', () => {
 });
 
 test('publish-article-fast.mjs verifica gli asset DOPO l\'offload', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'scripts/publish-article-fast.mjs'), 'utf-8');
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/article-render-pipeline.mjs'), 'utf-8');
   const offloadAt = src.indexOf('offload-generated-images-cdn.mjs');
   const checkAt = src.indexOf('cdn-asset-existence.mjs');
   assert.ok(offloadAt > 0, 'lo step di offload è sparito da publish-article-fast.mjs');
@@ -222,7 +222,7 @@ test('IL DIFETTO: offload non eseguito e «niente da riscrivere» hanno righe DI
 });
 
 test('publish-article-fast.mjs raccoglie anche i same-origin superstiti', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'scripts/publish-article-fast.mjs'), 'utf-8');
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/article-render-pipeline.mjs'), 'utf-8');
   assert.ok(
     src.includes('hasSameOriginAssetRef') && src.includes('formatOffloadCoverageReport'),
     'lo step 7b non distingue piu\' un offload fallito da «niente da riscrivere» (#817)',
@@ -468,7 +468,7 @@ test('formatCdnAssetReport stampa il MARGINE e avvisa solo se il tetto e\' stato
 });
 
 test('publish-article-fast.mjs MISURA il passo di verifica', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'scripts/publish-article-fast.mjs'), 'utf-8');
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/article-render-pipeline.mjs'), 'utf-8');
   assert.match(
     src,
     /formatCdnAssetReport\(results, '\[cdn-asset-check\]', \{ elapsedMs \}\)/,

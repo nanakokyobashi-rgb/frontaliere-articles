@@ -1,0 +1,281 @@
+name: fast-publish-section
+
+# Pubblica su R2 le pagine delle sezioni articoli CANTONALI (piano «sezioni
+# articoli per cantone», D3/D8; P7b). E' il gemello di fast-publish-article.yml
+# per le sezioni che non hanno uno shard Pages: il Worker del sito le serve da
+# `edge/sections/<path>/index.html` quando il registro pubblicato da
+# publish-api.yml le dichiara `live`.
+#
+# Cosa fa scattare un publish: un push che tocca i contenuti di una sezione
+# cantonale ATTIVA nel core — un corpo (gli articoli cambiati vengono resi),
+# oppure registro, mappa slug, meta, chunk SEO o i dati di un hub (si rendono
+# landing, archivio e hub). Quali sezioni e quali id lo decide
+# `scripts/ci/fast-publish-section.mjs r2-plan`, dal core: con la lista attiva
+# di oggi (nessun cantone) la matrice e' vuota e il job `publish` non parte.
+#
+# CONCURRENCY PER SEZIONE (D8), non globale: `fast-publish-<sezione>`, senza
+# cancellazione. Un gruppo unico con 24 generatori terrebbe una sola run in
+# attesa e scarterebbe le altre (misurato su generate-article: 16 su 60), e gli
+# articoli persi finirebbero tutti sulla riconciliazione. Due sezioni diverse
+# scrivono chiavi R2 disgiunte, quindi possono andare in parallelo.
+#
+# NIENTE NOINDEX: una pagina resa con un `noindex`, senza il meta di proprieta'
+# della route o con asset same-origin e' un rifiuto di
+# scripts/publish-section-pages.mjs, prima di qualunque upload.
+#
+# BOOTSTRAP: `workflow_dispatch` con `bootstrap: true` rende TUTTI gli articoli
+# della sezione, piu' landing, archivio e hub — e' il passo che carica le
+# pagine su R2 mentre la sezione e' ancora `draft`, PRIMA del flip a `live` in
+# sections/registry.json. Il verify in quel caso legge le chiavi sul CDN (la
+# sezione non e' ancora servita all'apex).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/cantons/**'
+      - 'content/blog-body-canton-*/**'
+      - 'content/blog-meta-canton-*'
+      - 'generator/scripts/lib/canton-hubs/paths.mjs'
+      - 'generator/scripts/lib/corpus-paths.mjs'
+      - 'generator/scripts/lib/control-char-write-report.mjs'
+      - 'engine/**'
+      - 'host/**'
+      - 'scripts/publish-section-pages.mjs'
+      - 'scripts/publish-section-edge.mjs'
+      - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/cf-purge-cache.mjs'
+      - 'scripts/offload-generated-images-cdn.mjs'
+      - 'scripts/lib/article-render-pipeline.mjs'
+      - 'scripts/lib/cf-analytics.mjs'
+      - 'scripts/lib/canton-hub-data.mjs'
+      - 'scripts/lib/canton-hub-content.mjs'
+      - 'scripts/lib/cdn-asset-existence.mjs'
+      - 'scripts/lib/cf-purge-variants.mjs'
+      - 'scripts/lib/delete-cdn-file.sh'
+      - 'scripts/lib/corpus-floors.mjs'
+      - 'scripts/lib/corpus-sections.mjs'
+      - 'scripts/lib/engine-corpus-view.mjs'
+      - 'scripts/lib/sanitize-control-chars.mjs'
+      - 'scripts/lib/section-registry.mjs'
+      - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/lib/npm-ci-retry.sh'
+      - 'scripts/lib/parse-positive-num.mjs'
+      - 'generator/scripts/load-rc-env.mjs'
+  workflow_dispatch:
+    inputs:
+      section:
+        description: 'Sezione cantonale attiva nel core (es. canton-ti)'
+        required: true
+        type: string
+      article_ids:
+        description: 'Array JSON di id articolo (vuoto = solo landing, archivio e hub)'
+        required: false
+        type: string
+      bootstrap:
+        description: 'Rendi TUTTI gli articoli della sezione (accensione di un cantone)'
+        required: false
+        default: false
+        type: boolean
+      dry_run:
+        description: 'Rendi e valida, non caricare niente'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      any: ${{ steps.plan.outputs.any }}
+      dry: ${{ steps.plan.outputs.dry }}
+    steps:
+      - name: Checkout (resolve)
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Fetch push base (resolve)
+        if: github.event_name == 'push'
+        env:
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
+            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
+          fi
+
+      # Solo builtin Node (fast-publish-section.mjs): niente setup-node/npm ci
+      # per decidere se c'e' qualcosa da pubblicare.
+      - name: Resolve sections and article ids
+        id: plan
+        env:
+          SECTION_INPUT: ${{ inputs.section }}
+          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
+          DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          before="${PUSH_BEFORE:-}"
+          if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            dry=true
+            [ "$DRY_RUN_INPUT" = "false" ] && dry=false
+            ids_json='[]'
+            if [ -n "$ARTICLE_IDS_INPUT" ]; then
+              ids_json="$(printf '%s' "$ARTICLE_IDS_INPUT" | jq -ce '
+                if type == "array" and all(.[]; type == "string" and length > 0)
+                then unique
+                else error("article_ids must be a JSON array of article ids")
+                end
+              ')"
+            fi
+            bootstrap=false
+            [ "$BOOTSTRAP_INPUT" = "true" ] && bootstrap=true
+            if [ "$bootstrap" = "true" ] && [ "$ids_json" != "[]" ]; then
+              echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
+              exit 1
+            fi
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson b "$bootstrap" \
+              '[{section: $s, ids: $ids, bootstrap: $b}]')"
+          else
+            dry=false
+            # Stessi interruttori di fast-publish-article.yml: un file nel
+            # repo o la variabile FAST_PUBLISH_ARMED=false fermano gli upload
+            # senza toccare il codice.
+            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+              echo "::warning::.github/FAST_PUBLISH_DISABLED present — running dry"
+              dry=true
+            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+              dry=true
+            fi
+            matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
+              | node scripts/ci/fast-publish-section.mjs r2-plan \
+              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+          fi
+          any=false
+          [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true
+          {
+            echo "matrix=$matrix"
+            echo "any=$any"
+            echo "dry=$dry"
+          } >> "$GITHUB_OUTPUT"
+          echo "resolved matrix=$matrix dry=$dry"
+
+  publish:
+    needs: resolve
+    if: needs.resolve.outputs.any == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJSON(needs.resolve.outputs.matrix) }}
+    concurrency:
+      group: fast-publish-${{ matrix.target.section }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Fetch previous published revision
+        if: github.event_name == 'push'
+        env:
+          PREVIOUS_REVISION: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]]; then
+            git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
+          fi
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      # Remote Config e' la sola sorgente delle credenziali R2 e Cloudflare.
+      # In dry non servono: il render e la validazione girano comunque.
+      - name: Prepare Firebase credentials
+        if: needs.resolve.outputs.dry != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the R2 and Cloudflare credentials"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        if: needs.resolve.outputs.dry != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Un upload che «salta» per credenziali assenti esce 0 da
+      # upload-cdn-file.sh: qui l'assenza deve fermare il job PRIMA del render,
+      # non diventare una pubblicazione verde che non ha caricato niente.
+      - name: Require the R2 and Cloudflare credentials
+        if: needs.resolve.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          missing=()
+          for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
+            [ -n "${!v:-}" ] || missing+=("$v")
+          done
+          if [ "${#missing[@]}" -gt 0 ]; then
+            echo "::error::missing after the Remote Config load: ${missing[*]}"
+            exit 1
+          fi
+
+      - name: Render, validate and publish the section pages
+        env:
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          BOOTSTRAP: ${{ matrix.target.bootstrap }}
+          DRY: ${{ needs.resolve.outputs.dry }}
+        run: |
+          set -euo pipefail
+          args=(--section "$SECTION" --out "$RUNNER_TEMP/section-dist" --summary "$RUNNER_TEMP/section-summary.json")
+          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ]; then
+            args+=(--previous-revision "${{ github.event.before }}")
+          fi
+          if [ "$BOOTSTRAP" = "true" ]; then
+            args+=(--bootstrap)
+          else
+            args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+          fi
+          if [ "$DRY" = "true" ]; then
+            args+=(--dry-run)
+          else
+            args+=(--publish)
+          fi
+          # Attraverso il wrapper di retry (issue #98): `npx -y` scarica tsx dal
+          # registro a ogni run. Ritentare l'intero comando e' sicuro: il
+          # render riscrive lo stesso scratch e gli upload R2 sono PUT
+          # idempotenti sulle stesse chiavi.
+          bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+
+      - name: Summary
+        if: always()
+        run: |
+          set -euo pipefail
+          s="$RUNNER_TEMP/section-summary.json"
+          [ -s "$s" ] || { echo "nessun summary: il render non e' arrivato in fondo"; exit 0; }
+          jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
