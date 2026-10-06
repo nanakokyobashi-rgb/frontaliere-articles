@@ -44,12 +44,26 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // le sezioni cantonali R2 attive, invece di produrre una matrice vuota.
 const SHARED_R2_REFRESH_PATHS = new Set([
   'generator/scripts/lib/canton-hubs/paths.mjs',
+  'generator/scripts/lib/control-char-write-report.mjs',
   'scripts/ci/fast-publish-section.mjs',
+  'scripts/cf-purge-cache.mjs',
   'scripts/lib/article-render-pipeline.mjs',
   'scripts/lib/canton-hub-data.mjs',
+  'scripts/lib/cdn-asset-existence.mjs',
+  'scripts/lib/corpus-floors.mjs',
+  'scripts/lib/corpus-sections.mjs',
+  'scripts/lib/engine-corpus-view.mjs',
+  'scripts/lib/sanitize-control-chars.mjs',
   'scripts/lib/section-registry.mjs',
+  'scripts/lib/upload-cdn-file.sh',
+  'scripts/ci/retry-cmd.sh',
+  'scripts/publish-section-edge.mjs',
   'scripts/publish-section-pages.mjs',
 ]);
+const SHARED_R2_REFRESH_PREFIXES = Object.freeze(['engine/', 'host/']);
+
+const isSharedR2RefreshPath = (rel) =>
+  SHARED_R2_REFRESH_PATHS.has(rel) || SHARED_R2_REFRESH_PREFIXES.some((prefix) => rel.startsWith(prefix));
 
 /**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
@@ -129,7 +143,7 @@ export function r2PublishPlan(files, coreList = ARTICLE_SECTION_CORE_LIST) {
     const paths = status === 'R' || status === 'C' ? fields.slice(1) : fields.slice(1, 2);
     for (const rel of paths) changedFiles.push({ rel: rel.trim(), status });
   }
-  if (changedFiles.some(({ rel }) => SHARED_R2_REFRESH_PATHS.has(rel))) {
+  if (changedFiles.some(({ rel }) => isSharedR2RefreshPath(rel))) {
     for (const section of sections) touch(section.section).bootstrap = true;
   }
   for (const { rel, status } of changedFiles) {

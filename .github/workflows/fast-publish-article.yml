@@ -72,7 +72,14 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/cf-purge-cache.mjs'
+      - 'engine/**'
+      - 'host/**'
       - 'scripts/lib/article-render-pipeline.mjs'
+      - 'scripts/lib/cdn-asset-existence.mjs'
+      - 'scripts/lib/sanitize-control-chars.mjs'
+      - 'scripts/lib/upload-cdn-file.sh'
       # THE CHAIN LINK — a corpus push means an article was produced.
       - 'content/**'
   workflow_dispatch:

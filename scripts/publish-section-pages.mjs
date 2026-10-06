@@ -305,6 +305,15 @@ export async function publishedStatus(section) {
   }
 }
 
+/**
+ * I dati hub mancanti sono tollerabili solo mentre il Worker serve certamente
+ * la sezione come draft. In publish il registro edge e' la fonte effettiva;
+ * in dry-run non si fa rete e si usa il registro committato come guardia.
+ */
+export function hubMissingIsFatal({ declaredStatus, effectiveStatus, publishing }) {
+  return (publishing ? effectiveStatus : declaredStatus) === 'live';
+}
+
 async function publish({ pages, cdnUploads, distDir, section }) {
   let failures = 0;
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
@@ -369,6 +378,11 @@ export async function main(argv = process.argv.slice(2)) {
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
+  const publishing = args.publish && !args.dryRun;
+  // Preflight the same registry the Worker serves before deciding whether a
+  // partial hub set is merely a draft refresh or a live-page defect. A draft
+  // checkout must not override an edge registry that is still live.
+  const effectiveStatus = publishing ? await publishedStatus(section) : null;
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
@@ -405,6 +419,9 @@ export async function main(argv = process.argv.slice(2)) {
   ];
 
   const defects = [];
+  if (publishing && effectiveStatus === null) {
+    defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
+  }
   for (const page of pages) {
     const abs = path.join(distDir, page.rel);
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
@@ -422,7 +439,7 @@ export async function main(argv = process.argv.slice(2)) {
   const declared = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, SECTION_REGISTRY_FILE), 'utf8')).sections?.[section]?.status;
   if (hubs.missing.length) {
     const note = `hub senza dati, non pubblicati: ${hubs.missing.join(', ')} (${hubs.missing.map((t) => cantonHubDataFile(section, t)).join(', ')})`;
-    if (declared === 'live') defects.push(`sezione live con ${note}`);
+    if (hubMissingIsFatal({ declaredStatus: declared, effectiveStatus, publishing })) defects.push(`sezione live con ${note}`);
     else console.log(`::warning::[${LOG}] ${note} — la sezione deve restare draft finche' mancano`);
   }
 
@@ -438,6 +455,7 @@ export async function main(argv = process.argv.slice(2)) {
     counts: Object.fromEntries(UPLOAD_ORDER.map((kind) => [kind, pages.filter((page) => page.kind === kind).length])),
     countsByLocale,
     hubsMissing: hubs.missing,
+    effectiveStatus,
     pages,
     cdnUploads,
     defects,

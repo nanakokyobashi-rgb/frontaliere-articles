@@ -123,17 +123,22 @@ async function getText(url, fetchImpl) {
   return res.text();
 }
 
-/** HEAD con due tentativi: 200 presente, 404 mancante, il resto non verificabile. */
+/** HEAD con due tentativi; 405/501 ricadono su GET, 200 presente, 404 mancante. */
 export async function headState(url, fetchImpl = fetch) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-      const res = await fetchImpl(`${url}?_rcb=${Date.now()}.${attempt}`, {
-        method: 'HEAD',
+      const request = (method) => fetchImpl(`${url}?_rcb=${Date.now()}.${attempt}.${method.toLowerCase()}`, {
+        method,
         headers: { 'user-agent': UA },
         signal: AbortSignal.timeout(15000),
       });
+      const res = await request('HEAD');
       if (res.status === 200) return 'present';
       if (res.status === 404) return 'missing';
+      if (res.status !== 405 && res.status !== 501) continue;
+      const get = await request('GET');
+      if (get.status === 200) return 'present';
+      if (get.status === 404) return 'missing';
     } catch {
       /* ritenta, poi non verificabile */
     }

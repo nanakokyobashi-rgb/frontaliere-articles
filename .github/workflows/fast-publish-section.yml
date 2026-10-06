@@ -37,11 +37,23 @@ on:
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
+      - 'generator/scripts/lib/control-char-write-report.mjs'
+      - 'engine/**'
+      - 'host/**'
       - 'scripts/publish-section-pages.mjs'
+      - 'scripts/publish-section-edge.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/cf-purge-cache.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
+      - 'scripts/lib/cdn-asset-existence.mjs'
+      - 'scripts/lib/corpus-floors.mjs'
+      - 'scripts/lib/corpus-sections.mjs'
+      - 'scripts/lib/engine-corpus-view.mjs'
+      - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/section-registry.mjs'
+      - 'scripts/lib/upload-cdn-file.sh'
   workflow_dispatch:
     inputs:
       section:

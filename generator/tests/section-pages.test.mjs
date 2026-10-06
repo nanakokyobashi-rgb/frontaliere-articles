@@ -21,6 +21,7 @@ import {
   assertPublishableSection,
   createRenderRoot,
   ensureRouteOwnerMeta,
+  hubMissingIsFatal,
   inUploadOrder,
   pageDefects,
   pageEntry,
@@ -31,7 +32,7 @@ import {
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
-import { cdnUrlFor, expectedSectionPages, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
+import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 
@@ -124,6 +125,14 @@ test('publisher: registry edge illeggibile o con stato sconosciuto non diventa d
   }
   assert.match(read('scripts/publish-section-pages.mjs'), /beforeStatus === null/);
   assert.match(read('scripts/publish-section-pages.mjs'), /if \(status === null\)/);
+});
+
+test('publisher: hub mancanti sono fatali sulla sola verita\' effettiva live', () => {
+  assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: 'draft', publishing: true }), false);
+  assert.equal(hubMissingIsFatal({ declaredStatus: 'draft', effectiveStatus: 'live', publishing: true }), true);
+  assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: null, publishing: true }), false);
+  assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: null, publishing: false }), true);
+  assert.match(read('scripts/publish-section-pages.mjs'), /const effectiveStatus = publishing \? await publishedStatus\(section\) : null/);
 });
 
 test('publisher: il meta di proprieta\' si aggiunge solo dove manca', () => {
@@ -249,7 +258,7 @@ test('registro: una sezione live deve avere i dati di tutti e sei gli hub (mai n
   doc.sections['canton-ti'].status = 'draft';
   assert.deepEqual(declaredRegistryErrors(doc, { missingHubsOf: () => ['eventi'] }), []);
   // Il publisher ripete il vincolo sul commit che sta pubblicando.
-  assert.match(read('scripts/publish-section-pages.mjs'), /if \(declared === 'live'\) defects\.push\(`sezione live con \$\{note\}`\)/);
+  assert.match(read('scripts/publish-section-pages.mjs'), /hubMissingIsFatal\(\{ declaredStatus: declared, effectiveStatus, publishing \}\)/);
   assert.match(read('scripts/build-api.mjs'), /loadDeclaredRegistry\(ROOT\)/);
 });
 
@@ -303,6 +312,13 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/lib/canton-hub-data.mjs',
     'scripts/lib/section-registry.mjs',
     'scripts/publish-section-pages.mjs',
+    'scripts/publish-section-edge.mjs',
+    'scripts/lib/engine-corpus-view.mjs',
+    'scripts/lib/upload-cdn-file.sh',
+    'scripts/ci/retry-cmd.sh',
+    'scripts/cf-purge-cache.mjs',
+    'engine/cantonSectionPages.ts',
+    'host/siteShellBootstrap.ts',
   ]) {
     assert.deepEqual(r2PublishPlan([rel], WITH_TI), [{ section: 'canton-ti', ids: [], bootstrap: true }], rel);
   }
@@ -329,13 +345,27 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /git diff --name-status HEAD~1 HEAD/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
+    'generator/scripts/lib/control-char-write-report.mjs',
     'scripts/publish-section-pages.mjs',
+    'scripts/publish-section-edge.mjs',
     'scripts/ci/fast-publish-section.mjs',
+    'scripts/ci/retry-cmd.sh',
+    'scripts/cf-purge-cache.mjs',
     'scripts/lib/article-render-pipeline.mjs',
     'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/cdn-asset-existence.mjs',
+    'scripts/lib/corpus-floors.mjs',
+    'scripts/lib/corpus-sections.mjs',
+    'scripts/lib/engine-corpus-view.mjs',
+    'scripts/lib/sanitize-control-chars.mjs',
     'scripts/lib/section-registry.mjs',
+    'scripts/lib/upload-cdn-file.sh',
   ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
+  assert.ok(wf.includes("      - 'engine/**'\n"));
+  assert.ok(wf.includes("      - 'host/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));
+  assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
+  assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
   assert.match(wf, /bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
   assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
@@ -389,6 +419,28 @@ test('reconcile: pagine attese = tutti gli URL annunciati da loc e alternate del
   assert.ok(pages.some((p) => p.path === '/fr/articles-tessin/tutti/page-2/'), 'le page-N dell\'archivio vengono dalla sitemap');
   assert.equal(cdnUrlFor('/en/ticino-articles/a-en/'), 'https://cdn.frontaliereticino.ch/edge/sections/en/ticino-articles/a-en/index.html');
   assert.throws(() => expectedSectionPages({ id: 'canton-zz', paths: {} }, {}, SITEMAP_TI), /sconosciuta/);
+});
+
+test('reconcile: HEAD 405/501 ricade su GET, mantenendo 404 = missing', async () => {
+  const presentMethods = [];
+  assert.equal(
+    await headState('https://cdn.test/page', async (_url, init) => {
+      presentMethods.push(init.method);
+      return { status: init.method === 'HEAD' ? 405 : 200 };
+    }),
+    'present',
+  );
+  assert.deepEqual(presentMethods, ['HEAD', 'GET']);
+
+  const missingMethods = [];
+  assert.equal(
+    await headState('https://cdn.test/page', async (_url, init) => {
+      missingMethods.push(init.method);
+      return { status: init.method === 'HEAD' ? 501 : 404 };
+    }),
+    'missing',
+  );
+  assert.deepEqual(missingMethods, ['HEAD', 'GET']);
 });
 
 test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubblica', () => {
