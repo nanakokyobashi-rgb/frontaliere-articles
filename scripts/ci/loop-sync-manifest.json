@@ -947,6 +947,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/run-listing-window.mjs",
+      "mode": "identical",
+      "reason": "Finestra `created` per gli elenchi di run filtrati per branch (`createdSince`, `createdSinceFilter`, `createdSinceQuery`, `newestFirst`): modulo senza import, copiato byte per byte dal sito. E' registrato PRIMA del suo importatore: `scripts/ci/close-recovered-failure-issues.mjs` e' `identical` e sul sito lo importa dalla PR 12016, e il gate del sito sugli import dei gemelli identici rifiuta un importatore il cui modulo non e' dichiarato qui (il trasporto porterebbe l'importatore senza il modulo: ERR_MODULE_NOT_FOUND, caso della issue 1890). `generator/tests/run-listing-window.test.mjs` ne prova il comportamento in questo repository.",
+      "baseline": {
+        "site": "55e66ea9b5ef172e",
+        "corpus": "55e66ea9b5ef172e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
       "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito. Il gemello e' lo stesso path sul sito; per questo la copia legacy degli observer non puo' puntare qui: e' dichiarata in `scope.outOfScope` con la sua ragione (valerielinc-ops/frontaliere-si-o-no#7483).",
