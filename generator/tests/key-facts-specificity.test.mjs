@@ -24,6 +24,7 @@ import {
   MAX_KEY_FACTS,
   buildAiSearchMarkdown,
   buildBackfillPrompt,
+  findOrphanedKeyFactsList,
   getKeyFactsHeading,
   validateBackfillPayload,
 } from '../scripts/lib/ai-search-template.mjs';
@@ -182,6 +183,37 @@ test('il serializzatore accetta solo i fatti source-backed disponibili fino al c
   );
 });
 
+test('il gate distingue lista orfana, sezione completa e assenza legittima', () => {
+  const orphan = [
+    '## In breve',
+    '- Un fatto',
+    '- Un altro fatto',
+    '',
+    '',
+    '- **Cosa**: un fatto source-backed.',
+    '- **Quando**: 6 ottobre 2026.',
+  ].join('\n');
+  const complete = [
+    '## In breve',
+    '- Un fatto',
+    '- Un altro fatto',
+    '',
+    '## Fatti chiave',
+    '- **Cosa**: un fatto source-backed.',
+  ].join('\n');
+  const absentLegitimately = [
+    '## In breve',
+    '- Un fatto',
+    '- Un altro fatto',
+    '',
+    'Il lead giornalistico segue senza una sezione di fatti chiave.',
+  ].join('\n');
+
+  assert.equal(findOrphanedKeyFactsList(orphan, 'it')?.bulletCount, 2);
+  assert.equal(findOrphanedKeyFactsList(complete, 'it'), null);
+  assert.equal(findOrphanedKeyFactsList(absentLegitimately, 'it'), null);
+});
+
 test('il prompt AI Search ammette tutti i fatti presenti nella fonte senza placeholder', () => {
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /up to 8/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /meno di tre fatti utili/i);
@@ -313,8 +345,13 @@ test('lo scanner riproduce la baseline corrente senza fatti vacui', { skip: !fs.
 test('create-article applica il gate dopo validate e marca il rifiuto come qualita\'', () => {
   const source = fs.readFileSync(CREATE_ARTICLE_PATH, 'utf8');
   assert.match(source, /from ['"]\.\/lib\/key-facts-specificity\.mjs['"]/);
+  assert.match(source, /findOrphanedKeyFactsList/);
   assert.match(source, /from ['"]\.\/lib\/cantone-toponimi-coerenza\.mjs['"]/);
   assert.match(source, /function qualityRejectError\([\s\S]*?error\.qualityReject = true/);
+  assert.match(source, /\[key-facts-heading\]/);
+  const orphanGate = source.indexOf('findOrphanedKeyFactsList(localeContent.body1, locale)');
+  const specificityGate = source.indexOf('const result = stripVacuousFacts(localeContent.body1);');
+  assert.ok(orphanGate >= 0 && orphanGate < specificityGate, 'il gate dell\'heading deve precedere il trattamento dei fatti rifiutati');
   const validated = source.indexOf('data = validate(rawData');
   const gate = source.indexOf('assertGeneratedArticleQuality(data);', validated);
   assert.ok(validated >= 0 && gate > validated, 'il gate non e\' nel percorso post-validate');
@@ -331,5 +368,11 @@ test('create-article applica il gate dopo validate e marca il rifiuto come quali
   const registrar = source.indexOf('export async function registerArticleFiles');
   const registrarCantonGate = source.indexOf('cantonBody: data._cantonGuardBodyBeforeCta', registrar);
   assert.ok(registrar > -1 && registrarCantonGate > registrar, 'il registrar deve riusare il body cantonale pre-CTA');
+  const registrarHeadingGate = source.indexOf('assertGeneratedArticleQuality(data, {', registrar);
+  const registrarWrite = source.indexOf('beginRegisterLock(data.id);', registrar);
+  assert.ok(
+    registrarHeadingGate > registrar && registrarHeadingGate < registrarWrite,
+    'il registrar deve rifiutare il body prima di aprire il lock di scrittura',
+  );
   assert.match(source, /data\._cantonGuardBodyBeforeCta = bodyTextForQuality\(contentIt\)/);
 });
