@@ -1,12 +1,12 @@
 /**
  * Reader-facing provenance for blog cover images.
  *
- * Generated covers keep the strict engine record (under `/images/blog/` for
- * article heroes, with `/images/generated/` retained for other generated
- * surfaces). Editorial uploads use a separate, explicit
- * record because the engine's `generated-provider` licence is not a licence
- * for a human-supplied photograph. The aggregate is published by
- * build-blog-index.mjs as `data/image-credits-blog.json`.
+ * Generated covers keep the strict engine record and its article-hero path
+ * (the current engine uses `/images/blog/`; records from the older
+ * `/images/generated/` layout remain readable). Editorial uploads use a
+ * separate, explicit record because the engine's `generated-provider`
+ * licence is not a licence for a human-supplied photograph. The aggregate is
+ * published by build-blog-index.mjs as `data/image-credits-blog.json`.
  */
 
 import fs from 'node:fs';

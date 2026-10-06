@@ -171,7 +171,7 @@ import {
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
-import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { AI_SEARCH_PROMPT_BLOCK_IT, findOrphanedKeyFactsList } from './lib/ai-search-template.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
@@ -5029,6 +5029,15 @@ function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
   for (const [locale, localeContent] of Object.entries(content)) {
     if (!localeContent || typeof localeContent !== 'object') continue;
     if (typeof localeContent.body1 !== 'string') continue;
+
+    const orphanedKeyFacts = findOrphanedKeyFactsList(localeContent.body1, locale);
+    if (orphanedKeyFacts) {
+      throw qualityRejectError(
+        `[key-facts-heading] ${data.id || '(id mancante)'} ${locale}: `
+        + `${orphanedKeyFacts.bulletCount} fatti chiave senza l'intestazione ${orphanedKeyFacts.heading}`,
+      );
+    }
+
     const result = stripVacuousFacts(localeContent.body1);
     if (result.rejected) {
       const sections = result.rejectedSections.join(', ');
