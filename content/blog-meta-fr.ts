@@ -12699,6 +12699,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.ciclabile-lumino-castione-fase-due.title': 'Piste cyclable Lumino-Castione : deuxième phase des travaux',
     'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'Du lundi 12 octobre jusqu\'à fin avril 2027, des travaux auront lieu entre la via Quatorta et la gare FFS de Castione, avec deux nouveaux arrêts de bus.',
     'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Deuxième phase des travaux de la piste cyclable entre Lumino et la gare FFS de Castione',
+    'blog.article.crisi-attrattivita-como-lecco.title': 'Como et Lecco : risque de perte de 14 mille travailleurs d\'ici 2029',
+    'blog.article.crisi-attrattivita-como-lecco.excerpt': 'Alerte de l\'UIL : le manque de logements, la complexité de la mobilité et l\'insuffisance des services risquent d\'éloigner du territoire des milliers de personnes en âge de travailler.',
+    'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Train de passagers arrivant à une gare entre Côme et Lecco (Como)',
 };
 
 export default blogMetaFr;

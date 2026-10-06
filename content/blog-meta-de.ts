@@ -12696,6 +12696,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.ciclabile-lumino-castione-fase-due.title': 'Veloweg Lumino-Castione: zweite Bauphase',
     'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'Von Montag, 12. Oktober bis Ende April 2027 Bauarbeiten zwischen via Quatorta und dem FFS-Bahnhof Castione, mit zwei neuen Bushaltestellen.',
     'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Zweite Bauphase des Velowegs zwischen Lumino und dem FFS-Bahnhof Castione',
+    'blog.article.crisi-attrattivita-como-lecco.title': 'Como und Lecco: Risiko des Verlusts von 14mila Arbeitskräften bis 2029',
+    'blog.article.crisi-attrattivita-como-lecco.excerpt': 'Warnung von UIL: Wohnungsmangel, schwierige Verkehrsanbindung und unzureichende Dienstleistungen drohen Tausende Menschen im erwerbsfähigen Alter aus dem Gebiet zu vertreiben.',
+    'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Personenzug an einem Bahnhof zwischen Como und Lecco',
 };
 
 export default blogMetaDe;

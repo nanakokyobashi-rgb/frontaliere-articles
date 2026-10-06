@@ -12698,6 +12698,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ciclabile-lumino-castione-fase-due.title': 'Ciclabile Lumino-Castione: seconda fase dei lavori',
     'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'Da lunedì 12 ottobre a fine aprile 2027 lavori tra via Quatorta e la stazione FFS di Castione, con due nuove fermate bus.',
     'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Seconda fase dei lavori per la ciclabile tra Lumino e la stazione FFS di Castione',
+    'blog.article.crisi-attrattivita-como-lecco.title': 'Como e Lecco: rischio perdita 14mila lavoratori entro 2029',
+    'blog.article.crisi-attrattivita-como-lecco.excerpt': 'Allarme UIL: mancanza di case, mobilità complessa e servizi carenti rischiano di allontanare migliaia di persone in età lavorativa dal territorio.',
+    'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Treno passeggeri in arrivo in una stazione tra Como e Lecco',
 };
 
 export default blogMetaIt;

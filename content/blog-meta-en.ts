@@ -12697,6 +12697,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.ciclabile-lumino-castione-fase-due.title': 'Lumino-Castione cycle path: second phase of the works',
     'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'From Monday, October 12 to the end of April 2027, works between via Quatorta and the Castione FFS station, with two new bus stops',
     'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Second phase of cycle path works between Lumino and Castione FFS station',
+    'blog.article.crisi-attrattivita-como-lecco.title': 'Como and Lecco: risk of losing 14 thousand workers by 2029',
+    'blog.article.crisi-attrattivita-como-lecco.excerpt': 'UIL warning: lack of housing, complex commuting and inadequate services risk driving thousands of working-age people away from the area.',
+    'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Passenger train arriving at a station between Como and Lecco',
 };
 
 export default blogMetaEn;

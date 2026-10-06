@@ -1,5 +1,4 @@
 {
-  "https://www.ticinonews.ch/svizzera/frontalieri-in-ticino-cifre-in-lieve-aumento-440207": "frontalierieticinoaumento",
   "https://www.rsi.ch/s/3936801": "aumento-dei-frontalieri-attivi-in-svizzera",
   "https://www.swissinfo.ch/ita/pensioni%3a-rendite-in-calo%2c-coprono-sempre-meno-l%27ultimo-stipendio/91855785": "di-piu-pensioni-rendite-in-calascoprono-sempre-meno-lultimo-stipendio",
   "https://www.tio.ch/ticino/attualita/1942433/palestina-locarno-territorio-aziende-genocidio": "palestina-locarno-territorio-aziende-genocidio",
@@ -2044,6 +2043,11 @@
   "https://www.tio.ch/ticino/attualita/1954976/ciclabile-lumino-castione-al-via-la-seconda-fase-dei-lavori": {
     "articleId": "ciclabile-lumino-castione-fase-due",
     "ts": "2026-10-06T12:30:34.389Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/senza-case-mobilita-e-scuole-le-province-di-como-e-lecco-rischiano-laddio-di-14mila-persone": {
+    "articleId": "crisi-attrattivita-como-lecco",
+    "ts": "2026-10-06T13:26:39.760Z",
     "keyForm": 2
   }
 }
