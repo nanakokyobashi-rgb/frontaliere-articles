@@ -678,6 +678,8 @@ function normalizeJsonCandidate(input) {
 
 /** Maximum number of later top-level candidate roots inspected after the first one. */
 const MAX_LATER_CANDIDATES = 24;
+/** Extra bound for malformed/unbalanced openers that are discarded. */
+const MAX_LATER_SCANNED_ROOTS = MAX_LATER_CANDIDATES * 4;
 
 /**
  * The only safe reason to skip a valid first payload is an explicit response
@@ -752,6 +754,7 @@ function isNestedRootCandidate(source, rootStart, candidateStart) {
       // context, not evidence that the real later root is nested.
       const stringEnd = scanStringEnd(source, i, true);
       if (stringEnd === -1) return false;
+      if (stringEnd > candidateStart) return true;
       i = stringEnd - 1;
       continue;
     }
@@ -764,12 +767,16 @@ function isNestedRootCandidate(source, rootStart, candidateStart) {
     }
   }
 
+  // A syntactically JSON-like prefix means the opener is still inside the
+  // malformed root, even when a missing comma leaves whitespace before it.
+  // Prose such as `preamble [unbalanced ` fails this check and remains a
+  // boundary after which a real response root is allowed.
+  if (!hasJsonPrefixSyntax(source, rootStart + 1, candidateStart)) return false;
   if (stack.length > 1) return true;
 
   let previous = candidateStart - 1;
   while (previous > rootStart && /\s/.test(source[previous])) previous--;
-  return [':', '[', '{', ','].includes(source[previous])
-    && hasJsonPrefixSyntax(source, rootStart + 1, candidateStart);
+  return source[rootStart] === '[' || [':', '[', '{', ','].includes(source[previous]);
 }
 
 function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {}) {
@@ -779,15 +786,11 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
   const opener = source[start];
   const firstCloseIdx = findMatchingClose(source, start, true);
 
-  // If the preferred root itself is unterminated, later object roots are
-  // normally its still-complete elements, not independent response roots.
-  // Inspecting them as candidates makes a truncated array of FAQ objects
-  // select the first object and discards the rest before the caller's salvage
-  // path can recover them. A later preferred root can still be a real payload
-  // after an unmatched preamble, so keep scanning that root shape only.
-  const laterRootOpeners = preferredRoot && opener === preferredRoot && firstCloseIdx === -1
-    ? [preferredRoot]
-    : rootOpeners;
+  // Keep both root shapes in the search even when the preferred root is
+  // unterminated. `isNestedRootCandidate` filters containers inside it, while
+  // validation/selection decides whether a later wrapper or direct array is
+  // the actual response.
+  const laterRootOpeners = rootOpeners;
 
   const candidates = [];
   const addCandidate = (candidateStart, candidateEnd, balanced) => {
@@ -801,10 +804,13 @@ function collectJsonCandidates(source, rootOpeners, { preferredRoot = null } = {
 
   const collectLaterBalancedCandidates = (from, { skipUnbalanced = false, skipNested = false } = {}) => {
     let nextStart = nextRootStart(source, from, laterRootOpeners);
+    let scanned = 0;
     let examined = 0;
-    while (nextStart !== -1 && examined < MAX_LATER_CANDIDATES) {
+    while (nextStart !== -1 && scanned < MAX_LATER_SCANNED_ROOTS && examined < MAX_LATER_CANDIDATES) {
+      scanned++;
       const nextCloseIdx = findMatchingClose(source, nextStart, true);
-      if (skipNested && isNestedRootCandidate(source, start, nextStart)) {
+      const nested = skipNested && isNestedRootCandidate(source, start, nextStart);
+      if (nested) {
         const nextFrom = nextCloseIdx === -1 ? nextStart + 1 : nextCloseIdx + 1;
         nextStart = nextRootStart(source, nextFrom, laterRootOpeners);
         continue;

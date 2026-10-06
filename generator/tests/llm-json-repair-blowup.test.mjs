@@ -72,9 +72,14 @@ test('repairLlmJsonArray skips an unmatched array preamble before a balanced arr
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
 });
 
-test('repairLlmJsonArray crosses an unmatched quoted prose preamble', () => {
-  const raw = '{ preambolo "foo "bar" : ["Q"]';
-  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), ['Q']);
+test('repairLlmJsonArray keeps a wrapper after an unmatched preferred root', () => {
+  const raw = 'preamble [unbalanced {"faq":[{"q":"Q","a":"A"}]}';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { faq: [{ q: 'Q', a: 'A' }] });
+});
+
+test('repairLlmJsonArray ignores an array inside a recoverable quoted preamble', () => {
+  const raw = '{ "preamble [inside]" ] ["real"]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), ['real']);
 });
 
 test('repairLlmJsonArray keeps a response after malformed array preamble punctuation', () => {
