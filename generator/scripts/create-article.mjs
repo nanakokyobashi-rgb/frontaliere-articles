@@ -6317,11 +6317,12 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     }
   }
 
-  // ── Codex Luna Max when the free verifiers are not enough ──
+  // ── Codex Luna Max safety fallback when the primary vote is missing ──
   //
-  // Owner decision, 2026-09-25: «se i verificatori non funzionano usa codex
-  // luna Max senza secondo parere». After the attempts above two cases are
-  // left without a consensus:
+  // Owner decision, 2026-10-06: Codex is the first verifier in the primary
+  // pair. This block only handles the broker-unavailable/circuit-open case, or
+  // a primary request that produced no vote. Two cases are left without a
+  // consensus:
   //  - no vote at all: Codex verifies alone, and its verdict decides through
   //    the single-model rules below (a FAIL with confidence ≥ 0.5 and
   //    non-minor issues blocks, a PASS passes);
