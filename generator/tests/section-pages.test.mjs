@@ -36,6 +36,7 @@ import {
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
+import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
@@ -130,12 +131,90 @@ test('publisher: una sezione cantonale nuova o vuota ha una release articolo vuo
 
   writeFileSync(slugPath, 'export const CANTON_SLUGS: Record<string, Record<string, string>> = {\n};\n');
   assert.deepEqual(articleReleaseSnapshot(root, 'canton-ti'), []);
+  assert.deepEqual(sourceRegistryIds(root, 'canton-ti'), []);
 
   writeFileSync(slugPath, `export const CANTON_SLUGS = {
   'orphan': { it: 'orphan-it', en: 'orphan-en', de: 'orphan-de', fr: 'orphan-fr' },
 };
 `);
   assert.throws(() => articleReleaseSnapshot(root, 'canton-ti'), /registry\/slugs incoerenti/);
+});
+
+test('publisher/floors: una coppia cantonale parziale resta un rifiuto fail-closed', () => {
+  const source = sectionSourceSurfaces('canton-ti');
+  const root = mkdtempSync(path.join(tmpdir(), 'floor-partial-'));
+  const registryPath = path.join(root, source.registryFile);
+  mkdirSync(path.dirname(registryPath), { recursive: true });
+  writeFileSync(registryPath, 'export const CANTON_ARTICLES: Article[] = [\n];\n');
+  assert.throws(() => sourceRegistryIds(root, 'canton-ti'), /registry\/slugs incompleti/);
+});
+
+test('publisher: una pagina obsoleta resta intatta se la release corrente non e\' servita', async () => {
+  const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
+  const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
+  const calls = [];
+  const probes = [];
+  const okPage = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'contenuto '.repeat(40)}</body></html>`;
+  const result = await publish({
+    section: 'canton-ti',
+    pages: [current],
+    cdnUploads: [],
+    obsoletePages: [obsolete],
+    distDir: mkdtempSync(path.join(tmpdir(), 'publish-obsolete-')),
+    publishedStatusImpl: async () => 'draft',
+    runImpl: (command, args) => {
+      calls.push({ command, args });
+      if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) return { code: 0, stdout: '✅ uploaded' };
+      if (args.some((arg) => arg.endsWith('retry-cmd.sh'))) return { code: 0, stdout: '' };
+      throw new Error(`non deve cancellare prima della verifica: ${args.join(' ')}`);
+    },
+    probeImpl: async (url) => {
+      probes.push(url);
+      return url === current.cdnUrl
+        ? { ok: false, status: 500, body: '' }
+        : { ok: true, status: 200, body: okPage };
+    },
+  });
+  assert.equal(result.failures, 1);
+  assert.equal(result.deleted, 0);
+  assert.ok(!calls.some(({ args }) => args.some((arg) => arg.endsWith('delete-cdn-file.sh'))));
+  assert.ok(probes.some((url) => url === current.cdnUrl));
+});
+
+test('publisher: la cancellazione obsoleta arriva dopo purge e verifica della release corrente', async () => {
+  const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
+  const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
+  const events = [];
+  const html = `<!doctype html><html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'contenuto '.repeat(40)}</body></html>`;
+  const result = await publish({
+    section: 'canton-ti',
+    pages: [current],
+    cdnUploads: [],
+    obsoletePages: [obsolete],
+    distDir: mkdtempSync(path.join(tmpdir(), 'publish-obsolete-order-')),
+    publishedStatusImpl: async () => 'draft',
+    runImpl: (_command, args) => {
+      if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) events.push('upload');
+      else if (args.some((arg) => arg.endsWith('delete-cdn-file.sh'))) events.push('delete');
+      else if (args.some((arg) => arg.endsWith('retry-cmd.sh'))) events.push('purge');
+      return {
+        code: 0,
+        stdout: args.some((arg) => arg.endsWith('delete-cdn-file.sh')) ? '✅ deleted' : '✅ uploaded',
+      };
+    },
+    probeImpl: async (url) => {
+      if (url === obsolete.cdnUrl) {
+        events.push('probe-obsolete');
+        return { ok: false, status: 'HTTP 404', body: '' };
+      }
+      events.push('probe-current');
+      return { ok: true, status: 200, body: html };
+    },
+  });
+  assert.equal(result.failures, 0);
+  assert.equal(result.deleted, 1);
+  assert.ok(events.indexOf('probe-current') < events.indexOf('delete'));
+  assert.ok(events.indexOf('delete') < events.indexOf('probe-obsolete'));
 });
 
 test('publisher: un hero CDN non confermato blocca l\'HTML della stessa release', async () => {

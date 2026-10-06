@@ -469,21 +469,28 @@ export async function publish({
       console.log(`::error::[${LOG}] pagina non caricata: ${page.edgeKey}`);
     }
   }
-  const deleted = [];
-  for (const page of obsoletePages) {
-    const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
-    if (stdout.includes('✅ deleted')) deleted.push(page);
-    else {
-      failures++;
-      console.log(`::error::[${LOG}] vecchia pagina non cancellata: ${page.edgeKey}`);
-    }
-  }
-  const purgeUrls = [...uploaded, ...obsoletePages].flatMap((page) => [page.apexUrl, page.cdnUrl]);
-  for (const chunk of purgeChunks(purgeUrls)) {
-    const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
-    if (code !== 0) failures++;
+
+  // Non cancellare URL della release precedente finche' la nuova release non
+  // e' stata caricata, purgata e letta. Durante il normale interleaving con
+  // publish-api una sitemap precedente puo' ancora annunciare quelle URL: una
+  // failure parziale qui deve lasciare intatta la superficie vecchia.
+  if (failures) {
+    console.error(`::error::[${LOG}] upload HTML incompleto: nessuna pagina obsoleta viene cancellata`);
+    return { failures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
   }
 
+  const purge = (pageList) => {
+    const urls = pageList.flatMap((page) => [page.apexUrl, page.cdnUrl]);
+    for (const chunk of purgeChunks(urls)) {
+      const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
+      if (code !== 0) failures++;
+    }
+  };
+
+  // Purge/verify only the current release first. Obsolete keys stay present
+  // until this pass is green, so a stale sitemap never points at a 404 caused
+  // by a partially published replacement.
+  purge(uploaded);
   const status = await publishedStatusImpl(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
@@ -506,6 +513,24 @@ export async function publish({
       }
     }
   }
+
+  if (failures) {
+    console.error(`::error::[${LOG}] release corrente non verificata: nessuna pagina obsoleta viene cancellata`);
+    return { failures, uploaded: uploaded.length, deleted: 0, status };
+  }
+
+  const deleted = [];
+  for (const page of obsoletePages) {
+    const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
+    if (stdout.includes('✅ deleted')) deleted.push(page);
+    else {
+      failures++;
+      console.log(`::error::[${LOG}] vecchia pagina non cancellata: ${page.edgeKey}`);
+    }
+  }
+  // The current release was already served before the delete. Purge the old
+  // keys only after their delete requests, then retain the 404 verification.
+  purge(obsoletePages);
   for (const page of obsoletePages) {
     const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
     if (old.status !== 'HTTP 404') {
