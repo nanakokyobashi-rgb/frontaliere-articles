@@ -4,12 +4,13 @@
  * Classifica il fallimento della review Codex usando lo stream JSONL prodotto
  * da `codex exec --json`.
  *
- * Il file è un artefatto effimero della singola run: non contiene token o
- * prompt, ma solo gli eventi diagnostici del processo. La classificazione è
- * volutamente conservativa e usa prima i campi strutturati; il testo libero è
- * considerato solo quando arriva da un evento esplicitamente fallito/errato.
+ * Il file è un artefatto privato ed effimero della singola run: lo stream può
+ * contenere testo del processo, quindi la superficie pubblica riceve solo
+ * classi allowlisted e conteggi. La classificazione è volutamente conservativa
+ * e usa prima i campi strutturati; il testo libero è considerato solo quando
+ * arriva da un evento esplicitamente fallito/errato.
  *
- * @returns {{cause: 'max_turns'|'rate_limit'|'server_error'|'cancelled'|'non_retryable'|'none', numTurns: number|null, source: 'structured'|'text'|'outcome'|'watchdog'|'none', readError?: string}}
+ * @returns {{cause: 'max_turns'|'rate_limit'|'server_error'|'cancelled'|'startup_failure'|'non_retryable'|'none', numTurns: number|null, source: 'structured'|'text'|'outcome'|'watchdog'|'startup'|'none', readError?: string}}
  */
 
 import fs from 'node:fs';
@@ -251,7 +252,7 @@ export function classifyCodexReviewFailure({
   exitCode = null,
   reviewPosted = false,
   sideEffectDetected = null,
-  } = {}) {
+} = {}) {
   const normalizedOutcome = String(outcome || '').toLowerCase();
   const telemetry = summarizeCodexDiagnostics(raw);
   const events = parseJsonEvents(raw);
