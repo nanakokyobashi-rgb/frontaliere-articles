@@ -148,6 +148,11 @@ import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { CrossRepoRateLimitError, createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { relativeImportSpecifiers } from './lib/import-specifiers.mjs';
+import {
+  EXIT_INVALID_MANIFEST,
+  guardManifestState,
+  writeManifestWithGuard,
+} from './lib/manifest-entry-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -641,6 +646,14 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').sl
 
 function readManifest() {
   return JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+}
+
+function manifestBlobSha(rel) {
+  try {
+    return gitBlobSha(fs.readFileSync(path.join(ROOT, rel)));
+  } catch {
+    return null;
+  }
 }
 
 /** Hash del file locale, o del blob committato durante `--init`. */
@@ -1912,7 +1925,8 @@ async function main() {
     console.error(forceError);
     return 1;
   }
-  const manifest = readManifest();
+  const manifestBytes = fs.readFileSync(MANIFEST_PATH);
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
   const manifestBefore = JSON.parse(JSON.stringify(manifest));
   const { targets: initTargets, unknown: initUnknown } = resolveInitTargets(ONLY, manifest.files.map((f) => f.path));
   if (initUnknown.length) {
@@ -2227,7 +2241,13 @@ async function main() {
       }
     }
     if (outcome.write) {
-      fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
+      const written = writeManifestWithGuard({
+        manifestPath: MANIFEST_PATH,
+        manifest,
+        originalBytes: manifestBytes,
+        blobShaForPath: manifestBlobSha,
+      });
+      if (!written.ok) return EXIT_INVALID_MANIFEST;
       console.log(`Baseline registrate per ${initWritten.length} file: ${initWritten.join(', ')}.`);
     }
     if (skipped) {
@@ -2252,6 +2272,15 @@ async function main() {
       if (!initWritten.length && !skipped) {
         console.error(`--init: nessuna voce registrata: ${initFailed.length} non verificate.`);
       }
+    }
+    if (!outcome.write) {
+      const guard = guardManifestState({
+        manifestPath: MANIFEST_PATH,
+        manifest,
+        originalBytes: manifestBytes,
+        blobShaForPath: manifestBlobSha,
+      });
+      if (!guard.ok) return EXIT_INVALID_MANIFEST;
     }
     return outcome.exitCode;
   }

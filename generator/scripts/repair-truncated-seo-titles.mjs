@@ -144,6 +144,19 @@ export function repairFile(source, filePlans) {
   return output;
 }
 
+let writeTmpSeq = 0;
+
+function writeAtomic(file, content) {
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    fs.writeFileSync(tmp, content, 'utf8');
+    fs.renameSync(tmp, file);
+  } catch (error) {
+    try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw error;
+  }
+}
+
 export function applyPlans(plans) {
   const byFile = new Map();
   for (const plan of plans) {
@@ -152,7 +165,7 @@ export function applyPlans(plans) {
   }
   for (const [absolute, filePlans] of byFile) {
     const source = fs.readFileSync(absolute, 'utf8');
-    fs.writeFileSync(absolute, repairFile(source, filePlans));
+    writeAtomic(absolute, repairFile(source, filePlans));
   }
   return byFile.size;
 }

@@ -49,6 +49,9 @@
  * Dopo il figlio si rilegge il manifest: la baseline scritta deve essere
  * ESATTAMENTE la coppia di hash su cui le prove sono state valutate. Se il sito
  * si e' mosso fra la valutazione e la scrittura, la voce torna com'era.
+ * Se la coppia converge, la voce passa a `identical` solo quando la stessa
+ * guardia del trasporto non trova vincoli bloccanti; altrimenti la voce resta
+ * trattenuta con la decisione sulla `mode` ancora da prendere.
  *
  * ## PR del sito SENZA meta' corpus
  *
@@ -87,6 +90,8 @@
  *   2  errore d'uso;
  *   1  eccezione non gestita: il manifest sul disco non e' certificato e il
  *      workflow NON lo pusha.
+ *      La stessa uscita vale per la guardia finale: ripristina i byte originali
+ *      quando una voce prodotta non rispetta la forma del manifest.
  *
  * Env:
  *   GH_TOKEN                   token per le API GitHub (PR del corpus, storia del sito)
@@ -104,9 +109,15 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { createRawFetcher } from '../lib/cross-repo-raw-fetch.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
-import { sha256, siteFile } from './loop-drift-check.mjs';
+import { gitBlobSha, sha256, siteFile } from './loop-drift-check.mjs';
 import { MANIFEST_PATH } from './transport-realign-body.mjs';
+import { localCouplings, permanentBlock } from './transport-identical-twins.mjs';
 import { pruneRatchetFile } from './lib/adapted-drift.mjs';
+import {
+  EXIT_INVALID_MANIFEST,
+  guardManifestState,
+  writeManifestWithGuard,
+} from './lib/manifest-entry-rules.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const TOOL = 'realign-adapted-baseline';
@@ -200,6 +211,42 @@ export function collectDeclarations(prs) {
 }
 
 const hold = (status, reason) => ({ realign: false, held: true, status, reason });
+
+/**
+ * Decide se una convergenza puo' chiudere anche la decisione sul `mode`.
+ * `permanentBlock` e' la stessa guardia usata dal trasporto: in particolare
+ * riusa `couplingBlockers`, senza ricostruire qui il grafo dei vincoli.
+ */
+export function convergedModeDecision({ entry, expected, couplings = [], outOfScopePrefixes = [] }) {
+  const converged = typeof expected?.site === 'string' && expected.site === expected.corpus;
+  if (!converged) return { converged: false, convert: false, held: false, status: null, reason: '' };
+  const blocker = permanentBlock(
+    { ...entry, mode: 'identical' },
+    { outOfScopePrefixes, couplings },
+  );
+  if (blocker) {
+    return {
+      ...hold('converged-needs-mode', `convergente: serve la decisione sulla \`mode\` (${blocker})`),
+      converged: true,
+      convert: false,
+    };
+  }
+  return {
+    converged: true,
+    convert: true,
+    held: false,
+    status: 'converged-to-identical',
+    reason: 'convergente: i due lati hanno la stessa impronta e il trasporto non rileva vincoli bloccanti',
+  };
+}
+
+/** Porta una voce convergente alla forma `identical`, senza la prosa adapted. */
+export function convertConvergedEntry(entry) {
+  entry.mode = 'identical';
+  delete entry.reason;
+  delete entry.adaptationIssue;
+  return entry;
+}
 
 /** Rifiuti che dipendono solo dalla voce e dalla dichiarazione: nessuna rete. */
 function entryHold(entry, declaration) {
@@ -475,6 +522,14 @@ function readManifest() {
   return JSON.parse(fs.readFileSync(path.join(ROOT, MANIFEST_PATH), 'utf8'));
 }
 
+function manifestBlobSha(rel) {
+  try {
+    return gitBlobSha(fs.readFileSync(path.join(ROOT, rel)));
+  } catch {
+    return null;
+  }
+}
+
 async function main(argv) {
   const dryRun = argv.includes('--dry-run');
   const paths = splitList(argValue(argv, 'paths'));
@@ -521,6 +576,7 @@ async function main(argv) {
 
   const manifestBytes = fs.readFileSync(path.join(ROOT, MANIFEST_PATH));
   const before = JSON.parse(manifestBytes.toString('utf8'));
+  const manifestPath = path.join(ROOT, MANIFEST_PATH);
   const entryOf = (manifest, rel) => manifest.files.find((entry) => entry.path === rel) || null;
   const rows = [];
   for (const declaration of declarations) {
@@ -535,6 +591,27 @@ async function main(argv) {
     rows.push({ declaration, entry, decision });
   }
 
+  const modeOf = new Map(before.files.map((entry) => [entry.path, entry.mode]));
+  const outOfScopePrefixes = (before.scope?.outOfScope || []).map((item) => item.prefix);
+  for (const row of rows.filter((candidate) => candidate.decision.realign)) {
+    const couplings = localCouplings(row.declaration.path, modeOf);
+    const modeDecision = convergedModeDecision({
+      entry: row.entry,
+      expected: row.decision.expected,
+      couplings,
+      outOfScopePrefixes,
+    });
+    row.modeDecision = modeDecision;
+    if (modeDecision.held) {
+      row.decision = modeDecision;
+    } else if (modeDecision.convert) {
+      row.decision = {
+        ...row.decision,
+        reason: `${row.decision.reason}; ${modeDecision.reason}`,
+      };
+    }
+  }
+
   const toInit = rows.filter((row) => row.decision.realign);
   if (toInit.length && !dryRun) {
     const child = spawnSync(
@@ -543,18 +620,35 @@ async function main(argv) {
       { cwd: ROOT, stdio: 'inherit' },
     );
     if (child.error) throw child.error;
-    const after = readManifest();
-    let reverted = false;
+    let after;
+    try {
+      after = readManifest();
+    } catch (error) {
+      fs.writeFileSync(manifestPath, manifestBytes);
+      console.error(`::error::${TOOL}: il manifest prodotto da \`--init\` non e' JSON valido: ${String(error?.message || error).slice(0, 160)}`);
+      return EXIT_INVALID_MANIFEST;
+    }
+    const afterGuard = guardManifestState({
+      manifestPath,
+      manifest: after,
+      originalBytes: manifestBytes,
+      blobShaForPath: manifestBlobSha,
+    });
+    if (!afterGuard.ok) return EXIT_INVALID_MANIFEST;
     for (const row of toInit) {
       const afterEntry = entryOf(after, row.declaration.path);
       const verdict = verifyInitResult({ before: row.entry, after: afterEntry || row.entry, expected: row.decision.expected });
       if (verdict.ok) {
-        row.decision = { ...row.decision, status: 'realigned' };
+        if (row.modeDecision?.convert) {
+          convertConvergedEntry(afterEntry);
+          row.decision = { ...row.decision, status: 'converted-to-identical' };
+        } else {
+          row.decision = { ...row.decision, status: 'realigned' };
+        }
         continue;
       }
       if (verdict.revert) {
         afterEntry.baseline = row.entry.baseline;
-        reverted = true;
         console.log(`::warning::${TOOL}: ${row.declaration.path} — ${verdict.reason}; riportata com'era, la prossima passata ritenta.`);
       }
       row.decision = hold(verdict.status, verdict.reason);
@@ -563,11 +657,25 @@ async function main(argv) {
       failed = true;
       console.log(`::error::${TOOL}: \`loop-drift-check.mjs --init\` ha rifiutato una voce che aveva passato le tre prove (exit ${child.status}): vedi il log qui sopra.`);
     }
-    if (!rows.some((row) => row.decision.status === 'realigned')) {
+    const writtenRows = rows.filter((row) => row.decision.status === 'realigned' || row.decision.status === 'converted-to-identical');
+    if (!writtenRows.length) {
       // Nessuna voce certificata: il manifest torna byte per byte com'era.
-      fs.writeFileSync(path.join(ROOT, MANIFEST_PATH), manifestBytes);
-    } else if (reverted) {
-      fs.writeFileSync(path.join(ROOT, MANIFEST_PATH), `${JSON.stringify(after, null, 2)}\n`);
+      fs.writeFileSync(manifestPath, manifestBytes);
+      const guard = guardManifestState({
+        manifestPath,
+        manifest: before,
+        originalBytes: manifestBytes,
+        blobShaForPath: manifestBlobSha,
+      });
+      if (!guard.ok) return EXIT_INVALID_MANIFEST;
+    } else {
+      const written = writeManifestWithGuard({
+        manifestPath,
+        manifest: after,
+        originalBytes: manifestBytes,
+        blobShaForPath: manifestBlobSha,
+      });
+      if (!written.ok) return written.exitCode;
     }
     // Il ratchet dei gemelli `adapted` in drift (issue #339) si abbassa qui, nel
     // momento in cui la baseline si muove davvero: toglierlo nella PR che porta
@@ -575,9 +683,21 @@ async function main(argv) {
     // rosso nella finestra fra il merge e questa passata.
     const pruned = pruneRatchetFile(
       ROOT,
-      rows.filter((row) => row.decision.status === 'realigned').map((row) => row.declaration.path),
+      rows
+        .filter((row) => row.decision.status === 'realigned' || row.decision.status === 'converted-to-identical')
+        .map((row) => row.declaration.path),
     );
     if (pruned.length) console.log(`${TOOL}: tolti dal ratchet dei gemelli adapted in drift: ${pruned.join(', ')}`);
+  }
+
+  if (!(toInit.length && !dryRun)) {
+    const guard = guardManifestState({
+      manifestPath,
+      manifest: before,
+      originalBytes: manifestBytes,
+      blobShaForPath: manifestBlobSha,
+    });
+    if (!guard.ok) return EXIT_INVALID_MANIFEST;
   }
 
   const describe = (row) => {
@@ -585,7 +705,7 @@ async function main(argv) {
     const origin = source.kind === 'pr' ? `PR #${source.number} del ${String(source.mergedAt).slice(0, 10)}` : 'dispatch manuale';
     return `\`${row.declaration.path}\` (${origin}; sito ${row.declaration.sitePrs.map((n) => `#${n}`).join(', ')})`;
   };
-  const realigned = rows.filter((row) => row.decision.status === 'realigned' || row.decision.status === 'realign');
+  const realigned = rows.filter((row) => row.decision.status === 'realigned' || row.decision.status === 'converted-to-identical' || row.decision.status === 'realign');
   const held = rows.filter((row) => row.decision.held);
   const settled = rows.filter((row) => row.decision.status === 'already-aligned');
   const stale = held.filter((row) => isStaleDeclaration({ decision: row.decision, entry: row.entry, source: row.declaration.sources[0], nowMs, staleDays }));
