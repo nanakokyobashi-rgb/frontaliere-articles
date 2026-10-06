@@ -736,7 +736,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         _outcome: outcome,
       });
 
-      assert.equal(out, 'vera traduzione');
+      assert.equal(
+        out,
+        IT.split('\n').map((line) => (line ? 'vera traduzione' : '')).join('\n'),
+      );
       assert.equal(outcome.incomplete, true);
     } finally {
       setLocalOpusMtForTests(null);
