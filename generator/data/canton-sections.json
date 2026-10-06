@@ -191,27 +191,6 @@
           "notes": "15 link /news/<slug> server-rendered. items7d = numero di link (non filtrati per data). Sanita'/ospedali: unica fonte ospedaliera AG con lista leggibile (KSA medienmitteilungen: nessun link)."
         },
         {
-          "url": "https://www.dorfheftli.ch/?format=feed&type=rss",
-          "format": "rss",
-          "parser": "rss",
-          "publisher": "Dorfheftli",
-          "language": "de",
-          "kind": "media",
-          "topics": [
-            "cronaca",
-            "eventi",
-            "servizi",
-            "lavoro",
-            "mobilita"
-          ],
-          "quirks": {
-            "contentSignal": "ai-input=yes, ai-train=no"
-          },
-          "items7d": 16,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/rss+xml; charset=utf-8, 16 item totali e 16 negli ultimi 7 giorni. Titoli: Grosser Empfang auf dem Dorfplatz; Moonlight; Alzbachfeld – Wo Wohnträume Gestalt annehmen. Testata locale indipendente con filtro geografico necessario. robots.txt 200: Allow / e Content-Signal ai-input=yes, ai-train=no; ClaudeBot, anthropic-ai, GPTBot, ChatGPT-User e OAI-SearchBot risultano esplicitamente Allow. Impressum consultato senza divieto di accesso automatizzato."
-        },
-        {
           "url": "https://www.reussbote.ch/rss.xml",
           "format": "rss",
           "parser": "rss",
@@ -1002,26 +981,6 @@
           "items7d": 10,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/xml, 9.264 byte, 10 item/entry e 10 negli ultimi 7 giorni. Titoli: Ipsach: Arbeitskran eingeknickt – Bahnstrecke und Hauptstrasse gesperrt; Thun: Revokation Vermisstmeldung – 69-Jähriger aufgefunden; Englisberg/Zeugenaufruf: 69-jähriger dementer Mann vermisst. Feed Atom ufficiale collegato al catalogo RSS di be.ch, utile per la cronaca/polizia e gli avvisi cantonali. robots.txt esatto del sottodominio API risponde 403: non sono state applicate tecniche di bypass; le direttive AI non sono quindi verificabili su quel file."
-        },
-        {
-          "url": "https://www.api.news.apps.be.ch/api/atom/news?lang=fr",
-          "format": "atom",
-          "parser": "atom",
-          "publisher": "Canton de Berne (be.ch, flux Atom d'actualités)",
-          "language": "fr",
-          "kind": "istituzionale",
-          "topics": [
-            "cronaca",
-            "mobilita",
-            "servizi",
-            "lavoro"
-          ],
-          "quirks": {
-            "robotsTxt": "unreachable"
-          },
-          "items7d": 10,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale con UA frontaliere-source-probe/1.0: status 200, content-type application/xml, 9.258 byte, 10 item/entry e 10 negli ultimi 7 giorni. Titoli: Ipsach: Effondrement d’une grue de chantier – Ligne de chemin de fer et route principale fermées; Pneumonie enzootique: pas de nouvel élevage touché à ce jour; Chômage stable en septembre. È la variante francese dello stesso feed ufficiale: mantenere il flag di deduplicazione per le storie bilingui. robots.txt esatto del sottodominio API risponde 403; nessun bypass e nessuna assunzione sulle direttive non osservabili."
         }
       ],
       "categoryDataSources": {
@@ -5270,27 +5229,6 @@
           "items7d": 4,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type application/rss+xml; charset=utf-8, 12 item nel feed. Quattro item OW nella finestra 29.09–06.10: «Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden», «Eiffelturm, Burj Khalifa – und jetzt Engelberg», «Zwischen Weltcup und Bauernhof: Janik Riebli aus Giswil» e «Odermatt, Gisin & Co.: So kämpfen sich Unterwaldens Ski-Asse in den Winter»; il feed è condiviso e va filtrato per OW/NW. robots.txt nomina gli user-agent AI ma consente esplicitamente / e /feed/ (vieta solo /admin/ e /api/); AGB/Impressum consultati senza divieto di raccolta."
-        },
-        {
-          "url": "https://obwaldenticker.ch/",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "obwaldenticker.ch / belmedia",
-          "language": "de",
-          "kind": "media",
-          "topics": [
-            "cronaca",
-            "servizi",
-            "mobilita",
-            "eventi"
-          ],
-          "quirks": {
-            "datesInList": false,
-            "articlePathPattern": "^/20\\d{2}/\\d{2}/\\d{2}/[^/?]+/?$"
-          },
-          "items7d": 0,
-          "verifiedAt": "2026-10-06",
-          "notes": "GET reale: status 200, content-type text/html; charset=UTF-8. Portale regionale con link HTML ma ultimo contenuto datato 04.09.2026; campioni: «30 Jahre RAV: ...», «Neue Plattform macht rund 60 Kleinseilbahnen in Uri und Nidwalden sichtbar», «Wanderungen/Naturangebote im Regionalraum». 0 item negli ultimi 7 giorni; robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum consultato."
         }
       ],
       "categoryDataSources": {
@@ -7881,23 +7819,6 @@
           }
         ],
         "fisco": [
-          {
-            "url": "https://www3.ti.ch/xml/rss/rss-attualita-1251.xml",
-            "format": "rss",
-            "parser": "rss",
-            "publisher": "Divisione delle contribuzioni - Cantone Ticino",
-            "language": "it",
-            "kind": "fisco",
-            "topics": [
-              "fisco",
-              "servizi"
-            ],
-            "quirks": {},
-            "items7d": 0,
-            "verifiedAt": "2026-10-06",
-            "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/xml. Items ultimi 7 giorni: 0. Titoli osservati: \"Vi informiamo che è stata pubblicata la nuova circolare n. 32 relativa all’imposizione delle partecipazioni di collaboratore\"; \"Modifiche della Legge tributaria entrate in vigore con effetto retroattivo al 1° gennaio 2023\"; \"La Divisione delle contribuzioni comunica che a partire dal 01.01.2023 sono state abolite le Attestazioni vincolanti\". Feed RSS con 10 item, ultimo 18.08.2026: 0 negli ultimi 7 giorni, ma fonte ufficiale per circolari e prassi fiscali. Alcuni link assoluti sono malformati (https://www.ti.chhttps://...): normalizzare prima del fetch. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www4.ti.ch/tich/informazioni-legali/informazioni-legali -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato.",
-            "reserve": true
-          }
         ],
         "pensioni": [
           {
