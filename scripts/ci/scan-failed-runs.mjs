@@ -308,6 +308,160 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
   'Publish article data API',
 ]);
 
+// ── Famiglie di workflow GENERATI ────────────────────────────────────────────
+// «Una issue per WORKFLOW» presume che due workflow siano due cose diverse. Non
+// vale per i caller generati da un'unica sorgente: i 24
+// `generate-article-<cantone>.yml` escono da
+// `scripts/ci/generate-canton-article-workflows.mjs` e chiamano tutti
+// `generate-article-core.yml`, quindi un difetto della sorgente o del core li
+// fa fallire TUTTI con la stessa firma. Misurato il 2026-10-05: il self-test
+// dei caller ha aperto una issue per cantone (#2235–#2244, poi #2265–#2272),
+// il triage le ha instradate una per una e sette `issue-fix` in parallelo
+// hanno prodotto sei PR sugli stessi 26 file (#2245 #2246 #2247 #2248 #2249
+// #2251 #2255): due mergiate, le altre in conflitto fra loro per ore.
+//
+// La regola e' stretta di proposito, perche' sopprimere una segnalazione e' il
+// verso pericoloso: un membro e' coperto da un fratello SOLO se la firma del
+// guasto e' identica. Le firme sono due:
+//   - gli step falliti, quando almeno un job e' partito. Un cantone che
+//     fallisce su uno step diverso (la sua fonte, il suo profilo) resta una
+//     issue a se';
+//   - `RUN_LEVEL_SIGNATURE`, quando la run e' fallita senza avviare NESSUN job.
+//     E' il caso misurato (18 issue aperte su 18 il 2026-10-06, tutte
+//     «nessun job fallito riportato dall'API»): una run che muore prima di
+//     qualunque job non ha ancora letto niente del cantone, quindi la causa e'
+//     nella definizione generata o nel core condiviso, cioe' comune.
+// Una lettura dei job FALLITA non e' una firma: quel membro non copre e non e'
+// coperto. Niente titolo di famiglia: la issue resta quella del membro
+// rappresentante, cosi' `close-recovered-failure-issues.mjs` la chiude come
+// sempre quando quel workflow torna verde, e se un fratello e' ancora rosso la
+// passata successiva apre la sua.
+//
+// I nomi sono legati ai `name:` reali degli YAML generati da
+// `generator/tests/scan-failed-runs-family.test.mjs`.
+export const GENERATED_WORKFLOW_FAMILIES = Object.freeze([
+  Object.freeze({
+    id: 'canton-article',
+    label: 'Generate Blog Article (canton-*)',
+    // Frase cercata nei titoli delle issue aperte; l'appartenenza la decide
+    // `nameRe`, la ricerca serve solo a restringere la lettura.
+    titleSearch: 'Workflow Failure: Generate Blog Article',
+    nameRe: /^Generate Blog Article \(canton-[a-z0-9-]+\)$/,
+    source: 'scripts/ci/generate-canton-article-workflows.mjs',
+  }),
+]);
+
+/** La famiglia di workflow generati a cui appartiene `name`, o null. Pura. */
+export function workflowFamilyOf(name) {
+  const value = String(name || '');
+  return GENERATED_WORKFLOW_FAMILIES.find((family) => family.nameRe.test(value)) || null;
+}
+
+/** Firma di una run fallita senza avviare nessun job. */
+export const RUN_LEVEL_SIGNATURE = '(run-level: nessun job avviato)';
+// La riga che il corpo generico scrive quando l'API non riporta job falliti:
+// una sola sorgente per chi la scrive (`main`) e per chi la rilegge qui sotto.
+export const NO_FAILED_JOBS_LINE = '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';
+
+/**
+ * Firma di un guasto. Con `runLevel` (lettura riuscita, zero job falliti) e'
+ * `RUN_LEVEL_SIGNATURE`; altrimenti gli step falliti, ordinati e senza
+ * duplicati. Vuota quando non c'e' niente di leggibile: una firma vuota non
+ * prova una causa comune, quindi non copre nessuno. Pura.
+ */
+export function failureSignature(jobs, { runLevel = false } = {}) {
+  if (runLevel) return RUN_LEVEL_SIGNATURE;
+  const steps = (Array.isArray(jobs) ? jobs : [])
+    .map((job) => String(job?.step || '').trim())
+    .filter(Boolean);
+  return [...new Set(steps)].sort().join(' | ');
+}
+
+const ISSUE_BODY_FAILED_STEP_RE = /step fallito: `([^`]+)`/g;
+
+/** La stessa firma, riletta dal corpo generico di una issue gia' aperta. Pura. */
+export function failureSignatureFromIssueBody(body) {
+  const text = String(body || '');
+  const steps = [...text.matchAll(ISSUE_BODY_FAILED_STEP_RE)].map((m) => m[1].trim()).filter(Boolean);
+  if (steps.length > 0) return [...new Set(steps)].sort().join(' | ');
+  return text.includes(NO_FAILED_JOBS_LINE) ? RUN_LEVEL_SIGNATURE : '';
+}
+
+/**
+ * Raggruppa i membri di famiglia falliti nella stessa passata per (famiglia,
+ * firma). Il primo di ogni gruppo, nell'ordine servito, e' il rappresentante;
+ * gli altri sono coperti da lui. Membri senza firma restano fuori. Pura.
+ *
+ * @param {Array<{name: string, jobs: Array, runLevel?: boolean, runUrl?: string}>} entries
+ * @returns {{ covered: Map<string, string>, siblings: Map<string, Array<{name: string, runUrl: string}>> }}
+ *   `covered`: membro → rappresentante; `siblings`: rappresentante → membri coperti.
+ */
+export function planFamilyCollapse(entries) {
+  const covered = new Map();
+  const siblings = new Map();
+  const representatives = new Map();
+  for (const entry of Array.isArray(entries) ? entries : []) {
+    const family = workflowFamilyOf(entry?.name);
+    const signature = failureSignature(entry?.jobs, { runLevel: entry?.runLevel === true });
+    if (!family || !signature) continue;
+    const key = `${family.id}\u0000${signature}`;
+    const representative = representatives.get(key);
+    if (!representative) {
+      representatives.set(key, entry.name);
+      continue;
+    }
+    covered.set(entry.name, representative);
+    if (!siblings.has(representative)) siblings.set(representative, []);
+    siblings.get(representative).push({ name: entry.name, runUrl: String(entry.runUrl || '') });
+  }
+  return { covered, siblings };
+}
+
+// Oltre questa eta' una issue aperta non copre piu' nessuno: se la famiglia
+// fallisce ancora un giorno dopo, o il primo fix non ha funzionato o la causa
+// e' nuova, e in entrambi i casi serve un segnale fresco. Senza il tetto una
+// issue parcheggiata (`fu-parked`, `needs-human`) coprirebbe per sempre.
+export const FAMILY_COVER_MAX_AGE_HOURS = 24;
+
+/**
+ * Una issue gia' APERTA di un fratello copre questo membro? Si', se e' della
+ * stessa famiglia, di un altro workflow, aperta da meno di
+ * `FAMILY_COVER_MAX_AGE_HOURS`, e il suo corpo riporta la stessa firma non
+ * vuota. Una data di apertura illeggibile non copre. Pura.
+ *
+ * @param {{name: string, jobs: Array, runLevel?: boolean}} entry
+ * @param {Array<{number: number, title: string, body: string, createdAt: string}>} openIssues
+ * @param {{now?: number}} [opts]
+ * @returns {{number: number, title: string}|null}
+ */
+export function openSiblingIssueCovering(entry, openIssues, { now = Date.now() } = {}) {
+  const family = workflowFamilyOf(entry?.name);
+  const signature = failureSignature(entry?.jobs, { runLevel: entry?.runLevel === true });
+  if (!family || !signature) return null;
+  const ownTitle = `Workflow Failure: ${entry.name}`;
+  return (Array.isArray(openIssues) ? openIssues : []).find((issue) => {
+    const title = String(issue?.title || '');
+    if (!title.startsWith('Workflow Failure: ') || title === ownTitle) return false;
+    if (!family.nameRe.test(title.slice('Workflow Failure: '.length))) return false;
+    const openedAt = Date.parse(issue?.createdAt ?? '');
+    if (!Number.isFinite(openedAt) || now - openedAt > FAMILY_COVER_MAX_AGE_HOURS * 3_600_000) return false;
+    return failureSignatureFromIssueBody(issue?.body) === signature;
+  }) || null;
+}
+
+/** Paragrafo aggiunto alla issue del rappresentante: dice al fixer che e' una classe. Pura. */
+export function familySiblingsNote(family, siblings) {
+  if (!family || !Array.isArray(siblings) || siblings.length === 0) return '';
+  return [
+    '',
+    `**Stessa famiglia, stessa firma, nella stessa passata (${siblings.length})**`,
+    '',
+    `Questi workflow sono generati dalla stessa sorgente (\`${family.source}\`) e sono falliti sugli stessi step: la causa e' comune, e questa issue li rappresenta tutti. Correggi la sorgente o il workflow condiviso, non il singolo caller.`,
+    '',
+    ...siblings.map((sibling) => `- ${sibling.name}${sibling.runUrl ? ` — ${sibling.runUrl}` : ''}`),
+  ].join('\n');
+}
+
 /**
  * Ordina i workflow di sorveglianza prima del cap `MAX_ISSUES`. `sort` in Node
  * e' stabile, quindi per tutti gli altri resta l'ordine di inserimento.
@@ -1263,19 +1417,55 @@ export function capUnitsForRun({ name, delivered }) {
   return delivered > 0 ? 1 : 0;
 }
 
+/**
+ * Le issue aperte che possono coprire un membro della famiglia, lette una
+ * volta per passata. Una lettura fallita rende `[]`: nessuna copertura, quindi
+ * la segnalazione parte comunque — il verso sicuro e' un'issue in piu', non
+ * una in meno.
+ */
+function openFamilyIssues(family, memo) {
+  if (memo.has(family.id)) return memo.get(family.id);
+  const raw = gh(
+    ['issue', 'list', '--repo', REPO, '--state', 'open', '--search', `"${family.titleSearch}" in:title`,
+      '--json', 'number,title,body,createdAt', '--limit', '100'],
+    '[]',
+  );
+  let issues = [];
+  try {
+    const parsed = JSON.parse(raw || '[]');
+    if (Array.isArray(parsed)) issues = parsed;
+  } catch {
+    issues = [];
+  }
+  memo.set(family.id, issues);
+  return issues;
+}
+
 /** I job falliti di una run, per dare al triage un aggancio concreto. */
 function failedJobs(runId) {
+  return readFailedJobs(runId).jobs;
+}
+
+/**
+ * Come `failedJobs`, ma distingue «nessun job fallito» da «lettura fallita»:
+ * `readable: false` quando la chiamata o il parse non riescono. Serve alle
+ * famiglie di workflow generati, dove una lista vuota E' una firma
+ * (`RUN_LEVEL_SIGNATURE`) e una lettura mancata non deve diventarlo.
+ */
+function readFailedJobs(runId) {
   const raw = gh(
     ['api', `repos/${REPO}/actions/runs/${runId}/jobs`, '--jq',
       '[.jobs[] | select(.conclusion=="failure") | '
         + '{name, url: .html_url, step: ([.steps[]? | select(.conclusion=="failure") | .name] | first), '
         + 'status, conclusion, completed_at, steps}]'],
-    '[]',
+    null,
   );
+  if (raw === null) return { jobs: [], readable: false };
   try {
-    return JSON.parse(raw || '[]');
+    const jobs = JSON.parse(raw || '[]');
+    return Array.isArray(jobs) ? { jobs, readable: true } : { jobs: [], readable: false };
   } catch {
-    return [];
+    return { jobs: [], readable: false };
   }
 }
 
@@ -1897,7 +2087,9 @@ async function main() {
   }
 
   // Una issue per WORKFLOW, non per run: se lo stesso workflow e' fallito tre
-  // volte nella finestra, il segnale resta uno solo. Per Issue fix si tiene la
+  // volte nella finestra, il segnale resta uno solo. I caller GENERATI dalla
+  // stessa sorgente con la stessa firma di guasto contano come uno (vedi
+  // `GENERATED_WORKFLOW_FAMILIES`). Per Issue fix si tiene la
   // piu' recente run NON soppressa: una non-consegna riconosciuta nella run
   // piu' recente non deve nascondere una failure diversa ancora nella finestra.
   const candidatesByWorkflow = new Map();
@@ -1933,6 +2125,33 @@ async function main() {
   // gate, riaperto da un'altra porta. `sort` in Node e' stabile, quindi
   // l'ordine relativo di tutti gli altri resta quello di inserimento.
   const servedOrder = orderBySurveillanceFirst(byWorkflow);
+
+  // Famiglie di workflow generati: i membri falliti in questa passata con la
+  // stessa firma hanno UN rappresentante. I job si leggono qui e restano in
+  // `selected.allFailedJobs`, che il ciclo sotto riusa: nessuna lettura in piu'.
+  const familyEntries = [];
+  for (const [name, selected] of servedOrder) {
+    if (!workflowFamilyOf(name)) continue;
+    // Senza una lettura riuscita dei job non c'e' firma: il membro resta
+    // fuori dal piano e segue il percorso ordinario.
+    if (selected.allFailedJobs) continue;
+    const read = readFailedJobs(selected.run.databaseId);
+    selected.allFailedJobs = read.jobs;
+    if (!read.readable) continue;
+    selected.familyEntry = {
+      name,
+      jobs: partitionFailedJobsByOwner(read.jobs).ordinary,
+      runLevel: read.jobs.length === 0,
+      runUrl: selected.run.url,
+    };
+    familyEntries.push(selected.familyEntry);
+  }
+  const familyPlan = planFamilyCollapse(familyEntries);
+  // Un rappresentante copre i fratelli solo dopo che la sua segnalazione e'
+  // stata consegnata in questa passata: se e' stato saltato o la consegna e'
+  // fallita, i fratelli tornano al percorso ordinario.
+  const familyRepresentativesServed = new Set();
+  const openFamilyIssuesMemo = new Map();
 
   let opened = 0;
   // Il cap limita il RUMORE, non gli allarmi: i workflow di sorveglianza non
@@ -2001,7 +2220,7 @@ async function main() {
 
     const jobLines = jobs.length
       ? jobs.map((j) => `- \`${j.name}\`${j.step ? ` — step fallito: \`${j.step}\`` : ''}\n  ${j.url}`).join('\n')
-      : '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';
+      : NO_FAILED_JOBS_LINE;
 
     // Il rilevatore ricco gira PRIMA della dedup: e' il titolo che decide quale
     // issue guardare, e per questa classe il titolo non e' piu' quello generico.
@@ -2035,6 +2254,24 @@ async function main() {
     // `null` = nessun report ricco: titolo e corpo generici del workflow.
     const reports = lost ? [lost] : (crawlerReports.length > 0 ? crawlerReports : [null]);
 
+    // Solo sul report generico: un articolo perso o un report per-membro hanno
+    // un titolo e una causa propri, e non si collassano mai.
+    const family = reports.length === 1 && reports[0] === null ? workflowFamilyOf(name) : null;
+    if (family) {
+      const representative = familyPlan.covered.get(name);
+      if (representative && familyRepresentativesServed.has(representative)) {
+        console.log(`[scan-failed-runs] ${name}: stessa famiglia (${family.label}) e stessa firma di «${representative}», già segnalato in questa passata → nessuna issue separata.`);
+        continue;
+      }
+      const sibling = selected.familyEntry
+        ? openSiblingIssueCovering(selected.familyEntry, openFamilyIssues(family, openFamilyIssuesMemo))
+        : null;
+      if (sibling) {
+        console.log(`[scan-failed-runs] ${name}: stessa famiglia (${family.label}) e stessa firma della issue aperta #${sibling.number} («${sibling.title}») → nessuna issue separata.`);
+        continue;
+      }
+    }
+
     const genericDescription = [
       `Il workflow **${name}** è fallito.`,
       '',
@@ -2045,6 +2282,7 @@ async function main() {
       '',
       '**Job falliti**',
       jobLines,
+      ...(family && familyPlan.siblings.has(name) ? [familySiblingsNote(family, familyPlan.siblings.get(name))] : []),
       '',
       '---',
       '',
@@ -2066,6 +2304,13 @@ async function main() {
       );
     }
     opened += outcome.delivered;
+    // Solo una consegna riuscita ORA copre i fratelli della passata. Se la
+    // issue del rappresentante era gia' aperta (`skipped`) decide il confronto
+    // di firma con le issue aperte, che legge il guasto che quella issue
+    // descrive davvero e non quello di oggi.
+    if (family && outcome.delivered > 0 && outcome.undelivered.length === 0) {
+      familyRepresentativesServed.add(name);
+    }
     // Solo una segnalazione CONSEGNATA conta verso il cap del rumore, e una run
     // conta una volta sola anche quando consegna un report per membro.
     cappedOpened += capUnitsForRun({ name, delivered: outcome.delivered });
