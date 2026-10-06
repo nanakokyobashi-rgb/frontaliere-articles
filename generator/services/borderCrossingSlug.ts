@@ -5,10 +5,9 @@
  * (Wiesenrain)' / 'Widnau-Lustenau (Schmitterbrücke)' both reduce to
  * "widnau-lustenau". 'Wiesenrain' keeps the unchanged slug (it is the first
  * of the two in data/borderCrossings.ts); 'Schmitterbrücke' gets this
- * override instead. Neither crossing has a public /traffico-dogane/ page, so
- * no redirect is needed — do NOT change the general rule itself, 5 other
- * crossings (incl. the primary Chiasso Centro one) have indexed URLs that
- * depend on parens being stripped.
+ * override instead. No redirect is needed — do NOT change the general rule
+ * itself. These explicit overrides preserve the existing indexed URL and add
+ * stable slugs for the five newly registered Basel-France crossings.
  *
  * Anti-collision regression coverage lives in
  * tests/border-crossing-slug-collision.test.ts — add a new override here
@@ -17,6 +16,11 @@
  */
 const CROSSING_SLUG_OVERRIDES: Readonly<Record<string, string>> = {
   'Widnau-Lustenau (Schmitterbrücke)': 'widnau-lustenau-schmitterbrucke',
+  'Basel–Saint-Louis (A35)': 'basel-saint-louis-a35',
+  'Basel–Bourgfelden (Burgfelderstrasse)': 'basel-bourgfelden-burgfelderstrasse',
+  'Basel–Saint-Louis (Elsässerstrasse)': 'basel-saint-louis-elsasserstrasse',
+  'Basel–Saint-Louis (Flughafenstrasse)': 'basel-saint-louis-flughafenstrasse',
+  'Basel–Huningue (Kohlenstrasse)': 'basel-huningue-kohlenstrasse',
 };
 
 /**
