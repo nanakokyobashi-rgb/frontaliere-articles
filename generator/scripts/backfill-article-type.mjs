@@ -4,8 +4,8 @@
  *
  * Senza opzioni esegue un dry-run. `--apply` inserisce solo la riga
  * `articleType` sulle voci legacy per cui il corpo italiano porta la citazione
- * finale unica scritta dal generatore. Le due citazioni statistiche sintetiche
- * BFS/ASTRA e ogni voce ambigua restano senza tipo.
+ * finale unica scritta dal generatore, col tipo che il writer assegna a quella
+ * run (`registryArticleTypeForRun`). Ogni voce ambigua resta senza tipo.
  */
 
 import { existsSync, readFileSync, realpathSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -15,7 +15,12 @@ import { fileURLToPath } from 'node:url';
 import {
   applyRegistryArticleTypes,
   readRegistryEntries,
+  registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
+import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
+
+// Riesportati per i test: il lettore e' quello condiviso col backfill dei cantoni.
+export { readTsStringLiteral, readTsStringMap };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -30,52 +35,8 @@ export const SECTIONS = Object.freeze({
   },
 });
 
-export const STATISTICS_SOURCE_DOMAINS = Object.freeze(['bfs.admin.ch', 'astra.admin.ch']);
-
 const CITATION_RE = /\*Fonte:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\*/gu;
 const TAIL_CITATION_RE = /\n\n\*Fonte:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\*$/u;
-
-/** Decodifica il letterale TS che comincia a `index`. */
-export function readTsStringLiteral(source, index) {
-  const quote = source[index];
-  if (quote !== "'" && quote !== '"' && quote !== '`') return null;
-  let value = '';
-  let i = index + 1;
-  while (i < source.length) {
-    const char = source[i];
-    if (char === '\\') {
-      const next = source[i + 1];
-      if (next === 'n') value += '\n';
-      else if (next === 't') value += '\t';
-      else if (next === 'r') value += '';
-      else if (next === 'u' && /^[0-9a-fA-F]{4}$/u.test(source.slice(i + 2, i + 6))) {
-        value += String.fromCharCode(parseInt(source.slice(i + 2, i + 6), 16));
-        i += 6;
-        continue;
-      } else value += next ?? '';
-      i += 2;
-      continue;
-    }
-    if (char === quote) return { value, end: i + 1 };
-    value += char;
-    i += 1;
-  }
-  return null;
-}
-
-/** Legge i campi `blog.article.<id>.*` da un sorgente TS di stringhe. */
-export function readTsStringMap(source) {
-  const out = new Map();
-  const rx = /(['"])(blog\.article\.[^'"]+)\1\s*:\s*/gu;
-  let match;
-  while ((match = rx.exec(source)) !== null) {
-    const literal = readTsStringLiteral(source, match.index + match[0].length);
-    if (!literal) continue;
-    out.set(match[2], literal.value);
-    rx.lastIndex = literal.end;
-  }
-  return out;
-}
 
 function normalizedHostname(url) {
   try {
@@ -86,8 +47,22 @@ function normalizedHostname(url) {
 }
 
 /**
- * Regola dimostrabile: news solo con una citazione Fonte finale, unica,
- * coerente col dominio dell'URL e non sintetica BFS/ASTRA.
+ * Regola dimostrabile: la citazione finale unica con il dominio come etichetta
+ * e' scritta da un solo punto, lo Step 3e di `create-article.mjs`, e solo
+ * quando l'URL della run NON e' `evergreen://`. Chi la porta e' quindi nato da
+ * una run non evergreen, e il suo tipo e' quello che il writer assegna oggi a
+ * quella run: `registryArticleTypeForRun`, la stessa definizione, non una
+ * seconda regola scritta qui.
+ *
+ * Vale anche per le due citazioni statistiche. Lo Step 3e sostituisce le
+ * chiavi sintetiche `stats-bfs://` e `stats-astra://` con la pagina pubblica
+ * di BFS e ASTRA, ma il tipo lo decide l'URL della run: non e' `evergreen://`
+ * e non riceve mai un'etichetta `evergreen_*` (assegnata soltanto insieme a un
+ * URL `evergreen://`), quindi il writer registra quei rapporti di periodo come
+ * `news`. Escluderli qui lasciava lo stock statistico senza tipo mentre gli
+ * articoli nuovi dello stesso percorso lo ricevono (review della PR 2312).
+ * Le due premesse sul generatore sono blindate da
+ * `generator/tests/backfill-article-type.test.mjs`.
  */
 export function articleTypeFromItalianBody(body3) {
   const body = String(body3 || '').trimEnd();
@@ -97,8 +72,11 @@ export function articleTypeFromItalianBody(body3) {
   if (citations.length !== 1) return undefined;
   const [, label, url] = tail;
   const domain = normalizedHostname(url);
-  if (!domain || label !== domain || STATISTICS_SOURCE_DOMAINS.includes(domain)) return undefined;
-  return 'news';
+  if (!domain || label !== domain) return undefined;
+  // L'etichetta di telemetria della run non e' nel corpus; `undefined` e' il
+  // valore delle run manuali, e nessuna etichetta `evergreen_*` convive con
+  // un URL che produce la citazione.
+  return registryArticleTypeForRun(undefined, url);
 }
 
 function body3For(root, bodyDir, id) {

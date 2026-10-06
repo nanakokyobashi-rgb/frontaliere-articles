@@ -22133,6 +22133,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     date: '2026-09-23T12:36:37.046Z',
     image: '/images/blog/parco-veicoli-svizzera-2026.webp',
     hasCalculator: true,
+    articleType: 'news',
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
