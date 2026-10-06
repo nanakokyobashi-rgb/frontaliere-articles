@@ -39867,6 +39867,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'varese-conferenza-lavoro-salari-2026',
+ category: 'novita',
+ date: '2026-10-06T03:43:17.872Z',
+ image: '/images/blog/varese-conferenza-lavoro-salari-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -99814,6 +99814,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-conferenza-lavoro-salari-2026': {
+    title: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    description: 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\': orari, relatori e temi su precarietà e potere d\'acquisto per i lavoratori lombardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, conferenza, salari, diritti',
+    ogTitle: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    ogDescription: 'Scopri il programma della conferenza \'Fondata sul lavoro\' a Varese. Sabato 10 ottobre si parlerà di salari, sicurezza e precarietà con relatori di peso e le Rsu di importanti aziende come Electrolux e Beko.',
+    canonicalPath: '/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: conferenza su salari e diritti, 10 ottobre",
+      "description": "Sabato 10 ottobre a Varese la conferenza 'Fondata sul lavoro': orari, relatori e temi su precarietà e potere d'acquisto per i lavoratori lombardi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/varese-conferenza-lavoro-salari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi"
+      },
+      "datePublished": "2026-10-06T03:43:17+00:00",
+      "dateModified": "2026-10-06T03:43:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

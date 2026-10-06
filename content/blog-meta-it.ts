@@ -12654,6 +12654,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.guida-tre-valli-varesine-2026.title': 'Tre Valli Varesine 2026: orari, percorso e chiusure',
     'blog.article.guida-tre-valli-varesine-2026.excerpt': '6 ottobre: partenza da Busto Arsizio, arrivo in via Sacco a Varese. Sei giri cittadini per uomini e donne.',
     'blog.article.guida-tre-valli-varesine-2026.imageAlt': 'Ciclista in gara sulla Tre Valli Varesine, vista sul lago di Varese',
+    'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: conferenza su salari e diritti, 10 ottobre',
+    'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\' di Sinistra Italiana e AVS: orari, relatori e temi su precarietà e potere d\'acquisto.',
+    'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi',
 };
 
 export default blogMetaIt;
