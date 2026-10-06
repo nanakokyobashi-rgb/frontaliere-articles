@@ -1122,12 +1122,16 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     const { events } = sanitizeDatasetEvents([
       {
         id: 'e-edge-markup',
-        title: 'Festival # 5 &amp; &ldquo;Live&rdquo; &ndash; **Festival',
+        title: 'Festival # 5 &amp; &ldquo;Live&rdquo; &ndash; **Festival &amp;szlig; &acirc; &ecirc; &ugrave;',
         description: '## Programma\n- _Apertura_\nMOPS_DanceSyndrome _chiusura',
       },
+      { id: 'e-angle-prose', title: 'A <B> C' },
+      { id: 'e-surrogate', title: 'Bad &#xD800;', titleByLocale: { it: 'Valid fallback' } },
     ]);
-    assert.equal(events[0].title, 'Festival # 5 & “Live” – Festival');
+    assert.equal(events[0].title, 'Festival # 5 & “Live” – Festival ß â ê ù');
     assert.equal(events[0].description, 'Programma - Apertura MOPS_DanceSyndrome chiusura');
+    assert.equal(events[1].title, 'A <B> C');
+    assert.equal(events[2].title, 'Valid fallback');
   });
 
   test('un `title` piatto avvelenato si recupera dalla prima chiave per-locale sana', () => {

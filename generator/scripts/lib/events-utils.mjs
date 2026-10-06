@@ -27,7 +27,7 @@ import {
   getTranslationCascadeConfigurationKey,
 } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
-import { decodeHtmlEntities } from './decode-html-entities.mjs';
+import { decode as decodeHtmlEntities } from 'html-entities';
 
 export { hasUsableContentText };
 
@@ -1594,42 +1594,36 @@ export const EVENTS_DATASET_PATH = path.join(REPO_ROOT, 'data', 'events.json');
 export const EVENTS_SLICE_DIR = path.join(REPO_ROOT, 'data', 'events', 'by-source');
 
 const EVENT_REPLACEMENT_CHARACTER = '\uFFFD';
-// The shared decoder owns the standard HTML entity set. Events still need
-// the German/French named letters that occur in crawl payloads, so keep only
-// that source-specific extension here instead of copying the shared map.
-const EVENT_LOCAL_ENTITY_MAP = Object.freeze({
-  '&auml;': 'ä',
-  '&Auml;': 'Ä',
-  '&ouml;': 'ö',
-  '&Ouml;': 'Ö',
-  '&uuml;': 'ü',
-  '&Uuml;': 'Ü',
-  '&eacute;': 'é',
-  '&Eacute;': 'É',
-  '&egrave;': 'è',
-  '&Egrave;': 'È',
-  '&agrave;': 'à',
-  '&Agrave;': 'À',
-  '&ccedil;': 'ç',
-  '&Ccedil;': 'Ç',
-});
-const EVENT_LOCAL_ENTITY_RX = /&(?:auml|Auml|ouml|Ouml|uuml|Uuml|eacute|Eacute|egrave|Egrave|agrave|Agrave|ccedil|Ccedil);/g;
+// Strip only tags that can occur in the crawlers' rendered copy. Keeping this
+// allow-list lower-case preserves ambiguous prose such as `A <B> C`, where the
+// angle brackets are text rather than a confirmed HTML element.
+const EVENT_KNOWN_TAG_RX = /<\/?(?:a|abbr|address|article|aside|b|bdi|bdo|blockquote|br|caption|cite|code|col|colgroup|dd|del|details|dfn|div|dl|dt|em|figcaption|figure|footer|h[1-6]|header|hr|i|ins|kbd|li|main|mark|nav|ol|p|pre|q|rp|rt|ruby|s|samp|section|small|source|span|strong|sub|summary|sup|table|tbody|td|tfoot|th|thead|time|tr|track|u|ul|var|wbr)(?:\s[^>]*)?\s*\/?\s*>/g;
 
 function decodeEventEntities(value) {
   let text = value;
   for (let pass = 0; pass < 3; pass += 1) {
-    const decoded = decodeHtmlEntities(text)
-      .replace(EVENT_LOCAL_ENTITY_RX, (entity) => EVENT_LOCAL_ENTITY_MAP[entity] ?? entity)
-      .replace(/&#(x[0-9a-f]+|\d+);/gi, (_, code) => {
-        const number = code.toLowerCase().startsWith('x')
-          ? Number.parseInt(code.slice(1), 16)
-          : Number.parseInt(code, 10);
-        return Number.isFinite(number) && number <= 0x10ffff ? String.fromCodePoint(number) : _;
-      });
+    const decoded = decodeHtmlEntities(text);
     if (decoded === text) break;
     text = decoded;
   }
   return text;
+}
+
+function containsInvalidUnicode(value) {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index);
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = value.charCodeAt(index + 1);
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        index += 1;
+      } else {
+        return true;
+      }
+    } else if (code >= 0xdc00 && code <= 0xdfff) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -1646,7 +1640,7 @@ export function cleanEventText(value) {
       .replace(/<!--[\s\S]*?-->/g, ' ')
       .replace(/<(script|style|noscript|template)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
       .replace(/<br\s*\/?\s*>/gi, ' ')
-      .replace(/<\/?[a-z][^>]*>/gi, ' ');
+      .replace(EVENT_KNOWN_TAG_RX, ' ');
     if (cleaned === text) break;
     text = cleaned;
   }
@@ -1664,7 +1658,9 @@ export function cleanEventText(value) {
     text = cleaned;
   }
   const normalized = text.replace(/\s+/g, ' ').trim();
-  return normalized.includes(EVENT_REPLACEMENT_CHARACTER) ? '' : normalized;
+  return normalized.includes(EVENT_REPLACEMENT_CHARACTER) || containsInvalidUnicode(normalized)
+    ? ''
+    : normalized;
 }
 
 /**
