@@ -7914,7 +7914,7 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Traffico di droga bloccato a Brogeda | Frontaliere Ticino',
     description: 'Carabinieri sequestrano 1,1 kg di eroina e 800 g di cocaina in auto a noleggio al valico di Como Brogeda. Arrestati due uomini nigeriani di 30 e 33 anni.',
     keywords: 'frontalieri, ticino, svizzera, italia, traffico, droga, bloccato, brogeda',
-    ogTitle: 'Traffico di droga bloccato a Brogeda: due arresti e due chili',
+    ogTitle: 'Traffico di droga bloccato a Brogeda: due arresti e due',
     ogDescription: 'Carabinieri sequestrano 1,1 kg di eroina e 800 g di cocaina in auto a noleggio al valico di Como Brogeda. Arrestati due uomini nigeriani di 30 e 33 anni.',
     canonicalPath: '/articoli-frontaliere/blocco-droga-confine-brogeda-2026/',
     structuredData: {
