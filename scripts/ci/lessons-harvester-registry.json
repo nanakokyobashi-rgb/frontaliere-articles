@@ -29,6 +29,97 @@
       "decidedAt": "2026-09-27T11:02:21Z",
       "ref": "#1928",
       "reason": "ISSUES.md > Terminare senza PR: recovery verificata = `already-fixed` con evidenza; niente codici ad hoc come `verified-recovered`."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-funnel-treats-every",
+      "outcome": "added",
+      "decidedAt": "2026-09-27T19:33:23Z",
+      "ref": "#10153",
+      "reason": "Regola in AGENTS.md #6: parser e guard funnel-critical validano dominio, contesto e casi non-target invece di classificare shape sintattiche generiche."
+    },
+    {
+      "key": "reviewer-finding/fp:body-technical-blocker-not",
+      "outcome": "declined",
+      "decidedAt": "2026-09-27T19:33:23Z",
+      "ref": "#10153",
+      "reason": "Gia' coperto dal contratto di completezza del body PR e dalla distinzione fra `blocked: <causa tecnica>` e stati chiudenti."
+    },
+    {
+      "key": "fix-outcome/fix-outcome:no-pr-no-root-cause",
+      "outcome": "added",
+      "decidedAt": "2026-09-27T19:33:23Z",
+      "ref": "#10153",
+      "reason": "`no-pr-no-root-cause` non e' un codice di issue-fix.yml. ISSUES.md > Abort senza PR ammette solo i codici dell'elenco di issue-fix.yml: causa non determinabile = `no-root-cause` + `AUTOMATION_DEFERRED: technical` + label `automation-deferred`."
+    },
+    {
+      "key": "reviewer-finding/fp:body-not-closing-state",
+      "outcome": "added",
+      "decidedAt": "2026-09-28T12:05:13Z",
+      "ref": "#10212",
+      "reason": "REVIEW.md: `per scelta` e `by construction` sono stati autonomi, non varianti di `blocked:`; `deferred, non funnel-critical` vale solo per 🟡/❓ di review."
+    },
+    {
+      "key": "reviewer-finding/fp:codex-fallback-review-scope",
+      "outcome": "declined",
+      "decidedAt": "2026-09-28T12:05:13Z",
+      "ref": "#10153, #10212",
+      "reason": "Cluster fantasma: review con body su una riga e `\\n` letterali, lette come una sola riga. tallyFindings ora normalizza i body malformati (reviewBodyLines), quindi il fingerprint non si forma piu'."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-funnel-accepts-any",
+      "outcome": "declined",
+      "decidedAt": "2026-10-01T11:46:17Z",
+      "ref": "#10707, #10400, #10156",
+      "reason": "Gia' coperto da AGENTS.md #6: parser e guard funnel-critical non accettano shape truthy/non-empty generiche, ma validano dominio, contesto, unknown/ambigui e vicino non-target."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-correctness-tratta-ogni",
+      "outcome": "declined",
+      "decidedAt": "2026-10-01T11:46:17Z",
+      "ref": "#10626, #10401, #10326",
+      "reason": "E' la stessa classe gia' coperta da AGENTS.md #6 e dalla regola registrata `fp:scripts-funnel-treats-every`: la shape non basta per classificare righe, componenti o risposte."
+    },
+    {
+      "key": "reviewer-finding/fp:github-github-github-github",
+      "outcome": "declined",
+      "decidedAt": "2026-10-01T11:46:17Z",
+      "ref": "#10596, #9970, #8862",
+      "reason": "Fingerprint catch-all basato sui path `.github`: gli esempi sono difetti eterogenei (heredoc shell, flag npm e contratto producer/consumer), quindi non sostengono una regola unica."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-scripts-scripts-scripts",
+      "outcome": "declined",
+      "decidedAt": "2026-10-05T12:25:34Z",
+      "ref": "#11577, #11125, #10805",
+      "reason": "Fingerprint catch-all creato dalla ripetizione di `scripts/`: gli esempi nuovi coprono contesto di una guardia, selettore crawler e telemetria GCP, senza una bug class preventiva comune."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-scripts-scripts-funnel",
+      "outcome": "declined",
+      "decidedAt": "2026-10-06T12:13:36Z",
+      "ref": "#11638, #11578, #11036",
+      "reason": "Catch-all basato su path `scripts/` e classe funnel: i nuovi finding coprono retry/status, rilevazione di meta-risposte e guardie di candidatura, senza una regola preventiva unica; AGENTS.md #6 resta sufficiente per i casi di dominio, contesto e sibling."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-correctness-treats-every",
+      "outcome": "declined",
+      "decidedAt": "2026-10-06T12:13:36Z",
+      "ref": "#11764, #11521, #10288",
+      "reason": "Gia' coperto da AGENTS.md #6: parser e guard non devono trattare ogni shape come semantica, ma validare dominio/contesto e gestire unknown, ambigui e vicino non-target; aggiungere una riga duplicherebbe la regola."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-funnel-falls-back",
+      "outcome": "added",
+      "decidedAt": "2026-10-04T11:15:12Z",
+      "ref": "#11033, #10707, #9501",
+      "reason": "Pattern funnel reale: fonte primaria assente o ambigua e fallback generici (`first-match`, `substring` o campo vicino) possono attribuire dati al contesto sbagliato; aggiunta frase preventiva in AGENTS.md #6."
+    },
+    {
+      "key": "reviewer-finding/fp:scripts-funnel-treats-any",
+      "outcome": "declined",
+      "decidedAt": "2026-10-04T11:15:12Z",
+      "ref": "#11033, #10476, #10182",
+      "reason": "Gia' coperto da AGENTS.md #6: parser e guard funnel-critical non classificano ogni token o linea per shape, ma validano dominio e contesto e gestiscono unknown, ambigui e non-target."
     }
   ]
 }

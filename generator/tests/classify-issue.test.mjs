@@ -9,9 +9,16 @@
  * L'ordine delle regex e' la parte fragile, e i due test sull'ordine sotto
  * esistono per quello.
  */
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { classifyIssue, isFixerExempt } from '../../scripts/lib/classify-issue.mjs';
+
+const CLASSIFIER = fileURLToPath(new URL('../../scripts/lib/classify-issue.mjs', import.meta.url));
 
 test('publish e\' l\'unica categoria che salta la coda', () => {
   const r = classifyIssue('Workflow Failure: Publish article data API', ['Bug']);
@@ -172,4 +179,21 @@ test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () =>
   // triage legge undefined e non instrada nulla, in silenzio.
   const r = classifyIssue('Workflow Failure: Publish article data API', []);
   assert.deepEqual(Object.keys(r).sort(), ['autofix', 'category', 'fuPrio', 'route']);
+});
+
+test('la CLI non si attiva per un wrapper chiamato classify-issue.mjs', () => {
+  const directory = mkdtempSync(path.join(tmpdir(), 'frontaliere-classify-'));
+  const wrapper = path.join(directory, 'classify-issue.mjs');
+  try {
+    writeFileSync(
+      wrapper,
+      'import ' + JSON.stringify(pathToFileURL(CLASSIFIER).href) + ';\n'
+        + "console.log('wrapper-ok');\n",
+    );
+    const result = spawnSync(process.execPath, [wrapper], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(result.stdout.trim(), 'wrapper-ok');
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });
