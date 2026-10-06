@@ -90,8 +90,11 @@ name: Stale PR rescuer (self-healing signal)
 # nessun push automatico, quindi è sicuro girarlo accanto ad agent attivi.
 #
 # ── Quanto costa, e perche' il `workflow_run` non riscandisce piu' tutto ──────
-# Ogni lettura qui spende il bucket REST del `GITHUB_TOKEN`: 1.000 richieste
-# l'ora per l'INTERO repo, condivise con i gate delle PR in `tests.yml`. Uno
+# Prima di questo intervento ogni lettura qui spendeva il bucket REST del
+# `GITHUB_TOKEN`: 1.000 richieste l'ora per l'INTERO repo, condivise con i gate
+# delle PR in `tests.yml`. Ora lo scan e il custode usano il PAT operativo
+# caricato da Remote Config; il token Actions resta solo come fallback sicuro
+# quando il caricamento non è disponibile e per il fetch Git plumbing. Uno
 # scan completo costa ~2 + (1 + 9·Pa)·PR autonome + (1 + 4·Pa)·PR aperte
 # letture (Pa = PR con push >2h), cioe' 30-150 per run; ripetuto su ogni
 # completamento di `tests` (18 run nell'ora dell'incidente) e' stato fra i primi
@@ -193,6 +196,37 @@ jobs:
           done
           printf 'path=%s\n' "$gh_bin" >> "$GITHUB_OUTPUT"
 
+      # The scan is trusted zero-Claude code, so its read-heavy REST traffic
+      # can use the nanako PAT bucket instead of the 1,000/h installation
+      # bucket. Keep this checkout separate from the object store below: the
+      # conflict proof intentionally has no working tree.
+      - name: Checkout Remote Config loader
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          path: stale-rc-loader
+          fetch-depth: 1
+          sparse-checkout: |
+            generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/google-service-account-token.mjs
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Prepare Firebase credentials for rate-limit reads
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente — stale-pr-rescuer resta sul GITHUB_TOKEN."
+          fi
+
+      - name: Load secrets from Remote Config for rate-limit reads
+        continue-on-error: true
+        run: node stale-rc-loader/generator/scripts/load-rc-env.mjs
+
       # Il battito completo costa decine di letture; un completamento di
       # `tests` ne arriva ogni ~3 minuti. Il primo run PARTITO in una finestra
       # di 30 minuti (slot allineati, `FULL_SCAN_SLOT_S`) fa lo scan completo;
@@ -217,6 +251,9 @@ jobs:
           FULL_SCAN_SLOT_S: '1800'
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           mode=full
           if [ "$EVENT_NAME" = "workflow_run" ]; then
             mode=scoped
@@ -299,6 +336,9 @@ jobs:
           SCAN_SCOPE_PRS: ${{ join(github.event.workflow_run.pull_requests.*.number, ' ') }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           NOW=$(date -u +%s)
           AGE_MIN_S=7200  # 2h: non toccare PR con lavoro recente
 
@@ -1399,6 +1439,7 @@ jobs:
             scripts/ci/orphan-pr-custodian.mjs
             scripts/ci/lib/constants.mjs
             scripts/ci/lib/review-input-revision.mjs
+            scripts/ci/report-rate-limit-budget.mjs
           sparse-checkout-cone-mode: false
 
       - name: Setup Node.js
@@ -1407,13 +1448,41 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Select runtime GitHub read token
+        if: steps.scope.outputs.mode == 'full'
+        env:
+          INSTALLATION_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            printf 'GH_TOKEN=%s\n' "$GITHUB_PAT_NANAKO" >> "$GITHUB_ENV"
+          else
+            printf 'GH_TOKEN=%s\n' "$INSTALLATION_TOKEN" >> "$GITHUB_ENV"
+          fi
+
       - name: Orphan PR custodian
         if: steps.scope.outputs.mode == 'full'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
           REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
           CI_CHECK_NAME: 'tests (node --test)'
           REDFLAG_FIXER_DISPATCH_INPUT: pr
         run: node scripts/ci/orphan-pr-custodian.mjs
+
+      - name: Report rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RATE_LIMIT_WORKFLOW: stale-pr-rescuer
+          TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
+        run: |
+          token_name=GITHUB_TOKEN
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            token_name=GITHUB_PAT_NANAKO
+          fi
+          RATE_LIMIT_TOKEN_NAME="$token_name" node scripts/ci/report-rate-limit-budget.mjs
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

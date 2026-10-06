@@ -7,7 +7,9 @@ import { fileURLToPath } from 'node:url';
 const read = (path) => fs.readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const tests = read('.github/workflows/tests.yml');
 const recovery = read('.github/workflows/retry-code-check-after-body-edit.yml');
-const script = recovery.slice(recovery.indexOf('          script: |\n') + '          script: |\n'.length)
+const scriptStart = recovery.indexOf('          script: |\n') + '          script: |\n'.length;
+const scriptEnd = recovery.indexOf('\n      - name:', scriptStart);
+const script = recovery.slice(scriptStart, scriptEnd < 0 ? recovery.length : scriptEnd)
   .split('\n').map(line => line.replace(/^ {12}/, '')).join('\n');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 delete process.env.CI_CHECK_NAME;
@@ -154,9 +156,15 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   // sparse on the evaluator, without credentials: never the PR head.
   const checkout = recovery.slice(recovery.indexOf('uses: actions/checkout'), recovery.indexOf('- name: Retry'));
   assert.doesNotMatch(checkout, /ref:/);
-  const sparseDirs = checkout.split('sparse-checkout: |\n')[1].split('\n')
-    .map(line => line.trim()).filter(line => line && !line.includes(':'));
-  assert.deepEqual(sparseDirs, ['scripts/lib', 'scripts/ci/lib']);
+  const sparseBlock = checkout.match(/sparse-checkout: \|\n((?: {12}\S+\n)+)/)?.[1] || '';
+  const sparseDirs = sparseBlock.split('\n').map(line => line.trim()).filter(Boolean);
+  assert.deepEqual(sparseDirs, [
+    'scripts/lib',
+    'scripts/ci/lib',
+    'scripts/ci/report-rate-limit-budget.mjs',
+    'generator/scripts/load-rc-env.mjs',
+    'generator/scripts/lib/google-service-account-token.mjs',
+  ]);
   // Every module the evaluator imports must be inside the sparse checkout,
   // or the green-run branch dies on ERR_MODULE_NOT_FOUND before any rerun.
   const root = new URL('../../', import.meta.url);
@@ -180,6 +188,15 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   // dispatch on the base would test base code and anchor the check on the
   // base SHA. Without a run on the head, recovery waits for the next push.
   assert.doesNotMatch(recovery, /createWorkflowDispatch/);
+});
+
+test('body recovery moves read polling to the runtime PAT and keeps mutations on the action token', () => {
+  assert.match(recovery, /const runtimeReadToken = process\.env\.GITHUB_PAT_NANAKO/);
+  assert.match(recovery, /authorization: `token \$\{runtimeReadToken\}`/);
+  assert.match(recovery, /withRuntimeReadToken\(\{ \.\.\.repo, pull_number: number \}\)/);
+  assert.match(recovery, /github\.graphql\(`\n\s+mutation DisablePullRequestAutoMerge/);
+  assert.match(recovery, /BODY_RECOVERY_POLL_MS: '30000'/);
+  assert.match(recovery, /pollMs \* 2 \*\* Math\.min\(pollAttempt, 1\)/);
 });
 
 test('a corrected failed body retries the code run', async () => {

@@ -41,6 +41,34 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Checkout Remote Config loader
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          path: orphan-rc-loader
+          fetch-depth: 1
+          sparse-checkout: |
+            generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/google-service-account-token.mjs
+            scripts/ci/report-rate-limit-budget.mjs
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Prepare Firebase credentials for rate-limit reads
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/orphan-push-warn-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/orphan-push-warn-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente — orphan-push-warn resta sul GITHUB_TOKEN."
+          fi
+
+      - name: Load secrets from Remote Config for rate-limit reads
+        continue-on-error: true
+        run: node orphan-rc-loader/generator/scripts/load-rc-env.mjs
+
       - name: Classify push on a closed PR branch (orphan push)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -55,6 +83,9 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
           set -uo pipefail
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
           # Niente `set -e`: un gh che fallisce non deve rendere rosso il push.
           # Il job e' un segnale; l'exit e' sempre 0.
           if [ -z "${HEAD_REF:-}" ] || [ -z "${REPO:-}" ]; then
@@ -244,3 +275,20 @@ jobs:
           gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$BODY" \
             || echo "Commento su PR #$PR_NUMBER fallito — il push resta un segnale, non un blocco."
           exit 0
+
+      - name: Report rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RATE_LIMIT_WORKFLOW: orphan-push-warn
+        run: |
+          token_name=GITHUB_TOKEN
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            token_name=GITHUB_PAT_NANAKO
+          fi
+          RATE_LIMIT_TOKEN_NAME="$token_name" node orphan-rc-loader/scripts/ci/report-rate-limit-budget.mjs
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/orphan-push-warn-sa.json

@@ -281,3 +281,17 @@ jobs:
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
+
+      - name: Report rate-limit budget
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RATE_LIMIT_WORKFLOW: issue-decompose
+          RATE_LIMIT_RESOURCES: core,graphql
+        run: |
+          token_name=GITHUB_TOKEN
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+            token_name=GITHUB_PAT_NANAKO
+          fi
+          RATE_LIMIT_TOKEN_NAME="$token_name" node scripts/ci/report-rate-limit-budget.mjs

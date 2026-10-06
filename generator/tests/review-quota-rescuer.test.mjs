@@ -960,7 +960,7 @@ test('rate limit: candidata solo l\'ULTIMA run pull_request della HEAD, rossa e 
  * Il rescuer vero, con un `gh` finto che serve PR, commenti, run `tests`, job e
  * annotation e registra le scritture.
  */
-function runRateLimitRescuer({ resetAt, comments = [], runs = [rlRun()], scan, annotationLevel = 'failure' }) {
+function runRateLimitRescuer({ resetAt, comments = [], runs = [rlRun()], scan, annotationLevel = 'failure', graphqlSnapshot = null }) {
   const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-rate-limit-rescuer-'));
   const calls = path.join(dir, 'calls');
   const fixture = path.join(dir, 'fixture.json');
@@ -971,6 +971,7 @@ function runRateLimitRescuer({ resetAt, comments = [], runs = [rlRun()], scan, a
     runs: [{ total_count: runs.length, workflow_runs: runs }],
     jobs: { total_count: 1, jobs: [{ id: 777, name: 'tests (node --test)', conclusion: 'failure', check_run_url: 'https://api.github.com/repos/o/r/check-runs/777', completed_at: rlIso(RL_NOW - 3500) }] },
     annotations: [[{ annotation_level: annotationLevel, message: `Resolve review input revision: rate limit ${rateLimitMarker({ resource: 'core', resetAt })}` }]],
+    graphql: graphqlSnapshot,
   }));
   fs.writeFileSync(path.join(dir, 'gh'), `#!/usr/bin/env node
 const fs = require('node:fs');
@@ -981,6 +982,7 @@ const f = JSON.parse(fs.readFileSync(${JSON.stringify(fixture)}, 'utf8'));
 const out = (value) => { process.stdout.write(JSON.stringify(value)); process.exit(0); };
 if (args[0] === 'pr' && args[1] === 'comment') process.exit(0);
 if (args[0] === 'run' && args[1] === 'rerun') process.exit(0);
+if (args[0] === 'api' && args[1] === 'graphql') out(f.graphql);
 if (line.includes('/pulls?state=open')) out(f.prs);
 if (line.includes('/issues/1800/comments')) out(f.comments);
 if (line.includes('/actions/workflows/tests.yml/runs?')) out(f.runs);
@@ -1018,6 +1020,35 @@ test('rate limit: dopo il reset il run tests viene rilanciato UNA volta, marker 
   assert.ok(commentAt >= 0 && rerunAt > commentAt, `marker requested PRIMA del rerun:\n${r.calls.join('\n')}`);
   assert.match(r.calls[commentAt], /REVIEW_RATE_LIMIT_RETRY: .*"state":"requested"/);
   assert.match(r.stdout, /rate-limit richiesti=1/);
+});
+
+test('lo snapshot GraphQL sostituisce la lettura REST dei commenti per tutte le PR', () => {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const snapshot = [{
+    data: {
+      repository: {
+        pullRequests: {
+          nodes: [{
+            number: 1800,
+            isDraft: false,
+            state: 'OPEN',
+            headRefOid: RL_HEAD,
+            headRefName: RL_REF,
+            baseRefName: 'main',
+            body: '',
+            comments: { nodes: [], pageInfo: { hasNextPage: false } },
+          }],
+          pageInfo: { hasNextPage: false, endCursor: null },
+        },
+      },
+    },
+  }];
+  const r = runRateLimitRescuer({ resetAt: nowSec + 900, graphqlSnapshot: snapshot });
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /snapshot PR\+commenti=GraphQL/);
+  assert.ok(r.calls.some((call) => call.startsWith('api graphql ')), r.calls.join('\n'));
+  assert.equal(r.calls.some((call) => call.includes('/pulls?state=open')), false, r.calls.join('\n'));
+  assert.equal(r.calls.some((call) => call.includes('/issues/1800/comments')), false, r.calls.join('\n'));
 });
 
 test('rate limit: prima del reset nessun rerun (rientrerebbe nel bucket vuoto)', () => {

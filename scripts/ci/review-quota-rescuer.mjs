@@ -99,6 +99,68 @@ function apiPages(path) {
   return parsed.flat();
 }
 
+const OPEN_PR_COMMENT_SNAPSHOT_QUERY = [
+  'query($owner:String!,$name:String!,$endCursor:String){',
+  'repository(owner:$owner,name:$name){pullRequests(first:100,after:$endCursor,states:OPEN,orderBy:{field:CREATED_AT,direction:ASC}){',
+  'nodes{number,isDraft,state,headRefOid,headRefName,baseRefName,body,comments(first:100){nodes{id,databaseId,body,createdAt,author{login}},pageInfo{hasNextPage}}}',
+  'pageInfo{hasNextPage,endCursor}}}}',
+].join('');
+
+function openPrCommentSnapshot() {
+  const [owner, name] = String(REPO).split('/');
+  if (!owner || !name) throw new Error('repository non valido per lo snapshot GraphQL');
+  const raw = gh([
+    'api', 'graphql', '--paginate', '--slurp',
+    '-f', `query=${OPEN_PR_COMMENT_SNAPSHOT_QUERY}`,
+    '-F', `owner=${owner}`,
+    '-F', `name=${name}`,
+  ]);
+  const pages = parseJson(raw, null);
+  if (!Array.isArray(pages) || pages.length === 0) {
+    // `[]` is a valid empty paginated response from the CLI fixture and from a
+    // repository with no open PRs; any other non-array response is unknown.
+    if (raw.trim() === '[]') return { prs: [], commentsByPr: new Map() };
+    throw new Error('snapshot GraphQL delle PR malformato');
+  }
+  const nodes = [];
+  for (const page of pages) {
+    const connection = page?.data?.repository?.pullRequests;
+    if (!connection || !Array.isArray(connection.nodes)) {
+      throw new Error('snapshot GraphQL delle PR senza connessione pullRequests');
+    }
+    nodes.push(...connection.nodes);
+  }
+  if (nodes.some((node) => !node || !Number.isInteger(node.number)
+      || typeof node.isDraft !== 'boolean'
+      || typeof node.headRefOid !== 'string' || node.headRefOid.length === 0
+      || typeof node.headRefName !== 'string'
+      || !node.comments || !Array.isArray(node.comments.nodes)
+      || node.comments.pageInfo?.hasNextPage === true)) {
+    // A PR with >100 comments needs the REST paginator for complete marker
+    // provenance. It is rare; fall back for the whole run rather than risk a
+    // false negative on a trusted deferred marker.
+    throw new Error('commenti oltre il primo blocco GraphQL: fallback REST verificabile');
+  }
+  const prs = nodes.map((node) => ({
+    number: node.number,
+    draft: node.isDraft,
+    state: String(node.state || 'OPEN').toLowerCase(),
+    body: node.body ?? '',
+    head: { sha: node.headRefOid, ref: node.headRefName },
+    base: { ref: node.baseRefName || '' },
+  }));
+  const commentsByPr = new Map(nodes.map((node) => [
+    node.number,
+    node.comments.nodes.map((comment) => ({
+      id: Number.isSafeInteger(comment?.databaseId) ? comment.databaseId : comment?.id,
+      body: comment?.body ?? '',
+      created_at: comment?.createdAt ?? '',
+      user: comment?.author?.login ? { login: comment.author.login } : {},
+    })),
+  ]));
+  return { prs, commentsByPr };
+}
+
 function commentRank(comment, index) {
   const parsed = Date.parse(comment?.created_at ?? comment?.createdAt ?? '');
   return [Number.isFinite(parsed) ? parsed : 0, Number(comment?.id) || 0, index];
@@ -498,6 +560,21 @@ export function roundRobinWindow(items, { limit = MAX_PRS, cursor = 0 } = {}) {
 
 function commentsForPr(number) {
   return apiPages(`repos/${REPO}/issues/${number}/comments?per_page=100`);
+}
+
+function listOpenPullRequestsWithComments() {
+  try {
+    const snapshot = openPrCommentSnapshot();
+    console.log(`review-quota-rescuer: snapshot PR+commenti=GraphQL (${snapshot.prs.length} PR, una lettura paginata);`);
+    return snapshot;
+  } catch (error) {
+    console.log(`::warning::snapshot GraphQL PR+commenti non disponibile (${String(error?.message || error).slice(0, 180)}) — fallback REST per PR.`);
+  }
+  const prs = listOpenPullRequests();
+  const commentsByPr = new Map();
+  for (const pr of prs) commentsByPr.set(Number(pr.number), commentsForPr(pr.number));
+  console.log(`review-quota-rescuer: snapshot PR+commenti=REST (${prs.length} PR, una lettura commenti per PR).`);
+  return { prs, commentsByPr };
 }
 
 /** Hash exactly the API representation used by tests.yml, including its LF. */
@@ -1435,9 +1512,7 @@ function main() {
     throw new Error('repository mancante: scansione non verificabile');
   }
 
-  const prs = listOpenPullRequests();
-  const commentsByPr = new Map();
-  for (const pr of prs) commentsByPr.set(Number(pr.number), commentsForPr(pr.number));
+  const { prs, commentsByPr } = listOpenPullRequestsWithComments();
   const candidates = collectReviewQuotaCandidates(prs, commentsByPr);
   const reviewRevisionByPr = new Map();
   for (const pr of prs) {
