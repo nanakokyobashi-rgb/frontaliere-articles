@@ -86,6 +86,21 @@ test('does not treat a slash in an unquoted template value as self-closing', () 
   assert.ok(charsetAt < scriptAt);
 });
 
+test('ignores the self-closing flag on a non-void raw-text element', () => {
+  const html = '<!doctype html><html><head><template><textarea/> '
+    + '<meta charset=utf-8></template><meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  assert.equal(output.includes('window.__CDN_DATA_BASE__'), false, 'un raw-text non-void non chiuso deve fallire chiuso');
+});
+
+test('does not accept a CDN marker that lives only in a template', () => {
+  const html = '<!doctype html><html><head><template><script>window.__CDN_DATA_BASE__="https://stale.example"</script></template>'
+    + '<meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  assert.equal((output.match(/window\.__CDN_DATA_BASE__/g) || []).length, 2);
+  assert.ok(output.includes(CDN), 'il marker attivo deve essere iniettato nella head');
+});
+
 test('keeps CDN payloads when one HTML page has no active head', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-cdn-charset-guard-'));
   try {
