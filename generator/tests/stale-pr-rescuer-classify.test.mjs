@@ -1121,12 +1121,25 @@ test('F — i guard fail-closed non saltano una PR in conflitto, salvo needs-hum
   assert.deepEqual(needsHuman.comments, [], needsHuman.stdout);
 });
 
-test('F — il checkout della prova conserva il merge-base', () => {
-  const start = WF.indexOf('      - name: Checkout main for current conflict proofs');
-  assert.notEqual(start, -1, 'step di checkout della prova F non trovato');
+test('F — l\'archivio della prova è plumbing puro: storia completa, nessun working tree', () => {
+  // Tre review consecutive hanno letto in modo opposto la coppia
+  // `filter`/`sparse-checkout` di actions/checkout. Il passo non la usa più:
+  // un repository vuoto, un fetch parziale di main, e basta.
+  const start = WF.indexOf('      - name: Prepare object store for conflict proofs (plumbing only, no working tree)');
+  assert.notEqual(start, -1, 'passo dell\'archivio della prova F non trovato');
   const end = WF.indexOf('\n      - name:', start + 1);
-  const checkout = WF.slice(start, end === -1 ? undefined : end);
-  assert.match(checkout, /fetch-depth:\s*0/, checkout);
+  const step = WF.slice(start, end === -1 ? undefined : end);
+  assert.match(step, /git init --quiet \./, step);
+  assert.match(step, /fetch --quiet --no-tags --filter=blob:none origin/, 'serve il clone parziale senza blob');
+  assert.match(step, /"\+refs\/heads\/main:refs\/remotes\/origin\/main"/, 'la ref di main deve essere quella che usa la prova');
+  // Storia completa: nessun `--depth`, altrimenti merge-tree non raggiunge il merge-base.
+  assert.equal(/--depth|--shallow/.test(step), false, 'un fetch shallow renderebbe la prova sempre unknown');
+  // Nessun working tree: niente checkout, niente actions/checkout prima dello scan.
+  assert.equal(/git (checkout|switch|reset|restore)\b/.test(step), false, 'la prova non deve materializzare file');
+  const beforeScan = WF.slice(0, WF.indexOf('      - name: Scan open PRs and flag stalled ones'));
+  assert.equal(/uses: actions\/checkout@/.test(beforeScan), false, 'nessun actions/checkout prima dello scan');
+  // Se l\'archivio non si crea lo scan parte lo stesso: la classe F resta unknown, A–E lavorano.
+  assert.match(step, /continue-on-error: true/, step);
 });
 
 test('F — commenti illeggibili: la label si applica lo stesso, il commento si rinvia', opts, () => {

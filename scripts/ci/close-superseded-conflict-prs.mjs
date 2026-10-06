@@ -428,7 +428,7 @@ function readConflictLabelEventAt(number) {
  * draft), non il conflitto: `mergeable=UNKNOWN` passa, perché GitHub lo
  * azzera a ogni push su main — cioè ogni pochi minuti, e pretendere
  * `CONFLICTING` a ogni rilettura lascerebbe lo sweep inerte. `MERGEABLE`
- * invece scarta. La prova del conflitto è `mergeTreeState`, che ogni
+ * invece scarta. La prova del conflitto è `mergeTreeProof`, che ogni
  * chiamante esegue accanto a questa rilettura, sulla stessa HEAD.
  */
 function rereadLivePr(pr) {
@@ -462,11 +462,6 @@ function mergeTreeProof(pr) {
   const merged = git(['merge-tree', '--write-tree', `refs/remotes/origin/${BASE_BRANCH}`, ref]);
   const state = classifyMergeTreeStatus(merged.status);
   return { state, files: state === 'conflicted' ? parseMergeTreeConflicts(String(merged.stdout || '')) : [] };
-}
-
-/** Solo lo stato della prova, per le guardie che non decidono sui file. */
-function mergeTreeState(pr) {
-  return mergeTreeProof(pr).state;
 }
 
 function decide(pr, openPrs, conflictFiles) {
@@ -551,7 +546,11 @@ function main() {
     // (rilettura della PR, merge-tree, hand-off, verdetto, contenuto), ma
     // `decide` fa letture anche lunghe: mentre giravano main può essersi
     // mosso e la HEAD può essere cambiata. Quindi, nell'ordine:
-    //   1. merge-tree un'altra volta, contro il main di ADESSO;
+    //   1. merge-tree un'altra volta, contro il main di ADESSO, tenendo anche
+    //      i FILE: se main si è mosso e un file nuovo è entrato in conflitto,
+    //      lo stato resta `conflicted` ma non è più il conflitto che la
+    //      conferma ha giudicato. I file di adesso devono essere fra quelli
+    //      della conferma, che a loro volta erano fra quelli dell'hand-off;
     //   2. per ULTIMA la rilettura della PR — stessa HEAD, ancora candidata
     //      stretta — e subito dopo la close, senza nient'altro in mezzo.
     //
@@ -564,7 +563,10 @@ function main() {
     // di perdere quella corsa è limitato dal disegno: il branch non viene
     // cancellato, la chiusura lascia un commento con la ragione, e
     // `gh pr reopen` la annulla.
-    if (!mergeTreeAllowsClose(mergeTreeState(live)) || !rereadLivePr(live)) {
+    const finalProof = mergeTreeProof(live);
+    if (!mergeTreeAllowsClose(finalProof.state)
+      || !conflictMatchesHandoff(finalProof.files, liveProof.files)
+      || !rereadLivePr(live)) {
       console.log(`PR #${pr.number}: main, HEAD o stato cambiati durante la conferma → resta aperta.`);
       continue;
     }

@@ -249,32 +249,37 @@ jobs:
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
       # La classe F non può usare la label come prova: pr-autorebase la preserva
-      # quando il proprio fetch o merge-tree è illeggibile. Il checkout conserva
-      # tutta la storia necessaria a raggiungere il merge-base; il passo F scarica
-      # poi ogni ref PR corrente e ricalcola l'unione reale con `git merge-tree`
-      # prima di mutare la PR.
-      - name: Checkout main for current conflict proofs
-        uses: actions/checkout@v7
-        with:
-          ref: main
-          fetch-depth: 0
-          filter: blob:none
-          # La prova usa solo plumbing (`git fetch`, `git merge-tree`), che
-          # lavora sugli oggetti e non sul working tree: storia completa per
-          # raggiungere il merge-base, nessun blob finché non serve, e nel
-          # working tree soltanto `.github/workflows`.
-          #
-          # È la STESSA terna di `pr-autorebase.yml` — `fetch-depth: 0`,
-          # `filter: blob:none`, `sparse-checkout` — che lì gira in produzione
-          # da mesi, e non una scelta nuova da verificare a ragionamento:
-          # misurato il 2026-10-06 sulle run 37406320393 e 37404569346 di
-          # pr-autorebase, lo step `Checkout` dura 46 s e 51 s, con un working
-          # tree più largo di questo. Il job qui ha 8 minuti. Il test
-          # `i checkout con storia completa usano la terna misurata` lega i due
-          # workflow: cambiarne uno solo lo rende rosso.
-          sparse-checkout: |
-            .github/workflows
-          sparse-checkout-cone-mode: false
+      # quando il proprio fetch o merge-tree è illeggibile. Serve quindi un
+      # archivio di oggetti in cui rifare `git merge-tree` sulla HEAD corrente.
+      #
+      # NIENTE `actions/checkout`, e niente working tree: la prova è solo
+      # plumbing. Qui sotto c'è un repository vuoto, un remote e un fetch
+      # parziale di `main` — commit e alberi di tutta la storia (serve il
+      # merge-base), nessun blob finché `merge-tree` non ne chiede uno. Così
+      # non esiste una configurazione di `sparse-checkout`/`filter` di cui
+      # discutere la semantica, e nessun file del corpus viene mai
+      # materializzato: `content/`, `dist/` e `public/` non possono far
+      # scadere il job.
+      #
+      # `continue-on-error`: se questo passo fallisce lo scan parte comunque.
+      # Senza archivio il fetch della classe F fallisce, la prova resta
+      # `unknown` e le PR in conflitto restano invariate (fail-closed); le
+      # classi A–E non usano Git locale e non devono fermarsi per questo.
+      - name: Prepare object store for conflict proofs (plumbing only, no working tree)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git init --quiet .
+          git remote add origin "https://github.com/${REPO}.git"
+          # Stessa forma di credenziale che scrive actions/checkout: i fetch
+          # della classe F (`git fetch origin …`) la ritrovano nella config.
+          git config --local http.https://github.com/.extraheader \
+            "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git -c protocol.version=2 fetch --quiet --no-tags --filter=blob:none origin \
+            "+refs/heads/main:refs/remotes/origin/main"
 
       - name: Scan open PRs and flag stalled ones
         env:

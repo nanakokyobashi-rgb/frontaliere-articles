@@ -148,10 +148,14 @@ test('l\'ultima cosa prima della chiusura è una rilettura della PR', () => {
   assert.notEqual(finalCheck, -1, 'manca la rilettura finale');
   assert.ok(finalCheck > main.indexOf('decide(live, freshOpenPrs, liveProof.files)'), 'la rilettura finale deve venire DOPO la decisione di conferma');
   const between = main.slice(finalCheck, closeAt);
-  assert.equal(/\b(decide|listOpenPrs|mergeTreeState)\(/.test(between), false, 'niente letture lunghe fra la rilettura finale e la close');
+  assert.equal(/\b(decide|listOpenPrs|mergeTreeProof)\(/.test(between), false, 'niente letture lunghe fra la rilettura finale e la close');
   // Nella stessa guardia, PRIMA della rilettura: merge-tree contro il main di adesso.
   const guard = main.slice(main.lastIndexOf('if (', finalCheck), finalCheck);
-  assert.match(guard, /mergeTreeAllowsClose\(mergeTreeState\(live\)\)/, 'la guardia finale deve rifare merge-tree prima della rilettura della HEAD');
+  assert.match(main.slice(main.indexOf('// ── Guardia finale'), finalCheck), /const finalProof = mergeTreeProof\(live\);/, 'la guardia finale deve rifare merge-tree prima della rilettura della HEAD');
+  assert.match(guard, /mergeTreeAllowsClose\(finalProof\.state\)/, guard);
+  // …e non solo lo stato: i file in conflitto adesso devono essere fra quelli
+  // della conferma, altrimenti un file nuovo passerebbe con lo stesso stato.
+  assert.match(guard, /conflictMatchesHandoff\(finalProof\.files, liveProof\.files\)/, 'la guardia finale deve ricontrollare i file in conflitto');
   // La finestra irriducibile è dichiarata, non taciuta.
   assert.match(main, /FINESTRA RESIDUA, per costruzione/);
 });
@@ -420,29 +424,20 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   assert.match(src, /const PR_FIELDS = '[^']*baseRefName[^']*title[^']*|const PR_FIELDS = '[^']*title[^']*baseRefName/);
 });
 
-test('i checkout con storia completa usano la terna misurata', () => {
-  // `fetch-depth: 0` + `filter: blob:none` + `sparse-checkout` è la terna con
-  // cui pr-autorebase gira in produzione: 46 s e 51 s di Checkout misurati il
-  // 2026-10-06 (run 37406320393 e 37404569346). Due review consecutive hanno
-  // chiesto prima di togliere il filtro e poi di rimetterlo: qui non si
-  // ragiona, si lega il rescuer alla configurazione misurata.
-  const checkoutSteps = (file) => {
-    const lines = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8').split('\n');
-    const steps = [];
-    lines.forEach((line, at) => {
-      if (!/^\s+uses: actions\/checkout@/.test(line)) return;
-      const end = lines.findIndex((l, i) => i > at && /^\s+- (name|uses|id|run):/.test(l));
-      steps.push(lines.slice(at, end < 0 ? lines.length : end).filter((l) => !/^\s*#/.test(l)).join('\n'));
-    });
-    return steps.filter((step) => /^\s+fetch-depth: 0$/m.test(step));
-  };
-  for (const file of ['pr-autorebase.yml', 'stale-pr-rescuer.yml']) {
-    const full = checkoutSteps(file);
-    assert.equal(full.length, 1, `${file}: atteso UN checkout con storia completa, trovati ${full.length}`);
-    assert.match(full[0], /^\s+filter: blob:none$/m, `${file}: manca il clone parziale senza blob`);
-    assert.match(full[0], /^\s+sparse-checkout: \|$/m, `${file}: manca lo sparse checkout`);
-    assert.match(full[0], /^\s+sparse-checkout-cone-mode: false$/m, `${file}: i pattern sono non-cone`);
-  }
+test('pr-autorebase.yml: il checkout non cambia rispetto a main', () => {
+  // La terna `fetch-depth: 0` + `filter: blob:none` + `sparse-checkout` è
+  // quella con cui pr-autorebase gira in produzione, e questa PR non la tocca.
+  // Che il filtro NON annulli lo sparse checkout lo dice il log di una run
+  // reale (37406320393, 2026-10-06): `git fetch … --filter=blob:none` seguito
+  // da `git rev-parse --git-path info/sparse-checkout`, 46 s di Checkout.
+  const lines = readFileSync(path.join(ROOT, '.github/workflows/pr-autorebase.yml'), 'utf8').split('\n');
+  const at = lines.findIndex((l) => /^\s+uses: actions\/checkout@/.test(l));
+  assert.notEqual(at, -1);
+  const end = lines.findIndex((l, i) => i > at && /^\s+- (name|uses|id|run):/.test(l));
+  const step = lines.slice(at, end).join('\n');
+  assert.match(step, /^\s+fetch-depth: 0$/m);
+  assert.match(step, /^\s+filter: blob:none$/m);
+  assert.match(step, /^\s+sparse-checkout: \|$/m);
 });
 
 test('lo sweep non cancella mai il branch e ha un tetto per run', () => {
