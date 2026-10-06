@@ -64,7 +64,12 @@
  * User-Agent onesto (D10: niente UA camuffato), lo stesso dei crawler eventi.
  */
 
-import { itemIdentityToken, maskInactiveMarkup, newsUrlKey, withItemIdentity } from './source-url-ledger.mjs';
+import {
+  itemIdentityToken,
+  maskInactiveMarkup as maskLedgerInactiveMarkup,
+  newsUrlKey,
+  withItemIdentity,
+} from './source-url-ledger.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -93,6 +98,175 @@ export const SUPPORTED_CANTON_PARSERS = Object.freeze([
 
 // ── Decodifica ───────────────────────────────────────────────────────────────
 
+const CHARSET_RAW_TEXT_TAGS = new Set(['script', 'style', 'textarea', 'title']);
+
+function isHtmlWhitespace(char) {
+  return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
+}
+
+function findCharsetTagEnd(html, start) {
+  let quote = '';
+  for (let i = start + 1; i < html.length; i++) {
+    const char = html[i];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '>') {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function isCharsetSelfClosingStartTag(html, nameEnd, end) {
+  let i = nameEnd;
+  while (i < end) {
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    if (html[i] === '/') {
+      return i + 1 === end;
+    }
+
+    while (
+      i < end &&
+      !isHtmlWhitespace(html[i]) &&
+      html[i] !== '=' &&
+      html[i] !== '/' &&
+      html[i] !== '>'
+    ) i++;
+    if (html[i] !== '=') continue;
+
+    i++;
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    const quote = html[i];
+    if (quote === '"' || quote === "'") {
+      i++;
+      while (i < end && html[i] !== quote) i++;
+      if (i >= end) return false;
+      i++;
+      continue;
+    }
+    // In HTML's unquoted attribute-value state `/` belongs to the value.
+    while (i < end && !isHtmlWhitespace(html[i]) && html[i] !== '>') i++;
+  }
+  return false;
+}
+
+function readCharsetTag(html, start) {
+  if (html[start] !== '<') return null;
+  let i = start + 1;
+  const closing = html[i] === '/';
+  if (closing) i++;
+  const nameStart = i;
+  while (i < html.length && /[A-Za-z0-9:_-]/.test(html[i])) i++;
+  if (i === nameStart) return null;
+  const boundary = html[i] ?? '';
+  if (boundary && !/[\s/>]/.test(boundary)) return null;
+  const end = findCharsetTagEnd(html, start);
+  if (end < 0) return null;
+  return {
+    closing,
+    end,
+    name: html.slice(nameStart, i).toLowerCase(),
+    selfClosing: !closing && isCharsetSelfClosingStartTag(html, i, end),
+  };
+}
+
+function skipCharsetComment(html, start) {
+  const end = html.indexOf('-->', start + 4);
+  return end < 0 ? -1 : end + 3;
+}
+
+function skipCharsetRawText(html, afterOpening, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = afterOpening;
+  const match = closing.exec(html);
+  return match ? match.index + match[0].length : -1;
+}
+
+function skipCharsetTemplate(html, afterOpening) {
+  let depth = 1;
+  let cursor = afterOpening;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipCharsetComment(html, start);
+      if (afterComment < 0) return -1;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readCharsetTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.name === 'template') {
+      if (tag.closing) {
+        depth--;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth++;
+      }
+    } else if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = skipCharsetRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return -1;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return -1;
+}
+
+/**
+ * Mask inactive markup for the charset prefix. An incomplete comment/raw-text
+ * block/template masks to EOF: the prefix is deliberately treated as
+ * untrusted when its closing context is outside the 1024-byte window.
+ */
+function maskCharsetInactiveMarkup(html) {
+  const source = String(html || '');
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let index = start; index < end; index++) output[index] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    if (source.startsWith('<!--', start)) {
+      const afterComment = skipCharsetComment(source, start);
+      blank(start, afterComment < 0 ? source.length : afterComment);
+      if (afterComment < 0) break;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readCharsetTag(source, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = skipCharsetRawText(source, tag.end + 1, tag.name);
+      blank(start, afterRawText < 0 ? source.length : afterRawText);
+      if (afterRawText < 0) break;
+      cursor = afterRawText;
+      continue;
+    }
+    if (tag.name === 'template' && !tag.closing && !tag.selfClosing) {
+      const afterTemplate = skipCharsetTemplate(source, tag.end + 1);
+      blank(start, afterTemplate < 0 ? source.length : afterTemplate);
+      if (afterTemplate < 0) break;
+      cursor = afterTemplate;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
+}
+
 /** Il charset dichiarato da un header `Content-Type`, o null. */
 export function charsetFromContentType(contentType) {
   const m = /charset\s*=\s*["']?([\w.:-]+)/i.exec(String(contentType || ''));
@@ -104,7 +278,7 @@ export function charsetFromDocumentHead(asciiHead) {
   // Only active document markup can declare the response charset. A stale
   // `<meta charset>` in a comment, template, or script must not win over the
   // real declaration that follows it.
-  const head = maskInactiveMarkup(String(asciiHead || ''));
+  const head = maskCharsetInactiveMarkup(String(asciiHead || ''));
   const xml = /<\?xml[^>]*\bencoding\s*=\s*["']([\w.:-]+)["']/i.exec(head);
   if (xml) return xml[1].toLowerCase();
   const meta = /<meta[^>]+charset\s*=\s*["']?([\w.:-]+)/i.exec(head);
@@ -256,7 +430,7 @@ export function stripPageChrome(html) {
   // `<nav>` scritto in un template JS non apre niente, e un `<a>` li' dentro
   // non e' un link. Resi spazi a pari lunghezza (gli indici restano quelli del
   // documento), e cosi' restano anche in uscita: l'estrattore non li vede.
-  const masked = maskInactiveMarkup(html);
+  const masked = maskLedgerInactiveMarkup(html);
   const tagRe = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*)>/g;
   const ranges = [];
   let sectioningDepth = 0;

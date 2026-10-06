@@ -146,6 +146,42 @@ function findTagEnd(html, start) {
   return -1;
 }
 
+function isSelfClosingStartTag(html, nameEnd, end) {
+  let i = nameEnd;
+  while (i < end) {
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    if (html[i] === '/') {
+      return i + 1 === end;
+    }
+
+    while (
+      i < end &&
+      !isHtmlWhitespace(html[i]) &&
+      html[i] !== '=' &&
+      html[i] !== '/' &&
+      html[i] !== '>'
+    ) i++;
+    if (html[i] !== '=') continue;
+
+    i++;
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    const quote = html[i];
+    if (quote === '"' || quote === "'") {
+      i++;
+      while (i < end && html[i] !== quote) i++;
+      if (i >= end) return false;
+      i++;
+      continue;
+    }
+    // In HTML's unquoted attribute-value state `/` is data, not the
+    // self-closing flag. Only whitespace can end this value.
+    while (i < end && !isHtmlWhitespace(html[i]) && html[i] !== '>') i++;
+  }
+  return false;
+}
+
 function readTag(html, start) {
   if (html[start] !== '<') return null;
   let i = start + 1;
@@ -159,14 +195,12 @@ function readTag(html, start) {
   if (boundary && !isHtmlWhitespace(boundary) && boundary !== '/' && boundary !== '>') return null;
   const end = findTagEnd(html, start);
   if (end < 0) return null;
-  let beforeEnd = end - 1;
-  while (beforeEnd >= nameEnd && isHtmlWhitespace(html[beforeEnd])) beforeEnd--;
   return {
     closing,
     end,
     nameEnd,
     nameStart,
-    selfClosing: !closing && html[beforeEnd] === '/',
+    selfClosing: !closing && isSelfClosingStartTag(html, nameEnd, end),
   };
 }
 
@@ -315,6 +349,81 @@ function findCharsetMetaEnd(headContent) {
     searchFrom = tag.end + 1;
   }
   return -1;
+}
+
+function findActiveHeadContent(html) {
+  let searchFrom = 0;
+  while (searchFrom < html.length) {
+    const start = html.indexOf('<', searchFrom);
+    if (start < 0) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return null;
+      searchFrom = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      searchFrom = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      searchFrom = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      if (rawName) {
+        const afterRawText = skipRawTextElement(html, tag.end + 1, rawName);
+        if (afterRawText < 0) return null;
+        searchFrom = afterRawText;
+        continue;
+      }
+    }
+    if (!tag.closing && isTagNamed(html, tag, 'head')) {
+      const contentStart = tag.end + 1;
+      let cursor = contentStart;
+      while (cursor < html.length) {
+        const nestedStart = html.indexOf('<', cursor);
+        if (nestedStart < 0) return null;
+        if (html.startsWith('<!--', nestedStart)) {
+          const afterComment = skipComment(html, nestedStart);
+          if (afterComment < 0) return null;
+          cursor = afterComment;
+          continue;
+        }
+        const nested = readTag(html, nestedStart);
+        if (!nested) {
+          cursor = nestedStart + 1;
+          continue;
+        }
+        if (nested.closing && isTagNamed(html, nested, 'head')) {
+          return { start: contentStart, end: nestedStart };
+        }
+        if (!nested.closing && !nested.selfClosing && isTagNamed(html, nested, 'template')) {
+          const afterTemplate = skipTemplateElement(html, nested.end + 1);
+          if (afterTemplate < 0) return null;
+          cursor = afterTemplate;
+          continue;
+        }
+        if (!nested.closing && !nested.selfClosing) {
+          const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, nested, name));
+          if (rawName) {
+            const afterRawText = skipRawTextElement(html, nested.end + 1, rawName);
+            if (afterRawText < 0) return null;
+            cursor = afterRawText;
+            continue;
+          }
+        }
+        cursor = nested.end + 1;
+      }
+      return null;
+    }
+    searchFrom = tag.end + 1;
+  }
+  return null;
 }
 
 function log(msg) {
@@ -541,21 +650,16 @@ function offloadAll(distDir, cdnBase) {
       if (out.includes('__CDN_DATA_BASE__')) {
         injected++; // already present (idempotent re-run)
       } else {
-        const m = out.match(/<head[^>]*>/i);
-        if (m) {
-          const headEnd = m.index + m[0].length;
-          const headRemainder = out.slice(headEnd);
-          const headCloseAt = headRemainder.search(/<\/head\s*>/i);
-          const headContent = headCloseAt >= 0
-            ? headRemainder.slice(0, headCloseAt)
-            : headRemainder;
+        const activeHead = findActiveHeadContent(out);
+        if (activeHead) {
+          const headContent = out.slice(activeHead.start, activeHead.end);
           const charsetEnd = findCharsetMetaEnd(headContent);
           // HTML requires the encoding declaration near the start of <head>.
           // Keep deploy-time hints after it; fall back to the old insertion
           // point for unusual documents that do not declare a charset.
           const at = charsetEnd >= 0
-            ? headEnd + charsetEnd
-            : headEnd;
+            ? activeHead.start + charsetEnd
+            : activeHead.start;
           // The hint comment above assumes the data CDN is a DISTINCT host
           // from the asset CDN; when config points both at the same origin the
           // build already ships this exact preconnect (asyncCssPlugin /

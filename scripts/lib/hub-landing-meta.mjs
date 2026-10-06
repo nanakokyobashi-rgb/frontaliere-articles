@@ -24,6 +24,10 @@ function escapeRegExp(value) {
 
 const HEAD_RAW_TEXT_TAGS = ['script', 'style', 'textarea', 'title'];
 
+function isHtmlWhitespace(char) {
+  return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
+}
+
 function findTagEnd(html, start) {
   let quote = '';
   for (let i = start + 1; i < html.length; i++) {
@@ -39,6 +43,42 @@ function findTagEnd(html, start) {
   return -1;
 }
 
+function isSelfClosingStartTag(html, nameEnd, end) {
+  let i = nameEnd;
+  while (i < end) {
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    if (html[i] === '/') {
+      return i + 1 === end;
+    }
+
+    while (
+      i < end &&
+      !isHtmlWhitespace(html[i]) &&
+      html[i] !== '=' &&
+      html[i] !== '/' &&
+      html[i] !== '>'
+    ) i++;
+    if (html[i] !== '=') continue;
+
+    i++;
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    const quote = html[i];
+    if (quote === '"' || quote === "'") {
+      i++;
+      while (i < end && html[i] !== quote) i++;
+      if (i >= end) return false;
+      i++;
+      continue;
+    }
+    // A slash is data in HTML's unquoted attribute-value state. It is a
+    // self-closing flag only after that value has ended at whitespace.
+    while (i < end && !isHtmlWhitespace(html[i]) && html[i] !== '>') i++;
+  }
+  return false;
+}
+
 function readTag(html, start) {
   if (html[start] !== '<') return null;
   let i = start + 1;
@@ -51,13 +91,11 @@ function readTag(html, start) {
   if (end < 0) return null;
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
-  let beforeEnd = end - 1;
-  while (beforeEnd >= i && /\s/.test(html[beforeEnd])) beforeEnd--;
   return {
     closing,
     end,
     name: html.slice(nameStart, i).toLowerCase(),
-    selfClosing: !closing && html[beforeEnd] === '/',
+    selfClosing: !closing && isSelfClosingStartTag(html, i, end),
   };
 }
 
@@ -66,11 +104,15 @@ function skipComment(html, start) {
   return end < 0 ? -1 : end + 3;
 }
 
-function skipRawTextElement(html, afterOpening, name) {
+function findRawTextClose(html, afterOpening, name) {
   const closing = new RegExp(`</${escapeRegExp(name)}\\s*>`, 'ig');
   closing.lastIndex = afterOpening;
   const match = closing.exec(html);
-  return match ? match.index + match[0].length : -1;
+  return match ? { start: match.index, end: match.index + match[0].length } : null;
+}
+
+function skipRawTextElement(html, afterOpening, name) {
+  return findRawTextClose(html, afterOpening, name)?.end ?? -1;
 }
 
 function skipTemplateElement(html, afterOpening) {
@@ -108,67 +150,177 @@ function skipTemplateElement(html, afterOpening) {
   return -1;
 }
 
-function replaceActiveHeadTitle(html, staleValue, nextValue) {
-  const head = /<head\b[^>]*>/i.exec(html);
-  if (!head) return html;
-  const headStart = head.index + head[0].length;
-  const rest = html.slice(headStart);
-  const closeAt = rest.search(/<\/head\s*>/i);
-  const headEnd = headStart + (closeAt < 0 ? rest.length : closeAt);
-  let cursor = headStart;
-  while (cursor < headEnd) {
+function findActiveHeadContent(html) {
+  let cursor = 0;
+  while (cursor < html.length) {
     const start = html.indexOf('<', cursor);
-    if (start < 0 || start >= headEnd) break;
+    if (start < 0) return null;
     if (html.startsWith('<!--', start)) {
       const afterComment = skipComment(html, start);
-      if (afterComment < 0) break;
+      if (afterComment < 0) return null;
       cursor = afterComment;
       continue;
     }
     const tag = readTag(html, start);
-    if (!tag || tag.end >= headEnd) {
+    if (!tag) {
       cursor = start + 1;
       continue;
     }
-    if (tag.name === 'template' && !tag.closing && !tag.selfClosing) {
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
       const afterTemplate = skipTemplateElement(html, tag.end + 1);
-      if (afterTemplate < 0) break;
+      if (afterTemplate < 0) return null;
       cursor = afterTemplate;
       continue;
     }
-    if (tag.name === 'title' && !tag.closing) {
-      const close = /<\/title\s*>/i.exec(html.slice(tag.end + 1, headEnd));
-      if (!close) break;
-      const contentStart = tag.end + 1;
-      const contentEnd = contentStart + close.index;
-      if (html.slice(contentStart, contentEnd) === staleValue) return `${html.slice(0, contentStart)}${nextValue}${html.slice(contentEnd)}`;
-      return html;
-    }
     if (!tag.closing && !tag.selfClosing && HEAD_RAW_TEXT_TAGS.includes(tag.name)) {
       const afterRawText = skipRawTextElement(html, tag.end + 1, tag.name);
-      if (afterRawText < 0 || afterRawText > headEnd) break;
+      if (afterRawText < 0) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'head') {
+      const contentStart = tag.end + 1;
+      let inside = contentStart;
+      while (inside < html.length) {
+        const nestedStart = html.indexOf('<', inside);
+        if (nestedStart < 0) return null;
+        if (html.startsWith('<!--', nestedStart)) {
+          const afterComment = skipComment(html, nestedStart);
+          if (afterComment < 0) return null;
+          inside = afterComment;
+          continue;
+        }
+        const nested = readTag(html, nestedStart);
+        if (!nested) {
+          inside = nestedStart + 1;
+          continue;
+        }
+        if (nested.closing && nested.name === 'head') {
+          return { start: contentStart, end: nestedStart };
+        }
+        if (!nested.closing && !nested.selfClosing && nested.name === 'template') {
+          const afterTemplate = skipTemplateElement(html, nested.end + 1);
+          if (afterTemplate < 0) return null;
+          inside = afterTemplate;
+          continue;
+        }
+        if (!nested.closing && !nested.selfClosing && HEAD_RAW_TEXT_TAGS.includes(nested.name)) {
+          const afterRawText = skipRawTextElement(html, nested.end + 1, nested.name);
+          if (afterRawText < 0) return null;
+          inside = afterRawText;
+          continue;
+        }
+        inside = nested.end + 1;
+      }
+      return null;
+    }
+    cursor = tag.end + 1;
+  }
+  return null;
+}
+
+const HEAD_META_PATCHES = Object.freeze([
+  {
+    attribute: 'name',
+    attributeValue: 'description',
+    staleValue: STALE_SWISS_HUB_ROOT_SEO_IT.description,
+    nextValue: SWISS_HUB_ROOT_SEO_IT.description,
+  },
+  {
+    attribute: 'property',
+    attributeValue: 'og:title',
+    staleValue: STALE_SWISS_HUB_ROOT_SEO_IT.title,
+    nextValue: SWISS_HUB_ROOT_SEO_IT.title,
+  },
+  {
+    attribute: 'property',
+    attributeValue: 'og:description',
+    staleValue: STALE_SWISS_HUB_ROOT_SEO_IT.ogDescription,
+    nextValue: SWISS_HUB_ROOT_SEO_IT.ogDescription,
+  },
+]);
+
+function patchMetaTag(tag) {
+  const content = /\bcontent\s*=\s*(['"])(.*?)\1/i;
+  for (const patch of HEAD_META_PATCHES) {
+    const identity = new RegExp(
+      `\\b${escapeRegExp(patch.attribute)}\\s*=\\s*(["'])${escapeRegExp(patch.attributeValue)}\\1`,
+      'i',
+    );
+    if (!identity.test(tag)) continue;
+    const match = content.exec(tag);
+    if (!match || match[2] !== patch.staleValue) return tag;
+    const valueOffset = match[0].indexOf(match[2]);
+    return `${tag.slice(0, match.index)}${match[0].slice(0, valueOffset)}${patch.nextValue}${match[1]}${tag.slice(match.index + match[0].length)}`;
+  }
+  return tag;
+}
+
+function patchActiveHeadMetadata(html) {
+  const source = String(html);
+  const head = findActiveHeadContent(source);
+  if (!head) return source;
+
+  const replacements = [];
+  let titleSeen = false;
+  let cursor = head.start;
+  while (cursor < head.end) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0 || start >= head.end) break;
+    if (source.startsWith('<!--', start)) {
+      const afterComment = skipComment(source, start);
+      if (afterComment < 0) break;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(source, start);
+    if (!tag || tag.end >= head.end) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.closing) {
+      cursor = tag.end + 1;
+      continue;
+    }
+    if (tag.name === 'template' && !tag.selfClosing) {
+      const afterTemplate = skipTemplateElement(source, tag.end + 1);
+      if (afterTemplate < 0 || afterTemplate > head.end) break;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (tag.name === 'title') {
+      const close = findRawTextClose(source, tag.end + 1, 'title');
+      if (!close || close.start >= head.end) break;
+      const contentStart = tag.end + 1;
+      if (!titleSeen && source.slice(contentStart, close.start) === STALE_SWISS_HUB_ROOT_SEO_IT.title) {
+        replacements.push({ start: contentStart, end: close.start, value: SWISS_HUB_ROOT_SEO_IT.title });
+      }
+      titleSeen = true;
+      cursor = close.end;
+      continue;
+    }
+    if (tag.name === 'meta') {
+      const original = source.slice(start, tag.end + 1);
+      const patched = patchMetaTag(original);
+      if (patched !== original) replacements.push({ start, end: tag.end + 1, value: patched });
+      cursor = tag.end + 1;
+      continue;
+    }
+    if (!tag.selfClosing && HEAD_RAW_TEXT_TAGS.includes(tag.name)) {
+      const afterRawText = skipRawTextElement(source, tag.end + 1, tag.name);
+      if (afterRawText < 0 || afterRawText > head.end) break;
       cursor = afterRawText;
       continue;
     }
     cursor = tag.end + 1;
   }
-  return html;
-}
 
-function replaceMetaContent(html, attribute, attributeValue, staleValue, nextValue) {
-  const identity = new RegExp(
-    `\\b${escapeRegExp(attribute)}\\s*=\\s*(["'])${escapeRegExp(attributeValue)}\\1`,
-    'i',
-  );
-  const content = /\bcontent\s*=\s*(['"])(.*?)\1/i;
-  return html.replace(/<meta\b[^>]*>/gi, (tag) => {
-    if (!identity.test(tag)) return tag;
-    const match = content.exec(tag);
-    if (!match || match[2] !== staleValue) return tag;
-    const before = tag.slice(0, match.index);
-    const after = tag.slice(match.index + match[0].length);
-    return `${before}${match[0].slice(0, match[0].indexOf(match[2]))}${nextValue}${match[1]}${after}`;
-  });
+  let out = source;
+  for (let i = replacements.length - 1; i >= 0; i--) {
+    const replacement = replacements[i];
+    out = `${out.slice(0, replacement.start)}${replacement.value}${out.slice(replacement.end)}`;
+  }
+  return out;
 }
 
 /**
@@ -177,32 +329,5 @@ function replaceMetaContent(html, attribute, attributeValue, staleValue, nextVal
  */
 export function patchHubLandingMetadata(html, section, locale) {
   if (section !== 'svizzera' || locale !== 'it') return html;
-
-  let out = replaceActiveHeadTitle(
-    String(html),
-    STALE_SWISS_HUB_ROOT_SEO_IT.title,
-    SWISS_HUB_ROOT_SEO_IT.title,
-  );
-  out = replaceMetaContent(
-    out,
-    'name',
-    'description',
-    STALE_SWISS_HUB_ROOT_SEO_IT.description,
-    SWISS_HUB_ROOT_SEO_IT.description,
-  );
-  out = replaceMetaContent(
-    out,
-    'property',
-    'og:title',
-    STALE_SWISS_HUB_ROOT_SEO_IT.title,
-    SWISS_HUB_ROOT_SEO_IT.title,
-  );
-  out = replaceMetaContent(
-    out,
-    'property',
-    'og:description',
-    STALE_SWISS_HUB_ROOT_SEO_IT.ogDescription,
-    SWISS_HUB_ROOT_SEO_IT.ogDescription,
-  );
-  return out;
+  return patchActiveHeadMetadata(String(html));
 }

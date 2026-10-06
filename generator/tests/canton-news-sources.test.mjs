@@ -239,6 +239,26 @@ test('charset: ignora dichiarazioni in markup inattivo prima della meta reale', 
   assert.equal(charsetFromDocumentHead(head), 'utf-8');
 });
 
+test('charset: un blocco inattivo oltre il prefisso di 1024 byte chiude il masking in fail-closed', () => {
+  const body = '<script>'
+    + 'x'.repeat(900)
+    + '<meta charset="iso-8859-1">'
+    + 'x'.repeat(200)
+    + '</script><meta charset="utf-8">';
+  const prefix = Buffer.from(body).subarray(0, 1024).toString('latin1');
+  assert.equal(charsetFromDocumentHead(prefix), null);
+  assert.equal(decodeResponseBody(Buffer.from(body), { contentType: 'text/html' }).charset, 'utf-8');
+});
+
+test('charset: template annidati e slash in valore non quotato restano inattivi', () => {
+  const nested = '<template><template></template><meta charset="windows-1252"></template>'
+    + '<meta charset="utf-8">';
+  const unquotedSlash = '<template data-src=/foo/><meta charset=windows-1252></template>'
+    + '<meta charset=utf-8>';
+  assert.equal(charsetFromDocumentHead(nested), 'utf-8');
+  assert.equal(charsetFromDocumentHead(unquotedSlash), 'utf-8');
+});
+
 test('pubDate vuoto (bs.ch): voci SENZA data per la quota undated, mai «recenti»', async () => {
   const source = sourceOf('BASILEA', 'https://www.bs.ch/rss');
   assert.equal(source.quirks.emptyPubDate, true);

@@ -55,6 +55,45 @@ function findTagEnd(html: string, start: number): number {
   return -1;
 }
 
+function isHtmlWhitespace(char: string | undefined): boolean {
+  return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
+}
+
+function isSelfClosingStartTag(html: string, nameEnd: number, end: number): boolean {
+  let index = nameEnd;
+  while (index < end) {
+    while (index < end && isHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    if (html[index] === '/') {
+      return index + 1 === end;
+    }
+
+    while (
+      index < end &&
+      !isHtmlWhitespace(html[index]) &&
+      html[index] !== '=' &&
+      html[index] !== '/' &&
+      html[index] !== '>'
+    ) index += 1;
+    if (html[index] !== '=') continue;
+
+    index += 1;
+    while (index < end && isHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    const quote = html[index];
+    if (quote === '"' || quote === "'") {
+      index += 1;
+      while (index < end && html[index] !== quote) index += 1;
+      if (index >= end) return false;
+      index += 1;
+      continue;
+    }
+    // In HTML's unquoted attribute-value state `/` belongs to the value.
+    while (index < end && !isHtmlWhitespace(html[index]) && html[index] !== '>') index += 1;
+  }
+  return false;
+}
+
 function readTag(html: string, start: number): { closing: boolean; end: number; name: string; selfClosing: boolean } | null {
   if (html[start] !== '<') return null;
   const closing = html[start + 1] === '/';
@@ -70,7 +109,7 @@ function readTag(html: string, start: number): { closing: boolean; end: number; 
     closing,
     end,
     name: nameMatch[0].toLowerCase(),
-    selfClosing: !closing && /\/\s*$/.test(html.slice(nameStart, end)),
+    selfClosing: !closing && isSelfClosingStartTag(html, nameEnd, end),
   };
 }
 

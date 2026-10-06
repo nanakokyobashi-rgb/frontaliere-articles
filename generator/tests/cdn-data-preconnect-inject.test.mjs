@@ -63,3 +63,25 @@ test('ignores raw text nested inside a template before the real charset', () => 
   assert.ok(charsetAt < scriptAt);
   assert.ok(charsetAt > output.indexOf('</template>'));
 });
+
+test('finds the real head close past inactive raw text', () => {
+  const html = '<!doctype html><html><head><!-- </head> -->'
+    + '<script>const fake = "</head>";</script>'
+    + '<meta charset="utf-8"><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  const charsetAt = output.indexOf('<meta charset="utf-8">');
+  const scriptAt = output.indexOf('window.__CDN_DATA_BASE__');
+  assert.ok(output.indexOf('</script>') < charsetAt);
+  assert.ok(charsetAt < scriptAt);
+});
+
+test('does not treat a slash in an unquoted template value as self-closing', () => {
+  const html = '<!doctype html><html><head><template data-src=/foo/>'
+    + '<meta charset=utf-8></template><meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  const templateEnd = output.indexOf('</template>');
+  const charsetAt = output.lastIndexOf('<meta charset=utf-8>');
+  const scriptAt = output.indexOf('window.__CDN_DATA_BASE__');
+  assert.ok(templateEnd < charsetAt);
+  assert.ok(charsetAt < scriptAt);
+});

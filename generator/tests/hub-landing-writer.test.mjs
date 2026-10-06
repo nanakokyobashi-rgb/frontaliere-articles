@@ -34,6 +34,7 @@ import { patchHubLandingMetadata, SWISS_HUB_ROOT_SEO_IT } from '../../scripts/li
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 const writer = readFileSync(path.join(ROOT, 'scripts', 'refresh-hub-landing.mjs'), 'utf-8');
 const engine = readFileSync(path.join(ROOT, 'engine', 'articlesHubCards.ts'), 'utf-8');
+const flatRedirect = readFileSync(path.join(ROOT, 'engine', 'flatHtmlRedirect.ts'), 'utf-8');
 
 test('the writer goes through the create-or-refresh entry point', () => {
   assert.match(
@@ -99,6 +100,12 @@ test('the mirrored engine exposes create-or-refresh and keeps its fail-closed co
   );
 });
 
+test('the mirrored flat redirect scanner parses unquoted attribute values before self-closing', () => {
+  assert.match(flatRedirect, /function isSelfClosingStartTag\(html: string, nameEnd: number, end: number\)/);
+  assert.match(flatRedirect, /selfClosing: !closing && isSelfClosingStartTag\(html, nameEnd, end\)/);
+  assert.match(flatRedirect, /unquoted attribute-value state/);
+});
+
 
 test('the writer upgrades the stale Italian Switzerland landing head', () => {
   const stale = '<head>'
@@ -124,4 +131,26 @@ test('the metadata patch changes only the active head title', () => {
   const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
   assert.equal((patched.match(/<title>Articoli sulla Svizzera 2026 \| Frontaliere Ticino<\/title>/g) || []).length, 1);
   assert.equal((patched.match(/<title>Articoli Svizzera \| Frontaliere Ticino<\/title>/g) || []).length, 3);
+});
+
+test('the metadata patch scans one real head and leaves inactive/body metadata alone', () => {
+  const staleTitle = 'Articoli Svizzera | Frontaliere Ticino';
+  const staleDescription = 'Informazioni utili per frontalieri Svizzera-Italia: articoli svizzera.';
+  const staleOgDescription = 'Informazioni utili per frontalieri: articoli svizzera.';
+  const stale = '<!-- <head><title>' + staleTitle + '</title>'
+    + '<meta name="description" content="' + staleDescription + '"></head> -->'
+    + '<template data-src=/foo/><head><title>' + staleTitle + '</title>'
+    + '<meta name="description" content="' + staleDescription + '"></head></template>'
+    + '<head><script>const fake = "</head><meta name=description content=\\"' + staleDescription + '\\">";</script>'
+    + '<title>' + staleTitle + '</title>'
+    + '<meta name="description" content="' + staleDescription + '">'
+    + '<meta property="og:title" content="' + staleTitle + '">'
+    + '<meta property="og:description" content="' + staleOgDescription + '"></head>'
+    + '<body><meta name="description" content="' + staleDescription + '"></body>';
+  const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
+  assert.equal((patched.match(/<title>Articoli sulla Svizzera 2026 \| Frontaliere Ticino<\/title>/g) || []).length, 1);
+  assert.ok(patched.includes('<meta name="description" content="' + SWISS_HUB_ROOT_SEO_IT.description + '">'));
+  assert.ok(patched.includes('<meta property="og:title" content="' + SWISS_HUB_ROOT_SEO_IT.title + '">'));
+  assert.ok(patched.includes('<meta property="og:description" content="' + SWISS_HUB_ROOT_SEO_IT.ogDescription + '">'));
+  assert.ok(patched.includes('<body><meta name="description" content="' + staleDescription + '"></body>'));
 });
