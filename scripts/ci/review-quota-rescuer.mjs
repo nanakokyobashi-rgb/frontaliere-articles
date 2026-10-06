@@ -122,6 +122,9 @@ function openPrCommentSnapshot() {
     if (raw.trim() === '[]') return { prs: [], commentsByPr: new Map() };
     throw new Error('snapshot GraphQL delle PR malformato');
   }
+  if (pages.some((page) => Array.isArray(page?.errors) && page.errors.length > 0)) {
+    throw new Error('snapshot GraphQL delle PR con errori parziali');
+  }
   const nodes = [];
   for (const page of pages) {
     const connection = page?.data?.repository?.pullRequests;
@@ -141,7 +144,20 @@ function openPrCommentSnapshot() {
     // false negative on a trusted deferred marker.
     throw new Error('commenti oltre il primo blocco GraphQL: fallback REST verificabile');
   }
-  const prs = nodes.map((node) => ({
+  const eligibleNodes = nodes.filter((node) => !node.isDraft);
+  const cursor = nonNegativeInt(
+    process.env.REVIEW_QUOTA_RESCUER_CURSOR ?? process.env.GITHUB_RUN_NUMBER,
+    0,
+  );
+  const selection = roundRobinWindow(eligibleNodes, { limit: MAX_PRS, cursor });
+  if (selection.items.length < eligibleNodes.length) {
+    console.log(
+      `review-quota-rescuer: snapshot PR=${eligibleNodes.length}, finestra=${selection.items.length}, `
+      + `round=${cursor}, start=${selection.start}; il prossimo run osserva una finestra diversa.`,
+    );
+  }
+  const selectedNodes = selection.items;
+  const prs = selectedNodes.map((node) => ({
     number: node.number,
     draft: node.isDraft,
     state: String(node.state || 'OPEN').toLowerCase(),
@@ -149,7 +165,7 @@ function openPrCommentSnapshot() {
     head: { sha: node.headRefOid, ref: node.headRefName },
     base: { ref: node.baseRefName || '' },
   }));
-  const commentsByPr = new Map(nodes.map((node) => [
+  const commentsByPr = new Map(selectedNodes.map((node) => [
     node.number,
     node.comments.nodes.map((comment) => ({
       id: Number.isSafeInteger(comment?.databaseId) ? comment.databaseId : comment?.id,

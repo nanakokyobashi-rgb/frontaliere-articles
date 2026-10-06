@@ -1051,6 +1051,49 @@ test('lo snapshot GraphQL sostituisce la lettura REST dei commenti per tutte le 
   assert.equal(r.calls.some((call) => call.includes('/issues/1800/comments')), false, r.calls.join('\n'));
 });
 
+test('lo snapshot GraphQL conserva filtro draft, cap e round-robin del percorso REST', () => {
+  const eligible = Array.from({ length: 101 }, (_, index) => ({
+    number: index === 0 ? 1800 : 2000 + index,
+    isDraft: false,
+    state: 'OPEN',
+    headRefOid: RL_HEAD,
+    headRefName: RL_REF,
+    baseRefName: 'main',
+    body: '',
+    comments: { nodes: [], pageInfo: { hasNextPage: false } },
+  }));
+  const snapshot = [{
+    data: {
+      repository: {
+        pullRequests: {
+          nodes: [{ ...eligible[0], isDraft: true }, ...eligible],
+          pageInfo: { hasNextPage: false, endCursor: null },
+        },
+      },
+    },
+  }];
+  const r = runRateLimitRescuer({ resetAt: Date.now() / 1000 + 900, graphqlSnapshot: snapshot });
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /snapshot PR=101, finestra=100/);
+  assert.match(r.stdout, /PR osservate=100/);
+  assert.equal(r.calls.some((call) => call.includes('/pulls?state=open')), false, r.calls.join('\n'));
+  assert.equal(r.calls.some((call) => call.includes('/issues/1800/comments')), false, r.calls.join('\n'));
+});
+
+test('gli errori GraphQL parziali fanno scattare il fallback REST fail-closed', () => {
+  const r = runRateLimitRescuer({
+    resetAt: Date.now() / 1000 + 900,
+    graphqlSnapshot: [{
+      errors: [{ message: 'partial response' }],
+      data: { repository: { pullRequests: { nodes: [], pageInfo: { hasNextPage: false } } } },
+    }],
+  });
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /fallback REST per PR/);
+  assert.ok(r.calls.some((call) => call.includes('/pulls?state=open')), r.calls.join('\n'));
+  assert.ok(r.calls.some((call) => call.includes('/issues/1800/comments')), r.calls.join('\n'));
+});
+
 test('rate limit: prima del reset nessun rerun (rientrerebbe nel bucket vuoto)', () => {
   const nowSec = Math.floor(Date.now() / 1000);
   const recent = rlRun({ created_at: rlIso(nowSec - 600), updated_at: rlIso(nowSec - 500) });
