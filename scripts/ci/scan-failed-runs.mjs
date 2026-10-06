@@ -175,12 +175,16 @@ export function resolveLookbackMin({
  * posti: 03..19 erano starved per costruzione, non per sfortuna. Misurato sulle
  * 48 ore precedenti, 8 gruppi non hanno MAI ricevuto una issue.
  *
- * 20 copre il fleet osservato (30 workflow distinti in 19 giorni, ~17 per
- * passata) e resta bounded: la dedup in `github-issue-creator.mjs` collassa le
+ * Il default 20 era sufficiente per il fleet misurato allora (30 workflow
+ * distinti in 19 giorni, ~17 per passata), ma il 2026-10-05 una singola
+ * finestra ha trovato 34 workflow distinti e il cap ne ha lasciati 13 fuori;
+ * la scansione successiva ne ha trovati 38. 40 copre l'ondata osservata con un
+ * margine e resta bounded: la dedup in `github-issue-creator.mjs` collassa le
  * ricorrenze su UNA issue per workflow, quindi il cap limita il lavoro per
  * passata, non il numero di issue vive.
  */
-const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 20, { label: '--max-issues' });
+export const DEFAULT_MAX_ISSUES = 40;
+const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), DEFAULT_MAX_ISSUES, { label: '--max-issues' });
 // `-1` e' un valore DICHIARATO per questa leva: disattiva il gate di ricorrenza
 // in `github-issue-creator.mjs` (stesso `-1` usato piu' sotto per l'articolo perso).
 const GATE = parsePositiveNum(val('--gate', undefined), 3, { label: '--gate', sentinels: [-1] });

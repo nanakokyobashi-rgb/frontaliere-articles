@@ -7781,6 +7781,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-edilizio-berna-procedura.title': 'Baubewilligung in Bern: Anforderungen und Verfahren',
     'blog.article.permesso-edilizio-berna-procedura.excerpt': 'Kanton Bern: wann eine Baubewilligung erforderlich ist, welche Unterlagen vorzubereiten sind und warum die Arbeiten nicht vor Erteilung der Bewilligung beginnen dürfen.',
     'blog.article.permesso-edilizio-berna-procedura.imageAlt': 'Unterlagen für ein Baugesuch im Kanton Bern',
+    'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, Partner von Swiss, baut bis zu 700 Stellen ab',
+    'blog.article.air-baltic-tagli-swiss.excerpt': 'Das lettische Unternehmen könnte 500-700 Stellen von rund 3\'000 abbauen. Das Flugprogramm ändert sich nicht; die Kürzungen betreffen Riga, Vilnius und Tallinn.',
+    'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic plant Stellenkürzungen bei unverändertem aktuellem Flugprogramm.',
 };
 
 export default blogMetaChDe;
