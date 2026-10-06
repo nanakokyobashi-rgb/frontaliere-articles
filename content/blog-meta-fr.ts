@@ -12661,6 +12661,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.casse-malati-proposte-esperti-risposta.title': 'Caisses-maladie : hausse de 5 % et propositions évaluées par des experts',
     'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'En 2027, la prime augmente de 5 %. Trois experts analysent les finances de l\'État, la prévention et les coûts : dans le canton du Tessin, dès 2029, la moitié des citoyens pourrait bénéficier de réductions.',
     'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Vue panoramique du lac de Lugano avec la ville en arrière-plan, lumière du matin.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.title': 'À Lipomo, le flair de Roxy permet de découvrir de la drogue : deux arrestations',
+    'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Opération des Carabiniers à Albate : 111 grammes de cocaïne, du haschisch et 390 euro saisis. Deux ressortissants tunisiens arrêtés, un troisième signalé à la justice.',
+    'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Opération antidrogue avec un berger allemand à Lipomo',
 };
 
 export default blogMetaFr;

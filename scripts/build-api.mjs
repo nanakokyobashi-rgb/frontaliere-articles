@@ -247,6 +247,15 @@ const releaseEmitted = edgeRegistryPublishable(declaredSections, killSwitch);
 const releaseLiveSections = new Set(
   releaseEmitted ? Object.keys(effectiveSections).filter((id) => effectiveSections[id].status === 'live') : [],
 );
+// Una sezione di famiglia ha una superficie pubblica solo quando il registro
+// edge che questo build puo' emettere la dichiara effettivamente live. Questa
+// e' la decisione unica per TUTTI gli artefatti cantonali: il catalogo
+// dichiarativo resta completo, ma registro/meta/slugs/sitemap/feed/counts non
+// possono leggere una sezione active ma draft o spenta dal kill-switch.
+const isPublicSection = (section) => section.api.family === null || releaseLiveSections.has(section.section);
+const PUBLIC_API_SECTIONS = PUBLISHED_API_SECTIONS.filter(isPublicSection);
+const ACTIVE_API_FAMILIES = activeApiFamilies(PUBLISHED_API_SECTIONS);
+const PUBLIC_API_FAMILIES = activeApiFamilies(PUBLIC_API_SECTIONS);
 // Le sezioni di FAMIGLIA (le cantonali accese) si leggono come le storiche, con
 // una differenza sola: una sezione di famiglia appena accesa non ha ancora i
 // suoi file (create-article li crea TUTTI INSIEME al primo articolo), e
@@ -340,8 +349,7 @@ async function loadSectionMeta(section, loc) {
 // unire i meta e' sicuro solo se nessuna chiave si ripete: una ripetizione e'
 // un rifiuto, non un «vince l'ultima». Senza famiglie accese (oggi) non si
 // scrive niente qui, e dist/api resta quello di prima.
-const API_FAMILIES = activeApiFamilies(PUBLISHED_API_SECTIONS);
-for (const family of API_FAMILIES) {
+for (const family of PUBLIC_API_FAMILIES) {
   const seen = new Map();
   const rows = [];
   for (const section of family.sections) {
@@ -429,7 +437,7 @@ if (reservedSlugEntries.length > 0) {
   // byte-identico. Annidate per sezione (`cantons.<canton-id>.<id>`), perche'
   // chi risolve uno slug deve sapere sotto quale prefisso vive; niente mappa
   // inversa, che il consumer deriva.
-  for (const family of API_FAMILIES) {
+  for (const family of PUBLIC_API_FAMILIES) {
     slugsDoc[family.api.slugsKey] = Object.fromEntries(
       family.sections.map((section) => [section.section, slugMapOf(section.section) ?? {}]),
     );
@@ -520,7 +528,7 @@ const retiredDailyEditionSlugs = new Set(
 const retiredByRegistry = (section) =>
   registryRetiredSlugs(declaredSections.sections[section.section], slugMapOf(section.section), SECTION_PATHS[section.section]);
 const SECTION_SITEMAP_SHADOW = Object.fromEntries(
-  PUBLISHED_API_SECTIONS.map((section) => [
+  PUBLIC_API_SECTIONS.map((section) => [
     section.section,
     section.retiredDailyEditions
       ? new Set([...retiredDailyEditionSlugs, ...SECTION_CANONICAL_SHADOW[section.section]])
@@ -536,7 +544,7 @@ const { ARTICLES_PAGE_SIZE } = await load('host/seoHubsData.ts');
 const sitemapCounts = {};
 /** Articoli emessi per sezione di famiglia: il pavimento si misura su questi, non su landing e hub. */
 const familySitemapArticles = {};
-for (const section of PUBLISHED_API_SECTIONS) {
+for (const section of PUBLIC_API_SECTIONS) {
   if (section.api.family !== null) {
     const built = buildFamilySectionSitemap({
       section: section.section,
@@ -580,7 +588,7 @@ for (const section of PUBLISHED_API_SECTIONS) {
 // esattamente quella di prima.
 const sitemapSources = {};
 const familySitemapRows = [];
-for (const section of PUBLISHED_API_SECTIONS) {
+for (const section of PUBLIC_API_SECTIONS) {
   const file = section.api.sitemap;
   const source = countSourceSitemapEntries(ROOT, section.section);
   sitemapSources[section.section] = source;
@@ -786,7 +794,7 @@ console.log(
 //     (`content/cantons/<id>/seo.ts`) diverso da quello che l'engine cerca
 //     (`seo-blog-<id>.ts`). Senza la vista il feed uscirebbe senza item, o con
 //     gli id al posto degli slug nei link.
-const familyRssView = API_FAMILIES.length ? createEngineCorpusView(ROOT, process.env.RUNNER_TEMP || os.tmpdir()) : null;
+const familyRssView = ACTIVE_API_FAMILIES.length ? createEngineCorpusView(ROOT, process.env.RUNNER_TEMP || os.tmpdir()) : null;
 let rssSections;
 try {
   rssSections = RSS_SECTIONS.map((section) => {
@@ -873,7 +881,7 @@ for (const section of rssSections) {
   // `section.articleCount`: quello lo produce lo stesso parser dei chunk SEO
   // che scrive il feed, quindi un chunk SEO mancante o troncato lo azzererebbe
   // insieme agli item e la sezione svuotata passerebbe per «nuova».
-  if (familyPolicy) familyRssRows.push({ section: section.id, source: countSourceArticles(ROOT, section.id), emitted: sectionItems });
+  if (familyPolicy && releaseLiveSections.has(section.id)) familyRssRows.push({ section: section.id, source: countSourceArticles(ROOT, section.id), emitted: sectionItems });
 }
 // Per i feed vale solo la meta' «nessuna sezione svuotata» del verdetto di
 // famiglia: un feed e' una finestra (RSS_MAX_ITEMS), quindi la somma degli item
@@ -1302,9 +1310,9 @@ const sectionsCatalog = buildSectionsCatalog({
   declared: declaredSections,
   commit,
   articles: Object.fromEntries(
-    Object.keys(declaredSections.sections).map((id) => [id, SECTION_REGISTRIES[id]?.length ?? 0]),
+    Object.keys(declaredSections.sections).map((id) => [id, releaseLiveSections.has(id) ? SECTION_REGISTRIES[id]?.length ?? 0 : 0]),
   ),
-  sitemapOf: (id) => PUBLISHED_BY_SECTION[id]?.api.sitemap ?? null,
+  sitemapOf: (id) => (releaseLiveSections.has(id) ? PUBLISHED_BY_SECTION[id]?.api.sitemap ?? null : null),
 });
 write(SECTIONS_CATALOG_FILE, sectionsCatalog);
 // Registro e indice si emettono INSIEME o per niente: sono la release che
@@ -1356,7 +1364,7 @@ write('manifest.json', {
     ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.sitemapCounter, sitemapCounts[section.section]])),
     // Le famiglie accese: un contatore aggregato per registro e uno per le
     // sitemap delle sue sezioni. Assenti finche' la famiglia e' spenta.
-    ...Object.fromEntries(API_FAMILIES.flatMap((family) => [
+    ...Object.fromEntries(PUBLIC_API_FAMILIES.flatMap((family) => [
       [family.api.counter, family.sections.reduce((n, section) => n + SECTION_REGISTRIES[section.section].length, 0)],
       [family.api.sitemapCounter, family.sections.reduce((n, section) => n + sitemapCounts[section.section], 0)],
     ])),
@@ -1379,7 +1387,7 @@ write('manifest.json', {
     // chiave. E' la forma che non cambia quando si accende una sezione: i
     // contatori col nome fisso qui sopra restano per i consumer che li leggono.
     bySection: Object.fromEntries(
-      PUBLISHED_API_SECTIONS.map((section) => [
+      PUBLIC_API_SECTIONS.map((section) => [
         section.section,
         { articles: SECTION_REGISTRIES[section.section].length, sitemapUrls: sitemapCounts[section.section] },
       ]),
@@ -1529,7 +1537,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       derivedAlways(section.api.registry, () => jsonOut(section.api.registry).length),
     ])),
     ...Object.fromEntries(API_SECTIONS.map((section) => [section.api.sitemapCounter, sitemapUrls(section.api.sitemap)])),
-    ...Object.fromEntries(API_FAMILIES.flatMap((family) => [
+    ...Object.fromEntries(PUBLIC_API_FAMILIES.flatMap((family) => [
       [family.api.counter, derivedAlways(family.api.registry, () => jsonOut(family.api.registry).length)],
       [family.api.sitemapCounter, family.sections.reduce((n, section) => n + (sitemapUrls(section.api.sitemap) ?? 0), 0)],
     ])),
@@ -1600,7 +1608,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // storici, per sezione. Si ri-deriva dai byte serviti come gli altri e si
   // confronta per valore qui sotto, quindi NON sta in NOT_ON_DISK.
   const derivedBySection = Object.fromEntries(
-    PUBLISHED_API_SECTIONS.map((section) => [
+    PUBLIC_API_SECTIONS.map((section) => [
       section.section,
       {
         articles: !exists(section.api.registry)
@@ -1714,7 +1722,7 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // registri storici controlla `validateReleaseMarkers`.
   // L'assenza di slugs.json e' gia' un mismatch del blocco qui sopra.
   const familySlugs = exists('slugs.json') ? jsonOut('slugs.json') : null;
-  for (const family of familySlugs ? API_FAMILIES : []) {
+  for (const family of familySlugs ? PUBLIC_API_FAMILIES : []) {
     if (!exists(family.api.registry)) continue; // gia' in `absent`
     const rows = jsonOut(family.api.registry);
     const staleRows = rows.filter((row) => row?.commit !== declaredCommit).length;

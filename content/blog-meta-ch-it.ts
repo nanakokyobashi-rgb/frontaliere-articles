@@ -7790,6 +7790,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.neutralita-svizzera-voto-costituzione.title': 'Neutralità svizzera: respinta la stretta in Costituzione',
     'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Il popolo svizzero ha confermato l\'attuale interpretazione della neutralità: respinta l\'iniziativa per una concezione più rigida nella Costituzione.',
     'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande a Bellinzona in una scena editoriale sulla politica svizzera',
+    'blog.article.elezioni-berna-guida-voto.title': 'Elezioni cantonali a Berna: guida a calendario e voto',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Guida pratica alle elezioni cantonali nel Cantone di Berna: sistema elettorale, calendario, modalità di voto, liste e competenze istituzionali.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guida alle elezioni cantonali nel Cantone di Berna e competenze',
 };
 
 export default blogMetaChIt;

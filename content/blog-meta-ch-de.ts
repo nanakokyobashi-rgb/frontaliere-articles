@@ -7790,6 +7790,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.neutralita-svizzera-voto-costituzione.title': 'Schweizer Neutralität: Verschärfung in der Verfassung abgelehnt',
     'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Das Schweizer Volk hat die aktuelle Auslegung der Neutralität bestätigt: Die Initiative für eine strengere Auffassung in der Verfassung wurde abgelehnt.',
     'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande in Bellinzona in einer redaktionellen Szene zur Schweizer Politik',
+    'blog.article.elezioni-berna-guida-voto.title': 'Kantonswahlen in Bern: Kalender- und Abstimmungsleitfaden',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Praktischer Leitfaden zu den kantonalen Wahlen im Kanton Bern: Wahlsystem, Zeitplan, Abstimmungsmodalitäten, Listen und institutionelle Kompetenzen.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Leitfaden zu den kantonalen Wahlen in Bern und Zuständigkeiten',
 };
 
 export default blogMetaChDe;

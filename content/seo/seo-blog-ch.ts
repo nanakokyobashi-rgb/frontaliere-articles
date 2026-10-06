@@ -98275,6 +98275,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-elezioni-berna-guida-voto': {
+    title: 'Elezioni cantonali a Berna: guida a calendario e voto',
+    description: 'Guida ufficiale alle elezioni cantonali nel Cantone di Berna: calendario, modalità di voto, liste, competenze fiscali, previdenza e regole di locazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, elezioni, cantonali, berna, calendario',
+    ogTitle: 'Elezioni cantonali Berna: guida a calendario, voto e competenze',
+    ogDescription: 'Scopri come orientarti nelle elezioni cantonali a Berna. Una panoramica completa su calendario, modalità di voto, liste, suddivisione fiscale, previdenza e regole sulla locazione.',
+    canonicalPath: '/articoli-svizzera/elezioni-berna-guida-voto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Elezioni cantonali a Berna: guida a calendario e voto",
+      "description": "Guida ufficiale alle elezioni cantonali nel Cantone di Berna: calendario, modalità di voto, liste, competenze fiscali, previdenza e regole di locazione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/elezioni-berna-guida-voto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida alle elezioni cantonali nel Cantone di Berna e competenze"
+      },
+      "datePublished": "2026-10-06T04:48:47+00:00",
+      "dateModified": "2026-10-06T04:48:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/elezioni-berna-guida-voto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

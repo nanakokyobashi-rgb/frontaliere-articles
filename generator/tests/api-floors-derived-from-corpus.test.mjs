@@ -938,9 +938,10 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.doesNotMatch(build, /const entryRe = \/'blog-\(\[\^'\]\+\):\\s\*\\{\/g/);
   assert.doesNotMatch(build, /start \+ 4000/);
   // Dal 2026-10 (C1) le sezioni vengono dal core: una sola chiamata per
-  // sezione pubblicata, nel loop sulle sezioni pubblicate (oggi frontaliere e
-  // svizzera; da P7 anche le cantonali accese, con la politica di famiglia).
-  assert.match(build, /for \(const section of PUBLISHED_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section\);/);
+  // sezione pubblicabile, nel loop sulle sezioni pubbliche (oggi frontaliere
+  // e svizzera; da P7 anche le cantonali effettivamente live, con la politica
+  // di famiglia).
+  assert.match(build, /for \(const section of PUBLIC_API_SECTIONS\) \{\s*const file = section\.api\.sitemap;\s*const source = countSourceSitemapEntries\(ROOT, section\.section\);/);
   assert.doesNotMatch(build, /countSitemapEntries\(ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SWISS_ARTICLES/);
   assert.doesNotMatch(build, /countSitemapEntries\(SECTION_REGISTRIES/);

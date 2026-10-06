@@ -7790,6 +7790,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.neutralita-svizzera-voto-costituzione.title': 'Swiss neutrality: constitutional tightening rejected',
     'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'The Swiss people have confirmed the current interpretation of neutrality: the initiative for a stricter conception in the Constitution has been rejected.',
     'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande in Bellinzona in an editorial scene about Swiss politics',
+    'blog.article.elezioni-berna-guida-voto.title': 'Cantonal elections in Bern: guide to the calendar and voting',
+    'blog.article.elezioni-berna-guida-voto.excerpt': 'Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.',
+    'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide to cantonal elections in Bern and institutional competences',
 };
 
 export default blogMetaChEn;
