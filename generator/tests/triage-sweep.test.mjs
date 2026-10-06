@@ -16,6 +16,8 @@ test('triage-sweep si importa e non riesamina i pin locali senza routing', () =>
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'operations-audit-review' }] }), false);
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'keep-open' }] }), false);
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'agent:no-age-out' }] }), false);
-  assert.equal(isTriagedButNotRouted({ labels: [] }), true);
+  // Un record senza titolo non è un'issue instradabile: la guardia fail-closed
+  // del sito evita di riesaminarlo come se avesse perso solo la routing label.
+  assert.equal(isTriagedButNotRouted({ labels: [] }), false);
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'agent:fix' }] }), false);
 });
