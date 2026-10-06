@@ -50,6 +50,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-border-wait-ranking-article.mjs', 'generate-border-wait-ranking-weekly.yml'],
   ['generator/scripts/batch-add-faq-to-articles.mjs', 'batch-faq-articles.yml'],
   ['generator/scripts/generate-pharmacy-evergreen-guides.mjs', 'nessun workflow: producer rerunnable lanciato a mano'],
+  ['generator/scripts/repair-truncated-seo-titles.mjs', 'nessun workflow: bonifica storica eseguita manualmente'],
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'bonifica-blocking-bodies.yml'],
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
   ['generator/scripts/backfill-article-type.mjs', 'nessun workflow: backfill one-shot del campo articleType lanciato a mano'],
@@ -229,7 +230,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // noti, quindi non copre il file NUOVO — che e' il caso per cui il
   // censimento esiste.
 
-  const PUBLISHED = /blog-body|blog-articles-data|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
+  const PUBLISHED = /blog-body|blog-articles-data|content\/seo|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
   const dir = path.join(root, 'generator', 'scripts');
 
   // La sorgente raggiungibile via import relativi (statici E dinamici) e il
