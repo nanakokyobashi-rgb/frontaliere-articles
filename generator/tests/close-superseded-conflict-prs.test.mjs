@@ -203,6 +203,11 @@ test('l\'ultima cosa prima della chiusura è una rilettura della PR', () => {
   assert.ok(finalCheck > main.indexOf('decide(live, freshOpenPrs)'), 'la rilettura finale deve venire DOPO la decisione di conferma');
   const between = main.slice(finalCheck, closeAt);
   assert.equal(/\b(decide|listOpenPrs|mergeTreeState)\(/.test(between), false, 'niente letture lunghe fra la rilettura finale e la close');
+  // Nella stessa guardia, PRIMA della rilettura: merge-tree contro il main di adesso.
+  const guard = main.slice(main.lastIndexOf('if (', finalCheck), finalCheck);
+  assert.match(guard, /mergeTreeAllowsClose\(mergeTreeState\(live\)\)/, 'la guardia finale deve rifare merge-tree prima della rilettura della HEAD');
+  // La finestra irriducibile è dichiarata, non taciuta.
+  assert.match(main, /FINESTRA RESIDUA, per costruzione/);
 });
 
 test('caso 1 — resta aperta finché l\'origine non è MERGED o non si legge', () => {
@@ -448,7 +453,7 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   assert.match(src, /function rereadLivePr[\s\S]{0,700}isSweepCandidate\(live\)\.candidate/, 'la rilettura deve restare stretta (niente allowUnknown)');
   assert.ok(before.includes('const live = rereadLivePr(pr);'), 'manca la rilettura della PR');
   assert.ok(before.includes('decide(live, freshOpenPrs)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
-  assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 2, 'merge-tree va ricalcolato prima della decisione e prima della chiusura');
+  assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 3, 'merge-tree va ricalcolato prima della decisione, prima della conferma e nella guardia finale');
   assert.ok(before.includes('confirmed.reason !== decision.reason'), 'la conferma deve reggere la stessa ragione');
   // La rilettura chiede gli stessi campi della lista, base compresa.
   assert.match(src, /const PR_FIELDS = '[^']*baseRefName[^']*title[^']*|const PR_FIELDS = '[^']*title[^']*baseRefName/);

@@ -618,13 +618,26 @@ function main() {
     }
     // Commento e chiusura in UNA chiamata, senza `--delete-branch`: una close
     // fallita non lascia un commento che il tick successivo ripeterebbe.
-    // `decide` qui sopra fa altre letture, anche lunghe: la HEAD può essere
-    // cambiata mentre giravano. L'ULTIMA cosa prima della close è quindi una
-    // rilettura della PR — stessa HEAD, ancora candidata stretta — senza
-    // nient'altro in mezzo. `gh pr close` non accetta una HEAD attesa: questa
-    // lettura è il confronto condizionale possibile.
-    if (!rereadLivePr(live)) {
-      console.log(`PR #${pr.number}: HEAD o stato cambiati durante la conferma → resta aperta.`);
+    // ── Guardia finale ───────────────────────────────────────────────────
+    // La conferma qui sopra ha rifatto TUTTE le prove sull'oggetto riletto
+    // (rilettura della PR, merge-tree, hand-off, verdetto, contenuto), ma
+    // `decide` fa letture anche lunghe: mentre giravano main può essersi
+    // mosso e la HEAD può essere cambiata. Quindi, nell'ordine:
+    //   1. merge-tree un'altra volta, contro il main di ADESSO;
+    //   2. per ULTIMA la rilettura della PR — stessa HEAD, ancora candidata
+    //      stretta — e subito dopo la close, senza nient'altro in mezzo.
+    //
+    // FINESTRA RESIDUA, per costruzione: `gh pr close` non accetta una HEAD
+    // attesa né altre precondizioni, quindi un confronto-e-scambio atomico
+    // non esiste. Fra la rilettura del punto 2 e la close resta il tempo di
+    // UNA chiamata API; un claim o un hand-off nato dopo la conferma resta
+    // invisibile, e rifare `decide` qui allargherebbe la finestra invece di
+    // chiuderla (è la lettura lunga da cui questa guardia protegge). Il costo
+    // di perdere quella corsa è limitato dal disegno: il branch non viene
+    // cancellato, la chiusura lascia un commento con la ragione, e
+    // `gh pr reopen` la annulla.
+    if (!mergeTreeAllowsClose(mergeTreeState(live)) || !rereadLivePr(live)) {
+      console.log(`PR #${pr.number}: main, HEAD o stato cambiati durante la conferma → resta aperta.`);
       continue;
     }
     if (gh(['pr', 'close', String(pr.number), '--repo', REPO, '--comment', closingComment(decision)]) === null) {

@@ -1261,7 +1261,7 @@
       "reason": "Sweep zero-Claude eseguito da pr-autorebase.yml, che sul sito non esiste (merge queue nativa): chiude le PR del ciclo in conflitto con main che non hanno piu' niente da consegnare — riapplicazione di una PR di origine gia' mergiata il cui contenuto e' provato su main hunk per hunk (solo patch senza rimozioni, che quella prova non vede), oppure hand-off chiuso dal fixer con `already-fixed`. Chiude solo PR verso main, con `mergeable=CONFLICTING` e con il conflitto ricalcolato da merge-tree sulla HEAD corrente, dopo aver riletto PR e prove. Sul sito lo stesso stato non si accumula: il 2026-10-06 aveva 3 PR aperte e nessuna `has-conflicts`, contro 6 nel corpus. Riusa i predicati condivisi (`conflictHandoffOriginPr`, `conflictHandoffExpectedHead`, `lastFixOutcome`, `reapplyInFlight`, `handoffRouted`, `hasClaimLabel`, `classifyMergeTreeStatus`, `originContentOnMain`) senza copiarli.",
       "baseline": {
         "site": null,
-        "corpus": "18aaaa586573c978",
+        "corpus": "826685c0a5a7d8fd",
         "alignedAt": "2026-10-06"
       }
     },
