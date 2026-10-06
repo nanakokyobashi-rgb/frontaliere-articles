@@ -24660,6 +24660,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'costi-assicurazione-base-proiezione',
+    category: 'pratico',
+    date: '2026-10-06T07:50:50.849Z',
+    image: '/images/blog/costi-assicurazione-base-proiezione.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -2624,6 +2624,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'edifici-berna-obbligo-premi': { it: 'edifici-berna-obbligo-premi', en: 'bern-building-insurance-guide', de: 'gebaeudeversicherung-bern-ratgeber', fr: 'assurance-immeubles-berne-guide' },
  'prezzi-immobili-settembre-regioni': { it: 'prezzi-immobili-settembre-regioni', en: 'swiss-home-prices-september-regions', de: 'immobilienpreise-september-regionen', fr: 'prix-immobilier-septembre-regions' },
  'ostinelli-cassa-malati-udienza-pretore': { it: 'ostinelli-cassa-malati-udienza-pretore', en: 'ostinelli-health-insurance-court-hearing', de: 'ostinelli-krankenkasse-gerichtstermin', fr: 'ostinelli-assurance-maladie-audience' },
+ 'costi-assicurazione-base-proiezione': { it: 'costi-assicurazione-base-proiezione', en: 'health-insurance-premiums-on-the-rise-heading-toward-1000-francs-a-month', de: 'krankenkassenpramien-steigen-auf-dem-weg-zu-1000-franken-pro-monat', fr: 'primes-de-caisse-maladie-en-hausse-vers-1000-francs-par-mois' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -7805,6 +7805,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli non paga la cassa malati e va davanti al pretore',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un\'assicurazione internazionale.',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, medico di Mendrisio, davanti al pretore per il mancato pagamento della cassa malati',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'L\'anno prossimo il premio medio sarà 488 franchi (+23, +5%); tra 14 anni potrebbe raggiungere 966,20 franchi se il trend del 5% annuo continua.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Famiglia svizzera che controlla le spese sanitarie e i premi della cassa malati sul tavolo della cucina',
 };
 
 export default blogMetaChIt;

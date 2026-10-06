@@ -7805,6 +7805,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli ne paie pas la caisse-maladie et se rend devant le juge',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, médecin de Mendrisio, compara devant le juge de paix pour non-paiement de l\'assurance maladie suisse',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Primes de caisse-maladie en hausse : vers 1000 francs par mois',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'L’année prochaine, la prime moyenne sera de 488 francs (+23, +5%) ; dans 14 ans, elle pourrait atteindre 966,20 francs si la tendance de 5% par an se poursuit.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Famille suisse examinant les dépenses de santé et les primes d\'assurance maladie autour de la table de cuisine',
 };
 
 export default blogMetaChFr;
