@@ -584,8 +584,17 @@ function attestationLines(lines) {
 export function triageMarkerPersistenceExpectation(markerBody) {
   const body = String(markerBody || '');
   const lines = body.split(/\r?\n/);
-  const items = [...body.matchAll(/Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi)]
-    .map((match) => match[1].toUpperCase());
+  // `Follow-up item:` is a structural claim only when it starts its own
+  // marker line.  A partial daily-fix PR may quote its provenance inside a
+  // zero marker (`Addresses #bucket` + ``Follow-up item: FU-...``); counting
+  // that inline service reference as a newly created item contradicts the
+  // zero heading and quarantines an otherwise complete triage (issue #2299).
+  // Keep the line shape deliberately narrow: a real item remains fail-closed
+  // when it is declared in an unrecognised prose shape.
+  const items = [...new Set(attestationLines(lines)
+    .flatMap((line) => [...line.matchAll(
+      /^\s*(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi,
+    )].map((match) => match[1].toUpperCase())))];
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
   // ciascuna occorrenza di «bucket», non ogni numero della riga: la prosa puo'
