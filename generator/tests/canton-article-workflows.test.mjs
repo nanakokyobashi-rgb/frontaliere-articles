@@ -312,6 +312,7 @@ esac
 
 test('admit elegge un solo self-test dry quando un commit cambia piu\' caller', () => {
   const batch = [
+    '.github/workflows/generate-article.yml',
     '.github/workflows/generate-article-appenzello.yml',
     '.github/workflows/generate-article-ag.yml',
     '.github/workflows/generate-article-core.yml',
@@ -334,9 +335,11 @@ test('admit elegge un solo self-test dry quando un commit cambia piu\' caller', 
 
   const source = runAdmit(SOURCE, {
     caller: 'generate-article.yml',
-    changed: ['.github/workflows/generate-article.yml'],
+    changed: batch,
   });
+  assert.equal(source.status, 0);
   assert.equal(source.outputs.proceed, 'true');
+  assert.match(source.stdout, /workflow sorgente: non partecipa al batch cantonale/);
 });
 
 const pairGenerateEnv = (extra) => ({ BODY_PATH_RE: PAIR.bodyRe, PRIMARY_SECTION: PAIR.primary, SIBLING_SECTION: PAIR.sibling, ...extra });
