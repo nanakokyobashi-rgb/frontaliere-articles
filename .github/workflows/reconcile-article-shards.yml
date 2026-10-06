@@ -157,9 +157,24 @@ jobs:
           [ -n "$reason" ] && echo "dispatch disabilitato: $reason"
           echo "allow=$allow" >> "$GITHUB_OUTPUT"
 
+      # Anche il gemello degli shard deve ereditare il kill-switch del
+      # fast-publish: il reconcile puo' essere innescato da workflow_run o cron,
+      # cioe' fuori dal ramo push che normalmente risolve FAST_PUBLISH_ARMED.
+      - name: Resolve fast-publish kill-switch
+        id: arm
+        run: |
+          set -euo pipefail
+          allow=true
+          if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+            allow=false; echo "dispatch backfill disabilitato: .github/FAST_PUBLISH_DISABLED presente"
+          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+            allow=false; echo "dispatch backfill disabilitato: repo variable FAST_PUBLISH_ARMED=false"
+          fi
+          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+
       - name: Backfill (dispatch fast-publish-article per gli id selezionati)
         id: backfill
-        if: steps.mode.outputs.allow == 'true' && steps.detect.outputs.selected != '0'
+        if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.selected != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WF: fast-publish-article.yml

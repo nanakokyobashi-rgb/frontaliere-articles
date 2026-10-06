@@ -44,6 +44,7 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // le sezioni cantonali R2 attive, invece di produrre una matrice vuota.
 const SHARED_R2_REFRESH_PATHS = new Set([
   'generator/scripts/lib/canton-hubs/paths.mjs',
+  'generator/scripts/lib/corpus-paths.mjs',
   'generator/scripts/lib/control-char-write-report.mjs',
   'scripts/ci/fast-publish-section.mjs',
   'scripts/cf-purge-cache.mjs',

@@ -82,8 +82,24 @@ jobs:
           fi
           echo "allow=$allow" >> "$GITHUB_OUTPUT"
 
+      # Il backfill e' un publisher a tutti gli effetti: eredita gli stessi
+      # interruttori del fast-publish, anche quando il reconcile nasce da
+      # workflow_run o dal cron. La detection resta attiva, ma non si carica
+      # una pagina live mentre il kill-switch tiene spenti gli upload.
+      - name: Resolve fast-publish kill-switch
+        id: arm
+        run: |
+          set -euo pipefail
+          allow=true
+          if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+            allow=false; echo "dispatch backfill disabilitato: .github/FAST_PUBLISH_DISABLED presente"
+          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+            allow=false; echo "dispatch backfill disabilitato: repo variable FAST_PUBLISH_ARMED=false"
+          fi
+          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+
       - name: Backfill (dispatch fast-publish-section per sezione)
-        if: steps.mode.outputs.allow == 'true' && steps.detect.outputs.dispatch != '0'
+        if: steps.mode.outputs.allow == 'true' && steps.arm.outputs.allow == 'true' && steps.detect.outputs.dispatch != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

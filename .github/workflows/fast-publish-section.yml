@@ -37,6 +37,7 @@ on:
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
+      - 'generator/scripts/lib/corpus-paths.mjs'
       - 'generator/scripts/lib/control-char-write-report.mjs'
       - 'engine/**'
       - 'host/**'

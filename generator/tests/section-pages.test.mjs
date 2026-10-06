@@ -19,6 +19,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwne
 import {
   UPLOAD_ORDER,
   articleReleasePages,
+  articleReleaseSnapshot,
   assertPublishableSection,
   createRenderRoot,
   ensureRouteOwnerMeta,
@@ -28,6 +29,7 @@ import {
   pageEntry,
   obsoleteArticlePages,
   parseArgs,
+  publish,
   publishedStatus,
   rendererPageEntry,
 } from '../../scripts/publish-section-pages.mjs';
@@ -37,6 +39,7 @@ import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.
 import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
+import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const TI = ARTICLE_SECTION_CORE_ALL['canton-ti'];
@@ -111,6 +114,52 @@ test('publisher: ritiri e cambi di slug cancellano solo le vecchie URL articolo'
   assert.ok(obsolete.every((page) => !current.some((live) => live.canonicalPath === page.canonicalPath)));
   assert.ok(!obsolete.some((page) => page.canonicalPath.includes('kept')));
   assert.match(read('scripts/publish-section-pages.mjs'), /scripts\/lib\/delete-cdn-file\.sh/);
+});
+
+test('publisher: una sezione cantonale nuova o vuota ha una release articolo vuota, ma una coppia parziale si ferma', () => {
+  const source = sectionSourceSurfaces('canton-ti');
+  const missing = mkdtempSync(path.join(tmpdir(), 'release-empty-'));
+  assert.deepEqual(articleReleaseSnapshot(missing, 'canton-ti'), []);
+
+  const root = mkdtempSync(path.join(tmpdir(), 'release-skeleton-'));
+  const registryPath = path.join(root, source.registryFile);
+  const slugPath = path.join(root, source.slugFile);
+  mkdirSync(path.dirname(registryPath), { recursive: true });
+  writeFileSync(registryPath, 'export const CANTON_ARTICLES: Article[] = [\n];\n');
+  assert.throws(() => articleReleaseSnapshot(root, 'canton-ti'), /registry\/slugs incompleti/);
+
+  writeFileSync(slugPath, 'export const CANTON_SLUGS: Record<string, Record<string, string>> = {\n};\n');
+  assert.deepEqual(articleReleaseSnapshot(root, 'canton-ti'), []);
+
+  writeFileSync(slugPath, `export const CANTON_SLUGS = {
+  'orphan': { it: 'orphan-it', en: 'orphan-en', de: 'orphan-de', fr: 'orphan-fr' },
+};
+`);
+  assert.throws(() => articleReleaseSnapshot(root, 'canton-ti'), /registry\/slugs incoerenti/);
+});
+
+test('publisher: un hero CDN non confermato blocca l\'HTML della stessa release', async () => {
+  const calls = [];
+  const page = pageEntry('canton-ti', 'articoli-ticino/orphan/index.html', 'article');
+  const result = await publish({
+    section: 'canton-ti',
+    pages: [page],
+    cdnUploads: [{ local: 'hero.webp', key: 'edge/sections/articoli-ticino/orphan/hero.webp' }],
+    obsoletePages: [],
+    distDir: mkdtempSync(path.join(tmpdir(), 'publish-hero-')),
+    publishedStatusImpl: async () => 'draft',
+    runImpl: (command, args) => {
+      calls.push({ command, args });
+      return { code: 1, stdout: '' };
+    },
+    probeImpl: async () => {
+      throw new Error('il verify non deve partire dopo un hero fallito');
+    },
+  });
+  assert.equal(result.failures, 1);
+  assert.equal(result.uploaded, 0);
+  assert.equal(calls.length, 1);
+  assert.match(calls[0].args.join(' '), /upload-cdn-file\.sh/);
 });
 
 test('publisher: una pagina con noindex, senza meta di proprieta\', con asset same-origin o canonical altrui non esce', () => {
@@ -327,6 +376,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
   // must not produce matrix=[] and leave every live section stale.
   for (const rel of [
     'generator/scripts/lib/canton-hubs/paths.mjs',
+    'generator/scripts/lib/corpus-paths.mjs',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/lib/article-render-pipeline.mjs',
     'scripts/lib/cf-analytics.mjs',
@@ -375,6 +425,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /--previous-revision/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
+    'generator/scripts/lib/corpus-paths.mjs',
     'generator/scripts/lib/control-char-write-report.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
@@ -403,6 +454,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/offload-generated-images-cdn.mjs'\n"));
   for (const p of [
+    'generator/scripts/lib/corpus-paths.mjs',
     'generator/scripts/load-rc-env.mjs',
     'scripts/lib/cf-analytics.mjs',
     'scripts/lib/cf-purge-variants.mjs',
@@ -555,11 +607,18 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
 
 test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta', () => {
   const wf = read('.github/workflows/reconcile-section-pages.yml');
+  const articleWf = read('.github/workflows/reconcile-article-shards.yml');
   assert.match(wf, /workflows: \[fast-publish-section\]/);
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
   assert.match(wf, /gh workflow run fast-publish-section\.yml[^\n]*\\\n\s+-f section="\$section" -f article_ids="\$ids" -f bootstrap=false -f dry_run=false/);
   assert.match(wf, /github\.event\.workflow_run\.event \}\}" = "workflow_dispatch"/);
   assert.match(wf, /actions: write/);
+  for (const reconcileWorkflow of [wf, articleWf]) {
+    assert.match(reconcileWorkflow, /id: arm/);
+    assert.match(reconcileWorkflow, /FAST_PUBLISH_DISABLED/);
+    assert.match(reconcileWorkflow, /FAST_PUBLISH_ARMED/);
+    assert.match(reconcileWorkflow, /steps\.arm\.outputs\.allow == 'true'/);
+  }
   // Il nome del workflow osservato e' quello vero.
   assert.match(read('.github/workflows/fast-publish-section.yml'), /^name: fast-publish-section$/m);
 });

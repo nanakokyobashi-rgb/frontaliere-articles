@@ -72,6 +72,7 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'generator/scripts/lib/corpus-paths.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'generator/scripts/load-rc-env.mjs'

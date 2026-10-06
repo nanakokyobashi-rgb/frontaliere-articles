@@ -163,11 +163,22 @@ export function rendererPageEntry(section, rendered, kind) {
 
 const RELEASE_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 const REGISTRY_ID_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 function releaseRegistryIds(source, rel) {
   const ids = [...source.matchAll(REGISTRY_ID_RE)].map((match) => match[1] ?? match[2]);
-  if (!ids.length) throw new Error(`${rel}: registro senza id articolo`);
+  // Una sezione cantonale appena materializzata usa il suo registro-scheletro
+  // `Article[] = [\n];`: zero articoli e' uno stato legittimo della famiglia,
+  // non un corpus troncato. Una forma diversa senza id resta invece un errore.
+  if (!ids.length && !/=\s*\[\s*\]\s*;/.test(source)) throw new Error(`${rel}: registro senza id articolo`);
   return ids;
+}
+
+function isEmptySlugMap(source, slugConst) {
+  return new RegExp(
+    `\\bconst\\s+${escapeRegex(slugConst)}(?:\\s*:\\s*[^=\\n]+)?\\s*=\\s*\\{\\s*\\}\\s*;`,
+    'm',
+  ).test(source);
 }
 
 function readGitFile(rootDir, revision, rel) {
@@ -221,18 +232,28 @@ export function obsoleteArticlePages(previousPages, currentPages) {
   return previousPages.filter((page) => !current.has(page.canonicalPath));
 }
 
-function articleReleaseSnapshot(rootDir, section, revision = null) {
+export function articleReleaseSnapshot(rootDir, section, revision = null) {
   const source = sectionSourceSurfaces(section);
-  const read = (rel) => (revision ? readGitFile(rootDir, revision, rel) : fs.readFileSync(path.join(rootDir, rel), 'utf8'));
+  const read = (rel) => {
+    if (revision) return readGitFile(rootDir, revision, rel);
+    const abs = path.join(rootDir, rel);
+    return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : null;
+  };
   const registry = read(source.registryFile);
   const slugSource = read(source.slugFile);
   if (registry === null && slugSource === null) return [];
   if (registry === null || slugSource === null) {
     throw new Error(`${section}: release ${revision ?? 'working tree'} ha registry/slugs incompleti`);
   }
+  const ids = releaseRegistryIds(registry, source.registryFile);
+  if (!ids.length && isEmptySlugMap(slugSource, source.slugExport)) return [];
+  const slugs = parseArticleUrlSlugs(slugSource, source.slugExport);
+  if (!ids.length) {
+    throw new Error(`${section}: release ${revision ?? 'working tree'} ha registry/slugs incoerenti (registro vuoto, slug non vuoti)`);
+  }
   return articleReleasePages(section, {
-    ids: releaseRegistryIds(registry, source.registryFile),
-    slugs: parseArticleUrlSlugs(slugSource, source.slugExport),
+    ids,
+    slugs,
   });
 }
 
@@ -403,27 +424,45 @@ export function hubMissingIsFatal({ declaredStatus, effectiveStatus, publishing 
   return (publishing ? effectiveStatus : declaredStatus) === 'live';
 }
 
-async function publish({ pages, cdnUploads, obsoletePages, distDir, section }) {
+export async function publish({
+  pages,
+  cdnUploads,
+  obsoletePages,
+  distDir,
+  section,
+  runImpl = run,
+  publishedStatusImpl = publishedStatus,
+  probeImpl = probe,
+}) {
   let failures = 0;
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
   // into that state: otherwise the CDN verify below can be green while a live
   // apex still serves stale/404 pages. A valid draft is the bootstrap case.
-  const beforeStatus = await publishedStatus(section);
+  const beforeStatus = await publishedStatusImpl(section);
   if (beforeStatus === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} illeggibile o con stato sconosciuto: pubblicazione bloccata`);
     return { failures: 1, uploaded: 0, status: null };
   }
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   for (const { local, key } of cdnUploads) {
-    const { stdout } = run('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
+    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
     if (!stdout.includes('✅ uploaded')) {
       failures++;
       console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
     }
   }
+  // Un HTML che punta a un hero non ancora confermato e' una pubblicazione
+  // parziale: il reconcile controlla la pagina, non ogni asset CDN. Lasciare
+  // partire gli upload delle pagine qui renderebbe quindi servibile un nuovo
+  // canonical con immagine 404. Gli articoli gia' presenti restano intatti e
+  // il run rosso verra' ripreso dal fast-publish/reconcile successivo.
+  if (failures) {
+    console.error(`::error::[${LOG}] upload hero incompleto: nessuna pagina HTML viene caricata`);
+    return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
+  }
   const uploaded = [];
   for (const page of inUploadOrder(pages)) {
-    const { stdout } = run('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
+    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
     if (stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
       failures++;
@@ -432,7 +471,7 @@ async function publish({ pages, cdnUploads, obsoletePages, distDir, section }) {
   }
   const deleted = [];
   for (const page of obsoletePages) {
-    const { stdout } = run('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
+    const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
     if (stdout.includes('✅ deleted')) deleted.push(page);
     else {
       failures++;
@@ -441,11 +480,11 @@ async function publish({ pages, cdnUploads, obsoletePages, distDir, section }) {
   }
   const purgeUrls = [...uploaded, ...obsoletePages].flatMap((page) => [page.apexUrl, page.cdnUrl]);
   for (const chunk of purgeChunks(purgeUrls)) {
-    const { code } = run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
+    const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
     if (code !== 0) failures++;
   }
 
-  const status = await publishedStatus(section);
+  const status = await publishedStatusImpl(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
@@ -453,14 +492,14 @@ async function publish({ pages, cdnUploads, obsoletePages, distDir, section }) {
   }
   const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
-    const cdn = await probe(page.cdnUrl, { want: hasMeta });
+    const cdn = await probeImpl(page.cdnUrl, { want: hasMeta });
     if (!cdn.ok) {
       failures++;
       console.log(`::error::[${LOG}] non leggibile sul CDN: ${page.cdnUrl} (${cdn.status})`);
       continue;
     }
     if (status === 'live') {
-      const apex = await probe(page.apexUrl, { want: hasMeta });
+      const apex = await probeImpl(page.apexUrl, { want: hasMeta });
       if (!apex.ok) {
         failures++;
         console.log(`::error::[${LOG}] non leggibile all'apex: ${page.apexUrl} (${apex.status})`);
@@ -468,7 +507,7 @@ async function publish({ pages, cdnUploads, obsoletePages, distDir, section }) {
     }
   }
   for (const page of obsoletePages) {
-    const old = await probe(page.cdnUrl, { attempts: 3, delayMs: 1000 });
+    const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
     if (old.status !== 'HTTP 404') {
       failures++;
       console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
