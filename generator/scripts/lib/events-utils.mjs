@@ -27,6 +27,7 @@ import {
   getTranslationCascadeConfigurationKey,
 } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
+import { decodeHtmlEntities } from './decode-html-entities.mjs';
 
 export { hasUsableContentText };
 
@@ -1592,6 +1593,120 @@ export function isoDay(date) {
 export const EVENTS_DATASET_PATH = path.join(REPO_ROOT, 'data', 'events.json');
 export const EVENTS_SLICE_DIR = path.join(REPO_ROOT, 'data', 'events', 'by-source');
 
+const EVENT_REPLACEMENT_CHARACTER = '\uFFFD';
+// `decode-html-entities.mjs` owns the shared punctuation/quote set. This
+// extension covers the Latin-1 and named letters emitted by the event feeds,
+// without making the dependency-free generator tests install npm packages.
+const EVENT_ENTITY_MAP = Object.freeze({
+  '&iexcl;': '¡', '&cent;': '¢', '&pound;': '£', '&curren;': '¤', '&yen;': '¥',
+  '&brvbar;': '¦', '&sect;': '§', '&uml;': '¨', '&copy;': '©', '&ordf;': 'ª',
+  '&laquo;': '«', '&not;': '¬', '&shy;': '\u00ad', '&reg;': '®', '&macr;': '¯',
+  '&deg;': '°', '&plusmn;': '±', '&sup2;': '²', '&sup3;': '³', '&acute;': '´',
+  '&micro;': 'µ', '&para;': '¶', '&middot;': '·', '&cedil;': '¸', '&sup1;': '¹',
+  '&ordm;': 'º', '&raquo;': '»', '&frac14;': '¼', '&frac12;': '½', '&frac34;': '¾',
+  '&iquest;': '¿', '&Agrave;': 'À', '&Aacute;': 'Á', '&Acirc;': 'Â', '&Atilde;': 'Ã',
+  '&Auml;': 'Ä', '&Aring;': 'Å', '&AElig;': 'Æ', '&Ccedil;': 'Ç', '&Egrave;': 'È',
+  '&Eacute;': 'É', '&Ecirc;': 'Ê', '&Euml;': 'Ë', '&Igrave;': 'Ì', '&Iacute;': 'Í',
+  '&Icirc;': 'Î', '&Iuml;': 'Ï', '&ETH;': 'Ð', '&Ntilde;': 'Ñ', '&Ograve;': 'Ò',
+  '&Oacute;': 'Ó', '&Ocirc;': 'Ô', '&Otilde;': 'Õ', '&Ouml;': 'Ö', '&times;': '×',
+  '&Oslash;': 'Ø', '&Ugrave;': 'Ù', '&Uacute;': 'Ú', '&Ucirc;': 'Û', '&Uuml;': 'Ü',
+  '&Yacute;': 'Ý', '&THORN;': 'Þ', '&szlig;': 'ß', '&agrave;': 'à', '&aacute;': 'á',
+  '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', '&aring;': 'å', '&aelig;': 'æ',
+  '&ccedil;': 'ç', '&egrave;': 'è', '&eacute;': 'é', '&ecirc;': 'ê', '&euml;': 'ë',
+  '&igrave;': 'ì', '&iacute;': 'í', '&icirc;': 'î', '&iuml;': 'ï', '&eth;': 'ð',
+  '&ntilde;': 'ñ', '&ograve;': 'ò', '&oacute;': 'ó', '&ocirc;': 'ô', '&otilde;': 'õ',
+  '&ouml;': 'ö', '&divide;': '÷', '&oslash;': 'ø', '&ugrave;': 'ù', '&uacute;': 'ú',
+  '&ucirc;': 'û', '&uuml;': 'ü', '&yacute;': 'ý', '&thorn;': 'þ', '&yuml;': 'ÿ',
+  '&OElig;': 'Œ', '&oelig;': 'œ', '&Scaron;': 'Š', '&scaron;': 'š', '&Yuml;': 'Ÿ',
+  '&fnof;': 'ƒ', '&bull;': '•', '&euro;': '€', '&trade;': '™', '&permil;': '‰',
+  '&lsaquo;': '‹', '&rsaquo;': '›', '&dagger;': '†', '&Dagger;': '‡',
+});
+const EVENT_ENTITY_RX = new RegExp(
+  Object.keys(EVENT_ENTITY_MAP)
+    .map((entity) => entity.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('|'),
+  'g',
+);
+// Strip only tags that can occur in the crawlers' rendered copy. Keeping this
+// allow-list lower-case preserves ambiguous prose such as `A <B> C`, where the
+// angle brackets are text rather than a confirmed HTML element.
+const EVENT_KNOWN_TAG_RX = /<\/?(?:a|abbr|address|article|aside|b|bdi|bdo|blockquote|br|caption|cite|code|col|colgroup|dd|del|details|dfn|div|dl|dt|em|figcaption|figure|footer|h[1-6]|header|hr|i|ins|kbd|li|main|mark|nav|ol|p|pre|q|rp|rt|ruby|s|samp|section|small|source|span|strong|sub|summary|sup|table|tbody|td|tfoot|th|thead|time|tr|track|u|ul|var|wbr)(?:\s[^>]*)?\s*\/?\s*>/g;
+
+function decodeEventEntities(value) {
+  let text = value;
+  for (let pass = 0; pass < 3; pass += 1) {
+    const decoded = decodeHtmlEntities(text)
+      .replace(EVENT_ENTITY_RX, (entity) => EVENT_ENTITY_MAP[entity] ?? entity)
+      .replace(/&#(x[0-9a-f]+|\d+);/gi, (_, code) => {
+        const number = code.toLowerCase().startsWith('x')
+          ? Number.parseInt(code.slice(1), 16)
+          : Number.parseInt(code, 10);
+        // Reject invalid Unicode scalar values before constructing a character.
+        if (!Number.isFinite(number) || number > 0x10ffff || (number >= 0xd800 && number <= 0xdfff)) {
+          return EVENT_REPLACEMENT_CHARACTER;
+        }
+        return String.fromCodePoint(number);
+      });
+    if (decoded === text) break;
+    text = decoded;
+  }
+  return text;
+}
+
+function containsInvalidUnicode(value) {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index);
+    if (code >= 0xd800 && code <= 0xdbff) {
+      const next = value.charCodeAt(index + 1);
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        index += 1;
+      } else {
+        return true;
+      }
+    } else if (code >= 0xdc00 && code <= 0xdfff) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Normalize event copy at the corpus HTTP boundary. The events crawler lives
+ * in the site repo, but this repo reads its assembled JSON directly for the
+ * weekly digest, so already-materialized entities, Markdown delimiters and
+ * replacement bytes must be cleaned before digest bullets are emitted.
+ */
+export function cleanEventText(value) {
+  if (typeof value !== 'string') return '';
+  let text = value;
+  for (let pass = 0; pass < 3; pass += 1) {
+    const cleaned = decodeEventEntities(text)
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<(script|style|noscript|template)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
+      .replace(/<br\s*\/?\s*>/gi, ' ')
+      .replace(EVENT_KNOWN_TAG_RX, ' ');
+    if (cleaned === text) break;
+    text = cleaned;
+  }
+
+  for (let pass = 0; pass < 3; pass += 1) {
+    const cleaned = text
+      .replace(/(^|\n)([ \t]*(?:(?:>[ \t]*)|(?:[-+*][ \t]+)|(?:\d+[.)][ \t]+))*)#{1,6}(?=\s)/g, '$1$2')
+      .replace(/(^|[\s([{\"'“‘])(\*{1,3}|_{1,3})(?=\S)([\s\S]*?\S)\2(?=$|[\s)\]}.,!?;:'\"”’])/g, '$1$3')
+      .replace(/(^|\s)(?:\*{3,}|_{3,})(?=\s|$)/g, '$1')
+      // Strip orphaned opening and closing emphasis markers as well. The
+      // boundary guards keep identifiers such as `MOPS_DanceSyndrome` intact.
+      .replace(/(^|[\s([{"'“‘])(\*{1,3}|_{1,3})(?=\S)/g, '$1')
+      .replace(/(\S)(\*{1,3}|_{1,3})(?=$|[\s)\]}.,!?;:'"”’])/g, '$1');
+    if (cleaned === text) break;
+    text = cleaned;
+  }
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  return normalized.includes(EVENT_REPLACEMENT_CHARACTER) || containsInvalidUnicode(normalized)
+    ? ''
+    : normalized;
+}
+
 /**
  * Applica l'invariante «meglio un campo assente che un `NULL` pubblicato» a un
  * dataset gia' MATERIALIZZATO, cioe' al punto in cui questo repo lo legge.
@@ -1633,6 +1748,18 @@ export function sanitizeDatasetEvents(events, locales = ['it', 'en', 'de', 'fr']
       continue;
     }
     const next = { ...event };
+    if ('title' in next) next.title = cleanEventText(next.title);
+    if ('description' in next) next.description = cleanEventText(next.description);
+    if (next.titleByLocale && typeof next.titleByLocale === 'object') {
+      next.titleByLocale = Object.fromEntries(
+        Object.entries(next.titleByLocale).map(([locale, value]) => [locale, cleanEventText(value)]),
+      );
+    }
+    if (next.descriptionByLocale && typeof next.descriptionByLocale === 'object') {
+      next.descriptionByLocale = Object.fromEntries(
+        Object.entries(next.descriptionByLocale).map(([locale, value]) => [locale, cleanEventText(value)]),
+      );
+    }
     if (next.titleByLocale) next.titleByLocale = stripUnusableLocaleValues(next.titleByLocale, 'titleByLocale');
     if (next.descriptionByLocale) {
       next.descriptionByLocale = stripUnusableLocaleValues(next.descriptionByLocale, 'descriptionByLocale');

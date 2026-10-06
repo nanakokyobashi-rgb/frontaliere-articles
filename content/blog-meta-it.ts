@@ -12681,6 +12681,20 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.carovita-sindacati-recupero-divario.title': 'Carovita, i sindacati chiedono recupero divario nel Preventivo 2027',
     'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Tra dicembre 2020 e settembre 2026, il rincaro è salito dell\'8,5% mentre gli stipendi del personale cantonale, parapubblico e sociosanitario sono stati adeguati solo del 3%.',
     'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Veduta di Bellinzona con il Castel Grande sotto un cielo sereno.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Nei weekend 9-12, 16-19 ottobre e 13-16, 20-23 novembre 2026, la chiusura cambia RE80, S10 e S40 tra Chiasso e Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Stazione FFS di Giubiasco: rinnovo concluso',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'L\'edificio della stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026 dopo lavori da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Edificio rinnovato della stazione FFS di Giubiasco',
+    'blog.article.trame-oriente-chiasso.title': 'Trame d\'Oriente: mini kimono in mostra a Chiasso',
+    'blog.article.trame-oriente-chiasso.excerpt': 'A Chiasso, dall\'8 al 22 ottobre, la mostra Trame d\'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.',
+    'blog.article.trame-oriente-chiasso.imageAlt': 'Dieci mini kimono in sete vintage della mostra Trame d\'Oriente a Chiasso',
+    'blog.article.bollettino-frontaliere-2026-10-06.title': 'Bollettino del frontaliere – 6 ottobre 2026: 746 nuovi annunci di lavoro ieri',
+    'blog.article.bollettino-frontaliere-2026-10-06.excerpt': 'I numeri di oggi, 6 ottobre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'I numeri del giorno per i frontalieri – 6 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Bollettino frontalieri del 6 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'I numeri del 6 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;

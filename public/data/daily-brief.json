@@ -1,43 +1,64 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T12:09:07.891Z",
-  "dateIso": "2026-10-05",
+  "generatedAt": "2026-10-06T11:53:17.926Z",
+  "dateIso": "2026-10-06",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 31,
-    "jobsActive": 29903
+    "jobsActive": 30606
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-10-05T11:08:21.419Z",
+      "updatedAt": "2026-10-06T11:09:56.810Z",
       "count": 141,
-      "zeroWaitCount": 111,
+      "zeroWaitCount": 112,
       "worst": {
-        "slug": "porto-ceresio-brusino",
-        "name": "Porto Ceresio-Brusino",
-        "waitMinutes": 4
+        "slug": "campione-d-italia-bissone",
+        "name": "Campione d'Italia-Bissone",
+        "waitMinutes": 8
       },
       "crossings": [
         {
-          "slug": "porto-ceresio-brusino",
-          "name": "Porto Ceresio-Brusino",
-          "waitMinutes": 4,
-          "status": "green",
+          "slug": "campione-d-italia-bissone",
+          "name": "Campione d'Italia-Bissone",
+          "waitMinutes": 8,
+          "status": "yellow",
           "direction": null
         },
         {
-          "slug": "waldshut-tiengen-koblenz-ag",
-          "name": "Waldshut-Tiengen – Koblenz AG",
-          "waitMinutes": 3,
+          "slug": "porto-ceresio-brusino",
+          "name": "Porto Ceresio-Brusino",
+          "waitMinutes": 5,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
+          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
+          "waitMinutes": 2,
           "status": "green",
           "direction": null
         },
         {
           "slug": "basel-weil-am-rhein-hiltalingerstrasse",
           "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
+          "waitMinutes": 2,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "laufenburg-laufenburg-ag",
+          "name": "Laufenburg (Baden) – Laufenburg AG",
+          "waitMinutes": 2,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "rielasingen-worblingen-ramsen-hofenacker",
+          "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
           "waitMinutes": 2,
           "status": "green",
           "direction": null
@@ -50,9 +71,9 @@
           "direction": null
         },
         {
-          "slug": "au-lustenau",
-          "name": "Au-Lustenau",
-          "waitMinutes": 1,
+          "slug": "waldshut-tiengen-koblenz-ag",
+          "name": "Waldshut-Tiengen – Koblenz AG",
+          "waitMinutes": 2,
           "status": "green",
           "direction": null
         },
@@ -64,22 +85,8 @@
           "direction": null
         },
         {
-          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
-          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "basel-weil-am-rhein-freiburgerstrasse",
           "name": "Basel – Weil am Rhein, Freiburgerstrasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "campocologno-tirano",
-          "name": "Campocologno-Tirano",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
@@ -101,6 +108,13 @@
         {
           "slug": "forcola-di-livigno",
           "name": "Forcola di Livigno",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
@@ -148,15 +162,8 @@
           "direction": null
         },
         {
-          "slug": "lanzo-d-intelvi-arogno",
-          "name": "Lanzo d'Intelvi-Arogno",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "laufenburg-laufenburg-ag",
-          "name": "Laufenburg (Baden) – Laufenburg AG",
+          "slug": "maslianico-pizzamiglio",
+          "name": "Maslianico-Pizzamiglio",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
@@ -171,13 +178,6 @@
         {
           "slug": "oria-gandria",
           "name": "Oria-Gandria",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "passo-dello-spluga",
-          "name": "Passo dello Spluga (Montespluga)",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
@@ -218,13 +218,6 @@
           "direction": null
         },
         {
-          "slug": "rielasingen-worblingen-ramsen-hofenacker",
-          "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "st-margrethen-hochst",
           "name": "St. Margrethen-Höchst",
           "waitMinutes": 1,
@@ -234,6 +227,13 @@
         {
           "slug": "anieres",
           "name": "Anières",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "au-lustenau",
+          "name": "Au-Lustenau",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -372,8 +372,8 @@
           "direction": null
         },
         {
-          "slug": "campione-d-italia-bissone",
-          "name": "Campione d'Italia-Bissone",
+          "slug": "campocologno-tirano",
+          "name": "Campocologno-Tirano",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -507,13 +507,6 @@
         {
           "slug": "fahy-abbevillers",
           "name": "Fahy-Abbévillers",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -715,6 +708,13 @@
           "direction": null
         },
         {
+          "slug": "lanzo-d-intelvi-arogno",
+          "name": "Lanzo d'Intelvi-Arogno",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "le-brassus-bois-d-amont",
           "name": "Le Brassus-Bois-d'Amont",
           "waitMinutes": 0,
@@ -778,13 +778,6 @@
           "direction": null
         },
         {
-          "slug": "maslianico-pizzamiglio",
-          "name": "Maslianico-Pizzamiglio",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "merishausen-tengen",
           "name": "Merishausen – Tengen",
           "waitMinutes": 0,
@@ -822,6 +815,13 @@
         {
           "slug": "opfertshofen-tengen",
           "name": "Opfertshofen – Tengen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "passo-dello-spluga",
+          "name": "Passo dello Spluga (Montespluga)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -1013,10 +1013,10 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-10-05T07:43:50.362Z",
+      "generatedAt": "2026-10-06T10:47:38.141Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 109,
-      "cheaperSwissCount": 21,
+      "cheaperItalyCount": 106,
+      "cheaperSwissCount": 24,
       "tieCount": 4,
       "cheapestItaly": [
         {
@@ -1032,16 +1032,16 @@
           "stationName": "ENI 2904"
         },
         {
-          "municipality": "Saint-Pierre",
-          "province": "AO",
-          "minPriceEur": 1.9,
-          "stationName": "eni"
-        },
-        {
           "municipality": "Aprica",
           "province": "SO",
           "minPriceEur": 1.919,
           "stationName": "DISTRIBUTORE ENI APRICA"
+        },
+        {
+          "municipality": "Aosta",
+          "province": "AO",
+          "minPriceEur": 1.984,
+          "stationName": "STAR OIL DI SVR CARBURANTI DI SEVERINO SIMONE E C.SNC"
         },
         {
           "municipality": "Domodossola",
@@ -1056,27 +1056,27 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.206,
-          "swissPriceEur": 2.263,
+          "swissPriceEur": 2.255,
           "swissPriceChf": 2.1,
-          "saving50LEur": 52.85
+          "saving50LEur": 52.45
         },
         {
           "municipality": "Aprica",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.285,
+          "swissPriceEur": 2.277,
           "swissPriceChf": 2.12,
-          "saving50LEur": 18.3
+          "saving50LEur": 17.9
         },
         {
           "municipality": "Chiesa in Valmalenco",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.99,
-          "swissPriceEur": 2.285,
+          "swissPriceEur": 2.277,
           "swissPriceChf": 2.12,
-          "saving50LEur": 14.75
+          "saving50LEur": 14.35
         }
       ],
       "cheapestSwissStation": null,
@@ -1097,12 +1097,12 @@
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-10-05T06:29:07.637Z",
-      "activeJobs": 29903,
-      "activeCompanies": 845,
-      "todayAdded": 264,
-      "yesterdayAdded": 1336,
-      "last7dAdded": 12726,
+      "generatedAt": "2026-10-06T08:46:26.714Z",
+      "activeJobs": 30606,
+      "activeCompanies": 857,
+      "todayAdded": 1030,
+      "yesterdayAdded": 746,
+      "last7dAdded": 8453,
       "degradedEditions": 0
     }
   }

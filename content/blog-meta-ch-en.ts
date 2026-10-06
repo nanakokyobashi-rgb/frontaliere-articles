@@ -7811,6 +7811,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-lavoro-settembre-2026.title': 'The labor market situation in September 2026',
     'blog.article.mercato-lavoro-settembre-2026.excerpt': 'In September 2026, Switzerland recorded 140’480 unemployed people, with the rate steady at 3%. This represents a monthly decrease of 0,8%, but an annual increase of 5,4%. There were 44’199 vacancies at the URCs.',
     'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Skyline of a Swiss city symbolizing the labor market and national economy.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'Army strength is sufficient now but will fall by 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'As of March 1, 2026, the army numbers 147 017 personnel, enough for the statutory 100 000, but a decline below 130 000 is expected by 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'View of Swiss army barracks near Lugano with soldiers in training',
+    'blog.article.perdita-ad-bilancio-2025.title': 'Unemployment insurance: loss of 249 million in 2025',
+    'blog.article.perdita-ad-bilancio-2025.excerpt': 'The AD closes 2025 with a loss of 249 million: outflows of 8,69 billion, inflows of 8,44 billion and average unemployment at 2,8%.',
+    'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Federal building in Bern, symbolic image of Switzerland\'s unemployment insurance accounts',
+    'blog.article.fuochi-artificio-no.title': 'Fireworks, the right launches the no campaign against the initiative',
+    'blog.article.fuochi-artificio-no.excerpt': 'Campaign against the fireworks initiative kicks off on Tuesday: the vote is on November 29. Centro, PLR, UDC and the business community support the no vote.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Fireworks above a Swiss town during the debate on the initiative',
 };
 
 export default blogMetaChEn;

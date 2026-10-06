@@ -12682,6 +12682,20 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.carovita-sindacati-recupero-divario.title': 'Carivita, les syndicats demandent le rattrapage de l\'écart dans le Devis 2027',
     'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Entre décembre 2020 et septembre 2026, le renchérissement a augmenté de 8,5 % alors que les salaires du personnel cantonal, parapublic et socio-sanitaire n\'ont été ajustés que de 3 %.',
     'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Vue de Bellinzone avec Castel Grande sous un ciel clair.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1 : modifications des services TILO entre Chiasso et Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Pendant les week-ends du 9 au 12 et du 16 au 19 octobre ainsi que du 13 au 16 et du 20 au 23 novembre 2026, la fermeture affecte les RE80, S10 et S40 entre Chiasso et Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Train TILO près de Chiasso pendant les travaux au tunnel Monte Olimpino 1.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Gare FFS de Giubiasco : rénovation achevée',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'Le bâtiment de la gare FFS de Giubiasco rouvrira le 8 octobre 2026 après des travaux d’environ 6,4 millions : nouveaux services, ascenseur et standard Minergie.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Bâtiment rénové de la gare CFF de Giubiasco',
+    'blog.article.trame-oriente-chiasso.title': 'Trames d’Orient : mini-kimonos exposés à Chiasso',
+    'blog.article.trame-oriente-chiasso.excerpt': 'À Chiasso, du 8 au 22 octobre, l\'exposition Trame d\'Oriente présente dix mini kimono en soie vintage, entre culture japonaise et couture locale, signée SAMS.',
+    'blog.article.trame-oriente-chiasso.imageAlt': 'Dix mini-kimonos en soie vintage de l\'exposition à Chiasso',
+    'blog.article.bollettino-frontaliere-2026-10-06.title': 'Bulletin du frontalier – 6 octobre 2026 : 746 nouvelles offres d\'emploi hier',
+    'blog.article.bollettino-frontaliere-2026-10-06.excerpt': 'Les chiffres du jour, 6 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'Les chiffres du jour pour les frontaliers – 6 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Bulletin du frontalier du 6 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'Les chiffres du 6 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
 };
 
 export default blogMetaFr;
