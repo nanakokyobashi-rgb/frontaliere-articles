@@ -3263,7 +3263,9 @@
     {
       "path": "generator/scripts/lib/translation-glossary.mjs",
       "sitePath": "scripts/lib/translation-glossary.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/2321",
+      "reason": "ADAPTED per questa PR: il corpus importa `translation-sentinels.mjs` per condividere la classificazione dei token protetti con la cascata free-MT, mentre il sito conserva il proprio percorso locale e non possiede quel modulo. La logica del glossario resta la stessa; la dipendenza corpus-only impedisce una copia byte-identica finché il sito non adotta lo stesso confine.",
       "baseline": {
         "site": "03387084038e0dc3",
         "corpus": "03387084038e0dc3",
