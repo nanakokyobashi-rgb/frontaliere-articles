@@ -3299,9 +3299,9 @@
       "sitePath": "data/authors.ts",
       "mode": "identical",
       "baseline": {
-        "site": "0f89e0a3464c7e48",
-        "corpus": "0f89e0a3464c7e48",
-        "alignedAt": "2026-10-04"
+        "site": "a4e70e5bedf3dbf3",
+        "corpus": "a4e70e5bedf3dbf3",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3400,9 +3400,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "4e2b0a541c32ed70",
-        "corpus": "4e2b0a541c32ed70",
-        "alignedAt": "2026-10-06"
+        "site": "d4204d47925bc6ec",
+        "corpus": "d4204d47925bc6ec",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3463,9 +3463,9 @@
       "sitePath": "build-plugins/shared/inlineJsonScript.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2d1b8c01016ef1d3",
-        "corpus": "2d1b8c01016ef1d3",
-        "alignedAt": "2026-08-09"
+        "site": "f1652b861b452480",
+        "corpus": "f1652b861b452480",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3495,9 +3495,9 @@
       "sitePath": "build-plugins/shared/railGutters.ts",
       "mode": "identical",
       "baseline": {
-        "site": "1b55f084ebc648f8",
-        "corpus": "1b55f084ebc648f8",
-        "alignedAt": "2026-09-28"
+        "site": "28740c7dfd69dbe6",
+        "corpus": "28740c7dfd69dbe6",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3637,9 +3637,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "3cdd32148bd86613",
-        "corpus": "3cdd32148bd86613",
-        "alignedAt": "2026-10-05"
+        "site": "77084b29001782fc",
+        "corpus": "77084b29001782fc",
+        "alignedAt": "2026-10-07"
       },
       "couplingSnapshot": [
         {
