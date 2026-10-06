@@ -73,6 +73,7 @@ const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const LOG = 'publish-section-pages';
 export const APEX = 'https://frontaliereticino.ch';
 export const EDGE_PREFIX = 'edge/sections';
+export const API_BASE = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 /** Le pagine si riscrivono a ogni publish e il Worker le tiene 5 min: stessa classe delle sitemap. */
 export const PAGE_CACHE_CONTROL = 'public,max-age=600';
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
@@ -234,20 +235,6 @@ export function obsoleteArticlePages(previousPages, currentPages) {
   return previousPages.filter((page) => !current.has(page.canonicalPath));
 }
 
-/** Pagine `/tutti/` che una release di una sezione cantonale deve servire. */
-export function archiveReleasePages(section, articlePages) {
-  const articleIds = new Set(articlePages.map((page) => page.id).filter(Boolean));
-  const totalPages = Math.max(1, Math.ceil(articleIds.size / ARTICLES_PAGE_SIZE));
-  return sectionRoutes(section).flatMap((route) => {
-    const archiveBase = `${route.prefix}/${CANTON_ARCHIVE_ALL_SLUG[route.locale]}`;
-    return Array.from({ length: totalPages }, (_, index) => {
-      const page = index + 1;
-      const canonicalPath = `${archiveBase}${page === 1 ? '/' : `/page-${page}/`}`;
-      return pageEntry(section, `${canonicalPath.slice(1)}index.html`, 'archive');
-    });
-  });
-}
-
 /** Vecchie pagine di archivio non piu' emesse dopo una riduzione del corpus. */
 export function obsoleteArchivePages(previousPages, currentPages) {
   const current = new Set(currentPages.map((page) => page.canonicalPath));
@@ -279,15 +266,78 @@ export function articleReleaseSnapshot(rootDir, section, revision = null) {
   });
 }
 
-function previousArticleReleasePages(rootDir, section, requestedRevision) {
+const ARCHIVE_TITLE_ID_RE = /['"]blog\.article\.([^'"]+?)\.title['"]\s*:/g;
+
+function archiveArticleIds(metaSource, slugSource, slugConst) {
+  const ids = new Set();
+  for (const match of String(metaSource ?? '').matchAll(ARCHIVE_TITLE_ID_RE)) ids.add(match[1]);
+  if (slugSource !== null) {
+    if (!isEmptySlugMap(slugSource, slugConst)) {
+      for (const id of Object.keys(parseArticleUrlSlugs(slugSource, slugConst))) ids.add(id);
+    }
+  }
+  return ids;
+}
+
+/** Archive `/tutti/` + page-N URLs emitted by the shared archive renderer. */
+export function archiveReleasePages(section, input) {
+  const articleIds = Array.isArray(input)
+    ? new Set(input.map((page) => page.id).filter(Boolean))
+    : (() => {
+      if (input.slugSource === null) throw new Error(`${section}: archivio senza slug map`);
+      return archiveArticleIds(input.metaSource, input.slugSource, input.slugConst);
+    })();
+  const totalPages = Math.max(1, Math.ceil(articleIds.size / ARTICLES_PAGE_SIZE));
+  const routes = new Map(sectionRoutes(section).map((route) => [route.locale, route]));
+  return RELEASE_LOCALES.flatMap((locale) => {
+    const route = routes.get(locale);
+    return Array.from({ length: totalPages }, (_, index) => {
+      const page = index + 1;
+      const suffix = page === 1 ? `/${CANTON_ARCHIVE_ALL_SLUG[locale]}/` : `/${CANTON_ARCHIVE_ALL_SLUG[locale]}/page-${page}/`;
+      return pageEntry(section, `${route.prefix.slice(1)}${suffix}index.html`, 'archive');
+    });
+  });
+}
+
+function archiveReleaseSnapshot(rootDir, section, revision = null) {
+  const source = sectionSourceSurfaces(section);
+  const read = (rel) => {
+    if (revision) return readGitFile(rootDir, revision, rel);
+    const abs = path.join(rootDir, rel);
+    return fs.existsSync(abs) ? fs.readFileSync(abs, 'utf8') : null;
+  };
+  const metaSource = read(source.metaFile('it'));
+  const slugSource = read(source.slugFile);
+  // Before a section is materialized there is no old archive key to delete.
+  if (metaSource === null && slugSource === null) return [];
+  return archiveReleasePages(section, {
+    metaSource,
+    slugSource,
+    slugConst: source.slugExport,
+  });
+}
+
+function previousRevision(rootDir, requestedRevision) {
   let revision;
   try {
     revision = requestedRevision || execFileSync('git', ['-C', rootDir, 'rev-parse', 'HEAD~1'], { encoding: 'utf8' }).trim();
   } catch {
-    return [];
+    return null;
   }
-  if (/^0+$/.test(revision)) return [];
+  if (/^0+$/.test(revision)) return null;
+  return revision;
+}
+
+function previousArticleReleasePages(rootDir, section, requestedRevision) {
+  const revision = previousRevision(rootDir, requestedRevision);
+  if (!revision) return [];
   return articleReleaseSnapshot(rootDir, section, revision);
+}
+
+function previousArchiveReleasePages(rootDir, section, requestedRevision) {
+  const revision = previousRevision(rootDir, requestedRevision);
+  if (!revision) return [];
+  return archiveReleaseSnapshot(rootDir, section, revision);
 }
 
 /**
@@ -437,6 +487,47 @@ export async function publishedStatus(section) {
   }
 }
 
+async function fetchJsonAt(url, fetchImpl) {
+  try {
+    const res = await fetchImpl(`${url}${url.includes('?') ? '&' : '?'}_sppr=${Date.now()}`, {
+      headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * La delete delle URL ritirate e' sicura solo dopo il flip della stessa
+ * release che ha aggiornato sitemap e slug. `publish-api` e fast-publish
+ * partono dallo stesso push, quindi la verifica locale dei nuovi HTML non
+ * basta: attendiamo manifest, catalogo, slugs e puntatore edge sul commit
+ * corrente. Se uno e' ancora vecchio, il run fallisce senza cancellare; il
+ * retry del workflow ripete la prova dopo il deploy API.
+ */
+export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch } = {}) {
+  if (!expectedCommit) return { ok: false, reason: 'commit corrente non disponibile' };
+  const [manifest, catalog, slugs, edgeRegistry] = await Promise.all([
+    fetchJsonAt(`${API_BASE}/manifest.json`, fetchImpl),
+    fetchJsonAt(`${API_BASE}/sections.json`, fetchImpl),
+    fetchJsonAt(`${API_BASE}/slugs.json`, fetchImpl),
+    fetchJsonAt(`${CDN_BASE}/${EDGE_SECTION_REGISTRY_FILE}`, fetchImpl),
+  ]);
+  if (!manifest || manifest.commit !== expectedCommit) {
+    return { ok: false, reason: `manifest API non ancora sul commit ${expectedCommit}` };
+  }
+  if (!catalog || catalog.commit !== expectedCommit || !slugs || slugs.commit !== expectedCommit) {
+    return { ok: false, reason: `catalogo/slugs API non ancora sul commit ${expectedCommit}` };
+  }
+  if (!edgeRegistry || edgeRegistry.commit !== expectedCommit || !validateEdgeSectionRegistry(edgeRegistry)) {
+    return { ok: false, reason: `registro edge non ancora valido sul commit ${expectedCommit}` };
+  }
+  return { ok: true, commit: expectedCommit };
+}
+
 /**
  * I dati hub mancanti sono tollerabili solo mentre il Worker serve certamente
  * la sezione come draft. In publish il registro edge e' la fonte effettiva;
@@ -452,9 +543,11 @@ export async function publish({
   obsoletePages,
   distDir,
   section,
+  releaseCommit = null,
   runImpl = run,
   publishedStatusImpl = publishedStatus,
   probeImpl = probe,
+  releaseReadyImpl = publishedReleaseReady,
 }) {
   let failures = 0;
   // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
@@ -542,6 +635,14 @@ export async function publish({
     return { failures, uploaded: uploaded.length, deleted: 0, status };
   }
 
+  if (obsoletePages.length > 0) {
+    const releaseReady = await releaseReadyImpl(releaseCommit, { section });
+    if (!(releaseReady === true || releaseReady?.ok)) {
+      console.error(`::error::[${LOG}] API/edge non hanno ancora servito la release corrente: ${releaseReady?.reason ?? 'verifica fallita'}; nessuna pagina obsoleta viene cancellata`);
+      return { failures: failures + 1, uploaded: uploaded.length, deleted: 0, status };
+    }
+  }
+
   const deleted = [];
   for (const page of obsoletePages) {
     const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
@@ -572,9 +673,8 @@ export async function main(argv = process.argv.slice(2)) {
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
-  const currentArticlePages = articleReleaseSnapshot(ROOT_DIR, section);
   const previousArticlePages = previousArticleReleasePages(ROOT_DIR, section, args.previousRevision);
-  const previousArchivePages = archiveReleasePages(section, previousArticlePages);
+  const previousArchivePages = previousArchiveReleasePages(ROOT_DIR, section, args.previousRevision);
   // Preflight the same registry the Worker serves before deciding whether a
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
@@ -607,6 +707,7 @@ export async function main(argv = process.argv.slice(2)) {
 
   fs.rmSync(renderRoot, { recursive: true, force: true });
 
+  const currentArticlePages = articleReleaseSnapshot(ROOT_DIR, section);
   const pages = [
     ...entries.flatMap((entry) => CANTON_HUB_LOCALES.map((loc) => entry.paths[loc]).filter(Boolean)).map((rel) => pageEntry(section, rel, 'article')),
     ...CANTON_HUB_LOCALES.flatMap((loc) => hubResult.pathsByLocale[loc] ?? []).map((rel) => pageEntry(section, rel, 'archive')),
@@ -644,7 +745,11 @@ export async function main(argv = process.argv.slice(2)) {
     else console.log(`::warning::[${LOG}] ${note} — la sezione deve restare draft finche' mancano`);
   }
 
-  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, logPrefix: LOG });
+  const missingHeroAssets = [];
+  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, htmlPages: landingPages, missing: missingHeroAssets, logPrefix: LOG });
+  for (const missing of new Map(missingHeroAssets.map((asset) => [asset.key, asset])).values()) {
+    defects.push(`hero landing/articolo non disponibile per l'upload: ${missing.local}`);
+  }
   const countsByLocale = Object.fromEntries(
     CANTON_HUB_LOCALES.map((locale) => [locale, pages.filter((page) => page.locale === locale).length]),
   );
@@ -656,6 +761,7 @@ export async function main(argv = process.argv.slice(2)) {
     counts: Object.fromEntries(UPLOAD_ORDER.map((kind) => [kind, pages.filter((page) => page.kind === kind).length])),
     countsByLocale,
     hubsMissing: hubs.missing,
+    missingHeroAssets,
     effectiveStatus,
     pages,
     cdnUploads,
@@ -685,7 +791,8 @@ export async function main(argv = process.argv.slice(2)) {
     console.log(`[${LOG}] dry-run: nessun upload. Summary: ${args.summary}`);
     return 0;
   }
-  summary.published = await publish({ pages, cdnUploads, obsoletePages, distDir, section });
+  const releaseCommit = execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+  summary.published = await publish({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
   writeSummary();
   console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pages.length} pagine, ${summary.published.failures} fallimenti`);
   return summary.published.failures ? 1 : 0;

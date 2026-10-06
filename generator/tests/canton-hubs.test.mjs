@@ -918,9 +918,13 @@ test('formattazione per locale, senza Intl', () => {
 
 test('la soglia di parole e la firma dell\'hub sono quelle del renderer dell\'engine', () => {
   const engine = fs.readFileSync(path.join(ROOT, 'engine/cantonSectionPages.ts'), 'utf8');
-  const min = /export const CANTON_HUB_MIN_CONTENT_WORDS = (\d+);/.exec(engine);
-  assert.ok(min, 'CANTON_HUB_MIN_CONTENT_WORDS non trovato nel renderer');
+  const shared = fs.readFileSync(path.join(ROOT, 'scripts/lib/canton-hub-content.mjs'), 'utf8');
+  const min = /export const CANTON_HUB_MIN_CONTENT_WORDS = (\d+);/.exec(shared);
+  assert.ok(min, 'CANTON_HUB_MIN_CONTENT_WORDS non trovato nel modulo corpus condiviso');
   assert.equal(HUB_MIN_CONTENT_WORDS, Number(min[1]));
+  const engineMin = /export const CANTON_HUB_MIN_CONTENT_WORDS = (\d+);/.exec(engine);
+  assert.ok(engineMin, 'CANTON_HUB_MIN_CONTENT_WORDS non trovato nel renderer');
+  assert.equal(Number(engineMin[1]), Number(min[1]), 'soglia corpus e renderer divergenti');
   const fieldsOf = (name) => {
     const body = new RegExp(`export interface ${name} \\{([\\s\\S]*?)\\n\\}`).exec(engine);
     assert.ok(body, `interfaccia ${name} non trovata`);

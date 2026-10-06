@@ -318,49 +318,78 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   return { written, entries, hubResult, extraPaths, locales };
 }
 
+function imagePathFromReference(reference) {
+  const raw = String(reference ?? '').trim();
+  if (!raw) return null;
+  let pathname = raw;
+  try {
+    if (/^https?:\/\//i.test(raw)) pathname = new URL(raw).pathname;
+  } catch {
+    return null;
+  }
+  const heroImgRel = pathname.split(/[?#]/, 1)[0].replace(/^\/+/, '');
+  if (!heroImgRel.startsWith('images/') || heroImgRel.includes('..')) return null;
+  return heroImgRel;
+}
+
+function imageReferencesFromHtml(html) {
+  const refs = [];
+  const attribute = /\b(?:src|srcset)=["']([^"']+)["']/gi;
+  for (const match of String(html ?? '').matchAll(attribute)) {
+    // srcset has comma-separated candidates; the first token of each one is
+    // the actual image URL. `src` simply produces one candidate.
+    for (const candidate of match[1].split(',')) {
+      const reference = imagePathFromReference(candidate.trim().split(/\s+/, 1)[0]);
+      if (reference) refs.push(reference);
+    }
+  }
+  return refs;
+}
+
+function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix }) {
+  const heroImgRel = imagePathFromReference(imagePath);
+  if (!heroImgRel) return;
+  const heroDir = path.dirname(heroImgRel);
+  const heroExt = path.extname(heroImgRel) || '.webp';
+  const heroBase = path.basename(heroImgRel, heroExt);
+  const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
+  const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
+  if (fs.existsSync(path.join(rootDir, heroLocal))) {
+    cdnUploadsByKey.set(path.join(heroDir, `${heroBase}${heroExt}`), {
+      local: heroLocal,
+      key: path.join(heroDir, `${heroBase}${heroExt}`),
+    });
+  } else {
+    console.error(`[${logPrefix}] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
+    missing?.push({ kind: 'hero', local: heroLocal, key: path.join(heroDir, `${heroBase}${heroExt}`) });
+  }
+  if (fs.existsSync(path.join(rootDir, thumbLocal))) {
+    cdnUploadsByKey.set(path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`), {
+      local: thumbLocal,
+      key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`),
+    });
+  } else {
+    console.error(`[${logPrefix}] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
+  }
+}
+
 /**
- * I file immagine (hero + thumbnail 480w) da caricare sul CDN per gli articoli
- * resi, come `[{ local, key }]` senza duplicati.
+ * I file immagine (hero + thumbnail 480w) da caricare sul CDN, come
+ * `[{ local, key }]` senza duplicati. Oltre agli articoli resi, `htmlPages`
+ * permette al publisher cantonale di includere gli hero di TUTTE le card che
+ * la landing rende dal registry: un refresh parziale non puo' pubblicare una
+ * landing che punta a un asset non confermato.
  */
-export function heroCdnUploads({ rootDir, entries, logPrefix = 'article-render-pipeline' }) {
-  // Derive cdnUploads from each entry.img's ACTUAL resolved directory — NOT a
-  // hardcoded `images/blog/`. resolveImagePath() (ogPagesPlugin.ts) resolves
-  // most articles to a per-article /images/blog/<slug>.<ext> hero, but a
-  // meaningful minority (47/3018 in data/blog-articles-data.ts, e.g. the
-  // shared `lugano-view.webp` stock photo used by 11 articles) resolve to a
-  // shared generic photo under /images/places/<name>.<ext> instead. Both
-  // directories follow the same `thumbnails/<basename>-480w.webp` sibling
-  // convention (confirmed: public/images/places/thumbnails/ exists with the
-  // same naming as public/images/blog/thumbnails/). Hardcoding `images/blog/`
-  // here would emit a nonexistent local path for every places/-resolved
-  // article, breaking stream B/C's CDN push. DEFAULT_IMG ('/og-image.png',
-  // last-resort fallback, not under images/) has no thumbnail and is already
-  // a static site asset — never listed here.
+export function heroCdnUploads({ rootDir, entries = [], htmlPages = [], missing, logPrefix = 'article-render-pipeline' }) {
+  // Derive every upload from the ACTUAL resolved directory — NOT a hardcoded
+  // `images/blog/`. Shared stock heroes live under `images/places/` and use
+  // the same thumbnail convention. DEFAULT_IMG (`/og-image.png`) is outside
+  // `images/` and is deliberately not listed here.
   const cdnUploadsByKey = new Map();
-  for (const entry of entries) {
-    const heroImgRel = entry.img.replace(/^\/+/, ''); // e.g. "images/blog/foo.webp" | "images/places/lugano-view.webp"
-    const heroDir = path.dirname(heroImgRel); // e.g. "images/blog" | "images/places"
-    if (heroDir.startsWith('images/') || heroDir === 'images') {
-      const heroExt = path.extname(heroImgRel) || '.webp';
-      const heroBase = path.basename(heroImgRel, heroExt);
-      const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
-      const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
-      if (fs.existsSync(path.join(rootDir, heroLocal))) {
-        cdnUploadsByKey.set(path.join(heroDir, `${heroBase}${heroExt}`), {
-          local: heroLocal,
-          key: path.join(heroDir, `${heroBase}${heroExt}`),
-        });
-      } else {
-        console.error(`[${logPrefix}] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
-      }
-      if (fs.existsSync(path.join(rootDir, thumbLocal))) {
-        cdnUploadsByKey.set(path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`), {
-          local: thumbLocal,
-          key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`),
-        });
-      } else {
-        console.error(`[${logPrefix}] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
-      }
+  for (const entry of entries) addHeroCdnUpload({ rootDir, imagePath: entry?.img, cdnUploadsByKey, missing, logPrefix });
+  for (const page of htmlPages) {
+    for (const imagePath of imageReferencesFromHtml(page?.html)) {
+      addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix });
     }
   }
   return [...cdnUploadsByKey.values()];

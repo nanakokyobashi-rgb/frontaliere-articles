@@ -30,6 +30,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords } from './canton-hub-content.mjs';
 import { hubFilePath } from '../../generator/scripts/lib/canton-hubs/paths.mjs';
 
 export const CANTON_HUB_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -77,6 +78,10 @@ function validateHubDocument(doc, section, topic, rel) {
     if (typeof entry.intro !== 'string' || entry.intro.trim() === '') throw new Error(`${rel}: intro "${locale}" vuota`);
     for (const field of ['keyFacts', 'dataBlocks', 'curatedArticles', 'links']) {
       if (!Array.isArray(entry[field])) throw new Error(`${rel}: ${field} della locale "${locale}" deve essere un array`);
+    }
+    const contentWords = countCantonHubContentWords(entry);
+    if (contentWords < CANTON_HUB_MIN_CONTENT_WORDS) {
+      throw new Error(`${rel}: contenuto insufficiente nella locale "${locale}" (${contentWords} parole < ${CANTON_HUB_MIN_CONTENT_WORDS})`);
     }
     if (!isIsoDate(entry.updatedAt)) throw new Error(`${rel}: updatedAt della locale "${locale}" non e' valida`);
   }

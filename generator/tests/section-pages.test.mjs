@@ -32,6 +32,7 @@ import {
   obsoleteArchivePages,
   parseArgs,
   publish,
+  publishedReleaseReady,
   publishedStatus,
   rendererPageEntry,
 } from '../../scripts/publish-section-pages.mjs';
@@ -40,6 +41,7 @@ import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
+import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
@@ -111,7 +113,7 @@ test('publisher: ritiri e cambi di slug cancellano solo le vecchie URL articolo'
     ids: ['kept', 'renamed'],
     slugs: { ...slugs('old'), renamed: slugs('new').renamed },
   });
-  const obsolete = obsoleteArticlePages(previous, current);
+  const obsolete = obsoleteArchivePages(previous, current);
   assert.equal(obsolete.length, 8, '4 locali ritirate + 4 URL del vecchio slug');
   assert.ok(obsolete.every((page) => page.edgeKey.startsWith('edge/sections/')));
   assert.ok(obsolete.every((page) => !current.some((live) => live.canonicalPath === page.canonicalPath)));
@@ -163,6 +165,20 @@ test('publisher/floors: una coppia cantonale parziale resta un rifiuto fail-clos
   assert.throws(() => sourceRegistryIds(root, 'canton-ti'), /registry\/slugs incompleti/);
 });
 
+test('publisher: il delta comprende anche le pagine archivio page-N ritirate', () => {
+  const slug = (id) => `  '${id}': { it: '${id}-it', en: '${id}-en', de: '${id}-de', fr: '${id}-fr' },`;
+  const previousMeta = Array.from({ length: 101 }, (_, i) => `'blog.article.a${i}.title': 'A${i}',`).join('\n');
+  const previousSlugs = `export const CANTON_SLUGS = {\n${Array.from({ length: 101 }, (_, i) => slug(`a${i}`)).join('\n')}\n};`;
+  const currentMeta = `'blog.article.a0.title': 'A0',`;
+  const currentSlugs = `export const CANTON_SLUGS = {\n${slug('a0')}\n};`;
+  const previous = archiveReleasePages('canton-ti', { metaSource: previousMeta, slugSource: previousSlugs, slugConst: 'CANTON_SLUGS' });
+  const current = archiveReleasePages('canton-ti', { metaSource: currentMeta, slugSource: currentSlugs, slugConst: 'CANTON_SLUGS' });
+  const obsolete = obsoleteArticlePages(previous, current);
+  assert.equal(previous.filter((page) => page.canonicalPath.includes('/page-2/')).length, 4);
+  assert.equal(obsolete.filter((page) => page.canonicalPath.includes('/page-2/')).length, 4);
+  assert.ok(obsolete.every((page) => page.kind === 'archive'));
+});
+
 test('publisher: una pagina obsoleta resta intatta se la release corrente non e\' servita', async () => {
   const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
   const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
@@ -205,6 +221,32 @@ test('publisher: una pagina obsoleta resta intatta se la release corrente non e\
   assert.ok(probes.some((url) => url === current.cdnUrl));
 });
 
+test('publisher: una URL obsoleta resta intatta finche\' API e edge non servono il commit corrente', async () => {
+  const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
+  const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
+  const calls = [];
+  const result = await publish({
+    section: 'canton-ti',
+    pages: [current],
+    cdnUploads: [],
+    obsoletePages: [obsolete],
+    distDir: mkdtempSync(path.join(tmpdir(), 'publish-api-edge-')),
+    releaseCommit: 'current-commit',
+    publishedStatusImpl: async () => 'draft',
+    releaseReadyImpl: async () => ({ ok: false, reason: 'manifest vecchio' }),
+    runImpl: (_command, args) => {
+      calls.push(args.join(' '));
+      if (args.some((arg) => arg.endsWith('retry-cmd.sh'))) return { code: 0, stdout: '' };
+      if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) return { code: 0, stdout: '✅ uploaded' };
+      throw new Error(`non deve cancellare: ${args.join(' ')}`);
+    },
+    probeImpl: async () => ({ ok: true, status: 200, body: `<!doctype html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head><body>${'contenuto '.repeat(40)}` }),
+  });
+  assert.equal(result.failures, 1);
+  assert.equal(result.deleted, 0);
+  assert.ok(!calls.some((call) => call.includes('delete-cdn-file.sh')));
+});
+
 test('publisher: la cancellazione obsoleta arriva dopo purge e verifica della release corrente', async () => {
   const current = pageEntry('canton-ti', 'articoli-ticino/current/index.html', 'article');
   const obsolete = pageEntry('canton-ti', 'articoli-ticino/obsolete/index.html', 'article');
@@ -223,6 +265,7 @@ test('publisher: la cancellazione obsoleta arriva dopo purge e verifica della re
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-obsolete-order-')),
       publishedStatusImpl: async () => 'draft',
+      releaseReadyImpl: async () => ({ ok: true }),
       runImpl: (_command, args) => {
         if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) events.push('upload');
         else if (args.some((arg) => arg.endsWith('delete-cdn-file.sh'))) events.push('delete');
@@ -287,6 +330,30 @@ test('publisher: un hero CDN non confermato blocca l\'HTML della stessa release'
   assert.ok(output.some((line) => line.includes('upload hero incompleto')));
 });
 
+test('publisher: il gate hero include le card della landing anche con refresh parziale', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'landing-heroes-'));
+  mkdirSync(path.join(root, 'public/images/places/thumbnails'), { recursive: true });
+  writeFileSync(path.join(root, 'public/images/places/landing.webp'), 'hero');
+  writeFileSync(path.join(root, 'public/images/places/thumbnails/landing-480w.webp'), 'thumb');
+  const uploads = heroCdnUploads({
+    rootDir: root,
+    entries: [],
+    htmlPages: [{ relPath: 'articoli-ticino/index.html', html: '<img src="/images/places/landing.webp">' }],
+  });
+  assert.deepEqual(uploads.map(({ key }) => key).sort(), [
+    'images/places/landing.webp',
+    'images/places/thumbnails/landing-480w.webp',
+  ]);
+  const missing = [];
+  assert.deepEqual(heroCdnUploads({
+    rootDir: root,
+    entries: [],
+    htmlPages: [{ html: '<img src="/images/blog/not-on-disk.webp">' }],
+    missing,
+  }), []);
+  assert.deepEqual(missing, [{ kind: 'hero', local: 'public/images/blog/not-on-disk.webp', key: 'images/blog/not-on-disk.webp' }]);
+});
+
 test('publisher: cancella le URL ritirate solo dopo il verify della release corrente', async () => {
   const current = pageEntry('canton-ti', 'articoli-ticino/kept/index.html', 'article');
   const obsolete = pageEntry('canton-ti', 'articoli-ticino/gone/index.html', 'article');
@@ -306,6 +373,7 @@ test('publisher: cancella le URL ritirate solo dopo il verify della release corr
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-order-')),
       publishedStatusImpl: async () => 'draft',
+      releaseReadyImpl: async () => ({ ok: true }),
       runImpl: (command, args) => {
         const script = args.join(' ');
         if (script.includes('upload-cdn-file.sh')) {
@@ -380,6 +448,14 @@ test('publisher: registry edge illeggibile o con stato sconosciuto non diventa d
   assert.match(read('scripts/publish-section-pages.mjs'), /if \(status === null\)/);
 });
 
+test('publisher: il readiness gate rifiuta una superficie API ancora vecchia', async () => {
+  const result = await publishedReleaseReady('current-commit', {
+    fetchImpl: async () => ({ ok: true, status: 200, json: async () => ({ commit: 'old-commit' }) }),
+  });
+  assert.equal(result.ok, false);
+  assert.match(result.reason, /manifest API/);
+});
+
 test('publisher: hub mancanti sono fatali sulla sola verita\' effettiva live', () => {
   assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: 'draft', publishing: true }), false);
   assert.equal(hubMissingIsFatal({ declaredStatus: 'draft', effectiveStatus: 'live', publishing: true }), true);
@@ -444,7 +520,8 @@ function hubRoot(files) {
   }
   return root;
 }
-const locale = (localeCode, topic, intro = 'Testo evergreen.') => ({
+const HUB_TEST_INTRO = 'Questa guida evergreen raccoglie informazioni pratiche, contesto aggiornato, fonti ufficiali e indicazioni operative per chi vive o lavora nel cantone. Il testo spiega come leggere i dati, quali verifiche fare e dove trovare ulteriori dettagli affidabili prima di prendere decisioni personali, con esempi, definizioni, scadenze e riferimenti facilmente consultabili da ogni lettore.';
+const locale = (localeCode, topic, intro = HUB_TEST_INTRO) => ({
   canton: 'TI',
   topic,
   locale: localeCode,
@@ -476,8 +553,8 @@ test('hub: un solo posto sa dove sta il file dati; assente = hub non pubblicato'
     'content/cantons/canton-ti/hubs/eventi.json': hubDocument('eventi'),
   });
   assert.equal(readCantonHubData(root, 'canton-ti', 'carburanti'), null);
-  assert.equal(readCantonHubData(root, 'canton-ti', 'fisco').de.intro, 'Testo evergreen.');
-  assert.equal(readCantonHubData(root, 'canton-ti', 'eventi').fr.intro, 'Testo evergreen.');
+  assert.equal(readCantonHubData(root, 'canton-ti', 'fisco').de.intro, HUB_TEST_INTRO);
+  assert.equal(readCantonHubData(root, 'canton-ti', 'eventi').fr.intro, HUB_TEST_INTRO);
   assert.deepEqual(cantonHubCoverage(root, 'canton-ti'), { present: ['fisco', 'eventi'], missing: ['carburanti', 'mobilita', 'pensioni', 'servizi'] });
   assert.throws(() => readCantonHubData(root, 'canton-ti', 'boh'), /sconosciuto/);
   assert.throws(() => cantonHubTopics('svizzera'), /hub tematici/);

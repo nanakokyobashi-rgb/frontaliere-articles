@@ -19,6 +19,7 @@
 import { createHash } from 'node:crypto';
 import { ARTICLE_SECTION_CORE_ALL } from '../../../../engine/shared/articleSectionCore.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';
+import { CANTON_HUB_MIN_CONTENT_WORDS, countCantonHubContentWords, countCantonHubIntroWords } from '../../../../scripts/lib/canton-hub-content.mjs';
 import { BLOCK_THRESHOLDS, DAY_MS, dateMs, instantMs } from './blocks-common.mjs';
 import { shapeFuelBlock } from './blocks-fuel.mjs';
 import { shapeEventsBlock } from './blocks-events.mjs';
@@ -37,11 +38,11 @@ import { hubFilePath, hubFilePaths } from './paths.mjs';
 export const HUB_SCHEMA_VERSION = 1;
 
 /**
- * Parole reali minime di un hub: stesso valore di `CANTON_HUB_MIN_CONTENT_WORDS`
- * in `engine/cantonSectionPages.ts` (TypeScript, non importabile da `node`
- * puro: `generator/tests/canton-hubs.test.mjs` tiene uguali i due numeri).
+ * Alias storico del valore condiviso con il renderer e il validatore del
+ * publisher. Il modulo comune e' plain ESM, quindi non serve piu' mantenere
+ * tre numeri sincronizzati a mano.
  */
-export const HUB_MIN_CONTENT_WORDS = 50;
+export const HUB_MIN_CONTENT_WORDS = CANTON_HUB_MIN_CONTENT_WORDS;
 
 /** Dataset annuali: per quanto si conserva un blocco se la cache manca in un run. */
 const ANNUAL_CARRY_MS = 30 * DAY_MS;
@@ -91,8 +92,6 @@ export const TOPIC_BLOCKS = Object.freeze({
 export const DATASET_KEYS = Object.freeze(['fuel', 'events', 'borderWait', 'roadEvents', 'notices', 'services', 'tax', 'pensions']);
 
 export { hubFilePath, hubFilePaths };
-
-const countWords = (text) => String(text ?? '').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
 
 function checkHref(url, what) {
   const value = String(url ?? '').trim();
@@ -199,16 +198,11 @@ export function validateHubInput(input) {
     if (l.description !== undefined) text(l.description, `${what}.description`);
   });
 
-  const contentWords =
-    paragraphs.reduce((n, p) => n + countWords(p), 0) +
-    input.keyFacts.reduce((n, f) => n + countWords(`${f.label} ${f.value} ${f.note ?? ''}`), 0) +
-    input.dataBlocks.reduce((n, b) => n + countWords(`${b.title} ${b.description ?? ''}`) +
-      b.items.reduce((m, it) => m + countWords(`${it.label} ${it.value ?? ''} ${it.detail ?? ''}`), 0), 0) +
-    input.curatedArticles.reduce((n, a) => n + countWords(`${a.title} ${a.excerpt ?? ''}`), 0);
+  const contentWords = countCantonHubContentWords(input);
   if (contentWords < HUB_MIN_CONTENT_WORDS) throw new Error(`${at}: contenuto insufficiente (${contentWords} parole < ${HUB_MIN_CONTENT_WORDS})`);
   // L'intro da sola deve reggere la pagina: e' cio' che resta quando mancano
   // tutti i dataset e non c'e' ancora una news.
-  const introWords = paragraphs.reduce((n, p) => n + countWords(p), 0);
+  const introWords = countCantonHubIntroWords(input);
   if (introWords < HUB_MIN_CONTENT_WORDS) throw new Error(`${at}: intro evergreen di ${introWords} parole, sotto le ${HUB_MIN_CONTENT_WORDS} che reggono la pagina senza dati`);
   return input;
 }

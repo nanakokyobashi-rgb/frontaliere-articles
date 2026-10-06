@@ -52,6 +52,7 @@ on:
       - 'sections/**'
       - 'scripts/lib/section-registry.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
+      - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'scripts/publish-section-edge.mjs'
       - 'scripts/lib/delete-cdn-file.sh'

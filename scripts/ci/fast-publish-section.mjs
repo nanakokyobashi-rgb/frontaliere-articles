@@ -51,6 +51,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/article-render-pipeline.mjs',
   'scripts/lib/cf-analytics.mjs',
   'scripts/lib/canton-hub-data.mjs',
+  'scripts/lib/canton-hub-content.mjs',
   'scripts/lib/cdn-asset-existence.mjs',
   'scripts/lib/cf-purge-variants.mjs',
   'scripts/lib/delete-cdn-file.sh',
