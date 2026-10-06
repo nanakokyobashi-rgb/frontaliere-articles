@@ -42,6 +42,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/events-utils.mjs'), 'utf8');
+const SOURCE_URL_LEDGER = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/source-url-ledger.mjs'), 'utf8');
 
 /** Corpo della funzione `name` (dalla firma alla prima `\n}` a colonna zero). */
 function body(name) {
@@ -51,6 +52,14 @@ function body(name) {
   assert.notEqual(end, -1, `funzione ${name} senza chiusura a colonna zero`);
   return SRC.slice(start, end);
 }
+
+test('cleanEventText usa il masker stateful condiviso per i template annidati', () => {
+  const fn = body('cleanEventText');
+  assert.match(fn, /maskInactiveMarkup\(decodeEventEntities\(text\)\)/);
+  assert.match(SRC, /from ['"]\.\/source-url-ledger\.mjs['"]/);
+  assert.match(SOURCE_URL_LEDGER, /depth\s*=\s*1/);
+  assert.match(SOURCE_URL_LEDGER, /if \(tag\.name === 'template'\)/);
+});
 
 test('il manifest committato e\' un oggetto JSON: qualunque altra forma fa fallire il caricamento a ogni run', () => {
   const file = path.join(ROOT, 'data/events-image-manifest.json');

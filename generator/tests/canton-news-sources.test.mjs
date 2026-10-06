@@ -33,6 +33,7 @@ import {
   SUPPORTED_CANTON_PARSERS,
   applyDatetimeYearOffset,
   applyItemIdentity,
+  charsetFromDocumentHead,
   createHostThrottle,
   decodeResponseBody,
   extractJsonApiItems,
@@ -228,6 +229,34 @@ test('charset: il prologo XML ISO-8859-1 vince sull\'assenza di charset nell\'he
   const out = await scanCantonSource(source, ctx(impl));
   assert.ok(out.headlines.some((h) => /L'économie genevoise/.test(h.headline)), 'il titolo arriva decodificato giusto');
   assert.ok(out.notes.includes('charset iso-8859-1'));
+});
+
+test('charset: ignora dichiarazioni in markup inattivo prima della meta reale', () => {
+  const head = '<!-- <meta charset="iso-8859-1"> -->'
+    + '<template><meta charset="windows-1252"></template>'
+    + '<script>const fake = "<meta charset=ascii>";</script>'
+    + '<meta charset="utf-8">';
+  assert.equal(charsetFromDocumentHead(head), 'utf-8');
+});
+
+test('charset: un blocco inattivo oltre il prefisso di 1024 byte chiude il masking in fail-closed', () => {
+  const body = '<script>'
+    + 'x'.repeat(900)
+    + '<meta charset="iso-8859-1">'
+    + 'x'.repeat(200)
+    + '</script><meta charset="utf-8">';
+  const prefix = Buffer.from(body).subarray(0, 1024).toString('latin1');
+  assert.equal(charsetFromDocumentHead(prefix), null);
+  assert.equal(decodeResponseBody(Buffer.from(body), { contentType: 'text/html' }).charset, 'utf-8');
+});
+
+test('charset: template annidati e slash in valore non quotato restano inattivi', () => {
+  const nested = '<template><template></template><meta charset="windows-1252"></template>'
+    + '<meta charset="utf-8">';
+  const unquotedSlash = '<template data-src=/foo/><meta charset=windows-1252></template>'
+    + '<meta charset=utf-8>';
+  assert.equal(charsetFromDocumentHead(nested), 'utf-8');
+  assert.equal(charsetFromDocumentHead(unquotedSlash), 'utf-8');
 });
 
 test('pubDate vuoto (bs.ch): voci SENZA data per la quota undated, mai «recenti»', async () => {
@@ -558,6 +587,11 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   assert.equal(cleaned.html.length, inactive.length, 'a pari lunghezza');
   assert.deepEqual(extractHeadlines(cleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/9']);
   assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 3, 'premessa: l\'estrattore storico li prende tutti');
+  const nestedTemplate = '<template><template></template><a href="/menu/nested">Voce del menu nel template esterno</a></template>'
+    + '<p><a href="/news/nested">Titolo del comunicato ancora attivo</a></p>';
+  const nestedCleaned = stripPageChrome(nestedTemplate);
+  assert.equal(nestedCleaned.html.length, nestedTemplate.length, 'template annidati mantengono gli indici');
+  assert.deepEqual(extractHeadlines(nestedCleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/nested']);
   // header/footer dentro role="main" o role="article" sono della sezione.
   const ariaSection = '<div role="main"><header><a href="/news/10">Titolo del decimo comunicato</a></header><div role="article"><footer><a href="/news/11">Titolo dell undicesimo comunicato</a></footer></div></div><footer><a href="/impressum">Impressum e note legali</a></footer>';
   const aria = stripPageChrome(ariaSection);

@@ -158,6 +158,17 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.ok(out.html.includes('og:title'));
   });
 
+  it('non tronca l’head su un </head> letterale dentro JSON-LD o script', () => {
+    const pageWithLiteralBoundary = '<html><head>'
+      + '<script type="application/ld+json">{"description":"testo </head> incorporato"}</script>'
+      + '<meta property="article:published_time" content="2026-06-12T10:00:00+02:00">'
+      + '</head><body><article>' + ARTICLE_PROSE + '</article></body></html>';
+    const res = isolateMainSourceHtml(pageWithLiteralBoundary);
+    assert.equal(res.isolated, true);
+    assert.ok(res.html.includes('article:published_time'), 'il meta dopo il literal </head> e’ stato perso');
+    assert.ok(res.html.includes('testo </head> incorporato'), 'il JSON-LD e’ stato troncato');
+  });
+
   it('recupera il JSON-LD anche quando sta in fondo a <body>, fuori dalla radice', () => {
     const page2 = `<html><head></head><body><main><article>${ARTICLE_PROSE}</article></main>` +
       '<script type="application/ld+json">{"articleBody":"corpo"}</script></body></html>';
