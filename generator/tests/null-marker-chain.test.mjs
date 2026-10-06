@@ -1096,6 +1096,28 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     assert.equal(events[0].titleByLocale.it, 'Sagra della castagna', 'il testo vero resta');
   });
 
+  test('normalizza entità, Markdown e byte di sostituzione prima del digest', () => {
+    const { events, dropped } = sanitizeDatasetEvents([
+      {
+        id: 'e-markup',
+        title: '*Huitante-Six*',
+        titleByLocale: { it: '&amp;auml;', de: 'Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen' },
+        description: '_Fonte: Ticinonline_',
+      },
+      {
+        id: 'e-corrupt',
+        title: 'Bergrestaurant Ch�mistube',
+        titleByLocale: { it: 'Braunwald' },
+      },
+    ]);
+    assert.equal(dropped, 0);
+    assert.equal(events[0].title, 'Huitante-Six');
+    assert.equal(events[0].titleByLocale.it, 'ä');
+    assert.equal(events[0].titleByLocale.de, 'Treffpunkt: Mehrzweckplatz Zwischenbächen');
+    assert.equal(events[0].description, 'Fonte: Ticinonline');
+    assert.equal(events[1].title, 'Braunwald');
+  });
+
   test('un `title` piatto avvelenato si recupera dalla prima chiave per-locale sana', () => {
     const { events, dropped } = sanitizeDatasetEvents([
       { id: 'e1', title: 'NULL', titleByLocale: { it: 'Sagra della castagna', de: 'NULL' } },

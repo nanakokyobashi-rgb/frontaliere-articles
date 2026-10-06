@@ -1592,6 +1592,75 @@ export function isoDay(date) {
 export const EVENTS_DATASET_PATH = path.join(REPO_ROOT, 'data', 'events.json');
 export const EVENTS_SLICE_DIR = path.join(REPO_ROOT, 'data', 'events', 'by-source');
 
+const EVENT_REPLACEMENT_CHARACTER = '\uFFFD';
+const EVENT_ENTITY_MAP = Object.freeze({
+  '&amp;': '&',
+  '&auml;': 'ä',
+  '&Auml;': 'Ä',
+  '&ouml;': 'ö',
+  '&Ouml;': 'Ö',
+  '&uuml;': 'ü',
+  '&Uuml;': 'Ü',
+  '&eacute;': 'é',
+  '&Eacute;': 'É',
+  '&egrave;': 'è',
+  '&Egrave;': 'È',
+  '&agrave;': 'à',
+  '&Agrave;': 'À',
+  '&ccedil;': 'ç',
+  '&Ccedil;': 'Ç',
+  '&nbsp;': ' ',
+});
+const EVENT_ENTITY_RX = /&(?:amp|auml|Auml|ouml|Ouml|uuml|Uuml|eacute|Eacute|egrave|Egrave|agrave|Agrave|ccedil|Ccedil|nbsp);/g;
+
+function decodeEventEntities(value) {
+  let text = value;
+  for (let pass = 0; pass < 3; pass += 1) {
+    const decoded = text
+      .replace(EVENT_ENTITY_RX, (entity) => EVENT_ENTITY_MAP[entity] ?? entity)
+      .replace(/&#(x[0-9a-f]+|\d+);/gi, (_, code) => {
+        const number = code.toLowerCase().startsWith('x')
+          ? Number.parseInt(code.slice(1), 16)
+          : Number.parseInt(code, 10);
+        return Number.isFinite(number) && number <= 0x10ffff ? String.fromCodePoint(number) : _;
+      });
+    if (decoded === text) break;
+    text = decoded;
+  }
+  return text;
+}
+
+/**
+ * Normalize event copy at the corpus HTTP boundary. The events crawler lives
+ * in the site repo, but this repo reads its assembled JSON directly for the
+ * weekly digest, so already-materialized entities, Markdown delimiters and
+ * replacement bytes must be cleaned before digest bullets are emitted.
+ */
+export function cleanEventText(value) {
+  if (typeof value !== 'string') return '';
+  let text = value;
+  for (let pass = 0; pass < 3; pass += 1) {
+    const cleaned = decodeEventEntities(text)
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<(script|style|noscript|template)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
+      .replace(/<br\s*\/?\s*>/gi, ' ')
+      .replace(/<\/?[a-z][^>]*>/gi, ' ');
+    if (cleaned === text) break;
+    text = cleaned;
+  }
+
+  for (let pass = 0; pass < 3; pass += 1) {
+    const cleaned = text
+      .replace(/(^|\s)#{1,6}(?=\s)/g, '$1')
+      .replace(/(^|[\s([{\"'“‘])(\*{1,3}|_{1,3})(?=\S)([\s\S]*?\S)\2(?=$|[\s)\]}.,!?;:'\"”’])/g, '$1$3')
+      .replace(/(^|\s)(?:\*{3,}|_{3,})(?=\s|$)/g, '$1');
+    if (cleaned === text) break;
+    text = cleaned;
+  }
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  return normalized.includes(EVENT_REPLACEMENT_CHARACTER) ? '' : normalized;
+}
+
 /**
  * Applica l'invariante «meglio un campo assente che un `NULL` pubblicato» a un
  * dataset gia' MATERIALIZZATO, cioe' al punto in cui questo repo lo legge.
@@ -1633,6 +1702,18 @@ export function sanitizeDatasetEvents(events, locales = ['it', 'en', 'de', 'fr']
       continue;
     }
     const next = { ...event };
+    if ('title' in next) next.title = cleanEventText(next.title);
+    if ('description' in next) next.description = cleanEventText(next.description);
+    if (next.titleByLocale && typeof next.titleByLocale === 'object') {
+      next.titleByLocale = Object.fromEntries(
+        Object.entries(next.titleByLocale).map(([locale, value]) => [locale, cleanEventText(value)]),
+      );
+    }
+    if (next.descriptionByLocale && typeof next.descriptionByLocale === 'object') {
+      next.descriptionByLocale = Object.fromEntries(
+        Object.entries(next.descriptionByLocale).map(([locale, value]) => [locale, cleanEventText(value)]),
+      );
+    }
     if (next.titleByLocale) next.titleByLocale = stripUnusableLocaleValues(next.titleByLocale, 'titleByLocale');
     if (next.descriptionByLocale) {
       next.descriptionByLocale = stripUnusableLocaleValues(next.descriptionByLocale, 'descriptionByLocale');
