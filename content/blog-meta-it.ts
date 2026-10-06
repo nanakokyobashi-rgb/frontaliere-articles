@@ -12687,6 +12687,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Stazione FFS di Giubiasco: rinnovo concluso',
     'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'L\'edificio della stazione FFS di Giubiasco riaprirà l\'8 ottobre 2026 dopo lavori da circa 6,4 milioni: nuovi servizi, ascensore e standard Minergie.',
     'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Edificio rinnovato della stazione FFS di Giubiasco',
+    'blog.article.trame-oriente-chiasso.title': 'Trame d\'Oriente: mini kimono in mostra a Chiasso',
+    'blog.article.trame-oriente-chiasso.excerpt': 'A Chiasso, dall\'8 al 22 ottobre, la mostra Trame d\'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.',
+    'blog.article.trame-oriente-chiasso.imageAlt': 'Dieci mini kimono in sete vintage della mostra Trame d\'Oriente a Chiasso',
 };
 
 export default blogMetaIt;
