@@ -395,8 +395,10 @@ test('every emitter that writes the public surface goes through the sanitiser', 
       /sanitizeDeep\(fullPayload\)/,
       /assertNoControlChars\(/,
     ],
-    'scripts/publish-article-fast.mjs': [
-      /from '\.\/lib\/sanitize-control-chars\.mjs'/,
+    // La catena di render delle pagine articolo (usata da publish-article-fast.mjs
+    // e da publish-section-pages.mjs): la sanificazione sta dove si scrive.
+    'scripts/lib/article-render-pipeline.mjs': [
+      /from '\.\/sanitize-control-chars\.mjs'/,
       /sanitizeHtmlDocument\(indexHtml\)/,
       /writeFileSync\(indexAbs, indexClean/,
       /sanitizeHtmlDocument\(finalBridgeHtml\)/,

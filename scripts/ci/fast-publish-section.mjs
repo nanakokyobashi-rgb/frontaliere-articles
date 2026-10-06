@@ -11,8 +11,17 @@
  *
  * Qui tutto viene da `ARTICLE_SECTION_CORE` (sezioni ATTIVE):
  *
- *   body-regex             l'ERE che riconosce un corpo di QUALSIASI sezione
- *                          attiva (`^content/(blog-body|blog-body-ch)/[a-z]{2}/.+\.ts$`)
+ *   body-regex [shard|r2]  l'ERE che riconosce un corpo di QUALSIASI sezione
+ *                          attiva (`^content/(blog-body|blog-body-ch)/[a-z]{2}/.+\.ts$`);
+ *                          con `shard` solo le sezioni servite da uno shard
+ *                          Pages (cio' che fast-publish-article.yml pubblica),
+ *                          con `r2` solo quelle servite da R2 + Worker (le
+ *                          cantonali, pubblicate da fast-publish-section.yml).
+ *                          Senza sezioni del tipo chiesto l'ERE non combacia
+ *                          con niente.
+ *   r2-plan                legge da stdin i file cambiati (uno per riga) e
+ *                          stampa la matrice JSON `[{section, ids}]` delle
+ *                          sezioni R2 da ripubblicare
  *   section-of <path>      la sezione che possiede quel corpo (esce 1 se nessuna)
  *   shard-of <section>     lo shard Pages della sezione. Una sezione con
  *                          `shardKey: null` (le cantonali) e' servita da R2 +
@@ -21,7 +30,7 @@
  *
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
-import { realpathSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
@@ -29,9 +38,18 @@ import { activeSourceSections, sectionForBodyPath } from '../lib/corpus-sections
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-/** L'ERE (grep -E) dei corpi delle sezioni attive. */
-export function bodyRegex(coreList = ARTICLE_SECTION_CORE_LIST) {
-  const dirs = activeSourceSections(coreList).map((s) => {
+/**
+ * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
+ * serve: `shard` (Pages) o `r2` (Worker). Un commit di un articolo cantonale
+ * non deve entrare nel fast-publish verso gli shard, dove `shard-of` lo
+ * rifiuterebbe facendo fallire il workflow a ogni articolo.
+ */
+export function bodyRegex(coreList = ARTICLE_SECTION_CORE_LIST, { served } = {}) {
+  if (served !== undefined && served !== 'shard' && served !== 'r2') throw new Error(`body-regex: tipo "${served}" sconosciuto (shard | r2)`);
+  const sections = activeSourceSections(coreList).filter((s) => served === undefined || (served === 'shard') === Boolean(s.shardKey));
+  // Nessuna sezione di quel tipo: un'ERE che non combacia con nessun path.
+  if (sections.length === 0) return '^$';
+  const dirs = sections.map((s) => {
     if (!s.bodyDir.startsWith('content/')) throw new Error(`bodyDir fuori da content/: ${s.bodyDir}`);
     return escapeRe(s.bodyDir.slice('content/'.length));
   });
@@ -63,6 +81,40 @@ export function shardOf(section, coreList = ARTICLE_SECTION_CORE_LIST) {
   return entry.shardKey;
 }
 
+/**
+ * Le sezioni R2 (cantonali attive) toccate da un insieme di file cambiati, con
+ * gli id degli articoli il cui corpo e' cambiato. Una sezione entra anche
+ * senza corpi — registro, mappa slug, meta, chunk SEO, dati di un hub — con
+ * `ids: []`: e' un giro che rinfresca landing, archivio e hub.
+ *
+ * @param {string[]} files path relativi alla radice del repo
+ * @returns {Array<{ section: string, ids: string[] }>} nell'ordine del core
+ */
+export function r2PublishPlan(files, coreList = ARTICLE_SECTION_CORE_LIST) {
+  const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
+  const plan = new Map();
+  const touch = (section) => {
+    if (!plan.has(section)) plan.set(section, new Set());
+    return plan.get(section);
+  };
+  for (const raw of files) {
+    const rel = String(raw ?? '').trim();
+    if (!rel) continue;
+    const body = sectionForBodyPath(rel, coreList);
+    if (body) {
+      if (sections.some((s) => s.section === body.section)) touch(body.section).add(body.id);
+      continue;
+    }
+    for (const s of sections) {
+      const own =
+        rel.startsWith(`content/cantons/${s.section}/`) ||
+        rel.startsWith(`${s.metaPrefix}-`);
+      if (own) touch(s.section);
+    }
+  }
+  return sections.filter((s) => plan.has(s.section)).map((s) => ({ section: s.section, ids: [...plan.get(s.section)].sort() }));
+}
+
 function isMain() {
   try {
     return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
@@ -74,10 +126,11 @@ function isMain() {
 if (isMain()) {
   const [cmd, arg] = process.argv.slice(2);
   try {
-    if (cmd === 'body-regex') console.log(bodyRegex());
+    if (cmd === 'body-regex') console.log(bodyRegex(ARTICLE_SECTION_CORE_LIST, { served: arg }));
+    else if (cmd === 'r2-plan') console.log(JSON.stringify(r2PublishPlan(readFileSync(0, 'utf8').split('\n'))));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex | section-of <path> | shard-of <section>');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files');
   } catch (error) {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);
     process.exit(1);

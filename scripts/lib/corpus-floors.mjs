@@ -612,6 +612,17 @@ export function countRegistryArticles(root, section) {
   return readRegistryData(root, section).count;
 }
 
+/**
+ * Gli id articolo del registro sorgente di una sezione, nell'ordine del file.
+ * Una sezione di famiglia senza registro e' una sezione nuova: nessun id. Per
+ * ogni altro caso valgono le regole di `readRegistryData` (registro assente o
+ * vuoto = riferimento mancante, un rifiuto).
+ */
+export function sourceRegistryIds(root, section) {
+  if (isNewFamilySection(root, section)) return [];
+  return readRegistryData(root, section).entryIds;
+}
+
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
 export function countSourceArticles(root, section) {
   const rel = path.join(sourceOf(section).bodyDir, 'it');

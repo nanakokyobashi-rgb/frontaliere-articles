@@ -57,6 +57,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { cantonHubCoverage } from './canton-hub-data.mjs';
 
 export const SECTION_REGISTRY_FILE = 'sections/registry.json';
 export const SECTIONS_CATALOG_FILE = 'sections.json';
@@ -202,10 +203,15 @@ function sameSlugs(a, b) {
  * pubblicherebbe ne' la sitemap ne' gli articoli e il Worker servirebbe 404
  * su una sezione dichiarata viva.
  *
+ * Con `missingHubsOf` (lo passa `loadDeclaredRegistry`, che ha il disco) una
+ * sezione `live` deve avere anche i dati di TUTTI i suoi hub tematici: la
+ * landing li linka tutti e la sitemap li elenca, e nessuna pagina cantonale e'
+ * mai `noindex` — una sezione a cui manca un hub resta `draft`.
+ *
  * @param {unknown} doc
- * @param {{ all?: Record<string, any>, active?: Record<string, any> }} [core]
+ * @param {{ all?: Record<string, any>, active?: Record<string, any>, missingHubsOf?: (id: string) => string[] }} [core]
  */
-export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE } = {}) {
+export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE, missingHubsOf } = {}) {
   const errors = [];
   if (!isPlainObject(doc)) return ['il registro deve essere un oggetto JSON'];
   for (const key of Object.keys(doc)) if (!TOP_KEYS.has(key)) errors.push(`chiave sconosciuta "${key}" al livello superiore`);
@@ -239,6 +245,18 @@ export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, ac
     if (entry.status === 'live' && !Object.prototype.hasOwnProperty.call(active, id)) {
       errors.push(`${id}: dichiarata live ma non attiva nel core (ACTIVE_CANTON_SECTIONS) — nessuna sua pagina verrebbe pubblicata`);
     }
+    if (entry.status === 'live' && missingHubsOf) {
+      let missing;
+      try {
+        missing = missingHubsOf(id);
+      } catch (error) {
+        errors.push(`${id}: dati hub non validi (${error.message})`);
+        missing = [];
+      }
+      if (missing.length) {
+        errors.push(`${id}: dichiarata live senza i dati degli hub ${missing.join(', ')} — la landing li linka e la sitemap li elenca: resta draft finche' non esistono`);
+      }
+    }
     errors.push(...routingErrors(id, entry, all));
   }
   const cycleFrom = redirectCycle(doc.sections);
@@ -255,7 +273,7 @@ export function loadDeclaredRegistry(root, core) {
   } catch (error) {
     throw new Error(`${SECTION_REGISTRY_FILE} illeggibile: ${error.message}`, { cause: error });
   }
-  const errors = declaredRegistryErrors(doc, core);
+  const errors = declaredRegistryErrors(doc, { missingHubsOf: (id) => cantonHubCoverage(root, id).missing, ...core });
   if (errors.length) throw new Error(`${SECTION_REGISTRY_FILE} non valido:\n  ${errors.join('\n  ')}`);
   return doc;
 }

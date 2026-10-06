@@ -177,7 +177,7 @@ jobs:
           # shard without an error.
           if [ "${#ids[@]}" -eq 0 ]; then
             changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
-            body_re="$(node scripts/ci/fast-publish-section.mjs body-regex)"
+            body_re="$(node scripts/ci/fast-publish-section.mjs body-regex shard)"
             mapfile -t bodies < <(
               printf '%s\n' "$changed" \
                 | grep -E "$body_re" \

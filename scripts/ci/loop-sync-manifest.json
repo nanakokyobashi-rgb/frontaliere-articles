@@ -2025,6 +2025,26 @@
       }
     },
     {
+      "path": "scripts/lib/canton-hub-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Lettore dei dati degli hub tematici cantonali (content/cantons/<sezione>/hubs/<tema>.json, scritti dal producer degli hub P10): unico posto che conosce path e forma del file, usato dal publisher R2 e dal validatore del registro (una sezione live deve avere tutti e sei gli hub; nessuna pagina cantonale e' noindex). Corpus-only: hub, registro e pubblicazione R2 delle sezioni vivono solo nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "357eb01236e64e2e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/article-render-pipeline.mjs",
+      "mode": "corpus-only",
+      "reason": "La catena di render delle pagine articolo di una sezione (symlink immagini, renderArticlePages, flat bridge, link contestuali, hreflang, hero CDN, archivio, offload per ultimo, verifica asset), estratta da publish-article-fast.mjs del corpus perche' la usino allo stesso modo il fast-publish verso gli shard e il publisher R2 delle sezioni cantonali (publish-section-pages.mjs): due copie divergerebbero sull'ordine dei passi (#5270). Corpus-only: sul sito la stessa sequenza vive dentro il suo fork di publish-article-fast.mjs (voce `adapted`), e il publisher R2 esiste solo qui.",
+      "baseline": {
+        "site": null,
+        "corpus": "415d8c4f5e003fde",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",

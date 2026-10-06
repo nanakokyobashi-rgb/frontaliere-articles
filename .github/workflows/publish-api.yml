@@ -51,6 +51,8 @@ on:
       # stato e' un commit su sections/registry.json e deve pubblicarsi subito.
       - 'sections/**'
       - 'scripts/lib/section-registry.mjs'
+      - 'scripts/lib/canton-hub-data.mjs'
+      - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'scripts/publish-section-edge.mjs'
       - 'scripts/lib/delete-cdn-file.sh'
       # Il loader di Remote Config e' un input del publisher da quando porta il

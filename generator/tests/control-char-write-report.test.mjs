@@ -198,7 +198,10 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
     'generator/scripts/retranslate-blocking-bodies.mjs',
     'scripts/build-api.mjs',
     'scripts/build-blog-index.mjs',
-    'scripts/publish-article-fast.mjs',
+    // La catena di render condivisa da publish-article-fast.mjs e
+    // publish-section-pages.mjs: e' li' che le pagine articolo si scrivono.
+    'scripts/lib/article-render-pipeline.mjs',
+    'scripts/publish-section-pages.mjs',
     'scripts/refresh-hub-landing.mjs',
   ];
   assert.deepEqual(
