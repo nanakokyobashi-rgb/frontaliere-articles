@@ -7823,6 +7823,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger candidato UDC per il Consiglio federale',
     'blog.article.ruegsegger-candidato-federale.excerpt': 'Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l\'annuncio delle dimissioni a fine anno.',
     'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, immagine simbolica per la politica federale svizzera.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Aeroporto di Zurigo: record con 123\'000 passeggeri',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Domenica 4 ottobre Zurigo ha accolto 123\'000 viaggiatori: record ancora provvisorio legato alle vacanze scolastiche autunnali in diversi Cantoni svizzero-tedeschi.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Aeroporto di Zurigo con un aereo sulla pista e il terminale sullo sfondo',
 };
 
 export default blogMetaChIt;

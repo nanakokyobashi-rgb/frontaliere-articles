@@ -7823,6 +7823,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger als SVP-Kandidat für den Bundesrat',
     'blog.article.ruegsegger-candidato-federale.excerpt': 'Der Kanton Schwyz schlägt André Rüegsegger als Nachfolger von Guy Parmelin vor: Es ist die erste offizielle Kandidatur nach der Ankündigung seines Rücktritts zum Jahresende.',
     'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande als Symbolbild für die Schweizer Bundespolitik.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Flughafen Zürich: Rekord mit 123\'000 Passagieren',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'Am Sonntag, 4. Oktober, hat Zürich 123\'000 Reisende empfangen: ein noch vorläufiger Rekord, der mit den schulischen Herbstferien in mehreren deutschschweizerischen Kantonen zusammenhängt.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Flughafen Zürich mit einem Flugzeug auf der Startbahn und dem Terminal im Hintergrund',
 };
 
 export default blogMetaChDe;

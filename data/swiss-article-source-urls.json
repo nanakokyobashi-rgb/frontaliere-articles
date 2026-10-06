@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1947998/franco-euro-cosa-dicono-i-dati-e-quali-prospettive-si-aprono-per-i-prossimi-mesi": {
-    "articleId": "franco-euro-analisi-cambio-dati",
-    "ts": "2026-09-05T06:06:30.843Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/t5pmx9db2vpc": {
     "articleId": "osce-conferenza-berna",
     "ts": "2026-09-05T10:04:57.884Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/sz%3a-consigliere-di-stato-r%c3%bcegsegger-potrebbe-succedere-a-parmelin/92173216": {
     "articleId": "ruegsegger-candidato-federale",
     "ts": "2026-10-06T12:03:33.934Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/aeroporto-zurigo%2c-domenica-da-record%3a-mai-cos%c3%ac-tanti-passeggeri/92172953": {
+    "articleId": "affluenza-scalo-zurigo-autunno",
+    "ts": "2026-10-06T12:52:18.106Z",
     "keyForm": 2
   }
 }

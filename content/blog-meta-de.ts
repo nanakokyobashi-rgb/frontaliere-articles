@@ -12693,6 +12693,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-06.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 6. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-06.seoDescription': 'Grenzgänger-Bulletin vom 6. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-06.ogDescription': 'Die Zahlen vom 6. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.ciclabile-lumino-castione-fase-due.title': 'Veloweg Lumino-Castione: zweite Bauphase',
+    'blog.article.ciclabile-lumino-castione-fase-due.excerpt': 'Von Montag, 12. Oktober bis Ende April 2027 Bauarbeiten zwischen via Quatorta und dem FFS-Bahnhof Castione, mit zwei neuen Bushaltestellen.',
+    'blog.article.ciclabile-lumino-castione-fase-due.imageAlt': 'Zweite Bauphase des Velowegs zwischen Lumino und dem FFS-Bahnhof Castione',
 };
 
 export default blogMetaDe;
