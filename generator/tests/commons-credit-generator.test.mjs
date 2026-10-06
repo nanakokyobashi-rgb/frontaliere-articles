@@ -29,6 +29,7 @@ import {
   GENERATED_IMAGE_LICENSE_URLS,
   GENERATED_IMAGE_PROMPT_VERSION,
   GENERATED_IMAGE_RESTRICTIONS,
+  isGeneratedImagePath,
   validateGeneratedImageRecord,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 
@@ -49,6 +50,8 @@ function tempRoot() {
 }
 
 function generatedRecord(overrides = {}) {
+  const articleHeroPath = '/images/blog/article-governance-test.webp';
+  const legacyArticleHeroPath = '/images/generated/article-governance-test.webp';
   return {
     schema: 1,
     assetId: 'article-governance-test',
@@ -69,7 +72,7 @@ function generatedRecord(overrides = {}) {
     verifiedAt: '2026-10-06T10:01:00.000Z',
     restrictions: [...GENERATED_IMAGE_RESTRICTIONS],
     scope: 'article-hero',
-    imageUrl: '/images/blog/article-governance-test.webp',
+    imageUrl: isGeneratedImagePath(articleHeroPath) ? articleHeroPath : legacyArticleHeroPath,
     vision: {
       ok: true,
       contains_text: false,
