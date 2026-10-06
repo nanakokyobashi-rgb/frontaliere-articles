@@ -68,6 +68,14 @@ on:
       - 'scripts/lib/announced-surface.mjs'
       - 'scripts/lib/registry-api-entry.mjs'
       - 'scripts/lib/seo-entry.mjs'
+      # Gli helper che publish-section-edge.mjs ESEGUE (upload e cancellazione
+      # su R2, retry, purge) e gli import del purge: non sono import del
+      # publisher ma ne decidono l'esito, quindi un loro fix deve ripubblicare.
+      - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/cf-purge-cache.mjs'
+      - 'scripts/lib/cf-analytics.mjs'
+      - 'scripts/lib/cf-purge-variants.mjs'
       - 'scripts/lib/count-xml-tags.mjs'
       - 'scripts/lib/ticker-shadow-check.mjs'
       - 'scripts/lib/published-slug-guard.mjs'

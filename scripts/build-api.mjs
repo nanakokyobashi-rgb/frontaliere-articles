@@ -1074,6 +1074,14 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     }
   };
 
+  // SOLO le sezioni con superficie propria (frontaliere, svizzera), ed e' una
+  // decisione, non una dimenticanza: il piano «sezioni articoli per cantone»
+  // tiene le sezioni cantonali FUORI dalla sitemap Google News nella v1 (D5:
+  // «Fuori v1: Google News sitemap, news ticker, homepage»). Un articolo
+  // cantonale e' annunciato dalla sitemap della sua sezione; per portarlo in
+  // Google News va cambiata prima quella decisione, e allora qui servono le
+  // sezioni di famiglia e il loro chunk SEO letto dove sta nel corpus
+  // (`seoChunkSources`). generator/tests/section-registry.test.mjs lo fissa.
   for (const section of API_SECTIONS) {
     collect(
       SECTION_REGISTRIES[section.section],

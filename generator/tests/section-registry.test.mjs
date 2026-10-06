@@ -522,6 +522,13 @@ test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-
   );
 });
 
+test('Google News: le sezioni cantonali restano fuori dalla v1 (decisione D5), per scelta dichiarata', () => {
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  const at = build.indexOf('«Fuori v1: Google News sitemap, news ticker, homepage»');
+  assert.ok(at > 0, 'la decisione deve restare scritta dove il collector sceglie le sezioni');
+  assert.match(build.slice(at, at + 700), /for \(const section of API_SECTIONS\) \{\s+collect\(/);
+});
+
 // ── 6. Pubblicazione su R2: release versionata, un solo PUT ──────────────────
 
 const DRAFT_ALL = (commit = COMMIT) => ({ schema: 1, commit, sections: Object.fromEntries(registrySectionIds().map((id) => [id, { status: 'draft' }])) });
@@ -1052,6 +1059,12 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     }
   };
   for (const entry of ['scripts/build-api.mjs', 'scripts/build-blog-index.mjs', 'scripts/publish-section-edge.mjs', 'scripts/ci/verify-api-floors.mjs']) walk(entry);
+  // Piu' cio' che publish-section-edge ESEGUE (non importa): gli script che lancia, e i loro import.
+  const edge = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
+  const realIoSrc = edge.slice(edge.indexOf('export const realIo = {'), edge.indexOf('/** Quanto si aspetta'));
+  const spawned = [...realIoSrc.matchAll(/'(scripts\/[A-Za-z0-9_\/.-]+\.(?:sh|mjs))'/g)].map((m) => m[1]);
+  assert.deepEqual([...new Set(spawned)].sort(), ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh']);
+  for (const file of spawned) walk(file);
   assert.ok(seen.size > 20, 'la chiusura e\' vuota: il test sarebbe vacuo');
   assert.deepEqual([...seen].filter((file) => !covered(file)).sort(), [], 'moduli importati dal publisher e non osservati da on.push.paths');
 
