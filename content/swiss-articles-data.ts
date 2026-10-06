@@ -24649,6 +24649,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ostinelli-cassa-malati-udienza-pretore',
+    category: 'pratico',
+    date: '2026-10-06T07:13:37.693Z',
+    image: '/images/blog/ostinelli-cassa-malati-udienza-pretore.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['TI'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

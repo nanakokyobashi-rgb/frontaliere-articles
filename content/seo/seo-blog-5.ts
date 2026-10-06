@@ -99984,6 +99984,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gambarogno-pavimentazione-attese': {
+    title: 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    description: 'A Gambarogno lavori di pavimentazione dal 12 al 16 ottobre tra il sottopasso FFS e la salita per Caviano - Scaiano. Per la circolazione attese fino a 30 minuti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gambarogno, lavori, sulla, cantonale',
+    ogTitle: 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    ogDescription: 'Il Comune e il Dipartimento del territorio annunciano opere di pavimentazione sulla strada cantonale di Gambarogno. L\'intervento interessa il tratto tra il sottopasso FFS e la salita per Caviano - Scaiano, con attese previste fino a 30 minuti.',
+    canonicalPath: '/articoli-frontaliere/gambarogno-pavimentazione-attese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gambarogno: lavori sulla cantonale, attese fino a 30 minuti",
+      "description": "A Gambarogno lavori di pavimentazione dal 12 al 16 ottobre tra il sottopasso FFS e la salita per Caviano - Scaiano. Per la circolazione attese fino a 30 minuti.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/gambarogno-pavimentazione-attese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori di pavimentazione sulla cantonale di Gambarogno tra il sottopasso FFS e Caviano"
+      },
+      "datePublished": "2026-10-06T06:52:28+00:00",
+      "dateModified": "2026-10-06T06:52:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gambarogno-pavimentazione-attese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

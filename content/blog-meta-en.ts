@@ -12668,6 +12668,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Fines and sentences: conversion into community service in Ticino',
     'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 cases in Ticino in 2025. In Zurich, 1\'388 requests: 4 hours of work are worth 1 day in prison.',
     'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Person wearing work gloves holding a checklist in a hospital corridor in Ticino.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: works on the cantonal road, delays of up to 30 minutes',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'From October 12 to 16, paving works on the cantonal road in Gambarogno, between the FFS underpass and the road uphill to Caviano - Scaiano. Delays of up to 30 minutes.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Paving works on the cantonal road in Gambarogno between the FFS underpass and Caviano',
 };
 
 export default blogMetaEn;

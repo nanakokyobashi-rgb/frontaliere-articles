@@ -7802,6 +7802,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.prezzi-immobili-settembre-regioni.title': 'Prix des maisons et des appartements en Suisse : septembre stable',
     'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Maisons individuelles à -0,1% et appartements à +0,2% en septembre : Zurich enregistre la baisse la plus marquée, tandis que le Tessin progresse dans la propriété par étages.',
     'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Immeubles résidentiels suisses illustrant les écarts régionaux des prix',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli ne paie pas la caisse-maladie et se rend devant le juge',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, médecin de Mendrisio, compara devant le juge de paix pour non-paiement de l\'assurance maladie suisse',
 };
 
 export default blogMetaChFr;

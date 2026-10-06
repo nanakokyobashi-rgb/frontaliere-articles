@@ -7802,6 +7802,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.prezzi-immobili-settembre-regioni.title': 'House and apartment prices in Switzerland: stable in September',
     'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Single-family homes at -0,1% and apartments at +0,2% in September: Zurich records the sharpest decline, while Ticino grows in condominium ownership.',
     'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Swiss residential buildings illustrating regional property price trends',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli does not pay his health insurance and goes before the magistrate',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, a doctor from Mendrisio, has not paid his health insurance since June 2024 and must appear before the magistrate on October 6; he pays 140 euro per month for international insurance.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, a doctor from Mendrisio, appearing before the magistrate for not paying his Swiss health insurance',
 };
 
 export default blogMetaChEn;

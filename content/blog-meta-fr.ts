@@ -12670,6 +12670,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Amendes et peines : conversion en travaux d’intérêt général au Tessin',
     'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 cas au Tessin en 2025. À Zurich, 1\'388 demandes : 4 heures de travail valent 1 jour de prison.',
     'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Personne portant des gants de travail tenant une liste de contrôle dans un couloir d\'hôpital en Tessin.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno : travaux sur la route cantonale, temps d\'attente jusqu\'à 30 minutes',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Du 12 au 16 octobre, des travaux de revêtement sont prévus sur la route cantonale à Gambarogno, entre le passage inférieur FFS et la montée vers Caviano - Scaiano. Temps d\'attente jusqu\'à 30 minutes.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Travaux de revêtement sur la route cantonale de Gambarogno entre le passage FFS et Caviano',
 };
 
 export default blogMetaFr;

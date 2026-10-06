@@ -39918,6 +39918,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gambarogno-pavimentazione-attese',
+ category: 'pratico',
+ date: '2026-10-06T06:52:28.196Z',
+ image: '/images/blog/gambarogno-pavimentazione-attese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

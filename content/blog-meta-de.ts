@@ -12667,6 +12667,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Bussen und Strafen: Umwandlung in gemeinnützige Arbeit im Tessin',
     'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 Fälle im Tessin im Jahr 2025. In Zürich 1\'388 Anfragen: 4 Stunden Arbeit entsprechen 1 Tag Haft.',
     'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Person mit Arbeitshandschuhen, die eine Checkliste in einem Krankenhausflur im Tessin hält.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: Arbeiten auf der Kantonsstrasse, Wartezeiten von bis zu 30 Minuten',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Vom 12. bis 16. Oktober Belagsarbeiten auf der Kantonsstrasse in Gambarogno, zwischen der FFS-Unterführung und der Auffahrt nach Caviano - Scaiano. Wartezeiten von bis zu 30 Minuten.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Belagsarbeiten auf der Kantonsstrasse in Gambarogno zwischen FFS-Unterführung und Caviano',
 };
 
 export default blogMetaDe;
