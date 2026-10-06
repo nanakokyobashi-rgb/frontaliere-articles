@@ -39,6 +39,38 @@ function findTagEnd(html, start) {
   return -1;
 }
 
+// A slash remains part of an unquoted attribute value until whitespace. The
+// final-byte heuristic would misread `<template data-src=/foo/>` as a
+// self-closing template and expose its inactive children to the metadata scan.
+function isSelfClosingStartTag(html, nameEnd, end) {
+  let cursor = nameEnd;
+  while (cursor < end) {
+    while (cursor < end && /\s/.test(html[cursor])) cursor++;
+    if (cursor >= end) return false;
+    if (html[cursor] === '/') return true;
+
+    while (
+      cursor < end
+      && !/\s/.test(html[cursor])
+      && html[cursor] !== '='
+      && html[cursor] !== '/'
+    ) cursor++;
+    while (cursor < end && /\s/.test(html[cursor])) cursor++;
+    if (html[cursor] !== '=') continue;
+    cursor++;
+    while (cursor < end && /\s/.test(html[cursor])) cursor++;
+    if (html[cursor] === '"' || html[cursor] === "'") {
+      const quote = html[cursor++];
+      while (cursor < end && html[cursor] !== quote) cursor++;
+      if (cursor < end) cursor++;
+    } else {
+      // `/` is data in an unquoted value, not the self-closing marker.
+      while (cursor < end && !/\s/.test(html[cursor])) cursor++;
+    }
+  }
+  return false;
+}
+
 function readTag(html, start) {
   if (html[start] !== '<') return null;
   let i = start + 1;
@@ -47,17 +79,17 @@ function readTag(html, start) {
   const nameStart = i;
   while (i < html.length && /[A-Za-z0-9:_-]/.test(html[i])) i++;
   if (i === nameStart) return null;
+  const nameEnd = i;
   const end = findTagEnd(html, start);
   if (end < 0) return null;
-  const boundary = html[i] ?? '';
+  const boundary = html[nameEnd] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
-  let beforeEnd = end - 1;
-  while (beforeEnd >= i && /\s/.test(html[beforeEnd])) beforeEnd--;
   return {
     closing,
     end,
     name: html.slice(nameStart, i).toLowerCase(),
-    selfClosing: !closing && html[beforeEnd] === '/',
+    nameEnd,
+    selfClosing: !closing && isSelfClosingStartTag(html, nameEnd, end),
   };
 }
 
@@ -108,13 +140,86 @@ function skipTemplateElement(html, afterOpening) {
   return -1;
 }
 
+// Return the content range of the real `<head>`, ignoring decoy markup in
+// comments, templates and raw-text elements. Both title and meta replacement
+// use this same range so stale values in the body or an inactive template can
+// never be patched accidentally.
+function findActiveHeadBounds(html) {
+  let cursor = 0;
+  let contentStart = -1;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && HEAD_RAW_TEXT_TAGS.includes(tag.name)) {
+      const afterRawText = skipRawTextElement(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'head') {
+      contentStart = tag.end + 1;
+      break;
+    }
+    cursor = tag.end + 1;
+  }
+
+  if (contentStart < 0) return null;
+  cursor = contentStart;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return { contentStart, contentEnd: html.length };
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.closing && tag.name === 'head') {
+      return { contentStart, contentEnd: start };
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && HEAD_RAW_TEXT_TAGS.includes(tag.name)) {
+      const afterRawText = skipRawTextElement(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return { contentStart, contentEnd: html.length };
+}
+
 function replaceActiveHeadTitle(html, staleValue, nextValue) {
-  const head = /<head\b[^>]*>/i.exec(html);
-  if (!head) return html;
-  const headStart = head.index + head[0].length;
-  const rest = html.slice(headStart);
-  const closeAt = rest.search(/<\/head\s*>/i);
-  const headEnd = headStart + (closeAt < 0 ? rest.length : closeAt);
+  const bounds = findActiveHeadBounds(html);
+  if (!bounds) return html;
+  const { contentStart: headStart, contentEnd: headEnd } = bounds;
   let cursor = headStart;
   while (cursor < headEnd) {
     const start = html.indexOf('<', cursor);
@@ -161,14 +266,51 @@ function replaceMetaContent(html, attribute, attributeValue, staleValue, nextVal
     'i',
   );
   const content = /\bcontent\s*=\s*(['"])(.*?)\1/i;
-  return html.replace(/<meta\b[^>]*>/gi, (tag) => {
-    if (!identity.test(tag)) return tag;
-    const match = content.exec(tag);
-    if (!match || match[2] !== staleValue) return tag;
-    const before = tag.slice(0, match.index);
-    const after = tag.slice(match.index + match[0].length);
-    return `${before}${match[0].slice(0, match[0].indexOf(match[2]))}${nextValue}${match[1]}${after}`;
-  });
+  const bounds = findActiveHeadBounds(html);
+  if (!bounds) return html;
+  let cursor = bounds.contentStart;
+  while (cursor < bounds.contentEnd) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0 || start >= bounds.contentEnd) break;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) break;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag || tag.end >= bounds.contentEnd) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0 || afterTemplate > bounds.contentEnd) break;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && HEAD_RAW_TEXT_TAGS.includes(tag.name)) {
+      const afterRawText = skipRawTextElement(html, tag.end + 1, tag.name);
+      if (afterRawText < 0 || afterRawText > bounds.contentEnd) break;
+      cursor = afterRawText;
+      continue;
+    }
+    if (tag.name === 'meta' && !tag.closing) {
+      const sourceTag = html.slice(start, tag.end + 1);
+      if (identity.test(sourceTag)) {
+        const match = content.exec(sourceTag);
+        if (match && match[2] === staleValue) {
+          const valueOffset = match[0].indexOf(match[2]);
+          const replacement = sourceTag.slice(0, match.index + valueOffset)
+            + nextValue
+            + sourceTag.slice(match.index + valueOffset + match[2].length);
+          return html.slice(0, start) + replacement + html.slice(tag.end + 1);
+        }
+      }
+    }
+    cursor = tag.end + 1;
+  }
+  return html;
 }
 
 /**

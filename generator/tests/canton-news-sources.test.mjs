@@ -239,6 +239,19 @@ test('charset: ignora dichiarazioni in markup inattivo prima della meta reale', 
   assert.equal(charsetFromDocumentHead(head), 'utf-8');
 });
 
+test('charset: usa solo il head attivo e tratta correttamente slash non quotati e nesting', () => {
+  const head = '<script>const fake = "</head><meta charset=ascii>";</script>'
+    + '<template data-src=/inactive/><template><meta charset=windows-1252></template></template>'
+    + '<head><template data-src=/nested/><template><meta charset=iso-8859-1></template></template>'
+    + '<meta charset=utf-8></head><body><meta charset=windows-1252></body>';
+  assert.equal(charsetFromDocumentHead(head), 'utf-8');
+  assert.equal(
+    charsetFromDocumentHead('<template><meta charset=iso-8859-1>'),
+    null,
+    'unclosed inactive markup must fail closed instead of trusting a prefix decoy',
+  );
+});
+
 test('pubDate vuoto (bs.ch): voci SENZA data per la quota undated, mai «recenti»', async () => {
   const source = sourceOf('BASILEA', 'https://www.bs.ch/rss');
   assert.equal(source.quirks.emptyPubDate, true);

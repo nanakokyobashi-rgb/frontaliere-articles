@@ -99,16 +99,270 @@ export function charsetFromContentType(contentType) {
   return m ? m[1].toLowerCase() : null;
 }
 
+const CHARSET_RAW_TEXT_TAGS = new Set(['script', 'style', 'textarea', 'title']);
+
+function charsetFindTagEnd(html, start) {
+  let quote = '';
+  for (let i = start + 1; i < html.length; i++) {
+    const char = html[i];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '>') {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function charsetIsSelfClosingStartTag(html, nameEnd, end) {
+  let cursor = nameEnd;
+  while (cursor < end) {
+    while (cursor < end && /\s/.test(html[cursor])) cursor++;
+    if (cursor >= end) return false;
+    if (html[cursor] === '/') return true;
+    while (
+      cursor < end
+      && !/\s/.test(html[cursor])
+      && html[cursor] !== '='
+      && html[cursor] !== '/'
+    ) cursor++;
+    while (cursor < end && /\s/.test(html[cursor])) cursor++;
+    if (html[cursor] !== '=') continue;
+    cursor++;
+    while (cursor < end && /\s/.test(html[cursor])) cursor++;
+    if (html[cursor] === '"' || html[cursor] === "'") {
+      const quote = html[cursor++];
+      while (cursor < end && html[cursor] !== quote) cursor++;
+      if (cursor < end) cursor++;
+    } else {
+      // A slash is data in an unquoted value until the next whitespace.
+      while (cursor < end && !/\s/.test(html[cursor])) cursor++;
+    }
+  }
+  return false;
+}
+
+function charsetReadTag(html, start) {
+  if (html[start] !== '<') return null;
+  let cursor = start + 1;
+  const closing = html[cursor] === '/';
+  if (closing) cursor++;
+  const nameStart = cursor;
+  while (cursor < html.length && /[A-Za-z0-9:_-]/.test(html[cursor])) cursor++;
+  if (cursor === nameStart) return null;
+  const nameEnd = cursor;
+  const boundary = html[cursor] || '';
+  if (boundary && !/[\s/>]/.test(boundary)) return null;
+  const end = charsetFindTagEnd(html, start);
+  if (end < 0) return null;
+  return {
+    closing,
+    end,
+    name: html.slice(nameStart, nameEnd).toLowerCase(),
+    nameEnd,
+    selfClosing: !closing && charsetIsSelfClosingStartTag(html, nameEnd, end),
+  };
+}
+
+function charsetSkipComment(html, start) {
+  const end = html.indexOf('-->', start + 4);
+  return end < 0 ? -1 : end + 3;
+}
+
+function charsetSkipRawText(html, afterOpening, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = afterOpening;
+  const match = closing.exec(html);
+  return match ? match.index + match[0].length : -1;
+}
+
+function charsetSkipTemplate(html, afterOpening) {
+  let depth = 1;
+  let cursor = afterOpening;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = charsetSkipComment(html, start);
+      if (afterComment < 0) return -1;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = charsetReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.name === 'template') {
+      if (tag.closing) {
+        depth--;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth++;
+      }
+    } else if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = charsetSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return -1;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return -1;
+}
+
+function charsetFindActiveHead(html) {
+  let cursor = 0;
+  let contentStart = -1;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = charsetSkipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = charsetReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = charsetSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = charsetSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'head') {
+      contentStart = tag.end + 1;
+      break;
+    }
+    cursor = tag.end + 1;
+  }
+  if (contentStart < 0) return null;
+
+  cursor = contentStart;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return { contentStart, contentEnd: html.length };
+    if (html.startsWith('<!--', start)) {
+      const afterComment = charsetSkipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = charsetReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.closing && tag.name === 'head') return { contentStart, contentEnd: start };
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = charsetSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = charsetSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return { contentStart, contentEnd: html.length };
+}
+
+function charsetAttributeValue(html, tag) {
+  let cursor = tag.nameEnd;
+  while (cursor < tag.end) {
+    while (cursor < tag.end && /[\s/]/.test(html[cursor])) cursor++;
+    if (cursor >= tag.end) break;
+    const nameStart = cursor;
+    while (cursor < tag.end && !/[\s=/>]/.test(html[cursor])) cursor++;
+    const nameEnd = cursor;
+    while (cursor < tag.end && /\s/.test(html[cursor])) cursor++;
+    if (html[cursor] !== '=') continue;
+    cursor++;
+    while (cursor < tag.end && /\s/.test(html[cursor])) cursor++;
+    const quote = html[cursor];
+    let value = '';
+    if (quote === '"' || quote === "'") {
+      cursor++;
+      const valueStart = cursor;
+      while (cursor < tag.end && html[cursor] !== quote) cursor++;
+      value = html.slice(valueStart, cursor);
+      if (cursor < tag.end) cursor++;
+    } else {
+      const valueStart = cursor;
+      while (cursor < tag.end && !/\s/.test(html[cursor])) cursor++;
+      value = html.slice(valueStart, cursor);
+    }
+    if (html.slice(nameStart, nameEnd).toLowerCase() === 'charset' && value) return value.toLowerCase();
+  }
+  return null;
+}
+
+function charsetFindMeta(html, from = 0, to = html.length) {
+  let cursor = from;
+  while (cursor < to) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0 || start >= to) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = charsetSkipComment(html, start);
+      if (afterComment < 0 || afterComment > to) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = charsetReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.end >= to) return null;
+    if (!tag.closing && tag.name === 'meta') {
+      const declared = charsetAttributeValue(html, tag);
+      if (declared) return declared;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = charsetSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0 || afterTemplate > to) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = charsetSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0 || afterRawText > to) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return null;
+}
+
 /** Il charset dichiarato DENTRO il documento (prologo XML o meta HTML), o null. */
 export function charsetFromDocumentHead(asciiHead) {
-  // Only active document markup can declare the response charset. A stale
-  // `<meta charset>` in a comment, template, or script must not win over the
-  // real declaration that follows it.
-  const head = maskInactiveMarkup(String(asciiHead || ''));
-  const xml = /<\?xml[^>]*\bencoding\s*=\s*["']([\w.:-]+)["']/i.exec(head);
+  const source = String(asciiHead || '');
+  // XML declarations are only valid at the start of the document. Anchoring
+  // this check keeps a PI-looking string in a comment/script from winning.
+  const xml = /^\s*<\?xml[^>]*\bencoding\s*=\s*["']([\w.:-]+)["']/i.exec(source);
   if (xml) return xml[1].toLowerCase();
-  const meta = /<meta[^>]+charset\s*=\s*["']?([\w.:-]+)/i.exec(head);
-  return meta ? meta[1].toLowerCase() : null;
+  const activeHead = charsetFindActiveHead(source);
+  if (activeHead) return charsetFindMeta(source, activeHead.contentStart, activeHead.contentEnd);
+  // Documents without a head (including short prefixes) are still scanned,
+  // but the same fail-closed inactive-node parser protects the fallback.
+  return charsetFindMeta(source);
 }
 
 /**

@@ -125,3 +125,24 @@ test('the metadata patch changes only the active head title', () => {
   assert.equal((patched.match(/<title>Articoli sulla Svizzera 2026 \| Frontaliere Ticino<\/title>/g) || []).length, 1);
   assert.equal((patched.match(/<title>Articoli Svizzera \| Frontaliere Ticino<\/title>/g) || []).length, 3);
 });
+
+test('the metadata patch ignores decoy heads, body tags, and slash-valued templates', () => {
+  const staleTitle = 'Articoli Svizzera | Frontaliere Ticino';
+  const staleDescription = 'Informazioni utili per frontalieri Svizzera-Italia: articoli svizzera.';
+  const staleOgDescription = 'Informazioni utili per frontalieri: articoli svizzera.';
+  const stale = '<!-- <head><title>' + staleTitle + '</title></head> -->'
+    + '<script>const fake = "<head><meta name=description content=\'' + staleDescription + '\'></head>";</script>'
+    + '<template data-src=/decoy/><head><title>' + staleTitle + '</title></head></template>'
+    + '<head><template data-src=/inactive/><meta name="description" content="' + staleDescription + '"></template>'
+    + '<title>' + staleTitle + '</title>'
+    + '<meta name="description" content="' + staleDescription + '">'
+    + '<meta property="og:title" content="' + staleTitle + '">'
+    + '<meta property="og:description" content="' + staleOgDescription + '"></head>'
+    + '<body><meta name="description" content="' + staleDescription + '"></body>';
+  const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
+  assert.equal(patched.split(`<title>${SWISS_HUB_ROOT_SEO_IT.title}</title>`).length - 1, 1);
+  assert.equal(patched.split(`name="description" content="${SWISS_HUB_ROOT_SEO_IT.description}`).length - 1, 1);
+  assert.equal(patched.split(`property="og:title" content="${SWISS_HUB_ROOT_SEO_IT.title}`).length - 1, 1);
+  assert.equal(patched.split(`property="og:description" content="${SWISS_HUB_ROOT_SEO_IT.ogDescription}`).length - 1, 1);
+  assert.ok(patched.includes(`<body><meta name="description" content="${staleDescription}"></body>`));
+});

@@ -146,6 +146,40 @@ function findTagEnd(html, start) {
   return -1;
 }
 
+// A slash belongs to an unquoted attribute value until the next whitespace.
+// Looking only at the last byte of a start tag therefore misclassifies
+// `<template data-src=/foo/>` as self-closing and makes the scanner expose the
+// inactive markup that follows it. Keep this small parser in sync with the
+// metadata scanners below and in the bridge engine.
+function isSelfClosingStartTag(html, nameEnd, end) {
+  let cursor = nameEnd;
+  while (cursor < end) {
+    while (cursor < end && isHtmlWhitespace(html[cursor])) cursor++;
+    if (cursor >= end) return false;
+    if (html[cursor] === '/') return true;
+
+    while (
+      cursor < end
+      && !isHtmlWhitespace(html[cursor])
+      && html[cursor] !== '='
+      && html[cursor] !== '/'
+    ) cursor++;
+    while (cursor < end && isHtmlWhitespace(html[cursor])) cursor++;
+    if (html[cursor] !== '=') continue;
+    cursor++;
+    while (cursor < end && isHtmlWhitespace(html[cursor])) cursor++;
+    if (html[cursor] === '"' || html[cursor] === "'") {
+      const quote = html[cursor++];
+      while (cursor < end && html[cursor] !== quote) cursor++;
+      if (cursor < end) cursor++;
+    } else {
+      // `/` is valid data in an unquoted value; consume it with the value.
+      while (cursor < end && !isHtmlWhitespace(html[cursor])) cursor++;
+    }
+  }
+  return false;
+}
+
 function readTag(html, start) {
   if (html[start] !== '<') return null;
   let i = start + 1;
@@ -159,14 +193,12 @@ function readTag(html, start) {
   if (boundary && !isHtmlWhitespace(boundary) && boundary !== '/' && boundary !== '>') return null;
   const end = findTagEnd(html, start);
   if (end < 0) return null;
-  let beforeEnd = end - 1;
-  while (beforeEnd >= nameEnd && isHtmlWhitespace(html[beforeEnd])) beforeEnd--;
   return {
     closing,
     end,
     nameEnd,
     nameStart,
-    selfClosing: !closing && html[beforeEnd] === '/',
+    selfClosing: !closing && isSelfClosingStartTag(html, nameEnd, end),
   };
 }
 
@@ -315,6 +347,86 @@ function findCharsetMetaEnd(headContent) {
     searchFrom = tag.end + 1;
   }
   return -1;
+}
+
+// Find the active `<head>` while skipping comments, templates and raw-text
+// elements. A literal `</head>` in a script/template must not truncate the
+// range used to place the CDN bootstrap.
+function findActiveHeadBounds(html) {
+  let cursor = 0;
+  let contentStart = -1;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      if (rawName) {
+        const afterRawText = skipRawTextElement(html, tag.end + 1, rawName);
+        if (afterRawText < 0) return null;
+        cursor = afterRawText;
+        continue;
+      }
+    }
+    if (!tag.closing && isTagNamed(html, tag, 'head')) {
+      contentStart = tag.end + 1;
+      break;
+    }
+    cursor = tag.end + 1;
+  }
+
+  cursor = contentStart;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return { contentStart, contentEnd: html.length };
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.closing && isTagNamed(html, tag, 'head')) {
+      return { contentStart, contentEnd: start };
+    }
+    if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      if (rawName) {
+        const afterRawText = skipRawTextElement(html, tag.end + 1, rawName);
+        if (afterRawText < 0) return null;
+        cursor = afterRawText;
+        continue;
+      }
+    }
+    cursor = tag.end + 1;
+  }
+  return { contentStart, contentEnd: html.length };
 }
 
 function log(msg) {
@@ -541,21 +653,16 @@ function offloadAll(distDir, cdnBase) {
       if (out.includes('__CDN_DATA_BASE__')) {
         injected++; // already present (idempotent re-run)
       } else {
-        const m = out.match(/<head[^>]*>/i);
-        if (m) {
-          const headEnd = m.index + m[0].length;
-          const headRemainder = out.slice(headEnd);
-          const headCloseAt = headRemainder.search(/<\/head\s*>/i);
-          const headContent = headCloseAt >= 0
-            ? headRemainder.slice(0, headCloseAt)
-            : headRemainder;
+        const headBounds = findActiveHeadBounds(out);
+        if (headBounds) {
+          const headContent = out.slice(headBounds.contentStart, headBounds.contentEnd);
           const charsetEnd = findCharsetMetaEnd(headContent);
           // HTML requires the encoding declaration near the start of <head>.
           // Keep deploy-time hints after it; fall back to the old insertion
           // point for unusual documents that do not declare a charset.
           const at = charsetEnd >= 0
-            ? headEnd + charsetEnd
-            : headEnd;
+            ? headBounds.contentStart + charsetEnd
+            : headBounds.contentStart;
           // The hint comment above assumes the data CDN is a DISTINCT host
           // from the asset CDN; when config points both at the same origin the
           // build already ships this exact preconnect (asyncCssPlugin /

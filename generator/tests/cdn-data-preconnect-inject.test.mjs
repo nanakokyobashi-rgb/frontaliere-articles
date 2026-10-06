@@ -63,3 +63,26 @@ test('ignores raw text nested inside a template before the real charset', () => 
   assert.ok(charsetAt < scriptAt);
   assert.ok(charsetAt > output.indexOf('</template>'));
 });
+
+test('finds the active head when decoy close tags occur in comments, templates, and scripts', () => {
+  const html = '<!doctype html><html><!-- <head><meta charset=ascii></head> -->'
+    + '<script>const fake = "<head></head>";</script>'
+    + '<template><head><meta charset=windows-1252></head></template>'
+    + '<head><meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  const charsetAt = output.indexOf('<meta charset=utf-8>');
+  const scriptAt = output.indexOf('window.__CDN_DATA_BASE__');
+  assert.ok(charsetAt < scriptAt, 'bootstrap follows the active head charset');
+  assert.equal((output.match(/window\.__CDN_DATA_BASE__/g) || []).length, 1);
+});
+
+test('does not treat a slash in an unquoted template value as self-closing', () => {
+  const html = '<!doctype html><html><head>'
+    + '<template data-src=/foo/><meta charset=iso-8859-1></template>'
+    + '<meta charset=utf-8><title>Articolo</title></head></html>';
+  const output = runOffload(html);
+  const charsetAt = output.indexOf('<meta charset=utf-8>');
+  const scriptAt = output.indexOf('window.__CDN_DATA_BASE__');
+  assert.ok(charsetAt < scriptAt, 'the real charset follows the inactive template');
+  assert.ok(output.indexOf('<meta charset=iso-8859-1>') < charsetAt, 'inactive charset stays before the active one');
+});
