@@ -93,6 +93,18 @@ outputs:
   codex_diagnostics_file:
     description: "Ephemeral structured Codex CLI event stream for failure classification."
     value: ${{ steps.finalize.outputs.codex_diagnostics_file }}
+  codex_exit_code:
+    description: "Exit code of the Codex primary process, when it was invoked."
+    value: ${{ steps.finalize.outputs.codex_exit_code }}
+  codex_failure_cause:
+    description: "Non-secret allowlisted Codex failure class."
+    value: ${{ steps.finalize.outputs.codex_failure_cause }}
+  codex_failure_diagnostic:
+    description: "Non-secret allowlisted Codex diagnostic shape."
+    value: ${{ steps.finalize.outputs.codex_failure_diagnostic }}
+  codex_event_counts:
+    description: "Counts of structured Codex JSONL event types, without event text."
+    value: ${{ steps.finalize.outputs.codex_event_counts }}
   claude_outcome:
     description: "Outcome of the Claude fallback action."
     value: ${{ steps.finalize.outputs.claude_outcome }}
@@ -351,6 +363,7 @@ runs:
         snapshot_file "$workspace_root/scripts/ci/claude-rate-limit.mjs" "$snapshot_root/ci/claude-rate-limit.mjs"
         snapshot_file "$workspace_root/scripts/ci/claude-rate-limit-contract.mjs" "$snapshot_root/ci/claude-rate-limit-contract.mjs"
         snapshot_file "$workspace_root/scripts/ci/codex-usage-summary.mjs" "$snapshot_root/ci/codex-usage-summary.mjs"
+        snapshot_file "$workspace_root/scripts/ci/classify-codex-review-failure.mjs" "$snapshot_root/ci/classify-codex-review-failure.mjs"
         snapshot_file "$workspace_root/scripts/lib/codex-fallback-contract.mjs" "$snapshot_root/lib/codex-fallback-contract.mjs"
         printf 'runtime_root=%s\n' "$snapshot_root" >> "$GITHUB_OUTPUT"
 
@@ -1379,6 +1392,7 @@ runs:
         printf 'codex_timed_out=%s\n' "$codex_timed_out" >> "$GITHUB_OUTPUT"
         printf 'codex_auth_failure=%s\n' "$codex_auth_failure" >> "$GITHUB_OUTPUT"
         printf 'codex_review_posted=%s\n' "$codex_review_posted" >> "$GITHUB_OUTPUT"
+        printf 'codex_exit_code=%s\n' "$codex_status" >> "$GITHUB_OUTPUT"
         exit "$codex_status"
 
     # The Anthropic action receives one github_token input and overwrites GH_TOKEN
@@ -1535,6 +1549,7 @@ runs:
         CODEX_AUTH_FAILURE: ${{ steps.codex.outputs.codex_auth_failure || steps.codex_auth.outputs.codex_auth_failure }}
         CODEX_AUTH_DIGEST: ${{ steps.codex_auth.outputs.codex_auth_digest }}
         CODEX_REVIEW_POSTED: ${{ steps.codex.outputs.codex_review_posted }}
+        CODEX_EXIT_CODE: ${{ steps.codex.outputs.codex_exit_code }}
         CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
         EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
         EVIDENCE_FILE: ${{ runner.temp }}/codex-primary-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
@@ -1550,6 +1565,7 @@ runs:
         [ "$codex_auth_failure" = 'true' ] || codex_auth_failure=false
         codex_auth_digest="${CODEX_AUTH_DIGEST:-}"
         codex_metrics='{"codex_invocations":0,"usage_available":false,"input_tokens":0,"cached_input_tokens":0,"output_tokens":0,"duration_ms":0,"outcome":"not_invoked","stream_status":"not_invoked","malformed_lines":0,"usage_records":0}'
+        codex_failure='{"cause":"none","numTurns":null,"source":"none","eventCounts":{},"turnEventCount":0,"diagnostic":""}'
         if [ -n "${TRUSTED_NODE:-}" ] && [ -x "$TRUSTED_NODE" ] \
           && [ -n "${RUNTIME_ROOT:-}" ] \
           && [ -f "$RUNTIME_ROOT/ci/codex-usage-summary.mjs" ]; then
@@ -1595,6 +1611,50 @@ runs:
         case "$duration_ms" in ''|*[!0-9]*) duration_ms=0 ;; esac
         case "$usage_outcome" in success|failure|cancelled|skipped|unknown|not_invoked) ;; *) usage_outcome=unknown ;; esac
         case "$stream_status" in complete|partial|malformed|unavailable|not_invoked) ;; *) stream_status=unavailable ;; esac
+        side_effect_detected="${CODEX_SIDE_EFFECT_DETECTED:-unknown}"
+        if [ "$codex_outcome" = 'skipped' ]; then
+          side_effect_detected=false
+        elif [ "$side_effect_detected" != 'false' ]; then
+          side_effect_detected=true
+        fi
+        if [ -n "${TRUSTED_NODE:-}" ] && [ -x "$TRUSTED_NODE" ] \
+          && [ -n "${RUNTIME_ROOT:-}" ] \
+          && [ -f "$RUNTIME_ROOT/ci/classify-codex-review-failure.mjs" ]; then
+          candidate_failure=''
+          if candidate_failure=$(
+            CODEX_TIMED_OUT="$codex_timed_out" \
+            CODEX_DURATION_MS="${CODEX_DURATION_MS:-}" \
+            CODEX_REVIEW_POSTED="${CODEX_REVIEW_POSTED:-false}" \
+            CODEX_SIDE_EFFECT_DETECTED="$side_effect_detected" \
+            "$TRUSTED_NODE" "$RUNTIME_ROOT/ci/classify-codex-review-failure.mjs" \
+              "${CODEX_DIAGNOSTICS:-}" "$codex_outcome" 2>/dev/null
+          ); then
+            if printf '%s' "$candidate_failure" | jq -e '
+              type == "object"
+              and (.cause | type == "string")
+              and (.eventCounts | type == "object")
+              and (.turnEventCount | type == "number")
+              and (.diagnostic | type == "string")
+            ' >/dev/null 2>&1; then
+              codex_failure="$candidate_failure"
+            fi
+          fi
+        fi
+        failure_cause="$(printf '%s' "$codex_failure" | jq -r '.cause // "none"')"
+        failure_diagnostic="$(printf '%s' "$codex_failure" | jq -r '.diagnostic // ""')"
+        event_counts="$(printf '%s' "$codex_failure" | jq -c '.eventCounts // {}')"
+        case "$failure_cause" in
+          cancelled|max_turns|rate_limit|server_error|startup_failure|non_retryable|none) ;;
+          *) failure_cause=none ;;
+        esac
+        case "$failure_diagnostic" in
+          ''|http_status=*|stream_disconnected|usage_limit|model_not_found|authentication_error|configuration_or_arguments_error|network_error) ;;
+          *) failure_diagnostic='' ;;
+        esac
+        case "$event_counts" in
+          \{*\}) ;;
+          *) event_counts='{}' ;;
+        esac
         if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
           {
             printf '\n### Codex review usage (non-secret)\n\n'
@@ -1607,13 +1667,13 @@ runs:
             printf '| duration (ms) | %s |\n' "$duration_ms"
             printf '| outcome | `%s` |\n' "$usage_outcome"
             printf '| stream status | `%s` |\n' "$stream_status"
+            printf '| exit code | `%s` |\n' "${CODEX_EXIT_CODE:-?}"
+            printf '| failure cause | `%s` |\n' "$failure_cause"
+            printf '| JSONL event counts | `%s` |\n' "$event_counts"
+            if [ -n "$failure_diagnostic" ]; then
+              printf '| stderr diagnostic | `%s` |\n' "$failure_diagnostic"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
-        fi
-        side_effect_detected="${CODEX_SIDE_EFFECT_DETECTED:-unknown}"
-        if [ "$codex_outcome" = 'skipped' ]; then
-          side_effect_detected=false
-        elif [ "$side_effect_detected" != 'false' ]; then
-          side_effect_detected=true
         fi
         claude_outcome="${CLAUDE_OUTCOME:-skipped}"
         codex_success=false
@@ -1669,6 +1729,10 @@ runs:
         printf 'fallback_evidence_file=%s\n' "$evidence_file" >> "$GITHUB_OUTPUT"
         printf 'codex_output_file=%s\n' "${CODEX_OUTPUT:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_diagnostics_file=%s\n' "${CODEX_DIAGNOSTICS:-}" >> "$GITHUB_OUTPUT"
+        printf 'codex_exit_code=%s\n' "${CODEX_EXIT_CODE:-}" >> "$GITHUB_OUTPUT"
+        printf 'codex_failure_cause=%s\n' "$failure_cause" >> "$GITHUB_OUTPUT"
+        printf 'codex_failure_diagnostic=%s\n' "$failure_diagnostic" >> "$GITHUB_OUTPUT"
+        printf 'codex_event_counts=%s\n' "$event_counts" >> "$GITHUB_OUTPUT"
         printf 'codex_timed_out=%s\n' "$codex_timed_out" >> "$GITHUB_OUTPUT"
         printf 'codex_auth_failure=%s\n' "$codex_auth_failure" >> "$GITHUB_OUTPUT"
         printf 'codex_auth_digest=%s\n' "$codex_auth_digest" >> "$GITHUB_OUTPUT"

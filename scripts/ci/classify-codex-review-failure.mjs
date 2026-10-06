@@ -19,11 +19,16 @@ export const CODEX_REVIEW_FAILURE_CAUSE = Object.freeze({
   RATE_LIMIT: 'rate_limit',
   SERVER_ERROR: 'server_error',
   CANCELLED: 'cancelled',
+  STARTUP_FAILURE: 'startup_failure',
   NON_RETRYABLE: 'non_retryable',
   NONE: 'none',
 });
 
 export const CODEX_REVIEW_WATCHDOG_TIMEOUT_MS = 1_800_000;
+// A provider process that dies before the first turn is materially different
+// from a review that ran and failed. Keep this window short and explicit: it is
+// a bounded one-shot recovery signal, not a general retry permission.
+export const CODEX_REVIEW_STARTUP_FAILURE_THRESHOLD_MS = 30_000;
 
 function parseJsonEvents(raw) {
   const text = String(raw || '').trim();
@@ -55,6 +60,61 @@ function walk(value, visit) {
 
 function eventType(event) {
   return String(event?.type || event?.event || '').toLowerCase();
+}
+
+function eventCounts(events) {
+  const counts = {};
+  for (const event of events) {
+    const type = eventType(event) || 'unknown';
+    counts[type] = (counts[type] || 0) + 1;
+  }
+  return Object.fromEntries(Object.entries(counts).sort(([left], [right]) => left.localeCompare(right)));
+}
+
+function turnEventCount(events) {
+  return events.filter((event) => /^turn(?:\.|$)/u.test(eventType(event))).length;
+}
+
+/**
+ * Return only a canonical, non-secret description of a known stderr shape.
+ * The raw line can contain a prompt, model output, a token, or a file path, so
+ * it must never cross into a summary, output, or claim comment.
+ */
+export function firstAllowedCodexDiagnostic(raw) {
+  const lines = String(raw || '').split(/\r?\n/u);
+  for (const line of lines) {
+    const text = line.trim();
+    if (!text) continue;
+    try {
+      JSON.parse(text);
+      continue;
+    } catch {
+      // Non-JSON lines are the stderr side of the mixed Codex stream.
+    }
+    const status = text.match(/\b(?:HTTP\s*|status(?:[_ -]?code)?\s*[:= ]+|api[_ -]?error[_ -]?status\s*[:= ]+)([45]\d{2})\b/iu);
+    if (status) return `http_status=${status[1]}`;
+    if (/stream\s+disconnected/iu.test(text)) return 'stream_disconnected';
+    if (/(?:usage|rate)[ _-]?limit|too many requests/iu.test(text)) return 'usage_limit';
+    if (/model\s+not\s+found/iu.test(text)) return 'model_not_found';
+    if (/(?:401\s+unauthorized|token[_ -]?expired|refresh\s+token)/iu.test(text)) return 'authentication_error';
+    if (/(?:invalid|unknown|unrecognized|malformed|missing)[^\r\n]{0,80}(?:config|argument|option|parameter)/iu.test(text)) {
+      return 'configuration_or_arguments_error';
+    }
+    if (/(?:ECONNRESET|ECONNREFUSED|ENOTFOUND|network\s+error|connection\s+(?:reset|refused))/iu.test(text)) {
+      return 'network_error';
+    }
+  }
+  return '';
+}
+
+/** Non-secret telemetry shared by the action finalizer and the classifier. */
+export function summarizeCodexDiagnostics(raw) {
+  const events = parseJsonEvents(raw);
+  return {
+    eventCounts: eventCounts(events),
+    turnEventCount: turnEventCount(events),
+    diagnostic: firstAllowedCodexDiagnostic(raw),
+  };
 }
 
 function isFailureEvent(event) {
@@ -181,8 +241,16 @@ function textSignals(raw, events) {
 /**
  * @param {{outcome?: string, raw?: string, timedOut?: boolean, durationMs?: number|string}} input
  */
-export function classifyCodexReviewFailure({ outcome = '', raw = '', timedOut = false, durationMs = null } = {}) {
+export function classifyCodexReviewFailure({
+  outcome = '',
+  raw = '',
+  timedOut = false,
+  durationMs = null,
+  reviewPosted = false,
+  sideEffectDetected = null,
+} = {}) {
   const normalizedOutcome = String(outcome || '').toLowerCase();
+  const telemetry = summarizeCodexDiagnostics(raw);
   const events = parseJsonEvents(raw);
   const structured = structuredSignals(events);
   const text = textSignals(raw, events);
@@ -221,6 +289,21 @@ export function classifyCodexReviewFailure({ outcome = '', raw = '', timedOut = 
   if (normalizedOutcome === 'cancelled') {
     return { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: structured.numTurns, source: 'outcome' };
   }
+  const startupFailure = normalizedOutcome === 'failure'
+    && Number.isFinite(measuredDurationMs)
+    && measuredDurationMs >= 0
+    && measuredDurationMs < CODEX_REVIEW_STARTUP_FAILURE_THRESHOLD_MS
+    && telemetry.turnEventCount === 0
+    && reviewPosted !== true
+    && reviewPosted !== 'true'
+    && (sideEffectDetected === false || sideEffectDetected === 'false');
+  if (startupFailure) {
+    return {
+      cause: CODEX_REVIEW_FAILURE_CAUSE.STARTUP_FAILURE,
+      numTurns: structured.numTurns,
+      source: 'startup',
+    };
+  }
   if (normalizedOutcome === 'failure') {
     return { cause: CODEX_REVIEW_FAILURE_CAUSE.NON_RETRYABLE, numTurns: structured.numTurns, source: 'none' };
   }
@@ -232,6 +315,8 @@ function main() {
   const outcome = process.argv[3] || process.env.REVIEW_OUTCOME || '';
   const timedOut = String(process.env.CODEX_TIMED_OUT || '').toLowerCase() === 'true';
   const durationMs = process.env.CODEX_DURATION_MS || null;
+  const reviewPosted = String(process.env.CODEX_REVIEW_POSTED || '').toLowerCase() === 'true';
+  const sideEffectDetected = process.env.CODEX_SIDE_EFFECT_DETECTED || null;
   let raw = '';
   let readError = '';
   if (file) {
@@ -241,8 +326,22 @@ function main() {
       readError = String(error?.message || error);
     }
   }
-  const result = classifyCodexReviewFailure({ outcome, raw, timedOut, durationMs });
-  const output = readError ? { ...result, readError } : result;
+  const result = classifyCodexReviewFailure({
+    outcome,
+    raw,
+    timedOut,
+    durationMs,
+    reviewPosted,
+    sideEffectDetected,
+  });
+  const telemetry = summarizeCodexDiagnostics(raw);
+  const output = {
+    ...result,
+    eventCounts: telemetry.eventCounts,
+    turnEventCount: telemetry.turnEventCount,
+    diagnostic: telemetry.diagnostic,
+    ...(readError ? { readError } : {}),
+  };
   process.stdout.write(`${JSON.stringify(output)}\n`);
 }
 
