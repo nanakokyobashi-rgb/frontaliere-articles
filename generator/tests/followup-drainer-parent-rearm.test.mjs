@@ -162,6 +162,44 @@ test('il drainer legge lo stato del padre: senza `state` ogni padre sarebbe ille
   }
 });
 
+test('a parità di secondo decide l\'ultima decomposizione, come nel PARENT-CLOSE', () => {
+  // Stesso caso del sito (PR 11975 di frontaliere-si-o-no): due marker
+  // DECOMPOSED_INTO nello stesso secondo, il secondo aggiunge una figlia aperta.
+  const parent = realCases[1];
+  const extraChild = 9999;
+  const comments = [
+    { body: decomposedBody(parent.children), createdAt: parent.decomposedAt },
+    { body: decomposedBody([...parent.children, extraChild]), createdAt: parent.decomposedAt },
+    { body: reopenedBody(parent.number), createdAt: parent.reopenedAt },
+  ];
+  const decision = decideParentRearm({
+    parentState: 'OPEN',
+    comments,
+    childStates: [...closedChildren(parent.children), { number: extraChild, state: 'OPEN' }],
+    now: NOW,
+  });
+  assert.equal(decision.action, 'skip');
+  assert.equal(decision.reason, 'child-open');
+});
+
+test('una ricorrenza nello stesso secondo della decomposizione conta solo se viene dopo nel thread', () => {
+  const parent = realCases[1];
+  const after = [
+    { body: decomposedBody(parent.children), createdAt: parent.decomposedAt },
+    { body: reopenedBody(parent.number), createdAt: parent.decomposedAt },
+  ];
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN', comments: after, childStates: closedChildren(parent.children), now: NOW,
+  }).action, 'rearm');
+  const before = [
+    { body: reopenedBody(parent.number), createdAt: parent.decomposedAt },
+    { body: decomposedBody(parent.children), createdAt: parent.decomposedAt },
+  ];
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN', comments: before, childStates: closedChildren(parent.children), now: NOW,
+  }).reason, 'not-reopened');
+});
+
 test('PARENT-REARM non agisce con una figlia aperta', () => {
   const parent = realCases[0];
   const states = closedChildren(parent.children);

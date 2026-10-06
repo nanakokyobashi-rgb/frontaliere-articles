@@ -73,6 +73,19 @@ test('false: l\'ULTIMO marker vince anche se una riapertura segue un marker prec
   ]), false);
 });
 
+test('a parità di secondo decide la posizione nel thread', () => {
+  // GitHub data i commenti al secondo: una ricorrenza scritta nello stesso
+  // secondo della decomposizione è «dopo» solo se viene dopo nell'elenco.
+  assert.equal(reopenedAfterDecomposition([
+    decomposed('2026-10-03T10:00:00Z'),
+    reopened('2026-10-03T10:00:00Z'),
+  ]), true);
+  assert.equal(reopenedAfterDecomposition([
+    reopened('2026-10-03T10:00:00Z'),
+    decomposed('2026-10-03T10:00:00Z'),
+  ]), false);
+});
+
 test('false: nessuna riapertura', () => {
   assert.equal(reopenedAfterDecomposition([
     decomposed('2026-10-03T10:00:00Z'),
