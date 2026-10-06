@@ -192,6 +192,7 @@ export const CONTENT_GATES = [
   // su 19.588 file); gli altri diciotto stanno sotto il secondo.
   'generator/tests/repair-mangled-chars-tetto-corpus.test.mjs',
   'generator/tests/seo-clause-truncation.test.mjs',
+  'generator/tests/seo-title-prefix-repair.test.mjs',
   'generator/tests/seo-description-cap.test.mjs',
   'generator/tests/seo-digit-residue-guard.test.mjs',
   'generator/tests/slug-placeholder-guard.test.mjs',
