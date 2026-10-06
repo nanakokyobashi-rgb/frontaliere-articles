@@ -544,10 +544,8 @@ test('push.paths: solo i path del corpus della propria sezione', () => {
   for (const { canton, file, pushPaths, pushBranches } of CALLERS) {
     const { section } = canton;
     assert.equal(pushBranches, 'main', `${file}: un branch di backup non deve generare`);
-    assert.ok(
-      pushPaths.every((p) => !p.startsWith(`${WORKFLOWS_DIR}/`)),
-      `${file}: una modifica batch ai caller non deve creare una raffica di run`,
-    );
+    assert.ok(pushPaths.length >= 3, file);
+    assert.ok(pushPaths.every((p) => p.startsWith('content/')), `${file}: un caller cantonale non deve auto-avviarsi quando cambia il proprio YAML`);
     const corpus = pushPaths;
     assert.ok(corpus.length >= 3, file);
     for (const p of corpus) {

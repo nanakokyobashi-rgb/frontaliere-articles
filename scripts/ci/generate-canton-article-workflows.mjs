@@ -43,9 +43,8 @@
  *     stessa ora si contenderebbero il tetto globale; per chi ha uno slot al
  *     giorno, perderlo vuol dire perdere la giornata);
  *   - `push.paths`: i soli path del corpus della sezione, cosi' una modifica
- *     batch ai 24 caller generati non crea una raffica di run e l'articolo di
- *     un cantone non sveglia gli altri 23; le modifiche ai caller restano
- *     coperte dal test del generatore e dal gate `tests`;
+ *     ai 24 caller non apre 24 self-test concorrenti e l'articolo di un
+ *     cantone non sveglia gli altri 23;
  *   - concurrency `generate-article-<sezione>` sul job che scrive;
  *   - catena via dispatch spenta (`chain_dispatch: false`).
  *
