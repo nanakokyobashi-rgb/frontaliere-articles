@@ -7811,6 +7811,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-lavoro-settembre-2026.title': 'La situazione sul mercato del lavoro nel mese di settembre 2026',
     'blog.article.mercato-lavoro-settembre-2026.excerpt': 'A settembre 2026, la Svizzera ha registrato 140’480 disoccupati, con un tasso fermo al 3%. Questo rappresenta un calo mensile dello 0,8%, ma un aumento annuo del 5,4%. I posti vacanti presso gli URC erano 44’199.',
     'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Panorama di una città svizzera che simboleggia il mercato del lavoro e l\'economia nazionale.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'L\'effettivo dell\'esercito è sufficiente ora ma calerà entro il 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'Al 1° marzo 2026 l\'esercito conta 147 017 militari, sufficienti per il regolamentare di 100 000, ma si prevede un calo sotto 130 000 entro il 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Vista delle caserme dell\'esercito svizzero vicino a Lugano con soldati in addestramento',
 };
 
 export default blogMetaChIt;

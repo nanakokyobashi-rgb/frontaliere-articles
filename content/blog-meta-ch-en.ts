@@ -7811,6 +7811,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-lavoro-settembre-2026.title': 'The labor market situation in September 2026',
     'blog.article.mercato-lavoro-settembre-2026.excerpt': 'In September 2026, Switzerland recorded 140’480 unemployed people, with the rate steady at 3%. This represents a monthly decrease of 0,8%, but an annual increase of 5,4%. There were 44’199 vacancies at the URCs.',
     'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Skyline of a Swiss city symbolizing the labor market and national economy.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'Army strength is sufficient now but will fall by 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'As of March 1, 2026, the army numbers 147 017 personnel, enough for the statutory 100 000, but a decline below 130 000 is expected by 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'View of Swiss army barracks near Lugano with soldiers in training',
 };
 
 export default blogMetaChEn;

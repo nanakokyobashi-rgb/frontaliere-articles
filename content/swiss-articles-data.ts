@@ -24680,6 +24680,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'effettivo-esercito-2026-calo',
+    category: 'pratico',
+    date: '2026-10-06T10:00:38.453Z',
+    image: '/images/blog/effettivo-esercito-2026-calo.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

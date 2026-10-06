@@ -7811,6 +7811,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-lavoro-settembre-2026.title': 'La situation sur le marché du travail au mois de septembre 2026',
     'blog.article.mercato-lavoro-settembre-2026.excerpt': 'En septembre 2026, la Suisse a enregistré 140’480 chômeurs, avec un taux stable à 3%. Cela représente une baisse mensuelle de 0,8%, mais une hausse annuelle de 5,4%. Les postes vacants auprès des ORP étaient au nombre de 44’199.',
     'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Horizon d\'une ville suisse symbolisant le marché du travail et l\'économie nationale.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'L\'effectif de l\'armée est suffisant maintenant mais il diminuera d\'ici 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'Au 1er mars 2026, l\'armée compte 147 017 militaires, ce qui est suffisant pour la réglementation de 100 000, mais on prévoit une baisse en dessous de 130 000 d\'ici 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Vue des casernes de l\'armée suisse près de Lugano avec des soldats en entraînement',
 };
 
 export default blogMetaChFr;

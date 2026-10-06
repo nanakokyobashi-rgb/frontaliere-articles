@@ -98513,6 +98513,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-effettivo-esercito-2026-calo': {
+    title: 'L\'effettivo dell\'esercito è sufficiente ora ma calerà entro il 2030',
+    description: 'Al 1° marzo 2026 l\'esercito svizzero conta 147 017 militari, sufficienti per garantire il regolamentare di 100 000, ma si prevede un calo sotto 130 000 unità',
+    keywords: 'frontalieri, ticino, svizzera, italia, effettivo, dell, esercito, sufficiente',
+    ogTitle: 'Esercito svizzero: effettivo sufficiente ora, calo previsto entro 2030',
+    ogDescription: 'Il censimento dell’esercito 2026 pubblicato il 6 ottobre mostra 147 017 militari incorporati al 1° marzo, sufficienti per il regolamentare di 100 000. Tuttavia, il proscioglimento delle ultime due classi d’età con obbligo di 12 anni nel 2028‑2029',
+    canonicalPath: '/articoli-svizzera/effettivo-esercito-2026-calo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'effettivo dell'esercito è sufficiente ora ma calerà entro il 2030",
+      "description": "Al 1° marzo 2026 l'esercito svizzero conta 147 017 militari, sufficienti per garantire il regolamentare di 100 000, ma si prevede un calo sotto 130 000 unità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/effettivo-esercito-2026-calo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista delle caserme dell'esercito svizzero vicino a Lugano con soldati in addestramento"
+      },
+      "datePublished": "2026-10-06T10:00:38+00:00",
+      "dateModified": "2026-10-06T10:00:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/effettivo-esercito-2026-calo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
