@@ -1981,7 +1981,7 @@
       "reason": "Le sezioni articolo viste dal pubblicatore: superfici sorgente derivate da ARTICLE_SECTION_CORE (+ corpusPath), nomi della superficie pubblicata in dist/api per tipo, politica dei pavimenti per tipo. Corpus-only perche' build-api, i pavimenti e la superficie dist/api esistono solo in questo repo; il sito consuma i JSON via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "e95e290150b710f9",
+        "corpus": "580f18b97f61fe7e",
         "alignedAt": "2026-10-06"
       }
     },
@@ -2011,7 +2011,7 @@
       "reason": "Il corpus visto nel layout che l engine legge (services/locales, services/seo, packages/articles/content), costruito al volo con symlink in una cartella temporanea: alias di cartella validi per ogni sezione piu un alias per chunk SEO cantonale, che create-article scrive in content/cantons/<id>/seo.ts e l engine cerca come seo-blog-<id>.ts. Lo usano build-api per i feed RSS delle sezioni di famiglia e i pavimenti per contare i chunk dove stanno. Corpus-only: sul sito il layout dell engine e quello nativo, non serve nessuna vista.",
       "baseline": {
         "site": null,
-        "corpus": "0000000000000000",
+        "corpus": "66b40ab3f4c5a824",
         "alignedAt": "2026-10-06"
       }
     },
@@ -2447,7 +2447,7 @@
       "reason": "La sezione cantonale vista da create-article.mjs (P6b del piano sezioni cantonali): voci di ARTICLE_SECTION_CONFIGS per le 24 sezioni `kind: canton` del core (path di registro, slug, meta e corpi da ARTICLE_SECTION_CORE_ALL, profilo da generator/data/canton-sections.json), gate D16 (`enabled` nel profilo o CANTON_ARTICLE_SECTIONS_ENABLED da Remote Config), stato per sezione D18 sotto data/sections/<id>/ e i suoi argomenti per rebase-onto-remote.sh, scheletri dei file al primo articolo, lessico di ammissione DE/FR e testi di prompt del cantone. Corpus-only: la generazione e il profilo editoriale vivono solo qui; il sito legge le sezioni come JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "8d6d2ca2c7e7d880",
+        "corpus": "4339022550d58da1",
         "alignedAt": "2026-10-06"
       }
     },
@@ -3580,7 +3580,7 @@
       "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "a7af7a8d7c5ae37c",
+        "corpus": "2981cd05ecf7c37a",
         "alignedAt": "2026-10-06"
       }
     },
