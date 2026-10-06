@@ -6377,8 +6377,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     //
     // Same for an article left with a single free vote — one verifier failed,
     // or the two kept collapsing into one model: one opinion is not a
-    // verification either. Codex Luna Max (above) is the last verifier asked;
-    // reaching here means it did not answer or its lane is off.
+    // verification either. Codex Luna Max (the primary lane above) is the
+    // safety verifier; reaching here means it did not answer or its lane is off.
     const codexNote = codexFallbackTried ? 'anche Codex Luna Max senza verdetto' : 'Codex Luna Max non disponibile';
     if (lacksSecondOpinion) {
       console.error(`  🚫 LLM fact-check: un solo parere indipendente, nessun secondo parere (${codexNote}) — articolo SCARTATO, mai pubblicato non verificato`);
