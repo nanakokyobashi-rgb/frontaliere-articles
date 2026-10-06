@@ -12712,6 +12712,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.parlamento-ticino-a2-a13-priorita.title': 'Ticino Parliament: A2-A13 to become a USTRA priority again',
     'blog.article.parlamento-ticino-a2-a13-priorita.excerpt': 'Ticino Parliament votes on a resolution not to postpone the A2-A13 connection beyond 2050. Locarnese is the only major region without direct motorway access.',
     'blog.article.parlamento-ticino-a2-a13-priorita.imageAlt': 'Aerial view of Locarnese with Lake Maggiore and missing highway link',
+    'blog.article.truffa-finto-operatore-luino.title': 'Fake banker scam in Luino: 17 thousand euros seized',
+    'blog.article.truffa-finto-operatore-luino.excerpt': 'A 32-year-old man from Campania has been reported: he allegedly convinced a 62-year-old person to make a bank transfer. An account containing more than 17,000 euros was seized.',
+    'blog.article.truffa-finto-operatore-luino.imageAlt': 'Luino street scene linked to a fake bank operator scam',
 };
 
 export default blogMetaEn;

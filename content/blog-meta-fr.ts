@@ -12714,6 +12714,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.parlamento-ticino-a2-a13-priorita.title': 'Parlement tessinois : l’A2-A13 doit redevenir une priorité de l’OFROU',
     'blog.article.parlamento-ticino-a2-a13-priorita.excerpt': 'Le Parlement tessinois vote une résolution pour ne pas reporter la liaison A2-A13 au-delà de 2050. Le Locarnese, seule grande région sans accès autoroutier direct.',
     'blog.article.parlamento-ticino-a2-a13-priorita.imageAlt': 'Vue aérienne du Locarnese avec le Lac Majeur et liaison autoroutière manquante',
+    'blog.article.truffa-finto-operatore-luino.title': 'Arnaque au faux banquier à Luino : 17mila euro saisis',
+    'blog.article.truffa-finto-operatore-luino.excerpt': 'Un Campanien de 32 ans a été dénoncé : il aurait convaincu une personne de 62 ans de faire un virement. Un compte contenant plus de 17mila euro a été saisi.',
+    'blog.article.truffa-finto-operatore-luino.imageAlt': 'Scène urbaine à Luino liée à une arnaque au faux opérateur bancaire',
 };
 
 export default blogMetaFr;

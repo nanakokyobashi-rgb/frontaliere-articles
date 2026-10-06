@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/culture/locarno-film-festival/1942206/il-graffio-nella-barba": "graffio-nella-barba-locarno-film-festival",
   "https://www.laregione.ch/culture/locarno-film-festival/1942190/claudio-simonetti-monsieur-peur": "claudio-simonetti-monsieur-peur",
   "https://www.varesenoi.it/2026/08/06/leggi-notizia/argomenti/economia-13/articolo/tra-varese-milano-e-la-svizzera-quando-una-compatta-usata-e-davvero-una-scelta-piu-intelligente.html": "compatta-usata-frontalieri-varese-milano",
   "https://www.ticinonews.ch/ticino/al-lavoro-nel-caldo-torrido-e-su-superfici-roventi-il-governo-e-preoccupato-e-apre-a-nuove-misure-440180": "caldo-lavoro-frontalieri-ticino",
@@ -2064,6 +2063,11 @@
   "https://www.rsi.ch/s/4139660": {
     "articleId": "parlamento-ticino-a2-a13-priorita",
     "ts": "2026-10-06T17:38:31.117Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/cronaca-20/articolo/deruba-unanziana-con-la-truffa-del-finto-operatore-bancario-i-carabinieri-di-luino-gli-sequestrano.html": {
+    "articleId": "truffa-finto-operatore-luino",
+    "ts": "2026-10-06T18:14:33.034Z",
     "keyForm": 2
   }
 }

@@ -40064,6 +40064,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'truffa-finto-operatore-luino',
+ category: 'novita',
+ date: '2026-10-06T18:14:32.622Z',
+ image: '/images/blog/truffa-finto-operatore-luino.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

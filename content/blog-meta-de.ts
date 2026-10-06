@@ -12711,6 +12711,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.parlamento-ticino-a2-a13-priorita.title': 'Tessiner Parlament: A2-A13 soll wieder zu einer Priorität der USTRA werden',
     'blog.article.parlamento-ticino-a2-a13-priorita.excerpt': 'Das Tessiner Parlament stimmt für eine Resolution gegen eine Verschiebung der Verbindung A2-A13 über 2050 hinaus. Das Locarnese ist die einzige grosse Region ohne direkten Autobahnanschluss.',
     'blog.article.parlamento-ticino-a2-a13-priorita.imageAlt': 'Luftaufnahme des Locarnese mit Lago Maggiore und fehlender Autobahnanbindung',
+    'blog.article.truffa-finto-operatore-luino.title': 'Bankbetrug in Luino: 17.000 Euro beschlagnahmt',
+    'blog.article.truffa-finto-operatore-luino.excerpt': 'Ein 32-jähriger Mann aus Kampanien wurde angezeigt: Er soll eine 62-jährige Person dazu gebracht haben, eine Überweisung zu tätigen. Ein Konto mit über 17mila euro wurde beschlagnahmt.',
+    'blog.article.truffa-finto-operatore-luino.imageAlt': 'Luinoer Stadtszene im Zusammenhang mit einem Betrug durch einen falschen Bankmitarbeiter (Luino)',
 };
 
 export default blogMetaDe;
