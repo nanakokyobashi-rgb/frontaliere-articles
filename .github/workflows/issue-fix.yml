@@ -493,7 +493,13 @@ jobs:
           # slot e il drainer impedisce il fan-out oltre il cap.
           QUOTA_LEASE_MAX_INFLIGHT_FIX: '15'
           GITHUB_RUN_ID: ${{ github.run_id }}
-        run: node scripts/ci/check-quota-backoff.mjs
+        # Il lease è una scansione ad alto volume: preferisce il PAT runtime,
+        # così non consuma il bucket REST dell'installation GITHUB_TOKEN.
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Codex lane quota lease unavailable (requeue zero-agent)
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
@@ -505,6 +511,9 @@ jobs:
           if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
             echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-fix saltato fail-closed, nessuna mutazione cieca."
             exit 1
+          fi
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
           fi
           node scripts/ci/requeue-quota-lease.mjs \
             --issue "$ISSUE_NUMBER" \
@@ -1354,7 +1363,11 @@ jobs:
           QUOTA_LEASE_TARGET_TYPE: issue
           QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
           QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
-        run: node scripts/ci/check-quota-backoff.mjs
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          fi
+          node scripts/ci/check-quota-backoff.mjs
 
       - name: Release in-progress claim (zero-Claude, mutex)
         if: always() && steps.claim.outputs.claim_acquired == 'true'
