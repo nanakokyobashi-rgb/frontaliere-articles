@@ -59,7 +59,7 @@
  * ══════════════════════════════════════════════════════════════
  */
 
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, realpathSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, rmSync, realpathSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createInterface } from 'node:readline';
@@ -14017,15 +14017,20 @@ function articleImageAssetId(data) {
   return `article-${(normalized || 'article').slice(0, 110)}`;
 }
 
-function governedArticleImageOutputDir() {
-  // The corpus engine arrives through the site mirror and can lag by one
-  // cycle. Derive the byte directory from the same path contract as the
-  // engine record so an old base remains valid until the blog-path engine is
-  // mirrored, while the current contract writes article heroes under blog/.
-  const blogProbe = '/images/blog/article-contract-probe.webp';
-  return isGeneratedImagePath(blogProbe)
-    ? resolve('public/images/blog')
-    : resolve('public/images/generated');
+function materializeGovernedArticleImage(result) {
+  const record = result?.record;
+  const imageUrl = String(record?.imageUrl || '');
+  const articleHeroPath = /^\/images\/(?:blog|generated)\/[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+  if (record?.scope !== 'article-hero' || !isGeneratedImagePath(imageUrl) || !articleHeroPath.test(imageUrl)) {
+    throw new Error(`Governed engine returned an invalid article-hero path: ${imageUrl || '<empty>'}`);
+  }
+  if (!result?.filePath || !existsSync(result.filePath)) {
+    throw new Error(`Governed engine returned no materialized image for ${imageUrl}`);
+  }
+  const destination = resolve(`public${imageUrl}`);
+  mkdirSync(path.dirname(destination), { recursive: true });
+  renameSync(result.filePath, destination);
+  return { destination, stagingDir: path.dirname(result.filePath) };
 }
 
 /**
@@ -14060,7 +14065,7 @@ async function generateArticleImage(data) {
         variant: 'article hero',
       },
       {
-        outputDir: governedArticleImageOutputDir(),
+        outputDir: resolve('.cache/generated-article-images'),
         assetId,
         maxAttempts: 3,
         deadlineAt: imageDeadline,
@@ -14074,7 +14079,21 @@ async function generateArticleImage(data) {
     return null;
   }
 
-  appendGeneratedImageRecord(PROJECT_ROOT, result.record);
+  let materialized;
+  try {
+    materialized = materializeGovernedArticleImage(result);
+    appendGeneratedImageRecord(PROJECT_ROOT, result.record);
+  } catch (error) {
+    if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
+    console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    return null;
+  } finally {
+    const stagingDir = materialized?.stagingDir
+      || (result?.filePath ? path.dirname(result.filePath) : null);
+    if (stagingDir && existsSync(stagingDir)) {
+      rmSync(stagingDir, { recursive: true, force: true });
+    }
+  }
   data._generatedImageRecord = result.record;
   data._generatedImagePath = result.record.imageUrl;
   console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);

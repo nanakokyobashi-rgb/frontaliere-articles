@@ -20,10 +20,11 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   const imageAdapter = between(source, '// ── Governed image generation', '// ── Step 4: Modify source files');
   assert.match(imageAdapter, /generateImageFromSpec/);
   assert.match(imageAdapter, /scope: 'article-hero'/);
-  assert.match(imageAdapter, /function governedArticleImageOutputDir\(\)/);
-  assert.match(imageAdapter, /isGeneratedImagePath\(blogProbe\)/);
-  assert.match(imageAdapter, /resolve\('public\/images\/blog'\)/);
-  assert.match(imageAdapter, /resolve\('public\/images\/generated'\)/);
+  assert.match(imageAdapter, /function materializeGovernedArticleImage\(result\)/);
+  assert.match(imageAdapter, /scope !== 'article-hero'/);
+  assert.match(imageAdapter, /articleHeroPath\.test\(imageUrl\)/);
+  assert.match(imageAdapter, /outputDir: resolve\('\.cache\/generated-article-images'\)/);
+  assert.match(imageAdapter, /renameSync\(result\.filePath, destination\)/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
   assert.doesNotMatch(imageAdapter, new RegExp(`fetch\\(|${RETIRED_FLASH_IMAGE_MODEL}|Pollinations|Together|Fal\\.ai|Pixabay|Pexels|Picsum`));
