@@ -98,7 +98,14 @@ export const SUPPORTED_CANTON_PARSERS = Object.freeze([
 
 // ── Decodifica ───────────────────────────────────────────────────────────────
 
-const CHARSET_RAW_TEXT_TAGS = new Set(['script', 'style', 'textarea', 'title']);
+const CHARSET_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const CHARSET_RAW_TEXT_TAGS = new Set([
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+]);
 
 function isHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
@@ -166,11 +173,13 @@ function readCharsetTag(html, start) {
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const end = findCharsetTagEnd(html, start);
   if (end < 0) return null;
+  const name = html.slice(nameStart, i).toLowerCase();
   return {
     closing,
     end,
-    name: html.slice(nameStart, i).toLowerCase(),
-    selfClosing: !closing && isCharsetSelfClosingStartTag(html, i, end),
+    name,
+    selfClosing: !closing && CHARSET_VOID_ELEMENTS.has(name)
+      && isCharsetSelfClosingStartTag(html, i, end),
   };
 }
 

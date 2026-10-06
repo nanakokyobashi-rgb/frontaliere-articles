@@ -274,8 +274,15 @@ export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SH
 // the page, but its text is raw markup while it is nested in a `<template>`.
 // Keep those two sets separate: masking an active `<title>` would erase the
 // evidence used by pageTitleEvidence().
-const INACTIVE_RAW_TEXT_TAGS = new Set(['script', 'style']);
-const TEMPLATE_RAW_TEXT_TAGS = new Set(['script', 'style', 'textarea', 'title']);
+const MASK_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const INACTIVE_RAW_TEXT_TAGS = new Set(['script', 'style', 'noscript', 'iframe', 'xmp', 'noembed', 'noframes']);
+const TEMPLATE_RAW_TEXT_TAGS = new Set([
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+]);
 
 function maskHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
@@ -341,11 +348,13 @@ function maskReadTag(html, start) {
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const end = maskFindTagEnd(html, start);
   if (end < 0) return null;
+  const name = html.slice(nameStart, i).toLowerCase();
   return {
     closing,
     end,
-    name: html.slice(nameStart, i).toLowerCase(),
-    selfClosing: !closing && maskIsSelfClosingStartTag(html, i, end),
+    name,
+    selfClosing: !closing && MASK_VOID_ELEMENTS.has(name)
+      && maskIsSelfClosingStartTag(html, i, end),
   };
 }
 

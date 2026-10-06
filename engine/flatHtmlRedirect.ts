@@ -59,6 +59,15 @@ function isHtmlWhitespace(char: string | undefined): boolean {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
 }
 
+const HTML_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const HTML_RAW_TEXT_ELEMENTS = new Set([
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+]);
+
 function isSelfClosingStartTag(html: string, nameEnd: number, end: number): boolean {
   let index = nameEnd;
   while (index < end) {
@@ -105,11 +114,13 @@ function readTag(html: string, start: number): { closing: boolean; end: number; 
   if (boundary && !/[\s/>]/.test(boundary)) return null;
   const end = findTagEnd(html, start);
   if (end < 0) return null;
+  const name = nameMatch[0].toLowerCase();
   return {
     closing,
     end,
-    name: nameMatch[0].toLowerCase(),
-    selfClosing: !closing && isSelfClosingStartTag(html, nameEnd, end),
+    name,
+    selfClosing: !closing && HTML_VOID_ELEMENTS.has(name)
+      && isSelfClosingStartTag(html, nameEnd, end),
   };
 }
 
@@ -149,7 +160,7 @@ function skipTemplateElement(html: string, afterOpening: number): number {
       } else if (!tag.selfClosing) {
         depth += 1;
       }
-    } else if (!tag.closing && !tag.selfClosing && (tag.name === 'script' || tag.name === 'style')) {
+    } else if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = skipRawTextElement(html, tag.end + 1, tag.name);
       if (afterRawText < 0) return html.length;
       cursor = afterRawText;
@@ -191,7 +202,7 @@ function maskInactiveMarkup(html = '') {
       cursor = start + 1;
       continue;
     }
-    if (!tag.closing && !tag.selfClosing && (tag.name === 'script' || tag.name === 'style')) {
+    if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
       const afterRawText = skipRawTextElement(source, tag.end + 1, tag.name);
       const afterInactive = afterRawText < 0 ? source.length : afterRawText;
       blank(start, afterInactive);

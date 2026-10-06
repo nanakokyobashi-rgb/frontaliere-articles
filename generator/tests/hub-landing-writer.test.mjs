@@ -102,7 +102,7 @@ test('the mirrored engine exposes create-or-refresh and keeps its fail-closed co
 
 test('the mirrored flat redirect scanner parses unquoted attribute values before self-closing', () => {
   assert.match(flatRedirect, /function isSelfClosingStartTag\(html: string, nameEnd: number, end: number\)/);
-  assert.match(flatRedirect, /selfClosing: !closing && isSelfClosingStartTag\(html, nameEnd, end\)/);
+  assert.match(flatRedirect, /selfClosing: !closing && HTML_VOID_ELEMENTS\.has\(name\)/);
   assert.match(flatRedirect, /unquoted attribute-value state/);
 });
 

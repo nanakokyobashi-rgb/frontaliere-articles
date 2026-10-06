@@ -57,7 +57,14 @@ import { ASSETS_SAME_ORIGIN_RX } from '../host/shared/cdnAssetOffloadRx.mjs';
 
 const ORIGIN = 'https://frontaliereticino.ch';
 const SCAN_EXT = new Set(['.html', '.xml', '.txt']);
-const HTML_RAW_TEXT_TAGS = ['script', 'style', 'textarea', 'title'];
+const HTML_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const HTML_RAW_TEXT_TAGS = [
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+];
 
 // Offload targets: [dist subdir, url path prefix]. Only these prefixes are
 // rewritten/guarded/deleted.
@@ -198,9 +205,14 @@ function readTag(html, start) {
   return {
     closing,
     end,
+    name: html.slice(nameStart, nameEnd).toLowerCase(),
     nameEnd,
     nameStart,
-    selfClosing: !closing && isSelfClosingStartTag(html, nameEnd, end),
+    // HTML's self-closing flag is ignored on non-void elements. Treating
+    // `<template/>` or `<script/>` as closed makes the scanners expose the
+    // inactive text that follows them as live document markup.
+    selfClosing: !closing && HTML_VOID_ELEMENTS.has(html.slice(nameStart, nameEnd).toLowerCase())
+      && isSelfClosingStartTag(html, nameEnd, end),
   };
 }
 
@@ -250,16 +262,22 @@ function isTagNamed(html, tag, expected) {
   return tag && asciiNameEquals(html, tag.nameStart, tag.nameEnd, expected);
 }
 
-function skipRawTextElement(html, afterOpening, name) {
+function findRawTextClose(html, afterOpening, name) {
   let searchFrom = afterOpening;
   while (searchFrom < html.length) {
     const start = html.indexOf('<', searchFrom);
-    if (start < 0) return -1;
+    if (start < 0) return null;
     const tag = readTag(html, start);
-    if (tag && tag.closing && isTagNamed(html, tag, name)) return tag.end + 1;
+    if (tag && tag.closing && isTagNamed(html, tag, name)) {
+      return { start, end: tag.end + 1 };
+    }
     searchFrom = start + 1;
   }
-  return -1;
+  return null;
+}
+
+function skipRawTextElement(html, afterOpening, name) {
+  return findRawTextClose(html, afterOpening, name)?.end ?? -1;
 }
 
 function skipTemplateElement(html, afterOpening) {
@@ -424,6 +442,65 @@ function findActiveHeadContent(html) {
     searchFrom = tag.end + 1;
   }
   return null;
+}
+
+function isExecutableScriptTag(html, tag, start) {
+  const source = html.slice(start, tag.end + 1);
+  const type = /\btype\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(source);
+  if (!type) return true;
+  const value = (type[1] ?? type[2] ?? type[3] ?? '').trim().toLowerCase();
+  if (!value || value === 'module') return true;
+  return value === 'text/javascript' || value === 'application/javascript'
+    || value === 'text/ecmascript' || value === 'application/ecmascript'
+    || value.endsWith('/javascript') || value.endsWith('/ecmascript');
+}
+
+/**
+ * Idempotency is valid only for an executable script inside the real head.
+ * A substring in a comment, template, JSON-LD block, or body must not make us
+ * skip injection: the data/image directories may be deleted immediately after
+ * this pass, so a false positive here turns into a runtime 404.
+ */
+function hasExecutableCdnBaseMarker(html, head) {
+  let cursor = head.start;
+  while (cursor < head.end) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0 || start >= head.end) return false;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0 || afterComment > head.end) return false;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    const tagEnd = tag.end + 1;
+    if (tagEnd > head.end) return false;
+    if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(html, tagEnd);
+      if (afterTemplate < 0 || afterTemplate > head.end) return false;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      if (rawName) {
+        const close = findRawTextClose(html, tagEnd, rawName);
+        if (!close || close.end > head.end) return false;
+        if (rawName === 'script' && isExecutableScriptTag(html, tag, start)
+          && html.slice(tagEnd, close.start).includes('__CDN_DATA_BASE__')) {
+          return true;
+        }
+        cursor = close.end;
+        continue;
+      }
+    }
+    cursor = tagEnd;
+  }
+  return false;
 }
 
 function log(msg) {
@@ -648,38 +725,31 @@ function offloadAll(distDir, cdnBase) {
     //     present whenever cdnBase is valid (this script only runs then).
     if (isHtml) {
       htmlSeen++;
-      if (out.includes('__CDN_DATA_BASE__')) {
-        injected++; // already present (idempotent re-run)
+      const activeHead = findActiveHeadContent(out);
+      if (!activeHead) {
+        injectionFailures.push(path.relative(distDir, fp));
+      } else if (hasExecutableCdnBaseMarker(out, activeHead)) {
+        injected++; // already present in the executable head (idempotent re-run)
       } else {
-        const activeHead = findActiveHeadContent(out);
-        if (activeHead) {
-          const headContent = out.slice(activeHead.start, activeHead.end);
-          const charsetEnd = findCharsetMetaEnd(headContent);
-          // HTML requires the encoding declaration near the start of <head>.
-          // Keep deploy-time hints after it; fall back to the old insertion
-          // point for unusual documents that do not declare a charset.
-          const at = charsetEnd >= 0
-            ? activeHead.start + charsetEnd
-            : activeHead.start;
-          // The hint comment above assumes the data CDN is a DISTINCT host
-          // from the asset CDN; when config points both at the same origin the
-          // build already ships this exact preconnect (asyncCssPlugin /
-          // template heads) and re-adding it duplicates the hint on every page
-          // (#3530). An existing preconnect also supersedes dns-prefetch, so
-          // only the data-base script tag is still required.
-          const tag = cdnOrigin && out.includes(`<link rel="preconnect" href="${cdnOrigin}"`)
-            ? injectTag.replace(hintTags, '')
-            : injectTag;
-          out = out.slice(0, at) + tag + out.slice(at);
-          injected++;
-        } else {
-          // A single malformed page must not be hidden by the aggregate
-          // injected count from all other pages. Its runtime image/data
-          // requests would still resolve same-origin, so deleting the local
-          // payload would turn that page into a 404 surface.
-          injectionFailures.push(path.relative(distDir, fp));
-        }
-        // no <head>: leave it (its SPA fetch degrades gracefully)
+        const headContent = out.slice(activeHead.start, activeHead.end);
+        const charsetEnd = findCharsetMetaEnd(headContent);
+        // HTML requires the encoding declaration near the start of <head>.
+        // Keep deploy-time hints after it; fall back to the old insertion
+        // point for unusual documents that do not declare a charset.
+        const at = charsetEnd >= 0
+          ? activeHead.start + charsetEnd
+          : activeHead.start;
+        // The hint comment above assumes the data CDN is a DISTINCT host
+        // from the asset CDN; when config points both at the same origin the
+        // build already ships this exact preconnect (asyncCssPlugin /
+        // template heads) and re-adding it duplicates the hint on every page
+        // (#3530). An existing preconnect also supersedes dns-prefetch, so
+        // only the data-base script tag is still required.
+        const tag = cdnOrigin && out.includes(`<link rel="preconnect" href="${cdnOrigin}"`)
+          ? injectTag.replace(hintTags, '')
+          : injectTag;
+        out = out.slice(0, at) + tag + out.slice(at);
+        injected++;
       }
     }
 

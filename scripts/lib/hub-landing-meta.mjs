@@ -22,7 +22,14 @@ function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-const HEAD_RAW_TEXT_TAGS = ['script', 'style', 'textarea', 'title'];
+const HTML_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const HEAD_RAW_TEXT_TAGS = [
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+];
 
 function isHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
@@ -91,11 +98,13 @@ function readTag(html, start) {
   if (end < 0) return null;
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
+  const name = html.slice(nameStart, i).toLowerCase();
   return {
     closing,
     end,
-    name: html.slice(nameStart, i).toLowerCase(),
-    selfClosing: !closing && isSelfClosingStartTag(html, i, end),
+    name,
+    selfClosing: !closing && HTML_VOID_ELEMENTS.has(name)
+      && isSelfClosingStartTag(html, i, end),
   };
 }
 

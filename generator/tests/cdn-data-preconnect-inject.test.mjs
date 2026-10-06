@@ -99,7 +99,11 @@ test('keeps CDN payloads when one HTML page has no active head', () => {
       '<!doctype html><html><head><meta charset="utf-8"><title>Articolo</title></head></html>',
       'utf8',
     );
-    fs.writeFileSync(path.join(dist, 'broken', 'index.html'), '<!doctype html><html><body>senza head</body></html>', 'utf8');
+    fs.writeFileSync(
+      path.join(dist, 'broken', 'index.html'),
+      '<!doctype html><html><body><!-- window.__CDN_DATA_BASE__=\"https://stale.example\" -->senza head</body></html>',
+      'utf8',
+    );
     fs.writeFileSync(path.join(dist, 'data', 'keep.json'), '{}', 'utf8');
     fs.writeFileSync(path.join(dist, 'images', 'brands', 'logo.webp'), 'asset', 'utf8');
 

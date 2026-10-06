@@ -7425,6 +7425,205 @@ function visibleTextLength(html) {
     .trim().length;
 }
 
+// A literal `</head>` inside JSON-LD, JavaScript, or a nested template is
+// text, not the document boundary. Keep this small scanner local to the
+// source-page isolation path: it only returns the first real head block and
+// deliberately fails closed when a raw block is unterminated.
+const SOURCE_HTML_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const SOURCE_HTML_RAW_TEXT_ELEMENTS = new Set([
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+]);
+
+function sourceHtmlWhitespace(char) {
+  return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
+}
+
+function sourceFindTagEnd(html, start) {
+  let quote = '';
+  for (let index = start + 1; index < html.length; index += 1) {
+    const char = html[index];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '>') {
+      return index;
+    }
+  }
+  return -1;
+}
+
+function sourceIsSelfClosingStartTag(html, nameEnd, end) {
+  let index = nameEnd;
+  while (index < end) {
+    while (index < end && sourceHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    if (html[index] === '/') return index + 1 === end;
+    while (
+      index < end &&
+      !sourceHtmlWhitespace(html[index]) &&
+      html[index] !== '=' &&
+      html[index] !== '/' &&
+      html[index] !== '>'
+    ) index += 1;
+    if (html[index] !== '=') continue;
+    index += 1;
+    while (index < end && sourceHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    const quote = html[index];
+    if (quote === '"' || quote === "'") {
+      index += 1;
+      while (index < end && html[index] !== quote) index += 1;
+      if (index >= end) return false;
+      index += 1;
+      continue;
+    }
+    while (index < end && !sourceHtmlWhitespace(html[index]) && html[index] !== '>') index += 1;
+  }
+  return false;
+}
+
+function sourceReadTag(html, start) {
+  if (html[start] !== '<') return null;
+  const closing = html[start + 1] === '/';
+  const nameStart = start + (closing ? 2 : 1);
+  const match = /^[A-Za-z][A-Za-z0-9:_-]*/.exec(html.slice(nameStart));
+  if (!match) return null;
+  const nameEnd = nameStart + match[0].length;
+  const boundary = html[nameEnd] ?? '';
+  if (boundary && !/[\s/>]/.test(boundary)) return null;
+  const end = sourceFindTagEnd(html, start);
+  if (end < 0) return null;
+  const name = match[0].toLowerCase();
+  return {
+    closing,
+    end,
+    name,
+    selfClosing: !closing && SOURCE_HTML_VOID_ELEMENTS.has(name)
+      && sourceIsSelfClosingStartTag(html, nameEnd, end),
+  };
+}
+
+function sourceSkipComment(html, start) {
+  const end = html.indexOf('-->', start + 4);
+  return end < 0 ? -1 : end + 3;
+}
+
+function sourceFindRawTextClose(html, afterOpening, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = afterOpening;
+  const match = closing.exec(html);
+  return match ? match.index + match[0].length : -1;
+}
+
+function sourceSkipTemplate(html, afterOpening) {
+  let depth = 1;
+  let cursor = afterOpening;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = sourceSkipComment(html, start);
+      if (afterComment < 0) return -1;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = sourceReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.name === 'template') {
+      if (tag.closing) {
+        depth -= 1;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth += 1;
+      }
+    } else if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+      const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return -1;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return -1;
+}
+
+function findActiveSourceHead(html) {
+  let cursor = 0;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = sourceSkipComment(html, start);
+      if (afterComment < 0) return null;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = sourceReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && tag.name === 'template') {
+      const afterTemplate = sourceSkipTemplate(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(tag.name)) {
+      const afterRawText = sourceFindRawTextClose(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return null;
+      cursor = afterRawText;
+      continue;
+    }
+    if (!tag.closing && tag.name === 'head') {
+      const headStart = start;
+      let inside = tag.end + 1;
+      while (inside < html.length) {
+        const nestedStart = html.indexOf('<', inside);
+        if (nestedStart < 0) return null;
+        if (html.startsWith('<!--', nestedStart)) {
+          const afterComment = sourceSkipComment(html, nestedStart);
+          if (afterComment < 0) return null;
+          inside = afterComment;
+          continue;
+        }
+        const nested = sourceReadTag(html, nestedStart);
+        if (!nested) {
+          inside = nestedStart + 1;
+          continue;
+        }
+        if (nested.closing && nested.name === 'head') {
+          return { start: headStart, end: nested.end + 1 };
+        }
+        if (!nested.closing && !nested.selfClosing && nested.name === 'template') {
+          const afterTemplate = sourceSkipTemplate(html, nested.end + 1);
+          if (afterTemplate < 0) return null;
+          inside = afterTemplate;
+          continue;
+        }
+        if (!nested.closing && !nested.selfClosing && SOURCE_HTML_RAW_TEXT_ELEMENTS.has(nested.name)) {
+          const afterRawText = sourceFindRawTextClose(html, nested.end + 1, nested.name);
+          if (afterRawText < 0) return null;
+          inside = afterRawText;
+          continue;
+        }
+        inside = nested.end + 1;
+      }
+      return null;
+    }
+    cursor = tag.end + 1;
+  }
+  return null;
+}
+
 /**
  * Blocco `<tag>…</tag>` di primo livello piu' lungo, con conteggio della
  * profondita' — una regex greedy prenderebbe dal primo `<article>` all'ultimo
@@ -7498,8 +7697,8 @@ export function isolateMainSourceHtml(html) {
   }
   if (!chosen) return { html: src, root: 'none', isolated: false };
 
-  const headMatch = src.match(/<head\b[^>]*>[\s\S]*?<\/head>/i);
-  const head = headMatch ? headMatch[0] : '';
+  const headBounds = findActiveSourceHead(src);
+  const head = headBounds ? src.slice(headBounds.start, headBounds.end) : '';
   // I blocchi JSON-LD stanno tanto in <head> quanto in fondo a <body>: si
   // riportano tutti quelli che NON sono gia' dentro cio' che si conserva,
   // perche' `articleBody` e' il ramo migliore dell'estrattore e perderlo
