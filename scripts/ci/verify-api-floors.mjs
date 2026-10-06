@@ -59,6 +59,7 @@ import {
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
 // alzerebbe la misura sopra il pavimento mascherando un feed troncato.
 import { countXmlTags } from '../lib/count-xml-tags.mjs';
+import { seoChunkSources } from '../lib/engine-corpus-view.mjs';
 import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -632,9 +633,12 @@ export async function expectFromCorpus(root) {
       previousFeedSources[section.id] = null;
       continue;
     }
-    feedSources[section.id] = countSeoEntries(root, section.seoFiles);
-    latestSeoPublications[section.id] = latestSeoPublication(root, section.seoFiles);
-    if (revision === null) {
+    // I chunk SEO dove stanno nel corpus: per una sezione cantonale non sono in
+    // content/seo col nome dell'engine ma nella cartella della sezione.
+    const seo = seoChunkSources(section);
+    feedSources[section.id] = countSeoEntries(root, seo.files, seo.seoDir);
+    latestSeoPublications[section.id] = latestSeoPublication(root, seo.files, seo.seoDir);
+    if (revision === null || !seo.historyComparable) {
       previousFeedSources[section.id] = null;
       continue;
     }

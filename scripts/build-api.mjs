@@ -37,6 +37,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import os from 'node:os';
 import { execSync } from 'node:child_process';
 import { buildSectionFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
@@ -119,6 +120,8 @@ import {
   validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
+// Il corpus nel layout dell'engine, per i feed delle sezioni di famiglia.
+import { createEngineCorpusView, engineViewRssLayout } from './lib/engine-corpus-view.mjs';
 // Allowlist dei campi pubblici di articles.json / swiss-articles.json.
 import { toPublicRegistryEntry } from './lib/registry-api-entry.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
@@ -760,25 +763,40 @@ console.log(
 // pins both halves of that.
 //
 // Una chiamata PER SEZIONE (e' cio' che `buildAllRssFeeds` fa, sezione per
-// sezione) invece di una sola con un layout unico: il layout non e' lo stesso
-// per tutte. Per le due storiche `sectionRssLayout` vale quello di sempre
-// (`content/seo`, `content`, mappa slug in `content/`), quindi i loro feed sono
-// byte-identici; una sezione cantonale ha la mappa slug nella SUA cartella.
-const rssSections = RSS_SECTIONS.map((section) =>
-  buildSectionFeeds({
-    fs,
-    path,
-    rootDir: ROOT,
-    section,
-    registry: SECTION_REGISTRIES[section.id] ?? [],
-    layout: sectionRssLayout(section.id),
-    // Il corpus e' il produttore REALE dei feed: il sito chiama l'engine solo
-    // dai test. Se questa riga manca, la riparazione della coda resta inerte
-    // in produzione dietro una CI verde del sito — la stessa forma
-    // dell'incidente SiteShellContract.
-    repairSerpSnippet,
-  }),
-);
+// sezione) invece di una sola con un layout unico, perche' radice e layout non
+// sono gli stessi per tutte:
+//   - le due storiche si leggono dalla radice del repo col layout di sempre
+//     (`sectionRssLayout`: `content/seo`, `content`, mappa slug in `content/`),
+//     quindi i loro feed sono byte-identici;
+//   - una sezione di famiglia (cantonale) si legge attraverso la VISTA nel
+//     layout dell'engine (scripts/lib/engine-corpus-view.mjs): la sua mappa
+//     slug sta nella sua cartella, e il suo chunk SEO ha nel corpus un nome
+//     (`content/cantons/<id>/seo.ts`) diverso da quello che l'engine cerca
+//     (`seo-blog-<id>.ts`). Senza la vista il feed uscirebbe senza item, o con
+//     gli id al posto degli slug nei link.
+const familyRssView = API_FAMILIES.length ? createEngineCorpusView(ROOT, process.env.RUNNER_TEMP || os.tmpdir()) : null;
+let rssSections;
+try {
+  rssSections = RSS_SECTIONS.map((section) => {
+    const published = PUBLISHED_BY_SECTION[section.id];
+    const viaView = Boolean(familyRssView && published?.api.family !== null);
+    return buildSectionFeeds({
+      fs,
+      path,
+      rootDir: viaView ? familyRssView : ROOT,
+      section,
+      registry: SECTION_REGISTRIES[section.id] ?? [],
+      layout: viaView ? engineViewRssLayout(published.slugFile) : sectionRssLayout(section.id),
+      // Il corpus e' il produttore REALE dei feed: il sito chiama l'engine solo
+      // dai test. Se questa riga manca, la riparazione della coda resta inerte
+      // in produzione dietro una CI verde del sito — la stessa forma
+      // dell'incidente SiteShellContract.
+      repairSerpSnippet,
+    });
+  });
+} finally {
+  if (familyRssView) fs.rmSync(familyRssView, { recursive: true, force: true });
+}
 // La mappa slug che il feed ha letto deve essere quella che questo script ha
 // emesso in slugs.json: se l'engine ne trova un'altra (o nessuna) i link dei
 // feed ricadono sugli id grezzi, e il feed resta «valido». Per le sezioni di

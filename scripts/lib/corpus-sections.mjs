@@ -228,15 +228,12 @@ export function sectionApiSurfaces(id) {
 }
 
 /**
- * Il layout del corpus che `engine/rssFeeds.mjs` deve usare per UNA sezione.
- * L'engine risolve la mappa slug come `<slugDir>/<basename del file slug>`: per
- * le due sezioni storiche la cartella e' `content` (routerBlogData.ts,
- * routerSwissData.ts), per una sezione cantonale e' la SUA cartella
- * (`content/cantons/<id>/slugs.ts`). Un solo layout per tutte, com'era prima
- * delle famiglie, farebbe cercare `content/slugs.ts`: i feed cantonali
- * uscirebbero con gli id al posto degli slug nei link, senza un errore.
- * Il chunk SEO sta per tutte in `content/seo` (`seo-blog-<sezione>.ts` per le
- * cantonali: e' dove lo scrive create-article e dove lo legge l'engine).
+ * Il layout del corpus che `engine/rssFeeds.mjs` usa per una sezione con
+ * superficie PROPRIA, letto direttamente dalla radice del repo: chunk SEO in
+ * `content/seo`, meta e corpi in `content`, mappa slug in `content/`. E' il
+ * layout di sempre delle due sezioni storiche. Le sezioni di famiglia non
+ * passano di qui: il loro chunk SEO ha un altro nome nel corpus, e si leggono
+ * attraverso la vista di scripts/lib/engine-corpus-view.mjs.
  */
 export function sectionRssLayout(id) {
   const source = sectionSourceSurfaces(id);

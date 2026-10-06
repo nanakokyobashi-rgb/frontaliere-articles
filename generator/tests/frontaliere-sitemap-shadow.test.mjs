@@ -248,7 +248,7 @@ test('build-api.mjs passes the UNFILTERED registries to the RSS builder and to t
   // Since P7 the feeds are built one section at a time (the corpus layout is
   // per section: a canton keeps its slug map in its own folder), through the
   // same engine function `buildAllRssFeeds` maps over.
-  const rssCall = src.match(/buildSectionFeeds\(\{[\s\S]*?\n  \}\),\n\);/);
+  const rssCall = src.match(/buildSectionFeeds\(\{[\s\S]*?\n    \}\);/);
   assert.ok(rssCall, 'could not find the buildSectionFeeds({...}) call to inspect');
   // Since C1 the registries are keyed by the core's section ids; each one is
   // the module export as loaded, with no filter between the load and here.

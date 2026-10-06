@@ -167,7 +167,7 @@ test('gli argomenti di rebase coprono ogni file scritto, con la strategia giusta
   assert.deepEqual(after('--merge-registry').sort(), [
     'content/cantons/canton-ti/registry.ts',
     'content/cantons/canton-ti/slugs.ts',
-    'content/seo/seo-blog-canton-ti.ts',
+    'content/cantons/canton-ti/seo.ts',
     'content/blog-meta-canton-ti-it.ts',
     'content/blog-meta-canton-ti-en.ts',
     'content/blog-meta-canton-ti-de.ts',

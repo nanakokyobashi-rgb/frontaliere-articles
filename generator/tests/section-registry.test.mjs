@@ -78,6 +78,13 @@ import {
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import { isNewFamilySection } from '../../scripts/lib/corpus-floors.mjs';
+import {
+  cantonSeoSourceFile,
+  createEngineCorpusView,
+  engineSeoChunkName,
+  engineViewRssLayout,
+  seoChunkSources,
+} from '../../scripts/lib/engine-corpus-view.mjs';
 import { floorViolations } from '../../scripts/ci/verify-api-floors.mjs';
 import {
   declaredFiles,
@@ -379,22 +386,66 @@ test('corpus-sections: la famiglia canton ha nomi aggregati, le storiche restano
     ['CANTON_ARTICLES', 'CANTON_SLUGS', null, 'CANTON_SLUG_FALLBACK_REASONS']);
 });
 
-test('RSS: ogni sezione ha il SUO layout — una cantonale legge la mappa slug dalla propria cartella', () => {
-  // Le storiche: il layout di sempre, quindi feed byte-identici.
+test('RSS: le storiche dalla radice col layout di sempre; una cantonale attraverso la vista nel layout dell\'engine', () => {
   for (const id of ['frontaliere', 'svizzera']) {
     assert.deepEqual(sectionRssLayout(id), { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' });
   }
   // L'engine risolve `<slugDir>/<basename del file slug>`: per canton-ti deve cadere sul file vero.
-  const layout = sectionRssLayout('canton-ti');
-  assert.deepEqual(layout, { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content/cantons/canton-ti' });
-  assert.equal(path.join(layout.slugDir, path.basename(sectionSourceSurfaces('canton-ti').slugFile)), 'content/cantons/canton-ti/slugs.ts');
+  const slugFile = sectionSourceSurfaces('canton-ti').slugFile;
+  const layout = engineViewRssLayout(slugFile);
+  assert.deepEqual(layout, { seoDir: 'services/seo', localesDir: 'services/locales', slugDir: 'content/cantons/canton-ti' });
+  assert.equal(path.join(layout.slugDir, path.basename(slugFile)), 'content/cantons/canton-ti/slugs.ts');
   assert.match(readFileSync(path.join(ROOT, 'engine/rssFeeds.mjs'), 'utf8'), /return path\.join\(slugDir, path\.basename\(slugFile\)\);/);
-  // Il chunk SEO: create-article lo scrive dove l'engine (articoli e RSS) lo legge.
-  assert.match(readFileSync(path.join(ROOT, 'generator/scripts/lib/canton-section-profile.mjs'), 'utf8'), /seoFile: `services\/seo\/seo-blog-\$\{section\}\.ts`,/);
-  assert.match(readFileSync(path.join(ROOT, 'engine/rssFeeds.mjs'), 'utf8'), /seo-blog-\$\{core\.section\}\.ts/);
-  // E build-api rifiuta un feed di famiglia che ha letto una mappa slug diversa da quella pubblicata.
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /rootDir: viaView \? familyRssView : ROOT,/);
+  assert.match(build, /layout: viaView \? engineViewRssLayout\(published\.slugFile\) : sectionRssLayout\(section\.id\),/);
+  // E build-api rifiuta un feed di famiglia che ha letto una mappa slug diversa da quella pubblicata.
   assert.match(build, /if \(section\.slugCount !== emitted\) \{\s+throw new Error\(/);
+});
+
+test('vista del corpus nel layout dell\'engine: il chunk SEO cantonale ha il nome che l\'engine cerca', () => {
+  // I due nomi dello stesso file: dove create-article lo scrive, come l'engine lo cerca.
+  assert.equal(cantonSeoSourceFile('canton-ti'), 'content/cantons/canton-ti/seo.ts');
+  assert.equal(engineSeoChunkName('canton-ti'), 'seo-blog-canton-ti.ts');
+  const generator = path.join(ROOT, 'generator/scripts/lib/canton-section-profile.mjs');
+  if (existsSync(generator)) assert.ok(readFileSync(generator, 'utf8').includes('seoFile: `packages/articles/content/cantons/${section}/seo.ts`'));
+  assert.ok(readFileSync(path.join(ROOT, 'engine/shared/articleSectionDescriptors.ts'), 'utf8').includes('seoFiles: [`services/seo/seo-blog-${core.section}.ts`]'));
+
+  const root = mkdtempSync(path.join(tmpdir(), 'view-root-'));
+  for (const [rel, body] of [
+    ['content/seo/seo-blog-ch.ts', 'ch'],
+    ['content/cantons/canton-ti/seo.ts', 'ti'],
+    ['content/cantons/canton-ti/slugs.ts', 'slugs'],
+    ['content/blog-meta-canton-ti-it.ts', 'meta'],
+    ['engine/x.mjs', 'engine'],
+    ['services/routerSwissData.ts', 'router'],
+    ['scripts/a.mjs', 'script'],
+  ]) {
+    mkdirSync(path.dirname(path.join(root, rel)), { recursive: true });
+    writeFileSync(path.join(root, rel), body);
+  }
+  mkdirSync(path.join(root, '.git'));
+  const view = createEngineCorpusView(root, mkdtempSync(path.join(tmpdir(), 'view-')));
+  try {
+    const at = (rel) => readFileSync(path.join(view, rel), 'utf8');
+    assert.equal(at('services/seo/seo-blog-canton-ti.ts'), 'ti', 'il nome dell\'engine cade sul chunk scritto da create-article');
+    assert.equal(at('services/seo/seo-blog-ch.ts'), 'ch');
+    assert.equal(at('services/locales/blog-meta-canton-ti-it.ts'), 'meta');
+    assert.equal(at('packages/articles/content/cantons/canton-ti/slugs.ts'), 'slugs');
+    assert.equal(at('content/cantons/canton-ti/slugs.ts'), 'slugs');
+    assert.equal(at('services/routerSwissData.ts'), 'router');
+    assert.equal(at('packages/articles/engine/x.mjs'), 'engine');
+    assert.ok(!existsSync(path.join(view, '.git')));
+    // Una sezione senza chunk non ha un alias penzolante.
+    assert.ok(!existsSync(path.join(view, 'services/seo/seo-blog-canton-gr.ts')));
+  } finally {
+    rmSync(view, { recursive: true, force: true });
+  }
+  assert.equal(readFileSync(path.join(root, 'content/cantons/canton-ti/seo.ts'), 'utf8'), 'ti', 'rimuovere la vista non tocca il corpus');
+  // I pavimenti contano i chunk dove stanno nel corpus.
+  assert.deepEqual(seoChunkSources({ id: 'canton-ti', seoFiles: ['seo-blog-canton-ti.ts'] }), { seoDir: 'content/cantons/canton-ti', files: ['seo.ts'], historyComparable: false });
+  assert.deepEqual(seoChunkSources({ id: 'svizzera', seoFiles: ['seo-blog-ch.ts'] }), { seoDir: 'content/seo', files: ['seo-blog-ch.ts'], historyComparable: true });
+  assert.match(readFileSync(path.join(ROOT, 'scripts/ci/verify-api-floors.mjs'), 'utf8'), /countSeoEntries\(root, seo\.files, seo\.seoDir\)/);
 });
 
 test('corpus-sections: gli export dichiarati coincidono con quelli che create-article scrive (P6b)', async (t) => {
