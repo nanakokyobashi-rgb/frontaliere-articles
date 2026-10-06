@@ -220,6 +220,7 @@ function runScan({
     const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
     const fixGitFetchError = path.join(dir, 'git-fetch-error');
+    const fixLiveReads = path.join(dir, 'live-reads');
     const fixMergeTreeState = path.join(dir, 'merge-tree-state');
     const normalizedComments = posted.map((comment, index) => ({
       id: Number.isSafeInteger(Number(comment?.id)) && Number(comment.id) > 0 ? Number(comment.id) : index + 1,
@@ -248,6 +249,7 @@ function runScan({
     writeFileSync(fixReviewsMalformed, reviewsMalformed ? 'true' : 'false');
     writeFileSync(fixCommentsMalformed, commentsMalformed ? 'true' : 'false');
     writeFileSync(fixGitFetchError, gitFetchError ? 'true' : 'false');
+    writeFileSync(fixLiveReads, '');
     writeFileSync(fixMergeTreeState, String(prs?.[0]?.mergeable || 'UNKNOWN'));
     const fixMergeTreeSecond = path.join(dir, 'merge-tree-second');
     const fixMergeTreeCalls = path.join(dir, 'merge-tree-calls');
@@ -343,10 +345,12 @@ case "$sub" in
         if [ "$jq" = '.head.sha' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.head?.sha||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [[ "$jq" == *"@tsv"* ]]; then
-          # Rilettura della classe F subito prima della mutation: lo stato
-          # CORRENTE della PR. _live nella fixture simula ciò che è cambiato
-          # fra la prova e la label; _liveError una lettura fallita.
-          node -e 'const value=require(process.argv[1]); const fs=require("fs"); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const counter=process.argv[2]; fs.appendFileSync(counter,"x"); const second=fs.readFileSync(counter,"utf8").length>1; const pr={...base,...(base?._live||{}),...(second?(base?._liveSecond||{}):{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"-", pr.head?.ref||"-", String(Boolean(pr.draft)), pr.mergeable_state||"unknown", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)} ${JSON.stringify(path.join(dir, 'live-reads'))}
+          # Rilettura della classe F: lo stato CORRENTE della PR. _live nella
+          # fixture simula ciò che è cambiato fra la prima prova e la seconda;
+          # _liveSecond e _liveAfterSecondProof simulano il cambio arrivato
+          # alla rilettura dopo la seconda prova, che il secondo gate deve
+          # bloccare; _liveError simula una lettura fallita.
+          node -e 'const value=require(process.argv[1]); const fs=require("fs"); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const counter=process.argv[2]; fs.appendFileSync(counter,"x"); const second=fs.readFileSync(counter,"utf8").length>1; const pr={...base,...(base?._live||{}),...(second?(base?._liveSecond||{}):{}),...(second?(base?._liveAfterSecondProof||{}):{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"-", pr.head?.ref||"-", String(Boolean(pr.draft)), pr.mergeable_state||"unknown", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)} ${JSON.stringify(fixLiveReads)}
         elif [ "$jq" = '.mergeable_state // ""' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; if (pr?.mergeable_state === "__error__") process.exit(1); process.stdout.write(String(pr?.mergeable_state||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.body // ""' ]; then
@@ -1300,6 +1304,25 @@ test('F — un veto o un push arrivati DURANTE la seconda prova: nessuna mutatio
   // Senza cambiamenti le due riletture concordano e la classe scatta.
   const steady = runScan({ prs: conflicted(), ...greenLgtm() });
   assert.deepEqual(steady.labeled, [901], steady.stdout);
+});
+
+test('F — un cambio dopo la seconda prova blocca label e commento', opts, () => {
+  // La prima rilettura e il secondo merge-tree possono essere entrambi validi,
+  // ma un workflow concorrente può ancora aggiungere un veto o cambiare il
+  // record prima della mutation. Il gate finale deve leggere la PR e le label
+  // dopo la prova, non affidarsi al record letto prima di essa.
+  for (const [what, live] of [
+    ['needs-human arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'needs-human' }] }],
+    ['agent:resolving-conflict arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'agent:resolving-conflict' }] }],
+    ['HEAD cambiata nel frattempo', { head: { ref: 'fix/qualcosa', sha: OLD_SHA } }],
+    ['base cambiata nel frattempo', { base: { ref: 'release/2026-10' } }],
+    ['PR chiusa nel frattempo', { state: 'closed' }],
+    ['conflitto rientrato nel frattempo', { mergeable_state: 'clean' }],
+  ]) {
+    const r = runScan({ prs: conflicted([], { _liveAfterSecondProof: live }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `${what}: label applicata dopo una rilettura non più valida\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], `${what}: commento pubblicato dopo una rilettura non più valida\n${r.stdout}`);
+  }
 });
 
 test('F — la label si decide sulle label RILETTE, non sullo snapshot', opts, () => {

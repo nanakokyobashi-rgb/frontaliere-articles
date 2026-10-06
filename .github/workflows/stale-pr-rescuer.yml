@@ -515,26 +515,26 @@ jobs:
               MARKER="<!-- stale-pr-rescuer class=F head=${HEAD:0:7} -->"
               echo "::warning::PR #$N FERMA — $REASON"
               if [ "${DRY_RUN:-false}" = "true" ]; then echo "(dry-run) nessuna azione su PR #$N"; continue; fi
-              # Rilettura subito prima della mutation, e DOPO di lei la prova.
               # Fra la prima prova e la label passano secondi in cui tutto può
               # cambiare: un push porta una HEAD nuova, main si muove e il
               # conflitto rientra, la PR diventa draft o perde la provenienza
-              # del ciclo, un altro workflow toglie `stale-review`. Quindi:
-              #   1. si rilegge il record intero e si pretende che sia ancora
-              #      una PR del ciclo, aperta, non draft, sulla stessa HEAD,
-              #      verso main, `dirty`, con `has-conflicts` e senza
-              #      `needs-human`;
-              #   2. si rifà fetch + merge-tree su quella stessa HEAD: è questa
-              #      seconda prova, l'ultima cosa prima della label, ad
-              #      autorizzarla — non lo stato di GitHub, che è una cache;
-              #   3. la label si decide sulle label RILETTE, non sullo snapshot
-              #      iniziale, e se l'add fallisce non si commenta.
-              # Lettura fallita o qualunque differenza → PR invariata.
+              # del ciclo, un altro workflow toglie `stale-review` o aggiunge un
+              # veto. Quindi la stessa rilettura completa viene usata due volte:
+              #   1. prima della seconda prova, per legare il fetch + merge-tree
+              #      alla PR ancora aperta, non draft, sulla stessa HEAD, verso
+              #      main, `dirty`, con `has-conflicts` e senza veto;
+              #   2. DOPO la seconda prova e immediatamente prima della label,
+              #      con gli stessi vincoli e le label correnti: la prova non
+              #      autorizza una mutation su uno stato ormai diverso.
+              # La label si decide sulle label RILETTE, non sullo snapshot
+              # iniziale, e se l'add fallisce non si commenta. Lettura fallita o
+              # qualunque differenza → PR invariata.
               # Nessun campo intermedio vuoto: `read` con IFS=tab li fonderebbe.
               # Una rilettura completa della PR: imposta F_LIVE_* e F_LIVE_OK.
               # In funzione perché serve DUE volte (vedi sotto).
               f_reread_live() {
                 F_LIVE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '[.state, .head.sha, .base.ref, .head.ref, (.draft | tostring), (if (.mergeable_state // "") == "" then "unknown" else .mergeable_state end), ([.labels[]?.name] | join(","))] | @tsv' 2>/dev/null || true)
+                F_LIVE_STATE= F_LIVE_HEAD= F_LIVE_BASE= F_LIVE_BRANCH= F_LIVE_DRAFT= F_LIVE_MERGEABLE= F_LIVE_LABELS=
                 IFS=$'\t' read -r F_LIVE_STATE F_LIVE_HEAD F_LIVE_BASE F_LIVE_BRANCH F_LIVE_DRAFT F_LIVE_MERGEABLE F_LIVE_LABELS <<<"$F_LIVE" || true
                 F_LIVE_OK=true
                 [ "${F_LIVE_STATE:-}" = "open" ] || F_LIVE_OK=false
