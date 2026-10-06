@@ -26,6 +26,7 @@
  * Uso:  node scripts/ci/verify-api-floors.mjs [--dist dist/api]
  * Esce 1 elencando ogni violazione; 0 e un riepilogo se tutto regge.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';

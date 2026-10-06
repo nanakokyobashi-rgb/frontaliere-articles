@@ -1,3 +1,5 @@
+import './cantonSectionsBootstrap.mjs';
+
 /**
  * SiteShellContract implementation for THIS repository acting as its own host.
  *

@@ -16,6 +16,7 @@
  *     create-article riconoscono come «primo articolo»;
  *   - il profilo di ammissione e i testi di prompt del cantone.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

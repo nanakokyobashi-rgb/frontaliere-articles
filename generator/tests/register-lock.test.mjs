@@ -29,6 +29,7 @@
  * vedi AGENTS.md). E' esattamente il motivo per cui il meccanismo vive in un
  * modulo proprio.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

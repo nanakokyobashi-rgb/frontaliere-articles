@@ -10,6 +10,7 @@
  * The probe classified them with jsdom; the dependency-free sanitiser must
  * reach the same verdicts, file by file — not just the same totals.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

@@ -59,6 +59,7 @@
  * plus a JSON line per page so the workflow log carries what moved.
  */
 
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 // The third article surface this repo writes, and the third that interpolates

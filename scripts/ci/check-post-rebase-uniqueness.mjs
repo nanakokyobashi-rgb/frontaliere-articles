@@ -54,19 +54,21 @@
  *
  * ── Le sezioni vengono dal core ────────────────────────────────────────────
  *
- * Registro e mappa slug di ogni sezione si derivano da `ARTICLE_SECTION_CORE_LIST`
- * (+ `corpusPath`), il ledger URL→id da `SECTIONS` di `article-surfaces.mjs`.
+ * Registro e mappa slug di ogni sezione si derivano dalla lista attiva fornita
+ * dal bootstrap corpus (+ `corpusPath`), il ledger URL→id da `SECTIONS` di
+ * `article-surfaces.mjs`.
  * Nessun elenco scritto qui: una sezione nuova nel core e' controllata da sola,
  * e una sezione nel core senza ledger dichiarato e' un ERRORE, non una sezione
  * saltata in silenzio.
  *
  * Solo builtin Node, come ogni script di `scripts/ci/`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
 import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
+import { activeCorpusCoreEntries } from '../lib/corpus-sections.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry } from '../../generator/scripts/lib/source-url-ledger.mjs';
@@ -98,7 +100,7 @@ export function registryIdsOf(src) {
  * @param {Record<string, {sourceLedger?: string}>} [surfaces]
  * @returns {Array<{section: string, registryFile: string, slugDataFile: string, sourceLedger: string}>}
  */
-export function sectionSurfaces(coreList = ARTICLE_SECTION_CORE_LIST, surfaces = SECTION_SURFACES) {
+export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces = SECTION_SURFACES) {
   if (!Array.isArray(coreList) || coreList.length === 0) {
     throw new Error('il core delle sezioni e\' vuoto: non c\'e\' niente su cui verificare l\'unicita\'');
   }

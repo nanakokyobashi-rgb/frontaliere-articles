@@ -18,6 +18,7 @@
  * one carrying the article — i.e. the exact failure the helper was written to
  * prevent, reintroduced by the helper.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';

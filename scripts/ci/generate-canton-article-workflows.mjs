@@ -51,6 +51,7 @@
  *
  * Solo builtin Node e moduli puri del corpus, come ogni script di `scripts/ci/`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { existsSync, readdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

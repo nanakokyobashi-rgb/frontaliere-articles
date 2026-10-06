@@ -20,6 +20,7 @@
  * infra/cloudflare-worker/locale-router.js del sito) sono provate sui casi che
  * il Worker documenta: il Worker e' uno script autonomo e non si importa da qui.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';

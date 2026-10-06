@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * engine-corpus-view.mjs — il corpus visto nel LAYOUT che l'engine legge.
  *

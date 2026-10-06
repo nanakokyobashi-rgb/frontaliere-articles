@@ -31,6 +31,7 @@
  * Lancia con:
  *   node --test generator/tests/retire-article-leftover-check.test.mjs
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';

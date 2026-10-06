@@ -6,6 +6,7 @@
  * Fixtures only, in temporary trees: the same checks on the REAL corpus are
  * the content gate `image-credits-content.test.mjs`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

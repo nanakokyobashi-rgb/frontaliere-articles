@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * corpus-floors.mjs — i pavimenti anti-troncamento, DERIVATI dal corpus.
  *

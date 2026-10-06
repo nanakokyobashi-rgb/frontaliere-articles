@@ -14,6 +14,7 @@
  *      di famiglia, errore esplicito dove la sua superficie non esiste ancora
  *      (API: P7, scritture di create-article: P6, shard Pages: mai).
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';

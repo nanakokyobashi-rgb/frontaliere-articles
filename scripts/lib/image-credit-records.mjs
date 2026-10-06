@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * image-credit-records.mjs — the credit records of the Commons covers as the
  * corpus holds them, and what the rest of the corpus says about them (P14).

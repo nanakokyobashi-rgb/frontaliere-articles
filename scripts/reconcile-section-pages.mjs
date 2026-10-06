@@ -33,6 +33,7 @@
  * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N]
  * Solo builtin Node: gira senza npm ci.
  */
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

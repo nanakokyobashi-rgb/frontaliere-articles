@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * Pure sitemap-XML builder shared by every active article section (frontaliere,
  * svizzera today, from the section core). Extracted out of scripts/build-api.mjs (issue #138 item 1) so it
@@ -17,7 +19,8 @@
  */
 
 import { isReservedPublishedSlug } from './published-slug-guard.mjs';
-import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { activeCorpusCoreMap } from './corpus-sections.mjs';
 
 export const SITE = 'https://frontaliereticino.ch';
 
@@ -37,7 +40,7 @@ export const xmlEsc = (s) =>
 // would have had no path here. IT lives at the apex, the other locales under
 // `/<locale>/` — the same rule the site router and `archiveBase` in build-api use.
 export const SECTION_PATHS = Object.freeze(Object.fromEntries(
-  Object.entries(ARTICLE_SECTION_CORE).map(([section, core]) => [
+  Object.entries(activeCorpusCoreMap()).map(([section, core]) => [
     section,
     Object.freeze(Object.fromEntries(
       Object.entries(core.indexSlug).map(([locale, slug]) => [

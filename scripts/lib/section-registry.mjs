@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * section-registry.mjs — il registro delle sezioni articolo pubblicate dal
  * corpus e servite dal Worker del sito (piano «sezioni articoli per cantone»,
@@ -56,8 +58,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { cantonHubCoverage } from './canton-hub-data.mjs';
+import { activeCorpusCoreMap } from './corpus-sections.mjs';
 
 export const SECTION_REGISTRY_FILE = 'sections/registry.json';
 export const SECTIONS_CATALOG_FILE = 'sections.json';
@@ -213,7 +216,7 @@ function sameSlugs(a, b) {
  * @param {unknown} doc
  * @param {{ all?: Record<string, any>, active?: Record<string, any>, missingHubsOf?: (id: string) => string[] }} [core]
  */
-export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE, missingHubsOf } = {}) {
+export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap(), missingHubsOf } = {}) {
   const errors = [];
   if (!isPlainObject(doc)) return ['il registro deve essere un oggetto JSON'];
   for (const key of Object.keys(doc)) if (!TOP_KEYS.has(key)) errors.push(`chiave sconosciuta "${key}" al livello superiore`);

@@ -10,6 +10,7 @@
  * nella forma che i lettori veri leggono (registro, mappa slug, meta).
  * L'engine (tassonomia e TF-IDF) e' quello VERO, caricato da `engine/`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

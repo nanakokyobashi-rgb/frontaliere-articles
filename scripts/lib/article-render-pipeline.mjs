@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * article-render-pipeline.mjs — la catena di render delle pagine articolo di
  * UNA sezione, estratta da scripts/publish-article-fast.mjs perche' la usino

@@ -63,6 +63,7 @@
  *        (3 files)
  */
 
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 // Same output-boundary guard build-api.mjs uses. This index is the LIST

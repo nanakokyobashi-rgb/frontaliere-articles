@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * canton-hub-data.mjs — i DATI degli hub tematici di una sezione cantonale,
  * letti dal publisher (scripts/publish-section-pages.mjs) e dal registro

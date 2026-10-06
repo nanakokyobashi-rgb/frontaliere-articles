@@ -88,6 +88,7 @@
  *
  * Uso: node scripts/publish-section-edge.mjs [--dist dist/api] [--dry-run]
  */
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';

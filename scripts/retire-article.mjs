@@ -45,6 +45,7 @@
  * scrivere le voci edge dall'altro lato.
  */
 
+import '../host/cantonSectionsBootstrap.mjs';
 import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

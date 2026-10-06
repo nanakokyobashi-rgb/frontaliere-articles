@@ -32,6 +32,7 @@
  * body2-expected-fields.test.mjs: create-article.mjs non è importabile dalle
  * gate del generatore (niente `npm ci`, niente jsdom).
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';

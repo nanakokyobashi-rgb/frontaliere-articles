@@ -48,13 +48,14 @@
  * Esce 1 se una pagina non passa la validazione, se un upload non e'
  * confermato o se il verify fallisce.
  */
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
@@ -65,7 +66,7 @@ import { sourceRegistryIds } from './lib/corpus-floors.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
-import { sectionSourceSurfaces } from './lib/corpus-sections.mjs';
+import { activeCorpusCoreMap, sectionSourceSurfaces } from './lib/corpus-sections.mjs';
 import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes, validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 
@@ -82,7 +83,7 @@ export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 
-export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE } = {}) {
+export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const out = { ids: [], bootstrap: false, publish: false, dryRun: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -119,7 +120,7 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = ARTIC
 }
 
 /** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
-export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = ARTICLE_SECTION_CORE } = {}) {
+export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const core = Object.prototype.hasOwnProperty.call(all, section) ? all[section] : undefined;
   if (!core) throw new Error(`sezione sconosciuta: "${section}"`);
   if (core.kind !== 'canton' || core.shardKey) {
