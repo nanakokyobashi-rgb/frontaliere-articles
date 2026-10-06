@@ -12661,6 +12661,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, Roxys Spürnase entdeckt Drogen: zwei Festnahmen',
     'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Einsatz der Carabinieri in Albate: 111 Gramm Kokain, Haschisch und 390 Euro beschlagnahmt. Zwei tunesische Staatsangehörige festgenommen, ein dritter angezeigt.',
     'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Drogenfahndung mit einem Deutschen Schäferhund in Lipomo',
+    'blog.article.incidente-monte-generoso-varese.title': 'Unfall in Varese nahe der Università dell\'Insubria',
+    'blog.article.incidente-monte-generoso-varese.excerpt': 'Ein Unfall wird in der Via Monte Generoso, Varese, nur einen Schritt von der Universität Insubria entfernt, gemeldet.',
+    'blog.article.incidente-monte-generoso-varese.imageAlt': 'Stadtstrasse nahe der Universität Insubria in Varese',
 };
 
 export default blogMetaDe;

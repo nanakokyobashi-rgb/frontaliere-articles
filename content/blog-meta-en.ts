@@ -12662,6 +12662,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, Roxy\'s keen nose uncovers drugs: two arrests',
     'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Carabinieri operation in Albate: 111 grams of cocaine, hashish and 390 euros seized. Two Tunisian citizens arrested, a third reported.',
     'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Drug operation with a German shepherd near an apartment building in Lipomo',
+    'blog.article.incidente-monte-generoso-varese.title': 'Accident in Varese near Università dell\'Insubria',
+    'blog.article.incidente-monte-generoso-varese.excerpt': 'An accident has been reported on Via Monte Generoso, in Varese, just a stone’s throw from the University of Insubria.',
+    'blog.article.incidente-monte-generoso-varese.imageAlt': 'Urban street near the University of Insubria in Varese',
 };
 
 export default blogMetaEn;
