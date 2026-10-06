@@ -80,7 +80,11 @@ export function loadDatasets(root = ROOT, log = () => {}) {
       if (key === 'events' && dataset && Array.isArray(dataset.events)) {
         // Gli hub e il digest pubblicano lo stesso testo: il confine di lettura
         // deve applicare la stessa sanitizzazione, senza perdere generatedAt.
-        out[key] = { ...dataset, events: sanitizeDatasetEvents(dataset.events).events };
+        const sanitized = sanitizeDatasetEvents(dataset.events);
+        out[key] = { ...dataset, events: sanitized.events };
+        if (sanitized.dropped) {
+          log(`::warning::[generate-canton-hubs] ${rel}: ${sanitized.dropped} evento/i senza titolo pubblicabile scartati alla lettura`);
+        }
       } else {
         out[key] = dataset;
       }
