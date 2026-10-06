@@ -12655,6 +12655,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: Konferenz über Löhne und Rechte, 10. Oktober',
     'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Samstag, 10. Oktober bei Varese die Konferenz "Gegründet auf der Arbeit" der italienischen Linken und der AHV: Zeitpläne, Referenten und Themen zu Prekarität und Kaufkraft.',
     'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Moderne Tagungshalle mit Wirtschaftsscreen und Blick auf die lombardischen Seen',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Krankenkassen: Anstieg um 5% und von Experten bewertete Vorschläge',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': '2027 steigt die Prämie um 5%. Drei Experten analysieren die staatliche Kasse, die Prävention und die Kosten: Im Tessin könnte ab 2029 die Hälfte der Bürger von Senkungen profitieren.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panorama über den Luganersee mit der Stadt im Hintergrund, Morgenlicht.',
 };
 
 export default blogMetaDe;

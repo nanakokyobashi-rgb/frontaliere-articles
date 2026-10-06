@@ -7787,6 +7787,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia cuts 34 jobs in five newsrooms',
     'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia eliminates 34 full-time positions, affecting 41 employees in the newsrooms in Zurich, Bern, Basel, Lausanne and Geneva.',
     'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Tamedia building with newsroom in Switzerland',
+    'blog.article.neutralita-svizzera-voto-costituzione.title': 'Swiss neutrality: constitutional tightening rejected',
+    'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'The Swiss people have confirmed the current interpretation of neutrality: the initiative for a stricter conception in the Constitution has been rejected.',
+    'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande in Bellinzona in an editorial scene about Swiss politics',
 };
 
 export default blogMetaChEn;

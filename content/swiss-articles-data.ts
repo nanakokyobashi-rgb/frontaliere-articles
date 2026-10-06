@@ -24596,6 +24596,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'neutralita-svizzera-voto-costituzione',
+    category: 'novita',
+    date: '2026-10-06T04:01:17.585Z',
+    image: '/images/blog/neutralita-svizzera-voto-costituzione.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

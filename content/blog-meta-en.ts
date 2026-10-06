@@ -12656,6 +12656,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: conference on wages and rights, October 10',
     'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Saturday, October 10 at Varese, the conference \'Fondata sul lavoro\' by Sinistra Italiana and AVS: times, speakers and topics on job insecurity and purchasing power.',
     'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Modern conference hall with economic data screen and view of Lombard lakes',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Health insurance funds: 5% increase and proposals evaluated by experts',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'In 2027, the premium will increase by 5%. Three experts analyze the state fund, prevention and costs: in Ticino, from 2029, half of citizens could benefit from reductions.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Panoramic view of Lake Lugano with the city in the background, morning light.',
 };
 
 export default blogMetaEn;

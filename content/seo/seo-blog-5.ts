@@ -99848,6 +99848,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casse-malati-proposte-esperti-risposta': {
+    title: 'Casse malati: 5% di aumento e proposte valutate da esperti',
+    description: 'Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, aumento, proposte',
+    ogTitle: 'Casse malati: esperti valutano le proposte',
+    ogDescription: 'Il premio nazionale cresce del 5% nel 2027. Tre esperti analizzano le proposte sulla cassa statale e la prevenzione: in Ticino, dal 2029, metà dei cittadini potrebbe vedere ridotti i premi. Ecco cosa cambia.',
+    canonicalPath: '/articoli-frontaliere/casse-malati-proposte-esperti-risposta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati: 5% di aumento e proposte valutate da esperti",
+      "description": "Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/casse-malati-proposte-esperti-risposta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino."
+      },
+      "datePublished": "2026-10-06T04:17:25+00:00",
+      "dateModified": "2026-10-06T04:17:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/casse-malati-proposte-esperti-risposta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
