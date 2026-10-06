@@ -329,14 +329,19 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'generator/scripts/lib/canton-hubs/paths.mjs',
     'scripts/ci/fast-publish-section.mjs',
     'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/cf-analytics.mjs',
     'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/cf-purge-variants.mjs',
     'scripts/lib/delete-cdn-file.sh',
     'scripts/lib/section-registry.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
     'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/npm-ci-retry.sh',
+    'scripts/lib/parse-positive-num.mjs',
     'scripts/ci/retry-cmd.sh',
+    'generator/scripts/load-rc-env.mjs',
     'scripts/offload-generated-images-cdn.mjs',
     'scripts/cf-purge-cache.mjs',
     'engine/cantonSectionPages.ts',
@@ -364,7 +369,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     assert.ok(wf.includes(`      - ${p}\n`), p);
   }
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /git diff --name-status HEAD~1 HEAD/);
+  assert.match(wf, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
+  assert.match(wf, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch previous published revision/);
   assert.match(wf, /--previous-revision/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
@@ -377,20 +383,32 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/cf-purge-cache.mjs',
     'scripts/offload-generated-images-cdn.mjs',
     'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/cf-analytics.mjs',
     'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/cf-purge-variants.mjs',
     'scripts/lib/delete-cdn-file.sh',
     'scripts/lib/cdn-asset-existence.mjs',
     'scripts/lib/corpus-floors.mjs',
     'scripts/lib/corpus-sections.mjs',
     'scripts/lib/engine-corpus-view.mjs',
+    'scripts/lib/npm-ci-retry.sh',
+    'scripts/lib/parse-positive-num.mjs',
     'scripts/lib/sanitize-control-chars.mjs',
     'scripts/lib/section-registry.mjs',
     'scripts/lib/upload-cdn-file.sh',
+    'generator/scripts/load-rc-env.mjs',
   ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
   assert.ok(wf.includes("      - 'engine/**'\n"));
   assert.ok(wf.includes("      - 'host/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/offload-generated-images-cdn.mjs'\n"));
+  for (const p of [
+    'generator/scripts/load-rc-env.mjs',
+    'scripts/lib/cf-analytics.mjs',
+    'scripts/lib/cf-purge-variants.mjs',
+    'scripts/lib/npm-ci-retry.sh',
+    'scripts/lib/parse-positive-num.mjs',
+  ]) assert.ok(read('.github/workflows/fast-publish-article.yml').includes(`      - '${p}'\n`), p);
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
@@ -414,17 +432,11 @@ const SLUGS_TI = {
 };
 
 const sitemapUrl = (pathname) => `https://frontaliereticino.ch${pathname}`;
+const archiveSlugs = { it: 'tutti', en: 'all', de: 'alle', fr: 'tous' };
 const sectionSitemapPaths = [
-  '/articoli-ticino/', '/en/ticino-articles/', '/de/tessin-artikel/', '/fr/articles-tessin/',
-  ...['carburanti', 'fisco', 'mobilita', 'eventi', 'pensioni', 'servizi'].flatMap((topic) => [
-    `/articoli-ticino/${topic}/`, `/en/ticino-articles/${topic}/`, `/de/tessin-artikel/${topic}/`, `/fr/articles-tessin/${topic}/`,
-  ]),
-  ...[1, 2].flatMap((page) => [
-    `/articoli-ticino/tutti/${page === 1 ? '' : `page-${page}/`}`,
-    `/en/ticino-articles/tutti/${page === 1 ? '' : `page-${page}/`}`,
-    `/de/tessin-artikel/tutti/${page === 1 ? '' : `page-${page}/`}`,
-    `/fr/articles-tessin/tutti/${page === 1 ? '' : `page-${page}/`}`,
-  ]),
+  ...Object.values(CATALOG_TI.paths),
+  ...Object.values(TI.topicHubs).flatMap((topic) => Object.entries(topic).map(([locale, slug]) => `${CATALOG_TI.paths[locale]}${slug}/`)),
+  ...[1, 2].flatMap((page) => Object.entries(CATALOG_TI.paths).map(([locale, prefix]) => `${prefix}${archiveSlugs[locale]}/${page === 1 ? '' : `page-${page}/`}`)),
 ];
 const articleSitemapEntries = [
   ['/articoli-ticino/a-it/', ['/en/ticino-articles/a-en/', '/de/tessin-artikel/a-de/', '/fr/articles-tessin/a-fr/']],
@@ -442,10 +454,12 @@ test('reconcile: pagine attese = tutti gli URL annunciati da loc e alternate del
     '/articoli-ticino/a-it/', '/en/ticino-articles/a-en/', '/de/tessin-artikel/a-de/', '/fr/articles-tessin/a-fr/',
     '/articoli-ticino/b-it/', '/en/ticino-articles/b-en/', '/de/tessin-artikel/b-de/',
   ].sort());
-  assert.ok(pages.some((p) => p.path === '/de/tessin-artikel/carburanti/'));
-  assert.ok(pages.some((p) => p.path === '/fr/articles-tessin/tutti/page-2/'), 'le page-N dell\'archivio vengono dalla sitemap');
+  assert.ok(pages.some((p) => p.path === '/de/tessin-artikel/treibstoff/'));
+  assert.ok(pages.some((p) => p.path === '/fr/articles-tessin/tous/page-2/'), 'le page-N dell\'archivio vengono dalla sitemap');
   assert.equal(cdnUrlFor('/en/ticino-articles/a-en/'), 'https://cdn.frontaliereticino.ch/edge/sections/en/ticino-articles/a-en/index.html');
   assert.throws(() => expectedSectionPages({ id: 'canton-zz', paths: {} }, {}, SITEMAP_TI), /sconosciuta/);
+  const incoherent = SITEMAP_TI.replace('/articoli-ticino/a-it/', '/articoli-ticino/retired-not-in-slugs/');
+  assert.throws(() => expectedSectionPages(CATALOG_TI, SLUGS_TI, incoherent), /non compare in slugs\.json\.cantons/);
 });
 
 test('reconcile: HEAD 405/501 ricade su GET, mantenendo 404 = missing', async () => {

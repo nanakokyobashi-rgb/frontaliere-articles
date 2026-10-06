@@ -47,8 +47,10 @@ on:
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
+      - 'scripts/lib/cf-analytics.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
       - 'scripts/lib/cdn-asset-existence.mjs'
+      - 'scripts/lib/cf-purge-variants.mjs'
       - 'scripts/lib/delete-cdn-file.sh'
       - 'scripts/lib/corpus-floors.mjs'
       - 'scripts/lib/corpus-sections.mjs'
@@ -56,6 +58,9 @@ on:
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/section-registry.mjs'
       - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/lib/npm-ci-retry.sh'
+      - 'scripts/lib/parse-positive-num.mjs'
+      - 'generator/scripts/load-rc-env.mjs'
   workflow_dispatch:
     inputs:
       section:
@@ -95,6 +100,16 @@ jobs:
           fetch-depth: 2
           persist-credentials: false
 
+      - name: Fetch push base (resolve)
+        if: github.event_name == 'push'
+        env:
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
+            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
+          fi
+
       # Solo builtin Node (fast-publish-section.mjs): niente setup-node/npm ci
       # per decidere se c'e' qualcosa da pubblicare.
       - name: Resolve sections and article ids
@@ -104,8 +119,11 @@ jobs:
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
+          before="${PUSH_BEFORE:-}"
+          if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             dry=true
             [ "$DRY_RUN_INPUT" = "false" ] && dry=false
@@ -138,7 +156,7 @@ jobs:
               echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
               dry=true
             fi
-            matrix="$(git diff --name-status HEAD~1 HEAD 2>/dev/null \
+            matrix="$(git diff --name-status "$before" HEAD 2>/dev/null \
               | node scripts/ci/fast-publish-section.mjs r2-plan \
               | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
           fi

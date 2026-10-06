@@ -74,11 +74,16 @@ on:
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
+      - 'generator/scripts/load-rc-env.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'engine/**'
       - 'host/**'
       - 'scripts/lib/article-render-pipeline.mjs'
+      - 'scripts/lib/cf-analytics.mjs'
+      - 'scripts/lib/cf-purge-variants.mjs'
       - 'scripts/lib/cdn-asset-existence.mjs'
+      - 'scripts/lib/npm-ci-retry.sh'
+      - 'scripts/lib/parse-positive-num.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/upload-cdn-file.sh'
       # THE CHAIN LINK — a corpus push means an article was produced.
@@ -130,6 +135,16 @@ jobs:
           fetch-depth: 2
           persist-credentials: false
 
+      - name: Fetch push base (resolve)
+        if: github.event_name == 'push'
+        env:
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
+            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
+          fi
+
       - name: Resolve mode, article ids and section
         id: mode
         env:
@@ -137,9 +152,12 @@ jobs:
           ARTICLE_ID_INPUT: ${{ inputs.article_id }}
           SECTION_INPUT: ${{ inputs.section }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
           ids=()
+          before="${PUSH_BEFORE:-}"
+          if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             # Dispatch says what it wants; default stays dry so a manual poke
@@ -170,7 +188,7 @@ jobs:
               echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
               dry=true
             fi
-            changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
+            changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
             if ! printf '%s\n' "$changed" | grep -q '^content/'; then
               dry=true
             fi
@@ -185,7 +203,7 @@ jobs:
           # so a new section would have been published into another section's
           # shard without an error.
           if [ "${#ids[@]}" -eq 0 ]; then
-            changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
+            changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
             body_re="$(node scripts/ci/fast-publish-section.mjs body-regex shard)"
             mapfile -t bodies < <(
               printf '%s\n' "$changed" \

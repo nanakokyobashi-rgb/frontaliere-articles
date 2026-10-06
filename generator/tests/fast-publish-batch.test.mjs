@@ -36,7 +36,8 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.match(resolveStep, /sort -u/);
   assert.match(resolveStep, /ids\+=\("\$body_id"\)/);
   assert.match(resolveStep, /echo "ids=\$ids_json"/);
-  assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only HEAD~1 HEAD/);
+  assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
+  assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
 });
 

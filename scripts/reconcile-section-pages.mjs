@@ -38,6 +38,8 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
+import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
+import { cantonHubTopicSlugs } from '../engine/shared/articleSectionCore.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 
@@ -78,6 +80,19 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
       return typeof prefix === 'string' && (canonicalPath === prefix || canonicalPath.startsWith(prefix));
     });
     if (!locale) throw new Error(`sitemap di ${entry.id}: URL ${canonicalPath} fuori dai prefissi della sezione`);
+    const prefix = entry.paths[locale];
+    const archivePrefix = `${prefix}${CANTON_ARCHIVE_ALL_SLUG[locale]}/`;
+    const isLanding = canonicalPath === prefix;
+    const isHub = cantonHubTopicSlugs(entry.id, locale).some((slug) => canonicalPath === `${prefix}${slug}/`);
+    const isArchive = canonicalPath === archivePrefix || (
+      canonicalPath.startsWith(archivePrefix) && /^page-\d+\/$/.test(canonicalPath.slice(archivePrefix.length))
+    );
+    if (!isLanding && !isHub && !isArchive) {
+      throw new Error(
+        `sitemap di ${entry.id}: URL articolo ${canonicalPath} non compare in slugs.json.cantons — ` +
+          'superficie sitemap/slugs incoerente, backfill bloccato',
+      );
+    }
     return { kind: 'section', locale, path: canonicalPath };
   });
 }
