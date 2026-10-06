@@ -90,19 +90,13 @@ import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSynthe
 // free.
 //
 // `prefer` sposta l'id in testa DOPO l'ordinamento per punteggio, quindi vince
-// malgrado lo score storico. L'ordine e' per-chiamata apposta: l'autenticazione
-// subscription e' condivisa con i workflow agentici, e una preferenza globale
-// la brucerebbe affamando il ciclo dei merge.
-//
-// NON e' passata a: traduzioni, meta, FAQ, classificazione, riformulazione del
-// titolo — li' i modelli free funzionano e i gate lo confermano. La selezione
-// headline parte anch'essa dai free, ma ricade su Codex quando un tentativo
-// fallisce: vedi HEADLINE_SELECTION_FALLBACK, che spiega perche' i free li'
-// non bastano piu'. Il fact-check non la PREFERISCE: e' un consenso fra
-// verificatori INDIPENDENTI sui modelli free, e mandarli tutti sullo stesso
-// modello collasserebbe quell'indipendenza. Codex ci entra solo come ultimo
-// verificatore, quando i free non danno un verdetto o un secondo parere
-// (decisione del proprietario 2026-09-25, vedi llmFactCheck).
+// malgrado lo score storico. Il router applica la precedenza alle catene
+// default e applicative; le catene esplicite di diagnostica/eval restano
+// hard-pinned. Questa lista rende esplicita la scelta delle chiamate di
+// generazione e serve ai gate di disponibilita' del corpo.
+// L'autenticazione subscription e' condivisa con i workflow agentici: il
+// broker limita la concorrenza per job e il router apre un circuito per run su
+// timeout/quota/auth, quindi un errore non rallenta ogni chiamata successiva.
 const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
 ];
@@ -6182,6 +6176,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // the frontaliere section stall (#2675/#2672). Interleaving Gemini (Gemini API
   // free) into the pair makes a GitHub Models outage survivable on the first pass
   // and also strengthens consensus (two model families, not two OpenAI siblings).
+  // Codex Luna Max is now the first verifier. The second concurrent request
+  // explicitly excludes Codex so consensus still gets an independent free
+  // opinion instead of spending two subscription calls on the same answer.
   // The pair used to be gpt-4.1 + gemini-2.5-flash, with gpt-4o as the third.
   // GitHub Models was retired on 2026-07-30 and the Gemini free quota is spent
   // most days, so both "verifiers" fell through the same cascade to the same
@@ -6193,6 +6190,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // filter drops it and the pair becomes two NVIDIA models of different
   // families (Gemma, Nemotron) — still two opinions, not one model twice.
   const verificationCandidates = [
+    AI_MODELS.CODEX_CLI_PRIMARY, // primary; broker absence falls through cleanly
     AI_MODELS.NV_GEMMA_4_31B,     // NVIDIA NIM — Google Gemma 4 31B
     AI_MODELS.GEMINI_FLASH,       // Gemini API free — second provider, when its daily quota allows
     AI_MODELS.NV_NEMOTRON_ULTRA,  // NVIDIA NIM — Nemotron 3 Ultra (different family from Gemma)
@@ -6253,7 +6251,15 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
 
     // Query up to 2 models in parallel for consensus
     const modelsToQuery = verificationModels.slice(0, 2);
-    const promises = modelsToQuery.map(model => _runSingleFactCheck(model, prompt, { isEvergreen }));
+    const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
+      isEvergreen,
+      // The first verifier owns the Codex primary slot. Keep the parallel
+      // second opinion independent without changing its existing fallback
+      // family/order.
+      ...(index > 0 && modelsToQuery[0] === AI_MODELS.CODEX_CLI_PRIMARY
+        ? { excludeModels: [AI_MODELS.CODEX_CLI_PRIMARY] }
+        : {}),
+    }));
     const settled = await Promise.allSettled(promises);
 
     // One vote per model that ANSWERED, not per model asked: callLLM re-sorts
@@ -6320,9 +6326,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   //    the single-model rules below (a FAIL with confidence ≥ 0.5 and
   //    non-minor issues blocks, a PASS passes);
   //  - one vote — the other verifier failed, or the two collapsed into one
-  //    model: Codex becomes the second opinion. Codex is not in
-  //    DEFAULT_CHAIN, so no free verifier can have been served by it:
-  //    independent by construction.
+  //    model: Codex is used as the second opinion only if it has not already
+  //    served the primary vote. The normal chain excludes any model that has
+  //    already voted before asking for a new opinion.
   // The call is pinned to Codex (`codexOnly`) instead of walking the free
   // cascade that just failed. If Codex does not answer either, or its lane is
   // off, the article is discarded: a lone free vote is one opinion, and only
@@ -6333,7 +6339,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // self-verify` guard avoids for the local model. The owner chose this
   // knowingly; the log says so on every such article.
   let codexFallbackTried = false;
-  if (modelResults.length < 2 && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) {
+  const codexAlreadyVoted = modelResults.some((result) => result.servedBy === AI_MODELS.CODEX_CLI_PRIMARY);
+  if (modelResults.length < 2 && !codexAlreadyVoted && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) {
     const codex = AI_MODELS.CODEX_CLI_PRIMARY;
     codexFallbackTried = true;
     const why = modelResults.length === 0 ? 'nessun verificatore ha dato un verdetto' : 'manca un secondo parere indipendente';
@@ -15952,11 +15959,9 @@ async function main() {
     // this check is unaffected by that promotion either way). Renaming would
     // be a pure identifier change with no behavior difference; left as-is as
     // a comment-only fix (2026-07-28) to keep this edit surgical.
-    // Codex and Claude are intentionally absent from DEFAULT_CHAIN because
-    // they are reserved for the high-value article body. They are nevertheless
-    // viable non-local writers here: omitting either one makes this pre-scan
-    // misclassify a subscription-only runtime as local-only and skip the news
-    // scan before generation can use the preferred CLI lanes.
+    // The Codex primary is already in DEFAULT_CHAIN; keep the explicit
+    // preference in this probe as well so a broker-backed subscription-only
+    // runner is not misclassified as local-only before generation starts.
     const cloudOnlyChain = [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS]
       .filter((m) => m !== AI_MODELS.LOCAL_FALLBACK);
     const cloudCascadeExhausted = isLocalLlmEnabled() && !getPreferredModel({ chain: cloudOnlyChain });

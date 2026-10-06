@@ -356,19 +356,14 @@ export const AI_MODELS = Object.freeze({
   // remote API — it only runs when all remote providers are exhausted.
   LOCAL_FALLBACK:      'local/fallback',
 
-  // ── Codex CLI article primary (opt-in via the shared CLI lane) ────────────
-  // Routed through the action-owned broker using the ChatGPT subscription. The
-  // broker keeps CODEX_AUTH_JSON private and serializes the requests from the
-  // crawler group through one bounded lane. The crawler action explicitly
-  // prefers this model before the normal provider cascade.
-  // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
-  // the high-value article-body generation path (plus the headline-selection
-  // retry once the free cascade has failed, see HEADLINE_SELECTION_FALLBACK in
-  // create-article.mjs), not metadata or FAQ work. The fact-check reaches it
-  // only as its last verifier, pinned, when the free verifiers give no verdict
-  // or no second opinion (owner decision 2026-09-25, llmFactCheck).
-  // Translations reach it only through free-translate.mjs's budgeted tier,
-  // when DeepL and Azure are both out for the run (owner decision 2026-09-25).
+  // ── Codex CLI primary (action-owned broker lane) ─────────────────────────
+  // Codex Luna Max is the first provider for every LLM purpose. The action
+  // exposes only a private broker socket; if the socket/auth lane is absent or
+  // trips its in-run circuit, callLLM removes this entry from ordinary chains
+  // and resumes the previous provider order without exposing CODEX_AUTH_JSON.
+  // The broker's composite action defaults to three concurrent requests per
+  // job (1..6 is accepted, with a refresh-safe fallback to one); this is the
+  // per-run cap shared by the crawler workers, not a fleet-wide quota.
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
 
   // ── Claude CLI Haiku fallback (article-body explicit opt-in) ─────────────
@@ -412,6 +407,7 @@ export const AI_MODELS = Object.freeze({
  * fail repeatedly (rate-limited, down) sink to the bottom.
  */
 export const DEFAULT_CHAIN = [
+  AI_MODELS.CODEX_CLI_PRIMARY,  // 0. Codex Luna Max via the OAuth broker
   AI_MODELS.GPT4O,              // 1.  OpenAI flagship        (GitHub Models)
   AI_MODELS.GPT_4_1,            // 2.  GPT 4.1 flagship       (GitHub Models)
   AI_MODELS.GEMMA_4_31B,        // 2b. Gemma 4 31B            (Gemini API — 14,400/day!)
@@ -1071,11 +1067,64 @@ function isClaudeCliFallbackEnabled() {
 // send-newsletter run 36116142119). Legato al path, non booleano, cosi' un
 // socket nuovo riapre la lane.
 let _codexBrokerGoneSocket = '';
+// Codex is the primary lane, so a timeout/quota/auth failure must not make
+// every later purpose pay the same doomed broker round-trip. This breaker is
+// deliberately process/run-local: the next workflow gets a fresh broker and
+// must be allowed to try again. It never writes the shared model ledger.
+let _codexPrimaryCircuitOpen = false;
+let _codexPrimaryCircuitReason = '';
 function isCodexCliPrimaryEnabled() {
   const socketPath = String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
   return isCodexArticleLaneSwitchOn()
     && !!socketPath
-    && socketPath !== _codexBrokerGoneSocket;
+    && socketPath !== _codexBrokerGoneSocket
+    && !_codexPrimaryCircuitOpen;
+}
+function _codexPrimaryCircuitReasonFor(provider) {
+  if (provider !== PROVIDER.CODEX_CLI || !_codexPrimaryCircuitOpen) return '';
+  return `Codex primary circuit open for this run (${_codexPrimaryCircuitReason || 'broker failure'})`;
+}
+function _codexPrimaryFailureReason(error) {
+  const msg = String(error?.message || error || '');
+  if (error?.transportFault || /broker|socket|temporarily unavailable|connection closed/i.test(msg)) {
+    if (/quota|rate.?limit|request limit|usage limit|429/i.test(msg)) return 'quota/rate-limit';
+    if (/timeout|timed out|aborted/i.test(msg)) return 'timeout';
+    return 'broker transport/auth unavailable';
+  }
+  if (_isTimeoutError(error) || /timeout|timed out|aborted/i.test(msg)) return 'timeout';
+  if (isQuotaExhaustedError(error) || /quota|rate.?limit|request limit|usage limit|429/i.test(msg)) return 'quota/rate-limit';
+  if (/auth|unauthori[sz]|credential|login|token|not configured/i.test(msg)) return 'broker/auth unavailable';
+  return '';
+}
+function _codexSafeDiagnostic(value) {
+  let safe = String(value ?? '');
+  const secrets = new Set();
+  for (const key of ['CODEX_AUTH_JSON', 'CODEX_AUTH_TOKEN', 'CODEX_AUTH_SECRET']) {
+    const raw = String(process.env[key] || '');
+    if (raw.length >= 4) secrets.add(raw);
+    if (key === 'CODEX_AUTH_JSON' && raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        const collect = (item) => {
+          if (typeof item === 'string' && item.length >= 4) secrets.add(item);
+          else if (item && typeof item === 'object') Object.values(item).forEach(collect);
+        };
+        collect(parsed);
+      } catch { /* malformed test/runtime value: the raw value is still redacted */ }
+    }
+  }
+  for (const secret of [...secrets].sort((a, b) => b.length - a.length)) {
+    safe = safe.split(secret).join('[redacted]');
+  }
+  return safe;
+}
+function _tripCodexPrimaryCircuit(error) {
+  if (_codexPrimaryCircuitOpen) return;
+  const reason = _codexPrimaryFailureReason(error);
+  if (!reason) return;
+  _codexPrimaryCircuitOpen = true;
+  _codexPrimaryCircuitReason = reason;
+  console.warn(`⏹️  [codex-cli] primary lane disabled for the rest of this run (${reason}); using the normal fallback chain`);
 }
 // Motivo dello skip quando la lane e' spenta perche' il broker e' sparito. Non
 // «no API key»: quella frase e' vocabolario PERSISTENTE per
@@ -1095,7 +1144,11 @@ function hasClaudeCodeOauthToken() {
 const CLAUDE_CLI_BIN = (process.env.CLAUDE_CLI_BIN || 'claude').trim();
 const CODEX_CLI_MAX_TIMEOUT_MS = 600_000;
 const CODEX_CLI_MIN_TIMEOUT_MS = 15_000;
-// Il broker esegue una richiesta Codex alla volta: le altre aspettano in coda.
+// The production action permits at most three simultaneous requests per job
+// (broker_max_concurrency default=3, bounded to 1..6; refresh-sensitive jobs
+// fall back to one). The client still measures queue wait separately from
+// execution time. Translation adds its own two-lane cap, so it never consumes
+// all three broker slots by itself.
 // Questo e' il tempo massimo di quell'attesa, separato dal timeout di
 // esecuzione, che parte solo quando il broker segnala l'avvio di Codex
 // (CODEX_BROKER_START_SIGNAL). 20 + 10 minuti restano sotto il cap duro di
@@ -1535,12 +1588,9 @@ async function _withClaudeCliSlot(fn) {
 // (la scala di riduzione morde di piu' ai retry) e producono il thin-content che
 // la preferenza esiste per evitare.
 //
-// Il fact-check NON entra in questo conto: i suoi verificatori restano i
-// modelli free, perche' preferire un solo modello per tutti i membri
-// collasserebbe l'indipendenza del consenso. L'unico modello del piano che il
-// fact-check chiama e' Codex Luna Max, come ultimo verificatore con la catena
-// fissata su di lui, al massimo una volta per fact-check (decisione del
-// proprietario 2026-09-25): un'altra lane, fuori da questo tetto claude-cli.
+// Il fact-check ha Codex come prima lane, ma la sua seconda richiesta esclude
+// Codex per mantenere un parere indipendente; il broker e il circuito per run
+// proteggono comunque la quota condivisa. Claude resta fuori da questo tetto.
 //
 // NON alzarlo a 300 come `translate-pending.yml` del sito (#5885): li' il tetto
 // e' dimensionato su 900 job in un workflow di traduzione, qui su una singola
@@ -1794,8 +1844,8 @@ export function getApiKeyForProvider(provider) {
     // (and '' when disabled → every local/* model is skipped). Mirrors Cloudflare.
     case PROVIDER.LOCAL:       return isLocalLlmEnabled() ? 'local-no-key' : '';
     // Codex auth never enters this process as a token: the setup action exposes
-    // only its private broker socket. The broker serializes a bounded number
-    // of requests, so every crawler worker can use the same primary lane.
+    // only its private broker socket. A failed primary circuit is in-run only;
+    // the next workflow gets a fresh broker and can try again.
     case PROVIDER.CODEX_CLI:   return isCodexCliPrimaryEnabled() ? 'codex-cli-no-key' : '';
     // No real key — auth is the CLAUDE_CODE_OAUTH_TOKEN env var, read directly
     // by the `claude` CLI subprocess. Spenta dal proprietario il 2026-09-24:
@@ -1814,10 +1864,12 @@ export function getApiKeyForProvider(provider) {
  * True for opt-in providers (local CPU fallback, Codex/Claude CLI, OmniRoute —
  * see AI_MODELS.LOCAL_FALLBACK / CODEX_CLI_PRIMARY / CLAUDE_CLI_HAIKU /
  * OMNIROUTE_AUTO) that must
- * never be marked exhausted/banned. Local, Codex CLI and Claude CLI have no
- * daily-quota concept at all, so persisting a ban just guarantees zero output
- * for the
- * rest of the budget. OmniRoute's reasoning is distinct but lands on the same
+ * never be marked exhausted/banned. Local, Claude CLI and OmniRoute have no
+ * durable provider quota to persist; Codex is deliberately handled by the
+ * dedicated in-run primary circuit because its ChatGPT allowance is shared
+ * with the agent fleet and is not a per-repository daily ledger. Persisting a
+ * ban would guarantee zero output for later runs. OmniRoute's reasoning is
+ * distinct but lands on the same
  * exemption: the CI pilot instance is EPHEMERAL — a fresh, empty sqlite
  * provider DB every run (scripts/ci/omniroute-poc-register.mjs re-registers
  * from scratch each boot) — so a Firestore-persisted "exhausted until
@@ -5138,6 +5190,19 @@ export function applyModelsPrefer(chain, prefer) {
 }
 
 /**
+ * Make the owner-approved Codex lane the first live candidate after score and
+ * per-call preferences have been applied. Keeping this as a final routing
+ * step matters: a positive Firestore score must not silently move the primary
+ * behind a free provider, while an unavailable broker must leave the old
+ * order untouched. Forced diagnostic chains remain authoritative.
+ */
+function _routeCodexPrimaryFirst(chain) {
+  if (!isCodexCliPrimaryEnabled()) return chain;
+  const primary = AI_MODELS.CODEX_CLI_PRIMARY;
+  return [primary, ...chain.filter((model) => model !== primary)];
+}
+
+/**
  * Il cap di token di INPUT dichiarato per un modello, o `undefined` se nessuna
  * delle tre fonti ne dichiara uno. Stesso `Math.min` che usa il pre-flight di
  * callLLM (era inline li' dentro): estratto perche' un chiamante deve poter
@@ -5329,7 +5394,15 @@ export function isAnyModelAvailable() {
  *   if no configured model is currently available.
  */
 export function getPreferredModel({ model: startModel, chain: chainOverride, prefer } = {}) {
+  const usesDefaultChain = !chainOverride;
   let chain = chainOverride ? [...chainOverride] : [...DEFAULT_CHAIN];
+  // A runner without the broker must see the same free-provider order that
+  // existed before Codex became the primary. Explicit custom chains keep their
+  // requested Codex entry so their normal preflight/fallback semantics remain
+  // observable to diagnostics.
+  if (usesDefaultChain && !isCodexCliPrimaryEnabled()) {
+    chain = chain.filter((m) => m !== AI_MODELS.CODEX_CLI_PRIMARY);
+  }
   if (startModel) {
     const idx = chain.indexOf(startModel);
     if (idx > 0) chain = chain.slice(idx);
@@ -5340,6 +5413,11 @@ export function getPreferredModel({ model: startModel, chain: chainOverride, pre
   // preferenza. Senza questa riga il peek risponderebbe con il modello che la
   // catena avrebbe scelto, non con quello che la preferenza le fa scegliere.
   chain = applyModelsPrefer(chain, prefer);
+  // An explicit chain is a caller contract (diagnostic pins, evals and the
+  // legacy Claude usage-limit -> Codex fallback). Only the default chain is
+  // globally promoted; purpose-specific production chains put Codex first at
+  // their declaration site.
+  if (usesDefaultChain) chain = _routeCodexPrimaryFirst(chain);
   for (const m of chain) {
     if (_shouldSkipExhausted(m)) continue;
     if (isProviderCoolingDown(getProvider(m))) continue;
@@ -5545,6 +5623,8 @@ export function printRunSummary() {
 export function resetState() {
   _codexCliFallbackAttempted = false;
   _codexBrokerGoneSocket = '';
+  _codexPrimaryCircuitOpen = false;
+  _codexPrimaryCircuitReason = '';
   _exhaustedModels.clear();
   _ghExhaustedPats.clear();
   _exhaustReason.clear();
@@ -7818,7 +7898,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
         return;
       }
       if (!parsed?.ok || typeof parsed.result !== 'string') {
-        const brokerError = String(parsed?.error || 'unknown error');
+        const brokerError = _codexSafeDiagnostic(String(parsed?.error || 'unknown error'));
         const error = new Error(`Codex auth broker rejected the request: ${brokerError}`);
         // Il SIGKILL a scadenza di budget e il tetto di richieste del job sono
         // decisioni nostre, non giudizi sul modello: stessa regola del ramo
@@ -8982,6 +9062,7 @@ export async function callSingleModel(messages, opts = {}) {
     }
     return result;
   } catch (error) {
+    if (getProvider(model) === PROVIDER.CODEX_CLI) _tripCodexPrimaryCircuit(error);
     // callLLM has this companion in its cascade catch. A direct caller also
     // reaches the request-cap learning paths, so it must record the same
     // outcome or a cap proposal can be the only ledger evidence for the model.
@@ -9064,7 +9145,15 @@ export async function callLLM(messages, opts = {}) {
     }
   }
 
+  const usesDefaultChain = !o.chain;
   let chain = o.chain || [...DEFAULT_CHAIN];
+  // A workflow that cannot provision the broker must degrade to the exact
+  // previous chain without producing one missing-key/error row per call.
+  // Explicit chains retain Codex so a purpose-specific caller can still see
+  // the ordinary preflight skip and continue to its declared fallbacks.
+  if (usesDefaultChain && !isCodexCliPrimaryEnabled()) {
+    chain = chain.filter((m) => m !== AI_MODELS.CODEX_CLI_PRIMARY);
+  }
 
   // Diagnostic override: AI_MODELS_FORCE_CHAIN=local/fallback,gemini-flash-latest
   // pins the chain to exactly these models (in order), bypassing DEFAULT_CHAIN,
@@ -9111,6 +9200,12 @@ export async function callLLM(messages, opts = {}) {
     // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai da un
     // default, che e' vuoto. Vedi il blocco di commento su applyModelsPrefer.
     chain = applyModelsPrefer(chain, o.prefer);
+    // Codex is the owner-approved primary for the default and purpose chains.
+    // Explicit chains remain caller-authoritative (diagnostic pins and the
+    // legacy Claude usage-limit -> Codex fallback rely on that contract).
+    // Apply the promotion before excludeModels so the independent fact-check
+    // second opinion can explicitly remove Codex.
+    if (usesDefaultChain) chain = _routeCodexPrimaryFirst(chain);
     // Esclusione per-chiamata, DOPO sort e preferenza: un chiamante che ha
     // appena rigettato la risposta HTTP 200 di un modello (selezione headline:
     // prosa di ragionamento invece del JSON) ritenta sugli altri, invece di
@@ -9237,7 +9332,9 @@ export async function callLLM(messages, opts = {}) {
     if (!isModelAvailable(model)) {
       const reason = getApiKeyForProvider(provider)
         ? 'exhausted'
-        : _codexBrokerGoneReason(provider) || `no API key for provider ${provider}`;
+        : _codexBrokerGoneReason(provider)
+          || _codexPrimaryCircuitReasonFor(provider)
+          || `no API key for provider ${provider}`;
       _logPreflightSkipOnce(model, 'availability', reason);
       pushError(`${model}: skipped — ${reason}`);
       _recordLastResortSkip(model, reason);
@@ -9383,7 +9480,9 @@ export async function callLLM(messages, opts = {}) {
       }
       return result;
     } catch (e) {
-      const msg = e?.message || String(e);
+      const rawMsg = e?.message || String(e);
+      const msg = provider === PROVIDER.CODEX_CLI ? _codexSafeDiagnostic(rawMsg) : rawMsg;
+      if (provider === PROVIDER.CODEX_CLI) _tripCodexPrimaryCircuit(e);
       // L'indice si tiene perche' la riga va RIQUALIFICATA piu' sotto (#818):
       // il messaggio grezzo di un flap del resolver e' `fetch failed`, che non
       // matcha ne' transientRe ne' persistentRe in classifyExhaustionCause —
