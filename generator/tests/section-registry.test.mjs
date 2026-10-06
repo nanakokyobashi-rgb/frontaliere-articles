@@ -522,20 +522,33 @@ test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-
   );
 });
 
-test('i feed di una sezione di famiglia escono solo se la release la dichiara live (draft, ritirata, kill-switch: niente feed)', () => {
-  // build-api: lo stato della release si calcola PRIMA dei feed, dalla stessa
-  // coppia registro + kill-switch che scrive il puntatore, e una sezione di
-  // famiglia non live non scrive ne' conta feed.
+test('tutte le superfici di famiglia seguono una sola decisione live effettiva', () => {
+  // build-api: lo stato della release si calcola PRIMA di ogni superficie, dalla
+  // stessa coppia registro + kill-switch che scrive il puntatore. Una sezione
+  // di famiglia active ma non live non scrive ne' conta alcun artefatto.
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   const live = build.indexOf('const releaseLiveSections = new Set(');
-  const loop = build.indexOf('for (const section of rssSections) {');
-  assert.ok(live > 0 && loop > live, 'lo stato della release si decide prima di scrivere i feed');
+  const publicDecision = build.indexOf('const PUBLIC_API_SECTIONS = PUBLISHED_API_SECTIONS.filter(isPublicSection);');
+  assert.ok(live > 0 && publicDecision > live, 'lo stato effettivo si decide prima delle superfici di famiglia');
   assert.match(build.slice(live, live + 200), /releaseEmitted \? Object\.keys\(effectiveSections\)\.filter\(\(id\) => effectiveSections\[id\]\.status === 'live'\) : \[\]/);
   assert.match(build, /const releaseEmitted = edgeRegistryPublishable\(declaredSections, killSwitch\);/);
-  assert.match(build, /if \(releaseEmitted\) \{\s+const edgeRegistry/, 'lo stesso booleano decide la release e i feed');
+  assert.match(build, /const isPublicSection = \(section\) => section\.api\.family === null \|\| releaseLiveSections\.has\(section\.section\);/);
+  assert.match(build, /const PUBLIC_API_FAMILIES = activeApiFamilies\(PUBLIC_API_SECTIONS\);/);
   assert.equal(build.match(/resolveKillSwitch\(process\.env\)/g).length, 1, 'un solo kill-switch risolto per build');
+  const sitemapLoop = build.slice(build.indexOf('// ── Sitemaps'), build.indexOf('// ── Archive pages'));
+  assert.match(sitemapLoop, /for \(const section of PUBLIC_API_SECTIONS\)/, 'le sitemap cantonali non live non vengono scritte');
+  const familyLoop = build.slice(build.indexOf('for (const family of PUBLIC_API_FAMILIES) {'), build.indexOf('/** Il modulo della mappa slug'));
+  assert.match(familyLoop, /write\(family\.api\.registry/);
+  assert.match(build, /for \(const family of PUBLIC_API_FAMILIES\) \{[\s\S]*?slugsDoc\[family\.api\.slugsKey\]/);
+  assert.match(build, /const publishFeeds = !familyPolicy \|\| releaseLiveSections\.has\(section\.id\);/);
+  assert.match(build, /if \(familyPolicy && releaseLiveSections\.has\(section\.id\)\)/, 'i feed contano solo le sezioni live');
+  assert.match(build, /PUBLIC_API_FAMILIES\.flatMap\(\(family\) => \[/, 'counts aggregati solo live');
+  assert.match(build, /PUBLIC_API_SECTIONS\.map\(\(section\) => \[\s+section\.section,\s+\{ articles:/, 'counts.bySection solo live');
+  assert.match(build, /releaseLiveSections\.has\(id\) \? SECTION_REGISTRIES\[id\]/, 'il catalogo non annuncia sitemap o articoli draft');
+
+  const loop = build.indexOf('for (const section of rssSections) {');
+  assert.ok(loop > publicDecision, 'lo stato della release si decide prima di scrivere i feed');
   const body = build.slice(loop, build.indexOf('rssItemTotal += items;', loop));
-  assert.match(body, /const publishFeeds = !familyPolicy \|\| releaseLiveSections\.has\(section\.id\);/);
   const skip = body.indexOf('if (!publishFeeds) {');
   assert.ok(skip > 0 && skip < body.indexOf('fs.writeFileSync('), 'il salto precede la scrittura');
   assert.match(body.slice(skip, skip + 260), /continue;/);
@@ -1108,11 +1121,26 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     }
   };
   for (const entry of ['scripts/build-api.mjs', 'scripts/build-blog-index.mjs', 'scripts/publish-section-edge.mjs', 'scripts/ci/verify-api-floors.mjs']) walk(entry);
+  // Anche i comandi che il workflow usa per avviare build e gate sono input
+  // della superficie: derivarli dal blocco `run` evita che un nuovo wrapper
+  // resti fuori dalla chiusura solo perche' non e' un import JS.
+  const workflowScriptRefs = (source) => [...new Set(source.split('\n')
+    .map((line) => line.replace(/^\s*#.*$/, '').replace(/\s+#.*$/, ''))
+    .filter((line) => /\b(?:node|bash|npx)\b/.test(line))
+    .flatMap((line) => [...line.matchAll(/(?:generator\/)?scripts\/[A-Za-z0-9_\/.@-]+\.(?:mjs|sh)/g)].map((m) => m[0])))];
+  const buildAt = wf.indexOf('      - name: Build data surface\n');
+  const indexAt = wf.indexOf('      - name: Build the runtime blog index\n');
+  assert.ok(buildAt >= 0 && indexAt > buildAt, 'il workflow deve conservare i due entrypoint di build');
+  const buildRefs = workflowScriptRefs(wf.slice(buildAt, wf.indexOf('      - name: Build the runtime blog index\n', buildAt)));
+  const indexRefs = workflowScriptRefs(wf.slice(indexAt, wf.indexOf('      - name: Verify artifact\n', indexAt)));
+  for (const file of [...new Set([...buildRefs, ...indexRefs])]) walk(file);
   // Piu' cio' che publish-section-edge ESEGUE (non importa): gli script che lancia, e i loro import.
   const edge = readFileSync(path.join(ROOT, 'scripts/publish-section-edge.mjs'), 'utf8');
   const realIoSrc = edge.slice(edge.indexOf('export const realIo = {'), edge.indexOf('/** Quanto si aspetta'));
   const spawned = [...realIoSrc.matchAll(/'(scripts\/[A-Za-z0-9_\/.-]+\.(?:sh|mjs))'/g)].map((m) => m[1]);
-  assert.deepEqual([...new Set(spawned)].sort(), ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh']);
+  for (const required of ['scripts/cf-purge-cache.mjs', 'scripts/ci/retry-cmd.sh', 'scripts/lib/delete-cdn-file.sh', 'scripts/lib/upload-cdn-file.sh']) {
+    assert.ok(spawned.includes(required), `${required}: helper eseguito dal publisher assente`);
+  }
   for (const file of spawned) walk(file);
   assert.ok(seen.size > 20, 'la chiusura e\' vuota: il test sarebbe vacuo');
   assert.deepEqual([...seen].filter((file) => !covered(file)).sort(), [], 'moduli importati dal publisher e non osservati da on.push.paths');
