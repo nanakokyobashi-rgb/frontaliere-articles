@@ -12679,6 +12679,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Frontaliers : taxe d’entrée, rétrocessions et double imposition',
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'La Suisse introduit une taxe d\'entrée pouvant atteindre 4mila francs pour les travailleurs et les indépendants. Il est question de 900 millions annuels pour les chômeurs et il y a un risque de 120 millions pour les communes frontalières.',
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Vue panoramique de Lugano et de son lac, avec des bâtiments modernes symbolisant le contexte financier suisse.',
+    'blog.article.carovita-sindacati-recupero-divario.title': 'Carivita, les syndicats demandent le rattrapage de l\'écart dans le Devis 2027',
+    'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Entre décembre 2020 et septembre 2026, le renchérissement a augmenté de 8,5 % alors que les salaires du personnel cantonal, parapublic et socio-sanitaire n\'ont été ajustés que de 3 %.',
+    'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Vue de Bellinzone avec Castel Grande sous un ciel clair.',
 };
 
 export default blogMetaFr;

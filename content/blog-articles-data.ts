@@ -39949,6 +39949,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'carovita-sindacati-recupero-divario',
+ category: 'novita',
+ date: '2026-10-06T09:15:31.670Z',
+ image: '/images/blog/carovita-sindacati-recupero-divario.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -12676,6 +12676,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Grenzgänger: Eintrittssteuer, Rückvergütungen und Doppelbesteuerung',
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'Die Schweiz führt eine Eintrittssteuer von bis zu 4mila Franken für Arbeitnehmer und Selbstständige ein. Über 900 Millionen jährlich für Arbeitslose wird diskutiert, und für die Grenzgemeinden besteht das Risiko von 120 Millionen.',
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Panoramablick auf Lugano und seinen See, mit modernen Gebäuden, die den Schweizer Finanzkontext symbolisieren.',
+    'blog.article.carovita-sindacati-recupero-divario.title': 'Teuerung: Gewerkschaften fordern im Voranschlag 2027 die Aufholung der Lücke',
+    'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Zwischen Dezember 2020 und September 2026 ist die Teuerung um 8,5% gestiegen, während die Löhne des kantonalen, parapublischen und sozialmedizinischen Personals nur um 3% angepasst wurden.',
+    'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Blick auf Bellinzona mit Castel Grande unter klarem Himmel.',
 };
 
 export default blogMetaDe;
