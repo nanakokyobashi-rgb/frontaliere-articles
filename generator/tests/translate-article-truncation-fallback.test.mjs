@@ -57,6 +57,12 @@ import {
   isBodyTranslationPending,
   pendingBodyTranslations,
 } from '../scripts/lib/free-mt-recovery.mjs';
+import {
+  evaluateSourceCopy,
+  logSourceCopyVerdict,
+  SOURCE_COPY_OVERLAP_THRESHOLD,
+  SourceCopyError,
+} from '../scripts/lib/source-copy-guard.mjs';
 
 // Riempitivo dei campi meta nelle fixture. NON e' un dettaglio di stile: dal
 // floor di plausibilita' (#798) il loop missing-field giudica anche `title` e
@@ -828,6 +834,7 @@ const LINKS_SRC = (() => {
   assert.notEqual(fnAt, -1, 'enforceStrongInternalLinks non trovato dopo le sue costanti');
   return src.slice(a, src.indexOf('\n}\n', fnAt) + 2);
 })();
+const SOURCE_COPY_INPUT_SRC = extractFunctionSource('function sourceCopyInputText(pageContent) {');
 
 function runDownstreamMutators(data) {
   const fn = new Function(
@@ -946,18 +953,20 @@ const MAX_BODY_KEYS = (() => {
 
 function runPostTranslationToBodyFiles(data, url) {
   const fn = new Function(
-    'data', 'url', 'isBodyTranslationPending', 'console',
+    'data', 'url', 'pageContent', 'isBodyTranslationPending', 'console',
     'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
     'decodeHtmlEntities', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
-    `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n`
+    'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries',
+    `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n${SOURCE_COPY_INPUT_SRC}\n`
     + `${STEP_3C_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\n${STEP_3E_SRC}\n`
     + "const out = {};\nfor (const locale of ['it', 'en', 'de', 'fr']) { decodeLocaleContentEntities(data, locale); out[locale] = buildBodyFile(data, locale); }\nreturn out;",
   );
   const cta = { it: '\n\nCTA it calcolatore', en: '\n\nCTA en calculator', de: '\n\nCTA de rechner', fr: '\n\nCTA fr calculateur' };
   return fn(
-    data, url, isBodyTranslationPending, { error: () => {}, warn: () => {} },
+    data, url, '', isBodyTranslationPending, { error: () => {}, warn: () => {} },
     () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
     decodeHtmlEntities, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
+    evaluateSourceCopy, logSourceCopyVerdict, SOURCE_COPY_OVERLAP_THRESHOLD, SourceCopyError, 0,
   );
 }
 

@@ -28,7 +28,8 @@
  *                      built from the public plate-auction snapshot over HTTP
  *                      (static CDN file first, the Cloud Function as fallback)
  *   sitemap-news-candidates.xml  Google News candidates (migration §7.2)
- *   images-manifest.json + images/blog/*.webp  hero images (migration §7.1),
+ *   images-manifest.json + images/blog/*.webp + images/generated/*.webp
+ *                      hero images (migration §7.1),
  *                      emitted ONLY when this repo actually holds images
  *
  * Run with tsx: the corpus sources use extensionless relative specifiers, which
@@ -177,6 +178,7 @@ const PLATE_AUCTION_EDITORIAL = 'plate-auction-editorial.json';
 // l'assenza tornerebbe a valere 0 in accordo con un `counts` che vale 0 per la
 // stessa ragione (AGENTS.md #6: un valore condiviso ha UNA sorgente).
 const IMAGE_SRC_DIR = ['public', 'images', 'blog'];
+const IMAGE_SRC_DIRS = [IMAGE_SRC_DIR, ['public', 'images', 'generated']];
 const BORDER_RANKING_SRC = ['public', 'data', 'border-wait-ranking.json'];
 const DAILY_BRIEF_SRC = ['public', 'data', 'daily-brief.json'];
 
@@ -1156,33 +1158,37 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 //
 // Emitted ONLY when there is at least one image. The consumer refuses a manifest
 // listing zero images — deliberately, since an empty list is indistinguishable
-// from a publisher that broke halfway — so publishing one while generation still
-// runs in the site repo (and this repo therefore holds no images at all) would
-// turn every sync red. Absence is the correct signal until the generator cuts
-// over and starts writing public/images/blog/ here.
+// from a publisher that broke halfway. Generated covers now live under
+// public/images/generated; existing record-bearing catalog covers remain under
+// public/images/blog, and both are copied with their path kind preserved.
 {
-  const srcDir = path.join(ROOT, ...IMAGE_SRC_DIR);
-  const files = fs.existsSync(srcDir)
-    ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).sort()
-    : [];
+  const imageFiles = IMAGE_SRC_DIRS.flatMap((sourceDir) => {
+    const srcDir = path.join(ROOT, ...sourceDir);
+    if (!fs.existsSync(srcDir)) return [];
+    return fs.readdirSync(srcDir)
+      .filter((file) => file.endsWith('.webp'))
+      .sort()
+      .map((file) => ({ sourceDir, file, srcDir }));
+  });
 
-  if (files.length === 0) {
+  if (imageFiles.length === 0) {
     console.log(
-      `[build-api] ${IMAGE_MANIFEST}: not emitted — public/images/blog holds no .webp ` +
-        `(the consumer refuses a zero-image manifest; absence is the correct signal)`,
+      `[build-api] ${IMAGE_MANIFEST}: not emitted — no governed/catalogue .webp exists `
+        + `under ${IMAGE_SRC_DIRS.map((dir) => dir.join('/')).join(' or ')}`,
     );
   } else {
-    const destDir = path.join(OUT, 'images', 'blog');
-    fs.mkdirSync(destDir, { recursive: true });
     const images = [];
-    for (const file of files) {
+    for (const { sourceDir, file, srcDir } of imageFiles) {
+      const kind = sourceDir[2];
       const bytes = fs.readFileSync(path.join(srcDir, file));
+      const destDir = path.join(OUT, 'images', kind);
+      fs.mkdirSync(destDir, { recursive: true });
       fs.writeFileSync(path.join(destDir, file), bytes);
-      images.push({ id: file.replace(/\.webp$/, ''), path: `images/blog/${file}`, bytes: bytes.length });
+      images.push({ id: file.replace(/\.webp$/, ''), path: `images/${kind}/${file}`, bytes: bytes.length });
     }
     write(IMAGE_MANIFEST, { commit, images });
     imageCount = images.length;
-    console.log(`[build-api] images/blog: ${images.length} files copied to dist/api`);
+    console.log(`[build-api] images: ${images.length} files copied to dist/api`);
   }
 }
 
@@ -1555,11 +1561,13 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     images: derivedOptional(
       IMAGE_MANIFEST,
       () => {
-        const srcDir = path.join(ROOT, ...IMAGE_SRC_DIR);
-        const webp = fs.existsSync(srcDir)
-          ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).length
-          : 0;
-        return webp ? `${webp} .webp in ${IMAGE_SRC_DIR.join('/')}` : null;
+        const webp = IMAGE_SRC_DIRS.reduce((count, sourceDir) => {
+          const srcDir = path.join(ROOT, ...sourceDir);
+          return count + (fs.existsSync(srcDir)
+            ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).length
+            : 0);
+        }, 0);
+        return webp ? `${webp} .webp in ${IMAGE_SRC_DIRS.map((dir) => dir.join('/')).join(' + ')}` : null;
       },
       () => jsonOut(IMAGE_MANIFEST).images.length,
     ),
@@ -1784,12 +1792,14 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   // Le immagini sono l'unico artefatto che il consumer non puo' ri-derivare,
   // quindi il file trasferito conta quanto la voce che lo indicizza: una
   // copia interrotta a meta' lascia l'indice pieno e la cartella corta.
-  const webpDir = path.join(OUT, 'images', 'blog');
-  const webpOnDisk = fs.existsSync(webpDir)
-    ? fs.readdirSync(webpDir).filter((f) => f.endsWith('.webp')).length
-    : 0;
+  const webpOnDisk = IMAGE_SRC_DIRS.reduce((count, sourceDir) => {
+    const webpDir = path.join(OUT, 'images', sourceDir[2]);
+    return count + (fs.existsSync(webpDir)
+      ? fs.readdirSync(webpDir).filter((f) => f.endsWith('.webp')).length
+      : 0);
+  }, 0);
   if (webpOnDisk !== derived.images) {
-    mismatches.push(`images: ${IMAGE_MANIFEST} lists ${derived.images}, images/blog holds ${webpOnDisk}`);
+    mismatches.push(`images: ${IMAGE_MANIFEST} lists ${derived.images}, images directories hold ${webpOnDisk}`);
   }
 
   if (mismatches.length) {

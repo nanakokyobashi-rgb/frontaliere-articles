@@ -334,7 +334,15 @@ test('build-blog-index publishes image-credits-<section>.json beside the index, 
       const rel = `data/image-credits-${section}.json`;
       assert.equal(manifest.files[rel], fs.statSync(path.join(root, 'dist/api', rel)).size, rel);
     }
-    assert.equal(manifest.counts.imageCreditFiles, 2);
+    const aggregate = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/data/image-credits-blog.json'), 'utf-8'));
+    assert.equal(aggregate.schema, 1);
+    assert.equal(aggregate.section, 'blog');
+    assert.deepEqual(aggregate.sections, {
+      frontaliere: 'image-credits-frontaliere.json',
+      svizzera: 'image-credits-svizzera.json',
+    });
+    assert.equal(manifest.files['data/image-credits-blog.json'], fs.statSync(path.join(root, 'dist/api/data/image-credits-blog.json')).size);
+    assert.equal(manifest.counts.imageCreditFiles, 3);
     assert.equal(manifest.counts.blogIndexShards, 16, 'the index declaration is unchanged');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
@@ -366,7 +374,7 @@ test('publish-api.yml uploads and purges the credits like the blog index, and re
   const wf = fs.readFileSync(path.join(REPO, '.github/workflows/publish-api.yml'), 'utf-8');
   assert.match(wf, /for f in dist\/api\/data\/blog-index-\*\.json dist\/api\/data\/image-credits-\*\.json; do\n\s+\[ -s "\$f" \] \|\| continue\n\s+bash scripts\/lib\/upload-cdn-file\.sh "\$f" "data\/\$\(basename "\$f"\)" "public,max-age=600"\n\s+urls\+=\("https:\/\/cdn\.frontaliereticino\.ch\/data\/\$\(basename "\$f"\)"\)/);
   const paths = wf.slice(wf.indexOf('paths:'), wf.indexOf('schedule:'));
-  for (const trigger of ["'content/**'", "'engine/**'", "'scripts/build-blog-index.mjs'", "'scripts/lib/image-credit-records.mjs'"]) {
+  for (const trigger of ["'content/**'", "'engine/**'", "'public/images/generated/**'", "'scripts/build-blog-index.mjs'", "'scripts/lib/image-credit-records.mjs'", "'generator/scripts/lib/blog-image-registry.mjs'"]) {
     assert.ok(paths.includes(trigger), `publish-api.yml does not republish on ${trigger}`);
   }
 });

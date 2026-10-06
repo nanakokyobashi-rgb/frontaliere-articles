@@ -7838,6 +7838,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.maiali-polmonite-enzootica-svizzera.title': 'Suisse : 10\'500 porcs tués pour cause de pneumonie enzootique',
     'blog.article.maiali-polmonite-enzootica-svizzera.excerpt': 'Urgence sanitaire dans 14 cantons : plus de 10\'500 porcs mis à mort ou envoyés à l\'abattoir pour enrayer la propagation d\'une infection pulmonaire contagieuse.',
     'blog.article.maiali-polmonite-enzootica-svizzera.imageAlt': 'Paysage rural suisse avec des installations agricoles modernes',
+    'blog.article.ginevra-iniziativa-cern-fcc.title': 'Genève lance un vote populaire sur l’avenir du CERN',
+    'blog.article.ginevra-iniziativa-cern-fcc.excerpt': 'Le FCC ferait 91 km de long, coûterait 15 milliards de francs et 5’696 signatures sont nécessaires d’ici à la mi-février 2027 ; décision finale des 25 États membres prévue pour mai 2028.',
+    'blog.article.ginevra-iniziativa-cern-fcc.imageAlt': 'Vue du lac Léman avec le complexe du CERN en arrière-plan, lumière du jour',
 };
 
 export default blogMetaChFr;

@@ -256,7 +256,9 @@ test('files: sitePath e baseline coerenti col mode', () => {
     } else {
       assert.ok(f.baseline.site, `${f.path}: \`${f.mode}\` senza \`baseline.site\``);
     }
-    if (f.mode !== 'not-ported') {
+    // A newly declared corpus-only path has no historical blob to attest;
+    // loop-drift-check deliberately represents that first baseline as null.
+    if (f.mode !== 'not-ported' && f.baseline.corpus !== null) {
       assert.ok(f.baseline.corpus, `${f.path}: manca \`baseline.corpus\``);
     }
   }

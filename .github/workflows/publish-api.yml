@@ -18,6 +18,8 @@ on:
     branches: [main]
     paths:
       - 'content/**'
+      - 'public/images/blog/**'
+      - 'public/images/generated/**'
       # engine/** matters as much as the corpus: build-api.mjs is a thin caller
       # over engine/rssFeeds.mjs and engine/newsTickerDataPlugin.ts, both of
       # which arrive here through the mirror. Without this, a fix to the
@@ -99,9 +101,14 @@ on:
       - 'scripts/build-blog-index.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       # build-blog-index.mjs also emits the cover credits
-      # (data/image-credits-<section>.json) through this module; the records
+      # (data/image-credits-<section>.json and data/image-credits-blog.json)
+      # through this module; the records
       # themselves are under content/** and the reader under engine/**.
       - 'scripts/lib/image-credit-records.mjs'
+      - 'generator/scripts/lib/blog-image-registry.mjs'
+      - 'generator/scripts/lib/atomic-write-json.mjs'
+      - 'data/generated-image-registry.json'
+      - 'data/editorial-image-registry.json'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -606,7 +613,7 @@ jobs:
           # and only its CONTENT is gated here.
           if [ -f dist/api/images-manifest.json ]; then
             # Il pavimento sul NUMERO di immagini e' in verify-api-floors.mjs,
-            # contro le .webp presenti in public/images/blog: `-lt 1` fermava
+            # contro le .webp presenti in public/images/blog e generated: `-lt 1` fermava
             # solo il manifest completamente vuoto, mentre 1990 immagini
             # ridotte a 3 passavano.
             # Every listed path must have actually been copied into the artifact,
@@ -732,7 +739,8 @@ jobs:
           # CF_API_TOKEN, a Cloudflare error, a variant nobody thought of. That
           # window was 24 hours. It is now 10 minutes.
           #
-          # The cover credits (data/image-credits-<section>.json, P14) are the
+          # The cover credits (data/image-credits-<section>.json and
+          # data/image-credits-blog.json, P14) are the
           # same class — written by build-blog-index.mjs, rewritten on every
           # publish, fetched by the SPA's article page from the URL
           # cdnDataUrl() builds — so they take the same path, TTL and purge.

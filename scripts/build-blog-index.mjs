@@ -58,8 +58,9 @@
  *        <out>/blog-index-<section>-<locale>-full.json  every article
  *        (2 sections x 4 locales x 2 files). The capped file is the fast path;
  *        the full one is what stops the cap being a cliff — see the slice below.
- *        <out>/image-credits-<section>.json             the section's cover credits
- *        (2 files)
+ *        <out>/image-credits-<section>.json             the section's Commons credits
+ *        <out>/image-credits-blog.json                  all reader-facing cover records
+ *        (3 files)
  */
 
 import fs from 'node:fs';
@@ -88,6 +89,11 @@ import {
 import { declareApiArtifacts, byteSize } from './lib/api-manifest.mjs';
 import { buildImageCreditsIndex, corpusCreditReader } from './lib/image-credit-records.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
+import {
+  BLOG_IMAGE_CREDITS_AGGREGATE,
+  buildBlogImageCreditsAggregate,
+  buildPublishedBlogImageRegistry,
+} from '../generator/scripts/lib/blog-image-registry.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -119,7 +125,10 @@ const expectedShards = new Set(
 );
 /** The cover credits: one file per section, declared apart from the index shards. */
 const expectedCreditFiles = new Set(
-  SECTIONS.map((section) => path.relative(API_ROOT, path.join(OUT, `image-credits-${section.name}.json`))),
+  [
+    ...SECTIONS.map((section) => path.relative(API_ROOT, path.join(OUT, `image-credits-${section.name}.json`))),
+    path.relative(API_ROOT, path.join(OUT, path.basename(BLOG_IMAGE_CREDITS_AGGREGATE))),
+  ],
 );
 const writtenCredits = {};
 
@@ -441,6 +450,31 @@ if (!failed) {
       console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
     }
   }
+
+  // One aggregate ledger is the reader-facing contract for pages that need a
+  // cover record without first knowing the article section. It also carries
+  // the governed generated/editorial registries, which are not Commons files
+  // and therefore cannot be represented by buildImageCreditsIndex().
+  const aggregateFile = path.join(OUT, path.basename(BLOG_IMAGE_CREDITS_AGGREGATE));
+  const sectionPayloads = Object.fromEntries(
+    preparedSections.map(({ section, credits }) => [section.name, credits]),
+  );
+  const aggregate = buildBlogImageCreditsAggregate({
+    commit: releaseCommit,
+    sectionPayloads,
+    registry: buildPublishedBlogImageRegistry(ROOT),
+  });
+  const cleanAggregate = sanitizeDeep(aggregate);
+  reportStrippedControlCharsDeep(aggregateFile, aggregate, cleanAggregate);
+  const aggregateText = JSON.stringify(cleanAggregate) + '\n';
+  fs.writeFileSync(aggregateFile, aggregateText);
+  writtenCredits[path.relative(API_ROOT, aggregateFile)] = byteSize(aggregateText);
+  console.log(
+    `[blog-index] ${path.basename(aggregateFile)} — `
+      + `${Object.keys(aggregate.generated).length} generated, `
+      + `${Object.keys(aggregate.editorial).length} editorial, `
+      + `${Object.keys(aggregate.covers).length} Commons covers`,
+  );
 }
 
 // ── Final gate: no control character leaves this script either ────────────

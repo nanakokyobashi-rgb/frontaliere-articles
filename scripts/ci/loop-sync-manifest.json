@@ -1776,7 +1776,7 @@
       "path": "generator/scripts/create-article.mjs",
       "sitePath": "scripts/create-article.mjs",
       "mode": "adapted",
-      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi. Dal P14 diverge di proposito anche sulle copertine Wikimedia Commons (Strategy 4, `findStockImageCandidates`, `modifySeoService`, `validateStructuredData`): licenza e autore letti con la ricerca, record in `content/image-credits/blog/`, dedup per file Commons invece che per URL, letterale SEO senza i cinque campi di diritti per una copertina accreditata. Non va portato al sito: il gemello di la' e' il generatore legacy disabilitato (`confirm_corpus_write=yes`), e i record vivono nel corpus. 2026-08-14: `baseline.corpus` era un GHOST (3025de18994bdabc, un hash che loop-drift-check non ha trovato in nessuna revisione storica del path) ed e' stata ricalcolata dal contenuto reale. `baseline.site` NON e' stata toccata di proposito: di questo giro e' stata portata solo la meta' legata a clauseTail (i due call site passati a `truncateToClauseNonEmpty`), il resto del delta del sito non e' stato letto — la voce resta quindi `site-ahead`, che e' la verita', invece di dichiarare un allineamento che non c'e' stato.",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, il fallback richiede un record reader-facing valido e la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
         "site": "44b4dcb727b012ea",
         "corpus": "e48b58a762604895",
@@ -1840,7 +1840,7 @@
       "path": "generator/scripts/generate-journalist-image-catalog.mjs",
       "sitePath": "scripts/generate-journalist-image-catalog.mjs",
       "mode": "adapted",
-      "reason": "Catalogo delle immagini del giornalista; `create-article.mjs` ne importa `appendCatalogEntry`. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Un solo adattamento oltre a quello: il ramo `DRY_RUN=1` in coda, che sul sito non esiste. Senza, uno smoke run di CI che voleva solo dimostrare che il modulo si CARICA finiva per creare public/data/ e scrivere il catalogo; gli altri entry point del generatore (generate-events-digest-article, generate-border-wait-ranking-article) usavano gia' quella convenzione. E' un miglioramento del meccanismo, quindi candidato a risalire al sito.",
+      "reason": "Catalogo delle immagini del giornalista. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Un solo adattamento oltre a quello: il ramo `DRY_RUN=1` in coda, che sul sito non esiste. Dal 2026-10-06 il corpus include solo copertine con record Commons, generated o editorial-upload validi; i nuovi producer scrivono direttamente il proprio registro e questo catalogo non puo' autorizzare da solo un file senza provenienza. Senza, uno smoke run di CI che voleva solo dimostrare che il modulo si CARICA finiva per creare public/data/ e scrivere il catalogo. Il gemello del sito non gira piu' da solo e non va aggiornato per questa policy corpus-only.",
       "baseline": {
         "site": "43b2a0639c74c954",
         "corpus": "21607559bddd68c3",
@@ -1851,7 +1851,7 @@
       "path": "generator/scripts/publish-journalist-article.mjs",
       "sitePath": "scripts/publish-journalist-article.mjs",
       "mode": "adapted",
-      "reason": "Percorso di pubblicazione degli articoli firmati. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Fino al P14 era l'unica, e questo era il gemello con il diff piu' piccolo dei sette: proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire — un file quasi uguale non ha nessun segnale visibile che lo distingua da uno allineato, e una modifica del sito qui si perde senza lasciare traccia. Dal P14 (crediti delle copertine Wikimedia Commons) diverge di proposito anche in `resolveHeroImage`: un URL Commons passa da `lib/commons-credit.mjs` (licenza e autore letti da Commons, record in `content/image-credits/blog/`), e una scelta che non si puo' accreditare cede al fallback. Non va portato al sito: il gemello di la' non gira piu' da solo (schedule rimosso il 2026-08-14, la coda `journalist_articles` e' di questo repo) e i record vivono nel corpus.",
+      "reason": "Percorso di pubblicazione degli articoli firmati. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Fino al P14 era l'unica, e questo era il gemello con il diff piu' piccolo dei sette: proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire. Dal 2026-10-06 `resolveHeroImage` accetta solo un catalogo con record valido, una generazione del motore mirrorato o un upload editoriale HTTPS con rightsHolder/license/proofUrl/author registrati; URL arbitrari e fallback statici sono rifiutati, mentre il ledger aggregato va in `data/image-credits-blog.json`. Non va portato al sito: il gemello di la' non gira piu' da solo e la coda `journalist_articles` e' di questo repo.",
       "baseline": {
         "site": "e8d8cb515301783c",
         "corpus": "49aa1cb695aa6844",
@@ -2067,7 +2067,7 @@
     {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
-      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
+      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre sia il catalogo public/images/blog sia le copertine governate public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
         "corpus": "08b806da4017d729",
@@ -2469,6 +2469,36 @@
         "site": null,
         "corpus": "0d418d160b45beb5",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/blog-image-registry.mjs",
+      "mode": "corpus-only",
+      "reason": "Registry reader-facing delle copertine generate e degli upload editoriali, più ledger aggregato per la superficie API. La pipeline di generazione e il relativo filesystem vivono nel corpus; il sito consuma JSON pubblicato e non ha un gemello di questo writer.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/journalist-image-policy.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto puro che ammette un catalogo con record, un upload con rightsHolder/license/proofUrl/author o il motore governato e rifiuta URL arbitrari. È consumato dal publisher del corpus e non ha un gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/source-copy-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia pura anti-copia del testo generato: normalizza it/de/fr/en, esclude al massimo due citazioni attribuite di 25 parole e blocca overlap consecutivi di 12 parole. Il writer e il suo registro appartengono al generatore del corpus; non esiste un gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3639,7 +3669,7 @@
     {
       "path": "scripts/ci/verify-api-floors.mjs",
       "mode": "corpus-only",
-      "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
+      "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini del catalogo/generated contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
         "corpus": "1ad3e5591be93b55",
