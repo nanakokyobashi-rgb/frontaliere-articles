@@ -14517,7 +14517,7 @@ function modifySeoService(data) {
         "acquireLicensePage": ${jsonValue(coverRecord.licenseUrl)},
         "copyrightNotice": "Generated media; provider terms apply.",
         "license": ${jsonValue(coverRecord.licenseUrl)},
-        "creator": { "@type": "Organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": ${jsonValue(coverRecord.credit)},` : `
         "acquireLicensePage": ${jsonValue(coverRecord.proofUrl)},
         "copyrightNotice": ${jsonValue(`© ${coverRecord.rightsHolder}`)},
