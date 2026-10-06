@@ -7817,6 +7817,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.perdita-ad-bilancio-2025.title': 'Arbeitslosenversicherung: Verlust von 249 Millionen im Jahr 2025',
     'blog.article.perdita-ad-bilancio-2025.excerpt': 'Die ALV schliesst 2025 mit einem Verlust von 249 Millionen ab: Ausgaben von 8,69 Milliarden, Einnahmen von 8,44 Milliarden und eine durchschnittliche Arbeitslosenquote von 2,8%.',
     'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Bundesgebäude in Bern als Symbol für die Rechnung der Schweizer Arbeitslosenversicherung',
+    'blog.article.fuochi-artificio-no.title': 'Feuerwerk: Die Rechte lanciert das Nein zur Initiative',
+    'blog.article.fuochi-artificio-no.excerpt': 'Am Dienstag startet die Kampagne gegen die Feuerwerksinitiative: Die Abstimmung findet am 29. November statt. Die Mitte, FDP, SVP und die Wirtschaft unterstützen das Nein.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Feuerwerk über einer Schweizer Stadt während der Debatte über die Initiative',
 };
 
 export default blogMetaChDe;

@@ -7817,6 +7817,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.perdita-ad-bilancio-2025.title': 'Assicurazione disoccupazione: perdita 249 milioni nel 2025',
     'blog.article.perdita-ad-bilancio-2025.excerpt': 'L\'AD chiude il 2025 in rosso di 249 milioni: uscite per 8,69 miliardi, entrate per 8,44 miliardi e disoccupazione media al 2,8%.',
     'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Edificio federale a Berna, immagine simbolica del bilancio dell\'assicurazione disoccupazione',
+    'blog.article.fuochi-artificio-no.title': 'Fuochi d\'artificio, la destra lancia il no all\'iniziativa',
+    'blog.article.fuochi-artificio-no.excerpt': 'Campagna al via martedì contro l\'iniziativa sui fuochi d\'artificio: il voto è il 29 novembre. Centro, PLR, UDC e mondo economico sostengono il no.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Fuochi d\'artificio sopra una città svizzera durante il dibattito sull\'iniziativa',
 };
 
 export default blogMetaChIt;

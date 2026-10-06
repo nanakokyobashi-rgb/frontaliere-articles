@@ -7817,6 +7817,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.perdita-ad-bilancio-2025.title': 'Unemployment insurance: loss of 249 million in 2025',
     'blog.article.perdita-ad-bilancio-2025.excerpt': 'The AD closes 2025 with a loss of 249 million: outflows of 8,69 billion, inflows of 8,44 billion and average unemployment at 2,8%.',
     'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Federal building in Bern, symbolic image of Switzerland\'s unemployment insurance accounts',
+    'blog.article.fuochi-artificio-no.title': 'Fireworks, the right launches the no campaign against the initiative',
+    'blog.article.fuochi-artificio-no.excerpt': 'Campaign against the fireworks initiative kicks off on Tuesday: the vote is on November 29. Centro, PLR, UDC and the business community support the no vote.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Fireworks above a Swiss town during the debate on the initiative',
 };
 
 export default blogMetaChEn;

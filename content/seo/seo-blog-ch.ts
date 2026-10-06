@@ -98581,6 +98581,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fuochi-artificio-no': {
+    title: 'Fuochi d\'artificio, la destra lancia il no all\'iniziativa',
+    description: 'Il comitato contrario ha lanciato la campagna per il voto del 29 novembre: Centro, PLR, UDC e mondo economico contestano un divieto nazionale sproporzionato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fuochi, artificio, destra, lancia',
+    ogTitle: 'Fuochi d\'artificio: il no al divieto nazionale',
+    ogDescription: 'La campagna contraria è partita martedì. L\'iniziativa chiede più protezione da rumore ed emissioni; il fronte del no teme effetti su feste private e manifestazioni organizzate. Per i grandi eventi sovraregionali sono previste eccezioni cantonali.',
+    canonicalPath: '/articoli-svizzera/fuochi-artificio-no/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fuochi d'artificio, la destra lancia il no all'iniziativa",
+      "description": "Il comitato contrario ha lanciato la campagna per il voto del 29 novembre: Centro, PLR, UDC e mondo economico contestano un divieto nazionale sproporzionato.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/fuochi-artificio-no.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fuochi d'artificio sopra una città svizzera durante il dibattito sull'iniziativa"
+      },
+      "datePublished": "2026-10-06T11:19:54+00:00",
+      "dateModified": "2026-10-06T11:19:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fuochi-artificio-no/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

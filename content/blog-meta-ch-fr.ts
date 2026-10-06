@@ -7817,6 +7817,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.perdita-ad-bilancio-2025.title': 'Assurance-chômage : perte de 249 millions en 2025',
     'blog.article.perdita-ad-bilancio-2025.excerpt': 'L\'AD clôt l\'année 2025 dans le rouge, avec une perte de 249 millions : des dépenses de 8,69 milliards, des recettes de 8,44 milliards et un taux de chômage moyen de 2,8%.',
     'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Bâtiment fédéral à Berne, image symbolique des comptes de l\'assurance-chômage suisse',
+    'blog.article.fuochi-artificio-no.title': 'Feux d\'artifice, la droite lance le non à l\'initiative',
+    'blog.article.fuochi-artificio-no.excerpt': 'La campagne démarre mardi contre l\'initiative sur les feux d\'artifice : le vote a lieu le 29 novembre. Le Centre, le PLR, l\'UDC et le monde économique soutiennent le non.',
+    'blog.article.fuochi-artificio-no.imageAlt': 'Feux d\'artifice au-dessus d\'une ville suisse pendant le débat sur l\'initiative',
 };
 
 export default blogMetaChFr;
