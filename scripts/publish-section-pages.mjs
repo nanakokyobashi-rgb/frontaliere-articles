@@ -479,7 +479,8 @@ export async function publish({
     return { failures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
   }
 
-  const purge = (pageList) => {
+  const purgePages = (pageList) => {
+    if (pageList.length === 0) return;
     const urls = pageList.flatMap((page) => [page.apexUrl, page.cdnUrl]);
     for (const chunk of purgeChunks(urls)) {
       const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
@@ -490,12 +491,12 @@ export async function publish({
   // Purge/verify only the current release first. Obsolete keys stay present
   // until this pass is green, so a stale sitemap never points at a 404 caused
   // by a partially published replacement.
-  purge(uploaded);
+  purgePages(uploaded);
   const status = await publishedStatusImpl(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
-    return { failures: failures + 1, uploaded: uploaded.length, status: null };
+    return { failures: failures + 1, uploaded: uploaded.length, deleted: 0, status: null };
   }
   const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
@@ -529,8 +530,8 @@ export async function publish({
     }
   }
   // The current release was already served before the delete. Purge the old
-  // keys only after their delete requests, then retain the 404 verification.
-  purge(obsoletePages);
+  // keys only after successful delete requests, then retain the 404 verification.
+  purgePages(deleted);
   for (const page of obsoletePages) {
     const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
     if (old.status !== 'HTTP 404') {
