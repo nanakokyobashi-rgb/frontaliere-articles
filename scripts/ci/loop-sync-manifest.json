@@ -561,12 +561,12 @@
     },
     {
       "path": "scripts/ci/followup-has-candidates.mjs",
-      "mode": "identical",
-      "reason": "Gate no-op invocato per nome da collect-followup-batch.mjs, stessa classe di is-followup-fix-pr.mjs: assente nel corpus e inghiottito da runGate. Importa bulletState da scripts/lib/pr-body-sections-check.mjs e isReviewerBot da scripts/ci/lib/constants.mjs, entrambi gia' presenti nel corpus.",
+      "mode": "adapted",
+      "reason": "Il sito conserva la logica generale di audit dei rinvii per decisione (decisionDeferralSpecificity): decisioni vaghe restano candidati finche' non hanno motivo e prossimo passo concreti. Il corpus mantiene isManagedReview perche' il suo scripts/ci/lib/constants.mjs e i workflow/test includono l'identita' e il fallback Codex marcato; il sito usa isReviewerBot per il proprio contratto di review. Questa differenza resta intenzionale.",
       "baseline": {
-        "site": "6e925df5c6641f7c",
-        "corpus": "6e925df5c6641f7c",
-        "alignedAt": "2026-09-11"
+        "site": "88ce559e743b5143",
+        "corpus": "1dcb22df125cc3e",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -593,9 +593,9 @@
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "67a3c95f72f9029f",
-        "corpus": "67a3c95f72f9029f",
-        "alignedAt": "2026-08-07"
+        "site": "5f9932099a50149a",
+        "corpus": "5f9932099a50149a",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -630,9 +630,9 @@
       "path": "scripts/ci/pr-contribution-fingerprint.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "566902d2f27a3f4c",
-        "corpus": "566902d2f27a3f4c",
-        "alignedAt": "2026-08-07"
+        "site": "185c2a177882f683",
+        "corpus": "185c2a177882f683",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -737,9 +737,9 @@
       "path": "scripts/lib/pr-body-closes-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "217cfab9469cfe03",
-        "corpus": "217cfab9469cfe03",
-        "alignedAt": "2026-08-07"
+        "site": "9d0fa856b688ef1a",
+        "corpus": "9d0fa856b688ef1a",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1067,12 +1067,12 @@
     },
     {
       "path": "scripts/ci/lib/reopen-breaker.mjs",
-      "mode": "identical",
-      "reason": "Precondizione + circuit breaker del close+reopen di pr-autorebase (valerielinc-ops/frontaliere-si-o-no#5914). Registrata contestualmente allo script che la importa: e' una dipendenza NUOVA introdotta da quella PR e non censita qui, quindi una discesa drift-repair del solo pr-autorebase.mjs — che il manifest sorveglia file per file — avrebbe portato l'import senza il modulo e rotto l'autorebase con ERR_MODULE_NOT_FOUND. E' la stessa forma del punto cieco di loop-scripts-closure.test.mjs. Nessuna stringa e' cablata: il nome del check arriva da lib/constants.mjs, che qui e' adapted, cosi' il file resta identical e il messaggio resta corretto su entrambi i repo.",
+      "mode": "adapted",
+      "reason": "La logica generale di precondizione e breaker, inclusi stuck-red e le distinzioni review-skipped/review-aborted, segue il sito. Il corpus mantiene decideNeedsHumanPass e il ramo needs-human-pass perche' scripts/ci/pr-autorebase.mjs e i test corpus lo usano per la passata unica sulle PR parcheggiate; il sito ha rimosso quel veto con #9030. Il corpus conserva inoltre i propri messaggi e nomi di review adattati.",
       "baseline": {
-        "site": "3e9607e06d32673c",
-        "corpus": "3e9607e06d32673c",
-        "alignedAt": "2026-09-05"
+        "site": "d379326b6a9b5446",
+        "corpus": "7c334ed5ba569ac1",
+        "alignedAt": "2026-10-07"
       }
     },
     {
