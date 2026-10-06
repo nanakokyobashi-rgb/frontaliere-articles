@@ -47,6 +47,19 @@ test('ammette al massimo due citazioni brevi attribuite', () => {
   assert.ok(verdict.maxWords >= SOURCE_COPY_OVERLAP_THRESHOLD);
 });
 
+test('usa la posizione reale per attribuire una citazione successiva', () => {
+  const source = 'La redazione apre il pezzo con un contesto introduttivo. '
+    + 'La misura protegge i lavoratori frontalieri durante l’anno fiscale. '
+    + 'Il resto dell’articolo spiega le conseguenze locali.';
+  const article = 'Contesto editoriale indipendente e verificabile. '
+    + 'Secondo il rapporto «La misura protegge i lavoratori frontalieri durante l’anno fiscale». '
+    + 'Altri dettagli per il lettore.';
+  const verdict = evaluateSourceCopy(source, article);
+  assert.equal(verdict.allowedQuotes, 1);
+  assert.ok(verdict.maxWords < SOURCE_COPY_OVERLAP_THRESHOLD);
+  assert.equal(verdict.safe, true);
+});
+
 test('una citazione non attribuita o oltre 25 parole resta nel confronto', () => {
   const source = 'La fonte presenta una spiegazione chiara e completa del provvedimento per tutti i lavoratori frontalieri della regione durante il prossimo anno fiscale.';
   const unattributed = evaluateSourceCopy(source, '«La fonte presenta una spiegazione chiara e completa del provvedimento per tutti i lavoratori frontalieri della regione durante il prossimo anno fiscale».');

@@ -447,6 +447,7 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   assert.equal((img.text.match(/generateImageFromSpec\(/g) || []).length, 1, 'il nuovo hero deve avere un solo percorso di generazione');
   assert.match(img.text, /scope: 'article-hero'/);
   assert.match(img.text, /maxAttempts: 3/);
+  assert.match(img.text, /deadlineAt: imageDeadline/);
   assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
   assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);

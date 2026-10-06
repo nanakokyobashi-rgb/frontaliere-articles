@@ -63,9 +63,12 @@ function removeAllowedQuotes(text, locale) {
   let allowedQuotes = 0;
   const cleaned = source.replace(QUOTED_SPAN_RX, (whole, ...args) => {
     const groups = args.slice(0, 4);
-    const match = args[args.length - 2];
+    // String.replace passes the character offset as a number after the
+    // capture groups. Do not treat it as a match object: a quote later in
+    // the article must be checked against its own attribution window.
+    const offset = args[args.length - 2];
     const inner = groups.find((value) => typeof value === 'string') || '';
-    const start = match?.index ?? 0;
+    const start = typeof offset === 'number' ? offset : 0;
     const end = start + whole.length;
     const words = normalizeSourceWords(inner, locale).length;
     if (
