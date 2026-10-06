@@ -1777,7 +1777,19 @@ function realignMain(listFile) {
   if (mismatched.length) {
     console.error(`transport-identical-twins: ${mismatched.length} path trasportati sono stati committati con byte diversi da quelli del sito. Registrarli come baseline darebbe ‘undeclared-drift’ permanente al drift check e li escluderebbe dal trasporto: correggi la copia (normalizzazione, filtro ‘clean’, staging), oppure degrada la voce a ‘adapted’ con la sua ‘reason’.`);
   }
-  const manifestWrite = corrections.length && !mismatched.length && !normalization.length && !unreadable.length
+  if (mismatched.length || normalization.length) {
+    return 1;
+  }
+
+  if (unreadable.length) {
+    console.error(`transport-identical-twins: ${unreadable.length} path trasportati non verificabili sul commit — la baseline resterebbe registrata su byte che nessuno ha committato`);
+    return 1;
+  }
+  // Solo dopo TUTTI i gate qui sopra: una baseline si registra quando ogni
+  // path del batch e' stato verificato sul commit. La scrittura passa dalla
+  // guardia delle regole di voce; senza correzioni si certifica comunque lo
+  // stato che resta su disco.
+  const manifestWrite = corrections.length
     ? writeManifestWithGuard({
       manifestPath: MANIFEST_PATH,
       manifest,
@@ -1790,14 +1802,9 @@ function realignMain(listFile) {
       originalBytes: manifestBytes,
       blobShaForPath: manifestBlobSha,
     });
-  if (!manifestWrite.ok) return EXIT_INVALID_MANIFEST;
-  if (mismatched.length || normalization.length) {
-    return 1;
-  }
-
-  if (unreadable.length) {
-    console.error(`transport-identical-twins: ${unreadable.length} path trasportati non verificabili sul commit — la baseline resterebbe registrata su byte che nessuno ha committato`);
-    return 1;
+  if (!manifestWrite.ok) {
+    console.error('transport-identical-twins: manifest non certificabile, il realign non registra alcuna baseline');
+    return EXIT_INVALID_MANIFEST;
   }
   return 0;
 }
