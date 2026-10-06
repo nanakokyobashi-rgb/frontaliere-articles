@@ -95,6 +95,7 @@ import {
   readPreviousRelease,
   registryState,
   requiredPageKeys,
+  sitemapPaths,
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
 
@@ -532,12 +533,12 @@ const OLD = 'a'.repeat(40);
 const OLDER = 'b'.repeat(40);
 
 /** Un dist/api come lo scrive build-api per un dato registro (`salt` cambia i byte delle sitemap). */
-function fakeDist(registry, { index = undefined, salt = '' } = {}) {
+function fakeDist(registry, { index = undefined, salt = '', extraArticles = [] } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'section-edge-'));
   const live = Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
   mkdirSync(path.join(dir, 'edge/sections'), { recursive: true });
   writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(registry));
-  for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), sitemapOf(id, salt));
+  for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), sitemapOf(id, salt, extraArticles));
   if (index ?? live.length > 0) writeFileSync(path.join(dir, 'sitemap-cantons.xml'), `<sitemapindex><!-- ${live.join(',')} --></sitemapindex>`);
   return dir;
 }
@@ -610,24 +611,29 @@ const liveIds = (registry) => Object.keys(registry.sections).filter((id) => regi
 /** Mette su R2 le pagine di bootstrap di una sezione (cio' che fa publish-section-pages). */
 const SECTION_PAGES = (id) => familySectionPages(id, 0, 1).flatMap((page) => Object.values(page.paths));
 /** La sitemap finta di una sezione: le pagine di sezione, una page-2 d'archivio e un articolo. */
-const sitemapOf = (id, salt = '') => {
-  const base = SECTION_PAGES(id)[0];
-  const locs = [...SECTION_PAGES(id), `${base}tutti/page-2/`, `${base}un-articolo/`];
-  return `<urlset><!-- ${id}${salt} -->${locs.map((p) => `<url><loc>https://frontaliereticino.ch${p}</loc></url>`).join('')}</urlset>`;
+const sitemapOf = (id, salt = '', extraArticles = []) => {
+  const [it, en, de, fr] = SECTION_PAGES(id);
+  const locs = [...SECTION_PAGES(id), `${it}tutti/page-2/`];
+  // Un articolo come lo scrive buildArticleUrlBlocks: loc IT, le altre lingue solo negli alternate.
+  const article = (slug) =>
+    `<url><loc>https://frontaliereticino.ch${it}${slug}/</loc>` +
+    [['en', en], ['de', de], ['fr', fr]].map(([l, base]) => `<xhtml:link rel="alternate" hreflang="${l}" href="https://frontaliereticino.ch${base}${slug}-${l}/" />`).join('') +
+    '</url>';
+  return `<urlset><!-- ${id}${salt} -->${locs.map((p) => `<url><loc>https://frontaliereticino.ch${p}</loc></url>`).join('')}${['un-articolo', ...extraArticles].map(article).join('')}</urlset>`;
 };
 function seedPages(io, ids) {
   for (const id of ids) {
-    for (const key of requiredPageKeys(id, { activation: true, sitemapXml: sitemapOf(id) })) {
+    for (const key of requiredPageKeys(id, { sitemapXml: sitemapOf(id) })) {
       io.store.set(key, Buffer.from(`<html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head></html>`));
     }
   }
 }
 
-async function publish(registry, { history = [], seed, fail, corrupt, salt, bootstrap = true } = {}, env = CREDS) {
+async function publish(registry, { history = [], seed, fail, corrupt, salt, extraArticles, bootstrap = true, bootstrapWaitMs = 0, sleep } = {}, env = CREDS) {
   const io = fakeIo();
   for (const past of history) {
     seedPages(io, liveIds(past));
-    const first = await publishRelease(planRelease(fakeDist(past)), { io, env: CREDS, log: () => {} });
+    const first = await publishRelease(planRelease(fakeDist(past)), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
     assert.equal(first.code, 0, 'una release della storia deve pubblicarsi');
   }
   if (bootstrap) seedPages(io, liveIds(registry));
@@ -638,7 +644,7 @@ async function publish(registry, { history = [], seed, fail, corrupt, salt, boot
   if (corrupt) io.corrupt = corrupt;
   const logs = [];
   const before = served(io);
-  const result = await publishRelease(planRelease(fakeDist(registry, { salt })), { io, env, log: (line) => logs.push(line) });
+  const result = await publishRelease(planRelease(fakeDist(registry, { salt, extraArticles })), { io, env, log: (line) => logs.push(line), bootstrapWaitMs, sleep });
   return { io, logs, before, result };
 }
 
@@ -736,7 +742,7 @@ test('edge: la release servita e\' NOTA solo se ogni file dichiarato c\'e\' con 
   const seeded = async (seed) => {
     const io = fakeIo();
     seedPages(io, ['canton-ti']);
-    await publishRelease(planRelease(fakeDist(withLive(['canton-ti'], OLD))), { io, env: CREDS, log: () => {} });
+    await publishRelease(planRelease(fakeDist(withLive(['canton-ti'], OLD))), { io, env: CREDS, log: () => {}, bootstrapWaitMs: 0 });
     seed(io);
     return io;
   };
@@ -799,38 +805,71 @@ test('edge: ogni fallimento PRIMA del PUT lascia servita la release di prima, in
   }
 });
 
-test('edge: una sezione non diventa live finche\' le sue pagine di bootstrap non sono su R2', async () => {
-  // Per un'accensione: OGNI URL che la sitemap della release annuncia — pagine di sezione, page-N dell'archivio, articoli.
-  const activation = requiredPageKeys('canton-ti', { activation: true, sitemapXml: sitemapOf('canton-ti') });
-  assert.equal(activation.length, (1 + 6 + 1) * 4 + 2);
+test('edge: il puntatore non gira finche\' OGNI URL che le sitemap annunciano non e\' su R2', async () => {
+  // Ogni URL annunciato: le <loc> E gli href degli alternate (un articolo ha la loc in IT e le altre tre lingue solo li').
+  const all = requiredPageKeys('canton-ti', { sitemapXml: sitemapOf('canton-ti') });
+  assert.equal(all.length, (1 + 6 + 1) * 4 + 1 + 4);
   for (const key of [
     'edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/fuel/index.html', 'edge/sections/de/tessin-artikel/alle/index.html',
     'edge/sections/articoli-ticino/tutti/page-2/index.html', 'edge/sections/articoli-ticino/un-articolo/index.html',
+    'edge/sections/en/ticino-articles/un-articolo-en/index.html', 'edge/sections/fr/articles-tessin/un-articolo-fr/index.html',
   ]) {
-    assert.ok(activation.includes(key), key);
+    assert.ok(all.includes(key), key);
   }
-  assert.deepEqual(requiredPageKeys('canton-ti', { activation: false }), [
+  assert.deepEqual([...sitemapPaths('<url><loc>https://frontaliereticino.ch/a/</loc><xhtml:link rel="alternate" hreflang="en" href="https://frontaliereticino.ch/en/a/" /></url>')], ['/a/', '/en/a/']);
+  assert.throws(() => requiredPageKeys('canton-ti', {}), /serve la sitemap/);
+  assert.throws(() => requiredPageKeys('canton-ti', { sitemapXml: '<loc>https://evil.example/x/</loc>' }), /fuori dall'apex/);
+  assert.throws(() => requiredPageKeys('canton-ti', { sitemapXml: '<xhtml:link hreflang="en" href="https://evil.example/x/" />' }), /fuori dall'apex/);
+  // Sezione gia' live: solo gli URL nuovi rispetto alla sitemap servita, piu' le 4 landing.
+  assert.deepEqual(requiredPageKeys('canton-ti', { sitemapXml: sitemapOf('canton-ti', '', ['nuovo']), previousSitemapXml: sitemapOf('canton-ti') }).sort(), [
     'edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/index.html',
     'edge/sections/de/tessin-artikel/index.html', 'edge/sections/fr/articles-tessin/index.html',
-  ]);
-  assert.throws(() => requiredPageKeys('canton-ti', { activation: true }), /serve la sitemap/);
-  assert.throws(() => requiredPageKeys('canton-ti', { activation: true, sitemapXml: '<loc>https://evil.example/x/</loc>' }), /fuori dall'apex/);
-  // Accensione senza bootstrap, o con una sola pagina mancante, o con una pagina senza il meta di proprieta': niente flip.
+    'edge/sections/articoli-ticino/nuovo/index.html', 'edge/sections/en/ticino-articles/nuovo-en/index.html',
+    'edge/sections/de/tessin-artikel/nuovo-de/index.html', 'edge/sections/fr/articles-tessin/nuovo-fr/index.html',
+  ].sort());
+
+  // ACCENSIONE senza le pagine, o con una sola mancante, o con una pagina senza il meta di proprieta': niente flip.
   for (const [what, opts] of [
     ['nessuna pagina', { bootstrap: false }],
     ['un hub mancante', { seed: (io) => io.store.delete('edge/sections/fr/articles-tessin/fiscalite/index.html') }],
     ['una page-N dell\'archivio mancante', { seed: (io) => io.store.delete('edge/sections/articoli-ticino/tutti/page-2/index.html') }],
     ['un articolo mancante', { seed: (io) => io.store.delete('edge/sections/articoli-ticino/un-articolo/index.html') }],
+    ['la traduzione di un articolo mancante (solo negli alternate)', { seed: (io) => io.store.delete('edge/sections/de/tessin-artikel/un-articolo-de/index.html') }],
     ['landing senza ft-route-owner', { seed: (io) => io.store.set('edge/sections/articoli-ticino/index.html', Buffer.from('<html></html>')) }],
   ]) {
     const { io, logs, before, result } = await publish(withLive(['canton-ti']), { history: [DRAFT_ALL(OLD)], ...opts });
     assert.deepEqual([result.code, result.phase, result.flipped], [1, 'bootstrap', false], what);
     assert.equal(served(io), before, `${what}: la sezione resta com'era`);
-    assert.match(logs.join('\n'), /pagine di sezioni live non sono su R2/);
+    assert.match(logs.join('\n'), /pagine annunciate dalle sitemap delle sezioni live non sono su R2/);
     // I file caricati in staging non sono puntati da niente: vengono tolti.
     assert.ok(![...io.store.keys()].some((key) => !key.startsWith('cc:') && key.includes(`/_releases/${COMMIT}/`)), `${what}: staging ripulito`);
   }
-  // Una sezione gia' live: bastano le landing (un hub sparito non spegne la pubblicazione delle altre).
+
+  // SEZIONE GIA' LIVE con un articolo nuovo nella sitemap: le sue 4 pagine devono esserci prima del flip.
+  const newArticle = { history: [withLive(['canton-ti'], OLD)], extraArticles: ['nuovo'] };
+  const early = await publish(withLive(['canton-ti']), newArticle);
+  assert.deepEqual([early.result.code, early.result.phase, early.result.flipped], [1, 'bootstrap', false], 'la sitemap non annuncia un articolo che R2 non ha');
+  assert.equal(served(early.io), early.before);
+  const seedNew = (io, locales) => {
+    for (const [l, base] of [['it', 'articoli-ticino/nuovo'], ['en', 'en/ticino-articles/nuovo-en'], ['de', 'de/tessin-artikel/nuovo-de'], ['fr', 'fr/articles-tessin/nuovo-fr']]) {
+      if (locales.includes(l)) io.store.set(`edge/sections/${base}/index.html`, Buffer.from(`<html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head></html>`));
+    }
+  };
+  const partial = await publish(withLive(['canton-ti']), { ...newArticle, seed: (io) => seedNew(io, ['it', 'en', 'de']) });
+  assert.equal(partial.result.phase, 'bootstrap', 'una sola lingua mancante basta a fermare il flip');
+  const ready = await publish(withLive(['canton-ti']), { ...newArticle, seed: (io) => seedNew(io, ['it', 'en', 'de', 'fr']) });
+  assert.deepEqual([ready.result.code, ready.result.phase], [0, 'done']);
+  // fast-publish-section parte dallo stesso push e puo' finire dopo: le pagine mancanti si riprovano.
+  let waits = 0;
+  let lateIo;
+  const late = await publish(withLive(['canton-ti']), {
+    ...newArticle,
+    seed: (io) => { lateIo = io; },
+    bootstrapWaitMs: 60_000,
+    sleep: async () => { waits += 1; if (waits === 2) seedNew(lateIo, ['it', 'en', 'de', 'fr']); },
+  });
+  assert.deepEqual([late.result.code, late.result.phase, waits], [0, 'done', 2]);
+  // Una pagina vecchia sparita (non nuova nella sitemap) non ferma la pubblicazione delle altre: la riconcilia il reconcile.
   const kept = await publish(withLive(['canton-ti']), {
     history: [withLive(['canton-ti'], OLD)],
     salt: ' v2',

@@ -45,14 +45,17 @@
  *    e viene riletto dal CDN: sha256 e lunghezza dei byte serviti devono
  *    essere quelli locali. Fallimento: exit, nessun cambio.
  *
- * 1b. BOOTSTRAP. Il puntatore sta per dichiarare `live` delle sezioni: le loro
- *    PAGINE (`edge/sections/<path>/index.html`, chiavi fisse scritte da
- *    publish-section-pages.mjs) devono essere gia' su R2, o il flip esporrebbe
- *    URL cantonali che rispondono 404. Per una sezione che DIVENTA live si
- *    rilegge dal CDN OGNI URL che la sua sitemap annuncia (landing, hub, tutte
- *    le pagine dell'archivio, articoli); per una gia' live le 4 landing. Ogni pagina deve
- *    rispondere 200 e portare il meta `ft-route-owner`. Se ne manca una: exit,
- *    nessun cambio — la sezione resta com'era finche' il bootstrap non c'e'.
+ * 1b. PAGINE. Il puntatore sta per dichiarare delle sitemap: OGNI URL che
+ *    annunciano — le `<loc>` e gli `href` degli alternate, quindi tutte e
+ *    quattro le lingue di ogni articolo, hub e pagina d'archivio — deve essere
+ *    gia' su R2 (`edge/sections/<path>/index.html`, chiavi fisse scritte da
+ *    publish-section-pages.mjs), o il flip pubblicherebbe link che rispondono
+ *    404. Per una sezione che DIVENTA live si rileggono tutti; per una gia'
+ *    live quelli che la sitemap servita non annunciava gia', piu' le 4
+ *    landing. Ogni pagina deve rispondere 200 e portare il meta
+ *    `ft-route-owner`. Le pagine mancanti si riprovano per qualche minuto
+ *    (fast-publish-section parte dallo stesso push e puo' finire dopo); se
+ *    alla fine ne manca una: exit, nessun cambio.
  *
  * 2. FLIP. UN PUT del puntatore. E' l'unico passo che cambia cio' che il
  *    Worker serve. Fallimento: la release servita resta quella di prima,
@@ -259,46 +262,98 @@ export const realIo = {
 };
 
 /**
- * Le chiavi R2 delle pagine che una sezione deve avere per poter essere `live`.
- *
- * Se sta DIVENTANDO live: OGNI URL che la sua sitemap annuncia — landing, hub,
- * tutte le pagine dell'archivio (`page-N` comprese, nel numero che la sitemap
- * ha calcolato) e gli articoli. La lista viene dalla sitemap della release,
- * non da un secondo calcolo: e' esattamente cio' che si sta per dichiarare ai
- * crawler. Se era gia' live: le 4 landing (un controllo di sanita'; il resto
- * lo riconcilia reconcile-section-pages).
+ * OGNI URL che una sitemap di sezione annuncia, come path canonici: le `<loc>`
+ * e gli `href` degli alternate (`xhtml:link`). Gli articoli hanno la loc in IT
+ * e le altre tre lingue SOLO negli alternate: leggere le sole `<loc>` lascerebbe
+ * fuori tre pagine su quattro. Un URL fuori dall'apex e' un errore.
+ */
+export function sitemapPaths(sitemapXml, label = 'sitemap') {
+  const urls = [
+    ...[...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]),
+    ...[...sitemapXml.matchAll(/<xhtml:link\b[^>]*\bhref="([^"]+)"/g)].map((m) => m[1]),
+  ];
+  const paths = new Set();
+  for (const url of urls) {
+    if (!url.startsWith(`${APEX}/`)) throw new Error(`${label}: URL fuori dall'apex (${url})`);
+    paths.add(url.slice(APEX.length));
+  }
+  return paths;
+}
+
+/**
+ * Le chiavi R2 delle pagine che devono esserci PRIMA che il puntatore dichiari
+ * questa sitemap: ogni URL che la sitemap annuncia e che la release servita
+ * non annunciava gia' (tutti, per una sezione che diventa live o se la sitemap
+ * precedente non e' leggibile), piu' sempre le 4 landing. La lista viene dalla
+ * sitemap della release, non da un secondo calcolo: e' esattamente cio' che si
+ * sta per dichiarare ai crawler.
  *
  * @param {string} section
- * @param {{ activation: boolean, sitemapXml?: string }} opts
+ * @param {{ sitemapXml: string, previousSitemapXml?: string | null }} opts
  */
-export function requiredPageKeys(section, { activation, sitemapXml }) {
+export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = null }) {
+  if (typeof sitemapXml !== 'string') throw new Error(`requiredPageKeys: serve la sitemap di ${section} per verificarne le pagine`);
   const landings = familySectionPages(section, 0, 1)
     .filter((page) => page.key === 'landing')
     .flatMap((page) => Object.values(page.paths));
+  const already = previousSitemapXml ? sitemapPaths(previousSitemapXml, `sitemap precedente di ${section}`) : new Set();
   const paths = new Set(landings);
-  if (activation) {
-    if (typeof sitemapXml !== 'string') throw new Error(`requiredPageKeys: serve la sitemap di ${section} per verificarne il bootstrap`);
-    for (const [, loc] of sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
-      if (!loc.startsWith(`${APEX}/`)) throw new Error(`sitemap di ${section}: <loc> fuori dall'apex (${loc})`);
-      paths.add(loc.slice(APEX.length));
-    }
-  }
+  for (const p of sitemapPaths(sitemapXml, `sitemap di ${section}`)) if (!already.has(p)) paths.add(p);
   return [...paths].map((canonicalPath) => `edge/sections${canonicalPath}index.html`);
 }
 
-/** Le pagine richieste che NON sono su R2 (200 con il meta di proprieta' della route). */
-export async function missingBootstrapPages(release, previous, io) {
+/** Quanto si aspetta, e ogni quanto si riprova, che le pagine mancanti arrivino su R2. */
+export const BOOTSTRAP_WAIT_MS = 6 * 60 * 1000;
+export const BOOTSTRAP_RETRY_MS = 20 * 1000;
+
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, async () => {
+      while (next < items.length) {
+        const i = next++;
+        out[i] = await fn(items[i]);
+      }
+    }),
+  );
+  return out;
+}
+
+/**
+ * Le pagine richieste che NON sono su R2 (200 con il meta di proprieta' della
+ * route). Per una sezione gia' live si controllano gli URL NUOVI rispetto alla
+ * sitemap servita: un articolo appena generato viene caricato su R2 da
+ * fast-publish-section.yml, che parte dallo stesso push di publish-api.yml e
+ * puo' finire dopo. Per questo le pagine mancanti si riprovano fino a `waitMs`
+ * prima di rinunciare: senza l'attesa ogni articolo cantonale farebbe fallire
+ * il publish per una gara fra due workflow.
+ */
+export async function missingBootstrapPages(release, previous, io, { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep } = {}) {
+  const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   const wasLive = (id) => previous.state === 'ok' && previous.doc.sections?.[id]?.status === 'live';
-  const missing = [];
+  let pending = [];
   for (const id of release.live) {
-    const sitemap = release.files.find((f) => f.name === `sitemap-articles-${id}.xml`);
-    const sitemapXml = sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined;
-    for (const key of requiredPageKeys(id, { activation: !wasLive(id), sitemapXml })) {
-      const got = await io.fetchBytes(`${CDN}/${key}`);
-      if (got.status !== 200 || !got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG)) missing.push(key);
+    const name = `sitemap-articles-${id}.xml`;
+    const sitemap = release.files.find((f) => f.name === name);
+    let previousSitemapXml = null;
+    if (wasLive(id) && previous.doc.release?.files?.[name]) {
+      const got = await io.fetchBytes(`${CDN}/${previous.doc.release.base}${name}`);
+      if (got.status === 200) previousSitemapXml = got.body.toString('utf8');
     }
+    pending.push(...requiredPageKeys(id, { sitemapXml: sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined, previousSitemapXml }));
   }
-  return missing;
+  const present = async (key) => {
+    const got = await io.fetchBytes(`${CDN}/${key}`);
+    return got.status === 200 && got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
+  };
+  const deadline = Date.now() + waitMs;
+  for (;;) {
+    const ok = await mapLimit(pending, 8, present);
+    pending = pending.filter((_, i) => !ok[i]);
+    if (pending.length === 0 || Date.now() + retryMs > deadline) return pending;
+    await pause(retryMs);
+  }
 }
 
 /**
@@ -334,7 +389,7 @@ export async function readPreviousRelease(io) {
  * `{ code, phase, flipped }`: `phase` e' dove si e' fermato (`done` se in fondo),
  * `flipped` se il puntatore e' stato scritto.
  */
-export async function publishRelease(release, { io, env = process.env, log = console.log, tmpDir = os.tmpdir() }) {
+export async function publishRelease(release, { io, env = process.env, log = console.log, tmpDir = os.tmpdir(), bootstrapWaitMs = BOOTSTRAP_WAIT_MS, sleep }) {
   const previous = await readPreviousRelease(io);
   const mandatory = releaseDiffers(release, previous);
   log(
@@ -379,12 +434,12 @@ export async function publishRelease(release, { io, env = process.env, log = con
   }
 
   // 1b. Bootstrap: le pagine delle sezioni che il puntatore dichiarera' live.
-  const missingPages = await missingBootstrapPages(release, previous, io);
+  const missingPages = await missingBootstrapPages(release, previous, io, { waitMs: bootstrapWaitMs, sleep });
   if (missingPages.length) {
     return stopBeforeFlip(
       'bootstrap',
-      `${missingPages.length} pagine di sezioni live non sono su R2 (es. ${missingPages.slice(0, 3).join(', ')}): ` +
-        'prima il bootstrap (fast-publish-section con bootstrap), poi il flip a live',
+      `${missingPages.length} pagine annunciate dalle sitemap delle sezioni live non sono su R2 ` +
+        `(es. ${missingPages.slice(0, 3).join(', ')}): prima le pagine (fast-publish-section), poi il flip`,
     );
   }
 
