@@ -23,7 +23,8 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.match(imageAdapter, /function materializeGovernedArticleImage\(result\)/);
   assert.match(imageAdapter, /scope !== 'article-hero'/);
   assert.match(imageAdapter, /articleHeroPath\.test\(imageUrl\)/);
-  assert.match(imageAdapter, /outputDir: resolve\('\.cache\/generated-article-images'\)/);
+  assert.match(imageAdapter, /outputDir: stagingDir/);
+  assert.match(imageAdapter, /generated-article-images\/\$\{assetId\}-\$\{process\.pid\}-\$\{Date\.now\(\)\}/);
   assert.match(imageAdapter, /renameSync\(result\.filePath, destination\)/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);

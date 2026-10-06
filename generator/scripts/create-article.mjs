@@ -264,7 +264,6 @@ import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs'
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { generateImageFromSpec } from '../../engine/shared/generatedImageEngine.mjs';
-import { isGeneratedImagePath } from '../../engine/shared/generatedImageRegistry.mjs';
 import {
   appendGeneratedImageRecord,
   hasValidBlogImageRecord,
@@ -14021,7 +14020,7 @@ function materializeGovernedArticleImage(result) {
   const record = result?.record;
   const imageUrl = String(record?.imageUrl || '');
   const articleHeroPath = /^\/images\/(?:blog|generated)\/[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
-  if (record?.scope !== 'article-hero' || !isGeneratedImagePath(imageUrl) || !articleHeroPath.test(imageUrl)) {
+  if (record?.scope !== 'article-hero' || !articleHeroPath.test(imageUrl)) {
     throw new Error(`Governed engine returned an invalid article-hero path: ${imageUrl || '<empty>'}`);
   }
   if (!result?.filePath || !existsSync(result.filePath)) {
@@ -14053,6 +14052,7 @@ async function generateArticleImage(data) {
   }
 
   const assetId = articleImageAssetId(data);
+  const stagingDir = resolve(`.cache/generated-article-images/${assetId}-${process.pid}-${Date.now()}`);
   let result;
   try {
     result = await generateImageFromSpec(
@@ -14065,7 +14065,7 @@ async function generateArticleImage(data) {
         variant: 'article hero',
       },
       {
-        outputDir: resolve('.cache/generated-article-images'),
+        outputDir: stagingDir,
         assetId,
         maxAttempts: 3,
         deadlineAt: imageDeadline,
@@ -14075,6 +14075,7 @@ async function generateArticleImage(data) {
       },
     );
   } catch (error) {
+    if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
     return null;
   }
@@ -14088,10 +14089,11 @@ async function generateArticleImage(data) {
     console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
     return null;
   } finally {
-    const stagingDir = materialized?.stagingDir
-      || (result?.filePath ? path.dirname(result.filePath) : null);
-    if (stagingDir && existsSync(stagingDir)) {
-      rmSync(stagingDir, { recursive: true, force: true });
+    const cleanupDir = materialized?.stagingDir
+      || (result?.filePath ? path.dirname(result.filePath) : null)
+      || stagingDir;
+    if (cleanupDir && existsSync(cleanupDir)) {
+      rmSync(cleanupDir, { recursive: true, force: true });
     }
   }
   data._generatedImageRecord = result.record;
