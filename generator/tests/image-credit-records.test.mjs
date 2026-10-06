@@ -6,6 +6,7 @@
  * Fixtures only, in temporary trees: the same checks on the REAL corpus are
  * the content gate `image-credits-content.test.mjs`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -305,6 +306,11 @@ function blogIndexTree() {
     fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true });
     fs.cpSync(file, path.join(root, rel));
   }
+  // D22: the corpus bootstrap reads the committed activation profile before
+  // any publisher surface is built. Fixture roots must carry that input too;
+  // otherwise this isolated publisher test fails before it reaches its own
+  // image-credit assertions.
+  writeRaw(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   writeRaw(root, 'content/blog-body/it/uno.ts', 'export const uno = true;\n');
   writeRaw(root, 'content/blog-body-ch/it/due.ts', 'export const due = true;\n');
   writeRaw(root, 'content/blog-articles-data.ts', "export const RAW_ARTICLES = [{ id: 'uno', category: 'news', date: '2026-10-01', image: '/images/blog/uno.webp' }];\n");

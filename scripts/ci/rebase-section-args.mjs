@@ -24,6 +24,7 @@
  *
  * Solo builtin Node, come ogni script di `scripts/ci/`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 

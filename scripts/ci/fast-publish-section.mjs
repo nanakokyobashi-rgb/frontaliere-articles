@@ -31,11 +31,11 @@
  *
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
-import { activeSourceSections, sectionForBodyPath } from '../lib/corpus-sections.mjs';
+import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath } from '../lib/corpus-sections.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -80,7 +80,7 @@ const isSharedR2RefreshPath = (rel) =>
  * non deve entrare nel fast-publish verso gli shard, dove `shard-of` lo
  * rifiuterebbe facendo fallire il workflow a ogni articolo.
  */
-export function bodyRegex(coreList = ARTICLE_SECTION_CORE_LIST, { served } = {}) {
+export function bodyRegex(coreList = activeCorpusCoreEntries(), { served } = {}) {
   if (served !== undefined && served !== 'shard' && served !== 'r2') throw new Error(`body-regex: tipo "${served}" sconosciuto (shard | r2)`);
   const sections = activeSourceSections(coreList).filter((s) => served === undefined || (served === 'shard') === Boolean(s.shardKey));
   // Nessuna sezione di quel tipo: un'ERE che non combacia con nessun path.
@@ -93,14 +93,14 @@ export function bodyRegex(coreList = ARTICLE_SECTION_CORE_LIST, { served } = {})
 }
 
 /** La sezione che possiede il corpo, o un errore. */
-export function sectionOf(rel, coreList = ARTICLE_SECTION_CORE_LIST) {
+export function sectionOf(rel, coreList = activeCorpusCoreEntries()) {
   const hit = sectionForBodyPath(rel, coreList);
   if (!hit) throw new Error(`'${rel}' non e' il corpo di nessuna sezione attiva`);
   return hit.section;
 }
 
 /** Lo shard Pages di una sezione attiva, o un errore. */
-export function shardOf(section, coreList = ARTICLE_SECTION_CORE_LIST) {
+export function shardOf(section, coreList = activeCorpusCoreEntries()) {
   const entry = coreList.find((core) => core.section === section);
   if (!entry) {
     throw new Error(
@@ -129,7 +129,7 @@ export function shardOf(section, coreList = ARTICLE_SECTION_CORE_LIST) {
  * @param {string[]} files path relativi alla radice del repo
  * @returns {Array<{ section: string, ids: string[], bootstrap: boolean }>} nell'ordine del core
  */
-export function r2PublishPlan(files, coreList = ARTICLE_SECTION_CORE_LIST) {
+export function r2PublishPlan(files, coreList = activeCorpusCoreEntries()) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
   const plan = new Map();
   const touch = (section) => {
@@ -201,7 +201,7 @@ function isMain() {
 if (isMain()) {
   const [cmd, arg] = process.argv.slice(2);
   try {
-    if (cmd === 'body-regex') console.log(bodyRegex(ARTICLE_SECTION_CORE_LIST, { served: arg }));
+    if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
     else if (cmd === 'r2-plan') console.log(JSON.stringify(r2PublishPlan(readFileSync(0, 'utf8').split('\n'))));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));

@@ -35,6 +35,7 @@
  * Run with tsx: the corpus sources use extensionless relative specifiers, which
  * plain Node ESM does not resolve.
  */
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -65,6 +65,11 @@ function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = []
     fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true });
     fs.cpSync(file, path.join(root, rel));
   }
+  // D22: the retire path reaches the corpus bootstrap before it can inspect
+  // the image-credit surfaces. Keep the activation profile in this isolated
+  // fixture so the test reaches its own assertions instead of failing on the
+  // committed input lookup.
+  write(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   const row = ({ id, cover = id }) => `  {\n    id: '${id}',\n    category: 'news',\n    date: '2026-10-01',\n    image: '/images/blog/${cover}.webp',\n  },\n`;
   const swissRows = [
     { id: RETIRED, cover: covers[RETIRED] ?? RETIRED },

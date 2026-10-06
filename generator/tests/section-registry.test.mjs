@@ -20,6 +20,7 @@
  * infra/cloudflare-worker/locale-router.js del sito) sono provate sui casi che
  * il Worker documenta: il Worker e' uno script autonomo e non si importa da qui.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -106,7 +107,11 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 const sha256Of = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const committed = () => JSON.parse(readFileSync(path.join(ROOT, SECTION_REGISTRY_FILE), 'utf8'));
 const TI = ARTICLE_SECTION_CORE_ALL['canton-ti'];
-const ACTIVE_WITH_TI = { ...ARTICLE_SECTION_CORE, 'canton-ti': TI };
+const AG = ARTICLE_SECTION_CORE_ALL['canton-ag'];
+const HISTORICAL_CORE = Object.fromEntries(
+  ARTICLE_SECTION_CORE_LIST.filter((core) => core.kind !== 'canton').map((core) => [core.section, core]),
+);
+const ACTIVE_WITH_TI = { ...HISTORICAL_CORE, 'canton-ti': TI };
 
 // ── 1. Il registro committato ────────────────────────────────────────────────
 
@@ -154,12 +159,12 @@ test('validatore: insieme chiuso, parita\' col core, stato ammesso', () => {
 
 test('validatore: live solo per una sezione attiva nel core', () => {
   const live = committed();
-  live.sections['canton-ti'].status = 'live';
-  assert.match(declaredRegistryErrors(live).join('\n'), /canton-ti: dichiarata live ma non attiva nel core/);
-  assert.deepEqual(declaredRegistryErrors(live, { active: ACTIVE_WITH_TI }), []);
+  live.sections['canton-ag'].status = 'live';
+  assert.match(declaredRegistryErrors(live, { active: HISTORICAL_CORE }).join('\n'), /canton-ag: dichiarata live ma non attiva nel core/);
+  assert.deepEqual(declaredRegistryErrors(live, { active: { ...ACTIVE_WITH_TI, 'canton-ag': AG } }), []);
   // retired e draft non chiedono che la sezione sia attiva.
-  live.sections['canton-ti'].status = 'retired';
-  assert.deepEqual(declaredRegistryErrors(live), []);
+  live.sections['canton-ag'].status = 'retired';
+  assert.deepEqual(declaredRegistryErrors(live, { active: HISTORICAL_CORE }), []);
 });
 
 test('validatore: redirects e gone con le regole del Worker', () => {
@@ -371,17 +376,21 @@ test('corpus-sections: la famiglia canton ha nomi aggregati, le storiche restano
     ['canton', 'canton-articles.json', 'meta-canton-de.json', 'cantons', null, 'cantonArticles', 'sitemap-articles-canton-ti.xml', 'sitemapCantonUrls'],
   );
   assert.equal(sectionApiSurfaces('frontaliere').family, null);
-  // Con la lista attiva di oggi niente di famiglia e' pubblicato.
-  assert.deepEqual(FAMILY_API_SECTIONS, []);
-  assert.deepEqual(PUBLISHED_API_SECTIONS.map((s) => s.section), API_SECTIONS.map((s) => s.section));
-  // Accesa, la sezione cantonale entra nella famiglia, non fra le storiche.
-  const withTi = publishedApiSections([...ARTICLE_SECTION_CORE_LIST, TI]);
+  // Le sezioni abilitate dal profilo entrano nella famiglia, non fra le storiche.
+  const activeCantons = ARTICLE_SECTION_CORE_LIST.filter((core) => core.kind === 'canton').map((core) => core.section);
+  assert.deepEqual(FAMILY_API_SECTIONS.map((s) => s.section), activeCantons);
+  assert.deepEqual(
+    PUBLISHED_API_SECTIONS.map((s) => s.section),
+    [...API_SECTIONS.map((s) => s.section), ...activeCantons],
+  );
+  // Una sezione cantonale esplicitamente accesa entra nella famiglia, non fra le storiche.
+  const withTi = publishedApiSections([...Object.values(HISTORICAL_CORE), TI]);
   assert.deepEqual(withTi.map((s) => s.section), ['frontaliere', 'svizzera', 'canton-ti']);
   const families = activeApiFamilies(withTi);
   assert.equal(families.length, 1);
   assert.equal(families[0].family, 'canton');
   assert.deepEqual(families[0].sections.map((s) => s.section), ['canton-ti']);
-  assert.equal(assertActiveSectionsPublishable([...ARTICLE_SECTION_CORE_LIST, TI]), true);
+  assert.equal(assertActiveSectionsPublishable([...Object.values(HISTORICAL_CORE), TI]), true);
   // Gli export che create-article scrive per una sezione cantonale.
   const src = sectionSourceSurfaces('canton-ti');
   assert.deepEqual([src.registryExport, src.slugExport, src.reverseExport, src.fallbackReasonsExport],

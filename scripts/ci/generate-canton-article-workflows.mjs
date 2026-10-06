@@ -51,6 +51,7 @@
  *
  * Solo builtin Node e moduli puri del corpus, come ogni script di `scripts/ci/`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { existsSync, readdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -126,6 +127,8 @@ const SECTION_GATE_JOB = `  section_gate:
             engine/shared
             generator/data
             generator/scripts
+            host
+            scripts/lib
             scripts/ci
 
       - name: Section gate — setup Node.js

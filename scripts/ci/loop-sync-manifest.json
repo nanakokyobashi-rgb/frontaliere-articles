@@ -3600,6 +3600,16 @@
       }
     },
     {
+      "path": "host/cantonSectionsBootstrap.mjs",
+      "mode": "corpus-only",
+      "reason": "Bootstrap host D22 che legge `generator/data/canton-sections.json` e configura nel core l'insieme delle sezioni cantonali attive prima di ogni entrypoint del corpus che usa l'engine. Esiste solo qui perche' lo stato di attivazione appartiene al corpus e il sito mantiene `ACTIVE_CANTON_CODES` vuoto.",
+      "baseline": {
+        "site": null,
+        "corpus": "ea9a64d9aa024410",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "host/spaBundleResolver.ts",
       "sitePath": "build-plugins/spaBundleResolver.ts",
       "mode": "identical",

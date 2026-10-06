@@ -30,6 +30,7 @@
  * e' derivato e non riscritto a mano, perche' la prossima costante assoluta
  * scivolerebbe dentro con la stessa facilita' della prima.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
