@@ -141,25 +141,37 @@ test('publisher: una sezione cantonale nuova o vuota ha una release articolo vuo
 test('publisher: un hero CDN non confermato blocca l\'HTML della stessa release', async () => {
   const calls = [];
   const page = pageEntry('canton-ti', 'articoli-ticino/orphan/index.html', 'article');
-  const result = await publish({
-    section: 'canton-ti',
-    pages: [page],
-    cdnUploads: [{ local: 'hero.webp', key: 'edge/sections/articoli-ticino/orphan/hero.webp' }],
-    obsoletePages: [],
-    distDir: mkdtempSync(path.join(tmpdir(), 'publish-hero-')),
-    publishedStatusImpl: async () => 'draft',
-    runImpl: (command, args) => {
-      calls.push({ command, args });
-      return { code: 1, stdout: '' };
-    },
-    probeImpl: async () => {
-      throw new Error('il verify non deve partire dopo un hero fallito');
-    },
-  });
+  const output = [];
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  let result;
+  try {
+    console.log = (...args) => output.push(args.join(' '));
+    console.error = (...args) => output.push(args.join(' '));
+    result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [{ local: 'hero.webp', key: 'edge/sections/articoli-ticino/orphan/hero.webp' }],
+      obsoletePages: [],
+      distDir: mkdtempSync(path.join(tmpdir(), 'publish-hero-')),
+      publishedStatusImpl: async () => 'draft',
+      runImpl: (command, args) => {
+        calls.push({ command, args });
+        return { code: 1, stdout: '' };
+      },
+      probeImpl: async () => {
+        throw new Error('il verify non deve partire dopo un hero fallito');
+      },
+    });
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+  }
   assert.equal(result.failures, 1);
   assert.equal(result.uploaded, 0);
   assert.equal(calls.length, 1);
   assert.match(calls[0].args.join(' '), /upload-cdn-file\.sh/);
+  assert.ok(output.some((line) => line.includes('upload hero incompleto')));
 });
 
 test('publisher: una pagina con noindex, senza meta di proprieta\', con asset same-origin o canonical altrui non esce', () => {
