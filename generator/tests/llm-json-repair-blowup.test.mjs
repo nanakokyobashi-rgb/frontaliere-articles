@@ -51,7 +51,14 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MOD = path.resolve(HERE, '../scripts/lib/llm-json-repair.mjs');
-const { fixJsonStringBody, findMatchingClose, repairLlmJson, repairLlmJsonArray } = await import(MOD);
+const {
+  fixJsonStringBody,
+  findMatchingClose,
+  getLlmJsonRepairScanMetrics,
+  repairLlmJson,
+  repairLlmJsonArray,
+  resetLlmJsonRepairScanMetrics,
+} = await import(MOD);
 
 /** La forma esatta che fa esplodere la ricorsione: catena di coppie
  *  chiave/valore con virgolette non escapate, dentro un valore di prosa. */
@@ -117,6 +124,42 @@ test('repairLlmJsonArray does not exhaust the candidate budget on nested arrays'
   const nested = Array.from({ length: 25 }, () => '{"tags":["nested"]}').join(' ');
   const raw = `[${nested} prose [{"q":"real","a":"A"}]`;
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray ignores a mismatched close while another frame is open', () => {
+  const raw = 'preamble {"broken":[1} , 2]} prose Risposta finale: [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray ignores ambiguous quote delimiters inside a quoted value', () => {
+  const raw = 'meta {"note":"prosa "chiave": [1,2] e } ancora"} [{"q":"real","a":"A"}]';
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'real', a: 'A' }]);
+});
+
+test('repairLlmJsonArray documents the 24-root scan budget', () => {
+  const preamble = Array.from({ length: 25 }, (_, i) => `{"q":"noise-${i}","a":"N"}`).join(' ');
+  const raw = `${preamble} Risposta finale: {"q":"real","a":"A"}`;
+  // By construction, the 25th later balanced root is outside the bounded
+  // candidate scan; the first valid root remains the safe fallback.
+  assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), { q: 'noise-0', a: 'N' });
+});
+
+test('scanStringEnd examines the malformed-quote suffix linearly', () => {
+  const measure = (quoteCount) => {
+    const raw = `preamble [${'"'.repeat(quoteCount)}x`;
+    resetLlmJsonRepairScanMetrics();
+    repairLlmJsonArray(raw);
+    const metrics = getLlmJsonRepairScanMetrics();
+    assert.ok(metrics.charactersExamined > 0);
+    return metrics.charactersExamined;
+  };
+
+  const n = measure(256);
+  const fourN = measure(1_024);
+  assert.ok(
+    fourN <= n * 5,
+    `la scansione dei quote cresce oltre il lineare: N=${n}, 4N=${fourN}`,
+  );
 });
 
 test('repairLlmJsonArray extracts a real FAQ payload after corrupt prose leaves an unmatched nested opener', () => {
