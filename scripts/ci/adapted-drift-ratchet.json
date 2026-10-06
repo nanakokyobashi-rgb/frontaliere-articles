@@ -52,7 +52,6 @@
     "host/firebaseAuthPersistence.ts",
     "host/htmlTemplate.ts",
     "host/seoHubsData.ts",
-    "host/shared/criticalCss.ts",
     "host/shared/literalMarkdown.ts",
     "host/shared/seoContentTokens.ts",
     "scripts/ci/auto-merge-eval.mjs",

@@ -3453,9 +3453,10 @@
       "mode": "adapted",
       "reason": "Link al CSS critico. Estratto per chiusura di `build-plugins/shared/criticalCss.ts` (893 righe la', 24 qui: il resto e' il payload CSS inline che il percorso articolo non emette). Stessa nota sulla guardia inesistente.",
       "baseline": {
-        "site": "0c5a992dec3b8ff6",
+        "site": "7ccd19b0d3a8ea26",
         "corpus": "0d394f21212a14bb",
-        "alignedAt": "2026-08-09"
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T22:24:24.340Z"
       }
     },
     {
