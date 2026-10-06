@@ -108,19 +108,36 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
 const reapplyPr = loopPr({ number: 2205, headRefName: 'fix/issue-2204', title: 'feat(mobilita): riapplica P9c su main' });
 const handoffOfOrigin = { number: 2204, title: 'Conflitto con main dopo LGTM: riapplicare la PR #2201 su main' };
 
-test('caso 1 — la PR di origine ha mergiato: la riapplicazione è superata', () => {
+const PROVEN = { proven: true, checked: 12, files: ['generator/scripts/x.mjs'] };
+
+test('caso 1 — origine mergiata E contenuto di questa PR già su main: superata', () => {
   assert.deepEqual(
-    decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' } }),
+    decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: PROVEN }),
     { close: true, reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 },
   );
   // La forma del titolo senza «dopo LGTM» è lo stesso hand-off.
   const plain = { number: 2204, title: 'Conflitto con main: riapplicare la PR #2201 su main' };
-  assert.equal(decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: plain, origin: { state: 'MERGED' } }).close, true);
+  assert.equal(decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: plain, origin: { state: 'MERGED' }, contentProof: PROVEN }).close, true);
+});
+
+test('caso 1 — origine mergiata ma contenuto NON provato su main: resta aperta', () => {
+  // Review di #2274: l'origine può aver mergiato una HEAD diversa da quella
+  // dell'hand-off, o il suo merge può essere stato revertito. Allora questa
+  // riapplicazione è l'unica consegna rimasta.
+  const decide = (contentProof) => decideReapplyOfMergedOrigin({
+    pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof,
+  });
+  assert.deepEqual(decide({ proven: false, reason: 'x.mjs: hunk 1/2 non applicato su main' }), {
+    close: false, reason: 'content-not-on-main', detail: 'x.mjs: hunk 1/2 non applicato su main',
+  });
+  assert.equal(decide(null).reason, 'content-proof-unreadable');
+  assert.equal(decide(undefined).reason, 'content-proof-unreadable');
+  assert.equal(decide({ proven: 'true' }).close, false, 'solo `proven === true` autorizza');
 });
 
 test('caso 1 — resta aperta finché l\'origine non è MERGED o non si legge', () => {
   const reason = (over) => decideReapplyOfMergedOrigin({
-    pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, ...over,
+    pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: PROVEN, ...over,
   }).reason;
   assert.equal(reason({ origin: { state: 'OPEN' } }), 'origin-not-merged');
   // Chiusa senza merge: il contributo NON è su main, la riapplicazione serve.

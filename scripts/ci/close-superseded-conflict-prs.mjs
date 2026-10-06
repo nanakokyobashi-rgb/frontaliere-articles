@@ -76,7 +76,7 @@ import {
 import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
-import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
+import { handoffRouted, originContentOnMain, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
 import { hasClaimLabel } from './stale-claim-detector.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
@@ -233,9 +233,10 @@ export function latestConflictLabelEventAt(events) {
  * @param {object} p.pr            la PR candidata (`headRefName`)
  * @param {object|null} p.fixerIssue  la issue del branch `fix/issue-<K>` (`title`), o null
  * @param {object|null} p.origin   la PR di origine dell'hand-off (`state`), o null
- * @returns {{ close: boolean, reason: string, origin?: number, handoff?: number }}
+ * @param {{proven: boolean, reason?: string}|null} p.contentProof  `originContentOnMain` sui file di QUESTA PR, o null se illeggibile
+ * @returns {{ close: boolean, reason: string, origin?: number, handoff?: number, detail?: string }}
  */
-export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin }) {
+export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentProof }) {
   const issueNumber = fixerIssueOfBranch(pr?.headRefName);
   if (issueNumber === null) return { close: false, reason: 'not-a-fixer-branch' };
   if (!fixerIssue) return { close: false, reason: 'fixer-issue-unreadable' };
@@ -244,6 +245,15 @@ export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin }) {
   if (Number(originNumber) === Number(pr?.number)) return { close: false, reason: 'handoff-of-itself' };
   if (!origin) return { close: false, reason: 'origin-unreadable' };
   if (String(origin.state || '').toUpperCase() !== 'MERGED') return { close: false, reason: 'origin-not-merged' };
+  // «L'origine ha mergiato» non basta: può aver mergiato una HEAD diversa da
+  // quella dell'hand-off (force-push), o il merge può essere stato revertito,
+  // e allora questa riapplicazione è l'unica consegna rimasta. La prova è sul
+  // contenuto: ogni hunk di QUESTA PR deve essere già su main adesso
+  // (`originContentOnMain`, la stessa del riconciliatore).
+  if (!contentProof) return { close: false, reason: 'content-proof-unreadable' };
+  if (contentProof.proven !== true) {
+    return { close: false, reason: 'content-not-on-main', detail: String(contentProof.reason || '') };
+  }
   return { close: true, reason: 'reapply-origin-merged', origin: originNumber, handoff: issueNumber };
 }
 
@@ -311,7 +321,7 @@ export function latestHandoffOf(prNumber, issues) {
 }
 
 const CLOSING_REASONS = Object.freeze({
-  'reapply-origin-merged': ({ origin, handoff }) => `questa PR riapplicava la PR di origine **#${origin}** (hand-off #${handoff}), che nel frattempo è stata mergiata: il contributo è su \`main\` dal ramo originale e qui non resta niente da consegnare.`,
+  'reapply-origin-merged': ({ origin, handoff }) => `questa PR riapplicava la PR di origine **#${origin}** (hand-off #${handoff}), che nel frattempo è stata mergiata, e ogni hunk di questa PR risulta già presente su \`main\`: qui non resta niente da consegnare.`,
   'handoff-already-fixed': ({ handoff }) => `il fixer ha lavorato l'hand-off **#${handoff}** di questa PR e ha chiuso con \`FIX_OUTCOME: ${SUPERSEDING_OUTCOME}\` — il contenuto approvato era già su \`main\` per un'altra via, quindi non esiste una PR sostitutiva. La verifica del fixer è nei commenti di #${handoff}.`,
 });
 
@@ -391,6 +401,24 @@ function readIssueComments(number) {
   }
 }
 
+/** I file della PR con la loro patch, o null se la lettura fallisce. */
+function readPrFiles(prNumber) {
+  const raw = gh(['api', '--paginate', '--slurp', `repos/${REPO}/pulls/${Number(prNumber)}/files?per_page=100`]);
+  if (raw === null) return null;
+  try {
+    const pages = JSON.parse(raw);
+    return Array.isArray(pages) && pages.every(Array.isArray) ? pages.flat() : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Un file com'è su main adesso, o null. Stessa lettura del riconciliatore. */
+function readMainFile(filePath) {
+  const encoded = String(filePath).split('/').map(encodeURIComponent).join('/');
+  return gh(['api', '-H', 'Accept: application/vnd.github.raw+json', `repos/${REPO}/contents/${encoded}?ref=${BASE_BRANCH}`]);
+}
+
 function readConflictLabelEventAt(number) {
   const raw = gh(['api', '--paginate', '--slurp', `repos/${REPO}/issues/${Number(number)}/events?per_page=100`]);
   if (raw === null) return null;
@@ -437,7 +465,10 @@ function decide(pr, openPrs) {
     const fixerIssue = readFixerIssue(fixerIssueNumber);
     const originNumber = fixerIssue ? conflictHandoffOriginPr(fixerIssue.title) : null;
     const origin = originNumber !== null && originNumber !== Number(pr.number) ? readPrState(originNumber) : null;
-    const reapply = decideReapplyOfMergedOrigin({ pr, fixerIssue, origin });
+    // La prova di contenuto costa una lettura per file: solo se l'origine è mergiata.
+    const files = String(origin?.state || '').toUpperCase() === 'MERGED' ? readPrFiles(pr.number) : null;
+    const contentProof = files ? originContentOnMain(files, readMainFile) : null;
+    const reapply = decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentProof });
     if (reapply.close) return reapply;
   }
   const handoffs = readHandoffs(pr.number);

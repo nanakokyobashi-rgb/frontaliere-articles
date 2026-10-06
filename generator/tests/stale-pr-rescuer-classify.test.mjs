@@ -249,6 +249,10 @@ function runScan({
     writeFileSync(fixCommentsMalformed, commentsMalformed ? 'true' : 'false');
     writeFileSync(fixGitFetchError, gitFetchError ? 'true' : 'false');
     writeFileSync(fixMergeTreeState, String(prs?.[0]?.mergeable || 'UNKNOWN'));
+    const fixMergeTreeSecond = path.join(dir, 'merge-tree-second');
+    const fixMergeTreeCalls = path.join(dir, 'merge-tree-calls');
+    writeFileSync(fixMergeTreeSecond, String(prs?.[0]?._mergeTreeSecond || ''));
+    writeFileSync(fixMergeTreeCalls, '');
 
     // `gh`: serve le letture del rescuer e registra le scritture
     // (add-label, remove-label, comment, workflow run). Ogni
@@ -342,7 +346,7 @@ case "$sub" in
           # Rilettura della classe F subito prima della mutation: lo stato
           # CORRENTE della PR. _live nella fixture simula ciò che è cambiato
           # fra la prova e la label; _liveError una lettura fallita.
-          node -e 'const value=require(process.argv[1]); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const pr={...base,...(base?._live||{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"", pr.mergeable_state||"", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)}
+          node -e 'const value=require(process.argv[1]); const base=Array.isArray(value)?value[0]:value; if (base?._liveError) process.exit(1); const pr={...base,...(base?._live||{})}; process.stdout.write([pr.state||"open", pr.head?.sha||"", pr.base?.ref||"-", pr.head?.ref||"-", String(Boolean(pr.draft)), pr.mergeable_state||"unknown", (pr.labels||[]).map((l)=>l.name).join(",")].join("\\t")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.mergeable_state // ""' ]; then
           node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; if (pr?.mergeable_state === "__error__") process.exit(1); process.stdout.write(String(pr?.mergeable_state||"")+"\\n")' ${JSON.stringify(fixPrs)}
         elif [ "$jq" = '.body // ""' ]; then
@@ -444,7 +448,12 @@ case "\$1" in
     printf '%s\\n' ${JSON.stringify(HEAD_SHA)}
     ;;
   merge-tree)
-    case "\$(cat ${JSON.stringify(fixMergeTreeState)})" in
+    printf 'x' >> ${JSON.stringify(path.join(dir, 'merge-tree-calls'))}
+    state="\$(cat ${JSON.stringify(fixMergeTreeState)})"
+    if [ "\$(wc -c < ${JSON.stringify(path.join(dir, 'merge-tree-calls'))})" -gt 1 ] && [ -s ${JSON.stringify(path.join(dir, 'merge-tree-second'))} ]; then
+      state="\$(cat ${JSON.stringify(path.join(dir, 'merge-tree-second'))})"
+    fi
+    case "\$state" in
       CONFLICTING) exit 1 ;;
       MERGEABLE) exit 0 ;;
       *) exit 2 ;;
@@ -1198,6 +1207,8 @@ test('F — la PR cambia fra la prova e la label: nessuna mutation', opts, () =>
     ['needs-human arrivato nel frattempo', { labels: [{ name: 'has-conflicts' }, { name: 'needs-human' }] }],
     ['base cambiata', { base: { ref: 'release/2026-10' } }],
     ['PR chiusa', { state: 'closed' }],
+    ['diventata draft', { draft: true }],
+    ['non più del ciclo', { head: { ref: 'feat/umana', sha: HEAD_SHA }, labels: [{ name: 'has-conflicts' }] }],
   ]) {
     const r = runScan({ prs: conflicted([], { _live: live }), ...greenLgtm() });
     assert.deepEqual(r.labeled, [], `${what}: label applicata a un oggetto diverso da quello provato\n${r.stdout}`);
@@ -1206,6 +1217,33 @@ test('F — la PR cambia fra la prova e la label: nessuna mutation', opts, () =>
   const unreadable = runScan({ prs: conflicted([], { _liveError: true }), ...greenLgtm() });
   assert.deepEqual(unreadable.labeled, [], unreadable.stdout);
   assert.deepEqual(unreadable.comments, [], unreadable.stdout);
+});
+
+test('F — la prova che autorizza la label è il merge-tree DOPO la rilettura', opts, () => {
+  // main si muove fra la prima prova e la label: `mergeable_state` è ancora
+  // `dirty` (cache), ma il secondo merge-tree dice che il conflitto è rientrato.
+  for (const second of ['MERGEABLE', 'UNKNOWN']) {
+    const r = runScan({ prs: conflicted([], { _mergeTreeSecond: second }), ...greenLgtm() });
+    assert.deepEqual(r.labeled, [], `secondo merge-tree ${second}: label su una PR non più provata in conflitto\n${r.stdout}`);
+    assert.deepEqual(r.comments, [], r.stdout);
+  }
+});
+
+test('F — la label si decide sulle label RILETTE, non sullo snapshot', opts, () => {
+  // Lo snapshot aveva `stale-review`, ma un altro workflow l'ha tolta nella
+  // finestra: senza l'add la PR resterebbe senza il segnale per il recycle.
+  const removed = runScan({
+    prs: conflicted(['stale-review'], { _live: { labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }] } }),
+    ...greenLgtm(),
+  });
+  assert.deepEqual(removed.labeled, [901], removed.stdout);
+  // E il contrario: assente nello snapshot, già presente alla rilettura.
+  const added = runScan({
+    prs: conflicted([], { _live: { labels: [{ name: 'has-conflicts' }, { name: 'stale-review' }] } }),
+    ...greenLgtm(),
+  });
+  assert.deepEqual(added.labeled, [], added.stdout);
+  assert.equal(added.comments.length, 1, added.stdout);
 });
 
 test('F — idempotenza: stesso head già segnalato, nessun secondo commento', opts, () => {

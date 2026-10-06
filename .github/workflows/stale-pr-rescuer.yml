@@ -446,24 +446,24 @@ jobs:
               esac
             fi
             if [ "$F_CONFIRMED" = "true" ]; then
-              F_TREE_STATE=unknown
-              F_PR_REF="refs/remotes/origin/pr-$N-head"
-              if git fetch --no-tags --quiet origin \
-                "refs/heads/main:refs/remotes/origin/main" \
-                "refs/pull/$N/head:$F_PR_REF" >/dev/null 2>&1; then
-                if F_FETCHED_HEAD=$(git rev-parse "$F_PR_REF" 2>/dev/null) \
-                  && [ "$F_FETCHED_HEAD" = "$HEAD" ]; then
-                  if git merge-tree --write-tree refs/remotes/origin/main "$F_PR_REF" >/dev/null 2>&1; then
-                    F_MERGE_STATUS=0
-                  else
-                    F_MERGE_STATUS=$?
-                  fi
-                  case "$F_MERGE_STATUS" in
-                    0) F_TREE_STATE=clean ;;
-                    1) F_TREE_STATE=conflicted ;;
-                  esac
-                fi
-              fi
+              # merge-tree sulla HEAD: fetch di main e della ref della PR, poi
+              # l'unione reale. Stampa conflicted, clean o unknown (fetch
+              # fallito, ref diversa dalla HEAD attesa, oggetto mancante).
+              f_merge_tree_state() {
+                local ref="refs/remotes/origin/pr-$1-head" fetched status
+                git fetch --no-tags --quiet origin \
+                  "refs/heads/main:refs/remotes/origin/main" \
+                  "refs/pull/$1/head:$ref" >/dev/null 2>&1 || { echo unknown; return 0; }
+                fetched=$(git rev-parse "$ref" 2>/dev/null) || { echo unknown; return 0; }
+                [ "$fetched" = "$2" ] || { echo unknown; return 0; }
+                if git merge-tree --write-tree refs/remotes/origin/main "$ref" >/dev/null 2>&1; then status=0; else status=$?; fi
+                case "$status" in
+                  0) echo clean ;;
+                  1) echo conflicted ;;
+                  *) echo unknown ;;
+                esac
+              }
+              F_TREE_STATE=$(f_merge_tree_state "$N" "$HEAD")
               if [ "$F_TREE_STATE" != "conflicted" ]; then
                 echo "PR #$N: has-conflicts conservata ma merge-tree corrente è $F_TREE_STATE — nessuna azione della classe F."
                 continue
@@ -473,31 +473,54 @@ jobs:
               MARKER="<!-- stale-pr-rescuer class=F head=${HEAD:0:7} -->"
               echo "::warning::PR #$N FERMA — $REASON"
               if [ "${DRY_RUN:-false}" = "true" ]; then echo "(dry-run) nessuna azione su PR #$N"; continue; fi
-              # Rilettura subito prima della mutation. Fra la prova (stato di
-              # GitHub, fetch, merge-tree) e la label passano secondi in cui la
-              # PR può cambiare: un push porta una HEAD nuova, magari già
-              # pulita, e la label andrebbe sul contenuto sbagliato — con il
-              # recycle a 24 ore dietro. Si muta solo se l'oggetto di ADESSO è
-              # quello provato: aperta, stessa HEAD, base main, ancora `dirty`,
-              # ancora `has-conflicts`, nessun `needs-human` arrivato nel
-              # frattempo. Lettura fallita o qualunque differenza → invariata.
-              F_LIVE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '[.state, .head.sha, .base.ref, (.mergeable_state // ""), ([.labels[]?.name] | join(","))] | @tsv' 2>/dev/null || true)
-              IFS=$'\t' read -r F_LIVE_STATE F_LIVE_HEAD F_LIVE_BASE F_LIVE_MERGEABLE F_LIVE_LABELS <<<"$F_LIVE" || true
+              # Rilettura subito prima della mutation, e DOPO di lei la prova.
+              # Fra la prima prova e la label passano secondi in cui tutto può
+              # cambiare: un push porta una HEAD nuova, main si muove e il
+              # conflitto rientra, la PR diventa draft o perde la provenienza
+              # del ciclo, un altro workflow toglie `stale-review`. Quindi:
+              #   1. si rilegge il record intero e si pretende che sia ancora
+              #      una PR del ciclo, aperta, non draft, sulla stessa HEAD,
+              #      verso main, `dirty`, con `has-conflicts` e senza
+              #      `needs-human`;
+              #   2. si rifà fetch + merge-tree su quella stessa HEAD: è questa
+              #      seconda prova, l'ultima cosa prima della label, ad
+              #      autorizzarla — non lo stato di GitHub, che è una cache;
+              #   3. la label si decide sulle label RILETTE, non sullo snapshot
+              #      iniziale, e se l'add fallisce non si commenta.
+              # Lettura fallita o qualunque differenza → PR invariata.
+              # Nessun campo intermedio vuoto: `read` con IFS=tab li fonderebbe.
+              F_LIVE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '[.state, .head.sha, .base.ref, .head.ref, (.draft | tostring), (if (.mergeable_state // "") == "" then "unknown" else .mergeable_state end), ([.labels[]?.name] | join(","))] | @tsv' 2>/dev/null || true)
+              IFS=$'\t' read -r F_LIVE_STATE F_LIVE_HEAD F_LIVE_BASE F_LIVE_BRANCH F_LIVE_DRAFT F_LIVE_MERGEABLE F_LIVE_LABELS <<<"$F_LIVE" || true
               F_LIVE_OK=true
               [ "${F_LIVE_STATE:-}" = "open" ] || F_LIVE_OK=false
               [ "${F_LIVE_HEAD:-}" = "$HEAD" ] || F_LIVE_OK=false
               [ "${F_LIVE_BASE:-}" = "main" ] || F_LIVE_OK=false
+              [ "${F_LIVE_DRAFT:-}" = "false" ] || F_LIVE_OK=false
               [ "${F_LIVE_MERGEABLE:-}" = "dirty" ] || F_LIVE_OK=false
               case ",${F_LIVE_LABELS:-}," in *,has-conflicts,*) ;; *) F_LIVE_OK=false ;; esac
               case ",${F_LIVE_LABELS:-}," in *,needs-human,*) F_LIVE_OK=false ;; esac
+              # Provenienza del ciclo, la stessa regola del filtro in cima.
+              case "${F_LIVE_BRANCH:-}" in
+                fix/*) ;;
+                *) case ",${F_LIVE_LABELS:-}," in *,agent:autofix,*) ;; *) F_LIVE_OK=false ;; esac ;;
+              esac
               if [ "$F_LIVE_OK" != "true" ]; then
-                echo "PR #$N: stato cambiato o non rileggibile fra la prova e la label (state=${F_LIVE_STATE:-?} head=${F_LIVE_HEAD:0:7} base=${F_LIVE_BASE:-?} mergeable_state=${F_LIVE_MERGEABLE:-?}) — PR invariata"
+                echo "PR #$N: stato cambiato o non rileggibile fra la prova e la label (state=${F_LIVE_STATE:-?} head=${F_LIVE_HEAD:0:7} base=${F_LIVE_BASE:-?} draft=${F_LIVE_DRAFT:-?} mergeable_state=${F_LIVE_MERGEABLE:-?}) — PR invariata"
                 continue
               fi
-              if [ -z "$HAS_LABEL" ]; then
-                gh pr edit "$N" --repo "$REPO" --add-label "stale-review" 2>/dev/null || \
-                  echo "::warning::label stale-review non applicata (assente? la crea scripts/ci/ensure-loop-labels.mjs)"
+              F_TREE_STATE=$(f_merge_tree_state "$N" "$F_LIVE_HEAD")
+              if [ "$F_TREE_STATE" != "conflicted" ]; then
+                echo "PR #$N: merge-tree dopo la rilettura è $F_TREE_STATE — conflitto non più provato, PR invariata"
+                continue
               fi
+              case ",${F_LIVE_LABELS:-}," in
+                *,stale-review,*) ;;
+                *)
+                  if ! gh pr edit "$N" --repo "$REPO" --add-label "stale-review" 2>/dev/null; then
+                    echo "::warning::PR #$N: label stale-review non applicata (assente? la crea scripts/ci/ensure-loop-labels.mjs) — nessun commento, ritento al prossimo scan"
+                    continue
+                  fi ;;
+              esac
               if ! F_POSTED=$(gh api --paginate "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null) \
                 || ! F_BODIES=$(printf '%s\n' "$F_POSTED" | jq -rs '[.[][]? | .body // ""] | join("\n")' 2>/dev/null); then
                 echo "::warning::Commenti della PR #$N illeggibili — label applicata, commento della classe F rinviato."
