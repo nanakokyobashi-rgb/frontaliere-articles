@@ -7669,25 +7669,6 @@
           "items7d": 8,
           "verifiedAt": "2026-10-05",
           "notes": "8 item recenti; unica fonte VCO verificata con feed. Stessa piattaforma di VareseNews."
-        },
-        {
-          "url": "https://www.locarno.ch/it/news",
-          "format": "html",
-          "parser": "html-links",
-          "publisher": "Città di Locarno - attualità e comunicati",
-          "language": "it",
-          "kind": "istituzionale",
-          "topics": [
-            "mobilita",
-            "servizi",
-            "cronaca"
-          ],
-          "quirks": {
-            "articlePathPattern": "^/files/news/[^/?]+\\.pdf$"
-          },
-          "items7d": 1,
-          "verifiedAt": "2026-10-06",
-          "notes": "Misura reale: GET con User-Agent frontaliere-source-probe/1.0 -> status 200, content-type text/html; charset=UTF-8. Items ultimi 7 giorni: 1. Titoli osservati: \"Comunicato - Senso unico via Rovedo causa opere di scavo\"; \"Comunicato - Chiusura via della Posta e via Ballerini\"; \"Cena di gala 2025 del Corpo civici pompieri di Locarno, arricchita da giubilei e promozioni\". Lista HTML/PDF con 1 comunicato del 30.09.2026; i PDF sono duplicati due volte nella pagina ma rappresentano una sola storia: deduplicare URL. Robots exact path verificato: consentito; nessun bypass WAF/captcha/login. Pagina legale/termini https://www.locarno.ch/it/impressum -> 200; nessun divieto esplicito ClaudeBot/anthropic-ai/GPTBot/ai-input=no rilevato."
         }
       ],
       "categoryDataSources": {
