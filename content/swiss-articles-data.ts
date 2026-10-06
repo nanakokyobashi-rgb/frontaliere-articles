@@ -24771,6 +24771,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ginevra-iniziativa-cern-fcc',
+    category: 'novita',
+    date: '2026-10-06T17:58:26.506Z',
+    image: '/images/blog/ginevra-iniziativa-cern-fcc.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['GE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/zh%3a-processo-junge-tat%3b-procura-chiede-condanna%2c-difesa-assoluzione/92008105": {
-    "articleId": "processo-junge-tat-zurigo",
-    "ts": "2026-09-05T10:54:48.947Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4061616": {
     "articleId": "mezzo-miliardo-contadini-mercosur",
     "ts": "2026-09-05T11:11:32.077Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/in-svizzera-10%27500-maiali-uccisi-per-malattia-polmonare/92176032": {
     "articleId": "maiali-polmonite-enzootica-svizzera",
     "ts": "2026-10-06T17:19:31.582Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4139261": {
+    "articleId": "ginevra-iniziativa-cern-fcc",
+    "ts": "2026-10-06T17:58:27.045Z",
     "keyForm": 2
   }
 }
