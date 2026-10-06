@@ -304,6 +304,7 @@ import {
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
+import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
@@ -13394,6 +13395,13 @@ function optimizeSeoMetadata(data) {
   data.seo.title = candidate.length <= TITLE_MAX_CHARS ? candidate : seoTitleCore;
   data.seo.ogTitle = data.seo.ogTitle ? String(data.seo.ogTitle).trim() : seoTitleCore;
   data.seo.headline = data.seo.headline ? String(data.seo.headline).trim() : seoTitleCore;
+  // The model's character cap can leave either persisted field as a strict
+  // prefix of the editorial title (for example, ending on `per` or `cosa`).
+  // Repair only that provable shape, using the shared clause helper; unrelated
+  // model output remains visible for the existing quality gates to reject.
+  for (const { field, before, after } of repairSeoTitleFields(data.seo, seoTitleCore)) {
+    console.error(`  🔧 SEO ${field} ⇐ content.it.title ("${before}" → "${after}")`);
+  }
   // Non-vuota per la stessa ragione del `title` sopra: il breadcrumb finisce
   // nel JSON-LD `BreadcrumbList`, dove una `name` vuota e' un item invalido, e
   // il budget qui e' 42 — meta' del `title`, quindi il ramo del rifiuto scatta
