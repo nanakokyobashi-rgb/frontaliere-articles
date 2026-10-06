@@ -102,6 +102,66 @@ test('PARENT-REARM: i quattro casi misurati rientrano una sola volta', () => {
   }
 });
 
+test('il marker scritto nello stesso secondo della ricorrenza vale come riarmo già fatto', () => {
+  // I commenti sono datati al secondo: ricorrenza e marker possono avere lo
+  // stesso istante. Stesso caso del sito (PR 11968 di frontaliere-si-o-no).
+  const parent = realCases[0];
+  const sameSecond = [
+    ...commentsFor(parent),
+    {
+      body: parentRearmCommentBody({ reopenedAt: parent.reopenedAt, childNumbers: parent.children }),
+      createdAt: parent.reopenedAt,
+    },
+  ];
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN',
+    comments: sameSecond,
+    childStates: closedChildren(parent.children),
+    now: NOW,
+  }).reason, 'already-rearmed');
+
+  const before = [
+    ...commentsFor(parent),
+    {
+      body: parentRearmCommentBody({ reopenedAt: parent.reopenedAt, childNumbers: parent.children }),
+      createdAt: new Date(Date.parse(parent.reopenedAt) - 1000).toISOString(),
+    },
+  ];
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN',
+    comments: before,
+    childStates: closedChildren(parent.children),
+    now: NOW,
+  }).action, 'rearm');
+});
+
+test('il drainer legge lo stato del padre: senza `state` ogni padre sarebbe illeggibile', () => {
+  // La decisione e' fail-closed sullo stato mancante...
+  const parent = realCases[0];
+  assert.equal(decideParentRearm({
+    parentState: undefined,
+    comments: commentsFor(parent),
+    childStates: closedChildren(parent.children),
+    now: NOW,
+  }).reason, 'unreadable');
+  // ...quindi il listing che alimenta il pass deve chiedere `state` a GitHub,
+  // e il pass deve passare proprio quel campo.
+  const listing = /function listIssues\(label\) \{[\s\S]*?\n\}/.exec(DRAINER)?.[0] || '';
+  const projection = /'--json',\s*'([^']+)'/.exec(listing)?.[1].split(',') || [];
+  assert.ok(projection.includes('state'), `proiezione di listIssues senza state: ${projection.join(',')}`);
+  assert.match(DRAINER, /parentState: p\.state,/);
+  // `gh issue list --json state` rende lo stato in maiuscolo, il REST del
+  // sito in minuscolo: la decisione li accetta entrambi.
+  for (const state of ['OPEN', 'open']) {
+    assert.equal(decideParentRearm({
+      parentState: state,
+      comments: commentsFor(parent),
+      childStates: closedChildren(parent.children),
+      now: NOW,
+    }).action, 'rearm', state);
+  }
+});
+
 test('PARENT-REARM non agisce con una figlia aperta', () => {
   const parent = realCases[0];
   const states = closedChildren(parent.children);

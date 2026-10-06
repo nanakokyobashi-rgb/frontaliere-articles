@@ -2635,9 +2635,13 @@ function listIssuesBounded(args, what) {
 }
 
 function listIssues(label) {
+  // `state` fa parte della proiezione: il PARENT-REARM decide sullo stato del
+  // padre letto da GitHub e resta fail-closed (`unreadable`) quando manca.
+  // Senza questo campo ogni padre risultava illeggibile e nessuno veniva
+  // riarmato (review della PR 2322).
   return listIssuesBounded([
     'issue', 'list', '--repo', REPO, '--state', 'open', '--label', label,
-    '--json', 'number,title,labels,createdAt,updatedAt',
+    '--json', 'number,title,labels,createdAt,updatedAt,state',
   ], `issue aperte con label \`${label}\``);
 }
 
