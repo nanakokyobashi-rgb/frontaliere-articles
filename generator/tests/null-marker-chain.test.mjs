@@ -509,7 +509,7 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     // L'elenco dei motivi non si scrive a mano due volte: lo si legge dal
     // motore. Un motivo nuovo emesso li' e dimenticato nell'allow-list del
     // registro lasciava `wasFreeMtUnusable` a false: il campo rifiutato
-    // saltava il cap dei retry LLM (corpus 2313, `mangled-template-heading`).
+    // saltava il cap dei retry LLM (review della PR corpus 2313).
     const motore = readFileSync(
       path.join(__dirname, '..', 'scripts', 'lib', 'article-free-mt.mjs'),
       'utf-8',
@@ -518,7 +518,7 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
       /reason:\s*(?:'([a-z][a-z-]*)'|[^,\n]*?\?\s*'([a-z][a-z-]*)'\s*:\s*'([a-z][a-z-]*)')/g,
     )];
     const chiamate = motore.match(/onUnusableOutput\(/g) ?? [];
-    assert.ok(chiamate.length >= 8, 'il motore deve segnalare i suoi rifiuti');
+    assert.ok(chiamate.length >= 7, 'il motore deve segnalare i suoi rifiuti');
     assert.equal(
       emissioni.length,
       chiamate.length,
@@ -526,7 +526,7 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     );
 
     const motivi = new Set(emissioni.flatMap((m) => m.slice(1).filter(Boolean)));
-    assert.ok(motivi.has('mangled-template-heading'));
+    assert.ok(motivi.has('mangled-nav-link') && motivi.has('non-string'));
     for (const reason of motivi) {
       const report = createFreeMtRecoveryReport();
       recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason });

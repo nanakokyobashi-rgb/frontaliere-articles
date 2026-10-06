@@ -63,7 +63,6 @@ const FREE_MT_CAP_REASONS = new Set([
   'passthrough',
   'mangled-nav-link',
   'mangled-municipality-name',
-  'mangled-template-heading',
   'lone-surrogate',
   'semantic-truncation',
 ]);

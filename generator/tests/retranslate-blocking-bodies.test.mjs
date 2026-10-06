@@ -307,12 +307,18 @@ test('templateHeadingIssue: con `## Eckdaten` il motivo e\' il titolo, non il ge
   );
 });
 
-test('translateFieldFreeMt sottrae entrambi i titoli, li canonizza in en/de/fr e supera la guardia', async () => {
-  const inputs = [];
-  const translated = {};
+// Un titolo di template non arriva mai al motore: il campo viene diviso ai
+// titoli, il motore traduce i blocchi di testo e la forma canonica della lingua
+// di arrivo viene riscritta fra un blocco e l'altro. Qualunque cosa il motore
+// faccia al testo che riceve, il titolo non puo' essere tradotto, fuso in una
+// frase, spostato o perso.
+const TEMPLATE_HEADING_LINE_RE = /^## (In breve|Fatti chiave)$/m;
+
+test('translateFieldFreeMt non manda i titoli al motore, li canonizza in en/de/fr e supera la guardia', async () => {
   const source = IT_TEMPLATE_BODY1;
 
   for (const locale of ['en', 'de', 'fr']) {
+    const inputs = [];
     const out = await translateFieldFreeMt({
       text: source,
       sourceLang: 'it',
@@ -321,15 +327,18 @@ test('translateFieldFreeMt sottrae entrambi i titoli, li canonizza in en/de/fr e
       fieldName: 'body1',
       translate: async ({ text }) => {
         inputs.push(text);
-        assert.doesNotMatch(text, /^## In breve$/m);
-        assert.doesNotMatch(text, /^## Fatti chiave$/m);
-        // Il motore finto altera ogni riga di testo, ma conserva i token opachi.
-        return text.split('\n').map((line) => (
-          line.startsWith('0') ? line : `MT ${line}`
-        )).join('\n');
+        // Il motore finto altera ogni riga che riceve.
+        return text.split('\n').map((line) => (line ? `MT ${line}` : line)).join('\n');
       },
     });
-    translated[locale] = out;
+
+    // Due blocchi di testo (dopo ciascun titolo), quindi due chiamate; nessuna
+    // contiene un titolo di template ne' un segnaposto al suo posto.
+    assert.equal(inputs.length, 2, locale);
+    for (const input of inputs) {
+      assert.doesNotMatch(input, TEMPLATE_HEADING_LINE_RE);
+      assert.doesNotMatch(input, /0H0\d+Q0/);
+    }
     assert.match(out, new RegExp(`^${getTldrHeading(locale)}$`, 'm'));
     assert.match(out, new RegExp(`^${getKeyFactsHeading(locale)}$`, 'm'));
     assert.equal(
@@ -341,25 +350,70 @@ test('translateFieldFreeMt sottrae entrambi i titoli, li canonizza in en/de/fr e
       null,
     );
   }
-
-  assert.equal(inputs.length, 3);
-  assert.equal(Object.keys(translated).length, 3);
 });
 
-test('translateFieldFreeMt ripristina ogni occorrenza ripetuta dello stesso titolo', async () => {
+test('un motore che appiattisce le righe non sposta i titoli ne\' le righe vuote attorno', async () => {
+  // E' cio' che fa il ramo a pezzi della cascata per i testi lunghi
+  // (`_chunkAtSentences` e `parts.join(' ')` in free-translate.mjs): unisce
+  // segmenti e pezzi con uno spazio. Una sentinella «sola sulla sua riga» non
+  // potrebbe sopravvivere; un titolo che il motore non vede si'.
+  const out = await translateFieldFreeMt({
+    text: IT_TEMPLATE_BODY1,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate: async ({ text }) => `  MT ${text.replace(/\s*\n\s*/g, ' ')}  \r\n`,
+  });
+
+  const lines = out.split('\n');
+  assert.equal(lines[0], getTldrHeading('de'));
+  assert.equal(lines[1], 'MT - Il permesso G si rinnova ogni cinque anni.');
+  assert.equal(lines[2], '');
+  assert.equal(lines[3], getKeyFactsHeading('de'));
+  assert.ok(lines[4].startsWith('MT - **Cosa**: rinnovo del permesso G.'));
+  assert.equal(lines.length, 5, 'i titoli restano due righe intere, nell\'ordine della sorgente');
+  assert.equal(
+    templateHeadingIssue({
+      italianSections: { body1: IT_TEMPLATE_BODY1 },
+      newSections: { body1: out },
+      locale: 'de',
+    }),
+    null,
+  );
+});
+
+test('translateFieldFreeMt riscrive ogni occorrenza ripetuta dello stesso titolo', async () => {
   const source = ['## In breve', 'Primo testo.', '## In breve', 'Secondo testo.'].join('\n');
   const out = await translateFieldFreeMt({
     text: source,
     sourceLang: 'it',
     targetLang: 'de',
     fieldType: 'title',
-    translate: async ({ text }) => text.split('\n').map((line) => (
-      line.startsWith('0') ? line : `MT ${line}`
-    )).join('\n'),
+    translate: async ({ text }) => `MT ${text}`,
   });
 
-  assert.equal(out.split(getTldrHeading('de')).length - 1, 2);
-  assert.equal(out.includes('## In breve'), false);
+  assert.equal(out, [
+    getTldrHeading('de'), 'MT Primo testo.', getTldrHeading('de'), 'MT Secondo testo.',
+  ].join('\n'));
+});
+
+test('titoli adiacenti o in coda non generano chiamate a vuoto', async () => {
+  const inputs = [];
+  const out = await translateFieldFreeMt({
+    text: ['Premessa.', '## In breve', '', '## Fatti chiave'].join('\n'),
+    sourceLang: 'it',
+    targetLang: 'fr',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate: async ({ text }) => {
+      inputs.push(text);
+      return `MT ${text}`;
+    },
+  });
+
+  assert.deepEqual(inputs, ['Premessa.']);
+  assert.equal(out, ['MT Premessa.', getTldrHeading('fr'), '', getKeyFactsHeading('fr')].join('\n'));
 });
 
 test('titolo assente o presente solo dentro una riga di prosa resta nel testo tradotto', async () => {
@@ -384,6 +438,24 @@ test('titolo assente o presente solo dentro una riga di prosa resta nel testo tr
   }
 });
 
+test('senza titoli di template il campo va al motore in una chiamata e l\'uscita resta com\'e\'', async () => {
+  const inputs = [];
+  const out = await translateFieldFreeMt({
+    text: 'Prima riga.\n\nSeconda riga.',
+    sourceLang: 'it',
+    targetLang: 'en',
+    fieldType: 'description',
+    fieldName: 'body2',
+    translate: async ({ text }) => {
+      inputs.push(text);
+      return `MT ${text}\n`;
+    },
+  });
+
+  assert.deepEqual(inputs, ['Prima riga.\n\nSeconda riga.']);
+  assert.equal(out, 'MT Prima riga.\n\nSeconda riga.\n');
+});
+
 test('lingua senza forma canonica lascia il titolo al motore senza inventare una forma', async () => {
   const source = '## In breve\nTesto italiano.';
   for (const targetLang of ['es', 'de-CH']) {
@@ -404,86 +476,69 @@ test('lingua senza forma canonica lascia il titolo al motore senza inventare una
   }
 });
 
-test('sentinella del titolo alterata o persa fallisce chiusa il campo', async () => {
-  for (const replacement of ['SENTINELLA-ALTERATA', '']) {
-    const signals = [];
-    const out = await translateFieldFreeMt({
-      text: '## In breve\nTesto italiano sufficiente.',
-      sourceLang: 'it',
-      targetLang: 'fr',
-      fieldType: 'title',
-      translate: async ({ text }) => text.replace(/^0[^\n]*$/gm, replacement),
-      onUnusableOutput: (event) => signals.push(event),
-    });
-
-    assert.equal(out, '');
-    assert.deepEqual(signals, [{
-      targetLang: 'fr',
-      fieldType: 'title',
-      reason: 'mangled-template-heading',
-    }]);
-  }
-});
-
-test('sentinella del titolo dentro una riga o fuori ordine fallisce chiusa il campo', async () => {
+test('un blocco che il motore non traduce fa fallire chiuso l\'intero campo, con un solo segnale', async () => {
   const source = ['## In breve', 'Sintesi italiana.', '## Fatti chiave', '- Un fatto italiano.'].join('\n');
-  const casi = {
-    // Il motore ha fuso il titolo con la riga seguente: ripristinato alla
-    // lettera diventerebbe un titolo in mezzo a una riga di prosa.
-    'sentinella seguita da testo sulla stessa riga': (text) => text.replace('0H00Q0\n', '0H00Q0 - '),
-    'sentinella preceduta da testo sulla stessa riga': (text) => text.replace('\n0H01Q0', ' 0H01Q0'),
-    // Ogni indice compare una volta sola, ma i due blocchi finirebbero sotto
-    // il titolo sbagliato.
-    'sentinelle scambiate di posto': (text) => text
-      .replace('0H00Q0', '0HXQ0').replace('0H01Q0', '0H00Q0').replace('0HXQ0', '0H01Q0'),
-    'sentinella ripetuta': (text) => text.replace('0H01Q0', '0H00Q0'),
-  };
+  const casi = [
+    ['uscita vuota sul secondo blocco', async ({ text }) => (text.startsWith('-') ? '' : `MT ${text}`), 'unusable-text'],
+    ['uscita non stringa sul primo blocco', async () => null, 'non-string'],
+    ['errore del motore sul secondo blocco', async ({ text }) => {
+      if (text.startsWith('-')) throw new Error('quota');
+      return `MT ${text}`;
+    }, 'error'],
+  ];
 
-  for (const [nome, altera] of Object.entries(casi)) {
+  for (const [nome, translate, reason] of casi) {
     const signals = [];
-    let received;
     const out = await translateFieldFreeMt({
       text: source,
       sourceLang: 'it',
-      targetLang: 'de',
+      targetLang: 'fr',
       fieldType: 'description',
       fieldName: 'body1',
-      translate: async ({ text }) => {
-        received = text;
-        return altera(text);
-      },
+      translate,
       onUnusableOutput: (event) => signals.push(event),
     });
 
-    assert.notEqual(altera(received), received, `${nome}: il caso deve alterare davvero l'uscita`);
+    // Mai un campo cucito a meta': o tutti i blocchi sono tradotti, o niente.
     assert.equal(out, '', nome);
     assert.deepEqual(signals, [{
-      targetLang: 'de',
+      targetLang: 'fr',
       fieldType: 'description',
       fieldName: 'body1',
-      reason: 'mangled-template-heading',
+      reason,
     }], nome);
   }
 });
 
-test('sentinella del titolo sola sulla riga torna canonica anche con spazi e ritorni a capo CRLF', async () => {
-  const source = ['## In breve', 'Sintesi italiana.', '## Fatti chiave', '- Un fatto italiano.'].join('\n');
+test('i link interni restano protetti attraverso i blocchi', async () => {
+  const source = [
+    '## In breve',
+    'Leggi la [guida](nav:guide) completa.',
+    '## Fatti chiave',
+    '- Usa il [calcolatore](nav:calculator).',
+  ].join('\n');
+  const inputs = [];
   const out = await translateFieldFreeMt({
     text: source,
     sourceLang: 'it',
-    targetLang: 'fr',
+    targetLang: 'en',
     fieldType: 'description',
     fieldName: 'body1',
-    translate: async ({ text }) => text
-      .split('\n')
-      .map((line) => (line.startsWith('0') ? `  ${line} ` : `MT ${line}`))
-      .join('\r\n'),
+    translate: async ({ text }) => {
+      inputs.push(text);
+      return `MT ${text}`;
+    },
   });
 
-  const lines = out.split('\n').map((line) => line.replace(/\r$/, ''));
-  assert.equal(lines[0], getTldrHeading('fr'));
-  assert.equal(lines[2], getKeyFactsHeading('fr'));
-  assert.equal(/0H0\d+Q0/.test(out), false);
+  // Gli indici dei segnaposto sono globali al campo: ogni blocco ne porta una
+  // parte e il ripristino avviene sul campo ricomposto.
+  assert.deepEqual(inputs, ['Leggi la 0NAV00 completa.', '- Usa il 0NAV10.']);
+  assert.equal(out, [
+    getTldrHeading('en'),
+    'MT Leggi la [guida](nav:guide) completa.',
+    getKeyFactsHeading('en'),
+    'MT - Usa il [calcolatore](nav:calculator).',
+  ].join('\n'));
 });
 
 test('replaceBodyField col valore attuale e un no-op byte per byte', () => {
