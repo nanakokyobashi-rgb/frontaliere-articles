@@ -638,44 +638,112 @@ function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
   return true;
 }
 
-/**
- * Split text into chunks ≤ maxChars at sentence boundaries.
- * Splits at: paragraph breaks (\n\n), newlines (\n), sentence-ending punctuation (. ! ?),
- * markdown headers (##), and list items (- *).
- * Falls back to word boundaries if a single sentence exceeds maxChars.
- */
-function _chunkAtSentences(text, maxChars = 480) {
-  // Split into sentences at natural boundaries
-  const segments = text.split(/(?<=\.\s)|(?<=\n)|(?<=\?\s)|(?<=!\s)|(?=##\s)|(?=[-*]\s)/).filter(Boolean);
-  const chunks = [];
-  let current = '';
+function _splitOversizedSegment(text, maxChars, separatorAfter) {
+  const parts = [];
+  let remaining = text;
 
-  for (const seg of segments) {
-    const trimmed = seg.trim();
-    if (!trimmed) continue;
-    if (current.length + trimmed.length + 1 <= maxChars) {
-      current = current ? `${current} ${trimmed}` : trimmed;
+  while (remaining.length > maxChars) {
+    const space = remaining.lastIndexOf(' ', maxChars);
+    const splitAt = space > 0 ? space : maxChars;
+    const separator = space > 0 ? remaining.slice(splitAt, splitAt + 1) : '';
+    parts.push({ text: remaining.slice(0, splitAt), separatorAfter: separator });
+    remaining = remaining.slice(splitAt + separator.length);
+  }
+  if (remaining) parts.push({ text: remaining, separatorAfter });
+  return parts;
+}
+
+function _splitLongLine(line, lineSeparator, maxChars) {
+  const sentenceSegments = [];
+  let start = 0;
+  // Keep the boundary whitespace with the segment that precedes it. The
+  // separator becomes metadata only when the segment has to cross a request
+  // boundary; otherwise it remains inside the translated chunk.
+  const boundary = /(?<=[.!?]\s)|(?=##\s)|(?=[-*]\s)/g;
+  for (const match of line.matchAll(boundary)) {
+    const end = match.index;
+    if (end <= start) continue;
+    const raw = line.slice(start, end);
+    const separator = raw.match(/\s+$/)?.[0] || '';
+    const segment = raw.slice(0, raw.length - separator.length);
+    if (segment) sentenceSegments.push({ text: segment, separatorAfter: separator });
+    start = end;
+  }
+  if (start < line.length) sentenceSegments.push({ text: line.slice(start), separatorAfter: '' });
+  if (sentenceSegments.length === 0) sentenceSegments.push({ text: line, separatorAfter: '' });
+  sentenceSegments[sentenceSegments.length - 1].separatorAfter += lineSeparator;
+
+  return sentenceSegments.flatMap((segment) => segment.text.length > maxChars
+    ? _splitOversizedSegment(segment.text, maxChars, segment.separatorAfter)
+    : [segment]);
+}
+
+function _structuredLineGroups(text, maxChars) {
+  const lines = text.split('\n');
+  const groups = [];
+
+  for (let index = 0; index < lines.length;) {
+    const line = lines[index];
+    if (!line) {
+      index += 1;
+      continue;
+    }
+    let next = index + 1;
+    while (next < lines.length && lines[next] === '') next += 1;
+    const lineSeparator = next < lines.length ? '\n'.repeat(next - index) : '';
+    const segments = line.length > maxChars
+      ? _splitLongLine(line, lineSeparator, maxChars)
+      : [{ text: line, separatorAfter: lineSeparator }];
+    groups.push(segments);
+    index = next;
+  }
+  return groups;
+}
+
+function _packStructuredSegments(segments, maxChars) {
+  const chunks = [];
+  let current = null;
+  let separatorAfter = '';
+
+  for (const segment of segments) {
+    if (current === null) {
+      current = segment.text;
+      separatorAfter = segment.separatorAfter;
+      continue;
+    }
+    if (current.length + separatorAfter.length + segment.text.length <= maxChars) {
+      current += `${separatorAfter}${segment.text}`;
+      separatorAfter = segment.separatorAfter;
     } else {
-      if (current) chunks.push(current.trim());
-      // If single segment exceeds maxChars, split at word boundaries
-      if (trimmed.length > maxChars) {
-        const words = trimmed.split(/\s+/);
-        current = '';
-        for (const word of words) {
-          if (current.length + word.length + 1 <= maxChars) {
-            current = current ? `${current} ${word}` : word;
-          } else {
-            if (current) chunks.push(current.trim());
-            current = word;
-          }
-        }
-      } else {
-        current = trimmed;
-      }
+      chunks.push({ text: current, separatorAfter });
+      current = segment.text;
+      separatorAfter = segment.separatorAfter;
     }
   }
-  if (current.trim()) chunks.push(current.trim());
+  if (current !== null) chunks.push({ text: current, separatorAfter });
   return chunks;
+}
+
+/**
+ * Split text into chunks ≤ maxChars at sentence and line boundaries.
+ * Each chunk carries the separator that followed it in the normalized source.
+ * `oneLinePerChunk` is used by the long MyMemory branch so provider output
+ * cannot flatten a structured request before the cascade can reassemble it.
+ */
+export function _chunkAtSentences(text, maxChars = 480, { oneLinePerChunk = false } = {}) {
+  const clean = normalizeBlock(text);
+  if (!clean) return [];
+  const limit = Math.max(1, maxChars);
+  const lineGroups = _structuredLineGroups(clean, limit);
+  return oneLinePerChunk
+    ? lineGroups.flatMap((segments) => _packStructuredSegments(segments, limit))
+    : _packStructuredSegments(lineGroups.flat(), limit);
+}
+
+export function _recomposeChunkParts(chunks, translatedParts = chunks.map(({ text }) => text)) {
+  return chunks
+    .map((chunk, index) => `${translatedParts[index] ?? ''}${chunk.separatorAfter}`)
+    .join('');
 }
 
 // ── DeepL Free (multi-key with automatic rotation) ──────────────────────────
@@ -689,7 +757,7 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
   // bullet/section markers intact so the translated output is still
   // recognisable as structured prose to the audit.
   const clean = normalizeBlock(text);
-  const chunks = clean.length <= MAX_CHUNK ? [clean] : chunkText(clean, MAX_CHUNK);
+  const chunks = chunkText(clean, MAX_CHUNK);
   const translated = [];
 
   // Circuit-breaker: if a previous call already triggered the global flag, fail fast
@@ -698,7 +766,7 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
     throw Object.assign(new Error('DeepL 429 rate-limited'), { rateLimited: true });
   }
 
-  for (const chunk of chunks) {
+  for (const { text: chunk } of chunks) {
     const body = new URLSearchParams();
     body.append('text', chunk);
     if (srcCode) body.append('source_lang', srcCode);
@@ -753,7 +821,7 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
     if (chunks.length > 1) await delay(200);
   }
 
-  return normalizeBlock(translated.join('\n\n'));
+  return normalizeBlock(_recomposeChunkParts(chunks, translated));
 }
 
 async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) {
@@ -1117,7 +1185,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 
   // Azure supports up to 50K chars per request, but we chunk at 5K for safety
   const MAX_CHUNK = 5000;
-  const chunks = clean.length <= MAX_CHUNK ? [clean] : chunkText(clean, MAX_CHUNK);
+  const chunks = chunkText(clean, MAX_CHUNK);
 
   for (let attempt = 0; attempt < AZURE_TRANSLATOR_KEYS.length; attempt++) {
     const idx = (_azureKeyIndex + attempt) % AZURE_TRANSLATOR_KEYS.length;
@@ -1126,7 +1194,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 
     try {
       const translated = [];
-      for (const chunk of chunks) {
+      for (const { text: chunk } of chunks) {
         const url = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${sourceLang}&to=${targetLang}`;
         // Single call with the configured region. A 401/403 is an auth/credential
         // failure (bad or revoked key) — NOT something a different region header can
@@ -1188,7 +1256,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
         translated.push(t);
         if (chunks.length > 1) await delay(100);
       }
-      const result = normalizeBlock(translated.join('\n\n'));
+      const result = normalizeBlock(_recomposeChunkParts(chunks, translated));
       // Stessa ragione di DeepL: la scelta della chiave su cui restare avviene
       // qui dentro, prima che `tryTier` veda l'uscita, quindi il passthrough va
       // riconosciuto e CONTATO qui, non solo scartato.
@@ -1985,7 +2053,7 @@ async function translateWithGoogle(text, sourceLang, targetLang, outcome = null)
   if (!chunks.length) return '';
 
   const translated = [];
-  for (const chunk of chunks) {
+  for (const { text: chunk } of chunks) {
     let result = '';
     for (let attempt = 1; attempt <= 3; attempt++) {
       result = await translateChunkGoogle(chunk, sourceLang, targetLang, outcome);
@@ -1996,50 +2064,13 @@ async function translateWithGoogle(text, sourceLang, targetLang, outcome = null)
     translated.push(result);
   }
 
-  const merged = normalizeBlock(translated.join('\n\n'));
+  const merged = normalizeBlock(_recomposeChunkParts(chunks, translated));
   return merged; // il confronto con la sorgente e' salito in `tryTier`
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 function chunkText(text, maxChars = 1800) {
-  const clean = normalizeBlock(text);
-  if (!clean) return [];
-  if (clean.length <= maxChars) return [clean];
-
-  const chunks = [];
-  const paragraphs = clean.split(/\n{2,}/);
-  let current = '';
-
-  for (const para of paragraphs) {
-    if (current && (current.length + para.length + 2) > maxChars) {
-      chunks.push(current.trim());
-      current = para;
-    } else {
-      current = current ? `${current}\n\n${para}` : para;
-    }
-  }
-  if (current.trim()) chunks.push(current.trim());
-
-  // If any chunk is still too long, hard-split by sentences
-  const result = [];
-  for (const chunk of chunks) {
-    if (chunk.length <= maxChars) {
-      result.push(chunk);
-    } else {
-      const sentences = chunk.split(/(?<=[.!?])\s+/);
-      let cur = '';
-      for (const s of sentences) {
-        if (cur && (cur.length + s.length + 1) > maxChars) {
-          result.push(cur.trim());
-          cur = s;
-        } else {
-          cur = cur ? `${cur} ${s}` : s;
-        }
-      }
-      if (cur.trim()) result.push(cur.trim());
-    }
-  }
-  return result;
+  return _chunkAtSentences(text, maxChars);
 }
 
 function delay(ms) {
@@ -2318,15 +2349,18 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // restavano scoperti. Ora vale per tutti e conta anche la statistica.
       return normalizeBlock(mm);
     }
-    // Chunk long text at sentence/paragraph boundaries
-    const chunks = _chunkAtSentences(clean, 4800);
+    // MyMemory's response handling is not measured per provider in the
+    // repository cache, and live quota was exhausted. Send one source line per
+    // request so structure does not depend on the provider retaining newlines;
+    // the original separators remain metadata for the recomposition below.
+    const chunks = _chunkAtSentences(clean, 4800, { oneLinePerChunk: true });
     if (chunks.length === 0) {
       noteTranslationOutcome(_outcome, 'incomplete');
       return '';
     }
     const parts = [];
     for (const chunk of chunks) {
-      const mm = await translateWithMyMemory(chunk, sourceLang, targetLang);
+      const mm = await translateWithMyMemory(chunk.text, sourceLang, targetLang);
       if (!mm || mm.includes('MYMEMORY WARNING')) {
         noteTranslationOutcome(_outcome, 'incomplete');
         return ''; // quota hit mid-chunk, abort
@@ -2336,14 +2370,14 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
       // placeholder) resta invece nell'assemblato e viene giudicato da
       // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
-      if (rejectedAsPassthrough('myMemory', chunk, normalized, _outcome, 'chunk')
-        && isSubstantivePassthroughChunk(chunk)) return '';
+      if (rejectedAsPassthrough('myMemory', chunk.text, normalized, _outcome, 'chunk')
+        && isSubstantivePassthroughChunk(chunk.text)) return '';
       parts.push(normalized);
     }
-    // `return joined` e non un confronto locale: questo e' il ramo dei testi
-    // lunghi, cioe' dei body. Gli echo per segmento sono gia' nel bucket
-    // `tierPassthroughChunks`, oltre al conteggio canonico richiesto da #1210.
-    return normalizeBlock(parts.join(' '));
+    // Ricomponi con i separatori della sorgente, non con uno spazio fisso: gli
+    // echo per segmento sono gia' nel bucket `tierPassthroughChunks`, oltre al
+    // conteggio canonico richiesto da #1210.
+    return normalizeBlock(_recomposeChunkParts(chunks, parts));
   });
   if (t2) return finalize(t2);
 
