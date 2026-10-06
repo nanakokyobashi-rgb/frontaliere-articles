@@ -209,7 +209,7 @@ test('il body dir di una sezione non cattura quello di un\'altra con lo stesso p
 
 // ── 2. La regola di una sezione cantonale, sul suo id vero ─────────────────────
 
-test('una sezione cantonale ha le superfici sorgente derivate dal core, e nessuna API', () => {
+test('una sezione cantonale ha le superfici sorgente derivate dal core, e la superficie API di famiglia', () => {
   const ti = sectionSourceSurfaces('canton-ti');
   assert.equal(ti.kind, 'canton');
   assert.equal(ti.shardKey, null);
@@ -220,13 +220,17 @@ test('una sezione cantonale ha le superfici sorgente derivate dal core, e nessun
   assert.equal(ti.canonicalOverrides, null);
   assert.equal(floorPolicyOf('canton-ti'), 'family');
   assert.deepEqual(KIND_FLOOR_POLICY, { frontaliere: 'section', national: 'section', canton: 'family' });
-  assert.throws(() => sectionApiSurfaces('canton-ti'), /canton-ti.*senza superficie API.*P7/s);
-  assert.throws(
-    () => assertActiveSectionsPublishable([...ARTICLE_SECTION_CORE_LIST, CANTON]),
-    /canton-ti/,
-    'build-api deve rifiutare una sezione attiva senza nomi pubblicati invece di saltarla',
-  );
+  // P7: la famiglia canton pubblica in superfici aggregate (canton-articles.json,
+  // meta-canton-<loc>.json, slugs.json.cantons) e una sitemap per sezione.
+  assert.equal(sectionApiSurfaces('canton-ti').family, 'canton');
+  assert.equal(sectionApiSurfaces('canton-ti').sitemap, 'sitemap-articles-canton-ti.xml');
+  assert.equal(assertActiveSectionsPublishable([...ARTICLE_SECTION_CORE_LIST, CANTON]), true);
   assert.equal(assertActiveSectionsPublishable(), true);
+  // Un tipo senza nessun profilo resta un rifiuto esplicito, mai un salto.
+  assert.throws(
+    () => assertActiveSectionsPublishable([...ARTICLE_SECTION_CORE_LIST, { ...CANTON, section: 'canton-zz', kind: 'regione' }]),
+    /sezione articoli sconosciuta: "canton-zz"/,
+  );
   assert.throws(() => sectionSourceSurfaces('canton-zz'), /sconosciuta/);
 });
 
@@ -303,7 +307,10 @@ test('RSS: con la lista attiva di oggi nessun profilo cantonale viene chiesto al
   assert.deepEqual(RSS_SECTIONS.map((s) => s.id), ACTIVE);
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /assertActiveSectionsPublishable\(\);/);
-  assert.match(build, /registries: Object\.fromEntries\(API_SECTIONS\.map/);
+  assert.match(build, /RSS_SECTIONS\.map\(\(section\) => \{/);
+  assert.match(build, /return buildSectionFeeds\(\{/);
+  assert.match(build, /registry: SECTION_REGISTRIES\[section\.id\] \?\? \[\],/);
+  assert.match(build, /sectionRssLayout\(section\.id\)/);
   assert.doesNotMatch(build, /\['frontaliere', 'svizzera'\]/);
   assert.doesNotMatch(build, /SWISS_ARTICLES\.length/);
 });

@@ -1990,8 +1990,38 @@
       "reason": "Le sezioni articolo viste dal pubblicatore: superfici sorgente derivate da ARTICLE_SECTION_CORE (+ corpusPath), nomi della superficie pubblicata in dist/api per tipo, politica dei pavimenti per tipo. Corpus-only perche' build-api, i pavimenti e la superficie dist/api esistono solo in questo repo; il sito consuma i JSON via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "2d30bfe32a414c58",
-        "alignedAt": "2026-10-05"
+        "corpus": "580f18b97f61fe7e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/delete-cdn-file.sh",
+      "mode": "corpus-only",
+      "reason": "Cancellazione di UNA chiave R2 fra quelle delle sezioni cantonali (allowlist edge/sitemap-cantons.xml, edge/sitemap-articles-canton-<x>.xml, edge/sections/**): serve a ritirare l'indice sitemap-cantons.xml quando nessuna sezione e' piu' live, perche' un sitemapindex vuoto viola lo schema e il Worker deve tornare al 404. Fratello di upload-cdn-file.sh (additivo per contratto). Corpus-only: la pubblicazione R2 delle sezioni cantonali e' solo del corpus (P7).",
+      "baseline": {
+        "site": null,
+        "corpus": "37feb520d4b627eb",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/section-registry.mjs",
+      "mode": "corpus-only",
+      "reason": "Il registro delle sezioni articolo cantonali visto dal pubblicatore (P7 del piano sezioni cantonali, D3/D9/D14): validazione di sections/registry.json contro il core (insieme chiuso, parita' di kind/canton/indexSlug/topics, live solo se attiva) e contro le regole di parseCorpusSectionRegistry del Worker del sito (prefissi, forma canonica, redirect same-origin, cicli), kill-switch Remote Config CANTON_ARTICLE_SECTIONS_KILL col marker RC_ENV_LOADED, costruzione di sections.json, della copia edge/sections/registry.json per il Worker e dell'indice sitemap-cantons.xml. Corpus-only: il registro e la pubblicazione R2 delle sezioni vivono solo qui; il sito ne applica la regola nel Worker leggendo il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "ffeedd4948f222ff",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/engine-corpus-view.mjs",
+      "mode": "corpus-only",
+      "reason": "Il corpus visto nel layout che l engine legge (services/locales, services/seo, packages/articles/content), costruito al volo con symlink in una cartella temporanea: alias di cartella validi per ogni sezione piu un alias per chunk SEO cantonale, che create-article scrive in content/cantons/<id>/seo.ts e l engine cerca come seo-blog-<id>.ts. Lo usano build-api per i feed RSS delle sezioni di famiglia e i pavimenti per contare i chunk dove stanno. Corpus-only: sul sito il layout dell engine e quello nativo, non serve nessuna vista.",
+      "baseline": {
+        "site": null,
+        "corpus": "66b40ab3f4c5a824",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2000,8 +2030,8 @@
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "12927d8ee556aac7",
-        "alignedAt": "2026-09-12"
+        "corpus": "08b806da4017d729",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2428,7 +2458,7 @@
       "baseline": {
         "site": null,
         "corpus": "4339022550d58da1",
-        "alignedAt": "2026-10-05"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3562,8 +3592,8 @@
       "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "c20461c76346d1c9",
-        "alignedAt": "2026-09-05"
+        "corpus": "1ad3e5591be93b55",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3611,8 +3641,8 @@
       "reason": "Sitemap-XML builder estratto da scripts/build-api.mjs (issue #138 item 1), cosi' e' importabile sotto un node --test puro (nessun import .ts) per un test comportamentale reale. Il sito non ha un file omonimo: costruisce le sue sitemap con un renderer diverso (build-plugins/ogPagesPlugin.ts), non con questo script.",
       "baseline": {
         "site": null,
-        "corpus": "72f1caaadb03c397",
-        "alignedAt": "2026-08-10"
+        "corpus": "5feedc1fc12196a5",
+        "alignedAt": "2026-10-06"
       }
     },
     {
