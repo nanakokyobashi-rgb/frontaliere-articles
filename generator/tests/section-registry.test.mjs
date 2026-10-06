@@ -75,6 +75,8 @@ import {
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
+import { isNewFamilySection } from '../../scripts/lib/corpus-floors.mjs';
+import { floorViolations } from '../../scripts/ci/verify-api-floors.mjs';
 import {
   declaredFiles,
   main as edgeMain,
@@ -418,6 +420,32 @@ test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale es
   assert.match(build, /registryRetiredSlugs\(declaredSections\.sections\[section\.section\]/);
   // I ritiri dichiarati escono anche dal riferimento del pavimento di famiglia.
   assert.match(build, /source: Math\.max\(0, source - retiredSource\)/);
+});
+
+test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-api (indice runtime, pavimenti dei feed)', () => {
+  // Nuova = senza registro. Al primo articolo tornano le regole di tutte le altre.
+  const root = mkdtempSync(path.join(tmpdir(), 'new-family-'));
+  assert.equal(isNewFamilySection(root, 'canton-ti'), true);
+  assert.equal(isNewFamilySection(root, 'svizzera'), false, 'una sezione storica senza registro non e\' «nuova»: e\' un corpus sparito');
+  mkdirSync(path.join(root, 'content/cantons/canton-ti'), { recursive: true });
+  writeFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), "export const CANTON_ARTICLES = [\n  {\n    id: 'a',\n  },\n];\n");
+  assert.equal(isNewFamilySection(root, 'canton-ti'), false);
+  // build-blog-index: l'indice di una sezione senza articoli non ha un «piu' recente» da stampare.
+  const index = readFileSync(path.join(ROOT, 'scripts/build-blog-index.mjs'), 'utf8');
+  assert.doesNotMatch(index, /capped\[0\]\.date/);
+  assert.match(index, /capped\[0\]\?\.date \?\?/);
+  // verify-api-floors: i feed vuoti o assenti di una sezione nuova non sono un riferimento mancante;
+  // un feed con item senza registro sorgente invece si'.
+  const floors = readFileSync(path.join(ROOT, 'scripts/ci/verify-api-floors.mjs'), 'utf8');
+  assert.match(floors, /RSS_SECTIONS\.filter\(\(section\) => isNewFamilySection\(root, section\.id\)\)/);
+  assert.match(floors, /if \(newFamily\.has\(feedSection\(feedName\)\)\) continue;/);
+  assert.match(floors, /if \(newFamily\.has\(section\)\) \{[\s\S]*?if \(feed\.items > 0\) violations\.push/);
+  const none = { feeds: [], missingFeeds: [], imageErrors: [] };
+  assert.deepEqual(
+    floorViolations(none, { sourceArticles: {}, feedSources: {}, sourceImages: null, rssMaxItems: 50, newFamilySections: ['canton-ti'] })
+      .filter((line) => /feed|RSS/.test(line)),
+    [],
+  );
 });
 
 // ── 6. Pubblicazione su R2: release versionata, un solo PUT ──────────────────

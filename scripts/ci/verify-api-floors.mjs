@@ -53,6 +53,7 @@ import {
   countSourceArchiveSitemapUrls,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
+  isNewFamilySection,
 } from '../lib/corpus-floors.mjs';
 // Stessa funzione del writer e del gate manifest.counts in build-api.mjs: un
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
@@ -231,7 +232,14 @@ export function floorViolations(measured, expected, retention = undefined) {
   const violations = [...(measured.imageErrors ?? [])];
   const floor = (n) => floorFrom(n, retention);
 
+  // Una sezione di FAMIGLIA appena accesa (nessun registro: zero articoli) non
+  // ha ancora ne' chunk SEO ne' item: i suoi feed vuoti o assenti sono lo stato
+  // legittimo, non un riferimento mancante. Vale solo finche' la sezione e'
+  // nuova: al primo articolo esistono registro e chunk, e tornano le regole di
+  // tutte le altre (chunk a zero = rifiuto).
+  const newFamily = new Set(expected.newFamilySections ?? []);
   for (const feedName of measured.missingFeeds ?? []) {
+    if (newFamily.has(feedSection(feedName))) continue;
     violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
   }
 
@@ -320,6 +328,11 @@ export function floorViolations(measured, expected, retention = undefined) {
     const section = feedSection(feed.name);
     if (section === null) {
       violations.push(`${feed.name}: nessuna sezione RSS_SECTIONS corrispondente — feed non mappato`);
+      continue;
+    }
+    if (newFamily.has(section)) {
+      // Zero articoli in sorgente: un feed con item non ha da dove venire.
+      if (feed.items > 0) violations.push(`${feed.name}: ${feed.items} <item> per una sezione senza registro sorgente`);
       continue;
     }
     const current = expected.feedSources?.[section] ?? 0;
@@ -610,7 +623,15 @@ export async function expectFromCorpus(root) {
   const previousFeedSources = {};
   const latestSeoPublications = {};
   const revision = previousRevision(root);
+  const newFamilySections = RSS_SECTIONS.filter((section) => isNewFamilySection(root, section.id)).map((section) => section.id);
   for (const section of RSS_SECTIONS) {
+    if (newFamilySections.includes(section.id)) {
+      // Nessun registro, nessun chunk SEO: niente da contare ne' da datare.
+      feedSources[section.id] = 0;
+      latestSeoPublications[section.id] = null;
+      previousFeedSources[section.id] = null;
+      continue;
+    }
     feedSources[section.id] = countSeoEntries(root, section.seoFiles);
     latestSeoPublications[section.id] = latestSeoPublication(root, section.seoFiles);
     if (revision === null) {
@@ -652,6 +673,7 @@ export async function expectFromCorpus(root) {
     feedSources,
     previousFeedSources,
     latestSeoPublications,
+    newFamilySections,
     sourceImages: countSourceImages(root),
     rssMaxItems: RSS_MAX_ITEMS,
   };
