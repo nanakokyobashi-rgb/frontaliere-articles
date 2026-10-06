@@ -7808,6 +7808,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.costi-assicurazione-base-proiezione.title': 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
     'blog.article.costi-assicurazione-base-proiezione.excerpt': 'L\'anno prossimo il premio medio sarà 488 franchi (+23, +5%); tra 14 anni potrebbe raggiungere 966,20 franchi se il trend del 5% annuo continua.',
     'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Famiglia svizzera che controlla le spese sanitarie e i premi della cassa malati sul tavolo della cucina',
+    'blog.article.mercato-lavoro-settembre-2026.title': 'La situazione sul mercato del lavoro nel mese di settembre 2026',
+    'blog.article.mercato-lavoro-settembre-2026.excerpt': 'A settembre 2026, la Svizzera ha registrato 140’480 disoccupati, con un tasso fermo al 3%. Questo rappresenta un calo mensile dello 0,8%, ma un aumento annuo del 5,4%. I posti vacanti presso gli URC erano 44’199.',
+    'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Panorama di una città svizzera che simboleggia il mercato del lavoro e l\'economia nazionale.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'L\'effettivo dell\'esercito è sufficiente ora ma calerà entro il 2030',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'Al 1° marzo 2026 l\'esercito conta 147 017 militari, sufficienti per il regolamentare di 100 000, ma si prevede un calo sotto 130 000 entro il 2030.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Vista delle caserme dell\'esercito svizzero vicino a Lugano con soldati in addestramento',
 };
 
 export default blogMetaChIt;

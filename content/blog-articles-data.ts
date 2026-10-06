@@ -39949,6 +39949,27 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'carovita-sindacati-recupero-divario',
+ category: 'novita',
+ date: '2026-10-06T09:15:31.670Z',
+ image: '/images/blog/carovita-sindacati-recupero-divario.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'monte-olimpino-collegamenti-tilo',
+ category: 'pratico',
+ date: '2026-10-06T10:25:20.912Z',
+ image: '/images/blog/monte-olimpino-collegamenti-tilo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

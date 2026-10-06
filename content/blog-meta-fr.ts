@@ -12679,6 +12679,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Frontaliers : taxe d’entrée, rétrocessions et double imposition',
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'La Suisse introduit une taxe d\'entrée pouvant atteindre 4mila francs pour les travailleurs et les indépendants. Il est question de 900 millions annuels pour les chômeurs et il y a un risque de 120 millions pour les communes frontalières.',
     'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Vue panoramique de Lugano et de son lac, avec des bâtiments modernes symbolisant le contexte financier suisse.',
+    'blog.article.carovita-sindacati-recupero-divario.title': 'Carivita, les syndicats demandent le rattrapage de l\'écart dans le Devis 2027',
+    'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Entre décembre 2020 et septembre 2026, le renchérissement a augmenté de 8,5 % alors que les salaires du personnel cantonal, parapublic et socio-sanitaire n\'ont été ajustés que de 3 %.',
+    'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Vue de Bellinzone avec Castel Grande sous un ciel clair.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1 : modifications des services TILO entre Chiasso et Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Pendant les week-ends du 9 au 12 et du 16 au 19 octobre ainsi que du 13 au 16 et du 20 au 23 novembre 2026, la fermeture affecte les RE80, S10 et S40 entre Chiasso et Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Train TILO près de Chiasso pendant les travaux au tunnel Monte Olimpino 1.',
 };
 
 export default blogMetaFr;
