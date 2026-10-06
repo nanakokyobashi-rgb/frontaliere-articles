@@ -145,12 +145,14 @@ test('the metadata patch scans one real head and leaves inactive/body metadata a
     + '<title>' + staleTitle + '</title>'
     + '<meta name="description" content="' + staleDescription + '">'
     + '<meta property="og:title" content="' + staleTitle + '">'
-    + '<meta property="og:description" content="' + staleOgDescription + '"></head>'
+    + '<meta property="og:description" content="' + staleOgDescription + '">'
+    + '<meta data-name="description" data-content="' + staleDescription + '"></head>'
     + '<body><meta name="description" content="' + staleDescription + '"></body>';
   const patched = patchHubLandingMetadata(stale, 'svizzera', 'it');
   assert.equal((patched.match(/<title>Articoli sulla Svizzera 2026 \| Frontaliere Ticino<\/title>/g) || []).length, 1);
   assert.ok(patched.includes('<meta name="description" content="' + SWISS_HUB_ROOT_SEO_IT.description + '">'));
   assert.ok(patched.includes('<meta property="og:title" content="' + SWISS_HUB_ROOT_SEO_IT.title + '">'));
   assert.ok(patched.includes('<meta property="og:description" content="' + SWISS_HUB_ROOT_SEO_IT.ogDescription + '">'));
+  assert.ok(patched.includes('<meta data-name="description" data-content="' + staleDescription + '">'));
   assert.ok(patched.includes('<body><meta name="description" content="' + staleDescription + '"></body>'));
 });

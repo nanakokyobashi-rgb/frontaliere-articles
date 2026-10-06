@@ -241,10 +241,13 @@ const HEAD_META_PATCHES = Object.freeze([
 ]);
 
 function patchMetaTag(tag) {
-  const content = /\bcontent\s*=\s*(['"])(.*?)\1/i;
+  // Attribute names must start at the tag boundary or after whitespace:
+  // `data-name`/`data-content` are unrelated attributes and must not satisfy
+  // the stale metadata guard by word-boundary coincidence.
+  const content = /(?:^|\s)content\s*=\s*(['"])(.*?)\1/i;
   for (const patch of HEAD_META_PATCHES) {
     const identity = new RegExp(
-      `\\b${escapeRegExp(patch.attribute)}\\s*=\\s*(["'])${escapeRegExp(patch.attributeValue)}\\1`,
+      `(?:^|\\s)${escapeRegExp(patch.attribute)}\\s*=\\s*(["'])${escapeRegExp(patch.attributeValue)}\\1`,
       'i',
     );
     if (!identity.test(tag)) continue;

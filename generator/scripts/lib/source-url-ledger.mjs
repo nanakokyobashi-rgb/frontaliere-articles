@@ -270,18 +270,185 @@ export function pageCarriesItem(text, headline, { minShare = ITEM_ON_PAGE_MIN_SH
   return found / words.length >= minShare;
 }
 
+// A `<textarea>` or `<title>` is active document content when it appears in
+// the page, but its text is raw markup while it is nested in a `<template>`.
+// Keep those two sets separate: masking an active `<title>` would erase the
+// evidence used by pageTitleEvidence().
+const INACTIVE_RAW_TEXT_TAGS = new Set(['script', 'style']);
+const TEMPLATE_RAW_TEXT_TAGS = new Set(['script', 'style', 'textarea', 'title']);
+
+function maskHtmlWhitespace(char) {
+  return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
+}
+
+function maskFindTagEnd(html, start) {
+  let quote = '';
+  for (let i = start + 1; i < html.length; i++) {
+    const char = html[i];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '>') {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function maskIsSelfClosingStartTag(html, nameEnd, end) {
+  let i = nameEnd;
+  while (i < end) {
+    while (i < end && maskHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    if (html[i] === '/') return i + 1 === end;
+
+    while (
+      i < end &&
+      !maskHtmlWhitespace(html[i]) &&
+      html[i] !== '=' &&
+      html[i] !== '/' &&
+      html[i] !== '>'
+    ) i++;
+    if (html[i] !== '=') continue;
+
+    i++;
+    while (i < end && maskHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    const quote = html[i];
+    if (quote === '"' || quote === "'") {
+      i++;
+      while (i < end && html[i] !== quote) i++;
+      if (i >= end) return false;
+      i++;
+      continue;
+    }
+    // In HTML's unquoted attribute-value state `/` belongs to the value.
+    while (i < end && !maskHtmlWhitespace(html[i]) && html[i] !== '>') i++;
+  }
+  return false;
+}
+
+function maskReadTag(html, start) {
+  if (html[start] !== '<') return null;
+  let i = start + 1;
+  const closing = html[i] === '/';
+  if (closing) i++;
+  const nameStart = i;
+  while (i < html.length && /[A-Za-z0-9:_-]/.test(html[i])) i++;
+  if (i === nameStart) return null;
+  const boundary = html[i] ?? '';
+  if (boundary && !/[\s/>]/.test(boundary)) return null;
+  const end = maskFindTagEnd(html, start);
+  if (end < 0) return null;
+  return {
+    closing,
+    end,
+    name: html.slice(nameStart, i).toLowerCase(),
+    selfClosing: !closing && maskIsSelfClosingStartTag(html, i, end),
+  };
+}
+
+function maskSkipComment(html, start) {
+  const end = html.indexOf('-->', start + 4);
+  return end < 0 ? -1 : end + 3;
+}
+
+function maskSkipRawText(html, afterOpening, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = afterOpening;
+  const match = closing.exec(html);
+  return match ? match.index + match[0].length : -1;
+}
+
+function maskSkipTemplate(html, afterOpening) {
+  let depth = 1;
+  let cursor = afterOpening;
+  while (cursor < html.length) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = maskSkipComment(html, start);
+      if (afterComment < 0) return -1;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = maskReadTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (tag.name === 'template') {
+      if (tag.closing) {
+        depth--;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth++;
+      }
+    } else if (
+      !tag.closing &&
+      !tag.selfClosing &&
+      TEMPLATE_RAW_TEXT_TAGS.has(tag.name)
+    ) {
+      const afterRawText = maskSkipRawText(html, tag.end + 1, tag.name);
+      if (afterRawText < 0) return -1;
+      cursor = afterRawText;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return -1;
+}
+
 /**
  * L'HTML con i nodi INATTIVI resi spazi, a pari lunghezza (gli indici restano
- * quelli del documento): commenti, `<script>`, `<style>`, `<template>`. Li'
- * dentro un `<a>`, un `<nav>` o un `<h1>` non sono markup della pagina — un
- * menu in un template, un titolo vecchio in un commento — e chi cerca link o
- * titoli nel sorgente non deve trovarli.
+ * quelli del documento): commenti, `<script>`, `<style>`, `<template>` e i
+ * blocchi annidati dentro i template. Lo scanner e' stateful perche' una
+ * regex si ferma al primo `</template>` e rende visibili i link di un template
+ * esterno quando il markup contiene template annidati.
  *
  * @param {string} html
  * @returns {string}
  */
 export function maskInactiveMarkup(html) {
-  return String(html || '').replace(/<!--[\s\S]*?-->|<(script|style|template)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, (m) => ' '.repeat(m.length));
+  const source = String(html || '');
+  const output = source.split('');
+  const blank = (start, end) => {
+    for (let i = start; i < end; i++) output[i] = ' ';
+  };
+  let cursor = 0;
+  while (cursor < source.length) {
+    const start = source.indexOf('<', cursor);
+    if (start < 0) break;
+    if (source.startsWith('<!--', start)) {
+      const afterComment = maskSkipComment(source, start);
+      blank(start, afterComment < 0 ? source.length : afterComment);
+      if (afterComment < 0) break;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = maskReadTag(source, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && INACTIVE_RAW_TEXT_TAGS.has(tag.name)) {
+      const afterRawText = maskSkipRawText(source, tag.end + 1, tag.name);
+      blank(start, afterRawText < 0 ? source.length : afterRawText);
+      if (afterRawText < 0) break;
+      cursor = afterRawText;
+      continue;
+    }
+    if (tag.name === 'template' && !tag.closing && !tag.selfClosing) {
+      const afterTemplate = maskSkipTemplate(source, tag.end + 1);
+      blank(start, afterTemplate < 0 ? source.length : afterTemplate);
+      if (afterTemplate < 0) break;
+      cursor = afterTemplate;
+      continue;
+    }
+    cursor = tag.end + 1;
+  }
+  return output.join('');
 }
 
 /**

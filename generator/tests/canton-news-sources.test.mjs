@@ -587,6 +587,11 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   assert.equal(cleaned.html.length, inactive.length, 'a pari lunghezza');
   assert.deepEqual(extractHeadlines(cleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/9']);
   assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 3, 'premessa: l\'estrattore storico li prende tutti');
+  const nestedTemplate = '<template><template></template><a href="/menu/nested">Voce del menu nel template esterno</a></template>'
+    + '<p><a href="/news/nested">Titolo del comunicato ancora attivo</a></p>';
+  const nestedCleaned = stripPageChrome(nestedTemplate);
+  assert.equal(nestedCleaned.html.length, nestedTemplate.length, 'template annidati mantengono gli indici');
+  assert.deepEqual(extractHeadlines(nestedCleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/nested']);
   // header/footer dentro role="main" o role="article" sono della sezione.
   const ariaSection = '<div role="main"><header><a href="/news/10">Titolo del decimo comunicato</a></header><div role="article"><footer><a href="/news/11">Titolo dell undicesimo comunicato</a></footer></div></div><footer><a href="/impressum">Impressum e note legali</a></footer>';
   const aria = stripPageChrome(ariaSection);

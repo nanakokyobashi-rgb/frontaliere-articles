@@ -599,6 +599,7 @@ function offloadAll(distDir, cdnBase) {
   let dataRefRewritten = 0;
   let injected = 0;
   let htmlSeen = 0;
+  const injectionFailures = [];
   const ogLeaks = [];
   const assetsLeaks = [];
 
@@ -671,6 +672,12 @@ function offloadAll(distDir, cdnBase) {
             : injectTag;
           out = out.slice(0, at) + tag + out.slice(at);
           injected++;
+        } else {
+          // A single malformed page must not be hidden by the aggregate
+          // injected count from all other pages. Its runtime image/data
+          // requests would still resolve same-origin, so deleting the local
+          // payload would turn that page into a 404 surface.
+          injectionFailures.push(path.relative(distDir, fp));
         }
         // no <head>: leave it (its SPA fetch degrades gracefully)
       }
@@ -735,6 +742,10 @@ function offloadAll(distDir, cdnBase) {
       // so it's exempt. With the inject now decoupled from hasData this only fires
       // in the degenerate no-HTML-with-<head> case, but the guard makes the latent
       // 404 impossible by construction.
+      if (t.url.startsWith('/images/') && injectionFailures.length > 0) {
+        kept.push(`${t.url} (CDN base missing from ${injectionFailures.length}/${htmlSeen} HTML page(s) — keeping to avoid runtime cdnImageUrl 404)`);
+        continue;
+      }
       if (t.url.startsWith('/images/') && injected === 0) {
         kept.push(`${t.url} (CDN base injected into 0/${htmlSeen} HTML — keeping to avoid runtime cdnImageUrl 404)`);
         continue;
@@ -759,6 +770,8 @@ function offloadAll(distDir, cdnBase) {
   // data: delete cdn-only files, keep any /data/ path referenced same-origin in HTML.
   if (!hasData) {
     log('no dist/data — skipping data delete');
+  } else if (injectionFailures.length > 0) {
+    log(`GUARD: CDN base missing from ${injectionFailures.length}/${htmlSeen} HTML page(s) (${injectionFailures.slice(0, 3).join(', ')}) — keeping dist/data`);
   } else if (injected === 0) {
     log(`GUARD: data base injected into 0/${htmlSeen} HTML pages — keeping dist/data`);
   } else {
