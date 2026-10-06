@@ -98,6 +98,35 @@ test('un marker senza niente di dichiarato non promette niente da verificare', (
   assert.equal(verifyTriageMarkerPersistence(marker, 1537, () => null), true);
 });
 
+test('una citazione di provenienza inline non trasforma lo zero anti-nipote in un item (#2299)', () => {
+  const marker = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '- Gate anti-nipote applicato: `Addresses #2151` e `Follow-up item: FU-2026-10-05-004`; il bucket padre #2151 resta l\'unico contenitore.',
+    '- `## Non implementato (ancora)`: `Nessuno (in questa PR)`, reason `closing-state`.',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(marker);
+
+  assert.deepEqual(expectation.items, []);
+  assert.deepEqual(expectation.buckets, [2151]);
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(verifyTriageMarkerPersistence(marker, 2206, () => {
+    throw new Error('uno zero esplicito non deve leggere il bucket');
+  }), true);
+});
+
+test('un item su una riga propria resta una dichiarazione positiva', () => {
+  const marker = [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '- Follow-up item: FU-2026-10-05-004',
+    '- Daily bucket: #2151',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(marker);
+
+  assert.deepEqual(expectation.items, ['FU-2026-10-05-004']);
+  assert.equal(expectation.explicitZero, false);
+  assert.equal(expectation.requiresBucket, true);
+});
+
 test('il marker reale senza item e con bucket invariato e\' uno zero, non un claim positivo (#9286)', () => {
   const marker = [
     '## Post-merge follow-up triage',
