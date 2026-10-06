@@ -210,7 +210,9 @@ function journalistSourceText(doc) {
       ? doc.source.text
       : typeof doc?.sourceContent === 'string'
         ? doc.sourceContent
-        : '';
+        : typeof doc?.content?.it?.body === 'string'
+          ? doc.content.it.body
+          : '';
 }
 
 function assertJournalistSourceCopySafe(data, sourceText) {

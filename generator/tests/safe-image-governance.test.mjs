@@ -74,5 +74,6 @@ test('create e publisher applicano il gate anti-copia al testo sorgente e loggan
   assert.match(CREATE, /SOURCE_COPY_OVERLAP_THRESHOLD/);
   assert.match(CREATE, /logSourceCopyVerdict\(data\.id/);
   assert.match(JOURNALIST, /assertJournalistSourceCopySafe\(data, sourceText\)/);
+  assert.match(JOURNALIST, /doc\?\.content\?\.it\?\.body/);
   assert.match(JOURNALIST, /SourceCopyError/);
 });
