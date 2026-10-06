@@ -518,6 +518,12 @@ const MUTATIONS = {
       'Un epoch o una data senza fuso verrebbe formattato nel fuso del runner.',
     ],
     [
+      'granularita sconosciuta',
+      mutated(c, (p) => { p.records[0].granularity = 'regional'; }),
+      /granularity .* is not station\|region\|national/,
+      'Il renderer deve distinguere una stazione da una media regionale o nazionale, senza inferirlo dal conteggio.',
+    ],
+    [
       'lato sconosciuto',
       mutated(c, (p) => { p.records[0].side = 'LI'; }),
       /is not CH\|FR\|AT\|IT\|DE/,

@@ -46,11 +46,11 @@
   "sources": {
     "CH": {
       "status": "ok",
-      "provider": "TCS Benzinpreis-Radar",
-      "stationCount": 97,
-      "snapshotAt": "2026-10-04T12:51:26.609Z",
-      "scope": "border-strip",
-      "note": "National Swiss coverage is not collected: the TCS terms of use allow private use only."
+      "provider": "BFS/UST LIK — Durchschnittspreise für Energie und Treibstoffe",
+      "url": "https://dam-api.bfs.admin.ch/hub/api/dam/assets/orderNr:su-d-05.02.91/master",
+      "observedMonth": "2026-09",
+      "scope": "national-monthly",
+      "license": "OPEN-BY (attribuzione obbligatoria)"
     },
     "IT": {
       "status": "ok",
@@ -146,7 +146,8 @@
       "observedAt": "2026-10-05T07:08:58.000Z",
       "source": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
       "area": "FR-74,FR-01",
-      "coverage": "departement"
+      "coverage": "departement",
+      "granularity": "region"
     },
     {
       "canton": "GE",
@@ -160,7 +161,8 @@
       "observedAt": "2026-10-05T07:08:57.000Z",
       "source": "prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
       "area": "FR-74,FR-01",
-      "coverage": "departement"
+      "coverage": "departement",
+      "granularity": "region"
     },
     {
       "canton": "SG",
@@ -174,7 +176,8 @@
       "observedAt": "2026-10-05T07:19:20.048Z",
       "source": "E-Control Spritpreisrechner",
       "area": "AT-BL8",
-      "coverage": "cheapest-published"
+      "coverage": "cheapest-published",
+      "granularity": "region"
     },
     {
       "canton": "SG",
@@ -188,35 +191,38 @@
       "observedAt": "2026-10-05T07:19:20.048Z",
       "source": "E-Control Spritpreisrechner",
       "area": "AT-BL8",
-      "coverage": "cheapest-published"
+      "coverage": "cheapest-published",
+      "granularity": "region"
     },
     {
       "canton": "TI",
       "side": "CH",
       "fuel": "sp95",
       "currency": "CHF",
-      "avg": 1.995,
-      "median": 1.99,
-      "min": 1.73,
-      "stations": 47,
-      "observedAt": "2026-10-04T12:51:22.639Z",
-      "source": "TCS Benzinpreis-Radar",
-      "area": "CH (fascia entro 25 km dal confine italiano)",
-      "coverage": "border-strip"
+      "avg": 2.02,
+      "median": 2.02,
+      "min": 2.02,
+      "stations": 1,
+      "observedAt": "2026-09-01T00:00:00.000Z",
+      "source": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+      "area": "CH (media nazionale mensile ufficiale)",
+      "coverage": "national-monthly",
+      "granularity": "national"
     },
     {
       "canton": "TI",
       "side": "CH",
       "fuel": "diesel",
       "currency": "CHF",
-      "avg": 2.301,
-      "median": 2.29,
-      "min": 2.11,
-      "stations": 43,
-      "observedAt": "2026-10-04T12:51:22.639Z",
-      "source": "TCS Benzinpreis-Radar",
-      "area": "CH (fascia entro 25 km dal confine italiano)",
-      "coverage": "border-strip"
+      "avg": 2.27,
+      "median": 2.27,
+      "min": 2.27,
+      "stations": 1,
+      "observedAt": "2026-09-01T00:00:00.000Z",
+      "source": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
+      "area": "CH (media nazionale mensile ufficiale)",
+      "coverage": "national-monthly",
+      "granularity": "national"
     },
     {
       "canton": "TI",
@@ -230,7 +236,8 @@
       "observedAt": "2026-10-03T05:49:59.000Z",
       "source": "MIMIT Osservaprezzi carburanti (open data)",
       "area": "IT-CO,IT-VA,IT-VB",
-      "coverage": "border-municipalities-self-service"
+      "coverage": "border-municipalities-self-service",
+      "granularity": "region"
     },
     {
       "canton": "TI",
@@ -244,7 +251,8 @@
       "observedAt": "2026-10-03T05:49:59.000Z",
       "source": "MIMIT Osservaprezzi carburanti (open data)",
       "area": "IT-CO,IT-VA,IT-VB",
-      "coverage": "border-municipalities-self-service"
+      "coverage": "border-municipalities-self-service",
+      "granularity": "region"
     }
   ]
 }

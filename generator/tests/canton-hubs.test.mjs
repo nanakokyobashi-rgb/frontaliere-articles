@@ -336,7 +336,7 @@ test('ogni blocco ha una soglia: dataset assente, vecchio, malformato o troppo s
   assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.generatedAt = old(BLOCK_THRESHOLDS.fuel.maxAgeMs + HOUR_MS); }), 'stale');
   assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.generatedAt = new Date(NOW + DAY_MS).toISOString(); }), 'invalid');
   assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel = { records: 'x' }; }), 'invalid');
-  assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.records.forEach((r) => { r.stations = BLOCK_THRESHOLDS.fuel.minStations - 1; }); }), 'empty');
+  assert.equal(omittedCode('canton-ti', 'carburanti', 'prezzi-carburanti', (d) => { d.fuel.records.forEach((r) => { r.stations = r.granularity === 'national' ? 0 : BLOCK_THRESHOLDS.fuel.minStations - 1; }); }), 'empty');
   assert.equal(omittedCode('canton-be', 'carburanti', 'prezzi-carburanti', () => {}), 'empty');
 
   // eventi
