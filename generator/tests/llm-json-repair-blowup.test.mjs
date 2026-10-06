@@ -94,6 +94,29 @@ test('repairLlmJsonArray keeps a response after malformed array preamble punctua
   assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }]);
 });
 
+test('repairLlmJsonArray resynchronizes after a mismatched closer before a later FAQ root', () => {
+  const cases = [
+    '{"bad":[1} [{"q":"Q","a":"A"}]',
+    '[1} [{"q":"Q","a":"A"}]',
+    '{"bad":1] [{"q":"Q","a":"A"}]',
+    '{"bad":{"deeper":{"deepest":[1} [{"q":"Q","a":"A"}]',
+  ];
+
+  for (const raw of cases) {
+    assert.deepEqual(JSON.parse(repairLlmJsonArray(raw)), [{ q: 'Q', a: 'A' }], raw);
+  }
+});
+
+test('repairLlmJsonArray keeps an incompatible closer outside an unfinished root at EOF', () => {
+  const cases = ['[1}', '{"bad":1]'];
+
+  for (const raw of cases) {
+    const repaired = repairLlmJsonArray(raw);
+    assert.equal(repaired, raw);
+    assert.throws(() => JSON.parse(repaired), SyntaxError);
+  }
+});
+
 test('repairLlmJsonArray does not promote a nested array inside an unterminated root', () => {
   const raw = '[{"q":"Q","tags":["a"]}';
   const repaired = repairLlmJsonArray(raw);
