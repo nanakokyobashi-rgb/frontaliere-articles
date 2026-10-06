@@ -12657,6 +12657,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.varese-conferenza-lavoro-salari-2026.title': 'Varese: conferenza su salari e diritti, 10 ottobre',
     'blog.article.varese-conferenza-lavoro-salari-2026.excerpt': 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\' di Sinistra Italiana e AVS: orari, relatori e temi su precarietà e potere d\'acquisto.',
     'blog.article.varese-conferenza-lavoro-salari-2026.imageAlt': 'Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi',
+    'blog.article.casse-malati-proposte-esperti-risposta.title': 'Casse malati: 5% di aumento e proposte valutate da esperti',
+    'blog.article.casse-malati-proposte-esperti-risposta.excerpt': 'Nel 2027 il premio cresce del 5%. Tre esperti analizzano cassa statale, prevenzione e costi: in Ticino dal 2029 metà dei cittadini potrebbe avere riduzioni.',
+    'blog.article.casse-malati-proposte-esperti-risposta.imageAlt': 'Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino.',
 };
 
 export default blogMetaIt;
