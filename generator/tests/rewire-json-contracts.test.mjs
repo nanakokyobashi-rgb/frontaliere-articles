@@ -806,6 +806,16 @@ test('[border-wait-averages] "N min" senza trattino resta accettato', async () =
   assert.equal(status, 0, why(c, `Il ramo degenere "2 min" e' stato rifiutato:\n${out}`));
 });
 
+test('[fuel-cantons] la cache legacy senza granularita resta leggibile durante il passaggio HTTP', async () => {
+  const c = contract('fuel-cantons');
+  const body = mutated(c, (p) => {
+    for (const record of p.records) delete record.granularity;
+  });
+  const { status, out } = await runRefresh(c, body);
+  assert.equal(status, 0, why(c, `La cache schema 1 senza granularita e' stata rifiutata durante il passaggio HTTP:\n${out}`));
+  assert.match(out, /--check: .* records over .* cantons/);
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 5. Cio' che il gate lato fetch, per costruzione, non puo' vedere
 // ─────────────────────────────────────────────────────────────────────────────
