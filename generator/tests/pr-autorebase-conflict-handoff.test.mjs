@@ -3,17 +3,114 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   buildConflictHandoffIssue,
+  CONFLICT_RESOLUTION_LOCK_LABEL,
+  CONFLICT_RESOLUTION_LOCK_MAX_AGE_MS,
   conflictHandoffMarker,
+  decideConflictResolutionLock,
   shouldHandOffConflict,
 } from '../../scripts/ci/pr-autorebase.mjs';
 
 const SOURCE = readFileSync(new URL('../../scripts/ci/pr-autorebase.mjs', import.meta.url), 'utf8');
 const HEAD = '685bcb73'.padEnd(40, '0');
+const LOCKED_AT = Date.parse('2026-10-06T09:00:00Z');
+
+function lockEvent(event, createdAt) {
+  return {
+    event,
+    label: { name: CONFLICT_RESOLUTION_LOCK_LABEL },
+    created_at: createdAt,
+  };
+}
 
 test('passa la mano solo con LGTM e una volta per HEAD', () => {
   assert.equal(shouldHandOffConflict({ lgtm: true, alreadyHandedOff: false }), true);
   assert.equal(shouldHandOffConflict({ lgtm: false, alreadyHandedOff: false }), false);
   assert.equal(shouldHandOffConflict({ lgtm: true, alreadyHandedOff: true }), false);
+});
+
+test('un lock valido agent:resolving-conflict impedisce il passaggio di mano', () => {
+  const decision = decideConflictResolutionLock({
+    labels: [CONFLICT_RESOLUTION_LOCK_LABEL],
+    events: [lockEvent('labeled', '2026-10-06T09:00:00Z')],
+    headCommittedAt: '2026-10-06T08:59:00Z',
+    now: LOCKED_AT + 30 * 60 * 1000,
+  });
+
+  assert.equal(decision.state, 'active');
+  assert.equal(decision.release, false);
+  assert.equal(shouldHandOffConflict({
+    lgtm: true,
+    alreadyHandedOff: false,
+    conflictLockState: decision.state,
+  }), false);
+});
+
+test('un lock scaduto viene rimosso e ripristina il passaggio di mano', () => {
+  const decision = decideConflictResolutionLock({
+    labels: [CONFLICT_RESOLUTION_LOCK_LABEL],
+    events: [lockEvent('labeled', '2026-10-06T09:00:00Z')],
+    headCommittedAt: '2026-10-06T09:01:00Z',
+    now: LOCKED_AT + CONFLICT_RESOLUTION_LOCK_MAX_AGE_MS,
+  });
+
+  assert.equal(decision.state, 'expired');
+  assert.equal(decision.release, true);
+  assert.equal(shouldHandOffConflict({
+    lgtm: true,
+    alreadyHandedOff: false,
+    conflictLockState: decision.state,
+  }), true);
+});
+
+test('il primo commit dopo il lock lo fa cadere', () => {
+  const decision = decideConflictResolutionLock({
+    labels: [CONFLICT_RESOLUTION_LOCK_LABEL],
+    events: [lockEvent('labeled', '2026-10-06T09:00:00Z')],
+    headCommittedAt: '2026-10-06T09:02:00Z',
+    now: '2026-10-06T09:10:00Z',
+  });
+
+  assert.equal(decision.state, 'pushed');
+  assert.equal(decision.release, true);
+});
+
+test('senza la label il percorso resta quello attuale', () => {
+  const decision = decideConflictResolutionLock({
+    labels: [],
+    now: '2026-10-06T09:10:00Z',
+  });
+
+  assert.deepEqual(decision, { state: 'none', release: false });
+  assert.equal(shouldHandOffConflict({
+    lgtm: true,
+    alreadyHandedOff: false,
+    conflictLockState: decision.state,
+  }), true);
+});
+
+test('timeline illeggibile mantiene il blocco fail-closed', () => {
+  const decision = decideConflictResolutionLock({
+    labels: [CONFLICT_RESOLUTION_LOCK_LABEL],
+    headCommittedAt: '2026-10-06T09:01:00Z',
+    now: '2026-10-06T09:10:00Z',
+  });
+
+  assert.equal(decision.state, 'unreadable');
+  assert.equal(shouldHandOffConflict({
+    lgtm: true,
+    alreadyHandedOff: false,
+    conflictLockState: decision.state,
+  }), false);
+});
+
+test('il percorso live legge il lock prima di creare la issue di hand-off', () => {
+  const fn = SOURCE.slice(
+    SOURCE.indexOf('function handOffConflictToFixer('),
+    SOURCE.indexOf('function commentConflictOnce('),
+  );
+  const lock = fn.indexOf('readConflictResolutionLock');
+  const issue = fn.indexOf("'issue', 'create'");
+  assert.ok(lock >= 0 && issue > lock, 'il lock deve essere verificato prima della creazione della issue');
 });
 
 test("il marker e' legato alla HEAD", () => {

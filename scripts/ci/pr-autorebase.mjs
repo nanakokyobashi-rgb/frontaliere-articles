@@ -140,6 +140,9 @@ const MAX_REOPENS = intFromEnv('AUTOREBASE_MAX_REOPENS', DEFAULT_MAX_REOPENS);
 
 const budget = runBudgetFromEnv();
 const CONFLICT_MARKER = '<!-- AUTOREBASE_CONFLICT -->';
+/** Lock esplicito per una risoluzione manuale già iniziata sul branch della PR. */
+export const CONFLICT_RESOLUTION_LOCK_LABEL = 'agent:resolving-conflict';
+export const CONFLICT_RESOLUTION_LOCK_MAX_AGE_MS = 60 * 60 * 1000;
 
 // ── Rilevazione conflitti con main su TUTTE le PR aperte ─────────────────────
 //
@@ -704,10 +707,20 @@ function readReopenBudgetBody(num) {
 }
 
 /** Label correnti della PR (rilette: il breaker può averle appena cambiate). */
+function readCurrentPrLabelNames(num) {
+  try {
+    const view = gh(['pr', 'view', String(num), '--repo', REPO, '--json', 'labels']);
+    if (!Array.isArray(view?.labels)) return null;
+    return view.labels
+      .map((label) => String(label?.name || ''))
+      .filter(Boolean);
+  } catch {
+    return null;
+  }
+}
+
 function labelsOf(num) {
-  const raw = gh(['pr', 'view', String(num), '--repo', REPO, '--json', 'labels',
-    '--jq', '[.labels[].name] | join(",")'], { json: false, allowFail: true });
-  return (raw || '').trim().split(',').filter(Boolean);
+  return readCurrentPrLabelNames(num) || [];
 }
 
 /** behind_by: commit di main non nella head. */
@@ -719,10 +732,18 @@ function behindMain(head) {
 
 /** Minuti dall'ultimo push sull'head = committer date del commit head. Serve
  * all'activity-guard: un head appena pushato = contributor/agent mid-flight. */
+function readHeadCommitterAt(head) {
+  try {
+    const raw = gh(['api', `repos/${REPO}/commits/${head}`, '--jq', '.commit.committer.date'],
+      { json: false });
+    return String(raw || '').trim() || null;
+  } catch {
+    return null;
+  }
+}
+
 function headPushedMinutesAgo(head) {
-  const iso = gh(['api', `repos/${REPO}/commits/${head}`, '--jq', '.commit.committer.date'],
-    { json: false, allowFail: true });
-  const t = Date.parse((iso || '').trim());
+  const t = Date.parse(readHeadCommitterAt(head) || '');
   if (Number.isNaN(t)) return Infinity; // sconosciuto → non bloccare il rebase
   return (Date.now() - t) / 60000;
 }
@@ -1157,9 +1178,67 @@ export function conflictHandoffMarker(head) {
   return `${CONFLICT_HANDOFF_MARKER_PREFIX} head=${String(head).slice(0, 12)} -->`;
 }
 
+function timestampMs(value) {
+  if (typeof value === 'number') return Number.isFinite(value) ? value : NaN;
+  const at = Date.parse(String(value ?? ''));
+  return Number.isFinite(at) ? at : NaN;
+}
+
+/** Ultimo evento di lock, o null se la timeline non ne porta uno leggibile. */
+export function lastConflictResolutionLockEvent(events) {
+  let latest = null;
+  for (const event of Array.isArray(events) ? events : []) {
+    const label = typeof event?.label === 'string' ? event.label : event?.label?.name;
+    if (label !== CONFLICT_RESOLUTION_LOCK_LABEL) continue;
+    if (event?.event !== 'labeled' && event?.event !== 'unlabeled') continue;
+    const at = timestampMs(event.created_at ?? event.createdAt);
+    if (!Number.isFinite(at)) continue;
+    if (!latest || at >= latest.at) latest = { event: event.event, at };
+  }
+  return latest;
+}
+
+/**
+ * Stato del lock di risoluzione. Puro: il lettore GitHub inietta eventi e
+ * timestamp, così scadenza e push restano testabili senza chiamare la rete.
+ */
+export function decideConflictResolutionLock({
+  labels = [],
+  events,
+  headCommittedAt = null,
+  now = Date.now(),
+  maxAgeMs = CONFLICT_RESOLUTION_LOCK_MAX_AGE_MS,
+}) {
+  const names = labels.map((label) => (typeof label === 'string' ? label : label?.name));
+  if (!names.includes(CONFLICT_RESOLUTION_LOCK_LABEL)) {
+    return { state: 'none', release: false };
+  }
+  if (!Array.isArray(events)) {
+    return { state: 'unreadable', release: false, reason: 'timeline' };
+  }
+  const latest = lastConflictResolutionLockEvent(events);
+  if (!latest) return { state: 'unreadable', release: false, reason: 'timeline' };
+  if (latest.event === 'unlabeled') return { state: 'none', release: false, reason: 'unlabeled' };
+  const nowAt = timestampMs(now);
+  if (!Number.isFinite(nowAt)) return { state: 'unreadable', release: false, reason: 'clock' };
+  const expiresAt = latest.at + maxAgeMs;
+  if (nowAt >= expiresAt) {
+    return { state: 'expired', release: true, lockedAt: latest.at, expiresAt };
+  }
+  const headAt = timestampMs(headCommittedAt);
+  if (!Number.isFinite(headAt)) {
+    return { state: 'unreadable', release: false, reason: 'head' };
+  }
+  if (headAt > latest.at) {
+    return { state: 'pushed', release: true, lockedAt: latest.at, headCommittedAt: headAt, expiresAt };
+  }
+  return { state: 'active', release: false, lockedAt: latest.at, expiresAt };
+}
+
 /** Il conflitto merita un agente adesso? Puro: niente rete. */
-export function shouldHandOffConflict({ lgtm, alreadyHandedOff }) {
-  return Boolean(lgtm) && !alreadyHandedOff;
+export function shouldHandOffConflict({ lgtm, alreadyHandedOff, conflictLockState = 'none' }) {
+  const lockBlocks = conflictLockState === 'active' || conflictLockState === 'unreadable';
+  return Boolean(lgtm) && !alreadyHandedOff && !lockBlocks;
 }
 
 /** Titolo stabile e body della issue di hand-off. Puro: niente rete. */
@@ -1196,9 +1275,73 @@ function ghOk(args) {
   }
 }
 
+function parseConflictResolutionLockEvents(raw) {
+  if (typeof raw !== 'string') return null;
+  const events = [];
+  for (const line of raw.split('\n')) {
+    if (!line.trim()) continue;
+    try {
+      const event = JSON.parse(line);
+      if (!event || typeof event !== 'object') return null;
+      events.push({ ...event, label: CONFLICT_RESOLUTION_LOCK_LABEL });
+    } catch {
+      return null;
+    }
+  }
+  return events;
+}
+
+function readConflictResolutionLockEvents(num) {
+  try {
+    const raw = gh([
+      'api', '--paginate', `repos/${REPO}/issues/${num}/events?per_page=100`,
+      '--jq', `.[] | select((.event == "labeled" or .event == "unlabeled") and .label.name == "${CONFLICT_RESOLUTION_LOCK_LABEL}") | {event, created_at} | @json`,
+    ], { json: false });
+    return parseConflictResolutionLockEvents(raw);
+  } catch {
+    return null;
+  }
+}
+
+function readConflictResolutionLock(num, head, knownLabels = null) {
+  const labels = knownLabels ?? readCurrentPrLabelNames(num);
+  if (!Array.isArray(labels)) return { state: 'unreadable', release: false, reason: 'labels' };
+  if (!labels.includes(CONFLICT_RESOLUTION_LOCK_LABEL)) return { state: 'none', release: false };
+  const events = readConflictResolutionLockEvents(num);
+  const headCommittedAt = readHeadCommitterAt(head);
+  return decideConflictResolutionLock({ labels, events, headCommittedAt });
+}
+
+function removeConflictResolutionLock(num, decision) {
+  const reason = decision.state === 'expired' ? 'scaduto dopo 60 minuti' : 'rimosso dopo il primo push sulla HEAD';
+  if (DRY) {
+    console.log(`[dry] -label ${CONFLICT_RESOLUTION_LOCK_LABEL} #${num} (${reason})`);
+    return;
+  }
+  gh(['pr', 'edit', String(num), '--repo', REPO, '--remove-label', CONFLICT_RESOLUTION_LOCK_LABEL],
+    { json: false, allowFail: true });
+  console.log(`PR #${num}: -label ${CONFLICT_RESOLUTION_LOCK_LABEL} (${reason}).`);
+}
+
+function releaseConflictResolutionLockIfNeeded(num, head, knownLabels) {
+  const decision = readConflictResolutionLock(num, head, knownLabels);
+  if (decision.release) removeConflictResolutionLock(num, decision);
+  return decision;
+}
+
 function handOffConflictToFixer(num, branch, head, lgtm) {
+  const lock = readConflictResolutionLock(num, head);
+  if (lock.release) removeConflictResolutionLock(num, lock);
+  if (lock.state === 'active' || lock.state === 'unreadable') {
+    console.log(`PR #${num}: lock ${CONFLICT_RESOLUTION_LOCK_LABEL} ${lock.state === 'active' ? 'valido' : 'non verificabile'} → nessun hand-off a issue-fix.`);
+    return;
+  }
   const marker = conflictHandoffMarker(head);
-  if (!shouldHandOffConflict({ lgtm, alreadyHandedOff: lgtm && hasCommentMarker(num, marker) })) return;
+  if (!shouldHandOffConflict({
+    lgtm,
+    alreadyHandedOff: lgtm && hasCommentMarker(num, marker),
+    conflictLockState: lock.state,
+  })) return;
   // Il ramo chiamante puo' essersi basato su `mergeable=CONFLICTING`, che e'
   // una cache: l'hand-off parte solo se merge-tree conferma ADESSO un
   // conflitto. `clean` o `unknown` → nessuna issue (fail-closed).
@@ -1552,7 +1695,7 @@ async function processPR(pr) {
   const num = pr.number;
   const branch = pr.headRefName;
   const head = pr.headRefOid;
-  const labels = (pr.labels || []).map((l) => l.name);
+  let labels = (pr.labels || []).map((l) => l.name);
 
   // `behind` serve allo stuck-red, al gate `needs-human` e al flusso normale:
   // memoizzato per non pagare tre volte la compare API.
@@ -1607,6 +1750,15 @@ async function processPR(pr) {
   if (conflictScan === null) {
     console.log(`PR #${num}: conflitto non verificabile → rinvio ogni azione questo tick.`);
     return;
+  }
+
+  // Un push successivo al lock lo chiude anche se il conflitto è già rientrato
+  // e quindi questo tick non entrerà mai nel percorso di hand-off.
+  if (labels.includes(CONFLICT_RESOLUTION_LOCK_LABEL)) {
+    const lock = releaseConflictResolutionLockIfNeeded(num, head, labels);
+    if (lock.release || lock.reason === 'unlabeled') {
+      labels = labels.filter((label) => label !== CONFLICT_RESOLUTION_LOCK_LABEL);
+    }
   }
 
   // Contesto HEAD+body e ultimo verdetto del reviewer, letti PRIMA del gate
