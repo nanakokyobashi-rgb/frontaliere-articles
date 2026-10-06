@@ -12669,6 +12669,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Multe e pene: conversione in lavori utili in Ticino',
     'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 casi in Ticino nel 2025. A Zurigo 1\'388 richieste: 4 ore di lavoro valgono 1 giorno di carcere.',
     'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Persona con guanti da lavoro che tiene un foglio con checklist in un corridoio ospedaliero in Ticino.',
+    'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: lavori sulla cantonale, attese fino a 30 minuti',
+    'blog.article.gambarogno-pavimentazione-attese.excerpt': 'Dal 12 al 16 ottobre lavori di pavimentazione sulla cantonale a Gambarogno, tra il sottopasso FFS e la salita per Caviano - Scaiano. Attese fino a 30 minuti.',
+    'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Lavori di pavimentazione sulla cantonale di Gambarogno tra il sottopasso FFS e Caviano',
 };
 
 export default blogMetaIt;
