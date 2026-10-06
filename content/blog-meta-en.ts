@@ -12638,6 +12638,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.analisi-salario-prestazioni.title': 'Ticino: Avanti motion on salary and benefits',
     'blog.article.analisi-salario-prestazioni.excerpt': 'The Grand Council gives the green light to Speziali (Plr)\'s report: analysis and simulations on higher pay and fewer benefits.',
     'blog.article.analisi-salario-prestazioni.imageAlt': 'Civic building in Ticino',
+    'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana: 8,4 million for safety and road infrastructure',
+    'blog.article.investimenti-viabilita-lariana-como.excerpt': 'The Province of Como invests in safety and road accessibility along the S.P. 583 Lariana: new sidewalks, motorcyclist protection barriers and road resurfacing.',
+    'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Lariana provincial road along Lake Como with safety improvements',
+    'blog.article.biasca-accoltellamento-21enne.title': 'Ticino, 21-year-old Italian stabbed: his life is at risk',
+    'blog.article.biasca-accoltellamento-21enne.excerpt': 'In Biasca, a 21-year-old Italian citizen residing in the Leventina district was seriously stabbed: his life is in danger.',
+    'blog.article.biasca-accoltellamento-21enne.imageAlt': 'Via Bellinzona in Biasca, Ticino, where police officers and rescuers intervened.',
+    'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino: Lereti works on via Copelli until November 27',
+    'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Renewal of the water-supply network on via Copelli begins: 400 metres of new pipes and alternating one-way traffic with traffic lights are planned.',
+    'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Road construction site in via Copelli, Luino for water network renewal',
 };
 
 export default blogMetaEn;

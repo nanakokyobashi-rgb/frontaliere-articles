@@ -12640,6 +12640,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.analisi-salario-prestazioni.title': 'Ticino : motion Avanti sur le salaire et les prestations',
     'blog.article.analisi-salario-prestazioni.excerpt': 'Le Grand Conseil donne son feu vert au rapport de Speziali (PLR): analyses et simulations sur davantage de salaire et moins de prestations.',
     'blog.article.analisi-salario-prestazioni.imageAlt': 'Bâtiment institutionnel au Tessin',
+    'blog.article.investimenti-viabilita-lariana-como.title': 'Lariana : 8,4 millions pour la sécurité et la voirie',
+    'blog.article.investimenti-viabilita-lariana-como.excerpt': 'La Province de Como investit dans la sécurité et la praticabilité de la S.P. 583 Lariana : nouveaux trottoirs, barrières de protection pour motocyclistes et réfection des chaussées.',
+    'blog.article.investimenti-viabilita-lariana-como.imageAlt': 'Route provinciale Lariana le long du lac de Côme avec aménagements de sécurité (Como)',
+    'blog.article.biasca-accoltellamento-21enne.title': 'Tessin, 21 ans, poignardé : il risque sa vie',
+    'blog.article.biasca-accoltellamento-21enne.excerpt': 'À Biasca, un citoyen italien de 21 ans, résidant dans le district de Léventine, a été gravement poignardé : sa vie est en danger.',
+    'blog.article.biasca-accoltellamento-21enne.imageAlt': 'La via Bellinzona à Biasca, au Tessin, où la police et les secours sont intervenus.',
+    'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino : travaux de Lereti dans la via Copelli jusqu\'au 27 novembre',
+    'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Lancement du renouvellement du réseau d\'adduction d\'eau dans la via Copelli : 400 mètres de nouvelles canalisations sont prévus et une circulation alternée avec un feu de signalisation.',
+    'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Chantier routier via Copelli à Luino pour le renouvellement du réseau d\'eau',
 };
 
 export default blogMetaFr;

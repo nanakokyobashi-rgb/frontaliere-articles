@@ -158,7 +158,12 @@ test('gli argomenti di rebase coprono ogni file scritto, con la strategia giusta
     `${p.experimentalCounterFile}:count`,
     `${p.quotaStateFile}:runCounter`,
   ].sort());
-  assert.deepEqual(bare.sort(), [p.sourceUrlsFile, p.sourceQuotaFile, p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile].sort());
+  // Path nudi = «prendi upstream»: ledger, quote, cache di stato e i file dati
+  // dei 6 hub tematici (P10), che il loro producer riscrive per intero.
+  assert.deepEqual(bare.sort(), [
+    p.sourceUrlsFile, p.sourceQuotaFile, p.consumedFile, p.todayPicksFile, p.evergreenRejectedFile,
+    ...['carburanti', 'fisco', 'mobilita', 'eventi', 'pensioni', 'servizi'].map((t) => `content/cantons/canton-ti/hubs/${t}.json`),
+  ].sort());
   assert.deepEqual(after('--merge-registry').sort(), [
     'content/cantons/canton-ti/registry.ts',
     'content/cantons/canton-ti/slugs.ts',

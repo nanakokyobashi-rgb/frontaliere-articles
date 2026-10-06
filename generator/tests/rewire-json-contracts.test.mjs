@@ -1,16 +1,16 @@
 /**
- * rewire-json-contracts.test.mjs — i tre contratti JSON del REWIRE set,
+ * rewire-json-contracts.test.mjs — i contratti JSON del REWIRE set,
  * inchiodati dal lato del CONSUMATORE (issue #101).
  *
  * ## Il buco che chiude
  *
- * Il sito pubblica tre artefatti su `cdn.frontaliereticino.ch/data/` e questo
+ * Il sito pubblica artefatti su `cdn.frontaliereticino.ch/data/` e questo
  * repo li consuma. I due capi hanno nomi diversi e non si importano, quindi il
  * legame non e' visto da nessuno dei guard esistenti — ne' dal drift check (che
  * confronta per path), ne' dai closure test (che seguono gli import), ne' da
  * `loop-references-exist.test.mjs` (che verifica che un path citato ESISTA: la
  * sua esistenza non dice niente sulla sua forma). Il razionale completo, e le
- * tre coppie, stanno in `generator/tests/lib/rewire-contracts.mjs`.
+ * coppie, stanno in `generator/tests/lib/rewire-contracts.mjs`.
  *
  * Prima di questo file, `generator/tests/` non conteneva una sola riga che
  * nominasse border-wait o events-dataset. Il sintomo di una rottura non era un
@@ -33,7 +33,7 @@
  *
  * ## Perche' lo script viene COPIATO in una temp dir
  *
- * I tre `refresh` risolvono la propria cache da `import.meta.url`, non da `cwd`:
+ * I `refresh` risolvono la propria cache da `import.meta.url`, non da `cwd`:
  * eseguirli in loco leggerebbe (e, senza `--check`, scriverebbe) le cache vere
  * del repo. Su `refresh-border-wait-averages.mjs` non e' teorico — la guardia
  * anti-shrink confronta col file di cache ESISTENTE, quindi su una macchina che
@@ -55,7 +55,7 @@ import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
+import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenRecording, freshenWindow, freshenYear } from './lib/rewire-contracts.mjs';
 import { rankingFromStats, trendFromStats, MIN_SAMPLES_FOR_RANKING } from '../scripts/lib/border-wait-ranking.mjs';
 import { importSpecifiers, relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
@@ -65,6 +65,9 @@ const readFixture = (c) => JSON.parse(read(c.fixture));
 
 /** Oggi, come lo vedono i gate temporali dei `refresh`. */
 const TODAY = new Date().toISOString().slice(0, 10);
+
+/** Anno di calendario dei gate di staleness dei dataset annuali (fisco, pensioni). */
+const CURRENT_YEAR = new Date().getUTCFullYear();
 
 /**
  * Il payload registrato, rimesso in data quando il contratto lo richiede:
@@ -200,8 +203,8 @@ const mutated = (c, fn) => {
 test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', () => {
   assert.equal(
     REWIRE_CONTRACTS.length,
-    10,
-    'il REWIRE set e\' di dieci artefatti: i tre della issue #101, i carburanti per cantone (P9b), gli avvisi cantonali (P9g), i quattro input dei servizi (P9f) e road-events (P9c)',
+    12,
+    'il REWIRE set e\' di dodici artefatti: i tre della issue #101, i carburanti per cantone (P9b), gli avvisi cantonali (P9g), i quattro input dei servizi (P9f), road-events (P9c) e i dataset annuali fisco e pensioni (P9d/P9e)',
   );
   const missing = [];
   for (const c of REWIRE_CONTRACTS) {
@@ -279,7 +282,7 @@ test('ogni campo dichiarato letto esiste nel fixture ED e\' nominato dal file ch
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 2. La forma registrata passa, in tutti e tre
+// 2. La forma registrata passa, in tutti
 // ─────────────────────────────────────────────────────────────────────────────
 
 for (const c of REWIRE_CONTRACTS) {
@@ -290,7 +293,7 @@ for (const c of REWIRE_CONTRACTS) {
 
   test(`[${c.id}] un 200 che non e' JSON non viene mai cachato`, async () => {
     // La forma piu' comune di rottura di una pubblicazione statica: una pagina
-    // di errore servita con 200. Nessuno dei tre puo' permettersi di scriverla
+    // di errore servita con 200. Nessuno puo' permettersi di scriverla
     // sopra una copia buona.
     const { status, out } = await runRefresh(c, '<!doctype html><title>502</title>', { contentType: 'text/html' });
     assert.notEqual(status, 0, why(c, `Una pagina HTML servita con 200 e' stata accettata:\n${out}`));
@@ -677,6 +680,91 @@ const MUTATIONS = {
   'weather-snapshot': (c) => [
     ['cities{} vuoto', mutated(c, (p) => { p.cities = {}; }), /cities\{\} missing or empty/, 'Zero citta\' = blocco meteo sparito senza errore.'],
     ['generatedAt non data', mutated(c, (p) => { p.generatedAt = 'oggi'; }), /generatedAt is not a date/, 'La freschezza del meteo si misura su questo campo.'],
+  ],
+  'canton-tax': (c) => [
+    [
+      'schemaVersion diverso',
+      mutated(c, (p) => { p.schemaVersion = 2; }),
+      /has schemaVersion 2, expected 1/,
+      'Una forma nuova non dichiarata va letta da qualcuno prima di finire in un hub fiscale.',
+    ],
+    [
+      'anno vecchio di due anni',
+      mutated(c, (p) => freshenYear(p, CURRENT_YEAR - 2)),
+      /is stale/,
+      'Un publisher fermo consegnerebbe aliquote di due anni fa come attuali.',
+    ],
+    [
+      'cantone mancante',
+      mutated(c, (p) => { delete p.cantons.TI; }),
+      /cantons missing: TI/,
+      'Un hub cantonale senza il suo cantone non deve sovrascrivere quello buono.',
+    ],
+    [
+      'curva dell\'onere troncata a quattro redditi',
+      mutated(c, (p) => {
+        p.burden.incomeBracketsCHF = p.burden.incomeBracketsCHF.slice(0, 4);
+        for (const canton of Object.values(p.cantons)) canton.burdenPct[String(p.year)] = canton.burdenPct[String(p.year)].slice(0, 4);
+      }),
+      /incomeBracketsCHF is not a list of 5 incomes/,
+      'Una curva coerente ma con meno punti passerebbe il controllo riga per riga: il contratto e\' di cinque redditi.',
+    ],
+    [
+      'onere come stringhe',
+      mutated(c, (p) => { p.cantons.ZH.burdenPct[String(p.year)] = p.cantons.ZH.burdenPct[String(p.year)].map(String); }),
+      /ZH burdenPct \d{4} is not 5 percentages/,
+      'Le percentuali finiscono in prosa: una stringa passerebbe e verrebbe confrontata male.',
+    ],
+    [
+      'onere in frazioni invece che in percentuale',
+      mutated(c, (p) => { p.cantons.GE.burdenPct[String(p.year)] = [0.0188, 0.0983, 0.1548, 0.2003, 0.2611]; }),
+      /GE burdenPct \d{4} tops out at 0.2611%/,
+      'Un cambio di unita\' (frazione al posto di %) produrrebbe un onere dello 0,2%.',
+    ],
+    [
+      'tariffe alla fonte sotto soglia',
+      mutated(c, (p) => { for (const code of ['AG', 'AI', 'AR']) p.cantons[code].withholding = null; }),
+      /withholding A0 rates for only 23\/26 cantons/,
+      'Sotto 24 cantoni il dataset non e\' quello che il produttore ha validato.',
+    ],
+  ],
+  'pension-parameters': (c) => [
+    [
+      'schemaVersion diverso',
+      mutated(c, (p) => { p.schemaVersion = 2; }),
+      /has schemaVersion 2, expected 1/,
+      'Una forma nuova non dichiarata va letta da qualcuno prima di finire in un hub pensioni.',
+    ],
+    [
+      'anno vecchio di due anni',
+      mutated(c, (p) => { p.year = CURRENT_YEAR - 2; }),
+      /is stale/,
+      'La rendita AVS cambia ogni due anni: un dataset fermo pubblicherebbe la cifra superata.',
+    ],
+    [
+      'rendita massima non doppia della minima',
+      mutated(c, (p) => { p.federal.avs.maxMonthlyCHF = 2450; }),
+      /is not twice min/,
+      'Art. 34 LAVS: una coppia incoerente e\' un parse sbagliato a monte, non una cifra da pubblicare.',
+    ],
+    [
+      'soglia LPP non derivata dalla rendita massima',
+      mutated(c, (p) => { p.federal.lpp.entryThresholdCHF = 22050; }),
+      /is not 3\/4 of the annual maximum AVS pension/,
+      'La soglia d\'entrata e\' 3/4 della rendita massima annua per legge: 22\'050 e\' la soglia 2024.',
+    ],
+    [
+      'massimale 3a come stringa',
+      mutated(c, (p) => { p.federal.pillar3a.maxWithLppCHF = "7'258"; }),
+      /pillar3a maxima are not positive integers/,
+      'Le cifre finiscono in prosa e nei confronti numerici: una stringa formattata non e\' un importo.',
+    ],
+    [
+      'cassa di compensazione senza url',
+      mutated(c, (p) => { p.cantons.TI.compensationFund.url = null; }),
+      /compensationFund name\/url missing for TI/,
+      'L\'hub pensioni cantonale rimanda alla cassa AVS: senza link non ha la sua informazione principale.',
+    ],
   ],
 };
 

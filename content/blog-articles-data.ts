@@ -39815,6 +39815,37 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'investimenti-viabilita-lariana-como',
+ category: 'novita',
+ date: '2026-10-05T22:55:09.946Z',
+ image: '/images/blog/investimenti-viabilita-lariana-como.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'biasca-accoltellamento-21enne',
+ category: 'novita',
+ date: '2026-10-05T23:38:30.856Z',
+ image: '/images/blog/biasca-accoltellamento-21enne.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lavori-lereti-via-copelli-luino',
+ category: 'pratico',
+ date: '2026-10-06T00:22:58.575Z',
+ image: '/images/blog/lavori-lereti-via-copelli-luino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

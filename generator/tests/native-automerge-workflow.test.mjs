@@ -33,6 +33,23 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
   assert.match(source, /NATIVE_AUTOMERGE_BOOTSTRAP_READY=false/);
 });
 
+test('un workflow_run su main resta un no-op, mentre una PR da fork chiamata main resta eleggibile', () => {
+  const enableJob = source.slice(source.indexOf('\n  enable:\n'));
+  const condition = enableJob.match(/\n {4}if: >-\n((?: {6}.+\n)+)/)?.[1]
+    ?.replace(/\s+/g, ' ')
+    .trim();
+  assert.equal(
+    condition,
+    "(github.event_name != 'workflow_run' || (github.event.workflow_run.head_branch != '' && github.event.workflow_run.head_repository.full_name != '' && !(github.event.workflow_run.head_repository.full_name == github.repository && (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch') && github.event.workflow_run.head_branch == github.event.repository.default_branch))) && (github.event_name == 'workflow_run' || inputs.pr_number != '' || (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) || (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false))",
+  );
+  const trigger = source.slice(source.indexOf('\n  workflow_run:\n'));
+  assert.doesNotMatch(trigger, /\n {4}branches-ignore:/);
+  assert.match(source, /workflow_run\.head_repository\.full_name == github\.repository/);
+  assert.match(source, /workflow_run\.event == 'push'/);
+  assert.match(source, /workflow_run\.event == 'workflow_dispatch'/);
+  assert.match(source, /workflow_run\.head_branch == github\.event\.repository\.default_branch/);
+});
+
 test('tests richiama il gate dopo il verdetto, senza dipendere da pull_request_review', () => {
   const postReviewOffset = testsSource.indexOf('\n  post-review:');
   const postReview = testsSource.slice(postReviewOffset);

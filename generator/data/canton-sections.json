@@ -144,7 +144,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "mobilita", "frontalieri"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/de/aktuelles/meldungen/"
+          },
           "items7d": 20,
           "verifiedAt": "2026-10-05",
           "notes": "HTML con 20 link /meldungen/*.php server-rendered; comune di confine con la Germania (Rheinfelden Baden). Nessun feed RSS trovato; date non misurabili (items7d = numero di link, non filtrati per data)."
@@ -1020,7 +1022,8 @@
           "kind": "media",
           "topics": ["cronaca", "servizi", "mobilita", "lavoro", "eventi"],
           "quirks": {
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "urlReusedForDifferentStories": "^/ticker-"
           },
           "items7d": 52,
           "verifiedAt": "2026-10-05",
@@ -1035,7 +1038,8 @@
           "kind": "media",
           "topics": ["cronaca", "servizi", "mobilita", "eventi"],
           "quirks": {
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "urlReusedForDifferentStories": "^/ticker-"
           },
           "items7d": 23,
           "verifiedAt": "2026-10-05",
@@ -1607,7 +1611,8 @@
           "kind": "istituzionale",
           "topics": ["servizi"],
           "quirks": {
-            "crawlDelaySeconds": 10
+            "crawlDelaySeconds": 10,
+            "articlePathPattern": "^/newsroom/communiques-de-presse/"
           },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
@@ -2398,7 +2403,8 @@
           "kind": "media",
           "topics": ["cronaca", "mobilita", "eventi", "servizi", "lavoro", "fisco", "pensioni"],
           "quirks": {
-            "paywall": "title+lead"
+            "paywall": "title+lead",
+            "urlReusedForDifferentStories": true
           },
           "items7d": 28,
           "verifiedAt": "2026-10-05",
@@ -2413,7 +2419,8 @@
           "kind": "media",
           "topics": ["cronaca", "mobilita", "eventi", "lavoro"],
           "quirks": {
-            "paywall": "title+lead"
+            "paywall": "title+lead",
+            "urlReusedForDifferentStories": true
           },
           "items7d": 24,
           "verifiedAt": "2026-10-05",
@@ -2427,10 +2434,12 @@
           "language": "de",
           "kind": "media",
           "topics": ["cronaca"],
-          "quirks": {},
+          "quirks": {
+            "urlReusedForDifferentStories": true
+          },
           "items7d": 5,
           "verifiedAt": "2026-10-05",
-          "notes": "Solo fallback del feed: 31 URL con news:publication_date (ultime ore), 5 sotto /glarus/. Titoli non presenti nel file. Da usare solo se il feed /feed/glarus fallisce."
+          "notes": "Solo fallback del feed: 31 URL con news:publication_date (ultime ore), 5 sotto /glarus/. Rimisurato il 2026-10-05 (P5b): 48 voci, tutte con news:title, uguale al titolo del feed; una voce senza titolo verrebbe scartata (URL riusati: l'identita' e' il titolo). Da usare solo se il feed /feed/glarus fallisce."
         },
         {
           "url": "https://www.gl.ch/public-newsroom.html/30",
@@ -2696,7 +2705,8 @@
           "kind": "media",
           "topics": ["cronaca", "mobilita", "eventi", "servizi", "lavoro", "fisco", "pensioni", "frontalieri"],
           "quirks": {
-            "paywall": "title+lead"
+            "paywall": "title+lead",
+            "urlReusedForDifferentStories": true
           },
           "items7d": 44,
           "verifiedAt": "2026-10-05",
@@ -2752,7 +2762,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "mobilita", "fisco", "pensioni", "lavoro", "eventi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/DE/Medien/Mitteilungen/MMStaka/\\d{4}/Seiten/\\d+\\.aspx"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "25 link .../MMStaka/2026/Seiten/AAAAMMGGNN.aspx con data nell'URL: ultimo 28 sett (7 giorni fa, quindi 0 con finestra stretta <7d), 13 negli ultimi 21 giorni. Comunicati del governo (decisioni, cantieri stradali, votazioni, sussidi) in de; versione IT: https://www.gr.ch/IT/media/Seiten/RSS-Feeds.aspx indica l'equivalente (pagina Aktuell IT = 404, solo feed). Il feed RSS ufficiale esiste ma e' vietato da robots (vedi rejected)."
@@ -3137,7 +3149,8 @@
           "kind": "istituzionale",
           "topics": ["fisco", "pensioni", "servizi", "mobilita", "lavoro", "frontalieri", "eventi", "cronaca"],
           "quirks": {
-            "urlPeriod": "year"
+            "urlPeriod": "year",
+            "articlePathPattern": "^/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-\\d{4}/"
           },
           "items7d": 10,
           "verifiedAt": "2026-10-05",
@@ -3151,7 +3164,9 @@
           "language": "fr",
           "kind": "polizia",
           "topics": ["mobilita", "cronaca"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/fr/Autorites/Administration/DSJP/POC/Medias/Communiques-de-presse-de-la-Police/"
+          },
           "items7d": 5,
           "verifiedAt": "2026-10-05",
           "notes": "11 link /Communiques-de-presse-de-la-Police/<slug>.html con data (5.10, 4.10, 4.10, 2.10...). Utile solo per mobilita'/incidenti rilevanti; la cronaca nera va filtrata."
@@ -3164,7 +3179,9 @@
           "language": "fr",
           "kind": "istituzionale",
           "topics": ["servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/fr/A-propos/Medias-Presse/Communiques-de-presse/"
+          },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
           "notes": "10 comunicati /Communiques-de-presse/<slug>.html; una sola data leggibile nella pagina (4.10.2026): cadenza stimata settimanale/quindicinale."
@@ -3177,7 +3194,9 @@
           "language": "fr",
           "kind": "istituzionale",
           "topics": ["servizi", "eventi", "mobilita"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/fr/Vivre-a-Delemont/Actualites/Dernieres-nouvelles/"
+          },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
           "notes": "Capoluogo: 18 link /Dernieres-nouvelles/<slug>.html ('Lire la suite de «titolo»'), date visibili 4.10.2026 / 1.10 / 18.9 / 16.9. Comuni di Porrentruy e Moutier: vedi rejected."
@@ -3563,7 +3582,9 @@
           "language": "de",
           "kind": "economia",
           "topics": ["lavoro", "servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/ueber-uns/medien/news/"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Home con 6 link /ueber-uns/medien/news/<slug> datati (ultimo 23.09.2026). Basso volume; economia regionale."
@@ -4704,7 +4725,8 @@
           "topics": ["cronaca", "eventi", "servizi", "mobilita"],
           "quirks": {
             "datesInList": false,
-            "crawlDelaySeconds": 5
+            "crawlDelaySeconds": 5,
+            "articlePathPattern": "^/aktuell/"
           },
           "items7d": 36,
           "verifiedAt": "2026-10-05",
@@ -5157,7 +5179,8 @@
           "topics": ["servizi", "mobilita", "eventi"],
           "quirks": {
             "datesInList": false,
-            "crawlDelaySeconds": 30
+            "crawlDelaySeconds": 30,
+            "articlePathPattern": "^/informieren/aktuelles/pressemitteilungen/"
           },
           "items7d": null,
           "verifiedAt": "2026-10-05",
@@ -5236,7 +5259,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "carburanti", "mobilita"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/sh-power/newsroom/(newsbeitrag|blogpost)/"
+          },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
           "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; 1 negli ultimi 7 giorni, 4 negli ultimi 30 (ultimo 2026-09-29)."
@@ -5498,7 +5523,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "fisco", "mobilita", "pensioni", "lavoro"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/verwaltung/staatskanzlei/medien/medienmitteilung/news/"
+          },
           "items7d": 5,
           "verifiedAt": "2026-10-05",
           "notes": "Comunicati del Consiglio di Stato e dei dipartimenti. robots.txt di so.ch: * permesso salvo /typo3/, /newsletter/, ?tx_solr[page]."
@@ -5524,7 +5551,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "fisco", "pensioni"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/parlament/aktuell/aktuell/news/"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Parlamento cantonale: sessioni, dossier fiscali/sociali."
@@ -5537,7 +5566,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["lavoro", "servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Comunicato mensile sulla disoccupazione; link e testo parziale in pagina (il primo item punta a personenfreizuegigkeit.admin.ch)."
@@ -5576,7 +5607,9 @@
           "language": "de",
           "kind": "economia",
           "topics": ["lavoro", "fisco", "pensioni"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/news/[^/]"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Posizioni del padronato SO (budget cantonale, mercato del lavoro, iniziativa 10 milioni)."
@@ -6595,7 +6628,9 @@
           "language": "it",
           "kind": "media",
           "topics": ["frontalieri", "fisco", "pensioni", "servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/newsblog/valute-e-frontiere/\\d+/"
+          },
           "items7d": 23,
           "verifiedAt": "2026-10-05",
           "notes": "Rubrica dedicata ai frontalieri (fisco, pensioni, cambio franco). 23 link articolo server-rendered con id numerico; ~10 negli ultimi 7 giorni (etichette relative '2 gior', '1 sett'). Miglior fonte HTML per fisco/pensioni frontalieri."
@@ -6621,7 +6656,9 @@
           "language": "it",
           "kind": "media",
           "topics": ["cronaca", "frontalieri"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/it/article/"
+          },
           "items7d": 21,
           "verifiedAt": "2026-10-05",
           "notes": "21 link /it/article/<id>/; settimanale di orientamento politico (UDC/Lega), da trattare come fonte d'opinione. Priorita' bassa."
@@ -6634,7 +6671,9 @@
           "language": "it",
           "kind": "istituzionale",
           "topics": ["servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/media-e-news/news/\\d{4}/"
+          },
           "items7d": 4,
           "verifiedAt": "2026-10-05",
           "notes": "9 link /media-e-news/news/2026/<slug>.html con data in chiaro; 4 negli ultimi 7 giorni. Mix di novita' per i pazienti (Pronto Consulto) e congressi medici."
@@ -7024,7 +7063,8 @@
           "topics": ["servizi", "mobilita", "lavoro", "fisco", "eventi"],
           "quirks": {
             "datetimeYearOffset": -600,
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "articlePathPattern": "^/_rte/information/"
           },
           "items7d": 7,
           "verifiedAt": "2026-10-05",
@@ -7040,7 +7080,8 @@
           "topics": ["fisco", "servizi", "mobilita"],
           "quirks": {
             "datetimeYearOffset": -600,
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "articlePathPattern": "^/_rte/information/"
           },
           "items7d": 12,
           "verifiedAt": "2026-10-05",
@@ -7056,7 +7097,8 @@
           "topics": ["mobilita", "cronaca"],
           "quirks": {
             "datetimeYearOffset": -600,
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "articlePathPattern": "^/_rte/information/"
           },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
@@ -7070,7 +7112,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/aktuelles/neuigkeiten/[^/]"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-05",
           "notes": "Link server-rendered /aktuelles/neuigkeiten/<slug> con data testuale 'dd. Monat yyyy'; circa 1 notizia al mese (ultima 15.09.2026), 0 negli ultimi 7 giorni."
@@ -7572,7 +7616,9 @@
           "language": "fr",
           "kind": "istituzionale",
           "topics": ["servizi", "pensioni"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/web/communication/"
+          },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
           "notes": "3 link a /web/communication/detail?articleId=… con data (29.09.2026, 28.08.2026, 25.09.2026). Premi LAMal 2027: tema alto per i frontalieri con opzione LAMal."
@@ -7598,7 +7644,9 @@
           "language": "fr",
           "kind": "istituzionale",
           "topics": ["servizi"],
-          "quirks": {},
+          "quirks": {
+            "articlePathPattern": "^/lhopital-du-valais/actualites/en-detail/"
+          },
           "items7d": 1,
           "verifiedAt": "2026-10-05",
           "notes": "11 link con data nel testo (02 Octobre 2026, 25 Septembre 2026). hopitalvs.ch redirige qui. Versione tedesca su spitalwallis.ch (non misurata in dettaglio)."
@@ -7984,7 +8032,8 @@
           "kind": "media",
           "topics": ["cronaca", "eventi", "servizi"],
           "quirks": {
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "articlePathPattern": "^/zuger-news/detail/"
           },
           "items7d": 10,
           "verifiedAt": "2026-10-05",
@@ -8335,7 +8384,8 @@
           "kind": "media",
           "topics": ["mobilita", "servizi", "eventi", "cronaca"],
           "quirks": {
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "urlReusedForDifferentStories": "^/ticker-"
           },
           "items7d": 18,
           "verifiedAt": "2026-10-05",
@@ -8350,7 +8400,8 @@
           "kind": "media",
           "topics": ["mobilita", "servizi", "eventi", "cronaca"],
           "quirks": {
-            "robotsTxt": "absent"
+            "robotsTxt": "absent",
+            "urlReusedForDifferentStories": "^/ticker-"
           },
           "items7d": 17,
           "verifiedAt": "2026-10-05",

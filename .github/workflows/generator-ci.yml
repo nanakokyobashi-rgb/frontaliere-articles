@@ -173,7 +173,7 @@ jobs:
       # ogni fallimento e ritorna zero eventi, e il digest renderizza «nessun
       # evento questo weekend» SOVRASCRIVENDO quello corretto sulla URL evergreen.
       #
-      # Questi tre `--check` girano solo sui path di questo workflow, quindi non
+      # Questi `--check` girano solo sui path di questo workflow, quindi non
       # partono per una modifica del SITO: la copertura a orologio e'
       # rewire-contract-watch.yml, e la forma e' inchiodata offline da
       # generator/tests/rewire-json-contracts.test.mjs.
@@ -199,6 +199,18 @@ jobs:
         env:
           REWIRE_SKIP_WAF_403: '1'
         run: node generator/scripts/refresh-canton-services-data.mjs --check
+      # I due dataset annuali di categoria D11 (fisco, pensioni): hard gate per
+      # la stessa ragione — cifre fiscali/previdenziali vecchie o malformate non
+      # devono arrivare a un hub cantonale ne' al brief di fattualita'.
+      - name: Canton tax dataset reachable and well-shaped
+        env:
+          REWIRE_SKIP_WAF_403: '1'
+        run: node generator/scripts/refresh-canton-tax.mjs --check
+
+      - name: Pension parameters dataset reachable and well-shaped
+        env:
+          REWIRE_SKIP_WAF_403: '1'
+        run: node generator/scripts/refresh-pension-parameters.mjs --check
 
   dry-run:
     # The generator's own smoke test: load every entry point with writes

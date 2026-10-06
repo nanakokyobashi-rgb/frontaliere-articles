@@ -188,6 +188,28 @@ test('la sorella registrata col path nudo (forma 1) viene trovata dal ponte, com
   assert.equal(violations[0].otherId, 'suo');
 });
 
+test('una chiave con l\'identita\' dell\'item non passa dal ponte di forma 1 (P5b): il path nudo e\' un contenitore riusato', () => {
+  // suedostschweiz.ch riemette lo stesso URL con notizie diverse: la chiave
+  // della notizia porta `#ft-item=…`, e una voce storica sul path nudo
+  // nell'altra sezione era un'ALTRA notizia.
+  const container = 'https://www.suedostschweiz.ch/graubuenden/verkehrsticker-1574112';
+  const story = `${container}#ft-item=0123456789ab`;
+  const state = (ledgerOther) => ({
+    produced: snapshot({ [FIRST.section]: { ids: ['mio'], ledger: { [story]: entry('mio') } } }),
+    against: snapshot({
+      [FIRST.section]: { ids: ['mio'], ledger: { [story]: entry('mio') } },
+      [SECOND.section]: { ids: ['suo'], ledger: ledgerOther },
+    }),
+  });
+  const legacy = state({ [container]: 'suo' });
+  assert.deepEqual(findPostRebaseViolations({ producedBase: snapshot({}), ...legacy }).violations, []);
+  // La STESSA notizia nell'altra sezione resta una violazione (ramo esatto).
+  const same = state({ [story]: entry('suo') });
+  const { violations } = findPostRebaseViolations({ producedBase: snapshot({}), ...same });
+  assert.equal(violations.length, 1);
+  assert.equal(violations[0].kind, 'source-url-cross-section');
+});
+
 test('solo cio\' che il run ha aggiunto conta: un duplicato storico non fa scattare niente', () => {
   // I duplicati cross-sezione gia' nel corpus (cross-section-duplicate-ratchet)
   // stanno nella BASE del commit prodotto: non sono «nuovi».
