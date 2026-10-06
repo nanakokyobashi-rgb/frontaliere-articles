@@ -128,11 +128,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/lib/border-wait-ranking.mjs',
         fields: ['weightedAvgMinutes', 'totalSamples'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-border-wait.mjs',
+        fields: ['current', 'perCrossing', 'weekStart', 'weekEnd', 'canton'],
+      },
     ],
     producedUnread: ['generatedFor'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      workflows: ['generate-border-wait-ranking-weekly.yml'],
+      workflows: ['generate-border-wait-ranking-weekly.yml', 'refresh-canton-hubs.yml'],
       ci: ['generator-ci.yml'],
     },
   },
@@ -217,11 +221,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/lib/events-digest-content.mjs',
         fields: ['startDate', 'startTime', 'title', 'canton'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-events.mjs',
+        fields: ['events', 'generatedAt', 'startDate', 'startTime', 'title', 'titleByLocale', 'canton', 'comune', 'venue', 'url', 'id'],
+      },
     ],
     producedUnread: ['totalEvents'],
     notJsonExpect: /did not return JSON/,
     productionFetch: {
-      workflows: ['refresh-events-digest.yml'],
+      workflows: ['refresh-canton-hubs.yml', 'refresh-events-digest.yml'],
     },
   },
   {
@@ -273,15 +281,15 @@ export const REWIRE_CONTRACTS = [
           'source',
         ],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-fuel.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'records', 'canton', 'side', 'fuel', 'currency', 'avg', 'min', 'stations', 'observedAt', 'source'],
+      },
     ],
     producedUnread: ['median', 'area', 'coverage', 'exchangeRate', 'sources'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la cache (P9b consegna solo refresh + contratto): il ' +
-        'producer degli hub cantonali (P10) deve cablare `npm run refresh:fuel-cantons` nel proprio ' +
-        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
-        'solo dal `--check` di rewire-contract-watch.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -316,15 +324,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/lib/canton-notices-data.mjs',
         fields: ['schemaVersion', 'generatedAt', 'notices', 'id', 'canton', 'category', 'title', 'url', 'publishedAt', 'observedAt', 'source'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-notices.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'notices', 'title', 'url', 'publishedAt'],
+      },
     ],
     producedUnread: ['sourcesRegistry', 'totalNotices', 'health', 'language'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la cache (P9g consegna solo refresh + contratto): il ' +
-        'producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-notices` nel proprio ' +
-        'workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' sorvegliata ' +
-        'dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   // ── P9f: i quattro input dell'aggregatore dei servizi ─────────────────────
@@ -364,11 +372,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['rankings'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -404,11 +408,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['complete', 'bidCount'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -444,11 +444,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['windowDays', 'unresolvedDuties'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -484,11 +480,7 @@ export const REWIRE_CONTRACTS = [
     producedUnread: ['alerts', 'confidence'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la vista dei servizi (P9f consegna solo aggregatore + ' +
-        'contratti): il producer degli hub cantonali (P10) deve cablare `npm run refresh:canton-services` ' +
-        'nel proprio workflow e spostare questa voce in `workflows`. Fino ad allora la forma e\' ' +
-        'sorvegliata dal `--check` di rewire-contract-watch.yml e di generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -505,10 +497,10 @@ export const REWIRE_CONTRACTS = [
     },
     failureMode: 'soft',
     symptom:
-      'chiusure, cantieri e disagi del trasporto pubblico per cantone (P9c). Nessun generatore li ' +
-      'legge ancora; quando gli hub mobilita\' cantonali li useranno (P11), un `canton` col codice ' +
-      'BFS del semicantone (BS invece di BASILEA) o un tipo fuori dai quattro filerebbe gli eventi ' +
-      'sotto nessun hub, in silenzio.',
+      'chiusure, cantieri e disagi del trasporto pubblico per cantone (P9c), letti dal blocco ' +
+      '«chiusure e cantieri» degli hub mobilita\' cantonali (P10): un `canton` col codice BFS del ' +
+      'semicantone (BS invece di BASILEA) o un tipo fuori dai quattro filerebbe gli eventi sotto ' +
+      'nessun hub, in silenzio.',
     fixture: 'generator/tests/fixtures/rewire/road-events.json',
     recorded: {
       at: '2026-10-05',
@@ -521,14 +513,15 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/refresh-road-events.mjs',
         fields: ['schemaVersion', 'generatedAt', 'events', 'id', 'canton', 'type', 'title', 'url', 'validFrom', 'validTo', 'source', 'observedAt'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-road-events.mjs',
+        fields: ['schemaVersion', 'generatedAt', 'events', 'id', 'canton', 'type', 'title', 'titleByLocale', 'url', 'validFrom', 'validTo', 'observedAt'],
+      },
     ],
-    producedUnread: ['sources', 'titleByLocale', 'publishedAt', 'geo'],
+    producedUnread: ['sources', 'publishedAt', 'geo'],
     notJsonExpect: /is not valid JSON/,
     productionFetch: {
-      none:
-        'nessun generatore legge ancora il dataset: gli hub mobilita\' cantonali e i loro articoli ' +
-        'arrivano con P11 del programma sezioni per cantone, che cablera\' `npm run refresh:road-events` ' +
-        'nel workflow che li genera e spostera\' questa voce in `workflows`.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
   },
   {
@@ -561,13 +554,14 @@ export const REWIRE_CONTRACTS = [
         file: 'generator/scripts/refresh-canton-tax.mjs',
         fields: ['schemaVersion', 'year', 'burden', 'incomeBracketsCHF', 'cantons', 'burdenPct', 'withholding', 'ratesPct', 'A0'],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-tax.mjs',
+        fields: ['schemaVersion', 'year', 'generatedAt', 'sources', 'burden', 'incomeBracketsCHF', 'cantons', 'capital', 'municipality', 'burdenPct', 'withholding', 'monthlyIncomesCHF', 'ratesPct', 'A0', 'withholdingSource'],
+      },
     ],
-    producedUnread: ['generatedAt', 'sources', 'taxAuthority', 'deadlines', 'deadlinesSource', 'withholdingSource', 'capital'],
+    producedUnread: ['taxAuthority', 'deadlines', 'deadlinesSource'],
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la cache (P9d/P9e consegnano solo refresh + contratto): ' +
-        'gli hub fiscali (P10) e il brief di fattualita\' di create-article devono cablare `npm run refresh:canton-tax` nel proprio workflow e spostare questa voce in ' +
-        '`workflows`. Fino ad allora la forma e\' sorvegliata da rewire-contract-watch.yml e generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
     notJsonExpect: /did not return JSON/,
   },
@@ -621,13 +615,14 @@ export const REWIRE_CONTRACTS = [
           'name',
         ],
       },
+      {
+        file: 'generator/scripts/lib/canton-hubs/blocks-pensions.mjs',
+        fields: ['schemaVersion', 'year', 'generatedAt', 'federal', 'avs', 'minMonthlyCHF', 'maxMonthlyCHF', 'contributions', 'employeePct', 'lpp', 'entryThresholdCHF', 'coordinationDeductionCHF', 'minConversionRatePct', 'pillar3a', 'maxWithLppCHF', 'maxWithoutLppCHF', 'cantons', 'compensationFund', 'publicPensionFund', 'capitalWithdrawalTax', 'amountsCHF', 'taxCHF', 'municipality', 'url', 'name'],
+      },
     ],
-    producedUnread: ['generatedAt', 'sources', 'contributions', 'unemployment', 'publicPensionFund', 'capitalWithdrawalTax'],
+    producedUnread: ['sources', 'unemployment'],
     productionFetch: {
-      none:
-        'nessun generatore legge ancora la cache (P9d/P9e consegnano solo refresh + contratto): ' +
-        'gli hub pensioni (P10) e il brief di fattualita\' di create-article devono cablare `npm run refresh:pension-parameters` nel proprio workflow e spostare questa voce in ' +
-        '`workflows`. Fino ad allora la forma e\' sorvegliata da rewire-contract-watch.yml e generator-ci.yml.',
+      workflows: ['refresh-canton-hubs.yml'],
     },
     notJsonExpect: /did not return JSON/,
   },

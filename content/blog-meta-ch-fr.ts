@@ -7772,6 +7772,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.deduzioni-3a-2027.title': 'Pilier 3a : déductions fiscales maximales en 2027',
     'blog.article.deduzioni-3a-2027.excerpt': 'À partir du 1er janvier 2027, le plafond déductible du pilier 3a passera à 7373 francs avec un 2e pilier et à 36864 francs sans 2e pilier.',
     'blog.article.deduzioni-3a-2027.imageAlt': 'Calculatrice et documents fiscaux suisses pour les déductions du pilier 3a',
+    'blog.article.greggio-export-pre-guerra.title': 'Brut : exportations du Moyen-Orient aux niveaux d\'avant-guerre',
+    'blog.article.greggio-export-pre-guerra.excerpt': 'Les exportations de brut du Moyen-Orient, Iran exclu, dépassent les niveaux d\'avant-guerre. Le Brent à 101,44 dollars et le WTI à 90,02 : les routes alternatives se développent.',
+    'blog.article.greggio-export-pre-guerra.imageAlt': 'Panorama de Lugano pour suivre les marchés énergétiques internationaux',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.title': 'Suisse sans défense : retard de la défense antimissile et TVA',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.excerpt': 'La livraison du système antimissile Bodluv GR2 est en retard ; le Patriot déjà commandé accusera plusieurs années de retard. Le financement pourrait passer par une hausse de la TVA, qui doit encore être approuvée par le Parlement. Fournisseurs : France et Israël.',
+    'blog.article.svizzera-patriot-bodluv-iva-attesa.imageAlt': 'Illustration d\'un système de défense antimissile suisse dans les Alpes avec des pièces euro représentant une possible augmentation de la TVA',
 };
 
 export default blogMetaChFr;

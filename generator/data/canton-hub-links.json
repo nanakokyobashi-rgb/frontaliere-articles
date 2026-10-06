@@ -1,0 +1,1219 @@
+{
+  "_comment": "Catalogo dei link a strumenti e pagine di categoria del sito usati dagli hub cantonali (P10). NIENTE URL inventati: ogni path e' stato letto dalle sitemap pubblicate di frontaliereticino.ch (<loc> o alternate hreflang) alla data `verifiedAt`. `generator/scripts/verify-canton-hub-links.mjs` rifa' il controllo contro le sitemap live. `cantons: null` = tutti i 24 gruppi. Una locale assente in `paths` significa che la pagina non esiste (o non e' in sitemap) in quella lingua: il link in quella lingua non si emette. I link derivati dai file slug (eventi, lavoro per cantone) non sono qui: li costruisce lib/canton-hubs/links.mjs.",
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-05",
+  "static": [
+    {
+      "id": "fuel-petrol-today",
+      "topics": [
+        "carburanti"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS"
+      ],
+      "label": {
+        "it": "Prezzo della benzina oggi",
+        "en": "Petrol price today",
+        "de": "Benzinpreis heute",
+        "fr": "Prix de l’essence aujourd’hui"
+      },
+      "paths": {
+        "it": "/prezzi-benzina/oggi/",
+        "en": "/en/gasoline-price-switzerland/today/",
+        "de": "/de/benzinpreis-schweiz/heute/",
+        "fr": "/fr/prix-essence-suisse/aujourd-hui/"
+      }
+    },
+    {
+      "id": "fuel-diesel-today",
+      "topics": [
+        "carburanti"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS"
+      ],
+      "label": {
+        "it": "Prezzo del diesel oggi",
+        "en": "Diesel price today",
+        "de": "Dieselpreis heute",
+        "fr": "Prix du diesel aujourd’hui"
+      },
+      "paths": {
+        "it": "/prezzi-diesel/oggi/",
+        "en": "/en/diesel-price-switzerland/today/",
+        "de": "/de/dieselpreis-schweiz/heute/",
+        "fr": "/fr/prix-gasoil-suisse/aujourd-hui/"
+      }
+    },
+    {
+      "id": "fuel-swiss-stations",
+      "topics": [
+        "carburanti"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS"
+      ],
+      "label": {
+        "it": "Distributori svizzeri vicino al confine",
+        "en": "Swiss filling stations near the border",
+        "de": "Schweizer Tankstellen in Grenznähe",
+        "fr": "Stations-service suisses près de la frontière"
+      },
+      "paths": {
+        "it": "/prezzi-benzina/stazioni-svizzere/",
+        "en": "/en/diesel-price-switzerland/swiss-stations/",
+        "de": "/de/benzinpreis-schweiz/schweizer-tankstellen/",
+        "fr": "/fr/prix-essence-suisse/stations-suisses/"
+      }
+    },
+    {
+      "id": "fuel-border-stats",
+      "topics": [
+        "carburanti"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS"
+      ],
+      "label": {
+        "it": "Statistiche dei prezzi al confine",
+        "en": "Border fuel price statistics",
+        "de": "Statistik der Spritpreise an der Grenze",
+        "fr": "Statistiques des prix à la frontière"
+      },
+      "paths": {
+        "it": "/statistiche/prezzi-benzina-confine/",
+        "en": "/en/statistics/border-fuel-prices/",
+        "de": "/de/statistiken/spritpreise-grenze/",
+        "fr": "/fr/statistiques/prix-essence-frontiere/"
+      }
+    },
+    {
+      "id": "commuting-car-costs",
+      "topics": [
+        "carburanti",
+        "mobilita"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Calcolo del costo dell’auto per pendolari",
+        "en": "Commuting car cost calculator",
+        "de": "Autokosten-Rechner für Pendler",
+        "fr": "Calcul du coût de la voiture pour pendulaires"
+      },
+      "paths": {
+        "it": "/guida-frontaliere/costo-auto-pendolare/",
+        "en": "/en/cross-border-guide/commuting-car-costs/",
+        "de": "/de/grenzgaenger-ratgeber/pendler-autokosten/",
+        "fr": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+      }
+    },
+    {
+      "id": "exchange-rate",
+      "topics": [
+        "carburanti",
+        "servizi"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Cambio franco-euro",
+        "en": "CHF/EUR exchange rate",
+        "de": "Wechselkurs CHF/EUR",
+        "fr": "Taux de change CHF/EUR"
+      },
+      "paths": {
+        "it": "/compara-servizi/cambio-franco-euro/",
+        "en": "/en/service-comparison/chf-eur-exchange-rate/",
+        "de": "/de/service-vergleich/chf-eur-wechselkurs/",
+        "fr": "/fr/comparaison-services/taux-change-chf-eur/"
+      }
+    },
+    {
+      "id": "salary-calculator",
+      "topics": [
+        "fisco"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Calcolatore dello stipendio netto",
+        "en": "Net salary calculator",
+        "de": "Nettolohn-Rechner",
+        "fr": "Calculateur de salaire net"
+      },
+      "paths": {
+        "it": "/calcola-stipendio/",
+        "en": "/en/calculate-salary/",
+        "de": "/de/gehalt-berechnen/",
+        "fr": "/fr/calculer-salaire/"
+      }
+    },
+    {
+      "id": "tax-and-pension-tools",
+      "topics": [
+        "fisco",
+        "pensioni"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Strumenti su tasse e pensione",
+        "en": "Tax and pension tools",
+        "de": "Tools zu Steuern und Vorsorge",
+        "fr": "Outils impôts et retraite"
+      },
+      "paths": {
+        "it": "/tasse-e-pensione/",
+        "en": "/en/taxes-and-pension/",
+        "de": "/de/steuern-und-vorsorge/",
+        "fr": "/fr/impots-et-retraite/"
+      }
+    },
+    {
+      "id": "tax-return-switzerland",
+      "topics": [
+        "fisco"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Dichiarazione dei redditi in Svizzera",
+        "en": "Tax return in Switzerland",
+        "de": "Steuererklärung in der Schweiz",
+        "fr": "Déclaration de revenus en Suisse"
+      },
+      "paths": {
+        "it": "/tasse-e-pensione/dichiarazione-redditi-svizzera/",
+        "en": "/en/taxes-and-pension/tax-return-switzerland/",
+        "de": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/",
+        "fr": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+      }
+    },
+    {
+      "id": "tax-deadlines",
+      "topics": [
+        "fisco"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Scadenze fiscali",
+        "en": "Tax deadlines",
+        "de": "Steuerfristen",
+        "fr": "Échéances fiscales"
+      },
+      "paths": {
+        "it": "/tasse-e-pensione/scadenze-fiscali/",
+        "en": "/en/taxes-and-pension/tax-deadlines/",
+        "de": "/de/steuern-und-vorsorge/steuerfristen/",
+        "fr": "/fr/impots-et-retraite/echeances-fiscales/"
+      }
+    },
+    {
+      "id": "cross-border-taxation-guide",
+      "topics": [
+        "fisco"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS",
+        "AG",
+        "BASILEA",
+        "ZH",
+        "SH",
+        "TG",
+        "SG",
+        "GE",
+        "VD",
+        "NE",
+        "JU"
+      ],
+      "label": {
+        "it": "Guida alla tassazione dei frontalieri",
+        "en": "Cross-border taxation guide",
+        "de": "Leitfaden zur Grenzgängerbesteuerung",
+        "fr": "Guide de l’imposition des frontaliers"
+      },
+      "paths": {
+        "it": "/guida-tassazione-frontalieri-2026/",
+        "en": "/en/cross-border-taxation-guide-2026/",
+        "de": "/de/grenzgaenger-besteuerung-leitfaden-2026/",
+        "fr": "/fr/guide-imposition-frontaliers-2026/"
+      }
+    },
+    {
+      "id": "tax-news",
+      "topics": [
+        "fisco"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Tutte le notizie sul fisco",
+        "en": "All tax news",
+        "de": "Alle Steuer-Nachrichten",
+        "fr": "Toute l’actualité fiscale"
+      },
+      "paths": {
+        "it": "/fisco/",
+        "en": "/en/tax/",
+        "de": "/de/steuern/",
+        "fr": "/fr/fiscalite/"
+      }
+    },
+    {
+      "id": "border-wait",
+      "topics": [
+        "mobilita"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS",
+        "AG",
+        "BASILEA",
+        "ZH",
+        "SH",
+        "TG",
+        "SG",
+        "GE",
+        "VD",
+        "NE",
+        "JU"
+      ],
+      "label": {
+        "it": "Tempi di attesa ai valichi in tempo reale",
+        "en": "Live border waiting times",
+        "de": "Wartezeiten an der Grenze live",
+        "fr": "Temps d’attente aux frontières en direct"
+      },
+      "paths": {
+        "it": "/traffico-dogane/",
+        "en": "/en/border-wait/",
+        "de": "/de/wartezeit-grenze/",
+        "fr": "/fr/temps-attente-douane/"
+      }
+    },
+    {
+      "id": "border-map",
+      "topics": [
+        "mobilita"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS",
+        "AG",
+        "BASILEA",
+        "ZH",
+        "SH",
+        "TG",
+        "SG",
+        "GE",
+        "VD",
+        "NE",
+        "JU"
+      ],
+      "label": {
+        "it": "Mappa dei valichi di confine",
+        "en": "Border crossing map",
+        "de": "Karte der Grenzübergänge",
+        "fr": "Carte des postes-frontières"
+      },
+      "paths": {
+        "it": "/guida-frontaliere/mappa-confine/",
+        "en": "/en/cross-border-guide/border-map/",
+        "de": "/de/grenzgaenger-ratgeber/grenzkarte/",
+        "fr": "/fr/guide-frontalier/carte-frontiere/"
+      }
+    },
+    {
+      "id": "border-traffic-history",
+      "topics": [
+        "mobilita"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS",
+        "AG",
+        "BASILEA",
+        "ZH",
+        "SH",
+        "TG",
+        "SG",
+        "GE",
+        "VD",
+        "NE",
+        "JU"
+      ],
+      "label": {
+        "it": "Storico del traffico alle dogane",
+        "en": "Border traffic history",
+        "de": "Verlauf des Grenzverkehrs",
+        "fr": "Historique du trafic aux frontières"
+      },
+      "paths": {
+        "it": "/statistiche/storico-traffico-dogane/",
+        "en": "/en/statistics/border-traffic-history/",
+        "de": "/de/statistiken/grenzverkehr-verlauf/",
+        "fr": "/fr/statistiques/historique-trafic-frontiere/"
+      }
+    },
+    {
+      "id": "transport-news",
+      "topics": [
+        "mobilita"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Tutte le notizie sui trasporti",
+        "en": "All transport news",
+        "de": "Alle Verkehrs-Nachrichten",
+        "fr": "Toute l’actualité des transports"
+      },
+      "paths": {
+        "it": "/trasporti/",
+        "en": "/en/transport/",
+        "de": "/de/verkehr/",
+        "fr": "/fr/transports/"
+      }
+    },
+    {
+      "id": "customs-news",
+      "topics": [
+        "mobilita"
+      ],
+      "cantons": [
+        "TI",
+        "GR",
+        "VS",
+        "AG",
+        "BASILEA",
+        "ZH",
+        "SH",
+        "TG",
+        "SG",
+        "GE",
+        "VD",
+        "NE",
+        "JU"
+      ],
+      "label": {
+        "it": "Tutte le notizie sulla dogana",
+        "en": "All customs news",
+        "de": "Alle Zoll-Nachrichten",
+        "fr": "Toute l’actualité douanière"
+      },
+      "paths": {
+        "it": "/dogana/",
+        "en": "/en/customs/",
+        "de": "/de/zoll/",
+        "fr": "/fr/douane/"
+      }
+    },
+    {
+      "id": "pension-planner",
+      "topics": [
+        "pensioni"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Calcolatore della previdenza",
+        "en": "Retirement calculator",
+        "de": "Vorsorge-Rechner",
+        "fr": "Calculateur de prévoyance"
+      },
+      "paths": {
+        "it": "/tasse-e-pensione/calcola-previdenza/",
+        "en": "/en/taxes-and-pension/calculate-retirement/",
+        "de": "/de/steuern-und-vorsorge/rente-berechnen/",
+        "fr": "/fr/impots-et-retraite/calculer-pension/"
+      }
+    },
+    {
+      "id": "pillar-3a-simulator",
+      "topics": [
+        "pensioni"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Simulatore del terzo pilastro",
+        "en": "Third pillar simulator",
+        "de": "Rechner für die dritte Säule",
+        "fr": "Simulateur du troisième pilier"
+      },
+      "paths": {
+        "it": "/tasse-e-pensione/simula-terzo-pilastro/",
+        "en": "/en/taxes-and-pension/simulate-third-pillar/",
+        "de": "/de/steuern-und-vorsorge/dritte-saeule-simulieren/",
+        "fr": "/fr/impots-et-retraite/simuler-troisieme-pilier/"
+      }
+    },
+    {
+      "id": "pension-news",
+      "topics": [
+        "pensioni"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Tutte le notizie sulle pensioni",
+        "en": "All pension news",
+        "de": "Alle Renten-Nachrichten",
+        "fr": "Toute l’actualité des retraites"
+      },
+      "paths": {
+        "it": "/pensioni/",
+        "en": "/en/pensions/",
+        "de": "/de/renten/",
+        "fr": "/fr/retraites/"
+      }
+    },
+    {
+      "id": "health-insurance-comparison",
+      "topics": [
+        "servizi"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Confronto delle casse malati",
+        "en": "Health insurance comparison",
+        "de": "Krankenkassen-Vergleich",
+        "fr": "Comparateur de caisses maladie"
+      },
+      "paths": {
+        "it": "/compara-servizi/confronta-casse-malati/",
+        "en": "/en/service-comparison/compare-health-insurance/",
+        "de": "/de/service-vergleich/krankenkassen-vergleichen/",
+        "fr": "/fr/comparaison-services/comparer-caisses-maladie/"
+      }
+    },
+    {
+      "id": "on-duty-pharmacies",
+      "topics": [
+        "servizi"
+      ],
+      "cantons": [
+        "TI"
+      ],
+      "label": {
+        "it": "Farmacie di turno",
+        "en": "On-duty pharmacies",
+        "de": "Notfallapotheken",
+        "fr": "Pharmacies de garde"
+      },
+      "paths": {
+        "it": "/farmacie-di-turno/",
+        "en": "/en/on-duty-pharmacies/",
+        "de": "/de/notdienst-apotheken/",
+        "fr": "/fr/pharmacies-de-garde/"
+      }
+    },
+    {
+      "id": "work-permits-guide",
+      "topics": [
+        "servizi"
+      ],
+      "cantons": null,
+      "label": {
+        "it": "Guida ai permessi di lavoro",
+        "en": "Work permits guide",
+        "de": "Ratgeber Arbeitsbewilligungen",
+        "fr": "Guide des permis de travail"
+      },
+      "paths": {
+        "it": "/guida-frontaliere/permessi-di-lavoro/",
+        "en": "/en/cross-border-guide/work-permits-guide/",
+        "de": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/",
+        "fr": "/fr/guide-frontalier/permis-de-travail/"
+      }
+    },
+    {
+      "id": "weather",
+      "topics": [
+        "servizi"
+      ],
+      "cantons": [
+        "TI"
+      ],
+      "label": {
+        "it": "Meteo per i pendolari",
+        "en": "Commuter weather",
+        "de": "Pendlerwetter",
+        "fr": "Météo des pendulaires"
+      },
+      "paths": {
+        "it": "/meteo-frontalieri/",
+        "en": "/en/commute-weather/",
+        "de": "/de/pendler-wetter/",
+        "fr": "/fr/meteo-frontaliers/"
+      }
+    }
+  ],
+  "borderWaitRegions": {
+    "AG": [
+      {
+        "slug": "argovia-germania",
+        "toward": {
+          "it": "Germania",
+          "en": "Germany",
+          "de": "Deutschland",
+          "fr": "Allemagne"
+        }
+      }
+    ],
+    "BASILEA": [
+      {
+        "slug": "basilea-germania",
+        "toward": {
+          "it": "Germania",
+          "en": "Germany",
+          "de": "Deutschland",
+          "fr": "Allemagne"
+        }
+      }
+    ],
+    "GE": [
+      {
+        "slug": "geneve-francia",
+        "toward": {
+          "it": "Francia",
+          "en": "France",
+          "de": "Frankreich",
+          "fr": "France"
+        }
+      }
+    ],
+    "GR": [
+      {
+        "slug": "grigioni-austria",
+        "toward": {
+          "it": "Austria",
+          "en": "Austria",
+          "de": "Österreich",
+          "fr": "Autriche"
+        }
+      },
+      {
+        "slug": "grigioni-italia",
+        "toward": {
+          "it": "Italia",
+          "en": "Italy",
+          "de": "Italien",
+          "fr": "Italie"
+        }
+      },
+      {
+        "slug": "grigioni-liechtenstein",
+        "toward": {
+          "it": "Liechtenstein",
+          "en": "Liechtenstein",
+          "de": "Liechtenstein",
+          "fr": "Liechtenstein"
+        }
+      }
+    ],
+    "JU": [
+      {
+        "slug": "giura-francia",
+        "toward": {
+          "it": "Francia",
+          "en": "France",
+          "de": "Frankreich",
+          "fr": "France"
+        }
+      }
+    ],
+    "NE": [
+      {
+        "slug": "neuchatel-francia",
+        "toward": {
+          "it": "Francia",
+          "en": "France",
+          "de": "Frankreich",
+          "fr": "France"
+        }
+      }
+    ],
+    "SG": [
+      {
+        "slug": "san-gallo-austria",
+        "toward": {
+          "it": "Austria",
+          "en": "Austria",
+          "de": "Österreich",
+          "fr": "Autriche"
+        }
+      },
+      {
+        "slug": "san-gallo-liechtenstein",
+        "toward": {
+          "it": "Liechtenstein",
+          "en": "Liechtenstein",
+          "de": "Liechtenstein",
+          "fr": "Liechtenstein"
+        }
+      }
+    ],
+    "SH": [
+      {
+        "slug": "sciaffusa-germania",
+        "toward": {
+          "it": "Germania",
+          "en": "Germany",
+          "de": "Deutschland",
+          "fr": "Allemagne"
+        }
+      }
+    ],
+    "TG": [
+      {
+        "slug": "turgovia-germania",
+        "toward": {
+          "it": "Germania",
+          "en": "Germany",
+          "de": "Deutschland",
+          "fr": "Allemagne"
+        }
+      }
+    ],
+    "TI": [
+      {
+        "slug": "ticino-como",
+        "toward": {
+          "it": "Como",
+          "en": "Como",
+          "de": "Como",
+          "fr": "Côme"
+        }
+      },
+      {
+        "slug": "ticino-varese",
+        "toward": {
+          "it": "Varese",
+          "en": "Varese",
+          "de": "Varese",
+          "fr": "Varèse"
+        }
+      },
+      {
+        "slug": "ticino-verbano",
+        "toward": {
+          "it": "Verbano",
+          "en": "Verbano",
+          "de": "Verbano",
+          "fr": "Verbano"
+        }
+      }
+    ],
+    "VD": [
+      {
+        "slug": "vaud-francia",
+        "toward": {
+          "it": "Francia",
+          "en": "France",
+          "de": "Frankreich",
+          "fr": "France"
+        }
+      }
+    ],
+    "VS": [
+      {
+        "slug": "vallese-francia",
+        "toward": {
+          "it": "Francia",
+          "en": "France",
+          "de": "Frankreich",
+          "fr": "France"
+        }
+      },
+      {
+        "slug": "vallese-italia",
+        "toward": {
+          "it": "Italia",
+          "en": "Italy",
+          "de": "Italien",
+          "fr": "Italie"
+        }
+      }
+    ],
+    "ZH": [
+      {
+        "slug": "zurigo-germania",
+        "toward": {
+          "it": "Germania",
+          "en": "Germany",
+          "de": "Deutschland",
+          "fr": "Allemagne"
+        }
+      }
+    ]
+  },
+  "plateAuctions": {
+    "AG": [
+      {
+        "member": "AG",
+        "paths": {
+          "it": "/aste-targhe-svizzera/argovia-ag/",
+          "en": "/en/swiss-plate-auctions/aargau-ag/",
+          "de": "/de/schweizer-nummernschildauktionen/aargau-ag/"
+        }
+      }
+    ],
+    "APPENZELLO": [
+      {
+        "member": "AI",
+        "paths": {
+          "it": "/aste-targhe-svizzera/appenzello-interno-ai/",
+          "en": "/en/swiss-plate-auctions/appenzell-inner-ai/",
+          "de": "/de/schweizer-nummernschildauktionen/innerrhoden-ai/"
+        }
+      },
+      {
+        "member": "AR",
+        "paths": {
+          "it": "/aste-targhe-svizzera/appenzello-esterno-ar/",
+          "en": "/en/swiss-plate-auctions/appenzell-outer-ar/",
+          "de": "/de/schweizer-nummernschildauktionen/ausserrhoden-ar/"
+        }
+      }
+    ],
+    "BASILEA": [
+      {
+        "member": "BL",
+        "paths": {
+          "it": "/aste-targhe-svizzera/basilea-campagna-bl/",
+          "en": "/en/swiss-plate-auctions/basel-country-bl/",
+          "de": "/de/schweizer-nummernschildauktionen/basel-landschaft-bl/"
+        }
+      },
+      {
+        "member": "BS",
+        "paths": {
+          "it": "/aste-targhe-svizzera/basilea-citta-bs/",
+          "en": "/en/swiss-plate-auctions/basel-city-bs/",
+          "de": "/de/schweizer-nummernschildauktionen/basel-stadt-bs/"
+        }
+      }
+    ],
+    "BE": [
+      {
+        "member": "BE",
+        "paths": {
+          "it": "/aste-targhe-svizzera/berna-be/",
+          "en": "/en/swiss-plate-auctions/bern-be/",
+          "de": "/de/schweizer-nummernschildauktionen/bern-be/"
+        }
+      }
+    ],
+    "FR": [
+      {
+        "member": "FR",
+        "paths": {
+          "it": "/aste-targhe-svizzera/friburgo-fr/",
+          "en": "/en/swiss-plate-auctions/fribourg-fr/",
+          "de": "/de/schweizer-nummernschildauktionen/freiburg-fr/"
+        }
+      }
+    ],
+    "GE": [
+      {
+        "member": "GE",
+        "paths": {
+          "it": "/aste-targhe-svizzera/ginevra-ge/",
+          "en": "/en/swiss-plate-auctions/geneva-ge/",
+          "de": "/de/schweizer-nummernschildauktionen/genf-ge/"
+        }
+      }
+    ],
+    "GL": [
+      {
+        "member": "GL",
+        "paths": {
+          "it": "/aste-targhe-svizzera/glarona-gl/",
+          "en": "/en/swiss-plate-auctions/glarus-gl/",
+          "de": "/de/schweizer-nummernschildauktionen/glarus-gl/"
+        }
+      }
+    ],
+    "GR": [
+      {
+        "member": "GR",
+        "paths": {
+          "it": "/aste-targhe-svizzera/grigioni-gr/",
+          "en": "/en/swiss-plate-auctions/graubunden-gr/",
+          "de": "/de/schweizer-nummernschildauktionen/graubuenden-gr/"
+        }
+      }
+    ],
+    "JU": [
+      {
+        "member": "JU",
+        "paths": {
+          "it": "/aste-targhe-svizzera/giura-ju/",
+          "en": "/en/swiss-plate-auctions/jura-ju/",
+          "de": "/de/schweizer-nummernschildauktionen/jura-ju/"
+        }
+      }
+    ],
+    "LU": [
+      {
+        "member": "LU",
+        "paths": {
+          "it": "/aste-targhe-svizzera/lucerna-lu/",
+          "en": "/en/swiss-plate-auctions/lucerne-lu/",
+          "de": "/de/schweizer-nummernschildauktionen/luzern-lu/"
+        }
+      }
+    ],
+    "NE": [
+      {
+        "member": "NE",
+        "paths": {
+          "it": "/aste-targhe-svizzera/neuchatel-ne/",
+          "en": "/en/swiss-plate-auctions/neuchatel-ne/",
+          "de": "/de/schweizer-nummernschildauktionen/neuenburg-ne/"
+        }
+      }
+    ],
+    "NW": [
+      {
+        "member": "NW",
+        "paths": {
+          "it": "/aste-targhe-svizzera/nidvaldo-nw/",
+          "en": "/en/swiss-plate-auctions/nidwalden-nw/",
+          "de": "/de/schweizer-nummernschildauktionen/nidwalden-nw/"
+        }
+      }
+    ],
+    "OW": [
+      {
+        "member": "OW",
+        "paths": {
+          "it": "/aste-targhe-svizzera/obvaldo-ow/",
+          "en": "/en/swiss-plate-auctions/obwalden-ow/",
+          "de": "/de/schweizer-nummernschildauktionen/obwalden-ow/"
+        }
+      }
+    ],
+    "SG": [
+      {
+        "member": "SG",
+        "paths": {
+          "it": "/aste-targhe-svizzera/san-gallo-sg/",
+          "en": "/en/swiss-plate-auctions/st-gallen-sg/",
+          "de": "/de/schweizer-nummernschildauktionen/st-gallen-sg/"
+        }
+      }
+    ],
+    "SH": [
+      {
+        "member": "SH",
+        "paths": {
+          "it": "/aste-targhe-svizzera/sciaffusa-sh/",
+          "en": "/en/swiss-plate-auctions/schaffhausen-sh/",
+          "de": "/de/schweizer-nummernschildauktionen/schaffhausen-sh/"
+        }
+      }
+    ],
+    "SO": [
+      {
+        "member": "SO",
+        "paths": {
+          "it": "/aste-targhe-svizzera/soletta-so/",
+          "en": "/en/swiss-plate-auctions/solothurn-so/",
+          "de": "/de/schweizer-nummernschildauktionen/solothurn-so/"
+        }
+      }
+    ],
+    "SZ": [
+      {
+        "member": "SZ",
+        "paths": {
+          "it": "/aste-targhe-svizzera/svitto-sz/",
+          "en": "/en/swiss-plate-auctions/schwyz-sz/",
+          "de": "/de/schweizer-nummernschildauktionen/schwyz-sz/"
+        }
+      }
+    ],
+    "TG": [
+      {
+        "member": "TG",
+        "paths": {
+          "it": "/aste-targhe-svizzera/turgovia-tg/",
+          "en": "/en/swiss-plate-auctions/thurgau-tg/",
+          "de": "/de/schweizer-nummernschildauktionen/thurgau-tg/"
+        }
+      }
+    ],
+    "TI": [
+      {
+        "member": "TI",
+        "paths": {
+          "it": "/aste-targhe-svizzera/ticino-ti/",
+          "en": "/en/swiss-plate-auctions/ticino-ti/",
+          "de": "/de/schweizer-nummernschildauktionen/tessin-ti/"
+        }
+      }
+    ],
+    "UR": [
+      {
+        "member": "UR",
+        "paths": {
+          "it": "/aste-targhe-svizzera/uri-ur/",
+          "en": "/en/swiss-plate-auctions/uri-ur/",
+          "de": "/de/schweizer-nummernschildauktionen/uri-ur/"
+        }
+      }
+    ],
+    "VD": [
+      {
+        "member": "VD",
+        "paths": {
+          "it": "/aste-targhe-svizzera/vaud-vd/",
+          "en": "/en/swiss-plate-auctions/vaud-vd/",
+          "de": "/de/schweizer-nummernschildauktionen/waadt-vd/"
+        }
+      }
+    ],
+    "VS": [
+      {
+        "member": "VS",
+        "paths": {
+          "it": "/aste-targhe-svizzera/vallese-vs/",
+          "en": "/en/swiss-plate-auctions/valais-vs/",
+          "de": "/de/schweizer-nummernschildauktionen/wallis-vs/"
+        }
+      }
+    ],
+    "ZG": [
+      {
+        "member": "ZG",
+        "paths": {
+          "it": "/aste-targhe-svizzera/zugo-zg/",
+          "en": "/en/swiss-plate-auctions/zug-zg/",
+          "de": "/de/schweizer-nummernschildauktionen/zug-zg/"
+        }
+      }
+    ],
+    "ZH": [
+      {
+        "member": "ZH",
+        "paths": {
+          "it": "/aste-targhe-svizzera/zurigo-zh/",
+          "en": "/en/swiss-plate-auctions/zurich-zh/",
+          "de": "/de/schweizer-nummernschildauktionen/zurich-zh/"
+        }
+      }
+    ]
+  },
+  "healthPremiums": {
+    "AG": [
+      {
+        "member": "AG",
+        "paths": {
+          "it": "/premi-cassa-malati/argovia/"
+        }
+      }
+    ],
+    "APPENZELLO": [
+      {
+        "member": "AR",
+        "paths": {
+          "it": "/premi-cassa-malati/appenzello-esterno/"
+        }
+      },
+      {
+        "member": "AI",
+        "paths": {
+          "it": "/premi-cassa-malati/appenzello-interno/"
+        }
+      }
+    ],
+    "BASILEA": [
+      {
+        "member": "BL",
+        "paths": {
+          "it": "/premi-cassa-malati/basilea-campagna/"
+        }
+      },
+      {
+        "member": "BS",
+        "paths": {
+          "it": "/premi-cassa-malati/basilea-citta/"
+        }
+      }
+    ],
+    "BE": [
+      {
+        "member": "BE",
+        "paths": {
+          "it": "/premi-cassa-malati/berna/"
+        }
+      }
+    ],
+    "FR": [
+      {
+        "member": "FR",
+        "paths": {
+          "it": "/premi-cassa-malati/friborgo/"
+        }
+      }
+    ],
+    "GE": [
+      {
+        "member": "GE",
+        "paths": {
+          "it": "/premi-cassa-malati/ginevra/"
+        }
+      }
+    ],
+    "GL": [
+      {
+        "member": "GL",
+        "paths": {
+          "it": "/premi-cassa-malati/glarona/"
+        }
+      }
+    ],
+    "GR": [
+      {
+        "member": "GR",
+        "paths": {
+          "it": "/premi-cassa-malati/grigioni/"
+        }
+      }
+    ],
+    "JU": [
+      {
+        "member": "JU",
+        "paths": {
+          "it": "/premi-cassa-malati/giura/"
+        }
+      }
+    ],
+    "LU": [
+      {
+        "member": "LU",
+        "paths": {
+          "it": "/premi-cassa-malati/lucerna/"
+        }
+      }
+    ],
+    "NE": [
+      {
+        "member": "NE",
+        "paths": {
+          "it": "/premi-cassa-malati/neuchatel/"
+        }
+      }
+    ],
+    "NW": [
+      {
+        "member": "NW",
+        "paths": {
+          "it": "/premi-cassa-malati/nidvaldo/"
+        }
+      }
+    ],
+    "OW": [
+      {
+        "member": "OW",
+        "paths": {
+          "it": "/premi-cassa-malati/obvaldo/"
+        }
+      }
+    ],
+    "SG": [
+      {
+        "member": "SG",
+        "paths": {
+          "it": "/premi-cassa-malati/san-gallo/"
+        }
+      }
+    ],
+    "SH": [
+      {
+        "member": "SH",
+        "paths": {
+          "it": "/premi-cassa-malati/sciaffusa/"
+        }
+      }
+    ],
+    "SO": [
+      {
+        "member": "SO",
+        "paths": {
+          "it": "/premi-cassa-malati/soletta/"
+        }
+      }
+    ],
+    "SZ": [
+      {
+        "member": "SZ",
+        "paths": {
+          "it": "/premi-cassa-malati/svitto/"
+        }
+      }
+    ],
+    "TG": [
+      {
+        "member": "TG",
+        "paths": {
+          "it": "/premi-cassa-malati/turgovia/"
+        }
+      }
+    ],
+    "TI": [
+      {
+        "member": "TI",
+        "paths": {
+          "it": "/premi-cassa-malati/ticino/"
+        }
+      }
+    ],
+    "UR": [
+      {
+        "member": "UR",
+        "paths": {
+          "it": "/premi-cassa-malati/uri/"
+        }
+      }
+    ],
+    "VD": [
+      {
+        "member": "VD",
+        "paths": {
+          "it": "/premi-cassa-malati/vaud/"
+        }
+      }
+    ],
+    "VS": [
+      {
+        "member": "VS",
+        "paths": {
+          "it": "/premi-cassa-malati/vallese/"
+        }
+      }
+    ],
+    "ZG": [
+      {
+        "member": "ZG",
+        "paths": {
+          "it": "/premi-cassa-malati/zugo/"
+        }
+      }
+    ],
+    "ZH": [
+      {
+        "member": "ZH",
+        "paths": {
+          "it": "/premi-cassa-malati/zurigo/"
+        }
+      }
+    ]
+  }
+}

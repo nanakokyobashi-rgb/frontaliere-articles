@@ -98071,6 +98071,74 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-greggio-export-pre-guerra': {
+    title: 'Greggio: export mediorientale ai livelli pre-guerra',
+    description: 'Le esportazioni di greggio dal Medio Oriente, escluso l\'Iran, superano i livelli pre-guerra. Brent a 101,44 dollari e WTI a 90,02: le rotte alternative',
+    keywords: 'frontalieri, ticino, svizzera, italia, greggio, export, mediorientale, livelli',
+    ogTitle: 'Export di greggio: Medio Oriente sopra i livelli pre-guerra',
+    ogDescription: 'La media delle spedizioni ha oltrepassato per più giorni i 18 milioni di barili al giorno precedenti al conflitto. Arabia Saudita ed Emirati usano oleodotti alternativi, mentre le petroliere escono dal Golfo con scorta americana.',
+    canonicalPath: '/articoli-svizzera/greggio-export-pre-guerra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Greggio: export mediorientale ai livelli pre-guerra",
+      "description": "Le esportazioni di greggio dal Medio Oriente, escluso l'Iran, superano i livelli pre-guerra. Brent a 101,44 dollari e WTI a 90,02: le rotte alternative",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/greggio-export-pre-guerra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Lugano associato alla lettura dei mercati energetici internazionali"
+      },
+      "datePublished": "2026-10-05T23:22:16+00:00",
+      "dateModified": "2026-10-05T23:22:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/greggio-export-pre-guerra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-patriot-bodluv-iva-attesa': {
+    title: 'Svizzera indifesa: ritardo difesa missilizia e IVA',
+    description: 'La Svizzera rischia di restare indifesa contro missili balistici a causa del ritardo nella fornitura del sistema Bodluv GR2 e del Patriot. Il finanziamento',
+    keywords: 'frontalieri, ticino, svizzera, italia, indifesa, ritardo, difesa, missilizia',
+    ogTitle: 'Svizzera indifesa: ritardo difesa missilizia e IVA',
+    ogDescription: 'L\'articolo analizza il ritardo nella fornitura dei sistemi antimissile svizzeri Bodluv GR2 e Patriot, il possibile finanziamento tramite aumento dell\'IVA ancora da approvare dal Parlamento, i fornitori Francia e Israele e le posizioni politiche',
+    canonicalPath: '/articoli-svizzera/svizzera-patriot-bodluv-iva-attesa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera indifesa: ritardo difesa missilizia e IVA",
+      "description": "La Svizzera rischia di restare indifesa contro missili balistici a causa del ritardo nella fornitura del sistema Bodluv GR2 e del Patriot. Il finanziamento",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/svizzera-patriot-bodluv-iva-attesa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione di un sistema di difesa antimissile svizzero sulle Alpi con monete euro che rappresentano un possibile aumento dell'IVA"
+      },
+      "datePublished": "2026-10-05T23:53:47+00:00",
+      "dateModified": "2026-10-05T23:53:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-patriot-bodluv-iva-attesa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
