@@ -342,7 +342,9 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
 export const GENERATED_WORKFLOW_FAMILIES = Object.freeze([
   Object.freeze({
     id: 'canton-article',
-    label: 'Generate Blog Article (canton-*)',
+    // `display` e non `label`: generator/tests/loop-labels.test.mjs legge ogni
+    // riga «label: …» come una label GitHub applicata dal ciclo.
+    display: 'Generate Blog Article (canton-*)',
     // Frase cercata nei titoli delle issue aperte; l'appartenenza la decide
     // `nameRe`, la ricerca serve solo a restringere la lettura.
     titleSearch: 'Workflow Failure: Generate Blog Article',
@@ -2260,14 +2262,14 @@ async function main() {
     if (family) {
       const representative = familyPlan.covered.get(name);
       if (representative && familyRepresentativesServed.has(representative)) {
-        console.log(`[scan-failed-runs] ${name}: stessa famiglia (${family.label}) e stessa firma di «${representative}», già segnalato in questa passata → nessuna issue separata.`);
+        console.log(`[scan-failed-runs] ${name}: stessa famiglia (${family.display}) e stessa firma di «${representative}», già segnalato in questa passata → nessuna issue separata.`);
         continue;
       }
       const sibling = selected.familyEntry
         ? openSiblingIssueCovering(selected.familyEntry, openFamilyIssues(family, openFamilyIssuesMemo))
         : null;
       if (sibling) {
-        console.log(`[scan-failed-runs] ${name}: stessa famiglia (${family.label}) e stessa firma della issue aperta #${sibling.number} («${sibling.title}») → nessuna issue separata.`);
+        console.log(`[scan-failed-runs] ${name}: stessa famiglia (${family.display}) e stessa firma della issue aperta #${sibling.number} («${sibling.title}») → nessuna issue separata.`);
         continue;
       }
     }
