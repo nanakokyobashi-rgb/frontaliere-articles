@@ -7975,8 +7975,9 @@ function headlineTextFromMarkup(markup) {
 
 function normalizedGenericHeadlineLabel(text) {
   return headlineTextFromMarkup(text)
+    .normalize('NFKC')
     .toLocaleLowerCase('it')
-    .replace(/[«»“”"'.,:;!?()[\]{}]/g, ' ')
+    .replace(/[\p{P}\p{S}]+/gu, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -7985,8 +7986,19 @@ function isGenericHeadlineLinkLabel(text) {
   return GENERIC_HEADLINE_LINK_LABELS.has(normalizedGenericHeadlineLabel(text));
 }
 
+function headlineMarkupWithoutActionLinks(markup) {
+  return String(markup || '').replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, (full, inner) => {
+    const openEnd = full.indexOf('>');
+    const openTag = openEnd === -1 ? full : full.slice(0, openEnd + 1);
+    const accessibleLabel = headlineAttributeValue(openTag, 'aria-label')
+      || headlineAttributeValue(openTag, 'title')
+      || inner;
+    return isGenericHeadlineLinkLabel(accessibleLabel) ? ' ' : full;
+  });
+}
+
 function headlineCandidateIsUsable(text) {
-  const candidate = headlineTextFromMarkup(text);
+  const candidate = headlineTextFromMarkup(headlineMarkupWithoutActionLinks(text));
   if (candidate.length < 15 || candidate.length > 300) return null;
   if (isGenericHeadlineLinkLabel(candidate)) return null;
   if (/^[\d\s./,:-]+$/.test(candidate)) return null;
@@ -8055,7 +8067,7 @@ function headlineStackHasNavigation(stack) {
   return stack.some((node, index) => {
     if (/^(script|style|template)$/i.test(node.name)) return true;
     if (node.name === 'nav') {
-      return nearestSectioning === -1 || index > nearestSectioning;
+      return true;
     }
     const role = headlineAttributeValue(node.attrs, 'role');
     if (/^(header|footer)$/i.test(node.name)) {
@@ -8066,10 +8078,10 @@ function headlineStackHasNavigation(stack) {
     if (!/^(banner|navigation|complementary|contentinfo|search)$/i.test(role)) {
       return false;
     }
-    // A navigation landmark that wraps a real <main>/<article> is a common
-    // CMS mistake: keep content inside the nearest sectioning element. A
-    // landmark nested in that content remains navigation and is rejected.
-    return nearestSectioning === -1 || index > nearestSectioning;
+    // A navigation landmark can wrap a sectioning element in malformed or
+    // CMS-generated markup. It remains navigation: a descendant <main> or
+    // <section> must not turn a menu link into a headline.
+    return true;
   });
 }
 

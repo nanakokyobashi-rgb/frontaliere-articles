@@ -415,7 +415,7 @@ test('html-links: i testi generici recuperano il titolo strutturale delle tre fo
   }
 });
 
-test('html-links: i landmark sono valutati rispetto al sectioning piu\u0300 vicino', () => {
+test('html-links: i landmark interni restano contenuto, la navigazione resta esclusa', () => {
   const articleHeader = '<article><header><h2>Avviso importante per la mobilita\u0300 locale</h2><a href="/news/header">mehr</a></header></article>';
   assert.deepEqual(
     extractHeadlines(articleHeader, 'https://example.ch/').map((h) => h.headline),
@@ -423,22 +423,34 @@ test('html-links: i landmark sono valutati rispetto al sectioning piu\u0300 vici
   );
 
   const navigationWrapper = '<div role="navigation"><main><article><h2>Nuova ordinanza comunale sulla viabilita\u0300</h2><a href="/news/main">mehr</a></article></main></div>';
-  assert.deepEqual(
-    extractHeadlines(navigationWrapper, 'https://example.ch/').map((h) => h.headline),
-    ['Nuova ordinanza comunale sulla viabilita\u0300'],
-  );
+  assert.equal(extractHeadlines(navigationWrapper, 'https://example.ch/').length, 0);
 
-  const nativeNavigationWrapper = '<nav><main><article><h2>Nuovo servizio comunale per le famiglie</h2><a href="/news/native-main">mehr</a></article></main></nav>';
-  assert.deepEqual(
-    extractHeadlines(nativeNavigationWrapper, 'https://example.ch/').map((h) => h.headline),
-    ['Nuovo servizio comunale per le famiglie'],
-  );
+  const navigationList = '<nav><section><ul><li><h2>Menu della città e dei servizi</h2><a href="/menu">Mehr</a></li></ul></section></nav>';
+  assert.equal(extractHeadlines(navigationList, 'https://example.ch/').length, 0);
 
   const nestedNavigation = '<main><article><h2>Nuova ordinanza comunale sulla viabilita\u0300</h2><nav><a href="/menu">mehr</a></nav></article></main>';
   assert.equal(extractHeadlines(nestedNavigation, 'https://example.ch/').length, 0);
 
   const pageHeader = '<header><a href="/menu">mehr</a></header><main><p>contenuto</p></main>';
   assert.equal(extractHeadlines(pageHeader, 'https://example.ch/').length, 0);
+
+  const unicodeLabel = '<article><h2>Nuova guida comunale per i residenti</h2><a href="/news/unicode">Leggi l’articolo</a></article>';
+  assert.deepEqual(
+    extractHeadlines(unicodeLabel, 'https://example.ch/').map((h) => h.headline),
+    ['Nuova guida comunale per i residenti'],
+  );
+
+  const unicodeEllipsis = '<article><h2>Informazioni aggiornate sui servizi scolastici</h2><a href="/news/ellipsis">Mehr…</a></article>';
+  assert.deepEqual(
+    extractHeadlines(unicodeEllipsis, 'https://example.ch/').map((h) => h.headline),
+    ['Informazioni aggiornate sui servizi scolastici'],
+  );
+
+  const titleWithAction = '<article><div class="title">Nuovi orari per gli sportelli comunali <a href="/news/title">Read more</a></div></article>';
+  assert.deepEqual(
+    extractHeadlines(titleWithAction, 'https://example.ch/').map((h) => h.headline),
+    ['Nuovi orari per gli sportelli comunali'],
+  );
 });
 
 // ── P5b: navigazione delle pagine html-links ────────────────────────────────
