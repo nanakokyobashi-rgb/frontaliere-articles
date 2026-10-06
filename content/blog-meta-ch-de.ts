@@ -7814,6 +7814,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.effettivo-esercito-2026-calo.title': 'Der Armeebestand ist jetzt ausreichend, wird aber bis 2030 sinken',
     'blog.article.effettivo-esercito-2026-calo.excerpt': 'Am 1. März 2026 zählt die Armee 147 017 Angehörige des Militärs, was für die regulatorischen 100 000 ausreicht, aber es wird erwartet, dass sie bis 2030 unter 130 000 sinken wird.',
     'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Blick auf die Kasernen der Schweizer Armee nahe Lugano mit Soldaten im Training',
+    'blog.article.perdita-ad-bilancio-2025.title': 'Arbeitslosenversicherung: Verlust von 249 Millionen im Jahr 2025',
+    'blog.article.perdita-ad-bilancio-2025.excerpt': 'Die ALV schliesst 2025 mit einem Verlust von 249 Millionen ab: Ausgaben von 8,69 Milliarden, Einnahmen von 8,44 Milliarden und eine durchschnittliche Arbeitslosenquote von 2,8%.',
+    'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Bundesgebäude in Bern als Symbol für die Rechnung der Schweizer Arbeitslosenversicherung',
 };
 
 export default blogMetaChDe;

@@ -7814,6 +7814,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.effettivo-esercito-2026-calo.title': 'L\'effectif de l\'armée est suffisant maintenant mais il diminuera d\'ici 2030',
     'blog.article.effettivo-esercito-2026-calo.excerpt': 'Au 1er mars 2026, l\'armée compte 147 017 militaires, ce qui est suffisant pour la réglementation de 100 000, mais on prévoit une baisse en dessous de 130 000 d\'ici 2030.',
     'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Vue des casernes de l\'armée suisse près de Lugano avec des soldats en entraînement',
+    'blog.article.perdita-ad-bilancio-2025.title': 'Assurance-chômage : perte de 249 millions en 2025',
+    'blog.article.perdita-ad-bilancio-2025.excerpt': 'L\'AD clôt l\'année 2025 dans le rouge, avec une perte de 249 millions : des dépenses de 8,69 milliards, des recettes de 8,44 milliards et un taux de chômage moyen de 2,8%.',
+    'blog.article.perdita-ad-bilancio-2025.imageAlt': 'Bâtiment fédéral à Berne, image symbolique des comptes de l\'assurance-chômage suisse',
 };
 
 export default blogMetaChFr;
