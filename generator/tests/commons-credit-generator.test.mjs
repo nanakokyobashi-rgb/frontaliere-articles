@@ -85,6 +85,14 @@ function generatedRecord(overrides = {}) {
   };
 }
 
+function governedArticleCoverPath() {
+  const currentPath = generatedRecord().imageUrl;
+  if (validateGeneratedImageRecord(generatedRecord()).valid) return currentPath;
+  // The corpus base can lag the site engine by one mirror cycle; keep this
+  // fixture executable on both sides while the contract moves to /images/blog/.
+  return '/images/generated/article-governance-test.webp';
+}
+
 test('the new-cover pipeline uses only the governed article-hero engine', () => {
   const imageFunction = slice(CREATE, 'async function generateArticleImage(data) {', 'const imageDeadline');
   const imageAdapter = slice(CREATE, 'async function generateArticleImage(data) {', '// ── Step 4: Modify source files');
@@ -165,17 +173,7 @@ test('the pure journalist image policy rejects arbitrary URLs and accepts comple
 test('generated and editorial records are reader-facing and discoverable by cover path', () => {
   const root = tempRoot();
   try {
-    const generated = generatedRecord();
-    const blogArticleHero = {
-      ...generated,
-      imageUrl: '/images/blog/article-governance-test.webp',
-    };
-    // The corpus can run this fixture before or after the site engine mirror
-    // lands. Use the new article-hero path when that engine accepts it, while
-    // retaining a valid legacy fixture for the pre-mirror base.
-    if (validateGeneratedImageRecord(blogArticleHero).valid) {
-      generated.imageUrl = blogArticleHero.imageUrl;
-    }
+    const generated = generatedRecord({ imageUrl: governedArticleCoverPath() });
     const generatedFile = path.join(root, 'public', generated.imageUrl.slice(1));
     fs.mkdirSync(path.dirname(generatedFile), { recursive: true });
     fs.writeFileSync(generatedFile, Buffer.alloc(generated.bytes, 0x47));

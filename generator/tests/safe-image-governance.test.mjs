@@ -20,6 +20,12 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   const imageAdapter = between(source, '// ── Governed image generation', '// ── Step 4: Modify source files');
   assert.match(imageAdapter, /generateImageFromSpec/);
   assert.match(imageAdapter, /scope: 'article-hero'/);
+  assert.match(imageAdapter, /function materializeGovernedArticleImage\(result\)/);
+  assert.match(imageAdapter, /scope !== 'article-hero'/);
+  assert.match(imageAdapter, /articleHeroPath\.test\(imageUrl\)/);
+  assert.match(imageAdapter, /outputDir: stagingDir/);
+  assert.match(imageAdapter, /generated-article-images\/\$\{assetId\}-\$\{process\.pid\}-\$\{Date\.now\(\)\}/);
+  assert.match(imageAdapter, /renameSync\(result\.filePath, destination\)/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
   assert.doesNotMatch(imageAdapter, new RegExp(`fetch\\(|${RETIRED_FLASH_IMAGE_MODEL}|Pollinations|Together|Fal\\.ai|Pixabay|Pexels|Picsum`));
@@ -63,6 +69,7 @@ test('daily brief resta una card SVG deterministica, non un provider raster este
 test('la superficie API copia anche le immagini generate e pubblica il ledger aggregato', () => {
   const buildApi = read('scripts/build-api.mjs');
   const buildIndex = read('scripts/build-blog-index.mjs');
+  assert.match(buildApi, /\['public', 'images', 'blog'\]/);
   assert.match(buildApi, /\['public', 'images', 'generated'\]/);
   assert.match(buildApi, /images\/\${kind}/);
   assert.match(buildIndex, /BLOG_IMAGE_CREDITS_AGGREGATE/);
