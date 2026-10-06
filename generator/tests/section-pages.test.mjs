@@ -37,7 +37,6 @@ import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubDat
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
-import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
