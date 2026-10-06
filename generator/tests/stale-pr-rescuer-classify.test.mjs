@@ -1021,6 +1021,52 @@ test('F — precede le altre classi: con i test rossi il rimedio non è un rerun
   assert.deepEqual(r.workflowRuns, [], `Dispatch chiesto su una PR in conflitto.\n${r.stdout}`);
 });
 
+test('F — i guard fail-closed delle classi A–E non possono saltare una PR in conflitto', opts, () => {
+  // Review di #2274: nella catena A–E la F arrivava dopo una dozzina di
+  // `continue` (check o review illeggibili, fixer non verificabile,
+  // `needs-human`), ognuno dei quali lasciava la PR senza `stale-review`.
+  // Il conflitto non dipende da quei dati: la label si applica comunque.
+  for (const input of [
+    { checksError: true },
+    { reviewsError: true },
+    { checksMalformed: true },
+    { reviewsMalformed: true },
+    { fixerRunsError: true },
+  ]) {
+    const r = runScan({ prs: conflicted(), checks: checkRuns({ concl: 'success' }), reviews: [], ...input });
+    assert.deepEqual(r.labeled, [901], `${JSON.stringify(input)}: PR in conflitto saltata da un guard\n${r.stdout}`);
+    assert.match(only(r), /conflitto con `main`/);
+  }
+  const needsHuman = runScan({
+    prs: conflicted(['needs-human']),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: fuori scope' }),
+  });
+  assert.deepEqual(needsHuman.labeled, [901], needsHuman.stdout);
+});
+
+test('F — commenti illeggibili: la label si applica lo stesso, il commento si rinvia', opts, () => {
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    commentsError: true,
+  });
+  assert.deepEqual(r.labeled, [901], `La label è il segnale per il recycle: non dipende dai commenti.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], r.stdout);
+});
+
+test('F — dry_run: nessuna label e nessun commento', opts, () => {
+  const r = runScan({
+    prs: conflicted(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+    dryRun: true,
+  });
+  assert.deepEqual(r.labeled, [], r.stdout);
+  assert.deepEqual(r.comments, [], r.stdout);
+});
+
 test('F — idempotenza: stesso head già segnalato, nessun secondo commento', opts, () => {
   const first = runScan({
     prs: conflicted(),

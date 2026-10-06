@@ -159,6 +159,39 @@ test('caso 2 — ogni condizione mancante lascia la PR aperta', () => {
   assert.equal(reason({ comments: [verdict('already-fixed', { created_at: '2026-10-05T20:00:00Z' })] }), 'verdict-not-after-handoff');
 });
 
+test('caso 2 — claim parziale o hand-off in coda al fixer: il verdetto non basta', () => {
+  // Il claim è quello del predicato condiviso: una scrittura parziale può
+  // lasciare `agent:remote`/`agent:local` senza `agent:in-progress`.
+  const pr = loopPr();
+  const reason = (labels) => decideHandoffAlreadyFixed({
+    pr, handoff: handoffOf(pr, { labels: labels.map((name) => ({ name })) }), comments: [verdict('already-fixed')], openPrs: [pr],
+  }).reason;
+  assert.equal(reason(['agent:remote']), 'handoff-in-progress');
+  assert.equal(reason(['agent:local']), 'handoff-in-progress');
+  assert.equal(reason(['agent:fix']), 'handoff-routed');
+  assert.equal(reason(['agent:fix-queued']), 'handoff-routed');
+  assert.equal(reason(['agent:triaged', 'fu-parked', 'maybe-resolved']), 'handoff-already-fixed');
+});
+
+test('caso 2 — un hand-off duplicato ancora attivo blocca la chiusura', () => {
+  const pr = loopPr();
+  const latest = handoffOf(pr, { number: 2300, createdAt: '2026-10-05T23:30:00Z', state: 'OPEN' });
+  const decide = (older, openPrs = [pr]) => decideHandoffAlreadyFixed({
+    pr, handoff: latest, comments: [verdict('already-fixed')], openPrs, siblings: [latest, older],
+  });
+  const older = (over) => handoffOf(pr, { number: 2250, state: 'OPEN', ...over });
+  assert.deepEqual(decide(older({ labels: [{ name: 'agent:in-progress' }] })), { close: false, reason: 'handoff-in-progress', active: 2250 });
+  assert.deepEqual(decide(older({ labels: [{ name: 'agent:fix-queued' }] })), { close: false, reason: 'handoff-routed', active: 2250 });
+  // Una PR che riapplica il duplicato più vecchio, non il più recente.
+  assert.deepEqual(
+    decide(older({}), [pr, { number: 2290, headRefName: 'fix/issue-2250', body: '' }]),
+    { close: false, reason: 'reapply-in-flight', active: 2250 },
+  );
+  // Un duplicato CHIUSO ha già avuto il suo esito, anche se la label è rimasta.
+  assert.equal(decide(older({ state: 'CLOSED', labels: [{ name: 'agent:fix' }] })).close, true);
+  assert.equal(decide(older({})).close, true);
+});
+
 test('caso 2 — una riapplicazione in volo ha la precedenza sul verdetto', () => {
   const pr = loopPr();
   const reason = (reapply) => decideHandoffAlreadyFixed({

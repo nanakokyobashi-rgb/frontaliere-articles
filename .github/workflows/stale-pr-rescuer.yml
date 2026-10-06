@@ -4,7 +4,8 @@ name: Stale PR rescuer (self-healing signal)
 # interrogabile entro ~1h, invece di lasciarli fermi per giorni. Sei classi:
 #
 #   F) CONFLITTO CON MAIN (`has-conflicts`, scritta da `pr-autorebase` con
-#      merge-tree). Viene PRIMA di tutte le altre perché le rende inerti:
+#      merge-tree). Si valuta PRIMA di tutte le altre e prima dei loro guard
+#      fail-closed (check, review, quota, cap del fixer), perché le rende inerti:
 #      GitHub non avvia i workflow `pull_request` su una PR in conflitto, quindi
 #      nessun test, review o fixer può più partire su quella head. È la classe D
 #      del rescuer del sito, che qui mancava: una PR verde, con `## LGTM` sulla
@@ -376,6 +377,41 @@ jobs:
               || date -u -d "$UPD" +%s 2>/dev/null \
               || echo "$NOW")
             if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N con push recente (<2h) — skip"; continue; fi
+
+            # ── Classe F: conflitto con main, PRIMA di tutto il resto ────────
+            # Sta qui e non nella catena A–E più sotto perché quella catena è
+            # preceduta da una dozzina di `continue` fail-closed — check o
+            # review illeggibili, deferral di quota, cap del fixer,
+            # `needs-human`, stato del fixer non verificabile — e ognuno di
+            # quelli salterebbe la PR lasciandola senza `stale-review`. Per le
+            # classi A–E è giusto (decidono su quei dati); per F no: il
+            # conflitto non dipende da check e review, e finché resta nessuno
+            # di quei dati può più cambiare. La label è il solo segnale che
+            # porta la PR a `recycle-stale-prs`, quindi si applica PER PRIMA e
+            # comunque; il commento, idempotente per (classe, HEAD), si rinvia
+            # se i commenti non sono leggibili.
+            if [ "${HAS_CONFLICTS:-false}" = "true" ]; then
+              REASON="conflitto con \`main\` (\`has-conflicts\` da pr-autorebase): GitHub non avvia i workflow \`pull_request\` su una PR in conflitto, quindi nessun test, review o fixer può partire su questa head e l'auto-merge non la prenderà"
+              RESCUE="nessun rerun possibile finché il conflitto resta. Con \`## LGTM\` pr-autorebase ha già affidato la riapplicazione a issue-fix (issue «riapplicare la PR su main»); una PR superata viene chiusa da \`close-superseded-conflict-prs.mjs\`, e se resta ferma la ricicla \`recycle-stale-prs\`. A mano: \`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, risolvi e push."
+              MARKER="<!-- stale-pr-rescuer class=F head=${HEAD:0:7} -->"
+              echo "::warning::PR #$N FERMA — $REASON"
+              if [ "${DRY_RUN:-false}" = "true" ]; then echo "(dry-run) nessuna azione su PR #$N"; continue; fi
+              if [ -z "$HAS_LABEL" ]; then
+                gh pr edit "$N" --repo "$REPO" --add-label "stale-review" 2>/dev/null || \
+                  echo "::warning::label stale-review non applicata (assente? la crea scripts/ci/ensure-loop-labels.mjs)"
+              fi
+              if ! F_POSTED=$(gh api --paginate "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null) \
+                || ! F_BODIES=$(printf '%s\n' "$F_POSTED" | jq -rs '[.[][]? | .body // ""] | join("\n")' 2>/dev/null); then
+                echo "::warning::Commenti della PR #$N illeggibili — label applicata, commento della classe F rinviato."
+                continue
+              fi
+              case "$F_BODIES" in
+                *"$MARKER"*) echo "PR #$N: classe F su ${HEAD:0:7} già segnalata — nessun commento"; continue ;;
+              esac
+              gh pr comment "$N" --repo "$REPO" --body "$(printf '🔧 **stale-review** (automatico): PR ferma da oltre 2h.\n\nClasse: %s\n\nCome sbloccarla: %s\n\n_Segnale deterministico da stale-pr-rescuer.yml, zero Claude._\n%s' "$REASON" "$RESCUE" "$MARKER")" \
+                2>/dev/null || echo "commento fallito su PR #$N"
+              continue
+            fi
 
             # A review covers the current input only when its marker authenticates
             # the exact current PR body. Read/hash the body before selecting the
@@ -934,16 +970,7 @@ jobs:
             fi
 
             REASON=""; RESCUE=""; CLASS=""
-            if [ "${HAS_CONFLICTS:-false}" = "true" ]; then
-              CLASS="F"
-              # F — prima delle altre: con il conflitto nessun `pull_request`
-              # parte, quindi lo stato dei check e della review su questa head
-              # non può più cambiare e le classi sotto leggerebbero un verde che
-              # non porta a nessun merge. La label NON va tolta dall'`else`:
-              # è il segnale che `recycle-stale-prs` aspetta.
-              REASON="conflitto con \`main\` (\`has-conflicts\` da pr-autorebase): GitHub non avvia i workflow \`pull_request\` su una PR in conflitto, quindi nessun test, review o fixer può partire su questa head e l'auto-merge non la prenderà"
-              RESCUE="nessun rerun possibile finché il conflitto resta. Con \`## LGTM\` pr-autorebase ha già affidato la riapplicazione a issue-fix (issue «riapplicare la PR su main»); una PR superata viene chiusa da \`close-superseded-conflict-prs.mjs\`, e se resta ferma la ricicla \`recycle-stale-prs\`. A mano: \`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, risolvi e push."
-            elif [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
+            if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
               CLASS="D"
               # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
               # in più viene etichettata, cambia solo il rimedio consegnato.

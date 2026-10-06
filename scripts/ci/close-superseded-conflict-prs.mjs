@@ -72,8 +72,8 @@ import {
 import { lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
-import { reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
-import { CLAIM_LABEL } from './stale-claim-detector.mjs';
+import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
+import { hasClaimLabel } from './stale-claim-detector.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -193,26 +193,43 @@ export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin }) {
 
 /**
  * Caso 2: l'hand-off della PR è stato lavorato dal fixer e chiuso con
- * `already-fixed`, senza una riapplicazione in volo.
+ * `already-fixed`, e NESSUN hand-off aperto della stessa PR è ancora attivo.
+ * «Attivo» si legge sull'intera famiglia (`siblings`), non solo sul più
+ * recente: pr-autorebase può aprire più hand-off per la stessa PR (una HEAD
+ * nuova, due run concorrenti), e un duplicato più vecchio con un claim, in
+ * coda al fixer o con una riapplicazione in volo sta ancora portando il
+ * contributo. Il claim è quello del predicato condiviso `hasClaimLabel`
+ * (`agent:in-progress`, ma anche `agent:local`/`agent:remote` rimaste da una
+ * scrittura parziale); il routing è `handoffRouted` del riconciliatore.
  *
  * @param {object} p
  * @param {object} p.pr            la PR candidata (`number`, `headRefOid`)
  * @param {object|null} p.handoff  l'hand-off più recente della PR (`number`, `title`, `body`, `labels`, `createdAt`), o null
  * @param {Array|null} p.comments  i commenti dell'hand-off (REST), o null se illeggibili
  * @param {Array|null} p.openPrs   le PR aperte, o null se la lista è illeggibile o troncata
- * @returns {{ close: boolean, reason: string, handoff?: number }}
+ * @param {Array} [p.siblings]     tutti gli hand-off della PR (`number`, `labels`, `state`); default: il solo `handoff`
+ * @returns {{ close: boolean, reason: string, handoff?: number, active?: number }}
  */
-export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs }) {
+export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings }) {
   if (!handoff) return { close: false, reason: 'no-handoff' };
   if (conflictHandoffOriginPr(handoff.title) !== Number(pr?.number)) return { close: false, reason: 'handoff-of-another-pr' };
   const expectedHead = conflictHandoffExpectedHead(handoff.body);
   const head = String(pr?.headRefOid || '').toLowerCase();
   if (!expectedHead || !head || !head.startsWith(expectedHead)) return { close: false, reason: 'handoff-head-mismatch' };
-  if (labelNames(handoff).includes(CLAIM_LABEL)) return { close: false, reason: 'handoff-in-progress' };
   if (!Array.isArray(comments)) return { close: false, reason: 'handoff-comments-unreadable' };
   if (!Array.isArray(openPrs)) return { close: false, reason: 'open-prs-unreadable' };
-  if (reapplyInFlight(openPrs, { issueNumber: handoff.number, originNumber: pr.number }) !== null) {
-    return { close: false, reason: 'reapply-in-flight' };
+  const family = Array.isArray(siblings) && siblings.length ? siblings : [handoff];
+  for (const member of family) {
+    // Un hand-off CHIUSO ha già avuto il suo esito; conta chi è ancora aperto,
+    // più quello che si sta giudicando qualunque sia il suo stato.
+    const open = String(member?.state || 'OPEN').toUpperCase() === 'OPEN' || Number(member?.number) === Number(handoff.number);
+    if (!open) continue;
+    const active = Number(member.number);
+    if (hasClaimLabel(member.labels)) return { close: false, reason: 'handoff-in-progress', active };
+    if (handoffRouted(member)) return { close: false, reason: 'handoff-routed', active };
+    if (reapplyInFlight(openPrs, { issueNumber: member.number, originNumber: pr.number }) !== null) {
+      return { close: false, reason: 'reapply-in-flight', active };
+    }
   }
   const outcome = lastFixOutcome(comments.filter(isTrustedComment));
   if (!outcome) return { close: false, reason: 'no-trusted-verdict' };
@@ -354,7 +371,8 @@ function decide(pr, openPrs) {
   if (handoffs.length >= HANDOFF_SEARCH_LIMIT) return { close: false, reason: 'handoffs-truncated' };
   const handoff = latestHandoffOf(pr.number, handoffs);
   const comments = handoff ? readIssueComments(handoff.number) : null;
-  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs });
+  const siblings = handoffs.filter((issue) => conflictHandoffOriginPr(issue?.title) === Number(pr.number));
+  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings });
 }
 
 function main() {
