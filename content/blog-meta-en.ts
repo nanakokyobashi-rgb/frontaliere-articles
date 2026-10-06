@@ -12665,6 +12665,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-monte-generoso-varese.title': 'Accident in Varese near Università dell\'Insubria',
     'blog.article.incidente-monte-generoso-varese.excerpt': 'An accident has been reported on Via Monte Generoso, in Varese, just a stone’s throw from the University of Insubria.',
     'blog.article.incidente-monte-generoso-varese.imageAlt': 'Urban street near the University of Insubria in Varese',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Fines and sentences: conversion into community service in Ticino',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 cases in Ticino in 2025. In Zurich, 1\'388 requests: 4 hours of work are worth 1 day in prison.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Person wearing work gloves holding a checklist in a hospital corridor in Ticino.',
 };
 
 export default blogMetaEn;

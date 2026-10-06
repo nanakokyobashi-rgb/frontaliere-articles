@@ -12667,6 +12667,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incidente-monte-generoso-varese.title': 'Accident à Varese près de l\'Università dell\'Insubria',
     'blog.article.incidente-monte-generoso-varese.excerpt': 'Un accident est signalé dans la via Monte Generoso, à Varese, à deux pas de l\'Università dell\'Insubria.',
     'blog.article.incidente-monte-generoso-varese.imageAlt': 'Rue urbaine près de l\'Université de l\'Insubria à Varèse (Varese)',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Amendes et peines : conversion en travaux d’intérêt général au Tessin',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 cas au Tessin en 2025. À Zurich, 1\'388 demandes : 4 heures de travail valent 1 jour de prison.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Personne portant des gants de travail tenant une liste de contrôle dans un couloir d\'hôpital en Tessin.',
 };
 
 export default blogMetaFr;

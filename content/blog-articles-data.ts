@@ -39907,6 +39907,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lavori-pubblica-utilita-multe-pene',
+ category: 'pratico',
+ date: '2026-10-06T06:23:25.903Z',
+ image: '/images/blog/lavori-pubblica-utilita-multe-pene.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
