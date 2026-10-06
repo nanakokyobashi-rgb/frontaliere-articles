@@ -2011,8 +2011,8 @@
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "12927d8ee556aac7",
-        "alignedAt": "2026-09-12"
+        "corpus": "08b806da4017d729",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3570,8 +3570,8 @@
       "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "c20461c76346d1c9",
-        "alignedAt": "2026-09-05"
+        "corpus": "a7af7a8d7c5ae37c",
+        "alignedAt": "2026-10-06"
       }
     },
     {
