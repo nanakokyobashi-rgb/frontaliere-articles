@@ -7784,6 +7784,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, partner di Swiss, taglia fino a 700 posti',
     'blog.article.air-baltic-tagli-swiss.excerpt': 'La compagnia lettone potrebbe tagliare 500-700 posti su circa 3\'000. Il programma di voli non cambia; i tagli riguardano Riga, Vilnius e Tallinn.',
     'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic riduce il personale mentre mantiene invariato il programma di voli.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia cancella 34 posti di lavoro in cinque redazioni',
+    'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia sopprime 34 posti a tempo pieno coinvolgendo 41 collaboratori nelle redazioni di Zurigo, Berna, Basilea, Losanna e Ginevra.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Edificio Tamedia con redazione giornalistica in Svizzera',
 };
 
 export default blogMetaChIt;

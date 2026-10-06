@@ -24586,6 +24586,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tamedia-cancella-34-posti-lavoro',
+    category: 'pratico',
+    date: '2026-10-06T03:24:07.459Z',
+    image: '/images/blog/tamedia-cancella-34-posti-lavoro.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

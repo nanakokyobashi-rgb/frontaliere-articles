@@ -7784,6 +7784,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, partenaire de Swiss, supprime jusqu’à 700 postes',
     'blog.article.air-baltic-tagli-swiss.excerpt': 'La compagnie lettone pourrait supprimer 500-700 postes sur environ 3\'000. Le programme de vols ne change pas ; les suppressions concernent Riga, Vilnius et Tallinn.',
     'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic prévoit des suppressions de postes sans modifier le programme de vols actuel.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia supprime 34 emplois dans cinq rédactions',
+    'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia supprime 34 postes à temps plein, ce qui concerne 41 collaborateurs dans les rédactions de Zurich, Berne, Bâle, Lausanne et Genève.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Bâtiment Tamedia avec rédaction en Suisse',
 };
 
 export default blogMetaChFr;

@@ -98207,6 +98207,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tamedia-cancella-34-posti-lavoro': {
+    title: 'Tamedia cancella 34 posti di lavoro in cinque redazioni',
+    description: 'Tamedia sopprime 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori a Zurigo, Berna, Basilea, Losanna e Ginevra. Scopri il piano sociale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tamedia, cancella, posti, lavoro',
+    ogTitle: 'Tamedia taglia 34 posti di lavoro in Svizzera',
+    ogDescription: 'Annunciata la soppressione di 34 posizioni a tempo pieno e 41 collaboratori coinvolti nelle redazioni di Zurigo, Berna, Basilea, Losanna e Ginevra. Dettagli sul piano sociale e sulle misure di accompagnamento.',
+    canonicalPath: '/articoli-svizzera/tamedia-cancella-34-posti-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tamedia cancella 34 posti di lavoro in cinque redazioni",
+      "description": "Tamedia sopprime 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori a Zurigo, Berna, Basilea, Losanna e Ginevra. Scopri il piano sociale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tamedia-cancella-34-posti-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio Tamedia con redazione giornalistica in Svizzera"
+      },
+      "datePublished": "2026-10-06T03:24:07+00:00",
+      "dateModified": "2026-10-06T03:24:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tamedia-cancella-34-posti-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

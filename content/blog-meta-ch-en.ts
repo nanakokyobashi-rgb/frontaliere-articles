@@ -7784,6 +7784,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, Swiss partner, cuts up to 700 jobs',
     'blog.article.air-baltic-tagli-swiss.excerpt': 'The Latvian airline could cut 500-700 jobs out of approximately 3\'000. The flight schedule is unchanged; the cuts concern Riga, Vilnius and Tallinn.',
     'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic plans staff cuts while keeping its current flight programme unchanged.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia cuts 34 jobs in five newsrooms',
+    'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia eliminates 34 full-time positions, affecting 41 employees in the newsrooms in Zurich, Bern, Basel, Lausanne and Geneva.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Tamedia building with newsroom in Switzerland',
 };
 
 export default blogMetaChEn;

@@ -7784,6 +7784,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.air-baltic-tagli-swiss.title': 'Air Baltic, Partner von Swiss, baut bis zu 700 Stellen ab',
     'blog.article.air-baltic-tagli-swiss.excerpt': 'Das lettische Unternehmen könnte 500-700 Stellen von rund 3\'000 abbauen. Das Flugprogramm ändert sich nicht; die Kürzungen betreffen Riga, Vilnius und Tallinn.',
     'blog.article.air-baltic-tagli-swiss.imageAlt': 'Air Baltic plant Stellenkürzungen bei unverändertem aktuellem Flugprogramm.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia streicht 34 Arbeitsplätze in fünf Redaktionen',
+    'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia streicht 34 Vollzeitstellen und betrifft 41 Mitarbeitende in den Redaktionen in Zürich, Bern, Basel, Lausanne und Genf.',
+    'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Tamedia Gebäude mit Redaktion in der Schweiz',
 };
 
 export default blogMetaChDe;

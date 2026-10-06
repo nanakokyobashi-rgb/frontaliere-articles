@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4059840": {
-    "articleId": "cpe-s-voto-bilaterali-iii",
-    "ts": "2026-09-04T10:00:29.673Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/prezzo-olio-da-riscaldamento-alle-stelle%2c-colpa-di-usa-e-iran/92006003": {
     "articleId": "prezzo-olio-riscaldamento-alle-stelle-usa-iran",
     "ts": "2026-09-04T11:51:32.624Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/air-baltic%2c-partner-di-swiss%2c-taglia-fino-a-700-posti-di-lavoro/92168766": {
     "articleId": "air-baltic-tagli-swiss",
     "ts": "2026-10-06T01:43:45.733Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
+    "articleId": "tamedia-cancella-34-posti-lavoro",
+    "ts": "2026-10-06T03:24:07.811Z",
     "keyForm": 2
   }
 }
