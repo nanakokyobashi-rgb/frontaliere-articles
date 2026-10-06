@@ -51,6 +51,13 @@ test('true: decomposizione, PARENT-CLOSE, poi riapertura del monitor', () => {
   ]), true);
 });
 
+test('true: il monitor annota una ricorrenza su una issue già aperta', () => {
+  assert.equal(reopenedAfterDecomposition([
+    decomposed('2026-10-03T10:00:00Z'),
+    { body: '🔁 Recurrence on workflow run.\n\n**Workflow:** Bing SEO closed loop', createdAt: '2026-10-03T11:00:00Z' },
+  ]), true);
+});
+
 test('false: decomposizione rifatta DOPO la ricorrenza ridà l\'autorità al PARENT-CLOSE', () => {
   assert.equal(reopenedAfterDecomposition([
     reopened('2026-10-03T11:00:00Z'),
@@ -63,6 +70,19 @@ test('false: l\'ULTIMO marker vince anche se una riapertura segue un marker prec
     decomposed('2026-10-01T10:00:00Z'),
     reopened('2026-10-02T10:00:00Z'),
     decomposed('2026-10-03T12:00:00Z'),
+  ]), false);
+});
+
+test('a parità di secondo decide la posizione nel thread', () => {
+  // GitHub data i commenti al secondo: una ricorrenza scritta nello stesso
+  // secondo della decomposizione è «dopo» solo se viene dopo nell'elenco.
+  assert.equal(reopenedAfterDecomposition([
+    decomposed('2026-10-03T10:00:00Z'),
+    reopened('2026-10-03T10:00:00Z'),
+  ]), true);
+  assert.equal(reopenedAfterDecomposition([
+    reopened('2026-10-03T10:00:00Z'),
+    decomposed('2026-10-03T10:00:00Z'),
   ]), false);
 });
 
@@ -144,14 +164,33 @@ test('cablaggio: il PARENT-CLOSE importa e chiama la guardia prima di ogni lettu
   };
   const kids = at('decomposedChildNumbers(comments)');
   const guard = at('if (reopenedAfterDecomposition(comments))');
-  const skip = at('PARENT-CLOSE-SKIP');
+  const rearm = at('PARENT-REARM');
   const childState = at("'issue', 'view', String(k)");
   const pin = at('manifestPinFor(p.number)');
   const closeComment = at('Auto-chiusa dal followup-drainer (PARENT-CLOSE)');
   const close = at("closeIssue(p.number, { stage: 'parent-close' })");
   assert.ok(kids < guard, 'la guardia legge gli stessi commenti delle figlie, dopo di esse');
-  assert.ok(guard < skip);
+  assert.ok(guard < rearm);
   for (const [name, pos] of [['view stato figlie', childState], ['pin del manifest', pin], ['commento di chiusura', closeComment], ['closeIssue', close]]) {
     assert.ok(guard < pos, `la guardia deve precedere ${name}`);
   }
+});
+
+test('cablaggio: il riarmo puro scrive il marker prima di rimuovere il veto', () => {
+  const src = readFileSync(fromRoot('scripts/ci/followup-drainer.mjs'), 'utf8');
+  assert.match(src, /decideParentRearm\([\s\S]*?childStates/);
+  assert.match(src, /parentRearmCommentBody\(\{/);
+  assert.match(src, /remove: \[LBL_DECOMPOSED, 'agent:triaged', LBL_FIX, LBL_QUEUED\]/);
+  assert.match(src, /triage-sweep/);
+});
+
+test('cablaggio: un padre non riaperto non paga le letture delle figlie del riarmo', () => {
+  const src = readFileSync(fromRoot('scripts/ci/followup-drainer.mjs'), 'utf8');
+  const start = src.indexOf('// --- PARENT-CLOSE:');
+  const end = src.indexOf('// --- PRODUCTION-PROOF:', start);
+  const block = src.slice(start, end);
+  const guard = block.indexOf('if (reopenedAfterDecomposition(comments))');
+  const childRead = block.indexOf('readParentRearmChildStates(kids)');
+  assert.ok(guard >= 0);
+  assert.ok(childRead > guard);
 });

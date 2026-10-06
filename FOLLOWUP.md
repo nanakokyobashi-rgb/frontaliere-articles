@@ -39,6 +39,24 @@ editare — una voce in una checklist promemoria nel commento di chiusura.
 Nessun silenzio. Un item che sparisce senza motivo è il modo in cui lo scope
 deferito evapora.
 
+### Ciclo del padre decomposto e PARENT-REARM
+
+Un padre con `decomposed:1` resta un tracker: il PARENT-DEQUEUE toglie il
+routing del fixer e il PARENT-CLOSE lo chiude soltanto quando tutte le figlie
+dell'ultimo `DECOMPOSED_INTO` sono chiuse. Se un monitor riapre o riconferma la
+condizione dopo quel marker (`🔁 **Reopened**` oppure `🔁 Recurrence on workflow
+run.`), il drainer non richiude il padre: dopo aver verificato le figlie,
+PARENT-REARM scrive un marker HTML `PARENT_REARM`, rimuove `decomposed:1` e
+`agent:triaged` (oltre a eventuale routing stale), quindi lascia che il
+`triage-sweep` già esistente lo classifichi e lo instradi via App/PAT. Non esiste
+una coda speciale per il riarmo.
+
+Il marker rende il pass idempotente per quella riapertura. Il default è al
+massimo 2 riarmi per issue negli ultimi 30 giorni e 2 riarmi per run; marker,
+date o stato di una figlia illeggibili sono fail-closed. Un nuovo
+`DECOMPOSED_INTO` successivo al riarmo torna a essere l'autorità del
+PARENT-CLOSE, così il ciclo non può né bloccarsi né ricorrere senza tetto.
+
 ## Input
 
 - La PR mergiata: `gh pr view $PR_NUMBER --json number,title,body,mergedAt,url`
