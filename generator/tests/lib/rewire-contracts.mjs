@@ -260,7 +260,7 @@ export const REWIRE_CONTRACTS = [
       at: '2026-10-05',
       trimmedTo:
         '8 record sui 32 di un run locale del producer (TI CH nazionale BFS + IT, GE FR, SG AT), numeri non alterati; ' +
-        'blocchi di testa (cantons, sources, coverage, exchangeRate) completi',
+        'blocchi di testa (cantons, sources, health, coverage, exchangeRate) completi; DE esplicitamente skipped senza chiave',
     },
     readBy: [
       {
@@ -268,6 +268,7 @@ export const REWIRE_CONTRACTS = [
         fields: [
           'schemaVersion',
           'generatedAt',
+          'health',
           'cantons',
           'records',
           'canton',

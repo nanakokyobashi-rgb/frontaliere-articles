@@ -535,6 +535,12 @@ const MUTATIONS = {
       /is not CH\|FR\|AT\|IT\|DE/,
       'Il blocco dati conosce cinque lati: un sesto verrebbe ignorato o mal etichettato.',
     ],
+    [
+      'health DE non dichiarata',
+      mutated(c, (p) => { p.health.de = 'error'; }),
+      /health\.de .* is not ok\|skipped\|failed:<reason>/,
+      'La salute della fonte DE deve distinguere un overlay saltato da uno fallito, senza diventare un gate sui record CH.',
+    ],
   ],
   'road-events': (c) => [
     [
