@@ -5353,6 +5353,16 @@
         "corpus": "4403a7a168643f6c",
         "alignedAt": "2026-10-06"
       }
+    },
+    {
+      "path": "data/article-type-readings.json",
+      "mode": "corpus-only",
+      "reason": "Ledger editoriale delle letture articolo per articolo usato dal backfill di `articleType` per i 210 stale frontaliere. Non esiste sul sito: la classificazione e la sua prova di lettura appartengono al corpus, mentre il sito consuma il registry pubblicato via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "0beb9db2402755ea",
+        "alignedAt": "2026-10-06"
+      }
     }
   ]
 }
