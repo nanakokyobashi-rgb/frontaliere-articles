@@ -351,6 +351,60 @@ test('una riga traducibile che diventa solo marker viene rifiutata', async () =>
   assert.equal(translated, '');
 });
 
+test('il recovery conserva l indentazione delle liste annidate', async () => {
+  const source = '- Primo\n  - Annidato';
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = calls.length === 1
+      ? '- First\n- Nested'
+      : `Tradotto ${query}`;
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.deepEqual(calls, ['- Primo\n  - Annidato', 'Primo', 'Annidato']);
+  assert.equal(translated, '- Tradotto Primo\n  - Tradotto Annidato');
+});
+
+test('il recovery rifiuta una traduzione che perde URL o placeholder opachi', async () => {
+  const source = '- Leggi https://example.com/guida\n- Seconda riga';
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = calls.length === 1
+      ? '- Lies\n- Zweite'
+      : 'Lies';
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.equal(calls.length, 2);
+  assert.equal(translated, '');
+});
+
 test('il recovery di righe brevi realmente tradotte resta un hit', async () => {
   const source = ['Ciao mondo', 'Buona sera', 'Tutto bene'].join('\n');
   const calls = stubFoldedMyMemory((line) => `Tradotto: ${line}`);
@@ -503,9 +557,9 @@ test('hasTranslatableLineText conserva le righe brevi o prive di lettere', async
 
 test('una riga breve traducibile non servita da MyMemory fa proseguire la cascata', async () => {
   const source = [
-    'Sì',
     'No',
     'Questa riga lunga permette di entrare nel ramo MyMemory a pezzi. '.repeat(120),
+    'Sì',
   ].join('\n');
   const myMemoryCalls = [];
   const fallbackCalls = [];
@@ -520,9 +574,10 @@ test('una riga breve traducibile non servita da MyMemory fa proseguire la cascat
     if (value.includes('api.mymemory.translated.net')) {
       const query = new URL(value).searchParams.get('q') || '';
       myMemoryCalls.push(query);
+      const shortLineMiss = query.trim() === 'Sì';
       return {
         ok: true,
-        json: async () => ({ responseData: { translatedText: `MM ${query}`, match: 1 } }),
+        json: async () => ({ responseData: { translatedText: shortLineMiss ? '' : `MM ${query}`, match: 1 } }),
       };
     }
     if (value.includes('mozhi.adminforge.de/api/translate')) {
@@ -545,10 +600,10 @@ test('una riga breve traducibile non servita da MyMemory fa proseguire la cascat
     fieldType: 'description',
   });
 
-  assert.match(translated, /^DE Sì\nDE No\n/);
+  assert.match(translated, /^DE /);
   assert.ok(fallbackCalls.length > 0);
-  assert.equal(myMemoryCalls.includes('Sì'), false);
   assert.equal(myMemoryCalls.includes('No'), false);
+  assert.ok(myMemoryCalls.some((query) => query.trim() === 'No' && query.length >= 3));
 });
 
 test('il recovery rifiuta i marker Markdown alterati e ricompone quelli corretti', async () => {

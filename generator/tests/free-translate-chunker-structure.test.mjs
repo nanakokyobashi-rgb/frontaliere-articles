@@ -131,6 +131,15 @@ test('non divide URL o placeholder opachi e fallisce chiuso se superano il limit
   );
 });
 
+test('quando arretra prima di uno span opaco conserva lo spazio come separatore', () => {
+  const source = 'parola {{a b c d}} finale e altro testo';
+  const chunks = _chunkAtSentences(source, 15);
+
+  assert.equal(_recomposeChunkParts(chunks), source);
+  assert.equal(chunks.some(({ text }) => text.endsWith(' ')), false);
+  assert.equal(chunks.some(({ text }) => text.startsWith('{{')), true);
+});
+
 test('il ramo lungo MyMemory traduce una riga per richiesta e ricompone i separatori', async () => {
   const source = makeReproductionBody();
   const { calls, translated } = await translateWithStub(source, (chunk) => chunk);

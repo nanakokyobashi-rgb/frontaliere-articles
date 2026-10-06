@@ -513,6 +513,22 @@ function normalizeBlock(s) {
     .trim();
 }
 
+/** Normalize a block for structural checks without erasing nested Markdown indentation. */
+function normalizeStructuredBlock(s) {
+  return String(s ?? '')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\r\n?/g, '\n')
+    .split('\n')
+    .map((line) => {
+      const indent = line.match(/^[ \t]*/u)?.[0] || '';
+      const content = line.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
+      return content ? `${indent}${content}` : '';
+    })
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/^\n+|\n+$/g, '');
+}
+
 /**
  * Parse one normalized line once for both structure validation and recovery.
  * The returned prefix is the source-owned Markdown marker; `text` is the only
@@ -521,15 +537,18 @@ function normalizeBlock(s) {
  * structure miss even when the line count is unchanged.
  */
 function lineStructuralSignature(line) {
-  const candidate = normalizeBlock(line);
+  const raw = String(line ?? '').replace(/\u00a0/g, ' ').replace(/\r/g, '');
+  const indent = raw.match(/^[ \t]*/u)?.[0] || '';
+  const candidate = raw.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
+  const signaturePrefix = `indent:${JSON.stringify(indent)}|`;
   if (!candidate) return { kind: 'empty', signature: 'empty', prefix: '', text: '' };
 
   const heading = candidate.match(/^(#{1,6})(?:\s+|$)/u);
   if (heading) {
     return {
       kind: 'heading',
-      signature: `heading:${heading[1].length}`,
-      prefix: heading[0],
+      signature: `${signaturePrefix}heading:${heading[1].length}`,
+      prefix: `${indent}${heading[0]}`,
       text: candidate.slice(heading[0].length),
     };
   }
@@ -537,8 +556,8 @@ function lineStructuralSignature(line) {
   if (bullet) {
     return {
       kind: 'bullet',
-      signature: `bullet:${bullet[1]}`,
-      prefix: bullet[0],
+      signature: `${signaturePrefix}bullet:${bullet[1]}`,
+      prefix: `${indent}${bullet[0]}`,
       text: candidate.slice(bullet[0].length),
     };
   }
@@ -546,8 +565,8 @@ function lineStructuralSignature(line) {
   if (ordered) {
     return {
       kind: 'ordered',
-      signature: `ordered:${ordered[1]}${ordered[2]}`,
-      prefix: ordered[0],
+      signature: `${signaturePrefix}ordered:${ordered[1]}${ordered[2]}`,
+      prefix: `${indent}${ordered[0]}`,
       text: candidate.slice(ordered[0].length),
     };
   }
@@ -555,8 +574,8 @@ function lineStructuralSignature(line) {
   if (quote) {
     return {
       kind: 'quote',
-      signature: 'quote',
-      prefix: quote[0],
+      signature: `${signaturePrefix}quote`,
+      prefix: `${indent}${quote[0]}`,
       text: candidate.slice(quote[0].length),
     };
   }
@@ -564,12 +583,12 @@ function lineStructuralSignature(line) {
   if (table) {
     return {
       kind: 'table',
-      signature: 'table',
-      prefix: table[0],
+      signature: `${signaturePrefix}table`,
+      prefix: `${indent}${table[0]}`,
       text: candidate.slice(table[0].length),
     };
   }
-  return { kind: 'text', signature: 'text', prefix: '', text: candidate };
+  return { kind: 'text', signature: `${signaturePrefix}text`, prefix: indent, text: candidate };
 }
 
 const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
@@ -601,9 +620,22 @@ function hasVisibleLinePayload(line) {
   return /[\p{L}\p{N}]/u.test(candidate);
 }
 
+function opaqueSpanSignature(line) {
+  const text = lineStructuralSignature(line).text;
+  return opaqueSpanRanges(text)
+    .map(({ start, end }) => normalizeProtectedTokenSentinels(text.slice(start, end)).toLowerCase());
+}
+
+function hasSameOpaqueSpans(sourceLine, translatedLine) {
+  const source = opaqueSpanSignature(sourceLine);
+  const translated = opaqueSpanSignature(translatedLine);
+  return source.length === translated.length
+    && source.every((span, index) => span === translated[index]);
+}
+
 function hasSameLineStructure(sourceText, translatedText) {
-  const sourceLines = normalizeBlock(sourceText).split('\n');
-  const translatedLines = normalizeBlock(translatedText).split('\n');
+  const sourceLines = normalizeStructuredBlock(sourceText).split('\n');
+  const translatedLines = normalizeStructuredBlock(translatedText).split('\n');
   return sourceLines.length > 1
     && sourceLines.length === translatedLines.length
     && sourceLines.every((sourceLine, index) => {
@@ -611,7 +643,8 @@ function hasSameLineStructure(sourceText, translatedText) {
       if (lineStructuralSignature(sourceLine).signature !== lineStructuralSignature(translatedLine).signature) {
         return false;
       }
-      return !hasTranslatableLineText(sourceLine) || hasVisibleLinePayload(translatedLine);
+      return hasSameOpaqueSpans(sourceLine, translatedLine)
+        && (!hasTranslatableLineText(sourceLine) || hasVisibleLinePayload(translatedLine));
     });
 }
 
@@ -790,8 +823,14 @@ function _splitOversizedSegment(text, maxChars, separatorAfter) {
     const opaqueSpans = opaqueSpanRanges(remaining);
     const space = remaining.lastIndexOf(' ', maxChars);
     let splitAt = space > 0 ? space : maxChars;
+    let separator = '';
     const splitInsideOpaque = opaqueSpans.find(({ start, end }) => start < splitAt && splitAt < end);
-    if (splitInsideOpaque) splitAt = splitInsideOpaque.start;
+    if (splitInsideOpaque) {
+      const beforeOpaque = remaining.slice(0, splitInsideOpaque.start);
+      const whitespace = beforeOpaque.match(/\s+$/u)?.[0] || '';
+      splitAt = splitInsideOpaque.start - whitespace.length;
+      separator = whitespace;
+    }
 
     // An opaque token longer than the provider limit cannot be split safely.
     // Keep it as one explicitly marked segment so `_chunkAtSentences` can fail
@@ -800,19 +839,19 @@ function _splitOversizedSegment(text, maxChars, separatorAfter) {
     if (splitAt === 0) {
       const opaque = opaqueSpans.find(({ start }) => start === 0);
       if (opaque) {
-        const separator = remaining.slice(opaque.end).match(/^\s+/u)?.[0] || '';
+        const opaqueSeparator = remaining.slice(opaque.end).match(/^\s+/u)?.[0] || '';
         parts.push({
           text: remaining.slice(0, opaque.end),
-          separatorAfter: separator,
+          separatorAfter: opaqueSeparator,
           protectedOversize: opaque.end > maxChars,
         });
-        remaining = remaining.slice(opaque.end + separator.length);
+        remaining = remaining.slice(opaque.end + opaqueSeparator.length);
         continue;
       }
       splitAt = maxChars;
     }
 
-    const separator = remaining[splitAt] === ' ' ? remaining.slice(splitAt, splitAt + 1) : '';
+    if (!separator && remaining[splitAt] === ' ') separator = remaining.slice(splitAt, splitAt + 1);
     parts.push({ text: remaining.slice(0, splitAt), separatorAfter: separator });
     remaining = remaining.slice(splitAt + separator.length);
   }
@@ -990,7 +1029,8 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
     if (!recomposedLine) {
       return { ok: false, reason: 'recoveryFailed' };
     }
-    if (hasTranslatableLineText(line.text) && !hasVisibleLinePayload(recomposedLine)) {
+    if (!hasSameOpaqueSpans(line.text, recomposedLine)
+      || (hasTranslatableLineText(line.text) && !hasVisibleLinePayload(recomposedLine))) {
       return { ok: false, reason: 'recoveryFailed' };
     }
     const lineIsPassthrough = rejectedAsPassthroughWithSourceVariants(
@@ -1020,7 +1060,7 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
   }
   return {
     ok: true,
-    text: normalizeBlock(recomposed),
+    text: normalizeStructuredBlock(recomposed),
     allLinesNonTranslatable: translatableLines === 0,
   };
 }
@@ -2425,8 +2465,15 @@ export function balanceMarkdownMarkers(s) {
   //    a separator line sat between two paragraph breaks (\n\nSEP\n\n →
   //    \n\n\n after filter).
   out = out.replace(/\n{3,}/g, '\n\n');
-  // 6. Collapse the consecutive double-spaces that step 1 may have left.
-  out = out.replace(/[ \t]{2,}/g, ' ');
+  // 6. Collapse consecutive inline spaces that step 1 may have left without
+  // erasing the indentation of nested Markdown list items.
+  out = out
+    .split('\n')
+    .map((line) => {
+      const indent = line.match(/^[ \t]*/u)?.[0] || '';
+      return indent + line.slice(indent.length).replace(/[ \t]{2,}/g, ' ');
+    })
+    .join('\n');
   return out.trim();
 }
 
@@ -2463,6 +2510,15 @@ function mergeTranslationOutcome(target, source) {
   target.incomplete = target.incomplete || source.incomplete === true;
 }
 
+// MyMemory rejects requests shorter than three characters before it reaches
+// the network. Preserve the actual line content while padding only the
+// provider input; the response is normalized and judged against the unpadded
+// source by the structure/passthrough guards below.
+function myMemoryRequestText(text) {
+  const value = String(text ?? '');
+  return value.length < 3 ? value.padEnd(3, ' ') : value;
+}
+
 /**
  * Sorgente pronta per un motore: normalizzata e con i token protetti mascherati.
  * `null` su una sorgente vuota. E' l'ingresso di `freeTranslate` e di
@@ -2475,7 +2531,8 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
     ? normalizeGermanGenderForms(text)
     : text;
   const sourceClean = normalizeBlock(sourceInput);
-  if (!sourceClean) return null;
+  const structureSource = normalizeStructuredBlock(sourceInput);
+  if (!sourceClean || !structureSource) return null;
   // Protected tokens: mask DACH gender trigraphs ("(m/w/d)") before any tier
   // sees them. Handed the raw code, translators expand the letters as words —
   // live IT titles came back as "(lunedì/mercoledì/d)" (m→Monday, w→Wednesday).
@@ -2483,8 +2540,8 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
   // nothing to protect, so the cascade payload only differs for the small
   // fraction of titles that actually carry a trigraph — no `tokens.length`
   // branch is needed to keep the common case untouched.
-  const { text: clean, tokens: protectedTokens } = maskProtectedTokens(sourceClean);
-  return { rawSourceClean, sourceClean, clean, protectedTokens };
+  const { text: clean, tokens: protectedTokens } = maskProtectedTokens(structureSource);
+  return { rawSourceClean, sourceClean, structureSource, clean, protectedTokens };
 }
 
 /**
@@ -2513,7 +2570,7 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
 export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
   const prepared = _prepareEngineSource(text, sourceLang, fieldType);
   if (!prepared) return '';
-  const { rawSourceClean, sourceClean, clean } = prepared;
+  const { rawSourceClean, sourceClean, structureSource, clean } = prepared;
   if (sourceLang === targetLang) return sourceClean;
 
   _cascadeStats.calls++;
@@ -2555,7 +2612,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (
         result
         && (sourceClean.includes('\n') || result.includes('\n'))
-        && !hasSameLineStructure(sourceClean, result)
+        && !hasSameLineStructure(structureSource, result)
       ) {
         const recovered = await recoverStructuredTier({
           tierName,
@@ -2649,7 +2706,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // Short text (≤5000 chars): single call. Long text: chunk at sentence boundaries.
   const t2 = await tryTier('myMemory', async (requestText = clean) => {
     if (requestText.length <= 5000) {
-      const mm = await translateWithMyMemory(requestText, sourceLang, targetLang);
+      const mm = await translateWithMyMemory(myMemoryRequestText(requestText), sourceLang, targetLang);
       if (!mm) {
         noteTranslationOutcome(_outcome, 'incomplete');
         return '';
@@ -2681,7 +2738,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         continue;
       }
       const requestText = lineStructuralSignature(chunk.text).text;
-      const mm = await translateWithMyMemory(requestText, sourceLang, targetLang);
+      const mm = await translateWithMyMemory(myMemoryRequestText(requestText), sourceLang, targetLang);
       if (!mm || mm.includes('MYMEMORY WARNING')) {
         noteTranslationOutcome(_outcome, 'incomplete');
         // A translatable line that this tier cannot serve (notably MyMemory's
