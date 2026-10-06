@@ -709,9 +709,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "ae9d697695dc1ee7",
-        "corpus": "ae9d697695dc1ee7",
-        "alignedAt": "2026-10-05"
+        "site": "f135c767512bc891",
+        "corpus": "f135c767512bc891",
+        "alignedAt": "2026-10-06"
       }
     },
     {
