@@ -64,7 +64,6 @@
     "scripts/ci/needs-human-prepass.mjs",
     "scripts/ci/pr-autorebase.mjs",
     "scripts/ci/reconcile-followups.mjs",
-    "scripts/ci/report-validate-dist-failure.mjs",
     "scripts/ci/review-gate.mjs",
     "scripts/ci/review-test-policy.mjs",
     "scripts/ci/unwedge-pages-deploy-queue.mjs",
