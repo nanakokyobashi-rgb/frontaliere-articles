@@ -19,7 +19,11 @@ export const GENERATED_IMAGE_REGISTRY_REL = 'data/generated-image-registry.json'
 export const EDITORIAL_IMAGE_REGISTRY_REL = 'data/editorial-image-registry.json';
 export const BLOG_IMAGE_CREDITS_AGGREGATE = 'data/image-credits-blog.json';
 
+// New governed records are emitted and copied as WebP only. Accepting other
+// extensions here would let a valid-looking registry point at a file that the
+// API publisher never copies.
 const IMAGE_PATH_RX = /^\/images\/(?:blog|generated)\/[A-Za-z0-9._-]+\.webp$/i;
+const MATERIALIZED_IMAGE_PATH_RX = /^\/images\/(?:blog|generated)\/[A-Za-z0-9._-]+\.(?:webp|png|jpe?g|avif)$/i;
 const HTTPS_RX = /^https:\/\//i;
 
 function absolute(root, rel) {
@@ -54,18 +58,26 @@ function validImagePath(value) {
   return typeof value === 'string' && IMAGE_PATH_RX.test(value);
 }
 
-function imageFilePath(root, imagePath) {
-  const normalized = normalizePath(imagePath);
-  if (!normalized || !validImagePath(normalized)) return null;
-  return absolute(root, path.join('public', normalized.slice(1)));
+function materializedImagePath(root, imagePath) {
+  if (!MATERIALIZED_IMAGE_PATH_RX.test(imagePath)) return null;
+  return absolute(root, path.join('public', imagePath.slice(1)));
 }
 
-function hasRecordFileIntegrity(root, record, imagePath) {
-  const filePath = imageFilePath(root, imagePath);
-  if (!filePath || !fs.existsSync(filePath)) return false;
-  const stat = fs.statSync(filePath);
-  if (!stat.isFile() || stat.size !== record.bytes) return false;
-  return sha256File(filePath).toLowerCase() === String(record.sha256 || '').toLowerCase();
+function hasMaterializedImageRecord(root, imagePath, record) {
+  const file = materializedImagePath(root, imagePath);
+  if (!file) return false;
+  let stat;
+  try {
+    // Do not follow a symlink from a provenance record to bytes outside the
+    // published tree.
+    stat = fs.lstatSync(file);
+  } catch {
+    return false;
+  }
+  if (!stat.isFile()) return false;
+  if (Number.isInteger(record?.bytes) && stat.size !== record.bytes) return false;
+  if (typeof record?.sha256 === 'string' && sha256File(file) !== record.sha256.toLowerCase()) return false;
+  return true;
 }
 
 export function readGeneratedImageRecords(root, { strict = true } = {}) {
@@ -116,16 +128,19 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
   const normalized = normalizePath(imagePath);
   if (!normalized) return null;
   const generated = readGeneratedImageRecords(root, { strict })
-    .find((record) => record.scope === 'article-hero'
-      && record.imageUrl === normalized
-      && hasRecordFileIntegrity(root, record, record.imageUrl));
-  if (generated) return { kind: 'generated', record: generated };
-  const editorial = readEditorialImageRecords(root, { strict })
-    .find((record) => record.cover === normalized && hasRecordFileIntegrity(root, record, record.cover));
-  if (editorial) return { kind: 'editorial-upload', record: editorial };
+    .find((record) => record.scope === 'article-hero' && record.imageUrl === normalized);
+  if (generated) return hasMaterializedImageRecord(root, normalized, generated)
+    ? { kind: 'generated', record: generated }
+    : null;
+  const editorial = readEditorialImageRecords(root, { strict }).find((record) => record.cover === normalized);
+  if (editorial) return hasMaterializedImageRecord(root, normalized, editorial)
+    ? { kind: 'editorial-upload', record: editorial }
+    : null;
   try {
     const legacy = corpusCreditReader(root).get(normalized);
-    if (legacy) return { kind: 'wikimedia-commons', record: legacy };
+    if (legacy && hasMaterializedImageRecord(root, normalized, legacy)) {
+      return { kind: 'wikimedia-commons', record: legacy };
+    }
   } catch (error) {
     if (strict) throw error;
   }
@@ -159,14 +174,13 @@ export function buildPublishedBlogImageRegistry(root, images = []) {
   const generated = Object.fromEntries(
     readGeneratedImageRecords(root)
       .filter((record) => record.scope === 'article-hero' && record.imageUrl.startsWith('/images/generated/'))
-      .filter((record) => hasRecordFileIntegrity(root, record, record.imageUrl))
+      .filter((record) => hasMaterializedImageRecord(root, record.imageUrl, record))
       .filter((record) => selected.size === 0 || selected.has(record.imageUrl))
       .map((record) => [record.imageUrl, record]),
   );
   const editorial = Object.fromEntries(
-    readEditorialImageRecords(root)
-      .filter((record) => hasRecordFileIntegrity(root, record, record.cover))
-      .filter((record) => selected.size === 0 || selected.has(record.cover))
+    readEditorialImageRecords(root).filter((record) => selected.size === 0 || selected.has(record.cover))
+      .filter((record) => hasMaterializedImageRecord(root, record.cover, record))
       .map((record) => [record.cover, record]),
   );
   return { generated, editorial };

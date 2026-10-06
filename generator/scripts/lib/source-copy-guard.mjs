@@ -63,12 +63,12 @@ function removeAllowedQuotes(text, locale) {
   let allowedQuotes = 0;
   const cleaned = source.replace(QUOTED_SPAN_RX, (whole, ...args) => {
     const groups = args.slice(0, 4);
-    // String.replace passes the character offset as a number after the
-    // capture groups. Do not treat it as a match object: a quote later in
-    // the article must be checked against its own attribution window.
-    const offset = args[args.length - 2];
     const inner = groups.find((value) => typeof value === 'string') || '';
-    const start = typeof offset === 'number' ? offset : 0;
+    // With four capture groups, String#replace appends the numeric offset and
+    // the full input after those groups. The old code treated that offset as
+    // a match object, so every quote was attributed as if it started at 0 and
+    // attribution near the actual quote was silently ignored.
+    const start = Number.isInteger(args[4]) ? args[4] : 0;
     const end = start + whole.length;
     const words = normalizeSourceWords(inner, locale).length;
     if (

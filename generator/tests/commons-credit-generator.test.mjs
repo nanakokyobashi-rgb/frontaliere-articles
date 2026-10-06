@@ -9,7 +9,6 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -20,6 +19,7 @@ import {
   buildPublishedBlogImageRegistry,
   hasValidBlogImageRecord,
   imageRecordForPath,
+  sha256File,
   validateEditorialImageRecord,
 } from '../scripts/lib/blog-image-registry.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from '../scripts/lib/journalist-image-policy.mjs';
@@ -162,23 +162,16 @@ test('the pure journalist image policy rejects arbitrary URLs and accepts comple
 test('generated and editorial records are reader-facing and discoverable by cover path', () => {
   const root = tempRoot();
   try {
-    const generatedBytes = Buffer.from('generated image fixture');
-    const generatedPath = path.join(root, 'public/images/generated/article-governance-test.webp');
-    fs.mkdirSync(path.dirname(generatedPath), { recursive: true });
-    fs.writeFileSync(generatedPath, generatedBytes);
-    const generated = generatedRecord({
-      bytes: generatedBytes.length,
-      sha256: crypto.createHash('sha256').update(generatedBytes).digest('hex'),
-    });
+    const generated = generatedRecord();
+    const generatedFile = path.join(root, 'public', generated.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(generatedFile), { recursive: true });
+    fs.writeFileSync(generatedFile, Buffer.alloc(generated.bytes, 0x47));
+    generated.sha256 = sha256File(generatedFile);
     assert.equal(validateGeneratedImageRecord(generated).valid, true);
     appendGeneratedImageRecord(root, generated);
     assert.equal(imageRecordForPath(root, generated.imageUrl, { strict: true }).kind, 'generated');
     assert.equal(hasValidBlogImageRecord(root, generated.imageUrl), true);
 
-    const editorialBytes = Buffer.from('editorial image fixture');
-    const editorialPath = path.join(root, 'public/images/blog/editorial-governance-test.webp');
-    fs.mkdirSync(path.dirname(editorialPath), { recursive: true });
-    fs.writeFileSync(editorialPath, editorialBytes);
     const editorial = {
       schema: 1,
       source: 'editorial-upload',
@@ -191,11 +184,15 @@ test('generated and editorial records are reader-facing and discoverable by cove
       modified: 'cropped',
       fetchedAt: '2026-10-06T10:02:00.000Z',
       status: 'ok',
-      sha256: crypto.createHash('sha256').update(editorialBytes).digest('hex'),
-      bytes: editorialBytes.length,
+      sha256: 'c'.repeat(64),
+      bytes: 2048,
       width: 1200,
       height: 675,
     };
+    const editorialFile = path.join(root, 'public', editorial.cover.slice(1));
+    fs.mkdirSync(path.dirname(editorialFile), { recursive: true });
+    fs.writeFileSync(editorialFile, Buffer.alloc(editorial.bytes, 0x45));
+    editorial.sha256 = sha256File(editorialFile);
     assert.equal(validateEditorialImageRecord(editorial).valid, true);
     appendEditorialImageRecord(root, editorial);
     assert.equal(imageRecordForPath(root, editorial.cover, { strict: true }).kind, 'editorial-upload');
@@ -211,10 +208,13 @@ test('generated and editorial records are reader-facing and discoverable by cove
     assert.equal(aggregate.editorial[editorial.cover].rightsHolder, editorial.rightsHolder);
     assert.equal(aggregate.sections.frontaliere, 'image-credits-frontaliere.json');
 
-    fs.writeFileSync(generatedPath, Buffer.from('tampered image fixture'));
-    assert.equal(imageRecordForPath(root, generated.imageUrl), null, 'un record generated con hash stale non autorizza il file');
+    fs.writeFileSync(generatedFile, Buffer.alloc(generated.bytes, 0x48));
+    assert.equal(imageRecordForPath(root, generated.imageUrl, { strict: true }), null);
     assert.equal(buildPublishedBlogImageRegistry(root).generated[generated.imageUrl], undefined);
-    assert.equal(validateEditorialImageRecord({ ...editorial, cover: '/images/blog/not-webp.jpg' }).valid, false);
+
+    fs.unlinkSync(generatedFile);
+    assert.equal(imageRecordForPath(root, generated.imageUrl, { strict: true }), null);
+    assert.equal(buildPublishedBlogImageRegistry(root).generated[generated.imageUrl], undefined);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
