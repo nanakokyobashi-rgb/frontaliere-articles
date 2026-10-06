@@ -149,6 +149,15 @@ locale non ha un heartbeat CI affidabile. Le PR create dal loop ricevono
 `agent:autofix`, che è la prova esplicita usata dai fixer e dai rescuer per
 distinguere una PR automatica owner-authored da una PR umana.
 
+**Conflitto in risoluzione:** prima di iniziare una risoluzione manuale su una
+PR, applica `agent:resolving-conflict` con `gh pr edit <PR> --repo
+nanakokyobashi-rgb/frontaliere-articles --add-label agent:resolving-conflict`.
+Il lock dura 60 minuti dall'evento `labeled`, blocca il passaggio a `issue-fix`,
+scade oppure cade al primo commit successivo e viene rimosso. Timeline illeggibile
+= fail-closed. Alla fine fai push oppure rimuovi il lock con `gh pr edit <PR>
+--repo nanakokyobashi-rgb/frontaliere-articles --remove-label
+agent:resolving-conflict`; `needs-human` resta l'escalation.
+
 **La quota Claude è condivisa con il ciclo del sito.** Questo repo ha
 precedenza inferiore per costruzione: i suoi workflow Claude leggono anche il
 beacon di rate-limit del sito e cedono, mentre il sito non legge mai il nostro.
