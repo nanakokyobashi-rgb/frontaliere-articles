@@ -4095,7 +4095,7 @@
             "cronaca"
           ],
           "quirks": {
-            "articlePathPattern": "^/topics/[^/?]+/[^/?]+/[^/?]+$"
+            "articlePathPattern": "^/news/[^/?]+$"
           },
           "items7d": 0,
           "verifiedAt": "2026-10-06",
