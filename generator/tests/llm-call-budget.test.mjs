@@ -442,21 +442,17 @@ test('④ la selezione headline eredita il deadlineMs dal wrapper callLLM', () =
 // ④-bis Il tetto alla fase immagini
 // ─────────────────────────────────────────────────────────────────────────────
 
-test('④ ogni strategia immagine controlla il budget di fase', () => {
+test('④ la fase immagini usa un solo percorso governato e controlla il budget', () => {
   const img = extractBlock('async function generateArticleImage(');
-  const strategies = img.text.split('\n').filter((l) => /^\s*\/\/ ── Strategy /.test(l));
-  assert.equal(strategies.length, 9, `strategie trovate: ${strategies.length} (attese 9)`);
-
-  const guards = img.text.split('\n').filter((l) => /imagePhaseExpired\('Strategy /.test(l));
-  assert.equal(
-    guards.length, 9,
-    `REGRESSIONE: ${guards.length}/9 strategie controllano il budget. Le 9 seriali con timeout 90-120s `
-    + 'valgono ~22 minuti nel caso peggiore, e girano DOPO tutti i gate — quando perdere il lavoro costa di piu.',
-  );
+  assert.equal((img.text.match(/generateImageFromSpec\(/g) || []).length, 1, 'il nuovo hero deve avere un solo percorso di generazione');
+  assert.match(img.text, /scope: 'article-hero'/);
+  assert.match(img.text, /maxAttempts: 3/);
+  assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
+  assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
   assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
+  assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
+  assert.match(img.text, /deadlineAt:\s*imageDeadline/);
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
-  // Allo scadere si torna null, che e il percorso NORMALE del fallback.
-  assert.match(img.text, /if \(imagePhaseExpired\('Strategy 1'\)\) return null;/);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

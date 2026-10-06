@@ -12,13 +12,15 @@
  * just exposed as a ranked multi-candidate list instead of a single silent pick.
  *
  * Run directly to do a full rescan (`node scripts/generate-journalist-image-catalog.mjs`).
- * appendCatalogEntry() is called incrementally by the two places that ever
- * write a new file into public/images/blog: create-article.mjs's automated
- * pipeline and publish-journalist-article.mjs's resolveHeroImage() upload path.
+ * appendCatalogEntry() remains available for maintenance jobs that add a
+ * record-bearing blog cover; the new article and journalist pipelines persist
+ * their generated/editorial records directly and do not make an unrecorded
+ * image publishable by updating this catalog alone.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { hasValidBlogImageRecord } from './lib/blog-image-registry.mjs';
 
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
 // so one level up is now the generator directory, not the repo root.
@@ -42,7 +44,11 @@ export function buildCatalog() {
     : [];
   return files
     .map((f) => ({ path: `/images/blog/${f}`, words: wordsFromFilename(f) }))
-    .filter((entry) => entry.words.length > 0);
+    // A filename is not provenance. The picker is a publishable catalog only
+    // when the cover has a valid Commons, generated, or editorial-upload
+    // record; unrecorded historical photos remain on disk but cannot be
+    // selected for a new article.
+    .filter((entry) => entry.words.length > 0 && hasValidBlogImageRecord(PROJECT_ROOT, entry.path));
 }
 
 function readExistingCatalog() {
@@ -81,6 +87,10 @@ function writeCatalog(catalog) {
  */
 export function appendCatalogEntry(blogImagePath) {
   try {
+    if (!hasValidBlogImageRecord(PROJECT_ROOT, blogImagePath)) {
+      console.warn(`  ⚠️  appendCatalogEntry(${blogImagePath}) refused: no valid image-provenance record`);
+      return;
+    }
     const file = blogImagePath.replace(/^\/images\/blog\//, '');
     const words = wordsFromFilename(file);
     if (words.length === 0) return;
@@ -119,9 +129,17 @@ if (invokedDirectly) {
   // append-only in normal operation, so a sharp drop means a bad rescan, not
   // that half the cover images vanished.
   const existing = readExistingCatalog();
-  if (existing.length > 0 && catalog.length < existing.length / 2) {
+  // The provenance policy deliberately removes historical entries whose file
+  // has no valid reader-facing record. Compare the shrink guard with the
+  // record-bearing subset, not with the old ungoverned catalog size: otherwise
+  // the first policy rollout is indistinguishable from a truncated checkout.
+  const existingRecordBearing = existing.filter((entry) => (
+    typeof entry?.path === 'string' && hasValidBlogImageRecord(PROJECT_ROOT, entry.path)
+  ));
+  if (existingRecordBearing.length > 0 && catalog.length < existingRecordBearing.length / 2) {
     console.error(
-      `::error::rescan would shrink journalist-image-catalog.json from ${existing.length} to ${catalog.length} entries — refusing to write`,
+      `::error::rescan would shrink journalist-image-catalog.json from ${existingRecordBearing.length} governed `
+        + `to ${catalog.length} entries (legacy catalog has ${existing.length}) — refusing to write`,
     );
     process.exit(1);
   }

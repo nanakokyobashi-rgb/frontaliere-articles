@@ -469,11 +469,12 @@ test("una sola sezione senza corpus e' segnalata una volta, e non spegne l'altra
   assert.equal(floorViolations(alsoTruncated, noSwissBodies).length, 2);
 });
 
-test("images-manifest emesso senza public/images/blog e' una violazione", () => {
+test("images-manifest emesso senza le directory immagine e' una violazione", () => {
   const { measured, expected } = healthy();
   const violations = floorViolations(measured, { ...expected, sourceImages: 0 });
   assert.equal(violations.length, 1);
   assert.match(violations[0], /public[\\/]images[\\/]blog/);
+  assert.match(violations[0], /public[\\/]images[\\/]generated/);
 });
 
 test('sectionFloor lancia sul corpus assente invece di restituire un pavimento a zero', () => {
@@ -506,6 +507,7 @@ test("images: manifest assente o senza sorgente e' una violazione esplicita", ()
   );
   assert.equal(missingSource.length, 1);
   assert.match(missingSource[0], /public[\\/]images[\\/]blog/);
+  assert.match(missingSource[0], /public[\\/]images[\\/]generated/);
 
   const violations = floorViolations({ ...measured, images: 3 }, expected);
   assert.equal(violations.length, 1);
@@ -567,6 +569,18 @@ test('il conteggio delle immagini legge la directory sorgente una sola volta', (
     assert.equal(reads, 1);
   } finally {
     fs.readdirSync = original;
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il conteggio delle immagini include catalogo e copertine generate', () => {
+  const root = fs.mkdtempSync(join(os.tmpdir(), 'image-input-both-'));
+  const generatedDir = join(root, 'public', 'images', 'generated');
+  fs.mkdirSync(generatedDir, { recursive: true });
+  fs.writeFileSync(join(generatedDir, 'generated.webp'), 'generated');
+  try {
+    assert.equal(countSourceImages(root), 1);
+  } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
@@ -842,7 +856,7 @@ test('expectFromCorpus legge davvero un root alternativo e non il checkout del t
     fs.mkdirSync(join(root, 'content', 'blog-body', 'it'), { recursive: true });
     fs.mkdirSync(join(root, 'content', 'blog-body-ch', 'it'), { recursive: true });
     fs.mkdirSync(join(root, 'content', 'seo'), { recursive: true });
-    fs.mkdirSync(join(root, 'public', 'images', 'blog'), { recursive: true });
+    fs.mkdirSync(join(root, 'public', 'images', 'generated'), { recursive: true });
     fs.writeFileSync(join(root, 'content', 'blog-body', 'it', 'frontaliere.ts'), 'export {};');
     fs.writeFileSync(join(root, 'content', 'blog-body-ch', 'it', 'svizzera.ts'), 'export {};');
     for (const section of RSS_SECTIONS) {
@@ -855,7 +869,7 @@ test('expectFromCorpus legge davvero un root alternativo e non il checkout del t
         fs.writeFileSync(join(root, 'content', 'seo', file), source);
       }
     }
-    fs.writeFileSync(join(root, 'public', 'images', 'blog', 'alt.webp'), 'image');
+    fs.writeFileSync(join(root, 'public', 'images', 'generated', 'alt.webp'), 'image');
 
     const configuredRevision = process.env.API_FLOOR_BASE_REVISION;
     process.env.API_FLOOR_BASE_REVISION = '0000000000000000000000000000000000000000';
