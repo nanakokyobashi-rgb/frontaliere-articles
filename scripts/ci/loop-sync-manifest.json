@@ -5260,7 +5260,7 @@
       "reason": "Patch stale guardata dei metadati della landing italiana `/articoli-svizzera/`, applicata dal refresher che riscrive le pagine dello shard. Il sito non ha questo script: la landing e' servita dal corpus e il sito la consuma via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "330e306e1d1baf6d",
+        "corpus": "d6a609ea3e025fee",
         "alignedAt": "2026-10-06"
       }
     }
