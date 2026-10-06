@@ -565,8 +565,8 @@
       "reason": "Il sito conserva la logica generale di audit dei rinvii per decisione (decisionDeferralSpecificity): decisioni vaghe restano candidati finche' non hanno motivo e prossimo passo concreti. Il corpus mantiene isManagedReview perche' il suo scripts/ci/lib/constants.mjs e i workflow/test includono l'identita' e il fallback Codex marcato; il sito usa isReviewerBot per il proprio contratto di review. Questa differenza resta intenzionale.",
       "baseline": {
         "site": "88ce559e743b5143",
-        "corpus": "1dcb22df125cc3e",
-        "alignedAt": "2026-10-07"
+        "corpus": "1dcb22df125cc3e0",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -595,7 +595,7 @@
       "baseline": {
         "site": "5f9932099a50149a",
         "corpus": "5f9932099a50149a",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -632,7 +632,7 @@
       "baseline": {
         "site": "185c2a177882f683",
         "corpus": "185c2a177882f683",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -739,7 +739,7 @@
       "baseline": {
         "site": "9d0fa856b688ef1a",
         "corpus": "9d0fa856b688ef1a",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1072,7 +1072,7 @@
       "baseline": {
         "site": "d379326b6a9b5446",
         "corpus": "7c334ed5ba569ac1",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-06"
       }
     },
     {
