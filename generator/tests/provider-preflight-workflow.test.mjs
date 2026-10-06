@@ -33,13 +33,15 @@ test('il dry-run non viene bloccato dal preflight che richiede una lane attiva',
 });
 
 test('anche il batch FAQ usa lo stesso preflight e non il solo PAT GitHub', () => {
+  const setup = FAQ_WORKFLOW.indexOf('id: setup_claude_haiku_fallback');
   const start = FAQ_WORKFLOW.indexOf('id: provider_preflight');
-  assert.ok(start >= 0);
+  assert.ok(setup >= 0 && start > setup, 'il broker Codex deve precedere il preflight FAQ');
   const upload = FAQ_WORKFLOW.indexOf('- name: Upload provider preflight report', start);
   assert.ok(upload > start);
   const block = FAQ_WORKFLOW.slice(start, upload + 300);
   assert.match(block, /node generator\/scripts\/lib\/provider-preflight\.mjs/);
   assert.match(block, /PROVIDER_PREFLIGHT_OUTPUT:/);
+  assert.match(block, /CODEX_AUTH_BROKER_SOCKET:/);
   assert.match(block, /if: steps\.mode\.outputs\.dry != 'true'/);
   assert.match(block, /Upload provider preflight report/);
   assert.doesNotMatch(block, /GH_MODELS_PAT/);
