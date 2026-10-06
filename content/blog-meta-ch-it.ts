@@ -7802,6 +7802,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.prezzi-immobili-settembre-regioni.title': 'Prezzi case e appartamenti in Svizzera: settembre stabile',
     'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Case unifamiliari a -0,1% e appartamenti a +0,2% in settembre: Zurigo registra il calo più marcato, mentre il Ticino cresce nella proprietà per piani.',
     'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli non paga la cassa malati e va davanti al pretore',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un\'assicurazione internazionale.',
+    'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, medico di Mendrisio, davanti al pretore per il mancato pagamento della cassa malati',
 };
 
 export default blogMetaChIt;

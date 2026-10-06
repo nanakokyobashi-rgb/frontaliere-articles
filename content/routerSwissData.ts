@@ -2623,6 +2623,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'berna-protezione-servizio-indennita': { it: 'berna-protezione-servizio-indennita', en: 'bern-civil-protection-service-allowance', de: 'bern-zivilschutz-dienst-entschaedigung', fr: 'berne-protection-civile-service-indemnite' },
  'edifici-berna-obbligo-premi': { it: 'edifici-berna-obbligo-premi', en: 'bern-building-insurance-guide', de: 'gebaeudeversicherung-bern-ratgeber', fr: 'assurance-immeubles-berne-guide' },
  'prezzi-immobili-settembre-regioni': { it: 'prezzi-immobili-settembre-regioni', en: 'swiss-home-prices-september-regions', de: 'immobilienpreise-september-regionen', fr: 'prix-immobilier-septembre-regions' },
+ 'ostinelli-cassa-malati-udienza-pretore': { it: 'ostinelli-cassa-malati-udienza-pretore', en: 'ostinelli-health-insurance-court-hearing', de: 'ostinelli-krankenkasse-gerichtstermin', fr: 'ostinelli-assurance-maladie-audience' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
