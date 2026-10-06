@@ -12675,6 +12675,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.disoccupazione-settembre-ticino-2026.title': 'Disoccupazione stabile al 3% in Svizzera a settembre 2026',
     'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'In settembre la disoccupazione svizzera resta al 3%, Ticino al 2,9% con 4\'800 disoccupati, mentre i posti vacanti salgono a 44\'200.',
     'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Vista di Lugano con professionisti e segno dell\'ufficio di collocamento, rappresentante il mercato del lavoro ticinese.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Frontalieri: tassa ingresso, ristorni e doppia imposizione',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'La Svizzera introduce una tassa d\'ingresso fino a 4mila franchi per lavoratori e autonomi. Si discute di 900 milioni annui per i disoccupati e c\'è il rischio di 120 milioni per i comuni di frontiera.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Vista panoramica di Lugano e del suo lago, con edifici moderni che simboleggiano il contesto finanziario svizzero.',
+    'blog.article.carovita-sindacati-recupero-divario.title': 'Carovita, i sindacati chiedono recupero divario nel Preventivo 2027',
+    'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Tra dicembre 2020 e settembre 2026, il rincaro è salito dell\'8,5% mentre gli stipendi del personale cantonale, parapubblico e sociosanitario sono stati adeguati solo del 3%.',
+    'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Veduta di Bellinzona con il Castel Grande sotto un cielo sereno.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'Nei weekend 9-12, 16-19 ottobre e 13-16, 20-23 novembre 2026, la chiusura cambia RE80, S10 e S40 tra Chiasso e Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'Treno TILO vicino a Chiasso durante i lavori alla galleria Monte Olimpino 1.',
 };
 
 export default blogMetaIt;

@@ -1,14 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/b2f6vq9fb0d6": {
-    "articleId": "aggiornamento-direttiva-crs-2026",
-    "ts": "2026-09-04T13:42:36.149Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1948077/raffineria-prodotti-cressier-fornitura-fermo-garantita-carburante": {
-    "articleId": "cressier-guasto-benzina-garantita",
-    "ts": "2026-09-04T14:04:31.101Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1947961/guerra-svp-junge-svizzera-neutralita-video-iniziativa-film-jsvp": {
     "articleId": "soldati-svizzera-video-guerra",
     "ts": "2026-09-04T16:44:26.090Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/svizzera/economia/1954942/premi-anni-aumento-diventera-afferma": {
     "articleId": "costi-assicurazione-base-proiezione",
     "ts": "2026-10-06T07:50:51.196Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/cdju9-o8wgml": {
+    "articleId": "mercato-lavoro-settembre-2026",
+    "ts": "2026-10-06T08:45:47.610Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/tjk4qygofev-": {
+    "articleId": "effettivo-esercito-2026-calo",
+    "ts": "2026-10-06T10:00:38.875Z",
     "keyForm": 2
   }
 }

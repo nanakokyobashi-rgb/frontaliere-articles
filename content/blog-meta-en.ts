@@ -12674,6 +12674,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.disoccupazione-settembre-ticino-2026.title': 'Unemployment stable at 3% in Switzerland in September 2026',
     'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'In September, unemployment in Switzerland remains at 3% and in Ticino at 2,9%, with 4\'800 unemployed, while job vacancies rise to 44\'200.',
     'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Lugano street view with commuters and a subtle unemployment office sign, illustrating the Ticino job market.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.title': 'Cross-border workers: entry tax, tax rebates and double taxation',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.excerpt': 'Switzerland is introducing an entry tax of up to 4 thousand francs for employees and self-employed workers. There is discussion of 900 million annually for the unemployed, and there is a risk of 120 million for border municipalities.',
+    'blog.article.frontalieri-tassa-ingresso-rischi-comuni.imageAlt': 'Panoramic view of Lugano and its lake, with modern buildings symbolizing the Swiss financial context.',
+    'blog.article.carovita-sindacati-recupero-divario.title': 'Carvivita, the unions demand recovery of the gap in the 2027 Quote',
+    'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Between December 2020 and September 2026, the cost of living rose by 8.5%, while the salaries of cantonal, parapublic and social-healthcare staff were adjusted by only 3%.',
+    'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'View of Bellinzona with Castel Grande under a clear sky.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: changes to TILO services between Chiasso and Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'On the weekends of October 9–12 and 16–19 and November 13–16 and 20–23, 2026, the closure affects RE80, S10 and S40 between Chiasso and Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'TILO train near Chiasso during maintenance work at the Monte Olimpino 1 tunnel.',
 };
 
 export default blogMetaEn;

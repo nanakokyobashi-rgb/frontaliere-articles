@@ -7808,6 +7808,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.costi-assicurazione-base-proiezione.title': 'Krankenkassenprämien steigen: auf dem Weg zu 1000 Franken pro Monat',
     'blog.article.costi-assicurazione-base-proiezione.excerpt': 'Im nächsten Jahr wird die durchschnittliche Prämie 488 Franken betragen (+23, +5%); in 14 Jahren könnte sie 966,20 Franken erreichen, wenn der jährliche Trend von 5% anhält.',
     'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Schweizer Familie überprüft Gesundheitsausgaben und Krankenkassenprämien am Küchentisch',
+    'blog.article.mercato-lavoro-settembre-2026.title': 'Die Lage auf dem Arbeitsmarkt im September 2026',
+    'blog.article.mercato-lavoro-settembre-2026.excerpt': 'Im September 2026 verzeichnete die Schweiz 140’480 Arbeitslose bei einer unveränderten Quote von 3%. Dies entspricht einem monatlichen Rückgang von 0,8%, aber einem jährlichen Anstieg von 5,4%. Bei den RAV waren 44’199 offene Stellen gemeldet.',
+    'blog.article.mercato-lavoro-settembre-2026.imageAlt': 'Skyline einer Schweizer Stadt, die den Arbeitsmarkt und die nationale Wirtschaft symbolisiert.',
+    'blog.article.effettivo-esercito-2026-calo.title': 'Der Armeebestand ist jetzt ausreichend, wird aber bis 2030 sinken',
+    'blog.article.effettivo-esercito-2026-calo.excerpt': 'Am 1. März 2026 zählt die Armee 147 017 Angehörige des Militärs, was für die regulatorischen 100 000 ausreicht, aber es wird erwartet, dass sie bis 2030 unter 130 000 sinken wird.',
+    'blog.article.effettivo-esercito-2026-calo.imageAlt': 'Blick auf die Kasernen der Schweizer Armee nahe Lugano mit Soldaten im Training',
 };
 
 export default blogMetaChDe;
