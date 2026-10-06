@@ -32,7 +32,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { isTopicGateAbortedUrl, recordTopicGateAbortedUrl } from './lib/article-topic-selector.mjs';
 import { BODY_ONLY_FIELDS, classifyBody2Payload } from './lib/body2-payload-verdict.mjs';
@@ -113,7 +113,15 @@ export function measureArticleWaste({ fixture = JSON.parse(fs.readFileSync(FIXTU
   return { rows, total, salvage, earlyGate };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   const result = measureArticleWaste();
   if (process.argv.includes('--json')) {
     console.log(JSON.stringify(result, null, 2));
