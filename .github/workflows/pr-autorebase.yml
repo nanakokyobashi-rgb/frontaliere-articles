@@ -79,10 +79,7 @@ jobs:
         with:
           # Serve l'intera storia per fare `git merge origin/main` sui branch.
           fetch-depth: 0
-          # Niente `filter:` esplicito: in `actions/checkout` un filtro non
-          # vuoto SOVRASCRIVE `sparse-checkout`, cioè con entrambi il checkout
-          # materializzava comunque content/, dist/ e public/. Lo sparse
-          # checkout fa già da sé un clone parziale senza blob.
+          filter: blob:none
           sparse-checkout: |
             /*
             !/content
@@ -148,15 +145,15 @@ jobs:
           exit "$rc"
 
       # Una PR del ciclo in conflitto non riceve più eventi `pull_request`: se
-      # nel frattempo non ha più niente da consegnare (riapplicava una PR ormai
-      # mergiata, oppure il fixer ha chiuso il suo hand-off con `already-fixed`)
-      # resta aperta senza un
-      # proprietario — `recycle-stale-prs` vuole `stale-review` da 24 ore e la
-      # sorgente OPEN. Misurato il 2026-10-06: #2205 ferma 13 ore e #2246 ferma
-      # 4 ore, entrambe con l'auto-merge armato. Gira DOPO l'autorebase, che
-      # ricalcola `has-conflicts` con merge-tree, e anche se quello fallisce.
-      # GITHUB_TOKEN basta: chiudere una PR non deve avviare nessun workflow,
-      # e il branch non viene cancellato.
+      # nel frattempo il fixer ha chiuso il suo hand-off con `already-fixed`
+      # (il contenuto era già su main, nessuna PR sostitutiva) resta aperta
+      # senza un proprietario — `recycle-stale-prs` vuole `stale-review` da 24
+      # ore e la sorgente OPEN. Misurato il 2026-10-06: #2246 e #2249 ferme da
+      # ore con l'auto-merge armato. Gira DOPO l'autorebase, che ricalcola
+      # `has-conflicts` con merge-tree, e anche se quello fallisce: lo sweep
+      # rifà comunque merge-tree da sé prima di ogni decisione. GITHUB_TOKEN
+      # basta: chiudere una PR non deve avviare nessun workflow, e il branch
+      # non viene cancellato.
       - name: Close superseded conflicting loop PRs (zero-Claude)
         if: always()
         continue-on-error: true

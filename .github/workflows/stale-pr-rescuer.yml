@@ -258,14 +258,20 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          filter: blob:none
           # La prova usa solo plumbing (`git fetch`, `git merge-tree`), che
-          # lavora sugli oggetti e non sul working tree. Senza sparse checkout
-          # `actions/checkout` materializzerebbe l'intero corpus — `content/`
-          # (migliaia di file), `dist/`, `public/` — e il job da 8 minuti
-          # scadrebbe prima dello scan, portandosi dietro anche le classi A–E.
-          # Niente `filter:` esplicito: in `actions/checkout` un filtro non
-          # vuoto SOVRASCRIVE `sparse-checkout`. Lo sparse checkout fa già da
-          # sé un clone parziale senza blob.
+          # lavora sugli oggetti e non sul working tree: storia completa per
+          # raggiungere il merge-base, nessun blob finché non serve, e nel
+          # working tree soltanto `.github/workflows`.
+          #
+          # È la STESSA terna di `pr-autorebase.yml` — `fetch-depth: 0`,
+          # `filter: blob:none`, `sparse-checkout` — che lì gira in produzione
+          # da mesi, e non una scelta nuova da verificare a ragionamento:
+          # misurato il 2026-10-06 sulle run 37406320393 e 37404569346 di
+          # pr-autorebase, lo step `Checkout` dura 46 s e 51 s, con un working
+          # tree più largo di questo. Il job qui ha 8 minuti. Il test
+          # `i checkout con storia completa usano la terna misurata` lega i due
+          # workflow: cambiarne uno solo lo rende rosso.
           sparse-checkout: |
             .github/workflows
           sparse-checkout-cone-mode: false

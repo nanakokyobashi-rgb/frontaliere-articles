@@ -77,7 +77,7 @@ import {
 } from './check-issue-already-resolved.mjs';
 import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
-import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
+import { classifyMergeTreeStatus, parseMergeTreeConflicts } from './pr-autorebase.mjs';
 import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
 import { hasClaimLabel } from './stale-claim-detector.mjs';
 
@@ -249,7 +249,7 @@ export function latestConflictLabelEventAt(events) {
  * @param {number|string|null} p.conflictDetectedAt ultima applicazione corrente di `has-conflicts`
  * @returns {{ close: boolean, reason: string, handoff?: number, active?: number }}
  */
-export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt }) {
+export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt, conflictFiles }) {
   if (!handoff) return { close: false, reason: 'no-handoff' };
   if (conflictHandoffOriginPr(handoff.title) !== Number(pr?.number)) return { close: false, reason: 'handoff-of-another-pr' };
   const expectedHead = conflictHandoffExpectedHead(handoff.body);
@@ -282,7 +282,49 @@ export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, sibl
     return { close: false, reason: 'verdict-not-after-handoff' };
   }
   if (outcome.at <= conflictAt) return { close: false, reason: 'verdict-before-current-conflict' };
+  // Prova fresca: i file in conflitto ADESSO (merge-tree di questa passata)
+  // devono essere fra quelli dell'hand-off che il fixer ha lavorato.
+  if (!conflictMatchesHandoff(conflictFiles, handoffConflictFiles(handoff.body))) {
+    return { close: false, reason: 'conflict-differs-from-handoff' };
+  }
   return { close: true, reason: 'handoff-already-fixed', handoff: Number(handoff.number) };
+}
+
+/**
+ * I file in conflitto elencati nel corpo dell'hand-off da pr-autorebase
+ * (`buildConflictHandoffIssue`: la sezione «File in conflitto:», una voce
+ * `- \`path\`` per riga), o null se la sezione manca o è il segnaposto
+ * «elenco non disponibile». Pura.
+ */
+export function handoffConflictFiles(body) {
+  const text = String(body || '');
+  const at = text.indexOf('File in conflitto:');
+  if (at < 0) return null;
+  const files = [];
+  for (const line of text.slice(at).split('\n').slice(1)) {
+    const match = /^- `([^`]+)`$/.exec(line.trim());
+    if (match) files.push(match[1]);
+    else if (line.trim() !== '' && files.length > 0) break;
+    else if (line.trim() !== '') return null;
+  }
+  return files.length > 0 ? files : null;
+}
+
+/**
+ * Il conflitto di ADESSO è quello che il fixer ha giudicato? La label
+ * `has-conflicts` non lo dice: pr-autorebase non la riscrive quando c'è già,
+ * quindi può venire da un conflitto precedente — rientrato senza che nessuno
+ * lo vedesse e poi tornato diverso, su un main che nel frattempo ha cambiato
+ * proprio il contenuto giudicato «già su main». La prova fresca è il
+ * merge-tree di questa passata: ogni file oggi in conflitto deve essere fra
+ * quelli che l'hand-off elencava. Un file NUOVO in conflitto è un conflitto
+ * che il fixer non ha mai visto. Pura.
+ */
+export function conflictMatchesHandoff(currentFiles, handoffFiles) {
+  if (!Array.isArray(currentFiles) || currentFiles.length === 0) return false;
+  if (!Array.isArray(handoffFiles) || handoffFiles.length === 0) return false;
+  const known = new Set(handoffFiles);
+  return currentFiles.every((file) => known.has(file));
 }
 
 /** Fra gli hand-off della PR (una delle due forme del titolo), il più recente. Pura. */
@@ -402,10 +444,11 @@ function rereadLivePr(pr) {
  * fetch di `main` e della ref della PR, poi `git merge-tree`. Stesso oracolo
  * di pr-autorebase (`classifyMergeTreeStatus`). Qualunque errore → `unknown`.
  */
-function mergeTreeState(pr) {
+function mergeTreeProof(pr) {
+  const unknown = { state: 'unknown', files: [] };
   const git = (args) => spawnSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: GIT_TIMEOUT_MS });
   const head = String(pr.headRefOid || '').toLowerCase();
-  if (!/^[0-9a-f]{40}$/.test(head)) return 'unknown';
+  if (!/^[0-9a-f]{40}$/.test(head)) return unknown;
   // Ref temporanea e non lo SHA dello snapshot: dopo un push il clone può
   // avere ancora l'oggetto VECCHIO, e fondere quello darebbe la prova di una
   // HEAD che non è più la PR. Si fonde ciò che il fetch ha portato adesso, e
@@ -413,13 +456,20 @@ function mergeTreeState(pr) {
   const ref = `refs/sweep/pr-${Number(pr.number)}-head`;
   const fetched = git(['fetch', '--quiet', '--no-tags', 'origin',
     `+refs/heads/${BASE_BRANCH}:refs/remotes/origin/${BASE_BRANCH}`, `+refs/pull/${Number(pr.number)}/head:${ref}`]);
-  if (fetched.status !== 0) return 'unknown';
+  if (fetched.status !== 0) return unknown;
   const resolved = git(['rev-parse', '--verify', '--quiet', ref]);
-  if (resolved.status !== 0 || !mergeTreeRefMatches(resolved.stdout, head)) return 'unknown';
-  return classifyMergeTreeStatus(git(['merge-tree', '--write-tree', `refs/remotes/origin/${BASE_BRANCH}`, ref]).status);
+  if (resolved.status !== 0 || !mergeTreeRefMatches(resolved.stdout, head)) return unknown;
+  const merged = git(['merge-tree', '--write-tree', `refs/remotes/origin/${BASE_BRANCH}`, ref]);
+  const state = classifyMergeTreeStatus(merged.status);
+  return { state, files: state === 'conflicted' ? parseMergeTreeConflicts(String(merged.stdout || '')) : [] };
 }
 
-function decide(pr, openPrs) {
+/** Solo lo stato della prova, per le guardie che non decidono sui file. */
+function mergeTreeState(pr) {
+  return mergeTreeProof(pr).state;
+}
+
+function decide(pr, openPrs, conflictFiles) {
   const handoffs = readHandoffs(pr.number);
   if (!Array.isArray(handoffs)) return { close: false, reason: 'handoffs-unreadable' };
   if (handoffs.length >= HANDOFF_SEARCH_LIMIT) return { close: false, reason: 'handoffs-truncated' };
@@ -428,7 +478,7 @@ function decide(pr, openPrs) {
   if (conflictDetectedAt === null) return { close: false, reason: 'conflict-detection-unreadable' };
   const comments = handoff ? readIssueComments(handoff.number) : null;
   const siblings = handoffs.filter((issue) => conflictHandoffOriginPr(issue?.title) === Number(pr.number));
-  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt });
+  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt, conflictFiles });
 }
 
 function main() {
@@ -464,12 +514,13 @@ function main() {
       console.log(`PR #${listed.number}: cambiata o non più candidata alla rilettura → resta aperta.`);
       continue;
     }
-    const treeState = mergeTreeState(pr);
+    const proof = mergeTreeProof(pr);
+    const treeState = proof.state;
     if (!mergeTreeAllowsClose(treeState)) {
       console.log(`PR #${pr.number}: merge-tree ${treeState} sulla HEAD corrente → conflitto non confermato, resta aperta.`);
       continue;
     }
-    const decision = decide(pr, openPrs);
+    const decision = decide(pr, openPrs, proof.files);
     if (!decision.close) {
       console.log(`PR #${pr.number}: in conflitto, resta aperta (${decision.reason}).`);
       continue;
@@ -486,8 +537,9 @@ function main() {
     // La conferma lavora sull'oggetto RILETTO (titolo, body, label, base di
     // adesso) e ricalcola anche merge-tree: main può essersi mosso.
     const live = rereadLivePr(pr);
-    const freshOpenPrs = live && mergeTreeAllowsClose(mergeTreeState(live)) ? listOpenPrs() : null;
-    const confirmed = freshOpenPrs ? decide(live, freshOpenPrs) : null;
+    const liveProof = live ? mergeTreeProof(live) : null;
+    const freshOpenPrs = liveProof && mergeTreeAllowsClose(liveProof.state) ? listOpenPrs() : null;
+    const confirmed = freshOpenPrs ? decide(live, freshOpenPrs, liveProof.files) : null;
     if (!confirmed?.close || confirmed.reason !== decision.reason) {
       console.log(`PR #${pr.number}: stato cambiato fra la decisione e la chiusura (${confirmed?.reason || 'PR non più candidata'}) → resta aperta.`);
       continue;

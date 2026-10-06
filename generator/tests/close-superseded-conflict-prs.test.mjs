@@ -18,7 +18,9 @@ import {
   MAX_CLOSES_PER_RUN,
   SUPERSEDED_MARKER,
   closingComment,
-  decideHandoffAlreadyFixed,
+  conflictMatchesHandoff,
+  decideHandoffAlreadyFixed as decideHandoffAlreadyFixedRaw,
+  handoffConflictFiles,
   handoffTitleQuery,
   isSweepCandidate,
   isTrustedFixerOutcome,
@@ -34,6 +36,10 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const HEAD = '244f876cdaaa64fa9a5530933f6356de47202ab8';
 const CONFLICT_DETECTED_AT = '2026-10-05T23:06:51Z';
+// L'hand-off di fixture elenca `scripts/ci/x.mjs`: per default il conflitto
+// di adesso è proprio quello.
+const SAME_CONFLICT = ['scripts/ci/x.mjs'];
+const decideHandoffAlreadyFixed = (args) => decideHandoffAlreadyFixedRaw({ conflictFiles: SAME_CONFLICT, ...args });
 
 const loopPr = (over = {}) => ({
   number: 2246,
@@ -129,7 +135,7 @@ test('merge-tree vale solo sulla ref realmente scaricata', () => {
   assert.equal(mergeTreeRefMatches(HEAD.slice(0, 12), HEAD), false, 'un prefisso non è un OID');
   assert.equal(mergeTreeRefMatches('', HEAD), false);
   const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
-  const fn = src.slice(src.indexOf('function mergeTreeState(pr)'), src.indexOf('function decide(pr, openPrs)'));
+  const fn = src.slice(src.indexOf('function mergeTreeProof(pr)'), src.indexOf('function decide(pr, openPrs, conflictFiles)'));
   assert.ok(fn.indexOf('mergeTreeRefMatches(') < fn.indexOf("'merge-tree'"), 'il confronto dell\'OID deve precedere merge-tree');
   assert.equal(/'merge-tree', '--write-tree', [^\]]*\bhead\b\]/.test(fn), false, 'merge-tree deve fondere la ref scaricata, non lo SHA dello snapshot');
 });
@@ -140,7 +146,7 @@ test('l\'ultima cosa prima della chiusura è una rilettura della PR', () => {
   const closeAt = main.indexOf("gh(['pr', 'close'");
   const finalCheck = main.lastIndexOf('rereadLivePr(live)', closeAt);
   assert.notEqual(finalCheck, -1, 'manca la rilettura finale');
-  assert.ok(finalCheck > main.indexOf('decide(live, freshOpenPrs)'), 'la rilettura finale deve venire DOPO la decisione di conferma');
+  assert.ok(finalCheck > main.indexOf('decide(live, freshOpenPrs, liveProof.files)'), 'la rilettura finale deve venire DOPO la decisione di conferma');
   const between = main.slice(finalCheck, closeAt);
   assert.equal(/\b(decide|listOpenPrs|mergeTreeState)\(/.test(between), false, 'niente letture lunghe fra la rilettura finale e la close');
   // Nella stessa guardia, PRIMA della rilettura: merge-tree contro il main di adesso.
@@ -233,6 +239,34 @@ test('caso 2 — una riapplicazione in volo ha la precedenza sul verdetto', () =
   }).reason;
   assert.equal(reason({ number: 2290, headRefName: 'fix/issue-2250', body: '' }), 'reapply-in-flight');
   assert.equal(reason({ number: 2291, headRefName: 'codex/x', body: 'Supersedes #2246' }), 'reapply-in-flight');
+});
+
+test('caso 2 — il conflitto di adesso deve essere quello che il fixer ha giudicato', () => {
+  // Review di #2274: la label `has-conflicts` può venire da un conflitto
+  // precedente (pr-autorebase non la riscrive se c'è già). La prova fresca è
+  // il merge-tree di questa passata, confrontato coi file dell'hand-off.
+  const pr = loopPr();
+  const handoff = handoffOf(pr);
+  assert.deepEqual(handoffConflictFiles(handoff.body), ['scripts/ci/x.mjs']);
+  const reason = (conflictFiles) => decideHandoffAlreadyFixed({
+    pr, handoff, comments: [verdict('already-fixed')], openPrs: [pr], conflictDetectedAt: CONFLICT_DETECTED_AT, conflictFiles,
+  }).reason;
+  assert.equal(reason(['scripts/ci/x.mjs']), 'handoff-already-fixed');
+  // Un file nuovo in conflitto: il fixer non l'ha mai visto.
+  assert.equal(reason(['scripts/ci/x.mjs', 'generator/scripts/altro.mjs']), 'conflict-differs-from-handoff');
+  assert.equal(reason(['generator/scripts/altro.mjs']), 'conflict-differs-from-handoff');
+  // Senza una prova fresca dei file non si chiude.
+  assert.equal(reason([]), 'conflict-differs-from-handoff');
+  assert.equal(reason(undefined), 'conflict-differs-from-handoff');
+  // Un sottoinsieme va bene: parte del conflitto è rientrata, niente di nuovo.
+  const { body } = buildConflictHandoffIssue({ num: pr.number, branch: pr.headRefName, head: pr.headRefOid, files: ['a.mjs', 'b.mjs'] });
+  assert.deepEqual(handoffConflictFiles(body), ['a.mjs', 'b.mjs']);
+  assert.equal(conflictMatchesHandoff(['b.mjs'], handoffConflictFiles(body)), true);
+  // Hand-off senza elenco (segnaposto di pr-autorebase) o senza sezione: nessuna prova.
+  const { body: noList } = buildConflictHandoffIssue({ num: pr.number, branch: pr.headRefName, head: pr.headRefOid, files: [] });
+  assert.equal(handoffConflictFiles(noList), null);
+  assert.equal(handoffConflictFiles('nessuna sezione'), null);
+  assert.equal(conflictMatchesHandoff(['a.mjs'], null), false);
 });
 
 test('caso 2 — un marker incollato da fuori non chiude niente', () => {
@@ -367,42 +401,47 @@ test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto'
   const before = main.slice(0, closeAt);
   // Prima decisione sullo snapshot, conferma sull'oggetto RILETTO: un body
   // cambiato fra le due letture non deve essere ignorato.
-  assert.ok(before.includes('decide(pr, openPrs)'), 'manca la prima decisione');
+  assert.ok(before.includes('decide(pr, openPrs, proof.files)'), 'manca la prima decisione');
   // `mergeable=UNKNOWN` è la risposta tipica (main si muove ogni pochi
   // minuti): scrematura e riletture delle invarianti lo ammettono, altrimenti
   // lo sweep resterebbe inerte. Il conflitto lo decide SOLO merge-tree, che
   // deve stare fra la rilettura e ogni decisione.
   assert.equal(src.split('allowUnknown: true').length - 1, 2, '`allowUnknown`: scrematura della lista e rilettura delle invarianti, nient\'altro');
   const reread = before.indexOf('const pr = rereadLivePr(listed);');
-  const tree = before.indexOf('mergeTreeState(pr)');
-  const first = before.indexOf('decide(pr, openPrs)');
+  const tree = before.indexOf('mergeTreeProof(pr)');
+  const first = before.indexOf('decide(pr, openPrs, proof.files)');
   assert.ok(reread >= 0 && reread < tree && tree < first, 'ordine atteso: rilettura delle invarianti, merge-tree, decisione');
   assert.match(before.slice(tree, first), /if \(!mergeTreeAllowsClose\(treeState\)\) \{[\s\S]*?continue;/, 'senza merge-tree «conflicted» non si arriva alla decisione');
   assert.ok(before.includes('const live = rereadLivePr(pr);'), 'manca la rilettura della PR');
-  assert.ok(before.includes('decide(live, freshOpenPrs)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
+  assert.ok(before.includes('decide(live, freshOpenPrs, liveProof.files)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
   assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 3, 'merge-tree va ricalcolato prima della decisione, prima della conferma e nella guardia finale');
   assert.ok(before.includes('confirmed.reason !== decision.reason'), 'la conferma deve reggere la stessa ragione');
   // La rilettura chiede gli stessi campi della lista, base compresa.
   assert.match(src, /const PR_FIELDS = '[^']*baseRefName[^']*title[^']*|const PR_FIELDS = '[^']*title[^']*baseRefName/);
 });
 
-test('i checkout sparsi dei due workflow non hanno un `filter` che li annulla', () => {
-  // `actions/checkout`: «filter … Overrides sparse-checkout if set». Con
-  // entrambi il checkout materializza comunque content/, dist/ e public/, e
-  // il job del rescuer (8 minuti) scade prima dello scan.
-  for (const file of ['stale-pr-rescuer.yml', 'pr-autorebase.yml']) {
+test('i checkout con storia completa usano la terna misurata', () => {
+  // `fetch-depth: 0` + `filter: blob:none` + `sparse-checkout` è la terna con
+  // cui pr-autorebase gira in produzione: 46 s e 51 s di Checkout misurati il
+  // 2026-10-06 (run 37406320393 e 37404569346). Due review consecutive hanno
+  // chiesto prima di togliere il filtro e poi di rimetterlo: qui non si
+  // ragiona, si lega il rescuer alla configurazione misurata.
+  const checkoutSteps = (file) => {
     const lines = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8').split('\n');
-    const uses = lines.map((l, i) => (/^\s+uses: actions\/checkout@/.test(l) ? i : -1)).filter((i) => i >= 0);
-    assert.ok(uses.length > 0, `${file}: nessun checkout trovato`);
-    let sparse = 0;
-    for (const at of uses) {
+    const steps = [];
+    lines.forEach((line, at) => {
+      if (!/^\s+uses: actions\/checkout@/.test(line)) return;
       const end = lines.findIndex((l, i) => i > at && /^\s+- (name|uses|id|run):/.test(l));
-      const step = lines.slice(at, end < 0 ? lines.length : end).filter((l) => !/^\s*#/.test(l)).join('\n');
-      if (!/^\s+sparse-checkout: /m.test(step)) continue;
-      sparse += 1;
-      assert.equal(/^\s+filter: /m.test(step), false, `${file}: un checkout ha sia \`filter\` sia \`sparse-checkout\`, e il primo annulla il secondo`);
-    }
-    assert.ok(sparse > 0, `${file}: atteso almeno un checkout sparso`);
+      steps.push(lines.slice(at, end < 0 ? lines.length : end).filter((l) => !/^\s*#/.test(l)).join('\n'));
+    });
+    return steps.filter((step) => /^\s+fetch-depth: 0$/m.test(step));
+  };
+  for (const file of ['pr-autorebase.yml', 'stale-pr-rescuer.yml']) {
+    const full = checkoutSteps(file);
+    assert.equal(full.length, 1, `${file}: atteso UN checkout con storia completa, trovati ${full.length}`);
+    assert.match(full[0], /^\s+filter: blob:none$/m, `${file}: manca il clone parziale senza blob`);
+    assert.match(full[0], /^\s+sparse-checkout: \|$/m, `${file}: manca lo sparse checkout`);
+    assert.match(full[0], /^\s+sparse-checkout-cone-mode: false$/m, `${file}: i pattern sono non-cone`);
   }
 });
 
