@@ -144,12 +144,12 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
   }
 });
 
-// Decisione del proprietario del 2026-09-25: Codex resta l'ultimo tier nelle
-// fasi 2d/2e. H7 del 2026-10-05 aggiunge la riserva nella cascata 2b quando
-// DeepL/Azure non servono piu' la run; il broker parte dopo Argos bulk e prima
-// della 2b. L'artifact arriva dal lockstep del sito, quindi il test deve seguire
-// entrambe le decisioni e non una copia storica della posizione del broker.
-test('translate-pending: Codex entra dopo Argos, con riserva 2b e ultimo tier 2d/2e', () => {
+// Decisione del proprietario del 2026-10-06: Codex è la prima lane di ogni
+// cascata di traduzione; DeepL/Azure/MT restano ripieghi nell'ordine storico.
+// Il broker parte dopo Argos bulk e prima della 2b. L'artifact arriva dal
+// lockstep del sito, quindi il test segue la capacità del broker, non una
+// copia storica della posizione del tier.
+test('translate-pending: broker dopo Argos e Codex primario in 2b/2d/2e', () => {
   const source = read(TRANSLATION_WORKFLOW);
   const lines = source.split('\n');
   const setupIndex = lines.findIndex((line) => /^\s*-?\s*uses:\s*\.\/\.github\/actions\/setup-claude-haiku-fallback\s*$/.test(line));
@@ -183,9 +183,8 @@ test('translate-pending: Codex entra dopo Argos, con riserva 2b e ultimo tier 2d
     );
     assert.match(block, /FREE_TRANSLATE_CODEX_MAX_MS:\s*"?\d+"?/, 'per-run time budget missing');
   }
-  assert.doesNotMatch(consumers[0], /FREE_TRANSLATE_CODEX_TIER:/, 'the 2b reserve keeps the normal tier position');
-  for (const block of consumers.slice(1)) {
-    assert.match(block, /FREE_TRANSLATE_CODEX_TIER:\s*last/, 'Codex must sit at the end of the 2d/2e cascades');
+  for (const block of consumers) {
+    assert.doesNotMatch(block, /FREE_TRANSLATE_CODEX_TIER:/, 'production translation callers must use the Codex-primary default');
   }
   assert.doesNotMatch(source, /^\s+AI_MODELS_PREFER:/m);
 });

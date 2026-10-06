@@ -271,18 +271,11 @@ export function summarizeProviderPreflight(providers, generatedAt = new Date().t
 
 function defaultPreflightModels() {
   const models = [...DEFAULT_CHAIN];
-  // Codex is deliberately absent from DEFAULT_CHAIN because it is reserved
-  // for the article-body path. Generate Blog activates it through the
-  // action-owned broker, so include that lane only when the action handed this
-  // step a broker socket. FAQ and other callers without the socket retain the
-  // normal shared roster.
-  if (String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim()) {
-    models.push(AI_MODELS.CODEX_CLI_PRIMARY);
-  }
-  // Claude is deliberately absent from DEFAULT_CHAIN because it is reserved
-  // for the article-body preference. When the action has loaded the RC gate
-  // and the workflow passed its OAuth token, include that explicit fallback so
-  // preflight cannot reject a run whose only capable lane is Claude.
+  // Codex is already the first DEFAULT_CHAIN entry. The provider probe reports
+  // it as credential-missing when this caller has no broker socket, while the
+  // router removes it and immediately resumes the historical fallback order;
+  // do not append it here or a broker-ready run would count the lane twice.
+  // Claude remains an explicit article-body fallback rather than a shared tier.
   if (getApiKeyForProvider(getProviderForModel(AI_MODELS.CLAUDE_CLI_HAIKU))) {
     models.push(AI_MODELS.CLAUDE_CLI_HAIKU);
   }

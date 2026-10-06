@@ -22,7 +22,8 @@ name: Batch FAQ Generation
 #     MyMemory. With the broker socket, free-translate.mjs's Codex Luna Max
 #     tier serves those fields once DeepL and Azure are out, capped at
 #     FREE_TRANSLATE_CODEX_MAX_CALLS per process. No AI_MODELS_PREFER: FAQ
-#     generation itself stays on the free cascade.
+#     generation uses the router's Codex Luna Max primary when the action-owned
+#     broker is ready, with the existing free cascade as the automatic fallback.
 #   - Local Opus-MT is enabled for both FAQ translation passes. The model cache
 #     is shared with translate-pending, and the local tier runs before MyMemory
 #     for EN/DE/FR. It fails closed when the model cannot load, so the locale
@@ -169,11 +170,25 @@ jobs:
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
 
+      # Codex Luna Max is the primary FAQ/translation lane. Its broker must
+      # exist before provider preflight: DEFAULT_CHAIN starts with Codex, and
+      # a preflight without its action-owned socket can report the whole roster
+      # unavailable before the fallback lane is ready. Its idle TTL matches
+      # the job's 360-minute timeout because translation may reach this tier
+      # only after DeepL and Azure have been exhausted.
+      - id: setup_claude_haiku_fallback
+        if: steps.mode.outputs.dry != 'true'
+        uses: ./.github/actions/setup-claude-haiku-fallback
+        with:
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
+          broker_idle_ttl_ms: '21600000'
+
       - name: Verify a model provider is actually available
         id: provider_preflight
         if: steps.mode.outputs.dry != 'true'
         env:
           PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: node generator/scripts/lib/provider-preflight.mjs
 
       - name: Upload provider preflight report
@@ -195,21 +210,6 @@ jobs:
       # the first run would otherwise die on ENOENT when it saves progress.
       - name: Ensure progress directory exists
         run: mkdir -p data
-
-      # Codex Luna Max broker for the translation tier only (see the header).
-      # Its idle TTL matches the job's 360-minute timeout: the tier engages only
-      # once DeepL and Azure run out, which can be hours into the first step,
-      # and the second step starts after it. With the default 30 minutes the
-      # socket vanished during that silence and the tier was skipped without a
-      # word. The cleanup step below still ends the broker. It never fails the
-      # job — without it the tier is skipped and the cascade is the one it
-      # always was. Dry runs make no AI calls, so they skip it.
-      - id: setup_claude_haiku_fallback
-        if: steps.mode.outputs.dry != 'true'
-        uses: ./.github/actions/setup-claude-haiku-fallback
-        with:
-          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          broker_idle_ttl_ms: '21600000'
 
       - name: Run batch FAQ generation
         id: faq

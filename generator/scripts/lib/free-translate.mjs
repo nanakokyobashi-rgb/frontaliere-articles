@@ -2,12 +2,9 @@
  * Free Translation Cascade — Reusable multi-service translation utility.
  *
  * Cascade, in the order `freeTranslate` tries the tiers:
- *   1. DeepL Free API        (DEEPL_API_KEY / DEEPL_API_KEY_2, rotated on 456/429)
- *   2. Azure Translator      (AZURE_TRANSLATOR_KEY / _2, F0 free tier)
- *   3. Codex Luna Max        (ONLY when DeepL and Azure are both out for the run —
- *                             keys exhausted or not configured — and the Codex
- *                             broker lane is present; bounded per process, see
- *                             `translateWithCodex`)
+ *   1. Codex Luna Max       (private OAuth broker, bounded per process)
+ *   2. DeepL Free API       (DEEPL_API_KEY / DEEPL_API_KEY_2, rotated on 456/429)
+ *   3. Azure Translator     (AZURE_TRANSLATOR_KEY / _2, F0 free tier)
  *   4. Google Cloud Translation (service-account ADC/OAuth fallback, hard-capped at 16K chars/day)
  *   5. Local Opus-MT, self-hosted LibreTranslate (EN/DE/FR targets)
  *   6. MyMemory API
@@ -16,9 +13,8 @@
  *   9. Lingva, Mozhi+Google, unofficial Google Translate, Mozhi+DeepL,
  *      Mozhi+Yandex (local/dev tiers, often blocked from Actions IPs)
  *
- * With FREE_TRANSLATE_CODEX_TIER=last, Codex moves from position 3 to the very
- * end: it serves only a text that every tier above left untranslated, with no
- * DeepL/Azure condition (translate-pending, Phases 2d/2e, after Argos).
+ * `FREE_TRANSLATE_CODEX_TIER=last` remains a narrow compatibility override for
+ * an explicitly opted-in legacy caller; production workflows no longer set it.
  *
  * Features:
  *   - Instance health tracking: remembers which instances are down to skip them
@@ -229,13 +225,14 @@ const DEEPL_LANG_MAP = { it: 'IT', en: 'EN', de: 'DE', fr: 'FR' };
  */
 export async function getTranslationCascadeConfigurationKey() {
   return JSON.stringify({
-    // version 4 (2026-09-29): Google Cloud can use the scoped service-account
+    // version 5 (2026-10-06): Codex is the first translation tier; Google Cloud
+    // can use the scoped service-account
     // token from GOOGLE_APPLICATION_CREDENTIALS; memo keys from before that
     // capability must not hide a retry when ADC becomes available. `codex` ora
     // vale false anche con lane fermata,
     // budget esaurito o modello non disponibile. I memo scritti con la v2, che
     // a lane ferma diceva ancora disponibile, non devono combaciare.
-    version: 4,
+    version: 5,
     deepl: DEEPL_API_KEYS.length > 0,
     azure: AZURE_TRANSLATOR_KEYS.length > 0,
     googleCloud: _gcOAuthAvailable || _gcServiceAccountAvailable,
@@ -1212,26 +1209,14 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
   return '';
 }
 
-// ── Codex Luna Max (decisione del proprietario, 2026-09-25) ─────────────────
+// ── Codex Luna Max (decisione del proprietario, 2026-09-25) ────────────────
 //
-// «Quando deepl e azure translation sono fuori quota USA codex luna Max».
-//
-// Due posizioni, scelte per processo con FREE_TRANSLATE_CODEX_TIER:
-//   - default: subito dopo DeepL e Azure, con le condizioni qui sotto;
-//   - `last`: in coda alla cascata, per il solo testo che OGNI altro tier ha
-//     lasciato non tradotto, senza condizioni su DeepL/Azure. La usa
-//     translate-pending nelle fasi 2d/2e, dopo Argos (decisione del
-//     proprietario del 2026-09-25: «Per il translate pending aggiungi codex ma
-//     dopo argos e i sistemi che non consumano quota»).
-//
-// Nella posizione di default il
-// tier entra SOLO quando DeepL e Azure non possono piu' servire la run: ogni
-// chiave DeepL esaurita (456) o il circuit-breaker 429 scattato, E ogni chiave
-// Azure esaurita (401/403/429) — oppure i due non sono configurati. Un errore
-// transitorio di DeepL su UN testo non basta: quel testo scende ai tier free
-// come prima. Misura sul corpus, batch-faq-articles run 36097655591
-// (2026-09-25): «DeepL: 0/2 keys active», «Azure: 0/2 keys active» (401),
-// Google Cloud 403 su 288 chiamate su 288, e 288 campi su 288 finiti su MyMemory.
+// Regola aggiornata il 2026-10-06: Codex viene tentato per primo. Se broker/auth,
+// timeout o quota lo rendono
+// inutilizzabile, ai-models.mjs apre un circuito per run e questa cascata
+// prosegue immediatamente con DeepL, Azure e gli altri tier nell'ordine
+// storico. `FREE_TRANSLATE_CODEX_TIER=last` è mantenuto solo per un caller
+// legacy esplicito, non è usato dai workflow del corpus.
 //
 // La lane e' quella del corpo articolo: il broker che
 // `.github/actions/setup-claude-haiku-fallback` avvia quando c'e'
@@ -1394,11 +1379,11 @@ let _codexLane = null;
 /** @type {((messages: Array<{role: string, content: string}>, opts: object) => Promise<string>) | null} */
 let _codexCallForTests = null;
 
-/** Posizione del tier in questo processo: `last` o quella di default. */
+/** Posizione del tier in questo processo: `primary` o legacy `last`. */
 function _codexTierPosition() {
   return String(process.env.FREE_TRANSLATE_CODEX_TIER ?? '').trim().toLowerCase() === 'last'
     ? 'last'
-    : 'after-premium';
+    : 'primary';
 }
 
 function _codexBudget(name, fallback) {
@@ -1502,7 +1487,7 @@ function _cleanCodexTranslation(raw, source, marker) {
   return normalizeBlock(out);
 }
 
-async function translateWithCodex(text, sourceLang, targetLang, outcome = null, position = 'after-premium') {
+async function translateWithCodex(text, sourceLang, targetLang, outcome = null, position = 'primary') {
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   // La cascata chiama il tier in entrambe le posizioni: risponde solo quella
@@ -1636,7 +1621,7 @@ async function _translateGroupWithCodex(group) {
     _codexEngagedLogged = true;
     const why = _codexTierPosition() === 'last'
       ? 'testi che nessun altro tier ha tradotto'
-      : 'DeepL e Azure fuori gioco per questa run';
+      : 'corsia primaria prima dei provider di traduzione';
     console.log(`🤖 [codex] ${why}: traduzioni via Codex Luna Max (budget ${maxCalls} chiamate, ${Math.round(maxMs / 1000)}s)`);
   }
   // Testi identici in coda diventano una voce sola.
@@ -2265,23 +2250,19 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   }
 
   // ── CI-PROVEN TIERS (work from GitHub Actions) ─────────────────────────────
-  // Order: best quality first for short text (titles), then volume handlers for long text (descriptions)
+  // Codex is the owner-approved primary. A missing broker, disabled lane,
+  // timeout or quota opens the router's in-run circuit and falls through to
+  // the existing translation providers below without waiting on each field.
+  const t0 = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome, 'primary'));
+  if (t0) return finalize(t0);
 
-  // Tier 1: DeepL Free API (best quality, if API key set)
+  // Tier 1 fallback: DeepL Free API (best quality, if API key set)
   const t1 = await tryTier('deepl', () => translateWithDeepL(clean, sourceLang, targetLang, _outcome));
   if (t1) return finalize(t1);
 
-  // Tier 2: Azure Translator (F0 Free — 2M chars/month, near-DeepL quality)
+  // Tier 2 fallback: Azure Translator (F0 Free — 2M chars/month, near-DeepL quality)
   const t1b = await tryTier('azure', () => translateWithAzure(clean, sourceLang, targetLang, _outcome));
   if (t1b) return finalize(t1b);
-
-  // Tier 2b: Codex Luna Max — solo con DeepL e Azure fuori gioco per la run e la
-  // lane Codex presente, entro il budget del processo (vedi `translateWithCodex`).
-  // Con FREE_TRANSLATE_CODEX_TIER=last qui non risponde: entra in coda alla cascata.
-  // Passa da `tryTier` e da `finalize` come ogni altro tier: passthrough
-  // rifiutato, glossario, marker Markdown e token protetti.
-  const t1c = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome));
-  if (t1c) return finalize(t1c);
 
   // Tier 3: Google Cloud Translation (official API, 500K free/month, hard-capped 16K/day)
   const t2c = await tryTier('googleCloud', () => translateWithGoogleCloud(clean, sourceLang, targetLang, _outcome));

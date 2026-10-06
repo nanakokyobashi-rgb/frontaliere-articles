@@ -1,14 +1,13 @@
 /**
- * fact-check-codex-fallback.test.mjs — Codex Luna Max as the last verifier.
+ * fact-check-codex-fallback.test.mjs — Codex Luna Max as the primary verifier.
  *
- * Owner decision of 2026-09-25: «se i verificatori non funzionano usa codex
- * luna Max senza secondo parere». When the free verifiers give no verdict, or
- * no independent second opinion, llmFactCheck asks Codex, pinned to that one
- * model (`codexOnly` in _runSingleFactCheck → `chain: [codex], prefer:
- * [codex]`). create-article.mjs cannot be imported by a test (network call at
- * module scope), so the wiring is read from its source; the call itself runs
- * through the real callLLM against a fake broker socket, the same pattern as
- * codex-cli-json-request.test.mjs.
+ * Owner decision of 2026-10-06: Codex is first in the primary pair. When the
+ * broker is unavailable, its circuit opens, or the primary request gives no
+ * vote, llmFactCheck keeps the explicit one-model Codex fallback
+ * (`codexOnly` → `chain: [codex], prefer: [codex]`). create-article.mjs cannot
+ * be imported by a test (network call at module scope), so the wiring is read
+ * from its source; the call itself runs through real callLLM against a fake
+ * broker socket, the same pattern as codex-cli-json-request.test.mjs.
  */
 import { strict as assert } from 'node:assert';
 import fs from 'node:fs';
@@ -118,18 +117,22 @@ describe('the call is pinned to Codex', () => {
 });
 
 describe('llmFactCheck wiring', () => {
-  const start = SRC.indexOf('// ── Codex Luna Max when the free verifiers are not enough ──');
+  const start = SRC.indexOf('// ── Codex Luna Max safety fallback when the primary vote is missing ──');
   const failClosed = SRC.indexOf('if (modelResults.length === 0 || lacksSecondOpinion) {', start);
   const block = SRC.slice(start, failClosed);
 
-  test('Codex is asked after the free verifiers and before the article is discarded', () => {
+  test('Codex is first, with a safe fallback before the article is discarded', () => {
     assert.notEqual(start, -1, 'blocco Codex sparito');
     assert.ok(failClosed > start, 'il blocco Codex deve precedere il fail-closed');
-    assert.ok(SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);') < start, 'Codex non deve precedere i verificatori free');
-    // Fewer than two votes: none at all, one verifier failed, or the two
-    // collapsed into one model (review of PR #1871: the plain failure was
-    // left out and a single free PASS published the article).
-    assert.match(block, /if \(modelResults\.length < 2 && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
+    const candidates = SRC.indexOf('const verificationCandidates = [');
+    const codex = SRC.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', candidates);
+    const firstFree = SRC.indexOf('AI_MODELS.NV_GEMMA_4_31B', candidates);
+    assert.ok(candidates >= 0 && candidates < start, 'candidati Codex non dichiarati prima del fallback');
+    assert.ok(codex >= candidates && codex < firstFree, 'Codex non è il primo verificatore');
+    assert.ok(SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);') < start);
+    // If the primary lane gives no vote, do not publish an article with a
+    // single free opinion (review of PR #1871).
+    assert.match(block, /if \(modelResults\.length < 2 && !codexAlreadyVoted && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
     assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen, codexOnly: true \}\)/);
   });
 

@@ -77,6 +77,7 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
       now: () => '2026-09-14T12:00:00.000Z',
     });
     assert.ok(report.readyProviders.includes('codex_cli'));
+    assert.equal(report.providers.filter(({ provider }) => provider === 'codex_cli').length, 1);
   } finally {
     for (const name of names) {
       if (previous[name] === undefined) delete process.env[name];
