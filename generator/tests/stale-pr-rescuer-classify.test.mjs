@@ -1080,11 +1080,12 @@ test('F — precede le altre classi: con i test rossi il rimedio non è un rerun
   assert.deepEqual(r.workflowRuns, [], `Dispatch chiesto su una PR in conflitto.\n${r.stdout}`);
 });
 
-test('F — i guard fail-closed delle classi A–E non possono saltare una PR in conflitto', opts, () => {
+test('F — i guard fail-closed non saltano una PR in conflitto, salvo needs-human', opts, () => {
   // Review di #2274: nella catena A–E la F arrivava dopo una dozzina di
-  // `continue` (check o review illeggibili, fixer non verificabile,
-  // `needs-human`), ognuno dei quali lasciava la PR senza `stale-review`.
-  // Il conflitto non dipende da quei dati: la label si applica comunque.
+  // `continue` (check o review illeggibili, fixer non verificabile), ognuno dei
+  // quali lasciava la PR senza `stale-review`. Il conflitto non dipende da
+  // quei dati: la label si applica comunque. `needs-human` è invece un veto
+  // terminale e deve lasciare la PR invariata.
   for (const input of [
     { checksError: true },
     { reviewsError: true },
@@ -1101,7 +1102,17 @@ test('F — i guard fail-closed delle classi A–E non possono saltare una PR in
     checks: checkRuns({ concl: 'success' }),
     reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: fuori scope' }),
   });
-  assert.deepEqual(needsHuman.labeled, [901], needsHuman.stdout);
+  assert.deepEqual(needsHuman.labeled, [], needsHuman.stdout);
+  assert.deepEqual(needsHuman.unlabeled, [], needsHuman.stdout);
+  assert.deepEqual(needsHuman.comments, [], needsHuman.stdout);
+});
+
+test('F — il checkout della prova conserva il merge-base', () => {
+  const start = WF.indexOf('      - name: Checkout main for current conflict proofs');
+  assert.notEqual(start, -1, 'step di checkout della prova F non trovato');
+  const end = WF.indexOf('\n      - name:', start + 1);
+  const checkout = WF.slice(start, end === -1 ? undefined : end);
+  assert.match(checkout, /fetch-depth:\s*0/, checkout);
 });
 
 test('F — commenti illeggibili: la label si applica lo stesso, il commento si rinvia', opts, () => {

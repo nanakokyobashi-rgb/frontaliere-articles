@@ -6,8 +6,9 @@ name: Stale PR rescuer (self-healing signal)
 #   F) CONFLITTO CON MAIN (`has-conflicts`, scritta da `pr-autorebase` con
 #      merge-tree e confermata adesso da `mergeable_state=dirty` più un
 #      `git merge-tree` sulla HEAD corrente: la label da sola può essere rimasta
-#      da un ricalcolo fallito). Si valuta PRIMA di tutte le altre e prima dei loro guard
-#      fail-closed (check, review, quota, cap del fixer), perché le rende inerti:
+#      da un ricalcolo fallito). Si valuta PRIMA di tutte le altre e prima dei loro
+#      guard fail-closed (check, review, quota, cap del fixer), rispettando però
+#      il veto terminale `needs-human`: un'escalation umana non si annulla.
 #      GitHub non avvia i workflow `pull_request` su una PR in conflitto, quindi
 #      nessun test, review o fixer può più partire su quella head. La label è solo
 #      una candidata: il rescuer ricalcola con `git merge-tree` sulla HEAD
@@ -248,14 +249,15 @@ jobs:
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
       # La classe F non può usare la label come prova: pr-autorebase la preserva
-      # quando il proprio fetch o merge-tree è illeggibile. Il checkout contiene
-      # solo la storia necessaria; il passo F scarica poi ogni ref PR corrente e
-      # ricalcola l'unione reale con `git merge-tree` prima di mutare la PR.
+      # quando il proprio fetch o merge-tree è illeggibile. Il checkout conserva
+      # tutta la storia necessaria a raggiungere il merge-base; il passo F scarica
+      # poi ogni ref PR corrente e ricalcola l'unione reale con `git merge-tree`
+      # prima di mutare la PR.
       - name: Checkout main for current conflict proofs
         uses: actions/checkout@v7
         with:
           ref: main
-          fetch-depth: 1
+          fetch-depth: 0
           filter: blob:none
 
       - name: Scan open PRs and flag stalled ones
@@ -397,13 +399,15 @@ jobs:
             # ── Classe F: conflitto con main, PRIMA di tutto il resto ────────
             # Sta qui e non nella catena A–E più sotto perché quella catena è
             # preceduta da una dozzina di `continue` fail-closed — check o
-            # review illeggibili, deferral di quota, cap del fixer,
-            # `needs-human`, stato del fixer non verificabile — e ognuno di
-            # quelli salterebbe la PR lasciandola senza `stale-review`. Per le
-            # classi A–E è giusto (decidono su quei dati); per F no: il
-            # conflitto non dipende da check e review. La label è però solo una
-            # candidata: `pr-autorebase` la conserva quando fetch o merge-tree
-            # sono illeggibili, quindi qui si ricalcola l'unione con la HEAD
+            # review illeggibili, deferral di quota, cap del fixer e stato del
+            # fixer non verificabile — e ognuno di quelli salterebbe la PR
+            # lasciandola senza `stale-review`. Per le classi A–E è giusto
+            # (decidono su quei dati); per F no: il conflitto non dipende da
+            # check e review. Il veto `needs-human` resta invece terminale e
+            # viene applicato qui, prima di ogni mutation della classe F. La
+            # label è però solo una candidata: `pr-autorebase` la conserva
+            # quando fetch o merge-tree sono illeggibili, quindi qui si
+            # ricalcola l'unione con la HEAD
             # scaricata dalla ref PR corrente. Se fetch, HEAD o merge-tree non
             # sono verificabili, o il conflitto è rientrato, la PR resta
             # invariata; il commento, idempotente per (classe, HEAD), si rinvia
@@ -418,6 +422,10 @@ jobs:
             # la label (la PR prosegue verso le classi A–E come se non
             # l'avesse); qualunque altra risposta — `unknown` mentre GitHub
             # ricalcola, lettura fallita — lascia la PR INVARIATA.
+            if [ "${HAS_CONFLICTS:-false}" = "true" ] && [ "$HAS_NEEDS_HUMAN_LABEL" = "true" ]; then
+              echo "PR #$N: needs-human + has-conflicts — veto terminale, classe F invariata"
+              continue
+            fi
             F_CONFIRMED=false
             if [ "${HAS_CONFLICTS:-false}" = "true" ]; then
               MERGEABLE_STATE=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '.mergeable_state // ""' 2>/dev/null || true)
