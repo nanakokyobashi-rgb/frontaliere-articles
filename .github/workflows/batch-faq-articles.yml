@@ -22,7 +22,8 @@ name: Batch FAQ Generation
 #     MyMemory. With the broker socket, free-translate.mjs's Codex Luna Max
 #     tier serves those fields once DeepL and Azure are out, capped at
 #     FREE_TRANSLATE_CODEX_MAX_CALLS per process. No AI_MODELS_PREFER: FAQ
-#     generation itself stays on the free cascade.
+#     generation uses the router's Codex Luna Max primary when the action-owned
+#     broker is ready, with the existing free cascade as the automatic fallback.
 #   - Local Opus-MT is enabled for both FAQ translation passes. The model cache
 #     is shared with translate-pending, and the local tier runs before MyMemory
 #     for EN/DE/FR. It fails closed when the model cannot load, so the locale
