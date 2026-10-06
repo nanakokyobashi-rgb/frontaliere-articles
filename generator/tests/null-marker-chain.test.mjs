@@ -1118,6 +1118,18 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     assert.equal(events[1].title, 'Braunwald');
   });
 
+  test('pulisce entità standard, heading solo a inizio riga e marker sbilanciati', () => {
+    const { events } = sanitizeDatasetEvents([
+      {
+        id: 'e-edge-markup',
+        title: 'Festival # 5 &amp; &ldquo;Live&rdquo; &ndash; **Festival',
+        description: '## Programma\n- _Apertura_\nMOPS_DanceSyndrome _chiusura',
+      },
+    ]);
+    assert.equal(events[0].title, 'Festival # 5 & “Live” – Festival');
+    assert.equal(events[0].description, 'Programma - Apertura MOPS_DanceSyndrome chiusura');
+  });
+
   test('un `title` piatto avvelenato si recupera dalla prima chiave per-locale sana', () => {
     const { events, dropped } = sanitizeDatasetEvents([
       { id: 'e1', title: 'NULL', titleByLocale: { it: 'Sagra della castagna', de: 'NULL' } },

@@ -27,6 +27,7 @@ import {
   getTranslationCascadeConfigurationKey,
 } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
+import { decodeHtmlEntities } from './decode-html-entities.mjs';
 
 export { hasUsableContentText };
 
@@ -1593,8 +1594,10 @@ export const EVENTS_DATASET_PATH = path.join(REPO_ROOT, 'data', 'events.json');
 export const EVENTS_SLICE_DIR = path.join(REPO_ROOT, 'data', 'events', 'by-source');
 
 const EVENT_REPLACEMENT_CHARACTER = '\uFFFD';
-const EVENT_ENTITY_MAP = Object.freeze({
-  '&amp;': '&',
+// The shared decoder owns the standard HTML entity set. Events still need
+// the German/French named letters that occur in crawl payloads, so keep only
+// that source-specific extension here instead of copying the shared map.
+const EVENT_LOCAL_ENTITY_MAP = Object.freeze({
   '&auml;': 'ä',
   '&Auml;': 'Ä',
   '&ouml;': 'ö',
@@ -1609,15 +1612,14 @@ const EVENT_ENTITY_MAP = Object.freeze({
   '&Agrave;': 'À',
   '&ccedil;': 'ç',
   '&Ccedil;': 'Ç',
-  '&nbsp;': ' ',
 });
-const EVENT_ENTITY_RX = /&(?:amp|auml|Auml|ouml|Ouml|uuml|Uuml|eacute|Eacute|egrave|Egrave|agrave|Agrave|ccedil|Ccedil|nbsp);/g;
+const EVENT_LOCAL_ENTITY_RX = /&(?:auml|Auml|ouml|Ouml|uuml|Uuml|eacute|Eacute|egrave|Egrave|agrave|Agrave|ccedil|Ccedil);/g;
 
 function decodeEventEntities(value) {
   let text = value;
   for (let pass = 0; pass < 3; pass += 1) {
-    const decoded = text
-      .replace(EVENT_ENTITY_RX, (entity) => EVENT_ENTITY_MAP[entity] ?? entity)
+    const decoded = decodeHtmlEntities(text)
+      .replace(EVENT_LOCAL_ENTITY_RX, (entity) => EVENT_LOCAL_ENTITY_MAP[entity] ?? entity)
       .replace(/&#(x[0-9a-f]+|\d+);/gi, (_, code) => {
         const number = code.toLowerCase().startsWith('x')
           ? Number.parseInt(code.slice(1), 16)
@@ -1651,9 +1653,13 @@ export function cleanEventText(value) {
 
   for (let pass = 0; pass < 3; pass += 1) {
     const cleaned = text
-      .replace(/(^|\s)#{1,6}(?=\s)/g, '$1')
+      .replace(/(^|\n)([ \t]*(?:(?:>[ \t]*)|(?:[-+*][ \t]+)|(?:\d+[.)][ \t]+))*)#{1,6}(?=\s)/g, '$1$2')
       .replace(/(^|[\s([{\"'“‘])(\*{1,3}|_{1,3})(?=\S)([\s\S]*?\S)\2(?=$|[\s)\]}.,!?;:'\"”’])/g, '$1$3')
-      .replace(/(^|\s)(?:\*{3,}|_{3,})(?=\s|$)/g, '$1');
+      .replace(/(^|\s)(?:\*{3,}|_{3,})(?=\s|$)/g, '$1')
+      // Strip orphaned opening and closing emphasis markers as well. The
+      // boundary guards keep identifiers such as `MOPS_DanceSyndrome` intact.
+      .replace(/(^|[\s([{"'“‘])(\*{1,3}|_{1,3})(?=\S)/g, '$1')
+      .replace(/(\S)(\*{1,3}|_{1,3})(?=$|[\s)\]}.,!?;:'"”’])/g, '$1');
     if (cleaned === text) break;
     text = cleaned;
   }
