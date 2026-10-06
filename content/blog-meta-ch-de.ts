@@ -7829,6 +7829,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli nimmt sich Zeit für eine eidgenössische Kandidatur',
     'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, Zürcher SVP-Regierungsrätin, bestätigt ihre Kandidatur für den Bundesrat nicht und will die Antwort erst nach den Herbstferien geben; die Frist für die Kandidaturen läuft am 23. Oktober ab.',
     'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Fotorealistischer Blick auf ein schweizerisches Bundesgebäude im Herbstsonnenschein.',
+    'blog.article.nuovi-progetti-chiave-digitali.title': 'Neue Schlüsselprojekte für die digitale Souveränität des Bundes',
+    'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'Am 1. Oktober 2026 hat der Bundeskanzler den Arbeitsplatz für digitale Souveränität und EasyGov 2.0 zu Schlüsselprojekten erklärt; NEPRO scheidet aus der Kategorie aus. Derzeit machen 22 Schlüsselprojekte mehr als die Hälfte der zivilen IT-Ausgaben aus.',
+    'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Foto des Bundeshauses in Bern mit digitalen Überlagerungslinien, die die bundesweite IT-Transformation symbolisieren',
 };
 
 export default blogMetaChDe;

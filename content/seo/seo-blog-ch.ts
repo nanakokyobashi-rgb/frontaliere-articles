@@ -98717,6 +98717,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuovi-progetti-chiave-digitali': {
+    title: 'Nuovi progetti chiave per la sovranità digitale federale',
+    description: 'Il 1° ottobre 2026 il cancelliere ha designato due nuovi progetti chiave: la postazione di lavoro sulla sovranità digitale e EasyGov 2.0. NEPRO esce',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovi, progetti, chiave, sovranità',
+    ogTitle: 'Nuovi progetti chiave nel settore della trasformazione digitale e dell’informatica',
+    ogDescription: 'Il comunicato del cancelliere del 1° ottobre 2026 ha inserito come progetti chiave la postazione di lavoro basata sulla sovranità digitale e EasyGov 2.0, mentre NEPRO esce dalla categoria. I 22 progetti chiave attuali costituiscono più della metà',
+    canonicalPath: '/articoli-svizzera/nuovi-progetti-chiave-digitali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovi progetti chiave per la sovranità digitale federale",
+      "description": "Il 1° ottobre 2026 il cancelliere ha designato due nuovi progetti chiave: la postazione di lavoro sulla sovranità digitale e EasyGov 2.0. NEPRO esce",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/nuovi-progetti-chiave-digitali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto del Bundeshaus a Berna con linee digitali che simboleggiano la trasformazione informatica federale"
+      },
+      "datePublished": "2026-10-06T14:57:46+00:00",
+      "dateModified": "2026-10-06T14:57:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/nuovi-progetti-chiave-digitali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

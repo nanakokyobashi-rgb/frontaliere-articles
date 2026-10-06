@@ -7829,6 +7829,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli temporise sur une candidature fédérale',
     'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, conseillère d\'État zurichoise de l\'UDC, ne confirme pas sa candidature au Conseil fédéral et reporte sa réponse après les vacances d\'automne ; le délai pour les candidatures est fixé au 23 octobre.',
     'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Vue photoréaliste d\'un bâtiment fédéral suisse au coucher de soleil d\'automne.',
+    'blog.article.nuovi-progetti-chiave-digitali.title': 'Nouveaux projets clés pour la souveraineté numérique fédérale',
+    'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'Le 1er octobre 2026, le chancelier a désigné comme projets clés le poste de travail relatif à la souveraineté numérique et EasyGov 2.0 ; NEPRO sort de la catégorie. Actuellement, 22 projets clés représentent plus de la moitié des dépenses informatiques civiles.',
+    'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Photo du Palais fédéral à Berne avec des lignes numériques symbolisant la transformación informatique fédérale',
 };
 
 export default blogMetaChFr;

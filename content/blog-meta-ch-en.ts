@@ -7829,6 +7829,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli is taking time to consider a federal candidacy',
     'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, a Zurich cantonal councillor from the UDC, does not confirm her candidacy for the Federal Council and postpones her answer until after the autumn holidays; the deadline for applications is October 23.',
     'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Photorealistic view of a Swiss federal building at autumn sunset.',
+    'blog.article.nuovi-progetti-chiave-digitali.title': 'New key projects for federal digital sovereignty',
+    'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'On October 1, 2026, the Chancellor designated the digital sovereignty workstation and EasyGov 2.0 as key projects; NEPRO leaves the category. Currently, 22 key projects account for more than half of civilian IT spending.',
+    'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Photo of the Federal Palace in Bern with digital overlay lines symbolizing federal IT transformation',
 };
 
 export default blogMetaChEn;

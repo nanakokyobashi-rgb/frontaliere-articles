@@ -7829,6 +7829,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rickli-tempo-candidatura-federal.title': 'Natalie Rickli prende tempo su candidatura federale',
     'blog.article.rickli-tempo-candidatura-federal.excerpt': 'Rickli, consigliera di Stato zurighese dell\'UDC, non conferma la candidatura al Consiglio federale e rimanda la risposta dopo le vacanze autunnali; il termine per le candidature è il 23 ottobre.',
     'blog.article.rickli-tempo-candidatura-federal.imageAlt': 'Vista fotorealistica di un edificio federale svizzero al tramonto autunnale.',
+    'blog.article.nuovi-progetti-chiave-digitali.title': 'Nuovi progetti chiave per la sovranità digitale federale',
+    'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'Il 1° ottobre 2026 il cancelliere ha designato come progetti chiave la postazione di lavoro sulla sovranità digitale e EasyGov 2.0; NEPRO esce dalla categoria. Attualmente 22 progetti chiave rappresentano oltre metà della spesa informatica civile.',
+    'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Foto del Bundeshaus a Berna con linee digitali che simboleggiano la trasformazione informatica federale',
 };
 
 export default blogMetaChIt;
