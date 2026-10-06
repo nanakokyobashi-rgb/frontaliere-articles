@@ -7793,6 +7793,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.elezioni-berna-guida-voto.title': 'Kantonswahlen in Bern: Kalender- und Abstimmungsleitfaden',
     'blog.article.elezioni-berna-guida-voto.excerpt': 'Praktischer Leitfaden zu den kantonalen Wahlen im Kanton Bern: Wahlsystem, Zeitplan, Abstimmungsmodalitäten, Listen und institutionelle Kompetenzen.',
     'blog.article.elezioni-berna-guida-voto.imageAlt': 'Leitfaden zu den kantonalen Wahlen in Bern und Zuständigkeiten',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Zivilschutz im Kanton Bern: Voraussetzungen und Entschädigung',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'Im Kanton Bern wird der Zivilschutz auf kantonaler Ebene koordiniert. Aufgebote und Entschädigungen sind bei der zuständigen Behörde zu überprüfen.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Schweizer Zivilschutz vor einem kantonalen Verwaltungsgebäude',
 };
 
 export default blogMetaChDe;

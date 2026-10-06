@@ -7793,6 +7793,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.elezioni-berna-guida-voto.title': 'Cantonal elections in Bern: guide to the calendar and voting',
     'blog.article.elezioni-berna-guida-voto.excerpt': 'Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.',
     'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide to cantonal elections in Bern and institutional competences',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Civil protection, Canton of Bern: requirements and allowance',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'In the Canton of Bern, civil protection is coordinated at cantonal level. Call-up notices and allowances must be verified with the competent authority.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Swiss civil protection personnel outside a cantonal administration building',
 };
 
 export default blogMetaChEn;

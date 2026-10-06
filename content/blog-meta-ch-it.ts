@@ -7793,6 +7793,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.elezioni-berna-guida-voto.title': 'Elezioni cantonali a Berna: guida a calendario e voto',
     'blog.article.elezioni-berna-guida-voto.excerpt': 'Guida pratica alle elezioni cantonali nel Cantone di Berna: sistema elettorale, calendario, modalità di voto, liste e competenze istituzionali.',
     'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guida alle elezioni cantonali nel Cantone di Berna e competenze',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Protezione civile canton Berna: requisiti e indennità',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'Nel Cantone di Berna la protezione civile è coordinata a livello cantonale. Convocazioni e indennità vanno verificate presso l\'autorità competente.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protezione civile svizzera davanti a un edificio amministrativo cantonale',
 };
 
 export default blogMetaChIt;

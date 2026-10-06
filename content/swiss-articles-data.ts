@@ -24617,6 +24617,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'berna-protezione-servizio-indennita',
+    category: 'pratico',
+    date: '2026-10-06T05:28:53.054Z',
+    image: '/images/blog/berna-protezione-servizio-indennita.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -98309,6 +98309,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-berna-protezione-servizio-indennita': {
+    title: 'Protezione civile canton Berna: requisiti e indennità',
+    description: 'Protezione civile nel canton Berna: legge federale, coordinamento cantonale. Convocazioni e indennità devono essere verificate presso l\'autorità competente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, civile, canton, berna',
+    ogTitle: 'Protezione civile canton Berna: requisiti e indennità',
+    ogDescription: 'Nel canton Berna la protezione civile segue un coordinamento cantonale nell\'ambito della legge federale. Requisiti, convocazioni e indennità non vanno dedotti da regole generiche: il riferimento è l\'autorità competente.',
+    canonicalPath: '/articoli-svizzera/berna-protezione-servizio-indennita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione civile canton Berna: requisiti e indennità",
+      "description": "Protezione civile nel canton Berna: legge federale, coordinamento cantonale. Convocazioni e indennità devono essere verificate presso l'autorità competente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/berna-protezione-servizio-indennita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Protezione civile svizzera davanti a un edificio amministrativo cantonale"
+      },
+      "datePublished": "2026-10-06T05:28:53+00:00",
+      "dateModified": "2026-10-06T05:28:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/berna-protezione-servizio-indennita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

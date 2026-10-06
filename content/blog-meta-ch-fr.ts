@@ -7793,6 +7793,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.elezioni-berna-guida-voto.title': 'Élections cantonales à Berne : guide du calendrier et du vote',
     'blog.article.elezioni-berna-guida-voto.excerpt': 'Guide pratique des élections cantonales dans le canton de Berne : système électoral, calendrier, modalités de vote, listes et compétences institutionnelles.',
     'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide des élection cantonales à Berne et compétences institutionnelles',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Protection civile du canton de Berne : exigences et indemnités',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'Dans le canton de Berne, la protection civile est coordonnée au niveau cantonal. Les convocations et les indemnités doivent être vérifiées auprès de l\'autorité compétente.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protection civile suisse devant un bâtiment administratif cantonal',
 };
 
 export default blogMetaChFr;
