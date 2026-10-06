@@ -170,11 +170,12 @@ jobs:
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
 
-      # Codex Luna Max is the primary FAQ/translation lane. It must be
-      # provisioned before provider-preflight: otherwise DEFAULT_CHAIN starts
-      # with Codex, the socket is absent, and preflight can fail before this
-      # action ever gets a chance to create the broker. The action still owns
-      # the OAuth secret and exposes only the socket path as an output.
+      # Codex Luna Max is the primary FAQ/translation lane. Its broker must
+      # exist before provider preflight: DEFAULT_CHAIN starts with Codex, and
+      # a preflight without its action-owned socket can report the whole roster
+      # unavailable before the fallback lane is ready. Its idle TTL matches
+      # the job's 360-minute timeout because translation may reach this tier
+      # only after DeepL and Azure have been exhausted.
       - id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
         uses: ./.github/actions/setup-claude-haiku-fallback
