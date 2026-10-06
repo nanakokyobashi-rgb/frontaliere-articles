@@ -7805,6 +7805,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli zahlt seine Krankenversicherung nicht und muss sich vor Gericht verantworten.',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, Arzt aus Mendrisio, erscheint beim Bezirksgericht wegen ausstehender Krankenkassenbeiträge',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Krankenkassenprämien steigen: auf dem Weg zu 1000 Franken pro Monat',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'Im nächsten Jahr wird die durchschnittliche Prämie 488 Franken betragen (+23, +5%); in 14 Jahren könnte sie 966,20 Franken erreichen, wenn der jährliche Trend von 5% anhält.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Schweizer Familie überprüft Gesundheitsausgaben und Krankenkassenprämien am Küchentisch',
 };
 
 export default blogMetaChDe;

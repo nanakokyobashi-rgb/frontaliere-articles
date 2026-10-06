@@ -7805,6 +7805,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ostinelli-cassa-malati-udienza-pretore.title': 'Ostinelli does not pay his health insurance and goes before the magistrate',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.excerpt': 'Roberto Ostinelli, a doctor from Mendrisio, has not paid his health insurance since June 2024 and must appear before the magistrate on October 6; he pays 140 euro per month for international insurance.',
     'blog.article.ostinelli-cassa-malati-udienza-pretore.imageAlt': 'Roberto Ostinelli, a doctor from Mendrisio, appearing before the magistrate for not paying his Swiss health insurance',
+    'blog.article.costi-assicurazione-base-proiezione.title': 'Health insurance premiums on the rise: heading toward 1000 francs a month',
+    'blog.article.costi-assicurazione-base-proiezione.excerpt': 'Next year, the average premium will be 488 francs (+23, +5%); in 14 years it could reach 966,20 francs if the 5% annual trend continues.',
+    'blog.article.costi-assicurazione-base-proiezione.imageAlt': 'Swiss family reviewing healthcare expenses and insurance premiums at the kitchen table',
 };
 
 export default blogMetaChEn;

@@ -9,7 +9,8 @@
  * va chiuso) ma niente lo alimentava: un solo report in 52 commenti, postato a
  * mano il 2026-09-20, e `gh run list --workflow loop-health-report.yml` su
  * questo repo rispondeva 404. Lo script del sito era gia' portabile
- * (`GH_REPO`, revisore per repo), mancavano la copia qui e il cron.
+ * (`GH_REPO`, revisore per repo), mancavano la copia qui e il cron; il corpus
+ * aggiunge ora al proprio adattamento l'osservazione dei claim Codex locali.
  *
  * Se uno di questi pezzi sparisce, il tracker torna muto senza che nessun
  * check se ne accorga: per questo il contratto vive in un test e non solo nel
@@ -84,13 +85,15 @@ test('ogni action del workflow e\' pinnata a uno SHA completo', () => {
   }
 });
 
-test('lo script e\' un gemello `identical` del sito, quindi resta allineato dal drift check', () => {
+test('lo script e\' adattato: la salute dei claim Codex usa il ledger del corpus', () => {
   const manifest = JSON.parse(read('scripts/ci/loop-sync-manifest.json'));
   const entry = manifest.files.find((f) => f.path === SCRIPT_REL);
   assert.ok(entry, `${SCRIPT_REL} deve avere una voce nel manifest`);
-  assert.equal(entry.mode, 'identical');
+  assert.equal(entry.mode, 'adapted');
   assert.match(String(entry.baseline?.site), /^[0-9a-f]{16}$/);
-  assert.equal(entry.baseline.corpus, entry.baseline.site, 'una voce identical nasce con i due lati uguali');
+  assert.match(String(entry.baseline?.corpus), /^[0-9a-f]{16}$/);
+  assert.notEqual(entry.baseline.corpus, entry.baseline.site, 'il parser dei claim Codex e\' corpus-specifico');
+  assert.match(entry.reason, /claim Codex/i);
 });
 
 test('lo script gira senza npm ci: solo import di `node:*`', () => {

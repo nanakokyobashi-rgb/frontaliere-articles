@@ -12671,6 +12671,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.gambarogno-pavimentazione-attese.title': 'Gambarogno: works on the cantonal road, delays of up to 30 minutes',
     'blog.article.gambarogno-pavimentazione-attese.excerpt': 'From October 12 to 16, paving works on the cantonal road in Gambarogno, between the FFS underpass and the road uphill to Caviano - Scaiano. Delays of up to 30 minutes.',
     'blog.article.gambarogno-pavimentazione-attese.imageAlt': 'Paving works on the cantonal road in Gambarogno between the FFS underpass and Caviano',
+    'blog.article.disoccupazione-settembre-ticino-2026.title': 'Unemployment stable at 3% in Switzerland in September 2026',
+    'blog.article.disoccupazione-settembre-ticino-2026.excerpt': 'In September, unemployment in Switzerland remains at 3% and in Ticino at 2,9%, with 4\'800 unemployed, while job vacancies rise to 44\'200.',
+    'blog.article.disoccupazione-settembre-ticino-2026.imageAlt': 'Lugano street view with commuters and a subtle unemployment office sign, illustrating the Ticino job market.',
 };
 
 export default blogMetaEn;

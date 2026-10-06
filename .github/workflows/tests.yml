@@ -1595,6 +1595,9 @@ jobs:
           CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
           CODEX_TIMED_OUT: ${{ steps.codex_review.outputs.codex_timed_out }}
           CODEX_DURATION_MS: ${{ steps.codex_review.outputs.duration_ms }}
+          CODEX_EXIT_CODE: ${{ steps.codex_review.outputs.codex_exit_code }}
+          CODEX_REVIEW_POSTED: ${{ steps.codex_review.outputs.codex_review_posted }}
+          CODEX_SIDE_EFFECT_DETECTED: ${{ steps.codex_review.outputs.side_effect_detected }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
@@ -1610,6 +1613,9 @@ jobs:
           set_review_output review_abort_cause none
           set_review_output retryable_failure false
           set_review_output permanent_failure false
+          set_review_output review_abort_diagnostic ''
+          set_review_output review_event_counts '{}'
+          set_review_output review_exit_code "${CODEX_EXIT_CODE:-}"
           set_review_output verdict_evidence_file ''
           write_verdict_evidence() {
             local evidence_file="${VERDICT_EVIDENCE_FILE:-${RUNNER_TEMP:-/tmp}/codex-verdict-evidence-${RUN_ID:-$$}.md}"
@@ -1642,12 +1648,19 @@ jobs:
           # causa esplicita prima che il claim decida retry o terminale.
           CLASSIFICATION_JSON=''
           if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
-            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome","eventCounts":{},"turnEventCount":0,"diagnostic":""}'
           elif [ "${CODEX_TIMED_OUT:-}" = 'true' ] \
             || { [ "${CODEX_DURATION_MS:-0}" -ge 1800000 ] 2>/dev/null; }; then
-            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog"}'
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog","eventCounts":{},"turnEventCount":0,"diagnostic":""}'
           elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
-            if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then
+            if ! CLASSIFICATION_JSON=$(
+              CODEX_TIMED_OUT="${CODEX_TIMED_OUT:-false}" \
+              CODEX_DURATION_MS="${CODEX_DURATION_MS:-}" \
+              CODEX_EXIT_CODE="${CODEX_EXIT_CODE:-}" \
+              CODEX_REVIEW_POSTED="${CODEX_REVIEW_POSTED:-false}" \
+              CODEX_SIDE_EFFECT_DETECTED="${CODEX_SIDE_EFFECT_DETECTED:-}" \
+              node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"
+            ); then
               set_review_output review_abort_cause probe_failed
               set_review_output permanent_failure true
               echo "::error::Impossibile classificare lo stream diagnostico Codex."
@@ -1667,6 +1680,34 @@ jobs:
             exit 0
           fi
           NUM_TURNS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -r 'if .numTurns == null then "?" else (.numTurns | tostring) end')
+          DIAGNOSTIC_LINE=$(printf '%s' "$CLASSIFICATION_JSON" | jq -r '.diagnostic // empty')
+          EVENT_COUNTS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -c '.eventCounts // {}')
+          set_review_output review_abort_diagnostic "$DIAGNOSTIC_LINE"
+          set_review_output review_event_counts "$EVENT_COUNTS"
+          {
+            printf '\n### Codex review failure diagnostics (non-secret)\n\n'
+            printf '| metric | value |\n|---|---:|\n'
+            printf '| exit code | `%s` |\n' "${CODEX_EXIT_CODE:-?}"
+            printf '| duration (ms) | `%s` |\n' "${CODEX_DURATION_MS:-?}"
+            printf '| JSONL event counts | `%s` |\n' "$EVENT_COUNTS"
+            printf '| turn events | `%s` |\n' "$(printf '%s' "$CLASSIFICATION_JSON" | jq -r '.turnEventCount // 0')"
+            printf '| cause | `%s` |\n' "$CLASSIFICATION_CAUSE"
+            if [ -n "$DIAGNOSTIC_LINE" ]; then
+              printf '| stderr diagnostic | `%s` |\n' "$DIAGNOSTIC_LINE"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+
+          # A process that dies before the first turn, quickly, without a
+          # review or observable side effect is retryable once. The claim
+          # finalizer counts the prior failed-transient claim and makes the
+          # second identical failure terminal.
+          if [ "$CLASSIFICATION_CAUSE" = 'startup_failure' ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause startup_failure
+            set_review_output retryable_failure true
+            echo "::warning::Codex review fallita all'avvio senza turni (diagnostic=${DIAGNOSTIC_LINE:-unclassified}, durata=${CODEX_DURATION_MS:-?}ms): un solo retry ammesso sulla stessa HEAD."
+            exit 1
+          fi
 
           # max_turns PRIMA di 429/5xx: il terminal marker è più specifico dei
           # campi di telemetria condivisi. Anche Codex può aver postato la review
@@ -1926,6 +1967,7 @@ jobs:
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
+          REVIEW_ABORT_DIAGNOSTIC: ${{ steps.review_abort.outputs.review_abort_diagnostic }}
           REVIEW_POSTED: ${{ steps.test_only_review.outcome == 'success' }}
           REVIEW_GATE_FALLBACK_APPROVED: ${{ steps.review_gate.outputs.fallback_approved }}
           GITHUB_RUN_ID: ${{ github.run_id }}

@@ -98445,6 +98445,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-costi-assicurazione-base-proiezione': {
+    title: 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    description: 'L\'anno prossimo il premio medio dell\'assicurazione base sarà 488 franchi (+23, +5%). Se il trend del 5% annuo continua, tra 14 anni si avvicinerà a 966,20',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, aumento',
+    ogTitle: 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    ogDescription: 'L\'articolo analizza l aumento previsto dei premi dell\'assicurazione obbligatoria: 488 franchi al mese l anno prossimo (+5%, +23 franchi). Secondo la proiezione del 5% annuo, il premio potrebbe raggiungere 966,20 franchi dopo 14 anni e più del doppio',
+    canonicalPath: '/articoli-svizzera/costi-assicurazione-base-proiezione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati in aumento: verso i 1000 franchi al mese",
+      "description": "L'anno prossimo il premio medio dell'assicurazione base sarà 488 franchi (+23, +5%). Se il trend del 5% annuo continua, tra 14 anni si avvicinerà a 966,20",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/costi-assicurazione-base-proiezione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera che controlla le spese sanitarie e i premi della cassa malati sul tavolo della cucina"
+      },
+      "datePublished": "2026-10-06T07:50:50+00:00",
+      "dateModified": "2026-10-06T07:50:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costi-assicurazione-base-proiezione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
