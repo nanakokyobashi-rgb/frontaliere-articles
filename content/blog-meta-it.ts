@@ -12704,6 +12704,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.white-hash-sequestro-varese.title': 'Varese, la Polizia di Stato sequestra la nuova White Hash',
     'blog.article.white-hash-sequestro-varese.excerpt': 'Il 5 ottobre a Varese la Polizia di Stato ha sequestrato White Hash, sostanza ad alto contenuto di Thc. Segnalato un giovane da pochi giorni maggiorenne.',
     'blog.article.white-hash-sequestro-varese.imageAlt': 'Sequestro della White Hash da parte della Polizia di Stato a Varese',
+    'blog.article.varese-whp-programma-lombardia-2026.title': 'Varese lancia il programma WHP di Regione Lombardia',
+    'blog.article.varese-whp-programma-lombardia-2026.excerpt': 'Mercoledì 7 ottobre 2026, dalle 14:30 alle 16:30, il Salone Estense di Varese ospita la presentazione del Programma WHP di Regione Lombardia, organizzato da ATS Insubria, Comune, Confindustria e ASST Sette Laghi.',
+    'blog.article.varese-whp-programma-lombardia-2026.imageAlt': 'Ufficio moderno a Varese con dipendenti che partecipano a un workshop sul benessere lavorativo',
 };
 
 export default blogMetaIt;

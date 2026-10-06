@@ -12702,6 +12702,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.white-hash-sequestro-varese.title': 'Varese, die Polizia di Stato beschlagnahmt das neue White Hash',
     'blog.article.white-hash-sequestro-varese.excerpt': 'Am 5. Oktober hat die Polizia di Stato in Varese White Hash, eine Substanz mit hohem THC-Gehalt, beschlagnahmt. Ein seit wenigen Tagen volljähriger junger Mann wurde gemeldet.',
     'blog.article.white-hash-sequestro-varese.imageAlt': 'Beschlagnahmung von White Hash durch die Staatspolizei in Varese',
+    'blog.article.varese-whp-programma-lombardia-2026.title': 'Varese startet das WHP-Programm der Region Lombardei',
+    'blog.article.varese-whp-programma-lombardia-2026.excerpt': 'Am Mittwoch, 7. Oktober 2026, von 14:30 bis 16:30 Uhr findet im Salone Estense di Varese die Vorstellung des WHP-Programms der Region Lombardei statt, organisiert von ATS Insubria, der Gemeinde, Confindustria und ASST Sette Laghi.',
+    'blog.article.varese-whp-programma-lombardia-2026.imageAlt': 'Modernes Büro in Varese mit Mitarbeitern, die an einem Workshop zur betrieblichen Gesundheit teilnehmen',
 };
 
 export default blogMetaDe;

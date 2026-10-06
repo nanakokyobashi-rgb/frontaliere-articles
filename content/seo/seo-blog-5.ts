@@ -100363,6 +100363,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-whp-programma-lombardia-2026': {
+    title: 'Varese lancia il programma WHP di Regione Lombardia',
+    description: 'Presentazione del Programma WHP di Regione Lombardia a Varese il 7 ottobre 2026, dalle 14:30 alle 16:30 al Salone Estense, organizzato da ATS Insubria, Comune',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, lancia, programma, regione',
+    ogTitle: 'Varese lancia il programma WHP di Regione Lombardia',
+    ogDescription: 'Il 7 ottobre 2026, dalle 14:30 alle 16:30, il Salone Estense di Varese ospita l\'incontro pubblico sulla presentazione del Programma WHP di Regione Lombardia. Organizzato da ATS Insubria, Comune di Varese, Confindustria Varese e ASST Sette Laghi',
+    canonicalPath: '/articoli-frontaliere/varese-whp-programma-lombardia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese lancia il programma WHP di Regione Lombardia",
+      "description": "Presentazione del Programma WHP di Regione Lombardia a Varese il 7 ottobre 2026, dalle 14:30 alle 16:30 al Salone Estense, organizzato da ATS Insubria, Comune",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/varese-whp-programma-lombardia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno a Varese con dipendenti che partecipano a un workshop sul benessere lavorativo"
+      },
+      "datePublished": "2026-10-06T15:20:43+00:00",
+      "dateModified": "2026-10-06T15:20:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-whp-programma-lombardia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -794,10 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/attualita/1954607/nobel-ottobre-medicina-premio-economia": {
-      "section": "svizzera",
-      "ts": 1791125994294
-    },
     "svizzera::https://lenews.ch/2026/10/02/film-zurich-film-festival-2026-excellent-international-films-and-top-stars": {
       "section": "svizzera",
       "ts": 1791138099858
@@ -1001,6 +997,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
       "section": "svizzera",
       "ts": 1791297834567
+    },
+    "frontaliere::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
+      "section": "frontaliere",
+      "ts": 1791299512487
     }
   }
 }
