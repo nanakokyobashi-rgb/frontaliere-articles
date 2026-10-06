@@ -7796,6 +7796,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.berna-protezione-servizio-indennita.title': 'Protection civile du canton de Berne : exigences et indemnités',
     'blog.article.berna-protezione-servizio-indennita.excerpt': 'Dans le canton de Berne, la protection civile est coordonnée au niveau cantonal. Les convocations et les indemnités doivent être vérifiées auprès de l\'autorité compétente.',
     'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protection civile suisse devant un bâtiment administratif cantonal',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Assurance des immeubles dans le canton de Berne : obligation et primes',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'Dans le canton de Berne, l’obligation et l’organisation de l’assurance des bâtiments suivent la règle cantonale : guide sur l’organisme, les primes et les sinistres.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Immeuble résidentiel suisse et documents d\'assurance immobilière',
 };
 
 export default blogMetaChFr;

@@ -7796,6 +7796,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.berna-protezione-servizio-indennita.title': 'Civil protection, Canton of Bern: requirements and allowance',
     'blog.article.berna-protezione-servizio-indennita.excerpt': 'In the Canton of Bern, civil protection is coordinated at cantonal level. Call-up notices and allowances must be verified with the competent authority.',
     'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Swiss civil protection personnel outside a cantonal administration building',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Property insurance in the Canton of Bern: obligation and premiums',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'In the Canton of Bern, the obligation and organization of building insurance follow the cantonal rule: a guide to the agency, premiums, and claims.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Swiss residential building and documents for property insurance',
 };
 
 export default blogMetaChEn;

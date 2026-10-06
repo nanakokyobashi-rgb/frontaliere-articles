@@ -794,10 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/info/economia/dazi-ue-sui-%e2%80%9cpacchettini%e2%80%9d-coinvolta-anche-la-posta-svizzera--4131072.html": {
-      "section": "frontaliere",
-      "ts": 1791092681481
-    },
     "frontaliere::https://www.varesenews.it/2026/10/futura-volley-la-prima-di-campionato-e-tosta-le-cocche-ospitano-perugia/2696113": {
       "section": "frontaliere",
       "ts": 1791097453407
@@ -961,6 +957,18 @@
     "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954757/franchi-lavatoio-coop-brissago-legn-capanna-incella": {
       "section": "frontaliere",
       "ts": 1791264964372
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954941/riad-houthi-aeroporto-colpito-aramco-raffineria": {
+      "section": "svizzera",
+      "ts": 1791265633439
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1954682/shopping-sfrenato-con-le-carte-di-credito-degli-anziani-giovane-tirocinante-condannata-a-zurigo": {
+      "section": "svizzera",
+      "ts": 1791265645400
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1954715/paziente-neuchatel-bordo-ambulanza-conducente": {
+      "section": "svizzera",
+      "ts": 1791265652889
     }
   }
 }
