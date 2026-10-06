@@ -4140,8 +4140,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0a4362f52320c8a4",
-        "corpus": "0a4362f52320c8a4",
+        "site": "79f193dcc2bdd1ff",
+        "corpus": "79f193dcc2bdd1ff",
         "alignedAt": "2026-10-06"
       }
     },
@@ -4151,8 +4151,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "1549937f99791b26",
-        "corpus": "1549937f99791b26",
+        "site": "bbd0af62e9b763c5",
+        "corpus": "bbd0af62e9b763c5",
         "alignedAt": "2026-10-06"
       }
     },
@@ -4197,9 +4197,9 @@
       "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
       "mode": "identical",
       "baseline": {
-        "site": "96884d14000988cd",
-        "corpus": "96884d14000988cd",
-        "alignedAt": "2026-10-04"
+        "site": "6dd809048c5aadcf",
+        "corpus": "6dd809048c5aadcf",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4258,7 +4258,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "26b3015b0219cf50",
+        "corpus": "96be75827f4f9777",
         "alignedAt": "2026-10-01"
       }
     },
