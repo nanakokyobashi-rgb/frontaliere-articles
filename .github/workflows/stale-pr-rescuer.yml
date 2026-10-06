@@ -358,6 +358,7 @@ jobs:
             HAS_LABEL=$(echo "$pr" | jq -r '[.labels[].name] | index("stale-review") // empty')
             HAS_AUTOFIX=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
             HAS_NEEDS_HUMAN_LABEL=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "needs-human") then "true" else "false" end')
+            HAS_RESOLVING_LOCK=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:resolving-conflict") then "true" else "false" end')
             HAS_CONFLICTS=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "has-conflicts") then "true" else "false" end')
             BASE_REF=$(echo "$pr" | jq -r '.baseRefName // ""')
             IS_DRAFT=$(echo "$pr" | jq -r '.isDraft')
@@ -449,6 +450,14 @@ jobs:
               echo "PR #$N: needs-human + has-conflicts — veto terminale, classe F invariata"
               continue
             fi
+            # `agent:resolving-conflict` è il lock di chi sta risolvendo il
+            # conflitto sul branch (pr-autorebase lo rispetta per l'hand-off).
+            # Etichettarla `stale-review` la metterebbe sulla strada del
+            # recycle mentre qualcuno ci lavora: veto come `needs-human`.
+            if [ "${HAS_CONFLICTS:-false}" = "true" ] && [ "$HAS_RESOLVING_LOCK" = "true" ]; then
+              echo "PR #$N: agent:resolving-conflict + has-conflicts — risoluzione in corso, classe F invariata"
+              continue
+            fi
             F_CONFIRMED=false
             # Solo PR verso `main`: la prova sotto confronta la HEAD con
             # `main`, e il rimedio dice di fondere `main`. Su un altro target
@@ -527,6 +536,7 @@ jobs:
               [ "${F_LIVE_MERGEABLE:-}" = "dirty" ] || F_LIVE_OK=false
               case ",${F_LIVE_LABELS:-}," in *,has-conflicts,*) ;; *) F_LIVE_OK=false ;; esac
               case ",${F_LIVE_LABELS:-}," in *,needs-human,*) F_LIVE_OK=false ;; esac
+              case ",${F_LIVE_LABELS:-}," in *,agent:resolving-conflict,*) F_LIVE_OK=false ;; esac
               # Provenienza del ciclo, la stessa regola del filtro in cima.
               case "${F_LIVE_BRANCH:-}" in
                 fix/*) ;;

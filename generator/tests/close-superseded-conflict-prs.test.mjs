@@ -39,7 +39,11 @@ const CONFLICT_DETECTED_AT = '2026-10-05T23:06:51Z';
 // L'hand-off di fixture elenca `scripts/ci/x.mjs`: per default il conflitto
 // di adesso è proprio quello.
 const SAME_CONFLICT = ['scripts/ci/x.mjs'];
-const decideHandoffAlreadyFixed = (args) => decideHandoffAlreadyFixedRaw({ conflictFiles: SAME_CONFLICT, ...args });
+// …e dopo il verdetto main non ha toccato quei file.
+const MAIN_UNTOUCHED = () => false;
+const decideHandoffAlreadyFixed = (args) => decideHandoffAlreadyFixedRaw({
+  conflictFiles: SAME_CONFLICT, mainChangedSince: MAIN_UNTOUCHED, ...args,
+});
 
 const loopPr = (over = {}) => ({
   number: 2246,
@@ -88,6 +92,14 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
   assert.equal(reason({ isDraft: true }), 'draft');
   assert.equal(reason({ labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'needs-human' }] }), 'hands-off-label');
   assert.equal(reason({ labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'keep-open' }] }), 'hands-off-label');
+  // Il lock di chi sta risolvendo il conflitto sul branch: chiudere ora
+  // butterebbe via il lavoro in corso. Vale anche alla rilettura, che passa
+  // dalla stessa funzione.
+  assert.equal(reason({ labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'agent:resolving-conflict' }] }), 'hands-off-label');
+  assert.equal(
+    isSweepCandidate(loopPr({ mergeable: 'UNKNOWN', labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'agent:resolving-conflict' }] }), { allowUnknown: true }).candidate,
+    false,
+  );
   // «Il contenuto è già su main» vale solo per una PR diretta a main.
   assert.equal(reason({ baseRefName: 'release/x' }), 'base-not-main');
   assert.equal(reason({ baseRefName: undefined }), 'base-not-main');
@@ -271,6 +283,25 @@ test('caso 2 — il conflitto di adesso deve essere quello che il fixer ha giudi
   assert.equal(handoffConflictFiles(noList), null);
   assert.equal(handoffConflictFiles('nessuna sezione'), null);
   assert.equal(conflictMatchesHandoff(['a.mjs'], null), false);
+});
+
+test('caso 2 — il verdetto non si riusa se main ha toccato i file in conflitto dopo di lui', () => {
+  // Review di #2274: un conflitto rientrato senza essere osservato e poi
+  // ricomparso sugli stessi file ha la stessa label, lo stesso evento e lo
+  // stesso merge-tree. Lo distingue solo la storia di main.
+  const pr = loopPr();
+  const calls = [];
+  const decide = (mainChangedSince) => decideHandoffAlreadyFixed({
+    pr, handoff: handoffOf(pr), comments: [verdict('already-fixed')], openPrs: [pr], conflictDetectedAt: CONFLICT_DETECTED_AT, mainChangedSince,
+  });
+  assert.equal(decide((files, at) => { calls.push({ files, at }); return false; }).close, true);
+  // Chiesto proprio sui file in conflitto adesso e dall'istante del verdetto.
+  assert.deepEqual(calls, [{ files: SAME_CONFLICT, at: Date.parse('2026-10-06T00:18:00Z') }]);
+  assert.equal(decide(() => true).reason, 'main-changed-conflict-files-after-verdict');
+  // Storia non leggibile, o nessun lettore: non si chiude.
+  assert.equal(decide(() => null).reason, 'main-history-unreadable');
+  assert.equal(decide(undefined).reason, 'main-history-unreadable');
+  assert.equal(decide(() => 'no').reason, 'main-changed-conflict-files-after-verdict', 'solo un `false` esplicito autorizza');
 });
 
 test('caso 2 — un marker incollato da fuori non chiude niente', () => {

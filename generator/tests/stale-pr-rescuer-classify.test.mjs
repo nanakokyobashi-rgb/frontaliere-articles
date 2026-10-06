@@ -1209,6 +1209,24 @@ test('F — solo PR verso main: su un altro target il conflitto con main non la 
   }
 });
 
+test('F — agent:resolving-conflict: qualcuno sta risolvendo, la PR resta invariata', opts, () => {
+  // Il lock di chi risolve il conflitto sul branch: `stale-review` la
+  // metterebbe sulla strada del recycle mentre ci si lavora.
+  const locked = runScan({ prs: conflicted(['agent:resolving-conflict']), ...greenLgtm() });
+  assert.deepEqual(locked.labeled, [], locked.stdout);
+  assert.deepEqual(locked.comments, [], locked.stdout);
+  // Con `stale-review` già presente non la si toglie nemmeno.
+  const lockedStale = runScan({ prs: conflicted(['agent:resolving-conflict', 'stale-review']), ...greenLgtm() });
+  assert.deepEqual(lockedStale.unlabeled, [], lockedStale.stdout);
+  // Il lock arriva fra la prova e la label: nessuna mutation.
+  const lateLock = runScan({
+    prs: conflicted([], { _live: { labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'agent:resolving-conflict' }] } }),
+    ...greenLgtm(),
+  });
+  assert.deepEqual(lateLock.labeled, [], lateLock.stdout);
+  assert.deepEqual(lateLock.comments, [], lateLock.stdout);
+});
+
 test('F — base non leggibile con has-conflicts: nessuna classe può mutare la PR', opts, () => {
   // Con un target noto e diverso da main la PR prosegue verso le classi A–E
   // (qui: verde con LGTM, quindi `stale-review` viene tolta). Con un target

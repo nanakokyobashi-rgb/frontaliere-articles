@@ -77,7 +77,11 @@ import {
 } from './check-issue-already-resolved.mjs';
 import { FIX_OUTCOME_RE, lastFixOutcome } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
-import { classifyMergeTreeStatus, parseMergeTreeConflicts } from './pr-autorebase.mjs';
+import {
+  CONFLICT_RESOLUTION_LOCK_LABEL,
+  classifyMergeTreeStatus,
+  parseMergeTreeConflicts,
+} from './pr-autorebase.mjs';
 import { handoffRouted, reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
 import { hasClaimLabel } from './stale-claim-detector.mjs';
 
@@ -103,7 +107,10 @@ export const AUTOFIX_LABEL = 'agent:autofix';
 // Lo sweep ragiona su «il contenuto è già su main»: vale solo per le PR verso main.
 export const BASE_BRANCH = 'main';
 // Label con cui una PR è dichiarata fuori dal ciclo automatico.
-export const HANDS_OFF_LABELS = Object.freeze(['needs-human', 'keep-open']);
+// `agent:resolving-conflict` è il lock che un agente mette mentre risolve il
+// conflitto sul branch (pr-autorebase lo rispetta per l'hand-off): chiudere la
+// PR in quel momento butterebbe via il lavoro in corso.
+export const HANDS_OFF_LABELS = Object.freeze(['needs-human', 'keep-open', CONFLICT_RESOLUTION_LOCK_LABEL]);
 // Chi può scrivere un verdetto: il fixer commenta con l'identità del
 // proprietario o con `github-actions[bot]`. Su un repo pubblico chiunque può
 // commentare una issue, e un marker incollato da fuori non deve chiudere una PR.
@@ -249,7 +256,9 @@ export function latestConflictLabelEventAt(events) {
  * @param {number|string|null} p.conflictDetectedAt ultima applicazione corrente di `has-conflicts`
  * @returns {{ close: boolean, reason: string, handoff?: number, active?: number }}
  */
-export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt, conflictFiles }) {
+export function decideHandoffAlreadyFixed({
+  pr, handoff, comments, openPrs, siblings, conflictDetectedAt, conflictFiles, mainChangedSince,
+}) {
   if (!handoff) return { close: false, reason: 'no-handoff' };
   if (conflictHandoffOriginPr(handoff.title) !== Number(pr?.number)) return { close: false, reason: 'handoff-of-another-pr' };
   const expectedHead = conflictHandoffExpectedHead(handoff.body);
@@ -287,6 +296,19 @@ export function decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, sibl
   if (!conflictMatchesHandoff(conflictFiles, handoffConflictFiles(handoff.body))) {
     return { close: false, reason: 'conflict-differs-from-handoff' };
   }
+  // Il verdetto vale per il conflitto che il fixer ha visto. La label
+  // `has-conflicts` non dice se è ancora quello: pr-autorebase non emette un
+  // evento nuovo quando la label c'è già, quindi un conflitto rientrato senza
+  // che nessuno lo osservasse e poi ricomparso SUGLI STESSI FILE avrebbe la
+  // stessa label, lo stesso evento e lo stesso merge-tree. Lo distingue la
+  // storia di main: se dopo il verdetto nessun commit di main ha toccato i
+  // file in conflitto, con la HEAD della PR invariata (verificata sopra) i due
+  // lati di quei file sono quelli giudicati e il conflitto è letteralmente lo
+  // stesso. Se main li ha toccati, o la storia non è leggibile, il verdetto
+  // non si riusa.
+  const changed = typeof mainChangedSince === 'function' ? mainChangedSince(conflictFiles, outcome.at) : null;
+  if (changed === null || changed === undefined) return { close: false, reason: 'main-history-unreadable' };
+  if (changed !== false) return { close: false, reason: 'main-changed-conflict-files-after-verdict' };
   return { close: true, reason: 'handoff-already-fixed', handoff: Number(handoff.number) };
 }
 
@@ -464,6 +486,21 @@ function mergeTreeProof(pr) {
   return { state, files: state === 'conflicted' ? parseMergeTreeConflicts(String(merged.stdout || '')) : [] };
 }
 
+/**
+ * Dopo `sinceMs` un commit di main ha toccato uno di questi file? true/false,
+ * o null se la storia non è leggibile. Legge `refs/remotes/origin/main`, che
+ * `mergeTreeProof` ha appena aggiornato in questa stessa passata. `git log`
+ * su dei path lavora su commit e alberi: non scarica blob.
+ */
+function mainChangedConflictFilesSince(files, sinceMs) {
+  if (!Array.isArray(files) || files.length === 0 || !Number.isFinite(sinceMs)) return null;
+  const res = spawnSync('git', ['log', '-1', '--format=%H', `--since=@${Math.floor(sinceMs / 1000)}`,
+    `refs/remotes/origin/${BASE_BRANCH}`, '--', ...files],
+  { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: GIT_TIMEOUT_MS });
+  if (res.status !== 0) return null;
+  return String(res.stdout || '').trim() !== '';
+}
+
 function decide(pr, openPrs, conflictFiles) {
   const handoffs = readHandoffs(pr.number);
   if (!Array.isArray(handoffs)) return { close: false, reason: 'handoffs-unreadable' };
@@ -473,7 +510,9 @@ function decide(pr, openPrs, conflictFiles) {
   if (conflictDetectedAt === null) return { close: false, reason: 'conflict-detection-unreadable' };
   const comments = handoff ? readIssueComments(handoff.number) : null;
   const siblings = handoffs.filter((issue) => conflictHandoffOriginPr(issue?.title) === Number(pr.number));
-  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs, siblings, conflictDetectedAt, conflictFiles });
+  return decideHandoffAlreadyFixed({
+    pr, handoff, comments, openPrs, siblings, conflictDetectedAt, conflictFiles, mainChangedSince: mainChangedConflictFilesSince,
+  });
 }
 
 function main() {
