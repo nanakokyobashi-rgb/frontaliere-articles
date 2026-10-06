@@ -537,7 +537,7 @@ function fakeDist(registry, { index = undefined, salt = '' } = {}) {
   const live = Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
   mkdirSync(path.join(dir, 'edge/sections'), { recursive: true });
   writeFileSync(path.join(dir, EDGE_SECTION_REGISTRY_FILE), JSON.stringify(registry));
-  for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), `<urlset><!-- ${id}${salt} --></urlset>`);
+  for (const id of live) writeFileSync(path.join(dir, `sitemap-articles-${id}.xml`), sitemapOf(id, salt));
   if (index ?? live.length > 0) writeFileSync(path.join(dir, 'sitemap-cantons.xml'), `<sitemapindex><!-- ${live.join(',')} --></sitemapindex>`);
   return dir;
 }
@@ -608,9 +608,16 @@ function served(io) {
  */
 const liveIds = (registry) => Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
 /** Mette su R2 le pagine di bootstrap di una sezione (cio' che fa publish-section-pages). */
+const SECTION_PAGES = (id) => familySectionPages(id, 0, 1).flatMap((page) => Object.values(page.paths));
+/** La sitemap finta di una sezione: le pagine di sezione, una page-2 d'archivio e un articolo. */
+const sitemapOf = (id, salt = '') => {
+  const base = SECTION_PAGES(id)[0];
+  const locs = [...SECTION_PAGES(id), `${base}tutti/page-2/`, `${base}un-articolo/`];
+  return `<urlset><!-- ${id}${salt} -->${locs.map((p) => `<url><loc>https://frontaliereticino.ch${p}</loc></url>`).join('')}</urlset>`;
+};
 function seedPages(io, ids) {
   for (const id of ids) {
-    for (const key of requiredPageKeys(id, { activation: true })) {
+    for (const key of requiredPageKeys(id, { activation: true, sitemapXml: sitemapOf(id) })) {
       io.store.set(key, Buffer.from(`<html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head></html>`));
     }
   }
@@ -793,20 +800,27 @@ test('edge: ogni fallimento PRIMA del PUT lascia servita la release di prima, in
 });
 
 test('edge: una sezione non diventa live finche\' le sue pagine di bootstrap non sono su R2', async () => {
-  // Le chiavi sono quelle che il Worker serve: landing, 6 hub e archivio nelle 4 locali per un'accensione.
-  const activation = requiredPageKeys('canton-ti', { activation: true });
-  assert.equal(activation.length, (1 + 6 + 1) * 4);
-  for (const key of ['edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/fuel/index.html', 'edge/sections/de/tessin-artikel/alle/index.html']) {
+  // Per un'accensione: OGNI URL che la sitemap della release annuncia — pagine di sezione, page-N dell'archivio, articoli.
+  const activation = requiredPageKeys('canton-ti', { activation: true, sitemapXml: sitemapOf('canton-ti') });
+  assert.equal(activation.length, (1 + 6 + 1) * 4 + 2);
+  for (const key of [
+    'edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/fuel/index.html', 'edge/sections/de/tessin-artikel/alle/index.html',
+    'edge/sections/articoli-ticino/tutti/page-2/index.html', 'edge/sections/articoli-ticino/un-articolo/index.html',
+  ]) {
     assert.ok(activation.includes(key), key);
   }
   assert.deepEqual(requiredPageKeys('canton-ti', { activation: false }), [
     'edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/index.html',
     'edge/sections/de/tessin-artikel/index.html', 'edge/sections/fr/articles-tessin/index.html',
   ]);
+  assert.throws(() => requiredPageKeys('canton-ti', { activation: true }), /serve la sitemap/);
+  assert.throws(() => requiredPageKeys('canton-ti', { activation: true, sitemapXml: '<loc>https://evil.example/x/</loc>' }), /fuori dall'apex/);
   // Accensione senza bootstrap, o con una sola pagina mancante, o con una pagina senza il meta di proprieta': niente flip.
   for (const [what, opts] of [
     ['nessuna pagina', { bootstrap: false }],
     ['un hub mancante', { seed: (io) => io.store.delete('edge/sections/fr/articles-tessin/fiscalite/index.html') }],
+    ['una page-N dell\'archivio mancante', { seed: (io) => io.store.delete('edge/sections/articoli-ticino/tutti/page-2/index.html') }],
+    ['un articolo mancante', { seed: (io) => io.store.delete('edge/sections/articoli-ticino/un-articolo/index.html') }],
     ['landing senza ft-route-owner', { seed: (io) => io.store.set('edge/sections/articoli-ticino/index.html', Buffer.from('<html></html>')) }],
   ]) {
     const { io, logs, before, result } = await publish(withLive(['canton-ti']), { history: [DRAFT_ALL(OLD)], ...opts });
@@ -961,18 +975,40 @@ test('load-rc-env: kill-switch mappato, assente per default, marker scritto solo
   assert.ok(templateAt > 0 && markerAt > templateAt, 'il marker va scritto solo dopo aver letto il template');
 });
 
-test('publish-api: osserva il registro e pubblica la release edge PRIMA del deploy Pages, senza continue-on-error', () => {
+test('publish-api: osserva tutta la chiusura degli import del publisher, e pubblica la release edge DOPO il deploy Pages, per ultima', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
+  const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
-    assert.ok(wf.includes(`      - '${p}'\n`), p);
+    assert.ok(filters.includes(p), p);
   }
-  // Prima del deploy Pages e senza continue-on-error: il catalogo (Pages) non
-  // deve mai uscire prima del registro (R2) che descrive.
-  const at = wf.indexOf('      - name: Push the section registry and the canton sitemaps to the edge\n');
-  assert.ok(at > 0);
-  assert.equal(wf.slice(at, wf.indexOf('\n\n', at)), '      - name: Push the section registry and the canton sitemaps to the edge\n        run: node scripts/publish-section-edge.mjs');
-  assert.ok(at > wf.indexOf('- name: Verify artifact') && at < wf.indexOf('- uses: actions/configure-pages'));
-  assert.ok(at < wf.indexOf('uses: actions/deploy-pages'));
+  // La chiusura degli import (statici e dinamici, relativi) dei quattro
+  // entrypoint del publisher: un modulo importato e non osservato e' un fix
+  // che non ripubblica.
+  const seen = new Set();
+  const walk = (file) => {
+    if (seen.has(file) || !existsSync(path.join(ROOT, file))) return;
+    seen.add(file);
+    const src = readFileSync(path.join(ROOT, file), 'utf8');
+    for (const m of src.matchAll(/(?:from\s+|import\s*\(\s*|import\s+)['"](\.{1,2}\/[^'"]+)['"]/g)) {
+      const target = path.normalize(path.join(path.dirname(file), m[1]));
+      if (path.extname(target)) walk(target);
+    }
+  };
+  for (const entry of ['scripts/build-api.mjs', 'scripts/build-blog-index.mjs', 'scripts/publish-section-edge.mjs', 'scripts/ci/verify-api-floors.mjs']) walk(entry);
+  assert.ok(seen.size > 20, 'la chiusura e\' vuota: il test sarebbe vacuo');
+  assert.deepEqual([...seen].filter((file) => !covered(file)).sort(), [], 'moduli importati dal publisher e non osservati da on.push.paths');
+
+  // DOPO il deploy Pages (le superfici di famiglia escono con Pages) e per
+  // ultimo: se fallisce non salta ne' le sitemap blog ne' la notifica al sito.
+  const at = wf.indexOf('      - name: Publish the canton sections release to the edge\n');
+  assert.ok(at > wf.indexOf('uses: actions/deploy-pages'));
+  assert.ok(at > wf.indexOf('- name: Notify the site'));
+  assert.equal(wf.slice(at).trimEnd(), [
+    '      - name: Publish the canton sections release to the edge',
+    "        if: steps.deploy.outcome == 'success'",
+    '        run: node scripts/publish-section-edge.mjs',
+  ].join('\n'));
   // Il build gira dopo il caricamento di Remote Config: il kill-switch e il marker sono nell'ambiente.
   assert.ok(wf.indexOf('node generator/scripts/load-rc-env.mjs') < wf.indexOf('scripts/build-api.mjs\n'));
   assert.match(wf, /for f in articles\.json slugs\.json manifest\.json sections\.json; do/);

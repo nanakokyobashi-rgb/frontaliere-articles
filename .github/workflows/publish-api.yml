@@ -57,6 +57,17 @@ on:
       # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker
       # RC_ENV_LOADED che build-api legge: un fix al loader deve ripubblicare.
       - 'generator/scripts/load-rc-env.mjs'
+      # Il resto della chiusura degli import del publisher (build-api,
+      # build-blog-index, verify-api-floors, publish-section-edge): ogni modulo
+      # che uno di loro importa e' un input della superficie pubblicata, e un
+      # fix a uno di questi deve ripubblicare.
+      # generator/tests/section-registry.test.mjs ricalcola la chiusura e
+      # fallisce se un import nuovo resta fuori da questo filtro.
+      - 'scripts/lib/engine-corpus-view.mjs'
+      - 'scripts/ci/verify-api-floors.mjs'
+      - 'scripts/lib/announced-surface.mjs'
+      - 'scripts/lib/registry-api-entry.mjs'
+      - 'scripts/lib/seo-entry.mjs'
       - 'scripts/lib/count-xml-tags.mjs'
       - 'scripts/lib/ticker-shadow-check.mjs'
       - 'scripts/lib/published-slug-guard.mjs'
@@ -622,33 +633,6 @@ jobs:
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
-      # Il registro delle sezioni cantonali e le loro sitemap (piano «sezioni
-      # articoli per cantone», P7). Lo stato servito (live|draft|retired) ha UNA
-      # sola fonte: `edge/sections/registry.json` su R2, che il Worker del sito
-      # applica. `sections.json` su Pages e' un catalogo senza stato, quindi non
-      # ci sono due superfici di stato che un fallimento parziale possa far
-      # divergere.
-      #
-      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: sitemap e
-      # indice salgono SOLO su chiavi versionate per commit
-      # (`edge/sections/_releases/<commit>/…`, rilette e confrontate per
-      # sha256), poi UN PUT del puntatore `edge/sections/registry.json` — che
-      # porta lo stato e la release — cambia tutto insieme. Non ci sono path
-      # fissi da sovrascrivere ne' niente da ripristinare: prima del PUT un
-      # fallimento non cambia cio' che il Worker serve, dopo la release nuova
-      # e' servita intera.
-      #
-      # Esce 1, e ferma il publish prima del deploy Pages, quando la release
-      # da pubblicare DIFFERISCE da quella servita (stato delle sezioni o byte
-      # di un file) o quella servita non e' dimostrabile, e un passo non e'
-      # confermato o mancano le credenziali. Se niente di servito cambia (oggi:
-      # tutto draft, nessun file) un problema di R2 e' un warning e gli
-      # articoli si pubblicano lo stesso. Il kill-switch di Remote Config e'
-      # gia' applicato da build-api; se non e' verificabile con una sezione
-      # live, build-api non emette la release e R2 resta com'e'.
-      - name: Push the section registry and the canton sitemaps to the edge
-        run: node scripts/publish-section-edge.mjs
-
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
@@ -806,3 +790,31 @@ jobs:
           if [ "$code" != "204" ]; then
             echo "::warning::dispatch returned $code — the site will pick this up on its schedule"
           fi
+
+      # La release edge delle sezioni cantonali (piano «sezioni articoli per
+      # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:
+      # `edge/sections/registry.json` su R2, che il Worker del sito applica, e
+      # che e' anche il puntatore alla release (sitemap e indice sotto
+      # `edge/sections/_releases/<commit>/`, immutabili). `sections.json` su
+      # Pages e' un catalogo senza stato.
+      #
+      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
+      # sotto la base della release (riletto e confrontato per sha256), verifica
+      # che le pagine delle sezioni live siano gia' su R2, poi UN PUT del
+      # puntatore cambia tutto insieme. Prima del PUT un fallimento non cambia
+      # cio' che il Worker serve; dopo, la release nuova e' servita intera.
+      #
+      # DOPO il deploy Pages, e per ultimo. Le superfici di famiglia
+      # (canton-articles.json, slugs.json.cantons, i feed) escono con Pages: se
+      # il puntatore girasse prima e il deploy poi fallisse, il Worker
+      # servirebbe una sezione live con Pages fermo alla release precedente.
+      # In quest'ordine un deploy fallito lascia R2 com'era, e un flip fallito
+      # lascia Pages avanti di un catalogo che non porta stato. E' l'ultimo
+      # step perche' quando il push e' obbligatorio (la release differisce da
+      # quella servita, o quella servita non e' dimostrabile) e un passo non e'
+      # confermato esce 1: il job risulta fallito senza aver saltato la
+      # spinta delle sitemap blog ne' la notifica al sito. Se niente di servito
+      # cambia (oggi: tutto draft) un problema di R2 e' un warning.
+      - name: Publish the canton sections release to the edge
+        if: steps.deploy.outcome == 'success'
+        run: node scripts/publish-section-edge.mjs

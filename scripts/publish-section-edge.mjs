@@ -49,8 +49,8 @@
  *    PAGINE (`edge/sections/<path>/index.html`, chiavi fisse scritte da
  *    publish-section-pages.mjs) devono essere gia' su R2, o il flip esporrebbe
  *    URL cantonali che rispondono 404. Per una sezione che DIVENTA live si
- *    rileggono dal CDN tutte le pagine di sezione nelle 4 locali (landing, i 6
- *    hub, archivio); per una gia' live le 4 landing. Ogni pagina deve
+ *    rilegge dal CDN OGNI URL che la sua sitemap annuncia (landing, hub, tutte
+ *    le pagine dell'archivio, articoli); per una gia' live le 4 landing. Ogni pagina deve
  *    rispondere 200 e portare il meta `ft-route-owner`. Se ne manca una: exit,
  *    nessun cambio — la sezione resta com'era finche' il bootstrap non c'e'.
  *
@@ -68,10 +68,14 @@
  *    sostituito (`previous.release.previous`): mai la release puntata, mai la
  *    precedente (una richiesta in volo puo' ancora leggerla).
  *
- * ESITO. In un push obbligatorio un fallimento esce 1 e publish-api.yml si
- * ferma prima del deploy Pages. Se niente di servito cambia (oggi: tutto
- * `draft`, nessun file) un problema di R2 e' un warning ed esce 0: non ferma
- * la pubblicazione degli articoli.
+ * ESITO. In un push obbligatorio un fallimento esce 1 e il job di
+ * publish-api.yml risulta fallito. Lo step gira DOPO il deploy Pages, per
+ * ultimo: le superfici di famiglia (canton-articles.json, slugs.json.cantons,
+ * i feed) escono con Pages, quindi il puntatore gira solo quando Pages ha gia'
+ * la release nuova — un deploy fallito lascia R2 com'era, e un flip fallito
+ * lascia Pages avanti di un catalogo che non porta stato. Se niente di servito
+ * cambia (oggi: tutto `draft`, nessun file) un problema di R2 e' un warning ed
+ * esce 0.
  *
  * Registro assente in dist/api (kill-switch di Remote Config non verificato
  * con una sezione dichiarata live, vedi scripts/lib/section-registry.mjs):
@@ -255,15 +259,31 @@ export const realIo = {
 };
 
 /**
- * Le chiavi R2 delle pagine che una sezione deve avere per poter essere
- * `live`: tutte le pagine di sezione nelle 4 locali (landing, hub, prima
- * pagina dell'archivio) se sta DIVENTANDO live, le sole landing se lo era gia'.
+ * Le chiavi R2 delle pagine che una sezione deve avere per poter essere `live`.
+ *
+ * Se sta DIVENTANDO live: OGNI URL che la sua sitemap annuncia — landing, hub,
+ * tutte le pagine dell'archivio (`page-N` comprese, nel numero che la sitemap
+ * ha calcolato) e gli articoli. La lista viene dalla sitemap della release,
+ * non da un secondo calcolo: e' esattamente cio' che si sta per dichiarare ai
+ * crawler. Se era gia' live: le 4 landing (un controllo di sanita'; il resto
+ * lo riconcilia reconcile-section-pages).
+ *
+ * @param {string} section
+ * @param {{ activation: boolean, sitemapXml?: string }} opts
  */
-export function requiredPageKeys(section, { activation }) {
-  return familySectionPages(section, 0, 1)
-    .filter((page) => activation || page.key === 'landing')
-    .flatMap((page) => Object.values(page.paths))
-    .map((canonicalPath) => `edge/sections${canonicalPath}index.html`);
+export function requiredPageKeys(section, { activation, sitemapXml }) {
+  const landings = familySectionPages(section, 0, 1)
+    .filter((page) => page.key === 'landing')
+    .flatMap((page) => Object.values(page.paths));
+  const paths = new Set(landings);
+  if (activation) {
+    if (typeof sitemapXml !== 'string') throw new Error(`requiredPageKeys: serve la sitemap di ${section} per verificarne il bootstrap`);
+    for (const [, loc] of sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      if (!loc.startsWith(`${APEX}/`)) throw new Error(`sitemap di ${section}: <loc> fuori dall'apex (${loc})`);
+      paths.add(loc.slice(APEX.length));
+    }
+  }
+  return [...paths].map((canonicalPath) => `edge/sections${canonicalPath}index.html`);
 }
 
 /** Le pagine richieste che NON sono su R2 (200 con il meta di proprieta' della route). */
@@ -271,7 +291,9 @@ export async function missingBootstrapPages(release, previous, io) {
   const wasLive = (id) => previous.state === 'ok' && previous.doc.sections?.[id]?.status === 'live';
   const missing = [];
   for (const id of release.live) {
-    for (const key of requiredPageKeys(id, { activation: !wasLive(id) })) {
+    const sitemap = release.files.find((f) => f.name === `sitemap-articles-${id}.xml`);
+    const sitemapXml = sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined;
+    for (const key of requiredPageKeys(id, { activation: !wasLive(id), sitemapXml })) {
       const got = await io.fetchBytes(`${CDN}/${key}`);
       if (got.status !== 200 || !got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG)) missing.push(key);
     }
