@@ -7793,6 +7793,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.elezioni-berna-guida-voto.title': 'Cantonal elections in Bern: guide to the calendar and voting',
     'blog.article.elezioni-berna-guida-voto.excerpt': 'Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.',
     'blog.article.elezioni-berna-guida-voto.imageAlt': 'Guide to cantonal elections in Bern and institutional competences',
+    'blog.article.berna-protezione-servizio-indennita.title': 'Civil protection, Canton of Bern: requirements and allowance',
+    'blog.article.berna-protezione-servizio-indennita.excerpt': 'In the Canton of Bern, civil protection is coordinated at cantonal level. Call-up notices and allowances must be verified with the competent authority.',
+    'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Swiss civil protection personnel outside a cantonal administration building',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Property insurance in the Canton of Bern: obligation and premiums',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'In the Canton of Bern, the obligation and organization of building insurance follow the cantonal rule: a guide to the agency, premiums, and claims.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Swiss residential building and documents for property insurance',
+    'blog.article.prezzi-immobili-settembre-regioni.title': 'House and apartment prices in Switzerland: stable in September',
+    'blog.article.prezzi-immobili-settembre-regioni.excerpt': 'Single-family homes at -0,1% and apartments at +0,2% in September: Zurich records the sharpest decline, while Ticino grows in condominium ownership.',
+    'blog.article.prezzi-immobili-settembre-regioni.imageAlt': 'Swiss residential buildings illustrating regional property price trends',
 };
 
 export default blogMetaChEn;

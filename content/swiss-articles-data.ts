@@ -24617,6 +24617,38 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'berna-protezione-servizio-indennita',
+    category: 'pratico',
+    date: '2026-10-06T05:28:53.054Z',
+    image: '/images/blog/berna-protezione-servizio-indennita.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'edifici-berna-obbligo-premi',
+    category: 'pratico',
+    date: '2026-10-06T06:00:47.970Z',
+    image: '/images/blog/edifici-berna-obbligo-premi.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'prezzi-immobili-settembre-regioni',
+    category: 'pratico',
+    date: '2026-10-06T06:36:57.205Z',
+    image: '/images/blog/prezzi-immobili-settembre-regioni.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

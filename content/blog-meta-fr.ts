@@ -12664,6 +12664,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lipomo-fiuto-roxy-cocaina.title': 'À Lipomo, le flair de Roxy permet de découvrir de la drogue : deux arrestations',
     'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Opération des Carabiniers à Albate : 111 grammes de cocaïne, du haschisch et 390 euro saisis. Deux ressortissants tunisiens arrêtés, un troisième signalé à la justice.',
     'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Opération antidrogue avec un berger allemand à Lipomo',
+    'blog.article.incidente-monte-generoso-varese.title': 'Accident à Varese près de l\'Università dell\'Insubria',
+    'blog.article.incidente-monte-generoso-varese.excerpt': 'Un accident est signalé dans la via Monte Generoso, à Varese, à deux pas de l\'Università dell\'Insubria.',
+    'blog.article.incidente-monte-generoso-varese.imageAlt': 'Rue urbaine près de l\'Université de l\'Insubria à Varèse (Varese)',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Amendes et peines : conversion en travaux d’intérêt général au Tessin',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 cas au Tessin en 2025. À Zurich, 1\'388 demandes : 4 heures de travail valent 1 jour de prison.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Personne portant des gants de travail tenant une liste de contrôle dans un couloir d\'hôpital en Tessin.',
 };
 
 export default blogMetaFr;

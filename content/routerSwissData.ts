@@ -2620,6 +2620,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tamedia-cancella-34-posti-lavoro': { it: 'tamedia-cancella-34-posti-lavoro', en: 'tamedia-cuts-34-jobs', de: 'tamedia-streicht-34-stellen', fr: 'tamedia-supprime-34-postes' },
  'neutralita-svizzera-voto-costituzione': { it: 'neutralita-svizzera-voto-costituzione', en: 'swiss-neutrality-constitution-vote', de: 'schweizer-neutralitaet-verfassung-votum', fr: 'neutralite-suisse-vote-constitution' },
  'elezioni-berna-guida-voto': { it: 'elezioni-berna-guida-voto', en: 'bern-cantonal-elections-voting-guide', de: 'kantonale-wahlen-bern-abstimmungsfuehrer', fr: 'elections-cantonales-berne-guide-vote' },
+ 'berna-protezione-servizio-indennita': { it: 'berna-protezione-servizio-indennita', en: 'bern-civil-protection-service-allowance', de: 'bern-zivilschutz-dienst-entschaedigung', fr: 'berne-protection-civile-service-indemnite' },
+ 'edifici-berna-obbligo-premi': { it: 'edifici-berna-obbligo-premi', en: 'bern-building-insurance-guide', de: 'gebaeudeversicherung-bern-ratgeber', fr: 'assurance-immeubles-berne-guide' },
+ 'prezzi-immobili-settembre-regioni': { it: 'prezzi-immobili-settembre-regioni', en: 'swiss-home-prices-september-regions', de: 'immobilienpreise-september-regionen', fr: 'prix-immobilier-septembre-regions' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
