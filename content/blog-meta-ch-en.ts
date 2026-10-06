@@ -7823,6 +7823,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ruegsegger-candidato-federale.title': 'Rüegsegger UDC candidate for the Federal Council',
     'blog.article.ruegsegger-candidato-federale.excerpt': 'The Canton of Schwyz puts forward André Rüegsegger to succeed Guy Parmelin: it is the first official candidacy following the announcement of his resignation at the end of the year.',
     'blog.article.ruegsegger-candidato-federale.imageAlt': 'Castelgrande, a symbolic image for Swiss federal politics.',
+    'blog.article.affluenza-scalo-zurigo-autunno.title': 'Zurich Airport: record with 123\'000 passengers',
+    'blog.article.affluenza-scalo-zurigo-autunno.excerpt': 'On Sunday, October 4, Zurich welcomed 123\'000 travelers: a still-provisional record linked to the autumn school holidays in several German-speaking Swiss cantons.',
+    'blog.article.affluenza-scalo-zurigo-autunno.imageAlt': 'Zurich Airport with an aircraft on the runway and the terminal in the background',
 };
 
 export default blogMetaChEn;
