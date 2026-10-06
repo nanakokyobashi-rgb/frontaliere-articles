@@ -7787,6 +7787,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tamedia-cancella-34-posti-lavoro.title': 'Tamedia supprime 34 emplois dans cinq rédactions',
     'blog.article.tamedia-cancella-34-posti-lavoro.excerpt': 'Tamedia supprime 34 postes à temps plein, ce qui concerne 41 collaborateurs dans les rédactions de Zurich, Berne, Bâle, Lausanne et Genève.',
     'blog.article.tamedia-cancella-34-posti-lavoro.imageAlt': 'Bâtiment Tamedia avec rédaction en Suisse',
+    'blog.article.neutralita-svizzera-voto-costituzione.title': 'Neutralité suisse : le durcissement dans la Constitution a été rejeté',
+    'blog.article.neutralita-svizzera-voto-costituzione.excerpt': 'Le peuple suisse a confirmé l’interprétation actuelle de la neutralité : l’initiative visant à inscrire une conception plus stricte dans la Constitution a été rejetée.',
+    'blog.article.neutralita-svizzera-voto-costituzione.imageAlt': 'Castelgrande à Bellinzone dans une scène éditoriale sur la politique suisse',
 };
 
 export default blogMetaChFr;

@@ -98241,6 +98241,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neutralita-svizzera-voto-costituzione': {
+    title: 'Neutralità svizzera: respinta la stretta in Costituzione',
+    description: 'Il popolo svizzero ha respinto l\'iniziativa per una neutralità più rigida nella Costituzione e confermato l\'attuale interpretazione della neutralità elvetica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, respinta, stretta, costituzione',
+    ogTitle: 'Neutralità svizzera: respinta la stretta costituzionale',
+    ogDescription: 'L\'analisi sul rifiuto dell\'iniziativa per una concezione più rigida della neutralità mostra la conferma del sostegno popolare all\'attuale interpretazione elvetica e richiama i dubbi sulle intenzioni dei sostenitori.',
+    canonicalPath: '/articoli-svizzera/neutralita-svizzera-voto-costituzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità svizzera: respinta la stretta in Costituzione",
+      "description": "Il popolo svizzero ha respinto l'iniziativa per una neutralità più rigida nella Costituzione e confermato l'attuale interpretazione della neutralità elvetica.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/neutralita-svizzera-voto-costituzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande a Bellinzona in una scena editoriale sulla politica svizzera"
+      },
+      "datePublished": "2026-10-06T04:01:17+00:00",
+      "dateModified": "2026-10-06T04:01:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-svizzera-voto-costituzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
