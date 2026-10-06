@@ -12679,6 +12679,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.carovita-sindacati-recupero-divario.title': 'Teuerung: Gewerkschaften fordern im Voranschlag 2027 die Aufholung der Lücke',
     'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Zwischen Dezember 2020 und September 2026 ist die Teuerung um 8,5% gestiegen, während die Löhne des kantonalen, parapublischen und sozialmedizinischen Personals nur um 3% angepasst wurden.',
     'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'Blick auf Bellinzona mit Castel Grande unter klarem Himmel.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: Änderungen bei den TILO-Verbindungen zwischen Chiasso und Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'An den Wochenenden 9.–12. und 16.–19. Oktober sowie 13.–16. und 20.–23. November 2026 betrifft die Sperrung RE80, S10 und S40 zwischen Chiasso und Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'TILO-Zug bei Chiasso während Wartungsarbeiten am Tunnel Monte Olimpino 1.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'SBB Bahnhof Giubiasco: Erneuerung abgeschlossen',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'Das SBB Bahnhofsgebäude in Giubiasco wird am 8. Oktober 2026 nach rund 6,4 Millionen Umbauten wiedereröffnet: neue Services, Lift und Minergie-Standards.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Renoviertes FFS-Bahnhofsgebäude in Giubiasco',
 };
 
 export default blogMetaDe;

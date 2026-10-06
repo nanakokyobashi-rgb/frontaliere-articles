@@ -12680,6 +12680,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.carovita-sindacati-recupero-divario.title': 'Carvivita, the unions demand recovery of the gap in the 2027 Quote',
     'blog.article.carovita-sindacati-recupero-divario.excerpt': 'Between December 2020 and September 2026, the cost of living rose by 8.5%, while the salaries of cantonal, parapublic and social-healthcare staff were adjusted by only 3%.',
     'blog.article.carovita-sindacati-recupero-divario.imageAlt': 'View of Bellinzona with Castel Grande under a clear sky.',
+    'blog.article.monte-olimpino-collegamenti-tilo.title': 'Monte Olimpino 1: changes to TILO services between Chiasso and Como',
+    'blog.article.monte-olimpino-collegamenti-tilo.excerpt': 'On the weekends of October 9–12 and 16–19 and November 13–16 and 20–23, 2026, the closure affects RE80, S10 and S40 between Chiasso and Como.',
+    'blog.article.monte-olimpino-collegamenti-tilo.imageAlt': 'TILO train near Chiasso during maintenance work at the Monte Olimpino 1 tunnel.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.title': 'Giubiasco FFS station: renovation completed',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.excerpt': 'The Giubiasco FFS station building will reopen on 8 October 2026 after work costing approximately 6,4 million: new services, lift and Minergie standards.',
+    'blog.article.stazione-ffs-giubiasco-rinnovo.imageAlt': 'Renovated FFS station building in Giubiasco',
 };
 
 export default blogMetaEn;
