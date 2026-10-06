@@ -14,7 +14,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
@@ -184,7 +184,15 @@ export function main(argv = process.argv.slice(2)) {
   return result.plans.length;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   try {
     main();
   } catch (error) {
