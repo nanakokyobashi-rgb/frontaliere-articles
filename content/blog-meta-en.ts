@@ -12706,6 +12706,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.varese-whp-programma-lombardia-2026.title': 'Varese launches the WHP program of Regione Lombardia',
     'blog.article.varese-whp-programma-lombardia-2026.excerpt': 'Wednesday, October 7, 2026, from 14:30 to 16:30, the Salone Estense in Varese hosts the presentation of the WHP Program of Regione Lombardia, organized by ATS Insubria, Municipality, Confindustria and ASST Sette Laghi.',
     'blog.article.varese-whp-programma-lombardia-2026.imageAlt': 'Modern office in Varese with employees attending a workplace wellness workshop',
+    'blog.article.lavoro-part-time-ticino-dati.title': 'Part-time work pays less percentage-wise',
+    'blog.article.lavoro-part-time-ticino-dati.excerpt': 'In Ticino, 65% of employees work full-time (5\'456 francs/month) and 35% part-time with an equivalent remuneration of 5\'121 francs, that is, 335 francs less.',
+    'blog.article.lavoro-part-time-ticino-dati.imageAlt': 'Part-time worker on Lugano lakefront with Alpine background',
 };
 
 export default blogMetaEn;

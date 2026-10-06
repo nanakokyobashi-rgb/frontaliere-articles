@@ -12707,6 +12707,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.varese-whp-programma-lombardia-2026.title': 'Varese lancia il programma WHP di Regione Lombardia',
     'blog.article.varese-whp-programma-lombardia-2026.excerpt': 'Mercoledì 7 ottobre 2026, dalle 14:30 alle 16:30, il Salone Estense di Varese ospita la presentazione del Programma WHP di Regione Lombardia, organizzato da ATS Insubria, Comune, Confindustria e ASST Sette Laghi.',
     'blog.article.varese-whp-programma-lombardia-2026.imageAlt': 'Ufficio moderno a Varese con dipendenti che partecipano a un workshop sul benessere lavorativo',
+    'blog.article.lavoro-part-time-ticino-dati.title': 'Il lavoro part-time rende in percentuale meno',
+    'blog.article.lavoro-part-time-ticino-dati.excerpt': 'In Ticino il 65% dei salariati lavora a tempo pieno (5\'456 franchi/mese) e il 35% a part-time con retribuzione equivalente di 5\'121 franchi, cioè 335 franchi in meno.',
+    'blog.article.lavoro-part-time-ticino-dati.imageAlt': 'Lavoratore part-time sul lungolago di Lugano con vista sulle Alpi',
 };
 
 export default blogMetaIt;

@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1942433/palestina-locarno-territorio-aziende-genocidio": "palestina-locarno-territorio-aziende-genocidio",
   "https://www.tio.ch/ticino/attualita/1942262/frontalieri-lieve-aumento-in-ticino": "frontalieri-ticino-aumento-2026",
   "https://www.laregione.ch/culture/locarno-film-festival/1942206/il-graffio-nella-barba": "graffio-nella-barba-locarno-film-festival",
   "https://www.laregione.ch/culture/locarno-film-festival/1942190/claudio-simonetti-monsieur-peur": "claudio-simonetti-monsieur-peur",
@@ -2056,6 +2055,11 @@
   "https://www.varesenews.it/2026/10/luoghi-di-lavoro-che-promuovono-salute-varese-presenta-il-programma-whp-di-regione-lombardia/2699623": {
     "articleId": "varese-whp-programma-lombardia-2026",
     "ts": "2026-10-06T15:20:43.432Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/ticino/1955111/il-lavoro-part-time-rende-in-percentuale-meno": {
+    "articleId": "lavoro-part-time-ticino-dati",
+    "ts": "2026-10-06T17:01:18.081Z",
     "keyForm": 2
   }
 }

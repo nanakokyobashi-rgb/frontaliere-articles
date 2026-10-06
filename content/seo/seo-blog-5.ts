@@ -100397,6 +100397,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavoro-part-time-ticino-dati': {
+    title: 'Il lavoro part-time rende in percentuale meno | Frontaliere Ticino',
+    description: 'In Ticino il 65% lavora a tempo pieno (5\'456 franchi/mese) e il 35% a part-time con retribuzione equivalente di 5\'121 franchi, cioè 335 franchi in meno',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavoro, part-time, rende, percentuale',
+    ogTitle: 'Il lavoro part-time rende in percentuale meno',
+    ogDescription: 'Il nuovo rapporto Ustat di ottobre 2024 mostra che in Ticino il 65% dei salariati lavora a tempo pieno guadagnando in media 5\'456 franchi al mese, mentre il 35% lavora a part-time con una retribuzione equivalente a tempo pieno di 5\'121 franchi',
+    canonicalPath: '/articoli-frontaliere/lavoro-part-time-ticino-dati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il lavoro part-time rende in percentuale meno",
+      "description": "In Ticino il 65% lavora a tempo pieno (5'456 franchi/mese) e il 35% a part-time con retribuzione equivalente di 5'121 franchi, cioè 335 franchi in meno",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavoro-part-time-ticino-dati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore part-time sul lungolago di Lugano con vista sulle Alpi"
+      },
+      "datePublished": "2026-10-06T17:01:17+00:00",
+      "dateModified": "2026-10-06T17:01:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavoro-part-time-ticino-dati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

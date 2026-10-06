@@ -40042,6 +40042,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lavoro-part-time-ticino-dati',
+ category: 'pratico',
+ date: '2026-10-06T17:01:17.818Z',
+ image: '/images/blog/lavoro-part-time-ticino-dati.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
