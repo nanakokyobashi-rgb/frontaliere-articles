@@ -39846,6 +39846,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bellinzona-aggregazione-costi-2026',
+ category: 'pratico',
+ date: '2026-10-06T01:28:30.762Z',
+ image: '/images/blog/bellinzona-aggregazione-costi-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

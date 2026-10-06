@@ -12648,6 +12648,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino: lavori Lereti in via Copelli fino al 27 novembre',
     'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Avviato il rinnovo della rete acquedottistica in via Copelli: previsti 400 metri di nuove tubazioni e senso unico alternato con semaforo.',
     'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Cantiere stradale in via Copelli a Luino per il rinnovo della rete idrica',
+    'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona: aggregazione e bilancio 2026 a confronto',
+    'blog.article.bellinzona-aggregazione-costi-2026.excerpt': 'Spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni: il punto sui costi dell\'aggregazione.',
+    'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Centro di Bellinzona con edifici amministrativi e mura storiche all\'alba',
 };
 
 export default blogMetaIt;
