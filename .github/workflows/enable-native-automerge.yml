@@ -205,6 +205,10 @@ jobs:
             fi
             download_and_check \
               'scripts/ci/lib/constants.mjs' "$helper_dir/lib/constants.mjs"
+            if ! download_and_check \
+              'scripts/ci/report-rate-limit-budget.mjs' "$helper_dir/report-rate-limit-budget.mjs"; then
+              echo '::warning::Rate-limit budget helper non disponibile; il gate resta attivo senza summary.'
+            fi
             echo "NATIVE_AUTOMERGE_BOOTSTRAP_READY=true" >> "$GITHUB_ENV"
             echo "Native auto-merge gate bootstrap is present on main (vitestCheck required: $gate_requires_vitest)."
           else
@@ -254,6 +258,19 @@ jobs:
           fi
           GH_TOKEN="$GITHUB_PAT_NANAKO" node "$NATIVE_AUTOMERGE_HELPER_DIR/native-automerge-gate.mjs" \
             "$REPOSITORY" "$pr_number"
+      - name: Report rate-limit budget
+        if: always() && env.NATIVE_AUTOMERGE_BOOTSTRAP_READY == 'true'
+        continue-on-error: true
+        env:
+          RATE_LIMIT_WORKFLOW: enable-native-automerge
+          RATE_LIMIT_TOKEN_NAME: GITHUB_PAT_NANAKO
+          RATE_LIMIT_RESOURCES: core,graphql
+        run: |
+          RATE_LIMIT_WORKFLOW="$RATE_LIMIT_WORKFLOW" \
+            RATE_LIMIT_TOKEN_NAME="$RATE_LIMIT_TOKEN_NAME" \
+            RATE_LIMIT_RESOURCES="$RATE_LIMIT_RESOURCES" \
+            GH_TOKEN="${GITHUB_PAT_NANAKO:-}" \
+            node "$NATIVE_AUTOMERGE_HELPER_DIR/report-rate-limit-budget.mjs"
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json

@@ -2632,6 +2632,8 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ruegsegger-candidato-federale': { it: 'ruegsegger-candidato-federale', en: 'ruegsegger-federal-council', de: 'ruegsegger-bundesrat-kandidat', fr: 'ruegsegger-candidat-conseil-federal' },
  'affluenza-scalo-zurigo-autunno': { it: 'affluenza-scalo-zurigo-autunno', en: 'zurich-airport-autumn-record', de: 'flughafen-zuerich-herbst-rekord', fr: 'aeroport-zurich-record-automne' },
  'rickli-tempo-candidatura-federal': { it: 'rickli-tempo-candidatura-federal', en: 'rickli-takes-time-federal-candidacy', de: 'rickli-nimmt-zeit-bundeskandidatur', fr: 'rickli-prend-temps-candidature-federale' },
+ 'nuovi-progetti-chiave-digitali': { it: 'nuovi-progetti-chiave-digitali', en: 'new-key-digital-projects', de: 'neue-key-digital-projekte', fr: 'nouveaux-projets-cles-numeriques' },
+ 'luna-opportunita-aziende-svizzere': { it: 'luna-opportunita-aziende-svizzere', en: 'moon-opportunity-swiss-companies', de: 'mond-chance-schweizer-unternehmen', fr: 'lune-opportunite-entreprises-suisses' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

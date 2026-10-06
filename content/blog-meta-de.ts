@@ -12699,6 +12699,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.crisi-attrattivita-como-lecco.title': 'Como und Lecco: Risiko des Verlusts von 14mila Arbeitskräften bis 2029',
     'blog.article.crisi-attrattivita-como-lecco.excerpt': 'Warnung von UIL: Wohnungsmangel, schwierige Verkehrsanbindung und unzureichende Dienstleistungen drohen Tausende Menschen im erwerbsfähigen Alter aus dem Gebiet zu vertreiben.',
     'blog.article.crisi-attrattivita-como-lecco.imageAlt': 'Personenzug an einem Bahnhof zwischen Como und Lecco',
+    'blog.article.white-hash-sequestro-varese.title': 'Varese, die Polizia di Stato beschlagnahmt das neue White Hash',
+    'blog.article.white-hash-sequestro-varese.excerpt': 'Am 5. Oktober hat die Polizia di Stato in Varese White Hash, eine Substanz mit hohem THC-Gehalt, beschlagnahmt. Ein seit wenigen Tagen volljähriger junger Mann wurde gemeldet.',
+    'blog.article.white-hash-sequestro-varese.imageAlt': 'Beschlagnahmung von White Hash durch die Staatspolizei in Varese',
+    'blog.article.varese-whp-programma-lombardia-2026.title': 'Varese startet das WHP-Programm der Region Lombardei',
+    'blog.article.varese-whp-programma-lombardia-2026.excerpt': 'Am Mittwoch, 7. Oktober 2026, von 14:30 bis 16:30 Uhr findet im Salone Estense di Varese die Vorstellung des WHP-Programms der Region Lombardei statt, organisiert von ATS Insubria, der Gemeinde, Confindustria und ASST Sette Laghi.',
+    'blog.article.varese-whp-programma-lombardia-2026.imageAlt': 'Modernes Büro in Varese mit Mitarbeitern, die an einem Workshop zur betrieblichen Gesundheit teilnehmen',
+    'blog.article.lavoro-part-time-ticino-dati.title': 'Teilzeitarbeit bringt prozentual weniger ein',
+    'blog.article.lavoro-part-time-ticino-dati.excerpt': 'Im Tessin arbeiten 65% der Beschäftigten in Vollzeit (5\'456 Franken/Monat) und 35% in Teilzeit mit einem auf Vollzeit hochgerechneten Lohn von 5\'121 Franken, also 335 Franken weniger.',
+    'blog.article.lavoro-part-time-ticino-dati.imageAlt': 'Teilzeitbeschäftigter am Luganer Seeufer mit Alpenblick',
 };
 
 export default blogMetaDe;

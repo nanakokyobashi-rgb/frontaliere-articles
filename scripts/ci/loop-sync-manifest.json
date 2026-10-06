@@ -510,6 +510,16 @@
       }
     },
     {
+      "path": "scripts/ci/report-rate-limit-budget.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservabilita' del budget GitHub API per il ciclo Actions del corpus: interroga il rate-limit del token gia' selezionato dal workflow, redige il valore e pubblica una riga `RATE_LIMIT_BUDGET` nel log e nel job summary. Il sito non consuma questo ciclo Actions e non ha un gemello operativo.",
+      "baseline": {
+        "site": null,
+        "corpus": "3ea954a109c16187",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/ci/content-gates-main.mjs",
       "mode": "corpus-only",
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
@@ -2359,6 +2369,16 @@
         "site": null,
         "corpus": "13f65a4e0809abdb",
         "alignedAt": "2026-08-18"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/seo-title-repair.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del generatore e della bonifica storica introdotto dalla riparazione dei prefissi SEO troncati: `generator/scripts/create-article.mjs` e `generator/scripts/repair-truncated-seo-titles.mjs` condividono qui la stessa regola clause-safe per `ogTitle` e `headline`. Il codice della generazione del corpus vive in `generator/` e questo helper non ha un consumer nel percorso di pubblicazione del sito, quindi non c'e' un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "9d8a2ec5e74a7e2e",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -5252,6 +5272,16 @@
         "site": null,
         "corpus": "5aa5b161c07a95ea",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/lib/hub-landing-meta.mjs",
+      "mode": "corpus-only",
+      "reason": "Patch stale guardata dei metadati della landing italiana `/articoli-svizzera/`, applicata dal refresher che riscrive le pagine dello shard. Il sito non ha questo script: la landing e' servita dal corpus e il sito la consuma via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "4403a7a168643f6c",
+        "alignedAt": "2026-10-06"
       }
     }
   ]

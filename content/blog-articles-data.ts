@@ -40022,6 +40022,37 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'white-hash-sequestro-varese',
+ category: 'novita',
+ date: '2026-10-06T14:27:41.313Z',
+ image: '/images/blog/white-hash-sequestro-varese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'varese-whp-programma-lombardia-2026',
+ category: 'novita',
+ date: '2026-10-06T15:20:43.122Z',
+ image: '/images/blog/varese-whp-programma-lombardia-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lavoro-part-time-ticino-dati',
+ category: 'pratico',
+ date: '2026-10-06T17:01:17.818Z',
+ image: '/images/blog/lavoro-part-time-ticino-dati.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

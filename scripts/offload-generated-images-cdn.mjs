@@ -57,6 +57,14 @@ import { ASSETS_SAME_ORIGIN_RX } from '../host/shared/cdnAssetOffloadRx.mjs';
 
 const ORIGIN = 'https://frontaliereticino.ch';
 const SCAN_EXT = new Set(['.html', '.xml', '.txt']);
+const HTML_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta',
+  'param', 'source', 'track', 'wbr',
+]);
+const HTML_RAW_TEXT_TAGS = [
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+];
 
 // Offload targets: [dist subdir, url path prefix]. Only these prefixes are
 // rewritten/guarded/deleted.
@@ -103,6 +111,407 @@ const TARGETS = [
   // loop, and ensure-image-cdn-redirect.mjs OFFLOADED_PREFIXES.
   { dir: ['images', 'events'], url: '/images/events/' },
 ];
+
+function isHtmlWhitespace(char) {
+  return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
+}
+
+function isTagNameChar(char) {
+  if (!char) return false;
+  const code = char.charCodeAt(0);
+  return (
+    (code >= 65 && code <= 90) ||
+    (code >= 97 && code <= 122) ||
+    (code >= 48 && code <= 57) ||
+    char === ':' || char === '-' || char === '_'
+  );
+}
+
+function asciiNameEquals(text, start, end, expected) {
+  if (end - start !== expected.length) return false;
+  for (let i = 0; i < expected.length; i++) {
+    let actual = text.charCodeAt(start + i);
+    const wanted = expected.charCodeAt(i);
+    if (actual >= 65 && actual <= 90) actual += 32;
+    if (actual !== wanted) return false;
+  }
+  return true;
+}
+
+function findTagEnd(html, start) {
+  let quote = '';
+  for (let i = start + 1; i < html.length; i++) {
+    const char = html[i];
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '>') {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function isSelfClosingStartTag(html, nameEnd, end) {
+  let i = nameEnd;
+  while (i < end) {
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    if (html[i] === '/') {
+      return i + 1 === end;
+    }
+
+    while (
+      i < end &&
+      !isHtmlWhitespace(html[i]) &&
+      html[i] !== '=' &&
+      html[i] !== '/' &&
+      html[i] !== '>'
+    ) i++;
+    if (html[i] !== '=') continue;
+
+    i++;
+    while (i < end && isHtmlWhitespace(html[i])) i++;
+    if (i >= end) return false;
+    const quote = html[i];
+    if (quote === '"' || quote === "'") {
+      i++;
+      while (i < end && html[i] !== quote) i++;
+      if (i >= end) return false;
+      i++;
+      continue;
+    }
+    // In HTML's unquoted attribute-value state `/` is data, not the
+    // self-closing flag. Only whitespace can end this value.
+    while (i < end && !isHtmlWhitespace(html[i]) && html[i] !== '>') i++;
+  }
+  return false;
+}
+
+function readTag(html, start) {
+  if (html[start] !== '<') return null;
+  let i = start + 1;
+  const closing = html[i] === '/';
+  if (closing) i++;
+  const nameStart = i;
+  while (i < html.length && isTagNameChar(html[i])) i++;
+  if (i === nameStart) return null;
+  const nameEnd = i;
+  const boundary = html[i] ?? '';
+  if (boundary && !isHtmlWhitespace(boundary) && boundary !== '/' && boundary !== '>') return null;
+  const end = findTagEnd(html, start);
+  if (end < 0) return null;
+  return {
+    closing,
+    end,
+    name: html.slice(nameStart, nameEnd).toLowerCase(),
+    nameEnd,
+    nameStart,
+    // HTML's self-closing flag is ignored on non-void elements. Treating
+    // `<template/>` or `<script/>` as closed makes the scanners expose the
+    // inactive text that follows them as live document markup.
+    selfClosing: !closing && HTML_VOID_ELEMENTS.has(html.slice(nameStart, nameEnd).toLowerCase())
+      && isSelfClosingStartTag(html, nameEnd, end),
+  };
+}
+
+function hasCharsetAttribute(html, tag) {
+  let i = tag.nameEnd;
+  while (i < tag.end) {
+    while (i < tag.end && (isHtmlWhitespace(html[i]) || html[i] === '/')) i++;
+    if (i >= tag.end) break;
+
+    const nameStart = i;
+    while (
+      i < tag.end &&
+      !isHtmlWhitespace(html[i]) &&
+      html[i] !== '=' &&
+      html[i] !== '/' &&
+      html[i] !== '>'
+    ) i++;
+    const nameEnd = i;
+    while (i < tag.end && isHtmlWhitespace(html[i])) i++;
+    if (html[i] !== '=') continue;
+    i++;
+    while (i < tag.end && isHtmlWhitespace(html[i])) i++;
+
+    const valueQuote = html[i];
+    let valueStart = i;
+    let valueEnd = i;
+    if (valueQuote === '"' || valueQuote === "'") {
+      valueStart = ++i;
+      while (i < tag.end && html[i] !== valueQuote) i++;
+      valueEnd = i;
+      if (i < tag.end) i++;
+    } else {
+      while (i < tag.end && !isHtmlWhitespace(html[i])) i++;
+      valueEnd = i;
+    }
+    if (asciiNameEquals(html, nameStart, nameEnd, 'charset') && valueEnd > valueStart) return true;
+  }
+  return false;
+}
+
+function skipComment(html, start) {
+  const end = html.indexOf('-->', start + 4);
+  return end < 0 ? -1 : end + 3;
+}
+
+function isTagNamed(html, tag, expected) {
+  return tag && asciiNameEquals(html, tag.nameStart, tag.nameEnd, expected);
+}
+
+function findRawTextClose(html, afterOpening, name) {
+  let searchFrom = afterOpening;
+  while (searchFrom < html.length) {
+    const start = html.indexOf('<', searchFrom);
+    if (start < 0) return null;
+    const tag = readTag(html, start);
+    if (tag && tag.closing && isTagNamed(html, tag, name)) {
+      return { start, end: tag.end + 1 };
+    }
+    searchFrom = start + 1;
+  }
+  return null;
+}
+
+function skipRawTextElement(html, afterOpening, name) {
+  return findRawTextClose(html, afterOpening, name)?.end ?? -1;
+}
+
+function skipTemplateElement(html, afterOpening) {
+  let depth = 1;
+  let searchFrom = afterOpening;
+  while (searchFrom < html.length) {
+    const start = html.indexOf('<', searchFrom);
+    if (start < 0) return -1;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return -1;
+      searchFrom = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      searchFrom = start + 1;
+      continue;
+    }
+    if (isTagNamed(html, tag, 'template')) {
+      if (tag.closing) {
+        depth--;
+        if (depth === 0) return tag.end + 1;
+      } else if (!tag.selfClosing) {
+        depth++;
+      }
+    } else if (
+      !tag.closing &&
+      !tag.selfClosing &&
+      HTML_RAW_TEXT_TAGS.some((rawName) => isTagNamed(html, tag, rawName))
+    ) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      const afterRawText = skipRawTextElement(html, tag.end + 1, rawName);
+      if (afterRawText < 0) return -1;
+      searchFrom = afterRawText;
+      continue;
+    }
+    searchFrom = tag.end + 1;
+  }
+  return -1;
+}
+
+/**
+ * Return the offset immediately after the first complete, real `<meta>` start
+ * tag in `headContent` that declares `charset`. The scanner preserves source
+ * offsets, skips comments/templates/raw-text nodes, accepts any attribute
+ * order, and respects `>` inside quoted attribute values.
+ */
+function findCharsetMetaEnd(headContent) {
+  let searchFrom = 0;
+  while (searchFrom < headContent.length) {
+    const start = headContent.indexOf('<', searchFrom);
+    if (start < 0) return -1;
+    if (headContent.startsWith('<!--', start)) {
+      const afterComment = skipComment(headContent, start);
+      if (afterComment < 0) return -1;
+      searchFrom = afterComment;
+      continue;
+    }
+    const tag = readTag(headContent, start);
+    if (!tag) {
+      searchFrom = start + 1;
+      continue;
+    }
+    if (!tag.closing && isTagNamed(headContent, tag, 'meta') && hasCharsetAttribute(headContent, tag)) {
+      return tag.end + 1;
+    }
+    if (!tag.closing && !tag.selfClosing && isTagNamed(headContent, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(headContent, tag.end + 1);
+      if (afterTemplate < 0) return -1;
+      searchFrom = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      let skippedRawText = false;
+      for (const rawName of HTML_RAW_TEXT_TAGS) {
+        if (isTagNamed(headContent, tag, rawName)) {
+          const afterRawText = skipRawTextElement(headContent, tag.end + 1, rawName);
+          if (afterRawText < 0) return -1;
+          searchFrom = afterRawText;
+          skippedRawText = true;
+          break;
+        }
+      }
+      if (skippedRawText) continue;
+    }
+    searchFrom = tag.end + 1;
+  }
+  return -1;
+}
+
+function findActiveHeadContent(html) {
+  let searchFrom = 0;
+  while (searchFrom < html.length) {
+    const start = html.indexOf('<', searchFrom);
+    if (start < 0) return null;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0) return null;
+      searchFrom = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      searchFrom = start + 1;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(html, tag.end + 1);
+      if (afterTemplate < 0) return null;
+      searchFrom = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      if (rawName) {
+        const afterRawText = skipRawTextElement(html, tag.end + 1, rawName);
+        if (afterRawText < 0) return null;
+        searchFrom = afterRawText;
+        continue;
+      }
+    }
+    if (!tag.closing && isTagNamed(html, tag, 'head')) {
+      const contentStart = tag.end + 1;
+      let cursor = contentStart;
+      while (cursor < html.length) {
+        const nestedStart = html.indexOf('<', cursor);
+        if (nestedStart < 0) return null;
+        if (html.startsWith('<!--', nestedStart)) {
+          const afterComment = skipComment(html, nestedStart);
+          if (afterComment < 0) return null;
+          cursor = afterComment;
+          continue;
+        }
+        const nested = readTag(html, nestedStart);
+        if (!nested) {
+          cursor = nestedStart + 1;
+          continue;
+        }
+        if (nested.closing && isTagNamed(html, nested, 'head')) {
+          return { start: contentStart, end: nestedStart };
+        }
+        if (!nested.closing && !nested.selfClosing && isTagNamed(html, nested, 'template')) {
+          const afterTemplate = skipTemplateElement(html, nested.end + 1);
+          if (afterTemplate < 0) return null;
+          cursor = afterTemplate;
+          continue;
+        }
+        if (!nested.closing && !nested.selfClosing) {
+          const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, nested, name));
+          if (rawName) {
+            const afterRawText = skipRawTextElement(html, nested.end + 1, rawName);
+            if (afterRawText < 0) return null;
+            cursor = afterRawText;
+            continue;
+          }
+        }
+        cursor = nested.end + 1;
+      }
+      return null;
+    }
+    searchFrom = tag.end + 1;
+  }
+  return null;
+}
+
+function isExecutableScriptTag(html, tag, start) {
+  const source = html.slice(start, tag.end + 1);
+  const type = /(?:^|\s)type\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(source);
+  if (!type) return true;
+  const value = (type[1] ?? type[2] ?? type[3] ?? '').trim().toLowerCase();
+  if (!value || value === 'module') return true;
+  const mime = value.split(';', 1)[0].trim();
+  return mime === 'text/javascript' || mime === 'application/javascript'
+    || mime === 'text/ecmascript' || mime === 'application/ecmascript'
+    || mime.endsWith('/javascript') || mime.endsWith('/ecmascript');
+}
+
+function hasCdnBaseAssignment(script) {
+  // The initializer emitted by this script is the complete script body below.
+  // Requiring that exact shape is deliberately stricter than searching for an
+  // assignment: comments, string literals, regex literals, and application
+  // code can all contain the same text while leaving the runtime unconfigured.
+  const source = String(script || '').trim();
+  return /^window\.__CDN_DATA_BASE__\s*=\s*(["'])https?:\/\/[^"'\\\r\n]+\1\s*;?$/i.test(source);
+}
+
+/**
+ * Idempotency is valid only for an executable script inside the real head.
+ * A substring in a comment, template, JSON-LD block, or body must not make us
+ * skip injection: the data/image directories may be deleted immediately after
+ * this pass, so a false positive here turns into a runtime 404.
+ */
+function hasExecutableCdnBaseMarker(html, head) {
+  let cursor = head.start;
+  while (cursor < head.end) {
+    const start = html.indexOf('<', cursor);
+    if (start < 0 || start >= head.end) return false;
+    if (html.startsWith('<!--', start)) {
+      const afterComment = skipComment(html, start);
+      if (afterComment < 0 || afterComment > head.end) return false;
+      cursor = afterComment;
+      continue;
+    }
+    const tag = readTag(html, start);
+    if (!tag) {
+      cursor = start + 1;
+      continue;
+    }
+    const tagEnd = tag.end + 1;
+    if (tagEnd > head.end) return false;
+    if (!tag.closing && !tag.selfClosing && isTagNamed(html, tag, 'template')) {
+      const afterTemplate = skipTemplateElement(html, tagEnd);
+      if (afterTemplate < 0 || afterTemplate > head.end) return false;
+      cursor = afterTemplate;
+      continue;
+    }
+    if (!tag.closing && !tag.selfClosing) {
+      const rawName = HTML_RAW_TEXT_TAGS.find((name) => isTagNamed(html, tag, name));
+      if (rawName) {
+        const close = findRawTextClose(html, tagEnd, rawName);
+        if (!close || close.end > head.end) return false;
+        if (rawName === 'script' && isExecutableScriptTag(html, tag, start)
+          && hasCdnBaseAssignment(html.slice(tagEnd, close.start))) {
+          return true;
+        }
+        cursor = close.end;
+        continue;
+      }
+    }
+    cursor = tagEnd;
+  }
+  return false;
+}
 
 function log(msg) {
   console.log(`[offload-generated-cdn] ${msg}`);
@@ -277,6 +686,7 @@ function offloadAll(distDir, cdnBase) {
   let dataRefRewritten = 0;
   let injected = 0;
   let htmlSeen = 0;
+  const injectionFailures = [];
   const ogLeaks = [];
   const assetsLeaks = [];
 
@@ -325,25 +735,31 @@ function offloadAll(distDir, cdnBase) {
     //     present whenever cdnBase is valid (this script only runs then).
     if (isHtml) {
       htmlSeen++;
-      if (out.includes('__CDN_DATA_BASE__')) {
-        injected++; // already present (idempotent re-run)
+      const activeHead = findActiveHeadContent(out);
+      if (!activeHead) {
+        injectionFailures.push(path.relative(distDir, fp));
+      } else if (hasExecutableCdnBaseMarker(out, activeHead)) {
+        injected++; // already present in the executable head (idempotent re-run)
       } else {
-        const m = out.match(/<head[^>]*>/i);
-        if (m) {
-          const at = m.index + m[0].length;
-          // The hint comment above assumes the data CDN is a DISTINCT host
-          // from the asset CDN; when config points both at the same origin the
-          // build already ships this exact preconnect (asyncCssPlugin /
-          // template heads) and re-adding it duplicates the hint on every page
-          // (#3530). An existing preconnect also supersedes dns-prefetch, so
-          // only the data-base script tag is still required.
-          const tag = cdnOrigin && out.includes(`<link rel="preconnect" href="${cdnOrigin}"`)
-            ? injectTag.replace(hintTags, '')
-            : injectTag;
-          out = out.slice(0, at) + tag + out.slice(at);
-          injected++;
-        }
-        // no <head>: leave it (its SPA fetch degrades gracefully)
+        const headContent = out.slice(activeHead.start, activeHead.end);
+        const charsetEnd = findCharsetMetaEnd(headContent);
+        // HTML requires the encoding declaration near the start of <head>.
+        // Keep deploy-time hints after it; fall back to the old insertion
+        // point for unusual documents that do not declare a charset.
+        const at = charsetEnd >= 0
+          ? activeHead.start + charsetEnd
+          : activeHead.start;
+        // The hint comment above assumes the data CDN is a DISTINCT host
+        // from the asset CDN; when config points both at the same origin the
+        // build already ships this exact preconnect (asyncCssPlugin /
+        // template heads) and re-adding it duplicates the hint on every page
+        // (#3530). An existing preconnect also supersedes dns-prefetch, so
+        // only the data-base script tag is still required.
+        const tag = cdnOrigin && out.includes(`<link rel="preconnect" href="${cdnOrigin}"`)
+          ? injectTag.replace(hintTags, '')
+          : injectTag;
+        out = out.slice(0, at) + tag + out.slice(at);
+        injected++;
       }
     }
 
@@ -406,6 +822,10 @@ function offloadAll(distDir, cdnBase) {
       // so it's exempt. With the inject now decoupled from hasData this only fires
       // in the degenerate no-HTML-with-<head> case, but the guard makes the latent
       // 404 impossible by construction.
+      if (t.url.startsWith('/images/') && injectionFailures.length > 0) {
+        kept.push(`${t.url} (CDN base missing from ${injectionFailures.length}/${htmlSeen} HTML page(s) — keeping to avoid runtime cdnImageUrl 404)`);
+        continue;
+      }
       if (t.url.startsWith('/images/') && injected === 0) {
         kept.push(`${t.url} (CDN base injected into 0/${htmlSeen} HTML — keeping to avoid runtime cdnImageUrl 404)`);
         continue;
@@ -430,6 +850,8 @@ function offloadAll(distDir, cdnBase) {
   // data: delete cdn-only files, keep any /data/ path referenced same-origin in HTML.
   if (!hasData) {
     log('no dist/data — skipping data delete');
+  } else if (injectionFailures.length > 0) {
+    log(`GUARD: CDN base missing from ${injectionFailures.length}/${htmlSeen} HTML page(s) (${injectionFailures.slice(0, 3).join(', ')}) — keeping dist/data`);
   } else if (injected === 0) {
     log(`GUARD: data base injected into 0/${htmlSeen} HTML pages — keeping dist/data`);
   } else {

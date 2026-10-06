@@ -28,6 +28,7 @@ import {
 } from './free-translate.mjs';
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
+import { maskInactiveMarkup } from './source-url-ledger.mjs';
 
 export { hasUsableContentText };
 
@@ -1680,9 +1681,7 @@ export function cleanEventText(value) {
   if (typeof value !== 'string') return '';
   let text = value;
   for (let pass = 0; pass < 3; pass += 1) {
-    const cleaned = decodeEventEntities(text)
-      .replace(/<!--[\s\S]*?-->/g, ' ')
-      .replace(/<(script|style|noscript|template)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
+    const cleaned = maskInactiveMarkup(decodeEventEntities(text))
       .replace(/<br\s*\/?\s*>/gi, ' ')
       .replace(EVENT_KNOWN_TAG_RX, ' ');
     if (cleaned === text) break;

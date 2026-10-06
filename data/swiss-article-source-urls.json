@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948070/dispositivo-din-manifestazione-contenimento-dipartimento-g7-anti-g7-lecito": {
-    "articleId": "manifestazione-anti-g7-dispositivo-lecito",
-    "ts": "2026-09-05T10:26:36.163Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/cronaca/1947977/ubriachi-fradici-accatastano-oggetti-sui-binari-e-arriva-il-treno": {
-    "articleId": "svizzera-treno-oggetti-binari",
-    "ts": "2026-09-05T10:36:22.656Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948195/polizia-intervento-goldach-entita-scuola-concluso-sg": {
     "articleId": "intervento-polizia-goldach-scuola",
     "ts": "2026-09-05T10:47:04.665Z",
@@ -2497,6 +2487,16 @@
   "https://www.swissinfo.ch/ita/natalie-rickli-prende-tempo-su-candidatura-al-consiglio-federale/92174535": {
     "articleId": "rickli-tempo-candidatura-federal",
     "ts": "2026-10-06T14:04:52.613Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/3ziflyruw6a-": {
+    "articleId": "nuovi-progetti-chiave-digitali",
+    "ts": "2026-10-06T14:57:46.441Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/industrializzare-la-luna%2c-nuova-frontiera-pure-per-aziende-svizzere/92175634": {
+    "articleId": "luna-opportunita-aziende-svizzere",
+    "ts": "2026-10-06T15:49:22.319Z",
     "keyForm": 2
   }
 }

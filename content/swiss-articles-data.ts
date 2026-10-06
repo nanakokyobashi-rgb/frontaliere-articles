@@ -24741,6 +24741,26 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'nuovi-progetti-chiave-digitali',
+    category: 'novita',
+    date: '2026-10-06T14:57:46.101Z',
+    image: '/images/blog/nuovi-progetti-chiave-digitali.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'luna-opportunita-aziende-svizzere',
+    category: 'novita',
+    date: '2026-10-06T15:49:21.967Z',
+    image: '/images/blog/luna-opportunita-aziende-svizzere.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

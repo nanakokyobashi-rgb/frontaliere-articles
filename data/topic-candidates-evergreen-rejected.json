@@ -794,10 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/attualita/1954607/nobel-ottobre-medicina-premio-economia": {
-      "section": "svizzera",
-      "ts": 1791125994294
-    },
     "svizzera::https://lenews.ch/2026/10/02/film-zurich-film-festival-2026-excellent-international-films-and-top-stars": {
       "section": "svizzera",
       "ts": 1791138099858
@@ -981,6 +977,34 @@
     "frontaliere::https://www.tio.ch/ticino/politica/1955049/lavoro-movimento-possono-opportunita-contatti": {
       "section": "frontaliere",
       "ts": 1791291625510
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/gaia-turbine-sa-si-aggiudica-il-primo-premio-bancastato-per-la-sostenibilita-aziendale-444060": {
+      "section": "frontaliere",
+      "ts": 1791295913545
+    },
+    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1955011/pmi-premio-progetti-sostenibilita-territorio": {
+      "section": "frontaliere",
+      "ts": 1791295980022
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/arpa-e-insubria-insieme-per-accorciare-le-distanze-tra-universita-e-lavoro/2694481": {
+      "section": "frontaliere",
+      "ts": 1791296032597
+    },
+    "frontaliere::https://www.rsi.ch/s/4137113": {
+      "section": "frontaliere",
+      "ts": 1791296104849
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
+      "section": "svizzera",
+      "ts": 1791297834567
+    },
+    "frontaliere::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
+      "section": "frontaliere",
+      "ts": 1791299512487
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955034/allevamenti-stati-abbattuti-malattia-tre-sgomberati": {
+      "section": "svizzera",
+      "ts": 1791300500426
     }
   }
 }
