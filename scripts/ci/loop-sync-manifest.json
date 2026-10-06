@@ -369,11 +369,11 @@
     {
       "path": "scripts/ci/classify-codex-review-failure.mjs",
       "mode": "corpus-only",
-      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione e failure non ritentabili. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
+      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione, startup failure con un solo retry bounded e failure non ritentabili. Espone solo conteggi di eventi e una diagnostica stderr da allowlist, mai prompt/risposta/JSONL grezzo. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "4a1c1a0afcf0cb86",
-        "alignedAt": "2026-09-16"
+        "corpus": "7a101891a3815f76",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -834,10 +834,10 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
         "site": "7b647c07268b94ce",
-        "corpus": "75e6b6e720cb120a",
+        "corpus": "9c601148e973f83d",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T00:27:32.975Z"
       }
@@ -884,12 +884,12 @@
     },
     {
       "path": "scripts/ci/loop-health-report.mjs",
-      "mode": "identical",
-      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): lo script del sito e' gia' portabile (GH_REPO, revisore per repo) e importa solo node:*, quindi gira identico qui, alimentato da .github/workflows/loop-health-report.yml con il GITHUB_TOKEN del corpus.",
+      "mode": "adapted",
+      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare.",
       "baseline": {
         "site": "5f12fc298ad39df9",
-        "corpus": "5f12fc298ad39df9",
-        "alignedAt": "2026-10-04"
+        "corpus": "b8d5c02a27ced312",
+        "alignedAt": "2026-10-06"
       }
     },
     {
