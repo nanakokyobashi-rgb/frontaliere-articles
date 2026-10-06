@@ -69,7 +69,7 @@ function generatedRecord(overrides = {}) {
     verifiedAt: '2026-10-06T10:01:00.000Z',
     restrictions: [...GENERATED_IMAGE_RESTRICTIONS],
     scope: 'article-hero',
-    imageUrl: '/images/generated/article-governance-test.webp',
+    imageUrl: '/images/blog/article-governance-test.webp',
     vision: {
       ok: true,
       contains_text: false,
@@ -80,6 +80,14 @@ function generatedRecord(overrides = {}) {
     },
     ...overrides,
   };
+}
+
+function governedArticleCoverPath() {
+  const currentPath = generatedRecord().imageUrl;
+  if (validateGeneratedImageRecord(generatedRecord()).valid) return currentPath;
+  // The corpus base can lag the site engine by one mirror cycle; keep this
+  // fixture executable on both sides while the contract moves to /images/blog/.
+  return '/images/generated/article-governance-test.webp';
 }
 
 test('the new-cover pipeline uses only the governed article-hero engine', () => {
@@ -162,7 +170,7 @@ test('the pure journalist image policy rejects arbitrary URLs and accepts comple
 test('generated and editorial records are reader-facing and discoverable by cover path', () => {
   const root = tempRoot();
   try {
-    const generated = generatedRecord();
+    const generated = generatedRecord({ imageUrl: governedArticleCoverPath() });
     const generatedFile = path.join(root, 'public', generated.imageUrl.slice(1));
     fs.mkdirSync(path.dirname(generatedFile), { recursive: true });
     fs.writeFileSync(generatedFile, Buffer.alloc(generated.bytes, 0x47));

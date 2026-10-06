@@ -2067,7 +2067,7 @@
     {
       "path": "scripts/lib/corpus-floors.mjs",
       "mode": "corpus-only",
-      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre sia il catalogo public/images/blog sia le copertine governate public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
+      "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Il conteggio immagini copre il catalogo e le copertine governate sotto public/images/blog, oltre agli eventuali asset governati sotto public/images/generated. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
         "corpus": "08b806da4017d729",

@@ -14048,7 +14048,7 @@ async function generateArticleImage(data) {
         variant: 'article hero',
       },
       {
-        outputDir: resolve('public/images/generated'),
+        outputDir: resolve('public/images/blog'),
         assetId,
         maxAttempts: 3,
         deadlineAt: imageDeadline,
