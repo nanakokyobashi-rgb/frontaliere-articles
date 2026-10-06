@@ -204,9 +204,11 @@ function sameSlugs(a, b) {
  * su una sezione dichiarata viva.
  *
  * Con `missingHubsOf` (lo passa `loadDeclaredRegistry`, che ha il disco) una
- * sezione `live` deve avere anche i dati di TUTTI i suoi hub tematici: la
- * landing li linka tutti e la sitemap li elenca, e nessuna pagina cantonale e'
- * mai `noindex` — una sezione a cui manca un hub resta `draft`.
+ * sezione `live` viene anche controllata per i dati dei suoi hub tematici.
+ * Un hub assente e' uno stato di rollout incompleto, non un registro
+ * malformato: la sezione viene degradata a `draft` da `effectiveStatuses`.
+ * Un file presente ma illeggibile o incompleto resta invece un errore
+ * bloccante, per non pubblicare dati troncati.
  *
  * @param {unknown} doc
  * @param {{ all?: Record<string, any>, active?: Record<string, any>, missingHubsOf?: (id: string) => string[] }} [core]
@@ -246,15 +248,10 @@ export function declaredRegistryErrors(doc, { all = ARTICLE_SECTION_CORE_ALL, ac
       errors.push(`${id}: dichiarata live ma non attiva nel core (ACTIVE_CANTON_SECTIONS) — nessuna sua pagina verrebbe pubblicata`);
     }
     if (entry.status === 'live' && missingHubsOf) {
-      let missing;
       try {
-        missing = missingHubsOf(id);
+        missingHubsOf(id);
       } catch (error) {
         errors.push(`${id}: dati hub non validi (${error.message})`);
-        missing = [];
-      }
-      if (missing.length) {
-        errors.push(`${id}: dichiarata live senza i dati degli hub ${missing.join(', ')} — la landing li linka e la sitemap li elenca: resta draft finche' non esistono`);
       }
     }
     errors.push(...routingErrors(id, entry, all));
@@ -357,15 +354,18 @@ export function resolveKillSwitch(env = process.env, all = ARTICLE_SECTION_CORE_
 }
 
 /**
- * Stato effettivo per sezione: `live` dichiarato e spento → `draft`.
+ * Stato effettivo per sezione: `live` dichiarato e spento o senza tutti gli
+ * hub → `draft`.
  * @returns {Record<string, { declared: string, status: string, killed: boolean }>}
  */
-export function effectiveStatuses(declared, killSwitch) {
+export function effectiveStatuses(declared, killSwitch, { missingHubsOf } = {}) {
   const killed = new Set(killSwitch.sections);
   return Object.fromEntries(
     Object.entries(declared.sections).map(([id, entry]) => {
       const off = entry.status === 'live' && killed.has(id);
-      return [id, { declared: entry.status, status: off ? 'draft' : entry.status, killed: off }];
+      const missing = entry.status === 'live' && missingHubsOf ? missingHubsOf(id) : [];
+      const unavailable = missing.length > 0;
+      return [id, { declared: entry.status, status: off || unavailable ? 'draft' : entry.status, killed: off }];
     }),
   );
 }

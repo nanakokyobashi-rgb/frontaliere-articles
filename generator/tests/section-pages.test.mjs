@@ -642,12 +642,12 @@ test('hub: un file presente ma incompleto e\' un errore, non un hub in tre lingu
   assert.throws(() => readCantonHubData(root, 'canton-ti', 'servizi'), /JSON illeggibile/);
 });
 
-test('registro: una sezione live deve avere i dati di tutti e sei gli hub (mai noindex, resta draft)', () => {
+test('registro: gli hub mancanti lasciano draft, quelli malformati bloccano', () => {
   const doc = JSON.parse(read(SECTION_REGISTRY_FILE));
   doc.sections['canton-ti'].status = 'live';
   const withHubs = (missing) => declaredRegistryErrors(doc, { active: ACTIVE_WITH_TI, missingHubsOf: () => missing });
   assert.deepEqual(withHubs([]), []);
-  assert.match(withHubs(['eventi', 'servizi']).join('\n'), /canton-ti: dichiarata live senza i dati degli hub eventi, servizi/);
+  assert.deepEqual(withHubs(['eventi', 'servizi']), []);
   // Dati malformati: errore del registro, non un'eccezione che nasconde gli altri.
   const broken = declaredRegistryErrors(doc, { active: ACTIVE_WITH_TI, missingHubsOf: () => { throw new Error('intro "de" vuota'); } });
   assert.match(broken.join('\n'), /canton-ti: dati hub non validi \(intro "de" vuota\)/);

@@ -560,6 +560,7 @@ test('tutte le superfici di famiglia seguono una sola decisione live effettiva',
   const off = resolveKillSwitch({ RC_ENV_LOADED: '1', CANTON_ARTICLE_SECTIONS_KILL: 'TI' });
   assert.equal(effectiveStatuses(declared, on)['canton-ti'].status, 'live');
   assert.equal(effectiveStatuses(declared, off)['canton-ti'].status, 'draft');
+  assert.equal(effectiveStatuses(declared, on, { missingHubsOf: () => ['eventi'] })['canton-ti'].status, 'draft');
   assert.equal(edgeRegistryPublishable(declared, resolveKillSwitch({})), false);
 
   // verify-api-floors: per una sezione non live l'assenza dei feed e' lo stato
