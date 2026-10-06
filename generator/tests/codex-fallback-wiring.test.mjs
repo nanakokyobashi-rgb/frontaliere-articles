@@ -144,11 +144,12 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
   }
 });
 
-// Decisione del proprietario del 2026-09-25: «Per il translate pending aggiungi
-// codex ma dopo argos e i sistemi che non consumano quota». L'artifact e'
-// generato dal sito (translate-pending-logic.yml) e arriva col lockstep: prima
-// non tocca il broker, dopo lo usa solo cosi'. Mai a meta'.
-test('translate-pending: Codex solo dopo Argos, in coda alla cascata delle fasi 2d/2e', () => {
+// Decisione del proprietario del 2026-09-25: Codex resta l'ultimo tier nelle
+// fasi 2d/2e. H7 del 2026-10-05 aggiunge la riserva nella cascata 2b quando
+// DeepL/Azure non servono piu' la run; il broker parte dopo Argos bulk e prima
+// della 2b. L'artifact arriva dal lockstep del sito, quindi il test deve seguire
+// entrambe le decisioni e non una copia storica della posizione del broker.
+test('translate-pending: Codex entra dopo Argos, con riserva 2b e ultimo tier 2d/2e', () => {
   const source = read(TRANSLATION_WORKFLOW);
   const lines = source.split('\n');
   const setupIndex = lines.findIndex((line) => /^\s*-?\s*uses:\s*\.\/\.github\/actions\/setup-claude-haiku-fallback\s*$/.test(line));
@@ -161,7 +162,7 @@ test('translate-pending: Codex solo dopo Argos, in coda alla cascata delle fasi 
   const argosBulk = stepStart(/^\s*- name: "Phase 2a: .*Argos/);
   const argosMopup = stepStart(/^\s*- name: "Phase 2c mop-up: .*Argos/);
   assert.ok(argosBulk >= 0 && argosMopup >= 0, 'Argos phases not found');
-  assert.ok(setupIndex > argosBulk && setupIndex > argosMopup, 'the Codex broker must start after both Argos passes');
+  assert.ok(setupIndex > argosBulk && setupIndex < argosMopup, 'the Codex broker must start after Argos bulk and before the 2b cascade');
   assert.match(stepBlock(lines, setupIndex), /broker_idle_ttl_ms:\s*"?(\d+)"?/);
 
   const consumers = lines
@@ -169,13 +170,22 @@ test('translate-pending: Codex solo dopo Argos, in coda alla cascata delle fasi 
     .filter((block) => block && !block.includes('- name: Cleanup Codex auth broker'));
   assert.deepEqual(
     consumers.map((block) => /- name: "?([^"\n]+)"?/.exec(block)?.[1]),
-    ['Phase 2d: Fix untranslated titles (free cascade)', 'Phase 2e: Fix untranslated descriptions (free cascade)'],
-    'only the post-Argos repair phases may receive the Codex socket',
+    ['Phase 2b: Translate pending jobs (cascade top-up)', 'Phase 2d: Fix untranslated titles (free cascade)', 'Phase 2e: Fix untranslated descriptions (free cascade)'],
+    'only the 2b/2d/2e translation phases may receive the Codex socket',
   );
+  const hasWorkflowCallBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS_REPO:/.test(source)
+    && /printf ['"]FREE_TRANSLATE_CODEX_MAX_CALLS=%s/.test(source)
+    && /FREE_TRANSLATE_CODEX_MAX_CALLS=30/.test(source);
   for (const block of consumers) {
-    assert.match(block, /FREE_TRANSLATE_CODEX_TIER:\s*last/, 'Codex must sit at the end of the cascade');
-    assert.match(block, /FREE_TRANSLATE_CODEX_MAX_CALLS:\s*"?\d+"?/, 'per-run call budget missing');
+    assert.ok(
+      /FREE_TRANSLATE_CODEX_MAX_CALLS:\s*"?\d+"?/.test(block) || hasWorkflowCallBudget,
+      'per-run call budget missing',
+    );
     assert.match(block, /FREE_TRANSLATE_CODEX_MAX_MS:\s*"?\d+"?/, 'per-run time budget missing');
+  }
+  assert.doesNotMatch(consumers[0], /FREE_TRANSLATE_CODEX_TIER:/, 'the 2b reserve keeps the normal tier position');
+  for (const block of consumers.slice(1)) {
+    assert.match(block, /FREE_TRANSLATE_CODEX_TIER:\s*last/, 'Codex must sit at the end of the 2d/2e cascades');
   }
   assert.doesNotMatch(source, /^\s+AI_MODELS_PREFER:/m);
 });

@@ -11,10 +11,18 @@ const ENTRYPOINTS = [
   'generator/scripts/retranslate-blocking-bodies.mjs',
   'generator/scripts/reset-evergreen-strikes.mjs',
   'generator/scripts/scan-vacuous-key-facts.mjs',
+  'scripts/ci/check-node-test-stdout.mjs',
+  'scripts/ci/claude-codex-fallback.mjs',
+  'scripts/ci/redcheck-review-prefilter.mjs',
+  'scripts/ci/review-claim.mjs',
   'scripts/seo/bing-seo-loop.mjs',
   'scripts/lib/merge-content-registry-conflict.mjs',
+  'scripts/publish-section-edge.mjs',
   'scripts/reconcile-article-shards.mjs',
   'scripts/find-dirty-content-ids.mjs',
+  'scripts/ci/unwedge-pages-deploy-queue.mjs',
+  'generator/scripts/backfill-article-cantons.mjs',
+  'generator/scripts/measure-article-waste.mjs',
 ];
 
 test('i producer/repairer del follow-up canonicalizzano entrambi i lati del main-guard', () => {

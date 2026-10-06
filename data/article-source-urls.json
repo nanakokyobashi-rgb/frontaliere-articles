@@ -1,11 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1942030/indicatore-aziende-affari-migliora-settori": "indicatore-affari-aziende-luglio",
-  "https://www.tio.ch/svizzera/attualita/1942044/francia-affitti-alloggio-spinge-trasferirsi": "svizzeri-fuga-alloglio-ticino",
-  "https://ilgiornaledelticino.ch/pensieri-mostruosamente-proibiti-borsa-su-rotta-sullisola-dei-15000-punti": "borsa-rotta-isola-15000-punti",
-  "https://www.varesenews.it/2026/08/lite-davanti-alla-stazione-di-tradate-nellora-di-punta-dei-pendolari-ferito-un-trentenne/2651647": "tradate-lite-ferito-trentenne",
-  "https://www.varesenoi.it/2026/08/05/leggi-notizia/argomenti/video-6/articolo/caso-delmastro-la-protesta-di-avs-alla-camera-con-le-bende-sugli-occhi.html": "caso-delmastro-protesta-avs",
-  "https://www.laregione.ch/cantone/mendrisiotto/1942049/vanno-fatti-lavori-urgenti-alla-strada-che-porta-a-serpiano": "mendrisio-strada-serpiano-urgenti-lavori",
-  "https://www.ticinonews.ch/ticino/finanze-cantonali-disavanzo-di-497-milioni-migliore-di-83-milioni-440141": "disavanzo-cantonale-ticino-frontalieri",
   "https://ilgiornaledelticino.ch/clima-piu-disteso-e-trimestrali-in-arrivo-swiss-market-index-al-rilancio": "borse-zurigo-chiude-in-verde-new-york-si-concede-una-fuga",
   "https://www.ticinonews.ch/svizzera/frontalieri-in-ticino-cifre-in-lieve-aumento-440207": "frontalierieticinoaumento",
   "https://www.rsi.ch/s/3936801": "aumento-dei-frontalieri-attivi-in-svizzera",
@@ -2012,6 +2005,41 @@
   "https://www.rsi.ch/s/4136507": {
     "articleId": "lavori-pubblica-utilita-multe-pene",
     "ts": "2026-10-06T06:23:26.255Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1954947/lavori-e-attese-sulla-strada-cantonale": {
+    "articleId": "gambarogno-pavimentazione-attese",
+    "ts": "2026-10-06T06:52:28.617Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/economia/disoccupazione-rimane-stabile-al-30-in-settembre-in-svizzera-444034": {
+    "articleId": "disoccupazione-settembre-ticino-2026",
+    "ts": "2026-10-06T07:34:13.889Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/argomento/frontalieri": {
+    "articleId": "frontalieri-tassa-ingresso-rischi-comuni",
+    "ts": "2026-10-06T08:21:29.480Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1954970/carovita-i-sindacati-chiedono-al-cantone-di-recuperare-il-divario": {
+    "articleId": "carovita-sindacati-recupero-divario",
+    "ts": "2026-10-06T09:15:32.076Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/lavori-nella-galleria-di-monte-olimpino-1-modifiche-ai-tilo-tra-chiasso-e-como-444044": {
+    "articleId": "monte-olimpino-collegamenti-tilo",
+    "ts": "2026-10-06T10:25:21.305Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/stazione-ffs-di-giubiasco-concluso-il-rinnovo-dello-stabile-viaggiatori-444038": {
+    "articleId": "stazione-ffs-giubiasco-rinnovo",
+    "ts": "2026-10-06T10:59:23.191Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955019/chiasso-kimono-oriente-cultura-arriva-trame": {
+    "articleId": "trame-oriente-chiasso",
+    "ts": "2026-10-06T11:41:53.650Z",
     "keyForm": 2
   }
 }

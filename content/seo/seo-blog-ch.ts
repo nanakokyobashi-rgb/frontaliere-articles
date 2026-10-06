@@ -98377,6 +98377,278 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-immobili-settembre-regioni': {
+    title: 'Prezzi case e appartamenti in Svizzera: settembre stabile',
+    description: 'A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, case, appartamenti, settembre',
+    ogTitle: 'Case e appartamenti: prezzi stabili a settembre',
+    ogDescription: 'L\'analisi degli annunci Immoscout, in collaborazione con IAZI, mostra prezzi nazionali quasi stabili in settembre, ma differenze regionali: Zurigo guida il calo delle case, mentre il Ticino sale per la proprietà per piani.',
+    canonicalPath: '/articoli-svizzera/prezzi-immobili-settembre-regioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi case e appartamenti in Svizzera: settembre stabile",
+      "description": "A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prezzi-immobili-settembre-regioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari"
+      },
+      "datePublished": "2026-10-06T06:36:57+00:00",
+      "dateModified": "2026-10-06T06:36:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-immobili-settembre-regioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ostinelli-cassa-malati-udienza-pretore': {
+    title: 'Ostinelli non paga la cassa malati e va davanti al pretore',
+    description: 'Roberto Ostinelli, medico di Mendrisio, ha smesso di pagare la cassa malati svizzera da giugno 2024 e deve presentarsi davanti al pretore il 6 ottobre dopo aver',
+    keywords: 'frontalieri, ticino, svizzera, italia, ostinelli, paga, cassa, malati',
+    ogTitle: 'Ostinelli non paga la cassa malati e va davanti al pretore',
+    ogDescription: 'Il medico e parlamentare Roberto Ostinelli, residente a Mendrisio, non versa più il premio della cassa malati svizzera da giugno 2024, optando per un\'assicurazione internazionale da 140 euro al mese che dice valida anche in Svizzera. Dopo il rifiuto',
+    canonicalPath: '/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ostinelli non paga la cassa malati e va davanti al pretore",
+      "description": "Roberto Ostinelli, medico di Mendrisio, ha smesso di pagare la cassa malati svizzera da giugno 2024 e deve presentarsi davanti al pretore il 6 ottobre dopo aver",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ostinelli-cassa-malati-udienza-pretore.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Roberto Ostinelli, medico di Mendrisio, davanti al pretore per il mancato pagamento della cassa malati"
+      },
+      "datePublished": "2026-10-06T07:13:37+00:00",
+      "dateModified": "2026-10-06T07:13:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-costi-assicurazione-base-proiezione': {
+    title: 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    description: 'L\'anno prossimo il premio medio dell\'assicurazione base sarà 488 franchi (+23, +5%). Se il trend del 5% annuo continua, tra 14 anni si avvicinerà a 966,20',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, aumento',
+    ogTitle: 'Premi cassa malati in aumento: verso i 1000 franchi al mese',
+    ogDescription: 'L\'articolo analizza l aumento previsto dei premi dell\'assicurazione obbligatoria: 488 franchi al mese l anno prossimo (+5%, +23 franchi). Secondo la proiezione del 5% annuo, il premio potrebbe raggiungere 966,20 franchi dopo 14 anni e più del doppio',
+    canonicalPath: '/articoli-svizzera/costi-assicurazione-base-proiezione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati in aumento: verso i 1000 franchi al mese",
+      "description": "L'anno prossimo il premio medio dell'assicurazione base sarà 488 franchi (+23, +5%). Se il trend del 5% annuo continua, tra 14 anni si avvicinerà a 966,20",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/costi-assicurazione-base-proiezione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera che controlla le spese sanitarie e i premi della cassa malati sul tavolo della cucina"
+      },
+      "datePublished": "2026-10-06T07:50:50+00:00",
+      "dateModified": "2026-10-06T07:50:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costi-assicurazione-base-proiezione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-settembre-2026': {
+    title: 'La situazione sul mercato del lavoro nel mese di settembre 2026',
+    description: 'La SECO ha pubblicato i dati di settembre 2026: 140’480 disoccupati (3%), in calo mensile dello 0,8%, ma in aumento annuo del 5,4%. Posti vacanti URC a 44’199.',
+    keywords: 'frontalieri, ticino, svizzera, italia, situazione, mercato, lavoro, mese',
+    ogTitle: 'Mercato lavoro Svizzera: dati SECO settembre 2026',
+    ogDescription: 'I dati SECO di settembre 2026 rivelano 140’480 disoccupati in Svizzera con un tasso al 3%. Registrato un calo mensile dello 0,8% ma un aumento annuo del 5,4%. I posti vacanti presso gli URC sono 44’199. L\'analisi include anche disoccupazione',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-settembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La situazione sul mercato del lavoro nel mese di settembre 2026",
+      "description": "La SECO ha pubblicato i dati di settembre 2026: 140’480 disoccupati (3%), in calo mensile dello 0,8%, ma in aumento annuo del 5,4%. Posti vacanti URC a 44’199.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-settembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di una città svizzera che simboleggia il mercato del lavoro e l'economia nazionale."
+      },
+      "datePublished": "2026-10-06T08:45:47+00:00",
+      "dateModified": "2026-10-06T08:45:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-settembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-effettivo-esercito-2026-calo': {
+    title: 'L\'effettivo dell\'esercito è sufficiente ora ma calerà entro il 2030',
+    description: 'Al 1° marzo 2026 l\'esercito svizzero conta 147 017 militari, sufficienti per garantire il regolamentare di 100 000, ma si prevede un calo sotto 130 000 unità',
+    keywords: 'frontalieri, ticino, svizzera, italia, effettivo, dell, esercito, sufficiente',
+    ogTitle: 'Esercito svizzero: effettivo sufficiente ora, calo previsto entro 2030',
+    ogDescription: 'Il censimento dell’esercito 2026 pubblicato il 6 ottobre mostra 147 017 militari incorporati al 1° marzo, sufficienti per il regolamentare di 100 000. Tuttavia, il proscioglimento delle ultime due classi d’età con obbligo di 12 anni nel 2028‑2029',
+    canonicalPath: '/articoli-svizzera/effettivo-esercito-2026-calo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'effettivo dell'esercito è sufficiente ora ma calerà entro il 2030",
+      "description": "Al 1° marzo 2026 l'esercito svizzero conta 147 017 militari, sufficienti per garantire il regolamentare di 100 000, ma si prevede un calo sotto 130 000 unità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/effettivo-esercito-2026-calo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista delle caserme dell'esercito svizzero vicino a Lugano con soldati in addestramento"
+      },
+      "datePublished": "2026-10-06T10:00:38+00:00",
+      "dateModified": "2026-10-06T10:00:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/effettivo-esercito-2026-calo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-perdita-ad-bilancio-2025': {
+    title: 'Assicurazione disoccupazione: perdita 249 milioni nel 2025',
+    description: 'L\'assicurazione disoccupazione chiude il 2025 con una perdita di 249 milioni. La SECO comunica uscite, entrate, disoccupati medi e capitale netto del fondo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicurazione, disoccupazione, perdita, milioni',
+    ogTitle: 'AD: perdita di 249 milioni nel 2025',
+    ogDescription: 'Nel 2025 l\'AD ha registrato uscite per 8,69 miliardi contro 8,44 di entrate. I disoccupati medi sono saliti a 133\'712, mentre il capitale proprio netto del fondo è sceso a 7,96 miliardi; l\'approvazione formale resta pendente.',
+    canonicalPath: '/articoli-svizzera/perdita-ad-bilancio-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicurazione disoccupazione: perdita 249 milioni nel 2025",
+      "description": "L'assicurazione disoccupazione chiude il 2025 con una perdita di 249 milioni. La SECO comunica uscite, entrate, disoccupati medi e capitale netto del fondo.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/perdita-ad-bilancio-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio federale a Berna, immagine simbolica del bilancio dell'assicurazione disoccupazione"
+      },
+      "datePublished": "2026-10-06T10:41:49+00:00",
+      "dateModified": "2026-10-06T10:41:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/perdita-ad-bilancio-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fuochi-artificio-no': {
+    title: 'Fuochi d\'artificio, la destra lancia il no all\'iniziativa',
+    description: 'Il comitato contrario ha lanciato la campagna per il voto del 29 novembre: Centro, PLR, UDC e mondo economico contestano un divieto nazionale sproporzionato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fuochi, artificio, destra, lancia',
+    ogTitle: 'Fuochi d\'artificio: il no al divieto nazionale',
+    ogDescription: 'La campagna contraria è partita martedì. L\'iniziativa chiede più protezione da rumore ed emissioni; il fronte del no teme effetti su feste private e manifestazioni organizzate. Per i grandi eventi sovraregionali sono previste eccezioni cantonali.',
+    canonicalPath: '/articoli-svizzera/fuochi-artificio-no/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fuochi d'artificio, la destra lancia il no all'iniziativa",
+      "description": "Il comitato contrario ha lanciato la campagna per il voto del 29 novembre: Centro, PLR, UDC e mondo economico contestano un divieto nazionale sproporzionato.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/fuochi-artificio-no.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fuochi d'artificio sopra una città svizzera durante il dibattito sull'iniziativa"
+      },
+      "datePublished": "2026-10-06T11:19:54+00:00",
+      "dateModified": "2026-10-06T11:19:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fuochi-artificio-no/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ruegsegger-candidato-federale': {
+    title: 'Rüegsegger candidato UDC per il Consiglio federale',
+    description: 'Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l\'annuncio delle dimissioni a fine anno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rüegsegger, candidato, consiglio, federale',
+    ogTitle: 'Rüegsegger candidato UDC al Consiglio federale',
+    ogDescription: 'La sezione UDC del Canton Svitto propone André Rüegsegger alla commissione di ricerca nazionale come prima candidatura ufficiale per la successione di Guy Parmelin. Il consigliere di Stato, 50 anni, è nell\'esecutivo svittese dal 2012.',
+    canonicalPath: '/articoli-svizzera/ruegsegger-candidato-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rüegsegger candidato UDC per il Consiglio federale",
+      "description": "Il Canton Svitto propone André Rüegsegger per la successione di Guy Parmelin: è la prima candidatura ufficiale dopo l'annuncio delle dimissioni a fine anno.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/ruegsegger-candidato-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande, immagine simbolica per la politica federale svizzera."
+      },
+      "datePublished": "2026-10-06T12:03:33+00:00",
+      "dateModified": "2026-10-06T12:03:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ruegsegger-candidato-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -369,11 +369,11 @@
     {
       "path": "scripts/ci/classify-codex-review-failure.mjs",
       "mode": "corpus-only",
-      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione e failure non ritentabili. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
+      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione, startup failure con un solo retry bounded e failure non ritentabili. Espone solo conteggi di eventi e una diagnostica stderr da allowlist, mai prompt/risposta/JSONL grezzo. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "4a1c1a0afcf0cb86",
-        "alignedAt": "2026-09-16"
+        "corpus": "7a101891a3815f76",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -834,10 +834,10 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
         "site": "7b647c07268b94ce",
-        "corpus": "75e6b6e720cb120a",
+        "corpus": "9c601148e973f83d",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T00:27:32.975Z"
       }
@@ -884,12 +884,12 @@
     },
     {
       "path": "scripts/ci/loop-health-report.mjs",
-      "mode": "identical",
-      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): lo script del sito e' gia' portabile (GH_REPO, revisore per repo) e importa solo node:*, quindi gira identico qui, alimentato da .github/workflows/loop-health-report.yml con il GITHUB_TOKEN del corpus.",
+      "mode": "adapted",
+      "reason": "Generatore del tracker «📊 Loop health report (tracker)» anche in questo repo (issue 1644): il corpo resta portabile (GH_REPO, revisore per repo, solo node:*), ma il corpus osserva anche i marker strutturati dei claim Codex locali per contare failed-terminal per giorno/causa e segnalare una head aperta bloccata oltre soglia. Il sito ha un ledger/review consumer diverso e non usa questo consumer corpus-specifico: la differenza resta dichiaratamente adapted e non c'e' un gemello site da portare.",
       "baseline": {
         "site": "5f12fc298ad39df9",
-        "corpus": "5f12fc298ad39df9",
-        "alignedAt": "2026-10-04"
+        "corpus": "b8d5c02a27ced312",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1116,7 +1116,7 @@
     {
       "path": ".github/workflows/issue-fix.yml",
       "mode": "adapted",
-      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`. RICONCILIATO 2026-09-06 da `both-moved` (#956, item 1). Le due mosse dalla baseline precedente sono di nuovo DISGIUNTE. Lato sito: il tetto di step `timeout-minutes` su `Run Claude fix` (classe #7310), PORTATO qui con il numero ri-misurato su questo repo invece che copiato; il resto del suo diff e' la chiave di concorrenza per-issue (che qui era gia' arrivata con #908) e un commento sul default di FOLLOWUP_MAX_INFLIGHT_FIX, che nel nostro file non compare. Lato corpus: il pre-flight di dispatch stantio (#918), la terza condizione `no-root-cause`+manifest per la consegna al sito (#316), la discovery PR del vecchio backstop/classificatore con `sort_by(.createdAt) | last` (#925) e l'eccezione «issue aggregata» nel prompt — tutte modifiche che il sito non ha, quindi `corpus-ahead` da far risalire di la', non drift da correggere qui. Nota sul perche' il `both-moved` era in parte artificiale: l'allineamento del 2026-09-03 aveva aggiornato `baseline.corpus` e `alignedAt` lasciando `baseline.site` a quello del 2026-08-09, quindi il lato sito risultava mosso anche per i tre giri gia' letti allora. F5 (2026-09-20): baseline sidecar per run+attempt e helper `pr-delivery-evidence.mjs` trasportato insieme al marker; il workflow adattato prova nuova PR, nuovo HEAD o OPEN -> MERGED corrente e tratta lookup unknown fail-closed, preservando skipped/cancelled/no-op.",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`. RICONCILIATO 2026-09-06 da `both-moved` (#956, item 1). Le due mosse dalla baseline precedente sono di nuovo DISGIUNTE. Lato sito: il tetto di step `timeout-minutes` su `Run Claude fix` (classe #7310), PORTATO qui con il numero ri-misurato su questo repo invece che copiato; il resto del suo diff e' la chiave di concorrenza per-issue (che qui era gia' arrivata con #908) e un commento sul default di FOLLOWUP_MAX_INFLIGHT_FIX, che nel nostro file non compare. Lato corpus: il pre-flight di dispatch stantio (#918), la terza condizione `no-root-cause`+manifest per la consegna al sito (#316), la discovery PR del vecchio backstop/classificatore con `sort_by(.createdAt) | last` (#925) e l'eccezione «issue aggregata» nel prompt — tutte modifiche che il sito non ha, quindi `corpus-ahead` da far risalire di la', non drift da correggere qui. Nota sul perche' il `both-moved` era in parte artificiale: l'allineamento del 2026-09-03 aveva aggiornato `baseline.corpus` e `alignedAt` lasciando `baseline.site` a quello del 2026-08-09, quindi il lato sito risultava mosso anche per i tre giri gia' letti allora. F5 (2026-09-20): baseline sidecar per run+attempt e helper `pr-delivery-evidence.mjs` trasportato insieme al marker; il workflow adattato prova nuova PR, nuovo HEAD o OPEN -> MERGED corrente e tratta lookup unknown fail-closed, preservando skipped/cancelled/no-op. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "528d65247c678beb",
         "corpus": "b7df63a69ab05087",
@@ -1126,7 +1126,7 @@
     {
       "path": ".github/workflows/issue-decompose.yml",
       "mode": "adapted",
-      "reason": "Stadio di decomposizione (sito #6228). Adattamenti: sender gate con gli account del progetto; identita' GITHUB_PAT_NANAKO invece della GitHub App; ponte RC generator/scripts/load-rc-env.mjs; QUOTA_BEACON_PEER_REPO verso il sito; ensure-loop-labels; prompt sul dominio del corpus (manifest/identical, node --test) e recupero di VISION.md dal sito se assente qui.",
+      "reason": "Stadio di decomposizione (sito #6228). Adattamenti: sender gate con gli account del progetto; identita' GITHUB_PAT_NANAKO invece della GitHub App; ponte RC generator/scripts/load-rc-env.mjs; QUOTA_BEACON_PEER_REPO verso il sito; ensure-loop-labels; prompt sul dominio del corpus (manifest/identical, node --test) e recupero di VISION.md dal sito se assente qui. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "3bcdb9b32a40a785",
         "corpus": "816752e6ace0032e",
@@ -1348,7 +1348,7 @@
     {
       "path": ".github/workflows/pr-redflag-fixer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "99dd0bb1b3d86d95",
         "corpus": "5e93e30c34fe9f6b",
@@ -4070,9 +4070,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "340ae4a06bf98a94",
-        "corpus": "340ae4a06bf98a94",
-        "alignedAt": "2026-10-05"
+        "site": "113a5344297263e5",
+        "corpus": "113a5344297263e5",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4081,9 +4081,9 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "865b689c607e9ee7",
-        "corpus": "865b689c607e9ee7",
-        "alignedAt": "2026-10-05"
+        "site": "3a49e83a5550a36d",
+        "corpus": "3a49e83a5550a36d",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4188,7 +4188,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "3a6f1cf792554903",
+        "corpus": "bc566aa2922518fe",
         "alignedAt": "2026-10-01"
       }
     },
@@ -4577,7 +4577,7 @@
     {
       "path": ".github/workflows/pr-redcheck-fixer.yml",
       "mode": "adapted",
-      "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo.",
+      "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo. Adattamento 2026-10-06 (#1881): i consumer del lease preferiscono il PAT runtime GITHUB_PAT_NANAKO per separare la scansione ad alto volume dal bucket REST dell'installation GITHUB_TOKEN, con fallback invariato.",
       "baseline": {
         "site": "84011cb61e180899",
         "corpus": "97e1ec85a24e3a94",

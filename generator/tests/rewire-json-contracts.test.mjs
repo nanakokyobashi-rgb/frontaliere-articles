@@ -73,7 +73,7 @@ const CURRENT_YEAR = new Date().getUTCFullYear();
  * Il payload registrato, rimesso in data quando il contratto lo richiede:
  * border-wait window (finestra settimanale), carburanti per cantone e road-events
  * (`generatedAt`) e i contratti con `freshen` (timestamp traslati o anno
- * corrente, vedi `freshenRecording`).
+ * corrente, vedi `freshenRecording`); road-events usa anch'esso `generatedAt`.
  */
 function servable(c) {
   const payload = readFixture(c);

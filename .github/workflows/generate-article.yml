@@ -350,6 +350,7 @@ jobs:
           CHAIN_DEPTH: ${{ inputs.chain_depth }}
           PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
+          CALLER_WORKFLOW: generate-article.yml
         run: |
           set -uo pipefail
 
@@ -399,6 +400,17 @@ jobs:
           # verrebbe saltata quasi sempre, perché una generazione è in volo
           # quasi sempre.
           #
+          # Un commit che rigenera più chiamanti cantonali modifica più file che
+          # sono tutti nei rispettivi `push.paths`: senza un'elezione, ogni
+          # chiamante consumerebbe uno slot runner per lo stesso self-test dry.
+          # Il path alfabeticamente primo è il solo che esegue la prova; gli
+          # altri terminano qui con successo. Un singolo file resta il leader
+          # naturale, e i push che toccano `content/**` non passano da questo
+          # ramo.
+          # Il workflow sorgente non è un caller cantonale: se è modificato
+          # nello stesso push, resta fuori dall'handoff e conserva il proprio
+          # self-test. L'elezione si applica solo al caller presente nel batch.
+          #
           # NB: il marker del chain link viene calcolato una volta qui, nel gate,
           # e trasportato come output del job. Questa domanda è più stretta —
           # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
@@ -408,6 +420,26 @@ jobs:
             changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
               --jq '.files[].filename' 2>/dev/null || true)
             if [ -n "${changed:-}" ] && ! printf '%s\n' "$changed" | grep -q '^content/'; then
+              self_test_callers=$(printf '%s\n' "$changed" \
+                | grep -E '^\.github/workflows/generate-article-[a-z0-9]+\.yml$' \
+                | grep -v '/generate-article-core\.yml$' \
+                | sort -u || true)
+              if [ -n "${self_test_callers:-}" ] \
+                && printf '%s\n' "$self_test_callers" | grep -Fqx -- ".github/workflows/${CALLER_WORKFLOW:-}"; then
+                self_test_leader=$(printf '%s\n' "$self_test_callers" | head -1)
+                self_test_leader="${self_test_leader##*/}"
+                if [ "${CALLER_WORKFLOW:-}" != "$self_test_leader" ]; then
+                  echo "Self-test dry già eletto da $self_test_leader → questo chiamante (${CALLER_WORKFLOW:-?}) cede lo slot."
+                  echo "proceed=false" >> "$GITHUB_OUTPUT"
+                  echo "GENERATION_OUTCOME kind=skipped reason=self-test-batch section=unknown"
+                  exit 0
+                fi
+                echo "Self-test dry eletto per il batch: $self_test_leader."
+              elif [ -n "${self_test_callers:-}" ]; then
+                echo "Self-test dry del workflow sorgente: non partecipa al batch cantonale."
+              else
+                echo "Self-test dry singolo: nessun batch cantonale da arbitrare."
+              fi
               echo "Push senza content/** → self-test dry, nessuna scrittura: si procede."
               echo "proceed=true" >> "$GITHUB_OUTPUT"
               exit 0
