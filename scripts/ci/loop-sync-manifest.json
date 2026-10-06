@@ -4080,8 +4080,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "113a5344297263e5",
-        "corpus": "113a5344297263e5",
+        "site": "233b0237ae96a0d7",
+        "corpus": "233b0237ae96a0d7",
         "alignedAt": "2026-10-06"
       }
     },
@@ -4091,8 +4091,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "3a49e83a5550a36d",
-        "corpus": "3a49e83a5550a36d",
+        "site": "3d7d74555df1b76e",
+        "corpus": "3d7d74555df1b76e",
         "alignedAt": "2026-10-06"
       }
     },
@@ -4198,7 +4198,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "bc566aa2922518fe",
+        "corpus": "41b15516299a950f",
         "alignedAt": "2026-10-01"
       }
     },
