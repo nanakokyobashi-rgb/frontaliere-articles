@@ -1,16 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1941112/tasso-spread-euro-cambio-riferimento-importo-valuta": "spread-nel-cambio-valuta-cos-e-quanto-ti-costa-davvero",
-  "https://www.rsi.ch/s/3926505": "littering-lavoro-e-aviatione-novita-del-1-augusto",
-  "https://www.tio.ch/ticino/cronaca/1941911/lucibello-nessun-arricchimento-personale-o-uso-fraudolento-di-fondi": "lucibello-disti-verifica-fondi",
-  "https://www.tvsvizzera.it/tvs/qui-svizzera/inflazione-ancora-in-calo-in-svizzera-scende-allo-04-in-luglio/91837164": "inflazione-svizzera-luglio-2026",
-  "https://www.ticinonews.ch/ticino/cadenazzo-quartino-da-fine-agosto-si-attivano-i-semafori-intelligenti-440058": "semafori-intelligenti-cadenazzo-quartino",
-  "https://ilgiornaledelticino.ch/pala-piccone-pre-festival-tra-luci-ed-ombre-anzi-tra-luci-e-luci-troppe": "pre-festival-locarno-2024",
-  "https://www.varesenoi.it/2026/08/04/leggi-notizia/argomenti/economia-13/articolo/poste-italiane-apre-le-selezioni-per-consulenti-finanziari-in-provincia-di-varese.html": "poste-italiane-consulenti-finanziari-varese",
-  "https://www.laregione.ch/culture/locarno-film-festival/1941855/contro-il-sonno-della-rassegnazione-la-resistenza-dei-legami": "locarno-film-festival-resistenza-legami",
-  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/il-fronte-dei-contrari-alliniziativa-no-a-una-svizzera-da-10-milioni-%c3%a8-in-testa/91515750": "frontalieri-svizzera-sondaggio-giugno-2026",
-  "https://www.tio.ch/newsblog/verita-immobiliari/1941879/vivere-nel-cuore-di-bellinzona": "vivere-nel-cuore-di-bellinzona",
-  "https://www.tio.ch/svizzera/economia/1942030/indicatore-aziende-affari-migliora-settori": "indicatore-affari-aziende-luglio",
-  "https://www.tio.ch/svizzera/attualita/1942044/francia-affitti-alloggio-spinge-trasferirsi": "svizzeri-fuga-alloglio-ticino",
   "https://ilgiornaledelticino.ch/pensieri-mostruosamente-proibiti-borsa-su-rotta-sullisola-dei-15000-punti": "borsa-rotta-isola-15000-punti",
   "https://www.varesenews.it/2026/08/lite-davanti-alla-stazione-di-tradate-nellora-di-punta-dei-pendolari-ferito-un-trentenne/2651647": "tradate-lite-ferito-trentenne",
   "https://www.varesenoi.it/2026/08/05/leggi-notizia/argomenti/video-6/articolo/caso-delmastro-la-protesta-di-avs-alla-camera-con-le-bende-sugli-occhi.html": "caso-delmastro-protesta-avs",
@@ -1972,6 +1960,66 @@
   "https://www.laregione.ch/cantone/ticino/1954878/quanto-resta-in-tasca-lavorando-di-piu-passa-la-mozione-di-avanti": {
     "articleId": "analisi-salario-prestazioni",
     "ts": "2026-10-05T18:09:50.262Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/lago-di-como-maxi-investimenti-anti-ingorgo-e-barriere-salva-motociclisti-rivoluzione-viabilita-sulla-lariana": {
+    "articleId": "investimenti-viabilita-lariana-como",
+    "ts": "2026-10-05T22:55:10.375Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/cronaca/ticino-italiano-21enne-trovato-ferito-dalla-polizia-rischia-la-vita-indagini-in-corso": {
+    "articleId": "biasca-accoltellamento-21enne",
+    "ts": "2026-10-05T23:38:31.265Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/al-via-i-lavori-di-lereti-in-via-copelli-nuove-condotte-idriche-e-digitalizzazione-della-rete/2698861": {
+    "articleId": "lavori-lereti-via-copelli-luino",
+    "ts": "2026-10-06T00:22:58.958Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1954889/servizi-costi-aggregazione-citta-domanda-bellinzona-successo-elio-biaggio": {
+    "articleId": "bellinzona-aggregazione-costi-2026",
+    "ts": "2026-10-06T01:28:31.124Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/guida-alla-tre-valli-varesine-percorsi-chiusure-e-corridori-al-via/2698591": {
+    "articleId": "guida-tre-valli-varesine-2026",
+    "ts": "2026-10-06T03:13:40.894Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/fondata-sul-lavoro-a-varese-la-conferenza-regionale-di-sinistra-italiana-su-salari-e-diritti/2698951": {
+    "articleId": "varese-conferenza-lavoro-salari-2026",
+    "ts": "2026-10-06T03:43:18.269Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/dialogo/casse-malati-i-cittadini-propongono-gli-esperti-rispondono--4135604.html": {
+    "articleId": "casse-malati-proposte-esperti-risposta",
+    "ts": "2026-10-06T04:17:25.433Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/lipomo-il-fiuto-infallibile-di-roxy-scopre-la-droga-due-arresti": {
+    "articleId": "lipomo-fiuto-roxy-cocaina",
+    "ts": "2026-10-06T05:08:37.289Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/05/leggi-notizia/argomenti/cronaca-20/articolo/varese-incidente-a-un-passo-dalluniversita-dellinsubria-in-via-monte-generoso.html": {
+    "articleId": "incidente-monte-generoso-varese",
+    "ts": "2026-10-06T05:43:39.391Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4136507": {
+    "articleId": "lavori-pubblica-utilita-multe-pene",
+    "ts": "2026-10-06T06:23:26.255Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1954947/lavori-e-attese-sulla-strada-cantonale": {
+    "articleId": "gambarogno-pavimentazione-attese",
+    "ts": "2026-10-06T06:52:28.617Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/economia/disoccupazione-rimane-stabile-al-30-in-settembre-in-svizzera-444034": {
+    "articleId": "disoccupazione-settembre-ticino-2026",
+    "ts": "2026-10-06T07:34:13.889Z",
     "keyForm": 2
   }
 }

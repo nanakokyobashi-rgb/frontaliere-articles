@@ -45,6 +45,37 @@ on:
       # path mapping it depends on). A change there changes the surface.
       - 'scripts/lib/corpus-sections.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
+      # Il registro DICHIARATO delle sezioni cantonali (verita' del rollout, D9)
+      # e cio' che lo trasforma nei documenti pubblicati (sections.json, la
+      # copia per il Worker, sitemap-cantons.xml) e li porta su R2: un flip di
+      # stato e' un commit su sections/registry.json e deve pubblicarsi subito.
+      - 'sections/**'
+      - 'scripts/lib/section-registry.mjs'
+      - 'scripts/publish-section-edge.mjs'
+      - 'scripts/lib/delete-cdn-file.sh'
+      # Il loader di Remote Config e' un input del publisher da quando porta il
+      # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker
+      # RC_ENV_LOADED che build-api legge: un fix al loader deve ripubblicare.
+      - 'generator/scripts/load-rc-env.mjs'
+      # Il resto della chiusura degli import del publisher (build-api,
+      # build-blog-index, verify-api-floors, publish-section-edge): ogni modulo
+      # che uno di loro importa e' un input della superficie pubblicata, e un
+      # fix a uno di questi deve ripubblicare.
+      # generator/tests/section-registry.test.mjs ricalcola la chiusura e
+      # fallisce se un import nuovo resta fuori da questo filtro.
+      - 'scripts/lib/engine-corpus-view.mjs'
+      - 'scripts/ci/verify-api-floors.mjs'
+      - 'scripts/lib/announced-surface.mjs'
+      - 'scripts/lib/registry-api-entry.mjs'
+      - 'scripts/lib/seo-entry.mjs'
+      # Gli helper che publish-section-edge.mjs ESEGUE (upload e cancellazione
+      # su R2, retry, purge) e gli import del purge: non sono import del
+      # publisher ma ne decidono l'esito, quindi un loro fix deve ripubblicare.
+      - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/cf-purge-cache.mjs'
+      - 'scripts/lib/cf-analytics.mjs'
+      - 'scripts/lib/cf-purge-variants.mjs'
       - 'scripts/lib/count-xml-tags.mjs'
       - 'scripts/lib/ticker-shadow-check.mjs'
       - 'scripts/lib/published-slug-guard.mjs'
@@ -479,7 +510,9 @@ jobs:
           # grandezza: e' quella la root cause, non il numero.
           node scripts/ci/verify-api-floors.mjs
 
-          for f in articles.json slugs.json manifest.json; do
+          # sections.json e' sempre emesso (il catalogo delle sezioni cantonali,
+          # anche tutte draft): la sua assenza e' un publisher rotto.
+          for f in articles.json slugs.json manifest.json sections.json; do
             test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
           done
 
@@ -712,6 +745,35 @@ jobs:
             # which is a no-op for anything already purged.
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
           fi
+
+      # La release edge delle sezioni cantonali (piano «sezioni articoli per
+      # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:
+      # `edge/sections/registry.json` su R2, che il Worker del sito applica, e
+      # che e' anche il puntatore alla release (sitemap e indice sotto
+      # `edge/sections/_releases/<commit>/`, immutabili). `sections.json` su
+      # Pages e' un catalogo senza stato.
+      #
+      # Il protocollo e' in testa a scripts/publish-section-edge.mjs: staging
+      # sotto la base della release (riletto e confrontato per sha256), verifica
+      # che le pagine delle sezioni live siano gia' su R2, poi UN PUT del
+      # puntatore cambia tutto insieme. Prima del PUT un fallimento non cambia
+      # cio' che il Worker serve; dopo, la release nuova e' servita intera.
+      #
+      # DOPO il deploy Pages e PRIMA della notifica al sito. Le superfici di
+      # famiglia (canton-articles.json, slugs.json.cantons, i feed) escono con
+      # Pages: se il puntatore girasse prima e il deploy poi fallisse, il
+      # Worker servirebbe una sezione live con Pages fermo alla release
+      # precedente. E la notifica `articles-published` fa riconciliare il sito:
+      # deve partire quando R2 serve gia' la release nuova, non prima. Quando il
+      # push e' obbligatorio (la release differisce da quella servita, o quella
+      # servita non e' dimostrabile) e un passo non e' confermato lo script esce
+      # 1: il job fallisce QUI e la notifica non parte, perche' annuncerebbe una
+      # superficie che R2 non serve; il sync schedulato del sito resta la rete.
+      # Se niente di servito cambia (oggi: tutto draft) un problema di R2 e' un
+      # warning e la notifica parte come sempre.
+      - name: Publish the canton sections release to the edge
+        if: steps.deploy.outcome == 'success'
+        run: node scripts/publish-section-edge.mjs
 
       # Tell the site the surface moved. The publisher knows when it has
       # published, so the push is the event — the consumer's schedule is only a

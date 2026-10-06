@@ -114,9 +114,9 @@ Un body malformato non e' un verdetto e viene SCARTATO dal gate invece di essere
 
 Il contratto del body e' validato in modo deterministico da `scripts/ci/pr-body-contract.mjs` (step `PR-body completeness` di `tests.yml`, che compone `pr-body-sections-check.mjs`, `pr-body-nextstep-check.mjs`, `pr-body-closes-check.mjs` e `pr-body-filepath-check.mjs`): sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder, `Closes`, path citati. Il suo verdetto arriva al reviewer nel bundle, sotto `## Deterministic body contract`.
 
-**Se e' ✅, il body non genera 🔴 Important**: al massimo un 🟡 Nit ancorato `PR body:L<n>`. Ogni stato che il contratto accetta — incluso qualunque `blocked: <causa>`, che tiene il task aperto senza bloccare la PR — e' valido, e un `Prossimo passo` concreto non si ridiscute. Il review gate declassa comunque un 🔴 ancorato SOLO su una riga `PR body:L<n>` dentro `## Non implementato` quando il contratto e' verde (`DECLASSIFIED-BODY` nel log di `scripts/ci/review-scope.mjs`); il claim di performance senza baseline (punto 7 qui sotto) non e' una regola del contratto e resta 🔴.
+**Se e' ✅, il body non genera 🔴 Important**: al massimo un 🟡 Nit ancorato `PR body:L<n>`. Se il reviewer solleva comunque un 🔴 ancorato solo al body, `PR body:L<n>` deve essere il prefisso della prima riga del finding e subito sotto va `Body citation: "<JSON string>"`, con il testo contestato (massimo 240 caratteri). Il review gate lo declassa solo quando quella citazione non compare piu' nel body corrente dopo la normalizzazione di spazi e Markdown (`DECLASSIFIED-STALE-BODY` nel log di `scripts/ci/review-scope.mjs`) e pubblica un commento esplicito `Finding superato`. Citazione mancante, malformata o ancora presente resta 🔴; il finding senza citazione non si declassa da solo. `NON_CONTRACT_BODY_RE` mantiene bloccante un claim di performance/capacita' senza baseline finche' compare nella riga corrente; se la citazione manca perche' l'affermazione e' stata rimossa, vale la regola stale.
 
-Una regola del body che il contratto non copre va AGGIUNTA al contratto, non applicata a mano dal reviewer: due giudici sulla stessa superficie con politiche diverse incastrano il ciclo — il fixer declina, il cap dei round scatta, e `needs-human` atterra su una PR che non ha niente da riparare. I punti 2 e 4 qui sotto valgono quindi per cio' che il contratto non vede (la coerenza fra `## Implementato` e il diff) e per quando il verdetto non e' disponibile.
+Una regola del body che il contratto non copre va AGGIUNTA al contratto, non applicata a mano dal reviewer: due giudici sulla stessa superficie con politiche diverse incastrano il ciclo — il fixer declina, il cap dei round scatta, e `needs-human` atterra su una PR che non ha niente da riparare. I punti 2 e 4 qui sotto valgono quindi per cio' che il contratto non vede (la coerenza fra `## Implementato` e il diff) e per quando il verdetto non e' disponibile. La citazione testuale e' una prova di presenza/assenza, non un nuovo stato accettato dal contratto.
 
 ### Comportamento del reviewer
 
@@ -163,11 +163,13 @@ Una riga per finding:
 
 Prefix: `🔴 Important` / `🟡 Nit` / `🟣 Pre-existing` / `❓ q:`.
 
+Un `🔴 Important` con il solo anchor `PR body:L<n>` deve avere nella riga successiva `Body citation: "<JSON string>"`; la stringa e' il testo preciso contestato e non supera 240 caratteri.
+
 **Il marker `🔴 Important` è una stringa esatta, MAI in grassetto.** Scrivi `🔴 Important`, non `🔴 **Important**`. È letto da gate deterministici (`auto-merge-eval.mjs` per bloccare il merge). Il grassetto ha già rotto il match una volta, lasciando un 🔴 mai indirizzato. I gate oggi tollerano il grassetto, ma la tolleranza è una cintura, non il formato.
 
 **Elimina:** "ho notato", "sembra che", "forse", "potresti volere", il restating, "ottimo lavoro ma". Niente hedging.
 
-**Tieni:** la linea esatta, i simboli in backtick, un fix concreto, il *perché* solo se non ovvio.
+**Tieni:** la linea esatta, i simboli in backtick, un fix concreto, il *perché* solo se non ovvio. Per ogni finding ancorato solo al body aggiungi subito sotto `Body citation: "<JSON string>"`, usando il testo contestato letterale.
 
 **Newline reali:** posta Markdown con newline reali, non la sequenza letterale `\n` o un JSON-escaped intero; marker, heading, finding e `## LGTM` devono restare su righe proprie. Una review su una sola riga rompe il parsing del gate e del harvester.
 

@@ -1428,7 +1428,7 @@ jobs:
             echo
             echo "## Deterministic body contract"
             if [ "${BODY_CONTRACT_OUTCOME:-}" = "success" ]; then
-              echo "✅ passed on the current body (sections, bullet states, Motivo/Prossimo passo, placeholders, Closes). The body cannot produce a 🔴 Important in this review: at most a 🟡 Nit anchored as \`PR body:L<n>\`."
+              echo "✅ passed on the current body (sections, bullet states, Motivo/Prossimo passo, placeholders, Closes). A body-only 🔴 whose first finding line starts with \`PR body:L<n>\` must carry a \`Body citation: \"<JSON string>\"\` line; the gate declassifies it only when that quoted text is absent from the current body after whitespace/Markdown normalization."
             else
               echo "Verdict unavailable (${BODY_CONTRACT_OUTCOME:-unknown}): apply the REVIEW.md body rules."
             fi
@@ -1565,7 +1565,7 @@ jobs:
 
             **🔴 su righe non cambiate.** L'identita' di un finding e' un id stabile `(path, simbolo, classe, prosa)` che NON contiene il numero di riga: un rebase o un merge di main non la sposta. Un `🔴 Important` NUOVO ancorato SOLO a righe che nessuno ha toccato dall'ultima review viene classificato dal gate (`DECLASSIFIED-UNCHANGED-LINE`) per lasciare una traccia verificabile, ma il percorso resta fail-closed: serve una review successiva che lo risolva esplicitamente prima del merge. Se il rilievo valeva anche allora, ripetilo con lo stesso id stabile e una review pulita; se sei convinto che sia una regressione, dichiarala: `🔴 Important: [regression] ...`, col tag SUBITO DOPO i due punti, e resta bloccante. Le classi ammesse sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`.
 
-            **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body: un dubbio su quelle regole vale al massimo un `🟡 Nit` ancorato `PR body:L<n>`, e il review gate declassa comunque un 🔴 cosi' ancorato su un contratto verde. Ogni stato che il contratto accetta in `## Non implementato (ancora)` — `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e qualunque altro `blocked: <causa>` — e' valido, e su quelli **non si emette 🔴**. Riemettere un 🔴 su una voce che il contratto ha accettato incastra il ciclo: il fixer declina con una ragione, il cap dei round scatta, e `needs-human` atterra con la diagnosi sbagliata su una PR che non ha niente da riparare. Il claim di performance senza baseline (step 7 di REVIEW.md) NON e' una regola del contratto e resta 🔴. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
+            **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body. Se un finding resta ancorato solo a `PR body:L<n>` come prefisso della prima riga, deve citare il testo contestato nella riga seguente: `Body citation: "<JSON string>"`, massimo 240 caratteri. Il review gate declassifica quel finding solo quando la citazione non compare piu' nel body corrente dopo la normalizzazione di spazi e Markdown e pubblica un commento esplicito `Finding superato`; citazione mancante, malformata o ancora presente resta 🔴. `NON_CONTRACT_BODY_RE` mantiene bloccante un claim di performance/capacita' senza baseline finche' compare nella riga corrente; se la citazione manca perche' l'affermazione e' stata rimossa, vale la regola stale. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
             Se il bundle porta una sezione `## Code contribution unchanged`, il codice NON e' cambiato dalla review citata: rigiudica SOLO il body della PR, riporta ogni 🔴 Important di codice ancora aperto con lo stesso path e la stessa riga, non scrivere mai `Fix di` per un anchor di codice, e risolvi un Important sul body solo se il body corrente lo ripara davvero.
 
             **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
@@ -1595,6 +1595,9 @@ jobs:
           CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
           CODEX_TIMED_OUT: ${{ steps.codex_review.outputs.codex_timed_out }}
           CODEX_DURATION_MS: ${{ steps.codex_review.outputs.duration_ms }}
+          CODEX_EXIT_CODE: ${{ steps.codex_review.outputs.codex_exit_code }}
+          CODEX_REVIEW_POSTED: ${{ steps.codex_review.outputs.codex_review_posted }}
+          CODEX_SIDE_EFFECT_DETECTED: ${{ steps.codex_review.outputs.side_effect_detected }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
@@ -1610,6 +1613,9 @@ jobs:
           set_review_output review_abort_cause none
           set_review_output retryable_failure false
           set_review_output permanent_failure false
+          set_review_output review_abort_diagnostic ''
+          set_review_output review_event_counts '{}'
+          set_review_output review_exit_code "${CODEX_EXIT_CODE:-}"
           set_review_output verdict_evidence_file ''
           write_verdict_evidence() {
             local evidence_file="${VERDICT_EVIDENCE_FILE:-${RUNNER_TEMP:-/tmp}/codex-verdict-evidence-${RUN_ID:-$$}.md}"
@@ -1642,12 +1648,19 @@ jobs:
           # causa esplicita prima che il claim decida retry o terminale.
           CLASSIFICATION_JSON=''
           if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
-            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome","eventCounts":{},"turnEventCount":0,"diagnostic":""}'
           elif [ "${CODEX_TIMED_OUT:-}" = 'true' ] \
             || { [ "${CODEX_DURATION_MS:-0}" -ge 1800000 ] 2>/dev/null; }; then
-            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog"}'
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog","eventCounts":{},"turnEventCount":0,"diagnostic":""}'
           elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
-            if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then
+            if ! CLASSIFICATION_JSON=$(
+              CODEX_TIMED_OUT="${CODEX_TIMED_OUT:-false}" \
+              CODEX_DURATION_MS="${CODEX_DURATION_MS:-}" \
+              CODEX_EXIT_CODE="${CODEX_EXIT_CODE:-}" \
+              CODEX_REVIEW_POSTED="${CODEX_REVIEW_POSTED:-false}" \
+              CODEX_SIDE_EFFECT_DETECTED="${CODEX_SIDE_EFFECT_DETECTED:-}" \
+              node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"
+            ); then
               set_review_output review_abort_cause probe_failed
               set_review_output permanent_failure true
               echo "::error::Impossibile classificare lo stream diagnostico Codex."
@@ -1667,6 +1680,34 @@ jobs:
             exit 0
           fi
           NUM_TURNS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -r 'if .numTurns == null then "?" else (.numTurns | tostring) end')
+          DIAGNOSTIC_LINE=$(printf '%s' "$CLASSIFICATION_JSON" | jq -r '.diagnostic // empty')
+          EVENT_COUNTS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -c '.eventCounts // {}')
+          set_review_output review_abort_diagnostic "$DIAGNOSTIC_LINE"
+          set_review_output review_event_counts "$EVENT_COUNTS"
+          {
+            printf '\n### Codex review failure diagnostics (non-secret)\n\n'
+            printf '| metric | value |\n|---|---:|\n'
+            printf '| exit code | `%s` |\n' "${CODEX_EXIT_CODE:-?}"
+            printf '| duration (ms) | `%s` |\n' "${CODEX_DURATION_MS:-?}"
+            printf '| JSONL event counts | `%s` |\n' "$EVENT_COUNTS"
+            printf '| turn events | `%s` |\n' "$(printf '%s' "$CLASSIFICATION_JSON" | jq -r '.turnEventCount // 0')"
+            printf '| cause | `%s` |\n' "$CLASSIFICATION_CAUSE"
+            if [ -n "$DIAGNOSTIC_LINE" ]; then
+              printf '| stderr diagnostic | `%s` |\n' "$DIAGNOSTIC_LINE"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+
+          # A process that dies before the first turn, quickly, without a
+          # review or observable side effect is retryable once. The claim
+          # finalizer counts the prior failed-transient claim and makes the
+          # second identical failure terminal.
+          if [ "$CLASSIFICATION_CAUSE" = 'startup_failure' ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause startup_failure
+            set_review_output retryable_failure true
+            echo "::warning::Codex review fallita all'avvio senza turni (diagnostic=${DIAGNOSTIC_LINE:-unclassified}, durata=${CODEX_DURATION_MS:-?}ms): un solo retry ammesso sulla stessa HEAD."
+            exit 1
+          fi
 
           # max_turns PRIMA di 429/5xx: il terminal marker è più specifico dei
           # campi di telemetria condivisi. Anche Codex può aver postato la review
@@ -1825,8 +1866,9 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
-          # Unica fonte di verita' sul body: un 🔴 del modello ancorato SOLO su
-          # `PR body:L<n>` non blocca quando questo contratto e' passato.
+          # Unica fonte di verita' sul body: un 🔴 ancorato SOLO su
+          # `PR body:L<n>` deve provare il superamento con una citazione testuale
+          # assente dal body corrente; il contratto verde da solo non basta.
           BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
         run: |
           set -euo pipefail
@@ -1925,6 +1967,7 @@ jobs:
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
+          REVIEW_ABORT_DIAGNOSTIC: ${{ steps.review_abort.outputs.review_abort_diagnostic }}
           REVIEW_POSTED: ${{ steps.test_only_review.outcome == 'success' }}
           REVIEW_GATE_FALLBACK_APPROVED: ${{ steps.review_gate.outputs.fallback_approved }}
           GITHUB_RUN_ID: ${{ github.run_id }}

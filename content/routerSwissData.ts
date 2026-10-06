@@ -2613,6 +2613,17 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'guy-parmelin-visita-india': { it: 'guy-parmelin-visita-india', en: 'guy-parmelin-india-visit', de: 'guy-parmelin-indien-besuch', fr: 'guy-parmelin-visite-inde' },
  'bern-risanamento-energia': { it: 'bern-risanamento-energia', en: 'bern-energy-incentives-requirements', de: 'energiefoerderung-bern-voraussetzungen', fr: 'subventions-energie-berne-conditions' },
  'deduzioni-3a-2027': { it: 'deduzioni-3a-2027', en: 'pillar3-tax-deduction-2027', de: 'abzug-saeule-3a-2027', fr: 'deduction-pilier-3a-2027' },
+ 'greggio-export-pre-guerra': { it: 'greggio-export-pre-guerra', en: 'crude-oil-middle-east-prewar', de: 'rohoel-export-nahost-vorkriegsniveau', fr: 'petrole-brut-export-moyen-orient' },
+ 'svizzera-patriot-bodluv-iva-attesa': { it: 'svizzera-patriot-bodluv-iva-attesa', en: 'defenseless-switzerland-missile-defense-delay-and-vat', de: 'wehrlose-schweiz-verzogerung-raketenabwehr-und-mehrwertsteuer', fr: 'suisse-sans-defense-retard-de-la-defense-antimissile-et-tva' },
+ 'permesso-edilizio-berna-procedura': { it: 'permesso-edilizio-berna-procedura', en: 'bern-building-permit-process', de: 'baubewilligung-bern-verfahren', fr: 'permis-construire-berne-procedure' },
+ 'air-baltic-tagli-swiss': { it: 'air-baltic-tagli-swiss', en: 'air-baltic-cuts-swiss-flights', de: 'air-baltic-stellenabbau-swiss', fr: 'air-baltic-suppressions-swiss' },
+ 'tamedia-cancella-34-posti-lavoro': { it: 'tamedia-cancella-34-posti-lavoro', en: 'tamedia-cuts-34-jobs', de: 'tamedia-streicht-34-stellen', fr: 'tamedia-supprime-34-postes' },
+ 'neutralita-svizzera-voto-costituzione': { it: 'neutralita-svizzera-voto-costituzione', en: 'swiss-neutrality-constitution-vote', de: 'schweizer-neutralitaet-verfassung-votum', fr: 'neutralite-suisse-vote-constitution' },
+ 'elezioni-berna-guida-voto': { it: 'elezioni-berna-guida-voto', en: 'bern-cantonal-elections-voting-guide', de: 'kantonale-wahlen-bern-abstimmungsfuehrer', fr: 'elections-cantonales-berne-guide-vote' },
+ 'berna-protezione-servizio-indennita': { it: 'berna-protezione-servizio-indennita', en: 'bern-civil-protection-service-allowance', de: 'bern-zivilschutz-dienst-entschaedigung', fr: 'berne-protection-civile-service-indemnite' },
+ 'edifici-berna-obbligo-premi': { it: 'edifici-berna-obbligo-premi', en: 'bern-building-insurance-guide', de: 'gebaeudeversicherung-bern-ratgeber', fr: 'assurance-immeubles-berne-guide' },
+ 'prezzi-immobili-settembre-regioni': { it: 'prezzi-immobili-settembre-regioni', en: 'swiss-home-prices-september-regions', de: 'immobilienpreise-september-regionen', fr: 'prix-immobilier-septembre-regions' },
+ 'ostinelli-cassa-malati-udienza-pretore': { it: 'ostinelli-cassa-malati-udienza-pretore', en: 'ostinelli-health-insurance-court-hearing', de: 'ostinelli-krankenkasse-gerichtstermin', fr: 'ostinelli-assurance-maladie-audience' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

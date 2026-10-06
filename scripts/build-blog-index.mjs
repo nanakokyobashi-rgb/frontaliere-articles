@@ -424,7 +424,7 @@ if (!failed) {
       fs.writeFileSync(file, text);
       writtenShards[path.relative(API_ROOT, file)] = byteSize(text);
       const kb = Math.round(fs.statSync(file).size / 1024);
-      console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
+      console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0]?.date ?? '— (sezione senza articoli)'}`);
 
       const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
       const fullPayload = {

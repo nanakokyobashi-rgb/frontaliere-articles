@@ -42,10 +42,9 @@
  *     deterministico fra i cantoni della stessa cadenza (24 cantoni nella
  *     stessa ora si contenderebbero il tetto globale; per chi ha uno slot al
  *     giorno, perderlo vuol dire perdere la giornata);
- *   - `push.paths`: solo i path del corpus della sezione, cosi' la modifica
- *     simultanea dei caller generati non crea un burst di self-test e
- *     l'articolo di un cantone non sveglia gli altri 23; la validazione dei
- *     caller resta nel check deterministico del generatore e nella CI;
+ *   - `push.paths`: i soli path del corpus della sezione, cosi' una modifica
+ *     ai 24 caller non apre 24 self-test concorrenti e l'articolo di un
+ *     cantone non sveglia gli altri 23;
  *   - concurrency `generate-article-<sezione>` sul job che scrive;
  *   - catena via dispatch spenta (`chain_dispatch: false`).
  *

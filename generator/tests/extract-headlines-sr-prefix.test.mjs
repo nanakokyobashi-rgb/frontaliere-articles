@@ -18,6 +18,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -48,7 +49,10 @@ const BLOCK = slice('function extractDateFromUrl(url) {', '\n// ── Step 1b-b
 assert.match(BLOCK, /function extractHeadlines\(html, baseUrl\) \{/, 'il blocco deve contenere extractHeadlines — delimitatori da aggiornare');
 assert.match(BLOCK, /function extractDatesFromHtml\(html, baseUrl\) \{/, 'il blocco deve contenere extractDatesFromHtml — delimitatori da aggiornare');
 
-const { extractHeadlines } = new Function(`${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractDateFromUrl };`)();
+const { extractHeadlines } = new Function(
+  'decodeHtmlEntities',
+  `${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractDateFromUrl };`,
+)(decodeHtmlEntities);
 
 const BASE_URL = 'https://www.admin.ch/it/newnsb';
 
