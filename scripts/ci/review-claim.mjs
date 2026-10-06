@@ -15,6 +15,11 @@ import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import {
+  isKnownCauseClass,
+  isStartupFailure,
+  normalizeCauseClass,
+} from './codex-primary-diagnostics.mjs';
 import { normalizeReviewInputRevision, reviewHasInputRevision } from './review-test-policy.mjs';
 import { isManagedReview } from './lib/constants.mjs';
 import { isKnownReviewState } from './lib/review-states.mjs';
@@ -124,6 +129,8 @@ export function parseReviewClaim(body) {
 
   const reviewRevision = normalizeReviewInputRevision(event.reviewRevision);
   if (reviewRevision === null) return null;
+  if (event.causeClass !== undefined && !isKnownCauseClass(event.causeClass)) return null;
+  if (event.startupFailure !== undefined && typeof event.startupFailure !== 'boolean') return null;
 
   const normalizedEvent = {
     ...event,
@@ -135,6 +142,8 @@ export function parseReviewClaim(body) {
     expiresAt: Number(event.expiresAt),
   };
   if (reviewRevision) normalizedEvent.reviewRevision = reviewRevision;
+  if (event.causeClass !== undefined) normalizedEvent.causeClass = normalizeCauseClass(event.causeClass);
+  if (event.startupFailure !== undefined) normalizedEvent.startupFailure = event.startupFailure;
   if (normalizedEvent.key !== keyFromClaim(normalizedEvent)
       || normalizedEvent.dedupeKey !== dedupeKeyFromClaim(normalizedEvent)) return null;
   return normalizedEvent;
@@ -220,12 +229,22 @@ export function claimStatusFromOutcome({
   permanentFailure = false,
   reviewPosted = false,
   reviewFallbackApproved = false,
+  startupFailure = false,
+  startupFailureRetryExhausted = false,
 } = {}) {
   const outcome = providerOutcome || claudeOutcome;
   if (proceed !== true && proceed !== 'true') return 'released';
   if (reviewFallbackApproved === true || reviewFallbackApproved === 'true') return 'completed';
-  if (permanentFailure === true || permanentFailure === 'true') return 'failed-terminal';
   if (reviewPosted === true || reviewPosted === 'true') return 'completed';
+  // The startup predicate is stricter than the workflow's generic failure
+  // label. It grants exactly one retry for a run that demonstrably did no
+  // review work; the next matching failure is terminal and cannot loop.
+  if (startupFailure === true || startupFailure === 'true') {
+    return startupFailureRetryExhausted === true || startupFailureRetryExhausted === 'true'
+      ? 'failed-terminal'
+      : 'failed-transient';
+  }
+  if (permanentFailure === true || permanentFailure === 'true') return 'failed-terminal';
   const text = String(executionText || '');
   const transient = /(?:api_error_status|status_code|http_status|status)"?\s*:\s*"?429\b|\bHTTP\s*429\b|\b(?:overloaded|server_error|internal server error)\b|rate_limit_event|rate_limit_error/iu.test(text);
   if (retryableFailure === true || retryableFailure === 'true'
@@ -298,9 +317,12 @@ export function reviewWasPosted(repo, prNumber, headSha, reviewRevision = '', gh
 }
 
 function claimBody(event) {
+  const causeClass = normalizeCauseClass(event.causeClass);
+  const startupFailure = event.startupFailure === true ? ' · startup-failure=true' : '';
   return `${REVIEW_CLAIM_MARKER} ${JSON.stringify(event)} -->\n`
     + `_Review claim ${event.state} · PR #${event.prNumber} · HEAD ${event.headSha.slice(0, 12)} · `
-    + `${event.contributionFingerprint} · scade ${new Date(event.expiresAt * 1000).toISOString()}._`;
+    + `${event.contributionFingerprint} · cause=${causeClass}${startupFailure} · `
+    + `scade ${new Date(event.expiresAt * 1000).toISOString()}._`;
 }
 
 function postClaim(repo, prNumber, event) {
@@ -318,6 +340,8 @@ function writeOutput(result) {
     claim_dedupe_key: result.dedupeKey || '',
     claim_state: result.state || '',
     claim_reason: result.reason || '',
+    claim_cause_class: result.causeClass || '',
+    claim_startup_failure: result.startupFailure === true,
   };
   const lines = Object.entries(values)
     .map(([name, value]) => `${name}=${String(value).replace(/[\r\n]/gu, ' ')}`);
@@ -452,9 +476,25 @@ function finalizeClaim(base, repo) {
     ? fs.readFileSync(process.env.EXEC_FILE, 'utf8')
     : '';
   const cause = normalized(process.env.REVIEW_ABORT_CAUSE || '').toLowerCase();
+  const causeClass = normalizeCauseClass(
+    process.env.REVIEW_CAUSE_CLASS || process.env.CODEX_CAUSE_CLASS || '',
+  );
   const reviewFallbackApproved = process.env.REVIEW_GATE_FALLBACK_APPROVED === 'true';
-  const retryableCause = ['cancelled', 'max_turns', 'rate_limit', 'server_error'].includes(cause);
+  const retryableCause = ['cancelled', 'max_turns', 'rate_limit', 'server_error', 'startup-failure'].includes(cause);
   const permanentCause = cause === 'non_retryable' || cause === 'probe_failed';
+  const reviewPosted = process.env.REVIEW_POSTED === 'true'
+    || process.env.CODEX_REVIEW_POSTED === 'true';
+  const startupFailure = isStartupFailure({
+    exitCode: process.env.CODEX_EXIT_CODE,
+    eventTotal: process.env.CODEX_EVENT_TOTAL,
+    reviewPosted,
+    sideEffectDetected: process.env.CODEX_SIDE_EFFECT_DETECTED,
+    durationMs: process.env.CODEX_DURATION_MS,
+  });
+  const related = latestReviewClaims(comments, { dedupeKey: base.dedupeKey });
+  const startupFailureRetryExhausted = startupFailure && related.some((claim) => (
+    claim.token !== token && claim.state === 'failed-transient' && claim.startupFailure === true
+  ));
   let state = REVIEW_CLAIM_STATES.includes(process.env.CLAIM_STATUS)
     ? process.env.CLAIM_STATUS
     : claimStatusFromOutcome({
@@ -463,12 +503,15 @@ function finalizeClaim(base, repo) {
       executionText,
       retryableFailure: process.env.RETRYABLE_FAILURE === 'true' || retryableCause,
       permanentFailure: process.env.PERMANENT_FAILURE === 'true' || permanentCause,
-      reviewPosted: process.env.REVIEW_POSTED === 'true',
+      reviewPosted,
       reviewFallbackApproved,
+      startupFailure,
+      startupFailureRetryExhausted,
     });
   if (state === 'completed' && !reviewFallbackApproved
+      && !reviewPosted
       && !reviewWasPosted(repo, base.prNumber, base.headSha, base.reviewRevision)) {
-    if (permanentCause) state = 'failed-terminal';
+    if (permanentCause || startupFailureRetryExhausted) state = 'failed-terminal';
     else state = 'failed-transient';
   }
   if (current.state === state) return writeOutput({ ...base, allowed: true, token, state, reason: 'claim-already-finalized' });
@@ -479,6 +522,8 @@ function finalizeClaim(base, repo) {
   const finalEvent = {
     ...current,
     state,
+    causeClass,
+    startupFailure,
     issuedAt: nowSec,
     expiresAt: Math.max(nowSec, Number(current.expiresAt)),
     runId: String(process.env.GITHUB_RUN_ID || current.runId),

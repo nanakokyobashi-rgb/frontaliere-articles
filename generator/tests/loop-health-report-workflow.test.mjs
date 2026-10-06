@@ -39,6 +39,7 @@ const read = (rel) => {
 test('il workflow gira lo script del tracker a cron e su richiesta', () => {
   const workflow = read(WORKFLOW_REL);
   read(SCRIPT_REL);
+  read('scripts/ci/review-claim-health.mjs');
   const schedule = /^[ \t]+schedule:[ \t]*\n((?:[ \t]*(?:#.*)?\n)*)[ \t]+-[ \t]*cron:[ \t]*'[^']+'/m;
   assert.match(workflow, schedule, `${FAILURE}: nessun cron`);
   assert.match(workflow, /^\s*workflow_dispatch:/m, 'serve il dispatch manuale per la prima prova');
@@ -47,6 +48,7 @@ test('il workflow gira lo script del tracker a cron e su richiesta', () => {
     /^\s*node scripts\/ci\/loop-health-report\.mjs\b/m,
     `${FAILURE}: il workflow non esegue ${SCRIPT_REL}`,
   );
+  assert.match(workflow, /^\s*node scripts\/ci\/review-claim-health\.mjs\b/m);
 });
 
 test('il workflow usa solo il GITHUB_TOKEN di questo repo e misura il repo corrente', () => {

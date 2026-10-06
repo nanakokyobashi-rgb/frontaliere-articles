@@ -234,6 +234,34 @@ test('classifies setup and provider failures without consuming a retryable claim
   }), 'completed');
 });
 
+test('ammette un solo retry per un fallimento all avvio e terminalizza il secondo', () => {
+  const startup = {
+    proceed: true,
+    providerOutcome: 'failure',
+    permanentFailure: true,
+    startupFailure: true,
+  };
+  assert.equal(claimStatusFromOutcome(startup), 'failed-transient');
+  assert.equal(claimStatusFromOutcome({ ...startup, startupFailureRetryExhausted: true }), 'failed-terminal');
+  assert.equal(
+    claimStatusFromOutcome({ proceed: true, startupFailure: true, reviewPosted: true }),
+    'completed',
+    'una review postata resta completed anche se il processo aveva segnalato un avvio fallito',
+  );
+});
+
+test('il marker finalizzato conserva classe di causa e startup failure senza testo libero', () => {
+  const event = claim({
+    state: 'failed-transient',
+    causeClass: 'stream-disconnected',
+    startupFailure: true,
+  });
+  const parsed = parseReviewClaim(comment(event).body);
+  assert.equal(parsed?.causeClass, 'stream-disconnected');
+  assert.equal(parsed?.startupFailure, true);
+  assert.doesNotMatch(comment(event).body, /prompt|PRIVATE_PROMPT|PRIVATE_RESPONSE/iu);
+});
+
 test('a review verdict must carry exactly the current trusted body revision', () => {
   assert.equal(normalizeReviewInputRevision(` ${BODY_REVISION.toUpperCase()} `), BODY_REVISION);
   assert.equal(normalizeReviewInputRevision('body:not-a-sha'), null);
@@ -343,6 +371,12 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /CLAIM_ACTION: finalize/);
   assert.match(workflow, /CLAIM_KIND: review/);
   assert.match(workflow, /CONTRIBUTION_FINGERPRINT:/);
+  assert.match(workflow, /CODEX_EXIT_CODE:/);
+  assert.match(workflow, /CODEX_EVENT_TOTAL:/);
+  assert.match(workflow, /CODEX_STARTUP_FAILURE:/);
+  assert.match(workflow, /set_review_output startup_failure false/);
+  assert.match(workflow, /set_review_output review_abort_cause startup-failure/);
+  assert.match(workflow, /REVIEW_CAUSE_CLASS:/);
   // Il body edit non rientra piu' da un trigger `edited` di tests.yml: la
   // rerun di retry-code-check-after-body-edit.yml riusa il payload originale,
   // quindi la re-review dipende SOLO dalla revisione body letta via API.

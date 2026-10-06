@@ -368,9 +368,19 @@ test('la review Codex espone solo telemetry aggregata e conserva il cap di 45 mi
     'output_tokens',
     'duration_ms',
     'stream_status',
+    'codex_exit_code',
+    'codex_event_counts',
+    'codex_event_total',
+    'codex_stderr_match',
+    'codex_cause_class',
+    'codex_startup_failure',
   ]) {
     assert.match(action, new RegExp(`printf '${output}=%s\\\\n'`), `${output}: action output mancante`);
   }
+  assert.match(action, /codex-primary-diagnostics\.mjs/);
+  assert.match(action, /Codex primary diagnostics \(non-secret\)/);
+  assert.match(action, /event_counts/);
+  assert.match(action, /CODEX_STARTUP_FAILURE: \$\{\{ steps\.codex\.outputs\.codex_startup_failure \}\}/);
   assert.doesNotMatch(action, /cat "\$CODEX_DIAGNOSTICS"/,
     'il diagnostics stream non deve essere riversato nello step summary');
   const reviewStep = workflowStep(testsWorkflow, 'Run Codex Luna Max review');

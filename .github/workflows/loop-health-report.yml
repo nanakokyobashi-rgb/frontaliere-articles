@@ -82,3 +82,4 @@ jobs:
             ARGS+=(--no-post)
           fi
           node scripts/ci/loop-health-report.mjs "${ARGS[@]}" | tee -a "$GITHUB_STEP_SUMMARY"
+          node scripts/ci/review-claim-health.mjs --days "$INPUT_DAYS" | tee -a "$GITHUB_STEP_SUMMARY"

@@ -1595,6 +1595,13 @@ jobs:
           CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
           CODEX_TIMED_OUT: ${{ steps.codex_review.outputs.codex_timed_out }}
           CODEX_DURATION_MS: ${{ steps.codex_review.outputs.duration_ms }}
+          CODEX_EXIT_CODE: ${{ steps.codex_review.outputs.codex_exit_code }}
+          CODEX_EVENT_TOTAL: ${{ steps.codex_review.outputs.codex_event_total }}
+          CODEX_REVIEW_POSTED: ${{ steps.codex_review.outputs.codex_review_posted }}
+          CODEX_SIDE_EFFECT_DETECTED: ${{ steps.codex_review.outputs.side_effect_detected }}
+          CODEX_CAUSE_CLASS: ${{ steps.codex_review.outputs.codex_cause_class }}
+          CODEX_STDERR_MATCH: ${{ steps.codex_review.outputs.codex_stderr_match }}
+          CODEX_STARTUP_FAILURE: ${{ steps.codex_review.outputs.codex_startup_failure }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
@@ -1608,6 +1615,8 @@ jobs:
           }
           set_review_output review_aborted false
           set_review_output review_abort_cause none
+          set_review_output cause_class unknown
+          set_review_output startup_failure false
           set_review_output retryable_failure false
           set_review_output permanent_failure false
           set_review_output verdict_evidence_file ''
@@ -1635,6 +1644,24 @@ jobs:
           if [ "${CODEX_PRIMARY_SUCCESS:-false}" = 'true' ]; then
             echo "Codex primary riuscito: nessuna failure da classificare."
             exit 0
+          fi
+          CODEX_CAUSE_CLASS="${CODEX_CAUSE_CLASS:-unknown}"
+          case "$CODEX_CAUSE_CLASS" in
+            startup-failure|http-5xx|http-4xx|usage-limit|model-not-found|config-error|argument-error|stream-disconnected|error-code|unknown) ;;
+            *) CODEX_CAUSE_CLASS=unknown ;;
+          esac
+          set_review_output cause_class "$CODEX_CAUSE_CLASS"
+          # The action has already evaluated this predicate from the private
+          # stderr/JSONL files. Trust only its boolean result here: the claim
+          # finalizer independently rechecks the raw bounded signals before
+          # granting the one-shot retry.
+          if [ "${CODEX_STARTUP_FAILURE:-false}" = 'true' ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause startup-failure
+            set_review_output startup_failure true
+            set_review_output retryable_failure true
+            echo "::warning::Codex primary startup failure (cause=${CODEX_CAUSE_CLASS}, exit=${CODEX_EXIT_CODE:-unknown}, duration_ms=${CODEX_DURATION_MS:-unknown}, events=${CODEX_EVENT_TOTAL:-unknown}, stderr=${CODEX_STDERR_MATCH:-none}); one retry is admitted for this claim key."
+            exit 1
           fi
           # Codex viene eseguito con --json: il file è lo stream strutturato
           # della stessa action, non l'output Claude (vuoto nel percorso
@@ -1926,6 +1953,13 @@ jobs:
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
+          REVIEW_CAUSE_CLASS: ${{ steps.review_abort.outputs.cause_class || steps.codex_review.outputs.codex_cause_class }}
+          STARTUP_FAILURE: ${{ steps.review_abort.outputs.startup_failure }}
+          CODEX_EXIT_CODE: ${{ steps.codex_review.outputs.codex_exit_code }}
+          CODEX_EVENT_TOTAL: ${{ steps.codex_review.outputs.codex_event_total }}
+          CODEX_REVIEW_POSTED: ${{ steps.codex_review.outputs.codex_review_posted }}
+          CODEX_SIDE_EFFECT_DETECTED: ${{ steps.codex_review.outputs.side_effect_detected }}
+          CODEX_DURATION_MS: ${{ steps.codex_review.outputs.duration_ms }}
           REVIEW_POSTED: ${{ steps.test_only_review.outcome == 'success' }}
           REVIEW_GATE_FALLBACK_APPROVED: ${{ steps.review_gate.outputs.fallback_approved }}
           GITHUB_RUN_ID: ${{ github.run_id }}
