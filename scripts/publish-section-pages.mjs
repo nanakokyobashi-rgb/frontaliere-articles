@@ -292,11 +292,12 @@ async function probe(url, { attempts = 6, delayMs = 4000, want = () => true } = 
 }
 
 /** Lo stato della sezione nel registro che il Worker legge DAVVERO (R2), o null se illeggibile. */
-async function publishedStatus(section) {
+export async function publishedStatus(section) {
   const res = await probe(`${CDN_BASE}/${EDGE_SECTION_REGISTRY_FILE}`, { attempts: 2, delayMs: 2000 });
   if (!res.ok) return null;
   try {
-    return JSON.parse(res.body)?.sections?.[section]?.status ?? 'draft';
+    const status = JSON.parse(res.body)?.sections?.[section]?.status;
+    return status === 'live' || status === 'draft' ? status : null;
   } catch {
     return null;
   }
@@ -304,6 +305,15 @@ async function publishedStatus(section) {
 
 async function publish({ pages, cdnUploads, distDir, section }) {
   let failures = 0;
+  // A missing or malformed edge registry is UNKNOWN, not draft. Do not upload
+  // into that state: otherwise the CDN verify below can be green while a live
+  // apex still serves stale/404 pages. A valid draft is the bootstrap case.
+  const beforeStatus = await publishedStatus(section);
+  if (beforeStatus === null) {
+    console.error(`::error::[${LOG}] registro edge della sezione ${section} illeggibile o con stato sconosciuto: pubblicazione bloccata`);
+    return { failures: 1, uploaded: 0, status: null };
+  }
+  console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   for (const { local, key } of cdnUploads) {
     const { stdout } = run('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
     if (!stdout.includes('✅ uploaded')) {
@@ -327,6 +337,10 @@ async function publish({ pages, cdnUploads, distDir, section }) {
 
   const status = await publishedStatus(section);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
+  if (status === null) {
+    console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
+    return { failures: failures + 1, uploaded: uploaded.length, status: null };
+  }
   const hasMeta = (body) => body.includes(CORPUS_ROUTE_OWNER_META_TAG);
   for (const page of uploaded) {
     const cdn = await probe(page.cdnUrl, { want: hasMeta });

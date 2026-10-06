@@ -120,9 +120,9 @@ jobs:
               echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
               dry=true
             fi
-            matrix="$(git diff --name-only HEAD~1 HEAD 2>/dev/null \
+            matrix="$(git diff --name-status HEAD~1 HEAD 2>/dev/null \
               | node scripts/ci/fast-publish-section.mjs r2-plan \
-              | jq -c 'map(. + {bootstrap: false})')"
+              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true

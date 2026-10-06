@@ -25,6 +25,7 @@ import {
   pageDefects,
   pageEntry,
   parseArgs,
+  publishedStatus,
   rendererPageEntry,
 } from '../../scripts/publish-section-pages.mjs';
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
@@ -104,6 +105,22 @@ test('publisher: una pagina con noindex, senza meta di proprieta\', con asset sa
   assert.match(pageDefects(page, good.replace('https://cdn.frontaliereticino.ch/assets/', '/assets/')).join('|'), /same-origin/);
   assert.match(pageDefects(page, good.replace(page.apexUrl, 'https://frontaliereticino.ch/articoli-svizzera/')).join('|'), /canonical/);
   assert.match(pageDefects(page, '').join('|'), /vuota/);
+});
+
+test('publisher: registry edge illeggibile o con stato sconosciuto non diventa draft', async () => {
+  const previousFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => ({ status: 200, text: async () => '{"sections":{"canton-ti":{"status":"stale"}}}' });
+    assert.equal(await publishedStatus('canton-ti'), null);
+    globalThis.fetch = async () => ({ status: 200, text: async () => '{"sections":{"canton-ti":{"status":"draft"}}}' });
+    assert.equal(await publishedStatus('canton-ti'), 'draft');
+    globalThis.fetch = async () => ({ status: 200, text: async () => '{"sections":{"canton-ti":{"status":"live"}}}' });
+    assert.equal(await publishedStatus('canton-ti'), 'live');
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+  assert.match(read('scripts/publish-section-pages.mjs'), /beforeStatus === null/);
+  assert.match(read('scripts/publish-section-pages.mjs'), /if \(status === null\)/);
 });
 
 test('publisher: il meta di proprieta\' si aggiunge solo dove manca', () => {
@@ -246,7 +263,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/build-api.mjs',
     '',
   ], WITH_TI);
-  assert.deepEqual(plan, [{ section: 'canton-ti', ids: ['a', 'b'] }]);
+  assert.deepEqual(plan, [{ section: 'canton-ti', ids: ['a', 'b'], bootstrap: false }]);
   // Senza corpi: un giro di rinfresco (landing, archivio, hub).
   for (const rel of [
     'content/cantons/canton-ti/hubs/fisco.json',
@@ -254,8 +271,26 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'content/cantons/canton-ti/seo.ts',
     'content/blog-meta-canton-ti-en.ts',
   ]) {
-    assert.deepEqual(r2PublishPlan([rel], WITH_TI), [{ section: 'canton-ti', ids: [] }], rel);
+    const expectedBootstrap = !rel.includes('/hubs/');
+    assert.deepEqual(r2PublishPlan([rel], WITH_TI), [{ section: 'canton-ti', ids: [], bootstrap: expectedBootstrap }], rel);
   }
+  // A hub-only change does not need to render every article.
+  assert.deepEqual(
+    r2PublishPlan(['M\tcontent/cantons/canton-ti/hubs/fisco.json'], WITH_TI),
+    [{ section: 'canton-ti', ids: [], bootstrap: false }],
+  );
+  // `--name-status` preserves deletion state: a removed body triggers a full
+  // refresh of the surviving registry, but the removed id is never sent to
+  // renderArticlePages (which would otherwise abort before archive/landing).
+  assert.deepEqual(
+    r2PublishPlan(['D\tcontent/blog-body-canton-ti/it/removed.ts'], WITH_TI),
+    [{ section: 'canton-ti', ids: [], bootstrap: true }],
+  );
+  // A rename is also structural, and the destination is still recognised.
+  assert.deepEqual(
+    r2PublishPlan(['R100\tcontent/blog-body-canton-ti/it/old.ts\tcontent/blog-body-canton-ti/it/new.ts'], WITH_TI),
+    [{ section: 'canton-ti', ids: [], bootstrap: true }],
+  );
   assert.deepEqual(r2PublishPlan(['content/cantons/canton-gr/registry.ts', 'content/blog-meta-canton-tipo-it.ts'], WITH_TI), []);
 });
 
@@ -276,6 +311,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     assert.ok(wf.includes(`      - ${p}\n`), p);
   }
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /git diff --name-status HEAD~1 HEAD/);
+  assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
   assert.match(wf, /bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
   assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);

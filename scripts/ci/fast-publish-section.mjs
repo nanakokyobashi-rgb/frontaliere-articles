@@ -19,9 +19,10 @@
  *                          cantonali, pubblicate da fast-publish-section.yml).
  *                          Senza sezioni del tipo chiesto l'ERE non combacia
  *                          con niente.
- *   r2-plan                legge da stdin i file cambiati (uno per riga) e
- *                          stampa la matrice JSON `[{section, ids}]` delle
- *                          sezioni R2 da ripubblicare
+ *   r2-plan                legge da stdin i file cambiati (uno per riga; accetta
+ *                          anche `git diff --name-status`) e stampa la matrice
+ *                          JSON `[{section, ids, bootstrap}]` delle sezioni R2
+ *                          da ripubblicare
  *   section-of <path>      la sezione che possiede quel corpo (esce 1 se nessuna)
  *   shard-of <section>     lo shard Pages della sezione. Una sezione con
  *                          `shardKey: null` (le cantonali) e' servita da R2 +
@@ -83,36 +84,72 @@ export function shardOf(section, coreList = ARTICLE_SECTION_CORE_LIST) {
 
 /**
  * Le sezioni R2 (cantonali attive) toccate da un insieme di file cambiati, con
- * gli id degli articoli il cui corpo e' cambiato. Una sezione entra anche
- * senza corpi — registro, mappa slug, meta, chunk SEO, dati di un hub — con
- * `ids: []`: e' un giro che rinfresca landing, archivio e hub.
+ * gli id degli articoli il cui corpo e' cambiato. `bootstrap: true` significa
+ * che un input article-facing (registro, slug, SEO, meta) o una cancellazione
+ * richiede il render completo degli id ancora presenti: gli id rimossi non
+ * entrano mai in `ids`, quindi il controllo del renderer non fallisce su una
+ * voce che il commit ha eliminato. I soli input hub (`.../hubs/*.json`) restano
+ * `bootstrap: false` e con `ids: []`: rinfrescano landing, archivio e hub.
  *
  * @param {string[]} files path relativi alla radice del repo
- * @returns {Array<{ section: string, ids: string[] }>} nell'ordine del core
+ * @returns {Array<{ section: string, ids: string[], bootstrap: boolean }>} nell'ordine del core
  */
 export function r2PublishPlan(files, coreList = ARTICLE_SECTION_CORE_LIST) {
   const sections = activeSourceSections(coreList).filter((s) => !s.shardKey);
   const plan = new Map();
   const touch = (section) => {
-    if (!plan.has(section)) plan.set(section, new Set());
+    if (!plan.has(section)) plan.set(section, { ids: new Set(), bootstrap: false });
     return plan.get(section);
   };
+  const changedFiles = [];
   for (const raw of files) {
-    const rel = String(raw ?? '').trim();
+    const line = String(raw ?? '').trimEnd();
+    if (!line.trim()) continue;
+    const fields = line.split('\t');
+    if (fields.length === 1) {
+      changedFiles.push({ rel: fields[0].trim(), status: 'M' });
+      continue;
+    }
+    const status = fields[0].trim().charAt(0) || 'M';
+    // `--name-status` gives R<score> old new and C<score> old new. A rename
+    // is a deletion plus an addition for publication purposes: seeing either
+    // side is enough to force a complete refresh of the surviving registry.
+    const paths = status === 'R' || status === 'C' ? fields.slice(1) : fields.slice(1, 2);
+    for (const rel of paths) changedFiles.push({ rel: rel.trim(), status });
+  }
+  for (const { rel, status } of changedFiles) {
     if (!rel) continue;
     const body = sectionForBodyPath(rel, coreList);
     if (body) {
-      if (sections.some((s) => s.section === body.section)) touch(body.section).add(body.id);
+      const target = sections.find((s) => s.section === body.section);
+      if (!target) continue;
+      const state = touch(target.section);
+      if (status === 'D' || status === 'R') state.bootstrap = true;
+      else state.ids.add(body.id);
       continue;
     }
     for (const s of sections) {
-      const own =
-        rel.startsWith(`content/cantons/${s.section}/`) ||
-        rel.startsWith(`${s.metaPrefix}-`);
-      if (own) touch(s.section);
+      const cantonRoot = `content/cantons/${s.section}/`;
+      const hubRoot = `${cantonRoot}hubs/`;
+      const isHubData = rel.startsWith(hubRoot);
+      const own = rel.startsWith(cantonRoot) || rel.startsWith(`${s.metaPrefix}-`);
+      if (!own) continue;
+      const state = touch(s.section);
+      // Hub JSON changes only refresh the non-article surfaces. Every other
+      // canton source can alter article HTML/canonical/alternate output.
+      if (!isHubData) state.bootstrap = true;
     }
   }
-  return sections.filter((s) => plan.has(s.section)).map((s) => ({ section: s.section, ids: [...plan.get(s.section)].sort() }));
+  return sections
+    .filter((s) => plan.has(s.section))
+    .map((s) => {
+      const state = plan.get(s.section);
+      return {
+        section: s.section,
+        ids: state.bootstrap ? [] : [...state.ids].sort(),
+        bootstrap: state.bootstrap,
+      };
+    });
 }
 
 function isMain() {
