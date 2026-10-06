@@ -204,15 +204,17 @@ async function deriveJournalistContent(data, rawBody) {
 }
 
 function journalistSourceText(doc) {
+  // `content.it.body` is the journalist's authored draft and
+  // splitBodyIntoSections() deliberately preserves it verbatim; it is not an
+  // external source to paraphrase. Only an explicitly captured source field
+  // is an anti-copy input for this pipeline.
   return typeof doc?.sourceText === 'string'
     ? doc.sourceText
     : typeof doc?.source?.text === 'string'
       ? doc.source.text
       : typeof doc?.sourceContent === 'string'
         ? doc.sourceContent
-        : typeof doc?.content?.it?.body === 'string'
-          ? doc.content.it.body
-          : '';
+        : '';
 }
 
 function assertJournalistSourceCopySafe(data, sourceText) {
