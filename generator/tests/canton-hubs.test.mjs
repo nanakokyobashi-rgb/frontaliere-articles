@@ -517,6 +517,7 @@ test('un fetch fallito non toglie un blocco ancora valido: si conserva quello pu
     const block = nationalTooOld.locales[locale].dataBlocks.find((b) => b.id === 'prezzi-carburanti');
     for (const item of block.items) item.date = new Date(NOW - BLOCK_THRESHOLDS.fuel.nationalMaxAgeMs - DAY_MS).toISOString();
   }
+  nationalTooOld.blocks[0].carryUntilAt = new Date(NOW - DAY_MS).toISOString();
   const beyondNational = buildOne('canton-ti', 'carburanti', { datasets: withoutFuel, previous: nationalTooOld, nowMs: NOW + DAY_MS });
   assert.equal(beyondNational.blocks[0].status, 'omitted');
 

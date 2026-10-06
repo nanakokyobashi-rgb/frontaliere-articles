@@ -5,7 +5,7 @@
  * quelle del dataset, formattate (D11).
  */
 import { fmtDay, fmtNumber, fmtPerLitre } from './format.mjs';
-import { BLOCK_THRESHOLDS, finite, freshnessProblem, isObj, omitted } from './blocks-common.mjs';
+import { BLOCK_THRESHOLDS, finite, freshnessProblem, instantMs, isObj, omitted } from './blocks-common.mjs';
 
 export const FUEL_BLOCK_ID = 'prezzi-carburanti';
 
@@ -101,10 +101,16 @@ export function shapeFuelBlock(dataset, { canton, nowMs }) {
   }
 
   const providers = [...new Set(rows.map((r) => String(r.source ?? '').trim()).filter(Boolean))];
+  const carryUntilMs = Math.min(...rows.map((r) => {
+    const observedMs = instantMs(r.observedAt);
+    const maxAgeMs = granularityOf(r) === 'national' ? th.nationalMaxAgeMs : th.maxAgeMs;
+    return observedMs + maxAgeMs;
+  }));
   return {
     id,
     available: true,
     updatedAt: dataset.generatedAt,
+    carryUntilAt: new Date(carryUntilMs).toISOString(),
     maxAgeMs: th.maxAgeMs,
     render(locale) {
       const t = TXT[locale];
