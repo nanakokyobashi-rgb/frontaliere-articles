@@ -7841,6 +7841,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ginevra-iniziativa-cern-fcc.title': 'Ginevra lancia voto popolare sul futuro CERN',
     'blog.article.ginevra-iniziativa-cern-fcc.excerpt': 'Il FCC sarebbe lungo 91 km, costerebbe 15 miliardi di franchi e servono 5’696 firme entro metà febbraio 2027; decisione finale dei 25 Stati membri prevista per maggio 2028.',
     'blog.article.ginevra-iniziativa-cern-fcc.imageAlt': 'Vista del lago di Ginevra con il complesso del CERN sullo sfondo, luce diurna',
+    'blog.article.iniziative-mps-giustizia-respinte.title': 'Iniziative MPS sulla giustizia bocciate dal Gran Consiglio',
+    'blog.article.iniziative-mps-giustizia-respinte.excerpt': 'Il Gran Consiglio ha respinto le due iniziative MPS: ridurre l\'età pensionamento magistrati da 70 a 65 anni (41 voti contro) e trasferire al Parlamento le destituzioni (61 voti contro).',
+    'blog.article.iniziative-mps-giustizia-respinte.imageAlt': 'Aula del Gran Consiglio a Bellinzona durante una votazione sulle iniziative MPS sulla giustizia',
 };
 
 export default blogMetaChIt;

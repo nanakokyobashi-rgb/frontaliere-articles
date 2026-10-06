@@ -24782,6 +24782,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'iniziative-mps-giustizia-respinte',
+    category: 'novita',
+    date: '2026-10-06T18:30:47.821Z',
+    image: '/images/blog/iniziative-mps-giustizia-respinte.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
