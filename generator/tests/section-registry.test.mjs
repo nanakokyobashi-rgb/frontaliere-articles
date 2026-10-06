@@ -64,6 +64,7 @@ import {
   hasOwnApiSurfaces,
   publishedApiSections,
   sectionApiSurfaces,
+  sectionRssLayout,
   sectionSourceSurfaces,
 } from '../../scripts/lib/corpus-sections.mjs';
 import {
@@ -75,6 +76,7 @@ import {
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
+import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import { isNewFamilySection } from '../../scripts/lib/corpus-floors.mjs';
 import { floorViolations } from '../../scripts/ci/verify-api-floors.mjs';
 import {
@@ -85,6 +87,7 @@ import {
   purgeChunks,
   readPreviousRelease,
   registryState,
+  requiredPageKeys,
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
 
@@ -376,6 +379,24 @@ test('corpus-sections: la famiglia canton ha nomi aggregati, le storiche restano
     ['CANTON_ARTICLES', 'CANTON_SLUGS', null, 'CANTON_SLUG_FALLBACK_REASONS']);
 });
 
+test('RSS: ogni sezione ha il SUO layout — una cantonale legge la mappa slug dalla propria cartella', () => {
+  // Le storiche: il layout di sempre, quindi feed byte-identici.
+  for (const id of ['frontaliere', 'svizzera']) {
+    assert.deepEqual(sectionRssLayout(id), { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' });
+  }
+  // L'engine risolve `<slugDir>/<basename del file slug>`: per canton-ti deve cadere sul file vero.
+  const layout = sectionRssLayout('canton-ti');
+  assert.deepEqual(layout, { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content/cantons/canton-ti' });
+  assert.equal(path.join(layout.slugDir, path.basename(sectionSourceSurfaces('canton-ti').slugFile)), 'content/cantons/canton-ti/slugs.ts');
+  assert.match(readFileSync(path.join(ROOT, 'engine/rssFeeds.mjs'), 'utf8'), /return path\.join\(slugDir, path\.basename\(slugFile\)\);/);
+  // Il chunk SEO: create-article lo scrive dove l'engine (articoli e RSS) lo legge.
+  assert.match(readFileSync(path.join(ROOT, 'generator/scripts/lib/canton-section-profile.mjs'), 'utf8'), /seoFile: `services\/seo\/seo-blog-\$\{section\}\.ts`,/);
+  assert.match(readFileSync(path.join(ROOT, 'engine/rssFeeds.mjs'), 'utf8'), /seo-blog-\$\{core\.section\}\.ts/);
+  // E build-api rifiuta un feed di famiglia che ha letto una mappa slug diversa da quella pubblicata.
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(build, /if \(section\.slugCount !== emitted\) \{\s+throw new Error\(/);
+});
+
 test('corpus-sections: gli export dichiarati coincidono con quelli che create-article scrive (P6b)', async (t) => {
   const profile = path.join(ROOT, 'generator/scripts/lib/canton-section-profile.mjs');
   if (!existsSync(profile)) {
@@ -521,6 +542,7 @@ const pointerOf = (io) => {
  * puntatore dichiara, i byte sotto la SUA base. E' la sola cosa che un
  * fallimento prima del PUT deve lasciare identica.
  */
+const PAGE_KEY_RE = /^edge\/sections\/(?!_releases\/|registry\.json$)/;
 function served(io) {
   const pointer = pointerOf(io);
   if (!pointer) return JSON.stringify({ state: registryState({ sections: {} }), files: {} });
@@ -533,12 +555,24 @@ function served(io) {
  * pubblicate davvero, in ordine, con lo stesso protocollo; `seed(io)` puo'
  * poi alterare R2 a mano. I guasti valgono solo per la pubblicazione sotto prova.
  */
-async function publish(registry, { history = [], seed, fail, corrupt, salt } = {}, env = CREDS) {
+const liveIds = (registry) => Object.keys(registry.sections).filter((id) => registry.sections[id].status === 'live');
+/** Mette su R2 le pagine di bootstrap di una sezione (cio' che fa publish-section-pages). */
+function seedPages(io, ids) {
+  for (const id of ids) {
+    for (const key of requiredPageKeys(id, { activation: true })) {
+      io.store.set(key, Buffer.from(`<html><head>${CORPUS_ROUTE_OWNER_META_TAG}</head></html>`));
+    }
+  }
+}
+
+async function publish(registry, { history = [], seed, fail, corrupt, salt, bootstrap = true } = {}, env = CREDS) {
   const io = fakeIo();
   for (const past of history) {
+    seedPages(io, liveIds(past));
     const first = await publishRelease(planRelease(fakeDist(past)), { io, env: CREDS, log: () => {} });
     assert.equal(first.code, 0, 'una release della storia deve pubblicarsi');
   }
+  if (bootstrap) seedPages(io, liveIds(registry));
   if (seed) seed(io);
   io.ops.length = 0;
   io.purged.length = 0;
@@ -598,7 +632,7 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
     'purge 3',
   ]);
   // Nessuna chiave fuori dalla base della release, a parte il puntatore.
-  const written = [...io.store.keys()].filter((key) => !key.startsWith('cc:'));
+  const written = [...io.store.keys()].filter((key) => !key.startsWith('cc:') && !PAGE_KEY_RE.test(key));
   assert.ok(written.every((key) => key === 'edge/sections/registry.json' || key.startsWith('edge/sections/_releases/')), written.join(', '));
   assert.equal(io.store.get('cc:edge/sections/registry.json'), 'public,max-age=60');
   assert.equal(io.store.get(`cc:${base}sitemap-cantons.xml`), 'public,max-age=31536000,immutable');
@@ -643,6 +677,7 @@ test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, rit
 test('edge: la release servita e\' NOTA solo se ogni file dichiarato c\'e\' con il suo sha256', async () => {
   const seeded = async (seed) => {
     const io = fakeIo();
+    seedPages(io, ['canton-ti']);
     await publishRelease(planRelease(fakeDist(withLive(['canton-ti'], OLD))), { io, env: CREDS, log: () => {} });
     seed(io);
     return io;
@@ -704,6 +739,45 @@ test('edge: ogni fallimento PRIMA del PUT lascia servita la release di prima, in
       assert.match(logs.join('\n'), /::error::\[section-edge\].*il Worker serve la release di prima, intera; il publish si ferma/);
     }
   }
+});
+
+test('edge: una sezione non diventa live finche\' le sue pagine di bootstrap non sono su R2', async () => {
+  // Le chiavi sono quelle che il Worker serve: landing, 6 hub e archivio nelle 4 locali per un'accensione.
+  const activation = requiredPageKeys('canton-ti', { activation: true });
+  assert.equal(activation.length, (1 + 6 + 1) * 4);
+  for (const key of ['edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/fuel/index.html', 'edge/sections/de/tessin-artikel/alle/index.html']) {
+    assert.ok(activation.includes(key), key);
+  }
+  assert.deepEqual(requiredPageKeys('canton-ti', { activation: false }), [
+    'edge/sections/articoli-ticino/index.html', 'edge/sections/en/ticino-articles/index.html',
+    'edge/sections/de/tessin-artikel/index.html', 'edge/sections/fr/articles-tessin/index.html',
+  ]);
+  // Accensione senza bootstrap, o con una sola pagina mancante, o con una pagina senza il meta di proprieta': niente flip.
+  for (const [what, opts] of [
+    ['nessuna pagina', { bootstrap: false }],
+    ['un hub mancante', { seed: (io) => io.store.delete('edge/sections/fr/articles-tessin/fiscalite/index.html') }],
+    ['landing senza ft-route-owner', { seed: (io) => io.store.set('edge/sections/articoli-ticino/index.html', Buffer.from('<html></html>')) }],
+  ]) {
+    const { io, logs, before, result } = await publish(withLive(['canton-ti']), { history: [DRAFT_ALL(OLD)], ...opts });
+    assert.deepEqual([result.code, result.phase, result.flipped], [1, 'bootstrap', false], what);
+    assert.equal(served(io), before, `${what}: la sezione resta com'era`);
+    assert.match(logs.join('\n'), /pagine di sezioni live non sono su R2/);
+    // I file caricati in staging non sono puntati da niente: vengono tolti.
+    assert.ok(![...io.store.keys()].some((key) => !key.startsWith('cc:') && key.includes(`/_releases/${COMMIT}/`)), `${what}: staging ripulito`);
+  }
+  // Una sezione gia' live: bastano le landing (un hub sparito non spegne la pubblicazione delle altre).
+  const kept = await publish(withLive(['canton-ti']), {
+    history: [withLive(['canton-ti'], OLD)],
+    salt: ' v2',
+    seed: (io) => io.store.delete('edge/sections/fr/articles-tessin/fiscalite/index.html'),
+  });
+  assert.equal(kept.result.code, 0);
+  const lost = await publish(withLive(['canton-ti']), {
+    history: [withLive(['canton-ti'], OLD)],
+    salt: ' v2',
+    seed: (io) => io.store.delete('edge/sections/articoli-ticino/index.html'),
+  });
+  assert.deepEqual([lost.result.code, lost.result.phase], [1, 'bootstrap']);
 });
 
 test('edge: dopo il PUT la release nuova e\' servita intera; un purge fallito esce non-zero senza incoerenze', async () => {

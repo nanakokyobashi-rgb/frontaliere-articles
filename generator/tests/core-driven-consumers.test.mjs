@@ -307,7 +307,9 @@ test('RSS: con la lista attiva di oggi nessun profilo cantonale viene chiesto al
   assert.deepEqual(RSS_SECTIONS.map((s) => s.id), ACTIVE);
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /assertActiveSectionsPublishable\(\);/);
-  assert.match(build, /registries: Object\.fromEntries\(PUBLISHED_API_SECTIONS\.map/);
+  assert.match(build, /RSS_SECTIONS\.map\(\(section\) =>\s+buildSectionFeeds\(\{/);
+  assert.match(build, /registry: SECTION_REGISTRIES\[section\.id\] \?\? \[\],/);
+  assert.match(build, /layout: sectionRssLayout\(section\.id\),/);
   assert.doesNotMatch(build, /\['frontaliere', 'svizzera'\]/);
   assert.doesNotMatch(build, /SWISS_ARTICLES\.length/);
 });

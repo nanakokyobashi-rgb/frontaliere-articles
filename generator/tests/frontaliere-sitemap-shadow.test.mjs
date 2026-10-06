@@ -245,15 +245,18 @@ test('both canonical-override files still declare the sitemap-only scope (RSS ex
 test('build-api.mjs passes the UNFILTERED registries to the RSS builder and to the ticker (sitemap-only scope)', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
 
-  const rssCall = src.match(/buildAllRssFeeds\(\{[\s\S]*?\n\}\);/);
-  assert.ok(rssCall, 'could not find the buildAllRssFeeds({...}) call to inspect');
+  // Since P7 the feeds are built one section at a time (the corpus layout is
+  // per section: a canton keeps its slug map in its own folder), through the
+  // same engine function `buildAllRssFeeds` maps over.
+  const rssCall = src.match(/buildSectionFeeds\(\{[\s\S]*?\n  \}\),\n\);/);
+  assert.ok(rssCall, 'could not find the buildSectionFeeds({...}) call to inspect');
   // Since C1 the registries are keyed by the core's section ids; each one is
   // the module export as loaded, with no filter between the load and here.
   // Since P7 the family sections (cantons) are passed too, same rule.
   assert.match(src, /SECTION_REGISTRIES\[section\.section\] = registry;/);
   assert.match(
     rssCall[0],
-    /registries:\s*Object\.fromEntries\(PUBLISHED_API_SECTIONS\.map\(\(\{ section \}\) => \[section, SECTION_REGISTRIES\[section\]\]\)\)/,
+    /registry:\s*SECTION_REGISTRIES\[section\.id\] \?\? \[\],/,
     'the RSS registries are no longer the raw per-section registries. Filtering them HERE is a ' +
       'caller-side divergence: engine/rssFeeds.mjs is the single implementation shared with the site ' +
       '(its header forbids a second copy for exactly this reason), and both override files document ' +

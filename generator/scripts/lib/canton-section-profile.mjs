@@ -306,7 +306,13 @@ export function cantonSectionPaths(section) {
     metaPrefix: core.metaPrefix,
     bodyDir: core.bodyDir,
     metaFiles: LOCALES.map((loc) => `services/locales/${core.metaPrefix}-${loc}.ts`),
-    seoFile: `packages/articles/content/cantons/${section}/seo.ts`,
+    // Il chunk SEO sta dove l'ENGINE lo legge: il descrittore di sezione
+    // (engine/shared/articleSectionDescriptors.ts, riga `canton`) e il profilo
+    // RSS (engine/rssFeeds.mjs) cercano `seo-blog-<sezione>.ts` accanto ai
+    // chunk delle sezioni storiche. Un path diverso qui darebbe articoli resi
+    // senza metadati e feed senza item: nessun errore, solo pagine mancanti.
+    // generator/tests/section-registry.test.mjs lega i due lati.
+    seoFile: `services/seo/seo-blog-${section}.ts`,
     sourceUrlsFile: `${state}/article-source-urls.json`,
     sourceQuotaFile: `${state}/article-source-quotas.json`,
     quotaStateFile: `${state}/quota-state.json`,
@@ -461,7 +467,7 @@ export default ${varName};
   files[cfg.seoFile] = `// Metadati SEO degli articoli della sezione ${section} (${name}).
 // Stessa forma voce di seo-blog-ch.ts; scritto da create-article.mjs.
 
-${typeImportLine('SEOMetadata', '../../seo/seoMetadataType')}
+${typeImportLine('SEOMetadata', './seoMetadataType')}
 
 const BASE_URL = 'https://frontaliereticino.ch';
 

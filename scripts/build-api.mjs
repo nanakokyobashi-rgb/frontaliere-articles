@@ -38,7 +38,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
-import { buildAllRssFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
+import { buildSectionFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -96,6 +96,7 @@ import {
   API_SECTIONS,
   PUBLISHED_API_SECTIONS,
   activeApiFamilies,
+  sectionRssLayout,
   assertActiveSectionsPublishable,
 } from './lib/corpus-sections.mjs';
 // Il registro delle sezioni (dichiarato in sections/registry.json, verita' del
@@ -227,6 +228,7 @@ const load = async (rel) => import(path.join(ROOT, rel));
 // finche' non arrivano le superfici di famiglia) e' un rifiuto qui, prima di
 // scrivere un solo byte: saltarla pubblicherebbe un set troncato.
 assertActiveSectionsPublishable();
+const PUBLISHED_BY_SECTION = Object.fromEntries(PUBLISHED_API_SECTIONS.map((section) => [section.section, section]));
 // Il registro dichiarato delle sezioni si valida PRIMA di scrivere un solo
 // byte: un registro fuori contratto e' un errore del commit che l'ha toccato.
 const declaredSections = loadDeclaredRegistry(ROOT);
@@ -756,19 +758,43 @@ console.log(
 // inside engine/rssFeeds.mjs (one module, two callers — that module's header
 // forbids caller-side divergence by construction). generator/tests/frontaliere-sitemap-shadow.test.mjs
 // pins both halves of that.
-const rssSections = buildAllRssFeeds({
-  fs,
-  path,
-  rootDir: ROOT,
-  registries: Object.fromEntries(PUBLISHED_API_SECTIONS.map(({ section }) => [section, SECTION_REGISTRIES[section]])),
-  layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
-  // Il corpus e' il produttore REALE dei dieci feed: il sito chiama
-  // buildAllRssFeeds solo dai test. Se questa riga manca, la riparazione della
-  // coda resta inerte in produzione dietro una CI verde del sito — la stessa
-  // forma dell'incidente SiteShellContract. L'engine attuale ignora il
-  // parametro; quello che arriva col prossimo mirror lo pretende.
-  repairSerpSnippet,
-});
+//
+// Una chiamata PER SEZIONE (e' cio' che `buildAllRssFeeds` fa, sezione per
+// sezione) invece di una sola con un layout unico: il layout non e' lo stesso
+// per tutte. Per le due storiche `sectionRssLayout` vale quello di sempre
+// (`content/seo`, `content`, mappa slug in `content/`), quindi i loro feed sono
+// byte-identici; una sezione cantonale ha la mappa slug nella SUA cartella.
+const rssSections = RSS_SECTIONS.map((section) =>
+  buildSectionFeeds({
+    fs,
+    path,
+    rootDir: ROOT,
+    section,
+    registry: SECTION_REGISTRIES[section.id] ?? [],
+    layout: sectionRssLayout(section.id),
+    // Il corpus e' il produttore REALE dei feed: il sito chiama l'engine solo
+    // dai test. Se questa riga manca, la riparazione della coda resta inerte
+    // in produzione dietro una CI verde del sito — la stessa forma
+    // dell'incidente SiteShellContract.
+    repairSerpSnippet,
+  }),
+);
+// La mappa slug che il feed ha letto deve essere quella che questo script ha
+// emesso in slugs.json: se l'engine ne trova un'altra (o nessuna) i link dei
+// feed ricadono sugli id grezzi, e il feed resta «valido». Per le sezioni di
+// famiglia e' un rifiuto; le storiche hanno il loro confronto nel gate dei
+// counts (slugs.json contro il registro).
+for (const section of rssSections) {
+  const published = PUBLISHED_BY_SECTION[section.id];
+  if (!published || published.api.family === null) continue;
+  const emitted = Object.keys(slugMapOf(section.id) ?? {}).length;
+  if (section.slugCount !== emitted) {
+    throw new Error(
+      `rss: la sezione ${section.id} ha letto ${section.slugCount} slug da ${published.slugFile}, ` +
+        `slugs.json ne pubblica ${emitted} — refusing (i link dei feed userebbero gli id grezzi)`,
+    );
+  }
+}
 
 let rssFeedCount = 0;
 let rssItemTotal = 0;
@@ -1223,7 +1249,6 @@ console.log(
   `[build-api] sections: kill-switch ${killSwitch.state}` +
     (killedSections.length ? `, spente: ${killedSections.join(', ')}` : ', nessuna sezione spenta'),
 );
-const PUBLISHED_BY_ID = Object.fromEntries(PUBLISHED_API_SECTIONS.map((section) => [section.section, section]));
 // Il catalogo NON porta lo stato delle sezioni: quello ha una sola fonte, il
 // registro che il Worker legge da R2 (vedi buildSectionsCatalog).
 const sectionsCatalog = buildSectionsCatalog({
@@ -1232,7 +1257,7 @@ const sectionsCatalog = buildSectionsCatalog({
   articles: Object.fromEntries(
     Object.keys(declaredSections.sections).map((id) => [id, SECTION_REGISTRIES[id]?.length ?? 0]),
   ),
-  sitemapOf: (id) => PUBLISHED_BY_ID[id]?.api.sitemap ?? null,
+  sitemapOf: (id) => PUBLISHED_BY_SECTION[id]?.api.sitemap ?? null,
 });
 write(SECTIONS_CATALOG_FILE, sectionsCatalog);
 // Registro e indice si emettono INSIEME o per niente: sono la release che
@@ -1252,7 +1277,7 @@ if (edgeRegistryPublishable(declaredSections, killSwitch)) {
       // Una sezione live e' attiva per costruzione (declaredRegistryErrors),
       // quindi ha la sua sitemap scritta qui sopra; il controllo resta, perche'
       // una sitemap annunciata e non emessa e' un 404 dichiarato in robots.txt.
-      const file = PUBLISHED_BY_ID[id]?.api.sitemap;
+      const file = PUBLISHED_BY_SECTION[id]?.api.sitemap;
       if (!file || !Object.prototype.hasOwnProperty.call(written, file)) {
         throw new Error(`sezione live ${id} senza sitemap emessa — refusing`);
       }

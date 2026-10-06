@@ -45,6 +45,15 @@
  *    e viene riletto dal CDN: sha256 e lunghezza dei byte serviti devono
  *    essere quelli locali. Fallimento: exit, nessun cambio.
  *
+ * 1b. BOOTSTRAP. Il puntatore sta per dichiarare `live` delle sezioni: le loro
+ *    PAGINE (`edge/sections/<path>/index.html`, chiavi fisse scritte da
+ *    publish-section-pages.mjs) devono essere gia' su R2, o il flip esporrebbe
+ *    URL cantonali che rispondono 404. Per una sezione che DIVENTA live si
+ *    rileggono dal CDN tutte le pagine di sezione nelle 4 locali (landing, i 6
+ *    hub, archivio); per una gia' live le 4 landing. Ogni pagina deve
+ *    rispondere 200 e portare il meta `ft-route-owner`. Se ne manca una: exit,
+ *    nessun cambio — la sezione resta com'era finche' il bootstrap non c'e'.
+ *
  * 2. FLIP. UN PUT del puntatore. E' l'unico passo che cambia cio' che il
  *    Worker serve. Fallimento: la release servita resta quella di prima,
  *    intera.
@@ -77,6 +86,8 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
+import { familySectionPages } from './lib/build-sitemap.mjs';
 import {
   EDGE_SECTION_REGISTRY_FILE,
   SECTION_SITEMAP_INDEX_FILE,
@@ -244,6 +255,31 @@ export const realIo = {
 };
 
 /**
+ * Le chiavi R2 delle pagine che una sezione deve avere per poter essere
+ * `live`: tutte le pagine di sezione nelle 4 locali (landing, hub, prima
+ * pagina dell'archivio) se sta DIVENTANDO live, le sole landing se lo era gia'.
+ */
+export function requiredPageKeys(section, { activation }) {
+  return familySectionPages(section, 0, 1)
+    .filter((page) => activation || page.key === 'landing')
+    .flatMap((page) => Object.values(page.paths))
+    .map((canonicalPath) => `edge/sections${canonicalPath}index.html`);
+}
+
+/** Le pagine richieste che NON sono su R2 (200 con il meta di proprieta' della route). */
+export async function missingBootstrapPages(release, previous, io) {
+  const wasLive = (id) => previous.state === 'ok' && previous.doc.sections?.[id]?.status === 'live';
+  const missing = [];
+  for (const id of release.live) {
+    for (const key of requiredPageKeys(id, { activation: !wasLive(id) })) {
+      const got = await io.fetchBytes(`${CDN}/${key}`);
+      if (got.status !== 200 || !got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG)) missing.push(key);
+    }
+  }
+  return missing;
+}
+
+/**
  * La release che R2 serve ADESSO. `ok` solo se il puntatore rispetta il
  * contratto del Worker, dichiara i suoi file in modo leggibile, e OGNI file
  * dichiarato c'e' sotto la sua base con lo sha256 dichiarato. Un 200 non
@@ -295,15 +331,39 @@ export async function publishRelease(release, { io, env = process.env, log = con
   const missingCreds = ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_S3_ENDPOINT', 'R2_BUCKET', 'CF_API_TOKEN'].filter((name) => !env[name]);
   if (missingCreds.length) return stop('credenziali', `assenti (${missingCreds.join(', ')}): niente caricato`, false);
 
+  // Se ci si ferma prima del flip, i file gia' caricati sotto la base di QUESTA
+  // release non sono puntati da niente: si tolgono (best-effort), a meno che la
+  // base sia quella gia' servita (stesso commit ripubblicato).
+  const staged = [];
+  const stopBeforeFlip = (phase, what) => {
+    if (previous.doc?.release?.base !== release.base) {
+      for (const key of staged) {
+        if (!io.remove(key)) log(`::notice::[section-edge] file di staging non ripulito: ${key}`);
+      }
+    }
+    return stop(phase, what, false);
+  };
+
   // 1. Staging sotto la base della release, con rilettura di sha256 e lunghezza.
   for (const file of release.files) {
-    if (!io.upload(file.local, file.key, RELEASE_CACHE_CONTROL)) return stop('staging', `upload non confermato: ${file.key}`, false);
+    staged.push(file.key);
+    if (!io.upload(file.local, file.key, RELEASE_CACHE_CONTROL)) return stopBeforeFlip('staging', `upload non confermato: ${file.key}`);
   }
   for (const file of release.files) {
     const served = await io.fetchBytes(`${CDN}/${file.key}`);
     if (served.status !== 200 || served.body.length !== file.bytes || sha256(served.body) !== file.sha256) {
-      return stop('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`, false);
+      return stopBeforeFlip('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`);
     }
+  }
+
+  // 1b. Bootstrap: le pagine delle sezioni che il puntatore dichiarera' live.
+  const missingPages = await missingBootstrapPages(release, previous, io);
+  if (missingPages.length) {
+    return stopBeforeFlip(
+      'bootstrap',
+      `${missingPages.length} pagine di sezioni live non sono su R2 (es. ${missingPages.slice(0, 3).join(', ')}): ` +
+        'prima il bootstrap (fast-publish-section con bootstrap), poi il flip a live',
+    );
   }
 
   // 2. Flip: UN PUT del puntatore. Ricorda la release che sostituisce, per la
@@ -321,7 +381,7 @@ export async function publishRelease(release, { io, env = process.env, log = con
   } finally {
     fs.rmSync(pointerDir, { recursive: true, force: true });
   }
-  if (!flipped) return stop('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`, false);
+  if (!flipped) return stopBeforeFlip('flip', `puntatore non caricato: ${EDGE_SECTION_REGISTRY_FILE}`);
 
   // 3. Purge: il puntatore e le URL apex delle sitemap delle due release.
   const names = new Set([...release.files.map((f) => f.name), ...Object.keys(prevFiles ?? {}), SECTION_SITEMAP_INDEX_FILE]);
