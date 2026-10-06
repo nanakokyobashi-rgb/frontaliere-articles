@@ -12663,6 +12663,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lipomo-fiuto-roxy-cocaina.title': 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
     'blog.article.lipomo-fiuto-roxy-cocaina.excerpt': 'Operazione dei Carabinieri ad Albate: sequestrati 111 grammi di cocaina, hashish e 390 euro. Due cittadini tunisini arrestati, un terzo denunciato.',
     'blog.article.lipomo-fiuto-roxy-cocaina.imageAlt': 'Operazione antidroga dei Carabinieri con un pastore tedesco a Lipomo',
+    'blog.article.incidente-monte-generoso-varese.title': 'Incidente a Varese vicino all\'Università dell\'Insubria',
+    'blog.article.incidente-monte-generoso-varese.excerpt': 'Un incidente è segnalato in via Monte Generoso, a Varese, a un passo dall\'Università dell\'Insubria.',
+    'blog.article.incidente-monte-generoso-varese.imageAlt': 'Strada urbana vicino all\'Università dell\'Insubria a Varese',
+    'blog.article.lavori-pubblica-utilita-multe-pene.title': 'Multe e pene: conversione in lavori utili in Ticino',
+    'blog.article.lavori-pubblica-utilita-multe-pene.excerpt': '97 casi in Ticino nel 2025. A Zurigo 1\'388 richieste: 4 ore di lavoro valgono 1 giorno di carcere.',
+    'blog.article.lavori-pubblica-utilita-multe-pene.imageAlt': 'Persona con guanti da lavoro che tiene un foglio con checklist in un corridoio ospedaliero in Ticino.',
 };
 
 export default blogMetaIt;

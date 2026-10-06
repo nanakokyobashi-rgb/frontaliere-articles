@@ -98343,6 +98343,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-edifici-berna-obbligo-premi': {
+    title: 'Assicurazione immobili Canton Berna: obbligo e premi',
+    description: 'Assicurazione immobili nel Canton Berna: obbligo, ente competente, coperture, premi e procedura in caso di sinistro, con confronto alle altre voci svizzere.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicurazione, immobili, canton, berna',
+    ogTitle: 'Assicurazione immobili Canton Berna: obbligo e premi',
+    ogDescription: 'Nel Canton Berna il primo nodo è capire se l\'assicurazione degli edifici è obbligatoria e chi la gestisce. La guida separa ente cantonale, assicuratore autorizzato, premi, coperture e sinistro dalle imposte, dalla LAMal e dalla previdenza.',
+    canonicalPath: '/articoli-svizzera/edifici-berna-obbligo-premi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicurazione immobili Canton Berna: obbligo e premi",
+      "description": "Assicurazione immobili nel Canton Berna: obbligo, ente competente, coperture, premi e procedura in caso di sinistro, con confronto alle altre voci svizzere.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/edifici-berna-obbligo-premi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero e documenti per l'assicurazione immobiliare"
+      },
+      "datePublished": "2026-10-06T06:00:48+00:00",
+      "dateModified": "2026-10-06T06:00:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/edifici-berna-obbligo-premi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

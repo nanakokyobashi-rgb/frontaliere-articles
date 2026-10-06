@@ -7796,6 +7796,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.berna-protezione-servizio-indennita.title': 'Protezione civile canton Berna: requisiti e indennità',
     'blog.article.berna-protezione-servizio-indennita.excerpt': 'Nel Cantone di Berna la protezione civile è coordinata a livello cantonale. Convocazioni e indennità vanno verificate presso l\'autorità competente.',
     'blog.article.berna-protezione-servizio-indennita.imageAlt': 'Protezione civile svizzera davanti a un edificio amministrativo cantonale',
+    'blog.article.edifici-berna-obbligo-premi.title': 'Assicurazione immobili Canton Berna: obbligo e premi',
+    'blog.article.edifici-berna-obbligo-premi.excerpt': 'Nel Cantone di Berna l\'obbligo e l\'organizzazione dell\'assicurazione degli edifici seguono la regola cantonale: guida a ente, premi e sinistri.',
+    'blog.article.edifici-berna-obbligo-premi.imageAlt': 'Edificio residenziale svizzero e documenti per l\'assicurazione immobiliare',
 };
 
 export default blogMetaChIt;

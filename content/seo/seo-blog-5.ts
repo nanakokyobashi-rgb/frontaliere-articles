@@ -99916,6 +99916,74 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incidente-monte-generoso-varese': {
+    title: 'Incidente a Varese vicino all\'Università dell\'Insubria',
+    description: 'Incidente a Varese in via Monte Generoso, vicino all\'Università dell\'Insubria: la notizia identifica luogo e riferimento, senza altri dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, varese, vicino, università',
+    ogTitle: 'Incidente a Varese in via Monte Generoso',
+    ogDescription: 'La cronaca segnala un incidente in via Monte Generoso, a Varese, a un passo dall\'Università dell\'Insubria. Il materiale disponibile conferma il luogo e il riferimento urbano, ma non aggiunge informazioni su cause, persone coinvolte o conseguenze.',
+    canonicalPath: '/articoli-frontaliere/incidente-monte-generoso-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente a Varese vicino all'Università dell'Insubria",
+      "description": "Incidente a Varese in via Monte Generoso, vicino all'Università dell'Insubria: la notizia identifica luogo e riferimento, senza altri dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/incidente-monte-generoso-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana vicino all'Università dell'Insubria a Varese"
+      },
+      "datePublished": "2026-10-06T05:43:39+00:00",
+      "dateModified": "2026-10-06T05:43:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-monte-generoso-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavori-pubblica-utilita-multe-pene': {
+    title: 'Multe e pene: conversione in lavori utili in Ticino',
+    description: '97 casi di conversione di pene in lavori utili in Ticino nel 2025. Rapporto 4:1 con il carcere, minimo 8 ore settimanali. Il modello zurighese raggiunge l\'80%',
+    keywords: 'frontalieri, ticino, svizzera, italia, multe, pene, conversione, lavori',
+    ogTitle: 'Multe e pene: conversione in lavori utili in Ticino',
+    ogDescription: 'In Ticino 97 persone hanno convertito pene in lavori utili nel 2025. Il modello zurighese mostra un tasso di successo tra il 75 e l\'80%. Scopri come funziona il rapporto ore-giorni di carcere.',
+    canonicalPath: '/articoli-frontaliere/lavori-pubblica-utilita-multe-pene/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Multe e pene: conversione in lavori utili in Ticino",
+      "description": "97 casi di conversione di pene in lavori utili in Ticino nel 2025. Rapporto 4:1 con il carcere, minimo 8 ore settimanali. Il modello zurighese raggiunge l'80%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-pubblica-utilita-multe-pene.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona con guanti da lavoro che tiene un foglio con checklist in un corridoio ospedaliero in Ticino."
+      },
+      "datePublished": "2026-10-06T06:23:25+00:00",
+      "dateModified": "2026-10-06T06:23:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-pubblica-utilita-multe-pene/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
