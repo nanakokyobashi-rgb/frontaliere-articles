@@ -99780,6 +99780,210 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-tre-valli-varesine-2026': {
+    title: 'Tre Valli Varesine 2026: orari, percorso e chiusure',
+    description: 'Guida alla Tre Valli Varesine e femminile del 6 ottobre: orari da Busto Arsizio, arrivo in via Sacco a Varese, sei giri cittadini e info sulle chiusure.',
+    keywords: 'frontalieri, ticino, svizzera, italia, valli, varesine, orari, percorso',
+    ogTitle: 'Tre Valli Varesine 2026: orari e percorso',
+    ogDescription: 'Il 6 ottobre si corrono la Tre Valli Women\'s Race e la 105a Tre Valli Varesine. Partenza da Busto Arsizio, arrivo in via Sacco a Varese. Sei giri cittadini e due tornate lunghe per gli uomini. Scopri orari e dettagli sulle chiusure.',
+    canonicalPath: '/articoli-frontaliere/guida-tre-valli-varesine-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre Valli Varesine 2026: orari, percorso e chiusure",
+      "description": "Guida alla Tre Valli Varesine e femminile del 6 ottobre: orari da Busto Arsizio, arrivo in via Sacco a Varese, sei giri cittadini e info sulle chiusure.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/guida-tre-valli-varesine-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ciclista in gara sulla Tre Valli Varesine, vista sul lago di Varese"
+      },
+      "datePublished": "2026-10-06T03:13:40+00:00",
+      "dateModified": "2026-10-06T03:13:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/guida-tre-valli-varesine-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-varese-conferenza-lavoro-salari-2026': {
+    title: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    description: 'Sabato 10 ottobre a Varese la conferenza \'Fondata sul lavoro\': orari, relatori e temi su precarietà e potere d\'acquisto per i lavoratori lombardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, conferenza, salari, diritti',
+    ogTitle: 'Varese: conferenza su salari e diritti, 10 ottobre',
+    ogDescription: 'Scopri il programma della conferenza \'Fondata sul lavoro\' a Varese. Sabato 10 ottobre si parlerà di salari, sicurezza e precarietà con relatori di peso e le Rsu di importanti aziende come Electrolux e Beko.',
+    canonicalPath: '/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: conferenza su salari e diritti, 10 ottobre",
+      "description": "Sabato 10 ottobre a Varese la conferenza 'Fondata sul lavoro': orari, relatori e temi su precarietà e potere d'acquisto per i lavoratori lombardi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/varese-conferenza-lavoro-salari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala conferenze moderna con schermo per dati economici e vista sui laghi lombardi"
+      },
+      "datePublished": "2026-10-06T03:43:17+00:00",
+      "dateModified": "2026-10-06T03:43:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-conferenza-lavoro-salari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-casse-malati-proposte-esperti-risposta': {
+    title: 'Casse malati: 5% di aumento e proposte valutate da esperti',
+    description: 'Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, aumento, proposte',
+    ogTitle: 'Casse malati: esperti valutano le proposte',
+    ogDescription: 'Il premio nazionale cresce del 5% nel 2027. Tre esperti analizzano le proposte sulla cassa statale e la prevenzione: in Ticino, dal 2029, metà dei cittadini potrebbe vedere ridotti i premi. Ecco cosa cambia.',
+    canonicalPath: '/articoli-frontaliere/casse-malati-proposte-esperti-risposta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati: 5% di aumento e proposte valutate da esperti",
+      "description": "Analisi delle proposte per le casse malati: aumento del 5% nel 2027, costi LAMal al 4% e stima riduzioni in Ticino dal 2029. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/casse-malati-proposte-esperti-risposta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica sul Lago di Lugano con la città in sottofondo, luce del mattino."
+      },
+      "datePublished": "2026-10-06T04:17:25+00:00",
+      "dateModified": "2026-10-06T04:17:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/casse-malati-proposte-esperti-risposta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lipomo-fiuto-roxy-cocaina': {
+    title: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    description: 'Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lipomo, fiuto, roxy, scopre',
+    ogTitle: 'Lipomo, il fiuto di Roxy scopre droga: due arresti',
+    ogDescription: 'A Lipomo, i militari della Stazione di Albate hanno arrestato due cittadini tunisini dopo il sequestro di 111 grammi di cocaina, un bilancino e 390 euro. Il cane Roxy ha poi trovato 28 grammi di hashish e circa un grammo di cocaina in un\'abitazione.',
+    canonicalPath: '/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lipomo, il fiuto di Roxy scopre droga: due arresti",
+      "description": "Lipomo: due cittadini tunisini arrestati dai Carabinieri dopo il sequestro di 111 grammi di cocaina, hashish, un bilancino e 390 euro; un terzo denunciato.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lipomo-fiuto-roxy-cocaina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operazione antidroga dei Carabinieri con un pastore tedesco a Lipomo"
+      },
+      "datePublished": "2026-10-06T05:08:37+00:00",
+      "dateModified": "2026-10-06T05:08:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lipomo-fiuto-roxy-cocaina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-incidente-monte-generoso-varese': {
+    title: 'Incidente a Varese vicino all\'Università dell\'Insubria',
+    description: 'Incidente a Varese in via Monte Generoso, vicino all\'Università dell\'Insubria: la notizia identifica luogo e riferimento, senza altri dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, varese, vicino, università',
+    ogTitle: 'Incidente a Varese in via Monte Generoso',
+    ogDescription: 'La cronaca segnala un incidente in via Monte Generoso, a Varese, a un passo dall\'Università dell\'Insubria. Il materiale disponibile conferma il luogo e il riferimento urbano, ma non aggiunge informazioni su cause, persone coinvolte o conseguenze.',
+    canonicalPath: '/articoli-frontaliere/incidente-monte-generoso-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente a Varese vicino all'Università dell'Insubria",
+      "description": "Incidente a Varese in via Monte Generoso, vicino all'Università dell'Insubria: la notizia identifica luogo e riferimento, senza altri dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/incidente-monte-generoso-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana vicino all'Università dell'Insubria a Varese"
+      },
+      "datePublished": "2026-10-06T05:43:39+00:00",
+      "dateModified": "2026-10-06T05:43:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-monte-generoso-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavori-pubblica-utilita-multe-pene': {
+    title: 'Multe e pene: conversione in lavori utili in Ticino',
+    description: '97 casi di conversione di pene in lavori utili in Ticino nel 2025. Rapporto 4:1 con il carcere, minimo 8 ore settimanali. Il modello zurighese raggiunge l\'80%',
+    keywords: 'frontalieri, ticino, svizzera, italia, multe, pene, conversione, lavori',
+    ogTitle: 'Multe e pene: conversione in lavori utili in Ticino',
+    ogDescription: 'In Ticino 97 persone hanno convertito pene in lavori utili nel 2025. Il modello zurighese mostra un tasso di successo tra il 75 e l\'80%. Scopri come funziona il rapporto ore-giorni di carcere.',
+    canonicalPath: '/articoli-frontaliere/lavori-pubblica-utilita-multe-pene/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Multe e pene: conversione in lavori utili in Ticino",
+      "description": "97 casi di conversione di pene in lavori utili in Ticino nel 2025. Rapporto 4:1 con il carcere, minimo 8 ore settimanali. Il modello zurighese raggiunge l'80%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-pubblica-utilita-multe-pene.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona con guanti da lavoro che tiene un foglio con checklist in un corridoio ospedaliero in Ticino."
+      },
+      "datePublished": "2026-10-06T06:23:25+00:00",
+      "dateModified": "2026-10-06T06:23:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-pubblica-utilita-multe-pene/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

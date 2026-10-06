@@ -98207,6 +98207,210 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tamedia-cancella-34-posti-lavoro': {
+    title: 'Tamedia cancella 34 posti di lavoro in cinque redazioni',
+    description: 'Tamedia sopprime 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori a Zurigo, Berna, Basilea, Losanna e Ginevra. Scopri il piano sociale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tamedia, cancella, posti, lavoro',
+    ogTitle: 'Tamedia taglia 34 posti di lavoro in Svizzera',
+    ogDescription: 'Annunciata la soppressione di 34 posizioni a tempo pieno e 41 collaboratori coinvolti nelle redazioni di Zurigo, Berna, Basilea, Losanna e Ginevra. Dettagli sul piano sociale e sulle misure di accompagnamento.',
+    canonicalPath: '/articoli-svizzera/tamedia-cancella-34-posti-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tamedia cancella 34 posti di lavoro in cinque redazioni",
+      "description": "Tamedia sopprime 34 posti di lavoro a tempo pieno coinvolgendo 41 collaboratori a Zurigo, Berna, Basilea, Losanna e Ginevra. Scopri il piano sociale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tamedia-cancella-34-posti-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio Tamedia con redazione giornalistica in Svizzera"
+      },
+      "datePublished": "2026-10-06T03:24:07+00:00",
+      "dateModified": "2026-10-06T03:24:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tamedia-cancella-34-posti-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-neutralita-svizzera-voto-costituzione': {
+    title: 'Neutralità svizzera: respinta la stretta in Costituzione',
+    description: 'Il popolo svizzero ha respinto l\'iniziativa per una neutralità più rigida nella Costituzione e confermato l\'attuale interpretazione della neutralità elvetica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, respinta, stretta, costituzione',
+    ogTitle: 'Neutralità svizzera: respinta la stretta costituzionale',
+    ogDescription: 'L\'analisi sul rifiuto dell\'iniziativa per una concezione più rigida della neutralità mostra la conferma del sostegno popolare all\'attuale interpretazione elvetica e richiama i dubbi sulle intenzioni dei sostenitori.',
+    canonicalPath: '/articoli-svizzera/neutralita-svizzera-voto-costituzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità svizzera: respinta la stretta in Costituzione",
+      "description": "Il popolo svizzero ha respinto l'iniziativa per una neutralità più rigida nella Costituzione e confermato l'attuale interpretazione della neutralità elvetica.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/neutralita-svizzera-voto-costituzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande a Bellinzona in una scena editoriale sulla politica svizzera"
+      },
+      "datePublished": "2026-10-06T04:01:17+00:00",
+      "dateModified": "2026-10-06T04:01:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-svizzera-voto-costituzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-elezioni-berna-guida-voto': {
+    title: 'Elezioni cantonali a Berna: guida a calendario e voto',
+    description: 'Guida ufficiale alle elezioni cantonali nel Cantone di Berna: calendario, modalità di voto, liste, competenze fiscali, previdenza e regole di locazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, elezioni, cantonali, berna, calendario',
+    ogTitle: 'Elezioni cantonali Berna: guida a calendario, voto e competenze',
+    ogDescription: 'Scopri come orientarti nelle elezioni cantonali a Berna. Una panoramica completa su calendario, modalità di voto, liste, suddivisione fiscale, previdenza e regole sulla locazione.',
+    canonicalPath: '/articoli-svizzera/elezioni-berna-guida-voto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Elezioni cantonali a Berna: guida a calendario e voto",
+      "description": "Guida ufficiale alle elezioni cantonali nel Cantone di Berna: calendario, modalità di voto, liste, competenze fiscali, previdenza e regole di locazione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/elezioni-berna-guida-voto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida alle elezioni cantonali nel Cantone di Berna e competenze"
+      },
+      "datePublished": "2026-10-06T04:48:47+00:00",
+      "dateModified": "2026-10-06T04:48:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/elezioni-berna-guida-voto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-berna-protezione-servizio-indennita': {
+    title: 'Protezione civile canton Berna: requisiti e indennità',
+    description: 'Protezione civile nel canton Berna: legge federale, coordinamento cantonale. Convocazioni e indennità devono essere verificate presso l\'autorità competente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, civile, canton, berna',
+    ogTitle: 'Protezione civile canton Berna: requisiti e indennità',
+    ogDescription: 'Nel canton Berna la protezione civile segue un coordinamento cantonale nell\'ambito della legge federale. Requisiti, convocazioni e indennità non vanno dedotti da regole generiche: il riferimento è l\'autorità competente.',
+    canonicalPath: '/articoli-svizzera/berna-protezione-servizio-indennita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione civile canton Berna: requisiti e indennità",
+      "description": "Protezione civile nel canton Berna: legge federale, coordinamento cantonale. Convocazioni e indennità devono essere verificate presso l'autorità competente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/berna-protezione-servizio-indennita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Protezione civile svizzera davanti a un edificio amministrativo cantonale"
+      },
+      "datePublished": "2026-10-06T05:28:53+00:00",
+      "dateModified": "2026-10-06T05:28:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/berna-protezione-servizio-indennita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-edifici-berna-obbligo-premi': {
+    title: 'Assicurazione immobili Canton Berna: obbligo e premi',
+    description: 'Assicurazione immobili nel Canton Berna: obbligo, ente competente, coperture, premi e procedura in caso di sinistro, con confronto alle altre voci svizzere.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicurazione, immobili, canton, berna',
+    ogTitle: 'Assicurazione immobili Canton Berna: obbligo e premi',
+    ogDescription: 'Nel Canton Berna il primo nodo è capire se l\'assicurazione degli edifici è obbligatoria e chi la gestisce. La guida separa ente cantonale, assicuratore autorizzato, premi, coperture e sinistro dalle imposte, dalla LAMal e dalla previdenza.',
+    canonicalPath: '/articoli-svizzera/edifici-berna-obbligo-premi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicurazione immobili Canton Berna: obbligo e premi",
+      "description": "Assicurazione immobili nel Canton Berna: obbligo, ente competente, coperture, premi e procedura in caso di sinistro, con confronto alle altre voci svizzere.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/edifici-berna-obbligo-premi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero e documenti per l'assicurazione immobiliare"
+      },
+      "datePublished": "2026-10-06T06:00:48+00:00",
+      "dateModified": "2026-10-06T06:00:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/edifici-berna-obbligo-premi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prezzi-immobili-settembre-regioni': {
+    title: 'Prezzi case e appartamenti in Svizzera: settembre stabile',
+    description: 'A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, case, appartamenti, settembre',
+    ogTitle: 'Case e appartamenti: prezzi stabili a settembre',
+    ogDescription: 'L\'analisi degli annunci Immoscout, in collaborazione con IAZI, mostra prezzi nazionali quasi stabili in settembre, ma differenze regionali: Zurigo guida il calo delle case, mentre il Ticino sale per la proprietà per piani.',
+    canonicalPath: '/articoli-svizzera/prezzi-immobili-settembre-regioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi case e appartamenti in Svizzera: settembre stabile",
+      "description": "A settembre i prezzi richiesti in Svizzera cambiano poco: case unifamiliari -0,1% e appartamenti +0,2%, con differenze regionali anche tra Zurigo e Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/prezzi-immobili-settembre-regioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri e andamento regionale dei prezzi immobiliari"
+      },
+      "datePublished": "2026-10-06T06:36:57+00:00",
+      "dateModified": "2026-10-06T06:36:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-immobili-settembre-regioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

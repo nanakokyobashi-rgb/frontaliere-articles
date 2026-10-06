@@ -254,7 +254,7 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "04cd9caf770c4f97",
+        "corpus": "1c354b0a6638d0f3",
         "alignedAt": "2026-10-06"
       }
     },
@@ -401,9 +401,10 @@
       "mode": "adapted",
       "reason": "Regressione del falso 429 osservato nella run corpus 33338838671: status=allowed con overageStatus=rejected deve restare un successo. Il sito usa Vitest e conserva la suite completa del parser; qui il gemello Node test pinna il caso di produzione e il controllo positivo status=rejected senza introdurre Vitest nel repo pubblicatore.",
       "baseline": {
-        "site": "2dc2ac1df1cb5dae",
-        "corpus": "beb958405d5e2d75",
-        "alignedAt": "2026-08-31"
+        "site": "2751cb3f3f6e92b4",
+        "corpus": "aab43957a2ca3fa0",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -836,7 +837,7 @@
       "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
         "site": "7b647c07268b94ce",
-        "corpus": "ebbc7d36f12a6d47",
+        "corpus": "75e6b6e720cb120a",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T00:27:32.975Z"
       }
@@ -998,7 +999,7 @@
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
         "site": "3a28a8c91ab5671b",
-        "corpus": "022da3ec92e72861",
+        "corpus": "6880a0776c0ab697",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T00:27:33.002Z"
       }
@@ -1148,9 +1149,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test. RIALLINEATO 2026-08-09 senza portare nulla: il diff del sito dalla baseline precedente e' UNA riga, che aggiunge «CWV field criterion (#5001) docs/CWV-FIELD-CRITERION.md» alla sezione «Reference Docs». Qui non si applica per due motivi verificati: questo AGENTS.md non ha una sezione «Reference Docs» (le sue sono Cos'e' questo repo / La superficie pubblica / Non-negoziabili / Build e test / Credenziali / Il ciclo autonomo), e il repo non ha una cartella docs/ (404). Una modifica futura del sito che invece si applichi tornera' a comparire, perche' la baseline e' aggiornata all'hash di oggi, non disattivata.",
       "baseline": {
-        "site": "7b52bedf01d44f0d",
-        "corpus": "89844a388d163b80",
-        "alignedAt": "2026-09-03"
+        "site": "7d7fc256b858ca13",
+        "corpus": "dfa73cae2fda5969",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1158,9 +1160,10 @@
       "mode": "adapted",
       "reason": "Contratto del fixer adattato: categorie di questo repo, gate test node --test, e la catena assorbente del 429 descritta con i numeri del sito perche' e' la ragione per cui la telemetria FIX_OUTCOME e' obbligatoria.",
       "baseline": {
-        "site": "9c762fb417106a95",
-        "corpus": "90281612a9ae457f",
-        "alignedAt": "2026-08-07"
+        "site": "ca1f58b703f38b36",
+        "corpus": "7cdcf8c158a68181",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1316,9 +1319,10 @@
       "mode": "adapted",
       "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia il runner; qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch, e calcola la closure transitiva degli import statici/dinamici che il checkout sparse deve materializzare (#929, site #9528).",
       "baseline": {
-        "site": "ceab56f221d07ec1",
-        "corpus": "fb8e3ca0ab601792",
-        "alignedAt": "2026-09-19"
+        "site": "be1b0e165eae1c4b",
+        "corpus": "e41762ea8b88373b",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1534,9 +1538,10 @@
       "mode": "adapted",
       "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
       "baseline": {
-        "site": "8e3cbf379ad0cdf1",
-        "corpus": "5a092f55c91cc903",
-        "alignedAt": "2026-08-08"
+        "site": "cccbd0305799caee",
+        "corpus": "cf9615f8a607d4ce",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1545,9 +1550,10 @@
       "mode": "adapted",
       "reason": "Scan anti-allucinazioni su tutti i corpi (istituzioni/acronimi inventati, fatti errati noti, statistiche a fonte vaga). Adattamenti: path content/ al posto di services/locales/, node:test + expect-shim, offender aggregati per classe invece di it.each per file, sanity >3000 corpi IT perche' uno sparse checkout senza content/ non passi a vuoto. I PATTERN restano byte-identici al sito: nuove voci si aggiungono prima la' e si ricopiano qui. Misurato al porting: 0 offender su 15.076 file.",
       "baseline": {
-        "site": "ea03d049017092b7",
-        "corpus": "76a86e1937c4569a",
-        "alignedAt": "2026-08-08"
+        "site": "f4a9f610932ba9e9",
+        "corpus": "1ed72d4ab7dea050",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1623,9 +1629,10 @@
       "mode": "adapted",
       "reason": "Gemello di tests/pr-collision-detector-drafts.test.ts sul sito, riscritto per node --test perche' qui non c'e' vitest. Lo script sotto test e' mode: identical nel manifest e resta byte-identico; il test no, ed e' giusto cosi': e' il runner a differire, non il comportamento sotto test. Copre le draft che non devono partecipare al grafo delle collisioni (difetto osservato su questo repo, PR #33).",
       "baseline": {
-        "site": "edd15f5ad95271d2",
-        "corpus": "7592867878443da1",
-        "alignedAt": "2026-08-10"
+        "site": "30bb1b0cd005b04e",
+        "corpus": "14e2d62b63f14701",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1848,8 +1855,9 @@
       "reason": "Digest eventi del weekend (evergreen, registrato una volta e rinfrescato nei body). Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` per il layout `content/` invece di `services/locales/`, e la scrittura dei 4 body passa da `sanitizeText` (issue #66), oggi con il report di `reportStrippedControlChars` al posto di `findControlChars` (#131) — la stessa guardia al write di create-article.mjs, che sul sito non serve perche' i byte non atterrano li'. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-08-09 (`955467555a07c900`), qui `de0f7fddb5cf599d`. Il delta, letto per intero, e' tutto di questo lato: #131 (report degli strip dei control char), #320 (`sanitizePromptPlaceholders` in processo), #386 (solo commento: perche' qui non serve lo slug guard), #564 (write atomico temp+rename), #1097 (`resolveRegisterLockAtStartup` prima di ogni decisione sull'id), #1250 (`assertArticlePassesFactualityGates` e lock saltato in dry-run), #1427 (`assertGeneratedArticleQuality`), #1661 (main-guard su `realpathSync`). Non si porta al sito, per scelta: la copia del sito e' DORMIENTE dal cutover — nessun workflow del sito la esegue, mentre qui la lancia `refresh-events-digest.yml` ogni giovedi' — e il porting non avrebbe effetto in produzione; in piu' tre degli import nuovi (`assertArticlePassesFactualityGates`, `assertGeneratedArticleQuality`, `resolveRegisterLockAtStartup`) non esistono nel `create-article.mjs` del sito e `control-char-write-report.mjs` e' corpus-only. Il producer vivo e' questo: baseline corpus rigenerata sull'hash di oggi, baseline sito invariata, cosi' un movimento del sito torna a emergere come `site-ahead`.",
       "baseline": {
         "site": "955467555a07c900",
-        "corpus": "de0f7fddb5cf599d",
-        "alignedAt": "2026-09-25"
+        "corpus": "7c3ef5f6917d92b1",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1859,8 +1867,9 @@
       "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs. Il parser `../../scripts/lib/parse-positive-num.mjs` e' una dipendenza corpus-only dichiarata nel manifest: non va copiato nel gemello del sito. RICONCILIATO 2026-09-25 (both-moved, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483; producer vivo = corpus dopo il cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3): dalla baseline del 2026-08-09 il sito si e' mosso con la sola PR valerielinc-ops/frontaliere-si-o-no#8574 (`de42587f1ee3afe4`): `isWrongLocale` sul testo concatenato sostituito da `wrongLocalePair` per coppia, con `hasSourcePassthroughField` (un campo uguale alla sorgente allo STESSO indice, via `isSourcePassthrough`) piu' il rilevatore `detected !== expectedLocale` per coppia, e la guardia d'entrypoint. Qui, in 15 commit (#131, #227, #233, #392, #564, #994, #1020, #1257, #1316, #1367, #1369, #1371, #1393, #1428, #1665), il file e' diventato un superinsieme: `wrongLocalePair` a tre rami (verbatim, `=== sourceLang`, terza lingua conclamata, tarato da #1020 su 16'968 articoli×locale pubblicati), potatura delle coppie sbagliate con pavimento `MIN_FAQ_PAIRS` e ledger dei rifiuti, literal TS escapato, chiavi `.faq` ancorate all'id. Prima di dichiarare e' stato verificato caso per caso il controllo per campo del sito, e UN caso sfuggiva: il ramo verbatim confrontava la coppia INTERA, quindi una domanda italiana verbatim sopra una risposta tradotta passava (17 coppie pubblicate in 7 articoli×locale; misura nel docstring di `wrongLocalePair`). Riapplicato nella stessa PR come confronto per CAMPO e per contenuto — non per indice come sul sito, perche' qui la potatura sposta le coppie — con test in `generator/tests/retranslate-blocking-bodies.test.mjs`; copre anche `batch-add-faq-to-articles.mjs`, che importa il predicato. Resta una divergenza per scelta: il ramo di lingua del sito rifiuta `detected !== expectedLocale`, che sulle FAQ pubblicate da' il 2,0% di falsi positivi contro lo 0,7% del predicato corpus a parita' di recall (#1020). La copia del sito e' dormiente (`batch-faq-articles.yml` del sito ha lo `schedule` commentato al cutover), qui lo stesso workflow la esegue ogni notte. Baseline rigenerata come `--init --only --force` sui due hash di oggi (sito `de42587f1ee3afe4`, corpus `5953f4b97b263175`, che include la riapplicazione). RI-ATTESTATO 2026-09-29, solo lato corpus (`corpus-ahead`, valerielinc-ops/frontaliere-si-o-no#7483): dopo il 2026-09-25 il corpus ha aggiunto #1935 (il ramo `detected === sourceLang` di `wrongLocalePair` rifiuta solo con un eccesso di parole funzionali italiane: i nomi propri davano 43 falsi «lingua sbagliata» al giorno, 0/36 articoli riusciti; registro dei rifiuti nel batch), #1963 (chiavi della fingerprint sorgente canonicalizzate) e #1962 (fail-closed su un registro dei rifiuti corrotto, FU-006). Nessun port: la copia del sito resta dormiente, e il registro dei rifiuti vive accanto al batch notturno che gira solo qui. Il sito non si e' mosso (`de42587f1ee3afe4`), quindi la riattestazione e' quella di `--init --only` senza `--force` e la voce non porta `forcedAt`.",
       "baseline": {
         "site": "de42587f1ee3afe4",
-        "corpus": "935094f4f11001ab",
-        "alignedAt": "2026-09-29"
+        "corpus": "96d09dd1b788bc77",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -1981,8 +1990,38 @@
       "reason": "Le sezioni articolo viste dal pubblicatore: superfici sorgente derivate da ARTICLE_SECTION_CORE (+ corpusPath), nomi della superficie pubblicata in dist/api per tipo, politica dei pavimenti per tipo. Corpus-only perche' build-api, i pavimenti e la superficie dist/api esistono solo in questo repo; il sito consuma i JSON via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "2d30bfe32a414c58",
-        "alignedAt": "2026-10-05"
+        "corpus": "580f18b97f61fe7e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/delete-cdn-file.sh",
+      "mode": "corpus-only",
+      "reason": "Cancellazione di UNA chiave R2 fra quelle delle sezioni cantonali (allowlist edge/sitemap-cantons.xml, edge/sitemap-articles-canton-<x>.xml, edge/sections/**): serve a ritirare l'indice sitemap-cantons.xml quando nessuna sezione e' piu' live, perche' un sitemapindex vuoto viola lo schema e il Worker deve tornare al 404. Fratello di upload-cdn-file.sh (additivo per contratto). Corpus-only: la pubblicazione R2 delle sezioni cantonali e' solo del corpus (P7).",
+      "baseline": {
+        "site": null,
+        "corpus": "37feb520d4b627eb",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/section-registry.mjs",
+      "mode": "corpus-only",
+      "reason": "Il registro delle sezioni articolo cantonali visto dal pubblicatore (P7 del piano sezioni cantonali, D3/D9/D14): validazione di sections/registry.json contro il core (insieme chiuso, parita' di kind/canton/indexSlug/topics, live solo se attiva) e contro le regole di parseCorpusSectionRegistry del Worker del sito (prefissi, forma canonica, redirect same-origin, cicli), kill-switch Remote Config CANTON_ARTICLE_SECTIONS_KILL col marker RC_ENV_LOADED, costruzione di sections.json, della copia edge/sections/registry.json per il Worker e dell'indice sitemap-cantons.xml. Corpus-only: il registro e la pubblicazione R2 delle sezioni vivono solo qui; il sito ne applica la regola nel Worker leggendo il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "ffeedd4948f222ff",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/engine-corpus-view.mjs",
+      "mode": "corpus-only",
+      "reason": "Il corpus visto nel layout che l engine legge (services/locales, services/seo, packages/articles/content), costruito al volo con symlink in una cartella temporanea: alias di cartella validi per ogni sezione piu un alias per chunk SEO cantonale, che create-article scrive in content/cantons/<id>/seo.ts e l engine cerca come seo-blog-<id>.ts. Lo usano build-api per i feed RSS delle sezioni di famiglia e i pavimenti per contare i chunk dove stanno. Corpus-only: sul sito il layout dell engine e quello nativo, non serve nessuna vista.",
+      "baseline": {
+        "site": null,
+        "corpus": "66b40ab3f4c5a824",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1991,8 +2030,8 @@
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "12927d8ee556aac7",
-        "alignedAt": "2026-09-12"
+        "corpus": "08b806da4017d729",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2050,9 +2089,10 @@
       "mode": "adapted",
       "reason": "Push incrementale degli shard articolo. Divergente anche da `be6b31d5`, e per due cose che sul sito non hanno senso: (1) `repo_root` risolto rispetto allo script e non a `$(pwd)`, perche' con cwd diversa `section-shard-owners.json` spariva e il default `// \"valerielinc-ops\"` di jq mandava il push all'OWNER SBAGLIATO — questi shard sono di nanakokyobashi-rgb; (2) la PAT mode: senza deploy key lo script usciva 0 in silenzio e il chiamante riportava successo (misurato su run 30813668145: ogni locale «not provisioned», zero HTML sugli shard, workflow verde). Qui, senza deploy key ma con `SHARD_PUSH_PAT`/`GITHUB_PAT`, pusha via HTTPS.",
       "baseline": {
-        "site": "c6f403314174da9b",
-        "corpus": "84649b82b65653cd",
-        "alignedAt": "2026-08-09"
+        "site": "1c957440f17edfdf",
+        "corpus": "07f29c2a09f00b7f",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -2418,7 +2458,7 @@
       "baseline": {
         "site": null,
         "corpus": "4339022550d58da1",
-        "alignedAt": "2026-10-05"
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -2838,11 +2878,12 @@
       "path": "generator/scripts/lib/llm-json-repair.mjs",
       "sitePath": "scripts/lib/llm-json-repair.mjs",
       "mode": "adapted",
-      "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito.",
+      "reason": "Un'unica divergenza (issue #679): il commit d904c48c3 (#479, 2026-08-18) ha spostato `repairLlmJson` qui da `create-article.mjs` — motivo dato nell'intestazione del blocco, `create-article.mjs non e' importabile dalle gate del generatore (girano node --test senza npm ci)`, un vincolo di questo repo, non del sito. Il memo fix per lo spin esponenziale (#428) era gia' stato portato su entrambi i lati PRIMA di questa baseline (hash allineato 524dc16b7d1c0911), quindi la divergenza attuale e' solo il trasloco della funzione, non un fix di comportamento mancante al sito. Lotto 2 issue #6369: portate nel gemello adattato le due correzioni di valerielinc-ops/frontaliere-si-o-no#11771 (preambolo con `{` non bilanciata e selezione di root array evitando un array annidato); riallineata la baseline ai blob verificati senza rendere i percorsi generator node:test identici al sito.",
       "baseline": {
-        "site": "524dc16b7d1c0911",
-        "corpus": "88c317784c0cf492",
-        "alignedAt": "2026-09-01"
+        "site": "dfad523d048204f2",
+        "corpus": "71381efc4d151f66",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -3277,9 +3318,10 @@
       "mode": "adapted",
       "reason": "Dati slug/locale degli hub letti dall'engine via SiteShellContract. Estratto per chiusura di `build-plugins/seoHubsData.ts` (321 righe la', 64 qui); `SLUG_TABLES` non e' trasportato perche' la chiusura ne raggiunge due campi per locale, inlineati. Stessa nota sulla guardia inesistente.",
       "baseline": {
-        "site": "67299610cd5bcfe8",
-        "corpus": "6a1073ede10a5ee9",
-        "alignedAt": "2026-08-09"
+        "site": "1f017e5c86ede66c",
+        "corpus": "6e22c674d71bf3a4",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -3550,8 +3592,8 @@
       "reason": "Il gate di magnitudine di publish-api.yml: confronta manifest.counts, i feed e le immagini contro il CORPUS sorgente su disco. Non ha gemello sul sito, e non deve averlo: il corpus e la superficie dati vivono qui, e il sito li consuma come JSON su HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "c20461c76346d1c9",
-        "alignedAt": "2026-09-05"
+        "corpus": "1ad3e5591be93b55",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3588,8 +3630,9 @@
       "reason": "IL PUNTO CIECO CHE HA PERMESSO LA #5457. L'intestazione della copia di QUESTO repo dichiara «This repo is a SEPARATE COPY of the site's scripts/publish-article-fast.mjs» e chiede «If either copy is touched, touch both» — ma la dichiarazione esiste solo da questo lato, il file non era nel manifest, e nessun meccanismo la faceva rispettare. Cosi' la #65 ha cablato sanitizeHtmlDocument nei writeFileSync di questa copia (righe 292-293) e la copia del sito e' rimasta senza, agli stessi identici punti di scrittura, per giorni. E' la stessa classe gia' misurata sull'ordine render/offload, dove l'archivio live alternava sano e rotto a seconda di chi aveva pubblicato. `adapted` e non `identical` perche' divergono davvero e per costruzione (445 righe qui contro 333 la', 298 righe di diff): percorsi di render diversi, dipendenze diverse, e ora anche politiche diverse sui control character — qui si sanifica, la' si rifiuta (scripts/lib/control-char-publish-gate.mjs). Sorvegliato proprio perche' adattato: e' sui file adattati che una modifica di un lato si perde, «tanto e' diverso apposta». `baseline.site` ricalcolata da #148 dopo il merge di valerielinc-ops#5518, che ha toccato questo file sul sito. RIALLINEATO 2026-09-03 (corpus-ahead, issue #756): il movimento locale non dichiarato e' #139, che ha cablato `reportStrippedControlChars` (generator/scripts/lib/control-char-write-report.mjs) sui tre punti di scrittura HTML — index, bridge piatto e le pagine archivio dell'article-hub — perche' uno strip silenzioso sui byte che vanno live e' esattamente il caso che non fallisce. NON e' proponibile al sito: quel modulo e' `corpus-only` per costruzione (i choke point di scrittura li ha il generatore) e la' la politica sui control character e' il RIFIUTO, non lo strip, quindi non c'e' niente da riportare. Con l'aggiunta la copia locale passa da 445 a 451 righe e le due chiamate a `sanitizeHtmlDocument` citate sopra stanno ora alle righe 293 e 296. RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-09-03 (`d301f81c84506ca8`), qui `2c426a08e15b2d6f`. Il delta e' uno solo, lo Step 7b dopo l'offload, in tre commit: `f9632aaa6` (#788/#790) la verifica di esistenza sul CDN degli `/assets/` riscritti (`scripts/lib/cdn-asset-existence.mjs`), `636489388` (#817/#839) la discriminante fra offload fallito e «niente da riscrivere» (`hasSameOriginAssetRef`, `formatOffloadCoverageReport`), `97526cbe8` (#1219/#1221) il margine misurato con l'orologio vero. Verificato che NON cambia i byte HTML renderizzati: lo Step 7b legge l'HTML gia' scritto (`readdirSync`/`readFileSync`), fa HEAD/GET verso il CDN e stampa, senza nessuna scrittura su `distDir`, e `cdn-asset-existence.mjs` non importa `node:fs`. Quindi `check-article-byte-identity.mjs`, che ogni settimana (`audit-article-corpus-drift.yml` del sito) rende con la copia del SITO e confronta con la produzione, non vede differenze da questo delta; il fingerprint deterministico di #788 vive in `host/` (contratto shell), non in questo file. Niente da portare, per scelta: sul sito la stessa guardia sta gia' in `scripts/offload-generated-images-cdn.mjs` (sito #7493), che la copia del sito esegue come offload, e il `fast-publish-article.yml` del sito e' solo `workflow_dispatch` con `dry_run: true` di default e `human_approval`; qui `fast-publish-article.yml` parte a ogni push di `content/**` su main. Baseline corpus rigenerata sull'hash di oggi, baseline sito invariata. Oggi 502 righe qui contro 440 la', 470 righe di diff; le due chiamate a `sanitizeHtmlDocument` citate sopra restano alle righe 293 e 296.",
       "baseline": {
         "site": "d301f81c84506ca8",
-        "corpus": "2c426a08e15b2d6f",
-        "alignedAt": "2026-09-25"
+        "corpus": "3cb42f8a3426f1c3",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
@@ -3598,8 +3641,8 @@
       "reason": "Sitemap-XML builder estratto da scripts/build-api.mjs (issue #138 item 1), cosi' e' importabile sotto un node --test puro (nessun import .ts) per un test comportamentale reale. Il sito non ha un file omonimo: costruisce le sue sitemap con un renderer diverso (build-plugins/ogPagesPlugin.ts), non con questo script.",
       "baseline": {
         "site": null,
-        "corpus": "72f1caaadb03c397",
-        "alignedAt": "2026-08-10"
+        "corpus": "5feedc1fc12196a5",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4566,9 +4609,10 @@
       "mode": "adapted",
       "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",
       "baseline": {
-        "site": "fc90732f0e8c3af3",
-        "corpus": "1db7f81712ca6755",
-        "alignedAt": "2026-09-08"
+        "site": "8ec09e43fa2519a4",
+        "corpus": "a06e49c64e214cde",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T02:04:36.000Z"
       }
     },
     {
