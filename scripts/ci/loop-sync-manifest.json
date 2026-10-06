@@ -1048,10 +1048,10 @@
     {
       "path": "scripts/ci/lib/parent-close-recurrence.mjs",
       "mode": "identical",
-      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` riconosce `🔁 **Reopened**` e `🔁 Recurrence on workflow run.` dopo l'ultimo marker `DECOMPOSED_INTO`; `decideParentRearm` aggiunge la decisione pura, l'idempotenza per riapertura, il tetto per issue e il fail-closed sui dati illeggibili. Il modulo resta copiato byte-per-byte dal sito (merge `valerielinc-ops/frontaliere-si-o-no#11941`), senza adattamento; la baseline è stata ricalcolata sui due file reali. Il drainer corpus adattato importa anche il formatter del marker e applica parser numerico locale, route/classificatore e guard `manifest-pinned-issues.mjs` prima del PARENT-REARM. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` sorveglia l'identità del modulo.",
+      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` riconosce `🔁 **Reopened**` e `🔁 Recurrence on workflow run.` dopo l'ultimo marker `DECOMPOSED_INTO`; `decideParentRearm` aggiunge la decisione pura, l'idempotenza per riapertura, il tetto per issue e il fail-closed sui dati illeggibili. Il modulo resta copiato byte-per-byte dal sito (merge `valerielinc-ops/frontaliere-si-o-no#11941`, poi #11968, #11975 e #11987 per gli spareggi al secondo), senza adattamento; la baseline è stata ricalcolata sui due file reali. Il drainer corpus adattato importa anche il formatter del marker e applica parser numerico locale, route/classificatore e guard `manifest-pinned-issues.mjs` prima del PARENT-REARM. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` sorveglia l'identità del modulo.",
       "baseline": {
-        "site": "94a914a49bd0b84f",
-        "corpus": "94a914a49bd0b84f",
+        "site": "4c01b7bcfe6c1b97",
+        "corpus": "4c01b7bcfe6c1b97",
         "alignedAt": "2026-10-06"
       }
     },

@@ -135,6 +135,44 @@ test('il marker scritto nello stesso secondo della ricorrenza vale come riarmo g
   }).action, 'rearm');
 });
 
+test('un marker nello stesso secondo copre la ricorrenza solo se viene dopo nel thread', () => {
+  // Tutto nello stesso secondo: ricorrenza, marker di quella ricorrenza, e una
+  // seconda ricorrenza. Il marker PRECEDE la seconda ricorrenza: non può averla
+  // registrata. Stesso caso del sito (PR 11987 di frontaliere-si-o-no): con il
+  // solo confronto degli istanti la seconda risultava «già riarmata» e il
+  // padre usciva senza che nessuno leggesse lo stato delle figlie.
+  const parent = realCases[0];
+  const marker = {
+    body: parentRearmCommentBody({ reopenedAt: parent.reopenedAt, childNumbers: parent.children }),
+    createdAt: parent.reopenedAt,
+  };
+  const secondRecurrence = { body: reopenedBody(parent.number), createdAt: parent.reopenedAt };
+  const markerBefore = [...commentsFor(parent), marker, secondRecurrence];
+
+  const [openChild, ...rest] = parent.children;
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN',
+    comments: markerBefore,
+    childStates: [{ number: openChild, state: 'OPEN' }, ...closedChildren(rest)],
+    now: NOW,
+  }).reason, 'child-open');
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN',
+    comments: markerBefore,
+    childStates: closedChildren(parent.children),
+    now: NOW,
+  }).action, 'rearm');
+
+  // Lo stesso marker, scritto DOPO la seconda ricorrenza, la copre.
+  const markerAfter = [...commentsFor(parent), secondRecurrence, marker];
+  assert.equal(decideParentRearm({
+    parentState: 'OPEN',
+    comments: markerAfter,
+    childStates: null,
+    now: NOW,
+  }).reason, 'already-rearmed');
+});
+
 test('il drainer legge lo stato del padre: senza `state` ogni padre sarebbe illeggibile', () => {
   // La decisione e' fail-closed sullo stato mancante...
   const parent = realCases[0];
