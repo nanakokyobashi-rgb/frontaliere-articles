@@ -20,7 +20,9 @@ import {
   closingComment,
   decideHandoffAlreadyFixed,
   decideReapplyOfMergedOrigin,
+  firstFileWithRemovals,
   fixerIssueOfBranch,
+  reapplyContentProof,
   handoffTitleQuery,
   isSweepCandidate,
   isTrustedFixerOutcome,
@@ -133,6 +135,28 @@ test('caso 1 — origine mergiata ma contenuto NON provato su main: resta aperta
   assert.equal(decide(null).reason, 'content-proof-unreadable');
   assert.equal(decide(undefined).reason, 'content-proof-unreadable');
   assert.equal(decide({ proven: 'true' }).close, false, 'solo `proven === true` autorizza');
+});
+
+test('caso 1 — una patch con rimozioni non è dimostrabile: la prova fallisce chiusa', () => {
+  // Review di #2274: la prova del riconciliatore guarda solo contesto e
+  // aggiunte. Qui la riga aggiunta è già su main, quella rimossa c'è ancora:
+  // senza il rifiuto la PR verrebbe chiusa e la cancellazione persa.
+  const main = ['const a = 1;', 'const vecchia = true;', 'const nuova = true;', 'export { a };'].join('\n');
+  const additive = { filename: 'x.mjs', status: 'modified', patch: '@@ -1,3 +1,4 @@\n const a = 1;\n const vecchia = true;\n+const nuova = true;\n export { a };' };
+  const mixed = { filename: 'x.mjs', status: 'modified', patch: '@@ -1,3 +1,3 @@\n const a = 1;\n-const vecchia = true;\n+const nuova = true;\n export { a };' };
+  assert.equal(firstFileWithRemovals([additive]), null);
+  assert.equal(firstFileWithRemovals([additive, mixed]), 'x.mjs');
+  // Le intestazioni di un diff completo non sono rimozioni.
+  assert.equal(firstFileWithRemovals([{ filename: 'y.mjs', patch: '--- a/y.mjs\n+++ b/y.mjs\n@@ -1 +1,2 @@\n riga\n+altra' }]), null);
+  assert.equal(reapplyContentProof([additive], () => main).proven, true, 'una patch solo additiva già su main resta dimostrabile');
+  const refused = reapplyContentProof([mixed], () => main);
+  assert.equal(refused.proven, false);
+  assert.match(refused.reason, /rimuove righe/);
+  assert.equal(reapplyContentProof(null, () => main), null, 'file illeggibili: nessuna prova');
+  assert.equal(
+    decideReapplyOfMergedOrigin({ pr: reapplyPr, fixerIssue: handoffOfOrigin, origin: { state: 'MERGED' }, contentProof: refused }).reason,
+    'content-not-on-main',
+  );
 });
 
 test('caso 1 — resta aperta finché l\'origine non è MERGED o non si legge', () => {

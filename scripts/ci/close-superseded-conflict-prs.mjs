@@ -227,6 +227,39 @@ export function latestConflictLabelEventAt(events) {
 }
 
 /**
+ * Il primo file la cui patch RIMUOVE almeno una riga, o null. Dentro un hunk
+ * una riga rimossa comincia con `-`; le intestazioni `---`/`+++` di un
+ * diff completo stanno prima del primo `@@` e non contano. Pura.
+ */
+export function firstFileWithRemovals(files) {
+  for (const file of Array.isArray(files) ? files : []) {
+    let inHunk = false;
+    for (const line of String(file?.patch || '').split('\n')) {
+      if (line.startsWith('@@')) { inHunk = true; continue; }
+      if (inHunk && line.startsWith('-')) return String(file?.filename || '(senza nome)');
+    }
+  }
+  return null;
+}
+
+/**
+ * La prova di contenuto del caso 1. `originContentOnMain` dimostra il lato
+ * NUOVO di ogni hunk (contesto e aggiunte) ma non le righe rimosse: una patch
+ * che aggiunge una riga già su main e ne toglie una ancora presente
+ * passerebbe, e chiudere la PR perderebbe la cancellazione. Quindi, fail-
+ * closed: con anche una sola rimozione la prova non vale. Pura, dato
+ * `readMainFile`.
+ */
+export function reapplyContentProof(files, readMainFile) {
+  if (!Array.isArray(files)) return null;
+  const withRemovals = firstFileWithRemovals(files);
+  if (withRemovals !== null) {
+    return { proven: false, reason: `${withRemovals}: la patch rimuove righe, e una rimozione non è dimostrabile su main` };
+  }
+  return originContentOnMain(files, readMainFile);
+}
+
+/**
  * Caso 1: la PR riapplica una PR di origine che ha già mergiato.
  *
  * @param {object} p
@@ -249,7 +282,8 @@ export function decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentPro
   // quella dell'hand-off (force-push), o il merge può essere stato revertito,
   // e allora questa riapplicazione è l'unica consegna rimasta. La prova è sul
   // contenuto: ogni hunk di QUESTA PR deve essere già su main adesso
-  // (`originContentOnMain`, la stessa del riconciliatore).
+  // (`reapplyContentProof`: la prova del riconciliatore, rifiutata se la
+  // patch contiene rimozioni, che quella prova non vede).
   if (!contentProof) return { close: false, reason: 'content-proof-unreadable' };
   if (contentProof.proven !== true) {
     return { close: false, reason: 'content-not-on-main', detail: String(contentProof.reason || '') };
@@ -467,7 +501,7 @@ function decide(pr, openPrs) {
     const origin = originNumber !== null && originNumber !== Number(pr.number) ? readPrState(originNumber) : null;
     // La prova di contenuto costa una lettura per file: solo se l'origine è mergiata.
     const files = String(origin?.state || '').toUpperCase() === 'MERGED' ? readPrFiles(pr.number) : null;
-    const contentProof = files ? originContentOnMain(files, readMainFile) : null;
+    const contentProof = reapplyContentProof(files, readMainFile);
     const reapply = decideReapplyOfMergedOrigin({ pr, fixerIssue, origin, contentProof });
     if (reapply.close) return reapply;
   }
