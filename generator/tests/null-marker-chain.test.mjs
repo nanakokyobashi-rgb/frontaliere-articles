@@ -1096,6 +1096,44 @@ describe('events: la lettura del dataset applica il predicato severo', () => {
     assert.equal(events[0].titleByLocale.it, 'Sagra della castagna', 'il testo vero resta');
   });
 
+  test('normalizza entità, Markdown e byte di sostituzione prima del digest', () => {
+    const { events, dropped } = sanitizeDatasetEvents([
+      {
+        id: 'e-markup',
+        title: '*Huitante-Six*',
+        titleByLocale: { it: '&amp;auml;', de: 'Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen' },
+        description: '_Fonte: Ticinonline_',
+      },
+      {
+        id: 'e-corrupt',
+        title: 'Bergrestaurant Ch�mistube',
+        titleByLocale: { it: 'Braunwald' },
+      },
+    ]);
+    assert.equal(dropped, 0);
+    assert.equal(events[0].title, 'Huitante-Six');
+    assert.equal(events[0].titleByLocale.it, 'ä');
+    assert.equal(events[0].titleByLocale.de, 'Treffpunkt: Mehrzweckplatz Zwischenbächen');
+    assert.equal(events[0].description, 'Fonte: Ticinonline');
+    assert.equal(events[1].title, 'Braunwald');
+  });
+
+  test('pulisce entità standard, heading solo a inizio riga e marker sbilanciati', () => {
+    const { events } = sanitizeDatasetEvents([
+      {
+        id: 'e-edge-markup',
+        title: 'Festival # 5 &amp; &ldquo;Live&rdquo; &ndash; **Festival &amp;szlig; &acirc; &ecirc; &ugrave;',
+        description: '## Programma\n- _Apertura_\nMOPS_DanceSyndrome _chiusura',
+      },
+      { id: 'e-angle-prose', title: 'A <B> C' },
+      { id: 'e-surrogate', title: 'Bad &#xD800;', titleByLocale: { it: 'Valid fallback' } },
+    ]);
+    assert.equal(events[0].title, 'Festival # 5 & “Live” – Festival ß â ê ù');
+    assert.equal(events[0].description, 'Programma - Apertura MOPS_DanceSyndrome chiusura');
+    assert.equal(events[1].title, 'A <B> C');
+    assert.equal(events[2].title, 'Valid fallback');
+  });
+
   test('un `title` piatto avvelenato si recupera dalla prima chiave per-locale sana', () => {
     const { events, dropped } = sanitizeDatasetEvents([
       { id: 'e1', title: 'NULL', titleByLocale: { it: 'Sagra della castagna', de: 'NULL' } },

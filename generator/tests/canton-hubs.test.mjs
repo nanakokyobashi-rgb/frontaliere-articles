@@ -36,7 +36,7 @@ import { buildHubIntro, cantonPlace, foreignToponymsInCopy } from '../scripts/li
 import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
 import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct } from '../scripts/lib/canton-hubs/format.mjs';
 import { buildHubLinks, jobsPagePath } from '../scripts/lib/canton-hubs/links.mjs';
-import { enabledCantonSections, generateCantonHubs, parseArgs } from '../scripts/generate-canton-hubs.mjs';
+import { enabledCantonSections, generateCantonHubs, loadDatasets, parseArgs } from '../scripts/generate-canton-hubs.mjs';
 import { contract, freshenGeneratedAt, freshenRecording, freshenWindow } from './lib/rewire-contracts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -656,6 +656,33 @@ test('eventi: la stessa voce da due agende e\' una riga, due eventi omonimi in d
   const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
   assert.equal(block.available, true);
   assert.deepEqual(block.render('it').items.map((it) => it.detail).sort(), ['Bellinzona', 'Locarno', 'Lugano', 'Piazza Grande']);
+});
+
+test('eventi degli hub: loadDatasets sanitizza il payload prima di shapeEventsBlock e conserva generatedAt', () => {
+  const root = tmpRoot();
+  const generatedAt = new Date(NOW - HOUR_MS).toISOString();
+  fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'data/events.json'), JSON.stringify({
+    schemaVersion: 1,
+    generatedAt,
+    events: [
+      {
+        id: 'glarona-corrotto',
+        title: 'Bergrestaurant Ch�mistube',
+        titleByLocale: { it: '**Bergrestaurant _Ch&auml;mistube_**' },
+        startDate: new Date(NOW + DAY_MS).toISOString().slice(0, 10),
+        canton: 'TI',
+      },
+      { id: 'evento-2', title: 'Concerto', startDate: new Date(NOW + 2 * DAY_MS).toISOString().slice(0, 10), canton: 'TI' },
+      { id: 'evento-3', title: 'Mercato', startDate: new Date(NOW + 3 * DAY_MS).toISOString().slice(0, 10), canton: 'TI' },
+    ],
+  }));
+
+  const dataset = loadDatasets(root).events;
+  assert.equal(dataset.generatedAt, generatedAt);
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+  assert.equal(block.available, true);
+  assert.equal(block.render('it').items[0].label, 'Bergrestaurant Chämistube');
 });
 
 test('meteo: basta la previsione di oggi, come nella vista dei servizi', () => {
