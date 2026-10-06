@@ -1001,6 +1001,10 @@
     "frontaliere::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
       "section": "frontaliere",
       "ts": 1791299512487
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955034/allevamenti-stati-abbattuti-malattia-tre-sgomberati": {
+      "section": "svizzera",
+      "ts": 1791300500426
     }
   }
 }

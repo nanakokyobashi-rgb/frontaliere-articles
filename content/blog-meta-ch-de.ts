@@ -7832,6 +7832,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.nuovi-progetti-chiave-digitali.title': 'Neue Schlüsselprojekte für die digitale Souveränität des Bundes',
     'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'Am 1. Oktober 2026 hat der Bundeskanzler den Arbeitsplatz für digitale Souveränität und EasyGov 2.0 zu Schlüsselprojekten erklärt; NEPRO scheidet aus der Kategorie aus. Derzeit machen 22 Schlüsselprojekte mehr als die Hälfte der zivilen IT-Ausgaben aus.',
     'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Foto des Bundeshauses in Bern mit digitalen Überlagerungslinien, die die bundesweite IT-Transformation symbolisieren',
+    'blog.article.luna-opportunita-aziende-svizzere.title': 'Den Mond industrialisieren: Chancen für Schweizer Unternehmen',
+    'blog.article.luna-opportunita-aziende-svizzere.excerpt': 'Die Schweizer Raumfahrtkette rechnet mit ~330 Mio. CHF, beschäftigt fast 3000 Mitarbeiter in 120 Unternehmen und die Mondwirtschaft könnte bis 2050 einen Wert von 343-566 Mrd. USD haben.',
+    'blog.article.luna-opportunita-aziende-svizzere.imageAlt': 'Schweizer Ingenieure arbeiten an Komponenten für Mondmissionen in einer Werkstatt in Aigle',
 };
 
 export default blogMetaChDe;

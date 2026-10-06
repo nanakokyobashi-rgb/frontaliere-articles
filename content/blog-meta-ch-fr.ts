@@ -7832,6 +7832,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.nuovi-progetti-chiave-digitali.title': 'Nouveaux projets clés pour la souveraineté numérique fédérale',
     'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'Le 1er octobre 2026, le chancelier a désigné comme projets clés le poste de travail relatif à la souveraineté numérique et EasyGov 2.0 ; NEPRO sort de la catégorie. Actuellement, 22 projets clés représentent plus de la moitié des dépenses informatiques civiles.',
     'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Photo du Palais fédéral à Berne avec des lignes numériques symbolisant la transformación informatique fédérale',
+    'blog.article.luna-opportunita-aziende-svizzere.title': 'Industrialiser la Lune : des opportunités pour les entreprises suisses',
+    'blog.article.luna-opportunita-aziende-svizzere.excerpt': 'La filière spatiale suisse réalise un chiffre d\'affaires de ~330 mln CHF, emploie près de 3000 personnes dans 120 entreprises et l\'économie lunaire pourrait valoir 343-566 mld USD d\'ici 2050.',
+    'blog.article.luna-opportunita-aziende-svizzere.imageAlt': 'Ingénieurs suisses travaillant sur des composants pour des missions lunaires dans un atelier d\'Aigle',
 };
 
 export default blogMetaChFr;

@@ -7832,6 +7832,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.nuovi-progetti-chiave-digitali.title': 'New key projects for federal digital sovereignty',
     'blog.article.nuovi-progetti-chiave-digitali.excerpt': 'On October 1, 2026, the Chancellor designated the digital sovereignty workstation and EasyGov 2.0 as key projects; NEPRO leaves the category. Currently, 22 key projects account for more than half of civilian IT spending.',
     'blog.article.nuovi-progetti-chiave-digitali.imageAlt': 'Photo of the Federal Palace in Bern with digital overlay lines symbolizing federal IT transformation',
+    'blog.article.luna-opportunita-aziende-svizzere.title': 'Industrializing the Moon: opportunities for Swiss companies',
+    'blog.article.luna-opportunita-aziende-svizzere.excerpt': 'The Swiss space supply chain has a turnover of ~330 million CHF, employs nearly 3000 people in 120 companies, and the lunar economy could be worth 343-566 billion USD by 2050.',
+    'blog.article.luna-opportunita-aziende-svizzere.imageAlt': 'Swiss engineers working on lunar mission components in an Aigle workshop',
 };
 
 export default blogMetaChEn;
