@@ -147,6 +147,27 @@ function stubMyMemory({ fold = false, failRecovery = false } = {}) {
   return calls;
 }
 
+function stubFoldedMyMemory(lineResponse) {
+  const calls = [];
+  const premiumFailure = stubPremiumFailure();
+  globalThis.fetch = async (url) => {
+    const premium = premiumFailure(url);
+    if (premium) return premium;
+    const value = String(url);
+    if (!value.includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(value).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = calls.length === 1
+      ? query.replace(/\n/g, ' ')
+      : lineResponse(query);
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+  return calls;
+}
+
 test('i cinque ingressi live: un motore che conserva le righe resta a una chiamata', async () => {
   for (const fixture of LIVE_FIXTURES) {
     const calls = stubMyMemory();
@@ -250,6 +271,66 @@ test('un recupero fallito fa proseguire la cascata e conta recoveryFailed', asyn
     1,
   );
   assert.equal((getCascadeStats().tierHits.azure || 0) - beforeAzureHit, 1);
+});
+
+test('un recovery di righe brevi uguali rifiuta il passthrough del campo e conta una volta', async () => {
+  const source = ['Ciao mondo', 'Buona sera', 'Tutto bene'].join('\n');
+  const calls = stubFoldedMyMemory((line) => line);
+  const before = getCascadeStats();
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  const after = getCascadeStats();
+  assert.equal(calls.length, 4);
+  assert.equal(translated, '');
+  assert.equal((after.tierHits.myMemory || 0) - (before.tierHits.myMemory || 0), 0);
+  assert.equal(
+    (after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0),
+    1,
+  );
+});
+
+test('il recovery di righe brevi realmente tradotte resta un hit', async () => {
+  const source = ['Ciao mondo', 'Buona sera', 'Tutto bene'].join('\n');
+  const calls = stubFoldedMyMemory((line) => `Tradotto: ${line}`);
+  const before = getCascadeStats();
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  const after = getCascadeStats();
+  assert.equal(calls.length, 4);
+  assert.match(translated, /Tradotto: Ciao mondo/);
+  assert.equal((after.tierHits.myMemory || 0) - (before.tierHits.myMemory || 0), 1);
+  assert.equal((after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0), 0);
+});
+
+test('il recovery di sole righe non traducibili conserva la sorgente e conta un hit', async () => {
+  const source = ['OK', 'IT', '12345', '—'].join('\n');
+  const calls = stubFoldedMyMemory((line) => line);
+  const before = getCascadeStats();
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  const after = getCascadeStats();
+  assert.equal(calls.length, 1);
+  assert.equal(translated, source);
+  assert.equal((after.tierHits.myMemory || 0) - (before.tierHits.myMemory || 0), 1);
+  assert.equal((after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0), 0);
 });
 
 test('una sorgente a riga singola non paga chiamate di recupero', async () => {

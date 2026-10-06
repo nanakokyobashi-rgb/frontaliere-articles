@@ -22,7 +22,12 @@ for (const key of [
 ]) delete process.env[key];
 process.env.VITEST = '1';
 
-const { freeTranslate, _chunkAtSentences, _recomposeChunkParts } = await import('../scripts/lib/free-translate.mjs');
+const {
+  freeTranslate,
+  getCascadeStats,
+  _chunkAtSentences,
+  _recomposeChunkParts,
+} = await import('../scripts/lib/free-translate.mjs');
 
 const realFetch = globalThis.fetch;
 
@@ -129,4 +134,48 @@ test('il ramo breve MyMemory mantiene gli a capo nella chiamata singola', async 
   assert.equal(calls.length, 1);
   assert.equal((calls[0].match(/\n/g) || []).length, 4);
   assert.equal((translated.match(/\n/g) || []).length, 4);
+});
+
+test('_chunkAtSentences usa il default quando maxChars non è un numero finito positivo', () => {
+  const source = 'parola '.repeat(120).trim();
+  const expected = _chunkAtSentences(source);
+
+  for (const maxChars of [NaN, Infinity, 0, -1, '480', null]) {
+    assert.deepEqual(_chunkAtSentences(source, maxChars), expected, String(maxChars));
+  }
+});
+
+test('_recomposeChunkParts fallisce esplicitamente se manca una parte tradotta', () => {
+  const chunks = [
+    { text: 'uno', separatorAfter: '\n' },
+    { text: 'due', separatorAfter: '' },
+  ];
+
+  assert.throws(
+    () => _recomposeChunkParts(chunks, ['primo']),
+    /translatedParts.*one entry per chunk/,
+  );
+  assert.throws(
+    () => _recomposeChunkParts(chunks, ['primo', undefined]),
+    /translatedParts.*one entry per chunk/,
+  );
+  assert.throws(
+    () => _recomposeChunkParts(chunks, ['primo', null]),
+    /translatedParts.*one entry per chunk/,
+  );
+});
+
+test('getCascadeStats restituisce copie profonde dei secchi annidati', () => {
+  const photo = getCascadeStats();
+  const expected = structuredClone(photo);
+
+  photo.tierHits.myMemory = 101;
+  photo.tierErrors.myMemory = 102;
+  photo.tierPassthroughs.myMemory = 103;
+  photo.tierPassthroughChunks.myMemory = 104;
+  photo.tierMetaResponses.myMemory = 105;
+  photo.tierStructureFailures.recoveryFailed.myMemory = 106;
+  photo.byFieldType.description.calls = 107;
+
+  assert.deepEqual(getCascadeStats(), expected);
 });

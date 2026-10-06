@@ -49,13 +49,12 @@ function templateHeadingPairs(sourceLang, targetLang) {
  * never reach the engine: the runs of text between them are translated on their
  * own and the canonical target heading is written back between the runs.
  *
- * A sentinel was the first attempt and it cannot hold. The free cascade does
- * not preserve line structure: its long-text branch joins the sentence segments
- * of a chunk, and then the chunks, with a space
- * (`_chunkAtSentences` and `parts.join(' ')` in `free-translate.mjs`), so a token
- * that must come back alone on its line comes back inline. Whatever the engine
- * does to its input, a heading it never sees cannot be translated, merged into
- * a sentence, reordered or dropped.
+ * A sentinel was the first attempt and it cannot hold. The free cascade keeps
+ * the source line structure in its long-text branch: chunks carry their source
+ * separators and `_recomposeChunkParts` restores them after translation. A
+ * heading that must come back alone on its line therefore remains isolated;
+ * whatever the engine does to its input, a heading it never sees cannot be
+ * translated, merged into a sentence, reordered or dropped.
  *
  * Headings are recognised on `detectText` and the segments are cut from
  * `payloadText`: the municipality mask in between rewrites names inside a line

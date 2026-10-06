@@ -389,6 +389,15 @@ export function getInstanceHealthStats() {
 export function getCascadeStats() {
   return {
     ..._cascadeStats,
+    tierHits: { ..._cascadeStats.tierHits },
+    tierErrors: { ..._cascadeStats.tierErrors },
+    tierPassthroughs: { ..._cascadeStats.tierPassthroughs },
+    tierPassthroughChunks: { ..._cascadeStats.tierPassthroughChunks },
+    tierMetaResponses: { ..._cascadeStats.tierMetaResponses },
+    tierStructureFailures: Object.fromEntries(
+      Object.entries(_cascadeStats.tierStructureFailures)
+        .map(([reason, tiers]) => [reason, { ...tiers }]),
+    ),
     byFieldType: {
       title: { ..._cascadeStats.byFieldType.title },
       description: { ..._cascadeStats.byFieldType.description },
@@ -607,6 +616,16 @@ function isSubstantivePassthroughChunk(text) {
   return (candidate.match(TRANSLATABLE_WORD_RE) || []).length >= MIN_SUBSTANTIVE_PASSTHROUGH_WORDS;
 }
 
+/** Record a passthrough already detected by the guard. */
+function recordRejectedPassthrough(tierName, outcome = null, granularity = 'field') {
+  _cascadeStats.tierPassthroughs[tierName] = (_cascadeStats.tierPassthroughs[tierName] || 0) + 1;
+  if (granularity === 'chunk') {
+    _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + 1;
+  }
+  noteTranslationOutcome(outcome, 'passthroughs');
+  if (outcome) _echoTiersByOutcome.get(outcome)?.add(tierName);
+}
+
 /**
  * `isSourcePassthrough` piu' la contabilita', per i tier che il passthrough lo
  * devono intercettare da soli.
@@ -625,17 +644,16 @@ function isSubstantivePassthroughChunk(text) {
  * @param {string} tierName
  * @param {string} source  testo dato in pasto al motore
  * @param {string} out     testo reso dal motore
- * @param {string} [granularity='field']  `chunk` per il ramo a segmenti
- * @returns {boolean} true se `out` e' la sorgente (e il tier e' stato contato)
+ * @param {string} [granularity='field'] `chunk` conta anche il sotto-bucket;
+ *   `line` verifica solo il recovery e rimanda la contabilita' al campo.
+ * @returns {boolean} true se `out` e' la sorgente
  */
 function rejectedAsPassthrough(tierName, source, out, outcome = null, granularity = 'field') {
   if (!out || !isSourcePassthrough(source, out)) return false;
-  _cascadeStats.tierPassthroughs[tierName] = (_cascadeStats.tierPassthroughs[tierName] || 0) + 1;
-  if (granularity === 'chunk') {
-    _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + 1;
-  }
-  noteTranslationOutcome(outcome, 'passthroughs');
-  if (outcome) _echoTiersByOutcome.get(outcome)?.add(tierName);
+  // Recovery probes lines only for the structural decision. The canonical
+  // passthrough event is counted once on the recomposed field (or once when a
+  // substantive line aborts recovery), not once per short line.
+  if (granularity !== 'line') recordRejectedPassthrough(tierName, outcome, granularity);
   return true;
 }
 
@@ -778,17 +796,41 @@ function _packStructuredSegments(segments, maxChars) {
 export function _chunkAtSentences(text, maxChars = 480, { oneLinePerChunk = false } = {}) {
   const clean = normalizeBlock(text);
   if (!clean) return [];
-  const limit = Math.max(1, maxChars);
+  const limit = Number.isFinite(maxChars) && maxChars > 0 ? maxChars : 480;
   const lineGroups = _structuredLineGroups(clean, limit);
   return oneLinePerChunk
     ? lineGroups.flatMap((segments) => _packStructuredSegments(segments, limit))
     : _packStructuredSegments(lineGroups.flat(), limit);
 }
 
+const CHUNK_PARTS_MISMATCH = 'ERR_CHUNK_PARTS_MISMATCH';
+
 export function _recomposeChunkParts(chunks, translatedParts = chunks.map(({ text }) => text)) {
+  if (
+    !Array.isArray(translatedParts)
+    || translatedParts.length !== chunks.length
+    || translatedParts.some((part) => part === undefined || part === null)
+  ) {
+    const error = new TypeError('_recomposeChunkParts: translatedParts must have one entry per chunk');
+    error.code = CHUNK_PARTS_MISMATCH;
+    throw error;
+  }
   return chunks
-    .map((chunk, index) => `${translatedParts[index] ?? ''}${chunk.separatorAfter}`)
+    .map((chunk, index) => `${translatedParts[index]}${chunk.separatorAfter}`)
     .join('');
+}
+
+function isChunkPartsMismatchError(error) {
+  return error?.code === CHUNK_PARTS_MISMATCH;
+}
+
+function recomposeChunkPartsOrEmpty(chunks, translatedParts) {
+  try {
+    return _recomposeChunkParts(chunks, translatedParts);
+  } catch (error) {
+    if (isChunkPartsMismatchError(error)) return '';
+    throw error;
+  }
 }
 
 function noteTierStructureFailure(tierName, reason) {
@@ -804,6 +846,7 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
   }
 
   const translatedParts = [];
+  let substantivePassthroughRecorded = false;
   let translatableLines = 0;
   for (const line of lines) {
     if (!hasTranslatableLineText(line.text)) {
@@ -822,10 +865,19 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
     if (!normalized || normalized.includes('\n')) {
       return { ok: false, reason: 'recoveryFailed' };
     }
-    if (
-      rejectedAsPassthroughWithSourceVariants(tierName, line.text, line.text, normalized, outcome, 'line')
-      && isSubstantivePassthroughChunk(line.text)
-    ) {
+    const lineIsPassthrough = rejectedAsPassthroughWithSourceVariants(
+      tierName,
+      line.text,
+      line.text,
+      normalized,
+      outcome,
+      'line',
+    );
+    if (lineIsPassthrough && isSubstantivePassthroughChunk(line.text)) {
+      if (!substantivePassthroughRecorded) {
+        recordRejectedPassthrough(tierName, outcome);
+        substantivePassthroughRecorded = true;
+      }
       return { ok: false, reason: 'recoveryFailed' };
     }
     if (rejectedAsMetaResponse(tierName, line.text, normalized, outcome)) {
@@ -834,9 +886,16 @@ async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
     translatedParts.push(normalized);
   }
 
+  let recomposed;
+  try {
+    recomposed = _recomposeChunkParts(lines, translatedParts);
+  } catch (error) {
+    if (isChunkPartsMismatchError(error)) return { ok: false, reason: 'recoveryFailed' };
+    throw error;
+  }
   return {
     ok: true,
-    text: normalizeBlock(_recomposeChunkParts(lines, translatedParts)),
+    text: normalizeBlock(recomposed),
     allLinesNonTranslatable: translatableLines === 0,
   };
 }
@@ -916,7 +975,9 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
     if (chunks.length > 1) await delay(200);
   }
 
-  return normalizeBlock(_recomposeChunkParts(chunks, translated));
+  // A missing provider part is a structure miss for this tier, not a partial
+  // translation to expose to the field.
+  return normalizeBlock(recomposeChunkPartsOrEmpty(chunks, translated));
 }
 
 async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) {
@@ -1351,7 +1412,9 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
         translated.push(t);
         if (chunks.length > 1) await delay(100);
       }
-      const result = normalizeBlock(_recomposeChunkParts(chunks, translated));
+      // A missing provider part is a structure miss for this tier, not a partial
+      // translation to expose to the field.
+      const result = normalizeBlock(recomposeChunkPartsOrEmpty(chunks, translated));
       // Stessa ragione di DeepL: la scelta della chiave su cui restare avviene
       // qui dentro, prima che `tryTier` veda l'uscita, quindi il passthrough va
       // riconosciuto e CONTATO qui, non solo scartato.
@@ -2159,7 +2222,9 @@ async function translateWithGoogle(text, sourceLang, targetLang, outcome = null)
     translated.push(result);
   }
 
-  const merged = normalizeBlock(_recomposeChunkParts(chunks, translated));
+  // A missing provider part is a structure miss for this tier, not a partial
+  // translation to expose to the field.
+  const merged = normalizeBlock(recomposeChunkPartsOrEmpty(chunks, translated));
   return merged; // il confronto con la sorgente e' salito in `tryTier`
 }
 
@@ -2382,6 +2447,12 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
           fieldStats.successes++;
           return result;
         }
+        if (rejectedAsPassthroughWithSourceVariants(tierName, clean, rawSourceClean, result, _outcome)) {
+          return '';
+        }
+        // `rejectedAsMetaResponse` was already applied to every recovered line;
+        // recomposition preserves those line texts, so repeating it here would
+        // only double-count the same meta-response.
       }
       if (result) {
         _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
@@ -2497,7 +2568,9 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
     // Ricomponi con i separatori della sorgente, non con uno spazio fisso: gli
     // echo per segmento sono gia' nel bucket `tierPassthroughChunks`, oltre al
     // conteggio canonico richiesto da #1210.
-    return normalizeBlock(_recomposeChunkParts(chunks, parts));
+    // A missing provider part is a structure miss for this tier, not a partial
+    // translation to expose to the field.
+    return normalizeBlock(recomposeChunkPartsOrEmpty(chunks, parts));
   });
   if (t2) return finalize(t2);
 
