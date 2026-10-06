@@ -121,6 +121,21 @@ tick fosse sbagliato.
    non arriva in una settimana non arriva da sola.
 10. La PR entra da sola nel ciclo di review e auto-merge. **Non mergiare a mano.**
 
+### Stadio di decomposizione (`issue-decompose.yml`)
+
+`agent:decompose-queued` → UNO `agent:decompose`/tick; il planner produce le
+figlie atomiche e marca il padre con `decomposed:1` e
+`<!-- DECOMPOSED_INTO: n1 n2 -->`. Il padre resta aperto come tracker e il
+PARENT-CLOSE lo chiude quando tutte le figlie sono chiuse. Se un monitor annota
+`🔁 **Reopened**` o `🔁 Recurrence on workflow run.` dopo l'ultimo marker e tutte
+le figlie sono chiuse, PARENT-REARM scrive `<!-- PARENT_REARM: ... -->`, rimuove
+`decomposed:1`/`agent:triaged` e l'eventuale routing stale, poi lascia il padre
+al triage-sweep deterministico esistente; non crea una coda parallela. Un
+riarmo vale una sola volta per ricorrenza, al massimo 2 marcatori negli ultimi
+30 giorni per issue e 2 riarmi per run di default; marker, date o stato figlia
+illeggibili → nessuna mutazione. Una decomposizione successiva è l'ultima
+autorità e riporta al PARENT-CLOSE.
+
 ## Issue aggregate: il circuit-breaker
 
 Una issue con molti item distinti non entra in un solo run: tentarli tutti

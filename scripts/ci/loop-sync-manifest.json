@@ -1048,11 +1048,11 @@
     {
       "path": "scripts/ci/lib/parent-close-recurrence.mjs",
       "mode": "identical",
-      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` dice se un monitor (`🔁 **Reopened**` di `scripts/lib/github-issue-creator.mjs`) ha riaperto il padre decomposto DOPO l'ultimo marker `DECOMPOSED_INTO`; in quel caso il PARENT-CLOSE non lo richiude (valerielinc-ops/frontaliere-si-o-no#11312, origine site 5661; qui #339 «Loop drift», 25 PARENT-CLOSE e 35 riaperture al 2026-10-04). Copiata byte-per-byte dal sito: modulo puro, nessun adattamento. Il drainer adattato importa `reopenedAfterDecomposition` e `decomposedIntoNumbers` (unica definizione di `DECOMPOSED_INTO_RE`, come sul sito); il resto del delta del drainer non e' riconciliato in questo giro. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` confronta lo sha256 del file con questa baseline.",
+      "reason": "Dipendenza del PARENT-CLOSE adattato di `scripts/ci/followup-drainer.mjs`: `reopenedAfterDecomposition(comments)` riconosce `🔁 **Reopened**` e `🔁 Recurrence on workflow run.` dopo l'ultimo marker `DECOMPOSED_INTO`; `decideParentRearm` aggiunge la decisione pura, l'idempotenza per riapertura, il tetto per issue e il fail-closed sui dati illeggibili. Il modulo resta copiato byte-per-byte dal sito (merge `valerielinc-ops/frontaliere-si-o-no#11941`), senza adattamento; la baseline è stata ricalcolata sui due file reali. Il drainer corpus adattato importa anche il formatter del marker e applica parser numerico locale, route/classificatore e guard `manifest-pinned-issues.mjs` prima del PARENT-REARM. `generator/tests/followup-drainer-parent-close-recurrence.test.mjs` sorveglia l'identità del modulo.",
       "baseline": {
-        "site": "2547bd9672848f53",
-        "corpus": "2547bd9672848f53",
-        "alignedAt": "2026-10-04"
+        "site": "909cb4bc67bb9483",
+        "corpus": "909cb4bc67bb9483",
+        "alignedAt": "2026-10-06"
       }
     },
     {
