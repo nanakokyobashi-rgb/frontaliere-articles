@@ -20,11 +20,11 @@ import {
   closingComment,
   decideHandoffAlreadyFixed,
   decideReapplyOfMergedOrigin,
-  decideSourceIssuesClosed,
   fixerIssueOfBranch,
   handoffTitleQuery,
   isSweepCandidate,
   isTrustedComment,
+  mergeTreeAllowsClose,
   latestHandoffOf,
 } from '../../scripts/ci/close-superseded-conflict-prs.mjs';
 import { buildConflictHandoffIssue } from '../../scripts/ci/pr-autorebase.mjs';
@@ -39,6 +39,7 @@ const loopPr = (over = {}) => ({
   body: '## Implementato\n\n- fix\nCloses #2236\n\n## Non implementato (ancora)\n\n- niente, per scelta',
   headRefName: 'fix/issue-2236',
   headRefOid: HEAD,
+  baseRefName: 'main',
   isDraft: false,
   mergeable: 'CONFLICTING',
   labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }],
@@ -79,6 +80,9 @@ test('non candidata: senza conflitto, umana, draft, fuori dal ciclo, o tornata m
   assert.equal(reason({ isDraft: true }), 'draft');
   assert.equal(reason({ labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'needs-human' }] }), 'hands-off-label');
   assert.equal(reason({ labels: [{ name: 'has-conflicts' }, { name: 'agent:autofix' }, { name: 'keep-open' }] }), 'hands-off-label');
+  // «Il contenuto è già su main» vale solo per una PR diretta a main.
+  assert.equal(reason({ baseRefName: 'release/x' }), 'base-not-main');
+  assert.equal(reason({ baseRefName: undefined }), 'base-not-main');
   // La label è una fotografia di merge-tree: se GitHub dice MERGEABLE il
   // conflitto è appena rientrato e decide pr-autorebase, non questo sweep.
   assert.equal(reason({ mergeable: 'MERGEABLE' }), 'mergeable-now');
@@ -189,43 +193,32 @@ test('l\'hand-off più recente della PR si trova con entrambe le forme del titol
   assert.ok(issues[0].title.includes(handoffTitleQuery(2246)));
 });
 
-// ── Caso 3: ogni issue sorgente è già chiusa ────────────────────────────────
+// ── Niente terzo caso, e il conflitto si ricalcola ─────────────────────────
 
-const closedIssue = () => ({ state: 'CLOSED' });
-const mergedSiblings = [
-  { number: 2245, title: 'fix(cantoni): prevent generated workflow fan-out', body: 'Closes #2236' },
-  { number: 2248, title: 'fix(workflows): avoid canton self-test fanout', body: 'Fixes #2239' },
-];
-
-test('caso 3 — ogni sorgente è chiusa E consegnata da un\'altra PR mergiata', () => {
-  const pr = loopPr({ body: 'Closes #2236\nFixes #2239' });
-  assert.deepEqual(
-    decideSourceIssuesClosed({ pr, readIssue: closedIssue, mergedPrs: mergedSiblings }),
-    { close: true, reason: 'source-issues-delivered', issues: [2236, 2239], deliveredBy: [2245, 2248] },
+test('una issue sorgente chiusa da un\'altra PR NON è una ragione di chiusura', () => {
+  // Review di #2274: due PR possono chiudere la stessa issue con fix parziali
+  // o diversi. Il riferimento alla issue non prova che QUESTO contenuto sia su
+  // main, quindi lo sweep non lo usa: restano solo le due prove legate alla PR
+  // o al suo hand-off.
+  const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
+  assert.equal(/closedIssueRefs|closingMergedPr/.test(src), false, 'lo sweep non deve dedurre niente dalle keyword di chiusura');
+  assert.throws(() => closingComment({ reason: 'source-issues-delivered', issues: [2236] }), /ragione di chiusura sconosciuta/);
+  // Una PR in conflitto con un hand-off senza verdetto resta aperta, anche se
+  // dichiara di chiudere una issue: la riprendono la classe F e il recycle.
+  const pr = loopPr();
+  assert.equal(
+    decideHandoffAlreadyFixed({ pr, handoff: handoffOf(pr), comments: [], openPrs: [pr] }).close,
+    false,
   );
 });
 
-test('caso 3 — una issue chiusa senza una PR mergiata che la chiude NON prova niente', () => {
-  // Chiusa a mano, `not planned`, o dal solo ritorno al verde del workflow:
-  // questa PR può essere l'unico percorso di consegna rimasto.
-  const pr = loopPr({ body: 'Closes #2236\nFixes #2239' });
-  const reason = (mergedPrs) => decideSourceIssuesClosed({ pr, readIssue: closedIssue, mergedPrs }).reason;
-  assert.equal(reason([]), 'source-issue-not-delivered');
-  assert.equal(reason([mergedSiblings[0]]), 'source-issue-not-delivered', 'una sola delle due sorgenti consegnata non basta');
-  // La PR stessa non è la prova della propria consegna.
-  assert.equal(reason([{ number: pr.number, title: pr.title, body: pr.body }]), 'source-issue-not-delivered');
-  // #22360 non è #2236.
-  assert.equal(reason([{ number: 2245, body: 'Closes #22360\nCloses #2239' }]), 'source-issue-not-delivered');
-  assert.equal(reason(null), 'merged-prs-unreadable');
-});
-
-test('caso 3 — una sorgente aperta, illeggibile o assente lascia la PR aperta', () => {
-  const pr = loopPr({ body: 'Closes #2236\nFixes #2239' });
-  const states = { 2236: { state: 'CLOSED' }, 2239: { state: 'OPEN' } };
-  const reason = (over) => decideSourceIssuesClosed({ pr, readIssue: closedIssue, mergedPrs: mergedSiblings, ...over }).reason;
-  assert.equal(reason({ readIssue: (n) => states[n] }), 'source-issue-open');
-  assert.equal(reason({ readIssue: () => null }), 'source-issue-unreadable');
-  assert.equal(reason({ pr: loopPr({ body: 'nessuna keyword' }) }), 'no-closing-keyword');
+test('solo merge-tree «conflicted» sulla HEAD corrente autorizza la chiusura', () => {
+  assert.equal(mergeTreeAllowsClose('conflicted'), true);
+  // `clean`: il conflitto è rientrato e label/cache sono vecchie.
+  assert.equal(mergeTreeAllowsClose('clean'), false);
+  // `unknown`: fetch fallito o oggetto mancante — non lo sappiamo.
+  assert.equal(mergeTreeAllowsClose('unknown'), false);
+  assert.equal(mergeTreeAllowsClose(undefined), false);
 });
 
 // ── Commento e agganci ──────────────────────────────────────────────────────
@@ -234,7 +227,6 @@ test('il commento di chiusura dice la ragione e come annullarla', () => {
   for (const decision of [
     { reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 },
     { reason: 'handoff-already-fixed', handoff: 2250 },
-    { reason: 'source-issues-delivered', issues: [2236], deliveredBy: [2245] },
   ]) {
     const body = closingComment(decision);
     assert.ok(body.startsWith(SUPERSEDED_MARKER), body);
@@ -242,15 +234,24 @@ test('il commento di chiusura dice la ragione e come annullarla', () => {
     assert.match(body, /branch NON è stato cancellato/, body);
   }
   assert.match(closingComment({ reason: 'reapply-origin-merged', origin: 2201, handoff: 2204 }), /#2201/);
-  assert.match(closingComment({ reason: 'source-issues-delivered', issues: [2236], deliveredBy: [2245] }), /#2236.*#2245/);
   assert.throws(() => closingComment({ reason: 'inventata' }), /ragione di chiusura sconosciuta/);
 });
 
-test('la chiusura rilegge le prove, non solo la PR', () => {
+test('la chiusura rilegge PR, conflitto e prove, e decide sull\'oggetto riletto', () => {
   const src = readFileSync(path.join(ROOT, 'scripts/ci/close-superseded-conflict-prs.mjs'), 'utf8');
   const main = src.slice(src.indexOf('function main()'));
-  assert.equal(main.split('decide(pr, ').length - 1, 2, 'decisione e conferma: `decide` va eseguita due volte, la seconda subito prima della close');
-  assert.ok(main.indexOf('confirmed.reason !== decision.reason') < main.indexOf("'pr', 'close'"), 'la conferma deve precedere la chiusura');
+  const closeAt = main.indexOf("'pr', 'close'");
+  assert.notEqual(closeAt, -1);
+  const before = main.slice(0, closeAt);
+  // Prima decisione sullo snapshot, conferma sull'oggetto RILETTO: un body
+  // cambiato fra le due letture non deve essere ignorato.
+  assert.ok(before.includes('decide(pr, openPrs)'), 'manca la prima decisione');
+  assert.ok(before.includes('const live = rereadLivePr(pr);'), 'manca la rilettura della PR');
+  assert.ok(before.includes('decide(live, freshOpenPrs)'), 'la conferma deve decidere sull\'oggetto riletto, non sullo snapshot');
+  assert.equal(before.split('mergeTreeAllowsClose(').length - 1, 2, 'merge-tree va ricalcolato prima della decisione e prima della chiusura');
+  assert.ok(before.includes('confirmed.reason !== decision.reason'), 'la conferma deve reggere la stessa ragione');
+  // La rilettura chiede gli stessi campi della lista, base compresa.
+  assert.match(src, /const PR_FIELDS = '[^']*baseRefName[^']*title[^']*|const PR_FIELDS = '[^']*title[^']*baseRefName/);
 });
 
 test('lo sweep non cancella mai il branch e ha un tetto per run', () => {

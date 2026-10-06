@@ -29,18 +29,13 @@
  *      verdetto alle 00:18 — «i 24 caller sono byte-identici tra main e il
  *      branch approvato») ancora aperta e in conflitto alle 03:30.
  *
- *   3. `source-issues-delivered` — la PR dichiara `Closes #X`, ogni issue che
- *      dichiara di chiudere è già CHIUSA e per ognuna un'ALTRA PR mergiata
- *      dichiara di chiuderla. `recycle-stale-prs` ricicla solo con
- *      la issue sorgente ancora OPEN (deve ri-accodarla), quindi una PR in
- *      conflitto con la sorgente chiusa non la riprende nessuno, mai. È la
- *      fine attesa dei duplicati: il 2026-10-05 una sola causa ha aperto una
- *      issue per caller cantonale e sei PR sugli stessi 26 file (#2245 e
- *      #2248 mergiate, #2246 #2247 #2249 #2251 #2255 in conflitto). Una
- *      issue chiusa a mano, `not planned` o dal solo ritorno al verde del
- *      workflow NON basta: lì la PR può essere l'unica consegna rimasta.
+ * Non esiste un terzo caso «le issue sorgente sono chiuse»: che un'altra PR
+ * abbia chiuso la stessa issue non prova che abbia consegnato QUESTO
+ * contenuto (due fix parziali o diversi chiudono la stessa issue), e lì questa
+ * PR può essere l'unica consegna rimasta. Quelle PR restano alla classe F del
+ * rescuer e a `recycle-stale-prs`.
  *
- * In tutti e tre i casi la PR non può più mergiare e nessuno la riprenderà:
+ * In entrambi i casi la PR non può più mergiare e nessuno la riprenderà:
  * `recycle-stale-prs` vuole `stale-review` da oltre 24 ore e la sorgente OPEN.
  *
  * ## Cosa NON fa
@@ -66,7 +61,7 @@
  *       GITHUB_REPOSITORY, DRY_RUN=1|true (solo log), CI_JOB_DEADLINE_EPOCH.
  */
 
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -75,8 +70,8 @@ import {
   conflictHandoffOriginPr,
 } from './check-issue-already-resolved.mjs';
 import { lastFixOutcome } from './close-recovered-failure-issues.mjs';
-import { closedIssueRefs, closingMergedPr } from './followup-resolution-match.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
+import { classifyMergeTreeStatus } from './pr-autorebase.mjs';
 import { reapplyInFlight } from './reconcile-conflict-handoffs.mjs';
 import { CLAIM_LABEL } from './stale-claim-detector.mjs';
 
@@ -93,12 +88,14 @@ export const OPEN_PR_LIMIT = 200;
 // Gli hand-off letti per PR: uno per HEAD andata in conflitto, quindi pochi.
 // Una lista piena puo' avere tagliato il piu' recente: fail-closed.
 export const HANDOFF_SEARCH_LIMIT = 100;
-// Le PR mergiate lette per il caso 3, stessa finestra del riconciliatore.
-export const MERGED_PR_WINDOW = 200;
 // Costo stimato di una PR: fino a sei letture `gh` ripetute due volte e una scrittura.
 const PER_PR_BUDGET_MS = 40_000;
+const GH_TIMEOUT_MS = 30_000;
+const GIT_TIMEOUT_MS = 60_000;
 
 export const AUTOFIX_LABEL = 'agent:autofix';
+// Lo sweep ragiona su «il contenuto è già su main»: vale solo per le PR verso main.
+export const BASE_BRANCH = 'main';
 // Label con cui una PR è dichiarata fuori dal ciclo automatico.
 export const HANDS_OFF_LABELS = Object.freeze(['needs-human', 'keep-open']);
 // Chi può scrivere un verdetto: il fixer commenta con l'identità del
@@ -136,7 +133,9 @@ export function fixerIssueOfBranch(branch) {
  * sweep gira anche quando l'autorebase che la ricalcola e' fallito. Serve la
  * conferma indipendente di GitHub, `mergeable === 'CONFLICTING'`; `UNKNOWN`
  * (la risposta tipica subito dopo un push su main) o un campo assente sono
- * letture non verificabili e rimandano al tick dopo. Pura.
+ * letture non verificabili e rimandano al tick dopo. Anche `CONFLICTING` è
+ * una cache: la candidatura apre solo la strada, e la chiusura esige in più
+ * `mergeTreeAllowsClose`, cioè `git merge-tree` ricalcolato sulla HEAD. Pura.
  *
  * @returns {{ candidate: boolean, reason: string }}
  */
@@ -146,11 +145,21 @@ export function isSweepCandidate(pr) {
   if (pr?.isDraft) return { candidate: false, reason: 'draft' };
   const loopPr = labels.includes(AUTOFIX_LABEL) || String(pr?.headRefName || '').startsWith('fix/');
   if (!loopPr) return { candidate: false, reason: 'not-loop-pr' };
+  if (String(pr?.baseRefName || '') !== BASE_BRANCH) return { candidate: false, reason: 'base-not-main' };
   if (labels.some((name) => HANDS_OFF_LABELS.includes(name))) return { candidate: false, reason: 'hands-off-label' };
   const mergeable = String(pr?.mergeable || '').toUpperCase();
   if (mergeable === 'MERGEABLE') return { candidate: false, reason: 'mergeable-now' };
   if (mergeable !== 'CONFLICTING') return { candidate: false, reason: 'conflict-unconfirmed' };
   return { candidate: true, reason: 'conflicted-loop-pr' };
+}
+
+/**
+ * Il conflitto è confermato ADESSO da `git merge-tree origin/main <HEAD>`?
+ * Solo `conflicted` autorizza: `clean` (conflitto rientrato) e `unknown`
+ * (oggetto mancante, fetch fallito) lasciano la PR aperta. Pura.
+ */
+export function mergeTreeAllowsClose(state) {
+  return state === 'conflicted';
 }
 
 /** Il commento viene da un'identità che può scrivere un verdetto del fixer? Pura. */
@@ -222,41 +231,9 @@ export function latestHandoffOf(prNumber, issues) {
     .sort((a, b) => Date.parse(b?.createdAt ?? '') - Date.parse(a?.createdAt ?? ''))[0] || null;
 }
 
-/**
- * Caso 3: ogni issue che la PR dichiara di chiudere è già chiusa E per ognuna
- * esiste un'ALTRA PR mergiata che dichiara di chiuderla. La sola chiusura non
- * basta: una issue si chiude anche a mano o come `not planned`, e lì questa PR
- * può essere l'unico percorso di consegna rimasto. La PR mergiata è la prova
- * che il lavoro è arrivato su `main` per un'altra via. Senza nessuna keyword
- * di chiusura non c'è una sorgente da cui dedurre niente.
- *
- * @param {object} p
- * @param {object} p.pr  la PR candidata (`number`, `title`, `body`)
- * @param {(n: number) => ({state?: string}|null)} p.readIssue  lettura di una issue, `null` se illeggibile
- * @param {Array<{number: number, title?: string, body?: string}>|null} p.mergedPrs  le PR mergiate recenti, o null se illeggibili
- * @returns {{ close: boolean, reason: string, issues?: number[], deliveredBy?: number[] }}
- */
-export function decideSourceIssuesClosed({ pr, readIssue, mergedPrs }) {
-  const refs = closedIssueRefs(`${pr?.title || ''}\n${pr?.body || ''}`);
-  if (!refs.length) return { close: false, reason: 'no-closing-keyword' };
-  if (!Array.isArray(mergedPrs)) return { close: false, reason: 'merged-prs-unreadable' };
-  const others = mergedPrs.filter((merged) => Number(merged?.number) !== Number(pr?.number));
-  const deliveredBy = [];
-  for (const number of refs) {
-    const issue = readIssue(number);
-    if (!issue) return { close: false, reason: 'source-issue-unreadable' };
-    if (String(issue.state || '').toUpperCase() !== 'CLOSED') return { close: false, reason: 'source-issue-open' };
-    const delivered = closingMergedPr(number, others);
-    if (delivered === null) return { close: false, reason: 'source-issue-not-delivered' };
-    deliveredBy.push(Number(delivered));
-  }
-  return { close: true, reason: 'source-issues-delivered', issues: refs, deliveredBy: [...new Set(deliveredBy)] };
-}
-
 const CLOSING_REASONS = Object.freeze({
   'reapply-origin-merged': ({ origin, handoff }) => `questa PR riapplicava la PR di origine **#${origin}** (hand-off #${handoff}), che nel frattempo è stata mergiata: il contributo è su \`main\` dal ramo originale e qui non resta niente da consegnare.`,
   'handoff-already-fixed': ({ handoff }) => `il fixer ha lavorato l'hand-off **#${handoff}** di questa PR e ha chiuso con \`FIX_OUTCOME: ${SUPERSEDING_OUTCOME}\` — il contenuto approvato era già su \`main\` per un'altra via, quindi non esiste una PR sostitutiva. La verifica del fixer è nei commenti di #${handoff}.`,
-  'source-issues-delivered': ({ issues, deliveredBy }) => `ogni issue che dichiara di chiudere (${(issues || []).map((n) => `#${n}`).join(', ')}) è già chiusa da un'altra PR mergiata (${(deliveredBy || []).map((n) => `#${n}`).join(', ')}): il lavoro è su \`main\` per un'altra via, e \`recycle-stale-prs\` non può riciclarla perché ri-accoda solo una sorgente ancora aperta.`,
 });
 
 /** Commento lasciato sulla PR alla chiusura. Pura. */
@@ -279,6 +256,8 @@ function gh(args) {
       encoding: 'utf8',
       maxBuffer: 64 * 1024 * 1024,
       stdio: ['ignore', 'pipe', 'pipe'],
+      // Una lettura appesa non deve consumare la deadline del passo.
+      timeout: GH_TIMEOUT_MS,
     });
   } catch {
     return null;
@@ -295,9 +274,11 @@ function ghJson(args) {
   }
 }
 
+const PR_FIELDS = 'number,title,body,baseRefName,headRefName,headRefOid,labels,isDraft,mergeable';
+
 function listOpenPrs() {
   const prs = ghJson(['pr', 'list', '--repo', REPO, '--state', 'open', '--limit', String(OPEN_PR_LIMIT),
-    '--json', 'number,title,body,headRefName,headRefOid,labels,isDraft,mergeable']);
+    '--json', PR_FIELDS]);
   if (!Array.isArray(prs)) return null;
   if (prs.length >= OPEN_PR_LIMIT) {
     console.log(`::warning::close-superseded-conflict-prs: ${prs.length} PR aperte, lista forse troncata → nessuna chiusura.`);
@@ -331,24 +312,35 @@ function readIssueComments(number) {
   }
 }
 
-/** La PR è ancora quella che è stata giudicata? Rilettura subito prima di chiudere. */
-function stillSameOpenPr(pr) {
-  const live = ghJson(['pr', 'view', String(pr.number), '--repo', REPO, '--json', 'state,headRefOid,labels,isDraft,mergeable,headRefName']);
-  if (!live || String(live.state || '').toUpperCase() !== 'OPEN') return false;
-  if (String(live.headRefOid || '') !== String(pr.headRefOid || '')) return false;
-  return isSweepCandidate({ ...live, number: pr.number }).candidate;
+/**
+ * La PR com'è ADESSO, se è ancora quella giudicata (aperta, stessa HEAD,
+ * ancora candidata), altrimenti null. Rende l'oggetto riletto per intero:
+ * la conferma deve decidere su titolo, body e label correnti, non sullo
+ * snapshot iniziale.
+ */
+function rereadLivePr(pr) {
+  const live = ghJson(['pr', 'view', String(pr.number), '--repo', REPO, '--json', `state,${PR_FIELDS}`]);
+  if (!live || String(live.state || '').toUpperCase() !== 'OPEN') return null;
+  if (Number(live.number) !== Number(pr.number)) return null;
+  if (String(live.headRefOid || '') !== String(pr.headRefOid || '')) return null;
+  return isSweepCandidate(live).candidate ? live : null;
 }
 
-function listMergedPrs(memo) {
-  if (!memo.read) {
-    memo.read = true;
-    memo.value = ghJson(['pr', 'list', '--repo', REPO, '--state', 'merged',
-      '--limit', String(MERGED_PR_WINDOW), '--json', 'number,title,body']);
-  }
-  return Array.isArray(memo.value) ? memo.value : null;
+/**
+ * Ricalcola il conflitto sulla HEAD della PR, senza fidarsi di label e cache:
+ * fetch di `main` e della ref della PR, poi `git merge-tree`. Stesso oracolo
+ * di pr-autorebase (`classifyMergeTreeStatus`). Qualunque errore → `unknown`.
+ */
+function mergeTreeState(pr) {
+  const git = (args) => spawnSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: GIT_TIMEOUT_MS });
+  const fetched = git(['fetch', '--quiet', 'origin', BASE_BRANCH, `refs/pull/${Number(pr.number)}/head`]);
+  if (fetched.status !== 0) return 'unknown';
+  const head = String(pr.headRefOid || '');
+  if (!/^[0-9a-f]{40}$/i.test(head)) return 'unknown';
+  return classifyMergeTreeStatus(git(['merge-tree', '--write-tree', `origin/${BASE_BRANCH}`, head]).status);
 }
 
-function decide(pr, openPrs, mergedMemo) {
+function decide(pr, openPrs) {
   const fixerIssueNumber = fixerIssueOfBranch(pr.headRefName);
   if (fixerIssueNumber !== null) {
     const fixerIssue = readFixerIssue(fixerIssueNumber);
@@ -362,13 +354,7 @@ function decide(pr, openPrs, mergedMemo) {
   if (handoffs.length >= HANDOFF_SEARCH_LIMIT) return { close: false, reason: 'handoffs-truncated' };
   const handoff = latestHandoffOf(pr.number, handoffs);
   const comments = handoff ? readIssueComments(handoff.number) : null;
-  const alreadyFixed = decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs });
-  if (alreadyFixed.close) return alreadyFixed;
-  // Un hand-off in lavorazione o una riapplicazione in volo hanno la
-  // precedenza anche sul caso 3: c'è qualcuno che sta portando il contributo.
-  if (['handoff-in-progress', 'reapply-in-flight'].includes(alreadyFixed.reason)) return alreadyFixed;
-  const sourceClosed = decideSourceIssuesClosed({ pr, readIssue: readFixerIssue, mergedPrs: listMergedPrs(mergedMemo) });
-  return sourceClosed.close ? sourceClosed : alreadyFixed;
+  return decideHandoffAlreadyFixed({ pr, handoff, comments, openPrs });
 }
 
 function main() {
@@ -384,7 +370,6 @@ function main() {
   const candidates = openPrs.filter((pr) => isSweepCandidate(pr).candidate);
   const budget = runBudgetFromEnv();
   const closed = [];
-  const mergedMemo = {};
   let examined = 0;
   for (const pr of candidates) {
     if (closed.length >= MAX_CLOSES_PER_RUN) {
@@ -396,7 +381,12 @@ function main() {
       break;
     }
     examined += 1;
-    const decision = decide(pr, openPrs, mergedMemo);
+    const treeState = mergeTreeState(pr);
+    if (!mergeTreeAllowsClose(treeState)) {
+      console.log(`PR #${pr.number}: merge-tree ${treeState} sulla HEAD corrente → conflitto non confermato, resta aperta.`);
+      continue;
+    }
+    const decision = decide(pr, openPrs);
     if (!decision.close) {
       console.log(`PR #${pr.number}: in conflitto, resta aperta (${decision.reason}).`);
       continue;
@@ -410,8 +400,11 @@ function main() {
     // mergeability) ma anche le sue prove: un claim sull'hand-off, una
     // riapplicazione appena aperta, una issue sorgente riaperta. Si rilegge
     // TUTTO e si chiude solo se la stessa ragione regge ancora.
-    const freshOpenPrs = stillSameOpenPr(pr) ? listOpenPrs() : null;
-    const confirmed = freshOpenPrs ? decide(pr, freshOpenPrs, mergedMemo) : null;
+    // La conferma lavora sull'oggetto RILETTO (titolo, body, label, base di
+    // adesso) e ricalcola anche merge-tree: main può essersi mosso.
+    const live = rereadLivePr(pr);
+    const freshOpenPrs = live && mergeTreeAllowsClose(mergeTreeState(live)) ? listOpenPrs() : null;
+    const confirmed = freshOpenPrs ? decide(live, freshOpenPrs) : null;
     if (!confirmed?.close || confirmed.reason !== decision.reason) {
       console.log(`PR #${pr.number}: stato cambiato fra la decisione e la chiusura (${confirmed?.reason || 'PR non più candidata'}) → resta aperta.`);
       continue;

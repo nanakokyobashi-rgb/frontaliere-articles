@@ -1255,10 +1255,10 @@
     {
       "path": "scripts/ci/close-superseded-conflict-prs.mjs",
       "mode": "corpus-only",
-      "reason": "Sweep zero-Claude eseguito da pr-autorebase.yml, che sul sito non esiste (merge queue nativa): chiude le PR del ciclo in conflitto con main che non hanno piu' niente da consegnare — riapplicazione di una PR di origine gia' mergiata, hand-off chiuso dal fixer con `already-fixed`, issue sorgente tutte chiuse da un'altra PR mergiata. Chiude solo con `mergeable=CONFLICTING` confermato da GitHub e dopo aver riletto le prove. Sul sito lo stesso stato non si accumula: il 2026-10-06 aveva 3 PR aperte e nessuna `has-conflicts`, contro 6 nel corpus. Riusa i parser condivisi (`conflictHandoffOriginPr`, `lastFixOutcome`, `reapplyInFlight`, `closedIssueRefs`) senza copiarli.",
+      "reason": "Sweep zero-Claude eseguito da pr-autorebase.yml, che sul sito non esiste (merge queue nativa): chiude le PR del ciclo in conflitto con main che non hanno piu' niente da consegnare — riapplicazione di una PR di origine gia' mergiata, oppure hand-off chiuso dal fixer con `already-fixed`. Chiude solo PR verso main, con `mergeable=CONFLICTING` e con il conflitto ricalcolato da merge-tree sulla HEAD corrente, dopo aver riletto PR e prove. Sul sito lo stesso stato non si accumula: il 2026-10-06 aveva 3 PR aperte e nessuna `has-conflicts`, contro 6 nel corpus. Riusa i parser condivisi (`conflictHandoffOriginPr`, `lastFixOutcome`, `reapplyInFlight`, `closedIssueRefs`) senza copiarli.",
       "baseline": {
         "site": null,
-        "corpus": "515c848e6c08a70a",
+        "corpus": "8020eb1befb3875d",
         "alignedAt": "2026-10-06"
       }
     },
