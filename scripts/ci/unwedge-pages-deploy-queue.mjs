@@ -102,7 +102,8 @@
  * that run red and reaches workflow-failure-issues.yml.
  */
 
-import { pathToFileURL } from 'node:url';
+import { realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { githubApiHeaders } from '../lib/githubApiHeaders.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontaliere-articles';
@@ -320,7 +321,14 @@ async function main() {
   }
 }
 
-const invokedDirectly = import.meta.url === pathToFileURL(process.argv[1] ?? '').href;
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
 if (invokedDirectly) {
   main().catch((err) => {
     // ::error:: rather than a silent exit: the annotation names the crash in
