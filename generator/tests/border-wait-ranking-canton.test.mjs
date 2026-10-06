@@ -26,6 +26,7 @@ import {
   buildBorderWaitRankingArticle,
   rankingArticleIdentity,
 } from '../scripts/lib/border-wait-ranking-content.mjs';
+import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { freshenWindow } from './lib/rewire-contracts.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -57,6 +58,23 @@ function withGeneva() {
   return w;
 }
 
+/** I quattro valichi SO del registry, per esercitare il percorso reale del ranking. */
+function withSolothurn() {
+  const w = fixture();
+  const crossings = [
+    ['battwil-leymen', 4.2],
+    ['rodersdorf-leymen', 6.1],
+    ['rodersdorf-biederthal', 3.7],
+    ['kleinlutzel-kiffis', 8.5],
+  ];
+  for (const half of ['current', 'previous']) {
+    for (const [slug, weightedAvgMinutes] of crossings) {
+      w[half].perCrossing[slug] = { weightedAvgMinutes, totalSamples: 47, canton: 'SO' };
+    }
+  }
+  return w;
+}
+
 describe('classifica dogane per cantone', () => {
   it('Ticino resta l\'articolo originale: stesso id, stessi metadati, solo valichi ticinesi', () => {
     const data = buildData(TODAY, fixture());
@@ -78,6 +96,26 @@ describe('classifica dogane per cantone', () => {
     assert.match(data.seo.title, /Canton Ginevra/);
     const text = JSON.stringify(data.content);
     assert.doesNotMatch(text, /Ticino|Tessin|ticines|tessinois/);
+  });
+
+  it('Soletta classifica i quattro nuovi valichi SO quando il registry li conosce', () => {
+    const w = withSolothurn();
+    const snapshot = computeSnapshot(TODAY, w, 'SO');
+    assert.deepEqual(snapshot.ranking.map((r) => r.slug).sort(), [
+      'battwil-leymen',
+      'kleinlutzel-kiffis',
+      'rodersdorf-biederthal',
+      'rodersdorf-leymen',
+    ]);
+    const data = buildData(TODAY, w, 'SO');
+    assert.equal(data.id, 'classifica-dogane-soletta');
+    assert.equal(data._rankedCount, 4);
+    assert.match(data.seo.title, /Canton Soletta/);
+  });
+
+  it('un corridoio italiano dei Grigioni non entra nel fallback Ticino', () => {
+    assert.equal(isTicinoCrossing('chiasso-centro'), true);
+    assert.equal(isTicinoCrossing('mustair-taufers'), false);
   });
 
   it('una finestra senza `canton` (pubblicata prima del campo) non classifica nessun altro cantone', () => {
