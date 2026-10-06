@@ -448,6 +448,13 @@ jobs:
             # Solo PR verso `main`: la prova sotto confronta la HEAD con
             # `main`, e il rimedio dice di fondere `main`. Su un altro target
             # quel conflitto non riguarda la PR: non è F, decidono le altre classi.
+            # Base ILLEGGIBILE è un'altra cosa: non si sa quale sia il target,
+            # quindi con `has-conflicts` nessuna classe può mutare la PR —
+            # fail-closed, la si rivede al prossimo scan.
+            if [ "${HAS_CONFLICTS:-false}" = "true" ] && [ -z "$BASE_REF" ]; then
+              echo "PR #$N: has-conflicts ma base non leggibile — target non verificato, PR invariata"
+              continue
+            fi
             if [ "${HAS_CONFLICTS:-false}" = "true" ] && [ "$BASE_REF" != "main" ]; then
               echo "PR #$N: has-conflicts ma base \`${BASE_REF:-illeggibile}\` diversa da main — non è classe F"
             elif [ "${HAS_CONFLICTS:-false}" = "true" ]; then

@@ -1196,6 +1196,21 @@ test('F — solo PR verso main: su un altro target il conflitto con main non la 
   }
 });
 
+test('F — base non leggibile con has-conflicts: nessuna classe può mutare la PR', opts, () => {
+  // Con un target noto e diverso da main la PR prosegue verso le classi A–E
+  // (qui: verde con LGTM, quindi `stale-review` viene tolta). Con un target
+  // ILLEGGIBILE no: non si sa a cosa si riferisca il conflitto, e la PR resta
+  // esattamente com'è.
+  const known = runScan({ prs: conflicted(['stale-review'], { base: { ref: 'release/2026-10' } }), ...greenLgtm() });
+  assert.deepEqual(known.unlabeled, [901], known.stdout);
+  for (const base of [undefined, {}, { ref: '' }]) {
+    const r = runScan({ prs: conflicted(['stale-review'], { base }), ...greenLgtm() });
+    assert.deepEqual(r.unlabeled, [], `base=${JSON.stringify(base)}: mutation senza aver verificato il target\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.comments, [], r.stdout);
+  }
+});
+
 test('F — la PR cambia fra la prova e la label: nessuna mutation', opts, () => {
   // Review di #2274: un push dopo il fetch lascerebbe la prova sulla vecchia
   // HEAD e la label sulla nuova, con il recycle a 24 ore dietro.
