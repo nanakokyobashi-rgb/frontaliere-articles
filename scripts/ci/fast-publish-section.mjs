@@ -39,6 +39,18 @@ import { activeSourceSections, sectionForBodyPath } from '../lib/corpus-sections
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// Cambiare uno di questi moduli cambia il risultato di ogni publisher R2,
+// non una sola sezione: il workflow deve quindi rifare il bootstrap di tutte
+// le sezioni cantonali R2 attive, invece di produrre una matrice vuota.
+const SHARED_R2_REFRESH_PATHS = new Set([
+  'generator/scripts/lib/canton-hubs/paths.mjs',
+  'scripts/ci/fast-publish-section.mjs',
+  'scripts/lib/article-render-pipeline.mjs',
+  'scripts/lib/canton-hub-data.mjs',
+  'scripts/lib/section-registry.mjs',
+  'scripts/publish-section-pages.mjs',
+]);
+
 /**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
  * serve: `shard` (Pages) o `r2` (Worker). Un commit di un articolo cantonale
@@ -116,6 +128,9 @@ export function r2PublishPlan(files, coreList = ARTICLE_SECTION_CORE_LIST) {
     // side is enough to force a complete refresh of the surviving registry.
     const paths = status === 'R' || status === 'C' ? fields.slice(1) : fields.slice(1, 2);
     for (const rel of paths) changedFiles.push({ rel: rel.trim(), status });
+  }
+  if (changedFiles.some(({ rel }) => SHARED_R2_REFRESH_PATHS.has(rel))) {
+    for (const section of sections) touch(section.section).bootstrap = true;
   }
   for (const { rel, status } of changedFiles) {
     if (!rel) continue;

@@ -110,11 +110,14 @@ test('publisher: una pagina con noindex, senza meta di proprieta\', con asset sa
 test('publisher: registry edge illeggibile o con stato sconosciuto non diventa draft', async () => {
   const previousFetch = globalThis.fetch;
   try {
-    globalThis.fetch = async () => ({ status: 200, text: async () => '{"sections":{"canton-ti":{"status":"stale"}}}' });
+    globalThis.fetch = async () => ({
+      status: 200,
+      text: async () => '{"schema":1,"commit":"abc1234","sections":{"canton-ti":{"status":"draft"}},"release":{}}',
+    });
     assert.equal(await publishedStatus('canton-ti'), null);
-    globalThis.fetch = async () => ({ status: 200, text: async () => '{"sections":{"canton-ti":{"status":"draft"}}}' });
+    globalThis.fetch = async () => ({ status: 200, text: async () => '{"schema":1,"commit":"abc1234","sections":{"canton-ti":{"status":"draft"}}}' });
     assert.equal(await publishedStatus('canton-ti'), 'draft');
-    globalThis.fetch = async () => ({ status: 200, text: async () => '{"sections":{"canton-ti":{"status":"live"}}}' });
+    globalThis.fetch = async () => ({ status: 200, text: async () => '{"schema":1,"commit":"abc1234","sections":{"canton-ti":{"status":"live"}}}' });
     assert.equal(await publishedStatus('canton-ti'), 'live');
   } finally {
     globalThis.fetch = previousFetch;
@@ -291,6 +294,18 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     r2PublishPlan(['R100\tcontent/blog-body-canton-ti/it/old.ts\tcontent/blog-body-canton-ti/it/new.ts'], WITH_TI),
     [{ section: 'canton-ti', ids: [], bootstrap: true }],
   );
+  // Shared publisher/planner code is a fan-out input: with a canton active it
+  // must not produce matrix=[] and leave every live section stale.
+  for (const rel of [
+    'generator/scripts/lib/canton-hubs/paths.mjs',
+    'scripts/ci/fast-publish-section.mjs',
+    'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/section-registry.mjs',
+    'scripts/publish-section-pages.mjs',
+  ]) {
+    assert.deepEqual(r2PublishPlan([rel], WITH_TI), [{ section: 'canton-ti', ids: [], bootstrap: true }], rel);
+  }
   assert.deepEqual(r2PublishPlan(['content/cantons/canton-gr/registry.ts', 'content/blog-meta-canton-tipo-it.ts'], WITH_TI), []);
 });
 
@@ -313,6 +328,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /git diff --name-status HEAD~1 HEAD/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
+  for (const p of [
+    'scripts/publish-section-pages.mjs',
+    'scripts/ci/fast-publish-section.mjs',
+    'scripts/lib/article-render-pipeline.mjs',
+    'scripts/lib/canton-hub-data.mjs',
+    'scripts/lib/section-registry.mjs',
+  ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
+  assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'scripts/lib/article-render-pipeline.mjs'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
   assert.match(wf, /bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
   assert.match(wf, /\[ "\$DRY" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);

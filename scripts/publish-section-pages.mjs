@@ -62,7 +62,7 @@ import { sourceRegistryIds } from './lib/corpus-floors.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
-import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes } from './lib/section-registry.mjs';
+import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes, validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -296,7 +296,9 @@ export async function publishedStatus(section) {
   const res = await probe(`${CDN_BASE}/${EDGE_SECTION_REGISTRY_FILE}`, { attempts: 2, delayMs: 2000 });
   if (!res.ok) return null;
   try {
-    const status = JSON.parse(res.body)?.sections?.[section]?.status;
+    const registry = JSON.parse(res.body);
+    if (!validateEdgeSectionRegistry(registry)) return null;
+    const status = registry.sections?.[section]?.status;
     return status === 'live' || status === 'draft' ? status : null;
   } catch {
     return null;

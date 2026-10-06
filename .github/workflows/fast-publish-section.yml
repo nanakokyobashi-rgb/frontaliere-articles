@@ -37,7 +37,11 @@ on:
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
+      - 'scripts/publish-section-pages.mjs'
+      - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/lib/article-render-pipeline.mjs'
       - 'scripts/lib/canton-hub-data.mjs'
+      - 'scripts/lib/section-registry.mjs'
   workflow_dispatch:
     inputs:
       section:
