@@ -106,6 +106,11 @@ test('the mirrored flat redirect scanner parses unquoted attribute values before
     flatRedirect,
     /selfClosing: !closing && (?:HTML_VOID_ELEMENTS\.has\(name\)\s+&&\s+)?isSelfClosingStartTag\(html, nameEnd, end\)/,
   );
+  assert.match(
+    flatRedirect,
+    /html\[index\] !== '>'|!\/\\s\/\.test\(html\[cursor\]\)/,
+    'the unquoted value scanner must consume `/` before deciding self-closing',
+  );
   assert.match(flatRedirect, /function skipRawTextElement\(html(?:: string)?, afterOpening: number, name: string\)/);
   assert.match(flatRedirect, /function skipTemplateElement\(html(?:: string)?, afterOpening: number\)/);
   assert.match(
