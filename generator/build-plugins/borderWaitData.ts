@@ -957,17 +957,26 @@ export const REGION_TO_COUNTRY: Record<BorderCrossingRegion, 'IT' | 'DE' | 'AT' 
   'vallese-francia': 'FR',
 };
 
+/** Only these three Italy-facing regions are the Ticino corridor. */
+const TICINO_REGIONS: ReadonlySet<BorderCrossingRegion> = new Set([
+  'ticino-como',
+  'ticino-varese',
+  'ticino-verbano',
+]);
+
+/** True only for the three Ticino–Italy regions; see `TICINO_REGIONS`. */
+export function isTicinoRegion(region: BorderCrossingRegion): boolean {
+  return TICINO_REGIONS.has(region);
+}
+
 /**
- * True for the 26 Ticino–Italy crossings, false for the 108 non-Ticino
- * (Germany/Austria/Liechtenstein/France corridor) ones. Single source of
- * truth for "is this crossing in scope for Ticino-only content" (evergreen
- * ranking article, monthly archive pages,
- * etc.) — derived from CROSSING_TO_REGION + REGION_TO_COUNTRY instead of a
- * second hand-maintained list, so a new non-Italy corridor is excluded
- * automatically instead of silently leaking into Ticino-scoped copy.
+ * True for crossings in the Ticino corridor, false for other Swiss border
+ * regions even when they also face Italy (for example `grigioni-italia`).
+ * Single source of truth for Ticino-only content; do not derive this from
+ * `REGION_TO_COUNTRY === 'IT'`.
  */
 export function isTicinoCrossing(crossing: BorderCrossingSlug): boolean {
-  return REGION_TO_COUNTRY[CROSSING_TO_REGION[crossing]] === 'IT';
+  return isTicinoRegion(CROSSING_TO_REGION[crossing]);
 }
 
 // ── Path builders ─────────────────────────────────────────────────

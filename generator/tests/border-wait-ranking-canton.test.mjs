@@ -26,6 +26,7 @@ import {
   buildBorderWaitRankingArticle,
   rankingArticleIdentity,
 } from '../scripts/lib/border-wait-ranking-content.mjs';
+import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { freshenWindow } from './lib/rewire-contracts.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -110,6 +111,11 @@ describe('classifica dogane per cantone', () => {
     assert.equal(data.id, 'classifica-dogane-soletta');
     assert.equal(data._rankedCount, 4);
     assert.match(data.seo.title, /Canton Soletta/);
+  });
+
+  it('un corridoio italiano dei Grigioni non entra nel fallback Ticino', () => {
+    assert.equal(isTicinoCrossing('chiasso-centro'), true);
+    assert.equal(isTicinoCrossing('mustair-taufers'), false);
   });
 
   it('una finestra senza `canton` (pubblicata prima del campo) non classifica nessun altro cantone', () => {
