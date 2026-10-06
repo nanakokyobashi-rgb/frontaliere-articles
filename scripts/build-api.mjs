@@ -1158,9 +1158,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 //
 // Emitted ONLY when there is at least one image. The consumer refuses a manifest
 // listing zero images — deliberately, since an empty list is indistinguishable
-// from a publisher that broke halfway. Generated covers now live under
-// public/images/generated; existing record-bearing catalog covers remain under
-// public/images/blog, and both are copied with their path kind preserved.
+// from a publisher that broke halfway. Governed article covers live under
+// public/images/blog; other governed assets may remain under public/images/generated,
+// and both are copied with their path kind preserved.
 {
   const imageFiles = IMAGE_SRC_DIRS.flatMap((sourceDir) => {
     const srcDir = path.join(ROOT, ...sourceDir);
