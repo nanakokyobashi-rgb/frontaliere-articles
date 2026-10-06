@@ -99746,6 +99746,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bellinzona-aggregazione-costi-2026': {
+    title: 'Bellinzona: aggregazione e bilancio 2026 a confronto',
+    description: 'Analisi dei costi dell\'aggregazione a Bellinzona: spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni. Verifica su efficienza e servizi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, aggregazione, bilancio, confronto',
+    ogTitle: 'Bellinzona: aggregazione e bilancio 2026 a confronto',
+    ogDescription: 'Dieci anni dopo l\'unione dei 13 Comuni, Bellinzona affronta il test dei conti: 235,8 milioni di spese nel 2025 e un preventivo 2026 di 253,5 milioni. Quale efficienza reale per i cittadini?',
+    canonicalPath: '/articoli-frontaliere/bellinzona-aggregazione-costi-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bellinzona: aggregazione e bilancio 2026 a confronto",
+      "description": "Analisi dei costi dell'aggregazione a Bellinzona: spese 2025 a 235,8 milioni e preventivo 2026 a 253,5 milioni. Verifica su efficienza e servizi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/bellinzona-aggregazione-costi-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di Bellinzona con edifici amministrativi e mura storiche all'alba"
+      },
+      "datePublished": "2026-10-06T01:28:30+00:00",
+      "dateModified": "2026-10-06T01:28:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellinzona-aggregazione-costi-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

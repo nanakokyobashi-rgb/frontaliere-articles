@@ -301,7 +301,7 @@ import {
   cantonSectionSkeletons,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
-import { createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
+import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
@@ -7526,6 +7526,19 @@ let lastSourcePublishedAt = '';
 // (checkItemOnPage) ha bisogno di entrambi. Stessa vita di lastSourcePublishedAt.
 let lastSourcePageTitle = '';
 
+// Le fonti delle sezioni storiche continuano a usare il comportamento
+// precedente. Per le sezioni cantonali la pagina dell'articolo deve dichiarare
+// lo stesso UA onesto dello scanner (D10): la costante vive nel modulo dello
+// scanner, che e' l'unica sorgente del valore cantonale.
+const HISTORICAL_SOURCE_PAGE_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
+
+function sourcePageFetchHeaders() {
+  return {
+    'User-Agent': IS_CANTON ? CANTON_SOURCE_USER_AGENT : HISTORICAL_SOURCE_PAGE_USER_AGENT,
+    'Accept': 'text/html,application/xhtml+xml',
+  };
+}
+
 async function fetchPageContent(url) {
   // Clear FIRST, unconditionally, before any early return.
   //
@@ -7600,10 +7613,7 @@ async function fetchPageContent(url) {
   console.error(`📰 Fetching: ${absoluteUrl}`);
   try {
     const res = await fetch(absoluteUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-        'Accept': 'text/html,application/xhtml+xml',
-      },
+      headers: sourcePageFetchHeaders(),
       signal: AbortSignal.timeout(15000),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -7921,6 +7931,210 @@ function isWithinDays(date, days) {
   return date >= cutoff;
 }
 
+// Alcuni portali comunali usano un testo d'azione generico per il link alla
+// notizia. Non e' una headline: il titolo va cercato nella card che contiene
+// il link, senza allargare il pool ai link di menu gia' filtrati da P5b.
+const GENERIC_HEADLINE_LINK_LABELS = new Set([
+  'mehr',
+  'mehr anzeigen',
+  'mehr erfahren',
+  'mehr lesen',
+  'weiterlesen',
+  'weiter lesen',
+  'news lesen',
+  'lire la suite',
+  'en savoir plus',
+  'leggi tutto',
+  "leggi l'articolo",
+  'leggi l articolo',
+  'read more',
+  'read article',
+]);
+
+const HEADLINE_VOID_ELEMENTS = new Set([
+  'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
+  'meta', 'param', 'source', 'track', 'wbr',
+]);
+
+function headlineAttributeValue(attrs, name) {
+  const re = new RegExp(
+    "(?:^|\\s)" + name + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s\"'=<>]+))",
+    'i',
+  );
+  const match = re.exec(attrs || '');
+  return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+}
+
+function headlineTextFromMarkup(markup) {
+  return decodeHtmlEntities(String(markup || '')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim());
+}
+
+function normalizedGenericHeadlineLabel(text) {
+  return headlineTextFromMarkup(text)
+    .normalize('NFKC')
+    .toLocaleLowerCase('it')
+    .replace(/[\p{P}\p{S}]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isGenericHeadlineLinkLabel(text) {
+  return GENERIC_HEADLINE_LINK_LABELS.has(normalizedGenericHeadlineLabel(text));
+}
+
+function headlineMarkupWithoutActionLinks(markup) {
+  return String(markup || '').replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, (full, inner) => {
+    const openEnd = full.indexOf('>');
+    const openTag = openEnd === -1 ? full : full.slice(0, openEnd + 1);
+    const accessibleLabel = headlineAttributeValue(openTag, 'aria-label')
+      || headlineAttributeValue(openTag, 'title')
+      || inner;
+    return isGenericHeadlineLinkLabel(accessibleLabel) ? ' ' : full;
+  });
+}
+
+function headlineCandidateIsUsable(text) {
+  const candidate = headlineTextFromMarkup(headlineMarkupWithoutActionLinks(text));
+  if (candidate.length < 15 || candidate.length > 300) return null;
+  if (isGenericHeadlineLinkLabel(candidate)) return null;
+  if (/^[\d\s./,:-]+$/.test(candidate)) return null;
+  return candidate;
+}
+
+/** Stack degli elementi aperti davanti a un link, sufficiente per il markup
+ * server-rendered delle liste comunali (e tollerante verso HTML incompleto). */
+function headlineAncestorStack(html, before) {
+  const stack = [];
+  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
+  let match;
+  while ((match = tagRe.exec(html)) !== null && match.index < before) {
+    const closing = match[1] === '/';
+    const name = match[2].toLowerCase();
+    const attrs = match[3] || '';
+    if (closing) {
+      for (let i = stack.length - 1; i >= 0; i -= 1) {
+        if (stack[i].name !== name) continue;
+        stack.length = i;
+        break;
+      }
+      continue;
+    }
+    if (HEADLINE_VOID_ELEMENTS.has(name) || /\/\s*$/.test(attrs)) continue;
+    stack.push({ name, attrs, openEnd: tagRe.lastIndex, start: match.index });
+  }
+  return stack;
+}
+
+function headlineElementEnd(html, node) {
+  const closeRe = new RegExp('<(/?)' + node.name + '(?=[\\s/>])[^>]*>', 'gi');
+  closeRe.lastIndex = node.openEnd;
+  let depth = 1;
+  let match;
+  while ((match = closeRe.exec(html)) !== null) {
+    if (match[1] === '/') {
+      depth -= 1;
+      if (depth === 0) return { start: match.index, end: closeRe.lastIndex };
+    } else if (!/\/\s*>$/.test(match[0])) {
+      depth += 1;
+    }
+  }
+  return { start: html.length, end: html.length };
+}
+
+function headlineNodeHasHint(node) {
+  const value = headlineAttributeValue(node.attrs, 'class')
+    + ' ' + headlineAttributeValue(node.attrs, 'id')
+    + ' ' + headlineAttributeValue(node.attrs, 'role');
+  return /(?:^|[\s_-])(?:card|teaser|entry|item|tile|meldung|news)(?:$|[\s_-])/i.test(value);
+}
+
+function isHeadlineCardNode(node) {
+  return node.name === 'article' || node.name === 'li' || headlineNodeHasHint(node);
+}
+
+function headlineStackHasNavigation(stack) {
+  const sectioning = new Set(['article', 'main', 'section']);
+  let nearestSectioning = -1;
+  stack.forEach((node, index) => {
+    if (sectioning.has(node.name) || /^(article|main|section)$/i.test(headlineAttributeValue(node.attrs, 'role'))) {
+      nearestSectioning = index;
+    }
+  });
+  return stack.some((node, index) => {
+    if (/^(script|style|template)$/i.test(node.name)) return true;
+    if (node.name === 'nav') {
+      return true;
+    }
+    const role = headlineAttributeValue(node.attrs, 'role');
+    if (/^(header|footer)$/i.test(node.name)) {
+      // A header/footer after the nearest sectioning element belongs to the
+      // card/article. Before it, it is a page landmark wrapping the content.
+      return nearestSectioning === -1 || index < nearestSectioning;
+    }
+    if (!/^(banner|navigation|complementary|contentinfo|search)$/i.test(role)) {
+      return false;
+    }
+    // A navigation landmark can wrap a sectioning element in malformed or
+    // CMS-generated markup. It remains navigation: a descendant <main> or
+    // <section> must not turn a menu link into a headline.
+    return true;
+  });
+}
+
+function structuralHeadlineForLink(html, linkStart, anchorTag) {
+  const stack = headlineAncestorStack(html, linkStart);
+  if (headlineStackHasNavigation(stack)) return null;
+
+  const directAttributes = [
+    headlineAttributeValue(anchorTag, 'aria-label'),
+    headlineAttributeValue(anchorTag, 'title'),
+  ];
+  for (const value of directAttributes) {
+    const candidate = headlineCandidateIsUsable(value);
+    if (candidate) return candidate;
+  }
+
+  const cards = stack.filter(isHeadlineCardNode).reverse();
+  for (const card of cards) {
+    const range = headlineElementEnd(html, card);
+    const inner = html.slice(card.openEnd, range.start);
+    const candidates = [];
+    const addCandidate = (value, score, offset = 0) => {
+      const candidate = headlineCandidateIsUsable(value);
+      if (!candidate) return;
+      const absolute = card.openEnd + offset;
+      candidates.push({ candidate, score: score + (absolute <= linkStart ? 10 : 0), distance: Math.abs(linkStart - absolute) });
+    };
+
+    const cardAttributes = [
+      headlineAttributeValue(card.attrs, 'aria-label'),
+      headlineAttributeValue(card.attrs, 'title'),
+    ];
+    for (const value of cardAttributes) addCandidate(value, 95);
+
+    const headingRe = /<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi;
+    let match;
+    while ((match = headingRe.exec(inner)) !== null) addCandidate(match[1], 80, match.index);
+
+    const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+    while ((match = hintedRe.exec(inner)) !== null) {
+      const attrs = match[2] || '';
+      const hint = headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id');
+      if (/(?:title|headline|subject|caption)/i.test(hint)) {
+        addCandidate(match[3], 75, match.index);
+      }
+    }
+
+    candidates.sort((a, b) => b.score - a.score || a.distance - b.distance);
+    if (candidates.length > 0) return candidates[0].candidate;
+  }
+  return null;
+}
+
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const results = [];
@@ -7938,6 +8152,12 @@ function extractHeadlines(html, baseUrl) {
     // classifier's hasTopicalSignal/countAdmissionHits match with
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
+    if (isGenericHeadlineLinkLabel(text)) {
+      const anchorTagEnd = m[0].indexOf('>');
+      const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+      text = structuralHeadlineForLink(html, m.index, anchorTag);
+      if (!text) continue;
+    }
     // Only keep links with meaningful text (likely headlines)
     if (text.length < 15 || text.length > 300) continue;
     // Resolve relative URLs

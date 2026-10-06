@@ -793,14 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/cronaca/provincia-di-como-lodiosa-truffa-ai-danni-di-una-89enne-derubata-dei-gioielli-lettera-del-sindaco-non-fidatevi": {
-      "section": "frontaliere",
-      "ts": 1791076221629
-    },
-    "frontaliere::https://comozero.it/attualita/como-vivo-da-un-mese-in-centro-storico-e-ho-scoperto-che-dormire-e-unimpresa-mi-colpisce-la-rassegnazione-dei-residenti-video": {
-      "section": "frontaliere",
-      "ts": 1791076277994
-    },
     "frontaliere::https://www.varesenews.it/2026/10/scuola-medea-di-giubiano-al-via-i-lavori-di-riqualificazione-da-14-milioni-di-euro/2695381": {
       "section": "frontaliere",
       "ts": 1791082559228
@@ -944,6 +936,10 @@
     "frontaliere::https://www.rsi.ch/s/4131573": {
       "section": "frontaliere",
       "ts": 1791244728361
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
+      "section": "frontaliere",
+      "ts": 1791249645914
     }
   }
 }

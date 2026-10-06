@@ -12649,6 +12649,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lavori-lereti-via-copelli-luino.title': 'Luino : travaux de Lereti dans la via Copelli jusqu\'au 27 novembre',
     'blog.article.lavori-lereti-via-copelli-luino.excerpt': 'Lancement du renouvellement du réseau d\'adduction d\'eau dans la via Copelli : 400 mètres de nouvelles canalisations sont prévus et une circulation alternée avec un feu de signalisation.',
     'blog.article.lavori-lereti-via-copelli-luino.imageAlt': 'Chantier routier via Copelli à Luino pour le renouvellement du réseau d\'eau',
+    'blog.article.bellinzona-aggregazione-costi-2026.title': 'Bellinzona : comparaison entre l\'agrégation et le budget 2026',
+    'blog.article.bellinzona-aggregazione-costi-2026.excerpt': 'Dépenses 2025 à 235,8 millions et budget 2026 à 253,5 millions : le point sur les coûts de l\'agrégation.',
+    'blog.article.bellinzona-aggregazione-costi-2026.imageAlt': 'Centre de Bellinzone avec bâtiments administratifs et remparts historiques à l\'aube',
 };
 
 export default blogMetaFr;
