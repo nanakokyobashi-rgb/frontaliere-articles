@@ -542,6 +542,38 @@ jobs:
               continue
             fi
 
+            # ── Veto riletti dal CONSUMATORE, subito prima della close ───────
+            # `stale-review` è un segnale scritto da altri (rescuer,
+            # pr-autorebase) minuti o ore prima, e chi lo scrive non può
+            # renderlo condizionale: fra la sua ultima rilettura e l'add-label
+            # resta sempre una finestra, in cui la PR può ricevere un veto —
+            # `needs-human` (escalation: decide una persona) o
+            # `agent:resolving-conflict` (qualcuno sta risolvendo il conflitto
+            # sul branch). La lista delle `stale-review` in cima a questo scan
+            # è anch'essa una fotografia. L'unico punto in cui il veto si può
+            # far valere davvero è QUI, sulle label di adesso, immediatamente
+            # prima dell'operazione distruttiva:
+            #   - un veto presente            → la PR non si ricicla;
+            #   - `stale-review` non c'è più  → il segnale è stato revocato;
+            #   - label non rileggibili       → fail-closed, niente close.
+            # In tutti e tre i casi il tentativo non consuma il cap.
+            if ! LIVE_LABELS=$(gh pr view "$N" --repo "$REPO" --json labels --jq '[.labels[].name] | join(",")' 2>/dev/null) \
+              || [ -z "${LIVE_LABELS//[[:space:]]/}" ]; then
+              echo "::warning::PR #${N}: label non rileggibili prima della close — NON riciclata (fail-closed)."
+              continue
+            fi
+            case ",${LIVE_LABELS}," in
+              *,needs-human,*|*,agent:resolving-conflict,*)
+                echo "PR #${N}: veto presente alla rilettura (${LIVE_LABELS}) — NON riciclata."
+                continue ;;
+            esac
+            case ",${LIVE_LABELS}," in
+              *,stale-review,*) ;;
+              *)
+                echo "PR #${N}: \`stale-review\` non c'è più alla rilettura — segnale revocato, NON riciclata."
+                continue ;;
+            esac
+
             # Cap misurato sul numero di chiusure tentate, riservato PRIMA
             # dell'operazione distruttiva. Con timeout 10min e tre probe di
             # ref per PR, 5 lascia margine a un run lento e rende lo scan
