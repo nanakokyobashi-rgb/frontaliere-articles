@@ -27,12 +27,15 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CONDITIONS,
   COMMIT_COLLECTION_MAX_MS,
   COMMIT_COLLECTION_MAX_PAGES,
+  COVER_FALLBACK_CONSECUTIVE_THRESHOLD,
+  COVER_QUEUE_MAX_AGE_HOURS,
   exitCodeForCollectionError,
   IDLE_HOURS,
   OVERSIZE_MIN_MODELS,
@@ -54,6 +57,7 @@ import {
   TOTAL_REJECTION_MIN_GATE_RUNS,
   TOTAL_REJECTION_RATE,
   collectCorpus,
+  collectCoverQueue,
   collectCommits,
   collectMeasurements,
   evaluateConditions,
@@ -62,6 +66,7 @@ import {
   isDegradedOutcome,
   pairKeyOf,
   parseGenerationCommit,
+  parseCoverOutcomes,
   parseRunLog,
   reconcile,
   summarizeRuns,
@@ -172,6 +177,14 @@ const LOG_OUTCOMES = [
   'generate\tGenerate the article\t2026-08-10T10:03:00.1Z GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere',
 ].join('\n');
 
+const LOG_COVER_OUTCOMES = [
+  'generate\tGenerate the article\t2026-10-07T04:45:30.1Z [cover] article=cover-one source=engine reason=Codex broker rejected the request: Codex CLI returned an empty last message',
+  'generate\tGenerate the article\t2026-10-07T04:45:31.1Z [cover] article=cover-one source=catalog-fallback reason=Codex broker rejected the request: Codex CLI returned an empty last message',
+  'generate\tGenerate the article\t2026-10-07T04:46:30.1Z [cover] article=cover-two source=engine reason=generated',
+  'generate\tGenerate the article\t2026-10-07T04:47:30.1Z [cover] article=cover-three source=engine reason=Codex broker timed out after 119999ms',
+  'generate\tGenerate the article\t2026-10-07T04:47:31.1Z [cover] article=cover-three source=static reason=Codex broker timed out after 119999ms',
+].join('\n');
+
 // ── 1. Parsing ──────────────────────────────────────────────────────────────
 
 describe('parseGenerationCommit — i due esiti che il workflow già distingue', () => {
@@ -216,6 +229,26 @@ describe('parseGenerationCommit — i due esiti che il workflow già distingue',
 });
 
 describe('parseRunLog — i marker già emessi dalla pipeline', () => {
+  test('conta il solo esito finale della copertina, non la diagnosi engine che lo precede', () => {
+    const expected = [
+      {
+        articleId: 'cover-one',
+        kind: 'fallback',
+        source: 'catalog-fallback',
+        reason: 'Codex broker rejected the request: Codex CLI returned an empty last message',
+      },
+      { articleId: 'cover-two', kind: 'generated', source: 'engine', reason: 'generated' },
+      {
+        articleId: 'cover-three',
+        kind: 'fallback',
+        source: 'static',
+        reason: 'Codex broker timed out after 119999ms',
+      },
+    ];
+    assert.deepEqual(parseCoverOutcomes(LOG_COVER_OUTCOMES), expected);
+    assert.deepEqual(parseRunLog(LOG_COVER_OUTCOMES).coverOutcomes, expected);
+  });
+
   test('legge sezione, gate svuotato e pool evergreen saturo da una run svizzera reale', () => {
     const r = parseRunLog(LOG_SVIZZERA_EMPTIED);
     assert.equal(r.section, 'svizzera');
@@ -334,6 +367,7 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
       assert.deepEqual(r.gates, []);
       assert.deepEqual(r.totalRejections, []);
       assert.deepEqual(r.tokenLimitSkips, []);
+      assert.deepEqual(r.coverOutcomes, []);
     }
   });
 });
@@ -342,6 +376,29 @@ describe('summarizeRuns — i denominatori', () => {
   test('le run dry non entrano in nessun denominatore', () => {
     const s = summarizeRuns([parseRunLog(LOG_DRY), parseRunLog(LOG_DRY), parseRunLog(LOG_FRONTALIERE_OK)]);
     assert.equal(s.bySection.get('frontaliere').runs, 1);
+  });
+
+  test('misura fallback, rate e streak delle copertine in ordine temporale', () => {
+    const s = summarizeRuns([parseRunLog(LOG_COVER_OUTCOMES)]);
+    assert.deepEqual(s.coverHealth, {
+      observations: 3,
+      fallbacks: 2,
+      generated: 1,
+      fallbackRate: 2 / 3,
+      latestConsecutiveFallbacks: 1,
+      maxConsecutiveFallbacks: 1,
+      reasons: {
+        'Codex broker rejected the request: Codex CLI returned an empty last message': 1,
+        'Codex broker timed out after 119999ms': 1,
+      },
+    });
+
+    const chronological = summarizeRuns([
+      { ...parseRunLog(' [cover] article=new source=engine reason=generated'), runCreatedAt: Date.parse('2026-10-07T02:00:00Z') },
+      { ...parseRunLog(' [cover] article=old source=static reason=provider-timeout'), runCreatedAt: Date.parse('2026-10-07T01:00:00Z') },
+    ]);
+    assert.equal(chronological.coverHealth.latestConsecutiveFallbacks, 0);
+    assert.equal(chronological.coverHealth.maxConsecutiveFallbacks, 1);
   });
 
   test('il denominatore del gate sono le sole run in cui il gate è GIRATO', () => {
@@ -529,6 +586,15 @@ function healthy() {
     runs: {
       available: true, total: 60, logFailures: 0, spanHours: 12, bySection,
       outcomes: { total: 0, generated: 0, noArticle: 0, timeout: 0, skipped: 0, error: 0, unknown: 0, byReason: {} },
+      coverHealth: {
+        observations: 60,
+        fallbacks: 0,
+        generated: 60,
+        fallbackRate: 0,
+        latestConsecutiveFallbacks: 0,
+        maxConsecutiveFallbacks: 0,
+        reasons: {},
+      },
       oversize: { runs: 0, maxEstimated: 0, limitsCrossed: [], distinctModels: 0, models: [] },
       // Lo stato "sano" del roster NON è zero modelli morti: è il livello del
       // censimento di nanako#380 (run 31823202761), 3 modelli ritirati su ~101
@@ -552,11 +618,72 @@ function healthy() {
       },
     },
     corpus: { available: true, total: 3845, duplicatePairs: [] },
+    coverQueue: {
+      available: true,
+      count: 0,
+      oldestRequestedAt: null,
+      oldestAgeHours: null,
+      statuses: {},
+    },
   };
 }
 
 const verdictFor = (m, id, section = null) =>
   evaluateConditions(m).find((v) => v.id === id && v.section === section);
+
+describe('collectCoverQueue — la coda è una misura fail-closed', () => {
+  test('un file assente è una coda vuota misurabile', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    try {
+      assert.deepEqual(collectCoverQueue(root, NOW), {
+        available: true,
+        count: 0,
+        oldestRequestedAt: null,
+        oldestAgeHours: null,
+        statuses: {},
+      });
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test("espone l'item più vecchio e la distribuzione degli stati", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    try {
+      fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'data/image-regeneration-queue.json'), JSON.stringify({
+        schema: 1,
+        items: [
+          { articleId: 'old', requestedAt: '2026-10-07T06:00:00.000Z', status: 'queued' },
+          { articleId: 'new', requestedAt: '2026-10-07T11:30:00.000Z', status: 'failed' },
+        ],
+      }));
+      const result = collectCoverQueue(root, Date.parse('2026-10-07T12:00:00.000Z'));
+      assert.equal(result.available, true);
+      assert.equal(result.count, 2);
+      assert.equal(result.oldestRequestedAt, '2026-10-07T06:00:00.000Z');
+      assert.equal(result.oldestAgeHours, 6);
+      assert.deepEqual(result.statuses, { queued: 1, failed: 1 });
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test('un requestedAt invalido non viene trasformato in una misura sana', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    try {
+      fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'data/image-regeneration-queue.json'), JSON.stringify({
+        schema: 1,
+        items: [{ articleId: 'broken', requestedAt: 'not-a-date', status: 'queued' }],
+      }));
+      const result = collectCoverQueue(root, NOW);
+      assert.equal(result.available, false);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+});
 
 describe('le condizioni sono SPENTE sulla normalità misurata', () => {
   test('nessuna condizione si accende sulla misura di riferimento', () => {
@@ -571,6 +698,35 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
     m.commits.lastArticleAt = NOW - 5.2 * H;
     assert.equal(verdictFor(m, 'generation-idle').firing, false);
     assert.ok(IDLE_HOURS > 5.2, 'IDLE_HOURS deve stare sopra il p99 misurato');
+  });
+
+  test('tre fallback consecutivi sono il bordo tollerato e non accendono', () => {
+    const m = healthy();
+    m.runs.coverHealth = {
+      ...m.runs.coverHealth,
+      observations: 20,
+      fallbacks: 3,
+      generated: 17,
+      fallbackRate: 3 / 20,
+      latestConsecutiveFallbacks: 3,
+      maxConsecutiveFallbacks: 3,
+      reasons: { 'provider-timeout': 3 },
+    };
+    assert.ok(COVER_FALLBACK_CONSECUTIVE_THRESHOLD > 3);
+    assert.equal(verdictFor(m, 'cover-fallback-health').firing, false);
+  });
+
+  test('una coda sotto le sei ore non accende il watchdog copertine', () => {
+    const m = healthy();
+    m.coverQueue = {
+      available: true,
+      count: 55,
+      oldestRequestedAt: '2026-10-07T10:00:00.000Z',
+      oldestAgeHours: 5.9,
+      statuses: { queued: 55 },
+    };
+    assert.equal(verdictFor(m, 'cover-fallback-health').firing, false);
+    assert.equal(COVER_QUEUE_MAX_AGE_HOURS, 6);
   });
 
   test('il p95 per sezione (7,45h svizzera) non accende section-dry', () => {
@@ -706,14 +862,17 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
   test('un errore commit conserva le misure e gli observer indipendenti', async () => {
     const runs = healthy().runs;
     const corpus = healthy().corpus;
+    const coverQueue = healthy().coverQueue;
     const result = await collectMeasurements('owner/repo', {
       commitLookback: 48, maxLogRuns: 1, runLookback: 12, now: () => NOW,
       collectCommitsFn: () => { throw new Error('commit-window collection failed: GitHub API unavailable before cutoff'); },
       collectRunLogsFn: async () => runs, collectCorpusFn: () => corpus,
+      collectCoverQueueFn: () => coverQueue,
     });
     assert.equal(result.measurements.commits.available, false);
     assert.equal(result.measurements.runs, runs);
     assert.equal(result.measurements.corpus, corpus);
+    assert.equal(result.measurements.coverQueue, coverQueue);
     assert.equal(exitCodeForCollectionError(result.commitCollectionError), 1);
   });
 });
@@ -735,6 +894,51 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     m.commits.lastArticleAt = null;
     const v = verdictFor(m, 'generation-idle');
     assert.equal(v.firing, true);
+  });
+
+  test("cover-fallback-health: quattro fallback consecutivi aprono l'allarme con la causa", () => {
+    const m = healthy();
+    m.runs.coverHealth = {
+      observations: 4,
+      fallbacks: 4,
+      generated: 0,
+      fallbackRate: 1,
+      latestConsecutiveFallbacks: 4,
+      maxConsecutiveFallbacks: 4,
+      reasons: {
+        'Codex broker rejected the request: Codex CLI returned an empty last message': 3,
+        'Codex broker timed out after 119999ms': 1,
+      },
+    };
+    const v = verdictFor(m, 'cover-fallback-health');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /fallback \*\*4\*\* \(100%\)/);
+    assert.match(v.body, /Codex broker rejected the request/);
+    assert.match(v.body, /article-cover-fallback\.mjs/);
+  });
+
+  test("cover-fallback-health: una coda vecchia di sei ore e mezza apre l'allarme", () => {
+    const m = healthy();
+    m.coverQueue = {
+      available: true,
+      count: 55,
+      oldestRequestedAt: '2026-10-07T04:45:22.263Z',
+      oldestAgeHours: 6.5,
+      statuses: { queued: 55 },
+    };
+    const v = verdictFor(m, 'cover-fallback-health');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /55\*\* item/);
+    assert.match(v.body, /6\.5h/);
+    assert.match(v.body, /queued=55/);
+  });
+
+  test('cover-fallback-health resta non misurabile se la coda non è leggibile', () => {
+    const m = healthy();
+    m.coverQueue = { available: false };
+    const v = verdictFor(m, 'cover-fallback-health');
+    assert.equal(v.available, false);
+    assert.equal(v.firing, false);
   });
 
   test('section-dry: svizzera ferma 17h mentre frontaliere ne pubblica 14 (2026-08-08→09)', () => {
@@ -1363,6 +1567,8 @@ describe('le costanti di soglia restano quelle misurate', () => {
     assert.ok(TOTAL_REJECTION_RATE >= 0.6 && TOTAL_REJECTION_RATE <= 0.78, 'col predicato sull\'esito (2026-08-14): massimo sul lato sano = 36% (frontaliere 9/25), lato rotto verso il 100%');
     assert.ok(TOTAL_REJECTION_MIN_GATE_RUNS >= 12, 'a campione 4 la condizione si accende a 3/4, e su un lato sano al 36% ci arriva per caso nel 13,6% delle passate; il gate gira 1,7-3,0 volte l\'ora per sezione, quindi 12 righe arrivano in 4-7h');
     assert.ok(OVERSIZE_MIN_MODELS >= 5, 'le run sane ne saltavano 1-2');
+    assert.ok(COVER_FALLBACK_CONSECUTIVE_THRESHOLD >= 4, 'tre fallback consecutivi sono il limite tollerato dichiarato dall\'issue');
+    assert.equal(COVER_QUEUE_MAX_AGE_HOURS, 6, 'la coda oltre sei ore deve essere osservabile');
     // Rimisurato dopo #184: le 11 coppie uscite dopo il gate #120 distano al
     // massimo 132 minuti (ronago), e fra 180 e 360 minuti il conteggio non si
     // muove (11 -> 11, e 72 -> 72 sul totale storico): la soglia sta all'inizio
@@ -1413,6 +1619,7 @@ function measureFromLogs(spec) {
   const s = summarizeRuns(logs.map(parseRunLog));
   m.runs.bySection = s.bySection;
   m.runs.oversize = s.oversize;
+  m.runs.coverHealth = s.coverHealth;
   return m;
 }
 

@@ -60,10 +60,10 @@ function generatedCatalogRecord() {
   };
 }
 
-function article(id) {
+function article(id, title = 'Titolo di prova') {
   return {
     id,
-    content: { it: { title: 'Titolo di prova' } },
+    content: { it: { title } },
   };
 }
 
@@ -77,7 +77,7 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
     record.sha256 = sha256File(file);
     appendGeneratedImageRecord(root, record);
 
-    const data = article('article-cover-fallback');
+    const data = article('article-cover-fallback', 'Catalog fallback test');
     const result = resolveArticleCoverFallback(data, {
       root,
       findCatalogImage: () => record.imageUrl,
@@ -97,6 +97,31 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
     assert.equal(queue.items[0].fallbackImage, record.imageUrl);
     assert.match(queue.items[0].reason, /HTTP 400/);
     assert.equal(imageRecordForPath(root, record.imageUrl, { strict: true }).kind, 'generated');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {
+  const root = tempRoot();
+  try {
+    const record = generatedCatalogRecord();
+    const file = path.join(root, 'public', record.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
+    record.sha256 = sha256File(file);
+    appendGeneratedImageRecord(root, record);
+
+    const data = article('article-cover-irrelevant', 'Aggressione turisti Como');
+    const result = resolveArticleCoverFallback(data, {
+      root,
+      findCatalogImage: () => record.imageUrl,
+      reason: 'Codex broker timed out after 119999ms',
+    });
+
+    assert.equal(result.source, 'static');
+    assert.equal(result.path, '/images/places/lugano-view.webp');
+    assert.equal(data._generatedImageRecord.scope, 'place');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
