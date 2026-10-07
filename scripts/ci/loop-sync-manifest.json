@@ -251,9 +251,9 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "12617640c1d85ce2",
-        "corpus": "12617640c1d85ce2",
-        "alignedAt": "2026-10-06"
+        "site": "075ef4fa2fc7d8f2",
+        "corpus": "075ef4fa2fc7d8f2",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -815,10 +815,10 @@
       "mode": "adapted",
       "reason": "Il check required e il job di esecuzione coincidono: `VITEST_EXECUTION_JOB_NAME` segue `VITEST_CHECK_NAME`, mantenendo il nome locale del corpus e il suo override CI_CHECK_NAME. Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: il sito si e' mosso una volta sola dalla baseline del 2026-09-03, con valerielinc-ops/frontaliere-si-o-no#7600, che porta la PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE` (lead a classe negata semplice + lookbehind `(?<!`) ` di un carattere); qui quella forma e' arrivata prima (#959) ed e' gia' stata superata da #1106, che ne chiude i due residui (il lookbehind di un carattere spegneva il gate su una label incollata al marker; due finding sulla stessa riga diventavano verdi). Non c'e' quindi niente da riportare in giu': il contenuto del sito e' un sottoinsieme di questo, e la baseline registra la lettura di entrambi i lati. DEBITO VERSO IL SITO, non chiudibile da qui: `main` del sito gira ancora la regex pre-#977, quindi quei due buchi sono aperti la'; la risalita deve nascere sul sito (il mirror va in una direzione sola e questo repo non ha una credenziale cross-repo in scrittura). Le altre differenze del file — `GENERATOR_CI_JOB_NAME`, `GENERATOR_CI_TRIGGER_PATHS`, `REVIEWER_BOT_LOGIN_RE`/`_JQ` come prefisso, la lista `REVIEW_WORKFLOW_DRIFT_FILES` puntata a `tests.yml` — sono adattamenti gia' in essere alla baseline, non movimento del sito: il file NON differisce piu' di una riga sola, e dirlo qui evita che il prossimo lettore legga il resto come drift da riparare.",
       "baseline": {
-        "site": "e61df9c2c8b1e0ed",
-        "corpus": "00b20026ad92a440",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:10.423Z"
+        "site": "497acb61a9247225",
+        "corpus": "76c5012c2348c6d7",
+        "alignedAt": "2026-10-07",
+        "forcedAt": "2026-10-07T03:07:39.744Z"
       }
     },
     {
@@ -949,9 +949,9 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "896a7c71ea559b4c",
-        "corpus": "896a7c71ea559b4c",
-        "alignedAt": "2026-10-06"
+        "site": "aaa63d8647c14af9",
+        "corpus": "aaa63d8647c14af9",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -959,9 +959,9 @@
       "mode": "identical",
       "reason": "Finestra `created` per gli elenchi di run filtrati per branch (`createdSince`, `createdSinceFilter`, `createdSinceQuery`, `newestFirst`): modulo senza import, copiato byte per byte dal sito. E' registrato PRIMA del suo importatore: `scripts/ci/close-recovered-failure-issues.mjs` e' `identical` e sul sito lo importa dalla PR 12016, e il gate del sito sugli import dei gemelli identici rifiuta un importatore il cui modulo non e' dichiarato qui (il trasporto porterebbe l'importatore senza il modulo: ERR_MODULE_NOT_FOUND, caso della issue 1890). `generator/tests/run-listing-window.test.mjs` ne prova il comportamento in questo repository.",
       "baseline": {
-        "site": "55e66ea9b5ef172e",
-        "corpus": "55e66ea9b5ef172e",
-        "alignedAt": "2026-10-06"
+        "site": "6c65f857f24a2dd7",
+        "corpus": "6c65f857f24a2dd7",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1110,9 +1110,10 @@
       "mode": "adapted",
       "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito (baseline e605a5b7b6996af5, 11025 byte) non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico.",
       "baseline": {
-        "site": "e605a5b7b6996af5",
-        "corpus": "fa37b5e14d8d11f3",
-        "alignedAt": "2026-09-18"
+        "site": "d8b6d197bf4cd659",
+        "corpus": "1cd57d5c632b3fcb",
+        "alignedAt": "2026-10-07",
+        "forcedAt": "2026-10-07T03:07:41.860Z"
       }
     },
     {
@@ -1432,10 +1433,10 @@
       "mode": "adapted",
       "reason": "Helper del gate con la variante del corpus; la copia locale conserva il contratto di classificazione ma segue le dipendenze e le suite Node del pubblicatore, quindi non va trattata come file mirror-locked.",
       "baseline": {
-        "site": "93898e95cadccdaf",
-        "corpus": "0d1711b87e43ea41",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:13.849Z"
+        "site": "1b6ede8f9538720e",
+        "corpus": "85875eaac36db772",
+        "alignedAt": "2026-10-07",
+        "forcedAt": "2026-10-07T03:07:41.991Z"
       }
     },
     {
@@ -1452,9 +1453,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a9c64aebc070caef",
-        "corpus": "a9c64aebc070caef",
-        "alignedAt": "2026-10-05"
+        "site": "f702e538f96f43bd",
+        "corpus": "f702e538f96f43bd",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2201,9 +2202,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "e9b863164b45be21",
-        "corpus": "e9b863164b45be21",
-        "alignedAt": "2026-10-04"
+        "site": "633d31fbe8995e1f",
+        "corpus": "633d31fbe8995e1f",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2221,9 +2222,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "50c9061065249496",
-        "corpus": "50c9061065249496",
-        "alignedAt": "2026-10-06"
+        "site": "9633813da0529c82",
+        "corpus": "9633813da0529c82",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2352,6 +2353,16 @@
         "corpus": "720ed7bd9d3a345c",
         "alignedAt": "2026-10-06",
         "forcedAt": "2026-10-06T22:32:19.685Z"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/atomic-write-file.mjs",
+      "mode": "corpus-only",
+      "reason": "Punto comune di scrittura atomica per i producer del corpus: usa un temporaneo fratello e `renameSync` per evitare file troncati dopo un'interruzione. Non esiste un gemello sul sito, che non esegue questi writer del generatore, quindi resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "adb58a76191e9873",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2520,7 +2531,7 @@
     {
       "path": "generator/scripts/lib/source-copy-guard.mjs",
       "mode": "corpus-only",
-      "reason": "Guardia pura anti-copia del testo generato: normalizza it/de/fr/en, esclude al massimo due citazioni attribuite di 25 parole e blocca overlap consecutivi di 12 parole. Il writer e il suo registro appartengono al generatore del corpus; non esiste un gemello sul sito.",
+      "reason": "Guardia pura anti-copia del testo generato: normalizza it/de/fr/en, ammette al massimo due citazioni attribuite di 25 parole, esenta solo sequenze fino a 24 parole composte soprattutto da nomi/denominazioni ufficiali/date/cifre e in modalità repair riformula i paragrafi mirati prima della condensa; il writer e il suo registro appartengono al generatore del corpus e non esiste un gemello sul sito.",
       "baseline": {
         "site": null,
         "corpus": null,
@@ -4395,9 +4406,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0b80c7dee45fa550",
-        "corpus": "0b80c7dee45fa550",
-        "alignedAt": "2026-10-05"
+        "site": "adc6f92b284d1b2c",
+        "corpus": "adc6f92b284d1b2c",
+        "alignedAt": "2026-10-07"
       }
     },
     {

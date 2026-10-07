@@ -44,6 +44,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -236,7 +237,7 @@ function main() {
       written += 1;
       const delta = current.length - next.length;
       console.error(`   ${apply ? '💾' : '👀'} ${rel}: −${delta} caratteri`);
-      if (apply) fs.writeFileSync(full, next);
+      if (apply) writeFileAtomic(full, next);
     }
     console.error(`\n${apply ? 'Scritti' : 'Da scrivere'}: ${written} file`);
   }

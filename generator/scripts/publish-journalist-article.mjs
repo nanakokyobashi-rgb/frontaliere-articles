@@ -74,16 +74,16 @@ import {
   deriveAndSanitizeArticleSlugs,
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
+  assertArticlePassesFactualityGates,
   generateArticleImage,
+  repairGeneratedArticleSourceCopy,
+  refreshSourceCopyDerivedMetadata,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
 import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import {
-  evaluateSourceCopy,
   getSourceCopyMode,
-  logSourceCopyVerdict,
-  sourceCopyModeBlocks,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
@@ -223,26 +223,36 @@ function journalistSourceText(doc) {
         : '';
 }
 
-function assertJournalistSourceCopySafe(data, sourceText) {
+async function assertJournalistSourceCopySafe(data, sourceText) {
   if (!sourceText.trim()) return null;
   const sourceCopyMode = getSourceCopyMode();
-  const verdicts = ['it', 'en', 'de', 'fr']
-    .filter((locale) => data.content[locale])
-    .map((locale) => {
-      const verdict = evaluateSourceCopy(sourceText, data.content[locale], { locale });
-      logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode);
-      return verdict;
-    });
-  const worst = verdicts.reduce((current, verdict) => verdict.maxWords > current.maxWords ? verdict : current, verdicts[0]);
-  console.error(`[source-copy] article=${data.id} max_overlap=${worst.maxWords} threshold=${worst.threshold} mode=${sourceCopyMode} locales=${verdicts.map((v) => v.locale).join(',')}`);
-  const unsafe = verdicts.find((verdict) => !verdict.safe);
-  if (unsafe && sourceCopyModeBlocks(sourceCopyMode)) {
-    throw new SourceCopyError(
-      `Anti-copia fallita per l'articolo redazionale (${unsafe.locale}): overlap massimo ${unsafe.maxWords} parole`,
-      unsafe,
+  const verdicts = [];
+  let changed = false;
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    if (!data.content[locale]) continue;
+    const result = await repairGeneratedArticleSourceCopy(
+      data.content[locale],
+      sourceText,
+      { articleId: data.id, locale, mode: sourceCopyMode },
     );
+    data.content[locale] = result.article;
+    verdicts.push(result.verdict);
+    changed = changed || result.changed;
+    if (result.rejected) {
+      throw new SourceCopyError(
+        `Anti-copia strutturale per l'articolo redazionale (${locale}): overlap massimo ${result.verdict.maxWords} parole`,
+        result.verdict,
+        { retries: result.passes },
+      );
+    }
   }
-  return worst;
+  return {
+    changed,
+    verdict: verdicts.reduce(
+      (current, verdict) => verdict.maxWords > current.maxWords ? verdict : current,
+      verdicts[0] || null,
+    ),
+  };
 }
 
 function setHeroProvenance(data, imagePath, provenance) {
@@ -400,10 +410,11 @@ async function processDoc(db, FieldValue, docSnap) {
 
     await deriveJournalistContent(data, doc.content.it.body);
     const sourceText = journalistSourceText(doc);
-    assertJournalistSourceCopySafe(data, sourceText);
+    const initialSourceCopy = await assertJournalistSourceCopySafe(data, sourceText);
 
     console.log('  🪪 optimizing SEO metadata (optimizeSeoMetadata)...');
-    optimizeSeoMetadata(data);
+    if (initialSourceCopy?.changed) refreshSourceCopyDerivedMetadata(data);
+    else optimizeSeoMetadata(data);
 
     console.log('  ✂️  sanitizing bold formatting (sanitizeBoldFormatting, pre-translation)...');
     sanitizeBoldFormatting(data);
@@ -444,6 +455,12 @@ async function processDoc(db, FieldValue, docSnap) {
     console.log('  🌍 translating (translateArticle)...');
     await translateArticle(data);
 
+    // Repair translated paragraphs before any final fabrication, slug, CTA or
+    // registration gate. A rewrite after those checks would be able to add a
+    // fabricated reference or stale metadata after the checks had passed.
+    const translatedSourceCopy = await assertJournalistSourceCopySafe(data, sourceText);
+    if (translatedSourceCopy?.changed) refreshSourceCopyDerivedMetadata(data);
+
     // Same cross-locale fabrication check the AI generation path runs after
     // its own translateArticle() (create-article.mjs's "Step 3b.1") —
     // assertNoFabricatedReferences() above only ever saw the IT draft,
@@ -479,7 +496,6 @@ async function processDoc(db, FieldValue, docSnap) {
 
     console.log('  🔗 enforcing internal links (enforceStrongInternalLinks)...');
     enforceStrongInternalLinks(data);
-    assertJournalistSourceCopySafe(data, sourceText);
 
     console.log('  📂 registering article files (registerArticleFiles)...');
     // registerArticleFiles() derives + sanitizes data.slugs AND builds the
@@ -490,7 +506,26 @@ async function processDoc(db, FieldValue, docSnap) {
     // in fact already drifted — it omitted the /en //de //fr locale prefix
     // the router actually uses, producing wrong links in this "article is
     // live" email/Firestore field).
-    const { slugs, publishedUrls } = await registerArticleFiles(data);
+    const sourceUrl = typeof doc.sourceUrl === 'string'
+      ? doc.sourceUrl
+      : typeof doc.source?.url === 'string'
+        ? doc.source.url
+        : '';
+    Object.defineProperties(data, {
+      _sourceUrl: { value: sourceUrl, configurable: true },
+      _sourceText: { value: sourceText, configurable: true },
+    });
+    let registration;
+    try {
+      // Explicit source context closes the journalist-only gap before the
+      // shared registrar repeats the same gate on its write path.
+      assertArticlePassesFactualityGates(data, { sourceUrl, sourceText });
+      registration = await registerArticleFiles(data);
+    } finally {
+      delete data._sourceUrl;
+      delete data._sourceText;
+    }
+    const { slugs, publishedUrls } = registration;
 
     await docSnap.ref.update({
       status: 'published',
