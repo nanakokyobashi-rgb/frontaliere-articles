@@ -38,6 +38,14 @@ import {
   RUN_SELECTION_STATES,
   latestCompletedRunSelectionByName,
 } from './lib/vitestCheck.mjs';
+import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
+import {
+  TRANSPORT_BRANCH_RE,
+  TRANSPORT_WORKFLOW_AUTHOR,
+  isKnownSiteIssueUrl,
+  isIdenticalTwinTransportPr,
+  parseTransportRoutingEvidence,
+} from './lib/transport-pr.mjs';
 
 const TESTS_WORKFLOW_PATH = '.github/workflows/tests.yml';
 const TESTS_WORKFLOW_EVENT = 'pull_request';
@@ -487,6 +495,77 @@ export function reviewGateEvidenceDecision({
   return { ...verified, reason: carry.reason, codexCarryForward: true };
 }
 
+function sameStringSet(left, right) {
+  const a = new Set((Array.isArray(left) ? left : []).map(String));
+  const b = new Set((Array.isArray(right) ? right : []).map(String));
+  return a.size === b.size && [...a].every((value) => b.has(value));
+}
+
+/**
+ * Eccezione stretta per una review rossa della PR generata dal trasporto.
+ * L'attestazione viene pubblicata dal review-gate, ma il native gate rilegge
+ * qui identità, HEAD, perimetro e URL delle issue: il testo del commento non
+ * è da solo una delega di merge.
+ */
+export function transportIdenticalRoutingDecision({
+  pr,
+  review,
+  evidence,
+  transportPr,
+} = {}) {
+  const deny = (reason) => ({ allow: false, reason });
+  if (!transportPr?.transport) return deny('PR non attestata come trasporto identical');
+  if (!evidence || typeof evidence !== 'object' || Array.isArray(evidence)) {
+    return deny('attestazione routing identical del trasporto assente');
+  }
+  if (evidence.version !== 1
+      || evidence.transportPr !== true
+      || evidence.transportException !== true) {
+    return deny('attestazione routing identical del trasporto incompleta');
+  }
+  const head = String(pr?.headRefOid || '');
+  if (!/^[0-9a-f]{40}$/iu.test(head) || review?.commit_id !== head) {
+    return deny('review routing identical non legata alla HEAD corrente');
+  }
+  if (evidence.headSha !== head) return deny('HEAD dell’attestazione routing identical diversa');
+  const reviewId = reviewIdKey(review?.id);
+  if (!reviewId || evidence.reviewId !== reviewId) {
+    return deny('review dell’attestazione routing identical diversa');
+  }
+  if (!['COMMENTED', 'APPROVED'].includes(String(review?.state || '').toUpperCase())) {
+    return deny('stato della review non approvabile per il routing identical');
+  }
+  REDFLAG_IMPORTANT_RE.lastIndex = 0;
+  if (!REDFLAG_IMPORTANT_RE.test(String(review?.body || ''))) {
+    return deny('la review non contiene un 🔴 Important instradabile');
+  }
+  const allOpenFindingIds = [...new Set((evidence.allOpenFindingIds || []).map(String))].filter(Boolean);
+  const routed = Array.isArray(evidence.routed) ? evidence.routed : [];
+  const routedFindingIds = [...new Set((evidence.routedFindingIds || []).map(String))].filter(Boolean);
+  if (allOpenFindingIds.length === 0
+      || routed.length === 0
+      || !sameStringSet(allOpenFindingIds, routedFindingIds)) {
+    return deny('non tutti i finding aperti hanno un routing attestato');
+  }
+  const transported = new Set(transportPr.transportedFiles || []);
+  if (transported.size === 0) return deny('nessun file identical trasportato attestato');
+  for (const item of routed) {
+    if (!item || !allOpenFindingIds.includes(String(item.findingId))
+        || !transported.has(String(item.corpusPath))
+        || !isKnownSiteIssueUrl(item.issueUrl)) {
+      return deny('perimetro o issue URL del routing identical non verificabile');
+    }
+  }
+  const derivedIds = [...new Set(routed.map((item) => String(item?.findingId || '')).filter(Boolean))];
+  if (!sameStringSet(derivedIds, routedFindingIds)) {
+    return deny('finding IDs dell’attestazione routing identical incoerenti');
+  }
+  return {
+    allow: true,
+    reason: 'transport-identical-routed-findings: tutti i rilievi aperti sono instradati a issue del sito',
+  };
+}
+
 /**
  * The extra proof a Codex fallback LGTM on an earlier commit needs (#1870).
  *
@@ -640,7 +719,17 @@ export function evaluateNativeAutoMerge({
       inProgressWorkflowRunId,
     })
     : { allow: false, reason: 'review raw già approvante' };
-  if (review && !reviewIsApproved(review) && !reviewGateException.allow) {
+  const transportException = review && !reviewIsApproved(review)
+    ? transportIdenticalRoutingDecision({
+      pr,
+      review,
+      evidence: reviewGateEvidence?.transportRouting?.evidence,
+      transportPr: reviewGateEvidence?.transportRouting?.disposition,
+    })
+    : { allow: false, reason: 'review raw già approvante' };
+  if (review && !reviewIsApproved(review)
+      && !reviewGateException.allow
+      && !transportException.allow) {
     if (isCodexCarryForwardCandidate(review, pr.headRefOid)) {
       return {
         allow: false,
@@ -661,6 +750,8 @@ export function evaluateNativeAutoMerge({
   const approval = review || verifiedTestOnlyReview;
   const reviewScope = testOnlyApproval
     ? 'tests-only review verificata sul current HEAD'
+    : transportException.allow
+    ? transportException.reason
     : reviewGateException.codexCarryForward
     ? reviewGateException.reason
     : reviewGateException.allow
@@ -841,6 +932,59 @@ function loadReviews(repo, pr) {
   });
 }
 
+let transportManifestCache = null;
+
+function loadMainTransportManifest(repo) {
+  if (transportManifestCache?.repo === repo) return transportManifestCache.manifest;
+  const response = ghReadJson([
+    'api', `repos/${repo}/contents/scripts/ci/loop-sync-manifest.json?ref=main`,
+  ]);
+  if (response?.encoding !== 'base64' || typeof response.content !== 'string') {
+    throw new Error('manifest identical del main non leggibile');
+  }
+  const manifest = JSON.parse(Buffer.from(response.content.replace(/\s/gu, ''), 'base64').toString('utf8'));
+  transportManifestCache = { repo, manifest };
+  return manifest;
+}
+
+function loadTransportRoutingEvidence(repo, prNumber, head, review) {
+  try {
+    if (!review || review.commit_id !== head) return null;
+    const metadata = ghReadJson(['api', `repos/${repo}/pulls/${prNumber}`]);
+    const author = metadata?.author?.login || metadata?.user?.login || '';
+    const branch = metadata?.headRefName || metadata?.head?.ref || '';
+    if (author !== TRANSPORT_WORKFLOW_AUTHOR || !TRANSPORT_BRANCH_RE.test(String(branch))) return null;
+    const manifest = loadMainTransportManifest(repo);
+    const files = fetchPrFiles(Number(prNumber), ghForTestOnlyReview, repo);
+    const disposition = isIdenticalTwinTransportPr({
+      pr: metadata,
+      repository: repo,
+      files: files.files,
+      filesComplete: files.complete,
+      manifest,
+    });
+    if (!disposition.transport) return null;
+    const comments = flattenPages(ghReadJson([
+      'api', `repos/${repo}/issues/${prNumber}/comments`, '--paginate', '--slurp',
+    ]));
+    const candidates = comments
+      .filter((comment) => comment?.user?.login === 'github-actions[bot]')
+      .flatMap((comment) => parseTransportRoutingEvidence(comment.body));
+    for (const evidence of candidates.reverse()) {
+      const decision = transportIdenticalRoutingDecision({
+        pr: { headRefOid: head },
+        review,
+        evidence,
+        transportPr: disposition,
+      });
+      if (decision.allow) return { evidence, disposition };
+    }
+  } catch {
+    // Un'eccezione non dimostrata mantiene il gate normale e fail-closed.
+  }
+  return null;
+}
+
 /**
  * `filter=all` keeps every attempt: GitHub's default `latest` view hides a
  * green attempt once the same check is rerun, and the reviewed-commit proof of
@@ -896,11 +1040,15 @@ function loadCodexCarryForwardInputs(repo, prNumber, review) {
 
 function loadReviewGateEvidence(repo, prNumber, head, checkRuns, review) {
   if (!review || reviewIsApproved(review)) return null;
+  const transportRouting = loadTransportRoutingEvidence(repo, prNumber, head, review);
+  const withTransport = (value) => transportRouting
+    ? { ...(value || {}), transportRouting }
+    : value;
   const checkDecision = requiredVitestDecision(checkRuns, head);
-  if (!checkDecision.allow) return null;
+  if (!checkDecision.allow) return withTransport(null);
   const check = latestRequiredVitestCheck(checkRuns, head);
   const location = parseActionsJobUrl(check?.details_url, repo);
-  if (!check || !location || !reviewIdKey(review.id)) return null;
+  if (!check || !location || !reviewIdKey(review.id)) return withTransport(null);
   const workflow = ghReadJson([
     'api', `repos/${repo}/actions/runs/${location.runId}`,
   ]);
@@ -913,8 +1061,8 @@ function loadReviewGateEvidence(repo, prNumber, head, checkRuns, review) {
     workflow,
     job,
   };
-  if (!isCodexCarryForwardCandidate(review, head)) return evidence;
-  return { ...evidence, ...loadCodexCarryForwardInputs(repo, prNumber, review) };
+  if (!isCodexCarryForwardCandidate(review, head)) return withTransport(evidence);
+  return withTransport({ ...evidence, ...loadCodexCarryForwardInputs(repo, prNumber, review) });
 }
 
 function positiveIntegerFromEnv(value) {

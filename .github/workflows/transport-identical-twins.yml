@@ -87,23 +87,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          MANIFEST_PATH: scripts/ci/loop-sync-manifest.json
         run: |
-          # `set -e`: se la chiamata API fallisce lo step esce ROSSO invece di
-          # contare 0 e aprire una copia in piu'. Un guard che non ha potuto
-          # guardare non e' un guard verde.
           set -euo pipefail
-          # `head.repo.full_name == env.REPO`: su una PR da un FORK `head.ref` non
-          # e' qualificato, quindi chiunque puo' aprire un branch chiamato come
-          # il nostro e far contare 1 a questo guard — che poi si spegnerebbe
-          # da solo per sempre. Il prefisso e' un nome, non un permesso.
-          # Si serializza il repo head insieme al branch: jq `env.REPO` non è
-          # affidabile in questo contesto, mentre awk confronta il valore già
-          # uscito dall'API senza lasciare passare fork con lo stesso branch.
-          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.repo.full_name, .head.ref] | @tsv' |
-            awk -F '\t' -v repo="$REPO" '$1 == repo { print $2 }' > /tmp/open-prs.txt
-          OPEN=$(grep -c '^transport/identical-twins' /tmp/open-prs.txt || true)
-          echo "open_transports=$OPEN" >> "$GITHUB_OUTPUT"
-          if [ "$OPEN" != "0" ]; then
+          result=$(node scripts/ci/transport-identical-twins-guard.mjs)
+          printf '%s\n' "$result"
+          open=$(printf '%s' "$result" | jq -er '.openTransports')
+          echo "open_transports=$open" >> "$GITHUB_OUTPUT"
+          if [ "$open" != "0" ]; then
             echo "Una PR di trasporto e' gia' aperta — niente di nuovo oggi."
           fi
 

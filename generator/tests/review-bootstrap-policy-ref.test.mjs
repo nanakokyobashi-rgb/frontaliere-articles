@@ -141,12 +141,14 @@ test('i moduli si scaricano dalla PUNTA di main, non da base.sha', () => {
   const { status, output, urls } = runBootstrap();
   assert.equal(status, 0, `il bootstrap doveva riuscire:\n${output}`);
   const requested = urls.split('\n').filter((line) => line.startsWith('URL '));
-  // Il manifest PRIMA, poi esattamente i moduli che elenca: la lista non la
-  // dice piu' lo YAML della PR.
-  assert.equal(requested.length, FAKE_MANIFEST.modules.length + 1,
-    `richieste attese: il manifest piu' i suoi moduli (${requested.length})`);
+  // Il manifest di bootstrap PRIMA, poi il manifest identical trusted e i
+  // moduli elencati: nessuna delle due liste viene dal checkout della PR.
+  assert.equal(requested.length, FAKE_MANIFEST.modules.length + 2,
+    `richieste attese: i due manifest piu' i moduli (${requested.length})`);
   assert.ok(requested[0].endsWith('scripts/ci/review-gate-bootstrap-manifest.json'),
     'il manifest deve essere la PRIMA cosa letta dal ref trusted');
+  assert.ok(requested[1].endsWith('scripts/ci/loop-sync-manifest.json'),
+    'il perimetro identical deve arrivare dallo stesso ref trusted');
   for (const line of requested) {
     assert.ok(line.includes(TIP_SHA),
       `un modulo e' stato chiesto a un ref diverso dalla punta di main: ${line}`);

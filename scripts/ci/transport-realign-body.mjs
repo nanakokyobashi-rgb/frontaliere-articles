@@ -41,6 +41,9 @@ export const MANIFEST_PATH = 'scripts/ci/loop-sync-manifest.json';
  */
 export const TRANSPORT_BULLET_RE = /^- (`+)(?!`)([^\n]*?[^`\n])\1(?!`) .*?\((?:site )?sha256 `([0-9a-fA-F]{16}|[0-9a-fA-F]{64})`\)[^\S\n]*$/gm;
 
+/** Riga del body per una baseline riattestata senza file trasportati. */
+export const CONVERGED_BULLET_RE = /^- (`+)(?!`)([^\n]*?[^`\n])\1(?!`): baseline riattestata, i due lati si sono mossi e coincidono già byte per byte \(hash `([0-9a-fA-F]{16}|[0-9a-fA-F]{64})`\)[^\S\n]*$/gm;
+
 /** Code span CommonMark che rilegge esattamente `text`. */
 export function markdownCodeSpan(text) {
   const value = String(text);
@@ -74,7 +77,8 @@ export function transportBulletLine({ path: filePath, sitePath, to }) {
  * nella PR). Volutamente FUORI dal formato `(site sha256 ...)`: il realign
  * post-merge pretende che ogni path citato così sia fra i file della PR, e un
  * convergente non lo è mai — la sua riga resta leggibile per chi rivede, ma
- * invisibile a `parseTransportBullets`.
+ * invisibile a `parseTransportBullets`, ma leggibile dal guard che deve
+ * confrontare anche le baseline dei convergenti mentre la PR resta aperta.
  */
 export function convergedBulletLine({ path: filePath, hash }) {
   return '- ' + markdownCodeSpan(filePath)
@@ -155,6 +159,15 @@ export function normalizeSiteHash(value) {
 export function parseTransportBullets(body) {
   const bullets = [];
   for (const match of String(body || '').matchAll(TRANSPORT_BULLET_RE)) {
+    bullets.push({ path: decodeCodeSpanContent(match[2]), siteHash: normalizeSiteHash(match[3]) });
+  }
+  return bullets;
+}
+
+/** Le attestazioni `both-moved-converged`, usate dal guard pre-merge. */
+export function parseConvergedBullets(body) {
+  const bullets = [];
+  for (const match of String(body || '').matchAll(CONVERGED_BULLET_RE)) {
     bullets.push({ path: decodeCodeSpanContent(match[2]), siteHash: normalizeSiteHash(match[3]) });
   }
   return bullets;

@@ -211,6 +211,8 @@ jobs:
             fi
             download_and_check \
               'scripts/ci/lib/constants.mjs' "$helper_dir/lib/constants.mjs"
+            download_and_check \
+              'scripts/ci/lib/transport-pr.mjs' "$helper_dir/lib/transport-pr.mjs"
             if ! download_and_check \
               'scripts/ci/report-rate-limit-budget.mjs' "$helper_dir/report-rate-limit-budget.mjs"; then
               echo '::warning::Rate-limit budget helper non disponibile; il gate resta attivo senza summary.'
