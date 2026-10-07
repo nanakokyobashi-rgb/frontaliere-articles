@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { getKeyFactsHeading, getTldrHeading } from '../scripts/lib/ai-search-template.mjs';
 
 const ROOT = path.resolve(process.env.CORPUS_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'));
 const SLUG = 'lamal-vs-ssn-decisione';
@@ -126,6 +127,74 @@ for (const locale of LOCALES) {
     }
   });
 }
+
+/** Importi con due decimali, nel formato di qualunque lingua, resi come `1257.00`. */
+function amounts(text) {
+  const found = new Set();
+  for (const match of text.matchAll(/\d{1,3}(?:[.,\u0020\u00a0\u202f’']\d{3})*[.,]\d{2}(?!\d)/g)) {
+    const raw = match[0];
+    found.add(raw.slice(0, -3).replace(/\D/g, '') + '.' + raw.slice(-2));
+  }
+  return found;
+}
+
+// Le cifre derivate si rifanno dalla tabella, non si scrivono a mano: la prima
+// stesura dava come «massimo» della famiglia tipo il conto fatto sul premio
+// adulti piu' alto (Concordia), mentre presso lo stesso assicuratore due
+// adulti e due minorenni pagano di piu' con Assura.
+for (const locale of LOCALES) {
+  test(locale + ': minimo e massimo della famiglia tipo sono quelli che la tabella da', () => {
+    const bodies = loadBody(locale);
+    const rows = bodies.body1
+      .split('\n')
+      .filter((line) => line.startsWith('|'))
+      .map((line) => line.split('|').map((cell) => cell.trim()).filter(Boolean))
+      .filter((cells) => INSURERS.includes(cells[0]));
+    assert.equal(rows.length, INSURERS.length, locale + ': una riga di premi per assicuratore');
+    const amount = (cell) => Number([...amounts(cell)][0]);
+    const totals = rows.map((cells) => 2 * amount(cells[1]) + 2 * amount(cells[3]));
+    assert.ok(totals.every(Number.isFinite), locale + ': premi adulti e minorenni leggibili in ogni riga');
+    const written = amounts(Object.values(bodies).join('\n'));
+    for (const total of [Math.min(...totals), Math.max(...totals)]) {
+      assert.ok(
+        written.has(total.toFixed(2)),
+        locale + ': il testo deve riportare ' + total.toFixed(2) + ' (2 adulti + 2 minorenni presso lo stesso assicuratore)',
+      );
+    }
+  });
+}
+
+// I due riquadri iniziali si riconoscono dal titolo: il motore e i gate cercano
+// quelli del template. La prima stesura li aveva chiamati «In brief», «Kurz
+// erklärt» e «Faits essentiels».
+for (const locale of LOCALES) {
+  test(locale + ': i due riquadri iniziali hanno i titoli del template', () => {
+    const headings = loadBody(locale).body1.split('\n').filter((line) => line.startsWith('## '));
+    assert.deepEqual(headings.slice(0, 2), [getTldrHeading(locale), getKeyFactsHeading(locale)]);
+  });
+}
+
+// La voce SEO porta un secondo blocco FAQ scritto a mano. La pagina pubblica
+// le FAQ del body, ma quel blocco resta nel sorgente e nell'API: la prima
+// stesura di questo refresh lo aveva lasciato con i premi «CHF 200-600», il
+// contributo del 7,5%, la soglia di reddito e la scelta «che si cambia con un
+// nuovo rapporto di lavoro».
+test('la voce SEO della guida non porta i fatti smentiti nel suo blocco FAQ', () => {
+  const seo = read('content/seo/seo-blog-3.ts');
+  const start = seo.indexOf("'blog-" + SLUG + "': {");
+  assert.ok(start >= 0, 'voce SEO della guida non trovata in content/seo/seo-blog-3.ts');
+  const rest = seo.slice(start + 1);
+  const next = rest.search(/\n\s*'blog-[a-z0-9-]+': \{/);
+  const entry = next >= 0 ? rest.slice(0, next) : rest;
+  assert.match(entry, /"@type": "FAQPage"/, 'blocco FAQ presente');
+  assert.match(entry, /CHF 279,00[\s\S]*CHF 487,20/, 'premi adulti 2026');
+  assert.doesNotMatch(entry, /CHF 200-600|200 a CHF 600/, 'premi senza riscontro');
+  assert.doesNotMatch(entry, /7[.,]5\s?%/, 'contributo del 7,5%');
+  assert.doesNotMatch(entry, /5\.000\/mese/, 'soglia di reddito');
+  assert.doesNotMatch(entry, /2\.500/, 'franchigia opzionale');
+  assert.doesNotMatch(entry, /nuovo rapporto di lavoro|cambio di cantone o variazioni/i, 'scelta presentata come modificabile');
+  assert.match(entry, /definitiva/, 'la scelta e definitiva');
+});
 
 test('le quattro lingue hanno struttura identica per ogni campo', () => {
   const all = Object.fromEntries(LOCALES.map((locale) => [locale, loadBody(locale)]));

@@ -1,25 +1,25 @@
 const bodyLamalVsSsnDecisione: Record<string, string> = {
- 'blog.article.lamal-vs-ssn-decisione.body1': `## Kurz erklärt
-- **Optionsrecht**: Wenn du in Italien wohnst und in der Schweiz arbeitest, wählst du innerhalb von drei Monaten ab Arbeitsbeginn zwischen der Schweizer LAMal und dem italienischen Gesundheitsdienst. Die Wahl ist endgültig.
-- **LAMal-Prämien**: 2026 zahlt ein Erwachsener **CHF 279,00 bis CHF 487,20** pro Monat: eine Prämie je Krankenkasse, ohne wählbare Franchisen oder Modelle.
+ 'blog.article.lamal-vs-ssn-decisione.body1': `## Auf einen Blick
+- **Optionsrecht**: Wenn du in Italien wohnst und in der Schweiz arbeitest, wählst du innerhalb von drei Monaten ab Arbeitsbeginn zwischen der Schweizer KVG und dem italienischen Gesundheitsdienst. Die Wahl ist endgültig.
+- **KVG-Prämien**: 2026 zahlt ein Erwachsener **CHF 279,00 bis CHF 487,20** pro Monat: eine Prämie je Krankenkasse, ohne wählbare Franchisen oder Modelle.
 - **Italienischer Gesundheitsdienst**: «neue» Grenzgänger zahlen keinen spezifischen Gesundheitsbeitrag; für «alte» Grenzgänger sieht das Gesetz eine Beteiligung von **3 % bis 6 %** des Nettolohns vor, von **30 bis 200 Euro** pro Monat.
-- **Behandlung**: Mit der LAMal kannst du dich in der Schweiz und in Italien behandeln lassen; mit dem italienischen Gesundheitsdienst erhältst du während des Aufenthalts in der Schweiz notwendige Behandlungen.
+- **Behandlung**: Mit der KVG kannst du dich in der Schweiz und in Italien behandeln lassen; mit dem italienischen Gesundheitsdienst erhältst du während des Aufenthalts in der Schweiz notwendige Behandlungen.
 
-## Die wichtigsten Fakten
-- **Optionsrecht**: Antrag innerhalb von drei Monaten ab Arbeitsbeginn bei der kantonalen Behörde (im Tessin beim Istituto delle assicurazioni sociali); ohne Antrag bleibt die LAMal-Pflicht bestehen.
+## Wichtige Fakten
+- **Optionsrecht**: Antrag innerhalb von drei Monaten ab Arbeitsbeginn bei der kantonalen Behörde (im Tessin beim Istituto delle assicurazioni sociali); ohne Antrag bleibt die KVG-Pflicht bestehen.
 - **Endgültige Wahl**: Ein Arbeitgeber- oder Kantonswechsel sowie eine Änderung von Einkommen oder Prämie öffnen sie nicht neu.
-- **LAMal-Prämien 2026, Erwachsene**: CHF 279,00 bis CHF 487,20 pro Monat ohne Unfalldeckung (CHF 300,00 bis CHF 513,30 mit Unfalldeckung).
-- **LAMal-Prämien 2026, junge Erwachsene und Minderjährige**: CHF 239,60 bis CHF 475,30 sowie CHF 64,20 bis CHF 203,70 pro Monat.
-- **LAMal-Prämien 2027, Erwachsene**: CHF 306,90 bis CHF 509,40 pro Monat ohne Unfalldeckung.
+- **KVG-Prämien 2026, Erwachsene**: CHF 279,00 bis CHF 487,20 pro Monat ohne Unfalldeckung (CHF 300,00 bis CHF 513,30 mit Unfalldeckung).
+- **KVG-Prämien 2026, junge Erwachsene und Minderjährige**: CHF 239,60 bis CHF 475,30 sowie CHF 64,20 bis CHF 203,70 pro Monat.
+- **KVG-Prämien 2027, Erwachsene**: CHF 306,90 bis CHF 509,40 pro Monat ohne Unfalldeckung.
 - **Kostenbeteiligung**: Franchise von CHF 300 plus 10 % bis CHF 700 pro Jahr; keine wählbare Franchise für Personen mit Wohnsitz in Italien.
 - **Italienischer Gesundheitsdienst, «neue» Grenzgänger**: kein spezifischer Gesundheitsbeitrag.
 - **Italienischer Gesundheitsdienst, «alte» Grenzgänger**: 3 % bis 6 % des Nettolohns, mindestens 30 und höchstens 200 Euro pro Monat; Lombardei 3 %.
 - **Familienmitglieder**: Wenn nur ein Elternteil arbeitet, folgt die ganze Familie seiner Wahl.
 - **Behandlung in der Schweiz mit dem italienischen Gesundheitsdienst**: notwendige Behandlung mit der europäischen Karte, Kostenbeteiligung von CHF 92 alle 30 Tage.
 
-## LAMal vs. SSN: das Optionsrecht der Grenzgänger
+## KVG vs. SSN: das Optionsrecht der Grenzgänger
 
-Die **LAMal** (Bundesgesetz über die Krankenversicherung) ist die obligatorische Schweizer Krankenversicherung, während der **italienische Gesundheitsdienst (SSN)** das öffentliche Gesundheitssystem Italiens ist. Wenn du in der Schweiz zu arbeiten beginnst und in Italien wohnst, hast du ein **Optionsrecht**: Du kannst innerhalb von drei Monaten ab Arbeitsbeginn die Schweizer LAMal oder den italienischen Gesundheitsdienst wählen.
+Die **KVG** (Bundesgesetz über die Krankenversicherung, auf Italienisch LAMal) ist die obligatorische Schweizer Krankenversicherung, während der **italienische Gesundheitsdienst (SSN)** das öffentliche Gesundheitssystem Italiens ist. Wenn du in der Schweiz zu arbeiten beginnst und in Italien wohnst, hast du ein **Optionsrecht**: Du kannst innerhalb von drei Monaten ab Arbeitsbeginn die Schweizer KVG oder den italienischen Gesundheitsdienst wählen.
 
 Die Wahl ist für die gesamte ununterbrochene Tätigkeit als Grenzgänger endgültig. Vor der Entscheidung musst du wissen, welchem Regime du angehörst, ob du ein «alter» oder «neuer» Grenzgänger bist, wie deine Familie zusammengesetzt ist und wo du dich behandeln lassen willst.
 
@@ -27,15 +27,15 @@ Die drei entscheidenden Faktoren sind dein Steuer- und Versicherungsregime, dein
 
 Dieser Leitfaden vergleicht die beiden Optionen anhand von Prämien, Kostenbeteiligung, räumlicher Deckung und konkreten Szenarien, damit du mit überprüfbaren Informationen entscheiden kannst.
 
-## Wie die LAMal für Grenzgänger funktioniert
+## Wie die KVG für Grenzgänger funktioniert
 
 ### Versicherungspflicht und Grenzgänger-Ausnahme
 
-Wer in der Schweiz arbeitet, unterliegt der LAMal-Pflicht. Wenn du in Italien wohnst, kannst du eine Befreiung beantragen und im italienischen System bleiben. Der Antrag muss innerhalb von **drei Monaten** ab Arbeitsbeginn bei der kantonalen Behörde gestellt werden; im Tessin ist das Istituto delle assicurazioni sociali zuständig.
+Wer in der Schweiz arbeitet, unterliegt der KVG-Pflicht. Wenn du in Italien wohnst, kannst du eine Befreiung beantragen und im italienischen System bleiben. Der Antrag muss innerhalb von **drei Monaten** ab Arbeitsbeginn bei der kantonalen Behörde gestellt werden; im Tessin ist das Istituto delle assicurazioni sociali zuständig.
 
 Ohne formellen Antrag gibt es kein Optionsrecht: Du unterstehst rückwirkend ab Arbeitsbeginn der Schweizer Versicherungspflicht. Die Wahl ist für die gesamte ununterbrochene Tätigkeit endgültig: Ein Arbeitgeber- oder Kantonswechsel sowie eine Änderung von Einkommen oder Prämie öffnen sie nicht neu. Neu möglich wird sie erst nach einer Zeit, in der du dem System eines anderen Staates unterstandest, oder wenn du rentenberechtigt wirst.
 
-### Monatliche LAMal-Prämien: Was kostet sie wirklich?
+### Monatliche KVG-Prämien: Was kostet sie wirklich?
 
 Wer in Italien wohnt, zahlt nicht die Prämien des Kantons Tessin, sondern die Prämie, die jede Krankenkasse für Italien berechnet. Die Prämie hängt von drei Dingen ab: Krankenkasse, Altersklasse und Unfalldeckung. Die 14 Krankenkassen sind Agrisano, Aquilana, Assura, Concordia, CSS, Helsana, KPT, Mutuel, ÖKK, Sanitas, Sodalis, Swica, Visana und Vivao Sympany.
 
@@ -64,7 +64,7 @@ Wer beim gleichen Arbeitgeber mindestens acht Stunden pro Woche arbeitet, ist au
 
 2027 zahlen Erwachsene ohne Unfalldeckung CHF 306,90 bis CHF 509,40 pro Monat. Die tatsächlichen Kosten sind die Prämie plus die Kostenbeteiligung, die für einen Erwachsenen höchstens CHF 1.000 pro Jahr beträgt.
 
-### Wie die LAMal-Franchise funktioniert
+### Wie die KVG-Franchise funktioniert
 
 Für Personen mit Wohnsitz in Italien gibt es eine ordentliche Franchise: **CHF 300 pro Jahr** für Erwachsene und keine Franchise für Minderjährige. Danach zahlst du **10 %** der Kosten über der Franchise, bis höchstens **CHF 700 pro Jahr** für Erwachsene und CHF 350 für Minderjährige.
 
@@ -74,7 +74,7 @@ Für Personen mit Wohnsitz in Italien gibt es eine ordentliche Franchise: **CHF 
 
 Für einen Erwachsenen beträgt die maximale Kostenbeteiligung CHF 1.000 pro Jahr und gilt für Behandlungen in der Schweiz. Für Behandlungen in Italien zahlst du nur den allfälligen italienischen Selbstbehalt.
 
-### Räumliche Deckung der LAMal
+### Räumliche Deckung der KVG
 
 In der Schweiz hast du vollständigen Zugang zum Gesundheitssystem. In Italien meldest du dich mit der Bescheinigung der Schweizer Krankenkasse bei der ASL an und erhältst Leistungen nach den italienischen Regeln; du zahlst nur den allfälligen Selbstbehalt.
 
@@ -90,7 +90,7 @@ Mit der Option für den italienischen Gesundheitsdienst bleibst du bei der ASL d
 
 Das Gesetz 213/2023 (Art. 1, Abs. 237-239) sieht für «alte» Grenzgänger eine an die Wohnregion zu zahlende Beteiligung vor: **3 % bis 6 %** des in der Schweiz erzielten Nettolohns, progressiv nach Einkommen und Familienlasten, mit mindestens **30 Euro** und höchstens **200 Euro** für jeden gearbeiteten Monat. Die Beteiligung betrifft auch unterhaltsberechtigte Familienmitglieder.
 
-Das Ausführungsdekret datiert vom **14. November 2025** und wurde am **18. Dezember 2025** im Amtsblatt veröffentlicht. Die Lombardei hat **3 %** gewählt, für Einkommen 2025 und ohne Rückwirkung. Der Beginn der Erhebung ist nicht bestätigt: Für den aktuellen Stand verweist du auf die Website-Seite zum Gesundheitsbeitrag.
+Das Ausführungsdekret datiert vom **14. November 2025** und wurde am **18. Dezember 2025** im Amtsblatt veröffentlicht. Die Lombardei hat **3 %** gewählt, für Einkommen 2025 und ohne Rückwirkung. Der Beginn der Erhebung ist nicht bestätigt: Den aktuellen Stand findest du auf der Seite der Website zum Gesundheitsbeitrag.
 
 | Wer | Was das Gesetz vorsieht |
 |---|---|
@@ -123,11 +123,11 @@ Arbeitsunfälle und Berufskrankheiten bleiben durch die Unfallversicherung des S
 
 Wenn nur ein Elternteil arbeitet, folgt die ganze Familie seiner Wahl. Wenn der andere Elternteil in Italien arbeitet oder eine Rente bezieht, bleiben die Kinder in Italien versichert. Wenn beide Eltern in der Schweiz arbeiten, wählt jeder für sich; die Kinder folgen einem einzigen System.
 
-Mit der LAMal zahlt eine Familie mit zwei Erwachsenen und zwei Minderjährigen beim gleichen Versicherer mindestens **2 × 279,00 + 2 × 64,20 = CHF 686,40 pro Monat**, also **CHF 8.236,80 pro Jahr**. Mit der höchsten Prämie aus der Tabelle sind es **CHF 1.218,20 pro Monat** (2 × 487,20 + 2 × 121,90).
+Mit der KVG zahlt eine Familie mit zwei Erwachsenen und zwei Minderjährigen beim gleichen Versicherer mindestens **2 × 279,00 + 2 × 64,20 = CHF 686,40 pro Monat**, also **CHF 8.236,80 pro Jahr**. Beim teuersten Versicherer für diese Familie sind es **CHF 1.257,00 pro Monat** (2 × 475,30 + 2 × 153,20).
 
-## Vollständige Vergleichstabelle: LAMal vs. SSN
+## Vollständige Vergleichstabelle: KVG vs. SSN
 
-| Kriterium | LAMal (Schweiz) | Italienischer Gesundheitsdienst (SSN) |
+| Kriterium | KVG (Schweiz) | Italienischer Gesundheitsdienst (SSN) |
 |---|---|---|
 | **Kosten pro Person** | CHF 279,00-487,20 pro Monat (Erwachsene, 2026) | «Neue»: kein spezifischer Beitrag; «alte»: 3 %-6 % des Nettolohns, 30-200 Euro pro Monat |
 | **Familienkosten** | Jedes Mitglied zahlt eine Prämie (Minderjährige CHF 64,20-203,70) | Siehe oben; die Beteiligung der «alten» Grenzgänger betrifft auch unterhaltsberechtigte Familienmitglieder |
@@ -139,11 +139,11 @@ Mit der LAMal zahlt eine Familie mit zwei Erwachsenen und zwei Minderjährigen b
 | **Arztwahl** | Frei | Hausarzt und Überweisung |
 | **Zahnbehandlung** | Nicht von der Grundversicherung gedeckt; Zusatzversicherung nötig | Nach den Regeln des öffentlichen Systems teilweise gedeckt |
 | **Mutterschaft** | Vollständig gedeckt | Vollständig gedeckt |
-| **Medikamente** | Nach den LAMal-Regeln mit Kostenbeteiligung gedeckt | Klasse A kostenlos oder mit Beteiligung; Klasse C selbst zu bezahlen |
+| **Medikamente** | Nach den KVG-Regeln mit Kostenbeteiligung gedeckt | Klasse A kostenlos oder mit Beteiligung; Klasse C selbst zu bezahlen |
 | **Systemwechsel** | Endgültige Wahl, ausser bei Wiedereröffnung nach einem anderen Staat oder mit einer Rente | Endgültige Wahl mit derselben Präzisierung |
 | **Vergünstigungen** | Prämienverbilligung beim Arbeitskanton beantragen | Befreiung vom Selbstbehalt nach Einkommen oder Krankheit |
 | **EU-Deckung** | Versicherungskarte nach Schweizer Regeln | Europäische Karte für notwendige Behandlung während eines Aufenthalts |
-| **Zusatzversicherung** | Verfügbar, aber getrennt von der LAMal-Grundversicherung | Auch in Italien möglich |
+| **Zusatzversicherung** | Verfügbar, aber getrennt von der KVG-Grundversicherung | Auch in Italien möglich |
 
 (Quellen: BAG, Krankenversicherung für Grenzgänger; BAG, EU/EFTA/UK-Prämien; Priminfo, EU-Prämien 2026; OAMal Art. 101a und 103; Gesetz 213/2023.)`,
 
@@ -155,7 +155,7 @@ Die vier Szenarien verwenden die oben genannten Prämien und Kostenbeteiligungen
 
 **Profil**: Du wohnst in Italien, arbeitest in der Schweiz und gehörst zum neuen Regime.
 
-**LAMal-Option:**
+**KVG-Option:**
 - Monatsprämie: **CHF 279,00 bis CHF 487,20**.
 - Jahresprämie: **CHF 3.348 bis CHF 5.846,40**.
 - Bei **CHF 500** Behandlungskosten in der Schweiz zahlst du CHF 300 Franchise plus 10 % von CHF 200, also **CHF 320**.
@@ -164,16 +164,16 @@ Die vier Szenarien verwenden die oben genannten Prämien und Kostenbeteiligungen
 - Spezifischer Gesundheitsbeitrag: **keiner**.
 - Für Behandlungen in Italien zahlst du den allfälligen Selbstbehalt; in der Schweiz erhältst du während des Aufenthalts notwendige Behandlung.
 
-**Fazit**: Der italienische Gesundheitsdienst kostet bei der spezifischen Beteiligung weniger; die LAMal ermöglicht Zugang zur Behandlung in beiden Ländern.
+**Fazit**: Der italienische Gesundheitsdienst kostet bei der spezifischen Beteiligung weniger; die KVG ermöglicht Zugang zur Behandlung in beiden Ländern.
 
 ### Szenario 2: Paar mit zwei Kindern und einem Einkommen
 
 **Profil**: Ein Elternteil arbeitet in der Schweiz, der andere lebt mit zwei Minderjährigen.
 
-**LAMal-Option für alle beim gleichen Versicherer:**
+**KVG-Option für alle beim gleichen Versicherer:**
 - Mindestprämie: 2 × CHF 279,00 + 2 × CHF 64,20 = **CHF 686,40 pro Monat**.
 - Mindestjahresprämie: **CHF 8.236,80**.
-- Höchste Prämie aus der Tabelle: **CHF 1.218,20 pro Monat**.
+- Höchste Prämie beim gleichen Versicherer: 2 × CHF 475,30 + 2 × CHF 153,20 = **CHF 1.257,00 pro Monat**.
 
 **Option italienischer Gesundheitsdienst:**
 - Die ganze Familie folgt der Wahl des arbeitenden Elternteils.
@@ -185,7 +185,7 @@ Die vier Szenarien verwenden die oben genannten Prämien und Kostenbeteiligungen
 
 **Profil**: Du bist über 55 und brauchst eine längerfristige Behandlung.
 
-**LAMal-Option:**
+**KVG-Option:**
 - Erwachsenenprämie: **CHF 279,00 bis CHF 487,20** pro Monat.
 - Kostenbeteiligung für Behandlungen in der Schweiz: höchstens **CHF 1.000 pro Jahr**.
 - In Italien meldest du dich bei der ASL an und zahlst den allfälligen Selbstbehalt.
@@ -205,15 +205,15 @@ Die vier Szenarien verwenden die oben genannten Prämien und Kostenbeteiligungen
 - Bei einem Nettolohn von **4.000 Euro pro Monat** beträgt die Beteiligung **120 Euro pro Monat**.
 - Das Maximum von **200 Euro pro Monat**, also **2.400 Euro pro Jahr**, wird ab einem Nettolohn von ungefähr **6.700 Euro** erreicht.
 
-**Vergleich mit LAMal:**
+**Vergleich mit KVG:**
 - Die niedrigste Erwachsenenprämie 2026 beginnt bei **CHF 3.348 pro Jahr**.
 - Der Beginn der Erhebung ist nicht bestätigt.
 
 **Fazit**: Vergleiche dein Regime, deine Familie und den Behandlungsort; verwende für die Entscheidung keine Umrechnung zwischen CHF und Euro. Die Zahlen beschreiben die Fälle dieses Leitfadens und ersetzen nicht die Prüfung deiner persönlichen Situation.`,
 
- 'blog.article.lamal-vs-ssn-decisione.body4': `## Wann die LAMal sinnvoll sein kann: die konkreten Gründe
+ 'blog.article.lamal-vs-ssn-decisione.body4': `## Wann die KVG sinnvoll sein kann: die konkreten Gründe
 
-Die LAMal kann zu deiner Situation passen, wenn: Das ist keine automatische Regel; prüfe zuerst dein Regime, deine Familie und den Behandlungsort.
+Die KVG kann in den folgenden Fällen zu deiner Situation passen. Das ist keine automatische Regel: Prüfe zuerst dein Regime, deine Familie und den Behandlungsort.
 
 Vergleiche dein Regime und die benötigten Behandlungen, ohne Prämien und Beiträge verschiedener Systeme zu vermischen.
 
@@ -224,20 +224,20 @@ Du hast vollständigen Zugang zum Schweizer Gesundheitssystem und kannst die Fac
 In der Schweiz hast du vollständigen Zugang; in Italien meldest du dich mit der Bescheinigung der Krankenkasse bei der ASL an und zahlst den allfälligen Selbstbehalt. Die italienische Deckung folgt damit den Regeln des öffentlichen italienischen Systems.
 
 ### 3. Du brauchst geplante oder spezialisierte Behandlung in der Schweiz
-Mit dem italienischen Gesundheitsdienst benötigen geplante Behandlungen in der Schweiz die vorherige Genehmigung der ASL. Die LAMal vermeidet diesen Schritt für den Zugang zum Schweizer System, wenn die Behandlung von der LAMal gedeckt ist.
+Mit dem italienischen Gesundheitsdienst benötigen geplante Behandlungen in der Schweiz die vorherige Genehmigung der ASL. Die KVG vermeidet diesen Schritt für den Zugang zum Schweizer System, wenn die Behandlung von der KVG gedeckt ist.
 
 ### 4. Du willst einen bekannten Höchstbetrag für Behandlungen in der Schweiz
 Du kennst die Prämie und die Kostenbeteiligung eines Erwachsenen; sie übersteigt **CHF 1.000 pro Jahr** nicht. Diese Grenze gilt für Behandlungen in der Schweiz; in Italien zahlst du nur den allfälligen Selbstbehalt.
 
 ## Wann der SSN sinnvoll sein kann: die konkreten Gründe
 
-Der italienische Gesundheitsdienst kann zu deiner Situation passen, wenn: Auch hier musst du zwischen «neuen» und «alten» Grenzgängern unterscheiden und die Familie prüfen.
+Der italienische Gesundheitsdienst kann in den folgenden Fällen zu deiner Situation passen. Auch hier musst du zwischen «neuen» und «alten» Grenzgängern unterscheiden und die Familie prüfen.
 
 ### 1. Du prüfst zuerst die Kosten deines Regimes
-«Neue» Grenzgänger zahlen keinen spezifischen Beitrag; bei «alten» Grenzgängern beträgt die Beteiligung höchstens **200 Euro pro Monat**, weniger als jede Erwachsenenprämie der LAMal. Minimum und Maximum ersetzen nicht die Prüfung der Quote, die für dich gilt.
+«Neue» Grenzgänger zahlen keinen spezifischen Beitrag; bei «alten» Grenzgängern liegt die Beteiligung zwischen 30 und **200 Euro pro Monat**. Minimum und Maximum ersetzen nicht die Prüfung der Quote, die für dich gilt.
 
 ### 2. Du hast eine Familie
-Bei der LAMal zahlt jedes Mitglied eine Prämie: Für zwei Erwachsene und zwei Minderjährige beginnt sie beim gleichen Versicherer bei **CHF 686,40 pro Monat**. Zähle die Familienprämie für jede Person und nicht nur für den arbeitenden Elternteil.
+Bei der KVG zahlt jedes Mitglied eine Prämie: Für zwei Erwachsene und zwei Minderjährige beginnt sie beim gleichen Versicherer bei **CHF 686,40 pro Monat**. Zähle die Familienprämie für jede Person und nicht nur für den arbeitenden Elternteil.
 
 ### 3. Du lässt dich hauptsächlich in Italien behandeln
 Du bleibst bei der ASL eingeschrieben und nutzt das italienische System nach seinen Regeln; du zahlst den allfälligen Selbstbehalt. Das ist besonders zu prüfen, wenn deine Ärzte und Fachärzte in Italien sind.
@@ -245,55 +245,55 @@ Du bleibst bei der ASL eingeschrieben und nutzt das italienische System nach sei
 ### 4. Du hast eine chronische Erkrankung mit Befreiung vom Selbstbehalt
 Die für die Erkrankung vorgesehenen Befreiungen können die Kosten der Leistungen in Italien senken. Prüfe vor dem Vergleich, welche Leistungen von der Befreiung erfasst sind.
 
-## Häufige Fehler bei der Wahl zwischen LAMal und SSN
+## Häufige Fehler bei der Wahl zwischen KVG und SSN
 
 ### 1. Zu glauben, es gebe einen SSN-Beitrag von 7,5 % des Einkommens
 Einen solchen Beitrag gibt es nicht: «neue» Grenzgänger zahlen keinen spezifischen Gesundheitsbeitrag; für «alte» gilt eine Beteiligung von 3 % bis 6 %, mindestens 30 und höchstens 200 Euro pro Monat.
 
 ### 2. Die Prämien der ganzen Familie nicht zu zählen
-Bei der LAMal zahlt jedes Mitglied die eigene Prämie. Für zwei Erwachsene und zwei Minderjährige beträgt das Mindestbeispiel **CHF 686,40 pro Monat**.
+Bei der KVG zahlt jedes Mitglied die eigene Prämie. Für zwei Erwachsene und zwei Minderjährige beträgt das Mindestbeispiel **CHF 686,40 pro Monat**.
 
 ### 3. Auf hohe Franchisen oder Telmed- und HMO-Modelle zu setzen
 Für Personen mit Wohnsitz in Italien sind wählbare Franchisen sowie Telmed- und HMO-Modelle **nicht verfügbar**. Es gibt die ordentliche Prämie je Krankenkasse.
 
 ### 4. Die Frist von drei Monaten nicht einzuhalten
-Ohne formellen Antrag innerhalb von drei Monaten gibt es kein Optionsrecht: Die LAMal-Pflicht gilt rückwirkend ab Arbeitsbeginn.
+Ohne formellen Antrag innerhalb von drei Monaten gibt es kein Optionsrecht: Die KVG-Pflicht gilt rückwirkend ab Arbeitsbeginn.
 
-### 5. LAMal und Zusatzversicherung zu verwechseln
-Die LAMal ist die Grundversicherung. Eine Zusatzversicherung ist freiwillig und deckt zusätzliche Leistungen nach ihrem Vertrag.
+### 5. KVG und Zusatzversicherung zu verwechseln
+Die KVG ist die Grundversicherung. Eine Zusatzversicherung ist freiwillig und deckt zusätzliche Leistungen nach ihrem Vertrag.
 
 ### 6. Zu denken, ein neuer Arbeitgeber erlaube eine neue Wahl
 Die Wahl bleibt für die gesamte ununterbrochene Tätigkeit als Grenzgänger endgültig. Ein Arbeitgeberwechsel öffnet sie nicht neu. Ein neuer Vertrag allein genügt nicht, auch wenn sich Arbeitsort oder Einkommen ändern. Eine Wiedereröffnung setzt einen der oben beschriebenen Sonderfälle voraus, nicht nur eine persönliche Entscheidung.`,
 
- 'blog.article.lamal-vs-ssn-decisione.body5': `## Häufige Fragen zur Wahl zwischen LAMal und italienischem Gesundheitsdienst
+ 'blog.article.lamal-vs-ssn-decisione.body5': `## Häufige Fragen zur Wahl zwischen KVG und italienischem Gesundheitsdienst
 
-### Kann ich nach der ersten Wahl vom italienischen Gesundheitsdienst zur LAMal wechseln?
-Nein. Die Wahl ist für die gesamte ununterbrochene Tätigkeit als Grenzgänger endgültig. Sie wird nur nach einer Zeit im System eines anderen Staates oder bei Rentenberechtigung wieder möglich; ein Arbeitgeberwechsel genügt nicht. Für ein neues Familienmitglied kann eine LAMal-versicherte Person innerhalb von drei Monaten nach dem Ereignis die Befreiung beantragen.
+### Kann ich nach der ersten Wahl vom italienischen Gesundheitsdienst zur KVG wechseln?
+Nein. Die Wahl ist für die gesamte ununterbrochene Tätigkeit als Grenzgänger endgültig. Sie wird nur nach einer Zeit im System eines anderen Staates oder bei Rentenberechtigung wieder möglich; ein Arbeitgeberwechsel genügt nicht. Für ein neues Familienmitglied kann eine KVG-versicherte Person innerhalb von drei Monaten nach dem Ereignis die Befreiung beantragen.
 
-### Kann ich von der LAMal zum italienischen Gesundheitsdienst wechseln?
+### Kann ich von der KVG zum italienischen Gesundheitsdienst wechseln?
 Nein, dieselbe Regel gilt: Die Wahl ist endgültig. Eine Wiedereröffnung ist nur in den vorgesehenen Fällen nach einer Zeit im System eines anderen Staates oder bei einer Rente möglich.
 
 ### Was gilt, wenn mein Ehepartner in Italien arbeitet?
-Wenn der andere Elternteil in Italien arbeitet oder eine Rente bezieht, bleiben die Kinder in Italien versichert und die LAMal betrifft nur den Grenzgänger.
+Wenn der andere Elternteil in Italien arbeitet oder eine Rente bezieht, bleiben die Kinder in Italien versichert und die KVG betrifft nur den Grenzgänger.
 
-### Deckt die LAMal Behandlungen in Italien?
+### Deckt die KVG Behandlungen in Italien?
 Ja. Du meldest dich mit der Bescheinigung der Schweizer Krankenkasse bei der ASL an und erhältst Leistungen nach italienischen Regeln; du zahlst den allfälligen Selbstbehalt. Private Einrichtungen, die die Karte nicht akzeptieren, sind nicht gedeckt.
 
 ### Deckt der italienische Gesundheitsdienst Behandlungen in der Schweiz?
 Für medizinisch notwendige Behandlung während eines Aufenthalts nutzt du die europäische Karte und zahlst **CHF 92 je 30 Behandlungstage**. Geplante Behandlung benötigt die vorherige Genehmigung der ASL mit dem Formular S2.
 
 ### Wie viel Zeit habe ich für die Entscheidung?
-Du hast **drei Monate** ab Beginn der Arbeit in der Schweiz. Reiche den Antrag bei der kantonalen Behörde ein; im Tessin ist das Istituto delle assicurazioni sociali zuständig. Ohne Antrag bleibt die LAMal-Pflicht rückwirkend bestehen.
+Du hast **drei Monate** ab Beginn der Arbeit in der Schweiz. Reiche den Antrag bei der kantonalen Behörde ein; im Tessin ist das Istituto delle assicurazioni sociali zuständig. Ohne Antrag bleibt die KVG-Pflicht rückwirkend bestehen.
 
-### Kann ich gleichzeitig LAMal und eine private italienische Versicherung haben?
+### Kann ich gleichzeitig KVG und eine private italienische Versicherung haben?
 Ja, du kannst eine italienische Zusatzversicherung abschliessen. Sie ist von der Grundversicherung getrennt und sollte nach den benötigten Leistungen beurteilt werden.
 
 ### Wie wirkt sich die Wahl auf meine italienische Steuererklärung aus?
-Wir haben keine offizielle Bestätigung gefunden, dass LAMal-Prämien abzugsfähig sind. Bitte einen CAF oder eine Steuerberatung um die Prüfung deiner Situation.
+Wir haben keine offizielle Bestätigung gefunden, dass KVG-Prämien abzugsfähig sind. Bitte einen CAF oder eine Steuerberatung um die Prüfung deiner Situation.
 
 ## Kurzer Entscheidungsleitfaden
 
-**Wähle die LAMal, wenn:**
+**Wähle die KVG, wenn:**
 - Du dich hauptsächlich in der Schweiz behandeln lässt.
 - Du Zugang zu Behandlungen in beiden Ländern willst.
 - Du geplante Behandlung in der Schweiz brauchst.
@@ -311,7 +311,7 @@ Wir haben keine offizielle Bestätigung gefunden, dass LAMal-Prämien abzugsfäh
 
 ## Schluss: Eine Entscheidung, die Analyse statt Improvisation verdient
 
-Für die Wahl zwischen LAMal und italienischem Gesundheitsdienst gibt es keine allgemeine Antwort. Entscheidend sind dein Steuer- und Versicherungsregime, deine Familie, die anwendbare Prämie und der Ort der Behandlung.
+Für die Wahl zwischen KVG und italienischem Gesundheitsdienst gibt es keine allgemeine Antwort. Entscheidend sind dein Steuer- und Versicherungsregime, deine Familie, die anwendbare Prämie und der Ort der Behandlung.
 
 **Drei konkrete Schritte:**
 
@@ -321,7 +321,7 @@ Für die Wahl zwischen LAMal und italienischem Gesundheitsdienst gibt es keine a
 
 *Hauptquellen: BAG, Krankenversicherung für Grenzgänger; BAG, EU/EFTA/UK-Prämien; Priminfo, EU-Prämien 2026 und 2027; OAMal Art. 101a und 103; Istituto delle assicurazioni sociali des Kantons Tessin, Versicherungspflicht der Familienmitglieder; Gesetz 213/2023, Art. 1, Abs. 237-239.*`,
 
- 'blog.article.lamal-vs-ssn-decisione.faq': '[{"q":"Wie funktioniert das Optionsrecht für Grenzgänger, die in der Schweiz arbeiten?","a":"Du musst innerhalb von drei Monaten ab Arbeitsbeginn zwischen der Schweizer LAMal und dem italienischen Gesundheitsdienst wählen. Die Wahl ist für die gesamte ununterbrochene Tätigkeit als Grenzgänger endgültig."},{"q":"Kann die Wahl zwischen LAMal und italienischem Gesundheitsdienst geändert werden?","a":"Nein. Ein Arbeitgeber- oder Kantonswechsel öffnet die Wahl nicht neu. Das ist nur nach einer Zeit im System eines anderen Staates oder bei Rentenberechtigung möglich."},{"q":"Welche Behandlungen in Italien deckt die Schweizer LAMal für Grenzgänger?","a":"Du meldest dich mit der Bescheinigung der Schweizer Krankenkasse bei der ASL an und erhältst Leistungen nach italienischen Regeln; du zahlst den allfälligen Selbstbehalt. Private Einrichtungen, die die Karte nicht akzeptieren, sind nicht gedeckt."},{"q":"Wie funktionieren die Beiträge zum italienischen Gesundheitsdienst für Grenzgänger?","a":"Es gibt keinen Beitrag von 7,5 % des Einkommens. «Neue» Grenzgänger zahlen keinen spezifischen Gesundheitsbeitrag; «alte» zahlen 3 % bis 6 %, mindestens 30 und höchstens 200 Euro pro Monat. In der Lombardei beträgt der Satz 3 %, und der Beginn der Erhebung ist nicht bestätigt."},{"q":"Was passiert, wenn ein Grenzgänger mit LAMal in Italien Behandlung braucht?","a":"Die Behandlung erfolgt über die ASL mit der Bescheinigung der Schweizer Krankenkasse oder nach italienischen Regeln in der Notaufnahme. Du zahlst den allfälligen Selbstbehalt; private Einrichtungen, die die Karte nicht akzeptieren, sind nicht gedeckt."}]',
+ 'blog.article.lamal-vs-ssn-decisione.faq': '[{"q":"Wie funktioniert das Optionsrecht für Grenzgänger, die in der Schweiz arbeiten?","a":"Du musst innerhalb von drei Monaten ab Arbeitsbeginn zwischen der Schweizer KVG und dem italienischen Gesundheitsdienst wählen. Die Wahl ist für die gesamte ununterbrochene Tätigkeit als Grenzgänger endgültig."},{"q":"Kann die Wahl zwischen KVG und italienischem Gesundheitsdienst geändert werden?","a":"Nein. Ein Arbeitgeber- oder Kantonswechsel öffnet die Wahl nicht neu. Das ist nur nach einer Zeit im System eines anderen Staates oder bei Rentenberechtigung möglich."},{"q":"Welche Behandlungen in Italien deckt die Schweizer KVG für Grenzgänger?","a":"Du meldest dich mit der Bescheinigung der Schweizer Krankenkasse bei der ASL an und erhältst Leistungen nach italienischen Regeln; du zahlst den allfälligen Selbstbehalt. Private Einrichtungen, die die Karte nicht akzeptieren, sind nicht gedeckt."},{"q":"Wie funktionieren die Beiträge zum italienischen Gesundheitsdienst für Grenzgänger?","a":"Es gibt keinen Beitrag von 7,5 % des Einkommens. «Neue» Grenzgänger zahlen keinen spezifischen Gesundheitsbeitrag; «alte» zahlen 3 % bis 6 %, mindestens 30 und höchstens 200 Euro pro Monat. In der Lombardei beträgt der Satz 3 %, und der Beginn der Erhebung ist nicht bestätigt."},{"q":"Was passiert, wenn ein Grenzgänger mit KVG in Italien Behandlung braucht?","a":"Die Behandlung erfolgt über die ASL mit der Bescheinigung der Schweizer Krankenkasse oder nach italienischen Regeln in der Notaufnahme. Du zahlst den allfälligen Selbstbehalt; private Einrichtungen, die die Karte nicht akzeptieren, sind nicht gedeckt."}]',
 };
 
 export default bodyLamalVsSsnDecisione;

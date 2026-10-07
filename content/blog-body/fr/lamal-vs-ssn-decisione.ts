@@ -5,7 +5,7 @@ const bodyLamalVsSsnDecisione: Record<string, string> = {
 - **Service de santé italien** : les « nouveaux » frontaliers ne paient pas de contribution sanitaire spécifique ; pour les « anciens » frontaliers, la loi prévoit une quote-part de **3 % à 6 %** du salaire net, de **30 à 200 euros** par mois.
 - **Soins** : la LAMal permet de se faire soigner en Suisse et en Italie ; avec le service de santé italien, vous bénéficiez des soins nécessaires en Suisse pendant votre séjour.
 
-## Faits essentiels
+## Faits clés
 - **Droit d'option** : demande dans les trois mois suivant le début du travail auprès de l'autorité cantonale (au Tessin, l'Istituto delle assicurazioni sociali) ; sans demande, l'obligation LAMal reste applicable.
 - **Choix définitif** : ni un changement d'employeur ou de canton, ni une variation du revenu ne le rouvrent.
 - **Primes LAMal 2026, adultes** : CHF 279,00 à CHF 487,20 par mois sans couverture accidents (CHF 300,00 à CHF 513,30 avec couverture accidents).
@@ -123,7 +123,7 @@ Les accidents du travail et les maladies professionnelles restent couverts par l
 
 Si un seul parent travaille, toute la famille suit son choix. Si l'autre parent travaille ou perçoit une rente en Italie, les enfants restent assurés en Italie. Si les deux parents travaillent en Suisse, chacun choisit pour soi et les enfants suivent un seul système.
 
-Avec la LAMal, une famille de deux adultes et deux mineurs paie auprès de la même caisse au minimum **2 × 279,00 + 2 × 64,20 = CHF 686,40 par mois**, soit **CHF 8 236,80 par an**. Avec la prime la plus élevée du tableau, elle atteint **CHF 1 218,20 par mois** (2 × 487,20 + 2 × 121,90).
+Avec la LAMal, une famille de deux adultes et deux mineurs paie auprès de la même caisse au minimum **2 × 279,00 + 2 × 64,20 = CHF 686,40 par mois**, soit **CHF 8 236,80 par an**. Avec la caisse la plus chère pour cette famille, elle atteint **CHF 1 257,00 par mois** (2 × 475,30 + 2 × 153,20).
 
 ## Tableau comparatif complet : LAMal vs SSN
 
@@ -173,7 +173,7 @@ Les quatre scénarios utilisent les primes et les quotes-parts indiquées ci-des
 **Option LAMal pour tous auprès de la même caisse :**
 - Prime minimale : 2 × CHF 279,00 + 2 × CHF 64,20 = **CHF 686,40 par mois**.
 - Prime annuelle minimale : **CHF 8 236,80**.
-- Prime maximale du tableau : **CHF 1 218,20 par mois**.
+- Prime maximale auprès de la même caisse : 2 × CHF 475,30 + 2 × CHF 153,20 = **CHF 1 257,00 par mois**.
 
 **Option service de santé italien :**
 - Toute la famille suit le choix du parent qui travaille.
@@ -213,7 +213,7 @@ Les quatre scénarios utilisent les primes et les quotes-parts indiquées ci-des
 
  'blog.article.lamal-vs-ssn-decisione.body4': `## Quand choisir la LAMal : les raisons concrètes
 
-La LAMal peut correspondre à votre situation si : ce n'est pas une règle automatique ; vérifiez d'abord votre régime, votre famille et le lieu des soins.
+La LAMal peut correspondre à votre situation dans les cas ci-dessous. Ce n'est pas une règle automatique : vérifiez d'abord votre régime, votre famille et le lieu des soins.
 
 Comparez votre régime et les soins dont vous avez besoin, sans mélanger les primes et les cotisations de systèmes différents.
 
@@ -231,10 +231,10 @@ Vous connaissez la prime et, pour un adulte, la quote-part ne dépasse pas **CHF
 
 ## Quand choisir le SSN : les raisons concrètes
 
-Le service de santé italien peut correspondre à votre situation si : ici aussi, distinguez les « nouveaux » et les « anciens » frontaliers et vérifiez la situation de votre famille.
+Le service de santé italien peut correspondre à votre situation dans les cas ci-dessous. Ici aussi, distinguez les « nouveaux » et les « anciens » frontaliers et vérifiez la situation de votre famille.
 
 ### 1. Vous évaluez d'abord le coût de votre régime
-Les « nouveaux » frontaliers n'ont pas de contribution spécifique ; pour les « anciens », la quote-part atteint au maximum **200 euros par mois**, moins que toute prime LAMal pour adulte. Le minimum et le maximum ne remplacent pas la vérification de la quote-part qui vous concerne.
+Les « nouveaux » frontaliers n'ont pas de contribution spécifique ; pour les « anciens », la quote-part va de 30 à **200 euros par mois**. Le minimum et le maximum ne remplacent pas la vérification de la quote-part qui vous concerne.
 
 ### 2. Vous avez une famille
 Avec la LAMal, chaque membre paie une prime : pour deux adultes et deux mineurs, le montant commence à **CHF 686,40 par mois** auprès de la même caisse. Comptez la prime de chaque personne, et pas seulement celle du parent qui travaille.

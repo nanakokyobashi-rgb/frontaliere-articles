@@ -1,5 +1,5 @@
 const bodyLamalVsSsnDecisione: Record<string, string> = {
- 'blog.article.lamal-vs-ssn-decisione.body1': `## In brief
+ 'blog.article.lamal-vs-ssn-decisione.body1': `## TL;DR
 - **Right of option**: if you live in Italy and work in Switzerland, choose within three months of starting work between Swiss LAMal and the Italian National Health Service. The choice is final.
 - **LAMal premiums**: in 2026 an adult pays **CHF 279.00 to CHF 487.20** per month: one premium per insurer, with no optional deductibles or models.
 - **Italian National Health Service**: “new” cross-border workers pay no specific health contribution; for “old” cross-border workers the law provides a contribution of **3% to 6%** of net pay, from **€30 to €200** per month.
@@ -90,7 +90,7 @@ With the option for the Italian National Health Service, you remain registered w
 
 Law 213/2023 (Article 1, paragraphs 237-239) provides for “old” cross-border workers a contribution paid to the region of residence: **3% to 6%** of net salary received in Switzerland, progressive according to income and family responsibilities, with a minimum of **€30** and a maximum of **€200** for each month worked. The contribution also covers dependent family members.
 
-The implementing decree is dated **14 November 2025** and was published in the Official Gazette on **18 December 2025**. Lombardy chose **3%**, on 2025 income and without retroactive effect. Collection has not been confirmed: for an updated position, refer to the site page on the health contribution.
+The implementing decree is dated **14 November 2025** and was published in the Official Gazette on **18 December 2025**. Lombardy chose **3%**, on 2025 income and without retroactive effect. Collection has not been confirmed: for the current status, see the site's page on the health contribution.
 
 | Who | What the law provides |
 |---|---|
@@ -123,7 +123,7 @@ Occupational accidents and occupational diseases remain covered by the Swiss emp
 
 If only one parent works, the whole family follows that parent’s choice. If the other parent works or receives a pension in Italy, the children remain insured in Italy. If both parents work in Switzerland, each chooses for themselves and the children follow one system.
 
-With LAMal, a family of two adults and two minors pays, with the same insurer, at least **2 × 279.00 + 2 × 64.20 = CHF 686.40 per month**, or **CHF 8,236.80 per year**. With the highest premium in the table, it reaches **CHF 1,218.20 per month** (2 × 487.20 + 2 × 121.90).
+With LAMal, a family of two adults and two minors pays, with the same insurer, at least **2 × 279.00 + 2 × 64.20 = CHF 686.40 per month**, or **CHF 8,236.80 per year**. With the most expensive insurer for this family, it reaches **CHF 1,257.00 per month** (2 × 475.30 + 2 × 153.20).
 
 ## Complete comparison table: LAMal vs SSN
 
@@ -173,7 +173,7 @@ The four scenarios use the premiums and cost-sharing described above. Swiss-fran
 **LAMal option for everyone with the same insurer:**
 - Minimum premium: 2 × CHF 279.00 + 2 × CHF 64.20 = **CHF 686.40 per month**.
 - Minimum annual premium: **CHF 8,236.80**.
-- Highest premium in the table: **CHF 1,218.20 per month**.
+- Highest premium with the same insurer: 2 × CHF 475.30 + 2 × CHF 153.20 = **CHF 1,257.00 per month**.
 
 **Italian National Health Service option:**
 - The whole family follows the working parent’s choice.
@@ -213,7 +213,7 @@ The four scenarios use the premiums and cost-sharing described above. Swiss-fran
 
  'blog.article.lamal-vs-ssn-decisione.body4': `## When to choose LAMal: the concrete reasons
 
-LAMal may fit your situation if: this is not an automatic rule, so check your regime, family composition and place of care first.
+LAMal may fit your situation in the cases below. This is not an automatic rule: check your regime, family composition and place of care first.
 
 Compare the regime and the care you need, without confusing premiums and contributions from different systems.
 
@@ -231,10 +231,10 @@ You know the premium and, for an adult, cost-sharing cannot exceed **CHF 1,000 p
 
 ## When to choose the SSN: the concrete reasons
 
-The Italian National Health Service may fit your situation if: here too, distinguish “new” from “old” workers and check your family members’ situation.
+The Italian National Health Service may fit your situation in the cases below. Here too, distinguish “new” from “old” workers and check your family members’ situation.
 
 ### 1. You assess the cost of your regime first
-“New” cross-border workers have no specific contribution; for “old” workers the contribution reaches at most **€200 per month**, less than any adult LAMal premium. The minimum and maximum do not replace checking the contribution that applies to you.
+“New” cross-border workers have no specific contribution; for “old” workers the contribution ranges from €30 to **€200 per month**. The minimum and maximum do not replace checking the contribution that applies to you.
 
 ### 2. You have a family
 With LAMal, each member pays a premium: for two adults and two minors, the starting point is **CHF 686.40 per month** with the same insurer. Count the family premium for every person, not only for the working parent.

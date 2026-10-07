@@ -90,7 +90,7 @@ I nuovi frontalieri, assunti dal **17 luglio 2023** e tassati anche in Italia, n
 
 La legge 213/2023 (art. 1, commi 237-239) prevede per i «vecchi» una quota di compartecipazione da versare alla Regione di residenza: fra il **3% e il 6%** del salario netto percepito in Svizzera, progressiva rispetto a reddito e carichi familiari, con un minimo di **30 euro** e un massimo di **200 euro** per ogni mese lavorato. La quota riguarda anche i familiari a carico.
 
-Il decreto attuativo è del **14 novembre 2025**, pubblicato nella Gazzetta Ufficiale del **18 dicembre 2025**. La Lombardia ha scelto il **3%** sui redditi 2025 e senza effetto retroattivo. L'avvio della riscossione non è confermato: per lo stato aggiornato rimanda alla pagina del sito sulla tassa sulla salute.
+Il decreto attuativo è del **14 novembre 2025**, pubblicato nella Gazzetta Ufficiale del **18 dicembre 2025**. La Lombardia ha scelto il **3%** sui redditi 2025 e senza effetto retroattivo. L'avvio della riscossione non è confermato: per lo stato aggiornato consulta la pagina del sito sulla tassa sulla salute.
 
 | Chi | Cosa prevede la legge |
 |---|---|
@@ -123,7 +123,7 @@ Gli infortuni sul lavoro e le malattie professionali restano coperti dall'assicu
 
 Se lavora un solo genitore, tutta la famiglia segue la sua scelta. Se l'altro genitore lavora o riceve una rendita in Italia, i figli restano assicurati in Italia. Se entrambi lavorano in Svizzera, ciascuno sceglie per sé e i figli seguono un solo sistema.
 
-Con la LAMal una famiglia di due adulti e due minorenni paga, presso lo stesso assicuratore, almeno **2 × 279,00 + 2 × 64,20 = CHF 686,40 al mese**, cioè **CHF 8.236,80 l'anno**. Con il premio più alto della tabella arriva a **CHF 1.218,20 al mese** (2 × 487,20 + 2 × 121,90).
+Con la LAMal una famiglia di due adulti e due minorenni paga, presso lo stesso assicuratore, almeno **2 × 279,00 + 2 × 64,20 = CHF 686,40 al mese**, cioè **CHF 8.236,80 l'anno**. Con l'assicuratore più caro per questa famiglia arriva a **CHF 1.257,00 al mese** (2 × 475,30 + 2 × 153,20).
 
 ## Tabella comparativa completa: LAMal vs SSN
 
@@ -173,7 +173,7 @@ I quattro scenari usano i premi e le partecipazioni indicati sopra. Non converto
 **Opzione LAMal per tutti presso lo stesso assicuratore:**
 - Premio minimo: 2 × CHF 279,00 + 2 × CHF 64,20 = **CHF 686,40 al mese**.
 - Premio minimo annuale: **CHF 8.236,80**.
-- Premio massimo fra quelli della tabella: **CHF 1.218,20 al mese**.
+- Premio massimo presso lo stesso assicuratore: 2 × CHF 475,30 + 2 × CHF 153,20 = **CHF 1.257,00 al mese**.
 
 **Opzione Servizio sanitario italiano:**
 - Tutta la famiglia segue la scelta del genitore che lavora.
@@ -213,7 +213,7 @@ I quattro scenari usano i premi e le partecipazioni indicati sopra. Non converto
 
  'blog.article.lamal-vs-ssn-decisione.body4': `## Quando scegliere la LAMal: i motivi concreti
 
-La LAMal può essere coerente con la tua situazione se: non è una regola automatica, quindi verifica sempre il tuo regime, la composizione della famiglia e dove riceverai le cure.
+La LAMal può essere la scelta coerente con la tua situazione nei casi qui sotto. Non è una regola automatica: verifica sempre il tuo regime, la composizione della famiglia e dove riceverai le cure.
 
 Il confronto va fatto sul tuo regime e sulle cure che userai, senza confondere premi e quote di sistemi diversi.
 
@@ -231,10 +231,10 @@ Conosci il premio e, per un adulto, la partecipazione ai costi non supera **CHF 
 
 ## Quando scegliere il SSN: i motivi concreti
 
-Il Servizio sanitario italiano può essere coerente con la tua situazione se: anche qui devi distinguere fra nuovo e «vecchio» frontaliere e verificare la situazione dei familiari.
+Il Servizio sanitario italiano può essere la scelta coerente con la tua situazione nei casi qui sotto. Anche qui devi distinguere fra nuovo e «vecchio» frontaliere e verificare la situazione dei familiari.
 
 ### 1. Valuti prima il costo del tuo regime
-Per i nuovi frontalieri non c'è un contributo sanitario specifico; per i «vecchi» la quota arriva al massimo a **200 euro al mese**, meno di qualunque premio LAMal per adulti. Il minimo e il massimo non sostituiscono la verifica della quota applicabile al tuo caso.
+Per i nuovi frontalieri non c'è un contributo sanitario specifico; per i «vecchi» la quota va da 30 a **200 euro al mese**. Il minimo e il massimo non sostituiscono la verifica della quota applicabile al tuo caso.
 
 ### 2. Hai una famiglia
 Con la LAMal ogni membro paga un premio: per due adulti e due minorenni si parte da **CHF 686,40 al mese** presso lo stesso assicuratore. Il conto familiare va fatto per ogni persona, non solo per il genitore che lavora.
