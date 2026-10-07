@@ -2105,7 +2105,7 @@
       "reason": "Probe fail-closed usato dal publisher del corpus per distinguere una pagina online da proteggere da un articolo nuovo che puo' uscire con l'immagine generica: conferma due volte i 404, riconosce canonical/og:url e non tratta errori di rete come assenza. Il sito non ha questo helper perche' il controllo precede il push dal corpus verso gli shard e la superficie R2.",
       "baseline": {
         "site": null,
-        "corpus": "54ee403506dc561c",
+        "corpus": "ca237cdd47b7c169",
         "alignedAt": "2026-10-07"
       }
     },
