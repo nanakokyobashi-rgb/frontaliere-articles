@@ -704,7 +704,7 @@ export function extractJsonEntitiesItems(html, pageUrl) {
  *
  * @param {string} text
  * @param {string} apiUrl
- * @returns {Array<{url: string, headline: string, date: Date | null, lead?: string}>}
+ * @returns {Array<{url: string, headline: string, date: Date | null, lead?: string, sourceContent?: string}>}
  */
 export function extractJsonApiItems(text, apiUrl) {
   let data;
@@ -744,18 +744,39 @@ export function extractJsonApiItems(text, apiUrl) {
   }
   // CMS pubblico di Schaffhausen (sh.ch e shpol.ch): la pagina pubblica e'
   // un guscio client-side, ma /CMS/content/list espone gia' la lista di
-  // contenuti pubblicati. Per sh.ch il filtro sull'endpoint seleziona i PDF;
-  // il parser non scarica il file e conserva il permalink HTML, che resta la
-  // pagina-fonte verificabile per il generatore.
+  // contenuti pubblicati. Alcuni portali mettono il corpo editoriale in
+  // `post_content` nella stessa risposta, mentre il `permalink` restituito
+  // dall'API e' una shell comune che il server reindirizza alla lista: il
+  // corpo della riga e' quindi la fonte verificata da consegnare al
+  // generatore, senza inventare una URL diversa o perdere il contenuto.
   if (Array.isArray(data) && data.some((n) => n && n.permalink && n.publication_date)) {
     for (const n of data) {
       const url = absoluteUrl(n?.permalink, apiUrl);
       const headline = stripTags(n?.kachellabel ?? n?.listlabel ?? n?.articleHeadline ?? n?.label);
       if (!url || headline.length < 10) continue;
-      const date = parseDottedDate(n?.publication_date) || validDate(n?.publication_date);
+      // `publication_date` is day-only on the CMS; `transactiontime` carries
+      // the publication timestamp and keeps the 3-day window honest around
+      // midnight. `custom_publication_date_date` is the event date in several
+      // Polizei notices, so it must not win the recency decision.
+      const date = parseDottedDate(n?.transactiontime)
+        || parseDottedDate(n?.publication_date)
+        || validDate(n?.publication_date);
       if (!date) continue;
       const lead = stripTags(n?.teaserText ?? n?.lead ?? n?.description);
-      out.push({ url, headline, date, ...(lead ? { lead } : {}) });
+      const sourceContent = stripTags(
+        n?.post_content
+          ?? n?.post_content_areaPage
+          ?? n?.content
+          ?? n?.body
+          ?? n?.text,
+      );
+      out.push({
+        url,
+        headline,
+        date,
+        ...(lead ? { lead } : {}),
+        ...(sourceContent.length >= 200 ? { sourceContent } : {}),
+      });
     }
     return dedupByUrl(out);
   }
