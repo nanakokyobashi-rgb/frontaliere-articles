@@ -931,6 +931,13 @@ jobs:
           fi
           PRODUCED="$(git rev-parse HEAD)"
 
+          registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          if [ -f data/generated-image-registry.json ]; then
+            cp data/generated-image-registry.json "$registry_snapshot"
+          else
+            registry_snapshot=''
+          fi
+
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
           for attempt in 1 2 3 4 5; do
@@ -950,6 +957,7 @@ jobs:
               data/topic-candidates-today-picks.json \
               data/blog-images-used.json \
               public/data/journalist-image-catalog.json \
+              data/generated-image-registry.json \
               --merge-queue data/image-regeneration-queue.json \
               --merge-counter data/quota-state.json:runCounter \
               --merge-counter data/topic-candidates-experimental-counter.json:count \
@@ -957,6 +965,14 @@ jobs:
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ || rebased=0
+            if [ "$rebased" -eq 1 ] && [ -n "$registry_snapshot" ] && [ -f data/generated-image-registry.json ]; then
+              node scripts/ci/merge-generated-image-registry.mjs \
+                data/generated-image-registry.json "$registry_snapshot"
+              git add data/generated-image-registry.json
+              if ! git diff --cached --quiet; then
+                git commit --amend --no-edit
+              fi
+            fi
             if [ "$rebased" -eq 1 ]; then
               uniq_rc=0
               node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD || uniq_rc=$?
