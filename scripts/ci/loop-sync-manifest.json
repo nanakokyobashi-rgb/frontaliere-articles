@@ -5479,7 +5479,7 @@
       "reason": "Guard CI dei lock di registrazione runner-locali: segnala con sezione e runId un marker cantonale o di sezione rimasto nel workspace. Il sito non esegue i producer del corpus e non ha un gemello da trasportare.",
       "baseline": {
         "site": null,
-        "corpus": "6ce7eaca2fbfea46",
+        "corpus": null,
         "alignedAt": "2026-10-07"
       }
     }
