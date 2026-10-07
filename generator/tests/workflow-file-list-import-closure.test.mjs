@@ -5,14 +5,16 @@
  * ## Il difetto che chiude (2026-10-07)
  *
  * `generator/scripts/load-rc-env.mjs` ha guadagnato un import statico,
- * `./lib/source-copy-guard.mjs`. Cinque workflow portano il loader sul runner
- * senza un checkout intero, nominando i file uno per uno: due li scaricano
- * (`enable-native-automerge.yml`, `auto-merge-enroll-sweep.yml`), tre li
- * elencano in uno `sparse-checkout` (`orphan-push-warn.yml`,
- * `review-quota-rescuer.yml`, `retry-code-check-after-body-edit.yml`). Nessuno
- * dei cinque elenchi nominava il modulo nuovo. Il terzo sparse si e' salvato
- * per la sua modalita': in cone mode nominare un file porta sul runner tutti
- * i file della stessa cartella. Per gli altri quattro, dal merge in poi:
+ * `./lib/source-copy-guard.mjs`. Sette workflow portano il loader sul runner
+ * senza un checkout intero, nominando i file uno per uno, in tre forme: due
+ * li scaricano (`enable-native-automerge.yml`, `auto-merge-enroll-sweep.yml`),
+ * tre li elencano in uno `sparse-checkout` (`orphan-push-warn.yml`,
+ * `review-quota-rescuer.yml`, `retry-code-check-after-body-edit.yml`), due li
+ * estraggono con `git show <ref>:<file> > <file>` (`pr-redcheck-fixer.yml`,
+ * `stale-pr-rescuer.yml`). Nessuno dei sette elenchi nominava il modulo nuovo.
+ * Il terzo sparse si e' salvato per la sua modalita': in cone mode nominare un
+ * file porta sul runner tutti i file della stessa cartella. Per gli altri sei,
+ * dal merge in poi:
  *
  *     Error [ERR_MODULE_NOT_FOUND]: Cannot find module
  *     '.../native-automerge-helpers/lib/source-copy-guard.mjs' imported from
@@ -33,16 +35,18 @@
  *
  * ## La regola
  *
- * Per ogni elenco esplicito di un workflow — un blocco `sparse-checkout: |` o
- * gli argomenti di `download_and_check` — ogni file JS NOMINATO nell'elenco
+ * Per ogni elenco esplicito di un workflow — un blocco `sparse-checkout: |`,
+ * gli argomenti di `download_and_check`, oppure i file che uno stesso passo
+ * `run` estrae con `git show <ref>:<file>` o con `gh api .../contents/<file>`
+ * — ogni file JS NOMINATO nell'elenco
  * deve avere la chiusura dei propri import relativi (statici e dinamici, come
  * li estrae lo scanner condiviso) coperta dallo stesso elenco.
  *
  * Solo i file nominati sono radici: una voce di cartella non dice quale script
  * il job esegue, e pretendere la chiusura di ogni file di una cartella darebbe
- * falsi rossi su script che quel job non lancia. Per i download la copertura
- * e' l'appartenenza all'elenco; la corrispondenza fra le destinazioni resta ai
- * test dei singoli workflow.
+ * falsi rossi su script che quel job non lancia. Per i download e per
+ * `git show` la copertura e' l'appartenenza all'elenco; la corrispondenza fra
+ * le destinazioni resta ai test dei singoli workflow.
  */
 import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test } from 'node:test';
@@ -148,6 +152,35 @@ export function downloadList(yamlText) {
   return { where: 'download_and_check', sources: [...new Set([...direct, ...specs])] };
 }
 
+/**
+ * I file che ogni passo `run: |` estrae uno per uno, un elenco per passo:
+ * `git show <ref>:<file>` e `gh api .../contents/<file>?ref=...`.
+ */
+export function gitShowLists(yamlText) {
+  const lines = yamlText.split('\n');
+  const lists = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    const match = /^(\s*)(?:- )?run:\s*[|>]/.exec(lines[i]);
+    if (!match) continue;
+    const indent = match[1].length;
+    const body = [];
+    let end = i + 1;
+    for (; end < lines.length; end += 1) {
+      if (lines[end].trim() === '') continue;
+      if (lines[end].match(/^\s*/)[0].length <= indent) break;
+      if (!lines[end].trim().startsWith('#')) body.push(lines[end]);
+    }
+    const script = body.join('\n');
+    const sources = [
+      ...script.matchAll(/\bgit(?:\s+-C\s+\S+)?\s+show\s+["']?[^\s"':]+:([A-Za-z0-9_./-]+)["']?/g),
+      ...script.matchAll(/\/contents\/([A-Za-z0-9_./-]+)\?ref=/g),
+    ].map((found) => found[1]);
+    if (sources.length > 0) lists.push({ where: `estrazione nel passo alla riga ${i + 1}`, sources: [...new Set(sources)] });
+    i = end - 1;
+  }
+  return lists;
+}
+
 /** Le violazioni della regola in un workflow: `{ where, root, missing }`. */
 export function listViolations(root, yamlText) {
   const violations = [];
@@ -165,15 +198,14 @@ export function listViolations(root, yamlText) {
     }
   }
   const download = downloadList(yamlText);
-  if (download) {
-    const named = download.sources.filter((source) => JS_FILE_RE.test(source) && isFile(root, source));
-    if (named.length > 0) {
-      lists += 1;
-      for (const file of named) {
-        const { files, unresolved } = importClosure(root, file);
-        const missing = [...files.filter((dep) => !download.sources.includes(dep)), ...unresolved];
-        if (missing.length > 0) violations.push({ where: download.where, root: file, missing });
-      }
+  for (const list of [...(download ? [download] : []), ...gitShowLists(yamlText)]) {
+    const named = list.sources.filter((source) => JS_FILE_RE.test(source) && isFile(root, source));
+    if (named.length === 0) continue;
+    lists += 1;
+    for (const file of named) {
+      const { files, unresolved } = importClosure(root, file);
+      const missing = [...files.filter((dep) => !list.sources.includes(dep)), ...unresolved];
+      if (missing.length > 0) violations.push({ where: list.where, root: file, missing });
     }
   }
   return { lists, violations };
@@ -197,6 +229,8 @@ test('ogni elenco di file di un workflow porta con se\' gli import dei file che 
     'orphan-push-warn.yml',
     'retry-code-check-after-body-edit.yml',
     'review-quota-rescuer.yml',
+    'pr-redcheck-fixer.yml',
+    'stale-pr-rescuer.yml',
   ]) {
     assert.ok(examined.has(known), `${known}: l'elenco che materializza il loader non e' stato esaminato`);
   }
@@ -317,6 +351,45 @@ test('i download si leggono dagli argomenti di download_and_check, non dal testo
     ]));
     assert.deepEqual(complete.violations, []);
     assert.equal(downloadList('run: echo niente'), null);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('i file estratti uno per uno si leggono passo per passo: git show (con o senza -C) e API dei contenuti', () => {
+  const root = fixtureTree();
+  try {
+    const step = (commands) => [
+      '      - name: Materialize',
+      '        run: |',
+      '          set -euo pipefail',
+      "          # git show HEAD:tools/lib/deep/c.mjs (un commento non estrae niente)",
+      ...commands.map((command) => `          ${command}`),
+    ].join('\n');
+    const stale = listViolations(root, [
+      step(['git show HEAD:tools/run.mjs > tools/run.mjs', 'git show HEAD:tools/lib/a.mjs \\', '  > tools/lib/a.mjs']),
+      // Un altro passo e' un altro elenco: non copre i file del primo.
+      step(['git -C other show "origin/${DEFAULT_BRANCH}:tools/lib/b.mjs" > b.mjs', 'git show HEAD:tools/lib/deep/c.mjs > c.mjs']),
+    ].join('\n'));
+    assert.equal(stale.lists, 2);
+    assert.deepEqual(
+      stale.violations.map(({ root: file, missing }) => [file, [...missing].sort()]),
+      [['tools/run.mjs', ['tools/lib/b.mjs', 'tools/lib/deep/c.mjs']], ['tools/lib/a.mjs', ['tools/lib/deep/c.mjs']]],
+    );
+    const complete = listViolations(root, step([
+      'git show HEAD:tools/run.mjs > tools/run.mjs',
+      'git -C other show "origin/${DEFAULT_BRANCH}:tools/lib/a.mjs" > tools/lib/a.mjs',
+      "git show 'HEAD:tools/lib/b.mjs' > tools/lib/b.mjs",
+      'git show "$sha:tools/lib/deep/c.mjs" > tools/lib/deep/c.mjs',
+      'git show HEAD^:package.json > /tmp/previous.json',
+    ]));
+    assert.equal(complete.lists, 1);
+    assert.deepEqual(complete.violations, []);
+
+    // La stessa regola per un file letto dall'API dei contenuti.
+    const viaApi = listViolations(root, step(['gh api "repos/$REPO/contents/tools/lib/a.mjs?ref=$SHA" --jq .content']));
+    assert.deepEqual(viaApi.violations.map(({ root: file, missing }) => [file, missing]), [['tools/lib/a.mjs', ['tools/lib/deep/c.mjs']]]);
+    assert.deepEqual(gitShowLists('      - run: echo niente'), []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
