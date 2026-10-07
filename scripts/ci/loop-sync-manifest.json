@@ -2290,10 +2290,10 @@
     {
       "path": "scripts/lib/cdn-shell-assets.mjs",
       "mode": "identical",
-      "reason": "Garanzia che gli script statici della shell siano sulla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha, non sostituisce mai un oggetto e si ferma se non puo' stabilirlo. Usa solo i moduli di Node e scripts/lib/upload-cdn-file.sh (anch'esso identical) proprio per poter restare byte-identico: qui i moduli fratelli del sito sono diversi o assenti. Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
+      "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275 e #12299): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; ogni file che la prima sonda non ha mostrato viene invalidato all'edge e richiesto all'URL delle pagine nelle due varianti di cache, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
       "baseline": {
-        "site": "8e53333240ac357a",
-        "corpus": "8e53333240ac357a",
+        "site": "19441293bd8a8c21",
+        "corpus": "19441293bd8a8c21",
         "alignedAt": "2026-10-07"
       }
     },
@@ -3766,7 +3766,7 @@
       "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "599c6d0f4ce0ad33",
+        "corpus": "c882b2b06999f52d",
         "alignedAt": "2026-10-07"
       }
     },

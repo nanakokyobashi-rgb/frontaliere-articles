@@ -24,7 +24,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { hostShellFiles, main } from '../../scripts/ci/ensure-host-shell-assets.mjs';
-import { ensureCdnShellAssets, shellAssetsFromStaticScripts } from '../../scripts/lib/cdn-shell-assets.mjs';
+import {
+  SHELL_ASSET_PAGE_ORIGIN,
+  ensureCdnShellAssets,
+  shellAssetsFromStaticScripts,
+} from '../../scripts/lib/cdn-shell-assets.mjs';
+import { VARY_ORIGINS } from '../../scripts/lib/cf-purge-variants.mjs';
 import { normalizeContractEnv } from './shell-contract-env.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -35,12 +40,19 @@ const ENSURE_SCRIPT = 'scripts/ci/ensure-host-shell-assets.mjs';
 // dipende da ASSET_CDN al caricamento del modulo.
 normalizeContractEnv();
 
-/** Una CDN e un bucket che contengono `stored`, nei tre collaboratori che la libreria accetta. */
-function fakeCdn(stored, { probeAnswer, storeAnswer, uploadWorks = true } = {}) {
+/**
+ * Una CDN e un bucket che contengono `stored`, nei collaboratori che la
+ * libreria accetta. L'edge di questa CDN tiene il 404 dato per una chiave che
+ * mancava (`edge404`) finche' quella chiave non viene invalidata, come quello
+ * vero fa per alcuni minuti.
+ */
+function fakeCdn(stored, { probeAnswer, storeAnswer, uploadWorks = true, purgeWorks = true, confirmAnswer } = {}) {
   const bucket = new Set(stored);
-  const calls = { checkStored: [], upload: [] };
+  const edge404 = new Set();
+  const calls = { checkStored: [], upload: [], purge: [], confirm: [], wait: [] };
   return {
     bucket,
+    edge404,
     calls,
     probe: async (key) => (probeAnswer ? probeAnswer(key) : bucket.has(key) ? 'present' : 'absent'),
     checkStored: (key) => {
@@ -52,6 +64,17 @@ function fakeCdn(stored, { probeAnswer, storeAnswer, uploadWorks = true } = {}) 
       if (uploadWorks) bucket.add(key);
       return uploadWorks;
     },
+    purge: (keys) => {
+      calls.purge.push([...keys]);
+      if (purgeWorks) for (const key of keys) edge404.delete(key);
+      return purgeWorks;
+    },
+    confirm: async (key, { pageOrigin } = {}) => {
+      calls.confirm.push([key, pageOrigin]);
+      if (!bucket.has(key) || edge404.has(key)) return 'absent';
+      return confirmAnswer ? confirmAnswer(key, pageOrigin) : 'present';
+    },
+    wait: async (ms) => { calls.wait.push(ms); },
     log: () => {},
   };
 }
@@ -103,30 +126,74 @@ test('IL CASO: il file che la CDN non ha viene caricato, con il contenuto di hos
   assert.deepEqual(results.map((result) => result.outcome), assets.map(() => 'uploaded'));
 });
 
-test('un file servito non fa leggere R2 ne\' caricare niente', async () => {
+// Il rilievo della review su questa PR: l'oggetto e' su R2, ma una localita'
+// dell'edge che ha risposto 404 mentre mancava continua a rispondere cosi'.
+test('IL RILIEVO: il 404 che l\'edge ha tenuto viene invalidato, e l\'URL delle pagine deve rispondere', async () => {
+  const assets = shellAssetsFromStaticScripts(hostShellFiles());
+  const cdn = fakeCdn([]);
+  for (const asset of assets) cdn.edge404.add(asset.key);
+
+  await ensureCdnShellAssets({ assets, ...cdn });
+
+  assert.deepEqual(cdn.calls.purge, [assets.map((asset) => asset.key)], 'un solo purge, per tutti i file caricati');
+  assert.equal(cdn.edge404.size, 0);
+  // Le due voci di cache che l'edge tiene per ogni URL: senza Origin e con
+  // quella della pagina.
+  assert.deepEqual(
+    cdn.calls.confirm,
+    assets.flatMap((asset) => [[asset.key, undefined], [asset.key, SHELL_ASSET_PAGE_ORIGIN]]),
+  );
+});
+
+test('un file servito non fa leggere R2, ne\' caricare, ne\' invalidare niente', async () => {
   const assets = shellAssetsFromStaticScripts(hostShellFiles());
   const cdn = fakeCdn(assets.map((asset) => asset.key));
   await ensureCdnShellAssets({ assets, ...cdn });
   assert.deepEqual(cdn.calls.checkStored, []);
   assert.deepEqual(cdn.calls.upload, []);
+  assert.deepEqual(cdn.calls.purge, []);
+  assert.deepEqual(cdn.calls.confirm, []);
 });
 
-test('un runner respinto dall\'edge non sostituisce un oggetto che R2 ha', async () => {
+test('un runner respinto dall\'edge non sostituisce un oggetto che R2 ha, ma l\'URL va confermato lo stesso', async () => {
   const assets = shellAssetsFromStaticScripts(hostShellFiles());
   const cdn = fakeCdn(assets.map((asset) => asset.key), { probeAnswer: () => 'unknown' });
   const results = await ensureCdnShellAssets({ assets, ...cdn });
   assert.deepEqual(cdn.calls.upload, []);
   assert.deepEqual(results.map((result) => result.outcome), assets.map(() => 'stored'));
+  assert.deepEqual(cdn.calls.purge, [assets.map((asset) => asset.key)]);
+  assert.equal(cdn.calls.confirm.length, assets.length * 2);
 });
 
-test('se non si puo\' stabilire che il file ci sia, il job si ferma senza caricare', async () => {
+test('se non si puo\' stabilire che il file sia servito, il job si ferma', async () => {
   const assets = shellAssetsFromStaticScripts(hostShellFiles());
-  for (const cdn of [
-    fakeCdn([], { storeAnswer: () => 'indeterminate' }),
-    fakeCdn([], { uploadWorks: false }),
+  for (const [cdn, message] of [
+    [fakeCdn([], { storeAnswer: () => 'indeterminate' }), /R2 could not be read/],
+    [fakeCdn([], { uploadWorks: false }), /the upload failed/],
+    [fakeCdn([], { purgeWorks: false }), /could not be purged/],
+    [fakeCdn([], { confirmAnswer: () => 'absent' }), /still does not serve it/],
+    [fakeCdn([], { confirmAnswer: (_key, pageOrigin) => (pageOrigin ? 'unknown' : 'present') }), /still does not serve it/],
   ]) {
-    await assert.rejects(() => ensureCdnShellAssets({ assets, ...cdn }), /must not be published/);
+    await assert.rejects(() => ensureCdnShellAssets({ assets, ...cdn }), (error) => {
+      assert.match(error.message, message);
+      assert.match(error.message, /must not be published/);
+      return true;
+    });
   }
+});
+
+// La libreria e' identica a quella del sito e usa lo script di purge di QUESTO
+// repo come comando: modalita' e riga di successo sono un contratto che nessun
+// import porta.
+test('lo script di purge di questo repo ha la modalita\' e la riga su cui la libreria conta', () => {
+  const script = read('scripts/cf-purge-cache.mjs');
+  assert.match(script, /arg\.startsWith\('--files='\)/);
+  assert.match(script, /console\.log\(`✅ Cloudflare edge cache purged for \$\{targetFiles\.length\} URL\(s\)/);
+  // Esce 0 senza invalidare: per questo il segnale e' la riga, non il codice d'uscita.
+  assert.match(script, /CF_API_TOKEN not set — skipping[^\n]*\n\s*process\.exit\(0\)/);
+  // Le due voci di cache che la libreria poi conferma.
+  assert.match(script, /purgeBodiesForUrls\(/);
+  assert.deepEqual(VARY_ORIGINS, [SHELL_ASSET_PAGE_ORIGIN]);
 });
 
 // ── 3. Chi pubblica esegue il passo, prima ────────────────────────────────
@@ -200,4 +267,22 @@ test('ogni job che rende pagine con la shell esegue prima il passo, e non puo\' 
     if (/ensure-host-shell-assets\.mjs[^\n]*\|\|/.test(steps[ensure])) offenders.push(`${workflow} › ${name}: il passo scarta il proprio esito`);
   }
   assert.deepEqual(offenders, []);
+});
+
+// Il passo legge R2 e invalida l'edge: senza le credenziali puo' solo fermare
+// il job il giorno in cui un file manca.
+test('ogni job che rende pagine carica i secret di Remote Config prima del passo', () => {
+  const loadsSecrets = invocationOf(['generator/scripts/load-rc-env.mjs']);
+  const offenders = [];
+  for (const { workflow, name, steps } of renderingJobs) {
+    const ensure = steps.findIndex((step) => ensures.test(step));
+    const secrets = steps.findIndex((step) => loadsSecrets.test(step));
+    if (ensure === -1) continue;
+    if (secrets === -1 || secrets > ensure) offenders.push(`${workflow} › ${name}: il passo gira senza i secret di Remote Config`);
+  }
+  assert.deepEqual(offenders, []);
+  const loader = read('generator/scripts/load-rc-env.mjs');
+  for (const name of ['CF_API_TOKEN', 'R2_ACCESS_KEY_ID']) {
+    assert.match(loader, new RegExp(String.raw`^\s*${name}:\s*\[`, 'm'), `${name} non e' nella mappa RC_TO_ENV`);
+  }
 });
