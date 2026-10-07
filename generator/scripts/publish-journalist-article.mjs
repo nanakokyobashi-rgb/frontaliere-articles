@@ -10,7 +10,8 @@
  *   2. Builds the exact `data` shape scripts/create-article.mjs expects from the
  *      journalist's IT content.
  *   3. Resolves the hero image from a record-bearing catalog entry, a governed
- *      engine generation, or a documented editorial upload.
+ *      engine generation, a documented editorial upload, or a governed static
+ *      fallback when the engine is unavailable.
  *   4. Runs the article through translateArticle() → enforceStrongInternalLinks()
  *      → registerArticleFiles() — the IDENTICAL multi-language registration
  *      pipeline automated content goes through (no parallel/duplicate system).
@@ -78,6 +79,7 @@ import {
   generateArticleImage,
   repairGeneratedArticleSourceCopy,
   refreshSourceCopyDerivedMetadata,
+  resolveArticleCoverFallback,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
 import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
@@ -266,7 +268,7 @@ function setHeroProvenance(data, imagePath, provenance) {
 /**
  * Resolve a hero image under the publication policy:
  * catalog record → governed engine → documented editorial upload → governed
- * engine fallback. The URL branch is deliberately last and fail-closed.
+ * catalog/static fallback. The URL branch is deliberately last and fail-closed.
  */
 async function resolveHeroImage(data, doc) {
   const rawImage = String(doc?.image || '').trim();
@@ -356,17 +358,18 @@ async function resolveHeroImage(data, doc) {
 
   const generatedPath = await generateArticleImage(data);
   if (generatedPath) {
+    console.error(`[cover] article=${data.id} source=engine reason=generated`);
+    delete data._imageGenerationFailureReason;
     return { source: 'generated-engine', path: generatedPath, provenance: 'generated' };
   }
 
-  const matched = findBestFallbackImage(data);
-  if (matched) {
-    const provenance = imageRecordForPath(PROJECT_ROOT, matched, { strict: true });
-    if (!provenance) throw new Error(`Catalog fallback has no valid provenance record: ${matched}`);
-    setHeroProvenance(data, matched, provenance);
-    return { source: 'catalog-fallback', path: matched, provenance: provenance.kind };
-  }
-  throw new Error(`No governed image or valid catalog fallback for journalist article ${data.id}`);
+  const fallback = resolveArticleCoverFallback(data, {
+    root: PROJECT_ROOT,
+    findCatalogImage: findBestFallbackImage,
+    reason: data._imageGenerationFailureReason || 'engine-failed',
+  });
+  delete data._imageGenerationFailureReason;
+  return fallback;
 }
 
 /**
