@@ -798,7 +798,7 @@ jobs:
           for file in "${changed_files[@]}"; do
             [ -f "$file" ] || { echo "::error::changed cover is not a file: $file"; exit 1; }
             key="${file#public/}"
-            output="$(bash scripts/lib/upload-cdn-file.sh "$file" "$key" 'public,max-age=86400')"
+            output="$(bash scripts/lib/upload-cdn-file.sh "$file" "$key" "public,max-age=600")"
             printf '%s\n' "$output"
             printf '%s\n' "$output" | grep -q '✅ uploaded' || {
               echo "::error::CDN upload did not succeed for $file"
