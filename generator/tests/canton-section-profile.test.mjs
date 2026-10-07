@@ -8,8 +8,8 @@
  *     le inattive: il dedup fra sezioni le deve vedere), con i path del core e
  *     lo stato sotto data/sections/<id>/ (D18), senza toccare frontaliere e
  *     svizzera;
- *   - il gate D16: spento per default, acceso dal profilo `enabled` o
- *     dall'elenco CANTON_ARTICLE_SECTIONS_ENABLED (mappato in load-rc-env);
+ *   - il gate D16: `enabled` attiva la superficie corpus, ma la generazione
+ *     richiede anche CANTON_ARTICLE_SECTIONS_ENABLED (mappato in load-rc-env);
  *   - gli argomenti di rebase coprono OGNI file che create-article scrive per
  *     una sezione cantonale, con la strategia giusta;
  *   - gli scheletri dei file vuoti hanno la forma che gli scrittori di
@@ -115,7 +115,7 @@ test('create-article: le storiche restano letterali, le cantonali arrivano dal m
 
 // ── D16: il gate ────────────────────────────────────────────────────────────
 
-test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
+test('gate D16: il profilo attivo richiede comunque Remote Config', () => {
   // Il profilo di produzione può avere cantoni accesi (P11). Il caso «default
   // spento» va quindi provato con una copia esplicitamente disabilitata, non
   // assumendo che il catalogo live resti per sempre tutto false.
@@ -124,6 +124,9 @@ test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
   for (const id of cantonSectionIds()) {
     assert.equal(resolveCantonSectionGate(id, { env: {}, profiles }).enabled, false, `${id} acceso senza flag`);
     assert.equal(resolveCantonSectionGate(id, { env: { [CANTON_SECTIONS_ENABLED_ENV]: '' }, profiles }).enabled, false);
+  }
+  for (const code of ['TI', 'GR', 'BE']) {
+    profiles.cantons.find((profile) => profile.code === code).enabled = true;
   }
   const env = { [CANTON_SECTIONS_ENABLED_ENV]: 'TI, canton-gr  be;zz' };
   assert.deepEqual(resolveCantonSectionGate('canton-ti', { env, profiles }), { enabled: true, via: 'env', unknown: ['zz'] });
@@ -134,7 +137,9 @@ test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
   assert.equal(parseEnabledCantonSections('basilea appenzello').sections.size, 2);
 
   profiles.cantons.find((c) => c.code === 'UR').enabled = true;
-  assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: {}, profiles }), { enabled: true, via: 'profile', unknown: [] });
+  assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: {}, profiles }), { enabled: false, via: null, unknown: [] });
+  const envWithUr = { ...env, [CANTON_SECTIONS_ENABLED_ENV]: `${env[CANTON_SECTIONS_ENABLED_ENV]}, UR` };
+  assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: envWithUr, profiles }), { enabled: true, via: 'env', unknown: ['zz'] });
 });
 
 test('gate D16 cablato: Remote Config mappata, controllo in testa a main() prima di ogni scrittura', () => {

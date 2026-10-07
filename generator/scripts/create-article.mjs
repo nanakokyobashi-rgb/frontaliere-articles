@@ -15529,8 +15529,9 @@ async function exitAfterFlush(code) {
 }
 
 async function main() {
-  // Sezione cantonale spenta (D16): `enabled` nel profilo o l'elenco di
-  // Remote Config CANTON_ARTICLE_SECTIONS_ENABLED, default nessun cantone.
+  // Sezione cantonale spenta (D16): `enabled` nel profilo attiva la superficie
+  // del corpus, ma la generazione richiede anche CANTON_ARTICLE_SECTIONS_ENABLED
+  // da Remote Config; default nessun cantone.
   // Prima di ogni lettura o scrittura: una sezione spenta non tocca niente ed
   // esce 0 con un marcatore che il workflow (P8) e i log possono contare.
   if (IS_CANTON) {
@@ -15545,12 +15546,12 @@ async function main() {
       console.error(`  ⚠️ ${CANTON_SECTIONS_ENABLED_ENV}: token non riconosciuti ignorati: ${gate.unknown.join(', ')}`);
     }
     if (!gate.enabled) {
-      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo enabled=false, assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
+      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo non attivo nel corpus oppure assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME}`] });
       await exitAfterFlush(0);
       return;
     }
-    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${gate.via === 'profile' ? 'profilo enabled' : CANTON_SECTIONS_ENABLED_ENV})`);
+    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${CANTON_SECTIONS_ENABLED_ENV} e profilo corpus enabled)`);
     // Lo stato della sezione vive in data/sections/<id>/ (D18) e write() non
     // crea cartelle: senza questa riga il primo salvataggio del ledger URL->id
     // fallirebbe (in silenzio, e' un best-effort) e il dedup della fonte

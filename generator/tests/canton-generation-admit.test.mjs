@@ -108,6 +108,16 @@ test('flag assente o vuoto: nessun cantone genera', () => {
   }
 });
 
+test('D22 enabled nel profilo non bypassa il gate D16 di Remote Config', () => {
+  const r = readers();
+  const v = decide({
+    env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: '' },
+  }, r);
+  assert.equal(v.proceed, false);
+  assert.equal(v.reason, 'canton-disabled');
+  assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 });
+});
+
 test('il profilo committato e il core bootstrap condividono l\'insieme dei cantoni accesi', () => {
   const profileSections = PROFILES.cantons.filter((c) => c.enabled === true).map((c) => c.section).sort();
   const coreSections = Object.keys(activeCorpusCoreMap()).filter((section) => section.startsWith('canton-')).sort();
