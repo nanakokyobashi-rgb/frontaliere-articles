@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/xkqqxunqnkgo": {
-    "articleId": "conferenza-osce-berna-2026",
-    "ts": "2026-09-06T01:22:17.571Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948156/polizia-operazione-goldach-gallo-segnalazioni": {
     "articleId": "polizia-operazione-goldach",
     "ts": "2026-09-06T01:27:55.662Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/hhtcbmz3uwb9": {
     "articleId": "intelligenza-artificiale-diritti-umani",
     "ts": "2026-10-07T15:29:13.775Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/e-kwfdci0u88": {
+    "articleId": "lista-sanzioni-sesam-svizzera",
+    "ts": "2026-10-07T18:29:12.035Z",
     "keyForm": 2
   }
 }
