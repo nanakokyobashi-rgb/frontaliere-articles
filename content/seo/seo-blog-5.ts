@@ -77483,7 +77483,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Prezzi di benzina e gasolio allineati tra Lombardia e Svizzera. Lo sconto accise scade il 26 agosto. Conviene ancora fare il pieno oltre confine?',
     keywords: 'frontalieri, ticino, svizzera, italia, benzina, oltre, pieno, svizzero',
     ogTitle: 'Benzina oltre 2€, il pieno svizzero non conviene più',
-    ogDescription: 'Benzina e gasolio allineati tra Lombardia e Svizzera: 2,01€ vs 2,02€. Scadenza sconto accise il 26 agosto. Chi lavora in provincia di Varese deve rivedere la strategia di risparmio. Scopri i prezzi attuali sulle autostrade e cosa aspettarsi dalle',
+    ogDescription: 'Benzina e gasolio allineati tra Lombardia e Svizzera: 2,01€ vs 2,02€. Scadenza sconto accise il 26 agosto. Chi lavora in provincia di Varese deve rivedere la strategia di risparmio. Scopri i prezzi attuali sulle autostrade e cosa aspettarsi',
     canonicalPath: '/articoli-frontaliere/benzina-confine-svizzera-agosto-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -95159,7 +95159,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Ad agosto i rincari in Ticino raggiungono il 3%, mentre casa e mobilità salgono del 2,4% a livello nazionale e l\'inflazione è allo 0,8%. Scopri i dati Comparis',
     keywords: 'frontalieri, ticino, svizzera, italia, rincari, mobilità, abitazione, agosto',
     ogTitle: 'Ticino guida i rincari di mobilità e abitazione',
-    ogDescription: 'Lo studio di Comparis e KOF evidenzia che ad agosto i rincari in Ticino sono al 3%, il più alto tra i cantoni, mentre a livello nazionale casa e mobilità aumentano del 2,4% e l\'inflazione generale resta allo 0,8%. L\'articolo analizza l\'impatto sulle',
+    ogDescription: 'Lo studio di Comparis e KOF evidenzia che ad agosto i rincari in Ticino sono al 3%, il più alto tra i cantoni, mentre a livello nazionale casa e mobilità aumentano del 2,4% e l\'inflazione generale resta allo 0,8%. L\'articolo analizza l\'impatto',
     canonicalPath: '/articoli-frontaliere/ticino-costi-mobilita-abitazione',
     structuredData: {
       "@context": "https://schema.org",
@@ -97323,7 +97323,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Il 4 ottobre il lungolago di Gavirate ospita la Festa della Zucca con stand gastronomici, musica e rievocazioni storiche, mentre la Grand Fondo chiude molte',
     keywords: 'frontalieri, ticino, svizzera, italia, festa, zucca, gavirate, weekend',
     ogTitle: 'Festa della Zucca a Gavirate: weekend di ottobre in Varese',
-    ogDescription: 'Nel primo weekend di ottobre la provincia di Varese si anima: a Gavirate la Festa della Zucca attira famiglie con cibo, musica e rievocazioni dei Celti, Longobardi e Normanni; la Grand Fondo Tre Valli Varesine chiude numerose vie, rendendo gli',
+    ogDescription: 'Nel primo weekend di ottobre la provincia di Varese si anima: a Gavirate la Festa della Zucca attira famiglie con cibo, musica e rievocazioni dei Celti, Longobardi e Normanni; la Grand Fondo Tre Valli Varesine chiude numerose vie, rendendo',
     canonicalPath: '/articoli-frontaliere/festa-zucca-gavirate-weekend-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
