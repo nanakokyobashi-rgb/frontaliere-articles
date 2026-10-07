@@ -9,6 +9,51 @@
       "status": "queued",
       "requestedAt": "2026-10-07T04:45:22.263Z",
       "lastFailureAt": "2026-10-07T04:45:22.263Z"
+    },
+    {
+      "articleId": "clan-nazarbayev-ceresio",
+      "title": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
+      "fallbackImage": "/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp",
+      "reason": "All image providers failed for article-clan-nazarbayev-ceresio: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T04:58:11.891Z",
+      "lastFailureAt": "2026-10-07T04:58:11.891Z"
+    },
+    {
+      "articleId": "raffineria-cressier-carburanti",
+      "title": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
+      "fallbackImage": "/images/blog/diesel-rincaro-geopolitica-svizzera.webp",
+      "reason": "All image providers failed for article-raffineria-cressier-carburanti: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:28:44.576Z",
+      "lastFailureAt": "2026-10-07T05:28:44.576Z"
+    },
+    {
+      "articleId": "monte-olimpino-treni-weekend",
+      "title": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "fallbackImage": "/images/blog/como-crisi-abitativa-alloggi-sfitti.webp",
+      "reason": "All image providers failed for article-monte-olimpino-treni-weekend: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:47:57.525Z",
+      "lastFailureAt": "2026-10-07T05:47:57.525Z"
+    },
+    {
+      "articleId": "a2-mendrisio-melano-risanamento",
+      "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
+      "fallbackImage": "/images/blog/mendrisio-melano-progetto-meme-risanamento-fonico.webp",
+      "reason": "All image providers failed for article-a2-mendrisio-melano-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:12:18.865Z",
+      "lastFailureAt": "2026-10-07T06:12:18.865Z"
+    },
+    {
+      "articleId": "scambio-dati-salariali-2027",
+      "title": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
+      "fallbackImage": "/images/blog/fairtiq-bonus-ticino-2026-2027.webp",
+      "reason": "All image providers failed for article-scambio-dati-salariali-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:25:44.304Z",
+      "lastFailureAt": "2026-10-07T06:25:44.304Z"
     }
   ]
 }

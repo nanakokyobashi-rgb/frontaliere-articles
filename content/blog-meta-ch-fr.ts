@@ -7844,6 +7844,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziative-mps-giustizia-respinte.title': 'Initiatives MPS sur la justice rejetées par le Grand Conseil',
     'blog.article.iniziative-mps-giustizia-respinte.excerpt': 'Le Grand Conseil a rejeté les deux initiatives MPS : réduire l\'âge de la retraite des magistrats de 70 à 65 ans (41 voix contre) et transférer au Parlement les destitutions (61 voix contre).',
     'blog.article.iniziative-mps-giustizia-respinte.imageAlt': 'Salle du Grand Conseil à Bellinzone lors d\'un vote sur les initiatives MPS concernant la justice',
+    'blog.article.raffineria-cressier-carburanti.title': 'Le diesel suisse frôle 2,50 francs : alerte à Cressier',
+    'blog.article.raffineria-cressier-carburanti.excerpt': '## En bref - Le diesel en Suisse frôle 2,50 francs le litre - Cressier couvre environ 35% des carburants nationaux - Le raffinage européen a une capacité',
+    'blog.article.raffineria-cressier-carburanti.imageAlt': 'Pompe diesel en Suisse avec une raffinerie en arrière-plan',
 };
 
 export default blogMetaChFr;

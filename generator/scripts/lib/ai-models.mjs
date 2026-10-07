@@ -357,10 +357,12 @@ export const AI_MODELS = Object.freeze({
   LOCAL_FALLBACK:      'local/fallback',
 
   // ── Codex CLI primary (action-owned broker lane) ─────────────────────────
-  // Codex Luna Max is the first provider for every LLM purpose. The action
-  // exposes only a private broker socket; if the socket/auth lane is absent or
-  // trips its in-run circuit, callLLM removes this entry from ordinary chains
-  // and resumes the previous provider order without exposing CODEX_AUTH_JSON.
+  // Codex Luna Max is available as the owner-approved primary lane. Production
+  // callers opt in per purpose; incidental default calls keep the free-provider
+  // order so metadata, translation and fallback work cannot consume the broker
+  // wall-clock budget. The action exposes only a private broker socket; if the
+  // socket/auth lane is absent or trips its in-run circuit, callLLM removes
+  // this entry from explicit fallback chains without exposing CODEX_AUTH_JSON.
   // The broker's composite action defaults to three concurrent requests per
   // job (1..6 is accepted, with a refresh-safe fallback to one); this is the
   // per-run cap shared by the crawler workers, not a fleet-wide quota.
@@ -5191,15 +5193,26 @@ export function applyModelsPrefer(chain, prefer) {
 
 /**
  * Make the owner-approved Codex lane the first live candidate after score and
- * per-call preferences have been applied. Keeping this as a final routing
- * step matters: a positive Firestore score must not silently move the primary
- * behind a free provider, while an unavailable broker must leave the old
- * order untouched. Forced diagnostic chains remain authoritative.
+ * per-call preferences have been applied when a default-chain caller opted in.
+ * Keeping this as a final routing step matters: a positive Firestore score
+ * must not silently move the primary behind a free provider. Forced
+ * diagnostic chains remain authoritative.
  */
 function _routeCodexPrimaryFirst(chain) {
   if (!isCodexCliPrimaryEnabled()) return chain;
   const primary = AI_MODELS.CODEX_CLI_PRIMARY;
   return [primary, ...chain.filter((model) => model !== primary)];
+}
+
+/**
+ * The default roster exposes Codex to preflight and diagnostics, but that
+ * must not turn every incidental call into a broker call. A caller opts into
+ * Codex by naming it as the requested model or in its preference. Explicit
+ * custom chains remain authoritative and do not use this predicate.
+ */
+function _explicitlyRequestsCodex({ model, prefer } = {}) {
+  return model === AI_MODELS.CODEX_CLI_PRIMARY
+    || _preferFor(prefer).includes(AI_MODELS.CODEX_CLI_PRIMARY);
 }
 
 /**
@@ -5395,12 +5408,12 @@ export function isAnyModelAvailable() {
  */
 export function getPreferredModel({ model: startModel, chain: chainOverride, prefer } = {}) {
   const usesDefaultChain = !chainOverride;
+  const explicitlyRequestsCodex = _explicitlyRequestsCodex({ model: startModel, prefer });
   let chain = chainOverride ? [...chainOverride] : [...DEFAULT_CHAIN];
-  // A runner without the broker must see the same free-provider order that
-  // existed before Codex became the primary. Explicit custom chains keep their
-  // requested Codex entry so their normal preflight/fallback semantics remain
-  // observable to diagnostics.
-  if (usesDefaultChain && !isCodexCliPrimaryEnabled()) {
+  // Keep Codex in the roster for explicit callers, but do not promote it into
+  // incidental default calls. This prevents metadata, translation and
+  // fallback calls from consuming the broker's wall-clock budget.
+  if (usesDefaultChain && !explicitlyRequestsCodex) {
     chain = chain.filter((m) => m !== AI_MODELS.CODEX_CLI_PRIMARY);
   }
   if (startModel) {
@@ -5413,11 +5426,10 @@ export function getPreferredModel({ model: startModel, chain: chainOverride, pre
   // preferenza. Senza questa riga il peek risponderebbe con il modello che la
   // catena avrebbe scelto, non con quello che la preferenza le fa scegliere.
   chain = applyModelsPrefer(chain, prefer);
-  // An explicit chain is a caller contract (diagnostic pins, evals and the
-  // legacy Claude usage-limit -> Codex fallback). Only the default chain is
-  // globally promoted; purpose-specific production chains put Codex first at
-  // their declaration site.
-  if (usesDefaultChain) chain = _routeCodexPrimaryFirst(chain);
+  // Only a default chain which explicitly opted into Codex is promoted. An
+  // explicit chain is a caller contract (diagnostic pins, evals and the
+  // legacy Claude usage-limit -> Codex fallback) and remains untouched.
+  if (usesDefaultChain && explicitlyRequestsCodex) chain = _routeCodexPrimaryFirst(chain);
   for (const m of chain) {
     if (_shouldSkipExhausted(m)) continue;
     if (isProviderCoolingDown(getProvider(m))) continue;
@@ -9155,12 +9167,12 @@ export async function callLLM(messages, opts = {}) {
   }
 
   const usesDefaultChain = !o.chain;
+  const explicitlyRequestsCodex = _explicitlyRequestsCodex({ model: o.model, prefer: o.prefer });
   let chain = o.chain || [...DEFAULT_CHAIN];
-  // A workflow that cannot provision the broker must degrade to the exact
-  // previous chain without producing one missing-key/error row per call.
-  // Explicit chains retain Codex so a purpose-specific caller can still see
-  // the ordinary preflight skip and continue to its declared fallbacks.
-  if (usesDefaultChain && !isCodexCliPrimaryEnabled()) {
+  // Keep Codex available to explicit callers, but do not promote it into
+  // incidental default calls. This prevents metadata, translation and
+  // fallback calls from consuming the broker's wall-clock budget.
+  if (usesDefaultChain && !explicitlyRequestsCodex) {
     chain = chain.filter((m) => m !== AI_MODELS.CODEX_CLI_PRIMARY);
   }
 
@@ -9209,12 +9221,11 @@ export async function callLLM(messages, opts = {}) {
     // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai da un
     // default, che e' vuoto. Vedi il blocco di commento su applyModelsPrefer.
     chain = applyModelsPrefer(chain, o.prefer);
-    // Codex is the owner-approved primary for the default and purpose chains.
-    // Explicit chains remain caller-authoritative (diagnostic pins and the
-    // legacy Claude usage-limit -> Codex fallback rely on that contract).
-    // Apply the promotion before excludeModels so the independent fact-check
-    // second opinion can explicitly remove Codex.
-    if (usesDefaultChain) chain = _routeCodexPrimaryFirst(chain);
+    // Only a default chain which explicitly opted into Codex is promoted.
+    // Explicit chains remain caller-authoritative. Apply the promotion before
+    // excludeModels so an independent second opinion can explicitly remove
+    // Codex when the caller requested it for the first opinion.
+    if (usesDefaultChain && explicitlyRequestsCodex) chain = _routeCodexPrimaryFirst(chain);
     // Esclusione per-chiamata, DOPO sort e preferenza: un chiamante che ha
     // appena rigettato la risposta HTTP 200 di un modello (selezione headline:
     // prosa di ragionamento invece del JSON) ritenta sugli altri, invece di

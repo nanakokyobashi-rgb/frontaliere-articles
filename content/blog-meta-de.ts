@@ -12717,6 +12717,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fischiava-treno-gorla.title': 'Der Zug pfiff: Eisenbahnfest in Gorla Minore',
     'blog.article.fischiava-treno-gorla.excerpt': '## Auf einen Blick - Sonntag, 11. Oktober 2026 in Gorla Minore - Veranstaltung von 12:00 bis 18:00 Uhr in der Nähe des alten Bahnhofs - Mittagessen, Miniaturzüge, alte Spiele',
     'blog.article.fischiava-treno-gorla.imageAlt': 'Bahnveranstaltung nahe dem alten Bahnhof von Gorla Minore',
+    'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev am Ceresio: Öl, Villen und Bewilligungen',
+    'blog.article.clan-nazarbayev-ceresio.excerpt': 'Die Recherche zum Rohstoffhandel berichtet über die Ankunft des Clans Nazarbayev am Ceresio, zwischen Öl, Villen und ungewöhnlichen Aufenthaltsbewilligungen.',
+    'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Villen am Ceresio im Bericht über den Clan Nasarbajew',
+    'blog.article.monte-olimpino-treni-weekend.title': 'Züge Como-Schweiz: 4 Sperrwochenenden im Jahr 2026',
+    'blog.article.monte-olimpino-treni-weekend.excerpt': '## Auf einen Blick - Vier Sperrwochenenden zwischen Oktober und November 2026 - Unterbrechung von Freitag um 20:20 Uhr bis Montag um 04:20 Uhr - RE80 lässt Como San Giovanni und Como aus',
+    'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Regionalzug auf einer grenzüberschreitenden Bahnstrecke zwischen Como und der Schweiz',
 };
 
 export default blogMetaDe;

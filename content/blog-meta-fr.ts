@@ -12720,6 +12720,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fischiava-treno-gorla.title': 'Le train sifflait : fête ferroviaire à Gorla Minore',
     'blog.article.fischiava-treno-gorla.excerpt': '## En bref - Dimanche 11 octobre 2026 à Gorla Minore - Événement de 12:00 à 18:00 près de l’ancienne gare - Déjeuner, petits trains, jeux anciens',
     'blog.article.fischiava-treno-gorla.imageAlt': 'Événement ferroviaire près de l\'ancienne gare de Gorla Minore',
+    'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev sur le Ceresio : pétrole, villas et permis',
+    'blog.article.clan-nazarbayev-ceresio.excerpt': 'L\'enquête sur le commerce des matières premières raconte l\'arrivée du clan Nazarbayev sur le Ceresio, entre pétrole, villas et étranges permis de séjour.',
+    'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Villas au bord du Ceresio dans le récit sur le clan Nazarbayev',
+    'blog.article.monte-olimpino-treni-weekend.title': 'Trains Como-Suisse : 4 week-ends de fermeture en 2026',
+    'blog.article.monte-olimpino-treni-weekend.excerpt': '## En bref - Quatre week-ends de fermeture entre octobre et novembre 2026 - Interruption du vendredi à 20:20 au lundi à 04:20 - RE80 ne dessert pas Como San Giovanni et Como',
+    'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Train régional sur une ligne ferroviaire transfrontalière entre Côme et la Suisse (Como)',
 };
 
 export default blogMetaFr;

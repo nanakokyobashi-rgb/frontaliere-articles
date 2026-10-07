@@ -18,9 +18,9 @@
  *        (`GITHUB_PAT_NANAKO`) deve essere nell'ambiente. Senza, la lista dei
  *        cantoni accesi non e' leggibile e la risposta e' «no», non «forse».
  *      - la sezione e' accesa? Stessa funzione che usa `create-article.mjs`
- *        (`resolveCantonSectionGate`: `enabled` nel profilo oppure
+ *        (`resolveCantonSectionGate`: `enabled` nel profilo corpus E
  *        `CANTON_ARTICLE_SECTIONS_ENABLED` da Remote Config). Assente o vuoto =
- *        nessun cantone.
+ *        nessun cantone, anche se il profilo e' attivo.
  *      - la sezione e' ATTIVA nel profilo corpus (`enabled`)? Il bootstrap
  *        inietta lo stesso insieme nel core; il rebase
  *        (`--section-surfaces`), il ricontrollo di unicita' dopo il rebase e la
@@ -192,7 +192,7 @@ export function decideCantonAdmission({
     return {
       proceed: false,
       reason: 'canton-disabled',
-      detail: `sezione non accesa: ne' enabled nel profilo ne' in ${CANTON_SECTIONS_ENABLED_ENV}`,
+      detail: `sezione non accesa: il profilo corpus enabled e ${CANTON_SECTIONS_ENABLED_ENV} devono autorizzarla entrambi`,
       unknown: gate.unknown,
     };
   }

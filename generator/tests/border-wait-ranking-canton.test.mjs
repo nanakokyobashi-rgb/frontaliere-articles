@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import {
   cantonFromArgs,
   computeCantonSnapshot as computeSnapshot,
+  RANKING_IMAGE,
   staticMetaFor,
 } from '../scripts/lib/border-wait-ranking-canton.mjs';
 import {
@@ -144,8 +145,21 @@ describe('classifica dogane per cantone', () => {
     assert.equal(snapshot.ranking.length, 7);
     assert.doesNotMatch(JSON.stringify(snapshot), /gaggiolo/);
   });
-  it('un cantone senza foto dichiarata non puo\' essere registrato (immagine nulla)', () => {
-    assert.equal(staticMetaFor('GE').image, null);
+  it('usa solo le copertine del catalogo con provenienza; JU resta senza immagine', () => {
+    const covered = ['AG', 'BASILEA', 'GE', 'GR', 'NE', 'SG', 'SH', 'SO', 'TG', 'VD', 'VS', 'ZH'];
+    const catalog = new Set(JSON.parse(fs.readFileSync(path.join(HERE, '../../public/data/journalist-image-catalog.json'), 'utf8')).map((entry) => entry.path));
+    for (const canton of covered) {
+      assert.equal(staticMetaFor(canton).image, RANKING_IMAGE[canton], canton);
+      assert.equal(staticMetaFor(canton)._generatedImagePath, RANKING_IMAGE[canton], canton);
+      assert.match(RANKING_IMAGE[canton], /^\/images\/blog\/.+\.webp$/);
+      assert.ok(catalog.has(RANKING_IMAGE[canton]), `${canton}: cover assente dal catalogo`);
+      const key = RANKING_IMAGE[canton].split('/').pop().replace(/\.webp$/, '');
+      const credit = JSON.parse(fs.readFileSync(path.join(HERE, '../../content/image-credits/blog', `${key}.json`), 'utf8'));
+      assert.equal(credit.status, 'ok', `${canton}: credit non approvato`);
+      assert.ok(credit.licence?.name, `${canton}: licenza non verificata`);
+    }
+    assert.equal(staticMetaFor('JU').image, null);
+    assert.equal(staticMetaFor('JU')._generatedImagePath, undefined);
     assert.equal(staticMetaFor('TI').image, 'mendrisio.webp');
   });
 

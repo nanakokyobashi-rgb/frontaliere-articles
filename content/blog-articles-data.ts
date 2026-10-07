@@ -42852,6 +42852,26 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'clan-nazarbayev-ceresio',
+ category: 'novita',
+ date: '2026-10-07T04:58:11.502Z',
+ image: '/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'monte-olimpino-treni-weekend',
+ category: 'pratico',
+ date: '2026-10-07T05:47:57.277Z',
+ image: '/images/blog/como-crisi-abitativa-alloggi-sfitti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -7844,6 +7844,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziative-mps-giustizia-respinte.title': 'MPS justice initiatives rejected by the Grand Council',
     'blog.article.iniziative-mps-giustizia-respinte.excerpt': 'The Grand Council rejected the two MPS initiatives: reducing magistrates\' retirement age from 70 to 65 years (41 votes against) and transferring dismissals to Parliament (61 votes against).',
     'blog.article.iniziative-mps-giustizia-respinte.imageAlt': 'Grand Council chamber in Bellinzona during a vote on the MPS justice initiatives',
+    'blog.article.raffineria-cressier-carburanti.title': 'Swiss diesel nears 2,50 francs: Cressier alert',
+    'blog.article.raffineria-cressier-carburanti.excerpt': '## TL;DR - Diesel in Switzerland is nearing 2,50 francs per liter - Cressier supplies around 35% of the country\'s fuel - European refining has capacity',
+    'blog.article.raffineria-cressier-carburanti.imageAlt': 'Diesel pump in Switzerland with an oil refinery in the background',
 };
 
 export default blogMetaChEn;
