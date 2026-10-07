@@ -64,14 +64,36 @@ test('un finding multi-file conserva tutti i path nell\'id downstream', () => {
   assert.notEqual(stableFindingId(first), stableFindingId(second));
 });
 
-test('la classe si dichiara DOPO i due punti, e una inventata vale other', () => {
+test('la classe segue la severita\', con o senza separatore, e una inventata vale other', () => {
   assert.equal(findingDeclaredClass('🔴 Important: [regression] rotto.'), 'regression');
   assert.equal(findingDeclaredClass('🔴 Important: [contract] rotto.'), 'contract');
   assert.equal(findingDeclaredClass('🔴 Important: [urgentissimo] rotto.'), 'other',
     'una classe inventata non compra l\'eccezione riservata a regression');
-  assert.equal(findingDeclaredClass('🔴 Important [regression]: rotto.'), 'other',
-    'il tag prima del separatore rende il finding invisibile al parser del gate');
   assert.equal(findingDeclaredClass('🔴 Important: rotto.'), 'other');
+
+  // Forma con ancora di posizione senza separatore (`path:L<n>: 🔴 Important
+  // [classe] ...`, sito #12040): per il gate e' un finding, quindi il tag va
+  // letto anche li'. Prima valeva `other`, e un `[regression]` scritto cosi'
+  // non impediva piu' a `unchangedLineImportants` di declassare il finding.
+  assert.equal(findingDeclaredClass('engine/render.mjs:L1: 🔴 Important [regression] rotto.'), 'regression');
+  assert.equal(findingDeclaredClass('- `engine/render.mjs:L1`: 🔴 **Important** [funnel] rotto.'), 'funnel');
+  assert.equal(findingDeclaredClass('🔴 Important [regression]: rotto.'), 'regression',
+    'il tag subito dopo la severita\' vale anche quando il separatore lo segue');
+  assert.equal(findingDeclaredClass('engine/render.mjs:L1: 🔴 Important [urgentissimo] rotto.'), 'other',
+    'senza separatore una classe inventata resta other');
+  assert.equal(
+    findingDeclaredClass('engine/render.mjs:L1: 🔴 Important rotto, vedi [regression] piu\' sotto.'),
+    'other',
+    'un tag piu\' avanti nella prosa non e\' la classe dichiarata',
+  );
+});
+
+test('un [regression] senza separatore protegge il finding dal declassamento', () => {
+  const changed = new Map([['engine/render.mjs', new Set([10, 11])]]);
+  const regression = finding('`engine/render.mjs:42`: 🔴 Important [regression] `buildCanonical()` perde il locale.');
+  assert.equal(unchangedLineImportants({
+    findings: [regression], priorFindingIds: new Set(), changedLines: changed,
+  }).length, 0);
 });
 
 test('un 🔴 nuovo su righe non toccate si declassa, e i confini tengono', () => {
