@@ -98955,6 +98955,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-auto-elettrica-come-risparmiare-fino-al-50': {
+    title: 'Auto elettrica: come risparmiare fino al 50% | Frontaliere Ticino',
+    description: '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    keywords: 'frontalieri, ticino, svizzera, italia, auto, elettrica, risparmiare, fino',
+    ogTitle: 'Auto elettrica: come risparmiare fino al 50%',
+    ogDescription: '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    canonicalPath: '/articoli-svizzera/auto-elettrica-come-risparmiare-fino-al-50/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Auto elettrica: come risparmiare fino al 50%",
+      "description": "## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Auto elettrica: come risparmiare fino al 50%"
+      },
+      "datePublished": "2026-10-07T07:21:41+00:00",
+      "dateModified": "2026-10-07T07:21:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/auto-elettrica-come-risparmiare-fino-al-50/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

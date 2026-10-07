@@ -117,6 +117,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T07:11:43.433Z",
       "lastFailureAt": "2026-10-07T07:11:43.433Z"
+    },
+    {
+      "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
+      "title": "Auto elettrica: come risparmiare fino al 50%",
+      "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
+      "reason": "All image providers failed for article-auto-elettrica-come-risparmiare-fino-al-50: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:21:41.464Z",
+      "lastFailureAt": "2026-10-07T07:21:41.464Z"
     }
   ]
 }

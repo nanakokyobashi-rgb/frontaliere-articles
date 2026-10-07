@@ -2639,6 +2639,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'iniziative-mps-giustizia-respinte': { it: 'iniziative-mps-giustizia-respinte', en: 'mps-justice-initiatives-rejected', de: 'mps-justizinitiativen-abgelehnt', fr: 'initiatives-mps-justice-rejetees' },
  'raffineria-cressier-carburanti': { it: 'raffineria-cressier-carburanti', en: 'cressier-refinery-fuel-prices', de: 'raffinerie-cressier-treibstoffpreise', fr: 'raffinerie-cressier-prix-carburants' },
  'quattro-oggetti-urne-novembre': { it: 'quattro-oggetti-urne-novembre', en: 'four-ballot-items-november', de: 'vier-abstimmungsobjekte-november', fr: 'quatre-objets-vote-novembre' },
+ 'auto-elettrica-come-risparmiare-fino-al-50': { it: 'auto-elettrica-come-risparmiare-fino-al-50', en: 'electric-car-how-to-save-up-to-50', de: 'elektroautos-so-sparen-sie-bis-zu-50', fr: 'voiture-electrique-comment-economiser-jusqu-a-50' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
