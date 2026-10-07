@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-wabern-tram-risanamento': {
+    title: 'Approvati il tram di Kleinwabern e il risanamento di Wabern',
+    description: 'Il BAV ha approvato tram e risanamento a Wabern: linea 9 fino a Kleinwabern, nodo tra S-Bahn, bus e tram, lavori non prima del 2028, ricorso in corso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, approvati, tram, kleinwabern, risanamento',
+    ogTitle: 'Tram Kleinwabern approvato: lavori non prima del 2028',
+    ogDescription: '«Tram Kleinwabern» estenderà la linea 9 fino a Kleinwabern e creerà un nodo con S-Bahn, bus e tram. «Sanierung Zentrum Wabern» prevede il risanamento della Seftigenstrasse per ciclisti e pedoni; i lavori partiranno non prima del 2028.',
+    canonicalPath: '/articoli-berna/wabern-tram-risanamento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Approvati il tram di Kleinwabern e il risanamento di Wabern",
+      "description": "Il BAV ha approvato tram e risanamento a Wabern: linea 9 fino a Kleinwabern, nodo tra S-Bahn, bus e tram, lavori non prima del 2028, ricorso in corso.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tram-treno-lugano-lavori-inizio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Progetti del tram di Kleinwabern e risanamento del centro di Wabern"
+      },
+      "datePublished": "2026-10-07T07:11:43+00:00",
+      "dateModified": "2026-10-07T07:11:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/wabern-tram-risanamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
