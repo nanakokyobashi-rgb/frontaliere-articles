@@ -426,7 +426,7 @@ jobs:
           # and nothing anywhere reports a problem. Same silent-degradation class
           # as the empty archive above, so it gets the same treatment.
           it_article="$(jq -r '.shards[] | select(.locale=="it") | .articlePaths[0]' "$summary")"
-          if ! grep -Eq '"author":\{"(Person|Organization)","@id":"[^"]*/autori/[^"]*/#(person|profile)"' "$dist/$it_article"; then
+          if ! grep -Eq '"author":\{"@type":"(Person|Organization)","@id":"[^"]*/autori/[^"]*/#(person|profile)"' "$dist/$it_article"; then
             echo "::error::$it_article has no registered Person/editorial-profile author in its NewsArticle JSON-LD — the article registry did not resolve (check the data/*-articles-data.ts symlinks)"
             fail=1
           else
