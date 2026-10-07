@@ -167,6 +167,16 @@
       }
     },
     {
+      "path": "scripts/ci/auto-live-canton-sections.mjs",
+      "mode": "corpus-only",
+      "reason": "Piano D22 per promuovere in modo idempotente una sezione cantonale da draft a live dopo articolo proprio, sei hub e bootstrap R2 verificati; il workflow apre una PR e non esiste un producer equivalente nel sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "2964a09ec968c6c2",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "scripts/ci/canton-generation-admit.mjs",
       "mode": "corpus-only",
       "reason": "Ammissione di una sezione cantonale alla generazione (P8 del piano sezioni cantonali, D15/D16/D19): gate Remote Config con controllo esplicito del caricamento, sezione attiva nel core, budget giornaliero sui commit delle ultime 24h, tetto globale sulle run in_progress dei chiamanti cantonali, cessione al beacon di quota. Lo esegue il job section_gate di generate-article-core.yml. Esiste solo qui perche' la generazione degli articoli vive solo nel corpus: il sito non ha ne' i chiamanti ne' il profilo canton-sections.json.",
