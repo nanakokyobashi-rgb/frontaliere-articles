@@ -387,6 +387,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:36:03.797Z",
       "lastFailureAt": "2026-10-07T10:36:03.797Z"
+    },
+    {
+      "articleId": "pedemontana-truffa-sms-frontalieri",
+      "title": "Pedemontana avverte: nessun pagamento pedaggio via SMS o email",
+      "fallbackImage": "/images/blog/pedemontana-avviso-truffa.webp",
+      "reason": "All image providers failed for article-pedemontana-truffa-sms-frontalieri: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:36:09.204Z",
+      "lastFailureAt": "2026-10-07T10:36:09.204Z"
     }
   ]
 }

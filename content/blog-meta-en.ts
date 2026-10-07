@@ -12739,6 +12739,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.biasca-17enne-arrestato-accoltellamento.title': 'Biasca: 17-year-old arrested for stabbing near the station',
     'blog.article.biasca-17enne-arrestato-accoltellamento.excerpt': '## TL;DR - In Biasca, a 17-year-old Syrian resident was arrested - Injured in the abdomen, the 21-year-old is out of danger - The main charge is attempted murder',
     'blog.article.biasca-17enne-arrestato-accoltellamento.imageAlt': 'Police tape and flashing lights near Biasca station at dusk',
+    'blog.article.pedemontana-truffa-sms-frontalieri.title': 'Pedemontana warns: no toll payment via SMS or email',
+    'blog.article.pedemontana-truffa-sms-frontalieri.excerpt': '## TL;DR - Pedemontana does not request toll payments via SMS or email - Scammers threaten to block or seize the vehicle - Links lead to fake domains - Verify',
+    'blog.article.pedemontana-truffa-sms-frontalieri.imageAlt': 'Realistic photo of a Ticino highway toll booth at sunrise with a frontalier\'s car approaching',
 };
 
 export default blogMetaEn;

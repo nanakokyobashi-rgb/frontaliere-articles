@@ -12738,6 +12738,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.biasca-17enne-arrestato-accoltellamento.title': 'Biasca: 17-Jähriger wegen Messerstecherei in der Nähe des Bahnhofs festgenommen',
     'blog.article.biasca-17enne-arrestato-accoltellamento.excerpt': '## In Kürze - In Biasca wurde ein 17-jähriger Syrer verhaftet - Bauchverletzung, 21-Jähriger außer Lebensgefahr - Hauptverdächtiger ist versuchter Mord',
     'blog.article.biasca-17enne-arrestato-accoltellamento.imageAlt': 'Polizeiband und Blaulicht am Bahnhof Biasca bei Dämmerung',
+    'blog.article.pedemontana-truffa-sms-frontalieri.title': 'Pedemontana warnt: keine Mautzahlungen per SMS oder E-Mail',
+    'blog.article.pedemontana-truffa-sms-frontalieri.excerpt': '## Auf einen Blick - Pedemontana fordert keine Mautzahlungen per SMS oder E-Mail - Betrüger drohen mit Sperrung oder Stilllegung des Fahrzeugs - Die Links führen zu gefälschten Domains - Überprüfe',
+    'blog.article.pedemontana-truffa-sms-frontalieri.imageAlt': 'Realistische Foto eines ticinesen Autobahnmautstands bei Sonnenaufgang mit dem Auto eines Grenzgängers',
 };
 
 export default blogMetaDe;

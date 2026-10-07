@@ -100771,6 +100771,39 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pedemontana-truffa-sms-frontalieri': {
+    title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    description: '## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica',
+    keywords: 'frontalieri, ticino, svizzera, italia, pedemontana, avverte, nessun, pagamento',
+    ogTitle: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    ogDescription: '## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica',
+    canonicalPath: '/articoli-frontaliere/pedemontana-truffa-sms-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pedemontana avverte: nessun pagamento pedaggio via SMS o email",
+      "description": "## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto realistica di un casello autostradale ticinese all'alba con un'auto di un frontalier in avvicinamento"
+      },
+      "datePublished": "2026-10-07T10:36:08+00:00",
+      "dateModified": "2026-10-07T10:36:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pedemontana-truffa-sms-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;
