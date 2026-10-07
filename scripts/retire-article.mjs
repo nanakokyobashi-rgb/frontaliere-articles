@@ -46,11 +46,12 @@
  */
 
 import '../host/cantonSectionsBootstrap.mjs';
-import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+import { readFileSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs';
+import { writeFileAtomic } from '../generator/scripts/lib/atomic-write-file.mjs';
 import { writeJsonAtomic } from '../generator/scripts/lib/atomic-write-json.mjs';
 import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
@@ -73,7 +74,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 const rel = (p) => path.join(ROOT, p);
 const read = (p) => readFileSync(rel(p), 'utf-8');
-const write = (p, s) => writeFileSync(rel(p), s, 'utf-8');
+const write = (p, s) => writeFileAtomic(rel(p), s);
 
 /** Accoda solo un target che il retirement può riscrivere davvero. */
 function queueWriteTarget(writes, file, text, what) {
