@@ -285,7 +285,8 @@ test('i guard contano solo le PR di QUESTO repo, non quelle da un fork', () => {
   assert.match(transport, /REPO: \$\{\{ github\.repository \}\}/);
   const guard = read('scripts/ci/transport-identical-twins-guard.mjs');
   assert.match(guard, /pr\?\.head\?\.repo\?\.full_name === repo/);
-  assert.match(guard, /String\(pr\?\.head\?\.ref \|\| ''\)\.startsWith\('transport\/identical-twins'\)/);
+  assert.match(guard, /\^transport\\\/identical-twins-\\d\+\$\/u\.test\(String\(pr\?\.head\?\.ref \|\| ''\)\)/);
+  assert.match(guard, /isIdenticalTwinTransportPr/);
   assert.match(guard, /parseConvergedBullets/);
 
   // Questo consumer non e` ancora estratto e conserva la stessa prova inline.

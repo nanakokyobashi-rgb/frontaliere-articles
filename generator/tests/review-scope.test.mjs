@@ -522,6 +522,7 @@ test('lista REST al hard-cap con complete=false resta BLOCCANTE', { concurrency:
   const result = await classifyWithDiffFailure('cap');
   assert.equal(result.changedFilesComplete, false);
   assert.equal(result.diffReason, 'rest-hard-limit');
+  assert.deepEqual(result.staleDeclassified, []);
   assert.equal(result.outsideOnly, false);
   assert.equal(result.minted, false);
   assert.equal(result.blocking, true);
@@ -532,6 +533,7 @@ test('lista file vuota resta BLOCCANTE anche se il helper la dichiara complete',
   assert.equal(result.changedFiles.length, 0);
   assert.equal(result.changedFilesComplete, true);
   assert.equal(result.diffReason, 'empty');
+  assert.deepEqual(result.staleDeclassified, []);
   assert.equal(result.outsideOnly, false);
   assert.equal(result.minted, false);
   assert.equal(result.blocking, true);

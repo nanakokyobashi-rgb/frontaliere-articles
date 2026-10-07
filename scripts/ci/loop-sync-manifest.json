@@ -4948,8 +4948,8 @@
       "reason": "Regressione node:test del trasporto e del suo realign post-merge, che verifica i codici di ritorno e il confine di scrittura del manifest nel repository ricevente; il sito usa Vitest e non ha questo test corpus-only.",
       "baseline": {
         "site": null,
-        "corpus": "7eb0c82546609329",
-        "alignedAt": "2026-09-13"
+        "corpus": "b4d8ab4f1c212f95",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -5510,6 +5510,16 @@
       "baseline": {
         "site": null,
         "corpus": "0b367aa2f2a6cfb0",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/transport-pr.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato condiviso e fail-closed che riconosce esclusivamente le PR prodotte dal trasporto corpus legando autore, branch, base, repository head, manifest e insieme completo dei file. Il sito non consuma né autorizza questa eccezione del gate corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "36dde395830df87e",
         "alignedAt": "2026-10-07"
       }
     },
