@@ -172,7 +172,7 @@
       "reason": "Piano D22 per promuovere in modo idempotente una sezione cantonale da draft a live dopo articolo proprio, sei hub e bootstrap R2 verificati; il workflow apre una PR e non esiste un producer equivalente nel sito.",
       "baseline": {
         "site": null,
-        "corpus": "9566f6dfea0b4fd8",
+        "corpus": "183d3371cbb6de68",
         "alignedAt": "2026-10-07"
       }
     },
