@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-zg:servizi",
+  "section": "canton-zg",
+  "canton": "ZG",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "72754e988fa2efb369faa21d0b5581e868a6a3dc3fb0c8e1232c0434ff7fdb69",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "ZG",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Zugo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e inglese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "430,50 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "ZG, regione di premio 0",
+              "value": "mediana 430,50 CHF al mese",
+              "detail": "da 385,80 a 536,10 CHF, 27 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "16 °C",
+              "detail": "oggi da 15 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
+              "date": "2026-10-01",
+              "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
+            },
+            {
+              "label": "Neue Leiterin Personal per 1. Oktober 2026",
+              "date": "2026-10-01",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/neue-leiterin-personal-per-1-oktober-2026"
+            },
+            {
+              "label": "Kostenlose Brustkrebsvorsorge im PINK CUBE in Zug am Samstag, 19. September 2026",
+              "date": "2026-09-15",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/kostenlose-brustkrebsvorsorge-im-pink-cube-in-zug-am-samstag-19-september-2026"
+            },
+            {
+              "label": "Rekordbeteiligung: 17 Familien nahmen am polysportiven Familienwochenende in Tenero teil",
+              "date": "2026-09-06",
+              "url": "https://zg.ch/de/news/2026/September/rekordbeteiligung-17-familien-nahmen-am-polysportiven-familienwochenende-in-tenero-teil"
+            },
+            {
+              "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
+              "date": "2026-08-25",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
+            },
+            {
+              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
+              "date": "2026-08-15",
+              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B Canton Zugo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-zugo-guida-pratica/",
+          "excerpt": "Guida al permesso di dimora B a Zugo: come funziona il permesso rinnovabile, quali requisiti federali e cantonali seguire, documenti e procedura di rinnovo.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Patente di guida nel Canton Zugo: conversione licenza estera, esami e procedure",
+          "url": "/articoli-svizzera/patente-guida-zugo-conversione-esami/",
+          "excerpt": "Guida completa alla conversione della patente di guida estera nel Canton Zugo: documenti richiesti, esami teorico e pratico, corsi obbligatori e scadenze.",
+          "date": "2026-09-22T00:32:07.582Z"
+        },
+        {
+          "title": "Premi cassa malati canton Zugo e riduzione premi",
+          "url": "/articoli-svizzera/zugo-riduzione-premi-sussidio/",
+          "excerpt": "Come funzionano i premi LAMal nel Canton Zugo, le sei franchigie disponibili e come accedere ai sussidi cantonali per ridurre il costo dell'assicurazione malattia.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Asilo nido Zugo: costi, tariffe e sussidi cantonali",
+          "url": "/articoli-svizzera/custodia-bambini-zugo-tariffe-sussidi/",
+          "excerpt": "Nel canton Zugo, asili nido e custodia seguono tariffe progressive su base reddituale. Scopri le opzioni disponibili, i sussidi cantonali e le procedure di accesso.",
+          "date": "2026-09-04T23:16:38.350Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini in Canton Zug: costi",
+          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-zugo-costi/",
+          "excerpt": "I costi per l'asilo nido e la custodia dei bambini in Canton Zug possono variare in base alla tariffa calcolata sul reddito e ai sussidi cantonali disponibili.",
+          "date": "2026-08-17T15:14:36.291Z"
+        },
+        {
+          "title": "Premi cassa malati cantone Zugo e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-zugo-riduzione-premi/",
+          "excerpt": "I premi per l'assicurazione malattia obbligatoria nel Cantone di Zugo: fasce di premio, franchigie, modelli alternativi e requisiti per beneficiare della riduzione dei premi.",
+          "date": "2026-08-17T08:03:04.287Z"
+        },
+        {
+          "title": "Patente di guida nel Cantone di Zugo: conversione della licenza estera",
+          "url": "/articoli-svizzera/patente-guida-cantone-zugo-conversione/",
+          "excerpt": "La conversione della licenza di guida estera è obbligatoria per i frontalieri che risiedono nel Cantone di Zugo.",
+          "date": "2026-08-17T17:33:42.509Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/zugo/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/zugo-zg/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Zugo",
+          "url": "/cerca-lavoro-zugo/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "ZG",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Zug, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and English; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "430.50 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "ZG, premium region 0",
+              "value": "typical 430.50 CHF per month",
+              "detail": "from 385.80 to 536.10 CHF, 27 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "16 °C",
+              "detail": "today from 15 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
+              "date": "2026-10-01",
+              "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
+            },
+            {
+              "label": "Neue Leiterin Personal per 1. Oktober 2026",
+              "date": "2026-10-01",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/neue-leiterin-personal-per-1-oktober-2026"
+            },
+            {
+              "label": "Kostenlose Brustkrebsvorsorge im PINK CUBE in Zug am Samstag, 19. September 2026",
+              "date": "2026-09-15",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/kostenlose-brustkrebsvorsorge-im-pink-cube-in-zug-am-samstag-19-september-2026"
+            },
+            {
+              "label": "Rekordbeteiligung: 17 Familien nahmen am polysportiven Familienwochenende in Tenero teil",
+              "date": "2026-09-06",
+              "url": "https://zg.ch/de/news/2026/September/rekordbeteiligung-17-familien-nahmen-am-polysportiven-familienwochenende-in-tenero-teil"
+            },
+            {
+              "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
+              "date": "2026-08-25",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
+            },
+            {
+              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
+              "date": "2026-08-15",
+              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B Canton Zug: requirements and renewal",
+          "url": "/en/swiss-articles/permit-b-zug-practical-guide/",
+          "excerpt": "Guide to residence permit B in Zug: how the renewable permit works, what federal and cantonal requirements to follow, documents and renewal procedure.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Driving licence Zug: foreign conversion, exams & procedures",
+          "url": "/en/swiss-articles/zug-driving-license-conversion-exams/",
+          "excerpt": "Complete guide to converting a foreign driver's license in the canton of Zug: required documents, theoretical and practical exams, mandatory courses and deadlines.",
+          "date": "2026-09-22T00:32:07.582Z"
+        },
+        {
+          "title": "Canton Zug health insurance premiums and premium reductions",
+          "url": "/en/swiss-articles/zugo-lamal-premium-subsidy/",
+          "excerpt": "How LAMal premiums work in the Canton of Zug, the six deductibles available and how to access cantonal benefits to reduce the cost of health insurance.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Zug kindergarten: cantonal costs, fees and subsidies",
+          "url": "/en/swiss-articles/childcare-zugo-tariffs-subsidies/",
+          "excerpt": "In the canton of Zug, nurseries and childcare facilities follow progressive rates on an income basis. Learn about available options, cantonal subsidies, and access procedures.",
+          "date": "2026-09-04T23:16:38.350Z"
+        },
+        {
+          "title": "Kindergarten and childcare in Canton Zug: costs",
+          "url": "/en/swiss-articles/kindergarten-and-childcare-in-canton-zug-costs/",
+          "excerpt": "Costs for childcare and childcare in Canton Zug may vary based on the calculated rate on income and available cantonal subsidies.",
+          "date": "2026-08-17T15:14:36.291Z"
+        },
+        {
+          "title": "Canton Zug health insurance premiums and premium reductions",
+          "url": "/en/swiss-articles/premi-cassa-malati-canton-zugo-riduzione-premi/",
+          "excerpt": "Premiums for compulsory health insurance in the canton of Zug: premium ranges, deductibles, alternative models and requirements for benefiting from premium reductions.",
+          "date": "2026-08-17T08:03:04.287Z"
+        },
+        {
+          "title": "Driver's license in the Canton of Zug: conversion of the foreign license",
+          "url": "/en/swiss-articles/canton-zug-driving-license-conversion/",
+          "excerpt": "The conversion of the foreign driving license is mandatory for border workers residing in the Canton of Zug.",
+          "date": "2026-08-17T17:33:42.509Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/zug-zg/"
+        },
+        {
+          "label": "Job offers in the canton of Zug",
+          "url": "/en/find-jobs-zug/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "ZG",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Zug laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Englisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "430.50 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "ZG, Prämienregion 0",
+              "value": "Mittelwert 430.50 CHF pro Monat",
+              "detail": "von 385.80 bis 536.10 CHF, 27 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "16 °C",
+              "detail": "heute 15 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
+              "date": "2026-10-01",
+              "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
+            },
+            {
+              "label": "Neue Leiterin Personal per 1. Oktober 2026",
+              "date": "2026-10-01",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/neue-leiterin-personal-per-1-oktober-2026"
+            },
+            {
+              "label": "Kostenlose Brustkrebsvorsorge im PINK CUBE in Zug am Samstag, 19. September 2026",
+              "date": "2026-09-15",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/kostenlose-brustkrebsvorsorge-im-pink-cube-in-zug-am-samstag-19-september-2026"
+            },
+            {
+              "label": "Rekordbeteiligung: 17 Familien nahmen am polysportiven Familienwochenende in Tenero teil",
+              "date": "2026-09-06",
+              "url": "https://zg.ch/de/news/2026/September/rekordbeteiligung-17-familien-nahmen-am-polysportiven-familienwochenende-in-tenero-teil"
+            },
+            {
+              "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
+              "date": "2026-08-25",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
+            },
+            {
+              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
+              "date": "2026-08-15",
+              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B Kanton Zug: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-zug-praktischer-leitfaden/",
+          "excerpt": "Leitfaden Aufenthaltsbewilligung B in Zug: Wie funktioniert die erneuerbare Bewilligung, welche eidgenössischen und kantonalen Anforderungen gelten, Dokumente und Erneuerungsverfahren.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Führerschein Kt. Zug: Ausländ. Umwandlung, Prüfungen & Verfahren",
+          "url": "/de/schweiz-artikel/zug-fuhrerschein-umtausch-prufungen/",
+          "excerpt": "Vollständiger Leitfaden zur Umwandlung eines ausländischen Führerscheins im Kanton Zug: erforderliche Dokumente, theoretische und praktische Prüfungen, Pflichtkurse und Fristen.",
+          "date": "2026-09-22T00:32:07.582Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Zug und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/zugo-krankenkasse-praemien-reduktion/",
+          "excerpt": "Wie die KVG-Prämien im Kanton Zug funktionieren, welche sechs Franchisen zur Verfügung stehen und wie Sie auf kantonale Beiträge zugreifen können, um die Kosten der Krankenversicherung zu senken.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Kindergarten Zug: Kosten, Tarife und kantonale Zuschüsse",
+          "url": "/de/schweiz-artikel/kinderbetreuung-zug-tarife-subventionen/",
+          "excerpt": "Im Kanton Zug gelten für Kinderkrippen und Kinderbetreuung progressive Tarife auf Einkommensbasis. Informieren Sie sich über die verfügbaren Optionen, die kantonalen Subventionen und die Zugangsverfahren.",
+          "date": "2026-09-04T23:16:38.350Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Zug: Kosten",
+          "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-canton-zugo-kosten/",
+          "excerpt": "Die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zug können je nach dem berechneten Einkommenstarif und den verfügbaren kantonalen Leistungen variieren.",
+          "date": "2026-08-17T15:14:36.291Z"
+        },
+        {
+          "title": "Krankenversicherungsprämien im Kanton Zug und Prämiensenkungen",
+          "url": "/de/schweiz-artikel/premi-cassa-malati-kanton-zugo-riduzione-premi/",
+          "excerpt": "Prämien für die Pflichtkrankenversicherung im Kanton Zug: Prämienbereiche, Selbstbeteiligungen, alternative Modelle und Anforderungen für den Vorteil von Prämiensenkungen.",
+          "date": "2026-08-17T08:03:04.287Z"
+        },
+        {
+          "title": "Führerschein im Kanton Zug: Umtausch des ausländischen Führerscheins",
+          "url": "/de/schweiz-artikel/fuehrerschein-kanton-zug-umstellung/",
+          "excerpt": "Der Umtausch des ausländischen Führerscheins ist für Grenzgänger mit Wohnsitz im Kanton Zug obligatorisch.",
+          "date": "2026-08-17T17:33:42.509Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/zug-zg/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Zug",
+          "url": "/de/jobs-in-zug/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "ZG",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Zoug, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et anglais ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "430,50 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "ZG, région de primes 0",
+              "value": "valeur centrale 430,50 CHF par mois",
+              "detail": "de 385,80 à 536,10 CHF, 27 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "16 °C",
+              "detail": "aujourd’hui de 15 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Christos Pouskoulas wird Kantonsarzt und Leiter des Amts für Gesundheit des Kantons Zug",
+              "date": "2026-10-01",
+              "url": "https://zg.ch/de/news/2026/March/christos-pouskoulas-wird-kantonsarzt-und-leiter-des-amts-fuer-gesundheit-des-kantons-zug"
+            },
+            {
+              "label": "Neue Leiterin Personal per 1. Oktober 2026",
+              "date": "2026-10-01",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/neue-leiterin-personal-per-1-oktober-2026"
+            },
+            {
+              "label": "Kostenlose Brustkrebsvorsorge im PINK CUBE in Zug am Samstag, 19. September 2026",
+              "date": "2026-09-15",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/kostenlose-brustkrebsvorsorge-im-pink-cube-in-zug-am-samstag-19-september-2026"
+            },
+            {
+              "label": "Rekordbeteiligung: 17 Familien nahmen am polysportiven Familienwochenende in Tenero teil",
+              "date": "2026-09-06",
+              "url": "https://zg.ch/de/news/2026/September/rekordbeteiligung-17-familien-nahmen-am-polysportiven-familienwochenende-in-tenero-teil"
+            },
+            {
+              "label": "Medical Partnership mit dem EVZ: neue Ärzte-Teams",
+              "date": "2026-08-25",
+              "url": "https://www.zgks.ch/ueber-uns/news-detail/detail/medical-partnership-mit-dem-evz-neue-aerzte-teams"
+            },
+            {
+              "label": "Sonn- und Feiertagsverkäufe im Kanton Zug im Jahr 2026",
+              "date": "2026-08-15",
+              "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B Canton Zoug : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-b-zoug-guide-pratique/",
+          "excerpt": "Guide du permis de séjour B à Zoug : comment fonctionne le permis renouvelable, quelles exigences fédérales et cantonales suivre, documents et procédure de renouvellement.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Permis de conduire Zoug : conversion, examens, démarches",
+          "url": "/fr/articles-suisse/zug-permis-conduite-conversion-examens/",
+          "excerpt": "Guide complet pour convertir un permis de conduire étranger dans le canton de Zoug : documents obligatoires, examens théoriques et pratiques, cours obligatoires et délais.",
+          "date": "2026-09-22T00:32:07.582Z"
+        },
+        {
+          "title": "Primes caisse-maladie canton de Zoug et réduction des primes",
+          "url": "/fr/articles-suisse/zugo-reduction-primes-maladie/",
+          "excerpt": "Comment fonctionnent les primes LAMal dans le canton de Zoug, les six franchises disponibles et comment accéder aux allocations cantonales pour réduire le coût de l'assurance maladie.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Garderie Zoug : coûts, tarifs et subventions cantonales",
+          "url": "/fr/articles-suisse/garde-enfants-zoug-tarifs-subventions/",
+          "excerpt": "Dans le canton de Zoug, les crèches et garderies suivent des tarifs progressifs sur la base des revenus. Découvrez les options disponibles, les subventions cantonales et les procédures d'accès.",
+          "date": "2026-09-04T23:16:38.350Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton de Zoug : coûts",
+          "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-zugo-couts/",
+          "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Zoug peuvent varier en fonction du tarif calculé sur le revenu et des allocations cantonales disponibles.",
+          "date": "2026-08-17T15:14:36.291Z"
+        },
+        {
+          "title": "Primes d'assurance santé dans le canton de Zoug et réductions de primes",
+          "url": "/fr/articles-suisse/premi-cassa-malati-canton-de-zoug-riduzione-premi/",
+          "excerpt": "Primes pour l'assurance maladie obligatoire dans le canton de Zou : fourchettes de primes, franchises, modèles alternatifs et exigences pour bénéficier de réductions de primes.",
+          "date": "2026-08-17T08:03:04.287Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Zoug : conversion du permis étranger",
+          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-zoug-conversion/",
+          "excerpt": "La conversion du permis de conduire étranger est obligatoire pour les frontaliers résidant dans le canton de Zoug.",
+          "date": "2026-08-17T17:33:42.509Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Zoug",
+          "url": "/fr/trouver-emploi-zoug/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

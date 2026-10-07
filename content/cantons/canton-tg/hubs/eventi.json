@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-tg:eventi",
+  "section": "canton-tg",
+  "canton": "TG",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "d7f80eaa9fe2d3cfe5037b3154dcf6186ed82e00deac85b2594749a67d44540a",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TG",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "In Turgovia, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "39",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "ESO - Europas Weg zu den Sternen",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/eso-europas-weg-zu-den-sternen_Ad8uUDq"
+            },
+            {
+              "label": "Waltee`s Heaven Jam",
+              "detail": "Heaven Music Club",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/balterswil/waltees-heaven-jam_ARwt84c"
+            },
+            {
+              "label": "Das 2-Tage-Theater in den Herbstferien",
+              "detail": "Weinfelden — in corso, ultimo giorno: 7 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-2-tage-theater-in-den-herbstferien/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Öpfelfarm – Von der Frucht zum Ringli",
+              "detail": "Öpfelfarm — in corso, ultimo giorno: 8 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oepfelfarm-von-der-frucht-zum-ringli/"
+            },
+            {
+              "label": "Die Entdeckung des Weltalls",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 10 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/die-entdeckung-des-weltalls_AUByaX7"
+            },
+            {
+              "label": "Von der Erde zum Universum",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/von-der-erde-zum-universum_AqipZBi"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Wochenmarkt am Freitag",
+              "detail": "Weinfelden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wochenmarkt-am-freitag/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/turgovia/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi in Turgovia",
+          "url": "/eventi/turgovia/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/turgovia/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "TG",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In Thurgau, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "39",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "ESO - Europas Weg zu den Sternen",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/eso-europas-weg-zu-den-sternen_Ad8uUDq"
+            },
+            {
+              "label": "Waltee`s Heaven Jam",
+              "detail": "Heaven Music Club",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/balterswil/waltees-heaven-jam_ARwt84c"
+            },
+            {
+              "label": "Das 2-Tage-Theater in den Herbstferien",
+              "detail": "Weinfelden — ongoing, last day: 7 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-2-tage-theater-in-den-herbstferien/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Öpfelfarm – Von der Frucht zum Ringli",
+              "detail": "Öpfelfarm — ongoing, last day: 8 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oepfelfarm-von-der-frucht-zum-ringli/"
+            },
+            {
+              "label": "Die Entdeckung des Weltalls",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 10 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/die-entdeckung-des-weltalls_AUByaX7"
+            },
+            {
+              "label": "Von der Erde zum Universum",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/von-der-erde-zum-universum_AqipZBi"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Wochenmarkt am Freitag",
+              "detail": "Weinfelden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wochenmarkt-am-freitag/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/thurgau/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in Thurgau",
+          "url": "/en/events/thurgau/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/thurgau/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "TG",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Thurgau ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "39",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "ESO - Europas Weg zu den Sternen",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/eso-europas-weg-zu-den-sternen_Ad8uUDq"
+            },
+            {
+              "label": "Waltee`s Heaven Jam",
+              "detail": "Heaven Music Club",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/balterswil/waltees-heaven-jam_ARwt84c"
+            },
+            {
+              "label": "Das 2-Tage-Theater in den Herbstferien",
+              "detail": "Weinfelden — läuft, letzter Tag: 7. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-2-tage-theater-in-den-herbstferien/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Öpfelfarm – Von der Frucht zum Ringli",
+              "detail": "Öpfelfarm — läuft, letzter Tag: 8. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oepfelfarm-von-der-frucht-zum-ringli/"
+            },
+            {
+              "label": "Die Entdeckung des Weltalls",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 10. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/die-entdeckung-des-weltalls_AUByaX7"
+            },
+            {
+              "label": "Von der Erde zum Universum",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/von-der-erde-zum-universum_AqipZBi"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Wochenmarkt am Freitag",
+              "detail": "Weinfelden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wochenmarkt-am-freitag/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/thurgau/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Thurgau",
+          "url": "/de/veranstaltungen/thurgau/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "TG",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "En Thurgovie, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "39",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "ESO - Europas Weg zu den Sternen",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/eso-europas-weg-zu-den-sternen_Ad8uUDq"
+            },
+            {
+              "label": "Waltee`s Heaven Jam",
+              "detail": "Heaven Music Club",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/balterswil/waltees-heaven-jam_ARwt84c"
+            },
+            {
+              "label": "Das 2-Tage-Theater in den Herbstferien",
+              "detail": "Weinfelden — en cours, dernier jour : 7 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/das-2-tage-theater-in-den-herbstferien/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
+            },
+            {
+              "label": "Öpfelfarm – Von der Frucht zum Ringli",
+              "detail": "Öpfelfarm — en cours, dernier jour : 8 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oepfelfarm-von-der-frucht-zum-ringli/"
+            },
+            {
+              "label": "Die Entdeckung des Weltalls",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 10 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/die-entdeckung-des-weltalls_AUByaX7"
+            },
+            {
+              "label": "Von der Erde zum Universum",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/von-der-erde-zum-universum_AqipZBi"
+            },
+            {
+              "label": "Limit - Expedition zum Rande der Welt",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/konstanz/kreuzlingen/limit-expedition-zum-rande-der-welt_Af6BCNs"
+            },
+            {
+              "label": "Wochenmarkt am Freitag",
+              "detail": "Weinfelden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wochenmarkt-am-freitag/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/thurgovie/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements en Thurgovie",
+          "url": "/fr/evenements/thurgovie/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/thurgovie/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

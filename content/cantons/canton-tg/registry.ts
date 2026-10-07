@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rapporti-thurmed-turgovia',
+ category: 'novita',
+ date: '2026-10-07T10:52:51.112Z',
+ image: '/images/blog/aiuti-malattie-rare-2025.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

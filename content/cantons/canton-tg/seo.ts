@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-rapporti-thurmed-turgovia': {
+    title: 'Rapporti 2025 thurmed e Spital Thurgau | Frontaliere Ticino',
+    description: 'La pagina di Spital Thurgau AG raccoglie il rapporto 2025 di thurmed, il rapporto di sostenibilità e le statistiche 2021-2025: ecco la struttura dell\'archivio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rapporti, thurmed, spital, thurgau',
+    ogTitle: 'Rapporti thurmed e Spital Thurgau 2025',
+    ogDescription: 'Archivio thurmed Gruppe e Spital Thurgau AG: per il 2025 sono elencati il Geschäftsbericht, il Nachhaltigkeitsbericht e Statistiken & Zahlen. La stessa pagina riporta Geschäftsbericht e statistiche per il 2021-2024.',
+    canonicalPath: '/articoli-turgovia/rapporti-thurmed-turgovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rapporti 2025 thurmed e Spital Thurgau",
+      "description": "La pagina di Spital Thurgau AG raccoglie il rapporto 2025 di thurmed, il rapporto di sostenibilità e le statistiche 2021-2025: ecco la struttura dell'archivio.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/aiuti-malattie-rare-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio ospedaliero nel Canton Turgovia per i rapporti thurmed e Spital Thurgau AG"
+      },
+      "datePublished": "2026-10-07T10:52:51+00:00",
+      "dateModified": "2026-10-07T10:52:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/rapporti-thurmed-turgovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

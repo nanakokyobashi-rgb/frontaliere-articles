@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-detrazioni-figli-basel': {
+    title: 'Basilea Città: detrazioni figli quattro volte più alte',
+    description: 'A Basilea Città un\'iniziativa propone di quadruplicare la detrazione fiscale per ogni figlio: la proposta riguarda i genitori del cantone sul piano fiscale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, basilea, città, detrazioni, figli',
+    ogTitle: 'Basilea Città: detrazioni figli quattro volte più alte',
+    ogDescription: 'Nel Canton Basilea Città un\'iniziativa propone di aumentare di quattro volte la detrazione fiscale per ogni figlio. Il titolo riguarda i genitori, ma non indica ancora importi in franchi, date o modalità di applicazione.',
+    canonicalPath: '/articoli-basilea/detrazioni-figli-basel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basilea Città: detrazioni figli quattro volte più alte",
+      "description": "A Basilea Città un'iniziativa propone di quadruplicare la detrazione fiscale per ogni figlio: la proposta riguarda i genitori del cantone sul piano fiscale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Genitori con figli in una scena urbana di Basilea Città sulle detrazioni fiscali"
+      },
+      "datePublished": "2026-10-07T11:11:39+00:00",
+      "dateModified": "2026-10-07T11:11:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/detrazioni-figli-basel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

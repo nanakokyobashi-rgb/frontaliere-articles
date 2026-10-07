@@ -1,6 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1942531/contro-le-ondate-di-calore-una-direttiva-ad-hoc-e-investimenti-infrastrutturali": "caldo-ticino-direttiva-consiglio-stato",
-  "https://ilgiornaledelticino.ch/devasta-un-vagone-ed-insulta-i-passeggeri-34enne-fermato-sul-treno": "devastazione-vagone-como-fermo",
   "https://www.laregione.ch/culture/locarno-film-festival/1942418/il-produttore-che-venne-dal-freddo": "produttore-islandese-hollywood-lezione",
   "https://www.ticinonews.ch/ticino/niente-piu-bucalettere-sotto-casa-anziani-e-sindacati-insorgono-440299": "bucalettere-centralizzate-anziani-sindacati",
   "https://www.varesenews.it/2026/08/accise-232-milioni-arrivano-dai-ministeri-il-mef-copre-oltre-meta-del-taglio/2653150": "accise-gasolio-ministeri-mef",
@@ -2096,6 +2094,16 @@
   "https://www.laregione.ch/cantone/bellinzonese/1954968/arrestato-un-17enne-per-l-accoltellamento-di-biasca": {
     "articleId": "biasca-17enne-arrestato-accoltellamento",
     "ts": "2026-10-07T10:19:58.848Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1955076/pedaggi-link-sms-cliccate-fermo": {
+    "articleId": "pedemontana-falso-pedaggio-sms",
+    "ts": "2026-10-07T10:51:03.476Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-turisti-derubati-e-aggrediti-mentre-dormono-nel-van-arrestato-un-21enne": {
+    "articleId": "furto-van-cernobbio-21enne",
+    "ts": "2026-10-07T11:25:53.548Z",
     "keyForm": 2
   }
 }

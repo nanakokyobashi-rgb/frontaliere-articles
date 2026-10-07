@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sg:carburanti",
+  "section": "canton-sg",
+  "canton": "SG",
+  "topic": "carburanti",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "3a327ee0de95e60a6369dd210b30833ea70a45ea8400c6c352dfb4d1da1743a8",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-10-06T13:36:10.911Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-10-13T13:36:10.911Z"
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SG",
+      "topic": "carburanti",
+      "locale": "it",
+      "intro": "Nel Canton San Gallo, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con l’Austria, il Liechtenstein e la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Austria",
+          "value": "1,828 EUR/l",
+          "note": "media regionale, 6 ottobre 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        },
+        {
+          "label": "Diesel — Austria",
+          "value": "2,096 EUR/l",
+          "note": "media regionale, 6 ottobre 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Austria",
+              "value": "1,828 EUR/l",
+              "detail": "media regionale: minimo 1,818 EUR/l, 10 stazioni rilevate",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Austria",
+              "value": "2,096 EUR/l",
+              "detail": "media regionale: minimo 2,088 EUR/l, 12 stazioni rilevate",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "SG",
+      "topic": "carburanti",
+      "locale": "en",
+      "intro": "In the canton of St. Gallen, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Austria, Liechtenstein and Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Austria",
+          "value": "1.828 EUR/l",
+          "note": "regional average, 6 October 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        },
+        {
+          "label": "Diesel — Austria",
+          "value": "2.096 EUR/l",
+          "note": "regional average, 6 October 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Austria",
+              "value": "1.828 EUR/l",
+              "detail": "regional average: lowest 1.818 EUR/l, 10 stations surveyed",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Austria",
+              "value": "2.096 EUR/l",
+              "detail": "regional average: lowest 2.088 EUR/l, 12 stations surveyed",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "SG",
+      "topic": "carburanti",
+      "locale": "de",
+      "intro": "Im Kanton St. Gallen sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Österreich, Liechtenstein und Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Österreich",
+          "value": "1.828 EUR/l",
+          "note": "regionaler Durchschnitt, 6. Oktober 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        },
+        {
+          "label": "Diesel — Österreich",
+          "value": "2.096 EUR/l",
+          "note": "regionaler Durchschnitt, 6. Oktober 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Österreich",
+              "value": "1.828 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.818 EUR/l, 10 erfasste Tankstellen",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Österreich",
+              "value": "2.096 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.088 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "SG",
+      "topic": "carburanti",
+      "locale": "fr",
+      "intro": "Dans le canton de Saint-Gall, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Autriche, le Liechtenstein et l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Autriche",
+          "value": "1,828 EUR/l",
+          "note": "moyenne régionale, 6 octobre 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        },
+        {
+          "label": "Diesel — Autriche",
+          "value": "2,096 EUR/l",
+          "note": "moyenne régionale, 6 octobre 2026",
+          "sourceName": "E-Control Spritpreisrechner"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Autriche",
+              "value": "1,828 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,818 EUR/l, 10 stations relevées",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Autriche",
+              "value": "2,096 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,088 EUR/l, 12 stations relevées",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}
