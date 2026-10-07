@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { editorialNotes, thinTranslatedFields, translationResidue } from './lib/evergreen-refresh-invariants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'assicurazione-malattia-famiglia';
@@ -94,5 +95,51 @@ test('assicurazione famiglia: premi, CEAM/TEAM e regola familiare sono coerenti'
     assert.match(faq[4].a, /same(?: Swiss health)? insurer|derselben (?:Schweizer )?Krankenkasse|stesso assicuratore|même caisse/i);
     assert.doesNotMatch(all, /(?:spiega un consulente|explains a consultant|erklärt ein(?:en)? Berater|explique un conseiller)/i, locale + ': citazione non verificata');
     for (const pattern of STALE) assert.doesNotMatch(all, pattern, locale + ': residuo non verificato ' + pattern);
+  }
+});
+
+function fieldsByName(locale) {
+  const source = fs.readFileSync(path.join(ROOT, 'content/blog-body', locale, SLUG + '.ts'), 'utf8');
+  const out = {};
+  for (const [key, value] of bodyFields(source)) out[key.split('.').pop()] = value;
+  return out;
+}
+
+test('assicurazione famiglia: nessuna nota redazionale, nessun residuo di traduzione automatica, traduzioni non svuotate', () => {
+  const italian = fieldsByName('it');
+  for (const locale of LOCALES) {
+    const fields = fieldsByName(locale);
+    const text = Object.values(fields).join('\n');
+    assert.deepEqual(editorialNotes(text, locale), [], locale + ': istruzioni di chi corregge finite nel testo');
+    assert.deepEqual(translationResidue(text, locale), [], locale + ': residuo di traduzione automatica o sigla della lingua sbagliata');
+    if (locale !== 'it') assert.deepEqual(thinTranslatedFields(italian, fields), [], locale + ': campo tradotto svuotato rispetto all\'italiano');
+  }
+});
+
+function seoEntry() {
+  const dir = path.join(ROOT, 'content/seo');
+  for (const name of fs.readdirSync(dir).filter((n) => /^seo-blog.*\.ts$/.test(n))) {
+    const source = fs.readFileSync(path.join(dir, name), 'utf8');
+    const start = source.indexOf("'blog-" + SLUG + "':");
+    if (start !== -1) return source.slice(start, source.indexOf("canonicalPath:", start));
+  }
+  assert.fail('voce SEO della guida non trovata in content/seo/seo-blog*.ts');
+}
+
+function excerpt(locale) {
+  const source = fs.readFileSync(path.join(ROOT, 'content/blog-meta-' + locale + '.ts'), 'utf8');
+  const match = source.match(new RegExp("'blog\\.article\\." + SLUG + "\\.excerpt':\\s*'((?:[^'\\\\]|\\\\.)*)'"));
+  assert.ok(match, locale + ': estratto presente in blog-meta');
+  return match[1];
+}
+
+test('assicurazione famiglia: descrizione ed estratti presentano le due opzioni vere, non la tessera europea come alternativa', () => {
+  const asOption = /LAMal, (?:la )?(?:EHIC|CEAM|EKVK|TEAM)\b/i; // «LAMal, EHIC, integrative»: la tessera messa in fila con le coperture
+  const named = { it: /Servizio sanitario italiano/i, en: /Italian National Health Service/i, de: /italienischer Gesundheitsdienst/i, fr: /service de santé italien/i };
+  assert.match(seoEntry(), /Servizio sanitario italiano/);
+  assert.doesNotMatch(seoEntry(), /\bEHIC\b/);
+  for (const locale of LOCALES) {
+    assert.match(excerpt(locale), named[locale], locale + ': estratto senza il Servizio sanitario italiano');
+    assert.doesNotMatch(excerpt(locale), asOption, locale + ': tessera europea presentata come copertura alternativa');
   }
 });

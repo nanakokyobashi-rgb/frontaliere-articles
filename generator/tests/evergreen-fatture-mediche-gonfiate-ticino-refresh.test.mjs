@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { editorialNotes, thinTranslatedFields, translationResidue } from './lib/evergreen-refresh-invariants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'fatture-mediche-gonfiate-ticino';
@@ -17,12 +18,12 @@ const FIRST_STEP = {
   it: /Prima (?:si chiede|chiedi).*?(?:medico|struttura)/i,
   en: /(?:first ask.*(?:doctor|facility)|ask for a correction first|contact the doctor)/i,
   de: /(?:Zuerst.*(?:Arzt|Einrichtung)|Sprechen Sie.*(?:Arzt|Einrichtung))/i,
-  fr: /(?:demander d’abord.*(?:médecin|établissement)|Adressez-vous.*(?:médecin|établissement))/i,
+  fr: /(?:D[’']abord[^.]*(?:médecin|établissement)|demand(?:er|ez) d[’']abord[^.]*(?:médecin|établissement))/i,
 };
 const COMMISSION = {
   it: /Commissione deontologica/i,
-  en: /Deontological Commission/i,
-  de: /Deontologische Kommission/i,
+  en: /(?:Ethical|Ethics|Deontological) Commission/i,
+  de: /(?:Standesethik-Kommission|Deontologische Kommission)/i,
   fr: /Commission de déontologie/i,
 };
 const NO_CAUSALITY = [
@@ -86,5 +87,50 @@ test('fatture mediche: cifra nazionale, aumento premi e contestazione sono corre
     assert.match(faq[4].a, /detailed|dettagliat|detaill|détaill/i);
     for (const pattern of NO_CAUSALITY) assert.doesNotMatch(faq[3].a, pattern, locale + ': causalità non dimostrata');
     for (const pattern of STALE) assert.doesNotMatch(all, pattern, locale + ': residuo non verificato ' + pattern);
+  }
+});
+
+function fieldsByName(locale) {
+  const source = fs.readFileSync(path.join(ROOT, 'content/blog-body', locale, SLUG + '.ts'), 'utf8');
+  const out = {};
+  for (const [key, value] of bodyFields(source)) out[key.split('.').pop()] = value;
+  return out;
+}
+
+test('fatture mediche: nessuna nota redazionale, nessun residuo di traduzione automatica, traduzioni non svuotate', () => {
+  const italian = fieldsByName('it');
+  for (const locale of LOCALES) {
+    const fields = fieldsByName(locale);
+    const text = Object.values(fields).join('\n');
+    assert.deepEqual(editorialNotes(text, locale), [], locale + ': istruzioni di chi corregge finite nel testo');
+    assert.deepEqual(translationResidue(text, locale), [], locale + ': residuo di traduzione automatica o sigla della lingua sbagliata');
+    if (locale !== 'it') assert.deepEqual(thinTranslatedFields(italian, fields), [], locale + ': campo tradotto svuotato rispetto all\'italiano');
+  }
+});
+
+function seoEntry() {
+  const dir = path.join(ROOT, 'content/seo');
+  for (const name of fs.readdirSync(dir).filter((n) => /^seo-blog.*\.ts$/.test(n))) {
+    const source = fs.readFileSync(path.join(dir, name), 'utf8');
+    const start = source.indexOf("'blog-" + SLUG + "':");
+    if (start !== -1) return source.slice(start, source.indexOf("canonicalPath:", start));
+  }
+  assert.fail('voce SEO della guida non trovata in content/seo/seo-blog*.ts');
+}
+
+function excerpt(locale) {
+  const source = fs.readFileSync(path.join(ROOT, 'content/blog-meta-' + locale + '.ts'), 'utf8');
+  const match = source.match(new RegExp("'blog\\.article\\." + SLUG + "\\.excerpt':\\s*'((?:[^'\\\\]|\\\\.)*)'"));
+  assert.ok(match, locale + ': estratto presente in blog-meta');
+  return match[1];
+}
+
+test('fatture mediche: descrizione ed estratti attribuiscono il 60% al sondaggio, non ai pazienti', () => {
+  const generalised = /60\s*%\s*(?:dei pazienti|of patients|der Patienten|des patients)/i;
+  assert.match(seoEntry(), /ACSI/);
+  assert.doesNotMatch(seoEntry(), generalised);
+  for (const locale of LOCALES) {
+    assert.match(excerpt(locale), /ACSI/, locale + ': estratto senza la fonte del dato');
+    assert.doesNotMatch(excerpt(locale), generalised, locale + ': estratto che generalizza il sondaggio');
   }
 });

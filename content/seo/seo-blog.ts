@@ -4036,16 +4036,16 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
 
  'blog-assicurazione-malattia-famiglia': {
  title: 'Assicurazione malattia famiglia | Frontaliere Ticino',
- description: 'Come frontalieri in Ticino, scopri le migliori opzioni di assicurazione malattia per te e la tua famiglia: LAMal, EHIC, integrative. Confronta ora.',
- keywords: 'assicurazione malattia, frontalieri, ticino, LAMal, EHIC, polizze integrative, sanitario, famiglia',
+ description: 'Frontalieri in Ticino con famiglia: LAMal svizzera o Servizio sanitario italiano? Premi 2026, regole per coniuge e figli, tessera europea e integrative.',
+ keywords: 'assicurazione malattia, frontalieri, ticino, LAMal, servizio sanitario italiano, tessera europea, polizze integrative, famiglia',
  ogTitle: 'Assicurazione malattia per tutta la famiglia',
- ogDescription: 'Proteggi la tua famiglia con le migliori opzioni di assicurazione malattia per frontalieri in Ticino: LAMal, EHIC e integrative.',
+ ogDescription: 'LAMal svizzera o Servizio sanitario italiano per tutta la famiglia: premi 2026 per adulti e minorenni, regole per coniuge e figli, tessera europea e polizze integrative.',
  canonicalPath: '/articoli-frontaliere/assicurazione-malattia-famiglia/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Assicurazione malattia per tutta la famiglia",
- "description": "Come frontalieri in Ticino, scopri le migliori opzioni di assicurazione malattia per te e la tua famiglia: LAMal, EHIC, integrative. Confronta ora.",
+ "description": "Frontalieri in Ticino con famiglia: LAMal svizzera o Servizio sanitario italiano? Premi 2026, regole per coniuge e figli, tessera europea e integrative.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/assicurazione-malattia-famiglia.webp`,
  "width": 1344,

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { editorialNotes, thinTranslatedFields, translationResidue } from './lib/evergreen-refresh-invariants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'lamal-vs-cmi';
@@ -79,9 +80,43 @@ test('LAMal vs CMI: fatti 2026 e terminologia sono presenti in tutte le lingue',
     assert.match(faq[0].a, /279|2026/);
     assert.match(body, /definit|définit|endgült|final/i);
     assert.match(faq[1].a, /92|33|S2/);
-    assert.match(faq[2].a, /attente|waiting|Warte|variab|cifre/i);
+    assert.match(faq[2].a, /tempi di attesa|waiting times|Wartezeiten|délais d[’']attente/i);
     assert.match(faq[3].a, /300|10|700/);
     assert.match(faq[4].a, /220|S2|matern|Mutter|maternité/i);
     for (const pattern of STALE) assert.doesNotMatch(all, pattern, locale + ': residuo non verificato ' + pattern);
+  }
+});
+
+function fieldsByName(locale) {
+  const source = fs.readFileSync(path.join(ROOT, 'content/blog-body', locale, SLUG + '.ts'), 'utf8');
+  const out = {};
+  for (const [key, value] of bodyFields(source)) out[key.split('.').pop()] = value;
+  return out;
+}
+
+test('LAMal vs CMI: nessuna nota redazionale, nessun residuo di traduzione automatica, traduzioni non svuotate', () => {
+  const italian = fieldsByName('it');
+  for (const locale of LOCALES) {
+    const fields = fieldsByName(locale);
+    const text = Object.values(fields).join('\n');
+    assert.deepEqual(editorialNotes(text, locale), [], locale + ': istruzioni di chi corregge finite nel testo');
+    assert.deepEqual(translationResidue(text, locale), [], locale + ': residuo di traduzione automatica o sigla della lingua sbagliata');
+    if (locale !== 'it') assert.deepEqual(thinTranslatedFields(italian, fields), [], locale + ': campo tradotto svuotato rispetto all\'italiano');
+  }
+});
+
+test('LAMal vs CMI: regimi datati, risposta diretta sulla tessera e maternità completa', () => {
+  const regime = { it: /17 luglio 2023/, en: /17 July 2023/, de: /17\. Juli 2023/, fr: /17 juillet 2023/ };
+  const no = { it: /^No:/, en: /^No:/, de: /^Nein:/, fr: /^Non :/ };
+  const week13 = { it: /tredicesima settimana/i, en: /thirteenth week/i, de: /dreizehnten Schwangerschaftswoche/i, fr: /treizième semaine/i };
+  const unplanned = { it: /parto non programmato/i, en: /unplanned birth/i, de: /nicht geplante Geburt/i, fr: /accouchement non programmé/i };
+  for (const locale of LOCALES) {
+    const { body, faq } = article(locale);
+    assert.match(body, regime[locale], locale + ': nuovi e vecchi frontalieri senza la data che li distingue');
+    assert.match(faq[1].a, no[locale], locale + ': la domanda sulle cure programmate vuole una risposta diretta');
+    assert.match(faq[4].a, /LAMal/, locale + ': risposta sulla maternità senza la metà LAMal');
+    assert.match(faq[4].a, week13[locale], locale + ': esenzione dalla partecipazione ai costi in maternità');
+    assert.match(faq[4].a, unplanned[locale], locale + ': tessera europea e parto non programmato');
+    assert.match(faq[4].a, /S2/, locale + ': parto programmato e autorizzazione');
   }
 });

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { editorialNotes, thinTranslatedFields, translationResidue } from './lib/evergreen-refresh-invariants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'malattia-frontaliere-guida-assicurazione';
@@ -102,5 +103,33 @@ test('guida malattia: scelta, premi, cura, infortuni e maternità sono coerenti'
     assert.match(faq[2].a, /92|33/);
     assert.match(faq[2].a, /S2|ASL/i);
     for (const pattern of STALE) assert.doesNotMatch(all, pattern, locale + ': residuo non verificato ' + pattern);
+  }
+});
+
+function fieldsByName(locale) {
+  const source = fs.readFileSync(path.join(ROOT, 'content/blog-body', locale, SLUG + '.ts'), 'utf8');
+  const out = {};
+  for (const [key, value] of bodyFields(source)) out[key.split('.').pop()] = value;
+  return out;
+}
+
+test('guida malattia: nessuna nota redazionale, nessun residuo di traduzione automatica, traduzioni non svuotate', () => {
+  const italian = fieldsByName('it');
+  for (const locale of LOCALES) {
+    const fields = fieldsByName(locale);
+    const text = Object.values(fields).join('\n');
+    assert.deepEqual(editorialNotes(text, locale), [], locale + ': istruzioni di chi corregge finite nel testo');
+    assert.deepEqual(translationResidue(text, locale), [], locale + ': residuo di traduzione automatica o sigla della lingua sbagliata');
+    if (locale !== 'it') assert.deepEqual(thinTranslatedFields(italian, fields), [], locale + ': campo tradotto svuotato rispetto all\'italiano');
+  }
+});
+
+test('guida malattia: regimi datati e scala bernese nominata in ogni lingua', () => {
+  const regime = { it: /17 luglio 2023/, en: /17 July 2023/, de: /17\. Juli 2023/, fr: /17 juillet 2023/ };
+  const scale = { it: /scala bernese/i, en: /Bernese scale/i, de: /Berner Skala/i, fr: /échelle bernoise/i };
+  for (const locale of LOCALES) {
+    const { body } = article(locale);
+    assert.match(body, regime[locale], locale + ': nuovo regime senza la data che lo definisce');
+    assert.match(body, scale[locale], locale + ': elenco delle durate senza il nome della scala');
   }
 });
