@@ -12731,6 +12731,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: arresto per chilo di hashish nel bagaglio',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La stazione internazionale di Domodossola, dove è avvenuto l\'arresto per traffico di stupefacenti',
+    'blog.article.petizione-recupero-carovita-ticino.title': 'Petizione sindacati per recupero carovati in Ticino',
+    'blog.article.petizione-recupero-carovita-ticino.excerpt': '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    'blog.article.petizione-recupero-carovita-ticino.imageAlt': 'Lavoratori del settore pubblico ticinese con striscioni a sostegno della petizione per il recupero del carovita',
 };
 
 export default blogMetaIt;

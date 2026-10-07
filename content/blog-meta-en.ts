@@ -12730,6 +12730,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: arrest for a kilo of hashish in luggage',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## TL;DR - Stopped at the international station of Domodossola - Was arriving from Milano Centrale - One kilogram of hashish in ten bricks - Estimated value',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'Domodossola international station, where the drug trafficking arrest took place',
+    'blog.article.petizione-recupero-carovita-ticino.title': 'Trade unions petition for cost-of-living compensation in Ticino',
+    'blog.article.petizione-recupero-carovita-ticino.excerpt': '## TL;DR - OCST, VPOD and SIT are calling for compensation for inflation. - Between December 2020 and September 2026, inflation increased by approximately',
+    'blog.article.petizione-recupero-carovita-ticino.imageAlt': 'Ticino public sector workers with banners supporting the cost-of-living recovery petition',
 };
 
 export default blogMetaEn;

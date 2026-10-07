@@ -12732,6 +12732,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola : arrestation pour un kilo de haschisch dans les bagages',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## En bref - Interpellée à la gare internationale de Domodossola - Elle arrivait de Milano Centrale - Un kilo de haschisch en dix pains - Valeur estimée : plus',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La gare internationale de Domodossola, lieu de l\'arrestation pour trafic de stupéfiants',
+    'blog.article.petizione-recupero-carovita-ticino.title': 'Pétition des syndicats pour le rattrapage du renchérissement au Tessin',
+    'blog.article.petizione-recupero-carovita-ticino.excerpt': '## En bref - OCST, VPOD et SIT demandent le rattrapage du renchérissement. - Au cours de la période comprise entre décembre 2020 et septembre 2026, le renchérissement a augmenté d\'environ',
+    'blog.article.petizione-recupero-carovita-ticino.imageAlt': 'Travailleurs du secteur public tessinois avec des banderoles soutenant la pétition pour la récupération du coût de la vie',
 };
 
 export default blogMetaFr;

@@ -135,6 +135,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:00:44.679Z",
       "lastFailureAt": "2026-10-07T08:00:44.679Z"
+    },
+    {
+      "articleId": "petizione-recupero-carovita-ticino",
+      "title": "Petizione sindacati per recupero carovati in Ticino",
+      "fallbackImage": "/images/blog/carovita-sindacati-recupero-divario.webp",
+      "reason": "All image providers failed for article-petizione-recupero-carovita-ticino: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:24:42.248Z",
+      "lastFailureAt": "2026-10-07T08:24:42.248Z"
     }
   ]
 }

@@ -42896,6 +42896,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'petizione-recupero-carovita-ticino',
+ category: 'novita',
+ date: '2026-10-07T08:24:41.849Z',
+ image: '/images/blog/carovita-sindacati-recupero-divario.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

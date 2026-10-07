@@ -100669,6 +100669,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-petizione-recupero-carovita-ticino': {
+    title: 'Petizione sindacati per recupero carovati in Ticino',
+    description: '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    keywords: 'frontalieri, ticino, svizzera, italia, petizione, sindacati, recupero, carovati',
+    ogTitle: 'Petizione sindacati per recupero carovati in Ticino',
+    ogDescription: '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    canonicalPath: '/articoli-frontaliere/petizione-recupero-carovita-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petizione sindacati per recupero carovati in Ticino",
+      "description": "## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/carovita-sindacati-recupero-divario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori del settore pubblico ticinese con striscioni a sostegno della petizione per il recupero del carovita"
+      },
+      "datePublished": "2026-10-07T08:24:41+00:00",
+      "dateModified": "2026-10-07T08:24:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/petizione-recupero-carovita-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

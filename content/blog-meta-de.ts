@@ -12729,6 +12729,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: Festnahme wegen eines Kilos Haschisch im Gepäck',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## Auf einen Blick - Am internationalen Bahnhof von Domodossola angehalten - Kam aus Milano Centrale - Ein Kilo Haschisch in zehn Päckchen - Geschätzter Wert',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'Der internationale Bahnhof von Domodossola, Ort des Drogenarrests',
+    'blog.article.petizione-recupero-carovita-ticino.title': 'Gewerkschaftspetition für den Teuerungsausgleich im Tessin',
+    'blog.article.petizione-recupero-carovita-ticino.excerpt': '## Auf einen Blick - OCST, VPOD und SIT fordern den Teuerungsausgleich. - Im Zeitraum zwischen Dezember 2020 und September 2026 ist die Teuerung um etwa',
+    'blog.article.petizione-recupero-carovita-ticino.imageAlt': 'Tessinische öffentliche Arbeitskräfte mit Transparenten zur Petition für den Lebensausgleich',
 };
 
 export default blogMetaDe;
