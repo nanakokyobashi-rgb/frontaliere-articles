@@ -1,5 +1,5 @@
 /**
- * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id e fonte
+ * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id, fonte e contenuto
  * DOPO il rebase e prima del push (D18).
  *
  * Le due invarianti — id unico in tutte le sezioni, una fonte = una sezione —
@@ -178,6 +178,32 @@ test('titolo quasi identico introdotto dal run viene bloccato dopo il rebase', (
   });
   assert.match(violations[0].signals, /Titolo:/);
   assert.equal(contentChecks, 1);
+});
+
+test('una seconda coppia con wording diverso ma stesso fatto viene bloccata', () => {
+  const old = {
+    id: 'aggressione-van-villa-olmo',
+    title: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
+    excerpt: 'A Como due turisti sono stati derubati e aggrediti nel loro van; arrestato un 21enne.',
+  };
+  const candidate = {
+    id: 'furto-van-cernobbio-21enne',
+    title: 'Como, turisti derubati nel van: arrestato un 21enne',
+    excerpt: 'Turisti derubati nel van a Como: per il furto è stato arrestato un 21enne.',
+  };
+  const producedBase = snapshot({ [FIRST.section]: { ids: [] } });
+  const produced = snapshot({ [FIRST.section]: { ids: [candidate.id], articles: { [candidate.id]: candidate } } });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: [candidate.id, old.id],
+      articles: { [candidate.id]: candidate, [old.id]: old },
+    },
+  });
+  const { violations } = findPostRebaseViolations({ producedBase, produced, against });
+  assert.equal(violations.length, 1);
+  assert.equal(violations[0].kind, 'duplicate-content');
+  assert.equal(violations[0].id, candidate.id);
+  assert.equal(violations[0].otherId, old.id);
 });
 
 test('id duplicato: lo stesso id appena registrato da un altro scrittore in un\'altra sezione', () => {

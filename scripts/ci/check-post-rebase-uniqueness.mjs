@@ -105,7 +105,7 @@ export function registryIdsOf(src) {
  * Le superfici da leggere per ogni sezione del core.
  *
  * @param {Array<{section: string, registryFile: string, slugDataFile: string}>} [coreList]
- * @param {Record<string, {sourceLedger?: string}>} [surfaces]
+ * @param {Record<string, {metaFiles?: string[], sourceLedger?: string}>} [surfaces]
  * @returns {Array<{section: string, registryFile: string, slugDataFile: string, metaFile: string, sourceLedger: string}>}
  */
 export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces = SECTION_SURFACES) {

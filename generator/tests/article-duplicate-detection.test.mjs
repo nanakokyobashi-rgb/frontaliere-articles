@@ -434,8 +434,8 @@ describe('drift guard — checkForDuplicates in create-article.mjs', () => {
   it('le soglie e le condizioni composte replicate qui esistono verbatim nel sorgente', () => {
     const src = readFileSync(new URL('../scripts/lib/article-content-duplicate.mjs', import.meta.url), 'utf-8');
 
-    // `localizedSlugs: false` e' il gate anticipato di Step 3a.0-dup: stesse
-    // soglie, solo lo slot IT degli slug (gli EN/DE/FR sono ancora provvisori).
+    // Le soglie del contenuto sono qui, nella sorgente pura condivisa dal
+    // generatore e dal gate post-rebase; il controllo slug resta nel chiamante.
     expect(src).toContain('export function findContentDuplicate(data, existingArticles)');
     expect(src).toContain('const ID_THRESHOLD = 0.72;');
     expect(src).toContain("computeAdaptiveEvergreenThresholds(existingArticles.length).titleJaccard");
