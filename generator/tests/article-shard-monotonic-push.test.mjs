@@ -66,7 +66,7 @@ function seedRemote({
   return { root, remote, head: git(['-C', remote, 'rev-parse', 'main']) };
 }
 
-function runPush(remote, incomingHtml, { revision = null, failFetch = false, trace = false } = {}) {
+function runPush(remote, incomingHtml, { revision = null, failFetch = false, trace = false, expectFailure = false } = {}) {
   const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-monotonic-dist-'));
   const runnerTemp = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-monotonic-runner-'));
   const summary = path.join(runnerTemp, 'push-summary.tsv');
@@ -99,7 +99,8 @@ function runPush(remote, incomingHtml, { revision = null, failFetch = false, tra
     encoding: 'utf8',
   });
   const output = `${result.stdout || ''}${result.stderr || ''}`;
-  assert.equal(result.status, 0, output);
+  if (expectFailure) assert.notEqual(result.status, 0, output);
+  else assert.equal(result.status, 0, output);
   const summaryText = fs.readFileSync(summary, 'utf8');
   assert.match(summaryText, /^articolifrontaliere-it\t/);
   const traceText = fs.existsSync(traceFile) ? fs.readFileSync(traceFile, 'utf8') : '';
@@ -187,12 +188,29 @@ test('HEAD più vecchio non fa fetch della storia e sostituisce', () => {
   }
 });
 
-test('stessa epoca con shell diversa sostituisce e non confronta HTML', () => {
+// Lo stesso commit del corpus reso di nuovo (shell nuova, riparazione) è la
+// stessa revisione e deve restare sostituibile, qualunque sia la lunghezza dei
+// due SHA.
+test('la stessa revisione, resa di nuovo, sostituisce', () => {
   const scenario = seedRemote({ body: page('remote'), remoteRevision: '2000000200.abcdef1', remoteEpoch: 2_000_000_200 });
   try {
-    const result = runPush(scenario.remote, page('incoming'), { revision: '2000000200.1234567' });
+    const result = runPush(scenario.remote, page('incoming'), { revision: '2000000200.ABCDEF123456' });
     assert.notEqual(result.head, scenario.head);
     assert.equal(remoteHtml(scenario.remote), page('incoming'));
+  } finally {
+    fs.rmSync(scenario.root, { recursive: true, force: true });
+  }
+});
+
+// Due commit del corpus dello stesso secondo non si ordinano con l'epoca:
+// quello già sullo shard resta (review della PR del sito 12166).
+test('stessa epoca ma commit diverso: la pagina remota resta', () => {
+  const scenario = seedRemote({ body: page('remote'), remoteRevision: '1700000000.bbbbbbb', remoteEpoch: 1_700_000_005 });
+  try {
+    const result = runPush(scenario.remote, page('incoming'), { revision: '1700000000.aaaaaaa' });
+    assert.equal(result.head, scenario.head);
+    assert.equal(remoteHtml(scenario.remote), page('remote-newer'));
+    assert.match(result.output, /kept remote for 1 newer article path/);
   } finally {
     fs.rmSync(scenario.root, { recursive: true, force: true });
   }
@@ -209,13 +227,16 @@ test('commit remoto senza trailer è sostituibile', () => {
   }
 });
 
-test('storia illeggibile: warning e push corrente', () => {
+// Una storia che non si legge è proprio il caso in cui una pagina più recente
+// potrebbe essere sovrascritta senza che nessuno se ne accorga: il push
+// fallisce e niente viene committato.
+test('storia illeggibile: il push fallisce e lo shard resta com\'è', () => {
   const scenario = seedRemote({ body: page('remote'), remoteEpoch: 2_000_000_100 });
   try {
-    const result = runPush(scenario.remote, page('incoming'), { revision: '2000000000.abcdef1', failFetch: true });
-    assert.notEqual(result.head, scenario.head);
-    assert.equal(remoteHtml(scenario.remote), page('incoming'));
-    assert.match(result.output, /history fetch failed|history unavailable/);
+    const result = runPush(scenario.remote, page('incoming'), { revision: '2000000000.abcdef1', failFetch: true, expectFailure: true });
+    assert.equal(result.head, scenario.head);
+    assert.equal(remoteHtml(scenario.remote), page('remote'));
+    assert.match(result.output, /refusing to publish without the shard history/);
     assert.match(result.summaryText, /\t1\n$/);
   } finally {
     fs.rmSync(scenario.root, { recursive: true, force: true });
