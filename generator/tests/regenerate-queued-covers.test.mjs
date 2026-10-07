@@ -36,6 +36,18 @@ function registryEntry(id, image) {
   return `export const ARTICLES = [\n {\n id: '${id}',\n image: '${image}',\n },\n];\n`;
 }
 
+function seoEntry(id, image = '/images/places/fallback.webp') {
+  return `  'blog-${id}': {\n    title: '${id}',\n    description: '${id}',\n    keywords: '${id}',\n    ogTitle: '${id}',\n    ogDescription: '${id}',\n    canonicalPath: '/articoli-frontaliere/${id}/',\n    structuredData: {\n      "image": {\n        "url": \`\${BASE_URL}${image}\`,\n        "width": 1200,\n        "height": 675\n      },\n      "datePublished": "2026-10-07T12:00:00+00:00"\n    }\n  },\n`;
+}
+
+function inlineSeoEntry(id, image = '/images/places/fallback.webp') {
+  return `  'blog-${id}': {\n    canonicalPath: '/articoli-frontaliere/${id}/',\n    structuredData: {\n      "image": { "@type": "ImageObject", "url": \`\${BASE_URL}${image}\`, "width": 1200, "height": 675 },\n      "datePublished": "2026-10-07T12:00:00+00:00"\n    }\n  },\n`;
+}
+
+function seoFile(entries) {
+  return `const BASE_URL = 'https://frontaliereticino.ch';\nconst BLOG_SEO_METADATA = {\n${entries.join('')}\n};\nexport default BLOG_SEO_METADATA;\n`;
+}
+
 function generatedRecord(root, articleId, imageUrl, bytes) {
   return {
     schema: 1,
@@ -75,6 +87,9 @@ function generatedRecord(root, articleId, imageUrl, bytes) {
 function fixture(root, items) {
   write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
   queue(root, items);
+  const entries = items.map((entry) => inlineSeoEntry(entry.articleId));
+  write(root, 'content/seo/seo-blog-5.ts', seoFile(entries));
+  write(root, 'content/cantons/canton-ti/seo.ts', seoFile(entries));
 }
 
 function item(articleId, requestedAt, title = articleId) {
@@ -143,6 +158,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
       [{ articleId: 'front-oldest', section: 'frontaliere' }],
     );
     assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-front-oldest\.webp/);
+    assert.match(fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8'), /article-front-oldest\.webp/);
     assert.match(fs.readFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), 'utf8'), /old\.webp/);
 
     const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
@@ -277,6 +293,40 @@ test('un errore dopo la generazione ripristina articolo, registro e file prima d
   }
 });
 
+test('un errore nella persistenza della rimozione ripristina la transazione prima del fallimento', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'queue-write-fails';
+    const originalImage = '/images/places/unchanged.webp';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, originalImage));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    const queuePath = path.join(root, 'data/image-regeneration-queue.json');
+
+    await assert.rejects(
+      () => drainQueuedCovers({
+        root,
+        limit: 1,
+        generateCover: fakeCover(root),
+        generateThumbnail: async (sourcePath, options) => {
+          const thumbnail = await fakeThumbnail(sourcePath, options);
+          fs.rmSync(queuePath);
+          fs.mkdirSync(queuePath, { recursive: true });
+          return thumbnail;
+        },
+      }),
+      /EISDIR|ENOTDIR|directory/i,
+    );
+
+    assert.equal(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8').includes(originalImage), true);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/generated-image-registry.json'), 'utf8')).assets.length, 0);
+    assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-publish-outbox.json')), false);
+    assert.equal(fs.existsSync(path.join(root, 'public/images/blog/article-queue-write-fails.webp')), false);
+    assert.equal(fs.existsSync(path.join(root, 'public/images/blog/thumbnails/article-queue-write-fails-480w.webp')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un record già materializzato rende il drain riprendibile senza una seconda generazione', async () => {
   const root = tempRoot();
   try {
@@ -289,6 +339,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     write(root, `public${imageUrl}`, bytes);
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'thumbnail');
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
 
     const summary = await drainQueuedCovers({
       root,
@@ -301,6 +352,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     assert.equal(summary.reused, 1);
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items.length, 0);
     assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-already-generated\.webp/);
+    assert.match(fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8'), /article-already-generated\.webp/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -325,4 +377,16 @@ test('il merge del registro in rebase conserva l ordine upstream e non perde un 
   assert.deepEqual(merged.assets.map((record) => record.assetId), ['lugano-view', 'article-old', 'article-new']);
   assert.equal(merged.assets[1].version, 'local');
   assert.equal(merged.assetCount, 3);
+});
+
+test('il workflow attende la completion del publisher prima di ackare l outbox', () => {
+  const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  const dispatch = workflow.indexOf('gh workflow run');
+  const completion = workflow.indexOf('gh run watch "$run_id" --repo "$REPO" --exit-status');
+  const acknowledge = workflow.indexOf('name: Acknowledge cover publisher outbox');
+  assert.ok(dispatch >= 0);
+  assert.ok(completion > dispatch);
+  assert.ok(acknowledge > completion);
+  assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
+  assert.doesNotMatch(workflow.slice(dispatch, acknowledge), /git rm -f/);
 });

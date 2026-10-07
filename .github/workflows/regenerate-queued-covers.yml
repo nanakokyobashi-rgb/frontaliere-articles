@@ -94,7 +94,7 @@ jobs:
 
       - name: Commit and push corpus data
         id: push
-        if: always() && steps.drain.outcome != 'cancelled'
+        if: steps.drain.outcome == 'success'
         env:
           SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
         run: |
@@ -163,11 +163,12 @@ jobs:
           echo "::error::push failed after 5 attempts"
           exit 1
 
-      - name: Republish pending cover outbox
+      - name: Dispatch and complete pending cover publishers
         id: republish
         if: steps.push.outputs.publish_ready == 'true'
         env:
           OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+          REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
@@ -179,26 +180,78 @@ jobs:
             exit 0
           fi
           jq -e '.schema == 1 and (.items | type == "array")' "$OUTBOX_FILE" >/dev/null
-          while IFS= read -r section; do
-            ids="$(jq -c --arg section "$section" '[.items[] | select(.section == $section) | .articleId]' "$OUTBOX_FILE")"
-            [ "$ids" != "null" ] && [ "$ids" != "[]" ] || continue
-            if [ "$section" = 'frontaliere' ] || [ "$section" = 'svizzera' ]; then
-              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run fast-publish-article.yml \
-                --repo nanakokyobashi-rgb/frontaliere-articles \
+
+          list_dispatch_runs() {
+            local workflow="$1"
+            GH_TOKEN="$GITHUB_PAT_NANAKO" gh run list \
+              --repo "$REPO" \
+              --workflow "$workflow" \
+              --event workflow_dispatch \
+              --branch main \
+              --limit 100 \
+              --json databaseId,createdAt 2>/dev/null || printf '[]'
+          }
+
+          dispatch_and_wait() {
+            local workflow="$1"
+            local section="$2"
+            local ids="$3"
+            local started_at before_ids runs run_id candidate
+            started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            before_ids="$(list_dispatch_runs "$workflow" | jq -r '.[].databaseId')"
+
+            if [ "$workflow" = 'fast-publish-article.yml' ]; then
+              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run "$workflow" \
+                --repo "$REPO" \
                 --ref main \
                 --field article_ids="$ids" \
                 --field section="$section" \
                 --field dry_run=false
             else
-              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run fast-publish-section.yml \
-                --repo nanakokyobashi-rgb/frontaliere-articles \
+              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run "$workflow" \
+                --repo "$REPO" \
                 --ref main \
                 --field section="$section" \
                 --field article_ids="$ids" \
                 --field bootstrap=false \
                 --field dry_run=false
             fi
-            echo "dispatched publisher for $section: $ids"
+
+            run_id=''
+            for _ in $(seq 1 36); do
+              runs="$(list_dispatch_runs "$workflow")"
+              while IFS= read -r candidate; do
+                [ -n "$candidate" ] || continue
+                if ! grep -Fqx "$candidate" <<< "$before_ids"; then
+                  run_id="$candidate"
+                  break
+                fi
+              done < <(
+                jq -r --arg started "$started_at" \
+                  '[.[] | select(.createdAt >= $started) | .databaseId] | reverse | .[]' \
+                  <<< "$runs"
+              )
+              [ -n "$run_id" ] && break
+              sleep 5
+            done
+            if [ -z "$run_id" ]; then
+              echo "::error::publisher dispatch accepted for $section but its run id was not observable; leaving the outbox durable"
+              return 1
+            fi
+
+            echo "publisher dispatched for $section as run $run_id; waiting for completion"
+            GH_TOKEN="$GITHUB_PAT_NANAKO" gh run watch "$run_id" --repo "$REPO" --exit-status
+            echo "publisher completed successfully for $section (run $run_id)"
+          }
+
+          while IFS= read -r section; do
+            ids="$(jq -c --arg section "$section" '[.items[] | select(.section == $section) | .articleId]' "$OUTBOX_FILE")"
+            [ "$ids" != "null" ] && [ "$ids" != "[]" ] || continue
+            if [ "$section" = 'frontaliere' ] || [ "$section" = 'svizzera' ]; then
+              dispatch_and_wait fast-publish-article.yml "$section" "$ids"
+            else
+              dispatch_and_wait fast-publish-section.yml "$section" "$ids"
+            fi
           done < <(jq -r '.items | map(.section) | unique[]' "$OUTBOX_FILE")
 
       - name: Acknowledge cover publisher outbox

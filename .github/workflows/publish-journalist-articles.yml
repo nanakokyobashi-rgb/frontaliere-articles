@@ -17,10 +17,11 @@ name: Publish Journalist Articles
 # later — it silently loses the article. Incident 2026-07-16 (site repo run
 # 29485706663) orphaned four articles for 8+ hours exactly this way.
 #
-# This workflow shares the production writer lock with generate-article and the
-# canton callers. That is deliberate: those writers all update the generated
-# image registry, and the lock prevents a drain rebase from racing a journalist
-# or canton commit. The shared rebase helper still resolves the cover queue.
+# This workflow keeps the global production writer lock with the historical
+# generate-article lane and the queued-cover drain. Canton callers use
+# section-specific generation groups so a 60-minute run in one canton cannot
+# replace another canton's pending run; their branch updates are protected by
+# the same shared rebase/merge helper below rather than by this global lock.
 # Other conflicts are fatal, because silently choosing a side would orphan a
 # published doc.
 # So this workflow:

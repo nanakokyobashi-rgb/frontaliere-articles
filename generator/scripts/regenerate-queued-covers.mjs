@@ -9,7 +9,12 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { appendGeneratedImageRecord, imageRecordForPath, readGeneratedImageRecords } from './lib/blog-image-registry.mjs';
 import { articleHeroImagePath, articleImageAssetId } from './lib/article-cover-identity.mjs';
-import { locateArticleRegistry, updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
+import {
+  locateArticleRegistry,
+  locateArticleSeoImage,
+  updateArticleImageInRegistry,
+  updateArticleImageInSeo,
+} from './lib/article-registry-image.mjs';
 import {
   appendImageRegenerationPublishOutbox,
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
@@ -99,6 +104,9 @@ function requestedAtSort(a, b) {
 
 function sectionForRegistry(location) {
   if (location.section) return location.section;
+  const cantonPath = /^content\/cantons\/([^/]+)\//.exec(String(location.path || ''));
+  if (cantonPath) return cantonPath[1];
+  if (String(location.path || '').includes('swiss-articles-data')) return 'svizzera';
   return 'frontaliere';
 }
 
@@ -193,6 +201,9 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   trackFile(snapshots, destination);
   const thumbnail = thumbnailFileForRecord(root, record);
   trackFile(snapshots, thumbnail);
+  const section = sectionForRegistry(location);
+  const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
+  trackFile(snapshots, absolute(root, seoLocation.path));
 
   if (!fs.existsSync(thumbnail)) await generateThumbnail(destination, { root, item, record });
   if (!fs.existsSync(thumbnail)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
@@ -201,6 +212,7 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   if (currentImage !== record.imageUrl) {
     updateArticleImageInRegistry(root, item.articleId, record.imageUrl, { registryFiles });
   }
+  updateArticleImageInSeo(root, item.articleId, record.imageUrl, { section });
 
   return {
     destination,
@@ -311,8 +323,9 @@ export async function drainQueuedCovers({
   const result = { drained: 0, failed: 0, failedIds: [], reused: 0, requeued, sections: {} };
 
   for (const item of selected) {
+    let outcome = null;
     try {
-      const outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles });
+      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles });
       const index = queue.items.indexOf(item);
       if (index < 0) throw new Error(`queue item disappeared before success: ${item.articleId}`);
       queue.items.splice(index, 1);
@@ -330,6 +343,7 @@ export async function drainQueuedCovers({
       if (!result.sections[section]) result.sections[section] = [];
       result.sections[section].push(item.articleId);
     } catch (error) {
+      if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
       item.failureCount = failureCount;
       item.status = failureCount >= 3 ? 'failed' : 'queued';
