@@ -938,9 +938,13 @@ test('generate-article.yml dichiara come registro OGNI target di scrittura del g
       expected.add(corpusPath(`services/locales/${section.metaPrefix}-${loc}.ts`));
     }
   }
-  const seoFiles = [...src.matchAll(/seoFile:\s*'([^']+)'/g)].map((m) => corpusPath(m[1]));
-  // Una regex che non trova niente renderebbe questo test vacuo: qui e' un
-  // fallimento, non un silenzio.
+  // Le due sezioni storiche hanno ancora letterali nel generatore; le
+  // cantonali arrivano da cantonSectionConfigs(). Il contratto completo e'
+  // quindi la stessa tabella di superfici che il rebase passa al generatore,
+  // non una regex che perde le sezioni generate dal profilo.
+  assert.match(src, /\.\.\.cantonSectionConfigs\(\)/,
+    'create-article.mjs deve derivare le configurazioni cantonali dal profilo');
+  const seoFiles = Object.values(SECTION_SURFACES).map(({ seoWriteFile }) => corpusPath(seoWriteFile));
   assert.equal(seoFiles.length, Object.keys(ARTICLE_SECTION_CORE).length,
     `atteso un seoFile per sezione in create-article.mjs, trovati: ${JSON.stringify(seoFiles)}`);
   for (const f of seoFiles) expected.add(f);
@@ -1067,7 +1071,7 @@ test('i prefissi --take-theirs coprono i target per-articolo di ENTRAMBE le sezi
     expected.add(`${corpusPath(`services/locales/${section.bodyDir}`)}/`);
   }
   const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
-  const sidecars = [...src.matchAll(/sidecarDir:\s*'([^']+)'/g)].map((m) => `${corpusPath(m[1])}/`);
+  const sidecars = Object.values(SECTION_SURFACES).map(({ sidecarDir }) => `${corpusPath(sidecarDir)}/`);
   assert.equal(sidecars.length, Object.keys(ARTICLE_SECTION_CORE).length,
     `atteso un sidecarDir per sezione in create-article.mjs, trovati: ${JSON.stringify(sidecars)}`);
   for (const s of sidecars) expected.add(s);

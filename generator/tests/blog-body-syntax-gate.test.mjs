@@ -44,7 +44,7 @@ import {
   parseChangedFiles,
   run,
 } from '../../scripts/ci/check-blog-body-syntax.mjs';
-import { historyRevisionFromEnv } from '../../scripts/lib/corpus-floors.mjs';
+import { floorPolicyOf, historyRevisionFromEnv } from '../../scripts/lib/corpus-floors.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
@@ -53,6 +53,7 @@ const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
 const GENERATOR_WORKFLOW = path.join(ROOT, '.github/workflows/generator-ci.yml');
 const CONTENT_GATES_WORKFLOW = path.join(ROOT, '.github/workflows/content-gates-main.yml');
 const TESTS_WORKFLOW = path.join(ROOT, '.github/workflows/tests.yml');
+const HISTORICAL_BODY_ROOTS = BLOG_BODY_ROOTS.filter(({ section }) => floorPolicyOf(section) !== 'family');
 
 // Questa e' la forma unica della guardia: deve riconoscere import/export
 // statici, anche braced su piu' righe, ma non una stringa `esbuild` in coda a
@@ -134,15 +135,20 @@ test('UNA sola radice a zero fa fallire, anche se il totale abbonda', () => {
 });
 
 test('i pavimenti derivano dai registri moltiplicati per i locali presenti', () => {
-  assert.equal(BLOG_BODY_ROOTS.length, 2, 'entrambe le radici devono essere sorvegliate');
+  assert.equal(HISTORICAL_BODY_ROOTS.length, 2, 'entrambe le radici storiche devono essere sorvegliate');
   assert.deepEqual(
-    BLOG_BODY_ROOTS.map((r) => r.rel).sort(),
+    HISTORICAL_BODY_ROOTS.map((r) => r.rel).sort(),
     ['content/blog-body', 'content/blog-body-ch'],
     'le due radici dei corpi di questo repo',
   );
   assert.ok(BLOG_BODY_ROOTS.every((r) => r.section), 'ogni radice deve avere una sezione derivabile');
   const model = deriveFloorModel(ROOT);
-  assert.ok(model.perRoot.every((r) => r.expectedFiles > 0));
+  assert.ok(
+    model.perRoot
+      .filter((r) => floorPolicyOf(r.section) !== 'family')
+      .every((r) => r.expectedFiles > 0),
+    'i due floor storici devono avere un riferimento positivo',
+  );
   assert.equal(
     model.expectedTotal,
     model.perRoot.reduce((sum, r) => sum + r.expectedFiles, 0),
@@ -173,7 +179,18 @@ test('il modello non conta la directory del gate e rifiuta un riferimento assent
     const model = deriveFloorModel(dir, {
       previousRegistryCounts: { frontaliere: 2, svizzera: 1 },
     });
-    assert.deepEqual(model.perRoot.map((r) => r.expectedFiles), [8, 4]);
+    assert.deepEqual(
+      model.perRoot
+        .filter((r) => floorPolicyOf(r.section) !== 'family')
+        .map((r) => r.expectedFiles),
+      [8, 4],
+    );
+    assert.ok(
+      model.perRoot
+        .filter((r) => floorPolicyOf(r.section) === 'family')
+        .every((r) => r.expectedFiles === 0),
+      'un cantone attivo senza registro parte da zero corpi senza spegnere i floor storici',
+    );
 
     const missing = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-'));
     try {
