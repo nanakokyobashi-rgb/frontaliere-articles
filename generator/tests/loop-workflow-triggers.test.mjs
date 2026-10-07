@@ -301,8 +301,8 @@ test('generate-article: la mutua esclusione resta, ma sul job che scrive', () =>
   assert.ok(gen, 'job `generate` non trovato');
   assert.match(
     gen,
-    /\n\s+concurrency:\n\s+group: generate-article\n\s+cancel-in-progress: false/,
-    'Il gruppo `generate-article` non è più sul job che scrive. Il gate riduce gli arrivi, non ' +
+    /\n\s+concurrency:\n\s+group: \$\{\{ needs\.admit\.outputs\.content_push == 'true' && 'generate-article-content' \|\| 'generate-article-dry' \}\}\n\s+cancel-in-progress: false/,
+    'I gruppi content/dry non sono più sul job che scrive. Il gate riduce gli arrivi, non ' +
       'garantisce l\'esclusività: se due arrivi passano insieme la finestra di corsa fra i due ' +
       'controlli, questo è lo strato che evita di pagare due generazioni per un articolo solo.',
   );
