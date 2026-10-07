@@ -3,11 +3,56 @@ import assert from 'node:assert/strict';
 import {
   evaluateSourceCopy,
   generateWithSourceCopyGuard,
+  getSourceCopyMode,
+  logSourceCopyVerdict,
   SOURCE_COPY_OVERLAP_THRESHOLD,
+  sourceCopyModeBlocks,
   SourceCopyError,
 } from '../scripts/lib/source-copy-guard.mjs';
 
 const WORDS = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici tredici';
+
+test('la modalità anti-copia è warn per default, valida e fail-safe', () => {
+  const previous = process.env.ARTICLE_SOURCE_COPY_MODE;
+  try {
+    delete process.env.ARTICLE_SOURCE_COPY_MODE;
+    assert.equal(getSourceCopyMode(), 'warn');
+    assert.equal(sourceCopyModeBlocks(), false);
+    assert.equal(getSourceCopyMode('repair'), 'repair');
+    assert.equal(sourceCopyModeBlocks('repair'), false);
+    assert.equal(getSourceCopyMode('enforce'), 'enforce');
+    assert.equal(sourceCopyModeBlocks('enforce'), true);
+    assert.equal(getSourceCopyMode('invalid'), 'warn');
+  } finally {
+    if (previous === undefined) delete process.env.ARTICLE_SOURCE_COPY_MODE;
+    else process.env.ARTICLE_SOURCE_COPY_MODE = previous;
+  }
+});
+
+test('il log espone la modalità effettiva senza bloccare il verdetto warn', () => {
+  const lines = [];
+  const verdict = evaluateSourceCopy(WORDS, WORDS);
+  logSourceCopyVerdict('articolo-test', verdict, (line) => lines.push(line), 'warn');
+  assert.equal(verdict.safe, false);
+  assert.match(lines[0], /max_overlap=13/);
+  assert.match(lines[0], /mode=warn/);
+});
+
+test('warn restituisce il primo draft senza rigenerare né rigettare', async () => {
+  let calls = 0;
+  const result = await generateWithSourceCopyGuard({
+    sourceText: WORDS,
+    mode: 'warn',
+    generate: async () => {
+      calls += 1;
+      return WORDS;
+    },
+    logger: () => {},
+  });
+  assert.equal(calls, 1);
+  assert.equal(result.retries, 0);
+  assert.equal(result.verdict.safe, false);
+});
 
 test('rifiuta una sequenza di almeno dodici parole consecutive', () => {
   const exact = evaluateSourceCopy(WORDS, WORDS);
@@ -78,6 +123,7 @@ test('rigenera dopo il primo overlap e poi accetta la parafrasi', async () => {
   const result = await generateWithSourceCopyGuard({
     sourceText: WORDS,
     articleId: 'articolo-test',
+    mode: 'enforce',
     logger: (line) => logs.push(line),
     generate: async ({ retry, instruction }) => {
       calls.push({ retry, instruction });
@@ -95,6 +141,7 @@ test('fallisce esplicitamente dopo il tetto di rigenerazioni', async () => {
     generateWithSourceCopyGuard({
       sourceText: WORDS,
       maxRetries: 1,
+      mode: 'enforce',
       generate: async () => WORDS,
       logger: () => {},
     }),
