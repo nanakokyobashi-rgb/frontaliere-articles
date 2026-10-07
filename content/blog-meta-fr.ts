@@ -12729,6 +12729,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.hotel-ticino-140-licenziati.title': 'Deux hôtels fermés au Tessin : 140 licenciés',
     'blog.article.hotel-ticino-140-licenziati.excerpt': 'La société qui gère Principe Leopoldo et Villa Sassa annonce 140 licenciements. Daniele Lardi rassure : une bonne partie du personnel sera réembauchée.',
     'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Les hôtels Principe Leopoldo et Villa Sassa au Tessin',
+    'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola : arrestation pour un kilo de haschisch dans les bagages',
+    'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## En bref - Interpellée à la gare internationale de Domodossola - Elle arrivait de Milano Centrale - Un kilo de haschisch en dix pains - Valeur estimée : plus',
+    'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La gare internationale de Domodossola, lieu de l\'arrestation pour trafic de stupéfiants',
 };
 
 export default blogMetaFr;

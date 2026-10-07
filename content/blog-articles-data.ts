@@ -42883,6 +42883,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'domodossola-arresto-hashish-stazione',
+ category: 'pratico',
+ date: '2026-10-07T06:58:03.077Z',
+ image: '/images/blog/affitti-friburgo-contestazione-canone.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
