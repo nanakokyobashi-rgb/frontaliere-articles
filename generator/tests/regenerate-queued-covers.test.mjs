@@ -1,0 +1,270 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+
+import {
+  GENERATED_IMAGE_CREDIT,
+  GENERATED_IMAGE_LICENSE,
+  GENERATED_IMAGE_LICENSE_URLS,
+  GENERATED_IMAGE_PROMPT_VERSION,
+  GENERATED_IMAGE_RESTRICTIONS,
+} from '../../engine/shared/generatedImageRegistry.mjs';
+import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
+import { drainQueuedCovers } from '../scripts/regenerate-queued-covers.mjs';
+import { mergeGeneratedImageRegistries } from '../../scripts/ci/merge-generated-image-registry.mjs';
+
+function tempRoot() {
+  return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
+}
+
+function write(root, relativePath, content) {
+  const filePath = path.join(root, relativePath);
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, content);
+  return filePath;
+}
+
+function queue(root, items) {
+  write(root, 'data/image-regeneration-queue.json', JSON.stringify({ schema: 1, items }, null, 2));
+}
+
+function registryEntry(id, image) {
+  return `export const ARTICLES = [\n {\n id: '${id}',\n image: '${image}',\n },\n];\n`;
+}
+
+function generatedRecord(root, articleId, imageUrl, bytes) {
+  return {
+    schema: 1,
+    assetId: articleImageAssetId(articleId),
+    provider: 'openai-codex',
+    model: 'gpt-image-2.5',
+    executorModel: 'gpt-5.6-luna',
+    promptVersion: GENERATED_IMAGE_PROMPT_VERSION,
+    promptHash: 'a'.repeat(64),
+    license: GENERATED_IMAGE_LICENSE,
+    licenseUrl: GENERATED_IMAGE_LICENSE_URLS['openai-codex'],
+    credit: GENERATED_IMAGE_CREDIT,
+    bytes: bytes.length,
+    sha256: crypto.createHash('sha256').update(bytes).digest('hex'),
+    width: 1200,
+    height: 675,
+    format: 'webp',
+    generatedAt: '2026-10-07T12:00:00.000Z',
+    verifiedAt: '2026-10-07T12:00:01.000Z',
+    restrictions: [...GENERATED_IMAGE_RESTRICTIONS],
+    scope: 'article-hero',
+    imageUrl,
+    area: 'Test',
+    season: 'all seasons',
+    variant: 'article hero',
+    vision: {
+      ok: true,
+      contains_text: false,
+      contains_logo: false,
+      contains_recognizable_face: false,
+      looks_like_specific_real_event: false,
+      notes: 'test fixture',
+    },
+  };
+}
+
+function fixture(root, items) {
+  write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
+  queue(root, items);
+}
+
+function item(articleId, requestedAt, title = articleId) {
+  return {
+    articleId,
+    title,
+    fallbackImage: '/images/places/lugano-view.webp',
+    reason: 'engine failed',
+    status: 'queued',
+    requestedAt,
+    lastFailureAt: requestedAt,
+  };
+}
+
+function fakeCover(root) {
+  return async (entry) => {
+    const bytes = Buffer.from(`cover:${entry.articleId}`);
+    const imageUrl = `/images/blog/${articleImageAssetId(entry.articleId)}.webp`;
+    const filePath = path.join(root, '.cache', `${entry.articleId}.webp`);
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, bytes);
+    return { filePath, record: generatedRecord(root, entry.articleId, imageUrl, bytes) };
+  };
+}
+
+async function fakeThumbnail(sourcePath) {
+  const thumbPath = path.join(
+    path.dirname(sourcePath),
+    'thumbnails',
+    `${path.basename(sourcePath, path.extname(sourcePath))}-480w.webp`,
+  );
+  fs.mkdirSync(path.dirname(thumbPath), { recursive: true });
+  fs.writeFileSync(thumbPath, 'thumbnail');
+  return thumbPath;
+}
+
+test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giusto', async () => {
+  const root = tempRoot();
+  try {
+    write(root, 'content/blog-articles-data.ts', registryEntry('front-oldest', '/images/places/old.webp'));
+    write(root, 'content/cantons/canton-ti/registry.ts', registryEntry('canton-newer', '/images/places/old.webp'));
+    fixture(root, [
+      item('canton-newer', '2026-10-07T10:00:00.000Z'),
+      item('front-oldest', '2026-10-07T09:00:00.000Z'),
+    ]);
+
+    let calls = 0;
+    const generateCover = fakeCover(root);
+    const summary = await drainQueuedCovers({
+      root,
+      limit: 1,
+      generateCover: async (...args) => {
+        calls += 1;
+        return generateCover(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+      now: () => '2026-10-07T13:00:00.000Z',
+    });
+
+    assert.equal(calls, 1);
+    assert.equal(summary.drained, 1);
+    assert.equal(summary.residual, 1);
+    assert.deepEqual(summary.sections.frontaliere, ['front-oldest']);
+    assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-front-oldest\.webp/);
+    assert.match(fs.readFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), 'utf8'), /old\.webp/);
+
+    const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
+    assert.deepEqual(remaining.items.map((entry) => entry.articleId), ['canton-newer']);
+
+    const second = await drainQueuedCovers({
+      root,
+      limit: 1,
+      generateCover: async (...args) => {
+        calls += 1;
+        return generateCover(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(second.drained, 1);
+    assert.equal(second.residual, 0);
+    assert.deepEqual(second.sections['canton-ti'], ['canton-newer']);
+    assert.match(fs.readFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), 'utf8'), /article-canton-newer\.webp/);
+    assert.equal(calls, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un fallimento conserva articolo e coda, e il terzo tentativo resta marcato', async () => {
+  const root = tempRoot();
+  try {
+    const originalImage = '/images/places/unchanged.webp';
+    write(root, 'content/blog-articles-data.ts', registryEntry('will-fail', originalImage));
+    fixture(root, [item('will-fail', '2026-10-07T09:00:00.000Z')]);
+    let now = 0;
+    const fail = async () => { throw new Error('provider unavailable'); };
+
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const summary = await drainQueuedCovers({
+        root,
+        limit: 1,
+        generateCover: fail,
+        generateThumbnail: fakeThumbnail,
+        now: () => `2026-10-07T13:0${now++}:00.000Z`,
+      });
+      assert.equal(summary.failed, 1);
+      assert.equal(summary.residual, 1);
+      assert.equal(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8').includes(originalImage), true);
+    }
+
+    const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
+    assert.equal(remaining.items[0].failureCount, 3);
+    assert.equal(remaining.items[0].status, 'failed');
+    assert.equal(remaining.items[0].reason, 'provider unavailable');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un errore dopo la generazione ripristina articolo, registro e file prima di lasciare la voce in coda', async () => {
+  const root = tempRoot();
+  try {
+    const originalImage = '/images/places/unchanged.webp';
+    const articleId = 'thumbnail-fails';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, originalImage));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+    const summary = await drainQueuedCovers({
+      root,
+      limit: 1,
+      generateCover: fakeCover(root),
+      generateThumbnail: async () => { throw new Error('thumbnail unavailable'); },
+    });
+
+    assert.equal(summary.failed, 1);
+    assert.equal(summary.residual, 1);
+    assert.equal(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8').includes(originalImage), true);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/generated-image-registry.json'), 'utf8')).assets.length, 0);
+    assert.equal(fs.existsSync(path.join(root, 'public/images/blog/article-thumbnail-fails.webp')), false);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0].failureCount, 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un record già materializzato rende il drain riprendibile senza una seconda generazione', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'already-generated';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const bytes = Buffer.from('already-generated-cover');
+    const record = generatedRecord(root, articleId, imageUrl, bytes);
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+    write(root, `public${imageUrl}`, bytes);
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'thumbnail');
+    queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+    const summary = await drainQueuedCovers({
+      root,
+      limit: 1,
+      generateCover: async () => { throw new Error('must not regenerate'); },
+      generateThumbnail: async () => { throw new Error('thumbnail already exists'); },
+    });
+
+    assert.equal(summary.drained, 1);
+    assert.equal(summary.reused, 1);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items.length, 0);
+    assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-already-generated\.webp/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il merge del registro in rebase conserva l ordine upstream e non perde un record locale', () => {
+  const upstream = {
+    schema: 1,
+    assets: [
+      { assetId: 'lugano-view', version: 'upstream' },
+      { assetId: 'article-old', version: 'upstream' },
+    ],
+  };
+  const replayed = {
+    schema: 1,
+    assets: [
+      { assetId: 'article-new', version: 'local' },
+      { assetId: 'article-old', version: 'local' },
+    ],
+  };
+  const merged = mergeGeneratedImageRegistries(upstream, replayed);
+  assert.deepEqual(merged.assets.map((record) => record.assetId), ['lugano-view', 'article-old', 'article-new']);
+  assert.equal(merged.assets[1].version, 'local');
+  assert.equal(merged.assetCount, 3);
+});

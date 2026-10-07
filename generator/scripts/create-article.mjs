@@ -266,7 +266,6 @@ import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTit
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
-import { generateImageFromSpec } from '../../engine/shared/generatedImageEngine.mjs';
 import {
   appendGeneratedImageRecord,
   hasValidBlogImageRecord,
@@ -276,6 +275,7 @@ import {
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from './lib/article-cover-fallback.mjs';
+import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -14265,18 +14265,6 @@ const IMAGE_PHASE_BUDGET_MS = Math.max(
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
-function articleImageSubject(data) {
-  const title = String(data.title || data.content?.it?.title || data.content?.title || '').trim();
-  const context = String(data.imagePrompt || '').replace(/\s+/g, ' ').trim();
-  return [title, context].filter(Boolean).join(' — ').slice(0, 500);
-}
-
-function articleImageAssetId(data) {
-  const raw = String(data.id || 'article').toLowerCase();
-  const normalized = raw.replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
-  return `article-${(normalized || 'article').slice(0, 110)}`;
-}
-
 function materializeGovernedArticleImage(result) {
   const record = result?.record;
   const imageUrl = String(record?.imageUrl || '');
@@ -14315,33 +14303,20 @@ async function generateArticleImage(data) {
     return null;
   }
 
-  const assetId = articleImageAssetId(data);
-  const stagingDir = resolve(`.cache/generated-article-images/${assetId}-${process.pid}-${Date.now()}`);
   let result;
   try {
-    result = await generateImageFromSpec(
-      {
-        scope: 'article-hero',
-        assetId,
-        subject: articleImageSubject(data),
-        area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
-        season: 'all seasons',
-        variant: 'article hero',
+    result = await generateGovernedArticleHero({
+      root: PROJECT_ROOT,
+      data,
+      area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
+      deadlineAt: imageDeadline,
+      onProviderAttempt: ({ provider, attempt }) => {
+        console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
       },
-      {
-        outputDir: stagingDir,
-        assetId,
-        // A provider outage must fall through immediately. The engine itself
-        // owns provider order; this publishing path permits one attempt total.
-        maxAttempts: 1,
-        deadlineAt: imageDeadline,
-        onProviderAttempt: ({ provider, attempt }) => {
-          console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
-        },
-      },
-    );
+    });
   } catch (error) {
-    if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
+    const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
+    if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
@@ -14362,8 +14337,9 @@ async function generateArticleImage(data) {
     return null;
   } finally {
     const cleanupDir = materialized?.stagingDir
+      || result?.stagingDir
       || (result?.filePath ? path.dirname(result.filePath) : null)
-      || stagingDir;
+      || null;
     if (cleanupDir && existsSync(cleanupDir)) {
       rmSync(cleanupDir, { recursive: true, force: true });
     }

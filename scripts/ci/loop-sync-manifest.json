@@ -5472,6 +5472,56 @@
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
       }
+    },
+    {
+      "path": "scripts/ci/merge-generated-image-registry.mjs",
+      "mode": "corpus-only",
+      "reason": "Merge deterministico del registro immagini generato durante il rebase del drain: conserva gli asset prodotti localmente mentre prende il registro upstream per risolvere il push concorrente. Il registro e il suo rebase appartengono alla pubblicazione dati del corpus; non esiste un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-cover-engine.mjs",
+      "mode": "corpus-only",
+      "reason": "Adapter corpus-only del motore governato per le copertine `article-hero`: mantiene una sola costruzione di scope, soggetto, staging e policy fra generazione normale e smaltimento della coda. L'engine mirrorato resta la sorgente del provider, del prompt e della verifica; sul sito non esiste questo entry point del generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-cover-identity.mjs",
+      "mode": "corpus-only",
+      "reason": "Funzioni pure corpus-only per asset id, soggetto e path delle copertine articolo. Evitano che il nuovo consumer duplichi regex e normalizzazioni del percorso governato; il sito consuma il JSON pubblicato e non esegue il generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-registry-image.mjs",
+      "mode": "corpus-only",
+      "reason": "Locator e writer del campo `image` nei registry frontaliere, svizzera e cantonali. Aggiorna esclusivamente il record dell'articolo selezionato e non importa codice dal sito: la superficie cross-repo resta il JSON HTTP pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/regenerate-queued-covers.mjs",
+      "mode": "corpus-only",
+      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: smaltisce per anzianita', applica il percorso governato, aggiorna registro/hero/thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
     }
   ]
 }

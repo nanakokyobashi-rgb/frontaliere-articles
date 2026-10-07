@@ -26,6 +26,17 @@ function readQueue(root) {
   return parsed;
 }
 
+export function readImageRegenerationQueue(root) {
+  return readQueue(root);
+}
+
+export function writeImageRegenerationQueue(root, queue) {
+  if (queue?.schema !== IMAGE_REGENERATION_QUEUE_SCHEMA || !Array.isArray(queue.items)) {
+    throw new Error(`Invalid image regeneration queue: expected schema ${IMAGE_REGENERATION_QUEUE_SCHEMA} and items[]`);
+  }
+  writeJsonAtomic(queuePath(root), queue);
+}
+
 /**
  * Add one failed-engine cover to the versioned regeneration queue.
  *
@@ -48,12 +59,16 @@ export function appendImageRegenerationQueue(root, {
       fallbackImage: String(fallbackImage || ''),
       reason: normalizeReason(reason),
       status: 'queued',
+      failureCount: 0,
       requestedAt: String(requestedAt),
       lastFailureAt: String(requestedAt),
     };
     const existing = queue.items.find((entry) => entry?.articleId === item.articleId);
     if (existing) {
-      Object.assign(existing, item, { requestedAt: existing.requestedAt || item.requestedAt });
+      Object.assign(existing, item, {
+        failureCount: Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
+        requestedAt: existing.requestedAt || item.requestedAt,
+      });
     } else {
       queue.items.push(item);
     }

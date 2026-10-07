@@ -1,0 +1,227 @@
+name: Regenerate queued article covers
+run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
+
+# La coda e' un recupero dati, non una nuova pipeline editoriale: parte ogni
+# due ore e si ferma da sola quando items[] e' vuoto. Il dispatch manuale puo'
+# abbassare o alzare il tetto senza cambiare il percorso governato.
+on:
+  schedule:
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Numero massimo di voci piu' vecchie da tentare in questa run"
+        required: false
+        default: '10'
+        type: string
+
+# Mai cancellare un drain in corso: ha gia' pagato le immagini e sta per
+# rendere atomici hero, registro, thumbnail e coda.
+concurrency:
+  group: generate-article
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  drain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: bash scripts/lib/npm-ci-retry.sh
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of provider keys and the push PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      # The same Codex broker lane used by generate-article.yml. The engine
+      # still owns provider order and verification; this step only supplies
+      # the first provider's governed authentication path.
+      - name: Setup Codex Luna Max article lane
+        id: setup_claude_haiku_fallback
+        continue-on-error: true
+        uses: ./.github/actions/setup-claude-haiku-fallback
+        with:
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
+
+      - name: Drain queued covers
+        id: drain
+        env:
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          LIMIT_INPUT: ${{ inputs.limit || '10' }}
+          SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
+        run: |
+          set -euo pipefail
+          node generator/scripts/regenerate-queued-covers.mjs \
+            --limit "$LIMIT_INPUT" \
+            --summary "$SUMMARY_FILE"
+          echo "summary=$SUMMARY_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push corpus data
+        id: push
+        if: always() && steps.drain.outcome != 'cancelled'
+        env:
+          SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
+        run: |
+          set -euo pipefail
+          echo "pushed=false" >> "$GITHUB_OUTPUT"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "queued cover queue produced no changes"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — refusing a GITHUB_TOKEN push because it would not trigger publish-api.yml"
+            exit 1
+          fi
+
+          drained=0
+          if [ -f "$SUMMARY_FILE" ]; then drained="$(jq -r '.drained // 0' "$SUMMARY_FILE")"; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(generator): drain queued article covers ($drained drained)"
+          registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          cp data/generated-image-registry.json "$registry_snapshot"
+
+          # Keep the token out of URLs and logs. The extraheader is local-only
+          # checkout state and is removed with the runner; the runtime source is
+          # explicitly the Remote Config bridge's GITHUB_PAT_NANAKO variable.
+          remote="https://github.com/${GITHUB_REPOSITORY}.git"
+          auth="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 -w 0)"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
+          git remote set-url origin "$remote"
+
+          for attempt in 1 2 3 4 5; do
+            if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
+              echo "pushed to main"
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [ "$attempt" -eq 5 ]; then break; fi
+            echo "push attempt $attempt failed; rebasing onto origin/main"
+            sleep $((attempt * 3))
+
+            # rebase-onto-remote.sh has the repository's proven queue merge,
+            # per-section registry merge, and per-article image resolution.
+            # Pull uses the authenticated remote URL plus the local extraheader
+            # above; no credential-bearing URL is written to git config.
+            rebased=1
+            bash scripts/lib/rebase-onto-remote.sh "$remote" main \
+              data/generated-image-registry.json \
+              --merge-queue data/image-regeneration-queue.json \
+              --section-surfaces \
+              --take-theirs public/images/blog/ || rebased=0
+            if [ "$rebased" -ne 1 ]; then
+              echo "::error::safe rebase failed; refusing to choose a side for a corpus conflict"
+              exit 1
+            fi
+            node scripts/ci/merge-generated-image-registry.mjs \
+              data/generated-image-registry.json "$registry_snapshot"
+            git add data/generated-image-registry.json
+            if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+          done
+          echo "::error::push failed after 5 attempts"
+          exit 1
+
+      - name: Republish touched article pages
+        if: steps.push.outputs.pushed == 'true'
+        env:
+          SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
+        run: |
+          set -euo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — cannot dispatch the existing article publishers"
+            exit 1
+          fi
+          if [ ! -s "$SUMMARY_FILE" ]; then
+            echo "::error::cover summary missing after a successful push"
+            exit 1
+          fi
+          while IFS= read -r section; do
+            ids="$(jq -c --arg section "$section" '.sections[$section]' "$SUMMARY_FILE")"
+            [ "$ids" != "null" ] && [ "$ids" != "[]" ] || continue
+            if [ "$section" = 'frontaliere' ] || [ "$section" = 'svizzera' ]; then
+              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run fast-publish-article.yml \
+                --repo nanakokyobashi-rgb/frontaliere-articles \
+                --ref main \
+                --field article_ids="$ids" \
+                --field section="$section" \
+                --field dry_run=false
+            else
+              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run fast-publish-section.yml \
+                --repo nanakokyobashi-rgb/frontaliere-articles \
+                --ref main \
+                --field section="$section" \
+                --field article_ids="$ids" \
+                --field bootstrap=false \
+                --field dry_run=false
+            fi
+            echo "dispatched publisher for $section: $ids"
+          done < <(jq -r '.sections | keys[]' "$SUMMARY_FILE")
+
+      - name: Summary
+        if: always()
+        env:
+          SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
+        run: |
+          set -uo pipefail
+          {
+            echo "## Queue cover drain"
+            if [ -s "$SUMMARY_FILE" ]; then
+              drained="$(jq -r '.drained // 0' "$SUMMARY_FILE")"
+              residual="$(jq -r '.residual // 0' "$SUMMARY_FILE")"
+              failed="$(jq -r '.failed // 0' "$SUMMARY_FILE")"
+              marked="$(jq -r '(.marked // []) | length' "$SUMMARY_FILE")"
+              echo "- Smaltite: **$drained**"
+              echo "- Residue: **$residual**"
+              echo "- Fallite in questa run: **$failed**"
+              echo "- Marcate dopo almeno tre fallimenti: **$marked**"
+              if [ "$marked" -gt 0 ]; then
+                echo "- ⚠️ ID marcati: $(jq -r '(.marked // []) | join(", ")' "$SUMMARY_FILE")"
+              fi
+              if [ "$failed" -gt 0 ]; then
+                echo "- ⚠️ ID falliti in questa run: $(jq -r '(.failedIds // []) | join(", ")' "$SUMMARY_FILE")"
+              fi
+              echo "- Sezioni ripubblicate: $(jq -c '.sections // {}' "$SUMMARY_FILE")"
+            else
+              echo "- Summary del drainer non disponibile: la run si è fermata prima del conteggio."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Cleanup Codex auth broker
+        if: always()
+        continue-on-error: true
+        env:
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+        run: |
+          if [ -z "$CODEX_AUTH_BROKER_SOCKET" ] || [ ! -S "$CODEX_AUTH_BROKER_SOCKET" ]; then
+            exit 0
+          fi
+          node .github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs \
+            --cleanup --socket "$CODEX_AUTH_BROKER_SOCKET" \
+            || echo "::warning::Codex auth broker cleanup did not complete"

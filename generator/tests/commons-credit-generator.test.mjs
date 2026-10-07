@@ -36,6 +36,7 @@ import {
 } from '../../engine/shared/generatedImageRegistry.mjs';
 
 const CREATE = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf-8');
+const COVER_ENGINE = fs.readFileSync(new URL('../scripts/lib/article-cover-engine.mjs', import.meta.url), 'utf-8');
 const JOURNALIST = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf-8');
 const RETIRED_FLASH_IMAGE_MODEL = ['gemini', '2.5', 'flash', 'image'].join('-');
 
@@ -100,9 +101,10 @@ test('the new-cover pipeline uses only the governed article-hero engine', () => 
   const imageAdapter = slice(CREATE, 'async function generateArticleImage(data) {', '// ── Step 4: Modify source files');
   const imageStep = slice(CREATE, '  // Step 3b: Generate article image through the governed engine.', '  // Step 4: Modify files');
 
-  assert.match(imageAdapter, /generateImageFromSpec/);
+  assert.match(imageAdapter, /generateGovernedArticleHero/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
-  assert.match(imageAdapter, /scope:\s*'article-hero'/);
+  assert.match(COVER_ENGINE, /generateImageFromSpec/);
+  assert.match(COVER_ENGINE, /scope:\s*'article-hero'/);
   for (const forbidden of [
     RETIRED_FLASH_IMAGE_MODEL,
     'pollinations.ai',
