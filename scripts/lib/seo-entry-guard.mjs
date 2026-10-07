@@ -1,3 +1,4 @@
+import '../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync } from 'node:fs';
 
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
