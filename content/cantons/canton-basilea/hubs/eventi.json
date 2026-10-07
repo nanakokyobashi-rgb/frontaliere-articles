@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-basilea:eventi",
+  "section": "canton-basilea",
+  "canton": "BASILEA",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "ea54cce9a14f7e2bb0ef2d52499c09a512964d1132abefe043564863c4245467",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BASILEA",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nella regione di Basilea, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Germania e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "84",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+            },
+            {
+              "label": "Jugendzirkus Robiano – Und Action!",
+              "detail": "Sportplatz Eisweiher",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
+            },
+            {
+              "label": "Polysport-Camp & Tagesferien",
+              "detail": "Riehen — in corso, ultimo giorno: 9 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "Oktoberfest im Zic Zac",
+              "detail": "Zic Zac, Allschwil — in corso, ultimo giorno: 10 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+            },
+            {
+              "label": "Sculture di René Küng nel giardino del museo",
+              "detail": "Allschwil — in corso, ultimo giorno: 9 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+            },
+            {
+              "label": "2-Hour Pickleball Beginner Workshop in Basel",
+              "detail": "Union Sport x Pickleball Hub Basel, Basel — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+            },
+            {
+              "label": "BackJumps – The Live Issue: Reality Check",
+              "detail": "Colab Gallery, Basel — in corso, ultimo giorno: 7 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+            },
+            {
+              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
+              "detail": "Basel",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+            },
+            {
+              "label": "IRISH MUSIC SESSION BASEL 2026",
+              "detail": "Kulturhuus Häbse, Basel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/basilea/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nella regione di Basilea",
+          "url": "/eventi/basilea/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/basilea/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "BASILEA",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the Basel region, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders Germany and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "84",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+            },
+            {
+              "label": "Jugendzirkus Robiano - Und Action!",
+              "detail": "Sportplatz Eisweiher",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
+            },
+            {
+              "label": "Polysport-Camp & Tagesferien",
+              "detail": "Riehen — ongoing, last day: 9 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — ongoing, last day: 18 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "Oktoberfest im Zic Zac",
+              "detail": "Zic Zac, Allschwil — ongoing, last day: 10 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+            },
+            {
+              "label": "Sculptures by René Küng in the museum garden",
+              "detail": "Allschwil — ongoing, last day: 9 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+            },
+            {
+              "label": "2-Hour Pickleball Beginner Workshop in Basel",
+              "detail": "Union Sport x Pickleball Hub Basel, Basel — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+            },
+            {
+              "label": "BackJumps – The Live Issue: Reality Check",
+              "detail": "Colab Gallery, Basel — ongoing, last day: 7 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+            },
+            {
+              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
+              "detail": "Basel",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+            },
+            {
+              "label": "IRISH MUSIC SESSION BASEL 2026",
+              "detail": "Kulturhuus Häbse, Basel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/basel/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the Basel region",
+          "url": "/en/events/basel/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/basel/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "BASILEA",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "In der Region Basel ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Deutschland und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "84",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+            },
+            {
+              "label": "Jugendzirkus Robiano - Und Action!",
+              "detail": "Sportplatz Eisweiher",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
+            },
+            {
+              "label": "Polysport-Camp & Tagesferien",
+              "detail": "Riehen — läuft, letzter Tag: 9. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "Oktoberfest im Zic Zac",
+              "detail": "Zic Zac, Allschwil — läuft, letzter Tag: 10. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+            },
+            {
+              "label": "Skulpturen René Küng im Museumsgarten",
+              "detail": "Allschwil — läuft, letzter Tag: 9. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+            },
+            {
+              "label": "Pickleball 2-stündiger Einsteiger Workshop Basel",
+              "detail": "Union Sport x Pickleball Hub Basel, Basel — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+            },
+            {
+              "label": "BackJumps – The Live Issue: Reality Check",
+              "detail": "Colab Gallery, Basel — läuft, letzter Tag: 7. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+            },
+            {
+              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
+              "detail": "Basel",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+            },
+            {
+              "label": "IRISH MUSIC SESSION BASEL 2026",
+              "detail": "Kulturhuus Häbse, Basel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/basel/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen in der Region Basel",
+          "url": "/de/veranstaltungen/basel/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/basel/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "BASILEA",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans la région bâloise, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec l’Allemagne et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "84",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Der «Blüthner» auf Reisen",
+              "detail": "Museum Kleines Klingental",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+            },
+            {
+              "label": "Jugendzirkus Robiano – Und Action !",
+              "detail": "Sportplatz Eisweiher",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
+            },
+            {
+              "label": "Polysport-Camp & Tagesferien",
+              "detail": "Riehen — en cours, dernier jour : 9 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+            },
+            {
+              "label": "Römer-Weekends",
+              "detail": "Augusta Raurica, Augst — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
+            },
+            {
+              "label": "Oktoberfest im Zic Zac",
+              "detail": "Zic Zac, Allschwil — en cours, dernier jour : 10 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+            },
+            {
+              "label": "Les sculptures de René Küng dans le jardin du musée",
+              "detail": "Allschwil — en cours, dernier jour : 9 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+            },
+            {
+              "label": "2-Hour Pickleball Beginner Workshop in Basel",
+              "detail": "Union Sport x Pickleball Hub Basel, Basel — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+            },
+            {
+              "label": "BackJumps – The Live Issue: Reality Check",
+              "detail": "Colab Gallery, Basel — en cours, dernier jour : 7 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+            },
+            {
+              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
+              "detail": "Basel",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+            },
+            {
+              "label": "IRISH MUSIC SESSION BASEL 2026",
+              "detail": "Kulturhuus Häbse, Basel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/bale/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans la région bâloise",
+          "url": "/fr/evenements/bale/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/bale/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

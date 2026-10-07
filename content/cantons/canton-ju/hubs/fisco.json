@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ju:fisco",
+  "section": "canton-ju",
+  "canton": "JU",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "483b799286f17a3c1fe7c28b979c4c3f8388e63c64c69fe682707647062403ff",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "JU",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Giura, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "15,53 %",
+          "note": "Delémont, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "15,25 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Delémont)",
+              "value": "4,13 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Delémont)",
+              "value": "10,37 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Delémont)",
+              "value": "15,53 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Delémont)",
+              "value": "20,21 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Delémont)",
+              "value": "26,01 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "9,26 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "12,62 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "15,25 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "17,43 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "22,18 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.jura.ch/DFI/CTR/Impots-speciaux/Impot-a-la-source/Impot-a-la-source.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposte cantonali Giura: aliquote, scaglioni e deduzioni 2024",
+          "url": "/articoli-svizzera/imposte-cantonali-giura-aliquote-deduzioni/",
+          "excerpt": "Guida pratica al sistema fiscale del Cantone Giura: struttura a tre livelli, moltiplicatori comunali, deduzioni ammesse e portale ufficiale per la dichiarazione.",
+          "date": "2026-09-10T22:13:44.884Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Guida alla tassazione dei frontalieri",
+          "url": "/guida-tassazione-frontalieri-2026/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "JU",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Jura, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "15.53%",
+          "note": "Delémont, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "15.25%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Delémont)",
+              "value": "4.13%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Delémont)",
+              "value": "10.37%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Delémont)",
+              "value": "15.53%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Delémont)",
+              "value": "20.21%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Delémont)",
+              "value": "26.01%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "9.26%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "12.62%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "15.25%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "17.43%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "22.18%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.jura.ch/DFI/CTR/Impots-speciaux/Impot-a-la-source/Impot-a-la-source.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Cantonal taxes Jura: rates, brackets and deductions 2024",
+          "url": "/en/swiss-articles/jura-cantonal-tax-rates-deductions/",
+          "excerpt": "Practical guide to the tax system of the Canton of Jura: three-level structure, municipal multipliers, allowable deductions and official portal for the declaration.",
+          "date": "2026-09-10T22:13:44.884Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "Cross-border taxation guide",
+          "url": "/en/cross-border-taxation-guide-2026/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "JU",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Jura hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "15.53 %",
+          "note": "Delémont, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "15.25 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Delémont)",
+              "value": "4.13 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Delémont)",
+              "value": "10.37 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Delémont)",
+              "value": "15.53 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Delémont)",
+              "value": "20.21 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Delémont)",
+              "value": "26.01 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "9.26 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "12.62 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "15.25 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "17.43 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "22.18 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.jura.ch/DFI/CTR/Impots-speciaux/Impot-a-la-source/Impot-a-la-source.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Kantonale Steuern Jura: Steuersätze, Staffeln und Abzüge 2024",
+          "url": "/de/schweiz-artikel/jura-kantonssteuer-saetze-abzuege/",
+          "excerpt": "Praktischer Leitfaden zum Steuersystem des Kantons Jura: dreistufige Struktur, kommunale Multiplikatoren, zulässige Abzüge und offizielles Deklarationsportal.",
+          "date": "2026-09-10T22:13:44.884Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Leitfaden zur Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-besteuerung-leitfaden-2026/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "JU",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton du Jura, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "15,53 %",
+          "note": "Delémont, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "15,25 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Delémont)",
+              "value": "4,13 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Delémont)",
+              "value": "10,37 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Delémont)",
+              "value": "15,53 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Delémont)",
+              "value": "20,21 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Delémont)",
+              "value": "26,01 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "9,26 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "12,62 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "15,25 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "17,43 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "22,18 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.jura.ch/DFI/CTR/Impots-speciaux/Impot-a-la-source/Impot-a-la-source.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Impôts cantonaux Jura : taux, échelonnements et déductions 2024",
+          "url": "/fr/articles-suisse/impots-cantonaux-jura-taux-deductions/",
+          "excerpt": "Guide pratique du système fiscal du canton du Jura : structure à trois niveaux, multiplicateurs municipaux, déductions admises et portail officiel de déclaration.",
+          "date": "2026-09-10T22:13:44.884Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Guide de l’imposition des frontaliers",
+          "url": "/fr/guide-imposition-frontaliers-2026/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sg:eventi",
+  "section": "canton-sg",
+  "canton": "SG",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "fefc891ada21ea552a7bd1b6e2dd7789f01ce09845f7b6e3dc72ba0d6ce7972c",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SG",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton San Gallo, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con l’Austria, il Liechtenstein e la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "57",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Erlebniswoche",
+              "detail": "Klangwelt Toggenburg — in corso, ultimo giorno: 10 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+            },
+            {
+              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
+              "detail": "Galerie Fafou, Uzwil — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+            },
+            {
+              "label": "Minerva IV / IV: Thinking with hands",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+            },
+            {
+              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
+              "detail": "Olma Areal",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Musik und Tanz mit \"Ghörsch\"",
+              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
+            },
+            {
+              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
+            },
+            {
+              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
+              "detail": "St. Gallen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
+            },
+            {
+              "label": "Django Chutney",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/san-gallo/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton San Gallo",
+          "url": "/eventi/san-gallo/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/san-gallo/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "SG",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of St. Gallen, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders Austria, Liechtenstein and Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "57",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Erlebniswoche",
+              "detail": "Klangwelt Toggenburg — ongoing, last day: 10 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+            },
+            {
+              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
+              "detail": "Galerie Fafou, Uzwil — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+            },
+            {
+              "label": "Minerva IV / IV: Thinking with hands",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+            },
+            {
+              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
+              "detail": "Olma Areal",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Music and Dance with \"Ghörsch\"",
+              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
+            },
+            {
+              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
+            },
+            {
+              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
+              "detail": "St. Gallen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
+            },
+            {
+              "label": "Django Chutney",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/st-gallen/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of St. Gallen",
+          "url": "/en/events/st-gallen/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/st-gallen/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "SG",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton St. Gallen ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Österreich, Liechtenstein und Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "57",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Erlebniswoche",
+              "detail": "Klangwelt Toggenburg — läuft, letzter Tag: 10. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+            },
+            {
+              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
+              "detail": "Galerie Fafou, Uzwil — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+            },
+            {
+              "label": "Minerva IV / IV: Thinking with hands",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+            },
+            {
+              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
+              "detail": "Olma Areal",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Musik und Tanz mit „Ghörsch“",
+              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
+            },
+            {
+              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
+            },
+            {
+              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
+              "detail": "St. Gallen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
+            },
+            {
+              "label": "Django Chutney",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/st-gallen/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton St. Gallen",
+          "url": "/de/veranstaltungen/st-gallen/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "SG",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Saint-Gall, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec l’Autriche, le Liechtenstein et l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "57",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Erlebniswoche",
+              "detail": "Klangwelt Toggenburg — en cours, dernier jour : 10 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+            },
+            {
+              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
+              "detail": "Galerie Fafou, Uzwil — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+            },
+            {
+              "label": "Minerva IV / IV: Thinking with hands",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+            },
+            {
+              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
+              "detail": "Olma Areal",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Musik und Tanz mit « Ghörsch »",
+              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
+              "date": "2026-10-08",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
+            },
+            {
+              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
+              "detail": "Forum Würth Rorschach, Rorschach",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
+            },
+            {
+              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
+              "detail": "St. Gallen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
+            },
+            {
+              "label": "Django Chutney",
+              "detail": "Dixie- und Jazz-Club, Sargans",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/saint-gall/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Saint-Gall",
+          "url": "/fr/evenements/saint-gall/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/saint-gall/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

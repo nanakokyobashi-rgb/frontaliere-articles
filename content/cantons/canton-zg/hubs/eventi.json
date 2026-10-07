@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-zg:eventi",
+  "section": "canton-zg",
+  "canton": "ZG",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "17e94cc466881c3d3b554f427ce0fc980438131ea462dfbfb4ca087575b76840",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "ZG",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Zugo, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e inglese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "26",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Restaurant APART",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/perron-nord-seniorenstamm/"
+            },
+            {
+              "label": "Mercoledì libero",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercoledi-libero/"
+            },
+            {
+              "label": "Repair Café Zug - offene Werkstatt",
+              "detail": "FabLab Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/events/zug/repair-cafe-open-workshop_A1tEu9p"
+            },
+            {
+              "label": "Tea time on Lake Zug",
+              "detail": "Zug — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Sanaë",
+              "detail": "Zug",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sanae/"
+            },
+            {
+              "label": "ZUGvögel Openair 2026",
+              "detail": "Kulturzentrum Galvanik, Zug",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zugvoegel-openair-2026/"
+            },
+            {
+              "label": "Autumn Camp 2026",
+              "detail": "Helvetic Institute, Zug",
+              "date": "2026-10-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
+            },
+            {
+              "label": "Tempo sonoro per voi - meditazione sonora",
+              "detail": "Feelergy",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/rotkreuz/klangmeditation_AMRPjSX"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Cham, Cham",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/panfloetenkonzert-mit-duo-pantastico_AuvZVnb"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/zugo/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Zugo",
+          "url": "/eventi/zugo/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/zugo/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "ZG",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Zug, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and English; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "26",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Restaurant APART",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/perron-nord-seniorenstamm/"
+            },
+            {
+              "label": "Free Wednesday",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercoledi-libero/"
+            },
+            {
+              "label": "Repair Café - open workshop",
+              "detail": "FabLab Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/events/zug/repair-cafe-open-workshop_A1tEu9p"
+            },
+            {
+              "label": "Tea time on Lake Zug",
+              "detail": "Zug — ongoing, last day: 18 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — ongoing, last day: 22 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Sanaë",
+              "detail": "Zug",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sanae/"
+            },
+            {
+              "label": "ZUGvögel Openair 2026",
+              "detail": "Kulturzentrum Galvanik, Zug",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zugvoegel-openair-2026/"
+            },
+            {
+              "label": "Autumn Camp 2026",
+              "detail": "Helvetic Institute, Zug",
+              "date": "2026-10-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
+            },
+            {
+              "label": "Sound time for you - sound meditation",
+              "detail": "Feelergy",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/rotkreuz/klangmeditation_AMRPjSX"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Cham, Cham",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/panfloetenkonzert-mit-duo-pantastico_AuvZVnb"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/zug/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of Zug",
+          "url": "/en/events/zug/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/zug/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "ZG",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Zug ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Englisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "26",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Restaurant APART",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/perron-nord-seniorenstamm/"
+            },
+            {
+              "label": "Freier Mittwoch",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercoledi-libero/"
+            },
+            {
+              "label": "Repair Café Zug - offene Werkstatt",
+              "detail": "FabLab Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/events/zug/repair-cafe-open-workshop_A1tEu9p"
+            },
+            {
+              "label": "Tea Time auf dem Zugersee",
+              "detail": "Zug — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Sanaë",
+              "detail": "Zug",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sanae/"
+            },
+            {
+              "label": "ZUGvögel Openair 2026",
+              "detail": "Kulturzentrum Galvanik, Zug",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zugvoegel-openair-2026/"
+            },
+            {
+              "label": "Herbst-Camp 2026",
+              "detail": "Helvetic Institute, Zug",
+              "date": "2026-10-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
+            },
+            {
+              "label": "Klangzeit für Dich – Klangmeditation",
+              "detail": "Feelergy",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/rotkreuz/klangmeditation_AMRPjSX"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Cham, Cham",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/panfloetenkonzert-mit-duo-pantastico_AuvZVnb"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/zug/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Zug",
+          "url": "/de/veranstaltungen/zug/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/zug/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "ZG",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Zoug, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et anglais ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "26",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "PERRON NORD: Seniorenstamm",
+              "detail": "Restaurant APART",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/perron-nord-seniorenstamm/"
+            },
+            {
+              "label": "Mercredi libre",
+              "detail": "Museum Burg Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercoledi-libero/"
+            },
+            {
+              "label": "Repair Café Zug - offene Werkstatt",
+              "detail": "FabLab Zug, Zug",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/events/zug/repair-cafe-open-workshop_A1tEu9p"
+            },
+            {
+              "label": "Tea time on Lake Zug",
+              "detail": "Zug — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — en cours, dernier jour : 22 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Sanaë",
+              "detail": "Zug",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sanae/"
+            },
+            {
+              "label": "ZUGvögel Openair 2026",
+              "detail": "Kulturzentrum Galvanik, Zug",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zugvoegel-openair-2026/"
+            },
+            {
+              "label": "Autumn Camp 2026",
+              "detail": "Helvetic Institute, Zug",
+              "date": "2026-10-12",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-camp-2026/"
+            },
+            {
+              "label": "Temps de son pour toi - Méditation sonore",
+              "detail": "Feelergy",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/rotkreuz/klangmeditation_AMRPjSX"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Cham, Cham",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/cham/panfloetenkonzert-mit-duo-pantastico_AuvZVnb"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/zoug/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Zoug",
+          "url": "/fr/evenements/zoug/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/zoug/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

@@ -12744,6 +12744,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.pedemontana-truffa-sms-frontalieri.title': 'Pedemontana avertit : aucun paiement de péage par SMS ou e-mail',
     'blog.article.pedemontana-truffa-sms-frontalieri.excerpt': '## En bref - Pedemontana ne demande pas le paiement de péages par SMS ou e-mail - Les escrocs menacent de blocage ou d\'immobilisation du véhicule - Les liens renvoient vers de faux domaines - Vérifiez',
     'blog.article.pedemontana-truffa-sms-frontalieri.imageAlt': 'Photo réaliste d\'un poste de péage autoroutier tessinois au lever du soleil avec la voiture d\'un frontalier approchant',
+    'blog.article.pedemontana-falso-pedaggio-sms.title': 'Pedemontana : aucun paiement de péage par SMS ou e-mail',
+    'blog.article.pedemontana-falso-pedaggio-sms.excerpt': '## En bref - Pedemontana signale de faux péages par e-mail, SMS et WhatsApp - Les messages menacent d\'un blocage ou d\'une immobilisation administrative - Les éventuels péages se',
+    'blog.article.pedemontana-falso-pedaggio-sms.imageAlt': 'Vue sur le lac de Lugano avec les montagnes et un smartphone affichant un SMS suspect sur le pare-brise d\'une voiture.',
+    'blog.article.aggressione-van-villa-olmo.title': 'Côme : touristes agressés dans un van, 21 ans arrêté',
+    'blog.article.aggressione-van-villa-olmo.excerpt': '## En bref - Un Égyptien de 21 ans arrêté à Como - Vol dans un van via Cernobbio - Rixe près du Lido di Villa Olmo - Biens et documents',
+    'blog.article.aggressione-van-villa-olmo.imageAlt': 'Route au bord du lac la nuit avec un van stationné',
 };
 
 export default blogMetaFr;

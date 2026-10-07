@@ -57,9 +57,10 @@ export interface Article {
  /**
   * A2 — author registry slug (`marco-ferrari`, `laura-bianchi`, `redazione`).
   * When present, the byline links to `/autori/{authorSlug}/` and the
-  * NewsArticle JSON-LD uses a Person `@type` for that author. Optional for
-  * backward compatibility with pre-A2 articles; the byline component falls
-  * back to "Redazione Frontaliere Ticino" when missing.
+  * NewsArticle JSON-LD uses a Person `@type` for a real author and an
+  * Organization `@type` for an editorial profile. Optional for backward
+  * compatibility with pre-A2 articles; the byline component falls back to
+  * "Redazione Frontaliere Ticino" when missing.
   */
  authorSlug?: string;
  /** A2 — full display name for the byline. Mirrors `data/authors.ts`. */
@@ -42935,6 +42936,26 @@ const RAW_ARTICLES = [
  date: '2026-10-07T10:36:08.818Z',
  image: '/images/blog/pedemontana-avviso-truffa.webp',
  hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'pedemontana-falso-pedaggio-sms',
+ category: 'pratico',
+ date: '2026-10-07T10:51:03.091Z',
+ image: '/images/blog/pedemontana-avviso-truffa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'aggressione-van-villa-olmo',
+ category: 'novita',
+ date: '2026-10-07T11:07:36.032Z',
+ image: '/images/blog/trenord-furto-di-cavi-sospesa-como-milano.webp',
+ hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',

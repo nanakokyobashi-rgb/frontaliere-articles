@@ -1,0 +1,944 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-basilea:mobilita",
+  "section": "canton-basilea",
+  "canton": "BASILEA",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "7b4433941698be716e33ac63e62de9be719b7ef795a11ead2d959ed5d6d59b2b",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BASILEA",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nella regione di Basilea, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con la Germania e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0,7 min",
+          "note": "Riehen – Weil am Rhein, settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "23",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "33",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Riehen – Weil am Rhein",
+              "value": "0,7 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/riehen-weil-am-rhein/oggi/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Freiburgerstrasse",
+              "value": "0,7 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/basel-weil-am-rhein-freiburgerstrasse/oggi/"
+            },
+            {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "0,9 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/riehen-lorrach-stetten/oggi/"
+            },
+            {
+              "label": "Inzlingen – Riehen",
+              "value": "1 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/inzlingen-riehen/oggi/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Autostrada A2/A5",
+              "value": "1,7 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/basel-weil-am-rhein-autostrada-a2-a5/oggi/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
+              "value": "2,3 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/basel-weil-am-rhein-hiltalingerstrasse/oggi/"
+            },
+            {
+              "label": "Grenzach-Wyhlen – Riehen",
+              "value": "4,9 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/grenzach-wyhlen-riehen/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A2 Basel -> Luzern Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4 Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern tra Galleria Galleria Schwarzwald E Svincolo autostradale Basel-Wettstein Situazione: uscita chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A22 Liestal <-> Sissach tra Svincolo autostradale Pratteln-Est E Svincolo autostradale Liestal-Nord Situazione: chiusa cantiere, lunghezza [km] 3.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-02-02T06:58:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Raccordo di Hagnau tra Svincolo autostradale Reinach-Nord E Svincolo autostradale Reinach-Sud Situazione: chiusa cantiere, lunghezza [km] 2.1",
+              "value": "Chiusura",
+              "detail": "fine prevista: 5 novembre 2026",
+              "date": "2026-02-02T07:00:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Raccordo di Hagnau tra Galleria Galleria Schänzli E Svincolo autostradale Muttenz-Sud Situazione: chiusa cantiere, lunghezza [km] 1.7",
+              "value": "Chiusura",
+              "detail": "fine prevista: 11 novembre 2026",
+              "date": "2026-02-02T07:01:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Basel-City Basilea-City -> Raccordo di Gellert tra Svincolo autostradale Basilea-City E Raccordo autostradale Raccordo di Gellert Situazione: raccordo autostradale chiuso in…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-02-02T07:10:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Auf der Suche nach einem originellen Geschenk?",
+              "date": "2026-09-21T14:13:47.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
+            },
+            {
+              "label": "slowUp: Busumleitungen am Sonntag",
+              "date": "2026-09-17T06:48:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
+            },
+            {
+              "label": "Mobil bleiben – heute und morgen",
+              "date": "2026-09-17T06:18:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
+            },
+            {
+              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
+              "date": "2026-09-15T08:07:17.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
+            },
+            {
+              "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
+              "date": "2026-09-11T08:18:25.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
+            },
+            {
+              "label": "Gesucht: Werkstudent*in Content Produktion",
+              "date": "2026-09-08T08:50:15.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti pubblici a Basilea: zone e tariffe",
+          "url": "/articoli-svizzera/basilea-citta-mobilita-tariffe/",
+          "excerpt": "Abbonamenti trasporti pubblici nel Cantone di Basilea Città: guida a zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.",
+          "date": "2026-10-01T02:08:49.379Z"
+        },
+        {
+          "title": "Basilea Città: abbonamenti ai trasporti, zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-basilea-zone-tariffe/",
+          "excerpt": "Comunità tariffaria, zone e formule mensili o annuali: come orientarsi a Basilea Città tra metà-prezzo, AG e sconti per studenti e apprendisti.",
+          "date": "2026-10-01T01:57:38.605Z"
+        },
+        {
+          "title": "Trasporti Basilea Campagna: abbonamenti, zone e tariffe",
+          "url": "/articoli-svizzera/trasporti-basilea-campagna-abbonamenti/",
+          "excerpt": "Abbonamenti mensili e annuali, zone tariffarie, mezzo-prezzo e GA per pendolari e studenti in Basilea Campagna.",
+          "date": "2026-08-20T02:48:51.897Z"
+        },
+        {
+          "title": "Grigioni non riprendono il modello basilese per gestire il traffico",
+          "url": "/articoli-svizzera/grigioni-modello-basilese-traffico/",
+          "excerpt": "Il governo grigionese è scettico sull'adozione del modello di sanzioni di Birsfelden per deviare il traffico festivo e turistico.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Germania",
+          "url": "/traffico-dogane/basilea-germania/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "BASILEA",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the Basel region, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Germany and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0.7 min",
+          "note": "Riehen – Weil am Rhein, week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "23",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "33",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Riehen – Weil am Rhein",
+              "value": "0.7 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/riehen-weil-am-rhein/today/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Freiburgerstrasse",
+              "value": "0.7 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/basel-weil-am-rhein-freiburgerstrasse/today/"
+            },
+            {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "0.9 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/riehen-lorrach-stetten/today/"
+            },
+            {
+              "label": "Inzlingen – Riehen",
+              "value": "1 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/inzlingen-riehen/today/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Autostrada A2/A5",
+              "value": "1.7 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/basel-weil-am-rhein-autostrada-a2-a5/today/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
+              "value": "2.3 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/basel-weil-am-rhein-hiltalingerstrasse/today/"
+            },
+            {
+              "label": "Grenzach-Wyhlen – Riehen",
+              "value": "4.9 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/grenzach-wyhlen-riehen/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A2 Basel -> Luzern Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4 Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern tra Galleria Galleria Schwarzwald E Svincolo autostradale Basel-Wettstein Situazione: uscita chiusa cantiere, lunghezza [km] 0.2",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Svincolo autostradale Basel-Badischer Bahnhof Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza…",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A22 Liestal <-> Sissach tra Svincolo autostradale Pratteln-Est E Svincolo autostradale Liestal-Nord Situazione: chiusa cantiere, lunghezza [km] 3.5",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-02-02T06:58:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Raccordo di Hagnau tra Svincolo autostradale Reinach-Nord E Svincolo autostradale Reinach-Sud Situazione: chiusa cantiere, lunghezza [km] 2.1",
+              "value": "Closure",
+              "detail": "until 5 November 2026",
+              "date": "2026-02-02T07:00:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Raccordo di Hagnau tra Galleria Galleria Schänzli E Svincolo autostradale Muttenz-Sud Situazione: chiusa cantiere, lunghezza [km] 1.7",
+              "value": "Closure",
+              "detail": "until 11 November 2026",
+              "date": "2026-02-02T07:01:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Basel-City Basilea-City -> Raccordo di Gellert tra Svincolo autostradale Basilea-City E Raccordo autostradale Raccordo di Gellert Situazione: raccordo autostradale chiuso in…",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-02-02T07:10:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Auf der Suche nach einem originellen Geschenk?",
+              "date": "2026-09-21T14:13:47.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
+            },
+            {
+              "label": "slowUp: Busumleitungen am Sonntag",
+              "date": "2026-09-17T06:48:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
+            },
+            {
+              "label": "Mobil bleiben – heute und morgen",
+              "date": "2026-09-17T06:18:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
+            },
+            {
+              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
+              "date": "2026-09-15T08:07:17.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
+            },
+            {
+              "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
+              "date": "2026-09-11T08:18:25.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
+            },
+            {
+              "label": "Gesucht: Werkstudent*in Content Produktion",
+              "date": "2026-09-08T08:50:15.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Public Transportation Passes in Basel: Zones and Fares",
+          "url": "/en/swiss-articles/basel-city-transport-subscriptions/",
+          "excerpt": "Public Transportation Passes in the Canton of Basel-Stadt: A Guide to Zones, Annual and Monthly Passes, Half-Price Passes, AG Passes, and Discounts for Students and Apprentices.",
+          "date": "2026-10-01T02:08:49.379Z"
+        },
+        {
+          "title": "Basel-Stadt: transport travelcards, zones and fares",
+          "url": "/en/swiss-articles/basel-public-transport-passes/",
+          "excerpt": "Fare zone system, zones, and monthly or annual passes: a guide to navigating Basel-Stadt’s half-fare, GA, and student and apprentice discounts.",
+          "date": "2026-10-01T01:57:38.605Z"
+        },
+        {
+          "title": "Transport Basel Countryside: subscriptions, zones and fares",
+          "url": "/en/swiss-articles/transport-baselland-subscriptions-zones/",
+          "excerpt": "Monthly and annual subscriptions, fare zones, half-price and GA for commuters and students in Basel Countryside.",
+          "date": "2026-08-20T02:48:51.897Z"
+        },
+        {
+          "title": "Graubünden does not use the Basel model to manage traffic",
+          "url": "/en/swiss-articles/grisons-basel-model-traffic/",
+          "excerpt": "The Grison government is sceptical about adopting the Birsfelden model of sanctions to divert holiday and tourist traffic.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards Germany",
+          "url": "/en/border-wait/basilea-germania/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "BASILEA",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "In der Region Basel bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Deutschland und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0.7 Min.",
+          "note": "Riehen – Weil am Rhein, Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "23",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "33",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Riehen – Weil am Rhein",
+              "value": "0.7 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/riehen-weil-am-rhein/heute/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Freiburgerstrasse",
+              "value": "0.7 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/basel-weil-am-rhein-freiburgerstrasse/heute/"
+            },
+            {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "0.9 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/riehen-lorrach-stetten/heute/"
+            },
+            {
+              "label": "Inzlingen – Riehen",
+              "value": "1 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/inzlingen-riehen/heute/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Autostrada A2/A5",
+              "value": "1.7 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/basel-weil-am-rhein-autostrada-a2-a5/heute/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
+              "value": "2.3 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/basel-weil-am-rhein-hiltalingerstrasse/heute/"
+            },
+            {
+              "label": "Grenzach-Wyhlen – Riehen",
+              "value": "4.9 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/grenzach-wyhlen-riehen/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A2 Basel -> Luzern Anschluss Basel-Badischer Bahnhof Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.4 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 0.0",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern zwischen Tunnel Schwarzwald-Tunnel und Anschluss Basel-Wettstein Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.2",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Anschluss Basel-Badischer Bahnhof Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Anschluss Basel-Badischer Bahnhof Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.1 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 0.0",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A22 Liestal <-> Sissach zwischen Anschluss Pratteln-Ost und Anschluss Liestal-Nord Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.5",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-02-02T06:58:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Verzweigung Hagnau zwischen Anschluss Reinach-Nord und Anschluss Reinach-Süd Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.1",
+              "value": "Sperrung",
+              "detail": "bis 5. November 2026",
+              "date": "2026-02-02T07:00:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Verzweigung Hagnau zwischen Tunnel Schänzli-Tunnel und Anschluss Muttenz-Süd Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.7",
+              "value": "Sperrung",
+              "detail": "bis 11. November 2026",
+              "date": "2026-02-02T07:01:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Basel-City Basel-City -> Verzweigung Gellert zwischen Anschluss Basel-City und Autobahndreieck Verzweigung Gellert Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 1.2",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-02-02T07:10:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Auf der Suche nach einem originellen Geschenk?",
+              "date": "2026-09-21T14:13:47.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
+            },
+            {
+              "label": "slowUp: Busumleitungen am Sonntag",
+              "date": "2026-09-17T06:48:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
+            },
+            {
+              "label": "Mobil bleiben – heute und morgen",
+              "date": "2026-09-17T06:18:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
+            },
+            {
+              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
+              "date": "2026-09-15T08:07:17.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
+            },
+            {
+              "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
+              "date": "2026-09-11T08:18:25.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
+            },
+            {
+              "label": "Gesucht: Werkstudent*in Content Produktion",
+              "date": "2026-09-08T08:50:15.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Öffentliche Nahverkehrspässe in Basel: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/basel-stadt-abo-zonen-tarife/",
+          "excerpt": "Abonnements für den öffentlichen Nahverkehr im Kanton Basel-Stadt: Übersicht über Zonen, Jahres- und Monatsabonnements, Halbtax, GA sowie Ermäßigungen für Studierende und Auszubildende.",
+          "date": "2026-10-01T02:08:49.379Z"
+        },
+        {
+          "title": "Basel-Stadt: Fahrkarten, Zonen und Tarife",
+          "url": "/de/schweiz-artikel/basel-oev-abos-zonen-tarife/",
+          "excerpt": "Tarifverbund, Zonen und Monats- oder Jahresabonnements: So finden Sie sich in Basel-Stadt zurecht – zwischen Halbtax, GA und Ermäßigungen für Studenten und Auszubildende.",
+          "date": "2026-10-01T01:57:38.605Z"
+        },
+        {
+          "title": "Transporte Basel-Landschaft: Abonnements, Zonen und Tarife",
+          "url": "/de/schweiz-artikel/verkehr-baselland-abos-zonen/",
+          "excerpt": "Monats- und Jahresabonnements, Tarifzonen, Halbtax und GA für Pendler und Studenten in Basel-Landschaft.",
+          "date": "2026-08-20T02:48:51.897Z"
+        },
+        {
+          "title": "Graubünden greift bei der Verkehrssteuerung nicht auf das Basler Modell zurück",
+          "url": "/de/schweiz-artikel/graubuenden-basler-modell-verkehr/",
+          "excerpt": "Die Bündner Regierung ist skeptisch gegenüber der Einführung des Birsfeldener Sanktionsmodells, um den Urlaubs- und Tourismusverkehr abzulenken.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Deutschland",
+          "url": "/de/wartezeit-grenze/basilea-germania/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "BASILEA",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans la région bâloise, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Allemagne et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0,7 min",
+          "note": "Riehen – Weil am Rhein, semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "23",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "33",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Riehen – Weil am Rhein",
+              "value": "0,7 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/riehen-weil-am-rhein/aujourd-hui/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Freiburgerstrasse",
+              "value": "0,7 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/basel-weil-am-rhein-freiburgerstrasse/aujourd-hui/"
+            },
+            {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "0,9 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/riehen-lorrach-stetten/aujourd-hui/"
+            },
+            {
+              "label": "Inzlingen – Riehen",
+              "value": "1 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/inzlingen-riehen/aujourd-hui/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Autostrada A2/A5",
+              "value": "1,7 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/basel-weil-am-rhein-autostrada-a2-a5/aujourd-hui/"
+            },
+            {
+              "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
+              "value": "2,3 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/basel-weil-am-rhein-hiltalingerstrasse/aujourd-hui/"
+            },
+            {
+              "label": "Grenzach-Wyhlen – Riehen",
+              "value": "4,9 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/grenzach-wyhlen-riehen/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A2 Bâle -> Lucerne Jonction autoroutière Bâle-Badischer Bahnhof Situation: entrée fermée travaux, longueur [km] 0.4 Complément 1: limitation temporaire de largeur largeur de la voie [m] 0.0",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Bâle -> Lucerne entre Tunnel Tunnel du Schwarzwald et Jonction autoroutière Bâle-Wettstein Situation: sortie fermée travaux, longueur [km] 0.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2025-03-31T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Jonction autoroutière Bâle-Badischer Bahnhof Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Jonction autoroutière Bâle-Badischer Bahnhof Situation: entrée fermée travaux, longueur [km] 0.1 Complément 1: limitation temporaire de largeur largeur de la voie [m] 0.0",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2025-10-19T19:00:00.000Z"
+            },
+            {
+              "label": "A22 Liestal <-> Sissach entre Jonction autoroutière Pratteln-Est et Jonction autoroutière Liestal-Nord Situation: fermé travaux, longueur [km] 3.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-02-02T06:58:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Echangeur de Hagnau entre Jonction autoroutière Reinach-Nord et Jonction autoroutière Reinach-Sud Situation: fermé travaux, longueur [km] 2.1",
+              "value": "Fermeture",
+              "detail": "jusqu’au 5 novembre 2026",
+              "date": "2026-02-02T07:00:00.000Z"
+            },
+            {
+              "label": "A18 Grellingen <-> Echangeur de Hagnau entre Tunnel Tunnel Schänzli et Jonction autoroutière Muttenz-Sud Situation: fermé travaux, longueur [km] 1.7",
+              "value": "Fermeture",
+              "detail": "jusqu’au 11 novembre 2026",
+              "date": "2026-02-02T07:01:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Basel-City Bâle-City -> Echangeur de Gellert entre Jonction autoroutière Bâle-City et Echangeur Echangeur de Gellert Situation: entrée fermée travaux, longueur [km] 1.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-02-02T07:10:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Auf der Suche nach einem originellen Geschenk?",
+              "date": "2026-09-21T14:13:47.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
+            },
+            {
+              "label": "slowUp: Busumleitungen am Sonntag",
+              "date": "2026-09-17T06:48:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
+            },
+            {
+              "label": "Mobil bleiben – heute und morgen",
+              "date": "2026-09-17T06:18:35.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
+            },
+            {
+              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
+              "date": "2026-09-15T08:07:17.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
+            },
+            {
+              "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
+              "date": "2026-09-11T08:18:25.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
+            },
+            {
+              "label": "Gesucht: Werkstudent*in Content Produktion",
+              "date": "2026-09-08T08:50:15.000Z",
+              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Passes de transport en commun à Bâle : zones et tarifs",
+          "url": "/fr/articles-suisse/bale-ville-abonnements-transports/",
+          "excerpt": "Cartes de voyage de transport en commun dans le canton de Bâle-Stadt : guide de zone, forfaits annuels et mensuels, carte de voyage demi-tarif, carte de voyage GA et réductions pour les étudiants et apprentis.",
+          "date": "2026-10-01T02:08:49.379Z"
+        },
+        {
+          "title": "Bâle-Ville : cartes de voyage, zones et tarifs de transport",
+          "url": "/fr/articles-suisse/abonnements-transports-bale-zones/",
+          "excerpt": "Réseau tarifaire, zones mensuelles ou annuelles et forfaits : comment vous orienter entre les cartes de voyage demi-tarif, les cartes de voyage GA et les réductions pour étudiants et apprentis.",
+          "date": "2026-10-01T01:57:38.605Z"
+        },
+        {
+          "title": "Transports Bâle-Campagne : abonnements, zones et tarifs",
+          "url": "/fr/articles-suisse/transports-bale-campagne-abonnements/",
+          "excerpt": "Abonnements mensuels et annuels, zones tarifaires, demi-tarif et GA pour les navetteurs et les étudiants à Bâle-Campagne.",
+          "date": "2026-08-20T02:48:51.897Z"
+        },
+        {
+          "title": "Grisons ne reprennent pas le modèle bâlois pour gérer le trafic",
+          "url": "/fr/articles-suisse/grisons-modele-bale-trafic/",
+          "excerpt": "Le gouvernement grison est sceptique quant à l'adoption du modèle de sanctions de Birsfelden pour détourner le trafic festif et touristique.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers Allemagne",
+          "url": "/fr/temps-attente-douane/basilea-germania/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

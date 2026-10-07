@@ -100804,6 +100804,74 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-pedemontana-falso-pedaggio-sms': {
+    title: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
+    description: '## In breve - Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp - I messaggi minacciano blocco o fermo amministrativo - Eventuali pedaggi si',
+    keywords: 'frontalieri, ticino, svizzera, italia, pedemontana, nessun, pagamento, pedaggio',
+    ogTitle: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
+    ogDescription: '## In breve - Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp - I messaggi minacciano blocco o fermo amministrativo - Eventuali pedaggi si',
+    canonicalPath: '/articoli-frontaliere/pedemontana-falso-pedaggio-sms/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pedemontana: nessun pagamento pedaggio via SMS o email",
+      "description": "## In breve - Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp - I messaggi minacciano blocco o fermo amministrativo - Eventuali pedaggi si",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con le montagne e uno smartphone che mostra un SMS sospetto sul parabrezza di un'auto."
+      },
+      "datePublished": "2026-10-07T10:51:03+00:00",
+      "dateModified": "2026-10-07T10:51:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pedemontana-falso-pedaggio-sms/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aggressione-van-villa-olmo': {
+    title: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
+    description: '## In breve - Arrestato a Como un 21enne egiziano - Furto in un van in via per Cernobbio - Colluttazione vicino al Lido di Villa Olmo - Beni e documenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, turisti, derubati, aggrediti',
+    ogTitle: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
+    ogDescription: '## In breve - Arrestato a Como un 21enne egiziano - Furto in un van in via per Cernobbio - Colluttazione vicino al Lido di Villa Olmo - Beni e documenti',
+    canonicalPath: '/articoli-frontaliere/aggressione-van-villa-olmo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, turisti derubati e aggrediti nel van: arrestato 21enne",
+      "description": "## In breve - Arrestato a Como un 21enne egiziano - Furto in un van in via per Cernobbio - Colluttazione vicino al Lido di Villa Olmo - Beni e documenti",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/trenord-furto-di-cavi-sospesa-como-milano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada lacustre notturna con un van parcheggiato"
+      },
+      "datePublished": "2026-10-07T11:07:36+00:00",
+      "dateModified": "2026-10-07T11:07:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aggressione-van-villa-olmo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;
