@@ -189,6 +189,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:44:53.164Z",
       "lastFailureAt": "2026-10-07T08:44:53.164Z"
+    },
+    {
+      "articleId": "revisione-fiscale-canton-glarona",
+      "title": "Glarona: dieci anni per compensare le perdite fiscali",
+      "fallbackImage": "/images/blog/asilo-nido-custodia-bambini-canton-glarona.webp",
+      "reason": "All image providers failed for article-revisione-fiscale-canton-glarona: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:45:21.309Z",
+      "lastFailureAt": "2026-10-07T08:45:21.309Z"
     }
   ]
 }
