@@ -75,6 +75,7 @@ export function resolveArticleCoverFallback(data, {
     value: {
       articleId: data.id,
       title: data.content?.it?.title || data.content?.title || data.title,
+      imagePrompt: data.imagePrompt,
       fallbackImage: selected.path,
       reason: engineReason,
     },

@@ -9,7 +9,12 @@ import {
   articleImageSubject,
 } from './article-cover-identity.mjs';
 
-export { articleHeroImagePath, articleImageAssetId, articleImageSubject } from './article-cover-identity.mjs';
+export {
+  articleHeroImagePath,
+  articleHeroPath,
+  articleImageAssetId,
+  articleImageSubject,
+} from './article-cover-identity.mjs';
 
 /**
  * The article-cover adapter shared by the normal generator and the queue

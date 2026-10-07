@@ -97,6 +97,7 @@ function item(articleId, requestedAt, title = articleId) {
     articleId,
     title,
     fallbackImage: '/images/places/lugano-view.webp',
+    imagePrompt: `Documentary editorial scene for ${articleId}`,
     reason: 'engine failed',
     status: 'queued',
     requestedAt,
@@ -137,12 +138,14 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     ]);
 
     let calls = 0;
+    let seenPrompt = null;
     const generateCover = fakeCover(root);
     const summary = await drainQueuedCovers({
       root,
       limit: 1,
       generateCover: async (...args) => {
         calls += 1;
+        seenPrompt = args[0].imagePrompt;
         return generateCover(...args);
       },
       generateThumbnail: fakeThumbnail,
@@ -150,6 +153,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     });
 
     assert.equal(calls, 1);
+    assert.equal(seenPrompt, 'Documentary editorial scene for front-oldest');
     assert.equal(summary.drained, 1);
     assert.equal(summary.residual, 1);
     assert.deepEqual(summary.sections.frontaliere, ['front-oldest']);
@@ -379,14 +383,38 @@ test('il merge del registro in rebase conserva l ordine upstream e non perde un 
   assert.equal(merged.assetCount, 3);
 });
 
-test('il workflow attende la completion del publisher prima di ackare l outbox', () => {
+test('il renderer SEO propaga la copertina aggiornata in JSON-LD e og:image', () => {
+  const renderer = fs.readFileSync(new URL('../../engine/ogPagesPlugin.ts', import.meta.url), 'utf8');
+
+  assert.match(renderer, /const imgU = `\$\{BASE_URL\}\$\{en\.img\}`/);
+  assert.match(renderer, /image: imageObjectLd\(\{\s*url: imgU/s);
+  assert.match(renderer, /<meta property="og:image" content="\$\{imgU\}">/);
+});
+
+test('il workflow lascia l outbox al publisher e non attende una run arbitraria', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
   const dispatch = workflow.indexOf('gh workflow run');
-  const completion = workflow.indexOf('gh run watch "$run_id" --repo "$REPO" --exit-status');
-  const acknowledge = workflow.indexOf('name: Acknowledge cover publisher outbox');
   assert.ok(dispatch >= 0);
-  assert.ok(completion > dispatch);
-  assert.ok(acknowledge > completion);
+  assert.doesNotMatch(workflow, /gh run (?:watch|list)/);
+  assert.match(workflow, /--field article_ids="\$ids"/);
+  assert.match(workflow, /--field drain_ack_request="\$request_id"/);
+  assert.match(workflow, /group: regenerate-queued-covers/);
+  assert.match(workflow, /GITHUB_REF_NAME.*main/);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
-  assert.doesNotMatch(workflow.slice(dispatch, acknowledge), /git rm -f/);
+  assert.doesNotMatch(workflow, /git rm -f/);
+  assert.doesNotMatch(workflow.slice(dispatch), /Acknowledge cover publisher outbox/);
+});
+
+test('il drain non sfratta i cantoni e il producer fonde il registro immagini dopo il rebase', () => {
+  const drain = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  const producer = fs.readFileSync(new URL('../../.github/workflows/generate-article.yml', import.meta.url), 'utf8');
+  const core = fs.readFileSync(new URL('../../.github/workflows/generate-article-core.yml', import.meta.url), 'utf8');
+
+  assert.match(drain, /group: regenerate-queued-covers/);
+  assert.doesNotMatch(drain, /group: generate-article\s*$/m);
+  for (const workflow of [producer, core]) {
+    assert.match(workflow, /REGISTRY_SNAPSHOT=/);
+    assert.match(workflow, /data\/generated-image-registry\.json/);
+    assert.match(workflow, /merge-generated-image-registry\.mjs/);
+  }
 });

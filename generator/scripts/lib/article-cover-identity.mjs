@@ -1,4 +1,4 @@
-const ARTICLE_HERO_PATH = /^\/images\/(?:blog|generated)\/[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+export const articleHeroPath = /^\/images\/(?:blog|generated)\/[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
 
 export function articleImageSubject(data = {}) {
   const title = String(data.title || data.content?.it?.title || data.content?.title || '').trim();
@@ -16,7 +16,7 @@ export function articleImageAssetId(value) {
 
 export function articleHeroImagePath(imageUrl) {
   const normalized = String(imageUrl || '');
-  if (!ARTICLE_HERO_PATH.test(normalized)) {
+  if (!articleHeroPath.test(normalized)) {
     throw new Error(`Governed engine returned an invalid article-hero path: ${normalized || '<empty>'}`);
   }
   return normalized;

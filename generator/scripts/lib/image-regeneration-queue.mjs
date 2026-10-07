@@ -48,6 +48,7 @@ export function appendImageRegenerationQueue(root, {
   title,
   fallbackImage,
   reason,
+  imagePrompt,
   requestedAt = new Date().toISOString(),
 } = {}) {
   if (!articleId) return false;
@@ -63,6 +64,8 @@ export function appendImageRegenerationQueue(root, {
       requestedAt: String(requestedAt),
       lastFailureAt: String(requestedAt),
     };
+    const normalizedImagePrompt = String(imagePrompt || '').replace(/\s+/g, ' ').trim().slice(0, 500);
+    if (normalizedImagePrompt) item.imagePrompt = normalizedImagePrompt;
     const existing = queue.items.find((entry) => entry?.articleId === item.articleId);
     if (existing) {
       Object.assign(existing, item, {

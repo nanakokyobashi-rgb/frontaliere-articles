@@ -42,7 +42,7 @@ function snapshotFile(filePath) {
 
 function restoreFile(filePath, snapshot) {
   if (snapshot === null) {
-    fs.rmSync(filePath, { force: true });
+    fs.rmSync(filePath, { force: true, recursive: true });
     return;
   }
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -151,8 +151,14 @@ async function defaultGenerateCover(item, context) {
   const { generateGovernedArticleHero } = await import('./lib/article-cover-engine.mjs');
   return generateGovernedArticleHero({
     root: context.root,
+    data: {
+      id: item.articleId,
+      title: item.title,
+      imagePrompt: item.imagePrompt,
+    },
     articleId: item.articleId,
     title: item.title,
+    imagePrompt: item.imagePrompt,
     area: context.area,
     deadlineAt: Date.now() + IMAGE_BUDGET_MS,
     onProviderAttempt: ({ provider, attempt }) => {
@@ -212,12 +218,13 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   if (currentImage !== record.imageUrl) {
     updateArticleImageInRegistry(root, item.articleId, record.imageUrl, { registryFiles });
   }
-  updateArticleImageInSeo(root, item.articleId, record.imageUrl, { section });
+  const seo = updateArticleImageInSeo(root, item.articleId, record.imageUrl, { section });
 
   return {
     destination,
     thumbnail,
     changed: currentImage !== record.imageUrl,
+    seoChanged: seo.changed,
   };
 }
 
@@ -304,9 +311,15 @@ export async function drainQueuedCovers({
 } = {}) {
   const boundedLimit = parseLimit(limit);
   const queue = readImageRegenerationQueue(root);
+  const selected = queue.items
+    .filter((item) => retryFailed || item.status !== 'failed')
+    .map((item, index) => ({ item, index }))
+    .sort(requestedAtSort)
+    .slice(0, boundedLimit)
+    .map(({ item }) => item);
   const requeued = [];
   if (retryFailed) {
-    for (const item of queue.items) {
+    for (const item of selected) {
       if (item.status !== 'failed') continue;
       item.status = 'queued';
       item.failureCount = 0;
@@ -314,12 +327,6 @@ export async function drainQueuedCovers({
     }
     if (requeued.length > 0) writeImageRegenerationQueue(root, queue);
   }
-  const selected = queue.items
-    .filter((item) => retryFailed || item.status !== 'failed')
-    .map((item, index) => ({ item, index }))
-    .sort(requestedAtSort)
-    .slice(0, boundedLimit)
-    .map(({ item }) => item);
   const result = { drained: 0, failed: 0, failedIds: [], reused: 0, requeued, sections: {} };
 
   for (const item of selected) {

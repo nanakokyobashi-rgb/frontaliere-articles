@@ -83,6 +83,11 @@ on:
         required: false
         default: true
         type: boolean
+      drain_ack_request:
+        description: 'Internal cover-drain correlation id; acknowledge the outbox only after this publisher succeeds'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -95,6 +100,7 @@ jobs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
+      drain_ack_request: ${{ steps.plan.outputs.drain_ack_request }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -121,14 +127,17 @@ jobs:
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          DRAIN_ACK_REQUEST_INPUT: ${{ inputs.drain_ack_request }}
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
           before="${PUSH_BEFORE:-}"
+          drain_ack_request=''
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             dry=true
             [ "$DRY_RUN_INPUT" = "false" ] && dry=false
+            drain_ack_request="$DRAIN_ACK_REQUEST_INPUT"
             ids_json='[]'
             if [ -n "$ARTICLE_IDS_INPUT" ]; then
               ids_json="$(printf '%s' "$ARTICLE_IDS_INPUT" | jq -ce '
@@ -168,6 +177,7 @@ jobs:
             echo "matrix=$matrix"
             echo "any=$any"
             echo "dry=$dry"
+            echo "drain_ack_request=$drain_ack_request"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
 
@@ -271,6 +281,14 @@ jobs:
           # render riscrive lo stesso scratch e gli upload R2 sono PUT
           # idempotenti sulle stesse chiavi.
           bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
+
+      - name: Acknowledge queued cover outbox after successful publish
+        if: success() && needs.resolve.outputs.dry != 'true' && needs.resolve.outputs.drain_ack_request != ''
+        env:
+          SECTION: ${{ matrix.target.section }}
+          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          REQUEST_ID: ${{ needs.resolve.outputs.drain_ack_request }}
+        run: bash scripts/ci/ack-image-regeneration-outbox.sh "$SECTION" "$ARTICLE_IDS_JSON" "$REQUEST_ID"
 
       - name: Summary
         if: always()

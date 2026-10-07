@@ -278,7 +278,7 @@ import {
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from './lib/article-cover-fallback.mjs';
-import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
+import { articleHeroImagePath, articleHeroPath, generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -14297,10 +14297,10 @@ const IMAGE_PHASE_BUDGET_MS = Math.max(
 function materializeGovernedArticleImage(result) {
   const record = result?.record;
   const imageUrl = String(record?.imageUrl || '');
-  const articleHeroPath = /^\/images\/(?:blog|generated)\/[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
   if (record?.scope !== 'article-hero' || !articleHeroPath.test(imageUrl)) {
     throw new Error(`Governed engine returned an invalid article-hero path: ${imageUrl || '<empty>'}`);
   }
+  articleHeroImagePath(imageUrl);
   if (!result?.filePath || !existsSync(result.filePath)) {
     throw new Error(`Governed engine returned no materialized image for ${imageUrl}`);
   }

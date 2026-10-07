@@ -147,6 +147,26 @@
   },
   "files": [
     {
+      "path": "scripts/ci/ack-image-regeneration-outbox.mjs",
+      "mode": "corpus-only",
+      "reason": "Ack selettivo dell'outbox dopo una pubblicazione riuscita: rimuove solo gli articleId della sezione dichiarata e lascia durevoli tutte le altre richieste. Il publisher del corpus lo esegue dopo render/upload e il sito consuma solo le superfici HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/ack-image-regeneration-outbox.sh",
+      "mode": "corpus-only",
+      "reason": "Wrapper di commit e push dell'ack selettivo dell'outbox: ritenta dal main piu' recente senza force-push, cosi' una pubblicazione concorrente non perde voci nuove. E' un helper dei workflow di pubblicazione del corpus e non ha gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "scripts/ci/alert-pat-down.mjs",
       "mode": "identical",
       "baseline": {

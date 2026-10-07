@@ -1863,6 +1863,8 @@ jobs:
           # voce del ledger URL->id), perche' dopo il rebase la voce del ledger
           # puo' non esserci piu' (bookkeeping: vince upstream).
           PRODUCED="$(git rev-parse HEAD)"
+          REGISTRY_SNAPSHOT="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          cp data/generated-image-registry.json "$REGISTRY_SNAPSHOT"
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
@@ -2026,6 +2028,7 @@ jobs:
               --merge-counter data/quota-state.json:runCounter \
               --merge-counter data/topic-candidates-experimental-counter.json:count \
               --merge-counter data/topic-candidates-evergreen-counter.json:count \
+              data/generated-image-registry.json \
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ || rebased=0
@@ -2051,6 +2054,10 @@ jobs:
                 echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides with another section on id or source URL; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
                 exit 1
               fi
+              node scripts/ci/merge-generated-image-registry.mjs \
+                data/generated-image-registry.json "$REGISTRY_SNAPSHOT"
+              git add data/generated-image-registry.json
+              if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
             fi
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"

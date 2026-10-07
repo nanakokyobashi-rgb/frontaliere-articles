@@ -108,6 +108,11 @@ on:
         required: false
         default: true
         type: boolean
+      drain_ack_request:
+        description: 'Internal cover-drain correlation id; acknowledge the outbox only after this publisher succeeds'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -130,6 +135,7 @@ jobs:
       ids: ${{ steps.mode.outputs.ids }}
       section: ${{ steps.mode.outputs.section }}
       shard: ${{ steps.mode.outputs.shard }}
+      drain_ack_request: ${{ steps.mode.outputs.drain_ack_request }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -154,10 +160,12 @@ jobs:
           ARTICLE_ID_INPUT: ${{ inputs.article_id }}
           SECTION_INPUT: ${{ inputs.section }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          DRAIN_ACK_REQUEST_INPUT: ${{ inputs.drain_ack_request }}
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
           ids=()
+          drain_ack_request=''
           before="${PUSH_BEFORE:-}"
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
 
@@ -167,6 +175,7 @@ jobs:
             dry=true
             [ "$DRY_RUN_INPUT" = "false" ] && dry=false
             section="$SECTION_INPUT"
+            drain_ack_request="$DRAIN_ACK_REQUEST_INPUT"
             if [ -n "$ARTICLE_IDS_INPUT" ]; then
               ids_json="$(printf '%s' "$ARTICLE_IDS_INPUT" | jq -ce '
                 if type == "array" and length > 0 and all(.[]; type == "string" and length > 0)
@@ -231,6 +240,7 @@ jobs:
             done
           fi
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
+          echo "drain_ack_request=$drain_ack_request" >> "$GITHUB_OUTPUT"
 
           if [ "${#ids[@]}" -eq 0 ]; then
             canton_content=false
@@ -1025,6 +1035,14 @@ jobs:
           # Through retry-cmd.sh — same blip class and same idempotency
           # justification as the first purge step above (issue #268).
           bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+
+      - name: Acknowledge queued cover outbox after successful publish
+        if: success() && needs.resolve.outputs.drain_ack_request != '' && needs.resolve.outputs.dry != 'true'
+        env:
+          SECTION: ${{ needs.resolve.outputs.section }}
+          ARTICLE_IDS_JSON: ${{ needs.resolve.outputs.ids }}
+          REQUEST_ID: ${{ needs.resolve.outputs.drain_ack_request }}
+        run: bash scripts/ci/ack-image-regeneration-outbox.sh "$SECTION" "$ARTICLE_IDS_JSON" "$REQUEST_ID"
 
       - name: Summary
         if: always() && needs.resolve.outputs.skip != 'true'
