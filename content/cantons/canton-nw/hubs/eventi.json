@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-nw:eventi",
+  "section": "canton-nw",
+  "canton": "NW",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "e92ecb9e3169c6404d6a3098a6695f4c36daca17f56505b0818e70465045e78b",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "NW",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Nidvaldo, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "50",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/89788"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Herbstferien",
+              "detail": "Emmetten — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93979"
+            },
+            {
+              "label": "Wildpflanzen am Wegrand - Sonntags",
+              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+            },
+            {
+              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
+              "detail": "kath. Pfarrhaus, Buochs, Buochs",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/94018"
+            },
+            {
+              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93337"
+            },
+            {
+              "label": "Nidwaldner GenussMarkt",
+              "detail": "Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93505"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93061"
+            },
+            {
+              "label": "Yoga auf dem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/90382"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/nidvaldo/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Nidvaldo",
+          "url": "/eventi/nidvaldo/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/nidvaldo/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "NW",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In Nidwalden, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "50",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/89788"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Herbstferien",
+              "detail": "Emmetten — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93979"
+            },
+            {
+              "label": "Wildpflanzen am Wegrand - Sonntags",
+              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+            },
+            {
+              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
+              "detail": "kath. Pfarrhaus, Buochs, Buochs",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/94018"
+            },
+            {
+              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93337"
+            },
+            {
+              "label": "Nidwaldner GenussMarkt",
+              "detail": "Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93505"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93061"
+            },
+            {
+              "label": "Yoga auf dem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/90382"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/nidwalden/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in Nidwalden",
+          "url": "/en/events/nidwalden/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/nidwalden/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "NW",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "In Nidwalden ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "50",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/89788"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Herbstferien",
+              "detail": "Emmetten — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93979"
+            },
+            {
+              "label": "Wildpflanzen am Wegrand - Sonntags",
+              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+            },
+            {
+              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
+              "detail": "kath. Pfarrhaus, Buochs, Buochs",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/94018"
+            },
+            {
+              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93337"
+            },
+            {
+              "label": "Nidwaldner GenussMarkt",
+              "detail": "Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93505"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93061"
+            },
+            {
+              "label": "Yoga auf dem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/90382"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/nidwalden/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen in Nidwalden",
+          "url": "/de/veranstaltungen/nidwalden/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "NW",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "À Nidwald, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "50",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/89788"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Herbstferien",
+              "detail": "Emmetten — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.nw.ch/_rte/anlass/93979"
+            },
+            {
+              "label": "Wildpflanzen am Wegrand - Sonntags",
+              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+            },
+            {
+              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
+              "detail": "kath. Pfarrhaus, Buochs, Buochs",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/94018"
+            },
+            {
+              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93337"
+            },
+            {
+              "label": "Nidwaldner GenussMarkt",
+              "detail": "Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93505"
+            },
+            {
+              "label": "Oeltrotte-Zmorgä",
+              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/93061"
+            },
+            {
+              "label": "Yoga auf dem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-10",
+              "url": "https://www.nw.ch/_rte/anlass/90382"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/nidwald/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements à Nidwald",
+          "url": "/fr/evenements/nidwald/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/nidwald/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

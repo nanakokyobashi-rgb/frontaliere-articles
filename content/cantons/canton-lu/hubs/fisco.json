@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-lu:fisco",
+  "section": "canton-lu",
+  "canton": "LU",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "041766023735cc6d8cb8e12d564e20fc42b5e8ad8328eacc2a66208718118229",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "LU",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Lucerna, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "11,54 %",
+          "note": "Luzern, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "11,02 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Luzern)",
+              "value": "1,94 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Luzern)",
+              "value": "8,66 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Luzern)",
+              "value": "11,54 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Luzern)",
+              "value": "14,2 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Luzern)",
+              "value": "18,54 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "6,47 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "9,39 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "11,02 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "12,57 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "15,74 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://steuern.lu.ch/publikationen/nav_wegleitungen/we_quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Ausgleich der Folgen der kalten Progression für das Steuerjahr 2027",
+              "date": "2026-09-17",
+              "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposta cantonale confronto Svizzera 2026: canton Lucerna",
+          "url": "/articoli-svizzera/fisco-lucerna-tre-livelli-2026/",
+          "excerpt": "Tre livelli fiscali e moltiplicatore comunale: il confronto 2026 parte dalla struttura nazionale e applica il metodo al canton Lucerna.",
+          "date": "2026-10-01T03:47:26.930Z"
+        },
+        {
+          "title": "Imposte cantonali canton Lucerna: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-canton-lucerna-aliquote/",
+          "excerpt": "Guida alle imposte cantonali e comunali nel Cantone di Lucerna con aliquote, scaglioni, deduzioni e portale ufficiale dell'amministrazione fiscale.",
+          "date": "2026-08-14T01:47:31.544Z"
+        },
+        {
+          "title": "Imposta di successione e donazione Canton Lucerna: aliquote",
+          "url": "/articoli-svizzera/imposta-successione-donazione-lucerna-guida/",
+          "excerpt": "Guida completa all'imposta di successione e donazione nel Canton Lucerna. Scopri le aliquote per grado di parentela, le esenzioni e come dichiarare l'eredità.",
+          "date": "2026-08-22T12:05:19.300Z"
+        },
+        {
+          "title": "Comprare casa a Lucerna: mutuo ipotecario e imposte",
+          "url": "/articoli-svizzera/comprare-casa-lucerna-ipoteca-pratica/",
+          "excerpt": "Acquistare una proprietà nel Canton Lucerna richiede competenze fiscal-finanziarie: imposte sui trapassi, mutuo sostenibile, spese notarili. Guida operativa 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
+        },
+        {
+          "title": "Imposta di successione e donazione nel Cantone di Lucerna",
+          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-lucerna/",
+          "excerpt": "Sono previste aliquote diverse in base al grado di parentela tra i beneficiari e i donanti.",
+          "date": "2026-08-15T22:49:24.474Z"
+        },
+        {
+          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
+          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
+          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
+          "date": "2026-05-07T09:05:42.794Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "LU",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Lucerne, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "11.54%",
+          "note": "Luzern, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "11.02%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Luzern)",
+              "value": "1.94%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Luzern)",
+              "value": "8.66%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Luzern)",
+              "value": "11.54%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Luzern)",
+              "value": "14.2%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Luzern)",
+              "value": "18.54%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "6.47%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "9.39%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "11.02%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "12.57%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "15.74%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://steuern.lu.ch/publikationen/nav_wegleitungen/we_quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Ausgleich der Folgen der kalten Progression für das Steuerjahr 2027",
+              "date": "2026-09-17",
+              "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Swiss Cantonal Tax Comparison 2026: Canton of Lucerne",
+          "url": "/en/swiss-articles/lucerne-tax-three-levels-2026/",
+          "excerpt": "Three tax tiers and the municipal multiplier: The 2026 comparison begins with the national structure and applies the method to the canton of Lucerne.",
+          "date": "2026-10-01T03:47:26.930Z"
+        },
+        {
+          "title": "Cantonal taxes canton Lucerne: rates and deductions",
+          "url": "/en/swiss-articles/canton-lucerne-cantonal-taxes-deductions/",
+          "excerpt": "Guide to cantonal and municipal taxes in the Canton of Lucerne with rates, brackets, deductions and official portal of the tax administration.",
+          "date": "2026-08-14T01:47:31.544Z"
+        },
+        {
+          "title": "Inheritance and gift tax Canton Lucerne: rates",
+          "url": "/en/swiss-articles/succession-donation-tax-lucerne-guide/",
+          "excerpt": "Complete guide to inheritance and gift tax in the Canton of Lucerne. Learn about kinship rates, exemptions, and how to declare inheritance.",
+          "date": "2026-08-22T12:05:19.300Z"
+        },
+        {
+          "title": "Buying a house in Lucerne: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-home-lucerne-mortgage-guide/",
+          "excerpt": "Buying a property in the Canton of Lucerne requires fiscal-financial skills: transfer taxes, sustainable mortgage, notary fees. Operating Guide 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
+        },
+        {
+          "title": "Inheritance and gift tax in the Canton of Lucerne",
+          "url": "/en/swiss-articles/imposta-di-succesione-e-donazione-canton-lucerna-en/",
+          "excerpt": "Different rates are provided according to the degree of kinship between beneficiaries and donors.",
+          "date": "2026-08-15T22:49:24.474Z"
+        },
+        {
+          "title": "Lucerne overtakes Zug: new tax haven for businesses",
+          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
+          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
+          "date": "2026-05-07T09:05:42.794Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "LU",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Luzern hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "11.54 %",
+          "note": "Luzern, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "11.02 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Luzern)",
+              "value": "1.94 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Luzern)",
+              "value": "8.66 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Luzern)",
+              "value": "11.54 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Luzern)",
+              "value": "14.2 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Luzern)",
+              "value": "18.54 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "6.47 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "9.39 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "11.02 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "12.57 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "15.74 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://steuern.lu.ch/publikationen/nav_wegleitungen/we_quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Ausgleich der Folgen der kalten Progression für das Steuerjahr 2027",
+              "date": "2026-09-17",
+              "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern",
+          "url": "/de/schweiz-artikel/steuern-luzern-drei-ebenen-2026/",
+          "excerpt": "Drei Steuerstufen und kommunaler Multiplikator: Der Vergleich für 2026 geht von der nationalen Struktur aus und wendet die Methode auf den Kanton Luzern an.",
+          "date": "2026-10-01T03:47:26.930Z"
+        },
+        {
+          "title": "Kantonale Steuern Kanton Luzern: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kantonssteuern-kanton-luzern-abzuege/",
+          "excerpt": "Leitfaden zu den Kantons- und Gemeindesteuern im Kanton Luzern mit Steuersätzen, Staffelungen, Abzügen und dem offiziellen Portal der Steuerverwaltung.",
+          "date": "2026-08-14T01:47:31.544Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer Kanton Luzern: Steuersätze",
+          "url": "/de/schweiz-artikel/erbschaftssteuer-schenkungssteuer-luzern-leitfaden/",
+          "excerpt": "Vollständiger Leitfaden zur Erbschafts- und Schenkungssteuer im Kanton Luzern. Entdecken Sie die Sätze nach Verwandtschaftsgrad, die Ausnahmen und wie Sie die Erbschaft erklären können.",
+          "date": "2026-08-22T12:05:19.300Z"
+        },
+        {
+          "title": "Haus kaufen in Luzern: Hypothekendarlehen und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-luzern-hypothek-anleitung/",
+          "excerpt": "Der Kauf einer Immobilie im Kanton Luzern erfordert steuerliche und finanzielle Kompetenzen: Abgeltungssteuern, nachhaltiges Darlehen, Notarkosten. Betriebsanleitung 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer im Kanton Luzern",
+          "url": "/de/schweiz-artikel/imposta-di-succesione-e-donazione-canton-lucerna-de/",
+          "excerpt": "Je nach Verwandtschaftsgrad zwischen den Begünstigten und den Spendern gibt es unterschiedliche Sätze.",
+          "date": "2026-08-15T22:49:24.474Z"
+        },
+        {
+          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
+          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
+          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
+          "date": "2026-05-07T09:05:42.794Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "LU",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton de Lucerne, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "11,54 %",
+          "note": "Luzern, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "11,02 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Luzern)",
+              "value": "1,94 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Luzern)",
+              "value": "8,66 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Luzern)",
+              "value": "11,54 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Luzern)",
+              "value": "14,2 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Luzern)",
+              "value": "18,54 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "6,47 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "9,39 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "11,02 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "12,57 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "15,74 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://steuern.lu.ch/publikationen/nav_wegleitungen/we_quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Ausgleich der Folgen der kalten Progression für das Steuerjahr 2027",
+              "date": "2026-09-17",
+              "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Comparaison fiscale cantonale en Suisse 2026 : canton de Lucerne",
+          "url": "/fr/articles-suisse/impots-lucerne-trois-niveaux-2026/",
+          "excerpt": "Trois niveaux d’imposition et multiplicateur municipal : la comparaison 2026 part de la structure nationale et applique la méthode au canton de Lucerne.",
+          "date": "2026-10-01T03:47:26.930Z"
+        },
+        {
+          "title": "Impôts cantonaux canton de Lucerne : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-canton-lucerne-baremes/",
+          "excerpt": "Guide des impôts cantonaux et communaux dans le canton de Lucerne avec taux, tranches, déductions et portail officiel de l'administration fiscale.",
+          "date": "2026-08-14T01:47:31.544Z"
+        },
+        {
+          "title": "Droits de succession et de donation Canton de Lucerne : taux",
+          "url": "/fr/articles-suisse/impot-succession-donation-lucerne-guide/",
+          "excerpt": "Guide complet de l'impôt sur les successions et les donations dans le canton de Lucerne. Découvrez les taux par degré de parenté, les exemptions et comment déclarer l'héritage.",
+          "date": "2026-08-22T12:05:19.300Z"
+        },
+        {
+          "title": "Acheter une maison à Lucerne : hypothèque et impôts",
+          "url": "/fr/articles-suisse/acheter-maison-lucerne-hypotheque-guide/",
+          "excerpt": "L'achat d'une propriété dans le canton de Lucerne nécessite des compétences fiscales et financières : taxes de passage, hypothèque durable, frais de notaire. Guide opérationnel 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
+        },
+        {
+          "title": "Droits de succession et de donation dans le canton de Lucerne",
+          "url": "/fr/articles-suisse/imposta-di-succesione-e-donazione-canton-lucerna-fr/",
+          "excerpt": "Des taux différents sont prévus en fonction du degré de parenté entre les bénéficiaires et les donneurs.",
+          "date": "2026-08-15T22:49:24.474Z"
+        },
+        {
+          "title": "Lucerne dépasse Zug: nouveau paradis fiscal pour les entreprises",
+          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
+          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zug. Impact sur les frontaliers et comparaison avec l'UE.",
+          "date": "2026-05-07T09:05:42.794Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

@@ -1,0 +1,795 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-basilea:fisco",
+  "section": "canton-basilea",
+  "canton": "BASILEA",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "981f2b111ac8c4e387f0648a4fa233645e0d86030f7461361fb7bce76a8d8937",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BASILEA",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nella regione di Basilea, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio confina con la Germania e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "16,72 %",
+          "note": "Liestal, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "12,98 %",
+          "note": "tariffa A0 BL, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Liestal)",
+              "value": "3,72 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Liestal)",
+              "value": "10,95 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Liestal)",
+              "value": "16,72 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Liestal)",
+              "value": "21,75 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Liestal)",
+              "value": "27,93 %"
+            },
+            {
+              "label": "Reddito lordo di 30.000 CHF (Basel)",
+              "value": "0,22 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Basel)",
+              "value": "9,89 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Basel)",
+              "value": "14,66 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Basel)",
+              "value": "18,27 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Basel)",
+              "value": "22,83 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (BL, A0)",
+              "value": "4,96 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (BL, A0)",
+              "value": "9,67 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (BL, A0)",
+              "value": "12,98 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (BL, A0)",
+              "value": "15,79 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (BL, A0)",
+              "value": "20,93 %"
+            },
+            {
+              "label": "Salario mensile di 4000 CHF (BS, A0)",
+              "value": "6,07 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (BS, A0)",
+              "value": "10,59 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (BS, A0)",
+              "value": "13,06 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (BS, A0)",
+              "value": "15,07 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (BS, A0)",
+              "value": "18,55 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposta di successione e donazione Basilea Città: aliquote",
+          "url": "/articoli-svizzera/imposta-di-successione-e-donazione-basilea-citta/",
+          "excerpt": "Guida alle imposte di successione e donazione nel Cantone di Basilea Città: aliquote per grado di parentela, esenzioni e procedure di dichiarazione.",
+          "date": "2026-09-02T04:47:57.978Z"
+        },
+        {
+          "title": "Imposte canton Basilea Campagna: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-canton-basilea-campagna/",
+          "excerpt": "Guida completa alle imposte cantonali e comunali nel canton Basilea Campagna: aliquote, deduzioni ammesse, scadenze di dichiarazione e portale online fiscale.",
+          "date": "2026-08-24T15:07:39.075Z"
+        },
+        {
+          "title": "Imposta di successione nel Canton Basilea-Città: aliquote e procedure",
+          "url": "/articoli-svizzera/imposta-successione-basilea-citta/",
+          "excerpt": "Imposta di successione nel Canton Basilea-Città: aliquote per grado di parentela, esenzioni per coniuge e discendenti, dichiarazione e termini di presentazione.",
+          "date": "2026-08-24T14:42:33.929Z"
+        },
+        {
+          "title": "Imposta di successione e donazione: Basilea Campagna",
+          "url": "/articoli-svizzera/imposta-successione-donazione-basilea-campagna/",
+          "excerpt": "Come funzionano le imposte su successioni e donazioni nel cantone di Basilea Campagna: aliquote, esenzioni per familiari e procedure di dichiarazione.",
+          "date": "2026-08-24T17:56:22.422Z"
+        },
+        {
+          "title": "Imposte cantonali e comunali in Basilea Città: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-basilea-citta-aliquote/",
+          "excerpt": "Le imposte cantonali e comunali in Basilea Città sono tra le più alte della Svizzera.",
+          "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Imposta cantonale confronto Svizzera 2026 canton Basilea",
+          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-basilea/",
+          "excerpt": "Confronto 2026 delle aliquote cantonali in Svizzera: focus su Basilea con dati su AD/AC 1,1%, LAINF 0,7–1,5%, LPP 7–18% e franchigia frontalieri €10'000.",
+          "date": "2026-08-07T03:42:43.033Z"
+        },
+        {
+          "title": "Basel: approvata l'introduzione dell'imposizione alla fonte",
+          "url": "/articoli-svizzera/imposizione-fonte-basilea/",
+          "excerpt": "Le votazioni cantonali a Basilea hanno approvato l'introduzione dell'imposizione alla fonte, con il 53,4% dei voti, modificando il sistema fiscale locale.",
+          "date": "2026-06-15T05:26:26.152Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Guida alla tassazione dei frontalieri",
+          "url": "/guida-tassazione-frontalieri-2026/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "BASILEA",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the Basel region, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area borders Germany and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "16.72%",
+          "note": "Liestal, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "12.98%",
+          "note": "tariff A0 BL, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Liestal)",
+              "value": "3.72%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Liestal)",
+              "value": "10.95%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Liestal)",
+              "value": "16.72%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Liestal)",
+              "value": "21.75%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Liestal)",
+              "value": "27.93%"
+            },
+            {
+              "label": "Gross income of 30,000 CHF (Basel)",
+              "value": "0.22%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Basel)",
+              "value": "9.89%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Basel)",
+              "value": "14.66%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Basel)",
+              "value": "18.27%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Basel)",
+              "value": "22.83%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (BL, A0)",
+              "value": "4.96%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (BL, A0)",
+              "value": "9.67%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (BL, A0)",
+              "value": "12.98%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (BL, A0)",
+              "value": "15.79%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (BL, A0)",
+              "value": "20.93%"
+            },
+            {
+              "label": "Monthly wage of 4,000 CHF (BS, A0)",
+              "value": "6.07%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (BS, A0)",
+              "value": "10.59%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (BS, A0)",
+              "value": "13.06%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (BS, A0)",
+              "value": "15.07%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (BS, A0)",
+              "value": "18.55%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Basel City Inheritance and Gift Tax: Rates",
+          "url": "/en/swiss-articles/inheritance-and-donation-tax-basel-stadt/",
+          "excerpt": "Guide to inheritance and gift taxes in the Canton of Basel-City: rates for degree of kinship, exemptions and reporting procedures.",
+          "date": "2026-09-02T04:47:57.978Z"
+        },
+        {
+          "title": "Canton taxes Basel Countryside: rates and deductions",
+          "url": "/en/swiss-articles/basel-landschaft-taxes-rates-deductions/",
+          "excerpt": "Complete guide to cantonal and municipal taxes in the canton of Basel-Country: rates, allowable deductions, reporting deadlines and online tax portal.",
+          "date": "2026-08-24T15:07:39.075Z"
+        },
+        {
+          "title": "Inheritance tax in the canton of Basel-City: rates and procedures",
+          "url": "/en/swiss-articles/inheritance-tax-basel-city/",
+          "excerpt": "Inheritance tax in the Canton of Basel-City: rates for degree of kinship, exemptions for spouse and descendants, declaration and filing deadlines.",
+          "date": "2026-08-24T14:42:33.929Z"
+        },
+        {
+          "title": "Inheritance and Donation Tax: Basel Countryside",
+          "url": "/en/swiss-articles/inheritance-donation-tax-basel-landschaft/",
+          "excerpt": "How inheritance and gift taxes work in the canton of Basel-Country: rates, family exemptions and reporting procedures.",
+          "date": "2026-08-24T17:56:22.422Z"
+        },
+        {
+          "title": "Cantonal and municipal taxes in Basel City: rates and deductions",
+          "url": "/en/swiss-articles/cantonal-and-municipal-taxes-in-basel-city-rates-and-deductions/",
+          "excerpt": "Cantonal and municipal taxes in Basel City are among the highest in Switzerland.",
+          "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Cantonal tax comparison Switzerland 2026 canton Basel",
+          "url": "/en/swiss-articles/canton-tax-comparison-switzerland-2026-basel-canton/",
+          "excerpt": "2026 comparison of cantonal rates in Switzerland: focus on Basel with data on AD/AC 1.1%, LAINF 0.7-1.5%, LPP 7–18% and border deductibles €10,000.",
+          "date": "2026-08-07T03:42:43.033Z"
+        },
+        {
+          "title": "Basel: Approval of Source Tax Introduction",
+          "url": "/en/swiss-articles/source-tax-basel/",
+          "excerpt": "Cantonal votes in Basel have approved the introduction of source taxation, with 53.4% of votes, modifying the local tax system.",
+          "date": "2026-06-15T05:26:26.152Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "Cross-border taxation guide",
+          "url": "/en/cross-border-taxation-guide-2026/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "BASILEA",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "In der Region Basel hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet grenzt an Deutschland und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "16.72 %",
+          "note": "Liestal, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "12.98 %",
+          "note": "Tarif A0 BL, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Liestal)",
+              "value": "3.72 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Liestal)",
+              "value": "10.95 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Liestal)",
+              "value": "16.72 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Liestal)",
+              "value": "21.75 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Liestal)",
+              "value": "27.93 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Basel)",
+              "value": "0.22 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Basel)",
+              "value": "9.89 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Basel)",
+              "value": "14.66 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Basel)",
+              "value": "18.27 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Basel)",
+              "value": "22.83 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (BL, A0)",
+              "value": "4.96 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (BL, A0)",
+              "value": "9.67 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (BL, A0)",
+              "value": "12.98 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (BL, A0)",
+              "value": "15.79 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (BL, A0)",
+              "value": "20.93 %"
+            },
+            {
+              "label": "Monatslohn von 4’000 CHF (BS, A0)",
+              "value": "6.07 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (BS, A0)",
+              "value": "10.59 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (BS, A0)",
+              "value": "13.06 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (BS, A0)",
+              "value": "15.07 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (BS, A0)",
+              "value": "18.55 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Erbschafts- und Schenkungssteuer Basel-Stadt: Steuersätze",
+          "url": "/de/schweiz-artikel/erbschaft-und-schenkung-steuern-basel-stadt/",
+          "excerpt": "Leitfaden Erbschafts- und Schenkungssteuern im Kanton Basel-Stadt: Verwandtschaftsgradsätze, Befreiungen und Meldeverfahren.",
+          "date": "2026-09-02T04:47:57.978Z"
+        },
+        {
+          "title": "Steuern Kanton Basel-Landschaft: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/imposte-kanton-basel-landschaft-satze-abzuge/",
+          "excerpt": "Vollständiger Leitfaden zu den Kantons- und Gemeindesteuern im Kanton Basel-Landschaft: Sätze, zulässige Abzüge, Deklarationsfristen und Online-Steuerportal.",
+          "date": "2026-08-24T15:07:39.075Z"
+        },
+        {
+          "title": "Erbschaftssteuer im Kanton Basel-Stadt: Sätze und Verfahren",
+          "url": "/de/schweiz-artikel/erbschaftssteuer-basel-stadt/",
+          "excerpt": "Erbschaftssteuer im Kanton Basel-Stadt: Sätze pro Verwandtschaftsgrad, Befreiungen für Ehegatten und Nachkommen, Erklärung und Einreichungsfristen.",
+          "date": "2026-08-24T14:42:33.929Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer: Basel-Landschaft",
+          "url": "/de/schweiz-artikel/erbschafts-donationsteuer-baselland/",
+          "excerpt": "Wie funktionieren Erbschafts- und Schenkungssteuern im Kanton Basel-Landschaft: Steuersätze, Steuerbefreiungen für Angehörige und Meldeverfahren.",
+          "date": "2026-08-24T17:56:22.422Z"
+        },
+        {
+          "title": "Kantons- und Gemeindesteuern in Basel-Stadt: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/steuern-kanton-basel-stadt-besteuerung/",
+          "excerpt": "Die Kantons- und Gemeindesteuern in Basel-Stadt gehören zu den höchsten der Schweiz.",
+          "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Kantonssteuer Vergleich Schweiz 2026 Kanton Basel",
+          "url": "/de/schweiz-artikel/kantonaler-steuervergleich-schweiz-2026-kanton-basel/",
+          "excerpt": "Vergleich 2026 der kantonalen Steuersätze in der Schweiz: Fokus auf Basel mit Daten zu AD/AC 1,1%, UVG 0,7-1,5%, BVG 7-18% und Grenzfranchise € 10'000.",
+          "date": "2026-08-07T03:42:43.033Z"
+        },
+        {
+          "title": "Basel: Einführung der Steuer auf die Quelle genehmigt",
+          "url": "/de/schweiz-artikel/quelle-steuer-basel/",
+          "excerpt": "Die Kantonsabstimmungen in Basel haben die Einführung der Steuer auf die Quelle genehmigt, mit 53,4 % der Stimmen, wodurch das lokale Steuersystem geändert wird.",
+          "date": "2026-06-15T05:26:26.152Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Leitfaden zur Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-besteuerung-leitfaden-2026/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "BASILEA",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans la région bâloise, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire a une frontière avec l’Allemagne et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "16,72 %",
+          "note": "Liestal, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "12,98 %",
+          "note": "barème A0 BL, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Liestal)",
+              "value": "3,72 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Liestal)",
+              "value": "10,95 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Liestal)",
+              "value": "16,72 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Liestal)",
+              "value": "21,75 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Liestal)",
+              "value": "27,93 %"
+            },
+            {
+              "label": "Revenu brut de 30 000 CHF (Basel)",
+              "value": "0,22 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Basel)",
+              "value": "9,89 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Basel)",
+              "value": "14,66 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Basel)",
+              "value": "18,27 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Basel)",
+              "value": "22,83 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (BL, A0)",
+              "value": "4,96 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (BL, A0)",
+              "value": "9,67 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (BL, A0)",
+              "value": "12,98 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (BL, A0)",
+              "value": "15,79 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (BL, A0)",
+              "value": "20,93 %"
+            },
+            {
+              "label": "Salaire mensuel de 4 000 CHF (BS, A0)",
+              "value": "6,07 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (BS, A0)",
+              "value": "10,59 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (BS, A0)",
+              "value": "13,06 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (BS, A0)",
+              "value": "15,07 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (BS, A0)",
+              "value": "18,55 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Droit de succession et donation Bâle-Ville : taux",
+          "url": "/fr/articles-suisse/impot-succession-et-donation-bale-ville/",
+          "excerpt": "Guide des droits de succession et de donation dans le canton de Bâle-Ville : taux par degré de parenté, exonérations et procédures de déclaration.",
+          "date": "2026-09-02T04:47:57.978Z"
+        },
+        {
+          "title": "Impôts canton Bâle-Campagne : taux et déductions",
+          "url": "/fr/articles-suisse/impots-canton-bale-campagne-taux-deductions/",
+          "excerpt": "Guide complet des impôts cantonaux et communaux dans le canton de Bâle-Campagne : taux, déductions admises, délais de déclaration et portail fiscal en ligne.",
+          "date": "2026-08-24T15:07:39.075Z"
+        },
+        {
+          "title": "Droit de succession dans le canton de Bâle-Ville : taux et procédures",
+          "url": "/fr/articles-suisse/impot-succession-bale-ville/",
+          "excerpt": "Droit de succession dans le canton de Bâle-Ville : taux par degré de parenté, exonérations pour conjoint et descendants, déclaration et délais de présentation.",
+          "date": "2026-08-24T14:42:33.929Z"
+        },
+        {
+          "title": "Droits de succession et de donation : Bâle-Campagne",
+          "url": "/fr/articles-suisse/impot-succession-donation-bale-campagne/",
+          "excerpt": "Comment fonctionnent les impôts sur les successions et les donations dans le canton de Bâle-Campagne : taux, exonérations pour les membres de la famille et procédures de déclaration.",
+          "date": "2026-08-24T17:56:22.422Z"
+        },
+        {
+          "title": "Impôts cantonaux et communaux à Bâle-Ville : taux et déductions",
+          "url": "/fr/articles-suisse/impots-canton-de-basel-ville-imposition/",
+          "excerpt": "Les impôts cantonaux et communaux à Bâle-Ville sont parmi les plus élevés de Suisse.",
+          "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Impôt cantonal comparaison Suisse 2026 canton Bâle",
+          "url": "/fr/articles-suisse/comparaison-impots-cantonaux-suisse-2026-canton-de-bale/",
+          "excerpt": "Comparaison 2026 des taux cantonaux en Suisse : focus sur Bâle avec des données sur AD/AC 1,1%, LAA 0,7–1,5%, LPP 7–18% et franchise frontalière € 10'000.",
+          "date": "2026-08-07T03:42:43.033Z"
+        },
+        {
+          "title": "Basile : imposition à la source approuvée",
+          "url": "/fr/articles-suisse/impot-source-basel/",
+          "excerpt": "Les votes cantonaux de Basilea ont approuvé l'introduction de l'imposition à la source, avec 53,4 % des voix, modifiant le système fiscal local.",
+          "date": "2026-06-15T05:26:26.152Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Guide de l’imposition des frontaliers",
+          "url": "/fr/guide-imposition-frontaliers-2026/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

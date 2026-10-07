@@ -1,0 +1,912 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sg:mobilita",
+  "section": "canton-sg",
+  "canton": "SG",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "ef335b2e57b163a14865139b188442e15fd38ded176f96ab6851da4b43e54719",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SG",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton San Gallo, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con l’Austria, il Liechtenstein e la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Buchs (SG)-Schaan, settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "14",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "15",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/buchs-schaan/oggi/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/kriessern-mader/oggi/"
+            },
+            {
+              "label": "Montlingen-Koblach",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/montlingen-koblach/oggi/"
+            },
+            {
+              "label": "Rheineck-Gaißau",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/rheineck-gai-au/oggi/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/salez-ruggell/oggi/"
+            },
+            {
+              "label": "Sevelen-Vaduz",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/sevelen-vaduz/oggi/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/widnau-lustenau/oggi/"
+            },
+            {
+              "label": "Widnau-Lustenau (Schmitterbrücke)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/widnau-lustenau-schmitterbrucke/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A13 St. Margrethen -> Sargans tra Svincolo autostradale Kriessern E Svincolo autostradale Oberriet Situazione: chiusa cantiere, lunghezza [km] 9.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2026-01-15T14:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Kriessern Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 1 maggio 2027",
+              "date": "2026-01-15T14:55:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-07-01T18:00:00.000Z"
+            },
+            {
+              "label": "A1 St. Gallen -> St. Margrethen Svincolo autostradale St. Gallen-St. Fiden Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4",
+              "value": "Chiusura",
+              "detail": "fine prevista: 9 ottobre 2026",
+              "date": "2026-07-08T11:29:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: chiusa…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-07-08T11:30:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: uscita…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-07-08T11:31:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: uscita…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 22 ottobre 2026",
+              "date": "2026-07-08T11:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen Svincolo autostradale Oberriet Situazione: uscita chiusa cantiere, lunghezza [km] 0.7",
+              "value": "Chiusura",
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-08-25T11:22:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
+              "date": "2026-10-03",
+              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
+            },
+            {
+              "label": "Dienstag, 29.9.2026 Neuer Bahnhof Wolfurt: Modernes Tor zum öffentlichen Verkehr im Rheintal",
+              "date": "2026-09-29",
+              "url": "https://presse.vorarlberg.at/land/public/Neuer-Bahnhof-Wolfurt-Modernes-Tor-zum-ffentlichen-Verkehr-im-Rheintal"
+            },
+            {
+              "label": "Montag, 21.9.2026 Abteilung Wohnbauförderung: Kein Parteienverkehr am 23. September 2026",
+              "date": "2026-09-23",
+              "url": "https://presse.vorarlberg.at/land/public/Abteilung-Wohnbauf-rderung-Kein-Parteienverkehr-am-23-September-2026"
+            },
+            {
+              "label": "St.Galler Regierungsrätin wird Präsidentin der BPUK",
+              "date": "2026-09-18",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
+            },
+            {
+              "label": "Freitag, 18.9.2026 Verkehrsbeschränkungen auf der L 51 Laternser Straße in Zwischenwasser",
+              "date": "2026-09-18",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsbeschr-nkungen-auf-der-L-51-Laternser-Stra-e-in-Zwischenwasser"
+            },
+            {
+              "label": "Mittwoch, 16.9.2026 Verkehrsverbund Vorarlberg lädt zum „VMOBIL Forum“ - Fahrgäste gestalten Mobilitätszukunft mit",
+              "date": "2026-09-16",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsverbund-Vorarlberg-l-dt-zum-VMOBIL-Forum-Fahrg-ste-gestalten-Mobilit-tszukunft-mit"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti San Gallo: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-san-gallo/",
+          "excerpt": "Scopri la struttura tariffaria del Canton San Gallo: comunità tariffaria, zone, abbonamenti annuali e mensili, Metà-prezzo e AG, sconti per studenti.",
+          "date": "2026-08-30T09:09:21.184Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Austria",
+          "url": "/traffico-dogane/san-gallo-austria/"
+        },
+        {
+          "label": "Attese ai valichi verso Liechtenstein",
+          "url": "/traffico-dogane/san-gallo-liechtenstein/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "SG",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of St. Gallen, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Austria, Liechtenstein and Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Buchs (SG)-Schaan, week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "14",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "15",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/buchs-schaan/today/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/kriessern-mader/today/"
+            },
+            {
+              "label": "Montlingen-Koblach",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/montlingen-koblach/today/"
+            },
+            {
+              "label": "Rheineck-Gaißau",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/rheineck-gai-au/today/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/salez-ruggell/today/"
+            },
+            {
+              "label": "Sevelen-Vaduz",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/sevelen-vaduz/today/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/widnau-lustenau/today/"
+            },
+            {
+              "label": "Widnau-Lustenau (Schmitterbrücke)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/widnau-lustenau-schmitterbrucke/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A13 St. Margrethen -> Sargans tra Svincolo autostradale Kriessern E Svincolo autostradale Oberriet Situazione: chiusa cantiere, lunghezza [km] 9.2",
+              "value": "Closure",
+              "detail": "until 30 April 2027",
+              "date": "2026-01-15T14:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Kriessern Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 1 May 2027",
+              "date": "2026-01-15T14:55:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 13 November 2026",
+              "date": "2026-07-01T18:00:00.000Z"
+            },
+            {
+              "label": "A1 St. Gallen -> St. Margrethen Svincolo autostradale St. Gallen-St. Fiden Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.4",
+              "value": "Closure",
+              "detail": "until 9 October 2026",
+              "date": "2026-07-08T11:29:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: chiusa…",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-07-08T11:30:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: uscita…",
+              "value": "Closure",
+              "detail": "until 13 November 2026",
+              "date": "2026-07-08T11:31:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse tra Svincolo autostradale St. Gallen-Kreuzbleiche E Svincolo autostradale Rosenbergstrasse Situazione: uscita…",
+              "value": "Closure",
+              "detail": "until 22 October 2026",
+              "date": "2026-07-08T11:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen Svincolo autostradale Oberriet Situazione: uscita chiusa cantiere, lunghezza [km] 0.7",
+              "value": "Closure",
+              "detail": "until 23 October 2026",
+              "date": "2026-08-25T11:22:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
+              "date": "2026-10-03",
+              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
+            },
+            {
+              "label": "Dienstag, 29.9.2026 Neuer Bahnhof Wolfurt: Modernes Tor zum öffentlichen Verkehr im Rheintal",
+              "date": "2026-09-29",
+              "url": "https://presse.vorarlberg.at/land/public/Neuer-Bahnhof-Wolfurt-Modernes-Tor-zum-ffentlichen-Verkehr-im-Rheintal"
+            },
+            {
+              "label": "Montag, 21.9.2026 Abteilung Wohnbauförderung: Kein Parteienverkehr am 23. September 2026",
+              "date": "2026-09-23",
+              "url": "https://presse.vorarlberg.at/land/public/Abteilung-Wohnbauf-rderung-Kein-Parteienverkehr-am-23-September-2026"
+            },
+            {
+              "label": "St.Galler Regierungsrätin wird Präsidentin der BPUK",
+              "date": "2026-09-18",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
+            },
+            {
+              "label": "Freitag, 18.9.2026 Verkehrsbeschränkungen auf der L 51 Laternser Straße in Zwischenwasser",
+              "date": "2026-09-18",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsbeschr-nkungen-auf-der-L-51-Laternser-Stra-e-in-Zwischenwasser"
+            },
+            {
+              "label": "Mittwoch, 16.9.2026 Verkehrsverbund Vorarlberg lädt zum „VMOBIL Forum“ - Fahrgäste gestalten Mobilitätszukunft mit",
+              "date": "2026-09-16",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsverbund-Vorarlberg-l-dt-zum-VMOBIL-Forum-Fahrg-ste-gestalten-Mobilit-tszukunft-mit"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "St. Gallen Transportation Subscriptions: Zones and Rates",
+          "url": "/en/swiss-articles/st-gallen-public-transport-passes/",
+          "excerpt": "Discover the tariff structure of the Canton of St. Gallen: tariff community, zones, annual and monthly subscriptions, Half-price and AG, discounts for students.",
+          "date": "2026-08-30T09:09:21.184Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards Austria",
+          "url": "/en/border-wait/san-gallo-austria/"
+        },
+        {
+          "label": "Border waits towards Liechtenstein",
+          "url": "/en/border-wait/san-gallo-liechtenstein/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "SG",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Kanton St. Gallen bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Österreich, Liechtenstein und Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Buchs (SG)-Schaan, Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "14",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "15",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/buchs-schaan/heute/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
+            },
+            {
+              "label": "Montlingen-Koblach",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/montlingen-koblach/heute/"
+            },
+            {
+              "label": "Rheineck-Gaißau",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/rheineck-gai-au/heute/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
+            },
+            {
+              "label": "Sevelen-Vaduz",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/widnau-lustenau/heute/"
+            },
+            {
+              "label": "Widnau-Lustenau (Schmitterbrücke)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/widnau-lustenau-schmitterbrucke/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A13 St. Margrethen -> Sargans zwischen Anschluss Kriessern und Anschluss Oberriet Sachlage: Strecke gesperrt Baustelle, Länge [km] 9.2",
+              "value": "Sperrung",
+              "detail": "bis 30. April 2027",
+              "date": "2026-01-15T14:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen zwischen Anschluss Oberriet und Anschluss Kriessern Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 1. Mai 2027",
+              "date": "2026-01-15T14:55:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse Anschluss St. Gallen-Kreuzbleiche Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 13. November 2026",
+              "date": "2026-07-01T18:00:00.000Z"
+            },
+            {
+              "label": "A1 St. Gallen -> St. Margrethen Anschluss St. Gallen-St. Fiden Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.4",
+              "value": "Sperrung",
+              "detail": "bis 9. Oktober 2026",
+              "date": "2026-07-08T11:29:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse zwischen Anschluss St. Gallen-Kreuzbleiche und Anschluss Rosenbergstrasse Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-07-08T11:30:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche -> Rosenbergstrasse zwischen Anschluss St. Gallen-Kreuzbleiche und Anschluss Rosenbergstrasse Sachlage: Ausfahrt gesperrt Baustelle…",
+              "value": "Sperrung",
+              "detail": "bis 13. November 2026",
+              "date": "2026-07-08T11:31:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gallen-Kreuzbleiche <-> Rosenbergstrasse zwischen Anschluss St. Gallen-Kreuzbleiche und Anschluss Rosenbergstrasse Sachlage: Ausfahrt gesperrt…",
+              "value": "Sperrung",
+              "detail": "bis 22. Oktober 2026",
+              "date": "2026-07-08T11:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen Anschluss Oberriet Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.7",
+              "value": "Sperrung",
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-08-25T11:22:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
+              "date": "2026-10-03",
+              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
+            },
+            {
+              "label": "Dienstag, 29.9.2026 Neuer Bahnhof Wolfurt: Modernes Tor zum öffentlichen Verkehr im Rheintal",
+              "date": "2026-09-29",
+              "url": "https://presse.vorarlberg.at/land/public/Neuer-Bahnhof-Wolfurt-Modernes-Tor-zum-ffentlichen-Verkehr-im-Rheintal"
+            },
+            {
+              "label": "Montag, 21.9.2026 Abteilung Wohnbauförderung: Kein Parteienverkehr am 23. September 2026",
+              "date": "2026-09-23",
+              "url": "https://presse.vorarlberg.at/land/public/Abteilung-Wohnbauf-rderung-Kein-Parteienverkehr-am-23-September-2026"
+            },
+            {
+              "label": "St.Galler Regierungsrätin wird Präsidentin der BPUK",
+              "date": "2026-09-18",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
+            },
+            {
+              "label": "Freitag, 18.9.2026 Verkehrsbeschränkungen auf der L 51 Laternser Straße in Zwischenwasser",
+              "date": "2026-09-18",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsbeschr-nkungen-auf-der-L-51-Laternser-Stra-e-in-Zwischenwasser"
+            },
+            {
+              "label": "Mittwoch, 16.9.2026 Verkehrsverbund Vorarlberg lädt zum „VMOBIL Forum“ - Fahrgäste gestalten Mobilitätszukunft mit",
+              "date": "2026-09-16",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsverbund-Vorarlberg-l-dt-zum-VMOBIL-Forum-Fahrg-ste-gestalten-Mobilit-tszukunft-mit"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Verkehrstickets St. Gallen: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/san-gallen-abonnementsverkehr/",
+          "excerpt": "Entdecken Sie die Tarifstruktur des Kantons St. Gallen: Tarifgemeinschaft, Zonen, Jahres- und Monatsabonnements, Halbtax und GA, Studentenrabatte.",
+          "date": "2026-08-30T09:09:21.184Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Österreich",
+          "url": "/de/wartezeit-grenze/san-gallo-austria/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze Richtung Liechtenstein",
+          "url": "/de/wartezeit-grenze/san-gallo-liechtenstein/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "SG",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Saint-Gall, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Autriche, le Liechtenstein et l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Buchs (SG)-Schaan, semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "14",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "15",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Buchs (SG)-Schaan",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/buchs-schaan/aujourd-hui/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
+            },
+            {
+              "label": "Montlingen-Koblach",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/montlingen-koblach/aujourd-hui/"
+            },
+            {
+              "label": "Rheineck-Gaißau",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/rheineck-gai-au/aujourd-hui/"
+            },
+            {
+              "label": "Salez-Ruggell",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
+            },
+            {
+              "label": "Sevelen-Vaduz",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
+            },
+            {
+              "label": "Widnau-Lustenau (Wiesenrain)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/widnau-lustenau/aujourd-hui/"
+            },
+            {
+              "label": "Widnau-Lustenau (Schmitterbrücke)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/widnau-lustenau-schmitterbrucke/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A13 St. Margrethen -> Sargans entre Jonction autoroutière Kriessern et Jonction autoroutière Oberriet Situation: fermé travaux, longueur [km] 9.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2026-01-15T14:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Kriessern Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 1er mai 2027",
+              "date": "2026-01-15T14:55:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche <-> Rosenbergstrasse Jonction autoroutière St. Gall-Kreuzbleiche Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-07-01T18:00:00.000Z"
+            },
+            {
+              "label": "A1 St-Gall -> St. Margrethen Jonction autoroutière St. Gall-St. Fiden Situation: entrée fermée travaux, longueur [km] 0.4",
+              "value": "Fermeture",
+              "detail": "jusqu’au 9 octobre 2026",
+              "date": "2026-07-08T11:29:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche -> Rosenbergstrasse entre Jonction autoroutière St. Gall-Kreuzbleiche et Jonction autoroutière Rosenbergstrasse Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-07-08T11:30:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche -> Rosenbergstrasse entre Jonction autoroutière St. Gall-Kreuzbleiche et Jonction autoroutière Rosenbergstrasse Situation: sortie…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-07-08T11:31:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer St. Gallen-Kreuzbleiche St. Gall-Kreuzbleiche <-> Rosenbergstrasse entre Jonction autoroutière St. Gall-Kreuzbleiche et Jonction autoroutière Rosenbergstrasse Situation: sortie…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 22 octobre 2026",
+              "date": "2026-07-08T11:34:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> St. Margrethen Jonction autoroutière Oberriet Situation: sortie fermée travaux, longueur [km] 0.7",
+              "value": "Fermeture",
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-08-25T11:22:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Mittwoch, 23.9.2026 „Tag der offenen Baustelle“ beim Stadttunnel Feldkirch",
+              "date": "2026-10-03",
+              "url": "https://presse.vorarlberg.at/land/public/-Tag-der-offenen-Baustelle-beim-Stadttunnel-Feldkirch"
+            },
+            {
+              "label": "Dienstag, 29.9.2026 Neuer Bahnhof Wolfurt: Modernes Tor zum öffentlichen Verkehr im Rheintal",
+              "date": "2026-09-29",
+              "url": "https://presse.vorarlberg.at/land/public/Neuer-Bahnhof-Wolfurt-Modernes-Tor-zum-ffentlichen-Verkehr-im-Rheintal"
+            },
+            {
+              "label": "Montag, 21.9.2026 Abteilung Wohnbauförderung: Kein Parteienverkehr am 23. September 2026",
+              "date": "2026-09-23",
+              "url": "https://presse.vorarlberg.at/land/public/Abteilung-Wohnbauf-rderung-Kein-Parteienverkehr-am-23-September-2026"
+            },
+            {
+              "label": "St.Galler Regierungsrätin wird Präsidentin der BPUK",
+              "date": "2026-09-18",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/st-galler-regierungsraetin-wird-praesidentin-der-bpuk.html"
+            },
+            {
+              "label": "Freitag, 18.9.2026 Verkehrsbeschränkungen auf der L 51 Laternser Straße in Zwischenwasser",
+              "date": "2026-09-18",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsbeschr-nkungen-auf-der-L-51-Laternser-Stra-e-in-Zwischenwasser"
+            },
+            {
+              "label": "Mittwoch, 16.9.2026 Verkehrsverbund Vorarlberg lädt zum „VMOBIL Forum“ - Fahrgäste gestalten Mobilitätszukunft mit",
+              "date": "2026-09-16",
+              "url": "https://presse.vorarlberg.at/land/public/Verkehrsverbund-Vorarlberg-l-dt-zum-VMOBIL-Forum-Fahrg-ste-gestalten-Mobilit-tszukunft-mit"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports Saint-Gall : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-saint-gall/",
+          "excerpt": "Découvrez la structure tarifaire du canton de Saint-Gall : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif et AG, réductions pour étudiants.",
+          "date": "2026-08-30T09:09:21.184Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers Autriche",
+          "url": "/fr/temps-attente-douane/san-gallo-austria/"
+        },
+        {
+          "label": "Attente aux frontières vers Liechtenstein",
+          "url": "/fr/temps-attente-douane/san-gallo-liechtenstein/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

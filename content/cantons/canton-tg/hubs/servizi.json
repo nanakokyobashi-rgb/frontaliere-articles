@@ -1,0 +1,657 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-tg:servizi",
+  "section": "canton-tg",
+  "canton": "TG",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "d7895a6d8f8a70b3b9ce0caac98ed03f94e25e0163103e14b2a16b381c6f9207",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TG",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "In Turgovia, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "544,10 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "44",
+          "note": "offerta mediana 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "TG, regione di premio 0",
+              "value": "mediana 544,10 CHF al mese",
+              "detail": "da 499,60 a 600,90 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "TG999099",
+              "value": "1160 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109664"
+            },
+            {
+              "label": "TG777666",
+              "value": "1040 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109632"
+            },
+            {
+              "label": "TG27017",
+              "value": "1010 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109628"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion.tg.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "12 °C",
+              "detail": "oggi da 12 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://www.tg.ch/news.html/485/news/80354"
+            },
+            {
+              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
+              "date": "2026-09-07",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
+            },
+            {
+              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
+              "date": "2026-09-02",
+              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
+            },
+            {
+              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
+              "date": "2026-08-27",
+              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
+            },
+            {
+              "label": "PD Dr. med. Ralf Joukhadar wird Anfang Oktober Chefarzt der Frauenklinik am Kantonsspital Frauenfeld",
+              "date": "2026-08-07",
+              "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B nel Cantone di Turgovia: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-canton-turgovia-requisiti-rinnovo/",
+          "excerpt": "Scopri i requisiti e la procedura per il rinnovo del permesso di dimora B nel Cantone di Turgovia.",
+          "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Premi cassa malati Canton Turgovia: riduzione",
+          "url": "/articoli-svizzera/premi-cassa-malati-canton-turgovia-riduzione/",
+          "excerpt": "Come ottenere la riduzione sui premi della LAMal nel Canton Turgovia: franchigie disponibili, requisiti per il sussidio e procedure per richiedere il beneficio cantonale.",
+          "date": "2026-09-03T02:24:34.012Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/turgovia/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/turgovia-tg/"
+        },
+        {
+          "label": "Offerte di lavoro in Turgovia",
+          "url": "/cerca-lavoro-turgovia/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "TG",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Thurgau, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "544.10 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "44",
+          "note": "typical bid 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "TG, premium region 0",
+              "value": "typical 544.10 CHF per month",
+              "detail": "from 499.60 to 600.90 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "TG999099",
+              "value": "1,160 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109664"
+            },
+            {
+              "label": "TG777666",
+              "value": "1,040 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109632"
+            },
+            {
+              "label": "TG27017",
+              "value": "1,010 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109628"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion.tg.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "12 °C",
+              "detail": "today from 12 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://www.tg.ch/news.html/485/news/80354"
+            },
+            {
+              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
+              "date": "2026-09-07",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
+            },
+            {
+              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
+              "date": "2026-09-02",
+              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
+            },
+            {
+              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
+              "date": "2026-08-27",
+              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
+            },
+            {
+              "label": "PD Dr. med. Ralf Joukhadar wird Anfang Oktober Chefarzt der Frauenklinik am Kantonsspital Frauenfeld",
+              "date": "2026-08-07",
+              "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B in the Canton of Thurgau: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-canton-turgovia-requirements-renewal/",
+          "excerpt": "Learn about the requirements and procedure for renewing a B residence permit in the Canton of Thurgau.",
+          "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Thurgau: reduction",
+          "url": "/en/swiss-articles/health-insurance-premiums-canton-aargau-reduction/",
+          "excerpt": "How to get the LAMal premium reduction in the canton of Thurgau: available deductibles, subsidy requirements and procedures to apply for the cantonal benefit.",
+          "date": "2026-09-03T02:24:34.012Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/thurgau-tg/"
+        },
+        {
+          "label": "Job offers in Thurgau",
+          "url": "/en/find-jobs-thurgau/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "TG",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Thurgau laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "544.10 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "44",
+          "note": "mittleres Gebot 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "TG, Prämienregion 0",
+              "value": "Mittelwert 544.10 CHF pro Monat",
+              "detail": "von 499.60 bis 600.90 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "TG999099",
+              "value": "1’160 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109664"
+            },
+            {
+              "label": "TG777666",
+              "value": "1’040 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109632"
+            },
+            {
+              "label": "TG27017",
+              "value": "1’010 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109628"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion.tg.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "12 °C",
+              "detail": "heute 12 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://www.tg.ch/news.html/485/news/80354"
+            },
+            {
+              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
+              "date": "2026-09-07",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
+            },
+            {
+              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
+              "date": "2026-09-02",
+              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
+            },
+            {
+              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
+              "date": "2026-08-27",
+              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
+            },
+            {
+              "label": "PD Dr. med. Ralf Joukhadar wird Anfang Oktober Chefarzt der Frauenklinik am Kantonsspital Frauenfeld",
+              "date": "2026-08-07",
+              "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B im Kanton Thurgau: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-thurgau-voraussetzungen-verlaengerung/",
+          "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Thurgau.",
+          "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Thurgau: Reduktion",
+          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-aargau-reduktion/",
+          "excerpt": "So erhalten Sie die KVG-Prämienreduktion im Kanton Thurgau: Verfügbare Franchisen, Beitragsvoraussetzungen und Verfahren zur Beantragung der kantonalen Leistung.",
+          "date": "2026-09-03T02:24:34.012Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/thurgau-tg/"
+        },
+        {
+          "label": "Stellenangebote im Thurgau",
+          "url": "/de/jobs-im-thurgau/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "TG",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "En Thurgovie, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "544,10 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "44",
+          "note": "offre centrale 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "TG, région de primes 0",
+              "value": "valeur centrale 544,10 CHF par mois",
+              "detail": "de 499,60 à 600,90 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "TG999099",
+              "value": "1 160 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109664"
+            },
+            {
+              "label": "TG777666",
+              "value": "1 040 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109632"
+            },
+            {
+              "label": "TG27017",
+              "value": "1 010 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109628"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion.tg.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 12 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80356"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt unverändert",
+              "date": "2026-10-06",
+              "url": "https://www.tg.ch/news.html/485/news/80354"
+            },
+            {
+              "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
+              "date": "2026-09-07",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
+            },
+            {
+              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
+              "date": "2026-09-02",
+              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
+            },
+            {
+              "label": "Reconstructive Robotic Urology – erfolgreiche Premiere der ersten Masterclass in der Urologie Spital...",
+              "date": "2026-08-27",
+              "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
+            },
+            {
+              "label": "PD Dr. med. Ralf Joukhadar wird Anfang Oktober Chefarzt der Frauenklinik am Kantonsspital Frauenfeld",
+              "date": "2026-08-07",
+              "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B dans le canton de Thurgovie : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-canton-de-thurgovie-exigences-renouvellement/",
+          "excerpt": "Découvrez les conditions et la procédure de renouvellement du permis de séjour B dans le canton de Thurgovie.",
+          "date": "2026-09-07T03:40:46.786Z"
+        },
+        {
+          "title": "Primes caisse-maladie Canton Thurgovie : réduction",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-argovie-reduction/",
+          "excerpt": "Comment obtenir la réduction sur les primes de LAMal dans le canton de Thurgovie : franchises disponibles, conditions de subvention et procédures pour demander l'avantage cantonal.",
+          "date": "2026-09-03T02:24:34.012Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi en Thurgovie",
+          "url": "/fr/trouver-emploi-thurgovie/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

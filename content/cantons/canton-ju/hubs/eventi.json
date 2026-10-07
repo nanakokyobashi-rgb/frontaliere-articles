@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ju:eventi",
+  "section": "canton-ju",
+  "canton": "JU",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "736ca5fd003c0c065202df2d5c6c1df13c305b279fcae8b5ba12e00ad44064c2",
+  "blocks": [],
+  "locales": {
+    "it": {
+      "canton": "JU",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Giura, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Giura",
+          "url": "/eventi/giura/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/giura/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "JU",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Jura, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of Jura",
+          "url": "/en/events/jura/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/jura/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "JU",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Jura ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Jura",
+          "url": "/de/veranstaltungen/jura/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/jura/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "JU",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton du Jura, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton du Jura",
+          "url": "/fr/evenements/jura/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/jura/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}
