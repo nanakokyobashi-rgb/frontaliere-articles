@@ -9,20 +9,54 @@
  * il primo avvistamento, cosi' la coda non dimentica da quanto aspetta.
  */
 import { execFileSync } from 'node:child_process';
-import { realpathSync, writeFileSync } from 'node:fs';
+import { existsSync, realpathSync, writeFileSync } from 'node:fs';
+import { resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
 
 function readStage(stage, file) {
+  let indexPath;
+  try {
+    indexPath = execFileSync('git', ['rev-parse', '--git-path', 'index'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch (error) {
+    throw new Error(`impossibile individuare l'indice Git: ${error.message}`);
+  }
+  if (!indexPath || !existsSync(resolvePath(indexPath))) {
+    throw new Error(`impossibile leggere l'indice Git: file assente (${indexPath || '<sconosciuto>'})`);
+  }
+
+  let indexText;
+  try {
+    indexText = execFileSync('git', ['ls-files', '--stage', '--', file], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+  } catch (error) {
+    throw new Error(`impossibile leggere l'indice Git per lo stage ${stage}: ${error.message}`);
+  }
+
+  const stageEntry = indexText
+    .split('\n')
+    .map((line) => line.match(/^\d+\s+([0-9a-f]+)\s+(\d)\t(.+)$/))
+    .find((match) => match && match[2] === String(stage) && match[3] === file);
+  if (!stageEntry) {
+    // The path is genuinely absent from this stage (for example, an add/delete
+    // conflict). That is different from a failed object/index read.
+    return null;
+  }
+
   try {
     return execFileSync('git', ['show', `:${stage}:${file}`], {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
     });
-  } catch {
-    return null;
+  } catch (error) {
+    throw new Error(`impossibile leggere ${file} dallo stage ${stage}: ${error.message}`);
   }
 }
 

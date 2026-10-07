@@ -95,6 +95,7 @@ import {
   imageRecordForPath,
   sha256File,
 } from './lib/blog-image-registry.mjs';
+import { queueArticleCoverRegeneration } from './lib/article-cover-fallback.mjs';
 import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
   BLOG_IMAGE_HARD_MAX_BYTES,
@@ -537,6 +538,10 @@ async function processDoc(db, FieldValue, docSnap) {
       delete data._sourceText;
     }
     const { slugs, publishedUrls } = registration;
+    // The fallback is queued only after registerArticleFiles() succeeds. If a
+    // later validation rejects the journalist draft, no retry item may point
+    // at an article that never entered the registry.
+    queueArticleCoverRegeneration(PROJECT_ROOT, data, imageResolution);
 
     await docSnap.ref.update({
       status: 'published',

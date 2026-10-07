@@ -234,6 +234,9 @@ export function appendEditorialImageRecord(root, record) {
 
 export function buildPublishedBlogImageRegistry(root, images = []) {
   const selected = new Set(images.map(normalizePath).filter(Boolean));
+  const staticFallbackRecord = (selected.size === 0 || selected.has(STATIC_FALLBACK_IMAGE))
+    ? imageRecordForPath(root, STATIC_FALLBACK_IMAGE)?.record
+    : null;
   const generated = Object.fromEntries(
     readGeneratedImageRecords(root)
       .filter((record) => record.scope === 'article-hero' && validImagePath(record.imageUrl))
@@ -241,6 +244,7 @@ export function buildPublishedBlogImageRegistry(root, images = []) {
       .filter((record) => selected.size === 0 || selected.has(record.imageUrl))
       .map((record) => [record.imageUrl, record]),
   );
+  if (staticFallbackRecord) generated[STATIC_FALLBACK_IMAGE] = staticFallbackRecord;
   const editorial = Object.fromEntries(
     readEditorialImageRecords(root).filter((record) => selected.size === 0 || selected.has(record.cover))
       .filter((record) => hasMaterializedImageRecord(root, record.cover, record))

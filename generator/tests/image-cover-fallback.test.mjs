@@ -5,9 +5,13 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { resolveArticleCoverFallback } from '../scripts/lib/article-cover-fallback.mjs';
+import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+} from '../scripts/lib/article-cover-fallback.mjs';
 import {
   appendGeneratedImageRecord,
+  buildPublishedBlogImageRegistry,
   imageRecordForPath,
   sha256File,
 } from '../scripts/lib/blog-image-registry.mjs';
@@ -80,6 +84,7 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
       findCatalogImage: () => record.imageUrl,
       reason: 'Gemini image request failed with HTTP 400',
     });
+    queueArticleCoverRegeneration(root, data, result);
 
     assert.equal(result.source, 'catalog-fallback');
     assert.equal(data._generatedImagePath, record.imageUrl);
@@ -107,7 +112,9 @@ test('when the catalog is empty, the governed static cover still publishes and d
       reason: 'image-budget-expired',
     };
     const first = resolveArticleCoverFallback(data, options);
-    resolveArticleCoverFallback(data, { ...options, reason: 'provider-timeout' });
+    queueArticleCoverRegeneration(root, data, first);
+    const second = resolveArticleCoverFallback(data, { ...options, reason: 'provider-timeout' });
+    queueArticleCoverRegeneration(root, data, second);
 
     assert.equal(first.source, 'static');
     assert.equal(first.path, '/images/places/lugano-view.webp');
@@ -115,6 +122,18 @@ test('when the catalog is empty, the governed static cover still publishes and d
     const queue = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
     assert.equal(queue.items.length, 1);
     assert.equal(queue.items[0].reason, 'provider-timeout');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('the published image ledger carries the governed static fallback record', () => {
+  const root = tempRoot();
+  try {
+    const registry = buildPublishedBlogImageRegistry(root);
+    const record = registry.generated['/images/places/lugano-view.webp'];
+    assert.equal(record?.scope, 'place');
+    assert.equal(record?.imageUrl, '/images/places/lugano-view.webp');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

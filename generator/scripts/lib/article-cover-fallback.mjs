@@ -21,6 +21,16 @@ export function applyHeroProvenance(data, imagePath, provenance) {
   data.image = imagePath.split('/').pop() || data.image;
 }
 
+export function queueArticleCoverRegeneration(root, data, resolution) {
+  if (!resolution?.regeneration) return false;
+  return appendImageRegenerationQueue(root, {
+    articleId: data.id,
+    title: data.content?.it?.title || data.content?.title || data.title,
+    fallbackImage: resolution.regeneration.fallbackImage,
+    reason: resolution.regeneration.reason,
+  });
+}
+
 /**
  * Resolve a non-blocking cover after the governed engine has failed.
  *
@@ -55,16 +65,14 @@ export function resolveArticleCoverFallback(data, {
   }
 
   applyHeroProvenance(data, selected.path, provenance);
-  appendImageRegenerationQueue(root, {
-    articleId: data.id,
-    title: data.content?.it?.title || data.content?.title || data.title,
-    fallbackImage: selected.path,
-    reason: engineReason,
-  });
   console.error(`[cover] article=${data.id} source=${selected.source} reason=${engineReason}`);
   return {
     source: selected.source,
     path: selected.path,
     provenance: provenance.kind,
+    regeneration: {
+      fallbackImage: selected.path,
+      reason: engineReason,
+    },
   };
 }

@@ -272,7 +272,10 @@ import {
   hasValidBlogImageRecord,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
-import { resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
+import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+} from './lib/article-cover-fallback.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -17971,6 +17974,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 3b: Generate article image through the governed engine.
   console.error('🎨 Generazione immagine articolo:');
   const imagePath = await generateArticleImage(data);
+  let imageResolution = null;
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error(`  ✅ Immagine generata: ${imagePath}`);
@@ -17978,7 +17982,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   } else {
     // A cover-provider failure is recoverable: keep the article and queue the
     // cover for later regeneration after selecting a governed fallback.
-    resolveArticleCoverFallback(data, {
+    imageResolution = resolveArticleCoverFallback(data, {
       root: PROJECT_ROOT,
       findCatalogImage: findBestFallbackImage,
       reason: data._imageGenerationFailureReason || 'engine-failed',
@@ -18041,6 +18045,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Track source URL for future duplicate prevention
   recordSourceUrl(sourceUrl, data.id);
+
+  // Persist a deferred image retry only after every article source file has
+  // passed validation and has been written successfully. A failed validation
+  // must not leave a queue item for an article that never entered the registry.
+  queueArticleCoverRegeneration(PROJECT_ROOT, data, imageResolution);
 
   // Step 5: Git add
   console.error('\n📦 Staging file:');
