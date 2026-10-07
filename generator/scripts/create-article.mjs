@@ -151,7 +151,7 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs } from './lib/free-translate.mjs';
+import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs, getCascadeStats } from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -11888,7 +11888,7 @@ function pendingBodySecondLaneAvailable() {
   return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
 }
 
-async function translatePendingBodyWithCodex(itValue, locale, field) {
+async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCall = null } = {}) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
   const deadlineMs = codexCallDeadlineMs({
     now: Date.now(),
@@ -11904,8 +11904,12 @@ async function translatePendingBodyWithCodex(itValue, locale, field) {
     chain: [codex],
     prefer: [codex],
     bypassForceChain: true,
+    retryCodexTransport: true,
+    codexTransportRetries: 2,
+    codexTransportBackoffMs: 1_000,
     deadlineMs,
   });
+  onCodexCall?.();
   const rejected = [];
   const text = await translateFieldFreeMt({
     text: itValue,
@@ -11954,8 +11958,31 @@ async function translateArticle(data) {
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
   RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
   resetBodyTranslationPending(data);
+  const cascadeStatsBeforeTranslation = getCascadeStats();
+  let translationRecoveryCodexCalls = 0;
 
-  async function callWithRetry(prompt, maxTokens, label) {
+  // A recovery call is a translation call only when it opts into the Codex
+  // model explicitly. The default path below remains the scored historical
+  // chain, so fact-checks and second opinions cannot inherit this preference.
+  function codexTranslationRecoveryOptions() {
+    const deadlineMs = codexCallDeadlineMs({
+      now: Date.now(),
+      budgetRemainingMs: 180_000,
+      processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
+    });
+    return {
+      model: AI_MODELS.CODEX_CLI_PRIMARY,
+      chain: [AI_MODELS.CODEX_CLI_PRIMARY],
+      prefer: [AI_MODELS.CODEX_CLI_PRIMARY],
+      bypassForceChain: true,
+      retryCodexTransport: true,
+      codexTransportRetries: 2,
+      codexTransportBackoffMs: 1_000,
+      ...(deadlineMs === null ? {} : { deadlineMs }),
+    };
+  }
+
+  async function callWithRetry(prompt, maxTokens, label, { translation = false } = {}) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
     // Niente try/catch attorno a callLLM qui, a differenza del gemello
     // requestHeadlineSelection (#391) — verificato in review su PR #604
@@ -11972,10 +11999,19 @@ async function translateArticle(data) {
     // precedente giro di questa PR. Se un giorno il wrapper guadagnasse un
     // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
     // cattura qui avrebbe senso; oggi no.
-    const raw = await callLLM(
-      [{ role: 'user', content: safePrompt }],
-      { temperature: 0.5, maxTokens, jsonMode: true },
-    );
+    const call = (tokens, temperature = 0.5) => {
+      if (translation) translationRecoveryCodexCalls += 1;
+      return callLLM(
+        [{ role: 'user', content: safePrompt }],
+        {
+          temperature,
+          maxTokens: tokens,
+          jsonMode: true,
+          ...(translation ? codexTranslationRecoveryOptions() : {}),
+        },
+      );
+    };
+    const raw = await call(maxTokens);
     const repaired = repairLlmJson(raw);
     try {
       return JSON.parse(repaired);
@@ -11987,10 +12023,7 @@ async function translateArticle(data) {
       const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
       const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
       console.error(`  🔄 Retry ${label} con maxTokens=${retry1Tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
-      const raw2 = await callLLM(
-        [{ role: 'user', content: safePrompt }],
-        { temperature: 0.5, maxTokens: retry1Tokens, jsonMode: true },
-      );
+      const raw2 = await call(retry1Tokens);
       try {
         const result = JSON.parse(repairLlmJson(raw2));
         console.error(`  ✅ Retry riuscito per ${label}`);
@@ -11999,10 +12032,7 @@ async function translateArticle(data) {
         console.error(`  ⚠️  Retry 1 fallito (${label}): ${retryErr.message} — tentativo 2...`);
         // Third attempt with maximum tokens
         const retry2Tokens = 16000;
-        const raw3 = await callLLM(
-          [{ role: 'user', content: safePrompt }],
-          { temperature: 0.3, maxTokens: retry2Tokens, jsonMode: true },
-        );
+        const raw3 = await call(retry2Tokens, 0.3);
         try {
           const result3 = JSON.parse(repairLlmJson(raw3));
           console.error(`  ✅ Retry 2 riuscito per ${label}`);
@@ -12038,6 +12068,7 @@ async function translateArticle(data) {
           makeChunkPrompt(chunk, i, chunks.length),
           Math.max(5000, Math.ceil(countWords(chunk) * 5)),
           `${labelPrefix}-p${i + 1}`,
+          { translation: true },
         ),
       ),
     );
@@ -12113,7 +12144,7 @@ ${terminologyByLang[targetLang] || ''}`;
         const result = await callWithRetry(makePrompt(
           `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${bodyText}`,
           `{"${bodyKey}": "..."}`,
-        ), bodyTokens(bodyText), `${lang}:${bodyKey.replace('body', 'b')}`);
+        ), bodyTokens(bodyText), `${lang}:${bodyKey.replace('body', 'b')}`, { translation: true });
         // A model answering {"body1": {...}} / {"body1": [...]} still parses as
         // valid JSON. Returning it would carry an object into a string context
         // downstream, which stringifies to the literal "[object Object]" and
@@ -12165,7 +12196,7 @@ ${terminologyByLang[targetLang] || ''}`;
       ? callWithRetry(makePrompt(
           `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceContent.faq)}`,
           '{"faq": [{"q": "...", "a": "..."}]}',
-        ), 1500, `${targetLang}:faq`).catch(err => {
+        ), 1500, `${targetLang}:faq`, { translation: true }).catch(err => {
           console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message}`);
           return { faq: sourceContent.faq }; // Fallback to Italian
         })
@@ -12192,7 +12223,7 @@ ${terminologyByLang[targetLang] || ''}`;
       callWithRetry(makePrompt(
         `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.`,
         '{"title": "...", "excerpt": "..."}',
-      ), 1000, `${targetLang}:meta`).catch(onTranslateFail(`${targetLang}:meta`)),
+      ), 1000, `${targetLang}:meta`, { translation: true }).catch(onTranslateFail(`${targetLang}:meta`)),
       // Body fields with dynamic sizing + sub-chunking safety.
       ...bodyFields.map((field) =>
         translateBodyField(field, sourceContent[field], targetLang)
@@ -12420,6 +12451,7 @@ ${terminologyByLang[targetLang] || ''}`;
             `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
             1500,
             `${locale}:${recoveryField}-missing-retry`,
+            { translation: true },
           );
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
@@ -12535,6 +12567,7 @@ ${terminologyByLang[targetLang] || ''}`;
             buildRetryPrompt(itValue, 0, 1),
             Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
             `${locale}:${field}-truncation-retry`,
+            { translation: true },
           );
           retried = translatedStringOrNull(parsed?.[field], locale);
         }
@@ -12604,6 +12637,7 @@ ${terminologyByLang[targetLang] || ''}`;
             buildForcedRetranslationPrompt({ langName, field, itValue: itVal }),
             1000,
             `${locale}:${field}-retry`,
+            { translation: true },
           );
           // Gemello di #798: anche qui il retry SOSTITUIVA il campo con
           // qualunque stringa non vuota, e su `title` quella stringa diventa
@@ -12644,7 +12678,12 @@ ${terminologyByLang[targetLang] || ''}`;
     lane: AI_MODELS.CODEX_CLI_PRIMARY,
     isLaneAvailable: () => pendingBodySecondLaneAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
-    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(itValue, locale, field),
+    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(
+      itValue,
+      locale,
+      field,
+      { onCodexCall: () => { translationRecoveryCodexCalls += 1; } },
+    ),
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
@@ -12675,6 +12714,7 @@ ${terminologyByLang[targetLang] || ''}`;
           `Riformula il seguente titolo in ${langName} per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${initialCap.originalLength} caratteri, troppo lungo):\n${localeContent.title}\n\nTITOLO ITALIANO ORIGINALE (riferimento):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula in modo conciso.\n\nRispondi SOLO con JSON: {"title": "..."}`,
           1000,
           `${locale}:title-length-retry`,
+          { translation: true },
         );
         // Il retry accorcia: chiedendo «MASSIMO 60 caratteri» il modo tipico di
         // sbagliare e' accorciare TROPPO, e `capBlogTitle` sotto non impone
@@ -12709,6 +12749,24 @@ ${terminologyByLang[targetLang] || ''}`;
     applyMicrocopyGuard(localeContent, locale);
   }
 
+  const cascadeStatsAfterTranslation = getCascadeStats();
+  const codexRequests = (cascadeStatsAfterTranslation.codexTranslation?.calls || 0)
+    - (cascadeStatsBeforeTranslation.codexTranslation?.calls || 0);
+  const codexTexts = (cascadeStatsAfterTranslation.codexTranslation?.texts || 0)
+    - (cascadeStatsBeforeTranslation.codexTranslation?.texts || 0);
+  const codexSeconds = ((cascadeStatsAfterTranslation.codexTranslation?.spentMs || 0)
+    - (cascadeStatsBeforeTranslation.codexTranslation?.spentMs || 0)) / 1000;
+  const tierDelta = Object.fromEntries(Object.keys(cascadeStatsAfterTranslation.tierHits)
+    .map((tier) => [tier, (cascadeStatsAfterTranslation.tierHits[tier] || 0)
+      - (cascadeStatsBeforeTranslation.tierHits[tier] || 0)]));
+  const translatedFields = Object.values(tierDelta).reduce((sum, value) => sum + Math.max(0, value), 0);
+  const codexFields = Math.max(0, tierDelta.codex || 0);
+  const fallbackFields = Math.max(0, translatedFields - codexFields);
+  console.error(
+    `  📏 Traduzioni: Codex ${codexRequests} richieste/${codexTexts} testi/${codexFields} campi `
+    + `in ${codexSeconds.toFixed(1)}s; fallback MT ${fallbackFields} campi; `
+    + `recovery Codex ${translationRecoveryCodexCalls} chiamate`,
+  );
   console.error(`  ✅ Articolo assemblato — ${Object.keys(data.content).length} lingue`);
 }
 
@@ -15305,7 +15363,7 @@ const RUN_START_MS = Date.now();
 /**
  * Margine fra la scadenza del tier di traduzione Codex e il budget wall-clock.
  *
- * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s di orologio con almeno
+ * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 900 s di orologio con almeno
  * una richiesta Codex in volo, contati dall'inizio delle traduzioni) non
  * conosce l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
  * traduzioni erano ancora in corso quando il `timeout` del workflow ha ucciso

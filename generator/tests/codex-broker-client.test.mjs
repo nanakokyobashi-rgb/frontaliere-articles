@@ -137,7 +137,6 @@ test('callLLM non apre il broker per una chiamata default senza opt-in', async (
   try {
     assert.equal(
       await callLLM(messages, {
-        model: AI_MODELS.GEMINI_FLASH,
         maxRetriesPerModel: 1,
       }),
       'DEFAULT FALLBACK',
@@ -218,6 +217,25 @@ test('chiede il segnale di avvio e toglie i byte di controllo prima della rispos
   assert.equal(requests[0].notifyStart, true);
   // callLLM non usa mai i tool dell'agente: il broker risponde col profilo function.
   assert.equal(requests[0].profile, 'function');
+});
+
+test('solo una chiamata di traduzione con opt-in ritenta una chiusura di trasporto', async () => {
+  let attempt = 0;
+  behavior = (client) => {
+    attempt += 1;
+    if (attempt === 1) {
+      client.end();
+      return;
+    }
+    client.write('\x01');
+    client.end(`${JSON.stringify({ ok: true, result: 'PONG-RETRY' })}\n`);
+  };
+  assert.equal(await callCodex({
+    retryCodexTransport: true,
+    codexTransportRetries: 1,
+    codexTransportBackoffMs: 1,
+  }), 'PONG-RETRY');
+  assert.equal(requests.length, 2, 'il retry deve restare confinato all\'opt-in della traduzione');
 });
 
 test('una richiesta mai partita scade come attesa in coda, senza toccare lo score', async () => {

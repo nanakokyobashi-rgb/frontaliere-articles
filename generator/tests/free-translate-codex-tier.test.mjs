@@ -228,6 +228,7 @@ test('DeepL 456 e Azure 401: tier Codex, con il prompt stretto e la sola lane Co
   const after = codexCounters();
   assert.equal(after.hits - before.hits, 1);
   assert.equal(lines.filter((l) => l.includes('traduzioni via Codex Luna Max')).length, 1);
+  assert.doesNotMatch(lines.join('\n'), /DeepL key|Azure key|HTTP 456|HTTP 401|credenziali rifiutate/);
 
   const { messages, opts } = calls[0];
   const system = messages.find((m) => m.role === 'system').content;
@@ -510,6 +511,50 @@ test('una voce di gruppo avvolta in una cornice di codice arriva senza cornice',
   });
 });
 
+test('il JSON batch recintato passa dalla riparazione comune', async () => {
+  await withLanes(1, async () => {
+    const answer = codexAnswer();
+    const calls = stubCodex((messages) => {
+      const items = batchItems(messages);
+      if (!items) return answer(messages);
+      const payload = JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: translationOf(text) })) });
+      const fence = '```';
+      return `${fence}json\n${payload}\n${fence}`;
+    });
+    const texts = numbered(3);
+    const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+    assert.equal(calls.length, 2);
+    assert.deepEqual(value, texts.map(translationOf));
+  });
+});
+
+test('la fixture articolo 3 body + meta + FAQ su EN/DE/FR resta in pochi batch', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '12';
+  try {
+    await withLanes(2, async () => {
+      const fields = ['meta:title', 'meta:excerpt', 'body1', 'body2', 'body3', 'faq.q', 'faq.a'];
+      const locales = ['en', 'de', 'fr'];
+      const calls = stubCodex((messages) => {
+        const items = batchItems(messages);
+        if (items) return JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: `CODEX ${text}` })) });
+        return 'CODEX testo singolo';
+      });
+      const results = await Promise.all(locales.flatMap((locale) => fields.map((field) => freeTranslate({
+        text: `${IT} [${locale}/${field}]`,
+        sourceLang: 'it',
+        targetLang: locale,
+        fieldType: field.startsWith('meta:') ? 'title' : 'description',
+      }))));
+      assert.equal(results.length, 21);
+      assert.ok(results.every((value) => value.startsWith('CODEX')));
+      assert.equal(calls.length, 8, 'la fixture misurata deve usare 8 richieste batch, non una per segmento');
+      assert.ok(calls.length <= 12);
+    });
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+});
+
 test('FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS=1 con una corsia torna una richiesta per testo, una alla volta', async () => {
   process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '1';
   try {
@@ -553,6 +598,8 @@ test('con le corsie occupate i testi in coda partono insieme, con lo schema a id
     assert.deepEqual(opts.jsonSchema.schema.properties.items.items.required, ['id', 'text']);
     assert.deepEqual(opts.chain, [AI_MODELS.CODEX_CLI_PRIMARY]);
     assert.equal(opts.bypassForceChain, true);
+    assert.equal(opts.retryCodexTransport, true);
+    assert.equal(opts.codexTransportRetries, 2);
   });
 });
 

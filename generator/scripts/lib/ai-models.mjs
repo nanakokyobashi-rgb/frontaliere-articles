@@ -9028,6 +9028,52 @@ function _routeModelCall(model, messages, opts) {
   }
 }
 
+// The translation lane is allowed a small, explicit retry for a broker
+// transport flap. This option is deliberately opt-in: fact-checks, generation,
+// metadata and second opinions must not acquire another Codex attempt just
+// because Codex happens to be first in DEFAULT_CHAIN (regression #2302).
+const CODEX_TRANSLATION_TRANSPORT_RETRIES_DEFAULT = 2;
+const CODEX_TRANSLATION_TRANSPORT_RETRIES_MAX = 2;
+const CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_DEFAULT = 1_000;
+const CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_MAX = 10_000;
+
+function _codexTransportRetryCount(opts) {
+  if (opts?.retryCodexTransport !== true) return 0;
+  const raw = Number(opts.codexTransportRetries);
+  const configured = Number.isInteger(raw) && raw >= 0 ? raw : CODEX_TRANSLATION_TRANSPORT_RETRIES_DEFAULT;
+  return Math.min(configured, CODEX_TRANSLATION_TRANSPORT_RETRIES_MAX);
+}
+
+function _isRetryableCodexTransport(error) {
+  if (!error?.transportFault || error.nonRetryable) return false;
+  // Quota/request-budget responses are transport-shaped so they can be
+  // classified as transient by the run summary, but retrying them only spends
+  // the same exhausted broker budget again.
+  if (/quota|rate.?limit|request limit|usage limit|budget|exhausted/i.test(String(error.message || ''))) return false;
+  if (_codexBrokerGoneSocket) return false;
+  return true;
+}
+
+async function _callModelWithCodexTransportRetry(model, messages, opts) {
+  const retries = getProvider(model) === PROVIDER.CODEX_CLI ? _codexTransportRetryCount(opts) : 0;
+  let attempt = 0;
+  while (true) {
+    try {
+      return await _callModel(model, messages, opts);
+    } catch (error) {
+      if (attempt >= retries || !_isRetryableCodexTransport(error)) throw error;
+      const backoffRaw = Number(opts.codexTransportBackoffMs);
+      const backoffBase = Number.isFinite(backoffRaw) && backoffRaw >= 0
+        ? Math.min(backoffRaw, CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_MAX)
+        : CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_DEFAULT;
+      const waitMs = Math.min(backoffBase * (2 ** attempt), CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_MAX);
+      if (opts.deadlineMs && Date.now() + waitMs >= opts.deadlineMs) throw error;
+      await sleep(waitMs);
+      attempt += 1;
+    }
+  }
+}
+
 // ── Public API ───────────────────────────────────────────────
 
 /**
@@ -9043,6 +9089,8 @@ function _routeModelCall(model, messages, opts) {
  * @param {number} [opts.timeout=30000]
  * @param {number} [opts.maxRetriesPerModel=5]
  * @param {number} [opts.backoffMs=2500]
+ * @param {boolean} [opts.retryCodexTransport=false] — opt-in retry for Codex broker transport flaps
+ * @param {number} [opts.codexTransportRetries=2] — maximum retries when the opt-in is enabled
  * @returns {Promise<string>} — Text content from the model
  */
 export async function callSingleModel(messages, opts = {}) {
@@ -9074,7 +9122,7 @@ export async function callSingleModel(messages, opts = {}) {
   const callOpts = { ...o, modelUsedRef: callModelRef };
 
   try {
-    const result = await _callModel(model, messages, callOpts);
+    const result = await _callModelWithCodexTransportRetry(model, messages, callOpts);
     const servedModel = callModelRef.model || model;
     recordModelSuccess(servedModel, { recordScore: o.recordScore });
     if (o.modelUsedRef && typeof o.modelUsedRef === 'object') {
@@ -9133,6 +9181,8 @@ export async function callSingleModel(messages, opts = {}) {
  *   chain (after sort and preference), e.g. the model whose HTTP-200 answer the
  *   caller just rejected. Ignored under AI_MODELS_FORCE_CHAIN and when it would
  *   leave the chain empty; disables the response cache for the call.
+ * @param {boolean} [opts.retryCodexTransport=false] — opt-in retry for Codex broker transport flaps
+ * @param {number} [opts.codexTransportRetries=2] — maximum retries when the opt-in is enabled
  * @returns {Promise<string>} — Text content from whichever model succeeded
  */
 export async function callLLM(messages, opts = {}) {
@@ -9450,7 +9500,7 @@ export async function callLLM(messages, opts = {}) {
       // callers that inspect the serving model after a scored fallback.
       const callModelRef = { model, provider };
       const callOpts = { ...o, modelUsedRef: callModelRef };
-      const result = await _callModel(model, messages, callOpts);
+      const result = await _callModelWithCodexTransportRetry(model, messages, callOpts);
       const servedModel = callModelRef.model || model;
 
       // ✅ Success — boost this model's score so it stays near the top
