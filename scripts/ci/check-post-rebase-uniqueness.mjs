@@ -77,7 +77,7 @@ import { fileURLToPath } from 'node:url';
 import { activeCorpusCoreEntries } from '../lib/corpus-sections.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
-import { findContentDuplicate } from '../../generator/scripts/create-article.mjs';
+import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
