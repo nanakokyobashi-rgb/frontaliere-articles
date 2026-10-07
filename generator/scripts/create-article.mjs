@@ -292,6 +292,9 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/sha
 import {
   CANTON_SECTION_DISABLED_MARKER,
   CANTON_SECTIONS_ENABLED_ENV,
+  CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+  CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS,
+  CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
   buildCantonProfile,
   cantonClassifierPrompt,
   cantonHeadlineSelectionPrompt,
@@ -900,12 +903,12 @@ function classifierSourceHint(url) {
 // of the memo key — otherwise the same title from two different sections of two
 // different outlets would resolve to whichever verdict was computed first.
 // Memoizza la PROMISE, non il risultato: vedi `_preSpendGateCache`.
-function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
+function classifyFrontaliereRelevance(headline, summary, sourceUrl, deadlineMs = null) {
   const cacheKey = preSpendGateCacheKey(headline, sourceUrl);
   if (cacheKey && _preSpendGateCache.has(cacheKey)) {
     return _preSpendGateCache.get(cacheKey);
   }
-  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl);
+  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs);
   if (cacheKey) {
     _preSpendGateCache.set(cacheKey, pending);
     pending.catch(() => { _preSpendGateCache.delete(cacheKey); });
@@ -913,9 +916,24 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
   return pending;
 }
 
-async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
+async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs = null) {
   const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
+  const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
+  const classifierDeadline = deadlineMs ?? (IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS);
+  const remainingClassifierMs = classifierDeadline - Date.now();
+  if (remainingClassifierMs <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
+  const classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
+  if (classifierCallTimeout <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
   const prompt = IS_CANTON
     ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
     : IS_FRONTALIERE
@@ -957,7 +975,10 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         model,
         temperature: 0,
         maxTokens: 80,
-        timeout: 30_000,
+        // Il timeout HTTP non puo' superare il residuo della deadline assoluta:
+        // ai-models controlla la deadline fra i fallback, ma una richiesta gia'
+        // partita puo' restare in volo fino al suo timeout.
+        timeout: classifierCallTimeout,
         jsonMode: false,
         // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
         // camminare l'intera catena di fallback di ai-models.mjs. Il roster
@@ -966,7 +987,9 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
         // diretto, quindi il default del wrapper locale `callLLM` (che il
         // deadlineMs ce l'ha) non si eredita: va passato a mano.
-        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+        // deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS resta il termine per
+        // le sezioni storiche; la cantonale usa una finestra piu' stretta.
+        deadlineMs: classifierDeadline,
       },
     );
   } catch (err) {
@@ -1073,6 +1096,15 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // legacy anchor-only fast-path (pre-2026-05-15 behaviour, accepts on
   // anchor match without LLM confirmation).
   const classifierEnabled = (process.env.PRESPEND_TOPIC_GATE_CLASSIFIER ?? '1') !== '0';
+  // Cantonale: una sola finestra assoluta per tutto il gate, non una nuova
+  // finestra per ogni candidate. Cosi' la concorrenza non moltiplica i 45 s
+  // per il numero di classifier avviati nello stesso giro.
+  const classifierDeadline = IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS;
   // 2026-08-18 — IL CAP E' DISPONIBILE, NON IMPOSTO.
   // Il JSDoc dichiarava 12 e il codice usava `?? headlines.length`, cioe' il
   // ramo «budget esaurito» era irraggiungibile per costruzione. #416 ha
@@ -1173,7 +1205,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   const toClassify = plan.filter(p => p.kind === 'classify');
   const verdicts = await mapWithConcurrency(toClassify, concurrency, async (p) => {
     try {
-      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText);
+      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText, classifierDeadline);
     } catch {
       // Should not happen — classifyFrontaliereRelevance already fails open
       // — but belt+suspenders: keep the headline on any unexpected throw.
@@ -15529,8 +15561,9 @@ async function exitAfterFlush(code) {
 }
 
 async function main() {
-  // Sezione cantonale spenta (D16): `enabled` nel profilo o l'elenco di
-  // Remote Config CANTON_ARTICLE_SECTIONS_ENABLED, default nessun cantone.
+  // Sezione cantonale spenta (D16): `enabled` nel profilo attiva la superficie
+  // del corpus, ma la generazione richiede anche CANTON_ARTICLE_SECTIONS_ENABLED
+  // da Remote Config; default nessun cantone.
   // Prima di ogni lettura o scrittura: una sezione spenta non tocca niente ed
   // esce 0 con un marcatore che il workflow (P8) e i log possono contare.
   if (IS_CANTON) {
@@ -15545,12 +15578,12 @@ async function main() {
       console.error(`  ⚠️ ${CANTON_SECTIONS_ENABLED_ENV}: token non riconosciuti ignorati: ${gate.unknown.join(', ')}`);
     }
     if (!gate.enabled) {
-      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo enabled=false, assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
+      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo non attivo nel corpus oppure assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME}`] });
       await exitAfterFlush(0);
       return;
     }
-    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${gate.via === 'profile' ? 'profilo enabled' : CANTON_SECTIONS_ENABLED_ENV})`);
+    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${CANTON_SECTIONS_ENABLED_ENV} e profilo corpus enabled)`);
     // Lo stato della sezione vive in data/sections/<id>/ (D18) e write() non
     // crea cartelle: senza questa riga il primo salvataggio del ledger URL->id
     // fallirebbe (in silenzio, e' un best-effort) e il dedup della fonte
@@ -15904,7 +15937,18 @@ async function main() {
       // run 26440805420: 193 RSS candidates dropped because the gate had
       // already emptied headlines[] used as the resolver atlas.
       _provenHeadlinesPreGate = headlines.slice();
-      headlines = await applyPreSpendTopicGate(headlines);
+      const preSpendOptions = IS_CANTON
+        ? {
+          // The canton classifier is fail-open: candidates over the cap remain
+          // unclassified and are still checked by REGOLA #0 downstream. This
+          // bounds provider wait time without dropping a possible local story.
+          maxClassifier: Math.min(
+            CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+            DEFAULT_MAX_CLASSIFIER_CALLS ?? CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+          ),
+        }
+        : {};
+      headlines = await applyPreSpendTopicGate(headlines, preSpendOptions);
       if (beforePreSpendGate > headlines.length) {
         console.error(`  📋 Post-pre-spend gate: ${headlines.length}/${beforePreSpendGate} headline rimanenti\n`);
       }
@@ -16324,7 +16368,18 @@ async function main() {
       // anche a budget wall-clock esaurito (il riepilogo e' il contratto).
       await exitDryRunScan({ chosen: null, tier: null, pool: null, poolSize: 0 });
     } else if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
+      const note = `No article after news pool wall-clock budget (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min); evergreen fallback deferred`;
       console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
+      // Il pool news ha consumato il budget senza produrre un articolo. Questo
+      // e' un differimento dichiarato, non un return normale: senza il report
+      // e l'exit condiviso, il fail-closed del controllo di ritorno vede ancora
+      // `status=running` e trasforma una condizione prevista in
+      // `no-article-undeclared-exit`.
+      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
+      // Ragione legittima #8 di otto (corpus): il budget della run e' finito
+      // prima del fallback evergreen; il giro successivo puo' scegliere fonti
+      // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool) {
       // Sezione cantonale: nessun pool evergreen generico per costruzione (i
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del

@@ -100499,6 +100499,176 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fischiava-treno-gorla': {
+    title: 'Fischiava il treno: festa ferroviaria a Gorla Minore',
+    description: '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    keywords: 'frontalieri, ticino, svizzera, italia, fischiava, treno, festa, ferroviaria',
+    ogTitle: 'Gorla Minore: festa per la storia ferroviaria',
+    ogDescription: '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    canonicalPath: '/articoli-frontaliere/fischiava-treno-gorla/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fischiava il treno: festa ferroviaria a Gorla Minore",
+      "description": "## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mobilita-trenord-aumento-biglietti-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Evento ferroviario vicino alla vecchia stazione di Gorla Minore"
+      },
+      "datePublished": "2026-10-07T04:45:21+00:00",
+      "dateModified": "2026-10-07T04:45:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fischiava-treno-gorla/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-clan-nazarbayev-ceresio': {
+    title: 'Nazarbayev sul Ceresio: petrolio, ville e permessi',
+    description: 'L\'inchiesta sul commercio di materie prime racconta l\'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno nel racconto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nazarbayev, ceresio, petrolio, ville',
+    ogTitle: 'Clan Nazarbayev sul Ceresio: petrolio e ville',
+    ogDescription: 'La quarta puntata sul commercio di materie prime segue come il clan Nazarbayev è arrivato sul Ceresio. Il titolo parla di Luganistan, tra petrolio, ville e strani permessi di soggiorno, nel racconto di una cleptocrazia.',
+    canonicalPath: '/articoli-frontaliere/clan-nazarbayev-ceresio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
+      "description": "L'inchiesta sul commercio di materie prime racconta l'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno nel racconto.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ville sul Ceresio nel racconto sul clan Nazarbayev"
+      },
+      "datePublished": "2026-10-07T04:58:11+00:00",
+      "dateModified": "2026-10-07T04:58:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/clan-nazarbayev-ceresio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-monte-olimpino-treni-weekend': {
+    title: 'Treni Como-Svizzera: 4 weekend di chiusura nel 2026',
+    description: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    keywords: 'frontalieri, ticino, svizzera, italia, treni, como-svizzera, weekend, chiusura',
+    ogTitle: 'Monte Olimpino 1: chiusure ferroviarie nel 2026',
+    ogDescription: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    canonicalPath: '/articoli-frontaliere/monte-olimpino-treni-weekend/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "description": "## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/como-crisi-abitativa-alloggi-sfitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale su una linea transfrontaliera tra Como e la Svizzera"
+      },
+      "datePublished": "2026-10-07T05:47:57+00:00",
+      "dateModified": "2026-10-07T05:47:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/monte-olimpino-treni-weekend/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hotel-ticino-140-licenziati': {
+    title: 'Due hotel chiusi in Ticino: 140 licenziati | Frontaliere Ticino',
+    description: 'Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, hotel, chiusi, licenziati, società',
+    ogTitle: 'Due hotel chiusi in Ticino: 140 licenziati',
+    ogDescription: 'La chiusura di Principe Leopoldo e Villa Sassa porta a 140 licenziamenti. Il presidente Daniele Lardi rassicura sul possibile rientro di buona parte del personale e annuncia la valutazione di misure di accompagnamento.',
+    canonicalPath: '/articoli-frontaliere/hotel-ticino-140-licenziati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Due hotel chiusi in Ticino: 140 licenziati",
+      "description": "Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/hotel-ticino-76-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I due hotel Principe Leopoldo e Villa Sassa in Ticino"
+      },
+      "datePublished": "2026-10-07T06:29:50+00:00",
+      "dateModified": "2026-10-07T06:29:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hotel-ticino-140-licenziati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-domodossola-arresto-hashish-stazione': {
+    title: 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    description: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    keywords: 'frontalieri, ticino, svizzera, italia, domodossola, arresto, chilo, hashish',
+    ogTitle: 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    ogDescription: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    canonicalPath: '/articoli-frontaliere/domodossola-arresto-hashish-stazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Domodossola: arresto per chilo di hashish nel bagaglio",
+      "description": "## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-friburgo-contestazione-canone.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La stazione internazionale di Domodossola, dove è avvenuto l'arresto per traffico di stupefacenti"
+      },
+      "datePublished": "2026-10-07T06:58:03+00:00",
+      "dateModified": "2026-10-07T06:58:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/domodossola-arresto-hashish-stazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

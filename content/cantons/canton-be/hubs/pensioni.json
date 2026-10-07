@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-be:pensioni",
+  "section": "canton-be",
+  "canton": "BE",
+  "topic": "pensioni",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "22cbc2bf562d08e019e0093e6aea894b4adae86cebe4c3a6977f7999512c3076",
+  "blocks": [
+    {
+      "id": "parametri-previdenza",
+      "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "casse-cantonali",
+      "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "imposta-capitale",
+      "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BE",
+      "topic": "pensioni",
+      "locale": "it",
+      "intro": "Nel Canton Berna, la previdenza poggia sui tre pilastri svizzeri: AVS, cassa pensione e risparmio privato. Questa pagina riunisce i parametri federali dell’anno, le casse di riferimento, l’imposta sul prelievo del capitale e gli articoli della redazione su pensioni e previdenza.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Rendita AVS massima (mensile)",
+          "value": "2520 CHF",
+          "note": "valore federale 2026",
+          "sourceName": "Centro d’informazione AVS/AI e Ufficio federale delle assicurazioni sociali"
+        },
+        {
+          "label": "Versamento massimo nel pilastro 3a (con cassa pensione)",
+          "value": "7258 CHF",
+          "note": "valore federale 2026",
+          "sourceName": "Centro d’informazione AVS/AI e Ufficio federale delle assicurazioni sociali"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Parametri della previdenza 2026",
+          "description": "Importi e aliquote federali validi in tutta la Svizzera: primo pilastro (AVS), secondo pilastro (LPP) e pilastro 3a.",
+          "items": [
+            {
+              "label": "Rendita AVS minima (mensile)",
+              "value": "1260 CHF"
+            },
+            {
+              "label": "Rendita AVS massima (mensile)",
+              "value": "2520 CHF"
+            },
+            {
+              "label": "Contributi AVS/AI/IPG a carico del dipendente",
+              "value": "5,3 %"
+            },
+            {
+              "label": "Soglia d’entrata LPP (salario annuo)",
+              "value": "22.680 CHF"
+            },
+            {
+              "label": "Deduzione di coordinamento LPP",
+              "value": "26.460 CHF"
+            },
+            {
+              "label": "Aliquota minima di conversione LPP",
+              "value": "6,8 %"
+            },
+            {
+              "label": "Versamento massimo nel pilastro 3a (con cassa pensione)",
+              "value": "7258 CHF"
+            },
+            {
+              "label": "Versamento massimo nel pilastro 3a (senza cassa pensione)",
+              "value": "36.288 CHF"
+            }
+          ],
+          "sourceName": "Centro d’informazione AVS/AI e Ufficio federale delle assicurazioni sociali",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Casse del cantone",
+          "description": "Cassa di compensazione AVS e cassa pensione pubblica di riferimento, con il sito ufficiale.",
+          "items": [
+            {
+              "label": "Ausgleichskasse des Kantons Bern",
+              "detail": "Cassa di compensazione",
+              "url": "https://www.akbern.ch"
+            },
+            {
+              "label": "Bernische Pensionskasse (BPK)",
+              "detail": "Cassa pensione pubblica",
+              "url": "https://bpk.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Imposta sul prelievo del capitale 2026",
+          "description": "Imposte dovute sul prelievo in capitale della previdenza a 65 anni, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Prelievo di 100.000 CHF (Bern)",
+              "value": "4628 CHF"
+            },
+            {
+              "label": "Prelievo di 250.000 CHF (Bern)",
+              "value": "16.323 CHF"
+            },
+            {
+              "label": "Prelievo di 500.000 CHF (Bern)",
+              "value": "41.259 CHF"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Informationsanlass für angehende Pensionierte",
+              "date": "2026-07-21",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AVS e prestazioni complementari nel Canton Berna",
+          "url": "/articoli-svizzera/avs-integrazioni-canton-berna/",
+          "excerpt": "Come funziona il calcolo della rendita AVS nel Canton Berna: contributi obbligatori, lacune contributive, prestazioni complementari e copertura del minimo vitale.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna",
+          "url": "/articoli-svizzera/guida-terzo-3a-berna/",
+          "excerpt": "Guida 2026 al 3a nel canton Berna: massimale indicizzato, tre livelli fiscali e confronto tra provider bancari e assicurativi.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
+          "title": "AVS Cantone Berna: rendita, lacune e prestazioni",
+          "url": "/articoli-svizzera/avs-berna-rendita-lacune-contributive/",
+          "excerpt": "Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo vitale.",
+          "date": "2026-08-22T02:05:16.385Z"
+        },
+        {
+          "title": "AVS e prestazioni complementari nel Cantone Berna",
+          "url": "/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/",
+          "excerpt": "La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell'AVS, ma la fonte non fornisce informazioni specifiche.",
+          "date": "2026-08-13T16:04:43.335Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Calcolatore della previdenza",
+          "url": "/tasse-e-pensione/calcola-previdenza/"
+        },
+        {
+          "label": "Simulatore del terzo pilastro",
+          "url": "/tasse-e-pensione/simula-terzo-pilastro/"
+        },
+        {
+          "label": "Tutte le notizie sulle pensioni",
+          "url": "/pensioni/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "BE",
+      "topic": "pensioni",
+      "locale": "en",
+      "intro": "In the canton of Bern, retirement provision rests on the three Swiss pillars: AHV, the occupational pension fund and private savings. This page brings together this year’s federal parameters, the funds of reference, the tax on lump-sum withdrawals and our articles on pensions.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Maximum AHV pension (monthly)",
+          "value": "2,520 CHF",
+          "note": "federal value 2026",
+          "sourceName": "AHV/IV Information Centre and Federal Social Insurance Office"
+        },
+        {
+          "label": "Maximum pillar 3a payment (with a pension fund)",
+          "value": "7,258 CHF",
+          "note": "federal value 2026",
+          "sourceName": "AHV/IV Information Centre and Federal Social Insurance Office"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Pension parameters 2026",
+          "description": "Federal amounts and rates valid across Switzerland: first pillar (AHV), second pillar (BVG) and pillar 3a.",
+          "items": [
+            {
+              "label": "Minimum AHV pension (monthly)",
+              "value": "1,260 CHF"
+            },
+            {
+              "label": "Maximum AHV pension (monthly)",
+              "value": "2,520 CHF"
+            },
+            {
+              "label": "Employee share of AHV/IV/EO contributions",
+              "value": "5.3%"
+            },
+            {
+              "label": "BVG entry threshold (annual salary)",
+              "value": "22,680 CHF"
+            },
+            {
+              "label": "BVG coordination deduction",
+              "value": "26,460 CHF"
+            },
+            {
+              "label": "Minimum BVG conversion rate",
+              "value": "6.8%"
+            },
+            {
+              "label": "Maximum pillar 3a payment (with a pension fund)",
+              "value": "7,258 CHF"
+            },
+            {
+              "label": "Maximum pillar 3a payment (without a pension fund)",
+              "value": "36,288 CHF"
+            }
+          ],
+          "sourceName": "AHV/IV Information Centre and Federal Social Insurance Office",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Cantonal funds",
+          "description": "The AHV compensation fund and the public pension fund of reference, with their official websites.",
+          "items": [
+            {
+              "label": "Ausgleichskasse des Kantons Bern",
+              "detail": "Compensation fund",
+              "url": "https://www.akbern.ch"
+            },
+            {
+              "label": "Bernische Pensionskasse (BPK)",
+              "detail": "Public pension fund",
+              "url": "https://bpk.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Tax on lump-sum withdrawals 2026",
+          "description": "Tax due on a lump-sum pension withdrawal at 65, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Withdrawal of 100,000 CHF (Bern)",
+              "value": "4,628 CHF"
+            },
+            {
+              "label": "Withdrawal of 250,000 CHF (Bern)",
+              "value": "16,323 CHF"
+            },
+            {
+              "label": "Withdrawal of 500,000 CHF (Bern)",
+              "value": "41,259 CHF"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Informationsanlass für angehende Pensionierte",
+              "date": "2026-07-21",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AVS and complementary services in Canton Bern",
+          "url": "/en/swiss-articles/avs-integrations-canton-berna/",
+          "excerpt": "How the calculation of the AVS pension works in the Canton of Bern: mandatory contributions, contribution gaps, supplementary benefits and coverage of the minimum living allowance.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "Swiss third pillar 3a: 2026 benefits in the canton of Bern",
+          "url": "/en/swiss-articles/swiss-3a-pillar-bern-guide/",
+          "excerpt": "2026 Guide to 3a in the canton of Bern: indexed maximum, three tax levels, and comparison between banking and insurance providers.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
+          "title": "AVS Canton Bern: annuity, gaps and benefits",
+          "url": "/en/swiss-articles/avs-bern-pension-contribution-gaps/",
+          "excerpt": "First AVS pillar in the Canton of Bern: cantonal compensation fund, pension calculation, contribution gaps and benefits complementary to the minimum living allowance.",
+          "date": "2026-08-22T02:05:16.385Z"
+        },
+        {
+          "title": "AVS and complementary services in Canton Bern",
+          "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-berna-compensation-fund/",
+          "excerpt": "The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.",
+          "date": "2026-08-13T16:04:43.335Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Retirement calculator",
+          "url": "/en/taxes-and-pension/calculate-retirement/"
+        },
+        {
+          "label": "Third pillar simulator",
+          "url": "/en/taxes-and-pension/simulate-third-pillar/"
+        },
+        {
+          "label": "All pension news",
+          "url": "/en/pensions/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "BE",
+      "topic": "pensioni",
+      "locale": "de",
+      "intro": "Im Kanton Bern ruht die Vorsorge auf den drei Schweizer Säulen: AHV, Pensionskasse und privates Sparen. Diese Seite bündelt die eidgenössischen Eckwerte des Jahres, die zuständigen Kassen, die Steuer auf Kapitalbezügen und die Artikel der Redaktion zu Renten und Vorsorge.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Maximale AHV-Rente (monatlich)",
+          "value": "2’520 CHF",
+          "note": "Bundeswert 2026",
+          "sourceName": "Informationsstelle AHV/IV und Bundesamt für Sozialversicherungen"
+        },
+        {
+          "label": "Maximale Einzahlung in die Säule 3a (mit Pensionskasse)",
+          "value": "7’258 CHF",
+          "note": "Bundeswert 2026",
+          "sourceName": "Informationsstelle AHV/IV und Bundesamt für Sozialversicherungen"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Eckwerte der Vorsorge 2026",
+          "description": "Bundesweit gültige Beträge und Sätze: erste Säule (AHV), zweite Säule (BVG) und Säule 3a.",
+          "items": [
+            {
+              "label": "Minimale AHV-Rente (monatlich)",
+              "value": "1’260 CHF"
+            },
+            {
+              "label": "Maximale AHV-Rente (monatlich)",
+              "value": "2’520 CHF"
+            },
+            {
+              "label": "Arbeitnehmeranteil der AHV/IV/EO-Beiträge",
+              "value": "5.3 %"
+            },
+            {
+              "label": "BVG-Eintrittsschwelle (Jahreslohn)",
+              "value": "22’680 CHF"
+            },
+            {
+              "label": "BVG-Koordinationsabzug",
+              "value": "26’460 CHF"
+            },
+            {
+              "label": "BVG-Mindestumwandlungssatz",
+              "value": "6.8 %"
+            },
+            {
+              "label": "Maximale Einzahlung in die Säule 3a (mit Pensionskasse)",
+              "value": "7’258 CHF"
+            },
+            {
+              "label": "Maximale Einzahlung in die Säule 3a (ohne Pensionskasse)",
+              "value": "36’288 CHF"
+            }
+          ],
+          "sourceName": "Informationsstelle AHV/IV und Bundesamt für Sozialversicherungen",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Kassen des Kantons",
+          "description": "AHV-Ausgleichskasse und öffentliche Pensionskasse des Kantons mit offizieller Website.",
+          "items": [
+            {
+              "label": "Ausgleichskasse des Kantons Bern",
+              "detail": "Ausgleichskasse",
+              "url": "https://www.akbern.ch"
+            },
+            {
+              "label": "Bernische Pensionskasse (BPK)",
+              "detail": "Öffentliche Pensionskasse",
+              "url": "https://bpk.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Steuer auf Kapitalbezügen 2026",
+          "description": "Steuern auf einem Kapitalbezug aus der Vorsorge mit 65 Jahren für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bezug von 100’000 CHF (Bern)",
+              "value": "4’628 CHF"
+            },
+            {
+              "label": "Bezug von 250’000 CHF (Bern)",
+              "value": "16’323 CHF"
+            },
+            {
+              "label": "Bezug von 500’000 CHF (Bern)",
+              "value": "41’259 CHF"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Informationsanlass für angehende Pensionierte",
+              "date": "2026-07-21",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AHV und Ergänzungsleistungen im Kanton Bern",
+          "url": "/de/schweiz-artikel/ahv-zulagen-kanton-bern/",
+          "excerpt": "So funktioniert die Berechnung der AHV-Rente im Kanton Bern: Pflichtbeiträge, Beitragslücken, Ergänzungsleistungen und Lebensminimum.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "Schweizer Säule 3a: Vorteile 2026 im Kanton Bern",
+          "url": "/de/schweiz-artikel/3a-saeule-bern-leitfaden/",
+          "excerpt": "Leitfaden 2026 zur Säule 3a im Kanton Bern: indexierter Höchstbetrag, drei Steuerebenen und Vergleich von Bank- und Versicherungsanbietern.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
+          "title": "AHV Kanton Bern: Rente, Lücken und Leistungen",
+          "url": "/de/schweiz-artikel/avs-bern-rente-beitragslucken/",
+          "excerpt": "Erste AHV-Säule im Kanton Bern: kantonale Ausgleichskasse, Rentenberechnung, Beitragslücken und Ergänzungsleistungen zum Lebensminimum.",
+          "date": "2026-08-22T02:05:16.385Z"
+        },
+        {
+          "title": "AHV und Ergänzungsleistungen im Kanton Bern",
+          "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-berna-entschadigungsfonds/",
+          "excerpt": "Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.",
+          "date": "2026-08-13T16:04:43.335Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Vorsorge-Rechner",
+          "url": "/de/steuern-und-vorsorge/rente-berechnen/"
+        },
+        {
+          "label": "Rechner für die dritte Säule",
+          "url": "/de/steuern-und-vorsorge/dritte-saeule-simulieren/"
+        },
+        {
+          "label": "Alle Renten-Nachrichten",
+          "url": "/de/renten/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "BE",
+      "topic": "pensioni",
+      "locale": "fr",
+      "intro": "Dans le canton de Berne, la prévoyance repose sur les trois piliers suisses : l’AVS, la caisse de pension et l’épargne privée. Cette page réunit les paramètres fédéraux de l’année, les caisses de référence, l’impôt sur le retrait en capital et les articles de la rédaction sur les retraites.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Rente AVS maximale (mensuelle)",
+          "value": "2 520 CHF",
+          "note": "valeur fédérale 2026",
+          "sourceName": "Centre d’information AVS/AI et Office fédéral des assurances sociales"
+        },
+        {
+          "label": "Versement maximal au pilier 3a (avec caisse de pension)",
+          "value": "7 258 CHF",
+          "note": "valeur fédérale 2026",
+          "sourceName": "Centre d’information AVS/AI et Office fédéral des assurances sociales"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Paramètres de la prévoyance 2026",
+          "description": "Montants et taux fédéraux valables dans toute la Suisse : premier pilier (AVS), deuxième pilier (LPP) et pilier 3a.",
+          "items": [
+            {
+              "label": "Rente AVS minimale (mensuelle)",
+              "value": "1 260 CHF"
+            },
+            {
+              "label": "Rente AVS maximale (mensuelle)",
+              "value": "2 520 CHF"
+            },
+            {
+              "label": "Part salariale des cotisations AVS/AI/APG",
+              "value": "5,3 %"
+            },
+            {
+              "label": "Seuil d’entrée LPP (salaire annuel)",
+              "value": "22 680 CHF"
+            },
+            {
+              "label": "Déduction de coordination LPP",
+              "value": "26 460 CHF"
+            },
+            {
+              "label": "Taux de conversion minimal LPP",
+              "value": "6,8 %"
+            },
+            {
+              "label": "Versement maximal au pilier 3a (avec caisse de pension)",
+              "value": "7 258 CHF"
+            },
+            {
+              "label": "Versement maximal au pilier 3a (sans caisse de pension)",
+              "value": "36 288 CHF"
+            }
+          ],
+          "sourceName": "Centre d’information AVS/AI et Office fédéral des assurances sociales",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Caisses du canton",
+          "description": "Caisse de compensation AVS et caisse de pension publique de référence, avec leur site officiel.",
+          "items": [
+            {
+              "label": "Ausgleichskasse des Kantons Bern",
+              "detail": "Caisse de compensation",
+              "url": "https://www.akbern.ch"
+            },
+            {
+              "label": "Bernische Pensionskasse (BPK)",
+              "detail": "Caisse de pension publique",
+              "url": "https://bpk.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Impôt sur le retrait en capital 2026",
+          "description": "Impôts dus sur un retrait en capital de la prévoyance à 65 ans, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Retrait de 100 000 CHF (Bern)",
+              "value": "4 628 CHF"
+            },
+            {
+              "label": "Retrait de 250 000 CHF (Bern)",
+              "value": "16 323 CHF"
+            },
+            {
+              "label": "Retrait de 500 000 CHF (Bern)",
+              "value": "41 259 CHF"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Vergleichsrechnungen zur 13. Altersrente bei Witwen- und Witwerrenten",
+              "date": "2026-09-03",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
+            },
+            {
+              "label": "Informationsanlass für angehende Pensionierte",
+              "date": "2026-07-21",
+              "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AVS et prestations complémentaires dans le canton de Berne",
+          "url": "/fr/articles-suisse/ava-allocations-canton-berne/",
+          "excerpt": "Comment fonctionne le calcul de la rente AVS dans le canton de Berne : cotisations obligatoires, lacunes de cotisation, prestations complémentaires et couverture du minimum vital.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "Troisième pilier 3a suisse : avantages 2026 dans le canton de Berne",
+          "url": "/fr/articles-suisse/pilier-3a-berne-guide/",
+          "excerpt": "Guide 2026 du pilier 3a dans le canton de Berne : plafond indexé, trois niveaux fiscaux et comparaison entre les prestataires bancaires et les assureurs.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
+          "title": "AVS Canton de Berne : rente, lacunes et prestations",
+          "url": "/fr/articles-suisse/avs-berne-rente-lacunes-cotisations/",
+          "excerpt": "Premier pilier AVS dans le canton de Berne : caisse de compensation cantonale, calcul de la rente, lacunes contributives et prestations complémentaires au minimum vital.",
+          "date": "2026-08-22T02:05:16.385Z"
+        },
+        {
+          "title": "AVS et prestations complémentaires dans le canton de Berne",
+          "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berna-fonds-de-compensation/",
+          "excerpt": "La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l'AVS, mais la source ne fournit pas d'informations spécifiques.",
+          "date": "2026-08-13T16:04:43.335Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Calculateur de prévoyance",
+          "url": "/fr/impots-et-retraite/calculer-pension/"
+        },
+        {
+          "label": "Simulateur du troisième pilier",
+          "url": "/fr/impots-et-retraite/simuler-troisieme-pilier/"
+        },
+        {
+          "label": "Toute l’actualité des retraites",
+          "url": "/fr/retraites/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

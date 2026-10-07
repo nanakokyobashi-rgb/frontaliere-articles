@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gr:eventi",
+  "section": "canton-gr",
+  "canton": "GR",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "3b8ef7d988cfeb08d5d98479b27ed702d0a815359dd2f726ff11c77bc849a604",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-06T18:23:08.067Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GR",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nei Grigioni, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con l’Italia, l’Austria e il Liechtenstein: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco, italiano e romancio; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "142",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Giri in pony in Piazza Catrina",
+              "detail": "Catrina Experience",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Bartgeier-Tannenhähr-Arve",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+            },
+            {
+              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
+              "detail": "Chur",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Kids-Nachmittag mit Buchvorlesung",
+              "detail": "Thusis",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Felsberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+            },
+            {
+              "label": "Abendstille in Clugin",
+              "detail": "Clugin",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+            },
+            {
+              "label": "Orthodoxe Gesänge – Konzert in Andeer",
+              "detail": "Katholische Fatima-Kirche, Andeer",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+            },
+            {
+              "label": "Konzert Symphonic Brass Project",
+              "detail": "Hotel Laudinella, St. Moritz",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/grigioni/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "MisoXperience 2024: il festival degli sport all'aperto in Mesolcina",
+          "url": "/articoli-frontaliere/misoexperience-festival-sport-2024/",
+          "excerpt": "Dal 9 al 17 maggio, la valle Mesolcina ospita il MisoXperience Festival con kayak, bouldering e parapendio. Ecco il programma completo",
+          "date": "2026-05-05T19:17:57.904Z"
+        },
+        {
+          "title": "Roveredo, iniziativa popolare per un Carnevale accessibile a tutti",
+          "url": "/articoli-frontaliere/roveredo-carnevale-tutti-2026/",
+          "excerpt": "Un gruppo di cittadini di Roveredo lancia un'iniziativa per rendere il Carnevale Lingera più inclusivo e trasparente",
+          "date": "2026-05-06T09:32:17.339Z"
+        },
+        {
+          "title": "Torna il festival degli sport all'aperto in Mesolcina",
+          "url": "/articoli-frontaliere/mesolcina-festival-sport-2026/",
+          "excerpt": "Dal 9 al 17 maggio 2026, la Mesolcina ospita la sesta edizione di MisoXperience con kayak, bouldering e parapendio.",
+          "date": "2026-05-06T06:00:49.305Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tutti gli eventi nei Grigioni",
+          "url": "/eventi/grigioni/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/grigioni/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "GR",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In Graubünden, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders Italy, Austria and Liechtenstein: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German, Italian and Romansh; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "142",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Pony rides in Piazza Catrina",
+              "detail": "Catrina Experience",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Bartgeier-Tannenhähr-Arve",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+            },
+            {
+              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
+              "detail": "Chur",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Kids-Nachmittag mit Buchvorlesung",
+              "detail": "Thusis",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Felsberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+            },
+            {
+              "label": "Abendstille in Clugin",
+              "detail": "Clugin",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+            },
+            {
+              "label": "Orthodoxe Gesänge – Konzert in Andeer",
+              "detail": "Katholische Fatima-Kirche, Andeer",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+            },
+            {
+              "label": "Konzert Symphonic Brass Project",
+              "detail": "Hotel Laudinella, St. Moritz",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/graubunden/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Mesolcina Hosts MisoXperience 2024: Outdoor Sports Festival",
+          "url": "/en/cross-border-articles/misoexperience-sports-festival-2024/",
+          "excerpt": "From May 9 to 17, the Mesolcina valley will host the MisoXperience Festival featuring kayak, bouldering, and paragliding. Here is the complete program.",
+          "date": "2026-05-05T19:17:57.904Z"
+        },
+        {
+          "title": "Roveredo, initiative for an inclusive Carnival",
+          "url": "/en/cross-border-articles/roveredo-carnival-for-all-2026/",
+          "excerpt": "A group of citizens from Roveredo launches an initiative to make the Lingera Carnival more inclusive and transparent",
+          "date": "2026-05-06T09:32:17.339Z"
+        },
+        {
+          "title": "Outdoor sports festival returns to Mesolcina",
+          "url": "/en/cross-border-articles/mesolcina-sports-festival-2026/",
+          "excerpt": "From May 9 to 17, 2026, Mesolcina hosts the sixth edition of MisoXperience with kayaking, bouldering, and paragliding.",
+          "date": "2026-05-06T06:00:49.305Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "All events in Graubünden",
+          "url": "/en/events/graubunden/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/graubunden/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "GR",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "In Graubünden ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Italien, Österreich und Liechtenstein: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch, Italienisch und Rätoromanisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "142",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Ponyreiten auf der Piazza Catrina",
+              "detail": "Catrina Experience",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Bartgeier-Tannenhäher-Arve",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+            },
+            {
+              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
+              "detail": "Chur",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Kids-Nachmittag mit Buchvorlesung",
+              "detail": "Thusis",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Felsberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+            },
+            {
+              "label": "Abendstille in Clugin",
+              "detail": "Clugin",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+            },
+            {
+              "label": "Orthodoxe Gesänge – Konzert in Andeer",
+              "detail": "Katholische Fatima-Kirche, Andeer",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+            },
+            {
+              "label": "Konzert Symphonic Brass Project",
+              "detail": "Hotel Laudinella, St. Moritz",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/graubunden/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "MisoXperience 2024: Abenteuer in der Mesolcina",
+          "url": "/de/grenzgaenger-artikel/misoexperience-sportfestival-2024/",
+          "excerpt": "Vom 9. bis 17. Mai gastiert das MisoXperience Festival in der Mesolcina mit Kayak, Bouldern und Paragliding. Hier ist das umfassende Programm",
+          "date": "2026-05-05T19:17:57.904Z"
+        },
+        {
+          "title": "Roveredo: Initiative für einen inklusiven Karneval",
+          "url": "/de/grenzgaenger-artikel/roveredo-fasching-fur-alle-2026/",
+          "excerpt": "Eine Gruppe von Bürgern aus Roveredo startet eine Initiative, um den Lingera-Karneval inklusiver und transparenter zu gestalten",
+          "date": "2026-05-06T09:32:17.339Z"
+        },
+        {
+          "title": "MisoXperience: Sportfestival in der Mesolcina",
+          "url": "/de/grenzgaenger-artikel/mesolcina-sportfestival-2026/",
+          "excerpt": "Vom 9. bis 17. Mai 2026 findet die sechste Ausgabe von MisoXperience in der Mesolcina mit Kajak, Bouldern und Paragliding statt.",
+          "date": "2026-05-06T06:00:49.305Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen in Graubünden",
+          "url": "/de/veranstaltungen/graubunden/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "GR",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Aux Grisons, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec l’Italie, l’Autriche et le Liechtenstein : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand, italien et romanche ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "142",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Promenades à poney sur la Piazza Catrina",
+              "detail": "Catrina Experience",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Bartgeier-Tannenhähr-Arve",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+            },
+            {
+              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
+              "detail": "Chur",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Kids-Nachmittag mit Buchvorlesung",
+              "detail": "Thusis",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+            },
+            {
+              "label": "Kraft der Stille - Sitzen im Schweigen",
+              "detail": "Felsberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+            },
+            {
+              "label": "Spieleabend in der libraria",
+              "detail": "Scuol",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+            },
+            {
+              "label": "Abendstille in Clugin",
+              "detail": "Clugin",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+            },
+            {
+              "label": "Orthodoxe Gesänge – Konzert in Andeer",
+              "detail": "Katholische Fatima-Kirche, Andeer",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+            },
+            {
+              "label": "Konzert Symphonic Brass Project",
+              "detail": "Hotel Laudinella, St. Moritz",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/grisons/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "MisoXperience 2024: le festival des sports à l'air libre en Mesolcina",
+          "url": "/fr/articles-frontalier/festival-des-sports-misoexperience-2024/",
+          "excerpt": "Du 9 au 17 mai, la vallée de Mesolcina accueille le MisoXperience Festival avec kayak, escalade sur blocs et parapente. Voici le programme complet",
+          "date": "2026-05-05T19:17:57.904Z"
+        },
+        {
+          "title": "Roveredo, initiative pour un carnaval accessible à tous",
+          "url": "/fr/articles-frontalier/roveredo-carnaval-pour-tous-2026/",
+          "excerpt": "Un groupe de citoyens de Roveredo lance une initiative pour rendre le Carnaval Lingera plus inclusif et transparent",
+          "date": "2026-05-06T09:32:17.339Z"
+        },
+        {
+          "title": "Le festival des sports en plein air revient en Mesolcina",
+          "url": "/fr/articles-frontalier/festival-sports-mesolcina-2026/",
+          "excerpt": "Du 9 au 17 mai 2026, la Mesolcina accueille la sixième édition de MisoXperience avec du kayak, de l'escalade et du parapente.",
+          "date": "2026-05-06T06:00:49.305Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tous les événements aux Grisons",
+          "url": "/fr/evenements/grisons/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/grisons/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

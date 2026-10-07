@@ -98887,6 +98887,108 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-raffineria-cressier-carburanti': {
+    title: 'Diesel svizzero sfiora 2,50 franchi: allarme Cressier',
+    description: '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    keywords: 'frontalieri, ticino, svizzera, italia, diesel, svizzero, sfiora, franchi',
+    ogTitle: 'Diesel svizzero quasi a 2,50 franchi: Cressier',
+    ogDescription: '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    canonicalPath: '/articoli-svizzera/raffineria-cressier-carburanti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
+      "description": "## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/diesel-rincaro-geopolitica-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pompa di diesel in Svizzera con una raffineria sullo sfondo"
+      },
+      "datePublished": "2026-10-07T05:28:44+00:00",
+      "dateModified": "2026-10-07T05:28:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/raffineria-cressier-carburanti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-quattro-oggetti-urne-novembre': {
+    title: 'Voto del 29 novembre: IVA, AVS e quattro oggetti',
+    description: 'Il 29 novembre si voterà su quattro nuovi oggetti: aumento dell\'IVA per la 13esima AVS, due iniziative popolari e modifica della legge sul materiale bellico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, novembre, quattro, oggetti',
+    ogTitle: 'Voto del 29 novembre: IVA, AVS e quattro oggetti',
+    ogDescription: 'Il 29 novembre quattro oggetti arrivano alle urne: aumento dell\'IVA per la 13esima rendita AVS, due iniziative popolari e modifica della legge federale sul materiale bellico. Tamedia chiede ai lettori come voteranno.',
+    canonicalPath: '/articoli-svizzera/quattro-oggetti-urne-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
+      "description": "Il 29 novembre si voterà su quattro nuovi oggetti: aumento dell'IVA per la 13esima AVS, due iniziative popolari e modifica della legge sul materiale bellico.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/voto-iva-avs-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Urna svizzera e schede per il voto del 29 novembre"
+      },
+      "datePublished": "2026-10-07T06:42:41+00:00",
+      "dateModified": "2026-10-07T06:42:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/quattro-oggetti-urne-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-auto-elettrica-come-risparmiare-fino-al-50': {
+    title: 'Auto elettrica: come risparmiare fino al 50% | Frontaliere Ticino',
+    description: '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    keywords: 'frontalieri, ticino, svizzera, italia, auto, elettrica, risparmiare, fino',
+    ogTitle: 'Auto elettrica: come risparmiare fino al 50%',
+    ogDescription: '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    canonicalPath: '/articoli-svizzera/auto-elettrica-come-risparmiare-fino-al-50/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Auto elettrica: come risparmiare fino al 50%",
+      "description": "## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Auto elettrica: come risparmiare fino al 50%"
+      },
+      "datePublished": "2026-10-07T07:21:41+00:00",
+      "dateModified": "2026-10-07T07:21:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/auto-elettrica-come-risparmiare-fino-al-50/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -1,0 +1,80 @@
+// Metadati SEO degli articoli della sezione canton-gr (Grigioni).
+// Stessa forma voce di seo-blog-ch.ts; scritto da create-article.mjs.
+
+import type { SEOMetadata } from '../../seo/seoMetadataType';
+
+const BASE_URL = 'https://frontaliereticino.ch';
+
+const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
+
+  'blog-strada-calanca-chiusura-preventiva': {
+    title: 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
+    description: '## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura',
+    keywords: 'frontalieri, ticino, svizzera, italia, strada, calanca, chiusura, totale',
+    ogTitle: 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
+    ogDescription: '## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura',
+    canonicalPath: '/articoli-grigioni/strada-calanca-chiusura-preventiva/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+      "description": "## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pasture-chiusura-garanzie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada della Calanca chiusa per maltempo tra Molina Nord e Arvigo."
+      },
+      "datePublished": "2026-10-07T06:43:54+00:00",
+      "dateModified": "2026-10-07T06:43:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/strada-calanca-chiusura-preventiva/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-benzina-grigioni-deviazione': {
+    title: 'Prezzi benzina in Grigioni: quando conviene deviare',
+    description: 'In Grigioni, prezzi della benzina a livelli record: il calcolatore mostra quando il risparmio giustifica una deviazione verso una stazione più economica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, benzina, grigioni, quando',
+    ogTitle: 'Calcolatore benzina in Grigioni: prezzo e deviazione',
+    ogDescription: 'L\'articolo di Julian Reich del 5 ottobre 2026 presenta il calcolatore grigionese per valutare il rifornimento presso una stazione più economica: il prezzo da raggiungere e la distanza della deviazione sono i due elementi da confrontare.',
+    canonicalPath: '/articoli-grigioni/benzina-grigioni-deviazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi benzina in Grigioni: quando conviene deviare",
+      "description": "In Grigioni, prezzi della benzina a livelli record: il calcolatore mostra quando il risparmio giustifica una deviazione verso una stazione più economica.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/benzina-diesel-prezzi-calano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto davanti a un distributore lungo una strada dei Grigioni"
+      },
+      "datePublished": "2026-10-07T06:53:48+00:00",
+      "dateModified": "2026-10-07T06:53:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/benzina-grigioni-deviazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+};
+
+export default CANTON_SEO_METADATA;

@@ -9,7 +9,7 @@
  * costruzione ogni difetto che non e' ancora X.
  *
  * Qui si prova la regola invertita: **se non c'e' un articolo, e' rosso, tranne
- * quando OGNI tentativo ha dichiarato una delle sei ragioni legittime** uscendo
+ * quando OGNI tentativo ha dichiarato una ragione legittima** uscendo
  * con `EXIT_NO_ARTICLE_DECLARED`.
  *
  * TRE ORACOLI, TUTTI SUL CODICE DI USCITA:
@@ -291,24 +291,29 @@ test('senza il campo nuovo il verdetto e\' quello di oggi, byte per byte (#805)'
 
 // ── 2. IL CABLAGGIO in create-article.mjs ──────────────────────────────────
 
-test('le sette ragioni legittime escono TUTTE con la costante, e nessun\'altra', () => {
+test('le otto ragioni legittime del corpus escono TUTTE con la costante, e nessun\'altra', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
   // L'invariante e' la COSTANTE, non il nome della funzione che esce: dal
   // 2026-08-18 le uscite passano da `exitAfterFlush()`, che scrive il ledger
   // dei punteggi prima di terminare (`process.exit()` non fa scattare
   // `beforeExit`, quindi i successi dell'ultima finestra si perdevano). Il
   // conteggio resta 6 e il letterale resta bocciato, sotto. Dal P6b del piano
-  // «sezioni cantonali» le ragioni sono 7: la settima e' la sezione cantonale
-  // senza news utilizzabili, che per costruzione non ha un pool evergreen
-  // (CANTON_EVERGREEN_POOL_DISABLED) — stessa natura delle tre evergreen.
+  // «sezioni cantonali» le ragioni del corpus sono 7: la settima e' la sezione
+  // cantonale senza news utilizzabili, che per costruzione non ha un pool
+  // evergreen (CANTON_EVERGREEN_POOL_DISABLED). La scadenza del budget dopo il
+  // pool news e' l'ottava: e' un differimento esplicito, non un return muto.
   const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
-    declared.length, 7,
-    'le sette ragioni legittime (3 evergreen + cantonale senza pool evergreen + duplicato + qualita\' + quota) devono uscire con la costante condivisa',
+    declared.length, 8,
+    'le otto ragioni legittime (3 evergreen + cantonale senza pool evergreen + budget + duplicato + qualita\' + quota) devono uscire con la costante condivisa',
   );
   assert.ok(
     /CANTON_EVERGREEN_POOL_DISABLED[\s\S]{0,1500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
-    'la settima ragione e\' quella cantonale, dichiarata subito dopo il suo marcatore',
+    'la ragione cantonale e\' dichiarata subito dopo il suo marcatore',
+  );
+  assert.ok(
+    /else if \(!newsSuccess && !candidateSuccess && wallBudgetExceeded\(\)\)[\s\S]{0,1800}finalizeRunReport\('deferred'[\s\S]{0,500}await exitAfterFlush\(EXIT_NO_ARTICLE_DECLARED\)/.test(src),
+    'la scadenza del budget dopo il pool news deve dichiarare il differimento prima di uscire',
   );
   // Il letterale scritto a mano e' la via con cui le due meta' divergono.
   assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');

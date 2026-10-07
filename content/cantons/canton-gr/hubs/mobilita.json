@@ -1,0 +1,1096 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gr:mobilita",
+  "section": "canton-gr",
+  "canton": "GR",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "afd678fd8430c8972f6f751598c4c98eee678d64b8ad3156cf9173dc606cf870",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GR",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nei Grigioni, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con l’Italia, l’Austria e il Liechtenstein: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco, italiano e romancio; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "16",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "14",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/giogo-di-santa-maria/oggi/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/samnaun-spiss/oggi/"
+            },
+            {
+              "label": "St. Luzisteig (Fläsch-Balzers)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/st-luzisteig/oggi/"
+            },
+            {
+              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/tunnel-munt-la-schera/oggi/"
+            },
+            {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/martina-nauders/oggi/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0,2 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
+            },
+            {
+              "label": "Forcola di Livigno",
+              "value": "0,4 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/forcola-di-livigno/oggi/"
+            },
+            {
+              "label": "Campocologno-Tirano",
+              "value": "0,4 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/campocologno-tirano/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Pian San Giacomo E Svincolo autostradale Passstrasse Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-07-24T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> Chur tra Area di servizio Heidiland E Svincolo autostradale Maienfeld Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsia d'emergenza chiusa…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-08-04T03:00:00.000Z"
+            },
+            {
+              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Galleria Galleria Chlus E Incrocio Seewis Situazione: chiusa cantiere, lunghezza [km] 0.85",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-08-31T14:48:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Mesocco Nord E Svincolo autostradale Pian San Giacomo Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-09-02T22:12:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Pian San Giacomo E Svincolo autostradale Passstrasse Situazione: chiusa cantiere, lunghezza [km] 4.1",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-09-09T15:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 21 ottobre 2026",
+              "date": "2026-09-17T10:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzona Svincolo autostradale Grono Situazione: raccordo autostradale chiuso in entrata cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 21 ottobre 2026",
+              "date": "2026-09-17T10:45:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 8 ottobre 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
+              "date": "2026-09-24",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
+            },
+            {
+              "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
+              "date": "2026-09-16",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
+            },
+            {
+              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
+              "date": "2026-09-01",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
+            },
+            {
+              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
+              "date": "2026-08-20",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
+            },
+            {
+              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
+              "date": "2026-06-23",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
+            },
+            {
+              "label": "Positive Stimmung an der GV der RhB",
+              "date": "2026-06-12",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti pubblici Grigioni: zone e tariffe",
+          "url": "/articoli-svizzera/grigioni-percorso-quotidiano-pass/",
+          "excerpt": "Comunità tariffaria, zone, abbonamenti annuali e mensili: il confronto nei Grigioni include metà-prezzo, AG e sconti per studenti e apprendisti.",
+          "date": "2026-10-01T03:03:01.471Z"
+        },
+        {
+          "title": "Vivere a Ponte in Valtellina, lavorare nei Grigioni",
+          "url": "/articoli-frontaliere/ponte-valtellina-grigioni-frontaliere/",
+          "excerpt": "Guida completa per frontalieri: imposta alla fonte, Permesso G, franchigia €10k, AVS/LAMal, costo della vita. Dal 2024.",
+          "date": "2026-09-06T23:13:28.583Z"
+        },
+        {
+          "title": "TRIP: sviluppo mobilità tra Lombardia e Grigioni",
+          "url": "/articoli-frontaliere/trip-progetto-treni-retici-in-progress/",
+          "excerpt": "Il progetto TRIP collega Lombardia e Grigioni: obiettivi, rete ferroviaria e prospettive della mobilità transfrontaliera.",
+          "date": "2026-07-24T16:10:28.808Z"
+        },
+        {
+          "title": "Da S-chanf a Livigno in treno, Coira dice sì",
+          "url": "/articoli-svizzera/trenino-rossoschanf-livigno/",
+          "excerpt": "Il Canton Grigioni vuole lavorare assieme ai partner della Lombardia per realizzare un collegamento ferroviario tra Engadina e Alta Valtellina.",
+          "date": "2026-08-12T22:12:43.667Z"
+        },
+        {
+          "title": "Castasegna: la vecchia dogana in vendita preoccupa Bregaglia",
+          "url": "/articoli-frontaliere/castasegna-vecchia-dogana-in-vendita/",
+          "excerpt": "La Confederazione ha messo in vendita la vecchia dogana di Castasegna. Il Comune di Bregaglia si attiva con Coira per evitare la perdita della presenza federale.",
+          "date": "2026-08-09T00:40:13.497Z"
+        },
+        {
+          "title": "Berzo Demo e Grigioni: vivere da frontaliere al confine",
+          "url": "/articoli-frontaliere/vivere-berzo-demo-lavorare-grigioni/",
+          "excerpt": "Guida completa per chi vive a Berzo Demo e lavora in Grigioni: normative fiscali svizzere, Permesso G, AVS/LAMal, franchigie, contributi e procedure.",
+          "date": "2026-08-22T01:23:08.125Z"
+        },
+        {
+          "title": "Grigioni inviano fattura all'Italia per i costi del traffico olimpico",
+          "url": "/articoli-frontaliere/grigioni-fattura-italia-olimpiadi/",
+          "excerpt": "Il cantone dei Grigioni ha inviato una fattura da 2,6 milioni di franchi all'Italia per coprire i costi del piano trasporti durante le Olimpiadi di Milano-Cortina 2026.",
+          "date": "2026-05-08T04:56:14.368Z"
+        },
+        {
+          "title": "Grigioni non riprendono il modello basilese per gestire il traffico",
+          "url": "/articoli-svizzera/grigioni-modello-basilese-traffico/",
+          "excerpt": "Il governo grigionese è scettico sull'adozione del modello di sanzioni di Birsfelden per deviare il traffico festivo e turistico.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Austria",
+          "url": "/traffico-dogane/grigioni-austria/"
+        },
+        {
+          "label": "Attese ai valichi verso Italia",
+          "url": "/traffico-dogane/grigioni-italia/"
+        },
+        {
+          "label": "Attese ai valichi verso Liechtenstein",
+          "url": "/traffico-dogane/grigioni-liechtenstein/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "GR",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In Graubünden, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Italy, Austria and Liechtenstein: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German, Italian and Romansh; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "16",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "14",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/giogo-di-santa-maria/today/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/samnaun-spiss/today/"
+            },
+            {
+              "label": "St. Luzisteig (Fläsch-Balzers)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/st-luzisteig/today/"
+            },
+            {
+              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/tunnel-munt-la-schera/today/"
+            },
+            {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/martina-nauders/today/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0.2 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
+            },
+            {
+              "label": "Forcola di Livigno",
+              "value": "0.4 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/forcola-di-livigno/today/"
+            },
+            {
+              "label": "Campocologno-Tirano",
+              "value": "0.4 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/campocologno-tirano/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Pian San Giacomo E Svincolo autostradale Passstrasse Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-07-24T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> Chur tra Area di servizio Heidiland E Svincolo autostradale Maienfeld Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsia d'emergenza chiusa…",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-08-04T03:00:00.000Z"
+            },
+            {
+              "label": "A28 Landquart <-> Klosters Ost / Vereina tra Galleria Galleria Chlus E Incrocio Seewis Situazione: chiusa cantiere, lunghezza [km] 0.85",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-08-31T14:48:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Mesocco Nord E Svincolo autostradale Pian San Giacomo Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 23 October 2026",
+              "date": "2026-09-02T22:12:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino tra Svincolo autostradale Pian San Giacomo E Svincolo autostradale Passstrasse Situazione: chiusa cantiere, lunghezza [km] 4.1",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-09-09T15:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 21 October 2026",
+              "date": "2026-09-17T10:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzona Svincolo autostradale Grono Situazione: raccordo autostradale chiuso in entrata cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 21 October 2026",
+              "date": "2026-09-17T10:45:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 8 October 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
+              "date": "2026-09-24",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
+            },
+            {
+              "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
+              "date": "2026-09-16",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
+            },
+            {
+              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
+              "date": "2026-09-01",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
+            },
+            {
+              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
+              "date": "2026-08-20",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
+            },
+            {
+              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
+              "date": "2026-06-23",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
+            },
+            {
+              "label": "Positive Stimmung an der GV der RhB",
+              "date": "2026-06-12",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Graubünden Public Transportation Passes: Zones and Fares",
+          "url": "/en/swiss-articles/graubunden-public-transport-pass/",
+          "excerpt": "Fare network, zones, annual and monthly travelcards: the comparison in Graubünden includes Half-Fare travelcard, GA travelcard and discounts for students and apprentices.",
+          "date": "2026-10-01T03:03:01.471Z"
+        },
+        {
+          "title": "Living in Ponte in Valtellina, working in Graubünden",
+          "url": "/en/cross-border-articles/live-ponte-valtelline-work-grisons/",
+          "excerpt": "Complete guide for border workers: source tax, G Permit, €10k deductible, AVS/LAMal, cost of living. Since 2024.",
+          "date": "2026-09-06T23:13:28.583Z"
+        },
+        {
+          "title": "TRIP: mobility development between Lombardy and Graubünden",
+          "url": "/en/cross-border-articles/trip-project-trains-retici-progress/",
+          "excerpt": "The TRIP project aims to develop mobility between Lombardy and Graubünden.",
+          "date": "2026-07-24T16:10:28.808Z"
+        },
+        {
+          "title": "From S-chanf to Livigno by train, Chur says yes",
+          "url": "/en/swiss-articles/red-train-schanf-livigno/",
+          "excerpt": "The Canton of Graubünden wants to work together with the partners of Lombardy to create a railway connection between the Engadine and Alta Valtellina.",
+          "date": "2026-08-12T22:12:43.667Z"
+        },
+        {
+          "title": "Castasegna: the old customs house for sale worries Bregaglia",
+          "url": "/en/cross-border-articles/castasegna-old-customs-house-for-sale/",
+          "excerpt": "The Confederation has put the old Castasegna customs house up for sale. The Municipality of Bregaglia activates with Chur to avoid the loss of federal presence.",
+          "date": "2026-08-09T00:40:13.497Z"
+        },
+        {
+          "title": "Berzo Demo and Grisons: living as frontiersmen at the border",
+          "url": "/en/cross-border-articles/living-berzo-demo-working-grisons/",
+          "excerpt": "Complete guide for those who live in Berzo Demo and work in Grisons: Swiss tax regulations, G Permit, AVS/LAMal, deductibles, contributions and procedures.",
+          "date": "2026-08-22T01:23:08.125Z"
+        },
+        {
+          "title": "Grisons send Italy bill for Olympic traffic costs",
+          "url": "/en/cross-border-articles/grisons-bill-italy-olympics/",
+          "excerpt": "The canton of Grisons has sent a bill for 2.6 million francs to Italy to cover the costs of the transport plan during the Milan-Cortina 2026 Olympics.",
+          "date": "2026-05-08T04:56:14.368Z"
+        },
+        {
+          "title": "Graubünden does not use the Basel model to manage traffic",
+          "url": "/en/swiss-articles/grisons-basel-model-traffic/",
+          "excerpt": "The Grison government is sceptical about adopting the Birsfelden model of sanctions to divert holiday and tourist traffic.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards Austria",
+          "url": "/en/border-wait/grigioni-austria/"
+        },
+        {
+          "label": "Border waits towards Italy",
+          "url": "/en/border-wait/grigioni-italia/"
+        },
+        {
+          "label": "Border waits towards Liechtenstein",
+          "url": "/en/border-wait/grigioni-liechtenstein/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "GR",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "In Graubünden bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Italien, Österreich und Liechtenstein: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch, Italienisch und Rätoromanisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "16",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "14",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/giogo-di-santa-maria/heute/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
+            },
+            {
+              "label": "St. Luzisteig (Fläsch-Balzers)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/st-luzisteig/heute/"
+            },
+            {
+              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/tunnel-munt-la-schera/heute/"
+            },
+            {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/martina-nauders/heute/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0.2 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
+            },
+            {
+              "label": "Forcola di Livigno",
+              "value": "0.4 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
+            },
+            {
+              "label": "Campocologno-Tirano",
+              "value": "0.4 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino zwischen Anschluss Pian San Giacomo und Anschluss Passstrasse Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-07-24T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> Chur zwischen Raststätte Heidiland und Anschluss Maienfeld Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende…",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-08-04T03:00:00.000Z"
+            },
+            {
+              "label": "A28 Landquart <-> Klosters-Ost / Vereina zwischen Tunnel Chlus-Tunnel und Kreuzung Seewis Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.85",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-08-31T14:48:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino zwischen Anschluss Mesocco-Nord und Anschluss Pian San Giacomo Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-09-02T22:12:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona <-> S. Bernardino zwischen Anschluss Pian San Giacomo und Anschluss Passstrasse Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.1",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-09-09T15:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzona zwischen Anschluss Lostallo und Anschluss Roveredo Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 21. Oktober 2026",
+              "date": "2026-09-17T10:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzona Anschluss Grono Sachlage: Einfahrt gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 21. Oktober 2026",
+              "date": "2026-09-17T10:45:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Rothenbrunnen und Anschluss Reichenau Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 8. Oktober 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
+              "date": "2026-09-24",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
+            },
+            {
+              "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
+              "date": "2026-09-16",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
+            },
+            {
+              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
+              "date": "2026-09-01",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
+            },
+            {
+              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
+              "date": "2026-08-20",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
+            },
+            {
+              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
+              "date": "2026-06-23",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
+            },
+            {
+              "label": "Positive Stimmung an der GV der RhB",
+              "date": "2026-06-12",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements für den öffentlichen Nahverkehr in Graubünden: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/graubuenden-oev-abos/",
+          "excerpt": "Tarifverbund, Zonen, Jahres- und Monatsabonnemente: Der Vergleich in Graubünden umfasst den Halbtax, das GA sowie Ermäßigungen für Studierende und Auszubildende.",
+          "date": "2026-10-01T03:03:01.471Z"
+        },
+        {
+          "title": "Leben in Ponte in Valtellina, Arbeiten in Graubünden",
+          "url": "/de/grenzgaenger-artikel/in-ponte-wohnen-graubuenden-arbeiten/",
+          "excerpt": "Vollständiger Leitfaden für Grenzgänger: Quellensteuer, G-Bewilligung, € 10k-Franchise, AHV/KVG, Lebenshaltungskosten. Ab 2024.",
+          "date": "2026-09-06T23:13:28.583Z"
+        },
+        {
+          "title": "TRIP: Mobilitätsentwicklung zwischen Lombardei und Graubünden",
+          "url": "/de/grenzgaenger-artikel/trip-projekt-zuege-retici-fortschritt/",
+          "excerpt": "Das TRIP-Projekt zielt darauf ab, die Mobilität zwischen der Lombardei und Graubünden zu entwickeln.",
+          "date": "2026-07-24T16:10:28.808Z"
+        },
+        {
+          "title": "Von S-chanf nach Livigno mit dem Zug, Chur sagt ja",
+          "url": "/de/schweiz-artikel/rotter-zug-schanf-livigno/",
+          "excerpt": "Der Kanton Graubünden will mit Partnern aus der Lombardei zusammenarbeiten, um eine Bahnverbindung zwischen Engadin und Oberveltlin zu realisieren.",
+          "date": "2026-08-12T22:12:43.667Z"
+        },
+        {
+          "title": "Castasegna: Der alte Zoll zum Verkauf beunruhigt Bergell",
+          "url": "/de/grenzgaenger-artikel/castasegna-alter-zollposten-zu-verkaufen/",
+          "excerpt": "Der Bund hat den alten Zoll von Castasegna zum Verkauf angeboten. Die Gemeinde Bergell setzt sich mit Chur dafür ein, den Verlust der eidgenössischen Präsenz zu vermeiden.",
+          "date": "2026-08-09T00:40:13.497Z"
+        },
+        {
+          "title": "Berzo Demo und Graubünden: Grenzgänger leben an der Grenze",
+          "url": "/de/grenzgaenger-artikel/leben-berzo-demo-arbeiten-graubuenden/",
+          "excerpt": "Vollständiger Leitfaden für diejenigen, die in Berzo Demo leben und in Graubünden arbeiten: Schweizer Steuervorschriften, G-Bewilligung, AHV/KVG, Franchisen, Beiträge und Verfahren.",
+          "date": "2026-08-22T01:23:08.125Z"
+        },
+        {
+          "title": "Graubünden stellt Italien Rechnung für olympischen Verkehr",
+          "url": "/de/grenzgaenger-artikel/graubunden-rechnung-italien-olympiade/",
+          "excerpt": "Der Kanton Graubünden hat Italien eine Rechnung über 2,6 Millionen Franken für die Transportkosten während der Olympischen Spiele Mailand-Cortina 2026 gestellt.",
+          "date": "2026-05-08T04:56:14.368Z"
+        },
+        {
+          "title": "Graubünden greift bei der Verkehrssteuerung nicht auf das Basler Modell zurück",
+          "url": "/de/schweiz-artikel/graubuenden-basler-modell-verkehr/",
+          "excerpt": "Die Bündner Regierung ist skeptisch gegenüber der Einführung des Birsfeldener Sanktionsmodells, um den Urlaubs- und Tourismusverkehr abzulenken.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Österreich",
+          "url": "/de/wartezeit-grenze/grigioni-austria/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze Richtung Italien",
+          "url": "/de/wartezeit-grenze/grigioni-italia/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze Richtung Liechtenstein",
+          "url": "/de/wartezeit-grenze/grigioni-liechtenstein/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "GR",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Aux Grisons, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Italie, l’Autriche et le Liechtenstein : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand, italien et romanche ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Giogo di Santa Maria (Passo dell'Umbrail), semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "16",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "14",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/giogo-di-santa-maria/aujourd-hui/"
+            },
+            {
+              "label": "Samnaun-Spiss",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
+            },
+            {
+              "label": "St. Luzisteig (Fläsch-Balzers)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/st-luzisteig/aujourd-hui/"
+            },
+            {
+              "label": "Tunnel Munt La Schera (Passo del Gallo)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/tunnel-munt-la-schera/aujourd-hui/"
+            },
+            {
+              "label": "Martina-Nauders (Finstermünz)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0,2 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
+            },
+            {
+              "label": "Forcola di Livigno",
+              "value": "0,4 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
+            },
+            {
+              "label": "Campocologno-Tirano",
+              "value": "0,4 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A13 Bellinzone <-> S. Bernardino entre Jonction autoroutière Pian San Giacomo et Jonction autoroutière Passstrasse Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-07-24T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Sargans -> Coire entre Aire de service Heidiland et Jonction autoroutière Maienfeld Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: bande d'arrêt d'urgence fermée…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-08-04T03:00:00.000Z"
+            },
+            {
+              "label": "A28 Landquart <-> Klosters-Est / Vereina entre Tunnel Tunnel de la Chlus et Carrefour Seewis Situation: fermé travaux, longueur [km] 0.85",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-08-31T14:48:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzone <-> S. Bernardino entre Jonction autoroutière Mesocco-Nord et Jonction autoroutière Pian San Giacomo Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-09-02T22:12:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzone <-> S. Bernardino entre Jonction autoroutière Pian San Giacomo et Jonction autoroutière Passstrasse Situation: fermé travaux, longueur [km] 4.1",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-09-09T15:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzone entre Jonction autoroutière Lostallo et Jonction autoroutière Roveredo Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 21 octobre 2026",
+              "date": "2026-09-17T10:44:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino -> Bellinzone Jonction autoroutière Grono Situation: entrée fermée travaux Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 21 octobre 2026",
+              "date": "2026-09-17T10:45:00.000Z"
+            },
+            {
+              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Rothenbrunnen et Jonction autoroutière Reichenau Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 8 octobre 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Rechtsrheinische Oberländerstrasse: Nächtliche Sperrungen wegen Instandsetzungs- und Sanierungsarbeiten",
+              "date": "2026-09-24",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026092403.aspx"
+            },
+            {
+              "label": "Malojastrasse: Zeitweise Sperrungen bei Sils Baselgia wegen Felsräumungsarbeiten",
+              "date": "2026-09-16",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026091602.aspx"
+            },
+            {
+              "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
+              "date": "2026-09-01",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
+            },
+            {
+              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
+              "date": "2026-08-20",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
+            },
+            {
+              "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
+              "date": "2026-06-23",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
+            },
+            {
+              "label": "Positive Stimmung an der GV der RhB",
+              "date": "2026-06-12",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements aux transports publics des Grisons : zones et tarifs",
+          "url": "/fr/articles-suisse/grisons-transports-abonnements/",
+          "excerpt": "Réseau tarifaire, zones, cartes de voyage annuelles et mensuelles : la comparaison en Grisons inclut une carte de voyage à demi-tarif, une carte de voyage GA et des réductions pour les étudiants et apprentis.",
+          "date": "2026-10-01T03:03:01.471Z"
+        },
+        {
+          "title": "Vivre à Ponte in Valtellina, travailler dans les Grisons",
+          "url": "/fr/articles-frontalier/vivre-ponte-valteline-travailler-grisons/",
+          "excerpt": "Guide complet pour frontaliers : taxe à la source, permis G, franchise € 10k, AVS/LAMal, coût de la vie. A partir de 2024.",
+          "date": "2026-09-06T23:13:28.583Z"
+        },
+        {
+          "title": "TRIP : développement de la mobilité entre la Lombardie et les Grisons",
+          "url": "/fr/articles-frontalier/trip-projet-trains-retici-progres/",
+          "excerpt": "Le projet TRIP vise à développer la mobilité entre la Lombardie et les Grisons.",
+          "date": "2026-07-24T16:10:28.808Z"
+        },
+        {
+          "title": "De S-chanf à Livigno en train, Coire dit oui",
+          "url": "/fr/articles-suisse/train-rouge-schanf-livigno/",
+          "excerpt": "Le canton des Grisons souhaite travailler avec des partenaires de Lombardie pour réaliser une liaison ferroviaire entre l'Engadine et la Haute-Valtelline.",
+          "date": "2026-08-12T22:12:43.667Z"
+        },
+        {
+          "title": "Châtaigne : l'ancienne douane en vente inquiète Bregaglia",
+          "url": "/fr/articles-frontalier/castasegna-ancienne-douane-a-vendre/",
+          "excerpt": "La Confédération a mis en vente l'ancienne douane de Castasegna. La commune de Bregaglia s'active avec Coire pour éviter la perte de la présence fédérale.",
+          "date": "2026-08-09T00:40:13.497Z"
+        },
+        {
+          "title": "Berzo Demo et Grisons : vivre en frontalier à la frontière",
+          "url": "/fr/articles-frontalier/vivre-berzo-demo-travailler-grisons/",
+          "excerpt": "Guide complet pour ceux qui vivent à Berzo Demo et travaillent dans les Grisons : réglementations fiscales suisses, permis G, AVS/LAMal, franchises, cotisations et procédures.",
+          "date": "2026-08-22T01:23:08.125Z"
+        },
+        {
+          "title": "Les Grisons envoient une facture à l'Italie pour les coûts du trafic olympique",
+          "url": "/fr/articles-frontalier/grisons-facture-italie-olympiades/",
+          "excerpt": "Le canton des Grisons a envoyé une facture de 2,6 millions de francs à l'Italie pour couvrir les coûts du plan de transport pendant les Jeux olympiques de Milan-Cortina 2026.",
+          "date": "2026-05-08T04:56:14.368Z"
+        },
+        {
+          "title": "Grisons ne reprennent pas le modèle bâlois pour gérer le trafic",
+          "url": "/fr/articles-suisse/grisons-modele-bale-trafic/",
+          "excerpt": "Le gouvernement grison est sceptique quant à l'adoption du modèle de sanctions de Birsfelden pour détourner le trafic festif et touristique.",
+          "date": "2026-06-29T16:07:16.810Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers Autriche",
+          "url": "/fr/temps-attente-douane/grigioni-austria/"
+        },
+        {
+          "label": "Attente aux frontières vers Italie",
+          "url": "/fr/temps-attente-douane/grigioni-italia/"
+        },
+        {
+          "label": "Attente aux frontières vers Liechtenstein",
+          "url": "/fr/temps-attente-douane/grigioni-liechtenstein/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

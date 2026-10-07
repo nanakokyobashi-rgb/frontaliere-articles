@@ -7844,6 +7844,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziative-mps-giustizia-respinte.title': 'Initiatives MPS sur la justice rejetées par le Grand Conseil',
     'blog.article.iniziative-mps-giustizia-respinte.excerpt': 'Le Grand Conseil a rejeté les deux initiatives MPS : réduire l\'âge de la retraite des magistrats de 70 à 65 ans (41 voix contre) et transférer au Parlement les destitutions (61 voix contre).',
     'blog.article.iniziative-mps-giustizia-respinte.imageAlt': 'Salle du Grand Conseil à Bellinzone lors d\'un vote sur les initiatives MPS concernant la justice',
+    'blog.article.raffineria-cressier-carburanti.title': 'Le diesel suisse frôle 2,50 francs : alerte à Cressier',
+    'blog.article.raffineria-cressier-carburanti.excerpt': '## En bref - Le diesel en Suisse frôle 2,50 francs le litre - Cressier couvre environ 35% des carburants nationaux - Le raffinage européen a une capacité',
+    'blog.article.raffineria-cressier-carburanti.imageAlt': 'Pompe diesel en Suisse avec une raffinerie en arrière-plan',
+    'blog.article.quattro-oggetti-urne-novembre.title': 'Votation du 29 novembre : TVA, AVS et quatre objets',
+    'blog.article.quattro-oggetti-urne-novembre.excerpt': 'Le 29 novembre, les citoyens voteront sur quatre objets : augmentation de la TVA pour la 13e rente AVS, deux initiatives populaires et modification de la loi sur le matériel de guerre.',
+    'blog.article.quattro-oggetti-urne-novembre.imageAlt': 'Urne suisse et bulletins pour le vote du 29 novembre',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Voiture électrique : comment économiser jusqu’à 50 %',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## En bref - Le TCS compare les prix de 19’000 points de recharge suisses - 50 kWh coûtent entre 23 et 46 francs - 5 % des recharges s’effectuent sur des bornes rapides',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Image éditoriale relative à: Auto elettrica: come risparmiare fino al 50%',
 };
 
 export default blogMetaChFr;

@@ -12717,6 +12717,21 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.truffa-finto-operatore-luino.title': 'Arnaque au faux banquier à Luino : 17mila euro saisis',
     'blog.article.truffa-finto-operatore-luino.excerpt': 'Un Campanien de 32 ans a été dénoncé : il aurait convaincu une personne de 62 ans de faire un virement. Un compte contenant plus de 17mila euro a été saisi.',
     'blog.article.truffa-finto-operatore-luino.imageAlt': 'Scène urbaine à Luino liée à une arnaque au faux opérateur bancaire',
+    'blog.article.fischiava-treno-gorla.title': 'Le train sifflait : fête ferroviaire à Gorla Minore',
+    'blog.article.fischiava-treno-gorla.excerpt': '## En bref - Dimanche 11 octobre 2026 à Gorla Minore - Événement de 12:00 à 18:00 près de l’ancienne gare - Déjeuner, petits trains, jeux anciens',
+    'blog.article.fischiava-treno-gorla.imageAlt': 'Événement ferroviaire près de l\'ancienne gare de Gorla Minore',
+    'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev sur le Ceresio : pétrole, villas et permis',
+    'blog.article.clan-nazarbayev-ceresio.excerpt': 'L\'enquête sur le commerce des matières premières raconte l\'arrivée du clan Nazarbayev sur le Ceresio, entre pétrole, villas et étranges permis de séjour.',
+    'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Villas au bord du Ceresio dans le récit sur le clan Nazarbayev',
+    'blog.article.monte-olimpino-treni-weekend.title': 'Trains Como-Suisse : 4 week-ends de fermeture en 2026',
+    'blog.article.monte-olimpino-treni-weekend.excerpt': '## En bref - Quatre week-ends de fermeture entre octobre et novembre 2026 - Interruption du vendredi à 20:20 au lundi à 04:20 - RE80 ne dessert pas Como San Giovanni et Como',
+    'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Train régional sur une ligne ferroviaire transfrontalière entre Côme et la Suisse (Como)',
+    'blog.article.hotel-ticino-140-licenziati.title': 'Deux hôtels fermés au Tessin : 140 licenciés',
+    'blog.article.hotel-ticino-140-licenziati.excerpt': 'La société qui gère Principe Leopoldo et Villa Sassa annonce 140 licenciements. Daniele Lardi rassure : une bonne partie du personnel sera réembauchée.',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Les hôtels Principe Leopoldo et Villa Sassa au Tessin',
+    'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola : arrestation pour un kilo de haschisch dans les bagages',
+    'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## En bref - Interpellée à la gare internationale de Domodossola - Elle arrivait de Milano Centrale - Un kilo de haschisch en dix pains - Valeur estimée : plus',
+    'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La gare internationale de Domodossola, lieu de l\'arrestation pour trafic de stupéfiants',
 };
 
 export default blogMetaFr;

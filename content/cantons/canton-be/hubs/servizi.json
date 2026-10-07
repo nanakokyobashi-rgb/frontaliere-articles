@@ -1,0 +1,608 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-be:servizi",
+  "section": "canton-be",
+  "canton": "BE",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "24dac053f33e24e04d7abef40fdfc6f5e1c91f6a41aadd918427cd121a04575f",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BE",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Berna, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "681,50 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "7",
+          "note": "offerta mediana 490 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "BE, regione di premio 1",
+              "value": "mediana 681,50 CHF al mese",
+              "detail": "da 631 a 758,90 CHF, 26 assicuratori"
+            },
+            {
+              "label": "BE, regione di premio 2",
+              "value": "mediana 611,60 CHF al mese",
+              "detail": "da 566,10 a 660,20 CHF, 26 assicuratori"
+            },
+            {
+              "label": "BE, regione di premio 3",
+              "value": "mediana 571,30 CHF al mese",
+              "detail": "da 520,40 a 633,80 CHF, 26 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "BE64946",
+              "value": "790 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231033"
+            },
+            {
+              "label": "BE89689",
+              "value": "690 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231032"
+            },
+            {
+              "label": "BE328328",
+              "value": "490 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231030"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion-be.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
+              "date": "2026-09-09T09:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Asilo nido e custodia bambini Berna: costi e sussidi",
+          "url": "/articoli-svizzera/costi-asilo-nido-custodia-berna/",
+          "excerpt": "Scopri i costi degli asili nido nel Canton Berna, le tariffe basate sul reddito, le famiglie diurne e i sussidi cantonali disponibili per la custodia dei bambini.",
+          "date": "2026-08-13T03:12:52.951Z"
+        },
+        {
+          "title": "Patente di guida a Berna: conversione e requisiti",
+          "url": "/articoli-svizzera/patent-canton-bern-conversion-exams/",
+          "excerpt": "La conversione della patente di guida estera nel Canton di Berna richiede l'esame teorico e pratico, nonché la frequentazione di corsi obbligatori. L'ufficio della circolazione competente è responsabile…",
+          "date": "2026-08-13T17:49:01.339Z"
+        },
+        {
+          "title": "Premi cassa malati Cantone Berna e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
+          "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
+        {
+          "title": "Permesso di domicilio C nel Canton Berna: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-berna-requisiti-e-domanda/",
+          "excerpt": "Il permesso di domicilio C nel Canton Berna: requisiti, domanda e procedura di applicazione",
+          "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "Patente di guida nel Canton Berna: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-berna-conversione/",
+          "excerpt": "Guida ufficiale alla conversione della licenza estera, esami e procedure presso l'Ufficio della circolazione del Canton Berna per i nuovi residenti.",
+          "date": "2026-08-13T18:13:24.195Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/berna/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/berna-be/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Berna",
+          "url": "/cerca-lavoro-berna/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "BE",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Bern, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "681.50 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "7",
+          "note": "typical bid 490 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "BE, premium region 1",
+              "value": "typical 681.50 CHF per month",
+              "detail": "from 631 to 758.90 CHF, 26 insurers"
+            },
+            {
+              "label": "BE, premium region 2",
+              "value": "typical 611.60 CHF per month",
+              "detail": "from 566.10 to 660.20 CHF, 26 insurers"
+            },
+            {
+              "label": "BE, premium region 3",
+              "value": "typical 571.30 CHF per month",
+              "detail": "from 520.40 to 633.80 CHF, 26 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "BE64946",
+              "value": "790 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231033"
+            },
+            {
+              "label": "BE89689",
+              "value": "690 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231032"
+            },
+            {
+              "label": "BE328328",
+              "value": "490 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231030"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion-be.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
+              "date": "2026-09-09T09:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Nursery and childcare Bern: costs and subsidies",
+          "url": "/en/swiss-articles/childcare-costs-bern-canton/",
+          "excerpt": "Find out about kindergarten costs in the Canton of Bern, income-based rates, day families and cantonal childcare subsidies available.",
+          "date": "2026-08-13T03:12:52.951Z"
+        },
+        {
+          "title": "Driving licence in Bern: conversion and requirements",
+          "url": "/en/swiss-articles/canton-of-bern-driving-license-conversion-and-exams/",
+          "excerpt": "The conversion of the foreign driver's license in the Canton of Bern requires the theoretical and practical examination, as well as the attendance of compulsory courses. The relevant circulation office is responsible…",
+          "date": "2026-08-13T17:49:01.339Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Bern and premium reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
+          "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
+        {
+          "title": "Residence permit C in Canton Bern: requirements and application",
+          "url": "/en/swiss-articles/c-permit-bern-switzerland-requisites-and-application/",
+          "excerpt": "Residence permit C in the Canton of Bern: requirements, application and application procedure",
+          "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "Driver's license in the Canton of Bern: conversion and exams",
+          "url": "/en/swiss-articles/driving-license-bern-conversion/",
+          "excerpt": "Official Guide to Foreign License Conversion, Examinations and Procedures at the Canton of Bern Traffic Office for New Residents.",
+          "date": "2026-08-13T18:13:24.195Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/bern-be/"
+        },
+        {
+          "label": "Job offers in the canton of Bern",
+          "url": "/en/find-jobs-bern/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "BE",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Bern laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "681.50 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "7",
+          "note": "mittleres Gebot 490 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "BE, Prämienregion 1",
+              "value": "Mittelwert 681.50 CHF pro Monat",
+              "detail": "von 631 bis 758.90 CHF, 26 Versicherer"
+            },
+            {
+              "label": "BE, Prämienregion 2",
+              "value": "Mittelwert 611.60 CHF pro Monat",
+              "detail": "von 566.10 bis 660.20 CHF, 26 Versicherer"
+            },
+            {
+              "label": "BE, Prämienregion 3",
+              "value": "Mittelwert 571.30 CHF pro Monat",
+              "detail": "von 520.40 bis 633.80 CHF, 26 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "BE64946",
+              "value": "790 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231033"
+            },
+            {
+              "label": "BE89689",
+              "value": "690 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231032"
+            },
+            {
+              "label": "BE328328",
+              "value": "490 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231030"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion-be.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
+              "date": "2026-09-09T09:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung Bern: Kosten und Leistungen",
+          "url": "/de/schweiz-artikel/kinderbetreuungskosten-kanton-bern/",
+          "excerpt": "Informieren Sie sich über die Kosten der Kindertagesstätten im Kanton Bern, die einkommensabhängigen Tarife, die Tagesfamilien und die kantonalen Kinderbetreuungsbeihilfen.",
+          "date": "2026-08-13T03:12:52.951Z"
+        },
+        {
+          "title": "Führerschein in Bern: Umstellung und Voraussetzungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-kanton-bern-umstellung-und-pruefung/",
+          "excerpt": "Die Umschulung des ausländischen Führerscheins im Kanton Bern erfordert die theoretische und praktische Prüfung sowie die Teilnahme an Pflichtkursen. Für die Bearbeitung des Umwandlungsantrags ist das zuständige…",
+          "date": "2026-08-13T17:49:01.339Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Bern und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
+          "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/c-bescheinigung-bern-schweiz-anforderungen-und-antragstellung/",
+          "excerpt": "Die Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen, Antrag und Antragsverfahren",
+          "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "Führerschein im Kanton Bern: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-bern-umschreibung/",
+          "excerpt": "Amtlicher Leitfaden zur Umwandlung des ausländischen Ausweises, Prüfungen und Verfahren beim Strassenverkehrsamt des Kantons Bern für Neubürger.",
+          "date": "2026-08-13T18:13:24.195Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/bern-be/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Bern",
+          "url": "/de/jobs-in-bern/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "BE",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Berne, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "681,50 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "7",
+          "note": "offre centrale 490 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "BE, région de primes 1",
+              "value": "valeur centrale 681,50 CHF par mois",
+              "detail": "de 631 à 758,90 CHF, 26 assureurs"
+            },
+            {
+              "label": "BE, région de primes 2",
+              "value": "valeur centrale 611,60 CHF par mois",
+              "detail": "de 566,10 à 660,20 CHF, 26 assureurs"
+            },
+            {
+              "label": "BE, région de primes 3",
+              "value": "valeur centrale 571,30 CHF par mois",
+              "detail": "de 520,40 à 633,80 CHF, 26 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "BE64946",
+              "value": "790 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231033"
+            },
+            {
+              "label": "BE89689",
+              "value": "690 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231032"
+            },
+            {
+              "label": "BE328328",
+              "value": "490 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231030"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion-be.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Gesundheit am Arbeitsplatz – Zeitdruck grösste Herausforderung",
+              "date": "2026-09-09T09:58:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Garderie et garde d'enfants Berne : coûts et allocations",
+          "url": "/fr/articles-suisse/couts-creche-garde-enfants-canton-berne/",
+          "excerpt": "Découvrez les coûts des crèches dans le canton de Berne, les tarifs basés sur le revenu, les familles de jour et les allocations cantonales disponibles pour la garde des enfants.",
+          "date": "2026-08-13T03:12:52.951Z"
+        },
+        {
+          "title": "Permis de conduire à Berne : conversion et exigences",
+          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-bourguignon-conversion-et-examen/",
+          "excerpt": "La conversion du permis de conduire étranger dans le canton de Berne nécessite l'examen théorique et pratique ainsi que la fréquentation de cours obligatoires. L'office de la circulation compétent est responsable du…",
+          "date": "2026-08-13T17:49:01.339Z"
+        },
+        {
+          "title": "Primes caisse-maladie canton de Berne et réduction des primes",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
+          "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
+        {
+          "title": "Permis de séjour C dans le canton de Berne : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-sejour-c-bourg-de-berne-requisits-et-demande/",
+          "excerpt": "Le permis de séjour C dans le canton de Berne : exigences, demande et procédure d'application",
+          "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Berne : conversion et examens",
+          "url": "/fr/articles-suisse/permis-conduire-berne-conversion/",
+          "excerpt": "Guide officiel de conversion de la licence étrangère, examens et procédures auprès de l'Office de la circulation du canton de Berne pour les nouveaux résidents.",
+          "date": "2026-08-13T18:13:24.195Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Berne",
+          "url": "/fr/trouver-emploi-berne/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

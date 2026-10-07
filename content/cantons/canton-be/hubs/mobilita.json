@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-be:mobilita",
+  "section": "canton-be",
+  "canton": "BE",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "3eaea1e608d8623c782a474f5b743553ea31d61dddc32cc9fe2e7418567afec6",
+  "blocks": [
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BE",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Berna, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "32",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "90",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Bösingenstrasse, 3177 Laupen, Switzerland in tutte le direzioni Situazione: ponte chiuso Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 agosto 2027",
+              "date": "2024-09-02T04:00:00.000Z"
+            },
+            {
+              "label": "Laupen <-> Gurmels tra Luogo Kriechenwil E Luogo Laupen Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 agosto 2027",
+              "date": "2024-10-02T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Berna <-> Zurigo Svincolo autostradale Wangen an der Aare Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2025-04-28T03:00:00.000Z"
+            },
+            {
+              "label": "A6W Raccordo di Lattigen <-> Port tra Svincolo autostradale Port E Svincolo autostradale Wimmis Situazione: chiusa cantiere, lunghezza [km] 1.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 novembre 2026",
+              "date": "2026-06-16T14:33:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern tra Galleria Galleria Ebenrain E Galleria Galleria Oberburg Situazione: problemi di traffico cantiere, lunghezza [km] 7.3 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-07-09T10:04:00.000Z"
+            },
+            {
+              "label": "A6W Diramazione Lattigen -> Port tra Raccordo autostradale Diramazione Lattigen E Svincolo autostradale Wimmis Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
+              "value": "Chiusura",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-07-27T05:05:00.000Z"
+            },
+            {
+              "label": "Bützberg <-> Aarwangen Luogo Bützberg Situazione: chiusa Causa: incendio",
+              "value": "Chiusura",
+              "date": "2026-08-12T02:00:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse tra Svincolo autostradale Bern-Neufeld E Svincolo autostradale Bern-Tiefenaustrasse Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 ottobre 2026",
+              "date": "2026-08-14T06:17:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Plangenehmigung Tram Kleinwabern erteilt",
+              "date": "2026-10-06",
+              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
+            },
+            {
+              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
+              "date": "2026-09-28T13:28:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
+              "date": "2026-09-28T10:05:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern-Ostermundigen",
+              "date": "2026-09-28",
+              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
+            },
+            {
+              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
+              "date": "2026-09-27T14:24:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
+            },
+            {
+              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
+              "date": "2026-09-17T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti pubblici Canton Berna: zone e tariffe",
+          "url": "/articoli-svizzera/trasporti-pubblici-canton-berna-abbonamenti/",
+          "excerpt": "Informazioni sulle zone e le tariffe degli abbonamenti trasporti pubblici nel Canton Berna",
+          "date": "2026-08-13T07:24:39.765Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "BE",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of Bern, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Road closures in force or imminent",
+          "value": "32",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "90",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Bösingenstrasse, 3177 Laupen, Switzerland in tutte le direzioni Situazione: ponte chiuso Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 27 August 2027",
+              "date": "2024-09-02T04:00:00.000Z"
+            },
+            {
+              "label": "Laupen <-> Gurmels tra Luogo Kriechenwil E Luogo Laupen Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 27 August 2027",
+              "date": "2024-10-02T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Berna <-> Zurigo Svincolo autostradale Wangen an der Aare Situazione: problemi di traffico cantiere Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2025-04-28T03:00:00.000Z"
+            },
+            {
+              "label": "A6W Raccordo di Lattigen <-> Port tra Svincolo autostradale Port E Svincolo autostradale Wimmis Situazione: chiusa cantiere, lunghezza [km] 1.5",
+              "value": "Closure",
+              "detail": "until 30 November 2026",
+              "date": "2026-06-16T14:33:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern tra Galleria Galleria Ebenrain E Galleria Galleria Oberburg Situazione: problemi di traffico cantiere, lunghezza [km] 7.3 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-07-09T10:04:00.000Z"
+            },
+            {
+              "label": "A6W Diramazione Lattigen -> Port tra Raccordo autostradale Diramazione Lattigen E Svincolo autostradale Wimmis Situazione: uscita chiusa cantiere, lunghezza [km] 0.1",
+              "value": "Closure",
+              "detail": "until 12 November 2026",
+              "date": "2026-07-27T05:05:00.000Z"
+            },
+            {
+              "label": "Bützberg <-> Aarwangen Luogo Bützberg Situazione: chiusa Causa: incendio",
+              "value": "Closure",
+              "date": "2026-08-12T02:00:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse tra Svincolo autostradale Bern-Neufeld E Svincolo autostradale Bern-Tiefenaustrasse Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 19 October 2026",
+              "date": "2026-08-14T06:17:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Plangenehmigung Tram Kleinwabern erteilt",
+              "date": "2026-10-06",
+              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
+            },
+            {
+              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
+              "date": "2026-09-28T13:28:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
+              "date": "2026-09-28T10:05:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern-Ostermundigen",
+              "date": "2026-09-28",
+              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
+            },
+            {
+              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
+              "date": "2026-09-27T14:24:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
+            },
+            {
+              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
+              "date": "2026-09-17T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Public transport passes Canton Bern: zones and fares",
+          "url": "/en/swiss-articles/public-transport-canton-berne-subscriptions/",
+          "excerpt": "Information on areas and fares for public transport passes in the Canton of Bern",
+          "date": "2026-08-13T07:24:39.765Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "BE",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Kanton Bern bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "32",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "90",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Bösingenstrasse, 3177 Laupen, Switzerland in beide Richtungen Sachlage: Brücke gesperrt Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 27. August 2027",
+              "date": "2024-09-02T04:00:00.000Z"
+            },
+            {
+              "label": "Laupen <-> Gurmels zwischen Ortschaft Kriechenwil und Ortschaft Laupen Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 27. August 2027",
+              "date": "2024-10-02T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Bern <-> Zürich Anschluss Wangen an der Aare Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2025-04-28T03:00:00.000Z"
+            },
+            {
+              "label": "A6W Verzweigung Lattigen <-> Port zwischen Anschluss Port und Anschluss Wimmis Sachlage: Strecke gesperrt Baustelle, Länge [km] 1.5",
+              "value": "Sperrung",
+              "detail": "bis 30. November 2026",
+              "date": "2026-06-16T14:33:00.000Z"
+            },
+            {
+              "label": "A2 Basel -> Luzern zwischen Tunnel Ebenrain-Tunnel und Tunnel Oberburg-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 7.3 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-07-09T10:04:00.000Z"
+            },
+            {
+              "label": "A6W Verzweigung Lattigen -> Port zwischen Autobahndreieck Verzweigung Lattigen und Anschluss Wimmis Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.1",
+              "value": "Sperrung",
+              "detail": "bis 12. November 2026",
+              "date": "2026-07-27T05:05:00.000Z"
+            },
+            {
+              "label": "Bützberg <-> Aarwangen Ortschaft Bützberg Sachlage: Strecke gesperrt Ursache: Brand",
+              "value": "Sperrung",
+              "date": "2026-08-12T02:00:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse zwischen Anschluss Bern-Neufeld und Anschluss Bern-Tiefenaustrasse Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 19. Oktober 2026",
+              "date": "2026-08-14T06:17:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Plangenehmigung Tram Kleinwabern erteilt",
+              "date": "2026-10-06",
+              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
+            },
+            {
+              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
+              "date": "2026-09-28T13:28:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
+              "date": "2026-09-28T10:05:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern-Ostermundigen",
+              "date": "2026-09-28",
+              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
+            },
+            {
+              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
+              "date": "2026-09-27T14:24:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
+            },
+            {
+              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
+              "date": "2026-09-17T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Öffentliche Verkehrsmittel Kanton Bern: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/offentlicher-verkehr-kanton-bern-abonnements/",
+          "excerpt": "Informationen zu den Zonen und Tarifen der ÖV-Abos im Kanton Bern",
+          "date": "2026-08-13T07:24:39.765Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "BE",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Berne, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "32",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "90",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Bösingenstrasse, 3177 Laupen, Switzerland dans les deux sens Situation: pont fermé Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 août 2027",
+              "date": "2024-09-02T04:00:00.000Z"
+            },
+            {
+              "label": "Laupen <-> Gurmels entre Localité Kriechenwil et Localité Laupen Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 août 2027",
+              "date": "2024-10-02T05:00:00.000Z"
+            },
+            {
+              "label": "A1 Berne <-> Zurich Jonction autoroutière Wangen an der Aare Situation: trafic perturbé travaux Gestion du trafic: bande d'arrêt d'urgence fermée Complément 1: limitation temporaire de largeur…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2025-04-28T03:00:00.000Z"
+            },
+            {
+              "label": "A6W Echangeur de Lattigen <-> Port entre Jonction autoroutière Port et Jonction autoroutière Wimmis Situation: fermé travaux, longueur [km] 1.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 novembre 2026",
+              "date": "2026-06-16T14:33:00.000Z"
+            },
+            {
+              "label": "A2 Bâle -> Lucerne entre Tunnel Tunnel de Ebenrain et Tunnel Tunnel de Oberburg Situation: trafic perturbé travaux, longueur [km] 7.3 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-07-09T10:04:00.000Z"
+            },
+            {
+              "label": "A6W Echangeur de Lattigen -> Port entre Echangeur Echangeur de Lattigen et Jonction autoroutière Wimmis Situation: sortie fermée travaux, longueur [km] 0.1",
+              "value": "Fermeture",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-07-27T05:05:00.000Z"
+            },
+            {
+              "label": "Bützberg <-> Aarwangen Localité Bützberg Situation: fermé Raison: incendie",
+              "value": "Fermeture",
+              "date": "2026-08-12T02:00:00.000Z"
+            },
+            {
+              "label": "Autobahnzubringer Bern-Neufeld Berne-Neufeld <-> Tiefenaustrasse entre Jonction autoroutière Berne-Neufeld et Jonction autoroutière Bern-Tiefenaustrasse Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 octobre 2026",
+              "date": "2026-08-14T06:17:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Plangenehmigung Tram Kleinwabern erteilt",
+              "date": "2026-10-06",
+              "url": "https://www.bernmobil.ch/de/plangenehmigung-tram-kleinwabern-erteilt"
+            },
+            {
+              "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
+              "date": "2026-09-28T13:28:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
+              "date": "2026-09-28T10:05:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
+            },
+            {
+              "label": "Baubewilligung für Tram Bern-Ostermundigen",
+              "date": "2026-09-28",
+              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
+            },
+            {
+              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
+              "date": "2026-09-27T14:24:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
+            },
+            {
+              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
+              "date": "2026-09-17T05:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports publics Canton de Berne : zones et tarifs",
+          "url": "/fr/articles-suisse/transports-publiques-canton-de-berne-abonnements/",
+          "excerpt": "Informations sur les zones et les tarifs des abonnements transports publics dans le canton de Berne",
+          "date": "2026-08-13T07:24:39.765Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

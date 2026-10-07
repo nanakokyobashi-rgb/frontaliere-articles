@@ -1,19 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948218/medici-specialisti-alcuni-esagerano-prioswiss-tardoc-direttrice": {
-    "articleId": "medici-specialisti-fatturazioni-svizzera",
-    "ts": "2026-09-05T13:45:01.980Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/prio%2eswiss%3a-alcuni-medici-specialisti-esagerano-con-tardoc/92010294": {
-    "articleId": "prio-swiss-medici-specialisti-tardoc",
-    "ts": "2026-09-05T13:56:33.347Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/tg%3a-colpito-a-morte-da-cesto-di-mongolfiera/92006537": {
-    "articleId": "morte-mongolfiera-ticino",
-    "ts": "2026-09-05T14:06:08.331Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/cronaca/1948197/fiamme-in-piena-notte-alla-scuola-professionale": {
     "articleId": "incendio-notturno-scuola-professionale-biasca",
     "ts": "2026-09-05T14:17:14.593Z",
@@ -2497,6 +2482,21 @@
   "https://www.tio.ch/ticino/politica/1955012/bocciate-le-due-iniziative-sulla-giustizia-targate-mps": {
     "articleId": "iniziative-mps-giustizia-respinte",
     "ts": "2026-10-06T18:30:48.053Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954981/prezzi-varopreem-raffineria-carburanti-diesel-svizzera-produzione-ceo": {
+    "articleId": "raffineria-cressier-carburanti",
+    "ts": "2026-10-07T05:28:44.579Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
+    "articleId": "quattro-oggetti-urne-novembre",
+    "ts": "2026-10-07T06:42:41.995Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4135844": {
+    "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
+    "ts": "2026-10-07T07:21:41.466Z",
     "keyForm": 2
   }
 }
