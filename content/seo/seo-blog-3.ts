@@ -1496,10 +1496,10 @@ const BLOG_SEO_METADATA_3: Record<string, SEOMetadata> = {
 
 
  'blog-apprendisti-frontalieri-permessi-g': {
- title: 'Apprendisti frontalieri verso il permesso G per tutta',
+ title: 'Apprendisti frontalieri: permesso G per il tirocinio',
  description: 'Il Parlamento federale ha approvato la mozione 25.3624 per consentire agli apprendisti frontalieri di ottenere il permesso G per tutta la durata del tirocinio.',
  keywords: 'frontalieri, ticino, svizzera, italia, apprendisti, verso, permesso, tutta',
- ogTitle: 'Apprendisti frontalieri verso il permesso G per tutta la durata del tirocinio',
+ ogTitle: 'Apprendisti frontalieri: permesso G per il tirocinio',
  ogDescription: 'Il Parlamento federale ha approvato la mozione 25.3624 per consentire agli apprendisti frontalieri di ottenere il permesso G per tutta la durata del tirocinio.',
  canonicalPath: '/articoli-frontaliere/apprendisti-frontalieri-permessi-g/',
  structuredData: {

@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-fr:mobilita",
+  "section": "canton-fr",
+  "canton": "FR",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "4450c22f915625cd2e281f1635f98888d4adea7d4f88ba659ba458fe11f17ef0",
+  "blocks": [
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "FR",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Friburgo, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "16",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "8",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Pont du Milieu, Fribourg Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 15 ottobre 2026",
+              "date": "2026-03-30T16:29:00.000Z"
+            },
+            {
+              "label": "Rue du Russon, Vuadens Situazione: chiusa cantiere Causa: lavori di manutenzione Limitazione del traffico: nuova viabilità",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-04-07T12:18:00.000Z"
+            },
+            {
+              "label": "Route d'Onnens, Neyruz in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-07-30T09:34:00.000Z"
+            },
+            {
+              "label": "Petites-Rames, Fribourg in tutte le direzioni Situazione: chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 dicembre 2026",
+              "date": "2026-09-07T09:03:00.000Z"
+            },
+            {
+              "label": "Route de Morat, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-09-21T12:35:00.000Z"
+            },
+            {
+              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-09-23T09:32:00.000Z"
+            },
+            {
+              "label": "Rue du Progrès, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-09-24T06:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Morat tra Svincolo autostradale Yverdon Sud E Svincolo autostradale Estavayer-le-Lac Situazione: chiusa cantiere, lunghezza [km] 0.1",
+              "value": "Chiusura",
+              "detail": "fine prevista: 29 ottobre 2026",
+              "date": "2026-09-28T05:30:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
+              "date": "2026-10-05T13:37:46.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
+            },
+            {
+              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
+              "date": "2026-10-05T11:50:45.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
+            },
+            {
+              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
+              "date": "2026-10-04T10:28:53.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
+            },
+            {
+              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
+            },
+            {
+              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
+            },
+            {
+              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
+              "date": "2026-10-01T08:52:05.000Z",
+              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-friburgo-zone-tariffe/",
+          "excerpt": "Zone tariffarie progressive, abbonamenti annuali e mensili, sconti per studenti: guida completa ai trasporti pubblici friburghesi e nazionali.",
+          "date": "2026-08-24T02:28:56.399Z"
+        },
+        {
+          "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
+          "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
+          "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Friburgo: 117 milioni per 13 nuovi treni Flirt",
+          "url": "/articoli-svizzera/stadler-rail-friburgo-117-milioni/",
+          "excerpt": "Stadler Rail fornirà 13 nuovi treni Flirt Evo ai Trasporti pubblici friburghesi per 117 milioni CHF. Prime consegne a dicembre 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
+          "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
+          "date": "2026-08-18T00:58:21.517Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "FR",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of Fribourg, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Road closures in force or imminent",
+          "value": "16",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "8",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Pont du Milieu, Fribourg Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 15 October 2026",
+              "date": "2026-03-30T16:29:00.000Z"
+            },
+            {
+              "label": "Rue du Russon, Vuadens Situazione: chiusa cantiere Causa: lavori di manutenzione Limitazione del traffico: nuova viabilità",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-04-07T12:18:00.000Z"
+            },
+            {
+              "label": "Route d'Onnens, Neyruz in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-07-30T09:34:00.000Z"
+            },
+            {
+              "label": "Petites-Rames, Fribourg in tutte le direzioni Situazione: chiusa",
+              "value": "Closure",
+              "detail": "until 4 December 2026",
+              "date": "2026-09-07T09:03:00.000Z"
+            },
+            {
+              "label": "Route de Morat, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-09-21T12:35:00.000Z"
+            },
+            {
+              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-09-23T09:32:00.000Z"
+            },
+            {
+              "label": "Rue du Progrès, Fribourg in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-09-24T06:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Morat tra Svincolo autostradale Yverdon Sud E Svincolo autostradale Estavayer-le-Lac Situazione: chiusa cantiere, lunghezza [km] 0.1",
+              "value": "Closure",
+              "detail": "until 29 October 2026",
+              "date": "2026-09-28T05:30:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
+              "date": "2026-10-05T13:37:46.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
+            },
+            {
+              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
+              "date": "2026-10-05T11:50:45.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
+            },
+            {
+              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
+              "date": "2026-10-04T10:28:53.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
+            },
+            {
+              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
+            },
+            {
+              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
+            },
+            {
+              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
+              "date": "2026-10-01T08:52:05.000Z",
+              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Public transport tickets canton Freiburg: zones and fares",
+          "url": "/en/swiss-articles/fribourg-public-transport-subscriptions-zones/",
+          "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Freiburg and the country.",
+          "date": "2026-08-24T02:28:56.399Z"
+        },
+        {
+          "title": "Freiburg Transport Subscriptions: Zones and Rates",
+          "url": "/en/swiss-articles/public-transport-subscriptions-friburgo/",
+          "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
+          "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Freiburg: 117 million for 13 new Flirt trains",
+          "url": "/en/swiss-articles/stadler-rail-fribourg-117-million/",
+          "excerpt": "Stadler Rail will supply 13 new Flirt Evo trains to the Freiburg Public Transport for CHF 117 million. First deliveries in December 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Public transport passes in the canton of Freiburg: zones and fares",
+          "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
+          "excerpt": "Here are the details on public transport subscriptions in the Canton of Freiburg.",
+          "date": "2026-08-18T00:58:21.517Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "FR",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Kanton Freiburg bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "16",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "8",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Pont du Milieu, Fribourg Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 15. Oktober 2026",
+              "date": "2026-03-30T16:29:00.000Z"
+            },
+            {
+              "label": "Rue du Russon, Vuadens Sachlage: Strecke gesperrt Baustelle Ursache: Unterhaltsarbeiten Verkehrsführung: veränderte Verkehrsführung",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-04-07T12:18:00.000Z"
+            },
+            {
+              "label": "Route d'Onnens, Neyruz in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-07-30T09:34:00.000Z"
+            },
+            {
+              "label": "Petites-Rames, Fribourg in beide Richtungen Sachlage: Strecke gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 4. Dezember 2026",
+              "date": "2026-09-07T09:03:00.000Z"
+            },
+            {
+              "label": "Route de Morat, Fribourg in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-09-21T12:35:00.000Z"
+            },
+            {
+              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-09-23T09:32:00.000Z"
+            },
+            {
+              "label": "Rue du Progrès, Fribourg in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-09-24T06:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Murten zwischen Anschluss Yverdon-Süd und Anschluss Estavayer-le-Lac Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.1",
+              "value": "Sperrung",
+              "detail": "bis 29. Oktober 2026",
+              "date": "2026-09-28T05:30:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
+              "date": "2026-10-05T13:37:46.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
+            },
+            {
+              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
+              "date": "2026-10-05T11:50:45.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
+            },
+            {
+              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
+              "date": "2026-10-04T10:28:53.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
+            },
+            {
+              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
+            },
+            {
+              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
+            },
+            {
+              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
+              "date": "2026-10-01T08:52:05.000Z",
+              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/freiburg-fahrkarten-abo-zonen-tarife/",
+          "excerpt": "Progressive Tarifzonen, Jahres- und Monatsabonnements, Studentenrabatte: Kompletter Leitfaden für den öffentlichen Verkehr in Freiburg und im Inland.",
+          "date": "2026-08-24T02:28:56.399Z"
+        },
+        {
+          "title": "Fahrkarten Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
+          "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
+          "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Freiburg: 117 Millionen für 13 neue FLIRT-Züge",
+          "url": "/de/schweiz-artikel/stadler-rail-freiburg-117-millionen/",
+          "excerpt": "Stadler Rail wird 13 neue Flirt Evo-Züge für CHF 117 Mio. an den öffentlichen Verkehr in Freiburg liefern. Erste Auslieferungen im Dezember 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/fribourg-oeffentliche-verkehr-abos/",
+          "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
+          "date": "2026-08-18T00:58:21.517Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "FR",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Fribourg, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "16",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "8",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Pont du Milieu, Fribourg Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 15 octobre 2026",
+              "date": "2026-03-30T16:29:00.000Z"
+            },
+            {
+              "label": "Rue du Russon, Vuadens Situation: fermé travaux Raison: travaux de maintenance Gestion du trafic: nouveau plan de circulation",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-04-07T12:18:00.000Z"
+            },
+            {
+              "label": "Route d'Onnens, Neyruz dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-07-30T09:34:00.000Z"
+            },
+            {
+              "label": "Petites-Rames, Fribourg dans les deux sens Situation: fermé",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 décembre 2026",
+              "date": "2026-09-07T09:03:00.000Z"
+            },
+            {
+              "label": "Route de Morat, Fribourg dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-09-21T12:35:00.000Z"
+            },
+            {
+              "label": "Route de la Verrerie 27, Saint-Martin (FR) <-> Route de la Verrerie 140, Fiaugères Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-09-23T09:32:00.000Z"
+            },
+            {
+              "label": "Rue du Progrès, Fribourg dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-09-24T06:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne <-> Morat entre Jonction autoroutière Yverdon-Sud et Jonction autoroutière Estavayer-le-Lac Situation: fermé travaux, longueur [km] 0.1",
+              "value": "Fermeture",
+              "detail": "jusqu’au 29 octobre 2026",
+              "date": "2026-09-28T05:30:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
+              "date": "2026-10-05T13:37:46.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restriction-de-circulation-route-de-champriond-du-12-octobre-au-27-novembre-2026"
+            },
+            {
+              "label": "Plan du réseau cantonal des voies cyclables - Vélo au quotidien",
+              "date": "2026-10-05T11:50:45.000Z",
+              "url": "https://www.fr.ch/mobilite-et-transport/mobilite-douce/plan-du-reseau-cantonal-des-voies-cyclables-velo-au-quotidien"
+            },
+            {
+              "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
+              "date": "2026-10-04T10:28:53.000Z",
+              "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
+            },
+            {
+              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
+            },
+            {
+              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
+              "date": "2026-10-01T14:19:43.000Z",
+              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
+            },
+            {
+              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
+              "date": "2026-10-01T08:52:05.000Z",
+              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/fribourg-abonnements-transports-zones-tarifs/",
+          "excerpt": "Zones tarifaires progressives, abonnements annuels et mensuels, réductions pour étudiants : guide complet des transports publics fribourgeois et nationaux.",
+          "date": "2026-08-24T02:28:56.399Z"
+        },
+        {
+          "title": "Abonnements transports Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
+          "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
+          "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Fribourg : 117 millions pour 13 nouveaux trains Flirt",
+          "url": "/fr/articles-suisse/stadler-rail-fribourg-117-millions/",
+          "excerpt": "Stadler Rail fournira 13 nouveaux trains Flirt Evo aux Transports publics fribourgeois pour CHF 117 millions. Premières livraisons en décembre 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
+          "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
+          "date": "2026-08-18T00:58:21.517Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}

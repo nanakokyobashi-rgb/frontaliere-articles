@@ -1,0 +1,595 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-be:fisco",
+  "section": "canton-be",
+  "canton": "BE",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "9b08fe005075c668e6ecab62781d14c1d21b223d03646f105d7696d510528948",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BE",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Berna, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "16,37 %",
+          "note": "Bern, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "13,95 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Bern)",
+              "value": "6,91 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Bern)",
+              "value": "12,75 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Bern)",
+              "value": "16,37 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Bern)",
+              "value": "20,31 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Bern)",
+              "value": "26,21 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "8,47 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "11,93 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "13,95 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "15,98 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "20,55 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
+          "url": "/articoli-svizzera/fisco-berna-guida-2026/",
+          "excerpt": "Tre livelli fiscali, moltiplicatore comunale e competenze separate: la guida 2026 alla dichiarazione online nel canton Berna, con confronto nazionale.",
+          "date": "2026-10-03T09:08:36.139Z"
+        },
+        {
+          "title": "Imposta cantonale: confronto Svizzera 2026 e Berna",
+          "url": "/articoli-svizzera/mappa-fiscale-berna-2026/",
+          "excerpt": "Nel 2026 il confronto fiscale parte da IFD federale, imposta cantonale e imposta comunale: per Berna conta anche il moltiplicatore comunale.",
+          "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Imposta sugli autoveicoli a Berna: calcolo e pagamento",
+          "url": "/articoli-svizzera/veicoli-berna-calcolo-pratico/",
+          "excerpt": "Nel Cantone di Berna criteri, scadenze, importi e ufficio per l'imposta sugli autoveicoli dipendono dalle regole cantonali.",
+          "date": "2026-10-05T04:37:57.318Z"
+        },
+        {
+          "title": "Imposta successione e donazione Cantone Berna: aliquote",
+          "url": "/articoli-svizzera/imposta-successione-donazione-berna/",
+          "excerpt": "Guida alle aliquote per grado di parentela, esenzioni per coniugi e discendenti e termini di dichiarazione nel Cantone di Berna.",
+          "date": "2026-08-14T00:58:50.097Z"
+        },
+        {
+          "title": "Imposte cantonali nel Cantone di Berna: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonal-berna-aliquote-deduzioni/",
+          "excerpt": "Le imposte cantonali nel Cantone di Berna sono gestite dall'amministrazione cantonale e hanno aliquote diverse in base allo scaglione di reddito.",
+          "date": "2026-08-12T06:10:54.824Z"
+        },
+        {
+          "title": "Imposte di successione nel Canton Berna",
+          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-berna-aliquote/",
+          "excerpt": "Conoscere le aliquote per grado di parentela e le esenzioni per coniuge e discendenti",
+          "date": "2026-08-14T01:09:05.964Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "BE",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Bern, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "16.37%",
+          "note": "Bern, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "13.95%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Bern)",
+              "value": "6.91%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Bern)",
+              "value": "12.75%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Bern)",
+              "value": "16.37%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Bern)",
+              "value": "20.31%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Bern)",
+              "value": "26.21%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "8.47%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "11.93%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "13.95%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "15.98%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "20.55%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Swiss tax return: practical guide for 2026 in Bern",
+          "url": "/en/swiss-articles/swiss-tax-guide-bern-2026/",
+          "excerpt": "Three tax levels, municipal multiplier and separate jurisdictions: the 2026 guide to the online tax return in the Canton of Bern, with a national comparison.",
+          "date": "2026-10-03T09:08:36.139Z"
+        },
+        {
+          "title": "Cantonal Tax: A Comparison Between Switzerland in 2026 and Bern",
+          "url": "/en/swiss-articles/swiss-tax-map-bern-2026/",
+          "excerpt": "In 2026, the tax comparison will be based on the federal direct tax, cantonal tax, and municipal tax; for Bern, the municipal multiplier will also be taken into account.",
+          "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Motor vehicle tax in Bern: calculation and payment",
+          "url": "/en/swiss-articles/bern-vehicle-tax-calculation-payment/",
+          "excerpt": "In the Canton of Bern, the criteria, deadlines, amounts and office responsible for motor vehicle tax depend on cantonal rules.",
+          "date": "2026-10-05T04:37:57.318Z"
+        },
+        {
+          "title": "Inheritance and donation tax Canton Bern: rates",
+          "url": "/en/swiss-articles/inheritance-gift-tax-bern-rates/",
+          "excerpt": "Guide to rates for degree of kinship, exemptions for spouses and descendants and terms of declaration in the Canton of Bern.",
+          "date": "2026-08-14T00:58:50.097Z"
+        },
+        {
+          "title": "Cantonal taxes in the Canton of Bern: rates and deductions",
+          "url": "/en/swiss-articles/imposte-cantonal-berna-aliquote-deduzioni/",
+          "excerpt": "Cantonal taxes in the Canton of Bern are managed by the cantonal administration and have different rates based on the income bracket.",
+          "date": "2026-08-12T06:10:54.824Z"
+        },
+        {
+          "title": "Inheritance taxes in the Canton of Bern",
+          "url": "/en/swiss-articles/inheritance-and-donation-tax-canton-berne-rates/",
+          "excerpt": "Know the kinship rates and exemptions for spouses and descendants",
+          "date": "2026-08-14T01:09:05.964Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "BE",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Bern hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "16.37 %",
+          "note": "Bern, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "13.95 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Bern)",
+              "value": "6.91 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Bern)",
+              "value": "12.75 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Bern)",
+              "value": "16.37 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Bern)",
+              "value": "20.31 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Bern)",
+              "value": "26.21 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "8.47 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "11.93 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "13.95 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "15.98 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "20.55 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Schweizer Steuererklärung: praktischer Leitfaden 2026 in Bern",
+          "url": "/de/schweiz-artikel/steuererklaerung-bern-2026/",
+          "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und getrennte Zuständigkeiten: der Leitfaden 2026 zur Online-Steuererklärung im Kanton Bern, mit einem nationalen Vergleich.",
+          "date": "2026-10-03T09:08:36.139Z"
+        },
+        {
+          "title": "Kantonssteuer: Vergleich Schweiz 2026 und Bern",
+          "url": "/de/schweiz-artikel/steuervergleich-bern-schweiz-2026/",
+          "excerpt": "Im Jahr 2026 basiert der Steuervergleich auf der eidgenössischen direkten Steuer, der Kantonssteuer und der Gemeindesteuer; für Bern spielt zudem der Gemeindemultiplikator eine Rolle.",
+          "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Motorfahrzeugsteuer in Bern: Berechnung und Zahlung",
+          "url": "/de/schweiz-artikel/bern-autosteuer-berechnung-zahlung/",
+          "excerpt": "Im Kanton Bern richten sich Kriterien, Fristen, Beträge und die Kfz-Steuerstelle nach den kantonalen Regelungen.",
+          "date": "2026-10-05T04:37:57.318Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer Kanton Bern: Steuersätze",
+          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-bern-steuersatz/",
+          "excerpt": "Leitfaden zu den Sätzen nach Verwandtschaftsgrad, Befreiungen für Ehegatten und Nachkommen und Erklärungsfristen im Kanton Bern.",
+          "date": "2026-08-14T00:58:50.097Z"
+        },
+        {
+          "title": "Kantonale Steuern im Kanton Bern: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/imposten-cantonal-berner-ertragssteuern-satz-berechnung/",
+          "excerpt": "Die kantonalen Steuern im Kanton Bern werden von der kantonalen Verwaltung verwaltet und haben je nach Einkommensstufe unterschiedliche Sätze.",
+          "date": "2026-08-12T06:10:54.824Z"
+        },
+        {
+          "title": "Erbschaftssteuern im Kanton Bern",
+          "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-kanton-bern-zahlungen/",
+          "excerpt": "Kennen Sie die Sätze nach Verwandtschaftsgrad und die Befreiungen für Ehepartner und Nachkommen",
+          "date": "2026-08-14T01:09:05.964Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "BE",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton de Berne, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "16,37 %",
+          "note": "Bern, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "13,95 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Bern)",
+              "value": "6,91 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Bern)",
+              "value": "12,75 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Bern)",
+              "value": "16,37 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Bern)",
+              "value": "20,31 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Bern)",
+              "value": "26,21 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "8,47 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "11,93 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "13,95 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "15,98 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "20,55 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.sv.fin.be.ch/sv_fin/de/index/navi/index/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Déclaration fiscale suisse : guide pratique 2026 à Berne",
+          "url": "/fr/articles-suisse/declaration-impots-berne-2026/",
+          "excerpt": "Trois niveaux fiscaux, multiplicateur communal et compétences distinctes : le guide 2026 de la déclaration en ligne dans le canton de Berne, avec comparaison nationale.",
+          "date": "2026-10-03T09:08:36.139Z"
+        },
+        {
+          "title": "Taxe cantonale : comparaison entre la Suisse et Berne en 2026",
+          "url": "/fr/articles-suisse/comparatif-fiscal-berne-suisse-2026/",
+          "excerpt": "En 2026, la comparaison fiscale commence avec le DFI fédéral, l’impôt cantonal et l’impôt municipal : pour Berne, le multiplicateur municipal compte également.",
+          "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Taxe automobile à Berne : calcul et paiement",
+          "url": "/fr/articles-suisse/berne-impot-vehicules-calcul-paiement/",
+          "excerpt": "Dans le canton de Berne, les critères, les délais, les montants et le bureau compétent pour l'impôt sur les véhicules automobiles dépendent des règles cantonales.",
+          "date": "2026-10-05T04:37:57.318Z"
+        },
+        {
+          "title": "Impôt succession et donation Canton de Berne : taux",
+          "url": "/fr/articles-suisse/impot-succession-donation-berne-taux/",
+          "excerpt": "Guide des taux par degré de parenté, exemptions pour conjoints et descendants et délais de déclaration dans le canton de Berne.",
+          "date": "2026-08-14T00:58:50.097Z"
+        },
+        {
+          "title": "Impôts cantonaux dans le canton de Berne : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-bernais-impots-surtaxes-berechnung/",
+          "excerpt": "Les impôts cantonaux dans le canton de Berne sont gérés par l'administration cantonale et ont des taux différents en fonction de la tranche de revenu.",
+          "date": "2026-08-12T06:10:54.824Z"
+        },
+        {
+          "title": "Impôts sur les successions dans le canton de Berne",
+          "url": "/fr/articles-suisse/taxe-sur-la-succesions-et-la-donation-canton-de-berne/",
+          "excerpt": "Connaître les taux par degré de parenté et les exemptions pour conjoint et descendants",
+          "date": "2026-08-14T01:09:05.964Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

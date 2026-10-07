@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import '../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
+import { bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
@@ -69,7 +72,9 @@ test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il 
   assert.match(validation, /\.articleIds\[\]\?/);
   assert.match(validation, /\.bridgeIds\[\]\?/);
   assert.match(validation, /expected_ids/);
-  assert.match(validation, /grep -Eq .*Person\|Organization.*autori/);
+  assert.match(validation, /author_entry/);
+  assert.match(validation, /@type.*Person\|Organization/);
+  assert.match(validation, /frontaliereticino.*autori/);
   assert.doesNotMatch(validation, /has no Person author/);
 
   const probe = stepText('Verify the article is actually readable');
@@ -79,4 +84,31 @@ test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il 
   assert.match(probe, /poll_origin "\$u" 1 8/);
   assert.doesNotMatch(probe, /\.articlePaths\[0\]/);
   assert.doesNotMatch(probe, /\.shards\[\]\.url(?:'|\s|$)/);
+});
+
+test('un push solo cantonale salta il publisher Pages e un push misto conserva le storiche', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+  const cantonSections = ARTICLE_SECTION_CORE_LIST.filter((section) => section.kind === 'canton');
+  assert.equal(cantonSections.length, 24, 'la regressione deve coprire tutte le sezioni cantonali del core');
+  const cantonFiles = cantonSections.flatMap((section) => [
+    `content/${section.bodyDir}/it/example.ts`,
+    `content/cantons/${section.section}/registry.ts`,
+    `content/blog-meta-${section.section}-it.ts`,
+  ]);
+  const pagesBody = new RegExp(bodyRegex(ARTICLE_SECTION_CORE_LIST, { served: 'shard' }));
+  assert.deepEqual(cantonFiles.filter((file) => pagesBody.test(file)), []);
+  assert.deepEqual(
+    ['content/blog-body/it/historical.ts', ...cantonFiles].filter((file) => pagesBody.test(file)),
+    ['content/blog-body/it/historical.ts'],
+  );
+  assert.match(resolveStep, /CANTON_CONTENT_HANDLED_BY_FAST_PUBLISH_SECTION=1/);
+  assert.match(resolveStep, /skip_reason=canton-only-r2/);
+  assert.match(resolveStep, /fast-publish-section\.yml.*R2/);
+});
+
+test('la validazione accetta il profilo editoriale nominato ma non il fallback generico', () => {
+  const validation = stepText('Validate what was rendered');
+  assert.match(validation, /Person\|Organization/);
+  assert.match(validation, /autori/);
+  assert.doesNotMatch(validation, /no Person author/);
 });

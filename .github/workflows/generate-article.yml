@@ -335,6 +335,8 @@ jobs:
     outputs:
       proceed: ${{ steps.check.outputs.proceed }}
       chain_link: ${{ steps.check.outputs.chain_link }}
+      content_push: ${{ steps.check.outputs.content_push }}
+      run_mode: ${{ steps.check.outputs.run_mode }}
     steps:
       - name: Skip when a generation is already in flight
         id: check
@@ -351,8 +353,23 @@ jobs:
           PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: generate-article.yml
+          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -uo pipefail
+          # `run_mode` alimenta il gruppo di concurrency del job generate. Il
+          # trap copre anche tutti gli exit anticipati
+          # (manuale, fail-open, self-test eletto), così nessun job ricade nel
+          # gruppo dry per un output mancante.
+          content_push=false
+          successor_push=false
+          run_mode=dry
+          case "$EVENT_NAME" in
+            schedule) run_mode=production ;;
+            workflow_dispatch)
+              [ "${DRY_RUN:-false}" = "true" ] || run_mode=production
+              ;;
+          esac
+          trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"; echo "run_mode=$run_mode" >> "$GITHUB_OUTPUT"' EXIT
 
           # ── UN DISPATCH ORA PUO' ESSERE DUE COSE DIVERSE (2026-08-18) ───────
           #
@@ -416,14 +433,54 @@ jobs:
           # «questo arrivo può scrivere?» — e nel dubbio (compare vuoto,
           # `before` azzerato, errore API) si risponde di sì e si prosegue col
           # ragionamento sotto, cioè si degrada al comportamento normale.
+          # A content push is the producer's successor. It may arrive while
+          # the producer is still in flight (the push can happen before the
+          # producer run has reached its final step), so remember this trigger
+          # for the in-flight decision below. The generate job's own
+          # concurrency group serializes it safely behind the producer.
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
-            changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
-              --jq '.files[].filename' 2>/dev/null || true)
-            if [ -n "${changed:-}" ] && ! printf '%s\n' "$changed" | grep -q '^content/'; then
-              self_test_callers=$(printf '%s\n' "$changed" \
-                | grep -E '^\.github/workflows/generate-article-[a-z0-9]+\.yml$' \
-                | grep -v '/generate-article-core\.yml$' \
-                | sort -u || true)
+            compare_status=0
+            compare_truncated=false
+            compare_payload=$(gh api --paginate --slurp "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
+              2>/dev/null) || compare_status=$?
+            changed=
+            compare_file_count=0
+            if [ "$compare_status" -eq 0 ]; then
+              compare_file_count=$(jq -r '[.[]?.files[]?.filename] | length' <<< "$compare_payload" 2>/dev/null) || compare_status=$?
+              case "$compare_file_count" in
+                ''|*[!0-9]*) compare_status=65 ;;
+                300|[3-9][0-9][0-9]|[1-9][0-9][0-9][0-9]*) compare_truncated=true ;;
+                *) changed=$(jq -r '.[]?.files[]?.filename' <<< "$compare_payload" 2>/dev/null) || compare_status=$? ;;
+              esac
+            fi
+            if [ "$compare_status" -ne 0 ] || [ "$compare_truncated" = "true" ]; then
+              successor_push=true
+              run_mode=unknown
+              if [ "$compare_truncated" = "true" ]; then
+                echo "::warning title=Confronto push troncato::gh api compare ha restituito almeno 300 file; il push resta un successore non classificato per non perdere un articolo."
+              else
+                echo "::warning title=Confronto push non disponibile::gh api compare non ha restituito tutti i file del push (status $compare_status); il push resta un successore non classificato per non perdere un articolo."
+              fi
+            else
+              content_push=false
+              while IFS= read -r changed_path; do
+                case "$changed_path" in
+                  content/*) content_push=true; break ;;
+                esac
+              done <<< "$changed"
+            fi
+            if [ "$content_push" = "true" ]; then
+              successor_push=true
+              run_mode=production
+              content_push=true
+              echo "Push che tocca content/**: successore di produzione; la serializzazione resta nel job generate."
+            elif [ -n "${changed:-}" ]; then
+              self_test_callers=$(while IFS= read -r changed_path; do
+                if [[ "$changed_path" == .github/workflows/generate-article-[a-z0-9]*.yml \
+                  && "$changed_path" != .github/workflows/generate-article-core.yml ]]; then
+                  printf '%s\n' "$changed_path"
+                fi
+              done <<< "$changed" | sort -u || true)
               if [ -n "${self_test_callers:-}" ] \
                 && printf '%s\n' "$self_test_callers" | grep -Fqx -- ".github/workflows/${CALLER_WORKFLOW:-}"; then
                 self_test_leader=$(printf '%s\n' "$self_test_callers" | head -1)
@@ -565,11 +622,13 @@ jobs:
           # sotto), non la uccide e non le si sovrappone. E' il verso giusto in
           # cui sbagliare.
           #
-          # Proseguire NON riapre il buco di sovrapposizione che e' costato
-          # #255/#281/#285: il job `generate` ha `concurrency: generate-article`
-          # con `cancel-in-progress: false`, quindi l'arrivo ammesso si METTE IN
-          # CODA e parte quando l'incastrata muore. Qui si sceglie fra
-          # «aspetta in coda» e «non esistere mai», non fra «una» e «due».
+          # Proseguire per un push su `content/**` NON riapre il buco di
+          # sovrapposizione che e' costato #255/#281/#285: il job `generate` ha
+          # `concurrency: generate-article` con `cancel-in-progress: false`,
+          # quindi l'arrivo ammesso si METTE IN CODA e parte quando l'incastrata
+          # muore. Qui si sceglie fra «aspetta in coda» e «non esistere mai»,
+          # non fra «una» e «due». Gli altri trigger conservano il gate: una
+          # schedule o un dispatch di catena ridondante resta uno skip.
           #
           # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
           # rende il verdetto deterministico e non dipende dall'orologio del
@@ -608,13 +667,18 @@ jobs:
           esac
 
           if [ "$older" -gt 0 ]; then
-            echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
-            echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
-            echo "proceed=false" >> "$GITHUB_OUTPUT"
-            echo "GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown"
-            exit 0
+            if [ "$successor_push" = "true" ]; then
+              echo "Ci sono $older run più vecchie in volo, ma questo push è un successore: si procede e il job generate attende la concurrency."
+            else
+              echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
+              echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown"
+              exit 0
+            fi
+          else
+            echo "Nessuna generazione più vecchia in volo → si procede."
           fi
-          echo "Nessuna generazione più vecchia in volo → si procede."
           echo "proceed=true" >> "$GITHUB_OUTPUT"
 
   generate:
@@ -626,7 +690,13 @@ jobs:
     # run can leave the corpus half-written. Resta come RETE dietro `admit` —
     # vedi l'intestazione sopra per perché non è più il primo strato.
     concurrency:
-      group: generate-article
+      # GitHub conserva un solo pending per gruppo: il successore content deve
+      # stare separato dai self-test dry, altrimenti un push di workflow può
+      # sostituirlo mentre aspetta il producer. `unknown` resta un modo
+      # osservabile dell'admit, ma condivide il lock legacy `generate-article`
+      # con production:
+      # un compare fallito non può aprire una seconda scrittura.
+      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}
       cancel-in-progress: false
     steps:
       - name: Checkout
@@ -658,6 +728,7 @@ jobs:
           # passa qui il marker come output, così la decisione ha una sola fonte.
           CHAIN_LINK="${{ needs.admit.outputs.chain_link }}"
           [ "$CHAIN_LINK" = "true" ] || CHAIN_LINK=false
+          ADMIT_MODE="${{ needs.admit.outputs.run_mode }}"
 
           # A push is DRY unless it carried a corpus change — that is the chain
           # link. Editing this workflow or create-article.mjs must still only
@@ -674,7 +745,19 @@ jobs:
             else
               CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
             fi
-            if printf '%s\n' "$CHANGED" | grep -q '^content/'; then CHAIN=true; fi
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                content/*) CHAIN=true; break ;;
+              esac
+            done <<< "$CHANGED"
+            if [ "$ADMIT_MODE" = "unknown" ]; then
+              # Il gate non ha potuto classificare il compare: questo run è
+              # un possibile successore content, mai un self-test dry. Il
+              # lock content condiviso con production evita sia lo sfratto di
+              # un successore reale da parte di un dry sia la sovrapposizione.
+              CHAIN=true
+              echo "::warning title=Push non classificabile::admit=unknown: il resolver usa la lane writer conservativa"
+            fi
           fi
 
           if [ "$EV" = "push" ] && [ "$CHAIN" != "true" ]; then

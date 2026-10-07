@@ -1,8 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1942506/siccita-granoturco-importazioni-dazi-svizzera": "siccit-importazioni-granoturco-svizzera",
-  "https://www.tio.ch/rubriche/ospite/1942569/la-liberta-del-mercato-vale-anche-per-chi-lavora": "liberta-del-mercato-vale-anch-per-chi-lavora",
-  "https://www.ticinonews.ch/ticino/canicola-il-sindacato-vpod-chiede-al-governo-una-direttiva-per-stato-e-scuole-440277": "vpod-direttiva-canicola-scuole",
-  "https://www.laregione.ch/culture/locarno-film-festival/1942612/due-paesi-in-conflitto-l-inizio-di-una-tregua": "los-vencedores-falkland-pablo-aparo",
   "https://www.laregione.ch/cantone/ticino/1942531/contro-le-ondate-di-calore-una-direttiva-ad-hoc-e-investimenti-infrastrutturali": "caldo-ticino-direttiva-consiglio-stato",
   "https://ilgiornaledelticino.ch/devasta-un-vagone-ed-insulta-i-passeggeri-34enne-fermato-sul-treno": "devastazione-vagone-como-fermo",
   "https://www.laregione.ch/culture/locarno-film-festival/1942418/il-produttore-che-venne-dal-freddo": "produttore-islandese-hollywood-lezione",
@@ -2080,6 +2076,26 @@
   "https://www.laregione.ch/cantone/luganese/1955069/due-hotel-chiusi-140-licenziati-ne-riassumeremo-buona-parte": {
     "articleId": "hotel-ticino-140-licenziati",
     "ts": "2026-10-07T06:29:51.077Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/un-chilo-di-hashish-nascosto-nel-bagaglio-arrestata-alla-stazione-di-domodossola/2700487": {
+    "articleId": "domodossola-arresto-hashish-stazione",
+    "ts": "2026-10-07T06:58:03.458Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/carovita-i-sindacati-lanciano-una-petizione-per-il-recupero-dei-salari-444061": {
+    "articleId": "petizione-recupero-carovita-ticino",
+    "ts": "2026-10-07T08:24:42.250Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955222/torna-il-treno-del-foliage": {
+    "articleId": "treno-foliage-locarno-domodossola",
+    "ts": "2026-10-07T09:13:13.004Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/bellinzonese/1954968/arrestato-un-17enne-per-l-accoltellamento-di-biasca": {
+    "articleId": "biasca-17enne-arrestato-accoltellamento",
+    "ts": "2026-10-07T10:19:58.848Z",
     "keyForm": 2
   }
 }

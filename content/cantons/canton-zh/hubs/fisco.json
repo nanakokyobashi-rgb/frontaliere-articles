@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-zh:fisco",
+  "section": "canton-zh",
+  "canton": "ZH",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "1dfb5b6ba353bc9fdcd5c090193b301c357fe7f73b0eb69189ae00b790762de9",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "ZH",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Zurigo, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "11,85 %",
+          "note": "Zürich, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "8,66 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Zürich)",
+              "value": "3,76 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Zürich)",
+              "value": "7,76 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Zürich)",
+              "value": "11,85 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Zürich)",
+              "value": "15,95 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Zürich)",
+              "value": "22,41 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "4,19 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "6,79 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "8,66 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "10,59 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "15,09 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Dichiarazione imposte svizzera 2026: guida a Zurigo",
+          "url": "/articoli-svizzera/fisco-zurigo-guida-online/",
+          "excerpt": "Nel 2026 la dichiarazione distingue IFD, imposte cantonali e comunali: a Zurigo contano legge e moltiplicatore del Cantone e del Comune.",
+          "date": "2026-10-03T08:33:46.697Z"
+        },
+        {
+          "title": "Imposta di successione Zurigo: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposta-successione-zurigo-aliquote/",
+          "excerpt": "Come funziona la tassazione di successione nel Canton Zurigo: sistema progressivo, esenzioni per coniuge e discendenti, dichiarazione e scadenze.",
+          "date": "2026-08-25T10:18:42.683Z"
+        },
+        {
+          "title": "Imposta autoveicoli a Zurigo: calcolo e pagamento",
+          "url": "/articoli-svizzera/imposta-auto-zurigo-pagamento/",
+          "excerpt": "Nel Cantone di Zurigo calcolo, scadenze e pagamento dell'imposta sugli autoveicoli seguono regole cantonali; verifica anche cambio veicolo e indirizzo.",
+          "date": "2026-10-04T15:14:54.836Z"
+        },
+        {
+          "title": "Cembra e Vontobel lasciano Zurigo: fisco e spazi spingono il trasloco",
+          "url": "/articoli-svizzera/cembra-vontobel-sede-baden-baar/",
+          "excerpt": "Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
+        },
+        {
+          "title": "Imposta successione Zurigo: aliquote e esenzioni 2026",
+          "url": "/articoli-svizzera/successione-donazione-zurigo-guida/",
+          "excerpt": "Imposte di successione e donazione nel Canton Zurigo: aliquote per grado di parentela, esenzioni totali per coniuge e figli, dichiarazione obbligatoria e scadenze da rispettare.",
+          "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Imposte di successione e donazione nel Cantone di Zurigo",
+          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-zurigo-aliquote/",
+          "excerpt": "Nel Cantone di Zurigo, l'imposta di successione e donazione è soggetta a aliquote diverse in base al grado di parentela.",
+          "date": "2026-08-12T04:05:27.662Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Guida alla tassazione dei frontalieri",
+          "url": "/guida-tassazione-frontalieri-2026/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "ZH",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Zurich, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "11.85%",
+          "note": "Zürich, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "8.66%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Zürich)",
+              "value": "3.76%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Zürich)",
+              "value": "7.76%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Zürich)",
+              "value": "11.85%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Zürich)",
+              "value": "15.95%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Zürich)",
+              "value": "22.41%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "4.19%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "6.79%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "8.66%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "10.59%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "15.09%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Swiss tax return 2026: guide to Zurich",
+          "url": "/en/swiss-articles/zurich-tax-return-online-guide/",
+          "excerpt": "In 2026, the tax return distinguishes between IFD, cantonal taxes and municipal taxes: in Zurich, the law and multiplier of the canton and municipality matter.",
+          "date": "2026-10-03T08:33:46.697Z"
+        },
+        {
+          "title": "Zurich Inheritance Tax: Rates and Deductions",
+          "url": "/en/swiss-articles/inheritance-tax-zurich-rates/",
+          "excerpt": "How inheritance taxation works in the Canton of Zurich: progressive system, exemptions for spouse and descendants, declaration and deadlines.",
+          "date": "2026-08-25T10:18:42.683Z"
+        },
+        {
+          "title": "Motor vehicle tax in Zurich: calculation and payment",
+          "url": "/en/swiss-articles/zurich-vehicle-tax-calculation/",
+          "excerpt": "In the Canton of Zurich, the calculation, deadlines and payment of the motor vehicle tax follow cantonal rules; also check vehicle and address changes.",
+          "date": "2026-10-04T15:14:54.836Z"
+        },
+        {
+          "title": "Cembra and Vontobel leave Zurich: taxes and space drive the move",
+          "url": "/en/swiss-articles/cembra-vontobel-relocation-baden-baar/",
+          "excerpt": "Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
+        },
+        {
+          "title": "Zurich inheritance tax: rates and exemptions 2026",
+          "url": "/en/swiss-articles/succession-donation-zurich-guide/",
+          "excerpt": "Inheritance and gift taxes in the Canton of Zurich: rates for degree of kinship, total exemptions for spouse and children, mandatory declaration and deadlines to be met.",
+          "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Inheritance and gift taxes in the Canton of Zurich",
+          "url": "/en/swiss-articles/inheritance-tax-and-donation-canton-zurich-rates/",
+          "excerpt": "In the Canton of Zurich, inheritance and gift tax is subject to different rates depending on the degree of kinship.",
+          "date": "2026-08-12T04:05:27.662Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "Cross-border taxation guide",
+          "url": "/en/cross-border-taxation-guide-2026/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "ZH",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Zürich hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "11.85 %",
+          "note": "Zürich, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "8.66 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Zürich)",
+              "value": "3.76 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Zürich)",
+              "value": "7.76 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Zürich)",
+              "value": "11.85 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Zürich)",
+              "value": "15.95 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Zürich)",
+              "value": "22.41 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "4.19 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "6.79 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "8.66 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "10.59 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "15.09 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Schweizer Steuererklärung 2026: Leitfaden für Zürich",
+          "url": "/de/schweiz-artikel/steuererklaerung-zuerich-online-ratgeber/",
+          "excerpt": "Im Jahr 2026 unterscheidet die Steuererklärung zwischen IFD sowie kantonalen und kommunalen Steuern: In Zürich sind das Gesetz und der Steuerfuss des Kantons und der Gemeinde maßgeblich.",
+          "date": "2026-10-03T08:33:46.697Z"
+        },
+        {
+          "title": "Erbschaftssteuer Zürich: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/erbschaftssteuer-zuerich-saetze/",
+          "excerpt": "Wie die Erbschaftsbesteuerung im Kanton Zürich funktioniert: progressives System, Befreiungen für Ehegatten und Nachkommen, Erklärung und Fristen.",
+          "date": "2026-08-25T10:18:42.683Z"
+        },
+        {
+          "title": "Motorfahrzeugsteuer in Zürich: Berechnung und Zahlung",
+          "url": "/de/schweiz-artikel/fahrzeugsteuer-zuerich-berechnung/",
+          "excerpt": "Im Kanton Zürich richten sich Berechnung, Fälligkeiten und Zahlung der Motorfahrzeugsteuer nach kantonalen Regeln; prüfen Sie auch den Fahrzeug- und Adresswechsel.",
+          "date": "2026-10-04T15:14:54.836Z"
+        },
+        {
+          "title": "Cembra & Vontobel Zürich: Steuern & Räume treiben Umzug",
+          "url": "/de/schweiz-artikel/cembra-vontobel-sitz-baden-baar/",
+          "excerpt": "Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
+        },
+        {
+          "title": "Erbschaftssteuer Zürich: Steuersätze und Befreiungen 2026",
+          "url": "/de/schweiz-artikel/erbschaft-schenkung-zuerich-leitfaden/",
+          "excerpt": "Erbschafts- und Schenkungssteuern im Kanton Zürich: Sätze pro Verwandtschaftsgrad, Totalbefreiungen für Ehepartner und Kinder, Meldepflicht und einzuhaltende Fristen.",
+          "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuern im Kanton Zürich",
+          "url": "/de/schweiz-artikel/erbschaftssteuer-und-schenkungssteuer-kanton-zuerich-satz/",
+          "excerpt": "Im Kanton Zürich unterliegt die Erbschafts- und Schenkungssteuer je nach Verwandtschaftsgrad unterschiedlichen Sätzen.",
+          "date": "2026-08-12T04:05:27.662Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Leitfaden zur Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-besteuerung-leitfaden-2026/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "ZH",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton de Zurich, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "11,85 %",
+          "note": "Zürich, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "8,66 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Zürich)",
+              "value": "3,76 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Zürich)",
+              "value": "7,76 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Zürich)",
+              "value": "11,85 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Zürich)",
+              "value": "15,95 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Zürich)",
+              "value": "22,41 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "4,19 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "6,79 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "8,66 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "10,59 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "15,09 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.zh.ch/de/steuern-finanzen/steuern/quellensteuer.html",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Déclaration fiscale suisse 2026 : guide de Zurich",
+          "url": "/fr/articles-suisse/declaration-impots-zurich-guide-en-ligne/",
+          "excerpt": "En 2026, la déclaration distingue IFD, impôts cantonaux et communaux : à Zurich, la loi et le multiplicateur du canton et de la commune comptent.",
+          "date": "2026-10-03T08:33:46.697Z"
+        },
+        {
+          "title": "Impôt sur les successions Zurich : taux et déductions",
+          "url": "/fr/articles-suisse/impot-succession-zurich-taux/",
+          "excerpt": "Comment fonctionne la fiscalité successorale dans le canton de Zurich : système progressif, exonérations pour conjoint et descendants, déclaration et délais.",
+          "date": "2026-08-25T10:18:42.683Z"
+        },
+        {
+          "title": "Impôt sur les véhicules automobiles à Zurich : calcul et paiement",
+          "url": "/fr/articles-suisse/impot-vehicules-zurich-calcul/",
+          "excerpt": "Dans le canton de Zurich, le calcul, les échéances et le paiement de l'impôt sur les véhicules automobiles suivent les règles cantonales ; vérifiez également le changement de véhicule et d'adresse.",
+          "date": "2026-10-04T15:14:54.836Z"
+        },
+        {
+          "title": "Cembra et Vontobel quittent Zurich : fiscalité et locaux",
+          "url": "/fr/articles-suisse/cembra-vontobel-siege-baden-baar/",
+          "excerpt": "Cembra déplace 660 employés à Baden (15 % d'impôts) à l'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d'ici 2030. Zurich à 20 %.",
+          "date": "2026-09-25T22:08:30.423Z"
+        },
+        {
+          "title": "Impôt succession Zurich : taux et exonérations 2026",
+          "url": "/fr/articles-suisse/succession-donation-zurich-guide/",
+          "excerpt": "Droits de succession et de donation dans le canton de Zurich : taux par degré de parenté, exonérations totales pour conjoint et enfants, déclaration obligatoire et délais à respecter.",
+          "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Droits de succession et de donation dans le canton de Zurich",
+          "url": "/fr/articles-suisse/impot-de-succession-et-dons-canton-de-zurich-taux/",
+          "excerpt": "Dans le canton de Zurich, l'impôt sur les successions et les donations est soumis à des taux différents en fonction du degré de parenté.",
+          "date": "2026-08-12T04:05:27.662Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Guide de l’imposition des frontaliers",
+          "url": "/fr/guide-imposition-frontaliers-2026/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

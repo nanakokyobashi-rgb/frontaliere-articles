@@ -63,6 +63,357 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:29:51.075Z",
       "lastFailureAt": "2026-10-07T06:29:51.075Z"
+    },
+    {
+      "articleId": "quattro-oggetti-urne-novembre",
+      "title": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
+      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
+      "reason": "All image providers failed for article-quattro-oggetti-urne-novembre: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:42:41.992Z",
+      "lastFailureAt": "2026-10-07T06:42:41.992Z"
+    },
+    {
+      "articleId": "strada-calanca-chiusura-preventiva",
+      "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+      "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
+      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:43:54.395Z",
+      "lastFailureAt": "2026-10-07T06:43:54.395Z"
+    },
+    {
+      "articleId": "benzina-grigioni-deviazione",
+      "title": "Prezzi benzina in Grigioni: quando conviene deviare",
+      "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:53:48.101Z",
+      "lastFailureAt": "2026-10-07T06:53:48.101Z"
+    },
+    {
+      "articleId": "simplificazione-imposta-trasferimento-berna",
+      "title": "Imposta trasferimenti Berna: franchigia 800k",
+      "fallbackImage": "/images/blog/imposta-successione-donazione-berna.webp",
+      "reason": "All image providers failed for article-simplificazione-imposta-trasferimento-berna: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:54:25.697Z",
+      "lastFailureAt": "2026-10-07T06:54:25.697Z"
+    },
+    {
+      "articleId": "domodossola-arresto-hashish-stazione",
+      "title": "Domodossola: arresto per chilo di hashish nel bagaglio",
+      "fallbackImage": "/images/blog/affitti-friburgo-contestazione-canone.webp",
+      "reason": "All image providers failed for article-domodossola-arresto-hashish-stazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:58:03.399Z",
+      "lastFailureAt": "2026-10-07T06:58:03.399Z"
+    },
+    {
+      "articleId": "wabern-tram-risanamento",
+      "title": "Approvati il tram di Kleinwabern e il risanamento di Wabern",
+      "fallbackImage": "/images/blog/tram-treno-lugano-lavori-inizio.webp",
+      "reason": "All image providers failed for article-wabern-tram-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:11:43.433Z",
+      "lastFailureAt": "2026-10-07T07:11:43.433Z"
+    },
+    {
+      "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
+      "title": "Auto elettrica: come risparmiare fino al 50%",
+      "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
+      "reason": "All image providers failed for article-auto-elettrica-come-risparmiare-fino-al-50: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:21:41.464Z",
+      "lastFailureAt": "2026-10-07T07:21:41.464Z"
+    },
+    {
+      "articleId": "motore-filo-epfl",
+      "title": "EPFL sviluppa un motore a forma di filo",
+      "fallbackImage": "/images/blog/apprendistato-e-formazione-canton-soletta.webp",
+      "reason": "All image providers failed for article-motore-filo-epfl: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:00:44.679Z",
+      "lastFailureAt": "2026-10-07T08:00:44.679Z"
+    },
+    {
+      "articleId": "petizione-recupero-carovita-ticino",
+      "title": "Petizione sindacati per recupero carovati in Ticino",
+      "fallbackImage": "/images/blog/carovita-sindacati-recupero-divario.webp",
+      "reason": "All image providers failed for article-petizione-recupero-carovita-ticino: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:24:42.248Z",
+      "lastFailureAt": "2026-10-07T08:24:42.248Z"
+    },
+    {
+      "articleId": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+      "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
+      "fallbackImage": "/images/blog/galleria-moscia-acapulco-180-milioni.webp",
+      "reason": "All image providers failed for article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:41:12.756Z",
+      "lastFailureAt": "2026-10-07T08:41:12.756Z"
+    },
+    {
+      "articleId": "economia-ginevrina-ripresa-globale",
+      "title": "Economia ginevrina: beneficio dalla ripresa globale",
+      "fallbackImage": "/images/blog/crescita-economia-svizzera-seco-2026.webp",
+      "reason": "All image providers failed for article-economia-ginevrina-ripresa-globale: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:41:49.746Z",
+      "lastFailureAt": "2026-10-07T08:41:49.746Z"
+    },
+    {
+      "articleId": "disoccupazione-giura-settembre-2026",
+      "title": "Disoccupazione in Giura scende al 4,2% a settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-giura-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:42:08.220Z",
+      "lastFailureAt": "2026-10-07T08:42:08.220Z"
+    },
+    {
+      "articleId": "permessi-edilizi-digitali-basel",
+      "title": "Permessi edilizi a Basilea: solo digitali dal 2027",
+      "fallbackImage": "/images/blog/avs-prestazioni-complementari-basilea-campagna.webp",
+      "reason": "All image providers failed for article-permessi-edilizi-digitali-basel: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:43:35.081Z",
+      "lastFailureAt": "2026-10-07T08:43:35.081Z"
+    },
+    {
+      "articleId": "disoccupazione-zurigo-rav-2026",
+      "title": "Disoccupazione a Zurigo stabile al 2,9% a settembre",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-zurigo-rav-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:44:53.164Z",
+      "lastFailureAt": "2026-10-07T08:44:53.164Z"
+    },
+    {
+      "articleId": "revisione-fiscale-canton-glarona",
+      "title": "Glarona: dieci anni per compensare le perdite fiscali",
+      "fallbackImage": "/images/blog/asilo-nido-custodia-bambini-canton-glarona.webp",
+      "reason": "All image providers failed for article-revisione-fiscale-canton-glarona: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:45:21.309Z",
+      "lastFailureAt": "2026-10-07T08:45:21.309Z"
+    },
+    {
+      "articleId": "argovia-disoccupazione-settembre",
+      "title": "Argovia: disoccupazione al 3,2% a settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-argovia-disoccupazione-settembre: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:49:25.466Z",
+      "lastFailureAt": "2026-10-07T08:49:25.466Z"
+    },
+    {
+      "articleId": "disoccupazione-vallese-fine-estate",
+      "title": "Disoccupazione Vallese: 5’755 iscritti a settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-vallese-fine-estate: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:50:45.510Z",
+      "lastFailureAt": "2026-10-07T08:50:45.510Z"
+    },
+    {
+      "articleId": "disoccupazione-friburgo-settembre-2026",
+      "title": "Disoccupazione a Friburgo scende al 2,5% in settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-friburgo-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:52:59.963Z",
+      "lastFailureAt": "2026-10-07T08:52:59.963Z"
+    },
+    {
+      "articleId": "svizzera-india-accordi-bilaterali",
+      "title": "Svizzera e India: nuovi accordi su migrazione e lavoro",
+      "fallbackImage": "/images/blog/accordi-svizzera-ue-consiglio-federale.webp",
+      "reason": "All image providers failed for article-svizzera-india-accordi-bilaterali: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:55:12.292Z",
+      "lastFailureAt": "2026-10-07T08:55:12.292Z"
+    },
+    {
+      "articleId": "accordo-cure-oncologiche-ginevra",
+      "title": "Accordo Ginevra-Francia per cure oncologiche pediatriche",
+      "fallbackImage": "/images/blog/carenze-dogane-sicurezza-ticino.webp",
+      "reason": "All image providers failed for article-accordo-cure-oncologiche-ginevra: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:57:01.067Z",
+      "lastFailureAt": "2026-10-07T08:57:01.067Z"
+    },
+    {
+      "articleId": "mappa-affitti-zurigo-trasloco",
+      "title": "Affitti a Zurigo: il rincaro dopo il trasloco",
+      "fallbackImage": "/images/blog/affitti-zurigo-canoni-medi-e-diritto-di-locazione.webp",
+      "reason": "All image providers failed for article-mappa-affitti-zurigo-trasloco: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:59:16.025Z",
+      "lastFailureAt": "2026-10-07T08:59:16.025Z"
+    },
+    {
+      "articleId": "zug-rischio-coleottero-giapponese",
+      "title": "Zugo si prepara al rischio del coleottero giapponese",
+      "fallbackImage": "/images/blog/asilo-nido-e-custodia-bambini-canton-zugo-costi.webp",
+      "reason": "All image providers failed for article-zug-rischio-coleottero-giapponese: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:02:17.911Z",
+      "lastFailureAt": "2026-10-07T09:02:17.911Z"
+    },
+    {
+      "articleId": "riduzione-premi-argovia-2027",
+      "title": "Riduzione premi Argovia 2027: domanda entro il 31 dicembre",
+      "fallbackImage": "/images/blog/premi-lamal-vallese-riduzione.webp",
+      "reason": "All image providers failed for article-riduzione-premi-argovia-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:03:30.913Z",
+      "lastFailureAt": "2026-10-07T09:03:30.913Z"
+    },
+    {
+      "articleId": "uri-misure-energia-clima",
+      "title": "Canton Uri punta sulle misure energetiche per il clima",
+      "fallbackImage": "/images/blog/svizzeri-chiedono-misure-clima.webp",
+      "reason": "All image providers failed for article-uri-misure-energia-clima: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:07:12.843Z",
+      "lastFailureAt": "2026-10-07T09:07:12.843Z"
+    },
+    {
+      "articleId": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
+      "title": "Neuchâtel rinnova politica abitativa con 24 milioni",
+      "fallbackImage": "/images/blog/politica-agricola-2030-tagli-120-milioni.webp",
+      "reason": "All image providers failed for article-neuchatel-rinnova-politica-abitativa-con-24-milioni: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:07:42.914Z",
+      "lastFailureAt": "2026-10-07T09:07:42.914Z"
+    },
+    {
+      "articleId": "treno-foliage-locarno-domodossola",
+      "title": "Treno del Foliage: Locarno-Domodossola dal 10 ottobre",
+      "fallbackImage": "/images/blog/camelie-locarno-record-visitatori-2026-2.webp",
+      "reason": "All image providers failed for article-treno-foliage-locarno-domodossola: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:13:13.001Z",
+      "lastFailureAt": "2026-10-07T09:13:13.001Z"
+    },
+    {
+      "articleId": "chiusura-strade-gallusmarkt-svitto",
+      "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
+      "fallbackImage": "/images/blog/logistica-pallet-analisi-mercato.webp",
+      "reason": "All image providers failed for article-chiusura-strade-gallusmarkt-svitto: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:21:09.381Z",
+      "lastFailureAt": "2026-10-07T09:21:09.381Z"
+    },
+    {
+      "articleId": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
+      "title": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-stabile-4-4-neuchatel-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:30:57.336Z",
+      "lastFailureAt": "2026-10-07T09:30:57.336Z"
+    },
+    {
+      "articleId": "cancro-prostata-assistenza-svizzera",
+      "title": "Cancro alla prostata: assistenza buona in Svizzera 2020‑2023",
+      "fallbackImage": "/images/blog/allarme-aumento-affitti-svizzera.webp",
+      "reason": "All image providers failed for article-cancro-prostata-assistenza-svizzera: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:02:14.857Z",
+      "lastFailureAt": "2026-10-07T10:02:14.857Z"
+    },
+    {
+      "articleId": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
+      "title": "Canton San Gallo: stabile ricerca lavoro, cala disoccupazione",
+      "fallbackImage": "/images/blog/mercato-lavoro-canton-grigioni.webp",
+      "reason": "All image providers failed for article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:15:11.286Z",
+      "lastFailureAt": "2026-10-07T10:15:11.286Z"
+    },
+    {
+      "articleId": "lavoro-ar-rav-settembre-2026",
+      "title": "Appenzello Esterno: disoccupazione al 1,5% a settembre",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-lavoro-ar-rav-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:17:50.903Z",
+      "lastFailureAt": "2026-10-07T10:17:50.903Z"
+    },
+    {
+      "articleId": "rtvv-obvaldo-categorie-aziendali",
+      "title": "RTVV a Obvaldo: revisione delle categorie aziendali",
+      "fallbackImage": "/images/blog/asilo-nido-custodia-bambini-canton-obvaldo-costi.webp",
+      "reason": "All image providers failed for article-rtvv-obvaldo-categorie-aziendali: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:19:16.048Z",
+      "lastFailureAt": "2026-10-07T10:19:16.048Z"
+    },
+    {
+      "articleId": "biasca-17enne-arrestato-accoltellamento",
+      "title": "Biasca: arrestato 17enne per accoltellamento vicino alla stazione",
+      "fallbackImage": "/images/blog/biasca-accoltellamento-21enne.webp",
+      "reason": "All image providers failed for article-biasca-17enne-arrestato-accoltellamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:19:58.846Z",
+      "lastFailureAt": "2026-10-07T10:19:58.846Z"
+    },
+    {
+      "articleId": "cdhr-frontalieri-vaud-2026",
+      "title": "CDHR: quando i frontalieri francesi pagano l'acconto del 95%",
+      "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
+      "reason": "All image providers failed for article-cdhr-frontalieri-vaud-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:21:57.444Z",
+      "lastFailureAt": "2026-10-07T10:21:57.444Z"
+    },
+    {
+      "articleId": "fribourg-modifica-licd",
+      "title": "Fribourg adegua imposte dirette alla progressione a freddo",
+      "fallbackImage": "/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp",
+      "reason": "All image providers failed for article-fribourg-modifica-licd: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:27:22.590Z",
+      "lastFailureAt": "2026-10-07T10:27:22.590Z"
+    },
+    {
+      "articleId": "incidente-a13-widnau-2026",
+      "title": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
+      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
+      "reason": "All image providers failed for article-incidente-a13-widnau-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:36:03.797Z",
+      "lastFailureAt": "2026-10-07T10:36:03.797Z"
+    },
+    {
+      "articleId": "pedemontana-truffa-sms-frontalieri",
+      "title": "Pedemontana avverte: nessun pagamento pedaggio via SMS o email",
+      "fallbackImage": "/images/blog/pedemontana-avviso-truffa.webp",
+      "reason": "All image providers failed for article-pedemontana-truffa-sms-frontalieri: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:36:09.204Z",
+      "lastFailureAt": "2026-10-07T10:36:09.204Z"
+    },
+    {
+      "articleId": "soletta-disoccupazione-settembre",
+      "title": "Soletta: disoccupazione al 3,0% a settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-soletta-disoccupazione-settembre: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:37:25.687Z",
+      "lastFailureAt": "2026-10-07T10:37:25.687Z"
+    },
+    {
+      "articleId": "baugesuch-juchstrasse-frauenfeld",
+      "title": "Domanda edilizia a Frauenfeld: Juchstrasse 22-22b",
+      "fallbackImage": "/images/blog/calcolatore-salariale-edilizia-2026.webp",
+      "reason": "All image providers failed for article-baugesuch-juchstrasse-frauenfeld: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:39:32.224Z",
+      "lastFailureAt": "2026-10-07T10:39:32.224Z"
     }
   ]
 }

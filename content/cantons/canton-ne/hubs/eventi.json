@@ -1,0 +1,503 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ne:eventi",
+  "section": "canton-ne",
+  "canton": "NE",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "bd814406e01662c42969e731eac100facfc43d7ae7b4ce10c8365755c9f24090",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "NE",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Neuchâtel, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "15",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Savon galactique ! Atelier pour enfants",
+              "detail": "Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/savon-galactique-atelier-pour-enfants/"
+            },
+            {
+              "label": "Initiation au skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/initiation-au-skate-4/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
+            },
+            {
+              "label": "RORCAL (CH) - VERNISSAGE + IMPURE WILHELMINA (CH)",
+              "detail": "Queen Kong Club, Neuchâtel",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/rorcal-ch-vernissage-impure-wilhelmina-ch_AxP7yqe"
+            },
+            {
+              "label": "Alter Baum, erzähl mir von deinem Leben - 10. Oktober",
+              "detail": "Dombresson",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alter-baum-erzaehl-mir-von-deinem-leben-10-oktober-2026/"
+            },
+            {
+              "label": "Nuit de Contes 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-de-contes-2026/"
+            },
+            {
+              "label": "À chaque tête son chapeau",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
+            },
+            {
+              "label": "Crée ton magazine de skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
+            },
+            {
+              "label": "Minitaines",
+              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/neuchatel/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
+              "date": "2026-09-30",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/la-porte-des-possibles-une-exposition-collective-qui-place-la-jeunesse-au-coeur-de-la-ville"
+            },
+            {
+              "label": "Fête des vendanges 2026 : forte affluence sous une météo estivale et bilan sécuritaire positif",
+              "date": "2026-09-28",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/fete-des-vendanges-2026-forte-affluence-sous-une-meteo-estivale-et-bilan-securitaire-positif"
+            },
+            {
+              "label": "Architectures de papier. Une exposition sur Neuchâtel, ville bâtie, rêvée, dessinée",
+              "date": "2026-09-09",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Neuchâtel",
+          "url": "/eventi/neuchatel/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/neuchatel/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "NE",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Neuchâtel, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "15",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Savon galactique ! Atelier pour enfants",
+              "detail": "Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/savon-galactique-atelier-pour-enfants/"
+            },
+            {
+              "label": "Initiation au skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/initiation-au-skate-4/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — ongoing, last day: 25 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
+            },
+            {
+              "label": "RORCAL (CH) - VERNISSAGE + IMPURE WILHELMINA (CH)",
+              "detail": "Queen Kong Club, Neuchâtel",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/rorcal-ch-vernissage-impure-wilhelmina-ch_AxP7yqe"
+            },
+            {
+              "label": "Alter Baum, erzähl mir von deinem Leben - 10. Oktober",
+              "detail": "Dombresson",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alter-baum-erzaehl-mir-von-deinem-leben-10-oktober-2026/"
+            },
+            {
+              "label": "Nuit de Contes 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-de-contes-2026/"
+            },
+            {
+              "label": "À chaque tête son chapeau",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
+            },
+            {
+              "label": "Crée ton magazine de skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
+            },
+            {
+              "label": "Minitaines",
+              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/neuchatel/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
+              "date": "2026-09-30",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/la-porte-des-possibles-une-exposition-collective-qui-place-la-jeunesse-au-coeur-de-la-ville"
+            },
+            {
+              "label": "Fête des vendanges 2026 : forte affluence sous une météo estivale et bilan sécuritaire positif",
+              "date": "2026-09-28",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/fete-des-vendanges-2026-forte-affluence-sous-une-meteo-estivale-et-bilan-securitaire-positif"
+            },
+            {
+              "label": "Architectures de papier. Une exposition sur Neuchâtel, ville bâtie, rêvée, dessinée",
+              "date": "2026-09-09",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of Neuchâtel",
+          "url": "/en/events/neuchatel/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/neuchatel/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "NE",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Neuenburg ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "15",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Savon galactique ! Atelier pour enfants",
+              "detail": "Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/savon-galactique-atelier-pour-enfants/"
+            },
+            {
+              "label": "Initiation au skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/initiation-au-skate-4/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
+            },
+            {
+              "label": "RORCAL (CH) - VERNISSAGE + IMPURE WILHELMINA (CH)",
+              "detail": "Queen Kong Club, Neuchâtel",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/rorcal-ch-vernissage-impure-wilhelmina-ch_AxP7yqe"
+            },
+            {
+              "label": "Alter Baum, erzähl mir von deinem Leben - 10. Oktober",
+              "detail": "Dombresson",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alter-baum-erzaehl-mir-von-deinem-leben-10-oktober-2026/"
+            },
+            {
+              "label": "Nuit de Contes 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-de-contes-2026/"
+            },
+            {
+              "label": "À chaque tête son chapeau",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
+            },
+            {
+              "label": "Crée ton magazine de skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
+            },
+            {
+              "label": "Minitaines",
+              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/neuenburg/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
+              "date": "2026-09-30",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/la-porte-des-possibles-une-exposition-collective-qui-place-la-jeunesse-au-coeur-de-la-ville"
+            },
+            {
+              "label": "Fête des vendanges 2026 : forte affluence sous une météo estivale et bilan sécuritaire positif",
+              "date": "2026-09-28",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/fete-des-vendanges-2026-forte-affluence-sous-une-meteo-estivale-et-bilan-securitaire-positif"
+            },
+            {
+              "label": "Architectures de papier. Une exposition sur Neuchâtel, ville bâtie, rêvée, dessinée",
+              "date": "2026-09-09",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Neuenburg",
+          "url": "/de/veranstaltungen/neuenburg/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "NE",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Neuchâtel, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "15",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Savon galactique ! Atelier pour enfants",
+              "detail": "Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/savon-galactique-atelier-pour-enfants/"
+            },
+            {
+              "label": "Initiation au skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/initiation-au-skate-4/"
+            },
+            {
+              "label": "Atelier de gravure pour tous",
+              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
+            },
+            {
+              "label": "Démonstration de dentellières",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
+            },
+            {
+              "label": "RORCAL (CH) - VERNISSAGE + IMPURE WILHELMINA (CH)",
+              "detail": "Queen Kong Club, Neuchâtel",
+              "date": "2026-10-09",
+              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/rorcal-ch-vernissage-impure-wilhelmina-ch_AxP7yqe"
+            },
+            {
+              "label": "Vieil arbre, raconte-moi ta vie - 10 octobre",
+              "detail": "Dombresson",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alter-baum-erzaehl-mir-von-deinem-leben-10-oktober-2026/"
+            },
+            {
+              "label": "Nuit de Contes 2026",
+              "detail": "La Chaux-de-Fonds",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/nuit-de-contes-2026/"
+            },
+            {
+              "label": "À chaque tête son chapeau",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/a-chaque-tete-son-chapeau/"
+            },
+            {
+              "label": "Crée ton magazine de skate",
+              "detail": "Musée d'ethnographie, Neuchâtel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cree-ton-magazine-de-skate-2/"
+            },
+            {
+              "label": "Minitaines",
+              "detail": "La Turlutaine - Theâtre Atelier de Marionnettes, La Chaux-de-Fonds",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minitaines/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/neuchatel/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "« La porte des possibles », une exposition collective qui place la jeunesse au cœur de la ville",
+              "date": "2026-09-30",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/la-porte-des-possibles-une-exposition-collective-qui-place-la-jeunesse-au-coeur-de-la-ville"
+            },
+            {
+              "label": "Fête des vendanges 2026 : forte affluence sous une météo estivale et bilan sécuritaire positif",
+              "date": "2026-09-28",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/fete-des-vendanges-2026-forte-affluence-sous-une-meteo-estivale-et-bilan-securitaire-positif"
+            },
+            {
+              "label": "Architectures de papier. Une exposition sur Neuchâtel, ville bâtie, rêvée, dessinée",
+              "date": "2026-09-09",
+              "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Neuchâtel",
+          "url": "/fr/evenements/neuchatel/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/neuchatel/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

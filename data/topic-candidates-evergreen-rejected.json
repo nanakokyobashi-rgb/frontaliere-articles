@@ -792,21 +792,9 @@
     "imposta di successione e donazione canton Friburgo aliquote": 2,
     "salario medio professioni svizzera 2026 canton Zurigo": 2,
     "affitti svizzera mercato immobiliare 2026": 1,
-    "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 1
+    "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/punti-di-vista/turismo-a-como-5-milioni-di-tassa-di-soggiorno-una-cifra-uguale-per-trasporti-e-nidi-gratis-casa-o-tariffe-parcheggi": {
-      "section": "frontaliere",
-      "ts": 1791184701070
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-lallarme-di-confapi-varese-cosi-si-penalizzano-le-pmi-industriali/2698117": {
-      "section": "frontaliere",
-      "ts": 1791188571654
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/sacha-lembo-nominato-direttore-del-controllo-cantonale-delle-finanze-443971": {
-      "section": "frontaliere",
-      "ts": 1791190885729
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/villa-principe-leopoldo-76-licenziamenti-per-la-ristrutturazione-dellhotel-443974": {
       "section": "frontaliere",
       "ts": 1791201995923
@@ -1042,6 +1030,50 @@
     "frontaliere::https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
       "section": "frontaliere",
       "ts": 1791353815883
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/lega-contro-il-cancro-90-anni-di-speranza-e-umanit%c3%a0--4140326.html": {
+      "section": "frontaliere",
+      "ts": 1791355598794
+    },
+    "frontaliere::https://comozero.it/attualita/svizzera-lavori-in-edilizia-e-sei-giovane-10-settimane-di-vacanze-e-indennizzi-se-fa-troppo-caldo": {
+      "section": "frontaliere",
+      "ts": 1791358008892
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1955207/iazi-proprieta-mercato-alloggi-acquirenti": {
+      "section": "frontaliere",
+      "ts": 1791358051207
+    },
+    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1955101/urbanmetrix-vince-lo-swiss-prime-site-accelerator-2026": {
+      "section": "frontaliere",
+      "ts": 1791358098912
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/territorio/articolo/porto-valtravaglia-il-comune-non-si-arrende-alla-chiusura-della-scuola-primaria-vogliamo-riparti.html": {
+      "section": "frontaliere",
+      "ts": 1791358175320
+    },
+    "frontaliere::https://www.laregione.ch/economia/economia/1955074/l-avvocato-sotto-non-troppa-sorveglianza": {
+      "section": "frontaliere",
+      "ts": 1791358224194
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1954859/lavoro-dieci-settimane-datori-sindacato": {
+      "section": "frontaliere",
+      "ts": 1791358271295
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/tecnostampi-di-gornate-olona-ricerca-personale-tre-posizioni-aperte/2698927": {
+      "section": "frontaliere",
+      "ts": 1791363620522
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/alloggio-in-propriet%c3%a0-sempre-pi%c3%b9-caro-in-svizzera%2c-%2b4%25-in-un-anno/92178985": {
+      "section": "frontaliere",
+      "ts": 1791367578797
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/dentro-la-fabbrica-dei-simulatori-qui-ci-si-prepara-anche-a-cio-che-in-volo-non-si-puo-provare/2700532": {
+      "section": "frontaliere",
+      "ts": 1791367627386
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955252/il-taglio-di-posteggi-soffoca-l-economia-di-bellinzona": {
+      "section": "frontaliere",
+      "ts": 1791367678092
     }
   }
 }

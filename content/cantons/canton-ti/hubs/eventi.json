@@ -1,0 +1,618 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ti:eventi",
+  "section": "canton-ti",
+  "canton": "TI",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "ccd5061b2ebdbc45dc122651eaa12bbca4ab00767153e1b1531386f8c8258cd4",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-06T18:23:08.067Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TI",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "In Ticino, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con l’Italia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in italiano; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "220",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Carlo Agostino Meletta - pittore",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+            },
+            {
+              "label": "Fuori di Zucca, il villaggio delle zucche",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+            },
+            {
+              "label": "In orbita - mostra di ceramiche",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+            },
+            {
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+            },
+            {
+              "label": "Ceramiche dell'antico Perù. Dal Pacifico alle Ande",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+            },
+            {
+              "label": "Locarno Organ Festival",
+              "detail": "Collegiata S. Antonio, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+            },
+            {
+              "label": "Ri-creazione: cambiamo le regole del gioco?",
+              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+            },
+            {
+              "label": "Adriano Pitschen. 'Nitori', incisioni scelte",
+              "detail": "Biblioteca Salita dei Frati, Lugano",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+            },
+            {
+              "label": "Next Generation | Evensong",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+            },
+            {
+              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
+              "date": "2026-10-07",
+              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/ticino/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Mendrisiotto: tre eventi e strade chiuse nel fine settimana",
+          "url": "/articoli-frontaliere/mendrisiotto-strade-chiuse-weekend/",
+          "excerpt": "Dal 18 al 20 settembre Rally del Ticino, Penziamo e Chiasso-Pedrinate causano chiusure stradali, limitazioni per pedoni e bus deviati nel Mendrisiotto.",
+          "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Sagra dell'uva a Mendrisio: bilancio positivo",
+          "url": "/articoli-frontaliere/sagra-uva-mendrisio-bilancio/",
+          "excerpt": "Bilancio positivo per la 70ª Sagra dell'uva di Mendrisio: stimate 20-25mila persone e nessun intervento di rilievo per la sicurezza.",
+          "date": "2026-09-27T18:44:48.773Z"
+        },
+        {
+          "title": "Trame d'Oriente: mini kimono in mostra a Chiasso",
+          "url": "/articoli-frontaliere/trame-oriente-chiasso/",
+          "excerpt": "A Chiasso, dall'8 al 22 ottobre, la mostra Trame d'Oriente presenta dieci mini kimono in sete vintage, tra cultura giapponese e sartoria locale, firmata SAMS.",
+          "date": "2026-10-06T11:41:53.257Z"
+        },
+        {
+          "title": "Rientro al lavoro dopo la maternità: incontri a Mendrisio",
+          "url": "/articoli-svizzera/rientro-maternita-filanda/",
+          "excerpt": "Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.",
+          "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Pre-festival a Locarno: un evento tra luci e luci (troppe)",
+          "url": "/articoli-frontaliere/pre-festival-locarno-2024/",
+          "excerpt": "La 79ª edizione del Festival del Film di Locarno si apre con una proiezione di \"Chi ha incastrato Roger Rabbit?\" che suscita perplessità e discussioni.",
+          "date": "2026-08-05T02:14:46.445Z"
+        },
+        {
+          "title": "Ticino Musica si fa in quattro (concerti)",
+          "url": "/articoli-frontaliere/tacito-musica-ticino-concerti/",
+          "excerpt": "Il Festival Ticino Musica prosegue con una giornata ricca di appuntamenti che accompagneranno il pubblico dal pomeriggio alla sera.",
+          "date": "2026-07-28T05:51:38.011Z"
+        },
+        {
+          "title": "Locarno Film Festival: chi sarà il prossimo presidente?",
+          "url": "/articoli-frontaliere/presidente-locarno-film-festival/",
+          "excerpt": "Il Locarno Film Festival cerca un nuovo presidente. Le voci si rincorrono, ma nessuna conferma ufficiale.",
+          "date": "2026-08-08T23:56:06.372Z"
+        },
+        {
+          "title": "Locarno Film Festival: la cultura come legame",
+          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
+          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tutti gli eventi in Ticino",
+          "url": "/eventi/ticino/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/ticino/questo-weekend/"
+        },
+        {
+          "label": "Guida agli eventi del weekend",
+          "url": "/articoli-frontaliere/eventi-weekend-ticino/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "TI",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In Ticino, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders Italy: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in Italian; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "220",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Carlo Agostino Meletta - painter",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+            },
+            {
+              "label": "Outside of Zucca, the village of pumpkins",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+            },
+            {
+              "label": "In orbit - ceramics exhibition",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+            },
+            {
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+            },
+            {
+              "label": "Ceramics of ancient Peru. From the Pacific to the Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+            },
+            {
+              "label": "Locarno Organ Festival",
+              "detail": "Collegiata S. Antonio, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+            },
+            {
+              "label": "Re-creation: Shall we change the rules of the game?",
+              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+            },
+            {
+              "label": "Adriano Pitschen. 'Nitori', selected engravings",
+              "detail": "Biblioteca Salita dei Frati, Lugano",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+            },
+            {
+              "label": "Ne Gener",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+            },
+            {
+              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
+              "date": "2026-10-07",
+              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/ticino/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Mendrisiotto: three events and roads closed at the weekend",
+          "url": "/en/cross-border-articles/mendrisiotto-road-closures-weekend/",
+          "excerpt": "From 18 to 20 September Rally del Ticino, Penziamo and Chiasso-Pedrinate cause road closures, limitations for pedestrians and diverted buses in Mendrisiotto.",
+          "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Grape Festival in Mendrisio: positive outcome",
+          "url": "/en/cross-border-articles/mendrisio-grape-festival-results/",
+          "excerpt": "Positive outcome for the 70th Mendrisio Grape Festival: an estimated 20,000–25,000 people and no major security interventions.",
+          "date": "2026-09-27T18:44:48.773Z"
+        },
+        {
+          "title": "Threads of the East: mini kimonos on display in Chiasso",
+          "url": "/en/cross-border-articles/japanese-mini-kimonos-chiasso/",
+          "excerpt": "In Chiasso, from October 8 to 22, the exhibition Threads of the East by SAMS presents ten mini kimonos made from vintage silks, at the intersection of Japanese culture and local tailoring.",
+          "date": "2026-10-06T11:41:53.257Z"
+        },
+        {
+          "title": "Returning to Work After Maternity Leave: Events in Mendrisio",
+          "url": "/en/swiss-articles/return-to-work-maternity-filanda/",
+          "excerpt": "The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.",
+          "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Pre-festival in Locarno: an event between lights and lights (too many)",
+          "url": "/en/cross-border-articles/pre-locarno-film-festival-2024/",
+          "excerpt": "The 79th edition of the Locarno Film Festival opens with a screening of \"Who Framed Roger Rabbit?\" that sparks perplexity and discussion.",
+          "date": "2026-08-05T02:14:46.445Z"
+        },
+        {
+          "title": "Ticino Music is done in four (concerts)",
+          "url": "/en/cross-border-articles/tacito-musica-ticino-concerts/",
+          "excerpt": "The Ticino Music Festival continues with a day full of events that will accompany the public from afternoon to evening.",
+          "date": "2026-07-28T05:51:38.011Z"
+        },
+        {
+          "title": "Locarno Film Festival: who will be the next president?",
+          "url": "/en/cross-border-articles/locarno-film-festival-president/",
+          "excerpt": "The Locarno Film Festival is looking for a new president. The rumors chase each other, but no official confirmation.",
+          "date": "2026-08-08T23:56:06.372Z"
+        },
+        {
+          "title": "Locarno Film Festival: culture as a link",
+          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
+          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "All events in Ticino",
+          "url": "/en/events/ticino/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/ticino/this-weekend/"
+        },
+        {
+          "label": "Weekend events guide",
+          "url": "/en/cross-border-articles/weekend-events-ticino/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "TI",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Tessin ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Italien: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Italienisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "220",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Carlo Agostino Meletta - Maler",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+            },
+            {
+              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+            },
+            {
+              "label": "Im Orbit – Keramikausstellung",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+            },
+            {
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+            },
+            {
+              "label": "Keramik aus dem alten Peru. Vom Pazifik bis in die Anden",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+            },
+            {
+              "label": "Locarno Orgelfestival",
+              "detail": "Collegiata S. Antonio, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+            },
+            {
+              "label": "Re-Kreation: Ändern wir die Spielregeln?",
+              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+            },
+            {
+              "label": "Adriano Pitschen. 'Nitori', ausgewählte Gravuren",
+              "detail": "Biblioteca Salita dei Frati, Lugano",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+            },
+            {
+              "label": "Nächste Generation | Evensong",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+            },
+            {
+              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
+              "date": "2026-10-07",
+              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/tessin/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Mendrisiotto: Drei Veranstaltungen und gesperrte Straßen am Wochenende",
+          "url": "/de/grenzgaenger-artikel/mendrisiotto-strassensperrungen-wochenende/",
+          "excerpt": "Vom 18. bis 20. September verursachen die Rally del Ticino, Peniamo und Chiasso-Pedrinate Straßensperrungen, Einschränkungen für Fußgänger und umgeleitete Busse im Mendrisiotto.",
+          "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Traubenfest in Mendrisio: positive Bilanz",
+          "url": "/de/grenzgaenger-artikel/traubenfest-mendrisio-bilanz/",
+          "excerpt": "Positive Bilanz für das 70. Traubenfest von Mendrisio: schätzungsweise 20-25 Tausend Personen und kein nennenswerter Sicherheitseinsatz.",
+          "date": "2026-09-27T18:44:48.773Z"
+        },
+        {
+          "title": "Muster des Orients: Mini-Kimonos in Chiasso zu sehen",
+          "url": "/de/grenzgaenger-artikel/japanische-mini-kimonos-chiasso/",
+          "excerpt": "In Chiasso präsentiert die Ausstellung Trame d'Oriente von SAMS vom 8. bis 22. Oktober zehn Mini-Kimonos aus Vintage-Seidenstoffen zwischen japanischer Kultur und lokaler Schneiderei.",
+          "date": "2026-10-06T11:41:53.257Z"
+        },
+        {
+          "title": "Rückkehr in den Beruf nach dem Mutterschaftsurlaub: Veranstaltungen in Mendrisio",
+          "url": "/de/schweiz-artikel/wiedereinstieg-mutterschaft-filanda/",
+          "excerpt": "Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.",
+          "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Pre-Festival in Locarno: ein Ereignis zwischen Licht und Licht (zu viele)",
+          "url": "/de/grenzgaenger-artikel/vor-locarno-filmfestival-2024/",
+          "excerpt": "Die 79. Ausgabe des Filmfestivals von Locarno beginnt mit einer Vorführung von „Wer hat Roger Rabbit reingelegt?“, die Verwirrung und Diskussionen hervorruft.",
+          "date": "2026-08-05T02:14:46.445Z"
+        },
+        {
+          "title": "Tessin-Musik macht man zu viert (Konzerte)",
+          "url": "/de/grenzgaenger-artikel/tacito-musica-ticino-konzerte/",
+          "excerpt": "Das Tessiner Musikfestival wird mit einem Tag voller Veranstaltungen fortgesetzt, die das Publikum von Nachmittag bis Abend begleiten werden.",
+          "date": "2026-07-28T05:51:38.011Z"
+        },
+        {
+          "title": "Locarno Film Festival: Wer wird der nächste Präsident?",
+          "url": "/de/grenzgaenger-artikel/locarno-filmfestival-praesident/",
+          "excerpt": "Das Locarno Film Festival sucht einen neuen Präsidenten. Gerüchte werden gejagt, aber keine offizielle Bestätigung.",
+          "date": "2026-08-08T23:56:06.372Z"
+        },
+        {
+          "title": "Locarno Film Festival: Kultur als Verbindung",
+          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
+          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Tessin",
+          "url": "/de/veranstaltungen/tessin/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/tessin/dieses-wochenende/"
+        },
+        {
+          "label": "Wochenend-Veranstaltungsführer",
+          "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "TI",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Au Tessin, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec l’Italie : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en italien ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "220",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Carlo Agostino Meletta - peintre",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+            },
+            {
+              "label": "En dehors de Zucca, le village des citrouilles",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+            },
+            {
+              "label": "In orbit - exposition de céramique",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+            },
+            {
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+            },
+            {
+              "label": "Céramiques de l'ancien Pérou. Du Pacifique aux Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+            },
+            {
+              "label": "Festival d'orgue de Locarno",
+              "detail": "Collegiata S. Antonio, Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+            },
+            {
+              "label": "Ré-création : changeons-nous les règles du jeu ?",
+              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+            },
+            {
+              "label": "Adriano Pitschen. 'Nitori', gravures choisies",
+              "detail": "Biblioteca Salita dei Frati, Lugano",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+            },
+            {
+              "label": "Nouvelle génération | Chant du soir",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
+              "date": "2026-10-07",
+              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+            },
+            {
+              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
+              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
+              "date": "2026-10-07",
+              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/tessin/",
+          "updatedAt": "2026-10-06T18:23:08.067Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Mendrisiotto : trois événements et des routes fermées le week-end",
+          "url": "/fr/articles-frontalier/mendrisiotto-routes-fermees-week-end/",
+          "excerpt": "Du 18 au 20 septembre, le Rallye du Tessin, Penziamo et Chiasso-Pedrinate provoquent des fermetures de routes, des restrictions pour les piétons et les bus déviés dans le Mendrisiotto.",
+          "date": "2026-09-16T01:17:21.635Z"
+        },
+        {
+          "title": "Fête du raisin à Mendrisio : bilan positif",
+          "url": "/fr/articles-frontalier/fete-raisin-mendrisio-bilan/",
+          "excerpt": "Bilan positif pour la 70e Fête du raisin de Mendrisio : 20-25 mille personnes estimées et aucune intervention notable pour la sécurité.",
+          "date": "2026-09-27T18:44:48.773Z"
+        },
+        {
+          "title": "Trames d’Orient : mini-kimonos exposés à Chiasso",
+          "url": "/fr/articles-frontalier/mini-kimonos-japonais-chiasso/",
+          "excerpt": "À Chiasso, du 8 au 22 octobre, l'exposition Trame d'Oriente présente dix mini kimono en soie vintage, entre culture japonaise et couture locale, signée SAMS.",
+          "date": "2026-10-06T11:41:53.257Z"
+        },
+        {
+          "title": "Retour au travail après un congé maternité : rencontres à Mendrisio",
+          "url": "/fr/articles-suisse/retour-travail-maternite-filanda/",
+          "excerpt": "Les villes de Chiasso et de Mendrisio proposent à LaFilanda un parcours gratuit comprenant des entretiens, des rencontres et un service de garde d'enfants pour faciliter le retour au travail après un congé maternité.",
+          "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Pré-festival à Locarno : un événement entre lumières et lumières (trop)",
+          "url": "/fr/articles-frontalier/avant-le-festival-du-film-de-locarno-2024/",
+          "excerpt": "La 79ème édition du Festival du Film de Locarno s'ouvre par une projection de « Qui a piégé Roger Rabbit ? » qui suscite perplexité et discussions.",
+          "date": "2026-08-05T02:14:46.445Z"
+        },
+        {
+          "title": "Tessin Musique se fait en quatre (concerts)",
+          "url": "/fr/articles-frontalier/tacito-musica-ticino-concerts/",
+          "excerpt": "Le Festival Ticino Musica se poursuit avec une journée riche en événements qui accompagneront le public de l'après-midi au soir.",
+          "date": "2026-07-28T05:51:38.011Z"
+        },
+        {
+          "title": "Festival du film de Locarno : qui sera le prochain président ?",
+          "url": "/fr/articles-frontalier/president-festival-locarno/",
+          "excerpt": "Le Locarno Film Festival cherche un nouveau président. Les rumeurs courent, mais pas de confirmation officielle.",
+          "date": "2026-08-08T23:56:06.372Z"
+        },
+        {
+          "title": "Festival du film de Locarno : la culture comme lien",
+          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
+          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tous les événements au Tessin",
+          "url": "/fr/evenements/tessin/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/tessin/ce-week-end/"
+        },
+        {
+          "label": "Guide des événements du week-end",
+          "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

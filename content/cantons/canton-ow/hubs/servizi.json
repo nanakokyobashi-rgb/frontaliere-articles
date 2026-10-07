@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ow:servizi",
+  "section": "canton-ow",
+  "canton": "OW",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "59d869e16a597bd176cf4cfca8c06c8560a1ca248e837dbe1d457edd4034cc1e",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "OW",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Obvaldo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "501,10 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "OW, regione di premio 0",
+              "value": "mediana 501,10 CHF al mese",
+              "detail": "da 445,10 a 573,90 CHF, 26 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
+              "date": "2026-09-08",
+              "url": "https://www.ow.ch/_rte/information/137956"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.ow.ch/_rte/information/137884"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B in Obvaldo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-obvaldo-rinnovo/",
+          "excerpt": "Il permesso B consente di vivere e lavorare in Svizzera in modo rinnovabile. Scopri i requisiti, i documenti, la procedura di rinnovo nel Cantone Obvaldo.",
+          "date": "2026-08-30T01:58:39.120Z"
+        },
+        {
+          "title": "Permessi di soggiorno in Svizzera: il permesso L a Obwalden",
+          "url": "/articoli-svizzera/permesso-l-obbiettivo-obvaldo/",
+          "excerpt": "Il permesso L di breve durata è un permesso di soggiorno che può essere concesso per un massimo di 1 anno.",
+          "date": "2026-08-16T16:18:18.990Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini Canton Obvaldo costi",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-obvaldo-costi/",
+          "excerpt": "Scopri i costi di un asilo nido e le politiche di sussidi del Canton Obvaldo.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
+          "title": "Premi cassa malati nel Cantone di Obvaldo: riduzione e franchigie",
+          "url": "/articoli-svizzera/premi-cassa-malati-obvaldo-riduzione/",
+          "excerpt": "La legge cantonale sulle assicurazioni malattie nel Cantone di Obvaldo prevede fasce di età e franchigie per ridurre i premi.",
+          "date": "2026-08-16T14:15:52.976Z"
+        },
+        {
+          "title": "Patente di guida Obvaldo: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-obvaldo-conversione/",
+          "excerpt": "Guida completa alla conversione della patente estera nel Cantone di Obvaldo: procedura, esame teorico e pratico, corsi obbligatori e documenti necessari.",
+          "date": "2026-08-23T09:58:00.247Z"
+        },
+        {
+          "title": "Premi LAMal Obvaldo: franchigie e riduzione",
+          "url": "/articoli-svizzera/franchigie-obvaldo-malattia-riduzione/",
+          "excerpt": "Franchigie obbligatorie, riduzioni di premio e sussidi cantonali per l'assicurazione malattia nel Cantone di Obvaldo. Procedura di richiesta e modelli assicurativi alternativi.",
+          "date": "2026-08-23T05:27:44.369Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/obvaldo/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/obvaldo-ow/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Obvaldo",
+          "url": "/cerca-lavoro-obvaldo/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "OW",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Obwalden, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "501.10 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "OW, premium region 0",
+              "value": "typical 501.10 CHF per month",
+              "detail": "from 445.10 to 573.90 CHF, 26 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
+              "date": "2026-09-08",
+              "url": "https://www.ow.ch/_rte/information/137956"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.ow.ch/_rte/information/137884"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B in Obvaldo: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-obwalden-renewal/",
+          "excerpt": "Permit B allows you to live and work in Switzerland on a renewable basis. Learn about the requirements, documents, and renewal procedure in the Obvaldo Canton.",
+          "date": "2026-08-30T01:58:39.120Z"
+        },
+        {
+          "title": "Residence permits in Switzerland: the L permit in Obwalden",
+          "url": "/en/swiss-articles/permesso-l-objective-obwalden/",
+          "excerpt": "The short-term L permit is a residence permit that can be granted for a maximum of 1 year.",
+          "date": "2026-08-16T16:18:18.990Z"
+        },
+        {
+          "title": "Nursery and childcare Canton Obvaldo costs",
+          "url": "/en/swiss-articles/childcare-custody-canton-obvaldo-costs/",
+          "excerpt": "Discover the costs of a kindergarten and the subsidy policies of the Obvaldo Canton.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
+          "title": "Sick pay premiums in the Canton of Obvaldo: reduction and deductibles",
+          "url": "/en/swiss-articles/canton-obvaldo-maladie-insurance-premiums-reduction/",
+          "excerpt": "The cantonal law on health insurance in the Canton of Obvaldo provides for age groups and deductibles to reduce premiums.",
+          "date": "2026-08-16T14:15:52.976Z"
+        },
+        {
+          "title": "Obvaldo Driving License: Conversion and Exams",
+          "url": "/en/swiss-articles/driving-licence-obvaldo-conversion/",
+          "excerpt": "Complete guide to the conversion of the foreign licence in the Canton of Obvaldo: procedure, theoretical and practical examination, compulsory courses and necessary documents.",
+          "date": "2026-08-23T09:58:00.247Z"
+        },
+        {
+          "title": "LAMal Obvaldo premiums: deductibles and reduction",
+          "url": "/en/swiss-articles/obvaldo-health-insurance-deductibles-subsidies/",
+          "excerpt": "Compulsory deductibles, premium reductions and cantonal health insurance benefits in the Canton of Obvaldo. Application procedure and alternative insurance models.",
+          "date": "2026-08-23T05:27:44.369Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/obwalden-ow/"
+        },
+        {
+          "label": "Job offers in Obwalden",
+          "url": "/en/find-jobs-obwalden/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "OW",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "In Obwalden laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "501.10 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "OW, Prämienregion 0",
+              "value": "Mittelwert 501.10 CHF pro Monat",
+              "detail": "von 445.10 bis 573.90 CHF, 26 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
+              "date": "2026-09-08",
+              "url": "https://www.ow.ch/_rte/information/137956"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.ow.ch/_rte/information/137884"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B in Obwalden: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-obwalden-verlaengerung/",
+          "excerpt": "Die Bewilligung B ermöglicht es Ihnen, in der Schweiz erneuerbar zu leben und zu arbeiten. Entdecken Sie die Anforderungen, die Dokumente, das Erneuerungsverfahren im Kanton Obwalden.",
+          "date": "2026-08-30T01:58:39.120Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligungen in der Schweiz: die Bewilligung L in Obwalden",
+          "url": "/de/schweiz-artikel/permesso-l-zweck-obwalden/",
+          "excerpt": "Die Kurzaufenthaltsbewilligung L ist eine Aufenthaltsbewilligung, die für maximal 1 Jahr erteilt werden kann.",
+          "date": "2026-08-16T16:18:18.990Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung Kanton Obwalden Kosten",
+          "url": "/de/schweiz-artikel/kindergeld-pflege-kanton-obvaldo-kosten/",
+          "excerpt": "Entdecken Sie die Kosten einer Kindertagesstätte und die Subventionspolitik des Kantons Obwalden.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Obwalden: Reduktion und Franchisen",
+          "url": "/de/schweiz-artikel/kanton-obvaldo-krankenversicherung-pramien-reduktion/",
+          "excerpt": "Das kantonale Krankenversicherungsgesetz im Kanton Obwalden sieht Altersgruppen und Franchisen zur Prämienverbilligung vor.",
+          "date": "2026-08-16T14:15:52.976Z"
+        },
+        {
+          "title": "Führerschein Obwalden: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-obwalden-umwandlung/",
+          "excerpt": "Vollständiger Leitfaden zur Umwandlung des ausländischen Führerscheins im Kanton Obwalden: Verfahren, theoretische und praktische Prüfung, Pflichtkurse und erforderliche Unterlagen.",
+          "date": "2026-08-23T09:58:00.247Z"
+        },
+        {
+          "title": "KVG-Prämien Obwalden: Selbstbehalte und Kürzung",
+          "url": "/de/schweiz-artikel/obvaldo-krankenversicherung-franchisen-reduktion/",
+          "excerpt": "Obligatorische Franchisen, Prämienverbilligungen und kantonale Krankenversicherungsbeiträge im Kanton Obwalden. Antragsverfahren und alternative Versicherungsmodelle.",
+          "date": "2026-08-23T05:27:44.369Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/obwalden-ow/"
+        },
+        {
+          "label": "Stellenangebote in Obwalden",
+          "url": "/de/jobs-in-obwalden/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "OW",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "À Obwald, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "501,10 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "OW, région de primes 0",
+              "value": "valeur centrale 501,10 CHF par mois",
+              "detail": "de 445,10 à 573,90 CHF, 26 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Krankenpflegeversicherung: Kosten- und Qualitätsziele 2028-2031 in der obligatorischen Krankenversicherung (OKP)",
+              "date": "2026-09-08",
+              "url": "https://www.ow.ch/_rte/information/137956"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.ow.ch/_rte/information/137884"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B à Obwald : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-obwald-renouvellement/",
+          "excerpt": "Le permis B permet de vivre et de travailler en Suisse de manière renouvelable. Découvrez les exigences, les documents, la procédure de renouvellement dans le canton Obwald.",
+          "date": "2026-08-30T01:58:39.120Z"
+        },
+        {
+          "title": "Permis de séjour en Suisse : le permis L à Obwalden",
+          "url": "/fr/articles-suisse/permesso-l-objectif-obwalden/",
+          "excerpt": "Le permis L de courte durée est un permis de séjour qui peut être accordé pour une durée maximale d'un an.",
+          "date": "2026-08-16T16:18:18.990Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants Canton Obwald coûts",
+          "url": "/fr/articles-suisse/enfance-garde-canton-obvaldo-couts/",
+          "excerpt": "Découvrez les coûts d'une crèche et les politiques de subventions du canton Obwald.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
+          "title": "Primes caisse-maladie dans le canton d'Obwald : réduction et franchises",
+          "url": "/fr/articles-suisse/canton-obvaldo-assurance-maladie-primes-reduction/",
+          "excerpt": "La loi cantonale sur l'assurance-maladie dans le canton d'Obwald prévoit des tranches d'âge et des franchises pour réduire les primes.",
+          "date": "2026-08-16T14:15:52.976Z"
+        },
+        {
+          "title": "Permis de conduire Obwald : conversion et examens",
+          "url": "/fr/articles-suisse/permis-de-conduire-obwald-conversion/",
+          "excerpt": "Guide complet pour la conversion du permis étranger dans le canton d'Obwald : procédure, examen théorique et pratique, cours obligatoires et documents nécessaires.",
+          "date": "2026-08-23T09:58:00.247Z"
+        },
+        {
+          "title": "Primes LAMal Obwald : franchises et réduction",
+          "url": "/fr/articles-suisse/obvaldo-assurance-maladie-franchises-reduction/",
+          "excerpt": "Franchises obligatoires, réductions de primes et allocations cantonales pour l'assurance-maladie dans le canton d'Obwald. Procédure de demande et modèles d'assurance alternatifs.",
+          "date": "2026-08-23T05:27:44.369Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi à Obwald",
+          "url": "/fr/trouver-emploi-obwald/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

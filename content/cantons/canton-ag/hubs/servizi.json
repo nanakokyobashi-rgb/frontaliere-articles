@@ -1,0 +1,657 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ag:servizi",
+  "section": "canton-ag",
+  "canton": "AG",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "267b5331428ead365c8e90a3dac9379bb221c7b19ad83d7317c2470a938aa0ff",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "AG",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "In Argovia, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "569,90 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "18",
+          "note": "offerta mediana 1960 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "AG, regione di premio 0",
+              "value": "mediana 569,90 CHF al mese",
+              "detail": "da 519,25 a 621,90 CHF, 27 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "AG7797",
+              "value": "8200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58771"
+            },
+            {
+              "label": "AG8687",
+              "value": "8200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58772"
+            },
+            {
+              "label": "AG9194",
+              "value": "5200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58773"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion-ag.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
+              "date": "2026-09-25",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11849"
+            },
+            {
+              "label": "Das neue KSB-Magazin ist da: Geschichten, die Hoffnung machen",
+              "date": "2026-09-24",
+              "url": "https://www.kantonsspitalbaden.ch/news/das-neue-ksb-magazin-ist-da-geschichten-die-hoffnung-machen"
+            },
+            {
+              "label": "Gesundheitsamt legt ersten Basisgesundheitsbericht vor:...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/gesundheitsamt-waldshut-legt-ersten-basisgesundheitsbericht-vor-fokus-auf-praevention-und-gesundheitsfoerderung/"
+            },
+            {
+              "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
+              "date": "2026-09-23",
+              "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
+            },
+            {
+              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
+              "date": "2026-08-10",
+              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
+            },
+            {
+              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
+              "date": "2026-07-30",
+              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi cassa malati canton Argovia e riduzione premi",
+          "url": "/articoli-svizzera/argovia-sussidi-cassa-malati-2026/",
+          "excerpt": "Scopri come funzionano i premi dell'assicurazione malattia in Argovia, le franchigie disponibili e come richiedere la riduzione attraverso i sussidi cantonali.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Permesso dimora B Argovia: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-argovia-requisiti/",
+          "excerpt": "Permesso B è la dimora rinnovabile in Svizzera. Procedura federale SEM, competenza ufficio cantonale. Guida completa a requisiti, rinnovo e scadenze.",
+          "date": "2026-09-02T08:19:43.153Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/argovia/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/argovia-ag/"
+        },
+        {
+          "label": "Offerte di lavoro in Argovia",
+          "url": "/cerca-lavoro-argovia/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "AG",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Aargau, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "569.90 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "18",
+          "note": "typical bid 1,960 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "AG, premium region 0",
+              "value": "typical 569.90 CHF per month",
+              "detail": "from 519.25 to 621.90 CHF, 27 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "AG7797",
+              "value": "8,200 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58771"
+            },
+            {
+              "label": "AG8687",
+              "value": "8,200 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58772"
+            },
+            {
+              "label": "AG9194",
+              "value": "5,200 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58773"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion-ag.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
+              "date": "2026-09-25",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11849"
+            },
+            {
+              "label": "Das neue KSB-Magazin ist da: Geschichten, die Hoffnung machen",
+              "date": "2026-09-24",
+              "url": "https://www.kantonsspitalbaden.ch/news/das-neue-ksb-magazin-ist-da-geschichten-die-hoffnung-machen"
+            },
+            {
+              "label": "Gesundheitsamt legt ersten Basisgesundheitsbericht vor:...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/gesundheitsamt-waldshut-legt-ersten-basisgesundheitsbericht-vor-fokus-auf-praevention-und-gesundheitsfoerderung/"
+            },
+            {
+              "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
+              "date": "2026-09-23",
+              "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
+            },
+            {
+              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
+              "date": "2026-08-10",
+              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
+            },
+            {
+              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
+              "date": "2026-07-30",
+              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Health Insurance Premiums in the Canton of Aargau and Premium Reductions",
+          "url": "/en/swiss-articles/aargau-health-insurance-premium-subsidies/",
+          "excerpt": "Find out how health insurance premiums work in Aargau, what deductibles are available, and how to apply for a reduction through cantonal subsidies.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Residence permit B Aargau: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-aargau-requirements/",
+          "excerpt": "Permit B is the renewable residence in Switzerland. Federal SEM procedure, cantonal office competence. Complete guide to requirements, renewal and deadlines.",
+          "date": "2026-09-02T08:19:43.153Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/aargau-ag/"
+        },
+        {
+          "label": "Job offers in Aargau",
+          "url": "/en/find-jobs-aargau/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "AG",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Aargau laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "569.90 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "18",
+          "note": "mittleres Gebot 1’960 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "AG, Prämienregion 0",
+              "value": "Mittelwert 569.90 CHF pro Monat",
+              "detail": "von 519.25 bis 621.90 CHF, 27 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "AG7797",
+              "value": "8’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58771"
+            },
+            {
+              "label": "AG8687",
+              "value": "8’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58772"
+            },
+            {
+              "label": "AG9194",
+              "value": "5’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58773"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion-ag.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
+              "date": "2026-09-25",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11849"
+            },
+            {
+              "label": "Das neue KSB-Magazin ist da: Geschichten, die Hoffnung machen",
+              "date": "2026-09-24",
+              "url": "https://www.kantonsspitalbaden.ch/news/das-neue-ksb-magazin-ist-da-geschichten-die-hoffnung-machen"
+            },
+            {
+              "label": "Gesundheitsamt legt ersten Basisgesundheitsbericht vor:...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/gesundheitsamt-waldshut-legt-ersten-basisgesundheitsbericht-vor-fokus-auf-praevention-und-gesundheitsfoerderung/"
+            },
+            {
+              "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
+              "date": "2026-09-23",
+              "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
+            },
+            {
+              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
+              "date": "2026-08-10",
+              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
+            },
+            {
+              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
+              "date": "2026-07-30",
+              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien im Kanton Aargau und Prämienermäßigung",
+          "url": "/de/schweiz-artikel/aargau-krankenkasse-praemienzuschuesse/",
+          "excerpt": "Erfahren Sie, wie die Krankenkassenprämien im Kanton Aargau funktionieren, welche Franchisen es gibt und wie Sie eine Prämienermäßigung durch kantonale Zuschüsse beantragen können.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Aargau: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltsgenehmigung-b-aargau-anforderungen/",
+          "excerpt": "Permit B ist der erneuerbare Wohnsitz in der Schweiz. Bundesverfahren sem, Zuständigkeit kantonales Amt. Vollständiger Leitfaden zu Anforderungen, Erneuerung und Fristen.",
+          "date": "2026-09-02T08:19:43.153Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/aargau-ag/"
+        },
+        {
+          "label": "Stellenangebote im Aargau",
+          "url": "/de/jobs-im-aargau/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "AG",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "En Argovie, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "569,90 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "18",
+          "note": "offre centrale 1 960 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "AG, région de primes 0",
+              "value": "valeur centrale 569,90 CHF par mois",
+              "detail": "de 519,25 à 621,90 CHF, 27 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "AG7797",
+              "value": "8 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58771"
+            },
+            {
+              "label": "AG8687",
+              "value": "8 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58772"
+            },
+            {
+              "label": "AG9194",
+              "value": "5 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58773"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion-ag.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
+              "date": "2026-09-25",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11849"
+            },
+            {
+              "label": "Das neue KSB-Magazin ist da: Geschichten, die Hoffnung machen",
+              "date": "2026-09-24",
+              "url": "https://www.kantonsspitalbaden.ch/news/das-neue-ksb-magazin-ist-da-geschichten-die-hoffnung-machen"
+            },
+            {
+              "label": "Gesundheitsamt legt ersten Basisgesundheitsbericht vor:...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/gesundheitsamt-waldshut-legt-ersten-basisgesundheitsbericht-vor-fokus-auf-praevention-und-gesundheitsfoerderung/"
+            },
+            {
+              "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
+              "date": "2026-09-23",
+              "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
+            },
+            {
+              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
+              "date": "2026-08-10",
+              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
+            },
+            {
+              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
+              "date": "2026-07-30",
+              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes d'assurance maladie du canton d'Argovie et réduction des primes",
+          "url": "/fr/articles-suisse/argovie-subventions-primes-sante/",
+          "excerpt": "Découvrez comment fonctionnent les primes d'assurance maladie en Argovie, les franchises disponibles et comment demander une réduction grâce aux aides cantonales.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Permis de séjour B Argovie : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-argovie-exigences/",
+          "excerpt": "Le permis B est la résidence renouvelable en Suisse. Procédure fédérale SEM, compétence office cantonal. Guide complet des exigences, du renouvellement et des délais.",
+          "date": "2026-09-02T08:19:43.153Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi en Argovie",
+          "url": "/fr/trouver-emploi-argovie/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

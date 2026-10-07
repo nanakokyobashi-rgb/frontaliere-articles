@@ -1,0 +1,664 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vs:fisco",
+  "section": "canton-vs",
+  "canton": "VS",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "008e0d30e71c8bac72946a721c9f116aeef0255d5cfdbe2bd654d592a8bc3654",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VS",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "In Vallese, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio confina con l’Italia e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "14,26 %",
+          "note": "Sion, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "11,88 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Sion)",
+              "value": "0,7 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Sion)",
+              "value": "9,23 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Sion)",
+              "value": "14,26 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Sion)",
+              "value": "19,8 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Sion)",
+              "value": "26,8 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "3,9 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "9,09 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "11,88 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "14,62 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "20,96 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.vs.ch/de/web/scc/quelle",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Messagerie électronique chiffrée",
+              "date": "2026-08-11",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49665371"
+            },
+            {
+              "label": "Arnaque par courriel",
+              "date": "2026-08-04",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposta successione Vallese: aliquote e esenzioni",
+          "url": "/articoli-svizzera/successione-donazione-vallese-guida/",
+          "excerpt": "Tassazione successoria nel Vallese: aliquote per grado di parentela, esenzioni per coniuge e discendenti, dichiarazione e termini da rispettare.",
+          "date": "2026-09-06T15:34:18.889Z"
+        },
+        {
+          "title": "Imposta di successione nel Vallese: aliquote e dichiarazione",
+          "url": "/articoli-svizzera/imposta-successione-vallese-dichiarazione/",
+          "excerpt": "L'imposta di successione e donazione è disciplinata a livello cantonale: il Vallese ha norme proprie su gradi di parentela, esenzioni e termini di dichiarazione.",
+          "date": "2026-09-06T14:55:30.618Z"
+        },
+        {
+          "title": "Imposta di successione e donazione nel Vallese: aliquote",
+          "url": "/articoli-svizzera/imposta-successione-vallese-aliquote/",
+          "excerpt": "Guida alle imposte di successione e donazione nel Cantone Vallese: struttura cantonale, esenzioni per coniuge e figli, dichiarazione e termini ufficiali.",
+          "date": "2026-09-06T13:30:06.393Z"
+        },
+        {
+          "title": "Imposte cantonali nel Vallese: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-vallese-aliquote-deduzioni/",
+          "excerpt": "Scopri le aliquote e le deduzioni fiscali nel Cantone Vallese, con dettagli su scadenze e portale online dell'amministrazione fiscale.",
+          "date": "2026-09-05T09:53:45.166Z"
+        },
+        {
+          "title": "Imposta di successione nel Vallese: aliquote e procedure",
+          "url": "/articoli-svizzera/eredita-donazioni-vallese-guida/",
+          "excerpt": "La successione nel Vallese è soggetta a imposte cantonali calcolate per grado di parentela. Coniuge e discendenti hanno esenzioni specifiche. Ecco come funziona e quali procedimenti seguire.",
+          "date": "2026-09-06T14:17:14.380Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Guida alla tassazione dei frontalieri",
+          "url": "/guida-tassazione-frontalieri-2026/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "VS",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In Valais, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area borders Italy and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "14.26%",
+          "note": "Sion, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "11.88%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Sion)",
+              "value": "0.7%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Sion)",
+              "value": "9.23%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Sion)",
+              "value": "14.26%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Sion)",
+              "value": "19.8%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Sion)",
+              "value": "26.8%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "3.9%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "9.09%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "11.88%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "14.62%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "20.96%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.vs.ch/de/web/scc/quelle",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Messagerie électronique chiffrée",
+              "date": "2026-08-11",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49665371"
+            },
+            {
+              "label": "Arnaque par courriel",
+              "date": "2026-08-04",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Valais inheritance tax: rates and exemptions",
+          "url": "/en/swiss-articles/succession-donation-valais-guide/",
+          "excerpt": "Inheritance taxation in Valais: rates for degree of kinship, exemptions for spouse and descendants, declaration and deadlines to be respected.",
+          "date": "2026-09-06T15:34:18.889Z"
+        },
+        {
+          "title": "Inheritance tax in Valais: rates and declaration",
+          "url": "/en/swiss-articles/succession-tax-valais-declaration/",
+          "excerpt": "The inheritance and gift tax is regulated at the cantonal level: Valais has its own rules on degrees of kinship, exemptions and terms of declaration.",
+          "date": "2026-09-06T14:55:30.618Z"
+        },
+        {
+          "title": "Inheritance and gift tax in Valais: rates",
+          "url": "/en/swiss-articles/estate-tax-donation-valais-canton-rates/",
+          "excerpt": "Guide to inheritance and gift taxes in the Valais Canton: cantonal structure, exemptions for spouse and children, official declaration and terms.",
+          "date": "2026-09-06T13:30:06.393Z"
+        },
+        {
+          "title": "Cantonal taxes in Valais: rates and deductions",
+          "url": "/en/swiss-articles/cantonal-taxes-valais-tax-rates-deductions/",
+          "excerpt": "Find out about tax rates and deductions in the Canton of Valais, with details on deadlines and the tax administration's online portal.",
+          "date": "2026-09-05T09:53:45.166Z"
+        },
+        {
+          "title": "Inheritance tax in Valais: rates and procedures",
+          "url": "/en/swiss-articles/inheritance-donations-valais-guide/",
+          "excerpt": "Succession in Valais is subject to cantonal taxes calculated by degree of kinship. Spouse and descendants have specific exemptions. Here's how it works and what procedures to follow.",
+          "date": "2026-09-06T14:17:14.380Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "Cross-border taxation guide",
+          "url": "/en/cross-border-taxation-guide-2026/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "VS",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Wallis hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet grenzt an Italien und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "14.26 %",
+          "note": "Sion, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "11.88 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Sion)",
+              "value": "0.7 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Sion)",
+              "value": "9.23 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Sion)",
+              "value": "14.26 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Sion)",
+              "value": "19.8 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Sion)",
+              "value": "26.8 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "3.9 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "9.09 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "11.88 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "14.62 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "20.96 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.vs.ch/de/web/scc/quelle",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Messagerie électronique chiffrée",
+              "date": "2026-08-11",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49665371"
+            },
+            {
+              "label": "Arnaque par courriel",
+              "date": "2026-08-04",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Erbschaftssteuer Wallis: Steuersätze und Befreiungen",
+          "url": "/de/schweiz-artikel/erbschaft-schenkung-wallis-anleitung/",
+          "excerpt": "Erbschaftssteuer im Wallis: Sätze nach Verwandtschaftsgrad, Befreiungen für Ehegatten und Nachkommen, Erklärung und einzuhaltende Fristen.",
+          "date": "2026-09-06T15:34:18.889Z"
+        },
+        {
+          "title": "Erbschaftssteuer im Wallis: Sätze und Deklaration",
+          "url": "/de/schweiz-artikel/erbschaftssteuer-wallis-erklaerung/",
+          "excerpt": "Die Erbschafts- und Schenkungssteuer ist kantonal geregelt: Das Wallis hat eigene Regeln zu Verwandtschaftsgraden, Befreiungen und Meldefristen.",
+          "date": "2026-09-06T14:55:30.618Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer im Wallis: Steuersätze",
+          "url": "/de/schweiz-artikel/erbschaftssteuer-donationen-kanton-wallis-saetze/",
+          "excerpt": "Leitfaden zur Erbschafts- und Schenkungssteuer im Kanton Wallis: Kantonsstruktur, Freistellungen für Ehegatten und Kinder, Erklärung und Amtsfristen.",
+          "date": "2026-09-06T13:30:06.393Z"
+        },
+        {
+          "title": "Kantonale Steuern im Wallis: Sätze und Abzüge",
+          "url": "/de/schweiz-artikel/kantonale-steuern-wallis-steuersatze-abzuge/",
+          "excerpt": "Entdecken Sie die Steuersätze und Steuerabzüge im Kanton Wallis, mit Details zu Fälligkeiten und dem Online-Portal der Steuerverwaltung.",
+          "date": "2026-09-05T09:53:45.166Z"
+        },
+        {
+          "title": "Erbschaftssteuer im Wallis: Sätze und Verfahren",
+          "url": "/de/schweiz-artikel/erbschaft-schenkung-wallis-leitfaden/",
+          "excerpt": "Die Erbschaft im Wallis unterliegt kantonalen Steuern, die nach Verwandtschaftsgrad berechnet werden. Ehepartner und Nachkommen haben spezifische Ausnahmen. Hier ist, wie es funktioniert und welche Schritte zu befolgen…",
+          "date": "2026-09-06T14:17:14.380Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Leitfaden zur Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-besteuerung-leitfaden-2026/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "VS",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "En Valais, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire a une frontière avec l’Italie et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "14,26 %",
+          "note": "Sion, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "11,88 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Sion)",
+              "value": "0,7 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Sion)",
+              "value": "9,23 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Sion)",
+              "value": "14,26 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Sion)",
+              "value": "19,8 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Sion)",
+              "value": "26,8 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "3,9 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "9,09 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "11,88 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "14,62 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "20,96 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.vs.ch/de/web/scc/quelle",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Messagerie électronique chiffrée",
+              "date": "2026-08-11",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49665371"
+            },
+            {
+              "label": "Arnaque par courriel",
+              "date": "2026-08-04",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Impôt succession Valais : taux et exonérations",
+          "url": "/fr/articles-suisse/succession-donation-valais-guide/",
+          "excerpt": "Imposition successorale en Valais : taux par degré de parenté, exonérations pour conjoint et descendants, déclaration et délais à respecter.",
+          "date": "2026-09-06T15:34:18.889Z"
+        },
+        {
+          "title": "Droit de succession en Valais : taux et déclaration",
+          "url": "/fr/articles-suisse/impot-succession-valais-declaration/",
+          "excerpt": "L'impôt sur les successions et les donations est réglementé au niveau cantonal : le Valais a ses propres règles sur les degrés de parenté, les exemptions et les délais de déclaration.",
+          "date": "2026-09-06T14:55:30.618Z"
+        },
+        {
+          "title": "Droits de succession et de donation en Valais : taux",
+          "url": "/fr/articles-suisse/impot-succession-donations-canton-valais-taux/",
+          "excerpt": "Guide des droits de succession et de donation dans le canton du Valais : structure cantonale, exonérations pour conjoint et enfants, déclaration et délais officiels.",
+          "date": "2026-09-06T13:30:06.393Z"
+        },
+        {
+          "title": "Impôts cantonaux en Valais : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-valais-taux-dedeductions/",
+          "excerpt": "Découvrez les taux et les déductions fiscales dans le canton du Valais, avec des détails sur les délais et le portail en ligne de l'administration fiscale.",
+          "date": "2026-09-05T09:53:45.166Z"
+        },
+        {
+          "title": "Droit de succession en Valais : taux et procédures",
+          "url": "/fr/articles-suisse/heritage-donations-valais-guide/",
+          "excerpt": "La succession en Valais est soumise à des impôts cantonaux calculés par degré de parenté. Le conjoint et les descendants bénéficient d'exemptions spécifiques. Voici comment cela fonctionne et quelles procédures suivre.",
+          "date": "2026-09-06T14:17:14.380Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Guide de l’imposition des frontaliers",
+          "url": "/fr/guide-imposition-frontaliers-2026/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

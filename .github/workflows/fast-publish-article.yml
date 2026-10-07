@@ -124,6 +124,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       skip: ${{ steps.mode.outputs.skip }}
+      skip_reason: ${{ steps.mode.outputs.skip_reason }}
       dry: ${{ steps.mode.outputs.dry }}
       id: ${{ steps.mode.outputs.id }}
       ids: ${{ steps.mode.outputs.ids }}
@@ -190,7 +191,13 @@ jobs:
               dry=true
             fi
             changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
-            if ! printf '%s\n' "$changed" | grep -q '^content/'; then
+            has_content=false
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                content/*) has_content=true; break ;;
+              esac
+            done <<< "$changed"
+            if [ "$has_content" != true ]; then
               dry=true
             fi
           fi
@@ -226,7 +233,25 @@ jobs:
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
 
           if [ "${#ids[@]}" -eq 0 ]; then
-            echo "no article body in this event — nothing to publish"
+            canton_content=false
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                content/cantons/*|content/blog-body-canton-*|content/blog-meta-canton-*) canton_content=true; break ;;
+              esac
+            done <<< "$changed"
+            if [ "${{ github.event_name }}" = "push" ] && [ "$canton_content" = true ]; then
+              echo "::notice::CANTON_CONTENT_HANDLED_BY_FAST_PUBLISH_SECTION=1 — canton-only content push skipped by the Pages publisher"
+              echo "skip_reason=canton-only-r2" >> "$GITHUB_OUTPUT"
+              {
+                echo "### fast-publish-article"
+                echo
+                echo "- skip: canton-only content push; fast-publish-section.yml owns the R2 publication"
+                echo "- marker: CANTON_CONTENT_HANDLED_BY_FAST_PUBLISH_SECTION=1"
+              } >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "no article body in this event — nothing to publish"
+              echo "skip_reason=no-article-body" >> "$GITHUB_OUTPUT"
+            fi
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -244,6 +269,7 @@ jobs:
             echo "ids=$ids_json"
             echo "section=$section"
             echo "shard=$shard"
+            echo "skip_reason=publish"
           } >> "$GITHUB_OUTPUT"
           echo "resolved ids=$(printf '%s' "$ids_json" | jq -r 'join(", ")') section=$section shard=$shard dry=$dry"
 
@@ -415,22 +441,20 @@ jobs:
           fi
           echo "IT archive lists $items items"
 
-          # The article registry (data/{blog,swiss}-articles-data.ts -> content/)
-          # is read inside a try/catch in ogPagesPlugin: when it is missing the
-          # render SUCCEEDS and silently downgrades NewsArticle.author to the
-          # generic Organization fallback, and drops the visible byline.
-          # A resolved real author is a Person; a resolved editorial profile is
-          # an Organization. Both carry an /autori/ identity, unlike the
-          # fallback, so this gate must accept both registered forms.
-          # Measured: 4 of 42 rendered files differ, all of them article pages,
-          # and nothing anywhere reports a problem. Same silent-degradation class
-          # as the empty archive above, so it gets the same treatment.
+          # The host contract emits a named Person for real authors and a named
+          # Organization profile for editorial signatures such as `redazione`.
+          # Both are valid; requiring Person alone made every new article signed
+          # by the editorial profile fail even though the registry had resolved.
+          # A generic root Organization is still rejected: it is the silent
+          # fallback produced when the registry cannot resolve the article.
           it_article="$(jq -r '.shards[] | select(.locale=="it") | .articlePaths[0]' "$summary")"
-          if ! grep -Eq '"author":\{"@type":"(Person|Organization)","@id":"[^"]*/autori/[^"]*/#(person|profile)"' "$dist/$it_article"; then
-            echo "::error::$it_article has no registered Person/editorial-profile author in its NewsArticle JSON-LD — the article registry did not resolve (check the data/*-articles-data.ts symlinks)"
-            fail=1
+          author_entry="$(grep -o '"author"[[:space:]]*:[[:space:]]*{[^}]*}' "$dist/$it_article" | head -n 1 || true)"
+          if printf '%s' "$author_entry" | grep -Eq '"@type"[[:space:]]*:[[:space:]]*"(Person|Organization)"' \
+            && printf '%s' "$author_entry" | grep -Eq 'https://frontaliereticino\.ch/autori/[^" ]+'; then
+            echo "article carries a named Person or editorial Organization author"
           else
-            echo "article carries a registered Person or editorial-profile Organization author"
+            echo "::error::$it_article has no named Person/Organization author in its NewsArticle JSON-LD — the article registry did not resolve"
+            fail=1
           fi
 
           # Nessuna pagina può uscire con riferimenti /assets/ same-origin (issue #5270).

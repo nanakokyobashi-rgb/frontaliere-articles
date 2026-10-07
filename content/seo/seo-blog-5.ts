@@ -11831,10 +11831,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-anguria-pannelli-incendio-ticino-2026': {
-    title: 'Pannelli ignifughi con semi di anguria: rivoluzione per la sicurezza antincendio',
+    title: 'Pannelli ignifughi con semi di anguria: sicurezza antincendio',
     description: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, pannelli, ignifughi, semi, anguria',
-    ogTitle: 'Pannelli ignifughi con semi di anguria: rivoluzione per la sicurezza antincendio',
+    ogTitle: 'Pannelli ignifughi con semi di anguria: sicurezza antincendio',
     ogDescription: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino.',
     canonicalPath: '/articoli-frontaliere/anguria-pannelli-incendio-ticino-2026/',
     structuredData: {
@@ -77483,7 +77483,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Prezzi di benzina e gasolio allineati tra Lombardia e Svizzera. Lo sconto accise scade il 26 agosto. Conviene ancora fare il pieno oltre confine?',
     keywords: 'frontalieri, ticino, svizzera, italia, benzina, oltre, pieno, svizzero',
     ogTitle: 'Benzina oltre 2€, il pieno svizzero non conviene più',
-    ogDescription: 'Benzina e gasolio allineati tra Lombardia e Svizzera: 2,01€ vs 2,02€. Scadenza sconto accise il 26 agosto. Chi lavora in provincia di Varese deve rivedere la strategia di risparmio. Scopri i prezzi attuali sulle autostrade e cosa aspettarsi dalle',
+    ogDescription: 'Benzina e gasolio allineati tra Lombardia e Svizzera: 2,01€ vs 2,02€. Scadenza sconto accise il 26 agosto. Chi lavora in provincia di Varese deve rivedere la strategia di risparmio. Scopri i prezzi attuali sulle autostrade e cosa aspettarsi',
     canonicalPath: '/articoli-frontaliere/benzina-confine-svizzera-agosto-2026',
     structuredData: {
       "@context": "https://schema.org",
@@ -95159,7 +95159,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Ad agosto i rincari in Ticino raggiungono il 3%, mentre casa e mobilità salgono del 2,4% a livello nazionale e l\'inflazione è allo 0,8%. Scopri i dati Comparis',
     keywords: 'frontalieri, ticino, svizzera, italia, rincari, mobilità, abitazione, agosto',
     ogTitle: 'Ticino guida i rincari di mobilità e abitazione',
-    ogDescription: 'Lo studio di Comparis e KOF evidenzia che ad agosto i rincari in Ticino sono al 3%, il più alto tra i cantoni, mentre a livello nazionale casa e mobilità aumentano del 2,4% e l\'inflazione generale resta allo 0,8%. L\'articolo analizza l\'impatto sulle',
+    ogDescription: 'Lo studio di Comparis e KOF evidenzia che ad agosto i rincari in Ticino sono al 3%, il più alto tra i cantoni, mentre a livello nazionale casa e mobilità aumentano del 2,4% e l\'inflazione generale resta allo 0,8%. L\'articolo analizza l\'impatto',
     canonicalPath: '/articoli-frontaliere/ticino-costi-mobilita-abitazione',
     structuredData: {
       "@context": "https://schema.org",
@@ -97323,7 +97323,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: 'Il 4 ottobre il lungolago di Gavirate ospita la Festa della Zucca con stand gastronomici, musica e rievocazioni storiche, mentre la Grand Fondo chiude molte',
     keywords: 'frontalieri, ticino, svizzera, italia, festa, zucca, gavirate, weekend',
     ogTitle: 'Festa della Zucca a Gavirate: weekend di ottobre in Varese',
-    ogDescription: 'Nel primo weekend di ottobre la provincia di Varese si anima: a Gavirate la Festa della Zucca attira famiglie con cibo, musica e rievocazioni dei Celti, Longobardi e Normanni; la Grand Fondo Tre Valli Varesine chiude numerose vie, rendendo gli',
+    ogDescription: 'Nel primo weekend di ottobre la provincia di Varese si anima: a Gavirate la Festa della Zucca attira famiglie con cibo, musica e rievocazioni dei Celti, Longobardi e Normanni; la Grand Fondo Tre Valli Varesine chiude numerose vie, rendendo',
     canonicalPath: '/articoli-frontaliere/festa-zucca-gavirate-weekend-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
@@ -100635,6 +100635,175 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-domodossola-arresto-hashish-stazione': {
+    title: 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    description: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    keywords: 'frontalieri, ticino, svizzera, italia, domodossola, arresto, chilo, hashish',
+    ogTitle: 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    ogDescription: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    canonicalPath: '/articoli-frontaliere/domodossola-arresto-hashish-stazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Domodossola: arresto per chilo di hashish nel bagaglio",
+      "description": "## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-friburgo-contestazione-canone.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La stazione internazionale di Domodossola, dove è avvenuto l'arresto per traffico di stupefacenti"
+      },
+      "datePublished": "2026-10-07T06:58:03+00:00",
+      "dateModified": "2026-10-07T06:58:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/domodossola-arresto-hashish-stazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-petizione-recupero-carovita-ticino': {
+    title: 'Petizione sindacati per recupero carovati in Ticino',
+    description: '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    keywords: 'frontalieri, ticino, svizzera, italia, petizione, sindacati, recupero, carovati',
+    ogTitle: 'Petizione sindacati per recupero carovati in Ticino',
+    ogDescription: '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    canonicalPath: '/articoli-frontaliere/petizione-recupero-carovita-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Petizione sindacati per recupero carovati in Ticino",
+      "description": "## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/carovita-sindacati-recupero-divario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori del settore pubblico ticinese con striscioni a sostegno della petizione per il recupero del carovita"
+      },
+      "datePublished": "2026-10-07T08:24:41+00:00",
+      "dateModified": "2026-10-07T08:24:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/petizione-recupero-carovita-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-treno-foliage-locarno-domodossola': {
+    title: 'Treno del Foliage: Locarno-Domodossola dal 10 ottobre',
+    description: '## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni',
+    keywords: 'frontalieri, ticino, svizzera, italia, treno, foliage, locarno-domodossola, ottobre',
+    ogTitle: 'Treno del Foliage 2026 tra Locarno e Domodossola',
+    ogDescription: '## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni',
+    canonicalPath: '/articoli-frontaliere/treno-foliage-locarno-domodossola/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treno del Foliage: Locarno-Domodossola dal 10 ottobre",
+      "description": "## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/camelie-locarno-record-visitatori-2026-2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Treno del Foliage attraversa i paesaggi autunnali tra Locarno e Domodossola"
+      },
+      "datePublished": "2026-10-07T09:13:12+00:00",
+      "dateModified": "2026-10-07T09:13:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/treno-foliage-locarno-domodossola/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-biasca-17enne-arrestato-accoltellamento': {
+    title: 'Biasca: arrestato 17enne per accoltellamento vicino alla stazione',
+    description: '## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio',
+    keywords: 'frontalieri, ticino, svizzera, italia, biasca, arrestato, 17enne, accoltellamento',
+    ogTitle: 'Biasca: 17enne arrestato per accoltellamento vicino alla stazione',
+    ogDescription: '## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio',
+    canonicalPath: '/articoli-frontaliere/biasca-17enne-arrestato-accoltellamento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Biasca: arrestato 17enne per accoltellamento vicino alla stazione",
+      "description": "## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/biasca-accoltellamento-21enne.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nastro della polizia e luci lampeggianti vicino alla stazione di Biasca al tramonto"
+      },
+      "datePublished": "2026-10-07T10:19:58+00:00",
+      "dateModified": "2026-10-07T10:19:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/biasca-17enne-arrestato-accoltellamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pedemontana-truffa-sms-frontalieri': {
+    title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    description: '## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica',
+    keywords: 'frontalieri, ticino, svizzera, italia, pedemontana, avverte, nessun, pagamento',
+    ogTitle: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    ogDescription: '## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica',
+    canonicalPath: '/articoli-frontaliere/pedemontana-truffa-sms-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pedemontana avverte: nessun pagamento pedaggio via SMS o email",
+      "description": "## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto realistica di un casello autostradale ticinese all'alba con un'auto di un frontalier in avvicinamento"
+      },
+      "datePublished": "2026-10-07T10:36:08+00:00",
+      "dateModified": "2026-10-07T10:36:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pedemontana-truffa-sms-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

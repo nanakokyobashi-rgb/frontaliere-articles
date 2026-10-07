@@ -1,0 +1,808 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vd:mobilita",
+  "section": "canton-vd",
+  "canton": "VD",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "4b2e547edf1ea6c3277ccceaaf6a67bc2974e2437c5269b39c437654cb94aa01",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VD",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Vaud, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Chavannes-de-Bogis-Divonne, settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "14",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "19",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/chavannes-de-bogis-divonne/oggi/"
+            },
+            {
+              "label": "Crassier-Divonne",
+              "value": "0 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/crassier-divonne/oggi/"
+            },
+            {
+              "label": "L'Auberson-Les Fourgs",
+              "value": "0 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/l-auberson-les-fourgs/oggi/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/le-brassus-bois-d-amont/oggi/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/vallorbe-jougne/oggi/"
+            },
+            {
+              "label": "La Cure-Les Rousses",
+              "value": "0,1 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/la-cure-les-rousses/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A9 Pontarlier <-> Losanna tra Svincolo autostradale Ballaigues E Svincolo autostradale Orbe Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 ottobre 2026",
+              "date": "2025-10-29T11:07:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Losanna tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere Limitazione del traffico: corsia di sinistra chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2025-10-29T11:17:00.000Z"
+            },
+            {
+              "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Sud E Svincolo autostradale St-Maurice Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 21 novembre 2026",
+              "date": "2026-08-28T15:24:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere, lunghezza [km] 6.8",
+              "value": "Chiusura",
+              "detail": "fine prevista: 29 ottobre 2027",
+              "date": "2026-09-16T12:06:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Orbe Situazione: chiusa cantiere, lunghezza [km] 11.0",
+              "value": "Chiusura",
+              "detail": "fine prevista: 26 ottobre 2027",
+              "date": "2026-09-16T12:07:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier tra Svincolo autostradale Orbe E Svincolo autostradale Ballaigues Situazione: chiusa cantiere, lunghezza [km] 10.9",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 luglio 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier tra Svincolo autostradale Les Clées E Svincolo autostradale Ballaigues Situazione: chiusa cantiere, lunghezza [km] 6.7",
+              "value": "Chiusura",
+              "detail": "fine prevista: 7 luglio 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier -> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere, lunghezza [km] 6.8",
+              "value": "Chiusura",
+              "detail": "fine prevista: 9 luglio 2027",
+              "date": "2026-09-16T12:09:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Tarifs à compter du 13 décembre 2026",
+              "date": "2026-09-30T14:50:25.000Z",
+              "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
+            },
+            {
+              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
+              "date": "2026-09-24T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
+            },
+            {
+              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
+              "date": "2026-09-23T07:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
+            },
+            {
+              "label": "Communiqué de presse Abo Mobilis plus",
+              "date": "2026-06-11T08:56:01.000Z",
+              "url": "https://www.mobilis-vaud.ch/communique-de-presse-abo-mobilis-plus/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti canton Vaud: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-vaud-zone/",
+          "excerpt": "Abbonamenti mensili, annuali, metà-prezzo e Generale Abonnement nei trasporti pubblici svizzeri. Come funzionano le zone tariffarie e gli sconti per studenti.",
+          "date": "2026-09-05T05:50:23.197Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Francia",
+          "url": "/traffico-dogane/vaud-francia/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "VD",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of Vaud, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Chavannes-de-Bogis-Divonne, week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "14",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "19",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/chavannes-de-bogis-divonne/today/"
+            },
+            {
+              "label": "Crassier-Divonne",
+              "value": "0 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/crassier-divonne/today/"
+            },
+            {
+              "label": "L'Auberson-Les Fourgs",
+              "value": "0 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/l-auberson-les-fourgs/today/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/le-brassus-bois-d-amont/today/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/vallorbe-jougne/today/"
+            },
+            {
+              "label": "La Cure-Les Rousses",
+              "value": "0.1 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/la-cure-les-rousses/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A9 Pontarlier <-> Losanna tra Svincolo autostradale Ballaigues E Svincolo autostradale Orbe Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 27 October 2026",
+              "date": "2025-10-29T11:07:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Losanna tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere Limitazione del traffico: corsia di sinistra chiusa",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2025-10-29T11:17:00.000Z"
+            },
+            {
+              "label": "A9 Vevey <-> Martigny tra Svincolo autostradale Bex Sud E Svincolo autostradale St-Maurice Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 21 November 2026",
+              "date": "2026-08-28T15:24:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere, lunghezza [km] 6.8",
+              "value": "Closure",
+              "detail": "until 29 October 2027",
+              "date": "2026-09-16T12:06:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Orbe Situazione: chiusa cantiere, lunghezza [km] 11.0",
+              "value": "Closure",
+              "detail": "until 26 October 2027",
+              "date": "2026-09-16T12:07:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier tra Svincolo autostradale Orbe E Svincolo autostradale Ballaigues Situazione: chiusa cantiere, lunghezza [km] 10.9",
+              "value": "Closure",
+              "detail": "until 6 July 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier tra Svincolo autostradale Les Clées E Svincolo autostradale Ballaigues Situazione: chiusa cantiere, lunghezza [km] 6.7",
+              "value": "Closure",
+              "detail": "until 7 July 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier -> Lausanne tra Svincolo autostradale Ballaigues E Svincolo autostradale Les Clées Situazione: chiusa cantiere, lunghezza [km] 6.8",
+              "value": "Closure",
+              "detail": "until 9 July 2027",
+              "date": "2026-09-16T12:09:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Tarifs à compter du 13 décembre 2026",
+              "date": "2026-09-30T14:50:25.000Z",
+              "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
+            },
+            {
+              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
+              "date": "2026-09-24T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
+            },
+            {
+              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
+              "date": "2026-09-23T07:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
+            },
+            {
+              "label": "Communiqué de presse Abo Mobilis plus",
+              "date": "2026-06-11T08:56:01.000Z",
+              "url": "https://www.mobilis-vaud.ch/communique-de-presse-abo-mobilis-plus/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Vaud canton transport subscriptions: zones and rates",
+          "url": "/en/swiss-articles/public-transport-subscriptions-vaud-zones/",
+          "excerpt": "Monthly, annual, half-price and General Subscriptions in Swiss public transport. How fare zones and student discounts work.",
+          "date": "2026-09-05T05:50:23.197Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards France",
+          "url": "/en/border-wait/vaud-francia/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "VD",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "In der Waadt bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Chavannes-de-Bogis-Divonne, Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "14",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "19",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/chavannes-de-bogis-divonne/heute/"
+            },
+            {
+              "label": "Crassier-Divonne",
+              "value": "0 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/crassier-divonne/heute/"
+            },
+            {
+              "label": "L'Auberson-Les Fourgs",
+              "value": "0 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/l-auberson-les-fourgs/heute/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/le-brassus-bois-d-amont/heute/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/vallorbe-jougne/heute/"
+            },
+            {
+              "label": "La Cure-Les Rousses",
+              "value": "0.1 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/la-cure-les-rousses/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A9 Pontarlier <-> Lausanne zwischen Anschluss Ballaigues und Anschluss Orbe Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 27. Oktober 2026",
+              "date": "2025-10-29T11:07:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne zwischen Anschluss Ballaigues und Anschluss Les Clées Sachlage: Strecke gesperrt Baustelle Verkehrsführung: linker Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2025-10-29T11:17:00.000Z"
+            },
+            {
+              "label": "A9 Vevey <-> Martigny zwischen Anschluss Bex-Süd und Anschluss St-Maurice Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.0 Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 21. November 2026",
+              "date": "2026-08-28T15:24:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne zwischen Anschluss Ballaigues und Anschluss Les Clées Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.8",
+              "value": "Sperrung",
+              "detail": "bis 29. Oktober 2027",
+              "date": "2026-09-16T12:06:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne zwischen Anschluss Ballaigues und Anschluss Orbe Sachlage: Strecke gesperrt Baustelle, Länge [km] 11.0",
+              "value": "Sperrung",
+              "detail": "bis 26. Oktober 2027",
+              "date": "2026-09-16T12:07:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier zwischen Anschluss Orbe und Anschluss Ballaigues Sachlage: Strecke gesperrt Baustelle, Länge [km] 10.9",
+              "value": "Sperrung",
+              "detail": "bis 6. Juli 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier zwischen Anschluss Les Clées und Anschluss Ballaigues Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.7",
+              "value": "Sperrung",
+              "detail": "bis 7. Juli 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier -> Lausanne zwischen Anschluss Ballaigues und Anschluss Les Clées Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.8",
+              "value": "Sperrung",
+              "detail": "bis 9. Juli 2027",
+              "date": "2026-09-16T12:09:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Tarifs à compter du 13 décembre 2026",
+              "date": "2026-09-30T14:50:25.000Z",
+              "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
+            },
+            {
+              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
+              "date": "2026-09-24T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
+            },
+            {
+              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
+              "date": "2026-09-23T07:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
+            },
+            {
+              "label": "Communiqué de presse Abo Mobilis plus",
+              "date": "2026-06-11T08:56:01.000Z",
+              "url": "https://www.mobilis-vaud.ch/communique-de-presse-abo-mobilis-plus/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Verkehrstickets Kanton Waadt: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/abos-oepnv-vaud-zonen/",
+          "excerpt": "Monats-, Jahres-, Halbtax- und General Abonnement-Abonnements im öffentlichen Verkehr der Schweiz. Wie Tarifzonen und Studentenrabatte funktionieren.",
+          "date": "2026-09-05T05:50:23.197Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Frankreich",
+          "url": "/de/wartezeit-grenze/vaud-francia/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "VD",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Vaud, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Chavannes-de-Bogis-Divonne, semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "14",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "19",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Chavannes-de-Bogis-Divonne",
+              "value": "0 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/chavannes-de-bogis-divonne/aujourd-hui/"
+            },
+            {
+              "label": "Crassier-Divonne",
+              "value": "0 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/crassier-divonne/aujourd-hui/"
+            },
+            {
+              "label": "L'Auberson-Les Fourgs",
+              "value": "0 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/l-auberson-les-fourgs/aujourd-hui/"
+            },
+            {
+              "label": "Le Brassus-Bois-d'Amont",
+              "value": "0 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/le-brassus-bois-d-amont/aujourd-hui/"
+            },
+            {
+              "label": "Vallorbe-Jougne (La Ferrière)",
+              "value": "0 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/vallorbe-jougne/aujourd-hui/"
+            },
+            {
+              "label": "La Cure-Les Rousses",
+              "value": "0,1 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/la-cure-les-rousses/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A9 Pontarlier <-> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Orbe Situation: fermé travaux Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 octobre 2026",
+              "date": "2025-10-29T11:07:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Les Clées Situation: fermé travaux Gestion du trafic: voie de gauche fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2025-10-29T11:17:00.000Z"
+            },
+            {
+              "label": "A9 Vevey <-> Martigny entre Jonction autoroutière Bex-Sud et Jonction autoroutière St-Maurice Situation: fermé travaux, longueur [km] 6.0 Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 21 novembre 2026",
+              "date": "2026-08-28T15:24:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Les Clées Situation: fermé travaux, longueur [km] 6.8",
+              "value": "Fermeture",
+              "detail": "jusqu’au 29 octobre 2027",
+              "date": "2026-09-16T12:06:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier <-> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Orbe Situation: fermé travaux, longueur [km] 11.0",
+              "value": "Fermeture",
+              "detail": "jusqu’au 26 octobre 2027",
+              "date": "2026-09-16T12:07:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier entre Jonction autoroutière Orbe et Jonction autoroutière Ballaigues Situation: fermé travaux, longueur [km] 10.9",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 juillet 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Lausanne -> Pontarlier entre Jonction autoroutière Les Clées et Jonction autoroutière Ballaigues Situation: fermé travaux, longueur [km] 6.7",
+              "value": "Fermeture",
+              "detail": "jusqu’au 7 juillet 2027",
+              "date": "2026-09-16T12:08:00.000Z"
+            },
+            {
+              "label": "A9 Pontarlier -> Lausanne entre Jonction autoroutière Ballaigues et Jonction autoroutière Les Clées Situation: fermé travaux, longueur [km] 6.8",
+              "value": "Fermeture",
+              "detail": "jusqu’au 9 juillet 2027",
+              "date": "2026-09-16T12:09:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Tarifs à compter du 13 décembre 2026",
+              "date": "2026-09-30T14:50:25.000Z",
+              "url": "https://www.mobilis-vaud.ch/tarifs-a-compter-du-13-decembre-2026/"
+            },
+            {
+              "label": "Réponse à la consultation sur l’avant-projet de loi sur la mobilité",
+              "date": "2026-09-24T12:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90320"
+            },
+            {
+              "label": "Poste de Vers-chez-les-Blanc: la Ville obtient gain de cause contre sa fermeture",
+              "date": "2026-09-23T07:00:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
+            },
+            {
+              "label": "Communiqué de presse Abo Mobilis plus",
+              "date": "2026-06-11T08:56:01.000Z",
+              "url": "https://www.mobilis-vaud.ch/communique-de-presse-abo-mobilis-plus/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports canton de Vaud : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-vaud-zones/",
+          "excerpt": "Abonnements mensuels, annuels, demi-tarif et Général Abonnement dans les transports publics suisses. Comment fonctionnent les zones tarifaires et les réductions pour les étudiants.",
+          "date": "2026-09-05T05:50:23.197Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers France",
+          "url": "/fr/temps-attente-douane/vaud-francia/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}
