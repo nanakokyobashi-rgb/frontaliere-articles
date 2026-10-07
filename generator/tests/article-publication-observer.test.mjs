@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  OBSERVER_USER_AGENT,
   buildObserverTargets,
   classifyPublicationLag,
   observePublicationLag,
@@ -78,6 +79,7 @@ test('og:image dichiarata generica non apre il segnale degrado', () => {
 
 test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
   const requests = [];
+  const userAgents = [];
   const sleeps = [];
   const targets = ['one', 'two', 'three', 'four'].map((articleId) => ({ ...target(), articleId, url: `https://example.test/${articleId}/` }));
   const responses = [
@@ -92,13 +94,18 @@ test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
     minIntervalMs: 500,
     clock: () => 0,
     sleepImpl: async (ms) => sleeps.push(ms),
-    fetchImpl: async (url) => {
+    fetchImpl: async (url, options) => {
       requests.push(url);
+      userAgents.push(options?.headers?.['user-agent']);
       const html = responses[requests.length - 1];
       return { ok: true, status: 200, text: async () => html };
     },
   });
   assert.deepEqual(requests, targets.map((item) => item.url));
+  // La produzione risponde 403 allo User-Agent predefinito di Node: senza un
+  // nome proprio ogni pagina risulterebbe in ritardo con «HTTP 403».
+  assert.deepEqual(userAgents, targets.map(() => OBSERVER_USER_AGENT));
+  assert.match(OBSERVER_USER_AGENT, /^frontaliere-publication-observer\//);
   assert.deepEqual(sleeps, [500, 500, 500]);
   assert.deepEqual(result.lagging.map((item) => item.target.articleId), ['two', 'four']);
   assert.deepEqual(result.degraded.map((item) => item.target.articleId), ['three', 'four']);

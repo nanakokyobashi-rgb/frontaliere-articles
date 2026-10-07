@@ -75,6 +75,21 @@ test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary
   assert.match(pipeline, /filterEntriesByImagePostcondition/);
 });
 
+test('un articolo ricaduto sull’immagine generica passa dalla lettura della pagina online e non esce in silenzio', () => {
+  // La post-condizione da sola tratterrebbe anche l'articolo nuovo: il suo
+  // risultato deve passare da releaseArticlesWithNothingToProtect, e il push
+  // deve usare le voci che quella funzione restituisce.
+  assert.match(
+    pipeline,
+    /const imagePostcondition = await releaseArticlesWithNothingToProtect\(\{\s*entries,\s*postcondition: filterEntriesByImagePostcondition\(/,
+  );
+  assert.match(pipeline, /entries: imagePostcondition\.entries,/);
+  // Trattenuto e uscito con l'immagine generica sono due avvisi distinti sulla run.
+  assert.match(workflow, /\.imagePostcondition\.excludedArticles\[\]\?\.articleId/);
+  assert.match(workflow, /\.imagePostcondition\.releasedArticles\[\]\?\.articleId/);
+  assert.match(workflow, /::warning title=Articolo uscito con l'immagine generica::/);
+});
+
 test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il batch', () => {
   const validation = stepText('Validate what was rendered');
   assert.match(validation, /\.articlePaths \| length/);

@@ -30,6 +30,7 @@ import { spawnSync } from 'node:child_process';
 import { sanitizeHtmlDocument } from './sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../../generator/scripts/lib/control-char-write-report.mjs';
 import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
+import { releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
 
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const MAX_DECLARED_IMAGE_BYTES = 5 * 1024 * 1024;
@@ -46,9 +47,11 @@ const IMAGE_FETCH_CONCURRENCY = 4;
  * @param {string} [opts.logPrefix]
  * @param {(ctx: { distDir: string, entries: any[], hubResult: any }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
+ * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
+ *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
  * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload, probeOnlineImage }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
   // top-level evaluation (an IIFE, not a function call re-read per use), to
   // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
@@ -321,11 +324,25 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       if (rel && fs.existsSync(path.join(distDir, rel))) htmlByPath[rel] = fs.readFileSync(path.join(distDir, rel), 'utf-8');
     }
   }
-  const imagePostcondition = filterEntriesByImagePostcondition({ entries, declaredImages, htmlByPath });
+  // Un articolo che ricade sull'immagine generica resta fuori dal push solo se
+  // online c'è qualcosa da proteggere: una sua pagina con immagine propria, o
+  // una risposta che non si è potuta leggere. Un articolo senza pagine online
+  // esce subito con l'immagine generica (decisione del proprietario, 07-10-2026).
+  const imagePostcondition = await releaseArticlesWithNothingToProtect({
+    entries,
+    postcondition: filterEntriesByImagePostcondition({ entries, declaredImages, htmlByPath }),
+    probe: probeOnlineImage,
+  });
   if (imagePostcondition.excludedArticles.length > 0) {
     console.error(
       `[${logPrefix}] image postcondition excluded ${imagePostcondition.excludedArticles.length} article(s) / ` +
         `${imagePostcondition.excludedPages} page(s): ${imagePostcondition.firstExcludedArticleIds.join(', ')}`,
+    );
+  }
+  if (imagePostcondition.releasedArticles.length > 0) {
+    console.error(
+      `[${logPrefix}] image postcondition released ${imagePostcondition.releasedArticles.length} article(s) with the generic image ` +
+        `(no page online to protect): ${imagePostcondition.releasedArticles.slice(0, 10).map((article) => article.articleId).join(', ')}`,
     );
   }
 

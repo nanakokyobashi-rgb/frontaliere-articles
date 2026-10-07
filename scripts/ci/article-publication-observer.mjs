@@ -21,6 +21,10 @@ export const DEFAULT_STALE_MINUTES = 60;
 export const DEFAULT_MAX_PAGES = 300;
 export const DEFAULT_MIN_INTERVAL_MS = 500;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
+// The apex answers 403 to the default User-Agent of Node's fetch (measured on
+// 2026-10-07): without a name of its own the observer would report every page
+// as lagging with "HTTP 403".
+export const OBSERVER_USER_AGENT = 'frontaliere-publication-observer/1 (+https://frontaliereticino.ch)';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -179,7 +183,10 @@ export async function observePublicationLag({
     lastRequestAt = clock();
     let page;
     try {
-      const response = await fetchImpl(target.url, { headers: { accept: 'text/html' }, redirect: 'follow' });
+      const response = await fetchImpl(target.url, {
+        headers: { accept: 'text/html', 'user-agent': OBSERVER_USER_AGENT },
+        redirect: 'follow',
+      });
       if (!response.ok) {
         page = parsePageObservation('', response.status);
       } else {

@@ -403,10 +403,16 @@ jobs:
           expected_ids="$(jq -c '.ids | sort' "$summary")"
 
           # Un articolo trattenuto non deve passare in silenzio: la pagina online
-          # resta com'e`, ma chi legge la run deve vedere quale e perche`.
+          # resta com'è, ma chi legge la run deve vedere quale e perché.
           withheld="$(jq -r '[.imagePostcondition.excludedArticles[]?.articleId] | join(", ")' "$summary")"
           if [ -n "$withheld" ]; then
             echo "::warning title=Articolo trattenuto dalla post-condizione sull'immagine::$withheld: il registro dichiara un'immagine che il rendering non ha risolto; la pagina online non viene sostituita"
+          fi
+          # Lo stesso vale per l'articolo che esce con l'immagine generica perché
+          # online non aveva nulla da proteggere: va rireso quando l'immagine esiste.
+          released="$(jq -r '[.imagePostcondition.releasedArticles[]?.articleId] | join(", ")' "$summary")"
+          if [ -n "$released" ]; then
+            echo "::warning title=Articolo uscito con l'immagine generica::$released: il registro dichiara un'immagine che il rendering non ha risolto e nessuna pagina online andava protetta; va rireso quando l'immagine esiste"
           fi
           fetch_failures="$(jq -r '[.imageFetchFailures[]? | "\(.articleId) (\(.image): \(.reason))"] | join("; ")' "$summary")"
           if [ -n "$fetch_failures" ]; then
