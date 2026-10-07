@@ -443,7 +443,9 @@ test('publisher: cancella le URL ritirate solo dopo il verify della release corr
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-order-')),
       publishedStatusImpl: async () => 'draft',
-      releaseReadyImpl: async () => ({ ok: true }),
+      releaseReadyImpl: async () => {
+        throw new Error('una sezione draft non deve attendere la release API');
+      },
       runImpl: (command, args) => {
         const script = args.join(' ');
         if (script.includes('upload-cdn-file.sh')) {

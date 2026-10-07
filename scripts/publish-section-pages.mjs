@@ -505,12 +505,14 @@ async function fetchJsonAt(url, fetchImpl) {
 }
 
 /**
- * La delete delle URL ritirate e' sicura solo dopo il flip della stessa
- * release che ha aggiornato sitemap e slug. `publish-api` e fast-publish
- * partono dallo stesso push, quindi la verifica locale dei nuovi HTML non
- * basta: attendiamo manifest, catalogo, slugs e puntatore edge sul commit
- * corrente. Se uno e' ancora vecchio, il run fallisce senza cancellare; il
- * retry del workflow ripete la prova dopo il deploy API.
+ * La delete delle URL ritirate di una sezione live e' sicura solo dopo il flip
+ * della stessa release che ha aggiornato sitemap e slug. `publish-api` e
+ * fast-publish partono dallo stesso push, quindi la verifica locale dei nuovi
+ * HTML non basta: attendiamo manifest, catalogo, slugs e puntatore edge sul
+ * commit corrente. Se uno e' ancora vecchio, il run fallisce senza cancellare;
+ * il retry del workflow ripete la prova dopo il deploy API. Le sezioni draft
+ * non chiamano questa attesa: senza route live e sitemap pubblica il loro
+ * registro edge e' gia' la prova che quelle URL non sono annunciate.
  */
 export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch } = {}) {
   if (!expectedCommit) return { ok: false, reason: 'commit corrente non disponibile' };
@@ -533,7 +535,8 @@ export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch 
 }
 
 /**
- * Aspetta il flip coordinato di API e edge prima di cancellare URL ritirate.
+ * Aspetta il flip coordinato di API e edge prima di cancellare URL ritirate
+ * ancora annunciate da una sezione live.
  * Il workflow puo' ritentare l'intero publisher, ma quel retry da solo non
  * basta: ogni tentativo deve concedere alla pubblicazione API una finestra
  * bounded, altrimenti una gara transitoria lascia per sempre chiavi obsolete
