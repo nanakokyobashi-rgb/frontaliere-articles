@@ -505,6 +505,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-07T18:10:58.705Z",
       "lastFailureAt": "2026-10-07T18:10:58.705Z"
+    },
+    {
+      "articleId": "lopper-luce-pedoni-bici",
+      "title": "Lopper: illuminazione sul percorso tra Stansstad e Hergiswil",
+      "fallbackImage": "/images/blog/benzina-confine-svizzera-agosto-2026.webp",
+      "reason": "All image providers failed for article-lopper-luce-pedoni-bici: Codex broker timed out after 119998ms",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T18:27:16.502Z",
+      "lastFailureAt": "2026-10-07T18:27:16.502Z"
     }
   ]
 }
