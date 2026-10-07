@@ -5021,6 +5021,21 @@ function bodyTextForQuality(content) {
     .join('\n\n');
 }
 
+// The final source-copy repair runs after the first CTA/link pass. Recheck the
+// repaired body without those deterministic appendages: the canton guard must
+// see a toponym introduced by the repair, but a generic CTA mentioning Ticino
+// must not turn a Grigioni/Vallese article into a false cross-canton reject.
+function bodyTextForCantonPostcondition(data) {
+  const appendages = [
+    ...CTA_POOL.map((cta) => cta.it),
+    ...Object.values(INTERNAL_LINK_BLOCK.it),
+  ];
+  return appendages.reduce(
+    (body, appendage) => body.replaceAll(appendage, ''),
+    bodyTextForQuality(data?.content?.it || {}),
+  );
+}
+
 /**
  * Gate comune per i payload appena generati, prima di traduzioni, immagini e
  * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
@@ -17797,7 +17812,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     throw error;
   }
   sanitizeBoldFormatting(data);
-  assertGeneratedArticleQuality(data, { cantonBody: data._cantonGuardBodyBeforeCta });
+  assertGeneratedArticleQuality(data, {
+    // Explicitly evaluate the post-repair body with the deterministic CTA/link
+    // appendages removed; the pre-first-CTA snapshot is stale after repair.
+    cantonBody: bodyTextForCantonPostcondition(data),
+  });
   assertNoFabricatedReferences(data.content.it);
   assertNoFabricatedLaborOfficeCrossLocale(data);
   assertNoFabricatedNormAcronyms({
