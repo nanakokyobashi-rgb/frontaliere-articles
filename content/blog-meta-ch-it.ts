@@ -7847,6 +7847,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.raffineria-cressier-carburanti.title': 'Diesel svizzero sfiora 2,50 franchi: allarme Cressier',
     'blog.article.raffineria-cressier-carburanti.excerpt': '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
     'blog.article.raffineria-cressier-carburanti.imageAlt': 'Pompa di diesel in Svizzera con una raffineria sullo sfondo',
+    'blog.article.quattro-oggetti-urne-novembre.title': 'Voto del 29 novembre: IVA, AVS e quattro oggetti',
+    'blog.article.quattro-oggetti-urne-novembre.excerpt': 'Il 29 novembre si voterà su quattro oggetti: aumento dell\'IVA per la 13esima AVS, due iniziative popolari e modifica della legge sul materiale bellico.',
+    'blog.article.quattro-oggetti-urne-novembre.imageAlt': 'Urna svizzera e schede per il voto del 29 novembre',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Auto elettrica: come risparmiare fino al 50%',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Immagine editoriale relativa a: Auto elettrica: come risparmiare fino al 50%',
 };
 
 export default blogMetaChIt;

@@ -1,0 +1,929 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ti:servizi",
+  "section": "canton-ti",
+  "canton": "TI",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "aaab6642c30bbb2f865a41a5bfbe98f39d12a016d642628eba7e281c64dfa812",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-06T21:07:44.226Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TI",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "In Ticino, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Italia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in italiano; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "740,20 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "2",
+          "note": "offerta mediana 11.950 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "TI, regione di premio 1",
+              "value": "mediana 740,20 CHF al mese",
+              "detail": "da 679 a 826,50 CHF, 21 assicuratori"
+            },
+            {
+              "label": "TI, regione di premio 2",
+              "value": "mediana 683,30 CHF al mese",
+              "detail": "da 626,70 a 797,20 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Stazione",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-02T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Bozzoreda",
+              "detail": "Pregassona, Luganese",
+              "date": "2026-10-03T06:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-05T16:30:00.000Z"
+            },
+            {
+              "label": "Contrada dei Patrizi",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-06T06:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Malè",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-09T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-06T21:07:44.226Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "TI115",
+              "value": "23.000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1537"
+            },
+            {
+              "label": "TI10769",
+              "value": "900 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "A Lugano il Congresso Infertilità 2026",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
+            },
+            {
+              "label": "Approccio medico e infermieristico in Anestesia a confronto",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
+            },
+            {
+              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
+              "date": "2026-09-30",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
+            },
+            {
+              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
+              "date": "2026-09-28",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi cassa malati Ticino 2027: aumento del 3,7%",
+          "url": "/articoli-frontaliere/stangata-premi-cassa-malati-ticino/",
+          "excerpt": "Nel 2027 i premi di cassa malati in Ticino aumentano del 3,7%, portando il premio medio a 520 franchi al mese, il più alto della Svizzera.",
+          "date": "2026-09-29T12:24:49.493Z"
+        },
+        {
+          "title": "Premi di cassa malati: quando il 3,7% non racconta tutto",
+          "url": "/articoli-svizzera/premi-malati-ticino-aumento-franchi-2027/",
+          "excerpt": "Nel 2027 il premio medio della cassa malati in Ticino aumenterà del 3,7%, raggiungendo 519.90 franchi mensili, un incremento di 18.60 franchi, superiore del 26% alla media svizzera di 412 franchi.",
+          "date": "2026-09-30T17:00:48.460Z"
+        },
+        {
+          "title": "Ostinelli non paga la cassa malati e va davanti al pretore",
+          "url": "/articoli-svizzera/ostinelli-cassa-malati-udienza-pretore/",
+          "excerpt": "Roberto Ostinelli, medico di Mendrisio, non paga la cassa malati da giugno 2024 e deve comparire davanti al pretore il 6 ottobre; paga 140 euro al mese per un'assicurazione internazionale.",
+          "date": "2026-10-06T07:13:37.693Z"
+        },
+        {
+          "title": "La sanità ticinese ha bisogno di nuovi incentivi",
+          "url": "/articoli-svizzera/costi-sanita-incentivi/",
+          "excerpt": "Il Covid ha lasciato costi straordinari e duraturi; le casse malati trattengono al massimo il 5% della spesa; fino a un quinto della spesa sanitaria è legato a prestazioni inutili.",
+          "date": "2026-09-25T21:17:42.290Z"
+        },
+        {
+          "title": "Premi cassa malati 2027 in Ticino: +3,7% e EFAS dal 2028",
+          "url": "/articoli-svizzera/lucas-engelberger-premi-cassa-malati-2027/",
+          "excerpt": "Lukas Engelberger: il sistema è buono e costa. In Ticino i premi salgono del 3,7%, con EFAS atteso dal 2028.",
+          "date": "2026-09-29T16:13:57.565Z"
+        },
+        {
+          "title": "Farmacie in Ticino: elenco e contatti",
+          "url": "/articoli-svizzera/farmacie-ticino-elenco-contatti/",
+          "excerpt": "Elenco delle farmacie in Ticino con contatti e catalogo regionale: come cercare una sede e verificare orari e turni aggiornati.",
+          "date": "2026-09-14T20:06:49.755Z"
+        },
+        {
+          "title": "Farmacie di turno in Ticino: guida a fonti e copertura",
+          "url": "/articoli-svizzera/farmacie-turno-ticino-guida/",
+          "excerpt": "Turni di farmacia in Ticino: fonti ufficiali, copertura regionale e limiti del catalogo per verificare l'apertura prima di partire.",
+          "date": "2026-09-14T20:06:49.427Z"
+        },
+        {
+          "title": "Farmacia aperta o di turno: come leggere l’elenco",
+          "url": "/articoli-svizzera/farmacia-aperta-turno-elenco/",
+          "excerpt": "Come trovare una farmacia aperta o di turno tra Ticino e province di confine, leggendo cataloghi, orari e fonti ufficiali.",
+          "date": "2026-09-14T20:06:51.005Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/ticino/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/ticino-ti/"
+        },
+        {
+          "label": "Offerte di lavoro in Ticino",
+          "url": "/cerca-lavoro-ticino/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Farmacie di turno",
+          "url": "/farmacie-di-turno/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        },
+        {
+          "label": "Meteo per i pendolari",
+          "url": "/meteo-frontalieri/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "TI",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Ticino, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Italy: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in Italian; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "740.20 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "2",
+          "note": "typical bid 11,950 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "TI, premium region 1",
+              "value": "typical 740.20 CHF per month",
+              "detail": "from 679 to 826.50 CHF, 21 insurers"
+            },
+            {
+              "label": "TI, premium region 2",
+              "value": "typical 683.30 CHF per month",
+              "detail": "from 626.70 to 797.20 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Stazione",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-02T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Bozzoreda",
+              "detail": "Pregassona, Luganese",
+              "date": "2026-10-03T06:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-05T16:30:00.000Z"
+            },
+            {
+              "label": "Contrada dei Patrizi",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-06T06:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Malè",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-09T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-06T21:07:44.226Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "TI115",
+              "value": "23,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1537"
+            },
+            {
+              "label": "TI10769",
+              "value": "900 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "A Lugano il Congresso Infertilità 2026",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
+            },
+            {
+              "label": "Approccio medico e infermieristico in Anestesia a confronto",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
+            },
+            {
+              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
+              "date": "2026-09-30",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
+            },
+            {
+              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
+              "date": "2026-09-28",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Ticino health insurance premiums 2027: 3,7% increase",
+          "url": "/en/cross-border-articles/health-insurance-premiums-ticino-2027/",
+          "excerpt": "In 2027, health insurance premiums in Ticino increase by 3,7%, bringing the average premium to 520 francs per month, the highest in Switzerland.",
+          "date": "2026-09-29T12:24:49.493Z"
+        },
+        {
+          "title": "Health Insurance Premiums: When 3.7% Doesn't Tell the Whole Story",
+          "url": "/en/swiss-articles/health-insurance-premiums-ticino-increase-francs-2027/",
+          "excerpt": "In 2027, the average health insurance premium in Ticino will increase by 3,7%, reaching 519.90 francs per month, an increase of 18.60 francs, 26% higher than the Swiss average of 412 francs.",
+          "date": "2026-09-30T17:00:48.460Z"
+        },
+        {
+          "title": "Ostinelli does not pay his health insurance and goes before the magistrate",
+          "url": "/en/swiss-articles/ostinelli-health-insurance-court-hearing/",
+          "excerpt": "Roberto Ostinelli, a doctor from Mendrisio, has not paid his health insurance since June 2024 and must appear before the magistrate on October 6; he pays 140 euro per month for international insurance.",
+          "date": "2026-10-06T07:13:37.693Z"
+        },
+        {
+          "title": "Ticino's healthcare system needs new incentives",
+          "url": "/en/swiss-articles/ticino-s-healthcare-system-needs-new-incentives/",
+          "excerpt": "Covid has left extraordinary and lasting costs; health insurers retain at most 5% of expenditure; up to one fifth of healthcare spending is linked to unnecessary services.",
+          "date": "2026-09-25T21:17:42.290Z"
+        },
+        {
+          "title": "Health insurance premiums 2027 in Ticino: +3,7% and EFAS from 2028",
+          "url": "/en/swiss-articles/lucas-engelberger-2027-health-insurance-premiums/",
+          "excerpt": "Lukas Engelberger: the system is good and costs money. In Ticino, premiums are rising by 3,7%, with EFAS expected from 2028.",
+          "date": "2026-09-29T16:13:57.565Z"
+        },
+        {
+          "title": "Pharmacies in Ticino: directory and contacts",
+          "url": "/en/swiss-articles/ticino-pharmacy-directory-contacts/",
+          "excerpt": "A starting point for finding pharmacies present in the Ticino directory and opening the local records that are available. 207 Ticino records and 542 records in provinces CO, VA and VB; regional duty verified in the…",
+          "date": "2026-09-14T20:06:49.755Z"
+        },
+        {
+          "title": "Ticino on-duty pharmacies: a guide to sources and coverage",
+          "url": "/en/swiss-articles/ticino-on-duty-pharmacies-guide/",
+          "excerpt": "This guide explains where to read Ticino pharmacy duty information and how to interpret regional coverage correctly. 207 Ticino records and 542 records in provinces CO, VA and VB; regional duty verified in the five…",
+          "date": "2026-09-14T20:06:49.427Z"
+        },
+        {
+          "title": "Open or on duty? How to read the pharmacy directory",
+          "url": "/en/swiss-articles/open-pharmacy-duty-directory-guide/",
+          "excerpt": "The practical difference between finding a pharmacy in a directory, reading published hours and checking OFCT duty information. 207 Ticino records and 542 records in provinces CO, VA and VB; regional duty verified in…",
+          "date": "2026-09-14T20:06:51.005Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/ticino-ti/"
+        },
+        {
+          "label": "Job offers in Ticino",
+          "url": "/en/find-jobs-ticino/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "On-duty pharmacies",
+          "url": "/en/on-duty-pharmacies/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        },
+        {
+          "label": "Commuter weather",
+          "url": "/en/commute-weather/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "TI",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Tessin laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Italien: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Italienisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "740.20 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "2",
+          "note": "mittleres Gebot 11’950 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "TI, Prämienregion 1",
+              "value": "Mittelwert 740.20 CHF pro Monat",
+              "detail": "von 679 bis 826.50 CHF, 21 Versicherer"
+            },
+            {
+              "label": "TI, Prämienregion 2",
+              "value": "Mittelwert 683.30 CHF pro Monat",
+              "detail": "von 626.70 bis 797.20 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Stazione",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-02T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Bozzoreda",
+              "detail": "Pregassona, Luganese",
+              "date": "2026-10-03T06:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-05T16:30:00.000Z"
+            },
+            {
+              "label": "Contrada dei Patrizi",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-06T06:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Malè",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-09T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-06T21:07:44.226Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "TI115",
+              "value": "23’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1537"
+            },
+            {
+              "label": "TI10769",
+              "value": "900 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "A Lugano il Congresso Infertilità 2026",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
+            },
+            {
+              "label": "Approccio medico e infermieristico in Anestesia a confronto",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
+            },
+            {
+              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
+              "date": "2026-09-30",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
+            },
+            {
+              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
+              "date": "2026-09-28",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien im Tessin 2027: Anstieg um 3,7%",
+          "url": "/de/grenzgaenger-artikel/krankenkassenpraemien-tessin-2027/",
+          "excerpt": "Im Jahr 2027 steigen die Krankenkassenprämien im Tessin um 3,7%, wodurch die durchschnittliche Prämie auf 520 Franken pro Monat steigt, die höchste in der Schweiz.",
+          "date": "2026-09-29T12:24:49.493Z"
+        },
+        {
+          "title": "Krankenkassenprämien: Wenn 3,7 % nicht alles sagen",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-tessin-erhoehung-franken-2027/",
+          "excerpt": "Im Jahr 2027 wird der durchschnittliche Krankenkassenbeitrag im Tessin um 3,7 % steigen und 519,90 Franken pro Monat erreichen – ein Anstieg um 18,60 Franken, der 26 % über dem Schweizer Durchschnitt von 412 Franken…",
+          "date": "2026-09-30T17:00:48.460Z"
+        },
+        {
+          "title": "Ostinelli zahlt seine Krankenversicherung nicht und muss sich vor Gericht verantworten.",
+          "url": "/de/schweiz-artikel/ostinelli-krankenkasse-gerichtstermin/",
+          "excerpt": "Roberto Ostinelli, Arzt aus Mendrisio, zahlt seit Juni 2024 die Krankenkasse nicht mehr und muss am 6. Oktober vor dem Pretore erscheinen; er zahlt 140 Euro im Monat für eine internationale Versicherung.",
+          "date": "2026-10-06T07:13:37.693Z"
+        },
+        {
+          "title": "Das Tessiner Gesundheitswesen braucht neue Anreize.",
+          "url": "/de/schweiz-artikel/das-tessiner-gesundheitswesen-braucht-neue-anreize/",
+          "excerpt": "Covid hat außergewöhnliche und anhaltende Kosten hinterlassen; die Krankenkassen behalten höchstens 5% der Ausgaben ein; bis zu einem Fünftel der Gesundheitsausgaben ist mit unnötigen Leistungen verbunden.",
+          "date": "2026-09-25T21:17:42.290Z"
+        },
+        {
+          "title": "Krankenkassenprämien 2027 im Tessin: +3,7% und EFAS ab 2028",
+          "url": "/de/schweiz-artikel/lucas-engelberger-2027-krankenversicherungspramien/",
+          "excerpt": "Lukas Engelberger: Das System ist gut und kostet Geld. Im Tessin steigen die Prämien um 3,7%, wobei EFAS ab 2028 erwartet wird.",
+          "date": "2026-09-29T16:13:57.565Z"
+        },
+        {
+          "title": "Apotheken im Tessin: Verzeichnis und Kontakte",
+          "url": "/de/schweiz-artikel/apotheken-tessin-verzeichnis-kontakte/",
+          "excerpt": "Ein Ausgangspunkt für die Suche nach Apotheken im Tessiner Verzeichnis und für den Aufruf der verfügbaren lokalen Einträge. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; regionaler Notdienst…",
+          "date": "2026-09-14T20:06:49.755Z"
+        },
+        {
+          "title": "Notdienst-Apotheken im Tessin: Quellen und Abdeckung",
+          "url": "/de/schweiz-artikel/notdienst-apotheken-tessin-leitfaden/",
+          "excerpt": "Dieser Leitfaden erklärt, wo der Tessiner Apotheken-Notdienst veröffentlicht wird und wie die regionale Abdeckung zu lesen ist. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; regionaler…",
+          "date": "2026-09-14T20:06:49.427Z"
+        },
+        {
+          "title": "Apotheke geöffnet oder Notdienst? Das Verzeichnis richtig lesen",
+          "url": "/de/schweiz-artikel/apotheke-geoeffnet-notdienst-verzeichnis/",
+          "excerpt": "Der praktische Unterschied zwischen einem Verzeichniseintrag, veröffentlichten Öffnungszeiten und OFCT-Notdienstangaben. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; regionaler Notdienst in…",
+          "date": "2026-09-14T20:06:51.005Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/tessin-ti/"
+        },
+        {
+          "label": "Stellenangebote im Tessin",
+          "url": "/de/jobs-im-tessin/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Notfallapotheken",
+          "url": "/de/notdienst-apotheken/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        },
+        {
+          "label": "Pendlerwetter",
+          "url": "/de/pendler-wetter/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "TI",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Au Tessin, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Italie : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en italien ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "740,20 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "2",
+          "note": "offre centrale 11 950 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "TI, région de primes 1",
+              "value": "valeur centrale 740,20 CHF par mois",
+              "detail": "de 679 à 826,50 CHF, 21 assureurs"
+            },
+            {
+              "label": "TI, région de primes 2",
+              "value": "valeur centrale 683,30 CHF par mois",
+              "detail": "de 626,70 à 797,20 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Stazione",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-02T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Bozzoreda",
+              "detail": "Pregassona, Luganese",
+              "date": "2026-10-03T06:00:00.000Z"
+            },
+            {
+              "label": "S. Gottardo",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-05T16:30:00.000Z"
+            },
+            {
+              "label": "Contrada dei Patrizi",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-06T06:00:00.000Z"
+            },
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Malè",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-09T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-06T21:07:44.226Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "TI115",
+              "value": "23 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1537"
+            },
+            {
+              "label": "TI10769",
+              "value": "900 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T18:00:00.000Z",
+              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "A Lugano il Congresso Infertilità 2026",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
+            },
+            {
+              "label": "Approccio medico e infermieristico in Anestesia a confronto",
+              "date": "2026-10-01",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
+            },
+            {
+              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
+              "date": "2026-09-30",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
+            },
+            {
+              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
+              "date": "2026-09-28",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-09-27",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes d'assurance-maladie dans le canton du Tessin 2027 : hausse de 3,7%",
+          "url": "/fr/articles-frontalier/primes-assurance-maladie-ticin-2027/",
+          "excerpt": "En 2027, les primes d'assurance-maladie dans le canton du Tessin augmentent de 3,7%, portant la prime moyenne à 520 francs par mois, la plus élevée de Suisse.",
+          "date": "2026-09-29T12:24:49.493Z"
+        },
+        {
+          "title": "Primes d'assurance maladie : quand le 3,7% ne dit pas tout",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-tessin-augmentation-francs-2027/",
+          "excerpt": "En 2027, la prime moyenne de la caisse-maladie au Tessin augmentera de 3,7%, atteignant 519.90 francs par mois, soit une hausse de 18.60 francs, supérieure de 26% à la moyenne suisse de 412 francs.",
+          "date": "2026-09-30T17:00:48.460Z"
+        },
+        {
+          "title": "Ostinelli ne paie pas la caisse-maladie et se rend devant le juge",
+          "url": "/fr/articles-suisse/ostinelli-assurance-maladie-audience/",
+          "excerpt": "Roberto Ostinelli, médecin de Mendrisio, ne paie pas sa caisse-maladie depuis juin 2024 et doit comparaître devant le juge le 6 octobre ; il paie 140 euros par mois pour une assurance internationale.",
+          "date": "2026-10-06T07:13:37.693Z"
+        },
+        {
+          "title": "Le système de santé tessinois a besoin de nouvelles incitations",
+          "url": "/fr/articles-suisse/le-systeme-de-sante-tessinois-a-besoin-de-nouvelles-incitations/",
+          "excerpt": "La Covid a laissé des coûts extraordinaires et durables ; les caisses-maladie ne retiennent au maximum que 5 % des dépenses ; jusqu’à un cinquième des dépenses de santé est lié à des prestations inutiles.",
+          "date": "2026-09-25T21:17:42.290Z"
+        },
+        {
+          "title": "Primes d'assurance-maladie 2027 au Tessin : +3,7% et EFAS à partir de 2028",
+          "url": "/fr/articles-suisse/lucas-engelberger-premiums-assurance-maladie-2027/",
+          "excerpt": "Lukas Engelberger : le système est bon et coûte cher. Au Tessin, les primes augmentent de 3,7%, avec EFAS attendu à partir de 2028.",
+          "date": "2026-09-29T16:13:57.565Z"
+        },
+        {
+          "title": "Pharmacies au Tessin : répertoire et contacts",
+          "url": "/fr/articles-suisse/repertoire-pharmacies-tessin-contacts/",
+          "excerpt": "Un point de départ pour rechercher les pharmacies présentes dans le répertoire tessinois et ouvrir les fiches locales disponibles. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes régionales…",
+          "date": "2026-09-14T20:06:49.755Z"
+        },
+        {
+          "title": "Pharmacies de garde au Tessin : sources et couverture",
+          "url": "/fr/articles-suisse/guide-pharmacies-garde-tessin/",
+          "excerpt": "Ce guide indique où consulter les gardes des pharmacies au Tessin et comment comprendre leur couverture régionale. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes régionales vérifiées dans…",
+          "date": "2026-09-14T20:06:49.427Z"
+        },
+        {
+          "title": "Pharmacie ouverte ou de garde ? Comment lire le répertoire",
+          "url": "/fr/articles-suisse/pharmacie-ouverte-garde-repertoire/",
+          "excerpt": "La différence pratique entre trouver une pharmacie dans un répertoire, lire des horaires publiés et vérifier une garde OFCT. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes régionales…",
+          "date": "2026-09-14T20:06:51.005Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi au Tessin",
+          "url": "/fr/trouver-emploi-tessin/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Pharmacies de garde",
+          "url": "/fr/pharmacies-de-garde/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        },
+        {
+          "label": "Météo des pendulaires",
+          "url": "/fr/meteo-frontaliers/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

@@ -12728,6 +12728,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.hotel-ticino-140-licenziati.title': 'Due hotel chiusi in Ticino: 140 licenziati',
     'blog.article.hotel-ticino-140-licenziati.excerpt': 'La società che gestisce Principe Leopoldo e Villa Sassa comunica 140 licenziamenti. Daniele Lardi rassicura: una buona parte del personale sarà riassunta.',
     'blog.article.hotel-ticino-140-licenziati.imageAlt': 'I due hotel Principe Leopoldo e Villa Sassa in Ticino',
+    'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La stazione internazionale di Domodossola, dove è avvenuto l\'arresto per traffico di stupefacenti',
 };
 
 export default blogMetaIt;

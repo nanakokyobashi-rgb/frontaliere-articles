@@ -63,6 +63,69 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:29:51.075Z",
       "lastFailureAt": "2026-10-07T06:29:51.075Z"
+    },
+    {
+      "articleId": "quattro-oggetti-urne-novembre",
+      "title": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
+      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
+      "reason": "All image providers failed for article-quattro-oggetti-urne-novembre: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:42:41.992Z",
+      "lastFailureAt": "2026-10-07T06:42:41.992Z"
+    },
+    {
+      "articleId": "strada-calanca-chiusura-preventiva",
+      "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+      "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
+      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:43:54.395Z",
+      "lastFailureAt": "2026-10-07T06:43:54.395Z"
+    },
+    {
+      "articleId": "benzina-grigioni-deviazione",
+      "title": "Prezzi benzina in Grigioni: quando conviene deviare",
+      "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:53:48.101Z",
+      "lastFailureAt": "2026-10-07T06:53:48.101Z"
+    },
+    {
+      "articleId": "simplificazione-imposta-trasferimento-berna",
+      "title": "Imposta trasferimenti Berna: franchigia 800k",
+      "fallbackImage": "/images/blog/imposta-successione-donazione-berna.webp",
+      "reason": "All image providers failed for article-simplificazione-imposta-trasferimento-berna: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:54:25.697Z",
+      "lastFailureAt": "2026-10-07T06:54:25.697Z"
+    },
+    {
+      "articleId": "domodossola-arresto-hashish-stazione",
+      "title": "Domodossola: arresto per chilo di hashish nel bagaglio",
+      "fallbackImage": "/images/blog/affitti-friburgo-contestazione-canone.webp",
+      "reason": "All image providers failed for article-domodossola-arresto-hashish-stazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:58:03.399Z",
+      "lastFailureAt": "2026-10-07T06:58:03.399Z"
+    },
+    {
+      "articleId": "wabern-tram-risanamento",
+      "title": "Approvati il tram di Kleinwabern e il risanamento di Wabern",
+      "fallbackImage": "/images/blog/tram-treno-lugano-lavori-inizio.webp",
+      "reason": "All image providers failed for article-wabern-tram-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:11:43.433Z",
+      "lastFailureAt": "2026-10-07T07:11:43.433Z"
+    },
+    {
+      "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
+      "title": "Auto elettrica: come risparmiare fino al 50%",
+      "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
+      "reason": "All image providers failed for article-auto-elettrica-come-risparmiare-fino-al-50: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:21:41.464Z",
+      "lastFailureAt": "2026-10-07T07:21:41.464Z"
     }
   ]
 }

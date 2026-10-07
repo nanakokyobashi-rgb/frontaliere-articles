@@ -100635,6 +100635,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-domodossola-arresto-hashish-stazione': {
+    title: 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    description: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    keywords: 'frontalieri, ticino, svizzera, italia, domodossola, arresto, chilo, hashish',
+    ogTitle: 'Domodossola: arresto per chilo di hashish nel bagaglio',
+    ogDescription: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    canonicalPath: '/articoli-frontaliere/domodossola-arresto-hashish-stazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Domodossola: arresto per chilo di hashish nel bagaglio",
+      "description": "## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-friburgo-contestazione-canone.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La stazione internazionale di Domodossola, dove è avvenuto l'arresto per traffico di stupefacenti"
+      },
+      "datePublished": "2026-10-07T06:58:03+00:00",
+      "dateModified": "2026-10-07T06:58:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/domodossola-arresto-hashish-stazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

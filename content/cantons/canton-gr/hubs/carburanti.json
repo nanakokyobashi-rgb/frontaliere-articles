@@ -1,0 +1,427 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gr:carburanti",
+  "section": "canton-gr",
+  "canton": "GR",
+  "topic": "carburanti",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "f9e005cdd9c9b29b9ae3fa6e6905951f7d6522fdffcc0cb3addca4dc439c6b17",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-10-06T13:36:10.911Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-10-12T05:57:44.000Z"
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GR",
+      "topic": "carburanti",
+      "locale": "it",
+      "intro": "Nei Grigioni, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con l’Italia, l’Austria e il Liechtenstein: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco, italiano e romancio; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,141 CHF/l",
+          "note": "media regionale, 6 ottobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Svizzera",
+          "value": "2,438 CHF/l",
+          "note": "media regionale, 6 ottobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,141 CHF/l",
+              "detail": "media regionale: minimo 2,040 CHF/l, 31 stazioni rilevate",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,438 CHF/l",
+              "detail": "media regionale: minimo 2,300 CHF/l, 30 stazioni rilevate",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Benzina 95 — Italia",
+              "value": "1,997 EUR/l",
+              "detail": "media regionale: minimo 1,623 EUR/l, 66 stazioni rilevate",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Diesel — Italia",
+              "value": "2,257 EUR/l",
+              "detail": "media regionale: minimo 2,064 EUR/l, 56 stazioni rilevate",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Benzina 95 — Austria",
+              "value": "1,835 EUR/l",
+              "detail": "media regionale: minimo 1,818 EUR/l, 22 stazioni rilevate",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Austria",
+              "value": "2,091 EUR/l",
+              "detail": "media regionale: minimo 2,074 EUR/l, 22 stazioni rilevate",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Prezzi benzina in Grigioni: quando conviene deviare",
+          "url": "/articoli-grigioni/benzina-grigioni-deviazione/",
+          "excerpt": "Prezzi della benzina a livelli record anche in Grigioni: il calcolatore valuta prezzo e distanza della deviazione verso una stazione più economica.",
+          "date": "2026-10-07T06:53:48.091Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Prezzo della benzina oggi",
+          "url": "/prezzi-benzina/oggi/"
+        },
+        {
+          "label": "Prezzo del diesel oggi",
+          "url": "/prezzi-diesel/oggi/"
+        },
+        {
+          "label": "Distributori svizzeri vicino al confine",
+          "url": "/prezzi-benzina/stazioni-svizzere/"
+        },
+        {
+          "label": "Statistiche dei prezzi al confine",
+          "url": "/statistiche/prezzi-benzina-confine/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "GR",
+      "topic": "carburanti",
+      "locale": "en",
+      "intro": "In Graubünden, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Italy, Austria and Liechtenstein: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German, Italian and Romansh; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.141 CHF/l",
+          "note": "regional average, 6 October 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Switzerland",
+          "value": "2.438 CHF/l",
+          "note": "regional average, 6 October 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.141 CHF/l",
+              "detail": "regional average: lowest 2.040 CHF/l, 31 stations surveyed",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.438 CHF/l",
+              "detail": "regional average: lowest 2.300 CHF/l, 30 stations surveyed",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Petrol 95 — Italy",
+              "value": "1.997 EUR/l",
+              "detail": "regional average: lowest 1.623 EUR/l, 66 stations surveyed",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Diesel — Italy",
+              "value": "2.257 EUR/l",
+              "detail": "regional average: lowest 2.064 EUR/l, 56 stations surveyed",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Petrol 95 — Austria",
+              "value": "1.835 EUR/l",
+              "detail": "regional average: lowest 1.818 EUR/l, 22 stations surveyed",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Austria",
+              "value": "2.091 EUR/l",
+              "detail": "regional average: lowest 2.074 EUR/l, 22 stations surveyed",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Gasoline prices in Graubünden: when is it worth taking a detour",
+          "url": "/en/graubunden-articles/graubuenden-fuel-detour/",
+          "excerpt": "Petrol prices at record levels in Graubünden too: the calculator evaluates the price and distance of the detour to a cheaper station.",
+          "date": "2026-10-07T06:53:48.091Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Petrol price today",
+          "url": "/en/gasoline-price-switzerland/today/"
+        },
+        {
+          "label": "Diesel price today",
+          "url": "/en/diesel-price-switzerland/today/"
+        },
+        {
+          "label": "Swiss filling stations near the border",
+          "url": "/en/diesel-price-switzerland/swiss-stations/"
+        },
+        {
+          "label": "Border fuel price statistics",
+          "url": "/en/statistics/border-fuel-prices/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "GR",
+      "topic": "carburanti",
+      "locale": "de",
+      "intro": "In Graubünden sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Italien, Österreich und Liechtenstein: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch, Italienisch und Rätoromanisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.141 CHF/l",
+          "note": "regionaler Durchschnitt, 6. Oktober 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Schweiz",
+          "value": "2.438 CHF/l",
+          "note": "regionaler Durchschnitt, 6. Oktober 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.141 CHF/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.040 CHF/l, 31 erfasste Tankstellen",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.438 CHF/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.300 CHF/l, 30 erfasste Tankstellen",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Benzin 95 — Italien",
+              "value": "1.997 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.623 EUR/l, 66 erfasste Tankstellen",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Diesel — Italien",
+              "value": "2.257 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.064 EUR/l, 56 erfasste Tankstellen",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Benzin 95 — Österreich",
+              "value": "1.835 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.818 EUR/l, 22 erfasste Tankstellen",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Österreich",
+              "value": "2.091 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.074 EUR/l, 22 erfasste Tankstellen",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Benzinpreise in Graubünden: Wann lohnt sich der Umweg",
+          "url": "/de/graubunden-artikel/graubuenden-tankrechner-umweg/",
+          "excerpt": "Benzinpreise auch in Graubünden auf Rekordniveau: Der Rechner bewertet Preis und Entfernung des Umwegs zu einer günstigeren Tankstelle.",
+          "date": "2026-10-07T06:53:48.091Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Benzinpreis heute",
+          "url": "/de/benzinpreis-schweiz/heute/"
+        },
+        {
+          "label": "Dieselpreis heute",
+          "url": "/de/dieselpreis-schweiz/heute/"
+        },
+        {
+          "label": "Schweizer Tankstellen in Grenznähe",
+          "url": "/de/benzinpreis-schweiz/schweizer-tankstellen/"
+        },
+        {
+          "label": "Statistik der Spritpreise an der Grenze",
+          "url": "/de/statistiken/spritpreise-grenze/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "GR",
+      "topic": "carburanti",
+      "locale": "fr",
+      "intro": "Aux Grisons, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Italie, l’Autriche et le Liechtenstein : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand, italien et romanche ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Suisse",
+          "value": "2,141 CHF/l",
+          "note": "moyenne régionale, 6 octobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Suisse",
+          "value": "2,438 CHF/l",
+          "note": "moyenne régionale, 6 octobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Suisse",
+              "value": "2,141 CHF/l",
+              "detail": "moyenne régionale : prix le plus bas 2,040 CHF/l, 31 stations relevées",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,438 CHF/l",
+              "detail": "moyenne régionale : prix le plus bas 2,300 CHF/l, 30 stations relevées",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Essence 95 — Italie",
+              "value": "1,997 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,623 EUR/l, 66 stations relevées",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Diesel — Italie",
+              "value": "2,257 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,064 EUR/l, 56 stations relevées",
+              "date": "2026-10-05T05:57:44.000Z"
+            },
+            {
+              "label": "Essence 95 — Autriche",
+              "value": "1,835 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,818 EUR/l, 22 stations relevées",
+              "date": "2026-10-06T13:36:10.911Z"
+            },
+            {
+              "label": "Diesel — Autriche",
+              "value": "2,091 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,074 EUR/l, 22 stations relevées",
+              "date": "2026-10-06T13:36:10.911Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Prix de l’essence dans les Grisons : quand vaut-il la peine de faire un détour",
+          "url": "/fr/articles-grisons/grisons-carburant-detour/",
+          "excerpt": "Prix de l’essence à des niveaux records également dans les Grisons : le calculateur évalue le prix et la distance du détour vers une station moins chère.",
+          "date": "2026-10-07T06:53:48.091Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Prix de l’essence aujourd’hui",
+          "url": "/fr/prix-essence-suisse/aujourd-hui/"
+        },
+        {
+          "label": "Prix du diesel aujourd’hui",
+          "url": "/fr/prix-gasoil-suisse/aujourd-hui/"
+        },
+        {
+          "label": "Stations-service suisses près de la frontière",
+          "url": "/fr/prix-essence-suisse/stations-suisses/"
+        },
+        {
+          "label": "Statistiques des prix à la frontière",
+          "url": "/fr/statistiques/prix-essence-frontiere/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

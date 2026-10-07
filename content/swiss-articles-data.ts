@@ -26156,6 +26156,26 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'quattro-oggetti-urne-novembre',
+    category: 'novita',
+    date: '2026-10-07T06:42:41.631Z',
+    image: '/images/blog/voto-iva-avs-novembre-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'auto-elettrica-come-risparmiare-fino-al-50',
+    category: 'novita',
+    date: '2026-10-07T07:21:40.889Z',
+    image: '/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
