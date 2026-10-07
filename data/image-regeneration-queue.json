@@ -144,6 +144,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:24:42.248Z",
       "lastFailureAt": "2026-10-07T08:24:42.248Z"
+    },
+    {
+      "articleId": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+      "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
+      "fallbackImage": "/images/blog/galleria-moscia-acapulco-180-milioni.webp",
+      "reason": "All image providers failed for article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:41:12.756Z",
+      "lastFailureAt": "2026-10-07T08:41:12.756Z"
     }
   ]
 }
