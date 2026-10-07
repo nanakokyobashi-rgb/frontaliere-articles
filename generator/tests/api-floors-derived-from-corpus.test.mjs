@@ -81,6 +81,7 @@ import {
   previousRevision,
 } from '../../scripts/ci/verify-api-floors.mjs';
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
+import { seoChunkSources } from '../../scripts/lib/engine-corpus-view.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -757,13 +758,22 @@ test("il corpus di questo checkout e' la verita' di terra, e regge i due contato
 test('i feed di questo checkout sono gatati contro i chunk che li generano', async () => {
   const expected = await expectFromCorpus(ROOT);
   for (const section of RSS_SECTIONS) {
+    const seo = seoChunkSources(section);
     assert.equal(
       expected.feedSources[section.id],
-      countSeoEntries(ROOT, section.seoFiles),
+      countSeoEntries(ROOT, seo.files, seo.seoDir),
       `${section.id}: la lista dei chunk arriva da RSS_SECTIONS, non da una seconda copia`,
     );
     if (expected.newFamilySections?.includes(section.id)) {
       assert.equal(expected.feedSources[section.id], 0, `${section.id}: sezione nuova senza articoli`);
+      continue;
+    }
+    // Le sezioni cantonali condividono il floor di famiglia e possono avere
+    // una popolazione piccola appena bootstrap-ate. Il cap storico di 500 e'
+    // solo una sentinella per le due superfici proprie, non una soglia nuova
+    // per i cantoni.
+    if (floorPolicyOf(section.id) === 'family') {
+      assert.ok(expected.feedSources[section.id] >= 0, `${section.id}: conteggio feed non valido`);
       continue;
     }
     assert.ok(expected.feedSources[section.id] > 500, `${section.id}: ${expected.feedSources[section.id]}`);

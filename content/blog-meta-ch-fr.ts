@@ -7850,6 +7850,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.quattro-oggetti-urne-novembre.title': 'Votation du 29 novembre : TVA, AVS et quatre objets',
     'blog.article.quattro-oggetti-urne-novembre.excerpt': 'Le 29 novembre, les citoyens voteront sur quatre objets : augmentation de la TVA pour la 13e rente AVS, deux initiatives populaires et modification de la loi sur le matériel de guerre.',
     'blog.article.quattro-oggetti-urne-novembre.imageAlt': 'Urne suisse et bulletins pour le vote du 29 novembre',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Voiture électrique : comment économiser jusqu’à 50 %',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## En bref - Le TCS compare les prix de 19’000 points de recharge suisses - 50 kWh coûtent entre 23 et 46 francs - 5 % des recharges s’effectuent sur des bornes rapides',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Image éditoriale relative à: Auto elettrica: come risparmiare fino al 50%',
 };
 
 export default blogMetaChFr;
