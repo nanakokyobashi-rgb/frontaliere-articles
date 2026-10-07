@@ -1867,8 +1867,21 @@ jobs:
           # cache sacrificabile: il rebase puo' prendere upstream per uscire da
           # un conflitto testuale, quindi conserviamo la copia di questo run e
           # la riuniamo dopo ogni rebase con il resolver fail-closed dedicato.
+          registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base"
+          fi
           cp data/generated-image-registry.json "$registry_snapshot"
+          editorial_registry_base="$RUNNER_TEMP/editorial-image-registry-base.json"
+          editorial_registry_snapshot=""
+          if [ -f data/editorial-image-registry.json ]; then
+            editorial_registry_snapshot="$RUNNER_TEMP/editorial-image-registry-replayed.json"
+            if ! git show "$PRODUCED^:data/editorial-image-registry.json" > "$editorial_registry_base"; then
+              printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$editorial_registry_base"
+            fi
+            cp data/editorial-image-registry.json "$editorial_registry_snapshot"
+          fi
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
@@ -2031,6 +2044,7 @@ jobs:
             rebased=1
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/generated-image-registry.json \
+              data/editorial-image-registry.json \
               data/topic-candidates-evergreen-rejected.json \
               data/topic-candidates-consumed.json \
               data/topic-candidates-today-picks.json \
@@ -2060,10 +2074,19 @@ jobs:
             # qui: una sezione nuova e' coperta senza toccare questo step.
             if [ "$rebased" -eq 1 ]; then
               node scripts/ci/merge-generated-image-registry.mjs \
-                data/generated-image-registry.json "$registry_snapshot"
+                data/generated-image-registry.json "$registry_base" "$registry_snapshot"
               git add data/generated-image-registry.json
+              if [ -n "$editorial_registry_snapshot" ]; then
+                node scripts/ci/merge-generated-image-registry.mjs \
+                  data/editorial-image-registry.json "$editorial_registry_base" "$editorial_registry_snapshot" cover
+                git add data/editorial-image-registry.json
+              fi
               if ! git diff --cached --quiet; then
-                git commit --amend --no-edit
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                  git commit -C "$PRODUCED"
+                else
+                  git commit --amend --no-edit
+                fi
               fi
               uniq_rc=0
               node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD || uniq_rc=$?

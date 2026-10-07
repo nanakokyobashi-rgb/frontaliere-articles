@@ -48,11 +48,13 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
 const QUEUE_RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-image-regeneration-queue.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
+const CORE_WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article-core.yml');
 const JOURNALIST_WORKFLOW = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
 const BOOKKEEPING = 'data/topic-candidates-evergreen-rejected.json';
 const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
 const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
 const GENERATED_IMAGE_REGISTRY = 'data/generated-image-registry.json';
+const EDITORIAL_IMAGE_REGISTRY = 'data/editorial-image-registry.json';
 const GENERATED_IMAGE_REGISTRY_RESOLVER = path.resolve(HERE, '../../scripts/ci/merge-generated-image-registry.mjs');
 
 const GIT_ENV = {
@@ -409,8 +411,8 @@ test('generate-article.yml declares the journalist image catalog as bookkeeping'
   assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
 });
 
-function generatedImageRegistry(assetIds) {
-  const assets = assetIds.map((assetId) => ({ assetId }));
+function generatedImageRegistry(records) {
+  const assets = records.map((record) => typeof record === 'string' ? { assetId: record } : record);
   return `${JSON.stringify({ schema: 1, assetCount: assets.length, assets }, null, 2)}\n`;
 }
 
@@ -421,52 +423,121 @@ test('il ledger delle immagini generate sopravvive al rebase concorrente (#2421)
     allowlist.includes(GENERATED_IMAGE_REGISTRY),
     `${GENERATED_IMAGE_REGISTRY} must be declared so the helper can finish the rebase before its dedicated merge`,
   );
+  assert.ok(
+    allowlist.includes(EDITORIAL_IMAGE_REGISTRY),
+    `${EDITORIAL_IMAGE_REGISTRY} must be declared so the helper can finish before the cover-keyed merge`,
+  );
+  assert.match(workflow, /registry_base="\$RUNNER_TEMP\/generated-image-registry-base\.json"/);
   assert.match(workflow, /registry_snapshot="\$RUNNER_TEMP\/generated-image-registry-replayed\.json"/);
   assert.match(workflow, /cp data\/generated-image-registry\.json "\$registry_snapshot"/);
   assert.match(
     workflow,
-    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_snapshot"/,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_base" "\$registry_snapshot"/,
   );
 
   const w = makeWorld();
   try {
-    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry(['asset-base']));
+    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry([
+      { assetId: 'asset-shared', version: 'base' },
+    ]));
     commitAll(w.work, 'seed generated image registry');
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
 
+    const baseSnapshot = path.join(w.root, 'generated-image-registry-base.json');
+    writeFileSync(baseSnapshot, git(w.work, 'show', `HEAD:${GENERATED_IMAGE_REGISTRY}`));
+
     landUpstream(w, [[
       GENERATED_IMAGE_REGISTRY,
-      generatedImageRegistry(['asset-base', 'asset-upstream']),
+      generatedImageRegistry([
+        { assetId: 'asset-shared', version: 'upstream' },
+        { assetId: 'asset-upstream', version: 'upstream' },
+      ]),
       'concurrent run registers its generated cover',
     ]]);
 
-    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry(['asset-base', 'asset-replayed']));
+    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry([
+      { assetId: 'asset-shared', version: 'base' },
+      { assetId: 'asset-replayed', version: 'local' },
+    ]));
     write(w.work, 'content/blog-body/it/articolo-con-immagine.ts', 'export const image = true\n');
     const snapshot = path.join(w.root, 'generated-image-registry-replayed.json');
     copyFileSync(path.join(w.work, GENERATED_IMAGE_REGISTRY), snapshot);
     commitAll(w.work, 'Generate blog article with generated cover');
+    const produced = headSha(w.work);
 
     const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
     assert.equal(code, 0, `il conflitto del ledger non deve buttare via l'articolo:\n${out}`);
 
-    execFileSync('node', [GENERATED_IMAGE_REGISTRY_RESOLVER, GENERATED_IMAGE_REGISTRY, snapshot], {
+    execFileSync('node', [GENERATED_IMAGE_REGISTRY_RESOLVER, GENERATED_IMAGE_REGISTRY, baseSnapshot, snapshot], {
       cwd: w.work,
       env: GIT_ENV,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     git(w.work, 'add', '--', GENERATED_IMAGE_REGISTRY);
-    git(w.work, 'commit', '-q', '--amend', '--no-edit');
+    if (headSha(w.work) === git(w.work, 'rev-parse', 'FETCH_HEAD').trim()) {
+      git(w.work, 'commit', '-q', '-C', produced);
+    } else {
+      git(w.work, 'commit', '-q', '--amend', '--no-edit');
+    }
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
 
     const merged = JSON.parse(git(w.work, 'show', `HEAD:${GENERATED_IMAGE_REGISTRY}`));
     assert.deepEqual(merged.assets.map((asset) => asset.assetId), [
-      'asset-base', 'asset-upstream', 'asset-replayed',
+      'asset-shared', 'asset-upstream', 'asset-replayed',
     ]);
+    assert.equal(merged.assets[0].version, 'upstream', 'unchanged local metadata must not replace fresher upstream');
     assert.ok(
       existsSync(path.join(w.work, 'content/blog-body/it/articolo-con-immagine.ts')),
       'the article body must survive the same rebase that merges its image record',
     );
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('un replay vuoto ricrea il delta del ledger come commit fast-forward invece di amendare upstream', () => {
+  const w = makeWorld();
+  try {
+    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry([
+      { assetId: 'asset-shared', version: 'base' },
+    ]));
+    commitAll(w.work, 'seed generated image registry');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    const baseSnapshot = path.join(w.root, 'generated-image-registry-base.json');
+    copyFileSync(path.join(w.work, GENERATED_IMAGE_REGISTRY), baseSnapshot);
+    landUpstream(w, [[
+      GENERATED_IMAGE_REGISTRY,
+      generatedImageRegistry([{ assetId: 'asset-shared', version: 'upstream' }]),
+      'concurrent metadata refresh',
+    ]]);
+
+    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry([
+      { assetId: 'asset-shared', version: 'local' },
+    ]));
+    const replayedSnapshot = path.join(w.root, 'generated-image-registry-replayed.json');
+    copyFileSync(path.join(w.work, GENERATED_IMAGE_REGISTRY), replayedSnapshot);
+    commitAll(w.work, 'refresh generated image metadata');
+    const produced = headSha(w.work);
+
+    const { code, out } = runHelper(w.work, w.upstream, GENERATED_IMAGE_REGISTRY);
+    assert.equal(code, 0, `il helper deve saltare il replay diventato vuoto:\n${out}`);
+    const upstreamHead = git(w.work, 'rev-parse', 'FETCH_HEAD').trim();
+    assert.equal(headSha(w.work), upstreamHead, 'il replay vuoto deve lasciare HEAD sul commit upstream');
+
+    execFileSync('node', [
+      GENERATED_IMAGE_REGISTRY_RESOLVER,
+      GENERATED_IMAGE_REGISTRY,
+      baseSnapshot,
+      replayedSnapshot,
+    ], { cwd: w.work, env: GIT_ENV, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    git(w.work, 'add', '--', GENERATED_IMAGE_REGISTRY);
+    git(w.work, 'commit', '-q', '-C', produced);
+
+    assert.equal(git(w.work, 'rev-parse', 'HEAD^').trim(), upstreamHead, 'il delta deve essere figlio di upstream');
+    assert.equal(git(w.work, 'show', '-s', '--format=%s', 'HEAD').trim(), 'refresh generated image metadata');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
   } finally {
     w.cleanup();
   }
@@ -725,6 +796,52 @@ test('il resolver della coda fallisce chiuso se git non riesce a leggere uno sta
   }
 });
 
+function assertImageRegistryRebaseWiring(label, step) {
+  const allowlist = allowlistFromWorkflow(step);
+  const commitAt = step.indexOf('git commit -m "$COMMIT_MESSAGE"');
+  const snapshotAt = step.indexOf('cp data/generated-image-registry.json "$registry_snapshot"');
+  const rebaseAt = step.indexOf('bash scripts/lib/rebase-onto-remote.sh');
+  const mergeAt = step.indexOf('node scripts/ci/merge-generated-image-registry.mjs');
+
+  assert.ok(
+    snapshotAt >= 0 && rebaseAt > snapshotAt && mergeAt > rebaseAt,
+    `${label}: snapshot e merge dei registry devono racchiudere il rebase`,
+  );
+  if (label === 'journalist') assert.ok(commitAt >= 0 && snapshotAt > commitAt);
+  assert.ok(allowlist.includes(GENERATED_IMAGE_REGISTRY), `${label}: manca ${GENERATED_IMAGE_REGISTRY}`);
+  assert.ok(allowlist.includes(EDITORIAL_IMAGE_REGISTRY), `${label}: manca ${EDITORIAL_IMAGE_REGISTRY}`);
+  assert.match(step, /registry_base="\$RUNNER_TEMP\/generated-image-registry-base\.json"/);
+  assert.match(step, /editorial_registry_base="\$RUNNER_TEMP\/editorial-image-registry-base\.json"/);
+  assert.match(step, /git show "\$PRODUCED\^:data\/generated-image-registry\.json" > "\$registry_base"/);
+  assert.match(step, /git show "\$PRODUCED\^:data\/editorial-image-registry\.json" > "\$editorial_registry_base"/);
+  assert.match(
+    step,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_base" "\$registry_snapshot"/,
+  );
+  assert.match(
+    step,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/editorial-image-registry\.json "\$editorial_registry_base" "\$editorial_registry_snapshot" cover/,
+  );
+  assert.match(
+    step,
+    /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
+  );
+}
+
+test('i tre writer applicano il delta di entrambi i registry e gestiscono il replay vuoto', () => {
+  const journalistWorkflow = readFileSync(JOURNALIST_WORKFLOW, 'utf8');
+  const workflows = [
+    ['main', readFileSync(WORKFLOW, 'utf8')],
+    ['core', readFileSync(CORE_WORKFLOW, 'utf8')],
+    ['journalist', sliceBetween(
+      journalistWorkflow,
+      '      - name: Commit and push registered articles\n',
+      '      - name: Summary\n',
+    )],
+  ];
+  for (const [label, step] of workflows) assertImageRegistryRebaseWiring(label, step);
+});
+
 test('il publisher journalist conserva registry e coda nello stesso rebase', () => {
   const workflow = readFileSync(JOURNALIST_WORKFLOW, 'utf8');
   const step = sliceBetween(
@@ -732,25 +849,10 @@ test('il publisher journalist conserva registry e coda nello stesso rebase', () 
     '      - name: Commit and push registered articles\n',
     '      - name: Summary\n',
   );
-  const commitAt = step.indexOf('git commit -m "$COMMIT_MESSAGE"');
-  const snapshotAt = step.indexOf('cp data/generated-image-registry.json "$registry_snapshot"');
-  const rebaseAt = step.indexOf('bash scripts/lib/rebase-onto-remote.sh');
-  const mergeAt = step.indexOf('node scripts/ci/merge-generated-image-registry.mjs');
-
-  assert.ok(
-    commitAt >= 0 && snapshotAt > commitAt && rebaseAt > snapshotAt && mergeAt > rebaseAt,
-    'snapshot e merge del registry devono racchiudere il rebase del commit journalist',
-  );
   assert.match(
     step,
-    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json \\\n\s+data\/editorial-image-registry\.json \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
   );
-  assert.match(step, /registry_snapshot="\$RUNNER_TEMP\/generated-image-registry-replayed\.json"/);
-  assert.match(
-    step,
-    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_snapshot"/,
-  );
-  assert.match(step, /git add data\/generated-image-registry\.json[\s\S]*git commit --amend --no-edit/);
   assert.doesNotMatch(step, /git pull --rebase "\$REMOTE" "\$TARGET"/);
 });
 
