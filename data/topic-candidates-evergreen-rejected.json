@@ -795,10 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-lallarme-di-confapi-varese-cosi-si-penalizzano-le-pmi-industriali/2698117": {
-      "section": "frontaliere",
-      "ts": 1791188571654
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/sacha-lembo-nominato-direttore-del-controllo-cantonale-delle-finanze-443971": {
       "section": "frontaliere",
       "ts": 1791190885729
@@ -1066,6 +1062,10 @@
     "frontaliere::https://www.tio.ch/svizzera/economia/1954859/lavoro-dieci-settimane-datori-sindacato": {
       "section": "frontaliere",
       "ts": 1791358271295
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/tecnostampi-di-gornate-olona-ricerca-personale-tre-posizioni-aperte/2698927": {
+      "section": "frontaliere",
+      "ts": 1791363620522
     }
   }
 }

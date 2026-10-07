@@ -288,6 +288,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T09:07:42.914Z",
       "lastFailureAt": "2026-10-07T09:07:42.914Z"
+    },
+    {
+      "articleId": "treno-foliage-locarno-domodossola",
+      "title": "Treno del Foliage: Locarno-Domodossola dal 10 ottobre",
+      "fallbackImage": "/images/blog/camelie-locarno-record-visitatori-2026-2.webp",
+      "reason": "All image providers failed for article-treno-foliage-locarno-domodossola: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:13:13.001Z",
+      "lastFailureAt": "2026-10-07T09:13:13.001Z"
     }
   ]
 }

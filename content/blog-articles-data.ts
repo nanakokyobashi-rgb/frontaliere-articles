@@ -42907,6 +42907,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'treno-foliage-locarno-domodossola',
+ category: 'novita',
+ date: '2026-10-07T09:13:12.596Z',
+ image: '/images/blog/camelie-locarno-record-visitatori-2026-2.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
