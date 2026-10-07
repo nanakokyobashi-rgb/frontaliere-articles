@@ -250,7 +250,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // stile e' esattamente il tipo di cecita' silenziosa che questo censimento
   // deve escludere. Ora il match e' sul NOME della primitiva senza pretendere
   // la parentesi, cosi' l'alias entra come la chiamata diretta.
-  const WRITER = /\b(?:writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\b/;
+  const WRITER = /\b(?:writeFileAtomic|writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\b/;
 
   const found = [];
   const walk = (d) => {
