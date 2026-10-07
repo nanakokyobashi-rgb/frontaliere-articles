@@ -1,0 +1,548 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gr:pensioni",
+  "section": "canton-gr",
+  "canton": "GR",
+  "topic": "pensioni",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "7d84c89944aaf8760e9058b28d9deffb96cc408ea26ac290377c17f9f35e85f5",
+  "blocks": [
+    {
+      "id": "parametri-previdenza",
+      "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "casse-cantonali",
+      "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "imposta-capitale",
+      "updatedAt": "2026-10-05T09:44:09.891Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GR",
+      "topic": "pensioni",
+      "locale": "it",
+      "intro": "Nei Grigioni, la previdenza poggia sui tre pilastri svizzeri: AVS, cassa pensione e risparmio privato. Questa pagina riunisce i parametri federali dell’anno, le casse di riferimento, l’imposta sul prelievo del capitale e gli articoli della redazione su pensioni e previdenza.\n\nIl territorio confina con l’Italia, l’Austria e il Liechtenstein: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco, italiano e romancio; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Rendita AVS massima (mensile)",
+          "value": "2520 CHF",
+          "note": "valore federale 2026",
+          "sourceName": "Centro d’informazione AVS/AI e Ufficio federale delle assicurazioni sociali"
+        },
+        {
+          "label": "Versamento massimo nel pilastro 3a (con cassa pensione)",
+          "value": "7258 CHF",
+          "note": "valore federale 2026",
+          "sourceName": "Centro d’informazione AVS/AI e Ufficio federale delle assicurazioni sociali"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Parametri della previdenza 2026",
+          "description": "Importi e aliquote federali validi in tutta la Svizzera: primo pilastro (AVS), secondo pilastro (LPP) e pilastro 3a.",
+          "items": [
+            {
+              "label": "Rendita AVS minima (mensile)",
+              "value": "1260 CHF"
+            },
+            {
+              "label": "Rendita AVS massima (mensile)",
+              "value": "2520 CHF"
+            },
+            {
+              "label": "Contributi AVS/AI/IPG a carico del dipendente",
+              "value": "5,3 %"
+            },
+            {
+              "label": "Soglia d’entrata LPP (salario annuo)",
+              "value": "22.680 CHF"
+            },
+            {
+              "label": "Deduzione di coordinamento LPP",
+              "value": "26.460 CHF"
+            },
+            {
+              "label": "Aliquota minima di conversione LPP",
+              "value": "6,8 %"
+            },
+            {
+              "label": "Versamento massimo nel pilastro 3a (con cassa pensione)",
+              "value": "7258 CHF"
+            },
+            {
+              "label": "Versamento massimo nel pilastro 3a (senza cassa pensione)",
+              "value": "36.288 CHF"
+            }
+          ],
+          "sourceName": "Centro d’informazione AVS/AI e Ufficio federale delle assicurazioni sociali",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Casse del cantone",
+          "description": "Cassa di compensazione AVS e cassa pensione pubblica di riferimento, con il sito ufficiale.",
+          "items": [
+            {
+              "label": "Sozialversicherungsanstalt des Kantons Graubünden",
+              "detail": "Cassa di compensazione",
+              "url": "https://www.sva.gr.ch"
+            },
+            {
+              "label": "Pensionskasse Graubünden (PKGR)",
+              "detail": "Cassa pensione pubblica",
+              "url": "https://www.pkgr.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Imposta sul prelievo del capitale 2026",
+          "description": "Imposte dovute sul prelievo in capitale della previdenza a 65 anni, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Prelievo di 100.000 CHF (Chur)",
+              "value": "3237 CHF"
+            },
+            {
+              "label": "Prelievo di 250.000 CHF (Chur)",
+              "value": "10.651 CHF"
+            },
+            {
+              "label": "Prelievo di 500.000 CHF (Chur)",
+              "value": "28.501 CHF"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AVS e prestazioni complementari nel Canton Grigioni",
+          "url": "/articoli-svizzera/avs-prestazioni-complementari-grigioni/",
+          "excerpt": "Primo pilastro, lacune contributive e accesso alle prestazioni complementari: guida pratica per residenti e contribuenti del Canton Grigioni.",
+          "date": "2026-09-02T01:39:16.684Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Calcolatore della previdenza",
+          "url": "/tasse-e-pensione/calcola-previdenza/"
+        },
+        {
+          "label": "Simulatore del terzo pilastro",
+          "url": "/tasse-e-pensione/simula-terzo-pilastro/"
+        },
+        {
+          "label": "Tutte le notizie sulle pensioni",
+          "url": "/pensioni/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "GR",
+      "topic": "pensioni",
+      "locale": "en",
+      "intro": "In Graubünden, retirement provision rests on the three Swiss pillars: AHV, the occupational pension fund and private savings. This page brings together this year’s federal parameters, the funds of reference, the tax on lump-sum withdrawals and our articles on pensions.\n\nThe area borders Italy, Austria and Liechtenstein: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German, Italian and Romansh; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Maximum AHV pension (monthly)",
+          "value": "2,520 CHF",
+          "note": "federal value 2026",
+          "sourceName": "AHV/IV Information Centre and Federal Social Insurance Office"
+        },
+        {
+          "label": "Maximum pillar 3a payment (with a pension fund)",
+          "value": "7,258 CHF",
+          "note": "federal value 2026",
+          "sourceName": "AHV/IV Information Centre and Federal Social Insurance Office"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Pension parameters 2026",
+          "description": "Federal amounts and rates valid across Switzerland: first pillar (AHV), second pillar (BVG) and pillar 3a.",
+          "items": [
+            {
+              "label": "Minimum AHV pension (monthly)",
+              "value": "1,260 CHF"
+            },
+            {
+              "label": "Maximum AHV pension (monthly)",
+              "value": "2,520 CHF"
+            },
+            {
+              "label": "Employee share of AHV/IV/EO contributions",
+              "value": "5.3%"
+            },
+            {
+              "label": "BVG entry threshold (annual salary)",
+              "value": "22,680 CHF"
+            },
+            {
+              "label": "BVG coordination deduction",
+              "value": "26,460 CHF"
+            },
+            {
+              "label": "Minimum BVG conversion rate",
+              "value": "6.8%"
+            },
+            {
+              "label": "Maximum pillar 3a payment (with a pension fund)",
+              "value": "7,258 CHF"
+            },
+            {
+              "label": "Maximum pillar 3a payment (without a pension fund)",
+              "value": "36,288 CHF"
+            }
+          ],
+          "sourceName": "AHV/IV Information Centre and Federal Social Insurance Office",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Cantonal funds",
+          "description": "The AHV compensation fund and the public pension fund of reference, with their official websites.",
+          "items": [
+            {
+              "label": "Sozialversicherungsanstalt des Kantons Graubünden",
+              "detail": "Compensation fund",
+              "url": "https://www.sva.gr.ch"
+            },
+            {
+              "label": "Pensionskasse Graubünden (PKGR)",
+              "detail": "Public pension fund",
+              "url": "https://www.pkgr.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Tax on lump-sum withdrawals 2026",
+          "description": "Tax due on a lump-sum pension withdrawal at 65, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Withdrawal of 100,000 CHF (Chur)",
+              "value": "3,237 CHF"
+            },
+            {
+              "label": "Withdrawal of 250,000 CHF (Chur)",
+              "value": "10,651 CHF"
+            },
+            {
+              "label": "Withdrawal of 500,000 CHF (Chur)",
+              "value": "28,501 CHF"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AVS and complementary services in the Canton of Graubünden",
+          "url": "/en/swiss-articles/avs-complementary-benefits-canton-grisons/",
+          "excerpt": "First pillar, contribution gaps and access to supplementary benefits: a practical guide for residents and taxpayers of the Canton of Graubünden.",
+          "date": "2026-09-02T01:39:16.684Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Retirement calculator",
+          "url": "/en/taxes-and-pension/calculate-retirement/"
+        },
+        {
+          "label": "Third pillar simulator",
+          "url": "/en/taxes-and-pension/simulate-third-pillar/"
+        },
+        {
+          "label": "All pension news",
+          "url": "/en/pensions/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "GR",
+      "topic": "pensioni",
+      "locale": "de",
+      "intro": "In Graubünden ruht die Vorsorge auf den drei Schweizer Säulen: AHV, Pensionskasse und privates Sparen. Diese Seite bündelt die eidgenössischen Eckwerte des Jahres, die zuständigen Kassen, die Steuer auf Kapitalbezügen und die Artikel der Redaktion zu Renten und Vorsorge.\n\nDas Gebiet grenzt an Italien, Österreich und Liechtenstein: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch, Italienisch und Rätoromanisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Maximale AHV-Rente (monatlich)",
+          "value": "2’520 CHF",
+          "note": "Bundeswert 2026",
+          "sourceName": "Informationsstelle AHV/IV und Bundesamt für Sozialversicherungen"
+        },
+        {
+          "label": "Maximale Einzahlung in die Säule 3a (mit Pensionskasse)",
+          "value": "7’258 CHF",
+          "note": "Bundeswert 2026",
+          "sourceName": "Informationsstelle AHV/IV und Bundesamt für Sozialversicherungen"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Eckwerte der Vorsorge 2026",
+          "description": "Bundesweit gültige Beträge und Sätze: erste Säule (AHV), zweite Säule (BVG) und Säule 3a.",
+          "items": [
+            {
+              "label": "Minimale AHV-Rente (monatlich)",
+              "value": "1’260 CHF"
+            },
+            {
+              "label": "Maximale AHV-Rente (monatlich)",
+              "value": "2’520 CHF"
+            },
+            {
+              "label": "Arbeitnehmeranteil der AHV/IV/EO-Beiträge",
+              "value": "5.3 %"
+            },
+            {
+              "label": "BVG-Eintrittsschwelle (Jahreslohn)",
+              "value": "22’680 CHF"
+            },
+            {
+              "label": "BVG-Koordinationsabzug",
+              "value": "26’460 CHF"
+            },
+            {
+              "label": "BVG-Mindestumwandlungssatz",
+              "value": "6.8 %"
+            },
+            {
+              "label": "Maximale Einzahlung in die Säule 3a (mit Pensionskasse)",
+              "value": "7’258 CHF"
+            },
+            {
+              "label": "Maximale Einzahlung in die Säule 3a (ohne Pensionskasse)",
+              "value": "36’288 CHF"
+            }
+          ],
+          "sourceName": "Informationsstelle AHV/IV und Bundesamt für Sozialversicherungen",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Kassen des Kantons",
+          "description": "AHV-Ausgleichskasse und öffentliche Pensionskasse des Kantons mit offizieller Website.",
+          "items": [
+            {
+              "label": "Sozialversicherungsanstalt des Kantons Graubünden",
+              "detail": "Ausgleichskasse",
+              "url": "https://www.sva.gr.ch"
+            },
+            {
+              "label": "Pensionskasse Graubünden (PKGR)",
+              "detail": "Öffentliche Pensionskasse",
+              "url": "https://www.pkgr.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Steuer auf Kapitalbezügen 2026",
+          "description": "Steuern auf einem Kapitalbezug aus der Vorsorge mit 65 Jahren für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bezug von 100’000 CHF (Chur)",
+              "value": "3’237 CHF"
+            },
+            {
+              "label": "Bezug von 250’000 CHF (Chur)",
+              "value": "10’651 CHF"
+            },
+            {
+              "label": "Bezug von 500’000 CHF (Chur)",
+              "value": "28’501 CHF"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AHV und Ergänzungsleistungen im Kanton Graubünden",
+          "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-kanton-graubuenden/",
+          "excerpt": "Erste Säule, Beitragslücken und Zugang zu Ergänzungsleistungen: Praktischer Leitfaden für Bewohner und Steuerpflichtige des Kantons Graubünden.",
+          "date": "2026-09-02T01:39:16.684Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Vorsorge-Rechner",
+          "url": "/de/steuern-und-vorsorge/rente-berechnen/"
+        },
+        {
+          "label": "Rechner für die dritte Säule",
+          "url": "/de/steuern-und-vorsorge/dritte-saeule-simulieren/"
+        },
+        {
+          "label": "Alle Renten-Nachrichten",
+          "url": "/de/renten/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "GR",
+      "topic": "pensioni",
+      "locale": "fr",
+      "intro": "Aux Grisons, la prévoyance repose sur les trois piliers suisses : l’AVS, la caisse de pension et l’épargne privée. Cette page réunit les paramètres fédéraux de l’année, les caisses de référence, l’impôt sur le retrait en capital et les articles de la rédaction sur les retraites.\n\nLe territoire a une frontière avec l’Italie, l’Autriche et le Liechtenstein : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand, italien et romanche ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Rente AVS maximale (mensuelle)",
+          "value": "2 520 CHF",
+          "note": "valeur fédérale 2026",
+          "sourceName": "Centre d’information AVS/AI et Office fédéral des assurances sociales"
+        },
+        {
+          "label": "Versement maximal au pilier 3a (avec caisse de pension)",
+          "value": "7 258 CHF",
+          "note": "valeur fédérale 2026",
+          "sourceName": "Centre d’information AVS/AI et Office fédéral des assurances sociales"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "parametri-previdenza",
+          "title": "Paramètres de la prévoyance 2026",
+          "description": "Montants et taux fédéraux valables dans toute la Suisse : premier pilier (AVS), deuxième pilier (LPP) et pilier 3a.",
+          "items": [
+            {
+              "label": "Rente AVS minimale (mensuelle)",
+              "value": "1 260 CHF"
+            },
+            {
+              "label": "Rente AVS maximale (mensuelle)",
+              "value": "2 520 CHF"
+            },
+            {
+              "label": "Part salariale des cotisations AVS/AI/APG",
+              "value": "5,3 %"
+            },
+            {
+              "label": "Seuil d’entrée LPP (salaire annuel)",
+              "value": "22 680 CHF"
+            },
+            {
+              "label": "Déduction de coordination LPP",
+              "value": "26 460 CHF"
+            },
+            {
+              "label": "Taux de conversion minimal LPP",
+              "value": "6,8 %"
+            },
+            {
+              "label": "Versement maximal au pilier 3a (avec caisse de pension)",
+              "value": "7 258 CHF"
+            },
+            {
+              "label": "Versement maximal au pilier 3a (sans caisse de pension)",
+              "value": "36 288 CHF"
+            }
+          ],
+          "sourceName": "Centre d’information AVS/AI et Office fédéral des assurances sociales",
+          "sourceUrl": "https://www.ahv-iv.ch/p/3.01.d",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "casse-cantonali",
+          "title": "Caisses du canton",
+          "description": "Caisse de compensation AVS et caisse de pension publique de référence, avec leur site officiel.",
+          "items": [
+            {
+              "label": "Sozialversicherungsanstalt des Kantons Graubünden",
+              "detail": "Caisse de compensation",
+              "url": "https://www.sva.gr.ch"
+            },
+            {
+              "label": "Pensionskasse Graubünden (PKGR)",
+              "detail": "Caisse de pension publique",
+              "url": "https://www.pkgr.ch/"
+            }
+          ],
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        },
+        {
+          "id": "imposta-capitale",
+          "title": "Impôt sur le retrait en capital 2026",
+          "description": "Impôts dus sur un retrait en capital de la prévoyance à 65 ans, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Retrait de 100 000 CHF (Chur)",
+              "value": "3 237 CHF"
+            },
+            {
+              "label": "Retrait de 250 000 CHF (Chur)",
+              "value": "10 651 CHF"
+            },
+            {
+              "label": "Retrait de 500 000 CHF (Chur)",
+              "value": "28 501 CHF"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "updatedAt": "2026-10-05T09:44:09.891Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "AVS et prestations complémentaires dans le canton des Grisons",
+          "url": "/fr/articles-suisse/avs-prestations-complementaires-canton-grisons/",
+          "excerpt": "Premier pilier, lacunes en matière de cotisations et accès aux prestations complémentaires : guide pratique pour les résidents et les contribuables du canton des Grisons.",
+          "date": "2026-09-02T01:39:16.684Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Calculateur de prévoyance",
+          "url": "/fr/impots-et-retraite/calculer-pension/"
+        },
+        {
+          "label": "Simulateur du troisième pilier",
+          "url": "/fr/impots-et-retraite/simuler-troisieme-pilier/"
+        },
+        {
+          "label": "Toute l’actualité des retraites",
+          "url": "/fr/retraites/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

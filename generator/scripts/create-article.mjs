@@ -36,8 +36,9 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *    Evitare pattern tipici dell'AI (frasi filler, strutture ripetitive).
  *
  * 2. IMMAGINE CONTESTUALE: generare una illustrazione contestuale tramite il
- *    motore governato condiviso. Il fallback è esclusivamente una copertina
- *    già presente nel catalogo con record di provenienza valido.
+ *    motore governato condiviso. Se il motore non è disponibile, il fallback
+ *    è una copertina già presente nel catalogo con record valido oppure la
+ *    cover statica governata del sito.
  *
  * 3. SEO IMMAGINI: Ogni immagine deve avere ALT tag descrittivi e parlanti,
  *    con informazioni necessarie per l'indicizzazione su Google e Bing.
@@ -272,6 +273,10 @@ import {
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
 import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+} from './lib/article-cover-fallback.mjs';
+import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
   SOURCE_COPY_MAX_REPAIR_PASSES,
@@ -287,6 +292,9 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/sha
 import {
   CANTON_SECTION_DISABLED_MARKER,
   CANTON_SECTIONS_ENABLED_ENV,
+  CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+  CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS,
+  CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
   buildCantonProfile,
   cantonClassifierPrompt,
   cantonHeadlineSelectionPrompt,
@@ -895,12 +903,12 @@ function classifierSourceHint(url) {
 // of the memo key — otherwise the same title from two different sections of two
 // different outlets would resolve to whichever verdict was computed first.
 // Memoizza la PROMISE, non il risultato: vedi `_preSpendGateCache`.
-function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
+function classifyFrontaliereRelevance(headline, summary, sourceUrl, deadlineMs = null) {
   const cacheKey = preSpendGateCacheKey(headline, sourceUrl);
   if (cacheKey && _preSpendGateCache.has(cacheKey)) {
     return _preSpendGateCache.get(cacheKey);
   }
-  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl);
+  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs);
   if (cacheKey) {
     _preSpendGateCache.set(cacheKey, pending);
     pending.catch(() => { _preSpendGateCache.delete(cacheKey); });
@@ -908,9 +916,24 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
   return pending;
 }
 
-async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
+async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs = null) {
   const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
+  const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
+  const classifierDeadline = deadlineMs ?? (IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS);
+  const remainingClassifierMs = classifierDeadline - Date.now();
+  if (remainingClassifierMs <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
+  const classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
+  if (classifierCallTimeout <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
   const prompt = IS_CANTON
     ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
     : IS_FRONTALIERE
@@ -952,7 +975,10 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         model,
         temperature: 0,
         maxTokens: 80,
-        timeout: 30_000,
+        // Il timeout HTTP non puo' superare il residuo della deadline assoluta:
+        // ai-models controlla la deadline fra i fallback, ma una richiesta gia'
+        // partita puo' restare in volo fino al suo timeout.
+        timeout: classifierCallTimeout,
         jsonMode: false,
         // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
         // camminare l'intera catena di fallback di ai-models.mjs. Il roster
@@ -961,7 +987,9 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
         // diretto, quindi il default del wrapper locale `callLLM` (che il
         // deadlineMs ce l'ha) non si eredita: va passato a mano.
-        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+        // deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS resta il termine per
+        // le sezioni storiche; la cantonale usa una finestra piu' stretta.
+        deadlineMs: classifierDeadline,
       },
     );
   } catch (err) {
@@ -1068,6 +1096,15 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // legacy anchor-only fast-path (pre-2026-05-15 behaviour, accepts on
   // anchor match without LLM confirmation).
   const classifierEnabled = (process.env.PRESPEND_TOPIC_GATE_CLASSIFIER ?? '1') !== '0';
+  // Cantonale: una sola finestra assoluta per tutto il gate, non una nuova
+  // finestra per ogni candidate. Cosi' la concorrenza non moltiplica i 45 s
+  // per il numero di classifier avviati nello stesso giro.
+  const classifierDeadline = IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS;
   // 2026-08-18 — IL CAP E' DISPONIBILE, NON IMPOSTO.
   // Il JSDoc dichiarava 12 e il codice usava `?? headlines.length`, cioe' il
   // ramo «budget esaurito» era irraggiungibile per costruzione. #416 ha
@@ -1168,7 +1205,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   const toClassify = plan.filter(p => p.kind === 'classify');
   const verdicts = await mapWithConcurrency(toClassify, concurrency, async (p) => {
     try {
-      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText);
+      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText, classifierDeadline);
     } catch {
       // Should not happen — classifyFrontaliereRelevance already fails open
       // — but belt+suspenders: keep the headline on any unexpected throw.
@@ -1442,6 +1479,17 @@ function computeAdaptiveMinChars(sourceText) {
   return MIN_BODY_CHARS_FLOOR;
 }
 
+// `../..`, not `..`. In main this script sits at `scripts/create-article.mjs`,
+// so one level up WAS the repo root; the transport (#4974 item 3, step 2) put it
+// at `generator/scripts/create-article.mjs`, which makes one level up the
+// `generator/` directory. Keep this initialized before the catalog pool below:
+// the pool validates reader-facing records while the module is being loaded.
+const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '');
+
+function resolve(rel) {
+  return `${PROJECT_ROOT}/${corpusPath(rel)}`;
+}
+
 // Static places catalog
 const PLACES_IMAGES = [
   'ascona.webp', 'bellinzona.webp', 'castelgrande.webp', 'film-festival.webp',
@@ -1452,8 +1500,8 @@ const PLACES_IMAGES = [
 ];
 
 // Build the catalog-only fallback pool. Every candidate must already have a
-// reader-facing provenance record; static place assets and unrecorded photos are
-// deliberately excluded from new article publication.
+// reader-facing provenance record; static place assets remain outside the
+// topical pool and are reserved for the final governed default fallback.
 const BLOG_IMAGES = (() => {
   try {
     return readdirSync(resolve('public/images/blog'))
@@ -2955,23 +3003,11 @@ const NEWS_SOURCES_SVIZZERA_FALLBACK_MAP = {
   'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_svizzera.xml': 'https://www.laregione.ch/svizzera',
 };
 
-// `../..`, not `..`. In main this script sits at `scripts/create-article.mjs`,
-// so one level up WAS the repo root; the transport (#4974 item 3, step 2) put it
-// at `generator/scripts/create-article.mjs`, which makes one level up the
-// `generator/` directory. Left unchanged, every read and write in this file
-// would have been scoped to `generator/…` — reads would fail and writes would
-// create a phantom corpus inside the generator tree.
-const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '');
-
 // ── Helpers ─────────────────────────────────────────────────
 // Every read and write in this file funnels through here, which is what makes
 // `corpusPath()` a single choke point for the main→nanako layout difference
 // (`services/locales/…` → `content/…`) instead of ~30 edited literals. See
 // lib/corpus-paths.mjs for why the mapping is an explicit table.
-function resolve(rel) {
-  return `${PROJECT_ROOT}/${corpusPath(rel)}`;
-}
-
 function read(rel) {
   return readFileSync(resolve(rel), 'utf-8');
 }
@@ -14226,7 +14262,7 @@ function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'
 
 const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
-  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 600_000)),
+  Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
 function articleImageSubject(data) {
@@ -14269,10 +14305,13 @@ async function generateArticleImage(data) {
   delete data._imageCredit;
   delete data._generatedImageRecord;
   delete data._editorialImageRecord;
+  delete data._imageGenerationFailureReason;
 
   const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
   if (Date.now() >= imageDeadline) {
     console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
+    data._imageGenerationFailureReason = 'image-budget-expired';
+    console.error(`[cover] article=${data.id} source=engine reason=image-budget-expired`);
     return null;
   }
 
@@ -14292,7 +14331,9 @@ async function generateArticleImage(data) {
       {
         outputDir: stagingDir,
         assetId,
-        maxAttempts: 3,
+        // A provider outage must fall through immediately. The engine itself
+        // owns provider order; this publishing path permits one attempt total.
+        maxAttempts: 1,
         deadlineAt: imageDeadline,
         onProviderAttempt: ({ provider, attempt }) => {
           console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
@@ -14302,6 +14343,9 @@ async function generateArticleImage(data) {
   } catch (error) {
     if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    data._imageGenerationFailureReason = String(error.message || 'engine-failed')
+      .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
+    console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
     return null;
   }
 
@@ -14312,6 +14356,9 @@ async function generateArticleImage(data) {
   } catch (error) {
     if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
     console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    data._imageGenerationFailureReason = String(error.message || 'provenance-rejected')
+      .replace(/\s+/g, ' ').trim().slice(0, 180) || 'provenance-rejected';
+    console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
     return null;
   } finally {
     const cleanupDir = materialized?.stagingDir
@@ -15183,6 +15230,9 @@ function gitAddAll(data) {
   for (const registryPath of ['data/generated-image-registry.json', 'data/editorial-image-registry.json']) {
     if (existsSync(resolve(registryPath))) files.push(registryPath);
   }
+  if (existsSync(resolve('data/image-regeneration-queue.json'))) {
+    files.push('data/image-regeneration-queue.json');
+  }
   execSync(`git add ${resolveGitAddPaths(PROJECT_ROOT, files).join(' ')}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
   console.error('  ✅ Tutti i file modificati aggiunti a git');
 }
@@ -15511,8 +15561,9 @@ async function exitAfterFlush(code) {
 }
 
 async function main() {
-  // Sezione cantonale spenta (D16): `enabled` nel profilo o l'elenco di
-  // Remote Config CANTON_ARTICLE_SECTIONS_ENABLED, default nessun cantone.
+  // Sezione cantonale spenta (D16): `enabled` nel profilo attiva la superficie
+  // del corpus, ma la generazione richiede anche CANTON_ARTICLE_SECTIONS_ENABLED
+  // da Remote Config; default nessun cantone.
   // Prima di ogni lettura o scrittura: una sezione spenta non tocca niente ed
   // esce 0 con un marcatore che il workflow (P8) e i log possono contare.
   if (IS_CANTON) {
@@ -15527,12 +15578,12 @@ async function main() {
       console.error(`  ⚠️ ${CANTON_SECTIONS_ENABLED_ENV}: token non riconosciuti ignorati: ${gate.unknown.join(', ')}`);
     }
     if (!gate.enabled) {
-      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo enabled=false, assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
+      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-enabled (profilo non attivo nel corpus oppure assente da ${CANTON_SECTIONS_ENABLED_ENV})`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME}`] });
       await exitAfterFlush(0);
       return;
     }
-    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${gate.via === 'profile' ? 'profilo enabled' : CANTON_SECTIONS_ENABLED_ENV})`);
+    console.error(`🏔️  Sezione cantonale ${SECTION_NAME} abilitata (${CANTON_SECTIONS_ENABLED_ENV} e profilo corpus enabled)`);
     // Lo stato della sezione vive in data/sections/<id>/ (D18) e write() non
     // crea cartelle: senza questa riga il primo salvataggio del ledger URL->id
     // fallirebbe (in silenzio, e' un best-effort) e il dedup della fonte
@@ -15886,7 +15937,18 @@ async function main() {
       // run 26440805420: 193 RSS candidates dropped because the gate had
       // already emptied headlines[] used as the resolver atlas.
       _provenHeadlinesPreGate = headlines.slice();
-      headlines = await applyPreSpendTopicGate(headlines);
+      const preSpendOptions = IS_CANTON
+        ? {
+          // The canton classifier is fail-open: candidates over the cap remain
+          // unclassified and are still checked by REGOLA #0 downstream. This
+          // bounds provider wait time without dropping a possible local story.
+          maxClassifier: Math.min(
+            CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+            DEFAULT_MAX_CLASSIFIER_CALLS ?? CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+          ),
+        }
+        : {};
+      headlines = await applyPreSpendTopicGate(headlines, preSpendOptions);
       if (beforePreSpendGate > headlines.length) {
         console.error(`  📋 Post-pre-spend gate: ${headlines.length}/${beforePreSpendGate} headline rimanenti\n`);
       }
@@ -16306,7 +16368,18 @@ async function main() {
       // anche a budget wall-clock esaurito (il riepilogo e' il contratto).
       await exitDryRunScan({ chosen: null, tier: null, pool: null, poolSize: 0 });
     } else if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
+      const note = `No article after news pool wall-clock budget (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min); evergreen fallback deferred`;
       console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
+      // Il pool news ha consumato il budget senza produrre un articolo. Questo
+      // e' un differimento dichiarato, non un return normale: senza il report
+      // e l'exit condiviso, il fail-closed del controllo di ritorno vede ancora
+      // `status=running` e trasforma una condizione prevista in
+      // `no-article-undeclared-exit`.
+      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
+      // Ragione legittima #8 di otto (corpus): il budget della run e' finito
+      // prima del fallback evergreen; il giro successivo puo' scegliere fonti
+      // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool) {
       // Sezione cantonale: nessun pool evergreen generico per costruzione (i
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del
@@ -17958,23 +18031,17 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error(`  ✅ Immagine generata: ${imagePath}`);
+    console.error(`[cover] article=${data.id} source=engine reason=generated`);
   } else {
-    // The only outage fallback is an already catalogued cover with a valid
-    // provenance record. An unrecorded place/photo is never publishable.
-    const matched = findBestFallbackImage(data);
-    if (matched) {
-      data._generatedImagePath = matched;
-      const imageRecord = imageRecordForPath(PROJECT_ROOT, matched, { strict: true });
-      if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
-      if (!imageRecord) throw new Error(`Catalog fallback has no valid provenance record: ${matched}`);
-      console.error(`  ⚠️ Motore non disponibile, uso copertina catalogata: ${matched}`);
-    } else {
-      const error = new Error(`No governed image or valid catalog fallback for article ${data.id}`);
-      error.imagePolicyReject = true;
-      error.qualityReject = true;
-      throw error;
-    }
+    // A cover-provider failure is recoverable: keep the article and queue the
+    // cover for later regeneration after selecting a governed fallback.
+    resolveArticleCoverFallback(data, {
+      root: PROJECT_ROOT,
+      findCatalogImage: findBestFallbackImage,
+      reason: data._imageGenerationFailureReason || 'engine-failed',
+    });
   }
+  delete data._imageGenerationFailureReason;
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
@@ -18014,6 +18081,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Il marker resta presente se la validazione finale fallisce: il commit dei
   // file non va scambiato per una registrazione completata (#1126).
   endRegisterLock();
+  queueArticleCoverRegeneration(PROJECT_ROOT, data);
 
   // Track source-domain weekly quotas only on successful article generation.
   // Stats-bfs:// is editorial-internal — bucket it under 'bfs.admin.ch' so the
@@ -18933,7 +19001,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, resolveArticleCoverFallback, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image

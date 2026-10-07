@@ -791,21 +791,10 @@
     "vivere a Merone e lavorare in Ticino da frontaliere": 2,
     "imposta di successione e donazione canton Friburgo aliquote": 2,
     "salario medio professioni svizzera 2026 canton Zurigo": 2,
-    "affitti svizzera mercato immobiliare 2026": 1
+    "affitti svizzera mercato immobiliare 2026": 1,
+    "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
-      "section": "frontaliere",
-      "ts": 1791173353121
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1954213/startup-intelligenza-team-classifica-farmaci-lugano-aziende-top100-svizzera-swiss": {
-      "section": "frontaliere",
-      "ts": 1791177074339
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/bellucci-in-semifinale-senza-giocare-a-jingshan-lo-attende-il-turco-erel/2696431": {
-      "section": "frontaliere",
-      "ts": 1791177565447
-    },
     "frontaliere::https://comozero.it/punti-di-vista/turismo-a-como-5-milioni-di-tassa-di-soggiorno-una-cifra-uguale-per-trasporti-e-nidi-gratis-casa-o-tariffe-parcheggi": {
       "section": "frontaliere",
       "ts": 1791184701070
@@ -1021,6 +1010,42 @@
     "frontaliere::https://www.varesenews.it/2026/10/protezione-civile-la-cultura-della-sicurezza-entra-in-279-scuole-lombarde-37-gli-istituti-coinvolti-nel-varesotto/2699836": {
       "section": "frontaliere",
       "ts": 1791336821753
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1954728/villa-lugano-tagli-hotel-personale-sassa-messaggio": {
+      "section": "frontaliere",
+      "ts": 1791342812579
+    },
+    "frontaliere::https://comozero.it/attualita/como-riccardo-disegna-il-sinigaglia-del-futuro-nella-tesi-di-laurea-12mila-posti-negozi-e-viale-puecher-pedonale": {
+      "section": "frontaliere",
+      "ts": 1791343024104
+    },
+    "frontaliere::https://www.rsi.ch/s/4139591": {
+      "section": "frontaliere",
+      "ts": 1791343037660
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
+      "section": "frontaliere",
+      "ts": 1791347037982
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/economia-della-longevita-confindustria-varese-analizza-sfide-e-opportunita-della-silver-economy/2699461": {
+      "section": "frontaliere",
+      "ts": 1791347106179
+    },
+    "frontaliere::https://www.laregione.ch/economia/economia/1955093/luganistan-il-giardino-di-casa-di-una-cleptocrazia": {
+      "section": "frontaliere",
+      "ts": 1791347139488
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/ostinelli-non-pago-piu-la-cassa-malati-444069": {
+      "section": "frontaliere",
+      "ts": 1791351168567
+    },
+    "frontaliere::https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
+      "section": "frontaliere",
+      "ts": 1791353815883
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/lega-contro-il-cancro-90-anni-di-speranza-e-umanit%c3%a0--4140326.html": {
+      "section": "frontaliere",
+      "ts": 1791355598794
     }
   }
 }

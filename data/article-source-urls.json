@@ -1,8 +1,4 @@
 {
-  "https://www.laregione.ch/culture/locarno-film-festival/1942190/claudio-simonetti-monsieur-peur": "claudio-simonetti-monsieur-peur",
-  "https://www.varesenoi.it/2026/08/06/leggi-notizia/argomenti/economia-13/articolo/tra-varese-milano-e-la-svizzera-quando-una-compatta-usata-e-davvero-una-scelta-piu-intelligente.html": "compatta-usata-frontalieri-varese-milano",
-  "https://www.ticinonews.ch/ticino/al-lavoro-nel-caldo-torrido-e-su-superfici-roventi-il-governo-e-preoccupato-e-apre-a-nuove-misure-440180": "caldo-lavoro-frontalieri-ticino",
-  "https://www.tio.ch/svizzera/economia/1942506/siccita-granoturco-importazioni-dazi-svizzera": "siccit-importazioni-granoturco-svizzera",
   "https://www.tio.ch/rubriche/ospite/1942569/la-liberta-del-mercato-vale-anche-per-chi-lavora": "liberta-del-mercato-vale-anch-per-chi-lavora",
   "https://www.ticinonews.ch/ticino/canicola-il-sindacato-vpod-chiede-al-governo-una-direttiva-per-stato-e-scuole-440277": "vpod-direttiva-canicola-scuole",
   "https://www.laregione.ch/culture/locarno-film-festival/1942612/due-paesi-in-conflitto-l-inizio-di-una-tregua": "los-vencedores-falkland-pablo-aparo",
@@ -2068,6 +2064,26 @@
   "https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/cronaca-20/articolo/deruba-unanziana-con-la-truffa-del-finto-operatore-bancario-i-carabinieri-di-luino-gli-sequestrano.html": {
     "articleId": "truffa-finto-operatore-luino",
     "ts": "2026-10-06T18:14:33.034Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/fischiava-il-treno-gorla-minore-celebra-la-storia-della-ferrovia-della-valmorea/2699791": {
+    "articleId": "fischiava-treno-gorla",
+    "ts": "2026-10-07T04:45:22.298Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/attenzione-pendolari-tra-como-e-la-svizzera-4-weekend-non-facilissimi-per-chi-usa-quel-treno": {
+    "articleId": "monte-olimpino-treni-weekend",
+    "ts": "2026-10-07T05:47:57.527Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/luganese/1955069/due-hotel-chiusi-140-licenziati-ne-riassumeremo-buona-parte": {
+    "articleId": "hotel-ticino-140-licenziati",
+    "ts": "2026-10-07T06:29:51.077Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/un-chilo-di-hashish-nascosto-nel-bagaglio-arrestata-alla-stazione-di-domodossola/2700487": {
+    "articleId": "domodossola-arresto-hashish-stazione",
+    "ts": "2026-10-07T06:58:03.458Z",
     "keyForm": 2
   }
 }

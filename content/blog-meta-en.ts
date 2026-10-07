@@ -12715,6 +12715,21 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.truffa-finto-operatore-luino.title': 'Fake banker scam in Luino: 17 thousand euros seized',
     'blog.article.truffa-finto-operatore-luino.excerpt': 'A 32-year-old man from Campania has been reported: he allegedly convinced a 62-year-old person to make a bank transfer. An account containing more than 17,000 euros was seized.',
     'blog.article.truffa-finto-operatore-luino.imageAlt': 'Luino street scene linked to a fake bank operator scam',
+    'blog.article.fischiava-treno-gorla.title': 'The train was whistling: railway festival in Gorla Minore',
+    'blog.article.fischiava-treno-gorla.excerpt': '## TL;DR - Sunday, October 11, 2026 at Gorla Minore - Event from 12:00 to 18:00 near the old station - Lunch, toy trains, old-fashioned games',
+    'blog.article.fischiava-treno-gorla.imageAlt': 'Railway event near the old station in Gorla Minore',
+    'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev on Lake Ceresio: oil, villas and permits',
+    'blog.article.clan-nazarbayev-ceresio.excerpt': 'The investigation into the commodities trade tells the story of the Nazarbayev clan’s arrival on Lake Lugano, amid oil, villas and strange residence permits.',
+    'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Ceresio lakeside villas in the story of the Nazarbayev clan',
+    'blog.article.monte-olimpino-treni-weekend.title': 'Como-Switzerland trains: 4 weekends of closures in 2026',
+    'blog.article.monte-olimpino-treni-weekend.excerpt': '## TL;DR - Four closure weekends between October and November 2026 - Stop from Friday at 20:20 to Monday at 04:20 - RE80 skips Como San Giovanni and Como',
+    'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Regional train on a cross-border railway line between Como and Switzerland',
+    'blog.article.hotel-ticino-140-licenziati.title': 'Two hotels closed in Ticino: 140 laid off',
+    'blog.article.hotel-ticino-140-licenziati.excerpt': 'The company that manages Principe Leopoldo and Villa Sassa announces 140 layoffs. Daniele Lardi reassures: a good portion of the staff will be rehired.',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Principe Leopoldo and Villa Sassa hotels in Ticino',
+    'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: arrest for a kilo of hashish in luggage',
+    'blog.article.domodossola-arresto-hashish-stazione.excerpt': '## TL;DR - Stopped at the international station of Domodossola - Was arriving from Milano Centrale - One kilogram of hashish in ten bricks - Estimated value',
+    'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'Domodossola international station, where the drug trafficking arrest took place',
 };
 
 export default blogMetaEn;

@@ -1,0 +1,1108 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ti:mobilita",
+  "section": "canton-ti",
+  "canton": "TI",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "a3b682bed771dfc212149144e04428cac2eb3857de04bb82c061eb66b3a3e8a6",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TI",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "In Ticino, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con l’Italia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in italiano; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Biegno-Indemini, settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "4",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "40",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/biegno-indemini/oggi/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/camedo/oggi/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
+            },
+            {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/dumenza-cassinone/oggi/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/luino-fornasette/oggi/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/piaggio-valmara/oggi/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/ronago-novazzano/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A13 Ascona <-> Aeroporto di Locarno Svincolo autostradale Locarno Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.5, sulla corsia dêmergenza",
+              "value": "Chiusura",
+              "detail": "fine prevista: 20 ottobre 2026",
+              "date": "2026-07-10T03:00:00.000Z"
+            },
+            {
+              "label": "A13 Ascona <-> Aeroporto di Locarno tra Svincolo autostradale Minusio E Svincolo autostradale Locarno Situazione: chiusa cantiere, lunghezza [km] 5.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-09-21T14:56:00.000Z"
+            },
+            {
+              "label": "Contra -> Locarno Monti tra Luogo Contra E Luogo Brione Situazione: chiusa Causa: lavori di costruzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 8 ottobre 2026",
+              "date": "2026-09-29T11:41:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 Chiasso -> S. Gottardo Galleria Galleria Monte Ceneri Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di destra chiusa",
+              "value": "Chiusura",
+              "date": "2026-10-06T21:29:00.000Z"
+            },
+            {
+              "label": "Incidente della circolazione stradale in Valle Leventina",
+              "value": "Traffico",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261155"
+            },
+            {
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Traffico",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+            },
+            {
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Traffico",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
+            },
+            {
+              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
+            },
+            {
+              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
+            },
+            {
+              "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
+              "date": "2026-09-30",
+              "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
+              "date": "2026-09-28",
+              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
+            },
+            {
+              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
+              "date": "2026-09-22",
+              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Estradato dalla Svizzera, arrestato a Ponte Chiasso",
+          "url": "/articoli-frontaliere/estradizione-arresto-como/",
+          "excerpt": "Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni di reclusione.",
+          "date": "2026-10-01T12:10:19.439Z"
+        },
+        {
+          "title": "Modifiche TILO: bus al posto della S10 Chiasso-Melide",
+          "url": "/articoli-frontaliere/tilo-s10-bus-chiasso-melide/",
+          "excerpt": "Dal 13 settembre 2026 la corsa TILO delle 4:11 da Mendrisio verso Chiasso sarà sostituita da un autobus, con partenza anticipata, fino al 19 ottobre 2026.",
+          "date": "2026-09-11T18:59:52.263Z"
+        },
+        {
+          "title": "Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como",
+          "url": "/articoli-frontaliere/monte-olimpino-collegamenti-tilo/",
+          "excerpt": "Nei weekend 9-12, 16-19 ottobre e 13-16, 20-23 novembre 2026, la chiusura cambia RE80, S10 e S40 tra Chiasso e Como.",
+          "date": "2026-10-06T10:25:20.912Z"
+        },
+        {
+          "title": "Trenord, rincaro del 3,88% sulle linee con il Ticino",
+          "url": "/articoli-frontaliere/trenord-rincaro-388-linee-ticino/",
+          "excerpt": "Dal 1° settembre biglietti e abbonamenti Trenord più cari del 3,88%: rincaro disposto dalla Giunta di Regione Lombardia, con eccezioni per Malpensa Express e Como-Malpensa via Chiasso e Mendrisio.",
+          "date": "2026-08-31T20:12:12.781Z"
+        },
+        {
+          "title": "Controlli velocità in Ticino dal 5 all'11 ottobre",
+          "url": "/articoli-frontaliere/radar-strade-ticinesi-ottobre/",
+          "excerpt": "Dal 5 all'11 ottobre sono previsti controlli sulle strade ticinesi. La Polizia cantonale cura la mappa dei radar e indica le località interessate.",
+          "date": "2026-10-03T05:47:16.038Z"
+        },
+        {
+          "title": "Ufficio doganale unico per Mendrisio e Sopraceneri",
+          "url": "/articoli-frontaliere/ufficio-doganale-unico-mendrisio-sopraceneri/",
+          "excerpt": "Novità dalla riorganizzazione dell'Ufficio federale della dogana e della sicurezza dei confini con l'accorpamento dei Grigioni alla Regione Sud.",
+          "date": "2026-08-12T08:18:46.588Z"
+        },
+        {
+          "title": "Abbonamenti e sconti per frontalieri: come risparmiare sui trasporti",
+          "url": "/articoli-frontaliere/sconti-trasporti-frontalieri-ticino/",
+          "excerpt": "Guida pratica agli abbonamenti scontati e ai sistemi di trasporto integrati Ticino-Lombardia per chi lavora oltre confine: opzioni, risparmio e detraibilità fiscale.",
+          "date": "2026-08-27T01:48:08.946Z"
+        },
+        {
+          "title": "Vivere a Ponte Lambro e lavorare in Ticino da frontaliere",
+          "url": "/articoli-frontaliere/vivere-ponte-lambro-lavorare-ticino-frontaliere/",
+          "excerpt": "Scopri i collegamenti, i tempi di percorrenza, il costo della vita e i vantaggi di vivere a Ponte Lambro e lavorare in Ticino.",
+          "date": "2026-09-05T10:23:15.876Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Como",
+          "url": "/traffico-dogane/ticino-como/"
+        },
+        {
+          "label": "Attese ai valichi verso Varese",
+          "url": "/traffico-dogane/ticino-varese/"
+        },
+        {
+          "label": "Attese ai valichi verso Verbano",
+          "url": "/traffico-dogane/ticino-verbano/"
+        },
+        {
+          "label": "Classifica settimanale dei valichi",
+          "url": "/articoli-frontaliere/classifica-dogane-ticino/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "TI",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In Ticino, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Italy: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in Italian; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Biegno-Indemini, week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "4",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "40",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/biegno-indemini/today/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/camedo/today/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
+            },
+            {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/drezzo-pedrinate/today/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/dumenza-cassinone/today/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/luino-fornasette/today/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/piaggio-valmara/today/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/ronago-novazzano/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A13 Ascona <-> Aeroporto di Locarno Svincolo autostradale Locarno Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.5, sulla corsia dêmergenza",
+              "value": "Closure",
+              "detail": "until 20 October 2026",
+              "date": "2026-07-10T03:00:00.000Z"
+            },
+            {
+              "label": "A13 Ascona <-> Aeroporto di Locarno tra Svincolo autostradale Minusio E Svincolo autostradale Locarno Situazione: chiusa cantiere, lunghezza [km] 5.5",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-09-21T14:56:00.000Z"
+            },
+            {
+              "label": "Contra -> Locarno Monti tra Luogo Contra E Luogo Brione Situazione: chiusa Causa: lavori di costruzione",
+              "value": "Closure",
+              "detail": "until 8 October 2026",
+              "date": "2026-09-29T11:41:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 Chiasso -> S. Gottardo Galleria Galleria Monte Ceneri Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di destra chiusa",
+              "value": "Closure",
+              "date": "2026-10-06T21:29:00.000Z"
+            },
+            {
+              "label": "Incidente della circolazione stradale in Valle Leventina",
+              "value": "Traffic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261155"
+            },
+            {
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Traffic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+            },
+            {
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Traffic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
+            },
+            {
+              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
+            },
+            {
+              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
+            },
+            {
+              "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
+              "date": "2026-09-30",
+              "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
+              "date": "2026-09-28",
+              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
+            },
+            {
+              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
+              "date": "2026-09-22",
+              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Extradited from Switzerland, arrested in Ponte Chiasso",
+          "url": "/en/cross-border-articles/extradition-arrest-como/",
+          "excerpt": "Ponte Chiasso: On 18 September, a 28-year-old Nigerian man was handed over from Switzerland and arrested. He must serve four years, nine months and 18 days in prison.",
+          "date": "2026-10-01T12:10:19.439Z"
+        },
+        {
+          "title": "TILO changes: bus instead of the S10 Chiasso-Melide",
+          "url": "/en/cross-border-articles/tilo-changes-bus-instead-of-the-s10-chiasso-melide/",
+          "excerpt": "From 13 September 2026, the 4:11 TILO ride from Mendrisio to Chiasso will be replaced by a bus, with early departure, until 19 October 2026.",
+          "date": "2026-09-11T18:59:52.263Z"
+        },
+        {
+          "title": "Monte Olimpino 1: changes to TILO services between Chiasso and Como",
+          "url": "/en/cross-border-articles/monte-olimpino-tilo-chiasso-como/",
+          "excerpt": "On the weekends of October 9–12 and 16–19 and November 13–16 and 20–23, 2026, the closure affects RE80, S10 and S40 between Chiasso and Como.",
+          "date": "2026-10-06T10:25:20.912Z"
+        },
+        {
+          "title": "Trenord, 3.88% increase on lines with Ticino",
+          "url": "/en/cross-border-articles/trenord-388-price-hike-ticino-lines/",
+          "excerpt": "From 1 September, tickets and Trenord subscriptions are 3.88% more expensive: an increase ordered by the Lombardy Regional Government, with exceptions for Malpensa Express and Como-Malpensa via Chiasso and Mendrisio.",
+          "date": "2026-08-31T20:12:12.781Z"
+        },
+        {
+          "title": "Speed checks in Ticino from October 5 to 11",
+          "url": "/en/cross-border-articles/ticino-speed-checks-october/",
+          "excerpt": "From 5 to 11 October, checks are planned on Ticino's roads. The Cantonal Police manages the speed-camera map and indicates the locations concerned.",
+          "date": "2026-10-03T05:47:16.038Z"
+        },
+        {
+          "title": "Single customs office for Mendrisio and Sopraceneri",
+          "url": "/en/cross-border-articles/single-customs-office-mendrisio-sopraceneri/",
+          "excerpt": "New from the reorganization of the Federal Office of Customs and Border Security with the merger of the Graubünden with the Southern Region.",
+          "date": "2026-08-12T08:18:46.588Z"
+        },
+        {
+          "title": "Subscriptions and discounts for border crossers: how to save on transport",
+          "url": "/en/cross-border-articles/travel-discounts-cross-border-workers-ticino/",
+          "excerpt": "Practical guide to discounted subscriptions and integrated Ticino-Lombardy transport systems for those working across borders: options, savings and tax deductibility.",
+          "date": "2026-08-27T01:48:08.946Z"
+        },
+        {
+          "title": "Living in Ponte Lambro and working in Ticino as a border worker",
+          "url": "/en/cross-border-articles/live-in-ponte-lambro-work-in-ticino-as-a-commuter/",
+          "excerpt": "Discover the connections, journey times, cost of living and advantages of living in Ponte Lambro and working in Ticino.",
+          "date": "2026-09-05T10:23:15.876Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards Como",
+          "url": "/en/border-wait/ticino-como/"
+        },
+        {
+          "label": "Border waits towards Varese",
+          "url": "/en/border-wait/ticino-varese/"
+        },
+        {
+          "label": "Border waits towards Verbano",
+          "url": "/en/border-wait/ticino-verbano/"
+        },
+        {
+          "label": "Weekly border crossing ranking",
+          "url": "/en/cross-border-articles/ticino-border-crossing-ranking/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "TI",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Tessin bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Italien: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Italienisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Biegno-Indemini, Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "4",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "40",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/camedo/heute/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
+            },
+            {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/luino-fornasette/heute/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/piaggio-valmara/heute/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A13 Ascona <-> Flughafen Locarno Anschluss Locarno Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.5, auf dem Pannenstreifen",
+              "value": "Sperrung",
+              "detail": "bis 20. Oktober 2026",
+              "date": "2026-07-10T03:00:00.000Z"
+            },
+            {
+              "label": "A13 Ascona <-> Flughafen Locarno zwischen Anschluss Minusio und Anschluss Locarno Sachlage: Strecke gesperrt Baustelle, Länge [km] 5.5",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-09-21T14:56:00.000Z"
+            },
+            {
+              "label": "Contra -> Locarno Monti zwischen Ortschaft Contra und Ortschaft Brione Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 8. Oktober 2026",
+              "date": "2026-09-29T11:41:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A2 Chiasso -> Gotthard Tunnel Monte Ceneri-Tunnel Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: rechter Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-06T21:29:00.000Z"
+            },
+            {
+              "label": "Incidente della circolazione stradale in Valle Leventina",
+              "value": "Verkehr",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261155"
+            },
+            {
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Verkehr",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+            },
+            {
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Verkehr",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+            },
+            {
+              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
+            },
+            {
+              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
+            },
+            {
+              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
+            },
+            {
+              "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
+              "date": "2026-09-30",
+              "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
+              "date": "2026-09-28",
+              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
+            },
+            {
+              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
+              "date": "2026-09-22",
+              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Ausgeliefert aus der Schweiz, in Ponte Chiasso verhaftet",
+          "url": "/de/grenzgaenger-artikel/auslieferung-verhaftung-como/",
+          "excerpt": "Ponte Chiasso: Am 18. September wurde ein 28-jähriger Nigerianer aus der Schweiz übergeben und festgenommen. Er muss vier Jahre, neun Monate und 18 Tage im Gefängnis verbüßen.",
+          "date": "2026-10-01T12:10:19.439Z"
+        },
+        {
+          "title": "Änderungen TILO: Bus statt S10 Chiasso-Melide",
+          "url": "/de/grenzgaenger-artikel/anderungen-tilo-bus-statt-s10-chiasso-melide/",
+          "excerpt": "Ab dem 13. September 2026 wird die 4:11 -Tilo-Fahrt von Mendrisio nach Chiasso bis zum 19. Oktober 2026 durch einen Bus mit vorzeitiger Abfahrt ersetzt.",
+          "date": "2026-09-11T18:59:52.263Z"
+        },
+        {
+          "title": "Monte Olimpino 1: Änderungen bei den TILO-Verbindungen zwischen Chiasso und Como",
+          "url": "/de/grenzgaenger-artikel/monte-olimpino-tilo-chiasso-como/",
+          "excerpt": "An den Wochenenden 9.–12. und 16.–19. Oktober sowie 13.–16. und 20.–23. November 2026 betrifft die Sperrung RE80, S10 und S40 zwischen Chiasso und Como.",
+          "date": "2026-10-06T10:25:20.912Z"
+        },
+        {
+          "title": "Trenord, 3,88% Teuerung auf den Strecken mit dem Tessin",
+          "url": "/de/grenzgaenger-artikel/trenord-preiserhoehung-388-tessin-linien/",
+          "excerpt": "Ab dem 1. September teurere Trenord-Tickets und -Abonnements von 3,88%: Preiserhöhung durch die Regionalregierung der Lombardei, mit Ausnahme von Malpensa Express und Como-Malpensa über Chiasso und Mendrisio.",
+          "date": "2026-08-31T20:12:12.781Z"
+        },
+        {
+          "title": "Geschwindigkeitskontrollen im Tessin vom 5. bis 11. Oktober",
+          "url": "/de/grenzgaenger-artikel/geschwindigkeitskontrollen-tessin-oktober/",
+          "excerpt": "Vom 5. bis 11. Oktober sind auf den Tessiner Straßen Kontrollen vorgesehen. Die Kantonspolizei betreut die Radarkarte und gibt die betroffenen Orte an.",
+          "date": "2026-10-03T05:47:16.038Z"
+        },
+        {
+          "title": "Einheitliche Zollstelle für Mendrisio und Sopraceneri",
+          "url": "/de/grenzgaenger-artikel/zollbuero-mendrisio-sopraceneri/",
+          "excerpt": "Neuigkeiten aus der Reorganisation des Bundesamtes für Zoll und Grenzsicherheit mit der Eingliederung Graubündens in die Region Süd.",
+          "date": "2026-08-12T08:18:46.588Z"
+        },
+        {
+          "title": "Abonnements und Rabatte für Grenzgänger: So sparen Sie beim Transport",
+          "url": "/de/grenzgaenger-artikel/verguenstigungen-grenzgaenger-verkehr-tessin/",
+          "excerpt": "Praktischer Leitfaden zu ermäßigten Abonnements und integrierten Transportsystemen Tessin-Lombardei für diejenigen, die grenzüberschreitend arbeiten: Optionen, Einsparungen und Steuerabzugsfähigkeit.",
+          "date": "2026-08-27T01:48:08.946Z"
+        },
+        {
+          "title": "Leben in Ponte Lambro und Arbeiten im Tessin als Grenzgänger",
+          "url": "/de/grenzgaenger-artikel/in-ponte-lambro-leben-und-in-tessin-als-grenzgaenger-arbeiten/",
+          "excerpt": "Entdecken Sie die Verbindungen, die Reisezeiten, die Lebenshaltungskosten und die Vorteile, in Ponte Lambro zu leben und im Tessin zu arbeiten.",
+          "date": "2026-09-05T10:23:15.876Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Como",
+          "url": "/de/wartezeit-grenze/ticino-como/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze Richtung Varese",
+          "url": "/de/wartezeit-grenze/ticino-varese/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze Richtung Verbano",
+          "url": "/de/wartezeit-grenze/ticino-verbano/"
+        },
+        {
+          "label": "Wöchentliche Rangliste der Grenzübergänge",
+          "url": "/de/grenzgaenger-artikel/rangliste-grenzuebergaenge-tessin/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "TI",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Au Tessin, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Italie : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en italien ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Biegno-Indemini, semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "4",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "40",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
+            },
+            {
+              "label": "Camedo (Re-Centovalli)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
+            },
+            {
+              "label": "Drezzo-Pedrinate",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
+            },
+            {
+              "label": "Dumenza-Cassinone",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
+            },
+            {
+              "label": "Luino-Fornasette",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/luino-fornasette/aujourd-hui/"
+            },
+            {
+              "label": "Piaggio Valmara (Cannobio-Brissago)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/piaggio-valmara/aujourd-hui/"
+            },
+            {
+              "label": "Ronago-Novazzano",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A13 Ascona <-> Aeroprt de Locarno Jonction autoroutière Locarno Situation: entrée fermée travaux, longueur [km] 0.5, sur la bande d'arrêt d'urgence",
+              "value": "Fermeture",
+              "detail": "jusqu’au 20 octobre 2026",
+              "date": "2026-07-10T03:00:00.000Z"
+            },
+            {
+              "label": "A13 Ascona <-> Aeroprt de Locarno entre Jonction autoroutière Minusio et Jonction autoroutière Locarno Situation: fermé travaux, longueur [km] 5.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-09-21T14:56:00.000Z"
+            },
+            {
+              "label": "Contra -> Locarno Monti entre Localité Contra et Localité Brione Situation: fermé Raison: travaux de construction",
+              "value": "Fermeture",
+              "detail": "jusqu’au 8 octobre 2026",
+              "date": "2026-09-29T11:41:00.000Z"
+            },
+            {
+              "label": "Révoqué: A2 Chiasso -> St-Gothard Tunnel Tunnel du Monte Ceneri Situation: trafic perturbé Raison: accident Gestion du trafic: voie de droite fermée",
+              "value": "Fermeture",
+              "date": "2026-10-06T21:29:00.000Z"
+            },
+            {
+              "label": "Incidente della circolazione stradale in Valle Leventina",
+              "value": "Trafic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261155"
+            },
+            {
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Trafic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+            },
+            {
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "value": "Trafic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+            },
+            {
+              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
+            },
+            {
+              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
+            },
+            {
+              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
+              "date": "2026-10-05",
+              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
+            },
+            {
+              "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
+              "date": "2026-09-30",
+              "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
+              "date": "2026-09-28",
+              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
+            },
+            {
+              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
+              "date": "2026-09-22",
+              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Extradé de Suisse, arrêté à Ponte Chiasso",
+          "url": "/fr/articles-frontalier/extradition-arrestation-como/",
+          "excerpt": "Ponte Chiasso : Le 18 septembre, un Nigérian de 28 ans a été livré de Suisse et arrêté. Il doit purger quatre ans, neuf mois et 18 jours de prison.",
+          "date": "2026-10-01T12:10:19.439Z"
+        },
+        {
+          "title": "Modifications TILO : bus à la place du S10 Chiasso-Melide",
+          "url": "/fr/articles-frontalier/modifications-tilo-bus-a-la-place-du-s10-chiasso-melide/",
+          "excerpt": "À partir du 13 septembre 2026, la course TILO de 4h11 de Mendrisio à Chiasso sera remplacée par un bus, avec départ anticipé, jusqu'au 19 octobre 2026.",
+          "date": "2026-09-11T18:59:52.263Z"
+        },
+        {
+          "title": "Monte Olimpino 1 : modifications des services TILO entre Chiasso et Como",
+          "url": "/fr/articles-frontalier/monte-olimpino-tilo-chiasso-como/",
+          "excerpt": "Pendant les week-ends du 9 au 12 et du 16 au 19 octobre ainsi que du 13 au 16 et du 20 au 23 novembre 2026, la fermeture affecte les RE80, S10 et S40 entre Chiasso et Como.",
+          "date": "2026-10-06T10:25:20.912Z"
+        },
+        {
+          "title": "Trenord, renchérissement de 3,88 % sur les lignes avec le Tessin",
+          "url": "/fr/articles-frontalier/trenord-hausse-388-lignes-tessin/",
+          "excerpt": "Depuis le 1er septembre, les billets et les abonnements Trenord sont plus chers de 3,88 % : renchérissement ordonné par le Conseil de la Région Lombardie, à l'exception de Malpensa Express et de Como-Malpensa via…",
+          "date": "2026-08-31T20:12:12.781Z"
+        },
+        {
+          "title": "Contrôles de vitesse au Tessin du 5 au 11 octobre",
+          "url": "/fr/articles-frontalier/controles-vitesse-tessin-octobre/",
+          "excerpt": "Du 5 au 11 octobre, des contrôles sont prévus sur les routes tessinoises. La Police cantonale gère la carte des radars et indique les localités concernées.",
+          "date": "2026-10-03T05:47:16.038Z"
+        },
+        {
+          "title": "Bureau de douane unique pour Mendrisio et Sopraceneri",
+          "url": "/fr/articles-frontalier/bureau-douanier-unique-mendrisio-sopraceneri/",
+          "excerpt": "Nouveauté de la réorganisation de l'Office fédéral des douanes et de la sécurité des frontières avec le rattachement des Grisons à la Région Sud.",
+          "date": "2026-08-12T08:18:46.588Z"
+        },
+        {
+          "title": "Frontaliers : abos & réductions pour économiser",
+          "url": "/fr/articles-frontalier/reductions-transports-frontaliers-tessin/",
+          "excerpt": "Guide pratique des abonnements à prix réduit et des systèmes de transport intégrés Tessin-Lombardie pour ceux qui travaillent au-delà des frontières : options, économies et déductibilité fiscale.",
+          "date": "2026-08-27T01:48:08.946Z"
+        },
+        {
+          "title": "Vivre à Ponte Lambro et travailler au Tessin en tant que frontalier",
+          "url": "/fr/articles-frontalier/vivre-a-ponte-lambro-et-travailler-dans-le-tessin-en-tant-que-frontalier/",
+          "excerpt": "Découvrez les connexions, les temps de trajet, le coût de la vie et les avantages de vivre à Ponte Lambro et de travailler au Tessin.",
+          "date": "2026-09-05T10:23:15.876Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers Côme",
+          "url": "/fr/temps-attente-douane/ticino-como/"
+        },
+        {
+          "label": "Attente aux frontières vers Varèse",
+          "url": "/fr/temps-attente-douane/ticino-varese/"
+        },
+        {
+          "label": "Attente aux frontières vers Verbano",
+          "url": "/fr/temps-attente-douane/ticino-verbano/"
+        },
+        {
+          "label": "Classement hebdomadaire des postes-frontières",
+          "url": "/fr/articles-frontalier/classement-douanes-tessin/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

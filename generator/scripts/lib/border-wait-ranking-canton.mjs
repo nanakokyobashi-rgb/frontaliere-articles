@@ -33,13 +33,32 @@ export const STATIC_META = {
 };
 
 /**
- * Photo of each canton's ranking, from the site's `/images/places/` catalog.
- * Only Ticino has one today (the catalog holds Ticino places only); a canton
- * missing here cannot be REGISTERED — the dry run still works — so the first
- * publication of a new canton (P11) has to choose its image consciously
- * instead of inheriting a Ticino photo.
+ * RANKING_IMAGE is deliberately an allowlist of existing, credited catalog
+ * covers. A non-Ticino ranking uses `_generatedImagePath` for the real
+ * `/images/blog/` hero; `image` remains the public registry field and carries
+ * the same path for deterministic producers. Missing provenance stays null:
+ * the generator's first-publication guard then refuses the ranking instead of
+ * inheriting a Ticino place photo.
+ *
+ * Every selected path is present in `public/data/journalist-image-catalog.json`
+ * and has a matching `content/image-credits/blog/*.json` record with
+ * `status: "ok"`; JU has no matching legal catalog cover yet.
  */
-const RANKING_IMAGE = { TI: STATIC_META.image };
+export const RANKING_IMAGE = Object.freeze({
+  TI: STATIC_META.image,
+  AG: '/images/blog/argovia-mercato-lavoro-settori.webp',
+  BASILEA: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-basilea.webp',
+  GE: '/images/blog/ginevra-iniziativa-cern-fcc.webp',
+  GR: '/images/blog/castasegna-vecchia-dogana-in-vendita.webp',
+  NE: '/images/blog/acquisto-casa-neuchatel-costi-mutuo.webp',
+  SG: '/images/blog/casa-sangallo-mutuo-fondi-propri.webp',
+  SH: '/images/blog/comprare-casa-sciaffusa-mutuo.webp',
+  SO: '/images/blog/acquistare-immobile-canton-soletta-mutuo.webp',
+  TG: '/images/blog/comprare-casa-turgovia-mutuo.webp',
+  VD: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-vaud.webp',
+  VS: '/images/blog/apprendistato-formazione-canton-vallese.webp',
+  ZH: '/images/blog/azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.webp',
+});
 
 /**
  * Evergreen metadata of a canton's ranking. Ticino returns STATIC_META itself
@@ -52,9 +71,11 @@ export function staticMetaFor(canton = 'TI') {
   if (!profile) throw new Error(`no border-wait ranking for canton ${canton}`);
   const it = profile.it;
   const name = it.of.replace(/^(del Canton|della regione di|del|dei|della|dell'|di)\s*/, '');
+  const image = RANKING_IMAGE[canton] ?? null;
   return {
     ...STATIC_META,
-    image: RANKING_IMAGE[canton] ?? null,
+    image,
+    ...(image?.startsWith('/images/blog/') ? { _generatedImagePath: image } : {}),
     seo: {
       title: `Classifica delle dogane ${it.in}: le migliori e le peggiori`,
       description:

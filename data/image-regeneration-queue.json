@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "fischiava-treno-gorla",
+      "title": "Fischiava il treno: festa ferroviaria a Gorla Minore",
+      "fallbackImage": "/images/blog/mobilita-trenord-aumento-biglietti-2026.webp",
+      "reason": "All image providers failed for article-fischiava-treno-gorla: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T04:45:22.263Z",
+      "lastFailureAt": "2026-10-07T04:45:22.263Z"
+    },
+    {
+      "articleId": "clan-nazarbayev-ceresio",
+      "title": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
+      "fallbackImage": "/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp",
+      "reason": "All image providers failed for article-clan-nazarbayev-ceresio: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T04:58:11.891Z",
+      "lastFailureAt": "2026-10-07T04:58:11.891Z"
+    },
+    {
+      "articleId": "raffineria-cressier-carburanti",
+      "title": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
+      "fallbackImage": "/images/blog/diesel-rincaro-geopolitica-svizzera.webp",
+      "reason": "All image providers failed for article-raffineria-cressier-carburanti: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:28:44.576Z",
+      "lastFailureAt": "2026-10-07T05:28:44.576Z"
+    },
+    {
+      "articleId": "monte-olimpino-treni-weekend",
+      "title": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "fallbackImage": "/images/blog/como-crisi-abitativa-alloggi-sfitti.webp",
+      "reason": "All image providers failed for article-monte-olimpino-treni-weekend: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:47:57.525Z",
+      "lastFailureAt": "2026-10-07T05:47:57.525Z"
+    },
+    {
+      "articleId": "a2-mendrisio-melano-risanamento",
+      "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
+      "fallbackImage": "/images/blog/mendrisio-melano-progetto-meme-risanamento-fonico.webp",
+      "reason": "All image providers failed for article-a2-mendrisio-melano-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:12:18.865Z",
+      "lastFailureAt": "2026-10-07T06:12:18.865Z"
+    },
+    {
+      "articleId": "scambio-dati-salariali-2027",
+      "title": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
+      "fallbackImage": "/images/blog/fairtiq-bonus-ticino-2026-2027.webp",
+      "reason": "All image providers failed for article-scambio-dati-salariali-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:25:44.304Z",
+      "lastFailureAt": "2026-10-07T06:25:44.304Z"
+    },
+    {
+      "articleId": "hotel-ticino-140-licenziati",
+      "title": "Due hotel chiusi in Ticino: 140 licenziati",
+      "fallbackImage": "/images/blog/hotel-ticino-76-licenziamenti.webp",
+      "reason": "All image providers failed for article-hotel-ticino-140-licenziati: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:29:51.075Z",
+      "lastFailureAt": "2026-10-07T06:29:51.075Z"
+    },
+    {
+      "articleId": "quattro-oggetti-urne-novembre",
+      "title": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
+      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
+      "reason": "All image providers failed for article-quattro-oggetti-urne-novembre: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:42:41.992Z",
+      "lastFailureAt": "2026-10-07T06:42:41.992Z"
+    },
+    {
+      "articleId": "strada-calanca-chiusura-preventiva",
+      "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+      "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
+      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:43:54.395Z",
+      "lastFailureAt": "2026-10-07T06:43:54.395Z"
+    },
+    {
+      "articleId": "benzina-grigioni-deviazione",
+      "title": "Prezzi benzina in Grigioni: quando conviene deviare",
+      "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:53:48.101Z",
+      "lastFailureAt": "2026-10-07T06:53:48.101Z"
+    },
+    {
+      "articleId": "simplificazione-imposta-trasferimento-berna",
+      "title": "Imposta trasferimenti Berna: franchigia 800k",
+      "fallbackImage": "/images/blog/imposta-successione-donazione-berna.webp",
+      "reason": "All image providers failed for article-simplificazione-imposta-trasferimento-berna: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:54:25.697Z",
+      "lastFailureAt": "2026-10-07T06:54:25.697Z"
+    },
+    {
+      "articleId": "domodossola-arresto-hashish-stazione",
+      "title": "Domodossola: arresto per chilo di hashish nel bagaglio",
+      "fallbackImage": "/images/blog/affitti-friburgo-contestazione-canone.webp",
+      "reason": "All image providers failed for article-domodossola-arresto-hashish-stazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:58:03.399Z",
+      "lastFailureAt": "2026-10-07T06:58:03.399Z"
+    },
+    {
+      "articleId": "wabern-tram-risanamento",
+      "title": "Approvati il tram di Kleinwabern e il risanamento di Wabern",
+      "fallbackImage": "/images/blog/tram-treno-lugano-lavori-inizio.webp",
+      "reason": "All image providers failed for article-wabern-tram-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:11:43.433Z",
+      "lastFailureAt": "2026-10-07T07:11:43.433Z"
+    },
+    {
+      "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
+      "title": "Auto elettrica: come risparmiare fino al 50%",
+      "fallbackImage": "/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp",
+      "reason": "All image providers failed for article-auto-elettrica-come-risparmiare-fino-al-50: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T07:21:41.464Z",
+      "lastFailureAt": "2026-10-07T07:21:41.464Z"
+    }
+  ]
+}

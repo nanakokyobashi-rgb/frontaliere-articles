@@ -391,11 +391,26 @@ test('④ il classifier pre-spend porta un deadlineMs', () => {
   const i = CODE.indexOf('const model = process.env.PRESPEND_GATE_MODEL');
   assert.notEqual(i, -1);
   const region = CODE.slice(i, i + 6000);
+  assert.match(
+    region,
+    /const classifierDeadline = deadlineMs \?\? \(IS_CANTON/,
+    'il classifier cantonale deve avere una finestra propria, senza togliere il termine storico',
+  );
   const call = region.slice(region.indexOf('await _aiCallLLM('));
   assert.match(
     call.slice(0, 800),
-    /deadlineMs: RUN_START_MS \+ RUN_WALL_BUDGET_MS/,
-    'REGRESSIONE: una classificazione da 80 token puo tornare a camminare 56 modelli x 2 retry x 30s',
+    /deadlineMs: classifierDeadline/,
+    'REGRESSIONE: una classificazione da 80 token puo tornare a camminare oltre la finestra dichiarata',
+  );
+  assert.match(
+    region,
+    /const remainingClassifierMs = classifierDeadline - Date\.now\(\)/,
+    'il timeout cantonale deve essere calcolato sul residuo della deadline assoluta',
+  );
+  assert.match(
+    call.slice(0, 1000),
+    /timeout: classifierCallTimeout/,
+    'REGRESSIONE: il timeout HTTP torna a ignorare il residuo della finestra cantonale',
   );
 });
 
@@ -446,13 +461,14 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   const img = extractBlock('async function generateArticleImage(');
   assert.equal((img.text.match(/generateImageFromSpec\(/g) || []).length, 1, 'il nuovo hero deve avere un solo percorso di generazione');
   assert.match(img.text, /scope: 'article-hero'/);
-  assert.match(img.text, /maxAttempts: 3/);
+  assert.match(img.text, /maxAttempts: 1/);
   assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
   assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
   assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
   assert.match(img.text, /deadlineAt:\s*imageDeadline/);
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
+  assert.match(CODE, /Math\.min\(120_000/);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

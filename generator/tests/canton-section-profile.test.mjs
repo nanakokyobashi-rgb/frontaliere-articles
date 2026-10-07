@@ -8,8 +8,8 @@
  *     le inattive: il dedup fra sezioni le deve vedere), con i path del core e
  *     lo stato sotto data/sections/<id>/ (D18), senza toccare frontaliere e
  *     svizzera;
- *   - il gate D16: spento per default, acceso dal profilo `enabled` o
- *     dall'elenco CANTON_ARTICLE_SECTIONS_ENABLED (mappato in load-rc-env);
+ *   - il gate D16: `enabled` attiva la superficie corpus, ma la generazione
+ *     richiede anche CANTON_ARTICLE_SECTIONS_ENABLED (mappato in load-rc-env);
  *   - gli argomenti di rebase coprono OGNI file che create-article scrive per
  *     una sezione cantonale, con la strategia giusta;
  *   - gli scheletri dei file vuoti hanno la forma che gli scrittori di
@@ -26,10 +26,17 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL, isCantonSection } from '../../engine/shared/articleSectionCore.mjs';
 import {
   CANTON_DISPLAY_NAMES,
+  CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+  CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS,
+  CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+  CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS,
+  CANTON_PROMPT_CONTEXT_MAX_CHARS,
+  CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS,
   CANTON_SECTIONS_ENABLED_ENV,
   CANTON_STATE_ROOT,
   buildCantonProfile,
   cantonClassifierPrompt,
+  cantonHeadlineSelectionPrompt,
   cantonPromptLines,
   cantonSectionConfigs,
   cantonSectionIds,
@@ -115,7 +122,7 @@ test('create-article: le storiche restano letterali, le cantonali arrivano dal m
 
 // ── D16: il gate ────────────────────────────────────────────────────────────
 
-test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
+test('gate D16: il profilo attivo richiede comunque Remote Config', () => {
   // Il profilo di produzione può avere cantoni accesi (P11). Il caso «default
   // spento» va quindi provato con una copia esplicitamente disabilitata, non
   // assumendo che il catalogo live resti per sempre tutto false.
@@ -124,6 +131,9 @@ test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
   for (const id of cantonSectionIds()) {
     assert.equal(resolveCantonSectionGate(id, { env: {}, profiles }).enabled, false, `${id} acceso senza flag`);
     assert.equal(resolveCantonSectionGate(id, { env: { [CANTON_SECTIONS_ENABLED_ENV]: '' }, profiles }).enabled, false);
+  }
+  for (const code of ['TI', 'GR', 'BE']) {
+    profiles.cantons.find((profile) => profile.code === code).enabled = true;
   }
   const env = { [CANTON_SECTIONS_ENABLED_ENV]: 'TI, canton-gr  be;zz' };
   assert.deepEqual(resolveCantonSectionGate('canton-ti', { env, profiles }), { enabled: true, via: 'env', unknown: ['zz'] });
@@ -134,7 +144,9 @@ test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
   assert.equal(parseEnabledCantonSections('basilea appenzello').sections.size, 2);
 
   profiles.cantons.find((c) => c.code === 'UR').enabled = true;
-  assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: {}, profiles }), { enabled: true, via: 'profile', unknown: [] });
+  assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: {}, profiles }), { enabled: false, via: null, unknown: [] });
+  const envWithUr = { ...env, [CANTON_SECTIONS_ENABLED_ENV]: `${env[CANTON_SECTIONS_ENABLED_ENV]}, UR` };
+  assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: envWithUr, profiles }), { enabled: true, via: 'env', unknown: ['zz'] });
 });
 
 test('gate D16 cablato: Remote Config mappata, controllo in testa a main() prima di ogni scrittura', () => {
@@ -266,6 +278,42 @@ test('prompt cantonali: stesso formato di risposta delle storiche, cantone e con
   // nuovi (ne' altri cantoni), a differenza di quella nazionale.
   assert.match(lines.expandEnrichmentLine, /NON aggiungere NESSUN fatto, numero, comune, altro cantone/);
   assert.match(CREATE_ARTICLE, /const enrichmentLine = IS_CANTON && !boundToText\n\s+\? CANTON_LINES\.expandEnrichmentLine/);
+});
+
+test('prompt cantonali: contesto e liste hanno capi deterministici, lessico di ammissione intatto', () => {
+  const p = buildCantonProfile('canton-gr', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  const classifier = cantonClassifierPrompt(p, {
+    headline: 'Kanton Graubünden ändert die Steuern',
+    sourceHint: 'www.gr.ch/DE/Medien/Mitteilungen/MMStaka/Seiten/Aktuell.aspx',
+    summary: '',
+  });
+  const context = classifier.match(/CONTESTO DEL CANTONE .*?: ([\s\S]*?)\n\nÈ RILEVANTE/u)?.[1] || '';
+  assert.ok(context.length <= CANTON_PROMPT_CONTEXT_MAX_CHARS, `contesto classifier a ${context.length} caratteri`);
+  assert.ok(context.includes('Il Grigioni e\' un cantone di confine'), 'il contesto mantiene il segnale iniziale');
+  assert.ok(context.includes('flussi dall\'Austria sono modesti'), 'il contesto mantiene il segnale finale');
+  assert.ok(p.topicalTerms.length > 100, 'il lessico completo resta disponibile al gate deterministico');
+
+  const candidates = `H1 » (gr.ch) ${'Titolo troppo lungo '.repeat(30)}\nH2 » (gr.ch) ${'Secondo titolo troppo lungo '.repeat(30)}`;
+  const publishedTitle = `• ${'Titolo distintivo già pubblicato '.repeat(30)}`;
+  const published = `${publishedTitle} — ${'Estratto già pubblicato '.repeat(30)}`;
+  const selection = cantonHeadlineSelectionPrompt(p, {
+    headlineList: candidates,
+    recentArticles: published,
+    jsonQuoteSafetyRule: 'Regola JSON',
+  });
+  const listed = selection.split('\n').filter((line) => /^(H\d+ »|• )/.test(line));
+  assert.equal(listed.length, 3, 'il cap accorcia le righe, non elimina una candidata o un riferimento');
+  assert.ok(listed.filter((line) => line.startsWith('H')).every((line) => line.length <= CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS));
+  const publishedLine = listed.find((line) => line.startsWith('•'));
+  assert.ok(publishedLine.startsWith(publishedTitle), 'il titolo completo del digest resta intatto');
+  const excerpt = publishedLine.slice(publishedLine.lastIndexOf(' — ') + 3);
+  assert.ok(excerpt.length <= CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS + 1, 'si accorcia solo l’excerpt del digest');
+  assert.match(selection, /H2 »/, 'la chiave della seconda candidata resta selezionabile');
+
+  assert.ok(CANTON_PRESPEND_MAX_CLASSIFIER_CALLS <= 12);
+  assert.ok(CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS < 30_000);
+  assert.ok(CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS <= 60_000);
+  assert.match(CREATE_ARTICLE, /const preSpendOptions = IS_CANTON/);
 });
 
 test('create-article: i rami cantonali leggono il profilo, e le storiche restano sui loro testi', () => {

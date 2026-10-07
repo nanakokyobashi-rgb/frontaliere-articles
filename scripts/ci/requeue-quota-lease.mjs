@@ -7,6 +7,8 @@
  * the whole transition with a bounded exponential backoff so the workflow does
  * not turn a temporary API blip into a failed run. Permanent API errors still
  * fail closed and leave the active label untouched for the rescue path.
+ * The retry primitive is also used by the lease-release wrapper; keeping the
+ * transient classifier here gives both mutations one source of truth.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -15,12 +17,51 @@ import path from 'node:path';
 
 export const DEFAULT_MAX_ATTEMPTS = 3;
 export const DEFAULT_RETRY_DELAY_MS = 1_000;
+export const QUOTA_LEASE_FAILURE_MARKER = 'quota-lease-failure';
 const MAX_BUFFER = 8 * 1024 * 1024;
+const MAX_MARKER_STDERR_LENGTH = 4_096;
+const QUOTA_LEASE_FAILURE_MARKER_RE = new RegExp(
+  `\\[${QUOTA_LEASE_FAILURE_MARKER} status=(\\d+) stderr-b64=([A-Za-z0-9_-]*)\\]`,
+  'g',
+);
 
 function errorText(error) {
   return [error?.stderr, error?.stdout, error?.message]
     .map((part) => (part == null ? '' : String(part)))
     .join('\n');
+}
+
+function errorStatus(error) {
+  const status = Number(error?.status);
+  return Number.isSafeInteger(status) && status >= 0 ? status : 0;
+}
+
+function markerStderr(error) {
+  const stderr = String(error?.stderr ?? '').replace(/\s+/g, ' ').trim();
+  if (stderr.length <= MAX_MARKER_STDERR_LENGTH) return stderr;
+  const headLength = Math.floor(MAX_MARKER_STDERR_LENGTH / 2);
+  const tailLength = MAX_MARKER_STDERR_LENGTH - headLength;
+  return `${stderr.slice(0, headLength)}${stderr.slice(-tailLength)}`;
+}
+
+/** Preserve the child GitHub status/stderr before the human detail is shortened. */
+export function quotaLeaseFailureMarker(error) {
+  const stderr = Buffer.from(markerStderr(error), 'utf8').toString('base64url');
+  return `[${QUOTA_LEASE_FAILURE_MARKER} status=${errorStatus(error)} stderr-b64=${stderr}]`;
+}
+
+function markerErrorText(text) {
+  const values = [String(text || '')];
+  for (const match of String(text || '').matchAll(QUOTA_LEASE_FAILURE_MARKER_RE)) {
+    values.push(`HTTP ${match[1]}`);
+    if (!match[2]) continue;
+    try {
+      values.push(Buffer.from(match[2], 'base64url').toString('utf8'));
+    } catch {
+      // An invalid marker is diagnostic noise, never a reason to retry.
+    }
+  }
+  return values.join('\n');
 }
 
 /**
@@ -29,9 +70,11 @@ function errorText(error) {
  * visible instead of being hidden behind a retry loop.
  */
 export function isRetryableGitHubMutationError(error) {
-  const text = errorText(error);
+  const text = markerErrorText(errorText(error));
   return [
     /GraphQL:\s+Something went wrong/i,
+    /\bHTTP\s+429\b/i,
+    /\bsecondary\s+rate\s+limit\b/i,
     /\bHTTP\s+5\d{2}\b/i,
     /\b5\d{2}\s+(?:Internal Server Error|Not Implemented|Bad Gateway|Service Unavailable|Gateway Timeout|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)\b/i,
     /\b(?:ECONNRESET|ECONNREFUSED|ETIMEDOUT|EAI_AGAIN)\b/i,
@@ -65,7 +108,10 @@ export function retryGitHubMutation(operation, {
   maxAttempts = DEFAULT_MAX_ATTEMPTS,
   retryDelayMs = DEFAULT_RETRY_DELAY_MS,
   sleep = sleepSync,
-  log = (line) => console.log(line),
+  // Retry diagnostics belong on stderr: callers may run under node:test,
+  // where stdout is the runner's framed protocol rather than a log stream.
+  log = (line) => console.error(line),
+  mutationName = 'quota mutation',
 } = {}) {
   const attempts = positiveInteger(maxAttempts, DEFAULT_MAX_ATTEMPTS);
   const delay = nonNegativeInteger(retryDelayMs, DEFAULT_RETRY_DELAY_MS);
@@ -79,7 +125,7 @@ export function retryGitHubMutation(operation, {
       if (!isRetryableGitHubMutationError(error) || attempt === attempts) throw error;
 
       const waitMs = delay * (2 ** (attempt - 1));
-      log(`::warning::GitHub quota requeue transient failure (tentativo ${attempt}/${attempts}) → retry tra ${waitMs} ms.`);
+      log(`::warning::GitHub ${mutationName} transient failure (tentativo ${attempt}/${attempts}) → retry tra ${waitMs} ms.`);
       sleep(waitMs);
     }
   }
@@ -129,7 +175,7 @@ export function requeueQuotaLease({
       maxBuffer: MAX_BUFFER,
       stdio: ['ignore', 'pipe', 'pipe'],
     }),
-    retryOptions,
+    { ...retryOptions, mutationName: 'quota requeue' },
   );
 }
 

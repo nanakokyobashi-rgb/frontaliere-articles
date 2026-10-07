@@ -1,0 +1,760 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gr:servizi",
+  "section": "canton-gr",
+  "canton": "GR",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "de7985e31fada1b7cf8aca62761490cc142dbf0b5ea114580fea4063768de278",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GR",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nei Grigioni, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Italia, l’Austria e il Liechtenstein: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco, italiano e romancio; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "573,45 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "GR, regione di premio 1",
+              "value": "mediana 573,45 CHF al mese",
+              "detail": "da 499 a 660,10 CHF, 24 assicuratori"
+            },
+            {
+              "label": "GR, regione di premio 2",
+              "value": "mediana 534,95 CHF al mese",
+              "detail": "da 464 a 613,90 CHF, 24 assicuratori"
+            },
+            {
+              "label": "GR, regione di premio 3",
+              "value": "mediana 509,70 CHF al mese",
+              "detail": "da 426 a 574,30 CHF, 24 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "GR11215",
+              "value": "1050 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR13809",
+              "value": "600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR16271",
+              "value": "600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.gr.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit - September 2026",
+              "date": "2026-10-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
+            },
+            {
+              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
+              "date": "2026-09-24",
+              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
+            },
+            {
+              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
+              "date": "2026-09-21",
+              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
+            },
+            {
+              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
+              "date": "2026-09-15",
+              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
+            },
+            {
+              "label": "Arbeitslosigkeit - August 2026",
+              "date": "2026-09-07",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Sanità Alta Engadina: approvati accordi fino al 2029",
+          "url": "/articoli-svizzera/sanita-alta-engadina-samedan/",
+          "excerpt": "Il voto degli undici Comuni assicura quasi 28,5 milioni di franchi per l'ospedale di Samedan, case anziani, Spitex e l'ente Sanadura dal 2027 al 2029.",
+          "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "Ospedale Grigioni: 518 milioni per 12 anni",
+          "url": "/articoli-svizzera/ospedale-grigioni-ampliamento-500m/",
+          "excerpt": "La nuova ala dell'Ospedale cantonale dei Grigioni entra in servizio a fine novembre 2026 dopo 518 milioni investiti. Sale operatorie aumentano da 10 a 13.",
+          "date": "2026-08-18T19:56:19.062Z"
+        },
+        {
+          "title": "Ospedale Grigioni: 518 milioni per nuova ala",
+          "url": "/articoli-svizzera/ospedale-grigioni-ampliamento-2026/",
+          "excerpt": "Dodici anni di cantiere terminano. L'ospedale cantonale dei Grigioni a Coira inaugura la nuova struttura con 518 milioni di franchi investiti. Sale operatorie aumentate, trasloco fine novembre.",
+          "date": "2026-08-18T19:20:17.561Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini nel Canton Grigioni",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-grigioni/",
+          "excerpt": "Opzioni di custodia, tariffe calcolate sul reddito e sussidi cantonali: guida pratica per famiglie nel Grigioni.",
+          "date": "2026-09-01T21:51:40.121Z"
+        },
+        {
+          "title": "LAMal Grigioni: premi, franchigie e riduzione",
+          "url": "/articoli-svizzera/lam-grigioni-premi-riduzione/",
+          "excerpt": "Scopri come funziona l'assicurazione malattia LAMal nel canton Grigioni, quali franchigie scegliere e come accedere ai sussidi cantonali di riduzione dei premi.",
+          "date": "2026-08-30T18:10:50.603Z"
+        },
+        {
+          "title": "Grigioni: le finanze degli ospedali tornano in attivo",
+          "url": "/articoli-svizzera/ripresa-finanziaria-ospedali-grigionesi/",
+          "excerpt": "Dopo un 2024 difficile, i nosocomi grigionesi registrano risultati positivi nel 2025. Ecco la panoramica finanziaria delle principali strutture sanitarie.",
+          "date": "2026-07-14T13:24:13.191Z"
+        },
+        {
+          "title": "Grigioni: autocertificazione penali per permessi di dimora",
+          "url": "/articoli-frontaliere/grigioni-permessi-dimora-2026/",
+          "excerpt": "Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso.",
+          "date": "2026-04-23T21:32:48.344Z"
+        },
+        {
+          "title": "Grigioni, stretta sui permessi di dimora dopo l’infiltrazione mafiosa a Roveredo",
+          "url": "/articoli-frontaliere/grigioni-stretta-permessi-dimora-2026/",
+          "excerpt": "Nuove regole per i permessi di dimora nei Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso.",
+          "date": "2026-04-25T16:21:51.853Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/grigioni/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/grigioni-gr/"
+        },
+        {
+          "label": "Offerte di lavoro nei Grigioni",
+          "url": "/cerca-lavoro-grigioni/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "GR",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Graubünden, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Italy, Austria and Liechtenstein: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German, Italian and Romansh; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "573.45 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "GR, premium region 1",
+              "value": "typical 573.45 CHF per month",
+              "detail": "from 499 to 660.10 CHF, 24 insurers"
+            },
+            {
+              "label": "GR, premium region 2",
+              "value": "typical 534.95 CHF per month",
+              "detail": "from 464 to 613.90 CHF, 24 insurers"
+            },
+            {
+              "label": "GR, premium region 3",
+              "value": "typical 509.70 CHF per month",
+              "detail": "from 426 to 574.30 CHF, 24 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "GR11215",
+              "value": "1,050 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR13809",
+              "value": "600 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR16271",
+              "value": "600 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.gr.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit - September 2026",
+              "date": "2026-10-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
+            },
+            {
+              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
+              "date": "2026-09-24",
+              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
+            },
+            {
+              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
+              "date": "2026-09-21",
+              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
+            },
+            {
+              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
+              "date": "2026-09-15",
+              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
+            },
+            {
+              "label": "Arbeitslosigkeit - August 2026",
+              "date": "2026-09-07",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Upper Engadine Healthcare: agreements approved through 2029",
+          "url": "/en/swiss-articles/upper-engadine-healthcare-samedan/",
+          "excerpt": "The vote of the eleven Municipalities ensures almost 28.5 million francs for the Samedan hospital, elderly homes, Spitex and the Sanadura entity from 2027 to 2029.",
+          "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "Graubünden Hospital: 518 million over 12 years",
+          "url": "/en/swiss-articles/grisons-hospital-expansion-500m/",
+          "excerpt": "The new wing of the Cantonal Hospital of Graubünden comes into service at the end of November 2026 after 518 million invested. Operating rooms increase from 10 to 13.",
+          "date": "2026-08-18T19:56:19.062Z"
+        },
+        {
+          "title": "Graubünden Hospital: 518 million for new wing",
+          "url": "/en/swiss-articles/grisons-hospital-expansion-2026/",
+          "excerpt": "Twelve years of construction end. The cantonal hospital of Graubünden in Chur inaugurates the new structure with 518 million francs invested. Operating rooms increased, moving at the end of November.",
+          "date": "2026-08-18T19:20:17.561Z"
+        },
+        {
+          "title": "Nursery and childcare in the Canton of Graubünden",
+          "url": "/en/swiss-articles/nursery-childcare-graubunden-costs/",
+          "excerpt": "Custody options, income-based fees and cantonal subsidies: a practical guide for families in Graubünden.",
+          "date": "2026-09-01T21:51:40.121Z"
+        },
+        {
+          "title": "LAMal Grisioni: premiums, deductibles and reduction",
+          "url": "/en/swiss-articles/lamal-grisons-premiums-reduction/",
+          "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
+          "date": "2026-08-30T18:10:50.603Z"
+        },
+        {
+          "title": "Graubünden: hospitals' finances return to service",
+          "url": "/en/swiss-articles/financial-recovery-grisons-hospitals/",
+          "excerpt": "After a difficult 2024, Grisonian nosocomes register positive results in 2025. Here is the financial overview of the main healthcare facilities.",
+          "date": "2026-07-14T13:24:13.191Z"
+        },
+        {
+          "title": "Grison: Self-declaration of criminal records for residence permits",
+          "url": "/en/cross-border-articles/grisons-residence-permits-2026/",
+          "excerpt": "From May 2026, anyone applying for a residence permit in Grison will need to declare any criminal records or ongoing proceedings.",
+          "date": "2026-04-23T21:32:48.344Z"
+        },
+        {
+          "title": "Grisons, stricter rules for residence permits after mafia infiltration in Roveredo",
+          "url": "/en/cross-border-articles/grisons-tightens-residence-permits-2026/",
+          "excerpt": "New rules for residence permits in the Grisons: mandatory declaration of criminal records and ongoing proceedings.",
+          "date": "2026-04-25T16:21:51.853Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/graubunden-gr/"
+        },
+        {
+          "label": "Job offers in Graubünden",
+          "url": "/en/find-jobs-graubunden/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "GR",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "In Graubünden laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Italien, Österreich und Liechtenstein: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch, Italienisch und Rätoromanisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "573.45 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "GR, Prämienregion 1",
+              "value": "Mittelwert 573.45 CHF pro Monat",
+              "detail": "von 499 bis 660.10 CHF, 24 Versicherer"
+            },
+            {
+              "label": "GR, Prämienregion 2",
+              "value": "Mittelwert 534.95 CHF pro Monat",
+              "detail": "von 464 bis 613.90 CHF, 24 Versicherer"
+            },
+            {
+              "label": "GR, Prämienregion 3",
+              "value": "Mittelwert 509.70 CHF pro Monat",
+              "detail": "von 426 bis 574.30 CHF, 24 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "GR11215",
+              "value": "1’050 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR13809",
+              "value": "600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR16271",
+              "value": "600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.gr.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit - September 2026",
+              "date": "2026-10-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
+            },
+            {
+              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
+              "date": "2026-09-24",
+              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
+            },
+            {
+              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
+              "date": "2026-09-21",
+              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
+            },
+            {
+              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
+              "date": "2026-09-15",
+              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
+            },
+            {
+              "label": "Arbeitslosigkeit - August 2026",
+              "date": "2026-09-07",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Gesundheitsversorgung Oberengadin: Vereinbarungen bis 2029 genehmigt",
+          "url": "/de/schweiz-artikel/oberengadin-gesundheitswesen-samedan/",
+          "excerpt": "Die Zustimmung der elf Gemeinden sichert von 2027 bis 2029 fast 28,5 Millionen Franken für das Spital Samedan, Altersheime, Spitex und die Sanadura.",
+          "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "Spital Graubünden: 518 Millionen für 12 Jahre",
+          "url": "/de/schweiz-artikel/graubuenden-spital-erweiterung-500m/",
+          "excerpt": "Der neue Flügel des Kantonsspitals Graubünden wird Ende November 2026 nach Investitionen von 518 Millionen in Betrieb genommen. Operationssäle werden von 10 auf 13 erhöht.",
+          "date": "2026-08-18T19:56:19.062Z"
+        },
+        {
+          "title": "Spital Graubünden: 518 Millionen für neuen Flügel",
+          "url": "/de/schweiz-artikel/graubuenden-spital-erweiterung-2026/",
+          "excerpt": "Zwölf Baujahre gehen zu Ende. Das Kantonsspital Graubünden in Chur weiht die neue Struktur mit 518 Millionen Franken ein. Erhöhte Operationssäle, Umzug Ende November.",
+          "date": "2026-08-18T19:20:17.561Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Graubünden",
+          "url": "/de/schweiz-artikel/kindergarten-betreuung-graubuenden-kosten/",
+          "excerpt": "Betreuungsmöglichkeiten, einkommensberechnete Tarife und Kantonsbeiträge: Praktischer Leitfaden für Familien in Graubünden.",
+          "date": "2026-09-01T21:51:40.121Z"
+        },
+        {
+          "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
+          "url": "/de/schweiz-artikel/lamal-graubuenden-praemien-reduktion/",
+          "excerpt": "Erfahren Sie, wie die KVG-Krankenversicherung im Kanton Graubünden funktioniert, welche Franchisen Sie wählen und wie Sie auf kantonale Prämienverbilligungsbeiträge zugreifen können.",
+          "date": "2026-08-30T18:10:50.603Z"
+        },
+        {
+          "title": "Graubünden: Spitalfinanzen wieder auf Kurs",
+          "url": "/de/schweiz-artikel/finanzielle-erholung-graubuender-spitaeler/",
+          "excerpt": "Nach einem schwierigen Jahr 2024 verzeichnen die Bündner Spitäler im Jahr 2025 positive Ergebnisse. Hier ist die finanzielle Übersicht der wichtigsten Gesundheitseinrichtungen.",
+          "date": "2026-07-14T13:24:13.191Z"
+        },
+        {
+          "title": "Graubünden: Strafregister für Aufenthaltsbewilligungen",
+          "url": "/de/grenzgaenger-artikel/graubunden-aufenthaltsbewilligungen-2026/",
+          "excerpt": "Ab Mai 2026 müssen Antragsteller für eine Aufenthaltsbewilligung in Graubünden etwaige Vorstrafen oder laufende Strafverfahren angeben.",
+          "date": "2026-04-23T21:32:48.344Z"
+        },
+        {
+          "title": "Graubünden: Strengere Aufenthaltsbewilligungen nach Mafia-Infiltration in Roveredo",
+          "url": "/de/grenzgaenger-artikel/graubunden-verschartft-aufenthaltsbewilligungen-2026/",
+          "excerpt": "Neue Regeln für Aufenthaltsbewilligungen in Graubünden: Die Meldung von Vorstrafen und laufenden Verfahren wird obligatorisch.",
+          "date": "2026-04-25T16:21:51.853Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/graubuenden-gr/"
+        },
+        {
+          "label": "Stellenangebote in Graubünden",
+          "url": "/de/jobs-in-graubunden/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "GR",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Aux Grisons, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Italie, l’Autriche et le Liechtenstein : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand, italien et romanche ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "573,45 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 600 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "GR, région de primes 1",
+              "value": "valeur centrale 573,45 CHF par mois",
+              "detail": "de 499 à 660,10 CHF, 24 assureurs"
+            },
+            {
+              "label": "GR, région de primes 2",
+              "value": "valeur centrale 534,95 CHF par mois",
+              "detail": "de 464 à 613,90 CHF, 24 assureurs"
+            },
+            {
+              "label": "GR, région de primes 3",
+              "value": "valeur centrale 509,70 CHF par mois",
+              "detail": "de 426 à 574,30 CHF, 24 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "GR11215",
+              "value": "1 050 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR13809",
+              "value": "600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            },
+            {
+              "label": "GR16271",
+              "value": "600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.gr.ch/"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.gr.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit - September 2026",
+              "date": "2026-10-06",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026100601.aspx"
+            },
+            {
+              "label": "Mitgestalten – am ersten Patient:innen-Tag des Schmerzzentrums",
+              "date": "2026-09-24",
+              "url": "https://www.ksgr.ch/aktuelles/mitgestalten-am-ersten-patientinnen-tag-des-schmerzzentrums"
+            },
+            {
+              "label": "Finissage «Heilen ist Kunst ist Heilen» – und was dann?",
+              "date": "2026-09-21",
+              "url": "https://www.ksgr.ch/aktuelles/finissage-heilen-ist-kunst-ist-heilen-und-was-dann"
+            },
+            {
+              "label": "Nationale Woche gegen Food Waste: Dranbleiben macht den Unterschied",
+              "date": "2026-09-15",
+              "url": "https://www.ksgr.ch/aktuelles/nationale-woche-gegen-food-waste-dranbleiben-macht-den-unterschied"
+            },
+            {
+              "label": "Arbeitslosigkeit - August 2026",
+              "date": "2026-09-07",
+              "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Upper Engadine Healthcare : accords approuvés jusqu'en 2029",
+          "url": "/fr/articles-suisse/sante-haute-engadine-samedan/",
+          "excerpt": "Le vote des onze communes assure près de 28,5 millions de francs pour l’hôpital de Samedan, les maisons de retraite, Spitex et l’organisme Sanadura de 2027 à 2029.",
+          "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "Hôpital Grisons : 518 millions pour 12 ans",
+          "url": "/fr/articles-suisse/hopital-grisons-extension-500m/",
+          "excerpt": "La nouvelle aile de l'Hôpital cantonal des Grisons entre en service fin novembre 2026 après 518 millions investis. Les salles d'opération passent de 10 à 13.",
+          "date": "2026-08-18T19:56:19.062Z"
+        },
+        {
+          "title": "Hôpital Grisons : 518 millions pour une nouvelle aile",
+          "url": "/fr/articles-suisse/grisons-hopital-extension-2026/",
+          "excerpt": "Douze ans de chantier se terminent. L'hôpital cantonal des Grisons à Coire inaugure la nouvelle structure avec 518 millions de francs investis. Salles d'opération augmentées, déménagement fin novembre.",
+          "date": "2026-08-18T19:20:17.561Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton des Grisons",
+          "url": "/fr/articles-suisse/garderie-enfants-grisons-tarifs/",
+          "excerpt": "Options de garde, tarifs calculés sur le revenu et allocations cantonales : guide pratique pour les familles dans les Grisons.",
+          "date": "2026-09-01T21:51:40.121Z"
+        },
+        {
+          "title": "LAMal Grisons : primes, franchises et réduction",
+          "url": "/fr/articles-suisse/lamal-grisons-primes-reduction/",
+          "excerpt": "Découvrez comment fonctionne l'assurance maladie LAMal dans le canton des Grisons, quelles franchises choisir et comment accéder aux allocations cantonales de réduction des primes.",
+          "date": "2026-08-30T18:10:50.603Z"
+        },
+        {
+          "title": "Grisons : les finances des hôpitaux reviennent à l'actif",
+          "url": "/fr/articles-suisse/reprise-financiere-hopitaux-grisons/",
+          "excerpt": "Après une 2024 difficile, les nosocomes grisons enregistrent des résultats positifs en 2025. Voici l'aperçu financier des principaux établissements de santé.",
+          "date": "2026-07-14T13:24:13.191Z"
+        },
+        {
+          "title": "Grisons : autocertification pénale pour les permis de séjour",
+          "url": "/fr/articles-frontalier/grisons-permis-de-sejour-2026/",
+          "excerpt": "À partir de mai 2026, toute personne demandant un permis de séjour dans les Grisons devra déclarer d'éventuels antécédents pénaux ou procédures en cours.",
+          "date": "2026-04-23T21:32:48.344Z"
+        },
+        {
+          "title": "Grisons, contrôle renforcé sur les permis de séjour après l'infiltration mafieuse à Roveredo",
+          "url": "/fr/articles-frontalier/grisons-renforce-permis-de-sejour-2026/",
+          "excerpt": "Nouvelles règles pour les permis de séjour dans les Grisons : déclaration obligatoire des antécédents pénaux et des procédures en cours.",
+          "date": "2026-04-25T16:21:51.853Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi aux Grisons",
+          "url": "/fr/trouver-emploi-grisons/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}

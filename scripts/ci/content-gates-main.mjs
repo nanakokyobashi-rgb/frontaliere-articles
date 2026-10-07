@@ -165,6 +165,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
   'generator/tests/evergreen-irpef-secondo-scaglione-2026.test.mjs',
   'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
+  'generator/tests/evergreen-lamal-vs-ssn-decisione-refresh.test.mjs',
   'generator/tests/evergreen-mappa-fiscale-comuni-frontiera-refresh.test.mjs',
   'generator/tests/evergreen-naspi-disoccupazione-frontalieri-refresh.test.mjs',
   'generator/tests/evergreen-maternita-paternita-frontaliere-guida-refresh.test.mjs',
@@ -185,6 +186,12 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-telelavoro-frontalieri-ratifica-refresh.test.mjs',
   'generator/tests/evergreen-triad-refresh.test.mjs',
   'generator/tests/faq-locale-consistency.test.mjs',
+  // Censimento della trasformazione d'uscita delle traduzioni (#2311): passa
+  // ogni body italiano dal bilanciatore dei grassetti e pretende lo stesso
+  // numero di righe. Giudica una funzione, ma sul corpus reale: un articolo
+  // nuovo con una forma di Markdown non prevista lo rende rosso su `main` e
+  // su ogni branch, e allora deve aprire una issue, non fermare la coda.
+  'generator/tests/free-translate-exit-transform-structure.test.mjs',
   'generator/tests/frontaliere-sitemap-shadow.test.mjs',
   'generator/tests/it-microcopy-guard.test.mjs',
   'generator/tests/key-facts-specificity.test.mjs',

@@ -1,0 +1,547 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ti:carburanti",
+  "section": "canton-ti",
+  "canton": "TI",
+  "topic": "carburanti",
+  "updatedAt": "2026-10-07T06:57:59.693Z",
+  "contentHash": "bd879f5b4eb2b692277772f2afdb7624a46c45441e1f64f01fbe43eec3ee65ef",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-10-06T13:36:10.911Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-10-12T05:59:47.000Z"
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TI",
+      "topic": "carburanti",
+      "locale": "it",
+      "intro": "In Ticino, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con l’Italia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in italiano; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,028 CHF/l",
+          "note": "media regionale, 6 ottobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Svizzera",
+          "value": "2,313 CHF/l",
+          "note": "media regionale, 6 ottobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,028 CHF/l",
+              "detail": "media regionale: minimo 1,890 CHF/l, 168 stazioni rilevate",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,313 CHF/l",
+              "detail": "media regionale: minimo 2,130 CHF/l, 165 stazioni rilevate",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Benzina 95 — Italia",
+              "value": "2,049 EUR/l",
+              "detail": "media regionale: minimo 1,987 EUR/l, 304 stazioni rilevate",
+              "date": "2026-10-05T05:59:47.000Z"
+            },
+            {
+              "label": "Diesel — Italia",
+              "value": "2,251 EUR/l",
+              "detail": "media regionale: minimo 2,159 EUR/l, 303 stazioni rilevate",
+              "date": "2026-10-05T05:59:47.000Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data)",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Caro prezzi carburanti in Ticino: chiesta riduzione fiscale",
+          "url": "/articoli-frontaliere/carburanti-prezzi-tasse-ticino/",
+          "excerpt": "Presentata una mozione a Berna per alleggerire il carico fiscale su benzina, diesel e olio da riscaldamento di fronte a rincari storici.",
+          "date": "2026-09-23T00:36:17.679Z"
+        },
+        {
+          "title": "Benzina oltre 2€, il pieno svizzero non conviene più",
+          "url": "/articoli-frontaliere/benzina-confine-svizzera-agosto-2026/",
+          "excerpt": "Prezzi allineati tra Lombardia e Ticino: benzina a 2,01€ e gasolio a 2,14€. Sconto accise scaduto il 26 agosto.",
+          "date": "2026-08-26T07:06:02.859Z"
+        },
+        {
+          "title": "Nuove accise sui carburanti: come cambiano i prezzi in Ticino",
+          "url": "/articoli-frontaliere/nuove-accise-carburanti-2026/",
+          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Commissione della concorrenza indaga sul caro carburanti in Ticino",
+          "url": "/articoli-frontaliere/caro-carburanti-svizzera-indagine-comco/",
+          "excerpt": "Il consigliere Benoît Gaillard solleva il sospetto di intese sui prezzi della benzina dopo l’arrivo di Etzelpark a Bellinzona.",
+          "date": "2026-07-29T23:23:39.353Z"
+        },
+        {
+          "title": "Caro-carburanti: dove fare il pieno in Ticino",
+          "url": "/articoli-frontaliere/carburanti-ticino-confronto-2024/",
+          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici",
+          "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Prezzi Carburanti Ticino 2026 — Benzina e Diesel Aggiornati | Frontaliere Ticino",
+          "url": "/articoli-frontaliere/carburanti-ticino-aumento-prezzi/",
+          "excerpt": "Prezzi carburante in Ticino aggiornati 2026: rincari di +19 millesimi benzina e +46 millesimi diesel. Classifica distributori più convenienti e confronto con l'Italia per i frontalieri.",
+          "date": "2026-04-07T09:55:25.056Z"
+        },
+        {
+          "title": "Carburanti in rialzo: prezzo diesel oltre 2 euro in Ticino",
+          "url": "/articoli-frontaliere/carburanti-prezzo-rialzo-ticino/",
+          "excerpt": "Il prezzo di benzina e diesel aumenta, con il gasolio che supera i 2 euro. Ecco cosa sapere.",
+          "date": "2026-03-25T10:07:18.643Z"
+        },
+        {
+          "title": "Prezzo Diesel Ticino 2026 — Confronto Distributori Oggi | Frontaliere Ticino",
+          "url": "/articoli-frontaliere/diesel-aumento-prezzi-svizzera-2026/",
+          "excerpt": "Prezzo diesel in Ticino e Svizzera aggiornato 2026: CHF 2,10/litro, confronto con l'Italia, classifica distributori più convenienti e consigli per i frontalieri.",
+          "date": "2026-03-21T10:03:22.205Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Prezzo della benzina oggi",
+          "url": "/prezzi-benzina/oggi/"
+        },
+        {
+          "label": "Prezzo del diesel oggi",
+          "url": "/prezzi-diesel/oggi/"
+        },
+        {
+          "label": "Distributori svizzeri vicino al confine",
+          "url": "/prezzi-benzina/stazioni-svizzere/"
+        },
+        {
+          "label": "Statistiche dei prezzi al confine",
+          "url": "/statistiche/prezzi-benzina-confine/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "en": {
+      "canton": "TI",
+      "topic": "carburanti",
+      "locale": "en",
+      "intro": "In Ticino, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Italy: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in Italian; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.028 CHF/l",
+          "note": "regional average, 6 October 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Switzerland",
+          "value": "2.313 CHF/l",
+          "note": "regional average, 6 October 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.028 CHF/l",
+              "detail": "regional average: lowest 1.890 CHF/l, 168 stations surveyed",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.313 CHF/l",
+              "detail": "regional average: lowest 2.130 CHF/l, 165 stations surveyed",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Petrol 95 — Italy",
+              "value": "2.049 EUR/l",
+              "detail": "regional average: lowest 1.987 EUR/l, 304 stations surveyed",
+              "date": "2026-10-05T05:59:47.000Z"
+            },
+            {
+              "label": "Diesel — Italy",
+              "value": "2.251 EUR/l",
+              "detail": "regional average: lowest 2.159 EUR/l, 303 stations surveyed",
+              "date": "2026-10-05T05:59:47.000Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data)",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Expensive fuel prices in Ticino: tax reduction request",
+          "url": "/en/cross-border-articles/fuel-prices-taxes-ticino/",
+          "excerpt": "Motion filed in Bern to lighten the tax burden on gasoline, diesel and heating oil in the face of historic hikes.",
+          "date": "2026-09-23T00:36:17.679Z"
+        },
+        {
+          "title": "Petrol over €2, the Swiss full is no longer convenient",
+          "url": "/en/cross-border-articles/fuel-border-switzerland-august-2026/",
+          "excerpt": "Prices aligned between Lombardy and Ticino: petrol at €2.01 and diesel at €2.14. Excise discount expired on 26 August.",
+          "date": "2026-08-26T07:06:02.859Z"
+        },
+        {
+          "title": "New fuel excise duties: price changes in Ticino",
+          "url": "/en/cross-border-articles/new-fuel-taxes-2026/",
+          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Competition Commission investigates expensive fuels in Ticino",
+          "url": "/en/cross-border-articles/high-fuel-prices-switzerland-comco-investigation/",
+          "excerpt": "Councillor Benoît Gaillard raises suspicion of understandings on gasoline prices after Etzelpark's arrival in Bellinzona.",
+          "date": "2026-07-29T23:23:39.353Z"
+        },
+        {
+          "title": "Fuel price hike: where to fill up in Ticino",
+          "url": "/en/cross-border-articles/fuel-comparison-ticino-2024/",
+          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips",
+          "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Ticino Fuel Prices 2026 — Petrol and Diesel Live Rates | Frontaliere Ticino",
+          "url": "/en/cross-border-articles/ticino-fuel-prices-2026/",
+          "excerpt": "Live 2026 fuel prices in Ticino: +19 millesimi petrol and +46 millesimi diesel. Ranking of cheapest fuel stations and cross-border comparison with Italy for commuters.",
+          "date": "2026-04-07T09:55:25.056Z"
+        },
+        {
+          "title": "Fuel Prices on the Rise: Diesel Exceeds 2 Euros in Ticino",
+          "url": "/en/cross-border-articles/fuel-price-increase-ticino/",
+          "excerpt": "The price of gasoline and diesel is increasing, with diesel surpassing 2 euros. Here’s what you need to know.",
+          "date": "2026-03-25T10:07:18.643Z"
+        },
+        {
+          "title": "Diesel Price Ticino 2026 — Compare Swiss Fuel Stations Today | Frontaliere Ticino",
+          "url": "/en/cross-border-articles/diesel-price-increase-switzerland-2026/",
+          "excerpt": "Diesel price in Ticino and Switzerland updated 2026: CHF 2.10/liter, comparison with Italy, ranking of cheapest fuel stations and tips for cross-border workers.",
+          "date": "2026-03-21T10:03:22.205Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Petrol price today",
+          "url": "/en/gasoline-price-switzerland/today/"
+        },
+        {
+          "label": "Diesel price today",
+          "url": "/en/diesel-price-switzerland/today/"
+        },
+        {
+          "label": "Swiss filling stations near the border",
+          "url": "/en/diesel-price-switzerland/swiss-stations/"
+        },
+        {
+          "label": "Border fuel price statistics",
+          "url": "/en/statistics/border-fuel-prices/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "de": {
+      "canton": "TI",
+      "topic": "carburanti",
+      "locale": "de",
+      "intro": "Im Tessin sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Italien: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Italienisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.028 CHF/l",
+          "note": "regionaler Durchschnitt, 6. Oktober 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Schweiz",
+          "value": "2.313 CHF/l",
+          "note": "regionaler Durchschnitt, 6. Oktober 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.028 CHF/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.890 CHF/l, 168 erfasste Tankstellen",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.313 CHF/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.130 CHF/l, 165 erfasste Tankstellen",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Benzin 95 — Italien",
+              "value": "2.049 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.987 EUR/l, 304 erfasste Tankstellen",
+              "date": "2026-10-05T05:59:47.000Z"
+            },
+            {
+              "label": "Diesel — Italien",
+              "value": "2.251 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.159 EUR/l, 303 erfasste Tankstellen",
+              "date": "2026-10-05T05:59:47.000Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data)",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Teure Kraftstoffpreise im Tessin: Steuerermäßigung beantragt",
+          "url": "/de/grenzgaenger-artikel/treibstoffpreise-steuern-tessin/",
+          "excerpt": "In Bern wurde eine Motion eingebracht, um Benzin, Diesel und Heizöl angesichts historischer Preissteigerungen steuerlich zu entlasten.",
+          "date": "2026-09-23T00:36:17.679Z"
+        },
+        {
+          "title": "Benzin über 2 €, die Schweizer Tankfüllung lohnt sich nicht mehr",
+          "url": "/de/grenzgaenger-artikel/benzin-grenze-schweiz-august-2026/",
+          "excerpt": "Angepasste Preise zwischen der Lombardei und dem Tessin: Benzin für 2,01 € und Diesel für 2,14 €. Verbrauchsteuerrabatt ist am 26. August abgelaufen.",
+          "date": "2026-08-26T07:06:02.859Z"
+        },
+        {
+          "title": "Neue Kraftstoffsteuern: Preise im Tessin ändern sich",
+          "url": "/de/grenzgaenger-artikel/neue-kraftstoffsteuern-2026/",
+          "excerpt": "Ab dem 2. Mai 2026 steigen die Steuern auf Benzin und LPG, während Diesel leicht sinkt. So ändern sich die Kraftstoffkosten für Grenzgänger.",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Wettbewerbskommission untersucht teure Treibstoffe im Tessin",
+          "url": "/de/grenzgaenger-artikel/hohe-kraftstoffpreise-schweiz-comco-untersuchung/",
+          "excerpt": "Stadtrat Benoît Gaillard wirft nach der Ankunft des Etzelparks in Bellinzona den Verdacht auf eine Verständigung über die Benzinpreise auf.",
+          "date": "2026-07-29T23:23:39.353Z"
+        },
+        {
+          "title": "Hohe Kraftstoffpreise: Wo tanken in der Schweiz?",
+          "url": "/de/grenzgaenger-artikel/kraftstoffvergleich-tessin-2024/",
+          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps",
+          "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Kraftstoffpreise Tessin 2026 — Benzin und Diesel Live | Frontaliere Ticino",
+          "url": "/de/grenzgaenger-artikel/kraftstoffpreise-tessin-2026/",
+          "excerpt": "Aktuelle Kraftstoffpreise Tessin 2026: +19 Rappen Benzin und +46 Rappen Diesel. Ranking der günstigsten Tankstellen und Preisvergleich mit Italien für Grenzgänger.",
+          "date": "2026-04-07T09:55:25.056Z"
+        },
+        {
+          "title": "Kraftstoffpreise steigen: Dieselpreis über 2 Euro im Tessin",
+          "url": "/de/grenzgaenger-artikel/kraftstoffpreisanstieg-tessin/",
+          "excerpt": "Die Preise für Benzin und Diesel steigen, wobei der Diesel die 2-Euro-Marke überschreitet. Hier ist, was Sie wissen müssen.",
+          "date": "2026-03-25T10:07:18.643Z"
+        },
+        {
+          "title": "Dieselpreis Schweiz 2026 — Aktuelle Preise Tessin (CHF 2,10/L) | Frontaliere Ticino",
+          "url": "/de/grenzgaenger-artikel/diesel-preiserhohung-schweiz-2026/",
+          "excerpt": "Aktueller Dieselpreis Schweiz 2026: CHF 2,10/Liter. Tankstellen-Vergleich Tessin, Ranking der günstigsten Tankstellen und Spartipps für Grenzgänger — März–April 2026.",
+          "date": "2026-03-21T10:03:22.205Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Benzinpreis heute",
+          "url": "/de/benzinpreis-schweiz/heute/"
+        },
+        {
+          "label": "Dieselpreis heute",
+          "url": "/de/dieselpreis-schweiz/heute/"
+        },
+        {
+          "label": "Schweizer Tankstellen in Grenznähe",
+          "url": "/de/benzinpreis-schweiz/schweizer-tankstellen/"
+        },
+        {
+          "label": "Statistik der Spritpreise an der Grenze",
+          "url": "/de/statistiken/spritpreise-grenze/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    },
+    "fr": {
+      "canton": "TI",
+      "topic": "carburanti",
+      "locale": "fr",
+      "intro": "Au Tessin, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Italie : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en italien ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Suisse",
+          "value": "2,028 CHF/l",
+          "note": "moyenne régionale, 6 octobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        },
+        {
+          "label": "Diesel — Suisse",
+          "value": "2,313 CHF/l",
+          "note": "moyenne régionale, 6 octobre 2026",
+          "sourceName": "TCS Benzinpreis-Radar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Suisse",
+              "value": "2,028 CHF/l",
+              "detail": "moyenne régionale : prix le plus bas 1,890 CHF/l, 168 stations relevées",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,313 CHF/l",
+              "detail": "moyenne régionale : prix le plus bas 2,130 CHF/l, 165 stations relevées",
+              "date": "2026-10-06T13:35:55.338Z"
+            },
+            {
+              "label": "Essence 95 — Italie",
+              "value": "2,049 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,987 EUR/l, 304 stations relevées",
+              "date": "2026-10-05T05:59:47.000Z"
+            },
+            {
+              "label": "Diesel — Italie",
+              "value": "2,251 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,159 EUR/l, 303 stations relevées",
+              "date": "2026-10-05T05:59:47.000Z"
+            }
+          ],
+          "sourceName": "TCS Benzinpreis-Radar; MIMIT Osservaprezzi carburanti (open data)",
+          "updatedAt": "2026-10-06T13:36:10.911Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Cher prix des carburants au Tessin : demande de réduction d'impôt",
+          "url": "/fr/articles-frontalier/carburants-prix-taxes-ticino/",
+          "excerpt": "Une motion a été déposée à Berne pour alléger la charge fiscale sur l'essence, le diesel et l'huile de chauffage face à des hausses historiques.",
+          "date": "2026-09-23T00:36:17.679Z"
+        },
+        {
+          "title": "Essence plus de 2 € , le plein suisse ne convient plus",
+          "url": "/fr/articles-frontalier/carburant-frontiaire-suisse-aout-2026/",
+          "excerpt": "Prix alignés entre la Lombardie et le Tessin : essence à 2,01 € et gasoil à 2,14 € . Remise accises expirée le 26 août.",
+          "date": "2026-08-26T07:06:02.859Z"
+        },
+        {
+          "title": "Nouvelles taxes sur les carburants: les prix changent en Ticino",
+          "url": "/fr/articles-frontalier/nouvelles-taxes-sur-les-carburants-2026/",
+          "excerpt": "Depuis le 2 mai 2026, les taxes sur l'essence et le GPL ont augmenté, tandis que le diesel baisse légèrement. Voici comment change le coût du carburant pour les frontaliers.",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Commission de la concurrence enquête sur le cher carburant au Tessin",
+          "url": "/fr/articles-frontalier/prix-eleves-carburants-suisse-enquete-comco/",
+          "excerpt": "Le conseiller Benoît Gaillard soupçonne des ententes sur les prix de l'essence après l’arrivée d'Etzelpark à Bellinzone.",
+          "date": "2026-07-29T23:23:39.353Z"
+        },
+        {
+          "title": "Coût des carburants : où faire le plein en Ticino",
+          "url": "/fr/articles-frontalier/comparaison-carburants-tessin-2024/",
+          "excerpt": "Comparez les prix de l'essence et du diesel en Ticino et économisez avec nos conseils pratiques",
+          "date": "2026-04-27T09:12:47.619Z"
+        },
+        {
+          "title": "Prix Carburants Tessin 2026 — Essence et Diesel en Direct | Frontaliere Ticino",
+          "url": "/fr/articles-frontalier/prix-carburants-tessin-2026/",
+          "excerpt": "Prix carburants Tessin 2026 : +19 millièmes essence et +46 millièmes diesel. Classement des stations-service les moins chères et comparatif avec l'Italie pour les frontaliers.",
+          "date": "2026-04-07T09:55:25.056Z"
+        },
+        {
+          "title": "Carburants en hausse : le diesel dépasse 2 euros au Tessin",
+          "url": "/fr/articles-frontalier/augmentation-prix-carburant-ticino/",
+          "excerpt": "Les prix de l'essence et du diesel augmentent, le gazole franchissant les 2 euros. Voici ce qu'il faut savoir.",
+          "date": "2026-03-25T10:07:18.643Z"
+        },
+        {
+          "title": "Prix Diesel Tessin 2026 — Comparatif Stations-Service Aujourd'hui | Frontaliere Ticino",
+          "url": "/fr/articles-frontalier/augmentation-prix-diesel-suisse-2026/",
+          "excerpt": "Prix du diesel au Tessin et en Suisse 2026 : CHF 2,10/litre. Comparaison avec l'Italie, classement des stations les moins chères et astuces pour frontaliers.",
+          "date": "2026-03-21T10:03:22.205Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Prix de l’essence aujourd’hui",
+          "url": "/fr/prix-essence-suisse/aujourd-hui/"
+        },
+        {
+          "label": "Prix du diesel aujourd’hui",
+          "url": "/fr/prix-gasoil-suisse/aujourd-hui/"
+        },
+        {
+          "label": "Stations-service suisses près de la frontière",
+          "url": "/fr/prix-essence-suisse/stations-suisses/"
+        },
+        {
+          "label": "Statistiques des prix à la frontière",
+          "url": "/fr/statistiques/prix-essence-frontiere/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        }
+      ],
+      "updatedAt": "2026-10-07T06:57:59.693Z"
+    }
+  }
+}
