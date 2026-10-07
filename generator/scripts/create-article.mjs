@@ -16328,7 +16328,7 @@ async function main() {
       console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
       // Il pool news ha consumato il budget senza produrre un articolo. Questo
       // e' un differimento dichiarato, non un return normale: senza il report
-      // e l'exit condiviso, il fail-closed di main().then() vede ancora
+      // e l'exit condiviso, il fail-closed del controllo di ritorno vede ancora
       // `status=running` e trasforma una condizione prevista in
       // `no-article-undeclared-exit`.
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
