@@ -1,0 +1,543 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sh:mobilita",
+  "section": "canton-sh",
+  "canton": "SH",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:11:40.832Z",
+  "contentHash": "b39b2c9a41f1da6e2f18f50fb326cbb651ab816687cbaef735418df9a98484f0",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SH",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Sciaffusa, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Bargen SH – Tengen, settimana conclusa: 5 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Bargen SH – Tengen",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/bargen-sh-tengen/oggi/"
+            },
+            {
+              "label": "Blumberg – Beggingen",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/blumberg-beggingen/oggi/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-busingerstrasse/oggi/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, L202",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-l202/oggi/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-siedlerstrasse/oggi/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/oggi/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-stemmer/oggi/"
+            },
+            {
+              "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/dorflingen-gailingen-am-hochrhein-hinterdorf/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Schulung für Rollator- und Rollstuhlfahrende: Sicher mit dem Bus unterwegs",
+              "date": "2026-10-05T08:23:31.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/schulung+fuer+rollator-+und+rollstuhlfahrende_+sicher+mit+dem+bus+unterwegs"
+            },
+            {
+              "label": "Bürgerentscheid zum Fahrradparkhaus am Bahnhof am 29. November",
+              "date": "2026-08-06T13:28:29.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti Sciaffusa: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-sciaffusa-tariffe/",
+          "excerpt": "Guida completa agli abbonamenti per i trasporti pubblici nel cantone Sciaffusa: comunità tariffaria, abbonamenti mensili e annuali, metà-prezzo, GA e sconti per studenti.",
+          "date": "2026-09-02T18:05:58.641Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Germania",
+          "url": "/traffico-dogane/sciaffusa-germania/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "en": {
+      "canton": "SH",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of Schaffhausen, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Bargen SH – Tengen, week ending 5 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Bargen SH – Tengen",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/bargen-sh-tengen/today/"
+            },
+            {
+              "label": "Blumberg – Beggingen",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/blumberg-beggingen/today/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-busingerstrasse/today/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, L202",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-l202/today/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-siedlerstrasse/today/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/today/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-stemmer/today/"
+            },
+            {
+              "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/dorflingen-gailingen-am-hochrhein-hinterdorf/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Schulung für Rollator- und Rollstuhlfahrende: Sicher mit dem Bus unterwegs",
+              "date": "2026-10-05T08:23:31.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/schulung+fuer+rollator-+und+rollstuhlfahrende_+sicher+mit+dem+bus+unterwegs"
+            },
+            {
+              "label": "Bürgerentscheid zum Fahrradparkhaus am Bahnhof am 29. November",
+              "date": "2026-08-06T13:28:29.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Schaffhausen transport subscriptions: zones and rates",
+          "url": "/en/swiss-articles/schaffhausen-transport-passes-zones-fares/",
+          "excerpt": "Complete guide to public transport subscriptions in the canton of Schaffhausen: fare community, monthly and annual subscriptions, half-price, GA and student discounts.",
+          "date": "2026-09-02T18:05:58.641Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards Germany",
+          "url": "/en/border-wait/sciaffusa-germania/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "de": {
+      "canton": "SH",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Kanton Schaffhausen bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Bargen SH – Tengen, Woche bis 5. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Bargen SH – Tengen",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/bargen-sh-tengen/heute/"
+            },
+            {
+              "label": "Blumberg – Beggingen",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/blumberg-beggingen/heute/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-busingerstrasse/heute/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, L202",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-l202/heute/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-siedlerstrasse/heute/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/heute/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-stemmer/heute/"
+            },
+            {
+              "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/dorflingen-gailingen-am-hochrhein-hinterdorf/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Schulung für Rollator- und Rollstuhlfahrende: Sicher mit dem Bus unterwegs",
+              "date": "2026-10-05T08:23:31.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/schulung+fuer+rollator-+und+rollstuhlfahrende_+sicher+mit+dem+bus+unterwegs"
+            },
+            {
+              "label": "Bürgerentscheid zum Fahrradparkhaus am Bahnhof am 29. November",
+              "date": "2026-08-06T13:28:29.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Verkehrstickets Schaffhausen: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/schaffhausen-oeffentliche-verkehrsmittel-abos-zonen/",
+          "excerpt": "Vollständiger Abo-Leitfaden für den öffentlichen Verkehr im Kanton Schaffhausen: Tarifgemeinschaft, Monats- und Jahresabonnements, Halbtax, GA und Studentenrabatte.",
+          "date": "2026-09-02T18:05:58.641Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Deutschland",
+          "url": "/de/wartezeit-grenze/sciaffusa-germania/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "fr": {
+      "canton": "SH",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Schaffhouse, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Bargen SH – Tengen, semaine jusqu’au 5 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Bargen SH – Tengen",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/bargen-sh-tengen/aujourd-hui/"
+            },
+            {
+              "label": "Blumberg – Beggingen",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/blumberg-beggingen/aujourd-hui/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-busingerstrasse/aujourd-hui/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, L202",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-l202/aujourd-hui/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-siedlerstrasse/aujourd-hui/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/aujourd-hui/"
+            },
+            {
+              "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-stemmer/aujourd-hui/"
+            },
+            {
+              "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/dorflingen-gailingen-am-hochrhein-hinterdorf/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Schulung für Rollator- und Rollstuhlfahrende: Sicher mit dem Bus unterwegs",
+              "date": "2026-10-05T08:23:31.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/schulung+fuer+rollator-+und+rollstuhlfahrende_+sicher+mit+dem+bus+unterwegs"
+            },
+            {
+              "label": "Bürgerentscheid zum Fahrradparkhaus am Bahnhof am 29. November",
+              "date": "2026-08-06T13:28:29.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports Schaffhouse : zones et tarifs",
+          "url": "/fr/articles-suisse/schaffhouse-transports-publics-abonnements-zones/",
+          "excerpt": "Guide complet des abonnements pour les transports publics dans le canton de Schaffhouse : communauté tarifaire, abonnements mensuels et annuels, demi-tarif, GA et réductions étudiantes.",
+          "date": "2026-09-02T18:05:58.641Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers Allemagne",
+          "url": "/fr/temps-attente-douane/sciaffusa-germania/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    }
+  }
+}
