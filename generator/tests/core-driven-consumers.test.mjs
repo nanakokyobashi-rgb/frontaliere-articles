@@ -14,6 +14,7 @@
  *      di famiglia, errore esplicito dove la sua superficie non esiste ancora
  *      (API: P7, scritture di create-article: P6, shard Pages: mai).
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
@@ -29,6 +30,7 @@ import {
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 import {
   API_SECTIONS,
+  CORPUS_ACTIVE_CANTON_CODES,
   CORPUS_SECTIONS,
   KIND_FLOOR_POLICY,
   assertActiveSectionsPublishable,
@@ -61,15 +63,24 @@ import { SECTIONS as RECONCILE_SECTIONS } from '../../scripts/reconcile-article-
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const ACTIVE = ARTICLE_SECTION_CORE_LIST.map((core) => core.section);
+const HISTORICAL_ACTIVE = ARTICLE_SECTION_CORE_LIST.filter((core) => core.kind !== 'canton');
+const ACTIVE_CANTON_SECTIONS = ARTICLE_SECTION_CORE_LIST.filter((core) => core.kind === 'canton');
+const INACTIVE_CANTON = Object.values(ARTICLE_SECTION_CORE_ALL).find(
+  (core) => core.kind === 'canton' && !ACTIVE.includes(core.section),
+);
 const CANTON = ARTICLE_SECTION_CORE_ALL['canton-ti'];
 
 // ── 1. Con la lista attiva di oggi, la derivazione e' la vecchia copia ────────
 
-test('la lista attiva e\' quella delle due sezioni storiche (nessun cantone acceso)', () => {
-  assert.deepEqual(ACTIVE, ['frontaliere', 'svizzera']);
-  assert.ok(CANTON, 'il core deve conoscere canton-ti (inattiva) per provarne la regola');
+test('la lista attiva deriva dal profilo corpus e conserva le due sezioni storiche', () => {
+  assert.deepEqual(ACTIVE, ARTICLE_SECTION_CORE_LIST.map((core) => core.section));
+  assert.deepEqual(
+    ACTIVE_CANTON_SECTIONS.map((core) => core.canton).sort(),
+    [...CORPUS_ACTIVE_CANTON_CODES].sort(),
+  );
+  assert.ok(CANTON, 'il core deve conoscere canton-ti per provarne la regola');
   assert.deepEqual(CORPUS_SECTIONS.map((s) => s.section), ACTIVE);
-  assert.deepEqual(API_SECTIONS.map((s) => s.section), ACTIVE);
+  assert.deepEqual(API_SECTIONS.map((s) => s.section), HISTORICAL_ACTIVE.map((s) => s.section));
 });
 
 test('i nomi pubblicati restano quelli storici', () => {
@@ -99,58 +110,67 @@ test('le superfici sorgente derivate coincidono con le copie che sostituiscono',
 });
 
 test('build-sitemap: SECTION_PATHS derivati dal core = la vecchia tabella', () => {
-  assert.deepEqual(JSON.parse(JSON.stringify(SECTION_PATHS)), {
-    frontaliere: {
-      it: '/articoli-frontaliere/', en: '/en/cross-border-articles/',
-      de: '/de/grenzgaenger-artikel/', fr: '/fr/articles-frontalier/',
-    },
-    svizzera: {
-      it: '/articoli-svizzera/', en: '/en/swiss-articles/', de: '/de/schweiz-artikel/', fr: '/fr/articles-suisse/',
-    },
+  const expected = Object.fromEntries(ARTICLE_SECTION_CORE_LIST.map((core) => [
+    core.section,
+    Object.fromEntries(Object.entries(core.indexSlug).map(([locale, slug]) => [
+      locale,
+      locale === 'it' ? `/${slug}/` : `/${locale}/${slug}/`,
+    ])),
+  ]));
+  assert.deepEqual(JSON.parse(JSON.stringify(SECTION_PATHS)), expected);
+  assert.deepEqual(SECTION_PATHS.frontaliere, {
+    it: '/articoli-frontaliere/', en: '/en/cross-border-articles/',
+    de: '/de/grenzgaenger-artikel/', fr: '/fr/articles-frontalier/',
+  });
+  assert.deepEqual(SECTION_PATHS.svizzera, {
+    it: '/articoli-svizzera/', en: '/en/swiss-articles/',
+    de: '/de/schweiz-artikel/', fr: '/fr/articles-suisse/',
   });
 });
 
 test('corpus-floors: le mappe per sezione derivate = le vecchie tabelle', () => {
-  assert.deepEqual({ ...SECTION_BODY_DIRS }, {
-    frontaliere: path.join('content', 'blog-body', 'it'),
-    svizzera: path.join('content', 'blog-body-ch', 'it'),
-  });
-  assert.deepEqual({ ...SECTION_COUNTERS }, { frontaliere: 'articles', svizzera: 'swissArticles' });
-  assert.deepEqual({ ...SECTION_SITEMAPS }, { frontaliere: 'sitemap-blog.xml', svizzera: 'sitemap-blog-ch.xml' });
-  assert.deepEqual({ ...SECTION_REGISTRY_FILES }, {
-    frontaliere: path.join('content', 'blog-articles-data.ts'),
-    svizzera: path.join('content', 'swiss-articles-data.ts'),
-  });
-  assert.deepEqual({ ...SECTION_META_PREFIXES }, { frontaliere: 'blog-meta-', svizzera: 'blog-meta-ch-' });
+  assert.deepEqual({ ...SECTION_BODY_DIRS }, Object.fromEntries(
+    CORPUS_SECTIONS.map((s) => [s.section, path.join(s.bodyDir, 'it')]),
+  ));
+  assert.deepEqual({ ...SECTION_COUNTERS }, Object.fromEntries(
+    API_SECTIONS.map((s) => [s.section, s.api.counter]),
+  ));
+  assert.deepEqual({ ...SECTION_SITEMAPS }, Object.fromEntries(
+    API_SECTIONS.map((s) => [s.section, s.api.sitemap]),
+  ));
+  assert.deepEqual({ ...SECTION_REGISTRY_FILES }, Object.fromEntries(
+    CORPUS_SECTIONS.map((s) => [s.section, s.registryFile]),
+  ));
+  assert.deepEqual({ ...SECTION_META_PREFIXES }, Object.fromEntries(
+    CORPUS_SECTIONS.map((s) => [s.section, `${path.basename(s.metaPrefix)}-`]),
+  ));
 });
 
 test('le radici dei corpi e gli shard da riconciliare vengono dal core', () => {
-  assert.deepEqual(LOCALE_BODY_ROOTS.map((r) => [r.rel, r.name]), [
-    ['content/blog-body', 'frontaliere'],
-    ['content/blog-body-ch', 'svizzera'],
-  ]);
-  assert.deepEqual(RECONCILE_SECTIONS, [
-    { section: 'frontaliere', shard: 'articolifrontaliere', slugsKey: 'blog' },
-    { section: 'svizzera', shard: 'articolisvizzera', slugsKey: 'swiss' },
-  ]);
+  assert.deepEqual(LOCALE_BODY_ROOTS.map((r) => [r.rel, r.name]), CORPUS_SECTIONS.map((s) => [s.bodyDir, s.section]));
+  assert.deepEqual(RECONCILE_SECTIONS, API_SECTIONS.filter((s) => s.shardKey).map((s) => ({
+    section: s.section,
+    shard: s.shardKey,
+    slugsKey: s.api.slugsKey,
+  })));
   assert.deepEqual(Object.keys(SURFACE_SECTIONS), ACTIVE);
 });
 
 test('rebase: gli argomenti per sezione derivati = l\'elenco che generate-article.yml scriveva a mano', () => {
-  assert.deepEqual(sectionRebaseArgs(SURFACE_SECTIONS), [
-    'data/article-source-urls.json', 'data/article-source-quotas.json',
-    'data/swiss-article-source-urls.json', 'data/swiss-article-source-quotas.json',
-    ...[
-      'content/blog-articles-data.ts', 'content/routerBlogData.ts', 'content/blogArticleIds.ts',
-      'content/blog-meta-it.ts', 'content/blog-meta-en.ts', 'content/blog-meta-de.ts', 'content/blog-meta-fr.ts',
-      'content/seo/seo-blog-5.ts',
-      'content/swiss-articles-data.ts', 'content/routerSwissData.ts',
-      'content/blog-meta-ch-it.ts', 'content/blog-meta-ch-en.ts', 'content/blog-meta-ch-de.ts', 'content/blog-meta-ch-fr.ts',
-      'content/seo/seo-blog-ch.ts',
-    ].flatMap((p) => ['--merge-registry', p]),
-    ...['content/blog-body/', 'data/blog-articles/', 'content/blog-body-ch/', 'data/swiss-articles/']
-      .flatMap((p) => ['--take-theirs', p]),
-  ]);
+  const args = sectionRebaseArgs(SURFACE_SECTIONS);
+  for (const cfg of Object.values(SURFACE_SECTIONS)) {
+    for (const pathName of [cfg.sourceLedger, cfg.sourceQuotaFile, ...(cfg.stateBookkeeping || []), ...(cfg.hubDataFiles || [])]) {
+      assert.ok(args.includes(pathName), `bookkeeping mancante: ${pathName}`);
+    }
+    for (const pathName of [cfg.registryFile, cfg.slugDataFile, ...(cfg.idUnionFile ? [cfg.idUnionFile] : []), ...cfg.metaFiles, cfg.seoWriteFile]) {
+      assert.ok(args.includes(pathName), `registro mancante: ${pathName}`);
+    }
+    for (const pathName of [`${cfg.bodyDir}/`, `${cfg.sidecarDir}/`]) {
+      assert.ok(args.includes(pathName), `body/sidecar mancante: ${pathName}`);
+    }
+  }
+  assert.ok(args.includes('data/article-source-urls.json'));
+  assert.ok(args.includes('data/swiss-article-source-urls.json'));
 });
 
 test('rebase: una sezione senza una superficie di scrittura e\' un errore, non un buco', () => {
@@ -167,21 +187,25 @@ test('rebase: generate-article.yml passa --section-surfaces e non ricopia i path
 });
 
 test('fast-publish: regex dei corpi, sezione e shard dal core', () => {
-  assert.equal(bodyRegex(), '^content/(blog-body|blog-body-ch)/[a-z]{2}/.+\\.ts$');
+  assert.match(bodyRegex(), /^\^content\/\(blog-body\|blog-body-ch/);
   const re = new RegExp(bodyRegex());
   assert.ok(re.test('content/blog-body-ch/de/un-articolo.ts'));
   assert.ok(!re.test('content/blog-meta-it.ts'));
   assert.equal(sectionOf('content/blog-body/it/a.ts'), 'frontaliere');
   assert.equal(sectionOf('content/blog-body-ch/fr/b.ts'), 'svizzera');
-  assert.throws(() => sectionOf('content/blog-body-canton-ti/it/c.ts'), /nessuna sezione attiva/);
+  if (ACTIVE.includes('canton-ti')) assert.equal(sectionOf('content/blog-body-canton-ti/it/c.ts'), 'canton-ti');
+  else assert.throws(() => sectionOf('content/blog-body-canton-ti/it/c.ts'), /nessuna sezione attiva/);
+  if (INACTIVE_CANTON) {
+    assert.throws(() => sectionOf(`${INACTIVE_CANTON.bodyDir}/it/c.ts`), /nessuna sezione attiva/);
+  }
   assert.equal(shardOf('frontaliere'), 'articolifrontaliere');
   assert.equal(shardOf('svizzera'), 'articolisvizzera');
-  assert.throws(() => shardOf('canton-ti'), /non attiva/);
+  assert.throws(() => shardOf('canton-ti'), /non attiva|non ha uno shard Pages/);
   assert.throws(() => shardOf('svizera'), /non attiva/);
 });
 
 test('fast-publish: una sezione cantonale attiva non ripiega sullo shard di un\'altra', () => {
-  const withCanton = [...ARTICLE_SECTION_CORE_LIST, CANTON];
+  const withCanton = [...HISTORICAL_ACTIVE, CANTON];
   assert.equal(sectionOf('content/blog-body-canton-ti/it/c.ts', withCanton), 'canton-ti');
   assert.match(bodyRegex(withCanton), /\|blog-body-canton-ti\)/);
   assert.throws(() => shardOf('canton-ti', withCanton), /non ha uno shard Pages.*R2.*P7/s);
@@ -294,10 +318,20 @@ test('locale completeness: una radice di famiglia nuova non scatta i pavimenti a
 test('publish-api: osserva corpus-sections e deriva dal core le cartelle dei corpi del preflight', () => {
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   assert.match(wf, /^      - 'scripts\/lib\/corpus-sections\.mjs'$/m);
+  assert.match(wf, /^      - 'generator\/data\/canton-sections\.json'$/m);
   assert.match(wf, /^      - 'generator\/scripts\/lib\/corpus-paths\.mjs'$/m);
-  assert.match(wf, /import\('\.\/scripts\/lib\/corpus-sections\.mjs'\)/);
+  const bootstrapImport = wf.indexOf("await import('./host/cantonSectionsBootstrap.mjs')");
+  const corpusSectionsImport = wf.indexOf("await import('./scripts/lib/corpus-sections.mjs')");
+  assert.ok(bootstrapImport >= 0, 'publish-api preflight deve caricare il bootstrap D22');
+  assert.ok(corpusSectionsImport > bootstrapImport, 'publish-api preflight deve leggere le sezioni dopo il bootstrap D22');
   assert.match(wf, /git diff --name-only "\$BEFORE" HEAD -- "\$\{body_dir_list\[@\]\}"/);
   assert.doesNotMatch(wf, /-- content\/blog-body content\/blog-body-ch/);
+});
+
+test('i preflight dei corpi caricano il bootstrap D22 prima delle sezioni', () => {
+  const bootstrapImport = /import ['"]\.\.\/\.\.\/host\/cantonSectionsBootstrap\.mjs['"]/;
+  assert.match(readFileSync(path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs'), 'utf8'), bootstrapImport);
+  assert.match(readFileSync(path.join(ROOT, 'scripts/ci/check-blog-locale-completeness.mjs'), 'utf8'), bootstrapImport);
 });
 
 test('RSS: con la lista attiva di oggi nessun profilo cantonale viene chiesto all\'engine', () => {

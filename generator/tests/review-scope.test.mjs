@@ -36,6 +36,39 @@ test('la prosa che inizia con nessuno, 0 o none è un finding', () => {
   assert.equal(importantFindings(body).length, 3);
 });
 
+test('la forma con ancora di posizione senza punteggiatura è un finding, come per il gate', () => {
+  // Il gate (`REDFLAG_IMPORTANT_RE`) tiene rosse queste tre righe. Il parser le
+  // scartava perché cercava la punteggiatura dopo la severità: il follow-up
+  // fuori diff non nasceva e la corsia body-only contava zero finding di codice.
+  const body = [
+    '## Findings (Important: 3, Nit: 0)',
+    'scripts/ci/review-gate.mjs:L10: 🔴 Important manca il controllo sul token.',
+    '- `scripts/ci/feeds.mjs:L20`: 🔴 **Important** 0 feed vengono rigenerati.',
+    'PR body:L5: 🔴 Important nessuno stato dichiarato per la voce.',
+  ].join('\n');
+  const findings = importantFindings(body);
+  assert.equal(findings.length, 3);
+  assert.deepEqual(findings.map((finding) => finding.citations.map((citation) => citation.path)), [
+    ['scripts/ci/review-gate.mjs'],
+    ['scripts/ci/feeds.mjs'],
+    [],
+  ]);
+  // Il conteggio resta escluso solo nella forma che lo può esprimere.
+  assert.equal(importantFindings('🔴 Important: 0').length, 0);
+});
+
+test('un finding ancorato in elenco numerato chiude il testo del precedente', () => {
+  const body = [
+    '1. PR body:L5: 🔴 Important la voce non dichiara uno stato.',
+    '   dettaglio della prima.',
+    '2. PR body:L9: 🔴 Important il claim non ha una misura.',
+  ].join('\n');
+  const findings = importantFindings(body);
+  assert.equal(findings.length, 2);
+  assert.match(findings[0].text, /dettaglio della prima/);
+  assert.doesNotMatch(findings[0].text, /il claim non ha una misura/);
+});
+
 test('non tronca il verdetto nell\'Adversarial check', () => {
   const body = [
     '## Findings (Important: 0, Nit: 0)',

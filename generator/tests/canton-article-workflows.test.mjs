@@ -21,6 +21,7 @@
  *      dispatchare una catena. Sono proprieta' dei trigger, cioe' righe che
  *      GitHub interpreta prima che esista uno step.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';

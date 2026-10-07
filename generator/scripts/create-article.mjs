@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import '../../host/cantonSectionsBootstrap.mjs';
 /**
  * create-article.mjs — Generate a complete blog article using the configured LLM.
  *
@@ -171,7 +172,8 @@ import {
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
-import { AI_SEARCH_PROMPT_BLOCK_IT, findOrphanedKeyFactsList } from './lib/ai-search-template.mjs';
+import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
@@ -271,10 +273,12 @@ import {
 } from './lib/blog-image-registry.mjs';
 import {
   evaluateSourceCopy,
+  getSourceCopyMode,
   logSourceCopyVerdict,
   SOURCE_COPY_MAX_RETRIES,
   SOURCE_COPY_MAX_QUOTE_WORDS,
   SOURCE_COPY_OVERLAP_THRESHOLD,
+  sourceCopyModeBlocks,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
@@ -297,6 +301,7 @@ import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/cl
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
+import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 // Issue #313 — la disposizione di una cascata svuotata (differire vs gridare).
@@ -15300,6 +15305,12 @@ async function main() {
   // Prima di ogni lettura o scrittura: una sezione spenta non tocca niente ed
   // esce 0 con un marcatore che il workflow (P8) e i log possono contare.
   if (IS_CANTON) {
+    if (!Object.prototype.hasOwnProperty.call(activeCorpusCoreMap(), SECTION_NAME)) {
+      console.error(`${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME} reason=not-active-in-corpus-profile`);
+      finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `${CANTON_SECTION_DISABLED_MARKER} section=${SECTION_NAME}`] });
+      await exitAfterFlush(0);
+      return;
+    }
     const gate = resolveCantonSectionGate(SECTION_NAME);
     if (gate.unknown.length > 0) {
       console.error(`  ⚠️ ${CANTON_SECTIONS_ENABLED_ENV}: token non riconosciuti ignorati: ${gate.unknown.join(', ')}`);
@@ -16530,6 +16541,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
   let sourceCopyRetries = 0;
+  const sourceCopyMode = getSourceCopyMode();
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Cost accounting for the rejection ledger. Counted here — at the top of
@@ -16783,8 +16795,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       data.content.it,
       { locale: 'it' },
     );
-    logSourceCopyVerdict(data.id, sourceCopyVerdict);
-    if (!sourceCopyVerdict.safe) {
+    logSourceCopyVerdict(data.id, sourceCopyVerdict, console.error, sourceCopyMode);
+    if (!sourceCopyVerdict.safe && sourceCopyModeBlocks(sourceCopyMode)) {
       lastSourceCopyErrors = `Massimo overlap rilevato: ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}). `
         + 'Riformula il corpo senza copiare la fonte.';
       if (sourceCopyRetries < SOURCE_COPY_MAX_RETRIES && attempt < maxAttempts) {
@@ -17626,7 +17638,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   const sourceCopyFinalSource = sourceCopyInputText(pageContent);
   const sourceCopyFinalVerdicts = ['it', 'en', 'de', 'fr'].map((locale) => {
     const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
-    logSourceCopyVerdict(data.id, verdict);
+    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode);
     return verdict;
   });
   const worstSourceCopy = sourceCopyFinalVerdicts.reduce(
@@ -17635,10 +17647,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   );
   console.error(
     `[source-copy] article=${data.id} max_overlap=${worstSourceCopy.maxWords}`
-      + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} locales=it,en,de,fr`,
+      + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} mode=${sourceCopyMode} locales=it,en,de,fr`,
   );
   const unsafeSourceCopy = sourceCopyFinalVerdicts.find((verdict) => !verdict.safe);
-  if (unsafeSourceCopy) {
+  if (unsafeSourceCopy && sourceCopyModeBlocks(sourceCopyMode)) {
     throw new SourceCopyError(
       `Anti-copia fallita dopo le trasformazioni finali (${unsafeSourceCopy.locale}): `
         + `overlap massimo ${unsafeSourceCopy.maxWords} parole consecutive`,

@@ -794,18 +794,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/info/economia/swiss-steel-ristruttura-e-taglia-in-germania--4132557.html": {
-      "section": "frontaliere",
-      "ts": 1791148788078
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/dal-castello-sforzesco-coop-racconta-un-territorio-fatto-di-prodotti-imprese-e-comunita/2697754": {
-      "section": "frontaliere",
-      "ts": 1791149227711
-    },
-    "frontaliere::https://www.laregione.ch/culture/spettacoli/1954390/digger-l-incompreso-capolavoro-di-inarritu": {
-      "section": "frontaliere",
-      "ts": 1791157908824
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
       "section": "frontaliere",
       "ts": 1791173353121
@@ -1005,6 +993,34 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1955088/lavori-a-breno-otto-notti-di-sbarramenti-all-incrocio-inferiore": {
       "section": "frontaliere",
       "ts": 1791321480193
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-a-materia-le-offerte-di-lavoro-di-questa-settimana-in-provincia-di-varese-8/2700241": {
+      "section": "frontaliere",
+      "ts": 1791326568954
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1954599/mirante-avanti-con-ticino-lavoro-punta-a-un-seggio-in-governo": {
+      "section": "frontaliere",
+      "ts": 1791326608729
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955129/pompieri-all-ex-lati-doppio-passo-avanti-referendum-permettendo": {
+      "section": "frontaliere",
+      "ts": 1791327753721
+    },
+    "frontaliere::https://comozero.it/cronaca/provincia-di-como-schianto-tra-auto-una-persona-incastrata-tra-le-lamiere-in-ospedale": {
+      "section": "frontaliere",
+      "ts": 1791327814281
+    },
+    "frontaliere::https://www.rsi.ch/s/4140344": {
+      "section": "frontaliere",
+      "ts": 1791335342343
+    },
+    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1955095/con-i-profumi-d-autunno-e-di-nuovo-tempo-di-bellinzona-in-zucca": {
+      "section": "frontaliere",
+      "ts": 1791335755433
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/protezione-civile-la-cultura-della-sicurezza-entra-in-279-scuole-lombarde-37-gli-istituti-coinvolti-nel-varesotto/2699836": {
+      "section": "frontaliere",
+      "ts": 1791336821753
     }
   }
 }

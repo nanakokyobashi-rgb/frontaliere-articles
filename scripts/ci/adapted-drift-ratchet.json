@@ -28,7 +28,6 @@
     "AGENTS.md",
     "FOLLOWUP.md",
     "ISSUES.md",
-    "REVIEW.md",
     "generator/scripts/batch-add-faq-to-articles.mjs",
     "generator/scripts/create-article.mjs",
     "generator/scripts/lib/ai-models.mjs",
@@ -54,11 +53,8 @@
     "host/shared/literalMarkdown.ts",
     "host/shared/seoContentTokens.ts",
     "scripts/ci/auto-merge-eval.mjs",
-    "scripts/ci/collect-followup-batch.mjs",
     "scripts/ci/followup-drainer.mjs",
-    "scripts/ci/followup-resolution-match.mjs",
     "scripts/ci/gate-minted-followups.mjs",
-    "scripts/ci/lessons-harvester-registry.json",
     "scripts/ci/lib/constants.mjs",
     "scripts/ci/lib/machine-broken.mjs",
     "scripts/ci/lib/vitestCheck.mjs",
@@ -67,12 +63,10 @@
     "scripts/ci/needs-human-prepass.mjs",
     "scripts/ci/pr-autorebase.mjs",
     "scripts/ci/reconcile-followups.mjs",
-    "scripts/ci/report-validate-dist-failure.mjs",
     "scripts/ci/review-gate.mjs",
     "scripts/ci/review-test-policy.mjs",
     "scripts/ci/unwedge-pages-deploy-queue.mjs",
     "scripts/lib/cdn-asset-existence.mjs",
-    "scripts/lib/classify-issue.mjs",
     "scripts/lib/push-article-shard-incremental.sh"
   ]
 }

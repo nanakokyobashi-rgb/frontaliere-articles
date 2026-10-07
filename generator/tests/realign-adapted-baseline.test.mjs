@@ -22,10 +22,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import {
   STALE_DECLARATION_TITLE,
   EXIT_PARTIAL,
+  convergedModeDecision,
+  convertConvergedEntry,
   baselineNewerThanDeclaration,
   collectDeclarations,
   declarationCandidateLines,
@@ -37,6 +40,11 @@ import {
   realignDecision,
   verifyInitResult,
 } from '../../scripts/ci/realign-adapted-baseline.mjs';
+import {
+  EXIT_INVALID_MANIFEST,
+  writeManifestWithGuard,
+} from '../../scripts/ci/lib/manifest-entry-rules.mjs';
+import { pruneRatchetFile } from '../../scripts/ci/lib/adapted-drift.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = '.github/workflows/transport-identical-twins-realign.yml';
@@ -98,6 +106,86 @@ test('tre prove vere, una PR del sito: riallinea sulla coppia di hash valutata',
   const decision = await evaluate(declaration([101]), io);
   assert.equal(decision.realign, true, decision.reason);
   assert.deepEqual(decision.expected, { site: 'site-new', corpus: 'corpus-new' });
+});
+
+test('convergenza sicura: la voce puo\' diventare `identical` e perde la reason', () => {
+  const before = entry({ reason: 'adattamento storico', adaptationIssue: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/2337' });
+  const decision = convergedModeDecision({
+    entry: before,
+    expected: { site: 'same', corpus: 'same' },
+    couplings: [],
+  });
+  assert.equal(decision.convert, true);
+  assert.equal(decision.held, false);
+  assert.equal(decision.status, 'converged-to-identical');
+  assert.equal(
+    convergedModeDecision({ entry: before, expected: { site: 'different', corpus: 'same' } }).convert,
+    false,
+    'una convergenza assente non deve cambiare il percorso storico',
+  );
+
+  const after = convertConvergedEntry({
+    ...before,
+    baseline: { site: 'same', corpus: 'same', alignedAt: '2026-10-07' },
+  });
+  assert.equal(after.mode, 'identical');
+  assert.equal(after.reason, undefined);
+  assert.equal(after.adaptationIssue, undefined);
+  assert.equal(after.baseline.site, after.baseline.corpus);
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'converged-ratchet-'));
+  try {
+    const ratchetPath = path.join(dir, RATCHET_REL);
+    fs.mkdirSync(path.dirname(ratchetPath), { recursive: true });
+    fs.writeFileSync(ratchetPath, JSON.stringify({ paths: [REL, 'scripts/ci/altro.mjs'] }));
+    assert.deepEqual(pruneRatchetFile(dir, decision.status === 'converged-to-identical' ? [REL] : []), [REL]);
+    assert.deepEqual(JSON.parse(fs.readFileSync(ratchetPath, 'utf8')).paths, ['scripts/ci/altro.mjs']);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('convergenza con accoppiamento bloccante: serve una decisione sulla mode e la voce resta trattenuta', () => {
+  const before = entry({ path: 'host/tests/esempio.golden.json', reason: 'adattamento storico' });
+  const snapshot = structuredClone(before);
+  const decision = convergedModeDecision({
+    entry: before,
+    expected: { site: 'same', corpus: 'same' },
+    couplings: [{ path: 'host/shared/consumer.ts', mode: 'adapted' }],
+  });
+  assert.equal(decision.convert, false);
+  assert.equal(decision.held, true);
+  assert.equal(decision.status, 'converged-needs-mode');
+  assert.match(decision.reason, /convergente: serve la decisione sulla `mode`/);
+  assert.deepEqual(before, snapshot, 'una convergenza trattenuta non deve mutare la voce del manifest');
+});
+
+test('guardia writer: un manifest reso invalido non viene scritto e restituisce il codice che non pusha', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'manifest-guard-'));
+  try {
+    const manifestPath = path.join(dir, 'loop-sync-manifest.json');
+    const original = {
+      files: [entry({ reason: 'adattamento storico' })],
+    };
+    const originalBytes = Buffer.from(`${JSON.stringify(original, null, 2)}\n`);
+    fs.writeFileSync(manifestPath, originalBytes);
+    const invalid = {
+      files: [entry({ baseline: { site: 'same', corpus: 'same' }, reason: undefined })],
+    };
+
+    const result = writeManifestWithGuard({
+      manifestPath,
+      manifest: invalid,
+      originalBytes,
+      log: () => {},
+    });
+
+    assert.equal(result.ok, false);
+    assert.equal(result.exitCode, EXIT_INVALID_MANIFEST);
+    assert.deepEqual(fs.readFileSync(manifestPath), originalBytes);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('catena di due PR del sito dichiarate, entrambe mergiate: riallinea', async () => {

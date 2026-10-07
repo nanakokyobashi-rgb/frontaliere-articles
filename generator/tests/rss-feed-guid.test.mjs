@@ -11,6 +11,7 @@
  * never renamed, so the guid is now built from it instead — `<link>` still
  * tracks the current (renameable) slug, since that one has to resolve.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';

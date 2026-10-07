@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * corpus-floors.mjs — i pavimenti anti-troncamento, DERIVATI dal corpus.
  *
@@ -264,6 +266,10 @@ export function floorPolicyOf(section) {
  */
 export function isNewFamilySection(root, section) {
   if (floorPolicyOf(section) !== 'family') return false;
+  // Una superficie sola non è una sezione nuova vuota: è una coppia corrotta.
+  // Fallire qui, prima di decidere se saltare la sezione, evita che i consumer
+  // leggano o scrivano un registry senza la mappa slug (o viceversa).
+  assertFamilySourcePair(root, section);
   const source = sourceOf(section);
   return (
     !fs.existsSync(path.join(root, source.registryFile)) &&

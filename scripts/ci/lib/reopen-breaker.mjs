@@ -202,9 +202,9 @@ export function decideReopen({
 }) {
   // Un solo posto in cui i tre rossi omonimi diventano un'etichetta: se questa
   // scelta si duplicasse fra i rami, un ramo resterebbe indietro in silenzio.
-  const gateCause = reviewSkippedByGuard
-    ? 'review-gate-skipped'
-    : reviewAborted ? 'review-gate-aborted' : 'review-gate';
+  const gateCause = reviewAborted
+    ? 'review-gate-aborted'
+    : reviewSkippedByGuard ? 'review-gate-skipped' : 'review-gate';
   const stuckRed = failureNotAttributable === 'red-main' || failureNotAttributable === 'stale';
   const carried = prior && prior.fingerprint === fingerprint ? prior.count : 0;
 
@@ -231,7 +231,7 @@ export function decideReopen({
       action: 'skip-failing-check',
       count: carried,
       cause: reviewGateFailure ? gateCause : 'tests',
-      reason: reviewGateFailure && reviewSkippedByGuard
+      reason: reviewGateFailure && reviewSkippedByGuard && !reviewAborted
         ? `il check richiesto \`${VITEST_CHECK_NAME}\` è FAILURE sul solo step del `
           + `review gate, ma su quella run la review NON è girata: l'ha saltata il `
           + `\`Re-review guard\` (nessun code cambiato dall'ultima \`## LGTM\`) e il `

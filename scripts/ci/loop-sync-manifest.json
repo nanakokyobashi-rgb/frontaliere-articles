@@ -134,6 +134,14 @@
       {
         "prefix": "data/evergreen-verifications.json",
         "reason": "Registro delle verifiche evergreen scritto dal generatore (#2096), che oggi contiene solo `{}`: il censimento lo trova 'byte-identico' a `packages/articles/engine/shared/article-reviewed-by.json` del sito perche' due JSON vuoti hanno lo stesso sha del blob, non perche' siano lo stesso file. Il sito non ha nessun gemello di questo registro e non c'e' una fix che scende o risale. Se il registro diventa codice condiviso col sito, la riga va tolta e il file registrato."
+      },
+      {
+        "prefix": "services/seo/imageObjectLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/imageObjectLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
+      },
+      {
+        "prefix": "services/seo/organizationLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/organizationLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
       }
     ]
   },
@@ -362,9 +370,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9f50ff6b8bdb5b52",
-        "corpus": "9f50ff6b8bdb5b52",
-        "alignedAt": "2026-09-26"
+        "site": "d57065848ac1a2b0",
+        "corpus": "d57065848ac1a2b0",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -463,10 +471,10 @@
       "path": "scripts/ci/report-validate-dist-failure.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "6b96e6fcbb2942d1",
+        "site": "9d395b08c46db9b2",
         "corpus": "f128bfdc2aa3243e",
-        "alignedAt": "2026-09-26",
-        "forcedAt": "2026-09-26T11:35:00.000Z"
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:44:22.620Z"
       },
       "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto."
     },
@@ -535,9 +543,10 @@
       "mode": "adapted",
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla; `commandReferent()` ora accetta anche file senza estensione e directory, cioe' il contratto adattato del follow-up #8067. Aggiornata la SOLA baseline `corpus`: il lato `site` e `alignedAt` restano al 2026-09-13 perche' il sito si e' mosso per conto suo da allora e quel drift non l'ha riconciliato nessuno — riscriverlo qui lo cancellerebbe dal report senza che nessuno lo abbia guardato.",
       "baseline": {
-        "site": "2fc97767d9b96296",
-        "corpus": "e4d3ee34ecc957f8",
-        "alignedAt": "2026-09-13"
+        "site": "9d02fce29db5e79d",
+        "corpus": "29609a6b75d08f0d",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:28.281Z"
       }
     },
     {
@@ -562,12 +571,12 @@
     },
     {
       "path": "scripts/ci/followup-has-candidates.mjs",
-      "mode": "identical",
-      "reason": "Gate no-op invocato per nome da collect-followup-batch.mjs, stessa classe di is-followup-fix-pr.mjs: assente nel corpus e inghiottito da runGate. Importa bulletState da scripts/lib/pr-body-sections-check.mjs e isReviewerBot da scripts/ci/lib/constants.mjs, entrambi gia' presenti nel corpus.",
+      "mode": "adapted",
+      "reason": "Il sito conserva la logica generale di audit dei rinvii per decisione (decisionDeferralSpecificity): decisioni vaghe restano candidati finche' non hanno motivo e prossimo passo concreti. Il corpus mantiene isManagedReview perche' il suo scripts/ci/lib/constants.mjs e i workflow/test includono l'identita' e il fallback Codex marcato; il sito usa isReviewerBot per il proprio contratto di review. Questa differenza resta intenzionale.",
       "baseline": {
-        "site": "6e925df5c6641f7c",
-        "corpus": "6e925df5c6641f7c",
-        "alignedAt": "2026-09-11"
+        "site": "88ce559e743b5143",
+        "corpus": "1dcb22df125cc3e0",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -594,9 +603,9 @@
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "67a3c95f72f9029f",
-        "corpus": "67a3c95f72f9029f",
-        "alignedAt": "2026-08-07"
+        "site": "5f9932099a50149a",
+        "corpus": "5f9932099a50149a",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -631,9 +640,9 @@
       "path": "scripts/ci/pr-contribution-fingerprint.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "566902d2f27a3f4c",
-        "corpus": "566902d2f27a3f4c",
-        "alignedAt": "2026-08-07"
+        "site": "185c2a177882f683",
+        "corpus": "185c2a177882f683",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -709,9 +718,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "ae9d697695dc1ee7",
-        "corpus": "ae9d697695dc1ee7",
-        "alignedAt": "2026-10-05"
+        "site": "f135c767512bc891",
+        "corpus": "f135c767512bc891",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -738,9 +747,9 @@
       "path": "scripts/lib/pr-body-closes-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "217cfab9469cfe03",
-        "corpus": "217cfab9469cfe03",
-        "alignedAt": "2026-08-07"
+        "site": "9d0fa856b688ef1a",
+        "corpus": "9d0fa856b688ef1a",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -946,6 +955,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/run-listing-window.mjs",
+      "mode": "identical",
+      "reason": "Finestra `created` per gli elenchi di run filtrati per branch (`createdSince`, `createdSinceFilter`, `createdSinceQuery`, `newestFirst`): modulo senza import, copiato byte per byte dal sito. E' registrato PRIMA del suo importatore: `scripts/ci/close-recovered-failure-issues.mjs` e' `identical` e sul sito lo importa dalla PR 12016, e il gate del sito sugli import dei gemelli identici rifiuta un importatore il cui modulo non e' dichiarato qui (il trasporto porterebbe l'importatore senza il modulo: ERR_MODULE_NOT_FOUND, caso della issue 1890). `generator/tests/run-listing-window.test.mjs` ne prova il comportamento in questo repository.",
+      "baseline": {
+        "site": "55e66ea9b5ef172e",
+        "corpus": "55e66ea9b5ef172e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
       "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito. Il gemello e' lo stesso path sul sito; per questo la copia legacy degli observer non puo' puntare qui: e' dichiarata in `scope.outOfScope` con la sua ragione (valerielinc-ops/frontaliere-si-o-no#7483).",
@@ -1010,10 +1029,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "3a28a8c91ab5671b",
+        "site": "f7f1b2d248169079",
         "corpus": "6880a0776c0ab697",
         "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T00:27:33.002Z"
+        "forcedAt": "2026-10-06T23:54:42.602Z"
       }
     },
     {
@@ -1068,12 +1087,12 @@
     },
     {
       "path": "scripts/ci/lib/reopen-breaker.mjs",
-      "mode": "identical",
-      "reason": "Precondizione + circuit breaker del close+reopen di pr-autorebase (valerielinc-ops/frontaliere-si-o-no#5914). Registrata contestualmente allo script che la importa: e' una dipendenza NUOVA introdotta da quella PR e non censita qui, quindi una discesa drift-repair del solo pr-autorebase.mjs — che il manifest sorveglia file per file — avrebbe portato l'import senza il modulo e rotto l'autorebase con ERR_MODULE_NOT_FOUND. E' la stessa forma del punto cieco di loop-scripts-closure.test.mjs. Nessuna stringa e' cablata: il nome del check arriva da lib/constants.mjs, che qui e' adapted, cosi' il file resta identical e il messaggio resta corretto su entrambi i repo.",
+      "mode": "adapted",
+      "reason": "La logica generale di precondizione e breaker, inclusi stuck-red e le distinzioni review-skipped/review-aborted, segue il sito. Il corpus mantiene decideNeedsHumanPass e il ramo needs-human-pass perche' scripts/ci/pr-autorebase.mjs e i test corpus lo usano per la passata unica sulle PR parcheggiate; il sito ha rimosso quel veto con #9030. Il corpus conserva inoltre i propri messaggi e nomi di review adattati.",
       "baseline": {
-        "site": "3e9607e06d32673c",
-        "corpus": "3e9607e06d32673c",
-        "alignedAt": "2026-09-05"
+        "site": "d379326b6a9b5446",
+        "corpus": "7c334ed5ba569ac1",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -1110,9 +1129,10 @@
       "mode": "adapted",
       "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci. RIALLINEATO 2026-09-02 (corpus-ahead, issue #722): due aggiunte locali dopo la baseline, entrambe `route: 'none'` come `crawler-transient`, nessuna presente sul sito (verificato su raw.githubusercontent.com/valerielinc-ops/frontaliere-si-o-no@main). (1) categoria `backlog` (nanako#28 punto 6, nanako#40): la label vince su qualunque categoria decisa dal titolo perche' una issue-contenitore puo' nominare 'publish' o 'engine' nel corpo senza essere quel guasto; prima l'unico modo di escluderla era `fu-parked`, un uso improprio della label (significa 'parcheggiata dopo troppi tentativi', non 'non e' lavoro per un agente'). (2) assorbimento di `needs-human` (issue #649): se il triage instrada comunque un'issue che porta gia' quella label, il route normale brucerebbe un run del fixer su qualcosa che `needs-human-sweep.yml` ha gia' giudicato non risolvibile in automatico — osservato sul digest dello sweep stesso, rientrato in `agent:fix` lo stesso giorno. Non e' un miglioramento del meccanismo da proporre al sito: entrambe le label (`backlog`, `needs-human`) e i workflow che le gestiscono (`needs-human-sweep.yml`) sono topologia di QUESTO loop, che il sito non ha. RIALLINEATO 2026-09-11 (corpus-ahead, issue #1294): esporta anche il predicato locale usato da `triage-sweep.mjs`, mantenendo la decisione delle label fuori da copie inline.",
       "baseline": {
-        "site": "04d09fd104293724",
-        "corpus": "aa6c19b96f5b3cbb",
-        "alignedAt": "2026-09-11"
+        "site": "e7d86d8bb43b6c33",
+        "corpus": "8152d132bdc14074",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:30.031Z"
       }
     },
     {
@@ -1390,10 +1410,10 @@
       "mode": "adapted",
       "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): i due lati usano contratti DIVERSI per il marker di triage, ciascuno coerente con il prompt di `post-merge-followup.yml` del proprio repo (sito: riga `Created/updated:`; qui: `Follow-up item: FU-…`, bucket giornaliero, skip anti-nipote), e quella differenza resta per scelta. Audit dei commit solo-corpus dal 2026-09-10: gia' sul sito #1589, #1593 e #1822; portato con valerielinc-ops/frontaliere-si-o-no#10288 FU-009 di #1785 (uno zero si attesta solo con una riga di esito fuori da recinti e citazioni; la review del sito ha aggiunto la chiusura dei recinti alla CommonMark e le intestazioni ancorate a fine riga, riapplicate qui nella stessa PR con i test in `followup-marker-attestation.test.mjs`); non applicabili per contratto #1383, #1642, #1703 e #1783(a); osservabilita' senza caso osservato #1375, #1386, #1399 e #1783(c). I commit gemelli (#1572, #1581, #1718, #1390, #1943, #1951) sono gia' su entrambi i lati. Baseline come `--init --only --force` sui due hash di oggi.",
       "baseline": {
-        "site": "1a31e2baab9eceec",
-        "corpus": "494b4d89a67c0746",
-        "alignedAt": "2026-09-29",
-        "forcedAt": "2026-09-29T11:05:39.916Z"
+        "site": "e95de573ea7eac19",
+        "corpus": "e55a806fce7e1d86",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:30.205Z"
       }
     },
     {
@@ -1442,9 +1462,10 @@
       "mode": "adapted",
       "reason": "Registro delle decisioni del lessons-harvester: stesso schema del sito (parseLessonsRegistry nel gemello identical harvest-agent-lessons.mjs, sito #10225), ma voci diverse per costruzione, perche' ogni repo registra i propri cluster e le proprie PR. Si corregge lo schema nel sito, le voci in ciascun repo.",
       "baseline": {
-        "site": "5d68789d78ab1bcd",
-        "corpus": "68fb354dfe1ef885",
-        "alignedAt": "2026-09-28"
+        "site": "e3e9e7e9844bca7c",
+        "corpus": "f8415f541c3a95a0",
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:19:30.315Z"
       }
     },
     {
@@ -1490,9 +1511,9 @@
       "path": "scripts/ci/parked-pr-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "698fc51ff42c1b5b",
-        "corpus": "698fc51ff42c1b5b",
-        "alignedAt": "2026-08-08"
+        "site": "b8346885aa501baf",
+        "corpus": "b8346885aa501baf",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1962,9 +1983,9 @@
       "mode": "identical",
       "reason": "Client GraphQL Cloudflare Analytics. RIALLINEATO il 2026-08-14: il ritardo dichiarato qui e' stato chiuso copiando il sito, e i due lati ora coincidono byte a byte. Cronaca, perche' la classe si ripete: dal 2026-08-02 al 2026-08-14 il blob qui e' rimasto quello del trasporto (`valerielinc-ops@be6b31d5`) mentre il sito aggiungeva `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY` (2026-08-05). La divergenza era PRE-ESISTENTE alla registrazione della baseline (`baseline.site != baseline.corpus` gia' al 2026-08-09), quindi nessuno dei due lati si muoveva piu' e nessun evento l'avrebbe mai chiusa: `undeclared-drift` era un allarme permanente, non un incidente. `adapted` sarebbe stato falso — non c'e' nessun adattamento, solo ritardo — e infatti la riparazione giusta era copiare, non ri-dichiarare.",
       "baseline": {
-        "site": "4e3a87aedeb3b4c0",
-        "corpus": "4e3a87aedeb3b4c0",
-        "alignedAt": "2026-08-14"
+        "site": "52a8b40da564cfcc",
+        "corpus": "52a8b40da564cfcc",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2254,9 +2275,9 @@
       "sitePath": "scripts/lib/ai-search-template.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d9cd0305649921d0",
-        "corpus": "d9cd0305649921d0",
-        "alignedAt": "2026-08-09"
+        "site": "674ba7bd2445738b",
+        "corpus": "674ba7bd2445738b",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2349,9 +2370,9 @@
       "sitePath": "scripts/lib/border-wait-ranking-content.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "bee339da19623d4b",
-        "corpus": "bee339da19623d4b",
-        "alignedAt": "2026-10-05"
+        "site": "768528db03d8860e",
+        "corpus": "768528db03d8860e",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2522,8 +2543,8 @@
       "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "261595c0ccfc778b",
-        "alignedAt": "2026-09-12"
+        "corpus": "f7849427cf4d01c7",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2740,11 +2761,12 @@
     {
       "path": "generator/scripts/lib/events-digest-content.mjs",
       "sitePath": "scripts/lib/events-digest-content.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il comportamento del digest segue il sito, inclusi digest per cantone e fallback dei titoli localizzati. L'import di `hasUsableContentText` resta però dal locale `events-utils.mjs`, che nel corpus è un gemello adapted e ne riesporta il predicato insieme alla propria pipeline di traduzione; non esiste qui il modulo autonomo del sito da importare senza rompere il grafo.",
       "baseline": {
-        "site": "976cd7fdedd9a2ec",
-        "corpus": "976cd7fdedd9a2ec",
-        "alignedAt": "2026-08-09"
+        "site": "4ebf4c3eeaf78382",
+        "corpus": "0574d23d16c50bd9",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2915,8 +2937,8 @@
       "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "d27fde4ea91a493a",
-        "alignedAt": "2026-09-12"
+        "corpus": "66cbb05cae7bad72",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3277,6 +3299,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/translation-sentinels.mjs",
+      "mode": "corpus-only",
+      "reason": "Registro condiviso delle sentinelle protette usate dal generatore corpus per classificare, mascherare e ripristinare token di traduzione. Esiste solo qui perché il sito non importa questo modulo e il suo percorso di traduzione ha già la propria implementazione locale.",
+      "baseline": {
+        "site": null,
+        "corpus": "554067ca6635298f",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "generator/scripts/lib/exhaustion-disposition.mjs",
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
       "mode": "identical",
@@ -3302,9 +3334,9 @@
       "sitePath": "data/authors.ts",
       "mode": "identical",
       "baseline": {
-        "site": "0f89e0a3464c7e48",
-        "corpus": "0f89e0a3464c7e48",
-        "alignedAt": "2026-10-04"
+        "site": "a4e70e5bedf3dbf3",
+        "corpus": "a4e70e5bedf3dbf3",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3403,8 +3435,8 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "4e2b0a541c32ed70",
-        "corpus": "4e2b0a541c32ed70",
+        "site": "642ce32dbd0422f3",
+        "corpus": "642ce32dbd0422f3",
         "alignedAt": "2026-10-06"
       }
     },
@@ -3467,9 +3499,9 @@
       "sitePath": "build-plugins/shared/inlineJsonScript.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2d1b8c01016ef1d3",
-        "corpus": "2d1b8c01016ef1d3",
-        "alignedAt": "2026-08-09"
+        "site": "f1652b861b452480",
+        "corpus": "f1652b861b452480",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3499,9 +3531,9 @@
       "sitePath": "build-plugins/shared/railGutters.ts",
       "mode": "identical",
       "baseline": {
-        "site": "1b55f084ebc648f8",
-        "corpus": "1b55f084ebc648f8",
-        "alignedAt": "2026-09-28"
+        "site": "28740c7dfd69dbe6",
+        "corpus": "28740c7dfd69dbe6",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3597,6 +3629,16 @@
       }
     },
     {
+      "path": "host/cantonSectionsBootstrap.mjs",
+      "mode": "corpus-only",
+      "reason": "Bootstrap host D22 che legge `generator/data/canton-sections.json` e configura nel core l'insieme delle sezioni cantonali attive prima di ogni entrypoint del corpus che usa l'engine. Esiste solo qui perche' lo stato di attivazione appartiene al corpus e il sito mantiene `ACTIVE_CANTON_CODES` vuoto.",
+      "baseline": {
+        "site": null,
+        "corpus": "ea9a64d9aa024410",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "host/spaBundleResolver.ts",
       "sitePath": "build-plugins/spaBundleResolver.ts",
       "mode": "identical",
@@ -3641,9 +3683,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "3cdd32148bd86613",
-        "corpus": "3cdd32148bd86613",
-        "alignedAt": "2026-10-05"
+        "site": "77084b29001782fc",
+        "corpus": "77084b29001782fc",
+        "alignedAt": "2026-10-06"
       },
       "couplingSnapshot": [
         {
@@ -4156,8 +4198,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0a4362f52320c8a4",
-        "corpus": "0a4362f52320c8a4",
+        "site": "79f193dcc2bdd1ff",
+        "corpus": "79f193dcc2bdd1ff",
         "alignedAt": "2026-10-06"
       }
     },
@@ -4167,8 +4209,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "1549937f99791b26",
-        "corpus": "1549937f99791b26",
+        "site": "67134f0f415d5083",
+        "corpus": "67134f0f415d5083",
         "alignedAt": "2026-10-06"
       }
     },
@@ -4213,9 +4255,9 @@
       "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
       "mode": "identical",
       "baseline": {
-        "site": "96884d14000988cd",
-        "corpus": "96884d14000988cd",
-        "alignedAt": "2026-10-04"
+        "site": "6dd809048c5aadcf",
+        "corpus": "6dd809048c5aadcf",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4253,9 +4295,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0b80c7dee45fa550",
-        "corpus": "0b80c7dee45fa550",
-        "alignedAt": "2026-10-05"
+        "site": "adc6f92b284d1b2c",
+        "corpus": "adc6f92b284d1b2c",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -4274,7 +4316,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "26b3015b0219cf50",
+        "corpus": "96be75827f4f9777",
         "alignedAt": "2026-10-01"
       }
     },
@@ -4588,6 +4630,16 @@
         "site": null,
         "corpus": "78e3fb29d3a367e9",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/manifest-entry-rules.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica delle regole di forma delle voci del manifest e della guardia di scrittura condivisa dai writer automatici (issue #2337). Il test di scope e gli script del ciclo la usano; non esiste sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "31e85d1c7e1590d0",
+        "alignedAt": "2026-10-07"
       }
     },
     {

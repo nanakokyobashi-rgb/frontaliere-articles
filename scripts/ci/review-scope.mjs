@@ -27,7 +27,12 @@ const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 // Stesso margine del writer condiviso (`MAX_BODY_LEN`): il tetto API e' 65536.
 const MAX_FOLLOWUP_BODY_LEN = 60000;
 const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:cjs|css|html|js|json|md|mjs|sh|ts|tsx|txt|toml|yaml|yml|jsx))(?:[:#]L?\d+(?:[-–]\d+)?)?/giu;
-const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]\s*/u;
+// Serve solo a LOCALIZZARE il marker su una riga che il gate condiviso
+// (`REDFLAG_IMPORTANT_RE`) ha gia' riconosciuto, mai a decidere se la riga e'
+// un finding. La punteggiatura e' facoltativa e catturata: la forma con ancora
+// di posizione (`path:L<n>: 🔴 Important testo`) non la porta, e una regex
+// locale che la pretendeva scartava proprio i finding che il gate tiene rossi.
+const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}(\s*[:—-])?\s*/u;
 const FINDING_MARKER_RE = /🔴|🟡\s*\*{0,2}\s*Nit\s*\*{0,2}(?:[:—-]|(?=\s+\S))|🟣\s*\*{0,2}\s*Pre-existing\s*\*{0,2}(?:[:—-]|(?=\s+\S))|❓\s*q\s*:/gu;
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 // Anchor di un finding il cui unico riferimento e' la descrizione della PR.
@@ -163,7 +168,7 @@ function isFindingStart(line, marker) {
   if (!marker) return false;
   const prefix = String(line).slice(0, marker.index)
     .trim()
-    .replace(/^(?:[-*+>]\s*)+/u, '')
+    .replace(/^(?:(?:[-*+>]|\d+[.)])\s*)+/u, '')
     .replace(/^(?:[_*~`]\s*)+/u, '')
     .trim();
   if (!prefix || extractFileCitations(prefix).length > 0) return true;
@@ -176,7 +181,12 @@ function importantFindingLine(line) {
   resetImportantRegex();
   if (!REDFLAG_IMPORTANT_RE.test(line)) return false;
   const marker = IMPORTANT_MARKER_RE.exec(line);
-  if (!marker) return false;
+  // Il gate ha riconosciuto la riga. Senza punteggiatura dopo la severita' e'
+  // la forma con ancora di posizione, che ha testo per costruzione: il
+  // conteggio esiste solo come `🔴 Important: 0`, quindi qui non c'e' nulla da
+  // escludere. Scartarla lascerebbe il gate rosso su un finding che nessun
+  // consumatore di questo parser vede.
+  if (!marker || !marker[1]) return true;
   // Una riga di conteggio come `🔴 Important: 0` non e' un finding.
   return !ZERO_IMPORTANT_RE.test(line.slice(marker.index + marker[0].length).trim());
 }

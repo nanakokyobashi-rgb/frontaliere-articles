@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * article-surfaces.mjs — «su quali file vive un articolo?», in un posto solo.
  *
@@ -26,12 +28,13 @@ import {
 } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ledgerArticleId } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { cantonSectionConfig, cantonSectionPaths } from '../../generator/scripts/lib/canton-section-profile.mjs';
 import { hubFilePaths } from '../../generator/scripts/lib/canton-hubs/paths.mjs';
 import { mentionsId } from './mentions-id.mjs';
+import { activeCorpusCoreMap } from './corpus-sections.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -288,7 +291,7 @@ const KIND_WRITE_SURFACES = {
  * scrive. Le sezioni vengono da `ARTICLE_SECTION_CORE`, non da un elenco qui.
  */
 export const SECTIONS = Object.fromEntries(
-  Object.entries(ARTICLE_SECTION_CORE).map(([section, core]) => {
+  Object.entries(activeCorpusCoreMap()).map(([section, core]) => {
     const declared = Object.prototype.hasOwnProperty.call(KIND_WRITE_SURFACES, core.kind)
       ? KIND_WRITE_SURFACES[core.kind]
       : undefined;

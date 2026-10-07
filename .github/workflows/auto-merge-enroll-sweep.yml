@@ -117,8 +117,14 @@ jobs:
           download_and_check \
             'generator/scripts/load-rc-env.mjs' "$helper_dir/load-rc-env.mjs"
           download_and_check \
+            'generator/scripts/lib/source-copy-guard.mjs' \
+            "$helper_dir/lib/source-copy-guard.mjs"
+          download_and_check \
             'generator/scripts/lib/google-service-account-token.mjs' \
             "$helper_dir/lib/google-service-account-token.mjs"
+          download_and_check \
+            'generator/scripts/lib/source-copy-guard.mjs' \
+            "$helper_dir/lib/source-copy-guard.mjs"
           for spec in \
             'scripts/ci/native-automerge-gate.mjs|native-automerge-gate.mjs' \
             'scripts/ci/review-test-policy.mjs|review-test-policy.mjs' \

@@ -16,6 +16,7 @@
  *     create-article riconoscono come «primo articolo»;
  *   - il profilo di ammissione e i testi di prompt del cantone.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -115,19 +116,23 @@ test('create-article: le storiche restano letterali, le cantonali arrivano dal m
 // ── D16: il gate ────────────────────────────────────────────────────────────
 
 test('gate D16: spento per default, acceso dall\'elenco o dal profilo', () => {
+  // Il profilo di produzione può avere cantoni accesi (P11). Il caso «default
+  // spento» va quindi provato con una copia esplicitamente disabilitata, non
+  // assumendo che il catalogo live resti per sempre tutto false.
+  const profiles = structuredClone(PROFILES);
+  profiles.cantons = profiles.cantons.map((profile) => ({ ...profile, enabled: false }));
   for (const id of cantonSectionIds()) {
-    assert.equal(resolveCantonSectionGate(id, { env: {} }).enabled, false, `${id} acceso senza flag`);
-    assert.equal(resolveCantonSectionGate(id, { env: { [CANTON_SECTIONS_ENABLED_ENV]: '' } }).enabled, false);
+    assert.equal(resolveCantonSectionGate(id, { env: {}, profiles }).enabled, false, `${id} acceso senza flag`);
+    assert.equal(resolveCantonSectionGate(id, { env: { [CANTON_SECTIONS_ENABLED_ENV]: '' }, profiles }).enabled, false);
   }
   const env = { [CANTON_SECTIONS_ENABLED_ENV]: 'TI, canton-gr  be;zz' };
-  assert.deepEqual(resolveCantonSectionGate('canton-ti', { env }), { enabled: true, via: 'env', unknown: ['zz'] });
-  assert.equal(resolveCantonSectionGate('canton-gr', { env }).enabled, true);
-  assert.equal(resolveCantonSectionGate('canton-be', { env }).enabled, true);
-  assert.equal(resolveCantonSectionGate('canton-zh', { env }).enabled, false);
+  assert.deepEqual(resolveCantonSectionGate('canton-ti', { env, profiles }), { enabled: true, via: 'env', unknown: ['zz'] });
+  assert.equal(resolveCantonSectionGate('canton-gr', { env, profiles }).enabled, true);
+  assert.equal(resolveCantonSectionGate('canton-be', { env, profiles }).enabled, true);
+  assert.equal(resolveCantonSectionGate('canton-zh', { env, profiles }).enabled, false);
   assert.equal(parseEnabledCantonSections('all').sections.size, 24);
   assert.equal(parseEnabledCantonSections('basilea appenzello').sections.size, 2);
 
-  const profiles = structuredClone(PROFILES);
   profiles.cantons.find((c) => c.code === 'UR').enabled = true;
   assert.deepEqual(resolveCantonSectionGate('canton-ur', { env: {}, profiles }), { enabled: true, via: 'profile', unknown: [] });
 });

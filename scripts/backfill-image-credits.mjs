@@ -55,6 +55,7 @@
  * Usage: node scripts/backfill-image-credits.mjs --fetch|--build|--check [--root <dir>]
  */
 
+import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

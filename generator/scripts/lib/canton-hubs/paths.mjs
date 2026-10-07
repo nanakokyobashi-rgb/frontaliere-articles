@@ -7,6 +7,7 @@
  * `scripts/lib/article-surfaces.mjs`, che dichiara questi file fra le
  * superfici di scrittura della sezione (rebase e ritiro li vedono da li').
  */
+import '../../../../host/cantonSectionsBootstrap.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../../../engine/shared/articleSectionCore.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';
 

@@ -161,6 +161,14 @@ test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard
       mkdirSync(dirname(dest), { recursive: true });
       cpSync(resolve(ROOT, rel), dest);
     }
+    // D22: the publisher bootstrap reads the committed activation profile
+    // before validating the sections. Carry that input into the isolated
+    // tree so this atomicity test exercises its intended failure path.
+    mkdirSync(join(root, 'generator/data'), { recursive: true });
+    writeFileSync(
+      join(root, 'generator/data/canton-sections.json'),
+      readFileSync(resolve(ROOT, 'generator/data/canton-sections.json'), 'utf8'),
+    );
     mkdirSync(join(root, 'content/blog-body/it'), { recursive: true });
     writeFileSync(join(root, 'content/blog-body/it/one.ts'), 'export const one = true;\n');
     writeFileSync(

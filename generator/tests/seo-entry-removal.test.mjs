@@ -1,4 +1,5 @@
 /** Regression tests for the all-or-nothing SEO-entry removal used by retire. */
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

@@ -196,6 +196,16 @@ for (const line of [
   });
 }
 
+test('una decisione vaga resta candidata finche non e auditabile', () => {
+  const vague = classifyOne('Riallineamento del drift check — per scelta');
+  const audited = classifyOne(
+    'Riallineamento del drift check — per scelta. Motivo: il gate dipende dal flusso. ' +
+      'Prossimo passo: nessun lavoro aggiuntivo.',
+  );
+  assert.equal(vague.candidate, true);
+  assert.equal(audited.candidate, false);
+});
+
 // Allineato al sito #11371 (review della PR corpus 2080, due finding 🔴).
 test('una continuazione senza marker con `per scelta` chiude il bullet: non è candidato', () => {
   const body = [
