@@ -111,7 +111,7 @@
     "canton-basilea": {
       "kind": "canton",
       "canton": "BASILEA",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-basilea",
         "en": "basel-articles",
@@ -405,7 +405,7 @@
     "canton-ju": {
       "kind": "canton",
       "canton": "JU",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-giura",
         "en": "jura-articles",
@@ -650,7 +650,7 @@
     "canton-sg": {
       "kind": "canton",
       "canton": "SG",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-san-gallo",
         "en": "st-gallen-articles",
@@ -846,7 +846,7 @@
     "canton-tg": {
       "kind": "canton",
       "canton": "TG",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-turgovia",
         "en": "thurgau-articles",
@@ -1091,7 +1091,7 @@
     "canton-zg": {
       "kind": "canton",
       "canton": "ZG",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-zugo",
         "en": "zug-articles",
