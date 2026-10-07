@@ -139,6 +139,28 @@ async function getText(url, fetchImpl) {
   return res.text();
 }
 
+/** Piano conservativo per una sitemap che non si e' potuta leggere. */
+function unknownSitemapPlan(section, detail) {
+  return {
+    section,
+    // Non e' stato possibile contare le pagine annunciate: zero sarebbe un
+    // conteggio falsamente verificato e potrebbe far sembrare completa la
+    // superficie.
+    expected: null,
+    unknown: [detail],
+    sectionMissing: [],
+    missingIds: [],
+    selected: [],
+    leftover: [],
+    dispatch: false,
+  };
+}
+
+function sitemapFailureDetail(url, error) {
+  const reason = String(error?.message ?? error);
+  return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
+}
+
 /** HEAD con due tentativi; 405/501 ricadono su GET, 200 presente, 404 mancante. */
 export async function headState(url, fetchImpl = fetch) {
   for (let attempt = 1; attempt <= 2; attempt++) {
@@ -203,7 +225,16 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
   const dateById = new Map(rows.map((row) => [row.id, row.updatedAt || row.date || '']));
   const sections = [];
   for (const entry of live) {
-    const sitemapXml = await getText(`${apiBase}${entry.sitemap}`, fetchImpl);
+    const sitemapUrl = `${apiBase}${entry.sitemap}`;
+    let sitemapXml;
+    try {
+      sitemapXml = await getText(sitemapUrl, fetchImpl);
+    } catch (error) {
+      const detail = sitemapFailureDetail(sitemapUrl, error);
+      console.warn(`::warning::[reconcile-sections] ${entry.id}: sitemap non verificabile (${detail}); nessun backfill`);
+      sections.push(unknownSitemapPlan(entry.id, detail));
+      continue;
+    }
     const expected = expectedSectionPages(entry, slugs.cantons?.[entry.id] ?? {}, sitemapXml);
     const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
     sections.push(planSectionBackfill(entry.id, expected.map((page, i) => ({ ...page, state: states[i] })), dateById, cap));
