@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-vaud-revision-bouclier-fiscal-2024': {
+    title: 'Vaud: la destra rilancia il bouclier fiscal | Frontaliere Ticino',
+    description: 'Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti',
+    keywords: 'frontalieri, ticino, svizzera, italia, vaud, destra, rilancia, bouclier',
+    ogTitle: 'Vaud: la destra rilancia il bouclier fiscal',
+    ogDescription: 'Dopo il voto popolare del 27 settembre, il Gran Consiglio di Vaud riapre il dossier dello scudo fiscale. La destra chiede di recuperare la revisione 2024 per evitare la fuga di 3000 grandi contribuenti. La sinistra annuncia battaglia politica.',
+    canonicalPath: '/articoli-vaud/vaud-revision-bouclier-fiscal-2024/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vaud: la destra rilancia il bouclier fiscal",
+      "description": "Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/acquisire-casa-sciaffusa-mutuo-fiscale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Gran Consiglio del Canton Vaud a Losanna, sede delle decisioni sul bouclier fiscal."
+      },
+      "datePublished": "2026-10-07T10:47:31+00:00",
+      "dateModified": "2026-10-07T10:47:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/vaud-revision-bouclier-fiscal-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

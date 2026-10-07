@@ -414,6 +414,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:39:32.224Z",
       "lastFailureAt": "2026-10-07T10:39:32.224Z"
+    },
+    {
+      "articleId": "vaud-revision-bouclier-fiscal-2024",
+      "title": "Vaud: la destra rilancia il bouclier fiscal",
+      "fallbackImage": "/images/blog/acquisire-casa-sciaffusa-mutuo-fiscale.webp",
+      "reason": "All image providers failed for article-vaud-revision-bouclier-fiscal-2024: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:47:31.187Z",
+      "lastFailureAt": "2026-10-07T10:47:31.187Z"
     }
   ]
 }
