@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'losanna-budget-deficit-2027',
+ category: 'novita',
+ date: '2026-10-07T11:12:50.818Z',
+ image: '/images/blog/angestellte-schweiz-aumento-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
