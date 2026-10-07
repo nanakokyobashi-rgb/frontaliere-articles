@@ -118,17 +118,36 @@ test('il chunker conserva separatori, round-trip e limite per righe lunghe', () 
   assert.equal(_recomposeChunkParts(longLineChunks), longLine);
 });
 
-test('non divide URL o placeholder opachi e fallisce chiuso se superano il limite', () => {
+test('mantiene atomici URL, email, placeholder e sentinelle durante il taglio', () => {
   const longUrl = `https://${'x'.repeat(80)}.example.invalid/path`;
-  assert.throws(
-    () => _chunkAtSentences(`testo introduttivo ${longUrl} testo finale`, 40),
-    (error) => error?.code === 'ERR_OPAQUE_SPAN_TOO_LARGE',
-  );
+  const longEmail = `persona@${'x'.repeat(70)}.example`;
   const longPlaceholder = `{{${'token'.repeat(20)}}}`;
-  assert.throws(
-    () => _chunkAtSentences(`testo ${longPlaceholder} finale`, 40),
-    (error) => error?.code === 'ERR_OPAQUE_SPAN_TOO_LARGE',
+  for (const opaque of [longUrl, longEmail, longPlaceholder]) {
+    const source = `testo introduttivo ${opaque} testo finale`;
+    const chunks = _chunkAtSentences(source, 40);
+    assert.ok(chunks.some(({ text }) => text === opaque), opaque);
+    assert.equal(_recomposeChunkParts(chunks), source);
+    assert.ok(chunks.some(({ text, protectedOversize }) => text === opaque && protectedOversize));
+  }
+
+  const sentinel = 'ZQX0XQZ';
+  const sentinelSource = `${'a'.repeat(37)}${sentinel} testo finale`;
+  const sentinelChunks = _chunkAtSentences(sentinelSource, 40);
+  assert.ok(sentinelChunks.some(({ text }) => text.includes(sentinel)));
+  assert.equal(
+    sentinelChunks.some(({ text }) => text.includes('ZQX') && !text.includes(sentinel)),
+    false,
   );
+  assert.equal(_recomposeChunkParts(sentinelChunks), sentinelSource);
+});
+
+test('taglia il testo senza spazi quando non è un intervallo opaco', () => {
+  const source = 'x'.repeat(101);
+  const chunks = _chunkAtSentences(source, 40);
+
+  assert.ok(chunks.length > 1);
+  assert.ok(chunks.every(({ text }) => text.length <= 40));
+  assert.equal(_recomposeChunkParts(chunks), source);
 });
 
 test('quando arretra prima di uno span opaco conserva lo spazio come separatore', () => {
@@ -173,6 +192,61 @@ test('il ramo breve MyMemory mantiene gli a capo nella chiamata singola', async 
   assert.equal(calls.length, 1);
   assert.equal((calls[0].match(/\n/g) || []).length, 4);
   assert.equal((translated.match(/\n/g) || []).length, 4);
+});
+
+test('il ramo lungo aggrega i passthrough e conserva le righe corte corrette', async () => {
+  const source = [
+    'No!',
+    'OK!',
+    'Paragrafo lungo traducibile. '.repeat(220),
+  ].join('\n');
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = query === 'No!' ? query : `T ${query}`;
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'en',
+    fieldType: 'description',
+  });
+
+  assert.ok(calls.length > 2);
+  assert.match(translated, /^No!\nT OK!\n/);
+  assert.equal((translated.match(/\n/g) || []).length, 2);
+});
+
+test('il ramo riga per riga non invia uno span opaco sovralimite al motore', async () => {
+  const longUrl = `https://${'x'.repeat(5100)}.example.invalid/path`;
+  const source = `${longUrl}\nTesto traducibile`;
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText: `T ${query}`, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'en',
+    fieldType: 'description',
+  });
+
+  assert.deepEqual(calls, ['Testo traducibile']);
+  assert.equal(translated, `${longUrl}\nT Testo traducibile`);
 });
 
 test('_chunkAtSentences rifiuta un maxChars non intero positivo', () => {

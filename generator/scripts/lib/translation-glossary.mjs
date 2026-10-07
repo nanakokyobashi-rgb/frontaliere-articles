@@ -38,7 +38,6 @@
  */
 
 import { BORDER_GUARD_SOURCE_ANCHOR } from './article-locale-lexicon.mjs';
-import { translationSentinel, translationSentinelRegExp } from './translation-sentinels.mjs';
 
 // Mirror the leading-letter case of `sample` onto `replacement` so a corrected
 // title keeps its capitalization ("Orologio notturno" → "Guardia notturna").
@@ -433,10 +432,7 @@ export const GENDER_TRIGRAPH_PAIR_BY_LOCALE = {
 /** Sentinel shape: `ZQX<n>XQZ`. Alphanumeric (survives tokenizers), and a
  *  letter run no natural language produces. */
 const TOKEN_SEP = String.raw`[\s._·•\-]*`;
-const protectedTokenRe = () => translationSentinelRegExp('gender', 'gi');
-// Keep this separate from the canonical shape: it accepts only provider-added
-// separators around the canonical token and is never used to produce one.
-const protectedTokenTolerantRe = () =>
+const protectedTokenRe = () =>
   new RegExp(`z${TOKEN_SEP}q${TOKEN_SEP}x${TOKEN_SEP}(\\d{1,3})${TOKEN_SEP}x${TOKEN_SEP}q${TOKEN_SEP}z`, 'gi');
 /** Last-resort scrub for a sentinel the translator mangled past recognition
  *  (e.g. "ZQXOXQZ" — digit read as a letter). Never leave debris in a title. */
@@ -471,7 +467,6 @@ export function normalizeProtectedTokenSentinels(text = '') {
     // token during passthrough comparison.
     .replace(/\u0000/g, PROTECTED_TOKEN_COMPARISON_NUL_ESCAPE)
     .replace(protectedTokenRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER)
-    .replace(protectedTokenTolerantRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER)
     .replace(protectedTokenScrubRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER)
     .replace(mangledProtectedTokenScrubRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER);
 }
@@ -564,7 +559,7 @@ export function maskProtectedTokens(text = '') {
   if (!input) return { text: input, tokens: [] };
   const tokens = [];
   const capture = (raw, bracketed) => {
-    const placeholder = translationSentinel('gender', tokens.length);
+    const placeholder = `ZQX${tokens.length}XQZ`;
     tokens.push({ placeholder, raw, ...parseGenderTrigraph(raw), bracketed });
     return placeholder;
   };
@@ -604,15 +599,13 @@ export function restoreProtectedTokens(text = '', tokens = [], targetLang = '', 
 
   if (list.length) {
     const before = out;
-    const restoreToken = (_m, idx) => {
+    out = out.replace(protectedTokenRe(), (_m, idx) => {
       const i = Number(idx);
       const token = list[i];
       if (!token) return ''; // sentinel index the translator invented
       seen.add(i);
       return genderTrigraphForLocale(targetLang, token);
-    };
-    out = out.replace(protectedTokenRe(), restoreToken);
-    out = out.replace(protectedTokenTolerantRe(), restoreToken);
+    });
     out = out.replace(protectedTokenScrubRe(), '');
     out = out.replace(mangledProtectedTokenScrubRe(), '');
     // Only tidy when a sentinel was actually swapped out, so the guard never
