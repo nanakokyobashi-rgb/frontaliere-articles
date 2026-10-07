@@ -278,17 +278,22 @@ test('il verdetto finale gira con `always()`, non dentro il ramo col PAT', () =>
 });
 
 test('i guard contano solo le PR di QUESTO repo, non quelle da un fork', () => {
-  // Su una PR da un fork `head.ref` non e` qualificato: chiunque puo` aprire un
-  // branch chiamato come il nostro e far contare 1 al guard, che da quel
-  // momento si spegne da solo per sempre. Un prefisso e` un nome, non un
-  // permesso.
-  for (const wf of [WORKFLOW, '.github/workflows/lessons-harvester.yml']) {
-    assert.match(
-      read(wf),
-      /--jq '\.\[\] \| \[\.head\.repo\.full_name, \.head\.ref\] \| @tsv'[\s\S]*awk -F '\\t' -v repo="\$REPO"/,
-      `${wf}: il guard deve qualificare il branch col repo, non fidarsi del solo nome`,
-    );
-  }
+  // Su una PR da un fork `head.ref` non e` qualificato: il guard estratto deve
+  // applicare insieme repo e prefisso del branch, non fidarsi del solo nome.
+  const transport = read(WORKFLOW);
+  assert.match(transport, /node scripts\/ci\/transport-identical-twins-guard\.mjs/);
+  assert.match(transport, /REPO: \$\{\{ github\.repository \}\}/);
+  const guard = read('scripts/ci/transport-identical-twins-guard.mjs');
+  assert.match(guard, /pr\?\.head\?\.repo\?\.full_name === repo/);
+  assert.match(guard, /String\(pr\?\.head\?\.ref \|\| ''\)\.startsWith\('transport\/identical-twins'\)/);
+
+  // Questo consumer non e` ancora estratto e conserva la stessa prova inline.
+  const harvester = read('.github/workflows/lessons-harvester.yml');
+  assert.match(
+    harvester,
+    /--jq '\.\[\] \| \[\.head\.repo\.full_name, \.head\.ref\] \| @tsv'[\s\S]*awk -F '\\t' -v repo="\$REPO"/,
+    'lessons-harvester: il guard deve qualificare il branch col repo, non fidarsi del solo nome',
+  );
 });
 
 test('il quinto call-site della classe passa dall`helper', () => {

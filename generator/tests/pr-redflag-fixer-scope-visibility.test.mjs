@@ -43,7 +43,11 @@ test('the autonomous fixer is limited to bots, fix/*, or explicit agent:autofix 
 
 test('scope job is the shared declassification gate, and errors remain blocking', () => {
   assert.ok(scope, 'scope job not found');
-  assert.match(scope, /node scripts\/ci\/review-scope\.mjs/);
+  // Il classificatore arriva da main in una directory trusted: il job non deve
+  // poter eseguire il file eventualmente modificato dalla PR.
+  assert.match(scope, /git archive --format=tar "\$trusted_sha" scripts \| tar -x -C "\$trusted_root"/);
+  assert.match(scope, /REVIEW_SCOPE_SCRIPT: \$\{\{ steps\.trusted_scope\.outputs\.script \}\}/);
+  assert.match(scope, /node "\$REVIEW_SCOPE_SCRIPT"/);
   assert.match(scope, /blocking=true/);
   assert.match(workflow, /needs: \[preflight, scope\]/);
   assert.match(workflow, /needs\.scope\.outputs\.blocking == 'true'/);
