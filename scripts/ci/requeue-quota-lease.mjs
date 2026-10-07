@@ -7,6 +7,8 @@
  * the whole transition with a bounded exponential backoff so the workflow does
  * not turn a temporary API blip into a failed run. Permanent API errors still
  * fail closed and leave the active label untouched for the rescue path.
+ * The retry primitive is also used by the lease-release wrapper; keeping the
+ * transient classifier here gives both mutations one source of truth.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -66,6 +68,7 @@ export function retryGitHubMutation(operation, {
   retryDelayMs = DEFAULT_RETRY_DELAY_MS,
   sleep = sleepSync,
   log = (line) => console.log(line),
+  mutationName = 'quota mutation',
 } = {}) {
   const attempts = positiveInteger(maxAttempts, DEFAULT_MAX_ATTEMPTS);
   const delay = nonNegativeInteger(retryDelayMs, DEFAULT_RETRY_DELAY_MS);
@@ -79,7 +82,7 @@ export function retryGitHubMutation(operation, {
       if (!isRetryableGitHubMutationError(error) || attempt === attempts) throw error;
 
       const waitMs = delay * (2 ** (attempt - 1));
-      log(`::warning::GitHub quota requeue transient failure (tentativo ${attempt}/${attempts}) → retry tra ${waitMs} ms.`);
+      log(`::warning::GitHub ${mutationName} transient failure (tentativo ${attempt}/${attempts}) → retry tra ${waitMs} ms.`);
       sleep(waitMs);
     }
   }
@@ -129,7 +132,7 @@ export function requeueQuotaLease({
       maxBuffer: MAX_BUFFER,
       stdio: ['ignore', 'pipe', 'pipe'],
     }),
-    retryOptions,
+    { ...retryOptions, mutationName: 'quota requeue' },
   );
 }
 

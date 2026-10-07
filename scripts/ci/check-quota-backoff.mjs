@@ -1146,8 +1146,7 @@ function activeBeaconIn(scope, nowMs, nowSec) {
 
 function main() {
   if (process.env.QUOTA_LEASE_ACTION) {
-    runQuotaLease();
-    return;
+    return runQuotaLease();
   }
   const nowMs = Date.now();
   const nowSec = Math.floor(nowMs / 1000);
@@ -1226,10 +1225,16 @@ function main() {
 // invariato (comportamento identico a prima che questo gate esistesse).
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    main();
+    const result = main();
+    if (process.env.QUOTA_LEASE_STRICT_RELEASE === '1'
+      && process.env.QUOTA_LEASE_ACTION === 'release'
+      && result?.error === true) {
+      process.exitCode = 1;
+    }
   } catch (e) {
     console.error('Quota backoff gate error — procedo (fixer normale):', e && e.message ? e.message : e);
     setOutput(false, '');
-    process.exit(0);
+    process.exit(process.env.QUOTA_LEASE_STRICT_RELEASE === '1'
+      && process.env.QUOTA_LEASE_ACTION === 'release' ? 1 : 0);
   }
 }

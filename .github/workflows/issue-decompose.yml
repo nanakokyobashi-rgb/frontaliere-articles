@@ -276,7 +276,7 @@ jobs:
           if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
             export GH_TOKEN="$GITHUB_PAT_NANAKO"
           fi
-          node scripts/ci/check-quota-backoff.mjs
+          node scripts/ci/release-quota-lease.mjs
 
       - name: Cleanup Firebase credentials
         if: always()
