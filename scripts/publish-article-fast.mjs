@@ -37,14 +37,14 @@
 //      `/images/blog/<file>` refs to the CDN URL. Applied to every written
 //      file (index + bridge), matching blogImageCdnFinalizePlugin's
 //      unconditional whole-dist walk in the full build.
-//   6. renderArticleHubPages({section}) (issue #4881 Fase 1) — re-renders the
-//      section's `/tutti/` archive + pagination for all 4 locales so the
-//      just-published article is immediately LISTED, not merely reachable by
-//      direct URL. Calls the SAME renderArticleHubPagesCore the full build's
-//      emitSeoHubs uses (engine/articleHubPagesPlugin.ts) — byte-identical by
-//      construction. Not run through steps 2-5: those are article-body
-//      specific (flat bridge, this article's own related-picks, hero image)
-//      and don't apply to an archive listing page.
+//   6. after the image postcondition, renderArticleHubPages({section}) only if
+//      every requested article is publishable. Otherwise the previous archive
+//      stays online: a new archive built from the whole registry could link to
+//      a page deliberately withheld from this push. On the safe path, calls
+//      the SAME renderArticleHubPagesCore the full build's emitSeoHubs uses
+//      (engine/articleHubPagesPlugin.ts) — byte-identical by construction. It
+//      does not run through steps 2-5: those are article-body specific (flat
+//      bridge, this article's own related-picks, hero image), not archive work.
 //   7. scripts/offload-generated-images-cdn.mjs, unmodified, as a subprocess
 //      (CDN_BASE=https://cdn.frontaliereticino.ch — the same value deploy.yml
 //      exports for the en/de/fr shard runners, which process an analogously

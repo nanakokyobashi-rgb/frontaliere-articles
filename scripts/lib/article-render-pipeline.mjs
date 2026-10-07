@@ -179,6 +179,35 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     }
   }
 
+  const htmlByPath = {};
+  for (const entry of entries) {
+    for (const rel of [...Object.values(entry.paths || {}), ...Object.values(entry.flatPaths || {})]) {
+      if (rel && fs.existsSync(path.join(distDir, rel))) htmlByPath[rel] = fs.readFileSync(path.join(distDir, rel), 'utf-8');
+    }
+  }
+  // Un articolo che ricade sull'immagine generica resta fuori dal push solo se
+  // online c'è qualcosa da proteggere: una sua pagina con immagine propria, o
+  // una risposta che non si è potuta leggere. Un articolo senza pagine online
+  // esce subito con l'immagine generica (decisione del proprietario, 07-10-2026).
+  const imagePostcondition = await releaseArticlesWithNothingToProtect({
+    entries,
+    postcondition: filterEntriesByImagePostcondition({ entries, declaredImages, htmlByPath }),
+    probe: probeOnlineImage,
+  });
+  if (imagePostcondition.excludedArticles.length > 0) {
+    console.error(
+      `[${logPrefix}] image postcondition excluded ${imagePostcondition.excludedArticles.length} article(s) / ` +
+        `${imagePostcondition.excludedPages} page(s): ${imagePostcondition.firstExcludedArticleIds.join(', ')}`,
+    );
+  }
+  if (imagePostcondition.releasedArticles.length > 0) {
+    console.error(
+      `[${logPrefix}] image postcondition released ${imagePostcondition.releasedArticles.length} article(s) with the generic image ` +
+        `(no page online to protect): ${imagePostcondition.releasedArticles.slice(0, 10).map((article) => article.articleId).join(', ')}`,
+    );
+  }
+  const aggregatePagesAllowed = imagePostcondition.excludedArticles.length === 0;
+
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
   // Re-renders each section's `/tutti/` archive + pagination into the SAME
   // scratch distDir so the newly-published article is immediately LISTED,
@@ -213,36 +242,47 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // 2-6". That rationale is right for steps 2-5, which are per-article, and
   // wrong for the offload, which is a whole-dist pass every emitted page
   // needs — archive included.
-  const { renderArticleHubPages } = await import('../../engine/articleHubPagesPlugin.ts');
-  const hubResult = await renderArticleHubPages({
-    rootDir: rootDir,
-    distDir,
-    section: section,
-  });
+  // Gli archivi e le pagine aggregate leggono l'intero registro, non il set
+  // filtrato appena sopra. Se anche un solo articolo resta trattenuto, lasciare
+  // uscire quegli aggregati potrebbe pubblicare un link alla pagina omessa: in
+  // quel caso restano online gli aggregati precedenti e questo giro pubblica
+  // soltanto le pagine articolo dimostrate sane.
+  let hubResult = { written: 0, pathsByLocale: Object.fromEntries(locales.map((locale) => [locale, []])) };
+  let extraPaths = [];
+  if (aggregatePagesAllowed) {
+    const { renderArticleHubPages } = await import('../../engine/articleHubPagesPlugin.ts');
+    hubResult = await renderArticleHubPages({
+      rootDir: rootDir,
+      distDir,
+      section: section,
+    });
 
-  // The archive lists every article's TITLE, so it carries the same control
-  // bytes the article page does — one poisoned title contaminates every page
-  // of the /tutti/ chain in all 4 locales, not just its own URL. Steps 2-5
-  // deliberately skip these pages (they are article-body transforms); this is
-  // not an article-body transform, so it does not skip them. Rewritten only
-  // when something actually changed, so a clean archive keeps its bytes.
-  for (const locale of locales) {
-    for (const rel of hubResult.pathsByLocale[locale] ?? []) {
-      const abs = path.join(distDir, rel);
-      if (!fs.existsSync(abs)) continue;
-      const html = fs.readFileSync(abs, 'utf-8');
-      const clean = sanitizeHtmlDocument(html);
-      reportStrippedControlChars(abs, html, clean);
-      if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
+    // The archive lists every article's TITLE, so it carries the same control
+    // bytes the article page does — one poisoned title contaminates every page
+    // of the /tutti/ chain in all 4 locales, not just its own URL. Steps 2-5
+    // deliberately skip these pages (they are article-body transforms); this is
+    // not an article-body transform, so it does not skip them. Rewritten only
+    // when something actually changed, so a clean archive keeps its bytes.
+    for (const locale of locales) {
+      for (const rel of hubResult.pathsByLocale[locale] ?? []) {
+        const abs = path.join(distDir, rel);
+        if (!fs.existsSync(abs)) continue;
+        const html = fs.readFileSync(abs, 'utf-8');
+        const clean = sanitizeHtmlDocument(html);
+        reportStrippedControlChars(abs, html, clean);
+        if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
+      }
     }
-  }
 
-  // ── Step 6b: pagine in piu' del chiamante, PRIMA dell'offload ──
-  // Il publisher delle sezioni cantonali scrive qui landing e hub tematici:
-  // devono esistere in distDir prima del passo 7 per la stessa ragione
-  // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
-  // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
-  const extraPaths = beforeOffload ? (await beforeOffload({ distDir, entries, hubResult })) ?? [] : [];
+    // ── Step 6b: pagine in piu' del chiamante, PRIMA dell'offload ──
+    // Il publisher delle sezioni cantonali scrive qui landing e hub tematici:
+    // devono esistere in distDir prima del passo 7 per la stessa ragione
+    // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
+    // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
+    extraPaths = beforeOffload ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult })) ?? [] : [];
+  } else {
+    console.error(`[${logPrefix}] aggregate pages withheld because the image postcondition excluded an article`);
+  }
 
   // ── Step 7: offload-generated-images-cdn.mjs, unmodified, via subprocess ──
   // The script hardcodes distDir = path.resolve(process.cwd(), 'dist'), so we
@@ -316,34 +356,6 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     }
   } catch (err) {
     console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
-  }
-
-  const htmlByPath = {};
-  for (const entry of entries) {
-    for (const rel of [...Object.values(entry.paths || {}), ...Object.values(entry.flatPaths || {})]) {
-      if (rel && fs.existsSync(path.join(distDir, rel))) htmlByPath[rel] = fs.readFileSync(path.join(distDir, rel), 'utf-8');
-    }
-  }
-  // Un articolo che ricade sull'immagine generica resta fuori dal push solo se
-  // online c'è qualcosa da proteggere: una sua pagina con immagine propria, o
-  // una risposta che non si è potuta leggere. Un articolo senza pagine online
-  // esce subito con l'immagine generica (decisione del proprietario, 07-10-2026).
-  const imagePostcondition = await releaseArticlesWithNothingToProtect({
-    entries,
-    postcondition: filterEntriesByImagePostcondition({ entries, declaredImages, htmlByPath }),
-    probe: probeOnlineImage,
-  });
-  if (imagePostcondition.excludedArticles.length > 0) {
-    console.error(
-      `[${logPrefix}] image postcondition excluded ${imagePostcondition.excludedArticles.length} article(s) / ` +
-        `${imagePostcondition.excludedPages} page(s): ${imagePostcondition.firstExcludedArticleIds.join(', ')}`,
-    );
-  }
-  if (imagePostcondition.releasedArticles.length > 0) {
-    console.error(
-      `[${logPrefix}] image postcondition released ${imagePostcondition.releasedArticles.length} article(s) with the generic image ` +
-        `(no page online to protect): ${imagePostcondition.releasedArticles.slice(0, 10).map((article) => article.articleId).join(', ')}`,
-    );
   }
 
   return {

@@ -161,7 +161,7 @@
       "reason": "Osservatore read-only della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher e apre o risolve una issue stabile senza scrivere su sito, shard o CDN. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "32c0847c7fce37d9",
+        "corpus": "7791a06536731f3f",
         "alignedAt": "2026-10-07"
       }
     },

@@ -150,7 +150,7 @@ export function pageHasCaughtUp(pageModifiedAt, registryDate) {
   if (!Number.isFinite(pageMs) || !registryDate) return null;
   const registry = String(registryDate);
   if (/^\d{4}-\d{2}-\d{2}$/.test(registry)) {
-    const dayStartMs = Date.parse(`${registry}T00:00:00+02:00`);
+    const dayStartMs = Date.parse(`${registry}T00:00:00+01:00`);
     return Number.isFinite(dayStartMs) ? pageMs >= dayStartMs : null;
   }
   const registryMs = Date.parse(registry);

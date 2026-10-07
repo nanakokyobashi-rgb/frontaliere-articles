@@ -83,6 +83,15 @@ test('un articolo ricaduto sull’immagine generica passa dalla lettura della pa
     pipeline,
     /const imagePostcondition = await releaseArticlesWithNothingToProtect\(\{\s*entries,\s*postcondition: filterEntriesByImagePostcondition\(/,
   );
+  assert.ok(
+    pipeline.indexOf('const imagePostcondition = await releaseArticlesWithNothingToProtect')
+      < pipeline.indexOf('await renderArticleHubPages('),
+    'la post-condizione deve decidere prima di renderizzare qualunque pagina aggregata',
+  );
+  assert.match(pipeline, /const aggregatePagesAllowed = imagePostcondition\.excludedArticles\.length === 0/);
+  assert.match(pipeline, /if \(aggregatePagesAllowed\) \{[\s\S]*await renderArticleHubPages\(/);
+  assert.match(pipeline, /let hubResult = \{ written: 0, pathsByLocale:/);
+  assert.match(pipeline, /entries: imagePostcondition\.entries, hubResult/);
   assert.match(pipeline, /entries: imagePostcondition\.entries,/);
   // Trattenuto e uscito con l'immagine generica sono due avvisi distinti sulla run.
   assert.match(workflow, /\.imagePostcondition\.excludedArticles\[\]\?\.articleId/);

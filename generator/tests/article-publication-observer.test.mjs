@@ -156,7 +156,7 @@ test('senza alcuna data nel registro il confronto si salta; senza data nella pag
 test('una data senza ora nel registro è la mezzanotte locale che il renderer scrive', () => {
   // Misurato: updatedAt 2026-09-25 → dateModified 2026-09-25T00:00:00+01:00.
   assert.equal(pageHasCaughtUp('2026-09-25T00:00:00+01:00', '2026-09-25'), true);
-  assert.equal(pageHasCaughtUp('2026-09-25T00:00:00+02:00', '2026-09-25'), true);
+  assert.equal(pageHasCaughtUp('2026-09-25T00:00:00+02:00', '2026-09-25'), false);
   assert.equal(pageHasCaughtUp('2026-09-24T12:00:00+02:00', '2026-09-25'), false);
   assert.equal(pageHasCaughtUp('2026-09-26T09:00:00Z', '2026-09-25'), true);
   // Timestamp completi: la pagina porta i secondi interi del registro.
