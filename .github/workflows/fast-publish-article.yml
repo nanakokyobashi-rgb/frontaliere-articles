@@ -417,17 +417,20 @@ jobs:
 
           # The article registry (data/{blog,swiss}-articles-data.ts -> content/)
           # is read inside a try/catch in ogPagesPlugin: when it is missing the
-          # render SUCCEEDS and silently downgrades NewsArticle.author from the
-          # named Person to a generic Organization, and drops the visible byline.
+          # render SUCCEEDS and silently downgrades NewsArticle.author to the
+          # generic Organization fallback, and drops the visible byline.
+          # A resolved real author is a Person; a resolved editorial profile is
+          # an Organization. Both carry an /autori/ identity, unlike the
+          # fallback, so this gate must accept both registered forms.
           # Measured: 4 of 42 rendered files differ, all of them article pages,
           # and nothing anywhere reports a problem. Same silent-degradation class
           # as the empty archive above, so it gets the same treatment.
           it_article="$(jq -r '.shards[] | select(.locale=="it") | .articlePaths[0]' "$summary")"
-          if ! grep -q '"author":{"@type":"Person"' "$dist/$it_article"; then
-            echo "::error::$it_article has no Person author in its NewsArticle JSON-LD — the article registry did not resolve (check the data/*-articles-data.ts symlinks)"
+          if ! grep -Eq '"author":\{"(Person|Organization)","@id":"[^"]*/autori/[^"]*/#(person|profile)"' "$dist/$it_article"; then
+            echo "::error::$it_article has no registered Person/editorial-profile author in its NewsArticle JSON-LD — the article registry did not resolve (check the data/*-articles-data.ts symlinks)"
             fail=1
           else
-            echo "article carries a named Person author"
+            echo "article carries a registered Person or editorial-profile Organization author"
           fi
 
           # Nessuna pagina può uscire con riferimenti /assets/ same-origin (issue #5270).

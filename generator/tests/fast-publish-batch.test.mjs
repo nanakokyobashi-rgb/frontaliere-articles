@@ -69,6 +69,8 @@ test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il 
   assert.match(validation, /\.articleIds\[\]\?/);
   assert.match(validation, /\.bridgeIds\[\]\?/);
   assert.match(validation, /expected_ids/);
+  assert.match(validation, /grep -Eq .*Person\|Organization.*autori/);
+  assert.doesNotMatch(validation, /has no Person author/);
 
   const probe = stepText('Verify the article is actually readable');
   assert.match(probe, /\.articlePaths\[\]/);
