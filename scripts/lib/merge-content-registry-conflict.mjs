@@ -504,7 +504,12 @@ export function recordContainers(src) {
     const anchor = anchorOf(src, c.open);
     if (!anchor) continue;
     const records = splitRecords(src.slice(c.open + 1, c.close));
-    if (!records || records.length === 0) continue;
+    // Dopo il filtro di una tombstone un lato puo' avere un contenitore
+    // vuoto. Va conservato come ancora: l'altro lato puo' avere aggiunto un
+    // articolo vivo nello stesso array/mappa e `unionRecords([], live)` e' una
+    // fusione non ambigua. Scartare qui l'ancora trasformerebbe quel caso in
+    // «struttura cambiata» e farebbe abortire il rebase.
+    if (!records) continue;
     if (found.has(anchor)) return null;
     found.set(anchor, { open: c.open, close: c.close, records });
   }
@@ -516,12 +521,14 @@ export function recordContainers(src) {
  * in `blogArticleIds.ts`. Qui il record e' il singolo literal, e tenere
  * entrambi i lati darebbe due dichiarazioni con lo stesso nome.
  */
-const TYPE_UNION = /\btype\s+([A-Za-z_$][\w$]*)\s*=\s*((?:'[^']*'\s*\|\s*)*'[^']*')\s*;/g;
+const TYPE_UNION = /\btype\s+([A-Za-z_$][\w$]*)\s*=\s*((?:'[^']*'\s*\|\s*)*'[^']*'|never)\s*;/g;
 
 function typeUnions(src) {
   const found = new Map();
   for (const m of src.matchAll(TYPE_UNION)) {
-    const literals = [...m[2].matchAll(/'([^']*)'/g)].map((x) => x[1]);
+    const literals = m[2].trim() === 'never'
+      ? []
+      : [...m[2].matchAll(/'([^']*)'/g)].map((x) => x[1]);
     found.set(m[1], { start: m.index + m[0].indexOf(m[2]), end: m.index + m[0].indexOf(m[2]) + m[2].length, literals });
   }
   return found;
@@ -590,13 +597,13 @@ export function pruneRetiredRecords(src, retiredIds) {
   for (const union of typeUnions(src).values()) {
     const remaining = union.literals.filter((literal) => !retiredIdForKey(literal, retiredIds));
     if (remaining.length === union.literals.length) continue;
-    if (remaining.length === 0) {
-      throw new Error('una union di id resterebbe vuota dopo il filtro dei ritiri');
-    }
     edits.push({
       start: union.start,
       end: union.end,
-      text: remaining.map((literal) => `'${literal}'`).join(' | '),
+      // `never` e' una union vuota valida: lascia l'ancora per il merge con
+      // l'altro lato. Se entrambi i lati sono vuoti, mergeDocuments rifiuta il
+      // risultato invece di produrre una dichiarazione di id senza membri.
+      text: remaining.length === 0 ? 'never' : remaining.map((literal) => `'${literal}'`).join(' | '),
     });
   }
 
@@ -619,7 +626,35 @@ export function readRetiredIds(root = process.cwd()) {
   if (!Array.isArray(parsed.retired)) {
     throw new Error(`${file}: "retired" deve essere un array`);
   }
-  return new Set(parsed.retired.map((entry) => entry?.id).filter((id) => typeof id === 'string' && id.length > 0));
+  const ids = new Set();
+  for (const [index, entry] of parsed.retired.entries()) {
+    const label = `${file}: retired[${index}]`;
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+      throw new Error(`${label} deve essere un oggetto completo`);
+    }
+    for (const field of ['id', 'section', 'winnerId', 'winnerSection', 'retiredOn']) {
+      if (typeof entry[field] !== 'string' || entry[field].trim() === '') {
+        throw new Error(`${label}.${field} deve essere una stringa non vuota`);
+      }
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(entry.retiredOn)) {
+      throw new Error(`${label}.retiredOn deve essere YYYY-MM-DD`);
+    }
+    if (!Array.isArray(entry.duplicateOf) || entry.duplicateOf.some((url) => typeof url !== 'string' || url.trim() === '')) {
+      throw new Error(`${label}.duplicateOf deve essere un array di stringhe`);
+    }
+    if (!entry.slugs || typeof entry.slugs !== 'object' || Array.isArray(entry.slugs)) {
+      throw new Error(`${label}.slugs deve essere un oggetto`);
+    }
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      if (typeof entry.slugs[locale] !== 'string' || entry.slugs[locale].trim() === '') {
+        throw new Error(`${label}.slugs.${locale} deve essere una stringa non vuota`);
+      }
+    }
+    if (ids.has(entry.id)) throw new Error(`${file}: id ritirato duplicato '${entry.id}'`);
+    ids.add(entry.id);
+  }
+  return ids;
 }
 
 /** Unione ordinata di due liste di record. Il commit rigiocato vince sui pari. */
@@ -691,6 +726,9 @@ export function mergeDocuments(ours, theirs) {
     const seen = new Set(mine.literals);
     const united = [...mine.literals];
     for (const l of other.literals) if (!seen.has(l)) { seen.add(l); united.push(l); }
+    if (united.length === 0) {
+      return { ok: false, reason: `la union '${name}' resterebbe vuota dopo il filtro dei ritiri` };
+    }
     edits.push({ start: mine.start, end: mine.end, text: united.map((l) => `'${l}'`).join(' | ') });
     oursRegions.push([mine.start, mine.end]);
     theirsRegions.push([other.start, other.end]);
