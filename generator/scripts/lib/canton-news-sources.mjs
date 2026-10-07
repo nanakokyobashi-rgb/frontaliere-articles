@@ -91,12 +91,17 @@ const RETRYABLE_SOURCE_STATUSES = new Set([408, 425, 429]);
 // Errori che indicano un guasto di trasporto dopo che la richiesta e' partita
 // (o un timeout del trasporto). Un errore generico di fetch non basta: URL
 // malformati, redirect invalidi e argomenti rifiutati devono restare
-// fail-closed e non consumare il budget della fonte.
+// fail-closed e non consumare il budget della fonte. `ENOTFOUND` resta
+// escluso: il resolver ha risposto che il nome non esiste.
 const RETRYABLE_SOURCE_ERROR_CODES = new Set([
   'ECONNABORTED',
+  'ECONNREFUSED',
   'ECONNRESET',
   'EAI_AGAIN',
+  'EHOSTDOWN',
+  'EHOSTUNREACH',
   'EPIPE',
+  'ENETUNREACH',
   'ETIMEDOUT',
   'UND_ERR_ABORTED',
   'UND_ERR_BODY_TIMEOUT',

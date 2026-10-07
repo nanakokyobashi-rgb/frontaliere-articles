@@ -355,6 +355,27 @@ test('errore transitorio della fonte: un retry bounded recupera la fonte senza s
   assert.match(out.notes.join(' '), new RegExp(`retry fonte 2/${CANTON_SOURCE_MAX_ATTEMPTS}`));
 });
 
+test('guasti di connessione/raggiungibilità transitori: il codice annidato viene ritentato', async () => {
+  for (const code of ['ECONNREFUSED', 'ENETUNREACH', 'EHOSTUNREACH']) {
+    const source = { url: `https://${code.toLowerCase()}.example/news`, parser: 'html-links' };
+    let calls = 0;
+    const impl = async () => {
+      calls += 1;
+      if (calls === 1) throw new TypeError('fetch failed', { cause: { code } });
+      const bytes = Buffer.from('<html><body><a href="/news/1">Schaffhausen: nuove informazioni</a></body></html>', 'utf8');
+      return {
+        ok: true,
+        status: 200,
+        headers: new Map([['content-type', 'text/html; charset=utf-8']]),
+        arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+      };
+    };
+    const out = await scanCantonSource(source, ctx(impl));
+    assert.equal(calls, 2, code);
+    assert.ok(out.headlines.length > 0, code);
+  }
+});
+
 test('errore transitorio durante la lettura dello stream: il retry resta nel perimetro del trasporto', async () => {
   const source = { url: 'https://stream-retry.example/news', parser: 'html-links' };
   const body = '<html><body><a href="/news/1">Schaffhausen: nuove informazioni</a></body></html>';
