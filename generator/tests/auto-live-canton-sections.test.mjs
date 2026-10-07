@@ -17,6 +17,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import {
   applyRegistryTransitions,
   expectedSectionPages,
+  htmlPageProblems,
   planSections,
   probeSectionPages,
 } from '../../scripts/ci/auto-live-canton-sections.mjs';
@@ -193,6 +194,29 @@ test('hub mancante/corrotto non passa il gate e il flip pronto e\' idempotente',
     requireReady: true,
   });
   assert.deepEqual(rolledBack.changed, ['canton-lu']);
+});
+
+test('collisioni di slug e segnali SEO duplicati bloccano la promozione', async () => {
+  const root = fixtureRoot();
+  fs.writeFileSync(path.join(root, 'content/cantons/canton-lu/slugs.ts'), `const CANTON_SLUGS = {
+  'auto-live-fixture': { it: 'same-it', en: 'auto-live-fixture-en', de: 'auto-live-fixture-de', fr: 'auto-live-fixture-fr' },
+  'shadowed': { it: 'same-it', en: 'shadowed-en', de: 'shadowed-de', fr: 'shadowed-fr' },
+};
+`);
+  const plan = await planSections(root, { mode: 'promote', sections: ['canton-lu'], probe: false });
+  assert.equal(plan.sections[0].reason, 'article-slug-collision');
+  await assert.rejects(
+    () => applyRegistryTransitions(root, { mode: 'promote', sections: ['canton-lu'] }),
+    /transizione non pronta/u,
+  );
+
+  const pages = expectedSectionPages('canton-lu', { root: fixtureRoot() });
+  const page = pages.find((candidate) => candidate.kind === 'landing' && candidate.locale === 'it');
+  const byIdentity = new Map([['landing|||', pages.filter((candidate) => candidate.kind === 'landing')]]);
+  const duplicate = `${alternateHtml(page, pages)}<link rel="canonical" href="https://frontaliereticino.ch/altro/"><link rel="alternate" hreflang="it" href="https://frontaliereticino.ch${page.path}">`;
+  const problems = htmlPageProblems(duplicate, page, 'https://frontaliereticino.ch', byIdentity);
+  assert.ok(problems.includes('canonical'));
+  assert.ok(problems.includes('hreflang:it'));
 });
 
 test('il rollback live e\' indipendente da una mappa slug corrotta', async () => {

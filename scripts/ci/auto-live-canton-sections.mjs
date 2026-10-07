@@ -85,11 +85,22 @@ function ownArticleData(root, section) {
   }
   const articleIds = [...new Set(entries.map((entry) => entry.id).filter(Boolean))];
   const missingSlugs = articleIds.filter((id) => !slugs[id] || LOCALES.some((locale) => !slugs[id][locale]));
+  const slugCollisions = [];
+  for (const locale of LOCALES) {
+    const owners = new Map();
+    for (const [id, localized] of Object.entries(slugs)) {
+      const slug = localized?.[locale];
+      if (!slug) continue;
+      const previous = owners.get(slug);
+      if (previous) slugCollisions.push(`${locale}:${slug} (${previous}, ${id})`);
+      else owners.set(slug, id);
+    }
+  }
   const bodyDir = corpusPath(`services/locales/${surfaces.bodyDir}`);
   const missingBodies = articleIds.flatMap((id) => LOCALES
     .filter((locale) => !exists(root, `${bodyDir}/${locale}/${id}.ts`))
     .map((locale) => `${bodyDir}/${locale}/${id}.ts`));
-  return { registryFile, slugFile, bodyDir, articleIds, slugs, missingSlugs, missingBodies };
+  return { registryFile, slugFile, bodyDir, articleIds, slugs, missingSlugs, missingBodies, slugCollisions };
 }
 
 /**
@@ -154,30 +165,36 @@ function htmlAttribute(tag, name) {
 export function htmlPageProblems(html, page, siteBase, pagesByIdentity = new Map()) {
   const problems = [];
   const tags = [...String(html).matchAll(/<link\b[^>]*>/giu)].map((match) => match[0]);
-  const canonical = tags
-    .filter((tag) => htmlAttribute(tag, 'rel')?.toLowerCase() === 'canonical')
-    .map((tag) => htmlAttribute(tag, 'href'))
-    .find(Boolean);
+  const canonicalTags = tags.filter((tag) => htmlAttribute(tag, 'rel')?.toLowerCase() === 'canonical');
+  const canonical = canonicalTags.length === 1 ? htmlAttribute(canonicalTags[0], 'href') : null;
   const expectedCanonical = `${siteBase}${page.path}`;
-  if (canonical !== expectedCanonical) problems.push('canonical');
+  if (canonicalTags.length !== 1 || canonical !== expectedCanonical) problems.push('canonical');
   const alternates = tags
     .filter((tag) => htmlAttribute(tag, 'rel')?.toLowerCase() === 'alternate' && htmlAttribute(tag, 'hreflang'))
     .map((tag) => ({
       locale: htmlAttribute(tag, 'hreflang'),
       href: htmlAttribute(tag, 'href'),
     }));
-  const alternateByLocale = new Map(alternates.map((alternate) => [alternate.locale, alternate.href]));
   const requiresAlternates = page.kind !== 'archive' || page.page === 1;
   if (requiresAlternates) {
     const alternateTargets = new Map(
       (pagesByIdentity.get(pageIdentity(page)) || []).map((target) => [target.locale, `${siteBase}${target.path}`]),
     );
     alternateTargets.set('x-default', alternateTargets.get('it'));
-    for (const locale of [...LOCALES, 'x-default']) {
-      if (!alternateByLocale.has(locale) || alternateByLocale.get(locale) !== alternateTargets.get(locale)) {
+    const expectedLocales = [...LOCALES, 'x-default'];
+    const counts = new Map(expectedLocales.map((locale) => [locale, 0]));
+    for (const alternate of alternates) {
+      if (!counts.has(alternate.locale)) problems.push('hreflang:unexpected');
+      else counts.set(alternate.locale, counts.get(alternate.locale) + 1);
+    }
+    for (const locale of expectedLocales) {
+      const matching = alternates.filter((alternate) => alternate.locale === locale);
+      if (counts.get(locale) !== 1 || matching[0]?.href !== alternateTargets.get(locale)) {
         problems.push(`hreflang:${locale}`);
       }
     }
+  } else if (alternates.length > 0) {
+    problems.push('hreflang:unexpected');
   }
   if (!String(html).includes(CORPUS_ROUTE_OWNER_META_TAG)) problems.push('ft-route-owner');
   if (/<meta\b[^>]*(?:name\s*=\s*["']robots["'][^>]*content\s*=\s*["'][^"']*noindex|content\s*=\s*["'][^"']*noindex[^"']*["'][^>]*name\s*=\s*["']robots["'])/iu.test(html)) {
@@ -314,6 +331,7 @@ function initialReport(root, section, mode) {
     ownArticleIds: [],
     missingSlugs: [],
     missingBodies: [],
+    articleSlugCollisions: [],
     hubs: { required: CANTON_HUB_TOPIC_KEYS.length, missing: [], invalid: [] },
     r2: { state: 'not-probed', checked: 0, missing: [], bad: [] },
     ready: false,
@@ -352,8 +370,10 @@ function initialReport(root, section, mode) {
   report.ownArticleIds = own.articleIds;
   report.missingSlugs = own.missingSlugs;
   report.missingBodies = own.missingBodies;
+  report.articleSlugCollisions = own.slugCollisions;
   if (own.articleIds.length === 0) report.reason = 'no-own-article';
   else if (own.missingSlugs.length > 0) report.reason = 'article-slug-missing';
+  else if (own.slugCollisions.length > 0) report.reason = 'article-slug-collision';
   else if (own.missingBodies.length > 0) report.reason = 'article-body-missing';
 
   try {
@@ -398,6 +418,7 @@ export async function planSections(root = process.cwd(), {
         ownArticleIds: [],
         missingSlugs: [],
         missingBodies: [],
+        articleSlugCollisions: [],
         hubs: { required: CANTON_HUB_TOPIC_KEYS.length, missing: [], invalid: [] },
         r2: { state: 'not-probed', checked: 0, missing: [], bad: [] },
         ready: false,
