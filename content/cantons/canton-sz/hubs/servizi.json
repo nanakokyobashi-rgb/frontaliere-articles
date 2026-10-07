@@ -1,0 +1,753 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sz:servizi",
+  "section": "canton-sz",
+  "canton": "SZ",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "07e54eee79e337dffc965be58480b1e00e75b1f697bca2134768e13046a6e008",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SZ",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Svitto, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "521,20 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "11",
+          "note": "offerta mediana 350 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "SZ, regione di premio 0",
+              "value": "mediana 521,20 CHF al mese",
+              "detail": "da 439,30 a 585,40 CHF, 28 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SZ6920",
+              "value": "5000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
+            },
+            {
+              "label": "SZ10866",
+              "value": "1150 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
+            },
+            {
+              "label": "SZ12136",
+              "value": "640 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "14 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
+              "date": "2026-09-30",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
+            },
+            {
+              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
+              "date": "2026-09-25",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
+            },
+            {
+              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
+            },
+            {
+              "label": "Rettungsdienst Schwyz AG:",
+              "date": "2026-07-27",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "Anpassung im Bereich der Notfallversorgung",
+              "date": "2026-07-01",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B canton Svitto: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-svitto-requisiti-rinnovo/",
+          "excerpt": "Il permesso di dimora B nel canton Svitto consente ai cittadini stranieri di risiedere e lavorare in Svizzera. Scopri requisiti, documenti e come rinnovarlo secondo le normative SEM.",
+          "date": "2026-08-23T00:53:12.602Z"
+        },
+        {
+          "title": "Patente di guida nel Canton Svitto: procedura ed esami",
+          "url": "/articoli-svizzera/patente-guida-svitto-conversione-ed-esami/",
+          "excerpt": "Come ottenere o convertire la patente nel Cantone di Svitto: iscrizione, esami teorico e pratico e corsi obbligatori secondo la normativa federale.",
+          "date": "2026-08-30T01:23:24.295Z"
+        },
+        {
+          "title": "Patente di guida a Svitto: conversione, esami e ufficio",
+          "url": "/articoli-svizzera/conversione-patente-guida-svitto/",
+          "excerpt": "Guida completa alla conversione della patente di guida estera nel Cantone di Svitto, con dettagli su esami, corsi obbligatori e uffici.",
+          "date": "2026-08-16T14:08:59.768Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini nel Canton Svitto: costi e opzioni",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-svitto-costi/",
+          "excerpt": "I costi degli asili nido nel Canton Svitto variano in base alla fascia di età e alle esigenze dei genitori.",
+          "date": "2026-08-16T12:01:45.370Z"
+        },
+        {
+          "title": "Permessi di domicilio C nel Cantone di Svitto: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-svitto/",
+          "excerpt": "Per ottenere un permesso di domicilio C nel Cantone di Svitto, i frontalieri devono rispettare determinati requisiti e seguire una procedura specifica.",
+          "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Premi cassa malati Svitto: fasce, franchigie e sussidi",
+          "url": "/articoli-svizzera/premi-cassa-malati-svitto/",
+          "excerpt": "Analisi dei premi dell'assicurazione malattia obbligatoria nel Cantone di Svitto: fasce di premio, franchigie, modelli e requisiti per la riduzione.",
+          "date": "2026-08-16T11:05:05.342Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/svitto/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/svitto-sz/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Svitto",
+          "url": "/cerca-lavoro-svitto/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "SZ",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Schwyz, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "521.20 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "11",
+          "note": "typical bid 350 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "SZ, premium region 0",
+              "value": "typical 521.20 CHF per month",
+              "detail": "from 439.30 to 585.40 CHF, 28 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SZ6920",
+              "value": "5,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
+            },
+            {
+              "label": "SZ10866",
+              "value": "1,150 CHF",
+              "detail": "current bid",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
+            },
+            {
+              "label": "SZ12136",
+              "value": "640 CHF",
+              "detail": "current bid",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "14 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
+              "date": "2026-09-30",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
+            },
+            {
+              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
+              "date": "2026-09-25",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
+            },
+            {
+              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
+            },
+            {
+              "label": "Rettungsdienst Schwyz AG:",
+              "date": "2026-07-27",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "Anpassung im Bereich der Notfallversorgung",
+              "date": "2026-07-01",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B canton Svitto: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-canton-schwyz-requirements-renewal/",
+          "excerpt": "Residence permit B in canton Svitto allows foreign nationals to reside and work in Switzerland. Discover requirements, documents and how to renew it according to SEM regulations.",
+          "date": "2026-08-23T00:53:12.602Z"
+        },
+        {
+          "title": "Driving licence in the Canton of Svitto: procedure and examinations",
+          "url": "/en/swiss-articles/driving-licence-schwyz-conversion-and-exams/",
+          "excerpt": "How to obtain or convert your driver's license in the Canton of Schwyz: registration, theoretical and practical exams and compulsory courses according to federal regulations.",
+          "date": "2026-08-30T01:23:24.295Z"
+        },
+        {
+          "title": "Driving licence in Svitto: conversion, exams and office",
+          "url": "/en/swiss-articles/driving-license-conversion-schwyz/",
+          "excerpt": "Complete guide to converting your foreign driving licence in the Canton of Schwyz, with details on examinations, compulsory courses and offices.",
+          "date": "2026-08-16T14:08:59.768Z"
+        },
+        {
+          "title": "Kindergarten and childcare in the Canton of Schwyz: costs and options",
+          "url": "/en/swiss-articles/kindergarten-and-childcare-in-the-canton-of-schwyz-costs-and-options/",
+          "excerpt": "The costs of nurseries in the Canton of Schwyz vary according to the age group and the needs of the parents.",
+          "date": "2026-08-16T12:01:45.370Z"
+        },
+        {
+          "title": "Residence permits C in the Canton of Schwyz: requirements and application",
+          "url": "/en/swiss-articles/residence-permits-c-in-the-canton-of-schwyz-requirements-and-application/",
+          "excerpt": "To obtain a residence permit C in the Canton of Schwyz, border workers must comply with certain requirements and follow a specific procedure.",
+          "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Svitto sick pay premiums: bands, deductibles and subsidies",
+          "url": "/en/swiss-articles/schwyz-health-insurance-premiums/",
+          "excerpt": "Analysis of compulsory health insurance premiums in the Canton of Schwyz: premium brackets, deductibles, models and requirements for reduction.",
+          "date": "2026-08-16T11:05:05.342Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/schwyz-sz/"
+        },
+        {
+          "label": "Job offers in the canton of Schwyz",
+          "url": "/en/find-jobs-schwyz/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "SZ",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Schwyz laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "521.20 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "11",
+          "note": "mittleres Gebot 350 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "SZ, Prämienregion 0",
+              "value": "Mittelwert 521.20 CHF pro Monat",
+              "detail": "von 439.30 bis 585.40 CHF, 28 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SZ6920",
+              "value": "5’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
+            },
+            {
+              "label": "SZ10866",
+              "value": "1’150 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
+            },
+            {
+              "label": "SZ12136",
+              "value": "640 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "14 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
+              "date": "2026-09-30",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
+            },
+            {
+              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
+              "date": "2026-09-25",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
+            },
+            {
+              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
+            },
+            {
+              "label": "Rettungsdienst Schwyz AG:",
+              "date": "2026-07-27",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "Anpassung im Bereich der Notfallversorgung",
+              "date": "2026-07-01",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B Kanton Schwyz: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-kanton-schwyz-anforderungen-verlangerung/",
+          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Schwyz erlaubt ausländischen Staatsangehörigen, in der Schweiz zu wohnen und zu arbeiten. Entdecken Sie Anforderungen, Dokumente und wie Sie sie gemäß den SEM-Vorschriften…",
+          "date": "2026-08-23T00:53:12.602Z"
+        },
+        {
+          "title": "Führerschein im Kanton Schwyz: Verfahren und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-schwyz-umschreibung-und-pruefungen/",
+          "excerpt": "So erhalten oder umwandeln Sie Ihren Führerschein im Kanton Schwyz: Einschreibung, theoretische und praktische Prüfungen und Pflichtkurse gemäss Bundesgesetzgebung.",
+          "date": "2026-08-30T01:23:24.295Z"
+        },
+        {
+          "title": "Führerschein Schwyz: Umschulung, Prüfungen und Büro",
+          "url": "/de/schweiz-artikel/fuehrerschein-umschreibung-schwyz/",
+          "excerpt": "Vollständiger Leitfaden zur Umstellung des ausländischen Führerscheins im Kanton Schwyz mit Details zu Prüfungen, Pflichtkursen und Ämtern.",
+          "date": "2026-08-16T14:08:59.768Z"
+        },
+        {
+          "title": "Kinderkrippe und Kinderbetreuung im Kanton Schwyz: Kosten und Optionen",
+          "url": "/de/schweiz-artikel/asilo-nido-custodia-bambini-canton-svitto-kosten/",
+          "excerpt": "Die Kosten für Kindergärten im Kanton Schwyz variieren je nach Altersgruppe und Bedürfnissen der Eltern.",
+          "date": "2026-08-16T12:01:45.370Z"
+        },
+        {
+          "title": "Niederlassungsbewilligungen C im Kanton Schwyz: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligungen-c-im-kanton-schwyz-voraussetzungen-und-antrag/",
+          "excerpt": "Um eine Niederlassungsbewilligung C im Kanton Schwyz zu erhalten, müssen Grenzgänger bestimmte Voraussetzungen erfüllen und ein bestimmtes Verfahren einhalten.",
+          "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Krankenkassenprämien Schwyz: Zeitabschnitte, Franchisen und Zuschüsse",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-schwyz/",
+          "excerpt": "Prämienanalyse der obligatorischen Krankenversicherung im Kanton Schwyz: Prämienspannen, Franchisen, Modelle und Reduktionsvoraussetzungen.",
+          "date": "2026-08-16T11:05:05.342Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/schwyz-sz/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Schwyz",
+          "url": "/de/jobs-in-schwyz/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "SZ",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Schwytz, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "521,20 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "11",
+          "note": "offre centrale 350 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "SZ, région de primes 0",
+              "value": "valeur centrale 521,20 CHF par mois",
+              "detail": "de 439,30 à 585,40 CHF, 28 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SZ6920",
+              "value": "5 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
+            },
+            {
+              "label": "SZ10866",
+              "value": "1 150 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
+            },
+            {
+              "label": "SZ12136",
+              "value": "640 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-13T20:00:00.000Z",
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
+              "date": "2026-09-30",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
+            },
+            {
+              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
+              "date": "2026-09-25",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
+            },
+            {
+              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
+            },
+            {
+              "label": "Rettungsdienst Schwyz AG:",
+              "date": "2026-07-27",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "Anpassung im Bereich der Notfallversorgung",
+              "date": "2026-07-01",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B canton Schwyz : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-residence-b-canton-schwytz-exigences-renouvellement/",
+          "excerpt": "Le permis de séjour B dans le canton de Schwytz permet aux ressortissants étrangers de résider et de travailler en Suisse. Découvrez les exigences, les documents et comment les renouveler selon les réglementations SEM.",
+          "date": "2026-08-23T00:53:12.602Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Schwyz : procédure et examens",
+          "url": "/fr/articles-suisse/permis-conduire-schwyz-conversion-et-examens/",
+          "excerpt": "Comment obtenir ou convertir le permis dans le canton de Schwyz : inscription, examens théoriques et pratiques et cours obligatoires selon la réglementation fédérale.",
+          "date": "2026-08-30T01:23:24.295Z"
+        },
+        {
+          "title": "Permis de conduire à Schwyz : conversion, examens et bureau",
+          "url": "/fr/articles-suisse/conversion-permis-conduire-schwyz/",
+          "excerpt": "Guide complet de la conversion du permis de conduire étranger dans le canton de Schwyz, avec des détails sur les examens, les cours obligatoires et les bureaux.",
+          "date": "2026-08-16T14:08:59.768Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton de Schwyz : coûts et options",
+          "url": "/fr/articles-suisse/asilo-nido-custodia-bambini-canton-svitto-couts/",
+          "excerpt": "Les coûts des crèches dans le canton de Schwyz varient en fonction de la tranche d'âge et des besoins des parents.",
+          "date": "2026-08-16T12:01:45.370Z"
+        },
+        {
+          "title": "Permis de séjour C dans le canton de Schwyz : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-sejour-c-dans-le-canton-de-schwyz-exigences-et-demande/",
+          "excerpt": "Pour obtenir un permis de séjour C dans le canton de Schwyz, les frontaliers doivent respecter certaines exigences et suivre une procédure spécifique.",
+          "date": "2026-08-16T11:13:39.319Z"
+        },
+        {
+          "title": "Primes caisse-maladie Schwyz : tranches, franchises et subventions",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-schwytz/",
+          "excerpt": "Analyse des primes de l'assurance maladie obligatoire dans le canton de Schwyz : fourchettes de primes, franchises, modèles et conditions de réduction.",
+          "date": "2026-08-16T11:05:05.342Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Schwytz",
+          "url": "/fr/trouver-emploi-schwytz/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

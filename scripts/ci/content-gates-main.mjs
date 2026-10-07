@@ -154,6 +154,13 @@ export const CONTENT_GATES = [
   'generator/tests/blog-title-casing.test.mjs',
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
   'generator/tests/evergreen-addizionale-irpef-mappa-comuni-refresh.test.mjs',
+  // Lotto «assicurazione malattia» del 2026-10-07: quattro guide rilette contro
+  // la scheda dei fatti verificati. Ogni test legge i body nelle quattro lingue
+  // e, per due guide, anche estratti e voce SEO.
+  'generator/tests/evergreen-assicurazione-malattia-famiglia-refresh.test.mjs',
+  'generator/tests/evergreen-fatture-mediche-gonfiate-ticino-refresh.test.mjs',
+  'generator/tests/evergreen-lamal-vs-cmi-refresh.test.mjs',
+  'generator/tests/evergreen-malattia-frontaliere-guida-assicurazione-refresh.test.mjs',
   'generator/tests/evergreen-bonus-famiglia-frontalieri-2026-refresh.test.mjs',
   'generator/tests/evergreen-calcolo-pensione-avs-inps-refresh.test.mjs',
   'generator/tests/evergreen-calcolo-tasse-entro-confine-refresh.test.mjs',
@@ -221,6 +228,7 @@ export const CONTENT_GATES = [
   'generator/tests/seo-title-prefix-repair.test.mjs',
   'generator/tests/seo-description-cap.test.mjs',
   'generator/tests/seo-digit-residue-guard.test.mjs',
+  'generator/tests/seo-http-downgrade.test.mjs',
   'generator/tests/slug-placeholder-guard.test.mjs',
   'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs',
   'generator/tests/ts-literal-span.test.mjs',

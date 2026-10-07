@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sh:fisco",
+  "section": "canton-sh",
+  "canton": "SH",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T10:11:40.832Z",
+  "contentHash": "6df4f64158ab8107c96334118d2ea3e4be11016d8d7be99873f916db6db4045b",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SH",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Sciaffusa, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "11,54 %",
+          "note": "Schaffhausen, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "10,85 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Schaffhausen)",
+              "value": "3,24 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Schaffhausen)",
+              "value": "7,71 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Schaffhausen)",
+              "value": "11,54 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Schaffhausen)",
+              "value": "14,97 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Schaffhausen)",
+              "value": "19,95 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "5,76 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "8,65 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "10,85 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "12,9 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "16,39 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Services/Such-Portal-1212278-DE.html?search=quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposta successione e donazione Sciaffusa: aliquote",
+          "url": "/articoli-svizzera/imposta-successione-donazione-sciaffusa/",
+          "excerpt": "Scopri aliquote, esenzioni per coniuge e discendenti, procedure e termini per l'imposta di successione nel canton Sciaffusa. Guida completa per eredi.",
+          "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Imposte cantonali Sciaffusa: aliquote e deduzioni",
+          "url": "/articoli-svizzera/canton-sciaffusa-aliquote-deduzioni/",
+          "excerpt": "Guida pratica al sistema di imposte cantonali e comunali nel Canton Sciaffusa. Aliquote, deduzioni ammesse, scadenze di dichiarazione e accesso al portale online dell'amministrazione fiscale.",
+          "date": "2026-08-20T04:30:06.520Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Guida alla tassazione dei frontalieri",
+          "url": "/guida-tassazione-frontalieri-2026/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "en": {
+      "canton": "SH",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Schaffhausen, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "11.54%",
+          "note": "Schaffhausen, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "10.85%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Schaffhausen)",
+              "value": "3.24%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Schaffhausen)",
+              "value": "7.71%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Schaffhausen)",
+              "value": "11.54%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Schaffhausen)",
+              "value": "14.97%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Schaffhausen)",
+              "value": "19.95%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "5.76%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "8.65%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "10.85%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "12.9%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "16.39%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Services/Such-Portal-1212278-DE.html?search=quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Tax succession and donation Schaffhausen: rates",
+          "url": "/en/swiss-articles/shaffhausen-inheritance-donation-tax-rates/",
+          "excerpt": "Discover rates, exemptions for spouses and descendants, procedures and terms for inheritance tax in the canton of Schaffhausen. Complete guide for heirs.",
+          "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Cantonal taxes Schaffhausen: rates and deductions",
+          "url": "/en/swiss-articles/canton-schaffhausen-taxes-deductions/",
+          "excerpt": "Practical guide to the cantonal and municipal tax system in the Canton of Schaffhausen. Rates, allowable deductions, reporting deadlines and access to the online portal of the tax administration.",
+          "date": "2026-08-20T04:30:06.520Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "Cross-border taxation guide",
+          "url": "/en/cross-border-taxation-guide-2026/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "de": {
+      "canton": "SH",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Schaffhausen hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "11.54 %",
+          "note": "Schaffhausen, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "10.85 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Schaffhausen)",
+              "value": "3.24 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Schaffhausen)",
+              "value": "7.71 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Schaffhausen)",
+              "value": "11.54 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Schaffhausen)",
+              "value": "14.97 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Schaffhausen)",
+              "value": "19.95 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "5.76 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "8.65 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "10.85 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "12.9 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "16.39 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Services/Such-Portal-1212278-DE.html?search=quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Erbschafts- und Schenkungssteuer Schaffhausen: Steuersätze",
+          "url": "/de/schweiz-artikel/schaffhausen-erbschaft-schenkungsteuer-saetze/",
+          "excerpt": "Entdecken Sie Steuersätze, Befreiungen für Ehepartner und Nachkommen, Verfahren und Fristen für die Erbschaftssteuer im Kanton Schaffhausen. Komplette Anleitung für Erben.",
+          "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Kantonale Steuern Schaffhausen: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kanton-schaffhausen-steuersaetze-abzuege/",
+          "excerpt": "Praktischer Leitfaden zum System der Kantons- und Gemeindesteuern im Kanton Schaffhausen. Steuersätze, zulässige Abzüge, Anmeldefristen und Zugang zum Online-Portal der Steuerverwaltung.",
+          "date": "2026-08-20T04:30:06.520Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Leitfaden zur Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-besteuerung-leitfaden-2026/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "fr": {
+      "canton": "SH",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton de Schaffhouse, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "11,54 %",
+          "note": "Schaffhausen, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "10,85 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Schaffhausen)",
+              "value": "3,24 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Schaffhausen)",
+              "value": "7,71 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Schaffhausen)",
+              "value": "11,54 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Schaffhausen)",
+              "value": "14,97 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Schaffhausen)",
+              "value": "19,95 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "5,76 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "8,65 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "10,85 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "12,9 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "16,39 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://sh.ch/CMS/Webseite/Kanton-Schaffhausen/Beh-rde/Services/Such-Portal-1212278-DE.html?search=quellensteuer",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Impôt sur les successions et les donations Schaffhouse : taux",
+          "url": "/fr/articles-suisse/schaffhouse-impot-succession-donation-taux/",
+          "excerpt": "Découvrez les taux, les exonérations pour conjoint et descendants, les procédures et les délais pour l'impôt sur les successions dans le canton de Schaffhouse. Guide complet pour les héritiers.",
+          "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Impôts cantonaux Schaffhouse : taux et déductions",
+          "url": "/fr/articles-suisse/canton-schaffhouse-impots-deductions/",
+          "excerpt": "Guide pratique du système d'impôts cantonaux et communaux dans le canton de Schaffhouse. Taux, déductions autorisées, délais de déclaration et accès au portail en ligne de l'administration fiscale.",
+          "date": "2026-08-20T04:30:06.520Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Guide de l’imposition des frontaliers",
+          "url": "/fr/guide-imposition-frontaliers-2026/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    }
+  }
+}

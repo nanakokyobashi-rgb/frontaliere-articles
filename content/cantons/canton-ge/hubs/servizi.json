@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ge:servizi",
+  "section": "canton-ge",
+  "canton": "GE",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "240cee6782465e77bb50346a1a6f22ad64899053b2aea7758b4d1ca643efee62",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-07T00:42:23.283Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GE",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Ginevra, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "752,20 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "GE, regione di premio 0",
+              "value": "mediana 752,20 CHF al mese",
+              "detail": "da 686,70 a 913,80 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
+          "updatedAt": "2026-10-07T00:42:23.283Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "16 °C",
+              "detail": "oggi da 16 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en septembre 2026",
+              "date": "2026-10-06T07:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
+            },
+            {
+              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
+              "date": "2026-10-06",
+              "url": "https://www.ge.ch/node/45119"
+            },
+            {
+              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45116"
+            },
+            {
+              "label": "Santé mentale : un programme 2026 dédié aux arts",
+              "date": "2026-10-05",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
+            },
+            {
+              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45124"
+            },
+            {
+              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/15164"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi cassa malati LAMal 2026: canton Ginevra",
+          "url": "/articoli-svizzera/franchigia-sussidi-ginevra/",
+          "excerpt": "Guida 2026 ai premi LAMal nel canton Ginevra: franchigie adulti, confronto tra cantoni, cambio cassa e riduzione premi cantonale.",
+          "date": "2026-10-02T01:44:32.489Z"
+        },
+        {
+          "title": "Permesso di dimora B nel Canton Ginevra: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-canton-ginevra-requisiti-rinnovo/",
+          "excerpt": "Tutto su come ottenere e rinnovare il permesso di dimora B nel Canton Ginevra: requisiti, documenti e procedure.",
+          "date": "2026-09-07T12:22:21.792Z"
+        },
+        {
+          "title": "Asilo nido a Ginevra: tariffe e sussidi cantonali",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-ginevra-costi/",
+          "excerpt": "A Ginevra asili nido, famiglie diurne e doposcuola hanno tariffe modulate sul reddito imponibile. Sussidi cantonali riducono la quota a carico delle famiglie.",
+          "date": "2026-09-07T16:51:08.779Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/ginevra/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/ginevra-ge/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Ginevra",
+          "url": "/cerca-lavoro-ginevra/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "GE",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Geneva, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "752.20 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "GE, premium region 0",
+              "value": "typical 752.20 CHF per month",
+              "detail": "from 686.70 to 913.80 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
+          "updatedAt": "2026-10-07T00:42:23.283Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "16 °C",
+              "detail": "today from 16 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en septembre 2026",
+              "date": "2026-10-06T07:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
+            },
+            {
+              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
+              "date": "2026-10-06",
+              "url": "https://www.ge.ch/node/45119"
+            },
+            {
+              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45116"
+            },
+            {
+              "label": "Santé mentale : un programme 2026 dédié aux arts",
+              "date": "2026-10-05",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
+            },
+            {
+              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45124"
+            },
+            {
+              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/15164"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "KVG health insurance premiums in 2026: Canton of Geneva",
+          "url": "/en/swiss-articles/geneva-lamal-deductible-subsidies/",
+          "excerpt": "2026 guide to KVG premiums in the canton of Geneva: adult deductibles, comparison between cantons, exchange of funds and cantonal premium reduction.",
+          "date": "2026-10-02T01:44:32.489Z"
+        },
+        {
+          "title": "Residence permit B in the Canton of Geneva: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-canton-geneva-requirements-renewal/",
+          "excerpt": "All about how to obtain and renew the residence permit B in the Canton of Geneva: requirements, documents and procedures.",
+          "date": "2026-09-07T12:22:21.792Z"
+        },
+        {
+          "title": "Nursery in Geneva: cantonal fees and subsidies",
+          "url": "/en/swiss-articles/daycare-childcare-geneva-costs/",
+          "excerpt": "In Geneva kindergartens, day families and after-school have modulated rates on taxable income. Cantonal subsidies reduce the share borne by families.",
+          "date": "2026-09-07T16:51:08.779Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/geneva-ge/"
+        },
+        {
+          "label": "Job offers in the canton of Geneva",
+          "url": "/en/find-jobs-geneva/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "GE",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Genf laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "752.20 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "GE, Prämienregion 0",
+              "value": "Mittelwert 752.20 CHF pro Monat",
+              "detail": "von 686.70 bis 913.80 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
+          "updatedAt": "2026-10-07T00:42:23.283Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "16 °C",
+              "detail": "heute 16 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en septembre 2026",
+              "date": "2026-10-06T07:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
+            },
+            {
+              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
+              "date": "2026-10-06",
+              "url": "https://www.ge.ch/node/45119"
+            },
+            {
+              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45116"
+            },
+            {
+              "label": "Santé mentale : un programme 2026 dédié aux arts",
+              "date": "2026-10-05",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
+            },
+            {
+              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45124"
+            },
+            {
+              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/15164"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "KVG-Krankenversicherungsprämien im Jahr 2026: Kanton Genf",
+          "url": "/de/schweiz-artikel/genf-lamal-franchise-praemien/",
+          "excerpt": "Leitfaden 2026 zu KVG-Prämien im Kanton Genf: Selbstbeteiligungen für Erwachsene, Vergleich zwischen Kantonen, Geldaustausch und Reduktion der kantonalen Prämien.",
+          "date": "2026-10-02T01:44:32.489Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B im Kanton Genf: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-genf-anforderungen-erneuerung/",
+          "excerpt": "Alles zur Erlangung und Erneuerung der Aufenthaltsbewilligung B im Kanton Genf: Voraussetzungen, Dokumente und Verfahren.",
+          "date": "2026-09-07T12:22:21.792Z"
+        },
+        {
+          "title": "Kindergarten in Genf: Tarife und kantonale Zuschüsse",
+          "url": "/de/schweiz-artikel/kita-kinderbetreuung-genf-kosten/",
+          "excerpt": "In Genf haben Kindergärten, Tages- und Nachschulfamilien modulierte Tarife für das zu versteuernde Einkommen. Kantonale Subventionen senken den Anteil der Familien.",
+          "date": "2026-09-07T16:51:08.779Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/genf-ge/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Genf",
+          "url": "/de/jobs-in-genf/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "GE",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Genève, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "752,20 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "GE, région de primes 0",
+              "value": "valeur centrale 752,20 CHF par mois",
+              "detail": "de 686,70 à 913,80 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
+          "updatedAt": "2026-10-07T00:42:23.283Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "16 °C",
+              "detail": "aujourd’hui de 16 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Le chômage dans le canton de Genève en septembre 2026",
+              "date": "2026-10-06T07:15:00.000Z",
+              "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10877&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6051"
+            },
+            {
+              "label": "OCIRT-Formation 162-26 - Durée du travail et enregistrement du temps de travail : obligations et possibilité de renonciation ou de simplification",
+              "date": "2026-10-06",
+              "url": "https://www.ge.ch/node/45119"
+            },
+            {
+              "label": "Affiche avec slogan \"Vaccinons-nous contre la grippe\"",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45116"
+            },
+            {
+              "label": "Santé mentale : un programme 2026 dédié aux arts",
+              "date": "2026-10-05",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
+            },
+            {
+              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
+              "date": "2026-10-05",
+              "url": "https://www.ge.ch/node/45124"
+            },
+            {
+              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/15164"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes d’assurance santé KVG en 2026 : Canton de Genève",
+          "url": "/fr/articles-suisse/geneve-lamal-franchise-subsides/",
+          "excerpt": "Guide 2026 des primes KVG dans le canton de Genève : franchises pour adultes, comparaison entre cantons, échange de fonds et réduction cantonale des primes.",
+          "date": "2026-10-02T01:44:32.489Z"
+        },
+        {
+          "title": "Permis de séjour B dans le canton de Genève : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-canton-geneve-exigences-renouvellement/",
+          "excerpt": "Tout sur l'obtention et le renouvellement du permis de séjour B dans le canton de Genève : exigences, documents et procédures.",
+          "date": "2026-09-07T12:22:21.792Z"
+        },
+        {
+          "title": "Garderie à Genève : tarifs et subsides cantonaux",
+          "url": "/fr/articles-suisse/creche-garde-enfants-geneve-couts/",
+          "excerpt": "À Genève, les crèches, les familles de jour et après l'école ont des tarifs modulés sur le revenu imposable. Les allocations cantonales réduisent la part à la charge des familles.",
+          "date": "2026-09-07T16:51:08.779Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Genève",
+          "url": "/fr/trouver-emploi-geneve/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}

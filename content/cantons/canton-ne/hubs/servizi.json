@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ne:servizi",
+  "section": "canton-ne",
+  "canton": "NE",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "2f601c683f45f639553a98ef645e1c47694c0c33bb805dd31b79305464f4efdb",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "NE",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Neuchâtel, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "699 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "NE, regione di premio 0",
+              "value": "mediana 699 CHF al mese",
+              "detail": "da 655,90 a 794 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "15 °C",
+              "detail": "oggi da 17 a 17 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Stabilité du taux de chômage au mois de septembre 2026",
+              "date": "2026-10-06T06:56:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Patente di guida nel Canton Neuchâtel: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-neuchatel-conversione-ed-esami/",
+          "excerpt": "Scopri come convertire la tua patente estera e sostenere gli esami nel Canton Neuchâtel.",
+          "date": "2026-09-07T10:58:31.983Z"
+        },
+        {
+          "title": "Premi cassa malati Neuchâtel per giovani adulti 19-25 anni",
+          "url": "/articoli-svizzera/cassa-malati-neuchatel-giovani-19-25/",
+          "excerpt": "Analisi delle condizioni, premi e opzioni delle casse malati per giovani adulti residenti a Neuchâtel nella fascia 19-25 anni.",
+          "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Cassa malattia Neuchâtel: guida per giovani adulti 19-25 anni",
+          "url": "/articoli-frontaliere/assicurazione-malattia-neuchatel-giovani/",
+          "excerpt": "Panoramica sulle casse malattia a Neuchâtel per giovani adulti 19-25 anni. Dettagli sui requisiti e sulle procedure, info pratiche.",
+          "date": "2026-06-25T14:56:45.223Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/neuchatel/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/neuchatel-ne/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Neuchâtel",
+          "url": "/cerca-lavoro-neuchatel/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "NE",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Neuchâtel, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "699 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "NE, premium region 0",
+              "value": "typical 699 CHF per month",
+              "detail": "from 655.90 to 794 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "15 °C",
+              "detail": "today from 17 to 17 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Stabilité du taux de chômage au mois de septembre 2026",
+              "date": "2026-10-06T06:56:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Driver's license in the canton of Neuchâtel: conversion and exams",
+          "url": "/en/swiss-articles/driving-license-neuchatel-conversion-and-exams/",
+          "excerpt": "Learn how to convert your foreign license and take exams in the Canton of Neuchâtel.",
+          "date": "2026-09-07T10:58:31.983Z"
+        },
+        {
+          "title": "Neuchâtel health insurance premiums for young adults aged 19-25",
+          "url": "/en/swiss-articles/health-insurance-neuchatel-young-adults/",
+          "excerpt": "Analysis of the conditions, premiums and options of sickness funds for young adults residing in Neuchâtel in the 19-25 age group.",
+          "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Neuchâtel sickness fund: a guide for young adults aged 19-25",
+          "url": "/en/cross-border-articles/neuchatel-health-insurance-young-adults/",
+          "excerpt": "Overview of sickness funds in Neuchâtel for young adults 19-25 years old. Details on requirements and procedures, practical info.",
+          "date": "2026-06-25T14:56:45.223Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/neuchatel-ne/"
+        },
+        {
+          "label": "Job offers in the canton of Neuchâtel",
+          "url": "/en/find-jobs-neuchatel/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "NE",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Neuenburg laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "699 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "NE, Prämienregion 0",
+              "value": "Mittelwert 699 CHF pro Monat",
+              "detail": "von 655.90 bis 794 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "15 °C",
+              "detail": "heute 17 bis 17 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Stabilité du taux de chômage au mois de septembre 2026",
+              "date": "2026-10-06T06:56:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Führerschein im Kanton Neuenburg: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuhrerschein-neuchatel-umwandlung-und-pruefungen/",
+          "excerpt": "Erfahren Sie, wie Sie Ihren ausländischen Führerschein umtauschen und Prüfungen im Kanton Neuenburg ablegen können.",
+          "date": "2026-09-07T10:58:31.983Z"
+        },
+        {
+          "title": "Krankenkassenprämien Neuenburg für junge Erwachsene 19-25 Jahre",
+          "url": "/de/schweiz-artikel/krankenkasse-neuchatel-jugendliche/",
+          "excerpt": "Analyse der Bedingungen, Prämien und Optionen der Krankenkassen für junge Erwachsene mit Wohnsitz in Neuenburg im Alter von 19-25 Jahren.",
+          "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Krankenkasse Neuenburg: Leitfaden für junge Erwachsene 19-25 Jahre",
+          "url": "/de/grenzgaenger-artikel/krankenkasse-neuchatel-junge-erwachsene/",
+          "excerpt": "Übersicht Krankenkassen in Neuenburg für junge Erwachsene 19-25 Jahre. Details zu den Anforderungen und Verfahren, praktische Informationen.",
+          "date": "2026-06-25T14:56:45.223Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/neuenburg-ne/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Neuenburg",
+          "url": "/de/jobs-in-neuenburg/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "NE",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Neuchâtel, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "699 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "NE, région de primes 0",
+              "value": "valeur centrale 699 CHF par mois",
+              "detail": "de 655,90 à 794 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 17 à 17 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Stabilité du taux de chômage au mois de septembre 2026",
+              "date": "2026-10-06T06:56:52.000Z",
+              "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de conduire dans le canton de Neuchâtel : conversion et examens",
+          "url": "/fr/articles-suisse/permis-de-conduire-neuchatel-conversion-et-examens/",
+          "excerpt": "Découvrez comment convertir votre permis étranger et passer les examens dans le canton de Neuchâtel.",
+          "date": "2026-09-07T10:58:31.983Z"
+        },
+        {
+          "title": "Primes caisse maladie Neuchâtel jeunes adultes 19-25 ans",
+          "url": "/fr/articles-suisse/assurance-maladie-neuchatel-jeunes-19-25/",
+          "excerpt": "Analyse des conditions, primes et options des caisses-maladie pour jeunes adultes résidant à Neuchâtel dans la tranche d'âge 19-25 ans.",
+          "date": "2026-06-25T19:27:13.945Z"
+        },
+        {
+          "title": "Caisse maladie Neuchâtel : guide pour jeunes adultes 19-25 ans",
+          "url": "/fr/articles-frontalier/caisse-maladie-neuchatel-jeunes-adultes/",
+          "excerpt": "Aperçu des caisses-maladie à Neuchâtel pour jeunes adultes 19-25 ans. Détails sur les exigences et les procédures, informations pratiques.",
+          "date": "2026-06-25T14:56:45.223Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Neuchâtel",
+          "url": "/fr/trouver-emploi-neuchatel/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

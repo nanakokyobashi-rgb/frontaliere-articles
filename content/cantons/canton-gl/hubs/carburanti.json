@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gl:carburanti",
+  "section": "canton-gl",
+  "canton": "GL",
+  "topic": "carburanti",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "6dfa36b0333018a192890eb765b898a2fb617a500095c4c6feb7953f298f1282",
+  "blocks": [],
+  "locales": {
+    "it": {
+      "canton": "GL",
+      "topic": "carburanti",
+      "locale": "it",
+      "intro": "Nel Canton Glarona, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "GL",
+      "topic": "carburanti",
+      "locale": "en",
+      "intro": "In the canton of Glarus, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "GL",
+      "topic": "carburanti",
+      "locale": "de",
+      "intro": "Im Glarnerland sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "GL",
+      "topic": "carburanti",
+      "locale": "fr",
+      "intro": "Dans le canton de Glaris, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [],
+      "dataBlocks": [],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}

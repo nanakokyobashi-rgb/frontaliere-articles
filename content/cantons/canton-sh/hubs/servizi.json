@@ -1,0 +1,520 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sh:servizi",
+  "section": "canton-sh",
+  "canton": "SH",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:11:40.832Z",
+  "contentHash": "0c951441ff63afa6d2f6d03b67e0d8dcd2519b0dc649feec51abc6eed37b9913",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SH",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Sciaffusa, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "597,40 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "37",
+          "note": "offerta mediana 300 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "SH, regione di premio 1",
+              "value": "mediana 597,40 CHF al mese",
+              "detail": "da 552 a 650,10 CHF, 23 assicuratori"
+            },
+            {
+              "label": "SH, regione di premio 2",
+              "value": "mediana 556,70 CHF al mese",
+              "detail": "da 504,40 a 611,10 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SH9300",
+              "value": "1990 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+            },
+            {
+              "label": "SH1383",
+              "value": "1150 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+            },
+            {
+              "label": "SH2994",
+              "value": "1100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "oggi da 13 a 13 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso dimora B Sciaffusa: requisiti e rinnovo",
+          "url": "/articoli-svizzera/sciaffusa-permesso-dimora-b/",
+          "excerpt": "Il permesso B è un permesso rinnovabile per risiedere e lavorare in Svizzera, gestito da SEM. Scopri come ottenerlo e rinnovarlo nel canton Sciaffusa.",
+          "date": "2026-08-20T06:03:39.078Z"
+        },
+        {
+          "title": "Premi cassa malati Canton Sciaffusa e riduzione",
+          "url": "/articoli-svizzera/premi-assicurazione-malati-sciaffusa/",
+          "excerpt": "Obblighi, franchigie, modelli di copertura e procedura per richiedere il sussidio cantonale nel Canton Sciaffusa: guida pratica.",
+          "date": "2026-08-20T05:38:37.337Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/sciaffusa/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/sciaffusa-sh/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Sciaffusa",
+          "url": "/cerca-lavoro-sciaffusa/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "en": {
+      "canton": "SH",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Schaffhausen, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "597.40 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "37",
+          "note": "typical bid 300 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "SH, premium region 1",
+              "value": "typical 597.40 CHF per month",
+              "detail": "from 552 to 650.10 CHF, 23 insurers"
+            },
+            {
+              "label": "SH, premium region 2",
+              "value": "typical 556.70 CHF per month",
+              "detail": "from 504.40 to 611.10 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SH9300",
+              "value": "1,990 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+            },
+            {
+              "label": "SH1383",
+              "value": "1,150 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+            },
+            {
+              "label": "SH2994",
+              "value": "1,100 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "today from 13 to 13 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B Schaffhausen: requirements and renewal",
+          "url": "/en/swiss-articles/schaffhausen-residence-permit-category-b/",
+          "excerpt": "Permit B is a renewable permit to reside and work in Switzerland, managed by SEM. Find out how to get it and renew it in the canton of Schaffhausen.",
+          "date": "2026-08-20T06:03:39.078Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Schaffhausen and reduction",
+          "url": "/en/swiss-articles/health-insurance-premiums-schaffhausen/",
+          "excerpt": "Obligations, deductibles, coverage models and procedure to apply for cantonal subsidy in the Canton of Schaffhausen: practical guide.",
+          "date": "2026-08-20T05:38:37.337Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/schaffhausen-sh/"
+        },
+        {
+          "label": "Job offers in the canton of Schaffhausen",
+          "url": "/en/find-jobs-schaffhausen/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "de": {
+      "canton": "SH",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Schaffhausen laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "597.40 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "37",
+          "note": "mittleres Gebot 300 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "SH, Prämienregion 1",
+              "value": "Mittelwert 597.40 CHF pro Monat",
+              "detail": "von 552 bis 650.10 CHF, 23 Versicherer"
+            },
+            {
+              "label": "SH, Prämienregion 2",
+              "value": "Mittelwert 556.70 CHF pro Monat",
+              "detail": "von 504.40 bis 611.10 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SH9300",
+              "value": "1’990 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+            },
+            {
+              "label": "SH1383",
+              "value": "1’150 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+            },
+            {
+              "label": "SH2994",
+              "value": "1’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "heute 13 bis 13 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B Schaffhausen: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/schaffhausen-aufenthaltsgenehmigung-kategorie-b/",
+          "excerpt": "Die Bewilligung B ist eine erneuerbare Bewilligung zum Aufenthalt und Arbeiten in der Schweiz, die von sem verwaltet wird. Erfahren Sie, wie Sie es im Kanton Schaffhausen beziehen und erneuern können.",
+          "date": "2026-08-20T06:03:39.078Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Schaffhausen und Reduktion",
+          "url": "/de/schweiz-artikel/krankenversicherungspraemien-schaffhausen/",
+          "excerpt": "Pflichten, Franchisen, Deckungsmodelle und Verfahren zur Beantragung des Kantonsbeitrags im Kanton Schaffhausen: Praxisleitfaden.",
+          "date": "2026-08-20T05:38:37.337Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/schaffhausen-sh/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Schaffhausen",
+          "url": "/de/jobs-in-schaffhausen/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    },
+    "fr": {
+      "canton": "SH",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Schaffhouse, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "597,40 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "37",
+          "note": "offre centrale 300 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "SH, région de primes 1",
+              "value": "valeur centrale 597,40 CHF par mois",
+              "detail": "de 552 à 650,10 CHF, 23 assureurs"
+            },
+            {
+              "label": "SH, région de primes 2",
+              "value": "valeur centrale 556,70 CHF par mois",
+              "detail": "de 504,40 à 611,10 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SH9300",
+              "value": "1 990 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+            },
+            {
+              "label": "SH1383",
+              "value": "1 150 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+            },
+            {
+              "label": "SH2994",
+              "value": "1 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 13 à 13 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B Schaffhouse : exigences et renouvellement",
+          "url": "/fr/articles-suisse/schaffhouse-permis-de-sejour-categorie-b/",
+          "excerpt": "Le permis B est un permis renouvelable pour résider et travailler en Suisse, géré par SEM. Découvrez comment l'obtenir et le renouveler dans le canton de Schaffhouse.",
+          "date": "2026-08-20T06:03:39.078Z"
+        },
+        {
+          "title": "Primes caisse-maladie Canton Schaffhouse et réduction",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-schaffhouse/",
+          "excerpt": "Obligations, franchises, modèles de couverture et procédure de demande d'allocation cantonale dans le canton de Schaffhouse : guide pratique.",
+          "date": "2026-08-20T05:38:37.337Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Schaffhouse",
+          "url": "/fr/trouver-emploi-schaffhouse/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:11:40.832Z"
+    }
+  }
+}

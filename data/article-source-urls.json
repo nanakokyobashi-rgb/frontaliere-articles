@@ -1,6 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1942569/la-liberta-del-mercato-vale-anche-per-chi-lavora": "liberta-del-mercato-vale-anch-per-chi-lavora",
-  "https://www.ticinonews.ch/ticino/canicola-il-sindacato-vpod-chiede-al-governo-una-direttiva-per-stato-e-scuole-440277": "vpod-direttiva-canicola-scuole",
   "https://www.laregione.ch/culture/locarno-film-festival/1942612/due-paesi-in-conflitto-l-inizio-di-una-tregua": "los-vencedores-falkland-pablo-aparo",
   "https://www.laregione.ch/cantone/ticino/1942531/contro-le-ondate-di-calore-una-direttiva-ad-hoc-e-investimenti-infrastrutturali": "caldo-ticino-direttiva-consiglio-stato",
   "https://ilgiornaledelticino.ch/devasta-un-vagone-ed-insulta-i-passeggeri-34enne-fermato-sul-treno": "devastazione-vagone-como-fermo",
@@ -2084,6 +2082,16 @@
   "https://www.varesenews.it/2026/10/un-chilo-di-hashish-nascosto-nel-bagaglio-arrestata-alla-stazione-di-domodossola/2700487": {
     "articleId": "domodossola-arresto-hashish-stazione",
     "ts": "2026-10-07T06:58:03.458Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/carovita-i-sindacati-lanciano-una-petizione-per-il-recupero-dei-salari-444061": {
+    "articleId": "petizione-recupero-carovita-ticino",
+    "ts": "2026-10-07T08:24:42.250Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955222/torna-il-treno-del-foliage": {
+    "articleId": "treno-foliage-locarno-domodossola",
+    "ts": "2026-10-07T09:13:13.004Z",
     "keyForm": 2
   }
 }

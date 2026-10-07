@@ -7853,6 +7853,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Elektroautos: So sparen Sie bis zu 50 %',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## Kurz gesagt: TCS vergleicht die Preise von 19.000 Schweizer Ladepunkten – 50 kWh kosten zwischen 23 und 46 Franken – 5 % der Ladevorgänge finden an Schnellladestationen statt.',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Redaktionelles Bild zu: Auto elettrica: come risparmiare fino al 50%',
+    'blog.article.motore-filo-epfl.title': 'EPFL entwickelt einen fadenförmigen Motor',
+    'blog.article.motore-filo-epfl.excerpt': '## Auf einen Blick - FiberMotor: Durchmesser von 1 bis 3 Millimetern - Vier Motoren heben einen 46 Gramm schweren Riegel - Der Prototyp wurde in ein Paar',
+    'blog.article.motore-filo-epfl.imageAlt': 'FiberMotor und Roboterhose in einem Forschungslabor',
+    'blog.article.svizzera-india-accordi-bilaterali.title': 'Schweiz und Indien: neue Abkommen zu Migration und Arbeit',
+    'blog.article.svizzera-india-accordi-bilaterali.excerpt': '## Auf einen Blick - 5. Oktober 2026: Parmelin trifft indische Spitzenvertreter - Schweiz und Indien unterzeichnen zwei Abkommen - TEPA: ein Jahr seit dem Inkrafttreten mit der EFTA',
+    'blog.article.svizzera-india-accordi-bilaterali.imageAlt': 'Bundeshaus in Bern, Sitz der Schweizer Regierung',
+    'blog.article.cancro-prostata-assistenza-svizzera.title': 'Prostatakrebs: gute Versorgung in der Schweiz 2020‑2023',
+    'blog.article.cancro-prostata-assistenza-svizzera.excerpt': '## Auf einen Blick - Über 35\'000 Fälle wurden zwischen 2020 und 2023 analysiert - 8\'929 neue Fälle und durchschnittlich 1\'340 Todesfälle pro Jahr - 76% werden durch opportunistisches Screening entdeckt',
+    'blog.article.cancro-prostata-assistenza-svizzera.imageAlt': 'Arzt und Patient besprechen PSA-Testergebnisse in einem schweizerischen Arztbüro mit Alpenblick',
 };
 
 export default blogMetaChDe;

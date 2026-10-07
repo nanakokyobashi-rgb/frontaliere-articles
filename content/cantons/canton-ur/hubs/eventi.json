@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ur:eventi",
+  "section": "canton-ur",
+  "canton": "UR",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "129763a4fe277be012574d9e8cb27189449f6340180acc330ca23f28de6ed2b2",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "UR",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Uri, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "11",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Unterwegs mit Ziegen im Maderanertal",
+              "detail": "Bristen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unterwegs-mit-ziegen-im-maderanertal/"
+            },
+            {
+              "label": "In Ticino attraverso il San Gottardo",
+              "detail": "Erstfeld",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/in-ticino-attraverso-il-san-gottardo/"
+            },
+            {
+              "label": "Mercato autunnale di Andermatt Reuss",
+              "detail": "Furkagasse Andermatt, Andermatt",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-di-andermatt-reuss/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
+            },
+            {
+              "label": "Keramik Workshop",
+              "detail": "Andermatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
+            },
+            {
+              "label": "Chilbiständchen MG Isenthal",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
+              "detail": "Altdorf",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/uri/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Uri",
+          "url": "/eventi/uri/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/uri/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "UR",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Uri, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "11",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Unterwegs mit Ziegen im Maderanertal",
+              "detail": "Bristen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unterwegs-mit-ziegen-im-maderanertal/"
+            },
+            {
+              "label": "Durch den Gotthard ins Tessin",
+              "detail": "Erstfeld",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/in-ticino-attraverso-il-san-gottardo/"
+            },
+            {
+              "label": "Fall Market Andermatt Reuss",
+              "detail": "Furkagasse Andermatt, Andermatt",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-di-andermatt-reuss/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
+            },
+            {
+              "label": "Keramik Workshop",
+              "detail": "Andermatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
+            },
+            {
+              "label": "Chilbiständchen MG Isenthal",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
+              "detail": "Altdorf",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/uri/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of Uri",
+          "url": "/en/events/uri/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/uri/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "UR",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Uri ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "11",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Unterwegs mit Ziegen im Maderanertal",
+              "detail": "Bristen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unterwegs-mit-ziegen-im-maderanertal/"
+            },
+            {
+              "label": "Durch den Gotthard ins Tessin",
+              "detail": "Erstfeld",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/in-ticino-attraverso-il-san-gottardo/"
+            },
+            {
+              "label": "Herbstmarkt Andermatt Reuss",
+              "detail": "Furkagasse Andermatt, Andermatt",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-di-andermatt-reuss/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
+            },
+            {
+              "label": "Keramik Workshop",
+              "detail": "Andermatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
+            },
+            {
+              "label": "Chilbiständchen MG Isenthal",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
+              "detail": "Altdorf",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/uri/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Uri",
+          "url": "/de/veranstaltungen/uri/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/uri/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "UR",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton d'Uri, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "11",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Unterwegs mit Ziegen im Maderanertal",
+              "detail": "Bristen",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/unterwegs-mit-ziegen-im-maderanertal/"
+            },
+            {
+              "label": "La traversée du Gothard vers le Tessin",
+              "detail": "Erstfeld",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/in-ticino-attraverso-il-san-gottardo/"
+            },
+            {
+              "label": "Marché d'automne Andermatt Reuss",
+              "detail": "Furkagasse Andermatt, Andermatt",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-autunnale-di-andermatt-reuss/"
+            },
+            {
+              "label": "Gaming am Mittwoch",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gaming-am-mittwoch-1/"
+            },
+            {
+              "label": "Keramik Workshop",
+              "detail": "Andermatt",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/keramik-workshop-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-1/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbi-im-urirotstock-2/"
+            },
+            {
+              "label": "Chilbiständchen MG Isenthal",
+              "detail": "Isenthal",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbistaendchen/"
+            },
+            {
+              "label": "TriffAltdorf Sonntagsgespräche 10. Staffel: Übernämä",
+              "detail": "Altdorf",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/triffaltdorf-sonntagsgespraeche-10-staffel/"
+            },
+            {
+              "label": "Chilbi im Urirotstock",
+              "detail": "Hotel Urirotstock, Isenthal",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/uri/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton d'Uri",
+          "url": "/fr/evenements/uri/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/uri/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}
