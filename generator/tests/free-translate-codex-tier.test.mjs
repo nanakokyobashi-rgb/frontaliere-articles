@@ -450,6 +450,21 @@ test('una recovery multi-step addebita ogni chiamata iniziale alla lane condivis
   }
 });
 
+test('un retry fisico non usa una deadline piu\' lunga della chiamata fallita', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  setCodexTranslateCallForTests(null);
+  try {
+    const result = await withCodexTranslationLane({
+      run: async ({ reserveTransportRetry }) => reserveTransportRetry(Date.now() + 10_000),
+    });
+    assert.equal(result, false);
+    assert.equal(getCascadeStats().codexTranslation.calls, 1);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
 test('le richieste concorrenti non superano il budget, anche quando traducono piu\' testi', async () => {
   // Una corsia: il primo testo parte da solo, i cinque successivi insieme
   // nella seconda richiesta, e il settimo trova il budget di 2 esaurito.

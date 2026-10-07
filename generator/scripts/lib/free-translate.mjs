@@ -1998,7 +1998,7 @@ let _codexBusySince = 0;
 let _codexInFlight = 0;
 /** @type {Array<{clean: string, sourceLang: string, targetLang: string, outcome: any, resolve: (value: string) => void, reject: (error: unknown) => void}>} */
 let _codexPending = [];
-/** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: () => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
+/** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: (callDeadlineMs?: number | null) => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
 let _codexLanePending = [];
 let _codexConsecutiveFailures = 0;
 let _codexStopReason = '';
@@ -2210,10 +2210,14 @@ export function beginCodexTranslationCall(options = {}) {
   return _admitCodexTranslationCall({ ...admissionOptions, trackInFlight });
 }
 
-/** Riserva un solo retry fisico, senza aprire una seconda corsia temporale. */
-function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs) {
+/**
+ * Riserva un solo retry fisico, senza aprire una seconda corsia temporale.
+ * `callDeadlineMs` e' la deadline gia' concessa alla chiamata che ha fallito:
+ * un retry non puo' allungarla solo perche' il processo ha ancora margine.
+ */
+function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs, callDeadlineMs = null) {
   const admission = _admitCodexTranslationCall({
-    processDeadlineMs,
+    processDeadlineMs: callDeadlineMs ?? processDeadlineMs,
     trackInFlight: false,
   });
   if (!admission) return false;
@@ -2305,7 +2309,7 @@ function _pumpCodex() {
             deadlineMs: admission.deadlineMs,
             admission,
             admitCall,
-            reserveTransportRetry: () => _reserveCodexTransportRetry(request.processDeadlineMs),
+            reserveTransportRetry: (callDeadlineMs) => _reserveCodexTransportRetry(request.processDeadlineMs, callDeadlineMs),
           });
         } finally {
           // `trackInFlight:false` leaves the shared lane measurement to the
@@ -2414,7 +2418,7 @@ async function _translateGroupWithCodex(group) {
     // The first attempt is admitted below. ai-models.mjs calls this hook only
     // immediately before a physical transport retry, so every broker attempt
     // consumes the same shared ledger without reserving retries that never run.
-    onCodexTransportRetry: () => _reserveCodexTransportRetry(),
+    onCodexTransportRetry: (callDeadlineMs) => _reserveCodexTransportRetry(_codexProcessDeadlineMs, callDeadlineMs),
   };
   let byText;
   try {

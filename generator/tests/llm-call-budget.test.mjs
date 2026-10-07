@@ -409,6 +409,11 @@ test('④ la recovery Codex non riapre una chiamata senza deadline quando il res
     /deadlineMs === null \? \{\} : \{ deadlineMs \}/,
     'una deadline scaduta non deve piu\' degradare a opzioni senza termine',
   );
+  assert.match(
+    CODE,
+    /function legacyTranslationOptions\(\) \{[\s\S]*?const processDeadlineMs = _pendingBodyCodexDeadlineMs;[\s\S]*?\.\.\.\(processDeadlineMs === null \? \{\} : \{ deadlineMs: processDeadlineMs \}\)/,
+    'un producer importato non deve ereditare il wall-clock della CLI',
+  );
 });
 
 test('④ la seconda corsia ammette ogni segmento Codex fisico', () => {

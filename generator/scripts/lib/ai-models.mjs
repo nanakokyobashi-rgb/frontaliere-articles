@@ -9087,7 +9087,7 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
       // it is sent. Returning false keeps the original transport error and
       // lets callLLM continue with the next model in its chain.
       if (typeof opts.onCodexTransportRetry === 'function'
-        && opts.onCodexTransportRetry() === false) throw error;
+        && opts.onCodexTransportRetry(opts.deadlineMs) === false) throw error;
     }
   }
 }
@@ -9109,7 +9109,7 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
  * @param {number} [opts.backoffMs=2500]
  * @param {boolean} [opts.retryCodexTransport=false] — opt-in retry for Codex broker transport flaps
  * @param {number} [opts.codexTransportRetries=2] — maximum retries when the opt-in is enabled
- * @param {() => boolean} [opts.onCodexTransportRetry] — return false to refuse a physical retry
+ * @param {(deadlineMs?: number) => boolean} [opts.onCodexTransportRetry] — return false to refuse a physical retry
  * @returns {Promise<string>} — Text content from the model
  */
 export async function callSingleModel(messages, opts = {}) {
@@ -9202,7 +9202,7 @@ export async function callSingleModel(messages, opts = {}) {
  *   leave the chain empty; disables the response cache for the call.
  * @param {boolean} [opts.retryCodexTransport=false] — opt-in retry for Codex broker transport flaps
  * @param {number} [opts.codexTransportRetries=2] — maximum retries when the opt-in is enabled
- * @param {() => boolean} [opts.onCodexTransportRetry] — return false to refuse a physical retry
+ * @param {(deadlineMs?: number) => boolean} [opts.onCodexTransportRetry] — return false to refuse a physical retry
  * @returns {Promise<string>} — Text content from whichever model succeeded
  */
 export async function callLLM(messages, opts = {}) {

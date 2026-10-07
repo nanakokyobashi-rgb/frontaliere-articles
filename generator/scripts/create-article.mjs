@@ -12037,10 +12037,13 @@ async function translateArticle(data) {
   }
 
   function legacyTranslationOptions() {
+    // I producer importati non dichiarano una scadenza di processo: non
+    // inventare il wall-clock della CLI, che esiste solo dopo l'installer.
+    const processDeadlineMs = _pendingBodyCodexDeadlineMs;
     return {
       chain: legacyTranslationChain(),
       bypassForceChain: true,
-      deadlineMs: _pendingBodyCodexDeadlineMs ?? (RUN_START_MS + RUN_WALL_BUDGET_MS),
+      ...(processDeadlineMs === null ? {} : { deadlineMs: processDeadlineMs }),
     };
   }
 
