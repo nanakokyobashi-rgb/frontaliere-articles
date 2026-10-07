@@ -13,11 +13,12 @@
  *
  * Cosa decide, e perche' qui e non nel generatore:
  *
- *   - QUANDO una sezione cantonale genera davvero (D16): `enabled` nel profilo
- *     OPPURE la sezione elencata in `CANTON_ARTICLE_SECTIONS_ENABLED` (Remote
- *     Config, mappata in `load-rc-env.mjs`; assente o vuota = nessun cantone).
- *     Il generatore chiede `resolveCantonSectionGate` e, se chiusa, esce pulito
- *     con il marcatore `CANTON_SECTION_DISABLED section=<id>`.
+ *   - QUANDO una sezione cantonale genera davvero (D16): il profilo `enabled`
+ *     attiva la sezione nel corpus, ma la generazione richiede ANCHE la sezione
+ *     elencata in `CANTON_ARTICLE_SECTIONS_ENABLED` (Remote Config, mappata in
+ *     `load-rc-env.mjs`; assente o vuota = nessun cantone). Il generatore
+ *     chiede `resolveCantonSectionGate` e, se chiusa, esce pulito con il
+ *     marcatore `CANTON_SECTION_DISABLED section=<id>`.
  *   - DOVE scrive lo stato (D18): ledger URL->id, quote per dominio,
  *     `quota-state.json` e i contatori `topic-candidates-*` di una sezione
  *     cantonale stanno sotto `data/sections/<id>/`. 24 scrittori paralleli non
@@ -289,18 +290,18 @@ export function parseEnabledCantonSections(raw) {
 }
 
 /**
- * La sezione cantonale puo' generare? `enabled` nel profilo (P11, committato)
- * oppure l'elenco di Remote Config. Default sicuro: spenta.
+ * La sezione cantonale puo' generare? Deve essere attiva nel profilo corpus
+ * (D22) E presente nell'elenco Remote Config (D16). `enabled` da solo non
+ * autorizza mai una generazione; assente o vuoto = spenta.
  *
  * @param {string} section
  * @param {{ env?: Record<string, string | undefined>, profiles?: any }} [opts]
- * @returns {{ enabled: boolean, via: 'profile' | 'env' | null, unknown: string[] }}
+ * @returns {{ enabled: boolean, via: 'env' | null, unknown: string[] }}
  */
 export function resolveCantonSectionGate(section, { env = process.env, profiles } = {}) {
   const profile = cantonSectionProfile(section, profiles ?? loadCantonSectionProfiles());
   const { sections, unknown } = parseEnabledCantonSections(env?.[CANTON_SECTIONS_ENABLED_ENV]);
-  if (profile.enabled === true) return { enabled: true, via: 'profile', unknown };
-  if (sections.has(section)) return { enabled: true, via: 'env', unknown };
+  if (profile.enabled === true && sections.has(section)) return { enabled: true, via: 'env', unknown };
   return { enabled: false, via: null, unknown };
 }
 
