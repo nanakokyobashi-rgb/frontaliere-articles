@@ -32,7 +32,13 @@ function commitSeed(seed, message, epoch) {
   });
 }
 
-function seedRemote({ body, remoteRevision = null, remoteEpoch = 1_000_000_000 }) {
+function seedRemote({
+  body,
+  remoteRevision = null,
+  remoteEpoch = 1_000_000_000,
+  seedEpoch = remoteEpoch - 10,
+  seedRevision = null,
+}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-monotonic-'));
   const seed = path.join(root, 'seed');
   const remote = path.join(root, 'remote.git');
@@ -42,8 +48,13 @@ function seedRemote({ body, remoteRevision = null, remoteEpoch = 1_000_000_000 }
   git(['init', '-q', '-b', 'main', seed]);
   git(['-C', seed, 'config', 'user.name', 'monotonic test']);
   git(['-C', seed, 'config', 'user.email', 'monotonic-test@example.invalid']);
-  commitSeed(seed, 'seed', remoteEpoch - 10);
+  commitSeed(seed, seedRevision ? `seed\n\nContent-Rev: ${seedRevision}` : 'seed', seedEpoch);
   git(['init', '--bare', '-q', '-b', 'main', remote]);
+  // Lo script clona con --depth 1 --filter=blob:none. Git ignora --depth su un
+  // path locale, quindi il remote si raggiunge come file:// (vedi runPush): una
+  // guardia verificata solo su un clone completo non dice niente della
+  // produzione.
+  git(['-C', remote, 'config', 'uploadpack.allowfilter', 'true']);
   git(['-C', seed, 'remote', 'add', 'origin', remote]);
   git(['-C', seed, 'push', '-q', 'origin', 'main']);
 
@@ -72,7 +83,7 @@ function runPush(remote, incomingHtml, { revision = null, failFetch = false, tra
   const env = {
     ...process.env,
     SHARD_ARTICOLIFRONTALIERE_IT_DEPLOY_KEY: 'test-deploy-key',
-    SHARD_REPO_OVERRIDE: remote,
+    SHARD_REPO_OVERRIDE: `file://${remote}`,
     ARTICLE_PUSH_SUMMARY_FILE: summary,
     RUNNER_TEMP: runnerTemp,
     GITHUB_PAT: '',
@@ -118,6 +129,47 @@ test('Content-Rev remoto più recente mantiene la pagina senza leggere il blob r
     assert.equal(remoteHtml(scenario.remote), page('remote-newer'));
     assert.match(result.output, /kept remote for 1 newer article path/);
     assert.doesNotMatch(result.traceText, new RegExp(`show HEAD:${REL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
+  } finally {
+    fs.rmSync(scenario.root, { recursive: true, force: true });
+  }
+});
+
+// La forma tipica in produzione: uno shard poco mosso, il cui commit precedente
+// è vecchio di ore. La pubblicazione più recente è allora il commit più vecchio
+// che la finestra porta con sé, e arriva senza il genitore. La prima versione
+// della guardia non poteva confrontarlo, lo saltava in silenzio e sovrascriveva
+// la pagina (sondato su un remote file://; la suite usava un path locale, dove
+// il clone non è mai superficiale).
+test('pubblicazione più recente tenuta anche se il commit precedente è fuori dalla finestra', () => {
+  const remoteEpoch = 2_000_000_100;
+  const scenario = seedRemote({
+    body: page('remote'),
+    remoteRevision: `${remoteEpoch}.fffffff`,
+    remoteEpoch,
+    seedEpoch: remoteEpoch - 5 * 3600,
+  });
+  try {
+    const result = runPush(scenario.remote, page('incoming-older'), { revision: `${remoteEpoch - 600}.aaaaaaa`, trace: true });
+    assert.equal(result.head, scenario.head);
+    assert.equal(remoteHtml(scenario.remote), page('remote-newer'));
+    assert.match(result.output, /kept remote for 1 newer article path/);
+    // Prova che il ramo superficiale è stato percorso: su un clone completo
+    // non c'è niente da approfondire.
+    assert.match(result.traceText, /fetch .*--deepen=1/);
+    assert.match(result.summaryText, /\t1\t[^\t]+\t0\n$/);
+  } finally {
+    fs.rmSync(scenario.root, { recursive: true, force: true });
+  }
+});
+
+test('pubblicazione più recente tenuta quando è il commit radice dello shard', () => {
+  const remoteEpoch = 2_000_000_100;
+  const scenario = seedRemote({ body: page('remote'), remoteEpoch, seedEpoch: remoteEpoch, seedRevision: `${remoteEpoch}.fffffff` });
+  try {
+    const result = runPush(scenario.remote, page('incoming-older'), { revision: `${remoteEpoch - 600}.aaaaaaa` });
+    assert.equal(result.head, scenario.head);
+    assert.equal(remoteHtml(scenario.remote), page('remote'));
+    assert.match(result.output, /kept remote for 1 newer article path/);
   } finally {
     fs.rmSync(scenario.root, { recursive: true, force: true });
   }

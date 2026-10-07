@@ -503,8 +503,10 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
     console.error(`[${logPrefix}] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
     missing?.push({ kind: 'hero', local: heroLocal, key: heroKey });
   }
-  if (downloadedImageKeys.has(thumbKey)) {
-    console.log(`[${logPrefix}] skipping CDN upload for downloaded image ${thumbKey}`);
+  if (downloadedImageKeys.has(thumbKey) || downloadedImageKeys.has(heroKey)) {
+    // The hero came FROM the CDN: its thumbnail lives there too, and its
+    // absence from this checkout is expected, not a missing asset.
+    console.log(`[${logPrefix}] skipping CDN upload for the thumbnail of downloaded image ${heroKey}`);
   } else if (fs.existsSync(path.join(rootDir, thumbLocal))) {
     cdnUploadsByKey.set(thumbKey, {
       local: thumbLocal,

@@ -402,6 +402,17 @@ jobs:
           article_count="$(jq -r '.ids | length' "$summary")"
           expected_ids="$(jq -c '.ids | sort' "$summary")"
 
+          # Un articolo trattenuto non deve passare in silenzio: la pagina online
+          # resta com'e`, ma chi legge la run deve vedere quale e perche`.
+          withheld="$(jq -r '[.imagePostcondition.excludedArticles[]?.articleId] | join(", ")' "$summary")"
+          if [ -n "$withheld" ]; then
+            echo "::warning title=Articolo trattenuto dalla post-condizione sull'immagine::$withheld: il registro dichiara un'immagine che il rendering non ha risolto; la pagina online non viene sostituita"
+          fi
+          fetch_failures="$(jq -r '[.imageFetchFailures[]? | "\(.articleId) (\(.image): \(.reason))"] | join("; ")' "$summary")"
+          if [ -n "$fetch_failures" ]; then
+            echo "::warning title=Immagine dichiarata non disponibile sulla CDN::$fetch_failures"
+          fi
+
           # Every path the summary promises must exist and be non-empty. A
           # zero-item archive renders "successfully" (the core EMITS-EMPTY by
           # design), so size alone is not enough — the archive must also list
