@@ -135,6 +135,7 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config for rate-limit reads
+        id: load_rc_env
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -506,6 +507,7 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config (GITHUB_PAT_NANAKO)
+        id: load_rc_env
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -514,7 +516,7 @@ jobs:
       # (`gh-pat-expiry-monitor.yml`), che resta l'owner dell'auto-close.
       # `GH_TOKEN` e' il GITHUB_TOKEN, non il PAT: e' il PAT la cosa rotta.
       - name: Alert token-down (dedup, zero-Claude)
-        if: always()
+        if: always() && steps.load_rc_env.outcome != 'skipped'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

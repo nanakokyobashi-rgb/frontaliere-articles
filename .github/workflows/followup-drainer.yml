@@ -111,11 +111,12 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config
+        id: load_rc_env
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Alert token-down (dedup, zero-Claude)
-        if: always()
+        if: always() && steps.load_rc_env.outcome != 'skipped'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

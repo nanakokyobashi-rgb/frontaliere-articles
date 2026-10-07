@@ -67,6 +67,7 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config (GITHUB_PAT)
+        id: load_rc_env
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -97,7 +98,7 @@ jobs:
       # silenzio: nessuna close, nessun re-queue e nessun alert. Qui l'alert
       # scatta sulla stessa identita' che il preflight richiede.
       - name: Alert token-down (dedup, zero-Claude)
-        if: always()
+        if: always() && steps.load_rc_env.outcome != 'skipped'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

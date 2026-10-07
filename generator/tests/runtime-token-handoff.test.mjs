@@ -111,17 +111,30 @@ test('nessun workflow del repo reintroduce handoff env.* dopo load-rc-env', () =
   );
 });
 
-test('gli alert token-down leggono la disponibilità dalla shell runtime', () => {
+test('gli alert token-down richiedono un loader eseguito e leggono la shell runtime', () => {
   for (const file of [
     'followup-drainer.yml',
     'issue-triage.yml',
     'pr-autorebase.yml',
     'pr-redcheck-fixer.yml',
+    'pr-redflag-fixer.yml',
     'recycle-stale-prs.yml',
   ]) {
     const yaml = source(file);
-    assert.match(yaml, /Alert token-down[\s\S]*?if: always\(\)[\s\S]*?Token operativo runtime disponibile/,
-      `${file}: alert token-down non protetto dalla verifica runtime`);
+    const steps = yaml.split(/\n(?=      - name: )/);
+    const loaders = steps.filter((step) => /      - name: Load secrets from Remote Config/.test(step));
+    const alerts = steps.filter((step) => /      - name: Alert token-down \(dedup, zero-Claude\)/.test(step));
+    assert.ok(loaders.length >= alerts.length, `${file}: loader Remote Config mancanti`);
+    assert.ok(alerts.length > 0, `${file}: alert token-down mancante`);
+    for (const step of loaders) {
+      assert.match(step, /\n        id: load_rc_env\n/, `${file}: loader senza id osservabile`);
+    }
+    for (const step of alerts) {
+      assert.match(step, /\n        if: always\(\) && steps\.load_rc_env\.outcome != 'skipped'\n/,
+        `${file}: alert token-down deve saltare se il loader è skipped`);
+      assert.match(step, /Token operativo runtime disponibile/,
+        `${file}: alert token-down non protetto dalla verifica runtime`);
+    }
   }
 });
 
