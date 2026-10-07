@@ -278,6 +278,14 @@ const DECLARED_ABSENT = {
       'bundle: il validatore del sito misura il prompt contro PROMPT_SCALAR_LIMIT. Qui il tetto ' +
       'del prompt e\' tenuto da generator/tests/followup-template-acceptance.test.mjs; niente dipende dal file.',
   },
+  'scripts/lib/cdn-shell-assets.mjs :: scripts/lib/deploy-it-pages-prep.sh': {
+    kind: 'site-only',
+    reason:
+      'L\'intestazione del gemello identical dice quando il sito porta dist/assets sulla CDN, ' +
+      'nominando il suo script di deploy: e\' la spiegazione del difetto, non un referente. Qui il ' +
+      'passo e\' scripts/ci/ensure-host-shell-assets.mjs e carica con scripts/lib/upload-cdn-file.sh; ' +
+      'il legame con i workflow e\' asserito da host/tests/host-shell-assets.test.mjs.',
+  },
   '.github/workflows/publish-api-unwedge.yml :: pages-publish-lag-watchdog.yml': {
     kind: 'site-only',
     reason:
