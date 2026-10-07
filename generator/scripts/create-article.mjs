@@ -5309,19 +5309,20 @@ function appendSourceCitation(data, url) {
     : String(url || '').startsWith('stats-astra://')
       ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
       : url;
-  if (!citationUrl || String(citationUrl).startsWith('evergreen://')) return data;
-  try {
-    const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
-    const sourceLabel = { it: 'Fonte', en: 'Source', de: 'Quelle', fr: 'Source' };
-    for (const locale of ['it', 'en', 'de', 'fr']) {
-      if (!data.content?.[locale]?.body3) continue;
-      const label = sourceLabel[locale] || 'Source';
-      if (!data.content[locale].body3.includes(sourceDomain)) {
-        data.content[locale].body3 += `\n\n*${label}: [${sourceDomain}](${citationUrl})*`;
+  if (citationUrl && !citationUrl.startsWith('evergreen://')) {
+    try {
+      const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
+      const sourceLabel = { it: 'Fonte', en: 'Source', de: 'Quelle', fr: 'Source' };
+      for (const locale of ['it', 'en', 'de', 'fr']) {
+        if (!data.content?.[locale]?.body3) continue;
+        const label = sourceLabel[locale] || 'Source';
+        if (!data.content[locale].body3.includes(sourceDomain)) {
+          data.content[locale].body3 += `\n\n*${label}: [${sourceDomain}](${citationUrl})*`;
+        }
       }
-    }
-    console.error(`  📰 Citazione fonte aggiunta: ${sourceDomain}`);
-  } catch { /* invalid URL — skip */ }
+      console.error(`  📰 Citazione fonte aggiunta: ${sourceDomain}`);
+    } catch { /* invalid URL — skip */ }
+  }
   return data;
 }
 
