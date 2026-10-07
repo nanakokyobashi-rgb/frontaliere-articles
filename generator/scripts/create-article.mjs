@@ -7770,6 +7770,14 @@ let lastSourcePublishedAt = '';
 // estratto e' il corpo, senza l'h1, e la verifica degli URL riusati
 // (checkItemOnPage) ha bisogno di entrambi. Stessa vita di lastSourcePublishedAt.
 let lastSourcePageTitle = '';
+// I CMS pubblici di SH restituiscono, insieme alla lista JSON, il corpo
+// editoriale della riga; il permalink e' invece una shell comune che il server
+// puo' reindirizzare alla lista. Il contenuto viene passato alla fetch tramite
+// questo handoff per mantenere la firma storica di fetchPageContent (e i suoi
+// contratti statici), senza fabbricare URL o perdere una fonte ufficiale.
+let pendingCantonSourceContent = '';
+let pendingCantonSourcePublishedAt = '';
+let pendingCantonSourceTitle = '';
 
 // Le fonti delle sezioni storiche continuano a usare il comportamento
 // precedente. Per le sezioni cantonali la pagina dell'articolo deve dichiarare
@@ -7785,21 +7793,15 @@ function sourcePageFetchHeaders() {
 }
 
 async function fetchPageContent(url) {
-  // Clear FIRST, unconditionally, before any early return.
-  //
-  // main() calls generateAndValidateArticle() several times in one process:
-  // Fase 1 retries across real-URL headlines and, on exhaustion, falls through
-  // to the Fase 2 evergreen fallback. Without this reset a Fase-1 source date
-  // (the incident source was 184 days old) would still be set when the
-  // evergreen article — which has no source at all — reaches the freshness
-  // gate, where anything past 90 days is a blocking `stale-source`. That would
-  // spuriously reject innocent evergreen articles, the exact failure mode of
-  // issue #2947 ("the frontaliere evergreen path produced ~0 articles/run").
-  //
-  // Same reasoning as the `_localFallbackUsedThisHeadline` reset in
-  // generateAndValidateArticle(): per-headline state must not leak forward.
+  // Clear per-call state before every synthetic or fetched-source early return.
   lastSourcePublishedAt = '';
   lastSourcePageTitle = '';
+  const suppliedCantonSourceContent = pendingCantonSourceContent;
+  const suppliedCantonSourcePublishedAt = pendingCantonSourcePublishedAt;
+  const suppliedCantonSourceTitle = pendingCantonSourceTitle;
+  pendingCantonSourceContent = '';
+  pendingCantonSourcePublishedAt = '';
+  pendingCantonSourceTitle = '';
 
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
@@ -7874,6 +7876,12 @@ async function fetchPageContent(url) {
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
     lastSourcePublishedAt = publishedAt || '';
     lastSourcePageTitle = pageTitleEvidence(html);
+    if (suppliedCantonSourceContent.length >= 200) {
+      lastSourcePublishedAt = suppliedCantonSourcePublishedAt || lastSourcePublishedAt;
+      lastSourcePageTitle = suppliedCantonSourceTitle || lastSourcePageTitle;
+      console.error(`   📄 Corpo editoriale CMS verificato via JSON: ${suppliedCantonSourceContent.length} chars`);
+      return suppliedCantonSourceContent;
+    }
     const ageNote = lastSourcePublishedAt
       ? ` — fonte del ${lastSourcePublishedAt.slice(0, 10)}`
       : ' — data fonte non rilevata';
@@ -7885,6 +7893,12 @@ async function fetchPageContent(url) {
     return text;
   } catch (e) {
     console.error(`⚠️  Impossibile scaricare la pagina: ${e.message}`);
+    if (suppliedCantonSourceContent.length >= 200) {
+      lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+      lastSourcePageTitle = suppliedCantonSourceTitle;
+      console.error(`   📄 Uso il corpo CMS già verificato dallo scanner JSON: ${suppliedCantonSourceContent.length} chars`);
+      return suppliedCantonSourceContent;
+    }
     console.error('   L\'articolo verrà generato senza contesto dalla pagina web.');
     return '';
   }
@@ -8635,7 +8649,11 @@ async function fetchCantonSourceHeadlines(source, domain) {
   const extra = [Number.isFinite(budget) ? `budget ${budget} richieste` : '', ...notes].filter(Boolean).join('; ');
   console.error(`  📡 ${domain} [${source.parser}]: ${recent.length} recenti su ${raw.length}${extra ? ` (${extra})` : ''}`);
   const selected = recent.length > 0 ? recent : raw.filter((h) => !h.date);
-  return selected.map((h) => ({ ...h, _cantonSourceUrl: source.url }));
+  return selected.map((h) => ({
+    ...h,
+    _cantonSourceUrl: source.url,
+    ...(h.sourceContent ? { _cantonSourceContent: h.sourceContent } : {}),
+  }));
 }
 
 // ── Step 1c: Scan all news sources for recent headlines ─────
@@ -16081,6 +16099,18 @@ async function main() {
       const topicGateTracker = _loadEvergreenRejectedTracker();
       headlines = headlines.filter(h => {
         if (!h.url || !_isTopicGateAbortedUrl(topicGateTracker, normalizeNewsUrl(h.url), SECTION_NAME)) return true;
+        // A prior abort may have happened while a CMS permalink was only a
+        // thin shell. If the current canton scan carries the verified body
+        // from the official JSON API, spend the normal generation gates again:
+        // this is evidence repair, not a topic-gate bypass. Other sources and
+        // all candidates without a verified body remain memo-blocked.
+        const hasVerifiedCantonBody = IS_CANTON
+          && typeof h._cantonSourceContent === 'string'
+          && h._cantonSourceContent.trim().length >= 200;
+        if (hasVerifiedCantonBody) {
+          console.error(`  ♻️ Memo topic-gate ignorato: corpo CMS verificato presente per "${h.headline.slice(0, 60)}…"`);
+          return true;
+        }
         console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${h.headline.slice(0, 60)}…`);
         RUN_REPORT.preFilterDrops.topicGateAbortedRecently = (RUN_REPORT.preFilterDrops.topicGateAbortedRecently || 0) + 1;
         recordDiscardedHeadline({ reason: 'topic_gate_aborted_recently', headline: h.headline });
@@ -16869,6 +16899,13 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   }
 
   // Step 1: Fetch page content
+  pendingCantonSourceContent = typeof sourceContext?._cantonSourceContent === 'string'
+    ? sourceContext._cantonSourceContent
+    : '';
+  pendingCantonSourcePublishedAt = sourceContext?.date instanceof Date && !Number.isNaN(sourceContext.date.getTime())
+    ? sourceContext.date.toISOString()
+    : '';
+  pendingCantonSourceTitle = typeof sourceContext?.headline === 'string' ? sourceContext.headline : '';
   const pageContent = await fetchPageContent(url);
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
