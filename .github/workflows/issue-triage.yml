@@ -1,4 +1,9 @@
 name: Issue triage (deterministic classify + route)
+# L'orologio esterno del sito (Cloud Scheduler, `dispatchLoopClock`) dà un nome
+# ai propri dispatch: il suo osservatore conta una run come «dell'orologio»
+# solo per questo marcatore. Ogni altra run conserva il titolo che GitHub le
+# darebbe. Contratto fissato da generator/tests/loop-clock-workflow-contract.test.mjs.
+run-name: ${{ github.event_name == 'workflow_dispatch' && inputs.loop_clock != '' && format('Issue triage (deterministic classify + route) [loop-clock {0}]', inputs.loop_clock) || github.event.issue.title || 'Issue triage (deterministic classify + route)' }}
 
 # Classifica ogni issue e la instrada: `agent:fix` se va risolta subito,
 # `agent:fix-queued` + `fu-prio:<prio>` se deve passare dalla coda.
@@ -45,6 +50,11 @@ on:
         required: false
         type: boolean
         default: false
+      loop_clock:
+        description: "Impostato solo dall'orologio esterno del sito (id della voce @ slot): dà il nome alla run, nient'altro lo legge"
+        required: false
+        type: string
+        default: ''
 
 # Una run di triage alla volta: i fallimenti arrivano in burst (un provider LLM
 # che cade fa cadere più workflow di generazione insieme) e serializzare evita
