@@ -5930,6 +5930,7 @@ const RAW_ARTICLES = [
  id: 'lamal-vs-ssn-decisione',
  category: 'pratico',
  date: '2026-04-03',
+ updatedAt: '2026-10-07',
  image: '/images/places/lac-lugano.webp',
  hasCalculator: false,
  articleType: 'evergreen',
