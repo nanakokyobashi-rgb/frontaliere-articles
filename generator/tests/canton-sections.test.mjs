@@ -181,6 +181,16 @@ test('viola: enum non validi e dato di categoria fra le news', () => {
   expectViolation(doc, /quirk sconosciuto "inventato"/);
 });
 
+test('viola: filterByCanton deve essere un gruppo reale e proprietario della fonte', () => {
+  let doc = clone();
+  const source = firstNews(doc, 'NW');
+  source.quirks = { ...source.quirks, filterByCanton: 'ZZ' };
+  expectViolation(doc, /NW: newsSources .*filterByCanton="ZZ" non e' un codice cantonale/);
+  doc = clone();
+  firstNews(doc, 'NW').quirks = { ...firstNews(doc, 'NW').quirks, filterByCanton: 'OW' };
+  expectViolation(doc, /NW: newsSources .*filterByCanton="OW" non coincide col profilo proprietario NW/);
+});
+
 test('viola: articlePathPattern non ancorato, non compilabile o fuori da html-links (P5b)', () => {
   const htmlSource = (doc) => doc.cantons.flatMap((c) => c.newsSources.map((s) => [c, s])).find(([, s]) => s.parser === 'html-links');
   const rssSource = (doc) => doc.cantons.flatMap((c) => c.newsSources.map((s) => [c, s])).find(([, s]) => s.parser === 'rss');

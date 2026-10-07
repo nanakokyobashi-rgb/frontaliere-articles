@@ -151,7 +151,16 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs } from './lib/free-translate.mjs';
+import {
+  freeTranslateWithRetry,
+  balanceMarkdownMarkers,
+  setCodexTranslateProcessDeadline,
+  translateWithCodexEngine,
+  withCodexTranslationLane,
+  codexCallDeadlineMs,
+  CODEX_TRANSLATE_TRANSPORT_RETRIES,
+  getCascadeStats,
+} from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -269,7 +278,6 @@ import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTit
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
-import { generateImageFromSpec } from '../../engine/shared/generatedImageEngine.mjs';
 import {
   appendGeneratedImageRecord,
   hasValidBlogImageRecord,
@@ -279,6 +287,7 @@ import {
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from './lib/article-cover-fallback.mjs';
+import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -304,6 +313,7 @@ import {
   cantonPromptLines,
   cantonSectionConfigs,
   cantonSectionSkeletons,
+  filterCantonSourceHeadlines,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
@@ -8567,13 +8577,28 @@ async function fetchCantonSourceHeadlines(source, domain) {
   if (!RUN_REPORT.sources.canton) RUN_REPORT.sources.canton = [];
   const entry = { url: source.url, parser: source.parser, reserve: source.reserve === true, requests: 0, items: 0, recent: 0, status: 'failed' };
   RUN_REPORT.sources.canton.push(entry);
-  const { headlines: raw, requests, notes } = await scanCantonSource(source, {
+  const scanned = await scanCantonSource(source, {
     throttle: _cantonHostThrottle,
     extractRssItems,
     extractHeadlines,
   });
+  let { headlines: raw, requests, notes } = scanned;
   entry.requests = requests;
   entry.items = raw.length;
+  const filterByCanton = source.quirks?.filterByCanton;
+  if (filterByCanton) {
+    const wanted = String(filterByCanton).trim().toUpperCase();
+    const actual = String(SECTION_PROFILE.canton || '').trim().toUpperCase();
+    const before = raw.length;
+    if (wanted !== actual) {
+      raw = [];
+      notes = [...notes, `filterByCanton=${wanted} incompatibile con ${actual}: nessuna voce ammessa`];
+    } else {
+      raw = filterCantonSourceHeadlines(SECTION_PROFILE, source, raw);
+      entry.filteredByCanton = before - raw.length;
+      notes = [...notes, `filtro ${wanted}: ${raw.length}/${before} voci`];
+    }
+  }
   // Se ci sono voci recenti, solo quelle (come le fonti storiche RSS).
   // Altrimenti NON tutte, a differenza delle storiche: una voce con una data
   // piu' vecchia della finestra e' verificabilmente stantia e si scarta qui;
@@ -8584,7 +8609,8 @@ async function fetchCantonSourceHeadlines(source, domain) {
   const budget = sourceRequestBudget(source);
   const extra = [Number.isFinite(budget) ? `budget ${budget} richieste` : '', ...notes].filter(Boolean).join('; ');
   console.error(`  📡 ${domain} [${source.parser}]: ${recent.length} recenti su ${raw.length}${extra ? ` (${extra})` : ''}`);
-  return recent.length > 0 ? recent : raw.filter((h) => !h.date);
+  const selected = recent.length > 0 ? recent : raw.filter((h) => !h.date);
+  return selected.map((h) => ({ ...h, _cantonSourceUrl: source.url }));
 }
 
 // ── Step 1c: Scan all news sources for recent headlines ─────
@@ -8858,7 +8884,7 @@ async function scanNewsSources() {
       // la fonte lo da', e' parte del testo giudicato.
       const gateText = IS_CANTON && h.lead ? `${text} ${h.lead}` : text;
       const anchored = IS_CANTON
-        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url)
+        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url, h._cantonSourceUrl, h._cantonFilterBy)
         : hasDomainAnchor(text) || localNewsCandidate;
       if (dropAnchorless && !anchored) {
         droppedAnchor += 1;
@@ -11867,12 +11893,14 @@ Rispondi con un JSON object (no markdown, no code fences):
  * quel report per il cap sono gia' chiusi.
  *
  * Ogni chiamata ha la stessa finestra di una traduzione del tier Codex
- * (`codexCallDeadlineMs` di lib/free-translate.mjs: tetto per chiamata di
- * 180 s, coda del broker compresa, limitato dalla scadenza che il processo ha
- * dichiarato con `installCodexTranslateProcessDeadline`), mai i 600 s della
- * lane del corpo articolo ne' l'orologio di modulo: un broker bloccato costa
- * al piu' due finestre (la striscia di stop), non il residuo della run. Sotto
- * la finestra minima la chiamata non parte e il body resta in attesa.
+ * (`withCodexTranslationLane` + `beginCodexTranslationCall` di
+ * lib/free-translate.mjs: il tetto per chiamata di 180 s, coda del broker
+ * compresa, viene calcolato quando una corsia si libera e resta limitato dalla
+ * scadenza che il processo ha dichiarato con `installCodexTranslateProcessDeadline`),
+ * mai i 600 s della lane del corpo articolo ne' l'orologio di modulo: un broker
+ * bloccato costa al piu' due finestre (la striscia di stop), non il residuo
+ * della run. Sotto la finestra minima la chiamata non parte e il body resta in
+ * attesa.
  *
  * La corsia e' ARMATA solo nel percorso CLI, dallo stesso installer: e' li'
  * che il job ha il broker Codex e che la guardia `missing-key` di
@@ -11888,42 +11916,85 @@ function pendingBodySecondLaneAvailable() {
   return _pendingBodySecondLaneArmed && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
 }
 
-async function translatePendingBodyWithCodex(itValue, locale, field) {
+async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCall = null } = {}) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
-  const deadlineMs = codexCallDeadlineMs({
-    now: Date.now(),
-    budgetRemainingMs: Number.POSITIVE_INFINITY,
-    processDeadlineMs: _pendingBodyCodexDeadlineMs,
-  });
-  if (deadlineMs === null) {
-    throw new Error('finestra residua troppo corta per una chiamata Codex');
-  }
-  const call = (messages, opts = {}) => _aiCallLLM(messages, {
-    ...opts,
-    model: codex,
-    chain: [codex],
-    prefer: [codex],
-    bypassForceChain: true,
+  const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
   });
-  const rejected = [];
-  const text = await translateFieldFreeMt({
-    text: itValue,
-    sourceLang: 'it',
-    targetLang: locale,
-    fieldType: 'description',
-    fieldName: field,
-    translate: ({ text: masked, sourceLang, targetLang, fieldType }) => translateWithCodexEngine({
-      text: masked, sourceLang, targetLang, fieldType, call,
-    }),
-    balanceMarkdown: balanceMarkdownMarkers,
-    onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
-    onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+  return withCodexTranslationLane({
+    processDeadlineMs: _pendingBodyCodexDeadlineMs,
+    fallback: () => {
+      throw new Error('finestra residua troppo corta o lane Codex non disponibile');
+    },
+    run: async ({ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry }) => {
+      // Mantieni il guard esplicito del chiamante dopo l'ammissione: il
+      // residuo deriva dalla deadline concessa dallo scheduler, mai da un
+      // budget infinito calcolato prima della coda.
+      const deadlineMs = codexCallDeadlineMs({
+        now: Date.now(),
+        budgetRemainingMs: Math.max(0, laneDeadlineMs - Date.now()),
+        processDeadlineMs: _pendingBodyCodexDeadlineMs,
+      });
+      if (deadlineMs === null) {
+        throw new Error('finestra residua troppo corta per una chiamata Codex');
+      }
+      const codexCallOptions = {
+        model: codex,
+        chain: [codex],
+        prefer: [codex],
+        bypassForceChain: true,
+        retryCodexTransport: true,
+        codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
+        codexTransportBackoffMs: 1_000,
+        onCodexTransportRetry: reserveTransportRetry,
+        deadlineMs,
+      };
+      const callForDeadline = (callDeadlineMs) => (messages, opts = {}) => _aiCallLLM(messages, {
+        ...opts,
+        ...codexCallOptions,
+        ...codexDeadlineOptions(callDeadlineMs),
+      });
+      const rejected = [];
+      const text = await translateFieldFreeMt({
+        text: itValue,
+        sourceLang: 'it',
+        targetLang: locale,
+        fieldType: 'description',
+        fieldName: field,
+        translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
+          const callAdmission = admitCall();
+          if (!callAdmission) {
+            throw new Error('budget Codex esaurito prima della chiamata fisica');
+          }
+          // La prima admission e' quella gia' concessa dalla lane. Le
+          // successive sono riservate qui, davanti a ogni segmento reale, e
+          // portano una deadline ricalcolata sul residuo del ledger.
+          const callDeadlineMs = callAdmission === admission
+            ? deadlineMs
+            : callAdmission.deadlineMs;
+          onCodexCall?.();
+          try {
+            return await translateWithCodexEngine({
+              text: masked,
+              sourceLang,
+              targetLang,
+              fieldType,
+              call: callForDeadline(callDeadlineMs),
+            });
+          } finally {
+            callAdmission.finish();
+          }
+        },
+        balanceMarkdown: balanceMarkdownMarkers,
+        onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
+        onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+      });
+      if (!text && rejected.length > 0) {
+        console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
+      }
+      return text;
+    },
   });
-  if (!text && rejected.length > 0) {
-    console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
-  }
-  return text;
 }
 
 /** La seconda corsia non avvia una chiamata dopo lo stop cooperativo o a ridosso della scadenza dichiarata. */
@@ -11954,8 +12025,52 @@ async function translateArticle(data) {
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
   RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
   resetBodyTranslationPending(data);
+  const cascadeStatsBeforeTranslation = getCascadeStats();
+  let translationRecoveryCodexCalls = 0;
 
-  async function callWithRetry(prompt, maxTokens, label) {
+  // A recovery call is a translation call only when it opts into the Codex
+  // model explicitly. The fallback remains the scored historical chain with
+  // Codex removed, so a missing/disabled broker cannot strand the legacy path
+  // and fact-checks or second opinions cannot inherit this preference.
+  function legacyTranslationChain() {
+    return DEFAULT_CHAIN.filter((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+  }
+
+  function legacyTranslationOptions() {
+    // I producer importati non dichiarano una scadenza di processo: non
+    // inventare il wall-clock della CLI, che esiste solo dopo l'installer.
+    const processDeadlineMs = _pendingBodyCodexDeadlineMs;
+    return {
+      chain: legacyTranslationChain(),
+      bypassForceChain: true,
+      ...(processDeadlineMs === null ? {} : { deadlineMs: processDeadlineMs }),
+    };
+  }
+
+  function codexTranslationRecoveryOptions(deadlineMs, reserveTransportRetry) {
+    // Never omit the deadline: spreading `{}` here let a recovery retry fall
+    // back to ai-models' unbounded default exactly when the process was near
+    // its wall-clock cap. The caller turns this into a clean, typed stop. The
+    // historical chain follows Codex in the same call, so a broker transport
+    // failure falls through without waiting for a later field to recover it.
+    if (deadlineMs === null) return null;
+    return {
+      model: AI_MODELS.CODEX_CLI_PRIMARY,
+      chain: [AI_MODELS.CODEX_CLI_PRIMARY, ...legacyTranslationChain()],
+      prefer: [AI_MODELS.CODEX_CLI_PRIMARY],
+      bypassForceChain: true,
+      retryCodexTransport: true,
+      codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
+      codexTransportBackoffMs: 1_000,
+      // callWithRetry owns repairLlmJson plus the final shape check. Let the
+      // Codex broker carry fenced/repairable JSON to that validation layer.
+      deferJsonValidation: true,
+      deadlineMs,
+      onCodexTransportRetry: reserveTransportRetry,
+    };
+  }
+
+  async function callWithRetry(prompt, maxTokens, label, { translation = false } = {}) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
     // Niente try/catch attorno a callLLM qui, a differenza del gemello
     // requestHeadlineSelection (#391) — verificato in review su PR #604
@@ -11972,10 +12087,37 @@ async function translateArticle(data) {
     // precedente giro di questa PR. Se un giorno il wrapper guadagnasse un
     // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
     // cattura qui avrebbe senso; oggi no.
-    const raw = await callLLM(
-      [{ role: 'user', content: safePrompt }],
-      { temperature: 0.5, maxTokens, jsonMode: true },
-    );
+    const call = async (tokens, temperature = 0.5) => {
+      const messages = [{ role: 'user', content: safePrompt }];
+      const baseOptions = {
+        temperature,
+        maxTokens: tokens,
+        jsonMode: true,
+      };
+      const historicalCall = () => callLLM(messages, {
+        ...baseOptions,
+        ...(translation ? legacyTranslationOptions() : {}),
+      });
+      if (!translation) return historicalCall();
+
+      // The same scheduler serves free-MT batches and this legacy path. The
+      // producer may issue dozens of prompts through nested Promise.all calls,
+      // but only the shared Codex lane count can enter the broker at once.
+      // If Codex is disabled/missing, callLLM receives an explicit non-Codex
+      // historical chain immediately instead of being aborted before it runs.
+      if (!isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) return historicalCall();
+      return withCodexTranslationLane({
+        processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
+        fallback: historicalCall,
+        run: async ({ deadlineMs, reserveTransportRetry }) => {
+          const translationOptions = codexTranslationRecoveryOptions(deadlineMs, reserveTransportRetry);
+          if (translationOptions === null) return historicalCall();
+          translationRecoveryCodexCalls += 1;
+          return callLLM(messages, { ...baseOptions, ...translationOptions });
+        },
+      });
+    };
+    const raw = await call(maxTokens);
     const repaired = repairLlmJson(raw);
     try {
       return JSON.parse(repaired);
@@ -11987,10 +12129,7 @@ async function translateArticle(data) {
       const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
       const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
       console.error(`  🔄 Retry ${label} con maxTokens=${retry1Tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
-      const raw2 = await callLLM(
-        [{ role: 'user', content: safePrompt }],
-        { temperature: 0.5, maxTokens: retry1Tokens, jsonMode: true },
-      );
+      const raw2 = await call(retry1Tokens);
       try {
         const result = JSON.parse(repairLlmJson(raw2));
         console.error(`  ✅ Retry riuscito per ${label}`);
@@ -11999,10 +12138,7 @@ async function translateArticle(data) {
         console.error(`  ⚠️  Retry 1 fallito (${label}): ${retryErr.message} — tentativo 2...`);
         // Third attempt with maximum tokens
         const retry2Tokens = 16000;
-        const raw3 = await callLLM(
-          [{ role: 'user', content: safePrompt }],
-          { temperature: 0.3, maxTokens: retry2Tokens, jsonMode: true },
-        );
+        const raw3 = await call(retry2Tokens, 0.3);
         try {
           const result3 = JSON.parse(repairLlmJson(raw3));
           console.error(`  ✅ Retry 2 riuscito per ${label}`);
@@ -12038,6 +12174,7 @@ async function translateArticle(data) {
           makeChunkPrompt(chunk, i, chunks.length),
           Math.max(5000, Math.ceil(countWords(chunk) * 5)),
           `${labelPrefix}-p${i + 1}`,
+          { translation: true },
         ),
       ),
     );
@@ -12113,7 +12250,7 @@ ${terminologyByLang[targetLang] || ''}`;
         const result = await callWithRetry(makePrompt(
           `CONTENUTO ITALIANO DA TRADURRE:\n- ${bodyKey}: ${bodyText}`,
           `{"${bodyKey}": "..."}`,
-        ), bodyTokens(bodyText), `${lang}:${bodyKey.replace('body', 'b')}`);
+        ), bodyTokens(bodyText), `${lang}:${bodyKey.replace('body', 'b')}`, { translation: true });
         // A model answering {"body1": {...}} / {"body1": [...]} still parses as
         // valid JSON. Returning it would carry an object into a string context
         // downstream, which stringifies to the literal "[object Object]" and
@@ -12165,7 +12302,7 @@ ${terminologyByLang[targetLang] || ''}`;
       ? callWithRetry(makePrompt(
           `CONTENUTO ITALIANO DA TRADURRE:\n- faq: ${JSON.stringify(sourceContent.faq)}`,
           '{"faq": [{"q": "...", "a": "..."}]}',
-        ), 1500, `${targetLang}:faq`).catch(err => {
+        ), 1500, `${targetLang}:faq`, { translation: true }).catch(err => {
           console.error(`  ⚠️  FAQ translation failed for ${targetLang}: ${err.message}`);
           return { faq: sourceContent.faq }; // Fallback to Italian
         })
@@ -12192,7 +12329,7 @@ ${terminologyByLang[targetLang] || ''}`;
       callWithRetry(makePrompt(
         `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.`,
         '{"title": "...", "excerpt": "..."}',
-      ), 1000, `${targetLang}:meta`).catch(onTranslateFail(`${targetLang}:meta`)),
+      ), 1000, `${targetLang}:meta`, { translation: true }).catch(onTranslateFail(`${targetLang}:meta`)),
       // Body fields with dynamic sizing + sub-chunking safety.
       ...bodyFields.map((field) =>
         translateBodyField(field, sourceContent[field], targetLang)
@@ -12420,6 +12557,7 @@ ${terminologyByLang[targetLang] || ''}`;
             `Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino. Rispondi SOLO con JSON (no markdown):\n\nCAMPO ITALIANO (${retryFieldLabel}):\n${itValue}\n\nFormato risposta: ${faqPart ? `{"faq": [{"${faqPart}": "..."}]}` : `{"${field}": "..."}`}`,
             1500,
             `${locale}:${recoveryField}-missing-retry`,
+            { translation: true },
           );
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
@@ -12535,6 +12673,7 @@ ${terminologyByLang[targetLang] || ''}`;
             buildRetryPrompt(itValue, 0, 1),
             Math.max(5000, Math.ceil(countWords(itValue || '') * 5)),
             `${locale}:${field}-truncation-retry`,
+            { translation: true },
           );
           retried = translatedStringOrNull(parsed?.[field], locale);
         }
@@ -12604,6 +12743,7 @@ ${terminologyByLang[targetLang] || ''}`;
             buildForcedRetranslationPrompt({ langName, field, itValue: itVal }),
             1000,
             `${locale}:${field}-retry`,
+            { translation: true },
           );
           // Gemello di #798: anche qui il retry SOSTITUIVA il campo con
           // qualunque stringa non vuota, e su `title` quella stringa diventa
@@ -12644,7 +12784,12 @@ ${terminologyByLang[targetLang] || ''}`;
     lane: AI_MODELS.CODEX_CLI_PRIMARY,
     isLaneAvailable: () => pendingBodySecondLaneAvailable(),
     shouldStop: () => pendingBodyLaneShouldStop(),
-    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(itValue, locale, field),
+    translate: ({ locale, field, itValue }) => translatePendingBodyWithCodex(
+      itValue,
+      locale,
+      field,
+      { onCodexCall: () => { translationRecoveryCodexCalls += 1; } },
+    ),
     rejectReason: ({ locale, field, itValue, text }) => {
       if (translatedStringOrNull(text, locale) === null) return 'testo non usabile';
       if (isSourcePassthrough(text, itValue)) return "identico all'italiano";
@@ -12675,6 +12820,7 @@ ${terminologyByLang[targetLang] || ''}`;
           `Riformula il seguente titolo in ${langName} per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${initialCap.originalLength} caratteri, troppo lungo):\n${localeContent.title}\n\nTITOLO ITALIANO ORIGINALE (riferimento):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula in modo conciso.\n\nRispondi SOLO con JSON: {"title": "..."}`,
           1000,
           `${locale}:title-length-retry`,
+          { translation: true },
         );
         // Il retry accorcia: chiedendo «MASSIMO 60 caratteri» il modo tipico di
         // sbagliare e' accorciare TROPPO, e `capBlogTitle` sotto non impone
@@ -12709,6 +12855,24 @@ ${terminologyByLang[targetLang] || ''}`;
     applyMicrocopyGuard(localeContent, locale);
   }
 
+  const cascadeStatsAfterTranslation = getCascadeStats();
+  const codexRequests = (cascadeStatsAfterTranslation.codexTranslation?.calls || 0)
+    - (cascadeStatsBeforeTranslation.codexTranslation?.calls || 0);
+  const codexTexts = (cascadeStatsAfterTranslation.codexTranslation?.texts || 0)
+    - (cascadeStatsBeforeTranslation.codexTranslation?.texts || 0);
+  const codexSeconds = ((cascadeStatsAfterTranslation.codexTranslation?.spentMs || 0)
+    - (cascadeStatsBeforeTranslation.codexTranslation?.spentMs || 0)) / 1000;
+  const tierDelta = Object.fromEntries(Object.keys(cascadeStatsAfterTranslation.tierHits)
+    .map((tier) => [tier, (cascadeStatsAfterTranslation.tierHits[tier] || 0)
+      - (cascadeStatsBeforeTranslation.tierHits[tier] || 0)]));
+  const translatedFields = Object.values(tierDelta).reduce((sum, value) => sum + Math.max(0, value), 0);
+  const codexFields = Math.max(0, tierDelta.codex || 0);
+  const fallbackFields = Math.max(0, translatedFields - codexFields);
+  console.error(
+    `  📏 Traduzioni: Codex ${codexRequests} richieste/${codexTexts} testi/${codexFields} campi `
+    + `in ${codexSeconds.toFixed(1)}s; fallback MT ${fallbackFields} campi; `
+    + `recovery Codex ${translationRecoveryCodexCalls} chiamate`,
+  );
   console.error(`  ✅ Articolo assemblato — ${Object.keys(data.content).length} lingue`);
 }
 
@@ -14294,18 +14458,6 @@ const IMAGE_PHASE_BUDGET_MS = Math.max(
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
-function articleImageSubject(data) {
-  const title = String(data.title || data.content?.it?.title || data.content?.title || '').trim();
-  const context = String(data.imagePrompt || '').replace(/\s+/g, ' ').trim();
-  return [title, context].filter(Boolean).join(' — ').slice(0, 500);
-}
-
-function articleImageAssetId(data) {
-  const raw = String(data.id || 'article').toLowerCase();
-  const normalized = raw.replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
-  return `article-${(normalized || 'article').slice(0, 110)}`;
-}
-
 function materializeGovernedArticleImage(result) {
   const record = result?.record;
   const imageUrl = String(record?.imageUrl || '');
@@ -14344,33 +14496,20 @@ async function generateArticleImage(data) {
     return null;
   }
 
-  const assetId = articleImageAssetId(data);
-  const stagingDir = resolve(`.cache/generated-article-images/${assetId}-${process.pid}-${Date.now()}`);
   let result;
   try {
-    result = await generateImageFromSpec(
-      {
-        scope: 'article-hero',
-        assetId,
-        subject: articleImageSubject(data),
-        area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
-        season: 'all seasons',
-        variant: 'article hero',
+    result = await generateGovernedArticleHero({
+      root: PROJECT_ROOT,
+      data,
+      area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
+      deadlineAt: imageDeadline,
+      onProviderAttempt: ({ provider, attempt }) => {
+        console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
       },
-      {
-        outputDir: stagingDir,
-        assetId,
-        // A provider outage must fall through immediately. The engine itself
-        // owns provider order; this publishing path permits one attempt total.
-        maxAttempts: 1,
-        deadlineAt: imageDeadline,
-        onProviderAttempt: ({ provider, attempt }) => {
-          console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
-        },
-      },
-    );
+    });
   } catch (error) {
-    if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
+    const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
+    if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
@@ -14391,8 +14530,9 @@ async function generateArticleImage(data) {
     return null;
   } finally {
     const cleanupDir = materialized?.stagingDir
+      || result?.stagingDir
       || (result?.filePath ? path.dirname(result.filePath) : null)
-      || stagingDir;
+      || null;
     if (cleanupDir && existsSync(cleanupDir)) {
       rmSync(cleanupDir, { recursive: true, force: true });
     }
@@ -15305,7 +15445,7 @@ const RUN_START_MS = Date.now();
 /**
  * Margine fra la scadenza del tier di traduzione Codex e il budget wall-clock.
  *
- * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s di orologio con almeno
+ * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 900 s di orologio con almeno
  * una richiesta Codex in volo, contati dall'inizio delle traduzioni) non
  * conosce l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
  * traduzioni erano ancora in corso quando il `timeout` del workflow ha ucciso
