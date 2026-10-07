@@ -62,7 +62,7 @@
     "canton-appenzello": {
       "kind": "canton",
       "canton": "APPENZELLO",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-appenzello",
         "en": "appenzell-articles",
@@ -209,7 +209,7 @@
     "canton-fr": {
       "kind": "canton",
       "canton": "FR",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-friburgo",
         "en": "fribourg-articles",
@@ -258,7 +258,7 @@
     "canton-ge": {
       "kind": "canton",
       "canton": "GE",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-ginevra",
         "en": "geneva-articles",
@@ -307,7 +307,7 @@
     "canton-gl": {
       "kind": "canton",
       "canton": "GL",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-glarona",
         "en": "glarus-articles",
@@ -601,7 +601,7 @@
     "canton-ow": {
       "kind": "canton",
       "canton": "OW",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-obvaldo",
         "en": "obwalden-articles",
@@ -748,7 +748,7 @@
     "canton-so": {
       "kind": "canton",
       "canton": "SO",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-soletta",
         "en": "solothurn-articles",
@@ -993,7 +993,7 @@
     "canton-vd": {
       "kind": "canton",
       "canton": "VD",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-vaud",
         "en": "vaud-articles",
