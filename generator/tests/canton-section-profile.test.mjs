@@ -26,10 +26,17 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL, isCantonSection } from '../../engine/shared/articleSectionCore.mjs';
 import {
   CANTON_DISPLAY_NAMES,
+  CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+  CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS,
+  CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+  CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS,
+  CANTON_PROMPT_CONTEXT_MAX_CHARS,
+  CANTON_PROMPT_PUBLISHED_LINE_MAX_CHARS,
   CANTON_SECTIONS_ENABLED_ENV,
   CANTON_STATE_ROOT,
   buildCantonProfile,
   cantonClassifierPrompt,
+  cantonHeadlineSelectionPrompt,
   cantonPromptLines,
   cantonSectionConfigs,
   cantonSectionIds,
@@ -266,6 +273,38 @@ test('prompt cantonali: stesso formato di risposta delle storiche, cantone e con
   // nuovi (ne' altri cantoni), a differenza di quella nazionale.
   assert.match(lines.expandEnrichmentLine, /NON aggiungere NESSUN fatto, numero, comune, altro cantone/);
   assert.match(CREATE_ARTICLE, /const enrichmentLine = IS_CANTON && !boundToText\n\s+\? CANTON_LINES\.expandEnrichmentLine/);
+});
+
+test('prompt cantonali: contesto e liste hanno capi deterministici, lessico di ammissione intatto', () => {
+  const p = buildCantonProfile('canton-gr', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  const classifier = cantonClassifierPrompt(p, {
+    headline: 'Kanton Graubünden ändert die Steuern',
+    sourceHint: 'www.gr.ch/DE/Medien/Mitteilungen/MMStaka/Seiten/Aktuell.aspx',
+    summary: '',
+  });
+  const context = classifier.match(/CONTESTO DEL CANTONE .*?: ([\s\S]*?)\n\nÈ RILEVANTE/u)?.[1] || '';
+  assert.ok(context.length <= CANTON_PROMPT_CONTEXT_MAX_CHARS, `contesto classifier a ${context.length} caratteri`);
+  assert.ok(context.includes('Il Grigioni e\' un cantone di confine'), 'il contesto mantiene il segnale iniziale');
+  assert.ok(context.includes('flussi dall\'Austria sono modesti'), 'il contesto mantiene il segnale finale');
+  assert.ok(p.topicalTerms.length > 100, 'il lessico completo resta disponibile al gate deterministico');
+
+  const candidates = `H1 » (gr.ch) ${'Titolo troppo lungo '.repeat(30)}\nH2 » (gr.ch) ${'Secondo titolo troppo lungo '.repeat(30)}`;
+  const published = `• ${'Articolo già pubblicato '.repeat(30)}`;
+  const selection = cantonHeadlineSelectionPrompt(p, {
+    headlineList: candidates,
+    recentArticles: published,
+    jsonQuoteSafetyRule: 'Regola JSON',
+  });
+  const listed = selection.split('\n').filter((line) => /^(H\d+ »|• )/.test(line));
+  assert.equal(listed.length, 3, 'il cap accorcia le righe, non elimina una candidata o un riferimento');
+  assert.ok(listed.filter((line) => line.startsWith('H')).every((line) => line.length <= CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS));
+  assert.ok(listed.filter((line) => line.startsWith('•')).every((line) => line.length <= CANTON_PROMPT_PUBLISHED_LINE_MAX_CHARS));
+  assert.match(selection, /H2 »/, 'la chiave della seconda candidata resta selezionabile');
+
+  assert.ok(CANTON_PRESPEND_MAX_CLASSIFIER_CALLS <= 12);
+  assert.ok(CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS < 30_000);
+  assert.ok(CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS <= 60_000);
+  assert.match(CREATE_ARTICLE, /const preSpendOptions = IS_CANTON/);
 });
 
 test('create-article: i rami cantonali leggono il profilo, e le storiche restano sui loro testi', () => {

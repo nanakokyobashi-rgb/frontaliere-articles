@@ -292,6 +292,9 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/sha
 import {
   CANTON_SECTION_DISABLED_MARKER,
   CANTON_SECTIONS_ENABLED_ENV,
+  CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+  CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS,
+  CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
   buildCantonProfile,
   cantonClassifierPrompt,
   cantonHeadlineSelectionPrompt,
@@ -916,6 +919,13 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
 async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
   const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
+  const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
+  const classifierDeadline = IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS;
   const prompt = IS_CANTON
     ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
     : IS_FRONTALIERE
@@ -957,7 +967,7 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         model,
         temperature: 0,
         maxTokens: 80,
-        timeout: 30_000,
+        timeout: classifierTimeout,
         jsonMode: false,
         // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
         // camminare l'intera catena di fallback di ai-models.mjs. Il roster
@@ -966,7 +976,9 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
         // diretto, quindi il default del wrapper locale `callLLM` (che il
         // deadlineMs ce l'ha) non si eredita: va passato a mano.
-        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+        // deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS resta il termine per
+        // le sezioni storiche; la cantonale usa una finestra piu' stretta.
+        deadlineMs: classifierDeadline,
       },
     );
   } catch (err) {
@@ -15904,7 +15916,18 @@ async function main() {
       // run 26440805420: 193 RSS candidates dropped because the gate had
       // already emptied headlines[] used as the resolver atlas.
       _provenHeadlinesPreGate = headlines.slice();
-      headlines = await applyPreSpendTopicGate(headlines);
+      const preSpendOptions = IS_CANTON
+        ? {
+          // The canton classifier is fail-open: candidates over the cap remain
+          // unclassified and are still checked by REGOLA #0 downstream. This
+          // bounds provider wait time without dropping a possible local story.
+          maxClassifier: Math.min(
+            CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+            DEFAULT_MAX_CLASSIFIER_CALLS ?? CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
+          ),
+        }
+        : {};
+      headlines = await applyPreSpendTopicGate(headlines, preSpendOptions);
       if (beforePreSpendGate > headlines.length) {
         console.error(`  📋 Post-pre-spend gate: ${headlines.length}/${beforePreSpendGate} headline rimanenti\n`);
       }

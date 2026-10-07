@@ -391,11 +391,16 @@ test('④ il classifier pre-spend porta un deadlineMs', () => {
   const i = CODE.indexOf('const model = process.env.PRESPEND_GATE_MODEL');
   assert.notEqual(i, -1);
   const region = CODE.slice(i, i + 6000);
+  assert.match(
+    region,
+    /const classifierDeadline = IS_CANTON/,
+    'il classifier cantonale deve avere una finestra propria, senza togliere il termine storico',
+  );
   const call = region.slice(region.indexOf('await _aiCallLLM('));
   assert.match(
     call.slice(0, 800),
-    /deadlineMs: RUN_START_MS \+ RUN_WALL_BUDGET_MS/,
-    'REGRESSIONE: una classificazione da 80 token puo tornare a camminare 56 modelli x 2 retry x 30s',
+    /deadlineMs: classifierDeadline/,
+    'REGRESSIONE: una classificazione da 80 token puo tornare a camminare oltre la finestra dichiarata',
   );
 });
 
