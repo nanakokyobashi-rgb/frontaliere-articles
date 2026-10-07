@@ -409,6 +409,28 @@ export function inUploadOrder(pages) {
   return [...pages].sort((a, b) => UPLOAD_ORDER.indexOf(a.kind) - UPLOAD_ORDER.indexOf(b.kind));
 }
 
+/**
+ * Gli aggregati sono obbligatori nel percorso normale. Quando la pipeline ha
+ * trattenuto un articolo, invece, devono essere tutti assenti: il publisher
+ * conserva archive/landing/hub online e carica soltanto le pagine articolo
+ * filtrate che hanno superato la post-condizione.
+ */
+export function aggregatePageDefects(pages, { aggregatePagesAllowed, locales = CANTON_HUB_LOCALES } = {}) {
+  if (!aggregatePagesAllowed) {
+    const leaked = pages.filter((page) => page.kind !== 'article');
+    return leaked.length > 0
+      ? [`pagine aggregate presenti nel percorso article-only: ${leaked.map((page) => page.rel).join(', ')}`]
+      : [];
+  }
+  const defects = [];
+  for (const kind of ['archive', 'landing']) {
+    for (const locale of locales) {
+      if (!pages.some((page) => page.kind === kind && page.locale === locale)) defects.push(`nessuna pagina ${kind} per ${locale}`);
+    }
+  }
+  return defects;
+}
+
 /** Rende i 6 hub (quelli con il file dati) nelle 4 locali. */
 async function renderHubs({ section, distDir }) {
   const { renderCantonTopicHub } = await import('../engine/cantonSectionPages.ts');
@@ -777,11 +799,7 @@ export async function main(argv = process.argv.slice(2)) {
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
     for (const defect of pageDefects(page, html)) defects.push(`${page.rel}: ${defect}`);
   }
-  for (const kind of ['archive', 'landing']) {
-    for (const locale of CANTON_HUB_LOCALES) {
-      if (!pages.some((page) => page.kind === kind && page.locale === locale)) defects.push(`nessuna pagina ${kind} per ${locale}`);
-    }
-  }
+  defects.push(...aggregatePageDefects(pages, { aggregatePagesAllowed }));
 
   // Una sezione dichiarata live deve avere tutti e sei gli hub (lo stesso
   // vincolo che build-api applica al registro): qui si ripete perche' questo

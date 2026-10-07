@@ -19,6 +19,7 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LI
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
   UPLOAD_ORDER,
+  aggregatePageDefects,
   archiveReleasePages,
   articleReleasePages,
   articleReleaseSnapshot,
@@ -75,6 +76,21 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   );
   assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
   assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
+});
+
+test('publisher R2 pubblica article-only ma rifiuta aggregati trapelati', () => {
+  const articles = [{ kind: 'article', locale: 'it', rel: 'articoli-ticino/sano/index.html' }];
+  assert.deepEqual(aggregatePageDefects(articles, { aggregatePagesAllowed: false }), []);
+  assert.deepEqual(
+    aggregatePageDefects([...articles, { kind: 'archive', locale: 'it', rel: 'articoli-ticino/tutti/index.html' }], {
+      aggregatePagesAllowed: false,
+    }),
+    ['pagine aggregate presenti nel percorso article-only: articoli-ticino/tutti/index.html'],
+  );
+  assert.deepEqual(
+    aggregatePageDefects(articles, { aggregatePagesAllowed: true, locales: ['it'] }),
+    ['nessuna pagina archive per it', 'nessuna pagina landing per it'],
+  );
 });
 
 test('publisher: argomenti', () => {
