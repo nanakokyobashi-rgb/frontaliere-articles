@@ -173,8 +173,12 @@ export const CANTON_TOPICAL_TERMS_DE_FR = Object.freeze([
   'loyer', 'logement', 'coût de la vie', 'cout de la vie', 'prix de l\'électricité',
   // mobilita' e servizi
   'verkehr', 'baustelle', 'sperrung', 'gesperrt', 'umleitung', 'stau', 'autobahn', 'fahrplan', 'postauto',
-  'sbb', 'öv', 'trafic', 'chantier', 'fermeture', 'déviation', 'deviation', 'bouchon', 'autoroute',
-  'horaire', 'cff', 'transports publics',
+  'sbb', 'öv', 'fussweg', 'veloweg', 'radweg', 'veloroute', 'verkehrssicherheit', 'verkehrsunfall',
+  'wildunfall', 'strassenverkehr', 'strassensperrung', 'vollsperrung', 'umfahrungsbetrieb', 'umfahrung',
+  'kantonsstr', 'fahrbahn', 'schulweg', 'sicherheitsmassnahmen', 'verkehrsführung',
+  'trafic', 'chantier', 'fermeture', 'fermeture complète', 'fermeture complete', 'déviation', 'deviation',
+  'bouchon', 'autoroute', 'voie cyclable', 'piste cyclable', 'sécurité routière', 'securite routiere',
+  'accident de la route', 'collision avec un animal', 'route cantonale', 'horaire', 'cff', 'transports publics',
   // sanita', scuola, economia
   'spital', 'gesundheit', 'schule', 'volksschule', 'hôpital', 'hopital', 'santé', 'école', 'ecole',
   'wirtschaft', 'unternehmen', 'konkurs', 'firma', 'économie', 'economie', 'entreprise', 'faillite',
@@ -499,6 +503,86 @@ function sourceDomainMap() {
   return _domainMap;
 }
 
+let _sourceUrlMap = null;
+const LOCAL_SOURCE_KINDS = new Set(['media', 'istituzionale', 'polizia']);
+
+/** URL che identificano una pagina-fonte strettamente cantonale. */
+function canonicalSourceUrl(url) {
+  try {
+    const parsed = new URL(String(url || ''));
+    parsed.hash = '';
+    return parsed.toString();
+  } catch {
+    return String(url || '').trim();
+  }
+}
+
+/**
+ * I token del cantone che possono comparire nel percorso della pagina-fonte.
+ * «kanton»/«canton» da soli sono volutamente esclusi: un URL come
+ * `/kanton/medien` non distingue il gruppo. Questo consente di riconoscere
+ * `nau.ch/ort/luzern`, ma non il feed regionale condiviso di Tele 1 o 20min.
+ */
+function cantonSourcePathTokens(code) {
+  const stop = new Set(['kanton', 'canton', 'regierung', 'regierungsrat', 'conseil', 'etat', 'gouvernement']);
+  return [...new Set((CANTON_INSTITUTION_NAMES[code] || [])
+    .flatMap((name) => foldForMatch(name).split(/[^\p{L}\p{N}]+/u))
+    .filter((token) => token.length >= 4 && !stop.has(token)))];
+}
+
+/**
+ * Mappa URL-fonte -> cantone solo quando la pagina e' locale senza ambiguita'.
+ * Il dominio unico resta la regola principale. Per gli host condivisi si
+ * accetta soltanto un URL esatto usato da un solo profilo il cui percorso
+ * contiene il nome del cantone; i feed dichiarati `filterByCanton` restano
+ * esclusi perche' il loro URL e' condiviso per costruzione.
+ *
+ * @param {any} cantonSections
+ */
+export function buildCantonSourceUrlMap(cantonSections = loadCantonSectionProfiles()) {
+  const domainMap = buildSourceDomainMap(cantonSections);
+  const candidates = new Map();
+  for (const profile of cantonSections?.cantons || []) {
+    for (const source of profile.newsSources || []) {
+      const url = canonicalSourceUrl(source.url);
+      if (!url) continue;
+      const host = registrableHost(url);
+      const hostIsLocal = domainMap.get(host) === profile.code;
+      const pathHasCanton = termHits(url, cantonSourcePathTokens(profile.code)) > 0;
+      const scoped = hostIsLocal || (
+        LOCAL_SOURCE_KINDS.has(source.kind)
+        && !source.quirks?.filterByCanton
+        && pathHasCanton
+      );
+      if (!scoped) continue;
+      if (!candidates.has(url)) candidates.set(url, new Set());
+      candidates.get(url).add(profile.code);
+    }
+  }
+  return new Map([...candidates]
+    .filter(([, codes]) => codes.size === 1)
+    .map(([url, codes]) => [url, [...codes][0]]));
+}
+
+function sourceUrlMap() {
+  if (!_sourceUrlMap) _sourceUrlMap = buildCantonSourceUrlMap(loadCantonSectionProfiles());
+  return _sourceUrlMap;
+}
+
+/**
+ * Riduce un feed condiviso alle voci del cantone dichiarato dal quirk. Il
+ * filtro e' volutamente basato sull'area reale del titolo/lead/URL, non sul
+ * dominio del feed: `unterwalden24.ch` serve sia NW sia OW.
+ */
+export function filterCantonSourceHeadlines(profile, source, headlines) {
+  const wanted = String(source?.quirks?.filterByCanton || '').trim().toUpperCase();
+  if (!wanted) return headlines;
+  if (wanted !== String(profile?.canton || '').trim().toUpperCase()) return [];
+  return (headlines || []).filter((h) => profile?.isLocalArea?.(
+    `${h.headline || ''} ${h.lead || ''} ${h.url || ''}`,
+  ));
+}
+
 /**
  * Il profilo di sezione per `kind: 'canton'`. Le parti nazionali (lessico
  * italiano) arrivano dal chiamante: vivono in create-article.mjs e non si
@@ -561,11 +645,13 @@ export function buildCantonProfile(section, deps) {
      * fonte e' una testata/ente `.ch` di questo solo cantone, o (fonti del
      * lato estero) parla di frontalieri.
      */
-    anchors(text, url) {
+    anchors(text, url, sourceUrl) {
       if (isLocalArea(text)) return true;
       if (termHits(text, institutionNames) > 0) return true;
       const host = registrableHost(url || '');
       if (host && sourceDomainMap().get(host) === code) return true;
+      const configuredSource = canonicalSourceUrl(sourceUrl);
+      if (configuredSource && sourceUrlMap().get(configuredSource) === code) return true;
       return hasFrontalieriSignal(text);
     },
   });

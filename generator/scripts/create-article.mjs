@@ -301,6 +301,7 @@ import {
   cantonPromptLines,
   cantonSectionConfigs,
   cantonSectionSkeletons,
+  filterCantonSourceHeadlines,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
@@ -8564,13 +8565,28 @@ async function fetchCantonSourceHeadlines(source, domain) {
   if (!RUN_REPORT.sources.canton) RUN_REPORT.sources.canton = [];
   const entry = { url: source.url, parser: source.parser, reserve: source.reserve === true, requests: 0, items: 0, recent: 0, status: 'failed' };
   RUN_REPORT.sources.canton.push(entry);
-  const { headlines: raw, requests, notes } = await scanCantonSource(source, {
+  const scanned = await scanCantonSource(source, {
     throttle: _cantonHostThrottle,
     extractRssItems,
     extractHeadlines,
   });
+  let { headlines: raw, requests, notes } = scanned;
   entry.requests = requests;
   entry.items = raw.length;
+  const filterByCanton = source.quirks?.filterByCanton;
+  if (filterByCanton) {
+    const wanted = String(filterByCanton).trim().toUpperCase();
+    const actual = String(SECTION_PROFILE.canton || '').trim().toUpperCase();
+    const before = raw.length;
+    if (wanted !== actual) {
+      raw = [];
+      notes = [...notes, `filterByCanton=${wanted} incompatibile con ${actual}: nessuna voce ammessa`];
+    } else {
+      raw = filterCantonSourceHeadlines(SECTION_PROFILE, source, raw);
+      entry.filteredByCanton = before - raw.length;
+      notes = [...notes, `filtro ${wanted}: ${raw.length}/${before} voci`];
+    }
+  }
   // Se ci sono voci recenti, solo quelle (come le fonti storiche RSS).
   // Altrimenti NON tutte, a differenza delle storiche: una voce con una data
   // piu' vecchia della finestra e' verificabilmente stantia e si scarta qui;
@@ -8581,7 +8597,8 @@ async function fetchCantonSourceHeadlines(source, domain) {
   const budget = sourceRequestBudget(source);
   const extra = [Number.isFinite(budget) ? `budget ${budget} richieste` : '', ...notes].filter(Boolean).join('; ');
   console.error(`  📡 ${domain} [${source.parser}]: ${recent.length} recenti su ${raw.length}${extra ? ` (${extra})` : ''}`);
-  return recent.length > 0 ? recent : raw.filter((h) => !h.date);
+  const selected = recent.length > 0 ? recent : raw.filter((h) => !h.date);
+  return selected.map((h) => ({ ...h, _cantonSourceUrl: source.url }));
 }
 
 // ── Step 1c: Scan all news sources for recent headlines ─────
@@ -8855,7 +8872,7 @@ async function scanNewsSources() {
       // la fonte lo da', e' parte del testo giudicato.
       const gateText = IS_CANTON && h.lead ? `${text} ${h.lead}` : text;
       const anchored = IS_CANTON
-        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url)
+        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url, h._cantonSourceUrl)
         : hasDomainAnchor(text) || localNewsCandidate;
       if (dropAnchorless && !anchored) {
         droppedAnchor += 1;

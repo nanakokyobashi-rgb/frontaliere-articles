@@ -495,6 +495,7 @@ test('SOURCE_DROP_OFF_TOPIC: a page with no work, fiscal, commute or local-news 
 
 const BE = loadCantonGates('canton-be');
 const beHeadline = (headline, url = 'https://www.bern.ch/mediencenter/x') => ({ headline, url });
+const LU = loadCantonGates('canton-lu');
 
 test('canton-be: lavoro, fisco, governo cantonale e mobilita\' in tedesco/francese passano il gate topicale', () => {
   for (const t of [
@@ -533,4 +534,21 @@ test('canton-be: i rami nazionale e frontaliere NON cambiano con la sezione cant
   // E con `national` esplicito il ramo cantonale non interviene.
   assert.equal(BE.hasAdmissionSignal(t, true), CH.hasAdmissionSignal(t, true));
   assert.equal(BE.countTopicalHits('Svizzera: PIL in crescita', false), FRONT.countTopicalHits('Svizzera: PIL in crescita', false));
+});
+
+test('canton-lu: il gate usa la pagina-fonte scoped, ma non promuove un feed regionale', () => {
+  const scopedNau = {
+    headline: 'Qualitätsarbeit und Schulentwicklung rücken näher zusammen',
+    url: 'https://www.nau.ch/politik/regional/qualitaetsarbeit-67180739',
+    _cantonSourceUrl: 'https://www.nau.ch/ort/luzern',
+  };
+  assert.deepEqual(LU.filterByAnchor([scopedNau]), [scopedNau]);
+
+  const broadTele1 = {
+    headline: 'Nachrichten',
+    url: 'https://www.tele1.ch/nachrichten/nachrichten-165669749',
+    _cantonSourceUrl: 'https://www.tele1.ch/sitemap-news.xml',
+  };
+  assert.deepEqual(LU.filterByAnchor([broadTele1]), [], 'il sitemap regionale resta soggetto all\'ancora del testo');
+  assert.match(SRC, /_cantonSourceUrl: source\.url/);
 });

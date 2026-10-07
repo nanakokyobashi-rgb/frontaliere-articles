@@ -77,6 +77,9 @@ const QUIRKS = {
   charset: (v) => typeof v === 'string' && /^[a-z0-9-]+$/.test(v),
   crawlDelaySeconds: (v) => Number.isFinite(v) && v > 0,
   maxRequestsPerRun: (v) => Number.isInteger(v) && v >= 1,
+  // Feed condivisi fra cantoni: il generatore filtra le headline sul gruppo
+  // dichiarato prima di applicare recency e gate (es. Unterwalden24 NW/OW).
+  filterByCanton: (v) => typeof v === 'string' && /^[A-Z]{2}$/.test(v),
   http1Only: (v) => v === true,
   urlPeriod: (v) => ['year', 'month', 'iso-week'].includes(v),
   datetimeYearOffset: (v) => Number.isInteger(v) && v !== 0,

@@ -5031,6 +5031,7 @@
             "lavoro"
           ],
           "quirks": {
+            "filterByCanton": "NW",
             "maxRequestsPerRun": 1
           },
           "items7d": 5,
@@ -5962,6 +5963,34 @@
           "items7d": 0,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Ultimo comunicato 17.07.2026; campioni: «Erfreuliches Halbjahresergebnis in herausforderndem Umfeld», «Michael Bührer wird Standortleiter in Stein am Rhein», «18. Immobilien-Event der Schaffhauser Kantonalbank». robots.txt 200, path consentito, nessun blocco AI/ai-input=no; note legali/privacy consultate."
+        },
+        {
+          "url": "https://neuhausen.ch/aktuelles",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Gemeinde Neuhausen am Rheinfall",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["servizi", "mobilita", "eventi", "cronaca"],
+          "quirks": {},
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html (201170 byte). Ultimo item 27.09.2026; campioni: «Abstimmungsresultate vom 27. September 2026», «Gemeinde unterstützt Haus der Begegnung und der Menschlichkeit», «Erneuerung Spielplatz Schönegg». robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagina legale comunale consultata."
+        },
+        {
+          "url": "https://services.sh.ch/de/aktuelles",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Kanton Schaffhausen – Online-Services",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["servizi", "fisco", "lavoro"],
+          "quirks": {
+            "articlePathPattern": "^/de/aktuelles"
+          },
+          "items7d": 0,
+          "verifiedAt": "2026-10-06",
+          "notes": "GET reale: status 200, content-type text/html; charset=utf-8. Un aggiornamento leggibile, «Willkommen bei den Online-Services des Kantons Schaffhausen» del 10.09.2026; 0 nella finestra. robots.txt 200, path consentito, nessun blocco AI/ai-input=no; Impressum e Datenschutz collegati e consultati."
         }
       ],
       "categoryDataSources": {

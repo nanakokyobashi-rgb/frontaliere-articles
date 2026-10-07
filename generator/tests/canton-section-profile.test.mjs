@@ -35,9 +35,11 @@ import {
   CANTON_SECTIONS_ENABLED_ENV,
   CANTON_STATE_ROOT,
   buildCantonProfile,
+  filterCantonSourceHeadlines,
   cantonClassifierPrompt,
   cantonHeadlineSelectionPrompt,
   cantonPromptLines,
+  buildCantonSourceUrlMap,
   cantonSectionConfigs,
   cantonSectionIds,
   cantonSectionPaths,
@@ -264,6 +266,50 @@ test('profilo canton-gr: ammissione multilingue, cronaca solo con impatto pratic
   assert.equal(termHits('feststellen', ['stellen']), 0, 'gli stem si confrontano a inizio parola');
 });
 
+test("profili cantonali: l'URL della pagina-fonte ancora solo una fonte locale realmente scoped", () => {
+  const sourceMap = buildCantonSourceUrlMap(PROFILES);
+  assert.equal(sourceMap.get('https://www.nau.ch/ort/luzern'), 'LU', "la pagina Nau di Lucerna e' scoped anche se nau.ch e' condiviso");
+  assert.equal(sourceMap.has('https://www.tele1.ch/sitemap-news.xml'), false, "il sitemap Tele 1 e' regionale, non un'ancora LU");
+  assert.equal(sourceMap.has('https://www.20min.ch/regionen/zentralschweiz'), false, "20min e' condiviso fra LU/SZ/ZG");
+
+  const lu = buildCantonProfile('canton-lu', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  assert.equal(lu.anchors('Qualitätsarbeit und Schulentwicklung rücken näher zusammen', 'https://www.nau.ch/politik/regional/story', 'https://www.nau.ch/ort/luzern'), true);
+  assert.equal(lu.anchors('Nachrichten', 'https://www.tele1.ch/nachrichten/nachrichten-1', 'https://www.tele1.ch/sitemap-news.xml'), false);
+});
+
+test('feed condiviso: filterByCanton conserva NW e scarta le voci OW', () => {
+  const nw = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  const source = { quirks: { filterByCanton: 'NW' } };
+  const headlines = [
+    { headline: 'Stans: Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper', url: 'https://www.nw.ch/_rte/information/1' },
+    { headline: 'Titlis startet in besonderen Winter', url: 'https://www.unterwalden24.ch/titlis' },
+    { headline: 'Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden', url: 'https://www.unterwalden24.ch/wild' },
+  ];
+  assert.deepEqual(
+    filterCantonSourceHeadlines(nw, source, headlines).map((h) => h.headline),
+    [headlines[0].headline, headlines[2].headline],
+  );
+  assert.deepEqual(filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'OW' } }, headlines), []);
+});
+
+test("lessico cantonale: composti tedeschi/francesi di mobilita' e sicurezza entrano, cultura no", () => {
+  const p = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  for (const text of [
+    'Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper',
+    'Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden',
+    'Kantonsstrasse wegen Vollsperrung mit Umfahrungsbetrieb',
+    'Route cantonale fermée après un accident',
+  ]) {
+    assert.equal(p.hasAdmission(text), true, `non ammesso: ${text}`);
+  }
+  for (const text of [
+    'Die legendäre Schmiedgasse von Stans: Ein Stück Nidwalden lebt weiter',
+    'Titlis startet in besonderen Winter: Was sich für Skifahrer ändert',
+  ]) {
+    assert.equal(p.hasAdmission(text), false, `cultura/turismo ammesso per errore: ${text}`);
+  }
+});
+
 test('prompt cantonali: stesso formato di risposta delle storiche, cantone e contesto frontalieri dentro', () => {
   const p = buildCantonProfile('canton-ti', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   const prompt = cantonClassifierPrompt(p, { headline: 'Chiasso: chiusa la dogana di Brogeda', sourceHint: 'www.ti.ch/x', summary: '' });
@@ -364,5 +410,6 @@ test('sezione cantonale senza voci recenti: niente ripiego su TUTTE le headline'
   // con la quota per fonte, e le datate stantie si scartano per fonte.
   assert.match(CREATE_ARTICLE, /if \(recent\.length === 0 && !IS_CANTON\) \{/);
   const helper = CREATE_ARTICLE.slice(CREATE_ARTICLE.indexOf('async function fetchCantonSourceHeadlines('));
-  assert.match(helper.slice(0, 3000), /return recent\.length > 0 \? recent : raw\.filter\(\(h\) => !h\.date\);/);
+  assert.match(helper.slice(0, 3000), /const selected = recent\.length > 0 \? recent : raw\.filter\(\(h\) => !h\.date\);/);
+  assert.match(helper.slice(0, 3000), /_cantonSourceUrl: source\.url/);
 });
