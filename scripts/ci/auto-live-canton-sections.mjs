@@ -35,6 +35,10 @@ const exists = (root, rel) => fs.existsSync(path.join(root, rel));
 const ARCHIVE_TITLE_ID_RE = /['"]blog\.article\.([^'"]+?)\.title['"]\s*:/g;
 const PAGE_FETCH_CONCURRENCY = 12;
 const PAGE_FETCH_TIMEOUT_MS = 15_000;
+const PAGE_FETCH_ATTEMPTS = 3;
+const PAGE_FETCH_RETRY_DELAY_MS = 1_000;
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function normalizeBase(value, fallback) {
   const raw = String(value || fallback).trim();
@@ -187,13 +191,55 @@ function cdnPageUrl(pagePath, cdnBase) {
   return `${cdnBase}/${clean}/index.html`;
 }
 
+function pageFetchVariants(siteBase) {
+  return [
+    { label: 'headerless', headers: {} },
+    { label: 'origin', headers: { Origin: normalizeBase(siteBase, SITE_BASE) } },
+  ];
+}
+
+async function probePageVariant({ url, page, variant, siteBase, pagesByIdentity, fetchImpl, attempts, retryDelayMs, sleepImpl }) {
+  let last = { status: 0, problems: [`${variant.label}:no-response`] };
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const cacheBuster = `_auto_live=${Date.now()}.${variant.label}.${attempt}`;
+    const targetUrl = `${url}${url.includes('?') ? '&' : '?'}${cacheBuster}`;
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), PAGE_FETCH_TIMEOUT_MS);
+      let response;
+      try {
+        response = await fetchImpl(targetUrl, { redirect: 'manual', headers: variant.headers, signal: controller.signal });
+      } finally {
+        clearTimeout(timeout);
+      }
+      if (response.status === 200) {
+        const html = await response.text();
+        const problems = htmlPageProblems(html, page, normalizeBase(siteBase, SITE_BASE), pagesByIdentity);
+        last = { status: 200, problems };
+        if (problems.length === 0) return last;
+      } else {
+        last = { status: response.status, problems: [`${variant.label}:http:${response.status}`] };
+      }
+    } catch (error) {
+      last = { status: 0, problems: [`${variant.label}:fetch:${error.message}`] };
+    }
+    if (attempt < attempts) await sleepImpl(retryDelayMs);
+  }
+  return last;
+}
+
 export async function probeSectionPages(section, {
   root = process.cwd(),
   siteBase = SITE_BASE,
   cdnBase = CDN_BASE,
   fetchImpl = globalThis.fetch,
+  attempts = PAGE_FETCH_ATTEMPTS,
+  retryDelayMs = PAGE_FETCH_RETRY_DELAY_MS,
+  sleepImpl = sleep,
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new Error('fetch non disponibile per la verifica R2');
+  if (!Number.isInteger(attempts) || attempts < 1) throw new Error(`attempts non valido: ${attempts}`);
+  if (!Number.isFinite(retryDelayMs) || retryDelayMs < 0) throw new Error(`retryDelayMs non valido: ${retryDelayMs}`);
   const pages = expectedSectionPages(section, { root });
   const pagesByIdentity = new Map();
   for (const page of pages) {
@@ -206,23 +252,31 @@ export async function probeSectionPages(section, {
     const batch = pages.slice(offset, offset + PAGE_FETCH_CONCURRENCY);
     results.push(...await Promise.all(batch.map(async (page) => {
       const url = cdnPageUrl(page.path, normalizeBase(cdnBase, CDN_BASE));
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), PAGE_FETCH_TIMEOUT_MS);
-        let response;
-        try {
-          response = await fetchImpl(url, { redirect: 'manual', signal: controller.signal });
-        } finally {
-          clearTimeout(timeout);
-        }
-        const html = await response.text();
-        const problems = response.status === 200
-          ? htmlPageProblems(html, page, normalizeBase(siteBase, SITE_BASE), pagesByIdentity)
-          : [`http:${response.status}`];
-        return { ...page, url, status: response.status, problems };
-      } catch (error) {
-        return { ...page, url, status: 0, problems: [`fetch:${error.message}`] };
-      }
+      const variants = pageFetchVariants(siteBase);
+      const variantResults = await Promise.all(variants.map((variant) => probePageVariant({
+        url,
+        page,
+        variant,
+        siteBase,
+        pagesByIdentity,
+        fetchImpl,
+        attempts,
+        retryDelayMs,
+        sleepImpl,
+      })));
+      const failedVariant = variantResults.find((result) => result.status !== 200);
+      if (failedVariant) return {
+        ...page,
+        url,
+        status: failedVariant.status,
+        problems: [...new Set(variantResults.flatMap((result) => result.problems))],
+      };
+      return {
+        ...page,
+        url,
+        status: 200,
+        problems: [...new Set(variantResults.flatMap((result) => result.problems))],
+      };
     })));
   }
   return {

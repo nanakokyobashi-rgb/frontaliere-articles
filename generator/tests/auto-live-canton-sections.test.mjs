@@ -46,8 +46,9 @@ function alternateHtml(page, pages, { wrongRouteOwner = false } = {}) {
   ].join('');
 }
 
-function mockCdnFetch(pages, { badPath = null, wrongRouteOwner = false } = {}) {
-  return async (url) => {
+function mockCdnFetch(pages, { badPath = null, wrongRouteOwner = false, calls = null } = {}) {
+  return async (url, options = {}) => {
+    calls?.push({ url, headers: options.headers });
     const pagePath = new URL(url).pathname
       .replace(/^\/edge\/sections/u, '')
       .replace(/index\.html$/u, '');
@@ -123,14 +124,19 @@ test('il piano include tutte le pagine archivio paginate del renderer', () => {
 test('la verifica CDN richiede 200, canonical, hreflang reciproci, route owner e niente noindex', async () => {
   const root = fixtureRoot();
   const pages = expectedSectionPages('canton-lu', { root });
-  const good = await probeSectionPages('canton-lu', { root, fetchImpl: mockCdnFetch(pages) });
+  const calls = [];
+  const good = await probeSectionPages('canton-lu', { root, fetchImpl: mockCdnFetch(pages, { calls }), retryDelayMs: 0 });
   assert.equal(good.checked, 36);
   assert.deepEqual(good.missing, []);
   assert.deepEqual(good.bad, []);
+  assert.equal(calls.length, 72);
+  assert.ok(calls.some((call) => /_auto_live=/u.test(call.url) && !call.headers?.Origin));
+  assert.ok(calls.some((call) => /_auto_live=/u.test(call.url) && call.headers?.Origin === 'https://frontaliereticino.ch'));
 
   const bad = await probeSectionPages('canton-lu', {
     root,
     fetchImpl: mockCdnFetch(pages, { badPath: '/articoli-lucerna/' }),
+    retryDelayMs: 0,
   });
   assert.deepEqual(bad.missing, []);
   assert.deepEqual(bad.bad, [{ path: '/articoli-lucerna/', problems: ['noindex'] }]);
@@ -138,6 +144,7 @@ test('la verifica CDN richiede 200, canonical, hreflang reciproci, route owner e
   const wrongOwner = await probeSectionPages('canton-lu', {
     root,
     fetchImpl: mockCdnFetch(pages, { wrongRouteOwner: true }),
+    retryDelayMs: 0,
   });
   assert.deepEqual(wrongOwner.missing, []);
   assert.equal(wrongOwner.bad.length, 36);
@@ -162,6 +169,7 @@ test('hub mancante/corrotto non passa il gate e il flip pronto e\' idempotente',
     sections: ['canton-lu'],
     requireReady: true,
     fetchImpl,
+    retryDelayMs: 0,
   });
   assert.deepEqual(promoted.changed, ['canton-lu']);
   const second = await applyRegistryTransitions(root, {
