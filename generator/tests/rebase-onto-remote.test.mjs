@@ -725,13 +725,33 @@ test('il resolver della coda fallisce chiuso se git non riesce a leggere uno sta
   }
 });
 
-test('il publisher journalist usa lo stesso rebase queue-aware', () => {
+test('il publisher journalist conserva registry e coda nello stesso rebase', () => {
   const workflow = readFileSync(JOURNALIST_WORKFLOW, 'utf8');
-  assert.match(
+  const step = sliceBetween(
     workflow,
-    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
+    '      - name: Commit and push registered articles\n',
+    '      - name: Summary\n',
   );
-  assert.doesNotMatch(workflow, /git pull --rebase "\$REMOTE" "\$TARGET"/);
+  const commitAt = step.indexOf('git commit -m "$COMMIT_MESSAGE"');
+  const snapshotAt = step.indexOf('cp data/generated-image-registry.json "$registry_snapshot"');
+  const rebaseAt = step.indexOf('bash scripts/lib/rebase-onto-remote.sh');
+  const mergeAt = step.indexOf('node scripts/ci/merge-generated-image-registry.mjs');
+
+  assert.ok(
+    commitAt >= 0 && snapshotAt > commitAt && rebaseAt > snapshotAt && mergeAt > rebaseAt,
+    'snapshot e merge del registry devono racchiudere il rebase del commit journalist',
+  );
+  assert.match(
+    step,
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
+  );
+  assert.match(step, /registry_snapshot="\$RUNNER_TEMP\/generated-image-registry-replayed\.json"/);
+  assert.match(
+    step,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_snapshot"/,
+  );
+  assert.match(step, /git add data\/generated-image-registry\.json[\s\S]*git commit --amend --no-edit/);
+  assert.doesNotMatch(step, /git pull --rebase "\$REMOTE" "\$TARGET"/);
 });
 
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
