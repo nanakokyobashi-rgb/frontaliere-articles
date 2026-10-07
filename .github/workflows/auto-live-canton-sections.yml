@@ -1,0 +1,236 @@
+name: Auto-live Canton Sections
+
+# D22: il cron ricontrolla ogni giorno le sezioni cantonali ancora draft. Gli
+# eventi dei tre generatori/preparatori riaprono lo stesso controllo subito
+# dopo un articolo, un refresh degli hub o un bootstrap R2 riuscito.
+on:
+  schedule:
+    - cron: '37 9 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Azione idempotente sul registro delle sezioni'
+        required: true
+        default: promote
+        type: choice
+        options: [promote, rollback]
+      sections:
+        description: 'Sezioni cantonali separate da virgola (vuoto = tutte, solo promote)'
+        required: false
+        default: ''
+        type: string
+  workflow_run:
+    workflows:
+      - 'Generate Blog Article (canton-lu)'
+      - 'Generate Blog Article (canton-nw)'
+      - 'Generate Blog Article (canton-sh)'
+      - 'Refresh Canton Hubs'
+      - 'fast-publish-section'
+    types: [completed]
+
+concurrency:
+  group: auto-live-canton-sections
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Il loader legge soltanto i secret già amministrati in Remote Config.
+      # Questo workflow non modifica Remote Config, repository variables o
+      # repository secrets.
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: il bridge Remote Config non e' disponibile"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/auto-live-sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/auto-live-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load operational token from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Resolve trigger
+        id: trigger
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          MODE_INPUT: ${{ inputs.mode }}
+          SECTIONS_INPUT: ${{ inputs.sections }}
+          WORKFLOW_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          set -euo pipefail
+          mode="${MODE_INPUT:-promote}"
+          sections="${SECTIONS_INPUT:-}"
+          should_run=true
+          if [ "$EVENT_NAME" = "workflow_run" ] && [ "${WORKFLOW_CONCLUSION:-}" != "success" ]; then
+            should_run=false
+          fi
+          if [ "$mode" = "rollback" ] && [ -z "$sections" ]; then
+            echo "::error::rollback richiede --sections: non si retrocedono tutte le sezioni per errore"
+            exit 1
+          fi
+          case "$mode" in
+            promote|rollback) ;;
+            *) echo "::error::mode non valido: $mode"; exit 1 ;;
+          esac
+          {
+            echo "mode=$mode"
+            echo "sections=$sections"
+            echo "should_run=$should_run"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Plan idempotent promotion or rollback
+        id: plan
+        if: steps.trigger.outputs.should_run == 'true'
+        env:
+          MODE: ${{ steps.trigger.outputs.mode }}
+          SECTIONS: ${{ steps.trigger.outputs.sections }}
+          SITE_BASE: https://frontaliereticino.ch
+          CDN_BASE: https://cdn.frontaliereticino.ch/edge/sections
+          PLAN_FILE: ${{ runner.temp }}/auto-live-plan.json
+        run: |
+          set -euo pipefail
+          args=(plan --mode "$MODE" --site-base "$SITE_BASE" --cdn-base "$CDN_BASE" --json)
+          if [ -n "$SECTIONS" ]; then args+=(--sections "$SECTIONS"); fi
+          node scripts/ci/auto-live-canton-sections.mjs "${args[@]}" > "$PLAN_FILE"
+          node -e 'console.log(JSON.stringify(JSON.parse(require("fs").readFileSync(process.env.PLAN_FILE, "utf8")), null, 2))'
+          PLAN_FILE="$PLAN_FILE" node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const plan = JSON.parse(fs.readFileSync(process.env.PLAN_FILE, 'utf8'));
+          const reports = Array.isArray(plan.sections) ? plan.sections : [];
+          const csv = (items) => items.join(',');
+          const needsHubs = reports
+            .filter((r) => r.reason === 'hubs-missing' || r.reason === 'hubs-invalid')
+            .map((r) => r.section);
+          const needsBootstrap = reports
+            .filter((r) => r.reason === 'r2-pages-missing' || r.reason === 'r2-pages-invalid')
+            .map((r) => r.section);
+          const ready = Array.isArray(plan.readySections) ? plan.readySections : [];
+          const out = [
+            `needs_hubs=${csv(needsHubs)}`,
+            `needs_bootstrap=${csv(needsBootstrap)}`,
+            `ready=${csv(ready)}`,
+          ];
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `${out.join('\n')}\n`);
+          NODE
+
+      - name: Dispatch missing hub refreshes and R2 bootstraps
+        if: steps.trigger.outputs.should_run == 'true' && (steps.plan.outputs.needs_hubs != '' || steps.plan.outputs.needs_bootstrap != '')
+        env:
+          REPO: ${{ github.repository }}
+          NEEDS_HUBS: ${{ steps.plan.outputs.needs_hubs }}
+          NEEDS_BOOTSTRAP: ${{ steps.plan.outputs.needs_bootstrap }}
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: impossibile dispatchare i producer senza usare GITHUB_TOKEN"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          if [ -n "$NEEDS_HUBS" ]; then
+            gh workflow run refresh-canton-hubs.yml --repo "$REPO" --ref main \
+              -f sections="$NEEDS_HUBS" -f dry_run=false
+          fi
+          if [ -n "$NEEDS_BOOTSTRAP" ]; then
+            while IFS= read -r section; do
+              [ -n "$section" ] || continue
+              gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+                -f section="$section" -f bootstrap=true -f dry_run=false
+            done < <(printf '%s\n' "$NEEDS_BOOTSTRAP" | tr ',' '\n')
+          fi
+
+      - name: Open PR for ready registry transitions
+        if: steps.trigger.outputs.should_run == 'true' && steps.plan.outputs.ready != ''
+        env:
+          REPO: ${{ github.repository }}
+          MODE: ${{ steps.trigger.outputs.mode }}
+          READY: ${{ steps.plan.outputs.ready }}
+          SITE_BASE: https://frontaliereticino.ch
+          CDN_BASE: https://cdn.frontaliereticino.ch/edge/sections
+        run: |
+          set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: impossibile creare la PR di rollout"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
+          marker="<!-- auto-live mode=$MODE sections=$READY -->"
+          open_json="$(gh pr list --repo "$REPO" --state open --search '[auto-live] in:title' --limit 100 --json body)"
+          if MARKER="$marker" OPEN_JSON="$open_json" node --input-type=module -e '
+            const marker = process.env.MARKER;
+            const prs = JSON.parse(process.env.OPEN_JSON || "[]");
+            if (prs.some((pr) => String(pr.body || "").includes(marker))) process.exit(0);
+            process.exit(1);
+          '; then
+            echo "PR auto-live gia' aperta per lo stesso piano: nessuna mutazione"
+            exit 0
+          fi
+
+          branch="automation/auto-live-${MODE}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          if [ "$branch" = "main" ]; then
+            echo "::error::guard: il branch automatico non puo' essere main"
+            exit 1
+          fi
+          git fetch --no-tags origin main
+          git checkout -B "$branch" origin/main
+          node scripts/ci/auto-live-canton-sections.mjs apply \
+            --mode "$MODE" --sections "$READY" --require-ready \
+            --site-base "$SITE_BASE" --cdn-base "$CDN_BASE" --json
+          if git diff --quiet -- sections/registry.json; then
+            echo "nessuna transizione ancora necessaria: il piano era gia' stato applicato"
+            exit 0
+          fi
+          git config user.name 'frontaliere automation'
+          git config user.email 'frontaliere-automation@users.noreply.github.com'
+          git add -- sections/registry.json
+          git commit -m "chore(sections): auto-live ${MODE} ${READY}"
+          test "$(git branch --show-current)" = "$branch"
+          git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
+          git push origin "HEAD:$branch"
+          git remote set-url origin "https://github.com/${REPO}.git"
+
+          cat > "$RUNNER_TEMP/auto-live-pr-body.md" <<EOF
+          $marker
+          ## Implementato
+          - In questa PR il registro cantonale passa da ${MODE} in modo idempotente per: ${READY}; la pre-verifica ha richiesto articolo proprio, sei hub validati e tutte le pagine R2 con canonical, hreflang e indice pubblicabile.
+
+          ## Non implementato (ancora)
+          - Le sezioni che non soddisfano il gate restano draft per scelta in questa PR; il cron giornaliero e gli eventi dei producer ripeteranno il controllo. Motivo: nessuna transizione viene fatta senza superfici complete. Prossimo passo: attendere il primo articolo o il bootstrap riuscito.
+          EOF
+          pr_number="$(gh pr create --repo "$REPO" --base main --head "$branch" \
+            --title "chore(sections): auto-live ${MODE} ${READY}" \
+            --body-file "$RUNNER_TEMP/auto-live-pr-body.md" \
+            | sed -n 's#.*/pull/##p' | tail -1)"
+          if [ -z "$pr_number" ]; then
+            echo "::error::gh pr create non ha restituito il numero della PR"
+            exit 1
+          fi
+          gh pr merge "$pr_number" --repo "$REPO" --auto --squash
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/auto-live-sa.json"
