@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3940692": "grigioni-frontalieri-calano",
   "https://www.varesenews.it/2026/08/areu-cerca-30-assistenti-tecnici-opportunita-anche-per-la-centrale-del-112-di-varese/2654053": "areu-cerca-30-assistenti-tecnici",
   "https://www.laregione.ch/culture/locarno-film-festival/1942667/quale-presidente": "presidente-locarno-film-festival",
   "https://www.rsi.ch/s/3941424": "castasegna-vecchia-dogana-in-vendita",
@@ -2128,6 +2127,11 @@
   "https://www.varesenews.it/2026/10/incidente-in-autostrada-a8-tra-castronno-e-solbiate-viabilita-paralizzata/2701381": {
     "articleId": "coda-a8-castronno-solbiate",
     "ts": "2026-10-07T22:16:34.425Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/pedone-investito-a-tradate-58enne-ferito/2701480": {
+    "articleId": "incidente-via-albisetti",
+    "ts": "2026-10-07T22:41:49.331Z",
     "keyForm": 2
   }
 }
