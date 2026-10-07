@@ -424,5 +424,8 @@ const invokedDirectly = (() => {
 })();
 
 if (invokedDirectly) {
-  process.exit(main(process.argv.slice(2)));
+  // Set the exit code after the logger has queued its marker. `process.exit()`
+  // can truncate stdout/stderr when this CI script is launched through a
+  // pipe, which would make a real violation invisible to the caller.
+  process.exitCode = main(process.argv.slice(2));
 }
