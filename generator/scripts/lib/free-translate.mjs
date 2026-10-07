@@ -625,6 +625,10 @@ export function lineStructuralSignature(line) {
 
 const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
 const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
+function isWholeTranslationSentinel(span) {
+  const matches = String(span).match(translationSentinelRegExp());
+  return matches?.length === 1 && matches[0] === span;
+}
 // Numeric spans are opaque only to the chunker: a URL-like number, date or
 // amount must not be split across requests. They are deliberately absent from
 // the rejection signature below because locale-specific separators are valid.
@@ -683,7 +687,7 @@ export function opaqueSpanSignature(line) {
       const span = text.slice(start, end);
       // Only sentinels are intentionally case-insensitive. URL paths, email
       // local parts and placeholders can be case-sensitive in published HTML.
-      return translationSentinelRegExp().test(span)
+      return isWholeTranslationSentinel(span)
         ? normalizeProtectedTokenSentinels(span).toLowerCase()
         : span;
     });

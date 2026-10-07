@@ -958,7 +958,9 @@ test('D5: le localizzazioni numeriche reali passano, mentre i vincoli struttural
 
   const rejected = [
     ['Leggi https://example.com/CasePath', 'Lies https://example.com/casepath'],
+    ['Leggi https://host/ZQX1XQZ', 'Lies https://host/zqx1xqz'],
     ['Scrivi a User@example.com', 'Schreib an user@example.com'],
+    ['Scrivi a UserZQX1XQZ@example.com', 'Schreib an userzqx1xqz@example.com'],
     ['Importo {{amount}}', 'Betrag'],
     ['una riga', 'una riga\nuna riga in più'],
     ['4500', '4501'],
