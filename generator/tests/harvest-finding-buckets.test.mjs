@@ -270,3 +270,29 @@ test('end-to-end: le cinque PR per-scelta non aprono pr-body-contract; il false-
   const { counts } = tallyFindings([...perSceltaPrs, falseClaimPr]);
   assert.equal(counts['pr-body-contract'] ?? 0, 1, `bucket ${JSON.stringify(counts)}`);
 });
+
+// ── Severita' senza separatore (sito #12040) ────────────────────────────────
+// Il bucket `workflow-scope-creds` toglie dal contesto cio' che precede il
+// marker di severita', cosi' un path citato (`unsubscribe-credential-monitor.yml`)
+// non fa da vocabolario di credenziali per un finding che parla d'altro. La
+// forma con ancora di posizione (`path:L<n>: 🔴 Important testo`) non porta i due
+// punti: se il marker non viene riconosciuto la riga intera, path compresi,
+// torna a fare da contesto.
+
+test('senza i due punti dopo la severita\' i path citati restano fuori dal contesto', () => {
+  for (const marker of ['🔴 Important', '🔴 **Important**']) {
+    const line = 'PR body:L2; .github/workflows/auth-signup-subscriber-monitor.yml:L53; '
+      + ' .github/workflows/unsubscribe-credential-monitor.yml:L69: '
+      + `${marker} [contract] La PR dichiara che fetch-depth 50 elimina il timeout, `
+      + 'ma non fornisce una baseline pre/post misurata del checkout.';
+    assert.notEqual(bucketFinding(line), 'workflow-scope-creds', marker);
+  }
+  // Il finding autentico resta nel bucket anche in questa forma.
+  assert.equal(
+    bucketFinding(
+      '.github/workflows/deploy.yml:L10: 🔴 Important il workflow usa `${{ github.token }}` '
+        + 'per creare issue, ma serve un App/PAT con la capability richiesta.',
+    ),
+    'workflow-scope-creds',
+  );
+});
