@@ -100533,6 +100533,39 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-clan-nazarbayev-ceresio': {
+    title: 'Nazarbayev sul Ceresio: petrolio, ville e permessi',
+    description: 'L\'inchiesta sul commercio di materie prime racconta l\'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno nel racconto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nazarbayev, ceresio, petrolio, ville',
+    ogTitle: 'Clan Nazarbayev sul Ceresio: petrolio e ville',
+    ogDescription: 'La quarta puntata sul commercio di materie prime segue come il clan Nazarbayev è arrivato sul Ceresio. Il titolo parla di Luganistan, tra petrolio, ville e strani permessi di soggiorno, nel racconto di una cleptocrazia.',
+    canonicalPath: '/articoli-frontaliere/clan-nazarbayev-ceresio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
+      "description": "L'inchiesta sul commercio di materie prime racconta l'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno nel racconto.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ville sul Ceresio nel racconto sul clan Nazarbayev"
+      },
+      "datePublished": "2026-10-07T04:58:11+00:00",
+      "dateModified": "2026-10-07T04:58:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/clan-nazarbayev-ceresio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

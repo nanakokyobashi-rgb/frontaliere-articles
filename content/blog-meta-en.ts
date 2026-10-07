@@ -12718,6 +12718,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fischiava-treno-gorla.title': 'The train was whistling: railway festival in Gorla Minore',
     'blog.article.fischiava-treno-gorla.excerpt': '## TL;DR - Sunday, October 11, 2026 at Gorla Minore - Event from 12:00 to 18:00 near the old station - Lunch, toy trains, old-fashioned games',
     'blog.article.fischiava-treno-gorla.imageAlt': 'Railway event near the old station in Gorla Minore',
+    'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev on Lake Ceresio: oil, villas and permits',
+    'blog.article.clan-nazarbayev-ceresio.excerpt': 'The investigation into the commodities trade tells the story of the Nazarbayev clan’s arrival on Lake Lugano, amid oil, villas and strange residence permits.',
+    'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Ceresio lakeside villas in the story of the Nazarbayev clan',
 };
 
 export default blogMetaEn;

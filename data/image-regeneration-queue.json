@@ -9,6 +9,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T04:45:22.263Z",
       "lastFailureAt": "2026-10-07T04:45:22.263Z"
+    },
+    {
+      "articleId": "clan-nazarbayev-ceresio",
+      "title": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
+      "fallbackImage": "/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp",
+      "reason": "All image providers failed for article-clan-nazarbayev-ceresio: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T04:58:11.891Z",
+      "lastFailureAt": "2026-10-07T04:58:11.891Z"
     }
   ]
 }

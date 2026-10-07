@@ -12720,6 +12720,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fischiava-treno-gorla.title': 'Le train sifflait : fête ferroviaire à Gorla Minore',
     'blog.article.fischiava-treno-gorla.excerpt': '## En bref - Dimanche 11 octobre 2026 à Gorla Minore - Événement de 12:00 à 18:00 près de l’ancienne gare - Déjeuner, petits trains, jeux anciens',
     'blog.article.fischiava-treno-gorla.imageAlt': 'Événement ferroviaire près de l\'ancienne gare de Gorla Minore',
+    'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev sur le Ceresio : pétrole, villas et permis',
+    'blog.article.clan-nazarbayev-ceresio.excerpt': 'L\'enquête sur le commerce des matières premières raconte l\'arrivée du clan Nazarbayev sur le Ceresio, entre pétrole, villas et étranges permis de séjour.',
+    'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Villas au bord du Ceresio dans le récit sur le clan Nazarbayev',
 };
 
 export default blogMetaFr;
