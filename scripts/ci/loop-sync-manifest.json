@@ -150,9 +150,9 @@
       "path": "scripts/ci/alert-pat-down.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d0e26059bcae990c",
-        "corpus": "d0e26059bcae990c",
-        "alignedAt": "2026-09-09"
+        "site": "a050d48c01fbaee3",
+        "corpus": "a050d48c01fbaee3",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -292,18 +292,18 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "091785e2f1f73690",
-        "corpus": "091785e2f1f73690",
-        "alignedAt": "2026-10-01"
+        "site": "2da3c777f9a172d9",
+        "corpus": "2da3c777f9a172d9",
+        "alignedAt": "2026-10-07"
       }
     },
     {
       "path": "scripts/ci/detect-aggregate.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b09919d1e788e369",
-        "corpus": "b09919d1e788e369",
-        "alignedAt": "2026-09-13"
+        "site": "f882a21509692c2e",
+        "corpus": "f882a21509692c2e",
+        "alignedAt": "2026-10-07"
       },
       "reason": "Trasporto completato dopo il merge della sorgente sito (#8450): il detector importa `isAggregate()` e usa la stessa lettura del payload, fallback conservativo per issue illeggibili o vuote e propagazione non-zero quando `$GITHUB_OUTPUT` non e' scrivibile. Le due copie coincidono; la voce promossa da `corpus-only-pending` a `identical` per chiudere il tracking #986."
     },
@@ -332,27 +332,27 @@
       "path": "scripts/ci/check-workflows-scope.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "7d4f2b4a0d6b3360",
-        "corpus": "7d4f2b4a0d6b3360",
-        "alignedAt": "2026-10-04"
+        "site": "266157e96734fc53",
+        "corpus": "266157e96734fc53",
+        "alignedAt": "2026-10-07"
       }
     },
     {
       "path": "scripts/ci/probe-workflow-scope.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "86d6097d552f5056",
-        "corpus": "86d6097d552f5056",
-        "alignedAt": "2026-08-24"
+        "site": "81eff2e94527117e",
+        "corpus": "81eff2e94527117e",
+        "alignedAt": "2026-10-07"
       }
     },
     {
       "path": "scripts/ci/claim-issue-in-flight.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "52c469b3274cb9ff",
-        "corpus": "52c469b3274cb9ff",
-        "alignedAt": "2026-10-04"
+        "site": "c105978b192786ff",
+        "corpus": "c105978b192786ff",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -380,8 +380,8 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d57065848ac1a2b0",
-        "corpus": "d57065848ac1a2b0",
+        "site": "bf5fd8c4faea5eb7",
+        "corpus": "bf5fd8c4faea5eb7",
         "alignedAt": "2026-10-07"
       }
     },
@@ -442,9 +442,9 @@
       "path": "scripts/ci/claude-usage-summary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "79b484bdbc05106d",
-        "corpus": "79b484bdbc05106d",
-        "alignedAt": "2026-09-15"
+        "site": "94cd68a8488160df",
+        "corpus": "94cd68a8488160df",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -574,9 +574,9 @@
       "mode": "identical",
       "reason": "Gate grandchild-suppression invocato per nome da collect-followup-batch.mjs. Mancava nel corpus dalla nascita di quel chiamante: runGate ne inghiottiva l'ENOENT e ricadeva su proceed-safe, quindi il gate era inconclusive SEMPRE (46 PR su 46 in tre run, zero soppressioni in assoluto). Elencato qui perche' un file invocato per nome, e non importato, e' invisibile al drift check finche' non e' nel manifest.",
       "baseline": {
-        "site": "d07668933f2d473f",
-        "corpus": "d07668933f2d473f",
-        "alignedAt": "2026-09-10"
+        "site": "c41af42be638f0c5",
+        "corpus": "c41af42be638f0c5",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -594,9 +594,9 @@
       "mode": "identical",
       "reason": "Classifica e instrada i bullet di `## Non implementato (ancora)` per il triage di post-merge-followup.yml (sezione `## Candidate bullets` del bundle). Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#11209): importa solo scripts/lib/pr-body-sections-check.mjs e scripts/ci/followup-has-candidates.mjs, entrambi identical e gia' presenti qui. Qui gira con --side corpus e il manifest letto dal disco.",
       "baseline": {
-        "site": "35e55adcccec2f4c",
-        "corpus": "35e55adcccec2f4c",
-        "alignedAt": "2026-10-04"
+        "site": "6734a795e12f49c9",
+        "corpus": "6734a795e12f49c9",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -613,9 +613,9 @@
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "5f9932099a50149a",
-        "corpus": "5f9932099a50149a",
-        "alignedAt": "2026-10-06"
+        "site": "03d134062c864679",
+        "corpus": "03d134062c864679",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -632,18 +632,18 @@
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3fd861a16c10c4ed",
-        "corpus": "3fd861a16c10c4ed",
-        "alignedAt": "2026-10-02"
+        "site": "709f0aa877975ada",
+        "corpus": "709f0aa877975ada",
+        "alignedAt": "2026-10-07"
       }
     },
     {
       "path": "scripts/ci/lib/fetchPrFiles.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "37f39cf4c84fd946",
-        "corpus": "37f39cf4c84fd946",
-        "alignedAt": "2026-09-01"
+        "site": "3a5500e7150d8b27",
+        "corpus": "3a5500e7150d8b27",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -690,9 +690,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "153e7a012e9f2959",
-        "corpus": "153e7a012e9f2959",
-        "alignedAt": "2026-10-04"
+        "site": "e98a5db8cf2a8118",
+        "corpus": "e98a5db8cf2a8118",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -728,9 +728,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "f135c767512bc891",
-        "corpus": "f135c767512bc891",
-        "alignedAt": "2026-10-06"
+        "site": "fd74a582718ff11f",
+        "corpus": "fd74a582718ff11f",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -766,9 +766,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4c710e799877f56f",
-        "corpus": "4c710e799877f56f",
-        "alignedAt": "2026-10-05"
+        "site": "2cb7647345b46271",
+        "corpus": "2cb7647345b46271",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -959,8 +959,8 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "aaa63d8647c14af9",
-        "corpus": "aaa63d8647c14af9",
+        "site": "d0591c6ac04f7656",
+        "corpus": "d0591c6ac04f7656",
         "alignedAt": "2026-10-07"
       }
     },
@@ -1110,9 +1110,9 @@
       "mode": "identical",
       "reason": "Predicato unico source-first per provare la delivery corrente di issue-fix: sidecar legato a run+attempt, issue/branch/HEAD e tri-state verified-delivery/verified-none/unavailable. Il workflow resta adapted per i consumer del corpus; questo helper e' trasportato byte-identico insieme al marker, dopo la correzione del solo errore di sintassi nel draft sito.",
       "baseline": {
-        "site": "b446a2fe5aa92f7f",
-        "corpus": "b446a2fe5aa92f7f",
-        "alignedAt": "2026-09-20"
+        "site": "61e42b998cf5c988",
+        "corpus": "61e42b998cf5c988",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1463,8 +1463,8 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f702e538f96f43bd",
-        "corpus": "f702e538f96f43bd",
+        "site": "48647b815c7aec5e",
+        "corpus": "48647b815c7aec5e",
         "alignedAt": "2026-10-07"
       }
     },
@@ -1522,8 +1522,8 @@
       "path": "scripts/ci/parked-pr-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b8346885aa501baf",
-        "corpus": "b8346885aa501baf",
+        "site": "ddbf023fe035e047",
+        "corpus": "ddbf023fe035e047",
         "alignedAt": "2026-10-07"
       }
     },
@@ -1541,9 +1541,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "5441803216ff13c9",
-        "corpus": "5441803216ff13c9",
-        "alignedAt": "2026-09-25"
+        "site": "ab40276d66ccace5",
+        "corpus": "ab40276d66ccace5",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1833,8 +1833,8 @@
       "mode": "identical",
       "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso. RICONCILIATO il 2026-08-14 (#234, classe `both-moved`): era un both-moved APPARENTE. Il blob qui era byte-identico a `valerielinc-ops@8bfe4e3b:build-plugins/shared/clauseTail.mjs`, cioe' la \"modifica del corpus\" ERA la modifica del sito, arrivata col trasporto di #116 senza che la baseline venisse aggiornata; il sito e' poi andato avanti da solo con 79a6b924. Le due modifiche non sono indipendenti — una contiene l'altra — quindi la riconciliazione e' un fast-forward: adottata la versione del sito. Porta un CAMBIO DI COMPORTAMENTO, non solo un export nuovo: `truncateToClause` ora RIFIUTA (torna la stringa vuota) quando il primo token da solo sfora il budget, invece di tagliare duro a `maxLen`. Per questo `generator/scripts/create-article.mjs` e' passato a `truncateToClauseNonEmpty` sui due call site di titolo e breadcrumb, dove il fallback e' lo slug (nessuno spazio) e il rifiuto sarebbe stato la norma, non il caso limite.",
       "baseline": {
-        "site": "63cabf90191648cc",
-        "corpus": "63cabf90191648cc",
+        "site": "ca2b4d26a5cef1c9",
+        "corpus": "ca2b4d26a5cef1c9",
         "alignedAt": "2026-10-07"
       }
     },
@@ -2222,8 +2222,8 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "633d31fbe8995e1f",
-        "corpus": "633d31fbe8995e1f",
+        "site": "091c40076373adca",
+        "corpus": "091c40076373adca",
         "alignedAt": "2026-10-07"
       }
     },
@@ -3487,9 +3487,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "642ce32dbd0422f3",
-        "corpus": "642ce32dbd0422f3",
-        "alignedAt": "2026-10-06"
+        "site": "45f8bd93152a8515",
+        "corpus": "45f8bd93152a8515",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3551,9 +3551,9 @@
       "sitePath": "build-plugins/shared/inlineJsonScript.ts",
       "mode": "identical",
       "baseline": {
-        "site": "f1652b861b452480",
-        "corpus": "f1652b861b452480",
-        "alignedAt": "2026-10-06"
+        "site": "28427765cb0699f2",
+        "corpus": "28427765cb0699f2",
+        "alignedAt": "2026-10-07"
       }
     },
     {
