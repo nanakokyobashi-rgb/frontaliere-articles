@@ -7844,6 +7844,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziative-mps-giustizia-respinte.title': 'Iniziative MPS sulla giustizia bocciate dal Gran Consiglio',
     'blog.article.iniziative-mps-giustizia-respinte.excerpt': 'Il Gran Consiglio ha respinto le due iniziative MPS: ridurre l\'età pensionamento magistrati da 70 a 65 anni (41 voti contro) e trasferire al Parlamento le destituzioni (61 voti contro).',
     'blog.article.iniziative-mps-giustizia-respinte.imageAlt': 'Aula del Gran Consiglio a Bellinzona durante una votazione sulle iniziative MPS sulla giustizia',
+    'blog.article.raffineria-cressier-carburanti.title': 'Diesel svizzero sfiora 2,50 franchi: allarme Cressier',
+    'blog.article.raffineria-cressier-carburanti.excerpt': '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    'blog.article.raffineria-cressier-carburanti.imageAlt': 'Pompa di diesel in Svizzera con una raffineria sullo sfondo',
 };
 
 export default blogMetaChIt;

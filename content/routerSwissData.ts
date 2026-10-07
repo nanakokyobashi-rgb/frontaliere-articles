@@ -2637,6 +2637,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'maiali-polmonite-enzootica-svizzera': { it: 'maiali-polmonite-enzootica-svizzera', en: 'switzerland-pigs-enzootic-pneumonia', de: 'schweiz-schweine-enzootische-lunge', fr: 'suisse-porcs-pneumonie-enzootique' },
  'ginevra-iniziativa-cern-fcc': { it: 'ginevra-iniziativa-cern-fcc', en: 'geneva-initiative-cern-fcc', de: 'genf-initiative-cern-fcc', fr: 'geneve-initiative-cern-fcc' },
  'iniziative-mps-giustizia-respinte': { it: 'iniziative-mps-giustizia-respinte', en: 'mps-justice-initiatives-rejected', de: 'mps-justizinitiativen-abgelehnt', fr: 'initiatives-mps-justice-rejetees' },
+ 'raffineria-cressier-carburanti': { it: 'raffineria-cressier-carburanti', en: 'cressier-refinery-fuel-prices', de: 'raffinerie-cressier-treibstoffpreise', fr: 'raffinerie-cressier-prix-carburants' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

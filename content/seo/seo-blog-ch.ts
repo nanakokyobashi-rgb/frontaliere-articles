@@ -98887,6 +98887,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-raffineria-cressier-carburanti': {
+    title: 'Diesel svizzero sfiora 2,50 franchi: allarme Cressier',
+    description: '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    keywords: 'frontalieri, ticino, svizzera, italia, diesel, svizzero, sfiora, franchi',
+    ogTitle: 'Diesel svizzero quasi a 2,50 franchi: Cressier',
+    ogDescription: '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    canonicalPath: '/articoli-svizzera/raffineria-cressier-carburanti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
+      "description": "## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/diesel-rincaro-geopolitica-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pompa di diesel in Svizzera con una raffineria sullo sfondo"
+      },
+      "datePublished": "2026-10-07T05:28:44+00:00",
+      "dateModified": "2026-10-07T05:28:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/raffineria-cressier-carburanti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
