@@ -27,6 +27,7 @@ import {
 export const DEFAULT_LIMIT = 10;
 export const MAX_LIMIT = 100;
 export const IMAGE_BUDGET_MS = 120_000;
+export const NO_TEXT_IMAGE_RETRY_HINT = 'Safety retry: absolutely no signs, lettering, words, numbers, logos, labels, banners, watermarks, or signature-like marks anywhere in the image.';
 
 const GENERATED_REGISTRY_REL = 'data/generated-image-registry.json';
 let writeTmpSeq = 0;
@@ -84,6 +85,12 @@ function normalizeReason(value) {
   return reason || 'engine-failed';
 }
 
+export function isVisualTextFailure(reason) {
+  const normalized = String(reason || '');
+  return /vision gate rejected image/i.test(normalized)
+    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|markings|cartell|scritte?)/i.test(normalized);
+}
+
 function parseLimit(value) {
   const limit = Number(value);
   if (!Number.isSafeInteger(limit) || limit < 1 || limit > MAX_LIMIT) {
@@ -100,6 +107,21 @@ function requestedAtSort(a, b) {
   if (leftValid && rightValid && left !== right) return left - right;
   if (leftValid !== rightValid) return leftValid ? -1 : 1;
   return a.index - b.index;
+}
+
+function failureCountOf(item) {
+  if (Number.isInteger(item?.failureCount) && item.failureCount >= 0) return item.failureCount;
+  // Older queue entries predate failureCount. Their initial lastFailureAt is
+  // copied from requestedAt; a later timestamp proves that they were already
+  // attempted, so they must not masquerade as never-attempted work.
+  const requestedAt = Date.parse(String(item?.requestedAt || ''));
+  const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
+  return Number.isFinite(requestedAt) && Number.isFinite(lastFailureAt) && lastFailureAt > requestedAt ? 1 : 0;
+}
+
+function queueAttemptSort(a, b) {
+  const failureDelta = failureCountOf(a.item) - failureCountOf(b.item);
+  return failureDelta || requestedAtSort(a, b);
 }
 
 function sectionForRegistry(location) {
@@ -147,6 +169,19 @@ function existingRecordForArticle(root, articleId) {
   }
 }
 
+function alreadySatisfiedCover(root, item, registryFiles) {
+  try {
+    const location = locateArticleRegistry(root, item.articleId, { registryFiles });
+    const record = existingRecordForArticle(root, item.articleId);
+    if (!record || location.previousImage !== record.imageUrl) return false;
+    const section = sectionForRegistry(location);
+    const seo = locateArticleSeoImage(root, item.articleId, { section });
+    return seo.previousImage === record.imageUrl;
+  } catch {
+    return false;
+  }
+}
+
 async function defaultGenerateCover(item, context) {
   const { generateGovernedArticleHero } = await import('./lib/article-cover-engine.mjs');
   return generateGovernedArticleHero({
@@ -154,6 +189,7 @@ async function defaultGenerateCover(item, context) {
     articleId: item.articleId,
     title: item.title,
     area: context.area,
+    safetyHint: isVisualTextFailure(item.reason) ? NO_TEXT_IMAGE_RETRY_HINT : '',
     deadlineAt: Date.now() + IMAGE_BUDGET_MS,
     onProviderAttempt: ({ provider, attempt }) => {
       console.error(`  🎨 Copertina ${item.articleId}: ${provider}, tentativo ${attempt}`);
@@ -283,15 +319,18 @@ function summaryFor(queue, result) {
     marked: queue.items.filter((item) => Number(item.failureCount || 0) >= 3).map((item) => item.articleId),
     failedIds: result.failedIds,
     reused: result.reused,
+    alreadySatisfied: result.alreadySatisfiedIds.length,
+    alreadySatisfiedIds: result.alreadySatisfiedIds,
     requeued: result.requeued,
     sections: result.sections,
   };
 }
 
 /**
- * Drain the oldest queue entries. The callbacks are injectable so the queue,
- * rollback, and registry-selection contract can be tested without a provider
- * or an image codec.
+ * Drain the least-failed eligible queue entries, after reconciling covers that
+ * are already complete. The callbacks are injectable so the queue, rollback,
+ * and registry-selection contract can be tested without a provider or image
+ * codec.
  */
 export async function drainQueuedCovers({
   root,
@@ -304,6 +343,16 @@ export async function drainQueuedCovers({
 } = {}) {
   const boundedLimit = parseLimit(limit);
   const queue = readImageRegenerationQueue(root);
+  const alreadySatisfiedIds = [];
+  const unsatisfiedItems = [];
+  for (const item of queue.items) {
+    if (alreadySatisfiedCover(root, item, registryFiles)) alreadySatisfiedIds.push(item.articleId);
+    else unsatisfiedItems.push(item);
+  }
+  if (alreadySatisfiedIds.length > 0) {
+    queue.items = unsatisfiedItems;
+    writeImageRegenerationQueue(root, queue);
+  }
   const requeued = [];
   if (retryFailed) {
     for (const item of queue.items) {
@@ -317,10 +366,18 @@ export async function drainQueuedCovers({
   const selected = queue.items
     .filter((item) => retryFailed || item.status !== 'failed')
     .map((item, index) => ({ item, index }))
-    .sort(requestedAtSort)
+    .sort(queueAttemptSort)
     .slice(0, boundedLimit)
     .map(({ item }) => item);
-  const result = { drained: 0, failed: 0, failedIds: [], reused: 0, requeued, sections: {} };
+  const result = {
+    drained: 0,
+    failed: 0,
+    failedIds: [],
+    reused: 0,
+    alreadySatisfiedIds,
+    requeued,
+    sections: {},
+  };
 
   for (const item of selected) {
     let outcome = null;

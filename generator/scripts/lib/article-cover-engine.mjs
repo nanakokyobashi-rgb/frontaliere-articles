@@ -30,11 +30,13 @@ export async function generateGovernedArticleHero({
   title,
   imagePrompt,
   area,
+  safetyHint = '',
   deadlineAt,
   onProviderAttempt,
 } = {}) {
   const articleData = data || { id: articleId, title, imagePrompt };
   const assetId = articleImageAssetId(articleData);
+  const promptArea = [area, String(safetyHint || '').trim()].filter(Boolean).join('. ');
   const stagingDir = path.join(
     root,
     '.cache',
@@ -48,7 +50,7 @@ export async function generateGovernedArticleHero({
         scope: 'article-hero',
         assetId,
         subject: articleImageSubject(articleData),
-        area,
+        area: promptArea,
         season: 'all seasons',
         variant: 'article hero',
       },

@@ -779,6 +779,90 @@ test('il conflitto della coda copertine unisce gli item per articleId', () => {
   }
 });
 
+test('una rimozione del drain vince sui soli fallimenti ma non su una nuova richiesta dopo l avvio', () => {
+  const w = makeWorld();
+  try {
+    const drainStartedAt = '2026-10-07T22:40:00.000Z';
+    const failureOnly = {
+      ...queueItem('article-failure-only', 'previous failure', '2026-10-07T22:30:00.000Z'),
+      failureCount: 2,
+      requestedAt: '2026-10-07T22:00:00.000Z',
+    };
+    const newRequest = {
+      ...queueItem('article-new-request', 'previous failure', '2026-10-07T22:31:00.000Z'),
+      failureCount: 1,
+      requestedAt: '2026-10-07T22:01:00.000Z',
+    };
+    const stillQueued = {
+      ...queueItem('article-still-queued', 'base', '2026-10-07T22:32:00.000Z'),
+      failureCount: 0,
+    };
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([failureOnly, newRequest, stillQueued]));
+    commitAll(w.work, 'seed cover queue with previously failed entries');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    // The main branch advances with a producer that does not touch the queue.
+    landUpstream(w, [['README.md', 'unrelated upstream producer\n', 'unrelated producer advances main']]);
+
+    // The drain starts after the prior failure counts already exist and removes
+    // the two successful entries from its own queue snapshot.
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([stillQueued]));
+    write(w.work, 'content/blog-body/it/drained-cover.ts', 'export const drained = true\n');
+    commitAll(w.work, 'drain two cover requests');
+
+    // While the drain is running, one producer only records another failure;
+    // another explicitly requests the same article again after drainStartedAt.
+    const upstreamFailureOnly = {
+      ...failureOnly,
+      reason: 'failure from another run',
+      status: 'queued',
+      failureCount: 3,
+      lastFailureAt: '2026-10-07T22:45:00.000Z',
+    };
+    const upstreamNewRequest = {
+      ...newRequest,
+      reason: 'new request after drain started',
+      status: 'queued',
+      failureCount: 0,
+      requestedAt: '2026-10-07T22:41:00.000Z',
+      lastFailureAt: '2026-10-07T22:41:00.000Z',
+    };
+    landUpstream(w, [[
+      IMAGE_REGENERATION_QUEUE,
+      queueDocument([upstreamFailureOnly, upstreamNewRequest, stillQueued, queueItem(
+        'article-added-during-drain',
+        'new producer item',
+        '2026-10-07T22:42:00.000Z',
+      )]),
+      'producer updates queue during drain',
+    ]]);
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-queue', IMAGE_REGENERATION_QUEUE);
+    assert.equal(code, 0, `la coda deve fondersi senza perdere il drain:\n${out}`);
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${IMAGE_REGENERATION_QUEUE}`));
+    assert.deepEqual(merged.items.map((item) => item.articleId), [
+      'article-new-request',
+      'article-still-queued',
+      'article-added-during-drain',
+    ]);
+    assert.equal(
+      merged.items.find((item) => item.articleId === 'article-new-request').requestedAt,
+      '2026-10-07T22:41:00.000Z',
+      'una nuova richiesta con requestedAt dopo l avvio del drain deve restare in coda',
+    );
+    assert.equal(
+      merged.items.some((item) => item.articleId === 'article-failure-only'),
+      false,
+      'un aggiornamento di soli failureCount/lastFailureAt non deve riesumare una voce smaltita',
+    );
+    assert.match(git(w.work, 'show', 'HEAD:README.md'), /unrelated upstream producer/);
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/drained-cover.ts')));
+    assert.ok(drainStartedAt < '2026-10-07T22:41:00.000Z');
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('il resolver della coda fallisce chiuso se git non riesce a leggere uno stage', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'queue-stage-read-error-'));
   try {

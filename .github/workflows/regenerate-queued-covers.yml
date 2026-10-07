@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Numero massimo di voci piu' vecchie da tentare in questa run"
+        description: "Numero massimo di voci da tentare in questa run (mai tentate e meno fallite prima)"
         required: false
         default: '10'
         type: string
@@ -104,6 +104,26 @@ jobs:
         run: |
           set -euo pipefail
           echo "publish_ready=false" >> "$GITHUB_OUTPUT"
+
+          verify_pushed_queue() {
+            local internal actual verified
+            if [ ! -s "$SUMMARY_FILE" ]; then
+              echo "::error::queued-cover summary is missing; cannot verify the pushed queue count"
+              return 1
+            fi
+            internal="$(jq -er '.residual // error("missing residual")' "$SUMMARY_FILE")"
+            actual="$(git show HEAD:data/image-regeneration-queue.json | jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid queue") end')"
+            verified="${SUMMARY_FILE}.verified"
+            jq --argjson internal "$internal" --argjson actual "$actual" \
+              '.residualInternal = $internal | .residual = $actual | .residualSource = "pushed-branch"' \
+              "$SUMMARY_FILE" > "$verified"
+            mv "$verified" "$SUMMARY_FILE"
+            if [ "$actual" -ne "$internal" ]; then
+              echo "::error::queued-cover queue count diverged after push: drainer=$internal, pushed branch=$actual"
+              return 1
+            fi
+          }
+
           git add -A
           if git diff --cached --quiet; then
             if [ -s data/image-regeneration-publish-outbox.json ]; then
@@ -112,6 +132,7 @@ jobs:
             else
               echo "queued cover queue produced no changes and no publisher outbox"
             fi
+            verify_pushed_queue
             exit 0
           fi
           if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
@@ -143,6 +164,7 @@ jobs:
           for attempt in 1 2 3 4 5; do
             if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
               echo "pushed to main"
+              verify_pushed_queue
               echo "publish_ready=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
@@ -314,9 +336,11 @@ jobs:
               drained="$(jq -r '.drained // 0' "$SUMMARY_FILE")"
               residual="$(jq -r '.residual // 0' "$SUMMARY_FILE")"
               failed="$(jq -r '.failed // 0' "$SUMMARY_FILE")"
+              already_satisfied="$(jq -r '.alreadySatisfied // 0' "$SUMMARY_FILE")"
               marked="$(jq -r '(.marked // []) | length' "$SUMMARY_FILE")"
               requeued="$(jq -r '(.requeued // []) | length' "$SUMMARY_FILE")"
               echo "- Smaltite: **$drained**"
+              echo "- Già soddisfatte, tolte senza rigenerare: **$already_satisfied**"
               echo "- Residue: **$residual**"
               echo "- Fallite in questa run: **$failed**"
               echo "- Marcate dopo almeno tre fallimenti: **$marked**"
@@ -326,6 +350,9 @@ jobs:
               fi
               if [ "$failed" -gt 0 ]; then
                 echo "- ⚠️ ID falliti in questa run: $(jq -r '(.failedIds // []) | join(", ")' "$SUMMARY_FILE")"
+              fi
+              if [ "$already_satisfied" -gt 0 ]; then
+                echo "- ID già soddisfatti: $(jq -r '(.alreadySatisfiedIds // []) | join(", ")' "$SUMMARY_FILE")"
               fi
               echo "- Sezioni ripubblicate: $(jq -c '.sections // {}' "$SUMMARY_FILE")"
             else

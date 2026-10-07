@@ -15,7 +15,12 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
-import { drainQueuedCovers } from '../scripts/regenerate-queued-covers.mjs';
+import { appendImageRegenerationQueue } from '../scripts/lib/image-regeneration-queue.mjs';
+import {
+  drainQueuedCovers,
+  isVisualTextFailure,
+  NO_TEXT_IMAGE_RETRY_HINT,
+} from '../scripts/regenerate-queued-covers.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 
 function tempRoot() {
@@ -189,6 +194,107 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', async () => {
+  const root = tempRoot();
+  try {
+    const entries = ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']
+      .map((articleId) => ` {\n id: '${articleId}',\n image: '/images/places/fallback.webp',\n },`)
+      .join('\n');
+    write(root, 'content/blog-articles-data.ts', `export const ARTICLES = [\n${entries}\n];\n`);
+    fixture(root, [
+      { ...item('many-failures', '2026-10-07T08:00:00.000Z'), failureCount: 2 },
+      { ...item('legacy-failure', '2026-10-07T08:30:00.000Z'), lastFailureAt: '2026-10-07T08:45:00.000Z' },
+      { ...item('one-failure', '2026-10-07T09:00:00.000Z'), failureCount: 1 },
+      { ...item('never-attempted', '2026-10-07T10:00:00.000Z'), failureCount: 0 },
+    ]);
+
+    const seen = [];
+    const summary = await drainQueuedCovers({
+      root,
+      limit: 4,
+      generateCover: async (entry, ...args) => {
+        seen.push(entry.articleId);
+        return fakeCover(root)(entry, ...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.deepEqual(seen, ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']);
+    assert.equal(summary.drained, 4);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una nuova accodatura aggiorna requestedAt ma conserva il contatore dei fallimenti', () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'requeued-after-drain-start';
+    queue(root, [{
+      ...item(articleId, '2026-10-07T22:00:00.000Z'),
+      failureCount: 2,
+    }]);
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId,
+      title: articleId,
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'new request',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    }), true);
+    const updated = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0];
+    assert.equal(updated.requestedAt, '2026-10-07T22:41:00.000Z');
+    assert.equal(updated.failureCount, 2);
+    assert.equal(updated.status, 'queued');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'already-satisfied';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const bytes = Buffer.from('already-satisfied-cover');
+    const record = generatedRecord(root, articleId, imageUrl, bytes);
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+    write(root, `public${imageUrl}`, bytes);
+    queue(root, [{ ...item(articleId, '2026-10-07T09:00:00.000Z'), status: 'failed', failureCount: 3 }]);
+
+    let calls = 0;
+    const summary = await drainQueuedCovers({
+      root,
+      limit: 1,
+      generateCover: async () => {
+        calls += 1;
+        throw new Error('must not regenerate');
+      },
+      generateThumbnail: async () => { throw new Error('must not create a thumbnail'); },
+    });
+
+    assert.equal(calls, 0);
+    assert.equal(summary.drained, 0);
+    assert.equal(summary.alreadySatisfied, 1);
+    assert.deepEqual(summary.alreadySatisfiedIds, [articleId]);
+    assert.equal(summary.residual, 0);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items.length, 0);
+    assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-already-satisfied\.webp/);
+    assert.match(fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8'), /article-already-satisfied\.webp/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo', () => {
+  assert.equal(isVisualTextFailure('vision gate rejected image: visible lettering and signage'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
+  assert.equal(isVisualTextFailure('provider unavailable'), false);
+  assert.match(NO_TEXT_IMAGE_RETRY_HINT, /no signs/);
+  assert.match(NO_TEXT_IMAGE_RETRY_HINT, /lettering/);
 });
 
 test('non ritenta le voci failed in schedule e le riapre solo con retry esplicito', async () => {
@@ -509,6 +615,10 @@ test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto',
     workflow,
     /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
   );
+  assert.match(workflow, /verify_pushed_queue\(\)/);
+  assert.match(workflow, /git show HEAD:data\/image-regeneration-queue\.json \| jq/);
+  assert.match(workflow, /\.residualSource = "pushed-branch"/);
+  assert.match(workflow, /queued-cover queue count diverged after push/);
 });
 
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {

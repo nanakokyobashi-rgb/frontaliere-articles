@@ -4,11 +4,13 @@
  *
  * La coda e' un documento JSON riscritto per intero da due producer diversi.
  * Durante un rebase lo stage 2 e' la copia upstream e lo stage 3 e' il commit
- * rigiocato. Lo stage 1 aggiunge il punto comune: se il drain ha rimosso una
- * voce, la copia identica rimasta in un producer partito prima del drain e'
- * stale e non va reintrodotta; una modifica o aggiunta realmente nuova resta.
- * Per lo stesso articolo vince il fallimento piu' recente; requestedAt resta
- * il primo avvistamento, cosi' la coda non dimentica da quanto aspetta.
+ * rigiocato. Lo stage 1 e' lo snapshot comune all'avvio del drain: se il drain
+ * ha rimosso una voce, la copia upstream con lo stesso requestedAt e' stale,
+ * anche quando nel frattempo ha cambiato solo failureCount/lastFailureAt, e
+ * non va reintrodotta. Un requestedAt successivo identifica invece una nuova
+ * richiesta, che resta in coda; le aggiunte senza uno stage 1 restano sempre.
+ * Per lo stesso articolo vince il fallimento piu' recente e requestedAt segue
+ * l'ultima richiesta, cosi' il confine del drain resta esplicito.
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync, writeFileSync } from 'node:fs';
@@ -58,14 +60,6 @@ function timeOf(value) {
   return Number.isFinite(time) ? time : null;
 }
 
-function earliest(a, b) {
-  const left = timeOf(a);
-  const right = timeOf(b);
-  if (left == null) return b || a;
-  if (right == null) return a || b;
-  return left <= right ? a : b;
-}
-
 function latest(a, b) {
   const left = timeOf(a);
   const right = timeOf(b);
@@ -96,9 +90,20 @@ function mergeItem(existing, candidate) {
   return {
     ...winner,
     articleId: String(existing.articleId),
-    requestedAt: earliest(existing.requestedAt, candidate.requestedAt),
+    requestedAt: latest(existing.requestedAt, candidate.requestedAt),
     lastFailureAt: latest(existing.lastFailureAt, candidate.lastFailureAt),
+    failureCount: Math.max(
+      Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
+      Number.isInteger(candidate.failureCount) && candidate.failureCount >= 0 ? candidate.failureCount : 0,
+    ),
   };
+}
+
+function isNewRequestAfterDrainStart(baseItem, candidate) {
+  const baseRequestedAt = timeOf(baseItem.requestedAt);
+  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  return candidateRequestedAt != null
+    && (baseRequestedAt == null || candidateRequestedAt > baseRequestedAt);
 }
 
 /** Pure three-way merge used by the conflict resolver and its tests. */
@@ -114,12 +119,19 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
     const upstreamItem = upstreamByArticle.get(articleId);
     const replayedItem = replayedByArticle.get(articleId);
 
-    // A side that is absent deleted the item. When the other side is an
-    // unchanged copy of the common base, that copy is stale rather than a new
-    // request and the deletion must win. A changed item is a genuine later
-    // update and remains eligible for the normal merge.
+    // A side that is absent deleted the item. When the drain side removed it,
+    // an upstream copy with the old requestedAt is stale: failure counters and
+    // lastFailureAt are progress metadata, not a new request. Only a later
+    // requestedAt can revive the article after the drain started.
+    if (baseItem && !replayedItem) {
+      if (!upstreamItem || !isNewRequestAfterDrainStart(baseItem, upstreamItem)) continue;
+      byArticle.set(articleId, { ...upstreamItem, articleId });
+      continue;
+    }
+
+    // The upstream side can independently delete an item. If the replayed
+    // side is unchanged, its copy is stale and the deletion wins.
     if (baseItem && !upstreamItem && replayedItem && sameItem(replayedItem, baseItem)) continue;
-    if (baseItem && upstreamItem && !replayedItem && sameItem(upstreamItem, baseItem)) continue;
 
     if (upstreamItem && replayedItem) {
       if (baseItem && sameItem(upstreamItem, baseItem) && !sameItem(replayedItem, baseItem)) {
