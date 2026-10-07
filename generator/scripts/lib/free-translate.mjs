@@ -354,7 +354,15 @@ const _cascadeStats = {
   tierStructureFailures: {
     limitExceeded: {},
     recoveryFailed: {},
+    // The exit transform (markdown repair, token restore, glossary, placeholder
+    // strip) took away the line skeleton a tier's output had. Never a hit: the
+    // field is a MISS. The tier name is always `exit`.
+    exitTransformBroke: {},
   },
+  // Accepted fields whose opaque spans (URLs, e-mails, placeholders) differ
+  // from the source AFTER the exit transform although the tier's output had
+  // them intact. Measurement only, like `tierNumericDrift`: it never rejects.
+  exitTransformOpaqueDrift: 0,
   // Per-field-type split of calls/successes. The cumulative `successes` above is
   // summed across every field type, so a run that translates short titles fine
   // but has every (long) description rejected by all providers still reports
@@ -455,6 +463,9 @@ export function logCascadeSummary() {
     .filter((entry) => !entry.endsWith('=0'));
   if (structure.length) {
     console.log('   Tier structure failures (recupero per riga): ' + structure.join(', '));
+  }
+  if (s.exitTransformOpaqueDrift > 0) {
+    console.log('   Exit transform opaque drift (campi accettati con URL o segnaposto cambiati in uscita): ' + s.exitTransformOpaqueDrift);
   }
   const health = getInstanceHealthStats();
   const down = Object.entries(health).filter(([, h]) => h.failures >= HEALTH_FAILURE_THRESHOLD);
@@ -704,6 +715,23 @@ function isLocalizedOrdinalLine(sourceLine, translatedLine) {
   const source = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
   const translated = String(translatedLine ?? '').match(/^(\s*)(\d{1,2})\.\s+/u);
   return Boolean(source && translated && source[1] === translated[1] && source[2] === translated[2]);
+}
+
+/**
+ * Line count and per-line structural marker only. It is what a LOCAL transform
+ * applied after the tiers (markdown repair, token restore, glossary) may not
+ * change: unlike `hasSameLineStructure` it does not look at opaque spans or at
+ * the text of a line, so it compares an unmasked source with a finalized text
+ * without tripping on the tokens the transform is there to rewrite.
+ */
+export function hasSameLineSkeleton(sourceText, translatedText) {
+  const sourceLines = normalizeStructuredBlock(sourceText).split('\n');
+  const translatedLines = normalizeStructuredBlock(translatedText).split('\n');
+  return sourceLines.length === translatedLines.length
+    && sourceLines.every((sourceLine, index) => (
+      lineStructuralSignature(sourceLine).signature === lineStructuralSignature(translatedLines[index]).signature
+      || isLocalizedOrdinalLine(sourceLine, translatedLines[index])
+    ));
 }
 
 export function hasSameLineStructure(sourceText, translatedText) {
@@ -2561,6 +2589,38 @@ function delay(ms) {
  * @returns {Promise<string>} Translated text or ''
  */
 /**
+ * Drop the empty bold spans of ONE line (`** **`, `** : **`, `** - **`).
+ *
+ * Markers pair up left to right, so only the text BETWEEN an opening marker and
+ * its closing one is judged. A single regex over the whole text cannot tell the
+ * two apart: it matched ANY two markers with nothing but blanks or punctuation
+ * between them, and that is also the gap between the end of one bold span and
+ * the start of the next. `**a**, **b**` became `**a b**`; and since `\s`
+ * crosses line breaks, a list item ending in bold swallowed the item after it
+ * (`... **1.260 CHF/mese**\n- **LPP**: ...` came back as one line). That ran in
+ * the exit transform, AFTER the line-structure guard had accepted the tier's
+ * output, so nothing saw the merged lines. Working line by line also makes the
+ * step unable to add or remove a line break by construction.
+ */
+function dropEmptyBoldSpansInLine(line) {
+  const parts = line.split('**');
+  if (parts.length < 3) return line;
+  let out = parts[0];
+  for (let index = 1; index < parts.length; index += 2) {
+    const content = parts[index];
+    if (index + 1 >= parts.length) {
+      // Opening marker with no closing one on this line: the parity rule below
+      // decides what happens to it.
+      out += `**${content}`;
+      break;
+    }
+    out += /^[\s:;,.\-–—]*$/u.test(content) ? ' ' : `**${content}**`;
+    out += parts[index + 1];
+  }
+  return out;
+}
+
+/**
  * Post-process a translator output to make sure `**bold**` markdown markers
  * stay balanced. AI translators frequently re-flow paragraphs in a way that
  * leaves orphan `**` (count parity broken) or empty `**…**` runs containing
@@ -2573,15 +2633,24 @@ function delay(ms) {
  * Exported so the same balancer can be reused outside the cascade (tests,
  * upstream sanitizers, retroactive cleanup scripts).
  *
+ * `sourceText` is optional. When the caller has the source and the text to
+ * repair is line-aligned with it (same number of lines), a separator-only line
+ * that the SOURCE owns at the same position is kept: `---` between two
+ * sections is Markdown structure, not decoration added by a translator, and
+ * dropping it took two lines away from a translation that had kept them (the
+ * rule, then one of the blank lines around it at step 5).
+ *
  * @param {string} s
+ * @param {{ sourceText?: string|null }} [options]
  * @returns {string}
  */
-export function balanceMarkdownMarkers(s) {
+export function balanceMarkdownMarkers(s, { sourceText = null } = {}) {
   if (typeof s !== 'string' || !s) return s;
   let out = s;
   // 1. Drop empty / whitespace-only / punctuation-only bolds (e.g. `** **`,
-  //    `**  **`, `** : **`, `** - **`).
-  out = out.replace(/\*\*\s*[\s:;,.\-–—]*\s*\*\*/g, ' ');
+  //    `**  **`, `** : **`, `** - **`), one line at a time: see
+  //    `dropEmptyBoldSpansInLine`.
+  out = out.split('\n').map(dropEmptyBoldSpansInLine).join('\n');
   // 2. If `**` count is odd, the output is unrecoverable as bold structure —
   //    strip every `**` so the renderer sees plain text instead of a half-
   //    bold span.
@@ -2590,11 +2659,16 @@ export function balanceMarkdownMarkers(s) {
     out = out.replace(/\*\*/g, '');
   }
   // 3. Strip standalone separator-only lines (`______`, `======`) that some
-  //    translators emit as decoration.
-  out = out
-    .split('\n')
-    .filter((line) => !/^[\s_\-=*•·~]{3,}$/.test(line))
-    .join('\n');
+  //    translators emit as decoration — unless the source owns that line.
+  const separatorOnly = (line) => /^[\s_\-=*•·~]{3,}$/.test(line);
+  const outLines = out.split('\n');
+  const sourceLines = typeof sourceText === 'string' ? sourceText.split('\n') : null;
+  const aligned = sourceLines !== null && sourceLines.length === outLines.length;
+  const keptLines = outLines.filter((line, index) => (
+    !separatorOnly(line) || (aligned && separatorOnly(sourceLines[index]))
+  ));
+  const removedSeparatorLines = outLines.length - keptLines.length;
+  out = keptLines.join('\n');
   // 4. Strip trailing inline separator runs that often hug a line end.
   out = out
     .split('\n')
@@ -2602,8 +2676,10 @@ export function balanceMarkdownMarkers(s) {
     .join('\n');
   // 5. Collapse 3+ consecutive newlines that step 3 may have created when
   //    a separator line sat between two paragraph breaks (\n\nSEP\n\n →
-  //    \n\n\n after filter).
-  out = out.replace(/\n{3,}/g, '\n\n');
+  //    \n\n\n after filter). A text that is line-aligned with its source and
+  //    lost no line at step 3 has nothing to collapse: its blank runs are the
+  //    source's.
+  if (!aligned || removedSeparatorLines > 0) out = out.replace(/\n{3,}/g, '\n\n');
   // 6. Collapse consecutive inline spaces that step 1 may have left without
   // erasing the indentation of nested Markdown list items.
   out = out
@@ -2697,12 +2773,34 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
 function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }) {
   const finalized = finalizeTranslatedText({
     sourceText: prepared.sourceClean,
-    translatedText: balanceMarkdownMarkers(out),
+    translatedText: balanceMarkdownMarkers(out, { sourceText: prepared.clean }),
     targetLang,
     fieldType,
     protectedTokens: prepared.protectedTokens,
   });
-  if (!finalized) noteTranslationOutcome(outcome, 'incomplete');
+  if (!finalized) {
+    noteTranslationOutcome(outcome, 'incomplete');
+    return finalized;
+  }
+  // Exit invariant. A tier's output is accepted because it has the line
+  // structure of the source (`tryTier`); this transform runs AFTER that guard,
+  // so whatever it breaks nobody else sees. It used to merge list items and
+  // drop the source's own `---` lines here. The repair steps are now unable to
+  // do that; this check keeps it true for the next rule added to the exit:
+  //  - a lost line skeleton is a MISS, counted, never a published text;
+  //  - a changed opaque span (a URL the placeholder strip rewrote) is counted
+  //    and let through, because rejecting it would stop a translation that
+  //    was being published until now — the counter says when it reaches zero.
+  if (hasSameLineStructure(prepared.clean, out)) {
+    if (!hasSameLineSkeleton(prepared.structureSource, finalized)) {
+      noteTierStructureFailure('exit', 'exitTransformBroke');
+      noteTranslationOutcome(outcome, 'incomplete');
+      return '';
+    }
+    if (!hasSameLineStructure(prepared.structureSource, finalized)) {
+      _cascadeStats.exitTransformOpaqueDrift += 1;
+    }
+  }
   return finalized;
 }
 

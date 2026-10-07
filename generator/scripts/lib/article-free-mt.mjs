@@ -387,6 +387,8 @@ export function maskNavLinks(text) {
   return { masked, expected: store.length, restore };
 }
 
+const lineCount = (value) => String(value ?? '').trim().split('\n').length;
+
 /**
  * Translate a single article text field via the injected free MT translator,
  * preserving internal nav-links and, when requested, municipality names.
@@ -500,7 +502,16 @@ export async function translateFieldFreeMt({
     }
     restored = r.text;
   }
-  const balanced = balanceMarkdown(restored);
+  const balanced = balanceMarkdown(restored, { sourceText: src });
+  // The markdown repair runs on the whole field, after every engine guard. A
+  // translation that came back with the source's line count must still have
+  // it: the repair used to merge list items here (`**a**\n- **b**` → one
+  // line), and no later check looks at lines.
+  if (lineCount(restored) === lineCount(src) && lineCount(balanced) !== lineCount(src)) {
+    onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'markdown-repair-changed-lines' });
+    onWarn(`free-MT ${targetLang}:${fieldType} markdown repair changed the line count (${lineCount(src)} → ${lineCount(balanced)})`);
+    return '';
+  }
   if (findLoneSurrogates(balanced).length > 0) {
     onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'lone-surrogate' });
     onWarn(`free-MT ${targetLang}:${fieldType} produced a lone surrogate`);
