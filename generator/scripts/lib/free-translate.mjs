@@ -598,6 +598,7 @@ const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{
 // Dates with punctuation are matched as ordered numeric spans, while decimal
 // and thousands separators stay inside one span.
 const NUMERIC_OPAQUE_RE = /(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+const NUMERIC_OPAQUE_TEST_RE = new RegExp(NUMERIC_OPAQUE_RE.source, 'u');
 
 /**
  * Decide whether a source line deserves a translation request.
@@ -622,6 +623,12 @@ function opaqueSpanSignature(line) {
   return opaqueSpanRanges(text)
     .map(({ start, end }) => {
       const span = text.slice(start, end);
+      if (NUMERIC_OPAQUE_TEST_RE.test(span)) {
+        // Date ordinals and decimal punctuation are locale-specific (`1°` →
+        // `1.` and `1,5` → `1.5`). Compare the ordered digit groups so the
+        // value stays invariant without rejecting the target locale's format.
+        return `number:${span.match(/\d+/gu).join('|')}`;
+      }
       // Only sentinels are intentionally case-insensitive. URL paths, email
       // local parts and placeholders can be case-sensitive in published HTML.
       return translationSentinelRegExp().test(span)
@@ -2656,7 +2663,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (rejectedAsMetaResponse(tierName, sourceClean, result, _outcome)) {
         return '';
       }
-      if (result && !hasSameLineStructure(structureSource, result)) {
+      if (result && !hasSameLineStructure(clean, result)) {
         const recovered = await recoverStructuredTier({
           tierName,
           sourceText: clean,
