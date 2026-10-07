@@ -18,10 +18,8 @@ import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import {
-  findOrphanedKeyFactsList,
-  getKeyFactsHeading,
-} from './lib/ai-search-template.mjs';
+import { getKeyFactsHeading } from './lib/ai-search-template.mjs';
+import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { unescapeTs } from './scan-vacuous-key-facts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
