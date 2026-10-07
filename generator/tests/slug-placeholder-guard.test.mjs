@@ -93,6 +93,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
 import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
+import { findArticleIdentityServiceMarkers, findPublishedIdentityServiceMarkers } from '../../scripts/lib/published-slug-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -259,6 +260,18 @@ test('inspect: gli slug veri non si muovono', () => {
     const r = inspectSlugForPromptPlaceholder(value);
     assert.equal(r.leaked, false, `falso positivo su uno slug reale: "${value}"`);
     assert.equal(r.slug, value, `"${value}" e' stato alterato in "${r.slug}"`);
+  }
+});
+
+test('il classificatore del topic gate distingue i marker di servizio dagli slug veri', () => {
+  assert.deepEqual(
+    findPublishedIdentityServiceMarkers('abort-topical-relevance-pre-saint-didier'),
+    ['abort', 'topical-relevance', 'abort_topical_relevance'],
+  );
+  assert.deepEqual(findPublishedIdentityServiceMarkers('abort_saint-nicolas-non-frontaliero'), ['abort']);
+  assert.deepEqual(findPublishedIdentityServiceMarkers('news-reason-for-rejection'), ['reason']);
+  for (const slug of ['aborted-canton-health', 'reasonable-tax-guide', 'topical-relevant-ticino']) {
+    assert.deepEqual(findPublishedIdentityServiceMarkers(slug), [], `falso positivo su ${slug}`);
   }
 });
 
@@ -517,4 +530,24 @@ test('registro: il classificatore non tocca i 15.000 slug veri gia\' pubblicati'
     }
   }
   assert.ok(unchanged > 14000, `verificati solo ${unchanged} slug`);
+});
+
+test('registro: nessun id o slug pubblicato contiene marker del topic gate', () => {
+  const findings = [];
+  for (const registry of REGISTRIES) {
+    for (const { id, perLocale } of readRegistry(registry)) {
+      for (const finding of findArticleIdentityServiceMarkers({ id, slugs: perLocale })) {
+        findings.push(
+          `${registry.section}|${id}|${finding.field}${finding.locale ? `.${finding.locale}` : ''}="${finding.value}" (${finding.marker})`,
+        );
+      }
+    }
+  }
+  assert.deepEqual(
+    findings,
+    [],
+    'un verdetto di servizio del topic gate è arrivato nell’identità pubblica; ' +
+      'un abort deve interrompere la registrazione, non diventare un articolo:\n' +
+      findings.map((finding) => `  ${finding}`).join('\n'),
+  );
 });

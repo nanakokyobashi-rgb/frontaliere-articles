@@ -172,7 +172,10 @@ import {
   retryPendingBodyTranslations,
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
-import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
+import {
+  isReservedPublishedSlug,
+  findArticleIdentityServiceMarkers,
+} from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
@@ -12784,6 +12787,27 @@ export function validateHeadline(headline) {
   return errs;
 }
 
+/**
+ * A topic-gate verdict is control data, never a publishable article identity.
+ * The primary AI path marks this as a quality rejection so the next attempt
+ * receives the normal identity correction; secondary producers reach the same
+ * assertion through `deriveAndSanitizeArticleSlugs()` below.
+ */
+function assertNoArticleIdentityServiceMarkers(data, { qualityReject = false } = {}) {
+  const findings = findArticleIdentityServiceMarkers(data);
+  if (findings.length === 0) return;
+  const detail = findings
+    .map(({ field, locale, marker, value }) =>
+      `${field}${locale ? `.${locale}` : ''}="${value}" (${marker})`)
+    .join(', ');
+  const err = new Error(`[article-service-marker] identità non pubblicabile: ${detail}`);
+  if (qualityReject) {
+    err.qualityReject = true;
+    err.identityRejected = true;
+  }
+  throw err;
+}
+
 // ── Step 3: Validate Gemini response ────────────────────────
 function validate(data, opts = {}) {
   const minBodyChars = Number(opts.minBodyChars || MIN_BODY_CHARS);
@@ -12900,6 +12924,11 @@ function validate(data, opts = {}) {
     console.error(`⚠️  Campo "slugs" mancante — sarà derivato dai titoli per locale`);
     data.slugs = {};
   }
+  // `abort_topical_relevance`/`reason` are verdict fields, not article
+  // identity. Catch them before slug sanitization turns the field name into a
+  // normal-looking URL segment; this is the same write-boundary guard used by
+  // the secondary producers below and by the published-corpus observer.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
 
   // Synthesize seo from content.it if the model omitted it (common with smaller fallback models)
   if (!data.seo) {
@@ -18683,6 +18712,11 @@ function sectionLocaleSlugTaken(locale, slug) {
  */
 export function deriveAndSanitizeArticleSlugs(data) {
   data.slugs = data.slugs && typeof data.slugs === 'object' ? data.slugs : {};
+
+  // This function is also the shared identity finalizer for producers that do
+  // not pass through `validate()`. A verdict marker in an id or localized slug
+  // must stop before `data.slugs.it = data.id` can write it to the registry.
+  assertNoArticleIdentityServiceMarkers(data);
 
   const idCheck = inspectSlugForPromptPlaceholder(data.id);
   if (idCheck.leaked) {
