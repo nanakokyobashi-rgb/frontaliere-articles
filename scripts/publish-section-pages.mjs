@@ -623,7 +623,11 @@ export async function publish({
   // Non cancellare URL della release precedente finche' la nuova release non
   // e' stata caricata, purgata e letta. Durante il normale interleaving con
   // publish-api una sitemap precedente puo' ancora annunciare quelle URL: una
-  // failure parziale qui deve lasciare intatta la superficie vecchia.
+  // failure parziale qui deve lasciare intatta la superficie vecchia. Per una
+  // sezione draft, invece, il registro edge non espone ancora una route live e
+  // build-api non emette la sitemap della sezione: non c'e' una superficie
+  // pubblica da proteggere aspettando un commit API che potrebbe essere
+  // sostituito in coda.
   if (failures) {
     console.error(`::error::[${LOG}] upload HTML incompleto: nessuna pagina obsoleta viene cancellata`);
     return { failures, uploaded: uploaded.length, deleted: 0, status: beforeStatus };
@@ -670,7 +674,7 @@ export async function publish({
     return { failures, uploaded: uploaded.length, deleted: 0, status };
   }
 
-  if (obsoletePages.length > 0) {
+  if (obsoletePages.length > 0 && status === 'live') {
     const releaseReady = await waitForPublishedReleaseReady(releaseCommit, {
       section,
       releaseReadyImpl,

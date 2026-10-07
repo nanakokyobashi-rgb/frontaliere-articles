@@ -200,7 +200,7 @@ test('publisher: una pagina obsoleta resta intatta se la release corrente non e\
       cdnUploads: [],
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-obsolete-')),
-      publishedStatusImpl: async () => 'draft',
+      publishedStatusImpl: async () => 'live',
       runImpl: (command, args) => {
         calls.push({ command, args });
         if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) return { code: 0, stdout: '✅ uploaded' };
@@ -241,7 +241,7 @@ test('publisher: una URL obsoleta resta intatta finche\' API e edge non servono 
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-api-edge-')),
       releaseCommit: 'current-commit',
-      publishedStatusImpl: async () => 'draft',
+      publishedStatusImpl: async () => 'live',
       releaseReadyImpl: async () => ({ ok: false, reason: 'manifest vecchio' }),
       releaseReadyMaxWaitMs: 0,
       runImpl: (_command, args) => {
@@ -280,7 +280,7 @@ test('publisher: la readiness API viene ritentata prima della pulizia obsoleta',
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-readiness-retry-')),
       releaseCommit: 'current-commit',
-      publishedStatusImpl: async () => 'draft',
+      publishedStatusImpl: async () => 'live',
       releaseReadyImpl: async () => {
         readinessAttempts++;
         return readinessAttempts < 3 ? { ok: false, reason: 'manifest vecchio' } : { ok: true };
@@ -328,7 +328,7 @@ test('publisher: la cancellazione obsoleta arriva dopo purge e verifica della re
       cdnUploads: [],
       obsoletePages: [obsolete],
       distDir: mkdtempSync(path.join(tmpdir(), 'publish-obsolete-order-')),
-      publishedStatusImpl: async () => 'draft',
+      publishedStatusImpl: async () => 'live',
       releaseReadyImpl: async () => ({ ok: true }),
       runImpl: (_command, args) => {
         if (args.some((arg) => arg.endsWith('upload-cdn-file.sh'))) events.push('upload');
