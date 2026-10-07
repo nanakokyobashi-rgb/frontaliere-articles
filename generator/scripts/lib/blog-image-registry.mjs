@@ -20,6 +20,50 @@ import { writeJsonAtomic } from './atomic-write-json.mjs';
 export const GENERATED_IMAGE_REGISTRY_REL = 'data/generated-image-registry.json';
 export const EDITORIAL_IMAGE_REGISTRY_REL = 'data/editorial-image-registry.json';
 export const BLOG_IMAGE_CREDITS_AGGREGATE = 'data/image-credits-blog.json';
+export const STATIC_FALLBACK_IMAGE = '/images/places/lugano-view.webp';
+
+// The place asset is owned by the site and is materialized in the site tree,
+// not in this corpus checkout. Keep its governed record available here so a
+// corpus-only generator can publish it during an image-provider outage.
+const STATIC_FALLBACK_RECORD = Object.freeze({
+  schema: 1,
+  assetId: 'lugano-view',
+  provider: 'openai-codex',
+  model: 'gpt-image-2.5',
+  executorModel: 'gpt-5.6-luna',
+  promptVersion: 'frontaliereticino.generated-image-policy.v1',
+  promptHash: 'a552b810810fc3e04267e7c17af799c7a182a0cda5732e97212ee0b1d9e0cecb',
+  license: 'generated-provider',
+  licenseUrl: 'https://openai.com/policies/terms-of-use/',
+  credit: 'frontaliereticino.ch',
+  sha256: 'feb0ec2c59872a3d1ccb23dba22a436ca1d747d5e909b142cd4a593c550b6a96',
+  bytes: 169332,
+  width: 1200,
+  height: 675,
+  format: 'webp',
+  generatedAt: '2026-10-06T19:26:04.084Z',
+  verifiedAt: '2026-10-06T19:26:14.671Z',
+  restrictions: [
+    'illustrative-only',
+    'no-real-recognizable-foreground-person',
+    'no-public-figure-face',
+    'no-logo-brand-or-text',
+    'no-specific-real-event-photojournalism',
+  ],
+  scope: 'place',
+  imageUrl: STATIC_FALLBACK_IMAGE,
+  area: 'Canton Ticino e regione di confine',
+  season: 'luce diurna equilibrata',
+  variant: 'place-hero',
+  vision: {
+    ok: true,
+    contains_text: false,
+    contains_logo: false,
+    contains_recognizable_face: false,
+    looks_like_specific_real_event: false,
+    notes: 'Original generic illustrated landscape; no readable text, logos, signatures, recognizable faces, or specific real event.',
+  },
+});
 
 // New governed records are emitted and copied as WebP only. Accepting other
 // extensions here would let a valid-looking registry point at a file that the
@@ -129,11 +173,28 @@ export function validateEditorialImageRecord(record) {
 export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
   const normalized = normalizePath(imagePath);
   if (!normalized) return null;
+  if (normalized === STATIC_FALLBACK_IMAGE) {
+    // Prefer the versioned registry copy when present, but do not require the
+    // corpus checkout to materialize bytes owned by the site repository.
+    try {
+      const registered = readGeneratedImageRecords(root, { strict: false })
+        .find((record) => record.scope === 'place' && record.imageUrl === normalized);
+      if (registered) return { kind: 'generated', record: registered };
+    } catch {
+      // The built-in governed record below keeps the outage fallback usable;
+      // a malformed optional registry must not reject the article cover.
+    }
+    return { kind: 'generated', record: STATIC_FALLBACK_RECORD };
+  }
   const generated = readGeneratedImageRecords(root, { strict })
-    .find((record) => record.scope === 'article-hero' && record.imageUrl === normalized);
-  if (generated) return hasMaterializedImageRecord(root, normalized, generated)
-    ? { kind: 'generated', record: generated }
-    : null;
+    .find((record) => (record.scope === 'article-hero' || record.scope === 'place') && record.imageUrl === normalized);
+  if (generated) {
+    // Place records point at the site's static asset tree. Article-hero records
+    // must still prove the materialized corpus bytes before publication.
+    return generated.scope === 'place' || hasMaterializedImageRecord(root, normalized, generated)
+      ? { kind: 'generated', record: generated }
+      : null;
+  }
   const editorial = readEditorialImageRecords(root, { strict }).find((record) => record.cover === normalized);
   if (editorial) return hasMaterializedImageRecord(root, normalized, editorial)
     ? { kind: 'editorial-upload', record: editorial }

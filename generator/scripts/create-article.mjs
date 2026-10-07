@@ -36,8 +36,9 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *    Evitare pattern tipici dell'AI (frasi filler, strutture ripetitive).
  *
  * 2. IMMAGINE CONTESTUALE: generare una illustrazione contestuale tramite il
- *    motore governato condiviso. Il fallback è esclusivamente una copertina
- *    già presente nel catalogo con record di provenienza valido.
+ *    motore governato condiviso. Se il motore non è disponibile, il fallback
+ *    è una copertina già presente nel catalogo con record valido oppure la
+ *    cover statica governata del sito.
  *
  * 3. SEO IMMAGINI: Ogni immagine deve avere ALT tag descrittivi e parlanti,
  *    con informazioni necessarie per l'indicizzazione su Google e Bing.
@@ -271,6 +272,7 @@ import {
   hasValidBlogImageRecord,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
+import { resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -1452,8 +1454,8 @@ const PLACES_IMAGES = [
 ];
 
 // Build the catalog-only fallback pool. Every candidate must already have a
-// reader-facing provenance record; static place assets and unrecorded photos are
-// deliberately excluded from new article publication.
+// reader-facing provenance record; static place assets remain outside the
+// topical pool and are reserved for the final governed default fallback.
 const BLOG_IMAGES = (() => {
   try {
     return readdirSync(resolve('public/images/blog'))
@@ -14226,7 +14228,7 @@ function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'
 
 const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
-  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 600_000)),
+  Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
 function articleImageSubject(data) {
@@ -14269,10 +14271,13 @@ async function generateArticleImage(data) {
   delete data._imageCredit;
   delete data._generatedImageRecord;
   delete data._editorialImageRecord;
+  delete data._imageGenerationFailureReason;
 
   const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
   if (Date.now() >= imageDeadline) {
     console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
+    data._imageGenerationFailureReason = 'image-budget-expired';
+    console.error(`[cover] article=${data.id} source=engine reason=image-budget-expired`);
     return null;
   }
 
@@ -14292,7 +14297,9 @@ async function generateArticleImage(data) {
       {
         outputDir: stagingDir,
         assetId,
-        maxAttempts: 3,
+        // A provider outage must fall through immediately. The engine itself
+        // owns provider order; this publishing path permits one attempt total.
+        maxAttempts: 1,
         deadlineAt: imageDeadline,
         onProviderAttempt: ({ provider, attempt }) => {
           console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
@@ -14302,6 +14309,9 @@ async function generateArticleImage(data) {
   } catch (error) {
     if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    data._imageGenerationFailureReason = String(error.message || 'engine-failed')
+      .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
+    console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
     return null;
   }
 
@@ -14312,6 +14322,9 @@ async function generateArticleImage(data) {
   } catch (error) {
     if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
     console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    data._imageGenerationFailureReason = String(error.message || 'provenance-rejected')
+      .replace(/\s+/g, ' ').trim().slice(0, 180) || 'provenance-rejected';
+    console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
     return null;
   } finally {
     const cleanupDir = materialized?.stagingDir
@@ -15182,6 +15195,9 @@ function gitAddAll(data) {
   }
   for (const registryPath of ['data/generated-image-registry.json', 'data/editorial-image-registry.json']) {
     if (existsSync(resolve(registryPath))) files.push(registryPath);
+  }
+  if (existsSync(resolve('data/image-regeneration-queue.json'))) {
+    files.push('data/image-regeneration-queue.json');
   }
   execSync(`git add ${resolveGitAddPaths(PROJECT_ROOT, files).join(' ')}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
   console.error('  ✅ Tutti i file modificati aggiunti a git');
@@ -17958,23 +17974,17 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error(`  ✅ Immagine generata: ${imagePath}`);
+    console.error(`[cover] article=${data.id} source=engine reason=generated`);
   } else {
-    // The only outage fallback is an already catalogued cover with a valid
-    // provenance record. An unrecorded place/photo is never publishable.
-    const matched = findBestFallbackImage(data);
-    if (matched) {
-      data._generatedImagePath = matched;
-      const imageRecord = imageRecordForPath(PROJECT_ROOT, matched, { strict: true });
-      if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
-      if (!imageRecord) throw new Error(`Catalog fallback has no valid provenance record: ${matched}`);
-      console.error(`  ⚠️ Motore non disponibile, uso copertina catalogata: ${matched}`);
-    } else {
-      const error = new Error(`No governed image or valid catalog fallback for article ${data.id}`);
-      error.imagePolicyReject = true;
-      error.qualityReject = true;
-      throw error;
-    }
+    // A cover-provider failure is recoverable: keep the article and queue the
+    // cover for later regeneration after selecting a governed fallback.
+    resolveArticleCoverFallback(data, {
+      root: PROJECT_ROOT,
+      findCatalogImage: findBestFallbackImage,
+      reason: data._imageGenerationFailureReason || 'engine-failed',
+    });
   }
+  delete data._imageGenerationFailureReason;
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
@@ -18933,7 +18943,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, resolveArticleCoverFallback, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
