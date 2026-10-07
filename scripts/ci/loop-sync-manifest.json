@@ -5514,6 +5514,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/image-regeneration-publish-outbox.mjs",
+      "mode": "corpus-only",
+      "reason": "Outbox durevole per il passaggio delle copertine rigenerate ai publisher esistenti: conserva section/articleId fra il push dei dati e il dispatch/acknowledgement, cosi' un errore di gh workflow run non perde una ripubblicazione. Il sito non esegue il drainer e consuma solo le superfici HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "generator/scripts/regenerate-queued-covers.mjs",
       "mode": "corpus-only",
       "reason": "Consumer del ledger `data/image-regeneration-queue.json`: smaltisce per anzianita', applica il percorso governato, aggiorna registro/hero/thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",

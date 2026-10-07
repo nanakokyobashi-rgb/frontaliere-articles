@@ -356,8 +356,8 @@ test('il gate gira DOPO load-rc-env e PRIMA che il job generate esista', () => {
   assert.match(gen, /\n {4}if: needs\.admit\.outputs\.proceed == 'true' && needs\.section_gate\.outputs\.proceed == 'true'\n/);
   assert.match(
     gen,
-    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && inputs\.concurrency_group \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
-    'il solo job writer serializza production e unknown e lascia il dry separato',
+    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && 'generate-article' \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
+    'il solo job writer serializza tutti i producer production e unknown e lascia il dry separato',
   );
   assert.match(gate, /proceed: \$\{\{ steps\.none\.outputs\.proceed \|\| steps\.canton\.outputs\.proceed \}\}/);
 });

@@ -42,9 +42,8 @@ export async function generateGovernedArticleHero({
     `${assetId}-${process.pid}-${Date.now()}`,
   );
 
-  let result;
   try {
-    result = await generateImageFromSpec(
+    const result = await generateImageFromSpec(
       {
         scope: 'article-hero',
         assetId,
@@ -64,11 +63,14 @@ export async function generateGovernedArticleHero({
         onProviderAttempt,
       },
     );
+
+    // Keep the staging cleanup on every governed-contract failure, including
+    // a malformed engine result. A provider success is not a publish success
+    // until its hero URL has passed the article-hero path contract.
+    articleHeroImagePath(result?.record?.imageUrl);
+    return { ...result, stagingDir };
   } catch (error) {
     rmSync(stagingDir, { recursive: true, force: true });
     throw error;
   }
-
-  articleHeroImagePath(result?.record?.imageUrl);
-  return { ...result, stagingDir };
 }

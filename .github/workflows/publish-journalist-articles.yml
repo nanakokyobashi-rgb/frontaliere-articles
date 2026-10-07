@@ -17,9 +17,12 @@ name: Publish Journalist Articles
 # later — it silently loses the article. Incident 2026-07-16 (site repo run
 # 29485706663) orphaned four articles for 8+ hours exactly this way.
 #
-# The shared rebase helper resolves the one append-like surface this workflow
-# shares with the generator: the cover-regeneration queue. Other conflicts are
-# still fatal, because silently choosing a side would orphan a published doc.
+# This workflow shares the production writer lock with generate-article and the
+# canton callers. That is deliberate: those writers all update the generated
+# image registry, and the lock prevents a drain rebase from racing a journalist
+# or canton commit. The shared rebase helper still resolves the cover queue.
+# Other conflicts are fatal, because silently choosing a side would orphan a
+# published doc.
 # So this workflow:
 #   - retries the push with a rebase between attempts, and
 #   - merges queue items by articleId during that rebase,
@@ -70,7 +73,7 @@ on:
 # Never cancel: a cancelled run can land between the Firestore stamp and the
 # commit, which is the orphan window described above.
 concurrency:
-  group: publish-journalist-articles
+  group: generate-article
   cancel-in-progress: false
 
 permissions:

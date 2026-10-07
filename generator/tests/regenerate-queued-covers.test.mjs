@@ -138,6 +138,10 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     assert.equal(summary.drained, 1);
     assert.equal(summary.residual, 1);
     assert.deepEqual(summary.sections.frontaliere, ['front-oldest']);
+    assert.deepEqual(
+      JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-publish-outbox.json'), 'utf8')).items,
+      [{ articleId: 'front-oldest', section: 'frontaliere' }],
+    );
     assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-front-oldest\.webp/);
     assert.match(fs.readFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), 'utf8'), /old\.webp/);
 
@@ -157,7 +161,60 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     assert.equal(second.residual, 0);
     assert.deepEqual(second.sections['canton-ti'], ['canton-newer']);
     assert.match(fs.readFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), 'utf8'), /article-canton-newer\.webp/);
+    assert.deepEqual(
+      JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-publish-outbox.json'), 'utf8')).items,
+      [
+        { articleId: 'front-oldest', section: 'frontaliere' },
+        { articleId: 'canton-newer', section: 'canton-ti' },
+      ],
+    );
     assert.equal(calls, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('non ritenta le voci failed in schedule e le riapre solo con retry esplicito', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'already-failed';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [{
+      ...item(articleId, '2026-10-07T09:00:00.000Z'),
+      status: 'failed',
+      failureCount: 3,
+      reason: 'provider unavailable',
+    }]);
+
+    let calls = 0;
+    const skipped = await drainQueuedCovers({
+      root,
+      limit: 1,
+      generateCover: async (...args) => {
+        calls += 1;
+        return fakeCover(root)(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(skipped.drained, 0);
+    assert.equal(skipped.failed, 0);
+    assert.equal(calls, 0);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0].failureCount, 3);
+
+    const retried = await drainQueuedCovers({
+      root,
+      limit: 1,
+      retryFailed: true,
+      generateCover: async (...args) => {
+        calls += 1;
+        return fakeCover(root)(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(retried.drained, 1);
+    assert.deepEqual(retried.requeued, [articleId]);
+    assert.equal(calls, 1);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items.length, 0);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

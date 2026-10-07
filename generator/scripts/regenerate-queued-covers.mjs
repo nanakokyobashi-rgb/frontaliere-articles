@@ -11,6 +11,10 @@ import { appendGeneratedImageRecord, imageRecordForPath, readGeneratedImageRecor
 import { articleHeroImagePath, articleImageAssetId } from './lib/article-cover-identity.mjs';
 import { locateArticleRegistry, updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
 import {
+  appendImageRegenerationPublishOutbox,
+  IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
+} from './lib/image-regeneration-publish-outbox.mjs';
+import {
   readImageRegenerationQueue,
   writeImageRegenerationQueue,
 } from './lib/image-regeneration-queue.mjs';
@@ -207,15 +211,18 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
 
 async function processItem({ root, item, generateCover, generateThumbnail, registryFiles }) {
   const location = locateArticleRegistry(root, item.articleId, { registryFiles });
+  const section = sectionForRegistry(location);
   const snapshots = new Map();
   trackFile(snapshots, absolute(root, GENERATED_REGISTRY_REL));
   trackFile(snapshots, absolute(root, location.path));
+  trackFile(snapshots, absolute(root, IMAGE_REGENERATION_PUBLISH_OUTBOX_REL));
 
   const existing = existingRecordForArticle(root, item.articleId);
   if (existing) {
     try {
       const result = await finalizeCover({ root, item, record: existing, location, snapshots, generateThumbnail, registryFiles });
-      return { record: existing, ...result, reused: true, section: sectionForRegistry(location), snapshots };
+      appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
+      return { record: existing, ...result, reused: true, section, snapshots };
     } catch (error) {
       restoreTransaction(snapshots);
       throw error;
@@ -244,8 +251,9 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
     }
     appendGeneratedImageRecord(root, record);
     const result = await finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles });
+    appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
     removeStagingFile(generated.filePath, imageFile);
-    return { record, ...result, reused: false, section: sectionForRegistry(location), snapshots };
+    return { record, ...result, reused: false, section, snapshots };
   } catch (error) {
     restoreTransaction(snapshots);
     if (generated?.filePath && fs.existsSync(generated.filePath)) {
@@ -263,6 +271,7 @@ function summaryFor(queue, result) {
     marked: queue.items.filter((item) => Number(item.failureCount || 0) >= 3).map((item) => item.articleId),
     failedIds: result.failedIds,
     reused: result.reused,
+    requeued: result.requeued,
     sections: result.sections,
   };
 }
@@ -279,15 +288,27 @@ export async function drainQueuedCovers({
   generateCover = defaultGenerateCover,
   generateThumbnail = defaultGenerateThumbnail,
   registryFiles,
+  retryFailed = false,
 } = {}) {
   const boundedLimit = parseLimit(limit);
   const queue = readImageRegenerationQueue(root);
+  const requeued = [];
+  if (retryFailed) {
+    for (const item of queue.items) {
+      if (item.status !== 'failed') continue;
+      item.status = 'queued';
+      item.failureCount = 0;
+      requeued.push(item.articleId);
+    }
+    if (requeued.length > 0) writeImageRegenerationQueue(root, queue);
+  }
   const selected = queue.items
+    .filter((item) => retryFailed || item.status !== 'failed')
     .map((item, index) => ({ item, index }))
     .sort(requestedAtSort)
     .slice(0, boundedLimit)
     .map(({ item }) => item);
-  const result = { drained: 0, failed: 0, failedIds: [], reused: 0, sections: {} };
+  const result = { drained: 0, failed: 0, failedIds: [], reused: 0, requeued, sections: {} };
 
   for (const item of selected) {
     try {
@@ -325,12 +346,18 @@ export async function drainQueuedCovers({
 }
 
 function parseArgs(argv) {
-  const options = { limit: DEFAULT_LIMIT, summary: null, root: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..') };
+  const options = {
+    limit: DEFAULT_LIMIT,
+    summary: null,
+    root: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'),
+    retryFailed: false,
+  };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
     if (arg === '--limit') options.limit = parseLimit(argv[++index]);
     else if (arg === '--summary') options.summary = argv[++index];
     else if (arg === '--root') options.root = path.resolve(argv[++index]);
+    else if (arg === '--retry-failed') options.retryFailed = true;
     else throw new Error(`unknown argument: ${arg}`);
   }
   if (options.summary === '') throw new Error('--summary requires a file path');
