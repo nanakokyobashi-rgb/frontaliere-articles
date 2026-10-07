@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-mappa-affitti-zurigo-trasloco': {
+    title: 'Affitti a Zurigo: il rincaro dopo il trasloco | Frontaliere Ticino',
+    description: 'Mappa interattiva sugli affitti a Zurigo: il confronto mostra il rincaro della pigione dopo un trasloco e chiarisce cauzione, disdetta e contestazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, zurigo, rincaro, dopo',
+    ogTitle: 'Mappa interattiva: affitti più cari a Zurigo',
+    ogDescription: 'Chi valuta un trasloco a Zurigo può partire dalla mappa interattiva dedicata alle pigioni. Il confronto sul rincaro va letto insieme alle regole svizzere per deposito cauzionale, disdetta del locatore e contestazione entro 30 giorni.',
+    canonicalPath: '/articoli-zurigo/mappa-affitti-zurigo-trasloco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti a Zurigo: il rincaro dopo il trasloco",
+      "description": "Mappa interattiva sugli affitti a Zurigo: il confronto mostra il rincaro della pigione dopo un trasloco e chiarisce cauzione, disdetta e contestazione.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-zurigo-canoni-medi-e-diritto-di-locazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi residenziali a Zurigo, tema del confronto tra affitti e traslochi"
+      },
+      "datePublished": "2026-10-07T08:59:16+00:00",
+      "dateModified": "2026-10-07T08:59:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/mappa-affitti-zurigo-trasloco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

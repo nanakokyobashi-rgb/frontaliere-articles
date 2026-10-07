@@ -243,6 +243,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:57:01.067Z",
       "lastFailureAt": "2026-10-07T08:57:01.067Z"
+    },
+    {
+      "articleId": "mappa-affitti-zurigo-trasloco",
+      "title": "Affitti a Zurigo: il rincaro dopo il trasloco",
+      "fallbackImage": "/images/blog/affitti-zurigo-canoni-medi-e-diritto-di-locazione.webp",
+      "reason": "All image providers failed for article-mappa-affitti-zurigo-trasloco: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:59:16.025Z",
+      "lastFailureAt": "2026-10-07T08:59:16.025Z"
     }
   ]
 }

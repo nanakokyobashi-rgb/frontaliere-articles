@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'mappa-affitti-zurigo-trasloco',
+ category: 'pratico',
+ date: '2026-10-07T08:59:16.011Z',
+ image: '/images/blog/affitti-zurigo-canoni-medi-e-diritto-di-locazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
