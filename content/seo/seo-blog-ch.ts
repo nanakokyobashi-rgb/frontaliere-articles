@@ -99365,6 +99365,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parmelin-avs-ue': {
+    title: 'Parmelin lascia il Consiglio federale il 31.12.2026',
+    description: '## In breve - Guy Parmelin lascerà il Consiglio federale il 31.12.2026 - Le rendite AVS/AI saliranno di circa l\'1,6% - Il pacchetto Svizzera-UE è al Parlamento',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, lascia, consiglio, federale',
+    ogTitle: 'Parmelin lascia il Consiglio federale: novità 2026',
+    ogDescription: '## In breve - Guy Parmelin lascerà il Consiglio federale il 31.12.2026 - Le rendite AVS/AI saliranno di circa l\'1,6% - Il pacchetto Svizzera-UE è al Parlamento',
+    canonicalPath: '/articoli-svizzera/parmelin-avs-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parmelin lascia il Consiglio federale il 31.12.2026",
+      "description": "## In breve - Guy Parmelin lascerà il Consiglio federale il 31.12.2026 - Le rendite AVS/AI saliranno di circa l'1,6% - Il pacchetto Svizzera-UE è al Parlamento",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-parmelin-avs-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sulle decisioni del Consiglio federale svizzero"
+      },
+      "datePublished": "2026-10-07T22:55:04+00:00",
+      "dateModified": "2026-10-07T22:55:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parmelin-avs-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

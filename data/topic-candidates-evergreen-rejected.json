@@ -795,14 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/rinnovato-il-contratto-integrativo-alla-irca-fino-a-13-800-euro-di-premio-nei-quattro-anni-e-piu-tutele-sulla-conciliazione/2698855": {
-      "section": "frontaliere",
-      "ts": 1791239766194
-    },
-    "frontaliere::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
-      "section": "frontaliere",
-      "ts": 1791239840820
-    },
     "frontaliere::https://www.varesenews.it/2026/10/sicurezza-sul-lavoro-infortuni-in-calo-ma-aumentano-le-malattie-professionali-e-i-rischi-nella-logistica/2698822": {
       "section": "frontaliere",
       "ts": 1791242800729
@@ -1102,6 +1094,10 @@
     "frontaliere::https://comozero.it/economia/como-clamoroso-stop-di-confindustria-nessuna-fusione-con-lecco-e-sondrio": {
       "section": "frontaliere",
       "ts": 1791412542940
+    },
+    "svizzera::https://www.laregione.ch/svizzera/svizzera/1955125/jessica-moretti-chiede-l-indennita-per-infortunio-sul-lavoro": {
+      "section": "svizzera",
+      "ts": 1791413226901
     }
   }
 }
