@@ -21,6 +21,7 @@ const ENTRYPOINTS = [
   'scripts/lib/merge-content-registry-conflict.mjs',
   'scripts/publish-section-edge.mjs',
   'scripts/reconcile-article-shards.mjs',
+  'scripts/reconcile-section-pages.mjs',
   'scripts/find-dirty-content-ids.mjs',
   'scripts/ci/unwedge-pages-deploy-queue.mjs',
   'generator/scripts/backfill-article-cantons.mjs',
