@@ -51,6 +51,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
 const SRC = readFileSync(CREATE_ARTICLE, 'utf8');
+const COVER_ENGINE = readFileSync(path.resolve(HERE, '../scripts/lib/article-cover-engine.mjs'), 'utf8');
 const LINES = SRC.split('\n');
 
 /** Righe di solo commento, per non far passare un test su una prova citata a parole. */
@@ -459,14 +460,15 @@ test('④ la selezione headline eredita il deadlineMs dal wrapper callLLM', () =
 
 test('④ la fase immagini usa un solo percorso governato e controlla il budget', () => {
   const img = extractBlock('async function generateArticleImage(');
-  assert.equal((img.text.match(/generateImageFromSpec\(/g) || []).length, 1, 'il nuovo hero deve avere un solo percorso di generazione');
-  assert.match(img.text, /scope: 'article-hero'/);
-  assert.match(img.text, /maxAttempts: 1/);
+  assert.match(img.text, /generateGovernedArticleHero/);
+  assert.equal((COVER_ENGINE.match(/generateImageFromSpec\(/g) || []).length, 1, 'il nuovo hero deve avere un solo percorso di generazione');
+  assert.match(COVER_ENGINE, /scope: 'article-hero'/);
+  assert.match(COVER_ENGINE, /maxAttempts: 1/);
   assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
   assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
   assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
-  assert.match(img.text, /deadlineAt:\s*imageDeadline/);
+  assert.match(COVER_ENGINE, /deadlineAt/);
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
   assert.match(CODE, /Math\.min\(120_000/);
 });

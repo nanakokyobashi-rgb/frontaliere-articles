@@ -11,6 +11,7 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const read = (relative) => fs.readFileSync(path.join(ROOT, relative), 'utf8');
 const CREATE = read('generator/scripts/create-article.mjs');
+const COVER_ENGINE = read('generator/scripts/lib/article-cover-engine.mjs');
 const JOURNALIST = read('generator/scripts/publish-journalist-article.mjs');
 const between = (source, start, end) => source.slice(source.indexOf(start), source.indexOf(end, source.indexOf(start)));
 const RETIRED_FLASH_IMAGE_MODEL = ['gemini', '2.5', 'flash', 'image'].join('-');
@@ -18,13 +19,14 @@ const RETIRED_FLASH_IMAGE_MODEL = ['gemini', '2.5', 'flash', 'image'].join('-');
 test('create-article usa solo il motore governato per nuove copertine', () => {
   const source = read('generator/scripts/create-article.mjs');
   const imageAdapter = between(source, '// ── Governed image generation', '// ── Step 4: Modify source files');
-  assert.match(imageAdapter, /generateImageFromSpec/);
-  assert.match(imageAdapter, /scope: 'article-hero'/);
+  assert.match(imageAdapter, /generateGovernedArticleHero/);
+  assert.match(COVER_ENGINE, /generateImageFromSpec/);
+  assert.match(COVER_ENGINE, /scope: 'article-hero'/);
   assert.match(imageAdapter, /function materializeGovernedArticleImage\(result\)/);
   assert.match(imageAdapter, /scope !== 'article-hero'/);
   assert.match(imageAdapter, /articleHeroPath\.test\(imageUrl\)/);
-  assert.match(imageAdapter, /outputDir: stagingDir/);
-  assert.match(imageAdapter, /generated-article-images\/\$\{assetId\}-\$\{process\.pid\}-\$\{Date\.now\(\)\}/);
+  assert.match(COVER_ENGINE, /outputDir: stagingDir/);
+  assert.match(COVER_ENGINE, /generated-article-images/);
   assert.match(imageAdapter, /renameSync\(result\.filePath, destination\)/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
@@ -32,7 +34,7 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.doesNotMatch(source, new RegExp(RETIRED_FLASH_IMAGE_MODEL));
   assert.match(source, /hasValidBlogImageRecord/);
   assert.match(source, /resolveArticleCoverFallback/);
-  assert.match(imageAdapter, /maxAttempts:\s*1/);
+  assert.match(COVER_ENGINE, /maxAttempts:\s*1/);
 });
 
 test('il publisher non scarica URL senza prova di licenza', () => {
