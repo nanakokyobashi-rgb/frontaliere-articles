@@ -1840,11 +1840,12 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 // La quota della subscription e' CONDIVISA con l'uso interattivo del
 // proprietario (AGENTS.md, «Auth automazioni & frugalità quota»): il numero di
 // invocazioni e' limitato per architettura, per processo.
-//   - FREE_TRANSLATE_CODEX_MAX_CALLS: richieste a Codex (default 16; 0 spegne
-//     il tier). Una richiesta puo' tradurre piu' testi, vedi sotto. Il default
-//     copre la misura reale di 21-30 segmenti di un articolo (9-10 batch) con
-//     margine per un retry di trasporto senza riaprire la vecchia finestra da
-//     40 richieste che ha saturato il broker.
+//   - FREE_TRANSLATE_CODEX_MAX_CALLS: tentativi fisici al broker (default 16; 0
+//     spegne il tier). Una chiamata logica puo' tradurre piu' testi, vedi sotto;
+//     ogni retry di trasporto viene addebitato solo se sta per essere inviato.
+//     Il default copre la misura reale di 21-30 segmenti di un articolo (9-10
+//     batch) quando il trasporto e' sano, senza lasciare che i retry riaprano la
+//     vecchia finestra da 40 richieste che ha saturato il broker.
 //   - FREE_TRANSLATE_CODEX_MAX_MS: tempo di orologio in cui il processo ha
 //     almeno una richiesta Codex in volo (default 15 minuti). create-article ha
 //     un hard kill a 40 minuti: un budget solo a richieste potrebbe costargli
@@ -1896,6 +1897,10 @@ const CODEX_TRANSLATE_CALL_TIMEOUT_MS_MAX = 480_000;
 // che ai-models.mjs applica alla lane (CODEX_CLI_MIN_TIMEOUT_MS).
 const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
 const CODEX_TRANSLATE_FAILURE_LIMIT = 3;
+// Deve restare allineato con l'opt-in passato alla lane in questo modulo e nei
+// chiamanti delle recovery. Il ledger conta la chiamata iniziale qui, poi ogni
+// retry fisico attraverso `onCodexTransportRetry` in ai-models.mjs.
+export const CODEX_TRANSLATE_TRANSPORT_RETRIES = 2;
 
 // Scadenza ASSOLUTA (epoch ms) del processo che ospita la cascata, oltre la
 // quale nessuna chiamata Codex deve restare in volo. `null` = nessuna: e' il
@@ -1991,6 +1996,8 @@ let _codexBusySince = 0;
 let _codexInFlight = 0;
 /** @type {Array<{clean: string, sourceLang: string, targetLang: string, outcome: any, resolve: (value: string) => void, reject: (error: unknown) => void}>} */
 let _codexPending = [];
+/** @type {Array<{run: (args: {deadlineMs: number, admission: object, reserveTransportRetry: () => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
+let _codexLanePending = [];
 let _codexConsecutiveFailures = 0;
 let _codexStopReason = '';
 let _codexEngagedLogged = false;
@@ -2197,7 +2204,54 @@ function _admitCodexTranslationCall({
 }
 
 export function beginCodexTranslationCall(options = {}) {
-  return _admitCodexTranslationCall({ ...options, trackInFlight: true });
+  const { trackInFlight = true, ...admissionOptions } = options;
+  return _admitCodexTranslationCall({ ...admissionOptions, trackInFlight });
+}
+
+/** Riserva un solo retry fisico, senza aprire una seconda corsia temporale. */
+function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs) {
+  const admission = _admitCodexTranslationCall({
+    processDeadlineMs,
+    trackInFlight: false,
+  });
+  if (!admission) return false;
+  admission.finish();
+  return true;
+}
+
+/**
+ * Esegue una chiamata Codex in una corsia condivisa con il batching della
+ * cascata. Le recovery che passano da `callLLM` non possono usare
+ * `_codexPending` (il loro prompt non e' un testo traducibile a id), ma non
+ * devono nemmeno aggirare `FREE_TRANSLATE_CODEX_LANES`.
+ *
+ * L'ammissione avviene quando la corsia si libera, non quando il producer mette
+ * il lavoro in coda: la deadline e il budget di tempo misurano quindi il tempo
+ * reale disponibile, non l'attesa dietro altre richieste. `fallback` viene
+ * eseguito senza accodamento quando la lane non esiste gia' o e' stata fermata;
+ * se il budget si esaurisce mentre il lavoro era in coda, il fallback viene
+ * eseguito dal worker che ha rilevato lo stop.
+ */
+export function withCodexTranslationLane({
+  run,
+  fallback = null,
+  processDeadlineMs = _codexProcessDeadlineMs,
+} = {}) {
+  if (typeof run !== 'function') throw new TypeError('withCodexTranslationLane: `run` è richiesto');
+  const useFallback = () => (typeof fallback === 'function' ? fallback() : null);
+  // In questi casi la cascata non ha una lane da schedulare: non trattenere una
+  // corsia per il provider storico che il chiamante ha scelto come riserva.
+  if (_codexStopReason || !_codexSocketPresent()) {
+    try {
+      return Promise.resolve(useFallback());
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+  return new Promise((resolve, reject) => {
+    _codexLanePending.push({ run, fallback, processDeadlineMs, resolve, reject });
+    _pumpCodex();
+  });
 }
 
 /**
@@ -2206,13 +2260,45 @@ export function beginCodexTranslationCall(options = {}) {
  * cresce, e il prossimo posto libero la svuota a gruppi.
  */
 function _pumpCodex() {
-  while (_codexPending.length > 0 && _codexInFlight < _codexLanes()) {
-    const group = _takeCodexGroup();
+  while ((_codexPending.length > 0 || _codexLanePending.length > 0)
+    && _codexInFlight < _codexLanes()) {
+    if (_codexPending.length > 0) {
+      const group = _takeCodexGroup();
+      _beginTrackedCodexCall();
+      _runCodexGroup(group).finally(() => {
+        _finishTrackedCodexCall();
+        _pumpCodex();
+      });
+      continue;
+    }
+
+    const request = _codexLanePending.shift();
     _beginTrackedCodexCall();
-    _runCodexGroup(group).finally(() => {
-      _finishTrackedCodexCall();
-      _pumpCodex();
-    });
+    Promise.resolve()
+      .then(async () => {
+        const admission = beginCodexTranslationCall({
+          processDeadlineMs: request.processDeadlineMs,
+          trackInFlight: false,
+        });
+        if (!admission) return typeof request.fallback === 'function' ? request.fallback() : null;
+        try {
+          return await request.run({
+            deadlineMs: admission.deadlineMs,
+            admission,
+            reserveTransportRetry: () => _reserveCodexTransportRetry(request.processDeadlineMs),
+          });
+        } finally {
+          // `trackInFlight:false` leaves the shared lane measurement to the
+          // worker above, but the admission still owns an idempotent finish
+          // contract and must be closed at the same boundary.
+          admission.finish();
+        }
+      })
+      .then(request.resolve, request.reject)
+      .finally(() => {
+        _finishTrackedCodexCall();
+        _pumpCodex();
+      });
   }
 }
 
@@ -2302,9 +2388,13 @@ async function _translateGroupWithCodex(group) {
     // AI_MODELS_FORCE_CHAIN non deve trasformare questo tier in un'altra cascata.
     bypassForceChain: true,
     retryCodexTransport: true,
-    codexTransportRetries: 2,
+    codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
     codexTransportBackoffMs: 1_000,
     deadlineMs: callDeadlineMs,
+    // The first attempt is admitted below. ai-models.mjs calls this hook only
+    // immediately before a physical transport retry, so every broker attempt
+    // consumes the same shared ledger without reserving retries that never run.
+    onCodexTransportRetry: () => _reserveCodexTransportRetry(),
   };
   let byText;
   try {
@@ -2421,6 +2511,7 @@ export function setCodexTranslateCallForTests(fn) {
   _codexSpentMs = 0;
   _codexBusySince = 0;
   _codexInFlight = 0;
+  _codexLanePending = [];
   _codexConsecutiveFailures = 0;
   _codexStopReason = '';
   _codexEngagedLogged = false;

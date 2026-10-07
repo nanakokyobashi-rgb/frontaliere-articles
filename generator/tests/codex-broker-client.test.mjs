@@ -241,6 +241,7 @@ test('la traduzione batch puo\' riparare JSON fenced senza disattivare la guardi
 
 test('solo una chiamata di traduzione con opt-in ritenta una chiusura di trasporto', async () => {
   let attempt = 0;
+  let physicalRetryReservations = 0;
   behavior = (client) => {
     attempt += 1;
     if (attempt === 1) {
@@ -254,8 +255,13 @@ test('solo una chiamata di traduzione con opt-in ritenta una chiusura di traspor
     retryCodexTransport: true,
     codexTransportRetries: 1,
     codexTransportBackoffMs: 1,
+    onCodexTransportRetry: () => {
+      physicalRetryReservations += 1;
+      return true;
+    },
   }), 'PONG-RETRY');
   assert.equal(requests.length, 2, 'il retry deve restare confinato all\'opt-in della traduzione');
+  assert.equal(physicalRetryReservations, 1, 'il ledger hook deve precedere il retry fisico');
 });
 
 test('una richiesta mai partita scade come attesa in coda, senza toccare lo score', async () => {

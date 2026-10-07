@@ -151,7 +151,16 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs, beginCodexTranslationCall, getCascadeStats } from './lib/free-translate.mjs';
+import {
+  freeTranslateWithRetry,
+  balanceMarkdownMarkers,
+  setCodexTranslateProcessDeadline,
+  translateWithCodexEngine,
+  withCodexTranslationLane,
+  codexCallDeadlineMs,
+  CODEX_TRANSLATE_TRANSPORT_RETRIES,
+  getCascadeStats,
+} from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -11867,12 +11876,14 @@ Rispondi con un JSON object (no markdown, no code fences):
  * quel report per il cap sono gia' chiusi.
  *
  * Ogni chiamata ha la stessa finestra di una traduzione del tier Codex
- * (`codexCallDeadlineMs` di lib/free-translate.mjs: tetto per chiamata di
- * 180 s, coda del broker compresa, limitato dalla scadenza che il processo ha
- * dichiarato con `installCodexTranslateProcessDeadline`), mai i 600 s della
- * lane del corpo articolo ne' l'orologio di modulo: un broker bloccato costa
- * al piu' due finestre (la striscia di stop), non il residuo della run. Sotto
- * la finestra minima la chiamata non parte e il body resta in attesa.
+ * (`withCodexTranslationLane` + `beginCodexTranslationCall` di
+ * lib/free-translate.mjs: il tetto per chiamata di 180 s, coda del broker
+ * compresa, viene calcolato quando una corsia si libera e resta limitato dalla
+ * scadenza che il processo ha dichiarato con `installCodexTranslateProcessDeadline`),
+ * mai i 600 s della lane del corpo articolo ne' l'orologio di modulo: un broker
+ * bloccato costa al piu' due finestre (la striscia di stop), non il residuo
+ * della run. Sotto la finestra minima la chiamata non parte e il body resta in
+ * attesa.
  *
  * La corsia e' ARMATA solo nel percorso CLI, dallo stesso installer: e' li'
  * che il job ha il broker Codex e che la guardia `missing-key` di
@@ -11890,44 +11901,59 @@ function pendingBodySecondLaneAvailable() {
 
 async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCall = null } = {}) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
-  const deadlineMs = codexCallDeadlineMs({
-    now: Date.now(),
-    budgetRemainingMs: Number.POSITIVE_INFINITY,
-    processDeadlineMs: _pendingBodyCodexDeadlineMs,
-  });
-  if (deadlineMs === null) {
-    throw new Error('finestra residua troppo corta per una chiamata Codex');
-  }
-  const call = (messages, opts = {}) => _aiCallLLM(messages, {
-    ...opts,
-    model: codex,
-    chain: [codex],
-    prefer: [codex],
-    bypassForceChain: true,
-    retryCodexTransport: true,
-    codexTransportRetries: 2,
-    codexTransportBackoffMs: 1_000,
+  const codexDeadlineOptions = (deadlineMs) => ({
     deadlineMs,
   });
-  onCodexCall?.();
-  const rejected = [];
-  const text = await translateFieldFreeMt({
-    text: itValue,
-    sourceLang: 'it',
-    targetLang: locale,
-    fieldType: 'description',
-    fieldName: field,
-    translate: ({ text: masked, sourceLang, targetLang, fieldType }) => translateWithCodexEngine({
-      text: masked, sourceLang, targetLang, fieldType, call,
-    }),
-    balanceMarkdown: balanceMarkdownMarkers,
-    onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
-    onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+  return withCodexTranslationLane({
+    processDeadlineMs: _pendingBodyCodexDeadlineMs,
+    fallback: () => {
+      throw new Error('finestra residua troppo corta o lane Codex non disponibile');
+    },
+    run: async ({ deadlineMs: laneDeadlineMs, reserveTransportRetry }) => {
+      // Mantieni il guard esplicito del chiamante dopo l'ammissione: il
+      // residuo deriva dalla deadline concessa dallo scheduler, mai da un
+      // budget infinito calcolato prima della coda.
+      const deadlineMs = codexCallDeadlineMs({
+        now: Date.now(),
+        budgetRemainingMs: Math.max(0, laneDeadlineMs - Date.now()),
+        processDeadlineMs: _pendingBodyCodexDeadlineMs,
+      });
+      if (deadlineMs === null) {
+        throw new Error('finestra residua troppo corta per una chiamata Codex');
+      }
+      const call = (messages, opts = {}) => _aiCallLLM(messages, {
+        ...opts,
+        model: codex,
+        chain: [codex],
+        prefer: [codex],
+        bypassForceChain: true,
+        retryCodexTransport: true,
+        codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
+        codexTransportBackoffMs: 1_000,
+        ...codexDeadlineOptions(deadlineMs),
+        onCodexTransportRetry: reserveTransportRetry,
+      });
+      onCodexCall?.();
+      const rejected = [];
+      const text = await translateFieldFreeMt({
+        text: itValue,
+        sourceLang: 'it',
+        targetLang: locale,
+        fieldType: 'description',
+        fieldName: field,
+        translate: ({ text: masked, sourceLang, targetLang, fieldType }) => translateWithCodexEngine({
+          text: masked, sourceLang, targetLang, fieldType, call,
+        }),
+        balanceMarkdown: balanceMarkdownMarkers,
+        onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
+        onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),
+      });
+      if (!text && rejected.length > 0) {
+        console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
+      }
+      return text;
+    },
   });
-  if (!text && rejected.length > 0) {
-    console.error(`  ⚠️  [seconda corsia] ${locale}:${field} rifiutato da translateFieldFreeMt (${rejected.join(', ')})`);
-  }
-  return text;
 }
 
 /** La seconda corsia non avvia una chiamata dopo lo stop cooperativo o a ridosso della scadenza dichiarata. */
@@ -11962,25 +11988,41 @@ async function translateArticle(data) {
   let translationRecoveryCodexCalls = 0;
 
   // A recovery call is a translation call only when it opts into the Codex
-  // model explicitly. The default path below remains the scored historical
-  // chain, so fact-checks and second opinions cannot inherit this preference.
-  function codexTranslationRecoveryOptions(deadlineMs) {
+  // model explicitly. The fallback remains the scored historical chain with
+  // Codex removed, so a missing/disabled broker cannot strand the legacy path
+  // and fact-checks or second opinions cannot inherit this preference.
+  function legacyTranslationChain() {
+    return DEFAULT_CHAIN.filter((model) => model !== AI_MODELS.CODEX_CLI_PRIMARY);
+  }
+
+  function legacyTranslationOptions() {
+    return {
+      chain: legacyTranslationChain(),
+      bypassForceChain: true,
+      deadlineMs: _pendingBodyCodexDeadlineMs ?? (RUN_START_MS + RUN_WALL_BUDGET_MS),
+    };
+  }
+
+  function codexTranslationRecoveryOptions(deadlineMs, reserveTransportRetry) {
     // Never omit the deadline: spreading `{}` here let a recovery retry fall
     // back to ai-models' unbounded default exactly when the process was near
-    // its wall-clock cap. The caller turns this into a clean, typed stop.
+    // its wall-clock cap. The caller turns this into a clean, typed stop. The
+    // historical chain follows Codex in the same call, so a broker transport
+    // failure falls through without waiting for a later field to recover it.
     if (deadlineMs === null) return null;
     return {
       model: AI_MODELS.CODEX_CLI_PRIMARY,
-      chain: [AI_MODELS.CODEX_CLI_PRIMARY],
+      chain: [AI_MODELS.CODEX_CLI_PRIMARY, ...legacyTranslationChain()],
       prefer: [AI_MODELS.CODEX_CLI_PRIMARY],
       bypassForceChain: true,
       retryCodexTransport: true,
-      codexTransportRetries: 2,
+      codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
       codexTransportBackoffMs: 1_000,
       // callWithRetry owns repairLlmJson plus the final shape check. Let the
       // Codex broker carry fenced/repairable JSON to that validation layer.
       deferJsonValidation: true,
       deadlineMs,
+      onCodexTransportRetry: reserveTransportRetry,
     };
   }
 
@@ -12002,35 +12044,34 @@ async function translateArticle(data) {
     // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
     // cattura qui avrebbe senso; oggi no.
     const call = async (tokens, temperature = 0.5) => {
-      let translationOptions = {};
-      let admission = null;
-      if (translation) {
-        admission = beginCodexTranslationCall({
-          processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
-        });
-        translationOptions = codexTranslationRecoveryOptions(admission?.deadlineMs ?? null);
-        if (translationOptions === null) {
-          admission?.finish();
-          const error = new Error('finestra residua troppo corta per una recovery Codex');
-          error.code = 'CODEX_TRANSLATION_BUDGET';
-          error.transientExhaustion = true;
-          throw error;
-        }
-        translationRecoveryCodexCalls += 1;
-      }
-      try {
-        return await callLLM(
-          [{ role: 'user', content: safePrompt }],
-          {
-            temperature,
-            maxTokens: tokens,
-            jsonMode: true,
-            ...translationOptions,
-          },
-        );
-      } finally {
-        admission?.finish();
-      }
+      const messages = [{ role: 'user', content: safePrompt }];
+      const baseOptions = {
+        temperature,
+        maxTokens: tokens,
+        jsonMode: true,
+      };
+      const historicalCall = () => callLLM(messages, {
+        ...baseOptions,
+        ...(translation ? legacyTranslationOptions() : {}),
+      });
+      if (!translation) return historicalCall();
+
+      // The same scheduler serves free-MT batches and this legacy path. The
+      // producer may issue dozens of prompts through nested Promise.all calls,
+      // but only the shared Codex lane count can enter the broker at once.
+      // If Codex is disabled/missing, callLLM receives an explicit non-Codex
+      // historical chain immediately instead of being aborted before it runs.
+      if (!isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) return historicalCall();
+      return withCodexTranslationLane({
+        processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
+        fallback: historicalCall,
+        run: async ({ deadlineMs, reserveTransportRetry }) => {
+          const translationOptions = codexTranslationRecoveryOptions(deadlineMs, reserveTransportRetry);
+          if (translationOptions === null) return historicalCall();
+          translationRecoveryCodexCalls += 1;
+          return callLLM(messages, { ...baseOptions, ...translationOptions });
+        },
+      });
     };
     const raw = await call(maxTokens);
     const repaired = repairLlmJson(raw);

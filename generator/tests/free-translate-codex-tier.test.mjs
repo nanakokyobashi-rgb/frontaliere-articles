@@ -59,6 +59,7 @@ const {
   setCodexTranslateProcessDeadline,
   codexCallDeadlineMs,
   beginCodexTranslationCall,
+  withCodexTranslationLane,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
 
@@ -382,6 +383,45 @@ test('il budget di chiamate ferma il tier con una riga sola', async () => {
     assert.ok(summary.lines.some((l) => l.includes('Codex Luna Max: 2/2 calls')));
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+});
+
+test('un retry di trasporto fisico consuma una voce del ledger condiviso', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    assert.equal(await it(), `CODEX ${EN}`);
+    assert.equal(getCascadeStats().codexTranslation.calls, 1);
+    assert.equal(typeof calls[0].opts.onCodexTransportRetry, 'function');
+    assert.equal(calls[0].opts.onCodexTransportRetry(), true);
+    assert.equal(getCascadeStats().codexTranslation.calls, 2);
+    assert.equal(await it(), `MYMEMORY ${EN}`);
+    assert.equal(calls.length, 1, 'il secondo testo non deve superare il budget fisico');
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+});
+
+test('le recovery non batch condividono le corsie Codex con il scheduler', async () => {
+  process.env.FREE_TRANSLATE_CODEX_LANES = '1';
+  try {
+    setCodexTranslateCallForTests(null);
+    let inFlight = 0;
+    let maxInFlight = 0;
+    const run = (value) => withCodexTranslationLane({
+      run: async ({ deadlineMs }) => {
+        inFlight += 1;
+        maxInFlight = Math.max(maxInFlight, inFlight);
+        await new Promise((resolve) => setTimeout(resolve, 5));
+        inFlight -= 1;
+        return `${value}:${deadlineMs > Date.now()}`;
+      },
+    });
+    assert.deepEqual(await Promise.all([run('a'), run('b'), run('c')]), ['a:true', 'b:true', 'c:true']);
+    assert.equal(maxInFlight, 1);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_LANES;
+    setCodexTranslateCallForTests(null);
   }
 });
 
