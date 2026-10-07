@@ -105,6 +105,9 @@ const SECTION_GATE_JOB = `  section_gate:
     if: needs.admit.outputs.proceed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: \${{ needs.admit.outputs.run_mode == 'production' && inputs.concurrency_group || needs.admit.outputs.run_mode == 'unknown' && format('{0}-unknown', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
+      cancel-in-progress: false
     permissions:
       actions: read
       contents: read
@@ -201,8 +204,8 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'generate: gruppo di concurrency del chiamante',
     count: 1,
-    find: "      group: ${{ needs.admit.outputs.content_push == 'true' && 'generate-article-content' || 'generate-article-dry' }}\n",
-    replace: "      group: ${{ needs.admit.outputs.content_push == 'true' && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}\n",
+    find: "      group: ${{ needs.admit.outputs.run_mode == 'production' && 'generate-article-content' || needs.admit.outputs.run_mode == 'unknown' && 'generate-article-unknown' || 'generate-article-dry' }}\n",
+    replace: "      group: ${{ needs.admit.outputs.run_mode == 'production' && inputs.concurrency_group || needs.admit.outputs.run_mode == 'unknown' && format('{0}-unknown', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}\n",
   },
   {
     id: 'mode: sezione e gemella arrivano per env',

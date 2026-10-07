@@ -294,14 +294,14 @@ exit 0
 /** Esegue il gate `admit` con un compare GitHub finto. */
 function runAdmit(workflow, { caller, changed }) {
   return withBin((dir) => ({
-    gh: `#!/usr/bin/env bash
-case "\${2:-}" in
+gh: `#!/usr/bin/env bash
+case "$*" in
   *compare*) cat "${dir}/changed" ;;
   *) printf '%s\\n' '{"workflow_runs":[]}' ;;
 esac
 `,
   }), (dir, bin) => {
-    writeFileSync(path.join(dir, 'changed'), `${changed.join('\n')}\n`);
+    writeFileSync(path.join(dir, 'changed'), JSON.stringify([{ files: changed.map((filename) => ({ filename })) }]));
     writeFileSync(path.join(dir, 'out'), '');
     writeFileSync(path.join(dir, 'step.sh'), extractRun(workflow, 'Skip when a generation is already in flight'));
     const res = spawnSync('bash', [path.join(dir, 'step.sh')], {
@@ -729,13 +729,13 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');
-  // La mutua esclusione resta sul job che scrive: i successori content usano
-  // il gruppo del chiamante, mentre i dry-run hanno un gruppo separato.
+  // La mutua esclusione copre anche il gate cantonale prima del job che
+  // scrive: production, compare unknown e dry-run hanno gruppi distinti.
   assert.match(
     CORE,
-    /\n {4}concurrency:\n {6}group: \$\{\{ needs\.admit\.outputs\.content_push == 'true' && inputs\.concurrency_group \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
+    /\n {4}concurrency:\n {6}group: \$\{\{ needs\.admit\.outputs\.run_mode == 'production' && inputs\.concurrency_group \|\| needs\.admit\.outputs\.run_mode == 'unknown' && format\('\{0\}-unknown', inputs\.concurrency_group\) \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
   );
-  assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 1, 'ne\' admit ne\' il gate di sezione stanno in un gruppo');
+  assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 2, 'il gate e il job che scrive devono condividere la coda');
 });
 
 test('buildAll rifiuta un profilo che non copre le sezioni cantonali del core', () => {

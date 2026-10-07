@@ -89,6 +89,7 @@ jobs:
       proceed: ${{ steps.check.outputs.proceed }}
       chain_link: ${{ steps.check.outputs.chain_link }}
       content_push: ${{ steps.check.outputs.content_push }}
+      run_mode: ${{ steps.check.outputs.run_mode }}
     steps:
       - name: Skip when a generation is already in flight
         id: check
@@ -103,10 +104,19 @@ jobs:
           PARENT_RUN_ID: ${{ inputs.parent_run_id }}
           CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
+          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -uo pipefail
           content_push=false
-          trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"' EXIT
+          successor_push=false
+          run_mode=dry
+          case "$EVENT_NAME" in
+            schedule) run_mode=production ;;
+            workflow_dispatch)
+              [ "${DRY_RUN:-false}" = "true" ] || run_mode=production
+              ;;
+          esac
+          trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"; echo "run_mode=$run_mode" >> "$GITHUB_OUTPUT"' EXIT
 
           chain_depth=0
           case "${CHAIN_DEPTH:-0}" in
@@ -127,19 +137,47 @@ jobs:
 
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             compare_status=0
-            changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
-              --jq '.files[].filename' 2>/dev/null) || compare_status=$?
-            if [ "$compare_status" -ne 0 ]; then
-              content_push=true
-              echo "::warning title=Confronto push non disponibile::gh api compare non ha restituito i file del push (status $compare_status); il push viene ammesso come successore di produzione per non perdere l'articolo."
-            elif [ -n "${changed:-}" ] && printf '%s\n' "$changed" | grep -q '^content/'; then
+            compare_truncated=false
+            compare_payload=$(gh api --paginate --slurp "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
+              2>/dev/null) || compare_status=$?
+            changed=
+            compare_file_count=0
+            if [ "$compare_status" -eq 0 ]; then
+              compare_file_count=$(jq -r '[.[]?.files[]?.filename] | length' <<< "$compare_payload" 2>/dev/null) || compare_status=$?
+              case "$compare_file_count" in
+                ''|*[!0-9]*) compare_status=65 ;;
+                300|[3-9][0-9][0-9]|[1-9][0-9][0-9][0-9]*) compare_truncated=true ;;
+                *) changed=$(jq -r '.[]?.files[]?.filename' <<< "$compare_payload" 2>/dev/null) || compare_status=$? ;;
+              esac
+            fi
+            if [ "$compare_status" -ne 0 ] || [ "$compare_truncated" = "true" ]; then
+              successor_push=true
+              run_mode=unknown
+              if [ "$compare_truncated" = "true" ]; then
+                echo "::warning title=Confronto push troncato::gh api compare ha restituito almeno 300 file; il push resta un successore non classificato per non perdere un articolo."
+              else
+                echo "::warning title=Confronto push non disponibile::gh api compare non ha restituito tutti i file del push (status $compare_status); il push resta un successore non classificato per non perdere un articolo."
+              fi
+            else
+              content_push=false
+              while IFS= read -r changed_path; do
+                case "$changed_path" in
+                  content/*) content_push=true; break ;;
+                esac
+              done <<< "$changed"
+            fi
+            if [ "$content_push" = "true" ]; then
+              successor_push=true
+              run_mode=production
               content_push=true
               echo "Push che tocca content/**: successore di produzione; la serializzazione resta nel job generate."
             elif [ -n "${changed:-}" ]; then
-              self_test_callers=$(printf '%s\n' "$changed" \
-                | grep -E '^\.github/workflows/generate-article-[a-z0-9]+\.yml$' \
-                | grep -v '/generate-article-core\.yml$' \
-                | sort -u || true)
+              self_test_callers=$(while IFS= read -r changed_path; do
+                if [[ "$changed_path" == .github/workflows/generate-article-[a-z0-9]*.yml \
+                  && "$changed_path" != .github/workflows/generate-article-core.yml ]]; then
+                  printf '%s\n' "$changed_path"
+                fi
+              done <<< "$changed" | sort -u || true)
               if [ -n "${self_test_callers:-}" ] \
                 && printf '%s\n' "$self_test_callers" | grep -Fqx -- ".github/workflows/${CALLER_WORKFLOW:-}"; then
                 self_test_leader=$(printf '%s\n' "$self_test_callers" | head -1)
@@ -244,8 +282,8 @@ jobs:
           esac
 
           if [ "$older" -gt 0 ]; then
-            if [ "$content_push" = "true" ]; then
-              echo "Ci sono $older run più vecchie in volo, ma questo push su content/** è il successore: si procede e il job generate attende la concurrency."
+            if [ "$successor_push" = "true" ]; then
+              echo "Ci sono $older run più vecchie in volo, ma questo push è un successore: si procede e il job generate attende la concurrency."
             else
               echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
               echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
@@ -263,6 +301,9 @@ jobs:
     if: needs.admit.outputs.proceed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: ${{ needs.admit.outputs.run_mode == 'production' && inputs.concurrency_group || needs.admit.outputs.run_mode == 'unknown' && format('{0}-unknown', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
+      cancel-in-progress: false
     permissions:
       actions: read
       contents: read
@@ -333,7 +374,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
-      group: ${{ needs.admit.outputs.content_push == 'true' && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}
+      group: ${{ needs.admit.outputs.run_mode == 'production' && inputs.concurrency_group || needs.admit.outputs.run_mode == 'unknown' && format('{0}-unknown', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
       cancel-in-progress: false
     steps:
       - name: Checkout
@@ -366,7 +407,11 @@ jobs:
             else
               CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
             fi
-            if printf '%s\n' "$CHANGED" | grep -q '^content/'; then CHAIN=true; fi
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                content/*) CHAIN=true; break ;;
+              esac
+            done <<< "$CHANGED"
           fi
 
           if [ "$EV" = "push" ] && [ "$CHAIN" != "true" ]; then
