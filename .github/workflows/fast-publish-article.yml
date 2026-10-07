@@ -233,8 +233,13 @@ jobs:
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
 
           if [ "${#ids[@]}" -eq 0 ]; then
-            if [ "${{ github.event_name }}" = "push" ] \
-              && printf '%s\n' "$changed" | grep -Eq '^content/(cantons/|blog-body-canton-|blog-meta-canton-)'; then
+            canton_content=false
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                content/cantons/*|content/blog-body-canton-*|content/blog-meta-canton-*) canton_content=true; break ;;
+              esac
+            done <<< "$changed"
+            if [ "${{ github.event_name }}" = "push" ] && [ "$canton_content" = true ]; then
               echo "::notice::CANTON_CONTENT_HANDLED_BY_FAST_PUBLISH_SECTION=1 — canton-only content push skipped by the Pages publisher"
               echo "skip_reason=canton-only-r2" >> "$GITHUB_OUTPUT"
               {

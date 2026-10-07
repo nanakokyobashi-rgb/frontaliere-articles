@@ -201,7 +201,7 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'generate: gruppo di concurrency del chiamante',
     count: 1,
-    find: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article-content' || 'generate-article-dry' }}\n",
+    find: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}\n",
     replace: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}\n",
   },
   {

@@ -854,8 +854,8 @@ test('un push su content/** non viene scartato se il producer è ancora in volo'
   assert.ok(skipAt > allowAt, 'lo skip resta per schedule/dispatch ma non può precedere l eccezione content push');
   assert.match(
     WF,
-    /concurrency:\n(?:      #.*\n)*      group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && 'generate-article-content' \|\| 'generate-article-dry' \}\}\n      cancel-in-progress: false/,
-    'production e compare unknown condividono il lock content; il self-test dry resta separato',
+    /concurrency:\n(?:      #.*\n)*      group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && 'generate-article' \|\| 'generate-article-dry' \}\}\n      cancel-in-progress: false/,
+    'production e compare unknown condividono il lock legacy; il self-test dry resta separato',
   );
 });
 

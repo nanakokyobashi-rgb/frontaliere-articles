@@ -693,9 +693,10 @@ jobs:
       # GitHub conserva un solo pending per gruppo: il successore content deve
       # stare separato dai self-test dry, altrimenti un push di workflow può
       # sostituirlo mentre aspetta il producer. `unknown` resta un modo
-      # osservabile dell'admit, ma condivide il lock content con production:
+      # osservabile dell'admit, ma condivide il lock legacy `generate-article`
+      # con production:
       # un compare fallito non può aprire una seconda scrittura.
-      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article-content' || 'generate-article-dry' }}
+      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}
       cancel-in-progress: false
     steps:
       - name: Checkout
