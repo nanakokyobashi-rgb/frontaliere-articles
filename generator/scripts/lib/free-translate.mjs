@@ -593,6 +593,11 @@ function lineStructuralSignature(line) {
 
 const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
 const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
+// Numeric values are opaque too: a provider may localize prose around them,
+// but it must not silently change a year, date component, amount or quantity.
+// Dates with punctuation are matched as ordered numeric spans, while decimal
+// and thousands separators stay inside one span.
+const NUMERIC_OPAQUE_RE = /(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
 
 /**
  * Decide whether a source line deserves a translation request.
@@ -623,7 +628,14 @@ function hasVisibleLinePayload(line) {
 function opaqueSpanSignature(line) {
   const text = lineStructuralSignature(line).text;
   return opaqueSpanRanges(text)
-    .map(({ start, end }) => normalizeProtectedTokenSentinels(text.slice(start, end)).toLowerCase());
+    .map(({ start, end }) => {
+      const span = text.slice(start, end);
+      // Only sentinels are intentionally case-insensitive. URL paths, email
+      // local parts and placeholders can be case-sensitive in published HTML.
+      return translationSentinelRegExp().test(span)
+        ? normalizeProtectedTokenSentinels(span).toLowerCase()
+        : span;
+    });
 }
 
 function hasSameOpaqueSpans(sourceLine, translatedLine) {
@@ -636,8 +648,7 @@ function hasSameOpaqueSpans(sourceLine, translatedLine) {
 function hasSameLineStructure(sourceText, translatedText) {
   const sourceLines = normalizeStructuredBlock(sourceText).split('\n');
   const translatedLines = normalizeStructuredBlock(translatedText).split('\n');
-  return sourceLines.length > 1
-    && sourceLines.length === translatedLines.length
+  return sourceLines.length === translatedLines.length
     && sourceLines.every((sourceLine, index) => {
       const translatedLine = translatedLines[index];
       if (lineStructuralSignature(sourceLine).signature !== lineStructuralSignature(translatedLine).signature) {
@@ -660,9 +671,7 @@ function restoreSourceLineStructure(sourceLine, translatedLine) {
   const translated = lineStructuralSignature(translatedLine);
   if (source.signature === 'empty' || translated.signature === 'empty') return null;
   if (source.kind === 'text' && translated.kind !== 'text') return null;
-  return source.kind === 'text'
-    ? translated.text
-    : `${source.prefix}${translated.text}`;
+  return `${source.prefix}${translated.text}`;
 }
 
 /**
@@ -806,7 +815,7 @@ function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
 
 function opaqueSpanRanges(text) {
   const matcher = new RegExp(
-    `(?:${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${translationSentinelRegExp().source})`,
+    `(?:${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${NUMERIC_OPAQUE_RE.source}|${translationSentinelRegExp().source})`,
     'giu',
   );
   return [...text.matchAll(matcher)].map((match) => ({
@@ -2611,7 +2620,6 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       }
       if (
         result
-        && (sourceClean.includes('\n') || result.includes('\n'))
         && !hasSameLineStructure(structureSource, result)
       ) {
         const recovered = await recoverStructuredTier({

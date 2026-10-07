@@ -379,18 +379,68 @@ test('il recovery conserva l indentazione delle liste annidate', async () => {
 });
 
 test('il recovery rifiuta una traduzione che perde URL o placeholder opachi', async () => {
-  const source = '- Leggi https://example.com/guida\n- Seconda riga';
+  const source = '- Leggi https://example.com/CasePath\n- Seconda riga';
   const calls = [];
   globalThis.fetch = async (url) => {
     if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
     const query = new URL(url).searchParams.get('q') || '';
     calls.push(query);
     const translatedText = calls.length === 1
-      ? '- Lies\n- Zweite'
-      : 'Lies';
+      ? '- Lies https://example.com/casepath\n- Zweite'
+      : 'Lies https://example.com/casepath';
     return {
       ok: true,
       json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.equal(calls.length, 2);
+  assert.equal(translated, '');
+});
+
+test('la guardia monolinea rifiuta la perdita di un URL opaco', async () => {
+  const source = 'Leggi https://example.com/CasePath';
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText: 'Lies die Seite', match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.equal(calls.length, 2);
+  assert.equal(translated, '');
+});
+
+test('la guardia strutturale rifiuta numeri, date e quantità alterati', async () => {
+  const source = 'La regola vale dal 2026 e costa 42 CHF.';
+  const calls = [];
+  globalThis.fetch = async (url) => {
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    return {
+      ok: true,
+      json: async () => ({
+        responseData: { translatedText: 'Die Regel gilt ab 2025 und kostet 24 CHF.', match: 1 },
+      }),
     };
   };
 
