@@ -180,6 +180,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:43:35.081Z",
       "lastFailureAt": "2026-10-07T08:43:35.081Z"
+    },
+    {
+      "articleId": "disoccupazione-zurigo-rav-2026",
+      "title": "Disoccupazione a Zurigo stabile al 2,9% a settembre",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-zurigo-rav-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:44:53.164Z",
+      "lastFailureAt": "2026-10-07T08:44:53.164Z"
     }
   ]
 }
