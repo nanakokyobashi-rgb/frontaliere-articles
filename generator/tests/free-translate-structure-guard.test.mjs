@@ -1,5 +1,6 @@
 import { after, afterEach, test } from 'node:test';
 import assert from 'node:assert/strict';
+import { maskProtectedTokens, restoreProtectedTokens } from '../scripts/lib/translation-glossary.mjs';
 
 const ENV_KEYS = [
   'CODEX_AUTH_BROKER_SOCKET',
@@ -301,7 +302,7 @@ test('un recovery di righe brevi uguali rifiuta il passthrough del campo e conta
   });
 
   const after = getCascadeStats();
-  assert.equal(calls.length, 2);
+  assert.equal(calls.length, 4);
   assert.equal(translated, '');
   assert.equal((after.tierHits.myMemory || 0) - (before.tierHits.myMemory || 0), 0);
   assert.equal(
@@ -310,7 +311,7 @@ test('un recovery di righe brevi uguali rifiuta il passthrough del campo e conta
   );
 });
 
-test('un recovery rifiuta anche un passthrough breve mescolato a righe tradotte', async () => {
+test('un recovery conserva una riga breve uguale accanto a righe tradotte', async () => {
   const source = ['Ciao mondo', 'Vai', 'Buona sera'].join('\n');
   const calls = stubFoldedMyMemory((line) => (
     line === 'Vai' ? line : `Tradotto ${line}`
@@ -325,13 +326,93 @@ test('un recovery rifiuta anche un passthrough breve mescolato a righe tradotte'
   });
 
   const after = getCascadeStats();
-  assert.equal(calls.length, 3);
-  assert.equal(translated, '');
-  assert.equal((after.tierHits.myMemory || 0) - (before.tierHits.myMemory || 0), 0);
+  assert.equal(calls.length, 4);
+  assert.equal(translated, 'Tradotto Ciao mondo\nVai\nTradotto Buona sera');
+  assert.equal((after.tierHits.myMemory || 0) - (before.tierHits.myMemory || 0), 1);
   assert.equal(
     (after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0),
-    1,
+    0,
   );
+});
+
+test('il recovery aggregato lascia passare una sola riga breve uguale', async () => {
+  const source = ['No!', 'OK!', 'Sì!'].join('\n');
+  const calls = stubFoldedMyMemory((line) => (line === 'No!' ? line : `Tradotto ${line}`));
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.equal(calls.length, 4);
+  assert.equal(translated, 'No!\nTradotto OK!\nTradotto Sì!');
+});
+
+test('il recovery aggregato rifiuta le righe uguali sostanziose insieme', async () => {
+  const source = [
+    'Uno due tre quattro',
+    'cinque sei sette otto',
+    'Riga tradotta',
+    'Altra riga tradotta',
+  ].join('\n');
+  const before = getCascadeStats();
+  const calls = stubFoldedMyMemory((line) => (
+    line === 'Uno due tre quattro' || line === 'cinque sei sette otto'
+      ? line
+      : `Tradotto ${line}`
+  ));
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  const after = getCascadeStats();
+  assert.equal(calls.length, 5);
+  assert.equal(translated, '');
+  assert.equal((after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0), 1);
+});
+
+test('il recovery aggregato rifiuta quando le righe uguali sono piu della meta', async () => {
+  const source = ['No!', 'OK!', 'Sì!', 'Riga tradotta'].join('\n');
+  const before = getCascadeStats();
+  const calls = stubFoldedMyMemory((line) => (
+    line === 'Riga tradotta' ? `Tradotto ${line}` : line
+  ));
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  const after = getCascadeStats();
+  assert.equal(calls.length, 5);
+  assert.equal(translated, '');
+  assert.equal((after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0), 1);
+});
+
+test('il recovery aggregato rifiuta quando tutte le righe traducibili sono uguali', async () => {
+  const source = ['No!', 'OK!', 'Sì!'].join('\n');
+  const before = getCascadeStats();
+  const calls = stubFoldedMyMemory((line) => line);
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  const after = getCascadeStats();
+  assert.equal(calls.length, 4);
+  assert.equal(translated, '');
+  assert.equal((after.tierPassthroughs.myMemory || 0) - (before.tierPassthroughs.myMemory || 0), 1);
 });
 
 test('una riga traducibile che diventa solo marker viene rifiutata', async () => {
@@ -473,6 +554,34 @@ test('una sorgente monolinea rifiuta una risposta che aggiunge righe', async () 
           translatedText: 'Titolo tradotto\nRiga inattesa',
           match: 1,
         },
+      }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'title',
+  });
+
+  assert.equal(calls, 2);
+  assert.equal(translated, '');
+});
+
+test('una sorgente monolinea rifiuta un marcatore aggiunto anche senza newline', async () => {
+  const source = 'Titolo breve della procedura';
+  let calls = 0;
+  const premiumFailure = stubPremiumFailure();
+  globalThis.fetch = async (url) => {
+    const premium = premiumFailure(url);
+    if (premium) return premium;
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    calls += 1;
+    return {
+      ok: true,
+      json: async () => ({
+        responseData: { translatedText: '- Titolo tradotto', match: 1 },
       }),
     };
   };
@@ -648,6 +757,53 @@ test('il recovery rifiuta i marker Markdown alterati e ricompone quelli corretti
   assert.equal(translated, '## Titel\n- Punkt\n1. Schritt\n\nAbsatz');
 });
 
+test('la validazione del payload rifiuta una riga che conserva il prefisso ma non il testo', async () => {
+  const source = '- Prima riga\n- Seconda riga';
+  const calls = stubFoldedMyMemory((line) => (
+    line === 'Prima riga' ? '- 123' : `- Tradotto ${line}`
+  ));
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.equal(calls.length, 2);
+  assert.equal(translated, '');
+});
+
+test('una riga opaca alterata forza il recovery e conserva il valore sorgente', async () => {
+  const source = 'https://example.com\nTesto traducibile';
+  const calls = [];
+  const premiumFailure = stubPremiumFailure();
+  globalThis.fetch = async (url) => {
+    const premium = premiumFailure(url);
+    if (premium) return premium;
+    if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
+    const query = new URL(url).searchParams.get('q') || '';
+    calls.push(query);
+    const translatedText = calls.length === 1
+      ? 'https://changed.example\nTesto tradotto'
+      : 'Testo tradotto';
+    return {
+      ok: true,
+      json: async () => ({ responseData: { translatedText, match: 1 } }),
+    };
+  };
+
+  const translated = await freeTranslate({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  });
+
+  assert.deepEqual(calls, [source, 'Testo traducibile']);
+  assert.equal(translated, 'https://example.com\nTesto tradotto');
+});
+
 test('il recovery riattacca il prefisso sorgente senza raddoppiarlo', async () => {
   const source = '- Punto\n## Titolo';
   const calls = [];
@@ -707,4 +863,15 @@ test('la firma strutturale copre citazioni, tabelle e tutti i prefissi di elenco
     translated,
     '> Tradotto Citazione\n| Tradotto Cella | Valore |\n* Tradotto Punto\n+ Tradotto Altro\n• Tradotto Simbolo',
   );
+});
+
+test('la forma delle sentinelle di genere è osservata dal classificatore della cascata', () => {
+  const masked = maskProtectedTokens('Tecnico (m/w/d), infermiere (f/m) e ruolo M/W/D');
+  assert.ok(masked.tokens.length > 1);
+  const restored = restoreProtectedTokens(masked.text, masked.tokens, 'it');
+  assert.equal(restored, 'Tecnico (m/f/d), infermiere (m/f) e ruolo M/F/D');
+  for (const token of masked.tokens) {
+    assert.equal(hasTranslatableLineText(token.placeholder), false, token.placeholder);
+  }
+  assert.equal(hasTranslatableLineText('ZQX0_XQZ'), true);
 });

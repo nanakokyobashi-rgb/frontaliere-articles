@@ -38,20 +38,53 @@
  *     nei casi inversi: le asserzioni che pinnano il comportamento legittimo
  *     mordono davvero, non sono decorative.
  */
-import { test, describe, beforeEach, afterEach } from 'node:test';
+import { test, describe, beforeEach, afterEach, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
-import {
+import { setLocalOpusMtForTests } from '../scripts/lib/local-opus-mt.mjs';
+
+// This file deliberately drives the cascade with mocked fetches. Clear ADC and
+// every optional provider before importing free-translate: its Google Cloud
+// service-account credential is read at module initialization, and leaving the
+// ambient ADC in place would enter the real JWT retry/backoff path in an
+// otherwise offline test.
+const ENV_KEYS = [
+  'GOOGLE_APPLICATION_CREDENTIALS',
+  'CODEX_AUTH_BROKER_SOCKET',
+  'FREE_TRANSLATE_CODEX_TIER',
+  'DEEPL_API_KEY',
+  'DEEPL_API_KEY_2',
+  'AZURE_TRANSLATOR_KEY',
+  'AZURE_TRANSLATOR_KEY_2',
+  'GSC_CLIENT_ID',
+  'GSC_CLIENT_SECRET',
+  'GSC_REFRESH_TOKEN',
+  'HF_TOKEN',
+  'HUGGINGFACE_API_KEY',
+  'LIBRETRANSLATE_SELF_HOSTED_URL',
+  'MT_LOCAL_OPUSMT',
+  'VITEST',
+];
+const savedEnv = new Map(ENV_KEYS.map((key) => [key, process.env[key]]));
+for (const key of ENV_KEYS) delete process.env[key];
+
+const {
   freeTranslate,
   freeTranslateWithRetryDetailed,
   getCascadeStats,
   logCascadeSummary,
   isSourcePassthrough,
   asTranslationResult,
-} from '../scripts/lib/free-translate.mjs';
-import { setLocalOpusMtForTests } from '../scripts/lib/local-opus-mt.mjs';
+} = await import('../scripts/lib/free-translate.mjs');
+
+after(() => {
+  for (const [key, value] of savedEnv) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+});
 
 const IT = [
   '## In breve',
@@ -70,7 +103,7 @@ const EN = [
 ].join('\n');
 
 const realFetch = globalThis.fetch;
-const realVitestFlag = process.env.VITEST;
+const realVitestFlag = savedEnv.get('VITEST');
 
 test('non usa più il flag outcomeNoted morto nel percorso Azure', () => {
   const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
@@ -205,7 +238,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
-  test('rifiuta anche un ultimo chunk breve con prefisso strutturale se e\' un eco', async () => {
+  test('lascia passare un ultimo chunk breve se e\' l\'unico eco', async () => {
     const firstChunk = Array.from({ length: 100 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
     const secondChunk = Array.from({ length: 90 }, (_, i) => `Frase sorgente numero ${i + 100} con testo sufficiente.`).join(' ');
     const filler = Array.from({ length: 55 }, () => 'parola').join(' ');
@@ -227,12 +260,12 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
     const out = await freeTranslate({ text: longText, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
 
-    assert.equal(out, '');
+    assert.notEqual(out, '');
     assert.equal(queries.at(-1), 'FAQ');
     assert.ok(myMemoryCalls > 2);
-    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
-    assert.ok(snapshot().chunks - before.chunks > 0);
-    assert.equal(snapshot().hits - before.hits, 0);
+    assert.equal(snapshot().passthroughs - before.passthroughs, 0);
+    assert.equal(snapshot().chunks - before.chunks, 0);
+    assert.equal(snapshot().hits - before.hits, 1);
   });
 
   test('nomina il passthrough nel sommario della cascata', async () => {
@@ -265,10 +298,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.match(summary, /Tier passthrough \(chunk/);
   });
 
-  test('documenta che ogni chunk traducibile deve essere tradotto', () => {
+  test('documenta che i passthrough a chunk sono giudicati aggregati', () => {
     const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
-    assert.match(source, /Anche un eco breve invalida l'intero campo/);
-    assert.doesNotMatch(source, /MIN_SUBSTANTIVE_PASSTHROUGH_WORDS/);
+    assert.match(source, /MIN_SUBSTANTIVE_PASSTHROUGH_WORDS/);
+    assert.match(source, /rejectAggregatedPassthrough/);
   });
 
   // ── IL VERSO INVERSO: cio' che NON deve cambiare ───────────────────────────
