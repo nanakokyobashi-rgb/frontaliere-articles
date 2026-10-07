@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4061343": {
-    "articleId": "falso-allarme-goldach",
-    "ts": "2026-09-05T14:27:14.940Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948224/amante-della-pedopornografia-ma-faceva-l-educatore-in-un-asilo-nido": {
     "articleId": "asilo-nido-controlli-minori",
     "ts": "2026-09-05T16:05:02.364Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/team-di-ricerca-del-poli-losanna-sviluppa-un-motore-a-forma-di-filo/92178004": {
     "articleId": "motore-filo-epfl",
     "ts": "2026-10-07T08:00:44.681Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/icxk2lbhi0su": {
+    "articleId": "svizzera-india-accordi-bilaterali",
+    "ts": "2026-10-07T08:55:12.295Z",
     "keyForm": 2
   }
 }

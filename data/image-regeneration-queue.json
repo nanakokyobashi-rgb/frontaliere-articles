@@ -225,6 +225,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:52:59.963Z",
       "lastFailureAt": "2026-10-07T08:52:59.963Z"
+    },
+    {
+      "articleId": "svizzera-india-accordi-bilaterali",
+      "title": "Svizzera e India: nuovi accordi su migrazione e lavoro",
+      "fallbackImage": "/images/blog/accordi-svizzera-ue-consiglio-federale.webp",
+      "reason": "All image providers failed for article-svizzera-india-accordi-bilaterali: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:55:12.292Z",
+      "lastFailureAt": "2026-10-07T08:55:12.292Z"
     }
   ]
 }

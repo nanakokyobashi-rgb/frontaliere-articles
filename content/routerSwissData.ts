@@ -2641,6 +2641,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'quattro-oggetti-urne-novembre': { it: 'quattro-oggetti-urne-novembre', en: 'four-ballot-items-november', de: 'vier-abstimmungsobjekte-november', fr: 'quatre-objets-vote-novembre' },
  'auto-elettrica-come-risparmiare-fino-al-50': { it: 'auto-elettrica-come-risparmiare-fino-al-50', en: 'electric-car-how-to-save-up-to-50', de: 'elektroautos-so-sparen-sie-bis-zu-50', fr: 'voiture-electrique-comment-economiser-jusqu-a-50' },
  'motore-filo-epfl': { it: 'motore-filo-epfl', en: 'epfl-fiber-shaped-motor', de: 'epfl-fadenmotor', fr: 'moteur-fil-epfl' },
+ 'svizzera-india-accordi-bilaterali': { it: 'svizzera-india-accordi-bilaterali', en: 'switzerland-india-bilateral-agreements', de: 'schweiz-indien-bilaterale-abkommen', fr: 'suisse-inde-accords-bilateraux' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -7856,6 +7856,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.motore-filo-epfl.title': 'L’EPFL développe un moteur en forme de fil',
     'blog.article.motore-filo-epfl.excerpt': '## En bref - FiberMotor : diamètre de 1 à 3 millimètres - Quatre moteurs soulèvent une barrette de 46 grammes - Le prototype a été intégré dans une paire',
     'blog.article.motore-filo-epfl.imageAlt': 'FiberMotor et pantalon robotique dans un laboratoire de recherche',
+    'blog.article.svizzera-india-accordi-bilaterali.title': 'Suisse et Inde : nouveaux accords sur la migration et le travail',
+    'blog.article.svizzera-india-accordi-bilaterali.excerpt': '## En bref - 5 octobre 2026 : Parmelin rencontre les dirigeants indiens - La Suisse et l’Inde signent deux accords - TEPA : un an après son entrée en vigueur avec l’AELE',
+    'blog.article.svizzera-india-accordi-bilaterali.imageAlt': 'Palais fédéral à Berne, siège du gouvernement suisse',
 };
 
 export default blogMetaChFr;
