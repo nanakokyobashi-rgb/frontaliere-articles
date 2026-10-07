@@ -647,8 +647,13 @@ jobs:
           BEFORE: ${{ github.event.before }}
           SHA: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
+          REF: ${{ github.ref }}
         run: |
           set -euo pipefail
+          if [ "$REF" != 'refs/heads/main' ]; then
+            echo "::error::cover CDN reconciliation is allowed only from refs/heads/main (got $REF)"
+            exit 1
+          fi
           queue_file='data/blog-cover-cdn-sync-queue.json'
           changed_file_list="$RUNNER_TEMP/publish-api-changed-blog-covers.txt"
           manifest_file="$RUNNER_TEMP/publish-api-blog-covers.tsv"
@@ -710,12 +715,49 @@ jobs:
           fs.writeFileSync(nextQueuePath, `${JSON.stringify({ schema: 1, items: ordered }, null, 2)}\n`);
           NODE
 
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          rebuild_manifest_from_queue() {
+            node --input-type=module - "$queue_file" "$manifest_file" "$queue_update" <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+
+          const [, , queuePath, manifestPath, nextQueuePath] = process.argv;
+          const pathPattern = /^public\/images\/blog\/(?:thumbnails\/)?[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+          const current = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+          if (current.schema !== 1 || !Array.isArray(current.items)) {
+            throw new Error(`${queuePath}: invalid queue schema after rebase`);
+          }
+          const items = new Map();
+          for (const item of current.items) {
+            const file = String(item?.path || '').trim();
+            if (!pathPattern.test(file)) {
+              console.error(`::warning::dropping invalid queued blog cover path after rebase: ${file}`);
+              continue;
+            }
+            if (!fs.existsSync(file)) {
+              console.error(`::warning::dropping queued blog cover no longer present after rebase: ${file}`);
+              continue;
+            }
+            const sha256 = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+            items.set(file, { path: file, sha256 });
+          }
+          const ordered = [...items.values()].sort((left, right) => left.path.localeCompare(right.path));
+          const next = `${JSON.stringify({ schema: 1, items: ordered }, null, 2)}\n`;
+          fs.writeFileSync(queuePath, next);
+          fs.writeFileSync(manifestPath, ordered.map((item) => `${item.path}\t${item.sha256}`).join('\n') + (ordered.length ? '\n' : ''));
+          fs.writeFileSync(nextQueuePath, next);
+          NODE
+          }
+
           push_queue_commit() {
             if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
               echo '::error::GITHUB_PAT_NANAKO is required to persist the cover sync queue'
               return 1
             fi
             local attempt auth_header
+            local_queue_backup="$RUNNER_TEMP/publish-api-blog-cover-queue-before-rebase.json"
             auth_header="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 | tr -d '\n')"
             # actions/checkout persists GITHUB_TOKEN in the local git config;
             # the corpus main ruleset rejects that bot identity for queue
@@ -729,11 +771,40 @@ jobs:
               echo "::warning::main advanced while updating the cover queue; rebasing attempt $attempt/3"
               git -c "http.extraheader=AUTHORIZATION: basic $auth_header" fetch --no-tags origin main
               if git rebase origin/main; then
+                rebuild_manifest_from_queue
+                if ! git diff --quiet -- "$queue_file"; then
+                  git add "$queue_file"
+                  git commit -m 'chore(licenses): reconcile blog cover CDN queue [skip ci]'
+                fi
                 continue
               fi
+              cp "$queue_file" "$local_queue_backup"
               git rebase --abort || true
-              echo '::error::cannot rebase the cover queue update onto the current main'
-              return 1
+              git reset --hard origin/main
+              node --input-type=module - "$queue_file" "$local_queue_backup" <<'NODE'
+          import fs from 'node:fs';
+
+          const [, , queuePath, localPath] = process.argv;
+          const remote = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+          const local = JSON.parse(fs.readFileSync(localPath, 'utf8'));
+          if (remote.schema !== 1 || local.schema !== 1) {
+            throw new Error('cannot merge cover queues with an invalid schema');
+          }
+          const items = new Map();
+          for (const item of remote.items || []) {
+            if (item?.path) items.set(item.path, item);
+          }
+          for (const item of local.items || []) {
+            if (item?.path) items.set(item.path, item);
+          }
+          fs.writeFileSync(queuePath, `${JSON.stringify({ schema: 1, items: [...items.values()] }, null, 2)}\n`);
+          NODE
+              rebuild_manifest_from_queue
+              if ! git diff --quiet -- "$queue_file"; then
+                git add "$queue_file"
+                git commit -m 'chore(licenses): reconcile concurrent blog cover queue [skip ci]'
+              fi
+              echo '::warning::recovered the cover queue after a rebase conflict by merging current and remote paths'
             done
             echo '::error::cover queue push failed after three rebase attempts'
             return 1
@@ -745,8 +816,6 @@ jobs:
             queue_changed=true
           fi
           if [ "$queue_changed" = true ]; then
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add "$queue_file"
             git commit -m 'chore(licenses): persist blog cover CDN sync queue [skip ci]'
             push_queue_commit
