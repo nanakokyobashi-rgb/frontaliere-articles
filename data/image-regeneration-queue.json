@@ -315,6 +315,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T09:30:57.336Z",
       "lastFailureAt": "2026-10-07T09:30:57.336Z"
+    },
+    {
+      "articleId": "cancro-prostata-assistenza-svizzera",
+      "title": "Cancro alla prostata: assistenza buona in Svizzera 2020‑2023",
+      "fallbackImage": "/images/blog/allarme-aumento-affitti-svizzera.webp",
+      "reason": "All image providers failed for article-cancro-prostata-assistenza-svizzera: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:02:14.857Z",
+      "lastFailureAt": "2026-10-07T10:02:14.857Z"
     }
   ]
 }
