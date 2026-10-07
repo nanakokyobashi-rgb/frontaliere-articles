@@ -9,6 +9,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.wabern-tram-risanamento.title': 'Approvati il tram di Kleinwabern e il risanamento di Wabern',
     'blog.article.wabern-tram-risanamento.excerpt': 'Il BAV approva il tram fino a Kleinwabern e il risanamento della Seftigenstrasse: lavori non prima del 2028, fase di ricorso in corso.',
     'blog.article.wabern-tram-risanamento.imageAlt': 'Progetti del tram di Kleinwabern e risanamento del centro di Wabern',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.title': 'Disoccupazione stabile a Berna settembre 2026: +78 persone',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.excerpt': 'A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Disoccupazione stabile a Berna settembre 2026, aumento di 78 persone',
 };
 
 export default blogMetaCantonBeIt;

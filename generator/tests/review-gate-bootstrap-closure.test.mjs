@@ -26,6 +26,7 @@ const WORKFLOW = '.github/workflows/tests.yml';
 const ENTRY = 'scripts/ci/review-gate.mjs';
 
 const MANIFEST = 'scripts/ci/review-gate-bootstrap-manifest.json';
+const IDENTICAL_MANIFEST = 'scripts/ci/loop-sync-manifest.json';
 
 /**
  * I moduli che il bootstrap porta accanto al gate.
@@ -132,7 +133,7 @@ test('lo YAML non tiene una copia della lista', () => {
     `${WORKFLOW}: il bootstrap non scarica il manifest dal ref trusted`);
   const hardcoded = [...workflow.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)]
     .map((match) => match[1])
-    .filter((entry) => entry !== MANIFEST && !entry.startsWith('"'));
+    .filter((entry) => ![MANIFEST, IDENTICAL_MANIFEST].includes(entry) && !entry.startsWith('"'));
   assert.deepEqual(hardcoded, [],
     `${WORKFLOW}: moduli ancora elencati a mano: tornerebbero dalla lista della PR invece che da main — ${hardcoded.join(', ')}`);
 });

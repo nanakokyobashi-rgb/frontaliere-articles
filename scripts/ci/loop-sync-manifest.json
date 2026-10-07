@@ -272,8 +272,8 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "1c354b0a6638d0f3",
-        "alignedAt": "2026-10-06"
+        "corpus": "736bc2b8044dbf7c",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4469,8 +4469,8 @@
       "reason": "Lista trusted dei moduli che lo step `Bootstrap trusted review gate from main` di `.github/workflows/tests.yml` scarica accanto al gate. Esiste perche' QUI il gate gira da una directory ISOLATA popolata a mano: finche' la lista viveva nello YAML, una PR aperta prima che un modulo entrasse nel grafo scaricava l'entrypoint nuovo dalla punta di main con la lista vecchia e il gate moriva con ERR_MODULE_NOT_FOUND (misurato sulla #1599). Il sito non ha questo bootstrap — il suo review gate gira dal checkout — quindi non c'e' un gemello da portare. Il guard che la tiene uguale al grafo reale degli import e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "bf234e32a74af385",
-        "alignedAt": "2026-09-20"
+        "corpus": "50df4445838c5f02",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4959,8 +4959,8 @@
       "reason": "Regressione node:test del trasporto e del suo realign post-merge, che verifica i codici di ritorno e il confine di scrittura del manifest nel repository ricevente; il sito usa Vitest e non ha questo test corpus-only.",
       "baseline": {
         "site": null,
-        "corpus": "7eb0c82546609329",
-        "alignedAt": "2026-09-13"
+        "corpus": "b34ff74620403c90",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -5482,6 +5482,76 @@
         "site": null,
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/identical-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Modulo puro che deriva dal manifest l'insieme dei path `mode: identical` e li partiziona prima della scrittura. Il fixer del corpus lo materializza dal commit trusted di `main`; il sito non usa questo workflow-side consumer e non esiste un gemello HTTP da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "583389f6e3d446dd",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/identical-review-routing.mjs",
+      "mode": "corpus-only",
+      "reason": "Politica del fixer corpus che instrada i finding esclusivamente `identical` verso issue del sito usando il writer deduplicante esistente. Il sito riceve la diagnosi via HTTP e non possiede questo consumer del review-scope corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "41e52a281c54e11c",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/fixer-identical-hook.mjs",
+      "mode": "corpus-only",
+      "reason": "Hook pre-commit trusted dei fixer corpus: rifiuta un commit che stagia un path `mode: identical`, con il messaggio operativo che la correzione si fa nel sito. Il sito ha un ciclo di fixer adattato diverso e non usa questo hook.",
+      "baseline": {
+        "site": null,
+        "corpus": "6c7beb5ea3a67756",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/restore-identical-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Barriera deterministica post-agente del fixer corpus: ripristina i soli path `identical` toccati rispetto alla baseline del round, crea un commit aggiuntivo senza force-push e lascia intatti gli altri file.",
+      "baseline": {
+        "site": null,
+        "corpus": "0b367aa2f2a6cfb0",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/transport-pr.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato condiviso e fail-closed che riconosce esclusivamente le PR prodotte dal trasporto corpus legando autore, branch, base, repository head, manifest e insieme completo dei file. Il guard può includere il prodotto solo-manifest per sorvegliarlo, mentre l'eccezione di merge continua a richiedere file identical realmente trasportati. Il sito non consuma né autorizza questa eccezione del gate corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "ae413a3130623afa",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-identical-twins-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard del trasporto corpus che confronta gli hash del sito registrati nelle PR aperte con lo stato corrente: conserva una PR invariata, comprese le riattestazioni solo-manifest, e chiude/commenta quella superata prima di aprirne una nuova. Il trasporto non ha un consumer gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "2756d6b34136f8cd",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/tests/fixer-identical-readonly.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservatori `node:test` dell'issue #2400: manifest reale, ripristino git, hook, routing deduplicato, guard puro del trasporto e forma dei tre workflow. Sono test del ciclo CI del corpus e non hanno gemello da pubblicare via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "bfe7f17749681e5b",
+        "alignedAt": "2026-10-07"
       }
     },
     {

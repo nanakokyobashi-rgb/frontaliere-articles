@@ -378,6 +378,36 @@ test('both Codex entry points use the shared sandbox prerequisites', () => {
   assert.doesNotMatch(setup, /sysctl|danger-full-access/);
 });
 
+test('sandbox prerequisites have bounded apt and AppArmor commands', () => {
+  const setup = read('.github/actions/setup-codex-sandbox/action.yml');
+  assert.match(setup, /timeout_bin=\/usr\/bin\/timeout/);
+  assert.match(setup, /--signal=TERM --kill-after=3s/);
+  assert.match(setup, /timed out after \$\{seconds\} seconds/);
+  for (const option of [
+    'Acquire::http::Timeout=15',
+    'Acquire::https::Timeout=15',
+    'Acquire::Retries=1',
+    'DPkg::Lock::Timeout=10',
+  ]) assert.match(setup, new RegExp(option.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.match(setup, /run_retried 'apt-get update' 45/);
+  assert.match(setup, /run_retried 'apt-get install' 45/);
+  assert.match(setup, /run_retried 'apparmor_parser' 10/);
+  assert.match(setup, /267s \(4m27s\), below five minutes/);
+
+  const unboundedLines = [];
+  let boundedCommand = false;
+  for (const line of setup.split('\n')) {
+    const trimmed = line.trim();
+    if (trimmed.includes('run_retried') || trimmed.includes('run_bounded')) boundedCommand = true;
+    if (/(apt-get|apparmor_parser)/u.test(trimmed)
+      && !trimmed.startsWith('#')
+      && !boundedCommand) unboundedLines.push(line);
+    if (boundedCommand && !trimmed.endsWith('\\')) boundedCommand = false;
+  }
+  assert.deepEqual(unboundedLines, [], 'un apt-get/apparmor_parser è uscito dal wrapper bounded');
+  assert.match(setup, /Never disable AppArmor globally or retry the agent without a sandbox\./);
+});
+
 
 test('a failed body stops every later independent family so edit recovery can settle', () => {
   const afterBody = tests.split('        id: body_contract\n')[1].split('      # ═════════')[1];

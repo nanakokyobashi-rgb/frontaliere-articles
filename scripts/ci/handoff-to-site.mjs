@@ -79,6 +79,7 @@ import {
   localCouplings,
   scalarFingerprintCouplings,
 } from './transport-identical-twins.mjs';
+import { READ_ONLY_MODE } from './lib/identical-paths.mjs';
 // Le issue che il manifest tiene APERTE (`corpus-only-pending` → `trackingIssue`).
 // Sorgente unica, come `mirrorLockedPaths()`: la lista viene dal manifest, non da
 // numeri ricopiati qui che divergerebbero al primo cambio di voce (AGENTS.md #6).
@@ -116,7 +117,7 @@ export const HANDOFF_VERDICTS = new Set([
  * **nostro** da modificare, quindi un `no-root-cause` che lo cita non e' un caso
  * di mirror. `corpus-only` non esiste nemmeno la'.
  */
-export const MIRROR_LOCKED_MODES = new Set(['identical']);
+export const MIRROR_LOCKED_MODES = new Set([READ_ONLY_MODE]);
 
 const CRAWLER_CONTRACT_PATH = fileURLToPath(new URL('../../generator/data/crawler-cross-repo-contract.json', import.meta.url));
 

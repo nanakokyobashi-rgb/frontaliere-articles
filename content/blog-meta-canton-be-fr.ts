@@ -9,6 +9,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.wabern-tram-risanamento.title': 'Approuvés : le tram jusqu’à Kleinwabern et l’assainissement de Wabern',
     'blog.article.wabern-tram-risanamento.excerpt': 'L’OFT approuve le tram jusqu’à Kleinwabern et l’assainissement de la Seftigenstrasse : travaux pas avant 2028, phase de recours en cours.',
     'blog.article.wabern-tram-risanamento.imageAlt': 'Projet de tram à Kleinwabern et rénovation du centre de Wabern',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.title': 'Chômage stable à Berne en septembre 2026 : +78 personnes',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.excerpt': 'En septembre 2026, le canton de Berne compte 12.208 chômeurs (+78), taux de 2,2%, jeunes 1.435 (-11), secteur hôtelier +64, secteur sanitaire +35, MEM -50.',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Chômage stable à Berne septembre 2026, hausse de 78 personnes',
 };
 
 export default blogMetaCantonBeFr;

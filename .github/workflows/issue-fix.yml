@@ -224,6 +224,59 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
+      - name: Materialize trusted identical fixer set from main
+        id: trusted_identical
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
+          if ! trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha') \
+            || ! printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            echo "::warning::Manifest/helper identical non leggibili da main: nessun agente in questo run, retryable."
+            write_output "available=false"
+            exit 0
+          fi
+          if ! git fetch --no-tags origin "$trusted_sha" -q; then
+            echo "::warning::Commit main trusted non materializzabile: nessun agente in questo run, retryable."
+            write_output "available=false"
+            exit 0
+          fi
+          trusted_root="$RUNNER_TEMP/fixer-identical"
+          mkdir -p "$trusted_root/scripts/ci/lib"
+          identical_available=true
+          if ! git show "$trusted_sha:scripts/ci/loop-sync-manifest.json" > "$trusted_root/scripts/ci/loop-sync-manifest.json" \
+            || [ ! -s "$trusted_root/scripts/ci/loop-sync-manifest.json" ]; then
+            identical_available=false
+          fi
+          for rel in \
+            scripts/ci/lib/identical-paths.mjs \
+            scripts/ci/fixer-identical-hook.mjs \
+            scripts/ci/restore-identical-paths.mjs; do
+            destination="$trusted_root/$rel"
+            mkdir -p "$(dirname "$destination")"
+            if ! git show "$trusted_sha:$rel" > "$destination" || [ ! -s "$destination" ]; then
+              identical_available=false
+            fi
+          done
+          if [ "$identical_available" != 'true' ]; then
+            echo "::warning::Set identical trusted incompleto: nessun agente in questo run, retryable."
+            write_output "available=false"
+            exit 0
+          fi
+          write_output "sha=$trusted_sha"
+          write_output "identical_manifest=$trusted_root/scripts/ci/loop-sync-manifest.json"
+          write_output "identical_hook=$trusted_root/scripts/ci/fixer-identical-hook.mjs"
+          write_output "identical_restore=$trusted_root/scripts/ci/restore-identical-paths.mjs"
+          write_output "available=true"
+
+      - name: Fail closed when the trusted identical set is unavailable
+        if: always() && steps.trusted_identical.outputs.available != 'true'
+        run: |
+          echo "::error::Manifest/helper identical non verificabili da main: nessun agente viene autorizzato."
+          exit 1
+
       # ── Pre-flight 1: quota telemetry ─────────────────────────────────────
       # Il beacon è conservato per diagnosi e non è più un gate: Codex deve
       # poter partire anche quando il beacon di quota è attivo.
@@ -704,6 +757,10 @@ jobs:
             echo "push identity: GITHUB_TOKEN (.github/workflows/** NON pushabile, né dai run: né dall'action)"
           fi
 
+      - name: Install trusted identical pre-commit hook
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
+        run: node "${{ steps.trusted_identical.outputs.identical_hook }}" install "${{ steps.trusted_identical.outputs.identical_manifest }}"
+
       - name: Capture current PR delivery baseline (zero-Claude)
         # La lista catturata prima del model step identifica ciò che era già
         # consegnato. Il classificatore potrà quindi provare solo una nuova PR,
@@ -724,6 +781,22 @@ jobs:
             --run-attempt "$GITHUB_RUN_ATTEMPT" \
             --output "$delivery_baseline"
           echo "PR_DELIVERY_BASELINE_FILE=$delivery_baseline" >> "$GITHUB_ENV"
+
+      - name: Record identical restore baseline before agent
+        id: identical_base
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+          RESUME: ${{ steps.resume.outputs.resume }}
+        run: |
+          set -euo pipefail
+          if [ "$RESUME" = 'true' ]; then
+            git fetch origin "fix/issue-$ISSUE" -q
+            sha=$(git rev-parse "origin/fix/issue-$ISSUE")
+          else
+            sha=$(git rev-parse HEAD)
+          fi
+          printf 'sha=%s\n' "$sha" >> "$GITHUB_OUTPUT"
 
       - name: Run Codex Luna Max fix
         # Tetto sullo step (classe #7310 del sito, portata qui riconciliando il
@@ -837,8 +910,44 @@ jobs:
             - Modifiche chirurgiche, root-cause, una issue alla volta.
             - Mai toccare file fuori dallo scope — **eccetto i gemelli della stessa classe di bug** (passo 3): quelli SONO in scope.
             - **CODE vs DATA:** `content/` (14.888 file), `dist/`, `data/`, `public/` NON sono codice da leggere riga per riga. Se la root cause è un drift dell'output, fixa il CODICE che lo genera. Campione → `Read` mirato. `rg` scopato al codice: `rg <pattern> generator engine host scripts -g '!content/**' -g '!dist/**'`.
+            - NON modificare né committare path `mode: identical`: il file si corregge nel sito e il rilievo viene instradato; il pre-commit hook trusted rifiuta comunque il commit.
             - Se la root cause non è determinabile con confidenza → NON forzare un fix: commenta "Root cause non determinata: <cosa hai trovato>." con `<!-- FIX_OUTCOME: no-root-cause -->` e `<!-- AUTOMATION_DEFERRED: technical -->`, applica `automation-deferred`, rimuovi il routing `agent:fix*` se ancora presente e TERMINA senza PR. Non chiedere una risposta al proprietario: lo sweep automatico deve prima cambiare input, scheda o osservabilità.
             - **Telemetria (OBBLIGATORIO):** l'ULTIMO commento che posti sulla issue DEVE contenere un marker su riga propria — in testa o in coda, indifferentemente: `<!-- FIX_OUTCOME: <code> -->`, con `<code>` fra `pr-created`, `blocked-workflows-scope`, `blocked-secrets`, `blocked-admin-settings`, `no-root-cause`, `overlap-skip`, `pr-already-open`, `already-fixed`. Se apri una PR e non posti altro, posta comunque un commento col solo marker. Senza marker, il drainer non sa distinguere un verdetto da una run morta e ri-accoda a vuoto. Commenti sempre con `--body-file` da heredoc `<<'EOF'`: in `--body "..."` la shell esegue i backtick e il commento perde nomi di file e codice.
+
+      - name: Ripristina gemelli identical prima del checkpoint WIP (deterministico)
+        id: identical_restore_wip
+        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
+        continue-on-error: true
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+          BASE_SHA: ${{ steps.identical_base.outputs.sha }}
+          IDENTICAL_MANIFEST: ${{ steps.trusted_identical.outputs.identical_manifest }}
+          IDENTICAL_RESTORE: ${{ steps.trusted_identical.outputs.identical_restore }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          echo "verified=false" >> "$GITHUB_OUTPUT"
+          if [ -z "$BASE_SHA" ]; then
+            echo "::warning::Baseline identical assente: il checkpoint WIP non può essere autorizzato."
+            exit 0
+          fi
+          if ! result=$(node "$IDENTICAL_RESTORE" --base-ref "$BASE_SHA" --manifest "$IDENTICAL_MANIFEST" --include-working-tree --json); then
+            echo "::warning::Ripristino identical non verificabile: nessun checkpoint WIP verrà scritto."
+            exit 0
+          fi
+          printf '%s\n' "$result"
+          if ! count=$(printf '%s' "$result" | jq -er '.restored | length'); then
+            echo "::warning::Risultato restore identical malformato: nessun checkpoint WIP verrà scritto."
+            exit 0
+          fi
+          echo "identical_restore_count=$count" >> "$GITHUB_STEP_SUMMARY"
+          echo "verified=true" >> "$GITHUB_OUTPUT"
+          if [ "$count" -eq 0 ]; then
+            exit 0
+          fi
+          comment=$(printf '%s' "$result" | jq -er '.comment') || exit 0
+          gh issue comment "$ISSUE" --repo "$REPO" --body "$comment" || true
 
       - name: Salva il lavoro parziale (WIP checkpoint deterministico, zero-Claude)
         # PERCHE' ESISTE. Il checkpoint WIP c'era gia', ma come PASSO DEL PROMPT,
@@ -861,7 +970,7 @@ jobs:
         # c'era lavoro da salvare). Best-effort in senso stretto: qualunque
         # fallimento e' un warning, mai un job rosso — un salvataggio mancato non
         # deve trasformare un run terminato in un run fallito.
-        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
+        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true' && steps.identical_restore_wip.outputs.verified == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -75,6 +75,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-argovia-parita-salariale': {
+    title: 'Argovia: iniziativa per la parità salariale | Frontaliere Ticino',
+    description: 'Argovia: analisi salariali da 50 dipendenti, sanzioni e ripristino dell\'ufficio per la parità. La raccolta firme nel Cantone è iniziata il 14 giugno 2023.',
+    keywords: 'frontalieri, ticino, svizzera, italia, argovia, iniziativa, parità, salariale',
+    ogTitle: 'Parità salariale, iniziativa in Argovia',
+    ogDescription: 'ArbeitAargau e un\'alleanza di organizzazioni femminili e partiti chiedono più efficacia per la parità salariale in Argovia. La proposta prevede analisi per aziende da 50 dipendenti, sanzioni e il ripristino della Fachstelle für Gleichstellung.',
+    canonicalPath: '/articoli-argovia/argovia-parita-salariale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Argovia: iniziativa per la parità salariale",
+      "description": "Argovia: analisi salariali da 50 dipendenti, sanzioni e ripristino dell'ufficio per la parità. La raccolta firme nel Cantone è iniziata il 14 giugno 2023.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposte-cantonali-argovia-aliquote.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Gruppo di lavoratrici e sostenitrici discute la parità salariale in Argovia"
+      },
+      "datePublished": "2026-10-07T19:59:34+00:00",
+      "dateModified": "2026-10-07T19:59:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/argovia-parita-salariale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

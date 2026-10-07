@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {
+  applyIdenticalRouting,
   classifyImportantFindings,
   followupIssueBody,
   importantFindings,
@@ -17,6 +18,7 @@ import {
   hasFalsifiableAcceptance,
   splitFollowupItems,
 } from '../../scripts/ci/followup-resolution-match.mjs';
+import { routeIdenticalFindings } from '../../scripts/ci/lib/identical-review-routing.mjs';
 
 test('legge il verdetto: Important: 0 non è un finding', () => {
   const body = [
@@ -465,7 +467,7 @@ if (args[0] === 'api' && args[1].includes('/git/trees/')) {
 process.exit(0);
 `;
 
-async function classifyWithDiffFailure(mode) {
+async function classifyWithDiffFailure(mode, reviewBody = '`scripts/build-api.mjs:10`: 🔴 Important: il controllo della superficie pubblicata manca.', options = {}) {
   const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-diff-'));
   const binDir = path.join(tmpDir, 'bin');
@@ -481,8 +483,8 @@ async function classifyWithDiffFailure(mode) {
   delete process.env.GH_REPO;
   try {
     return await classifyAndMintReview(
-      '`scripts/build-api.mjs:10`: 🔴 Important: il controllo della superficie pubblicata manca.',
-      { repo: 'o/r', pr: 904, prUrl: 'https://x/pr/904' },
+      reviewBody,
+      { repo: 'o/r', pr: 904, prUrl: 'https://x/pr/904', ...options },
     );
   } finally {
     process.env.PATH = previous.PATH;
@@ -520,6 +522,7 @@ test('lista REST al hard-cap con complete=false resta BLOCCANTE', { concurrency:
   const result = await classifyWithDiffFailure('cap');
   assert.equal(result.changedFilesComplete, false);
   assert.equal(result.diffReason, 'rest-hard-limit');
+  assert.deepEqual(result.staleDeclassified, []);
   assert.equal(result.outsideOnly, false);
   assert.equal(result.minted, false);
   assert.equal(result.blocking, true);
@@ -530,9 +533,69 @@ test('lista file vuota resta BLOCCANTE anche se il helper la dichiara complete',
   assert.equal(result.changedFiles.length, 0);
   assert.equal(result.changedFilesComplete, true);
   assert.equal(result.diffReason, 'empty');
+  assert.deepEqual(result.staleDeclassified, []);
   assert.equal(result.outsideOnly, false);
   assert.equal(result.minted, false);
   assert.equal(result.blocking, true);
+});
+
+test('un finding su un gemello identical resta bloccante senza handoff verificabile', { concurrency: false }, async () => {
+  const result = await classifyWithDiffFailure(
+    'empty',
+    '`generator/scripts/lib/translation-glossary.mjs:10`: 🔴 Important: il parser dei link è rotto.',
+    { mutate: false },
+  );
+  assert.equal(result.outsideOnly, false);
+  assert.equal(result.blocking, true);
+  assert.equal(result.identicalOnly, false);
+  assert.deepEqual(result.identicalBlockingFindingIds, []);
+  assert.equal(result.identicalRouting, null);
+});
+
+test('una citazione basename viene risolta al path manifest e resta nel routing, non nel fixer', async () => {
+  const raw = {
+    stableId: 'basename-review-findings',
+    lineNumber: 655,
+    text: '`review-findings.mjs:L655`: 🔴 Important: il perimetro non è verificato.',
+    citations: [{ path: 'review-findings.mjs', line: 655 }],
+  };
+  const resolved = {
+    ...raw,
+    resolvedFiles: ['scripts/ci/lib/review-findings.mjs'],
+  };
+  const result = await applyIdenticalRouting({
+    findings: [raw],
+    outside: [resolved],
+    inScope: [],
+    unresolved: [],
+    staleBodyDeclassified: [],
+    staleDeclassified: [],
+    changedFiles: ['generator/scripts/trigger.mjs'],
+    changedFilesComplete: false,
+    blocking: true,
+  }, { repo: 'corpus/repo', pr: 2404, mutate: false });
+  assert.equal(result.blocking, true);
+  assert.equal(result.identicalRouting.candidates.length, 1);
+  assert.equal(result.identicalRouting.candidates[0].corpusPath, 'scripts/ci/lib/review-findings.mjs');
+  assert.match(result.identicalRouting.reason, /routing identical disabilitato/u);
+  const routed = await routeIdenticalFindings({
+    findings: [resolved],
+    manifest: {
+      files: [{
+        path: 'scripts/ci/lib/review-findings.mjs',
+        mode: 'identical',
+        sitePath: 'scripts/ci/lib/review-findings.mjs',
+      }],
+    },
+    repo: 'corpus/repo',
+    pr: 2404,
+    createIssue: async () => ({
+      persisted: true,
+      number: 655,
+      url: 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/655',
+    }),
+  });
+  assert.equal(routed.routed[0].corpusPath, 'scripts/ci/lib/review-findings.mjs');
 });
 
 test('una follow-up chiusa non viene riaperta né riempita di nuovo', { concurrency: false }, async () => {

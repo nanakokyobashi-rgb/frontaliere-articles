@@ -521,6 +521,8 @@ async function main() {
           repo: REPO,
           pr: PR,
           prUrl: `https://github.com/${REPO}/pull/${PR}`,
+          headSha: HEAD_SHA,
+          reviewId: last.id,
           bodyContractPassed: BODY_CONTRACT_PASSED,
         });
         for (const finding of scope.staleBodyDeclassified ?? []) {
@@ -564,8 +566,12 @@ async function main() {
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly
       && !unchangedLineDeclassified
       && ((scope?.outside?.length ?? 0) === 0 || scope?.minted));
+    const transportRoutedApproved = Boolean(applies && hasRedflag && scope?.transportException
+      && scope?.blocking === false);
     const approving = reviewStateAllowsApproval(last)
-      && ((body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved);
+      && ((body.includes('## LGTM') && !hasRedflag)
+        || outsideOnlyApproved
+        || transportRoutedApproved);
     // The evidence file is ephemeral. On a rerun where the re-review guard
     // correctly skips Claude, require the durable successful required-check
     // proof before carrying a positive Codex review forward.
