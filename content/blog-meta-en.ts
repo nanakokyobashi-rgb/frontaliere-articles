@@ -12748,6 +12748,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.notte-bper-gallarate-bancomat.title': 'ATM blown up: overnight heist at Bper in Gallarate',
     'blog.article.notte-bper-gallarate-bancomat.excerpt': 'Another ATM was blown up at Bper in Gallarate during a nighttime robbery: the available report on the case.',
     'blog.article.notte-bper-gallarate-bancomat.imageAlt': 'Bank building on a Swiss-Italian border street at night',
+    'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, 79-year-old seriously injured after falling from a ladder',
+    'blog.article.caduta-scala-locate-varesino.excerpt': '## TL;DR - Fall from a ladder on Via Madonnetta - A 79-year-old man fell at a farm - Emergency services dispatched under red code',
+    'blog.article.caduta-scala-locate-varesino.imageAlt': 'Rural setting of an agricultural farm',
 };
 
 export default blogMetaEn;

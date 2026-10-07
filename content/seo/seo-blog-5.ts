@@ -100870,6 +100870,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-caduta-scala-locate-varesino': {
+    title: 'Locate Varesino, cade da una scala: grave un 79enne',
+    description: '## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un\'azienda agricola - Soccorsi attivati in codice rosso',
+    keywords: 'frontalieri, ticino, svizzera, italia, locate, varesino, cade, scala',
+    ogTitle: 'Caduta da una scala a Locate Varesino: 79enne grave',
+    ogDescription: '## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un\'azienda agricola - Soccorsi attivati in codice rosso',
+    canonicalPath: '/articoli-frontaliere/caduta-scala-locate-varesino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Locate Varesino, cade da una scala: grave un 79enne",
+      "description": "## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un'azienda agricola - Soccorsi attivati in codice rosso",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-caduta-scala-locate-varesino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contesto rurale di un'azienda agricola"
+      },
+      "datePublished": "2026-10-07T12:57:53+00:00",
+      "dateModified": "2026-10-07T12:57:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/caduta-scala-locate-varesino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

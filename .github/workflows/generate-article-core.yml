@@ -533,16 +533,8 @@ jobs:
           }
 
           registration_state_dirty() {
-            git diff --cached --name-status -- \
-              content/ 'generator/data/register-in-progress*.json' |
-              awk -F '\t' '
-                {
-                  path = $2
-                  if ($1 ~ /^R/ && $3 != "") path = $3
-                  if ($1 == "D" && path ~ /^generator\/data\/register-in-progress(-[[:alnum:]_-]+)?\.json$/) next
-                  print
-                  exit
-                }'
+            git diff --cached --name-status -- content/ |
+              awk -F '\t' 'NF { print; exit }'
           }
 
           sections=("$TARGET_SECTION")

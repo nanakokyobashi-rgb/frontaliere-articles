@@ -12750,6 +12750,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.notte-bper-gallarate-bancomat.title': 'Distributeur automatique explosé : cambriolage nocturne à la Bper de Gallarate',
     'blog.article.notte-bper-gallarate-bancomat.excerpt': 'Un autre distributeur automatique de billets a explosé à la Bper de Gallarate lors d’un cambriolage nocturne : le compte rendu disponible sur l’affaire.',
     'blog.article.notte-bper-gallarate-bancomat.imageAlt': 'Banque dans une rue de la frontière italo-suisse pendant la nuit',
+    'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, chute d\'une échelle : un homme de 79 ans est grièvement blessé',
+    'blog.article.caduta-scala-locate-varesino.excerpt': '## En bref - Chute d\'une échelle via Madonnetta - Un homme de 79 ans est tombé dans une exploitation agricole - Secours déclenchés en code rouge',
+    'blog.article.caduta-scala-locate-varesino.imageAlt': 'Cadre rural d\'une exploitation agricole',
 };
 
 export default blogMetaFr;
