@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'disoccupazione-stabile-4-4-neuchatel-settembre-2026',
+ category: 'novita',
+ date: '2026-10-07T09:30:57.326Z',
+ image: '/images/blog/disoccupazione-settembre-ticino-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -306,6 +306,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T09:21:09.381Z",
       "lastFailureAt": "2026-10-07T09:21:09.381Z"
+    },
+    {
+      "articleId": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
+      "title": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-stabile-4-4-neuchatel-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:30:57.336Z",
+      "lastFailureAt": "2026-10-07T09:30:57.336Z"
     }
   ]
 }
