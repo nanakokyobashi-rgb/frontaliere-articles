@@ -1274,8 +1274,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "7734244adf87562a",
-        "alignedAt": "2026-09-19"
+        "corpus": "a0ac6f742fdcc87d",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4291,8 +4291,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "9cc5b734a3ede617",
-        "corpus": "9cc5b734a3ede617",
+        "site": "6c7aa50743635886",
+        "corpus": "6c7aa50743635886",
         "alignedAt": "2026-10-07"
       }
     },
@@ -4398,8 +4398,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "b0bfddc6e984796f",
-        "alignedAt": "2026-10-01"
+        "corpus": "90345be6d76b9ece",
+        "alignedAt": "2026-10-07"
       }
     },
     {
