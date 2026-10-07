@@ -54,6 +54,8 @@ const CHOKE_POINTS = [
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'bonifica-blocking-bodies.yml'],
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
   ['generator/scripts/backfill-article-type.mjs', 'nessun workflow: backfill one-shot del campo articleType lanciato a mano'],
+  ['generator/scripts/lib/article-registry-image.mjs', 'regenerate-queued-covers.yml'],
+  ['generator/scripts/regenerate-queued-covers.mjs', 'regenerate-queued-covers.yml'],
 ];
 
 // `create-article.mjs` e' nella classe ed e' gia' atomico dal round 1, ma la

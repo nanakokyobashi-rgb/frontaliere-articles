@@ -1,8 +1,24 @@
+import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from './corpus-paths.mjs';
+
+let writeTmpSeq = 0;
+
+function writeTextAtomic(root, relativePath, text) {
+  const target = absolute(root, relativePath);
+  const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  try {
+    fs.writeFileSync(tmp, text, 'utf8');
+    fs.renameSync(tmp, target);
+  } catch (error) {
+    try { fs.unlinkSync(tmp); } catch {}
+    throw error;
+  }
+}
 
 function absolute(root, relativePath) {
   return path.join(root, relativePath);
@@ -135,7 +151,7 @@ export function updateArticleImageInRegistry(root, articleId, imageUrl, options 
 
   located.lines[located.imageIndex] = `${match[1]}${match[2]}${imageUrl}${match[2]}${match[4]}`;
   const nextText = located.lines.join('\n');
-  fs.writeFileSync(absolute(root, located.path), nextText, 'utf8');
+  writeTextAtomic(root, located.path, nextText);
   return { ...located, changed: true, nextText };
 }
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
@@ -19,6 +20,7 @@ export const MAX_LIMIT = 100;
 export const IMAGE_BUDGET_MS = 120_000;
 
 const GENERATED_REGISTRY_REL = 'data/generated-image-registry.json';
+let writeTmpSeq = 0;
 
 function absolute(root, relativePath) {
   return path.join(root, relativePath);
@@ -36,6 +38,19 @@ function restoreFile(filePath, snapshot) {
   }
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, snapshot);
+}
+
+function writeTextAtomic(filePath, text) {
+  const target = path.resolve(filePath);
+  const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  try {
+    fs.writeFileSync(tmp, text, 'utf8');
+    fs.renameSync(tmp, target);
+  } catch (error) {
+    try { fs.unlinkSync(tmp); } catch {}
+    throw error;
+  }
 }
 
 function trackFile(snapshots, filePath) {
@@ -326,8 +341,7 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const summary = await drainQueuedCovers(options);
   if (options.summary) {
-    fs.mkdirSync(path.dirname(path.resolve(options.summary)), { recursive: true });
-    fs.writeFileSync(path.resolve(options.summary), `${JSON.stringify(summary, null, 2)}\n`, 'utf8');
+    writeTextAtomic(options.summary, `${JSON.stringify(summary, null, 2)}\n`);
   }
   console.log(JSON.stringify(summary));
 }

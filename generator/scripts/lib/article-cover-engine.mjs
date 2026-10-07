@@ -1,4 +1,5 @@
 import { rmSync } from 'node:fs';
+import '../../../host/cantonSectionsBootstrap.mjs';
 import path from 'node:path';
 
 import { generateImageFromSpec } from '../../../engine/shared/generatedImageEngine.mjs';
