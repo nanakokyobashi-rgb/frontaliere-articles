@@ -110,6 +110,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
+import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
 // L'oracolo della spelling escapata, non una seconda definizione: e' lo stesso
 // `ESCAPED_C0_RX` che conta le occorrenze in `find-dirty-content-ids.mjs`
@@ -1621,7 +1622,7 @@ function main() {
     }
     if (opz.scrivi && corrente !== testo) {
       const dest = path.join(opz.radice, f.percorso);
-      fs.writeFileSync(dest, Buffer.from(corrente, 'utf8'));
+      writeFileAtomic(dest, Buffer.from(corrente, 'utf8'));
     }
   }
 

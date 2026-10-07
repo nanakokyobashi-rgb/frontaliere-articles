@@ -54,6 +54,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import {
   findPromptPlaceholders,
@@ -270,7 +271,7 @@ function sweep(rel, re, { unescape, escape, contextOf, repair }) {
     changes.push({ rel, ...ctx, how: fixed.how, before: value.slice(0, 100), after: String(fixed.value).slice(0, 100) });
     return `${pre}${escape(fixed.value)}${post}`;
   });
-  if (touched && !CHECK_ONLY) fs.writeFileSync(abs, src);
+  if (touched && !CHECK_ONLY) writeFileAtomic(abs, src);
   return touched;
 }
 
@@ -351,7 +352,7 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
 //
 // Il rimedio ovvio — rendere questo passo transazionale e fare rollback se un
 // file lancia — e' impossibile e sarebbe DANNOSO. Impossibile perche' il passo
-// 2 ha gia' scritto su disco (`sweep()`, `fs.writeFileSync`) molto prima di
+// 2 ha gia' scritto su disco (`sweep()`, `writeFileAtomic`) molto prima di
 // arrivare qui, quindi non c'e' nessuno stato pulito a cui tornare. Dannoso
 // perche' il rollback del solo post-processo lascerebbe il sentinella LETTERALE
 // — `'blog.article.X.faq': '__DROP_FAQ__'` — dentro un corpo pubblicato, cioe'
@@ -379,7 +380,7 @@ if (!CHECK_ONLY) {
       // un id lascerebbe su disco quello di un altro — che il gate finale
       // `dropFaqSurvivors` conta come fallimento.
       src = src.replace(new RegExp(`\\n[ \\t]*'blog\\.article\\.[^']+\\.faq'\\s*:\\s*'${DROP_FAQ_SENTINEL}',?`, 'g'), '');
-      fs.writeFileSync(abs, src);
+      writeFileAtomic(abs, src);
     } catch (err) {
       problems.push(`${path.relative(ROOT, abs)}: rimozione della riga __DROP_FAQ__ fallita (${err.message}) — FILE SALTATO`);
     }
@@ -420,7 +421,7 @@ if (!CHECK_ONLY) {
 // in un file a due id `faqStateOf()` leggeva lo stato della chiave sbagliata e
 // la potatura qui sotto toglieva una FAQ viva e non orfana. E' lo stesso
 // ancoraggio con cui #294 ha chiuso i tre gate di sola lettura, applicato dove
-// l'esito non e' un rapporto ma una `writeFileSync` su `content/`.
+// l'esito non e' un rapporto ma una `writeFileAtomic` su `content/`.
 //
 // Le due funzioni vivono in `lib/prompt-placeholder-guard.mjs` perche' questo
 // file e' tutto a top level — importarlo lo esegue sul corpus — e la' sono
@@ -470,7 +471,7 @@ for (const dir of ['blog-body', 'blog-body-ch']) {
           residuals.push({ label: rel, id, field: 'faq', locale, value: '', reason: 'chiave faq presente ma non isolabile come riga' });
           continue;
         }
-        if (!CHECK_ONLY) fs.writeFileSync(abs, next);
+        if (!CHECK_ONLY) writeFileAtomic(abs, next);
         total += dropped.length;
         const how = dropped.length > 1 ? `faq-orfana rimossa (assente in it, ${dropped.length}×)` : 'faq-orfana rimossa (assente in it)';
         changes.push({ rel, id, field: 'faq', locale, how, before: dropped[0], after: '(chiave rimossa)' });
