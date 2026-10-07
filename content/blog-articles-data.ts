@@ -42991,6 +42991,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lifestyle-innovation-hub-chiasso',
+ category: 'novita',
+ date: '2026-10-07T21:45:03.951Z',
+ image: '/images/blog/article-lifestyle-innovation-hub-chiasso.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
