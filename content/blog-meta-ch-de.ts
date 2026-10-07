@@ -7853,6 +7853,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Elektroautos: So sparen Sie bis zu 50 %',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## Kurz gesagt: TCS vergleicht die Preise von 19.000 Schweizer Ladepunkten – 50 kWh kosten zwischen 23 und 46 Franken – 5 % der Ladevorgänge finden an Schnellladestationen statt.',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Redaktionelles Bild zu: Auto elettrica: come risparmiare fino al 50%',
+    'blog.article.motore-filo-epfl.title': 'EPFL entwickelt einen fadenförmigen Motor',
+    'blog.article.motore-filo-epfl.excerpt': '## Auf einen Blick - FiberMotor: Durchmesser von 1 bis 3 Millimetern - Vier Motoren heben einen 46 Gramm schweren Riegel - Der Prototyp wurde in ein Paar',
+    'blog.article.motore-filo-epfl.imageAlt': 'FiberMotor und Roboterhose in einem Forschungslabor',
 };
 
 export default blogMetaChDe;

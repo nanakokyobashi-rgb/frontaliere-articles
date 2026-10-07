@@ -2640,6 +2640,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'raffineria-cressier-carburanti': { it: 'raffineria-cressier-carburanti', en: 'cressier-refinery-fuel-prices', de: 'raffinerie-cressier-treibstoffpreise', fr: 'raffinerie-cressier-prix-carburants' },
  'quattro-oggetti-urne-novembre': { it: 'quattro-oggetti-urne-novembre', en: 'four-ballot-items-november', de: 'vier-abstimmungsobjekte-november', fr: 'quatre-objets-vote-novembre' },
  'auto-elettrica-come-risparmiare-fino-al-50': { it: 'auto-elettrica-come-risparmiare-fino-al-50', en: 'electric-car-how-to-save-up-to-50', de: 'elektroautos-so-sparen-sie-bis-zu-50', fr: 'voiture-electrique-comment-economiser-jusqu-a-50' },
+ 'motore-filo-epfl': { it: 'motore-filo-epfl', en: 'epfl-fiber-shaped-motor', de: 'epfl-fadenmotor', fr: 'moteur-fil-epfl' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

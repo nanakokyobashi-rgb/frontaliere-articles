@@ -26176,6 +26176,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'motore-filo-epfl',
+    category: 'novita',
+    date: '2026-10-07T08:00:44.308Z',
+    image: '/images/blog/apprendistato-e-formazione-canton-soletta.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

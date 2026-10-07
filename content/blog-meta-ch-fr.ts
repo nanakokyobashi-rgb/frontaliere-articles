@@ -7853,6 +7853,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Voiture électrique : comment économiser jusqu’à 50 %',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## En bref - Le TCS compare les prix de 19’000 points de recharge suisses - 50 kWh coûtent entre 23 et 46 francs - 5 % des recharges s’effectuent sur des bornes rapides',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Image éditoriale relative à: Auto elettrica: come risparmiare fino al 50%',
+    'blog.article.motore-filo-epfl.title': 'L’EPFL développe un moteur en forme de fil',
+    'blog.article.motore-filo-epfl.excerpt': '## En bref - FiberMotor : diamètre de 1 à 3 millimètres - Quatre moteurs soulèvent une barrette de 46 grammes - Le prototype a été intégré dans une paire',
+    'blog.article.motore-filo-epfl.imageAlt': 'FiberMotor et pantalon robotique dans un laboratoire de recherche',
 };
 
 export default blogMetaChFr;

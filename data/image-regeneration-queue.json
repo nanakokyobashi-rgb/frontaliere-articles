@@ -126,6 +126,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T07:21:41.464Z",
       "lastFailureAt": "2026-10-07T07:21:41.464Z"
+    },
+    {
+      "articleId": "motore-filo-epfl",
+      "title": "EPFL sviluppa un motore a forma di filo",
+      "fallbackImage": "/images/blog/apprendistato-e-formazione-canton-soletta.webp",
+      "reason": "All image providers failed for article-motore-filo-epfl: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:00:44.679Z",
+      "lastFailureAt": "2026-10-07T08:00:44.679Z"
     }
   ]
 }

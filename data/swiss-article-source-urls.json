@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/cronaca/1948197/fiamme-in-piena-notte-alla-scuola-professionale": {
-    "articleId": "incendio-notturno-scuola-professionale-biasca",
-    "ts": "2026-09-05T14:17:14.593Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4061343": {
     "articleId": "falso-allarme-goldach",
     "ts": "2026-09-05T14:27:14.940Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4135844": {
     "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
     "ts": "2026-10-07T07:21:41.466Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/team-di-ricerca-del-poli-losanna-sviluppa-un-motore-a-forma-di-filo/92178004": {
+    "articleId": "motore-filo-epfl",
+    "ts": "2026-10-07T08:00:44.681Z",
     "keyForm": 2
   }
 }

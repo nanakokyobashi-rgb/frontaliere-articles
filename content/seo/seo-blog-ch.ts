@@ -98989,6 +98989,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-motore-filo-epfl': {
+    title: 'EPFL sviluppa un motore a forma di filo | Frontaliere Ticino',
+    description: '## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio',
+    keywords: 'frontalieri, ticino, svizzera, italia, epfl, sviluppa, motore, forma',
+    ogTitle: 'FiberMotor EPFL: motore a forma di filo',
+    ogDescription: '## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio',
+    canonicalPath: '/articoli-svizzera/motore-filo-epfl/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "EPFL sviluppa un motore a forma di filo",
+      "description": "## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-e-formazione-canton-soletta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "FiberMotor e pantaloni robotici in un laboratorio di ricerca"
+      },
+      "datePublished": "2026-10-07T08:00:44+00:00",
+      "dateModified": "2026-10-07T08:00:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/motore-filo-epfl/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
