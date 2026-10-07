@@ -220,6 +220,7 @@ test('generated and editorial records are reader-facing and discoverable by cove
       registry,
     });
     assert.equal(aggregate.generated[generated.imageUrl].assetId, generated.assetId);
+    assert.equal(aggregate.generated['/images/places/lugano-view.webp'].scope, 'place');
     assert.equal(aggregate.editorial[editorial.cover].rightsHolder, editorial.rightsHolder);
     assert.equal(aggregate.sections.frontaliere, 'image-credits-frontaliere.json');
 

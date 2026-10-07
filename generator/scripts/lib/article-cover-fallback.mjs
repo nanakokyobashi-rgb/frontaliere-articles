@@ -22,6 +22,22 @@ export function applyHeroProvenance(data, imagePath, provenance) {
 }
 
 /**
+ * Persist the regeneration request only after the caller has registered the
+ * article successfully. The cover resolver runs before the final writer, so
+ * queueing there could leave a retry for a document that later failed a
+ * validation and was never published.
+ */
+export function queueArticleCoverRegeneration(root, data) {
+  const request = data?._imageRegenerationRequest;
+  if (!request) return false;
+  try {
+    return appendImageRegenerationQueue(root, request);
+  } finally {
+    delete data._imageRegenerationRequest;
+  }
+}
+
+/**
  * Resolve a non-blocking cover after the governed engine has failed.
  *
  * `findCatalogImage` is injected by the caller so the existing topical and
@@ -55,11 +71,15 @@ export function resolveArticleCoverFallback(data, {
   }
 
   applyHeroProvenance(data, selected.path, provenance);
-  appendImageRegenerationQueue(root, {
-    articleId: data.id,
-    title: data.content?.it?.title || data.content?.title || data.title,
-    fallbackImage: selected.path,
-    reason: engineReason,
+  Object.defineProperty(data, '_imageRegenerationRequest', {
+    value: {
+      articleId: data.id,
+      title: data.content?.it?.title || data.content?.title || data.title,
+      fallbackImage: selected.path,
+      reason: engineReason,
+    },
+    configurable: true,
+    writable: true,
   });
   console.error(`[cover] article=${data.id} source=${selected.source} reason=${engineReason}`);
   return {

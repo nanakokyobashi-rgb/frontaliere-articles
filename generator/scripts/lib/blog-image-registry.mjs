@@ -234,13 +234,24 @@ export function appendEditorialImageRecord(root, record) {
 
 export function buildPublishedBlogImageRegistry(root, images = []) {
   const selected = new Set(images.map(normalizePath).filter(Boolean));
-  const generated = Object.fromEntries(
-    readGeneratedImageRecords(root)
+  const generatedRecords = readGeneratedImageRecords(root);
+  const generatedEntries = generatedRecords
       .filter((record) => record.scope === 'article-hero' && validImagePath(record.imageUrl))
       .filter((record) => hasMaterializedImageRecord(root, record.imageUrl, record))
       .filter((record) => selected.size === 0 || selected.has(record.imageUrl))
-      .map((record) => [record.imageUrl, record]),
-  );
+      .map((record) => [record.imageUrl, record]);
+  // The governed static fallback is owned by the site repository, so its
+  // bytes are intentionally absent from this corpus checkout. It still needs
+  // to be in the reader-facing aggregate whenever the aggregate is built:
+  // otherwise an article that used the outage fallback has a valid generator
+  // record but no public provenance record for readers.
+  const staticRecord = generatedRecords.find(
+    (record) => record.scope === 'place' && record.imageUrl === STATIC_FALLBACK_IMAGE,
+  ) || STATIC_FALLBACK_RECORD;
+  if (!selected.size || selected.has(STATIC_FALLBACK_IMAGE)) {
+    generatedEntries.push([STATIC_FALLBACK_IMAGE, staticRecord]);
+  }
+  const generated = Object.fromEntries(generatedEntries);
   const editorial = Object.fromEntries(
     readEditorialImageRecords(root).filter((record) => selected.size === 0 || selected.has(record.cover))
       .filter((record) => hasMaterializedImageRecord(root, record.cover, record))

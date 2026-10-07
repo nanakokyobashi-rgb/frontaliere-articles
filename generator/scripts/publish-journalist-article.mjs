@@ -89,6 +89,7 @@ import {
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
+import { queueArticleCoverRegeneration } from './lib/article-cover-fallback.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import {
   appendEditorialImageRecord,
@@ -529,6 +530,7 @@ async function processDoc(db, FieldValue, docSnap) {
       delete data._sourceText;
     }
     const { slugs, publishedUrls } = registration;
+    queueArticleCoverRegeneration(PROJECT_ROOT, data);
 
     await docSnap.ref.update({
       status: 'published',

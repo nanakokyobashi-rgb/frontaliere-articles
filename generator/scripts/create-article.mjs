@@ -272,7 +272,10 @@ import {
   hasValidBlogImageRecord,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
-import { resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
+import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+} from './lib/article-cover-fallback.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -18023,6 +18026,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Il marker resta presente se la validazione finale fallisce: il commit dei
   // file non va scambiato per una registrazione completata (#1126).
   endRegisterLock();
+  queueArticleCoverRegeneration(PROJECT_ROOT, data);
 
   // Track source-domain weekly quotas only on successful article generation.
   // Stats-bfs:// is editorial-internal — bucket it under 'bfs.admin.ch' so the

@@ -46,6 +46,7 @@ import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
+const QUEUE_RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-image-regeneration-queue.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 const JOURNALIST_WORKFLOW = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
 const BOOKKEEPING = 'data/topic-candidates-evergreen-rejected.json';
@@ -632,6 +633,30 @@ test('il conflitto della coda copertine unisce gli item per articleId', () => {
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-con-coda.ts')));
   } finally {
     w.cleanup();
+  }
+});
+
+test('il resolver della coda fallisce chiuso se git non riesce a leggere uno stage', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'queue-stage-read-error-'));
+  try {
+    assert.throws(
+      () => execFileSync('node', [QUEUE_RESOLVER, IMAGE_REGENERATION_QUEUE], {
+        cwd: root,
+        env: GIT_ENV,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      }),
+      (error) => {
+        assert.equal(error.status, 1);
+        assert.match(
+          String(error.stdout || '') + String(error.stderr || ''),
+          /conflitto coda copertine non dimostrabile/,
+        );
+        return true;
+      },
+    );
+  } finally {
+    rmTempTree(root);
   }
 });
 

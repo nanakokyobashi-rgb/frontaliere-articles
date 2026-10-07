@@ -5,7 +5,10 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { resolveArticleCoverFallback } from '../scripts/lib/article-cover-fallback.mjs';
+import {
+  queueArticleCoverRegeneration,
+  resolveArticleCoverFallback,
+} from '../scripts/lib/article-cover-fallback.mjs';
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
@@ -86,6 +89,8 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
     assert.equal(data._generatedImageRecord.assetId, record.assetId);
     assert.equal(data.qualityReject, undefined);
     assert.equal(data.imagePolicyReject, undefined);
+    assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-queue.json')), false);
+    queueArticleCoverRegeneration(root, data);
     const queue = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
     assert.equal(queue.schema, 1);
     assert.equal(queue.items.length, 1);
@@ -107,7 +112,9 @@ test('when the catalog is empty, the governed static cover still publishes and d
       reason: 'image-budget-expired',
     };
     const first = resolveArticleCoverFallback(data, options);
+    queueArticleCoverRegeneration(root, data);
     resolveArticleCoverFallback(data, { ...options, reason: 'provider-timeout' });
+    queueArticleCoverRegeneration(root, data);
 
     assert.equal(first.source, 'static');
     assert.equal(first.path, '/images/places/lugano-view.webp');

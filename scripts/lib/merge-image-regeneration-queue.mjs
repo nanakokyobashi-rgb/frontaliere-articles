@@ -15,14 +15,20 @@ import { fileURLToPath } from 'node:url';
 export const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
 
-function readStage(stage, file) {
+function missingStageError(stderr) {
+  return /path .* (?:is in the index, but not at stage \d+|does not exist in (?:the )?index|exists on disk, but not in the index)/i.test(stderr);
+}
+
+export function readStage(stage, file) {
   try {
-    return execFileSync('git', ['show', `:${stage}:${file}`], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
+    return execFileSync('git', ['show', ':' + stage + ':' + file], {
+    encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
     });
-  } catch {
-    return null;
+  } catch (error) {
+    const stderr = String(error.stderr || '').trim();
+    if (missingStageError(stderr)) return null;
+    throw new Error('git show :' + stage + ':' + file + ' failed: ' + (stderr || error.message));
   }
 }
 
