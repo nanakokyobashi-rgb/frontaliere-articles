@@ -504,7 +504,7 @@ const MODE_SCENARIOS = [
   { name: 'anello dopo frontaliere', event: 'push', changed: 'content/blog-body/it/a.ts', subject: 'Generate blog article (frontaliere)' },
   { name: 'anello dopo un altro produttore', event: 'push', changed: 'content/blog-body/it/a.ts', subject: 'Weekly border-wait ranking digest refresh' },
   { name: 'anello dopo un cantone', event: 'push', changed: 'content/blog-body-canton-ti/it/a.ts', subject: 'Generate blog article (canton-ti)' },
-  { name: 'self-test', event: 'push', changed: '.github/workflows/generate-article.yml', subject: 'ci: tocca il workflow' },
+  { name: 'self-test', event: 'push', changed: '.github/workflows/generate-article.yml', subject: 'ci: tocca il workflow', admitMode: 'unknown' },
   { name: 'dispatch svizzera', event: 'workflow_dispatch', requested: 'svizzera', dry: 'false' },
   { name: 'dispatch frontaliere dry', event: 'workflow_dispatch', requested: 'frontaliere', dry: 'true' },
   { name: 'dispatch con sezione ignota', event: 'workflow_dispatch', requested: 'canton-ti', dry: 'false' },
@@ -514,6 +514,7 @@ const MODE_SCENARIOS = [
 const modeCtx = (s) => ({
   'github.event_name': s.event,
   'needs.admit.outputs.chain_link': s.chainLink || 'false',
+  'needs.admit.outputs.run_mode': s.admitMode || 'production',
   'github.event.before': '1111111111111111111111111111111111111111',
   'github.sha': '2222222222222222222222222222222222222222',
   'inputs.dry_run': s.dry || 'false',
@@ -532,6 +533,10 @@ test('Resolve run mode and section: con gli input della coppia storica il core s
     });
     assert.deepEqual(core, source, s.name);
     assert.ok(['frontaliere', 'svizzera'].includes(source.section), s.name);
+    if (s.admitMode === 'unknown') {
+      assert.equal(source.dry, 'false', `${s.name}: unknown non deve essere un self-test dry`);
+      assert.equal(source.chain, 'true', `${s.name}: unknown deve restare nella catena writer`);
+    }
   }
   // I cron della gemella dichiarati al core sono quelli che la sorgente cabla.
   assert.match(SOURCE, /'22 \* \* \* \*'\|'37 \* \* \* \*'\) SEC=svizzera ;;/);
