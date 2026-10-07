@@ -156,6 +156,16 @@
       }
     },
     {
+      "path": "scripts/ci/article-publication-observer.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservatore read-only della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher e apre o risolve una issue stabile senza scrivere su sito, shard o CDN. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "7791a06536731f3f",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "scripts/ci/auto-merge-eval.mjs",
       "mode": "adapted",
       "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",
@@ -2087,6 +2097,26 @@
         "site": null,
         "corpus": "5734c5423b0516e5",
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/lib/article-image-postcondition.mjs",
+      "mode": "identical",
+      "reason": "Postcondizione condivisa dai publisher articolo dei due repo: la dichiarazione del registro resta autorevole e una pagina ricaduta sull'immagine generica viene esclusa dal push. Il file e' riallineato byte per byte al gemello del sito, cosi' una modifica futura della stessa regola resta visibile al trasporto lockstep.",
+      "baseline": {
+        "site": "8979d94a31cdef27",
+        "corpus": "8979d94a31cdef27",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/lib/article-online-image-probe.mjs",
+      "mode": "corpus-only",
+      "reason": "Probe fail-closed usato dal publisher del corpus per distinguere una pagina online da proteggere da un articolo nuovo che puo' uscire con l'immagine generica: conferma due volte i 404, riconosce canonical/og:url e non tratta errori di rete come assenza. Il sito non ha questo helper perche' il controllo precede il push dal corpus verso gli shard e la superficie R2.",
+      "baseline": {
+        "site": null,
+        "corpus": "ca237cdd47b7c169",
+        "alignedAt": "2026-10-07"
       }
     },
     {
