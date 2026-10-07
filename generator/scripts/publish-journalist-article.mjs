@@ -41,8 +41,8 @@
  *       any doc could be processed), or an interrupted multi-file registration.
  *       In the latter case, documents completed earlier in the same drain are
  *       put back in `queued`: their files share the same registry/SEO files as
- *       the partial document, so the calling workflow must checkpoint only the
- *       marker rather than publish a mixed batch.
+ *       the partial document, so the calling workflow must publish no
+ *       registration output rather than publish a mixed batch.
  *
  * Usage:
  *   GOOGLE_APPLICATION_CREDENTIALS=<sa.json> node scripts/publish-journalist-article.mjs
@@ -647,7 +647,7 @@ async function main() {
     if (publishedDocs.length > 0) {
       try {
         await requeuePublishedDocuments({ db, FieldValue, publishedDocs, requeuedIds });
-        // The workflow failure path intentionally commits the marker only. The
+        // The workflow failure path publishes no registration output. The
         // completed documents are now queued again, so advertising them as
         // published would make the summary claim the opposite of Firestore.
         discardRequeuedFromPublishedIds();
