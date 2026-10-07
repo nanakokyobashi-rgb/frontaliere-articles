@@ -75,6 +75,20 @@ function assertEscapeSafe(raw, fixedRaw, unescape, opts, problems, label) {
 const changes = [];
 const problems = [];
 
+let writeTmpSeq = 0;
+
+/** Scrive il corpus con temp+rename, così un'interruzione non tronca il target. */
+function writeAtomic(file, content) {
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    fs.writeFileSync(tmp, content, 'utf8');
+    fs.renameSync(tmp, file);
+  } catch (err) {
+    try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
+}
+
 function sweepFile(rel, patterns) {
   const abs = path.join(ROOT, rel);
   let src = fs.readFileSync(abs, 'utf-8');
@@ -91,7 +105,7 @@ function sweepFile(rel, patterns) {
       return `${pre}${value}${post}`;
     });
   }
-  if (fileChanges && !CHECK_ONLY) fs.writeFileSync(abs, src);
+  if (fileChanges && !CHECK_ONLY) writeAtomic(abs, src);
   return fileChanges;
 }
 
