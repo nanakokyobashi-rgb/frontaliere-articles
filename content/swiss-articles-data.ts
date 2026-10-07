@@ -26196,6 +26196,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0',
+    category: 'novita',
+    date: '2026-10-07T12:04:10.925Z',
+    image: '/images/blog/article-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
