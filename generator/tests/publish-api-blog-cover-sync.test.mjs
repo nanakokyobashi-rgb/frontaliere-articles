@@ -10,7 +10,7 @@ const step = start >= 0 && end >= 0 ? workflow.slice(start, end) : '';
 
 test('publish-api uploads changed hero and thumbnail bytes from public-only cover PRs', () => {
   assert.notEqual(start, -1, 'cover sync step is present');
-  assert.match(step, /git diff --name-only --diff-filter=AM/);
+  assert.match(step, /git diff --name-only --diff-filter=AMRC --find-renames --find-copies/);
   assert.match(step, /git cat-file -e "\$\{BEFORE\}\^\{commit\}"/);
   assert.match(step, /public\/images\/blog\/\*\.webp/);
   assert.match(step, /public\/images\/blog\/thumbnails\/\*\.webp/);
@@ -18,7 +18,9 @@ test('publish-api uploads changed hero and thumbnail bytes from public-only cove
   assert.match(step, /scripts\/lib\/upload-cdn-file\.sh/);
   assert.match(step, /https:\/\/cdn\.frontaliereticino\.ch\/\$key/);
   assert.match(step, /scripts\/cf-purge-cache\.mjs/);
-  assert.match(step, /git push origin HEAD:main/);
+  assert.match(step, /push origin HEAD:main/);
+  assert.match(step, /GITHUB_PAT_NANAKO is required to persist the cover sync queue/);
+  assert.match(step, /http\.https:\/\/github\.com\/.extraheader/);
   assert.match(step, /github\.event_name == 'schedule'/);
   assert.match(step, /github\.event_name == 'workflow_dispatch'/);
   assert.doesNotMatch(step, /continue-on-error/);

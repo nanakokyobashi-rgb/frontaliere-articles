@@ -661,7 +661,7 @@ jobs:
                 echo "::error::push base is not reachable: $BEFORE"
                 exit 1
               fi
-              if ! git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" -- \
+              if ! git diff --name-only --diff-filter=AMRC --find-renames --find-copies "$BEFORE" "$SHA" -- \
                   'public/images/blog/*.webp' \
                   'public/images/blog/thumbnails/*.webp' > "$changed_file_list"; then
                 echo "::error::cannot compute changed blog covers between $BEFORE and $SHA"
@@ -711,13 +711,23 @@ jobs:
           NODE
 
           push_queue_commit() {
-            local attempt
+            if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+              echo '::error::GITHUB_PAT_NANAKO is required to persist the cover sync queue'
+              return 1
+            fi
+            local attempt auth_header
+            auth_header="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 | tr -d '\n')"
+            # actions/checkout persists GITHUB_TOKEN in the local git config;
+            # the corpus main ruleset rejects that bot identity for queue
+            # commits, so remove it and use the owner PAT explicitly.
+            git config --local --unset-all http.https://github.com/.extraheader || true
+            git config --local --unset-all http.extraheader || true
             for attempt in 1 2 3; do
-              if git push origin HEAD:main; then
+              if git -c "http.extraheader=AUTHORIZATION: basic $auth_header" push origin HEAD:main; then
                 return 0
               fi
               echo "::warning::main advanced while updating the cover queue; rebasing attempt $attempt/3"
-              git fetch --no-tags origin main
+              git -c "http.extraheader=AUTHORIZATION: basic $auth_header" fetch --no-tags origin main
               if git rebase origin/main; then
                 continue
               fi
