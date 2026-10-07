@@ -5,91 +5,101 @@
       "articleId": "fischiava-treno-gorla",
       "title": "Fischiava il treno: festa ferroviaria a Gorla Minore",
       "fallbackImage": "/images/blog/mobilita-trenord-aumento-biglietti-2026.webp",
-      "reason": "All image providers failed for article-fischiava-treno-gorla: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "SEO entry for article fischiava-treno-gorla has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T04:45:22.263Z",
-      "lastFailureAt": "2026-10-07T04:45:22.263Z"
+      "lastFailureAt": "2026-10-07T22:32:07.578Z",
+      "failureCount": 2
     },
     {
       "articleId": "clan-nazarbayev-ceresio",
       "title": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
       "fallbackImage": "/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp",
-      "reason": "All image providers failed for article-clan-nazarbayev-ceresio: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "All image providers failed for article-clan-nazarbayev-ceresio: openai-codex (vision gate rejected image: Generic illustrative landscape with a non-identifiable foreground figure, but apparent lettering/signage is visible on the distant tra",
       "status": "queued",
       "requestedAt": "2026-10-07T04:58:11.891Z",
-      "lastFailureAt": "2026-10-07T04:58:11.891Z"
+      "lastFailureAt": "2026-10-07T22:46:47.705Z",
+      "failureCount": 2
     },
     {
       "articleId": "raffineria-cressier-carburanti",
       "title": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
       "fallbackImage": "/images/blog/diesel-rincaro-geopolitica-svizzera.webp",
-      "reason": "All image providers failed for article-raffineria-cressier-carburanti: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "SEO entry for article raffineria-cressier-carburanti has no structuredData image URL in content/seo/seo-blog-ch.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T05:28:44.576Z",
-      "lastFailureAt": "2026-10-07T05:28:44.576Z"
+      "lastFailureAt": "2026-10-07T22:33:59.430Z",
+      "failureCount": 2
     },
     {
       "articleId": "monte-olimpino-treni-weekend",
       "title": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
       "fallbackImage": "/images/blog/como-crisi-abitativa-alloggi-sfitti.webp",
-      "reason": "All image providers failed for article-monte-olimpino-treni-weekend: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "SEO entry for article monte-olimpino-treni-weekend has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T05:47:57.525Z",
-      "lastFailureAt": "2026-10-07T05:47:57.525Z"
+      "lastFailureAt": "2026-10-07T22:35:19.132Z",
+      "failureCount": 2
     },
     {
       "articleId": "a2-mendrisio-melano-risanamento",
       "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
       "fallbackImage": "/images/blog/mendrisio-melano-progetto-meme-risanamento-fonico.webp",
-      "reason": "All image providers failed for article-a2-mendrisio-melano-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "SEO entry for article a2-mendrisio-melano-risanamento has no structuredData image URL in content/cantons/canton-ti/seo.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:12:18.865Z",
-      "lastFailureAt": "2026-10-07T06:12:18.865Z"
+      "lastFailureAt": "2026-10-07T22:37:13.899Z",
+      "failureCount": 2
     },
     {
       "articleId": "scambio-dati-salariali-2027",
       "title": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
       "fallbackImage": "/images/blog/fairtiq-bonus-ticino-2026-2027.webp",
-      "reason": "All image providers failed for article-scambio-dati-salariali-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "SEO entry for article scambio-dati-salariali-2027 has no structuredData image URL in content/cantons/canton-ti/seo.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:25:44.304Z",
-      "lastFailureAt": "2026-10-07T06:25:44.304Z"
+      "lastFailureAt": "2026-10-07T22:38:03.112Z",
+      "failureCount": 2
     },
     {
       "articleId": "hotel-ticino-140-licenziati",
       "title": "Due hotel chiusi in Ticino: 140 licenziati",
       "fallbackImage": "/images/blog/hotel-ticino-76-licenziamenti.webp",
-      "reason": "All image providers failed for article-hotel-ticino-140-licenziati: Codex broker timed out after 119999ms",
+      "reason": "SEO entry for article hotel-ticino-140-licenziati has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:29:51.075Z",
-      "lastFailureAt": "2026-10-07T06:29:51.075Z"
+      "lastFailureAt": "2026-10-07T22:38:53.513Z",
+      "failureCount": 2
     },
     {
       "articleId": "quattro-oggetti-urne-novembre",
       "title": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
       "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
-      "reason": "All image providers failed for article-quattro-oggetti-urne-novembre: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "SEO entry for article quattro-oggetti-urne-novembre has no structuredData image URL in content/seo/seo-blog-ch.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:42:41.992Z",
-      "lastFailureAt": "2026-10-07T06:42:41.992Z"
+      "lastFailureAt": "2026-10-07T22:39:42.757Z",
+      "failureCount": 2
     },
     {
       "articleId": "strada-calanca-chiusura-preventiva",
       "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
       "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
-      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: openai-codex (vision gate rejected image: Generic stylized landscape illustration with a visible road-closure barricade/signage; no readable lettering, logo, waterma",
       "status": "queued",
       "requestedAt": "2026-10-07T06:43:54.395Z",
-      "lastFailureAt": "2026-10-07T06:43:54.395Z"
+      "lastFailureAt": "2026-10-07T22:54:15.028Z",
+      "failureCount": 2
     },
     {
       "articleId": "benzina-grigioni-deviazione",
       "title": "Prezzi benzina in Grigioni: quando conviene deviare",
       "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
-      "reason": "All image providers failed for article-benzina-grigioni-deviazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (vision gate rejected image: Generic illustrated alpine road scene with prominent fuel/energy signage and droplet symbols; no readable lettering, logos, faces,",
       "status": "queued",
       "requestedAt": "2026-10-07T06:53:48.101Z",
-      "lastFailureAt": "2026-10-07T06:53:48.101Z"
+      "lastFailureAt": "2026-10-07T22:55:00.472Z",
+      "failureCount": 2
     },
     {
       "articleId": "simplificazione-imposta-trasferimento-berna",

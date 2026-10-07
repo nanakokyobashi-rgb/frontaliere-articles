@@ -7880,6 +7880,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.marcel-salathe-ia-commento.title': 'Künstliche Intelligenz wird uns nicht alle töten',
     'blog.article.marcel-salathe-ia-commento.excerpt': '## Auf einen Blick - Salathé hält apokalyptische Szenarien für übertrieben. - Er ist Professor an der Eidgenössischen Technischen Hochschule Lausanne. - Die Big-Tech-Unternehmen bereiten sich darauf vor, einzutreten',
     'blog.article.marcel-salathe-ia-commento.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund, repräsentiert den schweizerischen Kontext der KI-Debatte.',
+    'blog.article.carriere-politica-economica.title': 'Arbeiten beim SECO: Stellen und berufliche Wege',
+    'blog.article.carriere-politica-economica.excerpt': '## Auf einen Blick - Über 900 Mitarbeitende und Führungskräfte arbeiten beim SECO - Mitarbeitende und Führungskräfte verteilt auf drei Schweizer Standorte - Rund 30 Entsandte sind im Einsatz',
+    'blog.article.carriere-politica-economica.imageAlt': 'Mitarbeitende bei der Arbeit in einem modernen Schweizer Büro',
+    'blog.article.parmelin-avs-ue.title': 'Parmelin verlässt den Bundesrat am 31.12.2026',
+    'blog.article.parmelin-avs-ue.excerpt': '## Auf einen Blick - Guy Parmelin wird den Bundesrat am 31.12.2026 verlassen - Die AHV/IV-Renten werden um etwa 1,6% steigen - Das Schweiz-EU-Paket liegt dem Parlament vor',
+    'blog.article.parmelin-avs-ue.imageAlt': 'Dokumente zu den Entscheiden des Schweizer Bundesrats',
 };
 
 export default blogMetaChDe;

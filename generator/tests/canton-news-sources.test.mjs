@@ -152,6 +152,33 @@ test('json-api: una forma sconosciuta non si indovina (sterile, non inventata)',
   assert.deepEqual(extractJsonApiItems('non json', 'https://example.ch/api'), []);
 });
 
+test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei portali ufficiali', () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const rows = [
+    {
+      contentid: '23911745',
+      contenttypeid: '101',
+      kachellabel: 'Medienmitteilung: Status S: Regierungsrat will Unterstützung fortführen',
+      publication_date: '01.10.2026',
+      permalink: '/Webseite/Kanton-Schaffhausen/Medienmitteilungen-23911745-DE.html',
+    },
+    {
+      contentid: '23897400',
+      contenttypeid: '401',
+      articleHeadline: 'Thayngen: Mutmasslicher Täter schwer verletzt',
+      publication_date: '05.10.2026',
+      permalink: '/Webseite/Schaffhauser-Polizei-23897400-DE.html',
+    },
+  ];
+  const items = extractJsonApiItems(JSON.stringify(rows), api);
+  assert.equal(items.length, 2);
+  assert.equal(items[0].url, 'https://sh.ch/Webseite/Kanton-Schaffhausen/Medienmitteilungen-23911745-DE.html');
+  assert.match(items[0].headline, /Status S/);
+  assert.equal(items[0].date.getDate(), 1);
+  assert.equal(items[1].url, 'https://sh.ch/Webseite/Schaffhauser-Polizei-23897400-DE.html');
+  assert.match(items[1].headline, /Thayngen/);
+});
+
 // ── sitemap ─────────────────────────────────────────────────────────────────
 
 test('news-sitemap: news:title e news:publication_date', () => {
@@ -520,7 +547,7 @@ test('html-links: i testi generici recuperano il titolo strutturale delle tre fo
   ];
   assert.equal(PROFILE.cantons.length, 24, 'baseline P5b: 24 profili cantonali');
   const htmlLinkSources = PROFILE.cantons.flatMap((c) => c.newsSources.filter((s) => s.parser === 'html-links'));
-  assert.equal(htmlLinkSources.length, 159, 'baseline P5b/R2: 159 fonti html-links nei 24 profili dopo le 2 fonti SH verificate');
+  assert.equal(htmlLinkSources.length, 160, 'baseline P5b/R2: 160 fonti html-links nei 24 profili dopo la fonte Spitäler SH');
 
   for (const item of cases) {
     const html = fixture(item.fixture).toString('utf8');
@@ -534,6 +561,30 @@ test('html-links: i testi generici recuperano il titolo strutturale delle tre fo
     const out = await scanCantonSource(source, ctx(impl));
     assert.deepEqual(out.headlines.map((h) => h.headline), item.expected);
   }
+});
+
+test('html-links: la data YYMMDD nel path delle card newsBox non finisce nel secchio undated', async () => {
+  const url = 'https://spitaeler-sh.ch/News/';
+  const html = '<main><div class="newsBox"><div class="text"><h2>Neuer Leiter Unternehmensbereich Medizinische Plattformen</h2><a href="/News/eintraege/2026/260929-Neuer-Leiter-Unternehmensbereich-Medizinische-Plattformen.php">MEHR ERFAHREN</a></div></div></main>';
+  const source = { url, parser: 'html-links', language: 'de', quirks: { articlePathPattern: '^/News/eintraege/', urlDateFormat: 'YYMMDD' } };
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 1);
+  assert.equal(out.headlines[0].date.getFullYear(), 2026);
+  assert.equal(out.headlines[0].date.getMonth(), 8);
+  assert.equal(out.headlines[0].date.getDate(), 29);
+});
+
+test('html-links: una data evento nel corpo non sostituisce la data h4 della card', async () => {
+  const url = 'https://neuhausen.example/aktuelles';
+  const html = '<main><section><h2>Mitwirkung zum Angebotskonzept vbsh 2030 abgeschlossen</h2><article><h4>11.05.2026</h4><p>Die Volksabstimmung ist für den 28. Februar 2027 angesetzt.</p><a href="/fileupload/bericht.pdf">Mitwirkungsbericht der Gemeinde Neuhausen am Rheinfall</a></article></section></main>';
+  const source = { url, parser: 'html-links', language: 'de', quirks: { dateFromSectionHeading: 'h4' } };
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 1);
+  assert.equal(out.headlines[0].date.getFullYear(), 2026);
+  assert.equal(out.headlines[0].date.getMonth(), 4);
+  assert.equal(out.headlines[0].date.getDate(), 11);
 });
 
 test('html-links: i landmark interni restano contenuto, la navigazione resta esclusa', () => {

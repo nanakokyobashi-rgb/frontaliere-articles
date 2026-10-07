@@ -5849,6 +5849,45 @@
           "notes": "Lato estero: Konstanz-Kreuzlingen e' il polo dei pendolari verso TG/SH. Feed valido, 15 item, 7 negli ultimi 7 giorni (ordine non cronologico: non assumere il primo item come il piu' recente)."
         },
         {
+          "url": "https://sh.ch/CMS/content/list?start=0&rows=50&filter_customposttypeid_int=101&filter_approvedpaths_string=%2A1752%2F8540%2F1753%2F1765%2F1755%2F1763%2F1807%2F2757%2A&filter_published_string=published&language=DE&sort=publication_date%20desc&filter_text=%28%2AMedienmitteilung%2A%29",
+          "format": "json",
+          "parser": "json-api",
+          "publisher": "Kanton Schaffhausen – Staatskanzlei (Medienmitteilungen)",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["servizi", "mobilita", "fisco", "lavoro"],
+          "quirks": {},
+          "items7d": 1,
+          "verifiedAt": "2026-10-07",
+          "notes": "La pagina pubblica Medienmitteilungen e' un guscio client-side, ma l'endpoint pubblico CMS/content/list restituisce 50 PDF pubblicati, con permalink HTML e publication_date. Probe live 2026-10-07: 200, JSON, titoli del 01.10 e 29.09; sh.ch/robots.txt 200 con User-agent * Allow: /; nessun paywall sul permalink/PDF."
+        },
+        {
+          "url": "https://www.shpol.ch/CMS/content/list?start=0&rows=50&filter_customposttypeid_int=401&filter_approvedpaths_string=%2A8527%2F8897%2F2081191%2F2081205%2A&filter_published_string=published&language=DE&sort=publication_date%20desc",
+          "format": "json",
+          "parser": "json-api",
+          "publisher": "Schaffhauser Polizei (Medienmitteilungen)",
+          "language": "de",
+          "kind": "polizia",
+          "topics": ["cronaca", "mobilita", "servizi"],
+          "quirks": {"robotsTxt": "absent"},
+          "items7d": 2,
+          "verifiedAt": "2026-10-07",
+          "notes": "Endpoint CMS pubblico del portale ufficiale: probe live 2026-10-07 200, 20 comunicati datati, ultimo 05.10 (Thayngen) e precedente 01.10 (Neunkirch). robots.txt non pubblica un file robots valido: il path redirige alla home, senza direttive AI/ai-input=no; nessun paywall."
+        },
+        {
+          "url": "https://spitaeler-sh.ch/News/",
+          "format": "html",
+          "parser": "html-links",
+          "publisher": "Spitäler Schaffhausen (News)",
+          "language": "de",
+          "kind": "istituzionale",
+          "topics": ["servizi", "lavoro", "cronaca"],
+          "quirks": {"articlePathPattern": "^/News/eintraege/", "urlDateFormat": "YYMMDD", "robotsTxt": "absent"},
+          "items7d": 1,
+          "verifiedAt": "2026-10-07",
+          "notes": "Pagina HTML server-rendered con 18 link /News/eintraege/ e date nel percorso; probe live 200, item recente 01.10.2026 e articolo salute del 29.09. L'estrattore riconosce le card newsBox e scarta la navigazione. robots.txt non pubblica un file robots valido (risponde HTML), senza direttive AI/ai-input=no; nessun paywall."
+        },
+        {
           "url": "https://www.singen.de/informieren/aktuelles/pressemitteilungen",
           "format": "html",
           "parser": "html-links",
@@ -5941,9 +5980,10 @@
           "quirks": {
             "articlePathPattern": "^/sh-power/newsroom/(newsbeitrag|blogpost)/"
           },
+          "reserve": true,
           "items7d": 1,
           "verifiedAt": "2026-10-05",
-          "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; 1 negli ultimi 7 giorni, 4 negli ultimi 30 (ultimo 2026-09-29)."
+          "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; probe locale 200 (1 negli ultimi 7 giorni, 4 negli ultimi 30, ultimo 2026-09-29), ma il runner GitHub riceve HTTP 403. Nessun feed/sitemap ufficiale alternativo accessibile trovato: declassata a fonte reserve, mai da aggirare con UA/proxy/retry."
         },
         {
           "url": "https://www.shkb.ch/244-news-medienmitteilungen",
@@ -5959,7 +5999,8 @@
             "lavoro"
           ],
           "quirks": {
-            "articlePathPattern": "^/\\d+-[^/?]+$"
+            "articlePathPattern": "^/\\d+-[^/?]+$",
+            "localCantonContext": "SH"
           },
           "items7d": 0,
           "verifiedAt": "2026-10-06",
@@ -5973,7 +6014,9 @@
           "language": "de",
           "kind": "istituzionale",
           "topics": ["servizi", "mobilita", "eventi", "cronaca"],
-          "quirks": {},
+          "quirks": {
+            "dateFromSectionHeading": "h4"
+          },
           "items7d": 0,
           "verifiedAt": "2026-10-06",
           "notes": "GET reale: status 200, content-type text/html (201170 byte). Ultimo item 27.09.2026; campioni: «Abstimmungsresultate vom 27. September 2026», «Gemeinde unterstützt Haus der Begegnung und der Menschlichkeit», «Erneuerung Spielplatz Schönegg». robots.txt 200, path consentito, nessun blocco AI/ai-input=no; pagina legale comunale consultata."
