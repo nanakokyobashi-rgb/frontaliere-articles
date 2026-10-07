@@ -324,6 +324,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:02:14.857Z",
       "lastFailureAt": "2026-10-07T10:02:14.857Z"
+    },
+    {
+      "articleId": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
+      "title": "Canton San Gallo: stabile ricerca lavoro, cala disoccupazione",
+      "fallbackImage": "/images/blog/mercato-lavoro-canton-grigioni.webp",
+      "reason": "All image providers failed for article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:15:11.286Z",
+      "lastFailureAt": "2026-10-07T10:15:11.286Z"
     }
   ]
 }
