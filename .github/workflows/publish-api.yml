@@ -113,6 +113,7 @@ on:
       - 'generator/scripts/lib/atomic-write-json.mjs'
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'
+      - 'data/blog-cover-cdn-sync-queue.json'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -134,7 +135,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
   # `issues: write` is the GITHUB_TOKEN fallback for the "Alert on shadowed
@@ -635,6 +636,127 @@ jobs:
             echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
           fi
 
+      # A site-side licence-audit replacement keeps the article URL stable but
+      # changes the bytes at that URL. The corpus is a second publisher of the
+      # same CDN key, so this step runs BEFORE Pages deploy and keeps a durable
+      # queue. A failed upload therefore blocks the deploy and leaves the exact
+      # paths for the next scheduled or manual reconciliation.
+      - name: Publish governed blog cover bytes before Pages deploy
+        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          queue_file='data/blog-cover-cdn-sync-queue.json'
+          changed_file_list="$RUNNER_TEMP/publish-api-changed-blog-covers.txt"
+          manifest_file="$RUNNER_TEMP/publish-api-blog-covers.tsv"
+          queue_update="$RUNNER_TEMP/publish-api-blog-cover-queue.json"
+          : > "$changed_file_list"
+
+          if [ "$EVENT_NAME" = 'push' ]; then
+            if [ -n "${BEFORE:-}" ] && [[ ! "$BEFORE" =~ ^0+$ ]]; then
+              if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+                echo "::error::push base is not reachable: $BEFORE"
+                exit 1
+              fi
+              if ! git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" -- \
+                  'public/images/blog/*.webp' \
+                  'public/images/blog/thumbnails/*.webp' > "$changed_file_list"; then
+                echo "::error::cannot compute changed blog covers between $BEFORE and $SHA"
+                exit 1
+              fi
+            fi
+          fi
+
+          node --input-type=module - "$queue_file" "$changed_file_list" "$manifest_file" "$queue_update" <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+
+          const [, , queuePath, changedPath, manifestPath, nextQueuePath] = process.argv;
+          const pathPattern = /^public\/images\/blog\/(?:thumbnails\/)?[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+          const current = fs.existsSync(queuePath)
+            ? JSON.parse(fs.readFileSync(queuePath, 'utf8'))
+            : { schema: 1, items: [] };
+          if (current.schema !== 1 || !Array.isArray(current.items)) {
+            throw new Error(`${queuePath}: invalid queue schema`);
+          }
+          const items = new Map();
+          const add = (value) => {
+            const file = String(value || '').trim();
+            if (!file) return;
+            if (!pathPattern.test(file)) throw new Error(`invalid blog cover path: ${file}`);
+            if (!fs.existsSync(file)) throw new Error(`queued blog cover is missing: ${file}`);
+            const sha256 = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+            items.set(file, { path: file, sha256 });
+          };
+          for (const item of current.items) add(item?.path);
+          for (const file of fs.readFileSync(changedPath, 'utf8').split(/\r?\n/)) add(file);
+          const ordered = [...items.values()].sort((left, right) => left.path.localeCompare(right.path));
+          fs.writeFileSync(manifestPath, ordered.map((item) => `${item.path}\t${item.sha256}`).join('\n') + (ordered.length ? '\n' : ''));
+          fs.writeFileSync(nextQueuePath, `${JSON.stringify({ schema: 1, items: ordered }, null, 2)}\n`);
+          NODE
+
+          mapfile -t manifest_entries < "$manifest_file"
+          if [ "${#manifest_entries[@]}" -eq 0 ]; then
+            if [ "$EVENT_NAME" = 'push' ] && { [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; }; then
+              echo '::error::first push has no reachable base and no queued cover set to reconcile'
+              exit 1
+            fi
+            echo 'No governed blog cover bytes require CDN reconciliation.'
+            exit 0
+          fi
+
+          queue_changed=false
+          if [ ! -f "$queue_file" ] || ! cmp -s "$queue_file" "$queue_update"; then
+            cp "$queue_update" "$queue_file"
+            queue_changed=true
+          fi
+          if [ "$queue_changed" = true ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add "$queue_file"
+            git commit -m 'chore(licenses): persist blog cover CDN sync queue [skip ci]'
+            git push origin HEAD:main
+          fi
+
+          for required in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
+            if [ -z "${!required:-}" ]; then
+              echo "::error::$required is required before publishing governed blog cover bytes"
+              exit 1
+            fi
+          done
+
+          urls=()
+          while IFS="$(printf '\t')" read -r file sha256; do
+            [ -n "$file" ] || continue
+            key="${file#public/}"
+            output="$(bash scripts/lib/upload-cdn-file.sh "$file" "$key" "public,max-age=600")"
+            printf '%s\n' "$output"
+            printf '%s\n' "$output" | grep -q '✅ uploaded' || {
+              echo "::error::CDN upload did not succeed for $file (sha256 $sha256)"
+              exit 1
+            }
+            urls+=("https://cdn.frontaliereticino.ch/$key")
+          done < "$manifest_file"
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+
+          node --input-type=module - "$queue_file" "$manifest_file" "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json" <<'NODE'
+          import fs from 'node:fs';
+          const [, , queuePath, manifestPath, clearedPath] = process.argv;
+          const current = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+          const uploaded = new Set(fs.readFileSync(manifestPath, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => line.split('\t', 1)[0]));
+          const items = (current.items || []).filter((item) => !uploaded.has(item.path));
+          fs.writeFileSync(clearedPath, `${JSON.stringify({ schema: 1, items }, null, 2)}\n`);
+          NODE
+          if ! cmp -s "$queue_file" "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json"; then
+            cp "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json" "$queue_file"
+            git add "$queue_file"
+            git commit -m 'chore(licenses): acknowledge published cover sync queue [skip ci]'
+            git push origin HEAD:main
+          fi
+
       # ── Follow-up to #293/#166 (issue #302) ──────────────────────────────
       #
       # #293 made a same-day canonical-override shadowing a news-ticker article
@@ -760,60 +882,6 @@ jobs:
             # which is a no-op for anything already purged.
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
           fi
-
-      # A site-side licence-audit replacement keeps the article URL stable but
-      # changes the bytes at that URL. The corpus is a second publisher of the
-      # same CDN key, so a later corpus publish must carry the exact hero and
-      # thumbnail bytes or it could put the old cover back over the audited one.
-      # This diff-scoped upload is intentionally separate from fast-publish:
-      # public-only cover sync PRs do not touch content/** and therefore do not
-      # enter that workflow's push trigger.
-      - name: Publish changed blog cover bytes to the CDN
-        if: steps.deploy.outcome == 'success' && github.event_name == 'push'
-        env:
-          BEFORE: ${{ github.event.before }}
-          SHA: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          if [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; then
-            echo 'No push base available; no changed blog cover upload.'
-            exit 0
-          fi
-          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
-            echo "::error::push base is not reachable: $BEFORE"
-            exit 1
-          fi
-          changed_file_list="$RUNNER_TEMP/publish-api-changed-blog-covers.txt"
-          if ! git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" -- \
-              'public/images/blog/*.webp' \
-              'public/images/blog/thumbnails/*.webp' > "$changed_file_list"; then
-            echo "::error::cannot compute changed blog covers between $BEFORE and $SHA"
-            exit 1
-          fi
-          mapfile -t changed_files < "$changed_file_list"
-          if [ "${#changed_files[@]}" -eq 0 ]; then
-            echo 'No changed blog cover bytes in this push.'
-            exit 0
-          fi
-          for required in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
-            if [ -z "${!required:-}" ]; then
-              echo "::error::$required is required to publish changed blog cover bytes"
-              exit 1
-            fi
-          done
-          urls=()
-          for file in "${changed_files[@]}"; do
-            [ -f "$file" ] || { echo "::error::changed cover is not a file: $file"; exit 1; }
-            key="${file#public/}"
-            output="$(bash scripts/lib/upload-cdn-file.sh "$file" "$key" "public,max-age=600")"
-            printf '%s\n' "$output"
-            printf '%s\n' "$output" | grep -q '✅ uploaded' || {
-              echo "::error::CDN upload did not succeed for $file"
-              exit 1
-            }
-            urls+=("https://cdn.frontaliereticino.ch/$key")
-          done
-          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
       # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:
