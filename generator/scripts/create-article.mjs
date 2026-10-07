@@ -14280,31 +14280,15 @@ function preFlightHeadlineCheck(headline) {
 }
 
 // ── Step 3a.2: Programmatic duplicate detection (multi-signal) ──
-function checkForDuplicates(data, { localizedSlugs = true } = {}) {
-  // Read existing article titles AND excerpts across ALL sections (frontaliere
-  // + svizzera). Cross-section coverage (was: active section only) so an
-  // evergreen already published in the sibling section is caught — the
-  // one-letter `…-frontaliere`/`…-frontalieri` twins, "vivere nei Grigioni",
-  // etc. (2026-07-11). Same shared id/title namespace as getAllArticleIds.
-  const blogItSrc = readAllSectionsMetaIt();
-  const titleMatches = [...blogItSrc.matchAll(metaFieldRegex('title'))];
-  const excerptMatches = [...blogItSrc.matchAll(metaFieldRegex('excerpt'))];
-  titleMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
-  excerptMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
-  const existingArticles = titleMatches.map(m => {
-    const id = m[1];
-    const title = m[2];
-    const exMatch = excerptMatches.find(e => e[1] === id);
-    return { id, title, excerpt: exMatch ? exMatch[2] : '' };
-  });
-
-  // Also check IDs for exact match (all sections — shared id/SEO/i18n namespace)
-  const existingIds = getAllArticleIds();
-
-  // 1. Exact ID check
-  if (existingIds.includes(data.id)) {
-    throw new Error(`❌ DUPLICATO: L'ID "${data.id}" esiste già tra gli articoli pubblicati!`);
-  }
+// Kept pure so the post-rebase gate can run the SAME detector against the
+// rebased tree. The generator's normal caller supplies the live meta files;
+// the gate supplies the revision snapshots it just read from git. Keeping one
+// implementation is important here: a second set of thresholds would make
+// the pre-push decision diverge from the generation decision.
+export function findContentDuplicate(data, existingArticles) {
+  const candidate = data?.content?.it ?? data;
+  existingArticles = (existingArticles ?? []).filter((article) => article?.id !== candidate?.id);
+  const articles = existingArticles;
 
   // ── Local tokenizer ────────────────────────────────────────
   // Differs from the shared `tokenizeIt`: strips punctuation entirely
@@ -14314,7 +14298,7 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   // used to keep a byte-for-byte local copy of that Set, which is exactly the
   // drift risk AGENTS.md #6 flags (2026-07-18 sibling-pattern fix).
   function getSignificantWords(text) {
-    return text.toLowerCase()
+    return String(text ?? '').toLowerCase()
       .replace(/[^a-zàáèéìíòóùú0-9\s]/g, '')
       .split(/\s+/)
       .filter(w => w.length > 2 && !STOP_WORDS_IT.has(w))
@@ -14339,11 +14323,11 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   const commonEntities = corpusCommonEntities(existingEntityLists, commonEntityMinDf(existingArticles.length));
 
   // ── Prepare new article signals ────────────────────────────
-  const newIdWords = data.id.split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
-  const newTitleWords = getSignificantWords(data.content.it.title);
-  const newExcerptWords = getSignificantWords(data.content.it.excerpt || '');
+  const newIdWords = String(candidate?.id ?? '').split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
+  const newTitleWords = getSignificantWords(candidate?.title);
+  const newExcerptWords = getSignificantWords(candidate?.excerpt || '');
   const newEntities = distinctiveEntities(
-    articleEntities(data.content.it.title, data.content.it.excerpt || ''),
+    articleEntities(candidate?.title ?? '', candidate?.excerpt || ''),
     commonEntities,
   );
 
@@ -14367,9 +14351,7 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   const EXCERPT_THRESHOLD = 0.62;  // near-identical excerpt only (was 0.50)
   const COMBINED_THRESHOLD = 0.55; // catch semantically similar articles with different wording (was 0.48)
 
-  console.error(`  🔍 Controllo duplicati multi-segnale (${existingArticles.length} articoli esistenti)...`);
-
-  for (const [index, existing] of existingArticles.entries()) {
+  for (const [index, existing] of articles.entries()) {
     const existingIdWords = existing.id.split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
     const existingTitleWords = getSignificantWords(existing.title);
     const existingExcerptWords = getSignificantWords(existing.excerpt);
@@ -14412,15 +14394,59 @@ function checkForDuplicates(data, { localizedSlugs = true } = {}) {
       if (entitySim >= 0.65 && combinedScore >= 0.45)
         signals.push(`Entità+Combinato: ${(entitySim * 100).toFixed(0)}% ≥ 65% e ${(combinedScore * 100).toFixed(0)}% ≥ 45%`);
 
-      throw new Error(
-        `❌ DUPLICATO RILEVATO:\n` +
-        `   Nuovo:     "${data.content.it.title}" [${data.id}]\n` +
-        `   Esistente: "${existing.title}" [${existing.id}]\n` +
-        `   Segnali:   ${signals.join(' | ')}\n` +
-        `   Dettaglio: ID=${(idSim * 100).toFixed(0)}% Titolo=${(titleSim * 100).toFixed(0)}% Excerpt=${(excerptSim * 100).toFixed(0)}% Entità=${(entitySim * 100).toFixed(0)}% [${[...newEntities].filter((e) => existingEntities.includes(e)).join(', ')}] Combinato=${(combinedScore * 100).toFixed(0)}%\n` +
-        `   Scegli un argomento diverso o più specifico.`
-      );
+      return {
+        existing,
+        signals,
+        idSim,
+        titleSim,
+        excerptSim,
+        entitySim,
+        combinedScore,
+        sharedEntities: [...newEntities].filter((e) => existingEntities.includes(e)),
+      };
     }
+  }
+  return null;
+}
+
+function checkForDuplicates(data, { localizedSlugs = true } = {}) {
+  // Read existing article titles AND excerpts across ALL sections (frontaliere
+  // + svizzera). Cross-section coverage (was: active section only) so an
+  // evergreen already published in the sibling section is caught — the
+  // one-letter `…-frontaliere`/`…-frontalieri` twins, "vivere nei Grigioni",
+  // etc. (2026-07-11). Same shared id/title namespace as getAllArticleIds.
+  const blogItSrc = readAllSectionsMetaIt();
+  const titleMatches = [...blogItSrc.matchAll(metaFieldRegex('title'))];
+  const excerptMatches = [...blogItSrc.matchAll(metaFieldRegex('excerpt'))];
+  titleMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
+  excerptMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
+  const existingArticles = titleMatches.map(m => {
+    const id = m[1];
+    const title = m[2];
+    const exMatch = excerptMatches.find(e => e[1] === id);
+    return { id, title, excerpt: exMatch ? exMatch[2] : '' };
+  });
+
+  // Also check IDs for exact match (all sections — shared id/SEO/i18n namespace)
+  const existingIds = getAllArticleIds();
+
+  // 1. Exact ID check
+  if (existingIds.includes(data.id)) {
+    throw new Error(`❌ DUPLICATO: L'ID "${data.id}" esiste già tra gli articoli pubblicati!`);
+  }
+
+  console.error(`  🔍 Controllo duplicati multi-segnale (${existingArticles.length} articoli esistenti)...`);
+  const duplicate = findContentDuplicate(data, existingArticles);
+  if (duplicate) {
+    const { existing, signals, idSim, titleSim, excerptSim, entitySim, combinedScore, sharedEntities } = duplicate;
+    throw new Error(
+      `❌ DUPLICATO RILEVATO:\n` +
+      `   Nuovo:     "${data.content.it.title}" [${data.id}]\n` +
+      `   Esistente: "${existing.title}" [${existing.id}]\n` +
+      `   Segnali:   ${signals.join(' | ')}\n` +
+      `   Dettaglio: ID=${(idSim * 100).toFixed(0)}% Titolo=${(titleSim * 100).toFixed(0)}% Excerpt=${(excerptSim * 100).toFixed(0)}% Entità=${(entitySim * 100).toFixed(0)}% [${sharedEntities.join(', ')}] Combinato=${(combinedScore * 100).toFixed(0)}%\n` +
+      `   Scegli un argomento diverso o più specifico.`
+    );
   }
 
   // 3. Also check slug overlap (different title, same slug concept), across

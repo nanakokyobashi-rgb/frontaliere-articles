@@ -1859,9 +1859,10 @@ jobs:
             git commit -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
           fi
           # Il commit di QUESTO run, preso prima di ogni rebase: e' da li' che
-          # check-post-rebase-uniqueness.mjs legge cosa il run ha aggiunto (id e
-          # voce del ledger URL->id), perche' dopo il rebase la voce del ledger
-          # puo' non esserci piu' (bookkeeping: vince upstream).
+          # check-post-rebase-uniqueness.mjs legge cosa il run ha aggiunto (id,
+          # meta titolo/excerpt e voce del ledger URL->id), perche' dopo il
+          # rebase il ledger puo' non avere piu' la voce del run (bookkeeping:
+          # vince upstream), mentre il nuovo contenuto va comunque ricontrollato.
           PRODUCED="$(git rev-parse HEAD)"
           # Il registro delle immagini generate e' un ledger append-only, non una
           # cache sacrificabile: il rebase puo' prendere upstream per uscire da
@@ -2060,16 +2061,17 @@ jobs:
               --take-theirs public/images/blog/ || rebased=0
             # ── Ricontrollo dopo il rebase (D18) ──
             #
-            # L'unicita' dell'id (namespace globale `blog-{id}`) e il dedup
-            # della fonte fra sezioni (#251) il generatore li verifica sul tree
-            # di INIZIO run: reggono solo finche' gli scrittori sono seriali. Il
-            # rebase appena fatto ha fuso lo stato di altri run senza
-            # guardarli — `--merge-registry` unisce record di registri diversi
-            # anche con lo stesso id, e il ledger URL->id prende upstream —
-            # quindi le due domande si rifanno qui, sullo stato che si sta per
-            # pushare. Una violazione non si risolve riprovando: niente push,
-            # exit 1, e la run porta POST_REBASE_UNIQUENESS_VIOLATION nel log
-            # (POST_REBASE_UNIQUENESS_ERROR se il controllo non e' eseguibile:
+            # L'unicita' dell'id (namespace globale `blog-{id}`), il dedup della
+            # fonte fra sezioni (#251) e la duplicazione multi-segnale di titolo
+            # / excerpt il generatore li verifica sul tree di INIZIO run: reggono
+            # solo finche' gli scrittori sono seriali. Il rebase appena fatto ha
+            # fuso lo stato di altri run senza guardarli — `--merge-registry`
+            # unisce record di registri diversi anche con lo stesso id, il ledger
+            # URL->id prende upstream e il meta può contenere una notizia quasi
+            # identica — quindi le tre domande si rifanno qui, sullo stato che si
+            # sta per pushare. Una violazione non si risolve riprovando: niente
+            # push, exit 1, e la run porta POST_REBASE_UNIQUENESS_VIOLATION nel
+            # log (POST_REBASE_UNIQUENESS_ERROR se il controllo non e' eseguibile:
             # una garanzia non verificabile non si da' per verificata).
             # Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, non da un elenco
             # qui: una sezione nuova e' coperta senza toccare questo step.
@@ -2092,7 +2094,7 @@ jobs:
               uniq_rc=0
               node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD || uniq_rc=$?
               if [ "$uniq_rc" -ne 0 ]; then
-                echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides with another section on id or source URL; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
+                echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides on id, source URL, or content; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
                 exit 1
               fi
             fi

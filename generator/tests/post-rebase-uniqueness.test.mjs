@@ -65,11 +65,25 @@ function ledgerSrc(map) {
   return `${JSON.stringify(map, null, 2)}\n`;
 }
 
+function tsString(value) {
+  return String(value).replaceAll('\\', '\\\\').replaceAll("'", "\\'");
+}
+
+function metaSrc(ids, articles = {}) {
+  const entries = ids.map((id) => {
+    const article = articles[id] ?? { title: id, excerpt: '' };
+    return `  'blog.article.${id}.title': '${tsString(article.title)}',\n`
+      + `  'blog.article.${id}.excerpt': '${tsString(article.excerpt ?? '')}',\n`;
+  }).join('');
+  return `export const META = {\n${entries}};\n`;
+}
+
 /** Stato di una sezione: ids (registro + slug) e ledger URL→voce. */
-function sectionFiles(surface, { ids = [], ledger = {} } = {}) {
+function sectionFiles(surface, { ids = [], ledger = {}, articles = {} } = {}) {
   return {
     [surface.registryFile]: registrySrc(ids),
     [surface.slugDataFile]: slugSrc(ids),
+    [surface.metaFile]: metaSrc(ids, articles),
     [surface.sourceLedger]: ledgerSrc(ledger),
   };
 }
@@ -84,6 +98,7 @@ function snapshot(stateBySection) {
       registryIds: registryIdsOf(registrySrc(st.registryIds ?? st.ids ?? [])),
       ledger: st.ledger ?? {},
     };
+    if (st.articles) out[s.section].articles = st.articles;
   }
   return out;
 }
@@ -99,6 +114,7 @@ test('le superfici controllate sono TUTTE le sezioni del core, ognuna col suo le
   for (const s of SURFACES) {
     assert.ok(s.registryFile.startsWith('content/'), `${s.section}: registro fuori dal corpus (${s.registryFile})`);
     assert.ok(s.slugDataFile.startsWith('content/'), `${s.section}: mappa slug fuori dal corpus (${s.slugDataFile})`);
+    assert.ok(s.metaFile.startsWith('content/'), `${s.section}: meta IT fuori dal corpus (${s.metaFile})`);
     assert.match(s.sourceLedger, /\.json$/);
   }
   assert.equal(new Set(SURFACES.map((s) => s.sourceLedger)).size, SURFACES.length, 'un ledger per sezione');
@@ -130,6 +146,36 @@ test('ok: id nuovo e fonte nuova, nessuna collisione nello stato post-rebase', (
   assert.deepEqual(r.violations, []);
   assert.deepEqual(r.newIds, [{ section: FIRST.section, id: 'nuovo' }]);
   assert.equal(r.newSourceUrls.length, 1);
+});
+
+test('titolo quasi identico introdotto dal run viene bloccato dopo il rebase', () => {
+  const old = {
+    id: 'pedemontana-falso-pedaggio-sms',
+    title: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte che non chiede pagamenti del pedaggio via SMS o email.',
+  };
+  const candidate = {
+    id: 'pedemontana-truffa-sms-frontalieri',
+    title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte: nessun pagamento del pedaggio viene richiesto via SMS o email.',
+  };
+  const producedBase = snapshot({ [FIRST.section]: { ids: [] } });
+  const produced = snapshot({ [FIRST.section]: { ids: [candidate.id], articles: { [candidate.id]: candidate } } });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: [candidate.id, old.id],
+      articles: { [candidate.id]: candidate, [old.id]: old },
+    },
+  });
+  const { violations, contentChecks } = findPostRebaseViolations({ producedBase, produced, against });
+  assert.deepEqual(violations, [{
+    kind: 'duplicate-content',
+    section: FIRST.section,
+    id: candidate.id,
+    otherId: old.id,
+    signals: 'Titolo: 86% ≥ 82%|Combinato: 68% ≥ 55%',
+  }]);
+  assert.equal(contentChecks, 1);
 });
 
 test('id duplicato: lo stesso id appena registrato da un altro scrittore in un\'altra sezione', () => {
@@ -280,6 +326,45 @@ test('CLI ok: exit 0 e marcatore OK quando lo stato post-rebase e\' pulito', () 
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 0, out);
     assert.match(out, new RegExp(`${OK_MARKER} .*new_ids=${FIRST.section}/nuovo`));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI titolo quasi identico: exit 1 e violazione di contenuto dopo il rebase', () => {
+  const old = {
+    id: 'pedemontana-falso-pedaggio-sms',
+    title: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte che non chiede pagamenti del pedaggio via SMS o email.',
+  };
+  const candidate = {
+    id: 'pedemontana-truffa-sms-frontalieri',
+    title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte: nessun pagamento del pedaggio viene richiesto via SMS o email.',
+  };
+  const mine = sectionFiles(FIRST, {
+    ids: [candidate.id],
+    articles: { [candidate.id]: candidate },
+    ledger: { 'https://www.tio.ch/ticino/attualita/1999998/candidato': entry(candidate.id) },
+  });
+  const upstream = sectionFiles(FIRST, {
+    ids: [old.id],
+    articles: { [old.id]: old },
+    ledger: { 'https://www.tio.ch/ticino/attualita/1999997/esistente': entry(old.id) },
+  });
+  const rebased = sectionFiles(FIRST, {
+    ids: [candidate.id, old.id],
+    articles: { [candidate.id]: candidate, [old.id]: old },
+    ledger: {
+      'https://www.tio.ch/ticino/attualita/1999998/candidato': entry(candidate.id),
+      'https://www.tio.ch/ticino/attualita/1999997/esistente': entry(old.id),
+    },
+  });
+  const w = world({ upstream, mine, rebased });
+  try {
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 1, out);
+    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=duplicate-content section=${FIRST.section} id=${candidate.id} otherId=${old.id}`));
   } finally {
     w.cleanup();
   }
