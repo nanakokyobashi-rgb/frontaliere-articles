@@ -100499,6 +100499,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fischiava-treno-gorla': {
+    title: 'Fischiava il treno: festa ferroviaria a Gorla Minore',
+    description: '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    keywords: 'frontalieri, ticino, svizzera, italia, fischiava, treno, festa, ferroviaria',
+    ogTitle: 'Gorla Minore: festa per la storia ferroviaria',
+    ogDescription: '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    canonicalPath: '/articoli-frontaliere/fischiava-treno-gorla/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fischiava il treno: festa ferroviaria a Gorla Minore",
+      "description": "## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mobilita-trenord-aumento-biglietti-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Evento ferroviario vicino alla vecchia stazione di Gorla Minore"
+      },
+      "datePublished": "2026-10-07T04:45:21+00:00",
+      "dateModified": "2026-10-07T04:45:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fischiava-treno-gorla/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

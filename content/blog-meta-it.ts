@@ -12716,6 +12716,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.truffa-finto-operatore-luino.title': 'Truffa del finto bancario a Luino: sequestrati 17mila euro',
     'blog.article.truffa-finto-operatore-luino.excerpt': 'Un 32enne campano è stato denunciato: avrebbe convinto una persona di 62 anni a fare un bonifico. Sequestrato un conto con oltre 17mila euro.',
     'blog.article.truffa-finto-operatore-luino.imageAlt': 'Scena urbana di Luino legata alla truffa del finto operatore bancario',
+    'blog.article.fischiava-treno-gorla.title': 'Fischiava il treno: festa ferroviaria a Gorla Minore',
+    'blog.article.fischiava-treno-gorla.excerpt': '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    'blog.article.fischiava-treno-gorla.imageAlt': 'Evento ferroviario vicino alla vecchia stazione di Gorla Minore',
 };
 
 export default blogMetaIt;

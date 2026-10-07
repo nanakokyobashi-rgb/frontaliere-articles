@@ -1,4 +1,14 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "articleId": "fischiava-treno-gorla",
+      "title": "Fischiava il treno: festa ferroviaria a Gorla Minore",
+      "fallbackImage": "/images/blog/mobilita-trenord-aumento-biglietti-2026.webp",
+      "reason": "All image providers failed for article-fischiava-treno-gorla: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T04:45:22.263Z",
+      "lastFailureAt": "2026-10-07T04:45:22.263Z"
+    }
+  ]
 }

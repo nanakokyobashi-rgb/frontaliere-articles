@@ -12715,6 +12715,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.truffa-finto-operatore-luino.title': 'Fake banker scam in Luino: 17 thousand euros seized',
     'blog.article.truffa-finto-operatore-luino.excerpt': 'A 32-year-old man from Campania has been reported: he allegedly convinced a 62-year-old person to make a bank transfer. An account containing more than 17,000 euros was seized.',
     'blog.article.truffa-finto-operatore-luino.imageAlt': 'Luino street scene linked to a fake bank operator scam',
+    'blog.article.fischiava-treno-gorla.title': 'The train was whistling: railway festival in Gorla Minore',
+    'blog.article.fischiava-treno-gorla.excerpt': '## TL;DR - Sunday, October 11, 2026 at Gorla Minore - Event from 12:00 to 18:00 near the old station - Lunch, toy trains, old-fashioned games',
+    'blog.article.fischiava-treno-gorla.imageAlt': 'Railway event near the old station in Gorla Minore',
 };
 
 export default blogMetaEn;

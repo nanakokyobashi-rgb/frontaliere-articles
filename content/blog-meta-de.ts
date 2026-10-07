@@ -12714,6 +12714,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.truffa-finto-operatore-luino.title': 'Bankbetrug in Luino: 17.000 Euro beschlagnahmt',
     'blog.article.truffa-finto-operatore-luino.excerpt': 'Ein 32-jähriger Mann aus Kampanien wurde angezeigt: Er soll eine 62-jährige Person dazu gebracht haben, eine Überweisung zu tätigen. Ein Konto mit über 17mila euro wurde beschlagnahmt.',
     'blog.article.truffa-finto-operatore-luino.imageAlt': 'Luinoer Stadtszene im Zusammenhang mit einem Betrug durch einen falschen Bankmitarbeiter (Luino)',
+    'blog.article.fischiava-treno-gorla.title': 'Der Zug pfiff: Eisenbahnfest in Gorla Minore',
+    'blog.article.fischiava-treno-gorla.excerpt': '## Auf einen Blick - Sonntag, 11. Oktober 2026 in Gorla Minore - Veranstaltung von 12:00 bis 18:00 Uhr in der Nähe des alten Bahnhofs - Mittagessen, Miniaturzüge, alte Spiele',
+    'blog.article.fischiava-treno-gorla.imageAlt': 'Bahnveranstaltung nahe dem alten Bahnhof von Gorla Minore',
 };
 
 export default blogMetaDe;
