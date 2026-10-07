@@ -7865,6 +7865,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.riserve-valutarie-settembre-stabili.title': 'Riserve di divise BNS stabili a settembre',
     'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
     'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Scena urbana svizzera associata all\'analisi delle riserve valutarie',
+    'blog.article.ffs-sportelli-chiusi-stazioni.title': 'FFS chiude gli sportelli in 13 stazioni dal primo gennaio',
+    'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## In breve - Dal primo gennaio chiudono gli sportelli in 13 stazioni. - I punti con personale passeranno da 115 a 102. - Il 97% dei titoli passa dai canali',
+    'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Stazione ferroviaria svizzera con sportello chiuso e macchine self service in primo piano',
 };
 
 export default blogMetaChIt;
