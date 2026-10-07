@@ -216,6 +216,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:50:45.510Z",
       "lastFailureAt": "2026-10-07T08:50:45.510Z"
+    },
+    {
+      "articleId": "disoccupazione-friburgo-settembre-2026",
+      "title": "Disoccupazione a Friburgo scende al 2,5% in settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-friburgo-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:52:59.963Z",
+      "lastFailureAt": "2026-10-07T08:52:59.963Z"
     }
   ]
 }
