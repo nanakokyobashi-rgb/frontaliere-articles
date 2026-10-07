@@ -15,6 +15,18 @@
  * riga per riga): 109 campi in 99 articoli uscivano con meno righe della
  * sorgente; con questa correzione zero. L'ultimo test rifa' la misura a ogni
  * giro.
+ *
+ * Tre chiusure della stessa classe, chieste dalla review:
+ *  - una riga di soli separatori della sorgente (`---`) e' un marcatore
+ *    obbligatorio per le guardie di struttura: letta come testo, un motore
+ *    poteva rispondere prosa al suo posto e passare;
+ *  - il percorso Codex diretto (`translateWithCodexEngine`) ha la stessa
+ *    guardia dei tier, e l'invariante d'uscita vale per ogni testo che esce;
+ *  - al livello di campo la riparazione riceve blocchi che il motore ha gia'
+ *    normalizzato: il campo non e' quasi mai allineato riga per riga alla
+ *    sorgente grezza (327 campi su 12.692), quindi i filetti della sorgente si
+ *    contano invece di cercarli alla stessa riga, e la guardia confronta la
+ *    riparazione con il testo che ha ricevuto.
  */
 import { after, afterEach, test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -48,6 +60,11 @@ const {
   freeTranslate,
   getCascadeStats,
   hasSameLineSkeleton,
+  hasSameLineStructure,
+  isSeparatorOnlyLine,
+  lineStructuralSignature,
+  normalizeStructuredBlock,
+  translateWithCodexEngine,
 } = await import('../scripts/lib/free-translate.mjs');
 const { translateFieldFreeMt } = await import('../scripts/lib/article-free-mt.mjs');
 
@@ -124,21 +141,74 @@ test('un numero dispari di marcatori toglie ancora tutti i grassetti', () => {
   assert.equal(balanceMarkdownMarkers('testo **senza chiusura\n- **voce** intera'), 'testo senza chiusura\n- voce intera');
 });
 
-test('una riga di soli separatori e decorazione, salvo quando e della sorgente', () => {
+test('una riga di soli separatori e decorazione, salvo i filetti che la sorgente possiede', () => {
   const source = 'Primo paragrafo.\n\n---\n\nSecondo paragrafo.';
   const translated = 'Erster Absatz.\n\n---\n\nZweiter Absatz.';
   // Senza sorgente: comportamento di sempre (decorazione tolta, righe vuote compattate).
   assert.equal(balanceMarkdownMarkers(translated), 'Erster Absatz.\n\nZweiter Absatz.');
-  // Con la sorgente allineata riga per riga: il filetto e' struttura e resta.
+  // Con la sorgente: il filetto e' struttura e resta.
   assert.equal(balanceMarkdownMarkers(translated, { sourceText: source }), translated);
-  // Se alla stessa posizione la sorgente ha testo, quella riga non e' sua.
+  // Una sorgente senza filetti non ne possiede: la decorazione va via.
   const decorated = 'Erster Absatz.\n=====\nZweiter Absatz.';
   assert.equal(
     balanceMarkdownMarkers(decorated, { sourceText: 'Primo paragrafo.\nRiga di mezzo.\nSecondo paragrafo.' }),
     'Erster Absatz.\nZweiter Absatz.',
   );
-  // Sorgente non allineata (righe diverse): nessun allineamento, comportamento di sempre.
   assert.equal(balanceMarkdownMarkers(translated, { sourceText: 'Una riga sola.' }), 'Erster Absatz.\n\nZweiter Absatz.');
+});
+
+test('i filetti della sorgente si contano: restano anche se il campo non e allineato riga per riga', () => {
+  // La sorgente grezza ha tre righe vuote di fila; il motore le rende
+  // compattate. Il campo ha due righe in meno della sorgente, e il filetto
+  // «alla stessa riga» non c'e' piu': prima veniva tolto, e con lui una riga
+  // vuota.
+  const source = 'Primo paragrafo.\n\n\n\nSecondo paragrafo.\n\n---\n\nTerzo paragrafo.';
+  const translated = 'Erster Absatz.\n\nZweiter Absatz.\n\n---\n\nDritter Absatz.';
+  assert.notEqual(lineCount(source), lineCount(translated));
+  assert.equal(balanceMarkdownMarkers(translated, { sourceText: source }), translated);
+  // Tanti quanti ne ha la sorgente, in ordine: il secondo e' decorazione.
+  assert.equal(
+    balanceMarkdownMarkers('Erster Absatz.\n\n---\n\nZweiter Absatz.\n=====\nDritter Absatz.', { sourceText: source }),
+    'Erster Absatz.\n\n---\n\nZweiter Absatz.\nDritter Absatz.',
+  );
+});
+
+test('riparato contro la sorgente, un testo che non perde filetti tiene le sue righe vuote', () => {
+  const source = 'Primo paragrafo.\n\n\nSecondo paragrafo.';
+  const translated = 'Erster Absatz.\n\n\nZweiter Absatz.';
+  // Senza sorgente le righe vuote in piu' si compattano, come sempre.
+  assert.equal(balanceMarkdownMarkers(translated), 'Erster Absatz.\n\nZweiter Absatz.');
+  assert.equal(balanceMarkdownMarkers(translated, { sourceText: source }), translated);
+  // Una riga di soli spazi e' una riga vuota del testo, non un separatore.
+  assert.equal(lineCount(balanceMarkdownMarkers('Erster Absatz.\n    \nZweiter Absatz.', { sourceText: source })), 3);
+});
+
+test('una riga di soli separatori e una firma a se: rule, con il glifo e senza la lunghezza', () => {
+  for (const line of ['---', '-----------------', '- - -', '***', '* * *', '===', '___']) {
+    assert.equal(isSeparatorOnlyLine(line), true, line);
+    assert.equal(lineStructuralSignature(line).kind, 'rule', line);
+    assert.equal(lineStructuralSignature(line).text, '', line);
+  }
+  for (const line of ['- voce', '**grassetto**', '--', '-', '    ', '— — —', '|---|---|']) {
+    assert.notEqual(lineStructuralSignature(line).kind, 'rule', line);
+  }
+  assert.equal(lineStructuralSignature('---').signature, lineStructuralSignature('-----------').signature);
+  assert.notEqual(lineStructuralSignature('---').signature, lineStructuralSignature('***').signature);
+  assert.notEqual(lineStructuralSignature('---').signature, lineStructuralSignature('===').signature);
+});
+
+test('prosa al posto di un filetto della sorgente non passa le guardie di struttura', () => {
+  const source = 'Primo paragrafo.\n\n---\n\nSecondo paragrafo.';
+  // Stesso numero di righe, testo su tutte e due le righe: passava.
+  const prose = 'Erster Absatz.\n\nTrennlinie\n\nZweiter Absatz.';
+  assert.equal(hasSameLineStructure(source, prose), false);
+  assert.equal(hasSameLineSkeleton(source, prose), false);
+  // Il filetto reso com'e', o piu' corto, e' la stessa struttura.
+  assert.equal(hasSameLineStructure(source, 'Erster Absatz.\n\n---\n\nZweiter Absatz.'), true);
+  assert.equal(hasSameLineStructure('Primo.\n\n-----------\n\nSecondo.', 'Erster.\n\n---\n\nZweiter.'), true);
+  // Un altro glifo no; e un filetto al posto di una riga di prosa nemmeno.
+  assert.equal(hasSameLineStructure(source, 'Erster Absatz.\n\n***\n\nZweiter Absatz.'), false);
+  assert.equal(hasSameLineSkeleton('Primo.\n\nRiga di prosa.\n\nSecondo.', 'Erster.\n\n---\n\nZweiter.'), false);
 });
 
 test('hasSameLineSkeleton guarda righe e marcatori, non il testo', () => {
@@ -188,6 +258,76 @@ test('se l uscita toglie comunque lo scheletro di righe il campo e un MISS conta
   assert.equal(getCascadeStats().tierStructureFailures.exitTransformBroke.exit, before + 1);
 });
 
+// ── il percorso Codex diretto ────────────────────────────────────────────────
+
+const CODEX_SOURCE = [
+  '## Cosa cambia per il frontaliere',
+  '',
+  '- **Imposta alla fonte**: resta in Svizzera fino alla soglia.',
+  '- **Dichiarazione**: va presentata in Italia entro il termine.',
+  '',
+  '---',
+  '',
+  'Il datore di lavoro trattiene le imposte ogni mese.',
+].join('\n');
+
+const directPathRejections = () => getCascadeStats().tierStructureFailures.directPathRejected?.['codex-engine'] || 0;
+
+test('translateWithCodexEngine rende una risposta che ha le righe della sorgente', async () => {
+  const answer = [
+    '## Was sich für Grenzgänger ändert',
+    '',
+    '- **Quellensteuer**: bleibt bis zur Schwelle in der Schweiz.',
+    '- **Steuererklärung**: ist fristgerecht in Italien einzureichen.',
+    '',
+    '---',
+    '',
+    'Der Arbeitgeber behält die Steuern jeden Monat ein.',
+  ].join('\n');
+  const before = directPathRejections();
+  const out = await translateWithCodexEngine({ text: CODEX_SOURCE, sourceLang: 'it', targetLang: 'de', call: async () => answer });
+  assert.equal(out, answer);
+  assert.equal(directPathRejections(), before);
+});
+
+test('translateWithCodexEngine rifiuta una risposta che fonde le righe, e la conta', async () => {
+  // Le due voci d'elenco fuse in una: nessuna guardia guardava questo percorso.
+  const merged = [
+    '## Was sich für Grenzgänger ändert',
+    '',
+    '- **Quellensteuer**: bleibt bis zur Schwelle in der Schweiz. **Steuererklärung**: ist fristgerecht in Italien einzureichen.',
+    '',
+    '---',
+    '',
+    'Der Arbeitgeber behält die Steuern jeden Monat ein.',
+  ].join('\n');
+  const before = directPathRejections();
+  const outcome = { passthroughs: 0, errors: 0, incomplete: false };
+  const out = await translateWithCodexEngine({
+    text: CODEX_SOURCE, sourceLang: 'it', targetLang: 'de', call: async () => merged, _outcome: outcome,
+  });
+  assert.equal(out, '');
+  assert.equal(outcome.incomplete, true);
+  assert.equal(directPathRejections(), before + 1);
+});
+
+test('translateWithCodexEngine rifiuta la prosa al posto del filetto della sorgente', async () => {
+  const prose = [
+    '## Was sich für Grenzgänger ändert',
+    '',
+    '- **Quellensteuer**: bleibt bis zur Schwelle in der Schweiz.',
+    '- **Steuererklärung**: ist fristgerecht in Italien einzureichen.',
+    '',
+    'Trennlinie',
+    '',
+    'Der Arbeitgeber behält die Steuern jeden Monat ein.',
+  ].join('\n');
+  const before = directPathRejections();
+  const out = await translateWithCodexEngine({ text: CODEX_SOURCE, sourceLang: 'it', targetLang: 'de', call: async () => prose });
+  assert.equal(out, '');
+  assert.equal(directPathRejections(), before + 1);
+});
+
 // ── il campo articolo ────────────────────────────────────────────────────────
 
 test('translateFieldFreeMt conserva le righe con il bilanciatore di produzione', async () => {
@@ -225,9 +365,49 @@ test('translateFieldFreeMt rifiuta un campo a cui la riparazione ha tolto righe'
   assert.deepEqual(events, ['markdown-repair-changed-lines']);
 });
 
+test('translateFieldFreeMt tiene il filetto di un campo non allineato alla sorgente grezza', async () => {
+  // Tre righe vuote di fila nella sorgente: il motore rende il blocco con le
+  // righe vuote compattate, quindi il campo ha meno righe della sorgente
+  // grezza. Prima la riparazione toglieva qui il filetto, in silenzio.
+  const events = [];
+  const text = 'Primo paragrafo del testo.\n\n\n\nSecondo paragrafo del testo.\n\n---\n\nTerzo paragrafo del testo.';
+  const out = await translateFieldFreeMt({
+    text,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body2',
+    translate: async ({ text: source }) => normalizeStructuredBlock(source).replace(/paragrafo del testo/g, 'Absatz des Textes'),
+    balanceMarkdown: balanceMarkdownMarkers,
+    onUnusableOutput: (event) => events.push(event.reason),
+  });
+  assert.deepEqual(events, []);
+  assert.equal(lineCount(out), lineCount(normalizeStructuredBlock(text)));
+  assert.equal(out.split('\n').filter(isSeparatorOnlyLine).length, 1);
+  assert.equal(hasSameLineSkeleton(text, out), true);
+});
+
+test('translateFieldFreeMt rifiuta la riparazione che toglie righe anche a un campo non allineato', async () => {
+  const events = [];
+  const text = 'Primo paragrafo del testo.\n\n\n\n- prima voce dell elenco\n- seconda voce dell elenco';
+  const out = await translateFieldFreeMt({
+    text,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate: async ({ text: source }) => normalizeStructuredBlock(source).replace(/voce dell elenco/g, 'Punkt der Liste'),
+    // Una riparazione che fonde le righe, come faceva il bilanciatore.
+    balanceMarkdown: (value) => value.replace(/\n- /, ' '),
+    onUnusableOutput: (event) => events.push(event.reason),
+  });
+  assert.equal(out, '');
+  assert.deepEqual(events, ['markdown-repair-changed-lines']);
+});
+
 // ── l'osservatore sul corpus ─────────────────────────────────────────────────
 
-test('nessun body italiano perde righe passando dal bilanciatore', (t) => {
+test('nessun body italiano perde righe passando dal bilanciatore o dalla riparazione di campo', async (t) => {
   const dir = path.join(ROOT, 'content/blog-body/it');
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((file) => file.endsWith('.ts')).sort() : [];
   // In CI il checkout e' completo. Un worktree sparse senza i body non puo'
@@ -238,7 +418,9 @@ test('nessun body italiano perde righe passando dal bilanciatore', (t) => {
     return;
   }
   const offenders = [];
+  const fieldOffenders = [];
   let fields = 0;
+  let misalignedWithRawSource = 0;
   for (const file of files) {
     const raw = fs.readFileSync(path.join(dir, file), 'utf8');
     for (const match of raw.matchAll(/'([^'\n]+\.body\d+)':\s*(?:'((?:[^'\\]|\\.)*)'|`((?:[^`\\]|\\.)*)`)/g)) {
@@ -254,8 +436,47 @@ test('nessun body italiano perde righe passando dal bilanciatore', (t) => {
       if (lineCount(balanced) !== lineCount(text) || !hasSameLineSkeleton(text, balanced)) {
         offenders.push(`${file} ${match[1].split('.').pop()}: ${lineCount(text)} → ${lineCount(balanced)} righe`);
       }
+      // La riparazione di campo, con un motore che rende ogni blocco riga per
+      // riga nella forma normalizzata che la cascata restituisce: non deve
+      // cambiare il numero di righe del testo che riceve, ne' perdere un
+      // filetto, ne' far rifiutare il campo.
+      const fieldName = match[1].split('.').pop();
+      const reasons = [];
+      let repair = null;
+      // eslint-disable-next-line no-await-in-loop
+      await translateFieldFreeMt({
+        text,
+        sourceLang: 'it',
+        targetLang: 'de',
+        fieldType: 'description',
+        fieldName,
+        translate: async ({ text: block }) => normalizeStructuredBlock(block),
+        balanceMarkdown: (restored, options) => {
+          const out = balanceMarkdownMarkers(restored, options);
+          repair = { restored, out };
+          return out;
+        },
+        onUnusableOutput: (event) => reasons.push(event.reason),
+      });
+      const rules = (value) => String(value).split('\n').filter(isSeparatorOnlyLine).length;
+      if (!repair) {
+        fieldOffenders.push(`${file} ${fieldName}: la riparazione non e' stata raggiunta (${reasons.join(', ')})`);
+        continue;
+      }
+      if (String(repair.restored).trim().split('\n').length !== lineCount(text)) misalignedWithRawSource += 1;
+      const before = String(repair.restored).trim().split('\n').length;
+      const afterRepair = String(repair.out).trim().split('\n').length;
+      if (before !== afterRepair || rules(repair.out) < rules(repair.restored)
+        || reasons.includes('markdown-repair-changed-lines')) {
+        fieldOffenders.push(`${file} ${fieldName}: ${before} → ${afterRepair} righe, filetti ${rules(repair.restored)} → ${rules(repair.out)}, motivi [${reasons.join(', ')}]`);
+      }
     }
   }
   assert.ok(fields > 3000, `solo ${fields} campi letti: il lettore dei body non funziona piu`);
   assert.deepEqual(offenders.slice(0, 10), [], `${offenders.length} campi su ${fields} perdono la struttura di righe`);
+  assert.deepEqual(fieldOffenders.slice(0, 10), [], `${fieldOffenders.length} campi su ${fields}: la riparazione di campo cambia le righe`);
+  // La classe che la guardia di campo deve coprire esiste nel corpus: se un
+  // giorno questo numero andasse a zero il test non starebbe piu' esercitando
+  // i campi non allineati alla sorgente grezza.
+  t.diagnostic(`campi non allineati alla sorgente grezza: ${misalignedWithRawSource} su ${fields}`);
 });

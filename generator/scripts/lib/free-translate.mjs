@@ -358,6 +358,11 @@ const _cascadeStats = {
     // strip) took away the line skeleton a tier's output had. Never a hit: the
     // field is a MISS. The tier name is always `exit`.
     exitTransformBroke: {},
+    // An engine called OUTSIDE the cascade (`translateWithCodexEngine`: one
+    // `codex exec` process per call) answered with another line structure.
+    // There is no per-line recovery on that path — it would cost one process
+    // per line — so the field is a MISS. The tier name is `codex-engine`.
+    directPathRejected: {},
   },
   // Accepted fields whose opaque spans (URLs, e-mails, placeholders) differ
   // from the source AFTER the exit transform although the tier's output had
@@ -535,6 +540,17 @@ function normalizeBlock(s) {
     .trim();
 }
 
+/**
+ * A line made only of separator glyphs, with at least one that is not a blank:
+ * a Markdown rule (`---`) or the decoration some translators add (`______`).
+ * One definition for the structure guards and for the markdown repair, so the
+ * two cannot disagree on what a rule is. A line of blanks is a blank line.
+ */
+export function isSeparatorOnlyLine(line) {
+  const value = String(line ?? '');
+  return /^[\s_\-=*•·~]{3,}$/u.test(value) && /\S/u.test(value);
+}
+
 /** Normalize a block for structural checks without erasing nested Markdown indentation. */
 export function normalizeStructuredBlock(s) {
   return String(s ?? '')
@@ -578,6 +594,14 @@ function normalizeProviderBlock(s) {
  * portion a provider should receive. The signature deliberately keeps the
  * ordered number/delimiter and the unordered marker, so changing either is a
  * structure miss even when the line count is unchanged.
+ *
+ * A separator-only line (`---`, `***`, `- - -`) is a `rule`: the whole line is
+ * the source's marker and there is no text to hand to a provider. Read as
+ * plain `text` it let a tier answer prose in its place and still pass both
+ * structure guards, text on both sides. The signature keeps WHICH glyphs make
+ * the rule and not how many: `-----` answered as `---` is the same rule,
+ * `---` answered as `===` or `***` is not (under a line of text the first
+ * two are two different heading levels).
  */
 export function lineStructuralSignature(line) {
   const raw = String(line ?? '').replace(/\u00a0/g, ' ').replace(/\r/g, '');
@@ -585,6 +609,16 @@ export function lineStructuralSignature(line) {
   const candidate = raw.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
   const signaturePrefix = `indent:${JSON.stringify(indent)}|`;
   if (!candidate) return { kind: 'empty', signature: 'empty', prefix: '', text: '' };
+
+  // Before the bullet rule: `- - -` and `* * *` start like a list item.
+  if (isSeparatorOnlyLine(candidate)) {
+    return {
+      kind: 'rule',
+      signature: `${signaturePrefix}rule:${[...new Set(candidate.replace(/\s+/gu, ''))].sort().join('')}`,
+      prefix: `${indent}${candidate}`,
+      text: '',
+    };
+  }
 
   const heading = candidate.match(/^(#{1,6})(?:\s+|$)/u);
   if (heading) {
@@ -765,6 +799,9 @@ function restoreSourceLineStructure(sourceLine, translatedLine) {
   const source = lineStructuralSignature(sourceLine);
   const translated = lineStructuralSignature(translatedLine);
   if (source.signature === 'empty' || translated.signature === 'empty') return null;
+  // A rule has no text of its own: whatever a provider answered, the line is
+  // the source's.
+  if (source.kind === 'rule') return source.prefix;
   if (source.kind === 'text' && translated.kind !== 'text') {
     if (!isLocalizedOrdinalLine(sourceLine, translatedLine)) return null;
     return normalizeStructuredBlock(translatedLine);
@@ -2633,12 +2670,17 @@ function dropEmptyBoldSpansInLine(line) {
  * Exported so the same balancer can be reused outside the cascade (tests,
  * upstream sanitizers, retroactive cleanup scripts).
  *
- * `sourceText` is optional. When the caller has the source and the text to
- * repair is line-aligned with it (same number of lines), a separator-only line
- * that the SOURCE owns at the same position is kept: `---` between two
- * sections is Markdown structure, not decoration added by a translator, and
- * dropping it took two lines away from a translation that had kept them (the
- * rule, then one of the blank lines around it at step 5).
+ * `sourceText` is optional. When the caller has the source, the rules the
+ * SOURCE owns are kept: `---` between two sections is Markdown structure, not
+ * decoration added by a translator, and dropping it took two lines away from a
+ * translation that had kept them (the rule, then one of the blank lines around
+ * it at step 5). Ownership is by COUNT, in order — as many separator-only
+ * lines as the source has — and not by position: the whole field reaches this
+ * function with the blank runs of each translated block already collapsed by
+ * the engine, so it is rarely line-aligned with the raw source, and a rule
+ * kept only "at the same line number" was dropped in exactly those fields.
+ * Whether the rule is still where the source has it is the structure guards'
+ * question (`lineStructuralSignature` → `rule`), not this repair's.
  *
  * @param {string} s
  * @param {{ sourceText?: string|null }} [options]
@@ -2659,14 +2701,23 @@ export function balanceMarkdownMarkers(s, { sourceText = null } = {}) {
     out = out.replace(/\*\*/g, '');
   }
   // 3. Strip standalone separator-only lines (`______`, `======`) that some
-  //    translators emit as decoration — unless the source owns that line.
+  //    translators emit as decoration — except as many rules as the source
+  //    owns. Without a source every such line goes, blank-only ones included,
+  //    as it always did.
   const separatorOnly = (line) => /^[\s_\-=*•·~]{3,}$/.test(line);
   const outLines = out.split('\n');
   const sourceLines = typeof sourceText === 'string' ? sourceText.split('\n') : null;
-  const aligned = sourceLines !== null && sourceLines.length === outLines.length;
-  const keptLines = outLines.filter((line, index) => (
-    !separatorOnly(line) || (aligned && separatorOnly(sourceLines[index]))
-  ));
+  const sourceRuleCount = sourceLines === null ? 0 : sourceLines.filter(isSeparatorOnlyLine).length;
+  let keptRules = 0;
+  const keptLines = outLines.filter((line) => {
+    if (!separatorOnly(line)) return true;
+    if (sourceLines === null) return false;
+    // With a source, a line of blanks is a blank line of the text.
+    if (!isSeparatorOnlyLine(line)) return true;
+    if (keptRules >= sourceRuleCount) return false;
+    keptRules += 1;
+    return true;
+  });
   const removedSeparatorLines = outLines.length - keptLines.length;
   out = keptLines.join('\n');
   // 4. Strip trailing inline separator runs that often hug a line end.
@@ -2676,10 +2727,10 @@ export function balanceMarkdownMarkers(s, { sourceText = null } = {}) {
     .join('\n');
   // 5. Collapse 3+ consecutive newlines that step 3 may have created when
   //    a separator line sat between two paragraph breaks (\n\nSEP\n\n →
-  //    \n\n\n after filter). A text that is line-aligned with its source and
-  //    lost no line at step 3 has nothing to collapse: its blank runs are the
-  //    source's.
-  if (!aligned || removedSeparatorLines > 0) out = out.replace(/\n{3,}/g, '\n\n');
+  //    \n\n\n after filter). A text repaired against its source that lost no
+  //    line at step 3 has nothing to collapse: its blank runs are its own, and
+  //    collapsing them changed the line count of a field nobody had touched.
+  if (sourceLines === null || removedSeparatorLines > 0) out = out.replace(/\n{3,}/g, '\n\n');
   // 6. Collapse consecutive inline spaces that step 1 may have left without
   // erasing the indentation of nested Markdown list items.
   out = out
@@ -2783,23 +2834,25 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
     return finalized;
   }
   // Exit invariant. A tier's output is accepted because it has the line
-  // structure of the source (`tryTier`); this transform runs AFTER that guard,
-  // so whatever it breaks nobody else sees. It used to merge list items and
-  // drop the source's own `---` lines here. The repair steps are now unable to
-  // do that; this check keeps it true for the next rule added to the exit:
-  //  - a lost line skeleton is a MISS, counted, never a published text;
+  // structure of the source (`tryTier`, and the same guard on the direct Codex
+  // path); this transform runs AFTER that guard, so whatever it breaks nobody
+  // else sees. It used to merge list items and drop the source's own `---`
+  // lines here. The repair steps are now unable to do that; this check keeps
+  // it true for the next rule added to the exit, and for the next caller that
+  // reaches the exit without a guard of its own:
+  //  - a text without the line skeleton of the source is a MISS, counted,
+  //    never a published text — whoever lost it;
   //  - a changed opaque span (a URL the placeholder strip rewrote) is counted
   //    and let through, because rejecting it would stop a translation that
   //    was being published until now — the counter says when it reaches zero.
-  if (hasSameLineStructure(prepared.clean, out)) {
-    if (!hasSameLineSkeleton(prepared.structureSource, finalized)) {
-      noteTierStructureFailure('exit', 'exitTransformBroke');
-      noteTranslationOutcome(outcome, 'incomplete');
-      return '';
-    }
-    if (!hasSameLineStructure(prepared.structureSource, finalized)) {
-      _cascadeStats.exitTransformOpaqueDrift += 1;
-    }
+  if (!hasSameLineSkeleton(prepared.structureSource, finalized)) {
+    noteTierStructureFailure('exit', 'exitTransformBroke');
+    noteTranslationOutcome(outcome, 'incomplete');
+    return '';
+  }
+  if (hasSameLineStructure(prepared.clean, out)
+    && !hasSameLineStructure(prepared.structureSource, finalized)) {
+    _cascadeStats.exitTransformOpaqueDrift += 1;
   }
   return finalized;
 }
@@ -3206,6 +3259,17 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
   }
   // Stesso fail-closed su un rifiuto o una richiesta dell'input del modello.
   if (rejectedAsMetaResponse('codex', prepared.sourceClean, out, _outcome)) return '';
+  // Stessa guardia di struttura dei tier della cascata (`tryTier`): una
+  // risposta che fonde, toglie o cambia le righe non e' una traduzione del
+  // campo. Qui pero' non c'e' il recupero riga per riga: ogni chiamata e' un
+  // processo `codex exec`, e una riga per processo non e' un costo che questo
+  // percorso puo' pagare. Il campo e' un MISS contato; la bonifica salta
+  // l'articolo e la seconda corsia lo lascia al giro successivo.
+  if (!hasSameLineStructure(prepared.clean, out)) {
+    noteTierStructureFailure('codex-engine', 'directPathRejected');
+    noteTranslationOutcome(_outcome, 'incomplete');
+    return '';
+  }
   return _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
 }
 
