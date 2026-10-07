@@ -222,6 +222,8 @@ jobs:
             > stale-rc-loader/generator/scripts/load-rc-env.mjs
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/google-service-account-token.mjs" \
             > stale-rc-loader/generator/scripts/lib/google-service-account-token.mjs
+          git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/source-copy-guard.mjs" \
+            > stale-rc-loader/generator/scripts/lib/source-copy-guard.mjs
           # The report step runs for scoped workflow_run invocations too. The
           # full-scan custodian checkout is intentionally conditional, so the
           # helper must be materialized before the scope gate rather than only
@@ -1116,7 +1118,7 @@ jobs:
             # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
             HAS_IMPORTANT=false
             # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
-            IMPORTANT_MATCHES=$(printf '%s' "$LAST_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' || true)
+            IMPORTANT_MATCHES=$(printf '%s' "$LAST_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]|[ \t]*(?:(?:[-*+>]|\d+[.)])[ \t]*){0,3}(?:`[^`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?)(?:[ \t]*[,;][ \t]*(?:`[^`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?))*:[ \t]*🔴\s*\*{0,2}\s*Important\s*\*{0,2}(?=[ \t]+[^ \t\r]))' || true)
             if [ "${IMPORTANT_MATCHES:-0}" -gt 0 ]; then
               HAS_IMPORTANT=true
             fi
@@ -1129,7 +1131,7 @@ jobs:
             # historical finding after a body edit without treating a stale
             # LGTM as an approval for the new body.
             # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
-            HEAD_IMPORTANT_MATCHES=$(printf '%s' "$LAST_HEAD_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' || true)
+            HEAD_IMPORTANT_MATCHES=$(printf '%s' "$LAST_HEAD_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]|[ \t]*(?:(?:[-*+>]|\d+[.)])[ \t]*){0,3}(?:`[^`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?)(?:[ \t]*[,;][ \t]*(?:`[^`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?))*:[ \t]*🔴\s*\*{0,2}\s*Important\s*\*{0,2}(?=[ \t]+[^ \t\r]))' || true)
             if [ "${HEAD_IMPORTANT_MATCHES:-0}" -gt 0 ]; then
               IMPORTANT_ON_HEAD=true
             fi

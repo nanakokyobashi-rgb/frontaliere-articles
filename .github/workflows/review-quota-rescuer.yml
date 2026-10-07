@@ -99,6 +99,7 @@ jobs:
             scripts/ci
             generator/scripts/load-rc-env.mjs
             generator/scripts/lib/google-service-account-token.mjs
+            generator/scripts/lib/source-copy-guard.mjs
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
