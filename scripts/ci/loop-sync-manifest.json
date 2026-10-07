@@ -251,9 +251,9 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "12617640c1d85ce2",
-        "corpus": "12617640c1d85ce2",
-        "alignedAt": "2026-10-06"
+        "site": "075ef4fa2fc7d8f2",
+        "corpus": "075ef4fa2fc7d8f2",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -949,9 +949,9 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "896a7c71ea559b4c",
-        "corpus": "896a7c71ea559b4c",
-        "alignedAt": "2026-10-06"
+        "site": "aaa63d8647c14af9",
+        "corpus": "aaa63d8647c14af9",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -959,9 +959,9 @@
       "mode": "identical",
       "reason": "Finestra `created` per gli elenchi di run filtrati per branch (`createdSince`, `createdSinceFilter`, `createdSinceQuery`, `newestFirst`): modulo senza import, copiato byte per byte dal sito. E' registrato PRIMA del suo importatore: `scripts/ci/close-recovered-failure-issues.mjs` e' `identical` e sul sito lo importa dalla PR 12016, e il gate del sito sugli import dei gemelli identici rifiuta un importatore il cui modulo non e' dichiarato qui (il trasporto porterebbe l'importatore senza il modulo: ERR_MODULE_NOT_FOUND, caso della issue 1890). `generator/tests/run-listing-window.test.mjs` ne prova il comportamento in questo repository.",
       "baseline": {
-        "site": "55e66ea9b5ef172e",
-        "corpus": "55e66ea9b5ef172e",
-        "alignedAt": "2026-10-06"
+        "site": "6c65f857f24a2dd7",
+        "corpus": "6c65f857f24a2dd7",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1452,9 +1452,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a9c64aebc070caef",
-        "corpus": "a9c64aebc070caef",
-        "alignedAt": "2026-10-05"
+        "site": "f702e538f96f43bd",
+        "corpus": "f702e538f96f43bd",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2201,9 +2201,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "e9b863164b45be21",
-        "corpus": "e9b863164b45be21",
-        "alignedAt": "2026-10-04"
+        "site": "633d31fbe8995e1f",
+        "corpus": "633d31fbe8995e1f",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2221,9 +2221,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "50c9061065249496",
-        "corpus": "50c9061065249496",
-        "alignedAt": "2026-10-06"
+        "site": "9633813da0529c82",
+        "corpus": "9633813da0529c82",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4395,9 +4395,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0b80c7dee45fa550",
-        "corpus": "0b80c7dee45fa550",
-        "alignedAt": "2026-10-05"
+        "site": "adc6f92b284d1b2c",
+        "corpus": "adc6f92b284d1b2c",
+        "alignedAt": "2026-10-07"
       }
     },
     {
