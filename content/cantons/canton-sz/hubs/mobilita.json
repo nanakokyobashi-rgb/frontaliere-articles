@@ -1,0 +1,427 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-sz:mobilita",
+  "section": "canton-sz",
+  "canton": "SZ",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "1ae60d87d5b4b881d31edfed274a4e2162922b4fac86b87a3c774192f643ec47",
+  "blocks": [
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SZ",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Svitto, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "1",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "4",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A4 Altdorf <-> Zürich tra Svincolo autostradale Brunnen E Svincolo autostradale Brunnen Süd Situazione: chiusa cantiere, lunghezza [km] 2.3",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zürich Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 9 ottobre 2026",
+              "date": "2026-09-14T18:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Goldau E Svincolo autostradale Svitto Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: nuova viabilità ridotta…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 9 ottobre 2026",
+              "date": "2026-10-01T04:45:00.000Z"
+            },
+            {
+              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 22 ottobre 2026",
+              "date": "2026-10-02T08:09:00.000Z"
+            },
+            {
+              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-10-05T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
+              "date": "2026-10-01",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
+            },
+            {
+              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
+            },
+            {
+              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti pubblici Svitto: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-svitto/",
+          "excerpt": "Guida completa agli abbonamenti, alle zone tariffarie e alle riduzioni per i mezzi pubblici nel Cantone di Svitto.",
+          "date": "2026-08-16T13:32:24.597Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "SZ",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of Schwyz, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Road closures in force or imminent",
+          "value": "1",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "4",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A4 Altdorf <-> Zürich tra Svincolo autostradale Brunnen E Svincolo autostradale Brunnen Süd Situazione: chiusa cantiere, lunghezza [km] 2.3",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zürich Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 9 October 2026",
+              "date": "2026-09-14T18:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Goldau E Svincolo autostradale Svitto Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: nuova viabilità ridotta…",
+              "value": "Roadworks",
+              "detail": "until 9 October 2026",
+              "date": "2026-10-01T04:45:00.000Z"
+            },
+            {
+              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 22 October 2026",
+              "date": "2026-10-02T08:09:00.000Z"
+            },
+            {
+              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 23 October 2026",
+              "date": "2026-10-05T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
+              "date": "2026-10-01",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
+            },
+            {
+              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
+            },
+            {
+              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Tickets for public transport in Switzerland: zones and fares",
+          "url": "/en/swiss-articles/public-transport-passes-schwyz/",
+          "excerpt": "Complete guide to subscriptions, fare zones and reductions for public transport in the Canton of Schwyz.",
+          "date": "2026-08-16T13:32:24.597Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "SZ",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Kanton Schwyz bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "1",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "4",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A4 Altdorf <-> Zürich zwischen Anschluss Brunnen und Anschluss Brunnen-Süd Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.3",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zürich Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 9. Oktober 2026",
+              "date": "2026-09-14T18:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zürich zwischen Anschluss Goldau und Anschluss Schwyz Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 4.0 Verkehrsführung: veränderte Verkehrsführung auf einen Fahrstreifen…",
+              "value": "Baustelle",
+              "detail": "bis 9. Oktober 2026",
+              "date": "2026-10-01T04:45:00.000Z"
+            },
+            {
+              "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 22. Oktober 2026",
+              "date": "2026-10-02T08:09:00.000Z"
+            },
+            {
+              "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-10-05T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
+              "date": "2026-10-01",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
+            },
+            {
+              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
+            },
+            {
+              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Fahrkarten für den öffentlichen Verkehr Schwyz: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/oev-abonnemente-kanton-schwyz/",
+          "excerpt": "Vollständiger Leitfaden zu Abos, Tarifzonen und Ermäßigungen für den öffentlichen Verkehr im Kanton Schwyz.",
+          "date": "2026-08-16T13:32:24.597Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "SZ",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Schwytz, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "1",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "4",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A4 Altdorf <-> Zurich entre Jonction autoroutière Brunnen et Jonction autoroutière Brunnen-Sud Situation: fermé travaux, longueur [km] 2.3",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen -> Zurich Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 9 octobre 2026",
+              "date": "2026-09-14T18:00:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zurich entre Jonction autoroutière Goldau et Jonction autoroutière Schwytz Situation: trafic perturbé travaux, longueur [km] 4.0 Gestion du trafic: nouveau plan de circulation sur une…",
+              "value": "Chantier",
+              "detail": "jusqu’au 9 octobre 2026",
+              "date": "2026-10-01T04:45:00.000Z"
+            },
+            {
+              "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies sur une…",
+              "value": "Chantier",
+              "detail": "jusqu’au 22 octobre 2026",
+              "date": "2026-10-02T08:09:00.000Z"
+            },
+            {
+              "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: rétrécissement des voies sur une…",
+              "value": "Chantier",
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-10-05T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
+              "date": "2026-10-01",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
+            },
+            {
+              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
+            },
+            {
+              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
+              "date": "2026-09-24",
+              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports publics Schwyz : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-schwyz/",
+          "excerpt": "Guide complet des abonnements, des zones tarifaires et des réductions pour les transports publics dans le canton de Schwyz.",
+          "date": "2026-08-16T13:32:24.597Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

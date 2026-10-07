@@ -1,0 +1,840 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vs:mobilita",
+  "section": "canton-vs",
+  "canton": "VS",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "ac10900001087d0783977c4bbea84155911d9cab875283f73274045cf502b19c",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VS",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "In Vallese, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con l’Italia e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Sempione (Iselle-Gondo), settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "22",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "27",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/sempione/oggi/"
+            },
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0,1 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
+            },
+            {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0,1 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/le-chatelard-vallorcine/oggi/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0,1 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/saint-gingolph/oggi/"
+            },
+            {
+              "label": "Morgins-Châtel (Pas de Morgins)",
+              "value": "0,2 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/morgins-chatel/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Route de la Lienne <-> Route Du Simplon Incrocio Route Du Simplon Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-03-16T06:00:00.000Z"
+            },
+            {
+              "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 15 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Croix E Svincolo autostradale Martigny-Expo Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-09-10T03:58:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-09-17T18:00:00.000Z"
+            },
+            {
+              "label": "Susten <-> Leukerbad tra Luogo Susten E Luogo Leukerbad Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 8 ottobre 2026",
+              "date": "2026-09-24T13:35:00.000Z"
+            },
+            {
+              "label": "Leuk <-> Jeizinen tra Luogo Leuk E Luogo Erschmatt Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-09-24T13:42:00.000Z"
+            },
+            {
+              "label": "Brig <-> Blatten tra Luogo Naters E Luogo Blatten Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Chiusura",
+              "detail": "fine prevista: 8 ottobre 2026",
+              "date": "2026-09-24T13:46:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Ferrovia del Sempione, Borghi: “Non può chiudere per sei mesi nel 2028”",
+              "date": "2026-10-06T15:44:53.000Z",
+              "url": "https://www.ossolanews.it/2026/10/06/leggi-notizia/argomenti/politica-27/articolo/ferrovia-del-sempione-borghi-non-puo-chiudere-per-sei-mesi-nel-2028.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-05T13:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-7ede9ff51a.html"
+            },
+            {
+              "label": "Controlli della velocità in Ticino: ecco dove saranno gli autovelox dal 5 all’11 ottobre",
+              "date": "2026-10-05T07:01:46.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-ticino-ecco-dove-saranno-gli-autovelox-dal-5-all11-ottobre.html"
+            },
+            {
+              "label": "Anas, un nuovo bando per la messa in sicurezza dei versanti rocciosi sulla rete stradale",
+              "date": "2026-10-05T06:23:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-un-nuovo-bando-per-la-messa-in-sicurezza-dei-versanti-rocciosi-sulla-rete-stradale-2.html"
+            },
+            {
+              "label": "A26, chiusura notturna degli svincoli di Baveno",
+              "date": "2026-10-02T06:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/a26-chiusura-notturna-degli-svincoli-di-baveno-1.html"
+            },
+            {
+              "label": "Treni, sciopero il 2 ottobre: possibili disagi anche nel Novarese e nel Vco",
+              "date": "2026-10-01T10:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/01/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/treni-sciopero-il-2-ottobre-possibili-disagi-anche-nel-novarese-e-nel-vco.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Trasporti pubblici in Vallese: zone, tariffe e abbonamenti",
+          "url": "/articoli-svizzera/trasporti-pubblici-vallese-guida/",
+          "excerpt": "Guida pratica al sistema di mobilità vallesano: come funzionano zone e abbonamenti per pendolari e residenti nel rispetto delle direttive federali.",
+          "date": "2026-09-06T11:54:06.584Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Francia",
+          "url": "/traffico-dogane/vallese-francia/"
+        },
+        {
+          "label": "Attese ai valichi verso Italia",
+          "url": "/traffico-dogane/vallese-italia/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "VS",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In Valais, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Italy and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Sempione (Iselle-Gondo), week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "22",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "27",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/sempione/today/"
+            },
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0.1 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
+            },
+            {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0.1 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/le-chatelard-vallorcine/today/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0.1 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/saint-gingolph/today/"
+            },
+            {
+              "label": "Morgins-Châtel (Pas de Morgins)",
+              "value": "0.2 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/morgins-chatel/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Route de la Lienne <-> Route Du Simplon Incrocio Route Du Simplon Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-03-16T06:00:00.000Z"
+            },
+            {
+              "label": "Monthey <-> Champéry tra Luogo Troistorrents E Luogo Champéry Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 20 November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 15 November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Croix E Svincolo autostradale Martigny-Expo Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-09-10T03:58:00.000Z"
+            },
+            {
+              "label": "A21 Diramazione Gran San Bernardo <-> Martigny-Croix tra Svincolo autostradale Martigny-Expo E Svincolo autostradale Martigny-Croix Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-09-17T18:00:00.000Z"
+            },
+            {
+              "label": "Susten <-> Leukerbad tra Luogo Susten E Luogo Leukerbad Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 8 October 2026",
+              "date": "2026-09-24T13:35:00.000Z"
+            },
+            {
+              "label": "Leuk <-> Jeizinen tra Luogo Leuk E Luogo Erschmatt Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-09-24T13:42:00.000Z"
+            },
+            {
+              "label": "Brig <-> Blatten tra Luogo Naters E Luogo Blatten Situazione: chiusa Causa: lavori di manutenzione",
+              "value": "Closure",
+              "detail": "until 8 October 2026",
+              "date": "2026-09-24T13:46:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Ferrovia del Sempione, Borghi: “Non può chiudere per sei mesi nel 2028”",
+              "date": "2026-10-06T15:44:53.000Z",
+              "url": "https://www.ossolanews.it/2026/10/06/leggi-notizia/argomenti/politica-27/articolo/ferrovia-del-sempione-borghi-non-puo-chiudere-per-sei-mesi-nel-2028.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-05T13:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-7ede9ff51a.html"
+            },
+            {
+              "label": "Controlli della velocità in Ticino: ecco dove saranno gli autovelox dal 5 all’11 ottobre",
+              "date": "2026-10-05T07:01:46.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-ticino-ecco-dove-saranno-gli-autovelox-dal-5-all11-ottobre.html"
+            },
+            {
+              "label": "Anas, un nuovo bando per la messa in sicurezza dei versanti rocciosi sulla rete stradale",
+              "date": "2026-10-05T06:23:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-un-nuovo-bando-per-la-messa-in-sicurezza-dei-versanti-rocciosi-sulla-rete-stradale-2.html"
+            },
+            {
+              "label": "A26, chiusura notturna degli svincoli di Baveno",
+              "date": "2026-10-02T06:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/a26-chiusura-notturna-degli-svincoli-di-baveno-1.html"
+            },
+            {
+              "label": "Treni, sciopero il 2 ottobre: possibili disagi anche nel Novarese e nel Vco",
+              "date": "2026-10-01T10:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/01/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/treni-sciopero-il-2-ottobre-possibili-disagi-anche-nel-novarese-e-nel-vco.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Public transport in Valais: zones, fares and season tickets",
+          "url": "/en/swiss-articles/public-transport-valais-guide/",
+          "excerpt": "Practical guide to the Valais mobility system: how commuter and resident zones and passes work in compliance with federal directives.",
+          "date": "2026-09-06T11:54:06.584Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Border waits towards France",
+          "url": "/en/border-wait/vallese-francia/"
+        },
+        {
+          "label": "Border waits towards Italy",
+          "url": "/en/border-wait/vallese-italia/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "VS",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Wallis bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Italien und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Sempione (Iselle-Gondo), Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "22",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "27",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/sempione/heute/"
+            },
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0.1 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
+            },
+            {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0.1 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/le-chatelard-vallorcine/heute/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0.1 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
+            },
+            {
+              "label": "Morgins-Châtel (Pas de Morgins)",
+              "value": "0.2 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/morgins-chatel/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Route de la Lienne <-> Route Du Simplon Kreuzung Route Du Simplon Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-03-16T06:00:00.000Z"
+            },
+            {
+              "label": "Monthey <-> Champéry zwischen Ortschaft Troistorrents und Ortschaft Champéry Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 20. November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 15. November 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "A21 Verzweigung Gd-St-Bernard <-> Martigny-Croix zwischen Anschluss Martigny-Croix und Anschluss Martigny-Expo Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-09-10T03:58:00.000Z"
+            },
+            {
+              "label": "A21 Verzweigung Gd-St-Bernard <-> Martigny-Croix zwischen Anschluss Martigny-Expo und Anschluss Martigny-Croix Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-09-17T18:00:00.000Z"
+            },
+            {
+              "label": "Susten <-> Leukerbad zwischen Ortschaft Susten und Ortschaft Leukerbad Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 8. Oktober 2026",
+              "date": "2026-09-24T13:35:00.000Z"
+            },
+            {
+              "label": "Leuk <-> Jeizinen zwischen Ortschaft Leuk und Ortschaft Erschmatt Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-09-24T13:42:00.000Z"
+            },
+            {
+              "label": "Brig <-> Blatten zwischen Ortschaft Naters und Ortschaft Blatten Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
+              "value": "Sperrung",
+              "detail": "bis 8. Oktober 2026",
+              "date": "2026-09-24T13:46:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Ferrovia del Sempione, Borghi: “Non può chiudere per sei mesi nel 2028”",
+              "date": "2026-10-06T15:44:53.000Z",
+              "url": "https://www.ossolanews.it/2026/10/06/leggi-notizia/argomenti/politica-27/articolo/ferrovia-del-sempione-borghi-non-puo-chiudere-per-sei-mesi-nel-2028.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-05T13:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-7ede9ff51a.html"
+            },
+            {
+              "label": "Controlli della velocità in Ticino: ecco dove saranno gli autovelox dal 5 all’11 ottobre",
+              "date": "2026-10-05T07:01:46.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-ticino-ecco-dove-saranno-gli-autovelox-dal-5-all11-ottobre.html"
+            },
+            {
+              "label": "Anas, un nuovo bando per la messa in sicurezza dei versanti rocciosi sulla rete stradale",
+              "date": "2026-10-05T06:23:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-un-nuovo-bando-per-la-messa-in-sicurezza-dei-versanti-rocciosi-sulla-rete-stradale-2.html"
+            },
+            {
+              "label": "A26, chiusura notturna degli svincoli di Baveno",
+              "date": "2026-10-02T06:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/a26-chiusura-notturna-degli-svincoli-di-baveno-1.html"
+            },
+            {
+              "label": "Treni, sciopero il 2 ottobre: possibili disagi anche nel Novarese e nel Vco",
+              "date": "2026-10-01T10:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/01/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/treni-sciopero-il-2-ottobre-possibili-disagi-anche-nel-novarese-e-nel-vco.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Öffentlicher Verkehr im Wallis: Zonen, Tarife und Abonnements",
+          "url": "/de/schweiz-artikel/oeffentlicher-verkehr-wallis-leitfaden/",
+          "excerpt": "Praktischer Leitfaden zum Walliser Mobilitätssystem: So funktionieren Zonen und Abos für Pendler und Anwohner unter Beachtung der Bundesrichtlinien.",
+          "date": "2026-09-06T11:54:06.584Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Frankreich",
+          "url": "/de/wartezeit-grenze/vallese-francia/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze Richtung Italien",
+          "url": "/de/wartezeit-grenze/vallese-italia/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "VS",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "En Valais, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Italie et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Sempione (Iselle-Gondo), semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "22",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "27",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
+            },
+            {
+              "label": "Traforo del Gran San Bernardo",
+              "value": "0,1 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
+            },
+            {
+              "label": "Le Châtelard-Vallorcine",
+              "value": "0,1 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/le-chatelard-vallorcine/aujourd-hui/"
+            },
+            {
+              "label": "Saint-Gingolph",
+              "value": "0,1 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
+            },
+            {
+              "label": "Morgins-Châtel (Pas de Morgins)",
+              "value": "0,2 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/morgins-chatel/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Route de la Lienne <-> Route Du Simplon Carrefour Route Du Simplon Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-03-16T06:00:00.000Z"
+            },
+            {
+              "label": "Monthey <-> Champéry entre Localité Troistorrents et Localité Champéry Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "Epinassey, Saint-Maurice <-> La Rasse, Evionnaz Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 15 novembre 2026",
+              "date": "2026-08-31T05:00:00.000Z"
+            },
+            {
+              "label": "A21 Echangeur Gd-St-Bernard <-> Martigny-Croix entre Jonction autoroutière Martigny-Croix et Jonction autoroutière Martigny-Expo Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-09-10T03:58:00.000Z"
+            },
+            {
+              "label": "A21 Echangeur Gd-St-Bernard <-> Martigny-Croix entre Jonction autoroutière Martigny-Expo et Jonction autoroutière Martigny-Croix Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-09-17T18:00:00.000Z"
+            },
+            {
+              "label": "Susten <-> Loèche-les-Bains entre Localité Susten et Localité Loèche-les-Bains Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 8 octobre 2026",
+              "date": "2026-09-24T13:35:00.000Z"
+            },
+            {
+              "label": "Loèche <-> Jeizinen entre Localité Loèche et Localité Erschmatt Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-09-24T13:42:00.000Z"
+            },
+            {
+              "label": "Brigue <-> Blatten entre Localité Naters et Localité Blatten Situation: fermé Raison: travaux de maintenance",
+              "value": "Fermeture",
+              "detail": "jusqu’au 8 octobre 2026",
+              "date": "2026-09-24T13:46:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Ferrovia del Sempione, Borghi: “Non può chiudere per sei mesi nel 2028”",
+              "date": "2026-10-06T15:44:53.000Z",
+              "url": "https://www.ossolanews.it/2026/10/06/leggi-notizia/argomenti/politica-27/articolo/ferrovia-del-sempione-borghi-non-puo-chiudere-per-sei-mesi-nel-2028.html"
+            },
+            {
+              "label": "Autostrada A26, i cantieri attivi questa settimana",
+              "date": "2026-10-05T13:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/autostrada-a26-i-cantieri-attivi-questa-settimana-7ede9ff51a.html"
+            },
+            {
+              "label": "Controlli della velocità in Ticino: ecco dove saranno gli autovelox dal 5 all’11 ottobre",
+              "date": "2026-10-05T07:01:46.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/controlli-della-velocita-in-ticino-ecco-dove-saranno-gli-autovelox-dal-5-all11-ottobre.html"
+            },
+            {
+              "label": "Anas, un nuovo bando per la messa in sicurezza dei versanti rocciosi sulla rete stradale",
+              "date": "2026-10-05T06:23:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/05/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/anas-un-nuovo-bando-per-la-messa-in-sicurezza-dei-versanti-rocciosi-sulla-rete-stradale-2.html"
+            },
+            {
+              "label": "A26, chiusura notturna degli svincoli di Baveno",
+              "date": "2026-10-02T06:30:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/02/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/a26-chiusura-notturna-degli-svincoli-di-baveno-1.html"
+            },
+            {
+              "label": "Treni, sciopero il 2 ottobre: possibili disagi anche nel Novarese e nel Vco",
+              "date": "2026-10-01T10:02:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/01/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/treni-sciopero-il-2-ottobre-possibili-disagi-anche-nel-novarese-e-nel-vco.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Transports publics en Valais : zones, tarifs et abonnements",
+          "url": "/fr/articles-suisse/transports-publics-valais-guide/",
+          "excerpt": "Guide pratique du système de mobilité valaisan : comment fonctionnent les zones et les abonnements pour les navetteurs et les résidents conformément aux directives fédérales.",
+          "date": "2026-09-06T11:54:06.584Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Attente aux frontières vers France",
+          "url": "/fr/temps-attente-douane/vallese-francia/"
+        },
+        {
+          "label": "Attente aux frontières vers Italie",
+          "url": "/fr/temps-attente-douane/vallese-italia/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}
