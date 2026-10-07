@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948281/fondazione-vittime-franchi-crans-montana-istituita-richieste-azione-ricevuto-settantina": {
-    "articleId": "beloved-aiuto-vittime-crans-montana",
-    "ts": "2026-09-06T07:55:34.365Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/dal-mondo/cronaca/1948293/aeroporti-indonesia-vulcano-voli-passeggeri": {
     "articleId": "eruzione-vulcano-aeroporti-indonesia",
     "ts": "2026-09-06T10:56:39.482Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
     "articleId": "carriere-politica-economica",
     "ts": "2026-10-07T22:29:39.705Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1955074/l-avvocato-sotto-non-troppa-sorveglianza": {
+    "articleId": "lavaggio-denaro-avvocatura",
+    "ts": "2026-10-07T23:29:16.447Z",
     "keyForm": 2
   }
 }
