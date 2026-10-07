@@ -22,7 +22,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { copyFileSync, mkdtempSync, writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 // Non `rmSync` diretta: git scrive in `.git/` dopo l'uscita del comando e la
 // rimozione alza ENOTEMPTY. Il perche' e la misura stanno nel modulo.
@@ -52,6 +52,8 @@ const JOURNALIST_WORKFLOW = path.resolve(HERE, '../../.github/workflows/publish-
 const BOOKKEEPING = 'data/topic-candidates-evergreen-rejected.json';
 const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
 const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
+const GENERATED_IMAGE_REGISTRY = 'data/generated-image-registry.json';
+const GENERATED_IMAGE_REGISTRY_RESOLVER = path.resolve(HERE, '../../scripts/ci/merge-generated-image-registry.mjs');
 
 const GIT_ENV = {
   ...process.env,
@@ -405,6 +407,69 @@ test('generate-article.yml declares the journalist image catalog as bookkeeping'
   // rewrite that silently drops one would reopen issue #76 without failing here.
   assert.ok(allowlist.includes(BOOKKEEPING), `${BOOKKEEPING} must stay on the allowlist (issue #76)`);
   assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
+});
+
+function generatedImageRegistry(assetIds) {
+  const assets = assetIds.map((assetId) => ({ assetId }));
+  return `${JSON.stringify({ schema: 1, assetCount: assets.length, assets }, null, 2)}\n`;
+}
+
+test('il ledger delle immagini generate sopravvive al rebase concorrente (#2421)', () => {
+  const workflow = readFileSync(WORKFLOW, 'utf8');
+  const allowlist = allowlistFromWorkflow(workflow);
+  assert.ok(
+    allowlist.includes(GENERATED_IMAGE_REGISTRY),
+    `${GENERATED_IMAGE_REGISTRY} must be declared so the helper can finish the rebase before its dedicated merge`,
+  );
+  assert.match(workflow, /registry_snapshot="\$RUNNER_TEMP\/generated-image-registry-replayed\.json"/);
+  assert.match(workflow, /cp data\/generated-image-registry\.json "\$registry_snapshot"/);
+  assert.match(
+    workflow,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_snapshot"/,
+  );
+
+  const w = makeWorld();
+  try {
+    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry(['asset-base']));
+    commitAll(w.work, 'seed generated image registry');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    landUpstream(w, [[
+      GENERATED_IMAGE_REGISTRY,
+      generatedImageRegistry(['asset-base', 'asset-upstream']),
+      'concurrent run registers its generated cover',
+    ]]);
+
+    write(w.work, GENERATED_IMAGE_REGISTRY, generatedImageRegistry(['asset-base', 'asset-replayed']));
+    write(w.work, 'content/blog-body/it/articolo-con-immagine.ts', 'export const image = true\n');
+    const snapshot = path.join(w.root, 'generated-image-registry-replayed.json');
+    copyFileSync(path.join(w.work, GENERATED_IMAGE_REGISTRY), snapshot);
+    commitAll(w.work, 'Generate blog article with generated cover');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, `il conflitto del ledger non deve buttare via l'articolo:\n${out}`);
+
+    execFileSync('node', [GENERATED_IMAGE_REGISTRY_RESOLVER, GENERATED_IMAGE_REGISTRY, snapshot], {
+      cwd: w.work,
+      env: GIT_ENV,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    git(w.work, 'add', '--', GENERATED_IMAGE_REGISTRY);
+    git(w.work, 'commit', '-q', '--amend', '--no-edit');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${GENERATED_IMAGE_REGISTRY}`));
+    assert.deepEqual(merged.assets.map((asset) => asset.assetId), [
+      'asset-base', 'asset-upstream', 'asset-replayed',
+    ]);
+    assert.ok(
+      existsSync(path.join(w.work, 'content/blog-body/it/articolo-con-immagine.ts')),
+      'the article body must survive the same rebase that merges its image record',
+    );
+  } finally {
+    w.cleanup();
+  }
 });
 
 test('generate-article.yml declares every sourceUrlsFile/sourceQuotaFile ledger as bookkeeping (#496)', () => {
