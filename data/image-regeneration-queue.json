@@ -444,12 +444,12 @@
     },
     {
       "articleId": "premi-malattia-soletta-2027",
-      "title": "Canton Soletta: premi della cassa malati +6% nel 2027",
+      "title": "Premi cassa malati a Soletta: +6% nel 2027",
       "fallbackImage": "/images/blog/premi-cassa-malati-lamal-2026-canton-zurigo.webp",
       "reason": "All image providers failed for article-premi-malattia-soletta-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
       "status": "queued",
       "requestedAt": "2026-10-07T10:54:53.704Z",
-      "lastFailureAt": "2026-10-07T10:54:53.704Z"
+      "lastFailureAt": "2026-10-07T11:11:51.126Z"
     },
     {
       "articleId": "aggressione-van-villa-olmo",
