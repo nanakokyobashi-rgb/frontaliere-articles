@@ -163,6 +163,7 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
     'scripts/ci/lib',
     'scripts/ci/report-rate-limit-budget.mjs',
     'generator/scripts/load-rc-env.mjs',
+    'generator/scripts/lib/source-copy-guard.mjs',
     'generator/scripts/lib/google-service-account-token.mjs',
   ]);
   // Every module the evaluator imports must be inside the sparse checkout,
