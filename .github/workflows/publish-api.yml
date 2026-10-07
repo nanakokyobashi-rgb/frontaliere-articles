@@ -761,6 +761,53 @@ jobs:
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
           fi
 
+      # A site-side licence-audit replacement keeps the article URL stable but
+      # changes the bytes at that URL. The corpus is a second publisher of the
+      # same CDN key, so a later corpus publish must carry the exact hero and
+      # thumbnail bytes or it could put the old cover back over the audited one.
+      # This diff-scoped upload is intentionally separate from fast-publish:
+      # public-only cover sync PRs do not touch content/** and therefore do not
+      # enter that workflow's push trigger.
+      - name: Publish changed blog cover bytes to the CDN
+        if: steps.deploy.outcome == 'success' && github.event_name == 'push'
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; then
+            echo 'No push base available; no changed blog cover upload.'
+            exit 0
+          fi
+          mapfile -t changed_files < <(
+            git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" -- \
+              'public/images/blog/*.webp' \
+              'public/images/blog/thumbnails/*.webp'
+          )
+          if [ "${#changed_files[@]}" -eq 0 ]; then
+            echo 'No changed blog cover bytes in this push.'
+            exit 0
+          fi
+          for required in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
+            if [ -z "${!required:-}" ]; then
+              echo "::error::$required is required to publish changed blog cover bytes"
+              exit 1
+            fi
+          done
+          urls=()
+          for file in "${changed_files[@]}"; do
+            [ -f "$file" ] || { echo "::error::changed cover is not a file: $file"; exit 1; }
+            key="${file#public/}"
+            output="$(bash scripts/lib/upload-cdn-file.sh "$file" "$key" 'public,max-age=86400')"
+            printf '%s\n' "$output"
+            printf '%s\n' "$output" | grep -q '✅ uploaded' || {
+              echo "::error::CDN upload did not succeed for $file"
+              exit 1
+            }
+            urls+=("https://cdn.frontaliereticino.ch/$key")
+          done
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
       # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:
       # `edge/sections/registry.json` su R2, che il Worker del sito applica, e
