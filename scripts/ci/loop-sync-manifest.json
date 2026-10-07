@@ -5519,7 +5519,7 @@
       "reason": "Guard del trasporto corpus che confronta gli hash del sito registrati nelle PR aperte con lo stato corrente: conserva una PR invariata e chiude/commenta quella superata prima di aprirne una nuova. Il trasporto non ha un consumer gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "553b082fa92f2807",
+        "corpus": "e17186a237343c5a",
         "alignedAt": "2026-10-07"
       }
     },
