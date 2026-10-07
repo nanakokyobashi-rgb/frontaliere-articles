@@ -12,16 +12,27 @@
 const RESERVED_PUBLISHED_SLUGS = new Set(['null', 'undefined']);
 
 const ARTICLE_SERVICE_MARKER_RULES = Object.freeze([
-  Object.freeze({ name: 'abort', pattern: /(?:^|-)abort(?:-|$)/i }),
-  Object.freeze({ name: 'topical-relevance', pattern: /(?:^|-)topical[-_]relevance(?:-|$)/i }),
-  Object.freeze({ name: 'abort_topical_relevance', pattern: /(?:^|-)abort[-_]topical[-_]relevance(?:-|$)/i }),
-  Object.freeze({ name: 'reason', pattern: /(?:^|-)reason(?:-|$)/i }),
+  // These values are emitted by the topic-gate branch as prefixes. Matching a
+  // segment named `abort` or `topical-relevance` in the middle of an ordinary
+  // slug would reserve legitimate article words for no publish-boundary
+  // reason.
+  Object.freeze({ name: 'abort', pattern: /^abort(?:-|$)/i }),
+  Object.freeze({
+    name: 'topical-relevance',
+    pattern: /^(?:topical[-_]relevance|abort[-_]topical[-_]relevance)(?:-|$)/i,
+  }),
+  Object.freeze({ name: 'abort_topical_relevance', pattern: /^abort[-_]topical[-_]relevance(?:-|$)/i }),
+  // `reason` by itself is the topic-gate field. Keep the one known leaked
+  // rejection form, but do not reserve normal prose such as
+  // `reason-for-moving-to-ticino`.
+  Object.freeze({ name: 'reason', pattern: /(?:^|-)reason(?:$|-(?:for-)?(?:reject(?:ion)?|abort|off-topic))/i }),
 ]);
 
 /**
  * Return the topic-gate service markers found in one identity value.
  * Underscores are normalized only for matching, so both the JSON field name
- * (`abort_topical_relevance`) and its leaked URL form are covered.
+ * (`abort_topical_relevance`) and its leaked URL form are covered. The
+ * context-sensitive rules deliberately leave ordinary slug words alone.
  */
 export function findPublishedIdentityServiceMarkers(value) {
   if (typeof value !== 'string') return [];

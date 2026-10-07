@@ -276,7 +276,8 @@ test('il classificatore del topic gate distingue i marker di servizio dagli slug
   );
   assert.deepEqual(findPublishedIdentityServiceMarkers('abort_saint-nicolas-non-frontaliero'), ['abort']);
   assert.deepEqual(findPublishedIdentityServiceMarkers('news-reason-for-rejection'), ['reason']);
-  for (const slug of ['aborted-canton-health', 'reasonable-tax-guide', 'topical-relevant-ticino']) {
+  assert.deepEqual(findPublishedIdentityServiceMarkers('reason-for-moving-to-ticino'), []);
+  for (const slug of ['aborted-canton-health', 'reasonable-tax-guide', 'topical-relevant-ticino', 'news-abort-policy']) {
     assert.deepEqual(findPublishedIdentityServiceMarkers(slug), [], `falso positivo su ${slug}`);
   }
 });
@@ -337,6 +338,20 @@ test('derive: un marker di servizio nell\'identita\' blocca la scrittura', () =>
       /article-service-marker/,
     );
   }
+});
+
+test('derive: un marker derivato dal titolo tradotto blocca la scrittura', () => {
+  const data = articleFixture({
+    it: 'terzo-pilastro-3a-canton-lucerna',
+    en: 'terzo-pilastro-3a-canton-lucerna',
+    de: 'saeule-3a-luzern',
+    fr: 'pilier-3a-lucerne',
+  });
+  data.content.en.title = 'Abort topical relevance: source rejected';
+  assert.throws(
+    () => freshGuard().deriveAndSanitizeArticleSlugs(data),
+    /article-service-marker/,
+  );
 });
 
 test('derive: il resto del segnaposto vince sul titolo — il modello uno slug lo aveva prodotto', () => {

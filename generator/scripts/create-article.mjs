@@ -18081,6 +18081,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // eventuale `articleType` arrivato dal payload del modello.
   data.articleType = registryArticleTypeForRun(RUN_REPORT.selectedArticleType, url);
   data.canton = registryCantonsOrNone(data, url);
+  // The primary path writes directly and does not pass through
+  // registerArticleFiles(); this is the last identity check after every slug
+  // derivation and immediately before the first corpus write.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
@@ -18783,6 +18787,10 @@ export function deriveAndSanitizeArticleSlugs(data) {
     onEvent: reportSlugI18nEvent,
   });
   data._slugI18nFallbacks = slugI18n.stillItalian;
+  // A translated title can create the final localized slug after the
+  // provisional identity check above. Re-run the service-marker guard on that
+  // value before returning it to a secondary producer.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   return data.slugs;
 }
 
@@ -18995,6 +19003,9 @@ export async function registerArticleFiles(data, opts = {}) {
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.
   data.articleType = resolveArticleType(data, opts);
   data.canton = registryCantonsOrNone(data, data.sourceUrl || '');
+  // Secondary producers may have derived localized slugs above. Keep the
+  // publish-boundary check immediately adjacent to their write lock too.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
