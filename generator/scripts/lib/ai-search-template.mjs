@@ -56,61 +56,6 @@ export function getKeyFactsHeading(locale) {
   return KEY_FACTS_MARKERS_BY_LOCALE[locale] ?? KEY_FACTS_MARKERS_BY_LOCALE.it;
 }
 
-function isHeadingLine(line, heading) {
-  return typeof line === 'string' && line.trim().toLocaleLowerCase() === heading.toLocaleLowerCase();
-}
-
-function isTopLevelHeading(line) {
-  return typeof line === 'string' && /^##(?!#)\s+\S/.test(line.trim());
-}
-
-const KEY_FACT_BULLET_RX = /^\s*-\s+\S/;
-
-/**
- * Finds the generated shape in which a TL;DR is followed by two blank lines
- * and a key-facts list, but the localized key-facts heading is missing.
- *
- * This deliberately reports the defect instead of repairing it. The writer
- * must reject the payload so a future transformation cannot leave a list
- * detached from its section title.
- *
- * @param {string} body1
- * @param {'it'|'en'|'de'|'fr'} [locale='it']
- * @returns {{heading: string, lineIndex: number, bulletCount: number}|null}
- */
-export function findOrphanedKeyFactsList(body1, locale = 'it') {
-  if (typeof body1 !== 'string' || body1.length === 0) return null;
-
-  const lines = body1.split('\n');
-  const tldrHeading = getTldrHeading(locale);
-  const keyFactsHeading = getKeyFactsHeading(locale);
-  const tldrIndex = lines.findIndex((line) => isHeadingLine(line, tldrHeading));
-  if (tldrIndex < 0) return null;
-  // A body that contains the canonical section elsewhere is not part of this
-  // stock: its key-facts section is present and remains covered by the normal
-  // specificity gate. The issue is specifically a body with no such heading.
-  if (lines.some((line) => isHeadingLine(line, keyFactsHeading))) return null;
-
-  // The key-facts section is part of the opening AI Search block. Once the
-  // next H2 starts, a later list belongs to editorial prose, not this block.
-  for (let index = tldrIndex + 1; index < lines.length; index += 1) {
-    if (isTopLevelHeading(lines[index])) return null;
-    if (
-      lines[index - 1]?.trim() === ''
-      && lines[index - 2]?.trim() === ''
-      && KEY_FACT_BULLET_RX.test(lines[index])
-    ) {
-      let bulletCount = 0;
-      for (let next = index; next < lines.length && KEY_FACT_BULLET_RX.test(lines[next]); next += 1) {
-        bulletCount += 1;
-      }
-      return { heading: keyFactsHeading, lineIndex: index, bulletCount };
-    }
-  }
-
-  return null;
-}
-
 /**
  * Detects whether a body1 string already contains the AI-search optimization
  * blocks. When a locale is supplied, both markers must belong to that locale;
@@ -291,7 +236,6 @@ export default {
   MAX_KEY_FACTS,
   getTldrHeading,
   getKeyFactsHeading,
-  findOrphanedKeyFactsList,
   hasAiSearchOptimization,
   buildAiSearchMarkdown,
   prependAiSearchToBody1,

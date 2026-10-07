@@ -370,9 +370,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d57065848ac1a2b0",
-        "corpus": "d57065848ac1a2b0",
-        "alignedAt": "2026-10-07"
+        "site": "9f50ff6b8bdb5b52",
+        "corpus": "9f50ff6b8bdb5b52",
+        "alignedAt": "2026-09-26"
       }
     },
     {
@@ -2273,11 +2273,10 @@
     {
       "path": "generator/scripts/lib/ai-search-template.mjs",
       "sitePath": "scripts/lib/ai-search-template.mjs",
-      "mode": "adapted",
-      "reason": "Il contratto generale AI Search segue il sito (limite di 8 fatti, marker per locale e backfill locale-aware). Resta qui `findOrphanedKeyFactsList` perché è consumato dal `generator/scripts/create-article.mjs` adattato del corpus e dai relativi scanner/test corpus-only; il generatore del sito ha un percorso e un contratto diversi e non importa quel guard. Copiare la funzione nel sito senza il consumer non porterebbe una correzione osservabile.",
+      "mode": "identical",
       "baseline": {
         "site": "674ba7bd2445738b",
-        "corpus": "476ac834dd2b71fe",
+        "corpus": "674ba7bd2445738b",
         "alignedAt": "2026-10-07"
       }
     },
@@ -2544,8 +2543,8 @@
       "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "261595c0ccfc778b",
-        "alignedAt": "2026-09-12"
+        "corpus": "f7849427cf4d01c7",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2938,8 +2937,8 @@
       "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "d27fde4ea91a493a",
-        "alignedAt": "2026-09-12"
+        "corpus": "66cbb05cae7bad72",
+        "alignedAt": "2026-10-07"
       }
     },
     {
