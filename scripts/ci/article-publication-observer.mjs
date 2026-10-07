@@ -58,7 +58,9 @@ export function parseChangedBodyLog(log) {
     if (!current || !info || latest.has(`${info.section}:${info.articleId}`)) continue;
     latest.set(`${info.section}:${info.articleId}`, { ...info, ...current });
   }
-  return [...latest.values()].sort((a, b) => a.articleId.localeCompare(b.articleId));
+  // Most recent first: the page cap must cut the oldest changes, not the end of
+  // the alphabet (an alphabetical order would read the same pages every day).
+  return [...latest.values()].sort((a, b) => b.changedAt - a.changedAt || a.articleId.localeCompare(b.articleId));
 }
 
 function sourceBlock(source, articleId) {
@@ -126,10 +128,33 @@ export function parsePageObservation(html, status = 200) {
   return { status, modifiedAt, ogImage: extractOgImage(html), rawHtml: String(html) };
 }
 
-function parseDate(value) {
-  if (!value) return null;
-  const parsed = Date.parse(String(value).length === 10 ? `${value}T00:00:00Z` : value);
-  return Number.isFinite(parsed) ? parsed : null;
+/**
+ * The registry date a published page has to have caught up with: `updatedAt`
+ * when the article was revised, its publication `date` otherwise. Only 311 of
+ * the 4,209 frontaliere entries carry `updatedAt` (measured 2026-10-07), so an
+ * entry without it is compared through `date`, never reported as lagging.
+ */
+export function registryReferenceDate(target) {
+  return target?.sourceUpdatedAt || target?.registryDate || null;
+}
+
+/**
+ * true/false when the two dates can be compared, null when they cannot.
+ * A date-only registry value is rendered as local midnight (measured:
+ * `2026-09-25` → `2026-09-25T00:00:00+01:00`), so the page is current from the
+ * earliest instant that day starts in Europe/Zurich. A full timestamp is
+ * written by the renderer in whole seconds (`03:49:10.833Z` → `03:49:11`).
+ */
+export function pageHasCaughtUp(pageModifiedAt, registryDate) {
+  const pageMs = Date.parse(String(pageModifiedAt ?? ''));
+  if (!Number.isFinite(pageMs) || !registryDate) return null;
+  const registry = String(registryDate);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(registry)) {
+    const dayStartMs = Date.parse(`${registry}T00:00:00+02:00`);
+    return Number.isFinite(dayStartMs) ? pageMs >= dayStartMs : null;
+  }
+  const registryMs = Date.parse(registry);
+  return Number.isFinite(registryMs) ? pageMs >= Math.floor(registryMs / 1000) * 1000 : null;
 }
 
 export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEFAULT_STALE_MINUTES }) {
@@ -143,18 +168,24 @@ export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEF
     return { lagging: true, degraded: false, reason: `HTTP ${page.status}` };
   }
 
-  const pageDate = parseDate(page.modifiedAt);
-  const registryDate = parseDate(target.sourceUpdatedAt);
-  const lagging = pageDate === null || registryDate === null || pageDate < registryDate;
-  const reason = pageDate === null || registryDate === null
-    ? 'pagina senza dateModified confrontabile'
-    : lagging
-      ? `dateModified ${page.modifiedAt} < updatedAt ${target.sourceUpdatedAt}`
-      : 'dateModified current';
+  const reference = registryReferenceDate(target);
+  if (!reference) {
+    // Nothing to compare with is not a lag: the page answered and the image
+    // signal above still applies.
+    return { lagging: false, degraded, reason: 'registro senza data: confronto saltato', degradationReason };
+  }
+  if (!page.modifiedAt) {
+    return { lagging: true, degraded, reason: 'pagina senza dateModified', degradationReason };
+  }
+  const caughtUp = pageHasCaughtUp(page.modifiedAt, reference);
+  if (caughtUp === null) {
+    return { lagging: false, degraded, reason: `date non confrontabili (${page.modifiedAt} / ${reference})`, degradationReason };
+  }
+  const field = target.sourceUpdatedAt ? 'updatedAt' : 'date';
   return {
-    lagging,
+    lagging: !caughtUp,
     degraded,
-    reason,
+    reason: caughtUp ? 'dateModified current' : `dateModified ${page.modifiedAt} < ${field} ${reference}`,
     degradationReason,
   };
 }
@@ -204,6 +235,7 @@ export async function observePublicationLag({
     lagging: checked.filter((entry) => entry.lagging),
     degraded: checked.filter((entry) => entry.degraded),
     capped: targets.length > maxPages,
+    unread: Math.max(0, targets.length - maxPages),
   };
 }
 
@@ -212,7 +244,7 @@ export function formatObserverReport(report, { nowMs = Date.now(), skipped = [] 
     `Osservatore pubblicazione articoli — ${new Date(nowMs).toISOString()}`,
     `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; immagini degradate: ${report.degraded.length}; limite: ${DEFAULT_MAX_PAGES}.`,
   ];
-  if (report.capped) lines.push('⚠️ Il limite di 300 pagine ha escluso parte della finestra; il prossimo giro completerà il controllo.');
+  if (report.capped) lines.push(`⚠️ Lette le ${report.checked.length} pagine cambiate più di recente; ${report.unread ?? 'altre'} più vecchie nella finestra non sono state lette in questo giro.`);
   for (const item of report.lagging) {
     const page = item.page.modifiedAt || `HTTP ${item.page.status}`;
     lines.push(`- Ritardo \`${item.target.articleId}\` (${item.target.section}) — commit corpus ${item.target.sourceCommit}; pagina ${page}; ${item.reason}; ${item.target.url}`);
