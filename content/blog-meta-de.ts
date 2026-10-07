@@ -12747,6 +12747,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.notte-bper-gallarate-bancomat.title': 'Geldautomat explodiert: nächtlicher Überfall bei der Bper in Gallarate',
     'blog.article.notte-bper-gallarate-bancomat.excerpt': 'Ein weiterer Geldautomat ist bei der Bper in Gallarate während eines nächtlichen Überfalls in die Luft geflogen: die verfügbare Berichterstattung zu dem Fall.',
     'blog.article.notte-bper-gallarate-bancomat.imageAlt': 'Bankgebäude an einer italienisch-schweizerischen Grenzstrasse bei Nacht',
+    'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, fällt von einer Treppe: schwer ein 79-jähriger',
+    'blog.article.caduta-scala-locate-varesino.excerpt': '## In Kürze - Sturz von einer Treppe in der Via Madonnetta - Ein 79-jähriger Mann stürzte auf einen Bauernhof - Hilfe in rotem Code aktiviert',
+    'blog.article.caduta-scala-locate-varesino.imageAlt': 'Ländliche Umgebung eines Landwirtschaftsbetriebs',
 };
 
 export default blogMetaDe;

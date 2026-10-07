@@ -12749,6 +12749,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.notte-bper-gallarate-bancomat.title': 'Bancomat esploso: colpo notturno alla Bper di Gallarate',
     'blog.article.notte-bper-gallarate-bancomat.excerpt': 'Un altro bancomat è saltato in aria alla Bper di Gallarate durante un colpo notturno: la cronaca disponibile sul caso.',
     'blog.article.notte-bper-gallarate-bancomat.imageAlt': 'Banca in una strada del confine italo-svizzero durante la notte',
+    'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, cade da una scala: grave un 79enne',
+    'blog.article.caduta-scala-locate-varesino.excerpt': '## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un\'azienda agricola - Soccorsi attivati in codice rosso',
+    'blog.article.caduta-scala-locate-varesino.imageAlt': 'Contesto rurale di un\'azienda agricola',
 };
 
 export default blogMetaIt;
