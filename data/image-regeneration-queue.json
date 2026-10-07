@@ -81,6 +81,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:43:54.395Z",
       "lastFailureAt": "2026-10-07T06:43:54.395Z"
+    },
+    {
+      "articleId": "benzina-grigioni-deviazione",
+      "title": "Prezzi benzina in Grigioni: quando conviene deviare",
+      "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:53:48.101Z",
+      "lastFailureAt": "2026-10-07T06:53:48.101Z"
     }
   ]
 }
