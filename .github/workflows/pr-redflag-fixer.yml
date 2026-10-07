@@ -576,6 +576,7 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config (GITHUB_PAT)
+        id: load_rc_env
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -595,10 +596,10 @@ jobs:
       # cascade, coda congelata, routing/re-queue inerti). Alert inline
       # deterministico, dedup sul titolo canonico del monitor daily
       # (gh-pat-expiry-monitor.yml) che resta l'owner dell'auto-close.
-      # GH_TOKEN = GITHUB_TOKEN, NON l'App/PAT (e' la cosa rotta). Scatta solo se
-      # NESSUN token usabile (né App né PAT).
+      # GH_TOKEN = GITHUB_TOKEN, NON l'App/PAT (e' la cosa rotta). Dopo che il
+      # caricamento è stato eseguito, scatta solo se NESSUN token è usabile.
       - name: Alert token-down (dedup, zero-Claude)
-        if: always()
+        if: always() && steps.load_rc_env.outcome != 'skipped'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
