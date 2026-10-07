@@ -8094,7 +8094,7 @@ function monthFormatTag(name) {
 }
 
 /** Build a map of URL → date from <time> elements found near <a> links in the HTML */
-function extractDatesFromHtml(html, baseUrl) {
+function extractDatesFromHtml(html, baseUrl, quirks = {}) {
   const dateMap = new Map();
   // Match <time datetime="..."> anywhere in HTML — build global date context
   const timeRe = /<time[^>]*datetime=["']([^"']+)["'][^>]*>/gi;
@@ -8110,6 +8110,28 @@ function extractDatesFromHtml(html, baseUrl) {
         const d = new Date(dateStr);
         if (!isNaN(d.getTime())) dateMap.set(nearbyLink[1], d);
       } catch { /* skip invalid dates */ }
+    }
+  }
+
+  // Alcune liste istituzionali mettono il link al PDF in fondo alla card,
+  // dopo date d'evento nel corpo (Neuhausen: «28. Februar 2027»). Quando la
+  // fonte dichiara esplicitamente che l'`h4` della sezione è la data della
+  // card, quella è la sola data da associare ai link della sezione.
+  if (quirks?.dateFromSectionHeading === 'h4') {
+    const sectionRe = /<section\b[^>]*>([\s\S]*?)<\/section>/gi;
+    let section;
+    while ((section = sectionRe.exec(html)) !== null) {
+      const dateNode = section[1].match(/<h4\b[^>]*>([\s\S]*?)<\/h4>/i);
+      const hit = parseHeadlineDate(dateNode?.[1] || '');
+      if (!hit) continue;
+      const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>/gi;
+      let link;
+      while ((link = linkRe.exec(section[1])) !== null) {
+        try {
+          const href = new URL(link[1], baseUrl).href;
+          if (href.startsWith('http')) dateMap.set(href, hit.date);
+        } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
+      }
     }
   }
 
@@ -8294,7 +8316,8 @@ function headlineNodeHasHint(node) {
   const value = headlineAttributeValue(node.attrs, 'class')
     + ' ' + headlineAttributeValue(node.attrs, 'id')
     + ' ' + headlineAttributeValue(node.attrs, 'role');
-  return /(?:^|[\s_-])(?:card|teaser|entry|item|tile|meldung|news)(?:$|[\s_-])/i.test(value);
+  return /(?:^|[\s_-])(?:card|teaser|entry|item|tile|meldung|news)(?:$|[\s_-])/i.test(value)
+    || /(?:^|[\s_-])news(?=[A-Z])/u.test(value);
 }
 
 function isHeadlineCardNode(node) {
@@ -8381,9 +8404,9 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
 }
 
 // ── Step 1b: Extract links and headlines from an HTML page ──
-function extractHeadlines(html, baseUrl) {
+function extractHeadlines(html, baseUrl, source = {}) {
   const results = [];
-  const htmlDateMap = extractDatesFromHtml(html, baseUrl);
+  const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
   // Match <a href="...">text</a> — capture href and inner text
   const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m;

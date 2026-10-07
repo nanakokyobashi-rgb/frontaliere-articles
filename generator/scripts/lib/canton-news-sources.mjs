@@ -15,8 +15,10 @@
  *   - `json-entities`      → la lista e' un JSON HTML-escaped nell'attributo
  *                            `data-entities` (iCMS di NW, OW, SH): nessun `<a>`
  *                            nel sorgente, l'estrattore HTML ne trova zero
- *   - `json-api`           → zh.ch (`{news:[{title,date,link,teaserText}]}`) e
+ *   - `json-api`           → zh.ch (`{news:[{title,date,link,teaserText}]}`),
  *                            be.ch (`[{id,publishOn,contentList:[{title,lead}]}]`)
+ *                            e i CMS pubblici di SH (`[{kachellabel,
+ *                            publication_date,permalink}]`)
  *   - `news-sitemap` / `sitemap` → `<url><loc>` con `news:title` e
  *                            `news:publication_date` (o `lastmod`)
  *   - `weekly-sitemap`     → sitemap a periodo (`sitemap_<AAAA><settimana ISO>.xml`
@@ -51,6 +53,11 @@
  *   - `articlePathPattern` → fonti `html-links`: regex su path + query dei link
  *                            che sono articoli; gli altri sono navigazione
  *                            (vedi `filterArticleLinks`)
+ *   - `urlDateFormat: YYMMDD` → fonti `html-links` che codificano la data nel
+ *                            nome del file (per esempio Spitäler SH)
+ *   - `dateFromSectionHeading: h4` → liste HTML in cui la data di pubblicazione
+ *                            è l'`<h4>` della card/sezione; evita di leggere
+ *                            una data d'evento dentro il testo collegato
  *   - `urlReusedForDifferentStories` → la fonte riemette lo stesso URL con
  *                            notizie diverse (ticker, «Kurzmeldungen»),
  *                            ovunque (`true`) o sui path di una regex:
@@ -441,6 +448,29 @@ export function parseDottedDate(raw) {
   return d.getDate() === Number(m[1]) && d.getMonth() === Number(m[2]) - 1 ? d : null;
 }
 
+/** `YYMMDD` nel path di una fonte HTML → Date locale, o null. */
+function parseCompactPathDate(raw) {
+  const m = /^(\d{2})(\d{2})(\d{2})$/u.exec(String(raw || ''));
+  if (!m) return null;
+  const year = 2000 + Number(m[1]);
+  const month = Number(m[2]) - 1;
+  const day = Number(m[3]);
+  const date = new Date(year, month, day);
+  return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day ? date : null;
+}
+
+function applyUrlDateFormat(headlines, source) {
+  if (source?.quirks?.urlDateFormat !== 'YYMMDD') return headlines;
+  return headlines.map((h) => {
+    if (h.date) return h;
+    let pathName = '';
+    try { pathName = new URL(h.url).pathname; } catch { return h; }
+    const match = /(?:^|\/)(\d{6})-[^/]+(?:\.[^/]+)?$/u.exec(pathName);
+    const date = parseCompactPathDate(match?.[1]);
+    return date ? { ...h, date } : h;
+  });
+}
+
 /** `2026-08-28 07:58:00` (spazio, non `T`) → Date locale, o null. */
 function parseSqlDateTime(raw) {
   const m = /^\s*(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?\s*$/.exec(String(raw || ''));
@@ -709,6 +739,23 @@ export function extractJsonApiItems(text, apiUrl) {
         date: validDate(n.publishOn),
         ...(lead ? { lead } : {}),
       });
+    }
+    return dedupByUrl(out);
+  }
+  // CMS pubblico di Schaffhausen (sh.ch e shpol.ch): la pagina pubblica e'
+  // un guscio client-side, ma /CMS/content/list espone gia' la lista di
+  // contenuti pubblicati. Per sh.ch il filtro sull'endpoint seleziona i PDF;
+  // il parser non scarica il file e conserva il permalink HTML, che resta la
+  // pagina-fonte verificabile per il generatore.
+  if (Array.isArray(data) && data.some((n) => n && n.permalink && n.publication_date)) {
+    for (const n of data) {
+      const url = absoluteUrl(n?.permalink, apiUrl);
+      const headline = stripTags(n?.kachellabel ?? n?.listlabel ?? n?.articleHeadline ?? n?.label);
+      if (!url || headline.length < 10) continue;
+      const date = parseDottedDate(n?.publication_date) || validDate(n?.publication_date);
+      if (!date) continue;
+      const lead = stripTags(n?.teaserText ?? n?.lead ?? n?.description);
+      out.push({ url, headline, date, ...(lead ? { lead } : {}) });
     }
     return dedupByUrl(out);
   }
@@ -1110,11 +1157,11 @@ export async function scanCantonSource(source, ctx) {
         // Prima la cornice del sito (menu, header, footer), poi i link che
         // non sono articoli: vedi stripPageChrome e filterArticleLinks.
         const page = stripPageChrome(text);
-        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url), url, source);
+        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url, source), url, source);
         if (page.removed > 0 || links.dropped > 0) {
           notes.push(`navigazione: ${page.removed} aree tolte, ${links.dropped} link non articolo scartati`);
         }
-        return links.headlines;
+        return applyUrlDateFormat(links.headlines, source);
       }
       case 'json-entities':
         return extractJsonEntitiesItems(text, url);
