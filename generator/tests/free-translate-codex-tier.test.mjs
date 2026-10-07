@@ -425,6 +425,31 @@ test('le recovery non batch condividono le corsie Codex con il scheduler', async
   }
 });
 
+test('una recovery multi-step addebita ogni chiamata iniziale alla lane condivisa', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  setCodexTranslateCallForTests(null);
+  try {
+    const admissions = await withCodexTranslationLane({
+      run: async ({ admitCall }) => {
+        const first = admitCall();
+        const second = admitCall();
+        const refused = admitCall();
+        assert.ok(first);
+        assert.ok(second);
+        assert.equal(refused, null);
+        first.finish();
+        second.finish();
+        return [first.deadlineMs, second.deadlineMs];
+      },
+    });
+    assert.equal(admissions.length, 2);
+    assert.equal(getCascadeStats().codexTranslation.calls, 2);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
 test('le richieste concorrenti non superano il budget, anche quando traducono piu\' testi', async () => {
   // Una corsia: il primo testo parte da solo, i cinque successivi insieme
   // nella seconda richiesta, e il settimo trova il budget di 2 esaurito.

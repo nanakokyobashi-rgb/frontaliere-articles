@@ -1899,7 +1899,9 @@ const CODEX_TRANSLATE_MIN_CALL_MS = 15_000;
 const CODEX_TRANSLATE_FAILURE_LIMIT = 3;
 // Deve restare allineato con l'opt-in passato alla lane in questo modulo e nei
 // chiamanti delle recovery. Il ledger conta la chiamata iniziale qui, poi ogni
-// retry fisico attraverso `onCodexTransportRetry` in ai-models.mjs.
+// retry fisico attraverso `onCodexTransportRetry` in ai-models.mjs. Un producer
+// che esegue piu' chiamate fisiche dentro la stessa lane usa `admitCall`, che
+// riserva le iniziali successive sullo stesso ledger.
 export const CODEX_TRANSLATE_TRANSPORT_RETRIES = 2;
 
 // Scadenza ASSOLUTA (epoch ms) del processo che ospita la cascata, oltre la
@@ -1996,7 +1998,7 @@ let _codexBusySince = 0;
 let _codexInFlight = 0;
 /** @type {Array<{clean: string, sourceLang: string, targetLang: string, outcome: any, resolve: (value: string) => void, reject: (error: unknown) => void}>} */
 let _codexPending = [];
-/** @type {Array<{run: (args: {deadlineMs: number, admission: object, reserveTransportRetry: () => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
+/** @type {Array<{run: (args: {deadlineMs: number, admission: object, admitCall: () => object | null, reserveTransportRetry: () => boolean}) => Promise<any>, fallback: (() => any) | null, processDeadlineMs: number | null | undefined, resolve: (value: any) => void, reject: (error: unknown) => void}>} */
 let _codexLanePending = [];
 let _codexConsecutiveFailures = 0;
 let _codexStopReason = '';
@@ -2231,6 +2233,12 @@ function _reserveCodexTransportRetry(processDeadlineMs = _codexProcessDeadlineMs
  * eseguito senza accodamento quando la lane non esiste gia' o e' stata fermata;
  * se il budget si esaurisce mentre il lavoro era in coda, il fallback viene
  * eseguito dal worker che ha rilevato lo stop.
+ *
+ * `run` riceve anche `admitCall()`. La prima chiamata restituisce l'ammissione
+ * gia' ottenuta dalla lane; ogni chiamata successiva riserva una nuova
+ * ammissione iniziale con deadline e budget rivalutati. Il producer deve
+ * chiudere ogni admission con `.finish()` dopo la chiamata fisica. I retry di
+ * trasporto restano separati e passano da `reserveTransportRetry()`.
  */
 export function withCodexTranslationLane({
   run,
@@ -2281,10 +2289,22 @@ function _pumpCodex() {
           trackInFlight: false,
         });
         if (!admission) return typeof request.fallback === 'function' ? request.fallback() : null;
+        let firstCall = true;
+        const admitCall = () => {
+          if (firstCall) {
+            firstCall = false;
+            return admission;
+          }
+          return beginCodexTranslationCall({
+            processDeadlineMs: request.processDeadlineMs,
+            trackInFlight: false,
+          });
+        };
         try {
           return await request.run({
             deadlineMs: admission.deadlineMs,
             admission,
+            admitCall,
             reserveTransportRetry: () => _reserveCodexTransportRetry(request.processDeadlineMs),
           });
         } finally {

@@ -11926,7 +11926,7 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
     fallback: () => {
       throw new Error('finestra residua troppo corta o lane Codex non disponibile');
     },
-    run: async ({ deadlineMs: laneDeadlineMs, reserveTransportRetry }) => {
+    run: async ({ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry }) => {
       // Mantieni il guard esplicito del chiamante dopo l'ammissione: il
       // residuo deriva dalla deadline concessa dallo scheduler, mai da un
       // budget infinito calcolato prima della coda.
@@ -11938,8 +11938,7 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
       if (deadlineMs === null) {
         throw new Error('finestra residua troppo corta per una chiamata Codex');
       }
-      const call = (messages, opts = {}) => _aiCallLLM(messages, {
-        ...opts,
+      const codexCallOptions = {
         model: codex,
         chain: [codex],
         prefer: [codex],
@@ -11947,10 +11946,14 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
         retryCodexTransport: true,
         codexTransportRetries: CODEX_TRANSLATE_TRANSPORT_RETRIES,
         codexTransportBackoffMs: 1_000,
-        ...codexDeadlineOptions(deadlineMs),
         onCodexTransportRetry: reserveTransportRetry,
+        deadlineMs,
+      };
+      const callForDeadline = (callDeadlineMs) => (messages, opts = {}) => _aiCallLLM(messages, {
+        ...opts,
+        ...codexCallOptions,
+        ...codexDeadlineOptions(callDeadlineMs),
       });
-      onCodexCall?.();
       const rejected = [];
       const text = await translateFieldFreeMt({
         text: itValue,
@@ -11958,9 +11961,30 @@ async function translatePendingBodyWithCodex(itValue, locale, field, { onCodexCa
         targetLang: locale,
         fieldType: 'description',
         fieldName: field,
-        translate: ({ text: masked, sourceLang, targetLang, fieldType }) => translateWithCodexEngine({
-          text: masked, sourceLang, targetLang, fieldType, call,
-        }),
+        translate: async ({ text: masked, sourceLang, targetLang, fieldType }) => {
+          const callAdmission = admitCall();
+          if (!callAdmission) {
+            throw new Error('budget Codex esaurito prima della chiamata fisica');
+          }
+          // La prima admission e' quella gia' concessa dalla lane. Le
+          // successive sono riservate qui, davanti a ogni segmento reale, e
+          // portano una deadline ricalcolata sul residuo del ledger.
+          const callDeadlineMs = callAdmission === admission
+            ? deadlineMs
+            : callAdmission.deadlineMs;
+          onCodexCall?.();
+          try {
+            return await translateWithCodexEngine({
+              text: masked,
+              sourceLang,
+              targetLang,
+              fieldType,
+              call: callForDeadline(callDeadlineMs),
+            });
+          } finally {
+            callAdmission.finish();
+          }
+        },
         balanceMarkdown: balanceMarkdownMarkers,
         onWarn: (msg) => console.error(`  ⚠️  [seconda corsia] ${msg}`),
         onUnusableOutput: (event) => rejected.push(event?.reason || 'unusable'),

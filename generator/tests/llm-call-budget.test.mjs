@@ -411,6 +411,19 @@ test('④ la recovery Codex non riapre una chiamata senza deadline quando il res
   );
 });
 
+test('④ la seconda corsia ammette ogni segmento Codex fisico', () => {
+  const pending = extractBlock('async function translatePendingBodyWithCodex(').text;
+  assert.match(
+    pending,
+    /run: async \(\{ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry \}\)/,
+    'la recovery pending deve ricevere l ammettitore per le chiamate multiple',
+  );
+  assert.match(pending, /const callAdmission = admitCall\(\);/);
+  assert.match(pending, /const callDeadlineMs = callAdmission === admission/);
+  assert.match(pending, /call: callForDeadline\(callDeadlineMs\)/);
+  assert.match(pending, /callAdmission\.finish\(\);/);
+});
+
 test('④ il percorso legacy usa la catena storica quando Codex non e\' disponibile', () => {
   const at = CODE.indexOf('const historicalCall = () => callLLM(messages, {');
   assert.notEqual(at, -1, 'fallback storico della traduzione legacy sparito');
