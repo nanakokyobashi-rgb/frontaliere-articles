@@ -388,6 +388,65 @@ test('④ il fact-check porta un deadlineMs: bypassa il wrapper callLLM che ce l
   );
 });
 
+test('④ la recovery Codex non riapre una chiamata senza deadline quando il residuo e\' esaurito', () => {
+  const optionsStart = CODE.indexOf('function codexTranslationRecoveryOptions(deadlineMs, reserveTransportRetry)');
+  const optionsEnd = CODE.indexOf('async function callWithRetry(', optionsStart);
+  assert.notEqual(optionsStart, -1, 'la factory delle opzioni Codex per le recovery e sparita');
+  assert.notEqual(optionsEnd, -1, 'il confine della factory delle opzioni Codex e sparito');
+  const options = CODE.slice(optionsStart, optionsEnd);
+  assert.match(options, /deferJsonValidation: true/, 'la recovery deve lasciare la riparazione JSON al chiamante');
+  assert.match(CODE, /if \(deadlineMs === null\) return null;/);
+  assert.match(CODE, /withCodexTranslationLane\(\{[\s\S]*?processDeadlineMs: _pendingBodyCodexDeadlineMs/);
+  assert.match(CODE, /chain: \[AI_MODELS\.CODEX_CLI_PRIMARY, \.\.\.legacyTranslationChain\(\)\]/);
+  assert.match(CODE, /onCodexTransportRetry: reserveTransportRetry/);
+  assert.match(CODE, /if \(translationOptions === null\) return historicalCall\(\);/);
+  assert.match(
+    CODE,
+    /function legacyTranslationChain\(\) \{[\s\S]*?filter\(\(model\) => model !== AI_MODELS\.CODEX_CLI_PRIMARY\)/,
+    'la recovery deve avere una catena storica esplicitamente priva di Codex',
+  );
+  assert.doesNotMatch(
+    CODE,
+    /deadlineMs === null \? \{\} : \{ deadlineMs \}/,
+    'una deadline scaduta non deve piu\' degradare a opzioni senza termine',
+  );
+  assert.match(
+    CODE,
+    /function legacyTranslationOptions\(\) \{[\s\S]*?const processDeadlineMs = _pendingBodyCodexDeadlineMs;[\s\S]*?\.\.\.\(processDeadlineMs === null \? \{\} : \{ deadlineMs: processDeadlineMs \}\)/,
+    'un producer importato non deve ereditare il wall-clock della CLI',
+  );
+});
+
+test('④ la seconda corsia ammette ogni segmento Codex fisico', () => {
+  const pending = extractBlock('async function translatePendingBodyWithCodex(').text;
+  assert.match(
+    pending,
+    /run: async \(\{ deadlineMs: laneDeadlineMs, admission, admitCall, reserveTransportRetry \}\)/,
+    'la recovery pending deve ricevere l ammettitore per le chiamate multiple',
+  );
+  assert.match(pending, /const callAdmission = admitCall\(\);/);
+  assert.match(pending, /const callDeadlineMs = callAdmission === admission/);
+  assert.match(pending, /call: callForDeadline\(callDeadlineMs\)/);
+  assert.match(pending, /callAdmission\.finish\(\);/);
+});
+
+test('④ il percorso legacy usa la catena storica quando Codex non e\' disponibile', () => {
+  const at = CODE.indexOf('const historicalCall = () => callLLM(messages, {');
+  assert.notEqual(at, -1, 'fallback storico della traduzione legacy sparito');
+  const region = CODE.slice(at, at + 1800);
+  assert.match(region, /if \(!translation\) return historicalCall\(\);/);
+  assert.match(region, /if \(!isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) return historicalCall\(\);/);
+  assert.match(region, /fallback: historicalCall/);
+  assert.match(region, /run: async \(\{ deadlineMs, reserveTransportRetry \}\)/);
+});
+
+test('④ le recovery legacy passano dal semaforo Codex condiviso', () => {
+  const article = extractBlock('async function translateArticle(data) {').text;
+  assert.match(article, /await Promise\.all\(/, 'il percorso concorrente da proteggere e\' sparito');
+  assert.match(article, /withCodexTranslationLane\(/, 'le chiamate concorrenti non usano la corsia condivisa');
+  assert.match(article, /CODEX_TRANSLATE_TRANSPORT_RETRIES/);
+});
+
 test('④ il classifier pre-spend porta un deadlineMs', () => {
   const i = CODE.indexOf('const model = process.env.PRESPEND_GATE_MODEL');
   assert.notEqual(i, -1);

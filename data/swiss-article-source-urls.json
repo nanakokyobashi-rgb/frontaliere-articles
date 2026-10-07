@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948156/polizia-operazione-goldach-gallo-segnalazioni": {
-    "articleId": "polizia-operazione-goldach",
-    "ts": "2026-09-06T01:27:55.662Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/verita-immobiliari/1948263/affittare-presto-e-facile-affittare-bene-e-un-altro-lavoro": {
     "articleId": "affittare-bene-immobili-ticino",
     "ts": "2026-09-06T06:07:15.606Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/e-kwfdci0u88": {
     "articleId": "lista-sanzioni-sesam-svizzera",
     "ts": "2026-10-07T18:29:12.035Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955337/svizzera-collaboratori-tamedia-tagli-giornalismo": {
+    "articleId": "tamedia-41-licenziamenti-13-a-losanna-e-ginevra",
+    "ts": "2026-10-07T19:46:59.161Z",
     "keyForm": 2
   }
 }
