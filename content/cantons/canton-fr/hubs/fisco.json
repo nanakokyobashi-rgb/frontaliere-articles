@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "07e76b6a3ef51f2b71ea1f24f8565fcc4f23fc90e54d47885acccd1b1d5405ac",
+  "updatedAt": "2026-10-07T15:40:47.440Z",
+  "contentHash": "bd2807b3413c0f452f74a809299e42d289b128ff6e985eab3282ec59cb9530dd",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -140,6 +140,12 @@
           "date": "2026-09-28T04:25:31.514Z"
         },
         {
+          "title": "Fribourg adegua imposte dirette alla progressione a freddo",
+          "url": "/articoli-friburgo/fribourg-modifica-licd/",
+          "excerpt": "## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si",
+          "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
           "title": "Friburgo: successioni e donazioni, aliquote e esenzioni",
           "url": "/articoli-svizzera/friburgo-successione-donazione-aliquote/",
           "excerpt": "Nessuna aliquota federale unica: in Canton Friburgo le tasse seguono il grado di parentela e le esenzioni per coniuge e discendenti.",
@@ -174,7 +180,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "en": {
       "canton": "FR",
@@ -292,6 +298,12 @@
           "date": "2026-09-28T04:25:31.514Z"
         },
         {
+          "title": "Fribourg adjusts direct taxes for bracket creep",
+          "url": "/en/fribourg-articles/fribourg-adjusts-direct-taxes-for-bracket-creep/",
+          "excerpt": "## TL;DR - Vote: 97 in favour, 1 against, no abstentions - The revision of the LICD covers nine aspects - Tax scales and social deductions are adjusted",
+          "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
           "title": "Fribourg: inheritances and gifts, tax rates and exemptions",
           "url": "/en/swiss-articles/fribourg-inheritance-gift-tax-rates/",
           "excerpt": "No single federal tax rate: in the Canton of Fribourg, taxes depend on the degree of kinship and exemptions for spouse and descendants.",
@@ -326,7 +338,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "de": {
       "canton": "FR",
@@ -444,6 +456,12 @@
           "date": "2026-09-28T04:25:31.514Z"
         },
         {
+          "title": "Fribourg passt die direkten Steuern an die kalte Progression an",
+          "url": "/de/freiburg-artikel/fribourg-passt-die-direkten-steuern-an-die-kalte-progression-an/",
+          "excerpt": "## Auf einen Blick - Abstimmung: 97 Ja-Stimmen, 1 Gegenstimme, keine Enthaltung - Die Revision der LICD umfasst neun Aspekte - Die Steuerskalen und Sozialabzüge",
+          "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
           "title": "Freiburg: Erbschaften und Schenkungen, Steuersätze und Befreiungen",
           "url": "/de/schweiz-artikel/freiburg-erbschaft-schenkung-steuersaetze/",
           "excerpt": "Kein einheitlicher Bundessteuersatz: Im Kanton Freiburg richten sich die Steuern nach dem Verwandtschaftsgrad und den Befreiungen für Ehepartner und Nachkommen.",
@@ -478,7 +496,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "fr": {
       "canton": "FR",
@@ -596,6 +614,12 @@
           "date": "2026-09-28T04:25:31.514Z"
         },
         {
+          "title": "Fribourg adapte les impôts directs à la progression à froid",
+          "url": "/fr/articles-fribourg/fribourg-adapte-les-impots-directs-a-la-progression-a-froid/",
+          "excerpt": "## En bref - Vote : 97 voix favorables, 1 voix contre, aucune abstention - La révision de la LICD comprend neuf aspects - Les barèmes fiscaux et les déductions",
+          "date": "2026-10-07T10:27:22.581Z"
+        },
+        {
           "title": "Fribourg : successions et donations, taux et exonérations",
           "url": "/fr/articles-suisse/fribourg-impot-succession-donation-taux/",
           "excerpt": "Aucun taux fédéral unique : dans le canton de Fribourg, les taxes suivent le degré de parenté et les exonérations pour conjoint et descendants.",
@@ -630,7 +654,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     }
   }
 }

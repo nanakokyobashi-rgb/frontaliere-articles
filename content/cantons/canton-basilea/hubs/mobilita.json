@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "7b4433941698be716e33ac63e62de9be719b7ef795a11ead2d959ed5d6d59b2b",
+  "updatedAt": "2026-10-07T15:40:47.440Z",
+  "contentHash": "845bedc76651783f43ab92a63eaac2beafa01cdbdb1781f3c793813d60a2b212",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "33",
+          "value": "32",
           "note": "segnalazioni aggiornate: 6 ottobre 2026"
         }
       ],
@@ -251,7 +251,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -271,7 +271,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "33",
+          "value": "32",
           "note": "reports as of 6 October 2026"
         }
       ],
@@ -480,7 +480,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -500,7 +500,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "33",
+          "value": "32",
           "note": "Meldungen vom 6. Oktober 2026"
         }
       ],
@@ -709,7 +709,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -729,7 +729,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "33",
+          "value": "32",
           "note": "signalements au 6 octobre 2026"
         }
       ],
@@ -938,7 +938,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     }
   }
 }
