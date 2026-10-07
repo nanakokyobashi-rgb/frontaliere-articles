@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "ac10900001087d0783977c4bbea84155911d9cab875283f73274045cf502b19c",
+  "updatedAt": "2026-10-07T15:40:47.440Z",
+  "contentHash": "a847026eee2ed70ab91f4326dee908184f158faeb1edefe3892844b3abb7f313",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "21",
           "note": "segnalazioni aggiornate: 6 ottobre 2026"
         },
         {
@@ -225,7 +225,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "en": {
       "canton": "VS",
@@ -240,7 +240,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "21",
           "note": "reports as of 6 October 2026"
         },
         {
@@ -428,7 +428,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "de": {
       "canton": "VS",
@@ -443,7 +443,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "21",
           "note": "Meldungen vom 6. Oktober 2026"
         },
         {
@@ -631,7 +631,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "fr": {
       "canton": "VS",
@@ -646,7 +646,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "21",
           "note": "signalements au 6 octobre 2026"
         },
         {
@@ -834,7 +834,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     }
   }
 }

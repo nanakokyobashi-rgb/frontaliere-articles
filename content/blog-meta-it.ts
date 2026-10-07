@@ -12752,6 +12752,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, cade da una scala: grave un 79enne',
     'blog.article.caduta-scala-locate-varesino.excerpt': '## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un\'azienda agricola - Soccorsi attivati in codice rosso',
     'blog.article.caduta-scala-locate-varesino.imageAlt': 'Contesto rurale di un\'azienda agricola',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': '## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Locandina dello spettacolo dialettale “Quei giargianes da giappunes” al Teatro Pax di Cantello con la compagnia Tutti in Scena',
 };
 
 export default blogMetaIt;

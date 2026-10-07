@@ -26226,6 +26226,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'intelligenza-artificiale-diritti-umani',
+    category: 'novita',
+    date: '2026-10-07T15:29:13.411Z',
+    image: '/images/blog/article-intelligenza-artificiale-diritti-umani.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

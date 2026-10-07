@@ -7868,6 +7868,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ffs-sportelli-chiusi-stazioni.title': 'FFS chiude gli sportelli in 13 stazioni dal primo gennaio',
     'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## In breve - Dal primo gennaio chiudono gli sportelli in 13 stazioni. - I punti con personale passeranno da 115 a 102. - Il 97% dei titoli passa dai canali',
     'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Stazione ferroviaria svizzera con sportello chiuso e macchine self service in primo piano',
+    'blog.article.intelligenza-artificiale-diritti-umani.title': 'Intelligenza artificiale: impatto sui diritti umani',
+    'blog.article.intelligenza-artificiale-diritti-umani.excerpt': '## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy',
+    'blog.article.intelligenza-artificiale-diritti-umani.imageAlt': 'Ufficio svizzero con team che utilizza IA etica per risorse umane e alloggio',
 };
 
 export default blogMetaChIt;
