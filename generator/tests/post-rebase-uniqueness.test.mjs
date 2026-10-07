@@ -382,6 +382,7 @@ test('generate-article.yml esegue il controllo dopo un rebase riuscito e non pus
   const loopAt = active.indexOf('for attempt in');
   const rebaseAt = active.indexOf('bash scripts/lib/rebase-onto-remote.sh', loopAt);
   const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD');
+  const successGuardAt = active.lastIndexOf('if [ "$rebased" -eq 1 ]; then', checkAt);
   const doneMatch = /\n\s+done\n/.exec(active.slice(Math.max(0, checkAt)));
   const doneAt = doneMatch ? checkAt + doneMatch.index : -1;
 
@@ -391,8 +392,9 @@ test('generate-article.yml esegue il controllo dopo un rebase riuscito e non pus
     'il controllo sta nel loop, dopo il rebase e prima del prossimo push');
   const rebaseCall = active.slice(rebaseAt, checkAt);
   assert.match(rebaseCall, /\|\| rebased=0\n/, 'l\'esito del rebase deve essere registrato, non buttato con `|| true`');
-  const gate = active.slice(checkAt - 200, doneAt);
-  assert.match(gate, /if \[ "\$rebased" -eq 1 \]; then/, 'il controllo gira solo dopo un rebase riuscito');
+  assert.ok(successGuardAt > rebaseAt && successGuardAt < checkAt,
+    'il controllo gira solo dopo un rebase riuscito');
+  const gate = active.slice(successGuardAt, doneAt);
   assert.match(gate, /\|\| uniq_rc=\$\?/);
   assert.match(gate, /if \[ "\$uniq_rc" -ne 0 \]; then[\s\S]*?exit 1/, 'un controllo fallito deve fermare il run SENZA pushare');
 });

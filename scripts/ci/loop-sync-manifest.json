@@ -5567,7 +5567,7 @@
     {
       "path": "scripts/ci/merge-generated-image-registry.mjs",
       "mode": "corpus-only",
-      "reason": "Merge deterministico del registro immagini generato durante il rebase del drain: conserva gli asset prodotti localmente mentre prende il registro upstream per risolvere il push concorrente. Il registro e il suo rebase appartengono alla pubblicazione dati del corpus; non esiste un gemello operativo sul sito.",
+      "reason": "Merge deterministico append-only dei registri immagini generated/editorial durante i rebase del generatore: applica al ledger upstream soltanto il delta base→run, identificato per assetId o cover, così conserva gli asset prodotti localmente senza sovrascrivere metadata concorrenti più recenti. I registri e il loro rebase appartengono alla pubblicazione dati del corpus; non esiste un gemello operativo sul sito.",
       "baseline": {
         "site": null,
         "corpus": null,
