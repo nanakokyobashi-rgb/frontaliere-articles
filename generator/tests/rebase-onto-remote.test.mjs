@@ -29,7 +29,7 @@ import { tmpdir } from 'node:os';
 import { rmTempTree } from './rm-temp-tree.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { backstop, findDuplicates, mergeSource, pruneRetiredRecords, readRetiredIds } from '../../scripts/lib/merge-content-registry-conflict.mjs';
+import { backstop, findDuplicates, mergeSource, pruneRetiredRecords, readRetiredIds, recordContainers } from '../../scripts/lib/merge-content-registry-conflict.mjs';
 // Le due sorgenti di verita' da cui il generatore ricava i propri target di
 // scrittura. Importarle (invece di ricopiarne i path) e' cio' che rende il test
 // sui registri dichiarati una guardia e non un elenco che invecchia da solo.
@@ -1003,6 +1003,12 @@ test('il prune conserva l\'ancora di un contenitore e di una union potati', () =
   assert.match(bothRetired.reason, /union .* vuota/);
 });
 
+test('un contenitore vuoto non viene scambiato per un registro di record', () => {
+  const containers = recordContainers('const EMPTY_CONFIG = {};\n');
+  assert.ok(containers);
+  assert.equal(containers.size, 0);
+});
+
 test('il resolver CLI legge il ledger dei ritiri prima di scrivere il conflitto', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'merge-retired-ledger-'));
   try {
@@ -1045,6 +1051,7 @@ test('il ledger delle tombstone invalido viene rifiutato senza filtrare gli id',
       [{ ...valid }, { ...valid }],
       [{ id: valid.id }],
       [{ ...valid, slugs: { ...valid.slugs, fr: '' } }],
+      [{ ...valid, retiredOn: '2026-02-30' }],
     ]) {
       write(root, 'data/retired-articles.json', JSON.stringify({ retired }));
       assert.throws(() => readRetiredIds(root), /deve essere|duplicato/);

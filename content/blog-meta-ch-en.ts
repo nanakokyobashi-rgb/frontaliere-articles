@@ -7865,6 +7865,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.riserve-valutarie-settembre-stabili.title': 'BNS foreign exchange reserves stable in September',
     'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## TL;DR - BNS: foreign currency reserves at 771 billion - In September, +0,4 billion compared with August - Euro +0,9%, dollar +3%; together about 80% ## Key facts',
     'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Swiss urban scene linked to foreign-currency reserve data',
+    'blog.article.ffs-sportelli-chiusi-stazioni.title': 'FFS to close ticket counters at 13 stations from January 1',
+    'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## TL;DR - From January 1, ticket offices will close at 13 stations. - Staffed points will decrease from 115 to 102. - 97% of tickets pass through channels',
+    'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Swiss railway station with closed ticket counter and self-service machines in the foreground',
+    'blog.article.intelligenza-artificiale-diritti-umani.title': 'Artificial intelligence: impact on human rights',
+    'blog.article.intelligenza-artificiale-diritti-umani.excerpt': '## TL;DR - 63rd session of the Human Rights Council in Geneva - Switzerland led a coalition on transitional justice - Privacy',
+    'blog.article.intelligenza-artificiale-diritti-umani.imageAlt': 'Swiss office team using ethical AI for human resources and housing',
 };
 
 export default blogMetaChEn;
