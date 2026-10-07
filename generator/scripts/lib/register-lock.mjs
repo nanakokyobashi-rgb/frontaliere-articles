@@ -6,11 +6,11 @@
  * Registering an article touches 9 files (router, blog list, i18n, three
  * locale files, SEO service, sitemap, sitemap-news), each written
  * independently via `create-article.mjs`'s `write()`. `write()` itself is
- * atomic per-target (issue #561, temp+rename), but a normal exception could
- * still land BETWEEN two of the nine calls.  The writer now snapshots the
- * targets before opening the lock and restores that snapshot on every error;
- * this module owns the pure snapshot/restore protocol so the rollback can be
- * tested without importing the full generator.
+ * atomic per-target (issue #561, temp+rename), but nothing stopped a kill —
+ * or any other failure — from landing BETWEEN two of the nine calls: the
+ * corpus would end up with an id registered in some files and not others,
+ * and nothing checked the 9 files against each other on the next run to
+ * catch it.
  *
  * ## Why this is its own module and not a private function in create-article.mjs
  *
@@ -362,59 +362,6 @@ export function registrationTargetStatus(targets) {
     (has ? present : absent).push(labels[index]);
   }
   return { present, absent };
-}
-
-/**
- * Capture the exact pre-registration state of every target.
- *
- * The snapshot deliberately records both content and existence. A new body
- * file does not exist before registration, so restoring only text would leave
- * an orphan on disk after a later SEO failure.
- */
-export function snapshotRegistrationTargets(targets) {
-  if (!Array.isArray(targets)) {
-    throw new TypeError('snapshotRegistrationTargets() requires an array of targets');
-  }
-  return targets.map((target, index) => {
-    if (!target || typeof target.absPath !== 'string' || target.absPath.length === 0) {
-      throw new TypeError(`snapshotRegistrationTargets(): target #${index + 1} has no absolute path`);
-    }
-    const existed = existsSync(target.absPath);
-    return Object.freeze({
-      target,
-      existed,
-      content: existed ? readFileSync(target.absPath, 'utf8') : null,
-    });
-  });
-}
-
-/**
- * Restore a registration snapshot. I/O is injected so the operation stays
- * directly testable and the production writer can reuse its atomic `write()`
- * choke point for existing files.
- */
-export function restoreRegistrationTargets(snapshot, { writeFile, removeFile } = {}) {
-  if (!Array.isArray(snapshot)) {
-    throw new TypeError('restoreRegistrationTargets() requires a snapshot array');
-  }
-  if (typeof writeFile !== 'function' || typeof removeFile !== 'function') {
-    throw new TypeError('restoreRegistrationTargets() requires writeFile and removeFile callbacks');
-  }
-  const errors = [];
-  for (const item of [...snapshot].reverse()) {
-    try {
-      if (item.existed) writeFile(item.target, item.content);
-      else removeFile(item.target);
-    } catch (error) {
-      errors.push(new Error(
-        `rollback failed for ${item.target?.label || item.target?.absPath || '<target>'}: ${error.message}`,
-        { cause: error },
-      ));
-    }
-  }
-  if (errors.length > 0) {
-    throw new AggregateError(errors, 'registration rollback did not restore every target');
-  }
 }
 
 /**

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { deriveSeoMetadata } from '../scripts/lib/seo-metadata-derivation.mjs';
-import { appendSeoEntrySource, buildSeoEntry } from '../scripts/lib/seo-entry-builder.mjs';
+import { appendSeoEntrySource, buildSeoEntry, toIsoWithTz } from '../scripts/lib/seo-entry-builder.mjs';
 
 function article() {
   return {
@@ -37,8 +37,8 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   deriveSeoMetadata(commons);
   const commonsEntry = buildSeoEntry(commons, {
     provenance: { kind: 'wikimedia-commons', record: { width: 3712, height: 2088 } },
-    publishedAt: commons.date,
-    modifiedAt: commons.date,
+    publishedAt: toIsoWithTz(commons.date, { preserveExplicitOffset: false }),
+    modifiedAt: toIsoWithTz(commons.date, { preserveExplicitOffset: false }),
   });
   assert.match(commonsEntry, /"@type": "NewsArticle"/);
   assert.match(commonsEntry, /"datePublished": "2026-03-03T15:39:51\+01:00"/);
@@ -51,11 +51,22 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
       kind: 'generated',
       record: { licenseUrl: 'https://openai.com/policies/terms-of-use/', credit: 'frontaliereticino.ch', width: 1200, height: 675 },
     },
-    publishedAt: generated.date,
-    modifiedAt: generated.date,
+    publishedAt: toIsoWithTz(generated.date, { preserveExplicitOffset: false }),
+    modifiedAt: toIsoWithTz(generated.date, { preserveExplicitOffset: false }),
   });
   assert.match(generatedEntry, /"license": "https:\/\/openai\.com\/policies\/terms-of-use\/"/);
   assert.match(generatedEntry, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`/);
+});
+
+test('le date senza orario usano mezzogiorno Europe/Zurich con il cambio DST dichiarato', () => {
+  assert.equal(
+    toIsoWithTz('2026-01-03', { preserveExplicitOffset: false }),
+    '2026-01-03T12:00:00+01:00',
+  );
+  assert.equal(
+    toIsoWithTz('2026-07-03', { preserveExplicitOffset: false }),
+    '2026-07-03T12:00:00+02:00',
+  );
 });
 
 test('appendSeoEntrySource usa il chunk scelto dal writer e non seo-blog.ts', () => {

@@ -2,24 +2,28 @@
 /**
  * Recover SEO entries for registry articles that already have corpus content.
  *
- * This is deliberately a data-driven writer: it reads registry/meta/router
- * values, calls the same metadata derivation and SEO entry builder used by the
- * normal generator, resolves image provenance through the licence engine, and
- * performs one atomic append under a runner-local lock. It never asks a model
- * to invent copy and it has no hand-written article payloads.
+ * This is deliberately a data-driven recovery writer: it reads registry/meta
+ * values, calls the recovery-only metadata derivation and the same SEO entry
+ * builder used by the normal generator, resolves image provenance through the
+ * licence engine, and performs an atomic replacement under a runner-local
+ * lock. It never asks a model to invent copy and it has no hand-written
+ * article payloads.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
-import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
+import { findSeoEntryMatches, removeSeoEntriesFromSource } from '../../engine/shared/seo-entry.mjs';
 import { corpusCreditReader } from '../../scripts/lib/image-credit-records.mjs';
 import { unescapeTsString, tsStringEscapesWithNewlineAs } from './lib/unescape-ts-string.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
 import { appendSeoEntrySource, buildSeoEntry, toIsoWithTz } from './lib/seo-entry-builder.mjs';
 import { deriveSeoMetadata, normalizeSeoTitle } from './lib/seo-metadata-derivation.mjs';
+import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
+import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
+import { readImageRegenerationQueue } from './lib/image-regeneration-queue.mjs';
 import { beginSeoBackfillLock, endSeoBackfillLock } from './lib/seo-backfill-lock.mjs';
 import { writeTextAtomic } from './lib/atomic-write-text.mjs';
 
@@ -113,16 +117,16 @@ function existingTitleSet(titleById, currentId) {
 function imageProvenance(registryEntry, credits) {
   const credit = credits.get(registryEntry.image);
   if (credit) return { kind: 'wikimedia-commons', record: credit, imagePath: registryEntry.image };
-  const fallback = imageRecordForPath(ROOT, STATIC_FALLBACK_IMAGE, { strict: true });
-  if (!fallback) throw new Error(`${registryEntry.id}: governed static fallback has no licence record`);
-  return { ...fallback, imagePath: STATIC_FALLBACK_IMAGE };
+  const governed = imageRecordForPath(ROOT, registryEntry.image, { strict: true });
+  if (governed) return { ...governed, imagePath: registryEntry.image };
+  return null;
 }
 
 function buildArticle(registryEntry, meta, slugs, titleById, credits) {
   const localized = valuesForArticle(meta, registryEntry.id);
   const localizedSlugs = slugs[registryEntry.id];
   if (!localizedSlugs) throw new Error(`${registryEntry.id}: localized slugs missing from ${ROUTER_FILE}`);
-  const provenance = imageProvenance(registryEntry, credits);
+  const declaredProvenance = imageProvenance(registryEntry, credits);
   const data = {
     id: registryEntry.id,
     category: registryEntry.category,
@@ -137,17 +141,34 @@ function buildArticle(registryEntry, meta, slugs, titleById, credits) {
     imageAlt: localized.imageAlt,
     slugs: localizedSlugs,
     seo: {},
-    _generatedImagePath: provenance.imagePath,
+    _generatedImagePath: registryEntry.image,
   };
+  let provenance = declaredProvenance;
+  let fallback = false;
+  if (!provenance) {
+    const resolution = resolveArticleCoverFallback(data, {
+      root: ROOT,
+      findCatalogImage: () => null,
+      reason: 'declared cover has no governed provenance record',
+    });
+    if (resolution.source !== 'static' || resolution.path !== STATIC_FALLBACK_IMAGE) {
+      throw new Error(`${registryEntry.id}: unexpected cover fallback ${resolution.path}`);
+    }
+    provenance = imageRecordForPath(ROOT, data._generatedImagePath, { strict: true });
+    if (!provenance) throw new Error(`${registryEntry.id}: governed static fallback has no licence record`);
+    fallback = true;
+  }
   deriveSeoMetadata(data, {
     existingTitles: existingTitleSet(titleById, registryEntry.id),
     log: (message) => console.error(message),
   });
-  const publishedAt = toIsoWithTz(registryEntry.date);
-  const modifiedAt = toIsoWithTz(registryEntry.updatedAt || registryEntry.date);
+  const publishedAt = toIsoWithTz(registryEntry.date, { preserveExplicitOffset: false });
+  const modifiedAt = toIsoWithTz(registryEntry.updatedAt || registryEntry.date, { preserveExplicitOffset: false });
   return {
     data,
     provenance,
+    declaredImage: registryEntry.image,
+    fallback,
     publishedAt,
     modifiedAt,
     entry: buildSeoEntry(data, {
@@ -174,7 +195,9 @@ function run(idsFile, { dryRun = false } = {}) {
 
   const provenanceCounts = {};
   for (const { provenance } of entries) provenanceCounts[provenance.kind] = (provenanceCounts[provenance.kind] || 0) + 1;
-  const fallbackIds = entries.filter(({ provenance }) => provenance.imagePath === STATIC_FALLBACK_IMAGE).map(({ data }) => data.id);
+  const fallbackEntries = entries.filter((entry) => entry.fallback);
+  const fallbackIds = fallbackEntries.map(({ data }) => data.id);
+  const declaredImageCount = entries.length - fallbackEntries.length;
   if (dryRun) {
     console.log(JSON.stringify({
       dryRun: true,
@@ -182,6 +205,8 @@ function run(idsFile, { dryRun = false } = {}) {
       seoEntriesBuilt: entries.length,
       seoFile: SEO_FILE,
       provenanceCounts,
+      declaredImageCount,
+      fallbackImageCount: fallbackEntries.length,
       fallbackImage: STATIC_FALLBACK_IMAGE,
       fallbackIds,
     }, null, 2));
@@ -189,10 +214,23 @@ function run(idsFile, { dryRun = false } = {}) {
   }
 
   const seoPath = path.join(ROOT, SEO_FILE);
+  const registryPath = path.join(ROOT, REGISTRY_FILE);
+  const queuePath = path.join(ROOT, 'data/image-regeneration-queue.json');
   const before = fs.readFileSync(seoPath, 'utf8');
+  const registryBefore = fs.readFileSync(registryPath, 'utf8');
+  const queueBefore = fs.existsSync(queuePath) ? fs.readFileSync(queuePath, 'utf8') : null;
   beginSeoBackfillLock(ROOT, ids);
   try {
+    for (const { data } of fallbackEntries) {
+      const update = updateArticleImageInRegistry(ROOT, data.id, STATIC_FALLBACK_IMAGE);
+      if (update.nextText === undefined) throw new Error(`${data.id}: registry image update returned no text`);
+    }
+
     let after = before;
+    for (const id of ids) {
+      const removal = removeSeoEntriesFromSource(after, id, SEO_FILE);
+      after = removal.src;
+    }
     for (const { entry } of entries) {
       after = appendSeoEntrySource(after, entry, {
         seoConstName: SEO_CONST_NAME,
@@ -203,10 +241,25 @@ function run(idsFile, { dryRun = false } = {}) {
     const missingAfterWrite = ids.filter((id) => findSeoEntryMatches(after, id, SEO_FILE).length !== 1);
     if (missingAfterWrite.length > 0) throw new Error(`SEO entry count after build is not one for: ${missingAfterWrite.join(', ')}`);
     writeTextAtomic(seoPath, after);
+    for (const { data } of fallbackEntries) {
+      if (!queueArticleCoverRegeneration(ROOT, data)) {
+        throw new Error(`${data.id}: unable to queue declared-cover regeneration`);
+      }
+    }
+    const queue = readImageRegenerationQueue(ROOT);
+    const missingQueueItems = fallbackIds.filter((id) => !queue.items.some(
+      (item) => item?.articleId === id && item.fallbackImage === STATIC_FALLBACK_IMAGE,
+    ));
+    if (missingQueueItems.length > 0) {
+      throw new Error(`cover regeneration queue missing: ${missingQueueItems.join(', ')}`);
+    }
     endSeoBackfillLock(ROOT);
   } catch (error) {
     try {
       writeTextAtomic(seoPath, before);
+      writeTextAtomic(registryPath, registryBefore);
+      if (queueBefore === null) fs.rmSync(queuePath, { force: true });
+      else writeTextAtomic(queuePath, queueBefore);
       endSeoBackfillLock(ROOT);
     } catch (rollbackError) {
       error.rollbackError = rollbackError;
@@ -220,8 +273,11 @@ function run(idsFile, { dryRun = false } = {}) {
     seoEntriesWritten: entries.length,
     seoFile: SEO_FILE,
     provenanceCounts,
+    declaredImageCount,
+    fallbackImageCount: fallbackEntries.length,
     fallbackImage: STATIC_FALLBACK_IMAGE,
     fallbackIds,
+    queuedCoverRegenerations: fallbackIds.length,
   }, null, 2));
 }
 

@@ -152,6 +152,9 @@ export const CONTENT_GATES = [
   // pipeline: una voce in una sola delle due lascia l'articolo non renderizzabile
   // o fa servire una SEO per un id che il registro non conosce.
   'generator/tests/content-seo-registry-parity.test.mjs',
+  // Il builder condiviso deve restare byte-equivalente al writer di main sui
+  // 20 articoli piu' recenti: il recupero non puo' introdurre un dialetto SEO.
+  'generator/tests/seo-entry-equivalence.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',

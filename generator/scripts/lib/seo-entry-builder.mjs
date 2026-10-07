@@ -1,28 +1,89 @@
 /**
  * Shared SEO entry builder/writer.
  *
- * `create-article.mjs` and the deterministic orphan recovery must emit the
- * same literal shape.  Keeping the builder and the comma-safe append operation
- * here prevents a recovery-only dialect of structured data from drifting away
- * from the normal generator.
+ * Deterministic orphan recovery uses this builder and the comma-safe append
+ * operation. The normal article writer keeps its historical literal path in
+ * `create-article.mjs`; `seo-entry-equivalence.test.mjs` compares the builder
+ * with real main entries and classifies historical data drift.
  */
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
+export const SEO_TIME_ZONE = 'Europe/Zurich';
 
-/** Format a Date/string as the repository's ISO-8601-with-offset value. */
-export function toIsoWithTz(value = new Date()) {
-  const date = value instanceof Date ? value : new Date(value);
+const SEO_DATE_ONLY_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
+const SEO_EXPLICIT_TIMESTAMP_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+const SEO_ZURICH_PARTS = new Intl.DateTimeFormat('en-GB', {
+  timeZone: SEO_TIME_ZONE,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hourCycle: 'h23',
+});
+
+function zonedParts(date) {
+  return Object.fromEntries(
+    SEO_ZURICH_PARTS.formatToParts(date)
+      .filter(({ type }) => type !== 'literal')
+      .map(({ type, value }) => [type, value]),
+  );
+}
+
+function zurichOffsetMinutes(date) {
+  const parts = zonedParts(date);
+  const localAsUtc = Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour),
+    Number(parts.minute),
+    Number(parts.second),
+  );
+  return Math.round((localAsUtc - date.getTime()) / 60_000);
+}
+
+function parseSeoDate(value) {
+  if (value instanceof Date) return value;
+  const raw = String(value);
+  const dateOnly = SEO_DATE_ONLY_RE.exec(raw);
+  if (dateOnly) {
+    // A registry date without a time means noon in Europe/Zurich. Start from
+    // UTC noon, then subtract the actual Zurich offset for that date so DST is
+    // applied by the same formatter used for timestamps.
+    const utcNoon = Date.UTC(Number(dateOnly[1]), Number(dateOnly[2]) - 1, Number(dateOnly[3]), 12);
+    const guess = new Date(utcNoon);
+    return new Date(utcNoon - zurichOffsetMinutes(guess) * 60_000);
+  }
+  return new Date(raw);
+}
+
+/**
+ * Format a Date/string as the repository's ISO-8601-with-offset value.
+ *
+ * Already serialized timestamps are preserved by default so reconstructing a
+ * main-writer entry is byte-stable. Recovery passes `preserveExplicitOffset:
+ * false` when it starts from a registry timestamp, forcing the declared
+ * Europe/Zurich representation independent of the runner timezone.
+ */
+export function toIsoWithTz(value = new Date(), { preserveExplicitOffset = true } = {}) {
+  if (preserveExplicitOffset && typeof value === 'string' && SEO_EXPLICIT_TIMESTAMP_RE.test(value)) {
+    return value;
+  }
+  const date = parseSeoDate(value);
   if (Number.isNaN(date.getTime())) throw new Error(`Invalid date for SEO structured data: ${value}`);
   const pad = (number) => String(number).padStart(2, '0');
-  const year = date.getFullYear();
-  const month = pad(date.getMonth() + 1);
-  const day = pad(date.getDate());
-  const hours = pad(date.getHours());
-  const minutes = pad(date.getMinutes());
-  const seconds = pad(date.getSeconds());
-  const offsetMinutes = -date.getTimezoneOffset();
+  const parts = zonedParts(date);
+  const year = parts.year;
+  const month = parts.month;
+  const day = parts.day;
+  const hours = parts.hour;
+  const minutes = parts.minute;
+  const seconds = parts.second;
+  const offsetMinutes = zurichOffsetMinutes(date);
   const sign = offsetMinutes >= 0 ? '+' : '-';
   const absoluteOffset = Math.abs(offsetMinutes);
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}`

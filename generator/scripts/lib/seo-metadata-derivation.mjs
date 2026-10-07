@@ -1,12 +1,12 @@
 /**
- * Deterministic SEO metadata derivation shared by the normal generator and
- * corpus recovery tools.
+ * Deterministic SEO metadata derivation for corpus recovery tools only.
  *
- * The article generator normally receives `ogTitle`, `headline` and
- * `keywords` from its content payload.  Recovery has no model payload, so the
- * same choke point derives those fields from the persisted Italian metadata.
- * No copywriter or model is involved here: the inputs are registry/meta
- * values, the existing clause-tail rules and the existing title repair.
+ * The normal article generator receives `ogTitle`, `headline` and `keywords`
+ * from its model payload and preserves that writer contract. Recovery has no
+ * model payload, so this module derives those fields from persisted Italian
+ * metadata. No copywriter or model is involved here: the inputs are
+ * registry/meta values, the existing clause-tail rules and the existing title
+ * repair.
  */
 import {
   TRAILING_STOPWORDS,
