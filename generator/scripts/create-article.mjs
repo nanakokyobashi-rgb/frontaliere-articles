@@ -5033,7 +5033,7 @@ function bodyTextForCantonPostcondition(data) {
   return appendages.reduce(
     (body, appendage) => body.replaceAll(appendage, ''),
     bodyTextForQuality(data?.content?.it || {}),
-  );
+  ).replace(/\n\n\*Fonte: \[[^\]]+\]\([^)]*\)\*/gu, '');
 }
 
 /**
@@ -5422,17 +5422,28 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
       });
       const parsed = JSON.parse(repairLlmJson(raw));
       if (!Array.isArray(parsed?.replacements)) throw new Error('source-copy repair: replacements mancanti');
-      const replacements = parsed.replacements.flatMap((replacement) => {
-        const index = Number(replacement?.targetIndex);
-        const target = Number.isInteger(index) ? targets[index] : null;
-        if (!target || typeof replacement?.text !== 'string' || !replacement.text.trim()) return [];
-        return [{
+      const indexes = parsed.replacements.map((replacement) => Number(replacement?.targetIndex));
+      const uniqueIndexes = new Set(indexes);
+      const oneToOne = parsed.replacements.length === targets.length
+        && indexes.every((index) => Number.isInteger(index) && index >= 0 && index < targets.length)
+        && uniqueIndexes.size === targets.length;
+      if (!oneToOne) {
+        throw new Error(
+          `source-copy repair: replacements non uno-a-uno (${parsed.replacements.length}/${targets.length}, `
+          + 'indici duplicati, mancanti o fuori range)',
+        );
+      }
+      const replacements = parsed.replacements.map((replacement, position) => {
+        const target = targets[indexes[position]];
+        if (typeof replacement?.text !== 'string' || !replacement.text.trim()) {
+          throw new Error(`source-copy repair: testo vuoto per targetIndex=${indexes[position]}`);
+        }
+        return {
           field: target.field,
           paragraphIndex: target.paragraphIndex,
           text: replacement.text,
-        }];
+        };
       });
-      if (!replacements.length) throw new Error('source-copy repair: nessuna sostituzione valida');
       return applySourceCopyRepairReplacements(currentArticle, replacements);
     },
   });
@@ -11471,6 +11482,38 @@ function italianBodyWordCount(data) {
   return ['body1', 'body2', 'body3']
     .map((k) => countWords(it[k] || ''))
     .reduce((acc, n) => acc + n, 0);
+}
+
+function italianBodyPlainChars(data) {
+  const it = data?.content?.it || {};
+  return ['body1', 'body2', 'body3']
+    .map((k) => it[k] || '')
+    .join(' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .length;
+}
+
+function assertItalianBodyLengthPostcondition(bodyText, { minWords, minChars, label = 'Body' } = {}) {
+  const words = countWords(bodyText);
+  const chars = String(bodyText || '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .length;
+  if (Number.isFinite(minWords) && words < minWords) {
+    throw qualityRejectError(
+      `${label} troppo corto dopo la riparazione anti-copia: ${words} parole (min: ${minWords}).`,
+    );
+  }
+  if (Number.isFinite(minChars) && chars < minChars) {
+    throw qualityRejectError(
+      `${label} troppo corto dopo la riparazione anti-copia: ${chars} chars (min: ${minChars}).`,
+    );
+  }
+  console.error(`  ✅ [thin-content] ${label}: ${words} parole, ${chars} chars (min ${minWords}/${minChars})`);
+  return { words, chars };
 }
 
 /**
@@ -17587,8 +17630,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Final thin content guard (after retry/expand attempts)
   {
-    const itBodyFinal = `${(data.content.it || data.content)?.body1 || ''} ${(data.content.it || data.content)?.body2 || ''} ${(data.content.it || data.content)?.body3 || ''}`;
-    const itPlainCharsFinal = itBodyFinal.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().length;
+    const itPlainCharsFinal = italianBodyPlainChars(data);
     const adaptiveMinChars = computeAdaptiveMinChars(lengthBudgetSource);
     if (itPlainCharsFinal < adaptiveMinChars) {
       const thinErr = new Error(`Articolo troppo corto dopo retry: ${itPlainCharsFinal} chars (min: ${adaptiveMinChars}). Google penalizza thin content.`);
@@ -17597,6 +17639,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     }
     console.error(`  ✅ [thin-content] Body finale: ${itPlainCharsFinal} chars (min: ${adaptiveMinChars})`);
   }
+  // Preserve the floor that was actually verified before translation and the
+  // final targeted repair. Thin sources may legitimately use the documented
+  // last-attempt 85% word allowance; the postcondition must not make that
+  // accepted article shorter, while a normal article must still keep the full
+  // adaptive floor.
+  const verifiedItalianLength = {
+    words: italianBodyWordCount(data),
+    chars: italianBodyPlainChars(data),
+  };
 
     // Step 3a.0b: Strip leaked internal URLs from IT
   for (const field of ['body1', 'body2', 'body3']) {
@@ -17852,6 +17903,27 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
         { retries: SOURCE_COPY_MAX_REPAIR_PASSES },
       );
     }
+  }
+
+  // The repair/condense pass can shorten the Italian body after the original
+  // word/character gate and after duplicate admission. Check the repaired body
+  // before writing, without counting deterministic CTA/link/citation text.
+  assertItalianBodyLengthPostcondition(bodyTextForCantonPostcondition(data), {
+    minWords: Math.min(adaptiveMinWords, verifiedItalianLength.words),
+    minChars: Math.min(computeAdaptiveMinChars(lengthBudgetSource), verifiedItalianLength.chars),
+    label: 'Body post-riparazione anti-copia',
+  });
+
+  // Metadata refresh can change the excerpt used by both lexical and semantic
+  // duplicate admission. Re-run the same gates on the final candidate instead
+  // of publishing a repaired excerpt that was never admitted.
+  if (sourceCopyFinalChanged) {
+    console.error('🔍 Verifica duplicati post-riparazione:');
+    checkForDuplicates(data);
+    await checkSemanticNearDuplicate(data, {
+      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+    });
   }
 
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
