@@ -50,6 +50,7 @@ jobs:
           sparse-checkout: |
             generator/scripts/load-rc-env.mjs
             generator/scripts/lib/google-service-account-token.mjs
+            generator/scripts/lib/source-copy-guard.mjs
             scripts/ci/report-rate-limit-budget.mjs
           sparse-checkout-cone-mode: false
           persist-credentials: false

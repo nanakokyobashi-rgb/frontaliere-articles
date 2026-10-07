@@ -113,6 +113,8 @@ jobs:
           git show HEAD:generator/scripts/load-rc-env.mjs > generator/scripts/load-rc-env.mjs
           git show HEAD:generator/scripts/lib/google-service-account-token.mjs \
             > generator/scripts/lib/google-service-account-token.mjs
+          git show HEAD:generator/scripts/lib/source-copy-guard.mjs \
+            > generator/scripts/lib/source-copy-guard.mjs
 
       - name: Setup Node.js for Remote Config
         uses: actions/setup-node@v7
