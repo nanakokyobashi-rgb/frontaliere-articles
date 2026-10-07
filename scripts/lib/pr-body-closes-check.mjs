@@ -53,6 +53,9 @@
  * file mirrors down, with no change needed there.
  */
 
+import { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+
 // An issue reference: optional `owner/repo` prefix, then `#<digits>`.
 const REF = '(?:[\\w.-]+\\/[\\w.-]+)?#\\d+';
 // Separators GitHub users put between chained refs (the ones it silently ignores):
@@ -67,16 +70,43 @@ const CHAIN = new RegExp(
 );
 const ALL_REFS = new RegExp(REF, 'g');
 
+const PENDING_CLOSE_RE = /\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b\s*[:;,]?\s*$/i;
+const QUALIFIED_REF_START_RE = /^\s*[\w.-]+\/[\w.-]+#\d+\b/;
+
+function isPendingCloseLine(line) {
+  return PENDING_CLOSE_RE.test(String(line || '').trim());
+}
+
+function isClosingLine(line) {
+  const value = String(line || '').trim();
+  return isPendingCloseLine(value)
+    || /\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b\s*(?:[\w.-]+\/[\w.-]+)?#\d+\s*$/i.test(value);
+}
+const REF_START_RE = new RegExp(`^\\s*${REF}\\b`);
+
 /**
  * Detect a closing keyword followed by a chain of ≥2 refs (`kw #a #b ...`). Returns
  * the list of issue numbers in the chain, or null if the line is clean.
  */
-function lineHasMultiCloseViolation(line) {
+function lineHasMultiCloseViolation(line, previousLine = '') {
+  const current = String(line || '');
+  const previous = String(previousLine || '');
+  // A soft-wrapped `Closes #12\n#34` is still one GitHub closing chain. Carry
+  // only a line that starts with a bare/qualified ref when the previous line
+  // belongs to a closing-keyword line. A completed bare `Fixes #12` followed
+  // by an unrelated qualified `owner/repo#34` is two independent references,
+  // not one wrapped closing chain; a pending keyword may still wrap either ref.
+  const continuation = previous
+    && REF_START_RE.test(current)
+    && isClosingLine(previous)
+    && (!QUALIFIED_REF_START_RE.test(current) || isPendingCloseLine(previous))
+    && !lineHasMultiCloseViolation(previous);
+  const source = continuation ? `${previous}\n${current}` : current;
   // Guard: if the "extra" segment actually starts a NEW closing keyword for each
   // ref (e.g. `closes #1, closes #2`), the CHAIN regex won't match because a
   // keyword sits between the separator and the ref — SEP forbids word chars.
   CHAIN.lastIndex = 0;
-  const m = CHAIN.exec(line);
+  const m = CHAIN.exec(source);
   if (!m) return null;
   const chunk = m[0];
   const nums = [];
@@ -91,10 +121,6 @@ function lineHasMultiCloseViolation(line) {
 // The ONLY tokens GitHub acts on. Note what is absent: the gerunds. `Closing
 // #12` / `Fixing #12` read as closure to a human and do nothing at all.
 const EFFECTIVE_KW = '(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)';
-// Markdown punctuation can interleave with horizontal spacing in real bodies.
-// Newlines are excluded from the gap: a keyword on one line must not govern a
-// reference on a later line, while horizontal Markdown punctuation remains
-// tolerated between the keyword and ref.
 // Keep the gap horizontal: `\\s` would let a keyword reach a reference on a
 // later line, while GitHub only closes the reference it sees on that line.
 // Markdown emphasis/punctuation may still sit between the keyword and ref.
@@ -123,65 +149,42 @@ const PAST_REPORT_RE = /\b(?:gi[àa]'?|already|was|were|sono\s+stat[ei]|[èe]'?\
 // `\p{L}` with the `u` flag, NOT `\w`: `\w` is ASCII, so `non è chiusa #849` —
 // the commonest negated form in Italian — broke the chain at the accent and the
 // guard never reached `\s*$`. The lookahead keeps `Non solo chiude #12`
-// reportable: "non solo" concedes the closure, it does not deny it — and it has
-// to list every synonym of that concession, not three of them: `Non solamente
-// chiude #12, ma anche X` and `Not just closing #12` state the SAME concession
-// and were silently swallowed, i.e. a missed closure, which is the expensive
-// direction (a false positive gets discussed, a missed closure leaves an issue
-// open with its fix already on `main`).
+// reportable: "non solo" concedes the closure, it does not deny it.
 const CONCESSIVE =
-  '(?:solo|soltanto|solamente|unicamente|esclusivamente|only|just|merely|simply)';
-// `n(?:[éè]|e['’])` and not `n[éè]`: `ne'` is how `né` is typed on a keyboard
-// without the accent, exactly as `PAST_REPORT_RE` already admits `gi[àa]'?` for
-// `già`. The apostrophe is REQUIRED for the unaccented form — a bare `ne` is the
-// Italian pronoun ("ne chiude tre"), and swallowing it would cost a missed
-// closure, which is the expensive direction.
+  '(?:solo|soltanto|solamente|unicamente|esclusivamente|semplicemente|meramente|puramente|' +
+  'only|just|merely|simply)';
 const NEG_REPORT_RE = new RegExp(
-  `\\b(?:non|n(?:[éè]|e['’])|not|never|mai|senza|without)(?!\\s+${CONCESSIVE}\\b)(?:\\s+[\\p{L}\\p{N}_'’]+){0,2}\\s*$`,
+  `\\b(?:non|n(?:[éè]|e['’])|not|never|mai|senza|without)(?!\\s+${CONCESSIVE}\\b)` +
+  `(?:\\s+[\\p{L}\\p{N}_'’]+){0,2}\\s*$`,
   'iu',
 );
-// Markdown emphasis is not a word, and to a guard anchored to `\s*$` it looks
-// like one: `**non** chiude #849` puts `**` between the negation and the verb,
-// the chain breaks at the asterisks, and the false positive the guard exists to
-// prevent comes back — in the exact form the bodies of this repo are written in.
-// So both report guards read the prefix with the emphasis markers taken out.
-// Only an underscore run BETWEEN two word characters is deleted: it is an
-// intra-word identifier marker (`skip_total`). Asterisks and backticks in the
-// same position are prose punctuation, so they become a space instead. A run
-// anywhere else becomes a space, so `qualcosa**non** chiude #12` keeps the word
-// boundary the `\b` needs.
-// Exported because `pr-body-nextstep-check.mjs` has the same guard blinded the
-// same way (`**non** in questa PR` read as a done state), and a normalizer
-// duplicated between two gates of the same contract drifts (AGENTS.md #6).
 const EMPHASIS_RUN_RE = /[*_`]+/g;
 const WORD_CHAR_RE = /[\p{L}\p{N}]/u;
+
+/**
+ * Remove markdown emphasis without merging real words.
+ *
+ * An underscore between word characters is the identifier form we want to
+ * normalize (`skip_total` → `skiptotal`). Asterisks/backticks between words
+ * are emphasis/code boundaries and must become a space instead.
+ */
 export function stripEmphasis(s) {
   return String(s || '').replace(EMPHASIS_RUN_RE, (run, at, whole) => {
     const prev = whole[at - 1];
     const next = whole[at + run.length];
-    return /^_+$/.test(run) && prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
-  })
-    // I marker diventati spazi lasciano corse di spazi dove il testo ne aveva
-    // uno solo (`per **scelta**` -> `per  scelta `), e ogni regex che cerca una
-    // LOCUZIONE (`\bper scelta\b`, `\bfuori scope\b`) smetterebbe di
-    // agganciarla: la normalizzazione romperebbe cio' che deve preservare. Solo
-    // spazio orizzontale — un a capo resta un confine per chi legge righe.
-    .replace(/[^\S\n]+/g, ' ');
+    return /^_+$/.test(run)
+      && prev
+      && next
+      && WORD_CHAR_RE.test(prev)
+      && WORD_CHAR_RE.test(next)
+      ? ''
+      : ' ';
+  }).replace(/[^\S\n]+/g, ' ');
 }
 // Filler tolerated between the verb and the ref: `Chiusa da #12`, `Risolve
 // definitivamente #12`, `Closing the #12`. Bounded to a known word list so a
 // sentence boundary or real prose can never bridge verb and ref.
 const INTENT_FILLER = "(?:\\s+(?:da|by|the|la|il|lo|le|gli|l'|anche|definitivamente|finalmente|completamente|parzialmente))*";
-// `[\s:]*` — the colon is TOLERATED between verb and ref, and that tolerance is
-// what makes `chiusi: #849` reachable, i.e. what put the false positive above
-// within reach at all. Measured before keeping it, over the 556 PR bodies of
-// the corpus repo (2026-09-06): `<intento>: #N` occurs ONCE — inside PR #886,
-// which is the body quoting that very false positive — and a real keyword with
-// a colon (`Closes: #12`) occurs ZERO times. So dropping the colon would buy
-// nothing measurable and would cost the detection of a genuine `Chiude: #12`,
-// which is the expensive direction (a missed report leaves an issue open with
-// its fix on `main`). It stays, and the negation guard below is what keeps it
-// honest.
 const INTENT_RE = new RegExp(`\\b(${INTENT_KW})\\b${INTENT_FILLER}${MD_GAP}(${REF})`, 'gi');
 
 /** Every ref a real GitHub keyword governs → the ones that will actually close. */
@@ -195,32 +198,9 @@ function effectiveRefs(body) {
 /**
  * Refs a line claims to close with a token GitHub ignores.
  *
- * The two report guards read the WHOLE prefix, not a fixed window: both are
- * anchored to `\s*$` and bounded to ≤2 intervening words, so a longer prefix
- * cannot widen what they match — it can only stop truncating them. The old
- * 24-character slice was narrower than the two-word bound it was supposed to
- * serve, and Italian words are long enough to overflow it: `Il bug non ancora
- * completamente chiuso #849` was reported (`non ancora completamente ` = 25
- * chars, so `non` fell outside the slice) while `non ancora bene chiuso #849`
- * was not. Same sentence, opposite verdict, decided by spelling.
- *
- * `prev` is the previous body line, prepended because the guards are scoped to
- * a SENTENCE and a body is hard-wrapped by lines: `Il bug non è\nchiuso: #849
- * resta aperta.` is the same false positive the guard exists to prevent, split
- * across a soft wrap. Only one line back, and only joined by a space: the ≤2
- * word bound plus the letters-only class means any punctuation, list marker or
- * blank line between the negation and the verb still breaks the chain.
- *
- * The INTENT is matched on the masked line, the two guards read the UNMASKED
- * one (`raw`/`rawPrev`, same string when the caller has nothing better). The
- * asymmetry is the point: masking answers "is this claimed or merely quoted?",
- * which only the claim needs, while the guards answer "what does the sentence
- * around the claim say?" — and a word in an inline code span is still part of
- * that sentence. Without this ``​`non` chiuse #849`` reached the guard as
- * `      chiuse #849`, negation blanked out, and was reported: marking the
- * negated word as code deleted the negation. `maskQuoted` is length-preserving
- * character by character, so `m.index` addresses the same column in both.
- *
+ * The report guards inspect the whole prefix and one previous body line. A
+ * fixed-width prefix made the result depend on the spelling length of the
+ * sentence, while a soft-wrapped `non è\nchiuso: #849` lost the negation.
  * @returns {Array<{ keyword: string, ref: string }>}
  */
 function lineIntentRefs(line, prev = '', raw = line, rawPrev = prev) {
@@ -230,6 +210,10 @@ function lineIntentRefs(line, prev = '', raw = line, rawPrev = prev) {
   INTENT_RE.lastIndex = 0;
   return [...s.matchAll(INTENT_RE)]
     .filter((m) => {
+      // Keep the whole prefix: the regexes are anchored and bounded, so this
+      // cannot widen the report but does preserve long negated/past reports.
+      // The previous line covers bodies hard-wrapped between the guard word
+      // and the ineffective keyword.
       const before = stripEmphasis((carry ? `${carry} ` : '') + src.slice(0, m.index));
       return !PAST_REPORT_RE.test(before) && !NEG_REPORT_RE.test(before);
     })
@@ -274,12 +258,21 @@ export function checkClosesLines(body = '') {
   for (let i = 0; i < lines.length; i++) {
     // Scan the masked line, but REPORT the original: the author has to find the
     // line in their own body, and a row of blanks is not a landmark.
-    const text = (rawLines[i] ?? lines[i]).trim();
-    const refs = lineHasMultiCloseViolation(lines[i]);
+    const rawCurrent = (rawLines[i] ?? lines[i]).trim();
+    const previousLine = i > 0 ? lines[i - 1] : '';
+    const continuesChain = previousLine
+      && REF_START_RE.test(lines[i])
+      && isClosingLine(previousLine)
+      && (!QUALIFIED_REF_START_RE.test(lines[i]) || isPendingCloseLine(previousLine))
+      && !lineHasMultiCloseViolation(previousLine);
+    const text = continuesChain
+      ? `${(rawLines[i - 1] ?? lines[i - 1]).trim()} ${rawCurrent}`.trim()
+      : rawCurrent;
+    const refs = lineHasMultiCloseViolation(lines[i], previousLine);
     if (refs) {
       violations.push({
         type: 'multi-ref-close',
-        line: i + 1,
+        line: continuesChain ? i : i + 1,
         text,
         refs,
         message:
@@ -317,7 +310,14 @@ export function checkClosesLines(body = '') {
 }
 
 // CLI mode: read body from arg or stdin, print JSON, exit 1 on violation.
-if (process.argv[1] && process.argv[1].endsWith('pr-body-closes-check.mjs')) {
+// Entrypoint canonico, non suffisso del path (#7292): `endsWith` diceva true
+// per QUALUNQUE entrypoint il cui `argv[1]` finisse con questo nome di file;
+// `realpathSync` copre l'invocazione via symlink, dove `argv[1]` e' il link.
+const isDirectRun = (() => {
+  try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
+  catch { return false; }
+})();
+if (isDirectRun) {
   const arg = process.argv[2];
   const run = (body) => {
     const res = checkClosesLines(body);

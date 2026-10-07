@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { detectLanguageWithConfidence } from '../../generator/scripts/lib/detect-language.mjs';
+import '../../host/cantonSectionsBootstrap.mjs';
 import { CORPUS_SECTIONS } from '../lib/corpus-sections.mjs';
 import { floorFrom } from '../lib/corpus-floors.mjs';
 

@@ -9,6 +9,7 @@
  * allo script di accorgersene. Le sezioni sono quelle del core: niente qui
  * elenca «frontaliere» e «svizzera» come lista da controllare.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';

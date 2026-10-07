@@ -1,3 +1,5 @@
+import '../../host/cantonSectionsBootstrap.mjs';
+
 /**
  * Corpus compatibility entry point for the engine-transported SEO resolver.
  * Keep this shim for generator scripts and older callers; the implementation

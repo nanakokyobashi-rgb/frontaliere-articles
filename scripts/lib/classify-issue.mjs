@@ -61,6 +61,9 @@
  *   node scripts/lib/classify-issue.mjs "<title>" '<labels-json-array>'
  */
 
+import { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+
 const FIXER_EXEMPT_LABELS = new Set([
   'backlog',
   'needs-human',
@@ -169,8 +172,16 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
   return { category, autofix, route, fuPrio };
 }
 
+const isDirectRun = (() => {
+  try {
+    return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
+  } catch {
+    return false;
+  }
+})();
+
 // CLI mode
-if (process.argv[1] && process.argv[1].endsWith('classify-issue.mjs')) {
+if (isDirectRun) {
   const title = process.argv[2] || '';
   let labels = [];
   try {

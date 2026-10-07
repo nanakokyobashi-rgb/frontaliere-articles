@@ -30,6 +30,7 @@
  * e' derivato e non riscritto a mano, perche' la prossima costante assoluta
  * scivolerebbe dentro con la stessa facilita' della prima.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -61,13 +62,14 @@ import {
   countSourceArchiveSitemapUrls,
   ARCHIVE_SITEMAP,
   sectionFloor,
+  floorPolicyOf,
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
   SECTION_COUNTERS,
   SECTION_SITEMAPS,
   feedSection,
   expectedFeedNames,
-  floorViolations,
+  floorViolations as rawFloorViolations,
   retentionReport,
   retentionAdvisories,
   retentionLines,
@@ -88,6 +90,27 @@ const HOST_SEO_HUBS = fs.readFileSync(join(ROOT, 'host/seoHubsData.ts'), 'utf-8'
 const ARTICLE_READERS = fs.readFileSync(join(ROOT, 'engine/shared/articleReaders.ts'), 'utf-8');
 const CORPUS_FLOORS = fs.readFileSync(join(ROOT, 'scripts/lib/corpus-floors.mjs'), 'utf-8');
 const OG_PAGES_PLUGIN = fs.readFileSync(join(ROOT, 'engine/ogPagesPlugin.ts'), 'utf-8');
+
+// I fixture storici di questo file misurano ancora le due superfici proprie
+// del manifest. D22 può aggiungere sezioni di famiglia senza articoli: i loro
+// feed vuoti/assenti sono legittimi finché il corpus non ha un registro. La
+// lista dei feed resta quella del producer; il wrapper marca come nuove le
+// sezioni family attive, così `floorViolations` applica nei fixture la stessa
+// eccezione zero-articoli del percorso reale `expectFromCorpus`.
+const HISTORICAL_RSS_SECTIONS = Object.freeze(
+  RSS_SECTIONS.filter((section) => floorPolicyOf(section.id) !== 'family'),
+);
+const NEW_FAMILY_SECTIONS = Object.freeze(
+  RSS_SECTIONS.filter((section) => floorPolicyOf(section.id) === 'family').map(({ id }) => id),
+);
+
+function floorViolations(measured, expected, retention) {
+  return rawFloorViolations(measured, {
+    ...expected,
+    rssSections: RSS_SECTIONS,
+    newFamilySections: expected.newFamilySections ?? NEW_FAMILY_SECTIONS,
+  }, retention);
+}
 
 /** Una superficie sana su un corpus della taglia di quello reale. */
 function healthy() {
@@ -118,7 +141,7 @@ function writeHealthyFeeds(dir) {
   const pubDate = new Date(Date.now() + FEED_FRESHNESS_MAX_LAG_HOURS * 60 * 60 * 1000).toUTCString();
   const item = `<item><pubDate>${pubDate}</pubDate></item>`;
   const xml = `<rss><channel>${item.repeat(50)}</channel></rss>`;
-  for (const name of expectedFeedNames(RSS_SECTIONS)) fs.writeFileSync(join(dir, name), xml);
+  for (const name of expectedFeedNames(HISTORICAL_RSS_SECTIONS)) fs.writeFileSync(join(dir, name), xml);
   for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
     const count = countSourceArticles(ROOT, section);
     fs.writeFileSync(join(dir, file), `<urlset>${'<url>x</url>'.repeat(count)}</urlset>`);
@@ -739,6 +762,10 @@ test('i feed di questo checkout sono gatati contro i chunk che li generano', asy
       countSeoEntries(ROOT, section.seoFiles),
       `${section.id}: la lista dei chunk arriva da RSS_SECTIONS, non da una seconda copia`,
     );
+    if (expected.newFamilySections?.includes(section.id)) {
+      assert.equal(expected.feedSources[section.id], 0, `${section.id}: sezione nuova senza articoli`);
+      continue;
+    }
     assert.ok(expected.feedSources[section.id] > 500, `${section.id}: ${expected.feedSources[section.id]}`);
   }
   // Le due popolazioni divergono davvero: se coincidessero, questo fix non
@@ -881,7 +908,10 @@ test('expectFromCorpus legge davvero un root alternativo e non il checkout del t
       else process.env.API_FLOOR_BASE_REVISION = configuredRevision;
     }
     assert.deepEqual(expected.sourceArticles, { frontaliere: 1, svizzera: 1 });
-    assert.deepEqual(expected.feedSources, { frontaliere: 1, svizzera: 1 });
+    assert.deepEqual(
+      Object.fromEntries(HISTORICAL_RSS_SECTIONS.map(({ id }) => [id, expected.feedSources[id]])),
+      { frontaliere: 1, svizzera: 1 },
+    );
     assert.deepEqual(expected.latestSeoPublications.frontaliere, {
       articleId: 'alt',
       datePublished: '2026-02-03T04:05:06Z',

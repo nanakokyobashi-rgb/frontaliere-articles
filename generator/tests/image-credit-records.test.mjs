@@ -6,6 +6,7 @@
  * Fixtures only, in temporary trees: the same checks on the REAL corpus are
  * the content gate `image-credits-content.test.mjs`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -26,6 +27,7 @@ import {
 import { acceptCommonsCandidate, finalizeCreditRecord, writeCreditRecord } from '../scripts/lib/commons-credit.mjs';
 import { relativeImportClosure } from './lib/reachable-source.mjs';
 import { imageCreditParts, imageObjectCreditFields, validateImageCreditRecord } from '../../engine/shared/imageCredits.mjs';
+import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SNAPSHOT = JSON.parse(fs.readFileSync(new URL('./fixtures/commons-credit/probe-2026-10-04.snapshot.json', import.meta.url), 'utf-8'));
@@ -305,6 +307,11 @@ function blogIndexTree() {
     fs.mkdirSync(path.dirname(path.join(root, rel)), { recursive: true });
     fs.cpSync(file, path.join(root, rel));
   }
+  // D22: the corpus bootstrap reads the committed activation profile before
+  // any publisher surface is built. Fixture roots must carry that input too;
+  // otherwise this isolated publisher test fails before it reaches its own
+  // image-credit assertions.
+  writeRaw(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   writeRaw(root, 'content/blog-body/it/uno.ts', 'export const uno = true;\n');
   writeRaw(root, 'content/blog-body-ch/it/due.ts', 'export const due = true;\n');
   writeRaw(root, 'content/blog-articles-data.ts', "export const RAW_ARTICLES = [{ id: 'uno', category: 'news', date: '2026-10-01', image: '/images/blog/uno.webp' }];\n");
@@ -323,6 +330,7 @@ test('build-blog-index publishes image-credits-<section>.json beside the index, 
     writeRaw(root, 'dist/api/manifest.json', JSON.stringify({ schema: 1, commit: 'f00dfeed', counts: {}, files: {} }));
     const result = spawnSync(process.execPath, [path.join(root, 'scripts/build-blog-index.mjs')], { cwd: root, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stdout + result.stderr);
+    const sectionNames = CORPUS_SECTIONS.map(({ section }) => section);
     const frontaliere = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/data/image-credits-frontaliere.json'), 'utf-8'));
     assert.equal(frontaliere.commit, 'f00dfeed', 'the release of manifest.json');
     assert.deepEqual(frontaliere.covers, { uno: { file: 'Locarno 1.jpg', modified: 'cropped' } });
@@ -330,20 +338,20 @@ test('build-blog-index publishes image-credits-<section>.json beside the index, 
     const svizzera = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/data/image-credits-svizzera.json'), 'utf-8'));
     assert.deepEqual(svizzera.covers, {}, 'a section without a credited cover still gets its (empty) file');
     const manifest = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/manifest.json'), 'utf-8'));
-    for (const section of ['frontaliere', 'svizzera']) {
+    for (const section of sectionNames) {
       const rel = `data/image-credits-${section}.json`;
       assert.equal(manifest.files[rel], fs.statSync(path.join(root, 'dist/api', rel)).size, rel);
     }
     const aggregate = JSON.parse(fs.readFileSync(path.join(root, 'dist/api/data/image-credits-blog.json'), 'utf-8'));
     assert.equal(aggregate.schema, 1);
     assert.equal(aggregate.section, 'blog');
-    assert.deepEqual(aggregate.sections, {
-      frontaliere: 'image-credits-frontaliere.json',
-      svizzera: 'image-credits-svizzera.json',
-    });
+    assert.deepEqual(
+      aggregate.sections,
+      Object.fromEntries(sectionNames.map((section) => [section, `image-credits-${section}.json`])),
+    );
     assert.equal(manifest.files['data/image-credits-blog.json'], fs.statSync(path.join(root, 'dist/api/data/image-credits-blog.json')).size);
-    assert.equal(manifest.counts.imageCreditFiles, 3);
-    assert.equal(manifest.counts.blogIndexShards, 16, 'the index declaration is unchanged');
+    assert.equal(manifest.counts.imageCreditFiles, sectionNames.length + 1);
+    assert.equal(manifest.counts.blogIndexShards, sectionNames.length * 8, 'otto shard per sezione attiva');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

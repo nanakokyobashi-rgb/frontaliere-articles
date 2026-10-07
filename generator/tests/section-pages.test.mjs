@@ -7,6 +7,7 @@
  * DOVE — chiavi R2, difetti che fermano una pagina, hub senza dati, sezioni
  * toccate da un commit, riconciliazione — e il cablaggio dei workflow.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, writeFileSync } from 'node:fs';
@@ -48,8 +49,10 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const TI = ARTICLE_SECTION_CORE_ALL['canton-ti'];
-const WITH_TI = [...ARTICLE_SECTION_CORE_LIST, TI];
-const ACTIVE_WITH_TI = { ...ARTICLE_SECTION_CORE, 'canton-ti': TI };
+const HISTORICAL_CORE_LIST = ARTICLE_SECTION_CORE_LIST.filter((core) => core.kind !== 'canton');
+const HISTORICAL_CORE = Object.fromEntries(HISTORICAL_CORE_LIST.map((core) => [core.section, core]));
+const WITH_TI = [...HISTORICAL_CORE_LIST, TI];
+const ACTIVE_WITH_TI = { ...HISTORICAL_CORE, 'canton-ti': TI };
 const read = (rel) => readFileSync(path.join(ROOT, rel), 'utf8');
 
 // ── Publisher ────────────────────────────────────────────────────────────────
@@ -662,7 +665,7 @@ test('registro: gli hub mancanti lasciano draft, quelli malformati bloccano', ()
 // ── Cosa fa scattare un publish ──────────────────────────────────────────────
 
 test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cambiati', () => {
-  assert.deepEqual(r2PublishPlan(['content/blog-body-canton-ti/it/a.ts'], ARTICLE_SECTION_CORE_LIST), [], 'sezione non attiva: niente');
+  assert.deepEqual(r2PublishPlan(['content/blog-body-canton-ti/it/a.ts'], HISTORICAL_CORE_LIST), [], 'sezione non attiva: niente');
   const plan = r2PublishPlan([
     'content/blog-body-canton-ti/it/b.ts',
     'content/blog-body-canton-ti/de/a.ts',
@@ -733,8 +736,8 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
 test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le storiche', () => {
   assert.equal(bodyRegex(WITH_TI, { served: 'shard' }), '^content/(blog-body|blog-body-ch)/[a-z]{2}/.+\\.ts$');
   assert.equal(bodyRegex(WITH_TI, { served: 'r2' }), '^content/(blog-body-canton-ti)/[a-z]{2}/.+\\.ts$');
-  assert.equal(bodyRegex(ARTICLE_SECTION_CORE_LIST, { served: 'r2' }), '^$', 'nessuna sezione R2 attiva: non combacia con niente');
-  assert.ok(!new RegExp(bodyRegex(ARTICLE_SECTION_CORE_LIST, { served: 'r2' })).test('content/blog-body/it/x.ts'));
+  assert.equal(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' }), '^$', 'nessuna sezione R2 attiva: non combacia con niente');
+  assert.ok(!new RegExp(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' })).test('content/blog-body/it/x.ts'));
   assert.throws(() => bodyRegex(WITH_TI, { served: 'pages' }), /sconosciuto/);
   assert.match(read('.github/workflows/fast-publish-article.yml'), /fast-publish-section\.mjs body-regex shard\)/);
 });

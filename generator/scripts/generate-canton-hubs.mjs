@@ -32,11 +32,13 @@
  * CANTON_HUBS_NOW) fissa l'orologio; DRY_RUN=1 equivale a --dry-run.
  * Gira sotto `node` (>= 22.18) o sotto `npx -y tsx@4.23.15`.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../engine/shared/cantonArticleSectionCore.generated.mjs';
+import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { cantonSectionIds, cantonSectionProfile, loadCantonSectionProfiles, resolveCantonSectionGate } from './lib/canton-section-profile.mjs';
 import { loadCantonPool, loadSectionArticles, selectCuratedArticles } from './lib/canton-hubs/articles.mjs';
@@ -96,7 +98,7 @@ export function loadDatasets(root = ROOT, log = () => {}) {
 export function enabledCantonSections(env = process.env) {
   const profiles = loadCantonSectionProfiles();
   return cantonSectionIds().filter((id) =>
-    Object.prototype.hasOwnProperty.call(ARTICLE_SECTION_CORE, id) || resolveCantonSectionGate(id, { env, profiles }).enabled);
+    Object.prototype.hasOwnProperty.call(activeCorpusCoreMap(), id) || resolveCantonSectionGate(id, { env, profiles }).enabled);
 }
 
 export function parseArgs(argv, env = process.env) {

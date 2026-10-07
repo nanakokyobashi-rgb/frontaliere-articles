@@ -196,15 +196,15 @@ describe('la decisione: il one-shot si concede, e la causa e nominata', () => {
     assert.doesNotMatch(d.reason, /Serve far passare i test/);
   });
 
-  test('lo skip del guard ha la precedenza: li il re-trigger e un no-op', () => {
+  test('l abort esplicito ha la precedenza sul guard: il re-trigger e la cura', () => {
     // I due stati sono disgiunti nel workflow (a review saltata lo step di
-    // abort e' `skipped`), ma se mai arrivassero insieme la cura piu'
-    // conservativa e' quella del guard: NON concedere.
+    // abort e' `skipped`), ma se mai arrivassero insieme l abort esplicito
+    // descrive la causa verificata: il re-trigger puo' ripararla.
     const d = decideReopen({
       vitestConclusion: 'failure', fingerprint: redFp, prior: null,
       reviewGateFailure: true, reviewSkippedByGuard: true, reviewAborted: true,
     });
-    assert.equal(d.cause, 'review-gate-skipped');
+    assert.equal(d.cause, 'review-gate-aborted');
   });
 
   test('nessuna regressione sui due rossi gia coperti', () => {

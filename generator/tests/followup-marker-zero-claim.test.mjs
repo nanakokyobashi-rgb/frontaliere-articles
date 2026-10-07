@@ -34,6 +34,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   gatePreservedFollowupMatches,
+  ghBucketRead,
+  ISSUE_NUMBER_NOT_FOUND_RE,
   persistedBucketIssueMatches,
   readBucketIssue,
   triageMarkerPersistenceExpectation,
@@ -314,22 +316,93 @@ test('nessun riferimento provato: esito NON positivo', () => {
 test('il bucket del sito viene trovato anche quando `GH_REPO` è il corpus', () => {
   // È il difetto misurato: un item del corpus con target un file del sito conia
   // NEL SITO, e il marker della PR corpus cita quel numero. Leggendo solo
-  // `GH_REPO`, `gh` risponde «Could not resolve to an issue with the number
-  // 9102» → `null` → «lettura indisponibile» su OGNI bucket cross-repo. Quattro
-  // delle 11 PR bloccate nella run 35430183038 sono esattamente questo caso.
+  // `GH_REPO`, `gh` risponde «Could not resolve to an issue or pull request
+  // with the number of 9102»: è un 404 definitivo per il repository corrente,
+  // non una lettura indisponibile. Quattro delle 11 PR bloccate nella run
+  // 35430183038 sono esattamente questo caso.
   const calls = [];
   const fakeGh = (args) => {
     const repo = args[args.indexOf('--repo') + 1];
     calls.push(repo);
-    if (repo.startsWith('nanakokyobashi-rgb')) return null; // 404, come nella run reale
+    if (repo.startsWith('nanakokyobashi-rgb')) return false; // 404, come nella run reale
     return JSON.stringify(SITE_BUCKET);
   };
   const read = readBucketIssue(9102, fakeGh, ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no']);
   assert.equal(read.candidates.length, 1);
   assert.equal(read.candidates[0].number, 9102, 'il bucket del sito deve essere leggibile dal corpus');
   assert.equal(read.candidates[0].repo, 'valerielinc-ops/frontaliere-si-o-no');
-  assert.equal(read.unreadable, true, 'il 404 del corpus resta «non lo so», non «assente»');
+  assert.equal(read.unreadable, false, 'il 404 del corpus è un’assenza definitiva');
   assert.deepEqual(calls, ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no']);
+});
+
+test('ghBucketRead distingue un numero assente da un errore di lettura', () => {
+  const notFound = Object.assign(new Error('gh failed'), {
+    stderr: 'GraphQL: Could not resolve to an issue or pull request with the number of 9102.',
+  });
+  assert.equal(ghBucketRead(['issue', 'view', '9102'], '', () => { throw notFound; }), false);
+  assert.equal(ISSUE_NUMBER_NOT_FOUND_RE.test(notFound.stderr), true);
+  assert.equal(ghBucketRead(['issue', 'view', '9102'], '', () => {
+    throw Object.assign(new Error('gh failed'), {
+      stderr: Buffer.from('GraphQL: Could not resolve to an Issue with the number of 9102. (repository.issue)'),
+    });
+  }), false);
+
+  for (const stderr of [
+    "GraphQL: Could not resolve to a Repository with the name 'owner/missing'. (repository)",
+    'HTTP 502: Bad Gateway (https://api.github.com/graphql)',
+    'HTTP 401: Bad credentials',
+    '',
+  ]) {
+    const unavailable = Object.assign(new Error('gh failed'), { stderr });
+    assert.equal(ghBucketRead(['issue', 'view', '9102'], '', () => { throw unavailable; }), null, stderr);
+  }
+  assert.equal(ghBucketRead(['issue', 'view', '9102'], '', () => '{"number":9102}'), '{"number":9102}');
+  assert.equal(ISSUE_NUMBER_NOT_FOUND_RE.test('Could not resolve to a Repository with the name'), false);
+});
+
+test('ISSUE_NUMBER_NOT_FOUND_RE riconosce il messaggio letterale di gh, letto dal vivo', () => {
+  // stderr di `gh issue view 99999999 --repo <owner>/<repo> --json number`,
+  // identico sui due repository il 2026-10-06. Il testo ha «of» dopo
+  // «number»: la regex segue questo, non una citazione a memoria.
+  const live = 'GraphQL: Could not resolve to an issue or pull request with the number of 99999999. (repository.issue)';
+  assert.equal(ISSUE_NUMBER_NOT_FOUND_RE.test(live), true);
+  assert.equal(ghBucketRead(['issue', 'view', '99999999'], '', () => {
+    throw Object.assign(new Error('gh failed'), { stderr: `${live}\n` });
+  }), false);
+});
+
+test('readBucketIssue usa la firma effettiva di ghBucketRead attraverso i due repository', () => {
+  const repos = ['valerielinc-ops/frontaliere-si-o-no', 'nanakokyobashi-rgb/frontaliere-articles'];
+  const notFound = Object.assign(new Error('gh failed'), {
+    stderr: 'GraphQL: Could not resolve to an issue or pull request with the number of 9102.',
+  });
+  const calls = [];
+  const exec = (command, args) => {
+    const repo = args[args.indexOf('--repo') + 1];
+    calls.push({ command, repo });
+    if (repo === repos[1]) throw notFound;
+    return JSON.stringify(SITE_BUCKET);
+  };
+  const run = (args, token = '', execArg = exec) => ghBucketRead(args, token, execArg);
+  const read = readBucketIssue(9102, run, repos);
+  assert.deepEqual(read, { candidates: [{ ...SITE_BUCKET, repo: repos[0] }], unreadable: false });
+  assert.deepEqual(calls, [{ command: 'gh', repo: repos[0] }, { command: 'gh', repo: repos[1] }]);
+
+  const marker = '## Post-merge follow-up triage\n\nBucket daily: #9102\n- Follow-up item: FU-2026-09-18-011';
+  assert.equal(verifyTriageMarkerPersistence(marker, 1563, () => read), true);
+});
+
+test('un errore GitHub non-NOT_FOUND resta unreadable attraverso readBucketIssue', () => {
+  const repos = ['valerielinc-ops/frontaliere-si-o-no', 'nanakokyobashi-rgb/frontaliere-articles'];
+  const unavailable = Object.assign(new Error('gh failed'), {
+    stderr: Buffer.from('HTTP 502: Bad Gateway (https://api.github.com/graphql)'),
+  });
+  const exec = () => { throw unavailable; };
+  const run = (args, token = '', execArg = exec) => ghBucketRead(args, token, execArg);
+  const read = readBucketIssue(9102, run, repos);
+  assert.deepEqual(read, { candidates: [], unreadable: true });
+  const marker = '## Post-merge follow-up triage\n\nBucket daily: #9102\n- Follow-up item: FU-2026-09-18-011';
+  assert.equal(verifyTriageMarkerPersistence(marker, 1563, () => read), null);
 });
 
 test('una issue omonima nel primo repository non nasconde il bucket vero nel secondo', () => {
