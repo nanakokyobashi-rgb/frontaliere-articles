@@ -98863,7 +98863,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/diesel-rincaro-geopolitica-svizzera.webp`,
+        "url": `${BASE_URL}/images/blog/article-raffineria-cressier-carburanti.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Pompa di diesel in Svizzera con una raffineria sullo sfondo"
@@ -98897,7 +98897,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il 29 novembre si voterà su quattro nuovi oggetti: aumento dell'IVA per la 13esima AVS, due iniziative popolari e modifica della legge sul materiale bellico.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/voto-iva-avs-novembre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-quattro-oggetti-urne-novembre.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Urna svizzera e schede per il voto del 29 novembre"
