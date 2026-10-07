@@ -251,8 +251,8 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "075ef4fa2fc7d8f2",
-        "corpus": "075ef4fa2fc7d8f2",
+        "site": "200246b909cc0cbb",
+        "corpus": "200246b909cc0cbb",
         "alignedAt": "2026-10-07"
       }
     },
@@ -3334,9 +3334,9 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "03387084038e0dc3",
-        "corpus": "03387084038e0dc3",
-        "alignedAt": "2026-09-25"
+        "site": "82c63b1e1203e397",
+        "corpus": "82c63b1e1203e397",
+        "alignedAt": "2026-10-07"
       }
     },
     {
