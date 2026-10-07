@@ -12751,6 +12751,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, 79-year-old seriously injured after falling from a ladder',
     'blog.article.caduta-scala-locate-varesino.excerpt': '## TL;DR - Fall from a ladder on Via Madonnetta - A 79-year-old man fell at a farm - Emergency services dispatched under red code',
     'blog.article.caduta-scala-locate-varesino.imageAlt': 'Rural setting of an agricultural farm',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'Dialect theatre returns to Cantello: “Those Japanese strangers”',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': '## TL;DR - Two dates: October 10 at 21 and October 18 at 15 - Dialect version by Alessandro Campi - On stage, the amateur company Tutti in Scena',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Poster for the dialect play “Quei giargianes da giappunes” at Teatro Pax in Cantello, performed by Tutti in Scena',
 };
 
 export default blogMetaEn;
