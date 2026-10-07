@@ -31,6 +31,7 @@ test('#1139: auto-merge sweep usa REST paginata e fallisce chiuso sulla lettura'
   assert.match(source, /native-automerge-sweep-policy\.mjs/);
   assert.match(source, /--enroll "\$pages_file"/);
   assert.match(source, /'scripts\/ci\/native-automerge-gate\.mjs\|native-automerge-gate\.mjs'/);
+  assert.match(source, /'scripts\/ci\/lib\/transport-pr\.mjs\|lib\/transport-pr\.mjs'/);
   assert.match(source, /source_path="\$\{spec%%\|\*\}"/);
   assert.match(source, /GH_TOKEN="\$GITHUB_PAT_NANAKO" node "\$NATIVE_AUTOMERGE_HELPER_DIR\/native-automerge-gate\.mjs"/);
   assert.doesNotMatch(source, /gh pr merge/, 'lo sweep non deve avere un decisore di merge separato dal gate trusted');
@@ -155,6 +156,7 @@ test('il tree helper scaricato dallo sweep si importa senza dipendenze omesse', 
     ['scripts/ci/lib/fetchPrFiles.mjs', 'lib/fetchPrFiles.mjs'],
     ['scripts/ci/lib/vitestCheck.mjs', 'lib/vitestCheck.mjs'],
     ['scripts/ci/lib/constants.mjs', 'lib/constants.mjs'],
+    ['scripts/ci/lib/transport-pr.mjs', 'lib/transport-pr.mjs'],
     ['scripts/ci/native-automerge-sweep-policy.mjs', 'native-automerge-sweep-policy.mjs'],
   ];
   try {

@@ -18,6 +18,11 @@ import { isTerminalReviewState } from './lib/review-states.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import {
+  classifyIdenticalFindings,
+  routeIdenticalFindings,
+} from './lib/identical-review-routing.mjs';
+import { isIdenticalTwinTransportPr } from './lib/transport-pr.mjs';
+import {
   changedLinesFromPatch,
   stableFindingId,
   unchangedLineImportants,
@@ -542,6 +547,210 @@ function fetchChangedFiles(repo, pr) {
   return fetchPrFiles(Number(pr), gh, repo);
 }
 
+function readIdenticalManifest() {
+  const manifestPath = process.env.IDENTICAL_MANIFEST_PATH;
+  const source = manifestPath
+    ? readFileSync(manifestPath, 'utf8')
+    : readFileSync(new URL('./loop-sync-manifest.json', import.meta.url), 'utf8');
+  return JSON.parse(source);
+}
+
+function transportPrContext(repo, pr, files, filesComplete, manifest) {
+  if (filesComplete !== true) {
+    return { transport: false, transportedFiles: [], reason: 'elenco file PR non completo' };
+  }
+  try {
+    const metadata = gh(['api', `repos/${repo}/pulls/${pr}`]);
+    return isIdenticalTwinTransportPr({
+      pr: metadata,
+      repository: repo,
+      files,
+      filesComplete,
+      manifest,
+    });
+  } catch (error) {
+    return {
+      transport: false,
+      transportedFiles: [],
+      reason: `metadata PR trasporto non leggibile (${String(error).slice(0, 120)})`,
+    };
+  }
+}
+
+
+function withSiteIssueCreator(siteRepo, siteToken) {
+  if (!siteRepo) throw new Error('SITE_REPO obbligatorio per il routing identical');
+  if (!siteToken) throw new Error('SITE_TOKEN/GITHUB_PAT assente: routing identical fail-closed');
+  return async (options) => {
+    const previous = new Map([
+      ['GH_REPO', process.env.GH_REPO],
+      ['GH_TOKEN', process.env.GH_TOKEN],
+      ['GITHUB_TOKEN', process.env.GITHUB_TOKEN],
+    ]);
+    process.env.GH_REPO = siteRepo;
+    process.env.GH_TOKEN = siteToken;
+    process.env.GITHUB_TOKEN = siteToken;
+    try {
+      return await createGithubIssue(options);
+    } finally {
+      for (const [key, value] of previous) {
+        if (value === undefined) delete process.env[key];
+        else process.env[key] = value;
+      }
+    }
+  };
+}
+
+async function commentIdenticalRouting(repo, pr, body, { marker } = {}) {
+  let comments = '';
+  try {
+    comments = gh(['api', `repos/${repo}/issues/${pr}/comments`, '--paginate', '--jq', '.[].body'], { json: false });
+  } catch (error) {
+    throw new Error(`commenti PR non leggibili durante il routing identical: ${String(error).slice(0, 160)}`);
+  }
+  if (marker && String(comments).includes(marker)) return { posted: false, duplicate: true };
+  gh(['pr', 'comment', String(pr), '--repo', repo, '--body', body], { json: false });
+  return { posted: true, duplicate: false };
+}
+
+function findingIdentity(finding) {
+  return finding?.stableId || finding?.lineNumber || finding?.text;
+}
+
+function blockIdenticalRouting(result, { candidates, allIdentical, reason }) {
+  const findingIds = [...new Set(candidates.map((item) => item.findingId))];
+  return {
+    ...result,
+    outsideOnly: false,
+    blocking: true,
+    identicalOnly: false,
+    identicalBlockingFindingIds: findingIds,
+    identicalRouting: {
+      candidates,
+      routed: [],
+      routedFindingIds: [],
+      allIdentical,
+      blocked: true,
+      handoffConfirmed: false,
+      reason,
+    },
+    transportException: false,
+  };
+}
+
+/**
+ * Instrada i finding esclusivamente identical prima del calcolo del follow-up.
+ * Per le PR normali un finding identical resta bloccante sia prima sia dopo
+ * l'handoff: il commento/issue sul sito è una traccia operativa. L'unica
+ * eccezione è l'attestazione completa del canale transport-identical-twins,
+ * consumata poi dal gate nativo.
+ */
+export function applyRoutedIdenticalResult(result, routing) {
+  const routedIds = new Set(routing?.routedFindingIds || []);
+  const transportException = routing?.transportException === true;
+  if (routedIds.size === 0) {
+    return {
+      ...result,
+      identicalOnly: false,
+      identicalBlockingFindingIds: [],
+      identicalRouting: routing,
+      transportException: false,
+    };
+  }
+  const keep = (finding) => !routedIds.has(findingIdentity(finding));
+  const outside = result.outside.filter(keep);
+  const inScope = result.inScope.filter(keep);
+  const unresolved = result.unresolved.filter(keep);
+  return {
+    ...result,
+    outside,
+    inScope,
+    unresolved,
+    bodyOnly: false,
+    outsideOnly: false,
+    blocking: !transportException,
+    identicalOnly: routing.allIdentical,
+    identicalBlockingFindingIds: transportException ? [] : [...routedIds],
+    identicalRouting: { ...routing, handoffConfirmed: true },
+    transportException,
+  };
+}
+
+export async function applyIdenticalRouting(result, {
+  repo,
+  pr,
+  prUrl,
+  mutate,
+  headSha = null,
+  reviewId = null,
+} = {}) {
+  const declassified = new Set([
+    ...(result.staleBodyDeclassified || []).map(findingIdentity),
+    ...(result.staleDeclassified || []).map(findingIdentity),
+  ]);
+  const classifiedFindings = [
+    ...(result.outside || []),
+    ...(result.inScope || []),
+  ].filter((finding) => !declassified.has(findingIdentity(finding)));
+  const openFindings = [
+    ...classifiedFindings,
+    ...(result.unresolved || []),
+  ].filter((finding) => !declassified.has(findingIdentity(finding)));
+  const manifest = readIdenticalManifest();
+  const candidates = classifyIdenticalFindings(classifiedFindings, manifest);
+  if (candidates.length === 0) {
+    return {
+      ...result,
+      identicalOnly: false,
+      identicalBlockingFindingIds: [],
+      identicalRouting: null,
+      transportException: false,
+    };
+  }
+  const candidateFindingIds = new Set(candidates.map((item) => item.findingId));
+  const openFindingIds = new Set(openFindings.map(findingIdentity));
+  const allIdentical = openFindingIds.size > 0 && candidateFindingIds.size === openFindingIds.size;
+  const siteRepo = process.env.SITE_REPO;
+  const siteToken = process.env.SITE_TOKEN || process.env.GITHUB_PAT || '';
+  if (!mutate || !siteRepo || !siteToken) {
+    const reason = !mutate
+      ? 'routing identical disabilitato dal chiamante'
+      : (!siteRepo
+        ? 'SITE_REPO assente: handoff identical non verificabile'
+        : 'SITE_TOKEN/GITHUB_PAT assente: handoff identical non verificabile');
+    return blockIdenticalRouting(result, { candidates, allIdentical, reason });
+  }
+  const transportPr = transportPrContext(
+    repo,
+    pr,
+    result.changedFiles || [],
+    result.changedFilesComplete,
+    manifest,
+  );
+  const routing = await routeIdenticalFindings({
+    findings: classifiedFindings,
+    allFindings: openFindings,
+    manifest,
+    repo,
+    pr,
+    prUrl,
+    createIssue: withSiteIssueCreator(siteRepo, siteToken),
+    commentPr: (body, options) => commentIdenticalRouting(repo, pr, body, options),
+    mutate: true,
+    transportPr,
+    headSha: headSha || resolveHeadSha(repo, pr),
+    reviewId,
+  });
+  if ((routing.routedFindingIds || []).length === 0) {
+    return blockIdenticalRouting(result, {
+      candidates,
+      allIdentical,
+      reason: 'handoff identical non confermato dal writer',
+    });
+  }
+  return applyRoutedIdenticalResult(result, routing);
+}
+
 /**
  * Body corrente della PR. Un errore torna `null`, che spegne il declassamento
  * invece di concederlo: senza il body non c'e' prova che l'anchor cada dentro
@@ -995,6 +1204,7 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  */
 export async function classifyAndMintReview(body, {
   repo, pr, prUrl, mutate = true, headSha = null,
+  reviewId = null,
   priorFindingIds = null, changedLinesSince = null,
   // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
   // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
@@ -1039,7 +1249,7 @@ export async function classifyAndMintReview(body, {
       });
     const staleBodyIds = new Set(staleBodyDeclassified.map((finding) => stableFindingId(finding)));
     const stillOpen = findings.filter((finding) => !staleBodyIds.has(stableFindingId(finding)));
-    return {
+    const diffResult = {
       findings,
       outside: [],
       inScope: [],
@@ -1049,6 +1259,7 @@ export async function classifyAndMintReview(body, {
       })),
       bodyDeclassified: staleBodyDeclassified,
       staleBodyDeclassified,
+      staleDeclassified: [],
       bodyOnly: staleBodyDeclassified.length > 0 && stillOpen.length === 0,
       // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
       // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
@@ -1061,6 +1272,21 @@ export async function classifyAndMintReview(body, {
       changedFilesComplete: changed.complete,
       diffReason: reason,
     };
+    const routedResult = await applyIdenticalRouting(diffResult, {
+      repo,
+      pr,
+      prUrl,
+      mutate,
+      headSha: headSha || resolveHeadSha(repo, pr),
+      reviewId,
+    });
+    if (routedResult.identicalRouting?.routed?.length) {
+      console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
+    }
+    if (routedResult.identicalOnly) {
+      console.log('review-scope: tutti i finding aperti sono identical → nessun round del fixer');
+    }
+    return { ...routedResult, minted: false };
   }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
   // `null` = «non lo so» e si deriva; passarli esplicitamente resta possibile
@@ -1081,24 +1307,38 @@ export async function classifyAndMintReview(body, {
   for (const finding of result.staleDeclassified ?? []) {
     console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; il gate resta fail-closed, [regression] segnala esplicitamente la classe`);
   }
-  if (result.outside.length === 0 || !mutate) {
-    return {
-      ...result,
-      minted: false,
-      changedFiles: changed.files,
-      changedFilesComplete: changed.complete,
-      diffReason: changed.reason,
-    };
-  }
-  const issueBody = followupIssueBody({ repo, pr, prUrl, findings: result.outside });
-  const followup = await mintFollowup({ repo, pr, prUrl, body: issueBody, findings: result.outside });
-  return {
+  const resultWithDiff = {
     ...result,
-    minted: true,
-    followup,
     changedFiles: changed.files,
     changedFilesComplete: changed.complete,
     diffReason: changed.reason,
+  };
+  const routedResult = await applyIdenticalRouting(resultWithDiff, {
+    repo,
+    pr,
+    prUrl,
+    mutate,
+    headSha: headSha || resolveHeadSha(repo, pr),
+    reviewId,
+  });
+  if (routedResult.identicalRouting?.routed?.length) {
+    console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
+  }
+  if (routedResult.identicalOnly) {
+    console.log('review-scope: tutti i finding aperti sono identical → nessun round del fixer');
+  }
+  if (routedResult.outside.length === 0 || !mutate) {
+    return {
+      ...routedResult,
+      minted: false,
+    };
+  }
+  const issueBody = followupIssueBody({ repo, pr, prUrl, findings: routedResult.outside });
+  const followup = await mintFollowup({ repo, pr, prUrl, body: issueBody, findings: routedResult.outside });
+  return {
+    ...routedResult,
+    minted: true,
+    followup,
   };
 }
 
@@ -1123,6 +1363,10 @@ if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
       inScope: result.inScope.length,
       unresolved: result.unresolved.length,
       bodyOnly: result.bodyOnly === true,
+      identicalOnly: result.identicalOnly === true,
+      identicalBlockingFindingIds: result.identicalBlockingFindingIds || [],
+      identicalRouting: result.identicalRouting || null,
+      transportException: result.transportException === true,
       minted: result.minted,
       followup: result.followup || null,
     })}\n`);

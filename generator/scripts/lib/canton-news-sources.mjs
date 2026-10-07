@@ -81,6 +81,81 @@ export const MAX_INLINE_CRAWL_DELAY_SECONDS = 60;
 export const CANTON_SOURCE_TIMEOUT_MS = 15_000;
 
 /**
+ * Un errore transitorio di rete/servizio non deve trasformare una fonte
+ * verificata in una fonte assente per l'intero run. Il retry e' bounded a due
+ * tentativi e viene comunque limitato dal budget gia' dichiarato dalla fonte.
+ */
+export const CANTON_SOURCE_MAX_ATTEMPTS = 2;
+
+const RETRYABLE_SOURCE_STATUSES = new Set([408, 425, 429]);
+// Errori che indicano un guasto di trasporto dopo che la richiesta e' partita
+// (o un timeout del trasporto). Un errore generico di fetch non basta: URL
+// malformati, redirect invalidi e argomenti rifiutati devono restare
+// fail-closed e non consumare il budget della fonte. `ENOTFOUND` resta
+// escluso: il resolver ha risposto che il nome non esiste.
+const RETRYABLE_SOURCE_ERROR_CODES = new Set([
+  'ECONNABORTED',
+  'ECONNREFUSED',
+  'ECONNRESET',
+  'EAI_AGAIN',
+  'EHOSTDOWN',
+  'EHOSTUNREACH',
+  'EPIPE',
+  'ENETUNREACH',
+  'ETIMEDOUT',
+  'UND_ERR_ABORTED',
+  'UND_ERR_BODY_TIMEOUT',
+  'UND_ERR_CONNECT_TIMEOUT',
+  'UND_ERR_HEADERS_TIMEOUT',
+  'UND_ERR_SOCKET',
+]);
+const RETRYABLE_SOURCE_ERROR_NAMES = new Set(['AbortError', 'TimeoutError']);
+
+function walkSourceError(error, pick) {
+  const seen = new Set();
+  const walk = (current, depth) => {
+    if (!current || typeof current !== 'object' || depth > 4 || seen.has(current)) return null;
+    seen.add(current);
+    const found = pick(current);
+    if (found !== null && found !== undefined) return found;
+    if (Array.isArray(current.errors)) {
+      for (const nested of current.errors) {
+        const result = walk(nested, depth + 1);
+        if (result !== null && result !== undefined) return result;
+      }
+    }
+    return walk(current.cause, depth + 1);
+  };
+  return walk(error, 0);
+}
+
+function sourceErrorCode(error) {
+  return walkSourceError(error, (current) => (
+    typeof current.code === 'string' ? current.code : null
+  ));
+}
+
+function isRetryableSourceTransportError(error) {
+  const code = sourceErrorCode(error);
+  if (code) return RETRYABLE_SOURCE_ERROR_CODES.has(code);
+  if (walkSourceError(error, (current) => (
+    RETRYABLE_SOURCE_ERROR_NAMES.has(current.name) ? true : null
+  ))) return true;
+  // Undici's network failure is a bare TypeError when it has no nested
+  // syscall code. Invalid URL/redirect errors have a different message and
+  // therefore do not enter this fallback.
+  return error?.name === 'TypeError' && error?.message === 'fetch failed';
+}
+
+function isRetryableSourceStatus(status) {
+  return RETRYABLE_SOURCE_STATUSES.has(Number(status)) || (Number(status) >= 500 && Number(status) <= 599);
+}
+
+function isRetryableSourceError(error) {
+  return isRetryableSourceTransportError(error) || isRetryableSourceStatus(error?.status);
+}
+
+/**
  * `Accept-Language` della richiesta: la lingua della fonte, poi qualunque.
  * Non e' cosmesi: senza, `fetch` di Node manda `*` e l'API news di be.ch
  * risponde 500 a ogni richiesta (misurato il 2026-10-05; con `de` risponde
@@ -962,23 +1037,54 @@ export async function scanCantonSource(source, ctx) {
   }
 
   const get = async (url, accept) => {
-    if (requests >= budget) throw new Error(`budget di ${budget} richieste per run esaurito`);
-    requests += 1;
-    return throttle.run(host, quirks.crawlDelaySeconds || 0, async () => {
-      const res = await fetchImpl(url, {
-        headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
-        redirect: 'follow',
-        signal: AbortSignal.timeout(CANTON_SOURCE_TIMEOUT_MS),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const decoded = decodeResponseBody(await res.arrayBuffer(), {
-        contentType: res.headers?.get?.('content-type') ?? null,
-        forcedCharset: quirks.charset || null,
-      });
-      if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
-      else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
-      return decoded.text;
-    });
+    let lastError;
+    for (let attempt = 1; attempt <= CANTON_SOURCE_MAX_ATTEMPTS; attempt += 1) {
+      if (requests >= budget) {
+        throw lastError || new Error(`budget di ${budget} richieste per run esaurito`);
+      }
+      requests += 1;
+      try {
+        return await throttle.run(host, quirks.crawlDelaySeconds || 0, async () => {
+          let res;
+          try {
+            res = await fetchImpl(url, {
+              headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
+              redirect: 'follow',
+              signal: AbortSignal.timeout(CANTON_SOURCE_TIMEOUT_MS),
+            });
+          } catch (error) {
+            // Classify the transport error in the outer catch. Do not mark an
+            // arbitrary thrown value: invalid URLs and redirect failures are
+            // permanent request errors and must not be retried.
+            throw error;
+          }
+          if (!res.ok) {
+            const error = new Error(`HTTP ${res.status}`);
+            error.status = res.status;
+            throw error;
+          }
+          // The body is still a network stream: ECONNRESET/UND_ERR_SOCKET or
+          // a transport timeout can happen after fetch() returned headers.
+          // Keep this await inside the same retry classification, while the
+          // decoder itself remains outside the transport classifier.
+          const body = await res.arrayBuffer();
+          const decoded = decodeResponseBody(body, {
+            contentType: res.headers?.get?.('content-type') ?? null,
+            forcedCharset: quirks.charset || null,
+          });
+          if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
+          else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
+          return decoded.text;
+        });
+      } catch (error) {
+        lastError = error;
+        const budgetAllowsRetry = budget === Infinity || requests < budget;
+        const canRetry = attempt < CANTON_SOURCE_MAX_ATTEMPTS && budgetAllowsRetry && isRetryableSourceError(error);
+        if (!canRetry) throw error;
+        notes.push(`retry fonte ${attempt + 1}/${CANTON_SOURCE_MAX_ATTEMPTS} dopo ${error?.message || String(error)}`);
+      }
+    }
+    throw lastError || new Error('errore fonte non riconosciuto');
   };
 
   const XML_ACCEPT = 'application/rss+xml, application/atom+xml, application/xml, text/xml';

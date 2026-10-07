@@ -670,6 +670,11 @@ jobs:
             echo "::error::Manifest di bootstrap del review gate non leggibile da main @ ${policy_ref}: senza la lista trusted non si puo' comporre il gate."
             exit 1
           fi
+          identical_manifest="$review_gate_root/scripts/ci/loop-sync-manifest.json"
+          if ! download_main scripts/ci/loop-sync-manifest.json "$identical_manifest"; then
+            echo "::error::Manifest identical non leggibile da main @ ${policy_ref}: senza il perimetro trusted non si puo' instradare una review."
+            exit 1
+          fi
           # Ogni voce e' validata prima di diventare un path: il manifest arriva
           # dalla rete, e un `..` o un path assoluto scriverebbe fuori dalla
           # directory isolata. Fail-closed su qualunque voce non conforme.
@@ -697,6 +702,7 @@ jobs:
           review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
           node --check "$review_gate_module"
           echo "REVIEW_GATE_MAIN_MODULE=$review_gate_module" >> "$GITHUB_ENV"
+          echo "IDENTICAL_MANIFEST_PATH=$identical_manifest" >> "$GITHUB_ENV"
           echo "Review gate bootstrap: main @ ${policy_ref}; module=${review_gate_module}"
 
       # The body is an input to the reviewer, not executable content. Its
@@ -1865,6 +1871,7 @@ jobs:
         if: ${{ steps.body_contract.outcome != 'failure' && always() && steps.resolve.outputs.should_review == 'true' && steps.review_source_main.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}

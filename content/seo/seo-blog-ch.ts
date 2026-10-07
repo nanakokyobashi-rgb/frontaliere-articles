@@ -57585,7 +57585,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     description: 'Confederazione stanzia 54 milioni CHF in prestiti senza interessi per agricoltori colpiti da siccità. Sospesi dazi su fieno, ridotte tariffe su mais. Agroscope',
     keywords: 'frontalieri, ticino, svizzera, italia, scarsità, foraggio, milioni, aiuti',
     ogTitle: 'Scarsità di foraggio: 54 milioni di aiuti federali',
-    ogDescription: 'La Confederazione stanzia 54 milioni CHF in prestiti senza interessi per agricoltori svizzeri in difficoltà per scarsità di foraggio dovuta a siccità. Parmelin visita azienda che sperimenta sorgo e colture resistenti. Sospesi dazi su fieno e mais',
+    ogDescription: 'La Confederazione stanzia 54 milioni CHF in prestiti senza interessi per agricoltori svizzeri in difficoltà per scarsità di foraggio dovuta a siccità. Parmelin visita azienda che sperimenta sorgo e colture resistenti. Sospesi dazi su fieno e mais.',
     canonicalPath: '/articoli-svizzera/foraggio-siccita-aiuti-federali/',
     structuredData: {
       "@context": "https://schema.org",
@@ -99283,6 +99283,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tamedia-41-licenziamenti-13-a-losanna-e-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-marcel-salathe-ia-commento': {
+    title: 'L’intelligenza artificiale non ci ucciderà tutti',
+    description: '## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare',
+    keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, ucciderà, tutti',
+    ogTitle: 'L’intelligenza artificiale non ci ucciderà tutti',
+    ogDescription: '## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare',
+    canonicalPath: '/articoli-svizzera/marcel-salathe-ia-commento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L’intelligenza artificiale non ci ucciderà tutti",
+      "description": "## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-marcel-salathe-ia-commento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con le montagne sullo sfondo, rappresenta il contesto svizzero del dibattito sull'intelligenza artificiale."
+      },
+      "datePublished": "2026-10-07T20:39:09+00:00",
+      "dateModified": "2026-10-07T20:39:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/marcel-salathe-ia-commento/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

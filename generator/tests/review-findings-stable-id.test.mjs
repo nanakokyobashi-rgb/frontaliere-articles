@@ -210,7 +210,9 @@ test('la derivazione sta nel classificatore, cosi\' anche il fixer la riceve', (
   assert.match(source, /DECLASSIFIED-UNCHANGED-LINE/u,
     'il declassamento non lascia traccia nel log');
   const fixer = read('.github/workflows/pr-redflag-fixer.yml');
-  assert.match(fixer, /node scripts\/ci\/review-scope\.mjs/u,
+  assert.match(fixer, /REVIEW_SCOPE_SCRIPT: \$\{\{ steps\.trusted_scope\.outputs\.script \}\}/u,
+    'il fixer deve ricevere la CLI dal materiale trusted');
+  assert.match(fixer, /node "\$REVIEW_SCOPE_SCRIPT"/u,
     'il fixer deve continuare a passare da questa CLI');
 
   const gate = read('scripts/ci/review-gate.mjs');

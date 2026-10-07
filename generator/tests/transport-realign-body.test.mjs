@@ -24,6 +24,7 @@ import {
   convergedBulletLine,
   decodeCodeSpanContent,
   markdownCodeSpan,
+  parseConvergedBullets,
   parseTransportBullets,
   planTransportRealign,
   transportBulletLine,
@@ -217,6 +218,10 @@ test('le righe dei convergenti riattestati non entrano nel realign post-merge', 
     '- niente',
   ].join('\n');
   assert.deepEqual(parseTransportBullets(body), []);
+  assert.deepEqual(parseConvergedBullets(body), [
+    { path: 'scripts/ci/a.mjs', siteHash: HASH16 },
+    { path: 'scripts/ci/with`tick.mjs', siteHash: HASH16 },
+  ]);
   const plan = planTransportRealign({ body, changedFiles: [MANIFEST_PATH], manifest });
   assert.deepEqual(plan.rows, []);
   assert.deepEqual(plan.expected, []);

@@ -403,6 +403,7 @@ jobs:
       blocking: ${{ steps.classify.outputs.blocking }}
       error: ${{ steps.classify.outputs.error }}
       body_only: ${{ steps.classify.outputs.body_only }}
+      identical_only: ${{ steps.classify.outputs.identical_only }}
     steps:
       - name: Checkout dello script di classificazione
         uses: actions/checkout@v7
@@ -412,6 +413,49 @@ jobs:
           # gate è codice del repository base, non materiale da riparare.
           ref: ${{ needs.preflight.outputs.base_ref }}
 
+      - name: Setup Node.js per il routing trusted
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials for site routing
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/review-scope-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/review-scope-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente: routing identical senza token sito sarà fail-closed."
+          fi
+
+      - name: Load site token from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Materialize trusted review scope from main
+        id: trusted_scope
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')
+          printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'
+          git fetch --no-tags origin "$trusted_sha" -q
+          trusted_root="$RUNNER_TEMP/review-scope-main"
+          mkdir -p "$trusted_root"
+          git archive --format=tar "$trusted_sha" scripts | tar -x -C "$trusted_root"
+          if ! git show "$trusted_sha:scripts/ci/loop-sync-manifest.json" > "$trusted_root/scripts/ci/loop-sync-manifest.json" \
+            || [ ! -s "$trusted_root/scripts/ci/loop-sync-manifest.json" ] \
+            || [ ! -s "$trusted_root/scripts/ci/review-scope.mjs" ]; then
+            echo "::error::review-scope o manifest trusted mancanti su main."
+            exit 1
+          fi
+          echo "script=$trusted_root/scripts/ci/review-scope.mjs" >> "$GITHUB_OUTPUT"
+          echo "manifest=$trusted_root/scripts/ci/loop-sync-manifest.json" >> "$GITHUB_OUTPUT"
+
       - name: Classifica finding fuori diff e conia follow-up
         id: classify
         env:
@@ -420,6 +464,9 @@ jobs:
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
           PR_URL: ${{ needs.preflight.outputs.pr_url }}
           REVIEW_BODY_B64: ${{ needs.preflight.outputs.review_body_b64 }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          IDENTICAL_MANIFEST_PATH: ${{ steps.trusted_scope.outputs.manifest }}
+          REVIEW_SCOPE_SCRIPT: ${{ steps.trusted_scope.outputs.script }}
         run: |
           set -uo pipefail
           write_scope_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
@@ -429,7 +476,7 @@ jobs:
           fi
           export REVIEW_BODY
           set +e
-          output=$(node scripts/ci/review-scope.mjs 2>&1)
+          output=$(node "$REVIEW_SCOPE_SCRIPT" 2>&1)
           status=$?
           printf '%s\n' "$output"
           if [ "$status" -ne 0 ]; then
@@ -437,6 +484,7 @@ jobs:
             write_scope_output "blocking=true"
             write_scope_output "error=true"
             write_scope_output "body_only=false"
+            write_scope_output "identical_only=false"
             exit 0
           fi
           summary=$(printf '%s\n' "$output" | tail -n 1)
@@ -456,6 +504,13 @@ jobs:
           fi
           write_scope_output "blocking=$blocking"
           write_scope_output "body_only=$body_only"
+          identical_only=$(printf '%s' "$summary" | jq -r '.identicalOnly' 2>/dev/null || echo false)
+          if [ "$identical_only" != "true" ] && [ "$identical_only" != "false" ]; then
+            echo "::warning::flag identicalOnly inatteso: il fixer resta conservativamente azionabile."
+            identical_only=false
+            write_scope_output "error=true"
+          fi
+          write_scope_output "identical_only=$identical_only"
 
           # Un finding BODY-only gia' assolto dal contratto deterministico non
           # e' lavoro per Claude: invocarlo qui riscriverebbe il body senza il
@@ -485,6 +540,7 @@ jobs:
     needs: [preflight, scope]
     if: >-
       needs.preflight.outputs.actionable == 'true' &&
+      needs.scope.outputs.identical_only != 'true' &&
       (needs.scope.outputs.blocking == 'true' || needs.scope.outputs.error == 'true')
     runs-on: ubuntu-latest
     # 30→40 (2026-07-17): headroom per il cap turni alzato 45→60.
@@ -529,9 +585,42 @@ jobs:
             echo "available=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          trusted_root="$RUNNER_TEMP/fixer-identical"
+          trusted_ci="$trusted_root/scripts/ci"
+          mkdir -p "$trusted_ci/lib"
+          identical_available=true
+          if ! git show "$trusted_sha:scripts/ci/loop-sync-manifest.json" > "$trusted_root/scripts/ci/loop-sync-manifest.json" \
+            || [ ! -s "$trusted_root/scripts/ci/loop-sync-manifest.json" ]; then
+            identical_available=false
+          fi
+          for rel in \
+            scripts/ci/lib/identical-paths.mjs \
+            scripts/ci/fixer-identical-hook.mjs \
+            scripts/ci/restore-identical-paths.mjs; do
+            destination="$trusted_root/$rel"
+            mkdir -p "$(dirname "$destination")"
+            if ! git show "$trusted_sha:$rel" > "$destination" || [ ! -s "$destination" ]; then
+              identical_available=false
+            fi
+          done
+          if [ "$identical_available" != 'true' ]; then
+            echo "::warning::Set identical trusted non materializzabile da main: nessun fixer automatico in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "path=$trusted_path" >> "$GITHUB_OUTPUT"
           echo "sha=$trusted_sha" >> "$GITHUB_OUTPUT"
+          echo "identical_manifest=$trusted_root/scripts/ci/loop-sync-manifest.json" >> "$GITHUB_OUTPUT"
+          echo "identical_hook=$trusted_root/scripts/ci/fixer-identical-hook.mjs" >> "$GITHUB_OUTPUT"
+          echo "identical_restore=$trusted_root/scripts/ci/restore-identical-paths.mjs" >> "$GITHUB_OUTPUT"
+          echo "identical_available=true" >> "$GITHUB_OUTPUT"
           echo "available=true" >> "$GITHUB_OUTPUT"
+
+      - name: Fail closed when the trusted identical set is unavailable
+        if: always() && steps.trusted_marker.outputs.available != 'true'
+        run: |
+          echo "::error::Manifest/helper identical non verificabili da main: nessun agente viene autorizzato."
+          exit 1
 
       # Profilassi workflow-validation drift (anti-401): la GitHub App del reviewer
       # esige che `.github/workflows/tests.yml` sul branch sia BYTE-IDENTICO
@@ -891,6 +980,10 @@ jobs:
         env:
           FIX_ROUND: ${{ steps.guard.outputs.round }}
         run: node scripts/ci/fixer-commit-trailer.mjs install redflag "$FIX_ROUND"
+
+      - name: Install trusted identical pre-commit hook
+        if: steps.guard.outputs.proceed == 'true'
+        run: node "${{ steps.trusted_marker.outputs.identical_hook }}" install "${{ steps.trusted_marker.outputs.identical_manifest }}"
 
       # Push via App token (primario) / PAT (fallback) — ri-attiva la review dentro tests.yml
       # = re-review. Senza nessuno dei due il push userebbe GITHUB_TOKEN e la
@@ -1410,6 +1503,7 @@ jobs:
             - CODE vs DATA: non scorrere i blob `data/**`/`public/**`; fixa il CODE che li genera.
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
             - Commit con messaggio conventional; mantieni il gate PII su diff e messaggio.
+            - NON modificare né committare path `mode: identical`: il file si corregge nel sito e il rilievo viene instradato; il pre-commit hook trusted rifiuta comunque il commit.
             - Push sullo stesso branch: `git push origin HEAD:refs/heads/${{ needs.preflight.outputs.head_ref }}`. Il ref completo è richiesto dal bridge Git confinato al branch corrente. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
             - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
             - SCOPE: il blocco **Changed file list** è il confine della PR. Applica solo i finding `🔴 Important` che citano file presenti in quella lista; i finding su file fuori dal diff sono già stati coniati nel follow-up e non vanno fissati qui né trascinati nella PR.
@@ -1419,6 +1513,35 @@ jobs:
             - Se i 🔴 non sono fixabili con confidenza (root cause non chiara / serve giudizio umano) → commenta "🔴 non auto-fixabile: <motivo>" e TERMINA senza commit (il round cap + needs-human gestiranno l'escalation).
             - Ogni commit porta il trailer `Fixer: redflag-round-${{ steps.guard.outputs.round }}`: lo aggiunge l'hook `commit-msg` gia' installato, quindi non usare `--no-verify`.
             - Una sola passata: applica, valida, committa, pusha, aggiorna body, STOP.
+
+      - name: Ripristina gemelli identical toccati dal round (deterministico)
+        id: identical_restore
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+          IDENTICAL_MANIFEST: ${{ steps.trusted_marker.outputs.identical_manifest }}
+          IDENTICAL_RESTORE: ${{ steps.trusted_marker.outputs.identical_restore }}
+        run: |
+          set -euo pipefail
+          result=$(node "$IDENTICAL_RESTORE" --base-ref "$BASE_SHA" --manifest "$IDENTICAL_MANIFEST" --json)
+          printf '%s\n' "$result"
+          count=$(printf '%s' "$result" | jq -er '.restored | length')
+          commit_sha=$(printf '%s' "$result" | jq -r '.commitSha // ""')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" -eq 0 ]; then
+            echo "identical_restore_count=0" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "identical_restore_count=$count" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$commit_sha" ]; then
+            git push origin "HEAD:refs/heads/$HEAD_REF"
+          fi
+          comment=$(printf '%s' "$result" | jq -er '.comment')
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$comment"
 
       - name: Cleanup Firebase credentials
         if: always()

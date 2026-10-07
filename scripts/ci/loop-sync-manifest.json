@@ -261,8 +261,8 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "075ef4fa2fc7d8f2",
-        "corpus": "075ef4fa2fc7d8f2",
+        "site": "200246b909cc0cbb",
+        "corpus": "200246b909cc0cbb",
         "alignedAt": "2026-10-07"
       }
     },
@@ -272,8 +272,8 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "1c354b0a6638d0f3",
-        "alignedAt": "2026-10-06"
+        "corpus": "736bc2b8044dbf7c",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -1833,9 +1833,9 @@
       "mode": "identical",
       "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso. RICONCILIATO il 2026-08-14 (#234, classe `both-moved`): era un both-moved APPARENTE. Il blob qui era byte-identico a `valerielinc-ops@8bfe4e3b:build-plugins/shared/clauseTail.mjs`, cioe' la \"modifica del corpus\" ERA la modifica del sito, arrivata col trasporto di #116 senza che la baseline venisse aggiornata; il sito e' poi andato avanti da solo con 79a6b924. Le due modifiche non sono indipendenti — una contiene l'altra — quindi la riconciliazione e' un fast-forward: adottata la versione del sito. Porta un CAMBIO DI COMPORTAMENTO, non solo un export nuovo: `truncateToClause` ora RIFIUTA (torna la stringa vuota) quando il primo token da solo sfora il budget, invece di tagliare duro a `maxLen`. Per questo `generator/scripts/create-article.mjs` e' passato a `truncateToClauseNonEmpty` sui due call site di titolo e breadcrumb, dove il fallback e' lo slug (nessuno spazio) e il rifiuto sarebbe stato la norma, non il caso limite.",
       "baseline": {
-        "site": "b90d13451bef2ee2",
-        "corpus": "b90d13451bef2ee2",
-        "alignedAt": "2026-10-01"
+        "site": "63cabf90191648cc",
+        "corpus": "63cabf90191648cc",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2141,12 +2141,12 @@
     },
     {
       "path": "scripts/lib/git-push-with-retry.sh",
-      "mode": "identical",
-      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
+      "mode": "adapted",
+      "reason": "Push con retry usato dai job che scrivono sugli shard. Il corpus mantiene il retry, il flag opt-in `--soft-fail-exhausted` e le registrazioni dei merge driver del gemello del sito, ma non invoca `old-history-guard.mjs`: quel modulo non e' presente qui e la chiamata causava `MODULE_NOT_FOUND` prima di ogni push. La guardia potra' essere riattivata solo trasportando prima il modulo e registrandolo nel manifest insieme alla sua dipendenza. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello adattato, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "1b87e374164b004c",
+        "site": "4cb50306a5f08f8e",
         "corpus": "1b87e374164b004c",
-        "alignedAt": "2026-10-01"
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3342,11 +3342,12 @@
     {
       "path": "generator/scripts/lib/translation-glossary.mjs",
       "sitePath": "scripts/lib/translation-glossary.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "La copia trasportata dal sito resta la base comune, ma la review della PR corpus #2418 ha corretto qui due confini della mascheratura Markdown: la parentesi quadra della label resta scansionabile e il fallback delle destinazioni con parentesi annidate cerca URL opachi fino a fine riga. Il sito non contiene ancora questi due hunk, quindi dichiarare il file `identical` o attribuirgli la stessa baseline fabbricherebbe una ghost-baseline; torna `identical` quando la fix risale al sito e viene ritrasportata byte per byte.",
       "baseline": {
-        "site": "03387084038e0dc3",
-        "corpus": "03387084038e0dc3",
-        "alignedAt": "2026-09-25"
+        "site": "0fed92ef6205331a",
+        "corpus": "929b82dea6a7dfb4",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4468,8 +4469,8 @@
       "reason": "Lista trusted dei moduli che lo step `Bootstrap trusted review gate from main` di `.github/workflows/tests.yml` scarica accanto al gate. Esiste perche' QUI il gate gira da una directory ISOLATA popolata a mano: finche' la lista viveva nello YAML, una PR aperta prima che un modulo entrasse nel grafo scaricava l'entrypoint nuovo dalla punta di main con la lista vecchia e il gate moriva con ERR_MODULE_NOT_FOUND (misurato sulla #1599). Il sito non ha questo bootstrap — il suo review gate gira dal checkout — quindi non c'e' un gemello da portare. Il guard che la tiene uguale al grafo reale degli import e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "bf234e32a74af385",
-        "alignedAt": "2026-09-20"
+        "corpus": "50df4445838c5f02",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4958,8 +4959,8 @@
       "reason": "Regressione node:test del trasporto e del suo realign post-merge, che verifica i codici di ritorno e il confine di scrittura del manifest nel repository ricevente; il sito usa Vitest e non ha questo test corpus-only.",
       "baseline": {
         "site": null,
-        "corpus": "7eb0c82546609329",
-        "alignedAt": "2026-09-13"
+        "corpus": "b34ff74620403c90",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -5481,6 +5482,76 @@
         "site": null,
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/identical-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Modulo puro che deriva dal manifest l'insieme dei path `mode: identical` e li partiziona prima della scrittura. Il fixer del corpus lo materializza dal commit trusted di `main`; il sito non usa questo workflow-side consumer e non esiste un gemello HTTP da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "583389f6e3d446dd",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/identical-review-routing.mjs",
+      "mode": "corpus-only",
+      "reason": "Politica del fixer corpus che instrada i finding esclusivamente `identical` verso issue del sito usando il writer deduplicante esistente. Il sito riceve la diagnosi via HTTP e non possiede questo consumer del review-scope corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "41e52a281c54e11c",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/fixer-identical-hook.mjs",
+      "mode": "corpus-only",
+      "reason": "Hook pre-commit trusted dei fixer corpus: rifiuta un commit che stagia un path `mode: identical`, con il messaggio operativo che la correzione si fa nel sito. Il sito ha un ciclo di fixer adattato diverso e non usa questo hook.",
+      "baseline": {
+        "site": null,
+        "corpus": "6c7beb5ea3a67756",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/restore-identical-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Barriera deterministica post-agente del fixer corpus: ripristina i soli path `identical` toccati rispetto alla baseline del round, crea un commit aggiuntivo senza force-push e lascia intatti gli altri file.",
+      "baseline": {
+        "site": null,
+        "corpus": "0b367aa2f2a6cfb0",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/transport-pr.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato condiviso e fail-closed che riconosce esclusivamente le PR prodotte dal trasporto corpus legando autore, branch, base, repository head, manifest e insieme completo dei file. Il guard può includere il prodotto solo-manifest per sorvegliarlo, mentre l'eccezione di merge continua a richiedere file identical realmente trasportati. Il sito non consuma né autorizza questa eccezione del gate corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "ae413a3130623afa",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-identical-twins-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard del trasporto corpus che confronta gli hash del sito registrati nelle PR aperte con lo stato corrente: conserva una PR invariata, comprese le riattestazioni solo-manifest, e chiude/commenta quella superata prima di aprirne una nuova. Il trasporto non ha un consumer gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "2756d6b34136f8cd",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/tests/fixer-identical-readonly.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservatori `node:test` dell'issue #2400: manifest reale, ripristino git, hook, routing deduplicato, guard puro del trasporto e forma dei tre workflow. Sono test del ciclo CI del corpus e non hanno gemello da pubblicare via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "bfe7f17749681e5b",
+        "alignedAt": "2026-10-07"
       }
     },
     {
