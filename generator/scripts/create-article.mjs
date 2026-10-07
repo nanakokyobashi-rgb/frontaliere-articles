@@ -172,7 +172,8 @@ import {
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
-import { AI_SEARCH_PROMPT_BLOCK_IT, findOrphanedKeyFactsList } from './lib/ai-search-template.mjs';
+import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
