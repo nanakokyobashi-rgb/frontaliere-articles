@@ -1444,6 +1444,17 @@ function computeAdaptiveMinChars(sourceText) {
   return MIN_BODY_CHARS_FLOOR;
 }
 
+// `../..`, not `..`. In main this script sits at `scripts/create-article.mjs`,
+// so one level up WAS the repo root; the transport (#4974 item 3, step 2) put it
+// at `generator/scripts/create-article.mjs`, which makes one level up the
+// `generator/` directory. Keep this initialized before the catalog pool below:
+// the pool validates reader-facing records while the module is being loaded.
+const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '');
+
+function resolve(rel) {
+  return `${PROJECT_ROOT}/${corpusPath(rel)}`;
+}
+
 // Static places catalog
 const PLACES_IMAGES = [
   'ascona.webp', 'bellinzona.webp', 'castelgrande.webp', 'film-festival.webp',
@@ -2957,23 +2968,11 @@ const NEWS_SOURCES_SVIZZERA_FALLBACK_MAP = {
   'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_svizzera.xml': 'https://www.laregione.ch/svizzera',
 };
 
-// `../..`, not `..`. In main this script sits at `scripts/create-article.mjs`,
-// so one level up WAS the repo root; the transport (#4974 item 3, step 2) put it
-// at `generator/scripts/create-article.mjs`, which makes one level up the
-// `generator/` directory. Left unchanged, every read and write in this file
-// would have been scoped to `generator/…` — reads would fail and writes would
-// create a phantom corpus inside the generator tree.
-const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '');
-
 // ── Helpers ─────────────────────────────────────────────────
 // Every read and write in this file funnels through here, which is what makes
 // `corpusPath()` a single choke point for the main→nanako layout difference
 // (`services/locales/…` → `content/…`) instead of ~30 edited literals. See
 // lib/corpus-paths.mjs for why the mapping is an explicit table.
-function resolve(rel) {
-  return `${PROJECT_ROOT}/${corpusPath(rel)}`;
-}
-
 function read(rel) {
   return readFileSync(resolve(rel), 'utf-8');
 }
