@@ -65,6 +65,7 @@ const FREE_MT_CAP_REASONS = new Set([
   'mangled-municipality-name',
   'lone-surrogate',
   'semantic-truncation',
+  'markdown-repair-changed-lines',
 ]);
 
 function normalizeFaqCount(value) {
