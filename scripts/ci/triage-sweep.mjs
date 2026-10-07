@@ -16,10 +16,8 @@
  *
  * Questo sweep, schedulato, recupera le orfane qualunque sia la causa: riusa il
  * classifier deterministico (`classify-issue.mjs`, stesse regole del path
- * event-driven). I domini F1/F7 vengono marcati `automation-deferred` e non
- * entrano nel routing automatico; le issue ordinarie ricevono `agent:triaged` +
- * routing. `needs-human` resta intatta solo se era già un veto/decisione
- * esplicita del proprietario presente sull'issue.
+ * event-driven — ogni categoria autofix dal 2026-07-05, owner decision "Rimuovi
+ * tutte le guardie") e applica `agent:triaged` + routing.
  *
  * GENTLE BY-CONSTRUCTION (anti-burst, frugalità quota):
  *   - crawler-transient → solo `agent:triaged`, NIENTE route: si auto-chiudono
@@ -27,9 +25,9 @@
  *   - crawler (non-transient) → `agent:fix` diretto SOLO se lo slot issue-fix è
  *     libero, e UNO per run (`crawlerDirectFixBudget`); gli altri finiscono in
  *     `agent:fix-queued` + `fu-prio:high` come tutti. Vedi sotto.
- *   - ogni altra categoria ordinaria (follow-up, validation-failure, other,
- *     …) → `agent:fix-queued` (+fu-prio): il followup-drainer le promuove UNA
- *     alla volta → nessun burst per costruzione.
+ *   - ogni altra categoria (follow-up, revenue, tracker, validation-failure,
+ *     other, …) → `agent:fix-queued` (+fu-prio): il followup-drainer le
+ *     promuove UNA alla volta → nessun burst per costruzione.
  *
  * IL CAP A 5 ERA CALIBRATO SUL NUMERO SBAGLIATO (#5514, 2026-08-10). Il vecchio
  * `ROUTE_FIX_CAP=5` era nato come anti-burst, ma la coda che doveva proteggere
@@ -54,18 +52,15 @@
  * PRIMA del routing (race di concurrency) l'issue resta triaged-ma-non-routata
  * per sempre (il primo passaggio non la vede: non è orfana). Usato anche per il
  * backfill one-time post-PR #3554 (nuova policy routing universale: categorie
- * le categorie ordinarie ricevono agent:fix-queued). Non
+ * revenue/tracker/validation-failure/other ora ricevono agent:fix-queued). Non
  * tocca le issue già in stato di routing (agent:fix/agent:fix-queued/fu-parked/
- * fu-attempt:*) né le crawler-transient, né le issue vetate da `queueVeto()`
- * (`DECOMPOSE_STAGE_LABELS`, bucket giornaliero senza item `open`): quelle
- * vengono saltate con un log e contate fra i marked-only.
+ * fu-attempt:*) né le crawler-transient.
  *
  * `agent:triaged` SEMPRE via GITHUB_TOKEN (idempotenza, non deve triggerare);
  * il routing SEMPRE via GITHUB_PAT (anti-ricorsione + gate sender, come il path
  * event-driven). PAT assente → le routabili (fix/queue) restano ORFANE (no
- * triaged): uno sweep post-recovery le routa. Tagghiamo solo le non-routabili
- * per costruzione: crawler-transient (vedi sopra) e le vetate da `queueVeto()`,
- * che nel primo passaggio ricevono soltanto `agent:triaged`, anche senza PAT.
+ * triaged): uno sweep post-recovery le routa. Tagghiamo solo crawler-transient
+ * (l'unica categoria non-routabile per costruzione, vedi sopra).
  *
  * Uso:  node scripts/ci/triage-sweep.mjs [--dry-run] [--cap N]
  * Env:  GH_TOKEN (GITHUB_TOKEN: list + agent:triaged + commenti),
@@ -77,7 +72,6 @@ import {
   classifyIssue,
   isFixerExempt,
 } from '../lib/classify-issue.mjs';
-import { isDailyBucketTitle, parseFollowupItems } from './followup-resolution-match.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const PAT = process.env.GITHUB_PAT || '';
@@ -130,7 +124,7 @@ export function crawlerDirectFixBudget({ inFlightFixRuns, openFixLabeled, cap = 
   return Number.isFinite(cap) && cap > 0 ? cap : 0;
 }
 
-const names = (iss) => (iss?.labels || [])
+const names = (iss) => (iss.labels || [])
   .map((label) => (typeof label === 'string' ? label : label?.name))
   .filter(Boolean);
 const has = (iss, n) => names(iss).includes(n);
@@ -161,84 +155,9 @@ export const ROUTING_LABELS = [
   'fu-attempt:3',
 ];
 
-// Stadio di verifica, non assenza di routing: `maybe-resolved` la applicano chi
-// ha già stabilito che il difetto risulta risolto — il pre-flight
-// `check-issue-already-resolved.mjs`, `reconcile-followups.mjs` e, da #9742,
-// `route-already-fixed.mjs` dopo un `already-fixed` con evidenza verificata —
-// togliendo `agent:fix`. Re-instradarla qui ridarebbe al fixer la stessa issue
-// al giro dopo, cioè la spesa che quei passi esistono per evitare. Il rientro
-// resta esplicito: chi toglie `maybe-resolved` la rimette nel ciclo.
-export const VERIFICATION_LABEL = 'maybe-resolved';
-
-// Stadio di decomposizione, non assenza di routing. Un padre `decomposed:1` è
-// un tracker: lo scope vive nelle figlie e il drainer gli TOGLIE apposta
-// `agent:fix`/`agent:fix-queued` (PARENT-DEQUEUE). `agent:decompose-queued` e
-// `agent:decompose` sono lo stadio in corso, con uno slot proprio. Senza questo
-// elenco lo sweep leggeva quei padri come «triaged ma senza routing» e li
-// rimetteva in coda a ogni giro; il drainer li ritoglieva con un commento
-// (misurato: 73 commenti di dequeue su 7447; su 9443 4 riaccodamenti su 13
-// erano di questo sweep).
-//
-// Separata da `ROUTING_LABELS` di proposito: quella lista deve restare
-// esattamente le label note più `fu-attempt:1..MAX_ATTEMPTS`
-// (tests/followup-drainer-max-attempts-labels.test.ts).
-export const DECOMPOSE_STAGE_LABELS = [
-  'decomposed:1',
-  'agent:decompose-queued',
-  'agent:decompose',
-];
-
-/**
- * Perché una issue autofix senza label di routing NON va comunque accodata.
- * `null` = nessun veto. Pura (label, titolo, corpo) → testabile.
- *
- * - `decompose-stage`: porta una delle `DECOMPOSE_STAGE_LABELS`.
- * - `bucket-no-open-item`: bucket giornaliero i cui item sono tutti fuori da
- *   `open` (done, blocked, in-progress): il fixer non ha nulla da prendere e
- *   il drainer lo rimetterebbe fuori dalla coda al giro dopo.
- *
- * Il secondo veto scatta solo su un corpo LETTO e leggibile: corpo assente,
- * nessun item con id stabile o fence non terminata lasciano il comportamento
- * di prima (nessun veto) invece di congelare un bucket su un dato dubbio.
- *
- * @param {{title?: string, body?: string, labels?: Array<string|{name:string}>}} iss
- * @returns {'decompose-stage'|'bucket-no-open-item'|null}
- */
-export function queueVeto(iss) {
-  if (DECOMPOSE_STAGE_LABELS.some((label) => has(iss, label))) return 'decompose-stage';
-  if (isDailyBucketTitle(iss?.title) && typeof iss?.body === 'string') {
-    const items = parseFollowupItems(iss.body);
-    const stable = items.filter((item) => item.id);
-    if (!items.unterminatedFence && stable.length > 0
-      && !stable.some((item) => item.state === 'open')) {
-      return 'bucket-no-open-item';
-    }
-  }
-  return null;
-}
-
-const QUEUE_VETO_TEXT = {
-  'decompose-stage': 'padre decomposto / stadio decompose',
-  'bucket-no-open-item': 'bucket giornaliero senza item open',
-};
-
-/** Autofix, instradabile e senza label di routing: il veto si decide a parte. */
-function lacksRouting(iss) {
-  // Una riga senza titolo è un dato illeggibile, non una issue da instradare:
-  // dalla policy f1-f7-v4 la categoria sconosciuta non è più un deny, quindi
-  // l'integrità del record va verificata qui.
-  if (typeof iss?.title !== 'string' || !iss.title.trim()) return false;
-  if (has(iss, VERIFICATION_LABEL)) return false;
-  const decision = classifyIssue(iss.title, names(iss), iss?.body);
-  return decision.autofix === true
-    && decision.route !== 'none'
-    && !isFixerExempt(names(iss))
-    && !ROUTING_LABELS.some((r) => has(iss, r));
-}
-
 /** Il secondo passaggio non deve riesaminare i pin già esclusi dal routing. */
 export function isTriagedButNotRouted(iss) {
-  return lacksRouting(iss) && queueVeto(iss) === null;
+  return !isFixerExempt(names(iss)) && !ROUTING_LABELS.some((r) => has(iss, r));
 }
 
 function main() {
@@ -248,7 +167,7 @@ function main() {
   let issues = [];
   try {
     issues = gh(['issue', 'list', '--repo', REPO, '--state', 'open',
-      '--limit', '300', '--json', 'number,title,body,labels']);
+      '--limit', '300', '--json', 'number,title,labels']);
   } catch (e) { console.error(`gh issue list fallito: ${String(e).slice(0, 160)}`); process.exit(0); }
 
   // Orfane = open senza agent:triaged. Più vecchie prima (numero crescente).
@@ -283,36 +202,6 @@ function main() {
     catch (e) { console.log(`::warning::#${n} agent:triaged fallito: ${String(e).slice(0, 100)}`); }
   };
 
-  // Deny F1/F7 con l'identità del triage: non usa il PAT/App che attiva
-  // issue-fix. Un errore qui lascia l'issue senza routing, mai il contrario.
-  // Il deny è tecnico e rientrabile: non introduce un veto umano nuovo.
-  const markDeferred = (n, domains = [], reason = 'risk') => {
-    if (DRY) { console.log(`[dry] #${n} → +${AUTOMATION_DEFERRED_LABEL} (${reason}: ${domains.join(', ') || 'policy'})`); return; }
-    try {
-      gh(['issue', 'edit', String(n), '--repo', REPO,
-        '--remove-label', 'agent:fix', '--remove-label', 'agent:fix-queued',
-        '--remove-label', 'agent:vision-approved'], { json: false });
-    } catch (e) {
-      console.log(`::warning::#${n} rimozione label routing stale fallita (${String(e).slice(0, 120)}) — routing bloccato comunque.`);
-    }
-    try {
-      gh(['label', 'create', AUTOMATION_DEFERRED_LABEL, '--repo', REPO,
-        '--color', 'FBCA04',
-        '--description', 'Lavoro automatico differito da policy/capacità; rientra nello sweep',
-        '--force'], { json: false });
-      gh(['issue', 'edit', String(n), '--repo', REPO,
-        '--add-label', AUTOMATION_DEFERRED_LABEL], { json: false });
-      gh(['issue', 'comment', String(n), '--repo', REPO, '--body', [
-        `<!-- AUTOMATION_DEFERRED: ${reason} -->`,
-        `⏸️ **Lavoro differito dal risk gate** (${domains.join(', ') || 'policy'}).`,
-        'Il deny resta fail-closed, ma non introduce una nuova decisione umana: il prepass rivaluterà automaticamente la policy quando l’input sarà verificabile.',
-      ].join('\n\n')], { json: false });
-      console.log(`#${n} ${reason} (${domains.join(', ') || 'policy'}) → ${AUTOMATION_DEFERRED_LABEL}, nessun routing.`);
-    } catch (e) {
-      console.log(`::error::#${n} defer F1/F7 non applicato (${String(e).slice(0, 120)}) — routing bloccato comunque.`);
-    }
-  };
-
   // --- Primo passaggio: orfane (senza agent:triaged) ---
   if (!orphans.length) {
     console.log('Nessuna issue orfana (tutte triaged). ✅');
@@ -325,23 +214,14 @@ function main() {
 
     for (const iss of orphans) {
       const n = iss.number;
-      const { category, autofix, route, fuPrio, automationDeferred, riskBlocked, riskDomains } = classifyIssue(
-        iss.title,
-        names(iss),
-        iss.body,
-      );
+      const { category, autofix, route, fuPrio } = classifyIssue(iss.title, names(iss));
 
       // Routable = ha un routing reale (fix/queue), auto-route consentito, non transient.
       // Decisione PRIMA di qualunque label: marcare triaged una routabile che NON
       // riusciamo a routare (PAT assente o oltre cap) la perderebbe dal filtro
       // orfani per sempre → nessuno sweep successivo la routa mai (defeat-self).
       const isCrawlerTransient = has(iss, 'crawler-transient');
-      // Stesso veto del secondo passaggio: un padre decomposto (o un bucket
-      // senza item open) che ha perso `agent:triaged` non è routabile, quindi
-      // viene solo marcato, come i crawler-transient.
-      const veto = queueVeto(iss);
-      const isRoutable = autofix === true && (route === 'fix' || route === 'queue')
-        && !isCrawlerTransient && veto === null;
+      const isRoutable = autofix === true && (route === 'fix' || route === 'queue') && !isCrawlerTransient;
       const isCrawlerFix = isRoutable && route === 'fix';
 
       // PAT assente: routing impossibile. Lascia orfana (NO triaged) → uno sweep
@@ -363,17 +243,6 @@ function main() {
       // Da qui marchiamo SEMPRE triaged (idempotente).
       markTriaged(n);
 
-      if (riskBlocked) {
-        markDeferred(n, riskDomains, 'risk');
-        markedOnly++;
-        continue;
-      }
-      if (automationDeferred) {
-        console.log(`#${n} già in ${AUTOMATION_DEFERRED_LABEL} → nessun nuovo defer/routing.`);
-        markedOnly++;
-        continue;
-      }
-
       // crawler-transient → solo triaged (si auto-chiudono, routarle = burn).
       if (isCrawlerTransient) {
         console.log(`#${n} crawler-transient → solo triaged (auto-close, no route).`);
@@ -381,14 +250,9 @@ function main() {
         continue;
       }
 
-      if (veto) {
-        console.log(`#${n} ${QUEUE_VETO_TEXT[veto]} → solo triaged (no route).`);
-        markedOnly++;
-        continue;
-      }
-
-      // Difensivo: questo branch resta come guard contro un classifier che
-      // reintroduca una categoria human-only.
+      // Difensivo: dal 2026-07-05 classifyIssue non produce più route='none'/
+      // autofix=false per nessuna categoria — questo branch resta come guard
+      // contro un futuro classifier che reintroduca una categoria human-only.
       if (route === 'none' || autofix !== true) { markedOnly++; continue; }
       // PAT garantito qui: le routabili con !PAT sono già state lasciate orfane sopra.
 
@@ -425,52 +289,18 @@ function main() {
   let allTriaged = [];
   try {
     allTriaged = gh(['issue', 'list', '--repo', REPO, '--state', 'open',
-      '--label', 'agent:triaged', '--limit', '300', '--json', 'number,title,body,labels']);
+      '--label', 'agent:triaged', '--limit', '300', '--json', 'number,title,labels']);
   } catch (e) { console.error(`gh issue list (triaged-no-route): ${String(e).slice(0, 160)}`); }
 
-  // I vetati non entrano in `unrouted`, ma si contano e si loggano: un ramo
-  // muto sarebbe indistinguibile da un buco del router.
-  const unrouted = [];
-  for (const iss of allTriaged.filter(lacksRouting)) {
-    const veto = queueVeto(iss);
-    if (veto) {
-      console.log(`#${iss.number} triaged-no-route ${QUEUE_VETO_TEXT[veto]} → skip`);
-      markedOnly++;
-      continue;
-    }
-    if (isDailyBucketTitle(iss.title)) {
-      // `gh issue list --json body` dà sempre una stringa (vuota se assente):
-      // il caso reale è il parse che non dimostra nulla, non il campo mancante.
-      const items = typeof iss.body === 'string' ? parseFollowupItems(iss.body) : null;
-      if (!items || items.unterminatedFence || !items.some((item) => item.id)) {
-        console.log(`#${iss.number} triaged-no-route bucket giornaliero con corpo vuoto o non leggibile → nessun veto sugli item.`);
-      }
-    }
-    unrouted.push(iss);
-  }
+  const unrouted = allTriaged.filter(isTriagedButNotRouted);
   if (!unrouted.length) {
     console.log('Nessuna issue triaged-but-not-routed. ✅');
   } else {
     console.log(`Issue triaged-but-not-routed: ${unrouted.length}`);
     for (const iss of unrouted) {
       const n = iss.number;
-      const { route, fuPrio, automationDeferred, riskBlocked, riskDomains } = classifyIssue(
-        iss.title,
-        names(iss),
-        iss.body,
-      );
+      const { route, fuPrio } = classifyIssue(iss.title, names(iss));
       const isCrawlerTransient = has(iss, 'crawler-transient');
-
-      if (riskBlocked) {
-        markDeferred(n, riskDomains, 'risk');
-        markedOnly++;
-        continue;
-      }
-      if (automationDeferred) {
-        console.log(`#${n} già in ${AUTOMATION_DEFERRED_LABEL} → nessun nuovo defer/routing.`);
-        markedOnly++;
-        continue;
-      }
 
       // crawler-transient: si auto-chiudono quando il crawler recupera.
       if (isCrawlerTransient) {
@@ -484,7 +314,7 @@ function main() {
       // instraderebbe, ma in silenzio e a ogni sweep: esplicitarlo la conta come
       // marked-only invece di lasciarla indistinguibile da un buco del router.
       if (route === 'none') {
-        console.log(`#${n} triaged-no-route pin fuori dal ciclo (keep-open/agent:no-age-out) → skip.`);
+        console.log(`#${n} triaged-no-route pin fuori dal ciclo (keep-open/agent:no-age-out/operations-audit-review) → skip.`);
         markedOnly++;
         continue;
       }

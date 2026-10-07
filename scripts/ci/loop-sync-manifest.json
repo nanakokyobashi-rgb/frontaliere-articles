@@ -1119,9 +1119,9 @@
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d1903a1944aa1ad6",
-        "corpus": "d1903a1944aa1ad6",
-        "alignedAt": "2026-10-07"
+        "site": "80e52c7e8a3c29ad",
+        "corpus": "80e52c7e8a3c29ad",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -1340,9 +1340,9 @@
       "path": "scripts/ci/orphan-pr-custodian.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "abfa4ec416adc543",
-        "corpus": "abfa4ec416adc543",
-        "alignedAt": "2026-10-07"
+        "site": "e2a4715a3e983c0e",
+        "corpus": "e2a4715a3e983c0e",
+        "alignedAt": "2026-09-20"
       }
     },
     {
