@@ -10,6 +10,7 @@ const SCRIPT = path.join(ROOT, 'scripts/lib/push-article-shard-incremental.sh');
 const SECTION = 'articolifrontaliere';
 const LOCALE = 'it';
 const REL = 'articoli-frontaliere/monotonic-test/index.html';
+const OTHER_REL = 'unrelated/observer.txt';
 
 function git(args, cwd, extraEnv = {}) {
   return execFileSync('git', args, {
@@ -37,7 +38,7 @@ function seedRemote({
   remoteRevision = null,
   remoteEpoch = 1_000_000_000,
   seedEpoch = remoteEpoch - 10,
-  seedRevision = null,
+  seedRevision = `${seedEpoch}.0000000`,
 }) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-monotonic-'));
   const seed = path.join(root, 'seed');
@@ -63,7 +64,7 @@ function seedRemote({
     commitSeed(seed, `remote publication\n\nContent-Rev: ${remoteRevision}`, remoteEpoch);
     git(['-C', seed, 'push', '-q', 'origin', 'main']);
   }
-  return { root, remote, head: git(['-C', remote, 'rev-parse', 'main']) };
+  return { root, seed, remote, head: git(['-C', remote, 'rev-parse', 'main']) };
 }
 
 function runPush(remote, incomingHtml, { revision = null, failFetch = false, trace = false, expectFailure = false } = {}) {
@@ -216,12 +217,45 @@ test('stessa epoca ma commit diverso: la pagina remota resta', () => {
   }
 });
 
-test('commit remoto senza trailer è sostituibile', () => {
-  const scenario = seedRemote({ body: page('remote'), remoteEpoch: 2_000_000_100 });
+test('commit remoto rilevante senza trailer fa fallire closed il push', () => {
+  const scenario = seedRemote({ body: page('remote'), remoteEpoch: 2_000_000_100, seedRevision: null });
   try {
+    const result = runPush(scenario.remote, page('incoming'), { revision: '2000000000.abcdef1', expectFailure: true });
+    assert.equal(result.head, scenario.head);
+    assert.equal(remoteHtml(scenario.remote), page('remote'));
+    assert.match(result.output, /missing or malformed Content-Rev/);
+  } finally {
+    fs.rmSync(scenario.root, { recursive: true, force: true });
+  }
+});
+
+test('commit remoto rilevante con trailer malformato fa fallire closed il push', () => {
+  const scenario = seedRemote({ body: page('remote'), remoteRevision: 'not-a-revision', remoteEpoch: 2_000_000_100 });
+  try {
+    const result = runPush(scenario.remote, page('incoming'), { revision: '2000000000.abcdef1', expectFailure: true });
+    assert.equal(result.head, scenario.head);
+    assert.equal(remoteHtml(scenario.remote), page('remote-newer'));
+    assert.match(result.output, /missing or malformed Content-Rev/);
+  } finally {
+    fs.rmSync(scenario.root, { recursive: true, force: true });
+  }
+});
+
+test('commit remoto senza trailer che non tocca i path richiesti non blocca il push', () => {
+  const scenario = seedRemote({ body: page('remote'), remoteEpoch: 1_999_999_900 });
+  try {
+    fs.mkdirSync(path.join(scenario.seed, path.dirname(OTHER_REL)), { recursive: true });
+    fs.writeFileSync(path.join(scenario.seed, OTHER_REL), 'unrelated\n');
+    git(['-C', scenario.seed, 'add', OTHER_REL]);
+    git(['-C', scenario.seed, 'commit', '-qm', 'unrelated maintenance'], undefined, {
+      GIT_AUTHOR_DATE: dateFor(2_000_000_100),
+      GIT_COMMITTER_DATE: dateFor(2_000_000_100),
+    });
+    git(['-C', scenario.seed, 'push', '-q', 'origin', 'main']);
+
     const result = runPush(scenario.remote, page('incoming'), { revision: '2000000000.abcdef1' });
-    assert.notEqual(result.head, scenario.head);
     assert.equal(remoteHtml(scenario.remote), page('incoming'));
+    assert.doesNotMatch(result.output, /missing or malformed Content-Rev/);
   } finally {
     fs.rmSync(scenario.root, { recursive: true, force: true });
   }

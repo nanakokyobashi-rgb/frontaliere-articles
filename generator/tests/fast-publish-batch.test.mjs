@@ -88,10 +88,12 @@ test('un articolo ricaduto sull’immagine generica passa dalla lettura della pa
       < pipeline.indexOf('await renderArticleHubPages('),
     'la post-condizione deve decidere prima di renderizzare qualunque pagina aggregata',
   );
-  // Un articolo trattenuto con la pagina online non ferma gli archivi: li ferma
-  // solo quello la cui pagina non è dimostrata (vedi article-online-image-probe).
-  assert.match(pipeline, /const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage\(imagePostcondition\.excludedArticles\);/);
-  assert.match(pipeline, /const aggregatePagesAllowed = heldWithoutOnlinePage\.length === 0;/);
+  // Un articolo trattenuto con la pagina online non ferma gli archivi. Un
+  // articolo rilasciato col fallback invece li ferma: il registro completo
+  // conserva ancora il path dell'immagine dichiarata che manca.
+  assert.match(pipeline, /const aggregateVerdict = aggregatePageVerdict\(imagePostcondition\);/);
+  assert.match(pipeline, /const aggregatePagesAllowed = aggregateVerdict\.allowed;/);
+  assert.match(pipeline, /releasedWithGenericImage\.length > 0/);
   assert.doesNotMatch(pipeline, /aggregatePagesAllowed = imagePostcondition\.excludedArticles\.length === 0/);
   assert.match(pipeline, /if \(aggregatePagesAllowed\) \{[\s\S]*await renderArticleHubPages\(/);
   assert.match(pipeline, /let hubResult = \{ written: 0, pathsByLocale:/);
@@ -129,6 +131,14 @@ test('le immagini recuperate dal CDN restano sul CDN in indice e bridge', () => 
     pipeline.indexOf('rewriteDownloadedImageRefs(rewriteBlogImageRefs(indexHtml)')
       < pipeline.indexOf('const indexClean = sanitizeHtmlDocument(indexHtml)'),
     'la riscrittura deve precedere la scrittura dei byte pubblicati',
+  );
+  assert.match(
+    pipeline,
+    /rewriteDownloadedImageFiles\(\{\s*distDir,\s*relPaths: \[\.\.\.Object\.values\(hubResult\.pathsByLocale\)\.flat\(\), \.\.\.extraPaths\],/,
+  );
+  assert.ok(
+    pipeline.indexOf('rewriteDownloadedImageFiles({') < pipeline.indexOf('// ── Step 7: offload-generated-images-cdn.mjs'),
+    'landing e hub devono essere riscritti prima dell’offload',
   );
 });
 

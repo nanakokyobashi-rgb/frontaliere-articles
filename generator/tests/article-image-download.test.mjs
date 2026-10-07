@@ -4,11 +4,13 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {
+  aggregatePageVerdict,
   CDN_BASE,
   fetchDeclaredImage,
   prepareImageView,
   readDeclaredImages,
   registryPathForSection,
+  rewriteDownloadedImageFiles,
   rewriteDownloadedImageRefs,
 } from '../../scripts/lib/article-render-pipeline.mjs';
 
@@ -64,6 +66,45 @@ test('le sole immagini scaricate vengono riscritte sul CDN senza duplicare URL C
   assert.match(rewritten, /raw\.githubusercontent\.com\/example\/repo\/main\/public\/images\/places\/recovered\.webp/);
   assert.match(rewritten, /src="\/images\/places\/local\.webp"/);
   assert.match(rewritten, /recovered\.webp\?v=2/);
+});
+
+test('le immagini scaricate vengono riscritte anche in ogni pagina aggregata prodotta prima dell’offload', () => {
+  const distDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-aggregates-'));
+  try {
+    const landing = 'articoli-ticino/index.html';
+    const hub = 'articoli-ticino/lavoro/index.html';
+    const untouched = 'articoli-ticino/non-pubblicata/index.html';
+    for (const rel of [landing, hub, untouched]) {
+      fs.mkdirSync(path.join(distDir, path.dirname(rel)), { recursive: true });
+      fs.writeFileSync(path.join(distDir, rel), '<img src="/images/places/recovered.webp">');
+    }
+
+    rewriteDownloadedImageFiles({
+      distDir,
+      relPaths: [landing, hub],
+      downloadedImageKeys: ['images/places/recovered.webp'],
+    });
+
+    for (const rel of [landing, hub]) {
+      assert.equal(fs.readFileSync(path.join(distDir, rel), 'utf8'), `<img src="${CDN_BASE}/images/places/recovered.webp">`);
+    }
+    assert.equal(fs.readFileSync(path.join(distDir, untouched), 'utf8'), '<img src="/images/places/recovered.webp">');
+  } finally {
+    fs.rmSync(distDir, { recursive: true, force: true });
+  }
+});
+
+test('un articolo rilasciato col fallback resta fuori dagli aggregati finché l’immagine non è disponibile', () => {
+  const online = [{ articleId: 'online', online: [{ state: 'own' }] }];
+  assert.equal(aggregatePageVerdict({ excludedArticles: online, releasedArticles: [] }).allowed, true);
+  assert.equal(
+    aggregatePageVerdict({ excludedArticles: online, releasedArticles: [{ articleId: 'fallback' }] }).allowed,
+    false,
+  );
+  assert.equal(
+    aggregatePageVerdict({ excludedArticles: [{ articleId: 'missing', online: [{ state: 'absent' }] }], releasedArticles: [] }).allowed,
+    false,
+  );
 });
 
 test('il registro immagini viene dal profilo della sezione e manca fail-closed', async () => {

@@ -247,7 +247,7 @@ history_unavailable() {
 collect_remote_newer_paths() {
   local own_revision="$1"
   local own_epoch="${own_revision%%.*}"
-  local head_epoch boundary commits commit trailer parent changed_path changed_paths shallow_file
+  local head_epoch boundary commits commit commit_epoch trailer trailer_valid trailer_wins parent changed_path changed_paths shallow_file requested_path
   remote_newer_paths=()
 
   head_epoch="$(git -C "$stage" show -s --format=%ct HEAD 2>/dev/null)" || {
@@ -287,16 +287,35 @@ collect_remote_newer_paths() {
   }
   while IFS= read -r commit; do
     [ -n "$commit" ] || continue
+    commit_epoch="$(git -C "$stage" show -s --format=%ct "$commit" 2>/dev/null)" || {
+      history_unavailable "cannot read the timestamp of shard commit $commit"
+      return 1
+    }
+    if ! [[ "$commit_epoch" =~ ^[0-9]+$ ]]; then
+      history_unavailable "the timestamp of shard commit $commit is unreadable"
+      return 1
+    fi
     trailer="$(git -C "$stage" show -s --format='%(trailers:key=Content-Rev,valueonly)' "$commit" 2>/dev/null)" || {
       history_unavailable "cannot inspect shard commit $commit"
       return 1
     }
-    trailer="$(printf '%s' "$trailer" | sed -n '1p')"
-    [[ "$trailer" =~ ^[0-9]+\.[0-9A-Fa-f]{7,40}$ ]] || continue
-    remote_revision_wins "$trailer" "$own_revision" || continue
-    # The paths of a winning publication are always listed: either its parent
-    # is on disk, or it is a true root commit; anything else is an unreadable
-    # history, never a silent skip.
+    trailer_valid=0
+    trailer_wins=0
+    if [[ "$trailer" =~ ^[0-9]+\.[0-9A-Fa-f]{7,40}$ ]]; then
+      trailer_valid=1
+      if remote_revision_wins "$trailer" "$own_revision"; then trailer_wins=1; fi
+      # A valid older publication cannot protect any requested path and may be
+      # the shallow legacy boundary whose parent is deliberately unavailable.
+      [ "$trailer_wins" = 1 ] || continue
+    elif [ "$commit_epoch" -lt "$own_epoch" ]; then
+      # Explicit timestamp-verified legacy boundary: it predates the incoming
+      # content and therefore cannot be the newer writer we must preserve.
+      continue
+    fi
+    # Paths decide whether an otherwise invalid recent trailer is relevant. A
+    # commit without exactly one valid Content-Rev is not harmless when it
+    # touches one of the requested pages: its ordering is unknowable and must
+    # fail closed.
     if parent="$(git -C "$stage" rev-parse --verify --quiet "$commit^" 2>/dev/null)"; then
       changed_paths="$(git -C "$stage" diff-tree --no-commit-id --name-only -r "$parent" "$commit" 2>/dev/null)" || changed_paths='__unreadable__'
     elif [ -f "$shallow_file" ] && grep -qx "$commit" "$shallow_file" 2>/dev/null; then
@@ -308,10 +327,24 @@ collect_remote_newer_paths() {
       history_unavailable "cannot list the paths of shard commit $commit"
       return 1
     fi
+    local -a relevant_paths=()
     while IFS= read -r changed_path; do
       [ -n "$changed_path" ] || continue
-      append_remote_newer_path "$changed_path"
+      for requested_path in "${relpaths[@]}"; do
+        if [ "$changed_path" = "$requested_path" ]; then
+          relevant_paths+=("$changed_path")
+          break
+        fi
+      done
     done <<< "$changed_paths"
+    [ "${#relevant_paths[@]}" -gt 0 ] || continue
+    if [ "$trailer_valid" != 1 ]; then
+      history_unavailable "relevant shard commit $commit has a missing or malformed Content-Rev"
+      return 1
+    fi
+    for changed_path in "${relevant_paths[@]}"; do
+      append_remote_newer_path "$changed_path"
+    done
   done <<< "$commits"
 }
 

@@ -213,15 +213,25 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     );
   }
   // Un articolo trattenuto con la pagina online non ferma gli archivi: il link
-  // che lo elenca risponde. Li ferma solo quello la cui pagina non è dimostrata.
-  const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage(imagePostcondition.excludedArticles);
+  // che lo elenca risponde. Li ferma quello la cui pagina non è dimostrata e,
+  // separatamente, qualunque articolo appena rilasciato con l'immagine generica:
+  // gli aggregati leggono il registro completo e conserverebbero il path
+  // dichiarato che non è ancora disponibile.
+  const aggregateVerdict = aggregatePageVerdict(imagePostcondition);
+  const { heldWithoutOnlinePage, releasedWithGenericImage } = aggregateVerdict;
   if (heldWithoutOnlinePage.length > 0) {
     console.error(
       `[${logPrefix}] aggregate pages withheld: ${heldWithoutOnlinePage.length} held article(s) with no page proven online ` +
         `(${heldWithoutOnlinePage.slice(0, 10).map((article) => article.articleId).join(', ')})`,
     );
   }
-  const aggregatePagesAllowed = heldWithoutOnlinePage.length === 0;
+  if (releasedWithGenericImage.length > 0) {
+    console.error(
+      `[${logPrefix}] aggregate pages withheld: ${releasedWithGenericImage.length} article(s) released with the generic image ` +
+        `(${releasedWithGenericImage.slice(0, 10).map((article) => article.articleId).join(', ')})`,
+    );
+  }
+  const aggregatePagesAllowed = aggregateVerdict.allowed;
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
   // Re-renders each section's `/tutti/` archive + pagination into the SAME
@@ -260,8 +270,10 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // Gli archivi e le pagine aggregate leggono l'intero registro, non il set
   // filtrato appena sopra. Se un articolo trattenuto non ha una pagina
   // dimostrata online, lasciare uscire quegli aggregati pubblicherebbe un link
-  // alla pagina omessa: in quel caso restano online gli aggregati precedenti e
-  // questo giro pubblica soltanto le pagine articolo dimostrate sane.
+  // alla pagina omessa; se invece è stato rilasciato col fallback, gli aggregati
+  // conserverebbero ancora il path immagine dichiarato ma assente. In entrambi
+  // i casi restano online gli aggregati precedenti e questo giro pubblica solo
+  // le pagine articolo consentite.
   let hubResult = { written: 0, pathsByLocale: Object.fromEntries(locales.map((locale) => [locale, []])) };
   let extraPaths = [];
   if (aggregatePagesAllowed) {
@@ -295,8 +307,19 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
     // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
     extraPaths = beforeOffload ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult })) ?? [] : [];
+
+    // Le immagini recuperate esistono sul CDN ma non nel checkout e quindi non
+    // vengono ricaricate. Anche archivi, landing e hub possono riprenderne il
+    // path dal registro completo: riscriviamo tutte le pagine aggregate appena
+    // prodotte prima che la view temporanea sparita diventi un riferimento
+    // same-origin senza asset dietro.
+    rewriteDownloadedImageFiles({
+      distDir,
+      relPaths: [...Object.values(hubResult.pathsByLocale).flat(), ...extraPaths],
+      downloadedImageKeys: imageStage.downloadedImageKeys,
+    });
   } else {
-    console.error(`[${logPrefix}] aggregate pages withheld because the image postcondition excluded an article`);
+    console.error(`[${logPrefix}] aggregate pages withheld by the image postcondition verdict`);
   }
 
   // ── Step 7: offload-generated-images-cdn.mjs, unmodified, via subprocess ──
@@ -537,6 +560,28 @@ export function rewriteDownloadedImageRefs(html, downloadedImageKeys = []) {
       .replace(new RegExp(`(?<![\\w.@])/${escapedKey}${boundary}`, 'g'), replacement);
   }
   return rewritten;
+}
+
+/** Rewrite the generated aggregate files that can carry registry image refs. */
+export function rewriteDownloadedImageFiles({ distDir, relPaths = [], downloadedImageKeys = [] }) {
+  for (const rel of new Set(relPaths.filter(Boolean))) {
+    const abs = path.join(distDir, rel);
+    if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) continue;
+    const html = fs.readFileSync(abs, 'utf-8');
+    const rewritten = rewriteDownloadedImageRefs(html, downloadedImageKeys);
+    if (rewritten !== html) fs.writeFileSync(abs, rewritten, 'utf-8');
+  }
+}
+
+/** Aggregates are safe only when every registry image they retain is usable. */
+export function aggregatePageVerdict(imagePostcondition = {}) {
+  const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage(imagePostcondition.excludedArticles ?? []);
+  const releasedWithGenericImage = imagePostcondition.releasedArticles ?? [];
+  return {
+    allowed: heldWithoutOnlinePage.length === 0 && releasedWithGenericImage.length === 0,
+    heldWithoutOnlinePage,
+    releasedWithGenericImage,
+  };
 }
 
 function imageReferencesFromHtml(html) {
