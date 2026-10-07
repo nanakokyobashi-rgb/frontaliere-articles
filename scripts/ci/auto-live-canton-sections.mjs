@@ -329,6 +329,7 @@ function initialReport(root, section, mode) {
     enabled,
     status,
     ownArticleIds: [],
+    archiveOrphans: [],
     missingSlugs: [],
     missingBodies: [],
     articleSlugCollisions: [],
@@ -368,12 +369,15 @@ function initialReport(root, section, mode) {
     return report;
   }
   report.ownArticleIds = own.articleIds;
+  const archiveIds = archiveArticleIds(root, core, own);
+  report.archiveOrphans = [...archiveIds].filter((id) => !own.articleIds.includes(id));
   report.missingSlugs = own.missingSlugs;
   report.missingBodies = own.missingBodies;
   report.articleSlugCollisions = own.slugCollisions;
   if (own.articleIds.length === 0) report.reason = 'no-own-article';
-  else if (own.missingSlugs.length > 0) report.reason = 'article-slug-missing';
   else if (own.slugCollisions.length > 0) report.reason = 'article-slug-collision';
+  else if (report.archiveOrphans.length > 0) report.reason = 'archive-article-unreconciled';
+  else if (own.missingSlugs.length > 0) report.reason = 'article-slug-missing';
   else if (own.missingBodies.length > 0) report.reason = 'article-body-missing';
 
   try {
@@ -416,6 +420,7 @@ export async function planSections(root = process.cwd(), {
         enabled: false,
         status: null,
         ownArticleIds: [],
+        archiveOrphans: [],
         missingSlugs: [],
         missingBodies: [],
         articleSlugCollisions: [],

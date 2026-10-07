@@ -122,6 +122,20 @@ test('il piano include tutte le pagine archivio paginate del renderer', () => {
   assert.ok(pages.some((page) => page.path === '/articoli-lucerna/tutti/page-2/' && page.page === 2));
 });
 
+test('un ID solo in slug map o meta archivio blocca la promozione', async () => {
+  const slugOnly = fixtureRoot({ extraSlugCount: 1 });
+  const slugPlan = await planSections(slugOnly, { mode: 'promote', sections: ['canton-lu'], probe: false });
+  assert.equal(slugPlan.sections[0].reason, 'archive-article-unreconciled');
+  assert.deepEqual(slugPlan.sections[0].archiveOrphans, ['auto-live-slug-only-0']);
+  assert.deepEqual(slugPlan.readySections, []);
+
+  const metaOnly = fixtureRoot({ extraMetaCount: 1 });
+  const metaPlan = await planSections(metaOnly, { mode: 'promote', sections: ['canton-lu'], probe: false });
+  assert.equal(metaPlan.sections[0].reason, 'archive-article-unreconciled');
+  assert.deepEqual(metaPlan.sections[0].archiveOrphans, ['auto-live-extra-0']);
+  assert.deepEqual(metaPlan.readySections, []);
+});
+
 test('la verifica CDN richiede 200, canonical, hreflang reciproci, route owner e niente noindex', async () => {
   const root = fixtureRoot();
   const pages = expectedSectionPages('canton-lu', { root });
