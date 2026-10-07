@@ -1,0 +1,797 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vs:servizi",
+  "section": "canton-vs",
+  "canton": "VS",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "43f61b1f7eaa1cc944dff531fad54389edd50a8410c8f559bc69b3dabd06924b",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VS",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "In Vallese, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con l’Italia e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "582,80 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 400 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "VS, regione di premio 1",
+              "value": "mediana 582,80 CHF al mese",
+              "detail": "da 544,40 a 643,20 CHF, 26 assicuratori"
+            },
+            {
+              "label": "VS, regione di premio 2",
+              "value": "mediana 521,60 CHF al mese",
+              "detail": "da 470,90 a 597,90 CHF, 28 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VS111",
+              "value": "21.100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
+            },
+            {
+              "label": "VS52",
+              "value": "13.100 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
+            },
+            {
+              "label": "VS559955",
+              "value": "400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "14 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
+              "date": "2026-10-02",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
+              "date": "2026-09-29",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
+            },
+            {
+              "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
+              "date": "2026-09-25",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
+            },
+            {
+              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
+              "date": "2026-09-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
+            },
+            {
+              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
+              "date": "2026-09-24",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
+            },
+            {
+              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
+              "date": "2026-09-08",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Asilo nido e custodia bambini in Vallese: costi",
+          "url": "/articoli-svizzera/custodia-bambini-vallese-sussidi/",
+          "excerpt": "In Vallese asili nido, famiglie diurne e doposcuola: tariffe calcolate sul reddito e sussidi cantonali disponibili per la custodia dei bambini.",
+          "date": "2026-09-30T19:28:17.623Z"
+        },
+        {
+          "title": "Permesso di dimora B nel Canton Vallese: requisiti, documenti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-canton-vallese-requisiti-rinnovo/",
+          "excerpt": "Scopri i requisiti, i documenti necessari e la procedura di rinnovo del permesso di dimora B nel Canton Vallese.",
+          "date": "2026-09-05T20:58:25.674Z"
+        },
+        {
+          "title": "Permesso di domicilio C nel Canton Vallese: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-domicilio-c-canton-vallese-requisiti-domanda/",
+          "excerpt": "Scopri i requisiti e la procedura per ottenere il permesso di domicilio C nel Canton Vallese, inclusi anni richiesti, criteri di integrazione e conoscenze linguistiche.",
+          "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Premi LAMal nel Vallese: fasce e riduzioni 2026",
+          "url": "/articoli-svizzera/premi-lamal-vallese-riduzione/",
+          "excerpt": "Guida ai premi obbligatori di cassa malati nel canton Vallese: franchigie disponibili, modelli assicurativi, riduzione premi e procedura per ottenere sussidi cantonali.",
+          "date": "2026-09-05T16:42:46.103Z"
+        },
+        {
+          "title": "Crans-Montana, fatture ospedaliere: non tutti gli ospedali le hanno inviate",
+          "url": "/articoli-frontaliere/crans-montana-fatture-ospedali-2026/",
+          "excerpt": "Non tutti gli ospedali svizzeri hanno inviato le fatture ai pazienti italiani feriti nell'incendio di Crans-Montana.",
+          "date": "2026-05-01T09:01:00.384Z"
+        },
+        {
+          "title": "Cassis e Cornado: tensione su fatture ospedaliere per feriti di Crans-Montana",
+          "url": "/articoli-frontaliere/cassis-italia-cornado-risarcimento/",
+          "excerpt": "L'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: «Parlo senza mezzi termini». La questione riguarda le fatture ospedaliere per i feriti di Crans-Montana.",
+          "date": "2026-05-07T07:37:15.149Z"
+        },
+        {
+          "title": "Costi sanitari Crans-Montana: Marchesi chiede chiarimenti",
+          "url": "/articoli-frontaliere/svizzera-deroghe-costi-sanitari-crans-montana/",
+          "excerpt": "Il consigliere nazionale Piero Marchesi presenta un'interpellanza sul trattamento dei costi sanitari legati al dramma di Crans-Montana, sollevando preoccupazioni su possibili disparità di trattamento.",
+          "date": "2026-05-07T10:14:18.326Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/vallese/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/vallese-vs/"
+        },
+        {
+          "label": "Offerte di lavoro in Vallese",
+          "url": "/cerca-lavoro-vallese/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "VS",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Valais, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Italy and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "582.80 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 400 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "VS, premium region 1",
+              "value": "typical 582.80 CHF per month",
+              "detail": "from 544.40 to 643.20 CHF, 26 insurers"
+            },
+            {
+              "label": "VS, premium region 2",
+              "value": "typical 521.60 CHF per month",
+              "detail": "from 470.90 to 597.90 CHF, 28 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VS111",
+              "value": "21,100 CHF",
+              "detail": "current bid",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
+            },
+            {
+              "label": "VS52",
+              "value": "13,100 CHF",
+              "detail": "current bid",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
+            },
+            {
+              "label": "VS559955",
+              "value": "400 CHF",
+              "detail": "current bid",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "14 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
+              "date": "2026-10-02",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
+              "date": "2026-09-29",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
+            },
+            {
+              "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
+              "date": "2026-09-25",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
+            },
+            {
+              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
+              "date": "2026-09-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
+            },
+            {
+              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
+              "date": "2026-09-24",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
+            },
+            {
+              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
+              "date": "2026-09-08",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Daycare and Childcare in Valais: Costs",
+          "url": "/en/swiss-articles/childcare-costs-valais/",
+          "excerpt": "In Valais, daycare centers, family daycare, and after-school programs: fees are based on income, and cantonal subsidies are available for child care.",
+          "date": "2026-09-30T19:28:17.623Z"
+        },
+        {
+          "title": "Residence permit B in the Canton of Valais: requirements, documents and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-valais-requirements-renewal/",
+          "excerpt": "Learn about the requirements, the necessary documents and the procedure for renewing the B residence permit in the Canton of Valais.",
+          "date": "2026-09-05T20:58:25.674Z"
+        },
+        {
+          "title": "Residence permit C in the Canton of Valais: requirements and application",
+          "url": "/en/swiss-articles/permit-c-residence-canton-valais-requirements-application/",
+          "excerpt": "Learn about the requirements and procedure for obtaining a residence permit C in the Canton of Valais, including the required years, integration criteria and language skills.",
+          "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "LAMal awards in Valais: bands and reductions 2026",
+          "url": "/en/swiss-articles/valais-lamal-premiums-reduction/",
+          "excerpt": "Guide to compulsory sick pay premiums in the canton of Valais: deductibles available, insurance models, premium reduction and procedure for obtaining cantonal subsidies.",
+          "date": "2026-09-05T16:42:46.103Z"
+        },
+        {
+          "title": "Crans-Montana, hospital bills: not all sent to Italian patients",
+          "url": "/en/cross-border-articles/crans-montana-bills-hospitals-2026/",
+          "excerpt": "Not all Swiss hospitals have sent bills to Italian patients injured in the Crans-Montana fire.",
+          "date": "2026-05-01T09:01:00.384Z"
+        },
+        {
+          "title": "Cassis and Cornado: tension over Crans-Montana hospital bills",
+          "url": "/en/cross-border-articles/cassis-italy-cornado-compensation/",
+          "excerpt": "Italian ambassador Gian Lorenzo Cornado replies to Cassis: 'I speak without mincing words'. The issue concerns hospital bills for Crans-Montana's injured.",
+          "date": "2026-05-07T07:37:15.149Z"
+        },
+        {
+          "title": "Health costs in Crans-Montana: Marchesi asks for clarification",
+          "url": "/en/cross-border-articles/switzerland-derogations-health-costs-crans-montana/",
+          "excerpt": "National councillor Piero Marchesi submits an interpellation on the treatment of health costs related to the Crans-Montana drama, raising concerns about possible disparities in treatment.",
+          "date": "2026-05-07T10:14:18.326Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/valais-vs/"
+        },
+        {
+          "label": "Job offers in Valais",
+          "url": "/en/find-jobs-valais/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "VS",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Wallis laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Italien und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "582.80 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 400 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "VS, Prämienregion 1",
+              "value": "Mittelwert 582.80 CHF pro Monat",
+              "detail": "von 544.40 bis 643.20 CHF, 26 Versicherer"
+            },
+            {
+              "label": "VS, Prämienregion 2",
+              "value": "Mittelwert 521.60 CHF pro Monat",
+              "detail": "von 470.90 bis 597.90 CHF, 28 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VS111",
+              "value": "21’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
+            },
+            {
+              "label": "VS52",
+              "value": "13’100 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
+            },
+            {
+              "label": "VS559955",
+              "value": "400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "14 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
+              "date": "2026-10-02",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
+              "date": "2026-09-29",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
+            },
+            {
+              "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
+              "date": "2026-09-25",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
+            },
+            {
+              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
+              "date": "2026-09-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
+            },
+            {
+              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
+              "date": "2026-09-24",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
+            },
+            {
+              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
+              "date": "2026-09-08",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Wallis: Kosten",
+          "url": "/de/schweiz-artikel/kinderbetreuung-kosten-wallis/",
+          "excerpt": "Im Wallis: Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung: einkommensabhängige Tarife und kantonale Zuschüsse für die Kinderbetreuung.",
+          "date": "2026-09-30T19:28:17.623Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B im Wallis: Voraussetzungen, Dokumente und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-wallis-voraussetzungen-verlaengerung/",
+          "excerpt": "Informieren Sie sich über die Voraussetzungen, die erforderlichen Unterlagen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Wallis.",
+          "date": "2026-09-05T20:58:25.674Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C im Kanton Wallis: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-c-kanton-wallis-anforderungen-antrag/",
+          "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Wallis, einschliesslich erforderlicher Jahre, Integrationskriterien und Sprachkenntnisse.",
+          "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
+          "url": "/de/schweiz-artikel/vallese-lamal-praemien-reduktion/",
+          "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
+          "date": "2026-09-05T16:42:46.103Z"
+        },
+        {
+          "title": "Crans-Montana: Nicht alle Spitäler haben Rechnungen geschickt",
+          "url": "/de/grenzgaenger-artikel/crans-montana-rechnungen-krankenhauser-2026/",
+          "excerpt": "Nicht alle Schweizer Spitäler haben den italienischen Patienten, die beim Brand in Crans-Montana verletzt wurden, Rechnungen geschickt.",
+          "date": "2026-05-01T09:01:00.384Z"
+        },
+        {
+          "title": "Cassis und Cornado: Spannung um Spitalrechnungen für Crans-Montana-Verletzte",
+          "url": "/de/grenzgaenger-artikel/cassis-italien-cornado-entschaedigung/",
+          "excerpt": "Der italienische Botschafter Gian Lorenzo Cornado antwortet auf Cassis: 'Ich spreche ohne Umschweife.' Es geht um die Spitalrechnungen für die Verletzten von Crans-Montana.",
+          "date": "2026-05-07T07:37:15.149Z"
+        },
+        {
+          "title": "Krankenkosten Crans-Montana: Marchesi fordert Aufklärung",
+          "url": "/de/grenzgaenger-artikel/schweiz-abweichungen-kosten-crans-montana/",
+          "excerpt": "Nationalrat Piero Marchesi stellt eine Interpellation zur Behandlung der Gesundheitskosten im Zusammenhang mit dem Drama von Crans-Montana und äussert Bedenken über mögliche Ungleichbehandlungen.",
+          "date": "2026-05-07T10:14:18.326Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/wallis-vs/"
+        },
+        {
+          "label": "Stellenangebote im Wallis",
+          "url": "/de/jobs-im-wallis/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "VS",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "En Valais, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Italie et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "582,80 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 400 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "VS, région de primes 1",
+              "value": "valeur centrale 582,80 CHF par mois",
+              "detail": "de 544,40 à 643,20 CHF, 26 assureurs"
+            },
+            {
+              "label": "VS, région de primes 2",
+              "value": "valeur centrale 521,60 CHF par mois",
+              "detail": "de 470,90 à 597,90 CHF, 28 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VS111",
+              "value": "21 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
+            },
+            {
+              "label": "VS52",
+              "value": "13 100 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
+            },
+            {
+              "label": "VS559955",
+              "value": "400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-15T13:00:00.000Z",
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
+              "date": "2026-10-02",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/2/haut-valais-caroline-berchtold-hutter-nommee-directrice-des-soins-mtt"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 - Une nouvelle hausse difficilement justifiable",
+              "date": "2026-09-29",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51178036"
+            },
+            {
+              "label": "Semaine de la santé mentale - Le Canton du Valais s’associe à la démarche",
+              "date": "2026-09-25",
+              "url": "https://www.vs.ch/web/communication/detail?groupId=529400&articleId=51109625"
+            },
+            {
+              "label": "Le concours de projets pour l'extension de l'hôpital psychiatrique de Malévoz est lancé",
+              "date": "2026-09-25",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/25/le-concours-de-projets-pour-lextension-de-lhopital-psychiatrique-de-malevoz-est-lance"
+            },
+            {
+              "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
+              "date": "2026-09-24",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
+            },
+            {
+              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
+              "date": "2026-09-08",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Crèche et garde d’enfants en Valais : coûts",
+          "url": "/fr/articles-suisse/garde-enfants-couts-valais/",
+          "excerpt": "Dans le Valais, crèches, familles d'accueil de jour et garderies périscolaires : tarifs calculés en fonction des revenus et aides cantonales disponibles pour la garde des enfants.",
+          "date": "2026-09-30T19:28:17.623Z"
+        },
+        {
+          "title": "Permis B Valais : exigences, documents et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-valais-conditions-renouvellement/",
+          "excerpt": "Découvrez les exigences, les documents nécessaires et la procédure de renouvellement du permis de séjour B dans le canton du Valais.",
+          "date": "2026-09-05T20:58:25.674Z"
+        },
+        {
+          "title": "Permis de séjour C dans le canton du Valais : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-residence-canton-valais-conditions-demande/",
+          "excerpt": "Découvrez les conditions et la procédure d'obtention du permis de séjour C dans le canton du Valais, y compris les années requises, les critères d'intégration et les connaissances linguistiques.",
+          "date": "2026-09-06T00:58:20.006Z"
+        },
+        {
+          "title": "Primes LAMal en Valais : fourchettes et réductions 2026",
+          "url": "/fr/articles-suisse/valais-lamal-cotisazioni-riduzione/",
+          "excerpt": "Guide des primes obligatoires d'assurance-maladie dans le canton du Valais : franchises disponibles, modèles d'assurance, réduction des primes et procédure d'obtention des allocations cantonales.",
+          "date": "2026-09-05T16:42:46.103Z"
+        },
+        {
+          "title": "Crans-Montana, factures hospitalières: tous les hôpitaux ne les ont pas envoyées",
+          "url": "/fr/articles-frontalier/crans-montana-factures-hopitaux-2026/",
+          "excerpt": "Tous les hôpitaux suisses n'ont pas envoyé les factures aux patients italiens blessés dans l'incendie de Crans-Montana.",
+          "date": "2026-05-01T09:01:00.384Z"
+        },
+        {
+          "title": "Tension à Cassis et Cornado sur les factures d'hôpitaux",
+          "url": "/fr/articles-frontalier/cassis-italie-cornado-indemnisation/",
+          "excerpt": "L'ambassadeur italien Gian Lorenzo Cornado répond à Cassis: «Je parle sans détour». La question concerne les factures d'hôpitaux pour les blessés de Crans-Montana.",
+          "date": "2026-05-07T07:37:15.149Z"
+        },
+        {
+          "title": "Coûts sanitaires Crans-Montana: Marchesi demande des éclaircissements",
+          "url": "/fr/articles-frontalier/suisse-derogations-couts-crans-montana/",
+          "excerpt": "Le conseiller national Piero Marchesi dépose une interpellation sur le traitement des coûts sanitaires liés au drame de Crans-Montana, soulevant des inquiétudes sur d'éventuelles inégalités de traitement.",
+          "date": "2026-05-07T10:14:18.326Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi en Valais",
+          "url": "/fr/trouver-emploi-valais/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

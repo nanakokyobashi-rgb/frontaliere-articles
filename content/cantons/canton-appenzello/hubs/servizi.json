@@ -1,0 +1,857 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-appenzello:servizi",
+  "section": "canton-appenzello",
+  "canton": "APPENZELLO",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "c4facbf82447cfedeb7cd6beb38d483bdd3bc06bef0296cf0567936c1ae18e07",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "APPENZELLO",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "In Appenzello, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "447,80 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "5",
+          "note": "offerta mediana 750 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "AI, regione di premio 0",
+              "value": "mediana 447,80 CHF al mese",
+              "detail": "da 411 a 543 CHF, 23 assicuratori"
+            },
+            {
+              "label": "AR, regione di premio 0",
+              "value": "mediana 539,60 CHF al mese",
+              "detail": "da 479,40 a 652,20 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "AR2771",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+            },
+            {
+              "label": "AR4790",
+              "value": "750 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+            },
+            {
+              "label": "AR6176",
+              "value": "750 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "11 °C",
+              "detail": "oggi da 11 a 11 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "11 °C",
+              "detail": "oggi da 10 a 10 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit Ende September 2026",
+              "date": "2026-10-06T05:45:00.000Z",
+              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24T15:53:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/",
+          "excerpt": "Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
+          "date": "2026-09-07T10:09:56.666Z"
+        },
+        {
+          "title": "Permesso di dimora B nel Cantone di Appenzello Interno: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-appenzello-interno-requisiti-rinnovo/",
+          "excerpt": "Scopri i requisiti e la procedura di rinnovo del permesso di dimora B nel Cantone di Appenzello Interno.",
+          "date": "2026-09-02T23:10:49.584Z"
+        },
+        {
+          "title": "Permesso di dimora B Appenzello Esterno: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-appenzello-esterno/",
+          "excerpt": "Guida completa al permesso B svizzero: caratteristiche, documenti necessari, durata e procedura di rinnovo presso l'ufficio della migrazione cantonale.",
+          "date": "2026-08-21T00:16:38.270Z"
+        },
+        {
+          "title": "Patente di guida Appenzello Esterno: conversione e esami",
+          "url": "/articoli-svizzera/patente-guida-appenzello-esterno-conversione/",
+          "excerpt": "Come convertire la patente estera ad Appenzello Esterno: esame teorico, pratico, corsi e procedura presso l'Ufficio della circolazione cantonale.",
+          "date": "2026-09-07T00:59:19.046Z"
+        },
+        {
+          "title": "Premi cassa malati nel Cantone di Appenzello Interno e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-appenzello-interno-riduzione/",
+          "excerpt": "Scopri le fasce di premio, franchigie e modelli alternativi per l'assicurazione malattia obbligatoria nel Cantone di Appenzello Interno.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Asilo nido e custodia: costi in Appenzello Esterno",
+          "url": "/articoli-svizzera/asilo-custodia-appenzello-esterno/",
+          "excerpt": "Tariffe calcolate sul reddito, sussidi cantonali e deduzioni fiscali: tutto su asili nido, famiglie diurne e doposcuola nel canton Appenzello Esterno.",
+          "date": "2026-08-21T01:51:49.937Z"
+        },
+        {
+          "title": "Premi cassa malati Appenzello Esterno: franchigie e sussidi",
+          "url": "/articoli-svizzera/premi-franchigie-appenzello-esterno/",
+          "excerpt": "Come funziona l'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.",
+          "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Premi cassa malati Appenzello Interno: franchigie e riduzione",
+          "url": "/articoli-svizzera/franchigie-riduzione-appenzello/",
+          "excerpt": "Franchigie da CHF 300 a 2.500 e procedure per ottenere il sussidio cantonale di riduzione. Guida operativa ai premi LAMal e ai criteri di accesso in Appenzello Interno.",
+          "date": "2026-08-21T04:19:19.463Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione (AR)",
+          "url": "/premi-cassa-malati/appenzello-esterno/"
+        },
+        {
+          "label": "Premi di cassa malati per regione (AI)",
+          "url": "/premi-cassa-malati/appenzello-interno/"
+        },
+        {
+          "label": "Aste delle targhe (AI)",
+          "url": "/aste-targhe-svizzera/appenzello-interno-ai/"
+        },
+        {
+          "label": "Aste delle targhe (AR)",
+          "url": "/aste-targhe-svizzera/appenzello-esterno-ar/"
+        },
+        {
+          "label": "Offerte di lavoro in Appenzello",
+          "url": "/cerca-lavoro-appenzello/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "APPENZELLO",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Appenzell, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "447.80 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "5",
+          "note": "typical bid 750 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "AI, premium region 0",
+              "value": "typical 447.80 CHF per month",
+              "detail": "from 411 to 543 CHF, 23 insurers"
+            },
+            {
+              "label": "AR, premium region 0",
+              "value": "typical 539.60 CHF per month",
+              "detail": "from 479.40 to 652.20 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "AR2771",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+            },
+            {
+              "label": "AR4790",
+              "value": "750 CHF",
+              "detail": "current bid",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+            },
+            {
+              "label": "AR6176",
+              "value": "750 CHF",
+              "detail": "current bid",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "11 °C",
+              "detail": "today from 11 to 11 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "11 °C",
+              "detail": "today from 10 to 10 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit Ende September 2026",
+              "date": "2026-10-06T05:45:00.000Z",
+              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24T15:53:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Nursery and childcare in the Inner Appenzell Canton: costs and fees",
+          "url": "/en/swiss-articles/daycare-childcare-canton-appenzell-innerrhoden/",
+          "excerpt": "Discover childcare options in the Inner Appenzell Canton, including nurseries, day families and after-school, with income-based fees and cantonal subsidies available.",
+          "date": "2026-09-07T10:09:56.666Z"
+        },
+        {
+          "title": "Residence permit B in the Inner Appenzell Canton: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-appenzello-interno-requirements-renewal/",
+          "excerpt": "Find out the requirements and the procedure for renewing the B residence permit in the Canton of Appenzello Interno.",
+          "date": "2026-09-02T23:10:49.584Z"
+        },
+        {
+          "title": "Residence Permit B External Appenzel: Requirements and Renewal",
+          "url": "/en/swiss-articles/residence-permit-b-appenzell-ausserrhoden/",
+          "excerpt": "Complete guide to the Swiss B permit: characteristics, necessary documents, duration and renewal procedure at the cantonal migration office.",
+          "date": "2026-08-21T00:16:38.270Z"
+        },
+        {
+          "title": "External Appenzello Driving License: Conversion and Exams",
+          "url": "/en/swiss-articles/driving-license-appenzell-eastern-conversion/",
+          "excerpt": "How to convert the foreign license to External Appenzell: theoretical, practical exam, courses and procedure at the Cantonal Traffic Office.",
+          "date": "2026-09-07T00:59:19.046Z"
+        },
+        {
+          "title": "Sick pay premiums in the Inner Appenzell Canton and premium reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-appenzello-interno-reduction/",
+          "excerpt": "Discover the premium ranges, deductibles and alternative models for compulsory health insurance in the Canton of Appenzello Interno.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Nursery and care: costs in the External Appenzello",
+          "url": "/en/swiss-articles/childcare-daycare-appenzell-rhodes-outer/",
+          "excerpt": "Rates calculated on income, cantonal subsidies and tax deductions: all on kindergartens, day families and after-school in the canton of Appenzello Esterno.",
+          "date": "2026-08-21T01:51:49.937Z"
+        },
+        {
+          "title": "Sick pay premiums Appenzello Esterno: deductibles and subsidies",
+          "url": "/en/swiss-articles/health-insurance-appenzell-outsrhoden-deductibles/",
+          "excerpt": "How health insurance works in Appenzello Esterno: available deductibles, coverage models and procedures to access premium subsidies.",
+          "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Inner Appenzello sick pay premiums: deductibles and reduction",
+          "url": "/en/swiss-articles/deductibles-reduction-appenzell-rhodes/",
+          "excerpt": "Deductibles from CHF 300 to 2,500 and procedures to obtain the cantonal reduction subsidy. Operational guide to LAMal awards and access criteria in Appenzello Interno.",
+          "date": "2026-08-21T04:19:19.463Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions (AI)",
+          "url": "/en/swiss-plate-auctions/appenzell-inner-ai/"
+        },
+        {
+          "label": "Number plate auctions (AR)",
+          "url": "/en/swiss-plate-auctions/appenzell-outer-ar/"
+        },
+        {
+          "label": "Job offers in Appenzell",
+          "url": "/en/find-jobs-appenzell/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "APPENZELLO",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Appenzellerland laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "447.80 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "5",
+          "note": "mittleres Gebot 750 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "AI, Prämienregion 0",
+              "value": "Mittelwert 447.80 CHF pro Monat",
+              "detail": "von 411 bis 543 CHF, 23 Versicherer"
+            },
+            {
+              "label": "AR, Prämienregion 0",
+              "value": "Mittelwert 539.60 CHF pro Monat",
+              "detail": "von 479.40 bis 652.20 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "AR2771",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+            },
+            {
+              "label": "AR4790",
+              "value": "750 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+            },
+            {
+              "label": "AR6176",
+              "value": "750 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "11 °C",
+              "detail": "heute 11 bis 11 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "11 °C",
+              "detail": "heute 10 bis 10 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit Ende September 2026",
+              "date": "2026-10-06T05:45:00.000Z",
+              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24T15:53:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Kinderbetreuung Appenzell: Kosten & Tarife",
+          "url": "/de/schweiz-artikel/kindertagesstatte-kinderbetreuung-kanton-appenzell-innerrhoden/",
+          "excerpt": "Entdecken Sie die Kinderbetreuungsmöglichkeiten im Kanton Appenzell Innerrhoden, inklusive Kindergärten, Tages- und Nachschulfamilien, mit einkommensabhängigen Tarifen und kantonalen Zuschüssen.",
+          "date": "2026-09-07T10:09:56.666Z"
+        },
+        {
+          "title": "Aufenthaltserlaubnis B im Kanton Appenzell Innerrhoden: Anforderungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-appenzello-interno-anforderungen-verlangerung/",
+          "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Appenzell Innerrhoden.",
+          "date": "2026-09-02T23:10:49.584Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Appenzell AR: Erhalt & Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-appenzell-ausserrhoden/",
+          "excerpt": "Vollständiger Leitfaden zur Schweizer B-Bewilligung: Eigenschaften, erforderliche Dokumente, Dauer und Erneuerungsverfahren beim kantonalen Migrationsamt.",
+          "date": "2026-08-21T00:16:38.270Z"
+        },
+        {
+          "title": "Führerschein Appenzell Ausserrhoden: Umbau und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-appenzell-ausserrhoden-umwandlung/",
+          "excerpt": "Wie man den ausländischen Führerschein in Appenzell Ausserrhoden umwandelt: Theorie-, Praxis-, Kurs- und Verfahrensprüfung beim kantonalen Strassenverkehrsamt.",
+          "date": "2026-09-07T00:59:19.046Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Appenzell Innerrhoden und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenversicherungspramien-appenzello-interno-reduktion/",
+          "excerpt": "Entdecken Sie die Prämiensparten, Franchisen und alternativen Modelle für die obligatorische Krankenversicherung im Kanton Appenzell Innerrhoden.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Kindertagesstätte und Obhut: Kosten in Appenzell Ausserrhoden",
+          "url": "/de/schweiz-artikel/kinderbetreuung-appenzell-ausserrhoden-kosten/",
+          "excerpt": "Berechnete Einkommenstarife, Kantonsbeiträge und Steuerabzüge: Alles rund um Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung im Kanton Appenzell Ausserrhoden.",
+          "date": "2026-08-21T01:51:49.937Z"
+        },
+        {
+          "title": "Krankenkassenprämien Appenzell Ausserrhoden: Selbstbehalte und Zuschüsse",
+          "url": "/de/schweiz-artikel/praemien-franchisen-appenzell-ausserrhoden/",
+          "excerpt": "So funktioniert die Krankenversicherung in Appenzell Ausserrhoden: verfügbare Selbstbehalte, Deckungsmodelle und Verfahren für den Zugang zu Prämienbeiträgen.",
+          "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Krankenkassenprämien Appenzell Innerrhoden: Selbstbehalte und Ermäßigung",
+          "url": "/de/schweiz-artikel/selbstbehalte-ermaessigung-appenzell/",
+          "excerpt": "Franchisen von CHF 300 bis 2.500 und Verfahren zur Erlangung des kantonalen Reduktionszuschusses. Leitfaden zu den KVG-Prämien und Zugangskriterien in Appenzell Innerrhoden.",
+          "date": "2026-08-21T04:19:19.463Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen (AI)",
+          "url": "/de/schweizer-nummernschildauktionen/innerrhoden-ai/"
+        },
+        {
+          "label": "Kontrollschild-Auktionen (AR)",
+          "url": "/de/schweizer-nummernschildauktionen/ausserrhoden-ar/"
+        },
+        {
+          "label": "Stellenangebote im Appenzellerland",
+          "url": "/de/jobs-in-appenzell/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "APPENZELLO",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "En Appenzell, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "447,80 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "5",
+          "note": "offre centrale 750 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "AI, région de primes 0",
+              "value": "valeur centrale 447,80 CHF par mois",
+              "detail": "de 411 à 543 CHF, 23 assureurs"
+            },
+            {
+              "label": "AR, région de primes 0",
+              "value": "valeur centrale 539,60 CHF par mois",
+              "detail": "de 479,40 à 652,20 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "AR2771",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
+            },
+            {
+              "label": "AR4790",
+              "value": "750 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
+            },
+            {
+              "label": "AR6176",
+              "value": "750 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 11 à 11 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 10 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Arbeitslosigkeit Ende September 2026",
+              "date": "2026-10-06T05:45:00.000Z",
+              "url": "https://www.ai.ch/themen/wirtschaft-und-arbeit/arbeit/aktuelles/arbeitslosigkeit-ende-september-2026"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Breite Mehrheit begrüsst Stossrichtung des Spitalverbundsgesetzes",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/breite-mehrheit-begruesst-stossrichtung-des-spitalverbundsgesetzes/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24T15:53:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/verwaltung/departement-gesundheit-und-soziales/news-aus-dem-departement/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            },
+            {
+              "label": "Ostschweizer Kantone bremsen Kostenwachstum im Gesundheitswesen",
+              "date": "2026-09-24",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Garderie et garde d'enfants dans le canton d'Appenzell : coûts et tarifs",
+          "url": "/fr/articles-suisse/garde-d-enfants-canton-appenzell-rhodes-interieures/",
+          "excerpt": "Découvrez les options de garde d'enfants dans le canton d'Appenzell Interne, y compris les crèches, les familles de jour et après l'école, avec des tarifs calculés sur le revenu et des subventions cantonales disponibles.",
+          "date": "2026-09-07T10:09:56.666Z"
+        },
+        {
+          "title": "Permis B Appenzell, Innerrhoden : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-appenzello-interno-conditions-renouvellement/",
+          "excerpt": "Renseignez-vous sur les exigences et la procédure pour renouveler votre permis de séjour B dans le canton d'Appenzell, en Inerrhoden.",
+          "date": "2026-09-02T23:10:49.584Z"
+        },
+        {
+          "title": "Permis de séjour B Appenzell Extérieur : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-appenzell-rhodes-exterieures/",
+          "excerpt": "Guide complet du permis B suisse : caractéristiques, documents nécessaires, durée et procédure de renouvellement auprès de l'office cantonal des migrations.",
+          "date": "2026-08-21T00:16:38.270Z"
+        },
+        {
+          "title": "Permis de conduire Appenzell Extérieur : conversion et examens",
+          "url": "/fr/articles-suisse/permis-conduire-appenzell-externe-conversion/",
+          "excerpt": "Comment convertir le permis étranger en Appenzell Extérieur : examen théorique, pratique, cours et procédure auprès de l'Office de la circulation cantonale.",
+          "date": "2026-09-07T00:59:19.046Z"
+        },
+        {
+          "title": "Récompenses de la caisse-maladie dans le canton d'Appenzell Interne et réduction des primes",
+          "url": "/fr/articles-suisse/primes-d-assurance-maladie-appenzello-interno-reduction/",
+          "excerpt": "Découvrez les fourchettes de primes, franchises et modèles alternatifs pour l'assurance maladie obligatoire dans le canton d'Appenzell Intérieur.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants : coûts à Appenzell Extérieur",
+          "url": "/fr/articles-suisse/garde-enfants-appenzell-rhodes-exterieures/",
+          "excerpt": "Tarifs calculés sur le revenu, allocations cantonales et déductions fiscales : tout sur les crèches, les familles de jour et après l'école dans le canton d'Appenzell Extérieur.",
+          "date": "2026-08-21T01:51:49.937Z"
+        },
+        {
+          "title": "Primes caisse-maladie Appenzell Extérieur : franchises et subventions",
+          "url": "/fr/articles-suisse/primes-franchises-appenzell-rhodes-exterieures/",
+          "excerpt": "Comment fonctionne l'assurance maladie à Appenzell Extérieur : franchises disponibles, modèles de couverture et procédures d'accès aux allocations sur primes.",
+          "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Primes caisse-maladie Appenzell Interne : franchises et réduction",
+          "url": "/fr/articles-suisse/franchises-reduction-appenzell/",
+          "excerpt": "Franchises de 300 CHF à 2 500 CHF et procédures d'obtention de l'allocation cantonale de réduction. Guide opérationnel des prix LAMal et des critères d'accès à Appenzell Interne.",
+          "date": "2026-08-21T04:19:19.463Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi en Appenzell",
+          "url": "/fr/trouver-emploi-appenzell/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

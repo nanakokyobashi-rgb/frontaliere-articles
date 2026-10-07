@@ -1,0 +1,523 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ur:fisco",
+  "section": "canton-ur",
+  "canton": "UR",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "657f5f16987e62f7fd04babe00d493a15ed1e775882ed2d4050cd455127c19ae",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "UR",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Uri, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "11,45 %",
+          "note": "Altdorf (UR), 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "9,84 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Altdorf (UR))",
+              "value": "4,46 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Altdorf (UR))",
+              "value": "8,91 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Altdorf (UR))",
+              "value": "11,45 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Altdorf (UR))",
+              "value": "13,86 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Altdorf (UR))",
+              "value": "17,57 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "5,89 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "8,37 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "9,84 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "11,2 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "13,89 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.ur.ch/finanzen/1576",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposta di successione e donazione nel Cantone Uri: guida",
+          "url": "/articoli-svizzera/imposta-successione-donazione-uri-guida/",
+          "excerpt": "Come funziona la tassazione di successioni e donazioni nel Cantone Uri: aliquote per grado di parentela, moltiplicatore comunale e obblighi dichiarativi.",
+          "date": "2026-08-29T19:27:10.119Z"
+        },
+        {
+          "title": "Imposte cantonali Cantone di Uri: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonal-ur-aliquote-deduzioni/",
+          "excerpt": "Scopri le aliquote e le deduzioni ammesse per le imposte cantonali nel Cantone di Uri",
+          "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "Uri: aliquote di successione e donazione per grado di parentela",
+          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-uri-aliquote/",
+          "excerpt": "Imposta di successione e donazione nel Cantone di Uri: aliquote per grado di parentela",
+          "date": "2026-08-16T10:39:50.404Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "UR",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Uri, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "11.45%",
+          "note": "Altdorf (UR), 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "9.84%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Altdorf (UR))",
+              "value": "4.46%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Altdorf (UR))",
+              "value": "8.91%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Altdorf (UR))",
+              "value": "11.45%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Altdorf (UR))",
+              "value": "13.86%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Altdorf (UR))",
+              "value": "17.57%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "5.89%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "8.37%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "9.84%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "11.2%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "13.89%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.ur.ch/finanzen/1576",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Inheritance and gift tax in Canton Uri: guide",
+          "url": "/en/swiss-articles/inheritance-gift-tax-uri-guide/",
+          "excerpt": "How inheritance and gift taxation works in Canton Uri: rates by degree of kinship, municipal multiplier and declaratory obligations.",
+          "date": "2026-08-29T19:27:10.119Z"
+        },
+        {
+          "title": "Cantonal taxes Canton of Uri: rates and deductions",
+          "url": "/en/swiss-articles/uri-cantonal-taxes/",
+          "excerpt": "Find out the rates and deductions allowed for cantonal taxes in the Canton of Uri",
+          "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "Uri: inheritance and donation rates by degree of kinship",
+          "url": "/en/swiss-articles/succession-and-donation-taxes-in-the-canton-of-uri/",
+          "excerpt": "Inheritance and gift tax in the Canton of Uri: rates by degree of kinship",
+          "date": "2026-08-16T10:39:50.404Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "UR",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Uri hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "11.45 %",
+          "note": "Altdorf (UR), 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "9.84 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Altdorf (UR))",
+              "value": "4.46 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Altdorf (UR))",
+              "value": "8.91 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Altdorf (UR))",
+              "value": "11.45 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Altdorf (UR))",
+              "value": "13.86 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Altdorf (UR))",
+              "value": "17.57 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "5.89 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "8.37 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "9.84 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "11.2 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "13.89 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.ur.ch/finanzen/1576",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Erbschafts- und Schenkungssteuer im Kanton Uri: Leitfaden",
+          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-uri-leitfaden/",
+          "excerpt": "Wie funktioniert die Erbschafts- und Schenkungsbesteuerung im Kanton Uri: Sätze pro Verwandtschaftsgrad, kommunaler Multiplikator und Meldepflichten.",
+          "date": "2026-08-29T19:27:10.119Z"
+        },
+        {
+          "title": "Kantonale Steuern Kanton Uri: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kanton-ur-steuern/",
+          "excerpt": "Entdecken Sie die zulässigen Sätze und Abzüge für die kantonalen Steuern im Kanton Uri",
+          "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "URI: Erbschafts- und Schenkungssätze nach Verwandtschaftsgrad",
+          "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuern-im-kanton-uri/",
+          "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Uri: Sätze pro Verwandtschaftsgrad",
+          "date": "2026-08-16T10:39:50.404Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "UR",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton d'Uri, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "11,45 %",
+          "note": "Altdorf (UR), 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "9,84 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Altdorf (UR))",
+              "value": "4,46 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Altdorf (UR))",
+              "value": "8,91 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Altdorf (UR))",
+              "value": "11,45 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Altdorf (UR))",
+              "value": "13,86 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Altdorf (UR))",
+              "value": "17,57 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "5,89 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "8,37 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "9,84 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "11,2 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "13,89 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.ur.ch/finanzen/1576",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Droits de succession et de donation dans le canton d'Uri : guide",
+          "url": "/fr/articles-suisse/impot-succession-donation-uri-guide/",
+          "excerpt": "Comment fonctionne la fiscalité des successions et donations dans le canton d'Uri : taux par degré de parenté, multiplicateur communal et obligations déclaratives.",
+          "date": "2026-08-29T19:27:10.119Z"
+        },
+        {
+          "title": "Impôts cantonaux Canton d'Uri : taux et déductions",
+          "url": "/fr/articles-suisse/imposts-cantonaux-ur/",
+          "excerpt": "Découvrez les taux et déductions admis pour les impôts cantonaux dans le canton d'Uri",
+          "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "URI : taux de succession et de donation par degré de parenté",
+          "url": "/fr/articles-suisse/impots-sur-la-succession-et-la-donation-au-canton-d-uri/",
+          "excerpt": "Droits de succession et de donation dans le canton d'Uri : taux par degré de parenté",
+          "date": "2026-08-16T10:39:50.404Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

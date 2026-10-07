@@ -1,0 +1,1006 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-zh:servizi",
+  "section": "canton-zh",
+  "canton": "ZH",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:59:11.306Z",
+  "contentHash": "c61bd48e2ebe17fa16e74d66bb60054723d146b45d89c74c4883ae875befa0bf",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-07T00:42:24.752Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "ZH",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Zurigo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "639,80 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "31",
+          "note": "offerta mediana 1000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "ZH, regione di premio 1",
+              "value": "mediana 639,80 CHF al mese",
+              "detail": "da 605,20 a 724 CHF, 27 assicuratori"
+            },
+            {
+              "label": "ZH, regione di premio 2",
+              "value": "mediana 583,10 CHF al mese",
+              "detail": "da 535,60 a 637,70 CHF, 27 assicuratori"
+            },
+            {
+              "label": "ZH, regione di premio 3",
+              "value": "mediana 543,50 CHF al mese",
+              "detail": "da 488,50 a 617,80 CHF, 27 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "ZH477",
+              "value": "20.400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43554"
+            },
+            {
+              "label": "ZH2913",
+              "value": "6400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43555"
+            },
+            {
+              "label": "ZH10231",
+              "value": "2800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43558"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "15 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Aussergewöhnliche Pflege am USZ",
+              "date": "2026-10-06T19:43:03.000Z",
+              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im September stabil",
+              "date": "2026-10-06",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
+            },
+            {
+              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
+              "date": "2026-10-05T09:00:59.000Z",
+              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
+            },
+            {
+              "label": "Frauenherzen: Wann ist eine kardiologische Abklärung sinnvoll?",
+              "date": "2026-10-01T13:00:37.000Z",
+              "url": "https://www.usz.ch/frauenherzen-wann-ist-eine-kardiologische-abklaerung-sinnvoll/"
+            },
+            {
+              "label": "Prämienentlastungs-Initiative: Stadtrat verabschiedet Umsetzungsvorlage für Krankenkassenprämien-Zulagen",
+              "date": "2026-10-01T07:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/praemienentlastungs-initiative-stadtrat-verabschiedet-umsetzungsvorlage-fuer-krankenkassenpraemien-zulagen.html"
+            },
+            {
+              "label": "Drei Leuchtturmprojekte für präzisere Therapien",
+              "date": "2026-09-29T08:54:40.000Z",
+              "url": "https://www.usz.ch/drei-leuchtturmprojekte-fuer-praezisere-therapien/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Zurigo, sì al suicidio assistito nelle strutture sanitarie",
+          "url": "/articoli-svizzera/zurigo-suicidio-assistito/",
+          "excerpt": "A Zurigo il 68,1% approva il suicidio assistito nelle strutture sanitarie. Partecipazione 47,6%; bocciata al 59,2% la legge sugli insegnanti.",
+          "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Permesso di dimora B a Zurigo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-zurigo-guida/",
+          "excerpt": "Guida completa al permesso di dimora B nel Canton Zurigo: procedure, documentazione necessaria, scadenze per il rinnovo e competenze delle autorità cantonali.",
+          "date": "2026-08-11T08:49:10.999Z"
+        },
+        {
+          "title": "Permesso di dimora B in Canton Zurigo: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-zurigo-requisiti-e-rinnovo/",
+          "excerpt": "Il permesso di dimora B nel Canton Zurigo richiede la presentazione di documenti specifici e segue una procedura di rinnovo.",
+          "date": "2026-08-11T07:13:06.812Z"
+        },
+        {
+          "title": "I premi cassa malati LAMal nel Canton Zurigo per il 2026",
+          "url": "/articoli-svizzera/premi-cassa-malati-lamal-2026-canton-zurigo/",
+          "excerpt": "I premi dell'assicurazione malattia LAMal nel Canton Zurigo per il 2026",
+          "date": "2026-08-09T22:21:25.639Z"
+        },
+        {
+          "title": "Patente di guida a Zurigo: conversione e esami",
+          "url": "/articoli-svizzera/patente-di-guida-canton-zurigo-conversione-ed-esami/",
+          "excerpt": "Conversione della patente di guida estera, esame teorico e pratico, corsi obbligatori e ufficio della circolazione competente nel Cantone di Zurigo.",
+          "date": "2026-08-12T02:57:47.712Z"
+        },
+        {
+          "title": "Premi cassa malati Zurigo e riduzione premi: guida pratica",
+          "url": "/articoli-svizzera/premi-cassa-malati-zurigo-riduzione/",
+          "excerpt": "Analisi sui premi LAMal nel Cantone di Zurigo, modelli di franchigia e requisiti per ottenere la riduzione dei premi cantonale.",
+          "date": "2026-08-11T08:38:09.912Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini in Canton Zurigo: costi",
+          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-zurigo-costi/",
+          "excerpt": "Calcolati in base al reddito delle famiglie, i costi per l'asilo nido e la custodia dei bambini in Canton Zurigo sono una questione complessa.",
+          "date": "2026-08-11T21:38:35.676Z"
+        },
+        {
+          "title": "Voto Zurigo: alloggi e premi cassa malati",
+          "url": "/articoli-svizzera/voto-zurigo-alloggi-cassa-malati/",
+          "excerpt": "Il Canton Zurigo al voto su iniziative per alloggi a prezzi accessibili, protezione degli inquilini e deduzioni fiscali per i premi di cassa malati.",
+          "date": "2026-06-08T01:21:29.812Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/zurigo/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/zurigo-zh/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Zurigo",
+          "url": "/cerca-lavoro-zurigo/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "en": {
+      "canton": "ZH",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Zurich, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "639.80 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "31",
+          "note": "typical bid 1,000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "ZH, premium region 1",
+              "value": "typical 639.80 CHF per month",
+              "detail": "from 605.20 to 724 CHF, 27 insurers"
+            },
+            {
+              "label": "ZH, premium region 2",
+              "value": "typical 583.10 CHF per month",
+              "detail": "from 535.60 to 637.70 CHF, 27 insurers"
+            },
+            {
+              "label": "ZH, premium region 3",
+              "value": "typical 543.50 CHF per month",
+              "detail": "from 488.50 to 617.80 CHF, 27 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "ZH477",
+              "value": "20,400 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43554"
+            },
+            {
+              "label": "ZH2913",
+              "value": "6,400 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43555"
+            },
+            {
+              "label": "ZH10231",
+              "value": "2,800 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43558"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "15 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Aussergewöhnliche Pflege am USZ",
+              "date": "2026-10-06T19:43:03.000Z",
+              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im September stabil",
+              "date": "2026-10-06",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
+            },
+            {
+              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
+              "date": "2026-10-05T09:00:59.000Z",
+              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
+            },
+            {
+              "label": "Frauenherzen: Wann ist eine kardiologische Abklärung sinnvoll?",
+              "date": "2026-10-01T13:00:37.000Z",
+              "url": "https://www.usz.ch/frauenherzen-wann-ist-eine-kardiologische-abklaerung-sinnvoll/"
+            },
+            {
+              "label": "Prämienentlastungs-Initiative: Stadtrat verabschiedet Umsetzungsvorlage für Krankenkassenprämien-Zulagen",
+              "date": "2026-10-01T07:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/praemienentlastungs-initiative-stadtrat-verabschiedet-umsetzungsvorlage-fuer-krankenkassenpraemien-zulagen.html"
+            },
+            {
+              "label": "Drei Leuchtturmprojekte für präzisere Therapien",
+              "date": "2026-09-29T08:54:40.000Z",
+              "url": "https://www.usz.ch/drei-leuchtturmprojekte-fuer-praezisere-therapien/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Zurich, yes to assisted suicide in healthcare facilities",
+          "url": "/en/swiss-articles/zurich-assisted-suicide-facilities/",
+          "excerpt": "In Zurich, 68,1% approve assisted suicide in healthcare facilities. Turnout 47,6%; the law on teachers was rejected by 59,2%.",
+          "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Residence permit B in Zurich: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-zurich-requirements/",
+          "excerpt": "Complete guide to residence permit B in the Canton of Zurich: procedures, necessary documentation, deadlines for renewal and competences of the cantonal authorities.",
+          "date": "2026-08-11T08:49:10.999Z"
+        },
+        {
+          "title": "Residence permit B in Canton Zurich: requirements and procedure",
+          "url": "/en/swiss-articles/residence-permit-b-canton-zurich/",
+          "excerpt": "The B residence permit in the Canton of Zurich requires the submission of specific documents and follows a renewal procedure.",
+          "date": "2026-08-11T07:13:06.812Z"
+        },
+        {
+          "title": "LAMal health insurance premiums in the Canton of Zurich for 2026",
+          "url": "/en/swiss-articles/premium-health-insurance-lamal-2026-canton-zurigo/",
+          "excerpt": "LAMal health insurance premiums in the Canton of Zurich for 2026",
+          "date": "2026-08-09T22:21:25.639Z"
+        },
+        {
+          "title": "Driving licence in Zurich: conversion and exams",
+          "url": "/en/swiss-articles/driving-license-canton-zurigo-conversion/",
+          "excerpt": "Exchange of foreign driving licences, theoretical and practical examinations, compulsory courses and the competent road traffic office in the canton of Zurich.",
+          "date": "2026-08-12T02:57:47.712Z"
+        },
+        {
+          "title": "Zurich health insurance premiums and premium reductions: a practical guide",
+          "url": "/en/swiss-articles/health-insurance-premiums-zurich-reduction/",
+          "excerpt": "Analysis of LAMal premiums in the Canton of Zurich, franchise models and requirements to obtain the cantonal premium reduction.",
+          "date": "2026-08-11T08:38:09.912Z"
+        },
+        {
+          "title": "Kindergarten and childcare in Canton Zurich: costs",
+          "url": "/en/swiss-articles/daycare-center-and-childcare-canton-zurich-costs/",
+          "excerpt": "Calculated based on household income, the costs for daycare and childcare in Canton Zurich are a complex matter.",
+          "date": "2026-08-11T21:38:35.676Z"
+        },
+        {
+          "title": "Zurich Vote: Affordable Housing and Health Premiums",
+          "url": "/en/swiss-articles/zurich-vote-affordable-housing-health-insurance/",
+          "excerpt": "The Canton of Zurich votes on initiatives for affordable housing, tenant protection, and tax deductions for health insurance premiums.",
+          "date": "2026-06-08T01:21:29.812Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/zurich-zh/"
+        },
+        {
+          "label": "Job offers in the canton of Zurich",
+          "url": "/en/find-jobs-zurich/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "de": {
+      "canton": "ZH",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Zürich laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "639.80 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "31",
+          "note": "mittleres Gebot 1’000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "ZH, Prämienregion 1",
+              "value": "Mittelwert 639.80 CHF pro Monat",
+              "detail": "von 605.20 bis 724 CHF, 27 Versicherer"
+            },
+            {
+              "label": "ZH, Prämienregion 2",
+              "value": "Mittelwert 583.10 CHF pro Monat",
+              "detail": "von 535.60 bis 637.70 CHF, 27 Versicherer"
+            },
+            {
+              "label": "ZH, Prämienregion 3",
+              "value": "Mittelwert 543.50 CHF pro Monat",
+              "detail": "von 488.50 bis 617.80 CHF, 27 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "ZH477",
+              "value": "20’400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43554"
+            },
+            {
+              "label": "ZH2913",
+              "value": "6’400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43555"
+            },
+            {
+              "label": "ZH10231",
+              "value": "2’800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43558"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "15 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Aussergewöhnliche Pflege am USZ",
+              "date": "2026-10-06T19:43:03.000Z",
+              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im September stabil",
+              "date": "2026-10-06",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
+            },
+            {
+              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
+              "date": "2026-10-05T09:00:59.000Z",
+              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
+            },
+            {
+              "label": "Frauenherzen: Wann ist eine kardiologische Abklärung sinnvoll?",
+              "date": "2026-10-01T13:00:37.000Z",
+              "url": "https://www.usz.ch/frauenherzen-wann-ist-eine-kardiologische-abklaerung-sinnvoll/"
+            },
+            {
+              "label": "Prämienentlastungs-Initiative: Stadtrat verabschiedet Umsetzungsvorlage für Krankenkassenprämien-Zulagen",
+              "date": "2026-10-01T07:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/praemienentlastungs-initiative-stadtrat-verabschiedet-umsetzungsvorlage-fuer-krankenkassenpraemien-zulagen.html"
+            },
+            {
+              "label": "Drei Leuchtturmprojekte für präzisere Therapien",
+              "date": "2026-09-29T08:54:40.000Z",
+              "url": "https://www.usz.ch/drei-leuchtturmprojekte-fuer-praezisere-therapien/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Zürich, Ja zum assistierten Suizid in Gesundheitseinrichtungen",
+          "url": "/de/schweiz-artikel/zuerich-assistierter-suizid/",
+          "excerpt": "In Zürich befürworten 68,1% den assistierten Suizid in Gesundheitseinrichtungen. Beteiligung 47,6%; das Lehrergesetz wurde mit 59,2% abgelehnt.",
+          "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B in Zürich: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-zuerich-voraussetzungen/",
+          "excerpt": "Vollständiger Leitfaden zur Aufenthaltsbewilligung B im Kanton Zürich: Verfahren, erforderliche Unterlagen, Fristen für die Erneuerung und Zuständigkeiten der kantonalen Behörden.",
+          "date": "2026-08-11T08:49:10.999Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B im Kanton Zürich: Voraussetzungen und Verfahren",
+          "url": "/de/schweiz-artikel/aufenthaltstitel-b-kanton-zuerich/",
+          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Zürich erfordert die Vorlage spezifischer Dokumente und folgt einem Erneuerungsverfahren.",
+          "date": "2026-08-11T07:13:06.812Z"
+        },
+        {
+          "title": "Die Krankenkassenprämien KVG im Kanton Zürich für das Jahr 2026",
+          "url": "/de/schweiz-artikel/preis-von-krankenkassen-lamal-2026-kanton-zurich/",
+          "excerpt": "Die Krankenkassenprämien KVG im Kanton Zürich für das Jahr 2026",
+          "date": "2026-08-09T22:21:25.639Z"
+        },
+        {
+          "title": "Führerschein in Zürich: Umwandlung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-kanton-zu-rich-conversion/",
+          "excerpt": "Austausch ausländischer Führerscheine, theoretische und praktische Prüfungen, Pflichtkurse und das zuständige Straßenverkehrsamt im Kanton Zürich.",
+          "date": "2026-08-12T02:57:47.712Z"
+        },
+        {
+          "title": "Krankenkassenprämien Zürich und Prämienverbilligung: Praxisleitfaden",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-zuerich-verbilligung/",
+          "excerpt": "Analyse der KVG-Prämien im Kanton Zürich, Franchisemodelle und Voraussetzungen für die kantonale Prämienverbilligung.",
+          "date": "2026-08-11T08:38:09.912Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Zürich: Kosten",
+          "url": "/de/schweiz-artikel/kindertagesstatte-und-kindbetreuung-kanton-zurich-kosten/",
+          "excerpt": "Gemessen am Familieneinkommen sind die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zürich ein komplexes Thema.",
+          "date": "2026-08-11T21:38:35.676Z"
+        },
+        {
+          "title": "Abstimmung Zürich: Wohnungen und Krankenkassenprämien",
+          "url": "/de/schweiz-artikel/abstimmung-zuerich-wohnraum-krankenkassenpraemien/",
+          "excerpt": "Der Kanton Zürich stimmt über Initiativen zu erschwinglichem Wohnraum, Mieterschutz und Steuerabzügen für Krankenkassenprämien ab.",
+          "date": "2026-06-08T01:21:29.812Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/zurich-zh/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Zürich",
+          "url": "/de/jobs-in-zurich/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    },
+    "fr": {
+      "canton": "ZH",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Zurich, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "639,80 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "31",
+          "note": "offre centrale 1 000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "ZH, région de primes 1",
+              "value": "valeur centrale 639,80 CHF par mois",
+              "detail": "de 605,20 à 724 CHF, 27 assureurs"
+            },
+            {
+              "label": "ZH, région de primes 2",
+              "value": "valeur centrale 583,10 CHF par mois",
+              "detail": "de 535,60 à 637,70 CHF, 27 assureurs"
+            },
+            {
+              "label": "ZH, région de primes 3",
+              "value": "valeur centrale 543,50 CHF par mois",
+              "detail": "de 488,50 à 617,80 CHF, 27 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.avkz.ch/notfalldienst",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "ZH477",
+              "value": "20 400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43554"
+            },
+            {
+              "label": "ZH2913",
+              "value": "6 400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43555"
+            },
+            {
+              "label": "ZH10231",
+              "value": "2 800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T17:00:00.000Z",
+              "url": "https://www.auktion.stva.zh.ch/de/auction/43558"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Aussergewöhnliche Pflege am USZ",
+              "date": "2026-10-06T19:43:03.000Z",
+              "url": "https://www.usz.ch/aussergewoehnliche-pflege-am-usz/"
+            },
+            {
+              "label": "Arbeitslosenquote bleibt im September stabil",
+              "date": "2026-10-06",
+              "url": "https://www.zh.ch/de/news-uebersicht/medienmitteilungen/2026/10/arbeitslosenquote-bleibt-im-september-stabil.html"
+            },
+            {
+              "label": "Weltstar Anne-Sophie Mutter bringt Musik auf die Neonatologie des USZ",
+              "date": "2026-10-05T09:00:59.000Z",
+              "url": "https://www.usz.ch/weltstar-anne-sophie-mutter-bringt-musik-auf-die-neonatologie/"
+            },
+            {
+              "label": "Frauenherzen: Wann ist eine kardiologische Abklärung sinnvoll?",
+              "date": "2026-10-01T13:00:37.000Z",
+              "url": "https://www.usz.ch/frauenherzen-wann-ist-eine-kardiologische-abklaerung-sinnvoll/"
+            },
+            {
+              "label": "Prämienentlastungs-Initiative: Stadtrat verabschiedet Umsetzungsvorlage für Krankenkassenprämien-Zulagen",
+              "date": "2026-10-01T07:00:00.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/praemienentlastungs-initiative-stadtrat-verabschiedet-umsetzungsvorlage-fuer-krankenkassenpraemien-zulagen.html"
+            },
+            {
+              "label": "Drei Leuchtturmprojekte für präzisere Therapien",
+              "date": "2026-09-29T08:54:40.000Z",
+              "url": "https://www.usz.ch/drei-leuchtturmprojekte-fuer-praezisere-therapien/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Zurich, oui au suicide assisté dans les établissements de santé",
+          "url": "/fr/articles-suisse/zurich-suicide-assiste/",
+          "excerpt": "À Zurich, 68,1% approuvent le suicide assisté dans les établissements de santé. Participation 47,6%; la loi sur les enseignants rejetée à 59,2%.",
+          "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Permis de séjour B à Zurich : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-zurich-exigences/",
+          "excerpt": "Guide complet du permis de séjour B dans le canton de Zurich : procédures, documentation nécessaire, délais de renouvellement et compétences des autorités cantonales.",
+          "date": "2026-08-11T08:49:10.999Z"
+        },
+        {
+          "title": "Permis de séjour B dans le canton de Zurich : exigences et procédure",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-canton-de-zurich/",
+          "excerpt": "Le permis de séjour B dans le canton de Zurich nécessite la présentation de documents spécifiques et suit une procédure de renouvellement.",
+          "date": "2026-08-11T07:13:06.812Z"
+        },
+        {
+          "title": "Les primes caisse-maladie LAMal dans le canton de Zurich pour 2026",
+          "url": "/fr/articles-suisse/premies-des-assurances-maladie-lamal-2026-canton-zurich/",
+          "excerpt": "Les primes de l'assurance-maladie LAMal dans le canton de Zurich pour 2026",
+          "date": "2026-08-09T22:21:25.639Z"
+        },
+        {
+          "title": "Permis de conduire à Zurich : conversion et examens",
+          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-zurich-conversion/",
+          "excerpt": "Échange de permis de conduire étrangers, examens théoriques et pratiques, cours obligatoires et le service de circulation routière compétent dans le canton de Zurich.",
+          "date": "2026-08-12T02:57:47.712Z"
+        },
+        {
+          "title": "Primes caisse-maladie Zurich et réduction des primes : guide pratique",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-zurich-reduction/",
+          "excerpt": "Analyse des primes LAMal dans le canton de Zurich, modèles de franchise et conditions pour obtenir la réduction des primes cantonales.",
+          "date": "2026-08-11T08:38:09.912Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton de Zurich : coûts",
+          "url": "/fr/articles-suisse/etablissement-d-accueil-pour-enfants-et-accueil-de-jeunes-a-canton-zurich/",
+          "excerpt": "Calculés sur la base du revenu des familles, les frais de garderie et de garde d'enfants dans le canton de Zurich sont une question complexe.",
+          "date": "2026-08-11T21:38:35.676Z"
+        },
+        {
+          "title": "Vote à Zurich : logements et primes d'assurance maladie",
+          "url": "/fr/articles-suisse/vote-zurich-logement-abordable-assurance-maladie/",
+          "excerpt": "Le canton de Zurich vote sur des initiatives pour des logements abordables, la protection des locataires et des déductions fiscales pour les primes d'assurance maladie.",
+          "date": "2026-06-08T01:21:29.812Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Zurich",
+          "url": "/fr/trouver-emploi-zurich/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:59:11.306Z"
+    }
+  }
+}

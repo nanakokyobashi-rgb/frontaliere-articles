@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948224/amante-della-pedopornografia-ma-faceva-l-educatore-in-un-asilo-nido": {
-    "articleId": "asilo-nido-controlli-minori",
-    "ts": "2026-09-05T16:05:02.364Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948227/come-ridurre-il-traffico-sulle-strade-i-biglietti-piu-economici-non-bastano": {
     "articleId": "ridurre-traffico-trasporti-pubblici",
     "ts": "2026-09-05T18:30:02.406Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/icxk2lbhi0su": {
     "articleId": "svizzera-india-accordi-bilaterali",
     "ts": "2026-10-07T08:55:12.295Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1955227/casi-tumori-rischio-svizzera-trattamento-prostata-cancro-diagnosi-screening-rapporto": {
+    "articleId": "cancro-prostata-assistenza-svizzera",
+    "ts": "2026-10-07T10:02:14.858Z",
     "keyForm": 2
   }
 }

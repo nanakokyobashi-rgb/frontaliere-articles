@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-appenzello:eventi",
+  "section": "canton-appenzello",
+  "canton": "APPENZELLO",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "75970a0b9ae0be906539e8e77d44232aac83f1c235b91453e5befae0eca4f96f",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "APPENZELLO",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "In Appenzello, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "12",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Mostra del bestiame Walzenhausen",
+              "detail": "Grund 542, Walzenhausen",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
+            },
+            {
+              "label": "Ziegenschau –«Gässschau»",
+              "detail": "Appenzell",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
+            },
+            {
+              "label": "Mercato di primavera Heiden",
+              "detail": "Il maestoso centro curativo - Heiden, Heiden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
+            },
+            {
+              "label": "Mostra del bestiame di Hundwil",
+              "detail": "Hundwil",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
+            },
+            {
+              "label": "Mostra ovina di Teufen",
+              "detail": "Zeughausplatz, Teufen (AR)",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
+            },
+            {
+              "label": "BandXOst Quali 2026",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
+            },
+            {
+              "label": "Lisa Christ «Ideal»",
+              "detail": "Kunsthalle Ziegelhütte, Appenzell",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+            },
+            {
+              "label": "Giovedì conferenza Museo Heiden / Gertrud Kurz",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
+            },
+            {
+              "label": "Raduno di Capodanno",
+              "detail": "Rösslisaal, Trogen",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
+            },
+            {
+              "label": "Mostra cantonale dei tori e dell'autunno a Teufen",
+              "detail": "Teufen, Teufen (AR)",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/appenzello/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi in Appenzello",
+          "url": "/eventi/appenzello/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/appenzello/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "APPENZELLO",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In Appenzell, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "12",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Cattle show Walzenhausen",
+              "detail": "Grund 542, Walzenhausen",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
+            },
+            {
+              "label": "Ziegenschau –«Gässschau»",
+              "detail": "Appenzell",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
+            },
+            {
+              "label": "Spring market Heiden",
+              "detail": "Il maestoso centro curativo - Heiden, Heiden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
+            },
+            {
+              "label": "Hundwil cattle show",
+              "detail": "Hundwil",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
+            },
+            {
+              "label": "Teufen Sheep Show",
+              "detail": "Zeughausplatz, Teufen (AR)",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
+            },
+            {
+              "label": "BandXOst Quali 2026",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
+            },
+            {
+              "label": "Lisa Christ «Ideal»",
+              "detail": "Kunsthalle Ziegelhütte, Appenzell",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+            },
+            {
+              "label": "Thursday lecture Museum Heiden / Gertrud Kurz",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
+            },
+            {
+              "label": "New Year's Eve Gathering",
+              "detail": "Rösslisaal, Trogen",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
+            },
+            {
+              "label": "Cantonal bull and fall show in Teufen",
+              "detail": "Teufen, Teufen (AR)",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/appenzell/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in Appenzell",
+          "url": "/en/events/appenzell/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/appenzell/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "APPENZELLO",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Appenzellerland ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "12",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Viehschau Walzenhausen",
+              "detail": "Grund 542, Walzenhausen",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
+            },
+            {
+              "label": "Ziegenschau –«Gässschau»",
+              "detail": "Appenzell",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
+            },
+            {
+              "label": "Häädler Jahrmarkt",
+              "detail": "Il maestoso centro curativo - Heiden, Heiden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
+            },
+            {
+              "label": "Viehschau Hundwil",
+              "detail": "Hundwil",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
+            },
+            {
+              "label": "Kantonale Schafschau Teufen",
+              "detail": "Zeughausplatz, Teufen (AR)",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
+            },
+            {
+              "label": "BandXOst Quali 2026",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
+            },
+            {
+              "label": "Lisa Christ «Ideal»",
+              "detail": "Kunsthalle Ziegelhütte, Appenzell",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+            },
+            {
+              "label": "Donnerstagsvortrag Museum Heiden / Gertrud Kurz",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
+            },
+            {
+              "label": "Herbst Gathering",
+              "detail": "Rösslisaal, Trogen",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
+            },
+            {
+              "label": "Kantonale Stier- und Herbstschau in Teufen",
+              "detail": "Teufen, Teufen (AR)",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/appenzell/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Appenzellerland",
+          "url": "/de/veranstaltungen/appenzell/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "APPENZELLO",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "En Appenzell, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "12",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Exposition de bétail à Walzenhausen",
+              "detail": "Grund 542, Walzenhausen",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
+            },
+            {
+              "label": "Ziegenschau –«Gässschau»",
+              "detail": "Appenzell",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
+            },
+            {
+              "label": "Marché de printemps à Heiden",
+              "detail": "Il maestoso centro curativo - Heiden, Heiden",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
+            },
+            {
+              "label": "Exposition de bétail à Hundwil",
+              "detail": "Hundwil",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
+            },
+            {
+              "label": "Exposition ovine de Teufen",
+              "detail": "Zeughausplatz, Teufen (AR)",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
+            },
+            {
+              "label": "BandXOst Quali 2026",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
+            },
+            {
+              "label": "Lisa Christ «Ideal»",
+              "detail": "Kunsthalle Ziegelhütte, Appenzell",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+            },
+            {
+              "label": "Conférence du jeudi Musée de Heiden / Gertrud Kurz",
+              "detail": "Museum Heiden, Heiden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/heiden/donnerstagsvortrag-museum-heiden-gertrud-kurz_AyWjH2M"
+            },
+            {
+              "label": "Rencontre du Nouvel An",
+              "detail": "Rösslisaal, Trogen",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
+            },
+            {
+              "label": "Concours cantonal de taureaux et d'automne à Teufen",
+              "detail": "Teufen, Teufen (AR)",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/appenzell/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements en Appenzell",
+          "url": "/fr/evenements/appenzell/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/appenzell/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-fribourg-modifica-licd': {
+    title: 'Fribourg adegua imposte dirette alla progressione a freddo',
+    description: '## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si',
+    keywords: 'frontalieri, ticino, svizzera, italia, fribourg, adegua, imposte, dirette',
+    ogTitle: 'Fribourg adegua imposte dirette alla progressione a freddo',
+    ogDescription: '## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si',
+    canonicalPath: '/articoli-friburgo/fribourg-modifica-licd/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fribourg adegua imposte dirette alla progressione a freddo",
+      "description": "## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio pubblico a Friburgo con contribuenti che compilano la dichiarazione dei redditi su un computer"
+      },
+      "datePublished": "2026-10-07T10:27:22+00:00",
+      "dateModified": "2026-10-07T10:27:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/fribourg-modifica-licd/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

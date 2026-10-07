@@ -294,14 +294,14 @@ exit 0
 /** Esegue il gate `admit` con un compare GitHub finto. */
 function runAdmit(workflow, { caller, changed }) {
   return withBin((dir) => ({
-    gh: `#!/usr/bin/env bash
-case "\${2:-}" in
+gh: `#!/usr/bin/env bash
+case "$*" in
   *compare*) cat "${dir}/changed" ;;
   *) printf '%s\\n' '{"workflow_runs":[]}' ;;
 esac
 `,
   }), (dir, bin) => {
-    writeFileSync(path.join(dir, 'changed'), `${changed.join('\n')}\n`);
+    writeFileSync(path.join(dir, 'changed'), JSON.stringify([{ files: changed.map((filename) => ({ filename })) }]));
     writeFileSync(path.join(dir, 'out'), '');
     writeFileSync(path.join(dir, 'step.sh'), extractRun(workflow, 'Skip when a generation is already in flight'));
     const res = spawnSync('bash', [path.join(dir, 'step.sh')], {
@@ -504,7 +504,7 @@ const MODE_SCENARIOS = [
   { name: 'anello dopo frontaliere', event: 'push', changed: 'content/blog-body/it/a.ts', subject: 'Generate blog article (frontaliere)' },
   { name: 'anello dopo un altro produttore', event: 'push', changed: 'content/blog-body/it/a.ts', subject: 'Weekly border-wait ranking digest refresh' },
   { name: 'anello dopo un cantone', event: 'push', changed: 'content/blog-body-canton-ti/it/a.ts', subject: 'Generate blog article (canton-ti)' },
-  { name: 'self-test', event: 'push', changed: '.github/workflows/generate-article.yml', subject: 'ci: tocca il workflow' },
+  { name: 'self-test', event: 'push', changed: '.github/workflows/generate-article.yml', subject: 'ci: tocca il workflow', admitMode: 'unknown' },
   { name: 'dispatch svizzera', event: 'workflow_dispatch', requested: 'svizzera', dry: 'false' },
   { name: 'dispatch frontaliere dry', event: 'workflow_dispatch', requested: 'frontaliere', dry: 'true' },
   { name: 'dispatch con sezione ignota', event: 'workflow_dispatch', requested: 'canton-ti', dry: 'false' },
@@ -514,6 +514,7 @@ const MODE_SCENARIOS = [
 const modeCtx = (s) => ({
   'github.event_name': s.event,
   'needs.admit.outputs.chain_link': s.chainLink || 'false',
+  'needs.admit.outputs.run_mode': s.admitMode || 'production',
   'github.event.before': '1111111111111111111111111111111111111111',
   'github.sha': '2222222222222222222222222222222222222222',
   'inputs.dry_run': s.dry || 'false',
@@ -532,6 +533,10 @@ test('Resolve run mode and section: con gli input della coppia storica il core s
     });
     assert.deepEqual(core, source, s.name);
     assert.ok(['frontaliere', 'svizzera'].includes(source.section), s.name);
+    if (s.admitMode === 'unknown') {
+      assert.equal(source.dry, 'false', `${s.name}: unknown non deve essere un self-test dry`);
+      assert.equal(source.chain, 'true', `${s.name}: unknown deve restare nella catena writer`);
+    }
   }
   // I cron della gemella dichiarati al core sono quelli che la sorgente cabla.
   assert.match(SOURCE, /'22 \* \* \* \*'\|'37 \* \* \* \*'\) SEC=svizzera ;;/);
@@ -729,9 +734,14 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');
-  // La mutua esclusione resta sul job che scrive, col gruppo del chiamante.
-  assert.match(CORE, /\n {4}concurrency:\n {6}group: \$\{\{ inputs\.concurrency_group \}\}\n {6}cancel-in-progress: false\n/);
-  assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 1, 'ne\' admit ne\' il gate di sezione stanno in un gruppo');
+  // Il gate decide senza entrare nella coda del writer; la mutua esclusione
+  // vive sul job che scrive. Production e compare unknown condividono il lock
+  // content, mentre il dry-run resta separato.
+  assert.match(
+    CORE,
+    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && inputs\.concurrency_group \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
+  );
+  assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 1, 'solo il job writer deve detenere la coda');
 });
 
 test('buildAll rifiuta un profilo che non copre le sezioni cantonali del core', () => {
