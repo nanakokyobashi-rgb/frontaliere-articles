@@ -5,7 +5,6 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import {
   GENERATED_IMAGE_CREDIT,
@@ -16,7 +15,7 @@ import {
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
 import { drainQueuedCovers } from '../scripts/regenerate-queued-covers.mjs';
-import { mergeGeneratedImageRegistries } from '../../scripts/ci/merge-generated-image-registry.mjs';
+import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
@@ -359,21 +358,17 @@ test('un record già materializzato rende il drain riprendibile senza una second
   }
 });
 
-test('il merge del registro in rebase scarta lo snapshot stale e conserva le aggiunte', () => {
-  const base = {
-    schema: 1,
-    assets: [
-      { assetId: 'lugano-view', version: 'base' },
-      { assetId: 'article-old', version: 'base' },
-    ],
-  };
+test('il merge del registro applica solo il delta locale e conserva metadata upstream piu recenti', () => {
   const upstream = {
     schema: 1,
     assets: [
       { assetId: 'lugano-view', version: 'upstream' },
-      { assetId: 'article-old', version: 'drain-new-cover' },
-      { assetId: 'article-upstream', version: 'upstream-new' },
+      { assetId: 'article-old', version: 'upstream' },
     ],
+  };
+  const base = {
+    schema: 1,
+    assets: [{ assetId: 'article-old', version: 'base' }],
   };
   const replayed = {
     schema: 1,
@@ -382,21 +377,10 @@ test('il merge del registro in rebase scarta lo snapshot stale e conserva le agg
       { assetId: 'article-old', version: 'base' },
     ],
   };
-  const merged = mergeGeneratedImageRegistries(upstream, replayed, base);
-  assert.deepEqual(merged.assets.map((record) => record.assetId), [
-    'lugano-view', 'article-old', 'article-upstream', 'article-new',
-  ]);
-  assert.equal(merged.assets[1].version, 'drain-new-cover');
-  assert.equal(merged.assets[3].version, 'local');
-  assert.equal(merged.assetCount, 4);
-});
-
-test('il merge del registro lascia prevalere una modifica reale del commit rigiocato', () => {
-  const base = { schema: 1, assets: [{ assetId: 'same-asset', version: 'base' }] };
-  const upstream = { schema: 1, assets: [{ assetId: 'same-asset', version: 'drain' }] };
-  const replayed = { schema: 1, assets: [{ assetId: 'same-asset', version: 'local' }] };
-  const merged = mergeGeneratedImageRegistries(upstream, replayed, base);
-  assert.equal(merged.assets[0].version, 'local');
+  const merged = mergeImageRegistryDelta(upstream, base, replayed);
+  assert.deepEqual(merged.assets.map((record) => record.assetId), ['lugano-view', 'article-old', 'article-new']);
+  assert.equal(merged.assets[1].version, 'upstream');
+  assert.equal(merged.assetCount, 3);
 });
 
 function workflowConcurrencyGroups(source) {
@@ -434,32 +418,40 @@ function workflowConcurrencyGroups(source) {
   return groups;
 }
 
-test('il gruppo generate-article resta confinato ai writer ammessi', () => {
-  const workflowsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.github/workflows');
+test('il gruppo generate-article resta confinato ai writer ammessi e il drain ha una corsia propria', () => {
+  const workflowSources = [
+    ['generate-article.yml', new URL('../../.github/workflows/generate-article.yml', import.meta.url)],
+    ['generate-article-core.yml', new URL('../../.github/workflows/generate-article-core.yml', import.meta.url)],
+    ['publish-journalist-articles.yml', new URL('../../.github/workflows/publish-journalist-articles.yml', import.meta.url)],
+    ['regenerate-queued-covers.yml', new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url)],
+  ];
   const declarations = [];
 
-  for (const filename of fs.readdirSync(workflowsDir).filter((entry) => entry.endsWith('.yml') || entry.endsWith('.yaml'))) {
-    const source = fs.readFileSync(path.join(workflowsDir, filename), 'utf8');
+  for (const [filename, workflowUrl] of workflowSources) {
+    const source = fs.readFileSync(workflowUrl, 'utf8');
     for (const group of workflowConcurrencyGroups(source)) {
-      if (group.value.includes('generate-article')) {
-        declarations.push({filename, ...group});
-      }
+      declarations.push({filename, ...group});
     }
   }
 
-  const unexpected = declarations.filter(({filename, job, value}) => !(
+  const generateArticle = declarations.filter(({value}) => value.includes('generate-article'));
+  const unexpected = generateArticle.filter(({filename, job, value}) => !(
     (filename === 'generate-article.yml' && job === 'generate' && value.includes('generate-article'))
     || (filename === 'publish-journalist-articles.yml' && job === null && value === 'generate-article')
   ));
   assert.deepEqual(unexpected, []);
+  assert.ok(generateArticle.some(({filename, job}) => filename === 'generate-article.yml' && job === 'generate'));
+  assert.ok(generateArticle.some(({filename, job}) => filename === 'publish-journalist-articles.yml' && job === null));
 
-  assert.ok(declarations.some(({filename, job}) => filename === 'generate-article.yml' && job === 'generate'));
-  assert.ok(declarations.some(({filename, job}) => filename === 'publish-journalist-articles.yml' && job === null));
-
-  const drainSource = fs.readFileSync(path.join(workflowsDir, 'regenerate-queued-covers.yml'), 'utf8');
-  const drainGroup = workflowConcurrencyGroups(drainSource).find(({value}) => value.includes('regenerate-queued-covers'));
-  assert.equal(drainGroup?.value, 'regenerate-queued-covers');
-  assert.match(drainSource, /cancel-in-progress:\s*false/);
+  const drain = declarations.find(({filename, value}) => (
+    filename === 'regenerate-queued-covers.yml' && value === 'regenerate-queued-covers'
+  ));
+  assert.ok(drain);
+  assert.equal(
+    fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8')
+      .match(/cancel-in-progress:\s*false/gu)?.length,
+    1,
+  );
 });
 
 test('i writer concorrenti non possono riscrivere un articolo gia\' registrato', () => {
@@ -481,6 +473,42 @@ test('i writer concorrenti non possono riscrivere un articolo gia\' registrato',
     'il publisher deve rifiutare l id gia registrato prima di poter scegliere o scrivere una copertina');
 });
 
+test('il merge del registro fa vincere una rigenerazione locale realmente cambiata', () => {
+  const upstream = { schema: 1, assets: [{ assetId: 'article-old', version: 'upstream' }] };
+  const base = { schema: 1, assets: [{ assetId: 'article-old', version: 'base' }] };
+  const replayed = { schema: 1, assets: [{ assetId: 'article-old', version: 'local' }] };
+  const merged = mergeImageRegistryDelta(upstream, base, replayed);
+  assert.equal(merged.assets[0].version, 'local');
+});
+
+test('il registro editoriale usa cover come identita append-only', () => {
+  const upstream = { schema: 1, assets: [{ cover: '/images/blog/a.webp', version: 'upstream' }] };
+  const base = { schema: 1, assets: [{ cover: '/images/blog/a.webp', version: 'base' }] };
+  const replayed = { schema: 1, assets: [
+    { cover: '/images/blog/a.webp', version: 'base' },
+    { cover: '/images/blog/b.webp', version: 'local' },
+  ] };
+  const merged = mergeImageRegistryDelta(upstream, base, replayed, { key: 'cover' });
+  assert.deepEqual(merged.assets, [
+    { cover: '/images/blog/a.webp', version: 'upstream' },
+    { cover: '/images/blog/b.webp', version: 'local' },
+  ]);
+});
+
+test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto', () => {
+  const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /registry_base="\$RUNNER_TEMP\/generated-image-registry-base\.json"/);
+  assert.match(workflow, /git show "\$PRODUCED\^:data\/generated-image-registry\.json" > "\$registry_base"/);
+  assert.match(
+    workflow,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_base" "\$registry_snapshot"/,
+  );
+  assert.match(
+    workflow,
+    /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
+  );
+});
+
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
   const dispatch = workflow.indexOf('gh workflow run');
@@ -491,6 +519,6 @@ test('il workflow attende la completion del publisher prima di ackare l outbox',
   assert.ok(acknowledge > completion);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
   assert.doesNotMatch(workflow.slice(dispatch, acknowledge), /git rm -f/);
-  assert.match(workflow, /registry_base_snapshot/);
-  assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_snapshot\" \"\$registry_base_snapshot\"/);
+  assert.match(workflow, /registry_base=\"\$RUNNER_TEMP\/generated-image-registry-base\.json\"/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_base\" \"\$registry_snapshot\"/);
 });

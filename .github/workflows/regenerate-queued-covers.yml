@@ -124,14 +124,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(generator): drain queued article covers ($drained drained)"
-          produced="$(git rev-parse HEAD)"
-          registry_base_snapshot="$RUNNER_TEMP/generated-image-registry-base.json"
-          if git cat-file -e "$produced^:data/generated-image-registry.json" 2>/dev/null; then
-            git show "$produced^:data/generated-image-registry.json" > "$registry_base_snapshot"
-          else
-            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base_snapshot"
-          fi
+          PRODUCED="$(git rev-parse HEAD)"
+          registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base"
+          fi
           cp data/generated-image-registry.json "$registry_snapshot"
 
           # Keep the token out of URLs and logs. The extraheader is local-only
@@ -167,13 +165,11 @@ jobs:
               exit 1
             fi
             node scripts/ci/merge-generated-image-registry.mjs \
-              data/generated-image-registry.json "$registry_snapshot" "$registry_base_snapshot"
+              data/generated-image-registry.json "$registry_base" "$registry_snapshot"
             git add data/generated-image-registry.json
             if ! git diff --cached --quiet; then
-              upstream_head="$(git rev-parse --verify --quiet FETCH_HEAD || true)"
-              if [ -n "$upstream_head" ] && [ "$(git rev-parse HEAD)" = "$upstream_head" ]; then
-                echo "replayed commit was skipped; committing generated image registry merge as a child"
-                git commit -m "Reconcile generated image registry after rebase"
+              if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                git commit -C "$PRODUCED"
               else
                 git commit --amend --no-edit
               fi

@@ -409,6 +409,50 @@ export function inUploadOrder(pages) {
   return [...pages].sort((a, b) => UPLOAD_ORDER.indexOf(a.kind) - UPLOAD_ORDER.indexOf(b.kind));
 }
 
+/**
+ * Gli aggregati sono obbligatori nel percorso normale. Quando la pipeline ha
+ * trattenuto un articolo, invece, devono essere tutti assenti: il publisher
+ * conserva archive/landing/hub online e carica soltanto le pagine articolo
+ * filtrate che hanno superato la post-condizione.
+ */
+export function aggregatePageDefects(pages, { aggregatePagesAllowed, locales = CANTON_HUB_LOCALES } = {}) {
+  if (typeof aggregatePagesAllowed !== 'boolean') return ['verdetto aggregatePagesAllowed assente o non booleano'];
+  if (!aggregatePagesAllowed) {
+    const leaked = pages.filter((page) => page.kind !== 'article');
+    return leaked.length > 0
+      ? [`pagine aggregate presenti nel percorso article-only: ${leaked.map((page) => page.rel).join(', ')}`]
+      : [];
+  }
+  const defects = [];
+  for (const kind of ['archive', 'landing']) {
+    for (const locale of locales) {
+      if (!pages.some((page) => page.kind === kind && page.locale === locale)) defects.push(`nessuna pagina ${kind} per ${locale}`);
+    }
+  }
+  return defects;
+}
+
+/**
+ * Finche' gli aggregati precedenti restano online, nessuna pagina della loro
+ * release puo' diventare obsoleta: potrebbero ancora linkarla. Gli articoli
+ * sani del batch vengono caricati, ma cancellazioni e aggiornamento degli
+ * aggregati riprendono insieme soltanto su un verdetto completo.
+ */
+export function obsoleteReleasePages({
+  previousArticlePages,
+  currentArticlePages,
+  previousArchivePages,
+  currentArchivePages,
+  aggregatePagesAllowed,
+}) {
+  if (typeof aggregatePagesAllowed !== 'boolean') throw new Error('aggregatePagesAllowed deve essere booleano');
+  if (!aggregatePagesAllowed) return [];
+  return [
+    ...obsoleteArticlePages(previousArticlePages, currentArticlePages),
+    ...obsoleteArchivePages(previousArchivePages, currentArchivePages),
+  ];
+}
+
 /** Rende i 6 hub (quelli con il file dati) nelle 4 locali. */
 async function renderHubs({ section, distDir }) {
   const { renderCantonTopicHub } = await import('../engine/cantonSectionPages.ts');
@@ -724,7 +768,14 @@ export async function main(argv = process.argv.slice(2)) {
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
   const renderRoot = createRenderRoot(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
-  const { entries, hubResult } = await renderSectionArticlePipeline({
+  const {
+    entries,
+    hubResult,
+    downloadedImageKeys,
+    imageFetchFailures,
+    imagePostcondition,
+    aggregatePagesAllowed,
+  } = await renderSectionArticlePipeline({
     rootDir: renderRoot,
     distDir,
     section,
@@ -756,10 +807,13 @@ export async function main(argv = process.argv.slice(2)) {
     ...landingPages.map((page) => rendererPageEntry(section, page, 'landing')),
   ];
   const currentArchivePages = pages.filter((page) => page.kind === 'archive');
-  const obsoletePages = [
-    ...obsoleteArticlePages(previousArticlePages, currentArticlePages),
-    ...obsoleteArchivePages(previousArchivePages, currentArchivePages),
-  ];
+  const obsoletePages = obsoleteReleasePages({
+    previousArticlePages,
+    currentArticlePages,
+    previousArchivePages,
+    currentArchivePages,
+    aggregatePagesAllowed,
+  });
 
   const defects = [];
   if (publishing && effectiveStatus === null) {
@@ -770,11 +824,7 @@ export async function main(argv = process.argv.slice(2)) {
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
     for (const defect of pageDefects(page, html)) defects.push(`${page.rel}: ${defect}`);
   }
-  for (const kind of ['archive', 'landing']) {
-    for (const locale of CANTON_HUB_LOCALES) {
-      if (!pages.some((page) => page.kind === kind && page.locale === locale)) defects.push(`nessuna pagina ${kind} per ${locale}`);
-    }
-  }
+  defects.push(...aggregatePageDefects(pages, { aggregatePagesAllowed }));
 
   // Una sezione dichiarata live deve avere tutti e sei gli hub (lo stesso
   // vincolo che build-api applica al registro): qui si ripete perche' questo
@@ -787,7 +837,14 @@ export async function main(argv = process.argv.slice(2)) {
   }
 
   const missingHeroAssets = [];
-  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, htmlPages: landingPages, missing: missingHeroAssets, logPrefix: LOG });
+  const cdnUploads = heroCdnUploads({
+    rootDir: ROOT_DIR,
+    entries,
+    htmlPages: landingPages,
+    missing: missingHeroAssets,
+    logPrefix: LOG,
+    downloadedImageKeys,
+  });
   for (const missing of new Map(missingHeroAssets.map((asset) => [asset.key, asset])).values()) {
     defects.push(`hero landing/articolo non disponibile per l'upload: ${missing.local}`);
   }
@@ -803,6 +860,9 @@ export async function main(argv = process.argv.slice(2)) {
     countsByLocale,
     hubsMissing: hubs.missing,
     missingHeroAssets,
+    imageFetchFailures,
+    imagePostcondition,
+    aggregatePagesAllowed,
     effectiveStatus,
     pages,
     cdnUploads,

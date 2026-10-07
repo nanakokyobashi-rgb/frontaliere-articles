@@ -1863,23 +1863,24 @@ jobs:
           # voce del ledger URL->id), perche' dopo il rebase la voce del ledger
           # puo' non esserci piu' (bookkeeping: vince upstream).
           PRODUCED="$(git rev-parse HEAD)"
-
-          # Il drain delle copertine puo' ora avanzare in parallelo. Il registro
-          # e' append-only: conserviamo le differenze del commit replayed e le
-          # riuniamo dopo il rebase rispetto al base comune. Cosi' una copia
-          # invariata dello snapshot non puo' rimettere una copertina vecchia
-          # sopra quella rigenerata dal drain.
-          registry_base_snapshot="$RUNNER_TEMP/generated-image-registry-base.json"
-          if git cat-file -e "$PRODUCED^:data/generated-image-registry.json" 2>/dev/null; then
-            git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base_snapshot"
-          else
-            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base_snapshot"
-          fi
+          # Il registro delle immagini generate e' un ledger append-only, non una
+          # cache sacrificabile: il rebase puo' prendere upstream per uscire da
+          # un conflitto testuale, quindi conserviamo la copia di questo run e
+          # la riuniamo dopo ogni rebase con il resolver fail-closed dedicato.
+          registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
-          if [ -f data/generated-image-registry.json ]; then
-            cp data/generated-image-registry.json "$registry_snapshot"
-          else
-            registry_snapshot=''
+          if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base"
+          fi
+          cp data/generated-image-registry.json "$registry_snapshot"
+          editorial_registry_base="$RUNNER_TEMP/editorial-image-registry-base.json"
+          editorial_registry_snapshot=""
+          if [ -f data/editorial-image-registry.json ]; then
+            editorial_registry_snapshot="$RUNNER_TEMP/editorial-image-registry-replayed.json"
+            if ! git show "$PRODUCED^:data/editorial-image-registry.json" > "$editorial_registry_base"; then
+              printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$editorial_registry_base"
+            fi
+            cp data/editorial-image-registry.json "$editorial_registry_snapshot"
           fi
 
           TARGET="${{ github.ref_name }}"
@@ -2029,12 +2030,21 @@ jobs:
             # corpi e sidecar = --take-theirs). Qui restano solo i path che non
             # dipendono da quante sezioni esistono.
             #
+            # `data/generated-image-registry.json` e' un ledger JSON con un
+            # resolver proprio: il passaggio come bookkeeping serve solo a
+            # completare il rebase prendendo upstream, mentre lo snapshot sopra
+            # viene riunito subito dopo. Senza quel secondo passaggio il record
+            # della copertina di questo run sparirebbe dal registro e resterebbe
+            # un articolo fantasma, con il corpo presente ma senza provenienza.
+            #
             # Il backoff deve precedere fetch+rebase: dormire DOPO il rebase
             # rende HEAD gia' stantio prima del tentativo successivo, proprio
             # durante le raffiche di push dei crawler.
             sleep $((attempt * 3))
             rebased=1
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+              data/generated-image-registry.json \
+              data/editorial-image-registry.json \
               data/topic-candidates-evergreen-rejected.json \
               data/topic-candidates-consumed.json \
               data/topic-candidates-today-picks.json \
@@ -2048,20 +2058,6 @@ jobs:
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ || rebased=0
-            if [ "$rebased" -eq 1 ] && [ -n "$registry_snapshot" ] && [ -f data/generated-image-registry.json ]; then
-              node scripts/ci/merge-generated-image-registry.mjs \
-                data/generated-image-registry.json "$registry_snapshot" "$registry_base_snapshot"
-              git add data/generated-image-registry.json
-              if ! git diff --cached --quiet; then
-                upstream_head="$(git rev-parse --verify --quiet FETCH_HEAD || true)"
-                if [ -n "$upstream_head" ] && [ "$(git rev-parse HEAD)" = "$upstream_head" ]; then
-                  echo "replayed commit was skipped; committing generated image registry merge as a child"
-                  git commit -m "Reconcile generated image registry after rebase"
-                else
-                  git commit --amend --no-edit
-                fi
-              fi
-            fi
             # ── Ricontrollo dopo il rebase (D18) ──
             #
             # L'unicita' dell'id (namespace globale `blog-{id}`) e il dedup
@@ -2078,6 +2074,21 @@ jobs:
             # Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, non da un elenco
             # qui: una sezione nuova e' coperta senza toccare questo step.
             if [ "$rebased" -eq 1 ]; then
+              node scripts/ci/merge-generated-image-registry.mjs \
+                data/generated-image-registry.json "$registry_base" "$registry_snapshot"
+              git add data/generated-image-registry.json
+              if [ -n "$editorial_registry_snapshot" ]; then
+                node scripts/ci/merge-generated-image-registry.mjs \
+                  data/editorial-image-registry.json "$editorial_registry_base" "$editorial_registry_snapshot" cover
+                git add data/editorial-image-registry.json
+              fi
+              if ! git diff --cached --quiet; then
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                  git commit -C "$PRODUCED"
+                else
+                  git commit --amend --no-edit
+                fi
+              fi
               uniq_rc=0
               node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD || uniq_rc=$?
               if [ "$uniq_rc" -ne 0 ]; then

@@ -100943,6 +100943,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vendemmia-mendrisiotto-lavoratori-terra': {
+    title: 'Frontalieri della vendemmia: 15 franchi l\'ora | Frontaliere Ticino',
+    description: '## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti',
+    keywords: 'frontalieri, ticino, svizzera, italia, vendemmia, franchi, breve, circa',
+    ogTitle: 'Vendemmia in Ticino: 15 franchi netti l\'ora',
+    ogDescription: '## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti',
+    canonicalPath: '/articoli-frontaliere/vendemmia-mendrisiotto-lavoratori-terra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri della vendemmia: 15 franchi l'ora",
+      "description": "## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-vendemmia-mendrisiotto-lavoratori-terra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori frontalieri raccolgono uva sui colli del Mendrisiotto durante la vendemmia"
+      },
+      "datePublished": "2026-10-07T21:11:35+00:00",
+      "dateModified": "2026-10-07T21:11:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vendemmia-mendrisiotto-lavoratori-terra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

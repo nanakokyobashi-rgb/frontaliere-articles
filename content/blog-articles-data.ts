@@ -42980,6 +42980,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vendemmia-mendrisiotto-lavoratori-terra',
+ category: 'pratico',
+ date: '2026-10-07T21:11:35.309Z',
+ image: '/images/blog/article-vendemmia-mendrisiotto-lavoratori-terra.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

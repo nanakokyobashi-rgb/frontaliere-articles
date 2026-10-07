@@ -279,24 +279,21 @@ jobs:
           fi
 
           git commit -m "$COMMIT_MESSAGE"
-
-          # Il drain delle copertine puo' ora avanzare in parallelo. Il registro
-          # e' append-only: conserviamo le differenze del commit replayed e le
-          # riuniamo dopo il rebase rispetto al base comune. Cosi' una copia
-          # invariata dello snapshot non puo' rimettere una copertina vecchia
-          # sopra quella rigenerata dal drain.
-          produced="$(git rev-parse HEAD)"
-          registry_base_snapshot="$RUNNER_TEMP/generated-image-registry-base.json"
-          if git cat-file -e "$produced^:data/generated-image-registry.json" 2>/dev/null; then
-            git show "$produced^:data/generated-image-registry.json" > "$registry_base_snapshot"
-          else
-            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base_snapshot"
-          fi
+          PRODUCED="$(git rev-parse HEAD)"
+          registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
-          if [ -f data/generated-image-registry.json ]; then
-            cp data/generated-image-registry.json "$registry_snapshot"
-          else
-            registry_snapshot=''
+          if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base"
+          fi
+          cp data/generated-image-registry.json "$registry_snapshot"
+          editorial_registry_base="$RUNNER_TEMP/editorial-image-registry-base.json"
+          editorial_registry_snapshot=""
+          if [ -f data/editorial-image-registry.json ]; then
+            editorial_registry_snapshot="$RUNNER_TEMP/editorial-image-registry-replayed.json"
+            if ! git show "$PRODUCED^:data/editorial-image-registry.json" > "$editorial_registry_base"; then
+              printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$editorial_registry_base"
+            fi
+            cp data/editorial-image-registry.json "$editorial_registry_snapshot"
           fi
 
           TARGET="${{ github.ref_name }}"
@@ -314,28 +311,30 @@ jobs:
             rebased=1
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/generated-image-registry.json \
+              data/editorial-image-registry.json \
               --merge-queue data/image-regeneration-queue.json \
               --section-surfaces \
               --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ \
               || rebased=0
-            if [ "$rebased" -ne 1 ]; then
-              git rebase --abort 2>/dev/null || true
-              continue
-            fi
-            if [ -n "$registry_snapshot" ] && [ -f data/generated-image-registry.json ]; then
+            if [ "$rebased" -eq 1 ]; then
               node scripts/ci/merge-generated-image-registry.mjs \
-                data/generated-image-registry.json "$registry_snapshot" "$registry_base_snapshot"
+                data/generated-image-registry.json "$registry_base" "$registry_snapshot"
               git add data/generated-image-registry.json
+              if [ -n "$editorial_registry_snapshot" ]; then
+                node scripts/ci/merge-generated-image-registry.mjs \
+                  data/editorial-image-registry.json "$editorial_registry_base" "$editorial_registry_snapshot" cover
+                git add data/editorial-image-registry.json
+              fi
               if ! git diff --cached --quiet; then
-                upstream_head="$(git rev-parse --verify --quiet FETCH_HEAD || true)"
-                if [ -n "$upstream_head" ] && [ "$(git rev-parse HEAD)" = "$upstream_head" ]; then
-                  echo "replayed commit was skipped; committing generated image registry merge as a child"
-                  git commit -m "Reconcile generated image registry after rebase"
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                  git commit -C "$PRODUCED"
                 else
                   git commit --amend --no-edit
                 fi
               fi
+            else
+              git rebase --abort 2>/dev/null || true
             fi
           done
 
