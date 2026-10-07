@@ -699,7 +699,7 @@
     "canton-sh": {
       "kind": "canton",
       "canton": "SH",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-sciaffusa",
         "en": "schaffhausen-articles",
