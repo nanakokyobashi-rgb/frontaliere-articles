@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fribourg-modifica-licd',
+ category: 'fiscale',
+ date: '2026-10-07T10:27:22.581Z',
+ image: '/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

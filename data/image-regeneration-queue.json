@@ -369,6 +369,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:21:57.444Z",
       "lastFailureAt": "2026-10-07T10:21:57.444Z"
+    },
+    {
+      "articleId": "fribourg-modifica-licd",
+      "title": "Fribourg adegua imposte dirette alla progressione a freddo",
+      "fallbackImage": "/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp",
+      "reason": "All image providers failed for article-fribourg-modifica-licd: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:27:22.590Z",
+      "lastFailureAt": "2026-10-07T10:27:22.590Z"
     }
   ]
 }
