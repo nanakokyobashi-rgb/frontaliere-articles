@@ -99170,6 +99170,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-intelligenza-artificiale-diritti-umani': {
+    title: 'Intelligenza artificiale: impatto sui diritti umani',
+    description: '## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy',
+    keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, impatto, diritti',
+    ogTitle: 'Intelligenza artificiale: impatto sui diritti umani',
+    ogDescription: '## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy',
+    canonicalPath: '/articoli-svizzera/intelligenza-artificiale-diritti-umani/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Intelligenza artificiale: impatto sui diritti umani",
+      "description": "## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-intelligenza-artificiale-diritti-umani.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio svizzero con team che utilizza IA etica per risorse umane e alloggio"
+      },
+      "datePublished": "2026-10-07T15:29:13+00:00",
+      "dateModified": "2026-10-07T15:29:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/intelligenza-artificiale-diritti-umani/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

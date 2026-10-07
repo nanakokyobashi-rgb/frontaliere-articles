@@ -100909,6 +100909,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cantello-teatro-dialettale-ottobre-2026': {
+    title: 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
+    description: '## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantello, torna, teatro, dialettale',
+    ogTitle: 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
+    ogDescription: '## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena',
+    canonicalPath: '/articoli-frontaliere/cantello-teatro-dialettale-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantello torna il teatro dialettale “Quei giargianes da giappunes”",
+      "description": "## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/sindacati-miazzina-diritti-9-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Locandina dello spettacolo dialettale “Quei giargianes da giappunes” al Teatro Pax di Cantello con la compagnia Tutti in Scena"
+      },
+      "datePublished": "2026-10-07T16:05:11+00:00",
+      "dateModified": "2026-10-07T16:05:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cantello-teatro-dialettale-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

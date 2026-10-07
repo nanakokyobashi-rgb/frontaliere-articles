@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'allerta-botulismo-terrina-vallese',
+ category: 'pratico',
+ date: '2026-10-07T16:03:38.899Z',
+ image: '/images/blog/article-allerta-botulismo-terrina-vallese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

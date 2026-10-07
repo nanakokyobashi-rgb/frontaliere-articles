@@ -2645,6 +2645,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0': { it: 'rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0', en: 'swiss-bond-yields-rise-snb-at-0', de: 'renditen-schweizer-anleihen-steigen-snb-bei-0', fr: 'rendements-des-titres-suisses-en-hausse-bns-a-0' },
  'riserve-valutarie-settembre-stabili': { it: 'riserve-valutarie-settembre-stabili', en: 'stable-currency-reserves-september', de: 'waehrungsreserven-september-stabil', fr: 'reserves-devises-septembre-stables' },
  'ffs-sportelli-chiusi-stazioni': { it: 'ffs-sportelli-chiusi-stazioni', en: 'ffs-ticket-counter-closures-stations', de: 'ffs-schalterschliessungen-bahnhoefe', fr: 'ffs-fermeture-guichets-gares' },
+ 'intelligenza-artificiale-diritti-umani': { it: 'intelligenza-artificiale-diritti-umani', en: 'artificial-intelligence-human-rights', de: 'kuenstliche-intelligenz-menschenrechte', fr: 'intelligence-artificiale-droits-humains' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
