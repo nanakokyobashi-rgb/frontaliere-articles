@@ -251,8 +251,8 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "075ef4fa2fc7d8f2",
-        "corpus": "075ef4fa2fc7d8f2",
+        "site": "200246b909cc0cbb",
+        "corpus": "200246b909cc0cbb",
         "alignedAt": "2026-10-07"
       }
     },
@@ -1823,9 +1823,9 @@
       "mode": "identical",
       "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso. RICONCILIATO il 2026-08-14 (#234, classe `both-moved`): era un both-moved APPARENTE. Il blob qui era byte-identico a `valerielinc-ops@8bfe4e3b:build-plugins/shared/clauseTail.mjs`, cioe' la \"modifica del corpus\" ERA la modifica del sito, arrivata col trasporto di #116 senza che la baseline venisse aggiornata; il sito e' poi andato avanti da solo con 79a6b924. Le due modifiche non sono indipendenti — una contiene l'altra — quindi la riconciliazione e' un fast-forward: adottata la versione del sito. Porta un CAMBIO DI COMPORTAMENTO, non solo un export nuovo: `truncateToClause` ora RIFIUTA (torna la stringa vuota) quando il primo token da solo sfora il budget, invece di tagliare duro a `maxLen`. Per questo `generator/scripts/create-article.mjs` e' passato a `truncateToClauseNonEmpty` sui due call site di titolo e breadcrumb, dove il fallback e' lo slug (nessuno spazio) e il rifiuto sarebbe stato la norma, non il caso limite.",
       "baseline": {
-        "site": "b90d13451bef2ee2",
-        "corpus": "b90d13451bef2ee2",
-        "alignedAt": "2026-10-01"
+        "site": "63cabf90191648cc",
+        "corpus": "63cabf90191648cc",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2134,9 +2134,9 @@
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "1b87e374164b004c",
-        "corpus": "1b87e374164b004c",
-        "alignedAt": "2026-10-01"
+        "site": "4cb50306a5f08f8e",
+        "corpus": "4cb50306a5f08f8e",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -3334,9 +3334,9 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "03387084038e0dc3",
-        "corpus": "03387084038e0dc3",
-        "alignedAt": "2026-09-25"
+        "site": "0fed92ef6205331a",
+        "corpus": "0fed92ef6205331a",
+        "alignedAt": "2026-10-07"
       }
     },
     {
