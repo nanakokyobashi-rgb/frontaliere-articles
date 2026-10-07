@@ -46,7 +46,7 @@
  */
 
 import '../host/cantonSectionsBootstrap.mjs';
-import { readFileSync, unlinkSync } from 'node:fs';
+import { readFileSync, unlinkSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -320,6 +320,28 @@ function findSection(id) {
   return found[0][0];
 }
 
+/**
+ * Restituisce una tombstone già scritta dal retirement precedente, se esiste.
+ *
+ * Il caso non è teorico: il resolver di rebase lavorava su registri append-only
+ * e, prima di conoscere le tombstone, poteva riesumare soltanto la riga di
+ * `routerBlogData.ts`/`blogArticleIds.ts`. In quel punto il registro principale
+ * è già pulito, quindi il comando normale non riesce a trovare l'articolo e
+ * non può completare l'operazione. La tombstone conserva però sezione e slug:
+ * sono sufficienti per riprendere in modo atomico le superfici residue.
+ */
+function retiredEntryFor(id) {
+  const ledgerPath = rel(RETIRED_LEDGER);
+  if (!existsSync(ledgerPath)) return null;
+  const ledger = JSON.parse(readFileSync(ledgerPath, 'utf-8'));
+  if (!Array.isArray(ledger.retired)) {
+    throw new Error(`${RETIRED_LEDGER}: "retired" deve essere un array`);
+  }
+  const matches = ledger.retired.filter((entry) => entry?.id === id);
+  if (matches.length > 1) throw new Error(`${RETIRED_LEDGER}: '${id}' compare più volte`);
+  return matches[0] ?? null;
+}
+
 function main() {
   const argv = process.argv.slice(2);
   const id = argv.find((a) => !a.startsWith('--'));
@@ -335,7 +357,17 @@ function main() {
     process.exit(2);
   }
 
-  const section = findSection(id);
+  let section;
+  let priorRetirement = null;
+  try {
+    section = findSection(id);
+  } catch (error) {
+    if (!String(error?.message).includes('non è in nessuno dei due registri')) throw error;
+    priorRetirement = retiredEntryFor(id);
+    if (!priorRetirement || !SECTIONS[priorRetirement.section]) throw error;
+    section = priorRetirement.section;
+    console.warn(`'${id}' non è più nel registro: riprendo il retirement parziale dalla tombstone`);
+  }
   const cfg = SECTIONS[section];
   // Missing registry/slug/meta surfaces must stop before any retirement
   // planning can become a partial write. Keep this preflight before the
@@ -343,6 +375,9 @@ function main() {
   // real retirement, not merely avoid persisting an already-invalid plan.
   requiredWritableSurfaceFilesFor(section);
   const winnerSection = findSection(winner); // esiste? altrimenti throw: mai ritirare verso il nulla
+  if (priorRetirement?.winnerId && priorRetirement.winnerId !== winner) {
+    throw new Error(`'${id}' è già ritirato verso '${priorRetirement.winnerId}', non verso '${winner}'`);
+  }
   console.log(`ritiro '${id}' (${section}) → vincitore '${winner}' (${winnerSection})${dryRun ? '  [DRY RUN]' : ''}`);
 
   /** @type {Array<{file: string, what: string, kept?: boolean}>} */
@@ -355,9 +390,19 @@ function main() {
   // 1. slug map — PRIMA di tutto: è l'unico posto da cui gli slug localizzati
   //    sono ancora leggibili, e servono al ledger dei ritirati.
   const slugRow = removeSlugRow(cfg.slugDataFile, id);
-  if (!slugRow.changed) throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
-  let slugDataSrc = slugRow.src;
-  planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugRow.slugs[l]).join(', ')})` });
+  let slugDataSrc;
+  let slugs;
+  if (slugRow.changed) {
+    slugDataSrc = slugRow.src;
+    slugs = slugRow.slugs;
+    planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugs[l]).join(', ')})` });
+  } else if (priorRetirement?.slugs) {
+    slugs = priorRetirement.slugs;
+    slugDataSrc = read(cfg.slugDataFile);
+    planned.push({ file: cfg.slugDataFile, what: 'mappa slug già priva della tombstone' });
+  } else {
+    throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
+  }
 
   // La provenienza vive accanto alla mappa slug e deve uscire nello stesso
   // buffer, altrimenti build-api.mjs la pubblica come residuo fantasma dopo
@@ -411,9 +456,14 @@ function main() {
 
   // 2. registro di sezione
   const reg = removeRegistryEntry(cfg.registryFile, id);
-  if (!reg.changed) throw new Error(`${cfg.registryFile}: nessun blocco per '${id}'`);
-  queueWriteTarget(writes, cfg.registryFile, reg.src, 'registro di sezione');
-  planned.push({ file: cfg.registryFile, what: 'blocco di registro' });
+  if (reg.changed) {
+    queueWriteTarget(writes, cfg.registryFile, reg.src, 'registro di sezione');
+    planned.push({ file: cfg.registryFile, what: 'blocco di registro' });
+  } else if (!priorRetirement) {
+    throw new Error(`${cfg.registryFile}: nessun blocco per '${id}'`);
+  } else {
+    planned.push({ file: cfg.registryFile, what: 'registro già privo della tombstone' });
+  }
 
   // 3. meta per locale
   for (const metaFile of cfg.metaFiles) {
@@ -452,7 +502,7 @@ function main() {
   const led = sourceLedgerPresent
     ? removeJsonByValue(cfg.sourceLedger, id)
     : { changed: false, hits: [], text: null };
-  let retiredSourceUrls = [];
+  let retiredSourceUrls = Array.isArray(priorRetirement?.duplicateOf) ? priorRetirement.duplicateOf : [];
   if (led.changed) {
     retiredSourceUrls = led.hits;
     queueWriteTarget(writes, cfg.sourceLedger, led.text, 'ledger URL');
@@ -541,9 +591,9 @@ function main() {
     section,
     winnerId: winner,
     winnerSection,
-    retiredOn: new Date().toISOString().slice(0, 10),
+    retiredOn: priorRetirement?.retiredOn ?? new Date().toISOString().slice(0, 10),
     duplicateOf: retiredSourceUrls,
-    slugs: slugRow.slugs,
+    slugs,
   });
   ledger.retired.sort((a, b) => a.id.localeCompare(b.id));
 

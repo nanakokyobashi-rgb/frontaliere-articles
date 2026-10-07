@@ -29,7 +29,7 @@ import { tmpdir } from 'node:os';
 import { rmTempTree } from './rm-temp-tree.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { backstop, findDuplicates, mergeSource } from '../../scripts/lib/merge-content-registry-conflict.mjs';
+import { backstop, findDuplicates, mergeSource, pruneRetiredRecords } from '../../scripts/lib/merge-content-registry-conflict.mjs';
 // Le due sorgenti di verita' da cui il generatore ricava i propri target di
 // scrittura. Importarle (invece di ricopiarne i path) e' cio' che rende il test
 // sui registri dichiarati una guardia e non un elenco che invecchia da solo.
@@ -932,6 +932,64 @@ test('il confine del conflitto cade a META\' ENTRY, e il merge non fonde i due r
   assert.equal((result.merged.match(/\{\n\s+id: '/g) || []).length, 3,
     `tre record devono restare tre oggetti distinti:\n${result.merged}`);
   assert.deepEqual(backstop(result.merged, result.ours, result.theirs), []);
+});
+
+test('una tombstone non viene riesumata dal merge per-record, nemmeno nella union degli id', () => {
+  const conflicted = conflictedRegistry(['articolo-base', 'articolo-mio'], ['articolo-base', 'articolo-upstream']);
+  const result = mergeSource(conflicted, { retiredIds: new Set(['articolo-upstream']) });
+  assert.ok(result.ok, `il merge con tombstone deve riuscire: ${result.reason}`);
+  assert.match(result.merged, /articolo-base/);
+  assert.match(result.merged, /articolo-mio/);
+  assert.doesNotMatch(result.merged, /articolo-upstream/);
+  assert.deepEqual(backstop(result.merged, result.ours, result.theirs), []);
+
+  const unionConflict = [
+    "type _BlogId1 = 'articolo-base' |",
+    '<<<<<<< HEAD',
+    "'articolo-upstream'",
+    '=======',
+    "'articolo-mio'",
+    '>>>>>>> replay',
+    ';',
+    'export type BlogArticleId = _BlogId1;',
+    '',
+  ].join('\n');
+  const union = mergeSource(unionConflict, { retiredIds: new Set(['articolo-upstream']) });
+  assert.ok(union.ok, `la union con tombstone deve riuscire: ${union.reason}`);
+  assert.match(union.merged, /'articolo-base'/);
+  assert.match(union.merged, /'articolo-mio'/);
+  assert.doesNotMatch(union.merged, /articolo-upstream/);
+
+  const metadata = [
+    "const M = {",
+    "  'blog.article.articolo-upstream.title': 'ritirato',",
+    "  'blog.article.articolo-upstream-2.title': 'attivo',",
+    "  'blog-articolo-upstream': { title: 'ritirato' },",
+    "  'blog-articolo-upstream-2': { title: 'attivo' },",
+    '};',
+    '',
+  ].join('\n');
+  const pruned = pruneRetiredRecords(metadata, new Set(['articolo-upstream']));
+  assert.doesNotMatch(pruned, /blog\.article\.articolo-upstream\.title/);
+  assert.doesNotMatch(pruned, /'blog-articolo-upstream':/);
+  assert.match(pruned, /articolo-upstream-2/);
+});
+
+test('il resolver CLI legge il ledger dei ritiri prima di scrivere il conflitto', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'merge-retired-ledger-'));
+  try {
+    const conflicted = conflictedRegistry(['articolo-base', 'articolo-mio'], ['articolo-base', 'articolo-upstream']);
+    write(root, 'data/retired-articles.json', JSON.stringify({ retired: [{ id: 'articolo-upstream' }] }));
+    write(root, REGISTRY, conflicted);
+
+    execFileSync('node', [RESOLVER, REGISTRY], { cwd: root, env: GIT_ENV, encoding: 'utf8' });
+    const merged = readFileSync(path.join(root, REGISTRY), 'utf8');
+    assert.match(merged, /articolo-base/);
+    assert.match(merged, /articolo-mio/);
+    assert.doesNotMatch(merged, /articolo-upstream/);
+  } finally {
+    rmTempTree(root);
+  }
 });
 
 test('sullo STESSO file, «togli i marker e tieni entrambi i lati» fonde — e il backstop lo blocca', () => {

@@ -31,13 +31,19 @@
  * path della famiglia SVIZZERA.
  *
  * La terza opzione e' questa: unire gli id di ENTRAMBI i lati.
- *   · un id presente da un solo lato   → si tiene, sempre;
+ *   · un id presente da un solo lato   → si tiene, sempre, salvo che il ledger
+ *                                        canonico lo dichiari RITIRATO;
  *   · un id presente da entrambi       → vince il commit REBASATO (l'articolo
  *                                        appena generato), perche' per
  *                                        costruzione upstream non dovrebbe
  *                                        avere quello slug: se ce l'ha, la
  *                                        versione appena scritta e' quella
  *                                        completa.
+ *
+ * Un ritiro e' l'unica cancellazione legittima in questi registri append-only.
+ * Il ledger `data/retired-articles.json` e' quindi una tombstone, non una
+ * nota storica: durante un rebase una generazione partita prima del ritiro puo'
+ * riportare l'id nel suo lato, ma il resolver non deve riesumarlo.
  *
  * Nota sui lati, ed e' la cosa piu' facile da invertire: in un rebase HEAD e'
  * il ramo su cui si RIGIOCA, quindi il lato in alto (`<<<<<<<`) e' UPSTREAM e
@@ -521,6 +527,101 @@ function typeUnions(src) {
   return found;
 }
 
+/**
+ * Riconosce l'id canonico dietro alle chiavi delle diverse superfici.
+ *
+ * I registri slug e gli array usano l'id nudo; i file meta e SEO lo
+ * incapsulano rispettivamente in `blog.article.<id>.<campo>` e
+ * `blog-<id>`. Restituire l'id invece di un booleano rende il filtro
+ * verificabile e impedisce che una chiave piu' lunga venga scambiata per un
+ * altra (gli id del corpus possono essere prefissi l'uno dell'altro).
+ */
+function retiredIdForKey(key, retiredIds) {
+  if (retiredIds.has(key)) return key;
+  const metaPrefix = 'blog.article.';
+  if (key.startsWith(metaPrefix)) {
+    const id = key.slice(metaPrefix.length).split('.')[0];
+    if (retiredIds.has(id)) return id;
+  }
+  const seoPrefix = 'blog-';
+  if (key.startsWith(seoPrefix)) {
+    const id = key.slice(seoPrefix.length);
+    if (retiredIds.has(id)) return id;
+  }
+  return null;
+}
+
+/**
+ * Applica le tombstone del ledger prima del merge.
+ *
+ * Il backstop richiede che nessun record presente su un lato vada perso. La
+ * rimozione deve quindi avvenire PRIMA di `mergeDocuments`, su entrambi i lati:
+ * per il backstop un id ritirato non e' piu' un record atteso, mentre ogni id
+ * ancora attivo conserva la garanzia «non perso».
+ *
+ * @param {string} src
+ * @param {Set<string>} retiredIds
+ * @returns {string}
+ */
+export function pruneRetiredRecords(src, retiredIds) {
+  if (!retiredIds || retiredIds.size === 0) return src;
+
+  const containers = recordContainers(src);
+  if (containers === null) throw new Error('il documento non si decompone in record');
+  /** @type {Array<{start: number, end: number, text: string}>} */
+  const edits = [];
+  const seen = new Set();
+
+  for (const container of containers.values()) {
+    let offset = container.open + 1;
+    for (const record of container.records) {
+      const retiredId = retiredIdForKey(record.key, retiredIds);
+      if (retiredId) {
+        const key = `${offset}:${offset + record.text.length}`;
+        if (!seen.has(key)) {
+          edits.push({ start: offset, end: offset + record.text.length, text: '' });
+          seen.add(key);
+        }
+      }
+      offset += record.text.length;
+    }
+  }
+
+  for (const union of typeUnions(src).values()) {
+    const remaining = union.literals.filter((literal) => !retiredIdForKey(literal, retiredIds));
+    if (remaining.length === union.literals.length) continue;
+    if (remaining.length === 0) {
+      throw new Error('una union di id resterebbe vuota dopo il filtro dei ritiri');
+    }
+    edits.push({
+      start: union.start,
+      end: union.end,
+      text: remaining.map((literal) => `'${literal}'`).join(' | '),
+    });
+  }
+
+  edits.sort((a, b) => b.start - a.start);
+  for (let i = 1; i < edits.length; i++) {
+    if (edits[i - 1].start < edits[i].end) {
+      throw new Error('superfici ritirate sovrapposte nel documento');
+    }
+  }
+  let out = src;
+  for (const edit of edits) out = out.slice(0, edit.start) + edit.text + out.slice(edit.end);
+  return out;
+}
+
+/** Legge le tombstone del repository corrente; un ledger invalido e' fatale. */
+export function readRetiredIds(root = process.cwd()) {
+  const file = path.join(root, 'data/retired-articles.json');
+  if (!existsSync(file)) return new Set();
+  const parsed = JSON.parse(readFileSync(file, 'utf8'));
+  if (!Array.isArray(parsed.retired)) {
+    throw new Error(`${file}: "retired" deve essere un array`);
+  }
+  return new Set(parsed.retired.map((entry) => entry?.id).filter((id) => typeof id === 'string' && id.length > 0));
+}
+
 /** Unione ordinata di due liste di record. Il commit rigiocato vince sui pari. */
 function unionRecords(mine, theirs) {
   const byKey = new Map();
@@ -676,7 +777,7 @@ function assemble(segments, pick) {
  * @returns {{ ok: true, merged: string, ours: string, theirs: string, hunks: number }
  *          |{ ok: false, reason: string }}
  */
-export function mergeSource(src) {
+export function mergeSource(src, { retiredIds = new Set() } = {}) {
   let read;
   try {
     read = readHunks(src);
@@ -685,8 +786,16 @@ export function mergeSource(src) {
   }
   if (read.hunks === 0) return { ok: false, reason: 'nessun marker di conflitto nel file' };
 
-  const ours = assemble(read.segments, (s) => s.ours);
-  const theirs = assemble(read.segments, (s) => s.theirs);
+  const rawOurs = assemble(read.segments, (s) => s.ours);
+  const rawTheirs = assemble(read.segments, (s) => s.theirs);
+  let ours;
+  let theirs;
+  try {
+    ours = pruneRetiredRecords(rawOurs, retiredIds);
+    theirs = pruneRetiredRecords(rawTheirs, retiredIds);
+  } catch (error) {
+    return { ok: false, reason: `filtro dei ritiri impossibile: ${error.message}` };
+  }
   const merged = mergeDocuments(ours, theirs);
   if (!merged.ok) return merged;
 
@@ -827,9 +936,9 @@ export function tsxParseProbe(file, contents) {
 
 // ── CLI ─────────────────────────────────────────────────────────────────────
 
-function resolveFile(file) {
+function resolveFile(file, retiredIds) {
   const src = readFileSync(file, 'utf8');
-  const result = mergeSource(src);
+  const result = mergeSource(src, { retiredIds });
   if (!result.ok) {
     console.error(`::warning::${file}: merge per-record impossibile — ${result.reason}`);
     return false;
@@ -881,12 +990,19 @@ function main(argv) {
     console.error('uso: merge-content-registry-conflict.mjs [--check] <file>...');
     return 2;
   }
+  let retiredIds;
+  try {
+    retiredIds = readRetiredIds();
+  } catch (error) {
+    console.error(`::warning::ledger dei ritiri illeggibile — ${error.message}`);
+    return 1;
+  }
   // Nessun file viene scritto finche' non ha superato TUTTO: `resolveFile`
   // scrive solo in fondo, quindi un abort a meta' lista lascia i file rimanenti
   // ancora conflittati e il chiamante abortisce il rebase comunque.
   let ok = true;
   for (const f of files) {
-    if (!(check ? checkFile(f) : resolveFile(f))) ok = false;
+    if (!(check ? checkFile(f) : resolveFile(f, retiredIds))) ok = false;
   }
   return ok ? 0 : 1;
 }
