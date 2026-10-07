@@ -66,6 +66,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
 import { ghWithRateLimitRetry } from './lib/gh-rate-limit.mjs';
+import { quotaLeaseFailureMarker } from './requeue-quota-lease.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const CODEX_FALLBACK_MODE = process.env.CODEX_FALLBACK_MODE === '1';
@@ -946,7 +947,8 @@ export function runQuotaLease({
       reason: decision.reason,
     }, { writeOutput });
   } catch (error) {
-    console.log(`::error::quota lease fail-closed: ${String(error?.message || error).slice(0, 240)}`);
+    const detail = String(error?.message || error).replace(/\s+/g, ' ').trim().slice(0, 240);
+    console.log(`::error::${quotaLeaseFailureMarker(error)} quota lease fail-closed: ${detail}`);
     return writeLeaseOutputs({ allowed: false, error: true, reason: 'lease-api-or-parse-error' }, { writeOutput });
   }
 }

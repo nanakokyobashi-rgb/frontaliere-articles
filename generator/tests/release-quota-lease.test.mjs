@@ -6,12 +6,17 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 import { releaseLeaseWithRetry } from '../../scripts/ci/release-quota-lease.mjs';
+import {
+  isRetryableGitHubMutationError,
+  quotaLeaseFailureMarker,
+} from '../../scripts/ci/requeue-quota-lease.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CHECK_SCRIPT = path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs');
 
-function ghError(stderr) {
+function ghError(stderr, status = 1) {
   const error = new Error('Command failed: node');
+  error.status = status;
   error.stderr = stderr;
   return error;
 }
@@ -42,6 +47,42 @@ test('releaseLeaseWithRetry ritenta una release transient e conserva il strict m
   assert.deepEqual(calls[0].args, [CHECK_SCRIPT]);
   assert.equal(calls[0].options.env.QUOTA_LEASE_STRICT_RELEASE, '1');
   assert.equal(calls[0].options.env.QUOTA_LEASE_ACTION, 'release');
+});
+
+test('il wrapper ritenta il marker del gate anche quando il body ha nascosto il dettaglio', () => {
+  const calls = [];
+  const sleeps = [];
+  const githubError = ghError('gh: HTTP 503 Service Unavailable', 503);
+  const childError = Object.assign(
+    new Error(`Command failed: node issue comment --body ${'lease-body '.repeat(80)}`),
+    {
+      status: 1,
+      stdout: `::error::${quotaLeaseFailureMarker(githubError)} quota lease fail-closed`,
+      stderr: '',
+    },
+  );
+
+  const result = releaseLeaseWithRetry({
+    maxAttempts: 2,
+    retryDelayMs: 10,
+    sleep: (ms) => sleeps.push(ms),
+    exec: () => {
+      calls.push(true);
+      if (calls.length === 1) throw childError;
+      return 'lease_released=true\n';
+    },
+  });
+
+  assert.equal(result, 'lease_released=true\n');
+  assert.equal(calls.length, 2);
+  assert.deepEqual(sleeps, [10]);
+});
+
+test('il classificatore tratta 429 e secondary rate limit come transient, non auth o permessi', () => {
+  assert.equal(isRetryableGitHubMutationError(ghError('HTTP 429 Too Many Requests', 429)), true);
+  assert.equal(isRetryableGitHubMutationError(ghError('You have exceeded a secondary rate limit. Please wait')), true);
+  assert.equal(isRetryableGitHubMutationError(ghError('HTTP 401 Bad credentials', 401)), false);
+  assert.equal(isRetryableGitHubMutationError(ghError('HTTP 403 Resource not accessible by integration', 403)), false);
 });
 
 test('releaseLeaseWithRetry non nasconde un errore permanente', () => {
