@@ -325,6 +325,20 @@ test('derive: un id vero passa e lo slug IT resta agganciato all\'id', () => {
   });
 });
 
+test('derive: un marker di servizio nell\'identita\' blocca la scrittura', () => {
+  const dataWithBadId = { ...articleFixture({}), id: 'abort-topical-relevance-invalid' };
+  const dataWithBadSlug = {
+    ...articleFixture({}),
+    slugs: { it: 'articolo-valido', en: 'abort-topical-relevance-invalid' },
+  };
+  for (const data of [dataWithBadId, dataWithBadSlug]) {
+    assert.throws(
+      () => freshGuard().deriveAndSanitizeArticleSlugs(data),
+      /article-service-marker/,
+    );
+  }
+});
+
 test('derive: il resto del segnaposto vince sul titolo — il modello uno slug lo aveva prodotto', () => {
   const { deriveAndSanitizeArticleSlugs } = freshGuard();
   const data = articleFixture({
