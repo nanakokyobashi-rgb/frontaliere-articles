@@ -3,16 +3,17 @@
  * Read-only observer for the two Pages article publishers.
  *
  * It samples only Italian article pages whose body changed recently on corpus
- * main. A revision stamp is authoritative when present; legacy pages fall
- * back to dateModified versus the registry's updatedAt. The network loop is
- * deliberately sequential and rate-limited because this is a courtesy check,
- * not a crawler.
+ * main. Publication lag is measured with dateModified versus the registry's
+ * updatedAt; image degradation is a separate signal based on og:image versus
+ * the registry image. The network loop is deliberately sequential and
+ * rate-limited because this is a courtesy check, not a crawler.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { declaredImageIsOwn, extractOgImage, isGenericOgImage } from '../lib/article-image-postcondition.mjs';
 
 export const OBSERVER_ISSUE_TITLE = 'Article publication lag (corpus → site)';
 export const DEFAULT_LOOKBACK_DAYS = 7;
@@ -66,7 +67,8 @@ export function parseRegistryRecord(source, articleId) {
   if (!block) return null;
   const updatedAt = block.match(/\bupdatedAt:\s*['"]([^'"]+)['"]/)?.[1] || null;
   const date = block.match(/\bdate:\s*['"]([^'"]*)['"]/)?.[1] || null;
-  return { articleId, updatedAt, date };
+  const image = block.match(/\bimage:\s*['"]([^'"]+)['"]/)?.[1] || null;
+  return { articleId, updatedAt, date, image };
 }
 
 export function parseItalianSlug(source, articleId) {
@@ -90,9 +92,10 @@ export function buildObserverTargets({ changedBodies, registrySources, slugSourc
     targets.push({
       ...change,
       url: `${String(baseUrl).replace(/\/+$/, '')}/${change.section === 'svizzera' ? 'articoli-svizzera' : 'articoli-frontaliere'}/${slug}/`,
-      sourceRevision: `${Math.floor(change.changedAt / 1000)}.${change.commit.slice(0, 12)}`,
+      sourceCommit: change.commit,
       sourceUpdatedAt: registry.updatedAt,
       registryDate: registry.date,
+      registryImage: registry.image,
     });
   }
   return { targets, skipped };
@@ -107,27 +110,16 @@ function parseAttrs(tag) {
 }
 
 export function parsePageObservation(html, status = 200) {
-  let revision = null;
   let modifiedAt = null;
   for (const match of String(html).matchAll(/<meta\b[^>]*\/?\s*>/gi)) {
     const attrs = parseAttrs(match[0]);
     const name = String(attrs.name || '').toLowerCase();
     const property = String(attrs.property || '').toLowerCase();
     const content = String(attrs.content || '');
-    if (name === 'ft:content-rev' && /^[0-9]+\.[0-9a-f]{7,40}$/i.test(content)) revision = content;
     if (name === 'datemodified' || property === 'article:modified_time') modifiedAt ||= content;
   }
   modifiedAt ||= String(html).match(/"dateModified"\s*:\s*"([^"]+)"/)?.[1] || null;
-  return { status, revision, modifiedAt };
-}
-
-function revisionCompare(a, b) {
-  if (!a || !b) return null;
-  const [aEpoch, aSha] = String(a).split('.');
-  const [bEpoch, bSha] = String(b).split('.');
-  if (Number(aEpoch) !== Number(bEpoch)) return Number(aEpoch) < Number(bEpoch) ? -1 : 1;
-  if (aSha === bSha) return 0;
-  return aSha < bSha ? -1 : 1;
+  return { status, modifiedAt, ogImage: extractOgImage(html), rawHtml: String(html) };
 }
 
 function parseDate(value) {
@@ -138,26 +130,29 @@ function parseDate(value) {
 
 export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEFAULT_STALE_MINUTES }) {
   const ageMs = nowMs - target.changedAt;
-  if (ageMs <= staleMinutes * 60 * 1000) return { lagging: false, reason: 'grace window' };
-  if (page.status !== 200) {
-    return { lagging: true, reason: `HTTP ${page.status}` };
+  const degraded = declaredImageIsOwn(target.registryImage) && isGenericOgImage(page.rawHtml || '');
+  const degradationReason = degraded ? `og:image generico mentre il registro dichiara ${target.registryImage}` : null;
+  if (ageMs <= staleMinutes * 60 * 1000) {
+    return { lagging: false, degraded, reason: 'grace window', degradationReason };
   }
-  if (page.revision) {
-    const comparison = revisionCompare(page.revision, target.sourceRevision);
-    if (comparison !== null && comparison < 0) {
-      return { lagging: true, reason: `page revision ${page.revision} < corpus ${target.sourceRevision}` };
-    }
-    return { lagging: false, reason: 'revision current' };
+  if (page.status !== 200) {
+    return { lagging: true, degraded: false, reason: `HTTP ${page.status}` };
   }
 
   const pageDate = parseDate(page.modifiedAt);
   const registryDate = parseDate(target.sourceUpdatedAt);
-  if (pageDate !== null && registryDate !== null) {
-    return pageDate < registryDate
-      ? { lagging: true, reason: `dateModified ${page.modifiedAt} < updatedAt ${target.sourceUpdatedAt}` }
-      : { lagging: false, reason: 'dateModified current' };
-  }
-  return { lagging: true, reason: 'pagina senza timbro e senza dateModified confrontabile' };
+  const lagging = pageDate === null || registryDate === null || pageDate < registryDate;
+  const reason = pageDate === null || registryDate === null
+    ? 'pagina senza dateModified confrontabile'
+    : lagging
+      ? `dateModified ${page.modifiedAt} < updatedAt ${target.sourceUpdatedAt}`
+      : 'dateModified current';
+  return {
+    lagging,
+    degraded,
+    reason,
+    degradationReason,
+  };
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -188,10 +183,11 @@ export async function observePublicationLag({
       if (!response.ok) {
         page = parsePageObservation('', response.status);
       } else {
-        page = parsePageObservation(await response.text(), response.status);
+        const rawHtml = await response.text();
+        page = { ...parsePageObservation(rawHtml, response.status), rawHtml };
       }
     } catch (error) {
-      page = { status: 0, revision: null, modifiedAt: null, error: error?.message || String(error) };
+      page = { status: 0, modifiedAt: null, ogImage: null, rawHtml: '', error: error?.message || String(error) };
     }
     const verdict = classifyPublicationLag({ target, page, nowMs, staleMinutes });
     checked.push({ target, page, ...verdict });
@@ -199,6 +195,7 @@ export async function observePublicationLag({
   return {
     checked,
     lagging: checked.filter((entry) => entry.lagging),
+    degraded: checked.filter((entry) => entry.degraded),
     capped: targets.length > maxPages,
   };
 }
@@ -206,12 +203,15 @@ export async function observePublicationLag({
 export function formatObserverReport(report, { nowMs = Date.now(), skipped = [] } = {}) {
   const lines = [
     `Osservatore pubblicazione articoli — ${new Date(nowMs).toISOString()}`,
-    `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; limite: ${DEFAULT_MAX_PAGES}.`,
+    `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; immagini degradate: ${report.degraded.length}; limite: ${DEFAULT_MAX_PAGES}.`,
   ];
   if (report.capped) lines.push('⚠️ Il limite di 300 pagine ha escluso parte della finestra; il prossimo giro completerà il controllo.');
   for (const item of report.lagging) {
-    const page = item.page.revision || item.page.modifiedAt || `HTTP ${item.page.status}`;
-    lines.push(`- \`${item.target.articleId}\` (${item.target.section}) — corpus ${item.target.sourceRevision}; pagina ${page}; ${item.reason}; ${item.target.url}`);
+    const page = item.page.modifiedAt || `HTTP ${item.page.status}`;
+    lines.push(`- Ritardo \`${item.target.articleId}\` (${item.target.section}) — commit corpus ${item.target.sourceCommit}; pagina ${page}; ${item.reason}; ${item.target.url}`);
+  }
+  for (const item of report.degraded) {
+    lines.push(`- Immagine \`${item.target.articleId}\` (${item.target.section}) — ${item.degradationReason}; ${item.target.url}`);
   }
   for (const item of skipped) lines.push(`- Saltato \`${item.articleId}\` (${item.section}): ${item.reason}.`);
   return lines.join('\n');
@@ -254,7 +254,7 @@ export async function runObserver({ rootDir = ROOT, days = DEFAULT_LOOKBACK_DAYS
   const description = formatObserverReport(report, { nowMs, skipped: prepared.skipped });
 
   const { createGithubIssue, resolveGithubIssue } = await import('../lib/github-issue-creator.mjs');
-  if (report.lagging.length > 0) {
+  if (report.lagging.length > 0 || report.degraded.length > 0) {
     const issue = await createGithubIssue({
       title: OBSERVER_ISSUE_TITLE,
       description,
@@ -278,7 +278,7 @@ if (invokedDirectly) {
   runObserver({ days: parseArgs(process.argv.slice(2)).days })
     .then((result) => {
       console.log(formatObserverReport(result, { skipped: result.skipped }));
-      if (result.lagging.length === 0) console.log('Nessun ritardo oltre la finestra di grazia.');
+      if (result.lagging.length === 0 && result.degraded.length === 0) console.log('Nessun ritardo o degrado oltre la finestra di grazia.');
     })
     .catch((error) => {
       console.error(`[article-publication-observer] fatal: ${error.message || error}`);

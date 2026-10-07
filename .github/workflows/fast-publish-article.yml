@@ -133,7 +133,7 @@ jobs:
       shard: ${{ steps.mode.outputs.shard }}
     steps:
       - name: Checkout (resolve)
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7
         with:
           fetch-depth: 2
           persist-credentials: false
@@ -287,7 +287,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7
         with:
           fetch-depth: 2
           # persist-credentials: false is load-bearing, not hygiene. It stops
@@ -299,7 +299,7 @@ jobs:
 
       - name: Set up Node
         if: needs.resolve.outputs.skip != 'true'
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -363,6 +363,9 @@ jobs:
           ARTICLE_IDS_JSON: ${{ needs.resolve.outputs.ids }}
         run: |
           set -euo pipefail
+          revision="$(git show -s --format=%ct HEAD).$(git rev-parse --short=12 HEAD)"
+          echo "ARTICLE_CONTENT_REVISION=$revision" >> "$GITHUB_ENV"
+          export ARTICLE_CONTENT_REVISION="$revision"
           npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
             --ids "$ARTICLE_IDS_JSON" \
             --section "${{ needs.resolve.outputs.section }}" \
@@ -448,14 +451,18 @@ jobs:
           # by the editorial profile fail even though the registry had resolved.
           # A generic root Organization is still rejected: it is the silent
           # fallback produced when the registry cannot resolve the article.
-          it_article="$(jq -r '.shards[] | select(.locale=="it") | .articlePaths[0]' "$summary")"
-          author_entry="$(grep -o '"author"[[:space:]]*:[[:space:]]*{[^}]*}' "$dist/$it_article" | head -n 1 || true)"
-          if printf '%s' "$author_entry" | grep -Eq '"@type"[[:space:]]*:[[:space:]]*"(Person|Organization)"' \
-            && printf '%s' "$author_entry" | grep -Eq 'https://frontaliereticino\.ch/autori/[^" ]+'; then
-            echo "article carries a named Person or editorial Organization author"
+          if [ "$article_count" -gt 0 ]; then
+            it_article="$(jq -r '.shards[] | select(.locale=="it") | .articlePaths[0]' "$summary")"
+            author_entry="$(grep -o '"author"[[:space:]]*:[[:space:]]*{[^}]*}' "$dist/$it_article" | head -n 1 || true)"
+            if printf '%s' "$author_entry" | grep -Eq '"@type"[[:space:]]*:[[:space:]]*"(Person|Organization)"' \
+              && printf '%s' "$author_entry" | grep -Eq 'https://frontaliereticino\.ch/autori/[^" ]+'; then
+              echo "article carries a named Person or editorial Organization author"
+            else
+              echo "::error::$it_article has no named Person/Organization author in its NewsArticle JSON-LD — the article registry did not resolve"
+              fail=1
+            fi
           else
-            echo "::error::$it_article has no named Person/Organization author in its NewsArticle JSON-LD — the article registry did not resolve"
-            fail=1
+            echo "no article page published: all requested pages were withheld by the image postcondition"
           fi
 
           # Nessuna pagina può uscire con riferimenti /assets/ same-origin (issue #5270).

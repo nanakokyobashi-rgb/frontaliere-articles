@@ -29,8 +29,13 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { sanitizeHtmlDocument } from './sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../../generator/scripts/lib/control-char-write-report.mjs';
+import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
 
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
+const MAX_DECLARED_IMAGE_BYTES = 5 * 1024 * 1024;
+const IMAGE_FETCH_TIMEOUT_MS = 20_000;
+const IMAGE_FETCH_ATTEMPTS = 2;
+const IMAGE_FETCH_CONCURRENCY = 4;
 
 /**
  * @param {object} opts
@@ -39,12 +44,11 @@ export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
  * @param {string} opts.section sezione ATTIVA del core
  * @param {string[]} opts.ids id articolo da rendere (vuoto = nessun articolo, solo archivio ed extra)
  * @param {string} [opts.logPrefix]
- * @param {string} [opts.contentRevision] revisione esplicita del corpus passata al motore
  * @param {(ctx: { distDir: string, entries: any[], hubResult: any }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
- * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[] }>}
+ * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', contentRevision, beforeOffload }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
   // top-level evaluation (an IIFE, not a function call re-read per use), to
   // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
@@ -97,31 +101,24 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // cost. Must be set before the dynamic import below (Node reads TZ once).
   process.env.TZ = 'UTC';
 
-  // ── Step 0: make public/images visible to resolveImagePath's existence
-  // checks (see the "Known gap" note in the file header). Symlink, not copy
-  // — ~3.5k files, no need to duplicate them per invocation. Torn down again
-  // right after step 1 — see the DANGER note above for why its lifetime must
-  // stay confined to the renderArticlePages call only.
-  const scratchImagesLink = path.join(distDir, 'images');
-  try {
-    fs.symlinkSync(path.join(rootDir, 'public', 'images'), scratchImagesLink, 'dir');
-  } catch (err) {
-    if (err.code !== 'EEXIST') throw err;
-  }
+  const declaredImages = await readDeclaredImages(rootDir, section, ids);
+  const imageStage = await prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix });
 
   // ── Step 1: render the 4 locale pages (Deliverables 1+2, #4837 stream A) ──
   const { renderArticlePages } = await import('../../engine/ogPagesPlugin.ts');
   // `ids` vuoto = nessun articolo da rendere (una sezione appena accesa, o un
   // giro che rinfresca solo landing/archivio/hub): `onlyArticleIds: []` non
   // deve mai voler dire «tutta la sezione».
-  const { written, entries } = ids.length
-    ? await renderArticlePages({ rootDir, distDir, section, onlyArticleIds: ids, contentRevision })
-    : { written: 0, entries: [] };
-
-  // Remove the symlink itself (unlink — the final path component IS the
-  // symlink, so this never follows it into public/images). Must happen
-  // before any of steps 2-7, none of which need distDir/images to exist.
-  fs.rmSync(scratchImagesLink, { force: true });
+  let written;
+  let entries;
+  try {
+    ({ written, entries } = ids.length
+      ? await renderArticlePages({ rootDir, distDir, section, onlyArticleIds: ids })
+      : { written: 0, entries: [] });
+  } finally {
+    removeImageView(imageStage.viewDir);
+    fs.rmSync(imageStage.downloadDir, { recursive: true, force: true });
+  }
 
   const renderedIds = new Set(entries.map((entry) => entry.articleId));
   const missingIds = ids.filter((id) => !renderedIds.has(id));
@@ -318,7 +315,143 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
   }
 
-  return { written, entries, hubResult, extraPaths, locales };
+  const htmlByPath = {};
+  for (const entry of entries) {
+    for (const rel of [...Object.values(entry.paths || {}), ...Object.values(entry.flatPaths || {})]) {
+      if (rel && fs.existsSync(path.join(distDir, rel))) htmlByPath[rel] = fs.readFileSync(path.join(distDir, rel), 'utf-8');
+    }
+  }
+  const imagePostcondition = filterEntriesByImagePostcondition({ entries, declaredImages, htmlByPath });
+  if (imagePostcondition.excludedArticles.length > 0) {
+    console.error(
+      `[${logPrefix}] image postcondition excluded ${imagePostcondition.excludedArticles.length} article(s) / ` +
+        `${imagePostcondition.excludedPages} page(s): ${imagePostcondition.firstExcludedArticleIds.join(', ')}`,
+    );
+  }
+
+  return {
+    written,
+    entries: imagePostcondition.entries,
+    hubResult,
+    extraPaths,
+    locales,
+    declaredImages,
+    downloadedImageKeys: imageStage.downloadedImageKeys,
+    imageFetchFailures: imageStage.failures,
+    imagePostcondition,
+  };
+}
+
+function registryPathForSection(rootDir, section) {
+  const filename = section === 'svizzera' || section === 'articolisvizzera'
+    ? 'swiss-articles-data.ts'
+    : section === 'frontaliere' || section === 'articolifrontaliere'
+      ? 'blog-articles-data.ts'
+      : null;
+  return filename ? path.join(rootDir, 'content', filename) : null;
+}
+
+async function readDeclaredImages(rootDir, section, ids) {
+  const sourcePath = registryPathForSection(rootDir, section);
+  if (!sourcePath || !fs.existsSync(sourcePath)) return {};
+  const source = fs.readFileSync(sourcePath, 'utf-8');
+  const { parseArticleRegistryEntries } = await import('../../engine/shared/articleRegistryEntries.ts');
+  const wanted = new Set(ids);
+  return Object.fromEntries(
+    parseArticleRegistryEntries(source)
+      .filter((entry) => wanted.has(entry.id))
+      .map((entry) => [entry.id, entry.image]),
+  );
+}
+
+function removeImageView(viewDir) {
+  if (!viewDir || !fs.existsSync(viewDir)) return;
+  if (fs.lstatSync(viewDir).isSymbolicLink()) fs.unlinkSync(viewDir);
+  else fs.rmSync(viewDir, { recursive: true, force: true });
+}
+
+function mirrorImageFiles(sourceDir, destinationDir) {
+  if (!fs.existsSync(sourceDir)) return;
+  fs.mkdirSync(destinationDir, { recursive: true });
+  for (const item of fs.readdirSync(sourceDir, { withFileTypes: true })) {
+    const source = path.join(sourceDir, item.name);
+    const destination = path.join(destinationDir, item.name);
+    if (item.isDirectory()) mirrorImageFiles(source, destination);
+    else if (item.isFile()) fs.symlinkSync(source, destination);
+  }
+}
+
+function imageDownloadPath(reference) {
+  const rel = imagePathFromReference(reference);
+  return rel ? `/${rel}` : null;
+}
+
+export async function fetchDeclaredImage({ imagePath, destination, logPrefix, fetchImpl = globalThis.fetch }) {
+  const url = new URL(imagePath, `${CDN_BASE}/`);
+  if (url.origin !== new URL(CDN_BASE).origin || url.protocol !== 'https:') throw new Error('origine CDN non autorizzata');
+  let lastError = 'nessuna risposta';
+  for (let attempt = 1; attempt <= IMAGE_FETCH_ATTEMPTS; attempt += 1) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), IMAGE_FETCH_TIMEOUT_MS);
+    try {
+      const response = await fetchImpl(url, { redirect: 'manual', signal: controller.signal });
+      const contentType = String(response.headers?.get?.('content-type') || '').toLowerCase();
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!contentType.startsWith('image/')) throw new Error(`content-type non immagine: ${contentType || 'assente'}`);
+      const contentLength = Number(response.headers?.get?.('content-length') || 0);
+      if (contentLength > MAX_DECLARED_IMAGE_BYTES) throw new Error('immagine oltre 5 MB');
+      const buffer = Buffer.from(await response.arrayBuffer());
+      if (buffer.byteLength > MAX_DECLARED_IMAGE_BYTES) throw new Error('immagine oltre 5 MB');
+      fs.mkdirSync(path.dirname(destination), { recursive: true });
+      fs.writeFileSync(destination, buffer);
+      return;
+    } catch (error) {
+      lastError = error?.name === 'AbortError' ? 'timeout 20s' : error?.message || String(error);
+      if (attempt < IMAGE_FETCH_ATTEMPTS) await new Promise((resolve) => setTimeout(resolve, 100 * attempt));
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw new Error(lastError);
+}
+
+export async function prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix, fetchImpl = globalThis.fetch }) {
+  const viewDir = path.join(distDir, 'images');
+  const downloadDir = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-declared-images-'));
+  const downloadedImageKeys = [];
+  const failures = [];
+  removeImageView(viewDir);
+  mirrorImageFiles(path.join(rootDir, 'public', 'images'), viewDir);
+
+  const missing = [];
+  for (const articleId of ids) {
+    const reference = declaredImages[articleId];
+    const rel = imagePathFromReference(reference);
+    if (!rel || fs.existsSync(path.join(rootDir, 'public', rel))) continue;
+    missing.push({ articleId, rel });
+  }
+
+  let cursor = 0;
+  const worker = async () => {
+    while (cursor < missing.length) {
+      const item = missing[cursor++];
+      const destination = path.join(downloadDir, item.rel);
+      try {
+        await fetchDeclaredImage({ imagePath: imageDownloadPath(item.rel), destination, logPrefix, fetchImpl });
+        const target = path.join(viewDir, item.rel.replace(/^images[\\/]/, ''));
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.copyFileSync(destination, target);
+        downloadedImageKeys.push(item.rel);
+        console.log(`[${logPrefix}] downloaded declared image from CDN: ${item.rel}`);
+      } catch (error) {
+        const failure = { articleId: item.articleId, image: item.rel, reason: error?.message || String(error) };
+        failures.push(failure);
+        console.error(`[${logPrefix}] declared image unavailable (${item.articleId}, ${item.rel}): ${failure.reason}`);
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(IMAGE_FETCH_CONCURRENCY, Math.max(1, missing.length)) }, worker));
+  return { viewDir, downloadDir, downloadedImageKeys, failures };
 }
 
 function imagePathFromReference(reference) {
@@ -349,7 +482,7 @@ function imageReferencesFromHtml(html) {
   return refs;
 }
 
-function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix }) {
+function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys = new Set() }) {
   const heroImgRel = imagePathFromReference(imagePath);
   if (!heroImgRel) return;
   const heroDir = path.dirname(heroImgRel);
@@ -357,19 +490,25 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
   const heroBase = path.basename(heroImgRel, heroExt);
   const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
   const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
-  if (fs.existsSync(path.join(rootDir, heroLocal))) {
-    cdnUploadsByKey.set(path.join(heroDir, `${heroBase}${heroExt}`), {
+  const heroKey = path.join(heroDir, `${heroBase}${heroExt}`);
+  const thumbKey = path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`);
+  if (downloadedImageKeys.has(heroKey)) {
+    console.log(`[${logPrefix}] skipping CDN upload for downloaded image ${heroKey}`);
+  } else if (fs.existsSync(path.join(rootDir, heroLocal))) {
+    cdnUploadsByKey.set(heroKey, {
       local: heroLocal,
-      key: path.join(heroDir, `${heroBase}${heroExt}`),
+      key: heroKey,
     });
   } else {
     console.error(`[${logPrefix}] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
-    missing?.push({ kind: 'hero', local: heroLocal, key: path.join(heroDir, `${heroBase}${heroExt}`) });
+    missing?.push({ kind: 'hero', local: heroLocal, key: heroKey });
   }
-  if (fs.existsSync(path.join(rootDir, thumbLocal))) {
-    cdnUploadsByKey.set(path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`), {
+  if (downloadedImageKeys.has(thumbKey)) {
+    console.log(`[${logPrefix}] skipping CDN upload for downloaded image ${thumbKey}`);
+  } else if (fs.existsSync(path.join(rootDir, thumbLocal))) {
+    cdnUploadsByKey.set(thumbKey, {
       local: thumbLocal,
-      key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`),
+      key: thumbKey,
     });
   } else {
     console.error(`[${logPrefix}] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
@@ -383,16 +522,17 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
  * la landing rende dal registry: un refresh parziale non puo' pubblicare una
  * landing che punta a un asset non confermato.
  */
-export function heroCdnUploads({ rootDir, entries = [], htmlPages = [], missing, logPrefix = 'article-render-pipeline' }) {
+export function heroCdnUploads({ rootDir, entries = [], htmlPages = [], missing, logPrefix = 'article-render-pipeline', downloadedImageKeys = [] }) {
   // Derive every upload from the ACTUAL resolved directory — NOT a hardcoded
   // `images/blog/`. Shared stock heroes live under `images/places/` and use
   // the same thumbnail convention. DEFAULT_IMG (`/og-image.png`) is outside
   // `images/` and is deliberately not listed here.
   const cdnUploadsByKey = new Map();
-  for (const entry of entries) addHeroCdnUpload({ rootDir, imagePath: entry?.img, cdnUploadsByKey, missing, logPrefix });
+  const downloaded = new Set(downloadedImageKeys);
+  for (const entry of entries) addHeroCdnUpload({ rootDir, imagePath: entry?.img, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys: downloaded });
   for (const page of htmlPages) {
     for (const imagePath of imageReferencesFromHtml(page?.html)) {
-      addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix });
+      addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys: downloaded });
     }
   }
   return [...cdnUploadsByKey.values()];

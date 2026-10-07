@@ -208,13 +208,21 @@ async function main() {
       section: args.section,
       ids: args.ids,
       logPrefix: 'publish-article-fast',
-      contentRevision,
     });
   } catch (err) {
     console.error(`[publish-article-fast] ${err.message}`);
     process.exit(1);
   }
-  const { written, entries, hubResult, locales } = pipeline;
+  const {
+    written,
+    entries,
+    hubResult,
+    locales,
+    downloadedImageKeys,
+    imageFetchFailures,
+    imagePostcondition,
+  } = pipeline;
+  const publishedIds = [...new Set(entries.map((entry) => entry.articleId))];
 
   // ── Summary JSON for stream B (shard push) / stream C (workflow) ──
   const sectionShardKey = args.shardKey;
@@ -253,13 +261,21 @@ async function main() {
 
   // Hero e thumbnail di ogni articolo reso, dalla directory REALE in cui
   // l'engine li ha risolti (images/blog o images/places): vedi heroCdnUploads.
-  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, logPrefix: 'publish-article-fast' });
+  const cdnUploads = heroCdnUploads({
+    rootDir: ROOT_DIR,
+    entries,
+    downloadedImageKeys,
+    logPrefix: 'publish-article-fast',
+  });
 
   const summary = {
-    id: args.ids.length === 1 ? args.id : null,
-    ids: args.ids,
+    id: publishedIds.length === 1 ? publishedIds[0] : null,
+    requestedIds: args.ids,
+    ids: publishedIds,
     section: args.section,
     contentRevision,
+    imagePostcondition,
+    imageFetchFailures,
     shards,
     cdnUploads,
   };
@@ -269,7 +285,7 @@ async function main() {
 
   const wallMs = Date.now() - t0;
   console.log(
-    `[publish-article-fast] done — ids=${args.ids.join(',')} section=${args.section} contentRevision=${contentRevision} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
+    `[publish-article-fast] done — requested=${args.ids.join(',')} published=${publishedIds.join(',') || '(none)'} section=${args.section} contentRevision=${contentRevision} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
   );
   console.log(`[publish-article-fast] summary written to ${summaryPath}`);
 }

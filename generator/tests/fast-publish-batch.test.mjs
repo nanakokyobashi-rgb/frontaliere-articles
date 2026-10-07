@@ -49,14 +49,16 @@ test('il dispatch accetta una lista JSON e il workflow la passa al renderer batc
   assert.match(workflow, /ARTICLE_IDS_INPUT: \$\{\{ inputs\.article_ids \}\}/);
   assert.match(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
   assert.match(publisher, /renderSectionArticlePipeline\(\{[\s\S]*?ids: args\.ids,/);
-  assert.match(pipeline, /onlyArticleIds: ids, contentRevision \}\)/);
+  assert.match(pipeline, /onlyArticleIds: ids \}\)/);
 });
 
-test('il publisher passa al renderer la revisione del commit HEAD del corpus', () => {
+test('la revisione del corpus resta nel push e non entra nel motore HTML', () => {
   assert.match(publisher, /function corpusContentRevision\(\)/);
   assert.match(publisher, /const contentRevision = corpusContentRevision\(\);/);
-  assert.match(publisher, /contentRevision,\n\s+\}\);/);
-  assert.match(pipeline, /onlyArticleIds: ids, contentRevision \}/);
+  assert.match(workflow, /ARTICLE_CONTENT_REVISION/);
+  const renderCall = publisher.match(/renderSectionArticlePipeline\(\{[\s\S]*?\}\);/)?.[0] ?? '';
+  assert.doesNotMatch(renderCall, /contentRevision/);
+  assert.doesNotMatch(pipeline, /contentRevision/);
 });
 
 test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary', () => {
@@ -69,6 +71,8 @@ test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary
   assert.match(publisher, /bridgePaths = entries\.map/);
   assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.hubPaths\]/);
   assert.match(publisher, /url: urls\[0\],[\s\S]*urls,/);
+  assert.match(publisher, /imagePostcondition/);
+  assert.match(pipeline, /filterEntriesByImagePostcondition/);
 });
 
 test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il batch', () => {
