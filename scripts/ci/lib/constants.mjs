@@ -159,10 +159,20 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *      segua IMMEDIATAMENTE la label a inizio riga (elenco e backtick ammessi) e
  *      che dopo `Important` ci sia testo sulla stessa riga: la prosa di negazione
  *      di #3330 («zero 🔴 Important findings») non apre con una label e resta
- *      verde. Qui il lookahead e' `[ \t]+\S` e non `\s+\S` come sul sito: grep
- *      e' orientato alla riga, e con `\s` la copia JS vedrebbe come testo la riga
- *      successiva mentre le due copie bash no. Muove il verdetto solo da verde a
- *      ROSSO.
+ *      verde. Tre scostamenti dal sito, tutti verso il ROSSO o verso la parita'
+ *      delle copie:
+ *      - il lookahead e' `[ \t]+[^\n \t\r]` e non `\s+\S`: grep e' orientato
+ *        alla riga, e con `\s` la copia JS vedrebbe come testo la riga
+ *        successiva mentre le due copie bash no; e `\S` non e' la stessa classe
+ *        nei due motori (JS esclude lo spazio non separabile, PCRE senza UCP no),
+ *        quindi «c'e' testo» e' scritto come classe esplicita, identica ovunque;
+ *      - la label puo' stare in un elenco NUMERATO (`1. path:L<n>: 🔴 …`), non
+ *        solo puntato o citato: al massimo tre prefissi, cosi' una riga di soli
+ *        trattini o cifre non costa tentativi quadratici;
+ *      - la label puo' elencare PIU' ancore separate da virgola o punto e
+ *        virgola (`a.mjs:L1, b.mjs:L2: 🔴 …`): un finding su due file non deve
+ *        sparire perche' ne cita due. Fra le ancore non e' ammessa prosa.
+ *      Muove il verdetto solo da verde a ROSSO.
  *
  * Il conteggio dichiarato `## Findings (Important: N)` NON e' un ingresso del gate,
  * di proposito: su 172 review bot reali dei due repo c'e' su 170/172, e soprattutto
@@ -191,7 +201,7 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
  * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /^(?:(?:(?=(?:[^\n`]*`[^\n`]*`)*[^\n`]*`[^\n`]*$)(?:[^\n🟡🟢❓]*|(?:[^\n«]|«[^\n»]*»)*[🟡🟢❓](?:[^\n«]|«[^\n»]*»)*)|(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]|[ \t]*(?:[-*+>][ \t]*)?(?:`[^\n`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?):[ \t]*🔴\s*\*{0,2}\s*Important\s*\*{0,2}(?=[ \t]+\S))/mu;
+export const REDFLAG_IMPORTANT_RE = /^(?:(?:(?=(?:[^\n`]*`[^\n`]*`)*[^\n`]*`[^\n`]*$)(?:[^\n🟡🟢❓]*|(?:[^\n«]|«[^\n»]*»)*[🟡🟢❓](?:[^\n«]|«[^\n»]*»)*)|(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]|[ \t]*(?:(?:[-*+>]|\d+[.)])[ \t]*){0,3}(?:`[^\n`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?)(?:[ \t]*[,;][ \t]*(?:`[^\n`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?))*:[ \t]*🔴\s*\*{0,2}\s*Important\s*\*{0,2}(?=[ \t]+[^\n \t\r]))/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare

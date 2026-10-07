@@ -19,6 +19,7 @@ import {
   MAX_BODY_REREVIEWS_PER_HEAD,
   admissionCli,
   hasOpenCodeImportant,
+  reviewIsApproving,
   shouldAdmitBodyReReview,
 } from '../../scripts/ci/body-rereview-admission.mjs';
 
@@ -143,6 +144,65 @@ test('un 🔴 di CODICE aperto chiude la corsia body-only', () => {
     `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
     '`PR body:L5-6`: 🔴 Important: le due voci non tornano.',
   ].join('\n')), false);
+});
+
+const admitAfterEdit = (body) => shouldAdmitBodyReReview({
+  headSha: HEAD,
+  revision: REVISION,
+  reviews: [[review({ body })]],
+  bodyEditedAt: '2026-09-19T10:05:00Z',
+});
+
+test('un 🔴 di CODICE con ancora di posizione e senza punteggiatura chiude la corsia', () => {
+  // E' la forma che il review gate tiene rossa. Se il parser non la vedesse, un
+  // body edit aprirebbe la corsia `minimal` con un Important di codice aperto,
+  // e una review che lo dimentica lo chiuderebbe per omissione.
+  const mixed = [
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    '`PR body:L5`: 🔴 Important: la voce non dichiara uno stato.',
+    'engine/render.mjs:L42: 🔴 Important il canonical e\' sbagliato.',
+  ].join('\n');
+  assert.equal(hasOpenCodeImportant(mixed), true);
+  assert.equal(admitAfterEdit(mixed), false);
+
+  // Da solo accanto a un `## LGTM`: per il gate e' un no, non un si' sticky; ma
+  // e' lavoro di codice, quindi la corsia body-only resta chiusa lo stesso.
+  const codeOnly = [
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    'engine/render.mjs:L42: 🔴 Important il canonical e\' sbagliato.',
+    '',
+    '## LGTM',
+  ].join('\n');
+  assert.equal(reviewIsApproving(codeOnly), false);
+  assert.equal(hasOpenCodeImportant(codeOnly), true);
+  assert.equal(admitAfterEdit(codeOnly), false);
+});
+
+test('la stessa forma ancorata al SOLO body ammette la review minimal', () => {
+  const bodyOnly = [
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    'PR body:L5: 🔴 Important la voce non dichiara uno stato.',
+    '',
+    '## LGTM',
+  ].join('\n');
+  assert.equal(reviewIsApproving(bodyOnly), false, 'il gate la tiene rossa: non e\' un LGTM sticky');
+  assert.equal(hasOpenCodeImportant(bodyOnly), false);
+  assert.equal(admitAfterEdit(bodyOnly), true);
+});
+
+test('«approvante» e\' la definizione del review gate, nelle due direzioni', () => {
+  // Un marker CITATO dentro un nit non e' un Important per il gate: quel
+  // verdetto e' un si', e un si' resta sticky.
+  const quoted = [
+    'Important: 0',
+    '`x.mjs:L1`: 🟡 Nit: il test pinna `🔴 Important: y` come fixture.',
+    '',
+    '## LGTM',
+  ].join('\n');
+  assert.equal(reviewIsApproving(quoted), true);
+  assert.equal(admitAfterEdit(quoted), false);
+  assert.equal(reviewIsApproving(`${redflag()}\n\n## LGTM`), false);
+  assert.equal(reviewIsApproving(lgtm()), true);
 });
 
 test('il recupero del verdetto precedente non usa una flag che `gh api` non ha', () => {

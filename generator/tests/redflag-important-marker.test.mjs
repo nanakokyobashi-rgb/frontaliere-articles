@@ -26,6 +26,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { REDFLAG_IMPORTANT_RE } from '../../scripts/ci/lib/constants.mjs';
 
@@ -219,6 +220,35 @@ test('il testo del finding ancorato sta sulla STESSA riga: JS e grep giudicano u
   assert.equal(REDFLAG_IMPORTANT_RE.test('scripts/ci/x.mjs:L12: 🔴 Important\nriga successiva'), false);
 });
 
+test('la label ancorata vale anche in un elenco numerato e con piu\' ancore', () => {
+  for (const line of [
+    '1. scripts/ci/x.mjs:L12: 🔴 Important il ramo non chiude',
+    '2) `a.mjs:L1`: 🔴 **Important** guard mancante',
+    '- 3. PR body:L9: 🔴 Important il claim non ha una misura',
+    'a.mjs:L1, b.mjs:L2: 🔴 Important i due lati divergono',
+    '`a.mjs:L1`, `b.mjs:L2-4`: 🔴 Important i due lati divergono',
+    '- a.mjs:L1; PR body:L4: 🔴 Important codice e descrizione non tornano',
+  ]) {
+    assert.equal(REDFLAG_IMPORTANT_RE.test(line), true, line);
+  }
+});
+
+test('fra le ancore della label non passa prosa, e i prefissi di elenco sono limitati', () => {
+  for (const line of [
+    // Prosa fra le ancore o davanti alla label: resta la regola di #3330.
+    'a.mjs:L1, vedi anche sotto: 🔴 Important guard mancante',
+    'In a.mjs:L1, b.mjs:L2: 🔴 Important guard mancante',
+    // Una riga di soli separatori non e' un elenco che porta una label.
+    `${'-'.repeat(60)} 🔴 Important testo`,
+  ]) {
+    assert.equal(REDFLAG_IMPORTANT_RE.test(line), false, line);
+  }
+  // Limite ai prefissi: una riga lunga di trattini e cifre resta lineare.
+  const started = process.hrtime.bigint();
+  assert.equal(REDFLAG_IMPORTANT_RE.test(`${'1.-'.repeat(20000)} 🔴 Important testo`), false);
+  assert.ok(Number(process.hrtime.bigint() - started) / 1e6 < 2000, 'la riga patologica non deve costare secondi');
+});
+
 // --- coerenza col conteggio dichiarato, nelle due direzioni -----------------
 const declared = (body) => {
   const header = body.match(/^#{1,4}\s*Findings\b[^\n]*/m);
@@ -262,3 +292,63 @@ for (const wf of ['pr-redflag-fixer.yml', 'stale-pr-rescuer.yml']) {
     assert.ok(yaml.includes(`grep -cP '${bashPattern}'`), `${wf} non porta il pattern derivato dalla source`);
   });
 }
+
+// --- parita' ESEGUITA fra la copia JS e il pattern bash ----------------------
+// I guard qui sopra provano che i due workflow portano il pattern DERIVATO dalla
+// source; non provano che i due motori lo leggano allo stesso modo. Queste righe
+// passano davvero per `grep -P` (il comando dei workflow, stesso locale) e per
+// la regex JS. Ci sono solo forme la cui parita' vale per costruzione: spazi
+// ASCII, piu' lo spazio non separabile dopo `Important`, che il ramo ancorato
+// tratta con una classe esplicita proprio perche' `\S` non e' la stessa classe
+// nei due motori.
+const NBSP = '\u00A0';
+const PARITY_LINES = [
+  ['🔴 Important: missing canonical', true],
+  ['🔴 **Important —** sibling non spazzato', true],
+  ['- `scripts/ci/transport-identical-twins.mjs:L446`: 🔴 Important: shard non coperto', true],
+  ['Correction: zero 🔴 Important findings (both nits are non-blocking).', false],
+  ['Il test pinna la stringa `🔴 Important: x` come fixture.', false],
+  ['- `constants.mjs:L84`: 🟡 Nit: il pattern `🔴 Important:` va documentato.', false],
+  ['scripts/ci/x.mjs:L12: 🔴 Important il ramo non chiude', true],
+  ['- scripts/ci/x.mjs:L12-14: 🔴 **Important** il ramo non chiude', true],
+  ['PR body:L9: 🔴 Important il claim non ha una misura', true],
+  ['- `a.mjs:L1: 🔴 Important guard mancante', true],
+  ['> generator/scripts/lib/free-translate.mjs:L967: 🔴 Important nel recovery una riga torna uguale', true],
+  ['1. scripts/ci/x.mjs:L12: 🔴 Important il ramo non chiude', true],
+  ['2) `a.mjs:L1`: 🔴 **Important** guard mancante', true],
+  ['a.mjs:L1, b.mjs:L2: 🔴 Important i due lati divergono', true],
+  ['`a.mjs:L1`, `b.mjs:L2-4`: 🔴 Important i due lati divergono', true],
+  ['a.mjs:L1, vedi anche sotto: 🔴 Important guard mancante', false],
+  ['Nessun 🔴 Important trovato in scripts/ci/x.mjs:L12 dopo la correzione.', false],
+  ['scripts/ci/x.mjs:L12: 🔴 Important', false],
+  ['scripts/ci/x.mjs:L12: 🔴 Important   ', false],
+  // Lo spazio non separabile incollato alla severita' non apre il testo...
+  [`scripts/ci/x.mjs:L12: 🔴 Important${NBSP}testo`, false],
+  // ...ma dopo uno spazio vero e' gia' testo, in entrambi i motori.
+  [`scripts/ci/x.mjs:L12: 🔴 Important ${NBSP}testo`, true],
+];
+
+test('le righe di parita\' hanno il verdetto atteso nella copia JS', () => {
+  for (const [line, expected] of PARITY_LINES) {
+    assert.equal(REDFLAG_IMPORTANT_RE.test(line), expected, line);
+  }
+});
+
+const grepEnv = { ...process.env, LC_ALL: 'C.UTF-8' };
+const grepProbe = spawnSync('grep', ['-cP', 'a'], { input: 'a\n', encoding: 'utf8', env: grepEnv });
+const grepPAvailable = grepProbe.status === 0 && String(grepProbe.stdout).trim() === '1';
+
+test('`grep -P` col pattern dei workflow da\' lo stesso verdetto, riga per riga', {
+  // Fuori da Actions (macOS: grep BSD senza -P) il confronto non e' eseguibile;
+  // in Actions deve girare, o l'osservatore sparirebbe in silenzio.
+  skip: !grepPAvailable && !process.env.GITHUB_ACTIONS ? '`grep -P` non disponibile su questa macchina' : false,
+}, () => {
+  assert.ok(grepPAvailable, 'in Actions `grep -P` deve esistere: e\' il comando dei due workflow');
+  const input = `${PARITY_LINES.map(([line]) => line).join('\n')}\n`;
+  const result = spawnSync('grep', ['-nP', bashPattern], { input, encoding: 'utf8', env: grepEnv });
+  assert.ok(result.status === 0 || result.status === 1, `grep -P non ha compilato il pattern: ${result.stderr}`);
+  const matched = new Set(String(result.stdout).split('\n').filter(Boolean).map((row) => Number(row.split(':', 1)[0])));
+  PARITY_LINES.forEach(([line, expected], index) => {
+    assert.equal(matched.has(index + 1), expected, `grep -P: ${line}`);
+  });
+});
