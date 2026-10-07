@@ -15,6 +15,7 @@ import {
   findReferenceVacuousFacts,
   findVacuousFacts,
   factValueOf,
+  findOrphanedKeyFactsList,
   matchesVacuousValue,
   parseAiSearchSections,
   stripVacuousFacts,
@@ -24,7 +25,6 @@ import {
   MAX_KEY_FACTS,
   buildAiSearchMarkdown,
   buildBackfillPrompt,
-  findOrphanedKeyFactsList,
   getKeyFactsHeading,
   validateBackfillPayload,
 } from '../scripts/lib/ai-search-template.mjs';
