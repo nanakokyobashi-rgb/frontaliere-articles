@@ -503,6 +503,8 @@ test('i producer trattano i lock come stato locale del runner', () => {
   const gitignore = fs.readFileSync(new URL('../../.gitignore', import.meta.url), 'utf-8');
   assert.match(gitignore, /^generator\/data\/register-in-progress\*\.json$/m,
     'il glob deve coprire il marker legacy e quelli section-scoped');
+  assert.match(gitignore, /^generator\/data\/register-in-progress\*\.json\.\*\.tmp$/m,
+    'il glob deve coprire anche i temporanei writeJsonAtomic dei lock');
   for (const workflow of [
     '../../.github/workflows/generate-daily-brief.yml',
     '../../.github/workflows/refresh-events-digest.yml',

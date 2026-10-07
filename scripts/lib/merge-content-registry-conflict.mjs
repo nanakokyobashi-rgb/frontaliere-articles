@@ -31,13 +31,19 @@
  * path della famiglia SVIZZERA.
  *
  * La terza opzione e' questa: unire gli id di ENTRAMBI i lati.
- *   · un id presente da un solo lato   → si tiene, sempre;
+ *   · un id presente da un solo lato   → si tiene, sempre, salvo che il ledger
+ *                                        canonico lo dichiari RITIRATO;
  *   · un id presente da entrambi       → vince il commit REBASATO (l'articolo
  *                                        appena generato), perche' per
  *                                        costruzione upstream non dovrebbe
  *                                        avere quello slug: se ce l'ha, la
  *                                        versione appena scritta e' quella
  *                                        completa.
+ *
+ * Un ritiro e' l'unica cancellazione legittima in questi registri append-only.
+ * Il ledger `data/retired-articles.json` e' quindi una tombstone, non una
+ * nota storica: durante un rebase una generazione partita prima del ritiro puo'
+ * riportare l'id nel suo lato, ma il resolver non deve riesumarlo.
  *
  * Nota sui lati, ed e' la cosa piu' facile da invertire: in un rebase HEAD e'
  * il ramo su cui si RIGIOCA, quindi il lato in alto (`<<<<<<<`) e' UPSTREAM e
@@ -485,7 +491,7 @@ function anchorOf(src, openOffset) {
  *          null = il documento non si analizza, o due contenitori condividono
  *          l'ancora (nel dubbio non si tocca niente).
  */
-export function recordContainers(src) {
+export function recordContainers(src, { emptyAnchors = new Set() } = {}) {
   let root;
   try {
     ({ root } = analyze(src));
@@ -498,7 +504,14 @@ export function recordContainers(src) {
     const anchor = anchorOf(src, c.open);
     if (!anchor) continue;
     const records = splitRecords(src.slice(c.open + 1, c.close));
-    if (!records || records.length === 0) continue;
+    if (!records) continue;
+    // Un contenitore vuoto non e' per se' un registro editoriale: potrebbe
+    // essere una configurazione vuota, e trattarlo come record cambierebbe il
+    // comportamento del resolver su strutture non fondibili. L'unica
+    // eccezione è un'ancora che il filtro tombstone ha appena svuotato; il
+    // chiamante la passa esplicitamente per permettere il merge con un record
+    // vivo sull'altro lato.
+    if (records.length === 0 && !emptyAnchors.has(anchor)) continue;
     if (found.has(anchor)) return null;
     found.set(anchor, { open: c.open, close: c.close, records });
   }
@@ -510,15 +523,158 @@ export function recordContainers(src) {
  * in `blogArticleIds.ts`. Qui il record e' il singolo literal, e tenere
  * entrambi i lati darebbe due dichiarazioni con lo stesso nome.
  */
-const TYPE_UNION = /\btype\s+([A-Za-z_$][\w$]*)\s*=\s*((?:'[^']*'\s*\|\s*)*'[^']*')\s*;/g;
+const TYPE_UNION = /\btype\s+([A-Za-z_$][\w$]*)\s*=\s*((?:'[^']*'\s*\|\s*)*'[^']*'|never)\s*;/g;
 
 function typeUnions(src) {
   const found = new Map();
   for (const m of src.matchAll(TYPE_UNION)) {
-    const literals = [...m[2].matchAll(/'([^']*)'/g)].map((x) => x[1]);
+    const literals = m[2].trim() === 'never'
+      ? []
+      : [...m[2].matchAll(/'([^']*)'/g)].map((x) => x[1]);
     found.set(m[1], { start: m.index + m[0].indexOf(m[2]), end: m.index + m[0].indexOf(m[2]) + m[2].length, literals });
   }
   return found;
+}
+
+/**
+ * Riconosce l'id canonico dietro alle chiavi delle diverse superfici.
+ *
+ * I registri slug e gli array usano l'id nudo; i file meta e SEO lo
+ * incapsulano rispettivamente in `blog.article.<id>.<campo>` e
+ * `blog-<id>`. Restituire l'id invece di un booleano rende il filtro
+ * verificabile e impedisce che una chiave piu' lunga venga scambiata per un
+ * altra (gli id del corpus possono essere prefissi l'uno dell'altro).
+ */
+function retiredIdForKey(key, retiredIds) {
+  if (retiredIds.has(key)) return key;
+  const metaPrefix = 'blog.article.';
+  if (key.startsWith(metaPrefix)) {
+    const id = key.slice(metaPrefix.length).split('.')[0];
+    if (retiredIds.has(id)) return id;
+  }
+  const seoPrefix = 'blog-';
+  if (key.startsWith(seoPrefix)) {
+    const id = key.slice(seoPrefix.length);
+    if (retiredIds.has(id)) return id;
+  }
+  return null;
+}
+
+/**
+ * Applica le tombstone del ledger prima del merge.
+ *
+ * Il backstop richiede che nessun record presente su un lato vada perso. La
+ * rimozione deve quindi avvenire PRIMA di `mergeDocuments`, su entrambi i lati:
+ * per il backstop un id ritirato non e' piu' un record atteso, mentre ogni id
+ * ancora attivo conserva la garanzia «non perso».
+ *
+ * @param {string} src
+ * @param {Set<string>} retiredIds
+ * @returns {string}
+ */
+export function pruneRetiredRecords(src, retiredIds) {
+  if (!retiredIds || retiredIds.size === 0) return src;
+
+  const containers = recordContainers(src);
+  if (containers === null) throw new Error('il documento non si decompone in record');
+  /** @type {Array<{start: number, end: number, text: string}>} */
+  const edits = [];
+  const seen = new Set();
+
+  for (const container of containers.values()) {
+    let offset = container.open + 1;
+    for (const record of container.records) {
+      const retiredId = retiredIdForKey(record.key, retiredIds);
+      if (retiredId) {
+        const key = `${offset}:${offset + record.text.length}`;
+        if (!seen.has(key)) {
+          edits.push({ start: offset, end: offset + record.text.length, text: '' });
+          seen.add(key);
+        }
+      }
+      offset += record.text.length;
+    }
+  }
+
+  for (const union of typeUnions(src).values()) {
+    const remaining = union.literals.filter((literal) => !retiredIdForKey(literal, retiredIds));
+    if (remaining.length === union.literals.length) continue;
+    edits.push({
+      start: union.start,
+      end: union.end,
+      // `never` e' una union vuota valida: lascia l'ancora per il merge con
+      // l'altro lato. Se entrambi i lati sono vuoti, mergeDocuments rifiuta il
+      // risultato invece di produrre una dichiarazione di id senza membri.
+      text: remaining.length === 0 ? 'never' : remaining.map((literal) => `'${literal}'`).join(' | '),
+    });
+  }
+
+  edits.sort((a, b) => b.start - a.start);
+  for (let i = 1; i < edits.length; i++) {
+    if (edits[i - 1].start < edits[i].end) {
+      throw new Error('superfici ritirate sovrapposte nel documento');
+    }
+  }
+  let out = src;
+  for (const edit of edits) out = out.slice(0, edit.start) + edit.text + out.slice(edit.end);
+  return out;
+}
+
+function retiredContainerAnchors(src, retiredIds) {
+  const containers = recordContainers(src);
+  if (containers === null) throw new Error('il documento non si decompone in record');
+  const anchors = new Set();
+  for (const [anchor, container] of containers) {
+    if (container.records.some((record) => retiredIdForKey(record.key, retiredIds))) {
+      anchors.add(anchor);
+    }
+  }
+  return anchors;
+}
+
+/** Legge le tombstone del repository corrente; un ledger invalido e' fatale. */
+export function readRetiredIds(root = process.cwd()) {
+  const file = path.join(root, 'data/retired-articles.json');
+  if (!existsSync(file)) return new Set();
+  const parsed = JSON.parse(readFileSync(file, 'utf8'));
+  if (!Array.isArray(parsed.retired)) {
+    throw new Error(`${file}: "retired" deve essere un array`);
+  }
+  const ids = new Set();
+  for (const [index, entry] of parsed.retired.entries()) {
+    const label = `${file}: retired[${index}]`;
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+      throw new Error(`${label} deve essere un oggetto completo`);
+    }
+    for (const field of ['id', 'section', 'winnerId', 'winnerSection', 'retiredOn']) {
+      if (typeof entry[field] !== 'string' || entry[field].trim() === '') {
+        throw new Error(`${label}.${field} deve essere una stringa non vuota`);
+      }
+    }
+    if (!isValidIsoDate(entry.retiredOn)) {
+      throw new Error(`${label}.retiredOn deve essere una data YYYY-MM-DD valida`);
+    }
+    if (!Array.isArray(entry.duplicateOf) || entry.duplicateOf.some((url) => typeof url !== 'string' || url.trim() === '')) {
+      throw new Error(`${label}.duplicateOf deve essere un array di stringhe`);
+    }
+    if (!entry.slugs || typeof entry.slugs !== 'object' || Array.isArray(entry.slugs)) {
+      throw new Error(`${label}.slugs deve essere un oggetto`);
+    }
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      if (typeof entry.slugs[locale] !== 'string' || entry.slugs[locale].trim() === '') {
+        throw new Error(`${label}.slugs.${locale} deve essere una stringa non vuota`);
+      }
+    }
+    if (ids.has(entry.id)) throw new Error(`${file}: id ritirato duplicato '${entry.id}'`);
+    ids.add(entry.id);
+  }
+  return ids;
+}
+
+function isValidIsoDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
 /** Unione ordinata di due liste di record. Il commit rigiocato vince sui pari. */
@@ -558,9 +714,9 @@ export function recordKeys(src) {
  * @returns {{ ok: true, text: string, spans: Array<[number, number]> }
  *          |{ ok: false, reason: string }}
  */
-export function mergeDocuments(ours, theirs) {
-  const A = recordContainers(ours);
-  const B = recordContainers(theirs);
+export function mergeDocuments(ours, theirs, { emptyAnchors = new Set() } = {}) {
+  const A = recordContainers(ours, { emptyAnchors });
+  const B = recordContainers(theirs, { emptyAnchors });
   if (A === null) return { ok: false, reason: 'la versione upstream non si decompone in record' };
   if (B === null) return { ok: false, reason: 'la versione del commit rigiocato non si decompone in record' };
 
@@ -590,6 +746,9 @@ export function mergeDocuments(ours, theirs) {
     const seen = new Set(mine.literals);
     const united = [...mine.literals];
     for (const l of other.literals) if (!seen.has(l)) { seen.add(l); united.push(l); }
+    if (united.length === 0) {
+      return { ok: false, reason: `la union '${name}' resterebbe vuota dopo il filtro dei ritiri` };
+    }
     edits.push({ start: mine.start, end: mine.end, text: united.map((l) => `'${l}'`).join(' | ') });
     oursRegions.push([mine.start, mine.end]);
     theirsRegions.push([other.start, other.end]);
@@ -676,7 +835,7 @@ function assemble(segments, pick) {
  * @returns {{ ok: true, merged: string, ours: string, theirs: string, hunks: number }
  *          |{ ok: false, reason: string }}
  */
-export function mergeSource(src) {
+export function mergeSource(src, { retiredIds = new Set() } = {}) {
   let read;
   try {
     read = readHunks(src);
@@ -685,9 +844,22 @@ export function mergeSource(src) {
   }
   if (read.hunks === 0) return { ok: false, reason: 'nessun marker di conflitto nel file' };
 
-  const ours = assemble(read.segments, (s) => s.ours);
-  const theirs = assemble(read.segments, (s) => s.theirs);
-  const merged = mergeDocuments(ours, theirs);
+  const rawOurs = assemble(read.segments, (s) => s.ours);
+  const rawTheirs = assemble(read.segments, (s) => s.theirs);
+  let ours;
+  let theirs;
+  let emptyAnchors;
+  try {
+    emptyAnchors = new Set([
+      ...retiredContainerAnchors(rawOurs, retiredIds),
+      ...retiredContainerAnchors(rawTheirs, retiredIds),
+    ]);
+    ours = pruneRetiredRecords(rawOurs, retiredIds);
+    theirs = pruneRetiredRecords(rawTheirs, retiredIds);
+  } catch (error) {
+    return { ok: false, reason: `filtro dei ritiri impossibile: ${error.message}` };
+  }
+  const merged = mergeDocuments(ours, theirs, { emptyAnchors });
   if (!merged.ok) return merged;
 
   // Fuori dai contenitori fusi i due lati devono essere IDENTICI.
@@ -827,9 +999,9 @@ export function tsxParseProbe(file, contents) {
 
 // ── CLI ─────────────────────────────────────────────────────────────────────
 
-function resolveFile(file) {
+function resolveFile(file, retiredIds) {
   const src = readFileSync(file, 'utf8');
-  const result = mergeSource(src);
+  const result = mergeSource(src, { retiredIds });
   if (!result.ok) {
     console.error(`::warning::${file}: merge per-record impossibile — ${result.reason}`);
     return false;
@@ -881,12 +1053,19 @@ function main(argv) {
     console.error('uso: merge-content-registry-conflict.mjs [--check] <file>...');
     return 2;
   }
+  let retiredIds;
+  try {
+    retiredIds = readRetiredIds();
+  } catch (error) {
+    console.error(`::warning::ledger dei ritiri illeggibile — ${error.message}`);
+    return 1;
+  }
   // Nessun file viene scritto finche' non ha superato TUTTO: `resolveFile`
   // scrive solo in fondo, quindi un abort a meta' lista lascia i file rimanenti
   // ancora conflittati e il chiamante abortisce il rebase comunque.
   let ok = true;
   for (const f of files) {
-    if (!(check ? checkFile(f) : resolveFile(f))) ok = false;
+    if (!(check ? checkFile(f) : resolveFile(f, retiredIds))) ok = false;
   }
   return ok ? 0 : 1;
 }

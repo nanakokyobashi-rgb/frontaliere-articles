@@ -1481,8 +1481,8 @@ jobs:
                 # A process that writes a body and then fails has produced only
                 # a partial transaction. Do not let the body probe turn that
                 # failure into `produced=true`: the commit step uses this
-                # output, and git add -A would otherwise publish the partial
-                # files together with any marker or later fallback output.
+                # output, and a broad git add -A would otherwise publish the
+                # partial files together with later fallback output.
                 partial_failure=true
                 all_declared=false
                 [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha scritto un corpo sulla sezione $sec ma e' terminato con exit $rc: output parziale non pubblicabile"
