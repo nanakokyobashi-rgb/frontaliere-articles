@@ -201,8 +201,8 @@ export const CORE_REPLACEMENTS = [
   {
     id: 'generate: gruppo di concurrency del chiamante',
     count: 1,
-    find: '    concurrency:\n      group: generate-article\n      cancel-in-progress: false\n',
-    replace: '    concurrency:\n      group: ${{ inputs.concurrency_group }}\n      cancel-in-progress: false\n',
+    find: "      group: ${{ needs.admit.outputs.content_push == 'true' && 'generate-article-content' || 'generate-article-dry' }}\n",
+    replace: "      group: ${{ needs.admit.outputs.content_push == 'true' && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}\n",
   },
   {
     id: 'mode: sezione e gemella arrivano per env',

@@ -836,6 +836,7 @@ test('un push su content/** non viene scartato se il producer è ancora in volo'
     admit.slice(compareFailureAt).includes('content_push=true'),
     'un push non classificabile deve essere ammesso come successore per non perdere la catena',
   );
+  assert.match(WF, /content_push: \$\{\{ steps\.check\.outputs\.content_push \}\}/);
   assert.match(admit, /content_push=true/);
   const olderAt = admit.indexOf('if [ "$older" -gt 0 ]; then');
   const allowAt = admit.indexOf('if [ "$content_push" = "true" ]; then', olderAt);
@@ -845,8 +846,8 @@ test('un push su content/** non viene scartato se il producer è ancora in volo'
   assert.ok(skipAt > allowAt, 'lo skip resta per schedule/dispatch ma non può precedere l eccezione content push');
   assert.match(
     WF,
-    /concurrency:\n      group: generate-article\n      cancel-in-progress: false/,
-    'la sicurezza contro la sovrapposizione resta nel job generate',
+    /concurrency:\n(?:      #.*\n)*      group: \$\{\{ needs\.admit\.outputs\.content_push == 'true' && 'generate-article-content' \|\| 'generate-article-dry' \}\}\n      cancel-in-progress: false/,
+    'successori content e self-test dry hanno gruppi distinti, entrambi non cancellabili',
   );
 });
 

@@ -335,6 +335,7 @@ jobs:
     outputs:
       proceed: ${{ steps.check.outputs.proceed }}
       chain_link: ${{ steps.check.outputs.chain_link }}
+      content_push: ${{ steps.check.outputs.content_push }}
     steps:
       - name: Skip when a generation is already in flight
         id: check
@@ -353,6 +354,12 @@ jobs:
           CALLER_WORKFLOW: generate-article.yml
         run: |
           set -uo pipefail
+          # L'output alimenta il gruppo di concurrency del job generate. Il
+          # trap copre anche tutti gli exit anticipati (manuale, fail-open,
+          # self-test eletto), così un content push non può ricadere nel gruppo
+          # dei dry-run per un output mancante.
+          content_push=false
+          trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"' EXIT
 
           # ── UN DISPATCH ORA PUO' ESSERE DUE COSE DIVERSE (2026-08-18) ───────
           #
@@ -421,7 +428,6 @@ jobs:
           # producer run has reached its final step), so remember this trigger
           # for the in-flight decision below. The generate job's own
           # concurrency group serializes it safely behind the producer.
-          content_push=false
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             compare_status=0
             changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
@@ -646,7 +652,10 @@ jobs:
     # run can leave the corpus half-written. Resta come RETE dietro `admit` —
     # vedi l'intestazione sopra per perché non è più il primo strato.
     concurrency:
-      group: generate-article
+      # GitHub conserva un solo pending per gruppo: il successore content deve
+      # stare separato dai self-test dry, altrimenti un push di workflow può
+      # sostituirlo mentre aspetta il producer.
+      group: ${{ needs.admit.outputs.content_push == 'true' && 'generate-article-content' || 'generate-article-dry' }}
       cancel-in-progress: false
     steps:
       - name: Checkout

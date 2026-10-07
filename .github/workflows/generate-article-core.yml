@@ -88,6 +88,7 @@ jobs:
     outputs:
       proceed: ${{ steps.check.outputs.proceed }}
       chain_link: ${{ steps.check.outputs.chain_link }}
+      content_push: ${{ steps.check.outputs.content_push }}
     steps:
       - name: Skip when a generation is already in flight
         id: check
@@ -104,6 +105,8 @@ jobs:
           CALLER_WORKFLOW: ${{ inputs.caller_workflow }}
         run: |
           set -uo pipefail
+          content_push=false
+          trap 'echo "content_push=$content_push" >> "$GITHUB_OUTPUT"' EXIT
 
           chain_depth=0
           case "${CHAIN_DEPTH:-0}" in
@@ -122,7 +125,6 @@ jobs:
             exit 0
           fi
 
-          content_push=false
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             compare_status=0
             changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
@@ -331,7 +333,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
-      group: ${{ inputs.concurrency_group }}
+      group: ${{ needs.admit.outputs.content_push == 'true' && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}
       cancel-in-progress: false
     steps:
       - name: Checkout
