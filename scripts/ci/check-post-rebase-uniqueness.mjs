@@ -33,7 +33,7 @@
  *      detector multi-segnale di `create-article.mjs`, non una copia delle sue
  *      soglie.
  *
- * Entrambe reggono solo in modo seriale. Con piu' scrittori paralleli (le
+ * Tutte reggono solo in modo seriale. Con piu' scrittori paralleli (le
  * sezioni cantonali, una concurrency per sezione) due run partono dalla stessa
  * base, e il rebase li fonde senza sapere niente di ne' l'uno ne' l'altro:
  * `--merge-registry` unisce due record con lo stesso id se stanno in registri
@@ -206,7 +206,7 @@ const idsOf = (snap) => new Set([...(snap?.slugIds ?? []), ...(snap?.registryIds
  * Le violazioni di unicita' introdotte dal commit prodotto, viste sullo stato post-rebase.
  *
  * @param {{producedBase: object, produced: object, against: object}} snapshots
- *        mappe sezione → {slugIds, registryIds, ledger} da `snapshotSections`.
+ *        mappe sezione → {slugIds, registryIds, articles, ledger} da `snapshotSections`.
  * @returns {{violations: Array<object>, newIds: Array<{section: string, id: string}>, newSourceUrls: Array<{section: string, url: string, articleId: string}>, contentChecks: number}}
  */
 export function findPostRebaseViolations({ producedBase, produced, against }) {
