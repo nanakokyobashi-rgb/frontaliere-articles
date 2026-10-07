@@ -23,7 +23,7 @@
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -508,11 +508,20 @@ test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale es
 test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-api (indice runtime, pavimenti dei feed)', () => {
   // Nuova = senza registro. Al primo articolo tornano le regole di tutte le altre.
   const root = mkdtempSync(path.join(tmpdir(), 'new-family-'));
-  assert.equal(isNewFamilySection(root, 'canton-ti'), true);
-  assert.equal(isNewFamilySection(root, 'svizzera'), false, 'una sezione storica senza registro non e\' «nuova»: e\' un corpus sparito');
-  mkdirSync(path.join(root, 'content/cantons/canton-ti'), { recursive: true });
-  writeFileSync(path.join(root, 'content/cantons/canton-ti/registry.ts'), "export const CANTON_ARTICLES = [\n  {\n    id: 'a',\n  },\n];\n");
-  assert.equal(isNewFamilySection(root, 'canton-ti'), false);
+  try {
+    assert.equal(isNewFamilySection(root, 'canton-ti'), true);
+    assert.equal(isNewFamilySection(root, 'svizzera'), false, 'una sezione storica senza registro non e\' «nuova»: e\' un corpus sparito');
+    const source = sectionSourceSurfaces('canton-ti');
+    const registry = path.join(root, source.registryFile);
+    const slugs = path.join(root, source.slugFile);
+    mkdirSync(path.dirname(registry), { recursive: true });
+    writeFileSync(registry, "export const CANTON_ARTICLES = [\n  {\n    id: 'a',\n  },\n];\n");
+    assert.throws(() => isNewFamilySection(root, 'canton-ti'), /canton-ti: registry\/slugs incompleti/);
+    writeFileSync(slugs, 'export const CANTON_SLUGS = {};\n');
+    assert.equal(isNewFamilySection(root, 'canton-ti'), false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
   // build-blog-index: l'indice di una sezione senza articoli non ha un «piu' recente» da stampare.
   const index = readFileSync(path.join(ROOT, 'scripts/build-blog-index.mjs'), 'utf8');
   assert.doesNotMatch(index, /capped\[0\]\.date/);
@@ -529,6 +538,30 @@ test('una sezione di famiglia accesa e VUOTA attraversa tutti i gate di publish-
       .filter((line) => /feed|RSS/.test(line)),
     [],
   );
+});
+
+test('una coppia registry/slugs cantonale parziale fallisce prima di essere saltata come sezione nuova', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'partial-family-'));
+  try {
+    const source = sectionSourceSurfaces('canton-ti');
+    const registry = path.join(root, source.registryFile);
+    const slugs = path.join(root, source.slugFile);
+    mkdirSync(path.dirname(registry), { recursive: true });
+    writeFileSync(registry, 'export const CANTON_ARTICLES = [];\n');
+    assert.throws(
+      () => isNewFamilySection(root, 'canton-ti'),
+      /canton-ti: registry\/slugs incompleti/,
+    );
+
+    unlinkSync(registry);
+    writeFileSync(slugs, 'export const CANTON_SLUGS = {};\n');
+    assert.throws(
+      () => isNewFamilySection(root, 'canton-ti'),
+      /canton-ti: registry\/slugs incompleti/,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('tutte le superfici di famiglia seguono una sola decisione live effettiva', () => {
