@@ -38,3 +38,14 @@ test('Cantello registry, SEO metadata and public asset use the dedicated cover',
   assert.ok(metadata.includes('${BASE_URL}' + COVER));
   assert.ok(fs.existsSync(path.join(ROOT, `public${COVER}`)), 'Cantello cover blob is missing');
 });
+
+test('Locate Varesino remains paired across typed and runtime id registries', () => {
+  const articleId = 'caduta-scala-locate-varesino';
+  const typedIds = fs.readFileSync(path.join(ROOT, 'content/blogArticleIds.ts'), 'utf8');
+  const runtimeIds = fs.readFileSync(path.join(ROOT, 'content/routerBlogData.ts'), 'utf8');
+  const runtimeList = runtimeIds.match(/export const ALL_BLOG_ARTICLE_IDS[^=]*=\s*\[([\s\S]*?)\];/)?.[1];
+
+  assert.equal(typedIds.match(new RegExp(articleId, 'g'))?.length, 2);
+  assert.ok(runtimeList, 'ALL_BLOG_ARTICLE_IDS is missing');
+  assert.match(runtimeList, new RegExp(`'${articleId}'`));
+});
