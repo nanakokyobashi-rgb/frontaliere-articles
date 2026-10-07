@@ -137,7 +137,6 @@ test('callLLM non apre il broker per una chiamata default senza opt-in', async (
   try {
     assert.equal(
       await callLLM(messages, {
-        model: AI_MODELS.GEMINI_FLASH,
         maxRetriesPerModel: 1,
       }),
       'DEFAULT FALLBACK',
@@ -218,6 +217,56 @@ test('chiede il segnale di avvio e toglie i byte di controllo prima della rispos
   assert.equal(requests[0].notifyStart, true);
   // callLLM non usa mai i tool dell'agente: il broker risponde col profilo function.
   assert.equal(requests[0].profile, 'function');
+});
+
+test('la traduzione batch puo\' riparare JSON fenced senza disattivare la guardia di default', async () => {
+  const fenced = '```json\n{"items":[]}\n```';
+  behavior = (client) => {
+    client.write('\x01');
+    client.end(`${JSON.stringify({ ok: true, result: fenced })}\n`);
+  };
+
+  await assert.rejects(
+    () => callCodex({ jsonMode: true }),
+    /invalid JSON for a JSON-mode request/,
+  );
+
+  resetState();
+  assert.equal(
+    await callCodex({ jsonMode: true, deferJsonValidation: true }),
+    fenced,
+  );
+  assert.equal(requests.length, 2);
+});
+
+test('solo una chiamata di traduzione con opt-in ritenta una chiusura di trasporto', async () => {
+  let attempt = 0;
+  let physicalRetryReservations = 0;
+  const deadlineMs = Date.now() + 60_000;
+  let callbackDeadlineMs;
+  behavior = (client) => {
+    attempt += 1;
+    if (attempt === 1) {
+      client.end();
+      return;
+    }
+    client.write('\x01');
+    client.end(`${JSON.stringify({ ok: true, result: 'PONG-RETRY' })}\n`);
+  };
+  assert.equal(await callCodex({
+    deadlineMs,
+    retryCodexTransport: true,
+    codexTransportRetries: 1,
+    codexTransportBackoffMs: 1,
+    onCodexTransportRetry: (retryDeadlineMs) => {
+      callbackDeadlineMs = retryDeadlineMs;
+      physicalRetryReservations += 1;
+      return true;
+    },
+  }), 'PONG-RETRY');
+  assert.equal(requests.length, 2, 'il retry deve restare confinato all\'opt-in della traduzione');
+  assert.equal(physicalRetryReservations, 1, 'il ledger hook deve precedere il retry fisico');
+  assert.equal(callbackDeadlineMs, deadlineMs, 'il ledger hook deve ricevere la deadline della chiamata');
 });
 
 test('una richiesta mai partita scade come attesa in coda, senza toccare lo score', async () => {
