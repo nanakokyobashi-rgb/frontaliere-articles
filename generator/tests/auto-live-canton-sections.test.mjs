@@ -60,7 +60,7 @@ function mockCdnFetch(pages, { badPath = null, wrongRouteOwner = false } = {}) {
   };
 }
 
-function fixtureRoot({ status = 'draft', invalidHub = null, extraMetaCount = 0, malformedSlugs = false } = {}) {
+function fixtureRoot({ status = 'draft', invalidHub = null, extraMetaCount = 0, extraSlugCount = 0, malformedSlugs = false } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-auto-live-'));
   fs.mkdirSync(path.join(root, 'sections'), { recursive: true });
   fs.mkdirSync(path.join(root, 'content/cantons/canton-lu'), { recursive: true });
@@ -75,6 +75,11 @@ function fixtureRoot({ status = 'draft', invalidHub = null, extraMetaCount = 0, 
   fs.writeFileSync(path.join(root, 'content/cantons/canton-lu/slugs.ts'), `const CANTON_SLUGS = {
   'auto-live-fixture': { it: 'auto-live-fixture-it', en: 'auto-live-fixture-en', de: 'auto-live-fixture-de', fr: 'auto-live-fixture-fr' },
 };\n`);
+  if (extraSlugCount > 0) {
+    const extra = Array.from({ length: extraSlugCount }, (_, index) =>
+      `  'auto-live-slug-only-${index}': { it: 'auto-live-slug-only-${index}-it', en: 'auto-live-slug-only-${index}-en', de: 'auto-live-slug-only-${index}-de', fr: 'auto-live-slug-only-${index}-fr' },\n`).join('');
+    fs.writeFileSync(path.join(root, 'content/cantons/canton-lu/slugs.ts'), `const CANTON_SLUGS = {\n  'auto-live-fixture': { it: 'auto-live-fixture-it', en: 'auto-live-fixture-en', de: 'auto-live-fixture-de', fr: 'auto-live-fixture-fr' },\n${extra}};\n`);
+  }
   if (extraMetaCount > 0) {
     fs.mkdirSync(path.join(root, 'content'), { recursive: true });
     const extra = Array.from({ length: extraMetaCount }, (_, index) =>
@@ -108,7 +113,7 @@ test('il piano conta le superfici canoniche per tutte le locali e l articolo pro
 });
 
 test('il piano include tutte le pagine archivio paginate del renderer', () => {
-  const root = fixtureRoot({ extraMetaCount: 100 });
+  const root = fixtureRoot({ extraMetaCount: 99, extraSlugCount: 2 });
   const pages = expectedSectionPages('canton-lu', { root });
   assert.equal(pages.length, 40);
   assert.equal(pages.filter((page) => page.kind === 'archive').length, 8);

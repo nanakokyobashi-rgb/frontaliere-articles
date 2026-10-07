@@ -93,16 +93,16 @@ function ownArticleData(root, section) {
  * section slug map. Keep that union here too, so a page-N archive cannot be
  * silently omitted from the pre-live gate.
  */
-function archiveArticleIds(root, section, core, own) {
+function archiveArticleIds(root, core, own) {
   const metaFile = corpusPath(`services/locales/${core.metaPrefix}-it.ts`);
   const metaSource = exists(root, metaFile) ? fs.readFileSync(path.join(root, metaFile), 'utf8') : '';
-  const ids = new Set(own.articleIds);
+  const ids = new Set([...own.articleIds, ...Object.keys(own.slugs)]);
   for (const match of metaSource.matchAll(ARCHIVE_TITLE_ID_RE)) ids.add(match[1]);
   return ids;
 }
 
-function archivePageCount(root, section, core, own) {
-  const total = archiveArticleIds(root, section, core, own).size;
+function archivePageCount(root, core, own) {
+  const total = archiveArticleIds(root, core, own).size;
   return Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
 }
 
@@ -117,7 +117,7 @@ function pageIdentity(page) {
 export function expectedSectionPages(section, { root = process.cwd(), includeArticles = true } = {}) {
   const { core } = sectionEntry(root, section);
   const own = ownArticleData(root, section);
-  const archivePages = archivePageCount(root, section, core, own);
+  const archivePages = archivePageCount(root, core, own);
   const pages = [];
   for (const locale of LOCALES) {
     const prefix = sectionPrefix(core, locale);
