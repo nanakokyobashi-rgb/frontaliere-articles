@@ -926,6 +926,14 @@ async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUr
       Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
     )
     : RUN_START_MS + RUN_WALL_BUDGET_MS);
+  const remainingClassifierMs = classifierDeadline - Date.now();
+  if (remainingClassifierMs <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
+  const classifierCallTimeout = Math.min(classifierTimeout, Math.floor(remainingClassifierMs));
+  if (classifierCallTimeout <= 0) {
+    return { relevant: true, reason: 'classifier-deadline-exceeded', fromError: true };
+  }
   const prompt = IS_CANTON
     ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
     : IS_FRONTALIERE
@@ -967,7 +975,10 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         model,
         temperature: 0,
         maxTokens: 80,
-        timeout: classifierTimeout,
+        // Il timeout HTTP non puo' superare il residuo della deadline assoluta:
+        // ai-models controlla la deadline fra i fallback, ma una richiesta gia'
+        // partita puo' restare in volo fino al suo timeout.
+        timeout: classifierCallTimeout,
         jsonMode: false,
         // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
         // camminare l'intera catena di fallback di ai-models.mjs. Il roster

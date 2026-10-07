@@ -59,7 +59,7 @@ export const CANTON_SECTIONS_ENABLED_ENV = 'CANTON_ARTICLE_SECTIONS_ENABLED';
 // generazione (e per renderli misurabili nei test offline).
 export const CANTON_PROMPT_CONTEXT_MAX_CHARS = 360;
 export const CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS = 220;
-export const CANTON_PROMPT_PUBLISHED_LINE_MAX_CHARS = 160;
+export const CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS = 48;
 
 // Il classifier è un filtro fail-open: una headline oltre questo tetto resta
 // nel pool e passa comunque al gate REGOLA #0. Il tetto impedisce che una
@@ -595,6 +595,18 @@ function compactPromptList(value, maxLineChars) {
   }).join('\n');
 }
 
+function compactPublishedDigest(value, maxExcerptChars) {
+  return String(value || '').split('\n').map((line) => {
+    const separator = ' — ';
+    const separatorAt = line.lastIndexOf(separator);
+    if (!line.startsWith('• ') || separatorAt < 0) return line;
+    const title = line.slice(0, separatorAt);
+    const excerpt = line.slice(separatorAt + separator.length);
+    if (excerpt.length <= maxExcerptChars) return line;
+    return `${title}${separator}${excerpt.slice(0, maxExcerptChars).trimEnd()}…`;
+  }).join('\n');
+}
+
 /** Il prompt del classifier pre-spend (stessa forma di risposta delle storiche). */
 export function cantonClassifierPrompt(p, { headline, sourceHint, summary }) {
   return `Sei un editor del sito frontaliereticino.ch, sezione del Canton ${p.cantonName}: informa chi VIVE o LAVORA nel Canton ${p.cantonName}, frontalieri compresi.
@@ -617,7 +629,7 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 /** Il prompt di selezione della headline (stesso protocollo H<n> delle storiche). */
 export function cantonHeadlineSelectionPrompt(p, { headlineList, recentArticles, jsonQuoteSafetyRule }) {
   const compactHeadlineList = compactPromptList(headlineList, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
-  const compactRecentArticles = compactPromptList(recentArticles, CANTON_PROMPT_PUBLISHED_LINE_MAX_CHARS);
+  const compactRecentArticles = compactPublishedDigest(recentArticles, CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS);
   return `Sei un editor del sito frontaliereticino.ch, sezione del Canton ${p.cantonName}.
 Devi scegliere UN articolo da queste headline di fonti del cantone per scrivere un pezzo utile a chi vive o lavora nel Canton ${p.cantonName}, frontalieri compresi.
 ${contextLine(p)}

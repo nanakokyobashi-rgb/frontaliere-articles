@@ -402,6 +402,16 @@ test('④ il classifier pre-spend porta un deadlineMs', () => {
     /deadlineMs: classifierDeadline/,
     'REGRESSIONE: una classificazione da 80 token puo tornare a camminare oltre la finestra dichiarata',
   );
+  assert.match(
+    region,
+    /const remainingClassifierMs = classifierDeadline - Date\.now\(\)/,
+    'il timeout cantonale deve essere calcolato sul residuo della deadline assoluta',
+  );
+  assert.match(
+    call.slice(0, 1000),
+    /timeout: classifierCallTimeout/,
+    'REGRESSIONE: il timeout HTTP torna a ignorare il residuo della finestra cantonale',
+  );
 });
 
 test('④ la selezione headline eredita il deadlineMs dal wrapper callLLM', () => {

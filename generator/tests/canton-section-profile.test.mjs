@@ -31,7 +31,7 @@ import {
   CANTON_PRESPEND_MAX_CLASSIFIER_CALLS,
   CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS,
   CANTON_PROMPT_CONTEXT_MAX_CHARS,
-  CANTON_PROMPT_PUBLISHED_LINE_MAX_CHARS,
+  CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS,
   CANTON_SECTIONS_ENABLED_ENV,
   CANTON_STATE_ROOT,
   buildCantonProfile,
@@ -289,7 +289,8 @@ test('prompt cantonali: contesto e liste hanno capi deterministici, lessico di a
   assert.ok(p.topicalTerms.length > 100, 'il lessico completo resta disponibile al gate deterministico');
 
   const candidates = `H1 » (gr.ch) ${'Titolo troppo lungo '.repeat(30)}\nH2 » (gr.ch) ${'Secondo titolo troppo lungo '.repeat(30)}`;
-  const published = `• ${'Articolo già pubblicato '.repeat(30)}`;
+  const publishedTitle = `• ${'Titolo distintivo già pubblicato '.repeat(30)}`;
+  const published = `${publishedTitle} — ${'Estratto già pubblicato '.repeat(30)}`;
   const selection = cantonHeadlineSelectionPrompt(p, {
     headlineList: candidates,
     recentArticles: published,
@@ -298,7 +299,10 @@ test('prompt cantonali: contesto e liste hanno capi deterministici, lessico di a
   const listed = selection.split('\n').filter((line) => /^(H\d+ »|• )/.test(line));
   assert.equal(listed.length, 3, 'il cap accorcia le righe, non elimina una candidata o un riferimento');
   assert.ok(listed.filter((line) => line.startsWith('H')).every((line) => line.length <= CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS));
-  assert.ok(listed.filter((line) => line.startsWith('•')).every((line) => line.length <= CANTON_PROMPT_PUBLISHED_LINE_MAX_CHARS));
+  const publishedLine = listed.find((line) => line.startsWith('•'));
+  assert.ok(publishedLine.startsWith(publishedTitle), 'il titolo completo del digest resta intatto');
+  const excerpt = publishedLine.slice(publishedLine.lastIndexOf(' — ') + 3);
+  assert.ok(excerpt.length <= CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS + 1, 'si accorcia solo l’excerpt del digest');
   assert.match(selection, /H2 »/, 'la chiave della seconda candidata resta selezionabile');
 
   assert.ok(CANTON_PRESPEND_MAX_CLASSIFIER_CALLS <= 12);
