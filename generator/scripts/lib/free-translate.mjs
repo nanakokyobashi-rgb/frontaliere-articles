@@ -29,6 +29,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
+import { stripTranslationSentinels, translationSentinelRegExp } from './translation-sentinels.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
@@ -331,9 +332,9 @@ const _cascadeStats = {
   // salvato.
   tierPassthroughs: {},
   // I testi lunghi attraversano MyMemory a chunk: un eco qui è un tentativo
-  // per segmento, non un tentativo per campo. Ogni eco entra comunque nel
-  // bucket canonico `tierPassthroughs` (contratto #1210); questo sotto-bucket
-  // conserva la cardinalità per segmento per la calibrazione del pavimento.
+  // per segmento, non un tentativo per campo. Un MISS aggregato entra una sola
+  // volta nel bucket canonico `tierPassthroughs` (contratto #1210); questo
+  // sotto-bucket conserva quanti chunk uguali lo hanno causato.
   tierPassthroughChunks: {},
   // Tier che hanno risposto PARLANDO della richiesta invece di tradurla: un
   // rifiuto («Sorry, I can't help with that.»), una richiesta dell'input («I
@@ -342,6 +343,18 @@ const _cascadeStats = {
   // valore («Traduzione:»). Vedi `rejectedAsMetaResponse`. Stessa unita' di
   // `tierPassthroughs`: tentativi di tier, non campi.
   tierMetaResponses: {},
+  // Accepted fields whose source contains a large numeric token missing from
+  // the translated text. This is measurement only: it never rejects, retries
+  // or changes the returned translation.
+  tierNumericDrift: {},
+  // Un tier ha risposto con una struttura multilinea diversa dalla sorgente e
+  // il recupero per riga non era ammesso o non e' riuscito. Ragioni separate:
+  // un limite raggiunto non e' un errore del motore, ma nessun testo fuso puo'
+  // diventare un hit senza passare questa guardia.
+  tierStructureFailures: {
+    limitExceeded: {},
+    recoveryFailed: {},
+  },
   // Per-field-type split of calls/successes. The cumulative `successes` above is
   // summed across every field type, so a run that translates short titles fine
   // but has every (long) description rejected by all providers still reports
@@ -381,6 +394,16 @@ export function getInstanceHealthStats() {
 export function getCascadeStats() {
   return {
     ..._cascadeStats,
+    tierHits: { ..._cascadeStats.tierHits },
+    tierErrors: { ..._cascadeStats.tierErrors },
+    tierPassthroughs: { ..._cascadeStats.tierPassthroughs },
+    tierPassthroughChunks: { ..._cascadeStats.tierPassthroughChunks },
+    tierMetaResponses: { ..._cascadeStats.tierMetaResponses },
+    tierNumericDrift: { ..._cascadeStats.tierNumericDrift },
+    tierStructureFailures: Object.fromEntries(
+      Object.entries(_cascadeStats.tierStructureFailures)
+        .map(([reason, tiers]) => [reason, { ...tiers }]),
+    ),
     byFieldType: {
       title: { ..._cascadeStats.byFieldType.title },
       description: { ..._cascadeStats.byFieldType.description },
@@ -420,6 +443,18 @@ export function logCascadeSummary() {
   const meta = Object.entries(s.tierMetaResponses).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
   if (meta.length) {
     console.log('   Tier meta-risposta (rifiuto/richiesta/narrazione, scartata): ' + meta.map(([k, v]) => `${k}=${v}`).join(', '));
+  }
+  const numericDrift = Object.entries(s.tierNumericDrift)
+    .filter(([, v]) => v > 0)
+    .sort((a, b) => b[1] - a[1]);
+  if (numericDrift.length) {
+    console.log('   Tier numeric drift (campi accettati con grandi numeri mancanti): ' + numericDrift.map(([k, v]) => `${k}=${v}`).join(', '));
+  }
+  const structure = Object.entries(s.tierStructureFailures)
+    .flatMap(([reason, tiers]) => Object.entries(tiers).map(([tier, count]) => reason + ':' + tier + '=' + count))
+    .filter((entry) => !entry.endsWith('=0'));
+  if (structure.length) {
+    console.log('   Tier structure failures (recupero per riga): ' + structure.join(', '));
   }
   const health = getInstanceHealthStats();
   const down = Object.entries(health).filter(([, h]) => h.failures >= HEALTH_FAILURE_THRESHOLD);
@@ -489,6 +524,226 @@ function normalizeBlock(s) {
     .trim();
 }
 
+/** Normalize a block for structural checks without erasing nested Markdown indentation. */
+export function normalizeStructuredBlock(s) {
+  return String(s ?? '')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\r\n?/g, '\n')
+    .split('\n')
+    .map((line) => {
+      const indent = line.match(/^[ \t]*/u)?.[0] || '';
+      const content = line.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
+      return content ? `${indent}${content}` : '';
+    })
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/^\n+|\n+$/g, '');
+}
+
+/** Normalize provider payloads without flattening nested Markdown indentation. */
+function normalizeProviderBlock(s) {
+  const value = String(s ?? '');
+  if (!value.includes('\n') && !/^[ \t]/u.test(value)) return normalizeBlock(value);
+  const lines = normalizeStructuredBlock(value).split('\n');
+  let afterBlank = true;
+  return lines.map((line, index) => {
+    if (!line) {
+      afterBlank = true;
+      return line;
+    }
+    const content = line.replace(/^[ \t]+/u, '');
+    // Leading whitespace at the start of a document (or after a paragraph
+    // break) is incidental in the source parser. Keep it on continuation
+    // lines, where it is the Markdown nesting contract the providers must see.
+    const stripBlockIndent = index === 0 || (afterBlank && !/^(?:#{1,6}\s|[-*+•]\s|\d+[.)]\s|>\s|\|)/u.test(content));
+    afterBlank = false;
+    return stripBlockIndent ? content : line;
+  }).join('\n');
+}
+
+/**
+ * Parse one normalized line once for both structure validation and recovery.
+ * The returned prefix is the source-owned Markdown marker; `text` is the only
+ * portion a provider should receive. The signature deliberately keeps the
+ * ordered number/delimiter and the unordered marker, so changing either is a
+ * structure miss even when the line count is unchanged.
+ */
+export function lineStructuralSignature(line) {
+  const raw = String(line ?? '').replace(/\u00a0/g, ' ').replace(/\r/g, '');
+  const indent = raw.match(/^[ \t]*/u)?.[0] || '';
+  const candidate = raw.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
+  const signaturePrefix = `indent:${JSON.stringify(indent)}|`;
+  if (!candidate) return { kind: 'empty', signature: 'empty', prefix: '', text: '' };
+
+  const heading = candidate.match(/^(#{1,6})(?:\s+|$)/u);
+  if (heading) {
+    return {
+      kind: 'heading',
+      signature: `${signaturePrefix}heading:${heading[1].length}`,
+      prefix: `${indent}${heading[0]}`,
+      text: candidate.slice(heading[0].length),
+    };
+  }
+  const bullet = candidate.match(/^([-*+•])(?:\s+|$)/u);
+  if (bullet) {
+    return {
+      kind: 'bullet',
+      signature: `${signaturePrefix}bullet:${bullet[1]}`,
+      prefix: `${indent}${bullet[0]}`,
+      text: candidate.slice(bullet[0].length),
+    };
+  }
+  const ordered = candidate.match(/^(\d+)([.)])(?:\s+|$)/u);
+  if (ordered) {
+    return {
+      kind: 'ordered',
+      signature: `${signaturePrefix}ordered:${ordered[1]}${ordered[2]}`,
+      prefix: `${indent}${ordered[0]}`,
+      text: candidate.slice(ordered[0].length),
+    };
+  }
+  const quote = candidate.match(/^(>)(?:\s+|$)/u);
+  if (quote) {
+    return {
+      kind: 'quote',
+      signature: `${signaturePrefix}quote`,
+      prefix: `${indent}${quote[0]}`,
+      text: candidate.slice(quote[0].length),
+    };
+  }
+  const table = candidate.match(/^(\|)\s*/u);
+  if (table) {
+    return {
+      kind: 'table',
+      signature: `${signaturePrefix}table`,
+      prefix: `${indent}${table[0]}`,
+      text: candidate.slice(table[0].length),
+    };
+  }
+  return { kind: 'text', signature: `${signaturePrefix}text`, prefix: indent, text: candidate };
+}
+
+const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
+const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
+function isWholeTranslationSentinel(span) {
+  const matches = String(span).match(translationSentinelRegExp());
+  return matches?.length === 1 && matches[0] === span;
+}
+// Numeric spans are opaque only to the chunker: a URL-like number, date or
+// amount must not be split across requests. They are deliberately absent from
+// the rejection signature below because locale-specific separators are valid.
+const NUMERIC_CHUNK_RE = /(?<![\p{L}\p{N}_])\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+const LARGE_NUMERIC_TOKEN_RE = /(?<![\d.,'’])(?:\d{1,3}(?:[.,'’   ]\d{3})+|\d{4,})(?!\d)/gu;
+
+function digitSequence(text) {
+  return [...String(text ?? '').matchAll(/\d/gu)].map(([digit]) => digit).join('');
+}
+
+/**
+ * Return source large-number tokens missing from a translation.
+ * Separators are ignored and repeated source tokens are matched as a multiset.
+ * This is an observability signal, not a translation guard.
+ */
+export function numericDriftTokens(sourceText, translatedText) {
+  const sourceTokens = [...String(sourceText ?? '').matchAll(LARGE_NUMERIC_TOKEN_RE)]
+    .map(([token]) => token.replace(/\D/gu, ''));
+  const translatedCounts = new Map();
+  for (const [token] of String(translatedText ?? '').matchAll(LARGE_NUMERIC_TOKEN_RE)) {
+    const normalized = token.replace(/\D/gu, '');
+    translatedCounts.set(normalized, (translatedCounts.get(normalized) || 0) + 1);
+  }
+  return sourceTokens.filter((token) => {
+    const available = translatedCounts.get(token) || 0;
+    if (available > 0) {
+      translatedCounts.set(token, available - 1);
+      return false;
+    }
+    return true;
+  });
+}
+
+/**
+ * Decide whether a source line deserves a translation request.
+ *
+ * Opaque lines contain only protected sentinels/placeholders, numbers,
+ * punctuation, symbols, URLs or email addresses and are copied by the
+ * recomposer. Any remaining letter is translatable, regardless of length:
+ * `No`, `Sì`, `Ja` and `OK` are prose, not a reason to copy Italian into a
+ * target locale. MyMemory's three-character limitation is enforced only by
+ * `translateWithMyMemory`; a null from that tier is a tier miss.
+ */
+export function hasTranslatableLineText(line) {
+  const candidate = stripTranslationSentinels(lineStructuralSignature(line).text)
+    .replace(INLINE_OPAQUE_RE, '')
+    .replace(PLACEHOLDER_RE, '')
+    .trim();
+  return /\p{L}/u.test(candidate);
+}
+
+export function opaqueSpanSignature(line) {
+  const text = lineStructuralSignature(line).text;
+  return guardOpaqueSpanRanges(text)
+    .map(({ start, end }) => {
+      const span = text.slice(start, end);
+      // Only sentinels are intentionally case-insensitive. URL paths, email
+      // local parts and placeholders can be case-sensitive in published HTML.
+      return isWholeTranslationSentinel(span)
+        ? normalizeProtectedTokenSentinels(span).toLowerCase()
+        : span;
+    });
+}
+
+function hasSameOpaqueSpans(sourceLine, translatedLine) {
+  const source = opaqueSpanSignature(sourceLine);
+  const translated = opaqueSpanSignature(translatedLine);
+  return source.length === translated.length
+    && source.every((span, index) => span === translated[index]);
+}
+
+function isLocalizedOrdinalLine(sourceLine, translatedLine) {
+  const source = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
+  const translated = String(translatedLine ?? '').match(/^(\s*)(\d{1,2})\.\s+/u);
+  return Boolean(source && translated && source[1] === translated[1] && source[2] === translated[2]);
+}
+
+export function hasSameLineStructure(sourceText, translatedText) {
+  const sourceLines = normalizeStructuredBlock(sourceText).split('\n');
+  const translatedLines = normalizeStructuredBlock(translatedText).split('\n');
+  return sourceLines.length === translatedLines.length
+    && sourceLines.every((sourceLine, index) => {
+      const source = lineStructuralSignature(sourceLine);
+      const translatedLine = translatedLines[index];
+      const translated = lineStructuralSignature(translatedLine);
+      if (source.signature !== translated.signature
+        && !isLocalizedOrdinalLine(sourceLine, translatedLine)) {
+        return false;
+      }
+      if (!hasSameOpaqueSpans(sourceLine, translatedLine)) return false;
+      if (!hasTranslatableLineText(sourceLine)) {
+        return digitSequence(sourceLine) === digitSequence(translatedLine);
+      }
+      return hasTranslatableLineText(translatedLine);
+    });
+}
+
+/**
+ * Restore the source-owned marker around a provider's one-line response.
+ * Providers may repeat or change a marker; strip their leading marker once
+ * (whatever family it is) and attach the source prefix exactly once. A plain
+ * source line receiving a new structural marker is rejected instead of
+ * inventing structure.
+ */
+function restoreSourceLineStructure(sourceLine, translatedLine) {
+  const source = lineStructuralSignature(sourceLine);
+  const translated = lineStructuralSignature(translatedLine);
+  if (source.signature === 'empty' || translated.signature === 'empty') return null;
+  if (source.kind === 'text' && translated.kind !== 'text') {
+    if (!isLocalizedOrdinalLine(sourceLine, translatedLine)) return null;
+    return normalizeStructuredBlock(translatedLine);
+  }
+  return `${source.prefix}${translated.text}`;
+}
+
 /**
  * Un motore che rende la SORGENTE non ha tradotto: dirlo, invece di rendere un
  * testo che a valle sembra valido.
@@ -551,9 +806,8 @@ export function isSourcePassthrough(sourceText, translatedText) {
 
 // Un segmento breve puo' essere un titolo, una URL o un placeholder che il
 // motore lascia intatto senza indicare che il body intero sia un passthrough.
-// Solo un segmento con abbastanza parole traducibili puo' quindi invalidare il
-// campo a chunk; l'eventuale eco breve resta nell'assemblato e viene giudicato
-// dal confronto sul campo intero in `tryTier`.
+// La soglia resta quella misurata dal ramo a chunk: qui si applica alla
+// concatenazione delle righe uguali, non a ogni riga isolata.
 // Misura corpus 2026-09-12 (content/blog-body{,-ch}):
 //   blog-body:    15'476 file, 46'524 campi, 48'298 chunk → 119 brevi / 48'179 sostanziosi
 //   blog-body-ch:  8'388 file, 25'164 campi, 25'589 chunk →  37 brevi / 25'552 sostanziosi
@@ -566,6 +820,32 @@ function isSubstantivePassthroughChunk(text) {
     .replace(/https?:\/\/\S+/gi, ' ')
     .replace(/\bZQX\d+XQZ\b/gi, ' ');
   return (candidate.match(TRANSLATABLE_WORD_RE) || []).length >= MIN_SUBSTANTIVE_PASSTHROUGH_WORDS;
+}
+
+function shouldRejectAggregatedPassthrough(totalTranslatable, passthroughTexts) {
+  if (!totalTranslatable || passthroughTexts.length === 0) return false;
+  return passthroughTexts.length === totalTranslatable
+    || passthroughTexts.length > totalTranslatable / 2
+    || isSubstantivePassthroughChunk(passthroughTexts.join('\n'));
+}
+
+function rejectAggregatedPassthrough(tierName, totalTranslatable, passthroughTexts, outcome = null, chunkCount = 0) {
+  if (!shouldRejectAggregatedPassthrough(totalTranslatable, passthroughTexts)) return false;
+  recordRejectedPassthrough(tierName, outcome);
+  if (chunkCount > 0) {
+    _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + chunkCount;
+  }
+  return true;
+}
+
+/** Record a passthrough already detected by the guard. */
+function recordRejectedPassthrough(tierName, outcome = null, granularity = 'field') {
+  _cascadeStats.tierPassthroughs[tierName] = (_cascadeStats.tierPassthroughs[tierName] || 0) + 1;
+  if (granularity === 'chunk') {
+    _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + 1;
+  }
+  noteTranslationOutcome(outcome, 'passthroughs');
+  if (outcome) _echoTiersByOutcome.get(outcome)?.add(tierName);
 }
 
 /**
@@ -586,17 +866,16 @@ function isSubstantivePassthroughChunk(text) {
  * @param {string} tierName
  * @param {string} source  testo dato in pasto al motore
  * @param {string} out     testo reso dal motore
- * @param {string} [granularity='field']  `chunk` per il ramo a segmenti
- * @returns {boolean} true se `out` e' la sorgente (e il tier e' stato contato)
+ * @param {string} [granularity='field'] `chunk` conta anche il sotto-bucket;
+ *   `line` verifica solo il recovery e rimanda la contabilita' al campo.
+ * @returns {boolean} true se `out` e' la sorgente
  */
 function rejectedAsPassthrough(tierName, source, out, outcome = null, granularity = 'field') {
   if (!out || !isSourcePassthrough(source, out)) return false;
-  _cascadeStats.tierPassthroughs[tierName] = (_cascadeStats.tierPassthroughs[tierName] || 0) + 1;
-  if (granularity === 'chunk') {
-    _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + 1;
-  }
-  noteTranslationOutcome(outcome, 'passthroughs');
-  if (outcome) _echoTiersByOutcome.get(outcome)?.add(tierName);
+  // Recovery probes lines only for the structural decision. The canonical
+  // passthrough event is counted once after the aggregate decision, not once
+  // per short line.
+  if (granularity !== 'line') recordRejectedPassthrough(tierName, outcome, granularity);
   return true;
 }
 
@@ -638,44 +917,279 @@ function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
   return true;
 }
 
-/**
- * Split text into chunks ≤ maxChars at sentence boundaries.
- * Splits at: paragraph breaks (\n\n), newlines (\n), sentence-ending punctuation (. ! ?),
- * markdown headers (##), and list items (- *).
- * Falls back to word boundaries if a single sentence exceeds maxChars.
- */
-function _chunkAtSentences(text, maxChars = 480) {
-  // Split into sentences at natural boundaries
-  const segments = text.split(/(?<=\.\s)|(?<=\n)|(?<=\?\s)|(?<=!\s)|(?=##\s)|(?=[-*]\s)/).filter(Boolean);
-  const chunks = [];
-  let current = '';
+function spanRanges(text, source) {
+  const matcher = new RegExp(
+    `(?:${source})`,
+    'giu',
+  );
+  return [...text.matchAll(matcher)].map((match) => ({
+    start: match.index,
+    end: match.index + match[0].length,
+  }));
+}
 
-  for (const seg of segments) {
-    const trimmed = seg.trim();
-    if (!trimmed) continue;
-    if (current.length + trimmed.length + 1 <= maxChars) {
-      current = current ? `${current} ${trimmed}` : trimmed;
-    } else {
-      if (current) chunks.push(current.trim());
-      // If single segment exceeds maxChars, split at word boundaries
-      if (trimmed.length > maxChars) {
-        const words = trimmed.split(/\s+/);
-        current = '';
-        for (const word of words) {
-          if (current.length + word.length + 1 <= maxChars) {
-            current = current ? `${current} ${word}` : word;
-          } else {
-            if (current) chunks.push(current.trim());
-            current = word;
-          }
-        }
-      } else {
-        current = trimmed;
+function guardOpaqueSpanRanges(text) {
+  return spanRanges(
+    text,
+    `${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${translationSentinelRegExp().source}`,
+  );
+}
+
+function chunkAtomicSpanRanges(text) {
+  return spanRanges(
+    text,
+    `${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${NUMERIC_CHUNK_RE.source}|${translationSentinelRegExp().source}`,
+  );
+}
+
+function _splitOversizedSegment(text, maxChars, separatorAfter) {
+  const parts = [];
+  let remaining = text;
+
+  while (remaining.length > maxChars) {
+    const opaqueSpans = chunkAtomicSpanRanges(remaining);
+    const space = remaining.lastIndexOf(' ', maxChars);
+    let splitAt = space > 0 ? space : maxChars;
+    let separator = '';
+    const splitInsideOpaque = opaqueSpans.find(({ start, end }) => start < splitAt && splitAt < end);
+    if (splitInsideOpaque) {
+      const beforeOpaque = remaining.slice(0, splitInsideOpaque.start);
+      const whitespace = beforeOpaque.match(/\s+$/u)?.[0] || '';
+      splitAt = splitInsideOpaque.start - whitespace.length;
+      separator = whitespace;
+    }
+
+    // An opaque token longer than the provider limit cannot be split safely.
+    // Keep it as one explicitly marked segment so callers can copy it without
+    // sending a URL, placeholder or sentinel fragment to a provider.
+    if (splitAt === 0) {
+      const opaque = opaqueSpans.find(({ start }) => start === 0);
+      if (opaque) {
+        const opaqueSeparator = remaining.slice(opaque.end).match(/^\s+/u)?.[0] || '';
+        parts.push({
+          text: remaining.slice(0, opaque.end),
+          separatorAfter: opaqueSeparator,
+          protectedOversize: opaque.end > maxChars,
+        });
+        remaining = remaining.slice(opaque.end + opaqueSeparator.length);
+        continue;
       }
+      splitAt = maxChars;
+    }
+
+    if (!separator && remaining[splitAt] === ' ') separator = remaining.slice(splitAt, splitAt + 1);
+    parts.push({ text: remaining.slice(0, splitAt), separatorAfter: separator });
+    remaining = remaining.slice(splitAt + separator.length);
+  }
+  if (remaining) parts.push({ text: remaining, separatorAfter });
+  else if (parts.length && separatorAfter) parts[parts.length - 1].separatorAfter += separatorAfter;
+  return parts;
+}
+
+function _splitLongLine(line, lineSeparator, maxChars) {
+  const sentenceSegments = [];
+  let start = 0;
+  // Keep the boundary whitespace with the segment that precedes it. The
+  // separator becomes metadata only when the segment has to cross a request
+  // boundary; otherwise it remains inside the translated chunk.
+  const boundary = /(?<=[.!?]\s)|(?=##\s)|(?=[-*]\s)/g;
+  for (const match of line.matchAll(boundary)) {
+    const end = match.index;
+    if (end <= start) continue;
+    const raw = line.slice(start, end);
+    const separator = raw.match(/\s+$/)?.[0] || '';
+    const segment = raw.slice(0, raw.length - separator.length);
+    if (segment) sentenceSegments.push({ text: segment, separatorAfter: separator });
+    start = end;
+  }
+  if (start < line.length) sentenceSegments.push({ text: line.slice(start), separatorAfter: '' });
+  if (sentenceSegments.length === 0) sentenceSegments.push({ text: line, separatorAfter: '' });
+  sentenceSegments[sentenceSegments.length - 1].separatorAfter += lineSeparator;
+
+  return sentenceSegments.flatMap((segment) => segment.text.length > maxChars
+    ? _splitOversizedSegment(segment.text, maxChars, segment.separatorAfter)
+    : [segment]);
+}
+
+// Recupero strutturale limitato a 12 righe non vuote: al massimo una chiamata
+// iniziale piu' 12 richieste per riga, con il passo di 1 s di MyMemory e meno
+// di 5K caratteri per i testi brevi osservati. Un campo piu' grande prosegue
+// la cascata senza spendere un recupero che puo' consumare quota e secondi.
+const MAX_STRUCTURE_RECOVERY_LINES = 12;
+
+function _structuredLineGroups(text, maxChars) {
+  const lines = text.split('\n');
+  const groups = [];
+
+  for (let index = 0; index < lines.length;) {
+    const line = lines[index];
+    if (!line) {
+      index += 1;
+      continue;
+    }
+    let next = index + 1;
+    while (next < lines.length && lines[next] === '') next += 1;
+    const lineSeparator = next < lines.length ? '\n'.repeat(next - index) : '';
+    const segments = line.length > maxChars
+      ? _splitLongLine(line, lineSeparator, maxChars)
+      : [{ text: line, separatorAfter: lineSeparator }];
+    groups.push(segments);
+    index = next;
+  }
+  return groups;
+}
+
+function _packStructuredSegments(segments, maxChars) {
+  const chunks = [];
+  let current = null;
+  let separatorAfter = '';
+  let protectedOversize = false;
+
+  for (const segment of segments) {
+    if (current === null) {
+      current = segment.text;
+      separatorAfter = segment.separatorAfter;
+      protectedOversize = Boolean(segment.protectedOversize);
+      continue;
+    }
+    if (current.length + separatorAfter.length + segment.text.length <= maxChars) {
+      current += `${separatorAfter}${segment.text}`;
+      separatorAfter = segment.separatorAfter;
+      protectedOversize ||= Boolean(segment.protectedOversize);
+    } else {
+      chunks.push({ text: current, separatorAfter, protectedOversize });
+      current = segment.text;
+      separatorAfter = segment.separatorAfter;
+      protectedOversize = Boolean(segment.protectedOversize);
     }
   }
-  if (current.trim()) chunks.push(current.trim());
+  if (current !== null) chunks.push({ text: current, separatorAfter, protectedOversize });
   return chunks;
+}
+
+/**
+ * Split text into chunks ≤ maxChars at sentence and line boundaries.
+ * Each chunk carries the separator that followed it in the normalized source.
+ * `oneLinePerChunk` is used by the long MyMemory branch so provider output
+ * cannot flatten a structured request before the cascade can reassemble it.
+ */
+export function _chunkAtSentences(text, maxChars = 480, { oneLinePerChunk = false } = {}) {
+  if (!Number.isInteger(maxChars) || maxChars < 1) {
+    throw new TypeError('_chunkAtSentences: maxChars must be an integer >= 1');
+  }
+  const clean = normalizeProviderBlock(text);
+  if (!clean) return [];
+  const lineGroups = _structuredLineGroups(clean, maxChars);
+  const chunks = oneLinePerChunk
+    ? lineGroups.flatMap((segments) => _packStructuredSegments(segments, maxChars))
+    : _packStructuredSegments(lineGroups.flat(), maxChars);
+  return chunks;
+}
+
+const CHUNK_PARTS_MISMATCH = 'ERR_CHUNK_PARTS_MISMATCH';
+
+export function _recomposeChunkParts(chunks, translatedParts = chunks.map(({ text }) => text)) {
+  if (
+    !Array.isArray(translatedParts)
+    || translatedParts.length !== chunks.length
+    || translatedParts.some((part) => part === undefined || part === null)
+  ) {
+    const error = new TypeError('_recomposeChunkParts: translatedParts must have one entry per chunk');
+    error.code = CHUNK_PARTS_MISMATCH;
+    throw error;
+  }
+  return chunks
+    .map((chunk, index) => `${translatedParts[index]}${chunk.separatorAfter}`)
+    .join('');
+}
+
+function isChunkPartsMismatchError(error) {
+  return error?.code === CHUNK_PARTS_MISMATCH;
+}
+
+function recomposeChunkPartsOrEmpty(chunks, translatedParts) {
+  try {
+    return _recomposeChunkParts(chunks, translatedParts);
+  } catch (error) {
+    if (isChunkPartsMismatchError(error)) return '';
+    throw error;
+  }
+}
+
+function noteTierStructureFailure(tierName, reason) {
+  const bucket = _cascadeStats.tierStructureFailures[reason]
+    || (_cascadeStats.tierStructureFailures[reason] = {});
+  bucket[tierName] = (bucket[tierName] || 0) + 1;
+}
+
+function noteNumericDrift(tierName, sourceText, translatedText) {
+  if (numericDriftTokens(sourceText, translatedText).length === 0) return;
+  _cascadeStats.tierNumericDrift[tierName] = (_cascadeStats.tierNumericDrift[tierName] || 0) + 1;
+}
+
+async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
+  const lines = _structuredLineGroups(sourceText, Number.MAX_SAFE_INTEGER).flat();
+  if (lines.length > MAX_STRUCTURE_RECOVERY_LINES) {
+    return { ok: false, reason: 'limitExceeded' };
+  }
+
+  const translatedParts = [];
+  let translatableLines = 0;
+  const passthroughLines = [];
+  for (const line of lines) {
+    if (!hasTranslatableLineText(line.text)) {
+      translatedParts.push(line.text);
+      continue;
+    }
+    translatableLines += 1;
+
+    let translated;
+    try {
+      translated = await fn(lineStructuralSignature(line.text).text);
+    } catch (error) {
+      return { ok: false, reason: 'recoveryFailed', error };
+    }
+    const normalized = normalizeBlock(translated);
+    if (!normalized || normalized.includes('\n')) {
+      return { ok: false, reason: 'recoveryFailed' };
+    }
+    const recomposedLine = restoreSourceLineStructure(line.text, normalized);
+    if (!recomposedLine) {
+      return { ok: false, reason: 'recoveryFailed' };
+    }
+    if (!hasSameOpaqueSpans(line.text, recomposedLine)
+      || !hasTranslatableLineText(recomposedLine)) {
+      return { ok: false, reason: 'recoveryFailed' };
+    }
+    const lineIsPassthrough = rejectedAsPassthroughWithSourceVariants(
+      tierName,
+      line.text,
+      line.text,
+      recomposedLine,
+      outcome,
+      'line',
+    );
+    if (lineIsPassthrough) passthroughLines.push(line.text);
+    if (rejectedAsMetaResponse(tierName, line.text, recomposedLine, outcome)) {
+      return { ok: false, reason: 'recoveryFailed' };
+    }
+    translatedParts.push(recomposedLine);
+  }
+
+  let recomposed;
+  try {
+    recomposed = _recomposeChunkParts(lines, translatedParts);
+  } catch (error) {
+    if (isChunkPartsMismatchError(error)) return { ok: false, reason: 'recoveryFailed' };
+    throw error;
+  }
+  return {
+    ok: true,
+    text: normalizeStructuredBlock(recomposed),
+    allLinesNonTranslatable: translatableLines === 0,
+    translatableLines,
+    passthroughLines,
+  };
 }
 
 // ── DeepL Free (multi-key with automatic rotation) ──────────────────────────
@@ -688,8 +1202,8 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
   // Using normalizeBlock (instead of the legacy normalizeSpace) keeps
   // bullet/section markers intact so the translated output is still
   // recognisable as structured prose to the audit.
-  const clean = normalizeBlock(text);
-  const chunks = clean.length <= MAX_CHUNK ? [clean] : chunkText(clean, MAX_CHUNK);
+  const clean = normalizeProviderBlock(text);
+  const chunks = chunkText(clean, MAX_CHUNK);
   const translated = [];
 
   // Circuit-breaker: if a previous call already triggered the global flag, fail fast
@@ -698,7 +1212,11 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
     throw Object.assign(new Error('DeepL 429 rate-limited'), { rateLimited: true });
   }
 
-  for (const chunk of chunks) {
+  for (const { text: chunk, protectedOversize } of chunks) {
+    if (protectedOversize) {
+      translated.push(chunk);
+      continue;
+    }
     const body = new URLSearchParams();
     body.append('text', chunk);
     if (srcCode) body.append('source_lang', srcCode);
@@ -753,12 +1271,14 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
     if (chunks.length > 1) await delay(200);
   }
 
-  return normalizeBlock(translated.join('\n\n'));
+  // A missing provider part is a structure miss for this tier, not a partial
+  // translation to expose to the field.
+  return normalizeProviderBlock(recomposeChunkPartsOrEmpty(chunks, translated));
 }
 
 async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) {
   if (DEEPL_API_KEYS.length === 0) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
 
@@ -810,7 +1330,7 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
 
 // ── Google Translate (unofficial free, multi-endpoint) ──────────────────────
 async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
 
@@ -854,7 +1374,7 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
           const segments = Array.isArray(parsed?.[0]) ? parsed[0] : [];
           translated = segments.map((seg) => (Array.isArray(seg) ? String(seg[0] || '') : '')).join('');
         }
-        const result = normalizeBlock(translated);
+        const result = normalizeProviderBlock(translated);
         // Il `continue` implicito resta: se questo endpoint rende l'eco si prova
         // il successivo, come prima. Cambia solo che la formula e' una sola e
         // che il tentativo finisce nel bucket invece di sparire.
@@ -977,7 +1497,7 @@ async function raceInstances(instances, fetchFn, outcome = null) {
 
 // ── Lingva Translate (free Google Translate proxy) ───────────────────────────
 async function translateWithLingva(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
   const encoded = encodeURIComponent(q);
 
@@ -991,7 +1511,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
     );
     if (!res.ok) return '';
     const data = await res.json();
-    const translated = normalizeBlock(data?.translation || '');
+    const translated = normalizeProviderBlock(data?.translation || '');
     // Dentro `raceInstances`: se questa istanza rende l'eco NON deve vincere la
     // gara, le altre stanno ancora provando. Percio' il rifiuto resta qui e non
     // sale in `tryTier` — ma passa dalla formula condivisa e viene contato.
@@ -1001,7 +1521,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
 
 // ── SimplyTranslate (another free Google Translate proxy) ────────────────────
 async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(SIMPLYTRANSLATE_INSTANCES, async (base, signal, attemptOutcome) => {
@@ -1017,7 +1537,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
     });
     if (!res.ok) return '';
     const data = await res.json();
-    const translated = normalizeBlock(data?.translated_text || '');
+    const translated = normalizeProviderBlock(data?.translated_text || '');
     return acceptedRaceAnswer('simplyTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
@@ -1025,7 +1545,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
 // ── LibreTranslate self-hosted (CI service container) ──────────────────────
 async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLang, outcome = null) {
   if (!LIBRETRANSLATE_SELF_HOSTED) return '';
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   // First call uses a 30s warmup window regardless of LIBRETRANSLATE_TIMEOUT_MS.
@@ -1044,7 +1564,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
       return '';
     }
     const data = await res.json();
-    const translated = normalizeBlock(data?.translatedText || '');
+    const translated = normalizeProviderBlock(data?.translatedText || '');
     if (translated && rejectedAsPassthrough('libreTranslateSelfHosted', q, translated, outcome)) {
       return '';
     }
@@ -1063,7 +1583,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
 
 // ── LibreTranslate public instances ─────────────────────────────────────────
 async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(LIBRETRANSLATE_PUBLIC, async (base, signal, attemptOutcome) => {
@@ -1075,14 +1595,14 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
     });
     if (!res.ok) return '';
     const data = await res.json();
-    const translated = normalizeBlock(data?.translatedText || '');
+    const translated = normalizeProviderBlock(data?.translatedText || '');
     return acceptedRaceAnswer('libreTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
 
 // ── Mozhi (open-source proxy, supports: google, deepl, duckduckgo, yandex) ──
 async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = 'google', outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(MOZHI_INSTANCES, async (base, signal, attemptOutcome) => {
@@ -1099,7 +1619,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
     if (!res.ok) return '';
     const data = await res.json();
     // Mozhi uses 'translated-text' (hyphenated) in its response
-    const translated = normalizeBlock(data?.['translated-text'] || data?.translated_text || '');
+    const translated = normalizeProviderBlock(data?.['translated-text'] || data?.translated_text || '');
     // Chiave per MOTORE: `tryTier` chiama questa stessa funzione con quattro
     // nomi diversi (`mozhiDdg`, `mozhiGoogle`, `mozhiYandex`, `mozhiDeepL`) e da
     // qui dentro non sono ricostruibili, quindi il bucket usa `mozhi:<engine>`
@@ -1111,13 +1631,13 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
 // ── Azure Translator (F0 Free — 2M chars/month, near-DeepL quality) ────────
 async function translateWithAzure(text, sourceLang, targetLang, outcome = null) {
   if (AZURE_TRANSLATOR_KEYS.length === 0) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
 
   // Azure supports up to 50K chars per request, but we chunk at 5K for safety
   const MAX_CHUNK = 5000;
-  const chunks = clean.length <= MAX_CHUNK ? [clean] : chunkText(clean, MAX_CHUNK);
+  const chunks = chunkText(clean, MAX_CHUNK);
 
   for (let attempt = 0; attempt < AZURE_TRANSLATOR_KEYS.length; attempt++) {
     const idx = (_azureKeyIndex + attempt) % AZURE_TRANSLATOR_KEYS.length;
@@ -1126,7 +1646,11 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 
     try {
       const translated = [];
-      for (const chunk of chunks) {
+      for (const { text: chunk, protectedOversize } of chunks) {
+        if (protectedOversize) {
+          translated.push(chunk);
+          continue;
+        }
         const url = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${sourceLang}&to=${targetLang}`;
         // Single call with the configured region. A 401/403 is an auth/credential
         // failure (bad or revoked key) — NOT something a different region header can
@@ -1188,7 +1712,9 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
         translated.push(t);
         if (chunks.length > 1) await delay(100);
       }
-      const result = normalizeBlock(translated.join('\n\n'));
+      // A missing provider part is a structure miss for this tier, not a partial
+      // translation to expose to the field.
+      const result = normalizeProviderBlock(recomposeChunkPartsOrEmpty(chunks, translated));
       // Stessa ragione di DeepL: la scelta della chiave su cui restare avviene
       // qui dentro, prima che `tryTier` veda l'uscita, quindi il passthrough va
       // riconosciuto e CONTATO qui, non solo scartato.
@@ -1488,7 +2014,7 @@ function _cleanCodexTranslation(raw, source, marker) {
 }
 
 async function translateWithCodex(text, sourceLang, targetLang, outcome = null, position = 'primary') {
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   // La cascata chiama il tier in entrambe le posizioni: risponde solo quella
   // scelta per il processo.
@@ -1843,7 +2369,7 @@ async function _getGoogleCloudAccessToken() {
 
 export async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
   if (!_gcOAuthAvailable && !_gcServiceAccountAvailable) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   if (_googleCloudDailyChars + clean.length > GOOGLE_CLOUD_DAILY_LIMIT) {
     noteTranslationOutcome(outcome, 'incomplete');
@@ -1918,7 +2444,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       return '';
     }
     const data = await res.json();
-    const translated = normalizeBlock(data?.data?.translations?.[0]?.translatedText || '');
+    const translated = normalizeProviderBlock(data?.data?.translations?.[0]?.translatedText || '');
     if (!translated) {
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
@@ -1941,7 +2467,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
 // ── Hugging Face OPUS-MT (Helsinki-NLP open-source models) ─────────────────
 async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = null) {
   if (!HF_TOKEN) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
 
   const modelKey = `${sourceLang}-${targetLang}`;
@@ -1966,7 +2492,7 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
       return '';
     }
     const data = await res.json();
-    const translated = normalizeBlock(
+    const translated = normalizeProviderBlock(
       Array.isArray(data) ? data[0]?.translation_text || '' : data?.translation_text || ''
     );
     if (!translated) noteTranslationOutcome(outcome, 'incomplete');
@@ -1978,14 +2504,18 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
 }
 
 async function translateWithGoogle(text, sourceLang, targetLang, outcome = null) {
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
 
   const chunks = chunkText(clean, 1800);
   if (!chunks.length) return '';
 
   const translated = [];
-  for (const chunk of chunks) {
+  for (const { text: chunk, protectedOversize } of chunks) {
+    if (protectedOversize) {
+      translated.push(chunk);
+      continue;
+    }
     let result = '';
     for (let attempt = 1; attempt <= 3; attempt++) {
       result = await translateChunkGoogle(chunk, sourceLang, targetLang, outcome);
@@ -1996,50 +2526,15 @@ async function translateWithGoogle(text, sourceLang, targetLang, outcome = null)
     translated.push(result);
   }
 
-  const merged = normalizeBlock(translated.join('\n\n'));
+  // A missing provider part is a structure miss for this tier, not a partial
+  // translation to expose to the field.
+  const merged = normalizeProviderBlock(recomposeChunkPartsOrEmpty(chunks, translated));
   return merged; // il confronto con la sorgente e' salito in `tryTier`
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 function chunkText(text, maxChars = 1800) {
-  const clean = normalizeBlock(text);
-  if (!clean) return [];
-  if (clean.length <= maxChars) return [clean];
-
-  const chunks = [];
-  const paragraphs = clean.split(/\n{2,}/);
-  let current = '';
-
-  for (const para of paragraphs) {
-    if (current && (current.length + para.length + 2) > maxChars) {
-      chunks.push(current.trim());
-      current = para;
-    } else {
-      current = current ? `${current}\n\n${para}` : para;
-    }
-  }
-  if (current.trim()) chunks.push(current.trim());
-
-  // If any chunk is still too long, hard-split by sentences
-  const result = [];
-  for (const chunk of chunks) {
-    if (chunk.length <= maxChars) {
-      result.push(chunk);
-    } else {
-      const sentences = chunk.split(/(?<=[.!?])\s+/);
-      let cur = '';
-      for (const s of sentences) {
-        if (cur && (cur.length + s.length + 1) > maxChars) {
-          result.push(cur.trim());
-          cur = s;
-        } else {
-          cur = cur ? `${cur} ${s}` : s;
-        }
-      }
-      if (cur.trim()) result.push(cur.trim());
-    }
-  }
-  return result;
+  return _chunkAtSentences(text, maxChars);
 }
 
 function delay(ms) {
@@ -2109,8 +2604,15 @@ export function balanceMarkdownMarkers(s) {
   //    a separator line sat between two paragraph breaks (\n\nSEP\n\n →
   //    \n\n\n after filter).
   out = out.replace(/\n{3,}/g, '\n\n');
-  // 6. Collapse the consecutive double-spaces that step 1 may have left.
-  out = out.replace(/[ \t]{2,}/g, ' ');
+  // 6. Collapse consecutive inline spaces that step 1 may have left without
+  // erasing the indentation of nested Markdown list items.
+  out = out
+    .split('\n')
+    .map((line) => {
+      const indent = line.match(/^[ \t]*/u)?.[0] || '';
+      return indent + line.slice(indent.length).replace(/[ \t]{2,}/g, ' ');
+    })
+    .join('\n');
   return out.trim();
 }
 
@@ -2147,6 +2649,15 @@ function mergeTranslationOutcome(target, source) {
   target.incomplete = target.incomplete || source.incomplete === true;
 }
 
+// MyMemory rejects requests shorter than three characters before it reaches
+// the network. Preserve the actual line content while padding only the
+// provider input; the response is normalized and judged against the unpadded
+// source by the structure/passthrough guards below.
+function myMemoryRequestText(text) {
+  const value = String(text ?? '');
+  return value.length < 3 ? value.padEnd(3, ' ') : value;
+}
+
 /**
  * Sorgente pronta per un motore: normalizzata e con i token protetti mascherati.
  * `null` su una sorgente vuota. E' l'ingresso di `freeTranslate` e di
@@ -2159,7 +2670,8 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
     ? normalizeGermanGenderForms(text)
     : text;
   const sourceClean = normalizeBlock(sourceInput);
-  if (!sourceClean) return null;
+  const structureSource = normalizeStructuredBlock(sourceInput);
+  if (!sourceClean || !structureSource) return null;
   // Protected tokens: mask DACH gender trigraphs ("(m/w/d)") before any tier
   // sees them. Handed the raw code, translators expand the letters as words —
   // live IT titles came back as "(lunedì/mercoledì/d)" (m→Monday, w→Wednesday).
@@ -2167,8 +2679,8 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
   // nothing to protect, so the cascade payload only differs for the small
   // fraction of titles that actually carry a trigraph — no `tokens.length`
   // branch is needed to keep the common case untouched.
-  const { text: clean, tokens: protectedTokens } = maskProtectedTokens(sourceClean);
-  return { rawSourceClean, sourceClean, clean, protectedTokens };
+  const { text: clean, tokens: protectedTokens } = maskProtectedTokens(structureSource);
+  return { rawSourceClean, sourceClean, structureSource, clean, protectedTokens };
 }
 
 /**
@@ -2197,7 +2709,7 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
 export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
   const prepared = _prepareEngineSource(text, sourceLang, fieldType);
   if (!prepared) return '';
-  const { rawSourceClean, sourceClean, clean } = prepared;
+  const { rawSourceClean, sourceClean, structureSource, clean } = prepared;
   if (sourceLang === targetLang) return sourceClean;
 
   _cascadeStats.calls++;
@@ -2218,7 +2730,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   /** Try a tier: track success/error/passthrough, return result or '' */
   async function tryTier(tierName, fn) {
     try {
-      const result = await fn();
+      let result = await fn(clean);
       // Un tier che rimanda indietro `clean` non ha tradotto: non e' un hit, ed
       // e' l'UNICO posto in cui questa cascata puo' accorgersene — a valle il
       // passthrough e' testo valido e nessun predicato lo scarta (vedi
@@ -2236,7 +2748,41 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       if (rejectedAsMetaResponse(tierName, sourceClean, result, _outcome)) {
         return '';
       }
+      if (result && !hasSameLineStructure(clean, result)) {
+        const recovered = await recoverStructuredTier({
+          tierName,
+          sourceText: clean,
+          fn,
+          outcome: _outcome,
+        });
+        if (!recovered.ok) {
+          noteTierStructureFailure(tierName, recovered.reason);
+          noteTranslationOutcome(_outcome, 'incomplete');
+          if (recovered.error) throw recovered.error;
+          return '';
+        }
+        result = recovered.text;
+        if (recovered.allLinesNonTranslatable) {
+          noteNumericDrift(tierName, sourceClean, result);
+          _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
+          _cascadeStats.successes++;
+          fieldStats.successes++;
+          return result;
+        }
+        if (rejectAggregatedPassthrough(
+          tierName,
+          recovered.translatableLines,
+          recovered.passthroughLines,
+          _outcome,
+        )) {
+          return '';
+        }
+        // `rejectedAsMetaResponse` was already applied to every recovered line;
+        // recomposition preserves those line texts, so repeating it here would
+        // only double-count the same meta-response.
+      }
       if (result) {
+        noteNumericDrift(tierName, sourceClean, result);
         _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
         _cascadeStats.successes++;
         fieldStats.successes++;
@@ -2253,19 +2799,19 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // Codex is the owner-approved primary. A missing broker, disabled lane,
   // timeout or quota opens the router's in-run circuit and falls through to
   // the existing translation providers below without waiting on each field.
-  const t0 = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome, 'primary'));
+  const t0 = await tryTier('codex', (requestText = clean) => translateWithCodex(requestText, sourceLang, targetLang, _outcome, 'primary'));
   if (t0) return finalize(t0);
 
   // Tier 1 fallback: DeepL Free API (best quality, if API key set)
-  const t1 = await tryTier('deepl', () => translateWithDeepL(clean, sourceLang, targetLang, _outcome));
+  const t1 = await tryTier('deepl', (requestText = clean) => translateWithDeepL(requestText, sourceLang, targetLang, _outcome));
   if (t1) return finalize(t1);
 
   // Tier 2 fallback: Azure Translator (F0 Free — 2M chars/month, near-DeepL quality)
-  const t1b = await tryTier('azure', () => translateWithAzure(clean, sourceLang, targetLang, _outcome));
+  const t1b = await tryTier('azure', (requestText = clean) => translateWithAzure(requestText, sourceLang, targetLang, _outcome));
   if (t1b) return finalize(t1b);
 
   // Tier 3: Google Cloud Translation (official API, 500K free/month, hard-capped 16K/day)
-  const t2c = await tryTier('googleCloud', () => translateWithGoogleCloud(clean, sourceLang, targetLang, _outcome));
+  const t2c = await tryTier('googleCloud', (requestText = clean) => translateWithGoogleCloud(requestText, sourceLang, targetLang, _outcome));
   if (t2c) return finalize(t2c);
 
   // Tier 3a: Local Opus-MT (Helsinki-NLP via @huggingface/transformers, on-runner).
@@ -2278,7 +2824,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   if (targetLang !== 'it' && localOpusMtEnabled()) {
     const t3a = await tryTier(
       'localOpusMt',
-      () => translateWithLocalOpusMtWithOutcome(clean, sourceLang, targetLang, _outcome),
+      (requestText = clean) => translateWithLocalOpusMtWithOutcome(requestText, sourceLang, targetLang, _outcome),
     );
     if (t3a) return finalize(t3a);
   }
@@ -2294,15 +2840,15 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // post-MyMemory fallback (Tier 4a below), preserving pre-PR IT behaviour. No-op
   // when LIBRETRANSLATE_SELF_HOSTED_URL is unset (returns '').
   if (targetLang !== 'it') {
-    const t3b = await tryTier('libreTranslateSelfHosted', () => translateWithLibreTranslateSelfHosted(clean, sourceLang, targetLang, _outcome));
+    const t3b = await tryTier('libreTranslateSelfHosted', (requestText = clean) => translateWithLibreTranslateSelfHosted(requestText, sourceLang, targetLang, _outcome));
     if (t3b) return finalize(t3b);
   }
 
   // Tier 4: MyMemory (best EU language quality, 50K chars/day with email param)
   // Short text (≤5000 chars): single call. Long text: chunk at sentence boundaries.
-  const t2 = await tryTier('myMemory', async () => {
-    if (clean.length <= 5000) {
-      const mm = await translateWithMyMemory(clean, sourceLang, targetLang);
+  const t2 = await tryTier('myMemory', async (requestText = clean) => {
+    if (requestText.length <= 5000) {
+      const mm = await translateWithMyMemory(myMemoryRequestText(requestText), sourceLang, targetLang);
       if (!mm) {
         noteTranslationOutcome(_outcome, 'incomplete');
         return '';
@@ -2318,32 +2864,64 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // restavano scoperti. Ora vale per tutti e conta anche la statistica.
       return normalizeBlock(mm);
     }
-    // Chunk long text at sentence/paragraph boundaries
-    const chunks = _chunkAtSentences(clean, 4800);
+    // MyMemory's response handling is not measured per provider in the
+    // repository cache, and live quota was exhausted. Send one source line per
+    // request so structure does not depend on the provider retaining newlines;
+    // the original separators remain metadata for the recomposition below.
+    const chunks = _chunkAtSentences(requestText, 4800, { oneLinePerChunk: true });
     if (chunks.length === 0) {
       noteTranslationOutcome(_outcome, 'incomplete');
       return '';
     }
     const parts = [];
+    const translatableChunks = [];
+    const passthroughChunks = [];
     for (const chunk of chunks) {
-      const mm = await translateWithMyMemory(chunk, sourceLang, targetLang);
+      if (chunk.protectedOversize || !hasTranslatableLineText(chunk.text)) {
+        parts.push(chunk.text);
+        continue;
+      }
+      translatableChunks.push(chunk.text);
+      const requestText = lineStructuralSignature(chunk.text).text;
+      const mm = await translateWithMyMemory(myMemoryRequestText(requestText), sourceLang, targetLang);
       if (!mm || mm.includes('MYMEMORY WARNING')) {
         noteTranslationOutcome(_outcome, 'incomplete');
-        return ''; // quota hit mid-chunk, abort
+        // A translatable line that this tier cannot serve (notably MyMemory's
+        // <3-character input limit) is a tier miss, never a source copy. The
+        // next cascade tier must receive the whole field.
+        return '';
       }
       const normalized = normalizeBlock(mm);
-      // Un eco sostanzioso invalida l'intero campo: assemblarlo con chunk
-      // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
-      // placeholder) resta invece nell'assemblato e viene giudicato da
-      // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
-      if (rejectedAsPassthrough('myMemory', chunk, normalized, _outcome, 'chunk')
-        && isSubstantivePassthroughChunk(chunk)) return '';
-      parts.push(normalized);
+      const recomposedLine = restoreSourceLineStructure(chunk.text, normalized);
+      if (!recomposedLine) {
+        noteTranslationOutcome(_outcome, 'incomplete');
+        return '';
+      }
+      if (rejectedAsPassthroughWithSourceVariants(
+        'myMemory',
+        chunk.text,
+        chunk.text,
+        recomposedLine,
+        null,
+        'line',
+      )) {
+        passthroughChunks.push(chunk.text);
+      }
+      parts.push(recomposedLine);
     }
-    // `return joined` e non un confronto locale: questo e' il ramo dei testi
-    // lunghi, cioe' dei body. Gli echo per segmento sono gia' nel bucket
-    // `tierPassthroughChunks`, oltre al conteggio canonico richiesto da #1210.
-    return normalizeBlock(parts.join(' '));
+    // Ricomponi con i separatori della sorgente, non con uno spazio fisso. Le
+    // righe uguali vengono giudicate aggregate: «No» → «No» puo' essere giusto,
+    // mentre molte righe uguali insieme sono un MISS del campo.
+    if (rejectAggregatedPassthrough(
+      'myMemory',
+      translatableChunks.length,
+      passthroughChunks,
+      _outcome,
+      passthroughChunks.length,
+    )) return '';
+    // A missing provider part is a structure miss for this tier, not a partial
+    // translation to expose to the field.
+    return normalizeBlock(recomposeChunkPartsOrEmpty(chunks, parts));
   });
   if (t2) return finalize(t2);
 
@@ -2353,7 +2931,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   if (targetLang === 'it' && localOpusMtEnabled()) {
     const t3aFallback = await tryTier(
       'localOpusMt',
-      () => translateWithLocalOpusMtWithOutcome(clean, sourceLang, targetLang, _outcome),
+      (requestText = clean) => translateWithLocalOpusMtWithOutcome(requestText, sourceLang, targetLang, _outcome),
     );
     if (t3aFallback) return finalize(t3aFallback);
   }
@@ -2364,42 +2942,42 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   // Tier 3b, so re-running it here would pay a second (up to 30s) timeout on a
   // hung endpoint for no benefit — skip. No-op when self-hosted URL is unset.
   if (targetLang === 'it') {
-    const t3bFallback = await tryTier('libreTranslateSelfHosted', () => translateWithLibreTranslateSelfHosted(clean, sourceLang, targetLang, _outcome));
+    const t3bFallback = await tryTier('libreTranslateSelfHosted', (requestText = clean) => translateWithLibreTranslateSelfHosted(requestText, sourceLang, targetLang, _outcome));
     if (t3bFallback) return finalize(t3bFallback);
   }
 
   // Tier 4b: LibreTranslate public instances (raced in parallel — reliable from CI)
-  const t4 = await tryTier('libreTranslate', () => translateWithLibreTranslate(clean, sourceLang, targetLang, _outcome));
+  const t4 = await tryTier('libreTranslate', (requestText = clean) => translateWithLibreTranslate(requestText, sourceLang, targetLang, _outcome));
   if (t4) return finalize(t4);
 
   // Tier 5: Hugging Face OPUS-MT (Helsinki-NLP open-source, good for short text)
-  const t5 = await tryTier('huggingFace', () => translateWithHuggingFace(clean, sourceLang, targetLang, _outcome));
+  const t5 = await tryTier('huggingFace', (requestText = clean) => translateWithHuggingFace(requestText, sourceLang, targetLang, _outcome));
   if (t5) return finalize(t5);
 
   // Tier 6: Mozhi+DuckDuckGo (Bing via Mozhi proxy — works sometimes from CI)
-  const t6b = await tryTier('mozhiDdg', () => translateWithMozhiEngine(clean, sourceLang, targetLang, 'duckduckgo', _outcome));
+  const t6b = await tryTier('mozhiDdg', (requestText = clean) => translateWithMozhiEngine(requestText, sourceLang, targetLang, 'duckduckgo', _outcome));
   if (t6b) return finalize(t6b);
 
   // ── LOCAL/DEV TIERS (blocked from GitHub Actions IPs, work locally) ───────
 
   // Tier 6: Lingva (Google Translate proxy — works locally, blocked in CI)
-  const t6 = await tryTier('lingva', () => translateWithLingva(clean, sourceLang, targetLang, _outcome));
+  const t6 = await tryTier('lingva', (requestText = clean) => translateWithLingva(requestText, sourceLang, targetLang, _outcome));
   if (t6) return finalize(t6);
 
   // Tier 7: Mozhi+Google (Google via Mozhi — works locally, blocked in CI)
-  const t7 = await tryTier('mozhiGoogle', () => translateWithMozhiEngine(clean, sourceLang, targetLang, 'google', _outcome));
+  const t7 = await tryTier('mozhiGoogle', (requestText = clean) => translateWithMozhiEngine(requestText, sourceLang, targetLang, 'google', _outcome));
   if (t7) return finalize(t7);
 
   // Tier 8: Google Translate (unofficial direct endpoint — often blocked)
-  const t8 = await tryTier('google', () => translateWithGoogle(clean, sourceLang, targetLang, _outcome));
+  const t8 = await tryTier('google', (requestText = clean) => translateWithGoogle(requestText, sourceLang, targetLang, _outcome));
   if (t8) return finalize(t8);
 
   // Tier 9: Mozhi+DeepL (DeepL engine returns empty via proxy — broken since 2026-03)
-  const t9 = await tryTier('mozhiDeepL', () => translateWithMozhiEngine(clean, sourceLang, targetLang, 'deepl', _outcome));
+  const t9 = await tryTier('mozhiDeepL', (requestText = clean) => translateWithMozhiEngine(requestText, sourceLang, targetLang, 'deepl', _outcome));
   if (t9) return finalize(t9);
 
   // Tier 10: Mozhi+Yandex (slow last resort)
-  const t10 = await tryTier('mozhiYandex', () => translateWithMozhiEngine(clean, sourceLang, targetLang, 'yandex', _outcome));
+  const t10 = await tryTier('mozhiYandex', (requestText = clean) => translateWithMozhiEngine(requestText, sourceLang, targetLang, 'yandex', _outcome));
   if (t10) return finalize(t10);
 
   // Tier finale: Codex Luna Max in coda alla cascata, solo con
@@ -2413,7 +2991,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
   if ((_echoTiersByOutcome.get(_outcome)?.size || 0) >= CODEX_LAST_SKIP_ECHOES) {
     _codexLastInvariantSkips += 1;
   } else {
-    const tLast = await tryTier('codex', () => translateWithCodex(clean, sourceLang, targetLang, _outcome, 'last'));
+    const tLast = await tryTier('codex', (requestText = clean) => translateWithCodex(requestText, sourceLang, targetLang, _outcome, 'last'));
     if (tLast) return finalize(tLast);
   }
 
