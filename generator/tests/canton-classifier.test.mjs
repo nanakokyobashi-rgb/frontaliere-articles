@@ -374,8 +374,14 @@ describe('campo canton nel registry', () => {
 
   test('create-article.mjs popola canton prima del lock, nei due percorsi', () => {
     const src = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
-    const hits = [...src.matchAll(/data\.canton = registryCantonsOrNone\([^)]*\);\n\s*beginRegisterLock\(data\.id\);/gu)];
-    assert.equal(hits.length, 2);
+    const assignments = [...src.matchAll(/data\.canton = registryCantonsOrNone\([^)]*\);/gu)];
+    assert.equal(assignments.length, 2);
+    for (const { index } of assignments) {
+      const lockIndex = src.indexOf('beginRegisterLock(data.id);', index);
+      assert.notEqual(lockIndex, -1);
+      const beforeLock = src.slice(index, lockIndex + 'beginRegisterLock(data.id);'.length);
+      assert.match(beforeLock, /assertNoArticleIdentityServiceMarkers\(data, \{ qualityReject: true \}\);\s*beginRegisterLock\(data\.id\);/u);
+    }
     assert.match(src, /import \{ registryCantonsForArticle \} from '\.\/lib\/canton-classifier\.mjs';/u);
   });
 

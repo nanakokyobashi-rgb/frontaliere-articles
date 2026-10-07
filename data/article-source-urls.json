@@ -1,7 +1,4 @@
 {
-  "https://www.laregione.ch/culture/locarno-film-festival/1942418/il-produttore-che-venne-dal-freddo": "produttore-islandese-hollywood-lezione",
-  "https://www.ticinonews.ch/ticino/niente-piu-bucalettere-sotto-casa-anziani-e-sindacati-insorgono-440299": "bucalettere-centralizzate-anziani-sindacati",
-  "https://www.varesenews.it/2026/08/accise-232-milioni-arrivano-dai-ministeri-il-mef-copre-oltre-meta-del-taglio/2653150": "accise-gasolio-ministeri-mef",
   "https://www.tvsvizzera.it/tvs/qui-svizzera/cala-il-numero-dei-frontalieri-italiani%2c-in-aumento-quelli-francesi/91855146": "calo-frontalieri-italiani-ticino",
   "https://www.laregione.ch/culture/locarno-film-festival/1942528/adolescenti-che-fanno-shifting-e-che-lottano-per-la-famiglia": "adolescenti-shifting-famiglia-recensioni-film",
   "https://www.rsi.ch/s/3939708": "scontri-al-festival-turco-11-curdi-condannati-a-basilea",
@@ -2104,6 +2101,21 @@
   "https://comozero.it/attualita/como-turisti-derubati-e-aggrediti-mentre-dormono-nel-van-arrestato-un-21enne": {
     "articleId": "furto-van-cernobbio-21enne",
     "ts": "2026-10-07T11:25:53.548Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/cronaca-20/articolo/salta-in-aria-un-altro-bancomat-colpo-notturno-alla-bper-di-gallarate.html": {
+    "articleId": "notte-bper-gallarate-bancomat",
+    "ts": "2026-10-07T12:19:47.222Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/provincia-di-como-cade-da-una-scala-in-unazienda-agricola-grave-79enne": {
+    "articleId": "caduta-scala-locate-varesino",
+    "ts": "2026-10-07T12:57:53.320Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-cantello-torna-il-teatro-dialettale-con-quei-giargianes-da-giappunes/2700721": {
+    "articleId": "cantello-teatro-dialettale-ottobre-2026",
+    "ts": "2026-10-07T16:05:11.906Z",
     "keyForm": 2
   }
 }

@@ -4079,9 +4079,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "914d98fbe777fb1b",
-        "corpus": "914d98fbe777fb1b",
-        "alignedAt": "2026-10-05"
+        "site": "7ef1f5c685e1955e",
+        "corpus": "7ef1f5c685e1955e",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4139,9 +4139,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e806a05d5b559e92",
-        "corpus": "e806a05d5b559e92",
-        "alignedAt": "2026-10-05"
+        "site": "1b2f64e1ba00b020",
+        "corpus": "1b2f64e1ba00b020",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4239,9 +4239,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "79f193dcc2bdd1ff",
-        "corpus": "79f193dcc2bdd1ff",
-        "alignedAt": "2026-10-06"
+        "site": "96dda93769a3b509",
+        "corpus": "96dda93769a3b509",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4250,9 +4250,9 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "67134f0f415d5083",
-        "corpus": "67134f0f415d5083",
-        "alignedAt": "2026-10-06"
+        "site": "9cc5b734a3ede617",
+        "corpus": "9cc5b734a3ede617",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4306,9 +4306,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3aec2f36e957dac1",
-        "corpus": "3aec2f36e957dac1",
-        "alignedAt": "2026-09-23"
+        "site": "e7e7ded5e06643d0",
+        "corpus": "e7e7ded5e06643d0",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4357,7 +4357,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "96be75827f4f9777",
+        "corpus": "b0bfddc6e984796f",
         "alignedAt": "2026-10-01"
       }
     },
@@ -5471,6 +5471,76 @@
         "site": null,
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/ci/check-registration-locks.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard CI dei lock di registrazione runner-locali: segnala con sezione e runId un marker cantonale o di sezione rimasto nel workspace. Il sito non esegue i producer del corpus e non ha un gemello da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/merge-generated-image-registry.mjs",
+      "mode": "corpus-only",
+      "reason": "Merge deterministico del registro immagini generato durante il rebase del drain: conserva gli asset prodotti localmente mentre prende il registro upstream per risolvere il push concorrente. Il registro e il suo rebase appartengono alla pubblicazione dati del corpus; non esiste un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-cover-engine.mjs",
+      "mode": "corpus-only",
+      "reason": "Adapter corpus-only del motore governato per le copertine `article-hero`: mantiene una sola costruzione di scope, soggetto, staging e policy fra generazione normale e smaltimento della coda. L'engine mirrorato resta la sorgente del provider, del prompt e della verifica; sul sito non esiste questo entry point del generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-cover-identity.mjs",
+      "mode": "corpus-only",
+      "reason": "Funzioni pure corpus-only per asset id, soggetto e path delle copertine articolo. Evitano che il nuovo consumer duplichi regex e normalizzazioni del percorso governato; il sito consuma il JSON pubblicato e non esegue il generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-registry-image.mjs",
+      "mode": "corpus-only",
+      "reason": "Locator e writer del campo `image` nei registry frontaliere, svizzera e cantonali. Aggiorna esclusivamente il record dell'articolo selezionato e non importa codice dal sito: la superficie cross-repo resta il JSON HTTP pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/image-regeneration-publish-outbox.mjs",
+      "mode": "corpus-only",
+      "reason": "Outbox durevole per il passaggio delle copertine rigenerate ai publisher esistenti: conserva section/articleId fra il push dei dati e il dispatch/acknowledgement, cosi' un errore di gh workflow run non perde una ripubblicazione. Il sito non esegue il drainer e consuma solo le superfici HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/regenerate-queued-covers.mjs",
+      "mode": "corpus-only",
+      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: smaltisce per anzianita', applica il percorso governato, aggiorna registro/hero/thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
       }
     }
   ]

@@ -172,7 +172,10 @@ import {
   retryPendingBodyTranslations,
 } from './lib/free-mt-recovery.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
-import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
+import {
+  isReservedPublishedSlug,
+  findArticleIdentityServiceMarkers,
+} from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
@@ -266,7 +269,6 @@ import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTit
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
-import { generateImageFromSpec } from '../../engine/shared/generatedImageEngine.mjs';
 import {
   appendGeneratedImageRecord,
   hasValidBlogImageRecord,
@@ -276,6 +278,7 @@ import {
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from './lib/article-cover-fallback.mjs';
+import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
@@ -301,6 +304,7 @@ import {
   cantonPromptLines,
   cantonSectionConfigs,
   cantonSectionSkeletons,
+  filterCantonSourceHeadlines,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
@@ -8564,13 +8568,28 @@ async function fetchCantonSourceHeadlines(source, domain) {
   if (!RUN_REPORT.sources.canton) RUN_REPORT.sources.canton = [];
   const entry = { url: source.url, parser: source.parser, reserve: source.reserve === true, requests: 0, items: 0, recent: 0, status: 'failed' };
   RUN_REPORT.sources.canton.push(entry);
-  const { headlines: raw, requests, notes } = await scanCantonSource(source, {
+  const scanned = await scanCantonSource(source, {
     throttle: _cantonHostThrottle,
     extractRssItems,
     extractHeadlines,
   });
+  let { headlines: raw, requests, notes } = scanned;
   entry.requests = requests;
   entry.items = raw.length;
+  const filterByCanton = source.quirks?.filterByCanton;
+  if (filterByCanton) {
+    const wanted = String(filterByCanton).trim().toUpperCase();
+    const actual = String(SECTION_PROFILE.canton || '').trim().toUpperCase();
+    const before = raw.length;
+    if (wanted !== actual) {
+      raw = [];
+      notes = [...notes, `filterByCanton=${wanted} incompatibile con ${actual}: nessuna voce ammessa`];
+    } else {
+      raw = filterCantonSourceHeadlines(SECTION_PROFILE, source, raw);
+      entry.filteredByCanton = before - raw.length;
+      notes = [...notes, `filtro ${wanted}: ${raw.length}/${before} voci`];
+    }
+  }
   // Se ci sono voci recenti, solo quelle (come le fonti storiche RSS).
   // Altrimenti NON tutte, a differenza delle storiche: una voce con una data
   // piu' vecchia della finestra e' verificabilmente stantia e si scarta qui;
@@ -8581,7 +8600,8 @@ async function fetchCantonSourceHeadlines(source, domain) {
   const budget = sourceRequestBudget(source);
   const extra = [Number.isFinite(budget) ? `budget ${budget} richieste` : '', ...notes].filter(Boolean).join('; ');
   console.error(`  📡 ${domain} [${source.parser}]: ${recent.length} recenti su ${raw.length}${extra ? ` (${extra})` : ''}`);
-  return recent.length > 0 ? recent : raw.filter((h) => !h.date);
+  const selected = recent.length > 0 ? recent : raw.filter((h) => !h.date);
+  return selected.map((h) => ({ ...h, _cantonSourceUrl: source.url }));
 }
 
 // ── Step 1c: Scan all news sources for recent headlines ─────
@@ -8855,7 +8875,7 @@ async function scanNewsSources() {
       // la fonte lo da', e' parte del testo giudicato.
       const gateText = IS_CANTON && h.lead ? `${text} ${h.lead}` : text;
       const anchored = IS_CANTON
-        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url)
+        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url, h._cantonSourceUrl, h._cantonFilterBy)
         : hasDomainAnchor(text) || localNewsCandidate;
       if (dropAnchorless && !anchored) {
         droppedAnchor += 1;
@@ -12784,6 +12804,27 @@ export function validateHeadline(headline) {
   return errs;
 }
 
+/**
+ * A topic-gate verdict is control data, never a publishable article identity.
+ * The primary AI path marks this as a quality rejection so the next attempt
+ * receives the normal identity correction; secondary producers reach the same
+ * assertion through `deriveAndSanitizeArticleSlugs()` below.
+ */
+function assertNoArticleIdentityServiceMarkers(data, { qualityReject = false } = {}) {
+  const findings = findArticleIdentityServiceMarkers(data);
+  if (findings.length === 0) return;
+  const detail = findings
+    .map(({ field, locale, marker, value }) =>
+      `${field}${locale ? `.${locale}` : ''}="${value}" (${marker})`)
+    .join(', ');
+  const err = new Error(`[article-service-marker] identità non pubblicabile: ${detail}`);
+  if (qualityReject) {
+    err.qualityReject = true;
+    err.identityRejected = true;
+  }
+  throw err;
+}
+
 // ── Step 3: Validate Gemini response ────────────────────────
 function validate(data, opts = {}) {
   const minBodyChars = Number(opts.minBodyChars || MIN_BODY_CHARS);
@@ -12900,6 +12941,11 @@ function validate(data, opts = {}) {
     console.error(`⚠️  Campo "slugs" mancante — sarà derivato dai titoli per locale`);
     data.slugs = {};
   }
+  // `abort_topical_relevance`/`reason` are verdict fields, not article
+  // identity. Catch them before slug sanitization turns the field name into a
+  // normal-looking URL segment; this is the same write-boundary guard used by
+  // the secondary producers below and by the published-corpus observer.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
 
   // Synthesize seo from content.it if the model omitted it (common with smaller fallback models)
   if (!data.seo) {
@@ -14265,18 +14311,6 @@ const IMAGE_PHASE_BUDGET_MS = Math.max(
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
 
-function articleImageSubject(data) {
-  const title = String(data.title || data.content?.it?.title || data.content?.title || '').trim();
-  const context = String(data.imagePrompt || '').replace(/\s+/g, ' ').trim();
-  return [title, context].filter(Boolean).join(' — ').slice(0, 500);
-}
-
-function articleImageAssetId(data) {
-  const raw = String(data.id || 'article').toLowerCase();
-  const normalized = raw.replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
-  return `article-${(normalized || 'article').slice(0, 110)}`;
-}
-
 function materializeGovernedArticleImage(result) {
   const record = result?.record;
   const imageUrl = String(record?.imageUrl || '');
@@ -14315,33 +14349,20 @@ async function generateArticleImage(data) {
     return null;
   }
 
-  const assetId = articleImageAssetId(data);
-  const stagingDir = resolve(`.cache/generated-article-images/${assetId}-${process.pid}-${Date.now()}`);
   let result;
   try {
-    result = await generateImageFromSpec(
-      {
-        scope: 'article-hero',
-        assetId,
-        subject: articleImageSubject(data),
-        area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
-        season: 'all seasons',
-        variant: 'article hero',
+    result = await generateGovernedArticleHero({
+      root: PROJECT_ROOT,
+      data,
+      area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
+      deadlineAt: imageDeadline,
+      onProviderAttempt: ({ provider, attempt }) => {
+        console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
       },
-      {
-        outputDir: stagingDir,
-        assetId,
-        // A provider outage must fall through immediately. The engine itself
-        // owns provider order; this publishing path permits one attempt total.
-        maxAttempts: 1,
-        deadlineAt: imageDeadline,
-        onProviderAttempt: ({ provider, attempt }) => {
-          console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
-        },
-      },
-    );
+    });
   } catch (error) {
-    if (existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
+    const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
+    if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
@@ -14362,8 +14383,9 @@ async function generateArticleImage(data) {
     return null;
   } finally {
     const cleanupDir = materialized?.stagingDir
+      || result?.stagingDir
       || (result?.filePath ? path.dirname(result.filePath) : null)
-      || stagingDir;
+      || null;
     if (cleanupDir && existsSync(cleanupDir)) {
       rmSync(cleanupDir, { recursive: true, force: true });
     }
@@ -18052,6 +18074,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // eventuale `articleType` arrivato dal payload del modello.
   data.articleType = registryArticleTypeForRun(RUN_REPORT.selectedArticleType, url);
   data.canton = registryCantonsOrNone(data, url);
+  // The primary path writes directly and does not pass through
+  // registerArticleFiles(); this is the last identity check after every slug
+  // derivation and immediately before the first corpus write.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
@@ -18684,6 +18710,11 @@ function sectionLocaleSlugTaken(locale, slug) {
 export function deriveAndSanitizeArticleSlugs(data) {
   data.slugs = data.slugs && typeof data.slugs === 'object' ? data.slugs : {};
 
+  // This function is also the shared identity finalizer for producers that do
+  // not pass through `validate()`. A verdict marker in an id or localized slug
+  // must stop before `data.slugs.it = data.id` can write it to the registry.
+  assertNoArticleIdentityServiceMarkers(data);
+
   const idCheck = inspectSlugForPromptPlaceholder(data.id);
   if (idCheck.leaked) {
     throw new Error(
@@ -18749,6 +18780,10 @@ export function deriveAndSanitizeArticleSlugs(data) {
     onEvent: reportSlugI18nEvent,
   });
   data._slugI18nFallbacks = slugI18n.stillItalian;
+  // A translated title can create the final localized slug after the
+  // provisional identity check above. Re-run the service-marker guard on that
+  // value before returning it to a secondary producer.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   return data.slugs;
 }
 
@@ -18961,6 +18996,9 @@ export async function registerArticleFiles(data, opts = {}) {
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.
   data.articleType = resolveArticleType(data, opts);
   data.canton = registryCantonsOrNone(data, data.sourceUrl || '');
+  // Secondary producers may have derived localized slugs above. Keep the
+  // publish-boundary check immediately adjacent to their write lock too.
+  assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);

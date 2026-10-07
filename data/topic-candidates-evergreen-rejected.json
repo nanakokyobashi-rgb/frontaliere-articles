@@ -795,22 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/villa-principe-leopoldo-76-licenziamenti-per-la-ristrutturazione-dellhotel-443974": {
-      "section": "frontaliere",
-      "ts": 1791201995923
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/rinaldi-piccola-industria-la-pmi-e-un-presidio-sociale-energia-credito-e-competenze-le-sfide-delle-imprese-varesine/2698249": {
-      "section": "frontaliere",
-      "ts": 1791209698429
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/05/leggi-notizia/argomenti/economia-13/articolo/riforma-dellartigianato-lallarme-di-confapi-varese-a-rischio-la-competitivita-delle-pmi-i.html": {
-      "section": "frontaliere",
-      "ts": 1791209932659
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/scuola-imprese-e-territorio-a-saronno-un-convegno-sulle-nuove-sfide-degli-istituti-tecnici/2698585": {
-      "section": "frontaliere",
-      "ts": 1791210021979
-    },
     "frontaliere::https://www.varesenews.it/2026/10/rinnovato-il-contratto-integrativo-alla-irca-fino-a-13-800-euro-di-premio-nei-quattro-anni-e-piu-tutele-sulla-conciliazione/2698855": {
       "section": "frontaliere",
       "ts": 1791239766194
@@ -1090,6 +1074,18 @@
     "frontaliere::https://www.varesenews.it/2026/10/il-rapporto-della-fondazione-gimbe-il-servizio-sanitario-si-sta-indebolendo-linflazione-azzera-gli-aumenti/2700793": {
       "section": "frontaliere",
       "ts": 1791371574452
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1955337/svizzera-collaboratori-tamedia-tagli-giornalismo": {
+      "section": "frontaliere",
+      "ts": 1791385506456
+    },
+    "frontaliere::https://comozero.it/attualita/lake-como-tourism-ora-nasce-il-progetto-dedicato-alle-aziende-che-scelgono-il-lago-di-como": {
+      "section": "frontaliere",
+      "ts": 1791387400355
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/personale-romando-di-tamedia%2c-%22basta-licenziamenti%22/92181974": {
+      "section": "frontaliere",
+      "ts": 1791387438818
     }
   }
 }

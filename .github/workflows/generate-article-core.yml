@@ -18,7 +18,7 @@ on:
         required: true
         type: string
       concurrency_group:
-        description: 'Gruppo di concurrency del job che scrive'
+        description: 'Gruppo base di concurrency della sezione; la produzione non sostituisce i pending di altre sezioni'
         required: true
         type: string
       body_path_regex:
@@ -371,7 +371,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
-      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}
+      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('{0}-production', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
       cancel-in-progress: false
     steps:
       - name: Checkout
@@ -533,16 +533,8 @@ jobs:
           }
 
           registration_state_dirty() {
-            git diff --cached --name-status -- \
-              content/ 'generator/data/register-in-progress*.json' |
-              awk -F '\t' '
-                {
-                  path = $2
-                  if ($1 ~ /^R/ && $3 != "") path = $3
-                  if ($1 == "D" && path ~ /^generator\/data\/register-in-progress(-[[:alnum:]_-]+)?\.json$/) next
-                  print
-                  exit
-                }'
+            git diff --cached --name-status -- content/ |
+              awk -F '\t' 'NF { print; exit }'
           }
 
           sections=("$TARGET_SECTION")

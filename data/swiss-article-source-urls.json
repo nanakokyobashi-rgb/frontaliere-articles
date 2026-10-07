@@ -1,29 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948227/come-ridurre-il-traffico-sulle-strade-i-biglietti-piu-economici-non-bastano": {
-    "articleId": "ridurre-traffico-trasporti-pubblici",
-    "ts": "2026-09-05T18:30:02.406Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/dal-mondo/attualita/1948255/pride-lgbtq-comunita-belgrado-diritti-manifestazione-anni-serbia-lgbt": {
-    "articleId": "pride-belgrado-25-anni",
-    "ts": "2026-09-05T19:13:22.339Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1948225/ho-visto-la-pista-dal-finestrino-pensavo-ci-schiantassimo": {
-    "articleId": "volo-easyjet-valencia-ginevra",
-    "ts": "2026-09-05T20:47:35.725Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/rubriche/ospite/1948265/39-neutralita-pacifista-matteo-buzzi": {
-    "articleId": "pacifismo-neutralita-buzzi",
-    "ts": "2026-09-05T21:16:12.813Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/xkqqxunqnkgo": {
-    "articleId": "conferenza-osce-berna-2026",
-    "ts": "2026-09-06T01:22:17.571Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948156/polizia-operazione-goldach-gallo-segnalazioni": {
     "articleId": "polizia-operazione-goldach",
     "ts": "2026-09-06T01:27:55.662Z",
@@ -2497,6 +2472,31 @@
   "https://www.tio.ch/svizzera/attualita/1955227/casi-tumori-rischio-svizzera-trattamento-prostata-cancro-diagnosi-screening-rapporto": {
     "articleId": "cancro-prostata-assistenza-svizzera",
     "ts": "2026-10-07T10:02:14.858Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955269/svizzera-titoli-mercati-rendimenti-rialzo": {
+    "articleId": "rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0",
+    "ts": "2026-10-07T12:04:11.230Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/bns%3a-riserve-di-divise-sono-rimaste-stabili-in-settembre/92180848": {
+    "articleId": "riserve-valutarie-settembre-stabili",
+    "ts": "2026-10-07T12:36:56.807Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ffs%3a-nuove-soppressioni-di-sportelli-nelle-stazioni/92181373": {
+    "articleId": "ffs-sportelli-chiusi-stazioni",
+    "ts": "2026-10-07T14:55:43.347Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/hhtcbmz3uwb9": {
+    "articleId": "intelligenza-artificiale-diritti-umani",
+    "ts": "2026-10-07T15:29:13.775Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/e-kwfdci0u88": {
+    "articleId": "lista-sanzioni-sesam-svizzera",
+    "ts": "2026-10-07T18:29:12.035Z",
     "keyForm": 2
   }
 }

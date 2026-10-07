@@ -995,23 +995,14 @@ jobs:
 
           # A failed attempt can touch the registration transaction before it
           # has emitted the first body file: beginRegisterLock() writes its
-          # marker, then the router/union/meta targets are updated before
-          # writeSectionLocale() creates the body.  The body probe alone must
-          # not let that dirty transaction fall through to the other section.
-          # A marker deletion made by resolveRegisterLockAtStartup() is a
-          # successful recovery, so it is deliberately ignored; every other
-          # registration change remains a hard partial failure.
+          # runner-local marker, then the router/union/meta targets are updated
+          # before writeSectionLocale() creates the body. The body probe alone
+          # must not let that dirty transaction fall through to the other
+          # section. The marker is ignored by git on purpose; every real
+          # registration target remains a hard partial failure.
           registration_state_dirty() {
-            git diff --cached --name-status -- \
-              content/ 'generator/data/register-in-progress*.json' |
-              awk -F '\t' '
-                {
-                  path = $2
-                  if ($1 ~ /^R/ && $3 != "") path = $3
-                  if ($1 == "D" && path ~ /^generator\/data\/register-in-progress(-[[:alnum:]_-]+)?\.json$/) next
-                  print
-                  exit
-                }'
+            git diff --cached --name-status -- content/ |
+              awk -F '\t' 'NF { print; exit }'
           }
 
           # The attempt list, fixed before the loop — this is the termination
@@ -1490,8 +1481,8 @@ jobs:
                 # A process that writes a body and then fails has produced only
                 # a partial transaction. Do not let the body probe turn that
                 # failure into `produced=true`: the commit step uses this
-                # output, and git add -A would otherwise publish the partial
-                # files together with any marker or later fallback output.
+                # output, and a broad git add -A would otherwise publish the
+                # partial files together with later fallback output.
                 partial_failure=true
                 all_declared=false
                 [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha scritto un corpo sulla sezione $sec ma e' terminato con exit $rc: output parziale non pubblicabile"

@@ -477,6 +477,44 @@
       "status": "queued",
       "requestedAt": "2026-10-07T11:12:50.829Z",
       "lastFailureAt": "2026-10-07T11:12:50.829Z"
+    },
+    {
+      "articleId": "notte-bper-gallarate-bancomat",
+      "title": "Bancomat esploso: colpo notturno alla Bper di Gallarate",
+      "fallbackImage": "/images/blog/controlli-locali-busto-arsizio-gallarate.webp",
+      "reason": "All image providers failed for article-notte-bper-gallarate-bancomat: Codex broker timed out after 119998ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T12:19:47.220Z",
+      "lastFailureAt": "2026-10-07T12:19:47.220Z"
+    },
+    {
+      "articleId": "cantello-teatro-dialettale-ottobre-2026",
+      "title": "Cantello torna il teatro dialettale “Quei giargianes da giappunes”",
+      "fallbackImage": "/images/blog/sindacati-miazzina-diritti-9-ottobre.webp",
+      "reason": "All image providers failed for article-cantello-teatro-dialettale-ottobre-2026: image vision fallback deadline exceeded",
+      "status": "queued",
+      "requestedAt": "2026-10-07T16:05:11.904Z",
+      "lastFailureAt": "2026-10-07T16:05:11.904Z"
+    },
+    {
+      "articleId": "lucerna-qualita-sviluppo-scuole",
+      "title": "Lucerna, qualità e sviluppo scolastico più vicini",
+      "fallbackImage": "/images/blog/apprendistato-formazione-canton-lucerna.webp",
+      "reason": "All image providers failed for article-lucerna-qualita-sviluppo-scuole: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T18:10:58.705Z",
+      "lastFailureAt": "2026-10-07T18:10:58.705Z"
+    },
+    {
+      "articleId": "lopper-luce-pedoni-bici",
+      "title": "Lopper: illuminazione sul percorso tra Stansstad e Hergiswil",
+      "fallbackImage": "/images/blog/benzina-confine-svizzera-agosto-2026.webp",
+      "reason": "All image providers failed for article-lopper-luce-pedoni-bici: Codex broker timed out after 119998ms",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T18:27:16.502Z",
+      "lastFailureAt": "2026-10-07T18:27:16.502Z"
     }
   ]
 }
