@@ -292,6 +292,24 @@ test('feed condiviso: filterByCanton conserva NW e scarta le voci OW', () => {
   assert.deepEqual(filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'OW' } }, headlines), []);
 });
 
+test('feed Unterwalden: gli alias condivisi entrano in entrambi i profili, URL locali nel proprio', () => {
+  const nw = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  const ow = buildCantonProfile('canton-ow', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  const headlines = [
+    { headline: 'Unterwaldens Ski-Asse starten in den Winter', url: 'https://www.unterwalden24.ch/ski' },
+    { headline: 'Eiffelturm, Burj Khalifa – und jetzt Engelberg', url: 'https://www.unterwalden24.ch/engelberg' },
+    { headline: 'Mehr Sicherheit am Lopper', url: 'https://www.nw.ch/_rte/information/138826' },
+  ];
+  assert.deepEqual(
+    filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'NW' } }, headlines).map((h) => h.headline),
+    [headlines[0].headline, headlines[2].headline],
+  );
+  assert.deepEqual(
+    filterCantonSourceHeadlines(ow, { quirks: { filterByCanton: 'OW' } }, headlines).map((h) => h.headline),
+    [headlines[0].headline, headlines[1].headline],
+  );
+});
+
 test("lessico cantonale: composti tedeschi/francesi di mobilita' e sicurezza entrano, cultura no", () => {
   const p = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   for (const text of [

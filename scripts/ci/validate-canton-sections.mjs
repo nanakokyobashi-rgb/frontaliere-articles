@@ -267,6 +267,14 @@ export function validateCantonSections(doc, ctx) {
         else if (!QUIRKS[k](v)) err(where, `${lbl}: quirk ${k}=${JSON.stringify(v)} non valido`);
         else if (QUIRK_PARSERS[k] && !QUIRK_PARSERS[k].has(s.parser)) err(where, `${lbl}: quirk ${k} non si applica al parser "${s.parser}"`);
       }
+      const filterByCanton = s?.quirks?.filterByCanton;
+      if (filterByCanton !== undefined) {
+        if (!expectedCodes.includes(filterByCanton)) {
+          err(where, `${lbl}: quirk filterByCanton="${filterByCanton}" non e' un codice cantonale del profilo`);
+        } else if (filterByCanton !== c.code) {
+          err(where, `${lbl}: quirk filterByCanton="${filterByCanton}" non coincide col profilo proprietario ${c.code}`);
+        }
+      }
       if (!(s.items7d === null || (Number.isInteger(s.items7d) && s.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
       if (!DATE_RE.test(s.verifiedAt || '')) err(where, `${lbl}: verifiedAt non YYYY-MM-DD`);
       if (s.reserve !== undefined && s.reserve !== true) err(where, `${lbl}: reserve ammesso solo come true`);

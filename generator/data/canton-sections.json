@@ -5202,6 +5202,7 @@
             "lavoro"
           ],
           "quirks": {
+            "filterByCanton": "OW",
             "maxRequestsPerRun": 1
           },
           "items7d": 4,

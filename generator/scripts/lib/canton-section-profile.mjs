@@ -506,6 +506,23 @@ function sourceDomainMap() {
 let _sourceUrlMap = null;
 const LOCAL_SOURCE_KINDS = new Set(['media', 'istituzionale', 'polizia']);
 
+/**
+ * Alias espliciti per il solo feed condiviso Ob-/Nidvaldo. Non entrano nel
+ * gate geografico generale: qui servono a separare un feed regionale che usa
+ * «Unterwalden» come nome storico e titoli che indicano il cantone solo nel
+ * percorso dell'articolo (per esempio `www.nw.ch`).
+ */
+const SHARED_CANTON_AREA_ALIASES = Object.freeze({
+  NW: Object.freeze([
+    'nidwalden', 'nidwald', 'nidvaldo', 'stans', 'hergiswil', 'buochs', 'stansstad',
+    'dallenwil', 'wolfenschiessen', 'ennetbuergen', 'nw.ch', 'ob- und nidwalden', 'unterwalden',
+  ]),
+  OW: Object.freeze([
+    'obwalden', 'obwald', 'obvaldo', 'sarnen', 'engelberg', 'alpnach', 'giswil', 'kerns',
+    'sachseln', 'lungern', 'melchtal', 'ow.ch', 'ob- und nidwalden', 'unterwalden',
+  ]),
+});
+
 /** URL che identificano una pagina-fonte strettamente cantonale. */
 function canonicalSourceUrl(url) {
   try {
@@ -578,9 +595,13 @@ export function filterCantonSourceHeadlines(profile, source, headlines) {
   const wanted = String(source?.quirks?.filterByCanton || '').trim().toUpperCase();
   if (!wanted) return headlines;
   if (wanted !== String(profile?.canton || '').trim().toUpperCase()) return [];
-  return (headlines || []).filter((h) => profile?.isLocalArea?.(
-    `${h.headline || ''} ${h.lead || ''} ${h.url || ''}`,
-  ));
+  const aliases = SHARED_CANTON_AREA_ALIASES[wanted] || [];
+  const textAliases = aliases.filter((alias) => !alias.includes('.ch'));
+  const urlAliases = wanted === 'NW' ? ['nw.ch'] : wanted === 'OW' ? ['ow.ch'] : [];
+  return (headlines || []).filter((h) => {
+    const text = `${h.headline || ''} ${h.lead || ''}`;
+    return profile?.isLocalArea?.(text) || termHits(text, textAliases) > 0 || termHits(h.url || '', urlAliases) > 0;
+  });
 }
 
 /**
