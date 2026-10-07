@@ -17,10 +17,12 @@ name: Publish Journalist Articles
 # later — it silently loses the article. Incident 2026-07-16 (site repo run
 # 29485706663) orphaned four articles for 8+ hours exactly this way.
 #
-# The site repo defends with git-push-with-retry.sh plus an append-conflict
-# resolver. Neither was transported, and re-implementing that resolver here from
-# memory would be worse than not having it. So this workflow instead:
+# The shared rebase helper resolves the one append-like surface this workflow
+# shares with the generator: the cover-regeneration queue. Other conflicts are
+# still fatal, because silently choosing a side would orphan a published doc.
+# So this workflow:
 #   - retries the push with a rebase between attempts, and
+#   - merges queue items by articleId during that rebase,
 #   - FAILS LOUDLY with the published ids in the summary if it still cannot push,
 #     so the orphaned docs are named rather than silently dropped.
 # It never swallows a push failure. If this step is red, those ids need
@@ -326,7 +328,9 @@ jobs:
               break
             fi
             sleep $((attempt * 3))
-            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+              --merge-queue data/image-regeneration-queue.json \
+              || { git rebase --abort 2>/dev/null || true; }
           done
 
           # Deliberately NOT `|| true`. Firestore already says these are

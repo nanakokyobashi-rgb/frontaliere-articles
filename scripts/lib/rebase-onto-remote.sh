@@ -4,7 +4,8 @@
 #
 # Usage:
 #   bash scripts/lib/rebase-onto-remote.sh <remote-url> <target-branch> [bookkeeping-path...]
-#     [--merge-registry <path>] [--take-theirs <prefix/>] [--merge-counter <path>:<field>]
+#     [--merge-registry <path>] [--merge-queue <path>] [--take-theirs <prefix/>]
+#     [--merge-counter <path>:<field>]
 #     [--section-surfaces]   # i path di ogni sezione ATTIVA del core, derivati
 #                            # da scripts/ci/rebase-section-args.mjs
 #
@@ -79,7 +80,14 @@
 # which is worse than losing the article because it is silent), and when it
 # refuses we abort exactly as before.
 #
-# ── Il QUARTO ramo: i contatori (`--merge-counter <path>:<campo>`, D18) ──────
+# ── Il QUARTO ramo: la coda copertine (`--merge-queue <path>`) ──────────────
+#
+# `data/image-regeneration-queue.json` e' un documento JSON riscritto per intero
+# dai due producer degli articoli. Prendere un lato dopo un conflitto perde le
+# richieste dell'altro producer; il resolver unisce gli item per `articleId` e
+# sceglie il fallimento piu' recente per i duplicati.
+#
+# ── Il QUINTO ramo: i contatori (`--merge-counter <path>:<campo>`, D18) ──────
 #
 # `data/topic-candidates-{experimental,evergreen}-counter.json` e
 # `data/quota-state.json` sono contatori riscritti per intero a ogni run che
@@ -99,13 +107,15 @@ shift 2
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MERGE_RESOLVER="$SCRIPT_DIR/merge-content-registry-conflict.mjs"
+QUEUE_RESOLVER="$SCRIPT_DIR/merge-image-regeneration-queue.mjs"
 COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 
-# FOUR categories, deliberately not one list: they mean different things about
+# FIVE categories, deliberately not one list: they mean different things about
 # the file, and collapsing any two of them resolves a conflict the wrong way.
 #
 #   (bare path)        cache di bookkeeping   → prendi UPSTREAM
 #   --merge-registry   registro append-only   → unisci i RECORD
+#   --merge-queue      coda globale per articleId → unisci gli ITEM
 #   --take-theirs      file PER-ARTICOLO      → prendi il commit rigiocato
 #   --merge-counter    contatore (path:campo) → upstream + incremento rigiocato
 #
@@ -129,6 +139,7 @@ COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 # so #281 would have stayed open with the fix in place.
 ALLOWED=" "
 REGISTRIES=" "
+QUEUES=" "
 THEIRS_PREFIXES=""
 # COUNTERS tiene i path (per classificare), COUNTER_SPECS le coppie path:campo
 # (per risolvere).
@@ -174,6 +185,11 @@ EOF_SECTION_ARGS
       REGISTRIES="$REGISTRIES$2 "
       shift 2
       ;;
+    --merge-queue)
+      [ "$#" -ge 2 ] || { echo "::error::--merge-queue requires a path"; exit 2; }
+      QUEUES="$QUEUES$2 "
+      shift 2
+      ;;
     --take-theirs)
       [ "$#" -ge 2 ] || { echo "::error::--take-theirs requires a path prefix"; exit 2; }
       THEIRS_PREFIXES="$THEIRS_PREFIXES$2
@@ -190,8 +206,8 @@ done
 # Guard against an empty argument list: with no paths declared in any category
 # nothing can ever be resolved, and silently degrading to "always abort" would
 # hide a caller bug behind behaviour that looks exactly like the old code.
-if [ "$ALLOWED" = " " ] && [ "$REGISTRIES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
-  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry, no --take-theirs and no --merge-counter paths"
+if [ "$ALLOWED" = " " ] && [ "$REGISTRIES" = " " ] && [ "$QUEUES" = " " ] && [ -z "$THEIRS_PREFIXES" ] && [ "$COUNTERS" = " " ]; then
+  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry, no --merge-queue, no --take-theirs and no --merge-counter paths"
   exit 2
 fi
 
@@ -311,11 +327,18 @@ for _pass in $(seq 1 20); do
     # Classify FIRST, resolve after. A conflicted set with one unlisted path in
     # it aborts whole, so no partial resolution is ever written.
     registry_set=""
+    queue_set=""
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       case "$REGISTRIES" in
         *" $f "*)
           registry_set="$registry_set$f "
+          continue
+          ;;
+      esac
+      case "$QUEUES" in
+        *" $f "*)
+          queue_set="$queue_set$f "
           continue
           ;;
       esac
@@ -348,7 +371,21 @@ EOF
       fi
     fi
 
-    # Branch 3 — file per-articolo: vince il commit rigiocato. `--theirs` e' la
+    # Branch 3 — merge the global cover-regeneration queue by articleId. This
+    # must happen before the generic bookkeeping branch below, which would
+    # otherwise keep upstream and silently lose this run's queue item.
+    if [ -n "$queue_set" ]; then
+      # shellcheck disable=SC2086
+      if node "$QUEUE_RESOLVER" $queue_set; then
+        # shellcheck disable=SC2086
+        git add -- $queue_set
+      else
+        echo "::warning::the cover-regeneration queue could not be merged by articleId — aborting rather than dropping a request"
+        abort_and_fail || exit 1
+      fi
+    fi
+
+    # Branch 4 — file per-articolo: vince il commit rigiocato. `--theirs` e' la
     # copia del commit che si sta rigiocando (vedi la nota in testa: durante un
     # rebase i due sono invertiti rispetto a un merge), cioe' l'articolo appena
     # generato — lo stesso lato che vince nel merge dei registri.
@@ -380,7 +417,7 @@ EOF
 $conflicted
 EOF
 
-    # Ramo 4 — contatori: upstream + l'incremento del commit rigiocato. Il
+    # Ramo 5 — contatori: upstream + l'incremento del commit rigiocato. Il
     # resolver scrive solo se la fusione e' dimostrabile; altrimenti si prende
     # upstream come per una cache di bookkeeping, cioe' il comportamento che
     # questi file avevano prima del ramo.
@@ -405,6 +442,9 @@ EOF
       [ -n "$f" ] || continue
       case "$REGISTRIES" in
         *" $f "*) continue ;;  # gia' risolto dal merge per record
+      esac
+      case "$QUEUES" in
+        *" $f "*) continue ;;  # gia' risolto dal merge per articleId
       esac
       is_per_article "$f" && continue  # gia' risolto dal ramo per-articolo
       case "$COUNTERS" in
