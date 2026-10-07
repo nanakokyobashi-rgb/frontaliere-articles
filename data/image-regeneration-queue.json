@@ -279,6 +279,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T09:07:12.843Z",
       "lastFailureAt": "2026-10-07T09:07:12.843Z"
+    },
+    {
+      "articleId": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
+      "title": "Neuchâtel rinnova politica abitativa con 24 milioni",
+      "fallbackImage": "/images/blog/politica-agricola-2030-tagli-120-milioni.webp",
+      "reason": "All image providers failed for article-neuchatel-rinnova-politica-abitativa-con-24-milioni: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:07:42.914Z",
+      "lastFailureAt": "2026-10-07T09:07:42.914Z"
     }
   ]
 }
