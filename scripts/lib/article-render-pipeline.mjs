@@ -29,6 +29,8 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { sanitizeHtmlDocument } from './sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../../generator/scripts/lib/control-char-write-report.mjs';
+import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
 import { releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
 
@@ -50,7 +52,7 @@ const IMAGE_FETCH_CONCURRENCY = 4;
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
  * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
  *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
- * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object }>}
+ * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, aggregatePagesAllowed: boolean }>}
  */
 export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload, probeOnlineImage }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
@@ -372,22 +374,24 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     downloadedImageKeys: imageStage.downloadedImageKeys,
     imageFetchFailures: imageStage.failures,
     imagePostcondition,
+    aggregatePagesAllowed,
   };
 }
 
-function registryPathForSection(rootDir, section) {
-  const filename = section === 'svizzera' || section === 'articolisvizzera'
-    ? 'swiss-articles-data.ts'
-    : section === 'frontaliere' || section === 'articolifrontaliere'
-      ? 'blog-articles-data.ts'
-      : null;
-  return filename ? path.join(rootDir, 'content', filename) : null;
+export function registryPathForSection(rootDir, section) {
+  const profile = ARTICLE_SECTION_CORE_ALL[section];
+  if (!profile?.registryFile) throw new Error(`profilo registryFile assente per la sezione "${section}"`);
+  return path.join(rootDir, corpusPath(profile.registryFile));
 }
 
-async function readDeclaredImages(rootDir, section, ids) {
+export async function readDeclaredImages(rootDir, section, ids) {
   const sourcePath = registryPathForSection(rootDir, section);
-  if (!sourcePath || !fs.existsSync(sourcePath)) return {};
-  const source = fs.readFileSync(sourcePath, 'utf-8');
+  let source;
+  try {
+    source = fs.readFileSync(sourcePath, 'utf-8');
+  } catch (error) {
+    throw new Error(`registro immagini dichiarate non leggibile per "${section}": ${sourcePath}`, { cause: error });
+  }
   const { parseArticleRegistryEntries } = await import('../../engine/shared/articleRegistryEntries.ts');
   const wanted = new Set(ids);
   return Object.fromEntries(

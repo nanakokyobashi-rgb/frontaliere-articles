@@ -93,10 +93,23 @@ test('un articolo ricaduto sull’immagine generica passa dalla lettura della pa
   assert.match(pipeline, /let hubResult = \{ written: 0, pathsByLocale:/);
   assert.match(pipeline, /entries: imagePostcondition\.entries, hubResult/);
   assert.match(pipeline, /entries: imagePostcondition\.entries,/);
+  assert.match(publisher, /aggregatePagesAllowed,/);
   // Trattenuto e uscito con l'immagine generica sono due avvisi distinti sulla run.
   assert.match(workflow, /\.imagePostcondition\.excludedArticles\[\]\?\.articleId/);
   assert.match(workflow, /\.imagePostcondition\.releasedArticles\[\]\?\.articleId/);
   assert.match(workflow, /::warning title=Articolo uscito con l'immagine generica::/);
+});
+
+test('la validazione distingue esplicitamente il percorso article-only dagli aggregati', () => {
+  const refresh = stepText('Refresh the hub landing grid');
+  const validation = stepText('Validate what was rendered');
+  const publish = stepText('Publish to shards and CDN');
+  assert.match(refresh, /jq -e '\.aggregatePagesAllowed == false'/);
+  assert.match(validation, /aggregate_pages="\$\(jq -r '\.aggregatePagesAllowed'/);
+  assert.match(validation, /if \[ "\$aggregate_pages" = "true" \]; then[\s\S]*hub_n/);
+  assert.match(validation, /elif \[ "\$\{hub_n:-0\}" -ne 0 \]/);
+  assert.match(validation, /aggregate pages intentionally withheld: validating the article-only set/);
+  assert.match(publish, /if \[ "\$\{#paths\[@\]\}" -eq 0 \] && \[ "\$\{#hpaths\[@\]\}" -eq 0 \]/);
 });
 
 test('le immagini recuperate dal CDN restano sul CDN in indice e bridge', () => {

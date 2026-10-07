@@ -67,6 +67,16 @@ test('publisher: solo una sezione cantonale ATTIVA nel core', () => {
   assert.equal(assertPublishableSection('canton-ti', { active: ACTIVE_WITH_TI }).canton, 'TI');
 });
 
+test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeline', () => {
+  const publisher = read('scripts/publish-section-pages.mjs');
+  assert.match(
+    publisher,
+    /\{\s*entries,\s*hubResult,\s*downloadedImageKeys,\s*imageFetchFailures,\s*imagePostcondition,\s*aggregatePagesAllowed,\s*\}/,
+  );
+  assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
+  assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
+});
+
 test('publisher: argomenti', () => {
   assert.throws(() => parseArgs(['--section', 'svizzera', '--out', 'o', '--summary', 's']), /shard Pages/);
   assert.throws(() => parseArgs(['--out', 'o', '--summary', 's']), /manca --section/);

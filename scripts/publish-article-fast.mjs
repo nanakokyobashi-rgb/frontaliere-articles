@@ -223,6 +223,7 @@ async function main() {
     downloadedImageKeys,
     imageFetchFailures,
     imagePostcondition,
+    aggregatePagesAllowed,
   } = pipeline;
   const publishedIds = [...new Set(entries.map((entry) => entry.articleId))];
 
@@ -278,6 +279,7 @@ async function main() {
     contentRevision,
     imagePostcondition,
     imageFetchFailures,
+    aggregatePagesAllowed,
     shards,
     cdnUploads,
   };

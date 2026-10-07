@@ -388,6 +388,10 @@ jobs:
         continue-on-error: true
         run: |
           set -euo pipefail
+          if jq -e '.aggregatePagesAllowed == false' "$RUNNER_TEMP/fast-summary.json" >/dev/null; then
+            echo "::notice::hub landing withheld with the archive because an article failed the image postcondition"
+            exit 0
+          fi
           npx -y tsx@4.23.15 scripts/refresh-hub-landing.mjs \
             --out "$RUNNER_TEMP/fast-dist" \
             --section "${{ needs.resolve.outputs.section }}" \
@@ -401,6 +405,11 @@ jobs:
           dist="$RUNNER_TEMP/fast-dist"
           article_count="$(jq -r '.ids | length' "$summary")"
           expected_ids="$(jq -c '.ids | sort' "$summary")"
+          aggregate_pages="$(jq -r '.aggregatePagesAllowed' "$summary")"
+          if [ "$aggregate_pages" != "true" ] && [ "$aggregate_pages" != "false" ]; then
+            echo "::error::summary has no explicit aggregatePagesAllowed verdict"
+            exit 1
+          fi
 
           # Un articolo trattenuto non deve passare in silenzio: la pagina online
           # resta com'è, ma chi legge la run deve vedere quale e perché.
@@ -438,8 +447,13 @@ jobs:
               echo "::error::locale $loc has ${bridge_n:-0} bridge path(s) or the wrong bridge IDs (expected $article_count paths for $expected_ids; got $bridge_ids)"
               fail=1
             fi
-            if [ "${hub_n:-0}" -lt 1 ]; then
-              echo "::error::locale $loc has no hub archive page"
+            if [ "$aggregate_pages" = "true" ]; then
+              if [ "${hub_n:-0}" -lt 1 ]; then
+                echo "::error::locale $loc has no hub archive page"
+                fail=1
+              fi
+            elif [ "${hub_n:-0}" -ne 0 ]; then
+              echo "::error::locale $loc has $hub_n hub archive page(s) despite the article-only verdict"
               fail=1
             fi
           done
@@ -454,13 +468,17 @@ jobs:
           # The archive must not be empty. This is the defect that made the
           # first local render produce four pages with zero <li> items when the
           # corpus symlinks were missing — it did not fail, it published nothing.
-          it_archive="$(jq -r '.shards[] | select(.locale=="it") | .hubPaths[0]' "$summary")"
-          items="$(grep -o '<li>' "$dist/$it_archive" | wc -l)"
-          if [ "$items" -lt 1 ]; then
-            echo "::error::IT archive $it_archive lists 0 articles — refusing to publish an empty archive over the live one"
-            fail=1
+          if [ "$aggregate_pages" = "true" ]; then
+            it_archive="$(jq -r '.shards[] | select(.locale=="it") | .hubPaths[0]' "$summary")"
+            items="$(grep -o '<li>' "$dist/$it_archive" | wc -l)"
+            if [ "$items" -lt 1 ]; then
+              echo "::error::IT archive $it_archive lists 0 articles — refusing to publish an empty archive over the live one"
+              fail=1
+            fi
+            echo "IT archive lists $items items"
+          else
+            echo "aggregate pages intentionally withheld: validating the article-only set"
           fi
-          echo "IT archive lists $items items"
 
           # The host contract emits a named Person for real authors and a named
           # Organization profile for editorial signatures such as `redazione`.
@@ -555,6 +573,10 @@ jobs:
             if [ -s "$RUNNER_TEMP/hub-landing.json" ]; then
               mapfile -t hpaths < <(jq -r --arg l "$loc" '.pages[] | select(.locale==$l) | .path' "$RUNNER_TEMP/hub-landing.json")
             fi
+            if [ "${#paths[@]}" -eq 0 ] && [ "${#hpaths[@]}" -eq 0 ]; then
+              echo "── no publishable files for $shard/$loc; shard stays unchanged"
+              continue
+            fi
             # Signature is <section> <locale> <scratch_dist_dir> <relpath...>.
             # There is no subtree argument: each relpath is BOTH the path under
             # $dist and the destination path inside the shard repo.
@@ -591,7 +613,11 @@ jobs:
           # invece di essere assorbita, e le due proprietà che quel commento difendeva —
           # ordine e non-fatalità — sono conservate dal fallback dentro il loop.
           if [ ! -s "$RUNNER_TEMP/hub-landing.json" ]; then
-            echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
+            if jq -e '.aggregatePagesAllowed == false' "$summary" >/dev/null; then
+              echo "::notice::no hub-landing.json — aggregate pages were intentionally withheld"
+            else
+              echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
+            fi
           fi
 
       - name: Purge the edge cache for what was published

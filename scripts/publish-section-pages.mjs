@@ -724,7 +724,14 @@ export async function main(argv = process.argv.slice(2)) {
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
   const renderRoot = createRenderRoot(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
-  const { entries, hubResult } = await renderSectionArticlePipeline({
+  const {
+    entries,
+    hubResult,
+    downloadedImageKeys,
+    imageFetchFailures,
+    imagePostcondition,
+    aggregatePagesAllowed,
+  } = await renderSectionArticlePipeline({
     rootDir: renderRoot,
     distDir,
     section,
@@ -787,7 +794,14 @@ export async function main(argv = process.argv.slice(2)) {
   }
 
   const missingHeroAssets = [];
-  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, htmlPages: landingPages, missing: missingHeroAssets, logPrefix: LOG });
+  const cdnUploads = heroCdnUploads({
+    rootDir: ROOT_DIR,
+    entries,
+    htmlPages: landingPages,
+    missing: missingHeroAssets,
+    logPrefix: LOG,
+    downloadedImageKeys,
+  });
   for (const missing of new Map(missingHeroAssets.map((asset) => [asset.key, asset])).values()) {
     defects.push(`hero landing/articolo non disponibile per l'upload: ${missing.local}`);
   }
@@ -803,6 +817,9 @@ export async function main(argv = process.argv.slice(2)) {
     countsByLocale,
     hubsMissing: hubs.missing,
     missingHeroAssets,
+    imageFetchFailures,
+    imagePostcondition,
+    aggregatePagesAllowed,
     effectiveStatus,
     pages,
     cdnUploads,

@@ -3,7 +3,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { CDN_BASE, fetchDeclaredImage, prepareImageView, rewriteDownloadedImageRefs } from '../../scripts/lib/article-render-pipeline.mjs';
+import {
+  CDN_BASE,
+  fetchDeclaredImage,
+  prepareImageView,
+  readDeclaredImages,
+  registryPathForSection,
+  rewriteDownloadedImageRefs,
+} from '../../scripts/lib/article-render-pipeline.mjs';
 
 function response({ status = 200, type = 'image/webp', body = Buffer.from('image') } = {}) {
   return {
@@ -57,6 +64,26 @@ test('le sole immagini scaricate vengono riscritte sul CDN senza duplicare URL C
   assert.match(rewritten, /raw\.githubusercontent\.com\/example\/repo\/main\/public\/images\/places\/recovered\.webp/);
   assert.match(rewritten, /src="\/images\/places\/local\.webp"/);
   assert.match(rewritten, /recovered\.webp\?v=2/);
+});
+
+test('il registro immagini viene dal profilo della sezione e manca fail-closed', async () => {
+  const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-registry-'));
+  try {
+    assert.equal(
+      registryPathForSection(rootDir, 'frontaliere'),
+      path.join(rootDir, 'content', 'blog-articles-data.ts'),
+    );
+    assert.equal(
+      registryPathForSection(rootDir, 'canton-ti'),
+      path.join(rootDir, 'content', 'cantons', 'canton-ti', 'registry.ts'),
+    );
+    await assert.rejects(
+      readDeclaredImages(rootDir, 'canton-ti', ['missing']),
+      /registro immagini dichiarate non leggibile per "canton-ti"/,
+    );
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
 });
 
 test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', async () => {
