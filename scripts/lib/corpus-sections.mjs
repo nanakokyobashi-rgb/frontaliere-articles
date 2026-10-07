@@ -87,7 +87,16 @@ function enabledCantonCodes(profiles = loadCorpusCantonProfiles()) {
     }
     if (profile.enabled) codes.push(profile.code);
   }
-  return Object.freeze(codes);
+  // Il core riordina sempre le sezioni secondo la sua tabella canonica
+  // (BASILEA precede BE, anche se il profilo storico mantiene BE prima).
+  // Restituiamo lo stesso ordine perche' il bootstrap e i consumer non
+  // possano osservare lo stesso insieme con due sequenze diverse.
+  const enabled = new Set(codes);
+  return Object.freeze(
+    Object.values(ARTICLE_SECTION_CORE_ALL)
+      .filter((entry) => entry.kind === 'canton' && enabled.has(entry.canton))
+      .map((entry) => entry.canton),
+  );
 }
 
 /** Codici cantonali `enabled: true`: la sola sorgente dell'attivazione D22. */
