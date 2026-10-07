@@ -903,12 +903,12 @@ function classifierSourceHint(url) {
 // of the memo key — otherwise the same title from two different sections of two
 // different outlets would resolve to whichever verdict was computed first.
 // Memoizza la PROMISE, non il risultato: vedi `_preSpendGateCache`.
-function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
+function classifyFrontaliereRelevance(headline, summary, sourceUrl, deadlineMs = null) {
   const cacheKey = preSpendGateCacheKey(headline, sourceUrl);
   if (cacheKey && _preSpendGateCache.has(cacheKey)) {
     return _preSpendGateCache.get(cacheKey);
   }
-  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl);
+  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs);
   if (cacheKey) {
     _preSpendGateCache.set(cacheKey, pending);
     pending.catch(() => { _preSpendGateCache.delete(cacheKey); });
@@ -916,16 +916,16 @@ function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
   return pending;
 }
 
-async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
+async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl, deadlineMs = null) {
   const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
   const classifierTimeout = IS_CANTON ? CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS : 30_000;
-  const classifierDeadline = IS_CANTON
+  const classifierDeadline = deadlineMs ?? (IS_CANTON
     ? Math.min(
       RUN_START_MS + RUN_WALL_BUDGET_MS,
       Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
     )
-    : RUN_START_MS + RUN_WALL_BUDGET_MS;
+    : RUN_START_MS + RUN_WALL_BUDGET_MS);
   const prompt = IS_CANTON
     ? cantonClassifierPrompt(SECTION_PROFILE, { headline, sourceHint, summary })
     : IS_FRONTALIERE
@@ -1085,6 +1085,15 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // legacy anchor-only fast-path (pre-2026-05-15 behaviour, accepts on
   // anchor match without LLM confirmation).
   const classifierEnabled = (process.env.PRESPEND_TOPIC_GATE_CLASSIFIER ?? '1') !== '0';
+  // Cantonale: una sola finestra assoluta per tutto il gate, non una nuova
+  // finestra per ogni candidate. Cosi' la concorrenza non moltiplica i 45 s
+  // per il numero di classifier avviati nello stesso giro.
+  const classifierDeadline = IS_CANTON
+    ? Math.min(
+      RUN_START_MS + RUN_WALL_BUDGET_MS,
+      Date.now() + CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS,
+    )
+    : RUN_START_MS + RUN_WALL_BUDGET_MS;
   // 2026-08-18 — IL CAP E' DISPONIBILE, NON IMPOSTO.
   // Il JSDoc dichiarava 12 e il codice usava `?? headlines.length`, cioe' il
   // ramo «budget esaurito» era irraggiungibile per costruzione. #416 ha
@@ -1185,7 +1194,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   const toClassify = plan.filter(p => p.kind === 'classify');
   const verdicts = await mapWithConcurrency(toClassify, concurrency, async (p) => {
     try {
-      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText);
+      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText, classifierDeadline);
     } catch {
       // Should not happen — classifyFrontaliereRelevance already fails open
       // — but belt+suspenders: keep the headline on any unexpected throw.

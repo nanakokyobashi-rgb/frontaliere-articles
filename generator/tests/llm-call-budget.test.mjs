@@ -393,7 +393,7 @@ test('④ il classifier pre-spend porta un deadlineMs', () => {
   const region = CODE.slice(i, i + 6000);
   assert.match(
     region,
-    /const classifierDeadline = IS_CANTON/,
+    /const classifierDeadline = deadlineMs \?\? \(IS_CANTON/,
     'il classifier cantonale deve avere una finestra propria, senza togliere il termine storico',
   );
   const call = region.slice(region.indexOf('await _aiCallLLM('));
