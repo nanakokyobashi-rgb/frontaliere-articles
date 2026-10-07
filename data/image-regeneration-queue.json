@@ -297,6 +297,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T09:13:13.001Z",
       "lastFailureAt": "2026-10-07T09:13:13.001Z"
+    },
+    {
+      "articleId": "chiusura-strade-gallusmarkt-svitto",
+      "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
+      "fallbackImage": "/images/blog/logistica-pallet-analisi-mercato.webp",
+      "reason": "All image providers failed for article-chiusura-strade-gallusmarkt-svitto: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T09:21:09.381Z",
+      "lastFailureAt": "2026-10-07T09:21:09.381Z"
     }
   ]
 }
