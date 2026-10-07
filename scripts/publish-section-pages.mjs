@@ -416,6 +416,7 @@ export function inUploadOrder(pages) {
  * filtrate che hanno superato la post-condizione.
  */
 export function aggregatePageDefects(pages, { aggregatePagesAllowed, locales = CANTON_HUB_LOCALES } = {}) {
+  if (typeof aggregatePagesAllowed !== 'boolean') return ['verdetto aggregatePagesAllowed assente o non booleano'];
   if (!aggregatePagesAllowed) {
     const leaked = pages.filter((page) => page.kind !== 'article');
     return leaked.length > 0
@@ -429,6 +430,27 @@ export function aggregatePageDefects(pages, { aggregatePagesAllowed, locales = C
     }
   }
   return defects;
+}
+
+/**
+ * Finche' gli aggregati precedenti restano online, nessuna pagina della loro
+ * release puo' diventare obsoleta: potrebbero ancora linkarla. Gli articoli
+ * sani del batch vengono caricati, ma cancellazioni e aggiornamento degli
+ * aggregati riprendono insieme soltanto su un verdetto completo.
+ */
+export function obsoleteReleasePages({
+  previousArticlePages,
+  currentArticlePages,
+  previousArchivePages,
+  currentArchivePages,
+  aggregatePagesAllowed,
+}) {
+  if (typeof aggregatePagesAllowed !== 'boolean') throw new Error('aggregatePagesAllowed deve essere booleano');
+  if (!aggregatePagesAllowed) return [];
+  return [
+    ...obsoleteArticlePages(previousArticlePages, currentArticlePages),
+    ...obsoleteArchivePages(previousArchivePages, currentArchivePages),
+  ];
 }
 
 /** Rende i 6 hub (quelli con il file dati) nelle 4 locali. */
@@ -785,10 +807,13 @@ export async function main(argv = process.argv.slice(2)) {
     ...landingPages.map((page) => rendererPageEntry(section, page, 'landing')),
   ];
   const currentArchivePages = pages.filter((page) => page.kind === 'archive');
-  const obsoletePages = [
-    ...obsoleteArticlePages(previousArticlePages, currentArticlePages),
-    ...obsoleteArchivePages(previousArchivePages, currentArchivePages),
-  ];
+  const obsoletePages = obsoleteReleasePages({
+    previousArticlePages,
+    currentArticlePages,
+    previousArchivePages,
+    currentArchivePages,
+    aggregatePagesAllowed,
+  });
 
   const defects = [];
   if (publishing && effectiveStatus === null) {

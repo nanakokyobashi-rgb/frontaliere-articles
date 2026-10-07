@@ -32,6 +32,7 @@ import {
   pageEntry,
   obsoleteArticlePages,
   obsoleteArchivePages,
+  obsoleteReleasePages,
   parseArgs,
   publish,
   publishedReleaseReady,
@@ -91,6 +92,24 @@ test('publisher R2 pubblica article-only ma rifiuta aggregati trapelati', () => 
     aggregatePageDefects(articles, { aggregatePagesAllowed: true, locales: ['it'] }),
     ['nessuna pagina archive per it', 'nessuna pagina landing per it'],
   );
+  assert.deepEqual(
+    aggregatePageDefects(articles),
+    ['verdetto aggregatePagesAllowed assente o non booleano'],
+  );
+});
+
+test('publisher R2 article-only conserva tutta la release precedente', () => {
+  const oldArticle = { canonicalPath: '/articoli-ticino/old/' };
+  const oldArchive = { canonicalPath: '/articoli-ticino/tutti/page/2/' };
+  const input = {
+    previousArticlePages: [oldArticle],
+    currentArticlePages: [],
+    previousArchivePages: [oldArchive],
+    currentArchivePages: [],
+  };
+  assert.deepEqual(obsoleteReleasePages({ ...input, aggregatePagesAllowed: false }), []);
+  assert.deepEqual(obsoleteReleasePages({ ...input, aggregatePagesAllowed: true }), [oldArticle, oldArchive]);
+  assert.throws(() => obsoleteReleasePages(input), /aggregatePagesAllowed deve essere booleano/);
 });
 
 test('publisher: argomenti', () => {
