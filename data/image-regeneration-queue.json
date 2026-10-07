@@ -8,8 +8,8 @@
       "reason": "SEO entry for article fischiava-treno-gorla has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T04:45:22.263Z",
-      "lastFailureAt": "2026-10-07T22:09:44.049Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:32:07.578Z",
+      "failureCount": 2
     },
     {
       "articleId": "clan-nazarbayev-ceresio",
@@ -18,18 +18,18 @@
       "reason": "SEO entry for article clan-nazarbayev-ceresio has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T04:58:11.891Z",
-      "lastFailureAt": "2026-10-07T22:11:17.235Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:33:10.858Z",
+      "failureCount": 2
     },
     {
       "articleId": "raffineria-cressier-carburanti",
       "title": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
       "fallbackImage": "/images/blog/diesel-rincaro-geopolitica-svizzera.webp",
-      "reason": "All image providers failed for article-raffineria-cressier-carburanti: openai-codex (vision gate rejected image: Generic editorial illustration with a visible car manufacturer emblem/logo on the vehicle.)",
+      "reason": "SEO entry for article raffineria-cressier-carburanti has no structuredData image URL in content/seo/seo-blog-ch.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T05:28:44.576Z",
-      "lastFailureAt": "2026-10-07T22:12:27.482Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:33:59.430Z",
+      "failureCount": 2
     },
     {
       "articleId": "monte-olimpino-treni-weekend",
@@ -38,8 +38,8 @@
       "reason": "SEO entry for article monte-olimpino-treni-weekend has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T05:47:57.525Z",
-      "lastFailureAt": "2026-10-07T22:13:42.583Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:35:19.132Z",
+      "failureCount": 2
     },
     {
       "articleId": "a2-mendrisio-melano-risanamento",
@@ -48,18 +48,18 @@
       "reason": "SEO entry for article a2-mendrisio-melano-risanamento has no structuredData image URL in content/cantons/canton-ti/seo.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:12:18.865Z",
-      "lastFailureAt": "2026-10-07T22:14:39.776Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:37:13.899Z",
+      "failureCount": 2
     },
     {
       "articleId": "scambio-dati-salariali-2027",
       "title": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
       "fallbackImage": "/images/blog/fairtiq-bonus-ticino-2026-2027.webp",
-      "reason": "All image providers failed for article-scambio-dati-salariali-2027: openai-codex (vision gate rejected image: Generic illustration with decorative text-like markings on the floating documents.)",
+      "reason": "SEO entry for article scambio-dati-salariali-2027 has no structuredData image URL in content/cantons/canton-ti/seo.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:25:44.304Z",
-      "lastFailureAt": "2026-10-07T22:16:26.976Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:38:03.112Z",
+      "failureCount": 2
     },
     {
       "articleId": "hotel-ticino-140-licenziati",
@@ -68,28 +68,28 @@
       "reason": "SEO entry for article hotel-ticino-140-licenziati has no structuredData image URL in content/seo/seo-blog-5.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:29:51.075Z",
-      "lastFailureAt": "2026-10-07T22:17:24.163Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:38:53.513Z",
+      "failureCount": 2
     },
     {
       "articleId": "quattro-oggetti-urne-novembre",
       "title": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
       "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
-      "reason": "All image providers failed for article-quattro-oggetti-urne-novembre: openai-codex (vision gate rejected image: Generic illustrative scene with no readable text or faces, but the foreground card contains a distinct logo-like emblem.)",
+      "reason": "SEO entry for article quattro-oggetti-urne-novembre has no structuredData image URL in content/seo/seo-blog-ch.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:42:41.992Z",
-      "lastFailureAt": "2026-10-07T22:18:15.427Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:39:42.757Z",
+      "failureCount": 2
     },
     {
       "articleId": "strada-calanca-chiusura-preventiva",
       "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
       "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
-      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: openai-codex (vision gate rejected image: Generic illustrated mountain scene; road barricade signage is present, though no readable lettering.)",
+      "reason": "SEO entry for article strada-calanca-chiusura-preventiva has no structuredData image URL in content/cantons/canton-gr/seo.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:43:54.395Z",
-      "lastFailureAt": "2026-10-07T22:19:17.854Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:40:27.378Z",
+      "failureCount": 2
     },
     {
       "articleId": "benzina-grigioni-deviazione",
@@ -98,8 +98,8 @@
       "reason": "SEO entry for article benzina-grigioni-deviazione has no structuredData image URL in content/cantons/canton-gr/seo.ts",
       "status": "queued",
       "requestedAt": "2026-10-07T06:53:48.101Z",
-      "lastFailureAt": "2026-10-07T22:20:26.158Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-07T22:41:22.094Z",
+      "failureCount": 2
     },
     {
       "articleId": "simplificazione-imposta-trasferimento-berna",
