@@ -8094,7 +8094,8 @@ function monthFormatTag(name) {
 }
 
 /** Build a map of URL → date from <time> elements found near <a> links in the HTML */
-function extractDatesFromHtml(html, baseUrl, quirks = {}) {
+function extractDatesFromHtml(html, baseUrl) {
+  const quirks = arguments[2] || {};
   const dateMap = new Map();
   // Match <time datetime="..."> anywhere in HTML — build global date context
   const timeRe = /<time[^>]*datetime=["']([^"']+)["'][^>]*>/gi;
@@ -8404,7 +8405,8 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
 }
 
 // ── Step 1b: Extract links and headlines from an HTML page ──
-function extractHeadlines(html, baseUrl, source = {}) {
+function extractHeadlines(html, baseUrl) {
+  const source = arguments[2] || {};
   const results = [];
   const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
   // Match <a href="...">text</a> — capture href and inner text
