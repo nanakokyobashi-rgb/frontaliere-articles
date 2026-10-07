@@ -219,6 +219,26 @@ test('chiede il segnale di avvio e toglie i byte di controllo prima della rispos
   assert.equal(requests[0].profile, 'function');
 });
 
+test('la traduzione batch puo\' riparare JSON fenced senza disattivare la guardia di default', async () => {
+  const fenced = '```json\n{"items":[]}\n```';
+  behavior = (client) => {
+    client.write('\x01');
+    client.end(`${JSON.stringify({ ok: true, result: fenced })}\n`);
+  };
+
+  await assert.rejects(
+    () => callCodex({ jsonMode: true }),
+    /invalid JSON for a JSON-mode request/,
+  );
+
+  resetState();
+  assert.equal(
+    await callCodex({ jsonMode: true, deferJsonValidation: true }),
+    fenced,
+  );
+  assert.equal(requests.length, 2);
+});
+
 test('solo una chiamata di traduzione con opt-in ritenta una chiusura di trasporto', async () => {
   let attempt = 0;
   behavior = (client) => {

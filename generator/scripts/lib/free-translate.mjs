@@ -2338,6 +2338,10 @@ async function _codexTranslateBatch(call, opts, texts, sourceLang, targetLang) {
     ...opts,
     jsonMode: true,
     jsonSchema: { name: 'translations', schema: CODEX_TRANSLATE_BATCH_SCHEMA },
+    // The Codex CLI broker must preserve fenced/repairable output here. This
+    // function owns repairLlmJson plus per-item validation; rejecting the raw
+    // string one layer below would make that recovery path unreachable.
+    deferJsonValidation: true,
   });
   const byText = new Map();
   let parsed = raw;

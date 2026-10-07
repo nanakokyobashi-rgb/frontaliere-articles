@@ -11970,6 +11970,10 @@ async function translateArticle(data) {
       budgetRemainingMs: 180_000,
       processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
     });
+    // Never omit the deadline: spreading `{}` here let a recovery retry fall
+    // back to ai-models' unbounded default exactly when the process was near
+    // its wall-clock cap. The caller turns this into a clean, typed stop.
+    if (deadlineMs === null) return null;
     return {
       model: AI_MODELS.CODEX_CLI_PRIMARY,
       chain: [AI_MODELS.CODEX_CLI_PRIMARY],
@@ -11978,7 +11982,7 @@ async function translateArticle(data) {
       retryCodexTransport: true,
       codexTransportRetries: 2,
       codexTransportBackoffMs: 1_000,
-      ...(deadlineMs === null ? {} : { deadlineMs }),
+      deadlineMs,
     };
   }
 
@@ -12000,14 +12004,24 @@ async function translateArticle(data) {
     // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
     // cattura qui avrebbe senso; oggi no.
     const call = (tokens, temperature = 0.5) => {
-      if (translation) translationRecoveryCodexCalls += 1;
+      let translationOptions = {};
+      if (translation) {
+        translationOptions = codexTranslationRecoveryOptions();
+        if (translationOptions === null) {
+          const error = new Error('finestra residua troppo corta per una recovery Codex');
+          error.code = 'CODEX_TRANSLATION_DEADLINE';
+          error.transientExhaustion = true;
+          throw error;
+        }
+        translationRecoveryCodexCalls += 1;
+      }
       return callLLM(
         [{ role: 'user', content: safePrompt }],
         {
           temperature,
           maxTokens: tokens,
           jsonMode: true,
-          ...(translation ? codexTranslationRecoveryOptions() : {}),
+          ...translationOptions,
         },
       );
     };

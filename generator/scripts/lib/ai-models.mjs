@@ -2144,6 +2144,12 @@ const DEFAULT_OPTS = {
   maxTokens: 4096,
   jsonMode: false,
   /**
+   * Let a caller that owns a repair-and-shape-validation step receive the raw
+   * Codex text. The default remains fail-closed JSON validation for every
+   * other JSON-mode caller.
+   */
+  deferJsonValidation: false,
+  /**
    * Optional JSON-Schema to enforce on the model output. When provided AND the
    * underlying provider supports schema-mode, the schema is forwarded to the
    * API (OpenAI: `response_format.json_schema` strict; Gemini:
@@ -3081,6 +3087,9 @@ function _responseCacheKey(messages, o) {
     mt: o.maxTokens,
     j: o.jsonMode,
     s: o.jsonSchema || null,
+    // A raw repairable response must never be served to a strict JSON caller
+    // (or vice versa) through the opt-in response cache.
+    dv: !!o.deferJsonValidation,
     model: o.model || null,
     ns: o.cacheNamespace || '',
     bfc: !!o.bypassForceChain,
@@ -7988,8 +7997,8 @@ function _codexFallbackJsonRequest(opts = {}) {
   };
 }
 
-function _validateCodexCliResult(result, { wantsJson, schemaApplied }) {
-  if (!wantsJson) return result;
+function _validateCodexCliResult(result, { wantsJson, schemaApplied, deferJsonValidation = false }) {
+  if (!wantsJson || deferJsonValidation) return result;
   let parsed;
   try {
     parsed = JSON.parse(result);
@@ -8022,7 +8031,10 @@ async function _callCodexCli(messages, opts = {}) {
   if (opts.deadlineMs && Date.now() >= opts.deadlineMs) {
     throw new Error('Codex primary skipped: caller deadline expired during execution');
   }
-  return _validateCodexCliResult(result, jsonRequest);
+  return _validateCodexCliResult(result, {
+    ...jsonRequest,
+    deferJsonValidation: opts.deferJsonValidation === true,
+  });
 }
 function _callOmniRoute(model, messages, opts) {
   const apiModel = getApiModelId(model); // = 'auto'

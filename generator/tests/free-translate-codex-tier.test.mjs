@@ -595,6 +595,7 @@ test('con le corsie occupate i testi in coda partono insieme, con lo schema a id
     assert.match(system, /Translate each item on its own/);
     assert.match(system, /ZQX0XQZ/);
     assert.equal(opts.jsonMode, true);
+    assert.equal(opts.deferJsonValidation, true);
     assert.deepEqual(opts.jsonSchema.schema.properties.items.items.required, ['id', 'text']);
     assert.deepEqual(opts.chain, [AI_MODELS.CODEX_CLI_PRIMARY]);
     assert.equal(opts.bypassForceChain, true);
