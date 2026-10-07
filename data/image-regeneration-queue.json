@@ -198,6 +198,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:45:21.309Z",
       "lastFailureAt": "2026-10-07T08:45:21.309Z"
+    },
+    {
+      "articleId": "argovia-disoccupazione-settembre",
+      "title": "Argovia: disoccupazione al 3,2% a settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-argovia-disoccupazione-settembre: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:49:25.466Z",
+      "lastFailureAt": "2026-10-07T08:49:25.466Z"
     }
   ]
 }
