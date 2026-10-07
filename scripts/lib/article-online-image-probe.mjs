@@ -171,6 +171,23 @@ async function mapPool(items, limit, worker) {
  * locale online with an image of its own holds all of them, because the push
  * set is per article.
  */
+/**
+ * Gli articoli trattenuti la cui pagina NON è dimostrata online in ogni lingua.
+ *
+ * L'archivio elenca tutti gli articoli del registro, anche quello che questo
+ * giro trattiene. Quel link è sbagliato solo dove la pagina non esiste: un
+ * articolo trattenuto perché online ha la sua immagine continua a rispondere, e
+ * l'archivio può uscire. Una pagina assente, o una lettura non riuscita, non
+ * dimostra nulla: lì l'archivio resta quello di prima.
+ */
+export function heldArticlesWithoutOnlinePage(excludedArticles = []) {
+  return excludedArticles.filter((article) => {
+    const online = article.online ?? [];
+    return online.length === 0
+      || online.some((page) => page.state !== ONLINE_IMAGE.OWN && page.state !== ONLINE_IMAGE.GENERIC);
+  });
+}
+
 export async function releaseArticlesWithNothingToProtect({
   entries = [],
   postcondition,

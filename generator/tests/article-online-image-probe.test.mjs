@@ -4,6 +4,7 @@ import { filterEntriesByImagePostcondition } from '../../scripts/lib/article-ima
 import {
   ONLINE_IMAGE,
   classifyOnlinePage,
+  heldArticlesWithoutOnlinePage,
   probeOnlineImage,
   releaseArticlesWithNothingToProtect,
 } from '../../scripts/lib/article-online-image-probe.mjs';
@@ -224,4 +225,26 @@ test('senza articoli esclusi non parte nessuna lettura e il risultato è quello 
   assert.deepEqual(asked, []);
   assert.deepEqual(result.entries, postcondition.entries);
   assert.deepEqual(result.releasedArticles, []);
+});
+
+test('un articolo trattenuto con la pagina online non ferma gli archivi', () => {
+  // Review della PR: l'archivio elenca anche l'articolo trattenuto. Il link è
+  // sbagliato solo dove la pagina non esiste, non ogni volta che un'immagine
+  // manca: il 07-10-2026 un rirendering completo tratteneva 7 articoli, tutti
+  // con la pagina online.
+  const page = (state, locale = 'it') => ({ locale, url: `https://frontaliereticino.ch/${locale}/x/`, state });
+  const held = (articleId, ...online) => ({ articleId, online });
+
+  const allOnline = held('online-ovunque', page(ONLINE_IMAGE.OWN, 'it'), page(ONLINE_IMAGE.OWN, 'en'), page(ONLINE_IMAGE.GENERIC, 'de'));
+  const oneAbsent = held('una-lingua-assente', page(ONLINE_IMAGE.OWN, 'it'), page(ONLINE_IMAGE.ABSENT, 'fr'));
+  const oneUnread = held('una-lettura-fallita', page(ONLINE_IMAGE.OWN, 'it'), page(ONLINE_IMAGE.UNKNOWN, 'en'));
+  const noUrls = held('senza-url');
+  const notProbed = { articleId: 'mai-letto' };
+
+  assert.deepEqual(heldArticlesWithoutOnlinePage([]), []);
+  assert.deepEqual(heldArticlesWithoutOnlinePage([allOnline]), []);
+  assert.deepEqual(
+    heldArticlesWithoutOnlinePage([allOnline, oneAbsent, oneUnread, noUrls, notProbed]).map((article) => article.articleId),
+    ['una-lingua-assente', 'una-lettura-fallita', 'senza-url', 'mai-letto'],
+  );
 });

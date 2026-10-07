@@ -32,7 +32,7 @@ import { reportStrippedControlChars } from '../../generator/scripts/lib/control-
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
-import { releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
+import { heldArticlesWithoutOnlinePage, releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
 
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const SITE_ORIGIN = 'https://frontaliereticino.ch';
@@ -212,7 +212,16 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
         `(no page online to protect): ${imagePostcondition.releasedArticles.slice(0, 10).map((article) => article.articleId).join(', ')}`,
     );
   }
-  const aggregatePagesAllowed = imagePostcondition.excludedArticles.length === 0;
+  // Un articolo trattenuto con la pagina online non ferma gli archivi: il link
+  // che lo elenca risponde. Li ferma solo quello la cui pagina non è dimostrata.
+  const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage(imagePostcondition.excludedArticles);
+  if (heldWithoutOnlinePage.length > 0) {
+    console.error(
+      `[${logPrefix}] aggregate pages withheld: ${heldWithoutOnlinePage.length} held article(s) with no page proven online ` +
+        `(${heldWithoutOnlinePage.slice(0, 10).map((article) => article.articleId).join(', ')})`,
+    );
+  }
+  const aggregatePagesAllowed = heldWithoutOnlinePage.length === 0;
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
   // Re-renders each section's `/tutti/` archive + pagination into the SAME
@@ -249,10 +258,10 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // wrong for the offload, which is a whole-dist pass every emitted page
   // needs — archive included.
   // Gli archivi e le pagine aggregate leggono l'intero registro, non il set
-  // filtrato appena sopra. Se anche un solo articolo resta trattenuto, lasciare
-  // uscire quegli aggregati potrebbe pubblicare un link alla pagina omessa: in
-  // quel caso restano online gli aggregati precedenti e questo giro pubblica
-  // soltanto le pagine articolo dimostrate sane.
+  // filtrato appena sopra. Se un articolo trattenuto non ha una pagina
+  // dimostrata online, lasciare uscire quegli aggregati pubblicherebbe un link
+  // alla pagina omessa: in quel caso restano online gli aggregati precedenti e
+  // questo giro pubblica soltanto le pagine articolo dimostrate sane.
   let hubResult = { written: 0, pathsByLocale: Object.fromEntries(locales.map((locale) => [locale, []])) };
   let extraPaths = [];
   if (aggregatePagesAllowed) {

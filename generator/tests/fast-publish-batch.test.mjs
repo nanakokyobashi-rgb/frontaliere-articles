@@ -88,7 +88,11 @@ test('un articolo ricaduto sull’immagine generica passa dalla lettura della pa
       < pipeline.indexOf('await renderArticleHubPages('),
     'la post-condizione deve decidere prima di renderizzare qualunque pagina aggregata',
   );
-  assert.match(pipeline, /const aggregatePagesAllowed = imagePostcondition\.excludedArticles\.length === 0/);
+  // Un articolo trattenuto con la pagina online non ferma gli archivi: li ferma
+  // solo quello la cui pagina non è dimostrata (vedi article-online-image-probe).
+  assert.match(pipeline, /const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage\(imagePostcondition\.excludedArticles\);/);
+  assert.match(pipeline, /const aggregatePagesAllowed = heldWithoutOnlinePage\.length === 0;/);
+  assert.doesNotMatch(pipeline, /aggregatePagesAllowed = imagePostcondition\.excludedArticles\.length === 0/);
   assert.match(pipeline, /if \(aggregatePagesAllowed\) \{[\s\S]*await renderArticleHubPages\(/);
   assert.match(pipeline, /let hubResult = \{ written: 0, pathsByLocale:/);
   assert.match(pipeline, /entries: imagePostcondition\.entries, hubResult/);
