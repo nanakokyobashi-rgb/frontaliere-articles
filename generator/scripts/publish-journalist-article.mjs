@@ -464,6 +464,14 @@ async function processDoc(db, FieldValue, docSnap) {
     const translatedSourceCopy = await assertJournalistSourceCopySafe(data, sourceText);
     if (translatedSourceCopy?.changed) refreshSourceCopyDerivedMetadata(data);
 
+    // The final source-copy repair also rewrites the Italian draft. Re-run the
+    // Italian fabrication guards immediately after that last model mutation;
+    // the pre-translation checks above cannot protect text changed here.
+    console.log('  🔍 rechecking fabricated references after source-copy repair...');
+    assertNoFabricatedReferences(data.content.it);
+    console.log('  🔍 rechecking fabricated norm acronyms after source-copy repair...');
+    assertNoFabricatedNormAcronyms({ it: data.content.it });
+
     // Same cross-locale fabrication check the AI generation path runs after
     // its own translateArticle() (create-article.mjs's "Step 3b.1") —
     // assertNoFabricatedReferences() above only ever saw the IT draft,

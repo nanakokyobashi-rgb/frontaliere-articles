@@ -17883,6 +17883,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // appendages removed; the pre-first-CTA snapshot is stale after repair.
     cantonBody: bodyTextForCantonPostcondition(data),
   });
+  assertTaxHealthConsistency(data.content.it, { ...(sourceContext || {}), url }, pageContent);
   assertNoFabricatedReferences(data.content.it);
   assertNoFabricatedLaborOfficeCrossLocale(data);
   assertNoFabricatedNormAcronyms({

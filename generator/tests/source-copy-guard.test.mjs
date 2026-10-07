@@ -1,5 +1,8 @@
+import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   condenseSourceCopyArticle,
   evaluateSourceCopy,
@@ -13,6 +16,8 @@ import {
 } from '../scripts/lib/source-copy-guard.mjs';
 
 const WORDS = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici tredici';
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const readSource = (relativePath) => fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
 
 test('la modalità anti-copia è repair per default, valida e fail-safe', () => {
   const previous = process.env.ARTICLE_SOURCE_COPY_MODE;
@@ -286,4 +291,29 @@ test('rigetta solo una copia strutturale che nessuna delle tre passate riesce a 
   assert.equal(result.verdict.structural, true);
   assert.equal(result.rejected, true);
   assert.equal(result.outcome, 'rejected');
+});
+
+test('il producer automatico riesegue il guard fiscale dopo la riparazione finale', () => {
+  const source = readSource('scripts/create-article.mjs');
+  const finalRepair = source.lastIndexOf('const result = await repairGeneratedArticleSourceCopy(');
+  const taxGuard = source.indexOf(
+    'assertTaxHealthConsistency(data.content.it, { ...(sourceContext || {}), url }, pageContent);',
+    finalRepair,
+  );
+  const fabricatedReferences = source.indexOf('assertNoFabricatedReferences(data.content.it);', finalRepair);
+  assert.ok(finalRepair >= 0, 'manca la riparazione source-copy finale del producer automatico');
+  assert.ok(taxGuard > finalRepair, 'il guard fiscale non segue la riparazione source-copy finale');
+  assert.ok(fabricatedReferences > taxGuard, 'il guard fiscale non precede gli altri guard finali');
+});
+
+test('il producer giornalistico riesegue i guard italiani dopo la riparazione tradotta', () => {
+  const source = readSource('scripts/publish-journalist-article.mjs');
+  const finalRepair = source.indexOf('const translatedSourceCopy = await assertJournalistSourceCopySafe(');
+  const fabricatedReferences = source.indexOf('assertNoFabricatedReferences(data.content.it);', finalRepair);
+  const fabricatedNormAcronyms = source.indexOf('assertNoFabricatedNormAcronyms({ it: data.content.it });', finalRepair);
+  const crossLocaleReferences = source.indexOf('assertNoFabricatedLaborOfficeCrossLocale(data);', finalRepair);
+  assert.ok(finalRepair >= 0, 'manca la riparazione source-copy finale del producer giornalistico');
+  assert.ok(fabricatedReferences > finalRepair, 'manca il guard riferimenti IT dopo la riparazione finale');
+  assert.ok(fabricatedNormAcronyms > fabricatedReferences, 'manca il guard sigle IT dopo la riparazione finale');
+  assert.ok(crossLocaleReferences > fabricatedNormAcronyms, 'i guard IT non precedono quelli cross-locale');
 });
