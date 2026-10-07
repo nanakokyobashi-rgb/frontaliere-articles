@@ -162,6 +162,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:41:49.746Z",
       "lastFailureAt": "2026-10-07T08:41:49.746Z"
+    },
+    {
+      "articleId": "disoccupazione-giura-settembre-2026",
+      "title": "Disoccupazione in Giura scende al 4,2% a settembre 2026",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-giura-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:42:08.220Z",
+      "lastFailureAt": "2026-10-07T08:42:08.220Z"
     }
   ]
 }
