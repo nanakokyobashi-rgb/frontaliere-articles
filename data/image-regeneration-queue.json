@@ -486,6 +486,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T12:19:47.220Z",
       "lastFailureAt": "2026-10-07T12:19:47.220Z"
+    },
+    {
+      "articleId": "cantello-teatro-dialettale-ottobre-2026",
+      "title": "Cantello torna il teatro dialettale “Quei giargianes da giappunes”",
+      "fallbackImage": "/images/blog/sindacati-miazzina-diritti-9-ottobre.webp",
+      "reason": "All image providers failed for article-cantello-teatro-dialettale-ottobre-2026: image vision fallback deadline exceeded",
+      "status": "queued",
+      "requestedAt": "2026-10-07T16:05:11.904Z",
+      "lastFailureAt": "2026-10-07T16:05:11.904Z"
     }
   ]
 }
