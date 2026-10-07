@@ -636,6 +636,50 @@ test('la fixture articolo 3 body + meta + FAQ su EN/DE/FR resta in pochi batch',
   }
 });
 
+test('un articolo completo da 42 campi resta su Codex oltre il vecchio budget di 16', async () => {
+  delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  await withLanes(2, async () => {
+    const fields = [
+      ['meta:title', 120],
+      ['meta:excerpt', 1400],
+      ['body1', 1400],
+      ['body2', 1400],
+      ['body3', 1400],
+      ['faq.q', 1400],
+      ['faq.a', 1400],
+      ['keyFacts.heading', 120],
+      ['keyFacts.one', 300],
+      ['keyFacts.two', 300],
+      ['keyFacts.three', 300],
+      ['source', 250],
+      ['cta', 120],
+      ['related', 300],
+    ];
+    const locales = ['en', 'de', 'fr'];
+    const before = getCascadeStats();
+    const calls = stubCodex((messages) => {
+      const items = batchItems(messages);
+      if (items) {
+        return JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: `CODEX ${text}` })) });
+      }
+      return 'CODEX testo singolo';
+    });
+    const unit = `${IT} `;
+    const results = await Promise.all(locales.flatMap((locale) => fields.map(([field, chars]) => freeTranslate({
+      text: `${unit.repeat(Math.ceil(chars / unit.length)).slice(0, chars)} [${locale}/${field}]`,
+      sourceLang: 'it',
+      targetLang: locale,
+      fieldType: field.startsWith('meta:') || field.endsWith('heading') ? 'title' : 'description',
+    }))));
+    const after = getCascadeStats();
+    assert.equal(results.length, 42);
+    assert.equal(after.tierHits.codex - before.tierHits.codex, 42);
+    assert.equal(after.tierHits.myMemory - before.tierHits.myMemory, 0);
+    assert.ok(calls.length >= 16, `la fixture deve esercitare il budget misurato: ${calls.length}`);
+    assert.ok(calls.length <= 32, `il batching deve restare nel budget predefinito: ${calls.length}`);
+  });
+});
+
 test('FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS=1 con una corsia torna una richiesta per testo, una alla volta', async () => {
   process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '1';
   try {

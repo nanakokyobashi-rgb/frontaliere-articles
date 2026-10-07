@@ -1840,12 +1840,12 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 // La quota della subscription e' CONDIVISA con l'uso interattivo del
 // proprietario (AGENTS.md, «Auth automazioni & frugalità quota»): il numero di
 // invocazioni e' limitato per architettura, per processo.
-//   - FREE_TRANSLATE_CODEX_MAX_CALLS: tentativi fisici al broker (default 16; 0
+//   - FREE_TRANSLATE_CODEX_MAX_CALLS: tentativi fisici al broker (default 32; 0
 //     spegne il tier). Una chiamata logica puo' tradurre piu' testi, vedi sotto;
 //     ogni retry di trasporto viene addebitato solo se sta per essere inviato.
-//     Il default copre la misura reale di 21-30 segmenti di un articolo (9-10
-//     batch) quando il trasporto e' sano, senza lasciare che i retry riaprano la
-//     vecchia finestra da 40 richieste che ha saturato il broker.
+//     Il default copre la misura reale di 42 segmenti di un articolo (22 batch)
+//     quando il trasporto e' sano, senza riaprire la vecchia finestra da 40
+//     richieste che ha saturato il broker.
 //   - FREE_TRANSLATE_CODEX_MAX_MS: tempo di orologio in cui il processo ha
 //     almeno una richiesta Codex in volo (default 15 minuti). create-article ha
 //     un hard kill a 40 minuti: un budget solo a richieste potrebbe costargli
@@ -1882,7 +1882,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
 // misura prima/dopo e' nel gemello del sito
 // (scripts/measure-codex-translate-tier.mjs): 30 campi di articolo 232 → 113 s
 // e 184k → 62k token di input; 8 testi FAQ 61 → 30 s e 49k → 31k.
-const CODEX_TRANSLATE_MAX_CALLS_DEFAULT = 16;
+const CODEX_TRANSLATE_MAX_CALLS_DEFAULT = 32;
 const CODEX_TRANSLATE_MAX_MS_DEFAULT = 15 * 60 * 1000;
 const CODEX_TRANSLATE_LANES_DEFAULT = 2;
 const CODEX_TRANSLATE_LANES_MAX = 3;
@@ -2164,7 +2164,7 @@ function _finishTrackedCodexCall(at = Date.now()) {
 /**
  * Ammette una chiamata Codex che appartiene alla traduzione dell'articolo.
  * Anche le recovery fuori dalla coda free-MT devono consumare lo stesso
- * budget 16/900s: altrimenti i retry JSON riaprirebbero una seconda quota
+ * budget 32/900s: altrimenti i retry JSON riaprirebbero una seconda quota
  * proprio dopo l'esaurimento della corsia principale.
  *
  * Restituisce la deadline della chiamata e una chiusura idempotente che misura
