@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'accordo-cure-oncologiche-ginevra',
+ category: 'novita',
+ date: '2026-10-07T08:57:01.058Z',
+ image: '/images/blog/carenze-dogane-sicurezza-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -4,6 +4,7 @@
  */
 export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
  'economia-ginevrina-ripresa-globale': { it: 'economia-ginevrina-ripresa-globale', en: 'geneva-economy-global-recovery', de: 'genfer-wirtschaft-globale-erholung', fr: 'economie-genevoise-reprise-mondiale' },
+ 'accordo-cure-oncologiche-ginevra': { it: 'accordo-cure-oncologiche-ginevra', en: 'geneva-france-pediatric-cancer-care', de: 'grenzueberschreitende-kinderkrebsversorgung-genf', fr: 'cooperation-transfrontaliere-cancer-geneve' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

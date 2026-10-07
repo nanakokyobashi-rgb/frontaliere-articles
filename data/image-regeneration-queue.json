@@ -234,6 +234,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:55:12.292Z",
       "lastFailureAt": "2026-10-07T08:55:12.292Z"
+    },
+    {
+      "articleId": "accordo-cure-oncologiche-ginevra",
+      "title": "Accordo Ginevra-Francia per cure oncologiche pediatriche",
+      "fallbackImage": "/images/blog/carenze-dogane-sicurezza-ticino.webp",
+      "reason": "All image providers failed for article-accordo-cure-oncologiche-ginevra: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:57:01.067Z",
+      "lastFailureAt": "2026-10-07T08:57:01.067Z"
     }
   ]
 }
