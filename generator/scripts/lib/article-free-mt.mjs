@@ -387,6 +387,8 @@ export function maskNavLinks(text) {
   return { masked, expected: store.length, restore };
 }
 
+const lineCount = (value) => String(value ?? '').trim().split('\n').length;
+
 /**
  * Translate a single article text field via the injected free MT translator,
  * preserving internal nav-links and, when requested, municipality names.
@@ -500,7 +502,20 @@ export async function translateFieldFreeMt({
     }
     restored = r.text;
   }
-  const balanced = balanceMarkdown(restored);
+  const balanced = balanceMarkdown(restored, { sourceText: src });
+  // The markdown repair runs on the whole field, after every engine guard, and
+  // no later check looks at lines: it may not change their number. It used to
+  // merge list items here (`**a**\n- **b**` → one line). The comparison is
+  // with the text it was handed, not with the source: each block comes back
+  // from the engine with its blank runs collapsed, so the field is often not
+  // line-aligned with the raw source, and a guard that waited for that
+  // alignment did not look at exactly the fields where the repair could still
+  // drop a line.
+  if (lineCount(balanced) !== lineCount(restored)) {
+    onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'markdown-repair-changed-lines' });
+    onWarn(`free-MT ${targetLang}:${fieldType} markdown repair changed the line count (${lineCount(restored)} → ${lineCount(balanced)})`);
+    return '';
+  }
   if (findLoneSurrogates(balanced).length > 0) {
     onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'lone-surrogate' });
     onWarn(`free-MT ${targetLang}:${fieldType} produced a lone surrogate`);
