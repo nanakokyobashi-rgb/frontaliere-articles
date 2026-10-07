@@ -45,6 +45,7 @@ test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', 
   const distDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-dist-'));
   let active = 0;
   let maxActive = 0;
+  const logs = [];
   try {
     const ids = Array.from({ length: 6 }, (_, index) => `article-${index}`);
     const declaredImages = Object.fromEntries(ids.map((id) => [id, `/images/places/${id}.webp`]));
@@ -54,6 +55,10 @@ test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', 
       ids,
       declaredImages,
       logPrefix: 'test',
+      logger: {
+        log: (message) => logs.push(message),
+        error: (message) => logs.push(message),
+      },
       fetchImpl: async () => {
         active += 1;
         maxActive = Math.max(maxActive, active);
@@ -65,6 +70,8 @@ test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', 
     assert.ok(maxActive <= 4);
     assert.equal(result.failures.length, 0);
     assert.equal(result.downloadedImageKeys.length, ids.length);
+    assert.equal(logs.length, ids.length);
+    assert.ok(logs.every((message) => message.startsWith('[test] downloaded declared image from CDN:')));
     for (const id of ids) assert.equal(fs.existsSync(path.join(result.viewDir, 'places', `${id}.webp`)), true);
     fs.rmSync(result.viewDir, { recursive: true, force: true });
     fs.rmSync(result.downloadDir, { recursive: true, force: true });

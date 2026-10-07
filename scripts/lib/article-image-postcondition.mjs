@@ -36,11 +36,6 @@ export function isGenericOgImage(html) {
   return Boolean(normalized && normalized.split(/[?#]/, 1)[0] === GENERIC_IMAGE_PATH);
 }
 
-/**
- * The registry is authoritative for the declared image. The rendered HTML is
- * only inspected to detect a generic fallback. Once one locale or its flat
- * bridge falls back, the whole article entry is kept out of the push set.
- */
 export function filterEntriesByImagePostcondition({ entries = [], declaredImages = {}, htmlByPath = {} } = {}) {
   const keptEntries = [];
   const excludedArticles = [];
@@ -58,12 +53,7 @@ export function filterEntriesByImagePostcondition({ entries = [], declaredImages
       continue;
     }
     excludedPages += paths.length;
-    excludedArticles.push({
-      articleId: entry.articleId,
-      declaredImage,
-      fallbackPaths,
-      paths,
-    });
+    excludedArticles.push({ articleId: entry.articleId, declaredImage, fallbackPaths, paths });
   }
 
   return {

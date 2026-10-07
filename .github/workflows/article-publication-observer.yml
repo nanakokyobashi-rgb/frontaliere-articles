@@ -38,6 +38,7 @@ jobs:
             /content/routerBlogData.ts
             /content/routerSwissData.ts
             /scripts/ci/article-publication-observer.mjs
+            /scripts/lib/article-image-postcondition.mjs
             /scripts/lib/github-issue-creator.mjs
           sparse-checkout-cone-mode: false
 

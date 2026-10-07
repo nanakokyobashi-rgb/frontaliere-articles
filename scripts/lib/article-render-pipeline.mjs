@@ -432,7 +432,7 @@ export async function fetchDeclaredImage({ imagePath, destination, logPrefix, fe
   throw new Error(lastError);
 }
 
-export async function prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix, fetchImpl = globalThis.fetch }) {
+export async function prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix, fetchImpl = globalThis.fetch, logger = console }) {
   const viewDir = path.join(distDir, 'images');
   const downloadDir = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-declared-images-'));
   const downloadedImageKeys = [];
@@ -459,11 +459,11 @@ export async function prepareImageView({ rootDir, distDir, ids, declaredImages, 
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.copyFileSync(destination, target);
         downloadedImageKeys.push(item.rel);
-        console.log(`[${logPrefix}] downloaded declared image from CDN: ${item.rel}`);
+        logger.log(`[${logPrefix}] downloaded declared image from CDN: ${item.rel}`);
       } catch (error) {
         const failure = { articleId: item.articleId, image: item.rel, reason: error?.message || String(error) };
         failures.push(failure);
-        console.error(`[${logPrefix}] declared image unavailable (${item.articleId}, ${item.rel}): ${failure.reason}`);
+        logger.error(`[${logPrefix}] declared image unavailable (${item.articleId}, ${item.rel}): ${failure.reason}`);
       }
     }
   };
