@@ -797,7 +797,7 @@
     "canton-sz": {
       "kind": "canton",
       "canton": "SZ",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-svitto",
         "en": "schwyz-articles",
@@ -1042,7 +1042,7 @@
     "canton-vs": {
       "kind": "canton",
       "canton": "VS",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-vallese",
         "en": "valais-articles",
@@ -1140,7 +1140,7 @@
     "canton-zh": {
       "kind": "canton",
       "canton": "ZH",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-zurigo",
         "en": "zurich-articles",
