@@ -394,6 +394,7 @@ jobs:
 
           CHAIN_LINK="${{ needs.admit.outputs.chain_link }}"
           [ "$CHAIN_LINK" = "true" ] || CHAIN_LINK=false
+          ADMIT_MODE="${{ needs.admit.outputs.run_mode }}"
 
           CHAIN=false
           if [ "$EV" = "push" ]; then
@@ -409,6 +410,10 @@ jobs:
                 content/*) CHAIN=true; break ;;
               esac
             done <<< "$CHANGED"
+            if [ "$ADMIT_MODE" = "unknown" ]; then
+              CHAIN=true
+              echo "::warning title=Push non classificabile::admit=unknown: il resolver usa la lane writer conservativa"
+            fi
           fi
 
           if [ "$EV" = "push" ] && [ "$CHAIN" != "true" ]; then

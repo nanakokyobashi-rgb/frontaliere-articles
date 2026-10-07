@@ -438,6 +438,8 @@ test('un dispatch della catena prova il fallback anche se l\'evento è workflow_
 test('il marker chain_link del mode arriva davvero allo step di generazione', () => {
   const mode = extractRun('Resolve run mode and section');
   assert.match(mode, /CHAIN_LINK="\$\{\{ needs\.admit\.outputs\.chain_link \}\}"/);
+  assert.match(mode, /ADMIT_MODE="\$\{\{ needs\.admit\.outputs\.run_mode \}\}"/);
+  assert.match(mode, /ADMIT_MODE.*unknown[\s\S]*CHAIN=true/, 'un compare unknown deve restare nella lane writer, mai dry');
   assert.doesNotMatch(mode, /inputs\.chain_depth/, 'il parser del marker deve avere una sola sorgente');
   assert.match(
     WF,

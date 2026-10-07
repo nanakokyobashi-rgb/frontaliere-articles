@@ -727,6 +727,7 @@ jobs:
           # passa qui il marker come output, così la decisione ha una sola fonte.
           CHAIN_LINK="${{ needs.admit.outputs.chain_link }}"
           [ "$CHAIN_LINK" = "true" ] || CHAIN_LINK=false
+          ADMIT_MODE="${{ needs.admit.outputs.run_mode }}"
 
           # A push is DRY unless it carried a corpus change — that is the chain
           # link. Editing this workflow or create-article.mjs must still only
@@ -748,6 +749,14 @@ jobs:
                 content/*) CHAIN=true; break ;;
               esac
             done <<< "$CHANGED"
+            if [ "$ADMIT_MODE" = "unknown" ]; then
+              # Il gate non ha potuto classificare il compare: questo run è
+              # un possibile successore content, mai un self-test dry. Il
+              # lock content condiviso con production evita sia lo sfratto di
+              # un successore reale da parte di un dry sia la sovrapposizione.
+              CHAIN=true
+              echo "::warning title=Push non classificabile::admit=unknown: il resolver usa la lane writer conservativa"
+            fi
           fi
 
           if [ "$EV" = "push" ] && [ "$CHAIN" != "true" ]; then
