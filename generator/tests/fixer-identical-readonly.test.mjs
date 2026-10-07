@@ -9,6 +9,7 @@ import { identicalPaths, partitionPaths } from '../../scripts/ci/lib/identical-p
 import { routeIdenticalFindings } from '../../scripts/ci/lib/identical-review-routing.mjs';
 import { installIdenticalCommitHook, IDENTICAL_COMMIT_MESSAGE } from '../../scripts/ci/fixer-identical-hook.mjs';
 import { restoreIdenticalPaths } from '../../scripts/ci/restore-identical-paths.mjs';
+import { registeredTransportHashes } from '../../scripts/ci/transport-identical-twins-guard.mjs';
 import { transportPrDisposition } from '../../scripts/ci/transport-identical-twins.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -154,6 +155,20 @@ test('il guard del trasporto distingue PR superata e PR ancora da attendere', ()
     registeredHashes: { 'same.mjs': 'aaaaaaaaaaaaaaaa' },
     currentHashes: { 'same.mjs': 'aaaaaaaaaaaaaaaa' },
   }), { state: 'wait', changed: [] });
+});
+
+test('il guard rifiuta attestazioni duplicate con hash discordanti', () => {
+  assert.deepEqual(registeredTransportHashes([
+    { path: 'same.mjs', siteHash: 'aaaaaaaaaaaaaaaa' },
+    { path: 'same.mjs', siteHash: 'aaaaaaaaaaaaaaaa' },
+  ]), { 'same.mjs': 'aaaaaaaaaaaaaaaa' });
+  assert.throws(
+    () => registeredTransportHashes([
+      { path: 'same.mjs', siteHash: 'aaaaaaaaaaaaaaaa' },
+      { path: 'same.mjs', siteHash: 'bbbbbbbbbbbbbbbb' },
+    ]),
+    /attestazioni in conflitto per same\.mjs/u,
+  );
 });
 
 test('forma dei workflow: helper trusted, hook prima dell’agente, restore dopo agente', () => {

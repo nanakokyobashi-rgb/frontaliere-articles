@@ -17,7 +17,10 @@ import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
-import { routeIdenticalFindings } from './lib/identical-review-routing.mjs';
+import {
+  classifyIdenticalFindings,
+  routeIdenticalFindings,
+} from './lib/identical-review-routing.mjs';
 import {
   changedLinesFromPatch,
   stableFindingId,
@@ -586,47 +589,111 @@ async function commentIdenticalRouting(repo, pr, body, { marker } = {}) {
   return { posted: true, duplicate: false };
 }
 
-/** Instrada i finding esclusivamente identical prima del calcolo del follow-up. */
-async function applyIdenticalRouting(result, { repo, pr, prUrl, mutate } = {}) {
-  if (!mutate || !process.env.SITE_REPO) return { ...result, identicalOnly: false, identicalRouting: null };
-  const declassified = new Set([
-    ...(result.staleBodyDeclassified || []).map((finding) => finding.stableId || finding.lineNumber || finding.text),
-    ...(result.staleDeclassified || []).map((finding) => finding.stableId || finding.lineNumber || finding.text),
-  ]);
-  const openFindings = (result.findings || []).filter((finding) => {
-    const id = finding.stableId || finding.lineNumber || finding.text;
-    return !declassified.has(id);
-  });
-  const routing = await routeIdenticalFindings({
-    findings: openFindings,
-    manifest: readIdenticalManifest(),
-    repo,
-    pr,
-    prUrl,
-    createIssue: withSiteIssueCreator(process.env.SITE_REPO, process.env.SITE_TOKEN || process.env.GITHUB_PAT || ''),
-    commentPr: (body, options) => commentIdenticalRouting(repo, pr, body, options),
-    mutate: true,
-  });
-  const routedIds = new Set(routing.routedFindingIds);
-  if (routedIds.size === 0) return { ...result, identicalOnly: false, identicalRouting: routing };
-  const keep = (finding) => !routedIds.has(finding.stableId || finding.lineNumber || finding.text);
+function findingIdentity(finding) {
+  return finding?.stableId || finding?.lineNumber || finding?.text;
+}
+
+function blockIdenticalRouting(result, { candidates, allIdentical, reason }) {
+  const findingIds = [...new Set(candidates.map((item) => item.findingId))];
+  return {
+    ...result,
+    outsideOnly: false,
+    blocking: true,
+    identicalOnly: false,
+    identicalBlockingFindingIds: findingIds,
+    identicalRouting: {
+      candidates,
+      routed: [],
+      routedFindingIds: [],
+      allIdentical,
+      blocked: true,
+      handoffConfirmed: false,
+      reason,
+    },
+  };
+}
+
+/**
+ * Instrada i finding esclusivamente identical prima del calcolo del follow-up.
+ * Un finding identical resta bloccante sia prima sia dopo l'handoff: il
+ * commento/issue sul sito è una traccia operativa, non una soluzione che
+ * autorizza il merge del corpus.
+ */
+export function applyRoutedIdenticalResult(result, routing) {
+  const routedIds = new Set(routing?.routedFindingIds || []);
+  if (routedIds.size === 0) {
+    return {
+      ...result,
+      identicalOnly: false,
+      identicalBlockingFindingIds: [],
+      identicalRouting: routing,
+    };
+  }
+  const keep = (finding) => !routedIds.has(findingIdentity(finding));
   const outside = result.outside.filter(keep);
   const inScope = result.inScope.filter(keep);
   const unresolved = result.unresolved.filter(keep);
-  const bodyOnly = result.staleBodyDeclassified.length > 0
-    && outside.length === 0 && inScope.length === 0 && unresolved.length === 0;
   return {
     ...result,
     outside,
     inScope,
     unresolved,
-    bodyOnly,
-    outsideOnly: (outside.length + result.staleBodyDeclassified.length + result.staleDeclassified.length) > 0
-      && inScope.length === 0 && unresolved.length === 0,
-    blocking: inScope.length > 0 || unresolved.length > 0,
+    bodyOnly: false,
+    outsideOnly: false,
+    blocking: true,
     identicalOnly: routing.allIdentical,
-    identicalRouting: routing,
+    identicalBlockingFindingIds: [...routedIds],
+    identicalRouting: { ...routing, handoffConfirmed: true },
   };
+}
+
+async function applyIdenticalRouting(result, { repo, pr, prUrl, mutate } = {}) {
+  const declassified = new Set([
+    ...(result.staleBodyDeclassified || []).map(findingIdentity),
+    ...(result.staleDeclassified || []).map(findingIdentity),
+  ]);
+  const openFindings = (result.findings || []).filter((finding) => !declassified.has(findingIdentity(finding)));
+  const manifest = readIdenticalManifest();
+  const candidates = classifyIdenticalFindings(openFindings, manifest);
+  if (candidates.length === 0) {
+    return {
+      ...result,
+      identicalOnly: false,
+      identicalBlockingFindingIds: [],
+      identicalRouting: null,
+    };
+  }
+  const candidateFindingIds = new Set(candidates.map((item) => item.findingId));
+  const openFindingIds = new Set(openFindings.map(findingIdentity));
+  const allIdentical = openFindingIds.size > 0 && candidateFindingIds.size === openFindingIds.size;
+  const siteRepo = process.env.SITE_REPO;
+  const siteToken = process.env.SITE_TOKEN || process.env.GITHUB_PAT || '';
+  if (!mutate || !siteRepo || !siteToken) {
+    const reason = !mutate
+      ? 'routing identical disabilitato dal chiamante'
+      : (!siteRepo
+        ? 'SITE_REPO assente: handoff identical non verificabile'
+        : 'SITE_TOKEN/GITHUB_PAT assente: handoff identical non verificabile');
+    return blockIdenticalRouting(result, { candidates, allIdentical, reason });
+  }
+  const routing = await routeIdenticalFindings({
+    findings: openFindings,
+    manifest,
+    repo,
+    pr,
+    prUrl,
+    createIssue: withSiteIssueCreator(siteRepo, siteToken),
+    commentPr: (body, options) => commentIdenticalRouting(repo, pr, body, options),
+    mutate: true,
+  });
+  if ((routing.routedFindingIds || []).length === 0) {
+    return blockIdenticalRouting(result, {
+      candidates,
+      allIdentical,
+      reason: 'handoff identical non confermato dal writer',
+    });
+  }
+  return applyRoutedIdenticalResult(result, routing);
 }
 
 /**
@@ -1136,6 +1203,7 @@ export async function classifyAndMintReview(body, {
       })),
       bodyDeclassified: staleBodyDeclassified,
       staleBodyDeclassified,
+      staleDeclassified: [],
       bodyOnly: staleBodyDeclassified.length > 0 && stillOpen.length === 0,
       // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
       // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
@@ -1226,6 +1294,7 @@ if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
       unresolved: result.unresolved.length,
       bodyOnly: result.bodyOnly === true,
       identicalOnly: result.identicalOnly === true,
+      identicalBlockingFindingIds: result.identicalBlockingFindingIds || [],
       identicalRouting: result.identicalRouting || null,
       minted: result.minted,
       followup: result.followup || null,

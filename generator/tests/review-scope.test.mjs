@@ -465,7 +465,7 @@ if (args[0] === 'api' && args[1].includes('/git/trees/')) {
 process.exit(0);
 `;
 
-async function classifyWithDiffFailure(mode) {
+async function classifyWithDiffFailure(mode, reviewBody = '`scripts/build-api.mjs:10`: 🔴 Important: il controllo della superficie pubblicata manca.', options = {}) {
   const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-diff-'));
   const binDir = path.join(tmpDir, 'bin');
@@ -481,8 +481,8 @@ async function classifyWithDiffFailure(mode) {
   delete process.env.GH_REPO;
   try {
     return await classifyAndMintReview(
-      '`scripts/build-api.mjs:10`: 🔴 Important: il controllo della superficie pubblicata manca.',
-      { repo: 'o/r', pr: 904, prUrl: 'https://x/pr/904' },
+      reviewBody,
+      { repo: 'o/r', pr: 904, prUrl: 'https://x/pr/904', ...options },
     );
   } finally {
     process.env.PATH = previous.PATH;
@@ -533,6 +533,20 @@ test('lista file vuota resta BLOCCANTE anche se il helper la dichiara complete',
   assert.equal(result.outsideOnly, false);
   assert.equal(result.minted, false);
   assert.equal(result.blocking, true);
+});
+
+test('un finding su un gemello identical resta bloccante senza handoff verificabile', { concurrency: false }, async () => {
+  const result = await classifyWithDiffFailure(
+    'empty',
+    '`generator/scripts/lib/translation-glossary.mjs:10`: 🔴 Important: il parser dei link è rotto.',
+    { mutate: false },
+  );
+  assert.equal(result.outsideOnly, false);
+  assert.equal(result.blocking, true);
+  assert.equal(result.identicalOnly, false);
+  assert.equal(result.identicalBlockingFindingIds.length, 1);
+  assert.equal(result.identicalRouting.blocked, true);
+  assert.match(result.identicalRouting.reason, /routing identical disabilitato/u);
 });
 
 test('una follow-up chiusa non viene riaperta né riempita di nuovo', { concurrency: false }, async () => {

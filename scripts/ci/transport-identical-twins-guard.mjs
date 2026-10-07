@@ -31,6 +31,23 @@ function sitePathFor(manifest, corpusPath) {
   return entry.sitePath || entry.path;
 }
 
+/**
+ * Registra una sola attestazione per path. Duplicati identici sono innocui;
+ * hash diversi sono ambigui e devono fermare il guard prima che un
+ * `Object.fromEntries` ne nasconda uno.
+ */
+export function registeredTransportHashes(bullets) {
+  const registered = new Map();
+  for (const bullet of bullets || []) {
+    const previous = registered.get(bullet.path);
+    if (previous !== undefined && previous !== bullet.siteHash) {
+      throw new Error(`attestazioni in conflitto per ${bullet.path}: ${previous} e ${bullet.siteHash}`);
+    }
+    registered.set(bullet.path, bullet.siteHash);
+  }
+  return Object.fromEntries(registered);
+}
+
 async function inspectPr(pr, manifest) {
   const body = pr.body || '';
   // Le righe `both-moved-converged` non appartengono al realign post-merge:
@@ -38,12 +55,12 @@ async function inspectPr(pr, manifest) {
   // ignorava, quindi una PR solo-manifest restava `wait` anche se il sito
   // avanzava dopo l'apertura.
   const bullets = [...parseTransportBullets(body), ...parseConvergedBullets(body)];
-  const registered = Object.fromEntries(bullets.map((bullet) => [bullet.path, bullet.siteHash]));
+  const registered = registeredTransportHashes(bullets);
   const current = {};
-  for (const bullet of bullets) {
-    const bytes = await siteFile(sitePathFor(manifest, bullet.path));
-    if (bytes === null) return { pr, state: 'unknown', changed: [], reason: `il sito non espone più ${bullet.path}` };
-    current[bullet.path] = sha256(bytes);
+  for (const corpusPath of Object.keys(registered)) {
+    const bytes = await siteFile(sitePathFor(manifest, corpusPath));
+    if (bytes === null) return { pr, state: 'unknown', changed: [], reason: `il sito non espone più ${corpusPath}` };
+    current[corpusPath] = sha256(bytes);
   }
   return { pr, ...transportPrDisposition({ openPr: true, registeredHashes: registered, currentHashes: current }) };
 }
