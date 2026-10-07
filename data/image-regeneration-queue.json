@@ -171,6 +171,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:42:08.220Z",
       "lastFailureAt": "2026-10-07T08:42:08.220Z"
+    },
+    {
+      "articleId": "permessi-edilizi-digitali-basel",
+      "title": "Permessi edilizi a Basilea: solo digitali dal 2027",
+      "fallbackImage": "/images/blog/avs-prestazioni-complementari-basilea-campagna.webp",
+      "reason": "All image providers failed for article-permessi-edilizi-digitali-basel: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:43:35.081Z",
+      "lastFailureAt": "2026-10-07T08:43:35.081Z"
     }
   ]
 }
