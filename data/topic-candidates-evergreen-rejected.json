@@ -795,14 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/attualita/1954213/startup-intelligenza-team-classifica-farmaci-lugano-aziende-top100-svizzera-swiss": {
-      "section": "frontaliere",
-      "ts": 1791177074339
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/bellucci-in-semifinale-senza-giocare-a-jingshan-lo-attende-il-turco-erel/2696431": {
-      "section": "frontaliere",
-      "ts": 1791177565447
-    },
     "frontaliere::https://comozero.it/punti-di-vista/turismo-a-como-5-milioni-di-tassa-di-soggiorno-una-cifra-uguale-per-trasporti-e-nidi-gratis-casa-o-tariffe-parcheggi": {
       "section": "frontaliere",
       "ts": 1791184701070
@@ -1042,6 +1034,14 @@
     "frontaliere::https://www.laregione.ch/economia/economia/1955093/luganistan-il-giardino-di-casa-di-una-cleptocrazia": {
       "section": "frontaliere",
       "ts": 1791347139488
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/ostinelli-non-pago-piu-la-cassa-malati-444069": {
+      "section": "frontaliere",
+      "ts": 1791351168567
+    },
+    "frontaliere::https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
+      "section": "frontaliere",
+      "ts": 1791353815883
     }
   }
 }

@@ -12721,6 +12721,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev on Lake Ceresio: oil, villas and permits',
     'blog.article.clan-nazarbayev-ceresio.excerpt': 'The investigation into the commodities trade tells the story of the Nazarbayev clan’s arrival on Lake Lugano, amid oil, villas and strange residence permits.',
     'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Ceresio lakeside villas in the story of the Nazarbayev clan',
+    'blog.article.monte-olimpino-treni-weekend.title': 'Como-Switzerland trains: 4 weekends of closures in 2026',
+    'blog.article.monte-olimpino-treni-weekend.excerpt': '## TL;DR - Four closure weekends between October and November 2026 - Stop from Friday at 20:20 to Monday at 04:20 - RE80 skips Como San Giovanni and Como',
+    'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Regional train on a cross-border railway line between Como and Switzerland',
+    'blog.article.hotel-ticino-140-licenziati.title': 'Two hotels closed in Ticino: 140 laid off',
+    'blog.article.hotel-ticino-140-licenziati.excerpt': 'The company that manages Principe Leopoldo and Villa Sassa announces 140 layoffs. Daniele Lardi reassures: a good portion of the staff will be rehired.',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Principe Leopoldo and Villa Sassa hotels in Ticino',
 };
 
 export default blogMetaEn;

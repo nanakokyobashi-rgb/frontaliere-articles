@@ -100566,6 +100566,75 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-monte-olimpino-treni-weekend': {
+    title: 'Treni Como-Svizzera: 4 weekend di chiusura nel 2026',
+    description: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    keywords: 'frontalieri, ticino, svizzera, italia, treni, como-svizzera, weekend, chiusura',
+    ogTitle: 'Monte Olimpino 1: chiusure ferroviarie nel 2026',
+    ogDescription: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    canonicalPath: '/articoli-frontaliere/monte-olimpino-treni-weekend/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "description": "## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/como-crisi-abitativa-alloggi-sfitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale su una linea transfrontaliera tra Como e la Svizzera"
+      },
+      "datePublished": "2026-10-07T05:47:57+00:00",
+      "dateModified": "2026-10-07T05:47:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/monte-olimpino-treni-weekend/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-hotel-ticino-140-licenziati': {
+    title: 'Due hotel chiusi in Ticino: 140 licenziati | Frontaliere Ticino',
+    description: 'Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, hotel, chiusi, licenziati, società',
+    ogTitle: 'Due hotel chiusi in Ticino: 140 licenziati',
+    ogDescription: 'La chiusura di Principe Leopoldo e Villa Sassa porta a 140 licenziamenti. Il presidente Daniele Lardi rassicura sul possibile rientro di buona parte del personale e annuncia la valutazione di misure di accompagnamento.',
+    canonicalPath: '/articoli-frontaliere/hotel-ticino-140-licenziati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Due hotel chiusi in Ticino: 140 licenziati",
+      "description": "Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/hotel-ticino-76-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I due hotel Principe Leopoldo e Villa Sassa in Ticino"
+      },
+      "datePublished": "2026-10-07T06:29:50+00:00",
+      "dateModified": "2026-10-07T06:29:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hotel-ticino-140-licenziati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

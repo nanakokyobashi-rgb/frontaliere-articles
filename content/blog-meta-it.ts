@@ -12722,6 +12722,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.clan-nazarbayev-ceresio.title': 'Nazarbayev sul Ceresio: petrolio, ville e permessi',
     'blog.article.clan-nazarbayev-ceresio.excerpt': 'L\'inchiesta sul commercio di materie prime racconta l\'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno.',
     'blog.article.clan-nazarbayev-ceresio.imageAlt': 'Ville sul Ceresio nel racconto sul clan Nazarbayev',
+    'blog.article.monte-olimpino-treni-weekend.title': 'Treni Como-Svizzera: 4 weekend di chiusura nel 2026',
+    'blog.article.monte-olimpino-treni-weekend.excerpt': '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Treno regionale su una linea transfrontaliera tra Como e la Svizzera',
+    'blog.article.hotel-ticino-140-licenziati.title': 'Due hotel chiusi in Ticino: 140 licenziati',
+    'blog.article.hotel-ticino-140-licenziati.excerpt': 'La società che gestisce Principe Leopoldo e Villa Sassa comunica 140 licenziamenti. Daniele Lardi rassicura: una buona parte del personale sarà riassunta.',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'I due hotel Principe Leopoldo e Villa Sassa in Ticino',
 };
 
 export default blogMetaIt;

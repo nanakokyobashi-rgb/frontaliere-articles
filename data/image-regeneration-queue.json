@@ -27,6 +27,42 @@
       "status": "queued",
       "requestedAt": "2026-10-07T05:28:44.576Z",
       "lastFailureAt": "2026-10-07T05:28:44.576Z"
+    },
+    {
+      "articleId": "monte-olimpino-treni-weekend",
+      "title": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "fallbackImage": "/images/blog/como-crisi-abitativa-alloggi-sfitti.webp",
+      "reason": "All image providers failed for article-monte-olimpino-treni-weekend: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:47:57.525Z",
+      "lastFailureAt": "2026-10-07T05:47:57.525Z"
+    },
+    {
+      "articleId": "a2-mendrisio-melano-risanamento",
+      "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
+      "fallbackImage": "/images/blog/mendrisio-melano-progetto-meme-risanamento-fonico.webp",
+      "reason": "All image providers failed for article-a2-mendrisio-melano-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:12:18.865Z",
+      "lastFailureAt": "2026-10-07T06:12:18.865Z"
+    },
+    {
+      "articleId": "scambio-dati-salariali-2027",
+      "title": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
+      "fallbackImage": "/images/blog/fairtiq-bonus-ticino-2026-2027.webp",
+      "reason": "All image providers failed for article-scambio-dati-salariali-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:25:44.304Z",
+      "lastFailureAt": "2026-10-07T06:25:44.304Z"
+    },
+    {
+      "articleId": "hotel-ticino-140-licenziati",
+      "title": "Due hotel chiusi in Ticino: 140 licenziati",
+      "fallbackImage": "/images/blog/hotel-ticino-76-licenziamenti.webp",
+      "reason": "All image providers failed for article-hotel-ticino-140-licenziati: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:29:51.075Z",
+      "lastFailureAt": "2026-10-07T06:29:51.075Z"
     }
   ]
 }
