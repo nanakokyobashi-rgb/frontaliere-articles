@@ -12750,6 +12750,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, fällt von einer Treppe: schwer ein 79-jähriger',
     'blog.article.caduta-scala-locate-varesino.excerpt': '## In Kürze - Sturz von einer Treppe in der Via Madonnetta - Ein 79-jähriger Mann stürzte auf einen Bauernhof - Hilfe in rotem Code aktiviert',
     'blog.article.caduta-scala-locate-varesino.imageAlt': 'Ländliche Umgebung eines Landwirtschaftsbetriebs',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'In Cantello kehrt das Dialekttheater „Quei giargianes da giappunes“ zurück',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': '## Auf einen Blick - Zwei Termine: 10. Oktober um 21 Uhr und 18. Oktober um 15 Uhr - Dialektfassung von Alessandro Campi - Auf der Bühne die Amateurtheatergruppe Tutti in Scena',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Plakat für das Dialektstück “Quei giargianes da giappunes” im Teatro Pax von Cantello mit der Gruppe Tutti in Scena',
 };
 
 export default blogMetaDe;

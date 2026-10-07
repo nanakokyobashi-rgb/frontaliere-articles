@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T10:41:07.739Z",
-  "contentHash": "0fad491da135eff7d5c615938ed96955c9fcd1cf67d220b6d754eca9a5df4109",
+  "updatedAt": "2026-10-07T15:40:47.440Z",
+  "contentHash": "b52d12427bb951983ac9327c069b361ce458f64848bd1ed7670c9993947b9c7f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -15,16 +15,6 @@
     {
       "id": "farmacie-di-turno",
       "updatedAt": "2026-10-07T00:42:24.752Z",
-      "keyFacts": 0
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-06T23:53:39.513Z",
       "keyFacts": 0
     },
     {
@@ -45,11 +35,6 @@
           "value": "606 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "6",
-          "note": "offerta mediana 1200 CHF"
         }
       ],
       "dataBlocks": [
@@ -94,51 +79,6 @@
           "updatedAt": "2026-10-07T00:42:24.752Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "SO10468",
-              "value": "20.000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
-            },
-            {
-              "label": "SO5504",
-              "value": "1200 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
-            },
-            {
-              "label": "SO7971",
-              "value": "1200 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "13 °C",
-              "detail": "oggi da 14 a 14 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-06T23:53:39.513Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -168,6 +108,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Premi cassa malati a Soletta: +6% nel 2027",
+          "url": "/articoli-soletta/premi-malattia-soletta-2027/",
+          "excerpt": "Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.",
+          "date": "2026-10-07T11:11:51.115Z"
+        },
         {
           "title": "Patente di guida nel Canton Soletta: conversione ed esami",
           "url": "/articoli-svizzera/soletta-licenza-estera-esami/",
@@ -209,12 +155,6 @@
           "url": "/articoli-svizzera/permesso-dimora-b-soletta-requisiti-rinnovo/",
           "excerpt": "Guida completa al permesso B nel cantone Soletta. Scopri requisiti, documenti da produrre, durata 5 anni e procedura di rinnovo entro 3 mesi dalla scadenza.",
           "date": "2026-08-24T04:51:47.353Z"
-        },
-        {
-          "title": "Permesso di domicilio C canton Soletta: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-domicilio-c-soletta/",
-          "excerpt": "Analisi dei requisiti, dei criteri di integrazione e della procedura per richiedere il permesso di domicilio C nel Cantone di Soletta.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -243,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "en": {
       "canton": "SO",
@@ -256,11 +196,6 @@
           "value": "606 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "6",
-          "note": "typical bid 1,200 CHF"
         }
       ],
       "dataBlocks": [
@@ -305,51 +240,6 @@
           "updatedAt": "2026-10-07T00:42:24.752Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "SO10468",
-              "value": "20,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
-            },
-            {
-              "label": "SO5504",
-              "value": "1,200 CHF",
-              "detail": "current bid",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
-            },
-            {
-              "label": "SO7971",
-              "value": "1,200 CHF",
-              "detail": "current bid",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "13 °C",
-              "detail": "today from 14 to 14 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-06T23:53:39.513Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -379,6 +269,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Health insurance premiums in Solothurn: +6% in 2027",
+          "url": "/en/solothurn-articles/solothurn-health-premiums-2027/",
+          "excerpt": "In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.",
+          "date": "2026-10-07T11:11:51.115Z"
+        },
         {
           "title": "Driving licence in the Canton of Solothurn: conversion and exams",
           "url": "/en/swiss-articles/solothurn-driving-licence-conversion/",
@@ -420,12 +316,6 @@
           "url": "/en/swiss-articles/residence-permit-b-soletta-requirements-renewal/",
           "excerpt": "Complete guide to permit B in the canton of Solothurn. Discover requirements, documents to be produced, duration 5 years and renewal procedure within 3 months of expiry.",
           "date": "2026-08-24T04:51:47.353Z"
-        },
-        {
-          "title": "Residence permit C canton Solothurn: requirements and application",
-          "url": "/en/swiss-articles/c-permit-solothurn-requirements-application/",
-          "excerpt": "Analysis of the requirements, integration criteria and procedure for applying for residence permit C in the Canton of Solothurn.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -450,7 +340,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "de": {
       "canton": "SO",
@@ -463,11 +353,6 @@
           "value": "606 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "6",
-          "note": "mittleres Gebot 1’200 CHF"
         }
       ],
       "dataBlocks": [
@@ -512,51 +397,6 @@
           "updatedAt": "2026-10-07T00:42:24.752Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "SO10468",
-              "value": "20’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
-            },
-            {
-              "label": "SO5504",
-              "value": "1’200 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
-            },
-            {
-              "label": "SO7971",
-              "value": "1’200 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "13 °C",
-              "detail": "heute 14 bis 14 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-06T23:53:39.513Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -586,6 +426,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien in Solothurn: +6% im Jahr 2027",
+          "url": "/de/solothurn-artikel/solothurn-krankenkassenpraemien-2027/",
+          "excerpt": "Im Kanton Solothurn steigt die durchschnittliche Prämie im Jahr 2027 um CHF 23.50 auf CHF 417.50, 5.50 mehr als der Schweizer Durchschnitt.",
+          "date": "2026-10-07T11:11:51.115Z"
+        },
         {
           "title": "Führerausweis im Kanton Solothurn: Umtausch und Prüfungen",
           "url": "/de/schweiz-artikel/solothurn-fuehrerausweis-umtausch/",
@@ -627,12 +473,6 @@
           "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-soletta-anforderungen-erneuerung/",
           "excerpt": "Vollständiger Führerschein B im Kanton Solothurn. Entdecken Sie die Anforderungen, die einzureichenden Dokumente, die Dauer von 5 Jahren und das Erneuerungsverfahren innerhalb von 3 Monaten nach Ablauf.",
           "date": "2026-08-24T04:51:47.353Z"
-        },
-        {
-          "title": "Niederlassungsbewilligung C Kanton Solothurn: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-kanton-solothurn-voraussetzungen/",
-          "excerpt": "Analyse der Voraussetzungen, der Integrationskriterien und des Verfahrens zur Beantragung der Niederlassungsbewilligung C im Kanton Solothurn.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -657,7 +497,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "fr": {
       "canton": "SO",
@@ -670,11 +510,6 @@
           "value": "606 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "6",
-          "note": "offre centrale 1 200 CHF"
         }
       ],
       "dataBlocks": [
@@ -719,51 +554,6 @@
           "updatedAt": "2026-10-07T00:42:24.752Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "SO10468",
-              "value": "20 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
-            },
-            {
-              "label": "SO5504",
-              "value": "1 200 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
-            },
-            {
-              "label": "SO7971",
-              "value": "1 200 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-07T15:00:00.000Z",
-              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Solothurn",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 14 à 14 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-06T23:53:39.513Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -793,6 +583,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Primes d’assurance-maladie à Soleure : +6 % en 2027",
+          "url": "/fr/articles-soleure/primes-maladie-soleure-2027/",
+          "excerpt": "Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.",
+          "date": "2026-10-07T11:11:51.115Z"
+        },
         {
           "title": "Permis de conduire dans le canton de Soleure : conversion et examens",
           "url": "/fr/articles-suisse/soleure-permis-conduire-conversion/",
@@ -834,12 +630,6 @@
           "url": "/fr/articles-suisse/permis-de-sejour-b-soletta-exigences-renouvellement/",
           "excerpt": "Guide complet du permis B dans le canton de Soleure. Découvrez les exigences, les documents à produire, la durée de 5 ans et la procédure de renouvellement dans les 3 mois suivant l'expiration.",
           "date": "2026-08-24T04:51:47.353Z"
-        },
-        {
-          "title": "Permis de séjour C canton de Soleure : exigences et demande",
-          "url": "/fr/articles-suisse/permis-etablissement-c-canton-soleure-conditions/",
-          "excerpt": "Analyse des exigences, des critères d'intégration et de la procédure de demande du permis de séjour C dans le canton de Soleure.",
-          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -860,7 +650,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     }
   }
 }
