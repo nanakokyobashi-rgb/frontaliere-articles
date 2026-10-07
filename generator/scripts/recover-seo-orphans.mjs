@@ -23,7 +23,7 @@ import { appendSeoEntrySource, buildSeoEntry, toIsoWithTz } from './lib/seo-entr
 import { deriveSeoMetadata, normalizeSeoTitle } from './lib/seo-metadata-derivation.mjs';
 import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
 import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
-import { readImageRegenerationQueue } from './lib/image-regeneration-queue.mjs';
+import { readImageRegenerationQueue, writeImageRegenerationQueue } from './lib/image-regeneration-queue.mjs';
 import { beginSeoBackfillLock, endSeoBackfillLock } from './lib/seo-backfill-lock.mjs';
 import { writeTextAtomic } from './lib/atomic-write-text.mjs';
 
@@ -104,6 +104,16 @@ function parseIds(file) {
   if (ids.length === 0) throw new Error(`ids file vuoto: ${file}`);
   if (new Set(ids).size !== ids.length) throw new Error(`ids file contiene duplicati: ${file}`);
   return ids;
+}
+
+function mergeQueueWithSnapshot(snapshot, current) {
+  const currentById = new Map(current.items.map((item) => [item?.articleId, item]));
+  const snapshotIds = new Set(snapshot.items.map((item) => item?.articleId));
+  const items = snapshot.items.map((item) => currentById.get(item?.articleId) || item);
+  for (const item of current.items) {
+    if (!snapshotIds.has(item?.articleId)) items.push(item);
+  }
+  return { ...current, items };
 }
 
 function existingTitleSet(titleById, currentId) {
@@ -219,6 +229,7 @@ function run(idsFile, { dryRun = false } = {}) {
   const before = fs.readFileSync(seoPath, 'utf8');
   const registryBefore = fs.readFileSync(registryPath, 'utf8');
   const queueBefore = fs.existsSync(queuePath) ? fs.readFileSync(queuePath, 'utf8') : null;
+  const queueSnapshot = queueBefore === null ? { schema: 1, items: [] } : JSON.parse(queueBefore);
   beginSeoBackfillLock(ROOT, ids);
   try {
     for (const { data } of fallbackEntries) {
@@ -246,7 +257,14 @@ function run(idsFile, { dryRun = false } = {}) {
         throw new Error(`${data.id}: unable to queue declared-cover regeneration`);
       }
     }
-    const queue = readImageRegenerationQueue(ROOT);
+    const currentQueue = readImageRegenerationQueue(ROOT);
+    const queue = mergeQueueWithSnapshot(queueSnapshot, currentQueue);
+    const missingSnapshotItems = queueSnapshot.items.some((item) => !currentQueue.items.some(
+      (currentItem) => currentItem?.articleId === item?.articleId,
+    ));
+    if (missingSnapshotItems || queue.items.length !== currentQueue.items.length) {
+      writeImageRegenerationQueue(ROOT, queue);
+    }
     const missingQueueItems = fallbackIds.filter((id) => !queue.items.some(
       (item) => item?.articleId === id && item.fallbackImage === STATIC_FALLBACK_IMAGE,
     ));
@@ -278,6 +296,7 @@ function run(idsFile, { dryRun = false } = {}) {
     fallbackImage: STATIC_FALLBACK_IMAGE,
     fallbackIds,
     queuedCoverRegenerations: fallbackIds.length,
+    queueItemsAfterRecovery: readImageRegenerationQueue(ROOT).items.length,
   }, null, 2));
 }
 
