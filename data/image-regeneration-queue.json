@@ -515,6 +515,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-07T18:27:16.502Z",
       "lastFailureAt": "2026-10-07T18:27:16.502Z"
+    },
+    {
+      "articleId": "disoccupazione-berna-settembre-2026-stabile",
+      "title": "Disoccupazione stabile a Berna settembre 2026: +78 persone",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-disoccupazione-berna-settembre-2026-stabile: image vision fallback deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T19:58:52.264Z",
+      "lastFailureAt": "2026-10-07T19:58:52.264Z"
     }
   ]
 }

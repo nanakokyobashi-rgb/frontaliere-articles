@@ -75,6 +75,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disoccupazione-berna-settembre-2026-stabile': {
+    title: 'Disoccupazione stabile a Berna settembre 2026: +78 persone',
+    description: 'A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, berna, settembre',
+    ogTitle: 'Disoccupazione stabile a Berna settembre 2026: +78 persone',
+    ogDescription: 'A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.',
+    canonicalPath: '/articoli-berna/disoccupazione-berna-settembre-2026-stabile/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione stabile a Berna settembre 2026: +78 persone",
+      "description": "A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Disoccupazione stabile a Berna settembre 2026, aumento di 78 persone"
+      },
+      "datePublished": "2026-10-07T19:58:52+00:00",
+      "dateModified": "2026-10-07T19:58:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/disoccupazione-berna-settembre-2026-stabile/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
