@@ -371,20 +371,32 @@ export function detectCorpusReaders(dir, rel = 'generator/tests') {
  * altro modulo che nascondesse l'accesso resterebbe comunque fuori: e' analisi
  * cross-file, non alla portata di un rilevatore statico su un singolo sorgente.
  */
+const JS_IDENTIFIER_PATTERN = '[A-Za-z_$][\\w$]*';
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 function corpusReaderReason(src) {
   if (/new URL\(\s*[`'"][^`'"]*\.\.\/content\//.test(src)) return 'new URL(../../content/…, import.meta.url)';
   const ancore = new Set();
-  for (const m of src.matchAll(/const\s+(\w+)\s*=\s*path\.(?:resolve|join)\([^;]*import\.meta\.url[^;]*\)/g)) ancore.add(m[1]);
-  for (const m of src.matchAll(/const\s+(\w+)\s*=\s*(\w+)\s*;/g)) if (ancore.has(m[2])) ancore.add(m[1]);
+  const anchoredDeclaration = new RegExp(
+    `const\\s+(${JS_IDENTIFIER_PATTERN})\\s*=\\s*path\\.(?:resolve|join)\\([^;]*import\\.meta\\.url[^;]*\\)`,
+    'g',
+  );
+  const anchorAlias = new RegExp(
+    `const\\s+(${JS_IDENTIFIER_PATTERN})\\s*=\\s*(${JS_IDENTIFIER_PATTERN})\\s*;`,
+    'g',
+  );
+  for (const m of src.matchAll(anchoredDeclaration)) ancore.add(m[1]);
+  for (const m of src.matchAll(anchorAlias)) if (ancore.has(m[2])) ancore.add(m[1]);
   for (const a of ancore) {
-    if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${a}\\s*,\\s*['"\`](?:\\.\\.\\/)*content`).test(src)) {
+    const escapedAnchor = escapeRegExp(a);
+    if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${escapedAnchor}\\s*,\\s*['"\`](?:\\.\\.\\/)*content`).test(src)) {
       return `path.join(${a}, 'content', …)`;
     }
   }
   const hasContentLiteral = /['"`]content\/[^'"`]+['"`]/.test(src);
   if (hasContentLiteral) {
     for (const a of ancore) {
-      if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${a}\\s*,\\s*[A-Za-z_$][\\w$]*\\s*[,)]`).test(src)) {
+      if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${escapeRegExp(a)}\\s*,\\s*[A-Za-z_$][\\w$]*\\s*[,)]`).test(src)) {
         return `path.join/resolve(${a}, <identificatore>) + literal 'content/…' (lettura indiretta)`;
       }
     }
@@ -392,7 +404,7 @@ function corpusReaderReason(src) {
   for (const tpl of src.match(/`[^`]*`/gs) || []) {
     if (!tpl.includes('content/')) continue;
     for (const a of ancore) {
-      if (new RegExp(`\\$\\{\\s*${a}\\s*\\}`).test(tpl)) {
+      if (new RegExp(`\\$\\{\\s*${escapeRegExp(a)}\\s*\\}`).test(tpl)) {
         return `\`\${${a}}/content/…\` (template literal)`;
       }
     }

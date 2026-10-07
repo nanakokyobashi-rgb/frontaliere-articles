@@ -560,6 +560,36 @@ describe('content-gates-main: il rilevatore vede le sotto-cartelle e il template
     }
   });
 
+  test('riconosce la forma indiretta con identificatori JavaScript che contengono $', () => {
+    const dir = mk();
+    try {
+      const contentPath = ['content', '/blog-articles-data.ts'].join('');
+      const rootIdentifier = '$ROOT';
+      const aliasIdentifier = '$REPO_ROOT';
+      const anchoredDeclaration = `const ${rootIdentifier} = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');`;
+      const aliasDeclaration = `const ${aliasIdentifier} = ${rootIdentifier};`;
+      const helperDeclaration = `const read = (rel) => fs.readFileSync(path.join(${aliasIdentifier}, rel), 'utf8');`;
+      fs.writeFileSync(
+        path.join(dir, 'dollar-anchor.test.mjs'),
+        [
+          "import path from 'node:path';",
+          "import { fileURLToPath } from 'node:url';",
+          anchoredDeclaration,
+          aliasDeclaration,
+          helperDeclaration,
+          `read('${contentPath}');`,
+        ].join('\n'),
+      );
+      const trovati = detectCorpusReaders(dir);
+      assert.equal(trovati.length, 1, 'l\'ancora con $ non e\' stata riconosciuta');
+      assert.equal(trovati[0].file, 'generator/tests/dollar-anchor.test.mjs');
+      assert.match(trovati[0].why, /lettura indiretta/);
+      assert.match(trovati[0].why, /REPO_ROOT/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
   test('path.join sull\'ancora senza un literal content/ resta null', () => {
     const dir = mk();
     try {
