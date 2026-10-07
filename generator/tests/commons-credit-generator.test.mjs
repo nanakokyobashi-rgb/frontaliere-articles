@@ -4,7 +4,8 @@
  * The old suite exercised the removed Commons/stock generation strategies by
  * slicing their implementation out of create-article.mjs. Commons records are
  * still covered by commons-credit.test.mjs; this suite now pins the contract
- * that new covers use the mirrored engine or a record-bearing catalog entry.
+ * that new covers use the mirrored engine or a record-bearing catalog entry,
+ * with a governed static cover as the final outage fallback.
  * It stays dependency-free so it runs before npm ci.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
@@ -114,16 +115,15 @@ test('the new-cover pipeline uses only the governed article-hero engine', () => 
     assert.doesNotMatch(imageAdapter, new RegExp(forbidden.replaceAll('.', '\\.'), 'i'), forbidden);
   }
   assert.doesNotMatch(imageStep, /fetch\s*\(/, 'the article cover step has no arbitrary image download');
-  assert.match(imageStep, /imageRecordForPath\(PROJECT_ROOT, matched, \{ strict: true \}\)/);
+  assert.match(imageStep, /resolveArticleCoverFallback/);
   assert.match(CREATE, /Hero image has no valid provenance record/);
 });
 
-test('a failed generation can fall back only to a record-bearing catalog cover', () => {
+test('a failed generation falls back without a quality rejection', () => {
   const imageStep = slice(CREATE, '  // Step 3b: Generate article image through the governed engine.', '  // Step 4: Modify files');
-  assert.match(imageStep, /findBestFallbackImage\(data\)/);
-  assert.match(imageStep, /imageRecordForPath\(PROJECT_ROOT, matched, \{ strict: true \}\)/);
-  assert.match(imageStep, /No governed image or valid catalog fallback/);
-  assert.doesNotMatch(imageStep, /PLACES_IMAGES|STATIC_FALLBACK_IMAGE|picsum\.photos/i);
+  assert.match(imageStep, /findCatalogImage: findBestFallbackImage/);
+  assert.match(imageStep, /reason: data\._imageGenerationFailureReason/);
+  assert.doesNotMatch(imageStep, /imagePolicyReject|qualityReject/);
 });
 
 test('the article adapter clears stale provenance before each governed attempt', () => {
@@ -140,12 +140,11 @@ test('journalist URLs are downloaded only after the four-field upload check', ()
   assert.match(resolver, /if \(isEditorialUpload && upload\)/);
   assert.match(resolver, /appendEditorialImageRecord\(PROJECT_ROOT, record\)/);
   assert.match(resolver, /generateArticleImage\(data\)/);
-  assert.doesNotMatch(resolver, /resolveCommonsPick|STATIC_FALLBACK_IMAGE/);
+  assert.match(resolver, /resolveArticleCoverFallback/);
   assert.ok(
     resolver.indexOf('if (isEditorialUpload && upload)') < resolver.indexOf('fetch(rawImage'),
     'rawImage is fetched only inside the documented upload branch',
   );
-  assert.match(resolver, /No governed image or valid catalog fallback/);
 });
 
 test('the pure journalist image policy rejects arbitrary URLs and accepts complete upload provenance', () => {
@@ -209,6 +208,10 @@ test('generated and editorial records are reader-facing and discoverable by cove
     appendEditorialImageRecord(root, editorial);
     assert.equal(imageRecordForPath(root, editorial.cover, { strict: true }).kind, 'editorial-upload');
     assert.equal(hasValidBlogImageRecord(root, editorial.cover), true);
+
+    const staticProvenance = imageRecordForPath(root, '/images/places/lugano-view.webp', { strict: true });
+    assert.equal(staticProvenance.kind, 'generated');
+    assert.equal(staticProvenance.record.scope, 'place');
 
     const registry = buildPublishedBlogImageRegistry(root);
     const aggregate = buildBlogImageCreditsAggregate({
