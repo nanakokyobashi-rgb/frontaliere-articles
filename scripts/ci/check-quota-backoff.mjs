@@ -66,6 +66,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
 import { ghWithRateLimitRetry } from './lib/gh-rate-limit.mjs';
+import { quotaLeaseFailureMarker } from './requeue-quota-lease.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const CODEX_FALLBACK_MODE = process.env.CODEX_FALLBACK_MODE === '1';
@@ -946,7 +947,8 @@ export function runQuotaLease({
       reason: decision.reason,
     }, { writeOutput });
   } catch (error) {
-    console.log(`::error::quota lease fail-closed: ${String(error?.message || error).slice(0, 240)}`);
+    const detail = String(error?.message || error).replace(/\s+/g, ' ').trim().slice(0, 240);
+    console.log(`::error::${quotaLeaseFailureMarker(error)} quota lease fail-closed: ${detail}`);
     return writeLeaseOutputs({ allowed: false, error: true, reason: 'lease-api-or-parse-error' }, { writeOutput });
   }
 }
@@ -1146,8 +1148,7 @@ function activeBeaconIn(scope, nowMs, nowSec) {
 
 function main() {
   if (process.env.QUOTA_LEASE_ACTION) {
-    runQuotaLease();
-    return;
+    return runQuotaLease();
   }
   const nowMs = Date.now();
   const nowSec = Math.floor(nowMs / 1000);
@@ -1226,10 +1227,16 @@ function main() {
 // invariato (comportamento identico a prima che questo gate esistesse).
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    main();
+    const result = main();
+    if (process.env.QUOTA_LEASE_STRICT_RELEASE === '1'
+      && process.env.QUOTA_LEASE_ACTION === 'release'
+      && result?.error === true) {
+      process.exitCode = 1;
+    }
   } catch (e) {
     console.error('Quota backoff gate error — procedo (fixer normale):', e && e.message ? e.message : e);
     setOutput(false, '');
-    process.exit(0);
+    process.exit(process.env.QUOTA_LEASE_STRICT_RELEASE === '1'
+      && process.env.QUOTA_LEASE_ACTION === 'release' ? 1 : 0);
   }
 }
