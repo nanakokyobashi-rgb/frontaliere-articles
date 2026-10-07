@@ -49,7 +49,7 @@
  *
  * Stampa su stdout `body_rereview=true|false` (forma GITHUB_OUTPUT).
  */
-import { REST_REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { REDFLAG_IMPORTANT_RE, REST_REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
 import { importantFindings } from './review-scope.mjs';
 
@@ -58,7 +58,6 @@ export const MAX_BODY_REREVIEWS_PER_HEAD = 3;
 
 const REVISION_LINE_RE = /^<!-- REVIEW_INPUT_REVISION: (body:[0-9a-f]{64}) -->$/i;
 const LGTM_RE = /^[ \t]{0,3}##[ \t]+LGTM[ \t]*$/;
-const IMPORTANT_RE = /🔴[ \t]*\*{0,2}[ \t]*Important[ \t]*\*{0,2}[ \t]*[:—-]/;
 
 /** Le pagine di `--slurp` sono array annidati; `--paginate` da solo no. */
 export function flattenReviewPages(reviews) {
@@ -90,11 +89,18 @@ export function reviewRevisions(body) {
   return [...found];
 }
 
-/** Un verdetto approvante: `## LGTM` come riga propria e nessun 🔴 Important. */
+/**
+ * Un verdetto approvante: `## LGTM` come riga propria e nessun 🔴 Important
+ * PER IL REVIEW GATE. La regex e' quella condivisa, non una copia locale: una
+ * definizione propria di «Important» divergeva proprio sulle forme che il gate
+ * impara dopo (la label di posizione senza punteggiatura), e un verdetto che
+ * il gate tiene rosso passava qui per un si' sticky.
+ */
 export function reviewIsApproving(body) {
   const text = String(body || '');
   if (!text.split(/\r?\n/).some((line) => LGTM_RE.test(line))) return false;
-  return !IMPORTANT_RE.test(text);
+  REDFLAG_IMPORTANT_RE.lastIndex = 0;
+  return !REDFLAG_IMPORTANT_RE.test(text);
 }
 
 function reviewId(review) {
