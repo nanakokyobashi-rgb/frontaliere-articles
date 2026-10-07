@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   GENERATED_IMAGE_CREDIT,
@@ -419,16 +420,17 @@ function workflowConcurrencyGroups(source) {
 }
 
 test('il gruppo generate-article resta confinato ai writer ammessi e il drain ha una corsia propria', () => {
+  const workflowsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.github/workflows');
   const workflowSources = [
-    ['generate-article.yml', new URL('../../.github/workflows/generate-article.yml', import.meta.url)],
-    ['generate-article-core.yml', new URL('../../.github/workflows/generate-article-core.yml', import.meta.url)],
-    ['publish-journalist-articles.yml', new URL('../../.github/workflows/publish-journalist-articles.yml', import.meta.url)],
-    ['regenerate-queued-covers.yml', new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url)],
+    ['generate-article.yml', 'generate-article.yml'],
+    ['generate-article-core.yml', 'generate-article-core.yml'],
+    ['publish-journalist-articles.yml', 'publish-journalist-articles.yml'],
+    ['regenerate-queued-covers.yml', 'regenerate-queued-covers.yml'],
   ];
   const declarations = [];
 
-  for (const [filename, workflowUrl] of workflowSources) {
-    const source = fs.readFileSync(workflowUrl, 'utf8');
+  for (const [filename, workflowFile] of workflowSources) {
+    const source = fs.readFileSync(path.join(workflowsDir, workflowFile), 'utf8');
     for (const group of workflowConcurrencyGroups(source)) {
       declarations.push({filename, ...group});
     }
@@ -448,7 +450,7 @@ test('il gruppo generate-article resta confinato ai writer ammessi e il drain ha
   ));
   assert.ok(drain);
   assert.equal(
-    fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8')
+    fs.readFileSync(path.join(workflowsDir, 'regenerate-queued-covers.yml'), 'utf8')
       .match(/cancel-in-progress:\s*false/gu)?.length,
     1,
   );
