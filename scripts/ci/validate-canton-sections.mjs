@@ -77,6 +77,9 @@ const QUIRKS = {
   charset: (v) => typeof v === 'string' && /^[a-z0-9-]+$/.test(v),
   crawlDelaySeconds: (v) => Number.isFinite(v) && v > 0,
   maxRequestsPerRun: (v) => Number.isInteger(v) && v >= 1,
+  // Feed condivisi fra cantoni: il generatore filtra le headline sul gruppo
+  // dichiarato prima di applicare recency e gate (es. Unterwalden24 NW/OW).
+  filterByCanton: (v) => typeof v === 'string' && /^[A-Z]{2}$/.test(v),
   http1Only: (v) => v === true,
   urlPeriod: (v) => ['year', 'month', 'iso-week'].includes(v),
   datetimeYearOffset: (v) => Number.isInteger(v) && v !== 0,
@@ -263,6 +266,14 @@ export function validateCantonSections(doc, ctx) {
         if (!QUIRKS[k]) err(where, `${lbl}: quirk sconosciuto "${k}"`);
         else if (!QUIRKS[k](v)) err(where, `${lbl}: quirk ${k}=${JSON.stringify(v)} non valido`);
         else if (QUIRK_PARSERS[k] && !QUIRK_PARSERS[k].has(s.parser)) err(where, `${lbl}: quirk ${k} non si applica al parser "${s.parser}"`);
+      }
+      const filterByCanton = s?.quirks?.filterByCanton;
+      if (filterByCanton !== undefined) {
+        if (!expectedCodes.includes(filterByCanton)) {
+          err(where, `${lbl}: quirk filterByCanton="${filterByCanton}" non e' un codice cantonale del profilo`);
+        } else if (filterByCanton !== c.code) {
+          err(where, `${lbl}: quirk filterByCanton="${filterByCanton}" non coincide col profilo proprietario ${c.code}`);
+        }
       }
       if (!(s.items7d === null || (Number.isInteger(s.items7d) && s.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
       if (!DATE_RE.test(s.verifiedAt || '')) err(where, `${lbl}: verifiedAt non YYYY-MM-DD`);
