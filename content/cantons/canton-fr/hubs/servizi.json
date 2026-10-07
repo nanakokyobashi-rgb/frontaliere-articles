@@ -1,0 +1,821 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-fr:servizi",
+  "section": "canton-fr",
+  "canton": "FR",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "b5e5ba77382bbedda412fc0338207a9c09257719b33a86c391e17f75ab2088f6",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "FR",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Friburgo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "606,90 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "14",
+          "note": "offerta mediana 175 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "FR, regione di premio 1",
+              "value": "mediana 606,90 CHF al mese",
+              "detail": "da 577 a 672,70 CHF, 23 assicuratori"
+            },
+            {
+              "label": "FR, regione di premio 2",
+              "value": "mediana 558 CHF al mese",
+              "detail": "da 523,30 a 617,50 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "FR18251",
+              "value": "550 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+            },
+            {
+              "label": "FR20890",
+              "value": "400 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+            },
+            {
+              "label": "FR37807",
+              "value": "300 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "13 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+            },
+            {
+              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-01T09:56:06.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+            },
+            {
+              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
+              "date": "2026-09-30",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+            },
+            {
+              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
+              "date": "2026-09-25T11:47:08.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+            },
+            {
+              "label": "Mois de la santé mentale 2026",
+              "date": "2026-09-25T07:40:51.000Z",
+              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B nel Canton Friburgo: requisiti, rinnovo e procedure",
+          "url": "/articoli-svizzera/permesso-dimora-b-canton-friburgo-requisiti-rinnovo/",
+          "excerpt": "Guida pratica ai requisiti per ottenere e rinnovare il permesso B nel Canton Friburgo, con documenti necessari e iter procedurale.",
+          "date": "2026-09-22T05:16:15.207Z"
+        },
+        {
+          "title": "Permesso di dimora B Friburgo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-friburgo-requisiti-rinnovo/",
+          "excerpt": "Permesso B a Friburgo: requisiti per UE/AELS e Paesi terzi, procedure di rinnovo, documenti necessari e ruoli della SEM e amministrazione cantonale.",
+          "date": "2026-09-05T16:17:35.042Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini nel Cantone di Friburgo: costi e opzioni",
+          "url": "/articoli-svizzera/asilo-nido-custodia-friburgo-costi/",
+          "excerpt": "Il Cantone di Friburgo offre diverse opzioni di asilo nido e custodia bambini, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
+          "date": "2026-08-18T00:24:16.744Z"
+        },
+        {
+          "title": "Patente di guida a Friburgo: conversione e requisiti",
+          "url": "/articoli-svizzera/patente-di-guida-friburgo-conversione-ed-esami/",
+          "excerpt": "Conversione della patente di guida estera nel Cantone di Friburgo, esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
+          "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Premi cassa malati Friburgo: riduzione e sussidi",
+          "url": "/articoli-svizzera/premi-lamal-friburgo-2026/",
+          "excerpt": "Guida ai premi dell'assicurazione malattia obbligatoria nel Canton Friburgo: franchigie, modelli alternativi e procedura per ottenere la riduzione dei premi",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "Patente di guida in Friburgo: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-friburgo-procedura/",
+          "excerpt": "Procedura di conversione della patente estera nel Cantone di Friburgo: corsi obbligatori, esami teorici e pratici, documenti richiesti e roadmap step-by-step.",
+          "date": "2026-09-01T20:58:54.961Z"
+        },
+        {
+          "title": "Asilo nido Friburgo: custodia bambini, costi",
+          "url": "/articoli-svizzera/custodia-bambini-friburgo-costi-sussidi/",
+          "excerpt": "Custodia bambini nel Canton Friburgo: tariffe, sussidi disponibili e procedure per richiedere i contributi cantonali alle famiglie.",
+          "date": "2026-09-01T19:42:33.243Z"
+        },
+        {
+          "title": "Ospedale di Friburgo cerca infermieri con contratto di 12 mesi",
+          "url": "/articoli-svizzera/ospedale-friburgo-posto-lavoro/",
+          "excerpt": "L'ospedale di Friburgo cerca infermieri con contratto CDD di 12 mesi al 60-100% di impiego",
+          "date": "2026-06-26T02:41:15.688Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/friborgo/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/friburgo-fr/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Friburgo",
+          "url": "/cerca-lavoro-friburgo/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "FR",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Fribourg, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "606.90 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "14",
+          "note": "typical bid 175 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "FR, premium region 1",
+              "value": "typical 606.90 CHF per month",
+              "detail": "from 577 to 672.70 CHF, 23 insurers"
+            },
+            {
+              "label": "FR, premium region 2",
+              "value": "typical 558 CHF per month",
+              "detail": "from 523.30 to 617.50 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "FR18251",
+              "value": "550 CHF",
+              "detail": "current bid",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+            },
+            {
+              "label": "FR20890",
+              "value": "400 CHF",
+              "detail": "current bid",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+            },
+            {
+              "label": "FR37807",
+              "value": "300 CHF",
+              "detail": "current bid",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "13 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+            },
+            {
+              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-01T09:56:06.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+            },
+            {
+              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
+              "date": "2026-09-30",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+            },
+            {
+              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
+              "date": "2026-09-25T11:47:08.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+            },
+            {
+              "label": "Mois de la santé mentale 2026",
+              "date": "2026-09-25T07:40:51.000Z",
+              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B in Fribourg: requirements, renewal & procedures",
+          "url": "/en/swiss-articles/residence-permit-b-canton-fribourg-requirements-renewal/",
+          "excerpt": "Practical guide to the requirements for obtaining and renewing the B permit in the Canton of Fribourg, with the necessary documents and procedure.",
+          "date": "2026-09-22T05:16:15.207Z"
+        },
+        {
+          "title": "Residence Permit B Freiburg: Requirements and Renewal",
+          "url": "/en/swiss-articles/residence-permit-b-fribourg-requirements-renewal/",
+          "excerpt": "Permit B in Freiburg: requirements for EU/EFTA and third countries, renewal procedures, necessary documents and roles of the SEM and cantonal administration.",
+          "date": "2026-09-05T16:17:35.042Z"
+        },
+        {
+          "title": "Nursery and childcare in the Canton of Freiburg: costs and options",
+          "url": "/en/swiss-articles/nursery-and-childcare-in-the-canton-of-freiburg-costs-and-options/",
+          "excerpt": "The Canton of Freiburg offers several daycare and childcare options, with income-based fees and cantonal subsidies available.",
+          "date": "2026-08-18T00:24:16.744Z"
+        },
+        {
+          "title": "Driving licence in Freiburg: conversion and requirements",
+          "url": "/en/swiss-articles/driving-license-fribourg-conversion-and-exams/",
+          "excerpt": "Conversion of the foreign driver's license in the Canton of Freiburg, theoretical and practical exams, compulsory courses and competent traffic office.",
+          "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Sick pay premiums Freiburg: reduction and subsidies",
+          "url": "/en/swiss-articles/fribourg-health-insurance-premiums-2026/",
+          "excerpt": "Guide to compulsory health insurance premiums in the Canton of Fribourg: deductibles, alternative models and procedure for obtaining premium reductions",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "Driving license in Freiburg: conversion and exams",
+          "url": "/en/swiss-articles/driving-license-fribourg-procedure/",
+          "excerpt": "Procedure for converting a foreign driver's license in the Canton of Freiburg: compulsory courses, theoretical and practical exams, required documents and step-by-step roadmaps.",
+          "date": "2026-09-01T20:58:54.961Z"
+        },
+        {
+          "title": "Kindergarten Freiburg: childcare, costs",
+          "url": "/en/swiss-articles/childcare-friburgo-costs-subsidies/",
+          "excerpt": "Child custody in the canton of Fribourg: rates, subsidies available and procedures for applying for cantonal contributions to families.",
+          "date": "2026-09-01T19:42:33.243Z"
+        },
+        {
+          "title": "Freiburg Hospital seeks nurses with 12-month contract",
+          "url": "/en/swiss-articles/fribourg-hospital-job-nurse/",
+          "excerpt": "Freiburg hospital is looking for nurses with a 12-month CDD contract at 60-100% employment",
+          "date": "2026-06-26T02:41:15.688Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/fribourg-fr/"
+        },
+        {
+          "label": "Job offers in the canton of Fribourg",
+          "url": "/en/find-jobs-fribourg/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "FR",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Freiburg laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "606.90 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "14",
+          "note": "mittleres Gebot 175 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "FR, Prämienregion 1",
+              "value": "Mittelwert 606.90 CHF pro Monat",
+              "detail": "von 577 bis 672.70 CHF, 23 Versicherer"
+            },
+            {
+              "label": "FR, Prämienregion 2",
+              "value": "Mittelwert 558 CHF pro Monat",
+              "detail": "von 523.30 bis 617.50 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "FR18251",
+              "value": "550 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+            },
+            {
+              "label": "FR20890",
+              "value": "400 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+            },
+            {
+              "label": "FR37807",
+              "value": "300 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "13 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+            },
+            {
+              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-01T09:56:06.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+            },
+            {
+              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
+              "date": "2026-09-30",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+            },
+            {
+              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
+              "date": "2026-09-25T11:47:08.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+            },
+            {
+              "label": "Mois de la santé mentale 2026",
+              "date": "2026-09-25T07:40:51.000Z",
+              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B in Freiburg: Voraussetzungen & Verfahren",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-freiburg-voraussetzungen-verlaengerung/",
+          "excerpt": "Praktischer Leitfaden zu den Voraussetzungen für die Erlangung und Erneuerung der B-Bewilligung im Kanton Freiburg, mit notwendigen Unterlagen und Verfahrensablauf.",
+          "date": "2026-09-22T05:16:15.207Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Freiburg: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-freiburg-verlaengerung/",
+          "excerpt": "Bewilligung B in Freiburg: Anforderungen für EU/EFTA und Drittländer, Erneuerungsverfahren, erforderliche Dokumente und Rollen des sem und der kantonalen Verwaltung.",
+          "date": "2026-09-05T16:17:35.042Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Freiburg: Kosten und Optionen",
+          "url": "/de/schweiz-artikel/asilo-nido-custodia-friburgo-kosten/",
+          "excerpt": "Der Kanton Freiburg bietet verschiedene Möglichkeiten der Kindertagesstätte und Kinderbetreuung mit einkommensabhängigen Tarifen und kantonalen Zuschüssen an.",
+          "date": "2026-08-18T00:24:16.744Z"
+        },
+        {
+          "title": "Führerschein in Freiburg: Umstellung und Voraussetzungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-freiburg-umstellung-und-pruefungen/",
+          "excerpt": "Umwandlung des ausländischen Führerscheins im Kanton Freiburg, theoretische und praktische Prüfungen, Pflichtkurse und zuständiges Strassenverkehrsamt.",
+          "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Krankenkassenprämien Freiburg: Kürzung und Zuschüsse",
+          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-2026/",
+          "excerpt": "Prämienleitfaden für die obligatorische Krankenversicherung im Kanton Freiburg: Franchisen, alternative Modelle und Verfahren zur Erlangung der Prämienverbilligung",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "Führerschein in Freiburg: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-freiburg-verfahren/",
+          "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Freiburg: Pflichtkurse, theoretische und praktische Prüfungen, erforderliche Unterlagen und Schritt-für-Schritt-Roadmaps.",
+          "date": "2026-09-01T20:58:54.961Z"
+        },
+        {
+          "title": "Kindertagesstätte Freiburg: Kinderbetreuung, Kosten",
+          "url": "/de/schweiz-artikel/kinderbetreuung-freiburg-kosten-subventionen/",
+          "excerpt": "Kinderbetreuung im Kanton Freiburg: Tarife, verfügbare Zuschüsse und Verfahren für die Beantragung von kantonalen Familienbeiträgen.",
+          "date": "2026-09-01T19:42:33.243Z"
+        },
+        {
+          "title": "Spital Freiburg sucht Krankenschwestern mit 12-monatigem Vertrag",
+          "url": "/de/schweiz-artikel/freiburg-spital-arbeit-pflegefachmann/",
+          "excerpt": "Das Spital Freiburg sucht Pflegekräfte mit 12-monatigem CDD-Vertrag bei 60-100% Beschäftigung",
+          "date": "2026-06-26T02:41:15.688Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/freiburg-fr/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Freiburg",
+          "url": "/de/jobs-in-freiburg/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "FR",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Fribourg, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "606,90 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "14",
+          "note": "offre centrale 175 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "FR, région de primes 1",
+              "value": "valeur centrale 606,90 CHF par mois",
+              "detail": "de 577 à 672,70 CHF, 23 assureurs"
+            },
+            {
+              "label": "FR, région de primes 2",
+              "value": "valeur centrale 558 CHF par mois",
+              "detail": "de 523,30 à 617,50 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "FR18251",
+              "value": "550 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+            },
+            {
+              "label": "FR20890",
+              "value": "400 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+            },
+            {
+              "label": "FR37807",
+              "value": "300 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-12T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+            },
+            {
+              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
+              "date": "2026-10-06T12:37:33.000Z",
+              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+            },
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-01T09:56:06.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+            },
+            {
+              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
+              "date": "2026-09-30",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+            },
+            {
+              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
+              "date": "2026-09-25T11:47:08.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+            },
+            {
+              "label": "Mois de la santé mentale 2026",
+              "date": "2026-09-25T07:40:51.000Z",
+              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis B Fribourg : exigences, renouvellement et démarches",
+          "url": "/fr/articles-suisse/permis-sejour-b-canton-fribourg-exigences-renouvellement/",
+          "excerpt": "Guide pratique des exigences pour obtenir et renouveler le permis B dans le canton de Fribourg, avec les documents nécessaires et les procédures.",
+          "date": "2026-09-22T05:16:15.207Z"
+        },
+        {
+          "title": "Permis de séjour B Fribourg : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-fribourg-renouvellement/",
+          "excerpt": "Permis B à Fribourg : exigences pour l'UE/AELE et les pays tiers, procédures de renouvellement, documents nécessaires et rôles du SEM et de l'administration cantonale.",
+          "date": "2026-09-05T16:17:35.042Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton de Fribourg : coûts et options",
+          "url": "/fr/articles-suisse/asilo-nido-custodia-fribourg-couts/",
+          "excerpt": "Le canton de Fribourg offre plusieurs options de crèche et de garde d'enfants, avec des tarifs calculés sur le revenu et des allocations cantonales disponibles.",
+          "date": "2026-08-18T00:24:16.744Z"
+        },
+        {
+          "title": "Permis de conduire à Fribourg : conversion et exigences",
+          "url": "/fr/articles-suisse/permis-de-conduire-fribourg-conversion-et-examen/",
+          "excerpt": "Conversion du permis de conduire étranger dans le canton de Fribourg, examens théoriques et pratiques, cours obligatoires et bureau de la circulation compétent.",
+          "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Primes caisse-maladie Fribourg : réduction et allocations",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-2026/",
+          "excerpt": "Guide des primes de l'assurance maladie obligatoire dans le canton de Fribourg : franchises, modèles alternatifs et procédure pour obtenir la réduction des primes",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "Permis de conduire à Fribourg : conversion et examens",
+          "url": "/fr/articles-suisse/permis-conduite-fribourg-procedure/",
+          "excerpt": "Procédure de conversion du permis étranger dans le canton de Fribourg : cours obligatoires, examens théoriques et pratiques, documents requis et feuille de route étape par étape.",
+          "date": "2026-09-01T20:58:54.961Z"
+        },
+        {
+          "title": "Garderie Fribourg : garde d'enfants, frais",
+          "url": "/fr/articles-suisse/garde-enfants-fribourg-couts-subventions/",
+          "excerpt": "Garde d'enfants dans le canton de Fribourg : tarifs, subventions disponibles et procédures pour demander les contributions cantonales aux familles.",
+          "date": "2026-09-01T19:42:33.243Z"
+        },
+        {
+          "title": "Hôpital de Fribourg à la recherche d'infirmières sous contrat de 12 mois",
+          "url": "/fr/articles-suisse/hopital-fribourg-emploi-infirmiere/",
+          "excerpt": "L'hôpital de Fribourg recherche des infirmières sous contrat CDD de 12 mois à 60-100% d'emploi",
+          "date": "2026-06-26T02:41:15.688Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Fribourg",
+          "url": "/fr/trouver-emploi-fribourg/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}

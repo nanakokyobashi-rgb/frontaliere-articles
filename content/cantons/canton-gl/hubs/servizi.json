@@ -1,0 +1,612 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-gl:servizi",
+  "section": "canton-gl",
+  "canton": "GL",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "fef7f982dbf35f4cf1c8cc9db6b94fbd4a4c470ccf11b09e3f26ac68e29571c2",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GL",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Glarona, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "534,95 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "GL, regione di premio 0",
+              "value": "mediana 534,95 CHF al mese",
+              "detail": "da 493 a 579,70 CHF, 26 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Glarus",
+              "value": "14 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
+              "date": "2026-10-05",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
+            },
+            {
+              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
+              "date": "2026-09-23",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
+            },
+            {
+              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
+              "date": "2026-09-22",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
+            },
+            {
+              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
+              "date": "2026-09-17",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi cassa malati Canton Glarona: fasce, franchigie e riduzione",
+          "url": "/articoli-svizzera/premi-lamal-glarona-modelli-franchigie/",
+          "excerpt": "Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.",
+          "date": "2026-09-16T11:54:46.142Z"
+        },
+        {
+          "title": "Permesso di domicilio C Canton Glarona: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-glarona-requisiti/",
+          "excerpt": "Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
+          "title": "Permessi di dimora B nel Canton di Glarona: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "excerpt": "Il permesso di dimora B nel Canton di Glarona è valido per un massimo di 1 anno. I requisiti e i documenti richiesti sono specificati nella Convenzione italo-svizzera contro le doppie imposizioni.",
+          "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Premi cassa malati Glarona: come ottenere riduzione",
+          "url": "/articoli-svizzera/lamal-glarona-sussidio-premi/",
+          "excerpt": "Come funzionano i premi dell'assicurazione malattia obbligatoria in Glarona, quali sono le franchigie disponibili e come richiedere i sussidi cantonali di riduzione.",
+          "date": "2026-08-23T12:40:50.239Z"
+        },
+        {
+          "title": "Premi cassa malati Cantone Glarona e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-glarona-riduzione/",
+          "excerpt": "Il sistema di premi cassa malati nel Cantone di Glarona con fasce di premio e franchigie",
+          "date": "2026-08-17T03:12:35.438Z"
+        },
+        {
+          "title": "Patente di guida canton Glarona: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-glarona-conversione/",
+          "excerpt": "Come convertire la patente straniera nel canton Glarona: procedura completa, esami teorico-pratici e corsi obbligatori per chi si trasferisce in Svizzera.",
+          "date": "2026-09-04T19:18:40.066Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini Canton Glarona costi",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-glarona/",
+          "excerpt": "Tariffe calcolate sul reddito e sussidi cantonali disponibili per le famiglie con reddito basso",
+          "date": "2026-08-17T03:47:42.989Z"
+        },
+        {
+          "title": "Permesso di domicilio C nel Cantone di Glarona: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-domicilio-c-canton-glarona-requisiti-e-domanda/",
+          "excerpt": "Cosa serve per ottenere un permesso di domicilio C nel Cantone di Glarona?",
+          "date": "2026-08-17T03:18:43.556Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/glarona/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/glarona-gl/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Glarona",
+          "url": "/cerca-lavoro-glarona/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "GL",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Glarus, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "534.95 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "GL, premium region 0",
+              "value": "typical 534.95 CHF per month",
+              "detail": "from 493 to 579.70 CHF, 26 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Glarus",
+              "value": "14 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
+              "date": "2026-10-05",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
+            },
+            {
+              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
+              "date": "2026-09-23",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
+            },
+            {
+              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
+              "date": "2026-09-22",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
+            },
+            {
+              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
+              "date": "2026-09-17",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Health insurance premiums Canton Glarus: bands, deductibles and reduction",
+          "url": "/en/swiss-articles/lamal-premiums-glarus-models-deductibles/",
+          "excerpt": "In the Canton of Glarus, LAMal premiums vary by premium range and deductible; it is possible to obtain the cantonal reduction within three months of registration.",
+          "date": "2026-09-16T11:54:46.142Z"
+        },
+        {
+          "title": "Residence permit C Canton Glarus: requirements and application",
+          "url": "/en/swiss-articles/permit-c-glarona-requirements/",
+          "excerpt": "Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
+          "title": "Residence permits B in the Canton of Glarus: requirements and renewal",
+          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "excerpt": "The residence permit B in the Canton of Glarus is valid for a maximum of 1 year. The requirements and documents required are specified in the Italian-Swiss Double Taxation Convention.",
+          "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Glarus health insurance premiums: how to obtain a reduction",
+          "url": "/en/swiss-articles/lamal-glarus-subsidy-premiums/",
+          "excerpt": "How compulsory health insurance premiums work in Glarus, what deductibles are available and how to claim cantonal reduction benefits.",
+          "date": "2026-08-23T12:40:50.239Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Glarus and premium reductions",
+          "url": "/en/swiss-articles/healthcare-insurance-premiums-glarus/",
+          "excerpt": "The sick pay premium system in the Canton of Glarus with premium bands and deductibles",
+          "date": "2026-08-17T03:12:35.438Z"
+        },
+        {
+          "title": "Canton Glarus Driving License: Conversion and Exams",
+          "url": "/en/swiss-articles/driver-license-glarus-conversion/",
+          "excerpt": "How to convert your foreign driver's license in the canton of Glarus: complete procedure, theoretical-practical exams and mandatory courses for those who move to Switzerland.",
+          "date": "2026-09-04T19:18:40.066Z"
+        },
+        {
+          "title": "Nursery and childcare Canton Glarus costs",
+          "url": "/en/swiss-articles/nursery-and-custody-of-children-in-the-canton-of-glarona/",
+          "excerpt": "Income Calculated Rates and Cantonal Subsidies Available for Low-Income Families",
+          "date": "2026-08-17T03:47:42.989Z"
+        },
+        {
+          "title": "Residence permit C in the Canton of Glarus: requirements and application",
+          "url": "/en/swiss-articles/c-permit-canton-glarus-requirements-and-application/",
+          "excerpt": "What does it take to obtain a residence permit C in the Canton of Glarus?",
+          "date": "2026-08-17T03:18:43.556Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/glarus-gl/"
+        },
+        {
+          "label": "Job offers in the canton of Glarus",
+          "url": "/en/find-jobs-glarus/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "GL",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Glarnerland laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "534.95 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "GL, Prämienregion 0",
+              "value": "Mittelwert 534.95 CHF pro Monat",
+              "detail": "von 493 bis 579.70 CHF, 26 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Glarus",
+              "value": "14 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
+              "date": "2026-10-05",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
+            },
+            {
+              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
+              "date": "2026-09-23",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
+            },
+            {
+              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
+              "date": "2026-09-22",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
+            },
+            {
+              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
+              "date": "2026-09-17",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien Kanton Glarus: Zeitabschnitte, Selbstbehalte und Kürzungen",
+          "url": "/de/schweiz-artikel/lamal-beitraege-glarus-modelle-selbstbehalte/",
+          "excerpt": "Im Kanton Glarus variieren die KVG-Prämien je nach Prämienspanne und Franchise; die kantonale Reduktion ist innerhalb von drei Monaten nach der Anmeldung möglich.",
+          "date": "2026-09-16T11:54:46.142Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-glarona-anforderungen/",
+          "excerpt": "Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligungen B im Kanton Glarus: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Glarus ist maximal 1 Jahr gültig. Die Anforderungen und erforderlichen Unterlagen sind im italienisch-schweizerischen Doppelbesteuerungsabkommen festgelegt.",
+          "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Krankenkassenprämien Glarus: So erhalten Sie eine Ermäßigung",
+          "url": "/de/schweiz-artikel/kvg-glarus-subsidie-praemien/",
+          "excerpt": "Wie funktionieren die Prämien der obligatorischen Krankenversicherung in Glarus, welche Franchisen stehen zur Verfügung und wie beantragt man kantonale Reduktionsbeiträge?",
+          "date": "2026-08-23T12:40:50.239Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Glarus und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/gesundheitsversicherungspramien-glarus/",
+          "excerpt": "Das Krankenkassen-Prämiensystem im Kanton Glarus mit Prämienbändern und Franchisen",
+          "date": "2026-08-17T03:12:35.438Z"
+        },
+        {
+          "title": "Führerschein Kanton Glarus: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-glarus-umwandlung/",
+          "excerpt": "Wie man einen ausländischen Führerschein im Kanton Glarus umwandelt: komplettes Verfahren, theoretisch-praktische Prüfungen und Pflichtkurse für Personen, die in die Schweiz ziehen.",
+          "date": "2026-09-04T19:18:40.066Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung Kanton Glarus Kosten",
+          "url": "/de/schweiz-artikel/kindergarten-und-custodia-dei-bambini-im-kanton-glarona/",
+          "excerpt": "Berechnete Einkommenstarife und kantonale Zuschüsse für einkommensschwache Haushalte verfügbar",
+          "date": "2026-08-17T03:47:42.989Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C im Kanton Glarus: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/c-bewilligung-kanton-glarus-anforderungen-und-antragstellung/",
+          "excerpt": "Was braucht man, um eine Niederlassungsbewilligung C im Kanton Glarus zu erhalten?",
+          "date": "2026-08-17T03:18:43.556Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/glarus-gl/"
+        },
+        {
+          "label": "Stellenangebote im Glarnerland",
+          "url": "/de/jobs-in-glarus/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "GL",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Glaris, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "534,95 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "GL, région de primes 0",
+              "value": "valeur centrale 534,95 CHF par mois",
+              "detail": "de 493 à 579,70 CHF, 26 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Glarus",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
+              "date": "2026-10-05",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
+            },
+            {
+              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
+              "date": "2026-09-23",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
+            },
+            {
+              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
+              "date": "2026-09-22",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
+            },
+            {
+              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
+              "date": "2026-09-17",
+              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes caisse-maladie Canton de Glaris : fourchettes, franchises et réduction",
+          "url": "/fr/articles-suisse/cotisations-lamal-glaris-modeles-franchises/",
+          "excerpt": "Dans le canton de Glaris, les primes LAMal varient selon la fourchette de primes et de franchises ; la réduction cantonale peut être obtenue dans les trois mois suivant l'inscription.",
+          "date": "2026-09-16T11:54:46.142Z"
+        },
+        {
+          "title": "Permis de séjour C Canton de Glaris : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-glarona-conditions/",
+          "excerpt": "Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l'UE/AELE et des pays tiers.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
+          "title": "Permis de séjour B dans le canton de Glaris : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "excerpt": "Le permis de séjour B dans le canton de Glaris est valable pour une durée maximale d'un an. Les exigences et les documents requis sont spécifiés dans la Convention italo-suisse contre les doubles impositions.",
+          "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Primes caisse-maladie Glaris : comment obtenir une réduction",
+          "url": "/fr/articles-suisse/lam-glaris-subside-cotisations/",
+          "excerpt": "Comment fonctionnent les primes de l'assurance maladie obligatoire à Glaris, quelles sont les franchises disponibles et comment demander les allocations cantonales de réduction.",
+          "date": "2026-08-23T12:40:50.239Z"
+        },
+        {
+          "title": "Primes caisse-maladie canton de Glaris et réduction des primes",
+          "url": "/fr/articles-suisse/systeme-de-primes-dassurance-maladie-glaris/",
+          "excerpt": "Le système de primes caisse-maladie dans le canton de Glaris avec fourchettes de primes et franchises",
+          "date": "2026-08-17T03:12:35.438Z"
+        },
+        {
+          "title": "Permis de conduire canton de Glaris : conversion et examens",
+          "url": "/fr/articles-suisse/permis-glaris-conversion/",
+          "excerpt": "Comment convertir le permis étranger dans le canton de Glaris : procédure complète, examens théoriques et pratiques et cours obligatoires pour ceux qui déménagent en Suisse.",
+          "date": "2026-09-04T19:18:40.066Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants Canton de Glaris coûts",
+          "url": "/fr/articles-suisse/creche-et-custodia-des-enfants-au-canton-de-glarona/",
+          "excerpt": "Tarifs calculés sur le revenu et allocations cantonales disponibles pour les ménages à faible revenu",
+          "date": "2026-08-17T03:47:42.989Z"
+        },
+        {
+          "title": "Permis de séjour C dans le canton de Glaris : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-domicile-c-canton-de-glarus-exigences-et-demande/",
+          "excerpt": "Que faut-il pour obtenir un permis de séjour C dans le canton de Glaris ?",
+          "date": "2026-08-17T03:18:43.556Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Glaris",
+          "url": "/fr/trouver-emploi-glaris/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}

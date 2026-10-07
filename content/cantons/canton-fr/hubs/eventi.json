@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-fr:eventi",
+  "section": "canton-fr",
+  "canton": "FR",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "ed680647e54125e5b120864baf1b754bfafaf1acde4a3af7ac0546e5b045290a",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "FR",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Friburgo, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "44",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Lunch-concert : Valentine Berne | Noémie Delcroix",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/bcu/evenements/lunch-concert-valentine-berne-noemie-delcroix"
+            },
+            {
+              "label": "Kiwi Club – Moi : 206 os",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-moi-206-os"
+            },
+            {
+              "label": "Swiss Cheese Awards 2026",
+              "detail": "Fribourg — in corso, ultimo giorno: 11 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/swiss-cheese-awards-2026/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "2ème concert à l’abonnement : Agate Quartet",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2eme-concert-a-labonnement-agate-quartet/"
+            },
+            {
+              "label": "Museoscope - Abraham Poincheval: Visite guidée publique",
+              "detail": "Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.fr.ch/mahf/evenements/museoscope-abraham-poincheval-visite-guidee-publique"
+            },
+            {
+              "label": "Bénichon of Charmey",
+              "detail": "Jeunesse de Charmey",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/benichon-de-charmey/"
+            },
+            {
+              "label": "Zäme Zmittag",
+              "detail": "Murten/Morat, Murten",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaeme-zmittag/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/friburgo/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Friburgo",
+          "url": "/eventi/friburgo/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/friburgo/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "FR",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Fribourg, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "44",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Lunch-concert : Valentine Berne | Noémie Delcroix",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/bcu/evenements/lunch-concert-valentine-berne-noemie-delcroix"
+            },
+            {
+              "label": "Kiwi Club – Moi : 206 os",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-moi-206-os"
+            },
+            {
+              "label": "Swiss Cheese Awards 2026",
+              "detail": "Fribourg — ongoing, last day: 11 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/swiss-cheese-awards-2026/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "2ème concert à l’abonnement : Agate Quartet",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2eme-concert-a-labonnement-agate-quartet/"
+            },
+            {
+              "label": "Museoscope - Abraham Poincheval: Visite guidée publique",
+              "detail": "Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.fr.ch/mahf/evenements/museoscope-abraham-poincheval-visite-guidee-publique"
+            },
+            {
+              "label": "Bénichon of Charmey",
+              "detail": "Jeunesse de Charmey",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/benichon-de-charmey/"
+            },
+            {
+              "label": "Zäme Zmittag",
+              "detail": "Murten/Morat, Murten",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaeme-zmittag/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/fribourg/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of Fribourg",
+          "url": "/en/events/fribourg/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/fribourg/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "FR",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Freiburg ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "44",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Lunch-concert : Valentine Berne | Noémie Delcroix",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/bcu/evenements/lunch-concert-valentine-berne-noemie-delcroix"
+            },
+            {
+              "label": "Kiwi Club – Moi : 206 os",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-moi-206-os"
+            },
+            {
+              "label": "Swiss Cheese Awards 2026",
+              "detail": "Fribourg — läuft, letzter Tag: 11. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/swiss-cheese-awards-2026/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "2ème concert à l’abonnement : Agate Quartet",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2eme-concert-a-labonnement-agate-quartet/"
+            },
+            {
+              "label": "Museoscope - Abraham Poincheval: Visite guidée publique",
+              "detail": "Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.fr.ch/mahf/evenements/museoscope-abraham-poincheval-visite-guidee-publique"
+            },
+            {
+              "label": "Kilbi in Charmey",
+              "detail": "Jeunesse de Charmey",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/benichon-de-charmey/"
+            },
+            {
+              "label": "Zäme Zmittag",
+              "detail": "Murten/Morat, Murten",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaeme-zmittag/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/freiburg/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Freiburg",
+          "url": "/de/veranstaltungen/freiburg/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "FR",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Fribourg, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "44",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Lunch-concert : Valentine Berne | Noémie Delcroix",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/bcu/evenements/lunch-concert-valentine-berne-noemie-delcroix"
+            },
+            {
+              "label": "Kiwi Club – Moi : 206 os",
+              "detail": "Fribourg",
+              "date": "2026-10-07",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-moi-206-os"
+            },
+            {
+              "label": "Swiss Cheese Awards 2026",
+              "detail": "Fribourg — en cours, dernier jour : 11 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/swiss-cheese-awards-2026/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "2ème concert à l’abonnement : Agate Quartet",
+              "detail": "Equilibre, Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2eme-concert-a-labonnement-agate-quartet/"
+            },
+            {
+              "label": "Museoscope - Abraham Poincheval: Visite guidée publique",
+              "detail": "Fribourg",
+              "date": "2026-10-08",
+              "url": "https://www.fr.ch/mahf/evenements/museoscope-abraham-poincheval-visite-guidee-publique"
+            },
+            {
+              "label": "Bénichon de Charmey",
+              "detail": "Jeunesse de Charmey",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/benichon-de-charmey/"
+            },
+            {
+              "label": "Zäme Zmittag",
+              "detail": "Murten/Morat, Murten",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaeme-zmittag/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/fribourg/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Fribourg",
+          "url": "/fr/evenements/fribourg/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/fribourg/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}
