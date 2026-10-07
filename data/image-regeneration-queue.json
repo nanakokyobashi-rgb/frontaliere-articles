@@ -45,6 +45,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:12:18.865Z",
       "lastFailureAt": "2026-10-07T06:12:18.865Z"
+    },
+    {
+      "articleId": "scambio-dati-salariali-2027",
+      "title": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
+      "fallbackImage": "/images/blog/fairtiq-bonus-ticino-2026-2027.webp",
+      "reason": "All image providers failed for article-scambio-dati-salariali-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:25:44.304Z",
+      "lastFailureAt": "2026-10-07T06:25:44.304Z"
     }
   ]
 }

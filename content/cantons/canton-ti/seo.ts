@@ -40,6 +40,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-scambio-dati-salariali-2027': {
+    title: 'Frontalieri, dal 2027 lo scambio dati sugli stipendi',
+    description: '## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1',
+    keywords: 'frontalieri, ticino, svizzera, italia, scambio, dati, sugli, stipendi',
+    ogTitle: 'Frontalieri, dal 2027 scambio automatico dati stipendi',
+    ogDescription: '## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1',
+    canonicalPath: '/articoli-ticino/scambio-dati-salariali-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
+      "description": "## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/fairtiq-bonus-ticino-2026-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Lugano con edifici moderni e uffici."
+      },
+      "datePublished": "2026-10-07T06:25:44+00:00",
+      "dateModified": "2026-10-07T06:25:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/scambio-dati-salariali-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
