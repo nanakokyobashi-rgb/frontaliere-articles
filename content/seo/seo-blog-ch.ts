@@ -33095,44 +33095,6 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
-  'blog-abort-topical-relevance-trump-health': {
-    title: 'Notizia non pertinente | Frontaliere Ticino',
-    description: 'Contenuto non pubblicato per mancanza di rilevanza con la Svizzera. Dati aggiornati 2026 per frontalieri in Ticino.',
-    keywords: 'frontalieri, ticino, svizzera, italia, notizia, pertinente, fonte, trattata',
-    ogTitle: 'Notizia non pertinente',
-    ogDescription: 'Contenuto non pubblicato per mancanza di rilevanza con la Svizzera.',
-    canonicalPath: '/articoli-svizzera/abort-topical-relevance-trump-health/',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Notizia non pertinente",
-      "description": "Contenuto non pubblicato per mancanza di rilevanza con la Svizzera. Dati aggiornati 2026 per frontalieri in Ticino.",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/abort-topical-relevance-trump-health.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Redazione di notizie economiche in Svizzera"
-      },
-      "datePublished": "2026-08-14T01:37:12+00:00",
-      "dateModified": "2026-08-14T01:37:12+00:00",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
-        "name": "Redazione Frontaliere Ticino",
-        "url": "https://frontaliereticino.ch/autori/redazione/"
-      },
-      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
-      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/abort-topical-relevance-trump-health/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
 
   'blog-imposte-cantonali-canton-lucerna-aliquote': {
     title: 'Imposte cantonali canton Lucerna: aliquote e deduzioni',
@@ -99087,6 +99049,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cancro-prostata-assistenza-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0': {
+    title: 'Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
+    description: '## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%',
+    keywords: 'frontalieri, ticino, svizzera, italia, rendimenti, titoli, svizzeri, rialzo',
+    ogTitle: 'Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
+    ogDescription: '## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%',
+    canonicalPath: '/articoli-svizzera/rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rendimenti titoli svizzeri in rialzo, BNS allo 0%",
+      "description": "## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Rendimenti titoli svizzeri in rialzo, BNS allo 0%"
+      },
+      "datePublished": "2026-10-07T12:04:10+00:00",
+      "dateModified": "2026-10-07T12:04:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-riserve-valutarie-settembre-stabili': {
+    title: 'Riserve di divise BNS stabili a settembre | Frontaliere Ticino',
+    description: '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    keywords: 'frontalieri, ticino, svizzera, italia, riserve, divise, stabili, settembre',
+    ogTitle: 'Riserve di divise BNS stabili a settembre',
+    ogDescription: '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    canonicalPath: '/articoli-svizzera/riserve-valutarie-settembre-stabili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riserve di divise BNS stabili a settembre",
+      "description": "## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riserve-valutarie-settembre-stabili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena urbana svizzera associata all'analisi delle riserve valutarie"
+      },
+      "datePublished": "2026-10-07T12:36:56+00:00",
+      "dateModified": "2026-10-07T12:36:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/riserve-valutarie-settembre-stabili/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

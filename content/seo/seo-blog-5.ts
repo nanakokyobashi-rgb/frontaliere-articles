@@ -63397,44 +63397,6 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
-  'blog-abort-topical-relevance-pre-saint-didier': {
-    title: 'Vivere a Pré-Saint-Didier e lavorare in Vallese',
-    description: 'Scopri i vincoli geografici per lavorare in Svizzera da frontaliere e le implicazioni fiscali legate alla residenza a Pré-Saint-Didier. Dati aggiornati 2026',
-    keywords: 'frontalieri, ticino, svizzera, italia, vivere, pré-saint-didier, lavorare, vallese',
-    ogTitle: 'Vivere a Pré-Saint-Didier e lavorare in Vallese da frontaliere',
-    ogDescription: 'Analisi sulle norme per i frontalieri e il requisito della residenza nei comuni entro 20 km dal confine svizzero per chi vive a Pré-Saint-Didier.',
-    canonicalPath: '/articoli-frontaliere/abort-topical-relevance-pre-saint-didier',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Vivere a Pré-Saint-Didier e lavorare in Vallese",
-      "description": "Scopri i vincoli geografici per lavorare in Svizzera da frontaliere e le implicazioni fiscali legate alla residenza a Pré-Saint-Didier. Dati aggiornati 2026",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/abort-topical-relevance-pre-saint-didier.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Paesaggio alpino al confine svizzero"
-      },
-      "datePublished": "2026-08-11T12:07:52+00:00",
-      "dateModified": "2026-08-11T12:07:52+00:00",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
-        "name": "Marco Ferrari",
-        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
-      },
-      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
-      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/abort-topical-relevance-pre-saint-didier/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
 
   'blog-vivere-courmayeur-e-lavorare-vallese-da-frontaliere': {
     title: 'Courmayeur: lavorare in Vallese vivendo in Valle d’Aosta',
@@ -63817,44 +63779,6 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
-  'blog-abort-saint-nicolas-non-frontaliero': {
-    title: 'Trasferirsi a Saint-Nicolas da frontaliere: i fatti',
-    description: 'Analisi sulla fattibilità del frontalierato verso il Canton Ticino dal comune di Saint-Nicolas. Scopri perché la distanza geografica è un ostacolo.',
-    keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, saint-nicolas, fatti, analisi',
-    ogTitle: 'Trasferirsi a Saint-Nicolas da frontaliere: i fatti',
-    ogDescription: 'Analisi sulla fattibilità del frontalierato verso il Canton Ticino dal comune di Saint-Nicolas. Scopri perché la distanza geografica è un ostacolo per i lavoratori.',
-    canonicalPath: '/articoli-frontaliere/abort-saint-nicolas-non-frontaliero',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Trasferirsi a Saint-Nicolas da frontaliere: i fatti",
-      "description": "Analisi sulla fattibilità del frontalierato verso il Canton Ticino dal comune di Saint-Nicolas. Scopri perché la distanza geografica è un ostacolo.",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/abort-saint-nicolas-non-frontaliero.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Veduta panoramica di un villaggio alpino svizzero"
-      },
-      "datePublished": "2026-08-11T16:40:10+00:00",
-      "dateModified": "2026-08-11T16:40:10+00:00",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
-        "name": "Marco Ferrari",
-        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
-      },
-      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
-      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/abort-saint-nicolas-non-frontaliero/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
 
   'blog-vivere-saint-pierre-e-lavorare-in-vallese-da-frontaliere': {
     title: 'Vivere a Saint-Pierre e lavorare in Vallese da frontaliere',
@@ -100911,6 +100835,41 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-notte-bper-gallarate-bancomat': {
+    title: 'Bancomat esploso: colpo notturno alla Bper di Gallarate',
+    description: 'Un altro bancomat è saltato in aria alla Bper di Gallarate in un colpo notturno. La fonte disponibile riporta il luogo e la dinamica essenziale della notizia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bancomat, esploso, colpo, notturno',
+    ogTitle: 'Colpo notturno alla Bper di Gallarate',
+    ogDescription: 'La cronaca riguarda un altro bancomat saltato in aria durante un colpo notturno alla Bper di Gallarate. Il materiale disponibile conferma il luogo e la dinamica essenziale, senza aggiungere cifre, nomi o conseguenze.',
+    canonicalPath: '/articoli-frontaliere/notte-bper-gallarate-bancomat/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bancomat esploso: colpo notturno alla Bper di Gallarate",
+      "description": "Un altro bancomat è saltato in aria alla Bper di Gallarate in un colpo notturno. La fonte disponibile riporta il luogo e la dinamica essenziale della notizia.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/controlli-locali-busto-arsizio-gallarate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Banca in una strada del confine italo-svizzero durante la notte"
+      },
+      "datePublished": "2026-10-07T12:19:46+00:00",
+      "dateModified": "2026-10-07T12:19:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/notte-bper-gallarate-bancomat/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

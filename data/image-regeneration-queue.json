@@ -477,6 +477,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T11:12:50.829Z",
       "lastFailureAt": "2026-10-07T11:12:50.829Z"
+    },
+    {
+      "articleId": "notte-bper-gallarate-bancomat",
+      "title": "Bancomat esploso: colpo notturno alla Bper di Gallarate",
+      "fallbackImage": "/images/blog/controlli-locali-busto-arsizio-gallarate.webp",
+      "reason": "All image providers failed for article-notte-bper-gallarate-bancomat: Codex broker timed out after 119998ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T12:19:47.220Z",
+      "lastFailureAt": "2026-10-07T12:19:47.220Z"
     }
   ]
 }
