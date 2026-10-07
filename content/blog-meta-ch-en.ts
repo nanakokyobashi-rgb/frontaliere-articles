@@ -7853,6 +7853,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Electric car: how to save up to 50%',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## TL;DR - TCS compares the prices of 19’000 points in Switzerland - 50 kWh cost between 23 and 46 francs - 5% of charging takes place at fast-charging stations',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Editorial image related to: Auto elettrica: come risparmiare fino al 50%',
+    'blog.article.motore-filo-epfl.title': 'EPFL develops a wire-shaped motor',
+    'blog.article.motore-filo-epfl.excerpt': '## TL;DR - FiberMotor: diameter from 1 to 3 millimeters - Four motors lift a 46-gram bar - The prototype was integrated into a pair',
+    'blog.article.motore-filo-epfl.imageAlt': 'FiberMotor and robotic trousers in a research laboratory',
+    'blog.article.svizzera-india-accordi-bilaterali.title': 'Switzerland and India: new agreements on migration and employment',
+    'blog.article.svizzera-india-accordi-bilaterali.excerpt': '## TL;DR - October 5, 2026: Parmelin meets Indian leaders - Switzerland and India sign two agreements - TEPA: one year since its entry into force with EFTA',
+    'blog.article.svizzera-india-accordi-bilaterali.imageAlt': 'Federal Palace in Bern, seat of the Swiss government',
 };
 
 export default blogMetaChEn;

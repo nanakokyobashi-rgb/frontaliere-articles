@@ -7853,6 +7853,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Auto elettrica: come risparmiare fino al 50%',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
     'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Immagine editoriale relativa a: Auto elettrica: come risparmiare fino al 50%',
+    'blog.article.motore-filo-epfl.title': 'EPFL sviluppa un motore a forma di filo',
+    'blog.article.motore-filo-epfl.excerpt': '## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio',
+    'blog.article.motore-filo-epfl.imageAlt': 'FiberMotor e pantaloni robotici in un laboratorio di ricerca',
+    'blog.article.svizzera-india-accordi-bilaterali.title': 'Svizzera e India: nuovi accordi su migrazione e lavoro',
+    'blog.article.svizzera-india-accordi-bilaterali.excerpt': '## In breve - 5 ottobre 2026: Parmelin incontra i vertici indiani - Svizzera e India firmano due accordi - TEPA: un anno dall\'entrata in vigore con l\'AELS',
+    'blog.article.svizzera-india-accordi-bilaterali.imageAlt': 'Palazzo Federale a Berna, sede del governo svizzero',
 };
 
 export default blogMetaChIt;

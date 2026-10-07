@@ -1,0 +1,868 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ge:mobilita",
+  "section": "canton-ge",
+  "canton": "GE",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "d4b4f6d0f50c9e62828824e7c22835f5f7fe8614ae74367e6358ac74e51b4eea",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "GE",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Ginevra, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0 min",
+          "note": "Hermance, settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "20",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "5",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Hermance",
+              "value": "0 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/hermance/oggi/"
+            },
+            {
+              "label": "Anières",
+              "value": "0,1 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/anieres/oggi/"
+            },
+            {
+              "label": "Sauverny",
+              "value": "0,1 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/sauverny/oggi/"
+            },
+            {
+              "label": "Landecy",
+              "value": "0,6 min",
+              "detail": "41 rilevazioni",
+              "url": "/traffico-dogane/landecy/oggi/"
+            },
+            {
+              "label": "Meyrin / CERN",
+              "value": "1,4 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/meyrin-cern/oggi/"
+            },
+            {
+              "label": "Perly (Perly-Certoux)",
+              "value": "2,3 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/perly/oggi/"
+            },
+            {
+              "label": "Moillesulaz",
+              "value": "3,1 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/moillesulaz/oggi/"
+            },
+            {
+              "label": "Thônex-Vallard (Autoroute Blanche)",
+              "value": "3,6 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/thonex-vallard/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Bernex Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 4.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-09-09T05:33:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-09-09T05:36:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Vernier Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
+              "value": "Chiusura",
+              "detail": "fine prevista: 15 ottobre 2026",
+              "date": "2026-09-09T05:37:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Bernex E Svincolo autostradale Perly Nord Situazione: chiusa cantiere, lunghezza [km] 2.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 ottobre 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Bernex Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 15 ottobre 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne Svincolo autostradale Perly Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 14 ottobre 2026",
+              "date": "2026-09-09T05:46:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Perly Sud E Svincolo autostradale Bernex Situazione: chiusa cantiere, lunghezza [km] 3.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 14 ottobre 2026",
+              "date": "2026-09-09T05:47:00.000Z"
+            },
+            {
+              "label": "A1 Genève <-> Lausanne Svincolo autostradale Bernex Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.3",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 ottobre 2026",
+              "date": "2026-09-09T05:49:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Info chantier Voie verte Genève-Satigny",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/41839"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
+              "date": "2026-10-01",
+              "url": "https://www.ge.ch/node/45079"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
+              "date": "2026-09-24",
+              "url": "https://www.ge.ch/node/44965"
+            },
+            {
+              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
+              "date": "2026-09-22",
+              "url": "https://www.ge.ch/node/44042"
+            },
+            {
+              "label": "Le rapport d’activité et de développement durable 2025 est en ligne",
+              "date": "2026-09-21",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/le-rapport-dactivite-et-de-developpement-durable-2025-est-en-ligne"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 21 septembre 2026",
+              "date": "2026-09-17",
+              "url": "https://www.ge.ch/node/44916"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Francia",
+          "url": "/traffico-dogane/geneve-francia/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "GE",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In the canton of Geneva, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0 min",
+          "note": "Hermance, week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "20",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "5",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Hermance",
+              "value": "0 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/hermance/today/"
+            },
+            {
+              "label": "Anières",
+              "value": "0.1 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/anieres/today/"
+            },
+            {
+              "label": "Sauverny",
+              "value": "0.1 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/sauverny/today/"
+            },
+            {
+              "label": "Landecy",
+              "value": "0.6 min",
+              "detail": "41 readings",
+              "url": "/en/border-wait/landecy/today/"
+            },
+            {
+              "label": "Meyrin / CERN",
+              "value": "1.4 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/meyrin-cern/today/"
+            },
+            {
+              "label": "Perly (Perly-Certoux)",
+              "value": "2.3 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/perly/today/"
+            },
+            {
+              "label": "Moillesulaz",
+              "value": "3.1 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/moillesulaz/today/"
+            },
+            {
+              "label": "Thônex-Vallard (Autoroute Blanche)",
+              "value": "3.6 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/thonex-vallard/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Bernex Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 4.2",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-09-09T05:33:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Bernex E Svincolo autostradale Vernier Situazione: chiusa cantiere, lunghezza [km] 4.2",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-09-09T05:36:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Vernier Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 5.0",
+              "value": "Closure",
+              "detail": "until 15 October 2026",
+              "date": "2026-09-09T05:37:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Bernex E Svincolo autostradale Perly Nord Situazione: chiusa cantiere, lunghezza [km] 2.2",
+              "value": "Closure",
+              "detail": "until 13 October 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève tra Svincolo autostradale Genève Aéroport E Svincolo autostradale Bernex Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 15 October 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne Svincolo autostradale Perly Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 14 October 2026",
+              "date": "2026-09-09T05:46:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Perly Sud E Svincolo autostradale Bernex Situazione: chiusa cantiere, lunghezza [km] 3.2",
+              "value": "Closure",
+              "detail": "until 14 October 2026",
+              "date": "2026-09-09T05:47:00.000Z"
+            },
+            {
+              "label": "A1 Genève <-> Lausanne Svincolo autostradale Bernex Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.3",
+              "value": "Closure",
+              "detail": "until 13 October 2026",
+              "date": "2026-09-09T05:49:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Info chantier Voie verte Genève-Satigny",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/41839"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
+              "date": "2026-10-01",
+              "url": "https://www.ge.ch/node/45079"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
+              "date": "2026-09-24",
+              "url": "https://www.ge.ch/node/44965"
+            },
+            {
+              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
+              "date": "2026-09-22",
+              "url": "https://www.ge.ch/node/44042"
+            },
+            {
+              "label": "Le rapport d’activité et de développement durable 2025 est en ligne",
+              "date": "2026-09-21",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/le-rapport-dactivite-et-de-developpement-durable-2025-est-en-ligne"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 21 septembre 2026",
+              "date": "2026-09-17",
+              "url": "https://www.ge.ch/node/44916"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Border waits towards France",
+          "url": "/en/border-wait/geneve-francia/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "GE",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Kanton Genf bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0 Min.",
+          "note": "Hermance, Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "20",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "5",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Hermance",
+              "value": "0 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/hermance/heute/"
+            },
+            {
+              "label": "Anières",
+              "value": "0.1 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/anieres/heute/"
+            },
+            {
+              "label": "Sauverny",
+              "value": "0.1 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/sauverny/heute/"
+            },
+            {
+              "label": "Landecy",
+              "value": "0.6 Min.",
+              "detail": "41 Messungen",
+              "url": "/de/wartezeit-grenze/landecy/heute/"
+            },
+            {
+              "label": "Meyrin / CERN",
+              "value": "1.4 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/meyrin-cern/heute/"
+            },
+            {
+              "label": "Perly (Perly-Certoux)",
+              "value": "2.3 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/perly/heute/"
+            },
+            {
+              "label": "Moillesulaz",
+              "value": "3.1 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/moillesulaz/heute/"
+            },
+            {
+              "label": "Thônex-Vallard (Autoroute Blanche)",
+              "value": "3.6 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/thonex-vallard/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A1 Lausanne -> Genf Anschluss Bernex Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 4.2",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-09-09T05:33:00.000Z"
+            },
+            {
+              "label": "A1 Genf -> Lausanne zwischen Anschluss Bernex und Anschluss Vernier Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.2",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-09-09T05:36:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genf Anschluss Vernier Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 5.0",
+              "value": "Sperrung",
+              "detail": "bis 15. Oktober 2026",
+              "date": "2026-09-09T05:37:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genf zwischen Anschluss Bernex und Anschluss Perly Nord Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.2",
+              "value": "Sperrung",
+              "detail": "bis 13. Oktober 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genf zwischen Anschluss Flughafen Genf und Anschluss Bernex Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 15. Oktober 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Genf -> Lausanne Anschluss Perly Nord Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 14. Oktober 2026",
+              "date": "2026-09-09T05:46:00.000Z"
+            },
+            {
+              "label": "A1 Genf -> Lausanne zwischen Anschluss Perly Süd und Anschluss Bernex Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.2",
+              "value": "Sperrung",
+              "detail": "bis 14. Oktober 2026",
+              "date": "2026-09-09T05:47:00.000Z"
+            },
+            {
+              "label": "A1 Genf <-> Lausanne Anschluss Bernex Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.3",
+              "value": "Sperrung",
+              "detail": "bis 13. Oktober 2026",
+              "date": "2026-09-09T05:49:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Info chantier Voie verte Genève-Satigny",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/41839"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
+              "date": "2026-10-01",
+              "url": "https://www.ge.ch/node/45079"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
+              "date": "2026-09-24",
+              "url": "https://www.ge.ch/node/44965"
+            },
+            {
+              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
+              "date": "2026-09-22",
+              "url": "https://www.ge.ch/node/44042"
+            },
+            {
+              "label": "Le rapport d’activité et de développement durable 2025 est en ligne",
+              "date": "2026-09-21",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/le-rapport-dactivite-et-de-developpement-durable-2025-est-en-ligne"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 21 septembre 2026",
+              "date": "2026-09-17",
+              "url": "https://www.ge.ch/node/44916"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Frankreich",
+          "url": "/de/wartezeit-grenze/geneve-francia/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "GE",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "Dans le canton de Genève, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0 min",
+          "note": "Hermance, semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "20",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "5",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Hermance",
+              "value": "0 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/hermance/aujourd-hui/"
+            },
+            {
+              "label": "Anières",
+              "value": "0,1 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/anieres/aujourd-hui/"
+            },
+            {
+              "label": "Sauverny",
+              "value": "0,1 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/sauverny/aujourd-hui/"
+            },
+            {
+              "label": "Landecy",
+              "value": "0,6 min",
+              "detail": "41 relevés",
+              "url": "/fr/temps-attente-douane/landecy/aujourd-hui/"
+            },
+            {
+              "label": "Meyrin / CERN",
+              "value": "1,4 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/meyrin-cern/aujourd-hui/"
+            },
+            {
+              "label": "Perly (Perly-Certoux)",
+              "value": "2,3 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/perly/aujourd-hui/"
+            },
+            {
+              "label": "Moillesulaz",
+              "value": "3,1 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/moillesulaz/aujourd-hui/"
+            },
+            {
+              "label": "Thônex-Vallard (Autoroute Blanche)",
+              "value": "3,6 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/thonex-vallard/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A1 Lausanne -> Genève Jonction autoroutière Bernex Situation: entrée fermée travaux, longueur [km] 4.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-09-09T05:33:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Bernex et Jonction autoroutière Vernier Situation: fermé travaux, longueur [km] 4.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-09-09T05:36:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Jonction autoroutière Vernier Situation: entrée fermée travaux, longueur [km] 5.0",
+              "value": "Fermeture",
+              "detail": "jusqu’au 15 octobre 2026",
+              "date": "2026-09-09T05:37:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève entre Jonction autoroutière Bernex et Jonction autoroutière Perly Nord Situation: fermé travaux, longueur [km] 2.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 octobre 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève entre Jonction autoroutière Aéroport de Genève et Jonction autoroutière Bernex Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 15 octobre 2026",
+              "date": "2026-09-09T05:39:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne Jonction autoroutière Perly Nord Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 14 octobre 2026",
+              "date": "2026-09-09T05:46:00.000Z"
+            },
+            {
+              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Perly Sud et Jonction autoroutière Bernex Situation: fermé travaux, longueur [km] 3.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 14 octobre 2026",
+              "date": "2026-09-09T05:47:00.000Z"
+            },
+            {
+              "label": "A1 Genève <-> Lausanne Jonction autoroutière Bernex Situation: entrée fermée travaux, longueur [km] 0.3",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 octobre 2026",
+              "date": "2026-09-09T05:49:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Info chantier Voie verte Genève-Satigny",
+              "date": "2026-10-02",
+              "url": "https://www.ge.ch/node/41839"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
+              "date": "2026-10-01",
+              "url": "https://www.ge.ch/node/45079"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
+              "date": "2026-09-24",
+              "url": "https://www.ge.ch/node/44965"
+            },
+            {
+              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
+              "date": "2026-09-22",
+              "url": "https://www.ge.ch/node/44042"
+            },
+            {
+              "label": "Le rapport d’activité et de développement durable 2025 est en ligne",
+              "date": "2026-09-21",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/le-rapport-dactivite-et-de-developpement-durable-2025-est-en-ligne"
+            },
+            {
+              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 21 septembre 2026",
+              "date": "2026-09-17",
+              "url": "https://www.ge.ch/node/44916"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Attente aux frontières vers France",
+          "url": "/fr/temps-attente-douane/geneve-francia/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}

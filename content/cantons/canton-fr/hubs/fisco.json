@@ -1,0 +1,636 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-fr:fisco",
+  "section": "canton-fr",
+  "canton": "FR",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T09:49:20.921Z",
+  "contentHash": "07e76b6a3ef51f2b71ea1f24f8565fcc4f23fc90e54d47885acccd1b1d5405ac",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "FR",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Friburgo, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in francese e tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "16,43 %",
+          "note": "Fribourg, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "14,55 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Fribourg)",
+              "value": "4,41 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Fribourg)",
+              "value": "11,8 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Fribourg)",
+              "value": "16,43 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Fribourg)",
+              "value": "20,52 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Fribourg)",
+              "value": "26,85 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "8,12 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "12,13 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "14,55 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "16,62 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "21,27 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Phishing-Prävention – Kommunikation mit der KSTV",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
+            },
+            {
+              "label": "Prévention du phishing - communiquer avec le SCC",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/impots/personnes-physiques/prevention-du-phishing-communiquer-avec-le-scc"
+            },
+            {
+              "label": "Änderungen bei den QR-Codes",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/aenderungen-bei-den-qr-codes"
+            },
+            {
+              "label": "Modification des codes QR",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Imposta successione e donazione: aliquote Friburgo",
+          "url": "/articoli-svizzera/friburgo-imposta-eredi-regole/",
+          "excerpt": "Cantone di Friburgo, fisco a tre livelli: come distinguere competenze, aliquote per parentela, esenzioni, dichiarazione e termini da verificare.",
+          "date": "2026-09-28T04:25:31.514Z"
+        },
+        {
+          "title": "Friburgo: successioni e donazioni, aliquote e esenzioni",
+          "url": "/articoli-svizzera/friburgo-successione-donazione-aliquote/",
+          "excerpt": "Nessuna aliquota federale unica: in Canton Friburgo le tasse seguono il grado di parentela e le esenzioni per coniuge e discendenti.",
+          "date": "2026-09-28T02:58:33.971Z"
+        },
+        {
+          "title": "Imposte cantonali nel Canton Friburgo: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantoni-friburgo-aliquote-deduzioni/",
+          "excerpt": "L'aliquota media nel Canton Friburgo è del 12,7% e le deduzioni ammesse sono del 20,5%.",
+          "date": "2026-08-17T18:09:37.236Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "en": {
+      "canton": "FR",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Fribourg, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in French and German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "16.43%",
+          "note": "Fribourg, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "14.55%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Fribourg)",
+              "value": "4.41%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Fribourg)",
+              "value": "11.8%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Fribourg)",
+              "value": "16.43%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Fribourg)",
+              "value": "20.52%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Fribourg)",
+              "value": "26.85%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "8.12%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "12.13%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "14.55%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "16.62%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "21.27%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Phishing-Prävention – Kommunikation mit der KSTV",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
+            },
+            {
+              "label": "Prévention du phishing - communiquer avec le SCC",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/impots/personnes-physiques/prevention-du-phishing-communiquer-avec-le-scc"
+            },
+            {
+              "label": "Änderungen bei den QR-Codes",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/aenderungen-bei-den-qr-codes"
+            },
+            {
+              "label": "Modification des codes QR",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Inheritance and gift tax: Fribourg rates",
+          "url": "/en/swiss-articles/fribourg-inheritance-gift-tax/",
+          "excerpt": "Canton of Fribourg, three-tier taxation: how to distinguish responsibilities, rates by relationship, exemptions, tax return and deadlines to verify.",
+          "date": "2026-09-28T04:25:31.514Z"
+        },
+        {
+          "title": "Fribourg: inheritances and gifts, tax rates and exemptions",
+          "url": "/en/swiss-articles/fribourg-inheritance-gift-tax-rates/",
+          "excerpt": "No single federal tax rate: in the Canton of Fribourg, taxes depend on the degree of kinship and exemptions for spouse and descendants.",
+          "date": "2026-09-28T02:58:33.971Z"
+        },
+        {
+          "title": "Cantonal taxes in the canton of Fribourg: rates and deductions",
+          "url": "/en/swiss-articles/cantonal-taxes-in-the-canton-of-fribourg-rates-and-deductions/",
+          "excerpt": "The average rate in the Canton of Fribourg is 12.7% and the allowable deductions are 20.5%.",
+          "date": "2026-08-17T18:09:37.236Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "de": {
+      "canton": "FR",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "Im Kanton Freiburg hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Französisch und Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "16.43 %",
+          "note": "Fribourg, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "14.55 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Fribourg)",
+              "value": "4.41 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Fribourg)",
+              "value": "11.8 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Fribourg)",
+              "value": "16.43 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Fribourg)",
+              "value": "20.52 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Fribourg)",
+              "value": "26.85 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "8.12 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "12.13 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "14.55 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "16.62 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "21.27 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Phishing-Prävention – Kommunikation mit der KSTV",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
+            },
+            {
+              "label": "Prévention du phishing - communiquer avec le SCC",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/impots/personnes-physiques/prevention-du-phishing-communiquer-avec-le-scc"
+            },
+            {
+              "label": "Änderungen bei den QR-Codes",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/aenderungen-bei-den-qr-codes"
+            },
+            {
+              "label": "Modification des codes QR",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Erbschafts- und Schenkungssteuer: Steuersätze Freiburg",
+          "url": "/de/schweiz-artikel/erbschaft-schenkungsteuer-freiburg/",
+          "excerpt": "Kanton Freiburg, Steuer auf drei Ebenen: wie man Zuständigkeiten, Verwandtschaftssätze, Befreiungen, Erklärung und zu überprüfende Fristen unterscheidet.",
+          "date": "2026-09-28T04:25:31.514Z"
+        },
+        {
+          "title": "Freiburg: Erbschaften und Schenkungen, Steuersätze und Befreiungen",
+          "url": "/de/schweiz-artikel/freiburg-erbschaft-schenkung-steuersaetze/",
+          "excerpt": "Kein einheitlicher Bundessteuersatz: Im Kanton Freiburg richten sich die Steuern nach dem Verwandtschaftsgrad und den Befreiungen für Ehepartner und Nachkommen.",
+          "date": "2026-09-28T02:58:33.971Z"
+        },
+        {
+          "title": "Kantonale Steuern im Kanton Freiburg: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/imposten-kantonen-freiburg-aliquoten-abzuge/",
+          "excerpt": "Der durchschnittliche Steuersatz im Kanton Freiburg beträgt 12,7% und die zulässigen Abzüge 20,5%.",
+          "date": "2026-08-17T18:09:37.236Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    },
+    "fr": {
+      "canton": "FR",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton de Fribourg, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en français et allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "16,43 %",
+          "note": "Fribourg, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "14,55 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Fribourg)",
+              "value": "4,41 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Fribourg)",
+              "value": "11,8 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Fribourg)",
+              "value": "16,43 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Fribourg)",
+              "value": "20,52 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Fribourg)",
+              "value": "26,85 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "8,12 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "12,13 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "14,55 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "16,62 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "21,27 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Phishing-Prävention – Kommunikation mit der KSTV",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/de/steuern/natuerliche-personen/phishing-praevention-kommunikation-mit-der-kstv"
+            },
+            {
+              "label": "Prévention du phishing - communiquer avec le SCC",
+              "date": "2026-10-06T13:37:38.000Z",
+              "url": "https://www.fr.ch/impots/personnes-physiques/prevention-du-phishing-communiquer-avec-le-scc"
+            },
+            {
+              "label": "Änderungen bei den QR-Codes",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/de/find/kstv/news/aenderungen-bei-den-qr-codes"
+            },
+            {
+              "label": "Modification des codes QR",
+              "date": "2026-08-06T07:20:00.000Z",
+              "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Impôt succession et donation : taux Fribourg",
+          "url": "/fr/articles-suisse/droits-succession-donation-fribourg/",
+          "excerpt": "Canton de Fribourg, fisc à trois niveaux : comment distinguer les compétences, les taux de parenté, les exonérations, la déclaration et les délais à vérifier.",
+          "date": "2026-09-28T04:25:31.514Z"
+        },
+        {
+          "title": "Fribourg : successions et donations, taux et exonérations",
+          "url": "/fr/articles-suisse/fribourg-impot-succession-donation-taux/",
+          "excerpt": "Aucun taux fédéral unique : dans le canton de Fribourg, les taxes suivent le degré de parenté et les exonérations pour conjoint et descendants.",
+          "date": "2026-09-28T02:58:33.971Z"
+        },
+        {
+          "title": "Impôts cantonaux dans le canton de Fribourg : taux et déductions",
+          "url": "/fr/articles-suisse/impostes-cantons-fribourg-aliquots-deductions/",
+          "excerpt": "Le taux moyen dans le canton de Fribourg est de 12,7 % et les déductions admises sont de 20,5 %.",
+          "date": "2026-08-17T18:09:37.236Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T09:49:20.921Z"
+    }
+  }
+}
