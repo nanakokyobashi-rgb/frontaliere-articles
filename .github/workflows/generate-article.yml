@@ -1865,9 +1865,16 @@ jobs:
           PRODUCED="$(git rev-parse HEAD)"
 
           # Il drain delle copertine puo' ora avanzare in parallelo. Il registro
-          # e' append-only: conserviamo il risultato del commit replayed e lo
-          # riuniamo dopo il rebase, invece di lasciare che un conflitto lo
-          # scarti.
+          # e' append-only: conserviamo le differenze del commit replayed e le
+          # riuniamo dopo il rebase rispetto al base comune. Cosi' una copia
+          # invariata dello snapshot non puo' rimettere una copertina vecchia
+          # sopra quella rigenerata dal drain.
+          registry_base_snapshot="$RUNNER_TEMP/generated-image-registry-base.json"
+          if git cat-file -e "$PRODUCED^:data/generated-image-registry.json" 2>/dev/null; then
+            git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base_snapshot"
+          else
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base_snapshot"
+          fi
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
           if [ -f data/generated-image-registry.json ]; then
             cp data/generated-image-registry.json "$registry_snapshot"
@@ -2043,7 +2050,7 @@ jobs:
               --take-theirs public/images/blog/ || rebased=0
             if [ "$rebased" -eq 1 ] && [ -n "$registry_snapshot" ] && [ -f data/generated-image-registry.json ]; then
               node scripts/ci/merge-generated-image-registry.mjs \
-                data/generated-image-registry.json "$registry_snapshot"
+                data/generated-image-registry.json "$registry_snapshot" "$registry_base_snapshot"
               git add data/generated-image-registry.json
               if ! git diff --cached --quiet; then
                 git commit --amend --no-edit

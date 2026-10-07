@@ -38,6 +38,7 @@ import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs
 import { SECTIONS as SECTION_SURFACES } from '../../scripts/lib/article-surfaces.mjs';
 import { sectionRebaseArgs, sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from '../../scripts/lib/image-credit-records.mjs';
+import { mergeImageRegenerationQueues } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 import { QUOTA_STATE_PATH } from '../scripts/lib/scheduler/quotaController.mjs';
 import * as topicSelector from '../scripts/lib/article-topic-selector.mjs';
 
@@ -672,7 +673,8 @@ test('il publisher journalist usa lo stesso rebase queue-aware', () => {
     /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
   );
   assert.match(workflow, /registry_snapshot/);
-  assert.match(workflow, /merge-generated-image-registry\.mjs/);
+  assert.match(workflow, /registry_base_snapshot/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_snapshot\" \"\$registry_base_snapshot\"/);
   assert.match(workflow, /--section-surfaces/);
   assert.match(workflow, /--take-theirs content\/image-credits\/blog\//);
   assert.match(workflow, /--take-theirs public\/images\/blog\//);
@@ -685,7 +687,51 @@ test('generate-article conserva il registry generato quando rebasea con il drain
   assert.ok(parsed.bookkeeping.includes('data/generated-image-registry.json'));
   assert.ok(parsed.queues.includes('data/image-regeneration-queue.json'));
   assert.match(workflow, /registry_snapshot/);
-  assert.match(workflow, /merge-generated-image-registry\.mjs/);
+  assert.match(workflow, /registry_base_snapshot/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_snapshot\" \"\$registry_base_snapshot\"/);
+});
+
+test('il merge della coda usa il replayed solo sui pareggi e conserva failure/status', () => {
+  const baseItem = queueItem('article-same', 'base', 'not-a-date');
+  const upstreamItem = {
+    ...baseItem,
+    reason: 'upstream',
+    status: 'failed',
+    failureCount: 2,
+    requestedAt: '2026-10-07T00:00:00.000Z',
+    lastFailureAt: '2026-10-07T00:01:00.000Z',
+  };
+  const replayedItem = {
+    ...baseItem,
+    reason: 'replayed',
+    status: 'queued',
+    failureCount: 3,
+    requestedAt: '2026-10-07T00:00:00.000Z',
+    lastFailureAt: '2026-10-07T00:01:00.000Z',
+  };
+  const merged = mergeImageRegenerationQueues(
+    { schema: 1, items: [upstreamItem] },
+    { schema: 1, items: [replayedItem] },
+    { schema: 1, items: [baseItem] },
+  );
+  assert.equal(merged.items[0].reason, 'replayed', 'a pari timestamp il commit rigiocato e\' deterministico');
+  assert.equal(merged.items[0].status, 'queued');
+  assert.equal(merged.items[0].failureCount, 3);
+  assert.equal(merged.items[0].requestedAt, '2026-10-07T00:00:00.000Z');
+  assert.equal(merged.items[0].lastFailureAt, '2026-10-07T00:01:00.000Z');
+
+  const orderA = { ...queueItem('article-order-a', 'base', 'not-a-date'), requestedAt: 'not-a-date' };
+  const orderB = { ...queueItem('article-order-b', 'new', 'not-a-date'), requestedAt: 'not-a-date' };
+  const ordered = mergeImageRegenerationQueues(
+    { schema: 1, items: [orderA, upstreamItem] },
+    { schema: 1, items: [orderA, replayedItem, orderB] },
+    { schema: 1, items: [orderA, baseItem] },
+  );
+  assert.deepEqual(
+    ordered.items.map((item) => item.articleId),
+    ['article-order-a', 'article-same', 'article-order-b'],
+    'item con timestamp assente/uguale mantiene ordine upstream e appende solo il nuovo',
+  );
 });
 
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {

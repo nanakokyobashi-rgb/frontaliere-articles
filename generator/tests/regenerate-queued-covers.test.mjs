@@ -359,25 +359,44 @@ test('un record già materializzato rende il drain riprendibile senza una second
   }
 });
 
-test('il merge del registro in rebase conserva l ordine upstream e non perde un record locale', () => {
+test('il merge del registro in rebase scarta lo snapshot stale e conserva le aggiunte', () => {
+  const base = {
+    schema: 1,
+    assets: [
+      { assetId: 'lugano-view', version: 'base' },
+      { assetId: 'article-old', version: 'base' },
+    ],
+  };
   const upstream = {
     schema: 1,
     assets: [
       { assetId: 'lugano-view', version: 'upstream' },
-      { assetId: 'article-old', version: 'upstream' },
+      { assetId: 'article-old', version: 'drain-new-cover' },
+      { assetId: 'article-upstream', version: 'upstream-new' },
     ],
   };
   const replayed = {
     schema: 1,
     assets: [
       { assetId: 'article-new', version: 'local' },
-      { assetId: 'article-old', version: 'local-new-cover' },
+      { assetId: 'article-old', version: 'base' },
     ],
   };
-  const merged = mergeGeneratedImageRegistries(upstream, replayed);
-  assert.deepEqual(merged.assets.map((record) => record.assetId), ['lugano-view', 'article-old', 'article-new']);
-  assert.equal(merged.assets[1].version, 'local-new-cover');
-  assert.equal(merged.assetCount, 3);
+  const merged = mergeGeneratedImageRegistries(upstream, replayed, base);
+  assert.deepEqual(merged.assets.map((record) => record.assetId), [
+    'lugano-view', 'article-old', 'article-upstream', 'article-new',
+  ]);
+  assert.equal(merged.assets[1].version, 'drain-new-cover');
+  assert.equal(merged.assets[3].version, 'local');
+  assert.equal(merged.assetCount, 4);
+});
+
+test('il merge del registro lascia prevalere una modifica reale del commit rigiocato', () => {
+  const base = { schema: 1, assets: [{ assetId: 'same-asset', version: 'base' }] };
+  const upstream = { schema: 1, assets: [{ assetId: 'same-asset', version: 'drain' }] };
+  const replayed = { schema: 1, assets: [{ assetId: 'same-asset', version: 'local' }] };
+  const merged = mergeGeneratedImageRegistries(upstream, replayed, base);
+  assert.equal(merged.assets[0].version, 'local');
 });
 
 function workflowConcurrencyGroups(source) {
@@ -472,4 +491,6 @@ test('il workflow attende la completion del publisher prima di ackare l outbox',
   assert.ok(acknowledge > completion);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
   assert.doesNotMatch(workflow.slice(dispatch, acknowledge), /git rm -f/);
+  assert.match(workflow, /registry_base_snapshot/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_snapshot\" \"\$registry_base_snapshot\"/);
 });

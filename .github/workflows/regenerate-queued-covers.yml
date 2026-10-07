@@ -124,6 +124,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(generator): drain queued article covers ($drained drained)"
+          produced="$(git rev-parse HEAD)"
+          registry_base_snapshot="$RUNNER_TEMP/generated-image-registry-base.json"
+          if git cat-file -e "$produced^:data/generated-image-registry.json" 2>/dev/null; then
+            git show "$produced^:data/generated-image-registry.json" > "$registry_base_snapshot"
+          else
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base_snapshot"
+          fi
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
           cp data/generated-image-registry.json "$registry_snapshot"
 
@@ -160,7 +167,7 @@ jobs:
               exit 1
             fi
             node scripts/ci/merge-generated-image-registry.mjs \
-              data/generated-image-registry.json "$registry_snapshot"
+              data/generated-image-registry.json "$registry_snapshot" "$registry_base_snapshot"
             git add data/generated-image-registry.json
             if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
           done
