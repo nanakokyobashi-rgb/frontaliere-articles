@@ -281,22 +281,22 @@ test('feed condiviso: filterByCanton conserva NW e scarta le voci OW', () => {
   const nw = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   const source = { quirks: { filterByCanton: 'NW' } };
   const headlines = [
-    { headline: 'Stans: Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper', url: 'https://www.nw.ch/_rte/information/1' },
+    { headline: 'Stans: Mehr Sicherheit im Unterwalden am Lopper', url: 'https://www.unterwalden24.ch/stans' },
     { headline: 'Titlis startet in besonderen Winter', url: 'https://www.unterwalden24.ch/titlis' },
     { headline: 'Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden', url: 'https://www.unterwalden24.ch/wild' },
   ];
   assert.deepEqual(
     filterCantonSourceHeadlines(nw, source, headlines).map((h) => h.headline),
-    [headlines[0].headline, headlines[2].headline],
+    [headlines[0].headline],
   );
   assert.deepEqual(filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'OW' } }, headlines), []);
 });
 
-test('feed Unterwalden: gli alias condivisi entrano in entrambi i profili, URL locali nel proprio', () => {
+test('feed Unterwalden: il nome storico richiede un segnale locale univoco', () => {
   const nw = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   const ow = buildCantonProfile('canton-ow', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   const headlines = [
-    { headline: 'Unterwaldens Ski-Asse starten in den Winter', url: 'https://www.unterwalden24.ch/ski' },
+    { headline: 'Stans: Unterwaldens Ski-Asse starten in den Winter', url: 'https://www.unterwalden24.ch/stans' },
     { headline: 'Eiffelturm, Burj Khalifa – und jetzt Engelberg', url: 'https://www.unterwalden24.ch/engelberg' },
     { headline: 'Mehr Sicherheit am Lopper', url: 'https://www.nw.ch/_rte/information/138826' },
   ];
@@ -307,20 +307,23 @@ test('feed Unterwalden: gli alias condivisi entrano in entrambi i profili, URL l
   );
   assert.equal(filteredNw[0]._cantonFilterBy, 'NW');
   assert.equal(
-    nw.anchors(filteredNw[0].headline, filteredNw[0].url, 'https://www.unterwalden24.ch/feed/'),
+    nw.anchors('Unterwalden: Ski-Asse starten im Winter', 'https://www.unterwalden24.ch/ski', 'https://www.unterwalden24.ch/feed/'),
     false,
     'un alias condiviso non filtra da solo il feed regionale',
   );
   assert.equal(
-    nw.anchors(filteredNw[0].headline, filteredNw[0].url, 'https://www.unterwalden24.ch/feed/', filteredNw[0]._cantonFilterBy),
+    nw.anchors('Unterwalden: Ski-Asse starten im Winter', 'https://www.unterwalden24.ch/ski', 'https://www.unterwalden24.ch/feed/', filteredNw[0]._cantonFilterBy),
     true,
     'la prova del filtro autorizza la voce gia\' separata',
   );
   const filteredOw = filterCantonSourceHeadlines(ow, { quirks: { filterByCanton: 'OW' } }, headlines);
   assert.deepEqual(
     filteredOw.map((h) => h.headline),
-    [headlines[0].headline, headlines[1].headline],
+    [headlines[1].headline],
   );
+  const sharedOnly = { headline: 'Wildunfall-Gefahr steigt im Herbst in Ob- und Nidwalden', url: 'https://www.unterwalden24.ch/wild' };
+  assert.deepEqual(filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'NW' } }, [sharedOnly]), []);
+  assert.deepEqual(filterCantonSourceHeadlines(ow, { quirks: { filterByCanton: 'OW' } }, [sharedOnly]), []);
 });
 
 test('feed non filtrato: scarta un marker cantonale residuo prima dell’anchor gate', () => {

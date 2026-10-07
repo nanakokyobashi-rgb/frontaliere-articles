@@ -515,13 +515,20 @@ const LOCAL_SOURCE_KINDS = new Set(['media', 'istituzionale', 'polizia']);
 const SHARED_CANTON_AREA_ALIASES = Object.freeze({
   NW: Object.freeze([
     'nidwalden', 'nidwald', 'nidvaldo', 'stans', 'hergiswil', 'buochs', 'stansstad',
-    'dallenwil', 'wolfenschiessen', 'ennetbuergen', 'nw.ch', 'ob- und nidwalden', 'unterwalden',
+    'dallenwil', 'wolfenschiessen', 'ennetbuergen', 'nw.ch',
   ]),
   OW: Object.freeze([
     'obwalden', 'obwald', 'obvaldo', 'sarnen', 'engelberg', 'alpnach', 'giswil', 'kerns',
-    'sachseln', 'lungern', 'melchtal', 'ow.ch', 'ob- und nidwalden', 'unterwalden',
+    'sachseln', 'lungern', 'melchtal', 'ow.ch',
   ]),
 });
+
+/**
+ * Il nome storico da solo non distingue i due lati del feed condiviso. Lo
+ * togliamo prima del matcher geografico: una headline comune passa solo se
+ * conserva anche una località/alias o un URL specifico del cantone.
+ */
+const SHARED_CANTON_AMBIGUOUS_RE = /\b(?:unterwalden|ob[-\s]+und\s+nidwalden|nidwalden\s+und\s+obwalden|obwalden\s+und\s+nidwalden)\b/giu;
 
 /** URL che identificano una pagina-fonte strettamente cantonale. */
 function canonicalSourceUrl(url) {
@@ -608,7 +615,10 @@ export function filterCantonSourceHeadlines(profile, source, headlines) {
   const urlAliases = wanted === 'NW' ? ['nw.ch'] : wanted === 'OW' ? ['ow.ch'] : [];
   const filtered = (headlines || []).filter((h) => {
     const text = `${h.headline || ''} ${h.lead || ''}`;
-    return profile?.isLocalArea?.(text) || termHits(text, textAliases) > 0 || termHits(h.url || '', urlAliases) > 0;
+    const textWithoutSharedAlias = text.replace(SHARED_CANTON_AMBIGUOUS_RE, ' ');
+    return profile?.isLocalArea?.(textWithoutSharedAlias)
+      || termHits(textWithoutSharedAlias, textAliases) > 0
+      || termHits(h.url || '', urlAliases) > 0;
   });
   // Il filtro ha già dimostrato che questa voce appartiene al cantone
   // dichiarato. Conserviamo la prova come metadato interno: il successivo
