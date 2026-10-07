@@ -2053,7 +2053,13 @@ jobs:
                 data/generated-image-registry.json "$registry_snapshot" "$registry_base_snapshot"
               git add data/generated-image-registry.json
               if ! git diff --cached --quiet; then
-                git commit --amend --no-edit
+                upstream_head="$(git rev-parse --verify --quiet FETCH_HEAD || true)"
+                if [ -n "$upstream_head" ] && [ "$(git rev-parse HEAD)" = "$upstream_head" ]; then
+                  echo "replayed commit was skipped; committing generated image registry merge as a child"
+                  git commit -m "Reconcile generated image registry after rebase"
+                else
+                  git commit --amend --no-edit
+                fi
               fi
             fi
             # ── Ricontrollo dopo il rebase (D18) ──

@@ -691,6 +691,27 @@ test('generate-article conserva il registry generato quando rebasea con il drain
   assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_snapshot\" \"\$registry_base_snapshot\"/);
 });
 
+test('i quattro writer del registry non fanno amend se il commit rigiocato e\' stato saltato', () => {
+  const workflowsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.github/workflows');
+  const workflows = [
+    'generate-article.yml',
+    'generate-article-core.yml',
+    'publish-journalist-articles.yml',
+    'regenerate-queued-covers.yml',
+  ];
+
+  for (const filename of workflows) {
+    const source = readFileSync(path.join(workflowsDir, filename), 'utf8');
+    const mergeStart = source.indexOf('node scripts/ci/merge-generated-image-registry.mjs');
+    assert.ok(mergeStart >= 0, `${filename}: manca il merge del registry`);
+    const mergeBlock = source.slice(mergeStart, mergeStart + 1_000);
+    assert.match(mergeBlock, /upstream_head=\"\$\(git rev-parse --verify --quiet FETCH_HEAD \|\| true\)\"/);
+    assert.match(mergeBlock, /if \[ -n \"\$upstream_head\" \] && \[ \"\$\(git rev-parse HEAD\)\" = \"\$upstream_head\" \]; then/);
+    assert.match(mergeBlock, /git commit -m \"Reconcile generated image registry after rebase\"/);
+    assert.match(mergeBlock, /git commit --amend --no-edit/);
+  }
+});
+
 test('il merge della coda usa il replayed solo sui pareggi e conserva failure/status', () => {
   const baseItem = queueItem('article-same', 'base', 'not-a-date');
   const upstreamItem = {
