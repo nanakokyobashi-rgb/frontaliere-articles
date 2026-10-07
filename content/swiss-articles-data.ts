@@ -26166,6 +26166,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'auto-elettrica-come-risparmiare-fino-al-50',
+    category: 'novita',
+    date: '2026-10-07T07:21:40.889Z',
+    image: '/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7850,6 +7850,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.quattro-oggetti-urne-novembre.title': 'November 29 vote: VAT, OASI and four proposals',
     'blog.article.quattro-oggetti-urne-novembre.excerpt': 'On November 29, voters will vote on four proposals: an increase in VAT for the 13th AHV pension, two popular initiatives, and an amendment to the law on war materiel.',
     'blog.article.quattro-oggetti-urne-novembre.imageAlt': 'Swiss ballot box and voting papers for the November 29 vote',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.title': 'Electric car: how to save up to 50%',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.excerpt': '## TL;DR - TCS compares the prices of 19’000 points in Switzerland - 50 kWh cost between 23 and 46 francs - 5% of charging takes place at fast-charging stations',
+    'blog.article.auto-elettrica-come-risparmiare-fino-al-50.imageAlt': 'Editorial image related to: Auto elettrica: come risparmiare fino al 50%',
 };
 
 export default blogMetaChEn;
