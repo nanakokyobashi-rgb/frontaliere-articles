@@ -91,20 +91,24 @@ const ARTICLE_READERS = fs.readFileSync(join(ROOT, 'engine/shared/articleReaders
 const CORPUS_FLOORS = fs.readFileSync(join(ROOT, 'scripts/lib/corpus-floors.mjs'), 'utf-8');
 const OG_PAGES_PLUGIN = fs.readFileSync(join(ROOT, 'engine/ogPagesPlugin.ts'), 'utf-8');
 
-// Le fixture storiche di questo file misurano ancora le due superfici proprie
-// del manifest. D22 puo' aggiungere sezioni di famiglia senza articoli: i loro
-// feed vuoti/assenti sono legittimi finche' il corpus non ha un registro. Le
-// asserzioni sui fixture restano esplicitamente nel perimetro storico; il
-// comportamento family-zero del nucleo e' coperto dal percorso reale di
-// expectFromCorpus/verify-api-floors.
+// I fixture storici di questo file misurano ancora le due superfici proprie
+// del manifest. D22 può aggiungere sezioni di famiglia senza articoli: i loro
+// feed vuoti/assenti sono legittimi finché il corpus non ha un registro. La
+// lista dei feed resta quella del producer; il wrapper marca come nuove le
+// sezioni family attive, così `floorViolations` applica nei fixture la stessa
+// eccezione zero-articoli del percorso reale `expectFromCorpus`.
 const HISTORICAL_RSS_SECTIONS = Object.freeze(
   RSS_SECTIONS.filter((section) => floorPolicyOf(section.id) !== 'family'),
+);
+const NEW_FAMILY_SECTIONS = Object.freeze(
+  RSS_SECTIONS.filter((section) => floorPolicyOf(section.id) === 'family').map(({ id }) => id),
 );
 
 function floorViolations(measured, expected, retention) {
   return rawFloorViolations(measured, {
     ...expected,
-    rssSections: HISTORICAL_RSS_SECTIONS,
+    rssSections: RSS_SECTIONS,
+    newFamilySections: expected.newFamilySections ?? NEW_FAMILY_SECTIONS,
   }, retention);
 }
 
