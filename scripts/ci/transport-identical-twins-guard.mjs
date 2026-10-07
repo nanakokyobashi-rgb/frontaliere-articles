@@ -38,6 +38,7 @@ function openTransportPrs(manifest) {
         files,
         filesComplete: true,
         manifest,
+        allowManifestOnly: true,
       });
       return disposition.transport ? { ...pr, transportDisposition: disposition } : null;
     })

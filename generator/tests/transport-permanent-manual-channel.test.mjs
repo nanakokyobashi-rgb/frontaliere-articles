@@ -287,6 +287,7 @@ test('i guard contano solo le PR di QUESTO repo, non quelle da un fork', () => {
   assert.match(guard, /pr\?\.head\?\.repo\?\.full_name === repo/);
   assert.match(guard, /\^transport\\\/identical-twins-\\d\+\$\/u\.test\(String\(pr\?\.head\?\.ref \|\| ''\)\)/);
   assert.match(guard, /isIdenticalTwinTransportPr/);
+  assert.match(guard, /allowManifestOnly: true/);
   assert.match(guard, /parseConvergedBullets/);
 
   // Questo consumer non e` ancora estratto e conserva la stessa prova inline.

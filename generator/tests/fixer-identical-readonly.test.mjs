@@ -156,6 +156,25 @@ test('il routing usa un titolo stabile/deduplicante e segnala il salto all-ident
   assert.equal(transported.transportException, true);
   assert.ok(commentBodies.at(-1).includes(TRANSPORT_EXCEPTION_PHRASE));
   assert.match(commentBodies.at(-1), /IDENTICAL_REVIEW_ROUTING_EVIDENCE/u);
+  const numberedFinding = {
+    lineNumber: 42,
+    text: '`same.mjs:42`: 🔴 Important: finding numerico',
+    resolvedFiles: ['same.mjs'],
+  };
+  const numberedTransport = await routeIdenticalFindings({
+    findings: [numberedFinding],
+    allFindings: [numberedFinding],
+    manifest,
+    repo: 'corpus/repo',
+    pr: 12,
+    createIssue,
+    commentPr,
+    transportPr: transport,
+    headSha: 'b'.repeat(40),
+    reviewId: 102,
+  });
+  assert.equal(numberedTransport.transportException, true);
+  assert.deepEqual(numberedTransport.allOpenFindingIds, ['42']);
   const nonIdenticalOpen = await routeIdenticalFindings({
     findings: [finding],
     allFindings: [finding, { stableId: 'finding-2', text: 'adapted', resolvedFiles: ['adapted.mjs'] }],
@@ -214,6 +233,17 @@ test('il predicato del trasporto lega autore, branch, manifest e perimetro dei f
     filesComplete: true,
     manifest,
   }).transport, false);
+  const manifestOnlyGuard = isIdenticalTwinTransportPr({
+    pr,
+    repository: 'corpus/repo',
+    files: ['scripts/ci/loop-sync-manifest.json'],
+    filesComplete: true,
+    manifest,
+    allowManifestOnly: true,
+  });
+  assert.equal(manifestOnlyGuard.transport, true);
+  assert.equal(manifestOnlyGuard.manifestOnly, true);
+  assert.deepEqual(manifestOnlyGuard.transportedFiles, []);
 });
 
 test('il guard del trasporto distingue PR superata e PR ancora da attendere', () => {

@@ -39,7 +39,7 @@ export function classifyIdenticalFindings(findings, manifest) {
     for (const corpusPath of corpusPaths) {
       out.push({
         finding,
-        findingId: finding.stableId || finding.id || finding.lineNumber || finding.text,
+        findingId: String(finding.stableId || finding.id || finding.lineNumber || finding.text),
         corpusPath,
         sitePath: sites.get(corpusPath) || corpusPath,
       });
@@ -162,7 +162,7 @@ export async function routeIdenticalFindings({
     [...candidatesByFinding.entries()]
       .filter(([, items]) => transportPrRecognized
         && items.every((item) => transported.has(item.corpusPath)))
-      .map(([findingId]) => findingId),
+      .map(([findingId]) => String(findingId)),
   );
   const transportExceptionCandidate = transportPrRecognized
     && allIdentical

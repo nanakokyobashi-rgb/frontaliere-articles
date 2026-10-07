@@ -63,7 +63,9 @@ function identicalManifestPaths(manifest) {
  *
  * `filesComplete` deve essere false quando l'API non ha dimostrato di aver
  * restituito l'elenco completo: una lista parziale non può autorizzare
- * l'eccezione del gate.
+ * l'eccezione del gate. `allowManifestOnly` appartiene soltanto al guard delle
+ * PR aperte: rende visibile una riattestazione convergente senza autorizzarla
+ * come eccezione di merge.
  */
 export function transportPrDisposition({
   pr,
@@ -71,6 +73,7 @@ export function transportPrDisposition({
   files,
   filesComplete = true,
   manifest,
+  allowManifestOnly = false,
 } = {}) {
   const changedFiles = uniquePaths(files);
   const identical = identicalManifestPaths(manifest);
@@ -94,7 +97,9 @@ export function transportPrDisposition({
     failures.push('manifest del ciclo non modificato');
   }
   if (identical.size === 0) failures.push('manifest senza gemelli identical ammessi');
-  if (transportedFiles.length === 0) failures.push('nessun gemello identical trasportato');
+  if (transportedFiles.length === 0 && !allowManifestOnly) {
+    failures.push('nessun gemello identical trasportato');
+  }
 
   const disallowedFiles = changedFiles.filter((file) => !allowed.has(file));
   if (disallowedFiles.length > 0) {
@@ -110,6 +115,7 @@ export function transportPrDisposition({
     branch,
     changedFiles,
     transportedFiles,
+    manifestOnly: transportedFiles.length === 0,
     disallowedFiles,
     manifestPath: TRANSPORT_MANIFEST_PATH,
   };

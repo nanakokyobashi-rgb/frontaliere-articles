@@ -1307,7 +1307,13 @@ export async function classifyAndMintReview(body, {
   for (const finding of result.staleDeclassified ?? []) {
     console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; il gate resta fail-closed, [regression] segnala esplicitamente la classe`);
   }
-  const routedResult = await applyIdenticalRouting(result, {
+  const resultWithDiff = {
+    ...result,
+    changedFiles: changed.files,
+    changedFilesComplete: changed.complete,
+    diffReason: changed.reason,
+  };
+  const routedResult = await applyIdenticalRouting(resultWithDiff, {
     repo,
     pr,
     prUrl,
@@ -1325,9 +1331,6 @@ export async function classifyAndMintReview(body, {
     return {
       ...routedResult,
       minted: false,
-      changedFiles: changed.files,
-      changedFilesComplete: changed.complete,
-      diffReason: changed.reason,
     };
   }
   const issueBody = followupIssueBody({ repo, pr, prUrl, findings: routedResult.outside });
@@ -1336,9 +1339,6 @@ export async function classifyAndMintReview(body, {
     ...routedResult,
     minted: true,
     followup,
-    changedFiles: changed.files,
-    changedFilesComplete: changed.complete,
-    diffReason: changed.reason,
   };
 }
 
