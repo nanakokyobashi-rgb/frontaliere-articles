@@ -491,7 +491,7 @@ function anchorOf(src, openOffset) {
  *          null = il documento non si analizza, o due contenitori condividono
  *          l'ancora (nel dubbio non si tocca niente).
  */
-export function recordContainers(src) {
+export function recordContainers(src, { emptyAnchors = new Set() } = {}) {
   let root;
   try {
     ({ root } = analyze(src));
@@ -504,12 +504,14 @@ export function recordContainers(src) {
     const anchor = anchorOf(src, c.open);
     if (!anchor) continue;
     const records = splitRecords(src.slice(c.open + 1, c.close));
-    // Dopo il filtro di una tombstone un lato puo' avere un contenitore
-    // vuoto. Va conservato come ancora: l'altro lato puo' avere aggiunto un
-    // articolo vivo nello stesso array/mappa e `unionRecords([], live)` e' una
-    // fusione non ambigua. Scartare qui l'ancora trasformerebbe quel caso in
-    // «struttura cambiata» e farebbe abortire il rebase.
     if (!records) continue;
+    // Un contenitore vuoto non e' per se' un registro editoriale: potrebbe
+    // essere una configurazione vuota, e trattarlo come record cambierebbe il
+    // comportamento del resolver su strutture non fondibili. L'unica
+    // eccezione è un'ancora che il filtro tombstone ha appena svuotato; il
+    // chiamante la passa esplicitamente per permettere il merge con un record
+    // vivo sull'altro lato.
+    if (records.length === 0 && !emptyAnchors.has(anchor)) continue;
     if (found.has(anchor)) return null;
     found.set(anchor, { open: c.open, close: c.close, records });
   }
@@ -618,6 +620,18 @@ export function pruneRetiredRecords(src, retiredIds) {
   return out;
 }
 
+function retiredContainerAnchors(src, retiredIds) {
+  const containers = recordContainers(src);
+  if (containers === null) throw new Error('il documento non si decompone in record');
+  const anchors = new Set();
+  for (const [anchor, container] of containers) {
+    if (container.records.some((record) => retiredIdForKey(record.key, retiredIds))) {
+      anchors.add(anchor);
+    }
+  }
+  return anchors;
+}
+
 /** Legge le tombstone del repository corrente; un ledger invalido e' fatale. */
 export function readRetiredIds(root = process.cwd()) {
   const file = path.join(root, 'data/retired-articles.json');
@@ -700,9 +714,9 @@ export function recordKeys(src) {
  * @returns {{ ok: true, text: string, spans: Array<[number, number]> }
  *          |{ ok: false, reason: string }}
  */
-export function mergeDocuments(ours, theirs) {
-  const A = recordContainers(ours);
-  const B = recordContainers(theirs);
+export function mergeDocuments(ours, theirs, { emptyAnchors = new Set() } = {}) {
+  const A = recordContainers(ours, { emptyAnchors });
+  const B = recordContainers(theirs, { emptyAnchors });
   if (A === null) return { ok: false, reason: 'la versione upstream non si decompone in record' };
   if (B === null) return { ok: false, reason: 'la versione del commit rigiocato non si decompone in record' };
 
@@ -834,13 +848,18 @@ export function mergeSource(src, { retiredIds = new Set() } = {}) {
   const rawTheirs = assemble(read.segments, (s) => s.theirs);
   let ours;
   let theirs;
+  let emptyAnchors;
   try {
+    emptyAnchors = new Set([
+      ...retiredContainerAnchors(rawOurs, retiredIds),
+      ...retiredContainerAnchors(rawTheirs, retiredIds),
+    ]);
     ours = pruneRetiredRecords(rawOurs, retiredIds);
     theirs = pruneRetiredRecords(rawTheirs, retiredIds);
   } catch (error) {
     return { ok: false, reason: `filtro dei ritiri impossibile: ${error.message}` };
   }
-  const merged = mergeDocuments(ours, theirs);
+  const merged = mergeDocuments(ours, theirs, { emptyAnchors });
   if (!merged.ok) return merged;
 
   // Fuori dai contenitori fusi i due lati devono essere IDENTICI.
