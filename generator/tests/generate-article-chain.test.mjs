@@ -824,6 +824,18 @@ test('un push su content/** non viene scartato se il producer è ancora in volo'
     admit.includes("printf '%s\\n' \"$changed\" | grep -q '^content/'"),
     'il gate deve riconoscere il push che porta l articolo prima del confronto con le run in volo',
   );
+  assert.match(admit, /compare_status=0/);
+  assert.match(
+    admit,
+    /changed=\$\(gh api[\s\S]*\) \|\| compare_status=\$\?/,
+    'lo status di compare non deve essere nascosto da `|| true`',
+  );
+  const compareFailureAt = admit.indexOf('if [ "$compare_status" -ne 0 ]; then');
+  assert.ok(compareFailureAt >= 0, 'un compare fallito deve avere un ramo esplicito');
+  assert.ok(
+    admit.slice(compareFailureAt).includes('content_push=true'),
+    'un push non classificabile deve essere ammesso come successore per non perdere la catena',
+  );
   assert.match(admit, /content_push=true/);
   const olderAt = admit.indexOf('if [ "$older" -gt 0 ]; then');
   const allowAt = admit.indexOf('if [ "$content_push" = "true" ]; then', olderAt);

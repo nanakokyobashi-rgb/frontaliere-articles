@@ -423,9 +423,13 @@ jobs:
           # concurrency group serializes it safely behind the producer.
           content_push=false
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
+            compare_status=0
             changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
-              --jq '.files[].filename' 2>/dev/null || true)
-            if [ -n "${changed:-}" ] && printf '%s\n' "$changed" | grep -q '^content/'; then
+              --jq '.files[].filename' 2>/dev/null) || compare_status=$?
+            if [ "$compare_status" -ne 0 ]; then
+              content_push=true
+              echo "::warning title=Confronto push non disponibile::gh api compare non ha restituito i file del push (status $compare_status); il push viene ammesso come successore di produzione per non perdere l'articolo."
+            elif [ -n "${changed:-}" ] && printf '%s\n' "$changed" | grep -q '^content/'; then
               content_push=true
               echo "Push che tocca content/**: successore di produzione; la serializzazione resta nel job generate."
             elif [ -n "${changed:-}" ]; then
