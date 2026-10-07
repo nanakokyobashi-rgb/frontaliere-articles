@@ -6,6 +6,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.argovia-disoccupazione-settembre.title': 'Argovie : chômage à 3,2% en septembre 2026',
     'blog.article.argovia-disoccupazione-settembre.excerpt': 'En septembre 2026, l\'Argovie comptait 12.451 chômeurs : taux à 3,2%, 204 de moins par rapport au mois précédent et 304 de plus que l\'année précédente.',
     'blog.article.argovia-disoccupazione-settembre.imageAlt': 'Centre régional de placement en Argovie sur le thème du chômage',
+    'blog.article.riduzione-premi-argovia-2027.title': 'Réduction des primes en Argovie 2027 : demande avant le 31 décembre',
+    'blog.article.riduzione-premi-argovia-2027.excerpt': 'La SVA Aargau envoie les codes pour la réduction des primes. Pour 2027, la demande doit être déposée d’ici au jeudi 31 décembre.',
+    'blog.article.riduzione-premi-argovia-2027.imageAlt': 'Un résident d\'Argovie vérifie le code SVA pour la réduction des primes',
 };
 
 export default blogMetaCantonAgFr;

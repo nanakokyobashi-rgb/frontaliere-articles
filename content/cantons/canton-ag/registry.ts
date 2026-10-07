@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'riduzione-premi-argovia-2027',
+ category: 'pratico',
+ date: '2026-10-07T09:03:30.904Z',
+ image: '/images/blog/premi-lamal-vallese-riduzione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
