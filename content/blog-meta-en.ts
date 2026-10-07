@@ -9687,9 +9687,6 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-doues-lavorare-vallese.title': 'Living in Doues and working in Valais as a border worker',
     'blog.article.vivere-doues-lavorare-vallese.excerpt': 'Guide to commuting between Doues and Valais: tax rules, social security and management of cross-border work in compliance with current agreements.',
     'blog.article.vivere-doues-lavorare-vallese.imageAlt': 'Mountain landscape between Doues and the Swiss border',
-    'blog.article.abort-topical-relevance-pre-saint-didier.title': 'Living in Pré-Saint-Didier and working in Valais',
-    'blog.article.abort-topical-relevance-pre-saint-didier.excerpt': 'Analysis of residence in Pré-Saint-Didier for workers in Switzerland and the geographical constraints related to border status.',
-    'blog.article.abort-topical-relevance-pre-saint-didier.imageAlt': 'Alpine landscape at the Swiss border',
     'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.title': 'Courmayeur: working in Valais while living in Aosta Valley',
     'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.excerpt': 'How to assess cross-border commuting between Courmayeur and Valais, including routes, residence and checks before accepting a job.',
     'blog.article.vivere-courmayeur-e-lavorare-vallese-da-frontaliere.imageAlt': 'A cross-border worker considers the Courmayeur and Vallese area for work and residence.',
@@ -9720,9 +9717,6 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-oyace-lavorare-vallese-frontaliere.title': 'Living in Oyace and working in Valais as a border worker',
     'blog.article.vivere-oyace-lavorare-vallese-frontaliere.excerpt': 'Practical guide to commuting between Oyace and Valais: tax rules, new agreement and income management between Switzerland and Italy.',
     'blog.article.vivere-oyace-lavorare-vallese-frontaliere.imageAlt': 'Mountain landscape between Oyace and Valais',
-    'blog.article.abort-saint-nicolas-non-frontaliero.title': 'Moving to Saint-Nicolas by border crossing: the facts',
-    'blog.article.abort-saint-nicolas-non-frontaliero.excerpt': 'Analysis of the feasibility of the border towards the Canton of Ticino starting from the municipality of Saint-Nicolas.',
-    'blog.article.abort-saint-nicolas-non-frontaliero.imageAlt': 'Panoramic view of a Swiss alpine village',
     'blog.article.vivere-saint-pierre-e-lavorare-in-vallese-da-frontaliere.title': 'Living in Saint-Pierre and working in Valais as a border worker',
     'blog.article.vivere-saint-pierre-e-lavorare-in-vallese-da-frontaliere.excerpt': 'The key facts about the life of a border worker who works in Valais and resides in Saint-Pierre.',
     'blog.article.vivere-saint-pierre-e-lavorare-in-vallese-da-frontaliere.imageAlt': 'A cross-border worker living in Saint-Pierre and working in Valais.',
@@ -12751,6 +12745,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.furto-van-cernobbio-21enne.title': 'Como, tourists robbed in van: 21-year-old arrested',
     'blog.article.furto-van-cernobbio-21enne.excerpt': '## TL;DR - Arrested at Como, a 21-year-old Egyptian - Theft targeting tourists on via per Cernobbio - Scuffle near the Lido di Villa Olmo - Investigation',
     'blog.article.furto-van-cernobbio-21enne.imageAlt': 'Como, a parked van on via per Cernobbio after tourists were robbed',
+    'blog.article.notte-bper-gallarate-bancomat.title': 'ATM blown up: overnight heist at Bper in Gallarate',
+    'blog.article.notte-bper-gallarate-bancomat.excerpt': 'Another ATM was blown up at Bper in Gallarate during a nighttime robbery: the available report on the case.',
+    'blog.article.notte-bper-gallarate-bancomat.imageAlt': 'Bank building on a Swiss-Italian border street at night',
+    'blog.article.caduta-scala-locate-varesino.title': 'Locate Varesino, 79-year-old seriously injured after falling from a ladder',
+    'blog.article.caduta-scala-locate-varesino.excerpt': '## TL;DR - Fall from a ladder on Via Madonnetta - A 79-year-old man fell at a farm - Emergency services dispatched under red code',
+    'blog.article.caduta-scala-locate-varesino.imageAlt': 'Rural setting of an agricultural farm',
 };
 
 export default blogMetaEn;

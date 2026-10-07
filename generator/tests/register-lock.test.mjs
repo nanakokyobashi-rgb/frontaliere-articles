@@ -499,29 +499,27 @@ test('le chiavi di configurazione delle sezioni sono validate prima del primo ru
   );
 });
 
-test('i tre workflow producer con staging esplicito includono il marker di registrazione', () => {
+test('i producer trattano i lock come stato locale del runner', () => {
+  const gitignore = fs.readFileSync(new URL('../../.gitignore', import.meta.url), 'utf-8');
+  assert.match(gitignore, /^generator\/data\/register-in-progress\*\.json$/m,
+    'il glob deve coprire il marker legacy e quelli section-scoped');
   for (const workflow of [
     '../../.github/workflows/generate-daily-brief.yml',
     '../../.github/workflows/refresh-events-digest.yml',
     '../../.github/workflows/generate-border-wait-ranking-weekly.yml',
   ]) {
     const src = fs.readFileSync(new URL(workflow, import.meta.url), 'utf-8');
-    assert.match(src, /generator\/data\/register-in-progress\*\.json/,
-      `${workflow}: marker non presente nello staging esplicito`);
-    assert.match(src, /git status --porcelain -- 'generator\/data\/register-in-progress\*\.json'/,
-      `${workflow}: un giorno senza marker deve restare un commit valido`);
     assert.match(src, /id: producer/, `${workflow}: il producer deve avere un outcome osservabile`);
-    assert.match(src, /id: registration-checkpoint/, `${workflow}: checkpoint del marker assente`);
-    assert.match(src, /if: always\(\) && steps\.mode\.outputs\.dry != 'true'/,
-      `${workflow}: il checkpoint deve sopravvivere al fallimento del producer`);
     assert.match(src, /steps\.producer\.outcome/,
       `${workflow}: il commit non distingue successo e fallimento del producer`);
     assert.match(src, /if \[ "\$PRODUCER_OUTCOME" != "success" \]/,
-      `${workflow}: manca il ramo di commit della registrazione interrotta`);
-    assert.ok(
-      (src.match(/git add -A -- 'generator\/data\/register-in-progress\*\.json'/g) ?? []).length >= 2,
-      `${workflow}: il marker deve essere staged con -A sia al checkpoint sia nel commit`,
-    );
+      `${workflow}: manca il ramo di rifiuto del producer fallito`);
+    assert.match(src, /refusing to commit partial producer output/,
+      `${workflow}: il producer fallito non viene rifiutato esplicitamente`);
+    assert.doesNotMatch(src, /id: registration-checkpoint/,
+      `${workflow}: checkpoint del marker ancora presente`);
+    assert.doesNotMatch(src, /git add -A -- 'generator\/data\/register-in-progress[^']*'/,
+      `${workflow}: il marker non deve essere staged esplicitamente`);
     assert.doesNotMatch(
       src,
       /generator\/data\/register-in-progress-\*\.json/,
@@ -532,8 +530,8 @@ test('i tre workflow producer con staging esplicito includono il marker di regis
 
 test('il marker porta l\'identita\' del RUN, non solo il pid', () => {
   // Il pid non sopravvive al processo: su un run successivo — o in un checkout
-  // fresco, che e' l'unico modo in cui un marker committato viene rivisto —
-  // nomina un processo scorrelato o nessuno. `GITHUB_RUN_ID` sopravvive e
+  // fresco, che non deve piu' ricevere il marker — nomina un processo
+  // scorrelato o nessuno. `GITHUB_RUN_ID` sopravvive e
   // punta ai log che spiegano cosa ha interrotto la registrazione.
   const root = sandbox();
   const prev = { id: process.env.GITHUB_RUN_ID, attempt: process.env.GITHUB_RUN_ATTEMPT };

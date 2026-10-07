@@ -403,6 +403,7 @@ const reservedSlugEntries = [];
 for (const section of PUBLISHED_API_SECTIONS) {
   const key = section.api.family === null ? section.api.slugsKey : `${section.api.slugsKey}.${section.section}`;
   for (const [id, locales] of Object.entries(slugMapOf(section.section) ?? {})) {
+    if (isReservedPublishedSlug(id)) reservedSlugEntries.push(`${key}.${id}.id=${id}`);
     for (const [locale, slug] of Object.entries(locales ?? {})) {
       if (isReservedPublishedSlug(slug)) reservedSlugEntries.push(`${key}.${id}.${locale}=${slug}`);
     }
@@ -417,7 +418,7 @@ for (const section of PUBLISHED_API_SECTIONS) {
   }
 }
 if (reservedSlugEntries.length > 0) {
-  throw new Error(`reserved published slug(s) in source maps: ${reservedSlugEntries.join(', ')}`);
+  throw new Error(`reserved/service-marker published identity value(s) in source maps: ${reservedSlugEntries.join(', ')}`);
 }
 // L'ordine delle chiavi e' quello storico — la prima sezione, poi
 // `fallbackReasons` di tutte, poi le altre — perche' slugs.json resti

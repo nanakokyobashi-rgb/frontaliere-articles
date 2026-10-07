@@ -2,6 +2,48 @@
   "_doc": "Articoli RITIRATI da questo corpus e i loro slug localizzati, preservati al momento della rimozione. Scritto da scripts/retire-article.mjs, sorvegliato da generator/tests/retired-articles-fully-removed.test.mjs. DUE RAGIONI PER CUI ESISTE. (1) Una rimozione PARZIALE non degrada l'articolo ritirato: scripts/build-api.mjs incrocia registro, mappa slug e meta, e un id presente in uno solo dei tre fa fallire la pubblicazione dell'INTERA superficie dati (news-ticker: article <id> has no <loc> slug — refusing to publish). Il test usa questo elenco per verificare che ogni id ritirato sia sparito da TUTTE le superfici e che il vincitore sia invece ancora al suo posto. (2) I quattro slug localizzati di un articolo vivono solo in content/routerSwissData.ts / routerBlogData.ts: nell'istante in cui l'articolo viene rimosso non sono piu' derivabili da nessun registro, e sono esattamente cio' che serve al repo del SITO per scrivere le voci EDGE_RETIRED_PATHS in infra/cloudflare-worker/locale-router.js — l'unico strato che ritira davvero l'URL, perche' lo shard degli otto prefissi articolo e' append-only e continua a servire le vecchie pagine. Rimuovere qui NON produce un 404: produce una pagina orfana che continua a rispondere 200 finche' la voce edge non atterra. Fonte: nanakokyobashi-rgb/frontaliere-articles#304 item 1.",
   "retired": [
     {
+      "id": "abort-saint-nicolas-non-frontaliero",
+      "section": "frontaliere",
+      "winnerId": "vivere-saint-pierre-e-lavorare-in-vallese-da-frontaliere",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-10-07",
+      "duplicateOf": [],
+      "slugs": {
+        "it": "abort-saint-nicolas-non-frontaliero",
+        "en": "moving-to-saint-nicolas-as-a-cross-border-worker-pros-and-cons",
+        "de": "umzug-nach-saint-nicolas-als-grenzgaenger-vor-und-nachteile",
+        "fr": "demenager-a-saint-nicolas-en-tant-que-frontalier-avantages-et-inconvenients"
+      }
+    },
+    {
+      "id": "abort-topical-relevance-pre-saint-didier",
+      "section": "frontaliere",
+      "winnerId": "vivere-courmayeur-e-lavorare-vallese-da-frontaliere",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-10-07",
+      "duplicateOf": [],
+      "slugs": {
+        "it": "abort-topical-relevance-pre-saint-didier",
+        "en": "living-pre-saint-didier-working-valais",
+        "de": "leben-pre-saint-didier-arbeiten-wallis",
+        "fr": "vivre-pre-saint-didier-travailler-valais"
+      }
+    },
+    {
+      "id": "abort-topical-relevance-trump-health",
+      "section": "svizzera",
+      "winnerId": "imposte-cantonali-canton-lucerna-aliquote",
+      "winnerSection": "svizzera",
+      "retiredOn": "2026-10-07",
+      "duplicateOf": [],
+      "slugs": {
+        "it": "abort-topical-relevance-trump-health",
+        "en": "news-not-relevant",
+        "de": "nicht-zutreffende-nachrichten",
+        "fr": "information-non-pertinente"
+      }
+    },
+    {
       "id": "autostrada-riapertura-ticino",
       "section": "svizzera",
       "winnerId": "autostrada-a2-mezzovico-interrogazione",
