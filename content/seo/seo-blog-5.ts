@@ -100566,6 +100566,41 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-monte-olimpino-treni-weekend': {
+    title: 'Treni Como-Svizzera: 4 weekend di chiusura nel 2026',
+    description: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    keywords: 'frontalieri, ticino, svizzera, italia, treni, como-svizzera, weekend, chiusura',
+    ogTitle: 'Monte Olimpino 1: chiusure ferroviarie nel 2026',
+    ogDescription: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    canonicalPath: '/articoli-frontaliere/monte-olimpino-treni-weekend/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "description": "## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/como-crisi-abitativa-alloggi-sfitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale su una linea transfrontaliera tra Como e la Svizzera"
+      },
+      "datePublished": "2026-10-07T05:47:57+00:00",
+      "dateModified": "2026-10-07T05:47:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/monte-olimpino-treni-weekend/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -27,6 +27,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T05:28:44.576Z",
       "lastFailureAt": "2026-10-07T05:28:44.576Z"
+    },
+    {
+      "articleId": "monte-olimpino-treni-weekend",
+      "title": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
+      "fallbackImage": "/images/blog/como-crisi-abitativa-alloggi-sfitti.webp",
+      "reason": "All image providers failed for article-monte-olimpino-treni-weekend: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:47:57.525Z",
+      "lastFailureAt": "2026-10-07T05:47:57.525Z"
     }
   ]
 }
