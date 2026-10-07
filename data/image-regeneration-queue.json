@@ -360,6 +360,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:19:58.846Z",
       "lastFailureAt": "2026-10-07T10:19:58.846Z"
+    },
+    {
+      "articleId": "cdhr-frontalieri-vaud-2026",
+      "title": "CDHR: quando i frontalieri francesi pagano l'acconto del 95%",
+      "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
+      "reason": "All image providers failed for article-cdhr-frontalieri-vaud-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:21:57.444Z",
+      "lastFailureAt": "2026-10-07T10:21:57.444Z"
     }
   ]
 }
