@@ -150,6 +150,23 @@ test('la verifica CDN richiede 200, canonical, hreflang reciproci, route owner e
   assert.deepEqual(wrongOwner.missing, []);
   assert.equal(wrongOwner.bad.length, 36);
   assert.ok(wrongOwner.bad.every((entry) => entry.problems.includes('ft-route-owner')));
+
+  const headerlessFetch = mockCdnFetch(pages);
+  const staleBrowserVariant = await probeSectionPages('canton-lu', {
+    root,
+    fetchImpl: async (url, options) => {
+      const response = await headerlessFetch(url, options);
+      if (!options.headers?.Origin) return response;
+      return {
+        status: 200,
+        text: async () => (await response.text()).replace(CORPUS_ROUTE_OWNER_META_TAG, '<meta name="ft-route-owner" content="stale">'),
+      };
+    },
+    retryDelayMs: 0,
+  });
+  assert.deepEqual(staleBrowserVariant.missing, []);
+  assert.equal(staleBrowserVariant.bad.length, 36);
+  assert.ok(staleBrowserVariant.bad.every((entry) => entry.problems.includes('ft-route-owner')));
 });
 
 test('hub mancante/corrotto non passa il gate e il flip pronto e\' idempotente', async () => {
@@ -224,6 +241,20 @@ test('il rollback live e\' indipendente da una mappa slug corrotta', async () =>
   const plan = await planSections(root, { mode: 'rollback', sections: ['canton-lu'], probe: true });
   assert.deepEqual(plan.readySections, ['canton-lu']);
   assert.equal(plan.sections[0].reason, null);
+});
+
+test('una sezione invalida non interrompe la riconciliazione delle successive', async () => {
+  const root = fixtureRoot();
+  const plan = await planSections(root, {
+    mode: 'promote',
+    sections: ['canton-sconosciuto', 'canton-lu'],
+    probe: false,
+  });
+  assert.equal(plan.sections.length, 2);
+  assert.equal(plan.sections[0].reason, 'section-invalid');
+  assert.match(plan.sections[0].errors[0], /sezione cantonale sconosciuta/u);
+  assert.equal(plan.sections[1].section, 'canton-lu');
+  assert.equal(plan.sections[1].reason, null);
 });
 
 test('workflow D22 usa cron/dispatch, lancia refresh e bootstrap, crea solo PR e supporta rollback', () => {
