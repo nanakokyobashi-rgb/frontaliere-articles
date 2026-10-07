@@ -116,6 +116,38 @@ test('Codex Luna Max e\' il primo della catena, ma senza broker resta il fallbac
   assert.equal(getPreferredModel({ chain: [CODEX, AI_MODELS.GEMINI_FLASH] }), AI_MODELS.GEMINI_FLASH);
 });
 
+test('la catena default non promuove Codex senza opt-in esplicito', () => {
+  process.env.GEMINI_API_KEY = 'gemini-test-key';
+  assert.equal(
+    getPreferredModel({ model: AI_MODELS.GEMINI_FLASH }),
+    AI_MODELS.GEMINI_FLASH,
+  );
+  assert.equal(
+    getPreferredModel({ model: AI_MODELS.GEMINI_FLASH, prefer: [CODEX] }),
+    CODEX,
+  );
+});
+
+test('callLLM non apre il broker per una chiamata default senza opt-in', async () => {
+  process.env.GEMINI_API_KEY = 'gemini-test-key';
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    candidates: [{ content: { parts: [{ text: 'DEFAULT FALLBACK' }] } }],
+  }), { status: 200 });
+  try {
+    assert.equal(
+      await callLLM(messages, {
+        model: AI_MODELS.GEMINI_FLASH,
+        maxRetriesPerModel: 1,
+      }),
+      'DEFAULT FALLBACK',
+    );
+    assert.equal(requests.length, 0, 'la chiamata default non deve consumare la socket Codex');
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});
+
 test('il kill-switch esistente esclude Codex senza cambiare la catena di ripiego', () => {
   process.env.GEMINI_API_KEY = 'gemini-test-key';
   process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '0';
