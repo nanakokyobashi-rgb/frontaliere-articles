@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3939708": "scontri-al-festival-turco-11-curdi-condannati-a-basilea",
   "https://www.rsi.ch/s/3940692": "grigioni-frontalieri-calano",
   "https://www.varesenews.it/2026/08/areu-cerca-30-assistenti-tecnici-opportunita-anche-per-la-centrale-del-112-di-varese/2654053": "areu-cerca-30-assistenti-tecnici",
   "https://www.laregione.ch/culture/locarno-film-festival/1942667/quale-presidente": "presidente-locarno-film-festival",
@@ -2124,6 +2123,11 @@
   "https://www.tio.ch/ticino/attualita/1955397/hub-innovation-intelligenza-chiasso-aziende": {
     "articleId": "lifestyle-innovation-hub-chiasso",
     "ts": "2026-10-07T21:45:04.207Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/incidente-in-autostrada-a8-tra-castronno-e-solbiate-viabilita-paralizzata/2701381": {
+    "articleId": "coda-a8-castronno-solbiate",
+    "ts": "2026-10-07T22:16:34.425Z",
     "keyForm": 2
   }
 }
