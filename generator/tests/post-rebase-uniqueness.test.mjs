@@ -26,13 +26,13 @@ import {
   OK_MARKER,
   VIOLATION_MARKER,
   findPostRebaseViolations,
+  main as checkPostRebaseMain,
   registryIdsOf,
   sectionSurfaces,
   slugIdsOf,
 } from '../../scripts/ci/check-post-rebase-uniqueness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const SCRIPT = path.resolve(HERE, '../../scripts/ci/check-post-rebase-uniqueness.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 
 const GIT_ENV = {
@@ -296,12 +296,13 @@ function commit(root, files, message) {
 }
 
 function runScript(cwd, ...args) {
-  try {
-    const out = execFileSync('node', [SCRIPT, ...args], { cwd, env: GIT_ENV, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-    return { code: 0, out };
-  } catch (err) {
-    return { code: err.status ?? 1, out: `${err.stdout ?? ''}${err.stderr ?? ''}` };
-  }
+  const output = [];
+  const code = checkPostRebaseMain(args, {
+    cwd,
+    log: (line) => output.push(String(line)),
+    error: (line) => output.push(String(line)),
+  });
+  return { code, out: output.join('\n') };
 }
 
 /**
