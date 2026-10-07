@@ -29,6 +29,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   CANTON_SOURCE_USER_AGENT,
+  CANTON_SOURCE_MAX_ATTEMPTS,
   MAX_INLINE_CRAWL_DELAY_SECONDS,
   SUPPORTED_CANTON_PARSERS,
   applyDatetimeYearOffset,
@@ -331,6 +332,97 @@ test('maxRequestsPerRun: il budget si applica anche alle sitemap a periodo', asy
   const { impl, calls } = fakeFetch({});
   await assert.rejects(scanCantonSource(source, ctx(impl, { now: new Date('2026-10-14T12:00:00Z') })), /HTTP 404/);
   assert.equal(calls.length, 1, 'una sola richiesta, anche se il periodo ne vorrebbe due');
+});
+
+test('errore transitorio della fonte: un retry bounded recupera la fonte senza superare il budget', async () => {
+  const source = { url: 'https://retry.example/news', parser: 'html-links' };
+  const body = '<html><body><a href="/news/1">Schaffhausen: nuove informazioni</a></body></html>';
+  let calls = 0;
+  const impl = async () => {
+    calls += 1;
+    if (calls === 1) throw new TypeError('fetch failed', { cause: { code: 'ECONNRESET' } });
+    const bytes = Buffer.from(body, 'utf8');
+    return {
+      ok: true,
+      status: 200,
+      headers: new Map([['content-type', 'text/html; charset=utf-8']]),
+      arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+    };
+  };
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(calls, 2);
+  assert.ok(out.headlines.length > 0);
+  assert.match(out.notes.join(' '), new RegExp(`retry fonte 2/${CANTON_SOURCE_MAX_ATTEMPTS}`));
+});
+
+test('guasti di connessione/raggiungibilità transitori: il codice annidato viene ritentato', async () => {
+  for (const code of ['ECONNREFUSED', 'ENETUNREACH', 'EHOSTUNREACH']) {
+    const source = { url: `https://${code.toLowerCase()}.example/news`, parser: 'html-links' };
+    let calls = 0;
+    const impl = async () => {
+      calls += 1;
+      if (calls === 1) throw new TypeError('fetch failed', { cause: { code } });
+      const bytes = Buffer.from('<html><body><a href="/news/1">Schaffhausen: nuove informazioni</a></body></html>', 'utf8');
+      return {
+        ok: true,
+        status: 200,
+        headers: new Map([['content-type', 'text/html; charset=utf-8']]),
+        arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+      };
+    };
+    const out = await scanCantonSource(source, ctx(impl));
+    assert.equal(calls, 2, code);
+    assert.ok(out.headlines.length > 0, code);
+  }
+});
+
+test('errore transitorio durante la lettura dello stream: il retry resta nel perimetro del trasporto', async () => {
+  const source = { url: 'https://stream-retry.example/news', parser: 'html-links' };
+  const body = '<html><body><a href="/news/1">Schaffhausen: nuove informazioni</a></body></html>';
+  let calls = 0;
+  const impl = async () => {
+    calls += 1;
+    if (calls === 1) {
+      return {
+        ok: true,
+        status: 200,
+        headers: new Map([['content-type', 'text/html; charset=utf-8']]),
+        arrayBuffer: async () => { throw new TypeError('terminated', { cause: { code: 'UND_ERR_SOCKET' } }); },
+      };
+    }
+    const bytes = Buffer.from(body, 'utf8');
+    return {
+      ok: true,
+      status: 200,
+      headers: new Map([['content-type', 'text/html; charset=utf-8']]),
+      arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+    };
+  };
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(calls, 2);
+  assert.ok(out.headlines.length > 0);
+});
+
+test('errore permanente della richiesta: URL/redirect non viene ritentato', async () => {
+  const source = { url: 'https://permanent-error.example/news', parser: 'html-links' };
+  let calls = 0;
+  const impl = async () => {
+    calls += 1;
+    throw new TypeError('Invalid URL', { cause: { code: 'ERR_INVALID_URL' } });
+  };
+  await assert.rejects(scanCantonSource(source, ctx(impl)), /Invalid URL/);
+  assert.equal(calls, 1);
+});
+
+test('retry transitorio: maxRequestsPerRun=1 resta fail-closed e non raddoppia la richiesta', async () => {
+  const source = { url: 'https://retry-once.example/news', parser: 'html-links', quirks: { maxRequestsPerRun: 1 } };
+  let calls = 0;
+  const impl = async () => {
+    calls += 1;
+    return { ok: false, status: 503, headers: new Map(), arrayBuffer: async () => new ArrayBuffer(0) };
+  };
+  await assert.rejects(scanCantonSource(source, ctx(impl)), /HTTP 503/);
+  assert.equal(calls, 1);
 });
 
 test('User-Agent dichiarato (D10) e niente HTTP/2 chiesto a undici (http1Only per costruzione)', async () => {
