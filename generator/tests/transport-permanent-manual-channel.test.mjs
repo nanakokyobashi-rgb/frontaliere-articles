@@ -286,6 +286,7 @@ test('i guard contano solo le PR di QUESTO repo, non quelle da un fork', () => {
   const guard = read('scripts/ci/transport-identical-twins-guard.mjs');
   assert.match(guard, /pr\?\.head\?\.repo\?\.full_name === repo/);
   assert.match(guard, /String\(pr\?\.head\?\.ref \|\| ''\)\.startsWith\('transport\/identical-twins'\)/);
+  assert.match(guard, /parseConvergedBullets/);
 
   // Questo consumer non e` ancora estratto e conserva la stessa prova inline.
   const harvester = read('.github/workflows/lessons-harvester.yml');

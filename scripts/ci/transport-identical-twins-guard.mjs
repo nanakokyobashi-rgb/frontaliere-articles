@@ -7,7 +7,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import { sha256, siteFile } from './loop-drift-check.mjs';
-import { parseTransportBullets } from './transport-realign-body.mjs';
+import { parseConvergedBullets, parseTransportBullets } from './transport-realign-body.mjs';
 import { transportPrDisposition } from './transport-identical-twins.mjs';
 
 const repo = process.env.REPO || process.env.GITHUB_REPOSITORY || '';
@@ -32,7 +32,12 @@ function sitePathFor(manifest, corpusPath) {
 }
 
 async function inspectPr(pr, manifest) {
-  const bullets = parseTransportBullets(pr.body || '');
+  const body = pr.body || '';
+  // Le righe `both-moved-converged` non appartengono al realign post-merge:
+  // riattestano solo la baseline. Prima di questo parser dedicato il guard le
+  // ignorava, quindi una PR solo-manifest restava `wait` anche se il sito
+  // avanzava dopo l'apertura.
+  const bullets = [...parseTransportBullets(body), ...parseConvergedBullets(body)];
   const registered = Object.fromEntries(bullets.map((bullet) => [bullet.path, bullet.siteHash]));
   const current = {};
   for (const bullet of bullets) {
