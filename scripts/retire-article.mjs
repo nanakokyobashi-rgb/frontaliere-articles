@@ -46,7 +46,7 @@
  */
 
 import '../host/cantonSectionsBootstrap.mjs';
-import { readFileSync, unlinkSync } from 'node:fs';
+import { readFileSync, unlinkSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -71,6 +71,7 @@ import { isNewFamilySection } from './lib/corpus-floors.mjs';
 import { coverKey } from '../engine/shared/imageCredits.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const RETIREMENT_JOURNAL = 'data/retirement-journal.json';
 
 const rel = (p) => path.join(ROOT, p);
 const read = (p) => readFileSync(rel(p), 'utf-8');
@@ -320,6 +321,85 @@ function findSection(id) {
   return found[0][0];
 }
 
+/**
+ * Restituisce una tombstone già scritta dal retirement precedente, se esiste.
+ *
+ * Il caso non è teorico: il resolver di rebase lavorava su registri append-only
+ * e, prima di conoscere le tombstone, poteva riesumare soltanto la riga di
+ * `routerBlogData.ts`/`blogArticleIds.ts`. In quel punto il registro principale
+ * è già pulito, quindi il comando normale non riesce a trovare l'articolo e
+ * non può completare l'operazione. La tombstone conserva però sezione e slug:
+ * sono sufficienti per riprendere in modo atomico le superfici residue.
+ */
+function validateRetirementEntry(entry, label) {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+    throw new Error(`${label} deve essere un oggetto completo`);
+  }
+  for (const field of ['id', 'section', 'winnerId', 'winnerSection', 'retiredOn']) {
+    if (typeof entry[field] !== 'string' || entry[field].trim() === '') {
+      throw new Error(`${label}.${field} deve essere una stringa non vuota`);
+    }
+  }
+  if (!isValidIsoDate(entry.retiredOn)) {
+    throw new Error(`${label}.retiredOn deve essere una data YYYY-MM-DD valida`);
+  }
+  if (!Array.isArray(entry.duplicateOf) || entry.duplicateOf.some((url) => typeof url !== 'string' || url.trim() === '')) {
+    throw new Error(`${label}.duplicateOf deve essere un array di stringhe`);
+  }
+  if (!entry.slugs || typeof entry.slugs !== 'object' || Array.isArray(entry.slugs)) {
+    throw new Error(`${label}.slugs deve essere un oggetto`);
+  }
+  for (const locale of LOCALES) {
+    if (typeof entry.slugs[locale] !== 'string' || entry.slugs[locale].trim() === '') {
+      throw new Error(`${label}.slugs.${locale} deve essere una stringa non vuota`);
+    }
+  }
+  if (entry.imageKey !== undefined && (typeof entry.imageKey !== 'string' || entry.imageKey.trim() === '')) {
+    throw new Error(`${label}.imageKey deve essere una stringa non vuota`);
+  }
+  return entry;
+}
+
+function isValidIsoDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+function retiredLedgerEntries() {
+  const ledgerPath = rel(RETIRED_LEDGER);
+  if (!assertRegularFileIfPresent(ROOT, RETIRED_LEDGER, 'ledger dei ritirati')) return [];
+  const ledger = JSON.parse(readFileSync(ledgerPath, 'utf-8'));
+  if (!Array.isArray(ledger.retired)) {
+    throw new Error(`${RETIRED_LEDGER}: "retired" deve essere un array`);
+  }
+  const ids = new Set();
+  return ledger.retired.map((entry, index) => {
+    const validated = validateRetirementEntry(entry, `${RETIRED_LEDGER}: retired[${index}]`);
+    if (ids.has(validated.id)) throw new Error(`${RETIRED_LEDGER}: '${validated.id}' compare più volte`);
+    ids.add(validated.id);
+    return validated;
+  });
+}
+
+function retiredEntryFor(id) {
+  return retiredLedgerEntries().find((entry) => entry.id === id) ?? null;
+}
+
+/** Un journal presente indica una transazione interrotta prima della tombstone. */
+function retirementJournalFor(id) {
+  const journalPath = rel(RETIREMENT_JOURNAL);
+  if (!assertRegularFileIfPresent(ROOT, RETIREMENT_JOURNAL, 'journal del retirement')) return null;
+  const journal = validateRetirementEntry(
+    JSON.parse(readFileSync(journalPath, 'utf-8')),
+    `${RETIREMENT_JOURNAL}: journal`,
+  );
+  if (journal.id !== id) {
+    throw new Error(`${RETIREMENT_JOURNAL}: transazione aperta per '${journal.id}', non per '${id}'`);
+  }
+  return journal;
+}
+
 function main() {
   const argv = process.argv.slice(2);
   const id = argv.find((a) => !a.startsWith('--'));
@@ -335,7 +415,17 @@ function main() {
     process.exit(2);
   }
 
-  const section = findSection(id);
+  let section;
+  let priorRetirement = retirementJournalFor(id);
+  try {
+    section = findSection(id);
+  } catch (error) {
+    if (!String(error?.message).includes('non è in nessuno dei due registri')) throw error;
+    if (!priorRetirement) priorRetirement = retiredEntryFor(id);
+    if (!priorRetirement || !SECTIONS[priorRetirement.section]) throw error;
+    section = priorRetirement.section;
+    console.warn(`'${id}' non è più nel registro: riprendo il retirement parziale dalla tombstone`);
+  }
   const cfg = SECTIONS[section];
   // Missing registry/slug/meta surfaces must stop before any retirement
   // planning can become a partial write. Keep this preflight before the
@@ -343,6 +433,12 @@ function main() {
   // real retirement, not merely avoid persisting an already-invalid plan.
   requiredWritableSurfaceFilesFor(section);
   const winnerSection = findSection(winner); // esiste? altrimenti throw: mai ritirare verso il nulla
+  if (priorRetirement?.section && priorRetirement.section !== section) {
+    throw new Error(`'${id}' ha una transazione aperta per la sezione '${priorRetirement.section}', non '${section}'`);
+  }
+  if (priorRetirement?.winnerId && priorRetirement.winnerId !== winner) {
+    throw new Error(`'${id}' è già ritirato verso '${priorRetirement.winnerId}', non verso '${winner}'`);
+  }
   console.log(`ritiro '${id}' (${section}) → vincitore '${winner}' (${winnerSection})${dryRun ? '  [DRY RUN]' : ''}`);
 
   /** @type {Array<{file: string, what: string, kept?: boolean}>} */
@@ -355,9 +451,19 @@ function main() {
   // 1. slug map — PRIMA di tutto: è l'unico posto da cui gli slug localizzati
   //    sono ancora leggibili, e servono al ledger dei ritirati.
   const slugRow = removeSlugRow(cfg.slugDataFile, id);
-  if (!slugRow.changed) throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
-  let slugDataSrc = slugRow.src;
-  planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugRow.slugs[l]).join(', ')})` });
+  let slugDataSrc;
+  let slugs;
+  if (slugRow.changed) {
+    slugDataSrc = slugRow.src;
+    slugs = slugRow.slugs;
+    planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugs[l]).join(', ')})` });
+  } else if (priorRetirement?.slugs) {
+    slugs = priorRetirement.slugs;
+    slugDataSrc = read(cfg.slugDataFile);
+    planned.push({ file: cfg.slugDataFile, what: 'mappa slug già priva della tombstone' });
+  } else {
+    throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
+  }
 
   // La provenienza vive accanto alla mappa slug e deve uscire nello stesso
   // buffer, altrimenti build-api.mjs la pubblica come residuo fantasma dopo
@@ -411,9 +517,14 @@ function main() {
 
   // 2. registro di sezione
   const reg = removeRegistryEntry(cfg.registryFile, id);
-  if (!reg.changed) throw new Error(`${cfg.registryFile}: nessun blocco per '${id}'`);
-  queueWriteTarget(writes, cfg.registryFile, reg.src, 'registro di sezione');
-  planned.push({ file: cfg.registryFile, what: 'blocco di registro' });
+  if (reg.changed) {
+    queueWriteTarget(writes, cfg.registryFile, reg.src, 'registro di sezione');
+    planned.push({ file: cfg.registryFile, what: 'blocco di registro' });
+  } else if (!priorRetirement) {
+    throw new Error(`${cfg.registryFile}: nessun blocco per '${id}'`);
+  } else {
+    planned.push({ file: cfg.registryFile, what: 'registro già privo della tombstone' });
+  }
 
   // 3. meta per locale
   for (const metaFile of cfg.metaFiles) {
@@ -452,7 +563,7 @@ function main() {
   const led = sourceLedgerPresent
     ? removeJsonByValue(cfg.sourceLedger, id)
     : { changed: false, hits: [], text: null };
-  let retiredSourceUrls = [];
+  let retiredSourceUrls = Array.isArray(priorRetirement?.duplicateOf) ? priorRetirement.duplicateOf : [];
   if (led.changed) {
     retiredSourceUrls = led.hits;
     queueWriteTarget(writes, cfg.sourceLedger, led.text, 'ledger URL');
@@ -483,7 +594,7 @@ function main() {
   //     copertina, miniatura, credito (P14) e voce di catalogo descrivono il
   //     file, non l'articolo, e servono all'articolo che resta.
   const retiredBlock = registryBlocks(cfg.registryFile).find((b) => b.id === id);
-  const ownKey = coverKey(retiredBlock && registryImage(retiredBlock.block)) ?? id;
+  const ownKey = priorRetirement?.imageKey ?? coverKey(retiredBlock && registryImage(retiredBlock.block)) ?? id;
   const inUse = coverKeysInUse(id);
   /** @type {string[]} */
   const removableCovers = [];
@@ -526,11 +637,25 @@ function main() {
     'target da scrivere (ledger ritirati)',
   );
   const retiredLedgerDirectory = path.dirname(RETIRED_LEDGER);
+  const retirementJournalPresent = assertRegularFileIfPresent(
+    ROOT,
+    RETIREMENT_JOURNAL,
+    'target da scrivere (journal del retirement)',
+  );
+  const retirementJournalDirectory = path.dirname(RETIREMENT_JOURNAL);
   requireWritableDirectory(
     ROOT,
     retiredLedgerDirectory,
     'directory padre del ledger ritirati',
   );
+  requireWritableDirectory(
+    ROOT,
+    retirementJournalDirectory,
+    'directory padre del journal del retirement',
+  );
+  if (retirementJournalPresent) {
+    requireWritableRegularFile(ROOT, RETIREMENT_JOURNAL, 'target da scrivere (journal del retirement)');
+  }
   const ledgerPath = rel(RETIRED_LEDGER);
   const ledger = retiredLedgerPresent
     ? JSON.parse(readFileSync(ledgerPath, 'utf-8'))
@@ -541,11 +666,23 @@ function main() {
     section,
     winnerId: winner,
     winnerSection,
-    retiredOn: new Date().toISOString().slice(0, 10),
+    retiredOn: priorRetirement?.retiredOn ?? new Date().toISOString().slice(0, 10),
     duplicateOf: retiredSourceUrls,
-    slugs: slugRow.slugs,
+    slugs,
   });
   ledger.retired.sort((a, b) => a.id.localeCompare(b.id));
+  const journalPath = rel(RETIREMENT_JOURNAL);
+  const journal = {
+    _doc: 'Transazione di recovery per scripts/retire-article.mjs; si elimina a verifica completata.',
+    id,
+    section,
+    winnerId: winner,
+    winnerSection,
+    retiredOn: priorRetirement?.retiredOn ?? new Date().toISOString().slice(0, 10),
+    duplicateOf: retiredSourceUrls,
+    slugs,
+    imageKey: ownKey,
+  };
 
   for (const p of planned) console.log(`   - ${p.file}  (${p.what})`);
 
@@ -562,12 +699,24 @@ function main() {
     retiredLedgerDirectory,
     'directory padre del ledger ritirati',
   );
+  requireWritableDirectory(
+    ROOT,
+    retirementJournalDirectory,
+    'directory padre del journal del retirement',
+  );
+  if (retirementJournalPresent) {
+    requireWritableRegularFile(ROOT, RETIREMENT_JOURNAL, 'target da scrivere (journal del retirement)');
+  }
 
   if (dryRun) {
     console.log('\n[DRY RUN] niente scritto.');
     return;
   }
 
+  // Il journal e' il primo commit atomico: se il processo muore in uno dei
+  // write/delete successivi, la prossima invocazione sa quale retirement
+  // riprendere anche quando la tombstone non e' ancora stata scritta.
+  writeJsonAtomic(journalPath, journal);
   for (const [file, text] of writes) write(file, text);
   for (const file of deletes) unlinkSync(rel(file));
 
@@ -594,6 +743,7 @@ function main() {
     }
     process.exit(1);
   }
+  if (existsSync(journalPath)) unlinkSync(journalPath);
   console.log(`\nfatto: '${id}' rimosso da ${planned.filter((p) => !p.kept).length} superfici, slug preservati in ${RETIRED_LEDGER}.`);
 }
 

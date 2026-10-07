@@ -459,13 +459,37 @@ test('la predicate dei target delete distingue assenza, inode non regolare e fil
 
 test('retire-article fa il preflight delle superfici obbligatorie prima di ogni write', () => {
   const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8');
-  const sectionAt = src.indexOf('const section = findSection(id);');
+  const sectionAt = src.indexOf('section = findSection(id);');
   const preflightAt = src.indexOf('requiredWritableSurfaceFilesFor(section);');
   const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
   const dryRunAt = src.indexOf('if (dryRun)');
   assert.ok(sectionAt >= 0 && preflightAt > sectionAt, 'il preflight deve seguire la risoluzione della sezione');
   assert.ok(preflightAt < firstWriteAt, 'le superfici mancanti devono fallire prima delle scritture');
   assert.ok(preflightAt < dryRunAt, 'anche --dry-run deve validare le superfici obbligatorie');
+});
+
+test('retire-article può riprendere una rimozione parziale dalla tombstone', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  assert.match(src, /const RETIREMENT_JOURNAL = 'data\/retirement-journal\.json'/);
+  assert.match(src, /function retirementJournalFor\(/);
+  assert.match(src, /function retiredEntryFor\(/);
+  assert.match(src, /priorRetirement = retiredEntryFor\(id\)/);
+  assert.match(src, /priorRetirement\?\.slugs/);
+  assert.match(src, /priorRetirement\?\.winnerId/);
+  assert.match(src, /registro già privo della tombstone/);
+  assert.match(src, /priorRetirement\?\.retiredOn/);
+});
+
+test('retire-article apre il journal prima delle superfici e lo chiude solo dopo la verifica', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  const journalAt = src.indexOf('writeJsonAtomic(journalPath, journal);');
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const cleanupAt = src.indexOf('if (existsSync(journalPath)) unlinkSync(journalPath);');
+  const finalCheckAt = src.indexOf('const leftovers = [];');
+  assert.ok(journalAt >= 0 && journalAt < firstWriteAt, 'il journal deve essere il primo write atomico');
+  assert.ok(cleanupAt > finalCheckAt, 'il journal non si può eliminare prima del controllo finale');
+  assert.match(src, /if \(!priorRetirement\) priorRetirement = retiredEntryFor\(id\)/);
+  assert.match(src, /imageKey: ownKey/);
 });
 
 test('retire-article valida i target opzionali prima di accodare i write', () => {
