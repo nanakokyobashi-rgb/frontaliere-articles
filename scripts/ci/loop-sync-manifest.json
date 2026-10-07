@@ -3332,10 +3332,11 @@
     {
       "path": "generator/scripts/lib/translation-glossary.mjs",
       "sitePath": "scripts/lib/translation-glossary.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "La copia trasportata dal sito resta la base comune, ma la review della PR corpus #2418 ha corretto qui due confini della mascheratura Markdown: la parentesi quadra della label resta scansionabile e il fallback delle destinazioni con parentesi annidate cerca URL opachi fino a fine riga. Il sito non contiene ancora questi due hunk, quindi dichiarare il file `identical` o attribuirgli la stessa baseline fabbricherebbe una ghost-baseline; torna `identical` quando la fix risale al sito e viene ritrasportata byte per byte.",
       "baseline": {
         "site": "0fed92ef6205331a",
-        "corpus": "0fed92ef6205331a",
+        "corpus": "929b82dea6a7dfb4",
         "alignedAt": "2026-10-07"
       }
     },
