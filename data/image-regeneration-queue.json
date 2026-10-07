@@ -459,6 +459,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T11:07:36.355Z",
       "lastFailureAt": "2026-10-07T11:07:36.355Z"
+    },
+    {
+      "articleId": "detrazioni-figli-basel",
+      "title": "Basilea Città: detrazioni figli quattro volte più alte",
+      "fallbackImage": "/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp",
+      "reason": "All image providers failed for article-detrazioni-figli-basel: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T11:11:39.965Z",
+      "lastFailureAt": "2026-10-07T11:11:39.965Z"
     }
   ]
 }
