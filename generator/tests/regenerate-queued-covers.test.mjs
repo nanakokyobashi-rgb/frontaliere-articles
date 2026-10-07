@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   GENERATED_IMAGE_CREDIT,
@@ -370,13 +371,95 @@ test('il merge del registro in rebase conserva l ordine upstream e non perde un 
     schema: 1,
     assets: [
       { assetId: 'article-new', version: 'local' },
-      { assetId: 'article-old', version: 'local' },
+      { assetId: 'article-old', version: 'local-new-cover' },
     ],
   };
   const merged = mergeGeneratedImageRegistries(upstream, replayed);
   assert.deepEqual(merged.assets.map((record) => record.assetId), ['lugano-view', 'article-old', 'article-new']);
-  assert.equal(merged.assets[1].version, 'local');
+  assert.equal(merged.assets[1].version, 'local-new-cover');
   assert.equal(merged.assetCount, 3);
+});
+
+function workflowConcurrencyGroups(source) {
+  const lines = source.split('\n');
+  const groups = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const concurrency = /^(\s*)concurrency:\s*$/.exec(lines[index]);
+    if (!concurrency) continue;
+
+    const baseIndent = concurrency[1].length;
+    let job = null;
+    if (baseIndent > 0) {
+      for (let previous = index - 1; previous >= 0; previous -= 1) {
+        const candidate = /^( {2})([A-Za-z0-9_-]+):\s*$/.exec(lines[previous]);
+        if (candidate) {
+          job = candidate[2];
+          break;
+        }
+      }
+    }
+
+    for (let next = index + 1; next < lines.length; next += 1) {
+      if (lines[next].trim() === '') continue;
+      const indent = lines[next].match(/^\s*/u)[0].length;
+      if (indent <= baseIndent) break;
+      const group = new RegExp(`^ {${baseIndent + 2}}group:\\s*(.+)$`).exec(lines[next]);
+      if (group) {
+        groups.push({job, value: group[1].trim(), line: next + 1});
+        break;
+      }
+    }
+  }
+
+  return groups;
+}
+
+test('il gruppo generate-article resta confinato ai writer ammessi', () => {
+  const workflowsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.github/workflows');
+  const declarations = [];
+
+  for (const filename of fs.readdirSync(workflowsDir).filter((entry) => entry.endsWith('.yml') || entry.endsWith('.yaml'))) {
+    const source = fs.readFileSync(path.join(workflowsDir, filename), 'utf8');
+    for (const group of workflowConcurrencyGroups(source)) {
+      if (group.value.includes('generate-article')) {
+        declarations.push({filename, ...group});
+      }
+    }
+  }
+
+  const unexpected = declarations.filter(({filename, job, value}) => !(
+    (filename === 'generate-article.yml' && job === 'generate' && value.includes('generate-article'))
+    || (filename === 'publish-journalist-articles.yml' && job === null && value === 'generate-article')
+  ));
+  assert.deepEqual(unexpected, []);
+
+  assert.ok(declarations.some(({filename, job}) => filename === 'generate-article.yml' && job === 'generate'));
+  assert.ok(declarations.some(({filename, job}) => filename === 'publish-journalist-articles.yml' && job === null));
+
+  const drainSource = fs.readFileSync(path.join(workflowsDir, 'regenerate-queued-covers.yml'), 'utf8');
+  const drainGroup = workflowConcurrencyGroups(drainSource).find(({value}) => value.includes('regenerate-queued-covers'));
+  assert.equal(drainGroup?.value, 'regenerate-queued-covers');
+  assert.match(drainSource, /cancel-in-progress:\s*false/);
+});
+
+test('i writer concorrenti non possono riscrivere un articolo gia\' registrato', () => {
+  const createArticle = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  const registerStart = createArticle.indexOf('export async function registerArticleFiles');
+  const registerEnd = createArticle.indexOf('\nexport function checkArticleIdExists', registerStart);
+  assert.ok(registerStart >= 0 && registerEnd > registerStart);
+  const registerBody = createArticle.slice(registerStart, registerEnd);
+  assert.match(registerBody, /resolveRegisterLockAtStartup\(\);[\s\S]*if \(checkArticleIdExists\(data\.id\)\)/);
+
+  const journalist = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf8');
+  const processStart = journalist.indexOf('async function processDoc(');
+  const processEnd = journalist.indexOf('\nasync function ', processStart + 1);
+  assert.ok(processStart >= 0 && processEnd > processStart);
+  const processBody = journalist.slice(processStart, processEnd);
+  const duplicateGuard = processBody.indexOf('checkArticleIdExists(data.id)');
+  const coverResolution = processBody.indexOf('resolveHeroImage(data, doc)');
+  assert.ok(duplicateGuard >= 0 && duplicateGuard < coverResolution,
+    'il publisher deve rifiutare l id gia registrato prima di poter scegliere o scrivere una copertina');
 });
 
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {

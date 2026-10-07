@@ -603,20 +603,24 @@ test('il conflitto della coda copertine unisce gli item per articleId', () => {
   const w = makeWorld();
   try {
     const base = queueItem('article-base', 'base', '2026-10-07T00:01:00.000Z');
-    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([base]));
+    const baseStillQueued = queueItem('article-still-queued', 'base', '2026-10-07T00:01:30.000Z');
+    const upstreamStillQueued = { ...baseStillQueued, reason: 'upstream-update', lastFailureAt: '2026-10-07T00:02:00.000Z' };
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([base, baseStillQueued]));
     commitAll(w.work, 'seed the cover regeneration queue');
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
 
-    const upstreamBase = { ...base, reason: 'upstream', lastFailureAt: '2026-10-07T00:02:00.000Z' };
     landUpstream(w, [[
       IMAGE_REGENERATION_QUEUE,
-      queueDocument([upstreamBase, queueItem('article-upstream', 'upstream', '2026-10-07T00:03:00.000Z')]),
-      'concurrent run queues its failed cover',
+      queueDocument([base, upstreamStillQueued, queueItem('article-upstream', 'upstream', '2026-10-07T00:03:00.000Z')]),
+      'concurrent run adds a new cover request',
     ]]);
 
-    const replayedBase = { ...base, reason: 'replayed', lastFailureAt: '2026-10-07T00:04:00.000Z' };
+    // This is the drain commit: article-base was successfully smaltita and
+    // removed, while another item remains queued. The concurrent producer was
+    // based on the old queue, so its copy of article-base must not resurrect it.
+    const replayedStillQueued = { ...baseStillQueued, reason: 'drain-retry', lastFailureAt: '2026-10-07T00:04:00.000Z' };
     write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([
-      replayedBase,
+      replayedStillQueued,
       queueItem('article-replayed', 'replayed', '2026-10-07T00:05:00.000Z'),
     ]));
     write(w.work, 'content/blog-body/it/articolo-con-coda.ts', 'export const cover = true\n');
@@ -626,9 +630,10 @@ test('il conflitto della coda copertine unisce gli item per articleId', () => {
     assert.equal(code, 0, `la coda deve fondersi, non abortire il rebase. Output:\n${out}`);
     const merged = JSON.parse(git(w.work, 'show', `HEAD:${IMAGE_REGENERATION_QUEUE}`));
     assert.deepEqual(merged.items.map((item) => item.articleId), [
-      'article-base', 'article-upstream', 'article-replayed',
+      'article-still-queued', 'article-upstream', 'article-replayed',
     ]);
-    assert.equal(merged.items.find((item) => item.articleId === 'article-base').reason, 'replayed');
+    assert.equal(merged.items.some((item) => item.articleId === 'article-base'), false);
+    assert.equal(merged.items.find((item) => item.articleId === 'article-still-queued').reason, 'drain-retry');
     assert.equal(new Set(merged.items.map((item) => item.articleId)).size, 3);
     assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-con-coda.ts')));
   } finally {
@@ -664,9 +669,23 @@ test('il publisher journalist usa lo stesso rebase queue-aware', () => {
   const workflow = readFileSync(JOURNALIST_WORKFLOW, 'utf8');
   assert.match(
     workflow,
-    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
   );
+  assert.match(workflow, /registry_snapshot/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs/);
+  assert.match(workflow, /--section-surfaces/);
+  assert.match(workflow, /--take-theirs content\/image-credits\/blog\//);
+  assert.match(workflow, /--take-theirs public\/images\/blog\//);
   assert.doesNotMatch(workflow, /git pull --rebase "\$REMOTE" "\$TARGET"/);
+});
+
+test('generate-article conserva il registry generato quando rebasea con il drain', () => {
+  const workflow = readFileSync(WORKFLOW, 'utf8');
+  const parsed = parseHelperArgs(workflow);
+  assert.ok(parsed.bookkeeping.includes('data/generated-image-registry.json'));
+  assert.ok(parsed.queues.includes('data/image-regeneration-queue.json'));
+  assert.match(workflow, /registry_snapshot/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs/);
 });
 
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
