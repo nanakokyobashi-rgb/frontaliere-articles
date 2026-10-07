@@ -4079,9 +4079,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "914d98fbe777fb1b",
-        "corpus": "914d98fbe777fb1b",
-        "alignedAt": "2026-10-05"
+        "site": "7ef1f5c685e1955e",
+        "corpus": "7ef1f5c685e1955e",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4139,9 +4139,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e806a05d5b559e92",
-        "corpus": "e806a05d5b559e92",
-        "alignedAt": "2026-10-05"
+        "site": "1b2f64e1ba00b020",
+        "corpus": "1b2f64e1ba00b020",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -4250,9 +4250,9 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "67134f0f415d5083",
-        "corpus": "67134f0f415d5083",
-        "alignedAt": "2026-10-06"
+        "site": "50efb68fbc745868",
+        "corpus": "50efb68fbc745868",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -5471,6 +5471,16 @@
         "site": null,
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/ci/check-registration-locks.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard CI dei lock di registrazione runner-locali: segnala con sezione e runId un marker cantonale o di sezione rimasto nel workspace. Il sito non esegue i producer del corpus e non ha un gemello da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
       }
     }
   ]

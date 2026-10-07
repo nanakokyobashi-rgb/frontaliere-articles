@@ -45,12 +45,12 @@
  * the one already there.
  *
  * A foreign marker being deferred is NOT the split going unnoticed: it stays
- * on disk, tracked, and is fatal for the section that owns it on its very
- * next run.
+ * on disk in the runner workspace and is fatal for the section that owns it on
+ * its very next run.
  *
  * `pid` alone never identified a marker: it does not survive the process, so
- * on a later run — or in a fresh checkout, which is how a committed marker is
- * always seen again — it names some unrelated process or nothing at all.
+ * on a later invocation — or in a fresh checkout, which must not receive a
+ * runner-local marker — it names some unrelated process or nothing at all.
  * `GITHUB_RUN_ID`/`GITHUB_RUN_ATTEMPT` do survive: they point at the run whose
  * logs explain what interrupted the registration, which is the one thing a
  * human repairing the corpus by hand actually needs.
@@ -59,23 +59,22 @@ import { readFileSync, existsSync, unlinkSync } from 'node:fs';
 import path from 'node:path';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
 
-// Deliberately NOT under `.tmp/`, which is gitignored. A run killed mid-write
-// leaves its partial writes on disk, and `generate-article.yml` sweeps them
-// into a commit with `git add -A` — a lock under `.tmp/` would be the one
-// piece of that evidence NOT committed, so the next run (a fresh checkout)
-// would inherit the split corpus with nothing left to detect it. Tracked here,
-// the registration-in-progress marker travels with the damage it describes.
+// Deliberately under generator/data rather than `.tmp/`, so a run can inspect
+// the marker beside the corpus while it is alive. The filename is gitignored:
+// it is runner-local state and must never travel into a producer commit. The
+// CI guard detects a forced/legacy marker in a checkout with an attributable
+// section and run id instead of allowing a generic gate failure.
 export const REGISTER_LOCK_DIR = 'generator/data';
 
-// The single-file marker used before #965. Still read (a marker committed by a
-// run started before this change is exactly the case the lock exists for), and
-// resolved by the section RECORDED INSIDE IT; never written again.
+// The single-file marker used before #965. Still read (a marker written by a
+// run started before this change may remain in a workspace), and resolved by
+// the section RECORDED INSIDE IT; never written again.
 export const LEGACY_REGISTER_LOCK_FILE = `${REGISTER_LOCK_DIR}/register-in-progress.json`;
 
 // The section becomes part of a filename, so it is constrained to the shape the
 // two section names actually have rather than merely "non-empty": a value with
 // a separator in it would write the marker outside `generator/data/`, where
-// `git add -A` would not sweep it into the commit that carries the damage.
+// the lock guard would otherwise be unable to attribute it to a valid section.
 const SECTION_RE = /^[a-z0-9][a-z0-9-]*$/;
 
 /**

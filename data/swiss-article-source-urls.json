@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/attualita/1948255/pride-lgbtq-comunita-belgrado-diritti-manifestazione-anni-serbia-lgbt": {
-    "articleId": "pride-belgrado-25-anni",
-    "ts": "2026-09-05T19:13:22.339Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948225/ho-visto-la-pista-dal-finestrino-pensavo-ci-schiantassimo": {
     "articleId": "volo-easyjet-valencia-ginevra",
     "ts": "2026-09-05T20:47:35.725Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1955269/svizzera-titoli-mercati-rendimenti-rialzo": {
     "articleId": "rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0",
     "ts": "2026-10-07T12:04:11.230Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/bns%3a-riserve-di-divise-sono-rimaste-stabili-in-settembre/92180848": {
+    "articleId": "riserve-valutarie-settembre-stabili",
+    "ts": "2026-10-07T12:36:56.807Z",
     "keyForm": 2
   }
 }

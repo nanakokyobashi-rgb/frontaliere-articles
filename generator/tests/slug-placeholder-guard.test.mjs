@@ -93,6 +93,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
 import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
+import {
+  findArticleIdentityServiceMarkers,
+  findPublishedIdentityServiceMarkers,
+  isReservedPublishedSlug,
+} from '../../scripts/lib/published-slug-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -141,12 +146,17 @@ function loadGuard() {
     // esplode su un nome non definito invece che sui segnaposto (#798).
     sliceFn('function localizedTitleSlugCandidate(localizedTitle) {'),
     sliceFn('export function relocalizeSlugsAfterTranslation(data, opts = {}) {'),
+    // Il guard sui marker di servizio e' condiviso fra validate() e il writer
+    // secondario: includerlo nella sandbox mantiene il test agganciato al
+    // percorso reale invece di sostituirlo con una copia.
+    sliceFn('function assertNoArticleIdentityServiceMarkers(data, { qualityReject = false } = {}) {'),
     sliceFn('export function deriveAndSanitizeArticleSlugs(data) {'),
   ]
     .join('\n\n')
     .replace(/^export /gm, '');
   return new Function(
     'console',
+    'findArticleIdentityServiceMarkers',
     'truncateSlugAtWordBoundary',
     'metaFieldPlausibilityMiss',
     'sectionLocaleSlugTaken',
@@ -173,6 +183,7 @@ function freshGuard() {
   // article-slug-i18n.test.mjs.
   const sandbox = loadGuard()(
     fakeConsole,
+    findArticleIdentityServiceMarkers,
     truncateSlugAtWordBoundary,
     // Importato dal suo modulo, non ricopiato (AGENTS.md #6): e' il floor che
     // `localizedTitleSlugCandidate` somma al classificatore.
@@ -262,6 +273,43 @@ test('inspect: gli slug veri non si muovono', () => {
   }
 });
 
+test('il classificatore del topic gate distingue i marker di servizio dagli slug veri', () => {
+  assert.deepEqual(
+    findPublishedIdentityServiceMarkers('abort-topical-relevance-pre-saint-didier'),
+    ['abort', 'topical-relevance', 'abort_topical_relevance'],
+  );
+  assert.deepEqual(findPublishedIdentityServiceMarkers('abort_saint-nicolas-non-frontaliero'), ['abort']);
+  assert.deepEqual(findPublishedIdentityServiceMarkers('news-reason-for-rejection'), ['reason']);
+  assert.deepEqual(findPublishedIdentityServiceMarkers('reason-for-moving-to-ticino'), []);
+  assert.deepEqual(findPublishedIdentityServiceMarkers('reason'), ['reason']);
+  for (const slug of [
+    'reason-for-moving-to-ticino',
+    'news-abort-policy',
+    'aborted-canton-health',
+    'reasonable-tax-guide',
+    'topical-relevant-ticino',
+  ]) {
+    assert.deepEqual(findPublishedIdentityServiceMarkers(slug), [], `falso positivo su ${slug}`);
+    assert.equal(isReservedPublishedSlug(slug), false, `lo slug legittimo ${slug} e' stato riservato`);
+  }
+  assert.equal(isReservedPublishedSlug('news-reason-for-rejection'), true);
+  assert.equal(isReservedPublishedSlug('abort-topical-relevance-pre-saint-didier'), true);
+});
+
+test('il writer ripete il guard sull\'identita\' finale prima del lock', () => {
+  const primaryBoundary = src.indexOf('data.canton = registryCantonsOrNone(data, url);');
+  const primaryGuard = src.indexOf('assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });', primaryBoundary);
+  const primaryLock = src.indexOf('beginRegisterLock(data.id);', primaryBoundary);
+  assert.ok(primaryBoundary >= 0, 'confine di scrittura primario non trovato');
+  assert.ok(primaryGuard > primaryBoundary && primaryGuard < primaryLock, 'guard finale assente prima del lock primario');
+
+  const secondaryDerive = src.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);');
+  const secondaryGuard = src.indexOf('assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });', secondaryDerive);
+  const secondaryLock = src.indexOf('beginRegisterLock(data.id);', secondaryDerive);
+  assert.ok(secondaryDerive >= 0, 'derivazione secondaria non trovata');
+  assert.ok(secondaryGuard > secondaryDerive && secondaryGuard < secondaryLock, 'guard finale assente dopo la derivazione secondaria');
+});
+
 // ── L'enforcement al punto di scrittura condiviso ──────────────────────────
 
 const IT_TITLE = 'Terzo pilastro 3a: i vantaggi fiscali nel Canton Lucerna';
@@ -304,6 +352,34 @@ test('derive: un id vero passa e lo slug IT resta agganciato all\'id', () => {
     de: 'saeule-3a-luzern',
     fr: 'pilier-3a-lucerne',
   });
+});
+
+test('derive: un marker di servizio nell\'identita\' blocca la scrittura', () => {
+  const dataWithBadId = { ...articleFixture({}), id: 'abort-topical-relevance-invalid' };
+  const dataWithBadSlug = {
+    ...articleFixture({}),
+    slugs: { it: 'articolo-valido', en: 'abort-topical-relevance-invalid' },
+  };
+  for (const data of [dataWithBadId, dataWithBadSlug]) {
+    assert.throws(
+      () => freshGuard().deriveAndSanitizeArticleSlugs(data),
+      /article-service-marker/,
+    );
+  }
+});
+
+test('derive: un marker derivato dal titolo tradotto blocca la scrittura', () => {
+  const data = articleFixture({
+    it: 'terzo-pilastro-3a-canton-lucerna',
+    en: 'terzo-pilastro-3a-canton-lucerna',
+    de: 'saeule-3a-luzern',
+    fr: 'pilier-3a-lucerne',
+  });
+  data.content.en.title = 'Abort topical relevance: source rejected';
+  assert.throws(
+    () => freshGuard().deriveAndSanitizeArticleSlugs(data),
+    /article-service-marker/,
+  );
 });
 
 test('derive: il resto del segnaposto vince sul titolo — il modello uno slug lo aveva prodotto', () => {
@@ -517,4 +593,24 @@ test('registro: il classificatore non tocca i 15.000 slug veri gia\' pubblicati'
     }
   }
   assert.ok(unchanged > 14000, `verificati solo ${unchanged} slug`);
+});
+
+test('registro: nessun id o slug pubblicato contiene marker del topic gate', () => {
+  const findings = [];
+  for (const registry of REGISTRIES) {
+    for (const { id, perLocale } of readRegistry(registry)) {
+      for (const finding of findArticleIdentityServiceMarkers({ id, slugs: perLocale })) {
+        findings.push(
+          `${registry.section}|${id}|${finding.field}${finding.locale ? `.${finding.locale}` : ''}="${finding.value}" (${finding.marker})`,
+        );
+      }
+    }
+  }
+  assert.deepEqual(
+    findings,
+    [],
+    'un verdetto di servizio del topic gate è arrivato nell’identità pubblica; ' +
+      'un abort deve interrompere la registrazione, non diventare un articolo:\n' +
+      findings.map((finding) => `  ${finding}`).join('\n'),
+  );
 });
