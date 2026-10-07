@@ -11,6 +11,7 @@ import {
   reviewIsApproved,
   latestBotReviewOnHead,
   reviewGateEvidenceDecision,
+  transportIdenticalRoutingDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
   REVIEW_GATE_STEP_NAMES,
@@ -67,6 +68,76 @@ test('accetta solo review approvante e check verde sulla HEAD', () => {
     pr: pr(),
     reviews: [review(CLEAN_BODY)],
     checkRuns: [check({ conclusion: 'failure' })],
+  }).allow, false);
+});
+
+const transportRedReview = () => ({
+  ...review('## Findings (Important: 1, Nit: 0)\n\n`same.mjs:L1`: 🔴 Important: difetto già instradato.\n\n## LGTM', HEAD),
+  id: 77,
+});
+
+const transportDisposition = {
+  transport: true,
+  transportedFiles: ['same.mjs'],
+};
+
+const transportEvidence = {
+  version: 1,
+  headSha: HEAD,
+  reviewId: '77',
+  transportPr: true,
+  transportException: true,
+  allOpenFindingIds: ['finding-1'],
+  routedFindingIds: ['finding-1'],
+  routed: [{
+    findingId: 'finding-1',
+    corpusPath: 'same.mjs',
+    sitePath: 'packages/same.mjs',
+    issueUrl: 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/77',
+  }],
+};
+
+test('consente solo il trasporto identical attestato, mantenendo il check verde obbligatorio', () => {
+  const red = transportRedReview();
+  const decision = evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [red],
+    checkRuns: [check()],
+    reviewGateEvidence: {
+      transportRouting: { evidence: transportEvidence, disposition: transportDisposition },
+    },
+  });
+  assert.equal(decision.allow, true, decision.reason);
+  assert.match(decision.reason, /transport-identical-routed-findings/u);
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [red],
+    checkRuns: [check({ conclusion: 'failure' })],
+    reviewGateEvidence: {
+      transportRouting: { evidence: transportEvidence, disposition: transportDisposition },
+    },
+  }).allow, false);
+  assert.equal(transportIdenticalRoutingDecision({
+    pr: pr(), review: red, evidence: transportEvidence, transportPr: transportDisposition,
+  }).allow, true);
+});
+
+test('un trasporto non attestato o fuori perimetro resta rosso come ogni altra PR', () => {
+  const red = transportRedReview();
+  assertDenied(transportIdenticalRoutingDecision({
+    pr: pr(), review: red, evidence: transportEvidence,
+    transportPr: { transport: false, transportedFiles: ['same.mjs'] },
+  }), /PR non attestata/);
+  assertDenied(transportIdenticalRoutingDecision({
+    pr: pr(), review: red,
+    evidence: {
+      ...transportEvidence,
+      routed: [{ ...transportEvidence.routed[0], issueUrl: 'https://github.com/corpus/repo/issues/77' }],
+    },
+    transportPr: transportDisposition,
+  }), /perimetro o issue URL/);
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr(), reviews: [red], checkRuns: [check()],
   }).allow, false);
 });
 

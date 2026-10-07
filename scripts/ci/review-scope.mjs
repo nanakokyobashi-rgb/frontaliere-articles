@@ -21,6 +21,7 @@ import {
   classifyIdenticalFindings,
   routeIdenticalFindings,
 } from './lib/identical-review-routing.mjs';
+import { isIdenticalTwinTransportPr } from './lib/transport-pr.mjs';
 import {
   changedLinesFromPatch,
   stableFindingId,
@@ -554,6 +555,29 @@ function readIdenticalManifest() {
   return JSON.parse(source);
 }
 
+function transportPrContext(repo, pr, files, filesComplete, manifest) {
+  if (filesComplete !== true) {
+    return { transport: false, transportedFiles: [], reason: 'elenco file PR non completo' };
+  }
+  try {
+    const metadata = gh(['api', `repos/${repo}/pulls/${pr}`]);
+    return isIdenticalTwinTransportPr({
+      pr: metadata,
+      repository: repo,
+      files,
+      filesComplete,
+      manifest,
+    });
+  } catch (error) {
+    return {
+      transport: false,
+      transportedFiles: [],
+      reason: `metadata PR trasporto non leggibile (${String(error).slice(0, 120)})`,
+    };
+  }
+}
+
+
 function withSiteIssueCreator(siteRepo, siteToken) {
   if (!siteRepo) throw new Error('SITE_REPO obbligatorio per il routing identical');
   if (!siteToken) throw new Error('SITE_TOKEN/GITHUB_PAT assente: routing identical fail-closed');
@@ -610,23 +634,27 @@ function blockIdenticalRouting(result, { candidates, allIdentical, reason }) {
       handoffConfirmed: false,
       reason,
     },
+    transportException: false,
   };
 }
 
 /**
  * Instrada i finding esclusivamente identical prima del calcolo del follow-up.
- * Un finding identical resta bloccante sia prima sia dopo l'handoff: il
- * commento/issue sul sito è una traccia operativa, non una soluzione che
- * autorizza il merge del corpus.
+ * Per le PR normali un finding identical resta bloccante sia prima sia dopo
+ * l'handoff: il commento/issue sul sito è una traccia operativa. L'unica
+ * eccezione è l'attestazione completa del canale transport-identical-twins,
+ * consumata poi dal gate nativo.
  */
 export function applyRoutedIdenticalResult(result, routing) {
   const routedIds = new Set(routing?.routedFindingIds || []);
+  const transportException = routing?.transportException === true;
   if (routedIds.size === 0) {
     return {
       ...result,
       identicalOnly: false,
       identicalBlockingFindingIds: [],
       identicalRouting: routing,
+      transportException: false,
     };
   }
   const keep = (finding) => !routedIds.has(findingIdentity(finding));
@@ -640,27 +668,43 @@ export function applyRoutedIdenticalResult(result, routing) {
     unresolved,
     bodyOnly: false,
     outsideOnly: false,
-    blocking: true,
+    blocking: !transportException,
     identicalOnly: routing.allIdentical,
-    identicalBlockingFindingIds: [...routedIds],
+    identicalBlockingFindingIds: transportException ? [] : [...routedIds],
     identicalRouting: { ...routing, handoffConfirmed: true },
+    transportException,
   };
 }
 
-async function applyIdenticalRouting(result, { repo, pr, prUrl, mutate } = {}) {
+export async function applyIdenticalRouting(result, {
+  repo,
+  pr,
+  prUrl,
+  mutate,
+  headSha = null,
+  reviewId = null,
+} = {}) {
   const declassified = new Set([
     ...(result.staleBodyDeclassified || []).map(findingIdentity),
     ...(result.staleDeclassified || []).map(findingIdentity),
   ]);
-  const openFindings = (result.findings || []).filter((finding) => !declassified.has(findingIdentity(finding)));
+  const classifiedFindings = [
+    ...(result.outside || []),
+    ...(result.inScope || []),
+  ].filter((finding) => !declassified.has(findingIdentity(finding)));
+  const openFindings = [
+    ...classifiedFindings,
+    ...(result.unresolved || []),
+  ].filter((finding) => !declassified.has(findingIdentity(finding)));
   const manifest = readIdenticalManifest();
-  const candidates = classifyIdenticalFindings(openFindings, manifest);
+  const candidates = classifyIdenticalFindings(classifiedFindings, manifest);
   if (candidates.length === 0) {
     return {
       ...result,
       identicalOnly: false,
       identicalBlockingFindingIds: [],
       identicalRouting: null,
+      transportException: false,
     };
   }
   const candidateFindingIds = new Set(candidates.map((item) => item.findingId));
@@ -676,8 +720,16 @@ async function applyIdenticalRouting(result, { repo, pr, prUrl, mutate } = {}) {
         : 'SITE_TOKEN/GITHUB_PAT assente: handoff identical non verificabile');
     return blockIdenticalRouting(result, { candidates, allIdentical, reason });
   }
+  const transportPr = transportPrContext(
+    repo,
+    pr,
+    result.changedFiles || [],
+    result.changedFilesComplete,
+    manifest,
+  );
   const routing = await routeIdenticalFindings({
-    findings: openFindings,
+    findings: classifiedFindings,
+    allFindings: openFindings,
     manifest,
     repo,
     pr,
@@ -685,6 +737,9 @@ async function applyIdenticalRouting(result, { repo, pr, prUrl, mutate } = {}) {
     createIssue: withSiteIssueCreator(siteRepo, siteToken),
     commentPr: (body, options) => commentIdenticalRouting(repo, pr, body, options),
     mutate: true,
+    transportPr,
+    headSha: headSha || resolveHeadSha(repo, pr),
+    reviewId,
   });
   if ((routing.routedFindingIds || []).length === 0) {
     return blockIdenticalRouting(result, {
@@ -1149,6 +1204,7 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  */
 export async function classifyAndMintReview(body, {
   repo, pr, prUrl, mutate = true, headSha = null,
+  reviewId = null,
   priorFindingIds = null, changedLinesSince = null,
   // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
   // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
@@ -1216,7 +1272,14 @@ export async function classifyAndMintReview(body, {
       changedFilesComplete: changed.complete,
       diffReason: reason,
     };
-    const routedResult = await applyIdenticalRouting(diffResult, { repo, pr, prUrl, mutate });
+    const routedResult = await applyIdenticalRouting(diffResult, {
+      repo,
+      pr,
+      prUrl,
+      mutate,
+      headSha: headSha || resolveHeadSha(repo, pr),
+      reviewId,
+    });
     if (routedResult.identicalRouting?.routed?.length) {
       console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
     }
@@ -1244,7 +1307,14 @@ export async function classifyAndMintReview(body, {
   for (const finding of result.staleDeclassified ?? []) {
     console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; il gate resta fail-closed, [regression] segnala esplicitamente la classe`);
   }
-  const routedResult = await applyIdenticalRouting(result, { repo, pr, prUrl, mutate });
+  const routedResult = await applyIdenticalRouting(result, {
+    repo,
+    pr,
+    prUrl,
+    mutate,
+    headSha: headSha || resolveHeadSha(repo, pr),
+    reviewId,
+  });
   if (routedResult.identicalRouting?.routed?.length) {
     console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
   }
@@ -1296,6 +1366,7 @@ if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
       identicalOnly: result.identicalOnly === true,
       identicalBlockingFindingIds: result.identicalBlockingFindingIds || [],
       identicalRouting: result.identicalRouting || null,
+      transportException: result.transportException === true,
       minted: result.minted,
       followup: result.followup || null,
     })}\n`);

@@ -7,12 +7,18 @@
  * adottato dal ciclo.
  */
 import { identicalPaths, identicalSitePaths } from './identical-paths.mjs';
+import {
+  TRANSPORT_EXCEPTION_PHRASE,
+  identicalRoutingCommentMarker,
+  transportRoutingEvidence,
+  transportRoutingEvidenceMarker,
+} from './transport-pr.mjs';
 
 export const IDENTICAL_REVIEW_TITLE = (sitePath) =>
   `gemello identical: rilievi della review del corpus su ${sitePath}`;
 
 function findingPaths(finding) {
-  const paths = Array.isArray(finding?.resolvedFiles) && finding.resolvedFiles.length
+  const paths = Object.hasOwn(finding || {}, 'resolvedFiles') && Array.isArray(finding.resolvedFiles)
     ? finding.resolvedFiles
     : (Array.isArray(finding?.citations) ? finding.citations.map((citation) => citation?.path) : []);
   return [...new Set(paths.filter((value) => typeof value === 'string' && value.length > 0))];
@@ -42,11 +48,15 @@ export function classifyIdenticalFindings(findings, manifest) {
   return out;
 }
 
-function routeKey(items) {
-  return [...new Set(items.map((item) => `${item.sitePath}:${item.findingId}`))].sort().join('|');
-}
-
-function issueDescription({ repo, pr, prUrl, sitePath, items }) {
+function issueDescription({
+  repo,
+  pr,
+  prUrl,
+  sitePath,
+  items,
+  transportPr = false,
+  transportException = false,
+}) {
   const lines = [
     'Diagnosi instradata automaticamente dal fixer del corpus: il rilievo riguarda un file `mode: identical` e va corretto nel sito.',
     '',
@@ -59,17 +69,47 @@ function issueDescription({ repo, pr, prUrl, sitePath, items }) {
     lines.push(`- **Path corpus:** \`${item.corpusPath}\``);
     lines.push(`  **Finding:** ${String(item.finding?.text || '').trim()}`);
   }
-  lines.push('', 'Il rilievo resta aperto sulla PR del corpus: questo instradamento non modifica il gate e non autorizza il merge.', '');
+  if (transportException) {
+    lines.push('', `${TRANSPORT_EXCEPTION_PHRASE}.`, '');
+  } else if (transportPr) {
+    lines.push('', 'Il rilievo resta aperto sulla PR del corpus: il trasporto resta bloccato finché ogni rilievo aperto non è instradato con una issue del sito.', '');
+  } else {
+    lines.push('', 'Il rilievo resta aperto sulla PR del corpus: questo instradamento non modifica il gate e non autorizza il merge.', '');
+  }
   return lines.join('\n');
 }
 
-function commentBody({ repo, pr, prUrl, routed, allIdentical }) {
-  const marker = `<!-- IDENTICAL_REVIEW_ROUTING: ${routeKey(routed)} -->`;
+function commentBody({
+  repo,
+  pr,
+  prUrl,
+  routed,
+  allIdentical,
+  transportPr = false,
+  transportException = false,
+  headSha = '',
+  reviewId = null,
+  allOpenFindingIds = [],
+}) {
+  const marker = identicalRoutingCommentMarker({ routed, headSha });
+  const evidence = transportRoutingEvidence({
+    headSha,
+    reviewId,
+    transportPr,
+    transportException,
+    allOpenFindingIds,
+    routed,
+  });
   const lines = [
     marker,
+    transportRoutingEvidenceMarker(evidence),
     '📤 **Rilievi su gemelli `identical` instradati al sito**',
     '',
-    'Questi rilievi restano aperti sulla PR del corpus; il fixer non li applica qui e nessun gate è stato abbassato.',
+    transportException
+      ? `Questi rilievi restano aperti sulla PR del corpus; il fixer non li applica qui. ${TRANSPORT_EXCEPTION_PHRASE}.`
+      : transportPr
+        ? 'Questi rilievi restano aperti sulla PR del corpus; il fixer non li applica qui e il trasporto resta bloccato finché ogni rilievo aperto non è instradato.'
+        : 'Questi rilievi restano aperti sulla PR del corpus; il fixer non li applica qui e nessun gate è stato abbassato.',
     '',
   ];
   for (const item of routed) {
@@ -78,6 +118,7 @@ function commentBody({ repo, pr, prUrl, routed, allIdentical }) {
   if (allIdentical) {
     lines.push('', 'Tutti i rilievi aperti sono su gemelli `identical`: il giro del fixer viene saltato e non consuma quota né round.');
   }
+  if (transportException) lines.push('', TRANSPORT_EXCEPTION_PHRASE);
   lines.push('', `Origine: [PR #${pr}](${prUrl || `https://github.com/${repo}/pull/${pr}`})`);
   return lines.join('\n');
 }
@@ -88,6 +129,7 @@ function commentBody({ repo, pr, prUrl, routed, allIdentical }) {
  */
 export async function routeIdenticalFindings({
   findings,
+  allFindings = findings,
   manifest,
   repo,
   pr,
@@ -95,13 +137,47 @@ export async function routeIdenticalFindings({
   createIssue,
   commentPr = null,
   mutate = true,
+  transportPr = null,
+  headSha = '',
+  reviewId = null,
 } = {}) {
   if (typeof createIssue !== 'function') throw new TypeError('createIssue deve essere una funzione');
   const candidates = classifyIdenticalFindings(findings, manifest);
   const uniqueFindings = [...new Set(candidates.map((item) => item.findingId))];
-  const allIdentical = Array.isArray(findings) && findings.length > 0 && uniqueFindings.length === findings.length;
+  const considered = Array.isArray(allFindings) ? allFindings : findings;
+  const allOpenFindingIds = [...new Set(considered.map((finding) => (
+    finding?.stableId || finding?.id || finding?.lineNumber || finding?.text
+  )).filter((id) => id !== undefined && id !== null).map(String))];
+  const allIdentical = allOpenFindingIds.length > 0
+    && uniqueFindings.length === allOpenFindingIds.length;
+  const transported = new Set(transportPr?.transportedFiles || []);
+  const candidatesByFinding = new Map();
+  for (const item of candidates) {
+    const group = candidatesByFinding.get(item.findingId) || [];
+    group.push(item);
+    candidatesByFinding.set(item.findingId, group);
+  }
+  const transportPrRecognized = transportPr?.transport === true;
+  const transportEligibleFindingIds = new Set(
+    [...candidatesByFinding.entries()]
+      .filter(([, items]) => transportPrRecognized
+        && items.every((item) => transported.has(item.corpusPath)))
+      .map(([findingId]) => findingId),
+  );
+  const transportExceptionCandidate = transportPrRecognized
+    && allIdentical
+    && allOpenFindingIds.every((findingId) => transportEligibleFindingIds.has(findingId));
   if (!mutate || candidates.length === 0) {
-    return { candidates, routed: [], routedFindingIds: [], allIdentical };
+    return {
+      candidates,
+      routed: [],
+      routedFindingIds: [],
+      allIdentical,
+      transportPr: transportPrRecognized,
+      transportException: false,
+      transportRoutedFindingIds: [],
+      allOpenFindingIds,
+    };
   }
 
   const bySite = new Map();
@@ -114,7 +190,15 @@ export async function routeIdenticalFindings({
   for (const [sitePath, items] of bySite) {
     const issue = await createIssue({
       title: IDENTICAL_REVIEW_TITLE(sitePath),
-      description: issueDescription({ repo, pr, prUrl, sitePath, items }),
+      description: issueDescription({
+        repo,
+        pr,
+        prUrl,
+        sitePath,
+        items,
+        transportPr: transportPrRecognized,
+        transportException: transportExceptionCandidate,
+      }),
       priority: 2,
       labels: [],
       exactTitle: true,
@@ -123,15 +207,40 @@ export async function routeIdenticalFindings({
     if (!issue || issue.persisted !== true) {
       throw new Error(`routing identical non persistito per ${sitePath}`);
     }
+    if (transportExceptionCandidate && !issue.url) {
+      throw new Error(`routing identical senza URL issue per ${sitePath}`);
+    }
     for (const item of items) routed.push({ ...item, issueNumber: issue.number, issueUrl: issue.url });
   }
+  const routedFindingIds = [...new Set(routed.map((item) => item.findingId))];
+  const transportRoutedFindingIds = routedFindingIds.filter((findingId) =>
+    transportEligibleFindingIds.has(findingId)
+      && routed.filter((item) => item.findingId === findingId).every((item) => item.issueUrl));
+  const transportException = transportExceptionCandidate
+    && transportRoutedFindingIds.length === allOpenFindingIds.length
+    && allOpenFindingIds.every((findingId) => transportRoutedFindingIds.includes(findingId));
   if (typeof commentPr === 'function') {
-    await commentPr(commentBody({ repo, pr, prUrl, routed, allIdentical }), { marker: `<!-- IDENTICAL_REVIEW_ROUTING: ${routeKey(routed)} -->` });
+    await commentPr(commentBody({
+      repo,
+      pr,
+      prUrl,
+      routed,
+      allIdentical,
+      transportPr: transportPrRecognized,
+      transportException,
+      headSha,
+      reviewId,
+      allOpenFindingIds,
+    }), { marker: identicalRoutingCommentMarker({ routed, headSha }) });
   }
   return {
     candidates,
     routed,
-    routedFindingIds: [...new Set(routed.map((item) => item.findingId))],
+    routedFindingIds,
     allIdentical,
+    transportPr: transportPrRecognized,
+    transportException,
+    transportRoutedFindingIds,
+    allOpenFindingIds,
   };
 }

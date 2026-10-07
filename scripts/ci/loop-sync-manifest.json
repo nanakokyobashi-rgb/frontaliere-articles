@@ -4458,7 +4458,7 @@
       "reason": "Lista trusted dei moduli che lo step `Bootstrap trusted review gate from main` di `.github/workflows/tests.yml` scarica accanto al gate. Esiste perche' QUI il gate gira da una directory ISOLATA popolata a mano: finche' la lista viveva nello YAML, una PR aperta prima che un modulo entrasse nel grafo scaricava l'entrypoint nuovo dalla punta di main con la lista vecchia e il gate moriva con ERR_MODULE_NOT_FOUND (misurato sulla #1599). Il sito non ha questo bootstrap — il suo review gate gira dal checkout — quindi non c'e' un gemello da portare. Il guard che la tiene uguale al grafo reale degli import e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "647d949766eb7807",
+        "corpus": "50df4445838c5f02",
         "alignedAt": "2026-10-07"
       }
     },
@@ -5489,7 +5489,7 @@
       "reason": "Politica del fixer corpus che instrada i finding esclusivamente `identical` verso issue del sito usando il writer deduplicante esistente. Il sito riceve la diagnosi via HTTP e non possiede questo consumer del review-scope corpus.",
       "baseline": {
         "site": null,
-        "corpus": "06e256f329240255",
+        "corpus": "139b6a262cf6d226",
         "alignedAt": "2026-10-07"
       }
     },
@@ -5519,7 +5519,7 @@
       "reason": "Guard del trasporto corpus che confronta gli hash del sito registrati nelle PR aperte con lo stato corrente: conserva una PR invariata e chiude/commenta quella superata prima di aprirne una nuova. Il trasporto non ha un consumer gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "e17186a237343c5a",
+        "corpus": "f3afeebadb24e522",
         "alignedAt": "2026-10-07"
       }
     },
@@ -5529,7 +5529,7 @@
       "reason": "Osservatori `node:test` dell'issue #2400: manifest reale, ripristino git, hook, routing deduplicato, guard puro del trasporto e forma dei tre workflow. Sono test del ciclo CI del corpus e non hanno gemello da pubblicare via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "2c268e17f667e41f",
+        "corpus": "5780d27d6c309576",
         "alignedAt": "2026-10-07"
       }
     },

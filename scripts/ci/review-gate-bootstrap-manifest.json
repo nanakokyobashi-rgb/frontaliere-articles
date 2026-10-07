@@ -15,6 +15,7 @@
     "scripts/ci/lib/identical-paths.mjs",
     "scripts/ci/lib/constants.mjs",
     "scripts/ci/lib/fetchPrFiles.mjs",
+    "scripts/ci/lib/transport-pr.mjs",
     "scripts/ci/lib/gh-rate-limit.mjs",
     "scripts/ci/lib/vitestCheck.mjs",
     "scripts/ci/lib/mergePreviewCheck.mjs",

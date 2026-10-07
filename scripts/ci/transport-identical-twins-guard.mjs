@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import { sha256, siteFile } from './loop-drift-check.mjs';
 import { parseConvergedBullets, parseTransportBullets } from './transport-realign-body.mjs';
 import { transportPrDisposition } from './transport-identical-twins.mjs';
+import { isIdenticalTwinTransportPr } from './lib/transport-pr.mjs';
 
 const repo = process.env.REPO || process.env.GITHUB_REPOSITORY || '';
 const siteRepo = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
@@ -18,11 +19,29 @@ function gh(args, { json = true } = {}) {
   const output = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return json ? JSON.parse(output) : output;
 }
-function openTransportPrs() {
+function pullRequestFiles(number) {
+  const raw = gh(['api', 'repos/' + repo + '/pulls/' + number + '/files', '--paginate', '--jq', '.[].filename'], { json: false });
+  return String(raw || '').split(/\r?\n/u).map((line) => line.trim()).filter(Boolean);
+}
+
+function openTransportPrs(manifest) {
   const pages = gh(['api', '--paginate', '--slurp', `repos/${repo}/pulls?state=open&per_page=100`]);
-  return (Array.isArray(pages) ? pages.flat() : [])
+  const candidates = (Array.isArray(pages) ? pages.flat() : [])
     .filter((pr) => pr?.head?.repo?.full_name === repo)
-    .filter((pr) => String(pr?.head?.ref || '').startsWith('transport/identical-twins'));
+    .filter((pr) => /^transport\/identical-twins-\d+$/u.test(String(pr?.head?.ref || '')));
+  return candidates
+    .map((pr) => {
+      const files = pullRequestFiles(pr.number);
+      const disposition = isIdenticalTwinTransportPr({
+        pr,
+        repository: repo,
+        files,
+        filesComplete: true,
+        manifest,
+      });
+      return disposition.transport ? { ...pr, transportDisposition: disposition } : null;
+    })
+    .filter(Boolean);
 }
 
 function sitePathFor(manifest, corpusPath) {
@@ -68,7 +87,7 @@ async function inspectPr(pr, manifest) {
 async function main() {
   if (!repo) throw new Error('REPO obbligatorio');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  const prs = openTransportPrs();
+  const prs = openTransportPrs(manifest);
   const inspected = [];
   for (const pr of prs) inspected.push(await inspectPr(pr, manifest));
   if (inspected.some((item) => item.state === 'unknown')) {

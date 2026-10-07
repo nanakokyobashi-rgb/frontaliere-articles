@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {
+  applyIdenticalRouting,
   classifyImportantFindings,
   followupIssueBody,
   importantFindings,
@@ -17,6 +18,7 @@ import {
   hasFalsifiableAcceptance,
   splitFollowupItems,
 } from '../../scripts/ci/followup-resolution-match.mjs';
+import { routeIdenticalFindings } from '../../scripts/ci/lib/identical-review-routing.mjs';
 
 test('legge il verdetto: Important: 0 non è un finding', () => {
   const body = [
@@ -544,9 +546,54 @@ test('un finding su un gemello identical resta bloccante senza handoff verificab
   assert.equal(result.outsideOnly, false);
   assert.equal(result.blocking, true);
   assert.equal(result.identicalOnly, false);
-  assert.equal(result.identicalBlockingFindingIds.length, 1);
-  assert.equal(result.identicalRouting.blocked, true);
+  assert.deepEqual(result.identicalBlockingFindingIds, []);
+  assert.equal(result.identicalRouting, null);
+});
+
+test('una citazione basename viene risolta al path manifest e resta nel routing, non nel fixer', async () => {
+  const raw = {
+    stableId: 'basename-review-findings',
+    lineNumber: 655,
+    text: '`review-findings.mjs:L655`: 🔴 Important: il perimetro non è verificato.',
+    citations: [{ path: 'review-findings.mjs', line: 655 }],
+  };
+  const resolved = {
+    ...raw,
+    resolvedFiles: ['scripts/ci/lib/review-findings.mjs'],
+  };
+  const result = await applyIdenticalRouting({
+    findings: [raw],
+    outside: [resolved],
+    inScope: [],
+    unresolved: [],
+    staleBodyDeclassified: [],
+    staleDeclassified: [],
+    changedFiles: ['generator/scripts/trigger.mjs'],
+    changedFilesComplete: false,
+    blocking: true,
+  }, { repo: 'corpus/repo', pr: 2404, mutate: false });
+  assert.equal(result.blocking, true);
+  assert.equal(result.identicalRouting.candidates.length, 1);
+  assert.equal(result.identicalRouting.candidates[0].corpusPath, 'scripts/ci/lib/review-findings.mjs');
   assert.match(result.identicalRouting.reason, /routing identical disabilitato/u);
+  const routed = await routeIdenticalFindings({
+    findings: [resolved],
+    manifest: {
+      files: [{
+        path: 'scripts/ci/lib/review-findings.mjs',
+        mode: 'identical',
+        sitePath: 'scripts/ci/lib/review-findings.mjs',
+      }],
+    },
+    repo: 'corpus/repo',
+    pr: 2404,
+    createIssue: async () => ({
+      persisted: true,
+      number: 655,
+      url: 'https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/655',
+    }),
+  });
+  assert.equal(routed.routed[0].corpusPath, 'scripts/ci/lib/review-findings.mjs');
 });
 
 test('una follow-up chiusa non viene riaperta né riempita di nuovo', { concurrency: false }, async () => {

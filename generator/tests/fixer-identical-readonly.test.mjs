@@ -11,6 +11,7 @@ import { installIdenticalCommitHook, IDENTICAL_COMMIT_MESSAGE } from '../../scri
 import { restoreIdenticalPaths } from '../../scripts/ci/restore-identical-paths.mjs';
 import { registeredTransportHashes } from '../../scripts/ci/transport-identical-twins-guard.mjs';
 import { transportPrDisposition } from '../../scripts/ci/transport-identical-twins.mjs';
+import { isIdenticalTwinTransportPr, TRANSPORT_EXCEPTION_PHRASE } from '../../scripts/ci/lib/transport-pr.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -142,6 +143,77 @@ test('il routing usa un titolo stabile/deduplicante e segnala il salto all-ident
   });
   assert.equal(mixed.allIdentical, false);
   assert.equal(mixed.routed.length, 0);
+
+  const transport = {
+    transport: true,
+    transportedFiles: ['same.mjs'],
+  };
+  const transported = await routeIdenticalFindings({
+    findings: [finding], allFindings: [finding], manifest, repo: 'corpus/repo', pr: 12,
+    prUrl: 'https://github.com/corpus/repo/pull/12', createIssue, commentPr,
+    transportPr: transport, headSha: 'a'.repeat(40), reviewId: 101,
+  });
+  assert.equal(transported.transportException, true);
+  assert.ok(commentBodies.at(-1).includes(TRANSPORT_EXCEPTION_PHRASE));
+  assert.match(commentBodies.at(-1), /IDENTICAL_REVIEW_ROUTING_EVIDENCE/u);
+  const nonIdenticalOpen = await routeIdenticalFindings({
+    findings: [finding],
+    allFindings: [finding, { stableId: 'finding-2', text: 'adapted', resolvedFiles: ['adapted.mjs'] }],
+    manifest,
+    repo: 'corpus/repo',
+    pr: 12,
+    createIssue,
+    transportPr: transport,
+  });
+  assert.equal(nonIdenticalOpen.transportException, false);
+  await assert.rejects(() => routeIdenticalFindings({
+    findings: [finding],
+    manifest,
+    repo: 'corpus/repo',
+    pr: 12,
+    createIssue: async () => ({ persisted: false }),
+    transportPr: transport,
+  }), /routing identical non persistito/u);
+});
+
+test('il predicato del trasporto lega autore, branch, manifest e perimetro dei file', () => {
+  const manifest = fixtureManifest();
+  const pr = {
+    author: { login: 'nanakokyobashi-rgb' },
+    headRefName: 'transport/identical-twins-123',
+    baseRefName: 'main',
+    headRepository: { nameWithOwner: 'corpus/repo' },
+  };
+  const valid = isIdenticalTwinTransportPr({
+    pr,
+    repository: 'corpus/repo',
+    files: ['same.mjs', 'scripts/ci/loop-sync-manifest.json'],
+    filesComplete: true,
+    manifest,
+  });
+  assert.equal(valid.transport, true);
+  assert.deepEqual(valid.transportedFiles, ['same.mjs']);
+  assert.equal(isIdenticalTwinTransportPr({
+    pr,
+    repository: 'corpus/repo',
+    files: ['same.mjs', 'scripts/ci/loop-sync-manifest.json', 'adapted.mjs'],
+    filesComplete: true,
+    manifest,
+  }).transport, false);
+  assert.equal(isIdenticalTwinTransportPr({
+    pr: { ...pr, author: { login: 'valerielinc-ops' } },
+    repository: 'corpus/repo',
+    files: ['same.mjs', 'scripts/ci/loop-sync-manifest.json'],
+    filesComplete: true,
+    manifest,
+  }).transport, false);
+  assert.equal(isIdenticalTwinTransportPr({
+    pr,
+    repository: 'corpus/repo',
+    files: ['scripts/ci/loop-sync-manifest.json'],
+    filesComplete: true,
+    manifest,
+  }).transport, false);
 });
 
 test('il guard del trasporto distingue PR superata e PR ancora da attendere', () => {
