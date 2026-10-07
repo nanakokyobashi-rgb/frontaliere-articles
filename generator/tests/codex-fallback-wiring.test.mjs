@@ -150,7 +150,7 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
 // Il broker parte dopo Argos bulk e prima della 2b. L'artifact arriva dal
 // lockstep del sito, quindi il test segue la capacità del broker, non una
 // copia storica della posizione del tier.
-test('translate-pending: broker dopo Argos e Codex primario in 2b/2d/2e', () => {
+test('translate-pending: broker dopo Argos e Codex primario in 2a.2/2b/2d/2e', () => {
   const source = read(TRANSLATION_WORKFLOW);
   const lines = source.split('\n');
   const setupIndex = lines.findIndex((line) => /^\s*-?\s*uses:\s*\.\/\.github\/actions\/setup-claude-haiku-fallback\s*$/.test(line));
@@ -169,10 +169,19 @@ test('translate-pending: broker dopo Argos e Codex primario in 2b/2d/2e', () => 
   const consumers = lines
     .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? stepBlock(lines, index) : null)
     .filter((block) => block && !block.includes('- name: Cleanup Codex auth broker'));
+  // La corsia titoli 2a.2 (dopo Argos bulk, prima della 2b) riceve il socket
+  // dal lockstep del sito successivo alla PR 12158; l'artifact precedente non
+  // la elenca. Entrambe le forme sono valide, nessun'altra fase lo e'.
+  const TITLE_LANE_2A2 = 'Phase 2a.2: Fix untranslated titles (free cascade, before descriptions)';
+  const consumerNames = consumers.map((block) => /- name: "?([^"\n]+)"?/.exec(block)?.[1]);
   assert.deepEqual(
-    consumers.map((block) => /- name: "?([^"\n]+)"?/.exec(block)?.[1]),
+    consumerNames.filter((name) => name !== TITLE_LANE_2A2),
     ['Phase 2b: Translate pending jobs (cascade top-up)', 'Phase 2d: Fix untranslated titles (free cascade)', 'Phase 2e: Fix untranslated descriptions (free cascade)'],
-    'only the 2b/2d/2e translation phases may receive the Codex socket',
+    'only the 2a.2/2b/2d/2e translation phases may receive the Codex socket',
+  );
+  assert.ok(
+    consumerNames.indexOf(TITLE_LANE_2A2) <= 0,
+    'the 2a.2 title lane, when it receives the Codex socket, comes before the 2b cascade',
   );
   const hasWorkflowCallBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS_REPO:/.test(source)
     && /printf ['"]FREE_TRANSLATE_CODEX_MAX_CALLS=%s/.test(source)

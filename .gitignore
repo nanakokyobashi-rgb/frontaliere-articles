@@ -59,3 +59,4 @@ public/images/events/*
 # The legacy marker and every section-scoped marker (including canton-*) must
 # never be swept into a producer commit made with `git add -A`.
 generator/data/register-in-progress*.json
+generator/data/register-in-progress*.json.*.tmp
