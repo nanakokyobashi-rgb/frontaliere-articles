@@ -4458,8 +4458,8 @@
       "reason": "Lista trusted dei moduli che lo step `Bootstrap trusted review gate from main` di `.github/workflows/tests.yml` scarica accanto al gate. Esiste perche' QUI il gate gira da una directory ISOLATA popolata a mano: finche' la lista viveva nello YAML, una PR aperta prima che un modulo entrasse nel grafo scaricava l'entrypoint nuovo dalla punta di main con la lista vecchia e il gate moriva con ERR_MODULE_NOT_FOUND (misurato sulla #1599). Il sito non ha questo bootstrap — il suo review gate gira dal checkout — quindi non c'e' un gemello da portare. Il guard che la tiene uguale al grafo reale degli import e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.",
       "baseline": {
         "site": null,
-        "corpus": "bf234e32a74af385",
-        "alignedAt": "2026-09-20"
+        "corpus": "5869fc3c5b55c8d6",
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -5471,6 +5471,66 @@
         "site": null,
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/identical-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Modulo puro che deriva dal manifest l'insieme dei path `mode: identical` e li partiziona prima della scrittura. Il fixer del corpus lo materializza dal commit trusted di `main`; il sito non usa questo workflow-side consumer e non esiste un gemello HTTP da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "363457142ea03fa0",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/identical-review-routing.mjs",
+      "mode": "corpus-only",
+      "reason": "Politica del fixer corpus che instrada i finding esclusivamente `identical` verso issue del sito usando il writer deduplicante esistente. Il sito riceve la diagnosi via HTTP e non possiede questo consumer del review-scope corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "c564d7da402bb8c7",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/fixer-identical-hook.mjs",
+      "mode": "corpus-only",
+      "reason": "Hook pre-commit trusted dei fixer corpus: rifiuta un commit che stagia un path `mode: identical`, con il messaggio operativo che la correzione si fa nel sito. Il sito ha un ciclo di fixer adattato diverso e non usa questo hook.",
+      "baseline": {
+        "site": null,
+        "corpus": "8a6ef2f96e256458",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/restore-identical-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "Barriera deterministica post-agente del fixer corpus: ripristina i soli path `identical` toccati rispetto alla baseline del round, crea un commit aggiuntivo senza force-push e lascia intatti gli altri file.",
+      "baseline": {
+        "site": null,
+        "corpus": "240e90d52c2756b6",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-identical-twins-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard del trasporto corpus che confronta gli hash del sito registrati nelle PR aperte con lo stato corrente: conserva una PR invariata e chiude/commenta quella superata prima di aprirne una nuova. Il trasporto non ha un consumer gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "0d0382f52823e7bd",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/tests/fixer-identical-readonly.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservatori `node:test` dell'issue #2400: manifest reale, ripristino git, hook, routing deduplicato, guard puro del trasporto e forma dei tre workflow. Sono test del ciclo CI del corpus e non hanno gemello da pubblicare via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "2c42563e54607beb",
+        "alignedAt": "2026-10-07"
       }
     }
   ]

@@ -234,6 +234,30 @@ const MAX_FAILURE_RATIO = parseRatio(process.env.TRANSPORT_MAX_FAILURE_RATIO, 0.
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
 
 /**
+ * Decisione pura per il guard «una PR di trasporto alla volta».
+ *
+ * `registeredHashes` sono gli hash del sito registrati nel body della PR,
+ * indicizzati dal path del corpus; `currentHashes` sono gli stessi hash riletti
+ * dal sito. Un'alterazione rende la PR vecchia e quindi sostituibile, mentre
+ * l'uguaglianza conserva il comportamento seriale esistente.
+ */
+export function transportPrDisposition({ openPr = true, registeredHashes = {}, currentHashes = {} } = {}) {
+  if (!openPr) return { state: 'none', changed: [] };
+  const registered = registeredHashes instanceof Map
+    ? Object.fromEntries(registeredHashes)
+    : (registeredHashes || {});
+  const current = currentHashes instanceof Map
+    ? Object.fromEntries(currentHashes)
+    : (currentHashes || {});
+  const changed = Object.keys(registered)
+    .filter((rel) => typeof current[rel] === 'string' && current[rel] !== registered[rel])
+    .sort();
+  return changed.length
+    ? { state: 'superseded', changed }
+    : { state: 'wait', changed: [] };
+}
+
+/**
  * Un path del manifest è un dato, e un dato che diventa una destinazione di
  * scrittura va trattato come non fidato: `..`, path assoluto o separatore
  * Windows farebbero uscire la copia dal checkout. È l'unico punto dello script

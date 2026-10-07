@@ -462,9 +462,40 @@ jobs:
             echo "available=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          trusted_root="$RUNNER_TEMP/fixer-identical"
+          mkdir -p "$trusted_root/scripts/ci/lib"
+          identical_available=true
+          if ! git show "$trusted_sha:scripts/ci/loop-sync-manifest.json" > "$trusted_root/scripts/ci/loop-sync-manifest.json" \
+            || [ ! -s "$trusted_root/scripts/ci/loop-sync-manifest.json" ]; then
+            identical_available=false
+          fi
+          for rel in \
+            scripts/ci/lib/identical-paths.mjs \
+            scripts/ci/fixer-identical-hook.mjs \
+            scripts/ci/restore-identical-paths.mjs; do
+            destination="$trusted_root/$rel"
+            mkdir -p "$(dirname "$destination")"
+            if ! git show "$trusted_sha:$rel" > "$destination" || [ ! -s "$destination" ]; then
+              identical_available=false
+            fi
+          done
+          if [ "$identical_available" != 'true' ]; then
+            echo "::warning::Set identical trusted non materializzabile da main: nessun fixer automatico in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "path=$trusted_path" >> "$GITHUB_OUTPUT"
           echo "sha=$trusted_sha" >> "$GITHUB_OUTPUT"
+          echo "identical_manifest=$trusted_root/scripts/ci/loop-sync-manifest.json" >> "$GITHUB_OUTPUT"
+          echo "identical_hook=$trusted_root/scripts/ci/fixer-identical-hook.mjs" >> "$GITHUB_OUTPUT"
+          echo "identical_restore=$trusted_root/scripts/ci/restore-identical-paths.mjs" >> "$GITHUB_OUTPUT"
           echo "available=true" >> "$GITHUB_OUTPUT"
+
+      - name: Fail closed when the trusted identical set is unavailable
+        if: always() && steps.trusted_marker.outputs.available != 'true'
+        run: |
+          echo "::error::Manifest/helper identical non verificabili da main: nessun agente viene autorizzato."
+          exit 1
 
       # Profilassi anti-401. Il lane Codex esige che il workflow file in
       # esecuzione sia BYTE-IDENTICO a `main`, e dal 2026-09-03 il workflow che
@@ -509,6 +540,56 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
+      - name: Ripristina drift identical prima di claim e quota
+        id: identical_drift
+        if: steps.trusted_marker.outputs.available == 'true' && contains(toJSON(needs.preflight.outputs.failed_check_key), 'drift')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          IDENTICAL_MANIFEST: ${{ steps.trusted_marker.outputs.identical_manifest }}
+          IDENTICAL_RESTORE: ${{ steps.trusted_marker.outputs.identical_restore }}
+        run: |
+          set -euo pipefail
+          git fetch origin main -q
+          base_ref=origin/main
+          if printf '%s' "$HEAD_REF" | grep -q '^transport/identical-twins-'; then
+            transport_commits=$(git rev-list --reverse origin/main..HEAD)
+            transport_base="${transport_commits%%$'\n'*}"
+            if [ -n "$transport_base" ]; then
+              base_ref="$transport_base"
+            else
+              echo "::error::Base del trasporto identical non determinabile: nessun agente viene autorizzato."
+              exit 1
+            fi
+          fi
+          result=$(node "$IDENTICAL_RESTORE" --base-ref "$base_ref" --manifest "$IDENTICAL_MANIFEST" --json)
+          printf '%s\n' "$result"
+          count=$(printf '%s' "$result" | jq -er '.restored | length')
+          echo "restored_count=$count" >> "$GITHUB_OUTPUT"
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          if [ "$count" -eq 0 ]; then
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::Drift identical ripristinato localmente ma senza PAT non è possibile consegnare il branch: fail-closed, nessun agente."
+            exit 1
+          fi
+          git config --unset-all "http.https://github.com/.extraheader" 2>/dev/null || true
+          while IFS= read -r inc_key; do
+            while IFS= read -r inc_path; do
+              if [[ "$inc_path" =~ (^|/)git-credentials-[0-9A-Fa-f-]+\.config$ ]]; then
+                git config --local --fixed-value --unset-all "$inc_key" "$inc_path"
+              fi
+            done < <(git config --local --get-all "$inc_key")
+          done < <({ git config --local --name-only --get-regexp '^includeif\.gitdir:' || true; } | sort -u)
+          git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/$REPO.git"
+          git push origin "HEAD:refs/heads/$HEAD_REF"
+          comment=$(printf '%s' "$result" | jq -er '.comment')
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$comment"
+          echo "skip=true" >> "$GITHUB_OUTPUT"
+
       # Token-down = degrado silenzioso a catena del ciclo autonomo. Alert
       # inline deterministico, dedup sul titolo canonico del monitor daily
       # (`gh-pat-expiry-monitor.yml`), che resta l'owner dell'auto-close.
@@ -528,6 +609,7 @@ jobs:
 
       - name: Claim redcheck PR + HEAD + failed check (zero-Claude)
         id: claim
+        if: steps.identical_drift.outputs.skip != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -863,6 +945,10 @@ jobs:
           FIX_ROUND: ${{ steps.guard.outputs.round }}
         run: node scripts/ci/fixer-commit-trailer.mjs install redcheck "$FIX_ROUND"
 
+      - name: Install trusted identical pre-commit hook
+        if: steps.guard.outputs.proceed == 'true'
+        run: node "${{ steps.trusted_marker.outputs.identical_hook }}" install "${{ steps.trusted_marker.outputs.identical_manifest }}"
+
       # Baseline del round (post-merge origin/main, pre-Claude): il classify
       # finale confronta SHA, body e commenti per capire se il round ha davvero
       # consegnato lavoro. Il body resta fuori dai log: si conserva solo il suo
@@ -1157,6 +1243,7 @@ jobs:
             - **Verifica che il rosso sia davvero della PR.** Un gate che legge `content/` puo' essere rosso per un articolo che nessuna PR ha scritto: quello e' un rosso EREDITATO da `main`. Commenta dicendolo, con la prova, e TERMINA senza toccare la PR — ripararlo qui lo nasconderebbe invece di risolverlo (e i gate sul contenuto girano apposta in `content-gates-main.yml`, dove il segnale e' azionabile).
             - Fix CHIRURGICO alla CLASSE del difetto: se il fallimento segnala un pattern, cerca i sibling e sweepa l'intera classe nella STESSA commit, o giustifica ogni sibling non toccato in `## Non implementato (ancora)`.
             - CODE vs DATA: non scorrere i blob sotto `content/`, `dist/`, `data/`, `public/`; fixa il CODICE che li genera.
+            - NON modificare né committare path `mode: identical`: il file si corregge nel sito e il rilievo viene instradato; il pre-commit hook trusted rifiuta comunque il commit.
             - Rilancia il test dopo il fix e verifica che sia verde, prima di committare.
 
             **Chiusura:**
@@ -1170,6 +1257,35 @@ jobs:
             - Ogni commit porta il trailer `Fixer: redcheck-round-${{ steps.guard.outputs.round }}`: lo aggiunge l'hook `commit-msg` gia' installato, quindi non usare `--no-verify`.
             - **Token-lever:** le letture e le chiamate `gh` indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno — un messaggio con piu' tool-call resta 1 turno.
             - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
+
+      - name: Ripristina gemelli identical toccati dal round (deterministico)
+        id: identical_restore
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.precodex.outputs.verified == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+          IDENTICAL_MANIFEST: ${{ steps.trusted_marker.outputs.identical_manifest }}
+          IDENTICAL_RESTORE: ${{ steps.trusted_marker.outputs.identical_restore }}
+        run: |
+          set -euo pipefail
+          result=$(node "$IDENTICAL_RESTORE" --base-ref "$BASE_SHA" --manifest "$IDENTICAL_MANIFEST" --json)
+          printf '%s\n' "$result"
+          count=$(printf '%s' "$result" | jq -er '.restored | length')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" -eq 0 ]; then
+            echo "identical_restore_count=0" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "identical_restore_count=$count" >> "$GITHUB_STEP_SUMMARY"
+          commit_sha=$(printf '%s' "$result" | jq -r '.commitSha // ""')
+          if [ -n "$commit_sha" ]; then
+            git push origin "HEAD:refs/heads/$HEAD_REF"
+          fi
+          comment=$(printf '%s' "$result" | jq -er '.comment')
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$comment"
 
       # Il colore del job e' il LAVORO reale del round, non l'exit della CLI.
       #  - head remota non verificabile (fetch fallito o head cambiata fra le

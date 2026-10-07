@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+/**
+ * Guard del trasporto: una PR invariata resta in volo; una PR il cui snapshot
+ * del sito e' superato viene commentata/chiusa, cosi' il giro puo' aprirne una
+ * nuova senza accumulare due trasporti sugli stessi gemelli.
+ */
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import { sha256, siteFile } from './loop-drift-check.mjs';
+import { parseTransportBullets } from './transport-realign-body.mjs';
+import { transportPrDisposition } from './transport-identical-twins.mjs';
+
+const repo = process.env.REPO || process.env.GITHUB_REPOSITORY || '';
+const siteRepo = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
+const manifestPath = process.env.MANIFEST_PATH || 'scripts/ci/loop-sync-manifest.json';
+
+function gh(args, { json = true } = {}) {
+  const output = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  return json ? JSON.parse(output) : output;
+}
+function openTransportPrs() {
+  const pages = gh(['api', '--paginate', '--slurp', `repos/${repo}/pulls?state=open&per_page=100`]);
+  return (Array.isArray(pages) ? pages.flat() : [])
+    .filter((pr) => pr?.head?.repo?.full_name === repo)
+    .filter((pr) => String(pr?.head?.ref || '').startsWith('transport/identical-twins'));
+}
+
+function sitePathFor(manifest, corpusPath) {
+  const entry = (manifest.files || []).find((candidate) => candidate?.path === corpusPath);
+  if (!entry || entry.mode !== 'identical') throw new Error(`PR trasporto cita un path non identical: ${corpusPath}`);
+  return entry.sitePath || entry.path;
+}
+
+async function inspectPr(pr, manifest) {
+  const bullets = parseTransportBullets(pr.body || '');
+  const registered = Object.fromEntries(bullets.map((bullet) => [bullet.path, bullet.siteHash]));
+  const current = {};
+  for (const bullet of bullets) {
+    const bytes = await siteFile(sitePathFor(manifest, bullet.path));
+    if (bytes === null) return { pr, state: 'unknown', changed: [], reason: `il sito non espone più ${bullet.path}` };
+    current[bullet.path] = sha256(bytes);
+  }
+  return { pr, ...transportPrDisposition({ openPr: true, registeredHashes: registered, currentHashes: current }) };
+}
+
+async function main() {
+  if (!repo) throw new Error('REPO obbligatorio');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const prs = openTransportPrs();
+  const inspected = [];
+  for (const pr of prs) inspected.push(await inspectPr(pr, manifest));
+  if (inspected.some((item) => item.state === 'unknown')) {
+    throw new Error(inspected.filter((item) => item.state === 'unknown').map((item) => item.reason).join('; '));
+  }
+  const superseded = inspected.filter((item) => item.state === 'superseded');
+  for (const item of superseded) {
+    const changed = item.changed.map((rel) => `\`${rel}\``).join(', ');
+    const comment = `♻️ **PR di trasporto superata**: lo snapshot sha256 del sito registrato in questa PR è cambiato per ${changed}. La chiudo senza force-push; il prossimo giro aprirà un trasporto nuovo sullo stato corrente.`;
+    gh(['pr', 'close', String(item.pr.number), '--repo', repo, '--comment', comment], { json: false });
+  }
+  const waiting = inspected.filter((item) => item.state === 'wait');
+  process.stdout.write(`${JSON.stringify({
+    open: prs.length,
+    superseded: superseded.map((item) => ({ number: item.pr.number, changed: item.changed })),
+    waiting: waiting.map((item) => item.pr.number),
+    openTransports: waiting.length,
+  })}\n`);
+}
+
+if (process.argv[1] && process.argv[1].endsWith('transport-identical-twins-guard.mjs')) {
+  main().catch((error) => {
+    console.error(`transport-identical-twins-guard: ${error?.message || error}`);
+    process.exitCode = 1;
+  });
+}

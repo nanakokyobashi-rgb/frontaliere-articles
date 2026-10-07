@@ -17,6 +17,7 @@ import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { isTerminalReviewState } from './lib/review-states.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
+import { routeIdenticalFindings } from './lib/identical-review-routing.mjs';
 import {
   changedLinesFromPatch,
   stableFindingId,
@@ -542,6 +543,92 @@ function fetchChangedFiles(repo, pr) {
   return fetchPrFiles(Number(pr), gh, repo);
 }
 
+function readIdenticalManifest() {
+  const manifestPath = process.env.IDENTICAL_MANIFEST_PATH;
+  const source = manifestPath
+    ? readFileSync(manifestPath, 'utf8')
+    : readFileSync(new URL('./loop-sync-manifest.json', import.meta.url), 'utf8');
+  return JSON.parse(source);
+}
+
+function withSiteIssueCreator(siteRepo, siteToken) {
+  if (!siteRepo) throw new Error('SITE_REPO obbligatorio per il routing identical');
+  if (!siteToken) throw new Error('SITE_TOKEN/GITHUB_PAT assente: routing identical fail-closed');
+  return async (options) => {
+    const previous = new Map([
+      ['GH_REPO', process.env.GH_REPO],
+      ['GH_TOKEN', process.env.GH_TOKEN],
+      ['GITHUB_TOKEN', process.env.GITHUB_TOKEN],
+    ]);
+    process.env.GH_REPO = siteRepo;
+    process.env.GH_TOKEN = siteToken;
+    process.env.GITHUB_TOKEN = siteToken;
+    try {
+      return await createGithubIssue(options);
+    } finally {
+      for (const [key, value] of previous) {
+        if (value === undefined) delete process.env[key];
+        else process.env[key] = value;
+      }
+    }
+  };
+}
+
+async function commentIdenticalRouting(repo, pr, body, { marker } = {}) {
+  let comments = '';
+  try {
+    comments = gh(['api', `repos/${repo}/issues/${pr}/comments`, '--paginate', '--jq', '.[].body'], { json: false });
+  } catch (error) {
+    throw new Error(`commenti PR non leggibili durante il routing identical: ${String(error).slice(0, 160)}`);
+  }
+  if (marker && String(comments).includes(marker)) return { posted: false, duplicate: true };
+  gh(['pr', 'comment', String(pr), '--repo', repo, '--body', body], { json: false });
+  return { posted: true, duplicate: false };
+}
+
+/** Instrada i finding esclusivamente identical prima del calcolo del follow-up. */
+async function applyIdenticalRouting(result, { repo, pr, prUrl, mutate } = {}) {
+  if (!mutate || !process.env.SITE_REPO) return { ...result, identicalOnly: false, identicalRouting: null };
+  const declassified = new Set([
+    ...(result.staleBodyDeclassified || []).map((finding) => finding.stableId || finding.lineNumber || finding.text),
+    ...(result.staleDeclassified || []).map((finding) => finding.stableId || finding.lineNumber || finding.text),
+  ]);
+  const openFindings = (result.findings || []).filter((finding) => {
+    const id = finding.stableId || finding.lineNumber || finding.text;
+    return !declassified.has(id);
+  });
+  const routing = await routeIdenticalFindings({
+    findings: openFindings,
+    manifest: readIdenticalManifest(),
+    repo,
+    pr,
+    prUrl,
+    createIssue: withSiteIssueCreator(process.env.SITE_REPO, process.env.SITE_TOKEN || process.env.GITHUB_PAT || ''),
+    commentPr: (body, options) => commentIdenticalRouting(repo, pr, body, options),
+    mutate: true,
+  });
+  const routedIds = new Set(routing.routedFindingIds);
+  if (routedIds.size === 0) return { ...result, identicalOnly: false, identicalRouting: routing };
+  const keep = (finding) => !routedIds.has(finding.stableId || finding.lineNumber || finding.text);
+  const outside = result.outside.filter(keep);
+  const inScope = result.inScope.filter(keep);
+  const unresolved = result.unresolved.filter(keep);
+  const bodyOnly = result.staleBodyDeclassified.length > 0
+    && outside.length === 0 && inScope.length === 0 && unresolved.length === 0;
+  return {
+    ...result,
+    outside,
+    inScope,
+    unresolved,
+    bodyOnly,
+    outsideOnly: (outside.length + result.staleBodyDeclassified.length + result.staleDeclassified.length) > 0
+      && inScope.length === 0 && unresolved.length === 0,
+    blocking: inScope.length > 0 || unresolved.length > 0,
+    identicalOnly: routing.allIdentical,
+    identicalRouting: routing,
+  };
+}
+
 /**
  * Body corrente della PR. Un errore torna `null`, che spegne il declassamento
  * invece di concederlo: senza il body non c'e' prova che l'anchor cada dentro
@@ -1039,7 +1126,7 @@ export async function classifyAndMintReview(body, {
       });
     const staleBodyIds = new Set(staleBodyDeclassified.map((finding) => stableFindingId(finding)));
     const stillOpen = findings.filter((finding) => !staleBodyIds.has(stableFindingId(finding)));
-    return {
+    const diffResult = {
       findings,
       outside: [],
       inScope: [],
@@ -1061,6 +1148,14 @@ export async function classifyAndMintReview(body, {
       changedFilesComplete: changed.complete,
       diffReason: reason,
     };
+    const routedResult = await applyIdenticalRouting(diffResult, { repo, pr, prUrl, mutate });
+    if (routedResult.identicalRouting?.routed?.length) {
+      console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
+    }
+    if (routedResult.identicalOnly) {
+      console.log('review-scope: tutti i finding aperti sono identical → nessun round del fixer');
+    }
+    return { ...routedResult, minted: false };
   }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
   // `null` = «non lo so» e si deriva; passarli esplicitamente resta possibile
@@ -1081,19 +1176,26 @@ export async function classifyAndMintReview(body, {
   for (const finding of result.staleDeclassified ?? []) {
     console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; il gate resta fail-closed, [regression] segnala esplicitamente la classe`);
   }
-  if (result.outside.length === 0 || !mutate) {
+  const routedResult = await applyIdenticalRouting(result, { repo, pr, prUrl, mutate });
+  if (routedResult.identicalRouting?.routed?.length) {
+    console.log(`review-scope: instradati ${routedResult.identicalRouting.routed.length} rilievi/path identical al sito`);
+  }
+  if (routedResult.identicalOnly) {
+    console.log('review-scope: tutti i finding aperti sono identical → nessun round del fixer');
+  }
+  if (routedResult.outside.length === 0 || !mutate) {
     return {
-      ...result,
+      ...routedResult,
       minted: false,
       changedFiles: changed.files,
       changedFilesComplete: changed.complete,
       diffReason: changed.reason,
     };
   }
-  const issueBody = followupIssueBody({ repo, pr, prUrl, findings: result.outside });
-  const followup = await mintFollowup({ repo, pr, prUrl, body: issueBody, findings: result.outside });
+  const issueBody = followupIssueBody({ repo, pr, prUrl, findings: routedResult.outside });
+  const followup = await mintFollowup({ repo, pr, prUrl, body: issueBody, findings: routedResult.outside });
   return {
-    ...result,
+    ...routedResult,
     minted: true,
     followup,
     changedFiles: changed.files,
@@ -1123,6 +1225,8 @@ if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
       inScope: result.inScope.length,
       unresolved: result.unresolved.length,
       bodyOnly: result.bodyOnly === true,
+      identicalOnly: result.identicalOnly === true,
+      identicalRouting: result.identicalRouting || null,
       minted: result.minted,
       followup: result.followup || null,
     })}\n`);
