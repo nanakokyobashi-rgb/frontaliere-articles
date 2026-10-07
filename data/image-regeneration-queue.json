@@ -36,6 +36,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T05:47:57.525Z",
       "lastFailureAt": "2026-10-07T05:47:57.525Z"
+    },
+    {
+      "articleId": "a2-mendrisio-melano-risanamento",
+      "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
+      "fallbackImage": "/images/blog/mendrisio-melano-progetto-meme-risanamento-fonico.webp",
+      "reason": "All image providers failed for article-a2-mendrisio-melano-risanamento: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:12:18.865Z",
+      "lastFailureAt": "2026-10-07T06:12:18.865Z"
     }
   ]
 }
