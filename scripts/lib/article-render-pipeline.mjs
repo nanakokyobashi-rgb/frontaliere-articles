@@ -39,11 +39,12 @@ export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
  * @param {string} opts.section sezione ATTIVA del core
  * @param {string[]} opts.ids id articolo da rendere (vuoto = nessun articolo, solo archivio ed extra)
  * @param {string} [opts.logPrefix]
+ * @param {string} [opts.contentRevision] revisione esplicita del corpus passata al motore
  * @param {(ctx: { distDir: string, entries: any[], hubResult: any }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
  * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[] }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', contentRevision, beforeOffload }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
   // top-level evaluation (an IIFE, not a function call re-read per use), to
   // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
@@ -114,7 +115,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // giro che rinfresca solo landing/archivio/hub): `onlyArticleIds: []` non
   // deve mai voler dire «tutta la sezione».
   const { written, entries } = ids.length
-    ? await renderArticlePages({ rootDir, distDir, section, onlyArticleIds: ids })
+    ? await renderArticlePages({ rootDir, distDir, section, onlyArticleIds: ids, contentRevision })
     : { written: 0, entries: [] };
 
   // Remove the symlink itself (unlink — the final path component IS the

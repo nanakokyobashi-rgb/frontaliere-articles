@@ -119,6 +119,7 @@
 import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 // Output-boundary sanitisation (see scripts/lib/sanitize-control-chars.mjs).
 // The renderer is engine/ogPagesPlugin.ts, which arrives by mirror and is not
@@ -134,6 +135,12 @@ import { heroCdnUploads, renderSectionArticlePipeline } from './lib/article-rend
 import { shardOf } from './ci/fast-publish-section.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+function corpusContentRevision() {
+  const epoch = execFileSync('git', ['show', '-s', '--format=%ct', 'HEAD'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
+  const short = execFileSync('git', ['rev-parse', '--short=12', 'HEAD'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
+  return `${epoch}.${short}`;
+}
 
 function parseArgs(argv) {
   const out = { ids: [] };
@@ -188,6 +195,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
+  const contentRevision = corpusContentRevision();
 
   // La catena di render (passi 0-7b, nell'ordine che conta) vive in
   // scripts/lib/article-render-pipeline.mjs, condivisa col publisher R2 delle
@@ -200,6 +208,7 @@ async function main() {
       section: args.section,
       ids: args.ids,
       logPrefix: 'publish-article-fast',
+      contentRevision,
     });
   } catch (err) {
     console.error(`[publish-article-fast] ${err.message}`);
@@ -246,14 +255,21 @@ async function main() {
   // l'engine li ha risolti (images/blog o images/places): vedi heroCdnUploads.
   const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, logPrefix: 'publish-article-fast' });
 
-  const summary = { id: args.ids.length === 1 ? args.id : null, ids: args.ids, section: args.section, shards, cdnUploads };
+  const summary = {
+    id: args.ids.length === 1 ? args.id : null,
+    ids: args.ids,
+    section: args.section,
+    contentRevision,
+    shards,
+    cdnUploads,
+  };
   const summaryPath = path.resolve(args.summary);
   fs.mkdirSync(path.dirname(summaryPath), { recursive: true });
   fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + '\n', 'utf-8');
 
   const wallMs = Date.now() - t0;
   console.log(
-    `[publish-article-fast] done — ids=${args.ids.join(',')} section=${args.section} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
+    `[publish-article-fast] done — ids=${args.ids.join(',')} section=${args.section} contentRevision=${contentRevision} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
   );
   console.log(`[publish-article-fast] summary written to ${summaryPath}`);
 }

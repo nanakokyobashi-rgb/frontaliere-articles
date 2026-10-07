@@ -49,7 +49,14 @@ test('il dispatch accetta una lista JSON e il workflow la passa al renderer batc
   assert.match(workflow, /ARTICLE_IDS_INPUT: \$\{\{ inputs\.article_ids \}\}/);
   assert.match(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
   assert.match(publisher, /renderSectionArticlePipeline\(\{[\s\S]*?ids: args\.ids,/);
-  assert.match(pipeline, /onlyArticleIds: ids \}\)/);
+  assert.match(pipeline, /onlyArticleIds: ids, contentRevision \}\)/);
+});
+
+test('il publisher passa al renderer la revisione del commit HEAD del corpus', () => {
+  assert.match(publisher, /function corpusContentRevision\(\)/);
+  assert.match(publisher, /const contentRevision = corpusContentRevision\(\);/);
+  assert.match(publisher, /contentRevision,\n\s+\}\);/);
+  assert.match(pipeline, /onlyArticleIds: ids, contentRevision \}/);
 });
 
 test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary', () => {

@@ -1,0 +1,56 @@
+name: Article publication observer
+
+# Read-only probe of the two article publishers. It opens or resolves one
+# stable issue through the repository's existing issue creator; it never writes
+# to the site, a shard, or a CDN.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Finestra di osservazione in giorni'
+        required: false
+        type: string
+        default: '7'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: article-publication-observer
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout corpus history and observer inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          sparse-checkout: |
+            /content/blog-articles-data.ts
+            /content/swiss-articles-data.ts
+            /content/routerBlogData.ts
+            /content/routerSwissData.ts
+            /scripts/ci/article-publication-observer.mjs
+            /scripts/lib/github-issue-creator.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+
+      - name: Observe published article revisions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          INPUT_DAYS: ${{ github.event.inputs.days || '7' }}
+        run: |
+          set -euo pipefail
+          node scripts/ci/article-publication-observer.mjs --days "$INPUT_DAYS" | tee -a "$GITHUB_STEP_SUMMARY"
