@@ -106,6 +106,14 @@ const COMMIT = 'ce0973785b6fff2ce470b7f7dcba7c1ebdb9dd48';
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const sha256Of = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const committed = () => JSON.parse(readFileSync(path.join(ROOT, SECTION_REGISTRY_FILE), 'utf8'));
+// I fixture delle funzioni di forma sotto test non devono ereditare lo stato
+// operativo del rollout corrente: partono da un documento draft e impostano
+// esplicitamente il solo stato usato dal caso.
+const committedDraft = () => {
+  const doc = committed();
+  for (const entry of Object.values(doc.sections)) entry.status = 'draft';
+  return doc;
+};
 const TI = ARTICLE_SECTION_CORE_ALL['canton-ti'];
 const AG = ARTICLE_SECTION_CORE_ALL['canton-ag'];
 const HISTORICAL_CORE = Object.fromEntries(
@@ -158,7 +166,7 @@ test('validatore: insieme chiuso, parita\' col core, stato ammesso', () => {
 });
 
 test('validatore: live solo per una sezione attiva nel core', () => {
-  const live = committed();
+  const live = committedDraft();
   live.sections['canton-ag'].status = 'live';
   assert.match(declaredRegistryErrors(live, { active: HISTORICAL_CORE }).join('\n'), /canton-ag: dichiarata live ma non attiva nel core/);
   assert.deepEqual(declaredRegistryErrors(live, { active: { ...ACTIVE_WITH_TI, 'canton-ag': AG } }), []);
@@ -237,7 +245,7 @@ test('kill-switch: verificato solo col marker del loader; spegne live, non tocca
 });
 
 test('copia per il Worker: scritta se verificato o se nessuna sezione e\' live', () => {
-  const doc = committed();
+  const doc = committedDraft();
   assert.equal(edgeRegistryPublishable(doc, { state: 'unverified', sections: [] }), true, 'tutte draft: niente da spegnere');
   doc.sections['canton-ti'].status = 'live';
   assert.equal(edgeRegistryPublishable(doc, { state: 'unverified', sections: [] }), false);
@@ -245,7 +253,7 @@ test('copia per il Worker: scritta se verificato o se nessuna sezione e\' live',
 });
 
 test('copia per il Worker: formato di parseCorpusSectionRegistry, accettata dal suo parse', () => {
-  const doc = committed();
+  const doc = committedDraft();
   doc.sections['canton-ti'].status = 'live';
   doc.sections['canton-ti'].redirects = { '/articoli-ticino/vecchio/': '/articoli-ticino/nuovo/' };
   doc.sections['canton-ti'].gone = ['/en/ticino-articles/ritirato/'];
