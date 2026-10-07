@@ -4,17 +4,71 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-07T10:11:40.832Z",
-  "contentHash": "d537676da16698dea733e926b2135d6722a27d5815bf93a9fc1ed95100a1d804",
-  "blocks": [],
+  "updatedAt": "2026-10-07T19:01:03.662Z",
+  "contentHash": "f3e5c418e763bc2ea7db20b9e3bd2a6897dc00736f5fb7feffd7393b74176f1e",
+  "blocks": [
+    {
+      "id": "prezzi-carburanti",
+      "updatedAt": "2026-10-07T11:34:26.362Z",
+      "keyFacts": 2,
+      "carryUntilAt": "2026-10-14T11:34:26.362Z"
+    }
+  ],
   "locales": {
     "it": {
       "canton": "SH",
       "topic": "carburanti",
       "locale": "it",
       "intro": "Nel Canton Sciaffusa, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,020 CHF/l",
+          "note": "media nazionale ufficiale, 1 settembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Svizzera",
+          "value": "2,270 CHF/l",
+          "note": "media nazionale ufficiale, 1 settembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prezzi dei carburanti",
+          "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
+          "items": [
+            {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,020 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,270 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Benzina 95 — Germania",
+              "value": "2,146 EUR/l",
+              "detail": "media regionale: minimo 2,119 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-07T11:34:26.362Z"
+            },
+            {
+              "label": "Diesel — Germania",
+              "value": "2,186 EUR/l",
+              "detail": "media regionale: minimo 2,159 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-07T11:34:26.362Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-10-07T11:34:26.362Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -26,15 +80,62 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     },
     "en": {
       "canton": "SH",
       "topic": "carburanti",
       "locale": "en",
       "intro": "In the canton of Schaffhausen, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.020 CHF/l",
+          "note": "official national average, 1 September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Switzerland",
+          "value": "2.270 CHF/l",
+          "note": "official national average, 1 September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Fuel prices",
+          "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
+          "items": [
+            {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.020 CHF/l",
+              "detail": "official national average",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.270 CHF/l",
+              "detail": "official national average",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Petrol 95 — Germany",
+              "value": "2.146 EUR/l",
+              "detail": "regional average: lowest 2.119 EUR/l, 3 stations surveyed",
+              "date": "2026-10-07T11:34:26.362Z"
+            },
+            {
+              "label": "Diesel — Germany",
+              "value": "2.186 EUR/l",
+              "detail": "regional average: lowest 2.159 EUR/l, 3 stations surveyed",
+              "date": "2026-10-07T11:34:26.362Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-10-07T11:34:26.362Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -46,15 +147,62 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     },
     "de": {
       "canton": "SH",
       "topic": "carburanti",
       "locale": "de",
       "intro": "Im Kanton Schaffhausen sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.020 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Schweiz",
+          "value": "2.270 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Treibstoffpreise",
+          "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
+          "items": [
+            {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.020 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.270 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Benzin 95 — Deutschland",
+              "value": "2.146 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.119 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-07T11:34:26.362Z"
+            },
+            {
+              "label": "Diesel — Deutschland",
+              "value": "2.186 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.159 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-07T11:34:26.362Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-10-07T11:34:26.362Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -66,15 +214,62 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     },
     "fr": {
       "canton": "SH",
       "topic": "carburanti",
       "locale": "fr",
       "intro": "Dans le canton de Schaffhouse, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Essence 95 — Suisse",
+          "value": "2,020 CHF/l",
+          "note": "moyenne nationale officielle, 1er septembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        },
+        {
+          "label": "Diesel — Suisse",
+          "value": "2,270 CHF/l",
+          "note": "moyenne nationale officielle, 1er septembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prezzi-carburanti",
+          "title": "Prix des carburants",
+          "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
+          "items": [
+            {
+              "label": "Essence 95 — Suisse",
+              "value": "2,020 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,270 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Essence 95 — Allemagne",
+              "value": "2,146 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,119 EUR/l, 3 stations relevées",
+              "date": "2026-10-07T11:34:26.362Z"
+            },
+            {
+              "label": "Diesel — Allemagne",
+              "value": "2,186 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,159 EUR/l, 3 stations relevées",
+              "date": "2026-10-07T11:34:26.362Z"
+            }
+          ],
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
+          "updatedAt": "2026-10-07T11:34:26.362Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -86,7 +281,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     }
   }
 }
