@@ -66,6 +66,7 @@ import {
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
 import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from './lib/image-credit-records.mjs';
+import { isNewFamilySection } from './lib/corpus-floors.mjs';
 import { coverKey } from '../engine/shared/imageCredits.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -289,7 +290,12 @@ function registryImage(block) {
 function coverKeysInUse(excludeId) {
   /** @type {Map<string, string[]>} */
   const inUse = new Map();
-  for (const cfg of Object.values(SECTIONS)) {
+  for (const [section, cfg] of Object.entries(SECTIONS)) {
+    // Una sezione cantonale attiva puo' essere ancora nuova: D22 la rende
+    // visibile al core prima che il primo articolo crei registry e slugs. La
+    // coppia assente e' uno stato valido per una famiglia vuota; una coppia
+    // parziale, invece, resta fail-closed dentro isNewFamilySection().
+    if (isNewFamilySection(ROOT, section)) continue;
     for (const { id, block } of registryBlocks(cfg.registryFile)) {
       if (id === excludeId) continue;
       const key = coverKey(registryImage(block));
@@ -305,7 +311,9 @@ function coverKeysInUse(excludeId) {
 
 /** In quale sezione vive l'id? Deciso dal registro che lo contiene. */
 function findSection(id) {
-  const found = Object.entries(SECTIONS).filter(([, cfg]) => read(cfg.registryFile).includes(`id: '${id}',`));
+  const found = Object.entries(SECTIONS)
+    .filter(([section]) => !isNewFamilySection(ROOT, section))
+    .filter(([, cfg]) => read(cfg.registryFile).includes(`id: '${id}',`));
   if (found.length === 0) throw new Error(`'${id}' non è in nessuno dei due registri`);
   if (found.length > 1) throw new Error(`'${id}' è in ${found.length} registri: ambiguo, va risolto a mano`);
   return found[0][0];

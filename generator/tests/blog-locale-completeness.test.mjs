@@ -10,8 +10,10 @@ import {
   extractBodyFields,
   inspectBlogLocaleCompleteness,
 } from '../../scripts/ci/check-blog-locale-completeness.mjs';
+import { floorPolicyOf } from '../../scripts/lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const HISTORICAL_BODY_ROOTS = BODY_ROOTS.filter(({ name }) => floorPolicyOf(name) !== 'family');
 
 function fixtureRoot() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-locale-completeness-'));
@@ -88,8 +90,8 @@ test('FU-009 — il controllo rileva chiavi mancanti e copie italiane', () => {
 
   const report = inspectBlogLocaleCompleteness({ root, minItalianFiles: 1, minItalianFields: 1 });
   assert.equal(report.ok, false);
-  assert.equal(report.counts['missing-key'], 2);
-  assert.equal(report.counts['source-echo'], 2);
+  assert.equal(report.counts['missing-key'], BODY_ROOTS.length);
+  assert.equal(report.counts['source-echo'], BODY_ROOTS.length);
   assert.ok(report.violations.every((violation) => violation.path.includes('content/')));
 });
 
@@ -124,13 +126,13 @@ test('FU-009 — il controllo segue i body opzionali presenti nella sorgente', (
 
   const report = inspectBlogLocaleCompleteness({ root, minItalianFiles: 1, minItalianFields: 1 });
   assert.equal(report.ok, false);
-  assert.equal(report.counts['missing-key'], 4);
+  assert.equal(report.counts['missing-key'], BODY_ROOTS.length * 2);
   assert.ok(report.violations.every((violation) => violation.field !== 'body21'));
   assert.deepEqual(
     report.violations
       .filter((violation) => violation.code === 'missing-key')
       .map((violation) => violation.field),
-    ['body4', 'body20', 'body4', 'body20'],
+    BODY_ROOTS.flatMap(() => ['body4', 'body20']),
   );
 });
 
@@ -138,8 +140,8 @@ test('FU-009 — il pavimento impedisce uno scan vuoto', () => {
   const root = fixtureRoot();
   const report = inspectBlogLocaleCompleteness({ root, minItalianFiles: 1, minItalianFields: 1 });
   assert.equal(report.ok, false);
-  assert.equal(report.counts['source-floor'], 2);
-  assert.equal(report.counts['source-field-floor'], 2);
+  assert.equal(report.counts['source-floor'], HISTORICAL_BODY_ROOTS.length);
+  assert.equal(report.counts['source-field-floor'], HISTORICAL_BODY_ROOTS.length);
 });
 
 test('publish-api espone il gate di completezza prima delle credenziali', () => {

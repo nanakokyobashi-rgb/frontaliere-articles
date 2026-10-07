@@ -208,7 +208,14 @@ describe('content-gates-main: niente falso verde', () => {
   test('il corpus vero passa il preflight', () => {
     const v = preflight();
     assert.deepEqual(v.violations, [], 'il preflight rifiuta il corpus reale');
-    assert.ok(v.perRoot.every((r) => r.count > 0));
+    // Le sezioni cantonali attive possono partire con zero articoli: la loro
+    // politica family tratta il registro assente come stato legittimo. I due
+    // corpora storici, invece, devono restare materializzati e non vuoti.
+    assert.ok(
+      v.perRoot
+        .filter((r) => r.section === 'frontaliere' || r.section === 'svizzera')
+        .every((r) => r.count > 0),
+    );
   });
 
   test('una directory col nome di un REQUIRED_FILES non passa come registro', () => {
