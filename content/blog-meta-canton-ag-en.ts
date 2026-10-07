@@ -9,6 +9,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.riduzione-premi-argovia-2027.title': 'Aargau premium reduction 2027: application by 31 December',
     'blog.article.riduzione-premi-argovia-2027.excerpt': 'SVA Aargau sends the codes for premium reduction. For 2027, the application must be submitted by Thursday, December 31.',
     'blog.article.riduzione-premi-argovia-2027.imageAlt': 'Aargau resident checks an SVA code for health premium reduction',
+    'blog.article.argovia-parita-salariale.title': 'Aargau: initiative for pay equality',
+    'blog.article.argovia-parita-salariale.excerpt': 'In Aargau, the equal-pay initiative calls for analyses at companies with 50 employees, sanctions, and the reinstatement of the equality office.',
+    'blog.article.argovia-parita-salariale.imageAlt': 'Workers and advocates discuss pay equality in Canton Aargau',
 };
 
 export default blogMetaCantonAgEn;

@@ -525,6 +525,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-07T19:58:52.264Z",
       "lastFailureAt": "2026-10-07T19:58:52.264Z"
+    },
+    {
+      "articleId": "argovia-parita-salariale",
+      "title": "Argovia: iniziativa per la parità salariale",
+      "fallbackImage": "/images/blog/imposte-cantonali-argovia-aliquote.webp",
+      "reason": "All image providers failed for article-argovia-parita-salariale: vision gate rejected image: Multiple clear, recognizable human faces are visible in the foreground.",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T19:59:34.747Z",
+      "lastFailureAt": "2026-10-07T19:59:34.747Z"
     }
   ]
 }

@@ -9,6 +9,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.riduzione-premi-argovia-2027.title': 'Prämienverbilligung Aargau 2027: Antrag bis zum 31. Dezember',
     'blog.article.riduzione-premi-argovia-2027.excerpt': 'Die SVA Aargau versendet die Codes für die Prämienverbilligung. Für 2027 muss der Antrag bis Donnerstag, 31. Dezember, eingereicht werden.',
     'blog.article.riduzione-premi-argovia-2027.imageAlt': 'Einwohner in Aargau prüft den SVA-Code für die Prämienverbilligung',
+    'blog.article.argovia-parita-salariale.title': 'Argovia: Initiative für Lohngleichheit',
+    'blog.article.argovia-parita-salariale.excerpt': 'In Argovia fordert die Initiative für Lohngleichheit Analysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle für Gleichstellung.',
+    'blog.article.argovia-parita-salariale.imageAlt': 'Arbeitnehmerinnen und Unterstützerinnen diskutieren Lohngleichheit im Kanton Aargau',
 };
 
 export default blogMetaCantonAgDe;

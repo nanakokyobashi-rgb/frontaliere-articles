@@ -9,6 +9,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.riduzione-premi-argovia-2027.title': 'Réduction des primes en Argovie 2027 : demande avant le 31 décembre',
     'blog.article.riduzione-premi-argovia-2027.excerpt': 'La SVA Aargau envoie les codes pour la réduction des primes. Pour 2027, la demande doit être déposée d’ici au jeudi 31 décembre.',
     'blog.article.riduzione-premi-argovia-2027.imageAlt': 'Un résident d\'Argovie vérifie le code SVA pour la réduction des primes',
+    'blog.article.argovia-parita-salariale.title': 'Argovie : initiative pour l\'égalité salariale',
+    'blog.article.argovia-parita-salariale.excerpt': 'En Argovie, l\'initiative pour l\'égalité salariale demande des analyses à partir de 50 employés, des sanctions et le rétablissement du bureau de l\'égalité.',
+    'blog.article.argovia-parita-salariale.imageAlt': 'Des travailleuses et militantes discutent de l\'égalité salariale en Argovie',
 };
 
 export default blogMetaCantonAgFr;
