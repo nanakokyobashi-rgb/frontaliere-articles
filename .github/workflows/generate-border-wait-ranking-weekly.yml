@@ -193,28 +193,6 @@ jobs:
           fi
           exit 0
 
-      # A producer can leave a registration marker and then exit non-zero.
-      # The normal commit step is behind the default success() condition, so
-      # checkpoint the evidence explicitly before credentials and commit.
-      - name: Checkpoint — stage registration marker after producer failure
-        id: registration-checkpoint
-        if: always() && steps.mode.outputs.dry != 'true'
-        run: |
-          set -euo pipefail
-          PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
-          if [ "$PRODUCER_OUTCOME" = "success" ]; then
-            echo "producer completed; the normal commit will stage marker changes"
-            exit 0
-          fi
-          if [ -z "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
-            echo "producer outcome: $PRODUCER_OUTCOME; no changed registration marker to checkpoint"
-            exit 0
-          fi
-          # -A is intentional here: it preserves additions, updates, and
-          # deletions of the tracked marker set after an interrupted run.
-          git add -A -- 'generator/data/register-in-progress*.json'
-          echo "staged registration marker checkpoint for producer outcome: $PRODUCER_OUTCOME"
-
       # Only the push needs a credential here — the window comes from the public
       # CDN and the render is offline — so Remote Config is loaded only on a run
       # that will actually commit. A dry run never touches it.
@@ -249,24 +227,16 @@ jobs:
           PRODUCER_OUTCOME="${{ steps.producer.outcome }}"
           GUARD_OUTCOME="${{ steps.guard.outcome }}"
           if [ "$PRODUCER_OUTCOME" != "success" ]; then
-            # The checkpoint normally staged this already. Repeat the
-            # deletion-aware add as a safety net if that step could not run.
-            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
-              git add -A -- 'generator/data/register-in-progress*.json'
-            fi
-            COMMIT_MESSAGE="Checkpoint interrupted border-wait registration"
-            echo "producer outcome: $PRODUCER_OUTCOME; committing registration evidence only"
+            echo "::warning::producer outcome: $PRODUCER_OUTCOME — refusing to commit partial producer output"
+            exit 0
           elif [ "$GUARD_OUTCOME" != "success" ]; then
             echo "::warning::content guard outcome: $GUARD_OUTCOME — refusing to commit producer output"
             exit 0
           else
             COMMIT_MESSAGE="Weekly border-wait ranking digest refresh"
-            # Keep an interrupted registration marker with the partial writes;
-            # the next run needs the evidence to refuse or repair the split.
             # The evergreen refresh also bumps the registry freshness and the
-            # NewsArticle dateModified. Leaving either file unstaged makes a
-            # concurrent push retry's pull --rebase refuse the dirty worktree,
-            # losing the digest commit after the producer already succeeded.
+            # NewsArticle dateModified. Registration markers remain runner-local
+            # and ignored, so they cannot be swept into this commit.
             git add public/data/border-wait-ranking.json \
                     content/blog-body/it/classifica-dogane-ticino.ts \
                     content/blog-body/en/classifica-dogane-ticino.ts \
@@ -274,14 +244,9 @@ jobs:
                     content/blog-body/fr/classifica-dogane-ticino.ts \
                     content/blog-articles-data.ts \
                     content/seo/seo-blog-5.ts
-            # Quote the pathspec so a missing file cannot expand into an empty
-            # argument, and -A also stages marker deletions.
-            if [ -n "$(git status --porcelain -- 'generator/data/register-in-progress*.json')" ]; then
-              git add -A -- 'generator/data/register-in-progress*.json'
-            fi
           fi
           if git diff --cached --quiet; then
-            echo "no ranking digest or registration marker checkpoint changes"
+            echo "no ranking digest changes"
             exit 0
           fi
           if [ -z "${GITHUB_PAT:-}" ]; then
@@ -290,16 +255,6 @@ jobs:
           fi
 
           git commit -m "$COMMIT_MESSAGE"
-
-          if [ "$PRODUCER_OUTCOME" != "success" ] && [ -n "$(git status --porcelain)" ]; then
-            # The failure checkpoint intentionally commits only the marker;
-            # partial producer files must not make the retry worktree dirty.
-            # A dirty tree makes the following pull --rebase refuse to start,
-            # so a push race would lose the marker evidence as well.
-            git stash push -u -m "discard-partial-producer-output-before-retry"
-            # shellcheck disable=SC1083
-            git stash drop stash@{0}
-          fi
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"

@@ -5472,6 +5472,16 @@
         "corpus": "0beb9db2402755ea",
         "alignedAt": "2026-10-06"
       }
+    },
+    {
+      "path": "scripts/ci/check-registration-locks.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard CI dei lock di registrazione runner-locali: segnala con sezione e runId un marker cantonale o di sezione rimasto nel workspace. Il sito non esegue i producer del corpus e non ha un gemello da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
     }
   ]
 }

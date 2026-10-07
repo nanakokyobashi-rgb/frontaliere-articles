@@ -180,8 +180,6 @@ if [ "$1" = "diff" ]; then
     case "$dirty" in
       content/*)
         case "$*" in *"content/"*) printf 'M\\t%s\\n' "$dirty";; esac ;;
-      generator/data/register-in-progress*)
-        case "$*" in *"register-in-progress"*) printf 'A\\t%s\\n' "$dirty";; esac ;;
     esac
   elif [ -f "${staged}" ]; then
     cat "${staged}"
@@ -395,10 +393,7 @@ test('un errore dopo una scrittura parziale resta vincolante per il commit', () 
   assert.match(r.stdout, /output parziale non pubblicabile/);
 });
 
-for (const registrationDirtyPath of [
-  'content/routerBlogData.ts',
-  'generator/data/register-in-progress-frontaliere.json',
-]) {
+for (const registrationDirtyPath of ['content/routerBlogData.ts']) {
   test(`un errore prima del body con registrazione dirty (${registrationDirtyPath}) blocca il fallback`, () => {
     const r = runGenerateStep({
       section: 'frontaliere',
@@ -1039,7 +1034,7 @@ test('tutti i writer deterministici dei body bloccano il commit su localizzazion
     const block = sliceBetween(
       workflow,
       `      - name: ${guardName}`,
-      '      - name: Checkpoint — stage registration marker after producer failure',
+      commitName,
     );
     const corpusGuardAt = block.indexOf('generator/tests/prompt-placeholder-guard.test.mjs');
     const localeGateAt = block.indexOf('node scripts/ci/check-blog-locale-completeness.mjs');

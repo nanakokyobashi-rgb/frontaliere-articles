@@ -265,6 +265,11 @@ jobs:
       # Node 22 collassa la cartella in UN test fallito invece di scoprire i
       # file, quindi si passano i path uno per uno.
       # ══════════════════════════════════════════════════════════════════════
+      - name: Registration lock guard — no orphan section markers
+        id: registration_lock_guard
+        if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() }}
+        run: node scripts/ci/check-registration-locks.mjs
+
       - name: Unit + closure gates (i gate sul contenuto girano altrove)
         id: unit_gates
         if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() }}
