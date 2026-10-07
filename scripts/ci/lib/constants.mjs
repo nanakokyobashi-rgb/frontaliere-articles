@@ -150,6 +150,30 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  *      code span (`` `file:L1: 🔴 Important: …` ``, la forma degli esempi di
  *      REVIEW.md) resta rosso: li' il backtick non e' incollato al glifo.
  *
+ *   3. La forma con ANCORA DI POSIZIONE vale anche senza punteggiatura dopo
+ *      `Important` (sito, PR 9339): `path:L<n>: 🔴 Important testo` e
+ *      `PR body:L<n>: 🔴 Important testo` sono il formato di uscita di REVIEW.md,
+ *      e un reviewer che omette i due punti dopo la severita' scriveva un 🔴 che
+ *      nessuna delle tre copie vedeva: con `## LGTM` nella stessa review la PR
+ *      passava il gate con un Important aperto. Il ramo richiede che il glifo
+ *      segua IMMEDIATAMENTE la label a inizio riga (elenco e backtick ammessi) e
+ *      che dopo `Important` ci sia testo sulla stessa riga: la prosa di negazione
+ *      di #3330 («zero 🔴 Important findings») non apre con una label e resta
+ *      verde. Tre scostamenti dal sito, tutti verso il ROSSO o verso la parita'
+ *      delle copie:
+ *      - il lookahead e' `[ \t]+[^\n \t\r]` e non `\s+\S`: grep e' orientato
+ *        alla riga, e con `\s` la copia JS vedrebbe come testo la riga
+ *        successiva mentre le due copie bash no; e `\S` non e' la stessa classe
+ *        nei due motori (JS esclude lo spazio non separabile, PCRE senza UCP no),
+ *        quindi «c'e' testo» e' scritto come classe esplicita, identica ovunque;
+ *      - la label puo' stare in un elenco NUMERATO (`1. path:L<n>: 🔴 …`), non
+ *        solo puntato o citato: al massimo tre prefissi, cosi' una riga di soli
+ *        trattini o cifre non costa tentativi quadratici;
+ *      - la label puo' elencare PIU' ancore separate da virgola o punto e
+ *        virgola (`a.mjs:L1, b.mjs:L2: 🔴 …`): un finding su due file non deve
+ *        sparire perche' ne cita due. Fra le ancore non e' ammessa prosa.
+ *      Muove il verdetto solo da verde a ROSSO.
+ *
  * Il conteggio dichiarato `## Findings (Important: N)` NON e' un ingresso del gate,
  * di proposito: su 172 review bot reali dei due repo c'e' su 170/172, e soprattutto
  * potrebbe spostare il verdetto solo da rosso a VERDE — un reviewer che scrive
@@ -168,15 +192,16 @@ export const VITEST_SHARD_NAME_RE = /^vitest shard \d+\/\d+$/;
  * NB: il preflight di `pr-redflag-fixer.yml` e la Classe B di
  * `stale-pr-rescuer.yml` grepano la STESSA forma in bash — un `if:`/`run:` YAML non
  * puo' importare questa regex. `grep` e' gia' orientato alla riga, quindi il pattern
- * bash e' questa `.source` senza i `\n` delle classi negate:
- * `grep -qP '^(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s\`)(?<!^\`)🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'`.
+ * bash e' questa `.source` senza i `\n` delle classi negate. Il pattern non e'
+ * ricopiato qui: una quarta copia scritta a mano invecchierebbe in silenzio, e il
+ * guard citato sotto lo deriva dalla sorgente.
  * I due lookbehind sono a lunghezza fissa, quindi PCRE1 (`grep -P`) li accetta —
  * uno solo, `(?<!(?:^|\s)\`)`, sarebbe a lunghezza variabile e li' non compila.
  * Le tre copie non possono piu' divergere in silenzio: il guard `mirror bash` di
  * `generator/tests/redflag-important-marker.test.mjs` deriva il pattern atteso da
  * questa `.source` e lo pretende, verbatim, in entrambi i workflow.
  */
-export const REDFLAG_IMPORTANT_RE = /^(?:(?=(?:[^\n`]*`[^\n`]*`)*[^\n`]*`[^\n`]*$)(?:[^\n🟡🟢❓]*|(?:[^\n«]|«[^\n»]*»)*[🟡🟢❓](?:[^\n«]|«[^\n»]*»)*)|(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]/mu;
+export const REDFLAG_IMPORTANT_RE = /^(?:(?:(?=(?:[^\n`]*`[^\n`]*`)*[^\n`]*`[^\n`]*$)(?:[^\n🟡🟢❓]*|(?:[^\n«]|«[^\n»]*»)*[🟡🟢❓](?:[^\n«]|«[^\n»]*»)*)|(?:[^\n🟡🟢❓]*|(?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*[🟡🟢❓](?:[^\n`«]|`[^\n`]*`|«[^\n»]*»|`(?![^\n`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]|[ \t]*(?:(?:[-*+>]|\d+[.)])[ \t]*){0,3}(?:`[^\n`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?)(?:[ \t]*[,;][ \t]*(?:`[^\n`]*:L?\d+(?:[-–]\d+)?`?|(?:PR[ \t]+body|[A-Za-z0-9_.@/-]+):L?\d+(?:[-–]\d+)?))*:[ \t]*🔴\s*\*{0,2}\s*Important\s*\*{0,2}(?=[ \t]+[^\n \t\r]))/mu;
 
 /**
  * File la cui modifica impedisce STRUTTURALMENTE al reviewer Claude di girare
