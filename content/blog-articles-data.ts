@@ -42842,6 +42842,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fischiava-treno-gorla',
+ category: 'novita',
+ date: '2026-10-07T04:45:21.777Z',
+ image: '/images/blog/mobilita-trenord-aumento-biglietti-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

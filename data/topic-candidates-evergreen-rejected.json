@@ -795,10 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
-      "section": "frontaliere",
-      "ts": 1791173353121
-    },
     "frontaliere::https://www.tio.ch/ticino/attualita/1954213/startup-intelligenza-team-classifica-farmaci-lugano-aziende-top100-svizzera-swiss": {
       "section": "frontaliere",
       "ts": 1791177074339
@@ -1034,6 +1030,18 @@
     "frontaliere::https://www.rsi.ch/s/4139591": {
       "section": "frontaliere",
       "ts": 1791343037660
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
+      "section": "frontaliere",
+      "ts": 1791347037982
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/economia-della-longevita-confindustria-varese-analizza-sfide-e-opportunita-della-silver-economy/2699461": {
+      "section": "frontaliere",
+      "ts": 1791347106179
+    },
+    "frontaliere::https://www.laregione.ch/economia/economia/1955093/luganistan-il-giardino-di-casa-di-una-cleptocrazia": {
+      "section": "frontaliere",
+      "ts": 1791347139488
     }
   }
 }
