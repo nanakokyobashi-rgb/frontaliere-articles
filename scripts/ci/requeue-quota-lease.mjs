@@ -108,7 +108,9 @@ export function retryGitHubMutation(operation, {
   maxAttempts = DEFAULT_MAX_ATTEMPTS,
   retryDelayMs = DEFAULT_RETRY_DELAY_MS,
   sleep = sleepSync,
-  log = (line) => console.log(line),
+  // Retry diagnostics belong on stderr: callers may run under node:test,
+  // where stdout is the runner's framed protocol rather than a log stream.
+  log = (line) => console.error(line),
   mutationName = 'quota mutation',
 } = {}) {
   const attempts = positiveInteger(maxAttempts, DEFAULT_MAX_ATTEMPTS);
