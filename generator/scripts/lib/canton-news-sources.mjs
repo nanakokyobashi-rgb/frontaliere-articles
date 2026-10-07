@@ -81,6 +81,23 @@ export const MAX_INLINE_CRAWL_DELAY_SECONDS = 60;
 export const CANTON_SOURCE_TIMEOUT_MS = 15_000;
 
 /**
+ * Un errore transitorio di rete/servizio non deve trasformare una fonte
+ * verificata in una fonte assente per l'intero run. Il retry e' bounded a due
+ * tentativi e viene comunque limitato dal budget gia' dichiarato dalla fonte.
+ */
+export const CANTON_SOURCE_MAX_ATTEMPTS = 2;
+
+const RETRYABLE_SOURCE_STATUSES = new Set([408, 425, 429]);
+
+function isRetryableSourceStatus(status) {
+  return RETRYABLE_SOURCE_STATUSES.has(Number(status)) || (Number(status) >= 500 && Number(status) <= 599);
+}
+
+function isRetryableSourceError(error) {
+  return Boolean(error?.retryable) || isRetryableSourceStatus(error?.status);
+}
+
+/**
  * `Accept-Language` della richiesta: la lingua della fonte, poi qualunque.
  * Non e' cosmesi: senza, `fetch` di Node manda `*` e l'API news di be.ch
  * risponde 500 a ogni richiesta (misurato il 2026-10-05; con `de` risponde
@@ -962,23 +979,49 @@ export async function scanCantonSource(source, ctx) {
   }
 
   const get = async (url, accept) => {
-    if (requests >= budget) throw new Error(`budget di ${budget} richieste per run esaurito`);
-    requests += 1;
-    return throttle.run(host, quirks.crawlDelaySeconds || 0, async () => {
-      const res = await fetchImpl(url, {
-        headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
-        redirect: 'follow',
-        signal: AbortSignal.timeout(CANTON_SOURCE_TIMEOUT_MS),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const decoded = decodeResponseBody(await res.arrayBuffer(), {
-        contentType: res.headers?.get?.('content-type') ?? null,
-        forcedCharset: quirks.charset || null,
-      });
-      if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
-      else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
-      return decoded.text;
-    });
+    let lastError;
+    for (let attempt = 1; attempt <= CANTON_SOURCE_MAX_ATTEMPTS; attempt += 1) {
+      if (requests >= budget) {
+        throw lastError || new Error(`budget di ${budget} richieste per run esaurito`);
+      }
+      requests += 1;
+      try {
+        return await throttle.run(host, quirks.crawlDelaySeconds || 0, async () => {
+          let res;
+          try {
+            res = await fetchImpl(url, {
+              headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
+              redirect: 'follow',
+              signal: AbortSignal.timeout(CANTON_SOURCE_TIMEOUT_MS),
+            });
+          } catch (error) {
+            // Fetch/timeout/DNS errors are transient candidates; parser and
+            // decoding errors remain fail-closed and are not retried here.
+            error.retryable = true;
+            throw error;
+          }
+          if (!res.ok) {
+            const error = new Error(`HTTP ${res.status}`);
+            error.status = res.status;
+            throw error;
+          }
+          const decoded = decodeResponseBody(await res.arrayBuffer(), {
+            contentType: res.headers?.get?.('content-type') ?? null,
+            forcedCharset: quirks.charset || null,
+          });
+          if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
+          else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
+          return decoded.text;
+        });
+      } catch (error) {
+        lastError = error;
+        const budgetAllowsRetry = budget === Infinity || requests < budget;
+        const canRetry = attempt < CANTON_SOURCE_MAX_ATTEMPTS && budgetAllowsRetry && isRetryableSourceError(error);
+        if (!canRetry) throw error;
+        notes.push(`retry fonte ${attempt + 1}/${CANTON_SOURCE_MAX_ATTEMPTS} dopo ${error.message}`);
+      }
+    }
+    throw lastError || new Error('errore fonte non riconosciuto');
   };
 
   const XML_ACCEPT = 'application/rss+xml, application/atom+xml, application/xml, text/xml';
