@@ -210,6 +210,7 @@ export const CONTENT_GATES = [
   'generator/tests/seo-title-prefix-repair.test.mjs',
   'generator/tests/seo-description-cap.test.mjs',
   'generator/tests/seo-digit-residue-guard.test.mjs',
+  'generator/tests/seo-http-downgrade.test.mjs',
   'generator/tests/slug-placeholder-guard.test.mjs',
   'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs',
   'generator/tests/vacant-key-facts.test.mjs',
