@@ -7847,6 +7847,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.raffineria-cressier-carburanti.title': 'Le diesel suisse frôle 2,50 francs : alerte à Cressier',
     'blog.article.raffineria-cressier-carburanti.excerpt': '## En bref - Le diesel en Suisse frôle 2,50 francs le litre - Cressier couvre environ 35% des carburants nationaux - Le raffinage européen a une capacité',
     'blog.article.raffineria-cressier-carburanti.imageAlt': 'Pompe diesel en Suisse avec une raffinerie en arrière-plan',
+    'blog.article.quattro-oggetti-urne-novembre.title': 'Votation du 29 novembre : TVA, AVS et quatre objets',
+    'blog.article.quattro-oggetti-urne-novembre.excerpt': 'Le 29 novembre, les citoyens voteront sur quatre objets : augmentation de la TVA pour la 13e rente AVS, deux initiatives populaires et modification de la loi sur le matériel de guerre.',
+    'blog.article.quattro-oggetti-urne-novembre.imageAlt': 'Urne suisse et bulletins pour le vote du 29 novembre',
 };
 
 export default blogMetaChFr;

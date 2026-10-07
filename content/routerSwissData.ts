@@ -2638,6 +2638,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ginevra-iniziativa-cern-fcc': { it: 'ginevra-iniziativa-cern-fcc', en: 'geneva-initiative-cern-fcc', de: 'genf-initiative-cern-fcc', fr: 'geneve-initiative-cern-fcc' },
  'iniziative-mps-giustizia-respinte': { it: 'iniziative-mps-giustizia-respinte', en: 'mps-justice-initiatives-rejected', de: 'mps-justizinitiativen-abgelehnt', fr: 'initiatives-mps-justice-rejetees' },
  'raffineria-cressier-carburanti': { it: 'raffineria-cressier-carburanti', en: 'cressier-refinery-fuel-prices', de: 'raffinerie-cressier-treibstoffpreise', fr: 'raffinerie-cressier-prix-carburants' },
+ 'quattro-oggetti-urne-novembre': { it: 'quattro-oggetti-urne-novembre', en: 'four-ballot-items-november', de: 'vier-abstimmungsobjekte-november', fr: 'quatre-objets-vote-novembre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

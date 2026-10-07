@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/prio%2eswiss%3a-alcuni-medici-specialisti-esagerano-con-tardoc/92010294": {
-    "articleId": "prio-swiss-medici-specialisti-tardoc",
-    "ts": "2026-09-05T13:56:33.347Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/tg%3a-colpito-a-morte-da-cesto-di-mongolfiera/92006537": {
     "articleId": "morte-mongolfiera-ticino",
     "ts": "2026-09-05T14:06:08.331Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1954981/prezzi-varopreem-raffineria-carburanti-diesel-svizzera-produzione-ceo": {
     "articleId": "raffineria-cressier-carburanti",
     "ts": "2026-10-07T05:28:44.579Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
+    "articleId": "quattro-oggetti-urne-novembre",
+    "ts": "2026-10-07T06:42:41.995Z",
     "keyForm": 2
   }
 }

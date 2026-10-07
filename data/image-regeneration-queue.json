@@ -63,6 +63,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:29:51.075Z",
       "lastFailureAt": "2026-10-07T06:29:51.075Z"
+    },
+    {
+      "articleId": "quattro-oggetti-urne-novembre",
+      "title": "Voto del 29 novembre: IVA, AVS e quattro oggetti",
+      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
+      "reason": "All image providers failed for article-quattro-oggetti-urne-novembre: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:42:41.992Z",
+      "lastFailureAt": "2026-10-07T06:42:41.992Z"
     }
   ]
 }
