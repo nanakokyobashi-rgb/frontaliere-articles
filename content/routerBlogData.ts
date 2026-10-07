@@ -4223,6 +4223,7 @@ export const BLOG_SLUGS: Record<string, Record<ArticleLocale, string>> = {
   'pedemontana-truffa-sms-frontalieri': { it: 'pedemontana-truffa-sms-frontalieri', en: 'pedemontana-scam-sms-frontaliers', de: 'pedemontana-betrug-sms-frontalieren', fr: 'pedemontana-arnaque-sms-frontaliers' },
   'pedemontana-falso-pedaggio-sms': { it: 'pedemontana-falso-pedaggio-sms', en: 'pedemontana-no-toll-payments-via-sms-or-email', de: 'pedemontana-keine-mautzahlung-per-sms-oder-e-mail', fr: 'pedemontana-aucun-paiement-de-peage-par-sms-ou-e-mail' },
   'aggressione-van-villa-olmo': { it: 'aggressione-van-villa-olmo', en: 'tourists-attacked-van-como', de: 'touristen-van-como-angriff', fr: 'touristes-agresses-van-como' },
+  'furto-van-cernobbio-21enne': { it: 'furto-van-cernobbio-21enne', en: 'como-tourists-robbed-in-van', de: 'como-touristen-im-van-bestreubt', fr: 'come-touristes-voles-dans-un-van' },
 };
 
 
