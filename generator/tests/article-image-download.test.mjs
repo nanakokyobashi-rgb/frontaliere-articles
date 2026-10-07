@@ -127,6 +127,24 @@ test('il registro immagini viene dal profilo della sezione e manca fail-closed',
   }
 });
 
+test('IL CASO canton-sh: una sezione senza registro e senza id non legge niente e non fallisce', async () => {
+  // Run 37691307907, primo giro cantonale dopo la PR 2425: 23 sezioni su 24
+  // pubblicate, canton-sh ferma su «registro immagini dichiarate non leggibile».
+  // La sezione ha solo hubs/: nessun articolo, quindi nessun registry.ts.
+  const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-registry-'));
+  try {
+    fs.mkdirSync(path.join(rootDir, 'content', 'cantons', 'canton-sh', 'hubs'), { recursive: true });
+    assert.deepEqual(await readDeclaredImages(rootDir, 'canton-sh', []), {});
+    // Con un id richiesto il registro serve davvero: la sua assenza resta un errore.
+    await assert.rejects(
+      readDeclaredImages(rootDir, 'canton-sh', ['un-articolo']),
+      /registro immagini dichiarate non leggibile per "canton-sh"/,
+    );
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', async () => {
   const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-root-'));
   const distDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-dist-'));
