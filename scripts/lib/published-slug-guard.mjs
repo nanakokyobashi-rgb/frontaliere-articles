@@ -5,7 +5,9 @@
  * article may legitimately contain the word `Null`, but the literal segment
  * `null` is never a safe fallback for a public URL. The topic-gate field names
  * are a second reserved family: an abort verdict is control data, not an
- * article id or slug. Keep the rules here so the writer, API builder, sitemap
+ * article id or slug. Only the shapes that can identify a leaked verdict are
+ * reserved here; normal slug words such as `reason-for-moving-to-ticino` must
+ * remain publishable. Keep the rules here so the writer, API builder, sitemap
  * builder and corpus scan cannot drift apart.
  */
 

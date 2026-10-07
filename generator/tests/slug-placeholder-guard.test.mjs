@@ -93,7 +93,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
 import { metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
-import { findArticleIdentityServiceMarkers, findPublishedIdentityServiceMarkers } from '../../scripts/lib/published-slug-guard.mjs';
+import {
+  findArticleIdentityServiceMarkers,
+  findPublishedIdentityServiceMarkers,
+  isReservedPublishedSlug,
+} from '../../scripts/lib/published-slug-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -277,9 +281,33 @@ test('il classificatore del topic gate distingue i marker di servizio dagli slug
   assert.deepEqual(findPublishedIdentityServiceMarkers('abort_saint-nicolas-non-frontaliero'), ['abort']);
   assert.deepEqual(findPublishedIdentityServiceMarkers('news-reason-for-rejection'), ['reason']);
   assert.deepEqual(findPublishedIdentityServiceMarkers('reason-for-moving-to-ticino'), []);
-  for (const slug of ['aborted-canton-health', 'reasonable-tax-guide', 'topical-relevant-ticino', 'news-abort-policy']) {
+  assert.deepEqual(findPublishedIdentityServiceMarkers('reason'), ['reason']);
+  for (const slug of [
+    'reason-for-moving-to-ticino',
+    'news-abort-policy',
+    'aborted-canton-health',
+    'reasonable-tax-guide',
+    'topical-relevant-ticino',
+  ]) {
     assert.deepEqual(findPublishedIdentityServiceMarkers(slug), [], `falso positivo su ${slug}`);
+    assert.equal(isReservedPublishedSlug(slug), false, `lo slug legittimo ${slug} e' stato riservato`);
   }
+  assert.equal(isReservedPublishedSlug('news-reason-for-rejection'), true);
+  assert.equal(isReservedPublishedSlug('abort-topical-relevance-pre-saint-didier'), true);
+});
+
+test('il writer ripete il guard sull\'identita\' finale prima del lock', () => {
+  const primaryBoundary = src.indexOf('data.canton = registryCantonsOrNone(data, url);');
+  const primaryGuard = src.indexOf('assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });', primaryBoundary);
+  const primaryLock = src.indexOf('beginRegisterLock(data.id);', primaryBoundary);
+  assert.ok(primaryBoundary >= 0, 'confine di scrittura primario non trovato');
+  assert.ok(primaryGuard > primaryBoundary && primaryGuard < primaryLock, 'guard finale assente prima del lock primario');
+
+  const secondaryDerive = src.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);');
+  const secondaryGuard = src.indexOf('assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });', secondaryDerive);
+  const secondaryLock = src.indexOf('beginRegisterLock(data.id);', secondaryDerive);
+  assert.ok(secondaryDerive >= 0, 'derivazione secondaria non trovata');
+  assert.ok(secondaryGuard > secondaryDerive && secondaryGuard < secondaryLock, 'guard finale assente dopo la derivazione secondaria');
 });
 
 // ── L'enforcement al punto di scrittura condiviso ──────────────────────────
