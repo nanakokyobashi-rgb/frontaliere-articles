@@ -7865,6 +7865,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.title': 'Rendements des titres suisses en hausse, BNS à 0%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.excerpt': '## En bref - Les titres de la Confédération à dix ans rapportent 0,58% - La BNS maintient le taux directeur à 0% - Le rendement est passé de 0,18% à 0,69%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.imageAlt': 'Image éditoriale relative à: Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
+    'blog.article.riserve-valutarie-settembre-stabili.title': 'Réserves de devises de la BNS stables en septembre',
+    'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## En bref - BNS : réserves de devises à 771 milliards - En septembre, +0,4 milliard par rapport à août - Euro +0,9 %, dollar +3 % ; ensemble environ 80 % ## Faits clés',
+    'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Scène urbaine suisse liée aux données sur les réserves de devises',
 };
 
 export default blogMetaChFr;

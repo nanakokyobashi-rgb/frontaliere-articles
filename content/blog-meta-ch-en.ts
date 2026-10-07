@@ -7865,6 +7865,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.title': 'Swiss bond yields rise, SNB at 0%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.excerpt': '## TL;DR - Ten-year Confederation bonds yield 0,58% - The SNB keeps the key rate at 0% - The yield rose from 0,18% to 0,69%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.imageAlt': 'Editorial image related to: Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
+    'blog.article.riserve-valutarie-settembre-stabili.title': 'BNS foreign exchange reserves stable in September',
+    'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## TL;DR - BNS: foreign currency reserves at 771 billion - In September, +0,4 billion compared with August - Euro +0,9%, dollar +3%; together about 80% ## Key facts',
+    'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Swiss urban scene linked to foreign-currency reserve data',
 };
 
 export default blogMetaChEn;

@@ -7865,6 +7865,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.title': 'Renditen Schweizer Anleihen steigen, SNB bei 0%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.excerpt': '## Auf einen Blick - Zehnjährige Anleihen der Eidgenossenschaft rentieren 0,58% - Die SNB belässt den Leitzins bei 0% - Die Rendite ist von 0,18% auf 0,69% gestiegen',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.imageAlt': 'Redaktionelles Bild zu: Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
+    'blog.article.riserve-valutarie-settembre-stabili.title': 'Devisenreserven der BNS im September stabil',
+    'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## Auf einen Blick - BNS: Devisenreserven bei 771 Milliarden - Im September +0,4 Milliarden gegenüber August - Euro +0,9%, Dollar +3%; zusammen etwa 80% ## Wichtige Fakten',
+    'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Schweizer Stadtszene zu Daten über Währungsreserven',
 };
 
 export default blogMetaChDe;

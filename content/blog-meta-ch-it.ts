@@ -7865,6 +7865,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.title': 'Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.excerpt': '## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%',
     'blog.article.rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.imageAlt': 'Immagine editoriale relativa a: Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
+    'blog.article.riserve-valutarie-settembre-stabili.title': 'Riserve di divise BNS stabili a settembre',
+    'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Scena urbana svizzera associata all\'analisi delle riserve valutarie',
 };
 
 export default blogMetaChIt;

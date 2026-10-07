@@ -99130,6 +99130,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riserve-valutarie-settembre-stabili': {
+    title: 'Riserve di divise BNS stabili a settembre | Frontaliere Ticino',
+    description: '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    keywords: 'frontalieri, ticino, svizzera, italia, riserve, divise, stabili, settembre',
+    ogTitle: 'Riserve di divise BNS stabili a settembre',
+    ogDescription: '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    canonicalPath: '/articoli-svizzera/riserve-valutarie-settembre-stabili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riserve di divise BNS stabili a settembre",
+      "description": "## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riserve-valutarie-settembre-stabili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena urbana svizzera associata all'analisi delle riserve valutarie"
+      },
+      "datePublished": "2026-10-07T12:36:56+00:00",
+      "dateModified": "2026-10-07T12:36:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/riserve-valutarie-settembre-stabili/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
