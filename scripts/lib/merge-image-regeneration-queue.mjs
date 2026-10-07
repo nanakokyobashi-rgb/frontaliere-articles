@@ -4,7 +4,9 @@
  *
  * La coda e' un documento JSON riscritto per intero da due producer diversi.
  * Durante un rebase lo stage 2 e' la copia upstream e lo stage 3 e' il commit
- * rigiocato: si conservano tutti gli item e si deduplicano per articleId.
+ * rigiocato. Lo stage 1 aggiunge il punto comune: se il drain ha rimosso una
+ * voce, la copia identica rimasta in un producer partito prima del drain e'
+ * stale e non va reintrodotta; una modifica o aggiunta realmente nuova resta.
  * Per lo stesso articolo vince il fallimento piu' recente; requestedAt resta
  * il primo avvistamento, cosi' la coda non dimentica da quanto aspetta.
  */
@@ -72,6 +74,19 @@ function latest(a, b) {
   return left >= right ? a : b;
 }
 
+function comparable(value) {
+  if (Array.isArray(value)) return value.map(comparable);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, comparable(value[key])]));
+  }
+  return value;
+}
+
+function sameItem(left, right) {
+  return left != null && right != null
+    && JSON.stringify(comparable(left)) === JSON.stringify(comparable(right));
+}
+
 function mergeItem(existing, candidate) {
   const existingTime = timeOf(existing.lastFailureAt) ?? timeOf(existing.requestedAt) ?? -Infinity;
   const candidateTime = timeOf(candidate.lastFailureAt) ?? timeOf(candidate.requestedAt) ?? -Infinity;
@@ -86,13 +101,38 @@ function mergeItem(existing, candidate) {
   };
 }
 
-/** Pure merge used by the conflict resolver and its tests. */
-export function mergeImageRegenerationQueues(upstream, replayed) {
+/** Pure three-way merge used by the conflict resolver and its tests. */
+export function mergeImageRegenerationQueues(upstream, replayed, base = { items: [] }) {
+  const baseByArticle = new Map(base.items.map((item) => [String(item.articleId), item]));
+  const upstreamByArticle = new Map(upstream.items.map((item) => [String(item.articleId), item]));
+  const replayedByArticle = new Map(replayed.items.map((item) => [String(item.articleId), item]));
   const byArticle = new Map();
-  for (const item of [...upstream.items, ...replayed.items]) {
-    const articleId = String(item.articleId);
-    const previous = byArticle.get(articleId);
-    byArticle.set(articleId, previous ? mergeItem(previous, item) : { ...item, articleId });
+  const articleIds = [...new Set([...upstream.items, ...replayed.items].map((item) => String(item.articleId)))];
+
+  for (const articleId of articleIds) {
+    const baseItem = baseByArticle.get(articleId);
+    const upstreamItem = upstreamByArticle.get(articleId);
+    const replayedItem = replayedByArticle.get(articleId);
+
+    // A side that is absent deleted the item. When the other side is an
+    // unchanged copy of the common base, that copy is stale rather than a new
+    // request and the deletion must win. A changed item is a genuine later
+    // update and remains eligible for the normal merge.
+    if (baseItem && !upstreamItem && replayedItem && sameItem(replayedItem, baseItem)) continue;
+    if (baseItem && upstreamItem && !replayedItem && sameItem(upstreamItem, baseItem)) continue;
+
+    if (upstreamItem && replayedItem) {
+      if (baseItem && sameItem(upstreamItem, baseItem) && !sameItem(replayedItem, baseItem)) {
+        byArticle.set(articleId, {...replayedItem, articleId});
+      } else if (baseItem && sameItem(replayedItem, baseItem) && !sameItem(upstreamItem, baseItem)) {
+        byArticle.set(articleId, {...upstreamItem, articleId});
+      } else {
+        byArticle.set(articleId, mergeItem(upstreamItem, replayedItem));
+      }
+    } else {
+      const item = upstreamItem || replayedItem;
+      if (item) byArticle.set(articleId, {...item, articleId});
+    }
   }
   return {
     schema: IMAGE_REGENERATION_QUEUE_SCHEMA,
@@ -101,9 +141,10 @@ export function mergeImageRegenerationQueues(upstream, replayed) {
 }
 
 function resolveFile(file) {
+  const base = parseQueue(readStage(1, file), 'base comune');
   const upstream = parseQueue(readStage(2, file), 'upstream');
   const replayed = parseQueue(readStage(3, file), 'commit rigiocato');
-  const merged = mergeImageRegenerationQueues(upstream, replayed);
+  const merged = mergeImageRegenerationQueues(upstream, replayed, base);
   writeFileSync(file, `${JSON.stringify(merged, null, 2)}\n`, 'utf8');
   console.log(`merge coda copertine: ${file} (${merged.items.length} articleId distinti)`);
 }

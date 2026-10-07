@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   GENERATED_IMAGE_CREDIT,
@@ -383,6 +384,97 @@ test('il merge del registro applica solo il delta locale e conserva metadata ups
   assert.equal(merged.assetCount, 3);
 });
 
+function workflowConcurrencyGroups(source) {
+  const lines = source.split('\n');
+  const groups = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const concurrency = /^(\s*)concurrency:\s*$/.exec(lines[index]);
+    if (!concurrency) continue;
+
+    const baseIndent = concurrency[1].length;
+    let job = null;
+    if (baseIndent > 0) {
+      for (let previous = index - 1; previous >= 0; previous -= 1) {
+        const candidate = /^( {2})([A-Za-z0-9_-]+):\s*$/.exec(lines[previous]);
+        if (candidate) {
+          job = candidate[2];
+          break;
+        }
+      }
+    }
+
+    for (let next = index + 1; next < lines.length; next += 1) {
+      if (lines[next].trim() === '') continue;
+      const indent = lines[next].match(/^\s*/u)[0].length;
+      if (indent <= baseIndent) break;
+      const group = new RegExp(`^ {${baseIndent + 2}}group:\\s*(.+)$`).exec(lines[next]);
+      if (group) {
+        groups.push({job, value: group[1].trim(), line: next + 1});
+        break;
+      }
+    }
+  }
+
+  return groups;
+}
+
+test('il gruppo generate-article resta confinato ai writer ammessi e il drain ha una corsia propria', () => {
+  const workflowsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.github/workflows');
+  const workflowSources = [
+    ['generate-article.yml', 'generate-article.yml'],
+    ['generate-article-core.yml', 'generate-article-core.yml'],
+    ['publish-journalist-articles.yml', 'publish-journalist-articles.yml'],
+    ['regenerate-queued-covers.yml', 'regenerate-queued-covers.yml'],
+  ];
+  const declarations = [];
+
+  for (const [filename, workflowFile] of workflowSources) {
+    const source = fs.readFileSync(path.join(workflowsDir, workflowFile), 'utf8');
+    for (const group of workflowConcurrencyGroups(source)) {
+      declarations.push({filename, ...group});
+    }
+  }
+
+  const generateArticle = declarations.filter(({value}) => value.includes('generate-article'));
+  const unexpected = generateArticle.filter(({filename, job, value}) => !(
+    (filename === 'generate-article.yml' && job === 'generate' && value.includes('generate-article'))
+    || (filename === 'publish-journalist-articles.yml' && job === null && value === 'generate-article')
+  ));
+  assert.deepEqual(unexpected, []);
+  assert.ok(generateArticle.some(({filename, job}) => filename === 'generate-article.yml' && job === 'generate'));
+  assert.ok(generateArticle.some(({filename, job}) => filename === 'publish-journalist-articles.yml' && job === null));
+
+  const drain = declarations.find(({filename, value}) => (
+    filename === 'regenerate-queued-covers.yml' && value === 'regenerate-queued-covers'
+  ));
+  assert.ok(drain);
+  assert.equal(
+    fs.readFileSync(path.join(workflowsDir, 'regenerate-queued-covers.yml'), 'utf8')
+      .match(/cancel-in-progress:\s*false/gu)?.length,
+    1,
+  );
+});
+
+test('i writer concorrenti non possono riscrivere un articolo gia\' registrato', () => {
+  const createArticle = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  const registerStart = createArticle.indexOf('export async function registerArticleFiles');
+  const registerEnd = createArticle.indexOf('\nexport function checkArticleIdExists', registerStart);
+  assert.ok(registerStart >= 0 && registerEnd > registerStart);
+  const registerBody = createArticle.slice(registerStart, registerEnd);
+  assert.match(registerBody, /resolveRegisterLockAtStartup\(\);[\s\S]*if \(checkArticleIdExists\(data\.id\)\)/);
+
+  const journalist = fs.readFileSync(new URL('../scripts/publish-journalist-article.mjs', import.meta.url), 'utf8');
+  const processStart = journalist.indexOf('async function processDoc(');
+  const processEnd = journalist.indexOf('\nasync function ', processStart + 1);
+  assert.ok(processStart >= 0 && processEnd > processStart);
+  const processBody = journalist.slice(processStart, processEnd);
+  const duplicateGuard = processBody.indexOf('checkArticleIdExists(data.id)');
+  const coverResolution = processBody.indexOf('resolveHeroImage(data, doc)');
+  assert.ok(duplicateGuard >= 0 && duplicateGuard < coverResolution,
+    'il publisher deve rifiutare l id gia registrato prima di poter scegliere o scrivere una copertina');
+});
+
 test('il merge del registro fa vincere una rigenerazione locale realmente cambiata', () => {
   const upstream = { schema: 1, assets: [{ assetId: 'article-old', version: 'upstream' }] };
   const base = { schema: 1, assets: [{ assetId: 'article-old', version: 'base' }] };
@@ -429,4 +521,6 @@ test('il workflow attende la completion del publisher prima di ackare l outbox',
   assert.ok(acknowledge > completion);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
   assert.doesNotMatch(workflow.slice(dispatch, acknowledge), /git rm -f/);
+  assert.match(workflow, /registry_base=\"\$RUNNER_TEMP\/generated-image-registry-base\.json\"/);
+  assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_base\" \"\$registry_snapshot\"/);
 });

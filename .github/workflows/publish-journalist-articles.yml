@@ -313,6 +313,9 @@ jobs:
               data/generated-image-registry.json \
               data/editorial-image-registry.json \
               --merge-queue data/image-regeneration-queue.json \
+              --section-surfaces \
+              --take-theirs content/image-credits/blog/ \
+              --take-theirs public/images/blog/ \
               || rebased=0
             if [ "$rebased" -eq 1 ]; then
               node scripts/ci/merge-generated-image-registry.mjs \

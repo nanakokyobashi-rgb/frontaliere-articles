@@ -21,10 +21,14 @@ on:
         default: false
         type: boolean
 
-# Mai cancellare un drain in corso: ha gia' pagato le immagini e sta per
-# rendere atomici hero, registro, thumbnail e coda.
+# Il gruppo condiviso `generate-article` e' una politica di scarto in entrambe
+# le direzioni: GitHub conserva una sola run pending e un arrivo del drain puo'
+# sfrattare una generazione (vedi l'intestazione di generate-article.yml).
+# La mutua esclusione delle scritture su main vive gia' nel push con rebase dello
+# step «Commit and push corpus data»; due drain non devono sovrapporsi, quindi
+# resta un gruppo ma proprio.
 concurrency:
-  group: generate-article
+  group: regenerate-queued-covers
   cancel-in-progress: false
 
 permissions:

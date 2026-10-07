@@ -284,6 +284,10 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
     'verifica la generazione dei workflow cantonali con YAML e corpi sintetici '
     + 'in directory temporanee; non apre il content/ reale del checkout, quindi '
     + 'un articolo pubblicato non puo\' renderla rossa.',
+  'generator/tests/regenerate-queued-covers.test.mjs':
+    'verifica workflow, script e fixture del drain; il path ancorato a import.meta.url '
+    + 'punta a .github/workflows e non apre il content/ reale del checkout, quindi '
+    + 'un articolo pubblicato non puo\' renderla rossa.',
   'generator/tests/canton-classifier.test.mjs':
     'classifica snapshot in generator/data e un mini-corpus creato sotto '
     + 'mkdtemp; non legge il content/ reale del checkout, quindi un articolo '
