@@ -16324,7 +16324,18 @@ async function main() {
       // anche a budget wall-clock esaurito (il riepilogo e' il contratto).
       await exitDryRunScan({ chosen: null, tier: null, pool: null, poolSize: 0 });
     } else if (!newsSuccess && !candidateSuccess && wallBudgetExceeded()) {
+      const note = `No article after news pool wall-clock budget (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min); evergreen fallback deferred`;
       console.error(`⏱️  Budget wall-clock (${Math.round(RUN_WALL_BUDGET_MS / 60000)}min) superato — salto il fallback evergreen; nessun articolo questo run (deferito al prossimo).`);
+      // Il pool news ha consumato il budget senza produrre un articolo. Questo
+      // e' un differimento dichiarato, non un return normale: senza il report
+      // e l'exit condiviso, il fail-closed del controllo di ritorno vede ancora
+      // `status=running` e trasforma una condizione prevista in
+      // `no-article-undeclared-exit`.
+      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
+      // Ragione legittima #8 di otto (corpus): il budget della run e' finito
+      // prima del fallback evergreen; il giro successivo puo' scegliere fonti
+      // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess && !SECTION_PROFILE.evergreenPool) {
       // Sezione cantonale: nessun pool evergreen generico per costruzione (i
       // suoi temi sono frontalieri/Ticino o nazionali; gli evergreen del
