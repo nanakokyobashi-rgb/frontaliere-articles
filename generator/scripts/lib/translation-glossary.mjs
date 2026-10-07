@@ -692,7 +692,10 @@ function tidySpacing(value = '') {
 // `…/a(b)/Perch%C3%A9`): closing the span at the first `)` left whatever
 // followed it exposed to the strip. A lone `(` is still part of the URL, and a
 // bare URL quoted inside a parenthesis of prose still ends before the `)`.
-const LINK_SPAN_RE = /\]\((?:[^()\s]|\((?:[^()\s]*\))?)*\)|(?:https?:\/\/|www\.)(?:[^\s<>"'()\]]|\((?:[^\s<>"'()\]]*\))?)+/gi;
+// Markdown also allows a link title after the destination and an angle-bracket
+// destination (`](</wiki/Perch%C3%A9> "titolo")`). Keep both inside the masked
+// span so an encoded token in the relative target cannot reach the strip.
+const LINK_SPAN_RE = /\]\((?:<[^>\r\n]*>|(?:[^()\s]|\((?:[^()\s]*\))?)*)(?:[ \t]+(?:"(?:\\.|[^"\\\r\n])*"|'(?:\\.|[^'\\\r\n])*'|\((?:\\.|[^)\\\r\n])*\)))?\)|(?:https?:\/\/|www\.)(?:[^\s<>"'()\]]|\((?:[^\s<>"'()\]]*\))?)+/gi;
 const LINK_SLOT_RE = /\u0000(\d+)\u0000/g;
 
 /** Remove template/placeholder tokens (see the design note above). */
