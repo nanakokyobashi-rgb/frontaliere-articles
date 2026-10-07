@@ -113,6 +113,7 @@ on:
       - 'generator/scripts/lib/atomic-write-json.mjs'
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'
+      - 'data/blog-cover-cdn-sync-queue.json'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -134,7 +135,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
   # `issues: write` is the GITHUB_TOKEN fallback for the "Alert on shadowed
@@ -633,6 +634,237 @@ jobs:
             "
           else
             echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
+          fi
+
+      # A site-side licence-audit replacement keeps the article URL stable but
+      # changes the bytes at that URL. The corpus is a second publisher of the
+      # same CDN key, so this step runs BEFORE Pages deploy and keeps a durable
+      # queue. A failed upload therefore blocks the deploy and leaves the exact
+      # paths for the next scheduled or manual reconciliation.
+      - name: Publish governed blog cover bytes before Pages deploy
+        if: github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+        run: |
+          set -euo pipefail
+          if [ "$REF" != 'refs/heads/main' ]; then
+            echo "::error::cover CDN reconciliation is allowed only from refs/heads/main (got $REF)"
+            exit 1
+          fi
+          queue_file='data/blog-cover-cdn-sync-queue.json'
+          changed_file_list="$RUNNER_TEMP/publish-api-changed-blog-covers.txt"
+          manifest_file="$RUNNER_TEMP/publish-api-blog-covers.tsv"
+          queue_update="$RUNNER_TEMP/publish-api-blog-cover-queue.json"
+          : > "$changed_file_list"
+
+          if [ "$EVENT_NAME" = 'push' ]; then
+            if [ -n "${BEFORE:-}" ] && [[ ! "$BEFORE" =~ ^0+$ ]]; then
+              if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+                echo "::error::push base is not reachable: $BEFORE"
+                exit 1
+              fi
+              if ! git diff --name-only --diff-filter=AMRC --find-renames --find-copies "$BEFORE" "$SHA" -- \
+                  'public/images/blog/*.webp' \
+                  'public/images/blog/thumbnails/*.webp' > "$changed_file_list"; then
+                echo "::error::cannot compute changed blog covers between $BEFORE and $SHA"
+                exit 1
+              fi
+            fi
+          fi
+
+          node --input-type=module - "$queue_file" "$changed_file_list" "$manifest_file" "$queue_update" <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+
+          const [, , queuePath, changedPath, manifestPath, nextQueuePath] = process.argv;
+          const pathPattern = /^public\/images\/blog\/(?:thumbnails\/)?[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+          const current = fs.existsSync(queuePath)
+            ? JSON.parse(fs.readFileSync(queuePath, 'utf8'))
+            : { schema: 1, items: [] };
+          if (current.schema !== 1 || !Array.isArray(current.items)) {
+            throw new Error(`${queuePath}: invalid queue schema`);
+          }
+          const items = new Map();
+          const add = (value, { queued = false } = {}) => {
+            const file = String(value || '').trim();
+            if (!file) return;
+            if (!pathPattern.test(file)) {
+              if (queued) {
+                console.error(`::warning::dropping invalid queued blog cover path: ${file}`);
+                return;
+              }
+              throw new Error(`invalid blog cover path: ${file}`);
+            }
+            if (!fs.existsSync(file)) {
+              if (queued) {
+                console.error(`::warning::dropping queued blog cover no longer present: ${file}`);
+                return;
+              }
+              throw new Error(`changed blog cover is missing: ${file}`);
+            }
+            const sha256 = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+            items.set(file, { path: file, sha256 });
+          };
+          for (const item of current.items) add(item?.path, { queued: true });
+          for (const file of fs.readFileSync(changedPath, 'utf8').split(/\r?\n/)) add(file);
+          const ordered = [...items.values()].sort((left, right) => left.path.localeCompare(right.path));
+          fs.writeFileSync(manifestPath, ordered.map((item) => `${item.path}\t${item.sha256}`).join('\n') + (ordered.length ? '\n' : ''));
+          fs.writeFileSync(nextQueuePath, `${JSON.stringify({ schema: 1, items: ordered }, null, 2)}\n`);
+          NODE
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          rebuild_manifest_from_queue() {
+            node --input-type=module - "$queue_file" "$manifest_file" "$queue_update" <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+
+          const [, , queuePath, manifestPath, nextQueuePath] = process.argv;
+          const pathPattern = /^public\/images\/blog\/(?:thumbnails\/)?[a-z0-9][a-z0-9._-]{2,127}\.webp$/;
+          const current = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+          if (current.schema !== 1 || !Array.isArray(current.items)) {
+            throw new Error(`${queuePath}: invalid queue schema after rebase`);
+          }
+          const items = new Map();
+          for (const item of current.items) {
+            const file = String(item?.path || '').trim();
+            if (!pathPattern.test(file)) {
+              console.error(`::warning::dropping invalid queued blog cover path after rebase: ${file}`);
+              continue;
+            }
+            if (!fs.existsSync(file)) {
+              console.error(`::warning::dropping queued blog cover no longer present after rebase: ${file}`);
+              continue;
+            }
+            const sha256 = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+            items.set(file, { path: file, sha256 });
+          }
+          const ordered = [...items.values()].sort((left, right) => left.path.localeCompare(right.path));
+          const next = `${JSON.stringify({ schema: 1, items: ordered }, null, 2)}\n`;
+          fs.writeFileSync(queuePath, next);
+          fs.writeFileSync(manifestPath, ordered.map((item) => `${item.path}\t${item.sha256}`).join('\n') + (ordered.length ? '\n' : ''));
+          fs.writeFileSync(nextQueuePath, next);
+          NODE
+          }
+
+          push_queue_commit() {
+            if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+              echo '::error::GITHUB_PAT_NANAKO is required to persist the cover sync queue'
+              return 1
+            fi
+            local attempt auth_header
+            local_queue_backup="$RUNNER_TEMP/publish-api-blog-cover-queue-before-rebase.json"
+            auth_header="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 | tr -d '\n')"
+            # actions/checkout persists GITHUB_TOKEN in the local git config;
+            # the corpus main ruleset rejects that bot identity for queue
+            # commits, so remove it and use the owner PAT explicitly.
+            git config --local --unset-all http.https://github.com/.extraheader || true
+            git config --local --unset-all http.extraheader || true
+            for attempt in 1 2 3; do
+              if git -c "http.extraheader=AUTHORIZATION: basic $auth_header" push origin HEAD:main; then
+                return 0
+              fi
+              echo "::warning::main advanced while updating the cover queue; rebasing attempt $attempt/3"
+              git -c "http.extraheader=AUTHORIZATION: basic $auth_header" fetch --no-tags origin main
+              if git rebase origin/main; then
+                rebuild_manifest_from_queue
+                if ! git diff --quiet -- "$queue_file"; then
+                  git add "$queue_file"
+                  git commit -m 'chore(licenses): reconcile blog cover CDN queue [skip ci]'
+                fi
+                continue
+              fi
+              cp "$queue_file" "$local_queue_backup"
+              git rebase --abort || true
+              git reset --hard origin/main
+              node --input-type=module - "$queue_file" "$local_queue_backup" <<'NODE'
+          import fs from 'node:fs';
+
+          const [, , queuePath, localPath] = process.argv;
+          const remote = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+          const local = JSON.parse(fs.readFileSync(localPath, 'utf8'));
+          if (remote.schema !== 1 || local.schema !== 1) {
+            throw new Error('cannot merge cover queues with an invalid schema');
+          }
+          const items = new Map();
+          for (const item of remote.items || []) {
+            if (item?.path) items.set(item.path, item);
+          }
+          for (const item of local.items || []) {
+            if (item?.path) items.set(item.path, item);
+          }
+          fs.writeFileSync(queuePath, `${JSON.stringify({ schema: 1, items: [...items.values()] }, null, 2)}\n`);
+          NODE
+              rebuild_manifest_from_queue
+              if ! git diff --quiet -- "$queue_file"; then
+                git add "$queue_file"
+                git commit -m 'chore(licenses): reconcile concurrent blog cover queue [skip ci]'
+              fi
+              echo '::warning::recovered the cover queue after a rebase conflict by merging current and remote paths'
+            done
+            echo '::error::cover queue push failed after three rebase attempts'
+            return 1
+          }
+
+          queue_changed=false
+          if [ ! -f "$queue_file" ] || ! cmp -s "$queue_file" "$queue_update"; then
+            cp "$queue_update" "$queue_file"
+            queue_changed=true
+          fi
+          if [ "$queue_changed" = true ]; then
+            git add "$queue_file"
+            git commit -m 'chore(licenses): persist blog cover CDN sync queue [skip ci]'
+            push_queue_commit
+          fi
+
+          mapfile -t manifest_entries < "$manifest_file"
+          if [ "${#manifest_entries[@]}" -eq 0 ]; then
+            if [ "$EVENT_NAME" = 'push' ] && { [ -z "${BEFORE:-}" ] || [[ "$BEFORE" =~ ^0+$ ]]; }; then
+              echo '::error::first push has no reachable base and no queued cover set to reconcile'
+              exit 1
+            fi
+            echo 'No governed blog cover bytes require CDN reconciliation.'
+            exit 0
+          fi
+
+          for required in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do
+            if [ -z "${!required:-}" ]; then
+              echo "::error::$required is required before publishing governed blog cover bytes"
+              exit 1
+            fi
+          done
+
+          urls=()
+          while IFS="$(printf '\t')" read -r file sha256; do
+            [ -n "$file" ] || continue
+            key="${file#public/}"
+            output="$(bash scripts/lib/upload-cdn-file.sh "$file" "$key" "public,max-age=600")"
+            printf '%s\n' "$output"
+            printf '%s\n' "$output" | grep -q '✅ uploaded' || {
+              echo "::error::CDN upload did not succeed for $file (sha256 $sha256)"
+              exit 1
+            }
+            urls+=("https://cdn.frontaliereticino.ch/$key")
+          done < "$manifest_file"
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+
+          node --input-type=module - "$queue_file" "$manifest_file" "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json" <<'NODE'
+          import fs from 'node:fs';
+          const [, , queuePath, manifestPath, clearedPath] = process.argv;
+          const current = JSON.parse(fs.readFileSync(queuePath, 'utf8'));
+          const uploaded = new Set(fs.readFileSync(manifestPath, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => line.split('\t', 1)[0]));
+          const items = (current.items || []).filter((item) => !uploaded.has(item.path));
+          fs.writeFileSync(clearedPath, `${JSON.stringify({ schema: 1, items }, null, 2)}\n`);
+          NODE
+          if ! cmp -s "$queue_file" "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json"; then
+            cp "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json" "$queue_file"
+            git add "$queue_file"
+            git commit -m 'chore(licenses): acknowledge published cover sync queue [skip ci]'
+            push_queue_commit
           fi
 
       # ── Follow-up to #293/#166 (issue #302) ──────────────────────────────
