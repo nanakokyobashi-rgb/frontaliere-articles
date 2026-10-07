@@ -99,6 +99,22 @@ test('un articolo ricaduto sull’immagine generica passa dalla lettura della pa
   assert.match(workflow, /::warning title=Articolo uscito con l'immagine generica::/);
 });
 
+test('le immagini recuperate dal CDN restano sul CDN in indice e bridge', () => {
+  assert.match(
+    pipeline,
+    /indexHtml = rewriteDownloadedImageRefs\(rewriteBlogImageRefs\(indexHtml\), imageStage\.downloadedImageKeys\)/,
+  );
+  assert.match(
+    pipeline,
+    /finalBridgeHtml = rewriteDownloadedImageRefs\(rewriteBlogImageRefs\(bridgeHtml\), imageStage\.downloadedImageKeys\)/,
+  );
+  assert.ok(
+    pipeline.indexOf('rewriteDownloadedImageRefs(rewriteBlogImageRefs(indexHtml)')
+      < pipeline.indexOf('const indexClean = sanitizeHtmlDocument(indexHtml)'),
+    'la riscrittura deve precedere la scrittura dei byte pubblicati',
+  );
+});
+
 test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il batch', () => {
   const validation = stepText('Validate what was rendered');
   assert.match(validation, /\.articlePaths \| length/);

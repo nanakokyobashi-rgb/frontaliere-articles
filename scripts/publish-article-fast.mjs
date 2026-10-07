@@ -34,9 +34,11 @@
 //      THIS article are already on disk by this point, so self-referencing
 //      hreflang (the only kind an article page emits) always resolves.
 //   5. hero-image CDN rewrite — rewriteBlogImageRefs() rewrites same-origin
-//      `/images/blog/<file>` refs to the CDN URL. Applied to every written
-//      file (index + bridge), matching blogImageCdnFinalizePlugin's
-//      unconditional whole-dist walk in the full build.
+//      `/images/blog/<file>` refs to the CDN URL; declared images recovered
+//      from the CDN are rewritten by exact key even outside `images/blog`.
+//      Applied to every written file (index + bridge), matching
+//      blogImageCdnFinalizePlugin's unconditional whole-dist walk in the full
+//      build while keeping scratch-only images reachable after cleanup.
 //   6. after the image postcondition, renderArticleHubPages({section}) only if
 //      every requested article is publishable. Otherwise the previous archive
 //      stays online: a new archive built from the whole registry could link to

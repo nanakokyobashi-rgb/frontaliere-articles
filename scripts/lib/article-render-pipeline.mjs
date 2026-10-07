@@ -33,6 +33,7 @@ import { filterEntriesByImagePostcondition } from './article-image-postcondition
 import { releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
 
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
+const SITE_ORIGIN = 'https://frontaliereticino.ch';
 const MAX_DECLARED_IMAGE_BYTES = 5 * 1024 * 1024;
 const IMAGE_FETCH_TIMEOUT_MS = 20_000;
 const IMAGE_FETCH_ATTEMPTS = 2;
@@ -162,9 +163,12 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       if (hreflangResult) indexHtml = hreflangResult.html;
 
       // 5. hero-image CDN rewrite — applied to both files, matching
-      // blogImageCdnFinalizePlugin's unconditional whole-dist walk.
-      indexHtml = rewriteBlogImageRefs(indexHtml);
-      const finalBridgeHtml = rewriteBlogImageRefs(bridgeHtml);
+      // blogImageCdnFinalizePlugin's unconditional whole-dist walk. Images
+      // recovered from the CDN for this scratch render can also live outside
+      // images/blog; keep those references on the CDN after the temporary
+      // image view is removed.
+      indexHtml = rewriteDownloadedImageRefs(rewriteBlogImageRefs(indexHtml), imageStage.downloadedImageKeys);
+      const finalBridgeHtml = rewriteDownloadedImageRefs(rewriteBlogImageRefs(bridgeHtml), imageStage.downloadedImageKeys);
 
       // Last transform before the bytes hit disk, so it covers steps 1-5 and
       // anything a later step inserts through them. A clean page comes back
@@ -497,6 +501,31 @@ function imagePathFromReference(reference) {
   return heroImgRel;
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * A declared image downloaded into the temporary render view already exists
+ * on the CDN and is deliberately not uploaded again. Rewrite only those exact
+ * same-origin references so removing the view cannot leave the published HTML
+ * pointing at an asset absent from the shard.
+ */
+export function rewriteDownloadedImageRefs(html, downloadedImageKeys = []) {
+  let rewritten = String(html ?? '');
+  for (const key of new Set(downloadedImageKeys)) {
+    const imageKey = imagePathFromReference(key);
+    if (!imageKey) continue;
+    const escapedKey = escapeRegExp(imageKey);
+    const boundary = '(?![\\w./%-])';
+    const replacement = `${CDN_BASE}/${imageKey}`;
+    rewritten = rewritten
+      .replace(new RegExp(`${escapeRegExp(SITE_ORIGIN)}/${escapedKey}${boundary}`, 'g'), replacement)
+      .replace(new RegExp(`(?<![\\w.@])/${escapedKey}${boundary}`, 'g'), replacement);
+  }
+  return rewritten;
+}
+
 function imageReferencesFromHtml(html) {
   const refs = [];
   const attribute = /\b(?:src|srcset)=["']([^"']+)["']/gi;
@@ -522,6 +551,8 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
   const heroKey = path.join(heroDir, `${heroBase}${heroExt}`);
   const thumbKey = path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`);
   if (downloadedImageKeys.has(heroKey)) {
+    // renderSectionArticlePipeline already rewrote this exact key to CDN_BASE
+    // in every emitted article page before the temporary image view vanished.
     console.log(`[${logPrefix}] skipping CDN upload for downloaded image ${heroKey}`);
   } else if (fs.existsSync(path.join(rootDir, heroLocal))) {
     cdnUploadsByKey.set(heroKey, {

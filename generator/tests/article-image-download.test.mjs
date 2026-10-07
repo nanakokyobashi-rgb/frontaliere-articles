@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fetchDeclaredImage, prepareImageView } from '../../scripts/lib/article-render-pipeline.mjs';
+import { CDN_BASE, fetchDeclaredImage, prepareImageView, rewriteDownloadedImageRefs } from '../../scripts/lib/article-render-pipeline.mjs';
 
 function response({ status = 200, type = 'image/webp', body = Buffer.from('image') } = {}) {
   return {
@@ -40,6 +40,25 @@ test('il fetch CDN richiede manual redirect e content-type image', async () => {
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('le sole immagini scaricate vengono riscritte sul CDN senza duplicare URL CDN', () => {
+  const html = [
+    '<meta property="og:image" content="https://frontaliereticino.ch/images/places/recovered.webp">',
+    '<img src="/images/places/recovered.webp?v=2">',
+    '<img src="https://cdn.frontaliereticino.ch/images/places/recovered.webp">',
+    '<img src="https://raw.githubusercontent.com/example/repo/main/public/images/places/recovered.webp">',
+    '<img src="/images/places/local.webp">',
+  ].join('\n');
+
+  const rewritten = rewriteDownloadedImageRefs(html, ['images/places/recovered.webp']);
+
+  assert.equal((rewritten.match(new RegExp(`${CDN_BASE}/images/places/recovered\\.webp`, 'g')) ?? []).length, 3);
+  assert.equal(rewritten.includes(`${CDN_BASE}${CDN_BASE}`), false);
+  assert.match(rewritten, /raw\.githubusercontent\.com\/example\/repo\/main\/public\/images\/places\/recovered\.webp/);
+  assert.match(rewritten, /src="\/images\/places\/local\.webp"/);
+  assert.match(rewritten, /recovered\.webp\?v=2/);
+});
+
 test('il renderer scarica al massimo quattro immagini dichiarate in parallelo', async () => {
   const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-root-'));
   const distDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-view-dist-'));
