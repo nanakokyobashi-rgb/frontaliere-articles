@@ -191,7 +191,13 @@ jobs:
               dry=true
             fi
             changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
-            if ! printf '%s\n' "$changed" | grep -q '^content/'; then
+            has_content=false
+            while IFS= read -r changed_path; do
+              case "$changed_path" in
+                content/*) has_content=true; break ;;
+              esac
+            done <<< "$changed"
+            if [ "$has_content" != true ]; then
               dry=true
             fi
           fi

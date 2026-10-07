@@ -349,15 +349,16 @@ test('il gate gira DOPO load-rc-env e PRIMA che il job generate esista', () => {
   assert.ok(load !== -1 && admit !== -1, 'gli step del gate sono spariti');
   assert.ok(load < admit, 'il flag si legge da Remote Config: il loader deve precedere il gate');
   assert.doesNotMatch(gate, /npm-ci-retry|npm ci\b|create-article\.mjs|setup-claude-haiku-fallback/, 'il gate non installa dipendenze e non tocca il generatore');
-  assert.match(
-    gate,
-    /\n {4}concurrency:\n {6}group: \$\{\{ needs\.admit\.outputs\.run_mode == 'production' && inputs\.concurrency_group \|\| needs\.admit\.outputs\.run_mode == 'unknown' && format\('\{0\}-unknown', inputs\.concurrency_group\) \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
-    'il gate cantonale usa la stessa coda del job di generazione senza cancellare run in coda',
-  );
+  assert.doesNotMatch(gate, /\n {4}concurrency:/, 'il gate non deve entrare nella coda del writer e sfrattare un successore');
 
   const gen = jobBlock('generate');
   assert.match(gen, /\n {4}needs: \[admit, section_gate\]\n/);
   assert.match(gen, /\n {4}if: needs\.admit\.outputs\.proceed == 'true' && needs\.section_gate\.outputs\.proceed == 'true'\n/);
+  assert.match(
+    gen,
+    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && inputs\.concurrency_group \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
+    'il solo job writer serializza production e unknown e lascia il dry separato',
+  );
   assert.match(gate, /proceed: \$\{\{ steps\.none\.outputs\.proceed \|\| steps\.canton\.outputs\.proceed \}\}/);
 });
 

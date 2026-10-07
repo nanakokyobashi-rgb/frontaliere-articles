@@ -356,8 +356,8 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -uo pipefail
-          # `run_mode` alimenta i gruppi di concurrency del gate cantonale e
-          # del job generate. Il trap copre anche tutti gli exit anticipati
+          # `run_mode` alimenta il gruppo di concurrency del job generate. Il
+          # trap copre anche tutti gli exit anticipati
           # (manuale, fail-open, self-test eletto), così nessun job ricade nel
           # gruppo dry per un output mancante.
           content_push=false
@@ -692,8 +692,10 @@ jobs:
     concurrency:
       # GitHub conserva un solo pending per gruppo: il successore content deve
       # stare separato dai self-test dry, altrimenti un push di workflow può
-      # sostituirlo mentre aspetta il producer.
-      group: ${{ needs.admit.outputs.run_mode == 'production' && 'generate-article-content' || needs.admit.outputs.run_mode == 'unknown' && 'generate-article-unknown' || 'generate-article-dry' }}
+      # sostituirlo mentre aspetta il producer. `unknown` resta un modo
+      # osservabile dell'admit, ma condivide il lock content con production:
+      # un compare fallito non può aprire una seconda scrittura.
+      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article-content' || 'generate-article-dry' }}
       cancel-in-progress: false
     steps:
       - name: Checkout

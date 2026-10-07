@@ -301,9 +301,6 @@ jobs:
     if: needs.admit.outputs.proceed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    concurrency:
-      group: ${{ needs.admit.outputs.run_mode == 'production' && inputs.concurrency_group || needs.admit.outputs.run_mode == 'unknown' && format('{0}-unknown', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
-      cancel-in-progress: false
     permissions:
       actions: read
       contents: read
@@ -374,7 +371,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
-      group: ${{ needs.admit.outputs.run_mode == 'production' && inputs.concurrency_group || needs.admit.outputs.run_mode == 'unknown' && format('{0}-unknown', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}
+      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}
       cancel-in-progress: false
     steps:
       - name: Checkout
