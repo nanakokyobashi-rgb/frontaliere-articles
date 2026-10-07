@@ -437,6 +437,15 @@ function articleBodySignature(article) {
   return JSON.stringify(bodyFields(article).map(({ field, text }) => [field, text]));
 }
 
+// The repair callback is allowed to return the object it received after
+// mutating it in place. Keep that mutation isolated from the current draft so
+// the no-op check below compares the before/after values instead of the same
+// already-mutated reference.
+function cloneArticleForRepair(article) {
+  if (typeof article === 'string') return article;
+  return { ...(article || {}) };
+}
+
 export async function repairSourceCopyArticle({
   sourceText,
   article,
@@ -451,25 +460,35 @@ export async function repairSourceCopyArticle({
 } = {}) {
   const sourceCopyMode = getSourceCopyMode(mode);
   let current = article;
+  const initialSignature = articleBodySignature(current);
   let verdict = evaluateSourceCopy(sourceText, current, { locale, threshold });
   logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, 'initial');
   if (verdict.safe) {
     logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, 'outcome=safe');
-    return { article: current, verdict, passes: 0, outcome: 'safe', rejected: false };
+    return { article: current, verdict, passes: 0, outcome: 'safe', rejected: false, changed: false };
   }
   if (sourceCopyMode === 'warn') {
     logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, 'outcome=warn');
-    return { article: current, verdict, passes: 0, outcome: 'warn', rejected: false };
+    return { article: current, verdict, passes: 0, outcome: 'warn', rejected: false, changed: false };
   }
 
   let passes = 0;
-  const passLimit = Math.max(0, Math.min(SOURCE_COPY_MAX_REPAIR_PASSES, Number(maxPasses) || SOURCE_COPY_MAX_REPAIR_PASSES));
+  const passLimit = Number.isInteger(maxPasses)
+    ? Math.max(0, Math.min(SOURCE_COPY_MAX_REPAIR_PASSES, maxPasses))
+    : SOURCE_COPY_MAX_REPAIR_PASSES;
   for (let pass = 1; pass <= passLimit; pass += 1) {
     const targets = sourceCopyRepairTargets(current, verdict, { threshold });
     if (!targets.length || typeof repair !== 'function') break;
     let next;
     try {
-      next = await repair({ article: current, sourceText, locale, verdict, targets, pass });
+      next = await repair({
+        article: cloneArticleForRepair(current),
+        sourceText,
+        locale,
+        verdict,
+        targets,
+        pass,
+      });
     } catch (error) {
       logger(`[source-copy] article=${String(articleId || 'unknown')} locale=${localeTag(locale)} pass=${pass} repair_error=${error.message}`);
       break;
@@ -481,12 +500,19 @@ export async function repairSourceCopyArticle({
     logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, `repair-${pass}`);
     if (verdict.safe) {
       logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, 'outcome=repaired');
-      return { article: current, verdict, passes, outcome: 'repaired', rejected: false };
+      return {
+        article: current,
+        verdict,
+        passes,
+        outcome: 'repaired',
+        rejected: false,
+        changed: articleBodySignature(current) !== initialSignature,
+      };
     }
   }
 
   const condensed = typeof condense === 'function'
-    ? await condense(current, verdict, { locale, threshold })
+    ? await condense(cloneArticleForRepair(current), verdict, { locale, threshold })
     : { article: current, changed: false };
   if (condensed?.changed && condensed.article != null) {
     current = condensed.article;
@@ -496,7 +522,14 @@ export async function repairSourceCopyArticle({
   const rejected = verdict.structural || (sourceCopyModeBlocks(sourceCopyMode) && !verdict.safe);
   const outcome = rejected ? 'rejected' : (verdict.safe ? 'repaired' : 'published-residual');
   logSourceCopyVerdict(articleId, verdict, logger, sourceCopyMode, `outcome=${outcome}`);
-  return { article: current, verdict, passes, outcome, rejected };
+  return {
+    article: current,
+    verdict,
+    passes,
+    outcome,
+    rejected,
+    changed: articleBodySignature(current) !== initialSignature,
+  };
 }
 
 export function logSourceCopyVerdict(articleId, verdict, logger = console.error, mode = getSourceCopyMode(), phase = 'verdict') {

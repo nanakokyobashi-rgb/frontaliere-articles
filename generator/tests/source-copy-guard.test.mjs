@@ -181,6 +181,46 @@ test('ripara solo il paragrafo indicato e scende sotto soglia senza rigenerare l
   assert.equal(result.article.body2, originalBody2);
 });
 
+test('onora maxPasses=0 e non considera una callback mutante un no-op', async () => {
+  const source = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici';
+  const article = {
+    body1: `${source}. Contesto editoriale indipendente e verificato.`,
+    body2: 'Secondo paragrafo autonomo con informazioni utili.',
+    body3: 'Conclusione autonoma con contesto locale.',
+  };
+  let calls = 0;
+  const noPasses = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    mode: 'repair',
+    maxPasses: 0,
+    repair: async () => {
+      calls += 1;
+      return article;
+    },
+    logger: () => {},
+  });
+  assert.equal(calls, 0);
+  assert.equal(noPasses.passes, 0);
+  assert.equal(noPasses.rejected, false);
+  assert.equal(noPasses.outcome, 'repaired');
+
+  const mutating = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    mode: 'repair',
+    repair: async ({ article: draft }) => {
+      draft.body1 = 'Paragrafo riformulato con lessico indipendente e fatti invariati.';
+      return draft;
+    },
+    logger: () => {},
+  });
+  assert.equal(mutating.passes, 1);
+  assert.equal(mutating.changed, true);
+  assert.equal(mutating.verdict.safe, true);
+  assert.equal(article.body1.startsWith(source), true);
+});
+
 test('condensa la frase incriminata quando la riparazione non cambia il testo', async () => {
   const source = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici';
   const article = {

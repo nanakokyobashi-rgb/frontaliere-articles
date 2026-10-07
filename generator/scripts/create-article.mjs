@@ -274,7 +274,10 @@ import {
 import {
   getSourceCopyMode,
   SOURCE_COPY_OVERLAP_THRESHOLD,
+  SOURCE_COPY_MAX_REPAIR_PASSES,
   applySourceCopyRepairReplacements,
+  evaluateSourceCopy,
+  logSourceCopyVerdict,
   repairSourceCopyArticle,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
@@ -5298,6 +5301,28 @@ function factualityGateSourceText(url, pageContent) {
 // those briefs are still input text and may not be reproduced verbatim.
 function sourceCopyInputText(pageContent) {
   return String(pageContent || '');
+}
+
+function appendSourceCitation(data, url) {
+  const citationUrl = String(url || '').startsWith('stats-bfs://')
+    ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
+    : String(url || '').startsWith('stats-astra://')
+      ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
+      : url;
+  if (!citationUrl || String(citationUrl).startsWith('evergreen://')) return data;
+  try {
+    const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
+    const sourceLabel = { it: 'Fonte', en: 'Source', de: 'Quelle', fr: 'Source' };
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      if (!data.content?.[locale]?.body3) continue;
+      const label = sourceLabel[locale] || 'Source';
+      if (!data.content[locale].body3.includes(sourceDomain)) {
+        data.content[locale].body3 += `\n\n*${label}: [${sourceDomain}](${citationUrl})*`;
+      }
+    }
+    console.error(`  📰 Citazione fonte aggiunta: ${sourceDomain}`);
+  } catch { /* invalid URL — skip */ }
+  return data;
 }
 
 const SOURCE_COPY_REPAIR_SCHEMA = {
@@ -13582,6 +13607,46 @@ function optimizeSeoMetadata(data) {
   return data;
 }
 
+/**
+ * Rebuild metadata that is derived from body text after a targeted source-copy
+ * repair. The repair intentionally changes only selected paragraphs, but an
+ * excerpt or SEO description derived before that change would describe text
+ * that is no longer published. The deterministic cap is the same fallback
+ * used by generateExcerpt() when its model call is unavailable; it keeps this
+ * postcondition quota-free and locale-safe.
+ */
+export function refreshSourceCopyDerivedMetadata(data) {
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const content = data?.content?.[locale];
+    if (!content || typeof content !== 'object') continue;
+    const body = bodyTextForQuality(content);
+    if (!body.trim()) continue;
+    const excerpt = capBlogDescription(body).value;
+    if (!excerpt) continue;
+    content.excerpt = excerpt;
+    applyMicrocopyGuard(content, locale);
+    if (typeof content.seoDescription === 'string') {
+      content.seoDescription = capBlogDescription(excerpt).value;
+    }
+    if (typeof content.ogDescription === 'string') {
+      content.ogDescription = capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value;
+    }
+  }
+
+  // optimizeSeoMetadata derives the shared IT description, OG description and
+  // keyword list from the current IT title/excerpt. Seed both descriptions so
+  // a previous model value cannot survive a body repair through its `||`
+  // fallback in that function.
+  const itExcerpt = data?.content?.it?.excerpt;
+  if (typeof itExcerpt === 'string' && itExcerpt.trim()) {
+    if (!data.seo || typeof data.seo !== 'object') data.seo = {};
+    data.seo.description = itExcerpt;
+    data.seo.ogDescription = itExcerpt;
+    optimizeSeoMetadata(data);
+  }
+  return data;
+}
+
 function evergreenTopicFamily(text) {
   const raw = String(text || '').toLowerCase();
   if (/\bpermess[oi]\b/.test(raw) && /\bg\b/.test(raw) && /\bb\b/.test(raw)) return 'permesso-g-b';
@@ -16888,7 +16953,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
-    optimizeSeoMetadata(data);
+    if (sourceCopyResult.changed) refreshSourceCopyDerivedMetadata(data);
+    else optimizeSeoMetadata(data);
     // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
     // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
@@ -17682,32 +17748,14 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 3e: Append source citation to body3 (E-E-A-T compliance)
   // For stats-bfs:// articles, the URL is a synthetic per-quarter dedup key
   // — the human-readable citation must point to the public BFS landing page.
-  const citationUrl = url.startsWith('stats-bfs://')
-    ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
-    : url.startsWith('stats-astra://')
-      ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
-      : url;
-  if (citationUrl && !citationUrl.startsWith('evergreen://')) {
-    try {
-      const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
-      const SOURCE_LABEL = { it: 'Fonte', en: 'Source', de: 'Quelle', fr: 'Source' };
-      for (const locale of ['it', 'en', 'de', 'fr']) {
-        if (!data.content[locale]?.body3) continue;
-        const label = SOURCE_LABEL[locale] || 'Source';
-        // Only append if not already present
-        if (!data.content[locale].body3.includes(sourceDomain)) {
-          data.content[locale].body3 += `\n\n*${label}: [${sourceDomain}](${citationUrl})*`;
-        }
-      }
-      console.error(`  📰 Citazione fonte aggiunta: ${sourceDomain}`);
-    } catch { /* invalid URL — skip */ }
-  }
+  appendSourceCitation(data, url);
 
   // Final anti-copy pass runs after citation/CTA/sanitizer mutations and on
   // every published locale. Translations use the same targeted repair and
   // condensation path; a full article regeneration is never triggered here.
   const sourceCopyFinalSource = sourceCopyInputText(pageContent);
   const sourceCopyFinalVerdicts = [];
+  let sourceCopyFinalChanged = false;
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue;
     const result = await repairGeneratedArticleSourceCopy(
@@ -17717,6 +17765,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     );
     data.content[locale] = result.article;
     sourceCopyFinalVerdicts.push(result.verdict);
+    sourceCopyFinalChanged = sourceCopyFinalChanged || result.changed;
     if (result.rejected) {
       throw new SourceCopyError(
         `Anti-copia strutturale dopo le trasformazioni finali (${locale}): overlap massimo ${result.verdict.maxWords} parole consecutive`,
@@ -17734,17 +17783,62 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} mode=${sourceCopyMode} locales=it,en,de,fr`,
   );
 
+  // The targeted repair is deliberately the last model mutation, but it ran
+  // after the normal CTA/link/citation passes. Re-run every deterministic
+  // postcondition that could otherwise be deleted by a paragraph replacement,
+  // and re-run the source-aware factuality checks before anything is written.
+  // This keeps the repair local without allowing it to bypass the guards that
+  // previously ran only before the final anti-copy pass.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (error) {
+    error.qualityReject = true;
+    throw error;
+  }
+  sanitizeBoldFormatting(data);
+  assertGeneratedArticleQuality(data, { cantonBody: data._cantonGuardBodyBeforeCta });
+  assertNoFabricatedReferences(data.content.it);
+  assertNoFabricatedLaborOfficeCrossLocale(data);
+  assertNoFabricatedNormAcronyms({
+    it: data.content.it,
+    en: data.content.en,
+    de: data.content.de,
+    fr: data.content.fr,
+  });
+
+  Object.defineProperty(data, '_localNewsSource', {
+    value: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent),
+    configurable: true,
+  });
+  validateAndEnforceCTA(data);
+  enforceStrongInternalLinks(data);
+  delete data._localNewsSource;
+  appendSourceCitation(data, url);
+
+  // The repair can change the text from which locale metadata was derived;
+  // restore the shared SEO fields after all body replacements, then keep the
+  // municipality postcondition last on the metadata surfaces.
+  if (sourceCopyFinalChanged) refreshSourceCopyDerivedMetadata(data);
+  preserveMunicipalityNamesInMetadata(data);
+
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    if (!data.content[locale]) continue;
+    const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
+    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode, 'postconditions');
+    if (sourceCopyMode !== 'warn' && (verdict.structural || (sourceCopyMode === 'enforce' && !verdict.safe))) {
+      throw new SourceCopyError(
+        `Anti-copia non conforme dopo le postcondizioni (${locale}): overlap massimo ${verdict.maxWords} parole consecutive`,
+        verdict,
+        { retries: SOURCE_COPY_MAX_REPAIR_PASSES },
+      );
+    }
+  }
+
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
   console.error(`   ID: ${data.id}`);
   console.error(`   Categoria: ${data.category}`);
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
-
-  // This is the last metadata mutation before the primary write path. The
-  // placeholder guard may replace a localized imageAlt wholesale with its IT
-  // fallback; restore municipality names only after that replacement, or a
-  // comune present only in the localized source would be lost.
-  preserveMunicipalityNamesInMetadata(data);
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
   // Questo gate resta dopo tutte le mutazioni del testo (3d CTA/link, 3e
