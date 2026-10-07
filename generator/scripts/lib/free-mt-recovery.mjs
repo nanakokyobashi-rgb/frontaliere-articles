@@ -370,7 +370,7 @@ export function clearBodyTranslationPending(data, { locale, field, report = null
 // non recuperato fa rossa la run e non viene committato. Run 37220516797
 // (2026-10-04): `pending_bodies={"de:body1":"retry-error"}` dopo che la cascata
 // free intera era esaurita, e il tier Codex del free-MT si era gia' fermato sul
-// suo budget di 300 s; run 37153946271 (2026-10-03): `fr:body1` e `fr:body2`.
+// suo vecchio budget di 300 s; run 37153946271 (2026-10-03): `fr:body1` e `fr:body2`.
 //
 // La guardia ha ragione (AGENTS.md #1) e resta com'e': prima che l'articolo
 // arrivi li', ogni body in attesa riceve UN tentativo su una seconda corsia,

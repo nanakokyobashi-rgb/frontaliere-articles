@@ -58,6 +58,8 @@ const {
   setCodexTranslateCallForTests,
   setCodexTranslateProcessDeadline,
   codexCallDeadlineMs,
+  beginCodexTranslationCall,
+  withCodexTranslationLane,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
 
@@ -228,6 +230,7 @@ test('DeepL 456 e Azure 401: tier Codex, con il prompt stretto e la sola lane Co
   const after = codexCounters();
   assert.equal(after.hits - before.hits, 1);
   assert.equal(lines.filter((l) => l.includes('traduzioni via Codex Luna Max')).length, 1);
+  assert.doesNotMatch(lines.join('\n'), /DeepL key|Azure key|HTTP 456|HTTP 401|credenziali rifiutate/);
 
   const { messages, opts } = calls[0];
   const system = messages.find((m) => m.role === 'system').content;
@@ -383,6 +386,85 @@ test('il budget di chiamate ferma il tier con una riga sola', async () => {
   }
 });
 
+test('un retry di trasporto fisico consuma una voce del ledger condiviso', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    assert.equal(await it(), `CODEX ${EN}`);
+    assert.equal(getCascadeStats().codexTranslation.calls, 1);
+    assert.equal(typeof calls[0].opts.onCodexTransportRetry, 'function');
+    assert.equal(calls[0].opts.onCodexTransportRetry(), true);
+    assert.equal(getCascadeStats().codexTranslation.calls, 2);
+    assert.equal(await it(), `MYMEMORY ${EN}`);
+    assert.equal(calls.length, 1, 'il secondo testo non deve superare il budget fisico');
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+});
+
+test('le recovery non batch condividono le corsie Codex con il scheduler', async () => {
+  process.env.FREE_TRANSLATE_CODEX_LANES = '1';
+  try {
+    setCodexTranslateCallForTests(null);
+    let inFlight = 0;
+    let maxInFlight = 0;
+    const run = (value) => withCodexTranslationLane({
+      run: async ({ deadlineMs }) => {
+        inFlight += 1;
+        maxInFlight = Math.max(maxInFlight, inFlight);
+        await new Promise((resolve) => setTimeout(resolve, 5));
+        inFlight -= 1;
+        return `${value}:${deadlineMs > Date.now()}`;
+      },
+    });
+    assert.deepEqual(await Promise.all([run('a'), run('b'), run('c')]), ['a:true', 'b:true', 'c:true']);
+    assert.equal(maxInFlight, 1);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_LANES;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
+test('una recovery multi-step addebita ogni chiamata iniziale alla lane condivisa', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  setCodexTranslateCallForTests(null);
+  try {
+    const admissions = await withCodexTranslationLane({
+      run: async ({ admitCall }) => {
+        const first = admitCall();
+        const second = admitCall();
+        const refused = admitCall();
+        assert.ok(first);
+        assert.ok(second);
+        assert.equal(refused, null);
+        first.finish();
+        second.finish();
+        return [first.deadlineMs, second.deadlineMs];
+      },
+    });
+    assert.equal(admissions.length, 2);
+    assert.equal(getCascadeStats().codexTranslation.calls, 2);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
+test('un retry fisico non usa una deadline piu\' lunga della chiamata fallita', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  setCodexTranslateCallForTests(null);
+  try {
+    const result = await withCodexTranslationLane({
+      run: async ({ reserveTransportRetry }) => reserveTransportRetry(Date.now() + 10_000),
+    });
+    assert.equal(result, false);
+    assert.equal(getCascadeStats().codexTranslation.calls, 1);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    setCodexTranslateCallForTests(null);
+  }
+});
+
 test('le richieste concorrenti non superano il budget, anche quando traducono piu\' testi', async () => {
   // Una corsia: il primo testo parte da solo, i cinque successivi insieme
   // nella seconda richiesta, e il settimo trova il budget di 2 esaurito.
@@ -510,6 +592,50 @@ test('una voce di gruppo avvolta in una cornice di codice arriva senza cornice',
   });
 });
 
+test('il JSON batch recintato passa dalla riparazione comune', async () => {
+  await withLanes(1, async () => {
+    const answer = codexAnswer();
+    const calls = stubCodex((messages) => {
+      const items = batchItems(messages);
+      if (!items) return answer(messages);
+      const payload = JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: translationOf(text) })) });
+      const fence = '```';
+      return `${fence}json\n${payload}\n${fence}`;
+    });
+    const texts = numbered(3);
+    const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+    assert.equal(calls.length, 2);
+    assert.deepEqual(value, texts.map(translationOf));
+  });
+});
+
+test('la fixture articolo 3 body + meta + FAQ su EN/DE/FR resta in pochi batch', async () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '12';
+  try {
+    await withLanes(2, async () => {
+      const fields = ['meta:title', 'meta:excerpt', 'body1', 'body2', 'body3', 'faq.q', 'faq.a'];
+      const locales = ['en', 'de', 'fr'];
+      const calls = stubCodex((messages) => {
+        const items = batchItems(messages);
+        if (items) return JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: `CODEX ${text}` })) });
+        return 'CODEX testo singolo';
+      });
+      const results = await Promise.all(locales.flatMap((locale) => fields.map((field) => freeTranslate({
+        text: `${IT} [${locale}/${field}]`,
+        sourceLang: 'it',
+        targetLang: locale,
+        fieldType: field.startsWith('meta:') ? 'title' : 'description',
+      }))));
+      assert.equal(results.length, 21);
+      assert.ok(results.every((value) => value.startsWith('CODEX')));
+      assert.equal(calls.length, 8, 'la fixture misurata deve usare 8 richieste batch, non una per segmento');
+      assert.ok(calls.length <= 12);
+    });
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+});
+
 test('FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS=1 con una corsia torna una richiesta per testo, una alla volta', async () => {
   process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '1';
   try {
@@ -550,9 +676,12 @@ test('con le corsie occupate i testi in coda partono insieme, con lo schema a id
     assert.match(system, /Translate each item on its own/);
     assert.match(system, /ZQX0XQZ/);
     assert.equal(opts.jsonMode, true);
+    assert.equal(opts.deferJsonValidation, true);
     assert.deepEqual(opts.jsonSchema.schema.properties.items.items.required, ['id', 'text']);
     assert.deepEqual(opts.chain, [AI_MODELS.CODEX_CLI_PRIMARY]);
     assert.equal(opts.bypassForceChain, true);
+    assert.equal(opts.retryCodexTransport, true);
+    assert.equal(opts.codexTransportRetries, 2);
   });
 });
 
@@ -829,6 +958,27 @@ test('clamp della deadline: minimo fra tetto della chiamata, budget del tier e s
   assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 14_999 }), null);
   assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now - 1 }), null);
   assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 15_000 }), now + 15_000);
+});
+
+test('le recovery condividono il budget Codex di chiamate e tempo', () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  process.env.FREE_TRANSLATE_CODEX_MAX_MS = '20000';
+  setCodexTranslateCallForTests(null);
+  try {
+    const first = beginCodexTranslationCall({ now: 1_000, processDeadlineMs: null });
+    assert.ok(first);
+    assert.equal(getCascadeStats().codexTranslation.calls, 1);
+    first.finish(11_000);
+
+    // Restano 10 s, sotto il minimo sicuro di 15 s: il secondo tentativo non
+    // deve partire neppure se il cap di chiamate non e' ancora esaurito.
+    assert.equal(beginCodexTranslationCall({ now: 11_000, processDeadlineMs: null }), null);
+    assert.match(getCascadeStats().codexTranslation.stopReason, /900|budget/);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+    setCodexTranslateCallForTests(null);
+  }
 });
 
 test('scadenza del processo lontana: la deadline passata a Codex non la supera', async () => {

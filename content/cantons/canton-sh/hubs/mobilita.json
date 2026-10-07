@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T10:11:40.832Z",
-  "contentHash": "b39b2c9a41f1da6e2f18f50fb326cbb651ab816687cbaef735418df9a98484f0",
+  "updatedAt": "2026-10-07T19:01:03.662Z",
+  "contentHash": "e136f21987ab967beda01cca5e3d1cc1bd686ce122a5a1df5b14b29c9405dd42",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "updatedAt": "2026-10-06T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-07T12:01:21.787Z",
       "keyFacts": 0
     }
   ],
@@ -28,67 +28,67 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 5 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 6 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 30 settembre 2026 – 6 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/bargen-sh-tengen/oggi/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/blumberg-beggingen/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-busingerstrasse/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-l202/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-siedlerstrasse/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-stemmer/oggi/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "41 rilevazioni",
               "url": "/traffico-dogane/dorflingen-gailingen-am-hochrhein-hinterdorf/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -106,7 +106,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-07T12:01:21.787Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     },
     "en": {
       "canton": "SH",
@@ -158,67 +158,67 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 5 October 2026"
+          "note": "Bargen SH – Tengen, week ending 6 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 30 September 2026 to 6 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/bargen-sh-tengen/today/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/blumberg-beggingen/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-busingerstrasse/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-l202/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-siedlerstrasse/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-stemmer/today/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "41 readings",
               "url": "/en/border-wait/dorflingen-gailingen-am-hochrhein-hinterdorf/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -236,7 +236,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-07T12:01:21.787Z"
         }
       ],
       "curatedArticles": [
@@ -277,7 +277,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     },
     "de": {
       "canton": "SH",
@@ -288,67 +288,67 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 5. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 6. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 30. September 2026 bis 6. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/bargen-sh-tengen/heute/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/blumberg-beggingen/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-busingerstrasse/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-l202/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-siedlerstrasse/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-stemmer/heute/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "41 Messungen",
               "url": "/de/wartezeit-grenze/dorflingen-gailingen-am-hochrhein-hinterdorf/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -366,7 +366,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-07T12:01:21.787Z"
         }
       ],
       "curatedArticles": [
@@ -407,7 +407,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     },
     "fr": {
       "canton": "SH",
@@ -418,67 +418,67 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 5 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 6 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 30 septembre 2026 au 6 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/bargen-sh-tengen/aujourd-hui/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/blumberg-beggingen/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-busingerstrasse/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-l202/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-siedlerstrasse/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-stemmer/aujourd-hui/"
             },
             {
               "label": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "41 relevés",
               "url": "/fr/temps-attente-douane/dorflingen-gailingen-am-hochrhein-hinterdorf/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-06T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -496,7 +496,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/buergerentscheid+zum+fahrradparkhaus+am+bahnhof+findet+am+29_+november+statt"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-07T12:01:21.787Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +537,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-07T19:01:03.662Z"
     }
   }
 }

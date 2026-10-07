@@ -6,6 +6,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-salute-mentale-banchi.title': 'Lucerne : journée sur la santé mentale le 10 octobre',
     'blog.article.lucerna-salute-mentale-banchi.excerpt': '## En bref - 10 octobre 2026 : journée cantonale à Lucerne - De 10 h à 16 h à la Matthäuskirche dans la vieille ville - Entrée libre et sans réservation',
     'blog.article.lucerna-salute-mentale-banchi.imageAlt': 'Bancs pour des discussions sur la santé mentale près de la Matthäuskirche à Lucerne',
+    'blog.article.lucerna-qualita-sviluppo-scuole.title': 'Lucerne, qualité et développement scolaire plus proches',
+    'blog.article.lucerna-qualita-sviluppo-scuole.excerpt': 'Les gymnases de Lucerne réexaminent le cadre QM : l’année scolaire 2026/27 servira à concrétiser le lien avec le développement scolaire et pédagogique.',
+    'blog.article.lucerna-qualita-sviluppo-scuole.imageAlt': 'Gymnases lucernois travaillant sur la qualité et le développement scolaires',
 };
 
 export default blogMetaCantonLuFr;

@@ -45,6 +45,41 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-lucerna-qualita-sviluppo-scuole': {
+    title: 'Lucerna, qualità e sviluppo scolastico più vicini',
+    description: 'Ginnasi di Lucerna al lavoro sul quadro QM: la conferenza del 27 e 28 agosto indica il 2026/27, con possibili progetti pilota nel nuovo anno scolastico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, qualità, sviluppo, scolastico',
+    ogTitle: 'Lucerna, qualità e sviluppo scolastico più vicini',
+    ogDescription: 'Alla conferenza dei responsabili della qualità, i ginnasi lucernesi hanno discusso la revisione del QM-Rahmenkonzept. Nel 2026/27 il lavoro collegherà pratica pedagogica, sviluppo scolastico e qualità, con possibili progetti pilota.',
+    canonicalPath: '/articoli-lucerna/lucerna-qualita-sviluppo-scuole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna, qualità e sviluppo scolastico più vicini",
+      "description": "Ginnasi di Lucerna al lavoro sul quadro QM: la conferenza del 27 e 28 agosto indica il 2026/27, con possibili progetti pilota nel nuovo anno scolastico.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-canton-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ginnasi del Canton Lucerna durante il percorso di sviluppo della qualità scolastica"
+      },
+      "datePublished": "2026-10-07T18:10:58+00:00",
+      "dateModified": "2026-10-07T18:10:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-qualita-sviluppo-scuole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
