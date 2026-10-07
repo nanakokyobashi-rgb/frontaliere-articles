@@ -220,6 +220,8 @@ jobs:
           mkdir -p stale-rc-loader/generator/scripts/lib scripts/ci
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/load-rc-env.mjs" \
             > stale-rc-loader/generator/scripts/load-rc-env.mjs
+          git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/source-copy-guard.mjs" \
+            > stale-rc-loader/generator/scripts/lib/source-copy-guard.mjs
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/google-service-account-token.mjs" \
             > stale-rc-loader/generator/scripts/lib/google-service-account-token.mjs
           # The report step runs for scoped workflow_run invocations too. The

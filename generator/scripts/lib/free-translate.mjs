@@ -540,6 +540,27 @@ export function normalizeStructuredBlock(s) {
     .replace(/^\n+|\n+$/g, '');
 }
 
+/** Normalize provider payloads without flattening nested Markdown indentation. */
+function normalizeProviderBlock(s) {
+  const value = String(s ?? '');
+  if (!value.includes('\n') && !/^[ \t]/u.test(value)) return normalizeBlock(value);
+  const lines = normalizeStructuredBlock(value).split('\n');
+  let afterBlank = true;
+  return lines.map((line, index) => {
+    if (!line) {
+      afterBlank = true;
+      return line;
+    }
+    const content = line.replace(/^[ \t]+/u, '');
+    // Leading whitespace at the start of a document (or after a paragraph
+    // break) is incidental in the source parser. Keep it on continuation
+    // lines, where it is the Markdown nesting contract the providers must see.
+    const stripBlockIndent = index === 0 || (afterBlank && !/^(?:#{1,6}\s|[-*+•]\s|\d+[.)]\s|>\s|\|)/u.test(content));
+    afterBlank = false;
+    return stripBlockIndent ? content : line;
+  }).join('\n');
+}
+
 /**
  * Parse one normalized line once for both structure validation and recovery.
  * The returned prefix is the source-owned Markdown marker; `text` is the only
@@ -1052,7 +1073,7 @@ export function _chunkAtSentences(text, maxChars = 480, { oneLinePerChunk = fals
   if (!Number.isInteger(maxChars) || maxChars < 1) {
     throw new TypeError('_chunkAtSentences: maxChars must be an integer >= 1');
   }
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean) return [];
   const lineGroups = _structuredLineGroups(clean, maxChars);
   const chunks = oneLinePerChunk
@@ -1177,7 +1198,7 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
   // Using normalizeBlock (instead of the legacy normalizeSpace) keeps
   // bullet/section markers intact so the translated output is still
   // recognisable as structured prose to the audit.
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   const chunks = chunkText(clean, MAX_CHUNK);
   const translated = [];
 
@@ -1248,12 +1269,12 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
 
   // A missing provider part is a structure miss for this tier, not a partial
   // translation to expose to the field.
-  return normalizeBlock(recomposeChunkPartsOrEmpty(chunks, translated));
+  return normalizeProviderBlock(recomposeChunkPartsOrEmpty(chunks, translated));
 }
 
 async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) {
   if (DEEPL_API_KEYS.length === 0) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
 
@@ -1305,7 +1326,7 @@ async function translateWithDeepL(text, sourceLang, targetLang, outcome = null) 
 
 // ── Google Translate (unofficial free, multi-endpoint) ──────────────────────
 async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
 
@@ -1349,7 +1370,7 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
           const segments = Array.isArray(parsed?.[0]) ? parsed[0] : [];
           translated = segments.map((seg) => (Array.isArray(seg) ? String(seg[0] || '') : '')).join('');
         }
-        const result = normalizeBlock(translated);
+        const result = normalizeProviderBlock(translated);
         // Il `continue` implicito resta: se questo endpoint rende l'eco si prova
         // il successivo, come prima. Cambia solo che la formula e' una sola e
         // che il tentativo finisce nel bucket invece di sparire.
@@ -1472,7 +1493,7 @@ async function raceInstances(instances, fetchFn, outcome = null) {
 
 // ── Lingva Translate (free Google Translate proxy) ───────────────────────────
 async function translateWithLingva(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
   const encoded = encodeURIComponent(q);
 
@@ -1486,7 +1507,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
     );
     if (!res.ok) return '';
     const data = await res.json();
-    const translated = normalizeBlock(data?.translation || '');
+    const translated = normalizeProviderBlock(data?.translation || '');
     // Dentro `raceInstances`: se questa istanza rende l'eco NON deve vincere la
     // gara, le altre stanno ancora provando. Percio' il rifiuto resta qui e non
     // sale in `tryTier` — ma passa dalla formula condivisa e viene contato.
@@ -1496,7 +1517,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
 
 // ── SimplyTranslate (another free Google Translate proxy) ────────────────────
 async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(SIMPLYTRANSLATE_INSTANCES, async (base, signal, attemptOutcome) => {
@@ -1512,7 +1533,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
     });
     if (!res.ok) return '';
     const data = await res.json();
-    const translated = normalizeBlock(data?.translated_text || '');
+    const translated = normalizeProviderBlock(data?.translated_text || '');
     return acceptedRaceAnswer('simplyTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
@@ -1520,7 +1541,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
 // ── LibreTranslate self-hosted (CI service container) ──────────────────────
 async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLang, outcome = null) {
   if (!LIBRETRANSLATE_SELF_HOSTED) return '';
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   // First call uses a 30s warmup window regardless of LIBRETRANSLATE_TIMEOUT_MS.
@@ -1539,7 +1560,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
       return '';
     }
     const data = await res.json();
-    const translated = normalizeBlock(data?.translatedText || '');
+    const translated = normalizeProviderBlock(data?.translatedText || '');
     if (translated && rejectedAsPassthrough('libreTranslateSelfHosted', q, translated, outcome)) {
       return '';
     }
@@ -1558,7 +1579,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
 
 // ── LibreTranslate public instances ─────────────────────────────────────────
 async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(LIBRETRANSLATE_PUBLIC, async (base, signal, attemptOutcome) => {
@@ -1570,14 +1591,14 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
     });
     if (!res.ok) return '';
     const data = await res.json();
-    const translated = normalizeBlock(data?.translatedText || '');
+    const translated = normalizeProviderBlock(data?.translatedText || '');
     return acceptedRaceAnswer('libreTranslate', q, translated, attemptOutcome);
   }, outcome);
 }
 
 // ── Mozhi (open-source proxy, supports: google, deepl, duckduckgo, yandex) ──
 async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = 'google', outcome = null) {
-  const q = normalizeBlock(text);
+  const q = normalizeProviderBlock(text);
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(MOZHI_INSTANCES, async (base, signal, attemptOutcome) => {
@@ -1594,7 +1615,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
     if (!res.ok) return '';
     const data = await res.json();
     // Mozhi uses 'translated-text' (hyphenated) in its response
-    const translated = normalizeBlock(data?.['translated-text'] || data?.translated_text || '');
+    const translated = normalizeProviderBlock(data?.['translated-text'] || data?.translated_text || '');
     // Chiave per MOTORE: `tryTier` chiama questa stessa funzione con quattro
     // nomi diversi (`mozhiDdg`, `mozhiGoogle`, `mozhiYandex`, `mozhiDeepL`) e da
     // qui dentro non sono ricostruibili, quindi il bucket usa `mozhi:<engine>`
@@ -1606,7 +1627,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
 // ── Azure Translator (F0 Free — 2M chars/month, near-DeepL quality) ────────
 async function translateWithAzure(text, sourceLang, targetLang, outcome = null) {
   if (AZURE_TRANSLATOR_KEYS.length === 0) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   const outcomeBefore = snapshotTranslationOutcome(outcome);
 
@@ -1689,7 +1710,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
       }
       // A missing provider part is a structure miss for this tier, not a partial
       // translation to expose to the field.
-      const result = normalizeBlock(recomposeChunkPartsOrEmpty(chunks, translated));
+      const result = normalizeProviderBlock(recomposeChunkPartsOrEmpty(chunks, translated));
       // Stessa ragione di DeepL: la scelta della chiave su cui restare avviene
       // qui dentro, prima che `tryTier` veda l'uscita, quindi il passthrough va
       // riconosciuto e CONTATO qui, non solo scartato.
@@ -1989,7 +2010,7 @@ function _cleanCodexTranslation(raw, source, marker) {
 }
 
 async function translateWithCodex(text, sourceLang, targetLang, outcome = null, position = 'primary') {
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   // La cascata chiama il tier in entrambe le posizioni: risponde solo quella
   // scelta per il processo.
@@ -2344,7 +2365,7 @@ async function _getGoogleCloudAccessToken() {
 
 export async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
   if (!_gcOAuthAvailable && !_gcServiceAccountAvailable) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   if (_googleCloudDailyChars + clean.length > GOOGLE_CLOUD_DAILY_LIMIT) {
     noteTranslationOutcome(outcome, 'incomplete');
@@ -2419,7 +2440,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       return '';
     }
     const data = await res.json();
-    const translated = normalizeBlock(data?.data?.translations?.[0]?.translatedText || '');
+    const translated = normalizeProviderBlock(data?.data?.translations?.[0]?.translatedText || '');
     if (!translated) {
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
@@ -2442,7 +2463,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
 // ── Hugging Face OPUS-MT (Helsinki-NLP open-source models) ─────────────────
 async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = null) {
   if (!HF_TOKEN) return '';
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
 
   const modelKey = `${sourceLang}-${targetLang}`;
@@ -2467,7 +2488,7 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
       return '';
     }
     const data = await res.json();
-    const translated = normalizeBlock(
+    const translated = normalizeProviderBlock(
       Array.isArray(data) ? data[0]?.translation_text || '' : data?.translation_text || ''
     );
     if (!translated) noteTranslationOutcome(outcome, 'incomplete');
@@ -2479,7 +2500,7 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
 }
 
 async function translateWithGoogle(text, sourceLang, targetLang, outcome = null) {
-  const clean = normalizeBlock(text);
+  const clean = normalizeProviderBlock(text);
   if (!clean || sourceLang === targetLang) return '';
 
   const chunks = chunkText(clean, 1800);
@@ -2503,7 +2524,7 @@ async function translateWithGoogle(text, sourceLang, targetLang, outcome = null)
 
   // A missing provider part is a structure miss for this tier, not a partial
   // translation to expose to the field.
-  const merged = normalizeBlock(recomposeChunkPartsOrEmpty(chunks, translated));
+  const merged = normalizeProviderBlock(recomposeChunkPartsOrEmpty(chunks, translated));
   return merged; // il confronto con la sorgente e' salito in `tryTier`
 }
 

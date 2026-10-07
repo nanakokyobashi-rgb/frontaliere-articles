@@ -111,6 +111,8 @@ jobs:
           set -euo pipefail
           mkdir -p generator/scripts/lib
           git show HEAD:generator/scripts/load-rc-env.mjs > generator/scripts/load-rc-env.mjs
+          git show HEAD:generator/scripts/lib/source-copy-guard.mjs \
+            > generator/scripts/lib/source-copy-guard.mjs
           git show HEAD:generator/scripts/lib/google-service-account-token.mjs \
             > generator/scripts/lib/google-service-account-token.mjs
 
