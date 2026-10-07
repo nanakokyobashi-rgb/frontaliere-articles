@@ -157,6 +157,14 @@ test('una riga di soli separatori e decorazione, salvo i filetti che la sorgente
   assert.equal(balanceMarkdownMarkers(translated, { sourceText: 'Una riga sola.' }), 'Erster Absatz.\n\nZweiter Absatz.');
 });
 
+test('i filetti composti da asterischi non vengono scambiati per grassetti vuoti', () => {
+  for (const rule of ['***', '****']) {
+    const text = `Primo paragrafo.\n${rule}\nSecondo paragrafo.`;
+    assert.equal(balanceMarkdownMarkers(text, { sourceText: text }), text, rule);
+    assert.equal(balanceMarkdownMarkers(text), 'Primo paragrafo.\nSecondo paragrafo.', rule);
+  }
+});
+
 test('i filetti della sorgente si contano: restano anche se il campo non e allineato riga per riga', () => {
   // La sorgente grezza ha tre righe vuote di fila; il motore le rende
   // compattate. Il campo ha due righe in meno della sorgente, e il filetto

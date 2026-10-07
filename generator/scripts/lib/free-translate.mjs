@@ -2640,6 +2640,10 @@ function delay(ms) {
  * step unable to add or remove a line break by construction.
  */
 function dropEmptyBoldSpansInLine(line) {
+  // `***` and `****` are separator rules, not empty bold spans. Keep them
+  // byte-for-byte intact until the separator-ownership pass below; otherwise
+  // the bold repair turns a source-owned rule into `*` or a blank line.
+  if (isSeparatorOnlyLine(line)) return line;
   const parts = line.split('**');
   if (parts.length < 3) return line;
   let out = parts[0];
@@ -2696,9 +2700,13 @@ export function balanceMarkdownMarkers(s, { sourceText = null } = {}) {
   // 2. If `**` count is odd, the output is unrecoverable as bold structure —
   //    strip every `**` so the renderer sees plain text instead of a half-
   //    bold span.
-  const count = (out.match(/\*\*/g) || []).length;
+  const count = out.split('\n').reduce((total, line) => (
+    total + (isSeparatorOnlyLine(line) ? 0 : (line.match(/\*\*/g) || []).length)
+  ), 0);
   if (count % 2 !== 0) {
-    out = out.replace(/\*\*/g, '');
+    out = out.split('\n')
+      .map((line) => (isSeparatorOnlyLine(line) ? line : line.replace(/\*\*/g, '')))
+      .join('\n');
   }
   // 3. Strip standalone separator-only lines (`______`, `======`) that some
   //    translators emit as decoration — except as many rules as the source
