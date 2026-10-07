@@ -1,6 +1,33 @@
 import { appendImageRegenerationQueue } from './image-regeneration-queue.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
 
+export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
+
+function articleSearchWords(data) {
+  const searchableText = [
+    data?.id || '',
+    data?.category || '',
+    data?.content?.it?.title || data?.content?.title || '',
+    data?.content?.it?.excerpt || data?.content?.excerpt || '',
+  ].join(' ').toLowerCase();
+  return new Set(
+    searchableText
+      .replace(/[^a-zà-ÿ0-9\s-]/g, ' ')
+      .split(/[\s-]+/)
+      .filter((word) => word.length >= 4),
+  );
+}
+
+export function catalogFallbackSharedWordCount(data, imagePath) {
+  const filename = String(imagePath || '')
+    .replace(/^.*\/images\/blog\//, '')
+    .replace(/\.webp$/i, '')
+    .toLowerCase();
+  if (!filename) return 0;
+  const articleWords = articleSearchWords(data);
+  return [...articleWords].filter((word) => filename.includes(word)).length;
+}
+
 function compactReason(value) {
   return String(value || 'engine-failed').replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
 }
@@ -53,9 +80,17 @@ export function resolveArticleCoverFallback(data, {
   let provenance = null;
   const catalogImage = typeof findCatalogImage === 'function' ? findCatalogImage(data) : null;
   if (catalogImage) {
-    provenance = readProvenance(root, catalogImage);
-    if (provenance) selected = { path: catalogImage, source: 'catalog-fallback' };
-    else console.warn(`  ⚠️  Fallback catalogato ignorato senza record: ${catalogImage}`);
+    const sharedWords = catalogFallbackSharedWordCount(data, catalogImage);
+    if (sharedWords < CATALOG_FALLBACK_MIN_SHARED_WORDS) {
+      console.warn(
+        `  ⚠️  Fallback catalogato ignorato per scarsa pertinenza (${sharedWords}/`
+          + `${CATALOG_FALLBACK_MIN_SHARED_WORDS} parole condivise): ${catalogImage}`,
+      );
+    } else {
+      provenance = readProvenance(root, catalogImage);
+      if (provenance) selected = { path: catalogImage, source: 'catalog-fallback' };
+      else console.warn(`  ⚠️  Fallback catalogato ignorato senza record: ${catalogImage}`);
+    }
   }
 
   if (!selected) {
