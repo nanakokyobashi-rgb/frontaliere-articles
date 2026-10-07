@@ -647,6 +647,9 @@ test('hub: un file presente ma incompleto e\' un errore, non un hub in tre lingu
 
 test('registro: gli hub mancanti lasciano draft, quelli malformati bloccano', () => {
   const doc = JSON.parse(read(SECTION_REGISTRY_FILE));
+  // Il caso prova una singola sezione live: non deve ereditare i cantoni
+  // attivati dal rollout reale del registry committato.
+  for (const entry of Object.values(doc.sections)) entry.status = 'draft';
   doc.sections['canton-ti'].status = 'live';
   const withHubs = (missing) => declaredRegistryErrors(doc, { active: ACTIVE_WITH_TI, missingHubsOf: () => missing });
   assert.deepEqual(withHubs([]), []);
