@@ -779,11 +779,18 @@ jobs:
             echo 'No push base available; no changed blog cover upload.'
             exit 0
           fi
-          mapfile -t changed_files < <(
-            git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" -- \
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "::error::push base is not reachable: $BEFORE"
+            exit 1
+          fi
+          changed_file_list="$RUNNER_TEMP/publish-api-changed-blog-covers.txt"
+          if ! git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" -- \
               'public/images/blog/*.webp' \
-              'public/images/blog/thumbnails/*.webp'
-          )
+              'public/images/blog/thumbnails/*.webp' > "$changed_file_list"; then
+            echo "::error::cannot compute changed blog covers between $BEFORE and $SHA"
+            exit 1
+          fi
+          mapfile -t changed_files < "$changed_file_list"
           if [ "${#changed_files[@]}" -eq 0 ]; then
             echo 'No changed blog cover bytes in this push.'
             exit 0
