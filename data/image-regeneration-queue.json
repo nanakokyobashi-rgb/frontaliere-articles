@@ -90,6 +90,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:53:48.101Z",
       "lastFailureAt": "2026-10-07T06:53:48.101Z"
+    },
+    {
+      "articleId": "simplificazione-imposta-trasferimento-berna",
+      "title": "Imposta trasferimenti Berna: franchigia 800k",
+      "fallbackImage": "/images/blog/imposta-successione-donazione-berna.webp",
+      "reason": "All image providers failed for article-simplificazione-imposta-trasferimento-berna: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:54:25.697Z",
+      "lastFailureAt": "2026-10-07T06:54:25.697Z"
     }
   ]
 }
