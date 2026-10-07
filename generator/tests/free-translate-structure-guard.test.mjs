@@ -24,6 +24,11 @@ const {
   freeTranslate,
   getCascadeStats,
   hasTranslatableLineText,
+  hasSameLineStructure,
+  lineStructuralSignature,
+  normalizeStructuredBlock,
+  numericDriftTokens,
+  opaqueSpanSignature,
 } = await import('../scripts/lib/free-translate.mjs');
 
 const realFetch = globalThis.fetch;
@@ -510,9 +515,10 @@ test('la guardia monolinea rifiuta la perdita di un URL opaco', async () => {
   assert.equal(translated, '');
 });
 
-test('la guardia strutturale rifiuta numeri, date e quantità alterati', async () => {
+test('la guardia strutturale misura i numeri alterati senza rifiutare la traduzione', async () => {
   const source = 'La regola vale dal 2026 e costa 42 CHF.';
   const calls = [];
+  const before = getCascadeStats();
   globalThis.fetch = async (url) => {
     if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
     const query = new URL(url).searchParams.get('q') || '';
@@ -532,8 +538,12 @@ test('la guardia strutturale rifiuta numeri, date e quantità alterati', async (
     fieldType: 'description',
   });
 
-  assert.equal(calls.length, 2);
-  assert.equal(translated, '');
+  assert.equal(calls.length, 1);
+  assert.equal(translated, 'Die Regel gilt ab 2025 und kostet 24 CHF.');
+  assert.equal(
+    (getCascadeStats().tierNumericDrift.myMemory || 0) - (before.tierNumericDrift.myMemory || 0),
+    1,
+  );
 });
 
 test('il recovery di righe brevi realmente tradotte resta un hit', async () => {
@@ -924,4 +934,39 @@ test('la forma delle sentinelle di genere è osservata dal classificatore della 
     assert.equal(hasTranslatableLineText(token.placeholder), false, token.placeholder);
   }
   assert.equal(hasTranslatableLineText('ZQX0_XQZ'), true);
+});
+
+test('D5: le localizzazioni numeriche reali passano, mentre i vincoli strutturali restano chiusi', () => {
+  // Coppie brevi osservate nelle localizzazioni pubblicate del corpus.
+  const accepted = [
+    ['70.000', '70,000'],
+    ['70.000', '70 000'],
+    ['20%', '20 %'],
+    ['1° luglio 2024', '1er juillet 2024'],
+    ['1° luglio 2024', '1. Juli 2024'],
+    ['1,80', '1.80'],
+    ['dalle ore 17.00', 'from 5:00 PM'],
+  ];
+  for (const [source, translated] of accepted) {
+    assert.equal(hasSameLineStructure(source, translated), true, `${source} → ${translated}`);
+    assert.deepEqual(numericDriftTokens(source, translated), [], `${source} → ${translated}`);
+  }
+
+  assert.deepEqual(opaqueSpanSignature('70.000'), [], 'i numeri non sono span della guardia');
+  assert.equal(lineStructuralSignature('1. Juli 2024').kind, 'ordered');
+  assert.equal(normalizeStructuredBlock('  70.000  '), '  70.000');
+
+  const rejected = [
+    ['Leggi https://example.com/CasePath', 'Lies https://example.com/casepath'],
+    ['Scrivi a User@example.com', 'Schreib an user@example.com'],
+    ['Importo {{amount}}', 'Betrag'],
+    ['una riga', 'una riga\nuna riga in più'],
+    ['4500', '4501'],
+  ];
+  for (const [source, translated] of rejected) {
+    assert.equal(hasSameLineStructure(source, translated), false, `${source} → ${translated}`);
+  }
+
+  assert.deepEqual(numericDriftTokens('Anno 2026', 'Jahr 2025'), ['2026']);
+  assert.deepEqual(numericDriftTokens('Importo 70.000', 'Betrag 7.000'), ['70000']);
 });

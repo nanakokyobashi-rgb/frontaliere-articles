@@ -343,6 +343,10 @@ const _cascadeStats = {
   // valore («Traduzione:»). Vedi `rejectedAsMetaResponse`. Stessa unita' di
   // `tierPassthroughs`: tentativi di tier, non campi.
   tierMetaResponses: {},
+  // Accepted fields whose source contains a large numeric token missing from
+  // the translated text. This is measurement only: it never rejects, retries
+  // or changes the returned translation.
+  tierNumericDrift: {},
   // Un tier ha risposto con una struttura multilinea diversa dalla sorgente e
   // il recupero per riga non era ammesso o non e' riuscito. Ragioni separate:
   // un limite raggiunto non e' un errore del motore, ma nessun testo fuso puo'
@@ -395,6 +399,7 @@ export function getCascadeStats() {
     tierPassthroughs: { ..._cascadeStats.tierPassthroughs },
     tierPassthroughChunks: { ..._cascadeStats.tierPassthroughChunks },
     tierMetaResponses: { ..._cascadeStats.tierMetaResponses },
+    tierNumericDrift: { ..._cascadeStats.tierNumericDrift },
     tierStructureFailures: Object.fromEntries(
       Object.entries(_cascadeStats.tierStructureFailures)
         .map(([reason, tiers]) => [reason, { ...tiers }]),
@@ -438,6 +443,12 @@ export function logCascadeSummary() {
   const meta = Object.entries(s.tierMetaResponses).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
   if (meta.length) {
     console.log('   Tier meta-risposta (rifiuto/richiesta/narrazione, scartata): ' + meta.map(([k, v]) => `${k}=${v}`).join(', '));
+  }
+  const numericDrift = Object.entries(s.tierNumericDrift)
+    .filter(([, v]) => v > 0)
+    .sort((a, b) => b[1] - a[1]);
+  if (numericDrift.length) {
+    console.log('   Tier numeric drift (campi accettati con grandi numeri mancanti): ' + numericDrift.map(([k, v]) => `${k}=${v}`).join(', '));
   }
   const structure = Object.entries(s.tierStructureFailures)
     .flatMap(([reason, tiers]) => Object.entries(tiers).map(([tier, count]) => reason + ':' + tier + '=' + count))
@@ -514,7 +525,7 @@ function normalizeBlock(s) {
 }
 
 /** Normalize a block for structural checks without erasing nested Markdown indentation. */
-function normalizeStructuredBlock(s) {
+export function normalizeStructuredBlock(s) {
   return String(s ?? '')
     .replace(/\u00a0/g, ' ')
     .replace(/\r\n?/g, '\n')
@@ -536,7 +547,7 @@ function normalizeStructuredBlock(s) {
  * ordered number/delimiter and the unordered marker, so changing either is a
  * structure miss even when the line count is unchanged.
  */
-function lineStructuralSignature(line) {
+export function lineStructuralSignature(line) {
   const raw = String(line ?? '').replace(/\u00a0/g, ' ').replace(/\r/g, '');
   const indent = raw.match(/^[ \t]*/u)?.[0] || '';
   const candidate = raw.slice(indent.length).replace(/[ \t]+/gu, ' ').trim();
@@ -593,12 +604,38 @@ function lineStructuralSignature(line) {
 
 const INLINE_OPAQUE_RE = /(?:https?:\/\/\S+|www\.\S+|[\p{L}\p{N}._%+-]+@[\p{L}\p{N}.-]+\.[\p{L}]{2,})/giu;
 const PLACEHOLDER_RE = /(?:\{\{[^{}\n]*\}\}|\$\{[^{}\n]*\}|\[\[[^\[\]\n]*\]\]|\{[^{}\n]*\}|%[A-Za-z0-9_]+)/gu;
-// Numeric values are opaque too: a provider may localize prose around them,
-// but it must not silently change a year, date component, amount or quantity.
-// Dates with punctuation are matched as ordered numeric spans, while decimal
-// and thousands separators stay inside one span.
-const NUMERIC_OPAQUE_RE = /(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
-const NUMERIC_OPAQUE_TEST_RE = new RegExp(NUMERIC_OPAQUE_RE.source, 'u');
+// Numeric spans are opaque only to the chunker: a URL-like number, date or
+// amount must not be split across requests. They are deliberately absent from
+// the rejection signature below because locale-specific separators are valid.
+const NUMERIC_CHUNK_RE = /(?<![\p{L}\p{N}_])\d+(?:[.,'’\u00a0\u202f ]\d+)*(?:\s*[%°º])?(?![\p{L}\p{N}_])/gu;
+const LARGE_NUMERIC_TOKEN_RE = /(?<![\d.,'’])(?:\d{1,3}(?:[.,'’   ]\d{3})+|\d{4,})(?!\d)/gu;
+
+function digitSequence(text) {
+  return [...String(text ?? '').matchAll(/\d/gu)].map(([digit]) => digit).join('');
+}
+
+/**
+ * Return source large-number tokens missing from a translation.
+ * Separators are ignored and repeated source tokens are matched as a multiset.
+ * This is an observability signal, not a translation guard.
+ */
+export function numericDriftTokens(sourceText, translatedText) {
+  const sourceTokens = [...String(sourceText ?? '').matchAll(LARGE_NUMERIC_TOKEN_RE)]
+    .map(([token]) => token.replace(/\D/gu, ''));
+  const translatedCounts = new Map();
+  for (const [token] of String(translatedText ?? '').matchAll(LARGE_NUMERIC_TOKEN_RE)) {
+    const normalized = token.replace(/\D/gu, '');
+    translatedCounts.set(normalized, (translatedCounts.get(normalized) || 0) + 1);
+  }
+  return sourceTokens.filter((token) => {
+    const available = translatedCounts.get(token) || 0;
+    if (available > 0) {
+      translatedCounts.set(token, available - 1);
+      return false;
+    }
+    return true;
+  });
+}
 
 /**
  * Decide whether a source line deserves a translation request.
@@ -618,17 +655,11 @@ export function hasTranslatableLineText(line) {
   return /\p{L}/u.test(candidate);
 }
 
-function opaqueSpanSignature(line) {
+export function opaqueSpanSignature(line) {
   const text = lineStructuralSignature(line).text;
-  return opaqueSpanRanges(text)
+  return guardOpaqueSpanRanges(text)
     .map(({ start, end }) => {
       const span = text.slice(start, end);
-      if (NUMERIC_OPAQUE_TEST_RE.test(span)) {
-        // Date ordinals and decimal punctuation are locale-specific (`1°` →
-        // `1.` and `1,5` → `1.5`). Compare the ordered digit groups so the
-        // value stays invariant without rejecting the target locale's format.
-        return `number:${span.match(/\d+/gu).join('|')}`;
-      }
       // Only sentinels are intentionally case-insensitive. URL paths, email
       // local parts and placeholders can be case-sensitive in published HTML.
       return translationSentinelRegExp().test(span)
@@ -644,7 +675,13 @@ function hasSameOpaqueSpans(sourceLine, translatedLine) {
     && source.every((span, index) => span === translated[index]);
 }
 
-function hasSameLineStructure(sourceText, translatedText) {
+function isLocalizedOrdinalLine(sourceLine, translatedLine) {
+  const source = String(sourceLine ?? '').match(/^(\s*)(\d{1,2})[°º]\s+/u);
+  const translated = String(translatedLine ?? '').match(/^(\s*)(\d{1,2})\.\s+/u);
+  return Boolean(source && translated && source[1] === translated[1] && source[2] === translated[2]);
+}
+
+export function hasSameLineStructure(sourceText, translatedText) {
   const sourceLines = normalizeStructuredBlock(sourceText).split('\n');
   const translatedLines = normalizeStructuredBlock(translatedText).split('\n');
   return sourceLines.length === translatedLines.length
@@ -652,12 +689,13 @@ function hasSameLineStructure(sourceText, translatedText) {
       const source = lineStructuralSignature(sourceLine);
       const translatedLine = translatedLines[index];
       const translated = lineStructuralSignature(translatedLine);
-      if (source.signature !== translated.signature) {
+      if (source.signature !== translated.signature
+        && !isLocalizedOrdinalLine(sourceLine, translatedLine)) {
         return false;
       }
       if (!hasSameOpaqueSpans(sourceLine, translatedLine)) return false;
       if (!hasTranslatableLineText(sourceLine)) {
-        return normalizeBlock(sourceLine) === normalizeBlock(translatedLine);
+        return digitSequence(sourceLine) === digitSequence(translatedLine);
       }
       return hasTranslatableLineText(translatedLine);
     });
@@ -674,7 +712,10 @@ function restoreSourceLineStructure(sourceLine, translatedLine) {
   const source = lineStructuralSignature(sourceLine);
   const translated = lineStructuralSignature(translatedLine);
   if (source.signature === 'empty' || translated.signature === 'empty') return null;
-  if (source.kind === 'text' && translated.kind !== 'text') return null;
+  if (source.kind === 'text' && translated.kind !== 'text') {
+    if (!isLocalizedOrdinalLine(sourceLine, translatedLine)) return null;
+    return normalizeStructuredBlock(translatedLine);
+  }
   return `${source.prefix}${translated.text}`;
 }
 
@@ -851,9 +892,9 @@ function rejectedAsMetaResponse(tierName, source, out, outcome = null) {
   return true;
 }
 
-function opaqueSpanRanges(text) {
+function spanRanges(text, source) {
   const matcher = new RegExp(
-    `(?:${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${NUMERIC_OPAQUE_RE.source}|${translationSentinelRegExp().source})`,
+    `(?:${source})`,
     'giu',
   );
   return [...text.matchAll(matcher)].map((match) => ({
@@ -862,12 +903,26 @@ function opaqueSpanRanges(text) {
   }));
 }
 
+function guardOpaqueSpanRanges(text) {
+  return spanRanges(
+    text,
+    `${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${translationSentinelRegExp().source}`,
+  );
+}
+
+function chunkAtomicSpanRanges(text) {
+  return spanRanges(
+    text,
+    `${INLINE_OPAQUE_RE.source}|${PLACEHOLDER_RE.source}|${NUMERIC_CHUNK_RE.source}|${translationSentinelRegExp().source}`,
+  );
+}
+
 function _splitOversizedSegment(text, maxChars, separatorAfter) {
   const parts = [];
   let remaining = text;
 
   while (remaining.length > maxChars) {
-    const opaqueSpans = opaqueSpanRanges(remaining);
+    const opaqueSpans = chunkAtomicSpanRanges(remaining);
     const space = remaining.lastIndexOf(' ', maxChars);
     let splitAt = space > 0 ? space : maxChars;
     let separator = '';
@@ -1040,6 +1095,11 @@ function noteTierStructureFailure(tierName, reason) {
   const bucket = _cascadeStats.tierStructureFailures[reason]
     || (_cascadeStats.tierStructureFailures[reason] = {});
   bucket[tierName] = (bucket[tierName] || 0) + 1;
+}
+
+function noteNumericDrift(tierName, sourceText, translatedText) {
+  if (numericDriftTokens(sourceText, translatedText).length === 0) return;
+  _cascadeStats.tierNumericDrift[tierName] = (_cascadeStats.tierNumericDrift[tierName] || 0) + 1;
 }
 
 async function recoverStructuredTier({ tierName, sourceText, fn, outcome }) {
@@ -2678,6 +2738,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         }
         result = recovered.text;
         if (recovered.allLinesNonTranslatable) {
+          noteNumericDrift(tierName, sourceClean, result);
           _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
           _cascadeStats.successes++;
           fieldStats.successes++;
@@ -2696,6 +2757,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
         // only double-count the same meta-response.
       }
       if (result) {
+        noteNumericDrift(tierName, sourceClean, result);
         _cascadeStats.tierHits[tierName] = (_cascadeStats.tierHits[tierName] || 0) + 1;
         _cascadeStats.successes++;
         fieldStats.successes++;

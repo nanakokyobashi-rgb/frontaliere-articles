@@ -292,8 +292,9 @@ test('getCascadeStats restituisce copie profonde dei secchi annidati', () => {
   photo.tierPassthroughs.myMemory = 103;
   photo.tierPassthroughChunks.myMemory = 104;
   photo.tierMetaResponses.myMemory = 105;
-  photo.tierStructureFailures.recoveryFailed.myMemory = 106;
-  photo.byFieldType.description.calls = 107;
+  photo.tierNumericDrift.myMemory = 106;
+  photo.tierStructureFailures.recoveryFailed.myMemory = 107;
+  photo.byFieldType.description.calls = 108;
 
   assert.deepEqual(getCascadeStats(), expected);
 });

@@ -250,8 +250,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
       const query = new URL(url).searchParams.get('q') || '';
       queries.push(query);
       myMemoryCalls += 1;
-      const numbers = query.match(/\d+(?:[.,]\d+)*(?:\s*[%°º])?/gu) || [];
-      const translatedText = query === 'FAQ' ? query : `Translated chunk ${numbers.join(' ')}`;
+      const translatedText = query === 'FAQ' ? query : `Translated chunk ${myMemoryCalls}`;
       return {
         ok: true,
         json: async () => ({ responseData: { translatedText, match: 1 } }),
@@ -752,14 +751,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     setLocalOpusMtForTests(async () => { throw new Error('modello non disponibile'); });
     globalThis.fetch = async (url) => {
       if (String(url).includes('api.mymemory.translated.net')) {
-      const query = new URL(url).searchParams.get('q') || '';
-      const translatedText = query.includes('\n')
-        ? 'vera traduzione'
-        : (() => {
-          const prefix = query.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u)?.[0] || '';
-          const numbers = query.match(/\d+(?:[.,]\d+)*(?:\s*[%°º])?/gu) || [];
-          return `${prefix}vera traduzione${numbers.length ? ` ${numbers.join(' ')}` : ''}`;
-        })();
+        const query = new URL(url).searchParams.get('q') || '';
+        const translatedText = query.includes('\n')
+          ? 'vera traduzione'
+          : `${query.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u)?.[0] || ''}vera traduzione`;
         return {
           ok: true,
           json: async () => ({ responseData: { translatedText, match: 1 } }),
@@ -780,7 +775,7 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
       assert.equal(
         out,
-        '## vera traduzione\n- vera traduzione\n- vera traduzione\n\nvera traduzione 2023',
+        '## vera traduzione\n- vera traduzione\n- vera traduzione\n\nvera traduzione',
       );
       assert.equal(outcome.incomplete, true);
     } finally {

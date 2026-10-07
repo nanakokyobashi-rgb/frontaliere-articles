@@ -94,11 +94,7 @@ globalThis.fetch = async (url) => {
     return { ok: true, status: 200, json: async () => ({ translation: q }) };
   }
   if (u.includes('api.mymemory.translated.net')) {
-    const query = new URL(u).searchParams.get('q') || '';
-    const numbers = query.match(/\d+(?:[.,]\d+)*(?:\s*[%°º])?/gu) || [];
-    const translatedText = free.mymemoryEcho
-      ? query
-      : `MYMEMORY ${EN}${numbers.length ? ` [${numbers.join(' ')}]` : ''}`;
+    const translatedText = free.mymemoryEcho ? new URL(u).searchParams.get('q') : `MYMEMORY ${EN}`;
     return { ok: true, json: async () => ({ responseData: { translatedText, match: 1 } }) };
   }
   throw new Error('offline nel test');
@@ -144,10 +140,6 @@ const it = (text = IT) => freeTranslate({ text, sourceLang: 'it', targetLang: 'e
 /** Testi distinti, tutti it→en: `Numero N` li distingue. */
 const numbered = (count) => Array.from({ length: count }, (_, i) => `${IT} Numero ${i + 1}.`);
 const translationOf = (text) => `${EN} [${/Numero (\d+)/.exec(text)?.[1] ?? '?'}]`;
-const myMemoryTranslationOf = (text) => {
-  const numbers = text.match(/\d+(?:[.,]\d+)*(?:\s*[%°º])?/gu) || [];
-  return `MYMEMORY ${EN}${numbers.length ? ` [${numbers.join(' ')}]` : ''}`;
-};
 
 const DATE_CASES = [
   {
@@ -343,7 +335,7 @@ test('un eco del prompt in un batch e\' rifiutato per il solo item guasto', asyn
     });
   });
   const { value } = await captureLog(() => withLanes(1, () => Promise.all(texts.map((text) => it(text)))));
-  assert.deepEqual(value, [translationOf(texts[0]), myMemoryTranslationOf(texts[1]), translationOf(texts[2])]);
+  assert.deepEqual(value, [translationOf(texts[0]), `MYMEMORY ${EN}`, translationOf(texts[2])]);
   assert.equal(calls.length, 2);
   assert.equal(batchItems(calls[0].messages), null);
   assert.equal(batchItems(calls[1].messages).length, 2);
@@ -408,7 +400,7 @@ test('le richieste concorrenti non superano il budget, anche quando traducono pi
       assert.equal(batchItems(calls[0].messages), null);
       assert.equal(batchItems(calls[1].messages).length, 5);
       assert.deepEqual(value.slice(0, 6), texts.slice(0, 6).map(translationOf));
-      assert.equal(value[6], myMemoryTranslationOf(texts[6]));
+      assert.equal(value[6], `MYMEMORY ${EN}`);
     });
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
@@ -579,7 +571,7 @@ test('una voce mancante, vuota o con un id estraneo scende al tier successivo, l
     const texts = numbered(4);
     const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
     assert.equal(calls.length, 2);
-    assert.deepEqual(value, [translationOf(texts[0]), translationOf(texts[1]), myMemoryTranslationOf(texts[2]), myMemoryTranslationOf(texts[3])]);
+    assert.deepEqual(value, [translationOf(texts[0]), translationOf(texts[1]), `MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
   });
 });
 
@@ -606,7 +598,7 @@ test('una richiesta di gruppo fallita e\' un errore per ogni suo testo e un fall
     const texts = numbered(4);
     const { value, lines } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
     assert.equal(calls.length, 2);
-    assert.deepEqual(value, [translationOf(texts[0]), myMemoryTranslationOf(texts[1]), myMemoryTranslationOf(texts[2]), myMemoryTranslationOf(texts[3])]);
+    assert.deepEqual(value, [translationOf(texts[0]), `MYMEMORY ${EN}`, `MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
     assert.equal(codexCounters().errors - before.errors, 3);
     assert.equal(lines.filter((l) => l.includes('fallimenti consecutivi')).length, 0);
   });
