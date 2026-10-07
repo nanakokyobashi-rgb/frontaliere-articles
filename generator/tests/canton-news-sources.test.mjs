@@ -43,6 +43,7 @@ import {
   feedItemDocuments,
   filterArticleLinks,
   isoWeekOf,
+  parseDottedDate,
   periodSitemapUrls,
   scanCantonSource,
   sourceRequestBudget,
@@ -167,7 +168,9 @@ test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei port
       contenttypeid: '401',
       articleHeadline: 'Thayngen: Mutmasslicher Täter schwer verletzt',
       publication_date: '05.10.2026',
+      transactiontime: '05.10.2026 17:15:36',
       permalink: '/Webseite/Schaffhauser-Polizei-23897400-DE.html',
+      post_content: '<p>Am frühen Mittwochmorgen ist beim Bahnhof in Thayngen ein Geldautomat gesprengt worden. Bei der Explosion wurde ein mutmasslicher Täter schwer verletzt.</p><p>Das Gebiet musste für die Bevölkerung gesperrt werden. Die Polizei suchte weitere Beteiligte und bat Personen mit Angaben zum Vorfall, zum Fluchtweg oder zu den benutzten Fahrzeugen, sich mit der Schaffhauser Polizei in Verbindung zu setzen.</p>',
     },
   ];
   const items = extractJsonApiItems(JSON.stringify(rows), api);
@@ -177,6 +180,36 @@ test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei port
   assert.equal(items[0].date.getDate(), 1);
   assert.equal(items[1].url, 'https://sh.ch/Webseite/Schaffhauser-Polizei-23897400-DE.html');
   assert.match(items[1].headline, /Thayngen/);
+  assert.equal(items[1].date.getHours(), 17);
+  assert.match(items[1].sourceContent, /Bahnhof in Thayngen/);
+});
+
+test('timestamp CMS SH: secondi, SQL e ISO precedono il fallback day-only', () => {
+  const dotted = parseDottedDate('05.10.2026 17:15:36');
+  assert.equal(dotted.getHours(), 17);
+  assert.equal(dotted.getMinutes(), 15);
+  assert.equal(dotted.getSeconds(), 36);
+  assert.equal(parseDottedDate('05.10.2026 25:15:36'), null);
+
+  const rows = [
+    {
+      kachellabel: 'CMS SQL timestamp',
+      publication_date: '05.10.2026',
+      transactiontime: '2026-10-05 17:15:36',
+      permalink: '/sql.html',
+    },
+    {
+      kachellabel: 'CMS ISO timestamp',
+      publication_date: '05.10.2026',
+      transactiontime: '2026-10-05T17:15:36Z',
+      permalink: '/iso.html',
+    },
+  ];
+  const items = extractJsonApiItems(JSON.stringify(rows), 'https://sh.ch/CMS/content/list?language=DE');
+  assert.equal(items.length, 2);
+  assert.equal(items[0].date.getHours(), 17);
+  assert.equal(items[0].date.getSeconds(), 36);
+  assert.equal(items[1].date.toISOString(), '2026-10-05T17:15:36.000Z');
 });
 
 // ── sitemap ─────────────────────────────────────────────────────────────────
