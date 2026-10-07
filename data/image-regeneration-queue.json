@@ -54,6 +54,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:25:44.304Z",
       "lastFailureAt": "2026-10-07T06:25:44.304Z"
+    },
+    {
+      "articleId": "hotel-ticino-140-licenziati",
+      "title": "Due hotel chiusi in Ticino: 140 licenziati",
+      "fallbackImage": "/images/blog/hotel-ticino-76-licenziamenti.webp",
+      "reason": "All image providers failed for article-hotel-ticino-140-licenziati: Codex broker timed out after 119999ms",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:29:51.075Z",
+      "lastFailureAt": "2026-10-07T06:29:51.075Z"
     }
   ]
 }

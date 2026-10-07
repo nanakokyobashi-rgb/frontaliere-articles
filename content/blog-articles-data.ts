@@ -42872,6 +42872,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hotel-ticino-140-licenziati',
+ category: 'novita',
+ date: '2026-10-07T06:29:50.676Z',
+ image: '/images/blog/hotel-ticino-76-licenziamenti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
