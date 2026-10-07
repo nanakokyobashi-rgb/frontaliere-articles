@@ -272,10 +272,12 @@ import {
 } from './lib/blog-image-registry.mjs';
 import {
   evaluateSourceCopy,
+  getSourceCopyMode,
   logSourceCopyVerdict,
   SOURCE_COPY_MAX_RETRIES,
   SOURCE_COPY_MAX_QUOTE_WORDS,
   SOURCE_COPY_OVERLAP_THRESHOLD,
+  sourceCopyModeBlocks,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
@@ -16538,6 +16540,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
   let sourceCopyRetries = 0;
+  const sourceCopyMode = getSourceCopyMode();
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Cost accounting for the rejection ledger. Counted here — at the top of
@@ -16791,8 +16794,8 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       data.content.it,
       { locale: 'it' },
     );
-    logSourceCopyVerdict(data.id, sourceCopyVerdict);
-    if (!sourceCopyVerdict.safe) {
+    logSourceCopyVerdict(data.id, sourceCopyVerdict, console.error, sourceCopyMode);
+    if (!sourceCopyVerdict.safe && sourceCopyModeBlocks(sourceCopyMode)) {
       lastSourceCopyErrors = `Massimo overlap rilevato: ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}). `
         + 'Riformula il corpo senza copiare la fonte.';
       if (sourceCopyRetries < SOURCE_COPY_MAX_RETRIES && attempt < maxAttempts) {
@@ -17634,7 +17637,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   const sourceCopyFinalSource = sourceCopyInputText(pageContent);
   const sourceCopyFinalVerdicts = ['it', 'en', 'de', 'fr'].map((locale) => {
     const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
-    logSourceCopyVerdict(data.id, verdict);
+    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode);
     return verdict;
   });
   const worstSourceCopy = sourceCopyFinalVerdicts.reduce(
@@ -17643,10 +17646,10 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   );
   console.error(
     `[source-copy] article=${data.id} max_overlap=${worstSourceCopy.maxWords}`
-      + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} locales=it,en,de,fr`,
+      + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} mode=${sourceCopyMode} locales=it,en,de,fr`,
   );
   const unsafeSourceCopy = sourceCopyFinalVerdicts.find((verdict) => !verdict.safe);
-  if (unsafeSourceCopy) {
+  if (unsafeSourceCopy && sourceCopyModeBlocks(sourceCopyMode)) {
     throw new SourceCopyError(
       `Anti-copia fallita dopo le trasformazioni finali (${unsafeSourceCopy.locale}): `
         + `overlap massimo ${unsafeSourceCopy.maxWords} parole consecutive`,

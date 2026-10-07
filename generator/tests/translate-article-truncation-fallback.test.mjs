@@ -957,7 +957,7 @@ function runPostTranslationToBodyFiles(data, url) {
     'data', 'url', 'pageContent', 'isBodyTranslationPending', 'console',
     'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
     'decodeHtmlEntities', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
-    'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries',
+    'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries', 'sourceCopyMode',
     `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n${SOURCE_COPY_INPUT_SRC}\n`
     + `${STEP_3C_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\n${STEP_3E_SRC}\n`
     + "const out = {};\nfor (const locale of ['it', 'en', 'de', 'fr']) { decodeLocaleContentEntities(data, locale); out[locale] = buildBodyFile(data, locale); }\nreturn out;",
@@ -967,7 +967,7 @@ function runPostTranslationToBodyFiles(data, url) {
     data, url, '', isBodyTranslationPending, { error: () => {}, warn: () => {} },
     () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
     decodeHtmlEntities, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
-    evaluateSourceCopy, logSourceCopyVerdict, SOURCE_COPY_OVERLAP_THRESHOLD, SourceCopyError, 0,
+    evaluateSourceCopy, logSourceCopyVerdict, SOURCE_COPY_OVERLAP_THRESHOLD, SourceCopyError, 0, 'warn',
   );
 }
 

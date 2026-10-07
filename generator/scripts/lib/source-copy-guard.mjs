@@ -10,6 +10,23 @@ export const SOURCE_COPY_OVERLAP_THRESHOLD = 12;
 export const SOURCE_COPY_MAX_ATTRIBUTED_QUOTES = 2;
 export const SOURCE_COPY_MAX_QUOTE_WORDS = 25;
 export const SOURCE_COPY_MAX_RETRIES = 2;
+export const ARTICLE_SOURCE_COPY_MODE_ENV = 'ARTICLE_SOURCE_COPY_MODE';
+export const SOURCE_COPY_DEFAULT_MODE = 'warn';
+export const SOURCE_COPY_MODES = Object.freeze(['warn', 'repair', 'enforce']);
+
+/**
+ * Resolve the production switch fail-safe. `repair` is reserved for the
+ * targeted repair path delivered separately; until then it remains advisory
+ * like `warn`, while `enforce` preserves the existing blocking behavior.
+ */
+export function getSourceCopyMode(value = process.env[ARTICLE_SOURCE_COPY_MODE_ENV]) {
+  const mode = String(value ?? '').trim().toLowerCase();
+  return SOURCE_COPY_MODES.includes(mode) ? mode : SOURCE_COPY_DEFAULT_MODE;
+}
+
+export function sourceCopyModeBlocks(mode = getSourceCopyMode()) {
+  return getSourceCopyMode(mode) === 'enforce';
+}
 
 const WORD_RX = /[\p{L}\p{N}]+/gu;
 const QUOTED_SPAN_RX = /«([^»\n]{1,4000})»|“([^”\n]{1,4000})”|„([^“\n]{1,4000})“|"([^"\n]{1,4000})"/gu;
@@ -144,11 +161,12 @@ export function evaluateSourceCopy(sourceText, articleText, {
   };
 }
 
-export function logSourceCopyVerdict(articleId, verdict, logger = console.error) {
+export function logSourceCopyVerdict(articleId, verdict, logger = console.error, mode = getSourceCopyMode()) {
+  const effectiveMode = getSourceCopyMode(mode);
   logger(
     `[source-copy] article=${String(articleId || 'unknown')} locale=${verdict.locale || 'it'}`
       + ` max_overlap=${verdict.maxWords} threshold=${verdict.threshold ?? SOURCE_COPY_OVERLAP_THRESHOLD}`
-      + ` allowed_quotes=${verdict.allowedQuotes || 0}`,
+      + ` mode=${effectiveMode} allowed_quotes=${verdict.allowedQuotes || 0}`,
   );
 }
 
@@ -173,10 +191,12 @@ export async function generateWithSourceCopyGuard({
   generate,
   articleId = 'unknown',
   locale = 'it',
+  mode = getSourceCopyMode(),
   maxRetries = SOURCE_COPY_MAX_RETRIES,
   logger = console.error,
 } = {}) {
   if (typeof generate !== 'function') throw new TypeError('generate must be a function');
+  const sourceCopyMode = getSourceCopyMode(mode);
   const retryLimit = Math.max(0, Number.isInteger(maxRetries) ? maxRetries : SOURCE_COPY_MAX_RETRIES);
   let lastVerdict = null;
   for (let retry = 0; retry <= retryLimit; retry += 1) {
@@ -187,8 +207,10 @@ export async function generateWithSourceCopyGuard({
         : `Riformula indipendentemente il testo: non riutilizzare sequenze di ${SOURCE_COPY_OVERLAP_THRESHOLD} parole consecutive della fonte.`,
     });
     lastVerdict = evaluateSourceCopy(sourceText, draft, { locale });
-    logSourceCopyVerdict(articleId, lastVerdict, logger);
-    if (lastVerdict.safe) return { draft, verdict: lastVerdict, retries: retry };
+    logSourceCopyVerdict(articleId, lastVerdict, logger, sourceCopyMode);
+    if (lastVerdict.safe || !sourceCopyModeBlocks(sourceCopyMode)) {
+      return { draft, verdict: lastVerdict, retries: retry };
+    }
   }
   throw new SourceCopyError(
     `Source-copy guard failed after ${retryLimit} retries: max overlap ${lastVerdict?.maxWords || 0} words (threshold ${SOURCE_COPY_OVERLAP_THRESHOLD})`,
