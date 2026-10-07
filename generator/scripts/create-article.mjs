@@ -16099,6 +16099,18 @@ async function main() {
       const topicGateTracker = _loadEvergreenRejectedTracker();
       headlines = headlines.filter(h => {
         if (!h.url || !_isTopicGateAbortedUrl(topicGateTracker, normalizeNewsUrl(h.url), SECTION_NAME)) return true;
+        // A prior abort may have happened while a CMS permalink was only a
+        // thin shell. If the current canton scan carries the verified body
+        // from the official JSON API, spend the normal generation gates again:
+        // this is evidence repair, not a topic-gate bypass. Other sources and
+        // all candidates without a verified body remain memo-blocked.
+        const hasVerifiedCantonBody = IS_CANTON
+          && typeof h._cantonSourceContent === 'string'
+          && h._cantonSourceContent.trim().length >= 200;
+        if (hasVerifiedCantonBody) {
+          console.error(`  ♻️ Memo topic-gate ignorato: corpo CMS verificato presente per "${h.headline.slice(0, 60)}…"`);
+          return true;
+        }
         console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${h.headline.slice(0, 60)}…`);
         RUN_REPORT.preFilterDrops.topicGateAbortedRecently = (RUN_REPORT.preFilterDrops.topicGateAbortedRecently || 0) + 1;
         recordDiscardedHeadline({ reason: 'topic_gate_aborted_recently', headline: h.headline });

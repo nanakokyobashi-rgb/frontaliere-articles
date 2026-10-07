@@ -43,6 +43,7 @@ import {
   feedItemDocuments,
   filterArticleLinks,
   isoWeekOf,
+  parseDottedDate,
   periodSitemapUrls,
   scanCantonSource,
   sourceRequestBudget,
@@ -181,6 +182,34 @@ test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei port
   assert.match(items[1].headline, /Thayngen/);
   assert.equal(items[1].date.getHours(), 17);
   assert.match(items[1].sourceContent, /Bahnhof in Thayngen/);
+});
+
+test('timestamp CMS SH: secondi, SQL e ISO precedono il fallback day-only', () => {
+  const dotted = parseDottedDate('05.10.2026 17:15:36');
+  assert.equal(dotted.getHours(), 17);
+  assert.equal(dotted.getMinutes(), 15);
+  assert.equal(dotted.getSeconds(), 36);
+  assert.equal(parseDottedDate('05.10.2026 25:15:36'), null);
+
+  const rows = [
+    {
+      kachellabel: 'CMS SQL timestamp',
+      publication_date: '05.10.2026',
+      transactiontime: '2026-10-05 17:15:36',
+      permalink: '/sql.html',
+    },
+    {
+      kachellabel: 'CMS ISO timestamp',
+      publication_date: '05.10.2026',
+      transactiontime: '2026-10-05T17:15:36Z',
+      permalink: '/iso.html',
+    },
+  ];
+  const items = extractJsonApiItems(JSON.stringify(rows), 'https://sh.ch/CMS/content/list?language=DE');
+  assert.equal(items.length, 2);
+  assert.equal(items[0].date.getHours(), 17);
+  assert.equal(items[0].date.getSeconds(), 36);
+  assert.equal(items[1].date.toISOString(), '2026-10-05T17:15:36.000Z');
 });
 
 // ── sitemap ─────────────────────────────────────────────────────────────────

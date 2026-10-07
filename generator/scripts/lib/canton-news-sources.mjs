@@ -440,12 +440,17 @@ function validDate(raw) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-/** `dd.mm.yyyy` (e `dd.mm.yyyy hh:mm`) → Date locale, o null. */
+/** `dd.mm.yyyy` (e `dd.mm.yyyy hh:mm:ss`) → Date locale, o null. */
 export function parseDottedDate(raw) {
-  const m = /^\s*(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[\sT]+(\d{1,2}):(\d{2}))?/.exec(String(raw || ''));
+  const m = /^\s*(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[\sT]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/.exec(String(raw || ''));
   if (!m) return null;
-  const d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]), Number(m[4] || 0), Number(m[5] || 0));
-  return d.getDate() === Number(m[1]) && d.getMonth() === Number(m[2]) - 1 ? d : null;
+  const d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]), Number(m[4] || 0), Number(m[5] || 0), Number(m[6] || 0));
+  return d.getDate() === Number(m[1])
+    && d.getMonth() === Number(m[2]) - 1
+    && d.getHours() === Number(m[4] || 0)
+    && d.getMinutes() === Number(m[5] || 0)
+    && d.getSeconds() === Number(m[6] || 0)
+    ? d : null;
 }
 
 /** `YYMMDD` nel path di una fonte HTML → Date locale, o null. */
@@ -759,6 +764,8 @@ export function extractJsonApiItems(text, apiUrl) {
       // midnight. `custom_publication_date_date` is the event date in several
       // Polizei notices, so it must not win the recency decision.
       const date = parseDottedDate(n?.transactiontime)
+        || parseSqlDateTime(n?.transactiontime)
+        || validDate(n?.transactiontime)
         || parseDottedDate(n?.publication_date)
         || validDate(n?.publication_date);
       if (!date) continue;
