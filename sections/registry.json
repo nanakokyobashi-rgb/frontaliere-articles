@@ -13,7 +13,7 @@
     "canton-ag": {
       "kind": "canton",
       "canton": "AG",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-argovia",
         "en": "aargau-articles",
@@ -503,7 +503,7 @@
     "canton-ne": {
       "kind": "canton",
       "canton": "NE",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-neuchatel",
         "en": "neuchatel-articles",
@@ -944,7 +944,7 @@
     "canton-ur": {
       "kind": "canton",
       "canton": "UR",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-uri",
         "en": "uri-articles",

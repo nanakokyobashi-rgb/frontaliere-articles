@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-lu:eventi",
+  "section": "canton-lu",
+  "canton": "LU",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "ecb67632edb438ec8cea3aa9f734fc1d70bda65f4cb24e50fb045d281e8e0492",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "LU",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Lucerna, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "65",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Metzgete",
+              "detail": "Littau, Luzern",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-6/"
+            },
+            {
+              "label": "Kunstausstellung Weltformat",
+              "detail": "Luzern — in corso, ultimo giorno: 10 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            },
+            {
+              "label": "Fiera d'autunno - Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
+              "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Wine and Dine trip",
+              "detail": "Lucerne — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Escursione meditativa",
+              "detail": "6356 Rigi Kaltbad — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
+            },
+            {
+              "label": "SalimSamatou - Comedy Night",
+              "detail": "FLORA (Ehemalig ROK Klub), Luzern",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/salimsamatou-comedy-night-2/"
+            },
+            {
+              "label": "Klosterkilbi St. Urban",
+              "detail": "4915 St. Urban",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klosterkilbi-st-urban/"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-10-09",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/lucerna/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Kunstausstellung Weltformat",
+              "date": "2026-10-02T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Patente di guida a Lucerna: cosa fare e sapere",
+          "url": "/articoli-svizzera/patente-guida-lucerna-conversione-ed-esami/",
+          "excerpt": "La conversione della patente di guida nel Cantone di Lucerna: requisiti, procedure e tempistiche.",
+          "date": "2026-08-15T20:25:03.719Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Lucerna",
+          "url": "/eventi/lucerna/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/lucerna/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "LU",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Lucerne, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "65",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Metzgete",
+              "detail": "Littau, Luzern",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-6/"
+            },
+            {
+              "label": "Kunstausstellung Weltformat",
+              "detail": "Luzern — ongoing, last day: 10 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            },
+            {
+              "label": "Autumn Fair - Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — ongoing, last day: 18 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
+              "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Wine and Dine trip",
+              "detail": "Lucerne — ongoing, last day: 16 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Meditative Hike",
+              "detail": "6356 Rigi Kaltbad — ongoing, last day: 17 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
+            },
+            {
+              "label": "SalimSamatou - Comedy Night",
+              "detail": "FLORA (Ehemalig ROK Klub), Luzern",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/salimsamatou-comedy-night-2/"
+            },
+            {
+              "label": "Klosterkilbi St. Urban",
+              "detail": "4915 St. Urban",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klosterkilbi-st-urban/"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-10-09",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/lucerne/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Kunstausstellung Weltformat",
+              "date": "2026-10-02T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Driver's license in Lucerne: what to do and know",
+          "url": "/en/swiss-articles/driver-s-license-in-lucerne-what-to-do-and-know/",
+          "excerpt": "The conversion of the driving licence in the Canton of Lucerne: requirements, procedures and timelines.",
+          "date": "2026-08-15T20:25:03.719Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "All events in the canton of Lucerne",
+          "url": "/en/events/lucerne/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/lucerne/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "LU",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Luzern ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "65",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Metzgete",
+              "detail": "Littau, Luzern",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-6/"
+            },
+            {
+              "label": "Kunstausstellung Weltformat",
+              "detail": "Luzern — läuft, letzter Tag: 10. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            },
+            {
+              "label": "Herbstmesse – Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
+              "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Wine und Dine Fahrt",
+              "detail": "Lucerne — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Meditative Wanderung",
+              "detail": "6356 Rigi Kaltbad — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
+            },
+            {
+              "label": "SalimSamatou - Comedy Night",
+              "detail": "FLORA (Ehemalig ROK Klub), Luzern",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/salimsamatou-comedy-night-2/"
+            },
+            {
+              "label": "Klosterkilbi St. Urban",
+              "detail": "4915 St. Urban",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klosterkilbi-st-urban/"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-10-09",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/luzern/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Kunstausstellung Weltformat",
+              "date": "2026-10-02T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Führerschein in Luzern: was zu tun und zu wissen ist",
+          "url": "/de/schweiz-artikel/fuhrerschein-in-luzern-was-zu-tun-und-zu-wissen-ist/",
+          "excerpt": "Die Umstellung des Führerscheins im Kanton Luzern: Voraussetzungen, Verfahren und Fristen.",
+          "date": "2026-08-15T20:25:03.719Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Luzern",
+          "url": "/de/veranstaltungen/luzern/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "LU",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Lucerne, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "65",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Metzgete",
+              "detail": "Littau, Luzern",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-6/"
+            },
+            {
+              "label": "Kunstausstellung Weltformat",
+              "detail": "Luzern — en cours, dernier jour : 10 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            },
+            {
+              "label": "Foire d'automne - Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
+              "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Voyage à la découverte du vin et de la gastronomie",
+              "detail": "Lucerne — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Randonnée méditative",
+              "detail": "6356 Rigi Kaltbad — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
+            },
+            {
+              "label": "SalimSamatou - Comedy Night",
+              "detail": "FLORA (Ehemalig ROK Klub), Luzern",
+              "date": "2026-10-08",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/salimsamatou-comedy-night-2/"
+            },
+            {
+              "label": "Klosterkilbi St. Urban",
+              "detail": "4915 St. Urban",
+              "date": "2026-10-09",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/klosterkilbi-st-urban/"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "detail": "Luzern",
+              "date": "2026-10-09",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649719"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/lucerne/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Kunstausstellung Weltformat",
+              "date": "2026-10-02T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de conduire à Lucerne : que faire et que savoir",
+          "url": "/fr/articles-suisse/permis-de-conduire-a-lucerne-que-faire-et-que-savoir/",
+          "excerpt": "La conversion du permis de conduire dans le canton de Lucerne : exigences, procédures et délais.",
+          "date": "2026-08-15T20:25:03.719Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Lucerne",
+          "url": "/fr/evenements/lucerne/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/lucerne/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

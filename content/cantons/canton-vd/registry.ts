@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'vaud-revision-bouclier-fiscal-2024',
+ category: 'fiscale',
+ date: '2026-10-07T10:47:31.180Z',
+ image: '/images/blog/acquisire-casa-sciaffusa-mutuo-fiscale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

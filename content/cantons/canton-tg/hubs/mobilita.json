@@ -1,0 +1,700 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-tg:mobilita",
+  "section": "canton-tg",
+  "canton": "TG",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "a21232c286e99a9778cd3eb09a96829464042143ccaeed35d3ca6c76d56d72ec",
+  "blocks": [
+    {
+      "id": "attese-valichi",
+      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "TG",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "In Turgovia, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio confina con la Germania: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Valico più scorrevole della settimana",
+          "value": "0,3 min",
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 5 ottobre 2026"
+        },
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "1",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "4",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attese ai valichi",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "items": [
+            {
+              "label": "Diessenhofen – Gailingen am Hochrhein",
+              "value": "0,3 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/diessenhofen-gailingen-am-hochrhein/oggi/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+              "value": "1 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/konstanz-tagerwilen-autostrada-b33n-a7/oggi/"
+            },
+            {
+              "label": "Konstanz – Kreuzlingen",
+              "value": "1,2 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/konstanz-kreuzlingen/oggi/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "5,4 min",
+              "detail": "42 rilevazioni",
+              "url": "/traffico-dogane/konstanz-tagerwilen-gottlieber-strasse/oggi/"
+            }
+          ],
+          "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
+          "sourceUrl": "/traffico-dogane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Svincolo autostradale Kreuzlingen Süd E Svincolo autostradale Kreuzlingen Nord Situazione: chiusa cantiere, lunghezza [km] 3.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 ottobre 2026",
+              "date": "2026-09-30T04:56:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-09-10T10:09:00.000Z"
+            },
+            {
+              "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-09-10T10:10:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-09-25T13:42:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 15 ottobre 2026",
+              "date": "2026-10-05T06:47:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Sanierung der Fabrikstrasse in Bischofszell",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80333"
+            },
+            {
+              "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80332"
+            },
+            {
+              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80334"
+            },
+            {
+              "label": "Regierungsrat lehnt die Vorlage Verkehr '45 hinsichtlich des Ausbaus der Eisenbahninfrastruktur ab",
+              "date": "2026-10-01",
+              "url": "https://www.tg.ch/news.html/485/news/80285"
+            },
+            {
+              "label": "Sanierung des Kugelfangs: Mehrverkehr auf der Mühletobelstrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12518"
+            },
+            {
+              "label": "Strassensperrung wegen Deckbelagsarbeiten an der Äusseren Stammerau und der Walzmühlestrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12516"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Attese ai valichi verso Germania",
+          "url": "/traffico-dogane/turgovia-germania/"
+        },
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tempi di attesa ai valichi in tempo reale",
+          "url": "/traffico-dogane/"
+        },
+        {
+          "label": "Mappa dei valichi di confine",
+          "url": "/guida-frontaliere/mappa-confine/"
+        },
+        {
+          "label": "Storico del traffico alle dogane",
+          "url": "/statistiche/storico-traffico-dogane/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        },
+        {
+          "label": "Tutte le notizie sulla dogana",
+          "url": "/dogana/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "TG",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In Thurgau, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area borders Germany: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Fastest crossing of the week",
+          "value": "0.3 min",
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 5 October 2026"
+        },
+        {
+          "label": "Road closures in force or imminent",
+          "value": "1",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "4",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Border crossing waits",
+          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "items": [
+            {
+              "label": "Diessenhofen – Gailingen am Hochrhein",
+              "value": "0.3 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/diessenhofen-gailingen-am-hochrhein/today/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+              "value": "1 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/konstanz-tagerwilen-autostrada-b33n-a7/today/"
+            },
+            {
+              "label": "Konstanz – Kreuzlingen",
+              "value": "1.2 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/konstanz-kreuzlingen/today/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "5.4 min",
+              "detail": "42 readings",
+              "url": "/en/border-wait/konstanz-tagerwilen-gottlieber-strasse/today/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino border-crossing monitoring",
+          "sourceUrl": "/en/border-wait/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Svincolo autostradale Kreuzlingen Süd E Svincolo autostradale Kreuzlingen Nord Situazione: chiusa cantiere, lunghezza [km] 3.5",
+              "value": "Closure",
+              "detail": "until 13 October 2026",
+              "date": "2026-09-30T04:56:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
+              "value": "Roadworks",
+              "detail": "until 23 October 2026",
+              "date": "2026-09-10T10:09:00.000Z"
+            },
+            {
+              "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
+              "value": "Roadworks",
+              "detail": "until 30 October 2026",
+              "date": "2026-09-10T10:10:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del…",
+              "value": "Roadworks",
+              "detail": "until 6 November 2026",
+              "date": "2026-09-25T13:42:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del…",
+              "value": "Roadworks",
+              "detail": "until 15 October 2026",
+              "date": "2026-10-05T06:47:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Sanierung der Fabrikstrasse in Bischofszell",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80333"
+            },
+            {
+              "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80332"
+            },
+            {
+              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80334"
+            },
+            {
+              "label": "Regierungsrat lehnt die Vorlage Verkehr '45 hinsichtlich des Ausbaus der Eisenbahninfrastruktur ab",
+              "date": "2026-10-01",
+              "url": "https://www.tg.ch/news.html/485/news/80285"
+            },
+            {
+              "label": "Sanierung des Kugelfangs: Mehrverkehr auf der Mühletobelstrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12518"
+            },
+            {
+              "label": "Strassensperrung wegen Deckbelagsarbeiten an der Äusseren Stammerau und der Walzmühlestrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12516"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Border waits towards Germany",
+          "url": "/en/border-wait/turgovia-germania/"
+        },
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "Live border waiting times",
+          "url": "/en/border-wait/"
+        },
+        {
+          "label": "Border crossing map",
+          "url": "/en/cross-border-guide/border-map/"
+        },
+        {
+          "label": "Border traffic history",
+          "url": "/en/statistics/border-traffic-history/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        },
+        {
+          "label": "All customs news",
+          "url": "/en/customs/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "TG",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Thurgau bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet grenzt an Deutschland: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Schnellster Grenzübergang der Woche",
+          "value": "0.3 Min.",
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 5. Oktober 2026"
+        },
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "1",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "4",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Wartezeiten an den Grenzübergängen",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "items": [
+            {
+              "label": "Diessenhofen – Gailingen am Hochrhein",
+              "value": "0.3 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/diessenhofen-gailingen-am-hochrhein/heute/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+              "value": "1 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/konstanz-tagerwilen-autostrada-b33n-a7/heute/"
+            },
+            {
+              "label": "Konstanz – Kreuzlingen",
+              "value": "1.2 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/konstanz-kreuzlingen/heute/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "5.4 Min.",
+              "detail": "42 Messungen",
+              "url": "/de/wartezeit-grenze/konstanz-tagerwilen-gottlieber-strasse/heute/"
+            }
+          ],
+          "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
+          "sourceUrl": "/de/wartezeit-grenze/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen zwischen Anschluss Kreuzlingen-Süd und Anschluss Kreuzlingen-Nord Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.5",
+              "value": "Sperrung",
+              "detail": "bis 13. Oktober 2026",
+              "date": "2026-09-30T04:56:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 7.5 Verkehrsführung: Fahrbahnverengung auf…",
+              "value": "Baustelle",
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-09-10T10:09:00.000Z"
+            },
+            {
+              "label": "A7 Kreuzlingen -> Winterthur zwischen Anschluss Kreuzlingen-Nord und Anschluss Kreuzlingen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.8 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-09-10T10:10:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Fahrbahnverengung auf…",
+              "value": "Baustelle",
+              "detail": "bis 6. November 2026",
+              "date": "2026-09-25T13:42:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Kreuzlingen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Fahrbahnverengung…",
+              "value": "Baustelle",
+              "detail": "bis 15. Oktober 2026",
+              "date": "2026-10-05T06:47:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Sanierung der Fabrikstrasse in Bischofszell",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80333"
+            },
+            {
+              "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80332"
+            },
+            {
+              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80334"
+            },
+            {
+              "label": "Regierungsrat lehnt die Vorlage Verkehr '45 hinsichtlich des Ausbaus der Eisenbahninfrastruktur ab",
+              "date": "2026-10-01",
+              "url": "https://www.tg.ch/news.html/485/news/80285"
+            },
+            {
+              "label": "Sanierung des Kugelfangs: Mehrverkehr auf der Mühletobelstrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12518"
+            },
+            {
+              "label": "Strassensperrung wegen Deckbelagsarbeiten an der Äusseren Stammerau und der Walzmühlestrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12516"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Wartezeiten an der Grenze Richtung Deutschland",
+          "url": "/de/wartezeit-grenze/turgovia-germania/"
+        },
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Wartezeiten an der Grenze live",
+          "url": "/de/wartezeit-grenze/"
+        },
+        {
+          "label": "Karte der Grenzübergänge",
+          "url": "/de/grenzgaenger-ratgeber/grenzkarte/"
+        },
+        {
+          "label": "Verlauf des Grenzverkehrs",
+          "url": "/de/statistiken/grenzverkehr-verlauf/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        },
+        {
+          "label": "Alle Zoll-Nachrichten",
+          "url": "/de/zoll/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "TG",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "En Thurgovie, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire a une frontière avec l’Allemagne : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Poste-frontière le plus fluide de la semaine",
+          "value": "0,3 min",
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 5 octobre 2026"
+        },
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "1",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "4",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "attese-valichi",
+          "title": "Attente aux postes-frontières",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "items": [
+            {
+              "label": "Diessenhofen – Gailingen am Hochrhein",
+              "value": "0,3 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/diessenhofen-gailingen-am-hochrhein/aujourd-hui/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+              "value": "1 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/konstanz-tagerwilen-autostrada-b33n-a7/aujourd-hui/"
+            },
+            {
+              "label": "Konstanz – Kreuzlingen",
+              "value": "1,2 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/konstanz-kreuzlingen/aujourd-hui/"
+            },
+            {
+              "label": "Konstanz – Tägerwilen, Gottlieber Strasse",
+              "value": "5,4 min",
+              "detail": "42 relevés",
+              "url": "/fr/temps-attente-douane/konstanz-tagerwilen-gottlieber-strasse/aujourd-hui/"
+            }
+          ],
+          "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
+          "sourceUrl": "/fr/temps-attente-douane/",
+          "updatedAt": "2026-10-05T23:59:59.000Z"
+        },
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen entre Jonction autoroutière Kreuzlingen-Sud et Jonction autoroutière Kreuzlingen-Nord Situation: fermé travaux, longueur [km] 3.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 octobre 2026",
+              "date": "2026-09-30T04:56:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 7.5 Gestion du trafic: rétrécissement des…",
+              "value": "Chantier",
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-09-10T10:09:00.000Z"
+            },
+            {
+              "label": "A7 Kreuzlingen -> Winterthur entre Jonction autoroutière Kreuzlingen-Nord et Jonction autoroutière Kreuzlingen-Sud Situation: trafic perturbé travaux, longueur [km] 1.8 Gestion du trafic…",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-09-10T10:10:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: rétrécissement des…",
+              "value": "Chantier",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-09-25T13:42:00.000Z"
+            },
+            {
+              "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Kreuzlingen-Sud Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: rétrécissement…",
+              "value": "Chantier",
+              "detail": "jusqu’au 15 octobre 2026",
+              "date": "2026-10-05T06:47:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Sanierung der Fabrikstrasse in Bischofszell",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80333"
+            },
+            {
+              "label": "Kantonsstrasse zwischen Wängi und Lommis bleibt länger gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80332"
+            },
+            {
+              "label": "Hauptstrasse in Hüttwilen wird gesperrt",
+              "date": "2026-10-02",
+              "url": "https://www.tg.ch/news.html/485/news/80334"
+            },
+            {
+              "label": "Regierungsrat lehnt die Vorlage Verkehr '45 hinsichtlich des Ausbaus der Eisenbahninfrastruktur ab",
+              "date": "2026-10-01",
+              "url": "https://www.tg.ch/news.html/485/news/80285"
+            },
+            {
+              "label": "Sanierung des Kugelfangs: Mehrverkehr auf der Mühletobelstrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12518"
+            },
+            {
+              "label": "Strassensperrung wegen Deckbelagsarbeiten an der Äusseren Stammerau und der Walzmühlestrasse",
+              "date": "2026-09-28",
+              "url": "https://www.frauenfeld.ch/politik-verwaltung/verwaltung/aktuelles/medienmitteilungen/details.html/773/news/12516"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Attente aux frontières vers Allemagne",
+          "url": "/fr/temps-attente-douane/turgovia-germania/"
+        },
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Temps d’attente aux frontières en direct",
+          "url": "/fr/temps-attente-douane/"
+        },
+        {
+          "label": "Carte des postes-frontières",
+          "url": "/fr/guide-frontalier/carte-frontiere/"
+        },
+        {
+          "label": "Historique du trafic aux frontières",
+          "url": "/fr/statistiques/historique-trafic-frontiere/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        },
+        {
+          "label": "Toute l’actualité douanière",
+          "url": "/fr/douane/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

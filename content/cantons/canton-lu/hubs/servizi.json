@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-lu:servizi",
+  "section": "canton-lu",
+  "canton": "LU",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "3969bf3f8a9aaeec3d2b47ce34ec3993f055553a315c6b40c2f1cf0a7d548f71",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "LU",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Lucerna, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "563,30 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "LU, regione di premio 1",
+              "value": "mediana 563,30 CHF al mese",
+              "detail": "da 502,55 a 640,60 CHF, 25 assicuratori"
+            },
+            {
+              "label": "LU, regione di premio 2",
+              "value": "mediana 526,50 CHF al mese",
+              "detail": "da 468,55 a 602,20 CHF, 25 assicuratori"
+            },
+            {
+              "label": "LU, regione di premio 3",
+              "value": "mediana 509 CHF al mese",
+              "detail": "da 452,80 a 595,80 CHF, 25 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "oggi da 15 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
+              "date": "2026-08-18",
+              "url": "https://www.lups.ch/2026/08/26/luzerner-psychiatrie-ag-feiert-20-jahr-jubilaeum-und-stellt-weichen-fuer-die-zukunft/"
+            },
+            {
+              "label": "Ambulatorium KJPD Sarnen an neuem Standort",
+              "date": "2026-08-03",
+              "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
+            },
+            {
+              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
+              "date": "2026-07-20",
+              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
+            },
+            {
+              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
+              "date": "2026-07-13",
+              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
+            },
+            {
+              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
+            },
+            {
+              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi cassa malati LAMal 2026: canton Lucerna",
+          "url": "/articoli-svizzera/franchigia-lamal-lucerna-guida/",
+          "excerpt": "A Lucerna i premi LAMal dipendono da cantone e regione: franchigie adulti, cambio cassa e riduzione premi cantonale per il 2026.",
+          "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Permesso di dimora B Lucerna: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-lucerna-rinnovo-procedura/",
+          "excerpt": "Guida pratica al permesso di dimora B nel cantone di Lucerna: durata, requisiti, documenti necessari, procedura di rinnovo e contatti dell'ufficio cantonale della migrazione.",
+          "date": "2026-08-22T06:02:17.642Z"
+        },
+        {
+          "title": "Il permesso di dimora B a Lucerna: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-dimora-b-lucerna-requisiti/",
+          "excerpt": "Il permesso di dimora B nel Cantone di Lucerna è un tipo di permesso di soggiorno che può essere rinnovato. Ecco i requisiti, i documenti da produrre e la procedura di rinnovo.",
+          "date": "2026-08-14T01:57:31.131Z"
+        },
+        {
+          "title": "Patente guida Lucerna: conversione ed esami",
+          "url": "/articoli-svizzera/patente-estera-lucerna-procedura/",
+          "excerpt": "Procedura di conversione della patente estera nel Cantone Lucerna: esame teorico e pratico, corsi obbligatori, ufficio della circolazione.",
+          "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Premi cassa malati Canton Lucerna e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-lucerna-2026/",
+          "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Canton Lucerna: fasce di premio, franchigie, modelli alternativi e requisiti per ottenere la riduzione dei premi.",
+          "date": "2026-08-14T01:51:57.093Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini Canton Lucerna: costi",
+          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-lucerna-costi/",
+          "excerpt": "I costi per l'asilo nido e la custodia dei bambini nel Canton Lucerna sono soggetti a diversi fattori.",
+          "date": "2026-08-14T02:53:59.094Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/lucerna/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/lucerna-lu/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Lucerna",
+          "url": "/cerca-lavoro-lucerna/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "LU",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Lucerne, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "563.30 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "LU, premium region 1",
+              "value": "typical 563.30 CHF per month",
+              "detail": "from 502.55 to 640.60 CHF, 25 insurers"
+            },
+            {
+              "label": "LU, premium region 2",
+              "value": "typical 526.50 CHF per month",
+              "detail": "from 468.55 to 602.20 CHF, 25 insurers"
+            },
+            {
+              "label": "LU, premium region 3",
+              "value": "typical 509 CHF per month",
+              "detail": "from 452.80 to 595.80 CHF, 25 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "today from 15 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
+              "date": "2026-08-18",
+              "url": "https://www.lups.ch/2026/08/26/luzerner-psychiatrie-ag-feiert-20-jahr-jubilaeum-und-stellt-weichen-fuer-die-zukunft/"
+            },
+            {
+              "label": "Ambulatorium KJPD Sarnen an neuem Standort",
+              "date": "2026-08-03",
+              "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
+            },
+            {
+              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
+              "date": "2026-07-20",
+              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
+            },
+            {
+              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
+              "date": "2026-07-13",
+              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
+            },
+            {
+              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
+            },
+            {
+              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "KVG health insurance premiums 2026: Canton of Lucerne",
+          "url": "/en/swiss-articles/lucerne-lamal-deductible-guide/",
+          "excerpt": "In Lucerne, LAMal premiums depend on the canton and region: adult deductibles, changing health insurer and cantonal premium reduction for 2026.",
+          "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Residence permit B Lucerne: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-lucerne-renewal-procedure/",
+          "excerpt": "Practical guide to residence permit B in the canton of Lucerne: duration, requirements, necessary documents, renewal procedure and contacts of the cantonal migration office.",
+          "date": "2026-08-22T06:02:17.642Z"
+        },
+        {
+          "title": "Residence permit B in Lucerne: requirements and procedure",
+          "url": "/en/swiss-articles/permesso-dimora-b-lucerne/",
+          "excerpt": "The B residence permit in the Canton of Lucerne is a type of residence permit that can be renewed. Here are the requirements, the documents to be produced and the renewal procedure.",
+          "date": "2026-08-14T01:57:31.131Z"
+        },
+        {
+          "title": "Lucerne driving licence: conversion and exams",
+          "url": "/en/swiss-articles/driving-licence-lucerne-conversion-procedure/",
+          "excerpt": "Procedure for converting the foreign licence in the Canton of Lucerne: theoretical and practical examination, compulsory courses, traffic office.",
+          "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Lucerne and premium reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-lucerne/",
+          "excerpt": "The law on compulsory health insurance in the Canton of Lucerne: premium bands, deductibles, alternative models and requirements to obtain the reduction of premiums.",
+          "date": "2026-08-14T01:51:57.093Z"
+        },
+        {
+          "title": "Kindergarten and childcare in the canton of Lucerne: costs",
+          "url": "/en/swiss-articles/kindergarten-and-childcare-in-the-canton-of-lucerne-costs/",
+          "excerpt": "The costs for daycare and childcare in the Canton of Lucerne are subject to several factors.",
+          "date": "2026-08-14T02:53:59.094Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/lucerne-lu/"
+        },
+        {
+          "label": "Job offers in the canton of Lucerne",
+          "url": "/en/find-jobs-lucerne/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "LU",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Luzern laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "563.30 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "LU, Prämienregion 1",
+              "value": "Mittelwert 563.30 CHF pro Monat",
+              "detail": "von 502.55 bis 640.60 CHF, 25 Versicherer"
+            },
+            {
+              "label": "LU, Prämienregion 2",
+              "value": "Mittelwert 526.50 CHF pro Monat",
+              "detail": "von 468.55 bis 602.20 CHF, 25 Versicherer"
+            },
+            {
+              "label": "LU, Prämienregion 3",
+              "value": "Mittelwert 509 CHF pro Monat",
+              "detail": "von 452.80 bis 595.80 CHF, 25 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "heute 15 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
+              "date": "2026-08-18",
+              "url": "https://www.lups.ch/2026/08/26/luzerner-psychiatrie-ag-feiert-20-jahr-jubilaeum-und-stellt-weichen-fuer-die-zukunft/"
+            },
+            {
+              "label": "Ambulatorium KJPD Sarnen an neuem Standort",
+              "date": "2026-08-03",
+              "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
+            },
+            {
+              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
+              "date": "2026-07-20",
+              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
+            },
+            {
+              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
+              "date": "2026-07-13",
+              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
+            },
+            {
+              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
+            },
+            {
+              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "KVG Krankenversicherungsprämien 2026: Kanton Luzern",
+          "url": "/de/schweiz-artikel/lamal-praemien-kanton-luzern-2026/",
+          "excerpt": "In Luzern hängen die LAMal-Prämien von Kanton und Region ab: Erwachsenenfranchisen, Kassenwechsel und kantonale Prämienverbilligung für 2026.",
+          "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Luzern: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-luzern-verlaengerung-verfahren/",
+          "excerpt": "Praktischer Leitfaden zur Aufenthaltsbewilligung B im Kanton Luzern: Dauer, Voraussetzungen, erforderliche Unterlagen, Erneuerungsverfahren und Kontakte der kantonalen Migrationsstelle.",
+          "date": "2026-08-22T06:02:17.642Z"
+        },
+        {
+          "title": "Die Aufenthaltsbewilligung B in Luzern: Voraussetzungen und Verfahren",
+          "url": "/de/schweiz-artikel/b-erlaubnis-luzern/",
+          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Luzern ist eine Art Aufenthaltsbewilligung, die erneuert werden kann. Hier sind die Anforderungen, die einzureichenden Dokumente und das Erneuerungsverfahren.",
+          "date": "2026-08-14T01:57:31.131Z"
+        },
+        {
+          "title": "Führerschein Luzern: Umbau und Prüfungen",
+          "url": "/de/schweiz-artikel/fahrerausweis-luzern-umschreibung-verfahren/",
+          "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Luzern: Theorie- und Praxisprüfung, Pflichtkurse, Strassenverkehrsamt.",
+          "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Luzern und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenversicherungspramien-luzern/",
+          "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Luzern: Prämienklassen, Franchisen, alternative Modelle und Voraussetzungen für die Prämienverbilligung.",
+          "date": "2026-08-14T01:51:57.093Z"
+        },
+        {
+          "title": "Kindergarten und Kinderbetreuung im Kanton Luzern: Kosten",
+          "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-kanton-luzern-kosten/",
+          "excerpt": "Die Kosten für Kindertagesstätten und Kinderbetreuung im Kanton Luzern unterliegen verschiedenen Faktoren.",
+          "date": "2026-08-14T02:53:59.094Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/luzern-lu/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Luzern",
+          "url": "/de/jobs-in-luzern/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "LU",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Lucerne, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "563,30 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "LU, région de primes 1",
+              "value": "valeur centrale 563,30 CHF par mois",
+              "detail": "de 502,55 à 640,60 CHF, 25 assureurs"
+            },
+            {
+              "label": "LU, région de primes 2",
+              "value": "valeur centrale 526,50 CHF par mois",
+              "detail": "de 468,55 à 602,20 CHF, 25 assureurs"
+            },
+            {
+              "label": "LU, région de primes 3",
+              "value": "valeur centrale 509 CHF par mois",
+              "detail": "de 452,80 à 595,80 CHF, 25 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 15 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
+              "date": "2026-08-18",
+              "url": "https://www.lups.ch/2026/08/26/luzerner-psychiatrie-ag-feiert-20-jahr-jubilaeum-und-stellt-weichen-fuer-die-zukunft/"
+            },
+            {
+              "label": "Ambulatorium KJPD Sarnen an neuem Standort",
+              "date": "2026-08-03",
+              "url": "https://www.lups.ch/2026/08/18/ambulatorium-kjpd-sarnen-an-neuem-standort/"
+            },
+            {
+              "label": "Rémy Gasser ist neuer CEO der Luzerner Psychiatrie AG",
+              "date": "2026-07-20",
+              "url": "https://www.lups.ch/2026/08/03/remy-gasser-ist-neuer-ceo-der-luzerner-psychiatrie-ag/"
+            },
+            {
+              "label": "Abschluss der Standorttour in St. Urban: Einblicke in Apotheke und Stationäre Dienste",
+              "date": "2026-07-13",
+              "url": "https://www.lups.ch/2026/07/20/abschluss-der-standorttour-in-st-urban-einblicke-in-apotheke-und-stationaere-dienste/"
+            },
+            {
+              "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
+            },
+            {
+              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
+              "date": "2026-07-02",
+              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes d’assurance santé KVG 2026 : Canton de Lucerne",
+          "url": "/fr/articles-suisse/primes-lamal-canton-lucerne-2026/",
+          "excerpt": "À Lucerne, les primes KVG dépendent du canton et de la région : franchises adultes, change de monnaie et réduction de primes cantonale pour 2026.",
+          "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Permis de séjour B Lucerne : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-lucerne-renouvellement-procedure/",
+          "excerpt": "Guide pratique du permis de séjour B dans le canton de Lucerne : durée, exigences, documents nécessaires, procédure de renouvellement et contacts de l'office cantonal des migrations.",
+          "date": "2026-08-22T06:02:17.642Z"
+        },
+        {
+          "title": "Le permis de séjour B à Lucerne : exigences et procédure",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-lucerne/",
+          "excerpt": "Le titre de séjour B dans le canton de Lucerne est un type de titre de séjour qui peut être renouvelé. Voici les exigences, les documents à produire et la procédure de renouvellement.",
+          "date": "2026-08-14T01:57:31.131Z"
+        },
+        {
+          "title": "Permis de conduire Lucerne : conversion et examens",
+          "url": "/fr/articles-suisse/permis-lucerne-conversion-procedure/",
+          "excerpt": "Procédure de conversion du permis étranger dans le canton de Lucerne : examen théorique et pratique, cours obligatoires, bureau de la circulation.",
+          "date": "2026-09-03T19:12:14.541Z"
+        },
+        {
+          "title": "Primes caisse-maladie Canton de Lucerne et réduction des primes",
+          "url": "/fr/articles-suisse/primes-maladie-lucerne/",
+          "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Lucerne : fourchettes de primes, franchises, modèles alternatifs et conditions pour obtenir la réduction des primes.",
+          "date": "2026-08-14T01:51:57.093Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants Canton de Lucerne : coûts",
+          "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-de-lucerne-couts/",
+          "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Lucerne sont soumis à plusieurs facteurs.",
+          "date": "2026-08-14T02:53:59.094Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Lucerne",
+          "url": "/fr/trouver-emploi-lucerne/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

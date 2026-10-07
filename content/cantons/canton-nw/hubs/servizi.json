@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-nw:servizi",
+  "section": "canton-nw",
+  "canton": "NW",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "78ad8efef4038003f71b541d6bdd340ed017906bb3b7dc3cbd2b8c86beeb9992",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "NW",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Nidvaldo, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "493,25 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "NW, regione di premio 0",
+              "value": "mediana 493,25 CHF al mese",
+              "detail": "da 448,10 a 581,10 CHF, 26 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "oggi da 16 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Öffnungszeiten Maria Himmelfahrt",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2953735"
+            },
+            {
+              "label": "Öffnungszeiten 1. August",
+              "date": "2026-07-22",
+              "url": "https://www.buochs.ch/_rte/information/2939209"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B nel Cantone di Nidvaldo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-nidvaldo-requisiti-rinnovo/",
+          "excerpt": "Il permesso di dimora B nel Cantone di Nidvaldo è un documento importante per i frontalieri che desiderano risiedere nel cantone.",
+          "date": "2026-08-16T19:18:57.651Z"
+        },
+        {
+          "title": "Premi cassa malati canton Nidvaldo e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-nidvaldo/",
+          "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.",
+          "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini Canton Nidvaldo: costi",
+          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-nidvaldo-costi/",
+          "excerpt": "I costi per l'asilo nido e la custodia dei bambini nel Canton Nidvaldo possono variare in base al tipo di assistenza richiesta.",
+          "date": "2026-08-16T23:10:33.638Z"
+        },
+        {
+          "title": "Patente di guida in Nidvaldo: conversione e esami obbligatori",
+          "url": "/articoli-svizzera/patente-guida-canton-nidvaldo-conversione/",
+          "excerpt": "Per convertire la licenza di guida estera in Svizzera, è necessario presentare i seguenti documenti: il passaporto, la licenza di guida estera e una copia del contratto di affitto o della proprietà.",
+          "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Patente di guida nel Cantone di Nidvaldo: conversione e esami",
+          "url": "/articoli-svizzera/patente-guida-canton-nidvaldo-conversione-ed-esami/",
+          "excerpt": "Per ottenere la patente di guida nel Cantone di Nidvaldo, i frontaliari devono convertire la loro licenza estera e superare un esame teorico e pratico, nonché iscriversi a corsi obbligatori.",
+          "date": "2026-08-16T23:55:01.723Z"
+        },
+        {
+          "title": "Permesso di domicilio C nel Cantone di Nidvaldo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-di-domicilio-c-nidvaldo-requisiti-e-domanda/",
+          "excerpt": "Requisiti di integrazione, conoscenze linguistiche e procedura di domanda per il permesso di domicilio C nel Cantone di Nidvaldo.",
+          "date": "2026-08-16T20:42:07.603Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/nidvaldo/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/nidvaldo-nw/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Nidvaldo",
+          "url": "/cerca-lavoro-nidvaldo/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "NW",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In Nidwalden, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "493.25 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "NW, premium region 0",
+              "value": "typical 493.25 CHF per month",
+              "detail": "from 448.10 to 581.10 CHF, 26 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "today from 16 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Öffnungszeiten Maria Himmelfahrt",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2953735"
+            },
+            {
+              "label": "Öffnungszeiten 1. August",
+              "date": "2026-07-22",
+              "url": "https://www.buochs.ch/_rte/information/2939209"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B in the Canton of Nidvaldo: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-in-the-canton-of-nidvaldo-requirements-and-renewal/",
+          "excerpt": "The residence permit B in the Canton of Nidvaldo is an important document for border workers who wish to reside in the canton.",
+          "date": "2026-08-16T19:18:57.651Z"
+        },
+        {
+          "title": "Canton Nidvaldo health insurance premiums and premium reductions",
+          "url": "/en/swiss-articles/canton-nidvaldo-health-insurance-premiums/",
+          "excerpt": "The law on compulsory health insurance in the Canton of Nidvaldo has reduced health insurance premiums.",
+          "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Nursery and childcare Canton Nidvaldo: costs",
+          "url": "/en/swiss-articles/nursery-and-childcare-canton-nidvaldo-costs/",
+          "excerpt": "Costs for daycare and childcare in Canton Nidvaldo may vary depending on the type of assistance required.",
+          "date": "2026-08-16T23:10:33.638Z"
+        },
+        {
+          "title": "Driving licence in Nidvaldo: conversion and mandatory exams",
+          "url": "/en/swiss-articles/patente-guida-canton-nidvaldo-conversione-ed-esami/",
+          "excerpt": "To convert your foreign driver's license in Switzerland, you need to present the following documents: your passport, your foreign driver's license, and a copy of your rental agreement or property.",
+          "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Driver's license in the Canton of Nidvaldo: conversion and exams",
+          "url": "/en/swiss-articles/driver-s-license-in-the-canton-of-nidvaldo-conversion-and-exams/",
+          "excerpt": "To obtain a driving licence in the Canton of Nidvaldo, frontier workers must convert their foreign licence and pass a theoretical and practical exam, as well as enrol in compulsory courses.",
+          "date": "2026-08-16T23:55:01.723Z"
+        },
+        {
+          "title": "Residence permit C in the Canton of Nidvaldo: requirements and application",
+          "url": "/en/swiss-articles/permesso-di-domicilio-c-nidvaldo/",
+          "excerpt": "Integration requirements, language skills and application procedure for residence permit C in the Canton of Nidvaldo.",
+          "date": "2026-08-16T20:42:07.603Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/nidwalden-nw/"
+        },
+        {
+          "label": "Job offers in Nidwalden",
+          "url": "/en/find-jobs-nidwalden/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "NW",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "In Nidwalden laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "493.25 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "NW, Prämienregion 0",
+              "value": "Mittelwert 493.25 CHF pro Monat",
+              "detail": "von 448.10 bis 581.10 CHF, 26 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "heute 16 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Öffnungszeiten Maria Himmelfahrt",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2953735"
+            },
+            {
+              "label": "Öffnungszeiten 1. August",
+              "date": "2026-07-22",
+              "url": "https://www.buochs.ch/_rte/information/2939209"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B im Kanton Nidwalden: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-im-kanton-nidwalden-voraussetzungen-und-verlangerung/",
+          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Nidwalden ist ein wichtiges Dokument für Grenzgänger, die im Kanton Nidwalden wohnen möchten.",
+          "date": "2026-08-16T19:18:57.651Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Nidwalden und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/kanton-nidvaldo-krankenversicherungspramien/",
+          "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.",
+          "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung Kanton Nidwalden: Kosten",
+          "url": "/de/schweiz-artikel/kindertagesstatte-und-kinderbetreuung-kanton-nidwalden-kosten/",
+          "excerpt": "Die Kosten für Kindergarten und Kinderbetreuung im Kanton Nidwalden können je nach Art der benötigten Betreuung variieren.",
+          "date": "2026-08-16T23:10:33.638Z"
+        },
+        {
+          "title": "Führerschein in Nidwalden: Umschulung und Pflichtprüfungen",
+          "url": "/de/schweiz-artikel/fahrerlaubnis-kanton-nidvaldo-umstellung/",
+          "excerpt": "Um den ausländischen Führerschein in der Schweiz umzuwandeln, sind folgende Unterlagen vorzulegen: Reisepass, ausländischer Führerschein und eine Kopie des Miet- oder Eigentumsvertrages.",
+          "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Führerschein im Kanton Nidwalden: Umschulung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuhrerschein-im-kanton-nidwalden-umschulung-und-prufungen/",
+          "excerpt": "Um den Führerschein im Kanton Nidwalden zu erhalten, müssen die Frontalangestellten ihren ausländischen Führerschein umtauschen und eine theoretische und praktische Prüfung ablegen sowie sich in Pflichtkursen…",
+          "date": "2026-08-16T23:55:01.723Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C im Kanton Nidwalden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/permesso-di-domicilio-c-nidvaldo/",
+          "excerpt": "Integrationsvoraussetzungen, Sprachkenntnisse und Antragsverfahren für die Niederlassungsbewilligung C im Kanton Nidwalden.",
+          "date": "2026-08-16T20:42:07.603Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/nidwalden-nw/"
+        },
+        {
+          "label": "Stellenangebote in Nidwalden",
+          "url": "/de/jobs-in-nidwalden/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "NW",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "À Nidwald, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "493,25 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "NW, région de primes 0",
+              "value": "valeur centrale 493,25 CHF par mois",
+              "detail": "de 448,10 à 581,10 CHF, 26 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 16 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Öffnungszeiten Maria Himmelfahrt",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2953735"
+            },
+            {
+              "label": "Öffnungszeiten 1. August",
+              "date": "2026-07-22",
+              "url": "https://www.buochs.ch/_rte/information/2939209"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B dans le canton de Nidwalden : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-dans-le-canton-de-nidwalden-exigences-et-renouvellement/",
+          "excerpt": "Le permis de séjour B dans le canton de Nidwald est un document important pour les frontaliers qui souhaitent résider dans le canton.",
+          "date": "2026-08-16T19:18:57.651Z"
+        },
+        {
+          "title": "Primes caisse-maladie canton de Nidwald et réduction des primes",
+          "url": "/fr/articles-suisse/canton-nidvaldo-premies-assurance-maladie/",
+          "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Nidwald a réduit les primes pour les assurances-maladie.",
+          "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants Canton de Nidwald : coûts",
+          "url": "/fr/articles-suisse/garderie-et-garde-d-enfants-canton-de-nidwald-couts/",
+          "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Nidwald peuvent varier en fonction du type d'assistance demandée.",
+          "date": "2026-08-16T23:10:33.638Z"
+        },
+        {
+          "title": "Permis de conduire à Nidwald : conversion et examens obligatoires",
+          "url": "/fr/articles-suisse/permis-de-conduire-canton-nidvaldo-conversion/",
+          "excerpt": "Pour convertir le permis de conduire étranger en Suisse, vous devez présenter les documents suivants : le passeport, le permis de conduire étranger et une copie du contrat de location ou de la propriété.",
+          "date": "2026-08-17T01:54:54.677Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Nidwald : conversion et examens",
+          "url": "/fr/articles-suisse/permis-de-conduire-dans-le-canton-de-nidwald-conversion-et-examens/",
+          "excerpt": "Pour obtenir le permis de conduire dans le canton de Nidwald, les frontaliers doivent convertir leur licence étrangère et passer un examen théorique et pratique, ainsi que s'inscrire aux cours obligatoires.",
+          "date": "2026-08-16T23:55:01.723Z"
+        },
+        {
+          "title": "Permis de séjour C dans le canton de Nidwald : exigences et demande",
+          "url": "/fr/articles-suisse/permesso-di-domicilio-c-nidvaldo/",
+          "excerpt": "Conditions d'intégration, connaissances linguistiques et procédure de demande de permis de séjour C dans le canton de Nidwald.",
+          "date": "2026-08-16T20:42:07.603Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi à Nidwald",
+          "url": "/fr/trouver-emploi-nidwald/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ju:servizi",
+  "section": "canton-ju",
+  "canton": "JU",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "1a79f16e6cd143a2fccfd79c1decb8c348898642a9252b8365d53e5f75730547",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "JU",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Giura, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "678 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "JU, regione di premio 0",
+              "value": "mediana 678 CHF al mese",
+              "detail": "da 628,20 a 762,50 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "12 °C",
+              "detail": "oggi da 12 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
+              "date": "2026-10-06",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Le-chomage-en-legere-baisse-a-4-2-en-septembre-2026.html"
+            },
+            {
+              "label": "Primes d’assurance maladie 2027: nouvelle hausse importante dans le Jura",
+              "date": "2026-09-29",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permesso di dimora B in Giura: requisiti, documenti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-canton-giura/",
+          "excerpt": "Scopri i requisiti, i documenti da produrre e la procedura di rinnovo del permesso B nel Cantone Giura, con indicazioni pratiche per chi vive in Svizzera.",
+          "date": "2026-09-11T04:55:10.506Z"
+        },
+        {
+          "title": "Permesso di dimora B in Giura: requisiti, rinnovo e ufficio competente",
+          "url": "/articoli-svizzera/permesso-b-jura-requisiti-rinnovo/",
+          "excerpt": "Scopri come funziona il permesso B nel Cantone di Giura, dalla documentazione alla procedura di rinnovo, con focus su tassazione e assicurazione obbligatoria.",
+          "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Premi cassa malati nel canton Giura: riduzioni e fasce 2024",
+          "url": "/articoli-svizzera/premi-cassa-malati-canton-giura-riduzioni/",
+          "excerpt": "Guida pratica ai premi LAMal nel Canton Giura: fasce di franchigia, modelli alternativi e requisiti per ottenere la riduzione cantonale dei premi.",
+          "date": "2026-09-11T00:48:35.425Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/giura/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/giura-ju/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Giura",
+          "url": "/cerca-lavoro-giura/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "JU",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Jura, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "678 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "JU, premium region 0",
+              "value": "typical 678 CHF per month",
+              "detail": "from 628.20 to 762.50 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "12 °C",
+              "detail": "today from 12 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
+              "date": "2026-10-06",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Le-chomage-en-legere-baisse-a-4-2-en-septembre-2026.html"
+            },
+            {
+              "label": "Primes d’assurance maladie 2027: nouvelle hausse importante dans le Jura",
+              "date": "2026-09-29",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Residence permit B in Jura: requirements, documents and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-jura/",
+          "excerpt": "Discover the requirements, the documents to be produced and the procedure for renewing the B permit in the Canton of Jura, with practical instructions for those living in Switzerland.",
+          "date": "2026-09-11T04:55:10.506Z"
+        },
+        {
+          "title": "Residence permit B in Jura: requirements, renewal and competent office",
+          "url": "/en/swiss-articles/permit-b-jura-requirements-renewal/",
+          "excerpt": "Find out how the B permit works in the Canton of Jura, from the documentation to the renewal procedure, with a focus on taxation and compulsory insurance.",
+          "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Health insurance premiums in the canton of Jura: reductions and bands 2024",
+          "url": "/en/swiss-articles/health-insurance-premiums-jura-canton-reductions/",
+          "excerpt": "Practical Guide to LAMal Awards in the Canton of Jura: Deductible Bands, Alternative Models, and Requirements to Achieve Cantonal Premium Reduction.",
+          "date": "2026-09-11T00:48:35.425Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/jura-ju/"
+        },
+        {
+          "label": "Job offers in the canton of Jura",
+          "url": "/en/find-jobs-jura/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "JU",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Jura laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "678 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "JU, Prämienregion 0",
+              "value": "Mittelwert 678 CHF pro Monat",
+              "detail": "von 628.20 bis 762.50 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "12 °C",
+              "detail": "heute 12 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
+              "date": "2026-10-06",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Le-chomage-en-legere-baisse-a-4-2-en-septembre-2026.html"
+            },
+            {
+              "label": "Primes d’assurance maladie 2027: nouvelle hausse importante dans le Jura",
+              "date": "2026-09-29",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Aufenthaltsbewilligung B im Jura: Voraussetzungen, Dokumente und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-jura/",
+          "excerpt": "Informieren Sie sich über die Anforderungen, die einzureichenden Dokumente und das Erneuerungsverfahren der B-Bewilligung im Kanton Jura mit praktischen Hinweisen für Personen, die in der Schweiz leben.",
+          "date": "2026-09-11T04:55:10.506Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B im Jura: Voraussetzungen, Verlängerung und zuständige Stelle",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-jura-anforderungen-verlaengerung/",
+          "excerpt": "Erfahren Sie, wie die B-Bewilligung im Kanton Jura funktioniert, von der Dokumentation bis zum Erneuerungsverfahren, mit Fokus auf Besteuerung und Pflichtversicherung.",
+          "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Jura: Kürzungen und Bandbreiten 2024",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-kanton-jura-verbilligungen/",
+          "excerpt": "Praktischer Leitfaden zu den KVG-Prämien im Kanton Jura: Franchise-Bänder, alternative Modelle und Voraussetzungen für die kantonale Prämienverbilligung.",
+          "date": "2026-09-11T00:48:35.425Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/jura-ju/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Jura",
+          "url": "/de/jobs-im-jura/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "JU",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton du Jura, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "678 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "JU, région de primes 0",
+              "value": "valeur centrale 678 CHF par mois",
+              "detail": "de 628,20 à 762,50 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 12 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
+              "date": "2026-10-06",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Le-chomage-en-legere-baisse-a-4-2-en-septembre-2026.html"
+            },
+            {
+              "label": "Primes d’assurance maladie 2027: nouvelle hausse importante dans le Jura",
+              "date": "2026-09-29",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de séjour B dans le Jura : exigences, documents et renouvellement",
+          "url": "/fr/articles-suisse/permis-dimora-b-jura/",
+          "excerpt": "Découvrez les exigences, les documents à produire et la procédure de renouvellement du permis B dans le canton du Jura, avec des indications pratiques pour ceux qui vivent en Suisse.",
+          "date": "2026-09-11T04:55:10.506Z"
+        },
+        {
+          "title": "Permis de séjour B dans le Jura : exigences, renouvellement et bureau compétent",
+          "url": "/fr/articles-suisse/permis-b-jura-exigences-renouvellement/",
+          "excerpt": "Découvrez comment fonctionne le permis B dans le canton du Jura, de la documentation à la procédure de renouvellement, en mettant l'accent sur la fiscalité et l'assurance obligatoire.",
+          "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Primes caisse-maladie dans le canton du Jura : réductions et tranches 2024",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-jura-reductions/",
+          "excerpt": "Guide pratique des primes LAMal dans le canton du Jura : fourchettes de franchise, modèles alternatifs et conditions pour obtenir la réduction cantonale des primes.",
+          "date": "2026-09-11T00:48:35.425Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton du Jura",
+          "url": "/fr/trouver-emploi-jura/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

@@ -1,0 +1,559 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-nw:mobilita",
+  "section": "canton-nw",
+  "canton": "NW",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "21d58d2590df46d0b3642157b3db8c7867987d4c7d7bcd793d98b2f0e0ef8d7c",
+  "blocks": [
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 2
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "NW",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "Nel Canton Nidvaldo, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Chiusure stradali in corso o imminenti",
+          "value": "5",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        },
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "6",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "A8 Sarnen <-> Hergiswil Svincolo autostradale Hergiswil Situazione: entrato-uscito chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 25 ottobre 2026",
+              "date": "2026-08-13T05:47:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Galleria Galleria Spier E Svincolo autostradale Hergiswil Nord Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 6 novembre 2026",
+              "date": "2026-09-22T09:32:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Stansstad E Svincolo autostradale Stans Nord Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 27 ottobre 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Hergiswil Sud Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 21 ottobre 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Hergiswil Nord Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.2",
+              "value": "Chiusura",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-10-11T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Stans Nord E Svincolo autostradale Stans Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: nuova…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 ottobre 2026",
+              "date": "2026-09-16T10:30:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Raccordo autostradale Diramazione Lopper E Svincolo autostradale Hergiswil Nord Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 16 ottobre 2026",
+              "date": "2026-09-22T05:22:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Beckenried E Svincolo autostradale Buochs Situazione: problemi di traffico cantiere, lunghezza [km] 0.8 Limitazione del traffico: corsie strette…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 14 ottobre 2026",
+              "date": "2026-09-22T11:59:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
+              "date": "2026-10-01",
+              "url": "https://www.buochs.ch/_rte/information/3000736"
+            },
+            {
+              "label": "Baustellen-News 24.09.2026",
+              "date": "2026-09-24",
+              "url": "https://www.buochs.ch/_rte/information/2994295"
+            },
+            {
+              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
+              "date": "2026-08-27",
+              "url": "https://www.buochs.ch/_rte/information/2966428"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
+              "date": "2026-08-24",
+              "url": "https://www.buochs.ch/_rte/information/2962954"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
+              "date": "2026-08-21",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+            },
+            {
+              "label": "Baustellen-News 11.08.2026",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2952814"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Trasporti pubblici a Nidvaldo: zone, tariffe e abbonamenti",
+          "url": "/articoli-svizzera/nidvaldo-trasporti-pubblici/",
+          "excerpt": "Guida completa ai trasporti pubblici nel Cantone di Nidvaldo, alle comunità tariffarie, alle zone, agli abbonamenti e alle combinazioni con i titoli di viaggio federali.",
+          "date": "2026-08-16T23:28:45.057Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "NW",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In Nidwalden, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Road closures in force or imminent",
+          "value": "5",
+          "note": "reports as of 6 October 2026"
+        },
+        {
+          "label": "Roadworks active or imminent",
+          "value": "6",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "A8 Sarnen <-> Hergiswil Svincolo autostradale Hergiswil Situazione: entrato-uscito chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 25 October 2026",
+              "date": "2026-08-13T05:47:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Galleria Galleria Spier E Svincolo autostradale Hergiswil Nord Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza…",
+              "value": "Closure",
+              "detail": "until 6 November 2026",
+              "date": "2026-09-22T09:32:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Stansstad E Svincolo autostradale Stans Nord Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 27 October 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Hergiswil Sud Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 21 October 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Hergiswil Nord Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.2",
+              "value": "Closure",
+              "detail": "until 16 October 2026",
+              "date": "2026-10-11T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Stans Nord E Svincolo autostradale Stans Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: nuova…",
+              "value": "Roadworks",
+              "detail": "until 13 October 2026",
+              "date": "2026-09-16T10:30:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Raccordo autostradale Diramazione Lopper E Svincolo autostradale Hergiswil Nord Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico…",
+              "value": "Roadworks",
+              "detail": "until 16 October 2026",
+              "date": "2026-09-22T05:22:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Beckenried E Svincolo autostradale Buochs Situazione: problemi di traffico cantiere, lunghezza [km] 0.8 Limitazione del traffico: corsie strette…",
+              "value": "Roadworks",
+              "detail": "until 14 October 2026",
+              "date": "2026-09-22T11:59:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
+              "date": "2026-10-01",
+              "url": "https://www.buochs.ch/_rte/information/3000736"
+            },
+            {
+              "label": "Baustellen-News 24.09.2026",
+              "date": "2026-09-24",
+              "url": "https://www.buochs.ch/_rte/information/2994295"
+            },
+            {
+              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
+              "date": "2026-08-27",
+              "url": "https://www.buochs.ch/_rte/information/2966428"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
+              "date": "2026-08-24",
+              "url": "https://www.buochs.ch/_rte/information/2962954"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
+              "date": "2026-08-21",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+            },
+            {
+              "label": "Baustellen-News 11.08.2026",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2952814"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Public transport in Nidvaldo: zones, fares and subscriptions",
+          "url": "/en/swiss-articles/nidwalden-public-transport-passes-zones/",
+          "excerpt": "Comprehensive guide to public transport in the Canton of Nidvaldo, fare communities, zones, season tickets and combinations with federal travel documents.",
+          "date": "2026-08-16T23:28:45.057Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "NW",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "In Nidwalden bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Laufende oder bevorstehende Strassensperrungen",
+          "value": "5",
+          "note": "Meldungen vom 6. Oktober 2026"
+        },
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "6",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "A8 Sarnen <-> Hergiswil Anschluss Hergiswil Sachlage: Ein- und Ausfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 25. Oktober 2026",
+              "date": "2026-08-13T05:47:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Tunnel Spier-Tunnel und Anschluss Hergiswil Nord Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 6. November 2026",
+              "date": "2026-09-22T09:32:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Anschluss Stansstad und Anschluss Stans-Nord Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 27. Oktober 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern zwischen Anschluss Stans-Nord und Anschluss Hergiswil Süd Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 21. Oktober 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern Anschluss Hergiswil Nord Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.2",
+              "value": "Sperrung",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-10-11T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Gotthard zwischen Anschluss Stans-Nord und Anschluss Stans-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 13. Oktober 2026",
+              "date": "2026-09-16T10:30:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern zwischen Autobahndreieck Verzweigung Lopper und Anschluss Hergiswil Nord Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 16. Oktober 2026",
+              "date": "2026-09-22T05:22:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern zwischen Anschluss Beckenried und Anschluss Buochs Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.8 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt…",
+              "value": "Baustelle",
+              "detail": "bis 14. Oktober 2026",
+              "date": "2026-09-22T11:59:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
+              "date": "2026-10-01",
+              "url": "https://www.buochs.ch/_rte/information/3000736"
+            },
+            {
+              "label": "Baustellen-News 24.09.2026",
+              "date": "2026-09-24",
+              "url": "https://www.buochs.ch/_rte/information/2994295"
+            },
+            {
+              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
+              "date": "2026-08-27",
+              "url": "https://www.buochs.ch/_rte/information/2966428"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
+              "date": "2026-08-24",
+              "url": "https://www.buochs.ch/_rte/information/2962954"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
+              "date": "2026-08-21",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+            },
+            {
+              "label": "Baustellen-News 11.08.2026",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2952814"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Öffentliche Verkehrsmittel in Nidwalden: Zonen, Tarife und Abonnements",
+          "url": "/de/schweiz-artikel/nidwalden-oev-abos-zonen/",
+          "excerpt": "Umfassender Leitfaden zum öffentlichen Verkehr im Kanton Nidwalden, zu Tarifgemeinschaften, Zonen, Abos und Kombinationen mit eidgenössischen Fahrausweisen.",
+          "date": "2026-08-16T23:28:45.057Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "NW",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "À Nidwald, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Fermetures de routes en cours ou imminentes",
+          "value": "5",
+          "note": "signalements au 6 octobre 2026"
+        },
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "6",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "A8 Sarnen <-> Hergiswil Jonction autoroutière Hergiswil Situation: Entrée et sortie verrouillées travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 25 octobre 2026",
+              "date": "2026-08-13T05:47:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Tunnel Tunnel Spier et Jonction autoroutière Hergiswil Nord Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 6 novembre 2026",
+              "date": "2026-09-22T09:32:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Stansstad et Jonction autoroutière Stans-Nord Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 27 octobre 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Stans-Nord et Jonction autoroutière Hergiswil Sud Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 21 octobre 2026",
+              "date": "2026-10-06T05:38:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne Jonction autoroutière Hergiswil Nord Situation: entrée fermée travaux, longueur [km] 0.2",
+              "value": "Fermeture",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-10-11T18:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Stans-Nord et Jonction autoroutière Stans-Sud Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: nouveau plan de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 octobre 2026",
+              "date": "2026-09-16T10:30:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne entre Echangeur Echangeur du Lopper et Jonction autoroutière Hergiswil Nord Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies…",
+              "value": "Chantier",
+              "detail": "jusqu’au 16 octobre 2026",
+              "date": "2026-09-22T05:22:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Beckenried et Jonction autoroutière Buochs Situation: trafic perturbé travaux, longueur [km] 0.8 Gestion du trafic: rétrécissement des voies sur…",
+              "value": "Chantier",
+              "detail": "jusqu’au 14 octobre 2026",
+              "date": "2026-09-22T11:59:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
+              "date": "2026-10-01",
+              "url": "https://www.buochs.ch/_rte/information/3000736"
+            },
+            {
+              "label": "Baustellen-News 24.09.2026",
+              "date": "2026-09-24",
+              "url": "https://www.buochs.ch/_rte/information/2994295"
+            },
+            {
+              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
+              "date": "2026-08-27",
+              "url": "https://www.buochs.ch/_rte/information/2966428"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
+              "date": "2026-08-24",
+              "url": "https://www.buochs.ch/_rte/information/2962954"
+            },
+            {
+              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
+              "date": "2026-08-21",
+              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+            },
+            {
+              "label": "Baustellen-News 11.08.2026",
+              "date": "2026-08-12",
+              "url": "https://www.buochs.ch/_rte/information/2952814"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Transports publics à Nidwald : zones, tarifs et abonnements",
+          "url": "/fr/articles-suisse/nidwald-transports-publics-abonnements-zones/",
+          "excerpt": "Guide complet des transports publics dans le canton de Nidwald, des communautés tarifaires, des zones, des abonnements et des combinaisons avec les titres de voyage fédéraux.",
+          "date": "2026-08-16T23:28:45.057Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

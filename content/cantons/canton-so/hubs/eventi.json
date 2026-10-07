@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-so:eventi",
+  "section": "canton-so",
+  "canton": "SO",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:41:07.739Z",
+  "contentHash": "a70d5356a03367849ec929452d6a617cc7bd1dfafe6c88cb2b3cbb0614aef3fc",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SO",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Soletta, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "50",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Röm.-kath. Jesuitenkirche",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-oktober-26_ArCBAeA"
+            },
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-oktober-26/"
+            },
+            {
+              "label": "Seifensiedekurs",
+              "detail": "4468 Kienberg, Kienberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seifensiedekurs-1/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand/"
+            },
+            {
+              "label": "Abenteuertage auf dem Weissenstein",
+              "detail": "Hotel-Restaurant Weissenstein — in corso, ultimo giorno: 9 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abenteuertage-auf-dem-weissenstein-2026/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
+            },
+            {
+              "label": "Was vom Tage übrigbleibt: Sonnenuntergang auf dem St. Ursenturm",
+              "detail": "Soletta — in corso, ultimo giorno: 13 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/soletta/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Patente Soletta: cosa fare e come procedere",
+          "url": "/articoli-svizzera/patente-di-guida-canton-soletta-conversione-ed-esami/",
+          "excerpt": "Conversione della patente di guida estera nel Cantone di Soletta: come richiedere la conversione e cosa fare durante gli esami.",
+          "date": "2026-08-18T04:08:47.013Z"
+        },
+        {
+          "title": "Giornate di Soletta 2026: Continua la Sfida Finanziaria",
+          "url": "/articoli-svizzera/giornate-soletta-finanza-2026/",
+          "excerpt": "Il festival cinematografico di Soletta ha registrato 65'000 spettatori, ma affronta difficoltà finanziarie con un risultato operativo di 39'000 franchi in rosso.",
+          "date": "2026-07-01T10:29:52.897Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Soletta",
+          "url": "/eventi/soletta/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/soletta/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    },
+    "en": {
+      "canton": "SO",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Solothurn, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "50",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Röm.-kath. Jesuitenkirche",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-oktober-26_ArCBAeA"
+            },
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-oktober-26/"
+            },
+            {
+              "label": "Seifensiedekurs",
+              "detail": "4468 Kienberg, Kienberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seifensiedekurs-1/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand/"
+            },
+            {
+              "label": "Abenteuertage auf dem Weissenstein",
+              "detail": "Hotel-Restaurant Weissenstein — ongoing, last day: 9 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abenteuertage-auf-dem-weissenstein-2026/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — ongoing, last day: 18 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — ongoing, last day: 25 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — ongoing, last day: 15 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
+            },
+            {
+              "label": "What remains of the day: sunset on the St. Ursenturm tower",
+              "detail": "Soletta — ongoing, last day: 13 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/solothurn/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Soleta licence: what to do and how to proceed",
+          "url": "/en/swiss-articles/soletta-switzerland-driving-license-conversion-exams/",
+          "excerpt": "Conversion of the foreign driver's license in the Canton of Solothurn: how to apply for the conversion and what to do during the exams.",
+          "date": "2026-08-18T04:08:47.013Z"
+        },
+        {
+          "title": "Solothurn Film Festival 2026: The Financial Challenge Continues",
+          "url": "/en/swiss-articles/solothurn-film-days-finance-2026/",
+          "excerpt": "The Solothurn film festival recorded 65,000 spectators, but is facing financial difficulties with an operating result of 39,000 francs in the red.",
+          "date": "2026-07-01T10:29:52.897Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "All events in the canton of Solothurn",
+          "url": "/en/events/solothurn/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/solothurn/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    },
+    "de": {
+      "canton": "SO",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "Im Kanton Solothurn ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "50",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Röm.-kath. Jesuitenkirche",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-oktober-26_ArCBAeA"
+            },
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-oktober-26/"
+            },
+            {
+              "label": "Seifensiedekurs",
+              "detail": "4468 Kienberg, Kienberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seifensiedekurs-1/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand/"
+            },
+            {
+              "label": "Abenteuertage auf dem Weissenstein",
+              "detail": "Hotel-Restaurant Weissenstein — läuft, letzter Tag: 9. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abenteuertage-auf-dem-weissenstein-2026/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
+            },
+            {
+              "label": "Was vom Tage übrigbleibt: Sonnenuntergang auf dem St. Ursenturm",
+              "detail": "Soletta — läuft, letzter Tag: 13. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/solothurn/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Solothurn-Führerschein: Was zu tun ist und wie vorzugehen",
+          "url": "/de/schweiz-artikel/fahrerschein-kanton-soletta-umstellung-und-pruefungen/",
+          "excerpt": "Umbau des ausländischen Führerscheins im Kanton Solothurn: Wie beantrage ich den Umbau und was mache ich während der Prüfungen?",
+          "date": "2026-08-18T04:08:47.013Z"
+        },
+        {
+          "title": "Solothurn Film Festival 2026: Die finanzielle Herausforderung geht weiter",
+          "url": "/de/schweiz-artikel/solothurner-filmtage-finanz-2026/",
+          "excerpt": "Das Solothurner Filmfestival verzeichnete 65.000 Zuschauer, steht jedoch vor finanziellen Schwierigkeiten mit einem Betriebsergebnis von 39.000 Francs im roten Bereich.",
+          "date": "2026-07-01T10:29:52.897Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen im Kanton Solothurn",
+          "url": "/de/veranstaltungen/solothurn/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    },
+    "fr": {
+      "canton": "SO",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Soleure, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "50",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Röm.-kath. Jesuitenkirche",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/solothurn/fermata-musica-oktober-26_ArCBAeA"
+            },
+            {
+              "label": "Fermata Musica Oktober 26",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fermata-musica-oktober-26/"
+            },
+            {
+              "label": "Seifensiedekurs",
+              "detail": "4468 Kienberg, Kienberg",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/seifensiedekurs-1/"
+            },
+            {
+              "label": "The ones we love - Kino on Demand",
+              "detail": "Solothurn",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-ones-we-love-kino-on-demand/"
+            },
+            {
+              "label": "Abenteuertage auf dem Weissenstein",
+              "detail": "Hotel-Restaurant Weissenstein — en cours, dernier jour : 9 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abenteuertage-auf-dem-weissenstein-2026/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
+            },
+            {
+              "label": "Ce qu'il reste du jour : coucher de soleil sur la tour St-Ursanne",
+              "detail": "Soletta — en cours, dernier jour : 13 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/soleure/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de conduire de Solothurn : quoi faire et comment procéder",
+          "url": "/fr/articles-suisse/permis-de-conduire-canton-soletta-conversion-et-examens/",
+          "excerpt": "Conversion d'un permis de conduire étranger dans le canton de Soleure : comment demander une conversion et quoi faire pendant les examens.",
+          "date": "2026-08-18T04:08:47.013Z"
+        },
+        {
+          "title": "Festival du film de Solothurn 2026 : Le défi financier continue",
+          "url": "/fr/articles-suisse/journees-de-soleure-finances-2026/",
+          "excerpt": "Le festival du film de Soleure a enregistré 65'000 spectateurs, mais fait face à des difficultés financières avec un résultat opérationnel de 39'000 francs en rouge.",
+          "date": "2026-07-01T10:29:52.897Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Soleure",
+          "url": "/fr/evenements/soleure/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/soleure/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    }
+  }
+}

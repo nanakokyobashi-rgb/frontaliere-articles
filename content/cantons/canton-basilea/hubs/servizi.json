@@ -1,0 +1,885 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-basilea:servizi",
+  "section": "canton-basilea",
+  "canton": "BASILEA",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:56:00.728Z",
+  "contentHash": "3b92034c8b4e4ebcb3987cd59f49837f7982cd114a7f7adfda617dfdd8527ec0",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-07T00:42:24.752Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "BASILEA",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nella regione di Basilea, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Germania e la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco e francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "680,20 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "4",
+          "note": "offerta mediana 561,50 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "BL, regione di premio 1",
+              "value": "mediana 680,20 CHF al mese",
+              "detail": "da 630 a 768,80 CHF, 23 assicuratori"
+            },
+            {
+              "label": "BL, regione di premio 2",
+              "value": "mediana 634,70 CHF al mese",
+              "detail": "da 575,30 a 709,10 CHF, 23 assicuratori"
+            },
+            {
+              "label": "BS, regione di premio 0",
+              "value": "mediana 703,90 CHF al mese",
+              "detail": "da 673,70 a 809,70 CHF, 23 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "BL3100",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+            },
+            {
+              "label": "BL4655",
+              "value": "922 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+            },
+            {
+              "label": "BL17655",
+              "value": "201 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "oggi da 12 a 12 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "13 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi LAMal a Basilea Città: franchigia e sussidio",
+          "url": "/articoli-svizzera/franchigie-lamal-basilea-citta/",
+          "excerpt": "Nel canton Basilea Città, i premi LAMal seguono cantone e regione: franchigie adulti, modelli alternativi e riduzione dei premi come sussidio cantonale.",
+          "date": "2026-09-30T13:45:57.951Z"
+        },
+        {
+          "title": "Premi cassa malati Basilea Città: riduzione premi",
+          "url": "/articoli-svizzera/lamal-franchigie-sussidio-basel/",
+          "excerpt": "Guida pratica ai premi LAMal a Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi come sussidio cantonale.",
+          "date": "2026-09-30T12:56:57.233Z"
+        },
+        {
+          "title": "Asilo nido Basilea Città: costi e sussidi",
+          "url": "/articoli-svizzera/tariffe-cura-infanzia-baselstadt/",
+          "excerpt": "Asilo nido e custodia bambini a Basilea Città: nidi, famiglie diurne e doposcuola, tariffe legate al reddito e sussidi cantonali.",
+          "date": "2026-10-01T01:12:49.462Z"
+        },
+        {
+          "title": "Permesso di dimora B a Basilea Città: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-basilea-citta/",
+          "excerpt": "Ecco i requisiti e i documenti necessari per ottenere il permesso di dimora B nel Cantone di Basilea Città, nonché la procedura di rinnovo e l'ufficio competente.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Permesso dimora B Basilea Città: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-basilea-citta/",
+          "excerpt": "Guida pratica al permesso di dimora rinnovabile nel Cantone di Basilea Città: requisiti, documenti, durata, procedura di rinnovo e contatti dell'ufficio della migrazione.",
+          "date": "2026-08-24T12:28:08.819Z"
+        },
+        {
+          "title": "Permesso di dimora B Basilea Campagna: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-basilea-campagna/",
+          "excerpt": "Guida ai requisiti e alla procedura di rinnovo del permesso B nel Canton Basilea Campagna. Durata, documenti e contatti utili.",
+          "date": "2026-08-24T15:36:51.306Z"
+        },
+        {
+          "title": "Guida al sistema sanitario svizzero: LAMal e scelta della cassa malati",
+          "url": "/articoli-svizzera/sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea/",
+          "excerpt": "Tutti i dati necessari per comprendere il sistema sanitario svizzero e la scelta della cassa malati nel canton Basilea",
+          "date": "2026-08-09T17:41:08.024Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini a Basilea Città: tariffe e sussidi",
+          "url": "/articoli-svizzera/asilo-custodia-basilea-citta-tariffe/",
+          "excerpt": "Guida alla custodia dei bambini nel canton Basilea Città: tariffe progressive, sussidi cantonali e deduzioni fiscali federali per famiglie. Come accedere ai servizi.",
+          "date": "2026-09-02T02:13:24.377Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione (BL)",
+          "url": "/premi-cassa-malati/basilea-campagna/"
+        },
+        {
+          "label": "Premi di cassa malati per regione (BS)",
+          "url": "/premi-cassa-malati/basilea-citta/"
+        },
+        {
+          "label": "Aste delle targhe (BL)",
+          "url": "/aste-targhe-svizzera/basilea-campagna-bl/"
+        },
+        {
+          "label": "Aste delle targhe (BS)",
+          "url": "/aste-targhe-svizzera/basilea-citta-bs/"
+        },
+        {
+          "label": "Offerte di lavoro nella regione di Basilea",
+          "url": "/cerca-lavoro-basilea/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "en": {
+      "canton": "BASILEA",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the Basel region, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders Germany and France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German and French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "680.20 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "4",
+          "note": "typical bid 561.50 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "BL, premium region 1",
+              "value": "typical 680.20 CHF per month",
+              "detail": "from 630 to 768.80 CHF, 23 insurers"
+            },
+            {
+              "label": "BL, premium region 2",
+              "value": "typical 634.70 CHF per month",
+              "detail": "from 575.30 to 709.10 CHF, 23 insurers"
+            },
+            {
+              "label": "BS, premium region 0",
+              "value": "typical 703.90 CHF per month",
+              "detail": "from 673.70 to 809.70 CHF, 23 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "BL3100",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+            },
+            {
+              "label": "BL4655",
+              "value": "922 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+            },
+            {
+              "label": "BL17655",
+              "value": "201 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "today from 12 to 12 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "13 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Health Insurance Premiums in the Canton of Basel-Stadt: Premium Reduction",
+          "url": "/en/swiss-articles/basel-city-lamal-premium-reduction/",
+          "excerpt": "In the canton of Basel-Stadt, KVG premiums vary by canton and region: adult deductibles, alternative plans, and premium reductions as a cantonal subsidy.",
+          "date": "2026-09-30T13:45:57.951Z"
+        },
+        {
+          "title": "Basel-Stadt health insurance premiums: premium reduction",
+          "url": "/en/swiss-articles/basel-city-health-premium-reduction/",
+          "excerpt": "A Practical Guide to LAMal Premiums in Basel-Stadt: Adult Deductibles, Premiums by Canton and Region, and Premium Reductions as Cantonal Subsidies.",
+          "date": "2026-09-30T12:56:57.233Z"
+        },
+        {
+          "title": "Daycare in Basel-Stadt: Costs and Subsidies",
+          "url": "/en/swiss-articles/basel-stadt-childcare-costs/",
+          "excerpt": "Crèche and childcare in Basel-Stadt: crèches, day and after-school families, income-related tariffs and cantonal subsidies.",
+          "date": "2026-10-01T01:12:49.462Z"
+        },
+        {
+          "title": "Residence permit B in Basel City: requirements and procedure",
+          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-basilea-citta-en/",
+          "excerpt": "Here are the requirements and documents necessary to obtain the residence permit B in the Canton of Basel-City, as well as the renewal procedure and the competent office.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Residence permit B Basel City: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-basel-city/",
+          "excerpt": "Practical guide to the renewable residence permit in the Canton of Basel-City: requirements, documents, duration, renewal procedure and contacts of the migration office.",
+          "date": "2026-08-24T12:28:08.819Z"
+        },
+        {
+          "title": "Residence Permit B Basel Countryside: Requirements and Renewal",
+          "url": "/en/swiss-articles/residence-permit-b-basel-landschaft-requirements-renewal/",
+          "excerpt": "Guide to the requirements and procedure for renewing the B permit in the Basel-Country Canton. Duration, documents and useful contacts.",
+          "date": "2026-08-24T15:36:51.306Z"
+        },
+        {
+          "title": "Guide to the Swiss health system: LAMal and the choice of the sick fund",
+          "url": "/en/swiss-articles/swiss-healthcare-system-lamal-guide-2026-canton-basel/",
+          "excerpt": "All the data necessary to understand the Swiss health system and the choice of the health insurance fund in the canton of Basel",
+          "date": "2026-08-09T17:41:08.024Z"
+        },
+        {
+          "title": "Nursery and childcare in Basel City: fees and subsidies",
+          "url": "/en/swiss-articles/nursery-childcare-basel-city-fees/",
+          "excerpt": "Guide to Child Custody in the Canton of Basel-City: Progressive Fees, Cantonal Subsidies, and Federal Family Tax Deductions. How to access services.",
+          "date": "2026-09-02T02:13:24.377Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions (BL)",
+          "url": "/en/swiss-plate-auctions/basel-country-bl/"
+        },
+        {
+          "label": "Number plate auctions (BS)",
+          "url": "/en/swiss-plate-auctions/basel-city-bs/"
+        },
+        {
+          "label": "Job offers in the Basel region",
+          "url": "/en/find-jobs-basel/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "de": {
+      "canton": "BASILEA",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "In der Region Basel laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Deutschland und Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch und Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "680.20 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "4",
+          "note": "mittleres Gebot 561.50 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "BL, Prämienregion 1",
+              "value": "Mittelwert 680.20 CHF pro Monat",
+              "detail": "von 630 bis 768.80 CHF, 23 Versicherer"
+            },
+            {
+              "label": "BL, Prämienregion 2",
+              "value": "Mittelwert 634.70 CHF pro Monat",
+              "detail": "von 575.30 bis 709.10 CHF, 23 Versicherer"
+            },
+            {
+              "label": "BS, Prämienregion 0",
+              "value": "Mittelwert 703.90 CHF pro Monat",
+              "detail": "von 673.70 bis 809.70 CHF, 23 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "BL3100",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+            },
+            {
+              "label": "BL4655",
+              "value": "922 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+            },
+            {
+              "label": "BL17655",
+              "value": "201 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "heute 12 bis 12 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "13 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien im Kanton Basel-Stadt: Prämienverbilligung",
+          "url": "/de/schweiz-artikel/basel-stadt-krankenkassenpraemien/",
+          "excerpt": "Im Kanton Basel-Stadt richten sich die LAMal-Prämien nach Kanton und Region: Erwachsenenfranchisen, alternative Modelle und Prämienverbilligung als kantonale Subvention.",
+          "date": "2026-09-30T13:45:57.951Z"
+        },
+        {
+          "title": "Krankenkassenprämien Basel-Stadt: Prämien senken",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-basel-stadt/",
+          "excerpt": "Praktischer Leitfaden zu den KVG-Prämien in Basel-Stadt: Selbstbehalte für Erwachsene, Prämien nach Kanton und Region sowie Prämienverbilligungen als kantonale Beihilfe.",
+          "date": "2026-09-30T12:56:57.233Z"
+        },
+        {
+          "title": "Kindergarten Basel-Stadt: Kosten und Zuschüsse",
+          "url": "/de/schweiz-artikel/basel-stadt-kinderbetreuung-kosten/",
+          "excerpt": "Kindertagesstätten und Kinderbetreuung in Basel-Stadt: Krippen, Tagesfamilien und Nachmittagsbetreuung, einkommensabhängige Tarife und kantonale Zuschüsse.",
+          "date": "2026-10-01T01:12:49.462Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B in Basel-Stadt: Voraussetzungen und Verfahren",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-basilea-citta-de/",
+          "excerpt": "Hier finden Sie die Voraussetzungen und Unterlagen zur Erlangung der Aufenthaltsbewilligung B im Kanton Basel-Stadt sowie das Erneuerungsverfahren und die zuständige Stelle.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Basel-Stadt: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltsgenehmigung-b-basel-stadt/",
+          "excerpt": "Praktischer Leitfaden zur erneuerbaren Aufenthaltsbewilligung im Kanton Basel-Stadt: Voraussetzungen, Dokumente, Dauer, Erneuerungsverfahren und Kontakte der Migrationsstelle.",
+          "date": "2026-08-24T12:28:08.819Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Basel-Landschaft: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-baselland-anforderungen-erneuerung/",
+          "excerpt": "Leitfaden zu den Anforderungen und Verfahren für die Erneuerung der B-Bewilligung im Kanton Basel-Landschaft. Dauer, Dokumente und nützliche Kontakte.",
+          "date": "2026-08-24T15:36:51.306Z"
+        },
+        {
+          "title": "Leitfaden zum schweizerischen Gesundheitssystem: KVG und Wahl der Krankenkasse",
+          "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-anleitung-2026-kanton-basel/",
+          "excerpt": "Alle notwendigen Daten, um das Schweizer Gesundheitssystem und die Wahl der Krankenkasse im Kanton Basel zu verstehen",
+          "date": "2026-08-09T17:41:08.024Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung in Basel-Stadt: Tarife und Zuschüsse",
+          "url": "/de/schweiz-artikel/kindergarten-kinderbetreuung-basel-stadt-gebuehren/",
+          "excerpt": "Leitfaden zur Kinderbetreuung im Kanton Basel-Stadt: Progressive Tarife, Kantonsbeiträge und eidgenössische Familiensteuerabzüge. So greifen Sie auf die Dienste zu.",
+          "date": "2026-09-02T02:13:24.377Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen (BL)",
+          "url": "/de/schweizer-nummernschildauktionen/basel-landschaft-bl/"
+        },
+        {
+          "label": "Kontrollschild-Auktionen (BS)",
+          "url": "/de/schweizer-nummernschildauktionen/basel-stadt-bs/"
+        },
+        {
+          "label": "Stellenangebote in der Region Basel",
+          "url": "/de/jobs-in-basel/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    },
+    "fr": {
+      "canton": "BASILEA",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans la région bâloise, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec l’Allemagne et la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand et français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "680,20 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "4",
+          "note": "offre centrale 561,50 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "BL, région de primes 1",
+              "value": "valeur centrale 680,20 CHF par mois",
+              "detail": "de 630 à 768,80 CHF, 23 assureurs"
+            },
+            {
+              "label": "BL, région de primes 2",
+              "value": "valeur centrale 634,70 CHF par mois",
+              "detail": "de 575,30 à 709,10 CHF, 23 assureurs"
+            },
+            {
+              "label": "BS, région de primes 0",
+              "value": "valeur centrale 703,90 CHF par mois",
+              "detail": "de 673,70 à 809,70 CHF, 23 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-06T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-07T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-08T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-09T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-10T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-11T22:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "BL3100",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+            },
+            {
+              "label": "BL4655",
+              "value": "922 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+            },
+            {
+              "label": "BL17655",
+              "value": "201 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 12 à 12 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes d’assurance-maladie du canton de Bâle-Ville : réduction des primes",
+          "url": "/fr/articles-suisse/primes-lamal-bale-ville/",
+          "excerpt": "Dans le canton de Bâle-Ville, les primes LAMal dépendent du canton et de la région : franchises pour adultes, modèles alternatifs et réduction des primes sous forme de subside cantonal.",
+          "date": "2026-09-30T13:45:57.951Z"
+        },
+        {
+          "title": "Primes d’assurance-maladie Bâle-Ville : réduction des primes",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-bale-ville/",
+          "excerpt": "Guide pratique des primes LAMal à Bâle-Ville : franchises pour adultes, prime par canton et par région et réduction de primes en tant que subvention cantonale.",
+          "date": "2026-09-30T12:56:57.233Z"
+        },
+        {
+          "title": "Maternelle Bâle-Stadt : coûts et subventions",
+          "url": "/fr/articles-suisse/bale-ville-couts-garde-enfants/",
+          "excerpt": "Crèche et garde d’enfants à Bâle-Stadt : crèches, familles de jour et après l’école, tarifs liés au revenu et subventions cantonales.",
+          "date": "2026-10-01T01:12:49.462Z"
+        },
+        {
+          "title": "Permis de séjour B à Bâle-Ville : exigences et procédure",
+          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-basilea-citta-fr/",
+          "excerpt": "Voici les conditions et les documents nécessaires pour obtenir le permis de séjour B dans le canton de Bâle-Ville, ainsi que la procédure de renouvellement et le bureau compétent.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Permis de séjour B Bâle-Ville : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-bale-ville/",
+          "excerpt": "Guide pratique du permis de séjour renouvelable dans le canton de Bâle-Ville : exigences, documents, durée, procédure de renouvellement et contacts de l'Office des migrations.",
+          "date": "2026-08-24T12:28:08.819Z"
+        },
+        {
+          "title": "Permis de séjour B Bâle-Campagne : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-bale-campagne-renouvellement/",
+          "excerpt": "Guide des exigences et de la procédure de renouvellement du permis B dans le canton de Bâle-Campagne. Durée, documents et contacts utiles.",
+          "date": "2026-08-24T15:36:51.306Z"
+        },
+        {
+          "title": "Guide du système de santé suisse : LAMal et choix de la caisse-maladie",
+          "url": "/fr/articles-suisse/systeme-de-sante-suisse-lamal-guide-2026-canton-de-bale/",
+          "excerpt": "Toutes les données nécessaires pour comprendre le système de santé suisse et le choix de la caisse-maladie dans le canton de Bâle",
+          "date": "2026-08-09T17:41:08.024Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants à Bâle-Ville : tarifs et subventions",
+          "url": "/fr/articles-suisse/garderie-garde-enfants-bale-ville-tarifs/",
+          "excerpt": "Guide de garde d'enfants dans le canton de Bâle-Ville : tarifs progressifs, allocations cantonales et déductions fiscales fédérales pour les familles. Comment accéder aux services.",
+          "date": "2026-09-02T02:13:24.377Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans la région bâloise",
+          "url": "/fr/trouver-emploi-bale/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:56:00.728Z"
+    }
+  }
+}

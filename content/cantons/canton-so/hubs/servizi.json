@@ -1,0 +1,866 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-so:servizi",
+  "section": "canton-so",
+  "canton": "SO",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:41:07.739Z",
+  "contentHash": "0fad491da135eff7d5c615938ed96955c9fcd1cf67d220b6d754eca9a5df4109",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-07T00:42:24.752Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "SO",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Soletta, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "606 CHF",
+          "note": "regione di premio 0, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "6",
+          "note": "offerta mediana 1200 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "SO, regione di premio 0",
+              "value": "mediana 606 CHF al mese",
+              "detail": "da 565,40 a 642,80 CHF, 25 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-11T07:00:00.000Z"
+            },
+            {
+              "label": "Apotheke Coop-Vitality - Grenchen",
+              "detail": "Grenchen, Solothurn",
+              "date": "2026-10-11T08:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-10-11T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SO10468",
+              "value": "20.000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
+            },
+            {
+              "label": "SO5504",
+              "value": "1200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
+            },
+            {
+              "label": "SO7971",
+              "value": "1200 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "oggi da 14 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
+              "date": "2026-10-06",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/die-arbeitslosenquote-sank-im-september-auf-30-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stagnierte im August bei 3,1 Prozent",
+              "date": "2026-09-07",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stagnierte-im-august-bei-31-prozent-1/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
+              "date": "2026-08-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
+              "date": "2026-07-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Patente di guida nel Canton Soletta: conversione ed esami",
+          "url": "/articoli-svizzera/soletta-licenza-estera-esami/",
+          "excerpt": "Conversione della licenza estera, esami teorico e pratico, corsi obbligatori e ufficio della circolazione competente a Soletta.",
+          "date": "2026-09-29T13:19:30.604Z"
+        },
+        {
+          "title": "Patente estera a Soletta: conversione ed esami",
+          "url": "/articoli-svizzera/licenza-estera-soletta-prove/",
+          "excerpt": "La guida alla patente nel Cantone di Soletta copre conversione della licenza estera, esami teorico e pratico, corsi obbligatori e ufficio competente.",
+          "date": "2026-09-29T05:42:57.002Z"
+        },
+        {
+          "title": "Permesso di dimora B in Soletta: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-soletta/",
+          "excerpt": "I requisiti per ottenere un permesso di dimora B nel Canton Soletta sono specificati nella legge cantonale.",
+          "date": "2026-08-18T01:22:42.942Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-soletta-costi/",
+          "excerpt": "Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola.",
+          "date": "2026-09-05T19:02:52.084Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini Soletta: costi e sussidi",
+          "url": "/articoli-svizzera/asilo-nido-canton-soletta-costi/",
+          "excerpt": "Guida completa alla custodia dei bambini nel Cantone di Soletta: tariffe basate sul reddito, asili nido, famiglie diurne e doposcuola.",
+          "date": "2026-08-18T03:06:46.710Z"
+        },
+        {
+          "title": "Premi cassa malati canton Soletta e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
+          "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
+          "title": "Permesso dimora B Soletta: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-soletta-requisiti-rinnovo/",
+          "excerpt": "Guida completa al permesso B nel cantone Soletta. Scopri requisiti, documenti da produrre, durata 5 anni e procedura di rinnovo entro 3 mesi dalla scadenza.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
+          "title": "Permesso di domicilio C canton Soletta: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-domicilio-c-soletta/",
+          "excerpt": "Analisi dei requisiti, dei criteri di integrazione e della procedura per richiedere il permesso di domicilio C nel Cantone di Soletta.",
+          "date": "2026-08-18T02:02:28.862Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/soletta/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/soletta-so/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Soletta",
+          "url": "/cerca-lavoro-soletta/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    },
+    "en": {
+      "canton": "SO",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Solothurn, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "606 CHF",
+          "note": "premium region 0, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "6",
+          "note": "typical bid 1,200 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "SO, premium region 0",
+              "value": "typical 606 CHF per month",
+              "detail": "from 565.40 to 642.80 CHF, 25 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-11T07:00:00.000Z"
+            },
+            {
+              "label": "Apotheke Coop-Vitality - Grenchen",
+              "detail": "Grenchen, Solothurn",
+              "date": "2026-10-11T08:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-10-11T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SO10468",
+              "value": "20,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
+            },
+            {
+              "label": "SO5504",
+              "value": "1,200 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
+            },
+            {
+              "label": "SO7971",
+              "value": "1,200 CHF",
+              "detail": "current bid",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "today from 14 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
+              "date": "2026-10-06",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/die-arbeitslosenquote-sank-im-september-auf-30-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stagnierte im August bei 3,1 Prozent",
+              "date": "2026-09-07",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stagnierte-im-august-bei-31-prozent-1/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
+              "date": "2026-08-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
+              "date": "2026-07-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Driving licence in the Canton of Solothurn: conversion and exams",
+          "url": "/en/swiss-articles/solothurn-driving-licence-conversion/",
+          "excerpt": "Conversion of a foreign driver's license, theory and practical exams, mandatory courses, and the competent road traffic office in Solothurn.",
+          "date": "2026-09-29T13:19:30.604Z"
+        },
+        {
+          "title": "Foreign driver's license in Solothurn: conversion and examinations",
+          "url": "/en/swiss-articles/foreign-licence-solothurn-tests/",
+          "excerpt": "The driving licence guide in the Canton of Solothurn covers conversion of a foreign licence, theory and practical tests, compulsory courses, and the responsible office.",
+          "date": "2026-09-29T05:42:57.002Z"
+        },
+        {
+          "title": "Residence permit B in Soleta: requirements and procedure",
+          "url": "/en/swiss-articles/residence-permit-b-in-soleta-requirements-and-procedure/",
+          "excerpt": "The requirements for obtaining a B residence permit in the Canton of Solothurn are specified in the cantonal law.",
+          "date": "2026-08-18T01:22:42.942Z"
+        },
+        {
+          "title": "Nursery and childcare in the canton of Solothurn: costs and fees",
+          "url": "/en/swiss-articles/childcare-costs-canton-solothurn/",
+          "excerpt": "Find out about childcare costs and fees in the Canton of Solothurn, including nurseries, day families and afterschool.",
+          "date": "2026-09-05T19:02:52.084Z"
+        },
+        {
+          "title": "Nursery and childcare Insole: costs and subsidies",
+          "url": "/en/swiss-articles/solothurn-daycare-costs/",
+          "excerpt": "Complete guide to childcare in the Canton of Solothurn: income-based rates, nurseries, day families and after-school.",
+          "date": "2026-08-18T03:06:46.710Z"
+        },
+        {
+          "title": "Canton health insurance premiums Slab and premium reduction",
+          "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
+          "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
+          "title": "Residence permit B Slab: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-soletta-requirements-renewal/",
+          "excerpt": "Complete guide to permit B in the canton of Solothurn. Discover requirements, documents to be produced, duration 5 years and renewal procedure within 3 months of expiry.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
+          "title": "Residence permit C canton Solothurn: requirements and application",
+          "url": "/en/swiss-articles/c-permit-solothurn-requirements-application/",
+          "excerpt": "Analysis of the requirements, integration criteria and procedure for applying for residence permit C in the Canton of Solothurn.",
+          "date": "2026-08-18T02:02:28.862Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/solothurn-so/"
+        },
+        {
+          "label": "Job offers in the canton of Solothurn",
+          "url": "/en/find-jobs-solothurn/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    },
+    "de": {
+      "canton": "SO",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "Im Kanton Solothurn laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "606 CHF",
+          "note": "Prämienregion 0, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "6",
+          "note": "mittleres Gebot 1’200 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "SO, Prämienregion 0",
+              "value": "Mittelwert 606 CHF pro Monat",
+              "detail": "von 565.40 bis 642.80 CHF, 25 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-11T07:00:00.000Z"
+            },
+            {
+              "label": "Apotheke Coop-Vitality - Grenchen",
+              "detail": "Grenchen, Solothurn",
+              "date": "2026-10-11T08:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-10-11T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SO10468",
+              "value": "20’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
+            },
+            {
+              "label": "SO5504",
+              "value": "1’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
+            },
+            {
+              "label": "SO7971",
+              "value": "1’200 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "heute 14 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
+              "date": "2026-10-06",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/die-arbeitslosenquote-sank-im-september-auf-30-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stagnierte im August bei 3,1 Prozent",
+              "date": "2026-09-07",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stagnierte-im-august-bei-31-prozent-1/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
+              "date": "2026-08-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
+              "date": "2026-07-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Führerausweis im Kanton Solothurn: Umtausch und Prüfungen",
+          "url": "/de/schweiz-artikel/solothurn-fuehrerausweis-umtausch/",
+          "excerpt": "Umtausch des ausländischen Führerausweises, theoretische und praktische Prüfungen, obligatorische Kurse und zuständiges Strassenverkehrsamt in Solothurn.",
+          "date": "2026-09-29T13:19:30.604Z"
+        },
+        {
+          "title": "Ausländischer Führerausweis in Solothurn: Umtausch und Prüfungen",
+          "url": "/de/schweiz-artikel/auslaendischer-fuehrerausweis-solothurn-pruefungen/",
+          "excerpt": "Der Führerscheinleitfaden im Kanton Solothurn behandelt die Umwandlung des ausländischen Führerscheins, die theoretische und praktische Prüfung, obligatorische Kurse und die zuständige Behörde.",
+          "date": "2026-09-29T05:42:57.002Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B in Solothurn: Voraussetzungen und Verfahren",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-soletta/",
+          "excerpt": "Die Voraussetzungen für eine Aufenthaltsbewilligung B im Kanton Solothurn sind im kantonalen Gesetz festgelegt.",
+          "date": "2026-08-18T01:22:42.942Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Solothurn: Kosten und Tarife",
+          "url": "/de/schweiz-artikel/kinderbetreuungskosten-kanton-solothurn/",
+          "excerpt": "Informieren Sie sich über die Kosten und Tarife für die Kinderbetreuung im Kanton Solothurn inklusive Kindergärten, Tagesfamilien und Kindergarten.",
+          "date": "2026-09-05T19:02:52.084Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung Solothurn: Kosten und Leistungen",
+          "url": "/de/schweiz-artikel/krippe-solothurn-kosten/",
+          "excerpt": "Umfassender Leitfaden zur Kinderbetreuung im Kanton Solothurn: einkommensabhängige Tarife, Kindergärten, Tages- und Nachschulfamilien.",
+          "date": "2026-08-18T03:06:46.710Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Solothurn und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
+          "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Solothurn: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-soletta-anforderungen-erneuerung/",
+          "excerpt": "Vollständiger Führerschein B im Kanton Solothurn. Entdecken Sie die Anforderungen, die einzureichenden Dokumente, die Dauer von 5 Jahren und das Erneuerungsverfahren innerhalb von 3 Monaten nach Ablauf.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C Kanton Solothurn: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-kanton-solothurn-voraussetzungen/",
+          "excerpt": "Analyse der Voraussetzungen, der Integrationskriterien und des Verfahrens zur Beantragung der Niederlassungsbewilligung C im Kanton Solothurn.",
+          "date": "2026-08-18T02:02:28.862Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/solothurn-so/"
+        },
+        {
+          "label": "Stellenangebote im Kanton Solothurn",
+          "url": "/de/jobs-in-solothurn/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    },
+    "fr": {
+      "canton": "SO",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Soleure, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "606 CHF",
+          "note": "région de primes 0, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "6",
+          "note": "offre centrale 1 200 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "SO, région de primes 0",
+              "value": "valeur centrale 606 CHF par mois",
+              "detail": "de 565,40 à 642,80 CHF, 25 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Saner Apotheke Dornach",
+              "detail": "Dornach, Dorneck-Thierstein",
+              "date": "2026-10-11T07:00:00.000Z"
+            },
+            {
+              "label": "Apotheke Coop-Vitality - Grenchen",
+              "detail": "Grenchen, Solothurn",
+              "date": "2026-10-11T08:00:00.000Z"
+            },
+            {
+              "label": "Apotheke zum Kreuz",
+              "detail": "Olten, Olten",
+              "date": "2026-10-11T08:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
+          "updatedAt": "2026-10-07T00:42:24.752Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SO10468",
+              "value": "20 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3349"
+            },
+            {
+              "label": "SO5504",
+              "value": "1 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3346"
+            },
+            {
+              "label": "SO7971",
+              "value": "1 200 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-07T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3347"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 14 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Die Arbeitslosenquote sank im September auf 3,0 Prozent",
+              "date": "2026-10-06",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/die-arbeitslosenquote-sank-im-september-auf-30-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stagnierte im August bei 3,1 Prozent",
+              "date": "2026-09-07",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stagnierte-im-august-bei-31-prozent-1/"
+            },
+            {
+              "label": "Die Arbeitslosenquote stieg im Juli 2026 auf 3,1 Prozent",
+              "date": "2026-08-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-stieg-im-juli-2026-auf-31-prozent/"
+            },
+            {
+              "label": "Die Arbeitslosenquote sank im Juni auf 3,0 Prozent",
+              "date": "2026-07-06",
+              "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Permis de conduire dans le canton de Soleure : conversion et examens",
+          "url": "/fr/articles-suisse/soleure-permis-conduire-conversion/",
+          "excerpt": "Conversion du permis étranger, examens théorique et pratique, cours obligatoires et office de la circulation compétent à Soleure.",
+          "date": "2026-09-29T13:19:30.604Z"
+        },
+        {
+          "title": "Permis de conduire étranger à Soleure : conversion et examens",
+          "url": "/fr/articles-suisse/permis-etranger-soleure-examens/",
+          "excerpt": "Le guide du permis de conduire dans le canton de Soleure couvre la conversion du permis étranger, les examens théorique et pratique, les cours obligatoires et l’office compétent.",
+          "date": "2026-09-29T05:42:57.002Z"
+        },
+        {
+          "title": "Permis de séjour B à Soleure : exigences et procédure",
+          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-de-soleure/",
+          "excerpt": "Les conditions d'obtention d'un permis de séjour B dans le canton de Soleure sont précisées dans la loi cantonale.",
+          "date": "2026-08-18T01:22:42.942Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton de Soleure : coûts et tarifs",
+          "url": "/fr/articles-suisse/couts-de-garde-d-enfants-canton-de-soleure/",
+          "excerpt": "Découvrez les coûts et les tarifs pour la garde des enfants dans le canton de Soleure, y compris les crèches, les familles de jour et après l'école.",
+          "date": "2026-09-05T19:02:52.084Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants Soleure : coûts et subventions",
+          "url": "/fr/articles-suisse/creche-soleure-couts/",
+          "excerpt": "Guide complet de garde d'enfants dans le canton de Soleure : tarifs basés sur le revenu, crèches, familles de jour et après l'école.",
+          "date": "2026-08-18T03:06:46.710Z"
+        },
+        {
+          "title": "Primes d'assurance maladie dans le canton de Soleure et réductions de primes",
+          "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
+          "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
+          "title": "Permis de séjour B Soleure : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-soletta-exigences-renouvellement/",
+          "excerpt": "Guide complet du permis B dans le canton de Soleure. Découvrez les exigences, les documents à produire, la durée de 5 ans et la procédure de renouvellement dans les 3 mois suivant l'expiration.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
+          "title": "Permis de séjour C canton de Soleure : exigences et demande",
+          "url": "/fr/articles-suisse/permis-etablissement-c-canton-soleure-conditions/",
+          "excerpt": "Analyse des exigences, des critères d'intégration et de la procédure de demande du permis de séjour C dans le canton de Soleure.",
+          "date": "2026-08-18T02:02:28.862Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Soleure",
+          "url": "/fr/trouver-emploi-soleure/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:41:07.739Z"
+    }
+  }
+}
