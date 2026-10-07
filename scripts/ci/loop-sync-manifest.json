@@ -1800,7 +1800,7 @@
       "path": "generator/scripts/create-article.mjs",
       "sitePath": "scripts/create-article.mjs",
       "mode": "adapted",
-      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, il fallback richiede un record reader-facing valido e la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
         "site": "44b4dcb727b012ea",
         "corpus": "e48b58a762604895",
@@ -1876,7 +1876,7 @@
       "path": "generator/scripts/publish-journalist-article.mjs",
       "sitePath": "scripts/publish-journalist-article.mjs",
       "mode": "adapted",
-      "reason": "Percorso di pubblicazione degli articoli firmati. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Fino al P14 era l'unica, e questo era il gemello con il diff piu' piccolo dei sette: proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire. Dal 2026-10-06 `resolveHeroImage` accetta solo un catalogo con record valido, una generazione del motore mirrorato o un upload editoriale HTTPS con rightsHolder/license/proofUrl/author registrati; URL arbitrari e fallback statici sono rifiutati, mentre il ledger aggregato va in `data/image-credits-blog.json`. Non va portato al sito: il gemello di la' non gira piu' da solo e la coda `journalist_articles` e' di questo repo.",
+      "reason": "Percorso di pubblicazione degli articoli firmati. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Fino al P14 era l'unica, e questo era il gemello con il diff piu' piccolo dei sette: proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire. Dal 2026-10-07 `resolveHeroImage` accetta solo un catalogo con record valido, una generazione del motore mirrorato o un upload editoriale HTTPS con rightsHolder/license/proofUrl/author registrati; URL arbitrari restano rifiutati; la cover statica governata viene usata quando il motore fallisce e la rigenerazione entra nella coda versionata, mentre il ledger aggregato va in `data/image-credits-blog.json`. Non va portato al sito: il gemello di la' non gira piu' da solo e la coda `journalist_articles` e' di questo repo.",
       "baseline": {
         "site": "e8d8cb515301783c",
         "corpus": "49aa1cb695aa6844",
@@ -2173,11 +2173,21 @@
     {
       "path": "scripts/lib/rebase-onto-remote.sh",
       "mode": "corpus-only",
-      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--take-theirs` per i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Dal 2026-10-05 (D18) un QUARTO ramo `--merge-counter <path>:<campo>` per i contatori riscritti per intero (`topic-candidates-{experimental,evergreen}-counter.json`, `quota-state.json`): passano da merge-counter-conflict.mjs, che scrive upstream + l'incremento del commit rigiocato, e se la fusione non e' dimostrabile ricadono su «prendi upstream». Le quattro categorie restano quattro liste apposta: confonderle toglierebbe dal registro l'articolo appena generato lasciandone i corpi sul posto, o perderebbe incrementi dei contatori.",
+      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--merge-queue` per `data/image-regeneration-queue.json`, che i due producer riscrivono per intero: merge-image-regeneration-queue.mjs unisce gli item per articleId e tiene il fallimento piu' recente, evitando che una coda globale in conflitto faccia abortire entrambi i retry. Un QUARTO ramo `--take-theirs` risolve i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Dal 2026-10-05 (D18) un QUINTO ramo `--merge-counter <path>:<campo>` per i contatori riscritti per intero (`topic-candidates-{experimental,evergreen}-counter.json`, `quota-state.json`): passano da merge-counter-conflict.mjs, che scrive upstream + l'incremento del commit rigiocato, e se la fusione non e' dimostrabile ricadono su «prendi upstream». Le cinque categorie restano liste separate apposta: confonderle toglierebbe dal registro l'articolo appena generato, perderebbe una richiesta di rigenerazione o perderebbe incrementi dei contatori.",
       "baseline": {
         "site": null,
         "corpus": "fe4d0086b9bfdca7",
         "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": "scripts/lib/merge-image-regeneration-queue.mjs",
+      "mode": "corpus-only",
+      "reason": "Resolver del conflitto di `data/image-regeneration-queue.json`: durante i retry di generate-article.yml e publish-journalist-articles.yml unisce gli item per articleId, conserva la prima richiesta e il fallimento piu' recente, e rifiuta una coda illeggibile invece di perdere silenziosamente una richiesta. Non esiste sul sito: entrambi i producer sono nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
       }
     },
     {
@@ -2516,6 +2526,26 @@
         "site": null,
         "corpus": null,
         "alignedAt": "2026-10-06"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-cover-fallback.mjs",
+      "mode": "corpus-only",
+      "reason": "Risolutore condiviso per il fallback non bloccante delle copertine: seleziona un record del catalogo o la cover statica governata e accoda la rigenerazione. Non esiste sul sito perche' i producer della coda vivono nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/image-regeneration-queue.mjs",
+      "mode": "corpus-only",
+      "reason": "Writer atomico della coda versionata delle copertine da rigenerare dopo un outage del motore. Non esiste sul sito perche' il consumer e il producer appartengono al workflow del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
       }
     },
     {

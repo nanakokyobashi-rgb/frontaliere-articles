@@ -446,13 +446,14 @@ test('④ la fase immagini usa un solo percorso governato e controlla il budget'
   const img = extractBlock('async function generateArticleImage(');
   assert.equal((img.text.match(/generateImageFromSpec\(/g) || []).length, 1, 'il nuovo hero deve avere un solo percorso di generazione');
   assert.match(img.text, /scope: 'article-hero'/);
-  assert.match(img.text, /maxAttempts: 3/);
+  assert.match(img.text, /maxAttempts: 1/);
   assert.match(img.text, /appendGeneratedImageRecord\(PROJECT_ROOT, result\.record\)/);
   assert.doesNotMatch(img.text, /Strategy \d|imagePhaseExpired\(/, 'non devono tornare strategie raster legacy separate');
   assert.match(img.text, /const imageDeadline = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
   assert.match(img.text, /if \(Date\.now\(\) >= imageDeadline\)/);
   assert.match(img.text, /deadlineAt:\s*imageDeadline/);
   assert.match(CODE, /const IMAGE_PHASE_BUDGET_MS = Math\.max\(/);
+  assert.match(CODE, /Math\.min\(120_000/);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

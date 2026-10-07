@@ -46,9 +46,12 @@ import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
+const QUEUE_RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-image-regeneration-queue.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
+const JOURNALIST_WORKFLOW = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
 const BOOKKEEPING = 'data/topic-candidates-evergreen-rejected.json';
 const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
+const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
 
 const GIT_ENV = {
   ...process.env,
@@ -335,9 +338,10 @@ test('a plain divergence with no conflict rebases cleanly', () => {
 function parseHelperArgs(yamlText) {
   const lines = yamlText.split('\n');
   const start = lines.findIndex((l) => l.includes('bash scripts/lib/rebase-onto-remote.sh'));
-  if (start === -1) return { bookkeeping: [], registries: [], takeTheirs: [], counters: [], sectionSurfaces: false };
+  if (start === -1) return { bookkeeping: [], registries: [], queues: [], takeTheirs: [], counters: [], sectionSurfaces: false };
   const bookkeeping = [];
   const registries = [];
+  const queues = [];
   const takeTheirs = [];
   const counters = [];
   let sectionSurfaces = false;
@@ -363,15 +367,20 @@ function parseHelperArgs(yamlText) {
     } else if (clean.startsWith('--merge-counter')) {
       const spec = clean.split(/\s+/)[1];
       if (spec) counters.push(spec);
+    } else if (clean.startsWith('--merge-queue')) {
+      const queue = clean.split(/\s+/)[1];
+      if (queue) queues.push(queue);
     } else {
-      const target = line.includes('--merge-registry') ? registries : bookkeeping;
+      const target = line.includes('--merge-registry') ? registries
+        : line.includes('--merge-queue') ? queues
+          : bookkeeping;
       for (const token of clean.split(/\s+/)) {
         if (/^[\w./-]+\.(?:json|ts|mjs)$/.test(token)) target.push(token);
       }
     }
     if (!/\\\s*$/.test(line)) break; // the shell continuation ended
   }
-  return { bookkeeping, registries, takeTheirs, counters, sectionSurfaces };
+  return { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces };
 }
 
 function allowlistFromWorkflow(yamlText) {
@@ -572,6 +581,94 @@ test('a conflict on the journalist image catalog resolves instead of aborting', 
   }
 });
 
+function queueDocument(items) {
+  return `${JSON.stringify({ schema: 1, items }, null, 2)}\n`;
+}
+
+function queueItem(articleId, reason, lastFailureAt) {
+  return {
+    articleId,
+    title: `Titolo ${articleId}`,
+    fallbackImage: '/images/places/lugano-view.webp',
+    reason,
+    status: 'queued',
+    requestedAt: '2026-10-07T00:00:00.000Z',
+    lastFailureAt,
+  };
+}
+
+test('il conflitto della coda copertine unisce gli item per articleId', () => {
+  const { queues } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  assert.deepEqual(queues, [IMAGE_REGENERATION_QUEUE]);
+  const w = makeWorld();
+  try {
+    const base = queueItem('article-base', 'base', '2026-10-07T00:01:00.000Z');
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([base]));
+    commitAll(w.work, 'seed the cover regeneration queue');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    const upstreamBase = { ...base, reason: 'upstream', lastFailureAt: '2026-10-07T00:02:00.000Z' };
+    landUpstream(w, [[
+      IMAGE_REGENERATION_QUEUE,
+      queueDocument([upstreamBase, queueItem('article-upstream', 'upstream', '2026-10-07T00:03:00.000Z')]),
+      'concurrent run queues its failed cover',
+    ]]);
+
+    const replayedBase = { ...base, reason: 'replayed', lastFailureAt: '2026-10-07T00:04:00.000Z' };
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([
+      replayedBase,
+      queueItem('article-replayed', 'replayed', '2026-10-07T00:05:00.000Z'),
+    ]));
+    write(w.work, 'content/blog-body/it/articolo-con-coda.ts', 'export const cover = true\n');
+    commitAll(w.work, 'Generate blog article with cover queue item');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-queue', IMAGE_REGENERATION_QUEUE);
+    assert.equal(code, 0, `la coda deve fondersi, non abortire il rebase. Output:\n${out}`);
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${IMAGE_REGENERATION_QUEUE}`));
+    assert.deepEqual(merged.items.map((item) => item.articleId), [
+      'article-base', 'article-upstream', 'article-replayed',
+    ]);
+    assert.equal(merged.items.find((item) => item.articleId === 'article-base').reason, 'replayed');
+    assert.equal(new Set(merged.items.map((item) => item.articleId)).size, 3);
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/articolo-con-coda.ts')));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('il resolver della coda fallisce chiuso se git non riesce a leggere uno stage', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'queue-stage-read-error-'));
+  try {
+    assert.throws(
+      () => execFileSync('node', [QUEUE_RESOLVER, IMAGE_REGENERATION_QUEUE], {
+        cwd: root,
+        env: GIT_ENV,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      }),
+      (error) => {
+        assert.equal(error.status, 1);
+        assert.match(
+          String(error.stdout || '') + String(error.stderr || ''),
+          /conflitto coda copertine non dimostrabile/,
+        );
+        return true;
+      },
+    );
+  } finally {
+    rmTempTree(root);
+  }
+});
+
+test('il publisher journalist usa lo stesso rebase queue-aware', () => {
+  const workflow = readFileSync(JOURNALIST_WORKFLOW, 'utf8');
+  assert.match(
+    workflow,
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+--merge-queue data\/image-regeneration-queue\.json/,
+  );
+  assert.doesNotMatch(workflow, /git pull --rebase "\$REMOTE" "\$TARGET"/);
+});
+
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
   // Without this guard a caller that forgot its paths would degrade to exactly
   // the old behaviour, which is indistinguishable from the fix not being there.
@@ -665,13 +762,14 @@ function allIds(ids) {
 
 /** Gli argomenti che il WORKFLOW passa davvero, non una lista riscritta qui. */
 function helperArgsFromWorkflow() {
-  const { bookkeeping, registries, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+  const { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
   if (sectionSurfaces) {
     // Come nel workflow: il flag, non la sua espansione. Cosi' i casi git sotto
     // passano davvero dalla derivazione dentro rebase-onto-remote.sh.
     const derived = new Set(sectionRebaseArgs(SECTION_SURFACES));
     return [
       ...bookkeeping.filter((p) => !derived.has(p)),
+      ...queues.flatMap((p) => ['--merge-queue', p]),
       ...counters.flatMap((c) => ['--merge-counter', c]),
       ...registries.filter((r) => !derived.has(r)).flatMap((r) => ['--merge-registry', r]),
       ...takeTheirs.filter((p) => !derived.has(p)).flatMap((p) => ['--take-theirs', p]),
@@ -680,6 +778,7 @@ function helperArgsFromWorkflow() {
   }
   return [
     ...bookkeeping,
+    ...queues.flatMap((p) => ['--merge-queue', p]),
     ...counters.flatMap((c) => ['--merge-counter', c]),
     ...registries.flatMap((r) => ['--merge-registry', r]),
     ...takeTheirs.flatMap((p) => ['--take-theirs', p]),
