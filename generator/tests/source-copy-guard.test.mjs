@@ -1,10 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  condenseSourceCopyArticle,
   evaluateSourceCopy,
   generateWithSourceCopyGuard,
   getSourceCopyMode,
   logSourceCopyVerdict,
+  repairSourceCopyArticle,
   SOURCE_COPY_OVERLAP_THRESHOLD,
   sourceCopyModeBlocks,
   SourceCopyError,
@@ -12,17 +14,17 @@ import {
 
 const WORDS = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici tredici';
 
-test('la modalità anti-copia è warn per default, valida e fail-safe', () => {
+test('la modalità anti-copia è repair per default, valida e fail-safe', () => {
   const previous = process.env.ARTICLE_SOURCE_COPY_MODE;
   try {
     delete process.env.ARTICLE_SOURCE_COPY_MODE;
-    assert.equal(getSourceCopyMode(), 'warn');
+    assert.equal(getSourceCopyMode(), 'repair');
     assert.equal(sourceCopyModeBlocks(), false);
     assert.equal(getSourceCopyMode('repair'), 'repair');
     assert.equal(sourceCopyModeBlocks('repair'), false);
     assert.equal(getSourceCopyMode('enforce'), 'enforce');
     assert.equal(sourceCopyModeBlocks('enforce'), true);
-    assert.equal(getSourceCopyMode('invalid'), 'warn');
+    assert.equal(getSourceCopyMode('invalid'), 'repair');
   } finally {
     if (previous === undefined) delete process.env.ARTICLE_SOURCE_COPY_MODE;
     else process.env.ARTICLE_SOURCE_COPY_MODE = previous;
@@ -147,4 +149,101 @@ test('fallisce esplicitamente dopo il tetto di rigenerazioni', async () => {
     }),
     (error) => error instanceof SourceCopyError && error.retries === 1 && error.qualityReject === true,
   );
+});
+
+test('ripara solo il paragrafo indicato e scende sotto soglia senza rigenerare l articolo', async () => {
+  const source = 'alfa bravo charlie delta echo foxtrot golf hotel india juliet kilo lima';
+  const article = {
+    body1: `${source}. Questo paragrafo contiene anche contesto editoriale indipendente per mantenere valido il corpo.`,
+    body2: 'Secondo paragrafo con fatti verificati e contesto locale aggiuntivo.',
+    body3: 'Terzo paragrafo con una chiusura editoriale autonoma e completa.',
+  };
+  const originalBody2 = article.body2;
+  const passes = [];
+  const result = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    articleId: 'mirato',
+    mode: 'repair',
+    logger: () => {},
+    repair: async ({ targets, pass }) => {
+      passes.push({ pass, fields: targets.map((target) => target.field), paragraphs: targets.map((target) => target.paragraphIndex) });
+      return {
+        ...article,
+        body1: 'Paragrafo riformulato con fatti invariati e lessico indipendente dal testo sorgente.',
+      };
+    },
+  });
+  assert.equal(result.rejected, false);
+  assert.equal(result.verdict.safe, true);
+  assert.equal(result.passes, 1);
+  assert.deepEqual(passes, [{ pass: 1, fields: ['body1'], paragraphs: [0] }]);
+  assert.equal(result.article.body2, originalBody2);
+});
+
+test('condensa la frase incriminata quando la riparazione non cambia il testo', async () => {
+  const source = 'uno due tre quattro cinque sei sette otto nove dieci undici dodici';
+  const article = {
+    body1: `Apertura autonoma. ${source}. Chiusura con informazioni aggiuntive non copiate e utili al lettore.`,
+    body2: 'Contesto separato con abbastanza parole per evitare una copertura strutturale.',
+    body3: 'Conclusione separata.',
+  };
+  const result = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    mode: 'repair',
+    logger: () => {},
+    repair: async () => article,
+  });
+  assert.equal(result.rejected, false);
+  assert.equal(result.verdict.safe, true);
+  assert.doesNotMatch(result.article.body1, /uno due tre quattro cinque/);
+  assert.match(result.article.body1, /Apertura autonoma/);
+  assert.match(result.article.body1, /Chiusura con informazioni/);
+  assert.equal(condenseSourceCopyArticle(article, evaluateSourceCopy(source, article)).changed, true);
+});
+
+test('esenta sequenze brevi composte soprattutto da nomi propri e denominazioni/date/cifre', () => {
+  const properSource = 'Lugano Mendrisio Bellinzona Locarno Varese Como Ticino Lombardia Svizzera Italia Zurigo Milano';
+  const proper = evaluateSourceCopy(properSource, properSource);
+  assert.equal(proper.maxWords, 0);
+  assert.equal(proper.rawMaxWords, 12);
+  assert.equal(proper.sequences[0].exempt, true);
+  assert.equal(proper.sequences[0].exemptionReason, 'nomi-propri');
+
+  const officialSource = 'Accordo Italia Svizzera legge federale del 2026 Ministero dell Economia Ufficio federale delle imposte';
+  const official = evaluateSourceCopy(officialSource, officialSource);
+  assert.equal(official.maxWords, 0);
+  assert.ok(official.sequences.some((sequence) => sequence.exempt));
+  assert.equal(official.safe, true);
+
+  const figuresSource = '2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030 2031';
+  const figures = evaluateSourceCopy(figuresSource, figuresSource);
+  assert.equal(figures.maxWords, 0);
+  assert.equal(figures.sequences[0].exemptionReason, 'date-cifre');
+});
+
+test('rigetta solo una copia strutturale che nessuna delle tre passate riesce a riparare', async () => {
+  const source = Array.from({ length: 45 }, (_, index) => `parola${index}`).join(' ');
+  const article = {
+    body1: `${source}.`,
+    body2: 'Paragrafo autonomo.',
+    body3: 'Altro contenuto autonomo.',
+  };
+  let passes = 0;
+  const result = await repairSourceCopyArticle({
+    sourceText: source,
+    article,
+    mode: 'repair',
+    logger: () => {},
+    repair: async () => {
+      passes += 1;
+      return { ...article, body1: `${source}. aggiunta${passes}` };
+    },
+    condense: () => ({ article, changed: false }),
+  });
+  assert.equal(passes, 3);
+  assert.equal(result.verdict.structural, true);
+  assert.equal(result.rejected, true);
+  assert.equal(result.outcome, 'rejected');
 });

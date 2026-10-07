@@ -75,15 +75,13 @@ import {
   assertNoFabricatedReferences,
   assertNoFabricatedLaborOfficeCrossLocale,
   generateArticleImage,
+  repairGeneratedArticleSourceCopy,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
 import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import {
-  evaluateSourceCopy,
   getSourceCopyMode,
-  logSourceCopyVerdict,
-  sourceCopyModeBlocks,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { classifyJournalistImage, editorialUploadMetadata } from './lib/journalist-image-policy.mjs';
@@ -223,26 +221,28 @@ function journalistSourceText(doc) {
         : '';
 }
 
-function assertJournalistSourceCopySafe(data, sourceText) {
+async function assertJournalistSourceCopySafe(data, sourceText) {
   if (!sourceText.trim()) return null;
   const sourceCopyMode = getSourceCopyMode();
-  const verdicts = ['it', 'en', 'de', 'fr']
-    .filter((locale) => data.content[locale])
-    .map((locale) => {
-      const verdict = evaluateSourceCopy(sourceText, data.content[locale], { locale });
-      logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode);
-      return verdict;
-    });
-  const worst = verdicts.reduce((current, verdict) => verdict.maxWords > current.maxWords ? verdict : current, verdicts[0]);
-  console.error(`[source-copy] article=${data.id} max_overlap=${worst.maxWords} threshold=${worst.threshold} mode=${sourceCopyMode} locales=${verdicts.map((v) => v.locale).join(',')}`);
-  const unsafe = verdicts.find((verdict) => !verdict.safe);
-  if (unsafe && sourceCopyModeBlocks(sourceCopyMode)) {
-    throw new SourceCopyError(
-      `Anti-copia fallita per l'articolo redazionale (${unsafe.locale}): overlap massimo ${unsafe.maxWords} parole`,
-      unsafe,
+  const verdicts = [];
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    if (!data.content[locale]) continue;
+    const result = await repairGeneratedArticleSourceCopy(
+      data.content[locale],
+      sourceText,
+      { articleId: data.id, locale, mode: sourceCopyMode },
     );
+    data.content[locale] = result.article;
+    verdicts.push(result.verdict);
+    if (result.rejected) {
+      throw new SourceCopyError(
+        `Anti-copia strutturale per l'articolo redazionale (${locale}): overlap massimo ${result.verdict.maxWords} parole`,
+        result.verdict,
+        { retries: result.passes },
+      );
+    }
   }
-  return worst;
+  return verdicts.reduce((current, verdict) => verdict.maxWords > current.maxWords ? verdict : current, verdicts[0] || null);
 }
 
 function setHeroProvenance(data, imagePath, provenance) {
@@ -400,7 +400,7 @@ async function processDoc(db, FieldValue, docSnap) {
 
     await deriveJournalistContent(data, doc.content.it.body);
     const sourceText = journalistSourceText(doc);
-    assertJournalistSourceCopySafe(data, sourceText);
+    await assertJournalistSourceCopySafe(data, sourceText);
 
     console.log('  🪪 optimizing SEO metadata (optimizeSeoMetadata)...');
     optimizeSeoMetadata(data);
@@ -479,7 +479,7 @@ async function processDoc(db, FieldValue, docSnap) {
 
     console.log('  🔗 enforcing internal links (enforceStrongInternalLinks)...');
     enforceStrongInternalLinks(data);
-    assertJournalistSourceCopySafe(data, sourceText);
+    await assertJournalistSourceCopySafe(data, sourceText);
 
     console.log('  📂 registering article files (registerArticleFiles)...');
     // registerArticleFiles() derives + sanitizes data.slugs AND builds the

@@ -2520,7 +2520,7 @@
     {
       "path": "generator/scripts/lib/source-copy-guard.mjs",
       "mode": "corpus-only",
-      "reason": "Guardia pura anti-copia del testo generato: normalizza it/de/fr/en, esclude al massimo due citazioni attribuite di 25 parole e blocca overlap consecutivi di 12 parole. Il writer e il suo registro appartengono al generatore del corpus; non esiste un gemello sul sito.",
+      "reason": "Guardia pura anti-copia del testo generato: normalizza it/de/fr/en, ammette al massimo due citazioni attribuite di 25 parole, esenta solo sequenze fino a 24 parole composte soprattutto da nomi/denominazioni ufficiali/date/cifre e in modalità repair riformula i paragrafi mirati prima della condensa; il writer e il suo registro appartengono al generatore del corpus e non esiste un gemello sul sito.",
       "baseline": {
         "site": null,
         "corpus": null,

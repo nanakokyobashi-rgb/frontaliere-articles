@@ -271,13 +271,10 @@ import {
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
 import {
-  evaluateSourceCopy,
   getSourceCopyMode,
-  logSourceCopyVerdict,
-  SOURCE_COPY_MAX_RETRIES,
-  SOURCE_COPY_MAX_QUOTE_WORDS,
   SOURCE_COPY_OVERLAP_THRESHOLD,
-  sourceCopyModeBlocks,
+  applySourceCopyRepairReplacements,
+  repairSourceCopyArticle,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
@@ -5302,6 +5299,103 @@ function sourceCopyInputText(pageContent) {
   return String(pageContent || '');
 }
 
+const SOURCE_COPY_REPAIR_SCHEMA = {
+  name: 'source_copy_targeted_repair',
+  schema: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['replacements'],
+    properties: {
+      replacements: {
+        type: 'array',
+        minItems: 1,
+        maxItems: 12,
+        items: {
+          type: 'object',
+          additionalProperties: false,
+          required: ['targetIndex', 'text'],
+          properties: {
+            targetIndex: { type: 'integer', minimum: 0 },
+            text: { type: 'string', minLength: 1 },
+          },
+        },
+      },
+    },
+  },
+};
+
+const SOURCE_COPY_REPAIR_LOCALE_NAMES = {
+  it: 'italiano',
+  en: 'inglese',
+  de: 'tedesco',
+  fr: 'francese',
+};
+
+/**
+ * Rewrite only the paragraphs identified by source-copy-guard. The model
+ * receives no article-wide regeneration prompt and the returned replacements
+ * are applied to the original paragraphs in JavaScript.
+ */
+export async function repairGeneratedArticleSourceCopy(article, sourceText, {
+  articleId,
+  locale = 'it',
+  mode = getSourceCopyMode(),
+} = {}) {
+  return repairSourceCopyArticle({
+    sourceText,
+    article,
+    articleId,
+    locale,
+    mode,
+    logger: console.error,
+    repair: async ({ article: currentArticle, targets, pass }) => {
+      const targetText = targets.map((target, index) => [
+        `TARGET ${index} — paragrafo ${target.paragraphIndex} (${target.field || 'body'})`,
+        `Sequenza da riformulare: ${target.articleText}`,
+        `Testo completo del paragrafo da riscrivere:\n${target.paragraphText}`,
+      ].join('\n')).join('\n\n');
+      const messages = [
+        {
+          role: 'system',
+          content: `Sei un redattore ${SOURCE_COPY_REPAIR_LOCALE_NAMES[locale] || locale}. `
+            + 'Ripara SOLO i paragrafi numerati indicati. Riformula le frasi che ripetono la fonte, '
+            + 'mantieni tutti i fatti verificabili, nomi propri, date, cifre, citazioni attribuite, link e markdown. '
+            + 'Non aggiungere fatti e non riscrivere i paragrafi non indicati. Rispondi SOLO con JSON valido '
+            + 'nel formato {"replacements":[{"targetIndex":0,"text":"..."}]}; includi una sostituzione '
+            + 'per ogni target e usa lo stesso indice.',
+        },
+        {
+          role: 'user',
+          content: `Passata di riparazione ${pass}. Fonte di confronto (non copiarla):\n${String(sourceText).slice(0, 12000)}\n\n${targetText}`,
+        },
+      ];
+      const raw = await _aiCallLLM(messages, {
+        temperature: 0.2,
+        maxTokens: 3000,
+        timeout: 90_000,
+        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+        jsonMode: true,
+        jsonSchema: SOURCE_COPY_REPAIR_SCHEMA,
+        prefer: PREFERRED_GENERATION_MODELS,
+      });
+      const parsed = JSON.parse(repairLlmJson(raw));
+      if (!Array.isArray(parsed?.replacements)) throw new Error('source-copy repair: replacements mancanti');
+      const replacements = parsed.replacements.flatMap((replacement) => {
+        const index = Number(replacement?.targetIndex);
+        const target = Number.isInteger(index) ? targets[index] : null;
+        if (!target || typeof replacement?.text !== 'string' || !replacement.text.trim()) return [];
+        return [{
+          field: target.field,
+          paragraphIndex: target.paragraphIndex,
+          text: replacement.text,
+        }];
+      });
+      if (!replacements.length) throw new Error('source-copy repair: nessuna sostituzione valida');
+      return applySourceCopyRepairReplacements(currentArticle, replacements);
+    },
+  });
+}
+
 /**
  * Factuality choke point shared by the AI path and the direct writers.
  * `registerArticleFiles()` is also called by the deterministic producers,
@@ -9920,12 +10014,6 @@ ${sourceContext._identityRefinement}
 Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore reale specifico dell'articolo, non il segnaposto), senza ripetere il valore appena rigettato.`
     : '';
 
-  const sourceCopyRefinementInstruction = sourceContext?._sourceCopyRefinement
-    ? `\n\n⚠️ TENTATIVO PRECEDENTE RIGETTATO — testo troppo vicino alla fonte:
-${sourceContext._sourceCopyRefinement}
-Riformula da zero il corpo italiano: non riutilizzare alcuna sequenza di ${SOURCE_COPY_OVERLAP_THRESHOLD} o più parole consecutive della fonte, salvo al massimo due citazioni brevi, attribuite e tra virgolette, di non più di ${SOURCE_COPY_MAX_QUOTE_WORDS} parole ciascuna.`
-    : '';
-
   // ── Multi-call generation with automatic model fallback ──
   // Supports model override via sourceContext._forceModel and temperature via sourceContext._temperature
   const forceModel = sourceContext?._forceModel;
@@ -10112,7 +10200,6 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // 12-token margin for the headline+fact-check combination alone): a single
   // relevant note beats three where two are stale.
   const _remediationFull = identityRefinementInstruction
-    || sourceCopyRefinementInstruction
     || (headlineRefinementInstruction + factCheckRefinementInstruction);
   const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
   const _shrinkLadder = [
@@ -16470,10 +16557,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // id/slug rejection regenerated blind instead of being told what to fix.
   /** @type {string|null} */
   let lastIdentityErrors = null;
-  // Carries the previous source-copy verdict into the next prompt so the model
-  // is explicitly told to paraphrase rather than repeat the rejected run.
-  /** @type {string|null} */
-  let lastSourceCopyErrors = null;
   // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
   // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
   let lastPromptTokenBudget = 0;
@@ -16539,7 +16622,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Tracks the model used by the immediately preceding attempt, for
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
-  let sourceCopyRetries = 0;
   const sourceCopyMode = getSourceCopyMode();
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
@@ -16612,9 +16694,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // Surface the previous attempt's id/slug rejection so callGemini can
       // tell the model exactly what was wrong with the value it echoed back.
       _identityRefinement: lastIdentityErrors || undefined,
-      // Surface the previous article/source overlap so the next body is
-      // regenerated with an explicit paraphrase instruction.
-      _sourceCopyRefinement: lastSourceCopyErrors || undefined,
       // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
       // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
       _promptTokenBudget: lastPromptTokenBudget || undefined,
@@ -16789,27 +16868,20 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       }
       throw validationErr;
     }
-    const sourceCopyVerdict = evaluateSourceCopy(
-      sourceCopyInputText(pageContent),
+    const sourceCopyResult = await repairGeneratedArticleSourceCopy(
       data.content.it,
-      { locale: 'it' },
+      sourceCopyInputText(pageContent),
+      { articleId: data.id, locale: 'it', mode: sourceCopyMode },
     );
-    logSourceCopyVerdict(data.id, sourceCopyVerdict, console.error, sourceCopyMode);
-    if (!sourceCopyVerdict.safe && sourceCopyModeBlocks(sourceCopyMode)) {
-      lastSourceCopyErrors = `Massimo overlap rilevato: ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}). `
-        + 'Riformula il corpo senza copiare la fonte.';
-      if (sourceCopyRetries < SOURCE_COPY_MAX_RETRIES && attempt < maxAttempts) {
-        sourceCopyRetries += 1;
-        console.error(`  🔄 Anti-copia: overlap di ${sourceCopyVerdict.maxWords} parole — rigenero (${sourceCopyRetries}/${SOURCE_COPY_MAX_RETRIES})...`);
-        continue;
-      }
+    data.content.it = sourceCopyResult.article;
+    if (sourceCopyResult.rejected) {
       throw new SourceCopyError(
-        `Anti-copia fallita: overlap massimo ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD})`,
-        sourceCopyVerdict,
-        { retries: sourceCopyRetries },
+        `Anti-copia strutturale: overlap massimo ${sourceCopyResult.verdict.maxWords} parole consecutive `
+          + `(soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}, coverage ${(sourceCopyResult.verdict.coverageRatio * 100).toFixed(1)}%)`,
+        sourceCopyResult.verdict,
+        { retries: sourceCopyResult.passes },
       );
     }
-    lastSourceCopyErrors = null;
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
@@ -17630,16 +17702,28 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     } catch { /* invalid URL — skip */ }
   }
 
-  // Final anti-copy check runs after citation/CTA/sanitizer mutations and on
-  // every published locale. The Italian check above is the regenerable gate;
-  // this is the fail-closed publication gate for the exact bytes we are about
-  // to write.
+  // Final anti-copy pass runs after citation/CTA/sanitizer mutations and on
+  // every published locale. Translations use the same targeted repair and
+  // condensation path; a full article regeneration is never triggered here.
   const sourceCopyFinalSource = sourceCopyInputText(pageContent);
-  const sourceCopyFinalVerdicts = ['it', 'en', 'de', 'fr'].map((locale) => {
-    const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
-    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode);
-    return verdict;
-  });
+  const sourceCopyFinalVerdicts = [];
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    if (!data.content[locale]) continue;
+    const result = await repairGeneratedArticleSourceCopy(
+      data.content[locale],
+      sourceCopyFinalSource,
+      { articleId: data.id, locale, mode: sourceCopyMode },
+    );
+    data.content[locale] = result.article;
+    sourceCopyFinalVerdicts.push(result.verdict);
+    if (result.rejected) {
+      throw new SourceCopyError(
+        `Anti-copia strutturale dopo le trasformazioni finali (${locale}): overlap massimo ${result.verdict.maxWords} parole consecutive`,
+        result.verdict,
+        { retries: result.passes },
+      );
+    }
+  }
   const worstSourceCopy = sourceCopyFinalVerdicts.reduce(
     (worst, verdict) => verdict.maxWords > worst.maxWords ? verdict : worst,
     sourceCopyFinalVerdicts[0],
@@ -17648,15 +17732,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     `[source-copy] article=${data.id} max_overlap=${worstSourceCopy.maxWords}`
       + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} mode=${sourceCopyMode} locales=it,en,de,fr`,
   );
-  const unsafeSourceCopy = sourceCopyFinalVerdicts.find((verdict) => !verdict.safe);
-  if (unsafeSourceCopy && sourceCopyModeBlocks(sourceCopyMode)) {
-    throw new SourceCopyError(
-      `Anti-copia fallita dopo le trasformazioni finali (${unsafeSourceCopy.locale}): `
-        + `overlap massimo ${unsafeSourceCopy.maxWords} parole consecutive`,
-      unsafeSourceCopy,
-      { retries: sourceCopyRetries },
-    );
-  }
 
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
   console.error(`   ID: ${data.id}`);
