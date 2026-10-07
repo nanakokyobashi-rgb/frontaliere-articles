@@ -7868,6 +7868,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ffs-sportelli-chiusi-stazioni.title': 'SBB schließt die Schalter in 13 Bahnhöfen ab 1. Januar',
     'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## Kurz gesagt - Ab dem 1. Januar schließen sie an 13 Stationen die Türen. - Die Personalpunkte werden von 115 auf 102 erhöht. - 97% der Titel werden von den Kanälen übertragen',
     'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Schweizer Bahnhof mit geschlossenem Schalter und Selbstbedienungsgeräten im Vordergrund',
+    'blog.article.intelligenza-artificiale-diritti-umani.title': 'Künstliche Intelligenz: Auswirkungen auf die Menschenrechte',
+    'blog.article.intelligenza-artificiale-diritti-umani.excerpt': '## Auf einen Blick - 63. Tagung des Menschenrechtsrats in Genf - Die Schweiz leitete eine Koalition zur Übergangsjustiz - Privatsphäre',
+    'blog.article.intelligenza-artificiale-diritti-umani.imageAlt': 'Schweizer Büro mit Team, das ethische KI für Personalwesen und Wohnraum nutzt',
 };
 
 export default blogMetaChDe;
