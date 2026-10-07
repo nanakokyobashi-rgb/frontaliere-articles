@@ -8875,7 +8875,7 @@ async function scanNewsSources() {
       // la fonte lo da', e' parte del testo giudicato.
       const gateText = IS_CANTON && h.lead ? `${text} ${h.lead}` : text;
       const anchored = IS_CANTON
-        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url, h._cantonSourceUrl)
+        ? SECTION_PROFILE.anchors(`${h.headline || ''} ${h.lead || ''}`, h.url, h._cantonSourceUrl, h._cantonFilterBy)
         : hasDomainAnchor(text) || localNewsCandidate;
       if (dropAnchorless && !anchored) {
         droppedAnchor += 1;

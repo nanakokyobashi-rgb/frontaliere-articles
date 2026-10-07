@@ -300,12 +300,25 @@ test('feed Unterwalden: gli alias condivisi entrano in entrambi i profili, URL l
     { headline: 'Eiffelturm, Burj Khalifa – und jetzt Engelberg', url: 'https://www.unterwalden24.ch/engelberg' },
     { headline: 'Mehr Sicherheit am Lopper', url: 'https://www.nw.ch/_rte/information/138826' },
   ];
+  const filteredNw = filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'NW' } }, headlines);
   assert.deepEqual(
-    filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'NW' } }, headlines).map((h) => h.headline),
+    filteredNw.map((h) => h.headline),
     [headlines[0].headline, headlines[2].headline],
   );
+  assert.equal(filteredNw[0]._cantonFilterBy, 'NW');
+  assert.equal(
+    nw.anchors(filteredNw[0].headline, filteredNw[0].url, 'https://www.unterwalden24.ch/feed/'),
+    false,
+    'un alias condiviso non filtra da solo il feed regionale',
+  );
+  assert.equal(
+    nw.anchors(filteredNw[0].headline, filteredNw[0].url, 'https://www.unterwalden24.ch/feed/', filteredNw[0]._cantonFilterBy),
+    true,
+    'la prova del filtro autorizza la voce gia\' separata',
+  );
+  const filteredOw = filterCantonSourceHeadlines(ow, { quirks: { filterByCanton: 'OW' } }, headlines);
   assert.deepEqual(
-    filterCantonSourceHeadlines(ow, { quirks: { filterByCanton: 'OW' } }, headlines).map((h) => h.headline),
+    filteredOw.map((h) => h.headline),
     [headlines[0].headline, headlines[1].headline],
   );
 });

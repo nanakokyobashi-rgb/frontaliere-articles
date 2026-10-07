@@ -598,10 +598,15 @@ export function filterCantonSourceHeadlines(profile, source, headlines) {
   const aliases = SHARED_CANTON_AREA_ALIASES[wanted] || [];
   const textAliases = aliases.filter((alias) => !alias.includes('.ch'));
   const urlAliases = wanted === 'NW' ? ['nw.ch'] : wanted === 'OW' ? ['ow.ch'] : [];
-  return (headlines || []).filter((h) => {
+  const filtered = (headlines || []).filter((h) => {
     const text = `${h.headline || ''} ${h.lead || ''}`;
     return profile?.isLocalArea?.(text) || termHits(text, textAliases) > 0 || termHits(h.url || '', urlAliases) > 0;
   });
+  // Il filtro ha già dimostrato che questa voce appartiene al cantone
+  // dichiarato. Conserviamo la prova come metadato interno: il successivo
+  // anchor-gate non deve riconoscere di nuovo gli alias condivisi come se
+  // fossero un feed regionale non filtrato.
+  return filtered.map((h) => ({ ...h, _cantonFilterBy: wanted }));
 }
 
 /**
@@ -666,7 +671,8 @@ export function buildCantonProfile(section, deps) {
      * fonte e' una testata/ente `.ch` di questo solo cantone, o (fonti del
      * lato estero) parla di frontalieri.
      */
-    anchors(text, url, sourceUrl) {
+    anchors(text, url, sourceUrl, cantonFilterBy) {
+      if (String(cantonFilterBy || '').trim().toUpperCase() === code) return true;
       if (isLocalArea(text)) return true;
       if (termHits(text, institutionNames) > 0) return true;
       const host = registrableHost(url || '');
