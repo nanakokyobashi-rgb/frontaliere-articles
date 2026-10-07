@@ -321,6 +321,8 @@ import {
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
+import { deriveSeoMetadata, normalizeSeoTitle } from './lib/seo-metadata-derivation.mjs';
+import { appendSeoEntrySource, BASE_URL, buildSeoEntry, toIsoWithTz } from './lib/seo-entry-builder.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
@@ -420,6 +422,8 @@ import {
   RegisterLockError,
   isRegisterLockError,
   isRegisterLockHeld as isRegisterLockHeldImpl,
+  snapshotRegistrationTargets,
+  restoreRegistrationTargets,
 } from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
@@ -1470,8 +1474,6 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
 // ── Config ──────────────────────────────────────────────────
 // Text calls go through centralized ai-models.mjs. Image calls go through the
 // shared governed engine imported above.
-const BASE_URL = 'https://frontaliereticino.ch';
-
 // Model aliases for callLLM opts (used by callers that pass opts.model)
 const GH_MODEL_HEAVY = AI_MODELS.GPT4O;
 const GH_MODEL_LIGHT = AI_MODELS.GPT4O_MINI;
@@ -3058,15 +3060,15 @@ function write(rel, content) {
 // The 9-file article registration (router, blog list, i18n, three locale
 // files, SEO service, sitemap, sitemap-news — both here and in the primary
 // AI flow's own write step, which duplicates the same sequence instead of
-// calling registerArticleFiles()) has no cross-file transaction: each write()
-// above is atomic on its OWN target (issue #561), but nothing stops a kill —
-// or any other failure — landing BETWEEN two of the nine calls, which leaves
-// the corpus with an id registered in some files and not others.
+// calling registerArticleFiles()) uses per-target atomic writes plus a
+// whole-target snapshot. A normal error between two calls restores the
+// pre-registration state; an uncatchable kill leaves the lock for the next
+// run's fail-closed split check.
 // `generate-article.yml`'s two-section retry loop runs this script twice in
 // the SAME checkout, so a killed first attempt's partial writes are still on
 // disk when the second attempt's `git add -A` later sweeps everything into
-// one commit — nothing before this lock ever compared the 9 files against
-// each other to catch it.
+// one commit — the snapshot closes the ordinary error path and the lock
+// remains the fail-closed evidence for an uncatchable interruption.
 //
 // The lock mechanism itself lives in lib/register-lock.mjs, not here — see
 // that module's header for why (this file imports jsdom statically, so
@@ -13803,133 +13805,22 @@ function loadExistingItTitlesExcluding(currentArticleId) {
   return others;
 }
 
-/** Extract a 4-digit year from data.date or data.id (slug). */
-function extractArticleYear(data) {
-  if (data.date) {
-    const d = new Date(data.date);
-    if (!isNaN(d.getTime())) return String(d.getFullYear());
-  }
-  const m = String(data.id || '').match(/\b(20[2-3]\d)\b/);
-  return m ? m[1] : '';
-}
-
-/** Extract a known city/region token from the slug (best-effort). */
-function extractArticleCity(slug) {
-  const KNOWN = [
-    { key: 'lugano', name: 'Lugano' },
-    { key: 'mendrisio', name: 'Mendrisio' },
-    { key: 'bellinzona', name: 'Bellinzona' },
-    { key: 'locarno', name: 'Locarno' },
-    { key: 'chiasso', name: 'Chiasso' },
-    { key: 'ticino', name: 'Ticino' },
-    { key: 'milano', name: 'Milano' },
-    { key: 'como', name: 'Como' },
-    { key: 'varese', name: 'Varese' },
-    { key: 'lombardia', name: 'Lombardia' },
-  ];
-  const cleaned = String(slug || '').toLowerCase();
-  for (const c of KNOWN) {
-    if (cleaned.includes(c.key)) return c.name;
-  }
-  return '';
-}
-
 function optimizeSeoMetadata(data) {
-  const it = data.content?.it || {};
-  if (!data.seo) data.seo = {};
-
-  // ── Collision prevention (mirror og-pages runtime disambiguator) ──
-  // The og-pages plugin appends " (2026)" / " — Bellinzona" / FNV hash at
-  // build time when two articles produce the same base <title>. Prevent
-  // those runtime disambiguators by mutating it.title HERE — at create
-  // time — so the base title is unique by construction. Tracked by the
-  // audit:title-no-disambig-hash ratchet (data/title-no-disambig-hash-baseline.json).
-  const initialItTitle = String(it.title || data.id || 'Articolo frontalieri')
-    .replace(/\s*\|\s*Frontaliere Ticino$/i, '')
-    .trim();
-  const existingTitles = loadExistingItTitlesExcluding(data.id);
-  if (existingTitles.has(initialItTitle.toLowerCase())) {
-    const year = extractArticleYear(data);
-    const city = extractArticleCity(data.id);
-    let mutated = initialItTitle;
-    if (year && !mutated.includes(year)) {
-      mutated = `${mutated} (${year})`;
-      console.error(`  🪪 Collisione titolo IT — aggiunto anno: "${mutated}"`);
-    } else if (city && !mutated.toLowerCase().includes(city.toLowerCase())) {
-      mutated = `${mutated} — ${city}`;
-      console.error(`  🪪 Collisione titolo IT — aggiunta città: "${mutated}"`);
-    }
-    if (mutated !== initialItTitle && !existingTitles.has(mutated.toLowerCase())) {
-      it.title = mutated;
-    } else {
-      // Anno e città non sufficienti (o già nel titolo). Throw DUPLICATO
-      // così il retry loop in main() ripesca un altro headline invece di
-      // killare il workflow. Rule #1 (zero tolleranza) resta rispettata:
-      // l'articolo duplicato non viene pubblicato.
-      console.error(`  ❌ Titolo IT "${initialItTitle}" collide con un articolo esistente.`);
-      console.error(`     Anno (${year || 'n/a'}) e città (${city || 'n/a'}) non bastano a disambiguare — provo un altro headline.`);
-      throw new Error(`DUPLICATO: titolo IT "${initialItTitle}" collide con un articolo esistente`);
-    }
-  }
-
-  // Universal rule (mirrors build-plugins/shared/titleSuffix.ts):
-  // headline VERBATIM; brand suffix appended only when the total stays
-  // within TITLE_MAX_CHARS (60 target + 10 % tolerance = 66). No headline
-  // truncation — if the headline alone exceeds the cap, audit:title-length
-  // flags it and the AI prompt must regenerate a shorter title.
-  const TITLE_SUFFIX = ' | Frontaliere Ticino';
-  const TITLE_MAX_CHARS = 66;
-  const seoTitleCore = String(it.title || data.id || 'Articolo frontalieri')
-    .replace(/\s*\|\s*Frontaliere Ticino$/i, '')
-    .trim();
-  const candidate = `${seoTitleCore}${TITLE_SUFFIX}`;
-  data.seo.title = candidate.length <= TITLE_MAX_CHARS ? candidate : seoTitleCore;
+  const optimized = deriveSeoMetadata(data, {
+    existingTitles: loadExistingItTitlesExcluding(data.id),
+    log: (message) => console.error(message),
+  });
+  // Keep the generator's two persisted title fields on the same repair source
+  // as the pure derivation module; the second call is intentionally idempotent.
+  const seoTitleCore = normalizeSeoTitle(data.seo.title);
   data.seo.ogTitle = data.seo.ogTitle ? String(data.seo.ogTitle).trim() : seoTitleCore;
   data.seo.headline = data.seo.headline ? String(data.seo.headline).trim() : seoTitleCore;
-  // The model's character cap can leave either persisted field as a strict
-  // prefix of the editorial title (for example, ending on `per` or `cosa`).
-  // Repair only that provable shape, using the shared clause helper; unrelated
-  // model output remains visible for the existing quality gates to reject.
-  for (const { field, before, after } of repairSeoTitleFields(data.seo, seoTitleCore)) {
-    console.error(`  🔧 SEO ${field} ⇐ content.it.title ("${before}" → "${after}")`);
-  }
-  // Non-vuota per la stessa ragione del `title` sopra: il breadcrumb finisce
-  // nel JSON-LD `BreadcrumbList`, dove una `name` vuota e' un item invalido, e
-  // il budget qui e' 42 — meta' del `title`, quindi il ramo del rifiuto scatta
-  // ancora piu' spesso su un `seoTitleCore` derivato dallo slug.
-  data.seo.breadcrumbName = truncateToClauseNonEmpty(
-    data.seo.breadcrumbName || seoTitleCore.split(/[:.–—]/)[0] || 'Articolo',
-    42,
-  );
-
-  let desc = String(data.seo.description || it.excerpt || '').replace(/\s+/g, ' ').trim();
-  if (!desc) desc = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati 2026.`;
-  if (desc.length < 145) {
-    desc = `${desc}${desc.endsWith('.') ? '' : '.'} Dati aggiornati 2026 per frontalieri in Ticino.`;
-  }
-  data.seo.description = truncateAtWordBoundary(desc, 160);
-  data.seo.ogDescription = truncateAtWordBoundary(
-    data.seo.ogDescription || data.seo.description,
-    SEO_OG_DESCRIPTION_MAX,
-  );
-
-  const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida']);
-  const isStopYear = (w) => /^(19|20)\d{2}$/.test(w);
-  const terms = `${it.title || ''} ${it.excerpt || ''} ${data.id || ''}`
-    .toLowerCase()
-    .replace(/[^a-z0-9àèéìòùäöüßç\s-]/gi, ' ')
-    .split(/\s+/)
-    .filter((w) => w.length > 3 && !STOP.has(w) && !isStopYear(w));
-
-  const uniqueTerms = [];
-  for (const t of terms) {
-    if (!uniqueTerms.includes(t)) uniqueTerms.push(t);
-    if (uniqueTerms.length >= 4) break;
-  }
-  const baseKeywords = ['frontalieri', 'ticino', 'svizzera', 'italia'];
-  data.seo.keywords = [...baseKeywords, ...uniqueTerms].slice(0, 8).join(', ');
-
-  return data;
+  repairSeoTitleFields(data.seo, seoTitleCore);
+  // Keep the non-empty breadcrumb postcondition at the generator boundary as
+  // well as in the pure derivation module; both calls use the same shared
+  // clause primitive and the latter is idempotent.
+  data.seo.breadcrumbName = truncateToClauseNonEmpty(data.seo.breadcrumbName, 42);
+  return optimized;
 }
 
 /**
@@ -14882,26 +14773,6 @@ function modifyLocaleFile(data, locale) {
   writeSectionLocale(data, locale);
 }
 
-function toIsoWithTz(date = new Date()) {
-  // Esempio output: 2026-02-26T09:51:00+01:00 (con offset locale)
-  const pad = (n) => String(n).padStart(2, '0')
-  const y = date.getFullYear()
-  const m = pad(date.getMonth() + 1)
-  const d = pad(date.getDate())
-  const hh = pad(date.getHours())
-  const mm = pad(date.getMinutes())
-  const ss = pad(date.getSeconds())
-
-  const offMin = -date.getTimezoneOffset() // minuti rispetto a UTC
-  const sign = offMin >= 0 ? '+' : '-'
-  const abs = Math.abs(offMin)
-  const offH = pad(Math.floor(abs / 60))
-  const offM = pad(abs % 60)
-
-  return `${y}-${m}-${d}T${hh}:${mm}:${ss}${sign}${offH}:${offM}`
-}
-
-
 const SEO_ENTITY_FIELDS = ['title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'headline', 'breadcrumbName'];
 
 function decodeSeoEntities(data) {
@@ -14913,13 +14784,12 @@ function decodeSeoEntities(data) {
 
 function modifySeoService(data) {
   decodeSeoEntities(data);
-  const publishedAt = toIsoWithTz(new Date())
-  const modifiedAt = publishedAt
+  const publishedAt = toIsoWithTz(new Date());
+  const modifiedAt = publishedAt;
 
   if (!data._generatedImagePath) {
     throw new Error(`No governed or recorded catalog hero image for article ${data.id}`);
   }
-  const imagePath = data._generatedImagePath.replace(/^\//, '');
   const provenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
   if (!provenance) {
     throw new Error(`Hero image has no valid provenance record: ${data._generatedImagePath}`);
@@ -14955,63 +14825,17 @@ function modifySeoService(data) {
   // the active section's localized IT hub slug.
   const blogSeoFile = SECTION.seoFile;
   let blogSrc = read(blogSeoFile);
-  const itHub = SECTION.hubSlug.it;
-  // Both article sections use the site's trailing-slash canonical contract.
-  const itHubPath = `/${itHub}/${data.slugs.it}/`;
-
-  const seoEntry = `
-  'blog-${data.id}': {
-    title: '${escapeForSingleQuoteTS(data.seo.title)}',
-    description: '${escapeForSingleQuoteTS(data.seo.description)}',
-    keywords: '${escapeForSingleQuoteTS(data.seo.keywords)}',
-    ogTitle: '${escapeForSingleQuoteTS(data.seo.ogTitle)}',
-    ogDescription: '${escapeForSingleQuoteTS(data.seo.ogDescription)}',
-    canonicalPath: '${itHubPath}',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "${String(data.seo.headline || '').replace(/"/g, '\\"')}",
-      "description": "${String(data.seo.description || '').replace(/"/g, '\\"')}",
-      "image": {
-        "@type": "ImageObject",${imageRightsLines}
-        "url": \`\${BASE_URL}/${imagePath}\`,
-        "width": ${imageWidth},
-        "height": ${imageHeight},
-        "caption": "${String(data.imageAlt?.it || data.seo.headline || '').replace(/"/g, '\\"')}"
-      },
-      "datePublished": "${publishedAt}",
-      "dateModified": "${modifiedAt}",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "${BASE_URL}/autori/${data.author?.slug || 'redazione'}/#person",
-        "name": "${String(data.author?.name || 'Redazione Frontaliere Ticino').replace(/"/g, '\\"')}",
-        "url": "${BASE_URL}/autori/${data.author?.slug || 'redazione'}/"
-      },
-      "publisher": {"@id": "${BASE_URL}/#organization"},
-      "mainEntityOfPage": \`\${BASE_URL}${itHubPath.endsWith('/') ? itHubPath : `${itHubPath}/`}\`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },`;
-
-  // Insert before the closing }; ... export default <CONST>;
-  // The const-name regex matches any frontaliere split variant
-  // (BLOG_SEO_METADATA, _2, … _5) or the svizzera BLOG_CH_SEO_METADATA.
-  const seoConst = SECTION.seoConstName;
-  const seoConstReSrc = SECTION.updateRouterUnion
-    ? `${seoConst}(?:_\\d+)?`   // frontaliere split chunks
-    : escapeRegex(seoConst);    // svizzera single file
-  const blogEndRe = new RegExp(`(\\s*\\},)\\s*(\\n};)\\s*(\\nexport default ${seoConstReSrc};)`);
-  if (blogEndRe.test(blogSrc)) {
-    blogSrc = replaceCaptureSafe(blogSrc, blogEndRe, (_m, g1, g2, g3) => `${g1}\n${seoEntry}\n${g2}\n${g3}`);
-  } else {
-    // Empty metadata object (first article) — anchor to the `= {` opener.
-    const emptyOpenRe = new RegExp(`(const ${escapeRegex(seoConst)}[^=]*=\\s*\\{)(\\s*\\n)(\\};)`);
-    if (!emptyOpenRe.test(blogSrc)) {
-      throw new Error(`Cannot find end (or empty-object opener) of ${seoConst} in ${corpusPath(blogSeoFile)}`);
-    }
-    blogSrc = replaceCaptureSafe(blogSrc, emptyOpenRe, (_m, g1, g2, g3) => `${g1}\n${seoEntry}\n${g3}`);
-  }
+  const seoEntry = buildSeoEntry(data, {
+    provenance,
+    publishedAt,
+    modifiedAt,
+    hubSlug: SECTION.hubSlug.it,
+  });
+  blogSrc = appendSeoEntrySource(blogSrc, seoEntry, {
+    seoConstName: SECTION.seoConstName,
+    updateRouterUnion: SECTION.updateRouterUnion,
+    fileLabel: corpusPath(blogSeoFile),
+  });
   write(blogSeoFile, blogSrc);
   console.error(`  ✅ ${corpusPath(blogSeoFile)}`);
 
@@ -19131,20 +18955,43 @@ export async function registerArticleFiles(data, opts = {}) {
   // publish-boundary check immediately adjacent to their write lock too.
   assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });
   beginRegisterLock(data.id);
-  modifyRouterTs(data);
-  modifyBlogArticlesTsx(data);
-  modifyI18nTs(data);
-  modifyLocaleFile(data, 'en');
-  modifyLocaleFile(data, 'de');
-  modifyLocaleFile(data, 'fr');
-  modifySeoService(data);
-  modifySitemap(data);
-  if (!opts.skipNews) modifySitemapNews(data);
-  validateStructuredData(data);
-  // Chiudi il marker solo dopo che anche la validazione strutturale ha
-  // approvato il payload appena registrato; in caso contrario il marker deve
-  // obbligare il run successivo a riesaminare la registrazione (#1126).
-  endRegisterLock();
+  const registrationSnapshot = snapshotRegistrationTargets(registerLockTargets(data.id));
+  try {
+    modifyRouterTs(data);
+    modifyBlogArticlesTsx(data);
+    modifyI18nTs(data);
+    modifyLocaleFile(data, 'en');
+    modifyLocaleFile(data, 'de');
+    modifyLocaleFile(data, 'fr');
+    modifySeoService(data);
+    modifySitemap(data);
+    if (!opts.skipNews) modifySitemapNews(data);
+    validateStructuredData(data);
+    // Chiudi il marker solo dopo che anche la validazione strutturale ha
+    // approvato il payload appena registrato; in caso contrario il marker deve
+    // obbligare il run successivo a riesaminare la registrazione (#1126).
+    endRegisterLock();
+  } catch (error) {
+    try {
+      restoreRegistrationTargets(registrationSnapshot, {
+        writeFile: (target, content) => write(target.label, content),
+        removeFile: (target) => {
+          try {
+            unlinkSync(target.absPath);
+          } catch (removeError) {
+            if (removeError?.code !== 'ENOENT') throw removeError;
+          }
+        },
+      });
+      // The snapshot is whole-file recovery for ordinary errors. A failed
+      // rollback leaves the lock in place so the next run stops fail-closed.
+      endRegisterLock();
+    } catch (rollbackError) {
+      error.rollbackError = rollbackError;
+      console.error(`  ❌ Rollback registrazione incompleto: ${rollbackError.message}`);
+    }
+    throw error;
+  }
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
   // passing it keep working; there is simply nothing left to skip.

@@ -148,6 +148,10 @@ export const CONTENT_GATES = [
   // coerenza registry/SEO/blob della cover dedicata. Legge il corpus reale e
   // deve quindi aprire l'alert di main se un produttore reintroduce il difetto.
   'generator/tests/article-publication-contract.test.mjs',
+  // Il registro e il motore SEO sono due superfici scritte dalla stessa
+  // pipeline: una voce in una sola delle due lascia l'articolo non renderizzabile
+  // o fa servire una SEO per un id che il registro non conosce.
+  'generator/tests/content-seo-registry-parity.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',
