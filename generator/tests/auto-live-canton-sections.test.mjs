@@ -160,6 +160,14 @@ test('hub mancante/corrotto non passa il gate e il flip pronto e\' idempotente',
   });
   assert.equal(report.sections[0].reason, 'hubs-invalid');
   assert.deepEqual(report.readySections, []);
+  await assert.rejects(
+    () => applyRegistryTransitions(incomplete, {
+      mode: 'promote',
+      sections: ['canton-lu'],
+      requireReady: false,
+    }),
+    /transizione non pronta/u,
+  );
 
   const root = fixtureRoot();
   const pages = expectedSectionPages('canton-lu', { root });

@@ -436,6 +436,7 @@ export async function applyRegistryTransitions(root = process.cwd(), {
   const doc = registryDocument(root);
   const expected = mode === 'promote' ? 'draft' : 'live';
   const next = mode === 'promote' ? 'live' : 'draft';
+  const mustBeReady = mode === 'promote' || requireReady;
   const toChange = [];
   for (const section of ids) {
     const entry = doc.sections[section];
@@ -444,10 +445,10 @@ export async function applyRegistryTransitions(root = process.cwd(), {
     if (entry.status !== expected) throw new Error(`${section}: atteso status ${expected}, trovato ${entry.status}`);
     toChange.push(section);
   }
-  const plan = requireReady && toChange.length > 0
+  const plan = mustBeReady && toChange.length > 0
     ? await planSections(root, { mode, sections: toChange, siteBase, cdnBase, probe: mode === 'promote', fetchImpl })
     : null;
-  if (requireReady && toChange.length > 0 && plan.readySections.length !== toChange.length) {
+  if (mustBeReady && toChange.length > 0 && plan.readySections.length !== toChange.length) {
     throw new Error(`transizione non pronta: ${plan.sections.filter((report) => !report.ready).map((report) => `${report.section}:${report.reason}`).join(', ')}`);
   }
   const changed = [];
