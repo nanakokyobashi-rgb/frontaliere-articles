@@ -438,6 +438,8 @@ test('un dispatch della catena prova il fallback anche se l\'evento è workflow_
 test('il marker chain_link del mode arriva davvero allo step di generazione', () => {
   const mode = extractRun('Resolve run mode and section');
   assert.match(mode, /CHAIN_LINK="\$\{\{ needs\.admit\.outputs\.chain_link \}\}"/);
+  assert.match(mode, /ADMIT_MODE="\$\{\{ needs\.admit\.outputs\.run_mode \}\}"/);
+  assert.match(mode, /ADMIT_MODE.*unknown[\s\S]*CHAIN=true/, 'un compare unknown deve restare nella lane writer, mai dry');
   assert.doesNotMatch(mode, /inputs\.chain_depth/, 'il parser del marker deve avere una sola sorgente');
   assert.match(
     WF,
@@ -814,6 +816,46 @@ test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', ()
   assert.ok(
     !/topic-candidates|data\/\*\*|- 'data\//.test(onBlock),
     'un run senza articolo scrive solo data/: metterlo nei paths riarma la ricorsione senza contenuto',
+  );
+});
+
+test('un push su content/** non viene scartato se il producer è ancora in volo', () => {
+  const admit = extractRun('Skip when a generation is already in flight');
+  assert.match(admit, /content_push=false/);
+  assert.ok(
+    admit.includes('while IFS= read -r changed_path') && admit.includes('content/*)'),
+    'il gate deve riconoscere il push che porta l articolo prima del confronto con le run in volo',
+  );
+  assert.doesNotMatch(admit, /grep -q '\^content\//, 'il match non deve chiudere la pipe sotto pipefail');
+  assert.match(admit, /successor_push=false/);
+  assert.match(admit, /compare_status=0/);
+  assert.match(
+    admit,
+    /compare_payload=\$\(gh api --paginate --slurp[\s\S]*\) \|\| compare_status=\$\?/,
+    'lo status di compare non deve essere nascosto da `|| true`',
+  );
+  assert.match(admit, /compare_file_count=0/);
+  assert.match(admit, /300\|\[3-9\]\[0-9\]\[0-9\]/);
+  assert.match(admit, /compare_truncated=true/);
+  const compareFailureAt = admit.indexOf('if [ "$compare_status" -ne 0 ] || [ "$compare_truncated" = "true" ]; then');
+  assert.ok(compareFailureAt >= 0, 'un compare fallito deve avere un ramo esplicito');
+  assert.ok(
+    admit.slice(compareFailureAt).includes('successor_push=true'),
+    'un push non classificabile deve essere ammesso come successore per non perdere la catena',
+  );
+  assert.match(WF, /content_push: \$\{\{ steps\.check\.outputs\.content_push \}\}/);
+  assert.match(WF, /run_mode: \$\{\{ steps\.check\.outputs\.run_mode \}\}/);
+  assert.match(admit, /content_push=true/);
+  const olderAt = admit.indexOf('if [ "$older" -gt 0 ]; then');
+  const allowAt = admit.indexOf('if [ "$successor_push" = "true" ]; then', olderAt);
+  const skipAt = admit.indexOf('GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown', olderAt);
+  assert.ok(olderAt >= 0, 'il confronto con le run precedenti è sparito');
+  assert.ok(allowAt > olderAt, 'il push content deve essere valutato nel ramo delle run precedenti');
+  assert.ok(skipAt > allowAt, 'lo skip resta per schedule/dispatch ma non può precedere l eccezione content push');
+  assert.match(
+    WF,
+    /concurrency:\n(?:      #.*\n)*      group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && 'generate-article' \|\| 'generate-article-dry' \}\}\n      cancel-in-progress: false/,
+    'production e compare unknown condividono il lock legacy; il self-test dry resta separato',
   );
 });
 
