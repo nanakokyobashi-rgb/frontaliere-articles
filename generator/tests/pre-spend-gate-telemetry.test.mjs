@@ -141,7 +141,11 @@ function makeGate({
   anchor = () => null,
   topicalHits = () => 0,
   isFrontaliere = true,
+  isCanton = false,
   section = 'frontaliere',
+  runStartMs = Date.now(),
+  runWallBudgetMs = 600_000,
+  cantonClassifierDeadlineMs = 45_000,
   // Il default di PRODUZIONE con `PRESPEND_GATE_MAX_CLASSIFIER` non impostata,
   // letto dal sorgente. Un test che vuole misurare il comportamento COL tetto
   // lo passa esplicito, esattamente come farebbe chi imposta la variabile.
@@ -162,9 +166,14 @@ function makeGate({
     },
   };
   const fakeConsole = { error: (...a) => logs.push(a.join(' ')) };
+  const classifierDeadlines = [];
   const gate = new Function(
     'IS_FRONTALIERE',
+    'IS_CANTON',
     'SECTION_NAME',
+    'RUN_START_MS',
+    'RUN_WALL_BUDGET_MS',
+    'CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS',
     'matchesFrontaliereAnchor',
     'matchesFrontaliereUnambiguousAnchor',
     'classifyFrontaliereRelevance',
@@ -179,10 +188,17 @@ function makeGate({
     `${GATE_SRC}\nreturn applyPreSpendTopicGate;`,
   )(
     isFrontaliere,
+    isCanton,
     section,
+    runStartMs,
+    runWallBudgetMs,
+    cantonClassifierDeadlineMs,
     anchor,
     () => false, // never bypass — every candidate must reach the classifier
-    async (headline) => ({ relevant: relevant(headline), reason: relevant(headline) ? 'ok' : 'relevant=no; off-topic' }),
+    async (headline, _summary, _url, deadlineMs) => {
+      classifierDeadlines.push(deadlineMs);
+      return { relevant: relevant(headline), reason: relevant(headline) ? 'ok' : 'relevant=no; off-topic' };
+    },
     topicalHits,
     () => {},
     runReport,
@@ -194,10 +210,21 @@ function makeGate({
     5,
     resolvePositiveIntEnv,
   );
-  return { gate, logs, runReport };
+  return { gate, logs, runReport, classifierDeadlines };
 }
 
 const hl = (...titles) => titles.map((headline) => ({ headline, url: `https://example.test/${encodeURIComponent(headline)}` }));
+
+test('il gate cantonale condivide una deadline assoluta fra tutti i classifier', async () => {
+  const { gate, classifierDeadlines } = makeGate({
+    isCanton: true,
+    section: 'canton-ti',
+    relevant: () => true,
+  });
+  await gate(hl('prima headline', 'seconda headline', 'terza headline'));
+  assert.equal(classifierDeadlines.length, 3);
+  assert.equal(new Set(classifierDeadlines).size, 1, 'ogni classificazione deve ricevere la stessa deadline assoluta');
+});
 
 function totalRejectionLine(logs) {
   return logs.find((l) => l.startsWith('PRESPEND_GATE_TOTAL_REJECTION'));

@@ -472,6 +472,16 @@ test('il ramo NEWS di una sezione CANTONALE resta sotto il tetto e porta le righ
   assert.match(ch.prompt, /a livello NAZIONALE\. Esempi di nesso reale/, 'premessa: la svizzera tiene la sua REGOLA #0');
 });
 
+test('le tre sezioni pilota non superano il cap grezzo del prompt news', () => {
+  const canton = ['canton-ti', 'canton-gr', 'canton-be'].map((section) => ({ section, ...newsPrompt({}, section) }));
+  for (const item of canton) {
+    assert.ok(
+      item.rawEstTokens <= PROMPT_TOKEN_RAW_CEILING,
+      `${item.section}: prompt grezzo ${item.rawEstTokens} sopra ${PROMPT_TOKEN_RAW_CEILING}`,
+    );
+  }
+});
+
 test('il ramo NEWS regge anche il retry, che e\' il tentativo piu\' pesante', () => {
   // I retry riducono la fonte (4500) ma aggiungono il feedback del fact-check
   // e quello sulla headline: il saldo e' in salita, quindi il caso peggiore
