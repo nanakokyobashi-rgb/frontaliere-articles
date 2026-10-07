@@ -817,6 +817,27 @@ test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', ()
   );
 });
 
+test('un push su content/** non viene scartato se il producer è ancora in volo', () => {
+  const admit = extractRun('Skip when a generation is already in flight');
+  assert.match(admit, /content_push=false/);
+  assert.ok(
+    admit.includes("printf '%s\\n' \"$changed\" | grep -q '^content/'"),
+    'il gate deve riconoscere il push che porta l articolo prima del confronto con le run in volo',
+  );
+  assert.match(admit, /content_push=true/);
+  const olderAt = admit.indexOf('if [ "$older" -gt 0 ]; then');
+  const allowAt = admit.indexOf('if [ "$content_push" = "true" ]; then', olderAt);
+  const skipAt = admit.indexOf('GENERATION_OUTCOME kind=skipped reason=admit-in-flight section=unknown', olderAt);
+  assert.ok(olderAt >= 0, 'il confronto con le run precedenti è sparito');
+  assert.ok(allowAt > olderAt, 'il push content deve essere valutato nel ramo delle run precedenti');
+  assert.ok(skipAt > allowAt, 'lo skip resta per schedule/dispatch ma non può precedere l eccezione content push');
+  assert.match(
+    WF,
+    /concurrency:\n      group: generate-article\n      cancel-in-progress: false/,
+    'la sicurezza contro la sovrapposizione resta nel job generate',
+  );
+});
+
 // QUESTO TEST DICEVA IL CONTRARIO fino al 2026-08-18, e la sostituzione e' il
 // punto. Diceva «il workflow non dispatcha se stesso», perche' chainare sul RUN
 // invece che sull'ARTICOLO e' la forma che gira a vuoto: un generatore che
