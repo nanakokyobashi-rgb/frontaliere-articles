@@ -333,6 +333,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:15:11.286Z",
       "lastFailureAt": "2026-10-07T10:15:11.286Z"
+    },
+    {
+      "articleId": "lavoro-ar-rav-settembre-2026",
+      "title": "Appenzello Esterno: disoccupazione al 1,5% a settembre",
+      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
+      "reason": "All image providers failed for article-lavoro-ar-rav-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:17:50.903Z",
+      "lastFailureAt": "2026-10-07T10:17:50.903Z"
     }
   ]
 }
