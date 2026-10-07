@@ -5155,11 +5155,21 @@
     {
       "path": "scripts/ci/requeue-quota-lease.mjs",
       "mode": "corpus-only",
-      "reason": "Helper zero-dipendenze per la transizione atomica di requeue dopo un lease quota negato, usato esclusivamente dai workflow corpus `issue-decompose.yml` e `issue-fix.yml` per ritentare mutazioni GitHub transitorie senza consumare un tentativo dell'agente. Il sito non ha questi consumer e non deve importare questo codice, quindi non esiste un gemello da portare.",
+      "reason": "Helper zero-dipendenze per la transizione atomica di requeue dopo un lease quota negato e sorgente unica del retry bounded condiviso con `release-quota-lease.mjs`, usato dai workflow corpus `issue-decompose.yml` e `issue-fix.yml` per ritentare mutazioni GitHub transitorie senza consumare un tentativo dell'agente. Il sito non ha questi consumer e non deve importare questo codice, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
         "corpus": "bc5a72d18b99a03e",
         "alignedAt": "2026-10-02"
+      }
+    },
+    {
+      "path": "scripts/ci/release-quota-lease.mjs",
+      "mode": "corpus-only",
+      "reason": "Wrapper zero-dipendenze `releaseLeaseWithRetry()` per il cleanup idempotente del lease quota: rende osservabile un errore release del gate e ritenta solo errori GitHub transitori con backoff bounded. E' usato dai quattro consumer corpus del lease; il sito non possiede questi workflow adattati e non deve importare questo codice.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-07"
       }
     },
     {

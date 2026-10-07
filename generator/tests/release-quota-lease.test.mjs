@@ -25,6 +25,7 @@ test('releaseLeaseWithRetry ritenta una release transient e conserva il strict m
     checkScript: CHECK_SCRIPT,
     maxAttempts: 3,
     retryDelayMs: 10,
+    env: { ...process.env, QUOTA_LEASE_ACTION: 'release' },
     sleep: (ms) => sleeps.push(ms),
     log: (line) => logs.push(line),
     exec: (_bin, args, options) => {
@@ -40,7 +41,7 @@ test('releaseLeaseWithRetry ritenta una release transient e conserva il strict m
   assert.equal(logs.length, 2);
   assert.deepEqual(calls[0].args, [CHECK_SCRIPT]);
   assert.equal(calls[0].options.env.QUOTA_LEASE_STRICT_RELEASE, '1');
-  assert.equal(calls[0].options.env.QUOTA_LEASE_ACTION, undefined);
+  assert.equal(calls[0].options.env.QUOTA_LEASE_ACTION, 'release');
 });
 
 test('releaseLeaseWithRetry non nasconde un errore permanente', () => {
