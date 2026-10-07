@@ -4250,8 +4250,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "320513a99dc1b432",
-        "corpus": "320513a99dc1b432",
+        "site": "9cc5b734a3ede617",
+        "corpus": "9cc5b734a3ede617",
         "alignedAt": "2026-10-07"
       }
     },
@@ -4306,9 +4306,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3aec2f36e957dac1",
-        "corpus": "3aec2f36e957dac1",
-        "alignedAt": "2026-09-23"
+        "site": "e7e7ded5e06643d0",
+        "corpus": "e7e7ded5e06643d0",
+        "alignedAt": "2026-10-07"
       }
     },
     {
