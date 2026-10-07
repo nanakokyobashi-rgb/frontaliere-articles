@@ -1,0 +1,692 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vd:fisco",
+  "section": "canton-vd",
+  "canton": "VD",
+  "topic": "fisco",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "6d012b0562a2b3bb443e47727e4f27f32d47f339dc42e2bc15f916b991776ac1",
+  "blocks": [
+    {
+      "id": "onere-fiscale",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "imposta-alla-fonte",
+      "updatedAt": "2026-10-05T07:54:42.677Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VD",
+      "topic": "fisco",
+      "locale": "it",
+      "intro": "Nel Canton Vaud, imposte sul reddito, imposta alla fonte e scadenze dipendono dalle regole cantonali oltre che da quelle federali. Questa pagina riunisce l’onere fiscale di riferimento, le aliquote dell’imposta alla fonte, gli avvisi dell’autorità fiscale e gli articoli della redazione sul fisco.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Onere fiscale su 100.000 CHF lordi",
+          "value": "16,72 %",
+          "note": "Lausanne, 2026",
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)"
+        },
+        {
+          "label": "Imposta alla fonte su 8000 CHF al mese",
+          "value": "13,46 %",
+          "note": "tariffa A0, 2026",
+          "sourceName": "Autorità fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Onere fiscale 2026",
+          "description": "Imposte cantonali, comunali e federali sul reddito in percentuale del reddito lordo annuo, per una persona sola senza figli residente nel capoluogo.",
+          "items": [
+            {
+              "label": "Reddito lordo di 30.000 CHF (Lausanne)",
+              "value": "0,66 %"
+            },
+            {
+              "label": "Reddito lordo di 60.000 CHF (Lausanne)",
+              "value": "11,6 %"
+            },
+            {
+              "label": "Reddito lordo di 100.000 CHF (Lausanne)",
+              "value": "16,72 %"
+            },
+            {
+              "label": "Reddito lordo di 150.000 CHF (Lausanne)",
+              "value": "21,21 %"
+            },
+            {
+              "label": "Reddito lordo di 250.000 CHF (Lausanne)",
+              "value": "27,96 %"
+            }
+          ],
+          "sourceName": "Amministrazione federale delle contribuzioni (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Imposta alla fonte 2026",
+          "description": "Aliquota dell’imposta alla fonte sul salario lordo mensile per il codice tariffario A0 (persona sola senza figli), dalle tariffe ufficiali del cantone.",
+          "items": [
+            {
+              "label": "Salario mensile di 4000 CHF (A0)",
+              "value": "4,49 %"
+            },
+            {
+              "label": "Salario mensile di 6000 CHF (A0)",
+              "value": "11,19 %"
+            },
+            {
+              "label": "Salario mensile di 8000 CHF (A0)",
+              "value": "13,46 %"
+            },
+            {
+              "label": "Salario mensile di 10.000 CHF (A0)",
+              "value": "15,69 %"
+            },
+            {
+              "label": "Salario mensile di 15.000 CHF (A0)",
+              "value": "20,69 %"
+            }
+          ],
+          "sourceName": "Autorità fiscale cantonale",
+          "sourceUrl": "https://www.vd.ch/etat-droit-finances/impots/impot-a-la-source-pour-les-employeurs-et-les-personnes-imposees-a-la-source",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
+              "date": "2026-08-26T16:00:54.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Dichiarazione imposte Svizzera: guida Vaud 2026",
+          "url": "/articoli-svizzera/guida-fiscale-vaud-2026/",
+          "excerpt": "Tre livelli fiscali, moltiplicatore comunale e procedura online: la guida 2026 alla dichiarazione in Svizzera con focus sul canton Vaud.",
+          "date": "2026-10-03T11:04:13.754Z"
+        },
+        {
+          "title": "Imposte cantonali nel canton Vaud: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-vaud-aliquote/",
+          "excerpt": "Sistema fiscale a 3 livelli, aliquote progressive per scaglioni di reddito, deduzioni ammesse e portale ufficiale del canton Vaud per le dichiarazioni.",
+          "date": "2026-09-04T03:23:19.992Z"
+        },
+        {
+          "title": "Vaud, taglio fiscale del 12% sul reddito e sulla sostanza",
+          "url": "/articoli-svizzera/vaud-riduzione-reddito-sostanza/",
+          "excerpt": "Il Vaud approva una riduzione del 12% delle imposte cantonali su reddito e sostanza. Si parla di 272 milioni in meno dal prossimo 1° gennaio.",
+          "date": "2026-09-28T21:32:07.062Z"
+        },
+        {
+          "title": "Scontro sulle tasse: sfida alla voracità fiscale nel Canton Vaud",
+          "url": "/articoli-svizzera/scontro-tasse-vodese-2024/",
+          "excerpt": "L'iniziativa del 12% propone uno sconto del 12% sull'imposta cantonale sul reddito e sul patrimonio.",
+          "date": "2026-08-17T13:10:46.376Z"
+        },
+        {
+          "title": "Imposta cantonale: confronto Svizzera 2026 - Cantone Vaud",
+          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-vaud/",
+          "excerpt": "Il cantone Vaud ha un'aliquota di imposta cantonale del 10,5%.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
+          "title": "Imposta successione e donazione nel Cantone di Vaud",
+          "url": "/articoli-svizzera/imposta-successione-donazione-vaud/",
+          "excerpt": "Guida alle aliquote e alle esenzioni per eredi e donatari nel sistema fiscale del Cantone di Vaud, con focus sui rapporti di parentela.",
+          "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Imposta cantonale: confronto 2026 e focus sul Canton Vaud",
+          "url": "/articoli-svizzera/confronto-imposte-cantonali-2026/",
+          "excerpt": "Analisi delle aliquote fiscali cantonali per il 2026, differenze tra i cantoni svizzeri e focus specifico sul sistema fiscale del Canton Vaud.",
+          "date": "2026-08-02T02:12:08.749Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolatore dello stipendio netto",
+          "url": "/calcola-stipendio/"
+        },
+        {
+          "label": "Strumenti su tasse e pensione",
+          "url": "/tasse-e-pensione/"
+        },
+        {
+          "label": "Dichiarazione dei redditi in Svizzera",
+          "url": "/tasse-e-pensione/dichiarazione-redditi-svizzera/"
+        },
+        {
+          "label": "Scadenze fiscali",
+          "url": "/tasse-e-pensione/scadenze-fiscali/"
+        },
+        {
+          "label": "Guida alla tassazione dei frontalieri",
+          "url": "/guida-tassazione-frontalieri-2026/"
+        },
+        {
+          "label": "Tutte le notizie sul fisco",
+          "url": "/fisco/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "VD",
+      "topic": "fisco",
+      "locale": "en",
+      "intro": "In the canton of Vaud, income tax, withholding tax and deadlines depend on cantonal rules as well as federal ones. This page brings together the reference tax burden, the withholding tax rates, notices from the tax authority and our articles on tax.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Tax burden on 100,000 CHF gross",
+          "value": "16.72%",
+          "note": "Lausanne, 2026",
+          "sourceName": "Federal Tax Administration (FTA)"
+        },
+        {
+          "label": "Withholding tax on 8,000 CHF a month",
+          "value": "13.46%",
+          "note": "tariff A0, 2026",
+          "sourceName": "Cantonal tax authority"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Tax burden 2026",
+          "description": "Cantonal, municipal and federal income tax as a share of gross annual income, for a single person without children living in the cantonal capital.",
+          "items": [
+            {
+              "label": "Gross income of 30,000 CHF (Lausanne)",
+              "value": "0.66%"
+            },
+            {
+              "label": "Gross income of 60,000 CHF (Lausanne)",
+              "value": "11.6%"
+            },
+            {
+              "label": "Gross income of 100,000 CHF (Lausanne)",
+              "value": "16.72%"
+            },
+            {
+              "label": "Gross income of 150,000 CHF (Lausanne)",
+              "value": "21.21%"
+            },
+            {
+              "label": "Gross income of 250,000 CHF (Lausanne)",
+              "value": "27.96%"
+            }
+          ],
+          "sourceName": "Federal Tax Administration (FTA)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Withholding tax 2026",
+          "description": "Withholding tax rate on the gross monthly wage for tariff code A0 (single person without children), from the canton’s official tariffs.",
+          "items": [
+            {
+              "label": "Monthly wage of 4,000 CHF (A0)",
+              "value": "4.49%"
+            },
+            {
+              "label": "Monthly wage of 6,000 CHF (A0)",
+              "value": "11.19%"
+            },
+            {
+              "label": "Monthly wage of 8,000 CHF (A0)",
+              "value": "13.46%"
+            },
+            {
+              "label": "Monthly wage of 10,000 CHF (A0)",
+              "value": "15.69%"
+            },
+            {
+              "label": "Monthly wage of 15,000 CHF (A0)",
+              "value": "20.69%"
+            }
+          ],
+          "sourceName": "Cantonal tax authority",
+          "sourceUrl": "https://www.vd.ch/etat-droit-finances/impots/impot-a-la-source-pour-les-employeurs-et-les-personnes-imposees-a-la-source",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
+              "date": "2026-08-26T16:00:54.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Swiss tax return: Vaud 2026 guide",
+          "url": "/en/swiss-articles/swiss-tax-return-vaud-2026/",
+          "excerpt": "Three tax levels, municipal multiplier and online procedure: the 2026 guide to filing a tax return in Switzerland with a focus on the canton of Vaud.",
+          "date": "2026-10-03T11:04:13.754Z"
+        },
+        {
+          "title": "Cantonal taxes in the canton of Vaud: rates and deductions",
+          "url": "/en/swiss-articles/canton-vaud-cantonal-tax-rates/",
+          "excerpt": "3-tier tax system, progressive rates for income brackets, allowable deductions and official portal of the canton of Vaud for declarations.",
+          "date": "2026-09-04T03:23:19.992Z"
+        },
+        {
+          "title": "Vaud, 12% tax cut on income and wealth",
+          "url": "/en/swiss-articles/vaud-tax-cut-income-wealth/",
+          "excerpt": "Vaud approves a 12% reduction in cantonal income and substance taxes. There is talk of 272 million less from next January 1.",
+          "date": "2026-09-28T21:32:07.062Z"
+        },
+        {
+          "title": "Tax Clash: Challenging Tax Voracity in the Canton of Vaud",
+          "url": "/en/swiss-articles/tax-clash-challenging-tax-voracity-in-the-canton-of-vaud/",
+          "excerpt": "The 12% initiative proposes a 12% discount on cantonal income and wealth tax.",
+          "date": "2026-08-17T13:10:46.376Z"
+        },
+        {
+          "title": "Cantonal tax: comparison Switzerland 2026 - Canton Vaud",
+          "url": "/en/swiss-articles/tax-cantonal-comparison-switzerland-2026-canton-vaud/",
+          "excerpt": "The canton of Vaud has a cantonal tax rate of 10.5%.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
+          "title": "Tax succession and donation in the Canton of Vaud",
+          "url": "/en/swiss-articles/inheritance-gift-tax-vaud-canton/",
+          "excerpt": "Guide to rates and exemptions for heirs and donors in the tax system of the Canton of Vaud, with a focus on kinship relationships.",
+          "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Cantonal tax: comparison 2026 and focus on the canton of Vaud",
+          "url": "/en/swiss-articles/cantonal-tax-comparison-2026-vaud/",
+          "excerpt": "Analysis of cantonal tax rates for 2026, differences between Swiss cantons and specific focus on the tax system of the Canton of Vaud.",
+          "date": "2026-08-02T02:12:08.749Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Net salary calculator",
+          "url": "/en/calculate-salary/"
+        },
+        {
+          "label": "Tax and pension tools",
+          "url": "/en/taxes-and-pension/"
+        },
+        {
+          "label": "Tax return in Switzerland",
+          "url": "/en/taxes-and-pension/tax-return-switzerland/"
+        },
+        {
+          "label": "Tax deadlines",
+          "url": "/en/taxes-and-pension/tax-deadlines/"
+        },
+        {
+          "label": "Cross-border taxation guide",
+          "url": "/en/cross-border-taxation-guide-2026/"
+        },
+        {
+          "label": "All tax news",
+          "url": "/en/tax/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "VD",
+      "topic": "fisco",
+      "locale": "de",
+      "intro": "In der Waadt hängen Einkommenssteuern, Quellensteuer und Fristen von den kantonalen Regeln ebenso ab wie von den eidgenössischen. Diese Seite bündelt die Steuerbelastung als Referenz, die Quellensteuersätze, die Mitteilungen der Steuerbehörde und die Artikel der Redaktion zu Steuern.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Steuerbelastung bei 100’000 CHF brutto",
+          "value": "16.72 %",
+          "note": "Lausanne, 2026",
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)"
+        },
+        {
+          "label": "Quellensteuer bei 8’000 CHF pro Monat",
+          "value": "13.46 %",
+          "note": "Tarif A0, 2026",
+          "sourceName": "Kantonale Steuerbehörde"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Steuerbelastung 2026",
+          "description": "Kantons-, Gemeinde- und Bundessteuern auf dem Einkommen in Prozent des Bruttojahreseinkommens für eine alleinstehende Person ohne Kinder mit Wohnsitz im Kantonshauptort.",
+          "items": [
+            {
+              "label": "Bruttoeinkommen von 30’000 CHF (Lausanne)",
+              "value": "0.66 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 60’000 CHF (Lausanne)",
+              "value": "11.6 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 100’000 CHF (Lausanne)",
+              "value": "16.72 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 150’000 CHF (Lausanne)",
+              "value": "21.21 %"
+            },
+            {
+              "label": "Bruttoeinkommen von 250’000 CHF (Lausanne)",
+              "value": "27.96 %"
+            }
+          ],
+          "sourceName": "Eidgenössische Steuerverwaltung (ESTV)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Quellensteuer 2026",
+          "description": "Quellensteuersatz auf dem Bruttomonatslohn für den Tarifcode A0 (alleinstehend, ohne Kinder) gemäss den offiziellen Tarifen des Kantons.",
+          "items": [
+            {
+              "label": "Monatslohn von 4’000 CHF (A0)",
+              "value": "4.49 %"
+            },
+            {
+              "label": "Monatslohn von 6’000 CHF (A0)",
+              "value": "11.19 %"
+            },
+            {
+              "label": "Monatslohn von 8’000 CHF (A0)",
+              "value": "13.46 %"
+            },
+            {
+              "label": "Monatslohn von 10’000 CHF (A0)",
+              "value": "15.69 %"
+            },
+            {
+              "label": "Monatslohn von 15’000 CHF (A0)",
+              "value": "20.69 %"
+            }
+          ],
+          "sourceName": "Kantonale Steuerbehörde",
+          "sourceUrl": "https://www.vd.ch/etat-droit-finances/impots/impot-a-la-source-pour-les-employeurs-et-les-personnes-imposees-a-la-source",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
+              "date": "2026-08-26T16:00:54.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Steuererklärung Schweiz: Leitfaden Vaud 2026",
+          "url": "/de/schweiz-artikel/steuererklaerung-waadt-2026/",
+          "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und Online-Verfahren: der Leitfaden 2026 zur Steuererklärung in der Schweiz mit Fokus auf den Kanton Waadt.",
+          "date": "2026-10-03T11:04:13.754Z"
+        },
+        {
+          "title": "Kantonale Steuern im Kanton Waadt: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kanton-waadt-kantonssteuer-saetze/",
+          "excerpt": "3-stufiges Steuersystem, progressive Steuersätze für Einkommensstufen, zulässige Abzüge und offizielles Portal des Kantons Waadt für Erklärungen.",
+          "date": "2026-09-04T03:23:19.992Z"
+        },
+        {
+          "title": "Waadt, Steuersenkung von 12% auf Einkommen und Vermögen",
+          "url": "/de/schweiz-artikel/vaud-steuersenkung-einkommen-vermoegen/",
+          "excerpt": "Das Waadtland genehmigt eine Senkung der kantonalen Einkommens- und Vermögenssteuern um 12%. Man spricht von 272 Millionen weniger ab dem 1. Januar.",
+          "date": "2026-09-28T21:32:07.062Z"
+        },
+        {
+          "title": "Steuerstreit: Herausforderung Steuergier im Kanton Waadt",
+          "url": "/de/schweiz-artikel/steuerstreit-herausforderung-steuergier-im-kanton-waadt/",
+          "excerpt": "Die 12% -Initiative schlägt einen Rabatt von 12% auf die kantonale Einkommens- und Vermögenssteuer vor.",
+          "date": "2026-08-17T13:10:46.376Z"
+        },
+        {
+          "title": "Kantonssteuer: Vergleich Schweiz 2026 - Kanton Waadt",
+          "url": "/de/schweiz-artikel/steuerliche-vergleichung-schweiz-2026-kanton-vaud/",
+          "excerpt": "Der Kanton Waadt hat einen kantonalen Steuersatz von 10,5%.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer im Kanton Waadt",
+          "url": "/de/schweiz-artikel/erbschaft-schenkungssteuer-kanton-waadt/",
+          "excerpt": "Leitfaden zu den Steuersätzen und Befreiungen für Erben und Schenkende im Steuersystem des Kantons Waadt mit Schwerpunkt auf Verwandtschaftsverhältnissen.",
+          "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Kantonssteuer: Vergleich 2026 und Fokus auf den Kanton Waadt",
+          "url": "/de/schweiz-artikel/kantonale-steuervergleich-2026-waadt/",
+          "excerpt": "Analyse der kantonalen Steuersätze für 2026, Unterschiede zwischen Schweizer Kantonen und besonderer Fokus auf das Steuersystem des Kantons Vaud.",
+          "date": "2026-08-02T02:12:08.749Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Nettolohn-Rechner",
+          "url": "/de/gehalt-berechnen/"
+        },
+        {
+          "label": "Tools zu Steuern und Vorsorge",
+          "url": "/de/steuern-und-vorsorge/"
+        },
+        {
+          "label": "Steuererklärung in der Schweiz",
+          "url": "/de/steuern-und-vorsorge/steuererklaerung-schweiz/"
+        },
+        {
+          "label": "Steuerfristen",
+          "url": "/de/steuern-und-vorsorge/steuerfristen/"
+        },
+        {
+          "label": "Leitfaden zur Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-besteuerung-leitfaden-2026/"
+        },
+        {
+          "label": "Alle Steuer-Nachrichten",
+          "url": "/de/steuern/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "VD",
+      "topic": "fisco",
+      "locale": "fr",
+      "intro": "Dans le canton de Vaud, l’impôt sur le revenu, l’impôt à la source et les échéances dépendent des règles cantonales autant que des règles fédérales. Cette page réunit la charge fiscale de référence, les taux de l’impôt à la source, les avis de l’autorité fiscale et les articles de la rédaction sur la fiscalité.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Charge fiscale sur 100 000 CHF bruts",
+          "value": "16,72 %",
+          "note": "Lausanne, 2026",
+          "sourceName": "Administration fédérale des contributions (AFC)"
+        },
+        {
+          "label": "Impôt à la source sur 8 000 CHF par mois",
+          "value": "13,46 %",
+          "note": "barème A0, 2026",
+          "sourceName": "Autorité fiscale cantonale"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "onere-fiscale",
+          "title": "Charge fiscale 2026",
+          "description": "Impôts cantonaux, communaux et fédéraux sur le revenu en pourcentage du revenu brut annuel, pour une personne seule sans enfant domiciliée au chef-lieu.",
+          "items": [
+            {
+              "label": "Revenu brut de 30 000 CHF (Lausanne)",
+              "value": "0,66 %"
+            },
+            {
+              "label": "Revenu brut de 60 000 CHF (Lausanne)",
+              "value": "11,6 %"
+            },
+            {
+              "label": "Revenu brut de 100 000 CHF (Lausanne)",
+              "value": "16,72 %"
+            },
+            {
+              "label": "Revenu brut de 150 000 CHF (Lausanne)",
+              "value": "21,21 %"
+            },
+            {
+              "label": "Revenu brut de 250 000 CHF (Lausanne)",
+              "value": "27,96 %"
+            }
+          ],
+          "sourceName": "Administration fédérale des contributions (AFC)",
+          "sourceUrl": "https://swisstaxcalculator.estv.admin.ch/#/taxburden/income-wealth-tax",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "imposta-alla-fonte",
+          "title": "Impôt à la source 2026",
+          "description": "Taux de l’impôt à la source sur le salaire brut mensuel pour le code tarifaire A0 (personne seule sans enfant), d’après les barèmes officiels du canton.",
+          "items": [
+            {
+              "label": "Salaire mensuel de 4 000 CHF (A0)",
+              "value": "4,49 %"
+            },
+            {
+              "label": "Salaire mensuel de 6 000 CHF (A0)",
+              "value": "11,19 %"
+            },
+            {
+              "label": "Salaire mensuel de 8 000 CHF (A0)",
+              "value": "13,46 %"
+            },
+            {
+              "label": "Salaire mensuel de 10 000 CHF (A0)",
+              "value": "15,69 %"
+            },
+            {
+              "label": "Salaire mensuel de 15 000 CHF (A0)",
+              "value": "20,69 %"
+            }
+          ],
+          "sourceName": "Autorité fiscale cantonale",
+          "sourceUrl": "https://www.vd.ch/etat-droit-finances/impots/impot-a-la-source-pour-les-employeurs-et-les-personnes-imposees-a-la-source",
+          "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Le peuple se prononcera sur l’initiative populaire «Baisse d’impôts pour tous»",
+              "date": "2026-08-26T16:00:54.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Déclaration d'impôts en Suisse : guide Vaud 2026",
+          "url": "/fr/articles-suisse/declaration-impots-vaud-2026/",
+          "excerpt": "Trois niveaux fiscaux, multiplicateur communal et procédure en ligne : le guide 2026 de la déclaration en Suisse, avec un focus sur le canton de Vaud.",
+          "date": "2026-10-03T11:04:13.754Z"
+        },
+        {
+          "title": "Impôts cantonaux dans le canton de Vaud : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-vaud-taux/",
+          "excerpt": "Système fiscal à 3 niveaux, taux progressifs par tranches de revenus, déductions admises et portail officiel du canton de Vaud pour les déclarations.",
+          "date": "2026-09-04T03:23:19.992Z"
+        },
+        {
+          "title": "Vaud, réduction d'impôt de 12 % sur le revenu et la fortune",
+          "url": "/fr/articles-suisse/vaud-baisse-impots-revenu-fortune/",
+          "excerpt": "Le Vaud approuve une réduction de 12% des impôts cantonaux sur le revenu et la fortune. On parle de 272 millions de moins à partir du 1er janvier prochain.",
+          "date": "2026-09-28T21:32:07.062Z"
+        },
+        {
+          "title": "Choc fiscal : défi à la voracité fiscale dans le canton de Vaud",
+          "url": "/fr/articles-suisse/choc-fiscal-defi-a-la-voracite-fiscale-dans-le-canton-de-vaud/",
+          "excerpt": "L'initiative des 12% propose une remise de 12% sur l'impôt cantonal sur le revenu et la fortune.",
+          "date": "2026-08-17T13:10:46.376Z"
+        },
+        {
+          "title": "Impôt cantonal : comparaison Suisse 2026 - Canton de Vaud",
+          "url": "/fr/articles-suisse/comparaison-fiscale-suisse-2026-canton-vaud/",
+          "excerpt": "Le canton de Vaud a un taux d'imposition cantonal de 10,5 %.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
+          "title": "Impôt succession et donation dans le canton de Vaud",
+          "url": "/fr/articles-suisse/impot-succession-donation-canton-vaud/",
+          "excerpt": "Guide des taux et des exonérations pour les héritiers et les donataires dans le système fiscal du canton de Vaud, en mettant l'accent sur les relations de parenté.",
+          "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Taxe cantonale : comparaison 2026 et focus sur le canton de Vaud",
+          "url": "/fr/articles-suisse/comparaison-impots-cantonaux-2026-vaud/",
+          "excerpt": "Analyse des taux d’imposition cantonaux pour 2026, des différences entre les cantons suisses et l’attention particulière portée au système fiscal du canton de Vaud.",
+          "date": "2026-08-02T02:12:08.749Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calculateur de salaire net",
+          "url": "/fr/calculer-salaire/"
+        },
+        {
+          "label": "Outils impôts et retraite",
+          "url": "/fr/impots-et-retraite/"
+        },
+        {
+          "label": "Déclaration de revenus en Suisse",
+          "url": "/fr/impots-et-retraite/declaration-revenus-suisse/"
+        },
+        {
+          "label": "Échéances fiscales",
+          "url": "/fr/impots-et-retraite/echeances-fiscales/"
+        },
+        {
+          "label": "Guide de l’imposition des frontaliers",
+          "url": "/fr/guide-imposition-frontaliers-2026/"
+        },
+        {
+          "label": "Toute l’actualité fiscale",
+          "url": "/fr/fiscalite/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

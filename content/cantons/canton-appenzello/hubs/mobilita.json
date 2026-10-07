@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-appenzello:mobilita",
+  "section": "canton-appenzello",
+  "canton": "APPENZELLO",
+  "topic": "mobilita",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "8ba7a5ee43f02d179b4c2b43ab99479d7077ca7d3afe6c66fffcb49fb2b73467",
+  "blocks": [
+    {
+      "id": "chiusure-cantieri",
+      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "APPENZELLO",
+      "topic": "mobilita",
+      "locale": "it",
+      "intro": "In Appenzello, spostarsi per lavoro significa fare i conti con cantieri, chiusure, trasporto pubblico e, dove c’è un confine, con le attese ai valichi. Questa pagina riunisce le limitazioni in corso, i tempi di attesa rilevati e gli articoli della redazione su traffico e trasporti.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Cantieri attivi o imminenti",
+          "value": "1",
+          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Chiusure, cantieri e disagi",
+          "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
+          "items": [
+            {
+              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
+              "value": "Traffico",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
+            },
+            {
+              "label": "Appenzell-Grossviehschau",
+              "value": "Traffico",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
+            },
+            {
+              "label": "Oberegg - Viehschau",
+              "value": "Traffico",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            }
+          ],
+          "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
+              "date": "2026-09-16T09:23:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+            },
+            {
+              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
+              "date": "2026-09-16T08:40:00.000Z",
+              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+            },
+            {
+              "label": "Sanierung Einlenker Haslerstegstrasse",
+              "date": "2026-09-14T09:57:00.000Z",
+              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
+            },
+            {
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abbonamenti trasporti Appenzello Interno: zone tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-appenzello-interno/",
+          "excerpt": "Trasporti pubblici ad Appenzello Interno: comunità tariffaria, zone, abbonamenti annuali e mensili, metà-prezzo, GA, sconti per studenti e apprendisti.",
+          "date": "2026-09-03T05:33:21.516Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcolo del costo dell’auto per pendolari",
+          "url": "/guida-frontaliere/costo-auto-pendolare/"
+        },
+        {
+          "label": "Tutte le notizie sui trasporti",
+          "url": "/trasporti/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "APPENZELLO",
+      "topic": "mobilita",
+      "locale": "en",
+      "intro": "In Appenzell, getting to work means dealing with roadworks, closures, public transport and, where there is a border, waiting times at the crossings. This page brings together current restrictions, measured waiting times and our articles on traffic and transport.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Roadworks active or imminent",
+          "value": "1",
+          "note": "reports as of 6 October 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Closures, roadworks and disruptions",
+          "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
+          "items": [
+            {
+              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
+              "value": "Traffic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
+            },
+            {
+              "label": "Appenzell-Grossviehschau",
+              "value": "Traffic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
+            },
+            {
+              "label": "Oberegg - Viehschau",
+              "value": "Traffic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            }
+          ],
+          "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
+              "date": "2026-09-16T09:23:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+            },
+            {
+              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
+              "date": "2026-09-16T08:40:00.000Z",
+              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+            },
+            {
+              "label": "Sanierung Einlenker Haslerstegstrasse",
+              "date": "2026-09-14T09:57:00.000Z",
+              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
+            },
+            {
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Internal Appenzello transport subscriptions: tariff zones",
+          "url": "/en/swiss-articles/public-transit-passes-appenzell-canton/",
+          "excerpt": "Public transport in Appenzello Interno: fare community, zones, annual and monthly subscriptions, half-price, GA, discounts for students and apprentices.",
+          "date": "2026-09-03T05:33:21.516Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Commuting car cost calculator",
+          "url": "/en/cross-border-guide/commuting-car-costs/"
+        },
+        {
+          "label": "All transport news",
+          "url": "/en/transport/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "APPENZELLO",
+      "topic": "mobilita",
+      "locale": "de",
+      "intro": "Im Appenzellerland bedeutet der Arbeitsweg, mit Baustellen, Sperrungen, dem öffentlichen Verkehr und – wo es eine Grenze gibt – mit Wartezeiten an den Übergängen zu rechnen. Diese Seite bündelt die laufenden Einschränkungen, die gemessenen Wartezeiten und die Artikel der Redaktion zu Verkehr und Mobilität.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Aktive oder bevorstehende Baustellen",
+          "value": "1",
+          "note": "Meldungen vom 6. Oktober 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Sperrungen, Baustellen und Störungen",
+          "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
+          "items": [
+            {
+              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
+              "value": "Verkehr",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
+            },
+            {
+              "label": "Appenzell-Grossviehschau",
+              "value": "Verkehr",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
+            },
+            {
+              "label": "Oberegg - Viehschau",
+              "value": "Verkehr",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            }
+          ],
+          "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
+              "date": "2026-09-16T09:23:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+            },
+            {
+              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
+              "date": "2026-09-16T08:40:00.000Z",
+              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+            },
+            {
+              "label": "Sanierung Einlenker Haslerstegstrasse",
+              "date": "2026-09-14T09:57:00.000Z",
+              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
+            },
+            {
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Fahrkarten Appenzell Innerrhoden: Tarifzonen",
+          "url": "/de/schweiz-artikel/fahrkarten-appenzell-innerrhoden/",
+          "excerpt": "Öffentlicher Verkehr in Appenzell Innerrhoden: Tarifgemeinschaft, Zonen, Jahres- und Monatsabonnements, Halbtax, GA, Studenten- und Lehrlingsrabatte.",
+          "date": "2026-09-03T05:33:21.516Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Autokosten-Rechner für Pendler",
+          "url": "/de/grenzgaenger-ratgeber/pendler-autokosten/"
+        },
+        {
+          "label": "Alle Verkehrs-Nachrichten",
+          "url": "/de/verkehr/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "APPENZELLO",
+      "topic": "mobilita",
+      "locale": "fr",
+      "intro": "En Appenzell, se déplacer pour le travail, c’est composer avec les chantiers, les fermetures, les transports publics et, là où il y a une frontière, l’attente aux postes-frontières. Cette page réunit les restrictions en cours, les temps d’attente mesurés et les articles de la rédaction sur le trafic et les transports.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Chantiers actifs ou imminents",
+          "value": "1",
+          "note": "signalements au 6 octobre 2026"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "chiusure-cantieri",
+          "title": "Fermetures, chantiers et perturbations",
+          "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
+          "items": [
+            {
+              "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
+              "value": "Trafic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
+            },
+            {
+              "label": "Appenzell-Grossviehschau",
+              "value": "Trafic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
+            },
+            {
+              "label": "Oberegg - Viehschau",
+              "value": "Trafic",
+              "date": "2026-10-06T22:51:50.713Z",
+              "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-10-05T06:20:00.000Z"
+            }
+          ],
+          "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
+          "updatedAt": "2026-10-06T22:51:50.713Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Bushaltestelle Unterrechstein in Grub wird barrierefrei",
+              "date": "2026-09-29",
+              "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/bushaltestelle-unterrechstein-in-grub-wird-barrierefrei/"
+            },
+            {
+              "label": "Ostschweizer Kantone fordern Anpassungen bei «Verkehr '45»",
+              "date": "2026-09-16T09:23:00.000Z",
+              "url": "https://www.ai.ch/politik/standeskommission/mitteilungen/aktuelles/ostschweizer-kantone-fordern-anpassungen-bei-verkehr-45"
+            },
+            {
+              "label": "Strassensperrung Gaiserstrasse Abschnitt Äbisegg",
+              "date": "2026-09-16T08:40:00.000Z",
+              "url": "https://www.ai.ch/themen/staat-und-recht/infrastruktur-kantonal/strassen-und-brueckenbau/strassensperrungen/strassensperrung-gaiserstrasse-abschnitt-aebisegg"
+            },
+            {
+              "label": "Sanierung Einlenker Haslerstegstrasse",
+              "date": "2026-09-14T09:57:00.000Z",
+              "url": "https://www.ai.ch/verwaltung/bau-und-umweltdepartement/oeffentliche-auflagen/im-anhang-sende-ich-dir-die-unterlagen-fuer-die-planauflage-sanierung-einlenker-haslerstegstrasse"
+            },
+            {
+              "label": "Instandsetzung der Oberen Bruderbachbrücke",
+              "date": "2026-09-14",
+              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Abonnements transports Appenzell Intérieur : zones tarifaires",
+          "url": "/fr/articles-suisse/abonnements-transports-appenzell-rhodes-interieures/",
+          "excerpt": "Transports publics à Appenzell Interne : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif, GA, réductions pour étudiants et apprentis.",
+          "date": "2026-09-03T05:33:21.516Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Calcul du coût de la voiture pour pendulaires",
+          "url": "/fr/guide-frontalier/cout-voiture-pendulaire/"
+        },
+        {
+          "label": "Toute l’actualité des transports",
+          "url": "/fr/transports/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

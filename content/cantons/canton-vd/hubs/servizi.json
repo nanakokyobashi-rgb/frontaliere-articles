@@ -1,0 +1,773 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vd:servizi",
+  "section": "canton-vd",
+  "canton": "VD",
+  "topic": "servizi",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "08ea24b72a67833bd0a4e51c8e875127365f86e7f8f0ea78a218ba159b01a1dd",
+  "blocks": [
+    {
+      "id": "premi-cassa-malati",
+      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-06T23:53:39.513Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VD",
+      "topic": "servizi",
+      "locale": "it",
+      "intro": "Nel Canton Vaud, i servizi di tutti i giorni passano da cassa malati, farmacie, uffici cantonali e sportelli pubblici. Questa pagina riunisce i premi dell’assicurazione di base, i servizi utili seguiti dal sito, gli avvisi ufficiali e gli articoli della redazione.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Premio mediano adulto 2026",
+          "value": "698 CHF",
+          "note": "regione di premio 1, franchigia 300 CHF",
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "35",
+          "note": "offerta mediana 2000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Premi di cassa malati 2026",
+          "description": "Premio mensile dell’assicurazione di base per un adulto con franchigia di 300 franchi, infortunio incluso, modello standard: minimo, mediana e massimo fra gli assicuratori di ogni regione di premio.",
+          "items": [
+            {
+              "label": "VD, regione di premio 1",
+              "value": "mediana 698 CHF al mese",
+              "detail": "da 647,80 a 763,90 CHF, 21 assicuratori"
+            },
+            {
+              "label": "VD, regione di premio 2",
+              "value": "mediana 663,40 CHF al mese",
+              "detail": "da 601,70 a 720,70 CHF, 21 assicuratori"
+            }
+          ],
+          "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "VD1087",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120400"
+            },
+            {
+              "label": "VD1357",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120409"
+            },
+            {
+              "label": "VD1427",
+              "value": "2000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120412"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.encheres-vd.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "17 °C",
+              "detail": "oggi da 18 a 18 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
+              "date": "2026-10-05T15:03:42.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
+            },
+            {
+              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
+              "date": "2026-10-02T16:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
+            },
+            {
+              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
+              "date": "2026-09-29T13:02:12.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
+            },
+            {
+              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
+              "date": "2026-09-01T11:00:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
+            },
+            {
+              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
+              "date": "2026-08-20T13:16:18.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
+            },
+            {
+              "label": "Remise des clés du Campus Santé",
+              "date": "2026-08-20T12:51:31.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Premi cassa malati LAMal 2026 nel canton Vaud",
+          "url": "/articoli-svizzera/franchigia-premi-vaud-2026/",
+          "excerpt": "Guida ai premi cassa malati LAMal 2026 nel canton Vaud: franchigie adulti, differenze tra cantoni e regioni, sussidio cantonale e cambio cassa.",
+          "date": "2026-10-02T02:25:28.395Z"
+        },
+        {
+          "title": "Permesso di dimora B canton Vaud: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-vaud-rinnovo/",
+          "excerpt": "Come rinnovare il permesso B nel Vaud? Quali sono i requisiti? Guida pratica alle procedure, documenti necessari e scadenze per il rinnovo della dimora.",
+          "date": "2026-09-04T06:34:11.412Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini nel Canton Vaud: costi e sussidi",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-vaud/",
+          "excerpt": "Come funziona la custodia nel Canton Vaud: asili nido, famiglie diurne, doposcuola con tariffe progressive sul reddito e sussidi cantonali disponibili.",
+          "date": "2026-09-04T22:15:17.620Z"
+        },
+        {
+          "title": "Premi cassa malati Vaud: come ottenere la riduzione",
+          "url": "/articoli-svizzera/premi-cassa-malati-vaud-riduzione/",
+          "excerpt": "Franchigie, modelli alternativi e requisiti per il sussidio cantonale: guida pratica ai premi LAMal nel Canton Vaud.",
+          "date": "2026-09-12T20:12:56.485Z"
+        },
+        {
+          "title": "Patente di guida nel Cantone di Vaud: conversione, esami e corsi obbligatori",
+          "url": "/articoli-svizzera/patente-guida-canton-vaud-conversione-esami/",
+          "excerpt": "Guida pratica alla conversione della patente di guida estera nel Cantone di Vaud, inclusi esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
+          "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Sistema sanitario svizzero LAMal nel Canton Vaud",
+          "url": "/articoli-svizzera/sistema-sanitario-lamal-2026-vaud/",
+          "excerpt": "Guida completa al sistema sanitario svizzero nel Canton Vaud: obbligo LAMal, scelta della cassa malati, franchigie e sussidi cantonali.",
+          "date": "2026-08-20T02:15:48.837Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Premi di cassa malati per regione",
+          "url": "/premi-cassa-malati/vaud/"
+        },
+        {
+          "label": "Aste delle targhe",
+          "url": "/aste-targhe-svizzera/vaud-vd/"
+        },
+        {
+          "label": "Offerte di lavoro nel Canton Vaud",
+          "url": "/cerca-lavoro-vaud/"
+        },
+        {
+          "label": "Cambio franco-euro",
+          "url": "/compara-servizi/cambio-franco-euro/"
+        },
+        {
+          "label": "Confronto delle casse malati",
+          "url": "/compara-servizi/confronta-casse-malati/"
+        },
+        {
+          "label": "Guida ai permessi di lavoro",
+          "url": "/guida-frontaliere/permessi-di-lavoro/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "VD",
+      "topic": "servizi",
+      "locale": "en",
+      "intro": "In the canton of Vaud, everyday services run through health insurance, pharmacies, cantonal offices and public counters. This page brings together basic insurance premiums, the useful services the site tracks, official notices and our articles.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Typical adult premium 2026",
+          "value": "698 CHF",
+          "note": "premium region 1, CHF 300 deductible",
+          "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "35",
+          "note": "typical bid 2,000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Health insurance premiums 2026",
+          "description": "Monthly basic insurance premium for an adult with a CHF 300 deductible, accident cover included, standard model: lowest, typical (middle value) and highest among the insurers of each premium region.",
+          "items": [
+            {
+              "label": "VD, premium region 1",
+              "value": "typical 698 CHF per month",
+              "detail": "from 647.80 to 763.90 CHF, 21 insurers"
+            },
+            {
+              "label": "VD, premium region 2",
+              "value": "typical 663.40 CHF per month",
+              "detail": "from 601.70 to 720.70 CHF, 21 insurers"
+            }
+          ],
+          "sourceName": "Federal Office of Public Health (FOPH)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "VD1087",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120400"
+            },
+            {
+              "label": "VD1357",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120409"
+            },
+            {
+              "label": "VD1427",
+              "value": "2,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120412"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.encheres-vd.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "17 °C",
+              "detail": "today from 18 to 18 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
+              "date": "2026-10-05T15:03:42.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
+            },
+            {
+              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
+              "date": "2026-10-02T16:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
+            },
+            {
+              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
+              "date": "2026-09-29T13:02:12.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
+            },
+            {
+              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
+              "date": "2026-09-01T11:00:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
+            },
+            {
+              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
+              "date": "2026-08-20T13:16:18.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
+            },
+            {
+              "label": "Remise des clés du Campus Santé",
+              "date": "2026-08-20T12:51:31.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "KVG health insurance premiums in 2026 in the canton of Vaud",
+          "url": "/en/swiss-articles/vaud-health-premium-deductible-2026/",
+          "excerpt": "Guide to KVG health insurance premiums in 2026 in the canton of Vaud: adult deductibles, differences between cantons and regions, cantonal subsidy and change of insurance policy.",
+          "date": "2026-10-02T02:25:28.395Z"
+        },
+        {
+          "title": "Residence permit B canton Vaud: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-vaud-renewal/",
+          "excerpt": "How to renew the B permit in the Vaud? What are the requirements? Practical guide to the procedures, necessary documents and deadlines for the renewal of the residence.",
+          "date": "2026-09-04T06:34:11.412Z"
+        },
+        {
+          "title": "Nursery and childcare in the Canton of Vaud: costs and subsidies",
+          "url": "/en/swiss-articles/nursery-childcare-vaud-costs-subsidies/",
+          "excerpt": "How custody works in the Canton of Vaud: kindergartens, day families, after-school with progressive income rates and available cantonal subsidies.",
+          "date": "2026-09-04T22:15:17.620Z"
+        },
+        {
+          "title": "Vaud sick pay premiums: how to get the reduction",
+          "url": "/en/swiss-articles/vaud-health-insurance-premiums-reduction/",
+          "excerpt": "Deductibles, alternative models and cantonal subsidy requirements: a practical guide to LAMal awards in the Canton of Vaud.",
+          "date": "2026-09-12T20:12:56.485Z"
+        },
+        {
+          "title": "Driver's license in the Canton of Vaud: conversion, exams and compulsory courses",
+          "url": "/en/swiss-articles/driving-license-canton-vaud-conversion-exams/",
+          "excerpt": "Practical guide to the conversion of the foreign driver's license in the Canton of Vaud, including theoretical and practical exams, compulsory courses and the competent traffic office.",
+          "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Swiss health system LAMal in the Canton of Vaud",
+          "url": "/en/swiss-articles/switzerland-healthcare-lamal-vaud/",
+          "excerpt": "Complete guide to the Swiss health system in the Canton of Vaud: LAMal obligation, choice of the sick fund, deductibles and cantonal subsidies.",
+          "date": "2026-08-20T02:15:48.837Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Number plate auctions",
+          "url": "/en/swiss-plate-auctions/vaud-vd/"
+        },
+        {
+          "label": "Job offers in the canton of Vaud",
+          "url": "/en/find-jobs-vaud/"
+        },
+        {
+          "label": "CHF/EUR exchange rate",
+          "url": "/en/service-comparison/chf-eur-exchange-rate/"
+        },
+        {
+          "label": "Health insurance comparison",
+          "url": "/en/service-comparison/compare-health-insurance/"
+        },
+        {
+          "label": "Work permits guide",
+          "url": "/en/cross-border-guide/work-permits-guide/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "VD",
+      "topic": "servizi",
+      "locale": "de",
+      "intro": "In der Waadt laufen die Dienstleistungen des Alltags über Krankenkasse, Apotheken, kantonale Ämter und öffentliche Schalter. Diese Seite bündelt die Prämien der Grundversicherung, die nützlichen Dienste, die die Website verfolgt, die amtlichen Mitteilungen und die Artikel der Redaktion.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Mittlere Erwachsenenprämie 2026",
+          "value": "698 CHF",
+          "note": "Prämienregion 1, Franchise 300 CHF",
+          "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "35",
+          "note": "mittleres Gebot 2’000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Krankenkassenprämien 2026",
+          "description": "Monatsprämie der Grundversicherung für Erwachsene mit Franchise 300 Franken, mit Unfalldeckung, Standardmodell: tiefster, mittlerer und höchster Wert unter den Versicherern jeder Prämienregion.",
+          "items": [
+            {
+              "label": "VD, Prämienregion 1",
+              "value": "Mittelwert 698 CHF pro Monat",
+              "detail": "von 647.80 bis 763.90 CHF, 21 Versicherer"
+            },
+            {
+              "label": "VD, Prämienregion 2",
+              "value": "Mittelwert 663.40 CHF pro Monat",
+              "detail": "von 601.70 bis 720.70 CHF, 21 Versicherer"
+            }
+          ],
+          "sourceName": "Bundesamt für Gesundheit (BAG)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "VD1087",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120400"
+            },
+            {
+              "label": "VD1357",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120409"
+            },
+            {
+              "label": "VD1427",
+              "value": "2’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120412"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.encheres-vd.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "17 °C",
+              "detail": "heute 18 bis 18 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
+              "date": "2026-10-05T15:03:42.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
+            },
+            {
+              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
+              "date": "2026-10-02T16:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
+            },
+            {
+              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
+              "date": "2026-09-29T13:02:12.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
+            },
+            {
+              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
+              "date": "2026-09-01T11:00:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
+            },
+            {
+              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
+              "date": "2026-08-20T13:16:18.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
+            },
+            {
+              "label": "Remise des clés du Campus Santé",
+              "date": "2026-08-20T12:51:31.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien LAMal 2026 im Kanton Waadt",
+          "url": "/de/schweiz-artikel/krankenkassenpraemie-waadt-franchise-2026/",
+          "excerpt": "Leitfaden zu den Krankenkassenprämien LAMal 2026 im Kanton Waadt: Erwachsenenfranchisen, Unterschiede zwischen Kantonen und Regionen, kantonale Prämienverbilligung und Krankenkassenwechsel.",
+          "date": "2026-10-02T02:25:28.395Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Kanton Waadt: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-vaud-erneuerung/",
+          "excerpt": "Wie kann ich den Führerschein B im Waadtland erneuern? Was sind die Voraussetzungen? Praktischer Leitfaden zu den Verfahren, erforderlichen Dokumenten und Fristen für die Erneuerung des Wohnsitzes.",
+          "date": "2026-09-04T06:34:11.412Z"
+        },
+        {
+          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Waadt: Kosten und Leistungen",
+          "url": "/de/schweiz-artikel/kita-kinderbetreuung-waadt-kosten-subventionen/",
+          "excerpt": "Wie die Obhut im Kanton Waadt funktioniert: Kindergärten, Tagesfamilien, Nachschule mit progressiven Einkommensraten und kantonale Zuschüsse stehen zur Verfügung.",
+          "date": "2026-09-04T22:15:17.620Z"
+        },
+        {
+          "title": "Krankenkassenprämien Waadt: So erhalten Sie die Ermäßigung",
+          "url": "/de/schweiz-artikel/waadt-krankenkassen-praemien-ermaessigung/",
+          "excerpt": "Franchisen, alternative Modelle und Voraussetzungen für den Kantonsbeitrag: Praktischer Leitfaden zu den KVG-Prämien im Kanton Waadt.",
+          "date": "2026-09-12T20:12:56.485Z"
+        },
+        {
+          "title": "Führerschein im Kanton Waadt: Umschulung, Prüfungen und Pflichtkurse",
+          "url": "/de/schweiz-artikel/fuhrerschein-kanton-waadt-umwandlung-pruefungen/",
+          "excerpt": "Praktischer Leitfaden für den Umtausch des ausländischen Führerscheins im Kanton Waadt, einschliesslich theoretischer und praktischer Prüfungen, Pflichtkurse und des zuständigen Strassenverkehrsamtes.",
+          "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Schweizerisches Gesundheitssystem KVG im Kanton Waadt",
+          "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-vaud/",
+          "excerpt": "Vollständiger Leitfaden zum Schweizer Gesundheitssystem im Kanton Waadt: KVG-Pflicht, Krankenkassenwahl, Franchisen und Kantonsbeiträge.",
+          "date": "2026-08-20T02:15:48.837Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Kontrollschild-Auktionen",
+          "url": "/de/schweizer-nummernschildauktionen/waadt-vd/"
+        },
+        {
+          "label": "Stellenangebote in der Waadt",
+          "url": "/de/jobs-in-der-waadt/"
+        },
+        {
+          "label": "Wechselkurs CHF/EUR",
+          "url": "/de/service-vergleich/chf-eur-wechselkurs/"
+        },
+        {
+          "label": "Krankenkassen-Vergleich",
+          "url": "/de/service-vergleich/krankenkassen-vergleichen/"
+        },
+        {
+          "label": "Ratgeber Arbeitsbewilligungen",
+          "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "VD",
+      "topic": "servizi",
+      "locale": "fr",
+      "intro": "Dans le canton de Vaud, les services du quotidien passent par l’assurance-maladie, les pharmacies, les offices cantonaux et les guichets publics. Cette page réunit les primes de l’assurance de base, les services utiles suivis par le site, les avis officiels et les articles de la rédaction.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Prime adulte centrale 2026",
+          "value": "698 CHF",
+          "note": "région de primes 1, franchise 300 CHF",
+          "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "35",
+          "note": "offre centrale 2 000 CHF"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "premi-cassa-malati",
+          "title": "Primes d’assurance-maladie 2026",
+          "description": "Prime mensuelle de l’assurance de base pour un adulte avec franchise de 300 francs, accident inclus, modèle standard : valeur la plus basse, valeur centrale et valeur la plus haute parmi les assureurs de chaque région de primes.",
+          "items": [
+            {
+              "label": "VD, région de primes 1",
+              "value": "valeur centrale 698 CHF par mois",
+              "detail": "de 647,80 à 763,90 CHF, 21 assureurs"
+            },
+            {
+              "label": "VD, région de primes 2",
+              "value": "valeur centrale 663,40 CHF par mois",
+              "detail": "de 601,70 à 720,70 CHF, 21 assureurs"
+            }
+          ],
+          "sourceName": "Office fédéral de la santé publique (OFSP)",
+          "sourceUrl": "https://www.priminfo.admin.ch/",
+          "updatedAt": "2026-10-04T10:36:48.239Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "VD1087",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120400"
+            },
+            {
+              "label": "VD1357",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120409"
+            },
+            {
+              "label": "VD1427",
+              "value": "2 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-11T20:00:00.000Z",
+              "url": "https://www.encheres-vd.ch/de/auction/120412"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.encheres-vd.ch/de/",
+          "updatedAt": "2026-10-06T18:25:29.905Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Lausanne",
+              "value": "17 °C",
+              "detail": "aujourd’hui de 18 à 18 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-06T23:53:39.513Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Trente ans de politique d’intégration dans le canton de Vaud",
+              "date": "2026-10-05T15:03:42.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26679-default-47773e4170"
+            },
+            {
+              "label": "Forum des clubs sportifs lausannois: la santé des jeunes au cœur de la performance",
+              "date": "2026-10-02T16:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90490"
+            },
+            {
+              "label": "Les primes d’assurance-maladie vont augmenter de 3.5% en moyenne en 2027",
+              "date": "2026-09-29T13:02:12.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26662-les-primes-dassurance-maladie-vont-augmenter-de-35-en-moyenne-en-2027"
+            },
+            {
+              "label": "Une loi sur le service des habitants adaptée aux enjeux d’aujourd’hui et de demain",
+              "date": "2026-09-01T11:00:00.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26576-default-4eccc336cd"
+            },
+            {
+              "label": "Ouverture du Campus Santé : le Canton de Vaud concrétise l’un de ses projets les plus stratégiques pour l’avenir",
+              "date": "2026-08-20T13:16:18.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26535-default-9c3c25a081"
+            },
+            {
+              "label": "Remise des clés du Campus Santé",
+              "date": "2026-08-20T12:51:31.000Z",
+              "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [
+        {
+          "title": "Primes d’assurance maladie KVG en 2026 dans le canton de Vaud",
+          "url": "/fr/articles-suisse/franchise-primes-vaud-2026/",
+          "excerpt": "Guide des primes d’assurance santé KVG en 2026 dans le canton de Vaud : franchises adultes, différences entre cantons et régions, subvention cantonale et changement de police d’assurance.",
+          "date": "2026-10-02T02:25:28.395Z"
+        },
+        {
+          "title": "Permis de séjour B canton de Vaud : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-vaud-renouvellement/",
+          "excerpt": "Comment renouveler le permis B en Vaud ? Quelles sont les exigences ? Guide pratique des procédures, des documents nécessaires et des délais pour la rénovation de la résidence.",
+          "date": "2026-09-04T06:34:11.412Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton de Vaud : frais et allocations",
+          "url": "/fr/articles-suisse/garderie-garde-enfants-vaud-couts-allocations/",
+          "excerpt": "Comment fonctionne la garde dans le canton de Vaud : crèches, familles de jour, après l'école avec des tarifs progressifs sur le revenu et des allocations cantonales disponibles.",
+          "date": "2026-09-04T22:15:17.620Z"
+        },
+        {
+          "title": "Primes caisse-maladie Vaud : comment obtenir la réduction",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-vaud-reduction/",
+          "excerpt": "Franchises, modèles alternatifs et conditions pour l'allocation cantonale : guide pratique des prix LAMal dans le canton de Vaud.",
+          "date": "2026-09-12T20:12:56.485Z"
+        },
+        {
+          "title": "Permis de conduire dans le canton de Vaud : conversion, examens et cours",
+          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-vaud-conversion-examens/",
+          "excerpt": "Guide pratique à la conversion du permis de conduire étranger dans le canton de Vaud, comprenant examens théoriques et pratiques, cours obligatoires et office de la circulation compétent.",
+          "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Système de santé suisse LAMal dans le canton de Vaud",
+          "url": "/fr/articles-suisse/systeme-sante-suisse-lamal-vaud/",
+          "excerpt": "Guide complet du système de santé suisse dans le canton de Vaud : obligation LAMal, choix de la caisse-maladie, franchises et allocations cantonales.",
+          "date": "2026-08-20T02:15:48.837Z"
+        }
+      ],
+      "links": [
+        {
+          "label": "Offres d’emploi dans le canton de Vaud",
+          "url": "/fr/trouver-emploi-vaud/"
+        },
+        {
+          "label": "Taux de change CHF/EUR",
+          "url": "/fr/comparaison-services/taux-change-chf-eur/"
+        },
+        {
+          "label": "Comparateur de caisses maladie",
+          "url": "/fr/comparaison-services/comparer-caisses-maladie/"
+        },
+        {
+          "label": "Guide des permis de travail",
+          "url": "/fr/guide-frontalier/permis-de-travail/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

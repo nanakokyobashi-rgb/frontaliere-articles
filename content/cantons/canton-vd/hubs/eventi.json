@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-vd:eventi",
+  "section": "canton-vd",
+  "canton": "VD",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "d99e8566cd00093a216c03c85ab52e1fc6d9bb6866e41824871f88fe3cbda755",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "keyFacts": 0
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "VD",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Vaud, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "88",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "\"Tous en Salles\": Movie and Dinner Night—Destination Somalia",
+              "detail": "Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
+            },
+            {
+              "label": "Concert",
+              "detail": "Centre de Jour du Panorama, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
+            },
+            {
+              "label": "Movie and Drinks at La Byronne",
+              "detail": "Association La Byronne, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
+            },
+            {
+              "label": "Écoles - Lance ton initiative!",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+            },
+            {
+              "label": "Humour sur la côte - Les décoiffeuses",
+              "detail": "Etoy",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "Trad Jazz Session",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
+            },
+            {
+              "label": "Salon d'art et d'artisanat local",
+              "detail": "Salle Communal de Perdtemps, Nyon — in corso, ultimo giorno: 8 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
+            },
+            {
+              "label": "The weekly markets in Aigle",
+              "detail": "Rue Farel, Aigle — in corso, ultimo giorno: 20 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
+            },
+            {
+              "label": "Stéphane Zaech’s ‘Aberdeen’ exhibition",
+              "detail": "Centre d'art Abstract, Grandson — in corso, ultimo giorno: 10 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/vaud/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
+              "date": "2026-10-01T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Vaud",
+          "url": "/eventi/vaud/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/vaud/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "VD",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In the canton of Vaud, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "88",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "\"Tous en Salles\": Movie and Dinner Night—Destination Somalia",
+              "detail": "Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
+            },
+            {
+              "label": "Concert",
+              "detail": "Centre de Jour du Panorama, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
+            },
+            {
+              "label": "Movie and Drinks at La Byronne",
+              "detail": "Association La Byronne, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
+            },
+            {
+              "label": "Écoles - Lance ton initiative!",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+            },
+            {
+              "label": "Humour sur la côte - Les décoiffeuses",
+              "detail": "Etoy",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "Trad Sess",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
+            },
+            {
+              "label": "Salon d'art et d'artisanat local",
+              "detail": "Salle Communal de Perdtemps, Nyon — ongoing, last day: 8 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
+            },
+            {
+              "label": "The weekly markets in Aigle",
+              "detail": "Rue Farel, Aigle — ongoing, last day: 20 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
+            },
+            {
+              "label": "Stéphane Zaech’s ‘Aberdeen’ exhibition",
+              "detail": "Centre d'art Abstract, Grandson — ongoing, last day: 10 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/vaud/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
+              "date": "2026-10-01T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in the canton of Vaud",
+          "url": "/en/events/vaud/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/vaud/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "VD",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "In der Waadt ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "88",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "„Tous en Salles“: Filmabend mit Abendessen – Reiseziel Somalia",
+              "detail": "Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
+            },
+            {
+              "label": "Konzert",
+              "detail": "Centre de Jour du Panorama, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
+            },
+            {
+              "label": "Apéro-Kino in der Byronne",
+              "detail": "Association La Byronne, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
+            },
+            {
+              "label": "Écoles - Lance ton initiative!",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+            },
+            {
+              "label": "Humour sur la côte - Les décoiffeuses",
+              "detail": "Etoy",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "Traditionelle Jazz-Session",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
+            },
+            {
+              "label": "Salon d'art et d'artisanat local",
+              "detail": "Salle Communal de Perdtemps, Nyon — läuft, letzter Tag: 8. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
+            },
+            {
+              "label": "Die Wochenmärkte von Aigle",
+              "detail": "Rue Farel, Aigle — läuft, letzter Tag: 20. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
+            },
+            {
+              "label": "Ausstellung „Aberdeen“ von Stéphane Zaech",
+              "detail": "Centre d'art Abstract, Grandson — läuft, letzter Tag: 10. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/waadt/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
+              "date": "2026-10-01T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen in der Waadt",
+          "url": "/de/veranstaltungen/waadt/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "VD",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "Dans le canton de Vaud, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "88",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Tous en Salles: soirée film&repas - destination Somalie",
+              "detail": "Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
+            },
+            {
+              "label": "Concert - La Fanfare de l'Automne Blonay",
+              "detail": "Centre de Jour du Panorama, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
+            },
+            {
+              "label": "Apéro-ciné à la Byronne",
+              "detail": "Association La Byronne, Vevey",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
+            },
+            {
+              "label": "Écoles - Lance ton initiative!",
+              "detail": "Musée national suisse, Prangins",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+            },
+            {
+              "label": "Humour sur la côte - Les décoiffeuses",
+              "detail": "Etoy",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+            },
+            {
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
+            },
+            {
+              "label": "Séance de jazz traditionnel",
+              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
+            },
+            {
+              "label": "Salon d'art et d'artisanat local",
+              "detail": "Salle Communal de Perdtemps, Nyon — en cours, dernier jour : 8 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
+            },
+            {
+              "label": "Les marchés hebdomadaires d'Aigle",
+              "detail": "Rue Farel, Aigle — en cours, dernier jour : 20 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
+            },
+            {
+              "label": "Exposition Aberdeen de Stéphane Zaech",
+              "detail": "Centre d'art Abstract, Grandson — en cours, dernier jour : 10 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/vaud/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
+              "date": "2026-10-01T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
+            }
+          ],
+          "updatedAt": "2026-10-06T21:55:10.346Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements dans le canton de Vaud",
+          "url": "/fr/evenements/vaud/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/vaud/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}

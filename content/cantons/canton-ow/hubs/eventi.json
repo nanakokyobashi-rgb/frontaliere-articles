@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 1,
+  "id": "canton-ow:eventi",
+  "section": "canton-ow",
+  "canton": "OW",
+  "topic": "eventi",
+  "updatedAt": "2026-10-07T10:25:04.311Z",
+  "contentHash": "2341e08a8ba20b746e6d6ebb5c6f3bdaf999a0bce10ca4be7fe9f49d336648d5",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "keyFacts": 1
+    }
+  ],
+  "locales": {
+    "it": {
+      "canton": "OW",
+      "topic": "eventi",
+      "locale": "it",
+      "intro": "Nel Canton Obvaldo, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "28",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Curling beginners course",
+              "detail": "Engelberg — in corso, ultimo giorno: 9 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/curling-beginners-course/"
+            },
+            {
+              "label": "Niklaus und Dorothee Alive",
+              "detail": "Kloster Bethanien — in corso, ultimo giorno: 9 ottobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/st-niklausen-ow/niklaus-und-dorothee-alive_AbUiXUM"
+            },
+            {
+              "label": "Oktoberfest Sarnen",
+              "detail": "Schulhaus Cher, Sarnen",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-sarnen/"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Jugendstilhotel Paxmontana",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/flueeli-ranft/wild-und-wine-mit-obwaldner-huismuisig_AxtQSZt"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Flüeli-Ranft, Sachseln",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-wine-mit-obwaldner-huismuisig/"
+            },
+            {
+              "label": "Kleinteiler-Chilbi",
+              "detail": "rund um die Kleinteiler Kapelle, Giswil, Giswil",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93427"
+            },
+            {
+              "label": "Sofagespräch mit Sandra Widmer und Luc Auf der Maur",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93805"
+            },
+            {
+              "label": "FG Sarnen: Armband mit Heilsteinen",
+              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/88742"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/87512"
+            },
+            {
+              "label": "NEW BALKAN FOLK",
+              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/91726"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/obvaldo/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tutti gli eventi nel Canton Obvaldo",
+          "url": "/eventi/obvaldo/"
+        },
+        {
+          "label": "Eventi di questo fine settimana",
+          "url": "/eventi/obvaldo/questo-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "en": {
+      "canton": "OW",
+      "topic": "eventi",
+      "locale": "en",
+      "intro": "In Obwalden, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "28",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Curling beginners course",
+              "detail": "Engelberg — ongoing, last day: 9 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/curling-beginners-course/"
+            },
+            {
+              "label": "Niklaus und Dorothee Alive",
+              "detail": "Kloster Bethanien — ongoing, last day: 9 October 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/st-niklausen-ow/niklaus-und-dorothee-alive_AbUiXUM"
+            },
+            {
+              "label": "Oktoberfest Sarnen",
+              "detail": "Schulhaus Cher, Sarnen",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-sarnen/"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Jugendstilhotel Paxmontana",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/flueeli-ranft/wild-und-wine-mit-obwaldner-huismuisig_AxtQSZt"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Flüeli-Ranft, Sachseln",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-wine-mit-obwaldner-huismuisig/"
+            },
+            {
+              "label": "Kleinteiler-Chilbi",
+              "detail": "rund um die Kleinteiler Kapelle, Giswil, Giswil",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93427"
+            },
+            {
+              "label": "Sofagespräch mit Sandra Widmer und Luc Auf der Maur",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93805"
+            },
+            {
+              "label": "FG Sarnen: Armband mit Heilsteinen",
+              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/88742"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/87512"
+            },
+            {
+              "label": "NEW BALKAN FOLK",
+              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/91726"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/obwalden/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "All events in Obwalden",
+          "url": "/en/events/obwalden/"
+        },
+        {
+          "label": "Events this weekend",
+          "url": "/en/events/obwalden/this-weekend/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "de": {
+      "canton": "OW",
+      "topic": "eventi",
+      "locale": "de",
+      "intro": "In Obwalden ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "28",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Curling Anfängerkurs",
+              "detail": "Engelberg — läuft, letzter Tag: 9. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/curling-beginners-course/"
+            },
+            {
+              "label": "Niklaus und Dorothee Alive",
+              "detail": "Kloster Bethanien — läuft, letzter Tag: 9. Oktober 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/st-niklausen-ow/niklaus-und-dorothee-alive_AbUiXUM"
+            },
+            {
+              "label": "Oktoberfest Sarnen",
+              "detail": "Schulhaus Cher, Sarnen",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-sarnen/"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Jugendstilhotel Paxmontana",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/flueeli-ranft/wild-und-wine-mit-obwaldner-huismuisig_AxtQSZt"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Flüeli-Ranft, Sachseln",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-wine-mit-obwaldner-huismuisig/"
+            },
+            {
+              "label": "Kleinteiler-Chilbi",
+              "detail": "rund um die Kleinteiler Kapelle, Giswil, Giswil",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93427"
+            },
+            {
+              "label": "Sofagespräch mit Sandra Widmer und Luc Auf der Maur",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93805"
+            },
+            {
+              "label": "FG Sarnen: Armband mit Heilsteinen",
+              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/88742"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/87512"
+            },
+            {
+              "label": "NEW BALKAN FOLK",
+              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/91726"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/obwalden/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Alle Veranstaltungen in Obwalden",
+          "url": "/de/veranstaltungen/obwalden/"
+        },
+        {
+          "label": "Veranstaltungen an diesem Wochenende",
+          "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    },
+    "fr": {
+      "canton": "OW",
+      "topic": "eventi",
+      "locale": "fr",
+      "intro": "À Obwald, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "28",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Curling beginners course",
+              "detail": "Engelberg — en cours, dernier jour : 9 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/curling-beginners-course/"
+            },
+            {
+              "label": "Niklaus und Dorothee Alive",
+              "detail": "Kloster Bethanien — en cours, dernier jour : 9 octobre 2026",
+              "date": "2026-10-07",
+              "url": "https://www.guidle.com/it/veranstaltungen/tourismus/st-niklausen-ow/niklaus-und-dorothee-alive_AbUiXUM"
+            },
+            {
+              "label": "Oktoberfest Sarnen",
+              "detail": "Schulhaus Cher, Sarnen",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-sarnen/"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Jugendstilhotel Paxmontana",
+              "date": "2026-10-10",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/flueeli-ranft/wild-und-wine-mit-obwaldner-huismuisig_AxtQSZt"
+            },
+            {
+              "label": "\"Wild & Wine\" mit Obwaldner Huismuisig",
+              "detail": "Flüeli-Ranft, Sachseln",
+              "date": "2026-10-10",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-wine-mit-obwaldner-huismuisig/"
+            },
+            {
+              "label": "Kleinteiler-Chilbi",
+              "detail": "rund um die Kleinteiler Kapelle, Giswil, Giswil",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93427"
+            },
+            {
+              "label": "Sofagespräch mit Sandra Widmer und Luc Auf der Maur",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-11",
+              "url": "https://www.ow.ch/_rte/anlass/93805"
+            },
+            {
+              "label": "FG Sarnen: Armband mit Heilsteinen",
+              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/88742"
+            },
+            {
+              "label": "Monatsübung",
+              "detail": "MZG, Giswil, Giswil",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/87512"
+            },
+            {
+              "label": "NEW BALKAN FOLK",
+              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
+              "date": "2026-10-13",
+              "url": "https://www.ow.ch/_rte/anlass/91726"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/obwald/",
+          "updatedAt": "2026-10-07T00:37:21.979Z"
+        }
+      ],
+      "curatedArticles": [],
+      "links": [
+        {
+          "label": "Tous les événements à Obwald",
+          "url": "/fr/evenements/obwald/"
+        },
+        {
+          "label": "Événements de ce week-end",
+          "url": "/fr/evenements/obwald/ce-week-end/"
+        }
+      ],
+      "updatedAt": "2026-10-07T10:25:04.311Z"
+    }
+  }
+}
