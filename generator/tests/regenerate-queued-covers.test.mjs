@@ -15,7 +15,7 @@ import {
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
 import { drainQueuedCovers } from '../scripts/regenerate-queued-covers.mjs';
-import { mergeGeneratedImageRegistries } from '../../scripts/ci/merge-generated-image-registry.mjs';
+import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
@@ -358,7 +358,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
   }
 });
 
-test('il merge del registro in rebase conserva l ordine upstream e non perde un record locale', () => {
+test('il merge del registro applica solo il delta locale e conserva metadata upstream piu recenti', () => {
   const upstream = {
     schema: 1,
     assets: [
@@ -366,17 +366,57 @@ test('il merge del registro in rebase conserva l ordine upstream e non perde un 
       { assetId: 'article-old', version: 'upstream' },
     ],
   };
+  const base = {
+    schema: 1,
+    assets: [{ assetId: 'article-old', version: 'base' }],
+  };
   const replayed = {
     schema: 1,
     assets: [
       { assetId: 'article-new', version: 'local' },
-      { assetId: 'article-old', version: 'local' },
+      { assetId: 'article-old', version: 'base' },
     ],
   };
-  const merged = mergeGeneratedImageRegistries(upstream, replayed);
+  const merged = mergeImageRegistryDelta(upstream, base, replayed);
   assert.deepEqual(merged.assets.map((record) => record.assetId), ['lugano-view', 'article-old', 'article-new']);
-  assert.equal(merged.assets[1].version, 'local');
+  assert.equal(merged.assets[1].version, 'upstream');
   assert.equal(merged.assetCount, 3);
+});
+
+test('il merge del registro fa vincere una rigenerazione locale realmente cambiata', () => {
+  const upstream = { schema: 1, assets: [{ assetId: 'article-old', version: 'upstream' }] };
+  const base = { schema: 1, assets: [{ assetId: 'article-old', version: 'base' }] };
+  const replayed = { schema: 1, assets: [{ assetId: 'article-old', version: 'local' }] };
+  const merged = mergeImageRegistryDelta(upstream, base, replayed);
+  assert.equal(merged.assets[0].version, 'local');
+});
+
+test('il registro editoriale usa cover come identita append-only', () => {
+  const upstream = { schema: 1, assets: [{ cover: '/images/blog/a.webp', version: 'upstream' }] };
+  const base = { schema: 1, assets: [{ cover: '/images/blog/a.webp', version: 'base' }] };
+  const replayed = { schema: 1, assets: [
+    { cover: '/images/blog/a.webp', version: 'base' },
+    { cover: '/images/blog/b.webp', version: 'local' },
+  ] };
+  const merged = mergeImageRegistryDelta(upstream, base, replayed, { key: 'cover' });
+  assert.deepEqual(merged.assets, [
+    { cover: '/images/blog/a.webp', version: 'upstream' },
+    { cover: '/images/blog/b.webp', version: 'local' },
+  ]);
+});
+
+test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto', () => {
+  const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /registry_base="\$RUNNER_TEMP\/generated-image-registry-base\.json"/);
+  assert.match(workflow, /git show "\$PRODUCED\^:data\/generated-image-registry\.json" > "\$registry_base"/);
+  assert.match(
+    workflow,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs \\\n\s+data\/generated-image-registry\.json "\$registry_base" "\$registry_snapshot"/,
+  );
+  assert.match(
+    workflow,
+    /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
+  );
 });
 
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {

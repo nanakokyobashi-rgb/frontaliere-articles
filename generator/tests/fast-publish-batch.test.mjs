@@ -52,6 +52,15 @@ test('il dispatch accetta una lista JSON e il workflow la passa al renderer batc
   assert.match(pipeline, /onlyArticleIds: ids \}\)/);
 });
 
+test('la revisione del corpus resta nel push e non entra nel motore HTML', () => {
+  assert.match(publisher, /function corpusContentRevision\(\)/);
+  assert.match(publisher, /const contentRevision = corpusContentRevision\(\);/);
+  assert.match(workflow, /ARTICLE_CONTENT_REVISION/);
+  const renderCall = publisher.match(/renderSectionArticlePipeline\(\{[\s\S]*?\}\);/)?.[0] ?? '';
+  assert.doesNotMatch(renderCall, /contentRevision/);
+  assert.doesNotMatch(pipeline, /contentRevision/);
+});
+
 test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary', () => {
   assert.match(pipeline, /const missingIds = ids\.filter/);
   assert.match(pipeline, /throw new Error\(`article id\(s\) not found in section/);
@@ -62,6 +71,75 @@ test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary
   assert.match(publisher, /bridgePaths = entries\.map/);
   assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.hubPaths\]/);
   assert.match(publisher, /url: urls\[0\],[\s\S]*urls,/);
+  assert.match(publisher, /imagePostcondition/);
+  assert.match(pipeline, /filterEntriesByImagePostcondition/);
+});
+
+test('un articolo ricaduto sull’immagine generica passa dalla lettura della pagina online e non esce in silenzio', () => {
+  // La post-condizione da sola tratterrebbe anche l'articolo nuovo: il suo
+  // risultato deve passare da releaseArticlesWithNothingToProtect, e il push
+  // deve usare le voci che quella funzione restituisce.
+  assert.match(
+    pipeline,
+    /const imagePostcondition = await releaseArticlesWithNothingToProtect\(\{\s*entries,\s*postcondition: filterEntriesByImagePostcondition\(/,
+  );
+  assert.ok(
+    pipeline.indexOf('const imagePostcondition = await releaseArticlesWithNothingToProtect')
+      < pipeline.indexOf('await renderArticleHubPages('),
+    'la post-condizione deve decidere prima di renderizzare qualunque pagina aggregata',
+  );
+  // Un articolo trattenuto con la pagina online non ferma gli archivi. Un
+  // articolo rilasciato col fallback invece li ferma: il registro completo
+  // conserva ancora il path dell'immagine dichiarata che manca.
+  assert.match(pipeline, /const aggregateVerdict = aggregatePageVerdict\(imagePostcondition\);/);
+  assert.match(pipeline, /const aggregatePagesAllowed = aggregateVerdict\.allowed;/);
+  assert.match(pipeline, /releasedWithGenericImage\.length > 0/);
+  assert.doesNotMatch(pipeline, /aggregatePagesAllowed = imagePostcondition\.excludedArticles\.length === 0/);
+  assert.match(pipeline, /if \(aggregatePagesAllowed\) \{[\s\S]*await renderArticleHubPages\(/);
+  assert.match(pipeline, /let hubResult = \{ written: 0, pathsByLocale:/);
+  assert.match(pipeline, /entries: imagePostcondition\.entries, hubResult/);
+  assert.match(pipeline, /entries: imagePostcondition\.entries,/);
+  assert.match(publisher, /aggregatePagesAllowed,/);
+  // Trattenuto e uscito con l'immagine generica sono due avvisi distinti sulla run.
+  assert.match(workflow, /\.imagePostcondition\.excludedArticles\[\]\?\.articleId/);
+  assert.match(workflow, /\.imagePostcondition\.releasedArticles\[\]\?\.articleId/);
+  assert.match(workflow, /::warning title=Articolo uscito con l'immagine generica::/);
+});
+
+test('la validazione distingue esplicitamente il percorso article-only dagli aggregati', () => {
+  const refresh = stepText('Refresh the hub landing grid');
+  const validation = stepText('Validate what was rendered');
+  const publish = stepText('Publish to shards and CDN');
+  assert.match(refresh, /jq -e '\.aggregatePagesAllowed == false'/);
+  assert.match(validation, /aggregate_pages="\$\(jq -r '\.aggregatePagesAllowed'/);
+  assert.match(validation, /if \[ "\$aggregate_pages" = "true" \]; then[\s\S]*hub_n/);
+  assert.match(validation, /elif \[ "\$\{hub_n:-0\}" -ne 0 \]/);
+  assert.match(validation, /aggregate pages intentionally withheld: validating the article-only set/);
+  assert.match(publish, /if \[ "\$\{#paths\[@\]\}" -eq 0 \] && \[ "\$\{#hpaths\[@\]\}" -eq 0 \]/);
+});
+
+test('le immagini recuperate dal CDN restano sul CDN in indice e bridge', () => {
+  assert.match(
+    pipeline,
+    /indexHtml = rewriteDownloadedImageRefs\(rewriteBlogImageRefs\(indexHtml\), imageStage\.downloadedImageKeys\)/,
+  );
+  assert.match(
+    pipeline,
+    /finalBridgeHtml = rewriteDownloadedImageRefs\(rewriteBlogImageRefs\(bridgeHtml\), imageStage\.downloadedImageKeys\)/,
+  );
+  assert.ok(
+    pipeline.indexOf('rewriteDownloadedImageRefs(rewriteBlogImageRefs(indexHtml)')
+      < pipeline.indexOf('const indexClean = sanitizeHtmlDocument(indexHtml)'),
+    'la riscrittura deve precedere la scrittura dei byte pubblicati',
+  );
+  assert.match(
+    pipeline,
+    /rewriteDownloadedImageFiles\(\{\s*distDir,\s*relPaths: \[\.\.\.Object\.values\(hubResult\.pathsByLocale\)\.flat\(\), \.\.\.extraPaths\],/,
+  );
+  assert.ok(
+    pipeline.indexOf('rewriteDownloadedImageFiles({') < pipeline.indexOf('// ── Step 7: offload-generated-images-cdn.mjs'),
+    'landing e hub devono essere riscritti prima dell’offload',
+  );
 });
 
 test('il workflow valida ID e cardinalità dei path per locale e sonda tutto il batch', () => {

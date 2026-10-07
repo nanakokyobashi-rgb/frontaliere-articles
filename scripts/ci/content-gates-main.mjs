@@ -144,6 +144,10 @@ export const CONTENT_GATES = [
   // e i letterali SEO delle copertine accreditate: li scrive il generatore,
   // direttamente su `main`.
   'generator/tests/image-credits-content.test.mjs',
+  // Regressioni del contratto di pubblicazione: separazione dei campi body e
+  // coerenza registry/SEO/blob della cover dedicata. Legge il corpus reale e
+  // deve quindi aprire l'alert di main se un produttore reintroduce il difetto.
+  'generator/tests/article-publication-contract.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',

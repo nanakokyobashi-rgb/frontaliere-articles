@@ -19,6 +19,7 @@ import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL, ARTICLE_SECTION_CORE_LI
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import {
   UPLOAD_ORDER,
+  aggregatePageDefects,
   archiveReleasePages,
   articleReleasePages,
   articleReleaseSnapshot,
@@ -31,6 +32,7 @@ import {
   pageEntry,
   obsoleteArticlePages,
   obsoleteArchivePages,
+  obsoleteReleasePages,
   parseArgs,
   publish,
   publishedReleaseReady,
@@ -65,6 +67,49 @@ test('publisher: solo una sezione cantonale ATTIVA nel core', () => {
     assert.throws(() => assertPublishableSection('canton-ti'), /non e' attiva nel core/);
   }
   assert.equal(assertPublishableSection('canton-ti', { active: ACTIVE_WITH_TI }).canton, 'TI');
+});
+
+test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeline', () => {
+  const publisher = read('scripts/publish-section-pages.mjs');
+  assert.match(
+    publisher,
+    /\{\s*entries,\s*hubResult,\s*downloadedImageKeys,\s*imageFetchFailures,\s*imagePostcondition,\s*aggregatePagesAllowed,\s*\}/,
+  );
+  assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
+  assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
+});
+
+test('publisher R2 pubblica article-only ma rifiuta aggregati trapelati', () => {
+  const articles = [{ kind: 'article', locale: 'it', rel: 'articoli-ticino/sano/index.html' }];
+  assert.deepEqual(aggregatePageDefects(articles, { aggregatePagesAllowed: false }), []);
+  assert.deepEqual(
+    aggregatePageDefects([...articles, { kind: 'archive', locale: 'it', rel: 'articoli-ticino/tutti/index.html' }], {
+      aggregatePagesAllowed: false,
+    }),
+    ['pagine aggregate presenti nel percorso article-only: articoli-ticino/tutti/index.html'],
+  );
+  assert.deepEqual(
+    aggregatePageDefects(articles, { aggregatePagesAllowed: true, locales: ['it'] }),
+    ['nessuna pagina archive per it', 'nessuna pagina landing per it'],
+  );
+  assert.deepEqual(
+    aggregatePageDefects(articles),
+    ['verdetto aggregatePagesAllowed assente o non booleano'],
+  );
+});
+
+test('publisher R2 article-only conserva tutta la release precedente', () => {
+  const oldArticle = { canonicalPath: '/articoli-ticino/old/' };
+  const oldArchive = { canonicalPath: '/articoli-ticino/tutti/page/2/' };
+  const input = {
+    previousArticlePages: [oldArticle],
+    currentArticlePages: [],
+    previousArchivePages: [oldArchive],
+    currentArchivePages: [],
+  };
+  assert.deepEqual(obsoleteReleasePages({ ...input, aggregatePagesAllowed: false }), []);
+  assert.deepEqual(obsoleteReleasePages({ ...input, aggregatePagesAllowed: true }), [oldArticle, oldArchive]);
+  assert.throws(() => obsoleteReleasePages(input), /aggregatePagesAllowed deve essere booleano/);
 });
 
 test('publisher: argomenti', () => {
