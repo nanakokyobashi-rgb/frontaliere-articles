@@ -134,6 +134,14 @@
       {
         "prefix": "data/evergreen-verifications.json",
         "reason": "Registro delle verifiche evergreen scritto dal generatore (#2096), che oggi contiene solo `{}`: il censimento lo trova 'byte-identico' a `packages/articles/engine/shared/article-reviewed-by.json` del sito perche' due JSON vuoti hanno lo stesso sha del blob, non perche' siano lo stesso file. Il sito non ha nessun gemello di questo registro e non c'e' una fix che scende o risale. Se il registro diventa codice condiviso col sito, la riga va tolta e il file registrato."
+      },
+      {
+        "prefix": "services/seo/imageObjectLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/imageObjectLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
+      },
+      {
+        "prefix": "services/seo/organizationLd.ts",
+        "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/organizationLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
       }
     ]
   },
@@ -463,10 +471,10 @@
       "path": "scripts/ci/report-validate-dist-failure.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "6b96e6fcbb2942d1",
+        "site": "9d395b08c46db9b2",
         "corpus": "f128bfdc2aa3243e",
-        "alignedAt": "2026-09-26",
-        "forcedAt": "2026-09-26T11:35:00.000Z"
+        "alignedAt": "2026-10-06",
+        "forcedAt": "2026-10-06T23:44:22.620Z"
       },
       "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto."
     },
@@ -947,6 +955,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/run-listing-window.mjs",
+      "mode": "identical",
+      "reason": "Finestra `created` per gli elenchi di run filtrati per branch (`createdSince`, `createdSinceFilter`, `createdSinceQuery`, `newestFirst`): modulo senza import, copiato byte per byte dal sito. E' registrato PRIMA del suo importatore: `scripts/ci/close-recovered-failure-issues.mjs` e' `identical` e sul sito lo importa dalla PR 12016, e il gate del sito sugli import dei gemelli identici rifiuta un importatore il cui modulo non e' dichiarato qui (il trasporto porterebbe l'importatore senza il modulo: ERR_MODULE_NOT_FOUND, caso della issue 1890). `generator/tests/run-listing-window.test.mjs` ne prova il comportamento in questo repository.",
+      "baseline": {
+        "site": "55e66ea9b5ef172e",
+        "corpus": "55e66ea9b5ef172e",
+        "alignedAt": "2026-10-06"
+      }
+    },
+    {
       "path": "scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
       "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito. Il gemello e' lo stesso path sul sito; per questo la copia legacy degli observer non puo' puntare qui: e' dichiarata in `scope.outOfScope` con la sua ragione (valerielinc-ops/frontaliere-si-o-no#7483).",
@@ -1011,10 +1029,10 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
       "baseline": {
-        "site": "3a28a8c91ab5671b",
+        "site": "f7f1b2d248169079",
         "corpus": "6880a0776c0ab697",
         "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T00:27:33.002Z"
+        "forcedAt": "2026-10-06T23:54:42.602Z"
       }
     },
     {
@@ -3307,9 +3325,9 @@
       "sitePath": "data/authors.ts",
       "mode": "identical",
       "baseline": {
-        "site": "0f89e0a3464c7e48",
-        "corpus": "0f89e0a3464c7e48",
-        "alignedAt": "2026-10-04"
+        "site": "a4e70e5bedf3dbf3",
+        "corpus": "a4e70e5bedf3dbf3",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3408,8 +3426,8 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "4e2b0a541c32ed70",
-        "corpus": "4e2b0a541c32ed70",
+        "site": "642ce32dbd0422f3",
+        "corpus": "642ce32dbd0422f3",
         "alignedAt": "2026-10-06"
       }
     },
@@ -3472,9 +3490,9 @@
       "sitePath": "build-plugins/shared/inlineJsonScript.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2d1b8c01016ef1d3",
-        "corpus": "2d1b8c01016ef1d3",
-        "alignedAt": "2026-08-09"
+        "site": "f1652b861b452480",
+        "corpus": "f1652b861b452480",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3504,9 +3522,9 @@
       "sitePath": "build-plugins/shared/railGutters.ts",
       "mode": "identical",
       "baseline": {
-        "site": "1b55f084ebc648f8",
-        "corpus": "1b55f084ebc648f8",
-        "alignedAt": "2026-09-28"
+        "site": "28740c7dfd69dbe6",
+        "corpus": "28740c7dfd69dbe6",
+        "alignedAt": "2026-10-06"
       }
     },
     {
@@ -3656,9 +3674,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "3cdd32148bd86613",
-        "corpus": "3cdd32148bd86613",
-        "alignedAt": "2026-10-05"
+        "site": "77084b29001782fc",
+        "corpus": "77084b29001782fc",
+        "alignedAt": "2026-10-06"
       },
       "couplingSnapshot": [
         {
