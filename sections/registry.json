@@ -454,7 +454,7 @@
     "canton-lu": {
       "kind": "canton",
       "canton": "LU",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-lucerna",
         "en": "lucerne-articles",
@@ -552,7 +552,7 @@
     "canton-nw": {
       "kind": "canton",
       "canton": "NW",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-nidvaldo",
         "en": "nidwalden-articles",
