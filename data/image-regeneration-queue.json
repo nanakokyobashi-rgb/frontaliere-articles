@@ -432,6 +432,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:51:03.474Z",
       "lastFailureAt": "2026-10-07T10:51:03.474Z"
+    },
+    {
+      "articleId": "rapporti-thurmed-turgovia",
+      "title": "Rapporti 2025 thurmed e Spital Thurgau",
+      "fallbackImage": "/images/blog/aiuti-malattie-rare-2025.webp",
+      "reason": "All image providers failed for article-rapporti-thurmed-turgovia: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:52:51.123Z",
+      "lastFailureAt": "2026-10-07T10:52:51.123Z"
     }
   ]
 }
