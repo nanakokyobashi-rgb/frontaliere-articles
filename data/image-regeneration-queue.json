@@ -153,6 +153,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T08:41:12.756Z",
       "lastFailureAt": "2026-10-07T08:41:12.756Z"
+    },
+    {
+      "articleId": "economia-ginevrina-ripresa-globale",
+      "title": "Economia ginevrina: beneficio dalla ripresa globale",
+      "fallbackImage": "/images/blog/crescita-economia-svizzera-seco-2026.webp",
+      "reason": "All image providers failed for article-economia-ginevrina-ripresa-globale: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T08:41:49.746Z",
+      "lastFailureAt": "2026-10-07T08:41:49.746Z"
     }
   ]
 }
