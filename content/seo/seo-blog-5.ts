@@ -11831,10 +11831,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-anguria-pannelli-incendio-ticino-2026': {
-    title: 'Pannelli ignifughi con semi di anguria: rivoluzione per la sicurezza antincendio',
+    title: 'Pannelli ignifughi con semi di anguria: sicurezza antincendio',
     description: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, pannelli, ignifughi, semi, anguria',
-    ogTitle: 'Pannelli ignifughi con semi di anguria: rivoluzione per la sicurezza antincendio',
+    ogTitle: 'Pannelli ignifughi con semi di anguria: sicurezza antincendio',
     ogDescription: 'Scoperta del Politecnico di Zurigo: pannelli resistenti al fuoco realizzati con semi di anguria. Possibili applicazioni in Ticino.',
     canonicalPath: '/articoli-frontaliere/anguria-pannelli-incendio-ticino-2026/',
     structuredData: {
