@@ -405,6 +405,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:37:25.687Z",
       "lastFailureAt": "2026-10-07T10:37:25.687Z"
+    },
+    {
+      "articleId": "baugesuch-juchstrasse-frauenfeld",
+      "title": "Domanda edilizia a Frauenfeld: Juchstrasse 22-22b",
+      "fallbackImage": "/images/blog/calcolatore-salariale-edilizia-2026.webp",
+      "reason": "All image providers failed for article-baugesuch-juchstrasse-frauenfeld: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:39:32.224Z",
+      "lastFailureAt": "2026-10-07T10:39:32.224Z"
     }
   ]
 }

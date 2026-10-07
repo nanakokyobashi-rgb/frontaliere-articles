@@ -1,0 +1,12 @@
+/**
+ * Slug per locale degli articoli della sezione canton-tg (Turgovia).
+ * Scritto da generator/scripts/create-article.mjs --section=canton-tg.
+ */
+export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
+ 'baugesuch-juchstrasse-frauenfeld': { it: 'baugesuch-juchstrasse-frauenfeld', en: 'frauenfeld-building-application-juchstrasse', de: 'baugesuch-frauenfeld-juchstrasse', fr: 'demande-construction-frauenfeld-juchstrasse' },
+};
+
+export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
+};
+
+export const ALL_CANTON_ARTICLE_IDS: string[] = Object.keys(CANTON_SLUGS);
