@@ -72,6 +72,7 @@ import {
   ANNOUNCED_SURFACE_RETRY_DELAY_MS,
 } from '../../scripts/find-dirty-content-ids.mjs';
 import { RELEASE_MARKER_CONTRACT_VERSION } from '../../scripts/lib/announced-surface.mjs';
+import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 
 test('sectionForBodyDir mappa le due directory dei corpi, null altrove', () => {
   assert.equal(sectionForBodyDir('blog-body'), 'frontaliere');
@@ -1084,11 +1085,15 @@ test("la forma escapata e' cercata in ENTRAMBE le cartelle dei corpi e su tutti 
   }
 });
 
-test('BODY_DIR_SECTIONS dichiara ESATTAMENTE le due cartelle dei corpi', () => {
+test('BODY_DIR_SECTIONS dichiara ogni cartella del corpo attiva nel core', () => {
   // La leva della mutazione precedente, pinnata da sola: una cartella che
   // sparisce di qui esce dallo scan in silenzio, e il conteggio scende senza
-  // che niente lo chiami un difetto.
-  assert.deepEqual(Object.keys(BODY_DIR_SECTIONS).sort(), ['blog-body', 'blog-body-ch']);
+  // che niente lo chiami un difetto. D22 aggiunge radici cantonali quando il
+  // corpus le abilita, quindi l’atteso deve seguire la lista attiva.
+  assert.deepEqual(
+    Object.keys(BODY_DIR_SECTIONS).sort(),
+    CORPUS_SECTIONS.map((section) => path.basename(section.bodyDir)).sort(),
+  );
   assert.equal(BODY_DIR_SECTIONS['blog-body'], 'frontaliere');
   assert.equal(BODY_DIR_SECTIONS['blog-body-ch'], 'svizzera');
 });
