@@ -2138,6 +2138,68 @@ function _codexSpentNow() {
   return _codexSpentMs + (_codexBusySince ? Date.now() - _codexBusySince : 0);
 }
 
+function _beginTrackedCodexCall(now = Date.now()) {
+  if (_codexInFlight === 0) _codexBusySince = now;
+  _codexInFlight += 1;
+}
+
+function _finishTrackedCodexCall(at = Date.now()) {
+  if (_codexInFlight <= 0) return;
+  _codexInFlight -= 1;
+  if (_codexInFlight === 0) {
+    _codexSpentMs += Math.max(0, at - _codexBusySince);
+    _codexBusySince = 0;
+  }
+}
+
+/**
+ * Ammette una chiamata Codex che appartiene alla traduzione dell'articolo.
+ * Anche le recovery fuori dalla coda free-MT devono consumare lo stesso
+ * budget 16/900s: altrimenti i retry JSON riaprirebbero una seconda quota
+ * proprio dopo l'esaurimento della corsia principale.
+ *
+ * Restituisce la deadline della chiamata e una chiusura idempotente che misura
+ * il tempo occupato; `null` significa che la chiamata non va avviata.
+ */
+function _admitCodexTranslationCall({
+  now = Date.now(),
+  processDeadlineMs = _codexProcessDeadlineMs,
+  trackInFlight = true,
+} = {}) {
+  if (_codexStopReason || !_codexSocketPresent()) return null;
+  const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
+  const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
+  if (_codexCalls >= maxCalls) {
+    _stopCodex(`budget di ${maxCalls} chiamate esaurito (FREE_TRANSLATE_CODEX_MAX_CALLS)`);
+    return null;
+  }
+  const remainingMs = maxMs - _codexSpentNow();
+  if (remainingMs < CODEX_TRANSLATE_MIN_CALL_MS) {
+    _stopCodex(`budget di ${Math.round(maxMs / 1000)}s esaurito (FREE_TRANSLATE_CODEX_MAX_MS)`);
+    return null;
+  }
+  const deadlineMs = codexCallDeadlineMs({ now, budgetRemainingMs: remainingMs, processDeadlineMs });
+  if (deadlineMs === null) {
+    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
+    return null;
+  }
+  _codexCalls += 1;
+  if (trackInFlight) _beginTrackedCodexCall(now);
+  let finished = false;
+  return {
+    deadlineMs,
+    finish(at = Date.now()) {
+      if (finished) return;
+      finished = true;
+      if (trackInFlight) _finishTrackedCodexCall(at);
+    },
+  };
+}
+
+export function beginCodexTranslationCall(options = {}) {
+  return _admitCodexTranslationCall({ ...options, trackInFlight: true });
+}
+
 /**
  * Parte una richiesta per ogni corsia libera. Con una corsia libera la coda ha
  * di solito un testo solo, che parte da solo; con le corsie occupate la coda
@@ -2146,14 +2208,9 @@ function _codexSpentNow() {
 function _pumpCodex() {
   while (_codexPending.length > 0 && _codexInFlight < _codexLanes()) {
     const group = _takeCodexGroup();
-    if (_codexInFlight === 0) _codexBusySince = Date.now();
-    _codexInFlight += 1;
+    _beginTrackedCodexCall();
     _runCodexGroup(group).finally(() => {
-      _codexInFlight -= 1;
-      if (_codexInFlight === 0) {
-        _codexSpentMs += Date.now() - _codexBusySince;
-        _codexBusySince = 0;
-      }
+      _finishTrackedCodexCall();
       _pumpCodex();
     });
   }
@@ -2215,28 +2272,17 @@ async function _translateGroupWithCodex(group) {
   }
   const model = ai.AI_MODELS.CODEX_CLI_PRIMARY;
   if (!ai.isModelAvailable(model)) return none();
-  const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
-  const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
-  if (_codexCalls >= maxCalls) {
-    _stopCodex(`budget di ${maxCalls} chiamate esaurito (FREE_TRANSLATE_CODEX_MAX_CALLS)`);
-    return none();
-  }
-  // Il tratto in corso comprende l'import qui sopra: il minimo per chiamata si
-  // misura sul residuo reale.
-  const remainingMs = maxMs - _codexSpentNow();
-  if (remainingMs < CODEX_TRANSLATE_MIN_CALL_MS) {
-    _stopCodex(`budget di ${Math.round(maxMs / 1000)}s esaurito (FREE_TRANSLATE_CODEX_MAX_MS)`);
-    return none();
-  }
-  // Rivalutata qui, in coda, e non all'ingresso: l'attesa dietro le richieste
-  // precedenti consuma proprio la finestra del processo.
-  const callDeadlineMs = codexCallDeadlineMs({ now: Date.now(), budgetRemainingMs: remainingMs });
-  if (callDeadlineMs === null) {
+  // L'ammissione si rivaluta qui, in coda, e non all'ingresso: l'attesa dietro
+  // le richieste precedenti consuma proprio la finestra del processo.
+  const admission = _admitCodexTranslationCall({ now: Date.now(), trackInFlight: false });
+  if (!admission) {
     // I testi non tradotti restano non tradotti: la cascata scende ai tier
     // successivi e cio' che resta scoperto lo recupera translate-pending.
-    _stopCodex('scadenza del processo troppo vicina per una nuova chiamata');
     return none();
   }
+  const callDeadlineMs = admission.deadlineMs;
+  const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
+  const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
   if (!_codexEngagedLogged) {
     _codexEngagedLogged = true;
     const why = _codexTierPosition() === 'last'
@@ -2246,7 +2292,6 @@ async function _translateGroupWithCodex(group) {
   }
   // Testi identici in coda diventano una voce sola.
   const unique = [...new Set(group.map((item) => item.clean))];
-  _codexCalls += 1;
   _codexTexts += unique.length;
   const { sourceLang, targetLang } = group[0];
   const call = _codexCallForTests || ai.callLLM;
@@ -2375,6 +2420,7 @@ export function setCodexTranslateCallForTests(fn) {
   _codexTexts = 0;
   _codexSpentMs = 0;
   _codexBusySince = 0;
+  _codexInFlight = 0;
   _codexConsecutiveFailures = 0;
   _codexStopReason = '';
   _codexEngagedLogged = false;

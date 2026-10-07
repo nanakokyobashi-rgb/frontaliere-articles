@@ -58,6 +58,7 @@ const {
   setCodexTranslateCallForTests,
   setCodexTranslateProcessDeadline,
   codexCallDeadlineMs,
+  beginCodexTranslationCall,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
 
@@ -877,6 +878,27 @@ test('clamp della deadline: minimo fra tetto della chiamata, budget del tier e s
   assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 14_999 }), null);
   assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now - 1 }), null);
   assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 15_000 }), now + 15_000);
+});
+
+test('le recovery condividono il budget Codex di chiamate e tempo', () => {
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
+  process.env.FREE_TRANSLATE_CODEX_MAX_MS = '20000';
+  setCodexTranslateCallForTests(null);
+  try {
+    const first = beginCodexTranslationCall({ now: 1_000, processDeadlineMs: null });
+    assert.ok(first);
+    assert.equal(getCascadeStats().codexTranslation.calls, 1);
+    first.finish(11_000);
+
+    // Restano 10 s, sotto il minimo sicuro di 15 s: il secondo tentativo non
+    // deve partire neppure se il cap di chiamate non e' ancora esaurito.
+    assert.equal(beginCodexTranslationCall({ now: 11_000, processDeadlineMs: null }), null);
+    assert.match(getCascadeStats().codexTranslation.stopReason, /900|budget/);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+    setCodexTranslateCallForTests(null);
+  }
 });
 
 test('scadenza del processo lontana: la deadline passata a Codex non la supera', async () => {

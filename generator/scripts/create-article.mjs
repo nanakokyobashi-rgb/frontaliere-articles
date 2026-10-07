@@ -151,7 +151,7 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs, getCascadeStats } from './lib/free-translate.mjs';
+import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs, beginCodexTranslationCall, getCascadeStats } from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -11964,12 +11964,7 @@ async function translateArticle(data) {
   // A recovery call is a translation call only when it opts into the Codex
   // model explicitly. The default path below remains the scored historical
   // chain, so fact-checks and second opinions cannot inherit this preference.
-  function codexTranslationRecoveryOptions() {
-    const deadlineMs = codexCallDeadlineMs({
-      now: Date.now(),
-      budgetRemainingMs: 180_000,
-      processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
-    });
+  function codexTranslationRecoveryOptions(deadlineMs) {
     // Never omit the deadline: spreading `{}` here let a recovery retry fall
     // back to ai-models' unbounded default exactly when the process was near
     // its wall-clock cap. The caller turns this into a clean, typed stop.
@@ -12003,27 +11998,36 @@ async function translateArticle(data) {
     // precedente giro di questa PR. Se un giorno il wrapper guadagnasse un
     // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
     // cattura qui avrebbe senso; oggi no.
-    const call = (tokens, temperature = 0.5) => {
+    const call = async (tokens, temperature = 0.5) => {
       let translationOptions = {};
+      let admission = null;
       if (translation) {
-        translationOptions = codexTranslationRecoveryOptions();
+        admission = beginCodexTranslationCall({
+          processDeadlineMs: _pendingBodyCodexDeadlineMs ?? undefined,
+        });
+        translationOptions = codexTranslationRecoveryOptions(admission?.deadlineMs ?? null);
         if (translationOptions === null) {
+          admission?.finish();
           const error = new Error('finestra residua troppo corta per una recovery Codex');
-          error.code = 'CODEX_TRANSLATION_DEADLINE';
+          error.code = 'CODEX_TRANSLATION_BUDGET';
           error.transientExhaustion = true;
           throw error;
         }
         translationRecoveryCodexCalls += 1;
       }
-      return callLLM(
-        [{ role: 'user', content: safePrompt }],
-        {
-          temperature,
-          maxTokens: tokens,
-          jsonMode: true,
-          ...translationOptions,
-        },
-      );
+      try {
+        return await callLLM(
+          [{ role: 'user', content: safePrompt }],
+          {
+            temperature,
+            maxTokens: tokens,
+            jsonMode: true,
+            ...translationOptions,
+          },
+        );
+      } finally {
+        admission?.finish();
+      }
     };
     const raw = await call(maxTokens);
     const repaired = repairLlmJson(raw);
