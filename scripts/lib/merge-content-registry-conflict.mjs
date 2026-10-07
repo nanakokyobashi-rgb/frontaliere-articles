@@ -637,8 +637,8 @@ export function readRetiredIds(root = process.cwd()) {
         throw new Error(`${label}.${field} deve essere una stringa non vuota`);
       }
     }
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(entry.retiredOn)) {
-      throw new Error(`${label}.retiredOn deve essere YYYY-MM-DD`);
+    if (!isValidIsoDate(entry.retiredOn)) {
+      throw new Error(`${label}.retiredOn deve essere una data YYYY-MM-DD valida`);
     }
     if (!Array.isArray(entry.duplicateOf) || entry.duplicateOf.some((url) => typeof url !== 'string' || url.trim() === '')) {
       throw new Error(`${label}.duplicateOf deve essere un array di stringhe`);
@@ -655,6 +655,12 @@ export function readRetiredIds(root = process.cwd()) {
     ids.add(entry.id);
   }
   return ids;
+}
+
+function isValidIsoDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
 /** Unione ordinata di due liste di record. Il commit rigiocato vince sui pari. */

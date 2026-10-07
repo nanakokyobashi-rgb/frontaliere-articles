@@ -1045,6 +1045,7 @@ test('il ledger delle tombstone invalido viene rifiutato senza filtrare gli id',
       [{ ...valid }, { ...valid }],
       [{ id: valid.id }],
       [{ ...valid, slugs: { ...valid.slugs, fr: '' } }],
+      [{ ...valid, retiredOn: '2026-02-30' }],
     ]) {
       write(root, 'data/retired-articles.json', JSON.stringify({ retired }));
       assert.throws(() => readRetiredIds(root), /deve essere|duplicato/);
