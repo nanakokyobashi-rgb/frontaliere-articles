@@ -179,7 +179,7 @@ jobs:
           fi
           export GH_TOKEN="$runtime_pat"
           marker="<!-- auto-live mode=$MODE sections=$READY -->"
-          open_json="$(gh pr list --repo "$REPO" --state open --search '[auto-live] in:title' --limit 100 --json body)"
+          open_json="$(gh pr list --repo "$REPO" --state open --search 'auto-live in:title' --limit 100 --json title,body)"
           if MARKER="$marker" OPEN_JSON="$open_json" node --input-type=module -e '
             const marker = process.env.MARKER;
             const prs = JSON.parse(process.env.OPEN_JSON || "[]");
@@ -222,7 +222,7 @@ jobs:
           - Le sezioni che non soddisfano il gate restano draft per scelta in questa PR; il cron giornaliero e gli eventi dei producer ripeteranno il controllo. Motivo: nessuna transizione viene fatta senza superfici complete. Prossimo passo: attendere il primo articolo o il bootstrap riuscito.
           EOF
           pr_number="$(gh pr create --repo "$REPO" --base main --head "$branch" \
-            --title "chore(sections): auto-live ${MODE} ${READY}" \
+            --title "[auto-live] chore(sections): auto-live ${MODE} ${READY}" \
             --body-file "$RUNNER_TEMP/auto-live-pr-body.md" \
             | sed -n 's#.*/pull/##p' | tail -1)"
           if [ -z "$pr_number" ]; then

@@ -14,9 +14,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../engine/shared/cantonArticleSectionCore.generated.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../../engine/shared/cantonSectionCopy.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
+import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 import { cantonSectionPaths, cantonSectionProfile } from '../../generator/scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { readRegistryEntries } from '../../generator/scripts/lib/registry-article-type.mjs';
@@ -30,6 +32,9 @@ const MODES = new Set(['promote', 'rollback']);
 
 const readJson = (root, rel) => JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
 const exists = (root, rel) => fs.existsSync(path.join(root, rel));
+const ARCHIVE_TITLE_ID_RE = /['"]blog\.article\.([^'"]+?)\.title['"]\s*:/g;
+const PAGE_FETCH_CONCURRENCY = 12;
+const PAGE_FETCH_TIMEOUT_MS = 15_000;
 
 function normalizeBase(value, fallback) {
   const raw = String(value || fallback).trim();
@@ -83,17 +88,36 @@ function ownArticleData(root, section) {
   return { registryFile, slugFile, bodyDir, articleIds, slugs, missingSlugs, missingBodies };
 }
 
+/**
+ * The archive renderer paginates the union of the IT meta title keys and the
+ * section slug map. Keep that union here too, so a page-N archive cannot be
+ * silently omitted from the pre-live gate.
+ */
+function archiveArticleIds(root, section, core, own) {
+  const metaFile = corpusPath(`services/locales/${core.metaPrefix}-it.ts`);
+  const metaSource = exists(root, metaFile) ? fs.readFileSync(path.join(root, metaFile), 'utf8') : '';
+  const ids = new Set(own.articleIds);
+  for (const match of metaSource.matchAll(ARCHIVE_TITLE_ID_RE)) ids.add(match[1]);
+  return ids;
+}
+
+function archivePageCount(root, section, core, own) {
+  const total = archiveArticleIds(root, section, core, own).size;
+  return Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
+}
+
 function sectionPrefix(core, locale) {
   return locale === 'it' ? `/${core.indexSlug.it}` : `/${locale}/${core.indexSlug[locale]}`;
 }
 
 function pageIdentity(page) {
-  return [page.kind, page.topic || '', page.id || ''].join('|');
+  return [page.kind, page.topic || '', page.id || '', page.page || ''].join('|');
 }
 
 export function expectedSectionPages(section, { root = process.cwd(), includeArticles = true } = {}) {
   const { core } = sectionEntry(root, section);
   const own = ownArticleData(root, section);
+  const archivePages = archivePageCount(root, section, core, own);
   const pages = [];
   for (const locale of LOCALES) {
     const prefix = sectionPrefix(core, locale);
@@ -101,7 +125,12 @@ export function expectedSectionPages(section, { root = process.cwd(), includeArt
     for (const topic of CANTON_HUB_TOPIC_KEYS) {
       pages.push({ kind: 'hub', topic, locale, path: `${prefix}/${core.topicHubs[topic][locale]}/` });
     }
-    pages.push({ kind: 'archive', locale, path: `${prefix}/${CANTON_ARCHIVE_ALL_SLUG[locale]}/` });
+    for (let page = 1; page <= archivePages; page += 1) {
+      const suffix = page === 1
+        ? `${CANTON_ARCHIVE_ALL_SLUG[locale]}/`
+        : `${CANTON_ARCHIVE_ALL_SLUG[locale]}/page-${page}/`;
+      pages.push({ kind: 'archive', locale, page, path: `${prefix}/${suffix}` });
+    }
     if (includeArticles) {
       for (const id of own.articleIds) {
         const slug = own.slugs[id]?.[locale];
@@ -134,16 +163,19 @@ export function htmlPageProblems(html, page, siteBase, pagesByIdentity = new Map
       href: htmlAttribute(tag, 'href'),
     }));
   const alternateByLocale = new Map(alternates.map((alternate) => [alternate.locale, alternate.href]));
-  const alternateTargets = new Map(
-    (pagesByIdentity.get(pageIdentity(page)) || []).map((target) => [target.locale, `${siteBase}${target.path}`]),
-  );
-  alternateTargets.set('x-default', alternateTargets.get('it'));
-  for (const locale of [...LOCALES, 'x-default']) {
-    if (!alternateByLocale.has(locale) || alternateByLocale.get(locale) !== alternateTargets.get(locale)) {
-      problems.push(`hreflang:${locale}`);
+  const requiresAlternates = page.kind !== 'archive' || page.page === 1;
+  if (requiresAlternates) {
+    const alternateTargets = new Map(
+      (pagesByIdentity.get(pageIdentity(page)) || []).map((target) => [target.locale, `${siteBase}${target.path}`]),
+    );
+    alternateTargets.set('x-default', alternateTargets.get('it'));
+    for (const locale of [...LOCALES, 'x-default']) {
+      if (!alternateByLocale.has(locale) || alternateByLocale.get(locale) !== alternateTargets.get(locale)) {
+        problems.push(`hreflang:${locale}`);
+      }
     }
   }
-  if (!/ft-route-owner/iu.test(html)) problems.push('ft-route-owner');
+  if (!String(html).includes(CORPUS_ROUTE_OWNER_META_TAG)) problems.push('ft-route-owner');
   if (/<meta\b[^>]*(?:name\s*=\s*["']robots["'][^>]*content\s*=\s*["'][^"']*noindex|content\s*=\s*["'][^"']*noindex[^"']*["'][^>]*name\s*=\s*["']robots["'])/iu.test(html)) {
     problems.push('noindex');
   }
@@ -169,19 +201,30 @@ export async function probeSectionPages(section, {
     if (!pagesByIdentity.has(key)) pagesByIdentity.set(key, []);
     pagesByIdentity.get(key).push(page);
   }
-  const results = await Promise.all(pages.map(async (page) => {
-    const url = cdnPageUrl(page.path, normalizeBase(cdnBase, CDN_BASE));
-    try {
-      const response = await fetchImpl(url, { redirect: 'manual' });
-      const html = await response.text();
-      const problems = response.status === 200
-        ? htmlPageProblems(html, page, normalizeBase(siteBase, SITE_BASE), pagesByIdentity)
-        : [`http:${response.status}`];
-      return { ...page, url, status: response.status, problems };
-    } catch (error) {
-      return { ...page, url, status: 0, problems: [`fetch:${error.message}`] };
-    }
-  }));
+  const results = [];
+  for (let offset = 0; offset < pages.length; offset += PAGE_FETCH_CONCURRENCY) {
+    const batch = pages.slice(offset, offset + PAGE_FETCH_CONCURRENCY);
+    results.push(...await Promise.all(batch.map(async (page) => {
+      const url = cdnPageUrl(page.path, normalizeBase(cdnBase, CDN_BASE));
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), PAGE_FETCH_TIMEOUT_MS);
+        let response;
+        try {
+          response = await fetchImpl(url, { redirect: 'manual', signal: controller.signal });
+        } finally {
+          clearTimeout(timeout);
+        }
+        const html = await response.text();
+        const problems = response.status === 200
+          ? htmlPageProblems(html, page, normalizeBase(siteBase, SITE_BASE), pagesByIdentity)
+          : [`http:${response.status}`];
+        return { ...page, url, status: response.status, problems };
+      } catch (error) {
+        return { ...page, url, status: 0, problems: [`fetch:${error.message}`] };
+      }
+    })));
+  }
   return {
     state: 'ready',
     checked: results.length,
@@ -207,8 +250,6 @@ function hubCoverage(root, section) {
 
 function initialReport(root, section, mode) {
   const { core, entry, profile } = sectionEntry(root, section);
-  const own = ownArticleData(root, section);
-  const hubs = hubCoverage(root, section);
   const status = entry.status;
   const enabled = profile.enabled === true;
   const report = {
@@ -216,22 +257,60 @@ function initialReport(root, section, mode) {
     canton: core.canton,
     enabled,
     status,
-    ownArticleIds: own.articleIds,
-    missingSlugs: own.missingSlugs,
-    missingBodies: own.missingBodies,
-    hubs: { required: CANTON_HUB_TOPIC_KEYS.length, ...hubs },
+    ownArticleIds: [],
+    missingSlugs: [],
+    missingBodies: [],
+    hubs: { required: CANTON_HUB_TOPIC_KEYS.length, missing: [], invalid: [] },
     r2: { state: 'not-probed', checked: 0, missing: [], bad: [] },
     ready: false,
     reason: null,
+    errors: [],
   };
-  if (!enabled) report.reason = 'profile-disabled';
-  else if (mode === 'promote' && status !== 'draft') report.reason = `status-${status}`;
-  else if (mode === 'rollback' && status !== 'live') report.reason = `status-${status}`;
-  else if (mode === 'promote' && own.articleIds.length === 0) report.reason = 'no-own-article';
-  else if (mode === 'promote' && own.missingSlugs.length > 0) report.reason = 'article-slug-missing';
-  else if (mode === 'promote' && own.missingBodies.length > 0) report.reason = 'article-body-missing';
-  else if (mode === 'promote' && hubs.missing.length > 0) report.reason = 'hubs-missing';
-  else if (mode === 'promote' && hubs.invalid.length > 0) report.reason = 'hubs-invalid';
+
+  // Check mode/status before reading promotion-only surfaces. In particular,
+  // an explicit live -> draft rollback must remain possible even if an old
+  // slug/meta file is malformed.
+  if (mode === 'promote' && status !== 'draft') {
+    report.reason = `status-${status}`;
+    return report;
+  }
+  if (mode === 'rollback' && status !== 'live') {
+    report.reason = `status-${status}`;
+    return report;
+  }
+  if (mode === 'rollback') {
+    report.ready = true;
+    return report;
+  }
+  if (!enabled) {
+    report.reason = 'profile-disabled';
+    return report;
+  }
+
+  let own;
+  try {
+    own = ownArticleData(root, section);
+  } catch (error) {
+    report.reason = 'article-data-invalid';
+    report.errors.push(error.message);
+    return report;
+  }
+  report.ownArticleIds = own.articleIds;
+  report.missingSlugs = own.missingSlugs;
+  report.missingBodies = own.missingBodies;
+  if (own.articleIds.length === 0) report.reason = 'no-own-article';
+  else if (own.missingSlugs.length > 0) report.reason = 'article-slug-missing';
+  else if (own.missingBodies.length > 0) report.reason = 'article-body-missing';
+
+  try {
+    report.hubs = { required: CANTON_HUB_TOPIC_KEYS.length, ...hubCoverage(root, section) };
+  } catch (error) {
+    report.reason ??= 'hubs-invalid';
+    report.errors.push(error.message);
+    return report;
+  }
+  if (report.reason === null && report.hubs.missing.length > 0) report.reason = 'hubs-missing';
+  else if (report.reason === null && report.hubs.invalid.length > 0) report.reason = 'hubs-invalid';
   return report;
 }
 
@@ -251,7 +330,27 @@ export async function planSections(root = process.cwd(), {
     : Object.keys(doc.sections).filter((id) => ARTICLE_SECTION_CORE_ALL[id]?.kind === 'canton');
   const reports = [];
   for (const section of ids) {
-    const report = initialReport(root, section, mode);
+    let report;
+    try {
+      report = initialReport(root, section, mode);
+    } catch (error) {
+      // One malformed section must not hide the status of the other sections
+      // in a scheduled reconciliation.
+      report = {
+        section,
+        canton: null,
+        enabled: false,
+        status: null,
+        ownArticleIds: [],
+        missingSlugs: [],
+        missingBodies: [],
+        hubs: { required: CANTON_HUB_TOPIC_KEYS.length, missing: [], invalid: [] },
+        r2: { state: 'not-probed', checked: 0, missing: [], bad: [] },
+        ready: false,
+        reason: 'section-invalid',
+        errors: [error.message],
+      };
+    }
     if (mode === 'rollback') {
       report.ready = report.reason === null;
       reports.push(report);

@@ -19,6 +19,7 @@ import {
   planSections,
   probeSectionPages,
 } from '../../scripts/ci/auto-live-canton-sections.mjs';
+import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwner.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
@@ -30,7 +31,7 @@ function identity(page) {
   return [page.kind, page.topic || '', page.id || ''].join('|');
 }
 
-function alternateHtml(page, pages) {
+function alternateHtml(page, pages, { wrongRouteOwner = false } = {}) {
   const targets = pages.filter((candidate) => identity(candidate) === identity(page));
   const byLocale = new Map(targets.map((candidate) => [candidate.locale, candidate.path]));
   const links = [...LOCALES.map((locale) => [locale, byLocale.get(locale)]), ['x-default', byLocale.get('it')]]
@@ -40,11 +41,11 @@ function alternateHtml(page, pages) {
     `<link rel="canonical" href="https://frontaliereticino.ch${page.path}">`,
     links,
     '<meta name="robots" content="index,follow">',
-    '<meta name="ft-route-owner" content="canton-section">',
+    wrongRouteOwner ? '<meta name="ft-route-owner" content="canton-section">' : CORPUS_ROUTE_OWNER_META_TAG,
   ].join('');
 }
 
-function mockCdnFetch(pages, { badPath = null } = {}) {
+function mockCdnFetch(pages, { badPath = null, wrongRouteOwner = false } = {}) {
   return async (url) => {
     const pagePath = new URL(url).pathname
       .replace(/^\/edge\/sections/u, '')
@@ -52,13 +53,13 @@ function mockCdnFetch(pages, { badPath = null } = {}) {
     const page = pages.find((candidate) => candidate.path === pagePath);
     assert.ok(page, `pagina CDN non prevista: ${pagePath}`);
     if (page.path === badPath) {
-      return { status: 200, text: async () => `${alternateHtml(page, pages)}<meta name="robots" content="noindex">` };
+      return { status: 200, text: async () => `${alternateHtml(page, pages, { wrongRouteOwner })}<meta name="robots" content="noindex">` };
     }
-    return { status: 200, text: async () => alternateHtml(page, pages) };
+    return { status: 200, text: async () => alternateHtml(page, pages, { wrongRouteOwner }) };
   };
 }
 
-function fixtureRoot({ status = 'draft', invalidHub = null } = {}) {
+function fixtureRoot({ status = 'draft', invalidHub = null, extraMetaCount = 0, malformedSlugs = false } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-auto-live-'));
   fs.mkdirSync(path.join(root, 'sections'), { recursive: true });
   fs.mkdirSync(path.join(root, 'content/cantons/canton-lu'), { recursive: true });
@@ -73,6 +74,13 @@ function fixtureRoot({ status = 'draft', invalidHub = null } = {}) {
   fs.writeFileSync(path.join(root, 'content/cantons/canton-lu/slugs.ts'), `const CANTON_SLUGS = {
   'auto-live-fixture': { it: 'auto-live-fixture-it', en: 'auto-live-fixture-en', de: 'auto-live-fixture-de', fr: 'auto-live-fixture-fr' },
 };\n`);
+  if (extraMetaCount > 0) {
+    fs.mkdirSync(path.join(root, 'content'), { recursive: true });
+    const extra = Array.from({ length: extraMetaCount }, (_, index) =>
+      `  'blog.article.auto-live-extra-${index}.title': 'Extra ${index}',\\n`).join('');
+    fs.writeFileSync(path.join(root, 'content/blog-meta-canton-lu-it.ts'), `export default {\\n${extra}};\\n`);
+  }
+  if (malformedSlugs) fs.writeFileSync(path.join(root, 'content/cantons/canton-lu/slugs.ts'), 'const CANTON_SLUGS = {;\\n');
   for (const locale of LOCALES) {
     fs.mkdirSync(path.join(root, `content/blog-body-canton-lu/${locale}`), { recursive: true });
     fs.writeFileSync(path.join(root, `content/blog-body-canton-lu/${locale}/auto-live-fixture.ts`), 'export default {};\n');
@@ -98,6 +106,14 @@ test('il piano conta le superfici canoniche per tutte le locali e l articolo pro
   assert.ok(pages.some((page) => page.path === '/articoli-lucerna/auto-live-fixture-it/'));
 });
 
+test('il piano include tutte le pagine archivio paginate del renderer', () => {
+  const root = fixtureRoot({ extraMetaCount: 100 });
+  const pages = expectedSectionPages('canton-lu', { root });
+  assert.equal(pages.length, 40);
+  assert.equal(pages.filter((page) => page.kind === 'archive').length, 8);
+  assert.ok(pages.some((page) => page.path === '/articoli-lucerna/tutti/page-2/' && page.page === 2));
+});
+
 test('la verifica CDN richiede 200, canonical, hreflang reciproci, route owner e niente noindex', async () => {
   const root = fixtureRoot();
   const pages = expectedSectionPages('canton-lu', { root });
@@ -112,6 +128,14 @@ test('la verifica CDN richiede 200, canonical, hreflang reciproci, route owner e
   });
   assert.deepEqual(bad.missing, []);
   assert.deepEqual(bad.bad, [{ path: '/articoli-lucerna/', problems: ['noindex'] }]);
+
+  const wrongOwner = await probeSectionPages('canton-lu', {
+    root,
+    fetchImpl: mockCdnFetch(pages, { wrongRouteOwner: true }),
+  });
+  assert.deepEqual(wrongOwner.missing, []);
+  assert.equal(wrongOwner.bad.length, 36);
+  assert.ok(wrongOwner.bad.every((entry) => entry.problems.includes('ft-route-owner')));
 });
 
 test('hub mancante/corrotto non passa il gate e il flip pronto e\' idempotente', async () => {
@@ -147,6 +171,13 @@ test('hub mancante/corrotto non passa il gate e il flip pronto e\' idempotente',
     requireReady: true,
   });
   assert.deepEqual(rolledBack.changed, ['canton-lu']);
+});
+
+test('il rollback live e\' indipendente da una mappa slug corrotta', async () => {
+  const root = fixtureRoot({ status: 'live', malformedSlugs: true });
+  const plan = await planSections(root, { mode: 'rollback', sections: ['canton-lu'], probe: true });
+  assert.deepEqual(plan.readySections, ['canton-lu']);
+  assert.equal(plan.sections[0].reason, null);
 });
 
 test('workflow D22 usa cron/dispatch, lancia refresh e bootstrap, crea solo PR e supporta rollback', () => {
