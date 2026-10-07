@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano. - I lavori potrebbero iniziare non prima del 2031. - Previsti asfalto fonoassorbente",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/mendrisio-melano-progetto-meme-risanamento-fonico.webp`,
+        "url": `${BASE_URL}/images/blog/article-a2-mendrisio-melano-risanamento.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Tratto autostradale A2 tra Mendrisio e Melano"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/fairtiq-bonus-ticino-2026-2027.webp`,
+        "url": `${BASE_URL}/images/blog/article-scambio-dati-salariali-2027.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Veduta di Lugano con edifici moderni e uffici."

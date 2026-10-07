@@ -46,7 +46,7 @@ function inlineSeoEntry(id, image = '/images/places/fallback.webp') {
 }
 
 function seoFile(entries) {
-  return `const BASE_URL = 'https://frontaliereticino.ch';\nconst BLOG_SEO_METADATA = {\n${entries.join('')}\n};\nexport default BLOG_SEO_METADATA;\n`;
+  return `const BASE_URL = 'https://frontaliereticino.ch';\nconst BLOG_SEO_METADATA = {\n${entries.join('\n')}\n};\nexport default BLOG_SEO_METADATA;\n`;
 }
 
 function generatedRecord(root, articleId, imageUrl, bytes) {

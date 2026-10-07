@@ -100437,7 +100437,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/mobilita-trenord-aumento-biglietti-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-fischiava-treno-gorla.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Evento ferroviario vicino alla vecchia stazione di Gorla Minore"
@@ -100505,7 +100505,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/como-crisi-abitativa-alloggi-sfitti.webp`,
+        "url": `${BASE_URL}/images/blog/article-monte-olimpino-treni-weekend.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Treno regionale su una linea transfrontaliera tra Como e la Svizzera"
@@ -100539,7 +100539,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/hotel-ticino-76-licenziamenti.webp`,
+        "url": `${BASE_URL}/images/blog/article-hotel-ticino-140-licenziati.webp`,
         "width": 1200,
         "height": 675,
         "caption": "I due hotel Principe Leopoldo e Villa Sassa in Ticino"
@@ -101017,6 +101017,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lifestyle-innovation-hub-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-coda-a8-castronno-solbiate': {
+    title: 'Incidente A8 tra Castronno e Solbiate: code | Frontaliere Ticino',
+    description: 'Incidente sulla A8 tra Castronno e Solbiate Arno: dalle 18 code tra Varese e Gallarate, traffico sulla Statale e ritorno alla normalità intorno alle 20.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, castronno, solbiate, code',
+    ogTitle: 'Code sulla A8 tra Castronno e Solbiate',
+    ogDescription: 'Lo scontro tra Castronno e Solbiate Arno ha provocato una lunga coda sulla A8 e paralizzato la viabilità tra Varese e Gallarate. Il traffico si è riversato sulla Statale, dove il semaforo a senso alternato del ponte ha creato un ulteriore imbuto.',
+    canonicalPath: '/articoli-frontaliere/coda-a8-castronno-solbiate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente A8 tra Castronno e Solbiate: code",
+      "description": "Incidente sulla A8 tra Castronno e Solbiate Arno: dalle 18 code tra Varese e Gallarate, traffico sulla Statale e ritorno alla normalità intorno alle 20.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-coda-a8-castronno-solbiate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coda stradale dopo l'incidente sulla A8 tra Castronno e Solbiate Arno."
+      },
+      "datePublished": "2026-10-07T22:16:34+00:00",
+      "dateModified": "2026-10-07T22:16:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/coda-a8-castronno-solbiate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-incidente-via-albisetti': {
+    title: 'Tradate, pedone investito: ferito un uomo di 58 anni',
+    description: '## In breve - Un uomo di 58 anni investito a Tradate - Incidente poco prima delle 20 in via Albisetti - Soccorsi della Croce Rossa di Busto e un\'automedica',
+    keywords: 'frontalieri, ticino, svizzera, italia, tradate, pedone, investito, ferito',
+    ogTitle: 'Tradate, pedone investito: ferito un uomo di 58 anni',
+    ogDescription: '## In breve - Un uomo di 58 anni investito a Tradate - Incidente poco prima delle 20 in via Albisetti - Soccorsi della Croce Rossa di Busto e un\'automedica',
+    canonicalPath: '/articoli-frontaliere/incidente-via-albisetti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tradate, pedone investito: ferito un uomo di 58 anni",
+      "description": "## In breve - Un uomo di 58 anni investito a Tradate - Incidente poco prima delle 20 in via Albisetti - Soccorsi della Croce Rossa di Busto e un'automedica",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incidente-via-albisetti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana al tramonto, immagine di repertorio per la notizia di Tradate"
+      },
+      "datePublished": "2026-10-07T22:41:49+00:00",
+      "dateModified": "2026-10-07T22:41:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-via-albisetti/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -264,6 +264,7 @@ test('profilo canton-gr: ammissione multilingue, cronaca solo con impatto pratic
   assert.equal(p.anchors('Neue Regeln für Grenzgänger', 'https://www.valtellinanotizie.com/x'), true, 'fonte del lato estero: basta il segnale frontalieri');
   assert.equal(p.anchors('Neue Regeln', 'https://www.gr.ch/DE/Medien/x'), true, 'ente .ch del solo cantone');
   assert.equal(termHits('feststellen', ['stellen']), 0, 'gli stem si confrontano a inizio parola');
+  assert.equal(termHits('https://example.test/mehr%20bus%20der%20vbsh', ['vbsh']), 1, 'gli URL percent-encoded conservano il confine di parola');
 });
 
 test("profili cantonali: l'URL della pagina-fonte ancora solo una fonte locale realmente scoped", () => {
@@ -275,6 +276,35 @@ test("profili cantonali: l'URL della pagina-fonte ancora solo una fonte locale r
   const lu = buildCantonProfile('canton-lu', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   assert.equal(lu.anchors('Qualitätsarbeit und Schulentwicklung rücken näher zusammen', 'https://www.nau.ch/politik/regional/story', 'https://www.nau.ch/ort/luzern'), true);
   assert.equal(lu.anchors('Nachrichten', 'https://www.tele1.ch/nachrichten/nachrichten-1', 'https://www.tele1.ch/sitemap-news.xml'), false);
+});
+
+test('SH: alias locali e contesto scoped delle fonti ufficiali non promuovono i feed tedeschi', () => {
+  const sourceMap = buildCantonSourceUrlMap(PROFILES);
+  const shkb = 'https://www.shkb.ch/244-news-medienmitteilungen';
+  assert.equal(sourceMap.get(shkb), 'SH', 'SHKB deve attestare SH tramite contesto esplicito della fonte');
+
+  const sh = buildCantonProfile('canton-sh', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  for (const alias of [
+    'Schaffhausen', 'Schaffhauser', 'Neuhausen am Rheinfall', 'Stein am Rhein', 'Thayngen',
+    'Beringen', 'Klettgau', 'Reiat', 'Randen', 'Rheinfall', 'Munot',
+  ]) {
+    assert.equal(sh.anchors(`Neue Informationen aus ${alias}`, 'https://example.invalid/news'), true, alias);
+  }
+  assert.equal(
+    sh.hasAdmission('Mitwirkungsbericht der Gemeinde Neuhausen am Rheinfall – Mehr Bus für Neuhausen am Rheinfall (Angebotskonzept 2030 der vbsh)'),
+    true,
+    'vbsh è lessico pratico SH scoped, non un abbassamento della soglia',
+  );
+  assert.equal(
+    sh.anchors('Zwei Umfragen zum Thema Carsharing in Konstanz', 'https://www.konstanz.de/service/presse/pressemitteilungen/umfragen+carsharing', 'https://www.konstanz.de/site/Konstanz/pmrss/30221/feed.xml'),
+    false,
+    'un item Konstanz senza SH o tema frontalieri resta fuori',
+  );
+
+  for (const code of Object.keys(SLUGS.cantons).filter((c) => c !== 'SH')) {
+    const profile = buildCantonProfile(`canton-${code.toLowerCase()}`, { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+    assert.equal(profile.anchors('Schaffhauser Polizei meldet neue Informationen aus Thayngen', 'https://www.shpol.ch/Webseite/Schaffhauser-Polizei-1-DE.html', 'https://www.shpol.ch/CMS/content/list'), false, `${code}: falso positivo SH`);
+  }
 });
 
 test('feed condiviso: filterByCanton conserva NW e scarta le voci OW', () => {

@@ -249,7 +249,10 @@ const CANTON_REGIONS = {
   NW: ['Stans', 'Hergiswil', 'Buochs', 'Stansstad'],
   OW: ['Sarnen', 'Engelberg', 'Alpnach'],
   SG: ['Rapperswil', 'Rheintal', 'Toggenburg'],
-  SH: ['Neuhausen am Rheinfall'],
+  SH: [
+    'Neuhausen am Rheinfall', 'Stein am Rhein', 'Thayngen', 'Beringen', 'Klettgau',
+    'Reiat', 'Randen', 'Rheinfall', 'Munot',
+  ],
   SO: ['Olten', 'Grenchen'],
   SZ: ['Einsiedeln', 'Küssnacht', 'Brunnen'],
   TG: [],
@@ -451,7 +454,9 @@ export function buildSourceDomainMap(cantonSections) {
       if (!seen.has(host)) seen.set(host, { cantons: new Set(), local: true });
       const entry = seen.get(host);
       entry.cantons.add(profile.code);
-      if (!LOCAL_SOURCE_KINDS.has(source.kind)) entry.local = false;
+      const sourceIsLocal = LOCAL_SOURCE_KINDS.has(source.kind)
+        || source.quirks?.localCantonContext === profile.code;
+      if (!sourceIsLocal) entry.local = false;
     }
   }
   const out = new Map();

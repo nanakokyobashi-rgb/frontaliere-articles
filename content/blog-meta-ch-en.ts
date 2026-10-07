@@ -7880,6 +7880,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.marcel-salathe-ia-commento.title': 'Artificial intelligence will not kill us all',
     'blog.article.marcel-salathe-ia-commento.excerpt': '## TL;DR - Salathé considers apocalyptic scenarios exaggerated. - He is a professor at the Swiss Federal Institute of Technology Lausanne. - Big tech companies are preparing to enter',
     'blog.article.marcel-salathe-ia-commento.imageAlt': 'View of Lake Lugano with mountains in the background, representing the Swiss context of the artificial intelligence debate.',
+    'blog.article.carriere-politica-economica.title': 'Working at SECO: Jobs and Career Paths',
+    'blog.article.carriere-politica-economica.excerpt': '## TL;DR - More than 900 employees and executives work at SECO - Employees and executives distributed across three Swiss locations - Approximately 30 secondees work',
+    'blog.article.carriere-politica-economica.imageAlt': 'Employees working in a modern Swiss office',
+    'blog.article.parmelin-avs-ue.title': 'Parmelin leaves the Federal Council on December 31, 2026',
+    'blog.article.parmelin-avs-ue.excerpt': '## TL;DR - Guy Parmelin will leave the Federal Council on December 31, 2026 - OASI/DI pensions will rise by around 1,6% - The Switzerland-EU package is before Parliament',
+    'blog.article.parmelin-avs-ue.imageAlt': 'Documents about decisions by the Swiss Federal Council',
 };
 
 export default blogMetaChEn;

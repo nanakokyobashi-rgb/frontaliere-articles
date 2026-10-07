@@ -417,6 +417,11 @@ export function registryPathForSection(rootDir, section) {
 }
 
 export async function readDeclaredImages(rootDir, section, ids) {
+  // Nessun id richiesto = nessuna immagine dichiarata da leggere. Una sezione
+  // appena accesa non ha ancora il registro (sourceRegistryIds la legge come
+  // «nessun id»), e il giro che ne rinfresca solo hub e landing non deve
+  // fallire sul file che manca: canton-sh, run 37691307907.
+  if (!Array.isArray(ids) || ids.length === 0) return {};
   const sourcePath = registryPathForSection(rootDir, section);
   let source;
   try {

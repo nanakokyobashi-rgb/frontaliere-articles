@@ -73,7 +73,12 @@ function seoEntryRegex(articleId) {
 
 function seoEntryEnd(source, start) {
   const next = /^\s*['"]blog-[^'"]+['"]\s*:\s*\{/gm;
-  next.lastIndex = start + 1;
+  // `^\s*` may begin on the blank line before the current entry and consume
+  // that newline, so starting at `start + 1` can rediscover the same entry.
+  // Resume after the current entry's opening line instead.
+  const currentEntryStart = source.indexOf('blog-', start);
+  const currentLineEnd = source.indexOf('\n', currentEntryStart < 0 ? start : currentEntryStart);
+  next.lastIndex = currentLineEnd < 0 ? source.length : currentLineEnd + 1;
   const match = next.exec(source);
   return match ? match.index : source.length;
 }
