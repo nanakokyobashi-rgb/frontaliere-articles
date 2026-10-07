@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948225/ho-visto-la-pista-dal-finestrino-pensavo-ci-schiantassimo": {
-    "articleId": "volo-easyjet-valencia-ginevra",
-    "ts": "2026-09-05T20:47:35.725Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/rubriche/ospite/1948265/39-neutralita-pacifista-matteo-buzzi": {
-    "articleId": "pacifismo-neutralita-buzzi",
-    "ts": "2026-09-05T21:16:12.813Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/xkqqxunqnkgo": {
     "articleId": "conferenza-osce-berna-2026",
     "ts": "2026-09-06T01:22:17.571Z",
@@ -2497,6 +2487,16 @@
   "https://www.swissinfo.ch/ita/bns%3a-riserve-di-divise-sono-rimaste-stabili-in-settembre/92180848": {
     "articleId": "riserve-valutarie-settembre-stabili",
     "ts": "2026-10-07T12:36:56.807Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ffs%3a-nuove-soppressioni-di-sportelli-nelle-stazioni/92181373": {
+    "articleId": "ffs-sportelli-chiusi-stazioni",
+    "ts": "2026-10-07T14:55:43.347Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/hhtcbmz3uwb9": {
+    "articleId": "intelligenza-artificiale-diritti-umani",
+    "ts": "2026-10-07T15:29:13.775Z",
     "keyForm": 2
   }
 }

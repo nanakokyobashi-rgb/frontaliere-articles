@@ -7865,6 +7865,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.riserve-valutarie-settembre-stabili.title': 'Réserves de devises de la BNS stables en septembre',
     'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## En bref - BNS : réserves de devises à 771 milliards - En septembre, +0,4 milliard par rapport à août - Euro +0,9 %, dollar +3 % ; ensemble environ 80 % ## Faits clés',
     'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Scène urbaine suisse liée aux données sur les réserves de devises',
+    'blog.article.ffs-sportelli-chiusi-stazioni.title': 'FFS ferme les guichets dans 13 gares à partir du 1er janvier',
+    'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## En bref - À partir du 1er janvier, les guichets ferment dans 13 gares. - Les points de vente avec personnel passeront de 115 à 102. - 97 % des titres passent par les canaux',
+    'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Gare suisse avec guichet fermé et machines en libre-service au premier plan',
+    'blog.article.intelligenza-artificiale-diritti-umani.title': 'Intelligence artificielle : impact sur les droits humains',
+    'blog.article.intelligenza-artificiale-diritti-umani.excerpt': '## En bref - 63e session du Conseil des droits de l’homme à Genève - La Suisse a dirigé une coalition sur la justice transitionnelle - Vie privée',
+    'blog.article.intelligenza-artificiale-diritti-umani.imageAlt': 'Bureau suisse avec équipe utilisant une IA éthique pour les ressources humaines et le logement',
 };
 
 export default blogMetaChFr;
